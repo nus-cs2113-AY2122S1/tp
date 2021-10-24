@@ -11,6 +11,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_LIST_COMMAND = "Parameters of list command entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_DELETE_COMMAND = "Parameters of delete command entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_EDIT_COMMAND = "Command must be in the form of edit m/ OR edit e/";
+    public static final String MESSAGE_INVALID_STAT_COMMAND = "Sorry, stat command must be "
+            + "stat -b OR stat -e OR stat -l";
     public static final String MESSAGE_INVALID_COMMAND = "Sorry, I did not understand your command.";
     public static final String MESSAGE_INVALID_CATEGORY = "Category entered is not recognized.";
     public static final String MESSAGE_EXIT = "Bye, see you again soon!";
