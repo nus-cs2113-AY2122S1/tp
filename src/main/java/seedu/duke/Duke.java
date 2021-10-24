@@ -23,10 +23,10 @@ public class Duke {
     }
 
     public String readInput() {
+        ui.printCursor();
         if (!in.hasNextLine()) {
             return CommandEnum.BYE.name();
         }
-        ui.printCursor();
         String input = in.nextLine();
         return input;
     }
