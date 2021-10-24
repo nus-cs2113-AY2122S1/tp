@@ -6,9 +6,10 @@
 - [Purpose](#purpose)
 - [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
+- [Quick guide to use Terminus](#quick-guide-to-use-terminus)
 - [Section: Module Management](#section--module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
-    * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
+    * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
     * [Viewing module information `view`](#viewing-module-information)
 - [Section: Module](#section--module)
@@ -119,6 +120,22 @@ Terminologies used throughout this guide:
 
 ---
 
+## Quick guide to use Terminus
+
+1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
+2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section--module-management).
+3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
+4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section--module).
+5. Once entering the **module workspace**, you can add the items related to the module here.
+   1. Please refer to [Section: Note](#section--note) for any related **Note** item.
+   2. Please refer to [Section: Schedule](#section--schedule) for any related **Schedule** item.
+   3. Please refer to [Section: Question](#section--question) for any related **Question** item.
+6. Once you are done, you can exit **TermiNUS** using the `exit` command.
+
+Hope you enjoy your experience with TermiNUS!
+
+---
+
 ## Section: Module Management
 
 All commands related to the workspace `Module Management` will be displayed in this section. These
@@ -161,7 +178,7 @@ List of Module Management workspace commands:
 |back|escape and return to the default workspace|
 |exit|exit and closes TermiNUS|
 
-### Adding a new module
+### Adding a module
 
 **Format:** `add "<module_code>"`
 
