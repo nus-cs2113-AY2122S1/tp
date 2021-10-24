@@ -14,24 +14,30 @@ public class Export {
     private static final String GOAL_TYPE = "G";
     private static final String HABIT_TYPE = "H";
 
-    protected static void exportStorage(ArrayList<Goal> goalList, String filePath) throws HaBitStorageException {
+    protected String filePath;
+
+    public Export(String filePath) {
+        this.filePath = filePath;
+    }
+
+    protected void exportStorage(ArrayList<Goal> goalList) throws HaBitStorageException {
         try {
-            clearFile(filePath);
-            writeToFile(goalList, filePath);
+            clearFile();
+            writeToFile(goalList);
         } catch (IOException e) {
             throw new HaBitStorageException(e.toString());
         }
     }
 
-    protected static void clearFile(String filePath) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
+    protected void clearFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath);
 
         fileWriter.write("");
         fileWriter.close();
     }
 
-    protected static void writeToFile(ArrayList<Goal> goalList, String filePath) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath, true);
+    protected void writeToFile(ArrayList<Goal> goalList) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath, true);
 
         for (Goal goal : goalList) {
             int index = goalList.indexOf(goal);
@@ -58,5 +64,42 @@ public class Export {
             }
         }
         fileWriter.close();
+    }
+
+    protected void exportGoal(Goal goal, int index) throws HaBitStorageException {
+        try {
+            FileWriter fileWriter = new FileWriter(this.filePath, true);
+
+            String goalToWrite = index + DELIMITER
+                    + GOAL_TYPE + DELIMITER
+                    + goal.getGoalTypeCharacter() + DELIMITER
+                    + goal.getGoalName() + DELIMITER
+                    + goal.getStartDate() + DELIMITER
+                    + goal.getEndDate() + NEWLINE;
+
+            fileWriter.write(goalToWrite);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new HaBitStorageException(e.getMessage());
+        }
+    }
+
+    protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
+        try {
+            FileWriter fileWriter = new FileWriter(this.filePath, true);
+
+            int doneValue = habit.getDone() ? 1 : 0;
+            String habitToWrite = index + DELIMITER
+                    + HABIT_TYPE + DELIMITER
+                    + doneValue + DELIMITER
+                    + habit.getHabitName() + DELIMITER
+                    + habit.getHabitDateString() + DELIMITER
+                    + habit.getInterval() + NEWLINE;
+
+            fileWriter.write(habitToWrite);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new HaBitStorageException(e.getMessage());
+        }
     }
 }

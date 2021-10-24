@@ -23,7 +23,6 @@ public class HappyBit {
         storage = new Storage(filePath, fileDir);
         goalList = new GoalList();
         state = new State(goalList, printManager, storage);
-        loadData();
         goalList.setRecurringTasks();
     }
 
@@ -45,27 +44,6 @@ public class HappyBit {
      * =========================================================================
      */
 
-    /**
-     * Loads in data from an external storage.
-     */
-    private void loadData() {
-        try {
-            goalList = storage.load();
-        } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
-        }
-    }
-
-    /**
-     * Exports data to an external storage.
-     */
-    private void exportData() {
-        try {
-            storage.export(goalList.getGoalList());
-        } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
-        }
-    }
 
     /**
      * Executes the main body of HappyBit.
@@ -73,7 +51,6 @@ public class HappyBit {
     private void run() {
         state.startupState();
         state.handleState();
-        exportData();
         printManager.showGoodbye();
     }
 
