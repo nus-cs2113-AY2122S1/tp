@@ -1,7 +1,5 @@
 package medbot.ui;
 
-import medbot.list.PersonList;
-
 public class StaffUi {
     public static final String END_LINE = System.lineSeparator();
     public static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
@@ -62,6 +60,22 @@ public class StaffUi {
                 + "Staff with id STAFF_ID deleted from system." + END_LINE;
     }
 
+    public static String getArchiveStaffHelpMessage() {
+        return "Archive a staff from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "archive STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff with id STAFF_ID is successfully archived." + END_LINE;
+    }
+
+    public static String getUnarchiveStaffHelpMessage() {
+        return "Unarchive a staff from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "unarchive STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff with id STAFF_ID is successfully unarchived." + END_LINE;
+    }
+
     /**
      * Prints a message when viewing the profile of a staff.
      *
@@ -76,12 +90,12 @@ public class StaffUi {
     /**
      * Prints all staffs in a list.
      *
-     * @param staffList the list containing staffs to be printed.
+     * @param staffListString String containing information of all staff.
      * @return all Staffs' information.
      */
-    public static String getAllStaffsString(PersonList staffList) {
+    public static String getAllStaffsString(String staffListString) {
         String output = getStaffTableHeader();
-        output += staffList.listPersons();
+        output += staffListString;
         output += TABLE_ROW_SEPARATOR;
 
         return output;

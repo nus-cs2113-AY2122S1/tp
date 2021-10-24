@@ -1,9 +1,5 @@
 package medbot.ui;
 
-import medbot.list.PersonList;
-
-import java.util.List;
-
 public class PatientUi {
     private static final String END_LINE = System.lineSeparator();
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
@@ -65,6 +61,22 @@ public class PatientUi {
                 + "Patient with id PATIENT_ID deleted from system." + END_LINE;
     }
 
+    public static String getArchivePatientHelpMessage() {
+        return "Archive a patient from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "archive PATIENT_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Patient with id PATIENT_ID is successfully archived." + END_LINE;
+    }
+
+    public static String getUnarchivePatientHelpMessage() {
+        return "Unarchive a patient from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "unarchive PATIENT_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Patient with id PATIENT_ID is successfully unarchived." + END_LINE;
+    }
+
 
     /**
      * Prints a message when viewing the profile of a patient.
@@ -80,12 +92,12 @@ public class PatientUi {
     /**
      * Prints all patients in a list.
      *
-     * @param patientList the list containing patients to be printed.
+     * @param patientListString String containing information of all patients.
      * @return all Patients' information.
      */
-    public static String getAllPatientsString(PersonList patientList) {
+    public static String getAllPatientsString(String patientListString) {
         String output = getPatientTableHeader();
-        output += patientList.listPersons();
+        output += patientListString;
         output += TABLE_ROW_SEPARATOR;
         return output;
     }

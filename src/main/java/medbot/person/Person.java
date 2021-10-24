@@ -5,7 +5,14 @@ import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
 import medbot.list.ListItem;
+
+import medbot.Appointment;
+import medbot.exceptions.MedBotException;
+
 import medbot.list.PersonalAppointmentList;
+
+import static medbot.ui.Ui.END_LINE;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 
 public abstract class Person extends ListItem {
@@ -34,6 +41,7 @@ public abstract class Person extends ListItem {
     protected String residentialAddress = "";
     protected PersonType personType;
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
+    protected boolean isArchived = false;
 
     public String toString() {
         return END_LINE
@@ -110,8 +118,50 @@ public abstract class Person extends ListItem {
         residentialAddress = null;
     }
 
-    public PersonalAppointmentList getPersonalAppointmentList() {
-        return personalAppointmentList;
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void archive() {
+        isArchived = true;
+    }
+
+    public void unarchive() {
+        isArchived = false;
+    }
+
+    /**
+     * Returns the appointmentId of the appointment at the specified time code, or -1 if there is none.
+     *
+     * @param dateTimeCode the dateTimeCode to search for
+     * @return the appointmentId of the appointment with that dateTimeCode, or -1 if there is none
+     */
+    public int getAppointmentId(int dateTimeCode) {
+        return personalAppointmentList.getAppointmentId(dateTimeCode);
+    }
+
+    /**
+     * Adds the given appointment to the appointment list.
+     *
+     * @param appointment Appointment to be added to the appointment list
+     * @throws MedBotException if there is another appointment at that time
+     */
+    public void addAppointment(Appointment appointment) throws MedBotException {
+        personalAppointmentList.addAppointment(appointment);
+    }
+
+    /**
+     * Removes the appointment with the specified dateTimeCode.
+     *
+     * @param dateTimeCode the dateTimeCode of the appointment to be deleted
+     * @throws MedBotException if there is no appointment with that dateTimeCode.
+     */
+    public void deleteAppointment(int dateTimeCode) throws MedBotException {
+        personalAppointmentList.deleteAppointment(dateTimeCode);
+    }
+
+    public String listAppointments() {
+        return personalAppointmentList.listAppointments();
     }
 
     /**

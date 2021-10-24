@@ -3,12 +3,14 @@ package medbot.parser;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import medbot.Appointment;
+import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Person;
 
@@ -25,31 +27,35 @@ public abstract class ParserUtils {
     private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2 = "s/";
     private static final String PARAMETER_APPOINTMENT_DATE_TIME_1 = "d/";
     private static final String PARAMETER_APPOINTMENT_DATE_TIME_2 = "t/";
-    private static final String ERROR_NO_PARAMETER = "No parameters given" + END_LINE;
-    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number." + END_LINE;
-    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified." + END_LINE;
-    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified." + END_LINE;
-    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format." + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified." + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits." + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits." + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
-            "Phone number contains unexpected characters." + END_LINE;
-    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified." + END_LINE;
-    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format." + END_LINE;
-    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified." + END_LINE;
+    private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
+    private static final String ERROR_NO_PARAMETER = "No parameters given";
+    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
+    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified.";
+    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified.";
+    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format.";
+    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified.";
+    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits.";
+    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits.";
+    private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARS = "Phone number contains unexpected characters.";
+    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified.";
+    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "" + "Incorrect email address format.";
+    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified.";
+    private static final String ERROR_DATE_TIME_WRONG_FORMAT = "Incorrect Date/Time format.";
+
     private static final String REGEX_VERTICAL_LINE = "\\|";
-    private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
+    private static final String REGEX_INPUT_PARAMETER = "[a-zA-Z]/";
     private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
-    private static final String REGEX_PERSON_ID = "([0-9]+$)|([0-9]+ )";
+    private static final String REGEX_ID = "([0-9]+$)|([0-9]+ )";
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
+
     private static final String VERTICAL_LINE = "|";
     private static final String SEPARATOR_SPACE = " ";
     private static final String EMPTY_STRING = "";
-    private static final String DATE_TIME_FORMATTER_PATTERN = "dd/MM/yy HH00";
+
+    private static final String DATE_TIME_FORMATTER_PATTERN = "d/M/yy HHmm";
     private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
 
     /**
@@ -169,7 +175,9 @@ public abstract class ParserUtils {
         if (attributeString.startsWith(PARAMETER_ADDRESS)) {
             String address = parseResidentialAddress(attributeString.substring(PARAMETER_BUFFER));
             person.setResidentialAddress(address);
+            return;
         }
+        throw new MedBotParserException(String.format(ERROR_INVALID_PARAM_SPECIFIER, attributeString.substring(0, 2)));
     }
 
     /**
@@ -179,16 +187,12 @@ public abstract class ParserUtils {
      * @return String containing the name specified in attributeString
      * @throws MedBotParserException if no name is given
      */
-    private static String parseName(String attributeString) throws MedBotParserException {
-        try {
-            String name = attributeString.strip();
-            if (name.equals(EMPTY_STRING)) {
-                throw new MedBotParserException(ERROR_NAME_NOT_SPECIFIED);
-            }
-            return capitaliseEachWord(name);
-        } catch (IndexOutOfBoundsException ie) {
+    public static String parseName(String attributeString) throws MedBotParserException {
+        String name = attributeString.strip();
+        if (name.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_NAME_NOT_SPECIFIED);
         }
+        return capitaliseEachWord(name);
     }
 
     /**
@@ -200,20 +204,16 @@ public abstract class ParserUtils {
      * @return String containing the IC number specified in attributeString
      * @throws MedBotParserException if IC number is not specified, or is in the wrong format
      */
-    private static String parseIcNumber(String attributeString) throws MedBotParserException {
-        try {
-            String icString = attributeString.toUpperCase().strip();
-            if (icString.equals(EMPTY_STRING)) {
-                throw new MedBotParserException(ERROR_IC_NUMBER_NOT_SPECIFIED);
-            }
-            if (!icString.matches(REGEX_IC)) {
-                throw new MedBotParserException(ERROR_IC_NUMBER_INCORRECT_FORMAT);
-            }
-            assert icString.length() == 9;
-            return icString;
-        } catch (IndexOutOfBoundsException ie) {
+    public static String parseIcNumber(String attributeString) throws MedBotParserException {
+        String icString = attributeString.toUpperCase().strip();
+        if (icString.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_IC_NUMBER_NOT_SPECIFIED);
         }
+        if (!icString.matches(REGEX_IC)) {
+            throw new MedBotParserException(ERROR_IC_NUMBER_INCORRECT_FORMAT);
+        }
+        assert icString.length() == 9;
+        return icString;
     }
 
     /**
@@ -226,74 +226,62 @@ public abstract class ParserUtils {
      * @throws MedBotParserException if the phone number is not specified,
      *                               has too many/few digits or contains unexpected characters
      */
-    private static String parsePhoneNumber(String attributeString) throws MedBotParserException {
-        try {
-            String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
-            if (numberString.equals(EMPTY_STRING)) {
-                throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
-            }
-            if (numberString.length() > 8) {
-                throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_MANY_DIGITS);
-            }
-            if (numberString.length() < 8) {
-                throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_FEW_DIGITS);
-            }
-            if (!numberString.matches(REGEX_PHONE_NUMBER)) {
-                throw new MedBotParserException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
-            }
-            return numberString;
-        } catch (IndexOutOfBoundsException ie) {
+    public static String parsePhoneNumber(String attributeString) throws MedBotParserException {
+        String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
+        if (numberString.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
         }
+        if (numberString.length() > 8) {
+            throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_MANY_DIGITS);
+        }
+        if (numberString.length() < 8) {
+            throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_FEW_DIGITS);
+        }
+        if (!numberString.matches(REGEX_PHONE_NUMBER)) {
+            throw new MedBotParserException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARS);
+        }
+        return numberString;
     }
 
     /**
      * Returns a String containing the email address specified in attributeString.
      *
-     * <p>Checks if the resultant String is of the right email format
+     * <p>Checks if the resultant String is of the right email format.
      *
      * @param attributeString String containing the email address to be parsed
      * @return String containing the email address specified in attributeString
      * @throws MedBotParserException if the email address is not specified or is in the wrong format
      */
-    private static String parseEmailAddress(String attributeString) throws MedBotParserException {
-        try {
-            String emailString = attributeString.strip();
-            if (emailString.equals(EMPTY_STRING)) {
-                throw new MedBotParserException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
-            }
-            if (!emailString.matches(REGEX_EMAIL)) {
-                throw new MedBotParserException(ERROR_EMAIL_ADDRESS_WRONG_FORMAT);
-            }
-            return emailString;
-        } catch (IndexOutOfBoundsException ie) {
+    public static String parseEmailAddress(String attributeString) throws MedBotParserException {
+        String emailString = attributeString.strip();
+        if (emailString.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
         }
+        if (!emailString.matches(REGEX_EMAIL)) {
+            throw new MedBotParserException(ERROR_EMAIL_ADDRESS_WRONG_FORMAT);
+        }
+        return emailString;
     }
 
     /**
      * Returns the String containing the address specified in attributeString, with each word capitalised.
      *
-     * <p>Capitalises each word in the address
+     * <p>Capitalises each word in the address.
      *
      * @param attributeString String containing the address to be parsed
      * @return String containing the address specified in attributeString
      * @throws MedBotParserException if address is not specified
      */
-    private static String parseResidentialAddress(String attributeString) throws MedBotParserException {
-        try {
-            String addressString = attributeString.strip();
-            if (addressString.equals(EMPTY_STRING)) {
-                throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
-            }
-            return capitaliseEachWord(addressString);
-        } catch (IndexOutOfBoundsException ie) {
+    public static String parseResidentialAddress(String attributeString) throws MedBotParserException {
+        String addressString = attributeString.strip();
+        if (addressString.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
         }
+        return capitaliseEachWord(addressString);
     }
 
     /**
-     * Reads a String and returns the integer at the start of the String.
+     * Reads the String and returns the non-negative integer at the start of the String.
      *
      * <p>Finds an integer at the start of the String that is immediately followed by a space character or the
      * end of the String. Returns that integer.
@@ -302,25 +290,23 @@ public abstract class ParserUtils {
      * @return integer that was found
      * @throws MedBotParserException if no integer is found
      */
-    static int parseId(String string) throws MedBotParserException {
+    public static int parseId(String string) throws MedBotParserException {
         string = string.strip();
         if (string.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
         }
-        Pattern pattern = Pattern.compile(REGEX_PERSON_ID);
+        Pattern pattern = Pattern.compile(REGEX_ID);
         Matcher matcher = pattern.matcher(string);
-        if (matcher.lookingAt()) {
-            int id;
-            try {
-                id = Integer.parseInt(matcher.group().stripTrailing());
-            } catch (NumberFormatException ne) {
-                //matched substring should only consist of [0-9], exception should not be thrown by parseInt method
-                assert false;
-                throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
-            }
-            return id;
+        if (!matcher.lookingAt()) {
+            throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
         }
-        throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+        try {
+            return Integer.parseInt(matcher.group().stripTrailing());
+        } catch (NumberFormatException ne) {
+            //matched substring should only consist of [0-9], exception should not be thrown by parseInt method
+            assert false;
+            throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+        }
     }
 
     /**
@@ -360,8 +346,7 @@ public abstract class ParserUtils {
      */
     private static String preprocessMultiAttributeInput(String input) {
         //replacement function to add a "|" character before an attribute specifier
-        Function<MatchResult, String> replacementFunction = x ->
-                SEPARATOR_SPACE + VERTICAL_LINE + x.group().substring(1);
+        Function<MatchResult, String> replacementFunction = x -> VERTICAL_LINE + x.group();
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
@@ -374,9 +359,15 @@ public abstract class ParserUtils {
      * @param dateTimeString String corresponding to a date and time
      * @return the number of hours since Unix epoch, rounded down to the nearest hour
      */
-    private static int parseDateTime(String dateTimeString) {
+    private static int parseDateTime(String dateTimeString) throws MedBotParserException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN);
-        LocalDateTime parsedDate = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
+        LocalDateTime parsedDate;
+        try {
+            parsedDate = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
+            parsedDate = parsedDate.withMinute(0);
+        } catch (DateTimeParseException dte) {
+            throw new MedBotParserException(ERROR_DATE_TIME_WRONG_FORMAT);
+        }
         return (int) (parsedDate.toEpochSecond(zoneOffset) / 60);
     }
 }

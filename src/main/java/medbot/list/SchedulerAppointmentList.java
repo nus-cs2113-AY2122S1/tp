@@ -5,6 +5,8 @@ import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
 public class SchedulerAppointmentList {
+    private static final String END_LINE = System.lineSeparator();
+
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
     private int lastId = 1;
 
@@ -36,6 +38,17 @@ public class SchedulerAppointmentList {
         return appointment;
     }
 
+    /**
+     * Adds the given appointment into the appointment list, returns the appointmentId that was allocated to it.
+     *
+     * <p>If the appointment has an appointmentId, the appointment will be added if there is no existing appointment
+     * with that id, and throw a MedBotException if there is a clash. If not, i.e, appointmentId == 0, an id will be
+     * generated and the appointment's id will be set to that value.
+     *
+     * @param appointment Appointment to be added into the appointment list
+     * @return id of the appointment that was added
+     * @throws MedBotException if another appointment with that id already exists
+     */
     public int addAppointment(Appointment appointment) throws MedBotException {
         assert appointment.isComplete();
         int appointmentId = appointment.getAppointmentId();
@@ -50,11 +63,25 @@ public class SchedulerAppointmentList {
         return appointmentId;
     }
 
-    public boolean doesAppointmentExistById(int appointmentId) {
+
+    /**
+     * Returns if an appointment with the specified appointmentId exists.
+     *
+     * @param appointmentId the appointmentId to check for
+     * @return Boolean of whether an appointment with that appointmentId exists.
+     */
+    public boolean doesAppointmentExist(int appointmentId) {
         return appointments.containsKey(appointmentId);
     }
 
-    public Appointment deleteAppointmentById(int appointmentId) throws MedBotException {
+    /**
+     * Removes the appointment with the specified appointmentId.
+     *
+     * @param appointmentId the appointmentId of the appointment to be removed
+     * @return the Appointment that was removed
+     * @throws MedBotException if there is no appointment with that appointmentId
+     */
+    public Appointment deleteAppointment(int appointmentId) throws MedBotException {
         if (!appointments.containsKey(appointmentId)) {
             throw new MedBotException(getAppointmentNotFoundErrorMessage(appointmentId));
         }
@@ -62,13 +89,13 @@ public class SchedulerAppointmentList {
     }
 
     private String getAppointmentNotFoundErrorMessage(int appointmentId) {
-        return "No appointment with ID: " + appointmentId + "found.";
+        return "No appointment with ID " + appointmentId + " found.";
     }
 
     public String listAppointments() {
         String output = "";
         for (int appointmentId : appointments.keySet()) {
-            output += appointments.get(appointmentId);
+            output += appointments.get(appointmentId) + END_LINE;
         }
         return output;
     }

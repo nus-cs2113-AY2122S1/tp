@@ -20,10 +20,10 @@ public class ViewAppointmentCommand extends Command {
         String output = "";
         switch (personType) {
         case PATIENT:
-            output = scheduler.getPatientList().getPersonalAppointmentList(personId).listAppointments();
+            output = scheduler.listPatientAppointments(personId);
             break;
         case STAFF:
-            output = scheduler.getMedicalStaffList().getPersonalAppointmentList(personId).listAppointments();
+            output = scheduler.listMedicalStaffAppointments(personId);
             break;
         default:
         }

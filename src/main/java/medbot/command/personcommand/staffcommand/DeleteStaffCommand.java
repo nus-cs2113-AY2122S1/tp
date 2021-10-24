@@ -13,7 +13,7 @@ public class DeleteStaffCommand extends DeletePersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        scheduler.getMedicalStaffList().deletePerson(personId);
+        scheduler.deleteStaff(personId);
         String deleteStaffMessage = Ui.getDeleteMessage(personId, ViewType.MEDICAL_STAFF_INFO);
         ui.printOutput(deleteStaffMessage);
     }

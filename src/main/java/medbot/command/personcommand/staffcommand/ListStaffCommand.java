@@ -9,7 +9,7 @@ public class ListStaffCommand extends ListPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allStaffString = StaffUi.getAllStaffsString(scheduler.getMedicalStaffList());
+        String allStaffString = StaffUi.getAllStaffsString(scheduler.listStaff());
         ui.printOutput(allStaffString);
     }
 }

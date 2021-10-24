@@ -9,7 +9,7 @@ public class ListAppointmentCommand extends Command {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        String output = scheduler.getSchedulerAppointmentList().listAppointments();
+        String output = scheduler.listAllAppointments();
         ui.printOutput(output);
     }
 }

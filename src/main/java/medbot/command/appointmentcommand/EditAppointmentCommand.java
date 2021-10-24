@@ -17,7 +17,8 @@ public class EditAppointmentCommand extends Command {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        Appointment editedAppointment = scheduler.editAppointment(appointmentId, appointment);
+        scheduler.editAppointment(appointmentId, appointment);
+        Appointment editedAppointment = scheduler.getAppointment(appointmentId);
         ui.printOutput("Appointment " + appointmentId + " changed to " + editedAppointment);
     }
 }

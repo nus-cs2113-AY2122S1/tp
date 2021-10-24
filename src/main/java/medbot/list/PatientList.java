@@ -1,14 +1,22 @@
 package medbot.list;
 
-import medbot.exceptions.MedBotException;
-import medbot.person.Patient;
-
-import java.util.List;
+import static medbot.ui.Ui.END_LINE;
 
 public class PatientList extends PersonList {
 
-    private String getNoPatientIdErrorMessage(int patientId) {
-        return "No Patient with ID " + super.getNoPersonIdErrorMessage(patientId);
+    @Override
+    protected String getPersonNotFoundErrorMessage(int patientId) {
+        return "No Patient with ID " + patientId + " found." + END_LINE;
+    }
+
+    @Override
+    protected String getAlreadyArchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already archived." + END_LINE;
+    }
+
+    @Override
+    protected String getAlreadyUnarchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already unarchived." + END_LINE;
     }
 
 }

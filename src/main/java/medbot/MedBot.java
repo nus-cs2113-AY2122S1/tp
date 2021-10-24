@@ -54,7 +54,7 @@ public class MedBot {
                 isInteracting = !command.isExit();
 
             } catch (MedBotException mbe) {
-                ui.printOutput(mbe.getMessage());
+                ui.printOutput(mbe.getMessage() + System.lineSeparator());
             }
         }
     }
