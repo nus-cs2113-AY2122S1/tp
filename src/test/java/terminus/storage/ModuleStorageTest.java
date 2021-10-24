@@ -9,13 +9,10 @@ import com.google.gson.JsonSyntaxException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
@@ -264,21 +261,6 @@ public class ModuleStorageTest {
         this.moduleStorage.updateModuleDirectory(tempModule, "test1");
         assertTrue(Files.exists(newPath));
         assertFalse(Files.exists(oldPath));
-    }
-
-    @Test
-    void updateModuleDirectory_directoryRenameFailed_exceptionThrown() throws IOException {
-        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
-        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
-        assertTrue(Files.exists(oldPath));
-        assertFalse(Files.exists(newPath));
-        Path filePath = Paths.get(oldPath.toString(), "test.txt");
-        FileChannel channel = FileChannel.open(filePath, StandardOpenOption.APPEND);
-        assertThrows(IOException.class, () -> this.moduleStorage.updateModuleDirectory(tempModule, "test1"));
-        channel.close();
-        assertFalse(Files.exists(newPath));
-        assertTrue(Files.exists(oldPath));
-
     }
 
     @Test
