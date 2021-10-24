@@ -165,7 +165,7 @@ public class Parser {
     private static void handleEditTrip(String inputParams) {
         try {
             assert inputParams != null;
-            executeEdit(inputParams);
+            executeEditTrip(inputParams);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
             Ui.printUnknownTripIndexError();
         }
@@ -189,7 +189,7 @@ public class Parser {
         Storage.setLastTrip(newTrip);
     }
 
-    private static void executeEdit(String inputDescription) {
+    private static void executeEditTrip(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
