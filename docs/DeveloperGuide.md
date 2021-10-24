@@ -212,7 +212,8 @@ Manage fitness routines quickly
 |v2.0|unfit user|be suggested workouts|so that I can follow them to achieve basic fitness|
 |v2.0|forgetful user| be constantly reminded of the syntax for commands|easily correct any incorrect input while using the app|
 |v2.0|user|modify an existing exercise in a workout|constantly update my routine|
-|v2.0|user who finds it hard to find motivation to complete workouts|be able to set deadlines for my workouts|set a goal for myself
+|v2.0|user who finds it hard to find motivation to complete workouts|be able to set deadlines for my workouts|set a goal for myself|
+|v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
 
 ## Non-Functional Requirements
 
