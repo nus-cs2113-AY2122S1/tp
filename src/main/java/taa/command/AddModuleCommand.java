@@ -23,7 +23,7 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -48,8 +48,6 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        checkArgument();
-
         assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
 
@@ -65,7 +63,6 @@ public class AddModuleCommand extends Command {
         TaaLogger.LOGGER.logInfo(String.format("Added module: %s", module));
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
     }
 

@@ -15,7 +15,7 @@ public class ListModulesCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
         if (!argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -31,8 +31,6 @@ public class ListModulesCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        checkArgument();
-
         String message;
         if (moduleList.getSize() == 0) {
             message = MESSAGE_LIST_EMPTY;

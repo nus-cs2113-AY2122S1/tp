@@ -15,13 +15,13 @@ public class DeleteAttendanceCommand extends Command {
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String[] DELETE_ATTENDANCE_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE, 
+        KEY_MODULE_CODE,
         KEY_STUDENT_INDEX,
         KEY_LESSON_NUMBER
     };
 
     private static final String MESSAGE_FORMAT_DELETE_ATTENDANCE_USAGE =
-            "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER>";
+        "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER>";
 
     private static final String MESSAGE_FORMAT_ATTENDANCE_DELETED = "Attendance removed for %s:\n  Lesson %s";
 
@@ -30,8 +30,24 @@ public class DeleteAttendanceCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+
+        String lessonNumInput = argumentMap.get(KEY_LESSON_NUMBER);
+        if (!Util.isStringInteger(lessonNumInput)) {
+            throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
+        }
     }
 
     /**
@@ -44,14 +60,6 @@ public class DeleteAttendanceCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -59,9 +67,7 @@ public class DeleteAttendanceCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
-        }
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         Student student = module.getStudentList().getStudentAt(studentIndex);
@@ -71,10 +77,7 @@ public class DeleteAttendanceCommand extends Command {
         }
 
         String lessonNumInput = argumentMap.get(KEY_LESSON_NUMBER);
-        if (!Util.isStringInteger(lessonNumInput)) {
-            throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
-        }
-
+        assert Util.isStringInteger(lessonNumInput);
         AttendanceList attendanceList = student.getAttendanceList();
         Attendance attendance = attendanceList.deleteAttendance(lessonNumInput);
         if (attendance == null) {
@@ -82,18 +85,17 @@ public class DeleteAttendanceCommand extends Command {
         }
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_FORMAT_ATTENDANCE_DELETED, student, lessonNumInput));
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_DELETE_ATTENDANCE_USAGE,
-                COMMAND_DELETE_ATTENDANCE,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER
+            MESSAGE_FORMAT_DELETE_ATTENDANCE_USAGE,
+            COMMAND_DELETE_ATTENDANCE,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_LESSON_NUMBER
         );
     }
 }

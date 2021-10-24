@@ -37,8 +37,24 @@ public class SetMarksCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+
+        String marksInput = argumentMap.get(KEY_MARKS);
+        if (!Util.isStringDouble(marksInput)) {
+            throw new TaaException(MESSAGE_INVALID_MARKS);
+        }
     }
 
     /**
@@ -51,15 +67,6 @@ public class SetMarksCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-      
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -67,11 +74,11 @@ public class SetMarksCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
-
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
-        if (student == null || !Util.isStringInteger(studentIndexInput)) {
+        if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
@@ -86,11 +93,13 @@ public class SetMarksCommand extends Command {
         }
 
         String marksInput = argumentMap.get(KEY_MARKS);
+        assert Util.isStringDouble(marksInput);
         double marks = Double.parseDouble(marksInput);
-        double maxMarks = assessment.getMaximumMarks();
-        if ((!Util.isStringDouble(marksInput)) || !(assessment.isMarksValid(marks))) {
+        if (!(assessment.isMarksValid(marks))) {
+            double maxMarks = assessment.getMaximumMarks();
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, 0, maxMarks));
         }
+
         setMarks(ui, student, assessmentName, marks);
         storage.save(moduleList);
     }
@@ -98,10 +107,10 @@ public class SetMarksCommand extends Command {
     /**
      * Sets the marks for a student's assessment.
      *
-     * @param ui         The ui instance to handle interactions with the user.
-     * @param student    The student instance to set the mark for.
+     * @param ui             The ui instance to handle interactions with the user.
+     * @param student        The student instance to set the mark for.
      * @param assessmentName The name of the assessment to be marked.
-     * @param marks      The marks to set for the assessment.
+     * @param marks          The marks to set for the assessment.
      */
     private void setMarks(Ui ui, Student student, String assessmentName, double marks) {
         assert marks >= 0;

@@ -23,11 +23,11 @@ public class EditAssessmentCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<MODULE_CODE> "
-            + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME>] [%s/<NEW_MAXIMUM_MARKS>] [%s/<NEW_WEIGHTAGE>]";
+        + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME>] [%s/<NEW_MAXIMUM_MARKS>] [%s/<NEW_WEIGHTAGE>]";
     private static final String MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE = "Invalid new weightage. "
-            + "Weightage must be between %,.2f and %,.2f (inclusive)";
+        + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS = "Invalid new maximum marks. "
-            + "Maximum marks must be larger than %d (inclusive)";
+        + "Maximum marks must be larger than %d (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_EDITED = "Assessment in %s updated:\n  %s";
 
     public EditAssessmentCommand(String argument) {
@@ -35,8 +35,42 @@ public class EditAssessmentCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        boolean hasModuleCode = argumentMap.containsKey(KEY_MODULE_CODE);
+        boolean hasAssessmentName = argumentMap.containsKey(KEY_ASSESSMENT_NAME);
+        boolean hasNewAssessmentName = argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME);
+        boolean hasNewMaximumMarks = argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS);
+        boolean hasNewWeightage = argumentMap.containsKey(KEY_NEW_WEIGHTAGE);
+        boolean hasNecessaryArguments = hasModuleCode && hasAssessmentName
+            && (hasNewAssessmentName || hasNewMaximumMarks || hasNewWeightage);
+        if (!hasNecessaryArguments) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
+        if (newMaximumMarksString != null) {
+            if (!Util.isStringInteger(newMaximumMarksString)) {
+                throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
+                    Assessment.MINIMUM_MARKS)
+                );
+            }
+        }
+
+        String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
+        if (newWeightageString != null) {
+            if (!Util.isStringDouble(newWeightageString)) {
+                throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
+                );
+            }
+        }
     }
 
     /**
@@ -51,21 +85,6 @@ public class EditAssessmentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        boolean hasModuleCode = argumentMap.containsKey(KEY_MODULE_CODE);
-        boolean hasAssessmentName = argumentMap.containsKey(KEY_ASSESSMENT_NAME);
-        boolean hasNewAssessmentName = argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME);
-        boolean hasNewMaximumMarks = argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS);
-        boolean hasNewWeightage = argumentMap.containsKey(KEY_NEW_WEIGHTAGE);
-        boolean hasNecessaryArguments = hasModuleCode && hasAssessmentName
-                && (hasNewAssessmentName || hasNewMaximumMarks || hasNewWeightage);
-        if (!hasNecessaryArguments) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -79,7 +98,7 @@ public class EditAssessmentCommand extends Command {
         }
 
         assert (argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME) || argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS)
-                || argumentMap.containsKey(KEY_NEW_WEIGHTAGE)) : "a new value to edit should at least exist.";
+            || argumentMap.containsKey(KEY_NEW_WEIGHTAGE)) : "a new value to edit should at least exist.";
         String newName = argumentMap.getOrDefault(KEY_NEW_ASSESSMENT_NAME, null);
         if (newName != null) {
             assessment.setName(newName);
@@ -87,18 +106,12 @@ public class EditAssessmentCommand extends Command {
 
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         if (newMaximumMarksString != null) {
-            if (!Util.isStringInteger(newMaximumMarksString)) {
-                throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
-                        Assessment.MINIMUM_MARKS)
-                );
-            }
-
+            assert Util.isStringInteger(newMaximumMarksString);
             int newMaximumMarks = Integer.parseInt(newMaximumMarksString);
             if (newMaximumMarks < Assessment.MINIMUM_MARKS) {
                 throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
-                        Assessment.MINIMUM_MARKS)
+                    MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
+                    Assessment.MINIMUM_MARKS)
                 );
             }
             assessment.setMaximumMarks(newMaximumMarks);
@@ -106,42 +119,36 @@ public class EditAssessmentCommand extends Command {
 
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
         if (newWeightageString != null) {
-            if (!Util.isStringDouble(newWeightageString)) {
-                throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
-                        Assessment.WEIGHTAGE_RANGE[0],
-                        Assessment.WEIGHTAGE_RANGE[1])
-                );
-            }
-
+            assert Util.isStringDouble(newWeightageString);
             double newWeightage = Double.parseDouble(newWeightageString);
             if (!Assessment.isWeightageWithinRange(newWeightage)) {
                 throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
-                        Assessment.WEIGHTAGE_RANGE[0],
-                        Assessment.WEIGHTAGE_RANGE[1])
+                    MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
                 );
             }
             assessment.setWeightage(newWeightage);
         }
+
         assert storage != null : "storage should exist.";
         storage.save(moduleList);
 
         assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_EDITED, moduleCode,
-                assessment));
+            assessment));
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE,
-                COMMAND_EDIT_ASSESSMENT,
-                KEY_MODULE_CODE,
-                KEY_ASSESSMENT_NAME,
-                KEY_NEW_ASSESSMENT_NAME,
-                KEY_NEW_MAXIMUM_MARKS,
-                KEY_NEW_WEIGHTAGE
+            MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE,
+            COMMAND_EDIT_ASSESSMENT,
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME,
+            KEY_NEW_ASSESSMENT_NAME,
+            KEY_NEW_MAXIMUM_MARKS,
+            KEY_NEW_WEIGHTAGE
         );
     }
 }

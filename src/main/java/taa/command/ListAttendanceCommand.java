@@ -24,8 +24,19 @@ public class ListAttendanceCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
     }
 
     /**
@@ -38,14 +49,6 @@ public class ListAttendanceCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -53,9 +56,7 @@ public class ListAttendanceCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
-        }
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = module.getStudentList();

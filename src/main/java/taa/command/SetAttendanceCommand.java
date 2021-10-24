@@ -40,8 +40,24 @@ public class SetAttendanceCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+
+        String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
+        if (!Util.isStringInteger(lessonNumberInput)) {
+            throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
+        }
     }
 
     /**
@@ -53,14 +69,6 @@ public class SetAttendanceCommand extends Command {
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -68,9 +76,7 @@ public class SetAttendanceCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
-        }
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = module.getStudentList();
@@ -80,10 +86,7 @@ public class SetAttendanceCommand extends Command {
         }
 
         String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
-        if (!Util.isStringInteger(lessonNumberInput)) {
-            throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
-        }
-
+        assert Util.isStringInteger(lessonNumberInput);
         int lessonNumber = Integer.parseInt(lessonNumberInput);
         if (lessonNumber < Attendance.getMinLessonNumber()) {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);

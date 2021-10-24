@@ -24,20 +24,20 @@ public class AddAssessmentCommand extends Command {
     private static final String MESSAGE_FAIL_TO_ADD = "Fail to add assessment.";
 
     private static final String MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME> "
-            + "%s/<MAXIMUM_MARKS> %s/<WEIGHTAGE>";
+        + "%s/<MAXIMUM_MARKS> %s/<WEIGHTAGE>";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
-            + "Weightage must be between %,.2f and %,.2f (inclusive)";
+        + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
-            + "Maximum marks must be larger than %d (inclusive)";
+        + "Maximum marks must be larger than %d (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
-            + "  %s\nThere are %d assessments in the %s.";
+        + "  %s\nThere are %d assessments in the %s.";
 
     public AddAssessmentCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -91,8 +91,6 @@ public class AddAssessmentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        checkArgument();
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -124,18 +122,18 @@ public class AddAssessmentCommand extends Command {
 
         assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED, moduleCode,
-                assessment, assessmentList.getSize(), module));
+            assessment, assessmentList.getSize(), module));
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE,
-                COMMAND_ADD_ASSESSMENT,
-                KEY_MODULE_CODE,
-                KEY_ASSESSMENT_NAME,
-                KEY_MAXIMUM_MARKS,
-                KEY_WEIGHTAGE
+            MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE,
+            COMMAND_ADD_ASSESSMENT,
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME,
+            KEY_MAXIMUM_MARKS,
+            KEY_WEIGHTAGE
         );
     }
 }

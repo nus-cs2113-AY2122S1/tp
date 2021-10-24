@@ -21,8 +21,14 @@ public class DeleteAssessmentCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
 
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
     }
 
     /**
@@ -35,14 +41,6 @@ public class DeleteAssessmentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -67,10 +65,10 @@ public class DeleteAssessmentCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_DELETE_ASSESSMENT_USAGE,
-                COMMAND_DELETE_ASSESSMENT,
-                KEY_MODULE_CODE,
-                KEY_ASSESSMENT_NAME
+            MESSAGE_FORMAT_DELETE_ASSESSMENT_USAGE,
+            COMMAND_DELETE_ASSESSMENT,
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME
         );
     }
 }

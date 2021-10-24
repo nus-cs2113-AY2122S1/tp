@@ -19,7 +19,7 @@ public class DeleteModuleCommand extends Command {
     }
 
     @Override
-    protected void checkArgument() throws TaaException {
+    public void checkArgument() throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -31,8 +31,6 @@ public class DeleteModuleCommand extends Command {
 
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        checkArgument();
-
         assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
@@ -49,7 +47,6 @@ public class DeleteModuleCommand extends Command {
         }
 
         storage.save(moduleList);
-
         ui.printMessage(message);
     }
 
