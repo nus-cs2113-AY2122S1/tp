@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -25,6 +26,7 @@ import terminus.common.CommonFormat;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 
 public class ModuleStorageTest {
@@ -191,7 +193,7 @@ public class ModuleStorageTest {
     }
 
     @Test
-    void exportModuleNotes_success() throws IOException {
+    void exportModuleNotes_success() throws IOException, InvalidArgumentException {
         ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
         Note note1 = new Note("a", "test");
         Note note2 = new Note("b", "test");
@@ -205,7 +207,7 @@ public class ModuleStorageTest {
         assertTrue(pdf.exists());
         StringBuilder content = new StringBuilder();
         try {
-            PdfReader pdfReader = new PdfReader(pdf.getAbsolutePath());
+            PdfReader pdfReader = new PdfReader(new FileInputStream(pdf.getAbsolutePath()));
             int pages = pdfReader.getNumberOfPages();
             for (int i = 1; i <= pages; i++) {
                 content.append(PdfTextExtractor.getTextFromPage(pdfReader, i));
@@ -218,13 +220,16 @@ public class ModuleStorageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        pdf.delete();
     }
 
     @Test
-    void exportModuleNotes_throwException() throws IOException {
+    void exportModuleNotes_throwException() throws IOException, InvalidArgumentException {
         ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
-        this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(), "doesNotExist", "didNotExist"));
+        noteManager.deleteContent(1);
+        assertThrows(InvalidArgumentException.class,
+            () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
+        this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(),"doesNotExist","didNotExist"));
         assertThrows(IOException.class,
             () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
 
