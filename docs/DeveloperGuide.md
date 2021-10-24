@@ -99,32 +99,51 @@ After obtaining the attributes of an entry from the `entry` class and the requir
 
 The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and the other classes involved with it as well.
 
-![img_3.png](AddExpenseCommandSD.drawio.PNG)
+![img_2.png](AddExpenseCommandSD.drawio.PNG)
 
 _------Work in Progress------_
 
 ### Data Saving Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
-`StonksXD_Data.csv`, which is located in the same directory as the program. DataManager requires an instance of the 
-`Parser`, `FinancialTracker` and `Ui` class to function. 
+`StonksXD_Entries.csv` and `StonksXD_Budget.csv`, which are located in the same directory as the program. 
 
-- When saving data into the csv file, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
+- `StonksXD_Entries.csv` will be storing users' income and expense entries.
+- `StonksXD_Budget.csv` will be storing users' budget settings.
+
+`DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui` and `BudgetManager` at the moment of 
+creation. 
+
+- When saving data into the csv files, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
 interact with the csv file.
-- When loading data from the csv file, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
+- When loading data from the csv files, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
 the csv file. 
 
 The image below illustrates the class diagram in the context of data saving and loading.
 
-![img_2.png](DataManagerCD.drawio.png)
+![img_3.png](DataManagerCD.drawio.png)
 
-The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Data.csv`.
 
--Work in progress-
+`DataManager` has 2 main objectives which are to save data into csv files and load data from csv files. The sequence of
+saving and loading are the same for both `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. Because of this, we will 
+only be showing sequence diagrams in the context of saving and loading entries.
 
-The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Data.csv` into the 
+When saving data,
+1. A `FileWriter` will be created first and be used to create a `BufferedWriter`.
+2. The header, that consist of all the categories, will be witten into the csv file.
+3. DataManager will obtain all current entries and incomes and write them to the file line by line.
+
+The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Entries.csv`.
+
+![img_4.png](SavingFeatureSD.drawio.png)
+
+When loading data,
+1. -Work in progress-
+
+The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Entries.csv` into the 
 program.
 
 -Work in progress-
+
 
 
 
