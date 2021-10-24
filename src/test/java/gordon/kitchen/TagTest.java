@@ -217,6 +217,44 @@ public class TagTest {
     }
 
     @Test
+    public void testUnTag_DifferentRecipeSameCriteria() {
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
+                + System.lineSeparator()
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
+                + System.lineSeparator()
+                + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
+                + System.lineSeparator()
+                + "tag / Duck Rice / Hawker Food + Poultry"
+                + System.lineSeparator()
+                + "untag / Chicken Rice / Hawker Food + Poultry"
+                + System.lineSeparator()
+                + "check Duck Rice";
+        String expected = "Finding recipes called Duck Rice....."
+                + System.lineSeparator()
+                + "===================="
+                + System.lineSeparator()
+                + "Duck Rice"
+                + System.lineSeparator()
+                + "Ingredients needed: "
+                + System.lineSeparator()
+                + "1. Duck"
+                + System.lineSeparator()
+                + "Method: "
+                + System.lineSeparator()
+                + "1. Cook"
+                + System.lineSeparator()
+                + "Tags: "
+                + System.lineSeparator()
+                + "1. Hawker Food"
+                + System.lineSeparator()
+                + "2. Poultry"
+                + System.lineSeparator()
+                + "===================="
+                + System.lineSeparator();
+        inputOutputTest(input,expected);
+    }
+
+    @Test
     public void testDeleteTag_WrongFormat1() {
         String input = "deleteTag /";
         String expected = formatException(GordonException.DELETETAG_FORMAT_TOOSHORT);
