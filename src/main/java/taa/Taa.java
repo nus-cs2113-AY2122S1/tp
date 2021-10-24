@@ -35,6 +35,7 @@ public class Taa {
 
             try {
                 Command command = Parser.parseUserInput(userInput);
+                command.checkArgument();
                 command.execute(moduleList, ui, storage);
                 isExit = command.isExit();
             } catch (TaaException e) {

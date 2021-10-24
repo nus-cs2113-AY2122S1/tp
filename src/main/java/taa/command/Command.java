@@ -39,6 +39,7 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
+    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
@@ -66,7 +67,7 @@ public abstract class Command {
 
     protected abstract String getUsage();
 
-    protected abstract void checkArgument() throws TaaException;
+    public abstract void checkArgument() throws TaaException;
 
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
 
