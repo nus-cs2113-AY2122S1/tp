@@ -104,8 +104,6 @@ public class Task {
                 + (information.isBlank()
                         ? ""
                         : System.lineSeparator() + Ui.PADDING + "       Info: " + information
-                + (priority.isBlank()
-                        ? ""
-                        : System.lineSeparator() + Ui.PADDING + "       Priority: " + priority));
+                + System.lineSeparator() + Ui.PADDING + "       Priority: " + priority);
     }
 }

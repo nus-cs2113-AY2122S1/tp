@@ -90,14 +90,14 @@ public class AddCommandParser {
 
         switch (params.length) {
         case 2:
-            return new AddTaskCommand(title, dayOfTheWeek, "-", "-");
+            return new AddTaskCommand(title, dayOfTheWeek, "-", "None");
         case 3:
             if (userResponse.contains("-i")) {
                 if (!hasCorrectFlagSequence(userResponse, "-d", "-i")) {
                     throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
                 }
                 String information = params[2].strip();
-                return new AddTaskCommand(title, dayOfTheWeek, information, "-");
+                return new AddTaskCommand(title, dayOfTheWeek, information, "None");
             } else if (userResponse.contains("-p")) {
                 if (!hasCorrectFlagSequence(userResponse, "d", "-p")) {
                     throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);

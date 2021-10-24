@@ -18,7 +18,7 @@ public class TaskListTest {
     @Test
     public void isEmpty_nonEmptyList_false() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test", "low"));
+        taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test", "Low"));
         assertFalse(taskList.isEmpty());
     }
 
@@ -26,9 +26,9 @@ public class TaskListTest {
     public void testDeleteTask() {
         try {
             TaskList taskList = new TaskList();
-            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 1 increment", "low"));
-            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 2 increment", "medium"));
-            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 3 increment", "high"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 1 increment", "Low"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 2 increment", "Medium"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 3 increment", "High"));
             assertEquals(3, taskList.getSize());
             taskList.deleteTask(2);
             assertEquals(2, taskList.getSize());
@@ -59,7 +59,7 @@ public class TaskListTest {
     public void markTaskAsDone_indexOutOfBounds_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
             TaskList taskList = new TaskList();
-            taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test", "medium"));
+            taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test", "Medium"));
             taskList.markTaskAsDone(1);
         });
     }

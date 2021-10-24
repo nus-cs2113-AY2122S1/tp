@@ -1,7 +1,7 @@
 package seedu.duke.commons.core;
 
 public enum Priority {
-    LOW, MEDIUM, HIGH;
+    LOW, MEDIUM, HIGH, NONE;
 
     public static boolean is(String param) {
         for (Priority priority : Priority.values()) {
