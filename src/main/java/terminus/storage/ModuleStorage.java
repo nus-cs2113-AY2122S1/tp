@@ -318,7 +318,7 @@ public class ModuleStorage {
             throw new InvalidArgumentException("There are no notes to export.");
         }
         try {
-            PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+            final PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
             Font header = FontFactory
                     .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
             Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
