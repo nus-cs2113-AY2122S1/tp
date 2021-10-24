@@ -7,24 +7,24 @@
 - [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
 - [Quick guide to use Terminus](#quick-guide-to-use-terminus)
-- [Section: Module Management](#section--module-management)
+- [Section: Module Management](#section-module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
     * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
     * [Viewing module information `view`](#viewing-module-information)
-- [Section: Module](#section--module)
+- [Section: Module](#section-module)
     * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
-- [Section: Note](#section--note)
+- [Section: Note](#section-note)
     * [Accessing note workspace : `note`](#accessing-note-workspace)
     * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
     * [Deleting a Note : `delete <index>`](#deleting-a-note)
     * [Viewing note information : `view {index}`](#viewing-note-information)
-- [Section: Schedule](#section--schedule)
+- [Section: Schedule](#section-schedule)
     * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#adding-a-schedule)
     * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
     * [Viewing schedule information : `view`](#viewing-schedule-information)
-- [Section: Question](#section--question)
+- [Section: Question](#section-question)
     * [Accessing question workspace : `question`](#accessing-question-workspace)
     * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
     * [Deleting a Question : `delete <index>`](#deleting-a-question)
@@ -90,7 +90,7 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
     - timetable
     - help
     - exit
-8. For more information of each command, please refer to the [Features](#Section:-Note) below.
+8. For more information of each command, please refer to the [Features](#section-note) below.
 
 ___
 
@@ -123,13 +123,13 @@ Terminologies used throughout this guide:
 ## Quick guide to use Terminus
 
 1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
-2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section--module-management).
+2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section-module-management).
 3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
-4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section--module).
+4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section-module).
 5. Once entering the **module workspace**, you can add the items related to the module here.
-   1. Please refer to [Section: Note](#section--note) for any related **Note** item.
-   2. Please refer to [Section: Schedule](#section--schedule) for any related **Schedule** item.
-   3. Please refer to [Section: Question](#section--question) for any related **Question** item.
+   1. Please refer to [Section: Note](#section-note) for any related **Note** item.
+   2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
+   3. Please refer to [Section: Question](#section-question) for any related **Question** item.
 6. Once you are done, you can exit **TermiNUS** using the `exit` command.
 
 Hope you enjoy your experience with TermiNUS!
