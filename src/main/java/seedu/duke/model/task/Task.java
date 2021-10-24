@@ -33,7 +33,9 @@ public class Task {
         return information;
     }
 
-    public String getPriority() { return priority; }
+    public String getPriority() {
+        return priority;
+    }
 
     public String getStatusIcon() {
         return isDone ? "[X]" : "[ ]";
@@ -66,8 +68,6 @@ public class Task {
         try {
             String[] params = line.split("\\s*[|]\\s*");
 
-            String title = params[1];
-
             String dayOfTheWeek = params[2];
             if (!DayOfTheWeek.is(dayOfTheWeek)) {
                 throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
@@ -82,6 +82,7 @@ public class Task {
             }
             priority = Priority.toProper(priority);
 
+            String title = params[1];
             Task task = new Task(title, dayOfTheWeek, information, priority);
 
             boolean isTaskDone = params[0].equals("1");
