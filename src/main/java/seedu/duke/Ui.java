@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.data.*;
+
 import java.util.Scanner;
 
 /**

@@ -1,9 +1,11 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
+
+import seedu.duke.commands.Command;
 
 /**
  * Deletes a client from the client list.
  */
-public class CutCommand extends Command {
+public class CutClientCommand extends Command {
     private final int clientIndex;
 
     /**
@@ -11,7 +13,7 @@ public class CutCommand extends Command {
      *
      * @param clientIndex index of to-be-deleted client in the client list
      */
-    public CutCommand(int clientIndex) {
+    public CutClientCommand(int clientIndex) {
         this.clientIndex = clientIndex;
     }
 

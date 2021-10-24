@@ -1,7 +1,10 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
 
 
 //public class AddTourCommand extends TourCommand {
+
+import seedu.duke.commands.Command;
+import seedu.duke.data.Tour;
 
 public class AddTourCommand extends Command {
 

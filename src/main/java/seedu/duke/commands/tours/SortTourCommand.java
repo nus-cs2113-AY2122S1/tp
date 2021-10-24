@@ -1,6 +1,8 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
 
-import java.util.ArrayList;
+import seedu.duke.commands.Command;
+import seedu.duke.data.Tour;
+
 import java.util.Arrays;
 
 public class SortTourCommand extends Command {

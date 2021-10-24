@@ -1,10 +1,13 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.Map;
+import seedu.duke.commands.*;
+import seedu.duke.commands.clients.*;
+import seedu.duke.commands.tours.*;
+import seedu.duke.commands.flights.*;
+import seedu.duke.commands.clientpackages.*;
+import seedu.duke.data.*;
+
+import java.util.*;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -323,7 +326,7 @@ public class Parser {
      */
     private static Command parseCut(String params) {
         int clientIndex = stringToInt(params) - 1;
-        return new CutCommand(clientIndex);
+        return new CutClientCommand(clientIndex);
     }
 
     /**
