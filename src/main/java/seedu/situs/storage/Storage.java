@@ -1,5 +1,7 @@
 package seedu.situs.storage;
 
+import seedu.situs.command.AlertExpiringSoonCommand;
+import seedu.situs.command.AlertLowStockCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientGroup;
@@ -34,16 +36,19 @@ public class Storage {
     }
 
     /**
-     * Checks for the existence of the {@code data} folder, and creates one if it does not exist.
+     * Loads the ingredients from memory.
      *
-     * @return loadedTaskList The Tasks read from the data file.
+     * @return the list of ingredients loaded
      */
-
     public ArrayList<IngredientGroup> loadIngredientsFromMemory() {
         ArrayList<IngredientGroup> extractedIngredients = new ArrayList<>();
 
         try {
             Scanner scanner = new Scanner(this.dataFile);
+
+            if (scanner.hasNextLine()) { //to skip the first line, which is used for thresholds
+                scanner.nextLine();
+            }
 
             while (scanner.hasNextLine()) {
                 IngredientGroup ingredientGroup = readStoredIngredients(scanner.nextLine());
@@ -58,8 +63,13 @@ public class Storage {
         return extractedIngredients;
     }
 
-
-
+    /**
+     * Reads the stored ingredient from the string saved in the memory file.
+     *
+     * @param savedIngredientString String representing the saved ingredient
+     * @return the ingredient group
+     * @throws SitusException if the saved data is of the wrong format
+     */
     private IngredientGroup readStoredIngredients(String savedIngredientString) throws SitusException {
         try {
 
@@ -89,10 +99,82 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the threshold data from the storage file.
+     *
+     * @return threshold data
+     */
+    public String getThresholdData() {
+        String thresholdData = "5|1.0";
+        try {
+            Scanner scanner = new Scanner(this.dataFile);
+            if (scanner.hasNextLine()) {
+                thresholdData = scanner.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            return thresholdData;
+        }
 
+        return thresholdData;
+    }
+
+    /**
+     * Loads the expiry threshold.
+     *
+     * @return the expiry threshold
+     */
+    public long loadExpiryThreshold() {
+        String[] thresholdData = getThresholdData().split("\\|");
+        return Long.parseLong(thresholdData[0]);
+    }
+
+    /**
+     * Loads the stock threshold.
+     *
+     * @return the stock threshold
+     */
+    public double loadStockThreshold() {
+        String[] thresholdData = getThresholdData().split("\\|");
+
+        return Double.parseDouble(thresholdData[1]);
+    }
+
+    /**
+     * Writes the threshold data to memory.
+     *
+     * @throws IOException when error with file
+     */
+    public void writeThresholdData() throws IOException {
+
+        FileWriter fw = new FileWriter(DATA_FILE_PATH);
+        String thresholdData = convertThresholdDataForStorage();
+        fw.write(thresholdData + System.lineSeparator());
+        fw.close();
+    }
+
+    /**
+     * Converts threshold data to a string for storage.
+     *
+     * @return string of threshold data
+     */
+    public String convertThresholdDataForStorage() {
+        long expiryThreshold = AlertExpiringSoonCommand.getExpiryThreshold();
+        double stockThreshold = AlertLowStockCommand.getLowStockThreshold();
+        return expiryThreshold + "|" + stockThreshold;
+    }
+
+    /**
+     * Writes the contents of the ingredient list to memory.
+     *
+     * @param ingredientGroups List of the ingredient groups
+     * @throws IOException when error with file
+     * @throws IndexOutOfBoundsException if reading from non-existent ingredient group
+     */
     public void writeIngredientsToMemory(ArrayList<IngredientGroup> ingredientGroups) throws IOException,
             IndexOutOfBoundsException {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
+
+        fw.write(convertThresholdDataForStorage() + System.lineSeparator());
 
         for (IngredientGroup ig : ingredientGroups) {
             String dataToWrite = ig.getIngredientGroupName() + "|";
@@ -107,4 +189,5 @@ public class Storage {
 
         fw.close();
     }
+
 }
