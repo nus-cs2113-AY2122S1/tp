@@ -144,7 +144,7 @@ public class ModuleStorageTest {
 
     @Test
     void saveAllNotes_success() throws IOException {
-        ContentManager noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
+        ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
         Note note1 = new Note("a", "test");
         Note note2 = new Note("b", "test");
         Note note3 = new Note("c", "test");

@@ -4,29 +4,25 @@ import terminus.parser.CommandParser;
 
 public class CommandResult {
 
-    protected CommandParser additionalData;
-    protected boolean isOk;
+    protected CommandParser newCommandParser;
+    protected String[] message;
     protected boolean isExit;
-
-    public CommandResult(boolean isOk) {
-        this(isOk, false);
+    
+    public CommandResult(String... message) {
+        this(false, null, message);
+    }
+    
+    public CommandResult(CommandParser parser) {
+        this(false, parser);
+    }
+    
+    public CommandResult(boolean isExit) {
+        this(isExit, null);
     }
 
-    public CommandResult(boolean isOk, boolean isExit) {
-        this(isOk, isExit, null);
-    }
-
-    public CommandResult(boolean isOk, CommandParser additionalData) {
-        this(isOk, false, additionalData);
-    }
-
-    public CommandResult(boolean isOk, String errorMessage) {
-        this(isOk, false, null);
-    }
-
-    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData) {
-        this.additionalData = additionalData;
-        this.isOk = isOk;
+    public CommandResult(boolean isExit, CommandParser newCommandParser, String... message) {
+        this.message = message;
+        this.newCommandParser = newCommandParser;
         this.isExit = isExit;
     }
 
@@ -36,8 +32,17 @@ public class CommandResult {
      *
      * @return The CommandParser object for the workspace or else null.
      */
-    public CommandParser getAdditionalData() {
-        return additionalData;
+    public CommandParser getNewCommandParser() {
+        return newCommandParser;
+    }
+
+    /**
+     * Returns the message that the command wishes to output.
+     * 
+     * @return The message that the command wishes to output.
+     */
+    public String[] getMessage() {
+        return message;
     }
 
     /**
@@ -45,8 +50,9 @@ public class CommandResult {
      *
      * @return True if successful or else false.
      */
+    @Deprecated
     public boolean isOk() {
-        return isOk;
+        return true;
     }
 
     /**
