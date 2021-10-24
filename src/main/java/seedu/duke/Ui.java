@@ -204,7 +204,7 @@ public class Ui {
 
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent " + stringForeignMoney(person.getMoneyOwed().get(person))
-                + " on the trip so far");
+                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person)) + ") on the trip so far");
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
                 if (person.getMoneyOwed().get(otherPerson) > 0) {
@@ -215,7 +215,7 @@ public class Ui {
                 } else if (person.getMoneyOwed().get(otherPerson) < 0) {
                     System.out.println(person.getName() + " owes "
                             + stringForeignMoney(-person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson)) + ")"
+                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson)) + ")"
                             + " to " + otherPerson.getName());
                 } else {
                     System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
