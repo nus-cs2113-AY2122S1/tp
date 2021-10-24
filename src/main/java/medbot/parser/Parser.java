@@ -1,7 +1,6 @@
 package medbot.parser;
 
-import medbot.command.HelpInfoCommand;
-import medbot.command.HelpSchedulerCommand;
+import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
 import medbot.command.ExitCommand;
@@ -66,6 +65,9 @@ public abstract class Parser {
         if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
+        if (userInput.equals(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
 
         //commands valid in only some viewTypes
         switch (viewType) {
@@ -82,6 +84,53 @@ public abstract class Parser {
     }
 
     /**
+     * Parses user input to pass relevant parameters into the HelpCommand constructor.
+     *
+     * @param userInput String containing the full user input.
+     * @return HelpCommand object.
+     * @throws MedBotParserException if parameters.length < 1 && > 2
+     */
+    private static HelpCommand parseHelpCommand(String userInput) throws MedBotParserException {
+        String commandTypeString = EMPTY_STRING;
+        try {
+            commandTypeString = userInput.substring(4).strip();
+        } catch (IndexOutOfBoundsException ie) {
+            return new HelpCommand(getViewType());
+        }
+        if (commandTypeString.equals(EMPTY_STRING)) {
+            return new HelpCommand(getViewType());
+        }
+        CommandType commandType = parseHelpCommandType(commandTypeString);
+        return new HelpCommand(commandType,getViewType());
+    }
+
+    private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
+        switch (commandTypeString) {
+        case COMMAND_ADD:
+            return CommandType.ADD;
+        case COMMAND_DELETE:
+            return CommandType.DELETE;
+        case COMMAND_EDIT:
+            return CommandType.EDIT;
+        case COMMAND_EXIT:
+            return CommandType.EXIT;
+        case COMMAND_HELP:
+            return CommandType.HELP;
+        case COMMAND_LIST:
+            return CommandType.LIST;
+        case COMMAND_SWITCH:
+            return CommandType.SWITCH;
+        case COMMAND_VIEW:
+            return CommandType.VIEW;
+        case COMMAND_FIND:
+            return CommandType.FIND;
+        default:
+            throw new MedBotParserException(ERROR_WRONG_COMMAND);
+        }
+    }
+
+    /**
+>>>>>>> 08146902260bb36f8caf3b266aa18d64025862a8
      * Processes user input and returns a SwitchCommand.
      *
      * <p>If view type is specified, returns a switch command with that new view type. If not, returns

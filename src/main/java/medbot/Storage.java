@@ -6,7 +6,7 @@ import medbot.person.Patient;
 import medbot.utilities.Pair;
 
 import static medbot.parser.ParserUtils.updatePersonalInformation;
-import static medbot.Ui.VERTICAL_LINE_SPACED_ESCAPED;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 import java.io.File;
 import java.io.FileNotFoundException;

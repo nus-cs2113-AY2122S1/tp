@@ -1,6 +1,6 @@
 package medbot.person;
 
-import static medbot.Ui.VERTICAL_LINE_SPACED;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 public class Patient extends Person {
 

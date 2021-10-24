@@ -2,14 +2,25 @@ package medbot;
 
 import medbot.command.Command;
 import medbot.command.ExitCommand;
-import medbot.command.HelpInfoCommand;
+import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
+import medbot.command.appointmentcommand.AddAppointmentCommand;
+import medbot.command.appointmentcommand.DeleteAppointmentCommand;
+import medbot.command.appointmentcommand.EditAppointmentCommand;
+import medbot.command.appointmentcommand.ListAppointmentCommand;
 import medbot.command.personcommand.patientcommand.AddPatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
 import medbot.command.personcommand.patientcommand.EditPatientCommand;
 import medbot.command.personcommand.patientcommand.FindPatientCommand;
 import medbot.command.personcommand.patientcommand.ListPatientCommand;
 import medbot.command.personcommand.patientcommand.ViewPatientCommand;
+import medbot.command.personcommand.staffcommand.AddStaffCommand;
+import medbot.command.personcommand.staffcommand.EditStaffCommand;
+import medbot.command.personcommand.staffcommand.DeleteStaffCommand;
+import medbot.command.personcommand.staffcommand.FindStaffCommand;
+import medbot.command.personcommand.staffcommand.ListStaffCommand;
+import medbot.command.personcommand.staffcommand.ViewStaffCommand;
+
 import medbot.exceptions.MedBotParserException;
 import medbot.parser.Parser;
 import medbot.parser.ParserUtils;
@@ -257,14 +268,14 @@ class ParserTest {
 
 
     @Test
-    void testParseCommand() {
+    void testParseCommandForPatient() {
         //This test only check the type, not the value of the command
         Parser.setViewType(ViewType.PATIENT_INFO);
         assertSame(Parser.getViewType(), ViewType.PATIENT_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
         testCases.put("exit", new ExitCommand());
-        testCases.put("help ", new HelpInfoCommand());
-        testCases.put("switch", new SwitchCommand(null));
+        testCases.put("help ", new HelpCommand(ViewType.PATIENT_INFO));
+        testCases.put("switch 2", new SwitchCommand(null));
         testCases.put("add n/John Tan ", new AddPatientCommand(null));
         testCases.put("edit 1 n/John Tan ", new EditPatientCommand(1, null));
         testCases.put("delete 1", new DeletePatientCommand(1));
@@ -281,6 +292,64 @@ class ParserTest {
                 assertEquals("Unable to parse command." + END_LINE, e.getMessage());
             }
         }
+    }
+
+    @Test
+    void testParseCommandForStaff() {
+        //This test only check the type, not the value of the command
+        Parser.setViewType(ViewType.MEDICAL_STAFF_INFO);
+        assertSame(Parser.getViewType(), ViewType.MEDICAL_STAFF_INFO);
+        HashMap<String, Command> testCases = new HashMap<>();
+        testCases.put("exit", new ExitCommand());
+        testCases.put("help ", new HelpCommand(ViewType.MEDICAL_STAFF_INFO));
+        testCases.put("switch 3", new SwitchCommand(null));
+        testCases.put("add n/John Tan ", new AddStaffCommand(null));
+        testCases.put("edit 1 n/John Tan ", new EditStaffCommand(1, null));
+        testCases.put("delete 1", new DeleteStaffCommand(1));
+        testCases.put("find n/name", new FindStaffCommand(new String[]{"name"}));
+        testCases.put("view 1", new ViewStaffCommand(1));
+        testCases.put("list", new ListStaffCommand());
+        testCases.put(" hello", null);
+
+        for (String testCase : testCases.keySet()) {
+            try {
+                Command command = Parser.parseCommand(testCase);
+                assertTrue(testCases.get(testCase).getClass().isAssignableFrom(command.getClass()));
+            } catch (MedBotParserException e) {
+                assertEquals("Unable to parse command." + END_LINE, e.getMessage());
+            }
+        }
+        //Change View type back to Patient
+        Parser.setViewType(ViewType.PATIENT_INFO);
+    }
+
+    @Test
+    void testParseCommandForAppointment() {
+        //This test only check the type, not the value of the command
+        Parser.setViewType(ViewType.SCHEDULER);
+        assertSame(Parser.getViewType(), ViewType.SCHEDULER);
+        HashMap<String, Command> testCases = new HashMap<>();
+        testCases.put("exit", new ExitCommand());
+        testCases.put("help ", new HelpCommand(ViewType.SCHEDULER));
+        testCases.put("switch 1", new SwitchCommand(null));
+        testCases.put("add p/1 m/1 d/18/10/21 1800 ", new AddAppointmentCommand(null));
+        testCases.put("add 1 p/1 s/1 t/18/10/21 1800 ", new AddAppointmentCommand(null));
+        testCases.put("edit 1 p/1 s/1 t/18/10/21 1800 ", new EditAppointmentCommand(1,null));
+        testCases.put("edit 1 p/1 m/1 d/18/10/21 1800 ", new EditAppointmentCommand(1,null));
+        testCases.put("delete 1", new DeleteAppointmentCommand(1));
+        testCases.put("list", new ListAppointmentCommand());
+        testCases.put(" hello", null);
+
+        for (String testCase : testCases.keySet()) {
+            try {
+                Command command = Parser.parseCommand(testCase);
+                assertTrue(testCases.get(testCase).getClass().isAssignableFrom(command.getClass()));
+            } catch (MedBotParserException e) {
+                assertEquals("Unable to parse command." + END_LINE, e.getMessage());
+            }
+        }
+        //Change View type back to Patient
+        Parser.setViewType(ViewType.PATIENT_INFO);
     }
 
 }

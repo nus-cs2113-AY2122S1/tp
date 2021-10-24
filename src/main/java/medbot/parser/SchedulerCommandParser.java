@@ -2,9 +2,6 @@ package medbot.parser;
 
 import medbot.Appointment;
 import medbot.command.Command;
-import medbot.command.CommandType;
-import medbot.command.HelpInfoCommand;
-import medbot.command.HelpSchedulerCommand;
 import medbot.command.appointmentcommand.AddAppointmentCommand;
 import medbot.command.appointmentcommand.DeleteAppointmentCommand;
 import medbot.command.appointmentcommand.EditAppointmentCommand;
@@ -46,9 +43,7 @@ public abstract class SchedulerCommandParser {
         if (userInput.equals(COMMAND_LIST)) {
             return new ListAppointmentCommand();
         }
-        if (userInput.startsWith(COMMAND_HELP)) {
-            return parseHelpCommand(userInput);
-        }
+
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -97,49 +92,4 @@ public abstract class SchedulerCommandParser {
         return new EditAppointmentCommand(appointmentId, appointment);
     }
 
-    /**
-     * Parses user input to pass relevant parameters into the HelpCommand constructor.
-     *
-     * @param userInput String containing the full user input.
-     * @return HelpCommand object.
-     * @throws MedBotParserException if parameters.length < 1 && > 2
-     */
-    private static Command parseHelpCommand(String userInput) throws MedBotParserException {
-        String commandTypeString = EMPTY_STRING;
-        try {
-            commandTypeString = userInput.substring(4).strip();
-        } catch (IndexOutOfBoundsException ie) {
-            return new HelpInfoCommand();
-        }
-        if (commandTypeString.equals(EMPTY_STRING)) {
-            return new HelpInfoCommand();
-        }
-
-        CommandType commandType = parseHelpSchedulerViewCommandType(commandTypeString);
-        return new HelpSchedulerCommand(commandType);
-    }
-
-    private static CommandType parseHelpSchedulerViewCommandType(String commandTypeString)
-            throws MedBotParserException {
-        switch (commandTypeString) {
-        case COMMAND_ADD:
-            return CommandType.ADD_APPOINTMENT;
-        case COMMAND_DELETE:
-            return CommandType.DELETE_APPOINTMENT;
-        case COMMAND_EDIT:
-            return CommandType.EDIT_APPOINTMENT;
-        case COMMAND_EXIT:
-            return CommandType.EXIT;
-        case COMMAND_HELP:
-            return CommandType.HELP;
-        case COMMAND_LIST:
-            return CommandType.LIST_APPOINTMENT;
-        case COMMAND_SWITCH:
-            return CommandType.SWITCH;
-        case COMMAND_VIEW:
-            return CommandType.VIEW_APPOINTMENT;
-        default:
-            throw new MedBotParserException(ERROR_WRONG_COMMAND);
-        }
-    }
 }

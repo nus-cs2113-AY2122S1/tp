@@ -1,9 +1,10 @@
 package medbot.command.personcommand.staffcommand;
 
 import medbot.Scheduler;
-import medbot.Ui;
+import medbot.ui.Ui;
 import medbot.command.personcommand.FindPersonCommand;
 import medbot.exceptions.MedBotException;
+import medbot.utilities.ViewType;
 
 import java.util.List;
 
@@ -14,9 +15,8 @@ public class FindStaffCommand extends FindPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        List<String> patients = scheduler.getMedicalStaffList().findPersons(parameters);
-        //todo change to getFindStaffMessage()
-        String findStaffMessage = ui.getFindPatientsMessage(patients);
+        List<String> staffs = scheduler.getMedicalStaffList().findPersons(parameters);
+        String findStaffMessage = ui.getFindPersonsMessage(staffs, ViewType.MEDICAL_STAFF_INFO);
         ui.printOutput(findStaffMessage);
     }
 }

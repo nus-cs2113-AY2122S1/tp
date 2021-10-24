@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 import medbot.exceptions.MedBotException;
 import medbot.parser.Parser;
+import medbot.ui.Ui;
 
 public class MedBot {
     public static void main(String[] args) {
