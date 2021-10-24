@@ -115,7 +115,7 @@ public class CommandParser {
      * Correct Format event Read Micah /at Monday 1600-1800.
      *
      * @param text the user input
-     * @param timetable the user's current timtable schedule
+     * @param timetable the user's current timetable schedule
      * @return returns Event Command with a timetable item to be added into timetable
      */
     private Command parseEventCommand(String text, Timetable timetable) {
@@ -237,6 +237,7 @@ public class CommandParser {
         String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
         return new DeleteCommand(moduleToBeDeleted, timetable);
     }
+
 
     /**
      * Parses user input into a SearchCommand.

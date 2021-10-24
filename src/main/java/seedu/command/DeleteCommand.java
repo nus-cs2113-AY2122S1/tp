@@ -6,17 +6,14 @@ import seedu.module.Module;
 import seedu.online.NusMods;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
-
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class DeleteCommand extends Command {
 
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
     private final String moduleToBeDeleted;
-    private Timetable timetable;
+    private final Timetable timetable;
 
     public DeleteCommand(String moduleToBeDeleted, Timetable timetable) {
         this.moduleToBeDeleted = moduleToBeDeleted;

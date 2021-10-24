@@ -218,13 +218,14 @@ public class Timetable implements Comparable<Timetable> {
      * @see Module
      */
     public void deleteFromLessons(Module module) {
-        deleteFromSchedule(module, monday);
-        deleteFromSchedule(module, tuesday);
-        deleteFromSchedule(module, wednesday);
-        deleteFromSchedule(module, thursday);
-        deleteFromSchedule(module, friday);
-        deleteFromSchedule(module, saturday);
-        deleteFromSchedule(module, sunday);
+        String moduleCode = module.getModuleCode();
+        deleteFromSchedule(moduleCode, monday);
+        deleteFromSchedule(moduleCode, tuesday);
+        deleteFromSchedule(moduleCode, wednesday);
+        deleteFromSchedule(moduleCode, thursday);
+        deleteFromSchedule(moduleCode, friday);
+        deleteFromSchedule(moduleCode, saturday);
+        deleteFromSchedule(moduleCode, sunday);
     }
 
     /**
@@ -233,12 +234,12 @@ public class Timetable implements Comparable<Timetable> {
      * 
      * @param schedule Schedule contains the lessons of the user for a particular
      *                 day of the week.
-     * @param module   Module to be Deleted
+     * @param moduleCode ModuleCode to be Deleted
      * @see Module
      */
-    public void deleteFromSchedule(Module module, TimetableItem[] schedule) {
+    public void deleteFromSchedule(String moduleCode, TimetableItem[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
-            if (schedule[i] != null && schedule[i].getTitle().equals(module.getModuleCode())) {
+            if (schedule[i] != null && schedule[i].getTitle().equals(moduleCode)) {
                 schedule[i] = null;
             }
         }
