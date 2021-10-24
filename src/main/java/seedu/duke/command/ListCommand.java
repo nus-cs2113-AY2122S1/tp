@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
@@ -9,7 +11,7 @@ import seedu.duke.task.TaskManager;
 public class ListCommand extends Command {
     private static final CommandEnum COMMAND = CommandEnum.LIST;
 
-    public ListCommand(HashMap<String, String> commandArguments) {
+    public ListCommand(Map<String, String> commandArguments) {
         super(COMMAND, commandArguments);
     }
 

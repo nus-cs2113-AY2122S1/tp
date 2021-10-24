@@ -15,6 +15,7 @@ import seedu.duke.task.type.Todo;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 class TaskManagerTest {
 
@@ -37,7 +38,7 @@ class TaskManagerTest {
 
     @Test
     void testListTasklistFormat() {
-        HashMap<String, String> listArguments = new HashMap<>();
+        Map<String, String> listArguments = new HashMap<>();
         listArguments.put("random_flag", "random_criteria");
         try {
             System.out.println("Testing List Command");
@@ -54,10 +55,10 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByPriority() {
 
-        HashMap<String, String> sortArguments = new HashMap<>();
+        Map<String, String> sortArguments = new HashMap<>();
         sortArguments.put("by", "priority");
 
-        HashMap<String, String> listArguments = new HashMap<>();
+        Map<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Priority Command");
@@ -72,10 +73,10 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByDescription() {
 
-        HashMap<String, String> sortArguments = new HashMap<>();
+        Map<String, String> sortArguments = new HashMap<>();
         sortArguments.put("by", "description");
 
-        HashMap<String, String> listArguments = new HashMap<>();
+        Map<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Description Command");
@@ -90,10 +91,10 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByTaskType() {
 
-        HashMap<String, String> sortArguments = new HashMap<>();
+        Map<String, String> sortArguments = new HashMap<>();
         sortArguments.put("by", "type");
 
-        HashMap<String, String> listArguments = new HashMap<>();
+        Map<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Task Type Command");
@@ -108,7 +109,7 @@ class TaskManagerTest {
     @Test
     void sortTasklist_ThrowsException_IfMissingByFlag() {
 
-        HashMap<String, String> sortArguments = new HashMap<>();
+        Map<String, String> sortArguments = new HashMap<>();
         sortArguments.put("random_flag", "random_criteria");
 
         try {
@@ -124,7 +125,7 @@ class TaskManagerTest {
     @Test
     void sortTasklist_ThrowsException_IfSortCriteriaEmpty() {
 
-        HashMap<String, String> commandArguments = new HashMap<>();
+        Map<String, String> commandArguments = new HashMap<>();
         commandArguments.put("by", "");
 
         try {

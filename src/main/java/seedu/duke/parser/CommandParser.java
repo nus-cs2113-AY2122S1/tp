@@ -14,6 +14,7 @@ import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class CommandParser {
 
@@ -21,9 +22,9 @@ public class CommandParser {
     private static final String WHITESPACE_REGEX = "\\s+";
 
 
-    public static HashMap getCommandOptions(String commandArguments) {
+    public static Map<String, String> getCommandOptions(String commandArguments) {
 
-        HashMap<String, String> flagsToArguments = new HashMap<>();
+        Map<String, String> flagsToArguments = new HashMap<>();
         String[] tokens = commandArguments.split(WHITESPACE_REGEX);
         String mainArgument = "";
 
@@ -54,7 +55,7 @@ public class CommandParser {
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
         CommandEnum commandEnum = CommandEnum.getCommand(command);
-        HashMap<String, String> commandOptions = new HashMap<>();
+        Map<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);
@@ -83,7 +84,7 @@ public class CommandParser {
     }
 
     // Used to debug and check the whether the user command mapping of flag->value works
-    public static String printCommandOptions(HashMap<String, String> commandOptions) {
+    public static String printCommandOptions(Map<String, String> commandOptions) {
 
         String flagsToArguments = "";
 

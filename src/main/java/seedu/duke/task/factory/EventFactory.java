@@ -1,7 +1,8 @@
 package seedu.duke.task.factory;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
@@ -18,7 +19,7 @@ import seedu.duke.task.type.Event;
 public class EventFactory {
     private static final TypeEnum taskType = TypeEnum.EVENT;
 
-    public static Event getEvent(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Event getEvent(Map<String, String> flags) throws GetTaskFailedException {
         try {
             checkForRequiredArguments(flags);
 
@@ -51,7 +52,7 @@ public class EventFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(Map<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : EventFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
