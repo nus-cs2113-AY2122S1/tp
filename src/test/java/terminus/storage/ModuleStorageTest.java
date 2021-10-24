@@ -278,6 +278,7 @@ public class ModuleStorageTest {
         assertTrue(Files.exists(oldPath));
         writer.close();
         this.moduleStorage.cleanAfterDeleteModule("test");
+        this.moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @Test
