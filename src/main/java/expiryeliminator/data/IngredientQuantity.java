@@ -6,8 +6,8 @@ import expiryeliminator.data.exception.IllegalValueException;
  * Represents an ingredient and it's associated quantity.
  */
 public class IngredientQuantity {
-    private final Ingredient ingredient;
-    private int quantity;
+    public final Ingredient ingredient;
+    public int quantity;
 
     /**
      * Initialises ingredient and quantity.
@@ -16,7 +16,7 @@ public class IngredientQuantity {
      * @param quantity Quantity of ingredient.
      * @throws IllegalValueException If quantity is less than or equal to 0.
      */
-    IngredientQuantity(Ingredient ingredient, int quantity) throws IllegalValueException {
+    public IngredientQuantity(Ingredient ingredient, int quantity) throws IllegalValueException {
         assert ingredient != null : "Ingredient cannot be null";
         this.ingredient = ingredient;
         setQuantity(quantity);
