@@ -48,22 +48,27 @@ public class PrintManager {
     }
 
     public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
+        int index = 1;
         printDashes();
         assert (numOfGoals > 0) : "List cannot be empty here";
         System.out.println("There is/are " + numOfGoals + " goal(s) in your list:");
         for (Goal goal : goals) {
+            System.out.print(index + ". ");
             System.out.println(goal.getDescription());
+            index ++;
         }
         printDashes();
     }
 
     public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
+        int index = 1;
         printDashes();
         assert (numOfHabits > 0) : "List cannot be empty here";
         System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
                 + goalDescription + "\".");
         String prefix = "[ ]";
         for (Habit habit : habits) {
+            System.out.print(index + ". ");
             String intervalPrint = "(every " + habit.getInterval() + " days)";
             String lastHabitDatePrint = habit.getHabitDateString();
             String nextHabitDatePrint = habit.getNextDateString();
@@ -72,7 +77,7 @@ public class PrintManager {
             }
             System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
             System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
-
+            index ++;
         }
         printDashes();
     }
