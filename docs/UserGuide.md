@@ -6,9 +6,10 @@
 - [Purpose](#purpose)
 - [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
+- [Quick guide to use Terminus](#quick-guide-to-use-terminus)
 - [Section: Module Management](#section-module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
-    * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
+    * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
     * [Viewing module information `view`](#viewing-module-information)
 - [Section: Module](#section-module)
@@ -89,7 +90,7 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
     - timetable
     - help
     - exit
-8. For more information of each command, please refer to the [Features](#Section:-Note) below.
+8. For more information of each command, please refer to the [Features](#section-note) below.
 
 ___
 
@@ -114,8 +115,25 @@ Terminologies used throughout this guide:
 | Terminology | Description |
 | ----------- | ----------- |
 | workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
-|default workspace|The very first workspace when executing the TermiNUS program.|
+|workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
+|default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
+
+---
+
+## Quick guide to use Terminus
+
+1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
+2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section-module-management).
+3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
+4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section-module).
+5. Once entering the **module workspace**, you can add the items related to the module here.
+   1. Please refer to [Section: Note](#section-note) for any related **Note** item.
+   2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
+   3. Please refer to [Section: Question](#section-question) for any related **Question** item.
+6. Once you are done, you can exit **TermiNUS** using the `exit` command.
+
+Hope you enjoy your experience with TermiNUS!
 
 ---
 
@@ -161,7 +179,7 @@ List of Module Management workspace commands:
 |back|escape and return to the default workspace|
 |exit|exit and closes TermiNUS|
 
-### Adding a new module
+### Adding a module
 
 **Format:** `add "<module_code>"`
 
