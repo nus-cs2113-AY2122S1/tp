@@ -23,6 +23,8 @@ public abstract class Parser {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_SWITCH = "switch";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_ARCHIVE = "archive";
+    private static final String COMMAND_UNARCHIVE = "unarchive";
 
     private static final String VIEW_TYPE_PATIENT_VIEW = "p";
     private static final String VIEW_TYPE_PATIENT_VIEW_ALT = "1";
@@ -124,6 +126,10 @@ public abstract class Parser {
             return CommandType.VIEW;
         case COMMAND_FIND:
             return CommandType.FIND;
+        case COMMAND_ARCHIVE:
+            return CommandType.ARCHIVE;
+        case COMMAND_UNARCHIVE:
+            return CommandType.UNARCHIVE;
         default:
             throw new MedBotParserException(ERROR_WRONG_COMMAND);
         }

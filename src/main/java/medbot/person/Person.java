@@ -1,12 +1,12 @@
 package medbot.person;
 
 
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
-import static medbot.ui.Ui.END_LINE;
-
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonalAppointmentList;
+
+import static medbot.ui.Ui.END_LINE;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 
 public abstract class Person {
@@ -35,6 +35,7 @@ public abstract class Person {
     protected String residentialAddress = "";
     protected PersonType personType;
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
+    protected boolean isArchived = false;
 
     public String toString() {
         return END_LINE
@@ -109,6 +110,18 @@ public abstract class Person {
         phoneNumber = null;
         emailAddress = null;
         residentialAddress = null;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void archive() {
+        isArchived = true;
+    }
+
+    public void unarchive() {
+        isArchived = false;
     }
 
     /**

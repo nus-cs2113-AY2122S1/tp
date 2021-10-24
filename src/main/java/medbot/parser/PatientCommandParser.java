@@ -2,10 +2,12 @@ package medbot.parser;
 
 import medbot.command.Command;
 import medbot.command.personcommand.patientcommand.AddPatientCommand;
+import medbot.command.personcommand.patientcommand.ArchivePatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
 import medbot.command.personcommand.patientcommand.EditPatientCommand;
 import medbot.command.personcommand.patientcommand.FindPatientCommand;
 import medbot.command.personcommand.patientcommand.ListPatientCommand;
+import medbot.command.personcommand.patientcommand.UnarchivePatientCommand;
 import medbot.command.personcommand.patientcommand.ViewPatientCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
@@ -21,6 +23,8 @@ public abstract class PatientCommandParser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_ARCHIVE = "archive";
+    private static final String COMMAND_UNARCHIVE = "unarchive";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
     private static final String EMPTY_STRING = "";
@@ -51,6 +55,12 @@ public abstract class PatientCommandParser {
         }
         if (userInput.startsWith(COMMAND_FIND)) {
             return parseFindPatientCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_ARCHIVE)) {
+            return parseArchivePatientCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_UNARCHIVE)) {
+            return parseUnarchivePatientCommand(userInput);
         }
 
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
@@ -123,4 +133,27 @@ public abstract class PatientCommandParser {
         return new FindPatientCommand(parameters);
     }
 
+    /**
+     * Parses user input and returns ArchiveUserCommand with the specified patient ID.
+     *
+     * @param userInput String containing the full user input.
+     * @return ArchiveUserCommand object with the specified parameters
+     * @throws MedBotParserException when patient id given is not specified or not a number.
+     */
+    private static ArchivePatientCommand parseArchivePatientCommand(String userInput) throws MedBotParserException {
+        int personId = ParserUtils.parseId(userInput.substring(7));
+        return new ArchivePatientCommand(personId);
+    }
+
+    /**
+     * Parses user input and returns UnarchivePatientCommand with the specified patient ID.
+     *
+     * @param userInput String containing the full user input.
+     * @return UnarchivePatientCommand object.
+     * @throws MedBotParserException when patient id given is not specified or not a number.
+     */
+    private static UnarchivePatientCommand parseUnarchivePatientCommand(String userInput) throws MedBotParserException {
+        int personId = ParserUtils.parseId(userInput.substring(9));
+        return new UnarchivePatientCommand(personId);
+    }
 }
