@@ -117,7 +117,7 @@ public class Ui {
         return task.getTitle() + System.lineSeparator()
                 + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
                 + task.getDescription() + System.lineSeparator() + task.getMemberList()
-                + task.getEvent();
+                + System.lineSeparator() + task.getEvent();
     }
 
     public static String getEvent(Event event) {
