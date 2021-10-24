@@ -1,4 +1,4 @@
-# Developer Guide
+# Food-O-Rama Developer Guide ✍
 * [Acknowledgements](#acknowledgements)
 * [Design & Implementations](#design--implementation)
   * [General Flow](#general-flow)
@@ -11,15 +11,16 @@
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
-*[User Stories](#user-stories)
-*[Non-Functional Requirements](#non-functional-requirements)
-*[Glossary](#glossary)
-*[Instructions for Manual Testing](#instructions-for-manual-testing)
-## Acknowledgements
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+## 👍 Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## 📔 Design & Implementation
 
 ### General Flow
 
@@ -29,10 +30,10 @@
 * User begins typing inputs
 * Inputs get parsed by input parser returning the appropriate command
 * Command gets executed and respective output gets displayed
-* Once user is done using the application, he can send a bye message prompting a goodbye message
+* Once user is done using the application, the user can send a `bye` command prompting a goodbye message
 * Application ends
 
-### Input parsing
+### Input Parsing
 * Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
 * Throws an exception if no matching command is found
 * Takes rest of user input as parameterString
@@ -89,7 +90,7 @@ The command it sends to the terminal is as follows:
 Handles errors such as unrecognised user commands and improper parameters by calling UI to print error messages that prompt user to type in correct commands/parameters
 
 
-### Command abstraction
+### Command Abstraction
 
 ![](images/command.png)
 
@@ -97,7 +98,8 @@ Handles errors such as unrecognised user commands and improper parameters by cal
 * All inherit from an abstract Command class with one execute method that takes a Arraylist<String> as input
 
 
-## Product scope
+## 📂 Product Scope
+
 ### Target User Profile
 
 Restaurant owners who will delegate their Inventory Management to Managers who are fast typists with experience in using
@@ -111,24 +113,24 @@ are reducing time wastage due to cooking of excess dishes and also saving money 
 Therefore, there’s a two fold saving. Additionally, we are also contributing to reducing Singapore's contribution to 
 global food wastage.
 
+## 🎤 User Stories
 
-## User Stories
+| Version | As a ... | I want to ... | So that I can ...|
+| --- | --- | --- | --- |
+| v1.0 | Restaurant owner | Delete an entry for a particular dish | Change the tracking to adapt to a change in my menu |
+| v1.0 | Restaurant owner | Use a help function | Get familiar with the application |
+| v1.0 | Restaurant owner | Add a ingredient to be tracked | Keep track of the ingredient storage |
+| v1.0 | Restaurant owner | Add a dish to be tracked | Track its wastage and its ingredients’ wastage |
+| v1.0 | Restaurant owner | Add the weight of wastage of a dish | Know how much of a certain dish is being wasted |
+| v1.0 | Restaurant owner | Calculate the Ingredients and Dishes wasted | Plan for future meal services to reduce food wastage |
+| v2.0 | Restaurant owner | Find a particular Ingredient/Dish | Do not have to look through a long list of ingredients/dishes |
+| v2.0 | Restaurant owner | Sort the Ingredients in descending order of Wastage | Determine which ingredients are wasted the most |
+| v2.0 | Restaurant owner | Sort the Dishes in descending order of Wastage | Determine which dishes are wasted the most |
+| v2.0 | Restaurant owner | Clear all the Dishes and/or Ingredients present in my data | Restart my data collection |
+| v2.0 | Restaurant owner | View a graph of wastage for my Dishes and Ingredients | Understand the wastage trends of Dishes and Ingredients at a glance |
+| v2.0 | Restaurant owner | Refresh my Command Line Interface after every User Command | Not have a cluttered terminal and instead focus on my tasks |
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|Restaurant owner|Delete an entry for a particular dish|Change the tracking to adapt to a change in my menu|
-|v1.0|Restaurant owner| Use a help function|Get familiar with the application|
-|v1.0|Restaurant owner|Add a ingredient to be tracked|Keep track of the ingredient storage|
-|v1.0|Restaurant owner|Add a dish to be tracked|Track its wastage and its ingredients’ wastage|
-|v1.0|Restaurant owner|Add the weight of wastage of a dish|Know how much of a certain dish is being wasted|
-|v1.0|Restaurant owner|Calculate the Ingredients and Dishes wasted|Plan for future meal services to reduce food wastage|
-|v2.0|Restaurant owner|Find a particular Ingredient/Dish|Do not have to look through a long list of ingredients/dishes|
-|v2.0|Restaurant owner|Sort the Ingredients in descending order of Wastage|Determine which ingredients are wasted the most|
-|v2.0|Restaurant owner|Sort the Dishes in descending order of Wastage|Determine which dishes are wasted the most|
-|v2.0|Restaurant owner|Clear all the Dishes and/or Ingredients present in my data|Restart my data collection|
-|v2.0|Restaurant owner|View a graph of wastage for my Dishes and Ingredients|Understand the wastage trends of Dishes and Ingredients at a glance|
-|v2.0|Restaurant owner|Refresh my Command Line Interface after every User Command|Not have a cluttered terminal and instead focus on my tasks|
-## Non-Functional Requirements
+## 🚦 Non-Functional Requirements
 
 * Work offline: User should be able to use Food-O-Rama without the need for internet service
 * Cross-platform: Food-O-Rama should be able to run on Windows, macOS and Linux operating systems
@@ -138,13 +140,13 @@ without crash
 
 
 
-## Glossary
+## 📒 Glossary
 
 * <i>Mainstream OS </i> - Windows, Linux, Unix, OS-X
 * <i>Ingredient </i> - The basic unit required to create any Dish
 * <i>Dish </i> - Food prepared using a combination of Ingredients
 * <i>Wastage </i> - Weight of Dish or Ingredient wasted
 
-## Instructions for Manual Testing
+## 🧪 Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
