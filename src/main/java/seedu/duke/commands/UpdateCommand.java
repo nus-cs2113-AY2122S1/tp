@@ -20,17 +20,20 @@ public class UpdateCommand extends Command {
     protected static final String BUDGET_FLAG = "budget/";
     protected static final String DESCRIPTION_FLAG = "description/";
     protected static final String TASK_FLAG = "task/";
+    protected static final String MEMBER_FLAG = "member/";
 
     public UpdateCommand(String[] command) {
         this.eventNumber = Integer.parseInt(command[1]) - 1;
         this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
-        System.out.println("Here are the details of the event:" + System.lineSeparator());
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================" + System.lineSeparator());
         Ui.printEvent(Duke.eventCatalog.get(eventNumber));
         Ui.printLineBreak();
     }
 
     private void updateIntroMessage() {
         System.out.println("Please type the item you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------   "
                 + System.lineSeparator() + "title/[NEW NAME]   "
                 + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
                 + System.lineSeparator() + "description/[NEW DESCRIPTION]"
@@ -94,7 +97,7 @@ public class UpdateCommand extends Command {
     }
 
     protected void updateTask(String index) throws DukeException {
-        Integer taskNum = Integer.parseInt(index) - 1;
+        int taskNum = Integer.parseInt(index) - 1;
         Task taskToBeUpdated = eventToBeUpdated.getFromTaskList(taskNum);
         Ui.printTask(taskToBeUpdated);
         updateTaskIntroMessage();
@@ -108,19 +111,29 @@ public class UpdateCommand extends Command {
                 updateDeadline(attribute[1], taskToBeUpdated);
             } else if (update.contains(DESCRIPTION_FLAG)) {
                taskToBeUpdated.setDescription(attribute[1]);
-            } else {
+            } else if (update.contains(MEMBER_FLAG)) {
+                updateMember(attribute[1], taskToBeUpdated);
+            }else {
                 System.out.println("invalid Command!");
             }
         }
         Ui.printLineBreak();
     }
 
+    private void updateMember(String index, Task taskToBeUpdated) {
+        System.out.println("Please key in the update for the Members Name");
+        String userInput = Ui.readInput();
+        taskToBeUpdated.getFromMemberList(Integer.parseInt(index) - 1).setName(userInput);
+    }
+
     private void updateTaskIntroMessage() {
         Ui.printLineBreak();
         System.out.println("Please type the item for task you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------   "
                 + System.lineSeparator() + "title/[NEW NAME]   "
                 + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
                 + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "member/[MEMBER INDEX]"
                 + System.lineSeparator() + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
     }

@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
@@ -127,7 +128,9 @@ public class Ui {
     public static void printTask(Task task) {
         System.out.println("Title: " + task.getTitle() + System.lineSeparator()
                 + "Deadline: " + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + "Description: " + task.getDescription());
+                + "Description: " + task.getDescription() + System.lineSeparator()
+                + "Members: ");
+        printMemberList(task.getMemberList());
     }
 
     public static void printEvent(Event event) {
@@ -138,5 +141,10 @@ public class Ui {
                 + "Budget: $" + event.getBudget() + System.lineSeparator()
                 + "Tasks: ");
         printList(event.getTaskList());
+    }
+
+    public static void printMemberList(ArrayList<Member> list) {
+        AtomicInteger i = new AtomicInteger();
+        list.forEach(member -> System.out.println(i.getAndIncrement() + 1 + ". " + member));
     }
 }

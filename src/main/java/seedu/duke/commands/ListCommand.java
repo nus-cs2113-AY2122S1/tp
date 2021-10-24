@@ -4,53 +4,68 @@ import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
-import seedu.duke.items.Item;
-
-import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    public static ArrayList<Item> sortedList = new ArrayList<>();
-
     protected String listType;
     protected String[] userCommand;
+
     public ListCommand(String[] command) {
         this.userCommand = command;
         if (command.length == 1) {
             this.listType = "list";
-        } else if (command[2].equalsIgnoreCase("-t")) {
+        } else if (userCommand.length > 2 && command[2].equalsIgnoreCase("-t")) {
             this.listType = "task";
-        }
-        else if (command[2].contains("t/")) {
+        } else if (userCommand.length > 2 && command[2].contains("t/")) {
             this.listType = "member";
-        }else {
+        } else {
             this.listType = "others";
         }
     }
 
     public CommandResult execute() {
+        Event event1;
+        try {
+            switch (listType) {
+            case "list":
+                System.out.println("OVERALL SCHEDULE"
+                        + System.lineSeparator() + "=======================");
+                Ui.printEventCatalog();
+                listUsageCommands();
+                break;
+            case "task":
 
-        sortedList.clear();
-
-        switch (listType) {
-        case "list":
-            Ui.printEventCatalog();
-            break;
-        case "task":
-            Event event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
-            Ui.printList(event1.getTaskList());
-            break;
-        case "member":
-            Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
-            String[] taskCommand = userCommand[2].split("/", 1);
-            Integer taskNum = Integer.parseInt(taskCommand[2]);
-            Task task = event2.getFromTaskList(taskNum);
-            Ui.printList(event2.getTaskList());
-            break;
-        default:
-            return new CommandResult("please specify type for list "
-                    + "[list, list -t [EVENT_NUM]]");
+                event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+                System.out.println("Event: " + event1.getTitle()
+                        + System.lineSeparator() + "=======================");
+                Ui.printList(event1.getTaskList());
+                break;
+            case "member":
+                Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+                String[] memberCommand = userCommand[2].split("/");
+                int taskNum = Integer.parseInt(memberCommand[1]) - 1;
+                Task task = event2.getFromTaskList(taskNum);
+                System.out.println("Event: " + event2.getTitle()
+                        + System.lineSeparator() + "Task: " + task.getTitle()
+                        + System.lineSeparator() + "=======================");
+                Ui.printMemberList(task.getMemberList());
+                break;
+            default:
+                return new CommandResult("please specify type for list "
+                        + "[list, list [EVENT_NUM] -t, ], list [Event Index] t/[Task Index]");
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            System.out.println("Please check through the format carefully");
+            listUsageCommands();
         }
-
         return new CommandResult("--------END OF LIST-----------");
+
+    }
+
+    private void listUsageCommands() {
+        System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
+                + System.lineSeparator() + "-----------------------"
+                + System.lineSeparator() + "To list Task: list [Event Index] -t"
+                + System.lineSeparator() + "To list Members of a Task: " +
+                "list [Event Index] t/[Task Index]");
     }
 }
