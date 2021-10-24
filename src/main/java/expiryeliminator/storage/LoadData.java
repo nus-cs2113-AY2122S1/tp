@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class LoadLists {
+public class LoadData {
     public static void loadRecipeList(RecipeList recipes) {
         String pathName = "./data/";
         String fileName = "recipeList.txt";
@@ -25,7 +25,7 @@ public class LoadLists {
         } catch (DuplicateDataException | IllegalValueException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
-            SaveLists.createFileOrFolder(pathName, fileName);
+            SaveData.createFileOrFolder(pathName, fileName);
         }
     }
 
@@ -78,7 +78,7 @@ public class LoadLists {
             Scanner sc = new Scanner(file);
             loadCurrentIngredientFromRepo(ingredients, sc);
         } catch (FileNotFoundException e) {
-            SaveLists.createFileOrFolder(pathName, fileName);
+            SaveData.createFileOrFolder(pathName, fileName);
         } catch (DuplicateDataException e) {
             e.printStackTrace();
         }

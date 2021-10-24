@@ -6,7 +6,7 @@ import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.storage.SaveLists;
+import expiryeliminator.storage.SaveData;
 
 import java.util.ArrayList;
 
@@ -63,7 +63,7 @@ public class UpdateRecipeCommand extends Command {
         try {
             recipes = recipes.updateRecipe(recipes, recipe);
             if (recipes != null) {
-                SaveLists.saveRecipeListToFile(recipes);
+                SaveData.saveRecipeListToFile(recipes);
                 return String.format(MESSAGE_RECIPE_UPDATED, recipe);
             } else {
                 return String.format(RECIPE_UPDATE_FAIL, recipe);

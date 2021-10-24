@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SaveLists {
+public class SaveData {
 
     public static void saveRecipeListToFile(RecipeList recipes) {
         String pathName = "./data/";
