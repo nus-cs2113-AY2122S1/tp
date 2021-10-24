@@ -1,11 +1,9 @@
 package seedu.duke;
 
 import seedu.command.Command;
-import seedu.exceptions.AddException;
 import seedu.exceptions.FetchException;
 import seedu.exceptions.IntegerException;
 import seedu.exceptions.ModuleExistException;
-import seedu.module.Module;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
 import seedu.timetable.Timetable;
@@ -24,7 +22,6 @@ public class Duke {
     private static Profile profileInUse;
 
     public static void main(String[] args) {
-        // assert false : "dummy";
         new Duke().setup();
     }
 
@@ -34,7 +31,6 @@ public class Duke {
         TextUi.printWelcomeMessage();
         profiles.add(new Profile("test user", "CEG", "2"));
         profileInUse = profiles.get(0);
-        profileInUse.getRecord().addModuleToRecord(new Module("CS1010"),'A');
         run();
     }
 
@@ -56,6 +52,8 @@ public class Duke {
             e.printMessage();
         } catch (ModuleExistException e) {
             e.printMessage();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,8 +1,8 @@
 package seedu.timetable;
 
-import java.util.ArrayList;
-
 import seedu.module.Module;
+
+import java.util.ArrayList;
 
 public class TimetableDto {
     private final int semester;
@@ -75,6 +75,7 @@ public class TimetableDto {
                 day[i] = userItems[i];
             } else {
                 day[i] = null;
+
             }
         }
         return day;

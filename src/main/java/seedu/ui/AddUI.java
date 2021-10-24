@@ -1,9 +1,10 @@
 package seedu.ui;
 
+import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
-import seedu.exceptions.IntegerException;
+
 import java.util.ArrayList;
 
 public class AddUI {
@@ -36,14 +37,14 @@ public class AddUI {
      * Function then calls getCommand method to receive input on the choice of lesson from the user
      * and adds them into the timetable
      *
-     * @param lec the list of lecture lesson type
-     * @param tt the list of tutorial lesson type
-     * @param lab the list of laboratory lesson type
+     * @param lec       the list of lecture lesson type
+     * @param tt        the list of tutorial lesson type
+     * @param lab       the list of laboratory lesson type
      * @param timetable the timetable where lessons wil be added into
-     * @param module the chosen module by the user
+     * @param module    the chosen module by the user
      */
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
-            Timetable timetable, Module module) {
+                                   Timetable timetable, Module module) {
 
         ArrayList<String> lectureLessons;
         ArrayList<String> tutorialLessons;
@@ -113,7 +114,7 @@ public class AddUI {
     /**
      * Functions prints out the lesson detail for all lessons.
      * @param lec the list of Strings representing the lesson detail
-     * @param tt the list of Strings representing the tutorial details
+     * @param tt  the list of Strings representing the tutorial details
      * @param lab the list of Strings representing the lab details
      */
     public void printLessons(ArrayList<String> lec, ArrayList<String> tt, ArrayList<String> lab) {
@@ -142,8 +143,8 @@ public class AddUI {
      * Function attempts to get user command of their preferred lesson.
      * @param lessons the list of lessons
      * @param lessonType the type of lesson
-     * @param timetable the timetable that the lesson will be added to
-     * @param module the module of the lesson
+     * @param timetable  the timetable that the lesson will be added to
+     * @param module     the module of the lesson
      * @throws IntegerException when the input is invalid
      */
     public void getCommand(ArrayList<Lesson> lessons, String lessonType,
@@ -191,7 +192,7 @@ public class AddUI {
      * @param classNumber the class number of the lesson
      */
     public void addLessonToTimetable(ArrayList<Lesson> lessons,
-            Timetable timetable, Module module, String classNumber) {
+                                     Timetable timetable, Module module, String classNumber) {
 
         assert (lessons.size() > ZERO);
         for (Lesson lesson : lessons) {
@@ -214,7 +215,7 @@ public class AddUI {
      * Function checks whether the current lesson in the list of lessons has the
      * same class number as the next lesson in the index.
      * @param lessonList the list of lesson
-     * @param lesson the specified lesson
+     * @param lesson     the specified lesson
      * @return true if the next lesson in the index has the same class number, false otherwise
      */
     public boolean classNumberGap(ArrayList<Lesson> lessonList, Lesson lesson) {
@@ -233,7 +234,7 @@ public class AddUI {
      * Function checks whether the array of lesson details
      * exist and a String in the index specified contains a lesson.
      * @param lesson the list of Strings that contain lesson details
-     * @param index the index specified
+     * @param index  the index specified
      * @return return true if the array and the lesson detail exist, otherwise false
      */
     public boolean isExist(ArrayList<String> lesson, int index) {
@@ -244,8 +245,8 @@ public class AddUI {
      * Function checks whether the array exist and a lesson in
      * the index specified contains a lesson.
      * @param lesson the list of lessons
-     * @param index the index specified
-     * @return return true if the array and the lesson exist, otherwise false
+     * @param index  the index specified
+     * @return return true if the array and the lesson exist, otherwise false.
      */
     public boolean isArrayExist(ArrayList<Lesson> lesson, int index) {
         return lesson.size() > ZERO && lesson.size() > index;

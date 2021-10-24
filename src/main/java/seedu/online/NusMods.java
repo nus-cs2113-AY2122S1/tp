@@ -2,7 +2,6 @@ package seedu.online;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-
 import seedu.command.flags.SearchFlags;
 import seedu.exceptions.FetchException;
 import seedu.module.Module;
@@ -25,7 +24,8 @@ public class NusMods {
 
     /**
      * Retrieves mod list from NUSMods API then iterates through it and prints all matching mods.
-     * @param searchTerm searchTerm that has to be contained in the moduleCode.
+     *
+     * @param searchTerm  searchTerm that has to be contained in the moduleCode.
      * @param searchFlags secondary variables that will be checked to narrow the search.
      * @throws IOException if there is no connection.
      */
@@ -46,8 +46,9 @@ public class NusMods {
 
     /**
      * Checks if mod matches search term and all flags, and prints all matching mods.
-     * @param module module to check.
-     * @param searchTerm search term to be compared.
+     *
+     * @param module      module to check.
+     * @param searchTerm  search term to be compared.
      * @param searchFlags flags to check with mod details.
      * @return true if everything matches, false otherwise.
      * @throws IOException if there is no connection.
@@ -70,6 +71,7 @@ public class NusMods {
 
     /**
      * Fetches a mod from NUSMods, saves it, then returns it.
+     *
      * @param moduleCode code of the module to fetch.
      * @return module that was fetched from NUSMods.
      * @throws FetchException if there is no connection.
@@ -86,6 +88,7 @@ public class NusMods {
 
     /**
      * Retrieves the mod list from NUSMods and returns it as an Inputstream.
+     *
      * @return list of mods as an Inputstream.
      * @throws IOException if there is no connection.
      */
@@ -100,6 +103,7 @@ public class NusMods {
 
     /**
      * Retrives detailed mod information from NUSMods and returns it as an Inputstream.
+     *
      * @param moduleCode mod to retrieve.
      * @return detailed mod information as an Inputstream.
      * @throws IOException if there is no connection.
@@ -115,6 +119,7 @@ public class NusMods {
 
     /**
      * Fetches a mod from NUSMods and prints its full information.
+     *
      * @param moduleCode mod to fetch.
      * @throws IOException if there is no connection.
      */
@@ -130,6 +135,7 @@ public class NusMods {
 
     /**
      * Fetches all mods from NUSMods and saves all of them into the local storage.
+     *
      * @throws IOException if there is no connection.
      */
     public static void update() throws IOException, ModStorage.FileErrorException {
