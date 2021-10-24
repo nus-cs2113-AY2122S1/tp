@@ -13,8 +13,10 @@ import seedu.situs.command.UpdateCommand;
 import seedu.situs.command.FindCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.storage.Storage;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -40,6 +42,7 @@ public class Parser {
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
+    private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -324,6 +327,8 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
+        } catch (IOException e) {
+            throw new SitusException(SET_THRESHOLD_ERROR_MESSAGE);
         }
     }
 }
