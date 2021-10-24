@@ -4,7 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.logger.LoggerUtil;
 import seedu.duke.parser.CommandManager;
 import seedu.duke.storage.Storage;

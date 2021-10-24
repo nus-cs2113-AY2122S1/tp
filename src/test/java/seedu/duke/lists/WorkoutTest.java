@@ -1,11 +1,10 @@
 package seedu.duke.lists;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.data.Workout;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.exercises.Exercise;
+import seedu.duke.data.Exercise;
 import seedu.duke.storage.models.WorkoutListModel;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
