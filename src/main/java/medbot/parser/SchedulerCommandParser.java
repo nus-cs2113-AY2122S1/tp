@@ -6,6 +6,7 @@ import medbot.command.appointmentcommand.AddAppointmentCommand;
 import medbot.command.appointmentcommand.DeleteAppointmentCommand;
 import medbot.command.appointmentcommand.EditAppointmentCommand;
 import medbot.command.appointmentcommand.ListAppointmentCommand;
+import medbot.command.appointmentcommand.ViewAppointmentCommand;
 import medbot.exceptions.MedBotParserException;
 
 public abstract class SchedulerCommandParser {

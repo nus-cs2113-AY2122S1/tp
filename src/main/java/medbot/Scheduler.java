@@ -30,6 +30,14 @@ public class Scheduler {
         return schedulerAppointmentList.listAppointments();
     }
 
+    public String listMedicalStaffAppointments(int staffId) throws MedBotException {
+        return medicalStaffList.listAppointments(staffId);
+    }
+
+    public String listPatientAppointments(int patientId) throws MedBotException {
+        return patientList.listAppointments(patientId);
+    }
+
     /**
      * Returns a copy of the appointment at the specified id.
      *
