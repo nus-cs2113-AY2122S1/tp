@@ -6,24 +6,24 @@
 - [Purpose](#purpose)
 - [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
-- [Section: Module Management](#section--module-management)
+- [Section: Module Management](#section-module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
     * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
     * [Viewing module information `view`](#viewing-module-information)
-- [Section: Module](#section--module)
+- [Section: Module](#section-module)
     * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
-- [Section: Note](#section--note)
+- [Section: Note](#section-note)
     * [Accessing note workspace : `note`](#accessing-note-workspace)
     * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
     * [Deleting a Note : `delete <index>`](#deleting-a-note)
     * [Viewing note information : `view {index}`](#viewing-note-information)
-- [Section: Schedule](#section--schedule)
+- [Section: Schedule](#section-schedule)
     * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
-    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#adding-a-schedule)
+    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
     * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
     * [Viewing schedule information : `view`](#viewing-schedule-information)
-- [Section: Question](#section--question)
+- [Section: Question](#section-question)
     * [Accessing question workspace : `question`](#accessing-question-workspace)
     * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
     * [Deleting a Question : `delete <index>`](#deleting-a-question)
@@ -107,6 +107,7 @@ The below table represents what each means.
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
 |`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hournotation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
+|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
 
 Terminologies used throughout this guide:
 
@@ -428,7 +429,7 @@ List of Schedule workspace commands:
 
 ### Adding a Schedule
 
-**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`
+**Format:** `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`
 
 Adds a schedule when in the schedule workspace.
 
@@ -436,7 +437,9 @@ Adds a schedule when in the schedule workspace.
 
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
-Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"`
+> ⚠️The `<duration>` must be a **positive** number. For example, `2` is a valid duration but `-1` is not.
+
+Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"`
 
 Expected Output:
 
@@ -476,8 +479,8 @@ Expected Output:
 [CS2113T > schedule] >>> view
 List of Content
 ---------------
-1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
-2. CS2113T Lab 1 (Friday, 12:30): https://zoom.us/test
+1. CS2113T Tutorial 1 (Thursday, 10:00 - 12:00): https://zoom.us/test
+2. CS2113T Lab 1 (Friday, 12:30 - 14:30): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
 [CS2113T > schedule] >>> 
@@ -677,9 +680,9 @@ Expected Output 2:
 ```
 [] >>> timetable
 THURSDAY:
-1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
+1. CS2113T Tutorial 1 (Thursday, 10:00 - 12:00): https://zoom.us/test
 FRIDAY:
-1. CS2113T Lab 1 (Friday, 12:30): https://zoom.us/test
+1. CS2113T Lab 1 (Friday, 12:30 - 14:30): https://zoom.us/test
 
 [] >>> 
 ```
@@ -690,7 +693,7 @@ Expected Output 2:
 
 ```
 [] >>> timetable thursday
-1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
+1. CS2113T Tutorial 1 (Thursday, 10:00 - 12:00): https://zoom.us/test
 
 [] >>> 
 ```
@@ -793,7 +796,7 @@ Your note on 'Advance command' has been added!
 - Adding a schedule without entering the schedule workspace.
 
 ```
-[CS2113T] >>> schedule add "Lecture" "Friday" "16:00" "https://zoom.us/test"
+[CS2113T] >>> schedule add "Lecture" "Friday" "16:00" "2" "https://zoom.us/test"
 Your schedule on 'Lecture' has been added!
 [CS2113T] >>> 
 ```
@@ -830,7 +833,7 @@ ___
 | ----------- | ----------- | ----------- |----------- |
 |module management|add module|`add "<module_code>"`|`add "CS2113T"`|
 |note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
-|schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"`|
+|schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
 |question|active learning|`test {count}`|`test`, `test 3`|
 |default|view timetable|`timetable {day}`|`timetable`, `timetable Thursday`|

@@ -19,6 +19,9 @@ import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.timetable.ConflictManager;
 
+import static terminus.common.CommonUtils.hasDurationOverflow;
+
+
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
  */
@@ -76,7 +79,14 @@ public class AddLinkCommand extends Command {
             TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
-        isValidDuration(startTime, duration);
+        if (!isValidDuration(this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.duration));
+        }
+        if (hasDurationOverflow(startTime, this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
+        }
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
                 + " to Add Link Command", description, day, startTime, link));
     }
@@ -99,8 +109,8 @@ public class AddLinkCommand extends Command {
         ConflictManager scheduleConflict = new ConflictManager(moduleManager, newLink);
 
         StringBuilder stringBuilder = new StringBuilder();
-        
-        if (scheduleConflict.getConflictingSchedule() != null) {
+
+        if (!CommonUtils.isStringNullOrEmpty(scheduleConflict.getConflictingSchedule())) {
             String conflicts = scheduleConflict.getConflictingSchedule();
             stringBuilder.append(Messages.MESSAGE_CONFLICTING_SCHEDULE + "\n").append(conflicts).append("\n");
         }

@@ -56,8 +56,17 @@ public class Link extends Content {
         this.link = link;
     }
 
+    /**
+     * Returns the end time from the start time and duration of the Link object.
+     *
+     * @return A LocalTime object containing the end time of the Link
+     */
     public LocalTime getEndTime() {
         LocalTime endTime = startTime.plusHours(duration);
+        LocalTime midnight = LocalTime.of(00, 00);
+        if (endTime.equals(midnight)) {
+            endTime = LocalTime.of(23, 59);
+        }
         return endTime;
     }
 
