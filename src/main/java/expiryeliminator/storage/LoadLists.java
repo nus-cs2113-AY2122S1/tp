@@ -84,6 +84,30 @@ public class LoadLists {
         }
     }
 
+    private static int getQuantityWithBatch(String line, int expiryDateStart) {
+        int quantityWithBatch;
+        String quantityWithUnit = line.substring(2, expiryDateStart - 2);
+        String theDigits = quantityWithUnit.replaceAll("[^0-9]", "");
+        quantityWithBatch = Integer.parseInt(theDigits);
+        return quantityWithBatch;
+    }
+
+    private static String getUnit(String line) {
+        String unit;
+        String theDigits = line.replaceAll("[^0-9]", "");
+        int lengthOfQuantity = theDigits.length();
+        int quantityStartIndex = line.indexOf(theDigits);
+        int unitStartIndex = quantityStartIndex + lengthOfQuantity;
+        int unitEndIndex = line.indexOf(")");
+        unit = line.substring(unitStartIndex, unitEndIndex);
+        if (unit.isBlank()) {
+            unit = null;
+        } else {
+            unit = unit.substring(1);
+        }
+        return unit;
+    }
+
     private static void loadCurrentIngredientFromRepo(IngredientRepository ingredients, Scanner sc)
             throws DuplicateDataException {
         LocalDate expiryDate = null;
@@ -122,29 +146,5 @@ public class LoadLists {
                 }
             }
         }
-    }
-
-    private static int getQuantityWithBatch(String line, int expiryDateStart) {
-        int quantityWithBatch;
-        String quantityWithUnit = line.substring(2, expiryDateStart - 2);
-        String theDigits = quantityWithUnit.replaceAll("[^0-9]", "");
-        quantityWithBatch = Integer.parseInt(theDigits);
-        return quantityWithBatch;
-    }
-
-    private static String getUnit(String line) {
-        String unit;
-        String theDigits = line.replaceAll("[^0-9]", "");
-        int lengthOfQuantity = theDigits.length();
-        int quantityStartIndex = line.indexOf(theDigits);
-        int unitStartIndex = quantityStartIndex + lengthOfQuantity;
-        int unitEndIndex = line.indexOf(")");
-        unit = line.substring(unitStartIndex, unitEndIndex);
-        if (unit.isBlank()) {
-            unit = null;
-        } else {
-            unit = unit.substring(1);
-        }
-        return unit;
     }
 }
