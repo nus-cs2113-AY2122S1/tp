@@ -1,5 +1,17 @@
 # Developer Guide
+
+## Introduction
+*Food-O-Rama* is a Java based Command-Line-Interface (CLI) application.
+
+This Developer Guide serves to inform developers on the design and implementation of
+*Food-O-Rama* to assist them in the development process of APIs. It also helps them 
+realise the target user profile that motivated us to build this application.
+
+---
+
+## Table of Contents
 * [Acknowledgements](#acknowledgements)
+* [Setting Up & Getting Started](#setting-up--getting-started)
 * [Design & Implementations](#design--implementation)
   * [General Flow](#general-flow)
   * [Input Parsing](#input-parsing)
@@ -15,40 +27,70 @@
 *[Non-Functional Requirements](#non-functional-requirements)
 *[Glossary](#glossary)
 *[Instructions for Manual Testing](#instructions-for-manual-testing)
+
+---
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Setting Up & Getting Started
+1. Fork *Food-O-Rama*'s repository from [here] (https://github.com/AY2122S1-CS2113T-W11-4/tp)
+2. Clone the repository into your computer
+3. Import the project into your IDE
+4. For optimal results it is recommended to use JDK 11
+
 ## Design & implementation
 
+This section brings developers through the general flow of the programme, the various components involved and the overall design of their 
+implementation.
+
 ### General Flow
+
+Describes the step-by-step sequence from User Input to the Output.
 
 ![](images/main_sequence.png)
 
 * User is greeted by welcome screen
 * User begins typing inputs
-* Inputs get parsed by input parser returning the appropriate command
+* Inputs get parsed by InputParser returning the appropriate Command
 * Command gets executed and respective output gets displayed
-* Once user is done using the application, he can send a bye message prompting a goodbye message
-* Application ends
+* Once user is done using the application, he can send an exit message prompting a goodbye message
+* Application exits
 
-### Input parsing
+### Input Parsing
+
+The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
+
 * Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
 * Throws an exception if no matching command is found
 * Takes rest of user input as parameterString
 * Based on command name splits the parameterString into respective parameters to respective command classes for execution
 
 ### Storage
-* After every operation writes the names of the Ingredient weight of ingredient stored, weight of ingredient wasted, into a text file called ingredients.txt
-* After every operation writes the names of the dish, weight of dish waste,constituents of the dish if there are any, into a text file called dish.txt
+
+The `Storage` class is responsible for the reading and writing of *Food-O-Rama* data. Data is stored as .txt files under *'Data'* folder.
+
+* After every operation writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted, into a text file called ingredients.txt
+* After every operation writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are any, into a text file called dishes.txt
 
 
 ### Data Structures
 
+The `Dish`, `DishList`, `Ingredient` and `IngredientList` classes are responsible for the handling and 
+manipulation of the *Food-O-Rama* data.
+
 ![](images/dish_ingredient.png)
 
-
+* The `Dish` class contains the Dish's Name, its wastage and its constituents.
+* The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
+wasted as well as the weight of Ingredient wasted from Dish wastage
+* The `DishList` class comprises an array of `Dish` along with Sort and Graph functions.
+* The `IngredientList` class comprises an array of `Ingredient` along with Sort and Graph functions.
+  * The Sort function arranges Dishes / Ingredients in descending order of their wastage
+  * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis 
 ### User-Interface Component
+
 
 ![](images/UiClass.png)
 
@@ -86,18 +128,23 @@ The command it sends to the terminal is as follows:
     }
 ```
 ### Exceptions
-Handles errors such as unrecognised user commands and improper parameters by calling UI to print error messages that prompt user to type in correct commands/parameters
+The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and 
+improper parameters. It does so by calling the `Ui` class to print error messages that prompt the User to 
+type in correct Commands/Parameters
 
 
-### Command abstraction
+### Command Abstraction
 
 ![](images/command.png)
 
-* Different Command Classes that perform different tasks by calling various functions of Objects  
-* All inherit from an abstract Command class with one execute method that takes a Arraylist<String> as input
+* Different Command Classes that perform different tasks by calling various functions of the Object Classes  
+* All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input
 
 
 ## Product scope
+
+Provides Developers with insights into our intended customers and the background to the problem to which
+*Food-O-Rama* finds a solution.
 ### Target User Profile
 
 Restaurant owners who will delegate their Inventory Management to Managers who are fast typists with experience in using
@@ -108,11 +155,13 @@ the Command Line Interface.
 By presenting the wastage statistics, we can help restaurant owners figure out which dishes are contributing the most to
 wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus we 
 are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients. 
-Therefore, there’s a two fold saving. Additionally, we are also contributing to reducing Singapore's contribution to 
+Therefore, there’s a two-fold saving. Additionally, we are also contributing to reducing Singapore's contribution to 
 global food wastage.
 
 
 ## User Stories
+
+Brings developers through the requirements of Users the *Food-O-Rama* team considered when building this programme.
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -130,11 +179,11 @@ global food wastage.
 |v2.0|Restaurant owner|Refresh my Command Line Interface after every User Command|Not have a cluttered terminal and instead focus on my tasks|
 ## Non-Functional Requirements
 
-* Work offline: User should be able to use Food-O-Rama without the need for internet service
-* Cross-platform: Food-O-Rama should be able to run on Windows, macOS and Linux operating systems
-* Exceptions handling: Food-O-Rama should be able to handle exceptions caused by User keying in erroneous inputs 
-without crash
-* Accessibility: Users with the .jar file should be able to use Food-O-Rama 
+* *Work offline:* User should be able to use *Food-O-Rama* without the need for Internet Access
+* *Cross-platform:* *Food-O-Rama* should be able to run on Windows, macOS and Linux operating systems without crashing
+* *Exceptions handling:* *Food-O-Rama* should be able to handle exceptions caused by User keying in erroneous inputs 
+without crashing
+* *Accessibility:* Users with the .jar file should be able to use *Food-O-Rama* 
 
 
 
