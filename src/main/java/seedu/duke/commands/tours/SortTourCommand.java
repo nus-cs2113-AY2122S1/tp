@@ -1,9 +1,8 @@
 package seedu.duke.commands.tours;
 
 import seedu.duke.commands.Command;
-import seedu.duke.data.Tour;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class SortTourCommand extends Command {
     private final String filter;
@@ -15,23 +14,13 @@ public class SortTourCommand extends Command {
     @Override
     public void execute() {
         switch (filter) {
-        case "/a":
-            String[] sortedCodes = new String[tours.getTourCount()];
-            for (int i = 0; i < tours.getTourCount(); i++) {
-                Tour currTour = tours.getTourByIndex(i);
-                sortedCodes[i] = currTour.getCode();
-            }
-            Arrays.sort(sortedCodes);
-            ui.showSortedTour(tours, sortedCodes);
+        case "/id":
+            ArrayList<String> sortedCodes = tours.getSortedTourCodes();
+            ui.showSortedTourById(tours, sortedCodes);
             break;
         case "/p":
-            Float[] sortedPrices = new Float[tours.getTourCount()];
-            for (int i = 0; i < tours.getTourCount(); i++) {
-                Tour currTour = tours.getTourByIndex(i);
-                sortedPrices[i] = currTour.getPrice();
-            }
-            Arrays.sort(sortedPrices);
-            ui.showSortedTour(tours, sortedPrices);
+            ArrayList<Float> sortedPrices = tours.getSortedTourPrices();
+            ui.showSortedTourByPrice(tours, sortedPrices);
             break;
         default:
             break;

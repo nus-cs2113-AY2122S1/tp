@@ -1,7 +1,16 @@
 package seedu.duke;
 
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
 
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,8 +28,9 @@ public class Ui {
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
 
-    private static final String SORT_TOUR_ALPHA_MESSAGE = "Sorted by code alphabetically";
+    private static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
     private static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
+    private static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
 
     private static Scanner in = new Scanner(System.in);
 
@@ -175,28 +185,48 @@ public class Ui {
         }
     }
 
-    public void showSortedTour(TourList tours, String[] sortedCodes) {
-        int count = tours.getTourCount();
-        show(SORT_TOUR_ALPHA_MESSAGE);
-        for (int i = 1; i <= count; i++) {
-            String currCode = sortedCodes[i - 1];
-            Tour currTour = tours.getTourByCode(currCode);
-            show(i + ". " + currTour + "\n");
+    public void showSortedTourById(TourList tours, ArrayList<String> sortedTourCodes) {
+        show(SORT_TOUR_ID_MESSAGE);
+        int listIndex = 1;
+        for (String tourCode : sortedTourCodes) {
+            Tour currTour = tours.getTourByCode(tourCode);
+            show(listIndex + ". " + currTour + System.lineSeparator());
+            listIndex++;
         }
     }
 
-    public void showSortedTour(TourList tours, Float[] sortedPrices) {
-        int count = tours.getTourCount();
+    public void showSortedTourByPrice(TourList tours, ArrayList<Float> sortedTourPrices) {
+        tours.initTempArray();
         show(SORT_TOUR_PRICE_MESSAGE);
-        for (int i = 1; i <= count; i++) {
-            float currPrice = sortedPrices[i - 1];
-            for (int j = 1; j <= count; j++) {
-                Tour currTour = tours.getTourByIndex(i - 1);
-                if (currTour.getPrice() == currPrice) {
-                    show(i + ". " + currTour + "\n");
-                    break;
-                }
-            }
+        int listIndex = 1;
+        for (Float tourPrice : sortedTourPrices) {
+            Tour currTour = tours.getTourByPrice(tourPrice);
+            show(listIndex + ". " + currTour + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+
+    public void showSortedClientById(ClientList clients, ArrayList<String> sortedClientIds)
+            throws TourPlannerException {
+        show(SORT_CLIENT_ID_MESSAGE);
+        int listIndex = 1;
+        for (String clientId : sortedClientIds) {
+            Client currClient = clients.getClientById(clientId);
+            show(listIndex + ". " + currClient + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+    public void showSortedClientByName(ClientList clients, ArrayList<String> sortedClientNames)
+            throws TourPlannerException {
+        clients.initTempArray();
+        show(SORT_CLIENT_ID_MESSAGE);
+        int listIndex = 1;
+        for (String clientName : sortedClientNames) {
+            Client currClient = clients.getClientByName(clientName);
+            show(listIndex + ". " + currClient + System.lineSeparator());
+            listIndex++;
         }
     }
 
@@ -278,5 +308,7 @@ public class Ui {
         show(BYE_MESSAGE);
         showLine();
     }
+
+
 }
 

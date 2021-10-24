@@ -1,13 +1,32 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
-import seedu.duke.commands.clients.*;
-import seedu.duke.commands.tours.*;
-import seedu.duke.commands.flights.*;
-import seedu.duke.commands.clientpackages.*;
-import seedu.duke.data.*;
 
-import java.util.*;
+import seedu.duke.commands.ByeCommand;
+import seedu.duke.commands.ClearCommand;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.clientpackages.AddClientPackageCommand;
+import seedu.duke.commands.clientpackages.ListClientPackageCommand;
+import seedu.duke.commands.clients.SortClientCommand;
+import seedu.duke.commands.clients.ListClientCommand;
+import seedu.duke.commands.clients.AddClientCommand;
+import seedu.duke.commands.clients.FindClientCommand;
+import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.commands.flights.FindFlightCommand;
+import seedu.duke.commands.flights.ListFlightCommand;
+import seedu.duke.commands.tours.AddTourCommand;
+import seedu.duke.commands.tours.FindTourCommand;
+import seedu.duke.commands.tours.ListTourCommand;
+import seedu.duke.commands.tours.SortTourCommand;
+import seedu.duke.data.Client;
+import seedu.duke.data.Flight;
+import seedu.duke.data.Tour;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -49,18 +68,15 @@ public class Parser {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ClearCommand();
-        case "cut":
-            try {
-                return parseCut(params);
-            } catch (NullPointerException | NumberFormatException e) {
-                throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
-            }
         case "find":
             return parseFind(params);
+        case "sort":
+            return parseSort(params);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
+
 
     /**
      * Separates command word and arguments.
@@ -390,20 +406,20 @@ public class Parser {
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
-    
-     private static Command parseCut(String params) throws TourPlannerException {
-        String[] identifierAndArgs = splitCommandString(params, " ");
-        String identifier = identifierAndArgs[0];
-        String args = identifierAndArgs[1];
 
+    private static Command parseSort(String params) {
+        String[] identifierAndFilter = splitCommandString(params, " ");
+        String identifier = identifierAndFilter[0];
+        String filter = identifierAndFilter[1];
         switch (identifier) {
+        case "-t":
+            return new SortTourCommand(filter);
         case "-c":
-            return new CutClientCommand(args);
+            return new SortClientCommand(filter);
         default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            return null;
         }
     }
-
 }
 
    

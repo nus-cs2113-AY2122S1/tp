@@ -1,10 +1,12 @@
 package seedu.duke.commands;
 
-import seedu.duke.*;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.data.ClientList;
-import seedu.duke.data.ClientPackageList;
-import seedu.duke.data.FlightList;
 import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
+
 
 /**
  * Abstract command that outlines the 'execute' and 'isExit' method.
@@ -19,7 +21,7 @@ public abstract class Command {
     /**
      * Executes the specific command depending on the command constructed.
      */
-    public abstract void execute();
+    public abstract void execute() throws TourPlannerException;
 
     public void setData(ClientList clients, FlightList flights, TourList tours,
                         ClientPackageList clientPackages, Ui ui) {
