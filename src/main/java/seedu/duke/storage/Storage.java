@@ -3,13 +3,13 @@ package seedu.duke.storage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.DeadlineWorkout;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.DeadlineWorkout;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
-import seedu.duke.exercises.Exercise;
+import seedu.duke.data.Exercise;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 /**

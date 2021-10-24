@@ -3,12 +3,10 @@ package seedu.duke.command.exercise;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

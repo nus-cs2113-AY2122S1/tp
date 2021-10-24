@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.util.logging.Logger;

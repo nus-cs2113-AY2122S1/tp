@@ -1,13 +1,12 @@
-package seedu.duke.lists;
+package seedu.duke.data;
 
-import seedu.duke.exercises.Exercise;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.duke.lists.WorkoutList.LOGGER;
+import static seedu.duke.data.WorkoutList.LOGGER;
 
 /**
  * A deadline workout is a workout with a deadline set by the user.

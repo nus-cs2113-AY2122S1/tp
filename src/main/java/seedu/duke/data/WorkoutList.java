@@ -1,4 +1,4 @@
-package seedu.duke.lists;
+package seedu.duke.data;
 
 import seedu.duke.exception.GetJackDException;
 

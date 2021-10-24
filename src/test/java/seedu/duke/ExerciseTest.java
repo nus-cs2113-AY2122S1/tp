@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.duke.exercises.Exercise;
+import seedu.duke.data.Exercise;
 
 public class ExerciseTest {
 
