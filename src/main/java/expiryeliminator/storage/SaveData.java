@@ -48,10 +48,12 @@ public class SaveData {
     }
 
     public static void createFileOrFolder(String pathName, String fileName) {
+        boolean hasExist = false;
         try {
             Path path = Paths.get(pathName);
             Files.createDirectory(path);
         } catch (FileAlreadyExistsException ignored) {
+            hasExist = true;
         } catch (IOException e) {
             System.out.println("An createFile IO error has occurred: " + e.getMessage());
         }
@@ -60,6 +62,7 @@ public class SaveData {
             Path file = Paths.get(pathName + fileName);
             Files.createFile(file);
         } catch (FileAlreadyExistsException ignored) {
+            hasExist = true;
         } catch (IOException e) {
             System.out.println("An createFile IO error has occurred: " + e.getMessage());
         }
