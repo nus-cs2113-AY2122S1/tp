@@ -1,4 +1,5 @@
-# Developer Guide
+
+# Food-O-Rama Developer Guide ✍
 
 ## Introduction
 *Food-O-Rama* is a Java based Command-Line-Interface (CLI) application.
@@ -10,6 +11,7 @@ realise the target user profile that motivated us to build this application.
 ---
 
 ## Table of Contents
+
 * [Acknowledgements](#acknowledgements)
 * [Setting Up & Getting Started](#setting-up--getting-started)
 * [Design & Implementations](#design--implementation)
@@ -30,7 +32,7 @@ realise the target user profile that motivated us to build this application.
 
 ---
 
-## Acknowledgements
+## 👍 Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
@@ -40,7 +42,7 @@ realise the target user profile that motivated us to build this application.
 3. Import the project into your IDE
 4. For optimal results it is recommended to use JDK 11
 
-## Design & implementation
+## 📔 Design & Implementation
 
 This section brings developers through the general flow of the programme, the various components involved and the overall design of their 
 implementation.
@@ -55,6 +57,7 @@ Describes the step-by-step sequence from User Input to the Output.
 * User begins typing inputs
 * Inputs get parsed by InputParser returning the appropriate Command
 * Command gets executed and respective output gets displayed
+
 * Once user is done using the application, he can send an exit message prompting a goodbye message
 * Application exits
 
@@ -141,10 +144,11 @@ type in correct Commands/Parameters
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input
 
 
-## Product scope
+## 📂 Product Scope
 
 Provides Developers with insights into our intended customers and the background to the problem to which
 *Food-O-Rama* finds a solution.
+
 ### Target User Profile
 
 Restaurant owners who will delegate their Inventory Management to Managers who are fast typists with experience in using
@@ -159,7 +163,7 @@ Therefore, there’s a two-fold saving. Additionally, we are also contributing t
 global food wastage.
 
 
-## User Stories
+## 🎤 User Stories
 
 Brings developers through the requirements of Users the *Food-O-Rama* team considered when building this programme.
 
@@ -177,7 +181,8 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 |v2.0|Restaurant owner|Clear all the Dishes and/or Ingredients present in my data|Restart my data collection|
 |v2.0|Restaurant owner|View a graph of wastage for my Dishes and Ingredients|Understand the wastage trends of Dishes and Ingredients at a glance|
 |v2.0|Restaurant owner|Refresh my Command Line Interface after every User Command|Not have a cluttered terminal and instead focus on my tasks|
-## Non-Functional Requirements
+
+## 🚦 Non-Functional Requirements
 
 * *Work offline:* User should be able to use *Food-O-Rama* without the need for Internet Access
 * *Cross-platform:* *Food-O-Rama* should be able to run on Windows, macOS and Linux operating systems without crashing
@@ -187,13 +192,13 @@ without crashing
 
 
 
-## Glossary
+## 📒 Glossary
 
 * <i>Mainstream OS </i> - Windows, Linux, Unix, OS-X
 * <i>Ingredient </i> - The basic unit required to create any Dish
 * <i>Dish </i> - Food prepared using a combination of Ingredients
 * <i>Wastage </i> - Weight of Dish or Ingredient wasted
 
-## Instructions for Manual Testing
+## 🧪 Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
