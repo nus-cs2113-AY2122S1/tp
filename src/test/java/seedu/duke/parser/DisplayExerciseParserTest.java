@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.exercise.DisplayExercisesCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -26,12 +27,15 @@ class DisplayExerciseParserTest {
     void parseInput_invalidInput_returnsIncorrectCommand() {
         parser = new DisplayExerciseParser("display    ");
         result = parser.parseInput();
-        assertTrue(result instanceof IncorrectCommand);
+        //assertTrue(result instanceof IncorrectCommand);
+        assertEquals(result.getClass(), IncorrectCommand.class);
         parser = new DisplayExerciseParser("display");
         result = parser.parseInput();
-        assertTrue(result instanceof IncorrectCommand);
+        //assertTrue(result instanceof IncorrectCommand);
+        assertEquals(result.getClass(), IncorrectCommand.class);
         parser = new DisplayExerciseParser("display a");
         result = parser.parseInput();
-        assertTrue(result instanceof IncorrectCommand);
+        //assertTrue(result instanceof IncorrectCommand);
+        assertEquals(result.getClass(), IncorrectCommand.class);
     }
 }
