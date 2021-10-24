@@ -76,12 +76,12 @@ public class StaffUi {
     /**
      * Prints all staffs in a list.
      *
-     * @param staffList the list containing staffs to be printed.
+     * @param staffListString String containing information of all staff.
      * @return all Staffs' information.
      */
-    public static String getAllStaffsString(PersonList staffList) {
+    public static String getAllStaffsString(String staffListString) {
         String output = getStaffTableHeader();
-        output += staffList.listPersons();
+        output += staffListString;
         output += TABLE_ROW_SEPARATOR;
 
         return output;

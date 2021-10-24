@@ -1,5 +1,6 @@
 package medbot;
 
+
 import medbot.command.Command;
 import medbot.command.ExitCommand;
 import medbot.command.HelpCommand;
@@ -27,152 +28,164 @@ import medbot.parser.ParserUtils;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
+
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 class ParserTest {
     private static final String END_LINE = System.lineSeparator();
 
     @Test
-    public void testParseEmailAddress() throws Exception {
-        String[][] testEmails = {
-                {"johntan@example.com", "johntan@example.com"},
-                {"johntan@example.com.sg", "johntan@example.com.sg"},
-                {"johntan2@example.com", "johntan2@example.com"},
-                {"john_tan@example.com", "john_tan@example.com"},
-                {"john.tan@example.com", "john.tan@example.com"},
-                {" johntan@example.com ", "johntan@example.com"},
-                {"   ", "Email address not specified." + END_LINE},
-                {"johntan_@example.com", "Incorrect email address format." + END_LINE},
-                {"_johntan@example.com", "Incorrect email address format." + END_LINE},
-                {"johntan@example", "Incorrect email address format." + END_LINE}
-        };
-
-        Method method = ParserUtils.class.getDeclaredMethod("parseEmailAddress", String.class);
-        method.setAccessible(true);
-
-        for (String[] testEmail : testEmails) {
-            try {
-                assertEquals(testEmail[1], method.invoke(method, testEmail[0]));
-            } catch (InvocationTargetException e) {
-                assertEquals(testEmail[1], e.getTargetException().getMessage());
-            }
+    public void testParseEmailAddress_correctFormat() {
+        try {
+            assertEquals("johntan@example.com",
+                    ParserUtils.parseEmailAddress("johntan@example.com"));
+            assertEquals("johntan@example.com.sg",
+                    ParserUtils.parseEmailAddress("johntan@example.com.sg"));
+            assertEquals("john.tan_2@example.com",
+                    ParserUtils.parseEmailAddress("john.tan_2@example.com"));
+            assertEquals("johntan@example.com",
+                    ParserUtils.parseEmailAddress(" johntan@example.com "));
+        } catch (MedBotParserException me) {
+            fail();
         }
     }
 
     @Test
-    public void testParsePhoneNumber() throws Exception {
-        String[][] testPhoneNumbers = {
-                {"81234567", "81234567"},
-                {"8123 4567", "81234567"},
-                {"8123_4567", "81234567"},
-                {"8123456", "Phone number has too few digits." + END_LINE},
-                {"812345678", "Phone number has too many digits." + END_LINE},
-                {"   ", "Phone number not specified." + END_LINE},
-                {"8123456A", "Phone number contains unexpected characters." + END_LINE},
-        };
+    public void testParseEmailAddress_exceptionThrown() {
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseEmailAddress("   "),
+                "Email address not specified.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseEmailAddress("johntan_@example.com"),
+                "Incorrect email address format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseEmailAddress("_johntan@example.com"),
+                "Incorrect email address format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseEmailAddress("johntan@example"),
+                "Incorrect email address format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseEmailAddress("johntanexample,com"),
+                "Incorrect email address format.");
+    }
 
-        Method method = ParserUtils.class.getDeclaredMethod("parsePhoneNumber", String.class);
-        method.setAccessible(true);
 
-
-        for (String[] testPhoneNumber : testPhoneNumbers) {
-            try {
-                assertEquals(testPhoneNumber[1], method.invoke(method, testPhoneNumber[0]));
-            } catch (InvocationTargetException e) {
-                assertEquals(testPhoneNumber[1], e.getTargetException().getMessage());
-            }
+    @Test
+    public void testParsePhoneNumber_correctFormat() {
+        try {
+            assertEquals("81234567",
+                    ParserUtils.parsePhoneNumber("81234567"));
+            assertEquals("81234567",
+                    ParserUtils.parsePhoneNumber("  81234567"));
+            assertEquals("81234567",
+                    ParserUtils.parsePhoneNumber("8123   4567"));
+            assertEquals("81234567",
+                    ParserUtils.parsePhoneNumber("8123_4567"));
+        } catch (MedBotParserException me) {
+            fail();
         }
     }
 
     @Test
-    public void testParseName() throws Exception {
-        Method method = ParserUtils.class.getDeclaredMethod("parseName", String.class);
-        method.setAccessible(true);
-        String[][] testNames = {
-                {"John Tan", "John Tan"},
-                {"john tan", "John Tan"},
-                {"john-tan", "John-Tan"},
-                {"JOHN TAN", "John Tan"},
-                {"   ", "Name not specified." + END_LINE}
-        };
+    public void testParsePhoneNumber_exceptionThrown() {
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parsePhoneNumber("8123456"),
+                "Phone number has too few digits.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parsePhoneNumber("812345678"),
+                "Phone number has too many digits.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parsePhoneNumber("   "),
+                "Phone number not specified.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parsePhoneNumber("8123456A"),
+                "Phone number contains unexpected characters.");
+    }
 
-        for (String[] testName : testNames) {
-            try {
-                assertEquals(testName[1], method.invoke(method, testName[0]));
-            } catch (InvocationTargetException e) {
-                assertEquals(testName[1], e.getTargetException().getMessage());
-            }
+
+    @Test
+    public void testParseName_validFormat() {
+        try {
+            assertEquals("John Tan", ParserUtils.parseName("John Tan"));
+            assertEquals("John Tan", ParserUtils.parseName("john tan"));
+            assertEquals("John Tan", ParserUtils.parseName("JOHN TAN"));
+            assertEquals("John-Tan", ParserUtils.parseName("john-tan"));
+            assertEquals("John+tan", ParserUtils.parseName("john+tan"));
+        } catch (MedBotParserException me) {
+            fail();
         }
     }
 
     @Test
-    public void testParseIcNumber() throws Exception {
-        Method method = ParserUtils.class.getDeclaredMethod("parseIcNumber", String.class);
-        method.setAccessible(true);
-        String[][] testIcNumbers = {
-                {"S1234567A", "S1234567A"},
-                {"F1234567A", "F1234567A"},
-                {"Z1234567A", "Incorrect IC number format." + END_LINE},
-                {"F1234567", "Incorrect IC number format." + END_LINE},
-                {"F1234A", "Incorrect IC number format." + END_LINE},
-                {"   ", "IC number not specified." + END_LINE},
-                {"1234567A", "Incorrect IC number format." + END_LINE}
-        };
-        for (String[] testIcNumber : testIcNumbers) {
-            try {
-                assertEquals(testIcNumber[1], method.invoke(method, testIcNumber[0]));
-            } catch (InvocationTargetException e) {
-                assertEquals(testIcNumber[1], e.getTargetException().getMessage());
-            }
+    public void testParseName_exceptionThrown() {
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseName("  "), "Name not specified.");
+    }
+
+    @Test
+    public void testParseIcNumber_validFormat() {
+        try {
+            assertEquals("S1234567A", ParserUtils.parseIcNumber("S1234567A"));
+            assertEquals("F1234567A", ParserUtils.parseIcNumber("f1234567a"));
+        } catch (MedBotParserException me) {
+            fail();
         }
     }
 
     @Test
-    void testParseResidentialAddress() throws Exception {
-        Method method = ParserUtils.class.getDeclaredMethod("parseResidentialAddress", String.class);
-        method.setAccessible(true);
-        String[][] testResidentialAddresses = {
-                {"12 Lower Kent Ridge", "12 Lower Kent Ridge"},
-                {"12 lower kent ridge", "12 Lower Kent Ridge"},
-                {"12 LOWER KENT RIDGE", "12 Lower Kent Ridge"},
-                {"   ", "Address not specified." + END_LINE}
-        };
-        for (String[] testResidentialAddress : testResidentialAddresses) {
-            try {
-                assertEquals(testResidentialAddress[1], method.invoke(method, testResidentialAddress[0]));
-            } catch (InvocationTargetException e) {
-                assertEquals(testResidentialAddress[1], e.getTargetException().getMessage());
-            }
+    public void testParseIcNumber_exceptionThrown() {
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("Z1234567A"),
+                "Incorrect IC number format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("F1234567"),
+                "Incorrect IC number format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("1234567A"),
+                "Incorrect IC number format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("S1234 567A"),
+                "Incorrect IC number format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("1234567A"),
+                "Incorrect IC number format.");
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseIcNumber("  "),
+                "IC number not specified.");
+    }
+
+    @Test
+    void testParseResidentialAddress_correctFormat() {
+        try {
+            assertEquals("12 Lower Kent Ridge", ParserUtils.parseResidentialAddress("12 Lower Kent Ridge"));
+            assertEquals("12 Lower Kent Ridge", ParserUtils.parseResidentialAddress("12 lower kent ridge"));
+            assertEquals("12 Lower Kent Ridge", ParserUtils.parseResidentialAddress("12 LOWER KENT RIDGE"));
+        } catch (MedBotParserException me) {
+            fail();
         }
+    }
+
+    @Test
+    public void testParseResidentialAddress_exceptionThrown() {
+        assertThrows(MedBotParserException.class, () -> ParserUtils.parseName("  "), "Address not specified.");
     }
 
     @Test
     void testPreprocessMultiAttributeInput() throws Exception {
         Method method = ParserUtils.class.getDeclaredMethod("preprocessMultiAttributeInput", String.class);
         method.setAccessible(true);
-        String[][] testInputStrings = {
-                {"add n/John Tan i/S8712345G e/john@gmail.com p/8123 4567 a/123 bishan st 24 #05-19",
-                "add |n/John Tan |i/S8712345G |e/john@gmail.com |p/8123 4567 |a/123 bishan st 24 #05-19"},
-                {"add n/joe ong e/joe@gmail.com a/123 Bishan st 24 #05-19 ",
-                "add |n/joe ong |e/joe@gmail.com |a/123 Bishan st 24 #05-19 "},
-                {"add   n/Tim lee   e/tim_lee@gmail.com.sg   a/123 queenstown ave 6 #05-19 ",
-                "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 "},
-                {"add i/S8712345G ",
-                "add |i/S8712345G "}
-        };
-        for (String[] testInputString : testInputStrings) {
-            assertEquals(testInputString[1], method.invoke(method, testInputString[0]));
-        }
+
+        String testInput0 = "add n/John Tan i/S8712345G e/john@gmail.com p/8123 4567 a/123 bishan st 24 #05-19";
+        String testOutput0 = "add |n/John Tan |i/S8712345G |e/john@gmail.com |p/8123 4567 |a/123 bishan st 24 #05-19";
+        assertEquals(testOutput0, method.invoke(method, testInput0));
+
+        String testInput1 = "add n/joe ong e/joe@gmail.com a/123 Bishan st 24 #05-19 ";
+        String testOutput1 = "add |n/joe ong |e/joe@gmail.com |a/123 Bishan st 24 #05-19 ";
+        assertEquals(testOutput1, method.invoke(method, testInput1));
+
+        String testInput2 = "add   n/Tim lee   e/tim_lee@gmail.com.sg   a/123 queenstown ave 6 #05-19 ";
+        String testOutput2 = "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 ";
+        assertEquals(testOutput2, method.invoke(method, testInput2));
+
+        String testInput3 = "addn/Tim leee/tim_lee@gmail.com.sga/123 queenstown ave 6 #05-19 ";
+        String testOutput3 = "add|n/Tim lee|e/tim_lee@gmail.com.sg|a/123 queenstown ave 6 #05-19 ";
+        assertEquals(testOutput3, method.invoke(method, testInput3));
     }
 
     @Test
@@ -191,19 +204,15 @@ class ParserTest {
         assertEquals(patient.getResidentialAddress(), "123 Bishan St 24 #05-19");
     }
 
+
     @Test
     void testPreprocessInput() throws Exception {
         Method method = ParserUtils.class.getDeclaredMethod("preprocessInput", String.class);
         method.setAccessible(true);
-        String[][] testInputStrings = {
-                {"  add n/John Tan   ", "add n/John Tan"},
-                {"add n/John Tan", "add n/John Tan"},
-                {"add n/Tim| lee ", "add n/Tim lee"},
-                {"add i/S8712345G||", "add i/S8712345G"}
-        };
-        for (String[] testInputString : testInputStrings) {
-            assertEquals(testInputString[1], method.invoke(method, testInputString[0]));
-        }
+        assertEquals("add n/John Tan", method.invoke(method, "  add n/John Tan   "));
+        assertEquals("add n/John Tan", method.invoke(method, "add n/John Tan"));
+        assertEquals("add n/Tim lee", method.invoke(method, "add n/Tim| lee "));
+        assertEquals("add i/S8712345G", method.invoke(method, "add i/S8712345G||"));
     }
 
     @Test
@@ -219,10 +228,10 @@ class ParserTest {
         }
 
         String[][] testInputExceptions = {
-                {"     ", "ID not specified or not a number." + END_LINE},
-                {"hi", "ID not specified or not a number." + END_LINE},
-                {"13hi ", "ID not specified or not a number." + END_LINE},
-                {"hi13", "ID not specified or not a number." + END_LINE}
+                {"     ", "ID not specified or not a number."},
+                {"hi", "ID not specified or not a number."},
+                {"13hi ", "ID not specified or not a number."},
+                {"hi13", "ID not specified or not a number."}
         };
         for (String[] testInputException : testInputExceptions) {
             try {
@@ -239,22 +248,20 @@ class ParserTest {
         Method method = ParserUtils.class.getDeclaredMethod("getParameters", String.class);
         method.setAccessible(true);
         String[] resultParameters = {"n/John Tan ", "i/S8712345G ", "e/john_tan@gmail.com ", "p/8123 4567"};
-        String[] inputCommands = {
-            "add n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
-            "edit n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
-            "add         n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
-            "edit          n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567"
-        };
+        String[] inputCommands = {"add n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
+                                  "edit n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
+                                  "add         n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567",
+                                  "edit          n/John Tan i/S8712345G e/john_tan@gmail.com p/8123 4567"};
 
         for (String inputCommand : inputCommands) {
             assertArrayEquals(resultParameters, (Object[]) method.invoke(method, inputCommand));
         }
 
         String[][] testInputExceptions = {
-                {"add    ", "No parameters given" + END_LINE},
-                {"edit    ", "No parameters given" + END_LINE},
-                {"add John  john@email", "No parameters given" + END_LINE},
-                {"edit John john@email", "No parameters given" + END_LINE}
+                {"add    ", "No parameters given"},
+                {"edit    ", "No parameters given"},
+                {"add John  john@email", "No parameters given"},
+                {"edit John john@email", "No parameters given"}
         };
         for (String[] testInputException : testInputExceptions) {
             try {
@@ -334,8 +341,8 @@ class ParserTest {
         testCases.put("switch 1", new SwitchCommand(null));
         testCases.put("add p/1 m/1 d/18/10/21 1800 ", new AddAppointmentCommand(null));
         testCases.put("add 1 p/1 s/1 t/18/10/21 1800 ", new AddAppointmentCommand(null));
-        testCases.put("edit 1 p/1 s/1 t/18/10/21 1800 ", new EditAppointmentCommand(1,null));
-        testCases.put("edit 1 p/1 m/1 d/18/10/21 1800 ", new EditAppointmentCommand(1,null));
+        testCases.put("edit 1 p/1 s/1 t/18/10/21 1800 ", new EditAppointmentCommand(1, null));
+        testCases.put("edit 1 p/1 m/1 d/18/10/21 1800 ", new EditAppointmentCommand(1, null));
         testCases.put("delete 1", new DeleteAppointmentCommand(1));
         testCases.put("list", new ListAppointmentCommand());
         testCases.put(" hello", null);

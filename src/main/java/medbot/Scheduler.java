@@ -1,9 +1,13 @@
 package medbot;
 
+import java.util.List;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
 import medbot.list.SchedulerAppointmentList;
+import medbot.person.Patient;
+import medbot.person.Person;
+import medbot.person.Staff;
 
 public class Scheduler {
     private static final String ERROR_ADD_INCOMPLETE_APPOINTMENT = "Incomplete appointment.";
@@ -18,16 +22,146 @@ public class Scheduler {
     private final MedicalStaffList medicalStaffList = new MedicalStaffList();
     private final SchedulerAppointmentList schedulerAppointmentList = new SchedulerAppointmentList();
 
-    public PatientList getPatientList() {
+    public PatientList getPatientList() { //todo will eventually remove this method for encapsulation
         return patientList;
     }
 
-    public MedicalStaffList getMedicalStaffList() {
+    public MedicalStaffList getMedicalStaffList() { //todo will eventually remove this method for encapsulation
         return medicalStaffList;
     }
 
     public String listAllAppointments() {
         return schedulerAppointmentList.listAppointments();
+    }
+
+    public String listMedicalStaffAppointments(int staffId) throws MedBotException {
+        return medicalStaffList.listAppointments(staffId);
+    }
+
+    public String listPatientAppointments(int patientId) throws MedBotException {
+        return patientList.listAppointments(patientId);
+    }
+
+    /**
+     * Adds the given patient into the scheduler, allocates an id to the patient and returns the id value.
+     *
+     * @param patient Patient to be added into the scheduler
+     * @return personId that was allocated to the patient
+     */
+    public int addPatient(Person patient) {
+        return patientList.addPerson(patient);
+    }
+
+    /**
+     * Adds the given staff into the scheduler, allocates an id to the staff and returns the id value.
+     *
+     * @param staff Staff to be added into the scheduler
+     * @return personId that was allocated to the staff
+     */
+    public int addStaff(Person staff) {
+        return medicalStaffList.addPerson(staff);
+    }
+
+    /**
+     * Edits the specified fields on Patient information with new values from the user.
+     *
+     * @param patientId      the id of the Patient with information to change
+     * @param newPatientData the new Patient data to change to (except the null fields)
+     * @throws MedBotException if there is no patient with that id
+     */
+    public void editPatient(int patientId, Person newPatientData) throws MedBotException {
+        patientList.editPerson(patientId, newPatientData);
+    }
+
+    /**
+     * Edits the specified fields on Staff information with new values from the user.
+     *
+     * @param staffId      the id of the Staff with information to change
+     * @param newStaffData the new Staff data to change to (except the null fields)
+     * @throws MedBotException if there is no staff with that id
+     */
+    public void editStaff(int staffId, Person newStaffData) throws MedBotException {
+        patientList.editPerson(staffId, newStaffData);
+    }
+
+    /**
+     * Removes the patient with the specified id.
+     *
+     * @param patientId the id of the patient to remove.
+     * @throws MedBotException if there is no patient with that id
+     */
+    public void deletePatient(int patientId) throws MedBotException {
+        patientList.deletePerson(patientId);
+    }
+
+    /**
+     * Removes the staff with the specified id.
+     *
+     * @param staffId the id of the staff to remove.
+     * @throws MedBotException if there is no staff with that id
+     */
+    public void deleteStaff(int staffId) throws MedBotException {
+        patientList.deletePerson(staffId);
+    }
+
+    /**
+     * Returns a String containing the information of the patient with the specified patientId.
+     *
+     * @param patientId the id of the patient to search for
+     * @return a String containing the patient's information
+     * @throws MedBotException if there is no patient with that id
+     */
+    public String getPatientInfo(int patientId) throws MedBotException {
+        return patientList.getPersonInfo(patientId);
+    }
+
+    /**
+     * Returns a String containing the information of the staff with the specified patientId.
+     *
+     * @param staffId the id of the staff to search for
+     * @return a String containing the staff's information
+     * @throws MedBotException if there is no staff with that id
+     */
+    public String getStaffInfo(int staffId) throws MedBotException {
+        return medicalStaffList.getPersonInfo(staffId);
+    }
+
+    /**
+     * Returns a list of patients that match the specified attributes.
+     *
+     * @param parameters The attributes to filter patients
+     * @return list of patients that match the specified attributes
+     */
+    public List<String> findPatients(String[] parameters) {
+        return patientList.findPersons(parameters);
+    }
+
+    /**
+     * Returns a list of staff that match the specified attributes.
+     *
+     * @param parameters The attributes to filter patients
+     * @return list of staff that match the specified attributes
+     */
+    public List<String> findStaff(String[] parameters) {
+        return medicalStaffList.findPersons(parameters);
+    }
+
+    /**
+     * Returns a String that containing information of all patients.
+     *
+     * @return String containing information of all patients.
+     */
+    public String listPatients() {
+        return patientList.listPersons();
+    }
+
+    /**
+     * Returns a String that containing information of all staff.
+     *
+     * @return String containing information of all staff.
+     */
+    public String listStaff() {
+        return medicalStaffList.listPersons();
     }
 
     /**

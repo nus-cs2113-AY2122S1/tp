@@ -13,7 +13,7 @@ public class ViewStaffCommand extends ViewPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        String staffInfo = scheduler.getMedicalStaffList().getPersonInfo(personId);
+        String staffInfo = scheduler.getStaffInfo(personId);
         String viewStaffMessage = StaffUi.getStaffInfo(staffInfo);
         ui.printOutput(viewStaffMessage);
     }
