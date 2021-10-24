@@ -97,7 +97,9 @@ Each method is abstracted into an appropriate child class (for e.g. `AddExpenseC
 
 After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
 
-UML Diagram 
+The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and the other classes involved with it as well.
+
+![img_3.png](AddExpenseCommandSD.drawio.PNG)
 
 _------Work in Progress------_
 
