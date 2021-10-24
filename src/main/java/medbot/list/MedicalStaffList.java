@@ -1,5 +1,6 @@
 package medbot.list;
 
+
 import static medbot.ui.Ui.END_LINE;
 
 public class MedicalStaffList extends PersonList {
