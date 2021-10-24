@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 
+//@@author Uxinnn
 public class Day {
     protected ItemsList itemsList;
 

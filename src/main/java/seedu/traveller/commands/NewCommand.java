@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class NewCommand extends Command {
     private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
@@ -47,9 +48,9 @@ public class NewCommand extends Command {
     @Override
     public String toString() {
         return "New command:"
-                + "\n\ttripName: " + tripName
-                + "\n\tstartCountry: " + startCountry
-                + "\n\tendCountry: " + endCountry;
+                + "\n\ttripName: " + getTripName()
+                + "\n\tstartCountry: " + getStartCountry()
+                + "\n\tendCountry: " + getEndCountry();
     }
 
     /**
@@ -60,18 +61,18 @@ public class NewCommand extends Command {
      */
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         for (int i = 0; i < tripsList.getSize(); i++) {
-            if (tripsList.getTrip(i).getTripName().equals(tripName)) {
-                throw new DuplicateTripException(tripName);
+            if (tripsList.getTrip(i).getTripName().equals(getTripName())) {
+                throw new DuplicateTripException(getTripName());
             }
         }
-        MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
+        MinCalcResult result = WorldMap.calcMinDistance(getStartCountry(), getEndCountry());
         if (result.getError() == 1) {
             return;
         }
         List<Country> path = result.getPath();
         List<Double> distances = result.getDistances();
-        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, path, distances);
+        Trip trip = new Trip(getTripName(), getStartCountry(), getEndCountry(), path, distances);
         tripsList.addTrip(trip);
-        ui.printNewTripCreated(tripName);
+        ui.printNewTripCreated(getEndCountry());
     }
 }

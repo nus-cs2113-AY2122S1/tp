@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class TripsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Trip> trips;

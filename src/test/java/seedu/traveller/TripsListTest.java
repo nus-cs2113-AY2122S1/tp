@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+//@@author Uxinnn
 public class TripsListTest {
     private final TripsList tripsList = new TripsList();
     private final Trip tripSinMly;
