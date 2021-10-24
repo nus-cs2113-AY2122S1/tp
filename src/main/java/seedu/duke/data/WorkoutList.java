@@ -3,7 +3,9 @@ package seedu.duke.data;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
@@ -70,6 +72,28 @@ public class WorkoutList {
         }
 
         return workouts.get(displayIndex - 1);
+    }
+
+    /**
+     * Sorts Workouts according to deadlines with the workouts due earlier being top of the list. Workouts without
+     * deadlines are at the bottom of the list.
+     */
+    public void sortWorkouts() {
+        ArrayList<DeadlineWorkout> deadlineWorkouts = new ArrayList<>();
+        ArrayList<Workout> normalWorkouts = new ArrayList<>();
+        for (Workout workout : workouts) {
+            if (workout instanceof DeadlineWorkout) {
+                deadlineWorkouts.add((DeadlineWorkout) workout);
+            } else {
+                normalWorkouts.add(workout);
+            }
+        }
+        ArrayList<Workout> sortedWorkouts = deadlineWorkouts.stream()
+                .sorted(Comparator.comparing(DeadlineWorkout::getDeadlineDate))
+                .collect(Collectors.toCollection(ArrayList::new));
+        sortedWorkouts.addAll(normalWorkouts);
+        workouts.clear();
+        workouts.addAll(sortedWorkouts);
     }
 
     /**
