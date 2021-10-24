@@ -132,6 +132,7 @@ public class Ui {
     public static void printNoExpensesError() {
         System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
+
     public static void printNoPersonFound(String string) {
         System.out.println("There are no persons with the name of [" + string + "] in this trip.");
     }
