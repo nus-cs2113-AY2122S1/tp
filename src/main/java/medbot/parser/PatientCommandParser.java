@@ -21,8 +21,6 @@ public abstract class PatientCommandParser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_HELP = "help";
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_SWITCH = "switch";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
     private static final String EMPTY_STRING = "";
@@ -113,6 +111,13 @@ public abstract class PatientCommandParser {
         return new AddPatientCommand(patient);
     }
 
+    /**
+     * Parses user input and returns FindUserCommand with the specified parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return FindUserCommand object with the specified parameters
+     * @throws MedBotParserException when no parameters are specified
+     */
     private static FindPatientCommand parseFindPatientCommand(String userInput) throws MedBotParserException {
         String[] parameters = ParserUtils.getParameters(userInput);
         return new FindPatientCommand(parameters);
