@@ -4,8 +4,11 @@ If you can type fast, TAA can help keep track of your modules and students faste
 
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Viewing help: `help`](#viewing-help-help)
   * [Listing all modules: `list_modules`](#listing-all-modules-list_modules)
   * [Adding a module: `add_module`](#adding-a-module-add_module)
+  * [Editing a module: `edit_module`](#editing-a-module-edit_module)
+  * [Deleting a module: `delete_module`](#deleting-a-module-delete_module)
   * [Adding a student to a specified module: `add_student`](#adding-a-student-to-a-specified-module-add_student)
   * [Editing student information: `edit_student`](#editing-student-information-edit_student)
   * [Deleting student information: `delete_student`](#deleting-student-information-delete_student)
@@ -52,13 +55,39 @@ Format: `list_modules`
 ### Adding a module: `add_module`
 Adds a module to the module list.
 
-Format: `add_module c/<MODULE_CODE> n/<MODULE_NAME>`
+Format: `add_module c/<MODULE_CODE> [n/<MODULE_NAME>]`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `MODULE_NAME` refers to the name of the module to be added.
+* `MODULE_NAME` [Optional] refers to the name of the module to be added.
 
 Examples:
 * `add_module c/CS2113T n/Software Engineering and Object-oriented Programming`
 * `add_module n/Effective Communication for Computing Professionals c/CS2101`
+* `add_module c/CS2102`
+
+### Editing a module: `edit_module`
+Edits the code or name of an existing module.
+
+Format: `edit_module c/<MODULE_CODE> [nc/<NEW_MODULE_CODE>] [n/<NEW_MODULE_NAME>]`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `NEW_MODULE_CODE` [Optional] refers to the updated code of the module.
+* `NEW_MODULE_NAME` [Optional] refers to the updated name of the module.
+> 💡 **Note:**<br />
+> Either `NEW_MODULE_CODE`, `NEW_MODULE_NAME`, or both must be provided.
+
+Examples:
+* `edit_module c/CS2113T nc/cs2113t`
+* `edit_module c/CS2113T n/software engineering`
+* `edit_module c/CS2113T nc/cs2113t n/software engineering`
+
+### Deleting a module: `delete_module`
+Deletes an existing module from the module list.
+
+Format: `delete_module c/<MODULE_CODE>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+
+Examples:
+* `delete_module c/CS2113T`
+* `delete_module c/CS2101`
 
 <br>
 
@@ -140,6 +169,8 @@ Format: `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT
 * `NEW_ASSESSMENT_NAME` refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
 * `NEW_MAXIMUM_MARKS` refers to the new maximum marks of the assessment (e.g. 50).
 * `NEW_WEIGHTAGE` refers to the new weightage of the assessment (e.g. 20%).
+> 💡 **Note:**<br />
+> TODO
 
 Examples:
 * `edit_assessment c/CS2101 n/OP1 m/20 w/10`
