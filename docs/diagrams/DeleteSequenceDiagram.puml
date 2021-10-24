@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":DeleteCommand" as delete COMMAND_COLOUR
+Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
+Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
+
+Participant ":Storage" as storage STORAGE_COLOUR
+
+-> parser : parse("delete n/ carrot e/ 25/12/2021")
+activate parser PARSER_COLOUR
+
+parser -> parser : parseDeleteCommand()
+activate parser PARSER_COLOUR_S1
+
+parser -> delete **: DeleteCommand("carrot", "25/12/2021")
+activate delete COMMAND_COLOUR
+return
+
+parser -> delete : run()
+activate delete COMMAND_COLOUR
+
+delete -> ingredient_list : getInstance()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return instance
+
+delete -> ingredient_list : removeIngredientFromGroup()
+activate ingredient_list INGREDIENTLIST_COLOUR
+
+ingredient_list -> ingredient_list : findIngredientIndexInList("carrot")
+activate ingredient_list INGREDIENTLIST_COLOUR
+return groupIndexToRemove
+
+ingredient_list -> ingredient_group : findIngredientIndexByExpiry(25/12/2021)
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return ingredientIndexToRemove
+
+ingredient_list -> ingredient_group : remove()
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return removedIngredient
+
+ingredient_list -> storage : writeIngredientsToMemory
+activate storage STORAGE_COLOUR
+return
+
+return removedIngredient
+
+return resultMsg
+
+return resultMsg
+
+return CLI message
+
+@enduml
