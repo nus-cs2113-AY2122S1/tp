@@ -1,6 +1,8 @@
 package seedu.duke.task.factory;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.GetTaskFailedException;
@@ -24,7 +26,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_validEventInputs_expectEvent() throws GetTaskFailedException {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -43,7 +45,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_minimumEventInputs_expectEvent() throws GetTaskFailedException {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -60,7 +62,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_eventWithNoEndDate_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -77,7 +79,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_eventWithNoStartDate_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
@@ -94,7 +96,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_eventStartDateAfterEndDate_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(EventFlag.START_DATE, VALID_DATE2);
@@ -111,7 +113,7 @@ class EventFactoryTest {
 
     @Test
     void getEvent_eventInvalidPriorityInteger_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         String invalidPriority = "69";
 

@@ -1,6 +1,8 @@
 package seedu.duke.task.factory;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.flags.TodoFlag;
 import seedu.duke.exception.GetTaskFailedException;
@@ -14,6 +16,7 @@ import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@@author SeanRobertDH
@@ -24,7 +27,7 @@ class TodoFactoryTest {
 
     @Test
     void getTask_validTodoInputs_expectTodo() throws GetTaskFailedException {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(TodoFlag.DO_ON_DATE, VALID_DATE1);
@@ -40,21 +43,21 @@ class TodoFactoryTest {
 
     @Test
     void getTask_minimumTodoInputs_expectTodo() throws GetTaskFailedException {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
 
         Todo todo = TodoFactory.getTodo(arguments);
 
         assertEquals(todo.getDescription(), DESCRIPTION);
-        assertEquals(todo.getDoOnDate(), null);
+        assertNull(todo.getDoOnDate());
         assertEquals(todo.getPriority(), PriorityEnum.MEDIUM);
         assertEquals(todo.getRecurrence(), RecurrenceEnum.NONE);
     }
 
     @Test
     void getTask_todoNoDateWithRecurrence_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(TodoFlag.RECURRENCE, RecurrenceEnum.DAILY.toString());
@@ -70,7 +73,7 @@ class TodoFactoryTest {
 
     @Test
     void getTask_todoWithNoDescription_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
@@ -84,7 +87,7 @@ class TodoFactoryTest {
 
     @Test
     void getTask_todoWithInvalidPriority_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
         String invalidPriority = "blarg";
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);

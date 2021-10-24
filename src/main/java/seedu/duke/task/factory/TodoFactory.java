@@ -2,6 +2,8 @@ package seedu.duke.task.factory;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
@@ -19,7 +21,7 @@ import seedu.duke.task.type.Todo;
 public class TodoFactory {
     private static final TypeEnum taskType = TypeEnum.TODO;
 
-    public static Todo getTodo(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Todo getTodo(Map<String, String> flags) throws GetTaskFailedException {
         try {
             checkForRequiredArguments(flags);
 
@@ -52,7 +54,7 @@ public class TodoFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(Map<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : TodoFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);

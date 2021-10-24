@@ -3,6 +3,7 @@ package seedu.duke.log;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ public class Log {
     private static final boolean DO_APPEND_TO_FILE = true;
     private static final boolean USE_DEFAULT_HANDLERS = false;
 
-    private static HashMap<String, Logger> loggers = new HashMap<>();
+    private static Map<String, Logger> loggers = new HashMap<>();
 
     private static FileHandler getFileHandler() throws IOException {
         FileHandler fileHandler = new FileHandler(LOG_FILE_NAME, DO_APPEND_TO_FILE);

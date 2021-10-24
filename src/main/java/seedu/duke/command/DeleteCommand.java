@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     private static final String LIST_NUMBERS = "-";
 
 
-    public DeleteCommand(HashMap<String, String> commandArguments) {
+    public DeleteCommand(Map<String, String> commandArguments) {
         super(COMMAND, commandArguments);
     }
 
@@ -56,7 +56,7 @@ public class DeleteCommand extends Command {
     }
 
     private TreeSet<Integer> getTasksToDelete(String[] indexStrings) throws NumberFormatException {
-        TreeSet<Integer> indexes = new TreeSet();
+        TreeSet<Integer> indexes = new TreeSet<>();
         for (String indexString : indexStrings) {
             if (indexString.contains(LIST_NUMBERS)) {
                 String[] listIndexes = indexString.split(LIST_NUMBERS, 2);
