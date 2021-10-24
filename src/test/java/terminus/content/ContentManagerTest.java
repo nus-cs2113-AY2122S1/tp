@@ -71,7 +71,7 @@ public class ContentManagerTest {
 
     @Test
     void getContent_link_success() throws InvalidArgumentException {
-        Link link = new Link("test", "monday", LocalTime.now(), 1,"test.com");
+        Link link = new Link("test", "monday", LocalTime.of(23, 00), 1,"test.com");
         linkContentManager.add(link);
         assertEquals(link.getDisplayInfo(), linkContentManager.getContentData(1));
     }
