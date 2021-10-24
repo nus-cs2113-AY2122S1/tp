@@ -48,8 +48,8 @@ public class SearchCommand extends Command {
         Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Workout> workoutList = workouts.getAllWorkouts();
 
-        boolean matchingWorkoutsFound = getMatchingWorkouts(map, workoutList);
-        boolean matchingExercisesFound = getMatchingExercises(map, workoutList);
+        boolean matchingWorkoutsFound = addMatchingWorkouts(map, workoutList);
+        boolean matchingExercisesFound = addMatchingExercises(map, workoutList);
 
         if (!matchingExercisesFound && !matchingWorkoutsFound) {
             return new CommandResult(MESSAGE_NO_MATCHES_FOUND);
@@ -58,7 +58,14 @@ public class SearchCommand extends Command {
         return new CommandResult(map, false);
     }
 
-    private boolean getMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
+    /**
+     * Adds matching workouts to the map and returns true if matching workouts are found.
+     *
+     * @param map         Map whose key is the workout name and value is the workout list.
+     * @param workoutList list of all workouts that we want to search through
+     * @return true if matching workouts were found and added to the map, false otherwise.
+     */
+    private boolean addMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchesFound = false;
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
         if (!filteredWorkouts.isEmpty()) {
@@ -68,8 +75,16 @@ public class SearchCommand extends Command {
         return matchesFound;
     }
 
-    private boolean getMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
-        boolean matchingWorkouts = false;
+    /**
+     * Adds matching exercises to the map and returns true if matching exercises are found.
+     *
+     * @param map         Map whose key is the workout name and value is the list of exercises that contain the
+     *                    particular keyword in that specific workout.
+     * @param workoutList list of all workouts that we want to filter through.
+     * @return true if matching exercises were found and added to the map, false otherwise.
+     */
+    private boolean addMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
+        boolean matchesFound = false;
 
         for (int i = 0; i < workoutList.size(); i++) {
             int displayIndex = i + 1;
@@ -77,15 +92,22 @@ public class SearchCommand extends Command {
             ArrayList<Exercise> exercises = w.getAllExercises();
             ArrayList<Exercise> filteredExercises = getFilteredExercisesWithExerciseIndex(exercises);
             if (!filteredExercises.isEmpty()) {
-                matchingWorkouts = true;
+                matchesFound = true;
                 String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
                         displayIndex, w.getWorkoutName());
                 map.put(matchingExerciseMessage, filteredExercises);
             }
         }
-        return matchingWorkouts;
+        return matchesFound;
     }
 
+    /**
+     * Filters through a workout list to find workouts that contain a keyword in the workout name.
+     * Index of workouts are preserved in the list.
+     *
+     * @param workoutList list of all workouts that we want to filter through.
+     * @return list of filtered workouts.
+     */
     private ArrayList<Workout> getFilteredWorkoutsWithWorkoutIndex(ArrayList<Workout> workoutList) {
         ArrayList<Workout> filteredWorkouts = filterWorkoutsByString(workoutList, filterString);
         boolean matchingWorkoutFound = false;
@@ -101,6 +123,13 @@ public class SearchCommand extends Command {
         return new ArrayList<>();
     }
 
+    /**
+     * Filters through an exercise list to find exercises that contain a keyword in the exercise description.
+     * Index of exercises are preserved in the list.
+     *
+     * @param exercises list of exercises that we want to filter through.
+     * @return list of filtered exercises.
+     */
     private ArrayList<Exercise> getFilteredExercisesWithExerciseIndex(ArrayList<Exercise> exercises) {
         boolean matchingExercisesFound = false;
 
@@ -117,6 +146,13 @@ public class SearchCommand extends Command {
         return new ArrayList<>();
     }
 
+    /**
+     * Filters through an exercise list to find exercises that contain a keyword in the exercise description.
+     * Index of exercises are preserved in the list.
+     *
+     * @param workout list of exercises that we want to filter through.
+     * @return list of filtered exercises.
+     */
     private static ArrayList<Exercise> filterExercisesByString(ArrayList<Exercise> workout, String filterString) {
         ArrayList<Exercise> filteredList = new ArrayList<>();
         for (Exercise e : workout) {
@@ -129,6 +165,13 @@ public class SearchCommand extends Command {
         return filteredList;
     }
 
+    /**
+     * Filters through a workout list to find workouts that contain a keyword in the workout name.
+     * Index of workouts are preserved in the list.
+     *
+     * @param workoutList list of workouts that we want to filter through.
+     * @return list of filtered exercises.
+     */
     private static ArrayList<Workout> filterWorkoutsByString(ArrayList<Workout> workoutList, String filterString) {
         ArrayList<Workout> filteredList = new ArrayList<>();
         for (Workout w : workoutList) {

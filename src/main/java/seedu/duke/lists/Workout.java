@@ -30,6 +30,14 @@ public class Workout {
         this.workoutName = workoutName;
     }
 
+    //TODO add javadoc
+    public Workout(String workoutName, ArrayList<Exercise> exercises) {
+        assert !workoutName.isEmpty();
+        assert !exercises.isEmpty();
+        this.workoutName = workoutName;
+        this.exercises = exercises;
+    }
+
     /**
      * Converts the object to a String.
      *
