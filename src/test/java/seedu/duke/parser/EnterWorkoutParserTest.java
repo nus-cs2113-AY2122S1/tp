@@ -37,4 +37,12 @@ class EnterWorkoutParserTest {
         assertEquals(IncorrectCommand.class, p1.parseInput().getClass());
         assertEquals(IncorrectCommand.class, p3.parseInput().getClass());
     }
+    
+    @Test
+    void parseInput_enterAnotherWorkoutWhenInsideOneWorkout_returnsCorrectEnterWorkoutCommand() {
+        Command.workoutMode = 1;
+        Parser p1 = new EnterWorkoutParser("enter 2");
+        EnterWorkoutCommand check = (EnterWorkoutCommand) p1.parseInput();
+        assertEquals(2,check.getWorkoutIndex());
+    }
 }

@@ -54,4 +54,8 @@ public class DisplayExercisesCommand extends Command {
             return new CommandResult(displayMessage, exercises);
         }
     }
+
+    public int getWorkoutIndex() {
+        return workoutIndex;
+    }
 }
