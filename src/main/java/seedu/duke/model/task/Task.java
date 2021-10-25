@@ -9,16 +9,16 @@ import seedu.duke.ui.Ui;
 public class Task {
     private final String title;
     private final String dayOfTheWeek;
+    private final String priority;
     private final String information;
     private boolean isDone;
-    private final String priority;
 
-    public Task(String title, String dayOfTheWeek, String information, String priority) {
+    public Task(String title, String dayOfTheWeek, String priority, String information) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
+        this.priority = priority;
         this.information = information;
         this.isDone = false;
-        this.priority = priority;
     }
 
     public String getTitle() {
@@ -29,12 +29,12 @@ public class Task {
         return dayOfTheWeek;
     }
 
-    public String getInformation() {
-        return information;
-    }
-
     public String getPriority() {
         return priority;
+    }
+
+    public String getInformation() {
+        return information;
     }
 
     public String getStatusIcon() {
@@ -55,7 +55,7 @@ public class Task {
      * @return serialized task data
      */
     public String serialize() {
-        return (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information + " | " + priority;
+        return (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + priority + " | " + information;
     }
 
     /**
@@ -74,8 +74,6 @@ public class Task {
             }
             dayOfTheWeek = DayOfTheWeek.toProper(dayOfTheWeek);
 
-            String information = params[3];
-
             String priority = params[4];
             if (!Priority.is(priority)) {
                 throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
@@ -83,7 +81,9 @@ public class Task {
             priority = Priority.toProper(priority);
 
             String title = params[1];
-            Task task = new Task(title, dayOfTheWeek, information, priority);
+            String information = params[3];
+
+            Task task = new Task(title, dayOfTheWeek, priority, information);
 
             boolean isTaskDone = params[0].equals("1");
             if (isTaskDone) {
@@ -101,9 +101,9 @@ public class Task {
     @Override
     public String toString() {
         return getStatusIcon() + " " + title + " (" + dayOfTheWeek + ")"
+                + System.lineSeparator() + Ui.PADDING + "       Priority: " + priority
                 + (information.isBlank()
                         ? ""
-                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information
-                + System.lineSeparator() + Ui.PADDING + "       Priority: " + priority);
+                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information);
     }
 }

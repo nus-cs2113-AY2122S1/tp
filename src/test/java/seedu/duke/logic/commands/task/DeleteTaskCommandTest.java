@@ -19,8 +19,8 @@ class DeleteTaskCommandTest {
     @Test
     public void deleteTask_taskToDelete_taskDeleted() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Task("task 1", "mon", "", "None"));
-        taskList.addTask(new Task("task 2", "fri", "someInfo", "Low"));
+        taskList.addTask(new Task("task 1", "mon", "None", ""));
+        taskList.addTask(new Task("task 2", "fri", "Low", "someInfo"));
 
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -41,8 +41,8 @@ class DeleteTaskCommandTest {
     @Test
     public void deleteTask_indexOutOfBounds_exceptionThrown() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Task("task 1", "mon", "", "Medium"));
-        taskList.addTask(new Task("task 2", "fri", "someInfo", "None"));
+        taskList.addTask(new Task("task 1", "mon", "Medium", ""));
+        taskList.addTask(new Task("task 2", "fri", "None", "someInfo"));
 
         Ui ui = new Ui();
         Storage storage = new Storage();

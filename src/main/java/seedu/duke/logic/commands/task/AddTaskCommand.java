@@ -27,7 +27,7 @@ public class AddTaskCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws IOException {
-        Task newTask = new Task(title, dayOfTheWeek, information, priority);
+        Task newTask = new Task(title, dayOfTheWeek, priority, information);
         taskList.addTask(newTask);
         storage.saveData(taskList);
         ui.printTaskAdded(newTask, taskList.getSize());
