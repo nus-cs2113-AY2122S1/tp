@@ -33,7 +33,8 @@ import java.util.ArrayList;
 public class ParserTest {
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String DATA_SEPARATOR = ",";
-    
+    private static final int TOTAL_EXPENSE_CATEGORY = 7;
+
     @Test
     public void parseCommand_validHelpCommand_returnHelpCommand() {
         Parser testParser = new Parser();
@@ -263,11 +264,10 @@ public class ParserTest {
     
     @Test
     public void convertDataToBudgetSettings() {
-        BudgetManager testBudgetManager = new BudgetManager();
         String testData = "12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
-        for (int i = 0; i < 7; i ++) {
+        for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
             assertEquals(12, testBudgets.get(i));
         }
     }

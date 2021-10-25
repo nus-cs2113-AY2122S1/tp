@@ -86,7 +86,7 @@ public class DataManagerTest {
                 break;
             }
             budgetManager.setBudget(i, category);
-            i ++;
+            i += 1;
         }
         dataManager.saveBudgetSettings();
         String testData = parser.convertBudgetSettingsToData(budgetManager);
@@ -109,7 +109,7 @@ public class DataManagerTest {
                 break;
             }
             assertEquals(budgetManager.getBudget(category), i);
-            i ++;
+            i += 1;
         }
     }
 }
