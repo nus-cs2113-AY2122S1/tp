@@ -220,19 +220,20 @@ public class Ui {
     }
 
     public static void printAmount(Person person, Trip trip) {
-        System.out.println(person.getName() + " spent " + stringForeignMoney(person.getMoneyOwed().get(person))
-                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person)) + ") on the trip so far");
+        System.out.println(person.getName() + " spent "
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
-                if (person.getMoneyOwed().get(otherPerson) > 0) {
+                if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
                     System.out.println(otherPerson.getName() + " owes "
-                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + person.getName());
-                } else if (person.getMoneyOwed().get(otherPerson) < 0) {
+                } else if (person.getMoneyOwed().get(otherPerson.getName()) < 0) {
                     System.out.println(person.getName() + " owes "
-                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + otherPerson.getName());
                 } else {
                     System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
