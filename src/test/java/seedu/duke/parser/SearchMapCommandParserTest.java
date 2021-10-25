@@ -47,7 +47,7 @@ public class SearchMapCommandParserTest {
             new SearchMapCommandParser().parse("non existent", universityMasterList,
                     universitySelectedList, moduleSelectedList);
         } catch (ParseException e) {
-            assertEquals("university does not exist", e.getMessage());
+            assertEquals("University not found.", e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class SearchMapCommandParserTest {
         try {
             new SearchMapCommandParser().parse("", universityMasterList, universitySelectedList, moduleSelectedList);
         } catch (ParseException e) {
-            assertEquals("no description given", e.getMessage());
+            assertEquals("Missing arguments.", e.getMessage());
         }
     }
 }

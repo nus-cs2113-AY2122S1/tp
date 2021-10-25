@@ -9,18 +9,21 @@ import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RemoveMapCommand extends Command {
     public RemoveMapCommand(int universityIndexToMap, int moduleIndexToMap, UniversityList universityMasterList,
                             ModuleList moduleMasterList, UniversityList universitySelectedList,
                             ModuleList moduleSelectedList) throws IOException {
-        University universityToMap = universityMasterList.get(universityIndexToMap - 1);
-        Module moduleToMap = moduleMasterList.get(moduleIndexToMap - 1);
-        Module mappedModule = universityToMap.getMappedModule(moduleToMap, moduleSelectedList);
-        ModuleMapping selectedMapping = universityToMap.getMapping(moduleToMap, moduleSelectedList);
-        universityToMap.addMapping(moduleToMap, mappedModule);
+        University selectedUniversity = universityMasterList.get(universityIndexToMap - 1);
+        University universityToMap = universitySelectedList.getUniversity(selectedUniversity.getName());
+        ArrayList<ModuleMapping> selectedMappings = universityToMap.getSelectedMappings(moduleSelectedList);
         System.out.println("This module mapping is removed: ");
-        Ui.printMapping(selectedMapping, moduleIndexToMap);
+        ModuleMapping selectedMapping = selectedMappings.get(moduleIndexToMap - 1);
+        Module localModule = moduleMasterList.get(moduleIndexToMap - 1);
+        Module mappedModule = universityToMap.getMappedModule(localModule, moduleSelectedList);
+        universityToMap.removeMapping(selectedMapping);
+        Ui.printMapping(selectedMapping, universityToMap.getMappingListSize());
         storage.updateSelectedUniversityList(universitySelectedList);
     }
 }
