@@ -1,6 +1,6 @@
 # User Guide
-SchedUrMods is a **desktop application for managing your NUSMODS timetable and everyday
-tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
+SchedUrMods is a **desktop application for NUS Students to manage your NUSMODS timetable and
+everyday tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
 SchedUrMods can help you manage your daily tasks faster than traditional GUI application.  
 
 Below is a guide on how you can get started using our program to start Sched'ing Ur Mods.  
@@ -68,7 +68,7 @@ Adds your **todo** task to your tasklist.
 **Format:** `todo <description> [--flag <argument>]`
 - `[description]` specifies the description of your todo.
 - `[--flag <argument>]` specifies additional details of your todo.
-  - When your task is to be done: `[--doOn dd-MM-yyyy hh:mm:ss]`
+  - When your task is to be done: `[--doOn dd-MM-yyyy hh:mm]`
   - The priority of your task: `[--priority high|medium|low]`
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
@@ -91,11 +91,10 @@ Adds your **todo** task to your tasklist.
 ### 2.2.2 Deadline: `deadline`
 Adds your **deadline** task to your tasklist.
 
-**Format:** `deadline <description> <--due dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
+**Format:** `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `[description]` specifies the description of your deadline.
-- `<--due dd-MM-yyyy hh:mm:ss>` is a mandatory flag.
+- `<--due dd-MM-yyyy hh:mm>` is a mandatory flag.
 - `[--flag <argument>]` specifies additional details of your deadline.
-  - When your task is due: `[--due dd-MM-yyyy hh:mm:ss]`
   - The priority of your task: `[--priority high|medium|low]`
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
@@ -103,7 +102,7 @@ Adds your **deadline** task to your tasklist.
 - Adds a deadline task with description `CS2106 Lab 3` to the tasklist.
 - Specifies the priority to be `high`.
 - Specifies the task is to be done on `20-10-2021 02:00:00`.
-- with no recurrence.
+- without recurrence.
 
 **Expected Outcome:**
 
@@ -118,12 +117,10 @@ Adds your **deadline** task to your tasklist.
 ### 2.2.3 Event: `event`
 Adds your **event** task to your tasklist.
 
-**Format:** `event <description> <--start dd-MM-yyyy hh:mm:ss> <--end dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
+**Format:** `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `[description]` specifies the description of your event.
-- `<--start dd-MM-yyyy hh:mm:ss>` and `<--end dd-MM-yyyy hh:mm:ss>` are mandatory flags.
+- `<--start dd-MM-yyyy hh:mm>` and `<--end dd-MM-yyyy hh:mm>` are mandatory flags.
 - `[--flag <argument>]` specifies additional details of your event.
-  - When your event starts: `[--start dd-MM-yyyy hh:mm:ss]`
-  - When your event ends: `[--end dd-MM-yyyy hh:mm:ss]`
   - The priority of your event: `[--priority high|medium|low]`
   - How often your event is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
