@@ -42,6 +42,8 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_INVALIDUNI = "This university is not in your selected list.";
+    public static final String ERRORMSG_PARSEEXCEPTION_NOMAPPING = "This university has no available mappings.";
+    public static final String ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING = "Mapping with this index does not exist.";
 
     // Logging messages
     public static final String LOGMSG_PARSESUCCESS = "Parse completed successfully";

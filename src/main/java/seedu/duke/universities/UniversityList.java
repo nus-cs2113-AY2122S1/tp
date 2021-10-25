@@ -53,7 +53,7 @@ public class UniversityList {
     }
 
     public University get(int index) {
-        assert index <= list.size();
+        assert index < list.size();
         return list.get(index);
     }
 
