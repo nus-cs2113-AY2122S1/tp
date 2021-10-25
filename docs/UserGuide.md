@@ -17,7 +17,7 @@ It is an integrated solution that provides real-time tracking of stock, orders a
         * [Adding stocks](#adding-stocks-addstock)
         * [Deleting stocks](#deleting-a-medication-stock-deletestock)
         * [Updating stocks](#updating-stocks-updatestock)
-        * [Listing stocks](#listing-stocks-liststock)
+        * [Listing stocks](#listing-medication-stocks-liststock)
     * [Managing Prescriptions](#managing-prescriptions)
         * [Adding prescriptions](#adding-prescriptions-addprescription)
         * [Deleting prescriptions](#deleting-prescriptions-deleteprescription)
@@ -159,14 +159,14 @@ Medication added: paracetamol
 
 ### Deleting a medication stock: `deletestock`
 
-Deletes medication from the inventory.
+Deletes a medication from the inventory.
 
-* Able to delete a specific stock by specifying stock Id using `i/STOCK_ID`.
+* Able to delete a specific stock by specifying Stock ID using `i/ID`.
 * Able to delete multiple stocks that have expiry date before and equals to specified date using `expiring/EXPIRY_DATE`.
 
-Format: `deletestock [i/STOCK_ID expiring/EXPIRY_DATE]`
+Format: `deletestock [i/ID expiring/EXPIRY_DATE]`
 
-Example 1 (Deletion by stock Id): `deletestock i/3`
+Example 1 (Deletion by Stock ID): `deletestock i/3`
 
 Expected output:
 
@@ -182,19 +182,20 @@ Expected output:
 Deleted expired medications! Rows deleted: 4
 ```
 
-### Updating medication stock information: `updatestock`
+### Updating stocks: `updatestock`
 
-Edits an existing medication stock information in the inventory.
+Updates existing medication stock information in the inventory.
 
-* Edits the optional parameters specified by the stock Id that you input.
-    * The Stock Id must exist in MediVault.
-* You cannot update the Stock Id. The allocation of Id is determined by MediVault.
-* If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
-  **all** entries that has same existing medication name given the `i/STOCK_ID` with your input values for these
+> :warning: Warning
+> * The Stock ID must exist in MediVault.
+> * You cannot update the Stock ID.
+>   * The allocation of Stock ID is determined by MediVault.
+> * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
+  **all** entries that has same existing medication name given the `i/ID` with your input values for these
   parameters.
-* A new Stock Id will be assigned to the current stock if your update has the `n/NAME` parameter.
+> * A new Stock ID will be assigned to the current stock if your update has the `n/NAME` parameter.
 
-Format: `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
+Format: `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 
 Example:
 `update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/Treats infections to ear, nose, throat, skin, or urinary tract m/100`
@@ -213,7 +214,7 @@ Stock Id changed from:
 +----+--------+--------+----------+-------------+-----------------------------------------------+--------------+
 ```
 
-### Listing medication stock : `liststock`
+### Listing medication stocks: `liststock`
 
 Lists all existing medication in the inventory.
 
@@ -267,6 +268,8 @@ Expected output:
 +----+---------+--------+--------------+-------------+-----------------------------------------------+--------------+
 ```
 
+## Managing Prescriptions
+
 ### Adding a dispense record: `adddispense`
 
 Adds a dispense.
@@ -295,23 +298,24 @@ Expected output:
 Dispense deleted for Dispense Id 3
 ```
 
-### Updating dispense record: `updatedispense`
+### Updating prescriptions: `updateprescription`
 
-Edits an existing medication dispense information in the inventory.
+Updates an existing prescription information.
 
-* A new Dispense Id will be assigned to the current dispense record if you update a medication dispense information.
-* You cannot update either the Stock or the Dispense Id. The allocation of Id is determined by MediVault.
-* When you update a dispense information, the stock information may be affected as well
+> :warning: Warning
+> * A new Prescription ID will be assigned to the current prescription if you update the medication in the prescription.
+> * You cannot update the Stock or the Prescription ID. The allocation of ID is determined by MediVault.
+> * When you update a prescription, the stock information may be affected as well
 
-Format: `updatedispense i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+Format: `updateprescription i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 
-Example: `updatedispense i/1 q/5`
+Example: `updateprescription i/1 q/5`
 
 Expected output:
 
 ```
 Restored 5 PANADOL
-Updated dispense information!
+Updated prescription information!
 +====+=========+==========+=============+============+=======+==========+
 | ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
 +====+=========+==========+=============+============+=======+==========+
@@ -417,14 +421,15 @@ Expected output:
 Order deleted for Order Id 1
 ```
 
-### Updating order: `updateorder`
+### Updating orders: `updateorder`
 
-Edits an existing medication order information in the inventory.
+Updates an existing order information.
 
-* You cannot update the Order Id or the status of the order.
-    * The allocation of Id is determined by MediVault.
-    * The status of the order will only be changed when you run the `receiveorder` command.
-* When you update an order information, MediVault reflects the pending stocks shown in the current medication stocks.
+> :warning: Warning
+> * You cannot update the Order ID or the status of the order.
+    >  * The allocation of ID is determined by MediVault.
+> * The status of the order will only be changed when you run the `receiveorder` command.
+> * When you update an order information, MediVault reflects the pending stocks shown in the current medication stocks.
 
 Format: `updateorder i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 
@@ -498,7 +503,28 @@ Expended output:
 +----+--------------+----------+------------+---------+
 ```
 
-### Receiving order : `receiveorder`
+### Receiving orders: `receiveorder`
+
+Adds the received medication into the current stocks.
+
+>:information_source: Note:
+>* Your input order Id must exist
+>* When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
+
+Format: `receiveorder i/ID e/EXPIRY_DATE`
+
+Example : `receiveorder i/1 e/19-09-2021`
+
+Expected output:
+```
+Received 50 panadol, adding to current stocks.
++====+=========+=======+==========+=============+===============================================+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+=========+=======+==========+=============+===============================================+==============+
+| 1  | panadol | $5.00 |    150    | 19-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |         |       |          |             |                     PAINS                     |              | 
++----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
+```
 
 ## Managing Data
 
