@@ -70,6 +70,7 @@ public class University implements Comparator<University> {
         }
         return selectedMappings;
     }
+
     public int getSelectedMappingListSize(ModuleList selectedModuleList) {
         return getSelectedMappings(selectedModuleList).size();
     }
@@ -142,4 +143,11 @@ public class University implements Comparator<University> {
         return u.index - u1.index;
     }
 
+    public double getMC() {
+        double totalMCs = 0;
+        for (int i = 0; i < list.size(); i++) {
+            totalMCs += list.get(i).getLocalModule().getModuleCredits();
+        }
+        return totalMCs;
+    }
 }

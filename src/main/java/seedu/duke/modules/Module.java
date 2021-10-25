@@ -10,6 +10,7 @@ public class Module implements Comparator<Module> {
 
     public Module() {
     }
+
     public Module(String moduleCode, String moduleName, double moduleCredits, ModuleList moduleMasterList) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
@@ -65,6 +66,7 @@ public class Module implements Comparator<Module> {
         return moduleCode + " # " + moduleName + " # " + moduleCredits
                 + System.lineSeparator();
     }
+
     @Override
     public int compare(Module m, Module m1) {
         return m.index - m1.index;
