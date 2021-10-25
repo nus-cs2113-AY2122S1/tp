@@ -10,9 +10,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
@@ -142,14 +146,15 @@ public class Storage {
     /**
      * Writes the threshold data to memory.
      *
+     * @link https://coderedirect.com/questions/564153/how-to-replace-a-specific-line-in-a-file-using-java
      * @throws IOException when error with file
      */
     public void writeThresholdData() throws IOException {
-
-        FileWriter fw = new FileWriter(DATA_FILE_PATH);
+        Path path = Paths.get(DATA_FILE_PATH);
+        List<String> fileContents = Files.readAllLines(path);
         String thresholdData = convertThresholdDataForStorage();
-        fw.write(thresholdData + System.lineSeparator());
-        fw.close();
+        fileContents.set(0, thresholdData);
+        Files.write(path, fileContents);
     }
 
     /**
