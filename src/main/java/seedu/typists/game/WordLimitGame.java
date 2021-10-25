@@ -2,7 +2,6 @@ package seedu.typists.game;
 
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.ui.TextUi;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,7 +25,6 @@ public class WordLimitGame extends Game {
         this.wordLimit = getWordLimit();
     }
 
-
     public int getTotalSentence() {
         return eachWord.size();
     }
@@ -34,6 +32,7 @@ public class WordLimitGame extends Game {
     public int getWordLimit() {
         Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how many words you want the game to run: ");
+
         try {
             return Integer.parseInt(in.nextLine());
         } catch (NumberFormatException e) {
@@ -56,10 +55,15 @@ public class WordLimitGame extends Game {
         }
         boolean isExit = false;
         int totalError = 0;
+
+        String actualWord = "";
+        String inputWord = "";
+
         while (!isExit) {
             assert gameIndex < getTotalSentence() : "There are still texts to be typed.";
             String temp = "";
             int number = 0;
+
             while (gameIndex < getTotalSentence()) {
                 temp += eachWord.get(gameIndex) + " ";
                 gameIndex += 1;
@@ -68,13 +72,18 @@ public class WordLimitGame extends Game {
                     break;
                 }
             }
+
+            actualWord += temp;
             temp = temp.trim();
-            ui.showText(temp);
+            ui.printLine(temp);
             String fullCommand = ui.readCommand();
+            inputWord += fullCommand + " ";
+
             if (fullCommand.equals("Exit")) {
-                ui.showWordLimitSummary(totalError, gameIndex);
+                ui.showAnimatedWordLimitSummary(totalError, gameIndex);
                 break;
             }
+
             WordLimitDataProcessor recordError =  new WordLimitDataProcessor(fullCommand, temp);
             try {
                 totalError += recordError.getError();
@@ -84,8 +93,13 @@ public class WordLimitGame extends Game {
             }
             //isExit = recordError.getIsExit();
             ui.printGameMode1Progress(gameIndex,getTotalSentence());
+
             if (gameIndex >= getTotalSentence()) {
-                ui.showWordLimitSummary(totalError,getTotalSentence());
+                ui.showAnimatedError(
+                    splitString(actualWord.trim()," "),
+                    splitString(inputWord.trim()," "),
+                    getTotalSentence()
+                );
                 break;
             }
         }
