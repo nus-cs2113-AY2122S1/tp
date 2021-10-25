@@ -1,6 +1,7 @@
 package seedu.typists.ui;
 
 import java.io.IOException;
+
 import seedu.typists.common.Error;
 import seedu.typists.content.Animation;
 
@@ -190,7 +191,7 @@ public class TextUi {
     }
 
 
-    public void showSummary(int errorWordCount, double errorPercentage, List<String> errorWords, double wpm,
+    /*public void showSummary(int errorWordCount, double errorPercentage, List<String> errorWords, double wpm,
                             int totalWordTyped, double gameTime) {
         assert errorWordCount >= 0;
         assert errorPercentage >= 0;
@@ -205,18 +206,16 @@ public class TextUi {
         printErrorWords(errorWords);
         out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         out.print("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds\n");
-    }
+    }*/
 
     public void showAnimatedSummary(int errorWordCount, double errorPercentage, double wpm,
-                            int totalWordTyped, double gameTime) throws InterruptedException {
+                                    int totalWordTyped, double gameTime) throws InterruptedException {
         out.print(SUMMARY + '\n');
         viewAnimateRight("Wrong Words: " + errorWordCount + "/" + totalWordTyped);
         viewAnimateRight("Error Percentage: " + String.format("%.2f", errorPercentage));
         viewAnimateRight("WPM: " + String.format("%.2f", wpm));
         viewAnimateRight("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
     }
-
-
 
 
 }

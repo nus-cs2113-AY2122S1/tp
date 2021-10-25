@@ -31,8 +31,9 @@ public class TimeGameCommand implements Command {
 
     public void printUserInput(TimeModeGame tg) {
         uiBot.printScreen("user input is: ");
-        for (String[] sa: tg.userLines) {
+        for (String[] sa : tg.userLines) {
             uiBot.printScreen(Arrays.toString(sa));
         }
     }
+
 }
