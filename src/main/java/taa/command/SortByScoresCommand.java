@@ -70,8 +70,7 @@ public class SortByScoresCommand extends Command {
 
         if (order.equalsIgnoreCase("asc")) {
             sortAscending(ui, module, assessmentName, studentListClone);
-        }
-        else if (order.equalsIgnoreCase("desc")) {
+        } else if (order.equalsIgnoreCase("desc")) {
             sortDescending(ui, module, assessmentName, studentListClone);
         }
     }
@@ -96,7 +95,8 @@ public class SortByScoresCommand extends Command {
         stringBuilder.append("NIL");
     }
 
-    private void appendMarkedStudent(String assessmentName, StringBuilder stringBuilder, int studentIndex, Student student) {
+    private void appendMarkedStudent(String assessmentName, StringBuilder stringBuilder, int studentIndex,
+                                     Student student) {
         stringBuilder.append("\n");
         stringBuilder.append(studentIndex);
         stringBuilder.append(". ");
@@ -117,8 +117,8 @@ public class SortByScoresCommand extends Command {
         students.removeAll(toRemove);
         while (students.size() > 0) {
             for (Student student : students) {
-                int current_minimum_score = 10000;
-                if (student.marksExist(assessmentName) && (student.getMarks(assessmentName) < current_minimum_score)) {
+                int currentMinimumScore = 10000;
+                if (student.marksExist(assessmentName) && (student.getMarks(assessmentName) < currentMinimumScore)) {
                     listIndex += 1;
                     appendMarkedStudent(assessmentName, stringBuilder, listIndex, student);
                     students.remove(student);
@@ -140,8 +140,8 @@ public class SortByScoresCommand extends Command {
         }
         while (students.size() > 0) {
             for (Student student : students) {
-                int current_maximum_score = -1;
-                if (student.marksExist(assessmentName) && (student.getMarks(assessmentName) > current_maximum_score)) {
+                int currentMaximumScore = -1;
+                if (student.marksExist(assessmentName) && (student.getMarks(assessmentName) > currentMaximumScore)) {
                     listIndex += 1;
                     appendMarkedStudent(assessmentName, stringBuilder, listIndex, student);
                     students.remove(student);
