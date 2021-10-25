@@ -119,6 +119,7 @@ public class AddCommandParser {
                                    ModuleList moduleSelectedList) throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
+        University currentUni = new University();
         boolean validUni = false;
         if (argumentSubstrings.length < 2) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
@@ -132,11 +133,18 @@ public class AddCommandParser {
         for (University uni : universitySelectedList.getList()) {
             if (uni.getIndex() == uniIndex) {
                 validUni = true;
+                currentUni = uni;
                 break;
             }
         }
         if (!validUni) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+        }
+        if (currentUni.getMappingListSize() == 0) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+        }
+        if (mapIndex > currentUni.getMappingListSize()) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
     }
 
