@@ -143,7 +143,6 @@ public class Parser {
 
     private static void handleTripSummary(String inputParams) {
         try {
-            assert inputParams != null;
             executeSummary(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
@@ -337,9 +336,6 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
-        //Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded,
-        //        expenseDescription, currTrip.getExchangeRate());
-        //newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();

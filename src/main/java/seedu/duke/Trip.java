@@ -3,10 +3,11 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Trip {
 
@@ -115,7 +116,7 @@ public class Trip {
     }
 
     public void getIndividualExpenseSummary(Person person) {
-        double currentAmount = 0; //amount paid for current expense
+        double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
@@ -141,7 +142,8 @@ public class Trip {
                 + expensesInvolved
                 + " expenses in the following split: ");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
-            System.out.println(set.getKey() + ": " + set.getValue());
+            System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
+                    + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")");
         }
     }
 
@@ -290,6 +292,7 @@ public class Trip {
 
     public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
+        listOfExpenses.sort(Comparator.comparing(Expense::getDate));
     }
 
     public ArrayList<Expense> getListOfExpenses() {
