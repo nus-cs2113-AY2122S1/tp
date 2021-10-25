@@ -26,12 +26,12 @@ public class TimetableUI {
      * 
      * @param modules the list of modules taken in the timetable
      */
-    public static void printModules(List<Module> modules) {
+    public static void printModules(List<Module> modules, int semester) {
         double counter = 0;
         System.out.println(STAR_DIVIDER);
         System.out.println(MODULES_HEADER);
         for (Module module : modules) {
-            System.out.println(module);
+            System.out.println(module + " " + module.getExam(semester));
             counter += module.getModuleCredit();
         }
 
