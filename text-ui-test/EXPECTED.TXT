@@ -22,6 +22,8 @@ To find out more information about the command, such as input format and paramet
 "create" : Creates a new workout
 "delete" : Deletes a workout
 "list" : Lists all your workouts
+"enter" : Enters a specific workout. Workout mode ON.
+"back" : Returns to main view. Workout mode OFF.
 "recommend" : Recommends workouts of a given difficulty
 "display" : Shows all the exercises in a specified workout
 "edit" : Edits a specific exercise in a specified workout
@@ -103,7 +105,7 @@ ________________________________________________________
 ________________________________________________________
 Invalid command format
 
-done: Marks the exercise in the workout workout as complete.
+done: Marks the exercise in the workout as complete.
 Format: done [Exercise index], [Workout index]
 Parameters:
 	Exercise index - Index of exercise to mark done
@@ -111,7 +113,7 @@ Parameters:
 Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
-done: Marks the exercise in the workout workout as complete.
+done: Marks the exercise in the workout as complete.
 Format: done [Exercise index], [Workout index]
 Parameters:
 	Exercise index - Index of exercise to mark done
@@ -159,7 +161,7 @@ Parameters:
 Example: display 3
 ________________________________________________________
 ________________________________________________________
-Exercises in Legs
+Exercises in 2) Legs
 1. [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
