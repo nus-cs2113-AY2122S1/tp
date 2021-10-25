@@ -34,13 +34,13 @@ Use the Table of Contents below to easily navigate to the section you desire.
     * [1.1.1. `WorldMap` class](#111-worldmap-class)
     * [1.1.2. `GraphList` class](#112-graphlist-class)
     * [1.1.3. `Logic` class](#113-logic-class)
-    * [1.1.4. `Loader` class](#114-loader-class)
+    * [1.1.4. `DataLoader` class](#114-dataloader-class)
   * [1.2. Main Traveller](#12-main-traveller)
     * [1.2.1. `Traveller` class](#121-traveller-class)
     * [1.2.2. `Parser` class](#122-parser-class)
     * [1.2.3. `TripsList` class](#123-tripslist-class)
     * [1.2.4. `Ui` class](#124-ui-class)
-    * [1.2.5. `Storage` class](#125-storage-class)
+    * [1.2.5. `SaveLoader` class](#125-saveloader-class)
 * [2. Product Scope](#2-product-scope)
   * [2.1. Target User Profile](#21-target-user-profile)
   * [2.2. Value Proposition](#22-value-proposition)
@@ -80,9 +80,24 @@ is then performed on this graph to obtain the shortest travel path from 1 countr
 #### 1.1.3. Logic class
 {TODO: Add details}
 
-#### 1.1.4. Loader class
-{TODO: Add details}
+#### 1.1.4. DataLoader class
+The `DataLoader` class reads in data from *flightData/flights.txt* to create the vertexes and edges in `GraphList`.
+Its main function is the `readData` function which passes the relevant lines in *flights.txt* to either `loadCountries`
+or `loadDistances` to create vertexes or edges respectively.
 
+While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this number by
+changing the variable `numberOfCountries` in the class.
+
+![](documentationPics/dataSequenceDiagram.png)
+Figure 3: DataLoader Sequence Diagram
+
+The first line of *flights.txt* contains the 5 country codes, which are read added as vertexes.
+The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as edges between the vertexes.
+
+>![](documentationPics/tip.png) As *flights.txt* is read in a specific way, there are certain things to take note when modifying it.
+>1. Country codes must only be 3 letters.
+>2. Distances must be numbers as it will be parsed into a double.
+>3. **numberOfCountries** should be changed to the number of countries on the first line.
 
 ### 1.2. Main Traveller
 The Main Traveller is the other of the 2 major components of the Traveller project.
@@ -92,7 +107,9 @@ TripsList class, Ui class, and Storage class.
 Additionally, the `Command` class is used to execute various actions in the various sub-components.
 
 ![](documentationPics/mainTravellerDesign.png)
-Figure 3: Design of the Main Traveller
+Figure 4: Design of the Main Traveller
+
+
 
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
@@ -117,7 +134,7 @@ It's main function is the `parse` function, which takes in a user input string o
 `Command` object. Figure 4 below illustrates the code of the `parse` function via a sequence diagram.
 
 ![](documentationPics/parserSequenceDiagram.png)
-Figure 4: Parser Sequence Diagram
+Figure 5: Parser Sequence Diagram
 
 The steps illustrated by Figure 4 is summarised below.
 1. The `parse` command is called once per iteration of the main `run` loop in `Traveller`.
@@ -135,9 +152,24 @@ thrown.
 #### 1.2.4. Ui class
 {TODO: Add details}
 
-#### 1.2.5. Storage class
-{TODO: Add details}
+#### 1.2.5. SaveLoader class
+The `SaveLoader` class handles the reading and writing of the save file which stores the existing trips when Traveller is exited.
+Its functions are called at the very start (to read and load the save) and at the very end (to write the save).
 
+The save file in *save/save.txt* stores the minimum number of commands to recreate the same trip list that was saved previously.
+Loading the save file is similar to the main `run` function of Traveller, as the function reads each line of *save.txt* and executes
+each corresponding command.
+
+Following the loading of the save file, writing of the save is handled as shown below.
+
+![](documentationPics/saveSequenceDiagram.png)
+Figure 6: Save Sequence Diagram
+
+The return strings of each trip, day and item will correspond to the command that will be executed in order to add it to the tripList/ DaysList or ItemsList.
+
+>![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
+> To read up more on what the `SaveLoader` class writes, take a look at the `getSaveX` functions from the `Trip` class
+> as shown in the diagram.
 
 ## 2. Product Scope
 ### 2.1. Target User Profile
@@ -180,5 +212,23 @@ _{More to be added}_
 
 ## 6. Instructions for manual testing
 
-{To be added}
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+###6.1 Data file
+The data file *flightData/flights.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
+there is no flight between the two countries (no edge between the vertexes).
+
+The lower triangular matrix is read as such.
+```
+SIN|MLY|CHN|JPN|SKR
+1
+2|3
+4|5|6
+7|8|9|10
+```
+Element11 (Row 1, Column 1) is the distance from SIN to MLY (and vice versa).
+
+Element32 (Row 3, Column 2) is the distance from MLY to JPN (and vice versa).
+
+###6.2 Save file
+The save file *save/save.txt* can be modified following the formatting stated [here](#125-saveloader-class). 
+Each line is a command which is executed to add a trip/days/items to the list.
