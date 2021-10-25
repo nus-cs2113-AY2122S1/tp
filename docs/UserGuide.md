@@ -52,8 +52,10 @@ each functionality are explained in the [features](#2-features) section.
   * [2.9. edit](#29-edit-a-trip-edit)
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
-  * [2.12. shortest](#212-shortest-shortest)
-  * [2.13. exit](#213-exiting-the-program-exit)
+  * [2.12. shortest](#212-shortest-dist)
+  * [2.13. shortest](#213-shortest-cost)
+  * [2.14. edit-map](#214-edit-map)
+  * [2.??. exit](#213-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -301,8 +303,36 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+### 2.13. Shortest: `shortest`
+Returns the shortest distance from the source to destination country.
 
-### 2.13 Exiting the program: `exit`
+#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ shortest /from SKR /to JPN
+____________________________________________________________
+	The distance from SKR to JPN is 10.0.
+____________________________________________________________
+```
+
+### 2.14. Edit Distances in Map: `edit-map`
+Edits and updates the distance from the source to destination country.
+
+#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ edit-map /from SIN /to MLY /dist 2.0
+____________________________________________________________
+	The distance from SIN to MLY is updated to 2.0.
+____________________________________________________________
+```
+
+
+### 2.?? Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`

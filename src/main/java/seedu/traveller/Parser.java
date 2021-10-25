@@ -11,6 +11,7 @@ import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.SearchItemCommand;
 import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.ShortestCommand;
+import seedu.traveller.commands.EditMapCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
@@ -41,6 +42,7 @@ public class Parser {
     private static final int TIME_LENGTH = 7;
     private static final int INDEX_LENGTH = 8;
     private static final int KEY_LENGTH = 6;
+    private static final int DIST_LENGTH = 7;
 
 
     /**
@@ -96,6 +98,9 @@ public class Parser {
                 break;
             case "help":
                 command = parseHelpCommand();
+                break;
+            case "edit-map":
+                command = parseEditMapCommand(userInput[1]);
                 break;
             default:
                 logger.log(Level.WARNING, "Invalid command input!");
@@ -345,6 +350,27 @@ public class Parser {
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
             command = new ShortestCommand(startCountryCode, endCountryCode);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidSearchFormatException();
+        }
+        return command;
+    }
+
+    private static Command parseEditMapCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Edit-map command input");
+        Command command;
+        try {
+            String toSeparator = " /to ";
+            String distSeparator = " /dist ";
+            int toIdx = userInput.indexOf(toSeparator);
+            int distIdx = userInput.indexOf(distSeparator);
+            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            String endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
+            Double dist = Double.parseDouble(userInput.substring(distIdx + DIST_LENGTH));
+
+            assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
+            assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
+            command = new EditMapCommand(startCountryCode, endCountryCode, dist);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchFormatException();
         }

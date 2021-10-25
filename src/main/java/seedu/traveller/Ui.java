@@ -102,6 +102,11 @@ public class Ui {
         System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
+    public void printEditMap(String startCountry, String endCountry, double dist) {
+        System.out.println("\tThe distance from " + startCountry + " to "
+                + endCountry + " is updated to " + dist + ".");
+    }
+
     public void printAddDayToTrip(String tripName, int numberOfDays) {
         assert numberOfDays >= 0 : "Number of days is negative.";
         assert !tripName.equals("all") : "'all' is an invalid tripName.";
