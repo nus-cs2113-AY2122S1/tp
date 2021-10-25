@@ -15,7 +15,6 @@ public class SchedulerUi {
         return " " + END_LINE;
     }
 
-
     public static String getFindSchedulerHelpMessage() {
         return " " + END_LINE;
     }

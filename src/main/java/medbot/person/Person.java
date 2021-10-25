@@ -10,10 +10,7 @@ import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
 import medbot.list.PersonalAppointmentList;
-
-import static medbot.ui.Ui.END_LINE;
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
-
+import medbot.utilities.FilterType;
 
 public abstract class Person extends ListItem {
     private static final String PARAMETER_NAME = "n/";
@@ -160,8 +157,16 @@ public abstract class Person extends ListItem {
         personalAppointmentList.deleteAppointment(dateTimeCode);
     }
 
-    public String listAppointments() {
-        return personalAppointmentList.listAppointments();
+    public String listAppointments(FilterType filterType, int dateTimeCode) {
+        switch (filterType) {
+        case BEFORE:
+            return personalAppointmentList.listAppointmentsBefore(dateTimeCode);
+        case AFTER:
+            return personalAppointmentList.listAppointmentsAfter(dateTimeCode);
+        case NONE:
+        default:
+            return personalAppointmentList.listAppointments();
+        }
     }
 
     /**
