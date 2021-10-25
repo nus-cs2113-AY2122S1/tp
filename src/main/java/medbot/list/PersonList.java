@@ -3,6 +3,7 @@ package medbot.list;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
+import medbot.utilities.FilterType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -218,11 +219,11 @@ public abstract class PersonList extends MedBotList {
      * @return a String containing the information of the person's appointments
      * @throws MedBotException if there is no person with the specified personId
      */
-    public String listAppointments(int personId) throws MedBotException {
+    public String listAppointments(int personId, FilterType filterType,int dateTimeCode) throws MedBotException {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getPersonNotFoundErrorMessage(personId));
         }
-        return persons.get(personId).listAppointments();
+        return persons.get(personId).listAppointments(filterType, dateTimeCode);
     }
 
     /**
