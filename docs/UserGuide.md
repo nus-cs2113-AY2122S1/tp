@@ -14,7 +14,7 @@ time required to look up for various usernames when working with colleagues.
 * **[Features](#features)**
     * **[Viewing help : `help`](#help)**
     * **[Adding a contact : `add`](#add)**
-    * **[Listing all contacts : `list`](#list)**
+    * **[Listing all contacts : `ls`](#list)**
     * **[Viewing a contact : `view`](#view)**
     * **[Deleting a contact : `rm`](#delete)**
     * **[Editing a contact : `edit`](#edit)**
@@ -38,7 +38,7 @@ time required to look up for various usernames when working with colleagues.
    Some example commands you can try:
    * `add -n Alex Lee -g alexlee -e alex.lee@contech.sg -te alexl33`: Adds a contact named `Alex Lee` 
      to the ConTech Book.
-   * `list`: Lists all contacts.
+   * `ls`: Lists all contacts.
    * `view 1`: Displays all the details of the contact at index `1`.   
    * `rm 1`: Deletes the contact at index `1` in the list.
    * `exit`: Exits the program.
@@ -64,8 +64,8 @@ add: ConTech adds the specified contact with provided parameters.
  Note: Parameters need not be in order and are optional except for NAME.
  Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 
-list: Displays the name of all saved contacts.
- Example: list
+ls: Displays the name of all saved contacts.
+ Example: ls
 
 edit: Edit any parameter in an existing contact.
  Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
@@ -100,7 +100,7 @@ ____________________________________________________________
 ### Adding a contact: `add`
 
 <a name="list"></a>
-### Listing all contacts: `list`
+### Listing all contacts: `ls`
 
 Lists all the saved contacts with the index and contact name.
 
@@ -153,8 +153,54 @@ ____________________________________________________________
 <a name="edit"></a>
 ### Editing a contact : `edit`
 
+Edits the details of a specified contact in the ConTech Book.
+
+Usage: `edit INDEX -FLAG DETAIL`
+
+- Up to six `FLAGS` and `DETAILS` can be specified in any order
+- The index refers to the index number shown in the displayed contact list.
+- The index must be within the range of indexes displayed in the contact list (zero-based).
+
+Expected outcome of usage: 
+```
+edit 0 -n John Lee -g johnlee -te johnlee123 -e john.lee@contech.sg
+____________________________________________________________
+0. John Lee
+   Github:   github.com/johnlee
+   Email:    john.lee@contech.sg
+   Telegram: t.me/johnlee123
+____________________________________________________________
+```
+
 <a name="search"></a>
 ### Searching for a contact: `search`
+
+Search the ConTech Book for a contact whose details contain the specified query.
+
+Usage: `search [-FLAG] QUERY`
+
+- Only one flag can be specified. 
+- If no flag is specified, the default search field is contact name.
+- The search query is not case-sensitive.
+- All contacts with the specified field containing the search query will be displayed in view format.
+
+Expected outcome of usage:
+```
+search -g lee
+____________________________________________________________
+0. Alex Lee
+   Github:   github.com/alexlee
+   Email:    alex.lee@contech.sg
+   Telegram: t.me/alexl33
+____________________________________________________________
+
+____________________________________________________________
+1. John Lee
+   Github:   github.com/johnlee
+   Email:    john.lee@contech.sg
+   Telegram: t.me/johnlee123
+____________________________________________________________
+```
 
 <a name="import"></a>
 ### Importing contacts: `import`
