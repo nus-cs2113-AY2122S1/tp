@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author deonchung
+
 /**
  * Prescribes medication based on user input.
  * User input includes medication name, quantity to prescribe, Customer's NRIC and Staff name.
@@ -61,6 +62,11 @@ public class AddPrescriptionCommand extends Command {
         int prescriptionQuantity = Integer.parseInt(quantity);
         int quantityToPrescribe = prescriptionQuantity;
 
+        if (quantityToPrescribe == 0) {
+            ui.print("Prescription Quantity cannot be 0.");
+            return;
+        }
+
         Date prescribeDate = new Date(); //prescribe date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
@@ -103,7 +109,7 @@ public class AddPrescriptionCommand extends Command {
                 return;
             }
 
-            if (existingQuantity < prescriptionQuantity) {
+            if (existingQuantity < prescriptionQuantity && existingQuantity != 0) {
                 quantityToPrescribe = quantityToPrescribe - existingQuantity;
                 prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
                         stock, existingId, existingExpiry, setStockValue);
@@ -133,10 +139,12 @@ public class AddPrescriptionCommand extends Command {
                            int existingId, Date existingExpiry, int setStockValue) {
         String expiry = DateParser.dateToString(existingExpiry);
         stock.setQuantity(setStockValue);
-        medicines.add(new Prescription(medicationName, quantityToPrescribe, customerId, prescribeDate,
-                staffName, existingId));
+        Prescription prescription = new Prescription(medicationName, quantityToPrescribe, customerId, prescribeDate,
+                staffName, existingId);
+        medicines.add(prescription);
         ui.print("Prescribed:" + medicationName + " Quantity:" + quantityToPrescribe + " Expiry "
                 + "Date:" + expiry);
+        ui.printPrescription(prescription);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
     }

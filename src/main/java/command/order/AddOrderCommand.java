@@ -67,6 +67,11 @@ public class AddOrderCommand extends Command {
         String dateToAdd = parameters.get(CommandParameters.DATE);
         int maxQuantity = Integer.MAX_VALUE;
 
+        if (orderQuantity == 0) {
+            ui.print("Order Quantity cannot be 0.");
+            return;
+        }
+
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
