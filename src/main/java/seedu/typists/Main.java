@@ -5,7 +5,6 @@ import seedu.typists.parser.Command;
 import seedu.typists.parser.CommandFactory;
 import seedu.typists.ui.TextUi;
 
-import seedu.typists.game.WordLimitGame;
 import seedu.typists.storage.StorageFile;
 
 import java.util.Scanner;

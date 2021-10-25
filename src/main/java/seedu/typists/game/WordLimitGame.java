@@ -25,6 +25,19 @@ public class WordLimitGame extends Game {
         this.wordLimit = getWordLimit();
     }
 
+    @Override
+    public void runGame() {
+        try {
+            game();
+        } catch (InvalidStringInputException e) {
+            e.printStackTrace();
+            //needs update
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            //needs update
+        }
+    }
+
     public int getTotalSentence() {
         return eachWord.size();
     }
@@ -42,17 +55,12 @@ public class WordLimitGame extends Game {
     }
 
     public void trimContent(int wordLimit) throws InvalidStringInputException {
-        eachWord = splitString(content1," ");
-        eachWord = new ArrayList<String>(eachWord.subList(0, wordLimit));
+        eachWord = splitString(content1, " ");
+        eachWord = new ArrayList<>(eachWord.subList(0, wordLimit));
     }
 
-    public void runGame() {
-        try {
-            trimContent(wordLimit);
-        } catch (InvalidStringInputException e) {
-            e.printStackTrace();
-            //do something
-        }
+    public void game() throws InterruptedException, InvalidStringInputException {
+        trimContent(wordLimit);
         boolean isExit = false;
         int totalError = 0;
 
