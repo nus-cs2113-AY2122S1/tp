@@ -8,7 +8,6 @@ import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddItemCommand;
 import seedu.traveller.commands.SearchItemCommand;
-import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
@@ -17,6 +16,7 @@ import seedu.traveller.exceptions.TravellerException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+//@@author Uxinnn
 public class ParserTest {
     private final NewCommand newCommand;
     private final EditCommand editCommand;
@@ -34,14 +34,13 @@ public class ParserTest {
         editCommand = new EditCommand("trip1", "SIN", "MLY");
         deleteCommand = new DeleteCommand("trip2");
         viewCommand = new ViewCommand("all");
-        shortestCommand = new ShortestCommand("SKR", "JPN");
+        shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
         addDayCommand = new AddDayCommand("trip3", 1);
 
         addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
-        searchItemCommand = new SearchItemCommand("trip4", "sleep at home");
-        editItemCommand = new EditItemCommand("trip4", 1, "7am", "wake up from bed");
+        searchItemCommand = new SearchItemCommand("trip4", 0, "sleep at home");
+        editItemCommand = new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
         //deleteItemCommand = new DeleteItemCommand("trip4", "wake up from bed");
-
 
         exitCommand = new ExitCommand();
     }

@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class ViewCommand extends Command {
     private static final Logger logger = Logger.getLogger(ViewCommand.class.getName());
     private final String tripName;
@@ -19,6 +20,10 @@ public class ViewCommand extends Command {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
         logger.log(Level.INFO, "Created a view command");
+    }
+
+    public String getTripName() {
+        return tripName;
     }
 
     /**
@@ -31,10 +36,10 @@ public class ViewCommand extends Command {
             throw new NoTripsCreatedException();
         }
 
-        if (Objects.equals(tripName, "all")) {
+        if (Objects.equals(getTripName(), "all")) {
             ui.printAllTrips(tripsList);
         } else {
-            int tripIndex = tripsList.getTripIndex(tripName);
+            int tripIndex = tripsList.getTripIndex(getTripName());
             assert tripIndex < tripsList.getSize() : "The trip index is out of bound.";
             if (tripIndex == -1) {
                 throw new TripNotFoundException();
@@ -47,6 +52,6 @@ public class ViewCommand extends Command {
     @Override
     public String toString() {
         return "View command:"
-                + "\n\ttripName: " + tripName;
+                + "\n\ttripName: " + getTripName();
     }
 }

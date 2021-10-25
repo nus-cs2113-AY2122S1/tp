@@ -1,5 +1,6 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.Country;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class Trip {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final String tripName;
@@ -19,6 +21,8 @@ public class Trip {
     public Trip(String tripName, String startCountryCode, String endCountryCode,
                 List<Country> path, List<Double> distances) {
         logger.setLevel(Level.INFO);
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         this.tripName = tripName;
         this.startCountryCode = startCountryCode;
         this.endCountryCode = endCountryCode;
@@ -74,16 +78,16 @@ public class Trip {
         this.distances = distances;
     }
 
-    public Day getDay(int i) {
-        return daysList.getDay(i);
+    public Day getDay(int dayNumber) throws TravellerException {
+        return daysList.getDay(dayNumber);
     }
 
     public void addDay() {
         daysList.addDay();
     }
 
-    public void deleteDay(int i) {
-        daysList.deleteDay(i);
+    public void deleteDay(int dayNumber) throws TravellerException {
+        daysList.deleteDay(dayNumber);
     }
 
     public String getSaveTrip() {
@@ -97,12 +101,12 @@ public class Trip {
     public String getSaveDay() {
         String saveDataForDays = "";
         if (getDaySize() > 0) {
-            saveDataForDays = "add-day " + getTripName() + " " + getDaySize() + "\n";
+            saveDataForDays = "add-day " + getTripName() + " /day " + getDaySize() + "\n";
         }
         return saveDataForDays;
     }
 
-    public String getSaveItem() {
+    public String getSaveItem() throws TravellerException {
         String saveDataForItems = "";
         for (int i = 0; i < getDaySize(); i++) {
             Day current = daysList.getDay(i);

@@ -6,6 +6,7 @@ import seedu.traveller.commands.NewCommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+//@@author Uxinnn
 public class NewCommandTest {
     @Test
     public void newCommand_create_success() {

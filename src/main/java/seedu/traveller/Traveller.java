@@ -8,6 +8,7 @@ import seedu.traveller.worldmap.WorldMap;
 import java.util.logging.LogManager;
 
 
+//@@author Uxinnn
 public class Traveller {
     private final Ui ui;
     private final TripsList tripsList;

@@ -50,7 +50,7 @@ public class GraphList {
                 return v;
             }
         }
-        throw new EmptyVertexException();
+        throw new EmptyVertexException(s);
     }
 
     public void modifyEdge(Double distance, Country startCountry, Country endCountry) {

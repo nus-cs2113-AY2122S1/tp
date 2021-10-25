@@ -1,7 +1,8 @@
 package seedu.traveller;
 
-import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.exceptions.TravellerException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,11 +40,12 @@ public class Ui {
     }
 
     public void printTrip(Trip trip) {
-        assert !trip.getTripName().equals("all") : "`all` is an invalid tripName.";
+        assert !trip.getTripName().equals("all") : "'all' is an invalid tripName.";
+        assert !trip.getTripName().equals("") : "'' is an invalid tripName.";
         System.out.println(trip);
     }
 
-    public void printAllTrips(TripsList tripsList) throws TripNotFoundException {
+    public void printAllTrips(TripsList tripsList) throws TravellerException {
         assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
         System.out.println("\tHere are all your trips: ");
         for (int i = 0; i < tripsList.getSize(); i++) {
@@ -56,6 +58,8 @@ public class Ui {
     }
 
     public void printNewTripCreated(String tripName) {
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         System.out.println("\tYou have just created a new trip called " + tripName + ".");
     }
 
@@ -71,28 +75,54 @@ public class Ui {
         System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
     }
 
-    public void printSearchItem(String tripName, String itemName) {
-        System.out.println("\tYou have just search item keyword " + itemName + " in trip called " + tripName);
+    public void printSearchItem(String tripName, int dayIndex, String itemKey, ArrayList<Item> keyString) {
+        System.out.println("\tYou have just search item keyword " + itemKey
+                + " on day " + dayIndex + " in trip called " + tripName + "\n");
+        System.out.println("\tResults: ");
+        if (keyString.size() == 0) {
+            System.out.println("\tThere are no results found.");
+        } else {
+            int i = 1;
+            for (Item key : keyString) {
+                System.out.println("\t" + i++ + ". " + key);
+            }
+        }
     }
 
-    public void printEditItem(String tripName, int itemIndex, String itemName, String itemTime) {
-        System.out.println("\tYou have just edited item " + itemIndex + " of "
-                + tripName + " to " + itemName + " and " + itemTime);
+    public void printEditItem(String tripName, int dayIndex, String itemName, String itemTime, int itemIndex) {
+        System.out.println("\tYou have just edited item " + itemIndex  + " on day " + dayIndex
+                + " of " + tripName + " to " + itemName + " at " + itemTime);
     }
 
     public void printEdit(String tripName) {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printShortest(String startCountry, String endCountry, double distance) {
-        System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
+    public void printShortestDist(String startCountry, String endCountry, double distance) {
+        System.out.println("\tThe shortest distance from " + startCountry
+                + " to " + endCountry + " is " + distance + ".");
     }
 
-    public void printAddDayToTrip(String tripName, int daysNumber) {
-        System.out.println("\tAdded " + daysNumber + " days to trip " + tripName + ".");
+    public void printShortestCost(String startCountry, String endCountry, double cost) {
+        System.out.println("\tThe least cost from " + startCountry + " to " + endCountry + " is " + cost + ".");
     }
 
-    public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
+    public void printEditMap(String startCountry, String endCountry, double dist) {
+        System.out.println("\tThe distance from " + startCountry + " to "
+                + endCountry + " is updated to " + dist + ".");
+    }
+
+    public void printAddDayToTrip(String tripName, int numberOfDays) {
+        assert numberOfDays >= 0 : "Number of days is negative.";
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
+        System.out.println("\tAdded " + numberOfDays + " days to trip " + tripName + ".");
+    }
+
+    public void printAddItemToDay(String tripName, int dayIndex) {
+        assert dayIndex >= 0 : "Number of days is negative.";
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         System.out.println("\tAdded a new item to day " + dayIndex + " of trip " + tripName + ".");
     }
 
@@ -102,6 +132,44 @@ public class Ui {
 
     public void printWriteSave() {
         System.out.println("\tNow saving all your trips.");
+    }
+
+    public void printHelp() {
+        System.out.println("\tSome of our basic commands are:\n"
+                + "\tnew FamilyTrip2021 /from SIN /to MLY : "
+                + "Adds a new trip called FamilyTrip2021 from Singapore "
+                + "(SIN) to Malaysia (MLY).\n"
+
+                + "\tadd-day myTrip 3 : "
+                + "Adds 3 days to trip myTrip.\n"
+
+                + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
+                + "Adds item Check-in to HolidayInn to day 0 of trip1.\n"
+
+                + "\tview : Views all your existing trips and their details.\n"
+
+                + "\tdelete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n"
+
+                + "\tdelete-day myTrip /day 0 : "
+                + "Deletes day 0 of myTrip.\n"
+
+                + "\tdelete-item myTrip /day 0 /item 0 : "
+                + "Deletes item 0 of myTrip on day 0.\n"
+
+                + "\tedit FamilyTrip2021 /from SKR /to JPN : "
+                + "Edits an existing trip called FamilyTrip2021"
+                + "to have new START and END destinations.\n"
+
+                + "\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
+                + "Edits item1 of trip 1 to wake up from bed at 7am.\n"
+
+                + "\tsearch-item trip1 /name sleep at home : "
+                + "Searches item keyword sleep at home in trip called trip1.\n"
+
+                + "\tshortest /from SKR /to JPN : "
+                + "Returns the shortest distance from SKR to JPN.\n"
+
+                + "\texit : Exits the program.");
     }
 
 }

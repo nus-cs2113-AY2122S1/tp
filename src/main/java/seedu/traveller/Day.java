@@ -1,6 +1,10 @@
 package seedu.traveller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+//@@author Uxinnn
 public class Day {
     protected ItemsList itemsList;
 
@@ -12,12 +16,12 @@ public class Day {
         itemsList.addItem(item);
     }
 
-    public Item getItem(int i) {
-        return itemsList.getItem(i);
+    public Item getItem(int itemNumber) {
+        return itemsList.getItem(itemNumber);
     }
 
-    public void deleteItem(int i) {
-        itemsList.deleteItem(i);
+    public void deleteItem(int itemNumber) {
+        itemsList.deleteItem(itemNumber);
     }
 
     public int getItemsListSize() {
@@ -27,5 +31,13 @@ public class Day {
     @Override
     public String toString() {
         return itemsList.toString();
+    }
+
+    public void editItem(int index, Item item) {
+        itemsList.editItem(index, item);
+    }
+
+    public ArrayList<Item> searchItem(String itemKey) {
+        return itemsList.searchItem(itemKey);
     }
 }

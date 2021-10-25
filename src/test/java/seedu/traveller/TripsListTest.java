@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
 import seedu.traveller.worldmap.Country;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+//@@author Uxinnn
 public class TripsListTest {
     private final TripsList tripsList = new TripsList();
     private final Trip tripSinMly;
@@ -35,13 +37,13 @@ public class TripsListTest {
     }
 
     @Test
-    public void getTrip_success() throws TripNotFoundException {
+    public void getTrip_success() throws TravellerException {
         assertEquals(this.tripSinMly, this.tripsList.getTrip(0));
         assertEquals(this.tripSkrJpn, this.tripsList.getTrip(1));
     }
 
     @Test
-    public void getTripIndex_success() throws TripNotFoundException {
+    public void getTripIndex_success() throws TravellerException {
         assertEquals(0, tripsList.getTripIndex("tripSinMly"));
         assertEquals(1, tripsList.getTripIndex("tripSkrJpn"));
     }

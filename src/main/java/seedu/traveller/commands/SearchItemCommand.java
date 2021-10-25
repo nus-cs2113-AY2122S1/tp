@@ -3,9 +3,13 @@ package seedu.traveller.commands;
 
 import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
+import seedu.traveller.Day;
+import seedu.traveller.Trip;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.Item;
 import seedu.traveller.exceptions.TripNotFoundException;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,20 +17,36 @@ import java.util.logging.Logger;
 public class SearchItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteDayCommand.class.getName());
     private final String tripName;
-    private final String itemName;
+    private final String itemKey;
+    private final int dayIndex;
 
-    public SearchItemCommand(String tripName, String itemName) {
+    public SearchItemCommand(String tripName, int dayIndex, String itemKey) {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
-        this.itemName = itemName;
+        this.itemKey = itemKey;
+        this.dayIndex = dayIndex;
 
         logger.log(Level.INFO, "Created a search-item command: \n" + this);
+    }
+
+    public String getTripName() {
+        return tripName;
+    }
+
+    public int getDayIndex() {
+        return dayIndex;
+    }
+
+    public String getItemKey() {
+        return itemKey;
     }
 
     @Override
     public String toString() {
         return "Search-item command:"
-                + "\n\titem: " + itemName;
+                + "\n\ttripName: " + getTripName()
+                + "\n\tdayIndex: " + getDayIndex()
+                + "\n\titemTime: " + getItemKey();
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
@@ -36,7 +56,13 @@ public class SearchItemCommand extends Command {
             throw new TripNotFoundException();
         }
 
-        ui.printSearchItem(tripName, itemName);
+        Trip trip = tripsList.getTrip(getTripName());
+        Day day = trip.getDay(getDayIndex());
+
+        ArrayList<Item> keyString;
+        keyString = day.searchItem(itemKey);
+
+        ui.printSearchItem(tripName, dayIndex, itemKey, keyString);
     }
 }
 

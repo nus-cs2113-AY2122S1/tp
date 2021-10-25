@@ -1,3 +1,4 @@
+
 # Traveller User Guide
 
 ## Introduction
@@ -6,8 +7,10 @@
 Thank you for choosing to use Traveller!
 
 Traveller is a travel planner app that is designed to help holidaymakers like you plan your overseas trips with ease.
+
 It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
 while still retaining the ease of use of a GUI.
+
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
 ### What is a Command Line Interface (CLI)?
@@ -49,8 +52,10 @@ each functionality are explained in the [features](#2-features) section.
   * [2.9. edit](#29-edit-a-trip-edit)
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
-  * [2.12. shortest](#212-shortest-shortest)
-  * [2.13. exit](#214-exiting-the-program-exit)
+  * [2.12. shortest](#212-shortest-dist)
+  * [2.13. shortest](#213-shortest-cost)
+  * [2.14. edit-map](#214-edit-map)
+  * [2.??. exit](#213-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -79,6 +84,7 @@ This section provides a guide on how to get Traveller up and running on your com
 
 ## 2. Features
 This section provides details for all commands that Traveller supports.
+
 For a quick summary of all commands, please click [here](#4-command-summary) instead.
 
 > ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type your commands is *very important*.
@@ -87,6 +93,10 @@ For a quick summary of all commands, please click [here](#4-command-summary) ins
 <br/>
 
 ### 2.1. Getting help: `help`
+The help command would return the basic commands that are able to be input into CLI.
+The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide
+
+#### Format: `help`
 
 <br/>
 
@@ -223,9 +233,9 @@ Deletes an existing item from a trip.
 #### Usage Example:
 ```
 ____________________________________________________________
-$ delete-day myTrip /day 0 /item 0
+$ delete-item trip1 /day 1 /item 0
 ____________________________________________________________
-	You have just deleted item 0 of myTrip day 0.
+	You have just deleted item 0 of trip1 day 1
 ____________________________________________________________
 ```
 
@@ -246,23 +256,89 @@ Edits an existing trip from the trip list.
 <br/>
 
 ### 2.10. Edit an item: `edit-item`
+Edits and updates existing item from a trip and updates it to a new corresponding item.
+
+#### Format: `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+
+#### Usage Example:
+```
+_________________________________________________________________________________
+$ edit-item trip1 /day 1 /time 9am /name later breakfast /index 1
+_________________________________________________________________________________
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 9am
+_________________________________________________________________________________
+```
 
 <br/>
 
 ### 2.11. Searching for an item: `search-item`
+Searches for an item keyword from a trip and returns the resulting matching items.
 
-<br/>
+#### Format: `search-item TRIP_NAME /name ITEM_NAME`
 
-### 2.12. Shortest: `shortest`
+#### Usage Example:
+```
+_________________________________________________________________________________
+$ search-item trip1 /day 1 /key n
+_________________________________________________________________________________
+	You have just search item keyword n on day 1 in trip called trip1
+	
+	Results: 
+	1. 2pm		lunch
+	2. 5pm		dinner
+_________________________________________________________________________________
+```
 
-<br/>
+### 2.12. Shortest distance: `shortest-dist`
+Returns the shortest distance from the source to destination country.
 
-### 2.13 Exiting the program: `exit`
+#### Format: `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ shortest-dist /from SIN /to JPN
+____________________________________________________________
+	The shortest distance from SIN to JPN is 6.0.
+____________________________________________________________
+```
+
+### 2.13. Least cost: `shortest-cost`
+Returns the least expensive flight path from the source to destination country.
+
+#### Format: `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ shortest-cost /from SIN /to JPN
+____________________________________________________________
+	The least cost from SIN to JPN is 550.0.
+____________________________________________________________
+```
+
+### 2.14. Edit Distances in Map: `edit-map`
+Edits and updates the distance from the source to destination country.
+
+#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ edit-map /from SIN /to MLY /dist 2.0
+____________________________________________________________
+	The distance from SIN to MLY is updated to 2.0.
+____________________________________________________________
+```
+
+
+### 2.?? Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
 
-> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in ensuring that your trips are saved
+> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in 
+> ensuring that your trips are saved.
 
 <br/>
 
@@ -277,7 +353,8 @@ Exits the program.
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
-**A**: Traveller can only read specific words as destinations. Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
+**A**: Traveller can only read specific words as destinations. 
+Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
 
 <br/>
 
@@ -296,8 +373,8 @@ Action | Format
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from START /to END`
-**edit-item** | `{to be added}`
-**search-item** | '{to be added}`
-**shortest** | '{to be added}`
+**edit-item** | `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+**search-item** |  `search-item TRIP_NAME /name ITEM_NAME`
+**shortest** | `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **exit** | `exit`
 

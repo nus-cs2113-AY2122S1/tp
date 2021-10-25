@@ -1,9 +1,12 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.exceptions.TravellerException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+//@@author Uxinnn
 public class DaysListTest {
     private final DaysList daysList;
 
@@ -22,7 +25,11 @@ public class DaysListTest {
     public void deleteDay_success() {
         daysList.addDay();
         daysList.addDay();
-        daysList.deleteDay(1);
+        try {
+            daysList.deleteDay(1);
+        } catch (TravellerException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(1, daysList.getSize());
     }
 }
