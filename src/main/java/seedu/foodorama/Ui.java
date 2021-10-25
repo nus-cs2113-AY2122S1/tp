@@ -583,7 +583,7 @@ public class Ui {
 
     public void printLimitSet(String name, double limit) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The limit of " + name + " is now " + limit + " kg" + System.lineSeparator()
+                + "The limit for " + name + " is now " + limit + " kg" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -591,5 +591,22 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Warning: The command " + name + " does not need any excess parameters" + System.lineSeparator()
                 + LINE_DIVIDER);
+    }
+
+    public String getFormatMessage() {
+        String dishFormat = "Dish Format: [Name] | [Amount wasted (kg)] | "
+                + "[Wastage divided by number of constituents] "
+                + "| [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]";
+        String dishExample = "Example (no constituents, no limit): prata|2.0|2.0|-1" + System.lineSeparator()
+                + "Example (2 constituents, no limit): prata|2.0|1.0|-1|flour|egg" + System.lineSeparator()
+                + "Example (2 constituents, limit of 3): prata|2.0|1.0|3|flour|egg";
+        String ingrFormat = "Ingredients: [Name] | [Amount stored (kg)] | [Amount wasted (kg)] | "
+                + "[Wastage limit (if present else -1)]";
+        String ingrExample = "Example (no limit): chicken|2.33|1.0|-1" + System.lineSeparator()
+                + "Example (limit of 2.5): chicken|2.33|1.0|2.5";
+        return dishFormat + System.lineSeparator()
+                + dishExample + System.lineSeparator()
+                + ingrFormat + System.lineSeparator()
+                + ingrExample + System.lineSeparator();
     }
 }

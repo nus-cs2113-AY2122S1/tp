@@ -23,12 +23,14 @@ reference. We hope you enjoy using *Food-O-Rama*! 💕
     * [Dish Commands](#add-new-dish-add-dish)
         * `add dish`: [Add new dish](#add-new-dish-add-dish)
         * `add dish waste`: [Add dish wastage](#add-dish-wastage-add-dish-waste)
+        * `set dish limit`: [Add a limit for dish wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
         * `del dish`: [Delete existing dish](#delete-existing-dish-del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes-list-dish)
     * [Ingredient Commands](#add-new-ingredient-add-ingr)
         * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
         * `add ingr waste`: [Add ingredient wastage](#add-ingredient-wastage-add-ingr-waste)
+        * `set ingr limit`: [Add a limit for ingredient wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
         * `add constituent`: [Link ingredient to dish](#link-ingredient-to-dish-add-constituent)
         * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
         * `list ingr`: [View exising ingredients](#view-all-exising-ingredients-list-ingr)
@@ -85,11 +87,13 @@ java -jar Food-O-Rama.jar
 | View the list of commands | help |
 | Add a new Dish | add dish [dishName] |
 | Add the Dish Wastage | add dish waste [dishName] followed by [weight in KG] |
+| Set the limit for Dish Wastage | set dish limit [dishName] followed by [weight in KG] |
 | Delete a Dish | del [dishName] |
 | View all Dishes | list dish|
 | Add a new Ingredient | add ingr [ingrName]  followed by [weight in KG] |
 | Add storage to an existing Ingredient | add ingr stored [ingrName] followed by [weight in KG] |
 | Add Ingredient Wastage | add ingr waste [ingrName] followed by [weight in KG] |
+| Set the limit for Ingredient Wastage | set ingr limit [ingrName] followed by [weight in KG] |
 | Link a Dish to a Ingredient | add constituent [dishName] / [ingrName] |
 | Delete an Ingredient | del [ingrName] |
 | View all Ingredients | list ingr |
@@ -182,10 +186,10 @@ ____________________________________________________________
 
 Incur wastage on an existing Dish
 
-Format: `add dish waste ingrName`
+Format: `add dish waste dishName`
 
 * Can only be performed on existing `dishName`
-* You will be prompted to enter the weight of `dishrName` wasted in the next step.
+* You will be prompted to enter the weight of `dishName` wasted in the next step.
 
 Example of usage:
 
@@ -206,6 +210,39 @@ Expected Outcome:
 
 ```
 Wastage of chicken rice is now 2.5 kg
+____________________________________________________________
+```
+
+### Add a limit for dish wastage: `set dish limit`
+
+Set a limit for wastage of an existing dish
+
+Format: `set dish limit dishName`
+
+* Can only be performed on existing `dishName`
+* You will be prompted to enter the limit to watch out for in the next step.
+
+Example of usage:
+
+`set dish limit chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Enter the limit for prata in kg:
+____________________________________________________________
+```
+
+Example of usage:
+
+`3.5`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
@@ -346,6 +383,39 @@ Expected Outcome:
 
 ```
 Wastage of chicken is now 1.5 kg
+____________________________________________________________
+```
+
+### Add a limit for ingredient wastage: `set ingr limit`
+
+Set a limit for wastage of an existing ingredient
+
+Format: `set ingr limit ingrName`
+
+* Can only be performed on existing `ingrName`
+* You will be prompted to enter the limit to watch out for in the next step.
+
+Example of usage:
+
+`set ingr limit chicken`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Enter the limit for chicken in kg:
+____________________________________________________________
+```
+
+Example of usage:
+
+`7.7`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+The limit for chicken is now 7.7 kg
 ____________________________________________________________
 ```
 

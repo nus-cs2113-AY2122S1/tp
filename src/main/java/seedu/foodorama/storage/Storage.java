@@ -4,6 +4,8 @@ import seedu.foodorama.Dish;
 import seedu.foodorama.DishList;
 import seedu.foodorama.Ingredient;
 import seedu.foodorama.IngredientList;
+import seedu.foodorama.Ui;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,12 +20,12 @@ public class Storage {
     private static final String DIRECTORY_NAME = "data";
     private static final String FILE_NAME_DISH = "dishes.txt";
     private static final String FILE_NAME_INGR = "ingredients.txt";
+    private static final String FILE_NAME_FORMAT = "formats.txt";
 
     public static void write(String mode) {
         try {
             File newDirectory = new File(DIRECTORY_NAME);
             if (!newDirectory.exists()) {
-                //System.out.println("Creating directory " + DIRECTORY_NAME);
                 newDirectory.mkdirs();
             }
             switch (mode) {
@@ -57,23 +59,40 @@ public class Storage {
     }
 
     public static void load() {
+        File newDirectory = new File(DIRECTORY_NAME);
+        if (!newDirectory.exists()) {
+            newDirectory.mkdirs();
+        }
         loadIngredients();
         loadDishes();
+        loadFormat();
+    }
+
+    private static void loadFormat() {
+        Ui ui = new Ui();
+        try {
+            FileWriter writer = new FileWriter(DIRECTORY_NAME + File.separator + FILE_NAME_FORMAT);
+            writer.write(ui.getFormatMessage());
+            writer.close();
+        } catch (IOException e) {
+            logger.log(Level.INFO, "File creation failed / unable to retrieve file");
+            System.out.println("____________________________________________");
+            System.out.println("Unable to access file");
+            System.out.println("____________________________________________");
+        }
     }
 
 
     private static void loadIngredients() {
-        File newDirectory = new File(DIRECTORY_NAME);
-        if (!newDirectory.exists()) {
-            //System.out.println("Creating directory " + DIRECTORY_NAME);
-            newDirectory.mkdirs();
-        }
         File fileToReadIngr = new File(DIRECTORY_NAME + File.separator + FILE_NAME_INGR);
         try {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
                 String in = s.nextLine();
                 String[] params = in.split("\\|");
+                for (int i = 0; i < params.length; i++) {
+                    params[i] = params[i].trim();
+                }
                 Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
                         Double.parseDouble(params[2]));
                 ingredientToAdd.setLimit(Double.parseDouble(params[3]));
@@ -81,7 +100,6 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             try {
-                //System.out.println("Creating " + FILE_NAME_INGR);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
                 logger.log(Level.INFO, "File creation failed / unable to retrieve file");
@@ -93,17 +111,15 @@ public class Storage {
     }
 
     private static void loadDishes() {
-        File newDirectory = new File(DIRECTORY_NAME);
-        if (!newDirectory.exists()) {
-            //System.out.println("Creating directory " + DIRECTORY_NAME);
-            newDirectory.mkdirs();
-        }
         File fileToReadIngr = new File(DIRECTORY_NAME + File.separator + FILE_NAME_DISH);
         try {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
                 String in = s.nextLine();
                 String[] params = in.split("\\|");
+                for (int i = 0; i < params.length; i++) {
+                    params[i] = params[i].trim();
+                }
                 Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
                 dishToAdd.setLimit(Double.parseDouble(params[3]));
                 if (params.length > 4) {
@@ -119,7 +135,6 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             try {
-                //System.out.println("Creating " + FILE_NAME_DISH);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
                 logger.log(Level.INFO, "File creation failed / unable to retrieve file");
