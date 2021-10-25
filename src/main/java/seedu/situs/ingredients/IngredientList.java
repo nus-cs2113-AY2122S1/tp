@@ -1,5 +1,6 @@
 package seedu.situs.ingredients;
 
+import seedu.situs.Situs;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
@@ -135,24 +136,31 @@ public class IngredientList {
         try {
             int i = 0;
             int ingredientIndex = findIngredientIndexInList(ingredientName);
-            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 2);
-
+            if (ingredientIndex < 0) {
+                throw new SitusException("Ingredient not found!");
+            }
+            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
             if (currentGroup.getTotalAmount() < subtractAmount) {
                 throw new SitusException(INVALID_SUBTRACT);
             }
-
+//
             currentGroup.subtractFromTotalAmount(subtractAmount);
-
+//
             while (subtractAmount != 0.0) {
                 if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
                     currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
                     subtractAmount = 0.0;
                 } else {
                     subtractAmount -= currentGroup.get(i + 1).getAmount();
-                    currentGroup.remove(i + 1);
+                    currentGroup.get(i + 1).setAmount(0.0);
                 }
                 i++;
             }
+            i = 0;
+            while (currentGroup.get(i + 1).getAmount() == 0.0) {
+                currentGroup.remove(i + 1);
+            }
+
             storage.writeIngredientsToMemory(ingredientList);
 
         } catch (IndexOutOfBoundsException e) {

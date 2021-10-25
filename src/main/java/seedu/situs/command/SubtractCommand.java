@@ -14,7 +14,7 @@ public class SubtractCommand extends Command {
     private Double subtractAmount;
 
     public SubtractCommand(String ingredientName, Double subtractAmount) {
-        this.ingredientName = ingredientName;
+        this.ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
         this.subtractAmount = subtractAmount;
     }
 
@@ -23,7 +23,7 @@ public class SubtractCommand extends Command {
         try {
             String resultMsg;
             IngredientList.getInstance()
-                    .subtractIngredientFromGroup(this.ingredientName, this.subtractAmount);
+                    .subtractIngredientFromGroup(ingredientName, subtractAmount);
             resultMsg = "Got it. " + subtractAmount
                     + " kg has been subtracted from " + ingredientName;
             return resultMsg;
