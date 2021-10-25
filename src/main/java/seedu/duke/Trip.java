@@ -71,7 +71,7 @@ public class Trip {
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean isThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
-            if (e.getPayer().getName().equals(expenseAttribute)) {
+            if (e.getPayer().getName().equalsIgnoreCase(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 isThereExpenses = true;
@@ -104,7 +104,7 @@ public class Trip {
                                                      String expenseAttribute) {
         boolean isThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
-            if (e.getCategory().equals(expenseAttribute)) {
+            if (e.getCategory().equalsIgnoreCase(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 isThereExpenses = true;
