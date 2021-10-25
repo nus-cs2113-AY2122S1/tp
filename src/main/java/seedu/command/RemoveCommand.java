@@ -1,6 +1,6 @@
 package seedu.command;
 
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.exceptions.FetchException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
@@ -20,7 +20,7 @@ public class RemoveCommand extends Command {
         Module module;
         try {
             module = NusMods.fetchModOnline(moduleToBeRemoved);
-            Profile currentProfile = Duke.getProfileInUse();
+            Profile currentProfile = UniMods.getProfileInUse();
             currentProfile.getRecord().removeModuleFromTranscript(moduleToBeRemoved);
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);

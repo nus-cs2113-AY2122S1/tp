@@ -1,6 +1,6 @@
 package seedu.command;
 
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.ui.TextUi;
 import seedu.user.Profile;
 
@@ -9,7 +9,7 @@ public class CalculateCapCommand extends Command {
     }
 
     public void execute() {
-        Profile currentProfile = Duke.getProfileInUse();
+        Profile currentProfile = UniMods.getProfileInUse();
         TextUi.printCap(currentProfile.getCap());
     }
 }
