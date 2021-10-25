@@ -118,20 +118,19 @@ Mode has changed to PRESCRIPTION.
 
 ## Managing Stocks
 
-### Adding a medication stock: `addstock`
+
+### Adding stocks: `addstock`
 
 Adds medication into the inventory.
 
-* If medication exists, description and maximum quantity will be optional parameters. If you
-  include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description
-  and existing maximum quantity.
+> :warning: Warning
+> * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 
 Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
 
 Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
 
 Expected Output 1:
-
 ```
 Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
@@ -147,7 +146,6 @@ Example 2 (If medication does not
 exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 2:
-
 ```
 Medication added: paracetamol
 +====+=============+========+==========+=============+==============================+==============+
@@ -270,32 +268,33 @@ Expected output:
 
 ## Managing Prescriptions
 
-### Adding a dispense record: `adddispense`
+### Adding prescriptions: `addprescription`
 
-Adds a dispense.
+Adds a prescription record and subtracts the medication quantity from stocks.
 
-Format: `adddispense n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
+> :information_source: MediVault will prescribe the medication with the shortest expiry date first. If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
 
-Example: `adddispense n/panadol q/5 s/john c/123`
+Format: `addprescription n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
+
+Example: `addprescription n/panadol q/5 s/john c/123`
 
 Expected Output:
 
 ```
-Dispensed:panadol Quantity:5 Expiry Date:13-09-2021
+Prescribed:panadol Quantity:5 Expiry Date:13-09-2021
 ```
 
-### Deleting a dispense record: `deletedispense`
+### Deleting prescriptions: `deleteprescription`
 
-Deletes dispense by specifying the dispense Id.
+Deletes a prescription record by specifying the Prescription ID.
 
-Format: `deletedispense i/DISPENSE_ID`
+Format: `deleteprescription i/PRESCRIPTION_ID`
 
-Example: `deletedispense i/3`
+Example: `deleteprescription i/3`
 
 Expected output:
-
 ```
-Dispense deleted for Dispense Id 3
+Prescription deleted for Prescription ID 3
 ```
 
 ### Updating prescriptions: `updateprescription`
@@ -409,7 +408,7 @@ Order for panadol exists. Unable to add order as total order quantity exceeds ma
 
 ### Deleting an order: `deleteorder`
 
-Deletes order by specifying the order Id.
+Deletes order by specifying the Order ID.
 
 Format: `deleteorder i/ORDER_ID`
 
@@ -418,7 +417,7 @@ Example: `deleteorder i/1`
 Expected output:
 
 ```
-Order deleted for Order Id 1
+Order deleted for Order ID 1
 ```
 
 ### Updating orders: `updateorder`

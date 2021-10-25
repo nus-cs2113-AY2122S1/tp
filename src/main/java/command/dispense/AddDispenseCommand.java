@@ -17,8 +17,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
- * Dispense medication based on user input.
- * User input includes medication name, quantity to dispense, Customer's NRIC and Staff name.
+ * Prescription medication based on user input.
+ * User input includes medication name, quantity to prescribe, Customer's NRIC and Staff name.
  */
 public class AddDispenseCommand extends Command {
 
@@ -55,10 +55,15 @@ public class AddDispenseCommand extends Command {
             return;
         }
 
-        int dispenseQuantity = Integer.parseInt(quantity);
-        int quantityToDispense = dispenseQuantity;
+        int prescribeQuantity = Integer.parseInt(quantity);
+        int quantityToPrescribe = prescribeQuantity;
 
-        Date dispenseDate = new Date(); //dispense date will be today's date
+        if (prescribeQuantity == 0) {
+            ui.print("Prescription Quantity cannot be 0.");
+            return;
+        }
+
+        Date prescribeDate = new Date(); //prescribe date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
@@ -74,9 +79,9 @@ public class AddDispenseCommand extends Command {
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
         int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
-        if (dispenseQuantity > totalStock) {
-            ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
-            ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
+        if (prescribeQuantity > totalStock) {
+            ui.print("Unable to prescribe! Prescription quantity is more than stock available!");
+            ui.print("Prescription quantity: " + prescribeQuantity + " Stock available: " + totalStock);
             return;
         }
 
@@ -87,22 +92,22 @@ public class AddDispenseCommand extends Command {
 
             int setStockValue = 0;
 
-            if (existingQuantity == quantityToDispense) {
-                dispense(ui, medicines, medicationName, customerId, staffName, existingQuantity, dispenseDate,
+            if (existingQuantity == quantityToPrescribe) {
+                prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
                         stock, existingId, existingExpiry, setStockValue);
                 return;
             }
 
-            if (existingQuantity > quantityToDispense) {
-                setStockValue = existingQuantity - quantityToDispense;
-                dispense(ui, medicines, medicationName, customerId, staffName, quantityToDispense, dispenseDate,
+            if (existingQuantity > quantityToPrescribe) {
+                setStockValue = existingQuantity - quantityToPrescribe;
+                prescribe(ui, medicines, medicationName, customerId, staffName, quantityToPrescribe, prescribeDate,
                         stock, existingId, existingExpiry, setStockValue);
                 return;
             }
 
-            if (existingQuantity < dispenseQuantity) {
-                quantityToDispense = quantityToDispense - existingQuantity;
-                dispense(ui, medicines, medicationName, customerId, staffName, existingQuantity, dispenseDate,
+            if (existingQuantity < prescribeQuantity) {
+                quantityToPrescribe = quantityToPrescribe - existingQuantity;
+                prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
                         stock, existingId, existingExpiry, setStockValue);
             }
 
@@ -111,28 +116,28 @@ public class AddDispenseCommand extends Command {
     }
 
     /**
-     * Change the stock quantity based on dispense quantity. Add dispense medication to dispense list.
+     * Change the stock quantity based on Prescription quantity. Add prescribed medication to prescription list.
      *
-     * @param ui                 Reference to the UI object to print messages.
-     * @param medicines          Arraylist of all medicines.
-     * @param medicationName     Medication to dispense.
-     * @param customerId         Customer ID whom medicine will be dispensed to.
-     * @param staffName          Staff who dispense the medication.
-     * @param quantityToDispense Quantity of medication to dispense.
-     * @param dispenseDate       Date which medication is dispensed
-     * @param stock              Stock object of the given stock id.
-     * @param existingId         Existing id of the stock object.
-     * @param existingExpiry     Existing expiry of the stock object.
-     * @param setStockValue      Stock quantity to set to after dispensed.
+     * @param ui                  Reference to the UI object to print messages.
+     * @param medicines           Arraylist of all medicines.
+     * @param medicationName      Medication to prescribe.
+     * @param customerId          Customer ID whom medicine will be prescribed to.
+     * @param staffName           Staff who prescribe the medication.
+     * @param quantityToPrescribe Quantity of medication to prescribe.
+     * @param prescribeDate       Date which medication is prescribed.
+     * @param stock               Stock object of the given stock id.
+     * @param existingId          Existing id of the stock object.
+     * @param existingExpiry      Existing expiry of the stock object.
+     * @param setStockValue       Stock quantity to set to after prescribed.
      */
-    private void dispense(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
-                          String staffName, int quantityToDispense, Date dispenseDate, Stock stock,
-                          int existingId, Date existingExpiry, int setStockValue) {
+    private void prescribe(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
+                           String staffName, int quantityToPrescribe, Date prescribeDate, Stock stock,
+                           int existingId, Date existingExpiry, int setStockValue) {
         String expiry = DateParser.dateToString(existingExpiry);
         stock.setQuantity(setStockValue);
-        medicines.add(new Dispense(medicationName, quantityToDispense, customerId, dispenseDate,
+        medicines.add(new Dispense(medicationName, quantityToPrescribe, customerId, prescribeDate,
                 staffName, existingId));
-        ui.print("Dispensed:" + medicationName + " Quantity:" + quantityToDispense + " Expiry "
+        ui.print("Prescribed:" + medicationName + " Quantity:" + quantityToPrescribe + " Expiry "
                 + "Date:" + expiry);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
