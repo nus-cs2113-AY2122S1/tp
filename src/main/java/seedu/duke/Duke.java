@@ -38,7 +38,7 @@ public class Duke {
             try {
                 Storage.writeToFile();
             } catch (IOException e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
