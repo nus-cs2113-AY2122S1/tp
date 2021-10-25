@@ -31,6 +31,9 @@ view your financial records through both text and graphs in different currencies
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
     - [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
     - [Clear all entries: `clear_all_entries`](#clear-all-entries-clear_all_entries)
+    - [Set budget: `set_budget`](#set-budget-set_budget)
+    - [Check budget: `check_budget`](#check-budget-check_budget)
+    - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
     - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
 - [FAQ](#faq)
@@ -507,6 +510,18 @@ All your entries have been cleared!
 </details>
 <br>
 
+### Set budget: `set_budget`
+
+- TODO
+
+### Check budget: `check_budget`
+
+- TODO
+
+### Set threshold: `set_threshold`
+
+- TODO
+
 ### View Yearly Report: `show_graph`
 
 Shows the monthly breakdown of the finances in a Yearly Report which also
@@ -573,7 +588,11 @@ Format: `end`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Your data is saved in 2 `.csv` files called `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. To transfer the data, make a copy of these files and paste them in the same directory as the `.jar` file on your new machine. 
+
+**Q**: What if my program terminates unexpectedly?
+
+**A**: All data will be stored inside the respective `.csv` files.
 
 ## Command Summary
 
