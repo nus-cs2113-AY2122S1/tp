@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public static void goodBye() {
-        System.out.println("Goodbye!");
+        System.out.println("Exiting the program now. Goodbye!");
     }
 
 
@@ -133,7 +133,7 @@ public class Ui {
 
     public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
         System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed");
+                + tripDate + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
@@ -187,6 +187,10 @@ public class Ui {
 
     public static void argNotNumber() {
         System.out.println("Input is not a number");
+    }
+
+    public static void promptForTripIndex() {
+        System.out.print("Please enter a valid trip number: ");
     }
 
     public static void emptyArgForDeleteCommand() {
@@ -293,6 +297,10 @@ public class Ui {
 
     public static void printCreateFileFailure() {
         System.out.println("The save file could not be created. Exiting the program now...");
+    }
+
+    public static void newFileSuccessfullyCreated() {
+        System.out.println("A new save file has been created!");
     }
 
     public static void printInvalidPerson(String name) {

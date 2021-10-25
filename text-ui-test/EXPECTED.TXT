@@ -6,6 +6,8 @@ Welcome to
 /_/    \__,_/\__, /_/  /_/\___/_____/\__,_/\___/_/|_|  
             /____/                                     
 
+No preloaded data found! We have created a file for you.
+A new save file has been created!
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
@@ -167,4 +169,4 @@ josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
 xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-Enter your command: Goodbye!
+Enter your command: Exiting the program now. Goodbye!
