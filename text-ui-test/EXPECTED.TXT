@@ -11,8 +11,7 @@ Enter your command: You have opened the following trip:
 America | 02 Feb 2021
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
-Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
-Enter your command: budget was not recognised. Please try again after this process is complete
+Enter your command: Enter your command: budget was not recognised. Please try again after this process is complete
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: There is USD $2.00 left to be assigned. How much did qian spend?: Your expense has been added successfully
@@ -73,9 +72,9 @@ Category: breakfast
 
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
-Enter your command: 1. c a b | Cost: USD $8.00
-2. d a c | Cost: USD $1.00
-3. d a c | Cost: USD $2.00
+Enter your command: 	1. c a b | 19 Oct 2021
+	2. d a c | 19 Oct 2021
+	3. d a c | 19 Oct 2021
 Enter your command: c a b
 date: 19 Oct 2021
 Amount Spent: USD $8.00

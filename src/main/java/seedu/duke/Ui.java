@@ -37,11 +37,12 @@ public class Ui {
                 val / Storage.getOpenTrip().getExchangeRate());
     }
 
-    public static void printListOfPeople(ArrayList<Person> People) {
-        for (Person person : People) {
+    public static void printListOfPeople(ArrayList<Person> people) {
+        for (Person person : people) {
             System.out.println("\t" + person.getName());
         }
     }
+
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
     }
@@ -61,9 +62,14 @@ public class Ui {
         System.out.println("Your expense has been added successfully");
     }
 
-    public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: "
-                + stringForeignMoney(expense.getAmountSpent()));
+    public static void printExpensesInList(ArrayList<Expense> listOfExpenses) {
+        for (int i = 0; i < listOfExpenses.size(); i++) {
+            System.out.print("\t");
+            System.out.println(i + 1 + ". "
+                    + listOfExpenses.get(i).getDescription() + " | "
+                    + listOfExpenses.get(i).getStringDate());
+
+        }
     }
 
     public static void printOpenTripMessage(Trip trip) {

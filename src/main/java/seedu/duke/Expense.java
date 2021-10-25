@@ -163,7 +163,7 @@ public class Expense {
     public String toString() {
         return (this.getDescription()
                 + System.lineSeparator()
-                + "date: " + this.getDate().format(outputPattern)
+                + "date: " + this.getStringDate()
                 + System.lineSeparator()
                 + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
@@ -203,6 +203,10 @@ public class Expense {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public String getStringDate() {
+        return date.format(outputPattern);
     }
 
     public void setDate(LocalDate date) {

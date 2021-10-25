@@ -315,17 +315,15 @@ public class Parser {
     }
 
     private static void executeList() {
-        int index = 1;
+        boolean areThereExpenses = false;
         if (!Storage.checkOpenTrip()) {
             Ui.printAllTrips();
         } else {
-            for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
-                Ui.printExpensesInList(expense, index);
-                index++;
-            }
-            if (index == 1) {
-                Ui.printNoExpensesError();
-            }
+            Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
+            areThereExpenses = true;
+        }
+        if (!areThereExpenses) {
+            Ui.printNoExpensesError();
         }
     }
 
