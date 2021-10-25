@@ -143,7 +143,6 @@ public class Parser {
 
     private static void handleTripSummary(String inputParams) {
         try {
-            assert inputParams != null;
             executeSummary(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
@@ -228,7 +227,8 @@ public class Parser {
         } else {
             //list only 1 person, if exists
             try {
-                Person personToView = stringToPerson(currentTrip, inputParams); //returns null if no such person
+                //returns null if no such person
+                Person personToView = getValidPersonInTripFromString(inputParams, currentTrip);
                 if (personToView != null) {
                     currentTrip.getIndividualExpenseSummary(personToView);
                 } else {
@@ -241,21 +241,6 @@ public class Parser {
             }
         }
 
-    }
-
-    /**
-     * Parses string to person, if it exists .
-     * @param trip trip to find person
-     * @param string supposed name of person
-     * @return the person corresponding to the input string
-     */
-    public static Person stringToPerson(Trip trip, String string) {
-        for (Person p : trip.getListOfPersons()) {
-            if (p.getName().equals(string)) {
-                return p;
-            }
-        }
-        return null;
     }
 
     private static void executeView(String inputParams) {
@@ -330,20 +315,15 @@ public class Parser {
     }
 
     private static void executeList() {
-        int index = 1;
+        boolean areThereExpenses = false;
         if (!Storage.checkOpenTrip()) {
-            for (Trip trip : Storage.getListOfTrips()) {
-                Ui.printTripsInList(trip, index);
-                index++;
-            }
+            Ui.printAllTrips();
         } else {
-            for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
-                Ui.printExpensesInList(expense, index);
-                index++;
-            }
-            if (index == 1) {
-                Ui.printNoExpensesError();
-            }
+            Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
+            areThereExpenses = true;
+        }
+        if (!areThereExpenses) {
+            Ui.printNoExpensesError();
         }
     }
 
@@ -351,9 +331,6 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
-        //Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded,
-        //        expenseDescription, currTrip.getExchangeRate());
-        //newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
@@ -372,7 +349,7 @@ public class Parser {
     protected static void updateIndividualSpending(Expense expense) {
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
-        Person payer = checkValidPersonInExpense(input, expense);
+        Person payer = getValidPersonInExpenseFromString(input, expense);
         if (payer != null) {
             expense.setPayer(payer);
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
@@ -415,7 +392,7 @@ public class Parser {
         }
     }
 
-    private static Person checkValidPersonInExpense(String name, Expense expense) {
+    private static Person getValidPersonInExpenseFromString(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {
             if (name.equalsIgnoreCase(person.getName())) {
                 return person;
@@ -456,7 +433,7 @@ public class Parser {
 
     private static void executeAmount(String name) {
         Trip trip = Storage.getOpenTrip();
-        Person toBeChecked = checkValidPersonInTrip(name, trip);
+        Person toBeChecked = getValidPersonInTripFromString(name, trip);
         if (toBeChecked == null) {
             Ui.printPersonNotInTrip();
         } else {
@@ -464,7 +441,7 @@ public class Parser {
         }
     }
 
-    private static Person checkValidPersonInTrip(String name, Trip trip) {
+    private static Person getValidPersonInTripFromString(String name, Trip trip) {
         for (Person person : trip.getListOfPersons()) {
             if (name.equalsIgnoreCase(person.getName())) {
                 return person;

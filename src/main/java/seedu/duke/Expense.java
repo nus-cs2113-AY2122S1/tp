@@ -22,7 +22,8 @@ public class Expense {
     private LocalDate date;
     private Person payer;
     private HashMap<Person, Double> amountSplit = new HashMap<>();
-    private static final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private double exchangeRate;
 
     /**
@@ -130,7 +131,7 @@ public class Expense {
         if (inputDate.isEmpty()) {
             return LocalDate.now();
         }
-        return LocalDate.parse(inputDate, pattern);
+        return LocalDate.parse(inputDate, inputPattern);
     }
 
     private Boolean isDateValid(String date) {
@@ -138,7 +139,7 @@ public class Expense {
             return true;
         }
         try {
-            LocalDate.parse(date, pattern);
+            LocalDate.parse(date, inputPattern);
             return true;
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
@@ -162,7 +163,7 @@ public class Expense {
     public String toString() {
         return (this.getDescription()
                 + System.lineSeparator()
-                + "date: " + this.getDate()
+                + "date: " + this.getStringDate()
                 + System.lineSeparator()
                 + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
@@ -170,7 +171,8 @@ public class Expense {
                 + System.lineSeparator()
                 + "Payer: " + this.getPayer()
                 + System.lineSeparator()
-                + "Category: " + this.category);
+                + "Category: " + this.category)
+                + System.lineSeparator();
     }
 
     //Getters and setters
@@ -201,6 +203,10 @@ public class Expense {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public String getStringDate() {
+        return date.format(outputPattern);
     }
 
     public void setDate(LocalDate date) {

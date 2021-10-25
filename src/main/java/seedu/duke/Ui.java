@@ -37,6 +37,12 @@ public class Ui {
                 val / Storage.getOpenTrip().getExchangeRate());
     }
 
+    public static void printListOfPeople(ArrayList<Person> people) {
+        for (Person person : people) {
+            System.out.println("\t" + person.getName());
+        }
+    }
+
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
     }
@@ -56,19 +62,20 @@ public class Ui {
         System.out.println("Your expense has been added successfully");
     }
 
-    public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: "
-                + stringForeignMoney(expense.getAmountSpent()));
+    public static void printExpensesInList(ArrayList<Expense> listOfExpenses) {
+        for (int i = 0; i < listOfExpenses.size(); i++) {
+            System.out.print("\t");
+            System.out.println(i + 1 + ". "
+                    + listOfExpenses.get(i).getDescription() + " | "
+                    + listOfExpenses.get(i).getStringDate());
+
+        }
     }
 
     public static void printOpenTripMessage(Trip trip) {
         System.out.println("You have opened the following trip: "
                 + System.lineSeparator()
                 + trip.getLocation() + " | " + trip.getDateOfTripString());
-    }
-
-    public static void printTripsInList(Trip trip, int index) {
-        System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
     public static void printCreateFormatError() {
@@ -159,7 +166,7 @@ public class Ui {
         for (int i = 0; i < listOfTrips.size(); i++) {
             System.out.print("\t");
             System.out.println(i + 1 + ". "
-                    + listOfTrips.get(i).getLocation() + " "
+                    + listOfTrips.get(i).getLocation() + " | "
                     + listOfTrips.get(i).getDateOfTripString());
 
         }
@@ -238,9 +245,7 @@ public class Ui {
 
     public static void printPeopleInvolved(ArrayList<Person> personArrayList) {
         System.out.println("These are the people who are involved in the expense: ");
-        for (Person person : personArrayList) {
-            System.out.println(person.getName() + " ");
-        }
+        printListOfPeople(personArrayList);
     }
 
     public static void displayHelp() {
@@ -290,9 +295,14 @@ public class Ui {
         System.out.println(name + " is not part of the trip. "
                 + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
         System.out.println("These are the names of the people who are part of the trip:");
-        for (Person person : Storage.getOpenTrip().getListOfPersons()) {
-            System.out.println(person.getName());
-        }
+        printListOfPeople(Storage.getOpenTrip().getListOfPersons());
     }
+
+    public static void printTripClosed(Trip trip) {
+        System.out.println("You have closed the following trip:"
+                + System.lineSeparator()
+                + trip.getLocation() + " | " + trip.getDateOfTripString());
+    }
+
 
 }

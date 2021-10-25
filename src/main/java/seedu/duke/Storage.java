@@ -32,7 +32,7 @@ public class Storage {
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
-                    "delete", "expense", "quit", "help", "amount"));
+                    "delete", "expense", "quit", "help", "amount", "close"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
             put("USD", new String[] {"$", "%.02f"});
@@ -147,7 +147,9 @@ public class Storage {
     }
 
     public static void closeTrip() {
+        Trip tripToBeClosed = openTrip;
         Storage.openTrip = null;
+        Ui.printTripClosed(tripToBeClosed);
     }
 
     public static Logger getLogger() {
