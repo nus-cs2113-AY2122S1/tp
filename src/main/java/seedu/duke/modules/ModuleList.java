@@ -18,6 +18,8 @@ public class ModuleList {
     public void addModule(Module module) {
         assert module != null;
         list.add(module);
+        list.sort(new Module());
+        assert !list.isEmpty();
     }
 
     public void removeModule(String moduleCode) {
