@@ -21,15 +21,15 @@ class AddModCommandParserTest {
 
     static {
         try {
-            universityMasterList = new UniversityList(storage.readUniversityList());
             moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(storage.readUniversityList());
         } catch (IOException e) {
-             e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     @Test
-    void parse_validModuleCode_expectModuleObject() throws IOException, ParseException {
+    void parse_validModuleCode_expectModuleObject() {
         String moduleCode = "CS1231";
         AddCommandParser acp = new AddCommandParser();
         assertEquals("CS1231", acp.searchForModule(moduleCode, moduleMasterList).getModuleCode());
