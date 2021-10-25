@@ -66,7 +66,7 @@ Displays all commands available for the SchedUrMods application.
 Adds your **todo** task to your task list.
 
 **Format:** `todo <description> [--flag <argument>]`
-- `[description]` specifies the description of your todo.
+- `<description>` specifies the description of your todo.
 - `[--flag <argument>]` specifies additional details of your todo.
   - When your task is to be done: `[--doOn dd-MM-yyyy hh:mm]`
   - The priority of your task: `[--priority high|medium|low]`
@@ -92,7 +92,7 @@ Adds your **todo** task to your task list.
 Adds your **deadline** task to your task list.
 
 **Format:** `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
-- `[description]` specifies the description of your deadline.
+- `<description>` specifies the description of your deadline.
 - `<--due dd-MM-yyyy hh:mm>` is a mandatory flag.
 - `[--flag <argument>]` specifies additional details of your deadline.
   - The priority of your task: `[--priority high|medium|low]`
@@ -118,7 +118,7 @@ Adds your **deadline** task to your task list.
 Adds your **event** task to your task list.
 
 **Format:** `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
-- `[description]` specifies the description of your event.
+- `<description>` specifies the description of your event.
 - `<--start dd-MM-yyyy hh:mm>` and `<--end dd-MM-yyyy hh:mm>` are mandatory flags.
 - `[--flag <argument>]` specifies additional details of your event.
   - The priority of your event: `[--priority high|medium|low]`
