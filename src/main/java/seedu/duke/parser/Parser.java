@@ -45,7 +45,8 @@ public abstract class Parser {
 
     static int parseWorkoutIndex(String commandArgs) throws GetJackDException {
         String arg = commandArgs.trim();
-        int workoutIndex = (Command.workoutMode == 0) ? parseArgsAsIndex(arg) : Command.workoutMode;
+        int workoutIndex = (Command.workoutMode == 0 || !arg.isEmpty()) ? parseArgsAsIndex(arg) :
+                Command.workoutMode;
         return workoutIndex;
     }
 
@@ -53,18 +54,21 @@ public abstract class Parser {
      * For parsing workout and exercise index for "done" and "remove" commands.
      *
      * @param commandArgs command arguments from user, in the format "workoutIndex, exerciseIndex"
+     * @param isEdit      whether this method is being called from a EditExerciseParser or not
      * @return int[2] the indices of workout and exercise
      * @throws GetJackDException when workout or exercise indices are not valid
      */
 
     //1, 1, crunches, 5 10 -> "1", "1", "crunches", "5 10"
-    static int[] parseWorkoutAndExerciseIndex(String commandArgs) throws GetJackDException {
+    static int[] parseWorkoutAndExerciseIndex(String commandArgs, boolean isEdit) throws GetJackDException {
         String[] args = commandArgs.split(PARAMETER_SEPARATOR);
         if ((args.length < 2 && Command.workoutMode == 0) || args.length < 1) {
             throw new GetJackDException("Error. Missing workout parameters");
         }
         int exerciseIndex = parseArgsAsIndex(args[0]);
-        int workoutIndex = (Command.workoutMode == 0) ? parseArgsAsIndex(args[1]) : Command.workoutMode;
+        int lengthForItToContainWorkoutIndex = (isEdit) ? 3 : 1;
+        int workoutIndex = (Command.workoutMode == 0 || args.length > lengthForItToContainWorkoutIndex)
+                ? parseArgsAsIndex(args[1]) : Command.workoutMode;
         int[] indices = {exerciseIndex, workoutIndex};
         return indices;
     }
@@ -112,6 +116,7 @@ public abstract class Parser {
      * commandArgs passed in as [exercise description], [sets and reps], [workout index or name]
      *
      * @param commandArgs user input without the command word.
+     * @param isEdit      whether this function was called for the EditExerciseParser or not
      * @return string array containing workoutIndex, exerciseName, sets and reps.
      * @throws GetJackDException if any of the above-mentioned arguments are empty.
      */
@@ -121,11 +126,9 @@ public abstract class Parser {
         }
 
         String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
-        if (!isEdit) {
-            if ((arguments.length < 3 && Command.workoutMode == 0) || arguments.length < 2) {
-                LOGGER.info("Missing exercise arguments");
-                throw new GetJackDException("Error. Missing exercise parameters");
-            }
+        if (!isEdit && ((arguments.length < 3 && Command.workoutMode == 0) || arguments.length < 2)) {
+            LOGGER.info("Missing exercise arguments");
+            throw new GetJackDException("Error. Missing exercise parameters");
         }
 
         try {
@@ -134,19 +137,31 @@ public abstract class Parser {
             String sets = setsAndReps[0];
             String reps = setsAndReps[1];
             String workoutIdentifier;
-            if (!isEdit) {
-                workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
-            } else {
-                workoutIdentifier = String.valueOf(EditExerciseParser.getWorkoutIndex());
-            }
-            String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
+            workoutIdentifier = getWorkoutIdentifier(arguments, isEdit);
 
-            return exerciseArgs;
+            return new String[]{exerciseDescription, sets, reps, workoutIdentifier};
 
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.info("Missing exercise arguments");
             throw new GetJackDException("Error. Missing sets or reps parameters");
         }
+    }
+
+    /**
+     * returns the index of the workout included in the parameters in the format of a string.
+     * If this function was called for the EditExerciseParser or if the user has currently entered
+     * a workout then the workout index of the workout being edited or entered is returned.
+     *
+     * @param arguments array of Strings consisting all the arguments input by user
+     * @param isEdit    whether this function was called for the EditExerciseParser or not
+     * @return index of workout in String format extracted from the arguments
+     */
+    private static String getWorkoutIdentifier(String[] arguments, boolean isEdit) {
+        if (isEdit) {
+            return String.valueOf(EditExerciseParser.getWorkoutIndex());
+        }
+        return (Command.workoutMode == 0 || arguments.length > 2) ? arguments[2] :
+                String.valueOf(Command.workoutMode);
     }
 
     /**

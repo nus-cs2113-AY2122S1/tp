@@ -20,8 +20,7 @@ public class AddExerciseParser extends Parser {
             String exerciseName = exerciseArgs[0].trim();
             int sets = parseArgsAsIndex(exerciseArgs[1]);
             int reps = parseArgsAsIndex(exerciseArgs[2]);
-            int workoutIndex = (Command.workoutMode == 0)
-                    ? parseArgsAsIndex(exerciseArgs[3]) : Command.workoutMode;
+            int workoutIndex = parseArgsAsIndex(exerciseArgs[3]);
             return new AddExerciseCommand(workoutIndex, exerciseName, sets, reps);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + AddExerciseCommand.MESSAGE_USAGE);

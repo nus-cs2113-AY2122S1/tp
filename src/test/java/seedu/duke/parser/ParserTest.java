@@ -62,7 +62,7 @@ class ParserTest {
     void getExerciseArgs_missingWorkoutIndexWhenInsideWorkout_returnsStringWithExerciseArgs() throws GetJackDException {
         String input = "exercise, 5 20";
         Command.workoutMode = 1;
-        assertArrayEquals(new String[]{"exercise", "5", "20", null}, getExerciseArgs(input, false));
+        assertArrayEquals(new String[]{"exercise", "5", "20", "1"}, getExerciseArgs(input, false));
     }
 
     @Test
@@ -73,10 +73,10 @@ class ParserTest {
     }
 
     @Test
-    void parseWorkoutIndex_inputWhenInsideAWorkout_returnsWorkoutMode() throws GetJackDException {
+    void parseWorkoutIndex_inputWhenInsideAWorkout_returnsCorrectWorkoutIndex() throws GetJackDException {
         String input = " 2 ";
         Command.workoutMode = 1;
-        assertEquals(1, parseWorkoutIndex(input));
+        assertEquals(2, parseWorkoutIndex(input));
     }
 
     @Test
@@ -86,8 +86,8 @@ class ParserTest {
     }
 
     @Test
-    void parseWorkoutIndex_invalidStringWhenInsideAWorkout_returnsWorkoutMode() throws GetJackDException {
-        String input = " a ";
+    void parseWorkoutIndex_emptyStringWhenInsideAWorkout_returnsWorkoutMode() throws GetJackDException {
+        String input = "";
         Command.workoutMode = 2;
         assertEquals(2, parseWorkoutIndex(input));
     }
@@ -95,7 +95,7 @@ class ParserTest {
     @Test
     void parseWorkoutAndExerciseIndex_validInput_returnWorkoutAndExerciseIndices() throws GetJackDException {
         String input = " 2, 3";
-        assertArrayEquals(new int[]{2, 3}, parseWorkoutAndExerciseIndex(input));
+        assertArrayEquals(new int[]{2, 3}, parseWorkoutAndExerciseIndex(input,false));
     }
 
     @Test
@@ -103,22 +103,22 @@ class ParserTest {
             throws GetJackDException {
         String input = " 2";
         Command.workoutMode = 1;
-        assertArrayEquals(new int[]{2, 1}, parseWorkoutAndExerciseIndex(input));
+        assertArrayEquals(new int[]{2, 1}, parseWorkoutAndExerciseIndex(input,false));
     }
 
     @Test
     void parseWorkoutAndExerciseIndex_noInputWhenInsideWorkout_throwsGetJackdException() {
         String input = "";
         Command.workoutMode = 1;
-        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex(input));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex(input,false));
     }
 
     @Test
     void parseWorkoutAndExerciseIndex_invalidInputs_throwsException() {
-        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex(""));
-        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("a"));
-        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2 2"));
-        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2,"));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("",false));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("a",false));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2 2",false));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2,",false));
     }
 
     @Test

@@ -75,4 +75,12 @@ class AddExerciseParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof AddExerciseCommand);
     }
+    
+    @Test
+    void parseInput_workoutIndexInputWhenInsideWorkout_returnsCorrectAddExerciseCommand() {
+        Command.workoutMode = 1;
+        parser = new AddExerciseParser("add test, 5 5, 2");
+        AddExerciseCommand check = (AddExerciseCommand) parser.parseInput();
+        assertEquals(2,check.getWorkoutIndex());
+    }
 }

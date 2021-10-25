@@ -7,6 +7,7 @@ import seedu.duke.command.exercise.DisplayExercisesCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -74,5 +75,13 @@ class MarkExerciseAsDoneParserTest {
         parser = new MarkExerciseAsDoneParser("done 1");
         result = parser.parseInput();
         assertTrue(result instanceof MarkExerciseAsDoneCommand);
+    }
+    
+    @Test
+    void parseInput_workoutIndexInputWhileInsideWorkout_returnsCorrectMarkExerciseAsDoneCommand() {
+        Command.workoutMode = 1;
+        parser = new MarkExerciseAsDoneParser("done 1, 2");
+        MarkExerciseAsDoneCommand check = (MarkExerciseAsDoneCommand) parser.parseInput();
+        assertEquals(2,check.getWorkoutIndex());
     }
 }

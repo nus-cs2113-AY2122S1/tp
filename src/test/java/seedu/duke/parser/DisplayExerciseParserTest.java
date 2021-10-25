@@ -49,4 +49,12 @@ class DisplayExerciseParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof DisplayExercisesCommand);
     }
+    
+    @Test
+    void parseInput_workoutIndexInputWhenInsideWorkout_returnsCorrectDisplayExerciseCommand() {
+        Command.workoutMode = 1;
+        parser = new DisplayExerciseParser("display 2");
+        DisplayExercisesCommand check = (DisplayExercisesCommand) parser.parseInput();
+        assertEquals(2,check.getWorkoutIndex());
+    }
 }
