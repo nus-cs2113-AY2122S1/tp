@@ -1,4 +1,4 @@
-![Ha(ppy)Bit Logo](Display Images/Ha(ppy)Bit_logo.png)
+![Ha(ppy)Bit Logo](Display_Images/Ha(ppy)Bit_logo.png)
 
 # Howdy! This is Ha(ppy)Bit.
 _Ha(ppy)Bit_ is a desktop app aimed to **empower students** to improve their **well-being**,
