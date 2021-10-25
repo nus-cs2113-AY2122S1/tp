@@ -77,13 +77,15 @@ The `Storage` class is responsible for the reading and writing of *Food-O-Rama* 
 ![](images/storage_load_sequence.png)
 
 * At the start of the program, Duke calls `Storage.load()`
-  * This method in the `Storage` class is responsible for invoking `loadIngredients()` and `loadDishes()`
+  * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()` and `loadFormat()`
 * After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and is added to the active
 ArrayList, `IngredientList.ingredientList`
 * Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to the active
   ArrayList, `DishList.dishList`
+* Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is saved along with examples
+  * This is present in the load method as opposed to the write method as it only needs to be called once per run of *Food-O-Rama*
   
-❕ *Note: `dishes.txt` and `ingredients.txt` can be found in the `data` folder from the root directory.*    
+❕ *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*    
 
 #### Saving Data
 ![](images/storage_write_sequence.png)
@@ -95,9 +97,12 @@ ArrayList, `IngredientList.ingredientList`
 
 * ❕ **Save Formats:**
   * Dishes
-    * `DISH_NAME | DISH_WASTAGE | INGREDIENTS_LINKED`
+    * `DISH_NAME | DISH_WASTAGE | DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS | LIMIT | INGREDIENTS_LINKED`
+    * ❕ Limit is -1 if limit has not been defined
+    * ❕ DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS is DISH_WASTAGE if no ingredients have been linked
   * Ingredients
-    * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE`
+    * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE | LIMIT`
+    * ❕ Limit is -1 if limit has not been defined
 
 ### Data Structures
 
