@@ -62,7 +62,7 @@ public class EditContactCommand extends Command {
         TextUi.editContactMessage(postEditContact);
     }
 
-
+    //@@author ashrafjfr
     private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
@@ -90,16 +90,6 @@ public class EditContactCommand extends Command {
             return userEditConfirmation.equalsIgnoreCase("n");
         }
         return false;
-    }
-
-    private Contact duplicateContact(Contact contact) {
-        String name = contact.getName();
-        String github = contact.getGithub();
-        String linkedin = contact.getLinkedin();
-        String telegram = contact.getTelegram();
-        String twitter = contact.getTwitter();
-        String email = contact.getEmail();
-        return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 
     private boolean[] hasEditedFields(String[] contactDetails) {
@@ -146,5 +136,16 @@ public class EditContactCommand extends Command {
             }
         }
         return contactDetails;
+    }
+
+    //@@author ng-andre
+    private Contact duplicateContact(Contact contact) {
+        String name = contact.getName();
+        String github = contact.getGithub();
+        String linkedin = contact.getLinkedin();
+        String telegram = contact.getTelegram();
+        String twitter = contact.getTwitter();
+        String email = contact.getEmail();
+        return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 }
