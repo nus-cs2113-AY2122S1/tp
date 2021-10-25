@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public static void goodBye() {
-        System.out.println("Goodbye!");
+        System.out.println("Exiting the program now. Goodbye!");
     }
 
 

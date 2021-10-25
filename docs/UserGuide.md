@@ -21,6 +21,19 @@ some code block
 
 ## Features 
 
+### Saving your data
+
+By default, the program attempts to save your data each time after you run a command. This includes
+the `quit` command.
+
+If the save attempt is unsuccessful, you will see this error message:
+
+```
+//error message not yet determined
+```
+
+and the program will attempt to save again the next time you run a command.
+
 ### Trips
 
 #### Create New Trip

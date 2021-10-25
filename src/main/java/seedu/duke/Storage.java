@@ -64,7 +64,6 @@ public class Storage {
             put("MXN", new String[] {"$", "%.0f"});
             put("TWD", new String[] {"NT$", "%.0f"});
             put("HUF", new String[] {"Ft", "%.0f"});
-            put("CZK", new String[] {"Kč", "%.0f"});
             put("CLP", new String[] {"$", "%.0f"});
             put("PHP", new String[] {"₱", "%.0f"});
             put("AED", new String[] {"د.إ", "%.0f"});
@@ -109,6 +108,7 @@ public class Storage {
             Ui.printJsonParseUserInputPrompt();
             String input = scanner.nextLine().strip();
             if (input.contains("n")) {
+                Ui.goodBye();
                 Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
                 System.exit(1);
                 return;
