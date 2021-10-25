@@ -175,8 +175,8 @@ public class Scheduler {
      *
      * @return String containing information of all patients.
      */
-    public String listPatients() {
-        return patientList.listPersons();
+    public String listPatients(boolean getArchivedPatients) {
+        return patientList.listPersons(getArchivedPatients);
     }
 
     /**
@@ -184,8 +184,8 @@ public class Scheduler {
      *
      * @return String containing information of all staff.
      */
-    public String listStaff() {
-        return medicalStaffList.listPersons();
+    public String listStaff(boolean getArchivedStaffs) {
+        return medicalStaffList.listPersons(getArchivedStaffs);
     }
 
     /**

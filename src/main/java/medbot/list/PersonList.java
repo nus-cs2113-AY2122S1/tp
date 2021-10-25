@@ -129,15 +129,18 @@ public abstract class PersonList extends MedBotList {
     }
 
     /**
-     * Returns a String that contains information of all persons.
+     * Returns a String that contains information of all archived or unarchived persons.
      *
-     * @return String that contains information of all persons
+     * @param getArchivedPersons The boolean to indicate whether to get archived or unarchived persons.
+     * @return String that contains information of all archived or unarchived persons
      */
-    public String listPersons() {
+    public String listPersons(boolean getArchivedPersons) {
         String output = "";
 
         for (int key : persons.keySet()) {
-            output += persons.get(key).getInfoInTableFormat() + END_LINE;
+            if (persons.get(key).isArchived() == getArchivedPersons) {
+                output += persons.get(key).getInfoInTableFormat() + END_LINE;
+            }
         }
 
         return output;

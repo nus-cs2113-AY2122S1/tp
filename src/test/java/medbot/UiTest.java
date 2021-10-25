@@ -110,7 +110,7 @@ class UiTest {
             + " ----------------------------------------------------------------------------------------------------- "
             + END_LINE;
 
-        assertEquals(PatientUi.getAllPatientsString(patientList.listPersons()), expectedOutput);
+        assertEquals(PatientUi.getAllPatientsString(patientList.listPersons(false)), expectedOutput);
     }
 
     @Test

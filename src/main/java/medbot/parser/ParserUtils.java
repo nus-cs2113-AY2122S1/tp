@@ -1,5 +1,11 @@
 package medbot.parser;
 
+import medbot.Appointment;
+import medbot.exceptions.MedBotParserException;
+import medbot.person.Person;
+import medbot.person.PersonType;
+import medbot.utilities.FilterType;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -10,16 +16,12 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import medbot.Appointment;
-import medbot.exceptions.MedBotParserException;
-import medbot.person.Person;
-import medbot.person.PersonType;
-import medbot.utilities.FilterType;
 
 import static java.util.stream.Collectors.toList;
 
 public abstract class ParserUtils {
     private static final String END_LINE = System.lineSeparator();
+    private static final String PARAMETER_ARCHIVE = "-ar";
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
     private static final String PARAMETER_PATIENT = "p/";
@@ -39,6 +41,7 @@ public abstract class ParserUtils {
     private static final String ERROR_PERSON_TYPE_NOT_SPECIFIED = "Person type not specified.";
     private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
     private static final String ERROR_FILTER_TYPE_INVALID = "Filter type specified is not valid.";
+    private static final String ERROR_PARAMETER_TYPE_INVALID = "Parameter type specified is not valid.";
     private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified.";
     private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified.";
     private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format.";
@@ -371,6 +374,18 @@ public abstract class ParserUtils {
         }
 
         throw new MedBotParserException(ERROR_FILTER_TYPE_INVALID);
+    }
+
+    public static boolean parseListParameter(String attributeString) throws MedBotParserException {
+        if (attributeString.trim().equals(PARAMETER_ARCHIVE)) {
+            return true;
+        }
+
+        if (attributeString.trim().equals(EMPTY_STRING)) {
+            return false;
+        }
+
+        throw new MedBotParserException(ERROR_PARAMETER_TYPE_INVALID);
     }
 
     /**
