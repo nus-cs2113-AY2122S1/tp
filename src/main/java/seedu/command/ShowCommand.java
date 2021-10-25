@@ -2,11 +2,8 @@ package seedu.command;
 
 import seedu.module.Module;
 import seedu.online.NusMods;
-import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
 
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ShowCommand extends Command {
@@ -27,6 +24,8 @@ public class ShowCommand extends Command {
         Module module = NusMods.fetchMod(moduleCode);
         if (module != null) {
             TextUi.printModFullDescription(module);
+        } else {
+            TextUi.printNotFoundMessage();
         }
     }
 }

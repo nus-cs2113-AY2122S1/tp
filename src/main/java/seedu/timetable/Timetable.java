@@ -22,7 +22,7 @@ public class Timetable implements Comparable<Timetable> {
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
 
-    private final int semester;
+    private int semester;
     private int earliestHour;
     private int latestHour;
 
@@ -345,6 +345,11 @@ public class Timetable implements Comparable<Timetable> {
 
     public int getSemester() {
         return semester;
+    }
+
+    public void setSemester(int semester) {
+        assert (semester > 0 && semester < 5);
+        this.semester = semester;
     }
 
     public int getEarliestHour() {
