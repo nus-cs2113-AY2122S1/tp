@@ -10,9 +10,7 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import medbot.Appointment;
-import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Person;
 import medbot.person.PersonType;
@@ -66,8 +64,8 @@ public abstract class ParserUtils {
     private static final String SEPARATOR_SPACE = " ";
     private static final String EMPTY_STRING = "";
 
-    private static final String DATE_TIME_FORMATTER_PATTERN = "d/M/yy HHmm";
-    private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
+    private static final String DATE_TIME_FORMATTER_PATTERN = "ddMMyy HHmm";
+    private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
 
     /**
      * Parses attributeStrings array and modifies all the corresponding attribute in appointment.
@@ -434,6 +432,6 @@ public abstract class ParserUtils {
         } catch (DateTimeParseException dte) {
             throw new MedBotParserException(ERROR_DATE_TIME_WRONG_FORMAT);
         }
-        return (int) (parsedDate.toEpochSecond(zoneOffset) / 60);
+        return (int) (parsedDate.toEpochSecond(ZONE_OFFSET) / 60);
     }
 }
