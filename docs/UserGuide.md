@@ -15,9 +15,10 @@
   10. [Entering into a Workout: `enter`](#10-entering-into-a-workout-enter)
   11. [Exiting from a workout: `back`](#11-exiting-from-a-workout-back)
   12. [Recommend a workout: `recommend`](#12-recommend-a-workout-recommend)
-  13. [Exiting the application: `bye`](#13-exiting-the-application-bye)
-  14. [Saving data](#14-saving-data)
-  15. [Editable data file](#15-editable-data-file)
+  12. [Clearing all workouts/exercises: `clear`](#13-clearing-all-workouts/exercises-clear)
+  13. [Exiting the application: `bye`](#14-exiting-the-application-bye)
+  14. [Saving data](#15-saving-data)
+  15. [Editable data file](#16-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -57,6 +58,7 @@ ________________________________________________________
 ## Features
 
 ### 1. Creating a new workout: `create`
+
 Adds a new workout to the list of workouts. You are free to add a deadline to your workouts too.
 
 Format (without deadline): `create [WORKOUT_DESCRIPTION]`
@@ -90,6 +92,7 @@ ________________________________________________________
 ```
 
 ### 2. Show all workouts: `list`
+
 Shows you all the workouts in the current list of workouts
 
 Usage example:
@@ -108,6 +111,7 @@ ________________________________________________________
 ```
 
 ### 3. Deleting a workout: `delete`
+
 Deletes a workout from the list of workouts
 
 Format: `delete [WORKOUT_INDEX]`
@@ -128,6 +132,7 @@ ________________________________________________________
 ```
 
 ### 4. Adding an exercise to a workout: `add`
+
 Adds an exercise to a specified workout
 
 Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
@@ -150,6 +155,7 @@ ________________________________________________________
 ```
 
 ### 5. Mark an exercise done: `done`
+
 Marks an exercise from a specified workout as done
 
 Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
@@ -168,6 +174,7 @@ ________________________________________________________
 ```
 
 ### 6. Editing an exercise in a workout: `edit`
+
 Edits an exercise in a specified workout
 
 Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
@@ -186,6 +193,7 @@ ________________________________________________________
 ```
 
 ### 7. Show all exercises from a workout: `display`
+
 Shows you all the exercises in a specified workout
 
 Format: `display [WORKOUT_INDEX]`
@@ -206,6 +214,7 @@ ________________________________________________________
 ```
 
 ### 8. Removing an exercise from a workout: `remove`
+
 Removes an exercise from a specified workout
 
 Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
@@ -224,13 +233,15 @@ ________________________________________________________
 ```
 
 ### 9. Searching for workouts and exercises: `search`
+
 Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.\n"
 
 Format: `search [KEYWORD]`
 
-Example of usage: 
+Example of usage:
 
 `search kickbacks` = search for workout names and exercise names that contain "kickbacks"
+
 `search leg day` = search for workout names and exercise names that contain "leg day"
 
 Expected outcome:
@@ -249,16 +260,20 @@ ________________________________________________________
 ```
 
 ### 10. Entering into a Workout: `enter`
+
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
 Format: `enter [WORKOUT_INDEX]`
 
 Example of usage:
-* `enter 1` = enter into the workout with index 1
-* `enter 2` = enter into the workout with index 2
+
+`enter 1` = enter into the workout with index 1
+
+`enter 2` = enter into the workout with index 2
 
 ### 11. Exiting from a workout: `back`
+
 Allows you to exit back into the main view once you have entered into a workout.
 
 Format `back`
@@ -336,7 +351,36 @@ __________________________________
 ________________________________________________________
 ```
 
-### 13. Exiting the application: `bye`
+### 13. Clearing all workouts/exercises: `clear`
+
+Helps you to remove all the exercises in a specified workout or all workouts in the application in one
+go.
+
+Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
+
+Note: Include WORKOUT_INDEX only when you want to clear exercises.
+
+Example of usage: 
+
+`clear exercise 1` - Clears all the exercises present inside workout 1
+
+`clear workout` - Clears all the workouts present in the application
+
+Expected outcome:
+
+```
+clear exercise 1
+________________________________________________________
+All exercises in workout 1 have been cleared!
+________________________________________________________
+
+clear workout
+________________________________________________________
+All workouts have been cleared!
+________________________________________________________
+```
+
+### 14. Exiting the application: `bye`
 
 Allows you to exit from the application.
 
@@ -350,13 +394,13 @@ Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
 ```
 
-### 14. Saving data
+### 15. Saving data
 
 GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
 or editing workouts and exercises). There is no need to
 save manually.
 
-### 15. Editable data file
+### 16. Editable data file
 
 GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
 directly by editing that data file.
@@ -389,4 +433,5 @@ saved file format (json), GetJack'd will not run.
 | Exit workout                                     | Example: `back`                                                                                          |
 | Help                                             | Format: `help [COMMAND_WORD]` <br />Example: `help add`                                                    |
 | Search                                           | Format: `search [KEYWORD]` <br />Example: `search legs`                                                    |
+| Clear                                           | Format: `clear [exercise/ workout] [WORKOUT_INDEX]` <br />Example: `clear exercise 1` <br />Example: `clear workout`                                               |
 | Exit                                             | Example: `bye`                                                                                           |
