@@ -317,10 +317,7 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
-            for (Trip trip : Storage.getListOfTrips()) {
-                Ui.printTripsInList(trip, index);
-                index++;
-            }
+            Ui.printAllTrips();
         } else {
             for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
                 Ui.printExpensesInList(expense, index);

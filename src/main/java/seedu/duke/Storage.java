@@ -147,7 +147,9 @@ public class Storage {
     }
 
     public static void closeTrip() {
+        Trip tripToBeClosed = openTrip;
         Storage.openTrip = null;
+        Ui.printTripClosed(tripToBeClosed);
     }
 
     public static Logger getLogger() {
