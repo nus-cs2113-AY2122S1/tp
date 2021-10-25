@@ -118,12 +118,13 @@ public class Expense {
 
 
     public void setAmountSplit(Person person, double amount) {
-            amountSplit.put(person.getName(), amount);
+        amountSplit.put(person.getName(), amount);
     }
 
     public HashMap<String, Double> getAmountSplit() {
         return amountSplit;
     }
+
     /**
      * Prompts user for date.
      *
