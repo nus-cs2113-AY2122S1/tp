@@ -57,6 +57,9 @@ public class Trip {
             case "payer":
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
+            case "person":
+                findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
+                break;
             default:
                 Ui.printInvalidFilterError();
                 break;
@@ -85,11 +88,8 @@ public class Trip {
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
         boolean areThereExpenses = false;
-        String descriptionToLowerCase;
-        String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
-            descriptionToLowerCase = e.getDescription().toLowerCase();
-            if (descriptionToLowerCase.contains(attributeToLowerCase)) {
+            if (e.getPayer().getName().equalsIgnoreCase(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 areThereExpenses = true;
@@ -105,6 +105,29 @@ public class Trip {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equalsIgnoreCase(expenseAttribute)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+                areThereExpenses = true;
+            }
+        }
+        if (!areThereExpenses) {
+            Ui.printNoMatchingExpenseError();
+        }
+    }
+
+    private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
+                                                   String personToSearchFor) {
+        boolean areThereExpenses = false;
+        for (Expense e : listOfCurrentExpenses) {
+            boolean isExpenseToBeAdded = false;
+            ArrayList<Person> personList = e.getPersonsList();
+            for (Person p : personList) {
+                if (p.getName().equalsIgnoreCase(personToSearchFor)) {
+                    isExpenseToBeAdded = true;
+                    break;
+                }
+            }
+            if (isExpenseToBeAdded) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 areThereExpenses = true;
@@ -201,7 +224,6 @@ public class Trip {
         }
         return totalExpense;
     }
-
 
 
     public String getForeignCurrency() {

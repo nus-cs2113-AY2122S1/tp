@@ -8,12 +8,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-
-/**
- * Constructor requires a Person class which is the user, amount spent, and a description.
- * printDate prints out a nicely formatted date.
- * getExpenseSummary assumes user pays the bill first, and expense is equally split among his friends.
- */
 public class Expense {
     private double amountSpent;
     private String description;
@@ -29,11 +23,11 @@ public class Expense {
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent (placeholder)
-     * @param category (placeholder)
+     * @param amountSpent   (placeholder)
+     * @param category      (placeholder)
      * @param listOfPersons (placeholder)
-     * @param description (placeholder)
-     * @param exchangeRate (placeholder)
+     * @param description   (placeholder)
+     * @param exchangeRate  (placeholder)
      */
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
                    String description, double exchangeRate) {

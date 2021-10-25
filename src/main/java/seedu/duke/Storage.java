@@ -35,21 +35,21 @@ public class Storage {
                     "delete", "expense", "quit", "help", "amount", "close"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
-            put("USD", new String[] {"$", "%.02f"});
-            put("SGD", new String[] {"$", "%.02f"});
-            put("AUD", new String[] {"$", "%.02f"});
-            put("CAD", new String[] {"$", "%.02f"});
-            put("EUR", new String[] {"€", "%.02f"});
-            put("GBP", new String[] {"£", "%.02f"});
-            put("MYR", new String[] {"RM", "%.02f"});
-            put("HKD", new String[] {"$", "%.02f"});
-            put("THB", new String[] {"฿", "%.02f"});
-            put("CNY", new String[] {"¥", "%.0f"});
-            put("JPY", new String[] {"¥", "%.0f"});
-            put("KRW", new String[] {"₩", "%.0f"});
-            put("IDR", new String[] {"Rp", "%.0f"});
-            put("INR", new String[] {"Rs", "%.0f"});
-        }};
+        put("USD", new String[]{"$", "%.02f"});
+        put("SGD", new String[]{"$", "%.02f"});
+        put("AUD", new String[]{"$", "%.02f"});
+        put("CAD", new String[]{"$", "%.02f"});
+        put("EUR", new String[]{"€", "%.02f"});
+        put("GBP", new String[]{"£", "%.02f"});
+        put("MYR", new String[]{"RM", "%.02f"});
+        put("HKD", new String[]{"$", "%.02f"});
+        put("THB", new String[]{"฿", "%.02f"});
+        put("CNY", new String[]{"¥", "%.0f"});
+        put("JPY", new String[]{"¥", "%.0f"});
+        put("KRW", new String[]{"₩", "%.0f"});
+        put("IDR", new String[]{"Rp", "%.0f"});
+        put("INR", new String[]{"Rs", "%.0f"});
+    }};
 
     public static HashMap<String, String[]> getAvailableCurrency() {
         return availableCurrency;
@@ -67,7 +67,8 @@ public class Storage {
         try {
             Scanner scanner = new Scanner(file);
             String jsonString = scanner.nextLine();
-            Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
+            Type tripType = new TypeToken<ArrayList<Trip>>() {
+            }.getType();
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
@@ -178,6 +179,13 @@ public class Storage {
 
     public static void setLastExpense(Expense lastExpense) {
         Storage.lastExpense = lastExpense;
+    }
+
+    public static Boolean isListOfTripsEmpty() {
+        if (listOfTrips.size() == 0) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -6,6 +6,8 @@ import java.util.logging.Level;
 
 public class Parser {
 
+    private static final double EPSILON = 0.001;
+
     /**
      * Parses the user-entered command and additional information/flags.
      *
@@ -48,10 +50,9 @@ public class Parser {
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
      * for further updates.
      *
-     *
      * @param inputCommand Valid command executed by the user
-     * @param inputParams Additional information appended to the command by the user
-     *                    (inputParams are not checked and may not be valid)
+     * @param inputParams  Additional information appended to the command by the user
+     *                     (inputParams are not checked and may not be valid)
      */
     private static void handleValidCommands(String inputCommand, String inputParams) {
         switch (inputCommand) {
@@ -126,7 +127,7 @@ public class Parser {
         try {
             executeAmount(inputParams);
         } catch (NullPointerException e) {
-            Ui.printPersonNotInTrip();
+            Ui.invalidArgForAmount();
         }
     }
 
@@ -350,6 +351,9 @@ public class Parser {
     }
 
     protected static void updateIndividualSpending(Expense expense) {
+        boolean isEqualSplitPromptDisplayed = false;
+        boolean isLogDisplayed = false;
+
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = getValidPersonInExpenseFromString(input, expense);
@@ -358,7 +362,20 @@ public class Parser {
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
+                if (!isEqualSplitPromptDisplayed) {
+                    Ui.equalSplitPrompt();
+                    isEqualSplitPromptDisplayed = true;
+                }
                 double amountRemaining = expense.getAmountSpent() - total;
+                if (Math.abs(amountRemaining) < EPSILON) {
+                    amountBeingPaid.put(person, 0d);
+                    if (!isLogDisplayed) {
+                        Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
+                        Ui.autoAssignIndividualSpending();
+                        isLogDisplayed = true;
+                    }
+                    continue;
+                }
                 Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
@@ -434,11 +451,11 @@ public class Parser {
         }
     }
 
-    private static void executeAmount(String name) {
+    private static void executeAmount(String inputParams) {
         Trip trip = Storage.getOpenTrip();
-        Person toBeChecked = getValidPersonInTripFromString(name, trip);
+        Person toBeChecked = getValidPersonInTripFromString(inputParams, trip);
         if (toBeChecked == null) {
-            Ui.printPersonNotInTrip();
+            Ui.invalidArgForAmount();
         } else {
             Ui.printAmount(toBeChecked, trip);
         }
@@ -456,7 +473,6 @@ public class Parser {
     private static boolean checkValidCommand(String inputCommand) {
         return Storage.getValidCommands().contains(inputCommand);
     }
-
 
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
