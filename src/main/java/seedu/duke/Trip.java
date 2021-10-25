@@ -329,7 +329,7 @@ public class Trip {
         }
         for (Person person : listOfPeople) {
             for (Person personToAdd : listOfPeople) {
-                person.getMoneyOwed().put(personToAdd, 0.0);
+                person.getMoneyOwed().put(personToAdd.getName(), 0.0); // Remove .getName()
             }
         }
         return listOfPeople;
