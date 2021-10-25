@@ -90,6 +90,7 @@ The ModuleMapping class consists of two modules, local and mapped module. It rep
 an available pair of module mapping in the user's SEP application. 
 
 ### Parser Component
+<img src="images/Parser.png" width="280"/>
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
