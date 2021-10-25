@@ -17,11 +17,11 @@ public class Ui {
         StringBuilder namePadding = stringPadder(mod.getModuleName(), PaddingType.MODULENAME);
         String output;
         if (printMC) {
-            output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR +
-                    mod.getModuleName() + namePadding + mod.getModuleCredits();
+            output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR
+                    + mod.getModuleName() + namePadding + mod.getModuleCredits();
         } else {
-            output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR +
-                    mod.getModuleName();
+            output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR
+                    + mod.getModuleName();
         }
         out.println(output);
     }
