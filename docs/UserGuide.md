@@ -86,9 +86,9 @@ me: Displays all details for personal contact.
 rm: Deletes the index specified contact.
  Parameter: INDEX
  Note: Index starts from 0.
-       "-rf" is used as the INDEX to delete all contacts.
+       "all" is used as the INDEX to delete all contacts.
  Examples: rm 0
-           rm -rf
+           rm all
 
 search: Search for a contact containing a specified query.
  Note: Flags may be used to specify a detail type to search.
@@ -159,7 +159,7 @@ Usages:
 * The index refers to the index number shown in the displayed contact list.
 * The index must be within the range of indexes displayed in the contact list _(zero-based)_.
   
-`rm -rf`
+`rm all`
 * Deletes all contacts in the ConTech Book
 
 Expected outcome of usages:
@@ -185,7 +185,7 @@ ____________________________________________________________
 * Remove all contacts:
 
 ```
-rm -rf
+rm all
 ____________________________________________________________
 Delete all of your contacts?  (y/n)
 ____________________________________________________________
@@ -223,8 +223,8 @@ ____________________________________________________________
 
 Action | Format | Examples
 --------|------------|---------
-|  |
-|  |
+View personal contact|`me`| `me`
+Delete contact|`rm INDEX` <br /> `rm all`| `rm 0` <br /> `rm all`
 |  |
 
 
