@@ -110,7 +110,7 @@ public class Dish implements Comparable<Dish> {
         }
         return dishName + System.lineSeparator()
                 + "   Wastage: " + wastage + " kg" + System.lineSeparator()
-                + "   Parts: " + partList;
+                + "   Ingredients Linked: " + partList;
     }
 
     public String toGraph(double max) {
