@@ -39,7 +39,7 @@ public class ParserTest {
                 + "3. List all your recipes: listRecipes" + System.lineSeparator()
                 + "4. Find a recipe: find \"Keyword\"" + System.lineSeparator()
                 + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
-                +"6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
+                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
                 + System.lineSeparator()
                 + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel "
                 + System.lineSeparator()
