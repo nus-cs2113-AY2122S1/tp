@@ -33,10 +33,8 @@ public abstract class ParserUtils {
     private static final String PARAMETER_AFTER = "a/";
     private static final int PARAMETER_BUFFER = 2;
     private static final String PARAMETER_APPOINTMENT_PATIENT_ID = "p/";
-    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1 = "m/";
-    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2 = "s/";
-    private static final String PARAMETER_APPOINTMENT_DATE_TIME_1 = "d/";
-    private static final String PARAMETER_APPOINTMENT_DATE_TIME_2 = "t/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID = "s/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME = "d/";
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
     private static final String ERROR_NO_PARAMETER = "No parameters given";
     private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
@@ -100,14 +98,12 @@ public abstract class ParserUtils {
             appointment.setPatientId(patientId);
             return;
         }
-        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1)
-                || attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2)) {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID)) {
             int medicalStaffId = parseId(attributeString.substring(PARAMETER_BUFFER));
             appointment.setMedicalStaffId(medicalStaffId);
             return;
         }
-        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_1)
-                || attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_2)) {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME)) {
             int dateTimeCode = parseDateTime(attributeString.substring(PARAMETER_BUFFER).strip());
             appointment.setDateTimeCode(dateTimeCode);
         }
