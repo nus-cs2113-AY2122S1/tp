@@ -63,7 +63,8 @@ public class UpdateCommand extends Command {
                 executeResult = "please follow the format closely"
                         + System.lineSeparator() + "returning to main page...";
             } catch (DukeException e) {
-                executeResult = e.getMessage();
+                executeResult = e.getMessage()
+                        + System.lineSeparator() + "returning to main page...";
             }
         }
         return new CommandResult(executeResult);
@@ -107,7 +108,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(DESCRIPTION_FLAG)) {
                 taskToBeUpdated.setDescription(attribute[1]);
             } else if (update.contains(MEMBER_FLAG)) {
-                updateMember(attribute[1], taskToBeUpdated);
+                updateMember(taskToBeUpdated);
             } else {
                 System.out.println("invalid Command!");
             }
@@ -115,10 +116,27 @@ public class UpdateCommand extends Command {
         Ui.printLineBreak();
     }
 
-    private void updateMember(String index, Task taskToBeUpdated) {
+    private void updateMember(Task taskToBeUpdated) throws DukeException {
         System.out.println("Please key in the update for the Members Name");
-        String userInput = Ui.readInput();
-        taskToBeUpdated.getFromMemberList(Integer.parseInt(index) - 1).setName(userInput);
+        Ui.promptForMemberIndex();
+        boolean isCorrectMember = false;
+        while (!isCorrectMember) {
+            try {
+                Ui.printMemberRoster();
+                Ui.printLineBreak();
+                int memberIndex = Integer.parseInt(Ui.readInput());
+                Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(taskToBeUpdated);
+                Duke.memberRoster.get(memberIndex - 1).sortTasks();
+                taskToBeUpdated.addMember(Duke.memberRoster.get(memberIndex - 1));
+                isCorrectMember = true;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("This member does not exist. Please enter the index corresponding to "
+                        + "the correct member. ");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number corresponding to the member "
+                        + "you want to assign this task to. ");
+            }
+        }
     }
 
     private void updateTaskIntroMessage() {
