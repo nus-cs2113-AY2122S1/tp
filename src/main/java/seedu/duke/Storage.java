@@ -12,11 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.logging.Level;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class Storage {
@@ -77,7 +74,7 @@ public class Storage {
     }
 
     protected static void writeToFile() throws IOException {
-        String jsonString = new Gson().toJson(listOfTrips);
+        String jsonString = FileStorage.getGson().toJson(listOfTrips);
         FileStorage.writeToFile(jsonString);
     }
 
@@ -85,8 +82,8 @@ public class Storage {
         try {
             String jsonString = FileStorage.readFromFile();
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
-            listOfTrips = new Gson().fromJson(jsonString, tripType);
-        } catch (JsonParseException e) {
+            listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
+        } catch (JsonParseException | NoSuchElementException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
         } catch (FileNotFoundException e) {
@@ -98,6 +95,7 @@ public class Storage {
     private static void tryCreateNewFile() {
         try {
             FileStorage.newBlankFile();
+            Ui.newFileSuccessfullyCreated();
         } catch (IOException ex) {
             Ui.printCreateFileFailure();
             System.exit(1);

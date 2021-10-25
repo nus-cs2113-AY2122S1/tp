@@ -295,6 +295,10 @@ public class Ui {
         System.out.println("The save file could not be created. Exiting the program now...");
     }
 
+    public static void newFileSuccessfullyCreated() {
+        System.out.println("A new save file has been created!");
+    }
+
     public static void printInvalidPerson(String name) {
         System.out.println(name + " is not part of the trip. "
                 + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
