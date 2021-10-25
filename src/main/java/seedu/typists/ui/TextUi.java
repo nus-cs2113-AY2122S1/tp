@@ -80,8 +80,8 @@ public class TextUi {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println(DIVIDER);
+    public void line() {
+        printScreen(DIVIDER);
     }
 
     /**
@@ -98,7 +98,7 @@ public class TextUi {
     }
 
     public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+        printScreen("Bye. Hope to see you again soon!");
     }
 
     public void printGameMode1Progress(int a, int b) throws InterruptedException {
