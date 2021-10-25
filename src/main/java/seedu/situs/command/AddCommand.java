@@ -1,6 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientList;
 
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-     public String run() throws DukeException {
+    public String run() throws SitusException {
         try {
             IngredientList.getInstance().add(this.ingredient);
             String resultMsg = ADDED_MESSAGE
@@ -32,9 +32,9 @@ public class AddCommand extends Command {
                     + Ingredient.daysFromCurrentDate(ingredient.getExpiry()) + " days.";
             return resultMsg;
         } catch (IOException e) {
-            throw new DukeException("Cannot write ingredient to memory!");
+            throw new SitusException("Cannot write ingredient to memory!");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e.getMessage());
+            throw new SitusException(e.getMessage());
         }
     }
 

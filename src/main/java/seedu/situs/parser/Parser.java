@@ -11,9 +11,8 @@ import seedu.situs.command.HelpCommand;
 import seedu.situs.command.ListCommand;
 import seedu.situs.command.UpdateCommand;
 import seedu.situs.command.FindCommand;
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
-import seedu.situs.ingredients.IngredientList;
 
 
 import java.time.LocalDate;
@@ -59,9 +58,9 @@ public class Parser {
      *
      * @param command The user input String
      * @return the output message
-     * @throws DukeException when there is an issue with the input
+     * @throws SitusException when there is an issue with the input
      */
-    public static String parse(String command) throws DukeException {
+    public static String parse(String command) throws SitusException {
 
         String[] words = command.split(SPACE_SEPARATOR, 2);
 
@@ -94,20 +93,20 @@ public class Parser {
     }
 
     /**
-     * Parses "find" command for keywords and executes find command.
+     * Parses and executes the {@code find} command.
      *
      * @param command The user input String
      * @return Search results for entered keywords
-     * @throws DukeException If no keywords are entered
+     * @throws SitusException If no keywords are entered
      */
-    private static String parseFindCommand(String command) throws DukeException {
+    private static String parseFindCommand(String command) throws SitusException {
         String[] keywords = command.replace(COMMAND_FIND, "").trim().split(SPACE_SEPARATOR);
 
         assert (keywords != null);
 
         for (int i = 0; i < keywords.length; i++) {
             if (keywords[i].isEmpty()) {
-                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
             keywords[i] = keywords[i].trim();
         }
@@ -124,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Calls and executes help command.
+     * Calls and executes the {@code help} command.
      *
      * @return a message summarising all possible commands recognised by SITUS
      */
@@ -133,16 +132,16 @@ public class Parser {
     }
 
     /**
-     * Parses update command and splits input into ingredient parameters.
+     * Parses and executes the {@code update} command.
      *
      * @param command 1 line of user input
      * @return Ingredient updated message
      */
-    private static String parseUpdateCommand(String command) throws DukeException {
+    private static String parseUpdateCommand(String command) throws SitusException {
         String[] details = command.split(DELIMITER);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
-            throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
@@ -150,7 +149,7 @@ public class Parser {
         for (int i = 1; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
-                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
@@ -168,24 +167,23 @@ public class Parser {
             }
             return resultMsg;
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         } catch (DateTimeParseException e) {
-            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
     /**
-     * Parses add command and splits input into ingredient parameters,
-     * then calls and executes the add command.
+     * Parses and executes the {@code add} command.
      *
      * @param command The user input String
      * @return Ingredient added message
      */
-    private static String parseAddCommand(String command) throws DukeException {
+    private static String parseAddCommand(String command) throws SitusException {
         String[] details = command.split(DELIMITER);
 
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
-            throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == ADD_COMMAND_ARGUMENT_COUNT);
@@ -193,7 +191,7 @@ public class Parser {
         for (int i = 1; i < ADD_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
-                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
@@ -206,74 +204,85 @@ public class Parser {
                      ingredientExpiry);
             return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         } catch (DateTimeParseException e) {
-            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
     /**
-     * Calls and Executes the List Command.
+     * Calls and executes the {@code list} command.
      *
      * @return List of ingredients
-     * @throws DukeException if trying to access non-existing ingredients
+     * @throws SitusException if trying to access non-existing ingredients
      */
-    private static String parseListCommand() throws DukeException {
+    private static String parseListCommand() throws SitusException {
         return new ListCommand().run();
     }
 
     /**
-     * Calls and Executes the Delete Command.
+     * Calls and executes the {@code delete} command.
      *
      * @param command The user input String
      * @return Ingredient Deleted Message
-     * @throws DukeException if trying to access non-existing ingredients
+     * @throws SitusException if trying to access non-existing ingredients
      */
-    private static String parseDeleteCommand(String command) throws DukeException {
-        String detail = command.substring(COMMAND_DELETE.length()).trim();
-        String resultMsg;
+    private static String parseDeleteCommand(String command) throws SitusException {
+        String[] details = command.split("n/|e/");
 
-        if (detail.length() <= 0) {
-            resultMsg = DELETE_ERROR_MESSAGE;
-            return resultMsg;
+        if (details.length != 3) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-        try {
-            int ingredientRemoveNumber = Integer.parseInt(detail);
-            resultMsg = new DeleteCommand(ingredientRemoveNumber).run();
-            return resultMsg;
-        } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+
+        for (int i = 1; i < details.length; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+            }
         }
+
+        return new DeleteCommand(details[1], details[2]).run();
     }
 
     /**
-     * Parses and executes the date command.
+     * Parses and executes the {@code date} command.
      *
      * @param command The user's input string
-     * @return the result message
-     * @throws DukeException if the date format is incorrect
+     * @return Date changed success message
+     * @throws SitusException if the date format is incorrect
      */
-    private static String parseDateCommand(String command) throws DukeException {
+    private static String parseDateCommand(String command) throws SitusException {
         String detail = command.substring(COMMAND_DATE.length()).trim();
 
         return new DateCommand(detail).run();
     }
 
     /**
-     * Parses and executes the expire command.
+     * Parses and executes the {@code expire} command.
+     *
+     * @param command The user's input string
+     * @return List of ingredients expiring by the specified date
+     * @throws SitusException if the date format is incorrect
      */
-    private static String parseExpireCommand(String command) throws DukeException {
+    private static String parseExpireCommand(String command) throws SitusException {
         String detail = command.substring(COMMAND_EXPIRE.length()).trim();
         try {
             LocalDate expireBeforeDate = Ingredient.stringToDate(detail);
             return new ExpireCommand(expireBeforeDate).run();
         } catch (DateTimeParseException e) {
-            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
-    private static String parseAlertsCommand(String command) throws DukeException {
+    /**
+     * Parses and executes the {@code alerts} command.
+     *
+     * @param command The user's input string
+     * @return The list of ingredients for each alert type
+     * @throws SitusException if alert type, date format or amount format is incorrect
+     */
+    private static String parseAlertsCommand(String command) throws SitusException {
         String detail = command.substring(COMMAND_ALERTS.length()).trim();
         switch (detail) {
         case "all":
@@ -283,11 +292,18 @@ public class Parser {
         case "stock":
             return new AlertLowStockCommand().run();
         default:
-            throw new DukeException(INVALID_ALERT_TYPE_MESSAGE);
+            throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
         }
     }
 
-    private static String parseSetCommand(String command) throws DukeException {
+    /**
+     * Parses and executes the {@code set} command.
+     *
+     * @param command The user's input string
+     * @return threshold successfully set message
+     * @throws SitusException if threshold type, date format or amount format is incorrect
+     */
+    private static String parseSetCommand(String command) throws SitusException {
         String[] details = command.split(" ", 3);
         try {
             switch (details[1].trim()) {
@@ -298,10 +314,10 @@ public class Parser {
                 AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
                 return "Successfully set low stock threshold to " + details[2].trim() + " kg";
             default:
-                throw new DukeException("Invalid Input");
+                throw new SitusException("Invalid Input");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+            throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
 }

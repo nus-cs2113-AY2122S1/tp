@@ -1,6 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -23,7 +23,7 @@ public abstract class Command {
      * Executes the command.
      *
      * @return the result message if success
-     * @throws DukeException if the command cannot be executed normally
+     * @throws SitusException if the command cannot be executed normally
      */
-    public abstract String run() throws DukeException;
+    public abstract String run() throws SitusException;
 }

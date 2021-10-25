@@ -1,7 +1,7 @@
 package seedu.situs.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientList;
 
@@ -18,13 +18,13 @@ public class FindCommandTest {
             + "Amount Left: 3.0 kg | Expiry Date: 21/10/2021";
 
     @Test
-    public void findCommandTest_ingredientNotFound_success() throws DukeException {
+    public void findCommandTest_ingredientNotFound_success() throws SitusException {
         String resultMsg = new FindCommand("nothing").run();
         assertEquals("I could not find any results for \"nothing\"!", resultMsg);
     }
 
     @Test
-    public void findCommandTest_ingredientFound_success() throws DukeException, IOException {
+    public void findCommandTest_ingredientFound_success() throws SitusException, IOException {
         LocalDate expiryDate1 = LocalDate.parse("21/10/2021", DATE_FORMATTER);
         Ingredient ingredient1 = new Ingredient("testxyz", 3, expiryDate1);
         IngredientList.getInstance().add(ingredient1);

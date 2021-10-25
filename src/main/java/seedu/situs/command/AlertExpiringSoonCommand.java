@@ -1,6 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 
 import seedu.situs.localtime.CurrentDate;
 
@@ -16,7 +16,7 @@ public class AlertExpiringSoonCommand extends Command {
     }
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         LocalDate expiryDateThreshold = CurrentDate.getCurrentDate().plusDays(expiryThreshold);
 
         return new ExpireCommand(expiryDateThreshold).run();

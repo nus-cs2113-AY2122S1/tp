@@ -1,11 +1,8 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
-import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
-
-import java.io.IOException;
 
 public class UpdateCommand extends Command {
 
@@ -21,36 +18,20 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         try {
-            String resultMsg = "";
-            int i;
-            int ingredientIndex;
-            IngredientGroup currentGroup;
+            String resultMsg;
             if (IngredientList.getInstance().getSize() == 0) {
                 resultMsg = LIST_EMPTY_MESSAGE;
                 return resultMsg;
             }
+            IngredientList.getInstance().update(this.updatedIngredient);
+            resultMsg = UPDATE_MESSAGE + updatedIngredient.toString();
+            return resultMsg;
 
-            ingredientIndex = IngredientList.getInstance().findIngredientIndexInList(updatedIngredient.getName());
-            currentGroup = IngredientList.getInstance().getIngredientGroup(ingredientIndex);
-
-            for (i = 0; i < currentGroup.getIngredientGroupSize(); i++) {
-                if (this.updatedIngredient.getExpiry().equals((currentGroup.get(i + 1).getExpiry()))) {
-//                    if (updatedIngredient.getAmount() == 0) {
-//                        Call delete
-//                    }
-                    currentGroup.get(i + 1).setAmount(updatedIngredient.getAmount());
-                    resultMsg = UPDATE_MESSAGE + this.updatedIngredient.toString();
-                }
-                return resultMsg;
-            }
-//        } catch (IOException e) {
-//            throw new DukeException("Cannot write ingredient to memory!");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER);
         }
-        return "";
     }
 
 }
