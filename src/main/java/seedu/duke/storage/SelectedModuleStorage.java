@@ -28,7 +28,7 @@ public class SelectedModuleStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public ArrayList<Module> readSelectedModuleList() throws IOException {
+    public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
         File file = loadFile();
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -36,7 +36,7 @@ public class SelectedModuleStorage {
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] attributes = line.split(" # ");
-            modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2])));
+            modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), moduleMasterList));
         }
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         return modules;

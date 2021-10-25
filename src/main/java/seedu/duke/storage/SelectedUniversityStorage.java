@@ -32,7 +32,7 @@ public class SelectedUniversityStorage {
     }
 
     public ArrayList<University> readSelectedUniversityList(
-            UniversityList universityMasterList) throws IOException {
+            UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
         File file = loadFile();
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -50,9 +50,9 @@ public class SelectedUniversityStorage {
             } else {
                 String[] attributes = line.split(" # ");
                 Module local = new Module(attributes[0], attributes[1],
-                        parseDouble(attributes[2]));
+                        parseDouble(attributes[2]),moduleMasterList);
                 Module mapped = new Module(attributes[3], attributes[4],
-                        parseDouble(attributes[5]));
+                        parseDouble(attributes[5]),moduleMasterList);
                 moduleMappings.add(new ModuleMapping(local, mapped));
             }
         }
