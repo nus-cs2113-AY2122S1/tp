@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
 public class UpdateCommand extends Command {
     protected Integer eventNumber;
     protected Event eventToBeUpdated;
+    protected boolean isError = false;
     protected static final String TITLE_FLAG = "title/";
     protected static final String DATE_FLAG = "date/";
     protected static final String DEADLINE_FLAG = "deadline/";
@@ -23,44 +24,49 @@ public class UpdateCommand extends Command {
     protected static final String MEMBER_FLAG = "member/";
 
     public UpdateCommand(String[] command) {
-        this.eventNumber = Integer.parseInt(command[1]) - 1;
-        this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
-        System.out.println("Here are the details of the event:" + System.lineSeparator()
-                + "======================================" + System.lineSeparator());
-        Ui.printEvent(Duke.eventCatalog.get(eventNumber));
-        Ui.printLineBreak();
+        if (command.length < 2) {
+            if (command[0].equalsIgnoreCase("update")) {
+                System.out.println("please specify which event you would like to update in the format"
+                        + System.lineSeparator() + "update [Event_num]");
+            }
+            Ui.printLineBreak();
+            this.isError = true;
+        } else {
+            this.eventNumber = Integer.parseInt(command[1]) - 1;
+            this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
+            System.out.println("Here are the details of the event:" + System.lineSeparator()
+                    + "======================================");
+            Ui.printEvent(Duke.eventCatalog.get(eventNumber));
+            Ui.printLineBreak();
+        }
     }
 
     public CommandResult execute() {
-        boolean exit = false;
-        while (!exit) {
-            Ui.updateIntroMessage();
-            String userInput = Ui.readInput();
-            Ui.printLineBreak();
-            if (userInput.equalsIgnoreCase("exit")) {
-                return new CommandResult("returning to main page...");
-            }
-            String[] userUpdates = userInput.trim().split(">");
+        String executeResult = "returning to main page...";
+        if (!isError) {
             try {
+                Ui.updateIntroMessage();
+                String userInput = Ui.readInput();
+                Ui.printLineBreak();
+                if (userInput.equalsIgnoreCase("exit")) {
+                    return new CommandResult(executeResult);
+                }
+                String[] userUpdates = userInput.trim().split(">");
+
                 CommandResult result = implementUpdates(userUpdates);
                 if (result != null) {
                     return result;
                 }
                 postUpdateMessage();
-                String exitInput = Ui.readInput();
                 Ui.printLineBreak();
-                if (exitInput.equalsIgnoreCase("y")) {
-                    Duke.eventCatalog.sortCatalog();
-                    exit = true;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("please follow the error closely");
+            } catch (NullPointerException | NumberFormatException e) {
+                executeResult = "please follow the format closely"
+                        + System.lineSeparator() + "returning to main page...";
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                executeResult = e.getMessage();
             }
-
         }
-        return new CommandResult("Item Have been updated accordingly!");
+        return new CommandResult(executeResult);
     }
 
     private CommandResult implementUpdates(String[] userUpdates) throws DukeException {
@@ -79,7 +85,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(TASK_FLAG)) {
                 updateTask(attribute[1]);
             } else {
-                return new CommandResult("invalid Command, you have returned to the main page!");
+                return new CommandResult("invalid Update, you have returned to the main page!");
             }
         }
         return null;
@@ -143,8 +149,6 @@ public class UpdateCommand extends Command {
     private void postUpdateMessage() {
         System.out.println("Here is the updated Event");
         Ui.printEvent(eventToBeUpdated);
-        System.out.println("If you are satisfied with your updates? y to exit, n to continue");
-        Ui.printLineBreak();
     }
 
 
