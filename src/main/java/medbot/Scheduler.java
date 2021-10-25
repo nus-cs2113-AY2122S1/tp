@@ -1,5 +1,6 @@
 package medbot;
 
+import java.util.LinkedList;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
@@ -93,6 +94,14 @@ public class Scheduler {
      * @throws MedBotException if there is no patient with that id
      */
     public void deletePatient(int patientId) throws MedBotException {
+        LinkedList<Integer> appointmentIds = patientList.getAllAppointmentIds(patientId);
+        for (int appointmentId : appointmentIds) {
+            try {
+                deleteAppointment(appointmentId);
+            } catch (MedBotException mbe) {
+                throw new MedBotException(ERROR_DELETE_APPOINTMENT_ERROR);
+            }
+        }
         patientList.deletePerson(patientId);
     }
 

@@ -56,6 +56,18 @@ public class SchedulerAppointmentList {
         return appointmentId;
     }
 
+    /**
+     * Generates a non-random but unique id to be allocated to an appointment.
+     *
+     * @return a unique id to be allocated to an appointment
+     */
+    private int generateAppointmentId() {
+        do {
+            lastId++;
+        } while (appointments.containsKey(lastId));
+        return lastId;
+    }
+
 
     /**
      * Returns if an appointment with the specified appointmentId exists.
