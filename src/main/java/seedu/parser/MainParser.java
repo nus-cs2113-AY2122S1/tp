@@ -50,9 +50,59 @@ public class MainParser {
     private final SearchContactParser searchContactParser = new SearchContactParser();
 
     public Command parseCommand(String userInput) {
-        String commandType = getCommandWord(userInput);
+        CommandType commandType = getCommandType(userInput);
+        String commandWord = getCommandWord(userInput);
         Command command;
         switch (commandType) {
+        case MANIPULATION:
+            command = parseManipulationCommand(commandWord, userInput);
+            break;
+        case QUERY:
+            command = parseQueryCommand(commandWord, userInput);
+            break;
+        case CONTROL:
+            command = parseControlCommand(commandWord);
+            break;
+        default:
+            command = new FailedCommand(FailedCommandType.GENERAL);
+        }
+        return command;
+    }
+
+    public String getCommandWord(String userInput) {
+        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
+        return destructuredInputs[COMD_WORD_INDEX];
+    }
+
+    public CommandType getCommandType(String userInput) {
+        String commandWord = getCommandWord(userInput);
+        CommandType commandType;
+        switch (commandWord) {
+        case ADD_CONTACT_COMD:
+        case EDIT_CONTACT_COMD:
+        case DELETE_CONTACT_COMD:
+        case IMPORT_COMD:
+            commandType = CommandType.MANIPULATION;
+            break;
+        case VIEW_CONTACT_COMD:
+        case SEARCH_COMD:
+        case LIST_COMD:
+        case HELP_COMD:
+        case PERSONAL_CONTACT_COMD:
+            commandType = CommandType.QUERY;
+            break;
+        case EXIT_COMD:
+            commandType = CommandType.CONTROL;
+            break;
+        default:
+            commandType = CommandType.FAILED;
+        }
+        return commandType;
+    }
+
+    private Command parseManipulationCommand(String commandWord, String userInput) {
+        Command command;
+        switch (commandWord) {
         case ADD_CONTACT_COMD:
             command = parseAddContact(userInput);
             break;
@@ -62,11 +112,34 @@ public class MainParser {
         case DELETE_CONTACT_COMD:
             command = parseDeleteContact(userInput);
             break;
-        case VIEW_CONTACT_COMD:
-            command = parseViewContact(userInput);
+        case IMPORT_COMD:
+            command = new ImportContactCommand();
             break;
+        default:
+            assert false;
+            command = new FailedCommand(FailedCommandType.GENERAL);
+        }
+        return command;
+    }
+
+    private Command parseControlCommand(String commandWord) {
+        Command command;
+        switch (commandWord) {
         case EXIT_COMD:
             command = new ExitCommand();
+            break;
+        default:
+            assert false;
+            command = new FailedCommand(FailedCommandType.GENERAL);
+        }
+        return command;
+    }
+
+    private Command parseQueryCommand(String commandWord, String userInput) {
+        Command command;
+        switch (commandWord) {
+        case VIEW_CONTACT_COMD:
+            command = parseViewContact(userInput);
             break;
         case LIST_COMD:
             command = new ListContactsCommand();
@@ -77,22 +150,14 @@ public class MainParser {
         case SEARCH_COMD:
             command = parseSearchCommand(userInput);
             break;
-        case IMPORT_COMD:
-            command = new ImportContactCommand();
-            break;
         case PERSONAL_CONTACT_COMD:
             command = parsePersonalContact();
             break;
         default:
+            assert false;
             command = new FailedCommand(FailedCommandType.GENERAL);
         }
         return command;
-    }
-
-
-    public String getCommandWord(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        return destructuredInputs[COMD_WORD_INDEX];
     }
 
     private Command parseAddContact(String userInput) {

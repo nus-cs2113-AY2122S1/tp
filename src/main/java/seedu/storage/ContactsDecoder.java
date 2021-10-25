@@ -39,6 +39,7 @@ public class ContactsDecoder extends RegexParser {
         return updatedContactList;
     }
 
+    //@@author lezongmun
     public Contact readPersonalContact(File personalContactFile)
             throws FileErrorException {
         Contact personalContact = new Contact(null, null, null, null, null, null);
@@ -54,7 +55,7 @@ public class ContactsDecoder extends RegexParser {
         return personalContact;
     }
 
-
+    //@author lezongmun
     private Contact decodePersonalContact(String contactText, Contact contact) {
         Contact personalContact = contact;
         try {
@@ -85,6 +86,7 @@ public class ContactsDecoder extends RegexParser {
         return personalContact;
     }
 
+    //@@author
     private void decodeContact(ContactList contactList, String contactText, int lineIndex, String contactFilePath) {
         // Add the decoded details into the contact list
         try {

@@ -5,10 +5,10 @@ import seedu.contact.ContactList;
 import java.util.ArrayList;
 
 public abstract class TextUi {
-    private static final String LOGO = "   _____         _______        _     \n"
+    private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
-            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      \n";
+            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
 
     private static final String LINE = "____________________________________________________________\n";
 
@@ -184,15 +184,26 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void confirmDeleteMessage(Contact deletedContact, int deletedIndex) {
+    public static void confirmDeleteContactMessage(Contact deletedContact, int deletedIndex) {
         String message = "Delete this contact?  (y/n)\n"
                 + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
+        printDoubleLineMessage(message);
+    }
+
+    public static void confirmDeleteAllMessage() {
+        String message = "Delete all of your contacts?  (y/n)";
         printDoubleLineMessage(message);
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void deleteAllContactsMessage(int listSize) {
+        String message = "ConTech has removed all " + listSize
+                + " of your contact(s).";
         printDoubleLineMessage(message);
     }
 

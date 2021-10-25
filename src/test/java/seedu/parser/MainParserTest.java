@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
+import seedu.command.EditContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.InvalidDetailCommand;
 import seedu.command.ViewContactCommand;
@@ -44,21 +45,29 @@ public class MainParserTest {
         return (T) result;
     }
 
-
     @Test
     public void parseDeleteCommand_validIndex_expectDeleteContactIndexMatch() {
         testIndex = 1;
         testUserInput = "rm " + testIndex;
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
-        assertEquals(testIndex, testResultCommand.getDeletedIndex());
+        assertEquals(testIndex, testResultCommand.getContactIndex());
+    }
+
+    @Test
+    public void parseDeleteCommand_validDeleteAllIndex_expectDeleteAddIdMatch() {
+        String testIndex = "-rf";
+        int testId = -2;
+        testUserInput = "rm " + testIndex;
+        final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
+        assertEquals(testId, testResultCommand.getContactIndex());
     }
 
     @Test
     public void parseDeleteCommand_multipleIndexes_expectDeleteContactIndexMatch() {
-        int testIndex = 1;
+        testIndex = 1;
         testUserInput = String.format("rm %d %d", testIndex, 2);
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
-        assertEquals(testIndex, testResultCommand.getDeletedIndex());
+        assertEquals(testIndex, testResultCommand.getContactIndex());
     }
 
     @Test
@@ -66,7 +75,7 @@ public class MainParserTest {
         testIndex = 1;
         testUserInput = "rm    " + testIndex;
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
-        assertEquals(testIndex, testResultCommand.getDeletedIndex());
+        assertEquals(testIndex, testResultCommand.getContactIndex());
     }
 
     @Test
@@ -85,7 +94,6 @@ public class MainParserTest {
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
 
-
     @Test
     public void parseDeleteCommand_outOfRangeIndex_expectException() {
         ContactList contactList = new ContactList();
@@ -98,11 +106,10 @@ public class MainParserTest {
         // trying to delete the contact with index 3 when there is only 1 contact (with index 0) in the contact list
         DeleteContactCommand deleteContactCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
         deleteContactCommand.setContactList(contactList);
-        int deletedIndex = deleteContactCommand.getDeletedIndex();
+        int deletedIndex = deleteContactCommand.getContactIndex();
 
         assertThrows(IndexOutOfBoundsException.class, () -> contactList.deleteContact(deletedIndex));
     }
-
 
     @Test
     public void parseAddCommand_validInputsWithIrregularSpaces_expectAddContactCommand() {

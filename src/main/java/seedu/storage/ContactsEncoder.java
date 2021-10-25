@@ -10,6 +10,7 @@ import java.io.IOException;
 import static seedu.storage.Storage.SEPARATOR;
 
 public class ContactsEncoder {
+    //@@author lezongmun
     public void savePersonalContact(String contactFilePath, Contact personalContact) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
@@ -21,6 +22,7 @@ public class ContactsEncoder {
         }
     }
 
+    //@@author
     public void saveContacts(String contactFilePath, ContactList contactList) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
