@@ -371,6 +371,21 @@ public class UiTest {
     }
 
     @Test
+    public void filterByKeyword_testWordCasing_printFoodEntries() {
+        FindCommand testFindCommand = new FindCommand("FOod");
+        initialiseFinancialTracker();
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Below is a list of all your findings!" + newLine
+                + SEPARATOR_LINE + newLine
+                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
+                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
     public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
         FindCommand testFindCommand = new FindCommand("25/10/2021");
         initialiseFinancialTracker();

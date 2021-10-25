@@ -3,6 +3,7 @@ package seedu.utility;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 
 public class StonksGraph {
@@ -205,14 +206,19 @@ public class StonksGraph {
         return currentDate.getMonth();
     }
 
+    private int currentYear() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getYear();
+    }
+
     private void setBar(FinancialTracker finances) {
         writeToGraph(5,4, "Your Yearly Report");
         drawSeparator();
         drawLegend();
         drawXAxisLabels();
         drawXAxis();
-        ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
-        ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
+        ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(currentYear());
+        ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(currentYear());
         drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
 
         for (int x = 0; x < ROWS; x++) {
