@@ -83,4 +83,12 @@ public class Parser {
     public static int getIndexOfLastSelectedEvent() {
         return indexOfLastSelectedEvent;
     }
+
+    public static void updateIndexToNoEventSelected() {
+        updateIndexOfLastSelectedEvent(-1);
+    }
+
+    public static boolean noEventSelected() {
+        return getIndexOfLastSelectedEvent() == -1;
+    }
 }
