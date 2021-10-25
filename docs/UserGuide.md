@@ -105,19 +105,18 @@ Mode has changed to PRESCRIPTION.
 > * Parameters enclosed in `[]` should contain **one or more** optional parameters.
 > * Parameters enclosed in `{}` are **totally** optional parameters.
 > * Parameters you specify can be in any order.
-    >  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
+>  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
 > * MediVault ignores additional parameters provided when commands do not require one.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
-    >  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
+>  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
-    >   * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
+>  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
-    > sort in descending order.
+> sort in descending order.
 
 ## Managing Stocks
-
 
 ### Adding stocks: `addstock`
 
@@ -126,11 +125,12 @@ Adds medication into the inventory.
 > :warning: Warning
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 
-Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
+Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
 Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
 
 Expected Output 1:
+
 ```
 Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
@@ -146,6 +146,7 @@ Example 2 (If medication does not
 exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 2:
+
 ```
 Medication added: paracetamol
 +====+=============+========+==========+=============+==============================+==============+
@@ -187,10 +188,10 @@ Updates existing medication stock information in the inventory.
 > :warning: Warning
 > * The Stock ID must exist in MediVault.
 > * You cannot update the Stock ID.
->   * The allocation of Stock ID is determined by MediVault.
+    >
+* The allocation of Stock ID is determined by MediVault.
 > * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
-  **all** entries that has same existing medication name given the `i/ID` with your input values for these
-  parameters.
+    **all** entries that has same existing medication name given the `i/ID` with your input values for these parameters.
 > * A new Stock ID will be assigned to the current stock if your update has the `n/NAME` parameter.
 
 Format: `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
@@ -293,6 +294,7 @@ Format: `deleteprescription i/PRESCRIPTION_ID`
 Example: `deleteprescription i/3`
 
 Expected output:
+
 ```
 Prescription deleted for Prescription ID 3
 ```
@@ -326,11 +328,11 @@ Updated prescription information!
 
 Lists all prescription records in the application.
 
-* All parameters for `listprescriptions` command are optional, you can choose to list the records by any of the
+* All parameters for `listprescription` command are optional, you can choose to list the records by any of the
   parameters.
-* You are able to `listprescriptions` by any column and sort or reverse sort them.
+* You are able to `listprescription` by any column and sort or reverse sort them.
 
-Format: `listprescriptions {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
+Format: `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
 
 Example 1 (Listing all prescriptions): `listprescriptions`
 
@@ -426,7 +428,7 @@ Updates an existing order information.
 
 > :warning: Warning
 > * You cannot update the Order ID or the status of the order.
-    >  * The allocation of ID is determined by MediVault.
+>  * The allocation of ID is determined by MediVault.
 > * The status of the order will only be changed when you run the `receiveorder` command.
 > * When you update an order information, MediVault reflects the pending stocks shown in the current medication stocks.
 
@@ -506,37 +508,56 @@ Expended output:
 
 Adds the received medication into the current stocks.
 
->:information_source: Note:
+> :information_source: Note:
 >* Your input order Id must exist
 >* When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
 
-Format: `receiveorder i/ID e/EXPIRY_DATE`
+> :warning: Warning
+> * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 
-Example : `receiveorder i/1 e/19-09-2021`
+Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
+
+Example 1 (If medication does not exist) : `receiveorder i/1 p/20 e/20-10-2021 d/used to treat fever and pain m/500`
 
 Expected output:
+
 ```
-Received 50 panadol, adding to current stocks.
-+====+=========+=======+==========+=============+===============================================+==============+
-| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
-+====+=========+=======+==========+=============+===============================================+==============+
-| 1  | panadol | $5.00 |    150   | 19-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
-|    |         |       |          |             |                     PAINS                     |              | 
-+----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
+Medication added: paracetamol
++====+=============+========+==========+=============+==============================+==============+
+| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE |         DESCRIPTION          | MAX_QUANTITY | 
++====+=============+========+==========+=============+==============================+==============+
+| 8  | paracetamol | $20.00 |    50    | 20-10-2021  | used to treat fever and pain |     500      | 
++----+-------------+--------+----------+-------------+------------------------------+--------------+
+```
+
+Example 2 (If medication exists) : `receiveorder i/2 p/20 e/25-10-2021`
+
+Expected output:
+
+```
+Medicine exists. Using existing description and maximum quantity.
+Medication added: PANADOL
++====+=========+========+==========+=============+==========================================+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |               DESCRIPTION                | MAX_QUANTITY | 
++====+=========+========+==========+=============+==========================================+==============+
+| 8  | PANADOL | $20.00 |   100    | 25-10-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER   |     1000     | 
+|    |         |        |          |             |                AND PAINS                 |              | 
++----+---------+--------+----------+-------------+------------------------------------------+--------------+
 ```
 
 ## Managing Data
 
-This section of the user guide explains the features and usage of commands related to data management. This includes the archive commands, purge command as well as data storage files related information. 
+This section of the user guide explains the features and usage of commands related to data management. This includes the
+archive commands, purge command as well as data storage files related information.
 
 ### Archive orders: `archiveorder`
 
-Archive order records into data/order_archive.txt file. 
+Archive order records into data/order_archive.txt file.
 
 > :information_source: Note:
-> * MediVault will remove all order records that have status of DELIVERED from the current orders that matches the user specified date and before. 
+> * MediVault will remove all order records that have status of DELIVERED from the current orders that matches the user specified date and before.
 > * MediVault will then archive it into data/order_archive.txt file.
-> * The date parameter is compulsory. 
+> * The date parameter is compulsory.
 
 > :warning: Warning
 > * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
@@ -545,12 +566,14 @@ Format: `archiveorder d/DATE`
 
 Example: `archiveorder d/10-10-2021`
 
-Expected Output: 
+Expected Output:
+
 ```
 Archived orders from 10-10-2021
 ```
 
 Expected Output (in data/order_archive.txt):
+
 ```
 [ORDER ID: 2] 10 PANADOL WAS ORDERED ON 09-10-2021. STATUS: DELIVERED
 [ORDER ID: 3] 50 VICODIN WAS ORDERED ON 10-10-2021. STATUS: DELIVERED
@@ -558,12 +581,12 @@ Expected Output (in data/order_archive.txt):
 
 ### Archive prescriptions: `archiveprescription`
 
-Archive prescription records into data/prescription_archive.txt file. 
+Archive prescription records into data/prescription_archive.txt file.
 
 > :information_source: Note:
-> * MediVault will remove all prescription records from the current prescriptions that matches the user specified date and before. 
+> * MediVault will remove all prescription records from the current prescriptions that matches the user specified date and before.
 > * MediVault will then archive it into data/prescription_archive.txt file.
-> * The date parameter for this command is compulsory. 
+> * The date parameter for this command is compulsory.
 
 > :warning: Warning
 > * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
@@ -572,11 +595,14 @@ Format: `archiveprescription d/DATE`
 
 Example: `archiveprescription d/10-10-2021`
 
-Expected Output: 
+Expected Output:
+
 ```
 Archived prescriptions from 10-10-2021
 ```
-Expected Output (in data/prescription_archive.txt): 
+
+Expected Output (in data/prescription_archive.txt):
+
 ```
 [PRESCRIPTION ID: 1] 10 PANADOL [STOCK ID: 1] WAS PRESCRIBED BY JANE TO S1234567A ON 09-10-2021
 [PRESCRIPTION ID: 2] 10 VICODIN [STOCK ID: 3] WAS PRESCRIBED BY PETER TO S2345678B ON 10-10-2021
@@ -600,13 +626,15 @@ All data has been cleared!
 
 ### Data Storage
 
-MediVault will automatically save your data after any operation that modifies stock, order or prescriptions. The data will be stored in 3 separate files `data/stock.txt`, `data/order.txt` and `data/prescription.txt`. Data is saved in a specific format with fields delimited by a pipe `|`.
+MediVault will automatically save your data after any operation that modifies stock, order or prescriptions. The data
+will be stored in 3 separate files `data/stock.txt`, `data/order.txt` and `data/prescription.txt`. Data is saved in a
+specific format with fields delimited by a pipe `|`.
 
 Data formats:
+
 * For `data/stock.txt`: `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
 * For `data/order.txt`: `ID|NAME|QUANTITY|DATE|STATUS`
 * For `data/prescription.txt`: `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
-
 
 ### Data Editing
 
@@ -615,9 +643,9 @@ Data formats:
 > * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
 > * In order for MediVault to work, you have to fix the error in the data file.
 > * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
-> * In the worst case scenario where you are unable to fix it,  you may have to delete the corresponding data file.
+> * In the worst case scenario where you are unable to fix it, you may have to delete the corresponding data file.
 > * It may result in unintended behaviour if data file is tampered with while the program is running.
-> * Editing the data directly poses a significant risk to corruption of data. 
+> * Editing the data directly poses a significant risk to corruption of data.
 
 ## Miscellaneous
 
@@ -635,43 +663,51 @@ Expected output:
 Welcome to the help page.
 Your current mode is indicated in the square brackets at the bottom left of the console.
 It allows you to type add, list, update, delete without typing in the full command.
-Type stock, dispense or order to change to respective modes.
+Type stock, prescription or order to change to respective modes.
 Note that parameters in {curly braces} are optional.
 Parameters in [square braces] indicate that at least one of the parameter(s) must be provided.
-+================+============================================================================================+
-|    COMMAND     |                                       COMMAND SYNTAX                                       | 
-+================+============================================================================================+
-|    addstock    | addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY              | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  deletestock   | deletestock [i/ID e/EXPIRY_DATE]                                                           | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  updatestock   | updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]    | 
-+----------------+--------------------------------------------------------------------------------------------+
-|   liststock    | liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE           | 
-|                | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
-|                | rsort/COLUMN NAME}                                                                         | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  adddispense   | adddispense n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME                                   | 
-+----------------+--------------------------------------------------------------------------------------------+
-| deletedispense | deletedispense i/ID                                                                        | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  listdispense  | listdispense {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID               | 
-|                | sort/COLUMN_NAME rsort/COLUMN NAME}                                                        | 
-+----------------+--------------------------------------------------------------------------------------------+
-|    addorder    | addorder n/NAME q/QUANTITY {d/DATE}                                                        | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  deleteorder   | deleteorder i/ID                                                                           | 
-+----------------+--------------------------------------------------------------------------------------------+
-|  updateorder   | updateorder i/ID [n/NAME q/QUANTITY d/DATE]                                                | 
-+----------------+--------------------------------------------------------------------------------------------+
-|   listorder    | listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}      | 
-+----------------+--------------------------------------------------------------------------------------------+
-|     purge      | purge                                                                                      | 
-+----------------+--------------------------------------------------------------------------------------------+
-|      help      | help                                                                                       | 
-+----------------+--------------------------------------------------------------------------------------------+
-|      exit      | exit                                                                                       | 
-+----------------+--------------------------------------------------------------------------------------------+
++=====================+============================================================================================+
+|       COMMAND       |                                       COMMAND SYNTAX                                       | 
++=====================+============================================================================================+
+|      addstock       | addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}            | 
++---------------------+--------------------------------------------------------------------------------------------+
+|     deletestock     | deletestock [i/ID expiring/EXPIRY_DATE]                                                    | 
++---------------------+--------------------------------------------------------------------------------------------+
+|     updatestock     | updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]    | 
++---------------------+--------------------------------------------------------------------------------------------+
+|      liststock      | liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE           | 
+|                     | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
+|                     | rsort/COLUMN NAME}                                                                         | 
++---------------------+--------------------------------------------------------------------------------------------+
+|   addprescription   | addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME                               | 
++---------------------+--------------------------------------------------------------------------------------------+
+| deleteprescription  | deleteprescription i/ID                                                                    | 
++---------------------+--------------------------------------------------------------------------------------------+
+| updateprescription  | updateprescription i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]              | 
++---------------------+--------------------------------------------------------------------------------------------+
+|  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID           | 
+|                     | sort/COLUMN_NAME rsort/COLUMN NAME}                                                        | 
++---------------------+--------------------------------------------------------------------------------------------+
+| archiveprescription | archiveprescription d/DATE                                                                 | 
++---------------------+--------------------------------------------------------------------------------------------+
+|      addorder       | addorder n/NAME q/QUANTITY {d/DATE}                                                        | 
++---------------------+--------------------------------------------------------------------------------------------+
+|     deleteorder     | deleteorder i/ID                                                                           | 
++---------------------+--------------------------------------------------------------------------------------------+
+|     updateorder     | updateorder i/ID [n/NAME q/QUANTITY d/DATE]                                                | 
++---------------------+--------------------------------------------------------------------------------------------+
+|      listorder      | listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}      | 
++---------------------+--------------------------------------------------------------------------------------------+
+|    archiveorder     | archiveorder d/DATE                                                                        | 
++---------------------+--------------------------------------------------------------------------------------------+
+|    receiveorder     | receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}                     | 
++---------------------+--------------------------------------------------------------------------------------------+
+|        purge        | purge                                                                                      | 
++---------------------+--------------------------------------------------------------------------------------------+
+|        help         | help                                                                                       | 
++---------------------+--------------------------------------------------------------------------------------------+
+|        exit         | exit                                                                                       | 
++---------------------+--------------------------------------------------------------------------------------------+
 For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/
  ```
 
@@ -701,7 +737,7 @@ see `stock.txt, order.txt, prescription.txt` in that folder.
 
 Command | Command Syntax
 ------ | ------
-addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY`
+addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 deletestock | `deletestock [i/STOCK_ID expiring/DATE]`
 updatestock | `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 liststock | `liststock {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
@@ -709,12 +745,13 @@ addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
 updateprescription | `updatepesprescriptiondispense i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
+archiveprescription | `archiveprescription d/DATE`
 addorder | `addorder n/NAME q/QUANTITY {d/DATE}`
 deleteorder | `deleteorder i/ID`
 updateorder | `updateorder i/ID [n/NAME q/QUANTITY d/DATE]  `
 listorder | `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}`
 archiveorder | `archiveorder d/DATE`
-archiveprescription | `archiveprescription d/DATE`
+receiveorder | `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 purge | `no parameters`
 help | `no parameters`
 exit | `no parameters`
