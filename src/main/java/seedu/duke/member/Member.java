@@ -119,6 +119,14 @@ public class Member {
     public String getStudentNumber() {
         return studentNumber;
     }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
 /*
     public String getAttendance() {
         return presentOrAbsent;
