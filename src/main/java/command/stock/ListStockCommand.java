@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+//@@author jiangweichen835
 /**
  * Helps to process the liststock command together with filters and sort.
  */
@@ -44,6 +45,7 @@ public class ListStockCommand extends Command {
         StockValidator stockValidator = new StockValidator();
         boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters,
                 requiredParameter, optionalParameters, CommandSyntax.LIST_STOCK_COMMAND, false);
+
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;

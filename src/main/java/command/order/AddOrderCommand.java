@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author jiangweichen835
 /**
  * Add order for medication based on user input.
  * User input include medication name, quantity and the order date.
@@ -94,13 +95,16 @@ public class AddOrderCommand extends Command {
             } else {
                 int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
                 int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+                int totalQuantity = existingStockQuantity + existingOrdersQuantity;
+
                 maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
 
-                if (orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity) {
+                if (orderQuantity + totalQuantity <= maxQuantity) {
                     addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
                 } else {
                     ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity "
-                            + "exceeds maximum stock quantity.\n");
+                            + "exceeds maximum stock quantity of " + maxQuantity + ". Existing quantity "
+                            + totalQuantity + ".");
                 }
             }
         } else {

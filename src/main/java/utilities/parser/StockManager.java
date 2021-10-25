@@ -7,6 +7,7 @@ import inventory.Stock;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//@@author a-tph
 /**
  * Manages medicines that are stock objects.
  */

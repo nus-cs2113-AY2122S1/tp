@@ -1,7 +1,7 @@
 package utilities.storage;
 
 import errors.InvalidDataException;
-import inventory.Dispense;
+import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Order;
 import utilities.parser.FileParser;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+//@@author RemusTeo
 /**
  * Storage class handles all saving and loading of data.
  */
@@ -24,21 +25,21 @@ public class Storage {
     private static final String DIRECTORY_PATH = "data";
     private static final String STOCK_FILE_PATH = "data/stock.txt";
     private static final String ORDER_FILE_PATH = "data/order.txt";
-    private static final String DISPENSE_FILE_PATH = "data/dispense.txt";
+    private static final String PRESCRIPTION_FILE_PATH = "data/prescription.txt";
     private static final String ORDER_ARCHIVE_FILE_PATH = "data/order_archive.txt";
-    private static final String DISPENSE_ARCHIVE_FILE_PATH = "data/dispense_archive.txt";
+    private static final String PRESCRIPTION_ARCHIVE_FILE_PATH = "data/prescription_archive.txt";
     private static final int NUMBER_OF_STOCK_DATA_FIELDS = 8;
     private static final int NUMBER_OF_ORDER_DATA_FIELDS = 5;
-    private static final int NUMBER_OF_DISPENSE_DATA_FIELDS = 7;
+    private static final int NUMBER_OF_PRESCRIPTION_DATA_FIELDS = 7;
     private static File stockFile;
     private static File orderFile;
-    private static File dispenseFile;
+    private static File prescriptionFile;
     private static File orderArchiveFile;
-    private static File dispenseArchiveFile;
+    private static File prescriptionArchiveFile;
     private static Storage storage = null;
     int highestStockId = 0;
     int highestOrderId = 0;
-    int highestDispenseId = 0;
+    int highestPrescriptionId = 0;
 
 
     /**
@@ -60,26 +61,26 @@ public class Storage {
     public Storage() {
         stockFile = new File(STOCK_FILE_PATH);
         orderFile = new File(ORDER_FILE_PATH);
-        dispenseFile = new File(DISPENSE_FILE_PATH);
+        prescriptionFile = new File(PRESCRIPTION_FILE_PATH);
         orderArchiveFile = new File(ORDER_ARCHIVE_FILE_PATH);
-        dispenseArchiveFile = new File(DISPENSE_ARCHIVE_FILE_PATH);
+        prescriptionArchiveFile = new File(PRESCRIPTION_ARCHIVE_FILE_PATH);
     }
 
     /**
-     * Save data into specific files after categorising them into Stock, Order and Dispense.
+     * Save data into specific files after categorising them into Stock, Order and Prescription.
      */
     public void saveData(ArrayList<Medicine> medicines) {
         String stockData = "";
         String orderData = "";
-        String dispenseData = "";
+        String prescriptionData = "";
         for (Medicine medicine : medicines) {
             String data = medicine.toFileFormat() + System.lineSeparator();
             if (medicine instanceof Stock) {
                 stockData += data;
             } else if (medicine instanceof Order) {
                 orderData += data;
-            } else if (medicine instanceof Dispense) {
-                dispenseData += data;
+            } else if (medicine instanceof Prescription) {
+                prescriptionData += data;
             }
         }
 
@@ -93,27 +94,27 @@ public class Storage {
             writeToFile(stockData, STOCK_FILE_PATH);
             orderFile.createNewFile();
             writeToFile(orderData, ORDER_FILE_PATH);
-            dispenseFile.createNewFile();
-            writeToFile(dispenseData, DISPENSE_FILE_PATH);
+            prescriptionFile.createNewFile();
+            writeToFile(prescriptionData, PRESCRIPTION_FILE_PATH);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
     /**
-     * Archive data into specific files after categorising them into Order and Dispense.
+     * Archive data into specific files after categorising them into Order and Prescription.
      */
     public void archiveData(ArrayList<Medicine> medicines) {
         String orderArchiveData = "";
-        String dispenseArchiveData = "";
+        String prescriptionData = "";
         for (Medicine medicine : medicines) {
             String data = medicine.toArchiveFormat() + System.lineSeparator();
             if (medicine instanceof Stock) {
                 continue; // No archive for stock
             } else if (medicine instanceof Order) {
                 orderArchiveData += data;
-            } else if (medicine instanceof Dispense) {
-                dispenseArchiveData += data;
+            } else if (medicine instanceof Prescription) {
+                prescriptionData += data;
             }
         }
 
@@ -125,8 +126,8 @@ public class Storage {
         try {
             orderArchiveFile.createNewFile();
             appendToFile(orderArchiveData, ORDER_ARCHIVE_FILE_PATH);
-            dispenseArchiveFile.createNewFile();
-            appendToFile(dispenseArchiveData, DISPENSE_ARCHIVE_FILE_PATH);
+            prescriptionArchiveFile.createNewFile();
+            appendToFile(prescriptionData, PRESCRIPTION_ARCHIVE_FILE_PATH);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -157,7 +158,7 @@ public class Storage {
     }
 
     /**
-     * Load saved data from data/stock.txt, data/order.txt, data/dispense.txt.
+     * Load saved data from data/stock.txt, data/order.txt, data/prescription.txt.
      */
     public ArrayList<Medicine> loadData() {
         ArrayList<Medicine> medicines = new ArrayList<>();
@@ -175,9 +176,9 @@ public class Storage {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
         }
-        if (dispenseFile.exists()) {
+        if (prescriptionFile.exists()) {
             try {
-                medicines.addAll(readFromFile("DISPENSE", dispenseFile));
+                medicines.addAll(readFromFile("PRESCRIPTION", prescriptionFile));
             } catch (FileNotFoundException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
@@ -188,7 +189,7 @@ public class Storage {
     /**
      * Read and process medicine details from corresponding file to restore medicine state in program.
      *
-     * @param file File object of data/stock.txt, data/order.txt, or data/dispense.txt
+     * @param file File object of data/stock.txt, data/order.txt, or data/prescription.txt
      * @throws FileNotFoundException If file is not found.
      */
     private ArrayList<Medicine> readFromFile(String fileType, File file) throws FileNotFoundException {
@@ -196,7 +197,7 @@ public class Storage {
         ArrayList<Medicine> medicines = new ArrayList<>();
         int stockRow = 1;
         int orderRow = 1;
-        int dispenseRow = 1;
+        int prescriptionRow = 1;
         while (sc.hasNextLine()) {
             String medicineDetails = sc.nextLine();
             try {
@@ -211,10 +212,10 @@ public class Storage {
                     medicines.add(parsedOrder);
                     orderRow++;
                     break;
-                case "DISPENSE":
-                    Medicine parsedDispense = parseDispenseData(medicineDetails, dispenseRow);
-                    medicines.add(parsedDispense);
-                    dispenseRow++;
+                case "PRESCRIPTION":
+                    Medicine parsedPrescription = parsePrescriptionData(medicineDetails, prescriptionRow);
+                    medicines.add(parsedPrescription);
+                    prescriptionRow++;
                     break;
                 default:
                     break;
@@ -297,35 +298,38 @@ public class Storage {
     }
 
     /**
-     * Parse dispense data and create a dispense object based on it.
+     * Parse prescription data and create a prescription object based on it.
      *
-     * @param dispenseDetails String of data of specific stock from file data/dispense.txt.
-     * @return Dispense object for adding into medicines.
+     * @param prescriptionDetails String of data of specific stock from file data/prescription.txt.
+     * @param prescriptionRow Row ID of the prescription.
+     * @return Prescription object for adding into medicines.
      */
-    private Medicine parseDispenseData(String dispenseDetails, int dispenseRow) throws InvalidDataException {
-        String[] splitDispenseDetails = dispenseDetails.split("\\|");
-        if (splitDispenseDetails.length != NUMBER_OF_DISPENSE_DATA_FIELDS) { // If not all fields present.
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
-                    + " [data/dispense.txt]");
+    private Medicine parsePrescriptionData(String prescriptionDetails, int prescriptionRow)
+            throws InvalidDataException {
+        String[] splitPrescriptionDetails = prescriptionDetails.split("\\|");
+        if (splitPrescriptionDetails.length != NUMBER_OF_PRESCRIPTION_DATA_FIELDS) { // If not all fields present.
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
+                    + " [data/prescription.txt]");
         }
-        int dispenseId = FileParser.parseDispenseId(splitDispenseDetails, dispenseRow);
-        String dispenseName = FileParser.parseDispenseName(splitDispenseDetails, dispenseRow);
-        int dispenseQuantity = FileParser.parseDispenseQuantity(splitDispenseDetails, dispenseRow);
-        String dispenseCustomerId = FileParser.parseDispenseCustomerId(splitDispenseDetails, dispenseRow);
-        Date dispenseDate = FileParser.parseDispenseDate(splitDispenseDetails, dispenseRow);
-        String dispenseStaff = FileParser.parseDispenseStaff(splitDispenseDetails, dispenseRow);
-        int dispenseStockId = FileParser.parseDispenseStockId(splitDispenseDetails, dispenseRow);
+        int prescriptionId = FileParser.parsePrescriptionId(splitPrescriptionDetails, prescriptionRow);
+        String prescriptionName = FileParser.parsePrescriptionName(splitPrescriptionDetails, prescriptionRow);
+        int prescriptionQuantity = FileParser.parsePrescriptionQuantity(splitPrescriptionDetails, prescriptionRow);
+        String prescriptionCustomerId =
+                FileParser.parsePrescriptionCustomerId(splitPrescriptionDetails, prescriptionRow);
+        Date prescriptionDate = FileParser.parsePrescriptionDate(splitPrescriptionDetails, prescriptionRow);
+        String prescriptionStaff = FileParser.parsePrescriptionStaff(splitPrescriptionDetails, prescriptionRow);
+        int prescriptionStockId = FileParser.parsePrescriptionStockId(splitPrescriptionDetails, prescriptionRow);
 
-        Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate,
-                dispenseStaff, dispenseStockId);
-        if (dispenseId > highestDispenseId) {
-            dispense.setDispenseId(dispenseId);
-            dispense.setDispenseCount(dispenseId);
-            highestDispenseId = dispenseId;
+        Prescription prescription = new Prescription(prescriptionName, prescriptionQuantity, prescriptionCustomerId,
+                prescriptionDate, prescriptionStaff, prescriptionStockId);
+        if (prescriptionId > highestPrescriptionId) {
+            prescription.setPrescriptionId(prescriptionId);
+            prescription.setPrescriptionCount(prescriptionId);
+            highestPrescriptionId = prescriptionId;
         } else {
-            dispense.setDispenseId(dispenseId);
-            dispense.setDispenseCount(highestDispenseId);
+            prescription.setPrescriptionId(prescriptionId);
+            prescription.setPrescriptionCount(highestPrescriptionId);
         }
-        return dispense;
+        return prescription;
     }
 }

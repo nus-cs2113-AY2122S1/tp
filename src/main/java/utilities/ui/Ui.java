@@ -1,7 +1,7 @@
 package utilities.ui;
 
 import command.CommandSyntax;
-import inventory.Dispense;
+import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
@@ -11,13 +11,15 @@ import utilities.parser.OrderManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//@@author alvintan01
+
 /**
  * Handles printing all messages in the application to the console.
  */
 
 public class Ui {
     private static final int TABLE_PADDING = 2;
-    private static final int DESCRIPTION_MAX_WIDTH = 45;
+    private static final int DESCRIPTION_MAX_WIDTH = 40;
     private static final int HELP_MAX_WIDTH = 90;
     private static Ui ui = null;
     private static Scanner scanner;
@@ -218,7 +220,7 @@ public class Ui {
      *
      * @param description   Description value in the column.
      * @param startingIndex The starting index to truncate the description.
-     * @param maxWidth The maximum number of characters allowed per row.
+     * @param maxWidth      The maximum number of characters allowed per row.
      */
     private String truncateDescription(String description, int startingIndex, int maxWidth) {
         String truncatedDescription = "";
@@ -305,7 +307,7 @@ public class Ui {
         System.out.println("Welcome to the help page.");
         System.out.println("Your current mode is indicated in the square brackets at the bottom left of the console.");
         System.out.println("It allows you to type add, list, update, delete without typing in the full command.");
-        System.out.println("Type stock, dispense or order to change to respective modes.");
+        System.out.println("Type stock, prescription or order to change to respective modes.");
         System.out.println("Note that parameters in {curly braces} are optional.");
         System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
                 + "provided.");
@@ -400,33 +402,33 @@ public class Ui {
     }
 
     /**
-     * Prints out all the medicines dispensed in a table format.
+     * Prints out all the medicines prescribed in a table format.
      *
-     * @param dispenses Arraylist of the dispenses.
+     * @param prescriptions Arraylist of the prescription.
      */
-    public void printDispenses(ArrayList<Dispense> dispenses) {
-        if (dispenses.size() == 0) {
-            print("There are no records of medicines dispensed.");
+    public void printPrescriptions(ArrayList<Prescription> prescriptions) {
+        if (prescriptions.size() == 0) {
+            print("There are no records of medicines prescribed.");
             return;
         }
 
-        int idWidth = Dispense.COLUMNS[0].length();
-        int nameWidth = Dispense.COLUMNS[1].length();
-        int quantityWidth = Dispense.COLUMNS[2].length();
-        int customerIdWidth = Dispense.COLUMNS[3].length();
-        int dateWidth = Dispense.COLUMNS[4].length();
-        int staffWidth = Dispense.COLUMNS[5].length();
-        int stockIdWidth = Dispense.COLUMNS[6].length();
+        int idWidth = Prescription.COLUMNS[0].length();
+        int nameWidth = Prescription.COLUMNS[1].length();
+        int quantityWidth = Prescription.COLUMNS[2].length();
+        int customerIdWidth = Prescription.COLUMNS[3].length();
+        int dateWidth = Prescription.COLUMNS[4].length();
+        int staffWidth = Prescription.COLUMNS[5].length();
+        int stockIdWidth = Prescription.COLUMNS[6].length();
 
         // Find the longest width of each column
-        for (Dispense dispense : dispenses) {
-            idWidth = Math.max(String.valueOf(dispense.getDispenseId()).length(), idWidth);
-            nameWidth = Math.max(dispense.getMedicineName().length(), nameWidth);
-            quantityWidth = Math.max(String.valueOf(dispense.getQuantity()).length(), quantityWidth);
-            customerIdWidth = Math.max(dispense.getCustomerId().length(), customerIdWidth);
-            dateWidth = Math.max(DateParser.dateToString(dispense.getDate()).length(), dateWidth);
-            staffWidth = Math.max(dispense.getStaff().length(), staffWidth);
-            stockIdWidth = Math.max(String.valueOf(dispense.getStockId()).length(), stockIdWidth);
+        for (Prescription prescription : prescriptions) {
+            idWidth = Math.max(String.valueOf(prescription.getPrescriptionId()).length(), idWidth);
+            nameWidth = Math.max(prescription.getMedicineName().length(), nameWidth);
+            quantityWidth = Math.max(String.valueOf(prescription.getQuantity()).length(), quantityWidth);
+            customerIdWidth = Math.max(prescription.getCustomerId().length(), customerIdWidth);
+            dateWidth = Math.max(DateParser.dateToString(prescription.getDate()).length(), dateWidth);
+            staffWidth = Math.max(prescription.getStaff().length(), staffWidth);
+            stockIdWidth = Math.max(String.valueOf(prescription.getStockId()).length(), stockIdWidth);
         }
 
         int[] columnWidths = {idWidth, nameWidth, quantityWidth, customerIdWidth, dateWidth, staffWidth, stockIdWidth};
@@ -445,22 +447,26 @@ public class Ui {
 
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < columnWidths.length; i++) {
-            headers.append(String.format(formats[i], centerString(columnWidths[i], Dispense.COLUMNS[i])));
+            headers.append(String.format(formats[i], centerString(columnWidths[i], Prescription.COLUMNS[i])));
         }
 
         printHeaderBorder(columnWidths);
         System.out.println(headers);
         printHeaderBorder(columnWidths);
 
-        for (Dispense dispense : dispenses) {
-            String row = String.format(idFormat, centerString(idWidth, String.valueOf(dispense.getDispenseId())))
-                    + String.format(nameFormat, centerString(nameWidth, dispense.getMedicineName()))
-                    + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(dispense.getQuantity())))
+        for (Prescription prescription : prescriptions) {
+            String row = String.format(idFormat, centerString(idWidth,
+                    String.valueOf(prescription.getPrescriptionId())))
+                    + String.format(nameFormat, centerString(nameWidth, prescription.getMedicineName()))
+                    + String.format(quantityFormat, centerString(quantityWidth,
+                    String.valueOf(prescription.getQuantity())))
                     + String.format(customerIdFormat, centerString(customerIdWidth,
-                    String.valueOf(dispense.getCustomerId())))
-                    + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(dispense.getDate())))
-                    + String.format(staffFormat, centerString(staffWidth, dispense.getStaff()))
-                    + String.format(stockIdFormat, centerString(stockIdWidth, String.valueOf(dispense.getStockId())));
+                    String.valueOf(prescription.getCustomerId())))
+                    + String.format(dateFormat, centerString(dateWidth,
+                    DateParser.dateToString(prescription.getDate())))
+                    + String.format(staffFormat, centerString(staffWidth, prescription.getStaff()))
+                    + String.format(stockIdFormat, centerString(stockIdWidth,
+                    String.valueOf(prescription.getStockId())));
             System.out.println(row);
             printRowBorder(columnWidths);
         }
