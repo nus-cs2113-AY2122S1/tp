@@ -274,7 +274,8 @@ Examples:
 <br>
 
 ### Viewing average marks for an assessment: `average_marks`
-Computes and prints the average marks for an assessment.
+Computes and prints the average marks for an assessment. If there are unmarked students, the average will be computed
+within the marked students only.
 
 Format: `set_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
@@ -283,6 +284,20 @@ Format: `set_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
 Examples:
 * `average_marks c/CS2113T a/Midterms`
 * `average_marks c/CS2101 a/Oral Presentation`
+
+<br>
+
+### Viewing median mark for an assessment: `median_mark`
+Computes and prints the median mark for an assessment. If there are unmarked students, the median will be computed 
+within the marked students only.
+
+Format: `set_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ASSESSMENT_NAME` refers to the name of the particular assessment.
+
+Examples:
+* `median_mark c/CS2113T a/Midterms`
+* `median_mark c/CS2101 a/Oral Presentation`
 
 <br>
 

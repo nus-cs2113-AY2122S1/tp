@@ -23,6 +23,7 @@ import taa.command.ListAttendanceCommand;
 import taa.command.ListMarksCommand;
 import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
+import taa.command.MedianMarkCommand;
 import taa.command.SetAttendanceCommand;
 import taa.command.SetMarksCommand;
 import taa.command.SortByScoresCommand;
@@ -128,6 +129,10 @@ public class Parser {
 
         case Command.COMMAND_AVERAGE_MARKS:
             command = new AverageMarksCommand(argument);
+            break;
+
+        case Command.COMMAND_MEDIAN_MARK:
+            command = new MedianMarkCommand(argument);
             break;
 
         case Command.COMMAND_LIST_MARKS:
