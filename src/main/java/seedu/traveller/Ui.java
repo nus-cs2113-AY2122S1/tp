@@ -119,34 +119,34 @@ public class Ui {
                 + "Adds a new trip called FamilyTrip2021 from Singapore "
                 + "(SIN) to Malaysia (MLY).\n"
 
-                +"\tadd-day myTrip 3 : "
-                +"Adds 3 days to trip myTrip.\n"
+                + "\tadd-day myTrip 3 : "
+                + "Adds 3 days to trip myTrip.\n"
 
-                +"\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
-                +"Adds item Check-in to HolidayInn to day 0 of trip1.\n"
+                + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
+                + "Adds item Check-in to HolidayInn to day 0 of trip1.\n"
 
                 + "\tview : Views all your existing trips and their details.\n"
 
                 + "\tdelete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n"
 
-                +"\tdelete-day myTrip /day 0 : "
-                +"Deletes day 0 of myTrip.\n"
+                + "\tdelete-day myTrip /day 0 : "
+                + "Deletes day 0 of myTrip.\n"
 
-                +"\tdelete-item myTrip /day 0 /item 0 : "
-                +"Deletes item 0 of myTrip on day 0.\n"
+                + "\tdelete-item myTrip /day 0 /item 0 : "
+                + "Deletes item 0 of myTrip on day 0.\n"
 
-                +"\tedit FamilyTrip2021 /from SKR /to JPN : "
-                +"Edits an existing trip called FamilyTrip2021"
-                +"to have new START and END destinations.\n"
+                + "\tedit FamilyTrip2021 /from SKR /to JPN : "
+                + "Edits an existing trip called FamilyTrip2021"
+                + "to have new START and END destinations.\n"
 
-                +"\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
-                +"Edits item1 of trip 1 to wake up from bed at 7am.\n"
+                + "\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
+                + "Edits item1 of trip 1 to wake up from bed at 7am.\n"
 
-                +"\tsearch-item trip1 /name sleep at home : "
-                +"Searches item keyword sleep at home in trip called trip1.\n"
+                + "\tsearch-item trip1 /name sleep at home : "
+                + "Searches item keyword sleep at home in trip called trip1.\n"
 
-                +"\tshortest /from SKR /to JPN : "
-                +"Returns the shortest distance from SKR to JPN.\n"
+                + "\tshortest /from SKR /to JPN : "
+                + "Returns the shortest distance from SKR to JPN.\n"
 
                 + "\texit : Exits the program.");
     }
