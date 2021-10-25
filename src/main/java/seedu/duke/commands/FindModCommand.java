@@ -17,7 +17,7 @@ public class FindModCommand extends Command {
             Ui.printFindModNull();
         } else {
             for (int i = 0; i < result.size(); i++) {
-                Ui.printModule(result.get(i), result.get(i).getMasterListIndex(moduleMasterList));
+                Ui.printModule(result.get(i), result.get(i).getMasterListIndex(moduleMasterList), false);
             }
         }
     }

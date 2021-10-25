@@ -25,7 +25,7 @@ public class AddModCommand extends Command {
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
         storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
-        Ui.printModule(moduleToAdd, moduleIndexToAdd);
+        Ui.printModule(moduleToAdd, moduleIndexToAdd, true);
     }
 
     public AddModCommand(Module moduleToAdd, ModuleList moduleMasterList,
@@ -43,6 +43,6 @@ public class AddModCommand extends Command {
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
         storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
-        Ui.printModule(moduleToAdd, moduleIndexToAdd);
+        Ui.printModule(moduleToAdd, moduleIndexToAdd, true);
     }
 }
