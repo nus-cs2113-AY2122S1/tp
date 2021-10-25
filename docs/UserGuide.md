@@ -9,13 +9,13 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 * [Quick Start](#quick-start)  
 * [Program run through](#program-run-through)  
 * [Features](#features)  
-  * [View all available universities](#view-all-available-universities)
-  * [View all selected universities](#view-all-selected-universities)
-  * [View all available modules](#view-all-available-modules)
-  * [View all selected modules](#view-all-selected-modules)
-  * [Add a partner university](#add-a-partner-university)
-  * [Add a NUS module](#add-a-nus-module)
-  * [Add a module mapping](#add-a-module-mapping)
+  * [Viewing all available universities](#viewing-all-available-universities)
+  * [Viewing all selected universities](#viewing-all-selected-universities)
+  * [Viewing all available modules](#viewing-all-available-modules)
+  * [Viewing all selected modules](#viewing-all-selected-modules)
+  * [Adding a partner university](#adding-a-partner-university)
+  * [Adding a NUS module](#adding-a-nus-module)
+  * [Adding a module mapping](#adding-a-module-mapping)
   * [Finding a specific university](#finding-a-specific-university)
   * [Finding a specific module](#finding-a-specific-module)
   * [Searching for available module mappings](#searching-for-available-module-mappings)
@@ -44,7 +44,7 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 
 ## Features 
 
-### View all available universities: 
+### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
 #### Format: `list /muni`  
 #### Example of usage:
@@ -61,7 +61,7 @@ Here are the universities and module mappings in the list:
 [80] - Western University  
 ```
 
-### View all selected universities:
+### Viewing all selected universities:
 Displays all universities added, as well as all module mappings added to the university by the user.  
 #### Format: `list /suni`  
 #### Example of usage:
@@ -74,7 +74,7 @@ Here are the universities and module mappings in your list:
 [80] - Western University
 ```
 
-### View all available modules: 
+### Viewing all available modules: 
 Displays all modules from the master list of modules that the user can choose from.  
 #### Format: `list /mmod`  
 #### Example of usage:
@@ -91,7 +91,7 @@ Here are the modules in the list:
 [805] UD5628 : Critique of Contemporary Urban Design  
 ```
 
-### View all selected modules
+### Viewing all selected modules
 Displays all modules from the master list of modules that the user can choose from.  
 #### Format: `list /smod`  
 #### Example of usage:
@@ -107,7 +107,7 @@ Here are the modules in the list:
 [47] CM1417   : Fundamentals of Chemistry
 ```
 
-### Add a partner university
+### Adding a partner university
 Add a partner university the user is interested into the user selected university list.
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
 >This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
@@ -126,7 +126,7 @@ New university added:
 [59] - University of California
 ```
 
-### Add a NUS module
+### Adding a NUS module
 Add a NUS module that the user wants to complete during SEP into the user selected module list.  
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 >This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments. The `<MODULE_INDEX>` can be found via `list /mmod` command.  
@@ -145,7 +145,7 @@ New module added:
 [77] CS1010   : Programming Methodology
 ```
 
-### Add a module mapping
+### Adding a module mapping
 Adds a specific pair of module mapping under a selected university.
 
 Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
