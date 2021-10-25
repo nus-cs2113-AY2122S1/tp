@@ -29,6 +29,47 @@
 
 ## Setting up, getting started
 
+Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
+
+1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
+  * In the same dialog, you _may_ have to set the Project language level field to the SDK default option.
+
+2. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+
+
+3. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+```
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :Duke.main()
+    _______________________________________________________________________________
+     I can't retrieve the saved task data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved lesson data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved module data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+       _   _       _   _   ____           ____     _   _   ____     ____   __   __ 
+      | \ |"|   U |"|u| | / __"| u     U | __")uU |"|u| | |  _"\   |  _"\  \ \ / / 
+     <|  \| |>   \| |\| |<\___ \/       \|  _ \/ \| |\| |/| | | | /| | | |  \ V /  
+     U| |\  |u    | |_| | u___) |        | |_) |  | |_| |U| |_| |\U| |_| |\U_|"|_u 
+      |_| \_|    <<\___/  |____/>>       |____/  <<\___/  |____/ u |____/ u  |_|   
+      ||   \\,-.(__) )(    )(  (__)     _|| \\_ (__) )(    |||_     |||_ .-,//|(_  
+      (_")  (_/     (__)  (__)         (__) (__)    (__)  (__)_)   (__)_) \_) (__) 
+    _______________________________________________________________________________
+
+```
+
+4. Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up Intellij IDEA to the coding style that matches ours.
+
 ## Design
 
 ### Architecture
@@ -147,7 +188,7 @@ The `Storage` component has methods that:
 * load data from the file in the given path into an array of strings representing each line of data.
 * save data of a given list by overwriting the respective file in the `data` folder with serialized data.
 
-The following sequence diagrams below show how task data is [saved](#saving-data) and [loaded](#loading-data) using the Storage class.
+The following sequence diagrams show how task data is [saved](#saving-data) and [loaded](#loading-data) using the Storage class.
 
 ### Common classes
 
@@ -159,22 +200,56 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 
 ![StorageSaveSequence](images/SaveDataSequenceDiagram.png)
 
+1. The path is determined based on the class type of the list given when calling the function.
+2. A FileWriter is created and subsequently used to create a BufferedWriter that points to the path.
+3. A taskList is called to return the serialized data of the list.
+4. BufferedWriter is used to write the serialized data into the location of the path.
+5. BufferedWriter is closed and the function subsequently returns.
+
 ### Loading data
 
 ![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
+
+1. A FileReader and created and subsequently used to create a BufferedReader that points to the given path.
+2. An ArrayList of Strings is created.
+3. BufferedReader is used to read each line of data from the path and stored into the ArrayList. (with each item in the array representing 1 line in the file)
+4. BufferedReader is closed and the function returns the ArrayList containing the read data.
 
 ## Appendix: Requirements
 
 ### Product scope
 
-{Describe the product scope}
+**Target Users:** 
+
+NUS undergraduate students who prefer typing over using a mouse and proficient with using CLI.
+
+**Needs of users:**
+
+* Quickly manage and record tasks and lessons
+* Manage modules for the semester and get module information quickly
 
 ### User stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add a task|keep track of my tasks|
+|v1.0|student|add a lesson|keep track of my lessons|
+|v1.0|user|list out tasks and lessons|see all my tasks and lessons|
+|v1.0|user|mark a task a done|keep track of completed tasks|
+|v1.0|user|delete tasks/lessons|keep my agenda clean|
+|v1.0|user|delete all tasks/lessons|quickly clear my agenda|
+|v1.0|user|store tasks/lessons in file(s)|retain data beyond the current instance|
+|v1.0|user|find tasks/lessons by keyword|quickly locate relevant information about tasks or lessons|
+|v2.0|user|attach priority to my tasks|see which tasks are of greater importance|
+|v2.0|NUS student|add/delete modules|keep track of my semester|
+|v2.0|NUS student|list out all the modules that I have with only the basic information|see all my modules with key information at a glance|
+|v2.0|NUS student|list out all the modules that I have with detailed information|see all my modules in detail|
+|v2.0|NUS student|search and browse for modules|look up for detailed information regarding a known module quickly|
+|v2.0|student|save to zoom link for my lessons|quickly access my zoom lessons|
+|v2.0|student|see all my tasks/lessons for today or tomorrow|quickly see work that are upcoming soon|
+|v2.0|user|see all the commands the app offers|not have to constantly refer to the user guide|
+|v2.0|user|sort my task in order of importance|see the important ones first|
+|v2.0|NUS student|be able to keep track of my CAP score|gauge my current undergraduate performance|
 
 ### Use cases
 
