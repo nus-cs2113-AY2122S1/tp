@@ -1,6 +1,8 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.items.characteristics.Member;
+import seedu.duke.items.mainlists.MemberRoster;
 import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
@@ -10,11 +12,13 @@ import seedu.duke.items.Task;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class AddCommand extends Command {
 
     protected static final String TASK_FLAG = "-t";
     protected static final String EVENT_FLAG = "-e";
+    protected static final String MEMBER_FLAG = "-m";
     protected static final String TITLE_FLAG = "n/";
     protected static final String DATE_FLAG = "d/";
     protected static final String VENUE_FLAG = "v/";
@@ -27,6 +31,8 @@ public class AddCommand extends Command {
 
     protected static String eventVenue;
     protected static double eventBudget;
+
+    protected static String memberName;
 
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
@@ -45,6 +51,8 @@ public class AddCommand extends Command {
                 prepareTask(response);
             } else if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 prepareEvent(response);
+            } else if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                prepareMember(response);
             } else {
                 throw new DukeException("Invalid item flag entered. Please specify task '-t' or event '-e'"
                         + "after the 'add' command. ");
@@ -103,6 +111,9 @@ public class AddCommand extends Command {
         if (Duke.eventCatalog.isEmpty()) {
             throw new DukeException("There is no event to assign this task to! Please add "
                     + "an event using the flag '-e'. ");
+        }
+        if (Duke.memberRoster.isEmpty()) {
+            throw new DukeException("There are no members in your roster to assign this task to!");
         }
         if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
@@ -166,9 +177,18 @@ public class AddCommand extends Command {
         }
     }
 
+    private void prepareMember(String response) {
+        memberName = response.substring(response.indexOf(MEMBER_FLAG) + 3).trim().toUpperCase();
+    }
+
     private static void addToEventCatalog(Event event) {
         Duke.eventCatalog.add(event);
         Duke.eventCatalog.sortCatalog();
+    }
+
+    private static void addToMemberRoster(Member member) {
+        Duke.memberRoster.add(member);
+        Duke.memberRoster.sortRoster();
     }
 
     private void addTaskToEvent(int eventIndex, Task task) throws DukeException {
@@ -209,10 +229,17 @@ public class AddCommand extends Command {
                 }
 
             }
+
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
+            }
+
+            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                Member member = new Member(memberName);
+                addToMemberRoster(member);
+                return new CommandResult(Ui.getMemberAddedMessage(member));
             }
         }
         return new CommandResult("Item unable to be added!");

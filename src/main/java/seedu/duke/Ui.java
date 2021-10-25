@@ -81,6 +81,10 @@ public class Ui {
                 event.getTitle(), Duke.eventCatalog.size());
     }
 
+    public static String getMemberAddedMessage(Member member) {
+        return String.format("Member added: %s\n", member.getName());
+    }
+
     public static void printGreetingMessage() {
         System.out.println("Greetings mortal. How may you be served today?\n"
                 + "TIP: enter \"help\" if you are weak and clueless!\n"

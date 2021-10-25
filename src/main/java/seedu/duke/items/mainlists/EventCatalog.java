@@ -7,21 +7,19 @@ import java.util.ArrayList;
 
 public class EventCatalog extends ArrayList<Event> {
 
-    private static ArrayList<Event> eventCatalog;
-    private static EventCatalog theOne = null;
+    private static EventCatalog eventCatalog = null;
 
     private EventCatalog() {
-        eventCatalog = new ArrayList<>();
     }
 
     public static EventCatalog getInstance() {
-        if (theOne == null) {
-            theOne = new EventCatalog();
+        if (eventCatalog == null) {
+            eventCatalog = new EventCatalog();
         }
-        return theOne;
+        return eventCatalog;
     }
 
-    private static <T extends Item> void swap(int i, ArrayList<T> list) {
+    private static <T> void swap(int i, ArrayList<T> list) {
         T t;
         t = list.get(i);
         list.set(i, list.get(i + 1));
@@ -39,8 +37,8 @@ public class EventCatalog extends ArrayList<Event> {
     }
 
     public void sortCatalog() {
-        bubbleSortItems(theOne);
-        for (Event event : theOne) {
+        bubbleSortItems(eventCatalog);
+        for (Event event : eventCatalog) {
             bubbleSortItems(event.getTaskList());
         }
     }
