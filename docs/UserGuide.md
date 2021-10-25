@@ -3,7 +3,28 @@
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
-Exchange Programme, optimised for use via Command Line Interface (CLI).
+Exchange Programme, optimised for use via Command Line Interface (CLI).  
+
+## Content Page
+* [Quick Start](#quick-start)  
+* [Program run through](#program-run-through)  
+* [Features](#features)  
+  * [View all available universities](#view-all-available-universities)
+  * [View all selected universities](#view-all-selected-universities)
+  * [View all available modules](#view-all-available-modules)
+  * [View all selected modules](#view-all-selected-modules)
+  * [Add a partner university](#add-a-partner-university)
+  * [Add a NUS module](#add-a-nus-module)
+  * [Add a module mapping](#add-a-module-mapping)
+  * [Finding a specific university](#finding-a-specific-university)
+  * [Finding a specific module](#finding-a-specific-module)
+  * [Searching for available module mappings](#searching-for-available-module-mappings)
+  * [Removing a selected university](#removing-a-selected-university)
+  * [Removing a selected NUS module](#removing-a-selected-nus-module)
+  * [Removing a selected module mapping](#removing-a-selected-module-mapping)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+* [Glossary](#glossary)
 
 ## Quick Start
 
@@ -95,12 +116,14 @@ Add a partner university the user is interested into the user selected universit
 * Input: `add /uni 24`  
 Expected output:
 ```
-show output here
+New university added: 
+[24] - Korea Advanced Inst of Sci & Tech
 ```
 * Input: `add /uni University of California`  
 Expected output:
 ```
-show output here
+New university added: 
+[59] - University of California
 ```
 
 ### Add a NUS module
@@ -112,12 +135,14 @@ Add a NUS module that the user wants to complete during SEP into the user select
 * Input: `add /mod 77`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 * Input: `add /mod CS1010`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 
 ### Add a module mapping
@@ -126,7 +151,7 @@ Adds a specific pair of module mapping under a selected university.
 Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
 >The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
 > 
-####Example of usage
+#### Example of usage:
 * Input: `add /map 4 2`  
 Expected output:
 ```
@@ -144,7 +169,16 @@ Format: `find /uni <KEYWORD>`
 * Input: `find /uni California`  
 Expected output:
 ```
-show output here
+[59] - University of California
+[60] - University of California, Berkeley
+[61] - University of California, Davis
+[62] - University of California, Irvine
+[63] - University of California, Los Angeles
+[64] - University of California, Merced
+[65] - University of California, Riverside
+[66] - University of California, San Diego
+[67] - University of California, Santa Barbara
+[68] - University of California, Santa Cruz
 ```
 
 ### Finding a specific module
@@ -155,7 +189,10 @@ Look for modules that matches the user entered keyword.
 * Input: `find /mod CS1010`  
 Expected output:
 ```
-show output here
+[77] CS1010   : Programming Methodology
+[78] CS1010E  : Programming Methodology
+[79] CS1010J  : Programming Methodology
+[80] CS1010S  : Programming Methodology
 ```
 
 ### Searching for available module mappings:
@@ -165,28 +202,30 @@ Displays all available module mappings for a specific university that matches th
 #### Example of usage:
 * Input: `searchmap 4`  
 Expected Output:
-  ```
-  Potential mappings for Boston University:
-  [1] CS1231 - MET CS 248 : Discrete Mathematics
-  [2] CS1231 - CAS CS131 : Combinatoric Structures
-  ```
+```
+Potential mappings for Boston University:
+[1] CS1231 - MET CS 248 : Discrete Mathematics
+[2] CS1231 - CAS CS131 : Combinatoric Structures
+```
 
-### Remove a selected university
+### Removing a selected university
 Remove a partner university from the user selected university list.
 #### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
 #### Examples of usage: 
 * Input: `remove /uni 4` 
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 * Input: `remove /uni Boston University`  
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 
-### Remove a selected NUS module
+### Removing a selected NUS module
 Removes a module from the user selected module list.
 #### Format: `remove /mod <MODULE_CODE>` `remove /mod <MODULE_INDEX>`
 #### Examples of usage:
@@ -204,7 +243,7 @@ The following module has been removed:
 ```
 
 
-### Remove a selected module mapping
+### Removing a selected module mapping
 Removes a module mapping under a selected university.
 #### Format: `remove /map <UNIVERSITY_INDEX> <MAPPING_INDEX>`  
 #### Example of usage: 
