@@ -96,7 +96,7 @@ public class Appointment {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: " + patientId
-                + " Staff ID: " + medicalStaffId + "\n";
+        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
+                + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 }
