@@ -147,6 +147,7 @@ public class Ui {
         AtomicInteger i = new AtomicInteger();
         list.forEach(member -> System.out.println(i.getAndIncrement() + 1 + ". " + member));
     }
+
     public static void listUsageCommands() {
         System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
                 + System.lineSeparator() + "-----------------------"
@@ -154,6 +155,7 @@ public class Ui {
                 + System.lineSeparator() + "To list Members of a Task: "
                 + "list [Event Index] t/[Task Index]");
     }
+
     public static void updateIntroMessage() {
         System.out.println("Please type the item you would like to update in the following manner "
                 + System.lineSeparator() + "-----------------------------------------------------------------------   "

@@ -32,14 +32,14 @@ public class NextCommand extends Command {
     public CommandResult execute() {
 
         try {
-        if (nextItem.equalsIgnoreCase("task")) {
-            if (userCommand.length != 3) {
-                nextCommandErrorMessage();
+            if (nextItem.equalsIgnoreCase("task")) {
+                if (userCommand.length != 3) {
+                    nextCommandErrorMessage();
+                }
+                Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2])).getFromTaskList(0));
+            } else if (nextItem.equalsIgnoreCase("event")) {
+                Ui.printEvent((Duke.eventCatalog.get(0)));
             }
-            Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2])).getFromTaskList(0));
-        } else if (nextItem.equalsIgnoreCase("event")) {
-            Ui.printEvent((Duke.eventCatalog.get(0)));
-        }
         } catch (NumberFormatException e) {
             nextCommandErrorMessage();
         }

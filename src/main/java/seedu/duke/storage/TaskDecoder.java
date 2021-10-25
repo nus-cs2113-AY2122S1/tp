@@ -23,8 +23,8 @@ public class TaskDecoder {
         String taskStatus = taskDetails[INDEX_OF_STATUS];
         String taskDescription = taskDetails[INDEX_OF_DESCRIPTION];
         LocalDateTime taskDeadline = Parser.convertDateTime(taskDetails[INDEX_OF_DEADLINE]);
-        //ArrayList<Member> membersList = decodeAssignedMembers(taskDetails[INDEX_OF_MEMBERS]);
-        ArrayList<Member> membersList = new ArrayList<>();
+        ArrayList<Member> membersList = decodeAssignedMembers(taskDetails[INDEX_OF_MEMBERS]);
+
         Task task = new Task(taskTitle, taskDescription, taskDeadline, membersList);
         if (taskStatus.equals("X")) {
             task.markAsDone();
