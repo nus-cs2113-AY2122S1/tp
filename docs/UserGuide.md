@@ -128,12 +128,9 @@ travel: $20.00
 shopping: $30.00
 
 ```
-#Available Currencies
+
 ###Expenses
-
-
-
-
+##Available Currencies
 Currency Name | ISO Code
 ------------ | -----------
 United States Dollar | USD
