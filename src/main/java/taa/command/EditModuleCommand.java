@@ -17,7 +17,7 @@ public class EditModuleCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_EDIT_MODULE_USAGE = "%s %s/<MODULE_CODE> "
-        + "[%s/<NEW_MODULE_NAME> | %s/<NEW_MODULE_NAME>]";
+        + "[%s/<NEW_MODULE_CODE>] [%s/<NEW_MODULE_NAME>]";
     private static final String MESSAGE_FORMAT_MODULE_EDITED = "Module edited:\n  %s";
 
     public EditModuleCommand(String argument) {
@@ -25,19 +25,26 @@ public class EditModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void checkArgument() throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        boolean hasModuleCode = argumentMap.containsKey(KEY_MODULE_CODE);
-        boolean hasNewModuleCode = argumentMap.containsKey(KEY_NEW_MODULE_CODE);
-        boolean hasNewModuleName = argumentMap.containsKey(KEY_NEW_MODULE_NAME);
-        boolean hasNecessaryArguments = hasModuleCode && (hasNewModuleCode || hasNewModuleName);
-        if (!hasNecessaryArguments) {
+        if (!argumentMap.containsKey(KEY_MODULE_CODE)) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
+        boolean hasNewModuleCode = argumentMap.containsKey(KEY_NEW_MODULE_CODE);
+        boolean hasNewModuleName = argumentMap.containsKey(KEY_NEW_MODULE_NAME);
+        boolean hasNecessaryArguments = (hasNewModuleCode || hasNewModuleName);
+        if (!hasNecessaryArguments) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+    }
+
+    @Override
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {

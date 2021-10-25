@@ -21,10 +21,21 @@ public class AverageMarksCommand extends Command {
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS = "Average marks for %s is %,.2f";
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED = "Average marks for %s is %,.2f\n"
-            + "Note that %d student(s) have yet to be marked!";
+        + "Note that %d student(s) have yet to be marked!";
 
     public AverageMarksCommand(String argument) {
         super(argument, AVERAGE_MARKS_ARGUMENT_KEYS);
+    }
+
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
     }
 
     /**
@@ -37,14 +48,6 @@ public class AverageMarksCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -91,7 +94,7 @@ public class AverageMarksCommand extends Command {
             ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS, assessmentName, averageMarks));
         } else {
             ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED,
-                    assessmentName, averageMarks, unmarkedStudents));
+                assessmentName, averageMarks, unmarkedStudents));
         }
     }
 

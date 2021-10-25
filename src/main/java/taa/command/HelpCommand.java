@@ -29,6 +29,7 @@ public class HelpCommand extends Command {
         new AverageMarksCommand(""),
         new ListAttendanceCommand(""),
         new SetAttendanceCommand(""),
+        new DeleteAttendanceCommand(""),
         new ExitCommand(""),
         new HelpCommand("")
     };
@@ -38,11 +39,14 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void checkArgument() throws TaaException {
         if (!argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
+    }
 
+    @Override
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commands.length; i += 1) {
             Command command = commands[i];

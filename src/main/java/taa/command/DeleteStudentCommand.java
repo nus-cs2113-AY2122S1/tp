@@ -22,6 +22,22 @@ public class DeleteStudentCommand extends Command {
         super(argument, DELETE_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+    }
+
     /**
      * Executes the delete_student command and deletes a student from the module.
      *
@@ -32,14 +48,6 @@ public class DeleteStudentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -47,9 +55,7 @@ public class DeleteStudentCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
-        }
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = module.getStudentList();
@@ -60,7 +66,6 @@ public class DeleteStudentCommand extends Command {
         }
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_DELETED, moduleCode, student));
     }
 

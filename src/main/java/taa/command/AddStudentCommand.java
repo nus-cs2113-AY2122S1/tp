@@ -23,6 +23,16 @@ public class AddStudentCommand extends Command {
         super(argument, ADD_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+    }
 
     /**
      * Executes the add_student command and adds a student to a particular module.
@@ -34,14 +44,6 @@ public class AddStudentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -56,7 +58,6 @@ public class AddStudentCommand extends Command {
         studentList.addStudent(student);
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
     }
 

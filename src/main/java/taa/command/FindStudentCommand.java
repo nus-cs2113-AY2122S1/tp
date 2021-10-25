@@ -25,6 +25,17 @@ public class FindStudentCommand extends Command {
         super(argument, FIND_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+    }
+
     /**
      * Executes the find_student command and finds students in the module based on a keyword.
      *
@@ -35,14 +46,6 @@ public class FindStudentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {

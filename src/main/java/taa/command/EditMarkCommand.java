@@ -24,9 +24,9 @@ public class EditMarkCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_EDIT_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
-            + "%s/<ASSESSMENT_NAME> %s/<NEW_MARKS>";
+        + "%s/<ASSESSMENT_NAME> %s/<NEW_MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
-            + "Marks must be between %d and %,.2f (inclusive)";
+        + "Marks must be between %d and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_MARKS_EDITED = "Marks edited for %s: from %,.2f to %,.2f for %s";
 
     public EditMarkCommand(String argument) {
@@ -34,40 +34,62 @@ public class EditMarkCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void checkArgument() throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
+
         if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+
+        String marksInput = argumentMap.get(KEY_NEW_MARKS);
+        if (!Util.isStringDouble(marksInput)) {
+            throw new TaaException(MESSAGE_INVALID_MARKS);
+        }
+    }
+
+    @Override
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
+
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
-        if (student == null || !Util.isStringInteger(studentIndexInput)) {
+        if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+
         AssessmentList assessmentList = module.getAssessmentList();
         String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = assessmentList.getAssessment(assessmentName);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
+
         String marksInput = argumentMap.get(KEY_NEW_MARKS);
+        assert Util.isStringDouble(marksInput);
         double marks = Double.parseDouble(marksInput);
         double maximumMarks = assessment.getMaximumMarks();
-        if ((!Util.isStringDouble(marksInput)) || !(assessment.isMarksValid(marks))) {
+        if (!(assessment.isMarksValid(marks))) {
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, 0, maximumMarks));
         }
+
         if (student.getResults().get(assessmentName) == null) {
             throw new TaaException(MESSAGE_NO_MARKS);
         }
+
         editMark(ui, student, assessmentName, marks);
         storage.save(moduleList);
     }
@@ -82,12 +104,12 @@ public class EditMarkCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_EDIT_MARKS_USAGE,
-                COMMAND_EDIT_MARK,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_ASSESSMENT_NAME,
-                KEY_NEW_MARKS
+            MESSAGE_FORMAT_EDIT_MARKS_USAGE,
+            COMMAND_EDIT_MARK,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_ASSESSMENT_NAME,
+            KEY_NEW_MARKS
         );
     }
 }

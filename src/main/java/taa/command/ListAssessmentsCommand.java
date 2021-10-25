@@ -20,6 +20,17 @@ public class ListAssessmentsCommand extends Command {
         super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+    }
+
     /**
      * Executes the list_assessment command and list all the assessments of a particular module.
      *
@@ -30,14 +41,6 @@ public class ListAssessmentsCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {

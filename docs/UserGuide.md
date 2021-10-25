@@ -6,21 +6,27 @@ If you can type fast, TAA can help keep track of your modules and students faste
 * [Features](#features)
   * [Listing all modules: `list_modules`](#listing-all-modules-list_modules)
   * [Adding a module: `add_module`](#adding-a-module-add_module)
-  * [Adding a student to a specified module: `add_student`](#adding-a-student-to-a-specified-module-add_student)
-  * [Editing student information: `edit_student`](#editing-student-information-edit_student)
-  * [Deleting student information: `delete_student`](#deleting-student-information-delete_student)
+  * [Editing a module: `edit_module`](#editing-a-module-edit_module)
+  * [Deleting a module: `delete_module`](#deleting-a-module-delete_module)
   * [Listing all students in a module: `list_students`](#listing-all-students-in-a-module-list_students)
+  * [Adding a student to a module: `add_student`](#adding-a-student-to-a-module-add_student)
+  * [Editing a student's information in a module: `edit_student`](#editing-a-students-information-in-a-module-edit_student)
+  * [Deleting a student from a module: `delete_student`](#deleting-a-student-from-a-module-delete_student)
   * [Finding students in a module given a keyword: `find_student`](#finding-students-in-a-module-given-a-keyword-find_student)
-  * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
   * [Listing all assessments in a module: `list_assessments`](#listing-all-assessments-in-a-module-list_assessments)
   * [Adding an assessment to a module: `add_assessment`](#adding-an-assessment-to-a-module-add_assessment)
   * [Editing an assessment in a module: `edit_assessment`](#editing-an-assessment-in-a-module-edit_assessment)
   * [Deleting an assessment from a module: `delete_assessment`](#deleting-an-assessment-from-a-module-delete_assessment)
   * [Listing marks for an assessment: `list_marks`](#listing-marks-for-an-assessment-list_marks)
-  * [Setting marks for a student's assessment: `set_marks`](#setting-marks-for-a-students-assessment-set_marks) 
+  * [Setting marks for a student's assessment: `set_marks`](#setting-marks-for-a-students-assessment-set_marks)
   * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
   * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
-  * [Finding average marks for an assessment: `average_marks`](#finding-average-marks-for-an-assessment-average_marks)
+  * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
+  * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
+  * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
+  * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -33,14 +39,7 @@ If you can type fast, TAA can help keep track of your modules and students faste
 5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app.
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
-## Features 
-
-### Viewing help: `help`
-Displays the list of available commands and how to use them.
-
-Format: `help`
-
-<br>
+## Features
 
 ### Listing all modules: `list_modules`
 Displays the list of all modules in the module list.
@@ -52,17 +51,59 @@ Format: `list_modules`
 ### Adding a module: `add_module`
 Adds a module to the module list.
 
-Format: `add_module c/<MODULE_CODE> n/<MODULE_NAME>`
+Format: `add_module c/<MODULE_CODE> [n/<MODULE_NAME>]`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `MODULE_NAME` refers to the name of the module to be added.
+* `MODULE_NAME` [Optional] refers to the name of the module to be added.
 
 Examples:
 * `add_module c/CS2113T n/Software Engineering and Object-oriented Programming`
 * `add_module n/Effective Communication for Computing Professionals c/CS2101`
+* `add_module c/CS2102`
 
 <br>
 
-### Adding a student to a specified module: `add_student`
+### Editing a module: `edit_module`
+Edits the code or name of an existing module.
+
+Format: `edit_module c/<MODULE_CODE> [nc/<NEW_MODULE_NAME>] [n/<NEW_MODULE_NAME>]`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `NEW_MODULE_CODE` [Optional] refers to the updated code of the module.
+* `NEW_MODULE_NAME` [Optional] refers to the updated name of the module.
+> 💡 **Note:**<br />
+> Either `NEW_MODULE_CODE`, `NEW_MODULE_NAME`, or both must be provided.
+
+Examples:
+* `edit_module c/CS2113T nc/cs2113t`
+* `edit_module c/CS2113T n/software engineering`
+* `edit_module c/CS2113T nc/cs2113t n/software engineering`
+
+<br>
+
+### Deleting a module: `delete_module`
+Deletes an existing module from the module list.
+
+Format: `delete_module c/<MODULE_CODE>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+
+Examples:
+* `delete_module c/CS2113T`
+* `delete_module c/CS2101`
+
+<br>
+
+### Listing all students in a module: `list_students`
+Shows a list of all students in a particular module.
+
+Format: `list_students c/<MODULE_CODE>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+
+Examples:
+* `list_students c/CS2113T`
+* `list_students c/CS2101`
+
+<br>
+
+### Adding a student to a module: `add_student`
 Adds a student to a particular module
 
 Format: `add_student c/<MODULE_CODE> i/<STUDENT_ID> n/<STUDENT_NAME>`
@@ -76,7 +117,7 @@ Examples:
 
 <br>
 
-### Editing student information: `edit_student`
+### Editing a student's information in a module: `edit_student`
 Edits student information from a particular module
 
 Format: `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_NAME>`
@@ -91,7 +132,7 @@ Examples:
 
 <br>
 
-### Deleting student information: `delete_student`
+### Deleting a student from a module: `delete_student`
 Deletes student information from a particular module.
 
 Format: `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
@@ -100,6 +141,19 @@ Format: `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
 
 Examples:
 * `delete_student c/cs2113t s/1`
+
+<br>
+
+### Finding students in a module given a keyword: `find_student`
+Displays all students in the module matching the keyword along with their index.
+
+Format: `find_student c/<MODULE_CODE> k/<KEYWORD>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `KEYWORD` refers to the keyword used to search the student list of the module.
+
+Examples:
+* `find_student c/CS2113T k/123`
+* `find_students c/CS2101 k/Jon`
 
 <br>
 
@@ -140,6 +194,8 @@ Format: `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT
 * `NEW_ASSESSMENT_NAME` refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
 * `NEW_MAXIMUM_MARKS` refers to the new maximum marks of the assessment (e.g. 50).
 * `NEW_WEIGHTAGE` refers to the new weightage of the assessment (e.g. 20%).
+> 💡 **Note:**<br />
+> TODO
 
 Examples:
 * `edit_assessment c/CS2101 n/OP1 m/20 w/10`
@@ -160,39 +216,18 @@ Examples:
 
 <br>
 
-### Listing all students in a module: `list_students`
-Shows a list of all students in a particular module.
+### Listing marks for an assessment: `list_marks`
+Lists all students and their marks for an assessment.
 
-Format: `list_students c/<MODULE_CODE>`
+Format: `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ASSESSMENT_NAME` refers to the name of the assessment whose marks are to be listed.
 
 Examples:
-* `list_students c/CS2113T`
-* `list_students c/CS2101`
+* `list_marks c/CS2113T a/Midterms`
+* `list_marks c/CS2101 a/Oral Presentation`
 
 <br>
-
-### Finding students in a module given a keyword: `find_student`
-Displays all students in the module matching the keyword along with their index.
-
-Format: `find_student c/<MODULE_CODE> k/<KEYWORD>`
-* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `KEYWORD` refers to the keyword used to search the student list of the module.
-
-Examples:
-* `find_student c/CS2113T k/123`
-* `find_students c/CS2101 k/Jon`
-
-<br>
-
-### Setting attendance for a particular lesson for a student: `set_attendance`
-Sets a student's attendance for a lesson
-
-Format: `set_attendance c/<MODULE_CODE s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
-* `LESSON_NUMBER` refers to the lesson number
-* `PRESENT` refers to the whether a student is present. (1 for present, 0 for not present)
 
 ### Setting marks for a student's assessment: `set_marks`
 Adds a student's marks for an assessment.
@@ -238,7 +273,7 @@ Examples:
 
 <br>
 
-### Finding average marks for an assessment: `average_marks`
+### Viewing average marks for an assessment: `average_marks`
 Computes and prints the average marks for an assessment.
 
 Format: `set_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
@@ -251,16 +286,40 @@ Examples:
 
 <br>
 
-### Listing marks for an assessment: `list_marks`
-Lists all students and their marks for an assessment.
+### Listing attendance for a particular student: `list_attendance`
+Lists a student's attendance.
 
-Format: `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
+Format: `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `ASSESSMENT_NAME` refers to the name of the assessment whose marks are to be listed.
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
 
-Examples:
-* `list_marks c/CS2113T a/Midterms`
-* `list_marks c/CS2101 a/Oral Presentation`
+<br>
+
+### Setting attendance for a particular lesson for a student: `set_attendance`
+Sets a student's attendance for a lesson.
+
+Format: `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `LESSON_NUMBER` refers to the lesson number.
+* `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+
+<br>
+
+### Deleting attendance for a particular lesson for a student: `delete_attendance`
+Deletes a student's attendance for a lesson.
+
+Format: `delete_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `LESSON_NUMBER` refers to the lesson number.
+
+<br>
+
+### Viewing help: `help`
+Displays the list of available commands and how to use them.
+
+Format: `help`
 
 <br>
 
@@ -279,27 +338,28 @@ Format: `exit`
 
 {Give a 'cheat sheet' of commands here}
 
-Command | Format and Examples |
+Action | Format |
   ------ | --------------- |
-add_module | `add_module c/<MODULE_CODE> n/<MODULE_NAME>` <br /> e.g.`add_module c/CS2113T n/Software Engineeringand Object-oriented Programming`
-add_student | `add_student c/<MODULE_CODE> i/<STUDENT_ID> n/<STUDENT_NAME>` <br /> e.g. `add_student c/CS2113T i/a0212345x n/Jon Lim`
-add_assessment | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>` <br /> e.g. `add_assessment c/CS2113T n/test m/100 w/20 `
-set_attendance | `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>` <br /> e.g. `set_attendance c/CS2113T s/1 l/1 p/1`
-set_marks | `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>` <br /> e.g. `set_marks c/CS2113T s/1 a/Midterms m/70.6`
-delete_student | `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>` <br /> e.g. `delete_student c/cs2113t s/1`
-delete_assessment | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>` <br /> e.g. `delete_assessment c/CS2113T n/finals`
-delete_mark | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>` <br /> e.g. `delete_mark c/CS2113T s/1 a/Midterms`
-edit_mark | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>` <br /> e.g. `edit_mark c/CS2113T s/1 a/Midterms m/80.6`
-edit_student | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>` <br /> e.g. `edit_student c/CS2113T s/1 i/12345 n/jon geh`
-edit_assessment | `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]` <br /> e.g. `edit_assessment c/CS2101 n/OP1 m/20 w/10`
-list_modules | `list_modules`
-list_students | `list_students c/<MODULE_CODE>` <br /> e.g. `list_students c/CS2113T`
-list_attendance | `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX>` <br /> e.g. `list_attendance c/CS2113T s/1`
-list_assessments | `list_assessments c/<MODULE_CODE>` <br /> e.g. `list_assessments c/CS2113T`
-list_marks | `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>` <br /> e.g. `list_marks c/CS2113T a/Midterms`
-find_student | `find_student c/<MODULE_CODE> k/<KEYWORD>` <br /> e.g. `find_student c/CS2113T k/123`
-average_marks | `average_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>` <br /> e.g. `average_marks c/CS2113T a/Midterms`
-help | `help`
-exit | `exit`
-
-
+Listing all modules | `list_modules`
+Adding a module | `add_module c/<MODULE_CODE> [n/<MODULE_NAME>]`
+Editing a module | `edit_module c/<MODULE_CODE> [nc/<NEW_MODULE_NAME>] [n/<NEW_MODULE_NAME>]`
+Deleting a module | `delete_module c/<MODULE_CODE>`
+Listing all students in a module | `list_students c/<MODULE_CODE>`
+Adding a student to a module | `add_student c/<MODULE_CODE> i/<STUDENT_ID> n/<STUDENT_NAME>`
+Editing a student's information in a module | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
+Deleting a student from a module | `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
+Finding students in a module given a keyword | `find_student c/<MODULE_CODE> k/<KEYWORD>`
+Listing all assessments in a module | `list_assessments c/<MODULE_CODE>`
+Adding an assessment to a module | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
+Editing an assessment in a module | `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
+Deleting an assessment from a module | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>`
+Listing marks for an assessment: | `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
+Setting marks for a student's assessment | `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
+Editing marks for a student's assessment | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
+Deleting marks for a student's assessment | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
+Viewing average marks for an assessment | `average_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
+Listing attendance for a particular student | `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX>`
+Setting attendance for a particular lesson for a student | `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+Deleting attendance for a particular lesson for a student | `delete_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+Viewing help | `help`
+Exiting the program | `exit`
