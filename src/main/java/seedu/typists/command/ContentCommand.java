@@ -1,6 +1,4 @@
-package seedu.typists.parser;
-
-import seedu.typists.content.Content;
+package seedu.typists.command;
 
 import static seedu.typists.Main.content;
 

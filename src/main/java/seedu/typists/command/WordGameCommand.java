@@ -1,6 +1,6 @@
-package seedu.typists.parser;
+package seedu.typists.command;
 
-import seedu.typists.game.Game;
+import seedu.typists.command.Command;
 import seedu.typists.game.WordLimitGame;
 
 import static seedu.typists.Main.content;
