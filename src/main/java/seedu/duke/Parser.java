@@ -5,18 +5,25 @@ import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.ClearCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
+import seedu.duke.commands.clientpackages.CutClientPackageCommand;
 import seedu.duke.commands.clientpackages.ListClientPackageCommand;
-import seedu.duke.commands.clients.SortClientCommand;
-import seedu.duke.commands.clients.ListClientCommand;
+
 import seedu.duke.commands.clients.AddClientCommand;
+import seedu.duke.commands.clients.CutClientCommand;
 import seedu.duke.commands.clients.FindClientCommand;
+import seedu.duke.commands.clients.ListClientCommand;
+import seedu.duke.commands.clients.SortClientCommand;
 import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.commands.flights.CutFlightCommand;
 import seedu.duke.commands.flights.FindFlightCommand;
 import seedu.duke.commands.flights.ListFlightCommand;
+
+import seedu.duke.commands.tours.SortTourCommand;
+import seedu.duke.commands.tours.CutTourCommand;
 import seedu.duke.commands.tours.AddTourCommand;
 import seedu.duke.commands.tours.FindTourCommand;
 import seedu.duke.commands.tours.ListTourCommand;
-import seedu.duke.commands.tours.SortTourCommand;
+
 import seedu.duke.data.Client;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
@@ -68,6 +75,8 @@ public class Parser {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ClearCommand();
+        case "cut":
+            return parseCut(params);
         case "find":
             return parseFind(params);
         case "sort":
@@ -107,8 +116,8 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
-            prefixes = Arrays.asList("/cn", "/m");
-            repeatPrefixChecker = 3;
+            prefixes = Arrays.asList("/n", "/cn", "/m");
+            repeatPrefixChecker = 4;
             break;
         case "-t":
             prefixes = Arrays.asList("/n", "/p");
@@ -119,8 +128,8 @@ public class Parser {
             repeatPrefixChecker = 5;
             break;
         case "-p":
-            prefixes = Arrays.asList("/t", "/f");
-            repeatPrefixChecker = 3;
+            prefixes = Arrays.asList("/c", "/t", "/f");
+            repeatPrefixChecker = 4;
             break;
         default:
             break;
@@ -238,11 +247,14 @@ public class Parser {
     private static int obtainPackageArrayIndex(String prefix) {
         int index;
         switch (prefix) {
-        case "/t":
+        case "/c":
             index = 1;
             break;
-        case "/f":
+        case "/t":
             index = 2;
+            break;
+        case "/f":
+            index = 3;
             break;
         default:
             index = 0;
@@ -295,11 +307,14 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/cn":
+        case "/n":
             index = 1;
             break;
-        case "/m":
+        case "/cn":
             index = 2;
+            break;
+        case "/m":
+            index = 3;
             break;
         default:
             index = 0;
@@ -387,6 +402,25 @@ public class Parser {
             return new ListFlightCommand();
         case "-p":
             return new ListClientPackageCommand();
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+
+    private static Command parseCut(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[0];
+        String args = identifierAndArgs[1];
+
+        switch (identifier) {
+        case "-c":
+            return new CutClientCommand(args);
+        case "-t":
+            return new CutTourCommand(args);
+        case "-f":
+            return new CutFlightCommand(args);
+        case "-p":
+            return new CutClientPackageCommand(args);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }

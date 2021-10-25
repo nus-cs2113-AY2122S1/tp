@@ -1,5 +1,6 @@
 package seedu.duke.commands.tours;
 
+import seedu.duke.TourPlannerException;
 import seedu.duke.commands.Command;
 
 public class FindTourCommand extends Command {
@@ -10,6 +11,10 @@ public class FindTourCommand extends Command {
     }
 
     public void execute() {
-        ui.showFindTour(tours, clientPackages, code);
+        try {
+            ui.showFindTour(tours, clientPackages, code);
+        } catch (TourPlannerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
