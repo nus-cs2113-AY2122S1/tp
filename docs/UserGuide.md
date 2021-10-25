@@ -15,10 +15,10 @@
   10. [Entering into a Workout: `enter`](#10-entering-into-a-workout-enter)
   11. [Exiting from a workout: `back`](#11-exiting-from-a-workout-back)
   12. [Recommend a workout: `recommend`](#12-recommend-a-workout-recommend)
-  12. [Clearing all workouts/exercises: `clear`](#13-clearing-all-workouts/exercises-clear)
-  13. [Exiting the application: `bye`](#14-exiting-the-application-bye)
-  14. [Saving data](#15-saving-data)
-  15. [Editable data file](#16-editable-data-file)
+  13. [Clearing all workouts or exercises: `clear`](#13-clearing-all-workouts-or-exercises-clear)
+  14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
+  15. [Saving data](#15-saving-data)
+  16. [Editable data file](#16-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -351,7 +351,7 @@ __________________________________
 ________________________________________________________
 ```
 
-### 13. Clearing all workouts/exercises: `clear`
+### 13. Clearing all workouts or exercises: `clear`
 
 Helps you to remove all the exercises in a specified workout or all workouts in the application in one
 go.
