@@ -8,7 +8,7 @@ public class Constants {
     public static final String MODULE_NAME_SEPARATOR = " : ";
     public static final String LINE_SEPARATOR = "============================="
             + "====================================================";
-    public static final String INDENTATION = "    ";
+    public static final String INDENTATION = "      ";
     public static final int MODULE_CODE_LENGTH = 8;
     public static final int INDEX_LENGTH = 3;
     public static int MODUlE_NAME_LENGTH = 40;

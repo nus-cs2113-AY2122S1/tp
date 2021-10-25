@@ -35,9 +35,15 @@ public class Ui {
         System.out.println(mappingDetails);
     }
 
-    public static void printUniversity(University uni) {
+    public static void printUniversity(University uni, boolean printMC) {
         printIndex(uni.getIndex(), false);
-        out.println(Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
+        String output;
+        if (printMC) {
+            output = uni.getName() + "      " + uni.getMC();
+        } else {
+            output = uni.getName();
+        }
+        out.println(output);
     }
 
     public static void printMapping(ModuleMapping mm, int index) {
