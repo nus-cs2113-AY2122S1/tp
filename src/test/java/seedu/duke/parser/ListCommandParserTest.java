@@ -28,6 +28,7 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
@@ -39,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ListCommandParserTest {
 
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
     private static UniversityList universityMasterList;
@@ -46,8 +48,8 @@ public class ListCommandParserTest {
 
     static {
         try {
-            moduleMasterList = new ModuleList(ModuleStorage.load());
-            universityMasterList = new UniversityList(UniversityStorage.load());
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(storage.readUniversityList());
         } catch (IOException e) {
             e.printStackTrace();
         }
