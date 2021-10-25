@@ -37,4 +37,5 @@ public class AddCommand extends Command {
             throw new SitusException(e.getMessage());
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package seedu.situs.ingredients;
 
+import seedu.situs.Situs;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
@@ -22,6 +23,9 @@ import java.util.ArrayList;
 public class IngredientList {
 
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
+    private static final String NEGATIVE_NUMBER = "Amount updated must be positive!";
+    private static final String INVALID_SUBTRACT = "Subtract amount can't be more than total amount!";
+
     protected static ArrayList<IngredientGroup> ingredientList;
     private static IngredientList instance = null;
     private static Storage storage;
@@ -121,6 +125,50 @@ public class IngredientList {
     }
 
     /**
+     * Subtracts amount from total ingredient amount
+     * @param ingredientName name of ingredient
+     * @param subtractAmount amount to be subtracted from total amount
+     * @throws SitusException if the ingredient and/or expiry date are not matched
+     * @throws IOException if the removed ingredient cannot be removed from memory
+     */
+    public void subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
+            SitusException, IOException {
+        try {
+            int i = 0;
+            int ingredientIndex = findIngredientIndexInList(ingredientName);
+            if (ingredientIndex < 0) {
+                throw new SitusException("Ingredient not found!");
+            }
+            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
+            if (currentGroup.getTotalAmount() < subtractAmount) {
+                throw new SitusException(INVALID_SUBTRACT);
+            }
+//
+            currentGroup.subtractFromTotalAmount(subtractAmount);
+//
+            while (subtractAmount != 0.0) {
+                if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
+                    currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
+                    subtractAmount = 0.0;
+                } else {
+                    subtractAmount -= currentGroup.get(i + 1).getAmount();
+                    currentGroup.get(i + 1).setAmount(0.0);
+                }
+                i++;
+            }
+            i = 0;
+            while (currentGroup.get(i + 1).getAmount() == 0.0) {
+                currentGroup.remove(i + 1);
+            }
+
+            storage.writeIngredientsToMemory(ingredientList);
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new SitusException(INVALID_NUMBER);
+        }
+    }
+
+    /**
      * Removes an ingredient from ingredient group.
      *
      * @param ingredientName the ingredient name to remove
@@ -171,4 +219,34 @@ public class IngredientList {
             throw new SitusException(INVALID_NUMBER);
         }
     }
+
+    /**
+     * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
+     *
+     * @param updatedIngredient to be updated ingredient
+     * @throws SitusException index out of bounds, cannot access
+     */
+    public boolean update(Ingredient updatedIngredient) throws SitusException {
+        try {
+            int i;
+            boolean expiryIsRepeated = false;
+            int ingredientIndex = findIngredientIndexInList(updatedIngredient.getName());
+            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
+            for (i = 0; i < currentGroup.getIngredientGroupSize(); i++) {
+                if (updatedIngredient.getExpiry().equals((currentGroup.getIngredientExpiry(i + 1)))) {
+                    if (updatedIngredient.getAmount() <= 0) {
+                        throw new SitusException(NEGATIVE_NUMBER);
+                    }
+                    currentGroup.updateTotalAmount(currentGroup.get(i + 1).getAmount(), updatedIngredient.getAmount());
+                    (currentGroup.get(i + 1)).setAmount(updatedIngredient.getAmount());
+                    expiryIsRepeated = true;
+                }
+            }
+            storage.writeIngredientsToMemory(ingredientList);
+            return expiryIsRepeated;
+        } catch (IndexOutOfBoundsException | IOException e) {
+            throw new SitusException(INVALID_NUMBER);
+        }
+    }
+
 }

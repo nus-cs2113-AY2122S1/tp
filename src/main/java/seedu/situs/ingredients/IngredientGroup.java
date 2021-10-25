@@ -25,8 +25,9 @@ public class IngredientGroup {
 
     protected ArrayList<Ingredient> ingredientGroup;
     private String groupName; //name of ingredient
-    private Double totalAmount;
+    private Double totalAmount; //sum of all amounts of the ingredient
 
+    private Storage storage;
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
@@ -49,6 +50,24 @@ public class IngredientGroup {
      */
     public double getTotalAmount() {
         return totalAmount;
+    }
+
+    /**
+     * Updates total amount of ingredient.
+     * @param currentAmount previous amount of ingredient with specific expiry date
+     * @param newAmount new amount of ingredient with specific expiry date
+     */
+    public void updateTotalAmount(double currentAmount, double newAmount) {
+        this.totalAmount += newAmount;
+        this.totalAmount -= currentAmount;
+    }
+
+    /**
+     * Subtracts amount from total amount
+     * @param subtractAmount amount to subtract from total amount
+     */
+    public void subtractFromTotalAmount(double subtractAmount) {
+        this.totalAmount -= subtractAmount;
     }
 
     /**
@@ -117,7 +136,6 @@ public class IngredientGroup {
         this.totalAmount += ingredient.getAmount();
         ingredientGroup.sort(Comparator.comparing(Ingredient::getExpiry));
     }
-
 
     public LocalDate getIngredientExpiry(int ingredientNumber) {
         return ingredientGroup.get(ingredientNumber - 1).getExpiry();
