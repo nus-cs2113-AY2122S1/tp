@@ -21,11 +21,9 @@ import seedu.duke.data.Client;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -40,6 +38,10 @@ public class Parser {
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
     public static final String ERROR_MISSING_NAME = "Missing name/id! Please try again.";
+    public static final String ERROR_EMAIL_FORMAT_WRONG = "Invalid Email!";
+    public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number";
+    public static final String ERROR_TOUR_TIME_WRONG = "Invalid Tour Time";
+    public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time";
 
     /**
      * Parses user's input into command to execute.
@@ -49,10 +51,13 @@ public class Parser {
      * @throws TourPlannerException if there are missing fields,duplicated prefixes, missing prefixes and erroneous
      *                              'cut' index given
      */
-    public static Command parse(String input) throws TourPlannerException {
+    public static Command parse(String input) throws TourPlannerException, ParseException {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
+        String dummy;
+        String contact_num;
+
         switch (command) {
         case "bye":
             if (!params.equals("")) {
@@ -60,6 +65,75 @@ public class Parser {
             }
             return new ByeCommand();
         case "add":
+            if(params.contains("-c")) {
+                if(!params.contains("@")) {
+                    throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
+                }
+                int index1 = params.indexOf("/cn");
+                int index2 = params.lastIndexOf("/");
+                if(index1 == index2) {
+                    dummy = params.substring(index1 + 3);
+                    contact_num = dummy.trim();
+                    for(int i = 0; i < contact_num.length(); i++) {
+                        char ch = contact_num.charAt(i);
+                        if(!(ch <= '9' && ch >= '0')) {
+                            throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                        }
+                    }
+                }
+                else {
+                    dummy = params.substring(index1 + 3, index2);
+                    contact_num = dummy.trim();
+                    for(int i = 0; i < contact_num.length(); i++) {
+                        char ch = contact_num.charAt(i);
+                        if(!(ch <= '9' && ch >= '0')) {
+                            throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                        }
+                    }
+                }
+            }
+            if(params.contains("-t")) {
+                int index1 = params.indexOf("/p");
+                int index2 = params.lastIndexOf("/");
+                String time;
+                if(index1 == index2) {
+                    dummy = params.substring(index1 + 2);
+                    time = dummy.trim();
+                }
+                else {
+                    dummy = params.substring(index1 + 2, index2);
+                    time = dummy.trim();
+                }
+                int tour_time = Integer.parseInt(time);
+                if(tour_time >= 2400) {
+                    throw new TourPlannerException(ERROR_TOUR_TIME_WRONG);
+                }
+            }
+            if(params.contains("-f")) {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM");
+                int index1 = params.indexOf("/dt");
+                int index2 = params.indexOf("/df");
+                String dt, df;
+                Date start;
+                Date end;
+                if(index1 > index2) {
+                    dummy = params.substring(index1 + 3).trim();
+                    start = formatter.parse(dummy);
+                    dummy = params.substring(index2 + 3, index1);
+                    end = formatter.parse(dummy);
+                }
+                else {
+                    dummy = params.substring(index2 + 3).trim();
+                    end = formatter.parse(dummy);
+                    dummy = params.substring(index1 + 3, index1);
+                    start = formatter.parse(dummy);
+                }
+                if(!end.after(start)) {
+                    throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
+                }
+            }
+
+
             return parseAdd(params);
         case "list":
             return parseList(params);
