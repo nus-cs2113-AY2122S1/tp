@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author alvintan01
+
 /**
  * Helps to add an order to stocks and mark the order as delivered.
  */
@@ -114,15 +115,15 @@ public class ReceiveOrderCommand extends Command {
 
         int orderId = Integer.parseInt(parameters.get(CommandParameters.ID));
         for (Medicine medicine : medicines) {
-            if (!(medicine instanceof Order)){
+            if (!(medicine instanceof Order)) {
                 continue;
             }
             Order order = (Order) medicine;
             if (order.getOrderId() == orderId) {
-                if (order.isDelivered()){
+                if (order.isDelivered()) {
                     ui.print("Order is already delivered!");
                     return false;
-                }else{
+                } else {
                     return true;
                 }
             }
