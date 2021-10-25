@@ -89,7 +89,7 @@ public class AverageMarksCommand extends Command {
             }
         }
 
-        double averageMarks = totalMarks / classSize;
+        double averageMarks = totalMarks / (classSize - unmarkedStudents);
         if (unmarkedStudents <= 0) {
             ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS, assessmentName, averageMarks));
         } else {
