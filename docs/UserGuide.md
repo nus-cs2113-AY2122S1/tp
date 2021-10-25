@@ -161,7 +161,7 @@ ____________________________________________________________
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
-Duke bids farewell and closes the application.
+Exits the application.
 
 Usage: `exit`
 
