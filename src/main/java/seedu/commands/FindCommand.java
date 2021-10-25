@@ -8,10 +8,12 @@ import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     protected String keyword;
     
     public FindCommand(String keyword) {
@@ -32,7 +34,7 @@ public class FindCommand extends Command {
     }
 
     private void filterByDate(ArrayList<Entry> entries, ArrayList<Entry> filteredEntries) {
-        LocalDate localDate = LocalDate.parse(keyword);
+        LocalDate localDate = LocalDate.parse(keyword, DateTimeFormatter.ofPattern(DATE_FORMAT));
         for (Entry entry: entries) {
             if (entry.getDate().isEqual(localDate)) {
                 filteredEntries.add(entry);

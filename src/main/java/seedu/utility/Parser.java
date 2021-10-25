@@ -92,8 +92,8 @@ public class Parser {
             Pattern.compile("i/(?<index>[^/]+)");
 
     private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
-            Pattern.compile("s/(?<start>[^/]+)"
-                    + "e/(?<end>[^/]+)");
+            Pattern.compile("s/(?<start>.+)"
+                    + "e/(?<end>.+)");
 
     private static final Pattern SET_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("c/(?<category>[^/]+)"
