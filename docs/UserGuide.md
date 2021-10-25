@@ -136,9 +136,8 @@ Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by 
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`
 
 >  ❗ **Notes about command format:**
-> * words enclosed in angle brackets, `<>` are the parameters which is the input the
-    > user is supposed to provide.
-    >  * e.g `view g/<goal index>` can be `view g/1`.
+> * words enclosed in angle brackets, `<>` are the parameters which is the input the user is supposed to provide.
+> * e.g `view g/<goal index>` can be `view g/1`.
 > * The parameters enclosed in curly brackets, `{}`, are optional.
 
 ## Features
