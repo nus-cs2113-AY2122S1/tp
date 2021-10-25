@@ -8,6 +8,7 @@ import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.task.TaskManager;
 
+//@@author APZH
 public class ListCommand extends Command {
     private static final CommandEnum COMMAND = CommandEnum.LIST;
 
@@ -15,6 +16,7 @@ public class ListCommand extends Command {
         super(COMMAND, commandArguments);
     }
 
+    //@@author APZH
     @Override
     public CommandResult executeCommand() {
         String message = "";

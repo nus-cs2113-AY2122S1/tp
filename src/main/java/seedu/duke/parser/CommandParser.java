@@ -16,12 +16,13 @@ import seedu.duke.log.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+//@@author APZH
 public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
 
-
+    //@@author APZH
     public static Map<String, String> getCommandOptions(String commandArguments) {
 
         Map<String, String> flagsToArguments = new HashMap<>();
@@ -50,6 +51,7 @@ public class CommandParser {
         return flagsToArguments;
     }
 
+    //@@author APZH
     public static Command parseCommand(String userInput) {
 
         String[] inputArguments = userInput.split("\\s+", 2);
@@ -83,6 +85,7 @@ public class CommandParser {
         }
     }
 
+    //@@author APZH
     // Used to debug and check the whether the user command mapping of flag->value works
     public static String printCommandOptions(Map<String, String> commandOptions) {
 
