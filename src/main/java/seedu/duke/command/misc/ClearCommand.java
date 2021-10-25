@@ -6,6 +6,9 @@ import seedu.duke.data.WorkoutList;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.Storage;
 
+/**
+ * Clears all the exercises present in the mentioned workoutIndex and all workouts in the application.
+ */
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all exercises in a workout / "
@@ -16,20 +19,32 @@ public class ClearCommand extends Command {
     private int workoutIndex;
     private final String keyword;
 
+    /**
+     * Instantiates object and sets parameters for clearing workouts.
+     *
+     * @param keyword is the argument containing the word "workout"
+     */
     public ClearCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Instantiates object and sets parameters for clearing exercises in a specified workout.
+     *
+     * @param workoutIndex index of Workout that the exercise is in
+     * @param keyword is the argument containing the word "exercise"
+     */
     public ClearCommand(int workoutIndex, String keyword) {
         this.workoutIndex = workoutIndex;
         this.keyword = keyword;
     }
 
     /**
-     * Abstract method to execute the Command's main functionality.
+     * Executes clear command to remove all the exercises in a workout of given index and to remove all workouts.
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      * @throws GetJackDException if command cannot be executed correctly
      */
     @Override
@@ -41,6 +56,6 @@ public class ClearCommand extends Command {
             workouts.getWorkout(workoutIndex).removeAllExercise();
             return new CommandResult("All exercises in workout " + workoutIndex + " have been cleared!");
         }
-        return null;
+        throw new GetJackDException("Invalid command - Unable to execute!");
     }
 }

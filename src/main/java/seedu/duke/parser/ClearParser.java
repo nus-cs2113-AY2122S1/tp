@@ -5,6 +5,9 @@ import seedu.duke.command.misc.ClearCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.exception.GetJackDException;
 
+/**
+ * Parses and processes input for the clear command.
+ */
 public class ClearParser extends Parser {
     public static final int INDEX_AFTER_EXERCISE = 8;
 
