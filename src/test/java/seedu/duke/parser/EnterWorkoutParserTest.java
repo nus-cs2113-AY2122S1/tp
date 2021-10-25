@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.Command;
 import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.data.Workout;
@@ -15,6 +16,7 @@ class EnterWorkoutParserTest {
 
     @BeforeEach
     public void setUp() {
+        Command.workoutMode = 0;
         Workout workout = new Workout("workout");
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);

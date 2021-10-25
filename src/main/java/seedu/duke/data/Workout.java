@@ -29,7 +29,12 @@ public class Workout {
         this.workoutName = workoutName;
     }
 
-    //TODO add javadoc
+    /**
+     * Constructor that takes in an Arraylist of exercises.
+     *
+     * @param workoutName is the name that the user gives to the workout routine
+     * @param exercises   is the list of exercises that are to be pre-loaded into the workout
+     */
     public Workout(String workoutName, ArrayList<Exercise> exercises) {
         assert !workoutName.isEmpty();
         assert !exercises.isEmpty();

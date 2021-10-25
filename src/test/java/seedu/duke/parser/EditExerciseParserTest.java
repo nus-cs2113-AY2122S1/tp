@@ -46,4 +46,12 @@ class EditExerciseParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof IncorrectCommand);
     }
+    
+    @Test
+    void parseInput_invalidWorkoutIndexButValidWorkoutMode_returnsEditExerciseCommand() {
+        Command.workoutMode = 1;
+        parser = new EditExerciseParser("edit 1, testExercise, 1 1");
+        result = parser.parseInput();
+        assertTrue(result instanceof EditExerciseCommand);
+    }
 }

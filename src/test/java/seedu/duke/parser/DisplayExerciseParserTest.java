@@ -33,15 +33,20 @@ class DisplayExerciseParserTest {
     void parseInput_invalidInput_returnsIncorrectCommand() {
         parser = new DisplayExerciseParser("display    ");
         result = parser.parseInput();
-        //assertTrue(result instanceof IncorrectCommand);
         assertEquals(IncorrectCommand.class, result.getClass());
         parser = new DisplayExerciseParser("display");
         result = parser.parseInput();
-        //assertTrue(result instanceof IncorrectCommand);
         assertEquals(result.getClass(), IncorrectCommand.class);
         parser = new DisplayExerciseParser("display a");
         result = parser.parseInput();
-        //assertTrue(result instanceof IncorrectCommand);
         assertEquals(result.getClass(), IncorrectCommand.class);
+    }
+    
+    @Test
+    void parseInput_invalidInputButValidWorkoutMode_returnsDisplayExerciseCommand() {
+        Command.workoutMode = 1;
+        parser = new DisplayExerciseParser("display   ");
+        result = parser.parseInput();
+        assertTrue(result instanceof DisplayExercisesCommand);
     }
 }
