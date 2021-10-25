@@ -21,7 +21,7 @@ public class DataManagerTest {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     @Test
-    public void save_validEntries_correctDataFileContent() {
+    public void saveEntries_validEntries_correctDataFileContent() {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
@@ -36,8 +36,8 @@ public class DataManagerTest {
     }
 
     @Test
-    public void load_validDataFileContent_correctEntries() {
-        save_validEntries_correctDataFileContent();
+    public void loadEntries_validDataFileContent_correctEntries() {
+        saveEntries_validEntries_correctDataFileContent();
         Parser parser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
@@ -59,7 +59,7 @@ public class DataManagerTest {
     }
 
     @Test
-    public void load_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
+    public void loadEntries_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
@@ -71,5 +71,45 @@ public class DataManagerTest {
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         dataManager.saveEntries();
         dataManager.loadEntries();
+    }
+    
+    @Test
+    public void saveBudget_validBudgets_validBudgetData() {
+        FinancialTracker financialTracker = new FinancialTracker();
+        Ui ui = new Ui();
+        Parser parser = new Parser();
+        BudgetManager budgetManager = new BudgetManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        int i = 0;
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            budgetManager.setBudget(i, category);
+            i++;
+        }
+        dataManager.saveBudgetSettings();
+        String testData = parser.convertBudgetSettingsToData(budgetManager);
+        String expectedData = "0.0,1.0,2.0,3.0,4.0,5.0,6.0";
+        assertEquals(expectedData, testData);
+    }
+    
+    @Test
+    public void loadBudget_validBudgetData_validBudgets() {
+        saveBudget_validBudgets_validBudgetData();
+        FinancialTracker financialTracker = new FinancialTracker();
+        Ui ui = new Ui();
+        Parser parser = new Parser();
+        BudgetManager budgetManager = new BudgetManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        dataManager.loadBudgetSettings();
+        int i = 0;
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            assertEquals(budgetManager.getBudget(category), i);
+            i++;
+        }
     }
 }

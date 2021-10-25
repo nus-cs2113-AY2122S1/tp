@@ -1,6 +1,7 @@
 package seedu.utility;
 
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
@@ -26,8 +27,7 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
-    private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget,"
-            + "billsBudget,entertainmentBudget,miscBudget";
+    private static final String BUDGET_CSV_HEADER = "food,transport,medical,bills,entertainment,misc,overall";
     private final Parser parser;
     private final FinancialTracker financialTracker;
     private final Ui ui;
@@ -46,7 +46,7 @@ public class DataManager {
      */
     public void saveAll() {
         saveEntries();
-        //saveBudgetSettings();
+        saveBudgetSettings();
     }
 
     /**
@@ -55,7 +55,7 @@ public class DataManager {
      */
     public void loadAll() {
         loadEntries();
-        //loadBudgetSettings();
+        loadBudgetSettings();
     }
 
     /**
@@ -139,7 +139,7 @@ public class DataManager {
             // Categories header for the CSV file
             buffer.write(BUDGET_CSV_HEADER);
             buffer.write(NEWLINE);
-            data = parser.convertBudgetSettingsToString(budgetManager);
+            data = parser.convertBudgetSettingsToData(budgetManager);
             buffer.write(data);
             buffer.write(NEWLINE);
             buffer.close();
@@ -153,7 +153,6 @@ public class DataManager {
      * This allows users to not lose all their budget settings when the previous instance of StonksXD closed.
      */
     public void loadBudgetSettings() {
-        boolean hasCorruptedLines = false;
         FileInputStream fis;
         try {
             fis = new FileInputStream(BUDGET_FILE_NAME);
@@ -161,15 +160,23 @@ public class DataManager {
             ui.printError(Messages.UNABLE_TO_FIND_BUDGET_FILE);
             return;
         }
+        
         Scanner sc = new Scanner(fis);
         sc.nextLine();
-
-        while (sc.hasNextLine()) {
-            // To be updated
+        String data = sc.nextLine();
+        try {
+            ArrayList<Double> budgetSettings = parser.convertDataToBudgetSettings(data);
+            int i = 0;
+            for (ExpenseCategory category : ExpenseCategory.values()) {
+                // Not expected to have a budget related to NULL
+                if (category == ExpenseCategory.NULL) {
+                    break;
+                }
+                budgetManager.setBudget(budgetSettings.get(i), category);
+                i++;
+            }
+        } catch (NullPointerException | NumberFormatException e) {
+            ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
         }
-
-        //if (hasCorruptedLines) {
-        //   ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
-        //}
     }
 }

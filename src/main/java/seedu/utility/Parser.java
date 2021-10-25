@@ -47,6 +47,8 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -132,6 +134,10 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
+    private static final Pattern BUDGET_SETTINGS_DATA_FORMAT
+            = Pattern.compile("(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)" 
+            + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)" + DATA_SEPARATOR 
+            + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
     
     private static final String DATE_FORMAT = "dd/MM/yyyy";
 
@@ -582,7 +588,7 @@ public class Parser {
 
     public Expense convertDataToExpense(String data) throws InputException, InvalidExpenseDataFormatException, 
             DateTimeParseException {
-        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
+        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data.trim());
         if (matcher.matches()) {
             String expenseDescription = extractExpenseDescription(matcher);
             double expenseAmount = extractExpenseAmount(matcher);
@@ -603,7 +609,7 @@ public class Parser {
 
     public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException, 
             DateTimeParseException {
-        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data);
+        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data.trim());
         if (matcher.matches()) {
             String incomeDescription = extractIncomeDescription(matcher);
             double incomeAmount = extractIncomeAmount(matcher);
@@ -714,11 +720,33 @@ public class Parser {
         return new SetThresholdCommand(thresholdValue);
     }
     
-    public String convertBudgetSettingsToString(BudgetManager budgetManager) {
-        return budgetManager.overallBudget.getLimit() + DATA_SEPARATOR + budgetManager.foodBudget.getLimit() 
-                + DATA_SEPARATOR + budgetManager.transportBudget.getLimit() + DATA_SEPARATOR 
-                + budgetManager.medicalBudget.getLimit() + DATA_SEPARATOR + budgetManager.billsBudget.getLimit() 
-                + DATA_SEPARATOR + budgetManager.entertainmentBudget.getLimit() + DATA_SEPARATOR 
-                + budgetManager.miscBudget.getLimit();
+    public String convertBudgetSettingsToData(BudgetManager budgetManager) {
+        StringBuilder data = new StringBuilder();
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
+            if (category == ExpenseCategory.OVERALL) {
+                data.append(budgetManager.getBudget(category));
+                break;
+            }
+            data.append(budgetManager.getBudget(category));
+            data.append(DATA_SEPARATOR);
+        }
+        return data.toString();
+    }
+    
+    public ArrayList<Double> convertDataToBudgetSettings(String data) throws NumberFormatException, 
+            NullPointerException {
+        ArrayList<Double> budgetSettings = new ArrayList<Double>();
+        final Matcher matcher = BUDGET_SETTINGS_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            for (ExpenseCategory category : ExpenseCategory.values()) {
+                // Not expected to have a budget related to NULL
+                if (category == ExpenseCategory.NULL) {
+                    break;
+                }
+                budgetSettings.add(Double.parseDouble(matcher.group(category.toString().toLowerCase())));
+            }
+        }
+        return budgetSettings;
     }
 }
