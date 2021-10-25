@@ -10,9 +10,7 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import medbot.Appointment;
-import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Person;
 import medbot.person.PersonType;
@@ -33,10 +31,8 @@ public abstract class ParserUtils {
     private static final String PARAMETER_AFTER = "a/";
     private static final int PARAMETER_BUFFER = 2;
     private static final String PARAMETER_APPOINTMENT_PATIENT_ID = "p/";
-    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1 = "m/";
-    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2 = "s/";
-    private static final String PARAMETER_APPOINTMENT_DATE_TIME_1 = "d/";
-    private static final String PARAMETER_APPOINTMENT_DATE_TIME_2 = "t/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID = "s/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME = "d/";
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
     private static final String ERROR_NO_PARAMETER = "No parameters given";
     private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
@@ -68,8 +64,8 @@ public abstract class ParserUtils {
     private static final String SEPARATOR_SPACE = " ";
     private static final String EMPTY_STRING = "";
 
-    private static final String DATE_TIME_FORMATTER_PATTERN = "d/M/yy HHmm";
-    private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
+    private static final String DATE_TIME_FORMATTER_PATTERN = "ddMMyy HHmm";
+    private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
 
     /**
      * Parses attributeStrings array and modifies all the corresponding attribute in appointment.
@@ -100,14 +96,12 @@ public abstract class ParserUtils {
             appointment.setPatientId(patientId);
             return;
         }
-        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1)
-                || attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2)) {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID)) {
             int medicalStaffId = parseId(attributeString.substring(PARAMETER_BUFFER));
             appointment.setMedicalStaffId(medicalStaffId);
             return;
         }
-        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_1)
-                || attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_2)) {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME)) {
             int dateTimeCode = parseDateTime(attributeString.substring(PARAMETER_BUFFER).strip());
             appointment.setDateTimeCode(dateTimeCode);
         }
@@ -143,10 +137,9 @@ public abstract class ParserUtils {
         List<String> p = Arrays.asList(parameters);
         assert parameters.length >= 1;
 
-        List<String> parametersWithoutSpecifiers = p.stream()
+        return p.stream()
                 .map(s -> s.substring(PARAMETER_BUFFER))
                 .collect(toList());
-        return parametersWithoutSpecifiers;
     }
 
     static String[] getSpecifiers(String userInput) throws MedBotParserException {
@@ -439,6 +432,6 @@ public abstract class ParserUtils {
         } catch (DateTimeParseException dte) {
             throw new MedBotParserException(ERROR_DATE_TIME_WRONG_FORMAT);
         }
-        return (int) (parsedDate.toEpochSecond(zoneOffset) / 60);
+        return (int) (parsedDate.toEpochSecond(ZONE_OFFSET) / 60);
     }
 }

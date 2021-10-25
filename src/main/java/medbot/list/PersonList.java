@@ -1,5 +1,6 @@
 package medbot.list;
 
+import java.util.LinkedList;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
@@ -15,7 +16,7 @@ import static medbot.ui.Ui.END_LINE;
 public abstract class PersonList extends MedBotList {
 
     private final HashMap<Integer, Person> persons = new HashMap<>();
-    private int lastId = 1;
+    private int lastId = 0;
 
     public int size() {
         return persons.size();
@@ -41,9 +42,10 @@ public abstract class PersonList extends MedBotList {
      * @return a unique id to be allocated to a person
      */
     private int generatePersonId() {
-        while (persons.containsKey(lastId)) {
+        do {
             lastId++;
-        }
+        } while (persons.containsKey(lastId));
+
         return lastId;
     }
 
@@ -55,9 +57,7 @@ public abstract class PersonList extends MedBotList {
      * @throws MedBotException if there is no person with that id
      */
     public String getPersonInfo(int personId) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         return persons.get(personId).toString();
     }
 
@@ -69,9 +69,7 @@ public abstract class PersonList extends MedBotList {
      * @throws MedBotException when the Person ID cannot be found
      */
     public void editPerson(int personId, Person newPersonData) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         assert (personId > 0);
         mergeEditPersonData(persons.get(personId), newPersonData);
     }
@@ -107,9 +105,7 @@ public abstract class PersonList extends MedBotList {
      * @throws MedBotException when the Person ID cannot be found.
      */
     public void deletePerson(int personId) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         assert (personId > 0);
         persons.remove(personId);
     }
@@ -148,9 +144,7 @@ public abstract class PersonList extends MedBotList {
     }
 
     public void archivePerson(int personId) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         if (persons.get(personId).isArchived()) {
             throw new MedBotException(getAlreadyArchivedErrorMessage(personId));
         }
@@ -158,9 +152,7 @@ public abstract class PersonList extends MedBotList {
     }
 
     public void unarchivePerson(int personId) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         if (!persons.get(personId).isArchived()) {
             throw new MedBotException(getAlreadyUnarchivedErrorMessage(personId));
         }
@@ -177,10 +169,20 @@ public abstract class PersonList extends MedBotList {
      * @throws MedBotException if there is no person with the specified personId
      */
     public int getAppointmentId(int personId, int dateTimeCode) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         return persons.get(personId).getAppointmentId(dateTimeCode);
+    }
+
+    /**
+     * For the person with the specified personId, returns an LinkedList of the appointmentId of all appointments.
+     *
+     * @param personId the id of the person to search for
+     * @return LinkedList of the appointmentId of all appointments for the specified person
+     * @throws MedBotException if there is no person with the specified personId
+     */
+    public LinkedList<Integer> getAllAppointmentIds(int personId) throws MedBotException {
+        checkPersonExists(personId);
+        return persons.get(personId).getAllAppointmentIds();
     }
 
     /**
@@ -191,9 +193,7 @@ public abstract class PersonList extends MedBotList {
      * @throws MedBotException if there is no person with the specified personId
      */
     public void addAppointment(int personId, Appointment appointment) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         persons.get(personId).addAppointment(appointment);
     }
 
@@ -206,9 +206,7 @@ public abstract class PersonList extends MedBotList {
      *                         the specified dateTimeCode for that person
      */
     public void deleteAppointment(int personId, int dateTimeCode) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
-        }
+        checkPersonExists(personId);
         persons.get(personId).deleteAppointment(dateTimeCode);
     }
 
@@ -219,11 +217,21 @@ public abstract class PersonList extends MedBotList {
      * @return a String containing the information of the person's appointments
      * @throws MedBotException if there is no person with the specified personId
      */
-    public String listAppointments(int personId, FilterType filterType,int dateTimeCode) throws MedBotException {
+    public String listAppointments(int personId, FilterType filterType, int dateTimeCode) throws MedBotException {
+        checkPersonExists(personId);
+        return persons.get(personId).listAppointments(filterType, dateTimeCode);
+    }
+
+    /**
+     * Checks if a person with the specified id is present in the list.
+     *
+     * @param personId the id of the person to search for
+     * @throws MedBotException if there is no person with the specified personId
+     */
+    private void checkPersonExists(int personId) throws MedBotException {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getPersonNotFoundErrorMessage(personId));
         }
-        return persons.get(personId).listAppointments(filterType, dateTimeCode);
     }
 
     /**

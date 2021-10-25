@@ -4,6 +4,7 @@ package medbot.person;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
+import java.util.LinkedList;
 import medbot.list.ListItem;
 
 import medbot.Appointment;
@@ -135,6 +136,15 @@ public abstract class Person extends ListItem {
      */
     public int getAppointmentId(int dateTimeCode) {
         return personalAppointmentList.getAppointmentId(dateTimeCode);
+    }
+
+    /**
+     * Returns an LinkedList of the appointmentId of all appointments.
+     *
+     * @return LinkedList of the appointmentId of all appointments
+     */
+    public LinkedList<Integer> getAllAppointmentIds() {
+        return personalAppointmentList.getAllAppointmentIds();
     }
 
     /**

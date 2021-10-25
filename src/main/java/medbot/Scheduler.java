@@ -1,5 +1,6 @@
 package medbot;
 
+import java.util.LinkedList;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
@@ -15,7 +16,6 @@ public class Scheduler {
     private static final String ERROR_STAFF_APPOINTMENT_CLASH = "Staff unavailable, appointment %d at that time.";
 
     private static final String ERROR_ADD_APPOINTMENT_ERROR = "Add appointment error.";
-    private static final String ERROR_EDIT_APPOINTMENT_ERROR = "Edit appointment error.";
     private static final String ERROR_DELETE_APPOINTMENT_ERROR = "Delete appointment error.";
 
     private final PatientList patientList = new PatientList();
@@ -93,6 +93,8 @@ public class Scheduler {
      * @throws MedBotException if there is no patient with that id
      */
     public void deletePatient(int patientId) throws MedBotException {
+        LinkedList<Integer> appointmentIds = patientList.getAllAppointmentIds(patientId);
+        deleteAppointments(appointmentIds);
         patientList.deletePerson(patientId);
     }
 
@@ -103,7 +105,27 @@ public class Scheduler {
      * @throws MedBotException if there is no staff with that id
      */
     public void deleteStaff(int staffId) throws MedBotException {
+        LinkedList<Integer> appointmentIds = medicalStaffList.getAllAppointmentIds(staffId);
+        deleteAppointments(appointmentIds);
         medicalStaffList.deletePerson(staffId);
+    }
+
+    /**
+     * Delete all appointments whose id is in the given appointmentIds List.
+     *
+     * @param appointmentIds List of ids of appointments to be deleted
+     * @throws MedBotException if there is an error when deleting the appointments
+     */
+    private void deleteAppointments(List<Integer> appointmentIds) throws MedBotException {
+        for (int appointmentId : appointmentIds) {
+            try {
+                deleteAppointment(appointmentId);
+            } catch (MedBotException mbe) {
+                //This exception should not be thrown
+                assert false;
+                throw new MedBotException(ERROR_DELETE_APPOINTMENT_ERROR);
+            }
+        }
     }
 
     /**
@@ -223,15 +245,14 @@ public class Scheduler {
      * <p>If the appointment does not have an appointmentId, it will be assigned one.
      *
      * @param appointment Appointment to be added to the scheduler
-     * @return the appointmentId of the appointment after it was added to the scheduler
      * @throws MedBotException if the appointment is missing information or clashes with another appointment
      */
-    public int addAppointment(Appointment appointment) throws MedBotException {
+    public void addAppointment(Appointment appointment) throws MedBotException {
         if (!appointment.isComplete()) {
             throw new MedBotException(ERROR_ADD_INCOMPLETE_APPOINTMENT);
         }
         checkAvailability(appointment);
-        return insertAppointment(appointment);
+        insertAppointment(appointment);
     }
 
     /**
@@ -249,7 +270,8 @@ public class Scheduler {
             patientList.deleteAppointment(patientId, dateTimeCode);
             medicalStaffList.deleteAppointment(medicalStaffId, dateTimeCode);
         } catch (MedBotException me) {
-            //No exception should be thrown
+            //This exception should not be thrown as the patientId, medicalStaffId and dateTimeCode should correspond
+            //to a valid appointment
             assert false;
             throw new MedBotException(ERROR_DELETE_APPOINTMENT_ERROR);
         }
@@ -280,7 +302,8 @@ public class Scheduler {
             medicalStaffList.addAppointment(appointment.getMedicalStaffId(), appointment);
             return appointmentId;
         } catch (MedBotException me) {
-            //No exception should be thrown
+            //This exception should not be thrown as it was already checked that there would be no clashes when
+            //inserting the appointment
             assert false;
             throw new MedBotException(ERROR_ADD_APPOINTMENT_ERROR);
         }

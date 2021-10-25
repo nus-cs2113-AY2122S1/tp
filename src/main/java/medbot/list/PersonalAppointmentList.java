@@ -1,6 +1,8 @@
 package medbot.list;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -57,6 +59,22 @@ public class PersonalAppointmentList {
             }
         }
         return -1;
+    }
+
+    /**
+     * Returns a LinkedList of the appointmentId of all appointments.
+     *
+     * @return LinkedList of the appointmentId of all appointments
+     */
+    public LinkedList<Integer> getAllAppointmentIds() {
+        LinkedList<Integer> appointmentIds = new LinkedList<>();
+
+        for (Appointment appointment : appointments) {
+            if (appointment != null) {
+                appointmentIds.add(appointment.getAppointmentId());
+            }
+        }
+        return appointmentIds;
     }
 
     /**
