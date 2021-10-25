@@ -41,7 +41,8 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
+    public void getFilteredExpenses(Integer index, String expenseCategory, String expenseAttribute) {
+
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
@@ -335,4 +336,7 @@ public class Trip {
 
     }
 
+    public Expense getExpenseAtIndex(Integer index) {
+        return listOfExpenses.get(index - 1);
+    }
 }

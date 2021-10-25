@@ -78,16 +78,12 @@ public class Storage {
 
     protected static void writeToFile() throws IOException {
         String jsonString = new Gson().toJson(listOfTrips);
-        FileWriter fileWriter = new FileWriter(FILE_PATH);
-        fileWriter.write(jsonString);
-        fileWriter.close();
+        FileStorage.writeToFile(jsonString);
     }
 
     protected static void readFromFile() {
-        File file = new File(FILE_PATH);
         try {
-            Scanner scanner = new Scanner(file);
-            String jsonString = scanner.nextLine();
+            String jsonString = FileStorage.readFromFile();
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
@@ -95,6 +91,16 @@ public class Storage {
             askOverwriteOrClose();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
+            tryCreateNewFile();
+        }
+    }
+
+    private static void tryCreateNewFile() {
+        try {
+            FileStorage.newBlankFile();
+        } catch (IOException ex) {
+            Ui.printCreateFileFailure();
+            System.exit(1);
         }
     }
 
@@ -107,13 +113,7 @@ public class Storage {
                 System.exit(1);
                 return;
             } else if (input.contains("y")) {
-                try {
-                    FileWriter fileWriter = new FileWriter(FILE_PATH);
-                    fileWriter.close();
-                } catch (IOException e) {
-                    Ui.printCreateFileFailure();
-                    System.exit(1);
-                }
+                tryCreateNewFile();
                 return;
             }
         }

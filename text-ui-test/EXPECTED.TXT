@@ -6,6 +6,7 @@ Welcome to
 /_/    \__,_/\__, /_/  /_/\___/_____/\__,_/\___/_/|_|  
             /____/                                     
 
+No preloaded data found! We have created a file for you.
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
@@ -64,12 +65,33 @@ Enter your command: 1. 	c a b
 	Payer: yikai
 	Category: breakfast
 
+2. 	d a c
+	date: 19 Oct 2021
+	Amount Spent: USD $1.00
+	People involved: [yikai, josh, xiyuan]
+	Payer: yikai
+	Category: lunch
+
+3. 	d a c
+	date: 19 Oct 2021
+	Amount Spent: USD $2.00
+	People involved: [yikai, josh]
+	Payer: josh
+	Category: breakfast
+
 Enter your command: 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
 	People involved: [yikai, josh]
 	Payer: josh
 	Category: breakfast
+
+Enter your command: 2. 	d a c
+	date: 19 Oct 2021
+	Amount Spent: USD $1.00
+	People involved: [yikai, josh, xiyuan]
+	Payer: yikai
+	Category: lunch
 
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
