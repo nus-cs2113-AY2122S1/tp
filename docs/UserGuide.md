@@ -111,6 +111,7 @@ Usage: `list`
 Expected outcome of usage:
 
 ```
+list
 ____________________________________________________________
 ConTech has 7 contacts stored.
 Here's the list :
@@ -160,6 +161,19 @@ ____________________________________________________________
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
+Duke bids farewell and closes the application.
+
+Usage: `exit`
+
+Excepted outcome of usage: `exit`
+
+```
+exit
+____________________________________________________________
+ConTech will now shutdown.
+We hope you have enjoyed using it.
+____________________________________________________________
+```
 
 ## FAQ
 
