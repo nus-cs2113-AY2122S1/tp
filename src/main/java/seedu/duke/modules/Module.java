@@ -4,14 +4,27 @@ package seedu.duke.modules;
 import seedu.duke.modules.ModuleList;
 
 public class Module {
+    protected int index;
     protected String moduleCode;
     protected String moduleName;
     protected double moduleCredits;
 
-    public Module(String moduleCode, String moduleName, double moduleCredits) {
+    public Module(String moduleCode, String moduleName, double moduleCredits, ModuleList moduleMasterList) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.moduleCredits = moduleCredits;
+        index = getMasterListIndex(moduleMasterList);
+    }
+
+    public Module(String moduleCode, String moduleName, double moduleCredits, int index) {
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
+        this.moduleCredits = moduleCredits;
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public String getModuleCode() {
@@ -26,9 +39,9 @@ public class Module {
         return moduleCredits;
     }
 
-    public int getModuleIndex(ModuleList moduleMasterList) {
+    public int getMasterListIndex(ModuleList moduleMasterList) {
         for (int i = 0; i < moduleMasterList.getSize(); i++) {
-            if (moduleName.equals(moduleMasterList.get(i).getModuleName())) {
+            if (moduleMasterList.get(i).getModuleCode().equals(moduleCode)) {
                 return i + 1;
             }
         }
@@ -51,4 +64,7 @@ public class Module {
         return moduleCode + " # " + moduleName + " # " + moduleCredits
                 + System.lineSeparator();
     }
+
+
+
 }

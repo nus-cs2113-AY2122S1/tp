@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;

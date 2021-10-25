@@ -19,10 +19,11 @@ public class ModuleStorage {
         ArrayList<Module> moduleList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
+        int index = 0;
         while (line != null) {
             String[] attributes = extractAttributes(line);
             assert parseDouble(attributes[2]) > 0 : "Local module credits should be greater than 0";
-            moduleList.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2])));
+            moduleList.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), ++index));
             line = br.readLine();
         }
         logger.log(Level.INFO, "Completed loading of modules");
