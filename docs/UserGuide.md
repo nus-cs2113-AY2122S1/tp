@@ -86,6 +86,7 @@ In the current loading screen, users will be able to execute the following actio
     
     Press enter to return to main menu...
     ```
+   
 2. User Guide - Opens up User Guide github page in user's web browser.
     
    ```
@@ -95,6 +96,7 @@ In the current loading screen, users will be able to execute the following actio
     
     Press enter to return to main menu...
     ```
+   
 3. Developer Guide - Opens up Developer Guide github page in user's web browser.
 
     ```
@@ -104,10 +106,12 @@ In the current loading screen, users will be able to execute the following actio
     
     Press enter to return to main menu...
     ```
+   
 4. Demo Video - Links to Demo Video (Not done yet)
     ```
    video not available.
     ```
+   
 5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
 
     ```
@@ -124,7 +128,6 @@ In the current loading screen, users will be able to execute the following actio
     Command:
     ```
 
-
 ## Terminology
 
 Name  | Description | Example
@@ -132,19 +135,21 @@ Name  | Description | Example
 Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`         
 
-**Notes about command format:**
-* words enclosed in angle brackets, `<>` are the parameters which is the input the
-user is supposed to provide.
-  * e.g `view g/<goal index>` can be `view g/1`.
-* The parameters enclosed in curly brackets, `{}`, are optional.
+>  ❗ **Notes about command format:**
+> * words enclosed in angle brackets, `<>` are the parameters which is the input the 
+> user is supposed to provide.
+>  * e.g `view g/<goal index>` can be `view g/1`.
+> * The parameters enclosed in curly brackets, `{}`, are optional.
 
 ## Features 
 
 Below are the commands that the app supports.
 Each section describes the function of the command and the command format.
 
-**NOTE**: For all commands and features, apart from the positioning of the command word, all other flags and parameters 
-can be placed in any order as long as their respective tags are present e.g. `n/, s/, e/` etc.
+> ❗ **Note:** <br>
+> For all commands and features, apart from the positioning of the command word,
+> all other flags and parameters can be placed in any order as long as 
+> their respective tags are present e.g. `n/, s/, e/` etc.
 
 ### Ask for Help: `help`
 Displays a list of all possible commands. 
@@ -177,15 +182,16 @@ start dates are optional.
 
 Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` 
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
-> 2. The two flags contained within the `{}` brackets indicate the optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
+> 2. The two flags contained within the `{}` brackets indicate the 
+> optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
 > 3. The optional `<GOAL_TYPE>` argument can take one of the following flags:
 >   1. `sl` &#8594; Sleep
 >   2. `fd` &#8594; Food
 >   3. `ex` &#8594; Exercise
 >   4. `sd` &#8594; Study
->4. Otherwise, it will be of default goal type `df`.
+> 4. Otherwise, it will be of default goal type `df`.
 
 Example:
 ```
@@ -210,7 +216,7 @@ Note: As of now, only goal name may be updated. To update other goal features yo
 
 Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -227,14 +233,15 @@ ________________________________________________________________________________
 Press enter to return to command mode...
 ```
 
-> :exclamation: Note: The update features below are still underway. 
+> ❗ **Note:** <br>
+> The update features below are still underway. 
 
 #### Updating Start/End Date
 Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
 _or_ <br>
 Format: `update g/<GOAL_INDEX> e/<NEW_END_DATE>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -250,7 +257,7 @@ Output:
 #### Updating Goal Type
 Format: `update g/<GOAL_INDEX> t/<NEW_GOAL_TYPE>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -268,7 +275,7 @@ Removes a goal specified by its index.
 
 Format: `remove g/<GOAL_INDEX>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -309,7 +316,7 @@ Adds a habit that is linked to a goal.
 
 Format: `add  n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVALS>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<INTERVALS>` is an integer indicating the number of days between each recurring instance of a habit.
 
@@ -333,7 +340,7 @@ Marks a habit under a goal as done.
 
 Format: `done g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<HABIT_INDEX>` is an integer.
 
@@ -357,7 +364,7 @@ Deletes a habit under a goal.
 
 Format: `delete g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<HABIT_INDEX>` is an integer.
 
@@ -380,7 +387,7 @@ Lists all habits under a specific goal.
 
 Format: `view g/<GOAL_INDEX>`
 
-> :exclamation: Note:
+> ❗ **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -400,8 +407,9 @@ ________________________________________________________________________________
 ### Exit the Program: `bye`
 Exits the program.
 
-> :warning: **Warning: Make sure to use this command before exiting the program
-to ensure that your data are saved properly.**
+> ⚠ **Warning:** <br>
+> Make sure to use this command before exiting the program
+to ensure that your data are saved properly.
 
 Format: `bye`
 
@@ -438,7 +446,7 @@ are **automatically** saved in a text file at the relative storage path, `data/h
 **A**: You can just copy-paste the habits.txt in the path `data/habits.txt` file from one computer to another and all 
 your data will be there!
 
-> :bulb: Pro Tip! Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data 
+> 💡 **Pro Tip!** Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data 
 > between devices. 
 
 **Q**: Are there any books you recommend?
