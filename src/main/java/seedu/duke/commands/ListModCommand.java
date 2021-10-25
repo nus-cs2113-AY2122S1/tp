@@ -5,6 +5,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.ModuleStorage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiModule;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ListModCommand extends Command {
             for (int i = 0; i < moduleList.getSize(); i++) {
                 Module currentModule = moduleList.get(i);
                 assert currentModule.getModuleCode() != null;
-                Ui.printModule(currentModule, currentModule.getIndex(), true);
+                UiModule.printModule(currentModule, currentModule.getIndex(), true);
             }
         }
     }

@@ -4,6 +4,7 @@ import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.UniversityStorage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiUniversity;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -29,7 +30,7 @@ public class ListUniCommand extends Command {
         System.out.println("Here are the universities and module mappings in your list:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), true);
+            UiUniversity.printUniversity(universityList.get(i), true);
             universityList.get(i).listAllMappings();
         }
     }
@@ -38,7 +39,7 @@ public class ListUniCommand extends Command {
         System.out.println("Here are the universities for exchange:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), false);
+            UiUniversity.printUniversity(universityList.get(i), false);
         }
     }
 }
