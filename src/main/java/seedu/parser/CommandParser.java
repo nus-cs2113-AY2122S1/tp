@@ -38,7 +38,13 @@ public class CommandParser {
     private String gradeType = "";
     public static boolean isErrorThrown = false;
 
-
+    /**
+     * Parses user input into different Command objects depending on the input.
+     *
+     * @param text User input.
+     * @param timetable Timetable object for timetable commands.
+     * @return command A Command object which class depends on the input.
+     */
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
         text = text.trim();
