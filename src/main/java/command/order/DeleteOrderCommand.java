@@ -68,7 +68,7 @@ public class DeleteOrderCommand extends Command {
                 break;
             }
         }
-        ui.print("Order deleted for Order Id " + orderId);
+        ui.print("Order deleted for Order ID " + orderId);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "Successful deletion of order");
