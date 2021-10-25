@@ -3,6 +3,7 @@ package medbot.list;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
+import medbot.utilities.FilterType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,9 @@ import java.util.List;
 
 import static medbot.ui.Ui.END_LINE;
 
-public abstract class PersonList {
+
+public abstract class PersonList extends MedBotList {
+
     private final HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
 
@@ -216,11 +219,11 @@ public abstract class PersonList {
      * @return a String containing the information of the person's appointments
      * @throws MedBotException if there is no person with the specified personId
      */
-    public String listAppointments(int personId) throws MedBotException {
+    public String listAppointments(int personId, FilterType filterType,int dateTimeCode) throws MedBotException {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getPersonNotFoundErrorMessage(personId));
         }
-        return persons.get(personId).listAppointments();
+        return persons.get(personId).listAppointments(filterType, dateTimeCode);
     }
 
     /**
@@ -259,6 +262,7 @@ public abstract class PersonList {
      *
      * @return storageString of all persons
      */
+    @Override
     public String getStorageString() {
         String output = "";
         for (int key : persons.keySet()) {
@@ -269,21 +273,20 @@ public abstract class PersonList {
         return output;
     }
 
-    /**
-     * Adds a person to persons hashmap.
-     *
-     * @param person an instance of Person
-     */
-    public void addPersonFromStorage(Person person) {
-        int personId = person.getPersonId();
+    @Override
+    public void addListItemFromStorage(ListItem personItem) {
+        Person person = (Person) personItem;
+        int personId = person.getId();
         persons.put(personId, person);
     }
+
 
     /**
      * Set lastId to a new number.
      *
      * @param newLastId lastId to be set to this
      */
+    @Override
     public void setLastId(int newLastId) {
         lastId = newLastId;
     }

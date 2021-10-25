@@ -5,22 +5,32 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Person;
+import medbot.person.PersonType;
+import medbot.utilities.FilterType;
+
+import static java.util.stream.Collectors.toList;
 
 public abstract class ParserUtils {
     private static final String END_LINE = System.lineSeparator();
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
+    private static final String PARAMETER_PATIENT = "p/";
+    private static final String PARAMETER_STAFF = "s/";
     private static final String PARAMETER_EMAIL = "e/";
     private static final String PARAMETER_IC = "i/";
     private static final String PARAMETER_ADDRESS = "a/";
+    private static final String PARAMETER_BEFORE = "b/";
+    private static final String PARAMETER_AFTER = "a/";
     private static final int PARAMETER_BUFFER = 2;
     private static final String PARAMETER_APPOINTMENT_PATIENT_ID = "p/";
     private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1 = "m/";
@@ -30,6 +40,9 @@ public abstract class ParserUtils {
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
     private static final String ERROR_NO_PARAMETER = "No parameters given";
     private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
+    private static final String ERROR_PERSON_TYPE_NOT_SPECIFIED = "Person type not specified.";
+    private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
+    private static final String ERROR_FILTER_TYPE_INVALID = "Filter type specified is not valid.";
     private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified.";
     private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified.";
     private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format.";
@@ -117,6 +130,40 @@ public abstract class ParserUtils {
         String[] parameters = Arrays.copyOfRange(words, 1, words.length);
         assert parameters.length >= 1;
         return parameters;
+    }
+
+    static List<String> getParametersWithoutSpecifiers(String userInput) throws MedBotParserException {
+        String processedInput = preprocessMultiAttributeInput(userInput);
+        String[] words = processedInput.split(REGEX_VERTICAL_LINE);
+        if (words.length == 1) {
+            throw new MedBotParserException(ERROR_NO_PARAMETER);
+        }
+        assert words.length > 1;
+        String[] parameters = Arrays.copyOfRange(words, 1, words.length);
+        List<String> p = Arrays.asList(parameters);
+        assert parameters.length >= 1;
+
+        List<String> parametersWithoutSpecifiers = p.stream()
+                .map(s -> s.substring(PARAMETER_BUFFER))
+                .collect(toList());
+        return parametersWithoutSpecifiers;
+    }
+
+    static String[] getSpecifiers(String userInput) throws MedBotParserException {
+        Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
+        Matcher matcher = pattern.matcher(userInput);
+        String[] specifiers = new String[2];
+        int i = 0;
+        try {
+            while (matcher.find()) {
+                specifiers[i] = matcher.group();
+                i++;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MedBotParserException("too many specifiers");
+        }
+        //update exception handling ltr
+        return specifiers;
     }
 
     /**
@@ -309,6 +356,30 @@ public abstract class ParserUtils {
         }
     }
 
+    public static PersonType parsePersonType(String string) throws MedBotParserException {
+        String attributeSpecifier = string.substring(0, PARAMETER_BUFFER);
+        if (attributeSpecifier.equals(PARAMETER_PATIENT)) {
+            return PersonType.PATIENT;
+        }
+        if (attributeSpecifier.equals(PARAMETER_STAFF)) {
+            return PersonType.STAFF;
+        }
+
+        throw new MedBotParserException(ERROR_PERSON_TYPE_INVALID);
+    }
+
+    public static FilterType parseFilterType(String attributeSpecifier) throws MedBotParserException {
+
+        if (attributeSpecifier.equals(PARAMETER_BEFORE)) {
+            return FilterType.BEFORE;
+        }
+        if (attributeSpecifier.equals(PARAMETER_AFTER)) {
+            return FilterType.AFTER;
+        }
+
+        throw new MedBotParserException(ERROR_FILTER_TYPE_INVALID);
+    }
+
     /**
      * Sets the first letter of each word of each word to uppercase and sets all others to lowercase.
      *
@@ -359,7 +430,7 @@ public abstract class ParserUtils {
      * @param dateTimeString String corresponding to a date and time
      * @return the number of hours since Unix epoch, rounded down to the nearest hour
      */
-    private static int parseDateTime(String dateTimeString) throws MedBotParserException {
+    public static int parseDateTime(String dateTimeString) throws MedBotParserException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN);
         LocalDateTime parsedDate;
         try {

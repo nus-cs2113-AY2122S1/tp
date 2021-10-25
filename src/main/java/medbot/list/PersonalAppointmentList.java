@@ -88,4 +88,27 @@ public class PersonalAppointmentList {
         }
         return output;
     }
+
+    public String listAppointmentsAfter(int dateTimeCode) {
+        Appointment referenceAppointment = new Appointment();
+        referenceAppointment.setDateTimeCode(dateTimeCode);
+        NavigableSet<Appointment> appointmentsAfter = appointments.tailSet(referenceAppointment, true);
+        String output = "";
+        for (Appointment appointment : appointmentsAfter) {
+            output += appointment + END_LINE;
+        }
+        return output;
+    }
+
+    public String listAppointmentsBefore(int dateTimeCode) {
+        Appointment referenceAppointment = new Appointment();
+        referenceAppointment.setDateTimeCode(dateTimeCode);
+        NavigableSet<Appointment> appointmentsBefore = appointments.headSet(referenceAppointment, true);
+        String output = "";
+        for (Appointment appointment : appointmentsBefore) {
+            output += appointment + END_LINE;
+        }
+        return output;
+    }
+
 }

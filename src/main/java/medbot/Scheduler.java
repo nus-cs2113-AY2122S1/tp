@@ -5,6 +5,7 @@ import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
 import medbot.list.SchedulerAppointmentList;
 import medbot.person.Person;
+import medbot.utilities.FilterType;
 
 import java.util.List;
 
@@ -33,12 +34,14 @@ public class Scheduler {
         return schedulerAppointmentList.listAppointments();
     }
 
-    public String listMedicalStaffAppointments(int staffId) throws MedBotException {
-        return medicalStaffList.listAppointments(staffId);
+    public String listMedicalStaffAppointments(int staffId, FilterType filterType, int dateTimeCode)
+            throws MedBotException {
+        return medicalStaffList.listAppointments(staffId, filterType, dateTimeCode);
     }
 
-    public String listPatientAppointments(int patientId) throws MedBotException {
-        return patientList.listAppointments(patientId);
+    public String listPatientAppointments(int patientId, FilterType filterType, int dateTimeCode)
+            throws MedBotException {
+        return patientList.listAppointments(patientId, filterType, dateTimeCode);
     }
 
     /**
@@ -80,7 +83,7 @@ public class Scheduler {
      * @throws MedBotException if there is no staff with that id
      */
     public void editStaff(int staffId, Person newStaffData) throws MedBotException {
-        patientList.editPerson(staffId, newStaffData);
+        medicalStaffList.editPerson(staffId, newStaffData);
     }
 
     /**
@@ -100,7 +103,7 @@ public class Scheduler {
      * @throws MedBotException if there is no staff with that id
      */
     public void deleteStaff(int staffId) throws MedBotException {
-        patientList.deletePerson(staffId);
+        medicalStaffList.deletePerson(staffId);
     }
 
     /**
