@@ -117,8 +117,8 @@ public class AddCommandParser {
     }
 
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
-                                   ModuleList moduleSelectedList, UniversityList universityMasterList)
-                                    throws ParseException {
+                                   ModuleList moduleSelectedList,
+                                   UniversityList universityMasterList) throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
         University currentUni = new University();
@@ -150,7 +150,8 @@ public class AddCommandParser {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
         //THIS IS NOT WORKING
-        if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList).get(mapIndex - 1))) {
+        if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList)
+                .get(mapIndex - 1))) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
         }
     }
