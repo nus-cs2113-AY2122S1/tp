@@ -14,65 +14,53 @@
 ## Design
 ### Architecture
 ![ArchitectureDiagram](diagrams/ArchitectureDiagram.png)
-<br>
-_Figure 1. Architecture Diagram_<br>
-<br>
-The _Architecture Diagram_ shown above explains the high-level design of the Application.<br>
-<br>
+
+The _Architecture Diagram_ shown above illustrates the high-level design of the Application.
+
 **Overview of components**
 * `Main`
-  * On app launch: Creates and runs an instance of `Duke`.
+  * On app launch: Creates and runs an instance of `Taa`.
 * `UI`
   * Handles UI operations.
 * `Taa`
   * On creation: Initializes the `UI` and `Storage` components.
-  * On run: Loads data saved in `Storage`, receives and processes user input from `UI`.
+  * On run: Loads persistent data from `Storage`, receives user input from `UI`, and uses `Parser` to parse the user input.
+* `Parser`
+  * Handles input parsing and determines which command to run.
 * `Command`
   * Defines how a command is to be executed.
-* `Model`
-  * Represents a collection of classes that holds the data of the application in-memory.
-  * Includes: `ModuleList`, `Modules`, `StudentList` , `Student`, `AssessmentList` , `Assessment`, `AttendanceList`
-, `Attendance`
+* `ModuleList`
+  * Contains a list of `Module` objects currently being managed by the app.
+* `Util`
+  * Contains useful methods (e.g. Check if a string is integer/double, convert string to integer/double).
 * `Storage`
   * Handles data storage operations (e.g. Reading from and writing to data file).
-* `Commons`
-  * Represents a collection of classes used by other components.
-  * `Parser`: Used to translate user input into a `Command` and to parse an argument string into its various values.
-  * `Util`: Contains utility functions used by other classes.
 
 <br>
 
-**Interactions between components**
-<br>
-
+**Interaction between components**
 ![ArchitectureSequenceDiagram](diagrams/ArchitectureSequenceDiagram.png)
-<br>
-_Figure 2. An example of interactions between components for `add_module c/CS2113T n/Software Engineering`._
+
+The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other. 
 
 ## Implementation
 ### Add Module
-The add module mechanism is facilitated by `AddModuleCommand`. It extends `Command` and uses `ModuleList` which stores
-module internally as an ArrayList `modules`.<br>
+The sequence diagram shown below illustrates how the `add_module` command works:
+![AddModuleSequenceDiagram](diagrams/AddModuleSequenceDiagram.png)
 
-`AddModuleCommand` implements the following methods:
-* `AddModuleCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
-
-`ModuleList` implements the following methods:
-* `ModuleList#getSize()` - Returns the no. of modules currently in the list.
-* `ModuleList#getModules()` - Returns an ArrayList containing all the modules.
-* `ModuleList#getModule(code:String)` - Returns a module with a particular code.
-* `ModuleList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `modules` ArrayList.
-* `ModuleList#addModule(module:Module)` - Adds a module to the `modules` ArrayList.
-* `ModuleList#getModuleAt(index:int)` - Returns a `Module` object at the specified `index` within the `modules` 
-ArrayList.
-
-Below is an example scenario of how the add module feature behaves at each step:<br>
-* Step 1 - The user executes `add_module c/CS2113T n/Software Engineering` to add a module. The `add_module` command 
-calls the `AddModuleCommand#execute` method. Within `AddModuleCommand#execute`, `ModuleList#getModule("CS2113T")` is 
-called to ensure that there is no existing module with code `CS2113T`.
-* Step 2 - If no existing module with code `CS2113T` is found, a new `Module` object with code and name set to `CS2113T`
-and `Software Engineering` respectively. Then, `ModuleList#addModule` is called to add the newly created `Module` 
-object into the `modules` ArrayList within `ModuleList`.
+Steps:
+1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
+2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
+is returned.
+3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid. **If an exception occurs, the exception
+message will be printed out and the command execution ends here.**
+4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called.
+5. Within `AddModuleCommand.checkArguments()`, `ModuleList.getModuleWithCode(moduleCode:String)` is called and will return a
+`Module` object if a module with the `moduleCode` is found. **If `ModuleList.getModuleWithCode(moduleCode:String)` returns
+an object, an exception will occur (the exception message will be printed out) and the command execution ends here.**
+6. A new `Module` object is created and the `ModuleList.addModule(module:Module)` method be invoked to add the `Module`
+object into the list of modules.
+7. Lastly, a message indicating that the module has been added will be printed out.
 
 ### Add Student
 The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which

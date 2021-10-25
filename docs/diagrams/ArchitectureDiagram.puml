@@ -2,9 +2,7 @@
 !include <office/Concepts/globe_internet>
 !include <office/Concepts/documents>
 !include <office/Users/user>
-
-skinparam Shadowing false
-skinparam MinClassWidth 50
+!include style.puml
 
 skinparam Class {
     FontColor #FFFFFF
@@ -14,9 +12,8 @@ skinparam Class {
     FontName Arial
 }
 
-hide footbox
-hide members
-hide circle
+Class "<$user>" as User #Red
+Class "<$documents>" as File #Gray
 
 Package " "<<Rectangle>>{
     Class UI #ForestGreen
@@ -24,28 +21,21 @@ Package " "<<Rectangle>>{
     Class Storage #DarkGoldenRod
     Class Main #IndianRed
     Class Command #DarkSlateBlue
-    Class Model #DarkRed
-    Class Commons #Purple
-    Class Dummy #White
+    Class ModuleList #DarkRed
     Class Parser #Navy
     Class Util #LightSeaGreen
 }
-Class "<$user>" as User #Red
-Class "<$documents>" as File #Gray
 
-Main -down-> Taa
-UI -> Taa
-Taa -> Command
+User <-down-> UI
+UI -down-> Taa
+Main -right-> Taa
+Taa <-down-> Parser
+Taa -right-> Command
+Command <-down-> Util
 Command -up-> UI
-Command -right-> Storage
-Command -down-> Model
-Model -right[hidden]- Dummy
-Dummy .down.> Commons
-Dummy .down.> Commons
-Dummy .down.> Commons
-Commons -left- Parser
-Commons -down- Util
+Command -down-> Storage
+Storage -up-> Taa
+Storage <-down-> File
+Command <-right-> ModuleList
 
-UI <-up- User
-Storage -right-> File
 @enduml
