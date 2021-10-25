@@ -10,6 +10,7 @@ import medbot.utilities.ViewType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class UiTest {
     public static final String END_LINE = System.lineSeparator();
@@ -109,11 +110,11 @@ class UiTest {
             + " ----------------------------------------------------------------------------------------------------- "
             + END_LINE;
 
-        assertEquals(PatientUi.getAllPatientsString(patientList.listPersons()), expectedOutput);
+        assertEquals(PatientUi.getAllPatientsString(patientList.listPersons(false)), expectedOutput);
     }
 
     @Test
-    public void testGetCommandListMessage() {
+    public void testGetPatientCommandListMessage() {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
@@ -123,7 +124,46 @@ class UiTest {
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
 
-        assertEquals(Ui.getCommandList(), expectedOutput);
+        try {
+            assertEquals(Ui.getCommandList(ViewType.PATIENT_INFO), expectedOutput);
+        } catch (MedBotException mbe) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGetStaffCommandListMessage() {
+
+        String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
+                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
+                + END_LINE + END_LINE
+                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "help [COMMAND]" + END_LINE + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+
+        try {
+            assertEquals(Ui.getCommandList(ViewType.MEDICAL_STAFF_INFO), expectedOutput);
+        } catch (MedBotException mbe) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGetSchedulerCommandListMessage() {
+
+        String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
+                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + END_LINE
+                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "help [COMMAND]" + END_LINE + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+
+        try {
+            assertEquals(Ui.getCommandList(ViewType.SCHEDULER), expectedOutput);
+        } catch (MedBotException mbe) {
+            fail();
+        }
     }
 
 

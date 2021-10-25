@@ -288,7 +288,7 @@ class ParserTest {
         testCases.put("delete 1", new DeletePatientCommand(1));
         testCases.put("find n/name", new FindPatientCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewPatientCommand(1));
-        testCases.put("list", new ListPatientCommand());
+        testCases.put("list", new ListPatientCommand(false));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {
@@ -315,7 +315,7 @@ class ParserTest {
         testCases.put("delete 1", new DeleteStaffCommand(1));
         testCases.put("find n/name", new FindStaffCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewStaffCommand(1));
-        testCases.put("list", new ListStaffCommand());
+        testCases.put("list", new ListStaffCommand(false));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {
@@ -339,10 +339,9 @@ class ParserTest {
         testCases.put("exit", new ExitCommand());
         testCases.put("help ", new HelpCommand(ViewType.SCHEDULER));
         testCases.put("switch 1", new SwitchCommand(null));
-        testCases.put("add p/1 m/1 d/18/10/21 1800 ", new AddAppointmentCommand(null));
-        testCases.put("add 1 p/1 s/1 t/18/10/21 1800 ", new AddAppointmentCommand(null));
-        testCases.put("edit 1 p/1 s/1 t/18/10/21 1800 ", new EditAppointmentCommand(1, null));
-        testCases.put("edit 1 p/1 m/1 d/18/10/21 1800 ", new EditAppointmentCommand(1, null));
+        testCases.put("add p/1 s/1 d/181021 1800 ", new AddAppointmentCommand(null));
+        testCases.put("add 1 p/1 s/1 d/181021 1800 ", new AddAppointmentCommand(null));
+        testCases.put("edit 1 p/1 s/1 d/181021 1800 ", new EditAppointmentCommand(1, null));
         testCases.put("delete 1", new DeleteAppointmentCommand(1));
         testCases.put("list", new ListAppointmentCommand());
         testCases.put(" hello", null);

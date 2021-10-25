@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String exitMessage = ui.getExitMessage();
+        String exitMessage = Ui.getExitMessage();
         ui.printOutput(exitMessage);
     }
 }

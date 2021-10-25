@@ -4,16 +4,14 @@ package medbot.person;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
+import java.util.LinkedList;
 import medbot.list.ListItem;
 
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
 import medbot.list.PersonalAppointmentList;
-
-import static medbot.ui.Ui.END_LINE;
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
-
+import medbot.utilities.FilterType;
 
 public abstract class Person extends ListItem {
     private static final String PARAMETER_NAME = "n/";
@@ -141,6 +139,15 @@ public abstract class Person extends ListItem {
     }
 
     /**
+     * Returns an LinkedList of the appointmentId of all appointments.
+     *
+     * @return LinkedList of the appointmentId of all appointments
+     */
+    public LinkedList<Integer> getAllAppointmentIds() {
+        return personalAppointmentList.getAllAppointmentIds();
+    }
+
+    /**
      * Adds the given appointment to the appointment list.
      *
      * @param appointment Appointment to be added to the appointment list
@@ -160,8 +167,16 @@ public abstract class Person extends ListItem {
         personalAppointmentList.deleteAppointment(dateTimeCode);
     }
 
-    public String listAppointments() {
-        return personalAppointmentList.listAppointments();
+    public String listAppointments(FilterType filterType, int dateTimeCode) {
+        switch (filterType) {
+        case BEFORE:
+            return personalAppointmentList.listAppointmentsBefore(dateTimeCode);
+        case AFTER:
+            return personalAppointmentList.listAppointmentsAfter(dateTimeCode);
+        case NONE:
+        default:
+            return personalAppointmentList.listAppointments();
+        }
     }
 
     /**

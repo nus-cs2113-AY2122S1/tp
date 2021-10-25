@@ -6,11 +6,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
-public class Appointment extends ListItem {
-    private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH00");
+public class Appointment {
+    private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private int appointmentId = 0;
     private int patientId = 0;
     private int medicalStaffId = 0;
@@ -50,8 +49,8 @@ public class Appointment extends ListItem {
 
     public static String getDateTimeString(int dateTimeCode) {
         long epochSecond = (long) dateTimeCode * 60;
-        LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, zoneOffset);
-        return localDateTime.format(dateTimeFormatter);
+        LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
+        return localDateTime.format(DATE_TIME_FORMATTER) + "HRS";
     }
 
     /**
@@ -100,8 +99,8 @@ public class Appointment extends ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + " " + getDateTimeString(dateTimeCode) + " Patient ID: " + patientId
-                + " Staff ID: " + medicalStaffId + "\n";
+        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
+                + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 
     /**

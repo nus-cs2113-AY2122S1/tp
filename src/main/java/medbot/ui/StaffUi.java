@@ -5,6 +5,16 @@ public class StaffUi {
     public static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
             + "----------------------------------------------------- " + END_LINE;
 
+    public static String getStaffCommandList() {
+        return "Here are the list of commands:" + END_LINE + END_LINE
+                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
+                + END_LINE + END_LINE
+                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "help [COMMAND]" + END_LINE + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+    }
+
     public static String getAddStaffHelpMessage() {
         return "Add a staff to the staff’s list." + END_LINE
                 + "Format:" + END_LINE
@@ -77,7 +87,7 @@ public class StaffUi {
     }
 
     /**
-     * Prints a message when viewing the profile of a staff.
+     * Returns the profile of a staff.
      *
      * @param staffInfo the Info of the patient to be printed.
      * @return the staff information
@@ -88,7 +98,7 @@ public class StaffUi {
     }
 
     /**
-     * Prints all staffs in a list.
+     * Returns all staffs' information in a list.
      *
      * @param staffListString String containing information of all staff.
      * @return all Staffs' information.
@@ -101,6 +111,11 @@ public class StaffUi {
         return output;
     }
 
+    /**
+     * Returns the header of the staff information table.
+     *
+     * @return the header of the staff information table.
+     */
     public static String getStaffTableHeader() {
         String output = "Here is a list of all staffs:" + END_LINE;
         output += "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE;

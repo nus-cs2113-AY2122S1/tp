@@ -12,17 +12,10 @@ public class SchedulerAppointmentList extends MedBotList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
-    private int lastId = 1;
+    private int lastId = 0;
 
     public SchedulerAppointmentList() {
 
-    }
-
-    private int generateAppointmentId() {
-        while (appointments.containsKey(lastId)) {
-            lastId++;
-        }
-        return lastId;
     }
 
     /**
@@ -65,6 +58,18 @@ public class SchedulerAppointmentList extends MedBotList {
         }
         appointments.put(appointmentId, appointment);
         return appointmentId;
+    }
+
+    /**
+     * Generates a non-random but unique id to be allocated to an appointment.
+     *
+     * @return a unique id to be allocated to an appointment
+     */
+    private int generateAppointmentId() {
+        do {
+            lastId++;
+        } while (appointments.containsKey(lastId));
+        return lastId;
     }
 
 

@@ -1,6 +1,8 @@
 package medbot.list;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -60,6 +62,22 @@ public class PersonalAppointmentList {
     }
 
     /**
+     * Returns a LinkedList of the appointmentId of all appointments.
+     *
+     * @return LinkedList of the appointmentId of all appointments
+     */
+    public LinkedList<Integer> getAllAppointmentIds() {
+        LinkedList<Integer> appointmentIds = new LinkedList<>();
+
+        for (Appointment appointment : appointments) {
+            if (appointment != null) {
+                appointmentIds.add(appointment.getAppointmentId());
+            }
+        }
+        return appointmentIds;
+    }
+
+    /**
      * Removes the appointment with the specified dateTimeCode.
      *
      * @param dateTimeCode the dateTimeCode of the appointment to be deleted
@@ -88,4 +106,27 @@ public class PersonalAppointmentList {
         }
         return output;
     }
+
+    public String listAppointmentsAfter(int dateTimeCode) {
+        Appointment referenceAppointment = new Appointment();
+        referenceAppointment.setDateTimeCode(dateTimeCode);
+        NavigableSet<Appointment> appointmentsAfter = appointments.tailSet(referenceAppointment, true);
+        String output = "";
+        for (Appointment appointment : appointmentsAfter) {
+            output += appointment + END_LINE;
+        }
+        return output;
+    }
+
+    public String listAppointmentsBefore(int dateTimeCode) {
+        Appointment referenceAppointment = new Appointment();
+        referenceAppointment.setDateTimeCode(dateTimeCode);
+        NavigableSet<Appointment> appointmentsBefore = appointments.headSet(referenceAppointment, true);
+        String output = "";
+        for (Appointment appointment : appointmentsBefore) {
+            output += appointment + END_LINE;
+        }
+        return output;
+    }
+
 }
