@@ -8,13 +8,13 @@ import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.ModuleStorage;
-import seedu.duke.storage.UniversityStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
 
 
 public class AddUniCommandParserTest {
 
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
     private static UniversityList universityMasterList;
@@ -22,8 +22,9 @@ public class AddUniCommandParserTest {
 
     @Test
     public void test_validUniversityName_success() throws IOException {
-        moduleMasterList = new ModuleList(ModuleStorage.load());
-        universityMasterList = new UniversityList(UniversityStorage.load());
+        moduleMasterList = new ModuleList(storage.readModuleList());
+        universityMasterList = new UniversityList(
+                storage.readUniversityList());
         AddCommandParser commandParser = new AddCommandParser();
         assertEquals(true, commandParser.isUniversityExist("Aarhus School of Business", universityMasterList));
         assertEquals(true, commandParser.isUniversityExist("Aarhus University", universityMasterList));
@@ -32,7 +33,8 @@ public class AddUniCommandParserTest {
     @Test
     public void test_invalidUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            UniversityList universityMasterList = new UniversityList(
+                    storage.readUniversityList());
             AddCommandParser commandParser = new AddCommandParser();
             commandParser.parse("non-existent university name", universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
@@ -47,7 +49,7 @@ public class AddUniCommandParserTest {
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
             AddCommandParser commandParser = new AddCommandParser();
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             commandParser.parse("", universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
