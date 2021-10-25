@@ -29,7 +29,7 @@ public class ItemsList {
     public void editItem(int index, Item item) {
         logger.log(Level.INFO, "Editing an item to itemsList");
         items.add(item);
-        Collections.swap(items, index - 1, getSize() - 1);
+        Collections.swap(items, index, getSize() - 1);
         items.remove(getSize() - 1);
     }
 
