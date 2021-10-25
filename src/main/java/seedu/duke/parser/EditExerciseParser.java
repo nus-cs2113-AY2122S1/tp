@@ -43,7 +43,11 @@ public class EditExerciseParser extends Parser {
 
             return new EditExerciseCommand(exerciseIndex, workoutIndex, newDescription, newSets, newReps);
         } catch (GetJackDException e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + EditExerciseCommand.MESSAGE_USAGE);
+            if (Command.workoutMode != 0) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                        + EditExerciseCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + EditExerciseCommand.MESSAGE_USAGE_MAIN);
         }
     }
 

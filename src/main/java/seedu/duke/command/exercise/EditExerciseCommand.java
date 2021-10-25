@@ -16,13 +16,23 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public class EditExerciseCommand extends Command {
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the exercise in the workout.\n"
+
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Edits the exercise in the workout.\n"
             + "Format: edit [exercise index], [workout index], [new Description], [sets and reps]\n"
             + "Parameters:\n"
             + "\tExercise index - Index of exercise to edit\n"
             + "\tWorkout index - Index of workout containing exercise to edit\n"
             + "Example: " + COMMAND_WORD + " 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
             + "from workout 2";
+
+    public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
+            + ": Edits the exercise in the workout the user is currently in.\n"
+            + "Format: edit [exercise index], [new Description], [sets and reps]\n"
+            + "Parameters:\n"
+            + "\tExercise index - Index of exercise to edit\n"
+            + "Example: " + COMMAND_WORD + " 1, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
+            + "from the current workout";
+
     public static final String MESSAGE_SUCCESS = "The edited exercise: %1$s";
 
     private static final Logger LOGGER = Logger.getLogger(EditExerciseCommand.class.getName());

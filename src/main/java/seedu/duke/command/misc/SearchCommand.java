@@ -18,10 +18,13 @@ import java.util.Map;
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays workouts or exercises that contain the "
             + "specified keyword with the workout or exercise index the keyword.\n"
+            + "Format: search [keyword]\n"
             + "\tParameters: KEYWORD\n"
             + "\tExample: " + COMMAND_WORD + " abs";
+
     public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";
     public static final String MESSAGE_NO_MATCHES_FOUND = "No matches found. ";
     public static final String MESSAGE_MATCHING_EXERCISES_IN_WORKOUT = "Matching exercises in %d) %s";

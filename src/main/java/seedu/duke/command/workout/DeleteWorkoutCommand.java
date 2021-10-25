@@ -16,6 +16,7 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the workout corresponding to the workout index.\n"
             + "Format: delete [Workout index]\n"
@@ -58,6 +59,10 @@ public class DeleteWorkoutCommand extends Command {
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
+
+        if (workoutMode == workoutIndex) {
+            workoutMode = 0;
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }

@@ -15,12 +15,18 @@ import java.util.ArrayList;
  */
 public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
+
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
             + "Format: display [Workout index]\n"
             + "Parameters:\n"
             + "\tWorkout index - index of workout to display exercises\n"
             + "Example: " + COMMAND_WORD + " 3";
-    public static final String MESSAGE_DISPLAY_EXERCISES = "Exercises in %s";
+
+    public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
+            + ": Displays all exercises in the workout the user is currently in.\n"
+            + "Example: " + COMMAND_WORD;
+
+    public static final String MESSAGE_DISPLAY_EXERCISES = "Exercises in %d) %s";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
 
     private final int workoutIndex;
@@ -50,7 +56,7 @@ public class DisplayExercisesCommand extends Command {
         if (exercises.isEmpty()) {
             return new CommandResult(MESSAGE_EMPTY_WORKOUT);
         } else {
-            String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workout.getWorkoutName());
+            String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workoutIndex, workout.getWorkoutName());
             return new CommandResult(displayMessage, exercises);
         }
     }

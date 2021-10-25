@@ -20,7 +20,12 @@ public class DisplayExerciseParser extends Parser {
             int workoutIndex = parseWorkoutIndex(commandArgs);
             return new DisplayExercisesCommand(workoutIndex);
         } catch (GetJackDException e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DisplayExercisesCommand.MESSAGE_USAGE);
+            if (Command.workoutMode != 0) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                        + DisplayExercisesCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                    + DisplayExercisesCommand.MESSAGE_USAGE_MAIN);
         }
     }
 

@@ -18,13 +18,22 @@ import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
  */
 public class AddExerciseCommand extends Command {
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to a workout.\n"
+
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Adds an exercise to a workout.\n"
             + "Format: add [exercise description], [sets and reps], [workout index]\n"
             + "Parameters:\n"
             + "\tSets and reps: \"5 10\" - 5 sets of 10 reps\n"
             + "\tWorkout index: Index of workout to add exercise to\n"
             + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10" + PARAMETER_SEPARATOR + "1";
-    public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
+
+    public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
+            + ": Adds an exercise to the workout the user is currently in.\n"
+            + "Format: add [exercise description], [sets and reps]\n"
+            + "Parameters:\n"
+            + "\tSets and reps: \"5 10\" - 5 sets of 10 reps\n"
+            + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10";
+
+    public static final String MESSAGE_SUCCESS = "New exercise added: %s";
 
     private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
     private final Exercise toAdd;
