@@ -8,17 +8,10 @@ public class SchedulerAppointmentList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
-    private int lastId = 1;
+    private int lastId = 0;
 
     public SchedulerAppointmentList() {
 
-    }
-
-    private int generateAppointmentId() {
-        while (appointments.containsKey(lastId)) {
-            lastId++;
-        }
-        return lastId;
     }
 
     /**

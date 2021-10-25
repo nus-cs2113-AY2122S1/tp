@@ -15,7 +15,7 @@ import static medbot.ui.Ui.END_LINE;
 public abstract class PersonList extends MedBotList {
 
     private final HashMap<Integer, Person> persons = new HashMap<>();
-    private int lastId = 1;
+    private int lastId = 0;
 
     public int size() {
         return persons.size();
@@ -41,9 +41,10 @@ public abstract class PersonList extends MedBotList {
      * @return a unique id to be allocated to a person
      */
     private int generatePersonId() {
-        while (persons.containsKey(lastId)) {
+        do {
             lastId++;
-        }
+        } while (persons.containsKey(lastId));
+
         return lastId;
     }
 
