@@ -163,7 +163,7 @@ Got it. This ingredient has been updated:
 ____________________________________________________
 ```
 
-### 2.5. Delete Ingredients [to be updated]
+### 2.5. Delete Ingredients
 
 Delete an ingredient from the ingredient list based on its name and expiry date in the list.
 > Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
@@ -336,9 +336,14 @@ ____________________________________________________
 
 ## 3. FAQ
 
+**Q**: How do I save my ingredient list?
+
+**A**: The ingredient list is automatically saved after any operations that edits its contents. They are saved under `data\"ingredients.txt"`
+
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: You can copy the `data` directory to the directory holding the jar file on the other computer.
+
 
 ## Command Summary
 
