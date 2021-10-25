@@ -141,7 +141,7 @@ Expected outcome of usage:
 me
 ____________________________________________________________
 Name:     Marcus Bo
-Github:   github.com/marcusboreee
+Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
 Telegram: t.me/m4rcusb0
 ____________________________________________________________
