@@ -387,7 +387,8 @@ public class UiTest {
 
     @Test
     public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
-        FindCommand testFindCommand = new FindCommand(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        String currDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        FindCommand testFindCommand = new FindCommand(currDate);
         initialiseFinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income incomeWithDiffDate = new Income("Paycheck August", 25.0, IncomeCategory.SALARY, date);

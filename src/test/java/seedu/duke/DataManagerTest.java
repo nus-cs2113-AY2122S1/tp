@@ -5,7 +5,12 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
-import seedu.utility.*;
+import seedu.utility.BudgetManager;
+import seedu.utility.DataManager;
+import seedu.utility.FinancialAdvisor;
+import seedu.utility.FinancialTracker;
+import seedu.utility.Parser;
+import seedu.utility.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

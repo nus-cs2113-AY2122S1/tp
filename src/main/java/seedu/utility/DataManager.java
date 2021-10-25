@@ -35,7 +35,8 @@ public class DataManager {
     private final BudgetManager budgetManager;
     private final FinancialAdvisor financialAdvisor;
 
-    public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, BudgetManager budgetManager, FinancialAdvisor financialAdvisor) {
+    public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, 
+            BudgetManager budgetManager, FinancialAdvisor financialAdvisor) {
         this.parser = parser;
         this.financialTracker = financialTracker;
         this.ui = ui;
