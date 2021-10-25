@@ -1,0 +1,156 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+Class University {
+    protected int index;
+    protected String name;
+    public ArrayList<ModuleMapping> list;
+
+    public University();
+
+    public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList);
+
+    public University(String name, ArrayList<ModuleMapping> list, int index);
+
+    public void addMapping(ModuleMapping moduleMapping);
+
+    public void removeMapping(ModuleMapping moduleMapping);
+
+    public void clearMappings();
+
+    public void listAllMappings();
+
+    public void listSelectedMappings(ModuleList selectedModuleList);
+
+    public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList);
+
+    public int getSelectedMappingListSize(ModuleList selectedModuleList);
+
+    public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList);
+
+    public int getMappingListSize();
+
+    public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList);
+
+    public String getName();
+
+    public int getIndex();
+
+    public int getMasterListIndex(UniversityList universityMasterList);
+
+    public boolean isExistMapping(ModuleMapping mapping);
+
+    public String toFileFormat();
+
+    public int compare(University u, University u1);
+
+    public double getMC();
+}
+
+Class UniversityList {
+
+    protected ArrayList<University> list;
+
+    public UniversityList(ArrayList<University> list);
+
+    public UniversityList();
+
+    public void addUniversity(University addedUniversity);
+
+    public void removeUniversity(String universityName);
+
+    public void removeUniversity(int index);
+
+    public void listUniversities();
+
+    public int getSize();
+
+    public ArrayList<University> getList();
+
+    public University get(int index);
+
+    public boolean searchUniversity(String universityName);
+
+    public University getUniversity(String universityName);
+
+}
+
+Class Module {
+    protected int index;
+    protected String moduleCode;
+    protected String moduleName;
+    protected double moduleCredits;
+
+    public Module();
+
+    public Module(String moduleCode, String moduleName, double moduleCredits, ModuleList moduleMasterList);
+
+    public Module(String moduleCode, String moduleName, double moduleCredits, int index);
+
+    public int getIndex();
+
+    public String getModuleCode();
+
+    public String getModuleName();
+
+    public double getModuleCredits();
+
+    public int getMasterListIndex(ModuleList moduleMasterList);
+
+    public void setModuleCode(String moduleCode);
+
+    public void setModuleName(String moduleName) ;
+
+    public void setModuleCredits(int moduleCredits) ;
+
+    public String toFileFormat();
+
+    public int compare(Module m, Module m1);
+
+
+}
+
+Class ModuleList {
+    protected ArrayList<Module> list;
+
+    public ModuleList(ArrayList<Module> list);
+
+    public ModuleList();
+
+    public void addModule(Module module);
+
+    public void removeModule(String moduleCode) ;
+
+    public int getSize();
+
+    public Module get(int index);
+
+    public boolean isModuleExist(String moduleCode);
+
+    public Module getModule(String moduleCode);
+
+    public ArrayList<Module> getList();
+
+    public void listModules();
+}
+
+Class ModuleMapping {
+    public Module localModule;
+
+    public Module mappedModule;
+
+    public ModuleMapping(Module localModule, Module mappedModule);
+
+    public Module getLocalModule();
+
+    public void setLocalModule(Module localModule);
+
+    public Module getMappedModule();
+
+    public void setMappedModule(Module mappedModule);
+
+
+}
+@enduml
