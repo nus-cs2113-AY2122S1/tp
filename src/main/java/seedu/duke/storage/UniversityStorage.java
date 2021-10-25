@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
@@ -18,7 +19,7 @@ import static java.lang.Double.parseDouble;
 public class UniversityStorage {
     private static final Logger logger = Logger.getLogger("UniversityStorageLog");
 
-    public ArrayList<University> readUniversityList(InputStream inputStream) throws IOException {
+    public ArrayList<University> readUniversityList(InputStream inputStream, ModuleList moduleMasterList) throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -36,10 +37,10 @@ public class UniversityStorage {
             }
             assert parseDouble(attributes[3]) > 0 : "Local module credits should be positive";
             Module local = new Module(attributes[1], attributes[2],
-                    parseDouble(attributes[3]));
+                    parseDouble(attributes[3]), moduleMasterList);
             assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be positive";
             Module mapped = new Module(attributes[4], attributes[5],
-                    parseDouble(attributes[6]));
+                    parseDouble(attributes[6]), moduleMasterList);
             moduleMappingList.add(new ModuleMapping(local, mapped));
             line = br.readLine();
         }
