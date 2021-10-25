@@ -88,7 +88,7 @@ public class EditContactCommand extends Command {
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
-            return userEditConfirmation.equalsIgnoreCase("n");
+            return !userEditConfirmation.equalsIgnoreCase("y");
         }
         return false;
     }
@@ -112,10 +112,10 @@ public class EditContactCommand extends Command {
     }
 
     private boolean hasDuplicateField(String input, String saved) {
-        return stringCleaner(saved).equals(stringCleaner(input));
+        return cleanString(saved).equals(cleanString(input));
     }
 
-    private String stringCleaner(String input) {
+    private String cleanString(String input) {
         return input.replace(" ", "").toLowerCase();
     }
 

@@ -10,6 +10,10 @@ public class IndexParser {
     private static final int INDEX_POSITION = 1;
     private static final int SIGNIFICANT_INDEX_POSITION = 0;
     private static final int COMD_INDEX_LENGTH = 2;
+    private static final String PERSONAL_CONTACT_INDEX = "me";
+    private static final int PERSONAL_CONTACT_ID = -1;
+    private static final String REMOVE_ALL_INDEX = "-rf";
+    private static final int REMOVE_ALL_ID = -2;
 
 
     public static int getIndexFromInput(String userInput)
@@ -22,12 +26,17 @@ public class IndexParser {
         assert destructuredInputs.length == 2;
         // split index string into words
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
-        // contact index that is important and what we want
-        // can be "me" or an integer
+        // Since inputs like "rm 1 2 3" are allowed
+        // 1 is the significant index that is important and chosen as the index for command
+        // index can be "me" or "-rf" or an integer
         String significantIndex = indexSplit[SIGNIFICANT_INDEX_POSITION].trim();
-        if (significantIndex.equalsIgnoreCase("me")) {
-            return -1;
+        if (significantIndex.equalsIgnoreCase(PERSONAL_CONTACT_INDEX)) {
+            return PERSONAL_CONTACT_ID;
         }
+        if (significantIndex.equalsIgnoreCase(REMOVE_ALL_INDEX)) {
+            return REMOVE_ALL_ID;
+        }
+
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         return Integer.parseInt(significantIndex);
     }
