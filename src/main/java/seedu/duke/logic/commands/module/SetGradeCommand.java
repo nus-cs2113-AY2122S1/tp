@@ -26,6 +26,7 @@ public class SetGradeCommand extends Command {
             throws DukeException, IOException {
         Module module = moduleList.getModule(index);
         module.setGrade(grade);
+        assert (module.getGrade() != null) : "module should have a valid grade";
         storage.saveData(moduleList);
         ui.printModuleWithGradeChanged(module);
     }
