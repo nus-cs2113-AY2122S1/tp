@@ -11,7 +11,6 @@ public class UI {
         System.out.println("Pack your bags, you're off the show");
     }
 
-    
     public void printHelp() {
         System.out.println("1. Add a recipe: addRecipe \"recipe name\" \"/ingredients\" 1+2 \"/steps\" 1+2");
         System.out.println("2. Delete a recipe: deleteRecipe \"Index of recipe\"");
