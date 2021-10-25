@@ -26,7 +26,8 @@ public class ExpireCommand extends Command {
         for (IngredientGroup ingredientGroup : ingredientList) {
             int entryCount = ingredientGroup.getIngredientGroupSize();
             for (int i = 0; i < entryCount; i++) {
-                if (getNumDaysBetween(ingredientGroup.getIngredientExpiry(i + 1), expireBeforeDate) >= 0) {
+                if (getNumDaysBetween(ingredientGroup.getIngredientExpiry(i + 1),
+                        expireBeforeDate) >= 0) {
                     resultMsg += ingredientGroup.get(i + 1).getName() + " | "
                             + ingredientGroup.getIngredientInfo(i + 1) + LIST_NEWLINE_INDENT;
                     expiringCount += 1;
@@ -41,6 +42,6 @@ public class ExpireCommand extends Command {
 
         return "There are " + expiringCount
                 + " ingredients expiring by: " + Ingredient.dateToString(expireBeforeDate)
-                + LIST_NEWLINE_INDENT + resultMsg;
+                + LIST_NEWLINE_INDENT + resultMsg.trim();
     }
 }

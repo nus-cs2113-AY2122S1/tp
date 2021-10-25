@@ -4,8 +4,10 @@ import seedu.situs.Situs;
 import seedu.situs.command.*;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.storage.Storage;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -32,6 +34,7 @@ public class Parser {
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
+    private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -154,7 +157,7 @@ public class Parser {
             LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
 
             Ingredient updatedIngredient =
-                    new Ingredient(ingredientName, ingredientAmount,  ingredientExpiry);
+                    new Ingredient(ingredientName, ingredientAmount, ingredientExpiry);
             String resultMsg = new UpdateCommand(updatedIngredient).run();
 
             if (resultMsg.equals(EMPTY_STRING)) {
@@ -196,7 +199,7 @@ public class Parser {
             LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
 
             Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
-                     ingredientExpiry);
+                    ingredientExpiry);
             return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
@@ -324,6 +327,12 @@ public class Parser {
      */
     private static String parseSetCommand(String command) throws SitusException {
         String[] details = command.split(" ", 3);
+        if (details.length < 3) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        }
+
+        assert (details.length == 3);
+
         try {
             switch (details[1].trim()) {
             case "expiry":
@@ -333,10 +342,12 @@ public class Parser {
                 AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
                 return "Successfully set low stock threshold to " + details[2].trim() + " kg";
             default:
-                throw new SitusException("Invalid Input");
+                throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
             }
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
+        } catch (IOException e) {
+            throw new SitusException(SET_THRESHOLD_ERROR_MESSAGE);
         }
     }
 }

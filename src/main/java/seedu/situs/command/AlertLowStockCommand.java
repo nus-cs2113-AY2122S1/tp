@@ -3,16 +3,31 @@ package seedu.situs.command;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
+import seedu.situs.storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AlertLowStockCommand extends Command {
 
-    private static double lowStockThreshold = 1;
+    private static double lowStockThreshold;
     private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
-    public static void setLowStockThreshold(double lowStockThreshold) {
+    public AlertLowStockCommand() {
+        try {
+            lowStockThreshold = new Storage().loadStockThreshold();
+        } catch (IOException | NumberFormatException e) {
+            lowStockThreshold = 1.0;
+        }
+    }
+
+    public static double getLowStockThreshold() {
+        return lowStockThreshold;
+    }
+
+    public static void setLowStockThreshold(double lowStockThreshold) throws IOException {
         AlertLowStockCommand.lowStockThreshold = lowStockThreshold;
+        new Storage().writeThresholdData();
     }
 
     @Override
@@ -34,7 +49,8 @@ public class AlertLowStockCommand extends Command {
         }
 
         return "There are " + lowStockCount
-                + " ingredients with stock less than " + lowStockThreshold + " kg" + LIST_NEWLINE_INDENT + resultMsg;
+                + " ingredients with stock less than " + lowStockThreshold + " kg"
+                + LIST_NEWLINE_INDENT + resultMsg.trim();
     }
 }
 

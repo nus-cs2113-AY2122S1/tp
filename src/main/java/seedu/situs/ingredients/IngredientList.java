@@ -187,6 +187,11 @@ public class IngredientList {
 
         removedIngredient = getIngredientGroup(groupIndexToRemove + 1)
                 .remove(ingredientIndexToRemove + 1);
+
+        if (getIngredientGroup(groupIndexToRemove + 1).getIngredientGroupSize() <= 0) {
+            ingredientList.remove(groupIndexToRemove);
+        }
+
         storage.writeIngredientsToMemory(ingredientList);
 
         return removedIngredient;

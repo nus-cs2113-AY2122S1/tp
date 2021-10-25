@@ -40,7 +40,7 @@ The intended audience for this document are developers looking to introduce new 
 2. **IntelliJ IDEA** most recent version
 
 ### 2.2. Setting up the project on the computer
-1. Clone **this** repo onto your computer.
+1. Clone **[this](https://github.com/AY2122S1-CS2113T-T09-3/tp.git)** repo onto your computer.
 2. Open IntelliJ (if you are not in welcome screen, click **`File`** > **`Close Project`** to close the existing project first).
 3. Set up the correct JDK 11 for IntelliJ.
    1. Click **`File`** > **`Project Structure..`** > **`Project`**.
@@ -86,17 +86,17 @@ enters the input `add n/carrot a/1 e/2021-11-12`
 
 Each of the 5 components (apart from `main`) can be found in their respective packages.
 
-### 3.2 UI component
+### 3.2. UI component
 
 The **UI** component can be found in the `UI` package. The UI reads commands from the user, sends the command to `Main` to be executed and prints an output message upon completion of the command or if an error occurred.
 
-### 3.3 Parser component
+### 3.3. Parser component
 
 The **Parser** component can be found in the `parser` package. 
 
 The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class (`XYZ` is henceforth used as a placeholder for the specific command name, e.g. `AddCommand`).
 
-### 3.4 Command component
+### 3.4. Command component
 
 The **Command** component can be found in the `command` package
 
@@ -112,7 +112,7 @@ A quick overview of how a command is parsed and executed is as such:
 * `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
 * Thus, the command entered by the user is executed.
 
-### 3.5 IngredientList component
+### 3.5. IngredientList component
 
 The **IngredientList** component can be found in the `ingredients` package
 
@@ -127,7 +127,7 @@ The `IngredientList` class
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
 
-### 3.6 Storage component
+### 3.6. Storage component
 
 The **Storage** component can be found in the `Storage` package
 
@@ -190,6 +190,27 @@ For `AlertLowStockCommand`, it is less complicated, and the sequence diagram sho
 
 The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
 information of the `IngredientGroup` is taken note of to be printed when the function is returned.
+
+### 4.2. Deleting ingredients
+
+Delete is performed on individual ingredients in groups. For example, the current ingredient inventory is
+```
+1. Carrot | Total Amount: 12.2 kg
+	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+	Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+
+2. Potato | Total Amount: 7.1 kg
+	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+
+3. Beef | Total Amount: 5.1 kg
+	Amount Left: 5.1 kg | Expiry Date: 01/02/2022
+```
+Then calling `delete n/ carrot e/ 25/12/2021` will remove the second entry in the `carrot` category.
+The sequence diagram below illustrates the above command example
+
+![image](images/DeleteSequenceDiagram.png)
+
 
 ## Product scope
 
