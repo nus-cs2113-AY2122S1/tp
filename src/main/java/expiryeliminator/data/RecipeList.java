@@ -1,5 +1,7 @@
 package expiryeliminator.data;
 
+import expiryeliminator.data.exception.IllegalValueException;
+
 import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -9,7 +11,7 @@ import expiryeliminator.data.exception.NotFoundException;
  * Represents the recipe list and contains methods to add and remove recipes.
  */
 public class RecipeList {
-    private final TreeMap<String, Recipe> recipes;
+    private TreeMap<String, Recipe> recipes;
 
     /**
      * Constructs Recipe List with no recipes.
@@ -55,6 +57,10 @@ public class RecipeList {
      */
     public TreeMap<String,Recipe> getRecipes() {
         return recipes;
+    }
+
+    public void setRecipes(TreeMap<String, Recipe> inputRecipes) {
+        this.recipes = inputRecipes;
     }
 
     /**
@@ -108,6 +114,29 @@ public class RecipeList {
                     recipe.getIngredientQuantities().get(ingredientInRecipeName).getIngredient().setUnit(newUnits);
                 }
             }
+        }
+    }
+
+    public RecipeList updateRecipe(RecipeList recipes, Recipe recipe)
+            throws NotFoundException, IllegalValueException {
+        Recipe matchedRecipe = recipes.findRecipe(recipe.getName());
+        boolean hasMatchingIngredient = false;
+        if (matchedRecipe != null) {
+            for (IngredientQuantity targetIngredient : recipe.getIngredientQuantities().values()) {
+                for (IngredientQuantity originalIngredient : matchedRecipe.getIngredientQuantities().values()) {
+                    if (targetIngredient.getName().equals(originalIngredient.getName())) {
+                        hasMatchingIngredient = true;
+                        originalIngredient.setQuantity(targetIngredient.getQuantity());
+                    }
+                }
+                if (!hasMatchingIngredient) {
+                    return null;
+                }
+            }
+            recipes.recipes.put(recipe.getName(), matchedRecipe);
+            return recipes;
+        } else {
+            return null;
         }
     }
 

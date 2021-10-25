@@ -5,6 +5,7 @@ import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
+import expiryeliminator.storage.SaveData;
 
 /**
  * Decrement ingredient by a specified quantity.
@@ -51,6 +52,7 @@ public class DecrementCommand extends Command {
         }
         try {
             ingredientStorage.remove(quantity);
+            SaveData.saveIngredientRepoToFile(ingredients);
         } catch (IllegalValueException e) {
             return String.format(MESSAGE_QUANTITY_NEGATIVE, ingredientStorage.getQuantity(), quantity,
                     ingredientStorage);

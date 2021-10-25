@@ -1,43 +1,39 @@
 package expiryeliminator.commands;
 
-import java.util.ArrayList;
-
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
+import expiryeliminator.data.exception.NotFoundException;
 import expiryeliminator.storage.SaveData;
 
-/**
- * Adds a recipe, together with the ingredients needed.
- */
-public class AddRecipeCommand extends Command {
-    /** Unique word associated with the command. */
-    public static final String COMMAND_WORD = "add recipe";
+import java.util.ArrayList;
 
-    public static final String MESSAGE_RECIPE_ADDED = "I've added this recipe:\n" + "\n%1$s\n"
-            + "Now you have %2$s recipe(s)";
-    public static final String MESSAGE_RECIPE_ADDED_WITH_REMINDER = "I've added this recipe:\n" + "\n%1$s\n"
-            + "Now you have %2$s recipe(s)\n" + "\nI've also added these ingredients:\n" + "\n%3$s\n"
-            + "Please update the unit if required.";
-    public static final String MESSAGE_RECIPE_ALREADY_EXISTS = "Unable to add recipe: %1$s\n"
-            + "You already have it in your list";
+public class UpdateRecipeCommand extends Command {
+    /**
+     * Unique word associated with the command.
+     */
+    public static final String COMMAND_WORD = "update recipe";
+
+    public static final String MESSAGE_RECIPE_UPDATED = "I've updated this recipe:\n" + "%1$s";
+    public static final String RECIPE_UPDATE_FAIL = "Unable to update this recipe:\n" + "%1$s"
+            + "No matching recipes or ingredients found, please check your input again\n";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to add recipe: %1$s\n"
             + "There is a duplicate ingredient: %2$s.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a recipe with its constituent ingredients"
-            + " to the recipe list.\n"
-            + "You can add any number of ingredients with its required quantities.\n"
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the quantity of ingredients"
+            + " in the recipe list.\n"
             + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
             + "Example: " + COMMAND_WORD
             + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
-    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";
+
 
     private final String name;
     private final ArrayList<String> ingredientNames;
     private final ArrayList<Integer> quantities;
 
-    public AddRecipeCommand(String name, ArrayList<String> ingredientNames, ArrayList<Integer> quantities) {
+    public UpdateRecipeCommand(String name, ArrayList<String> ingredientNames, ArrayList<Integer> quantities) {
         assert name != null : "Recipe name cannot be null";
         assert ingredientNames != null : "Ingredient list cannot be null";
         assert quantities != null : "Quantity list cannot be null";
@@ -50,15 +46,13 @@ public class AddRecipeCommand extends Command {
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
-        assert ingredients != null : "Ingredient repository cannot be null";
         assert recipes != null : "Recipe list cannot be null";
 
         final Recipe recipe = new Recipe(name);
-        String message = "";
 
         for (int i = 0; i < ingredientNames.size(); i++) {
             try {
-                message += recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
+                recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
             } catch (DuplicateDataException e) {
                 return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, ingredientNames.get(i));
             } catch (IllegalValueException e) {
@@ -67,14 +61,16 @@ public class AddRecipeCommand extends Command {
         }
 
         try {
-            recipes.add(recipe);
-            SaveData.saveRecipeListToFile(recipes);
-        } catch (DuplicateDataException e) {
-            return String.format(MESSAGE_RECIPE_ALREADY_EXISTS, name);
+            recipes = recipes.updateRecipe(recipes, recipe);
+            if (recipes != null) {
+                SaveData.saveRecipeListToFile(recipes);
+                return String.format(MESSAGE_RECIPE_UPDATED, recipe);
+            } else {
+                return String.format(RECIPE_UPDATE_FAIL, recipe);
+            }
+        } catch (NotFoundException | IllegalValueException e) {
+            return String.format(RECIPE_UPDATE_FAIL, recipe);
         }
-        if (message.equals("")) {
-            return String.format(MESSAGE_RECIPE_ADDED, recipe, recipes.size());
-        }
-        return String.format(MESSAGE_RECIPE_ADDED_WITH_REMINDER, recipe, recipes.size(),message);
+
     }
 }

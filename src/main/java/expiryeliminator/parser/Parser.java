@@ -2,33 +2,36 @@ package expiryeliminator.parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import expiryeliminator.commands.ListRecipesUserCanCookCommand;
-import expiryeliminator.commands.AddRecipeCommand;
-import expiryeliminator.commands.DeleteRecipeCommand;
-import expiryeliminator.commands.CookedRecipeCommand;
-import expiryeliminator.commands.ViewRecipeCommand;
-import expiryeliminator.commands.ByeCommand;
-
-
 import expiryeliminator.commands.AddIngredientCommand;
+import expiryeliminator.commands.AddRecipeCommand;
+import expiryeliminator.commands.ByeCommand;
 import expiryeliminator.commands.Command;
+import expiryeliminator.commands.CookedRecipeCommand;
 import expiryeliminator.commands.DecrementCommand;
+import expiryeliminator.commands.DeleteExpiredIngredientCommand;
 import expiryeliminator.commands.DeleteIngredientCommand;
+import expiryeliminator.commands.DeleteRecipeCommand;
+import expiryeliminator.commands.ListRecipesUserCanCookCommand;
+import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.commands.HelpCommand;
 import expiryeliminator.commands.IncorrectCommand;
 import expiryeliminator.commands.IncrementCommand;
 import expiryeliminator.commands.ListCommand;
 import expiryeliminator.commands.ListIngredientExpiringCommand;
 import expiryeliminator.commands.ListIngredientsExpiredCommand;
-import expiryeliminator.commands.DeleteExpiredIngredientCommand;
 import expiryeliminator.commands.ListRecipeCommand;
-import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ShoppingListCommand;
+import expiryeliminator.commands.UpdateRecipeCommand;
 import expiryeliminator.commands.UpdateUnitsCommand;
+import expiryeliminator.commands.ViewIngredientCommand;
+
+
+import expiryeliminator.data.IngredientQuantity;
 
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
@@ -42,6 +45,7 @@ import expiryeliminator.parser.exception.MultipleArgsException;
 import expiryeliminator.parser.prefix.MultipleArgPrefix;
 import expiryeliminator.parser.prefix.OptionalArgPrefix;
 import expiryeliminator.parser.prefix.SingleArgPrefix;
+import jdk.nashorn.api.tree.Tree;
 
 
 /**
@@ -118,6 +122,8 @@ public class Parser {
                 return new ListRecipesUserCanCookCommand();
             case ViewRecipeCommand.COMMAND_WORD:
                 return prepareViewRecipe(args);
+            case UpdateRecipeCommand.COMMAND_WORD:
+                return prepareUpdateRecipe(args);
             case ShoppingListCommand.COMMAND_WORD:
                 return prepareShoppingList(args);
             case CookedRecipeCommand.COMMAND_WORD:
@@ -264,6 +270,27 @@ public class Parser {
 
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
         return new ViewIngredientCommand(ingredient);
+    }
+
+    private static Command prepareUpdateRecipe(String args) throws InvalidArgFormatException {
+        final ArgParser argParser = new ArgParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT, PREFIX_MULTIPLE_QUANTITY);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UpdateRecipeCommand.MESSAGE_USAGE));
+        }
+
+        final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
+        final ArrayList<String> ingredients =
+                new IngredientParser().parse(argParser.getArgList(PREFIX_MULTIPLE_INGREDIENT));
+        final ArrayList<Integer> quantities =
+                new QuantityParser().parse(argParser.getArgList(PREFIX_MULTIPLE_QUANTITY));
+        if (ingredients.size() != quantities.size()) {
+            return new IncorrectCommand("Should have same number of ingredient names and quantities");
+        }
+        assert !recipe.isBlank();
+        return new UpdateRecipeCommand(recipe, ingredients, quantities);
     }
 
     private static Command prepareCookedRecipe(String args) throws InvalidArgFormatException {

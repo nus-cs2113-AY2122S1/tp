@@ -6,6 +6,7 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
+import expiryeliminator.storage.SaveData;
 
 /**
  * Increment ingredient by a specified quantity.
@@ -52,6 +53,7 @@ public class IncrementCommand extends Command {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         ingredientStorage.add(quantity, expiryDate);
+        SaveData.saveIngredientRepoToFile(ingredients);
         return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage);
     }
 }
