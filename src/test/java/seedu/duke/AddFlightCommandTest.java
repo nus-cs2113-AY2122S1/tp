@@ -1,6 +1,14 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.data.Flight;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,7 +27,7 @@ public class AddFlightCommandTest {
     }
 
     @Test
-    void addFlightCommand_emptyFlightList_populatedFlightList() {
+    void addFlightCommand_emptyFlightList_populatedFlightList() throws TourPlannerException {
         FlightList testFlightList = new FlightList();
         ClientList dummyClientList = new ClientList();
         TourList dummyTourList = new TourList();
