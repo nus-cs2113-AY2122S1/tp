@@ -23,6 +23,7 @@ public class IngredientList {
 
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
     private static final String NEGATIVE_NUMBER = "Amount updated must be positive!";
+    private static final String INVALID_SUBTRACT = "Subtract amount can't be more than total amount!";
 
     protected static ArrayList<IngredientGroup> ingredientList;
     private static IngredientList instance = null;
@@ -123,6 +124,43 @@ public class IngredientList {
     }
 
     /**
+     * Subtracts amount from total ingredient amount
+     * @param ingredientName name of ingredient
+     * @param subtractAmount amount to be subtracted from total amount
+     * @throws SitusException
+     * @throws IOException
+     */
+    public void subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
+            SitusException, IOException {
+        try {
+            int i = 0;
+            int ingredientIndex = findIngredientIndexInList(ingredientName);
+            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 2);
+
+            if (currentGroup.getTotalAmount() < subtractAmount) {
+                throw new SitusException(INVALID_SUBTRACT);
+            }
+
+            currentGroup.subtractFromTotalAmount(subtractAmount);
+
+            while (subtractAmount != 0.0) {
+                if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
+                    currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
+                    subtractAmount = 0.0;
+                } else {
+                    subtractAmount -= currentGroup.get(i + 1).getAmount();
+                    currentGroup.remove(i + 1);
+                }
+                i++;
+            }
+            storage.writeIngredientsToMemory(ingredientList);
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new SitusException(INVALID_NUMBER);
+        }
+    }
+
+    /**
      * Removes an ingredient from ingredient group.
      *
      * @param ingredientName the ingredient name to remove
@@ -173,12 +211,12 @@ public class IngredientList {
      * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
      *
      * @param updatedIngredient to be updated ingredient
-     * @return ingredient group
      * @throws SitusException index out of bounds, cannot access
      */
-    public void update(Ingredient updatedIngredient) throws SitusException {
+    public boolean update(Ingredient updatedIngredient) throws SitusException {
         try {
             int i;
+            boolean expiryIsRepeated = false;
             int ingredientIndex = findIngredientIndexInList(updatedIngredient.getName());
             IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
             for (i = 0; i < currentGroup.getIngredientGroupSize(); i++) {
@@ -188,9 +226,11 @@ public class IngredientList {
                     }
                     currentGroup.updateTotalAmount(currentGroup.get(i + 1).getAmount(), updatedIngredient.getAmount());
                     (currentGroup.get(i + 1)).setAmount(updatedIngredient.getAmount());
+                    expiryIsRepeated = true;
                 }
             }
             storage.writeIngredientsToMemory(ingredientList);
+            return expiryIsRepeated;
         } catch (IndexOutOfBoundsException | IOException e) {
             throw new SitusException(INVALID_NUMBER);
         }

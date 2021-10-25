@@ -72,6 +72,14 @@ public class IngredientGroup {
     }
 
     /**
+     * Subtracts amount from total amount
+     * @param subtractAmount amount to subtract from total amount
+     */
+    public void subtractFromTotalAmount(double subtractAmount) {
+        this.totalAmount -= subtractAmount;
+    }
+
+    /**
      * Gets the string representation of an ingredient in the list.
      *
      * @param ingredientNumber ingredient number to get information

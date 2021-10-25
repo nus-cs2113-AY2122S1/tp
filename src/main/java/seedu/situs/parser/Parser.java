@@ -1,16 +1,7 @@
 package seedu.situs.parser;
 
-import seedu.situs.command.AddCommand;
-import seedu.situs.command.AlertCommand;
-import seedu.situs.command.AlertExpiringSoonCommand;
-import seedu.situs.command.AlertLowStockCommand;
-import seedu.situs.command.DateCommand;
-import seedu.situs.command.DeleteCommand;
-import seedu.situs.command.ExpireCommand;
-import seedu.situs.command.HelpCommand;
-import seedu.situs.command.ListCommand;
-import seedu.situs.command.UpdateCommand;
-import seedu.situs.command.FindCommand;
+import seedu.situs.Situs;
+import seedu.situs.command.*;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 
@@ -22,6 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_ADD = "add";
+    private static final String COMMAND_SUBTRACT = "subtract";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_HELP = "help";
@@ -46,6 +38,7 @@ public class Parser {
     private static final String DELIMITER = "n/|a/|e/";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
+    private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 3;
     private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 4;
 
 
@@ -69,6 +62,8 @@ public class Parser {
             return parseListCommand();
         case COMMAND_ADD:
             return parseAddCommand(command);
+        case COMMAND_SUBTRACT:
+            return parseSubtractCommand(command);
         case COMMAND_DELETE:
             return parseDeleteCommand(command);
         case COMMAND_UPDATE:
@@ -209,6 +204,30 @@ public class Parser {
             throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
+
+    private static String parseSubtractCommand(String command) throws SitusException {
+        String[] details = command.split("n/|a/");
+
+        if (details.length != SUBTRACT_COMMAND_ARGUMENT_COUNT) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        }
+
+        assert (details.length == SUBTRACT_COMMAND_ARGUMENT_COUNT);
+
+        for (int i = 1; i < SUBTRACT_COMMAND_ARGUMENT_COUNT; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+            }
+        }
+
+        String ingredientName = details[1];
+        double subtractAmount = Double.parseDouble(details[2]);
+        return new SubtractCommand(ingredientName, subtractAmount).run();
+    }
+
+
+
 
     /**
      * Calls and executes the {@code list} command.

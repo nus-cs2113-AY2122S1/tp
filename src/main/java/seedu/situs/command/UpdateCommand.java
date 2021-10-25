@@ -9,7 +9,7 @@ public class UpdateCommand extends Command {
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
-
+    private static final String INVALID_EXPIRY_DATE = "Expiry date is wrong! Try another date";
     private Ingredient updatedIngredient;
 
     public UpdateCommand(Ingredient ingredient) {
@@ -25,8 +25,10 @@ public class UpdateCommand extends Command {
                 resultMsg = LIST_EMPTY_MESSAGE;
                 return resultMsg;
             }
-            IngredientList.getInstance().update(this.updatedIngredient);
-            resultMsg = UPDATE_MESSAGE + updatedIngredient.toString();
+            boolean expiryIsRepeated = IngredientList.getInstance().update(this.updatedIngredient);
+            resultMsg = expiryIsRepeated ?
+                        UPDATE_MESSAGE + updatedIngredient.toString()
+                        : INVALID_EXPIRY_DATE;
             return resultMsg;
 
         } catch (IndexOutOfBoundsException e) {
