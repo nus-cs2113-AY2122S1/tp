@@ -110,6 +110,19 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    public void setTimes(String name, int prepTime, int cookTime) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setTimes(prepTime, cookTime);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
     public void setPrice(String name, float newPrice) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -127,19 +140,6 @@ public class Cookbook {
             // .* uses all characters except line break
             if (recipe.getName().matches("(?i).*" + name + ".*")) {
                 recipe.setDifficulty(newDifficulty);
-                return;
-            }
-        }
-
-        throw new GordonException(GordonException.NO_RESULT_FOUND);
-    }
-
-    public void setTimes(String name, int prep, int cook) throws GordonException {
-        for (Recipe recipe : recipes) {
-            // (?i) enables case insensitivity
-            // .* uses all characters except line break
-            if (recipe.getName().matches("(?i).*" + name + ".*")) {
-                recipe.setTimes(prep, cook);
                 return;
             }
         }
@@ -185,6 +185,18 @@ public class Cookbook {
             // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
                 recipe.addTagToRecipe(tag, recipe.getName());
+            }
+        }
+    }
+
+    public void untagTagFromRecipe(Tag tag, String recipeName) {
+        for (Recipe recipe : recipes) {
+            // ensure that we fetch the correct Recipe
+            // ensure that Tag corresponds to correct recipe
+            if (recipe.getName().equalsIgnoreCase(recipeName) && tag.containsAssociatedRecipeNames(recipe.getName())) {
+                recipe.deleteTagFromRecipe(tag);
+                tag.removeAssociatedRecipeName(recipe.getName());
+                return;
             }
         }
     }

@@ -29,9 +29,10 @@ public class Storage {
                 buffer = loadDifficulty(r, buffer, loadScanner);
                 buffer = loadCalories(r, buffer, loadScanner);
                 buffer = loadTimes(r, buffer, loadScanner);
+                buffer = loadPrice(r, buffer, loadScanner);
                 buffer = loadIngredients(r, buffer, loadScanner);
-                loadSteps(r, buffer, loadScanner);
-                loadTags(r, loadScanner, cookbook);
+                buffer = loadSteps(r, buffer, loadScanner);
+                loadTags(r, buffer, loadScanner, cookbook);
                 cookbook.addRecipe(r);
             }
 
@@ -57,7 +58,7 @@ public class Storage {
                     r.setDifficulty(d);
                 }
             }
-            return null;
+            return loadScanner.nextLine();
         } else {
             return buffer;
         }
@@ -73,10 +74,34 @@ public class Storage {
         }
     }
 
-    //Not implemented yet
     public String loadTimes(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Preparation time:")) {
+        String line = buffer;
+        int prep = -1;
+        int cook = -1;
+
+        if (line.trim().equals("Preparation time:")) {
+            line = loadScanner.nextLine().trim();
+            int spaceIndex = line.indexOf(" ");
+            prep = Integer.parseInt(line.substring(0, spaceIndex));
+            line = loadScanner.nextLine();
+        }
+
+        if (line.trim().equals("Cooking time:")) {
+            line = loadScanner.nextLine().trim();
+            int spaceIndex = line.indexOf(" ");
+            cook = Integer.parseInt(line.substring(0, spaceIndex));
+            r.setTimes(prep, cook);
+            return loadScanner.nextLine();
+        } else {
+            r.setTimes(prep, cook);
+            return line;
+        }
+    }
+
+    private String loadPrice(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Total price of ingredients:")) {
             String line = loadScanner.nextLine().trim();
+            r.setTotalPrice(Float.parseFloat(line.substring(1)));
             return loadScanner.nextLine();
         } else {
             return buffer;
@@ -84,9 +109,10 @@ public class Storage {
     }
 
     public String loadIngredients(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Ingredients needed:")) {
+        String line = buffer;
+        if (line.trim().equals("Ingredients needed:")) {
             while (loadScanner.hasNext()) {
-                String line = loadScanner.nextLine().trim();
+                line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
 
                 if (dotIndex < 0) {
@@ -96,16 +122,17 @@ public class Storage {
                 String parsedIngredient = line.substring(dotIndex + 2);
                 r.addIngredient(parsedIngredient);
             }
-            return loadScanner.nextLine();
+            return line;
         } else {
             return buffer;
         }
     }
 
     public String loadSteps(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Method:")) {
+        String line = buffer;
+        if (line.trim().equals("Method:")) {
             while (loadScanner.hasNext()) {
-                String line = loadScanner.nextLine().trim();
+                line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
 
                 if (dotIndex < 0) {
@@ -115,30 +142,34 @@ public class Storage {
                 String parsedStep = line.substring(dotIndex + 2);
                 r.addStep(parsedStep);
             }
-            return loadScanner.nextLine();
+            return line;
         } else {
             return buffer;
         }
     }
 
-    public void loadTags(Recipe r, Scanner loadScanner, Cookbook cookbook) {
-        while (loadScanner.hasNext()) {
-            String line = loadScanner.nextLine().trim();
-            int dotIndex = line.indexOf('.');
+    public void loadTags(Recipe r, String buffer, Scanner loadScanner, Cookbook cookbook) {
+        String line = buffer;
 
-            if (dotIndex < 0) {
-                break;
+        if (line.trim().equals("Tags:")) {
+            while (loadScanner.hasNext()) {
+                line = loadScanner.nextLine().trim();
+                int dotIndex = line.indexOf('.');
+
+                if (dotIndex < 0) {
+                    break;
+                }
+
+                String parsedStep = line.substring(dotIndex + 2);
+                Tag createdTag = new Tag(parsedStep, r.getName());
+
+                if (!cookbook.doesCookbookTagExists(parsedStep)) {
+                    cookbook.addCookbookTag(createdTag);
+                } else {
+                    cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
+                }
+                r.addTagToRecipe(createdTag, r.getName());
             }
-
-            String parsedStep = line.substring(dotIndex + 2);
-            Tag createdTag = new Tag(parsedStep, r.getName());
-
-            if (!cookbook.doesCookbookTagExists(parsedStep)) {
-                cookbook.addCookbookTag(createdTag);
-            } else {
-                cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
-            }
-            r.addTagToRecipe(createdTag, r.getName());
         }
     }
 

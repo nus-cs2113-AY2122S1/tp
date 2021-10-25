@@ -1,22 +1,24 @@
 package gordon.util;
 
-import gordon.command.AddCommand;
-import gordon.command.CheckCommand;
 import gordon.command.Command;
-import gordon.command.DeleteRecipeCommand;
-import gordon.command.FindCaloriesCommand;
-import gordon.command.FindDifficultyCommand;
-import gordon.command.FindIngredientsCommand;
-import gordon.command.FindPriceCommand;
-import gordon.command.FindTagsCommand;
-import gordon.command.ListRecipesCommand;
-import gordon.command.NullCommand;
-import gordon.command.SetCaloriesCommand;
-import gordon.command.SetDifficultyCommand;
-import gordon.command.SetPriceCommand;
-import gordon.command.TagAddCommand;
-import gordon.command.TagDeleteCommand;
-import gordon.command.TagUntagCommand;
+import gordon.command.basic.AddCommand;
+import gordon.command.basic.CheckCommand;
+import gordon.command.basic.DeleteRecipeCommand;
+import gordon.command.basic.ListRecipesCommand;
+import gordon.command.basic.NullCommand;
+import gordon.command.find.FindTimeCommand;
+import gordon.command.find.FindCaloriesCommand;
+import gordon.command.find.FindPriceCommand;
+import gordon.command.find.FindTagsCommand;
+import gordon.command.find.FindDifficultyCommand;
+import gordon.command.find.FindIngredientsCommand;
+import gordon.command.set.SetCaloriesCommand;
+import gordon.command.set.SetDifficultyCommand;
+import gordon.command.set.SetPriceCommand;
+import gordon.command.set.SetTimeCommand;
+import gordon.command.tag.TagAddCommand;
+import gordon.command.tag.TagDeleteCommand;
+import gordon.command.tag.TagUntagCommand;
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -43,7 +45,7 @@ public class Parser {
 
     public Command parseMaster() {
         try {
-            if (parseCommand(line).equalsIgnoreCase("add")) {
+            if (parseCommand(line).equalsIgnoreCase("addRecipe")) {
                 return addRecipeParse();
             } else if (parseCommand(line).equalsIgnoreCase("deleteRecipe")) {
                 return deleteRecipeParse();
@@ -72,6 +74,11 @@ public class Parser {
             System.out.println("GordonException: " + e.getMessage());
         }
         return new NullCommand();
+    }
+
+    // used for JUnit purposes
+    public boolean parserHasNextLine() {
+        return in.hasNextLine();
     }
 
     public boolean parseNextLine() {
@@ -133,7 +140,7 @@ public class Parser {
 
     public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
-        if (splitContent.length < 4) {
+        if (splitContent.length < 3) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
 
@@ -142,7 +149,6 @@ public class Parser {
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
         parseIngredients(splitContent[INGREDIENTS_INDEX], r);
         parseSteps(splitContent[STEPS_INDEX], r);
-        parseCalories(splitContent[CALORIES_INDEX], r);
         return new AddCommand(r);
     }
 
@@ -206,6 +212,21 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new GordonException(GordonException.FLOAT_INVALID);
             }
+        case "time":
+            try {
+                String[] splitTime = splitContent[1].substring(spaceIndex + 1).split(",");
+                if (splitTime.length < 2) {
+                    throw new GordonException(GordonException.COMMAND_INVALID);
+                }
+                int prepTime = Integer.parseInt(splitTime[0].trim());
+                int cookTime = Integer.parseInt(splitTime[1].trim());
+                if (prepTime < -1 || cookTime < -1) {
+                    throw new GordonException(GordonException.INDEX_OOB);
+                }
+                return new SetTimeCommand(recipeName, prepTime, cookTime);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
@@ -213,6 +234,7 @@ public class Parser {
 
     public Command findParse() throws GordonException {
         String[] splitContent = line.split("/");
+        assert (splitContent.length != 0);
         if (splitContent.length < 2) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
@@ -257,6 +279,13 @@ public class Parser {
             ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));
             return new FindTagsCommand(tags);
+        case "time":
+            try {
+                int time = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                return new FindTimeCommand(time);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }

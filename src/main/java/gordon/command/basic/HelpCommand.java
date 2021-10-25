@@ -1,5 +1,6 @@
-package gordon.command;
+package gordon.command.basic;
 
+import gordon.command.Command;
 import gordon.kitchen.Cookbook;
 
 public class HelpCommand extends Command {

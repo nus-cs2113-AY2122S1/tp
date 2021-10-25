@@ -83,7 +83,7 @@ The `Cookbook` class can be classified into 3 main functionalities:
   - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method
   - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method
   - Add a recipe to the list of recipes associated with a particular tag using the `appendRecipeToCookbookTag` method
-  - Remove a recipe to the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
+  - Remove a recipe from the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
   - Add a tag to a recipe using the `addTagToRecipes` method
   - Delete a tag from a recipe using the `deleteTagFromRecipes` method
   - List all tags in the `cookbookTags` array using the `listCookBookTags` method
@@ -99,15 +99,11 @@ The `Cookbook` class can be classified into 3 main functionalities:
 
 ### Recipe component
 
-The Diagram below is the class diagram for the Recipe class
-
-![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
-
 ### Parser component
 
 The diagram below is the class diagram for the `Parser` class
 
-
+![Command Class Diagram](./RenderedUML/Parser.svg)
 
 Functions of the Parser class:
 * Reads in user input by implementing the `Scanner` class
@@ -116,11 +112,49 @@ Functions of the Parser class:
 * Prints responses to the console by implementing the `UI` class
 
 ### Command component
+
+The Diagram below is the class diagram for the Command Class
+
 ![Command Class Diagram](./RenderedUML/CommandRects.svg)
+
+The `Command` class contains all the basic functionality of the Gordon cookbook, and is the Class that executes specific commands given by the user.
+
+The `Command` class can be classified into 4 main functionalities:
+
+1. Basic Commands: 
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
+   * `AddCommand` is where the `addRecipe` feature is executed
+   * `CheckCommand` is where the `checkRecipe` feature is executed
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed
+   * `HelpCommand` is where the `help` feature is executed
+2. Find Commands:
+   * The Commands that are required for the `find` feature of Gordon are contained here
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
+3. Set Commands:
+   * The Commands that are required for the `set` feature of Gordon are contained here
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+4. Tag Commands:
+   * The Commands that are required for the  `tag` feature of Gordon are contained here
+   * `TagAddCommand` is where the `tag` feature of gordon is executed
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed
 
 ### Storage component
 
 ### UI Component
+
+### Tag Component
+The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
+1. `getTagName` returns the _Tag Name_.
+2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
+3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
+4. 'removeAssociatedRecipeName' removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
 
 ## Implementation
 
@@ -151,10 +185,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |***|v1.0|user|check my stored recipes|refer to them while cooking|
 |***|v1.0|user|add recipes to my cookbook|try them in the future|
 |***|v1.0|user|delete recipes from my cookbook|remove recipes I'm no longer interested in|
+|***|v1.0|user|list out all the recipes|see all of the recipes in my cookbook|
 |**|v2.0|disorganised user|find recipes by ingredient|see what recipes I can make with the food in my pantry|
+|**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
+|**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
+|**|v2.0|cooking newbie user|find recipes by difficulty|choose the difficulty of the recipe depending on my skill level|
+|**|v2.0|organised user|find recipes by my own tags|sort by my own metric|
 |**|v2.0|user|save and load my recipes from memory|refer to them whenever I want to|
-|**|v2.0|health-conscious user|set the amount of calories a recipe has|choose the healthier option|
-|*|v2.0|organized user|add tags to a recipe|classify my recipes however I feel like|
 |*|v2.0|developer|add my own functionality to Gordon in a modular fashion|improve the app to my needs|
 
 ## Use Cases
@@ -177,18 +214,6 @@ Use case ends.
 
 Use case ends
 
-**Use case: `check`**
-
-**MSS:**
-1. User requests to check recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions** 
-* The list is empty.
-  * Use case ends.
-
 **Use case: `add`**
 
 **MSS:**
@@ -203,7 +228,7 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes on step 1
 
-**Use case: `delete`**
+**Use case: `deleteRecipe`**
 
 **MSS:**
 1. User requests a list of all recipes
@@ -220,12 +245,38 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes from step 2
 
+**Use case: `listRecipes`**
+
+**MSS:**
+1. User requests to see all their recipes
+2. Gordon shows a list of all currently stored recipes
+
+Use case ends.
+
+**Extensions**
+* The list is empty.
+    * Use case ends.
+
+**Use case: `check`**
+
+**MSS:**
+1. User requests to check a specific recipe
+2. Gordon brings up the specified recipe for the user to peruse
+
+Use case ends.
+
+**Extensions**
+* The recipe does not exist.
+    * Use case ends.
+* Input was entered incorrectly
+  * Use case resumes from step 1
+
 **Use case: `find`**
 
 **MSS:**
 1. User has a large cookbook
-2. User searches for a specific recipe by a keyword
-3. Gordon returns a list of all the recipes which contain that keyword
+2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
+3. Gordon returns a list of all the recipes which contain what the user is looking for
 4. User checks the recipe for cooking
 
 Use case ends.
@@ -251,6 +302,31 @@ Use case ends.
 * The given recipe does not exist
   * Gordon shows an error message
   * Use case resumes from step 2
+
+**Use case: `untag`**
+
+**MSS:**
+1. User wants to remove a tag from a specific recipe
+2. Gordon removes the tag from the recipe
+3. User can now add a different tag to that recipe
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
+
+**Use case: `deleteTag`**
+
+**MSS:**
+1. User wants to delete a master tag from the database
+2. Gordon deletes the master tag from the cookbook
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
 
 ## Non-Functional Requirements
 

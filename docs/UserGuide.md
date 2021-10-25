@@ -5,7 +5,7 @@
 <!-- Images -->
 ![Markdown Logo](https://www.denofgeek.com/wp-content/uploads/2019/10/robot-chicken-gordon-ramsay-adult-swim.jpg?resize=768%2C432)
 
-It's me, **Gordon Ramsay v1.0**, and today, I'm gonna teach you ****** how to use the Gordon CLI application.
+It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon CLI application.
 
 I am a CLI-based recipe database application, and I can help you to;
 1) Store your recipes
@@ -24,19 +24,20 @@ It's absolutely bonkers. Now let's get down to business.
 
 ## What can Gordon do?
 
-### 1. Add a recipe: `add`
+### 1. Add a recipe: `addRecipe`
 
 Adds a new recipe to my database of recipes.
 
-#### Format: `add RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
+#### Format: `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 
 * The `RECIPE_NAME` can be in a natural language format.
 * Each individual ingredient in `INGREDIENTS` can be separated by a '+' sign.
 * Each individual step in `STEPS` can be separated by a '+' sign.
+* You cannot add two recipes with the same name.
 
 #### Example of usage: 
 
-`add Chicken Rice /ingredients Chicken+Rice /steps Cook+Mix`
+`addRecipe Chicken Rice /ingredients Chicken+Rice /steps Cook+Mix`
 
 #### Expected outcome:
 
@@ -59,11 +60,11 @@ Method:
     
 ---
 
-### 2. Delete a recipe: `delete`
+### 2. Delete a recipe: `deleteRecipe`
 
 Removes an existing recipe from my database of recipes.
 
-#### Format: `delete RECIPE_INDEX`
+#### Format: `deleteRecipe RECIPE_INDEX`
 
 * The `RECIPE_INDEX` must be a positive integer representing the index of the recipe you want to remove.
 
@@ -112,11 +113,11 @@ Method:
 
 #### Description of the outcome.
 
-- I'll show you the ingredients you need for that recipe, and the steps required to prepare it
+- I'll show you the ingredients you need for that recipe, and the steps required to prepare it.
 
 ---
 
-### 4. Display all recipes: `list`
+### 4. Display all recipes: `listRecipe`
 
 Shows all recipes saved in the database
 
@@ -124,7 +125,7 @@ Shows all recipes saved in the database
 
 #### Example of usage:
 
-`list`
+`listRecipe`
 
 #### Expected outcome:
 
@@ -135,7 +136,7 @@ Shows all recipes saved in the database
 ```
 #### Description of the outcome:
 
-- I'll show you all the existing recipes saved in my database
+- I'll show you all the existing recipes saved in my database.
 
 ---
 
@@ -163,7 +164,7 @@ Bye bye!
 
 ### 6. Lend a hand: `help`
 
-Shows you the proper format of commands
+Shows you the proper format of commands.
 
 #### Format: `help`
 
@@ -174,7 +175,15 @@ Shows you the proper format of commands
 #### Expected outcome:
 
 ```
-add "recipe name" "/ingredients" 1+2+3 "steps" 1+2+3
+1. Add a recipe: addRecipe \"recipe name\" \"/ingredients\" 1+2 \"/steps\" 1+2"
+2. Delete a recipe: deleteRecipe \"Index of recipe\""
+3. List all your recipes: listRecipes"
+4. Find a recipe: find \"Keyword\""
+5. Check a specific recipe: check \"Name of Recipe\""
+6. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
+7. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
+8. List all tags: listTags"
+9. Help me: help
 ```
 
 #### Description of the outcome.
@@ -183,19 +192,73 @@ add "recipe name" "/ingredients" 1+2+3 "steps" 1+2+3
 
 ---
 
-### 7. Find a recipe: `find`
+### 7. Set attributes of a recipe: `set`
 
-Searches for any recipes that contain the keyword that you have entered.
+Sets the attributes of recipes, e.g. time needed, calories etc.
 
-#### Format: `find KEYWORD`
+**Format:** `set RECIPE_NAME /ATTRIBUTE VALUE`
+
+* The program first looks for the recipe using `RECIPE_NAME`, similar to find.
+* `ATTRIBUTE` can be any one of the following:
+  * Calories (`VALUE` must be an integer)
+  * Difficulty (`VALUE` must be among None, Easy, Medium and Hard)
+  * Price (`VALUE` must be a decimal)
+  * Time (`VALUE` must be two integers, separated by a comma)
+* For calories, price and time, changing the `VALUE` to -1 will hide it from the recipe 
+* Any values below -1 are not accepted.
+* `ATTRIBUTE` is not case-sensitive.
+
+#### Examples of usage:
+ 
+`set Chicken Rice /calories 350`  
+`set Chicken Rice /difficulty hard`  
+`set Chicken Rice /price $3.00`  
+`set Chicken Rice /time 20, 40`
+
+```
+Setting calories...
+Calories set successfully.
+Setting difficulty...
+Difficulty set successfully.
+Setting price...
+Price set successfully.
+Setting times...
+Times set successfully.
+```
+
+---
+
+### 8. Find a recipe by attribute: `find`
+
+Finds recipes by their attributes, e.g. time needed, calories etc.
+
+#### Format: `find /ATTRIBUTE VALUE`
+
+* The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
+* If the `ATTRIBUTE` of any recipe is not set, it will show up in the results.
 
 #### Example of usage:
 
-`find` fried rice
+`find /calories 400`  
+`find /difficulty normal`  
+`find /price $5.00`  
+`find /time 30`
 
 #### Expected outcome
 
-Added fried rice recipe! Yum!
+```
+Searching by calories...
+1. Chicken Rice (Calories (kcal): 350)
+2. Caprese Salad (Calories (kcal): 150)
+Searching by difficulty...
+1. Cookies (Difficulty: Normal)
+Searching by price...
+1. Chicken Rice (Price: $3.00)
+2. Cookies (Price: $1.50)
+Searching by total time...
+1. Cookies (Total time: 30)
+2. Caprese Salad (Total time: 10)
+```
 
 ---
 
@@ -203,7 +266,7 @@ Added fried rice recipe! Yum!
 
 Instruction | Command format
 ------------ | -------------
-Add a recipe | `add RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
+Add a recipe | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 Delete a recipe | `deleteRecipe RECIPE_INDEX`
 Look up a recipe | `check RECIPE_NAME`
 Display all recipes | `listRecipes`
