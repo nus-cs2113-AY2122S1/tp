@@ -5,7 +5,16 @@ import seedu.duke.attendance.AttendanceList;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.AttendanceStorage;
 
+/**
+ * Deletes an Attendance from the AttendanceList.
+ */
 public class DeleteAttendance {
+
+    /**
+     * Constructor. Deletes an Attendance object from the AttendanceList given its index.
+     * @param attendanceList AttendanceList containing all Attendance.
+     * @param index Index of the Attendance to delete. Note that the actual index is -1 of given index.
+     */
     public DeleteAttendance(AttendanceList attendanceList, int index) {
         try {
             assert index >= 1;

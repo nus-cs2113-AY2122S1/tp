@@ -7,9 +7,19 @@ import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
+/**
+ * Edits a Member located in MemberList.
+ */
 public class EditMember {
 
-    public EditMember(MemberList members, int index, Member newMember) {
+    /**
+     * Constructor. Edits a Member in MemberList. Member is identified by its index.
+     *
+     * @param members MemberList containing all members.
+     * @param index Index of the member to edit. Note that the actual index is index-1.
+     * @param toChange Member containing details that needs to be changed.
+     */
+    public EditMember(MemberList members, int index, Member toChange) {
         try {
             assert index >= 1;
 
@@ -22,32 +32,31 @@ public class EditMember {
             oldMember.setGender(memberToChange.getGender());
 
 
-            if (!newMember.getName().equals("")) {
-                memberToChange.setName(newMember.getName());
+            if (!toChange.getName().equals("")) {
+                memberToChange.setName(toChange.getName());
             }
 
-            if (!newMember.getStudentNumber().equals("")) {
-                memberToChange.setStudentNumber(newMember.getStudentNumber());
+            if (!toChange.getStudentNumber().equals("")) {
+                memberToChange.setStudentNumber(toChange.getStudentNumber());
             }
 
-            if (!String.valueOf(newMember.getGender()).equals("")) {
-                memberToChange.setGender(newMember.getGender());
+            if (!String.valueOf(toChange.getGender()).equals("")) {
+                memberToChange.setGender(toChange.getGender());
             }
 
-            if (!String.valueOf(newMember.getPhoneNumber()).equals("")) {
-                memberToChange.setPhoneNumber(newMember.getPhoneNumber());
+            if (!String.valueOf(toChange.getPhoneNumber()).equals("")) {
+                memberToChange.setPhoneNumber(toChange.getPhoneNumber());
             }
 
             members.getMemberList().set(index - 1, memberToChange);
             Ui.printEditMessage(oldMember, memberToChange);
-            //TODO: Print and Save
             File dukeMemberFile = new File("dukeMembers.csv");
             writeMemberFile(dukeMemberFile, members);
 
         } catch (AssertionError e) {
             System.out.println("Index to edit must be an integer >= 1");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Unfortunately, the index you entered is invaid.");
+            System.out.println("Unfortunately, the index you entered is invalid.");
         }
     }
 }
