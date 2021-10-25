@@ -49,6 +49,7 @@ public class NextCommandTest {
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         assertEquals("Hope you have prepared everything!", command1.execute().feedbackToUser);
+        eventCatalog.clear();
     }
 
     @Test
