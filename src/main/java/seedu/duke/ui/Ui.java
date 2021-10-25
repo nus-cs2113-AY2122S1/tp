@@ -37,9 +37,10 @@ public class Ui {
 
     public static void printUniversity(University uni, boolean printMC) {
         printIndex(uni.getIndex(), false);
+        StringBuilder padding = stringPadder(uni.getName(), PaddingType.UNIVERSITYNAME);
         String output;
         if (printMC) {
-            output = uni.getName() + "      " + uni.getMC();
+            output = uni.getName() + " " + padding + " " + uni.getMC();
         } else {
             output = uni.getName();
         }
@@ -68,6 +69,7 @@ public class Ui {
     private static StringBuilder stringPadder(String input, PaddingType type) {
         StringBuilder padding = new StringBuilder();
         int benchmarkLength;
+        String fill = " ";
         switch (type) {
         case INDEX: {
             benchmarkLength = Constants.INDEX_LENGTH;
@@ -79,14 +81,19 @@ public class Ui {
         }
         case MODULENAME: {
             benchmarkLength = Constants.MODUlE_NAME_LENGTH;
+            break;
         }
-        break;
+        case UNIVERSITYNAME: {
+            benchmarkLength = Constants.UNIVERSITY_NAME_LENGTH;
+            fill = "-";
+            break;
+        }
         default:
             throw new IllegalStateException("Unexpected value: " + type);
         }
         int paddingCount = benchmarkLength - input.length();
         for (int i = 0; i < paddingCount; i++) {
-            padding.append(" ");
+            padding.append(fill);
         }
         return padding;
     }
