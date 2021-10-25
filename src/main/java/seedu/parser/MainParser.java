@@ -170,7 +170,7 @@ public class MainParser {
         return new FailedCommand(FailedCommandType.GENERAL);
     }
 
-    //@@author
+    //@@author ashrafjfr
     private Command parseViewContact(String userInput) {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);

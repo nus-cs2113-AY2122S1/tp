@@ -135,6 +135,7 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author ashrafjfr
     public static String formatContactFields(Contact addedContact) {
         String viewGithub = ViewMessageFormatterUi.viewGithubFormatter(addedContact);
         String viewEmail = ViewMessageFormatterUi.viewEmailFormatter(addedContact);
@@ -150,6 +151,7 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author
     public static void printContactWithIndex(int index, String contactName) {
         System.out.println(index + ". " + contactName);
     }
@@ -215,6 +217,7 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author ashrafjfr
     public static void helpMessage() {
         String message = "add: ConTech adds the specified contact with provided parameters.\n"
                 + " Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER\n"
@@ -292,6 +295,7 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author
     public static void successfulImportMessage(int numberOfLines) {
         String message = "ConTech has successfully imported " + numberOfLines + " lines";
         printDoubleLineMessage(message);

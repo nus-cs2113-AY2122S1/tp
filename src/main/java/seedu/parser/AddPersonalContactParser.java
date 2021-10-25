@@ -1,7 +1,8 @@
+//@@author lezongmun
+
 package seedu.parser;
 
 import seedu.contact.Contact;
-
 import seedu.exception.InvalidGithubUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
