@@ -2,9 +2,14 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
+import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.data.WorkoutList;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.Storage;
+
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 /**
  * Clears all the exercises present in the mentioned workoutIndex and all workouts in the application.
@@ -15,9 +20,9 @@ public class ClearCommand extends Command {
             + "all workouts in the list.\n"
             + "Format: clear [exercise/workout]\n"
             + "Example: " + COMMAND_WORD + " exercise";
-
-    private int workoutIndex;
+    private static final Logger LOGGER = Logger.getLogger(ClearCommand.class.getName());
     private final String keyword;
+    private int workoutIndex;
 
     /**
      * Instantiates object and sets parameters for clearing workouts.
@@ -25,18 +30,23 @@ public class ClearCommand extends Command {
      * @param keyword is the argument containing the word "workout"
      */
     public ClearCommand(String keyword) {
+        assert !keyword.isEmpty();
         this.keyword = keyword;
+        setupLogger(LOGGER);
     }
 
     /**
      * Instantiates object and sets parameters for clearing exercises in a specified workout.
      *
      * @param workoutIndex index of Workout that the exercise is in
-     * @param keyword is the argument containing the word "exercise"
+     * @param keyword      is the argument containing the word "exercise"
      */
     public ClearCommand(int workoutIndex, String keyword) {
+        assert !keyword.isEmpty();
+        assert workoutIndex >= 0;
         this.workoutIndex = workoutIndex;
         this.keyword = keyword;
+        setupLogger(LOGGER);
     }
 
     /**
@@ -50,12 +60,15 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         if (keyword.equals("workout")) {
+            LOGGER.info("Removing all workouts");
             workouts.removeAllWorkout();
             return new CommandResult("All workouts have been cleared!");
         } else if (keyword.equals("exercise")) {
+            LOGGER.info("Removing all exercises in workout " + workoutIndex);
             workouts.getWorkout(workoutIndex).removeAllExercise();
             return new CommandResult("All exercises in workout " + workoutIndex + " have been cleared!");
         }
+        LOGGER.info("Clear command failed - invalid keyword");
         throw new GetJackDException("Invalid command - Unable to execute!");
     }
 }
