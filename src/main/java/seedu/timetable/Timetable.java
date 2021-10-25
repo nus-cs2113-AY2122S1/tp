@@ -279,6 +279,29 @@ public class Timetable implements Comparable<Timetable> {
         TimetableUI.printModules(modules, this.semester);
     }
 
+    public void showUserItemsTimetable() {
+
+        TimetableUI.printScheduleHours(earliestHour, latestHour);
+        TimetableUI.printDaySchedule("MON", getUserItems(monday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("TUE", getUserItems(tuesday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("WED", getUserItems(wednesday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("THU", getUserItems(thursday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("FRI", getUserItems(friday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("SAT", getUserItems(saturday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("SUN", getUserItems(sunday), earliestHour, latestHour);
+        TimetableUI.printModules(modules);
+    }
+
+    public TimetableItem[] getUserItems(TimetableItem[] schedule) {
+        TimetableItem[] userItemSchedule = schedule.clone();
+        for (int i = 0; i < userItemSchedule.length; i++) {
+            if (userItemSchedule[i] instanceof TimetableLesson) {
+                userItemSchedule[i] = null;
+            }
+        }
+        return userItemSchedule;
+    }
+
     public TimetableLesson getLesson(DayOfWeek day, int startHour) {
         TimetableItem lesson;
         switch (day) {

@@ -59,7 +59,11 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("show")) {
             command = parseShowCommand(text);
         } else if (lowerCaseText.startsWith("timetable")) {
-            command = new TimetableCommand(UniMods.timetable);
+            boolean showUserItemsOnly = false;
+            if (lowerCaseText.contains("-u")) {
+                showUserItemsOnly = true;
+            }
+            command = new TimetableCommand(timetable, showUserItemsOnly);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
