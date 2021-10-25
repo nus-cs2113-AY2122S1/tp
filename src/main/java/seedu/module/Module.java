@@ -197,6 +197,18 @@ public class Module extends BaseModule {
         }
     }
 
+    public String getExam(int sem) {
+        for (Semester semester : semesterData) {
+            if (semester.getSemester() == sem) {
+                if (semester.getExamDate() != null) {
+                    return String.format("(Exam: %s)", semester.getExamInfo());
+                }
+                break;
+            }
+        }
+        return "(No Exam)";
+    }
+
     /**
      * Checks if the module is offered in the specified semester.
      *

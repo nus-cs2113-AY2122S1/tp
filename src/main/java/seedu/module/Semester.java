@@ -1,5 +1,6 @@
 package seedu.module;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +20,16 @@ public class Semester {
 
     public int getSemester() {
         return semester;
+    }
+
+    public String getExamInfo() {
+        Date end = new Date(examDate.getTime() + examDuration * 60);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+        String date = dateFormat.format(examDate.getTime());
+        String startTime = timeFormat.format(examDate.getTime());
+        String endTime = timeFormat.format(end.getTime());
+        return String.format("%s %s - %s", date, startTime, endTime);
     }
 
     public Date getExamDate() {
