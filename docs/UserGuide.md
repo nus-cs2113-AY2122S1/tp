@@ -102,6 +102,31 @@ ____________________________________________________________
 <a name="list"></a>
 ### Listing all contacts: `list`
 
+Lists all the saved contacts with the index and contact name.
+
+Usage: `list`
+* The indexes start from 0, this is done as computing professionals 
+ are more familiar with index start from 0.
+ 
+Expected outcome of usage:
+
+```
+list
+____________________________________________________________
+ConTech has 7 contacts stored.
+Here's the list :
+____________________________________________________________
+
+0. Andre
+1. Marcus
+2. Le Zong
+3. Ashraf
+4. Mayank
+5. Jim
+6. Akshay
+____________________________________________________________
+```
+
 <a name="view"></a>
 ### Viewing a contact: `view`
 Displays all the details saved to a contact in the ConTech Book.
@@ -136,15 +161,41 @@ ____________________________________________________________
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
+Exits the application.
+
+Usage: `exit`
+
+Excepted outcome of usage: `exit`
+
+```
+exit
+____________________________________________________________
+ConTech will now shutdown.
+We hope you have enjoyed using it.
+____________________________________________________________
+```
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: 
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+Below is a concise summary of frequently used commands in ConTech.
+The command format and examples are provided for each command for
+a quick view when using the application.
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Action | Command Format | Example
+--- | --- | --- | 
+List all valid commands and usage | `help` | `help`
+Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
+List all contacts | `list` | `list`
+View a contact| `view <INDEX>` | `view 2`
+Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
+Delete contact fields| `<COMMAND>` | `<EXAMPLE>`
+Delete a contact | `rm <INDEX>` | `rm 1`
+Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search Ashraf` <br>`search -g revflash`<br/>
+Import contacts from .txt file|`import` | `import`
+Exit ConTech | `exit` | `exit`
