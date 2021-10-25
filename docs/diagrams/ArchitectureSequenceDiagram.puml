@@ -1,45 +1,121 @@
 @startuml
+!include style.puml
 
 Actor User as user
-Participant ":UI" as ui
+Participant ":Ui" as ui
 Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
 Participant ":Command" as command
-Participant ":ModuleList" as modulelist
+Participant "<<class>>\nUtil" as util
+Participant ":ModuleList" as moduleList
 Participant ":Storage" as storage
 
-note left of modulelist: Model
-
-user -> ui : "add_module c/CS2113T\nn/Software Engineering"
-activate ui
-
-ui -> taa
 activate taa
 
-taa -> command : execute()
-activate command
+taa -> taa : loadModuleListFromStorage()
+activate taa
 
-command -> modulelist : addModule(module)
-activate modulelist
-
-modulelist --> command
-deactivate modulelist
-
-command -> storage : save(moduleList)
+taa -> storage : load()
 activate storage
 
+create moduleList
+storage -> moduleList
+activate moduleList
+moduleList --> storage
+deactivate moduleList
+
+storage --> taa : moduleList:ModuleList
+deactivate storage
+
+taa --> taa
+deactivate taa
+
+loop !isExit
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : User input command
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput:String)
+activate parser
+
+create command
+parser -> command
+activate command
+command --> parser
+deactivate command
+
+parser --> taa : command:Command
+deactivate parser
+
+taa -> command : checkArgument()
+activate command
+
+command -> util
+activate util
+util --> command
+deactivate util
+
+alt Exception
+command --> taa : throw :TaaException
+taa -> ui : printException(message:String)
+activate ui
+ui -> user : Display Exception message
+ui --> taa
+deactivate ui
+
+else else
+command --> taa
+deactivate command
+
+taa -> command : execute(moduleList:ModuleList, ui:Ui,\n\tstorage:Storage)
+activate command
+
+command -> util
+activate util
+util --> command
+deactivate util
+
+command -> moduleList
+activate moduleList
+moduleList --> command
+deactivate moduleList
+
+alt Exception
+command --> taa : throw :TaaException
+taa -> ui : printException(message:String)
+activate ui
+ui -> user : Display Exception message
+ui --> taa
+deactivate ui
+
+else else
+command -> storage : save(moduleList:ModuleList)
+activate storage
 storage --> command
 deactivate storage
 
-command -> ui : printMessage(...)
+command -> ui : printMessage(message:String)
+activate ui
+ui -> user : Display message
 ui --> command
+deactivate ui
 
 command --> taa
 deactivate command
 
-taa --> ui
-deactivate taa
+taa -> command : isExit()
+activate command
+command --> taa : isExit:boolean
+deactivate command
 
-ui --> user
-deactivate ui
+taa -[hidden]-> command
+destroy command
+taa -[hidden]-> command
+
+end
+end
 
 @enduml
