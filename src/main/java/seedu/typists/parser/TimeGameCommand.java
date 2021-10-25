@@ -5,7 +5,10 @@ import seedu.typists.game.TimeModeGame;
 
 import java.util.Arrays;
 
-import static seedu.typists.Main.*;
+import static seedu.typists.Main.content;
+import static seedu.typists.Main.uiBot;
+import static seedu.typists.Main.LINE_LENGTH;
+
 
 public class TimeGameCommand implements Command {
 
