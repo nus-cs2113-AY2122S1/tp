@@ -1,8 +1,12 @@
 package medbot.parser;
 
-import medbot.command.*;
 
-
+import medbot.command.Command;
+import medbot.command.CommandType;
+import medbot.command.ExitCommand;
+import medbot.command.GetCurrentViewCommand;
+import medbot.command.HelpCommand;
+import medbot.command.SwitchCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.utilities.ViewType;
 

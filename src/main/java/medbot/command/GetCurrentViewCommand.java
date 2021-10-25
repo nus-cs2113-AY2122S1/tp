@@ -5,7 +5,7 @@ import medbot.exceptions.MedBotException;
 import medbot.ui.Ui;
 import medbot.utilities.ViewType;
 
-public class GetCurrentViewCommand extends Command{
+public class GetCurrentViewCommand extends Command {
     private ViewType viewType;
 
     public GetCurrentViewCommand(ViewType viewType) {
