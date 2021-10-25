@@ -1,14 +1,18 @@
 package seedu.timetable;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import seedu.module.Lesson;
 import seedu.module.LessonType;
 import seedu.module.Module;
 
 import java.time.DayOfWeek;
+import java.util.Arrays;
 
 public class TimetableTest {
 
@@ -30,7 +34,8 @@ public class TimetableTest {
         assertEquals(tt.getLesson(DayOfWeek.MONDAY, 10).getClassNo(), "TestClass1");
         assertEquals(tt.getLesson(DayOfWeek.MONDAY, 11).getClassNo(), "TestClass1");
 
-        Lesson lesson2 = new Lesson("TestClass2", "1100", "1300", "TestVenue", "Tutorial", "Monday");
+        Lesson lesson2 =
+                new Lesson("TestClass2", "1100", "1300", "TestVenue", "Tutorial", "Monday");
 
         TimetableLesson timetableLesson2 = new TimetableLesson(testMod, 1, lesson2);
         tt.addLesson(testMod, 1, lesson2);
@@ -54,6 +59,22 @@ public class TimetableTest {
         TimetableLesson timetableLesson = new TimetableLesson(testMod, 1, lesson);
         tt.addLesson(testMod, 1, lesson);
         assertEquals(tt.getLesson(DayOfWeek.MONDAY, 10).getLessonType(), LessonType.LECTURE);
+    }
+
+    @Test
+    public void getUserItem_removeAllTimetableLesson() {
+        Timetable timetable = new Timetable(1);
+        Module testMod = new Module("Test");
+        Lesson testLesson =
+                new Lesson("TestClass1", "1000", "1200", "TestVenue", "Lecture", "Monday");
+        timetable.addLesson(testMod, 1, testLesson);
+        TimetableLesson timetableLesson = (TimetableLesson) timetable.getMonday()[2];
+
+        assertTrue(Arrays.asList(timetable.getMonday()).contains(timetableLesson));
+        TimetableItem[] schedule = timetable.getUserItems(timetable.getMonday());
+        for (TimetableItem item : schedule) {
+            assertNull(item);
+        }
     }
 
 }
