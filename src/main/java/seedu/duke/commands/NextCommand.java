@@ -36,12 +36,14 @@ public class NextCommand extends Command {
                 if (userCommand.length != 3) {
                     nextCommandErrorMessage();
                 }
-                Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2])).getFromTaskList(0));
+                Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2]) - 1).getFromTaskList(0));
             } else if (nextItem.equalsIgnoreCase("event")) {
                 Ui.printEvent((Duke.eventCatalog.get(0)));
             }
         } catch (NumberFormatException e) {
             nextCommandErrorMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return new CommandResult("This Event has no tasks!");
         }
         return new CommandResult("Hope you have prepared everything!");
     }
