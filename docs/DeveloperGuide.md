@@ -191,7 +191,7 @@ MediVault creates an `DeleteStockCommand` object when CommandParser identifies `
 in `stock` mode.
 
 * MediVault allows deletion of a stock by stock id through `deletestock i/STOCK_ID`.
-* MediVault allows deletion of stocks by expiry date through `deletestock e/EXPIRY_DATE`.
+* MediVault allows deletion of stocks by expiry date through `deletestock expiring/EXPIRY_DATE`.
 * MediVault deletes medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
 * MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry and executes
   accordingly.
@@ -199,12 +199,15 @@ in `stock` mode.
 The sequence diagram for `DeleteStockCommand` is shown below.
 ![DeleteStockSequenceDiagram](diagrams/diagram_images/DeleteStockSequenceDiagram.png)
 
-After MediVault determines that it is executing deletion by stock id, it will execute accordingly.
+After MediVault determines that it is executing deletion by stock id, it will execute accordingly. Currently, it only
+allows for deletion of 1 stock at a time. 
 
 The sequence diagram for deletion by stock id is shown below.
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByIdSequenceDiagram.png)
 
-After MediVault determines that it is executing deletion by expiry date, it will execute accordingly.
+After MediVault determines that it is executing deletion by expiry date, it will execute accordingly. The behaviour of
+this command is to delete all stock that have <= specified date. This is because we would want to delete all expired 
+stock and if a date is specified, all the date before will also be expired hence implement deletion of <= date.
 
 The sequence diagram for delete by expiry date is shown below.
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
