@@ -92,7 +92,7 @@ public class Parser {
             break;
 
         case "amount":
-            executeAmount(inputParams);
+            handleAmount(inputParams);
             break;
 
         case "help":
@@ -119,6 +119,14 @@ public class Parser {
             executeEditExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
+        }
+    }
+
+    private static void handleAmount(String inputParams) {
+        try {
+            executeAmount(inputParams);
+        } catch (NullPointerException e) {
+            Ui.printPersonNotInTrip();
         }
     }
 
