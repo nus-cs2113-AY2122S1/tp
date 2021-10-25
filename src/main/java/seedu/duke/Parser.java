@@ -315,15 +315,10 @@ public class Parser {
     }
 
     private static void executeList() {
-        boolean areThereExpenses = false;
         if (!Storage.checkOpenTrip()) {
             Ui.printAllTrips();
         } else {
             Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
-            areThereExpenses = true;
-        }
-        if (!areThereExpenses) {
-            Ui.printNoExpensesError();
         }
     }
 

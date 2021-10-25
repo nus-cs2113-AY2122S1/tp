@@ -63,12 +63,16 @@ public class Ui {
     }
 
     public static void printExpensesInList(ArrayList<Expense> listOfExpenses) {
+        if (listOfExpenses.isEmpty()) {
+            printNoExpensesError();
+            return;
+        }
+        System.out.println("List of Expenses: ");
         for (int i = 0; i < listOfExpenses.size(); i++) {
             System.out.print("\t");
             System.out.println(i + 1 + ". "
                     + listOfExpenses.get(i).getDescription() + " | "
                     + listOfExpenses.get(i).getStringDate());
-
         }
     }
 
@@ -168,7 +172,6 @@ public class Ui {
             System.out.println(i + 1 + ". "
                     + listOfTrips.get(i).getLocation() + " | "
                     + listOfTrips.get(i).getDateOfTripString());
-
         }
     }
 

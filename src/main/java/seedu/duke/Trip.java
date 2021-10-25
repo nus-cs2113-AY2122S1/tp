@@ -69,22 +69,22 @@ public class Trip {
     }
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
-        boolean isThereExpenses = false;
+        boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getPayer().getName().equalsIgnoreCase(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                isThereExpenses = true;
+                areThereExpenses = true;
             }
         }
-        if (!isThereExpenses) {
+        if (!areThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
-        boolean isThereExpenses = false;
+        boolean areThereExpenses = false;
         String descriptionToLowerCase;
         String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
@@ -92,25 +92,25 @@ public class Trip {
             if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                isThereExpenses = true;
+                areThereExpenses = true;
             }
         }
-        if (!isThereExpenses) {
+        if (!areThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
-        boolean isThereExpenses = false;
+        boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equalsIgnoreCase(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                isThereExpenses = true;
+                areThereExpenses = true;
             }
         }
-        if (!isThereExpenses) {
+        if (!areThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
