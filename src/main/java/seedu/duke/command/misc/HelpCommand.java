@@ -24,6 +24,7 @@ public class HelpCommand extends Command {
             + "\"display\" : Shows all the exercises in a specified workout\n"
             + "\"edit\" : Edits a specific exercise in a specified workout\n"
             + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
+            + "\"clear\" : Clears all exercises in a specified workout or all workouts in the list\n"
             + "\"bye\" : Ends the program";
     
     private String commandDescription = null;

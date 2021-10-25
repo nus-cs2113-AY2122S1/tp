@@ -137,6 +137,7 @@ Workout commands
 * `RecommendWorkoutCommand` : To suggest pre-set workouts based on user given difficulty level.
 
 Miscellaneous commands
+* `ClearCommand` : To clear all the exercises in a workout or all the workouts.
 * `HelpCommand` : To display the help message for a particular command when typed incorrectly.
 * `IncorrectCommand` : To show error message when command is invalid.
 * `SearchCommand` : To list all workouts or exercises matching the keyword.
@@ -214,6 +215,7 @@ Manage fitness routines quickly
 |v2.0|user|modify an existing exercise in a workout|constantly update my routine|
 |v2.0|user who finds it hard to find motivation to complete workouts|be able to set deadlines for my workouts|set a goal for myself|
 |v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
+|v2.0|busy user|clear all my current workouts or all the exercises in a workout|make a new workout plan without having to delete one by one|
 
 ## Non-Functional Requirements
 

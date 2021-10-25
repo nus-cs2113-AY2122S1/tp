@@ -33,8 +33,8 @@ public class MarkExerciseAsDoneCommand extends Command {
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
      *
-     * @param workoutIndex  display index of Workout that the exercise is in
-     * @param exerciseIndex display index of exercise to remove
+     * @param workoutIndex  is the display index of Workout that the exercise is in
+     * @param exerciseIndex is the display index of exercise to remove
      */
     public MarkExerciseAsDoneCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;

@@ -35,4 +35,6 @@ enter 1
 display
 add pushups, 5 20
 back
+clear exercise 1
+clear workout
 bye

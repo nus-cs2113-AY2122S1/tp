@@ -108,4 +108,8 @@ public class WorkoutList {
             workout.convertToWorkoutStorageModel();
         }
     }
+
+    public void removeAllWorkout() {
+        workouts.clear();
+    }
 }

@@ -128,4 +128,8 @@ public class Workout {
 
         WorkoutListModel.addToWorkoutListModel(workoutModel);
     }
+
+    public void removeAllExercise() {
+        exercises.clear();
+    }
 }
