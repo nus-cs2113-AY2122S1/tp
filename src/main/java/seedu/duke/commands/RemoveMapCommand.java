@@ -25,7 +25,5 @@ public class RemoveMapCommand extends Command {
         universityToMap.removeMapping(selectedMapping);
         Ui.printMapping(selectedMapping, universityToMap.getMappingListSize());
         storage.updateSelectedUniversityList(universitySelectedList);
-        Ui.printUniversity(universityToMap);
-        universityToMap.listAllMappings();
     }
 }
