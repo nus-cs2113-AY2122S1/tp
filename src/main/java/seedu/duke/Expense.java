@@ -161,17 +161,17 @@ public class Expense {
     //expense details
     @Override
     public String toString() {
-        return (this.getDescription()
+        return ("\t" + this.getDescription()
                 + System.lineSeparator()
-                + "date: " + this.getStringDate()
+                + "\t" + "date: " + this.getStringDate()
                 + System.lineSeparator()
-                + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
+                + "\t" + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
-                + "People involved: " + this.getPersonsList().toString()
+                + "\t" + "People involved: " + this.getPersonsList().toString()
                 + System.lineSeparator()
-                + "Payer: " + this.getPayer()
+                + "\t" + "Payer: " + this.getPayer()
                 + System.lineSeparator()
-                + "Category: " + this.category)
+                + "\t" + "Category: " + this.category)
                 + System.lineSeparator();
     }
 
