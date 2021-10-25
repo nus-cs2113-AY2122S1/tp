@@ -1,9 +1,5 @@
 package seedu.duke.modules;
 
-
-import seedu.duke.modules.ModuleList;
-import seedu.duke.universities.University;
-
 import java.util.Comparator;
 
 public class Module implements Comparator<Module> {
