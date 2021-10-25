@@ -21,7 +21,8 @@ public class Expense {
     private String category;
     private LocalDate date;
     private Person payer;
-    private HashMap<Person, Double> amountSplit = new HashMap<>();
+    //private HashMap<Person, Double> amountSplit = new HashMap<>();
+    private HashMap<String, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private double exchangeRate;
@@ -107,14 +108,22 @@ public class Expense {
         return payer;
     }
 
+    //public void setAmountSplit(Person person, double amount) {
+    //    amountSplit.put(person, amount);
+    //}
+
+    //public HashMap<Person, Double> getAmountSplit() {
+    //    return amountSplit;
+    //}
+
+
     public void setAmountSplit(Person person, double amount) {
-        amountSplit.put(person, amount);
+            amountSplit.put(person.getName(), amount);
     }
 
-    public HashMap<Person, Double> getAmountSplit() {
+    public HashMap<String, Double> getAmountSplit() {
         return amountSplit;
     }
-
     /**
      * Prompts user for date.
      *
