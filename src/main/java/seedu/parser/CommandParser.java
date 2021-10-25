@@ -2,6 +2,7 @@ package seedu.parser;
 
 import seedu.command.AddCommand;
 import seedu.command.CalculateCapCommand;
+import seedu.command.ChangeSemesterCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -69,6 +70,8 @@ public class CommandParser {
             command = new CalculateCapCommand();
         } else if (lowerCaseText.startsWith("remove")) {
             command = parseRemoveCommand(text);
+        } else if (lowerCaseText.startsWith("semester")) {
+            command = new ChangeSemesterCommand(timetable);
         } else {
             command = new InvalidCommand();
         }

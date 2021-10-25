@@ -261,4 +261,43 @@ public class TextUi {
     public static void printModuleRemoved(String moduleCode) {
         System.out.println(moduleCode + " is successfully removed from your Transcript.");
     }
+
+    public static int changeSemesterCommand() {
+        System.out.println("Change semester? (This will reset timetable)");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return Integer.parseInt(input);
+    }
+
+    public static void printSemesters(int semester) {
+        printCurrentSemester(semester);
+        System.out.println("1. Semester 1");
+        System.out.println("2. Semester 2");
+        System.out.println("3. Special Term 1");
+        System.out.println("4. Special Term 2");
+        System.out.println("5. cancel");
+    }
+
+    public static void printCurrentSemester(int semester) {
+        String currentSem = "";
+        switch (semester) {
+        case 1:
+            currentSem = "Semester 1";
+            break;
+        case 2:
+            currentSem = "Semester 2";
+            break;
+        case 3:
+            currentSem = "Special Term 1";
+            break;
+        case 4:
+            currentSem = "Special Term 2";
+            break;
+        default:
+            currentSem = "Semester 1";
+        }
+        System.out.println("Current semester: " + currentSem);
+    }
 }
