@@ -59,5 +59,6 @@ public class Messages {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-    
+
+    public static final String TIP_HEADER = "Here's our tip for the day: ";
 }

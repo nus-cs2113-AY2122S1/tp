@@ -208,7 +208,7 @@ Here we have a simple expense list with three items:
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we give the command `total_ex`, it will display the total expenditure:
+If we give the command <code>total_ex</code>, it will display the total expenditure:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your total expense is: $600.50
@@ -270,7 +270,7 @@ Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command `del_in i/1` is given, you get the following message:
+When command <code>del_in i/1</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
@@ -328,7 +328,7 @@ Here we have a simple income list with three items:
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we give the command `total_in`, it will display the total income:
+If we give the command <code>total_in</code>, it will display the total income:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your total income is: $2800.00
@@ -351,7 +351,8 @@ Examples:
 
 <details>
 <summary> Expected output in run window </summary>
-If you enter `find 19/10/2021`, it will find the entry recorded on that date:
+<br>
+If you enter <code>find 19/10/2021</code>, it will find the entry recorded on that date:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
@@ -377,8 +378,9 @@ Examples:
 <details>
 <summary> Expected output in run window </summary>
 <br>
-If you wish to search based on category, for e.g. all `food` expenses:
-- Give the command `find food` and it will return the following:
+If you wish to search based on category, for e.g. all <code>food</code> expenses:
+<br>
+<ul><li>Give the command <code>find food</code> and it will return the following:</li></ul>
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!
@@ -386,8 +388,8 @@ Below is a list of all your findings!
 1: [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
-If you wish to search based on description, for e.g. all entries that contain the keyword `bought`:
-- Give the command `find bought` and it will return the following:
+If you wish to search based on description, for e.g. all entries that contain the keyword <code>bought</code>:
+<ul><li>Give the command <code>find bought</code> and it will return the following:</li></ul>
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!

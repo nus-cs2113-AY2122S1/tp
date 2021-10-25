@@ -27,17 +27,20 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
+    private static final String ADVICE_FILE_NAME = "./FinancialAdvice.txt";
     private static final String BUDGET_CSV_HEADER = "food,transport,medical,bills,entertainment,misc,overall";
     private final Parser parser;
     private final FinancialTracker financialTracker;
     private final Ui ui;
     private final BudgetManager budgetManager;
+    private final FinancialAdvisor financialAdvisor;
 
-    public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, BudgetManager budgetManager) {
+    public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, BudgetManager budgetManager, FinancialAdvisor financialAdvisor) {
         this.parser = parser;
         this.financialTracker = financialTracker;
         this.ui = ui;
         this.budgetManager = budgetManager;
+        this.financialAdvisor = financialAdvisor;
     }
 
     /**
@@ -56,6 +59,7 @@ public class DataManager {
     public void loadAll() {
         loadEntries();
         loadBudgetSettings();
+        loadFinancialAdvice();
     }
 
     /**
@@ -147,7 +151,24 @@ public class DataManager {
             ui.printError(Messages.ERROR_SAVING_BUDGET_SETTINGS);
         }
     }
+    
+    public void loadFinancialAdvice() {
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(ADVICE_FILE_NAME);
+        } catch (FileNotFoundException e) {
+            ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
+            return;
+        }
+        Scanner sc = new Scanner(fis);
+        sc.nextLine();
 
+        while (sc.hasNextLine()) {
+            String data = sc.nextLine();
+            financialAdvisor.addAdvice(data);
+        }
+    }
+    
     /**
      * Loads all settings from StonksXD_Budget.csv into StonksXD.
      * This allows users to not lose all their budget settings when the previous instance of StonksXD closed.
