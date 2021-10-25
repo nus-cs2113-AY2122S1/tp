@@ -128,13 +128,9 @@ Adds medication into the inventory.
 
 Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
 
-
 Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
 
-
 Expected Output 1:
-
-
 ```
 Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
@@ -150,7 +146,6 @@ Example 2 (If medication does not
 exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 2:
-
 ```
 Medication added: paracetamol
 +====+=============+========+==========+=============+==============================+==============+
@@ -275,18 +270,13 @@ Expected output:
 
 ### Adding prescriptions: `addprescription`
 
-
 Adds a prescription record and subtracts the medication quantity from stocks.
-
 
 > :information_source: MediVault will prescribe the medication with the shortest expiry date first. If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
 
-
 Format: `addprescription n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
 
-
 Example: `addprescription n/panadol q/5 s/john c/123`
-
 
 Expected Output:
 
