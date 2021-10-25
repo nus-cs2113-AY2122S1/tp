@@ -116,6 +116,11 @@ public class University implements Comparator<University> {
         return 0;
     }
 
+    public boolean isExistMapping(ModuleMapping mapping) {
+        return list.contains(mapping);
+    }
+
+
     public String toFileFormat() {
         String result = name + System.lineSeparator();
         for (int i = 0; i < list.size(); i++) {

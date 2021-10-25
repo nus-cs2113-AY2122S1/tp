@@ -146,6 +146,9 @@ public class AddCommandParser {
         if (mapIndex > currentUni.getMappingListSize()) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
+        if (currentUni.isExistMapping(currentUni.getSelectedMappings(moduleSelectedList).get(mapIndex))) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
+        }
     }
 
     private boolean isTextMatches(String arguments) {
