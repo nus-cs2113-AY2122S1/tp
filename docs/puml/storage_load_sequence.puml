@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+-> Duke: Start of Program
+activate Duke
+Duke -> Storage: load()
+activate Storage
+Storage -> Storage : loadIngredients()
+activate Storage#DarkSalmon
+Storage -> IngredientList : ingredientList.add()
+deactivate Storage#DarkSalmon
+Storage -> Storage : loadDishes()
+activate Storage#LightSalmon
+Storage -> DishList : dishList.add()
+deactivate Storage#LightSalmon
+deactivate Duke
+
+@enduml
