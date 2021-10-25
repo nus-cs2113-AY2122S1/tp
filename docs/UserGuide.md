@@ -72,7 +72,7 @@ Format: `help`
 <details>
   <summary> Expected output in run window (Click to expand!)</summary>
 
-````
+```
 -----------------------------------------------------------------------------------------------------
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To View Your Yearly Report: show_graph
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
-````
+```
 </details>
 
 <br>
@@ -583,7 +583,6 @@ Format: `end`
 ██   ██    ██    ██          ██  ██ 
 ██████     ██    ███████        ██ 
 -----------------------------------------------------------------------------------------------------
-
 ````
 </details>
 
