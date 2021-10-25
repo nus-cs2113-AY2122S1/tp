@@ -405,26 +405,26 @@ For Example:
 									--	Unofficial Transcript	--
 									------------------------------
 
-Date Issued : 25-10-2021
+Date Issued : 26-10-2021
 
 MODULE                                                                              GRADE  CREDITS
 
-CS2113T     Software Engineering & Object-Oriented Programming                        A+    4.0
-CS1231      Discrete Structures                                                       A-    4.0
-CS1010      Programming Methodology                                                   C+    4.0
-CG2271      Real-Time Operating Systems                                               A+    4.0
-CG2271      Real-Time Operating Systems                                               C-    4.0
-CS2102      Database Systems                                                          A     4.0
-CG1111      Engineering Principles and Practice I                                     S     6.0
-CG1112      Engineering Principles and Practice II                                    U     6.0
+CS2113T     Software Engineering & Object-Oriented Programming                        A+    4.0   
+CS1231      Discrete Structures                                                       A-    4.0   
+MA1512      Differential Equations for Engineering                                    B+    2.0   
+CS1010      Programming Methodology                                                   C+    4.0   
+EE2026      Digital Design                                                            B+    4.0   
+CG2271      Real-Time Operating Systems                                               A     4.0   
+CG1111      Engineering Principles and Practice I                                     S     6.0   
+CG1112      Engineering Principles and Practice II                                    U     6.0   
+CFG1002     Career Catalyst                                                           CS    2.0   
 
 Total Credits Fulfilled : 36.0
 
-Cumulative Average Point : 3.67
+Cumulative Average Point : 4.18
 
 	This is not an official transcript issued by the Office of the Registrar.
 __________________________________________________________________________
-
 ```
 
 <br>
