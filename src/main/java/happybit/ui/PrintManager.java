@@ -73,19 +73,8 @@ public class PrintManager {
         System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
                 + goalDescription + "\".");
         for (Habit habit : habits) {
-            String prefix = "[ ]";
-            System.out.print(index + ". ");
-            String intervalPrint = "(every " + habit.getInterval() + " days)";
-            Date lastHabitDate = habit.getHabitDate();
-            Date nextHabitDate = habit.getNextDate();
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-            String lastHabitDatePrint = dateFormatter.format(lastHabitDate);
-            String nextHabitDatePrint = dateFormatter.format(nextHabitDate);
-            if (habit.getDone()) {
-                prefix = "[X]";
-            }
-            System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
-            System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
+            String currIndex = index + ". ";
+            printHabitDetails(habit, currIndex);
             index++;
         }
         printDashes();
@@ -116,10 +105,15 @@ public class PrintManager {
         printDashes();
     }
 
-    public void printDoneHabit(String goalDescription, String habitName) {
+    public void printDoneHabit(String goalDescription, Habit habit) {
         printDashes();
-        System.out.println("Your habit of \"" + habitName + "\" under the goal \""
-                + goalDescription + "\" has been set as done.");
+        System.out.println("You have completed your habit of \"" + habit.getHabitName() + "\" under the goal \""
+                + goalDescription + "\" set for " + habit.getHabitDateString() + ". Well Done!");
+        if (habit.getInterval() > 0) {
+            System.out.println("Your next date set for this habit is " + habit.getNextHabitDateString());
+        } else {
+            System.out.println("Update the habit with a regular interval value to make it recurring!");
+        }
         printDashes();
     }
 
@@ -141,6 +135,29 @@ public class PrintManager {
         System.out.println("\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + NEWLINE
                 + " — Will Durant");
         printDashes();
+    }
+
+    /*
+     * NOTE : ==================================================================
+     * The following are private methods that are used to implement SLAP for the
+     * above public methods. These methods are positioned at the bottom to better
+     * visualise the actual methods that can be called from outside this class.
+     * =========================================================================
+     */
+
+    private void printHabitDetails(Habit habit, String currIndex) {
+        String intervalPrint = "";
+        int habitIntervals = habit.getInterval();
+        if (habitIntervals > 0) {
+            intervalPrint ="(every " + habit.getInterval() + " day(s)";
+        }
+        Date lastHabitDate = habit.getHabitDate();
+        Date nextHabitDate = habit.getNextHabitDate();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        String lastHabitDatePrint = dateFormatter.format(lastHabitDate);
+        String nextHabitDatePrint = dateFormatter.format(nextHabitDate);
+        System.out.println(currIndex + " " + habit.getHabitName() + " " + intervalPrint);
+        System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
     }
 
     private void printDashes() {

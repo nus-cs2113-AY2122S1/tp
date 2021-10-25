@@ -89,10 +89,24 @@ public class Goal {
 
     /**
      * Adds a habit to the goal.
+     * From user input, need to addProgress().
      *
      * @param habit Habit to be added to the goal.
      */
     public void addHabit(Habit habit) {
+        habitList.add(habit);
+        // get newly added habit and add progress
+        Habit newHabit = habitList.get(getListLength() - 1);
+        newHabit.addProgress();
+    }
+
+    /**
+     * Adds a habit to the current goal.
+     * From storage, no need to addProgress() as progress obtained from storage.
+     *
+     * @param habit
+     */
+    public void addHabitFromStorage(Habit habit) {
         habitList.add(habit);
     }
 
@@ -112,7 +126,8 @@ public class Goal {
      */
     public void doneHabit(int habitIndex) {
         Habit habit = habitList.get(habitIndex);
-        habit.setCompleted();
+        // update key value pair in map for current iteration
+        habit.updateProgress();
     }
 
     /**

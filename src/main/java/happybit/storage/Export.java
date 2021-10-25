@@ -52,10 +52,8 @@ public class Export {
             fileWriter.write(goalToWrite);
 
             for (Habit habit : habits) {
-                int doneValue = habit.getDone() ? 1 : 0;
                 String habitToWrite = index + DELIMITER
                         + HABIT_TYPE + DELIMITER
-                        + doneValue + DELIMITER
                         + habit.getHabitName() + DELIMITER
                         + habit.getHabitDateString() + DELIMITER
                         + habit.getInterval() + NEWLINE;
@@ -88,10 +86,8 @@ public class Export {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
 
-            int doneValue = habit.getDone() ? 1 : 0;
             String habitToWrite = index + DELIMITER
                     + HABIT_TYPE + DELIMITER
-                    + doneValue + DELIMITER
                     + habit.getHabitName() + DELIMITER
                     + habit.getHabitDateString() + DELIMITER
                     + habit.getInterval() + NEWLINE;
@@ -102,4 +98,8 @@ public class Export {
             throw new HaBitStorageException(e.getMessage());
         }
     }
+
+    /**
+     * Need to export HashMap<Date, Progress> for each habit; nothing exported as of now
+     */
 }
