@@ -85,4 +85,8 @@ public class EditExerciseCommand extends Command {
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }
+
+    public int getWorkoutIndex() {
+        return workoutIndex;
+    }
 }

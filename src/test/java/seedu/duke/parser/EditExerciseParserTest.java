@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.exercise.EditExerciseCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EditExerciseParserTest {
@@ -53,5 +54,13 @@ class EditExerciseParserTest {
         parser = new EditExerciseParser("edit 1, testExercise, 1 1");
         result = parser.parseInput();
         assertTrue(result instanceof EditExerciseCommand);
+    }
+    
+    @Test
+    void parseInput_workoutIndexInputWhenInsideWorkout_returnsCorrectEditExerciseCommand() {
+        Command.workoutMode = 1;
+        parser = new EditExerciseParser("edit 2, 2, test, 1 1");
+        EditExerciseCommand check = (EditExerciseCommand) parser.parseInput();
+        assertEquals(2,check.getWorkoutIndex());
     }
 }

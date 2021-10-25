@@ -67,4 +67,8 @@ public class AddExerciseCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
+    
+    public int getWorkoutIndex() {
+        return workoutIndex;
+    }
 }

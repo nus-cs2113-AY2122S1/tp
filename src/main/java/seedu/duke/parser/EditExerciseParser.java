@@ -24,7 +24,7 @@ public class EditExerciseParser extends Parser {
 
     private Command prepareEditExercise(String commandArgs) {
         try {
-            int[] indices = parseWorkoutAndExerciseIndex(commandArgs);
+            int[] indices = parseWorkoutAndExerciseIndex(commandArgs,true);
             int exerciseIndex = indices[0];
             workoutIndex = indices[1];
 
