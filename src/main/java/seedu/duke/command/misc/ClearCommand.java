@@ -2,7 +2,6 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.data.WorkoutList;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.Storage;
@@ -18,8 +17,12 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all exercises in a workout / "
             + "all workouts in the list.\n"
-            + "Format: clear [exercise/workout]\n"
-            + "Example: " + COMMAND_WORD + " exercise";
+            + "Format: clear [Keyword] [Workout index]\n"
+            + "Parameters:\n"
+            + "\tKeyword - exercise or workout\n"
+            + "\tWorkout index - Index of workout to clear all exercises inside (only when keyword is \"exercise\")\n"
+            + "Example: " + COMMAND_WORD + " exercise 1\n"
+            + "Example: " + COMMAND_WORD + " workout";
     private static final Logger LOGGER = Logger.getLogger(ClearCommand.class.getName());
     private final String keyword;
     private int workoutIndex;
