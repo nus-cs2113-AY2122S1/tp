@@ -36,12 +36,16 @@ public class Task extends Item {
         this.event = event;
     }
 
+    @Override
+    public String toString() {
+        return String.format("[T][%s] %s (by: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
+    }
+
     public ArrayList<Member> getMemberList() {
         return memberList;
     }
 
-    @Override
-    public String toString() {
-        return String.format("[T][%s] %s (by: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
+    public Member getFromMemberList(int index) {
+        return memberList.get(index);
     }
 }

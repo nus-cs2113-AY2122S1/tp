@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
@@ -129,17 +130,48 @@ public class Ui {
     }
 
     public static void printTask(Task task) {
-        System.out.println(task.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + task.getDescription());
+        System.out.println("Title: " + task.getTitle() + System.lineSeparator()
+                + "Deadline: " + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + "Description: " + task.getDescription() + System.lineSeparator()
+                + "Members: ");
+        printMemberList(task.getMemberList());
     }
 
     public static void printEvent(Event event) {
-        System.out.println(event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
-                + event.getDescription() + System.lineSeparator()
-                + event.getVenue() + System.lineSeparator()
-                + event.getBudget());
-        System.out.println(event.getTaskList());
+        System.out.println("Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: ");
+        printList(event.getTaskList());
     }
+
+    public static void printMemberList(ArrayList<Member> list) {
+        AtomicInteger i = new AtomicInteger();
+        list.forEach(member -> System.out.println(i.getAndIncrement() + 1 + ". " + member));
+    }
+
+    public static void listUsageCommands() {
+        System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
+                + System.lineSeparator() + "-----------------------"
+                + System.lineSeparator() + "To list Task: list [Event Index] -t"
+                + System.lineSeparator() + "To list Members of a Task: "
+                + "list [Event Index] t/[Task Index]");
+    }
+
+    public static void updateIntroMessage() {
+        System.out.println("Please type the item you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------   "
+                + System.lineSeparator() + "title/[NEW NAME]   "
+                + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "venue/[NEW VENUE]"
+                + System.lineSeparator() + "budget/[NEW BUDGET]"
+                + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator() + Ui.getLineBreak());
+    }
+
 }

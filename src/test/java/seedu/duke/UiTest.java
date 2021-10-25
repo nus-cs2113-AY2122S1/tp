@@ -106,15 +106,17 @@ class UiTest {
         event.markAsDone();
 
         Ui.printEvent(event);
-        String expectedOutput = "Peppa Pig's Concert"
+        String expectedOutput = "Title: Peppa Pig's Concert"
                 + System.lineSeparator()
-                + "19 Feb 2022 - 20:00"
+                + "Date: 19 Feb 2022 - 20:00"
                 + System.lineSeparator()
-                + "Asia world tour"
+                + "Description: Asia world tour"
                 + System.lineSeparator()
-                + "Indoor Stadium"
+                + "Venue: Indoor Stadium"
                 + System.lineSeparator()
-                + "1000.9"
+                + "Budget: $1000.9"
+                + System.lineSeparator()
+                + "Tasks: "
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -127,11 +129,13 @@ class UiTest {
         task.markAsDone();
 
         Ui.printTask(task);
-        String expectedOutput = "Do homework"
+        String expectedOutput = "Title: Do homework"
                 + System.lineSeparator()
-                + "19 Feb 2022 - 23:59"
+                + "Deadline: 19 Feb 2022 - 23:59"
                 + System.lineSeparator()
-                + "CS2113T tp V1.0"
+                + "Description: CS2113T tp V1.0"
+                + System.lineSeparator()
+                + "Members: "
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }

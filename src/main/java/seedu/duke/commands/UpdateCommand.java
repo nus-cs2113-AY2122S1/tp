@@ -1,155 +1,173 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
-import seedu.duke.items.Task;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class UpdateCommand extends Command {
-    protected String listType;
-    protected String[] userCommand;
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy-HHmm");
-    protected static final String TITLE_FLAG = "n/";
-    protected static final String DATE_FLAG = "d/";
-    protected static final String VENUE_FLAG = "v/";
-    protected static final String BUDGET_FLAG = "b/";
-    protected static final String DESCRIPTION_FLAG = "p/";
+    protected Integer eventNumber;
+    protected Event eventToBeUpdated;
+    protected static final String TITLE_FLAG = "title/";
+    protected static final String DATE_FLAG = "date/";
+    protected static final String DEADLINE_FLAG = "deadline/";
+    protected static final String VENUE_FLAG = "venue/";
+    protected static final String BUDGET_FLAG = "budget/";
+    protected static final String DESCRIPTION_FLAG = "description/";
+    protected static final String TASK_FLAG = "task/";
+    protected static final String MEMBER_FLAG = "member/";
 
     public UpdateCommand(String[] command) {
-        this.listType = command[1];
-        this.userCommand = command;
-        ListCommand list = new ListCommand(userCommand);
-        list.execute();
-        System.out.println("Please type the index of the event you would like to update, "
-                + System.lineSeparator() + "and the attribute you would like to update in the format"
-                + System.lineSeparator() + "Index_num [n/TITLE] [d/dd-MM-yyyy HHmm] [p/DESCRIPTION] "
-                + System.lineSeparator() + "Only for Events: [v/VENUE] [b/BUDGET]");
+        this.eventNumber = Integer.parseInt(command[1]) - 1;
+        this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================" + System.lineSeparator());
+        Ui.printEvent(Duke.eventCatalog.get(eventNumber));
+        Ui.printLineBreak();
     }
 
     public CommandResult execute() {
-        String userInput = Ui.readInput();
-        String[] userUpdates = userInput.split(" ", 10);
-        try {
-            Integer index = Integer.parseInt(userUpdates[0]);
-            if (userUpdates.length == 1) {
-                throw new DukeException("Please specify what to update. ");
+        boolean exit = false;
+        while (!exit) {
+            Ui.updateIntroMessage();
+            String userInput = Ui.readInput();
+            Ui.printLineBreak();
+            if (userInput.equalsIgnoreCase("exit")) {
+                return new CommandResult("returning to main page...");
             }
-            for (String update : userUpdates) {
-                if (update.length() >= 2) {
-                    String attribute = update.trim().substring(2);
-                    if (update.contains(TITLE_FLAG)) {
-                        updateTitle(index, userInput);
-                    } else if (update.contains(DATE_FLAG)) {
-                        updateDate(index, userInput);
-                    } else if (update.contains(VENUE_FLAG)) {
-                        updateVenue(index, userInput);
-                    } else if (update.contains(BUDGET_FLAG)) {
-                        updateBudget(index, userInput);
-                    } else if (update.contains(DESCRIPTION_FLAG)) {
-                        updateDescription(index, userInput);
-                    }
+            String[] userUpdates = userInput.trim().split(">");
+            try {
+                CommandResult result = implementUpdates(userUpdates);
+                if (result != null) {
+                    return result;
                 }
+                postUpdateMessage();
+                String exitInput = Ui.readInput();
+                Ui.printLineBreak();
+                if (exitInput.equalsIgnoreCase("y")) {
+                    Duke.eventCatalog.sortCatalog();
+                    exit = true;
+                }
+            } catch (NullPointerException e) {
+                System.out.println("please follow the error closely");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("please follow the error closely");
+
         }
-        return new CommandResult("Item Updated");
+        return new CommandResult("Item Have been updated accordingly!");
+    }
+
+    private CommandResult implementUpdates(String[] userUpdates) throws DukeException {
+        for (String update : userUpdates) {
+            String[] attribute = update.trim().split("/");
+            if (update.contains(TITLE_FLAG)) {
+                eventToBeUpdated.setTitle(attribute[1]);
+            } else if (update.contains(DATE_FLAG)) {
+                updateDate(attribute[1]);
+            } else if (update.contains(VENUE_FLAG)) {
+                eventToBeUpdated.setVenue(attribute[1]);
+            } else if (update.contains(BUDGET_FLAG)) {
+                updateBudget(attribute[1]);
+            } else if (update.contains(DESCRIPTION_FLAG)) {
+                eventToBeUpdated.setDescription(attribute[1]);
+            } else if (update.contains(TASK_FLAG)) {
+                updateTask(attribute[1]);
+            } else {
+                return new CommandResult("invalid Command, you have returned to the main page!");
+            }
+        }
+        return null;
+    }
+
+    protected void updateTask(String index) throws DukeException {
+        int taskNum = Integer.parseInt(index) - 1;
+        Task taskToBeUpdated = eventToBeUpdated.getFromTaskList(taskNum);
+        Ui.printTask(taskToBeUpdated);
+        updateTaskIntroMessage();
+        String userInput = Ui.readInput();
+        String[] userUpdates = userInput.trim().split(">");
+        for (String update : userUpdates) {
+            String[] attribute = update.trim().split("/");
+            if (update.contains(TITLE_FLAG)) {
+                taskToBeUpdated.setTitle(attribute[1]);
+            } else if (update.contains(DEADLINE_FLAG)) {
+                updateDeadline(attribute[1], taskToBeUpdated);
+            } else if (update.contains(DESCRIPTION_FLAG)) {
+                taskToBeUpdated.setDescription(attribute[1]);
+            } else if (update.contains(MEMBER_FLAG)) {
+                updateMember(attribute[1], taskToBeUpdated);
+            } else {
+                System.out.println("invalid Command!");
+            }
+        }
+        Ui.printLineBreak();
+    }
+
+    private void updateMember(String index, Task taskToBeUpdated) {
+        System.out.println("Please key in the update for the Members Name");
+        String userInput = Ui.readInput();
+        taskToBeUpdated.getFromMemberList(Integer.parseInt(index) - 1).setName(userInput);
+    }
+
+    private void updateTaskIntroMessage() {
+        Ui.printLineBreak();
+        System.out.println("Please type the item for task you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------"
+                + System.lineSeparator() + "title/[NEW NAME]   "
+                + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "member/[MEMBER INDEX]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator() + Ui.getLineBreak());
+    }
+
+    protected void updateDeadline(String attribute, Task taskToBeUpdated) throws DukeException {
+        try {
+            LocalDateTime newDate = Parser.convertDateTime(attribute);
+            if (newDate.isBefore(LocalDateTime.now())) {
+                throw new DukeException("sorry a mortal cannot travel to the past");
+            }
+            taskToBeUpdated.setDateTime(Parser.convertDateTime(attribute));
+        } catch (DateTimeParseException e) {
+            System.out.println("incorrect format please ensure format for date is of [d/dd-MM-yyyy HHmm]");
+        }
+    }
+
+    private void postUpdateMessage() {
+        System.out.println("Here is the updated Event");
+        Ui.printEvent(eventToBeUpdated);
+        System.out.println("If you are satisfied with your updates? y to exit, n to continue");
+        Ui.printLineBreak();
     }
 
 
-    protected void updateDate(Integer index, String attribute) {
+    protected void updateDate(String attribute) throws DukeException {
         try {
-            if (this.listType.equalsIgnoreCase("-e")) {
-                Event itemToBeUpdated = Duke.eventCatalog.get(index);
-                String newDate = retrieveItemAttribute(attribute, DATE_FLAG);
-                itemToBeUpdated.setDateTime(Parser.convertDateTime(newDate));
-            } else if (this.listType.equalsIgnoreCase("-t")) {
-                Task itemToBeUpdated = Duke.taskList.get(index);
-                String newDate = retrieveItemAttribute(attribute, DATE_FLAG);
-                itemToBeUpdated.setDateTime(Parser.convertDateTime(newDate));
+            LocalDateTime newDate = Parser.convertDateTime(attribute);
+            if (newDate.isBefore(LocalDateTime.now())) {
+                throw new DukeException("sorry a mortal cannot travel to the past");
             }
+            eventToBeUpdated.setDateTime(Parser.convertDateTime(attribute));
+
         } catch (DateTimeParseException e) {
             System.out.println("incorrect format please ensure format for date is of [d/dd-MM-yyyy HHmm]");
         }
 
     }
 
-    protected void updateTitle(Integer index, String attribute) {
-        if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventCatalog.get(index);
-            String newTitle = retrieveItemAttribute(attribute, TITLE_FLAG);
-            itemToBeUpdated.setTitle(newTitle);
-        } else if (this.listType.equalsIgnoreCase("-t")) {
-            Task itemToBeUpdated = Duke.taskList.get(index);
-            String newTitle = retrieveItemAttribute(attribute, TITLE_FLAG);
-            itemToBeUpdated.setTitle(newTitle);
-        }
-    }
-
-    protected void updateVenue(Integer index, String attribute) {
-        if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventCatalog.get(index);
-            String newVenue = retrieveItemAttribute(attribute, VENUE_FLAG);
-            itemToBeUpdated.setVenue(newVenue);
-        } else if (this.listType.equalsIgnoreCase("-t")) {
-            System.out.println("such a field does not exist");
-        }
-    }
-
-    protected void updateBudget(Integer index, String attribute) {
+    protected void updateBudget(String attribute) {
         try {
-            if (this.listType.equalsIgnoreCase("-e")) {
-                Event itemToBeUpdated = Duke.eventCatalog.get(index);
-                double newBudget = retrieveEventBudget(attribute);
-                itemToBeUpdated.setBudget(newBudget);
-            } else if (this.listType.equalsIgnoreCase("-t")) {
-                System.out.println("such a field does not exist");
-            }
+            double newBudget = Double.parseDouble(attribute);
+            eventToBeUpdated.setBudget(newBudget);
         } catch (NullPointerException e) {
             System.out.println("please ensure budget is a double");
         }
-    }
-
-    protected void updateDescription(Integer index, String attribute) {
-        if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventCatalog.get(index);
-            String newDescription = retrieveItemAttribute(attribute, DESCRIPTION_FLAG);
-            itemToBeUpdated.setDescription(newDescription);
-        } else if (this.listType.equalsIgnoreCase("-t")) {
-            Task itemToBeUpdated = Duke.taskList.get(index);
-            String newDescription = retrieveItemAttribute(attribute, DESCRIPTION_FLAG);
-            itemToBeUpdated.setDescription(newDescription);
-        }
-    }
-
-    private double retrieveEventBudget(String response) {
-        int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
-        int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
-        try {
-            if (endOfEventBudget < 0) {
-                return Double.parseDouble(response.trim().substring(startOfEventBudget));
-            }
-            return Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
-        } catch (NumberFormatException e) {
-            System.out.print("Budget needs to be an integer. ");
-            // Returns -1 to signify that the budget entered was not a valid integer
-            return -1;
-        }
-    }
-
-    private String retrieveItemAttribute(String response, String flag) {
-        int startOfItemAttribute = response.indexOf(flag) + 2;
-        int endOfItemAttribute = response.indexOf("/", startOfItemAttribute) - 2;
-        if (endOfItemAttribute < 0) {
-            return response.trim().substring(startOfItemAttribute);
-        }
-        return response.trim().substring(startOfItemAttribute, endOfItemAttribute);
     }
 }
