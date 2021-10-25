@@ -157,8 +157,7 @@ Same Medication and Expiry Date exist. Update existing quantity.
 +----+---------+--------+----------+-------------+------------------------------------------+--------------+
 ```
 
-Example 3 (If medication does not
-exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
+Example 3 (If medication does not exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 3:
 

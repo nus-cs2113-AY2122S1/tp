@@ -78,10 +78,10 @@ public class AddStockCommand extends Command {
             if (nameExpiryExist(ui, filteredStocks, quantityToAdd, formatExpiry)) {
                 return;
             }
-            String[] requiredPara = {CommandParameters.NAME, CommandParameters.PRICE,
+            String[] requiredParams = {CommandParameters.NAME, CommandParameters.PRICE,
                     CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines, requiredPara, optionalParameters,
+            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParams, optionalParameters,
                     stockValidator)) {
                 return;
             }
@@ -221,6 +221,7 @@ public class AddStockCommand extends Command {
         ui.printStock(stock);
         logger.log(Level.INFO, "Successful addition of stock");
         return;
+
     }
 
 }
