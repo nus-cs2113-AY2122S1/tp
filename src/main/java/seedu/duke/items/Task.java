@@ -40,4 +40,12 @@ public class Task extends Item {
     public String toString() {
         return String.format("[T][%s] %s (by: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
     }
+
+    public ArrayList<Member> getMemberList() {
+        return memberList;
+    }
+
+    public Member getFromMemberList(int index) {
+        return memberList.get(index);
+    }
 }

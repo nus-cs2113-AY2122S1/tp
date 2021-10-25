@@ -40,6 +40,10 @@ public class Member {
         EventCatalog.bubbleSortItems(assignedTasks);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return name;
