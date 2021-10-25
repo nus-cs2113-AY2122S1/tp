@@ -19,7 +19,8 @@ import static java.lang.Double.parseDouble;
 public class UniversityStorage {
     private static final Logger logger = Logger.getLogger("UniversityStorageLog");
 
-    public ArrayList<University> readUniversityList(InputStream inputStream, ModuleList moduleMasterList) throws IOException {
+    public ArrayList<University> readUniversityList(InputStream inputStream,
+                                                    ModuleList moduleMasterList) throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));

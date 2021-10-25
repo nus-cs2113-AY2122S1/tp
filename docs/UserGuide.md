@@ -3,7 +3,28 @@
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
-Exchange Programme, optimised for use via Command Line Interface (CLI).
+Exchange Programme, optimised for use via Command Line Interface (CLI).  
+
+## Content Page
+* [Quick Start](#quick-start)  
+* [Program run through](#program-run-through)  
+* [Features](#features)  
+  * [Viewing all available universities](#viewing-all-available-universities)
+  * [Viewing all selected universities](#viewing-all-selected-universities)
+  * [Viewing all available modules](#viewing-all-available-modules)
+  * [Viewing all selected modules](#viewing-all-selected-modules)
+  * [Adding a partner university](#adding-a-partner-university)
+  * [Adding a NUS module](#adding-a-nus-module)
+  * [Adding a module mapping](#adding-a-module-mapping)
+  * [Finding a specific university](#finding-a-specific-university)
+  * [Finding a specific module](#finding-a-specific-module)
+  * [Searching for available module mappings](#searching-for-available-module-mappings)
+  * [Removing a selected university](#removing-a-selected-university)
+  * [Removing a selected NUS module](#removing-a-selected-nus-module)
+  * [Removing a selected module mapping](#removing-a-selected-module-mapping)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+* [Glossary](#glossary)
 
 ## Quick Start
 
@@ -23,7 +44,7 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 
 ## Features 
 
-### View all available universities: 
+### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
 #### Format: `list /muni`  
 #### Example of usage:
@@ -40,7 +61,7 @@ Here are the universities and module mappings in the list:
 [80] - Western University  
 ```
 
-### View all selected universities:
+### Viewing all selected universities:
 Displays all universities added, as well as all module mappings added to the university by the user.  
 #### Format: `list /suni`  
 #### Example of usage:
@@ -53,7 +74,7 @@ Here are the universities and module mappings in your list:
 [80] - Western University
 ```
 
-### View all available modules: 
+### Viewing all available modules: 
 Displays all modules from the master list of modules that the user can choose from.  
 #### Format: `list /mmod`  
 #### Example of usage:
@@ -70,7 +91,7 @@ Here are the modules in the list:
 [805] UD5628 : Critique of Contemporary Urban Design  
 ```
 
-### View all selected modules
+### Viewing all selected modules
 Displays all modules from the master list of modules that the user can choose from.  
 #### Format: `list /smod`  
 #### Example of usage:
@@ -86,7 +107,7 @@ Here are the modules in the list:
 [47] CM1417   : Fundamentals of Chemistry
 ```
 
-### Add a partner university
+### Adding a partner university
 Add a partner university the user is interested into the user selected university list.
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
 >This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
@@ -95,15 +116,17 @@ Add a partner university the user is interested into the user selected universit
 * Input: `add /uni 24`  
 Expected output:
 ```
-show output here
+New university added: 
+[24] - Korea Advanced Inst of Sci & Tech
 ```
 * Input: `add /uni University of California`  
 Expected output:
 ```
-show output here
+New university added: 
+[59] - University of California
 ```
 
-### Add a NUS module
+### Adding a NUS module
 Add a NUS module that the user wants to complete during SEP into the user selected module list.  
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 >This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments. The `<MODULE_INDEX>` can be found via `list /mmod` command.  
@@ -112,21 +135,23 @@ Add a NUS module that the user wants to complete during SEP into the user select
 * Input: `add /mod 77`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 * Input: `add /mod CS1010`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 
-### Add a module mapping
+### Adding a module mapping
 Adds a specific pair of module mapping under a selected university.
 
 Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
 >The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
 > 
-####Example of usage
+#### Example of usage:
 * Input: `add /map 4 2`  
 Expected output:
 ```
@@ -144,7 +169,16 @@ Format: `find /uni <KEYWORD>`
 * Input: `find /uni California`  
 Expected output:
 ```
-show output here
+[59] - University of California
+[60] - University of California, Berkeley
+[61] - University of California, Davis
+[62] - University of California, Irvine
+[63] - University of California, Los Angeles
+[64] - University of California, Merced
+[65] - University of California, Riverside
+[66] - University of California, San Diego
+[67] - University of California, Santa Barbara
+[68] - University of California, Santa Cruz
 ```
 
 ### Finding a specific module
@@ -155,7 +189,10 @@ Look for modules that matches the user entered keyword.
 * Input: `find /mod CS1010`  
 Expected output:
 ```
-show output here
+[77] CS1010   : Programming Methodology
+[78] CS1010E  : Programming Methodology
+[79] CS1010J  : Programming Methodology
+[80] CS1010S  : Programming Methodology
 ```
 
 ### Searching for available module mappings:
@@ -165,28 +202,30 @@ Displays all available module mappings for a specific university that matches th
 #### Example of usage:
 * Input: `searchmap 4`  
 Expected Output:
-  ```
-  Potential mappings for Boston University:
-  [1] CS1231 - MET CS 248 : Discrete Mathematics
-  [2] CS1231 - CAS CS131 : Combinatoric Structures
-  ```
+```
+Potential mappings for Boston University:
+[1] CS1231 - MET CS 248 : Discrete Mathematics
+[2] CS1231 - CAS CS131 : Combinatoric Structures
+```
 
-### Remove a selected university
+### Removing a selected university
 Remove a partner university from the user selected university list.
 #### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
 #### Examples of usage: 
 * Input: `remove /uni 4` 
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 * Input: `remove /uni Boston University`  
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 
-### Remove a selected NUS module
+### Removing a selected NUS module
 Removes a module from the user selected module list.
 #### Format: `remove /mod <MODULE_CODE>` `remove /mod <MODULE_INDEX>`
 #### Examples of usage:
@@ -204,7 +243,7 @@ The following module has been removed:
 ```
 
 
-### Remove a selected module mapping
+### Removing a selected module mapping
 Removes a module mapping under a selected university.
 #### Format: `remove /map <UNIVERSITY_INDEX> <MAPPING_INDEX>`  
 #### Example of usage: 
