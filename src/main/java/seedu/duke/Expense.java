@@ -171,7 +171,8 @@ public class Expense {
                 + System.lineSeparator()
                 + "Payer: " + this.getPayer()
                 + System.lineSeparator()
-                + "Category: " + this.category);
+                + "Category: " + this.category)
+                + System.lineSeparator();
     }
 
     //Getters and setters
