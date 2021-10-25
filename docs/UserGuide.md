@@ -119,8 +119,8 @@ ____________________________________________________________
 0. Andre
 1. Marcus
 2. Le Zong
-3. Mayank
-4. George
+3. Ashraf
+4. Mayank
 5. Jim
 6. Akshay
 ____________________________________________________________
@@ -168,6 +168,10 @@ ____________________________________________________________
 **A**: 
 
 ## Command Summary
+
+Below is a concise summary of frequently used commands in ConTech.
+The command format and examples are provided for each command for
+a quick view when using the application.
 
 Action | Command Format | Example
 --- | --- | --- | 
