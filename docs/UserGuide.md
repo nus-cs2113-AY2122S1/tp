@@ -261,9 +261,9 @@ Edits and updates existing item from a trip and updates it to a new correspondin
 #### Usage Example:
 ```
 ____________________________________________________________
-$ edit-item 1 trip1 /day 1 /time 7am /name wake up from bed
+$ edit-item trip1 /day 1 /time 9am /name later breakfast /index 1
 ____________________________________________________________
-	You have just edited item 1 of trip1 to wake up from bed at 7am
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 9am
 ____________________________________________________________
 ```
 
@@ -277,9 +277,13 @@ Searches for an item keyword from a trip and returns the resulting matching item
 #### Usage Example:
 ```
 ____________________________________________________________
-$ search-item trip1 /name sleep at home
+$ search-item trip1 /day 1 /key n
 ____________________________________________________________
-	You have just search item keyword sleep at home in trip called trip1
+	You have just search item keyword n on day 1 in trip called trip1
+	
+	Results: 
+	1. 2pm		lunch
+	2. 5pm		dinner
 ____________________________________________________________
 ```
 
