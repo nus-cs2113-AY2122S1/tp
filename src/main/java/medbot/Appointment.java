@@ -1,13 +1,16 @@
 package medbot;
 
+
 import medbot.list.ListItem;
+
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 
-public class Appointment {
+public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private int appointmentId = 0;
@@ -104,7 +107,7 @@ public class Appointment {
     }
 
     /**
-     * Text to be written to storage file of a person
+     * Text to be written to storage file of a person.
      *
      * @return storageString of a person
      */

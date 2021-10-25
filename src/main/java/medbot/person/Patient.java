@@ -13,7 +13,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Text to be written to storage file of a patient
+     * Text to be written to storage file of a patient.
      *
      * @return storageString of a patient
      */
