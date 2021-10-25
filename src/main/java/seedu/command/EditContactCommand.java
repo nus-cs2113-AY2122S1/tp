@@ -138,6 +138,10 @@ public class EditContactCommand extends Command {
         return contactDetails;
     }
 
+    public int getContactIndex() {
+        return this.contactIndex;
+    }
+
     //@@author ng-andre
     private Contact duplicateContact(Contact contact) {
         String name = contact.getName();

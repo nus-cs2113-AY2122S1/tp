@@ -2,7 +2,6 @@
 
 package seedu.command;
 
-import org.w3c.dom.Text;
 import seedu.contact.Contact;
 import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
@@ -20,7 +19,7 @@ public class DeleteContactCommand extends Command {
         this.contactIndex = contactIndex;
     }
 
-    public int getDeletedIndex() {
+    public int getContactIndex() {
         return contactIndex;
     }
 
