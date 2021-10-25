@@ -7,6 +7,7 @@ public abstract class Entry {
     protected String description;
     protected double value;
     protected LocalDate date;
+    protected static final String DATE_FORMAT = "dd/MM/yyyy";
 
     public String getDescription() {
         return this.description;

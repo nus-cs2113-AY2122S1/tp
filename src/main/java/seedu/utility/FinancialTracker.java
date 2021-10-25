@@ -127,12 +127,16 @@ public class FinancialTracker {
     //returns the total expense between a specific rage
     public double getExpenseBetween(LocalDate start, LocalDate end) {
         List<Expense> accumulatedExpense = expenses.stream()
-                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
-                        && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
+                .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
                 .collect(Collectors.toList());
         return getTotalExpense(accumulatedExpense);
     }
-    
+
+    private boolean isBetweenStartAndEndDates(LocalDate start, LocalDate end, LocalDate date) {
+        return (date.isAfter(start) || date.isEqual(start))
+                && (date.isBefore(end) || date.isEqual(end));
+    }
+
     //returns the total expense in the month. Used for data visualisation
     private double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
         List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
@@ -156,8 +160,7 @@ public class FinancialTracker {
     //returns the total expense between a specific rage
     public double getIncomeBetween(LocalDate start, LocalDate end) {
         List<Income> accumulatedIncome = incomes.stream()
-                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
-                        && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
+                .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
                 .collect(Collectors.toList());
         return getTotalIncome(accumulatedIncome);
     }
@@ -200,18 +203,9 @@ public class FinancialTracker {
         return incomes.isEmpty();
     }
 
-    //method used for testing
-    public Expense getExpense(int expenseIndex) {
-        return expenses.get(expenseIndex);
-    }
-
-    //method used for testing
-    public Income getIncome(int incomeIndex) {
-        return incomes.get(incomeIndex);
-    }
-    
     public void clearAllEntries() {
         expenses.clear();
         incomes.clear();
+        balance = 0;
     }
 }
