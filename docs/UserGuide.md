@@ -176,6 +176,7 @@ Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> 
 List all contacts | `list` | `list`
 View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
+Delete contact fields| `<COMMAND>` | `<EXAMPLE>`
 Delete a contact | `rm <INDEX>` | `rm 1`
 Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search Ashraf` <br>`search -g revflash`<br/>
 Import contacts from .txt file|`import` | `import`
