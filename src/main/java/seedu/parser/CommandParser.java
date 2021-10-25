@@ -1,10 +1,7 @@
 package seedu.parser;
 
 import seedu.command.AddCommand;
-<<<<<<< HEAD
 import seedu.command.CalculateCapCommand;
-=======
->>>>>>> 40a5c27b0be4df977c2090b76f2e67dfb1d583d3
 import seedu.command.ChangeSemesterCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
