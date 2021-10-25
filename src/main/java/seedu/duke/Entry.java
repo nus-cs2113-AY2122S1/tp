@@ -12,7 +12,6 @@ public class Entry {
     private static final TrainingList trainings = new TrainingList();
     private static final MemberList members = new MemberList();
     private static final AttendanceList attendanceList = new AttendanceList();
-
     /**
      * Returns void. Function is responsible for adding different Tasks to the task list.
      *
@@ -25,6 +24,7 @@ public class Entry {
 
         if (flag == 0) {
             MemberStorage.setupMemberFile(members);
+            AttendanceStorage.setUpAttendanceStorage(attendanceList);
         }
 
         switch (keyword) {
@@ -60,6 +60,9 @@ public class Entry {
             break;
         case FIND_TRAINING_KEYWORD:
             Parser.findInTraining(trainings, entry);
+            break;
+        case FIND_ATTENDANCE_KEYWORD:
+            Parser.findInAttendanceEntries(attendanceList, entry);
             break;
         case EDIT_TRAINING_KEYWORD:
             Parser.editTraining(trainings, entry);

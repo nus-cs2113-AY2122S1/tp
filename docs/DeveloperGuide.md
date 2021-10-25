@@ -55,6 +55,48 @@ The *sequence diagram* below shows how various components of the architecture in
 * `deleteMemeber(memberNumber)`: Deletes the member using the index number provided by the user.
 * `writeMemberFile()`: Writes the data to the csv file.
 
+The sections below give more details of each component.
+
+### Attendance component
+**API** : [`Attendance.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/attendance/Attendance.java)
+
+![Attendance Component Diagram](images/AttendanceComponent.png)
+
+The `Attendance` component,
+* instantiates an `Attendance` object comprising of 1 `Member` object and 1 `TrainingSchedule` object.
+* stores inputted `Attendance` objects in a list as an `ArrayList<Attendance>` in `AttendanceList` class.
+* stores the `AttendanceList` object in a csv file with the help of `AttendanceStorage`.
+
+###[Proposed] Storage component 
+#### **Proposed Implementation**
+**API** : ['Storage.java']()
+
+The `Storage` component consists of 3 sub-components, corresponding to `member storage` , `attendance storage` 
+and `training schedule storage`
+
+The `member storage` component,
+* can save members' data in CSV format and read them back into the `MemberList` object 
+* automatically adds to DukeMembers.csv whenever a new member is added to the `MemberList` object.
+* automatically edits to DukeMembers.csv whenever member details are edited in the `MemberList` object.
+* automatically deletes to DukeMembers.csv whenever a member is deleted from the `MemberList` object.
+
+The `attendance storage` component,
+*can save attendance data in CSV format and read them back into the `AttendanceList` object.
+*automatically deletes to AttendanceStorage.csv whenever a member is deleted from the `AttendanceList` object.
+
+The `training schedule` component
+*can save trainings schedules and read them back into the `TrainingList` object. 
+*automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object
+
+**API** : [`Member.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/member/Member.java)
+
+![Member Component Diagram](images/MemberComponent.png)
+
+The `Member` component,
+* instantiates an `MemberList` object comprising of 0 `Member` object.
+* stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
+* stores the `MemberList` object in a csv file with the help of `MemberStorage`.
+
 ## Appendix: Requirements
 ### Product scope
 #### **Target user profile**
