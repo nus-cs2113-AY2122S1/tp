@@ -114,14 +114,13 @@ Examples:
 - `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
 
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
 [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 
 <br>
