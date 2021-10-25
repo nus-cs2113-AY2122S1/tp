@@ -97,7 +97,7 @@ public class Ui {
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "view filter [category, payer, description] [search keyword]");
+                + "view index filter [category, payer, description] [search keyword]");
     }
 
 
