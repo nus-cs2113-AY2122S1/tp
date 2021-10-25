@@ -265,7 +265,7 @@ public class TextUi {
     }
 
     public static void showBudgetDeletedMessage() {
-        System.out.println("Successfully deleted Budget for this month!");
+        System.out.println("Successfully deleted the Budget for this month!");
         System.out.println("Now the budget amount is 0.00!");
         System.out.println(DIVIDER);
     }
