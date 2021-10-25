@@ -15,6 +15,7 @@ public class AddCommandTest {
 
     @Test
     public void addCommand_validData_correctlyConstructed() {
+        eventCatalog.clear();
         final InputStream sysInBackup = System.in;
         ByteArrayInputStream in1 = new ByteArrayInputStream("Birthday barbeque".getBytes());
         System.setIn(in1);
@@ -30,5 +31,6 @@ public class AddCommandTest {
         Command command2 = Parser.parseCommand("delete all");
         command2.execute();
         System.setIn(sysInBackup);
+        eventCatalog.clear();
     }
 }
