@@ -106,7 +106,6 @@ public class Ui {
             + "# 8. Adding Ingredient Limit : 'add ingr limit [ingrName]' followed by '[weight in KG]'            "
             + "            #" + System.lineSeparator()
             + "# 9. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                              "
-            + "            #" + System.lineSeparator()
             + "# 10. Deleting an Ingredient : 'del ingr [ingrName]'                                               "
             + "            #" + System.lineSeparator()
             + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
@@ -118,10 +117,9 @@ public class Ui {
             + "# 14. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
             + "            #" + System.lineSeparator()
             + "# 15. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "# 16. View full list of commands and examples: 'help'                                              "
             + "            #" + System.lineSeparator()
-            + "# 14. View full list of commands and examples: 'help'                                              "
-            + "            #" + System.lineSeparator()
-            + "# 15. Exiting the program: 'bye'                                                                   "
+            + "# 17. Exiting the program: 'bye'                                                                   "
             + "            #" + System.lineSeparator()
             + "###################################################################################################"
             + "#############" + System.lineSeparator()
@@ -560,14 +558,16 @@ public class Ui {
         assert name != null : "name cannot be null";
         assert wastage != -1 : "wastage cannot be negative";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + name + " is now " + wastage + " kg" + System.lineSeparator()
+                + "Wastage of " + name + " is now " + wastage + " kg" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printStorage(String name, double storage) {
         assert name != null : "name cannot be null";
         assert storage != -1 : "storage cannot be negative";
-        System.out.println("Storage of " + name + " is now " + storage + " kg");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Storage of " + name + " is now " + storage + " kg" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void clearTerminalAndPrintNewPage() {

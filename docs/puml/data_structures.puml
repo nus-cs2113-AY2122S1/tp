@@ -1,4 +1,8 @@
 @startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
 class seedu.duke.IngredientList {
 + {static} ArrayList<Ingredient> ingredientList
 - {static} Ui ui
