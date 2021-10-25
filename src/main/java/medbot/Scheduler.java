@@ -29,6 +29,10 @@ public class Scheduler {
         return medicalStaffList;
     }
 
+    public SchedulerAppointmentList getSchedulerAppointmentList() {
+        return schedulerAppointmentList;
+    }
+
     public String listAllAppointments() {
         return schedulerAppointmentList.listAppointments();
     }

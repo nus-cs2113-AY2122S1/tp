@@ -1,10 +1,14 @@
 package medbot.list;
 
 import java.util.HashMap;
+
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
+import medbot.person.Person;
 
-public class SchedulerAppointmentList {
+import static medbot.ui.Ui.END_LINE;
+
+public class SchedulerAppointmentList extends MedBotList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
@@ -100,7 +104,36 @@ public class SchedulerAppointmentList {
         return output;
     }
 
+    /**
+     * Get storageString for all appointments.
+     *
+     * @return storageString of all appointments
+     */
+    @Override
+    public String getStorageString() {
+        String output = "";
+        for (int key : appointments.keySet()) {
+            Appointment appointment = appointments.get(key);
+            String appointmentStorageString = appointment.getStorageString();
+            output += appointmentStorageString + END_LINE;
+        }
+        return output;
+    }
+
+    @Override
+    public void addListItemFromStorage(ListItem appointmentItem) {
+        Appointment appointment = (Appointment) appointmentItem;
+        int appointmentId = appointment.getId();
+        appointments.put(appointmentId, appointment);
+    }
+
+    @Override
     public void setLastId(int lastId) {
         this.lastId = lastId;
+    }
+
+    @Override
+    public int getLastId() {
+        return lastId;
     }
 }

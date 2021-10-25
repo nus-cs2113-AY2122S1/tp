@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
@@ -80,7 +81,7 @@ public abstract class ParserUtils {
      * @param attributeString String containing an attribute specifier and the corresponding appointment information
      * @throws MedBotParserException if the attributeString contains missing/invalid information
      */
-    private static void updateAppointmentInformation(Appointment appointment, String attributeString)
+    public static void updateAppointmentInformation(Appointment appointment, String attributeString)
             throws MedBotParserException {
         if (attributeString.startsWith(PARAMETER_APPOINTMENT_PATIENT_ID)) {
             int patientId = parseId(attributeString.substring(PARAMETER_BUFFER));

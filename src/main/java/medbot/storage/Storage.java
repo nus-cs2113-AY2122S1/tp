@@ -78,17 +78,18 @@ public abstract class Storage {
     }
 
 
-    protected void addListItemFromStorageLine(
-            ListItemType listItemType, String storageLine,
-            MedBotList medBotList) throws MedBotException {
+    protected void addListItemFromStorageLine(ListItemType listItemType, String storageLine, MedBotList medBotList)
+            throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
         medBotList.addListItemFromStorage(listItem);
         setListItemIdAsLastId(listItem, medBotList);
     }
 
     void setListItemIdAsLastId(ListItem listItem, MedBotList medBotList) {
-        int lastId = listItem.getId();
-        medBotList.setLastId(lastId);
+        int listItemId = listItem.getId();
+        if (medBotList.getLastId() < listItemId) {
+            medBotList.setLastId(listItemId);
+        }
     }
 
 
