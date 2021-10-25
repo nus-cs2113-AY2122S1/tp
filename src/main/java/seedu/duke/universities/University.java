@@ -29,10 +29,6 @@ public class University implements Comparator<University> {
         this.list = list;
     }
 
-//    public void addMapping(Module localModule, Module mappedModule) {
-//        list.add(new ModuleMapping(localModule, mappedModule));
-//    }
-
     public void addMapping(ModuleMapping moduleMapping) {
         list.add(moduleMapping);
     }
@@ -40,10 +36,6 @@ public class University implements Comparator<University> {
     public void removeMapping(ModuleMapping moduleMapping) {
         list.remove(moduleMapping);
     }
-
-//    public void removeMapping(Module localModule, Module mappedModule) {
-//        list.remove(new ModuleMapping(localModule, mappedModule));
-//    }
 
     public void clearMappings() {
         list = new ArrayList<>();
@@ -73,6 +65,7 @@ public class University implements Comparator<University> {
         }
         return selectedMappings;
     }
+
     public int getSelectedMappingListSize(ModuleList selectedModuleList) {
         return getSelectedMappings(selectedModuleList).size();
     }
