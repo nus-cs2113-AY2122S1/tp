@@ -1,6 +1,9 @@
 package seedu.typists.parser;
 
+import seedu.typists.ui.TextUi;
+
 public class CommandFactory {
+    TextUi ui = new TextUi();
 
     public Command getCommand(String commandType) {
         switch (commandType) {
@@ -9,14 +12,13 @@ public class CommandFactory {
         case "word":
             return new WordGameCommand();
         case "content":
-            // return something
-            return null;
+            return new ContentCommand();
         case "error":
-            //something
+            return new ErrorCommand();
         case "bye":
             return new ExitCommand();
         default:
-            System.out.println("invalid command");
+            ui.printScreen("invalid command");
             return null;
         }
     }
