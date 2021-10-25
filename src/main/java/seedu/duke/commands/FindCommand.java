@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class FindCommand extends Command {
 
-    private final static int MAX_SIZE = Duke.eventCatalog.size();
+    private static final int MAX_SIZE = Duke.eventCatalog.size();
 
     private static String keyword;
     private static Event[] filteredList = new Event[MAX_SIZE];
