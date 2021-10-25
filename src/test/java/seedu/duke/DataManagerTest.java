@@ -5,6 +5,7 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.utility.BudgetManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Parser;
@@ -17,28 +18,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DataManagerTest {
 
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+
     @Test
-    public void save_validEntries_correctFileContent() {
+    public void save_validEntries_correctDataFileContent() {
         FinancialTracker financialTracker = new FinancialTracker();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
         financialTracker.addExpense(new Expense("qwe", .5, ExpenseCategory.FOOD, date));
         financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.ALLOWANCE, date));
         financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.ALLOWANCE, date));
-        DataManager dataManager = new DataManager();
         Parser parser = new Parser();
         Ui ui = new Ui();
-        dataManager.save(parser, financialTracker, ui);
+        BudgetManager budgetManager = new BudgetManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        dataManager.saveEntries();
     }
 
     @Test
-    public void load_validFileContent_correctEntries() {
-        save_validEntries_correctFileContent();
+    public void load_validDataFileContent_correctEntries() {
+        save_validEntries_correctDataFileContent();
         Parser parser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
-        DataManager dataManager = new DataManager();
-        dataManager.load(parser, financialTracker, ui);
+        BudgetManager budgetManager = new BudgetManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        dataManager.loadEntries();
         assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
         assertEquals(ExpenseCategory.FOOD, financialTracker.getExpenses().get(0).getCategory());
@@ -54,16 +59,17 @@ public class DataManagerTest {
     }
 
     @Test
-    public void load_invalidFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
+    public void load_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
         FinancialTracker financialTracker = new FinancialTracker();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
         financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.ALLOWANCE, date));
         financialTracker.addIncome(new Income("", 12.5, IncomeCategory.ALLOWANCE, date));
-        DataManager dataManager = new DataManager();
         Ui ui = new Ui();
         Parser parser = new Parser();
-        dataManager.save(parser, financialTracker, ui);
-        dataManager.load(parser, financialTracker, ui);
+        BudgetManager budgetManager = new BudgetManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        dataManager.saveEntries();
+        dataManager.loadEntries();
     }
 }
