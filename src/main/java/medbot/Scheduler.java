@@ -80,7 +80,7 @@ public class Scheduler {
      * @throws MedBotException if there is no staff with that id
      */
     public void editStaff(int staffId, Person newStaffData) throws MedBotException {
-        patientList.editPerson(staffId, newStaffData);
+        medicalStaffList.editPerson(staffId, newStaffData);
     }
 
     /**
@@ -100,7 +100,7 @@ public class Scheduler {
      * @throws MedBotException if there is no staff with that id
      */
     public void deleteStaff(int staffId) throws MedBotException {
-        patientList.deletePerson(staffId);
+        medicalStaffList.deletePerson(staffId);
     }
 
     /**
