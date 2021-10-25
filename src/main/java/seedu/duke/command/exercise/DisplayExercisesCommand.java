@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
 
-    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD
+            + ": Displays all exercises in the particular workout.\n"
             + "Format: display [Workout index]\n"
             + "Parameters:\n"
             + "\tWorkout index - index of workout to display exercises\n"
