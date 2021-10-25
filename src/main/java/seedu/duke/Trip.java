@@ -89,8 +89,11 @@ public class Trip {
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
         boolean areThereExpenses = false;
+        String descriptionToLowerCase;
+        String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
-            if (e.getPayer().getName().equalsIgnoreCase(expenseAttribute)) {
+            descriptionToLowerCase = e.getDescription().toLowerCase();
+            if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 areThereExpenses = true;

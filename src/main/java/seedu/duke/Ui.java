@@ -94,12 +94,13 @@ public class Ui {
                 + System.lineSeparator()
                 + "expense [amount] [category] [people] /[description].");
     }
+
     //todo pls check this
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
                 + "view filter [category, payer, description, person] [search keyword]");
-                //+ "view [filter, index] [number (for index), category, payer, description] [search keyword]");
+        //+ "view [filter, index] [number (for index), category, payer, description] [search keyword]");
 
     }
 
