@@ -84,6 +84,7 @@ public class TimetableUI {
             infoLine += addInfoToString(timetableItem,prevTimetableItem, type);
             prevTimetableItem = timetableItem;
         }
+        System.out.println(infoLine);
     }
 
     private static String addHeader(String day, LineType type) {

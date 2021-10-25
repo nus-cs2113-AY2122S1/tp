@@ -1,7 +1,5 @@
 package seedu.module;
 
-import com.google.gson.annotations.JsonAdapter;
-
 import java.util.ArrayList;
 import java.util.Date;
 

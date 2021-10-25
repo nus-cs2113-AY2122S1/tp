@@ -2,6 +2,7 @@ package seedu.parser;
 
 import seedu.command.AddCommand;
 import seedu.command.CalculateCapCommand;
+import seedu.command.ChangeSemesterCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -37,7 +38,13 @@ public class CommandParser {
     private String gradeType = "";
     public static boolean isErrorThrown = false;
 
-
+    /**
+     * Parses user input into different Command objects depending on the input.
+     *
+     * @param text User input.
+     * @param timetable Timetable object for timetable commands.
+     * @return command A Command object which class depends on the input.
+     */
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
         text = text.trim();
@@ -69,6 +76,8 @@ public class CommandParser {
             command = new CalculateCapCommand();
         } else if (lowerCaseText.startsWith("remove")) {
             command = parseRemoveCommand(text);
+        } else if (lowerCaseText.startsWith("semester")) {
+            command = new ChangeSemesterCommand(timetable);
         } else {
             command = new InvalidCommand();
         }
