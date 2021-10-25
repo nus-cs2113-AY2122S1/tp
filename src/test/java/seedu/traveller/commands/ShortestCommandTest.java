@@ -9,9 +9,10 @@ public class ShortestCommandTest {
     @Test
     public void shortestCommand_create_success() {
         final String expectedOutput = "Shortest command: "
+                + "\n\tdistOrCost: dist"
                 + "\n\tstartCountry: CHN"
                 + "\n\tendCountry: SIN";
-        ShortestCommand shortestCommand = new ShortestCommand("CHN", "SIN");
+        ShortestCommand shortestCommand = new ShortestCommand("dist", "CHN", "SIN");
         assertEquals(expectedOutput, shortestCommand.toString());
     }
 }

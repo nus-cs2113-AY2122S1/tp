@@ -72,8 +72,11 @@ public class Parser {
             case "view":
                 command = parseViewCommand(userInput[1]);
                 break;
-            case "shortest":
-                command = parseShortestCommand(userInput[1]);
+            case "shortest-dist":
+                command = parseShortestDistCommand(userInput[1]);
+                break;
+            case "shortest-cost":
+                command = parseShortestCostCommand(userInput[1]);
                 break;
             case "search-item":
                 command = parseSearchItemCommand(userInput[1]);
@@ -339,7 +342,7 @@ public class Parser {
      * @return Command A <code>ShortestCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseShortestCommand(String userInput) throws TravellerException {
+    private static Command parseShortestDistCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
@@ -349,7 +352,30 @@ public class Parser {
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
-            command = new ShortestCommand(startCountryCode, endCountryCode);
+            command = new ShortestCommand("dist", startCountryCode, endCountryCode);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidSearchFormatException();
+        }
+        return command;
+    }
+
+    /**
+     * Parses user input to give a <code>ShortestCommand</code>.
+     * @param userInput Raw user input, with the first command option (search) removed.
+     * @return Command A <code>ShortestCommand</code> object.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
+    private static Command parseShortestCostCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Search command input");
+        Command command;
+        try {
+            String toSeparator = " /to ";
+            int toIdx = userInput.indexOf(toSeparator);
+            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+            assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
+            assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
+            command = new ShortestCommand("cost", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchFormatException();
         }

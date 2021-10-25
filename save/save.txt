@@ -9,6 +9,7 @@ view trip1
 edit-item trip1 /day 1 /time 9am /name later breakfast /index 1
 view trip1
 search-item trip1 /day 1 /key n
-shortest /from SIN /to JPN
+shortest-cost /from SIN /to JPN
+shortest-dist /from SIN /to JPN
 edit-map /from SIN /to MLY /dist 2.0
-shortest /from SIN /to JPN
+shortest-dist /from SIN /to JPN

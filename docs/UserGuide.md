@@ -289,31 +289,31 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-### 2.12. Shortest: `shortest`
+### 2.12. Shortest distance: `shortest-dist`
 Returns the shortest distance from the source to destination country.
 
-#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+#### Format: `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
 #### Usage Example:
 ```
 ____________________________________________________________
-$ shortest /from SKR /to JPN
+$ shortest-dist /from SIN /to JPN
 ____________________________________________________________
-	The distance from SKR to JPN is 10.0.
+	The shortest distance from SIN to JPN is 6.0.
 ____________________________________________________________
 ```
 
-### 2.13. Shortest: `shortest`
-Returns the shortest distance from the source to destination country.
+### 2.13. Least cost: `shortest-cost`
+Returns the least expensive flight path from the source to destination country.
 
-#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+#### Format: `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
 #### Usage Example:
 ```
 ____________________________________________________________
-$ shortest /from SKR /to JPN
+$ shortest-cost /from SIN /to JPN
 ____________________________________________________________
-	The distance from SKR to JPN is 10.0.
+	The least cost from SIN to JPN is 550.0.
 ____________________________________________________________
 ```
 
