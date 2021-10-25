@@ -160,7 +160,7 @@ public class GoalList {
     }
 
     /**
-     * Marks Progress for a goal as done
+     * Marks Progress for a goal as done.
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
@@ -243,9 +243,9 @@ public class GoalList {
      * Changes interval of a habit previously set by the user.
      * Need to check and update habitDate as well when executing this command.
      *
-     * @param goalIndex
-     * @param habitIndex
-     * @param newInterval
+     * @param goalIndex Integer of goal index habit to update is under
+     * @param habitIndex Integer of habit index of habit to update
+     * @param newInterval Integer of new interval uses wishes to set
      */
     public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
         // To be implemented

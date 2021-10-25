@@ -46,7 +46,7 @@ public class Habit {
      * @param habitDate Date parameter storing last date for Habit
      */
     public Habit(String habitName,  Date habitDate, int interval,
-                 HashMap<Date, Progress> progressHashMap ) {
+                 HashMap<Date, Progress> progressHashMap) {
         this.habitName = habitName;
         this.habitDate = habitDate;
         this.interval = interval;
@@ -124,7 +124,7 @@ public class Habit {
     }
 
     /**
-     * Sets a new interval for the specified habit
+     * Sets a new interval for the specified habit.
      *
      * @param interval Integer value of the new interval user wishes to have
      */

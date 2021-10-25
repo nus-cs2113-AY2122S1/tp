@@ -162,7 +162,7 @@ public class PrintManager {
         String intervalPrint = "";
         int habitIntervals = habit.getInterval();
         if (habitIntervals > 0) {
-            intervalPrint ="(every " + habit.getInterval() + " day(s))";
+            intervalPrint = "(every " + habit.getInterval() + " day(s))";
         }
         // String intervalPrint = "(every " + habit.getInterval() + " days)";
         String lastHabitDatePrint = habit.getHabitDateString();

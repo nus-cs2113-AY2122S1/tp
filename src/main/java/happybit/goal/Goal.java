@@ -133,7 +133,7 @@ public class Goal {
      * Adds a habit to the current goal.
      * From storage, no need to addProgress() as progress obtained from storage.
      *
-     * @param habit
+     * @param habit Habit being added to habitList
      */
     public void addHabitFromStorage(Habit habit) {
         habitList.add(habit);
