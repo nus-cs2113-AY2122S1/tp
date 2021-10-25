@@ -1,10 +1,8 @@
 package seedu.duke.items.mainlists;
 
-import seedu.duke.items.Event;
 import seedu.duke.items.characteristics.Member;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MemberRoster extends ArrayList<Member> {
 
@@ -20,7 +18,7 @@ public class MemberRoster extends ArrayList<Member> {
         return memberRoster;
     }
 
-    public static void sortRoster() {
-        Collections.sort(memberRoster, Member.NameComparator);
+    public void sortRoster() {
+        memberRoster.sort(Member.NameComparator);
     }
 }

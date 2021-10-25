@@ -37,6 +37,10 @@ public class Member {
         return tasks.toString();
     }
 
+    public void addToAssignedTasks(Task task) {
+        assignedTasks.add(task);
+    }
+
     public void sortTasks() {
         EventCatalog.bubbleSortItems(assignedTasks);
     }
@@ -45,15 +49,11 @@ public class Member {
         this.name = name;
     }
 
-    public static Comparator<Member> NameComparator = new Comparator<Member>() {
+    public static Comparator<Member> NameComparator = (member1, member2) -> {
+        String name1 = member1.getName().toUpperCase();
+        String name2 = member2.getName().toUpperCase();
 
-        @Override
-        public int compare(Member m1, Member m2) {
-            String name1 = m1.getName().toUpperCase();
-            String name2 = m2.getName().toUpperCase();
-
-            return name1.compareTo(name2);
-        }
+        return name1.compareTo(name2);
     };
 
     @Override
