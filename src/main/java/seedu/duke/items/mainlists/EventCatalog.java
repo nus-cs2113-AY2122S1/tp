@@ -39,8 +39,8 @@ public class EventCatalog extends ArrayList<Event> {
     }
 
     public void sortCatalog() {
-        bubbleSortItems(eventCatalog);
-        for (Event event : eventCatalog) {
+        bubbleSortItems(theOne);
+        for (Event event : theOne) {
             bubbleSortItems(event.getTaskList());
         }
     }

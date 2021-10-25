@@ -1,28 +1,49 @@
 package seedu.duke.commands;
 
-import seedu.duke.parser.Parser;
+import seedu.duke.Duke;
 import seedu.duke.Ui;
-import seedu.duke.items.Event;
-import seedu.duke.items.mainlists.EventCatalog;
-import seedu.duke.items.Item;
-import seedu.duke.items.Task;
 
-import java.util.ArrayList;
 
 public class NextCommand extends Command {
-    public static ArrayList<Item> sortedList = new ArrayList<>();
+    protected static String nextItem;
+    protected static String[] userCommand;
 
-    public NextCommand() {
+    public NextCommand(String[] command) {
+        userCommand = command;
+        if (command.length < 2 || command.length > 3) {
+            nextCommandErrorMessage();
+            nextItem = "others";
+        } else {
+            nextItem = command[1];
+        }
+    }
+
+    private void nextCommandErrorMessage() {
+        System.out.println("please follow the correct format"
+                + System.lineSeparator()
+                + "next event : View details of the upcoming events"
+                + System.lineSeparator()
+                + "next task [Event index]: View details of the task with the closest deadline in a particular "
+                + "event"
+                + System.lineSeparator()
+                + Ui.getLineBreak());
     }
 
     public CommandResult execute() {
-        sortedList = Parser.makeMainList();
-        EventCatalog.bubbleSortItems(sortedList);
-        Item nextItem = sortedList.get(0);
-        if (nextItem.getItemType().equalsIgnoreCase("task")) {
-            Ui.printTask((Task) nextItem);
-        } else if (nextItem.getItemType().equalsIgnoreCase("event")) {
-            Ui.printEvent((Event) nextItem);
+
+        try {
+            if (nextItem.equalsIgnoreCase("task")) {
+                if (userCommand.length != 3) {
+                    nextCommandErrorMessage();
+                }
+                Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2]) - 1).getFromTaskList(0));
+            } else if (nextItem.equalsIgnoreCase("event")) {
+                Ui.printEvent((Duke.eventCatalog.get(0)));
+            }
+        } catch (NumberFormatException e) {
+            nextCommandErrorMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return new CommandResult("This Event has no tasks!");
         }
         return new CommandResult("Hope you have prepared everything!");
     }

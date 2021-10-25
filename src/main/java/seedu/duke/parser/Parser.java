@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class Parser {
     protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
+    private static int indexOfLastSelectedEvent = -1;
 
     public static Command parseCommand(String response) {
         String[] command = response.split(" ", 10);
@@ -48,7 +49,7 @@ public class Parser {
         case "update":
             return new UpdateCommand(command);
         case "next":
-            return new NextCommand();
+            return new NextCommand(command);
         default:
             System.out.println("Im sorry i did not catch that maybe these instructions below will help"
                     + System.lineSeparator() /*+ ui.lineBreak*/);
@@ -73,5 +74,21 @@ public class Parser {
         sortedList.addAll(Duke.eventCatalog);
         sortedList.addAll(Duke.taskList);
         return sortedList;
+    }
+
+    public static void updateIndexOfLastSelectedEvent(int index) {
+        indexOfLastSelectedEvent = index;
+    }
+
+    public static int getIndexOfLastSelectedEvent() {
+        return indexOfLastSelectedEvent;
+    }
+
+    public static void updateIndexToNoEventSelected() {
+        updateIndexOfLastSelectedEvent(-1);
+    }
+
+    public static boolean noEventSelected() {
+        return getIndexOfLastSelectedEvent() == -1;
     }
 }

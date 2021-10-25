@@ -1,69 +1,129 @@
 package seedu.duke.commands;
 
+import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.parser.Parser;
 
-
-// meant to be used after FindCommand, where the user can view the details of a specific item
-// this class assumes that there were no exceptions thrown while using FindCommand and that at least one item
-// was found in FindCommand
-
-//                        filteredItemList
-// FindCommand(keyword) --------------------> SelectCommand(index)
 public class SelectCommand extends Command {
 
-    protected int itemIndex;
+    protected static final String EVENT_FLAG = "-e";
+    protected static final String TASK_FLAG = "-t";
 
-    // eg select 1
+    private String itemFlag;
+    private int eventIndexToSelect;
+    private int taskIndexToSelect;
+
+    private static boolean isCorrectFormat;
+
     public SelectCommand(String[] command) {
+        isCorrectFormat = true;
         try {
-            itemIndex = getItemIndex(command);
+            if (command.length == 1) {
+                throw new DukeException("Please specify what you wish to select.");
+            }
+            itemFlag = command[1].trim().toLowerCase();
+            if (isValidFlag(itemFlag)) {
+                prepareInputs(command);
+            } else {
+                throw new DukeException("Invalid item flag entered. Please specify event '-e' "
+                        + "or task '-t'.");
+            }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            isCorrectFormat = false;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a number for the item index!");
+            isCorrectFormat = false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("No such item index exists!");
+            isCorrectFormat = false;
         }
     }
 
     public CommandResult execute() {
-        try {
-            Item selectedItem = getItemFromIndex(itemIndex);
-            if (isTask(selectedItem)) {
-                return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
-            } else if (isEvent(selectedItem)) {
-                return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
+        if (!isCorrectFormat) {
+            return new CommandResult("Try again!");
+        }
+
+        Item selectedItem;
+        if (isEventFlag(itemFlag)) {
+            selectedItem = getEventFromIndex(eventIndexToSelect);
+            return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
+        } else if (isTaskFlag(itemFlag)) {
+            if (Parser.getIndexOfLastSelectedEvent() == -1) {
+                return new CommandResult("Please select an event first!");
             }
-        } catch (DukeException e) {
-            return new CommandResult(e.getMessage());
+            eventIndexToSelect = Parser.getIndexOfLastSelectedEvent();
+            selectedItem = getTaskFromEventIndex(eventIndexToSelect, taskIndexToSelect);
+            return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
         }
-        return new CommandResult("I can't select the item you want!");
+        return new CommandResult("Insert something here.");
     }
 
-    private Item getItemFromIndex(int index) throws DukeException {
-        if (FindCommand.filteredItemList.isEmpty()) {
-            throw new DukeException("Search for some items first, then select the item you want.");
+    private void prepareInputs(String[] command) throws DukeException {
+        if (command.length == 2) {
+            throw new DukeException("Please give me the index of the event you wish to select!");
         }
-        return FindCommand.filteredItemList.get(index);
-    }
-
-    private int getItemIndex(String[] command) throws DukeException {
-        int itemIndex = 0;
-        try {
-            itemIndex = Integer.parseInt(command[1]) - 1;
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter the numeric index of the item you wish to select.");
+        if (!isValidFlag(itemFlag)) {
+            throw new DukeException("Invalid item flag!");
         }
-        return itemIndex;
+        int index = getIndexFromCommand(command[2]);
+        if (isEventFlag(itemFlag)) {
+            if (!isValidEventIndex(index)) {
+                throw new DukeException("Invalid event index!");
+            }
+            eventIndexToSelect = index;
+            Parser.updateIndexOfLastSelectedEvent(index);
+        } else {
+            if (Parser.noEventSelected()) {
+                throw new DukeException("Select an event first!");
+            }
+            if (!isValidTaskIndex(Parser.getIndexOfLastSelectedEvent(), index)) {
+                throw new DukeException("Invalid task index!");
+            }
+            taskIndexToSelect = index;
+        }
     }
 
-    private boolean isEvent(Item selectedItem) {
-        String type = selectedItem.getItemType();
-        return type.equalsIgnoreCase("event");
+    private boolean isValidFlag(String flag) {
+        return isTaskFlag(flag) || isEventFlag(flag);
     }
 
-    private boolean isTask(Item selectedItem) {
-        String type = selectedItem.getItemType();
-        return type.equalsIgnoreCase("task");
+    private static boolean isTaskFlag(String flag) {
+        return flag.trim().equalsIgnoreCase(TASK_FLAG);
+    }
+
+    private static boolean isEventFlag(String flag) {
+        return flag.trim().equalsIgnoreCase(EVENT_FLAG);
+    }
+
+    private static int getIndexFromCommand(String indexAsString) {
+        return Integer.parseInt(indexAsString.trim()) - 1;
+    }
+
+    private static boolean isValidEventIndex(int eventIndex) {
+        if (eventIndex < 0 || eventIndex > Duke.eventCatalog.size()) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidTaskIndex(int eventIndex, int taskIndex) {
+        if (taskIndex < 0 || taskIndex > Duke.eventCatalog.get(eventIndex).getTaskList().size()) {
+            return false;
+        }
+        return true;
+    }
+
+    private static Event getEventFromIndex(int eventIndex) {
+        return Duke.eventCatalog.get(eventIndex);
+    }
+
+    private Task getTaskFromEventIndex(int eventIndex, int taskIndex) {
+        return Duke.eventCatalog.get(eventIndex).getFromTaskList(taskIndex);
     }
 }

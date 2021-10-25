@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class Member {
 
     private String name;
-    private ArrayList<Task> assignedTasks;
+    private ArrayList<Task> assignedTasks = new ArrayList<>();
+    public static final String MEMBER_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
+
 
     public Member(String name) {
         this.name = name;
@@ -36,6 +38,10 @@ public class Member {
 
     public void sortTasks() {
         EventCatalog.bubbleSortItems(assignedTasks);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
