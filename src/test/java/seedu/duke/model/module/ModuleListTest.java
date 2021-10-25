@@ -45,4 +45,28 @@ class ModuleListTest {
             new ModuleList().deleteModule(-1);
         });
     }
+
+    @Test
+    public void calculateCap_gradeWithValidGradePoint_expectedCap() {
+        ModuleList moduleList = new ModuleList();
+        Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
+        Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
+        moduleList.addModule(module1);
+        moduleList.addModule(module2);
+        module1.setGrade(Grade.A);
+        module2.setGrade(Grade.B);
+        assertEquals(4.25, moduleList.calculateCap());
+    }
+
+    @Test
+    public void calculateCap_gradeWithoutValidGradePoint_defaultCap() {
+        ModuleList moduleList = new ModuleList();
+        Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
+        Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
+        moduleList.addModule(module1);
+        moduleList.addModule(module2);
+        module1.setGrade(Grade.S);
+        module2.setGrade(Grade.NONE);
+        assertEquals(-1, moduleList.calculateCap());
+    }
 }

@@ -3,6 +3,7 @@ package seedu.duke.logic.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
+import seedu.duke.logic.commands.module.SetGradeCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.DukeException;
@@ -78,6 +79,29 @@ public class ParserTest {
     @Test
     public void parseListModule_invalidArgument_exceptionThrown() {
         String userResponse = "list module lol";
+        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    }
+
+    @Test
+    public void testSetGrade() {
+        String userResponse = "set grade 1 b";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof SetGradeCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void setGrade_indexNotANumber_exceptionThrown() {
+        String userResponse = "set grade n m";
+        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    }
+
+    @Test
+    public void setGrade_missingArgument_exceptionThrown() {
+        String userResponse = "set grade 1";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 }
