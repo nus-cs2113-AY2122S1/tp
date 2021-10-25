@@ -20,7 +20,7 @@ public class SummaryUI {
     public static void displaySummary(HashMap<String, Object> summary) {
         assert summary.containsKey("timeElapsed");
         assert summary.containsKey("gameMode");
-        assert summary.containsKey("WPM");
+        assert summary.containsKey("wordsPerMinute");
         assert summary.containsKey("errorWordCount");
         assert summary.containsKey("correctWordCount");
         assert summary.containsKey("totalWordCount");
@@ -31,8 +31,8 @@ public class SummaryUI {
 
         assert summary.get("timeElapsed") instanceof Double;
         assert summary.get("gameMode") instanceof String;
-        assert summary.get("WPM") instanceof Double;
-        printOverview((Double) summary.get("timeElapsed"), (String) summary.get("gameMode"), (Double) summary.get("WPM"));
+        assert summary.get("wordsPerMinute") instanceof Double;
+        printOverview((Double) summary.get("timeElapsed"), (String) summary.get("gameMode"), (Double) summary.get("wordsPerMinute"));
         assert summary.get("errorWordCount") instanceof Integer;
         assert summary.get("errorWordPercentage") instanceof Double;
         printErrorStatistics((Integer) summary.get("errorWordCount"), (Double) summary.get("errorWordPercentage"), (Integer) summary.get("totalWordCount"));
