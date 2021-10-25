@@ -288,7 +288,7 @@ class ParserTest {
         testCases.put("delete 1", new DeletePatientCommand(1));
         testCases.put("find n/name", new FindPatientCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewPatientCommand(1));
-        testCases.put("list", new ListPatientCommand());
+        testCases.put("list", new ListPatientCommand(false));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {
@@ -315,7 +315,7 @@ class ParserTest {
         testCases.put("delete 1", new DeleteStaffCommand(1));
         testCases.put("find n/name", new FindStaffCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewStaffCommand(1));
-        testCases.put("list", new ListStaffCommand());
+        testCases.put("list", new ListStaffCommand(false));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {

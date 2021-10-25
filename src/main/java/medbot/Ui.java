@@ -134,7 +134,7 @@ public class Ui {
      */
     public String getAllPatientsString(PersonList patientList) {
         String output = getPatientTableHeader();
-        output += patientList.listPersons();
+        output += patientList.listPersons(false);
         output += getPatientTableRowSeparator();
 
         return output;

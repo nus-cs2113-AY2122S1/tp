@@ -47,8 +47,8 @@ public abstract class PatientCommandParser {
         if (userInput.startsWith(COMMAND_VIEW)) {
             return parseViewPatientCommand(userInput);
         }
-        if (userInput.equals(COMMAND_LIST)) {
-            return new ListPatientCommand();
+        if (userInput.startsWith(COMMAND_LIST)) {
+            return parseListPatientCommand(userInput);
         }
         if (userInput.startsWith(COMMAND_EDIT)) {
             return parseEditPatientCommand(userInput);
@@ -105,6 +105,17 @@ public abstract class PatientCommandParser {
         patient.setNull();
         ParserUtils.updateMultiplePersonalInformation(patient, parameters);
         return new EditPatientCommand(patientId, patient);
+    }
+
+    /**
+     * Parses user input and returns ListPatientCommand with the parameter to retrieve archived or unarchived patients.
+     *
+     * @param userInput String containing the full user input.
+     * @return ListPatientCommand object.
+     */
+    private static ListPatientCommand parseListPatientCommand(String userInput) throws MedBotParserException {
+        boolean getArchivedPersons = ParserUtils.parseListParameter(userInput.substring(4));
+        return new ListPatientCommand(getArchivedPersons);
     }
 
     /**

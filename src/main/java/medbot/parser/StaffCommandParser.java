@@ -47,8 +47,8 @@ public abstract class StaffCommandParser {
         if (userInput.startsWith(COMMAND_VIEW)) {
             return parseViewStaffCommand(userInput);
         }
-        if (userInput.equals(COMMAND_LIST)) {
-            return new ListStaffCommand();
+        if (userInput.startsWith(COMMAND_LIST)) {
+            return parseListStaffCommand(userInput);
         }
         if (userInput.startsWith(COMMAND_EDIT)) {
             return parseEditStaffCommand(userInput);
@@ -108,6 +108,17 @@ public abstract class StaffCommandParser {
     }
 
     /**
+     * Parses user input and returns ListPatientCommand with the parameter to retrieve archived or unarchived patients.
+     *
+     * @param userInput String containing the full user input.
+     * @return ListPatientCommand object.
+     */
+    private static ListStaffCommand parseListStaffCommand(String userInput) throws MedBotParserException {
+        boolean getArchivedPersons = ParserUtils.parseListParameter(userInput.substring(4));
+        return new ListStaffCommand(getArchivedPersons);
+    }
+
+    /**
      * Parses user input and returns AddStaffCommand with the specified parameters.
      *
      * @param userInput String containing the full user input.
@@ -149,4 +160,5 @@ public abstract class StaffCommandParser {
         int personId = ParserUtils.parseId(userInput.substring(9));
         return new UnarchiveStaffCommand(personId);
     }
+
 }
