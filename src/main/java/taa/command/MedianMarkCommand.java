@@ -100,13 +100,13 @@ public class MedianMarkCommand extends Command {
                 unmarkedStudents += 1;
             }
         }
+        int medianCutOff = (int) Math.round(((classSize - unmarkedStudents) / 2) + unmarkedStudents);
         List<Map.Entry<Student, Double>> list = new LinkedList<>(unsortedResults.entrySet());
         list.sort(Map.Entry.comparingByValue());
         HashMap<Student, Double> sortedResults = new LinkedHashMap<>();
         for (Map.Entry<Student, Double> item : list) {
             sortedResults.put(item.getKey(), item.getValue());
         }
-        int medianCutOff = (int) Math.round(((classSize - unmarkedStudents) / 2) + unmarkedStudents);
         for (Map.Entry<Student, Double> entry : sortedResults.entrySet()) {
             if (printIterator == medianCutOff) {
                 median = entry.getValue();
