@@ -1,6 +1,11 @@
 new trip1 /from SIN /to MLY
 add-day trip1 /day 3
-add-item trip1 /day 0 /time 10pm /name breakfast
-add-item trip1 /day 1 /time 9pm /name breakfast
-edit-item trip1 /day 1 /time 5pm /name dinner /index 1
+add-item trip1 /day 0 /time 10am /name extra space bug fix me
+add-item trip1 /day 1 /time 8am /name breakfast
+add-item trip1 /day 1 /time 2pm /name lunch
+add-item trip1 /day 1 /time 5pm /name dinner
+add-item trip1 /day 1 /time 9pm /name supper
 view trip1
+edit-item trip1 /day 1 /time 9am /name later breakfast /index 1
+view trip1
+search-item trip1 /day 1 /key n

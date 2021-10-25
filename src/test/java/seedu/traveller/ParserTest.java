@@ -38,7 +38,7 @@ public class ParserTest {
         addDayCommand = new AddDayCommand("trip3", 1);
 
         addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
-        searchItemCommand = new SearchItemCommand("trip4", "sleep at home");
+        searchItemCommand = new SearchItemCommand("trip4", 0, "sleep at home");
         editItemCommand = new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
         //deleteItemCommand = new DeleteItemCommand("trip4", "wake up from bed");
 
