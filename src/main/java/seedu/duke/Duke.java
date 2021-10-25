@@ -17,6 +17,7 @@ public class Duke {
         Logger logger = Logger.getLogger("ProgramLogger");
         Storage.setLogger(logger);
 
+        FileStorage.initializeGson();
         Storage.readFromFile();
 
     }
