@@ -1,12 +1,12 @@
 package medbot.parser;
 
+
+import medbot.command.Command;
+import medbot.command.CommandType;
+import medbot.command.ExitCommand;
+import medbot.command.GetCurrentViewCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
-import medbot.command.Command;
-import medbot.command.ExitCommand;
-import medbot.command.CommandType;
-
-
 import medbot.exceptions.MedBotParserException;
 import medbot.utilities.ViewType;
 
@@ -25,6 +25,7 @@ public abstract class Parser {
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_ARCHIVE = "archive";
     private static final String COMMAND_UNARCHIVE = "unarchive";
+    private static final String COMMAND_GET_VIEW = "get view";
 
     private static final String VIEW_TYPE_PATIENT_VIEW = "p";
     private static final String VIEW_TYPE_PATIENT_VIEW_ALT = "1";
@@ -69,6 +70,10 @@ public abstract class Parser {
         }
         if (userInput.startsWith(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
+        }
+
+        if (userInput.startsWith(COMMAND_GET_VIEW)) {
+            return new GetCurrentViewCommand(getViewType());
         }
 
         //commands valid in only some viewTypes

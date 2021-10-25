@@ -88,7 +88,7 @@ public class PatientUi {
 
 
     /**
-     * Prints a message when viewing the profile of a patient.
+     * Returns the profile of a patient.
      *
      * @param patientInfo the Info of the patient to be printed.
      * @return the Patient information
@@ -99,7 +99,7 @@ public class PatientUi {
     }
 
     /**
-     * Prints all patients in a list.
+     * Returns all patients' information in a list.
      *
      * @param patientListString String containing information of all patients.
      * @return all Patients' information.
@@ -111,6 +111,11 @@ public class PatientUi {
         return output;
     }
 
+    /**
+     * Returns the header of the patient information table.
+     *
+     * @return the header of the patient information table.
+     */
     public static String getPatientTableHeader() {
         String output = "Here is a list of all patients:" + END_LINE;
         output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + END_LINE;

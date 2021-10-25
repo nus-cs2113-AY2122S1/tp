@@ -32,8 +32,14 @@ public class SchedulerUi {
     }
 
 
+    /**
+     * Returns a schedule information.
+     *
+     * @param scheduleInfo the Info of the patient to be printed.
+     * @return the Schedule information
+     */
     public static String getScheduleInfo(String scheduleInfo) {
-        return "Here's the requested patient:" + END_LINE + END_LINE
+        return "Here's the requested schedule:" + END_LINE + END_LINE
                 + scheduleInfo + END_LINE;
     }
 
@@ -58,13 +64,13 @@ public class SchedulerUi {
 
     public String getEditScheduleMessage(int scheduleId, String scheduleInfo) {
         assert scheduleId > 0;
-        return "The information of patient with ID " + scheduleId + " has been edited to:" + END_LINE + END_LINE
+        return "The information of schedule with ID " + scheduleId + " has been edited to:" + END_LINE + END_LINE
                 + scheduleInfo + END_LINE;
     }
 
     public String getFindSchedulesMessage(List<String> schedules) {
         if (schedules.size() == 0) {
-            return "There is no patient with such attributes." + END_LINE;
+            return "There is no schedule with such attributes." + END_LINE;
         }
         String output = TABLE_ROW_SEPARATOR;
         for (String patient : schedules) {
