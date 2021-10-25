@@ -25,6 +25,7 @@ import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
 import taa.command.SetAttendanceCommand;
 import taa.command.SetMarksCommand;
+import taa.command.SortByScoresCommand;
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
@@ -131,6 +132,10 @@ public class Parser {
 
         case Command.COMMAND_LIST_MARKS:
             command = new ListMarksCommand(argument);
+            break;
+
+        case Command.COMMAND_SORT_BY_SCORES:
+            command = new SortByScoresCommand(argument);
             break;
 
         default:
