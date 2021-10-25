@@ -1,28 +1,38 @@
 package seedu.duke.command;
+
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
-import seedu.duke.Ui;
 
+/**
+ * Edits a TrainingSchedule located in TrainingList.
+ */
 public class EditTraining {
-    public EditTraining(TrainingList trainings, int index, TrainingSchedule newTraining) {
+
+    /**
+     * Edits a TrainingSchedule in TrainingList. TrainingSchedule is located by index.
+     * @param trainings TrainingList containing all TrainingSchedules.
+     * @param index Index of TrainingSchedule to change. Note that the actual index is index-1.
+     * @param toChange TrainingSchedule containing details to be changed.
+     */
+    public EditTraining(TrainingList trainings, int index, TrainingSchedule toChange) {
         try {
             assert index >= 1;
 
-            TrainingSchedule trainingToChange = trainings.getTrainingList().get(index-1);
+            TrainingSchedule trainingToChange = trainings.getTrainingList().get(index - 1);
 
-            if (!newTraining.getTrainingName().equals("")) {
-                trainingToChange.setTrainingName(newTraining.getTrainingName());
+            if (!toChange.getTrainingName().equals("")) {
+                trainingToChange.setTrainingName(toChange.getTrainingName());
             }
 
-            if (!newTraining.getTrainingTime().equals("")) {
-                trainingToChange.setTrainingTime(newTraining.getTrainingTime());
+            if (!toChange.getTrainingTime().equals("")) {
+                trainingToChange.setTrainingTime(toChange.getTrainingTime());
             }
 
-            if (!newTraining.getTrainingVenue().equals("")) {
-                trainingToChange.setTrainingVenue(newTraining.getTrainingVenue());
+            if (!toChange.getTrainingVenue().equals("")) {
+                trainingToChange.setTrainingVenue(toChange.getTrainingVenue());
             }
 
-            trainings.getTrainingList().set(index-1, trainingToChange);
+            trainings.getTrainingList().set(index - 1, trainingToChange);
             //TODO: Print and Save
 
         } catch (AssertionError e) {

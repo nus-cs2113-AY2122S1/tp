@@ -19,10 +19,10 @@ public class Member {
     /**
      * Constructor for any type of member.
      *
-     * @param name              Name of member
-     * @param studentNumber     Student number of member
-     * @param gender            Gender of student M/F
-     * @param phoneNumber       Phone number of student
+     * @param name          Name of member
+     * @param studentNumber Student number of member
+     * @param gender        Gender of student M/F
+     * @param phoneNumber   Phone number of student
      */
     public Member(String name, String studentNumber, char gender, int phoneNumber) {
         setName(name);
@@ -30,7 +30,7 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-       // setPresentOrAbsent(presentOrAbsent);
+        // setPresentOrAbsent(presentOrAbsent);
     }
 
     public Member() {
@@ -42,7 +42,7 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-       // setPresentOrAbsent(presentOrAbsent);
+        // setPresentOrAbsent(presentOrAbsent);
 
     }
 
@@ -92,8 +92,8 @@ public class Member {
         return isActive;
     }
 
-    public void setAsActiveMember() { 
-        this.isActive = true; 
+    public void setAsActiveMember() {
+        this.isActive = true;
     }
 
     public void setAsInActiveMember() {
@@ -108,10 +108,10 @@ public class Member {
         this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
-   /* public void setPresentOrAbsent(String presentOrAbsent) {
-        this.presentOrAbsent = presentOrAbsent;
-    }
-*/
+    /* public void setPresentOrAbsent(String presentOrAbsent) {
+         this.presentOrAbsent = presentOrAbsent;
+     }
+    */
     public String getName() {
         return name;
     }
@@ -127,11 +127,12 @@ public class Member {
     public int getPhoneNumber() {
         return phoneNumber;
     }
-/*
+    /*
     public String getAttendance() {
         return presentOrAbsent;
     }
-*/
+    */
+
     /**
      * Formats description of member to be displayed to user.
      *
@@ -142,5 +143,5 @@ public class Member {
         return String.format("Name: %s | Student Number: %s | Gender: %c | Phone Number: %d", this.name,
                 this.studentNumber, this.gender, this.phoneNumber);
     }
-  
+
 }
