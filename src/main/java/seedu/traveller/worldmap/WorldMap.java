@@ -17,6 +17,14 @@ public class WorldMap {
         }
     }
 
+    public static void altWorldMap() {
+        try {
+            graphList = loader.readAltData();
+        } catch (WorldMapException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void printWorld() {
         for (String countryCode : graphList.getNameArray()) {
             System.out.print(countryCode + " ");
@@ -48,6 +56,24 @@ public class WorldMap {
         }
         logic.computeSource(sourceCountry, graphList);
         return logic.getToGoal(sourceCountry,targetCountry);
+    }
+
+    public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName) {
+        altWorldMap();
+
+        Country sourceCountry = getCountry(sourceCountryName);
+        Country targetCountry = getCountry(targetCountryName);
+        if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
+            MinCalcResult result = new MinCalcResult(sourceCountry, targetCountry, null, null);
+            result.setError();
+            return result;
+        }
+        logic.computeSource(sourceCountry, graphList);
+        MinCalcResult minResult = logic.getToGoal(sourceCountry,targetCountry);
+
+        initWorldMap();
+
+        return minResult;
     }
 
     public static Country getCountry(String countryName) {

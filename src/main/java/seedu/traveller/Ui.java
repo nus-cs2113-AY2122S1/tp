@@ -98,8 +98,13 @@ public class Ui {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printShortest(String startCountry, String endCountry, double distance) {
-        System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
+    public void printShortestDist(String startCountry, String endCountry, double distance) {
+        System.out.println("\tThe shortest distance from " + startCountry
+                + " to " + endCountry + " is " + distance + ".");
+    }
+
+    public void printShortestCost(String startCountry, String endCountry, double cost) {
+        System.out.println("\tThe least cost from " + startCountry + " to " + endCountry + " is " + cost + ".");
     }
 
     public void printEditMap(String startCountry, String endCountry, double dist) {
