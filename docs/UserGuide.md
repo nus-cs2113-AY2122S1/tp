@@ -19,8 +19,10 @@
     * [Find](#find)
   * [Listing](#listing)
     * [List](#list)
-  * [Deletion](#deletion)
-    * [Delete](#delete)
+  * [Delete](#delete)
+    * [Budget: `-b`](#delete-budget)
+    * [Expenditure: `-e`](#delete-expenditure)
+    * [Loan: `-l`](#delete-loan)
   * [Statistics](#statistics)
     * [Stat](#stat) 
       * [Budget: `-b`](#stat-budget)
@@ -303,42 +305,42 @@ Your expenditures:
 
 Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
 
-### `b/` - Delete a budget 
+### `-b` - Delete a budget 
 
 Deletes the budget of a specific month
 
-Format: `delete b/ m/MONTH`
+Format: `delete -b m/MONTH`
 
 * The `MONTH` represents the month of the budget will be deleted and cannot be empty.
 
 Example of usage:
 
-`delete b/ m/10`
+`delete -b m/10`
 
 Expected outcome:
 ```
 ========================================================
-Successfully deleted Budget for this month!
+Successfully deleted the Budget for this month!
 Now the budget amount is 0.00!      
 ========================================================
 ```
 
-### `e/` - Delete (an) expenditure(s)
+### `-e` - Delete (an) expenditure(s)
 
 Deletes (an) expenditure(s) of a specific month
 
-Format:`delete e/ m/MONTH` 
-<br/> `delete e/INDEX m/MONTH`
-<br/> `delete e/INDEX_FROM-INDEX_TO m/MONTH`
+Format:`delete -e m/MONTH` 
+<br/> `delete -e  m/MONTH i/INDEX`
+<br/> `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO `
 
 * The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
-* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
 * The `INDEX` must be within the range of the list.
 * If the `INDEX` is empty, then all the expenditures of this month will be deleted.
 
 Examples of usage:
 
- `delete e/3-5 m/MONTH`
+ `delete -e m/10 i/3-5`
 
 Expected outcome:
 ```
@@ -349,22 +351,22 @@ Successfully deleted Expenditure 5.chicken rice5          | $5.0               |
 ========================================================
 ```
 
-### `l/` - Delete (a) loan record(s)
+### `-l` - Delete (a) loan record(s)
 
 Deletes (a) loan record(s) of a specific month
 
-Format:`delete l/ m/MONTH` 
-<br/> `delete l/INDEX m/MONTH`
-<br/> `delete l/INDEX_FROM-INDEX_TO m/MONTH`
+Format:`delete -l m/MONTH` 
+<br/> `delete -l m/MONTH i/INDEX`
+<br/> `delete -l m/MONTH i/INDEX_FROM-INDEX_TO`
 
 * The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
-* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
 * The `INDEX` must be within the range of the list.
 * If the `INDEX` is empty, then all the loan records of this month will be deleted.
 
 Examples of usage:
 
- `delete l/3-5 m/MONTH`
+ `delete -l m/10 i/3-5`
 
 Expected outcome:
 ```
