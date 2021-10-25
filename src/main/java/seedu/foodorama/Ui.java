@@ -146,7 +146,8 @@ public class Ui {
             + "7. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
             + "8. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
             + "9. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
-            + "10. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'" + System.lineSeparator()
+            + "10. Adding a new Ingredient : 'add ingr [ingrName]' "
+            + "followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr chicken' ; '2'" + System.lineSeparator()
             + "11. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'"
             + " followed by '[weight in KG]'" + System.lineSeparator()

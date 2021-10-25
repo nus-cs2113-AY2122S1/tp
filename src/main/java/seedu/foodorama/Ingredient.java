@@ -80,7 +80,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         ui.printWastage(ingredientName, totalWaste);
-        if(totalWaste >= limit && limit != -1) {
+        if (totalWaste >= limit && limit != -1) {
             ui.printLimitExceeded(ingredientName);
         }
     }
@@ -93,11 +93,11 @@ public class Ingredient implements  Comparable<Ingredient> {
     public String toString() {
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         String limitString;
-        if(limit == -1) {
+        if (limit == -1) {
             limitString = "No limit has been set";
         } else {
             limitString = String.valueOf(limit);
-            if(limit < totalWaste) {
+            if (limit < totalWaste) {
                 limitString  = limitString + " (exceeded)";
             }
         }

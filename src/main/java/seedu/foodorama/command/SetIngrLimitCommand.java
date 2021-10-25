@@ -1,6 +1,8 @@
 package seedu.foodorama.command;
 
-import seedu.foodorama.*;
+import seedu.foodorama.Ingredient;
+import seedu.foodorama.IngredientList;
+import seedu.foodorama.Ui;
 import seedu.foodorama.exceptions.FoodoramaException;
 
 import java.util.ArrayList;

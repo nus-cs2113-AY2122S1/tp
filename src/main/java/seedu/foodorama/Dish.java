@@ -106,7 +106,7 @@ public class Dish implements Comparable<Dish> {
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
         ui.printWastage(dishName, wastage);
-        if(wastage >= limit && limit != -1) {
+        if (wastage >= limit && limit != -1) {
             ui.printLimitExceeded(dishName);
         }
         if (!parts.isEmpty()) {
@@ -123,11 +123,11 @@ public class Dish implements Comparable<Dish> {
     @Override
     public String toString() {
         String limitString;
-        if(limit == -1) {
+        if (limit == -1) {
             limitString = "No limit has been set";
         } else {
             limitString = String.valueOf(limit);
-            if(limit < wastage) {
+            if (limit < wastage) {
                 limitString  = limitString + " (exceeded)";
             }
         }
