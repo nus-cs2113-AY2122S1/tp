@@ -23,7 +23,9 @@
 
 !define LOGIC_MAGENTA_1 #FA21E3
 
+hide circle
 skinparam backgroundColor white
 skinparam defaultFontName Arial
 skinparam shadowing false
 skinparam arrowThickness 2
+skinparam classAttributeIconSize 0

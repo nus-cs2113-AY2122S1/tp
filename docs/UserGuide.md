@@ -286,7 +286,8 @@ Look up a recipe | `check RECIPE_NAME`
 Display all recipes | `listRecipes`
 Exit Gordon | `exit`
 Get some help | `help`
-Find a recipe | `find`
+Set recipe attributes | `set RECIPE_NAME /ATTRIBUTE VALUE`
+Find a recipe | `find /ATTRIBUTE VALUE`
 Tag a recipe | `tag`
 Untag a recipe | `untag`
 List all tags | `listTags`

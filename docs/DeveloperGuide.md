@@ -59,7 +59,7 @@ The Sequence Diagram below will show how the components interact with each other
 
 ### Cookbook component
 
-The Diagram below is the class diagram for the ``Cookbook`` class
+The Diagram below is the class diagram for the ``Kitchen`` package
 
 ![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
 

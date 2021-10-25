@@ -1,6 +1,6 @@
 @startuml
 !include Style.puml
-skinparam ArrowColor LOGIC_GREEN_4
+skinparam ArrowColor black
 left to right direction
 
 rectangle "Command" {
