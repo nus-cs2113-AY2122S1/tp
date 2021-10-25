@@ -123,7 +123,7 @@ public class Trip {
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
             if (e.getPersonsList().contains(person)) {
-                currentAmount = e.getAmountSplit().get(person); //why is this null?
+                currentAmount = e.getAmountSplit().get(person.getName()); //Remove .getName()
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
                 expensesInvolved++;
