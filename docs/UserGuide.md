@@ -1,5 +1,19 @@
 # Gordon's User Guide
 
+## Contents
+* [Who is Gordon?](#who-is-gordon)
+* [How do you start Gordon?](#how-do-you-start-gordon)
+* [What can Gordon do?](#what-can-gordon-do)
+  1. [Add a recipe](#1-add-a-recipe-addrecipe)
+  1. [Delete a recipe](#2-delete-a-recipe-deleterecipe)
+  1. [Look up a recipe](#3-look-up-a-recipe-check)
+  1. [Display all recipes](#4-display-all-recipes-listrecipe)
+  1. [Exit Gordon](#5-exit-gordon-exit)
+  1. [Lend a hand](#6-lend-a-hand-help)
+  1. [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set)
+  1. [Find a recipe by attribute](#8-find-a-recipe-by-attribute-find)
+* [Cheat sheet](#cheat-sheet)  
+
 ## Who is Gordon?
 
 <!-- Images -->
