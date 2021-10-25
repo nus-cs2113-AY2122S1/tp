@@ -55,7 +55,7 @@ public class Ui {
     }*/
 
     public static void printFilteredExpenses(Expense e, int index) {
-        System.out.println((index + 1) + ". " + e.toString());
+        System.out.println((index + 1) + ". " + e);
     }
 
     public static void printExpenseAddedSuccess() {

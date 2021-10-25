@@ -307,9 +307,9 @@ public class Trip {
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
         } else {
+            System.out.println("List of all Expenses in detail: ");
             for (Expense expense : listOfExpenses) {
                 Ui.printExpenseDetails(expense);
-                System.out.println();
             }
         }
     }
