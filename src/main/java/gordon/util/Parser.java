@@ -169,6 +169,7 @@ public class Parser {
 
     public Command setParse() throws GordonException {
         String[] splitContent = line.split("/");
+        assert splitContent.length > 1:"Invalid input. Type 'help' to find out how to use the 'set' command";
         if (splitContent.length < 2) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
