@@ -32,22 +32,22 @@ public class Storage {
         return moduleStorage.readModuleList(inputStream);
     }
 
-    public ArrayList<University> readUniversityList() throws IOException {
+    public ArrayList<University> readUniversityList(ModuleList moduleMasterList) throws IOException {
         logger.log(Level.INFO, "Start loading university data");
         InputStream inputStream = UniversityStorage.class.getResourceAsStream(
                 "/University.csv");
-        return universityStorage.readUniversityList(inputStream);
+        return universityStorage.readUniversityList(inputStream, moduleMasterList);
     }
 
-    public ArrayList<Module> readSelectedModuleList() throws IOException {
+    public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
         logger.log(Level.INFO, "Start loading selected module data");
-        return selectedModuleStorage.readSelectedModuleList();
+        return selectedModuleStorage.readSelectedModuleList(moduleMasterList);
     }
 
     public ArrayList<University> readSelectedUniversityList(
-            UniversityList universityMasterList) throws IOException {
+            UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
         logger.log(Level.INFO, "Start loading selected university data");
-        return selectedUniversityStorage.readSelectedUniversityList(universityMasterList);
+        return selectedUniversityStorage.readSelectedUniversityList(universityMasterList, moduleMasterList);
     }
 
     public void updateSelectedModuleList(ModuleList moduleList) throws IOException {

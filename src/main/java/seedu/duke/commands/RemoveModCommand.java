@@ -32,7 +32,7 @@ public class RemoveModCommand extends Command {
     public RemoveModCommand(Module moduleToRemove, ModuleList moduleMasterList,
                             ModuleList moduleSelectedList) throws IOException {
         this.moduleToRemove = moduleToRemove;
-        this.moduleIndexToRemove = moduleToRemove.getModuleIndex(moduleMasterList);
+        this.moduleIndexToRemove = moduleToRemove.getMasterListIndex(moduleMasterList);
         assert moduleToRemove.getModuleCode() != null;
         moduleSelectedList.removeModule(moduleToRemove.getModuleCode());
         assert moduleSelectedList.getSize() != 0;

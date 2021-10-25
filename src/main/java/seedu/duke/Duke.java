@@ -19,12 +19,12 @@ public class Duke {
         Storage storage = new Storage();
         try {
             Ui.welcome();
-            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
+            UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
             UniversityList universitySelectedList = new UniversityList(
-                    storage.readSelectedUniversityList(universityMasterList));
+                    storage.readSelectedUniversityList(universityMasterList, moduleMasterList));
             ModuleList moduleSelectedList = new ModuleList(
-                    storage.readSelectedModuleList());
+                    storage.readSelectedModuleList(moduleMasterList));
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;

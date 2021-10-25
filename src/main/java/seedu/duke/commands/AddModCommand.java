@@ -32,7 +32,7 @@ public class AddModCommand extends Command {
                          ModuleList moduleSelectedList) throws IOException {
 
         this.moduleToAdd = moduleToAdd;
-        this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleMasterList);
+        this.moduleIndexToAdd = moduleToAdd.getMasterListIndex(moduleMasterList);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;

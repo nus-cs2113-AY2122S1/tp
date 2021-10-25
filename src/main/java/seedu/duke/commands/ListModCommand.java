@@ -18,8 +18,9 @@ public class ListModCommand extends Command {
             assert moduleList.getSize() > 0;
             System.out.println("Here are the modules in the list:");
             for (int i = 0; i < moduleList.getSize(); i++) {
-                assert moduleList.get(i).getModuleCode() != null;
-                Ui.printModule(moduleList.get(i), i + 1);
+                Module currentModule = moduleList.get(i);
+                assert currentModule.getModuleCode() != null;
+                Ui.printModule(currentModule, currentModule.getIndex());
             }
         }
     }
