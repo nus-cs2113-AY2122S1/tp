@@ -205,7 +205,7 @@ public class GoalList {
         if (habitList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_HABIT_LIST);
         }
-        printManager.printHabitList(goal.getDescription(), habitList, numOfHabits);
+        printManager.printHabitList(goal.getGoalName(), habitList, numOfHabits);
     }
 
     /**

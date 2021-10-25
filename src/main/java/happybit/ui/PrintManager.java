@@ -70,20 +70,8 @@ public class PrintManager {
         System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
                 + goalDescription + "\".");
         for (Habit habit : habits) {
-<<<<<<< HEAD
             String currIndex = index + ". ";
             printHabitDetails(habit, currIndex);
-=======
-            System.out.print(index + ". ");
-            String intervalPrint = "(every " + habit.getInterval() + " days)";
-            String lastHabitDatePrint = habit.getHabitDateString();
-            String nextHabitDatePrint = habit.getNextDateString();
-            if (habit.getDone()) {
-                prefix = "[X]";
-            }
-            System.out.println(prefix + WHITE_SPACE + habit.getHabitName() + WHITE_SPACE + intervalPrint);
-            System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
->>>>>>> 85d0edbae2569effbfe18369fdddc56831b2f999
             index++;
         }
         printDashes();
@@ -146,33 +134,6 @@ public class PrintManager {
         printDashes();
     }
 
-    /*
-     * NOTE : ==================================================================
-     * The following are private methods that are used to implement SLAP for the
-     * above public methods. These methods are positioned at the bottom to better
-     * visualise the actual methods that can be called from outside this class.
-     * =========================================================================
-     */
-
-    private void printHabitDetails(Habit habit, String currIndex) {
-        String intervalPrint = "";
-        int habitIntervals = habit.getInterval();
-        if (habitIntervals > 0) {
-            intervalPrint ="(every " + habit.getInterval() + " day(s)";
-        }
-        Date lastHabitDate = habit.getHabitDate();
-        Date nextHabitDate = habit.getNextHabitDate();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        String lastHabitDatePrint = dateFormatter.format(lastHabitDate);
-        String nextHabitDatePrint = dateFormatter.format(nextHabitDate);
-        System.out.println(currIndex + " " + habit.getHabitName() + " " + intervalPrint);
-        System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
-    }
-
-    private void printDashes() {
-        System.out.println(DASHES);
-    }
-
     /**
      * Prints data in a tabular format.
      *
@@ -196,6 +157,23 @@ public class PrintManager {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+
+    private void printHabitDetails(Habit habit, String currIndex) {
+        String intervalPrint = "";
+        int habitIntervals = habit.getInterval();
+        if (habitIntervals > 0) {
+            intervalPrint ="(every " + habit.getInterval() + " day(s))";
+        }
+        // String intervalPrint = "(every " + habit.getInterval() + " days)";
+        String lastHabitDatePrint = habit.getHabitDateString();
+        String nextHabitDatePrint = habit.getNextHabitDateString();
+        System.out.println(currIndex + WHITE_SPACE + habit.getHabitName() + WHITE_SPACE + intervalPrint);
+        System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
+    }
+
+    private void printDashes() {
+        System.out.println(DASHES);
+    }
 
     // The following are sub-methods of the printTable() method.
 
