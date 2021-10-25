@@ -26,15 +26,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
+/**.
  * <h1>Parser class</h1>
- * Reads in user input by implementing the {@code Scanner} class
- * <p>
- * The {@code parseMaster()} method parses through the user's input to find the best match for the user's intended command
- * <p>
- * The corresponding command is then returned to the {@code Gordon} class
- * <p>
- * Prints responses to the console by implementing the {@code UI} class
+ *
+ * <p>Reads in user input by implementing the {@code Scanner} class.</p>
+ *
+ * <p>The {@code parseMaster()} method parses through the user's input to find the best match for the user's intended command.</p>
+ *
+ * <p>The corresponding command is then returned to the {@code Gordon} class.</p>
+ *
+ * <p>Prints responses to the console by implementing the {@code UI} class.</p>
  */
 public class Parser {
     protected String nameRecipe;
@@ -53,11 +54,14 @@ public class Parser {
         in = new Scanner(System.in);
     }
 
-    /**
-     * <h2>Command parseMaster()</h2>
-     * This method checks for keywords in the user's input, then returns the appropriate {@code Command} to be executed
-     * <p>
-     * If the user's input is invalid, the {@code GordonException} will be thrown
+    /**.
+     * <h2>Command parseMaster().</h2>
+     *
+     * <p>This method checks for keywords in the user's input, then returns the appropriate {@code Command}
+     * to be executed.</p>
+     *
+     * <p>If the user's input is invalid, the {@code GordonException} will be thrown.</p>
+     *
      * @return Command The corresponding command to be executed
      * @exception GordonException On invalid input
      * @see GordonException
