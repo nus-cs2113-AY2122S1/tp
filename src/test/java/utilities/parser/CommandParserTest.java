@@ -3,7 +3,7 @@ package utilities.parser;
 import command.Command;
 import command.ExitCommand;
 import command.stock.AddStockCommand;
-import errors.InvalidCommand;
+import errors.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 import utilities.ui.Ui;
 
@@ -20,7 +20,7 @@ public class CommandParserTest {
         try {
             Command command = commandParser.processCommand("exit", "", Mode.STOCK);
             assertEquals(command.getClass(), ExitCommand.class);
-        } catch (InvalidCommand e) {
+        } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
     }
@@ -31,7 +31,7 @@ public class CommandParserTest {
             Command command = commandParser.processCommand("add",
                     "n/name p/10 q/20 e/10-10-2021 d/desc m/100", Mode.STOCK);
             assertEquals(command.getClass(), AddStockCommand.class);
-        } catch (InvalidCommand e) {
+        } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
     }
@@ -59,8 +59,8 @@ public class CommandParserTest {
     }
 
     @Test
-    public void changeMode_modeStock_expectModeDispense() {
-        Mode mode = commandParser.changeMode(ui, "dispense", Mode.STOCK);
-        assertEquals(mode, Mode.DISPENSE);
+    public void changeMode_modeStock_expectModePrescription() {
+        Mode mode = commandParser.changeMode(ui, "prescription", Mode.STOCK);
+        assertEquals(mode, Mode.PRESCRIPTION);
     }
 }

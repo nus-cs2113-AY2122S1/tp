@@ -1,12 +1,12 @@
-package command.dispense;
+package command.prescription;
 
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Dispense;
+import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Stock;
-import utilities.parser.DispenseValidator;
+import utilities.parser.PrescriptionValidator;
 import utilities.parser.DateParser;
 import utilities.parser.StockManager;
 import utilities.storage.Storage;
@@ -16,13 +16,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+//@@author deonchung
 /**
- * Prescription medication based on user input.
+ * Prescribes medication based on user input.
  * User input includes medication name, quantity to prescribe, Customer's NRIC and Staff name.
  */
-public class AddDispenseCommand extends Command {
+public class AddPrescriptionCommand extends Command {
 
-    public AddDispenseCommand(LinkedHashMap<String, String> parameters) {
+    public AddPrescriptionCommand(LinkedHashMap<String, String> parameters) {
         this.parameters = parameters;
     }
 
@@ -40,28 +41,25 @@ public class AddDispenseCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
-        DispenseValidator dispenseValidator = new DispenseValidator();
+        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
 
-        boolean isInvalidParameters = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.ADD_DISPENSE_COMMAND, false);
+        boolean isInvalidParameters = prescriptionValidator.containsInvalidParameters(ui, parameters,
+                requiredParameters,
+                optionalParameters, CommandSyntax.ADD_PRESCRIPTION_COMMAND, false);
 
         if (isInvalidParameters) {
             return;
         }
 
-        boolean isInvalidParameterValues = dispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.ADD_DISPENSE_COMMAND);
+        boolean isInvalidParameterValues = prescriptionValidator.containsInvalidParameterValues(ui, parameters,
+                medicines,
+                CommandSyntax.ADD_PRESCRIPTION_COMMAND);
         if (isInvalidParameterValues) {
             return;
         }
 
-        int prescribeQuantity = Integer.parseInt(quantity);
-        int quantityToPrescribe = prescribeQuantity;
-
-        if (prescribeQuantity == 0) {
-            ui.print("Prescription Quantity cannot be 0.");
-            return;
-        }
+        int prescriptionQuantity = Integer.parseInt(quantity);
+        int quantityToPrescribe = prescriptionQuantity;
 
         Date prescribeDate = new Date(); //prescribe date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
@@ -79,9 +77,9 @@ public class AddDispenseCommand extends Command {
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
         int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
-        if (prescribeQuantity > totalStock) {
-            ui.print("Unable to prescribe! Prescription quantity is more than stock available!");
-            ui.print("Prescription quantity: " + prescribeQuantity + " Stock available: " + totalStock);
+        if (prescriptionQuantity > totalStock) {
+            ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
+            ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: " + totalStock);
             return;
         }
 
@@ -105,7 +103,7 @@ public class AddDispenseCommand extends Command {
                 return;
             }
 
-            if (existingQuantity < prescribeQuantity) {
+            if (existingQuantity < prescriptionQuantity) {
                 quantityToPrescribe = quantityToPrescribe - existingQuantity;
                 prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
                         stock, existingId, existingExpiry, setStockValue);
@@ -116,7 +114,7 @@ public class AddDispenseCommand extends Command {
     }
 
     /**
-     * Change the stock quantity based on Prescription quantity. Add prescribed medication to prescription list.
+     * Change the stock quantity based on prescription quantity. Add prescribed medication to prescription list.
      *
      * @param ui                  Reference to the UI object to print messages.
      * @param medicines           Arraylist of all medicines.
@@ -124,18 +122,18 @@ public class AddDispenseCommand extends Command {
      * @param customerId          Customer ID whom medicine will be prescribed to.
      * @param staffName           Staff who prescribe the medication.
      * @param quantityToPrescribe Quantity of medication to prescribe.
-     * @param prescribeDate       Date which medication is prescribed.
+     * @param prescribeDate       Date which medication is prescribed
      * @param stock               Stock object of the given stock id.
      * @param existingId          Existing id of the stock object.
      * @param existingExpiry      Existing expiry of the stock object.
-     * @param setStockValue       Stock quantity to set to after prescribed.
+     * @param setStockValue       Stock quantity to set to after prescription.
      */
     private void prescribe(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
                            String staffName, int quantityToPrescribe, Date prescribeDate, Stock stock,
                            int existingId, Date existingExpiry, int setStockValue) {
         String expiry = DateParser.dateToString(existingExpiry);
         stock.setQuantity(setStockValue);
-        medicines.add(new Dispense(medicationName, quantityToPrescribe, customerId, prescribeDate,
+        medicines.add(new Prescription(medicationName, quantityToPrescribe, customerId, prescribeDate,
                 staffName, existingId));
         ui.print("Prescribed:" + medicationName + " Quantity:" + quantityToPrescribe + " Expiry "
                 + "Date:" + expiry);

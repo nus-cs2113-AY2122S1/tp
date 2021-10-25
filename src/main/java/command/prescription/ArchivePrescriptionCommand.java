@@ -1,10 +1,10 @@
-package command.order;
+package command.prescription;
 
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
+import inventory.Prescription;
 import inventory.Medicine;
-import inventory.Order;
 import utilities.parser.DateParser;
 import utilities.parser.OrderValidator;
 import utilities.ui.Ui;
@@ -19,18 +19,18 @@ import java.util.logging.Logger;
 
 //@@author RemusTeo
 /**
- * Archive orders based on user input given date.
+ * Archive prescription based on user input given date.
  */
-public class ArchiveOrderCommand extends Command {
+public class ArchivePrescriptionCommand extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
-    public ArchiveOrderCommand(LinkedHashMap<String, String> parameters) {
+    public ArchivePrescriptionCommand(LinkedHashMap<String, String> parameters) {
         this.parameters = parameters;
     }
 
     @Override
     public void execute() {
-        logger.log(Level.INFO, "Start archiving of order");
+        logger.log(Level.INFO, "Start archiving of prescription");
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
@@ -40,54 +40,53 @@ public class ArchiveOrderCommand extends Command {
 
         OrderValidator orderValidator = new OrderValidator();
         boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.ARCHIVE_ORDER_COMMAND, true);
+                optionalParameters, CommandSyntax.ARCHIVE_PRESCRIPTION_COMMAND, true);
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful archive of order");
+            logger.log(Level.INFO, "Unsuccessful archive of prescription");
             return;
         }
 
         boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ARCHIVE_ORDER_COMMAND);
+                medicines, CommandSyntax.ARCHIVE_PRESCRIPTION_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
-            logger.log(Level.INFO, "Unsuccessful archive of order");
+            logger.log(Level.INFO, "Unsuccessful archive of prescription");
             return;
         }
 
-        Date orderArchiveDate = null;
-        String orderArchiveDateStr = parameters.get(CommandParameters.DATE);
+        Date prescribeArchiveDate = null;
+        String prescriptionArchiveDateStr = parameters.get(CommandParameters.DATE);
         try {
-            orderArchiveDate = DateParser.stringToDate(orderArchiveDateStr);
+            prescribeArchiveDate = DateParser.stringToDate(prescriptionArchiveDateStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Medicine> filteredOrders = new ArrayList<>();
+        ArrayList<Medicine> filteredPrescription = new ArrayList<>();
 
-        assert (filteredOrders != null) : "Array is not initialised";
+        assert (filteredPrescription != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
-            if (!(medicine instanceof Order)) {
+            if (!(medicine instanceof Prescription)) {
                 continue;
             }
-            Order order = (Order) medicine;
-            if (order.getStatus().equalsIgnoreCase("DELIVERED")) {
-                if (order.getDate().before(orderArchiveDate) || order.getDate().equals(orderArchiveDate)) {
-                    filteredOrders.add(order);
-                }
+            Prescription prescription = (Prescription) medicine;
+            if (prescription.getDate().before(prescribeArchiveDate)
+                    || prescription.getDate().equals(prescribeArchiveDate)) {
+                filteredPrescription.add(prescription);
             }
         }
 
-        for (Medicine medicine : filteredOrders) {
+        for (Medicine medicine : filteredPrescription) {
             medicines.remove(medicine);
         }
 
         Storage storage = Storage.getInstance();
-        storage.archiveData(filteredOrders);
+        storage.archiveData(filteredPrescription);
         storage.saveData(medicines);
-        ui.print("Archived delivered orders from " + DateParser.dateToString(orderArchiveDate));
-        logger.log(Level.INFO, "Successful archive of order");
+        ui.print("Archived prescriptions from " + DateParser.dateToString(prescribeArchiveDate));
+        logger.log(Level.INFO, "Successful archive of prescriptions");
     }
 }
 

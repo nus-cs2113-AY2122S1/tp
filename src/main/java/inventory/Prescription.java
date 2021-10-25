@@ -9,7 +9,7 @@ import java.util.Date;
  * date and staff name.
  */
 
-public class Dispense extends Medicine {
+public class Prescription extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";
     public static final String QUANTITY = "QUANTITY";
@@ -29,37 +29,37 @@ public class Dispense extends Medicine {
 
     public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMER_ID, DATE, STAFF, STOCK_ID};
 
-    private static int dispenseCount = 0;
-    protected int dispenseId;
+    private static int prescriptionCount = 0;
+    protected int prescriptionId;
     protected String customerId;
     protected Date date;
     protected String staff;
     protected int stockId;
 
-    public Dispense(String medicineName, int quantity, String customerId, Date date, String staff, int stockId) {
+    public Prescription(String medicineName, int quantity, String customerId, Date date, String staff, int stockId) {
         super(medicineName, quantity);
-        dispenseCount++;
-        this.dispenseId = dispenseCount;
+        prescriptionCount++;
+        this.prescriptionId = prescriptionCount;
         this.customerId = customerId;
         this.date = date;
         this.staff = staff;
         this.stockId = stockId;
     }
 
-    public static int getDispenseCount() {
-        return dispenseCount;
+    public static int getPrescriptionCount() {
+        return prescriptionCount;
     }
 
-    public static void setDispenseCount(int dispenseCount) {
-        Dispense.dispenseCount = dispenseCount;
+    public static void setPrescriptionCount(int prescriptionCount) {
+        Prescription.prescriptionCount = prescriptionCount;
     }
 
-    public int getDispenseId() {
-        return dispenseId;
+    public int getPrescriptionId() {
+        return prescriptionId;
     }
 
-    public void setDispenseId(int dispenseId) {
-        this.dispenseId = dispenseId;
+    public void setPrescriptionId(int prescriptionId) {
+        this.prescriptionId = prescriptionId;
     }
 
     public String getCustomerId() {
@@ -95,15 +95,15 @@ public class Dispense extends Medicine {
     }
 
     public String toFileFormat() {
-        String fileFormat = getDispenseId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
+        String fileFormat = getPrescriptionId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
                 + getCustomerId() + "|" + DateParser.dateToString(getDate()) + "|" + getStaff() + "|" + getStockId();
         return fileFormat;
     }
 
     public String toArchiveFormat() {
-        String archiveFormat = "[DISPENSE ID: " + getDispenseId() + "] " + getQuantity() + " " + getMedicineName()
-                + " [STOCK ID: " + getStockId() + "] WAS DISPENSED BY " + getStaff().toUpperCase() + " TO "
-                + getCustomerId().toUpperCase() + " ON " + DateParser.dateToString(getDate());
+        String archiveFormat = "[PRESCRIPTION ID: " + getPrescriptionId() + "] " + getQuantity() + " "
+                + getMedicineName() + " [STOCK ID: " + getStockId() + "] WAS PRESCRIBED BY " + getStaff().toUpperCase()
+                + " TO " + getCustomerId().toUpperCase() + " ON " + DateParser.dateToString(getDate());
         return archiveFormat;
     }
 

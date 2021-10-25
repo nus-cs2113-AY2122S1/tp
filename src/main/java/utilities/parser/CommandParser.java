@@ -4,11 +4,12 @@ import command.Command;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
-import command.dispense.AddDispenseCommand;
-import command.dispense.ArchiveDispenseCommand;
-import command.dispense.DeleteDispenseCommand;
-import command.dispense.ListDispenseCommand;
-import command.dispense.UpdateDispenseCommand;
+import command.order.ReceiveOrderCommand;
+import command.prescription.AddPrescriptionCommand;
+import command.prescription.ArchivePrescriptionCommand;
+import command.prescription.DeletePrescriptionCommand;
+import command.prescription.ListPrescriptionCommand;
+import command.prescription.UpdatePrescriptionCommand;
 import command.stock.AddStockCommand;
 import command.stock.DeleteStockCommand;
 import command.stock.ListStockCommand;
@@ -18,44 +19,47 @@ import command.order.ArchiveOrderCommand;
 import command.order.DeleteOrderCommand;
 import command.order.ListOrderCommand;
 import command.order.UpdateOrderCommand;
-import errors.InvalidCommand;
+import errors.InvalidCommandException;
 import utilities.ui.Ui;
 
 import java.util.LinkedHashMap;
 
 import static command.CommandList.ADD;
-import static command.CommandList.ADD_DISPENSE;
+import static command.CommandList.ADD_PRESCRIPTION;
 import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
 import static command.CommandList.ARCHIVE;
-import static command.CommandList.ARCHIVE_DISPENSE;
+import static command.CommandList.ARCHIVE_PRESCRIPTION;
 import static command.CommandList.ARCHIVE_ORDER;
 import static command.CommandList.DELETE;
-import static command.CommandList.DELETE_DISPENSE;
+import static command.CommandList.DELETE_PRESCRIPTION;
 import static command.CommandList.DELETE_STOCK;
 import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.EXIT;
 import static command.CommandList.HELP;
 import static command.CommandList.LIST;
-import static command.CommandList.LIST_DISPENSE;
+import static command.CommandList.LIST_PRESCRIPTION;
 import static command.CommandList.LIST_STOCK;
 import static command.CommandList.LIST_ORDER;
 import static command.CommandList.PURGE;
+import static command.CommandList.RECEIVE;
+import static command.CommandList.RECEIVE_ORDER;
 import static command.CommandList.UPDATE;
-import static command.CommandList.UPDATE_DISPENSE;
+import static command.CommandList.UPDATE_PRESCRIPTION;
 import static command.CommandList.UPDATE_STOCK;
 import static command.CommandList.UPDATE_ORDER;
-import static utilities.parser.Mode.DISPENSE;
+import static utilities.parser.Mode.PRESCRIPTION;
 import static utilities.parser.Mode.ORDER;
 import static utilities.parser.Mode.STOCK;
 
+//@@author alvintan01
 
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
 
 public class CommandParser {
-    public CommandParser(){
+    public CommandParser() {
     }
 
     private static final String DELIMITER = "/";
@@ -67,30 +71,30 @@ public class CommandParser {
      * @param parametersString String parameter entered by user.
      * @param mode             The current mode of the program.
      * @return A Command object.
-     * @throws InvalidCommand If a command does not exist.
+     * @throws InvalidCommandException If a command does not exist.
      */
-    public Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommand {
+    public Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommandException {
         // Append user's command with mode
         if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
-                || command.equals(DELETE) || command.equals(ARCHIVE)) {
+                || command.equals(DELETE) || command.equals(ARCHIVE) || command.equals(RECEIVE)) {
             command = command + mode.name().toLowerCase();
         }
 
         LinkedHashMap<String, String> parameters = parseParameters(parametersString);
 
         switch (command) {
-        case ADD_DISPENSE:
-            return new AddDispenseCommand(parameters);
+        case ADD_PRESCRIPTION:
+            return new AddPrescriptionCommand(parameters);
         case ADD_STOCK:
             return new AddStockCommand(parameters);
         case ADD_ORDER:
             return new AddOrderCommand(parameters);
         case ARCHIVE_ORDER:
             return new ArchiveOrderCommand(parameters);
-        case ARCHIVE_DISPENSE:
-            return new ArchiveDispenseCommand(parameters);
-        case DELETE_DISPENSE:
-            return new DeleteDispenseCommand(parameters);
+        case ARCHIVE_PRESCRIPTION:
+            return new ArchivePrescriptionCommand(parameters);
+        case DELETE_PRESCRIPTION:
+            return new DeletePrescriptionCommand(parameters);
         case DELETE_STOCK:
             return new DeleteStockCommand(parameters);
         case DELETE_ORDER:
@@ -99,26 +103,24 @@ public class CommandParser {
             return new ExitCommand();
         case HELP:
             return new HelpCommand();
-        case LIST_DISPENSE:
-            return new ListDispenseCommand(parameters);
+        case LIST_PRESCRIPTION:
+            return new ListPrescriptionCommand(parameters);
         case LIST_STOCK:
             return new ListStockCommand(parameters);
         case LIST_ORDER:
             return new ListOrderCommand(parameters);
         case PURGE:
             return new PurgeCommand();
-        /*case RECEIVE_ORDER:
-            break;
-        case UNDO:
-            break;*/
+        case RECEIVE_ORDER:
+            return new ReceiveOrderCommand(parameters);
         case UPDATE_STOCK:
             return new UpdateStockCommand(parameters);
-        case UPDATE_DISPENSE:
-            return new UpdateDispenseCommand(parameters);
+        case UPDATE_PRESCRIPTION:
+            return new UpdatePrescriptionCommand(parameters);
         case UPDATE_ORDER:
             return new UpdateOrderCommand(parameters);
         default:
-            throw new InvalidCommand();
+            throw new InvalidCommandException();
         }
     }
 
@@ -199,9 +201,10 @@ public class CommandParser {
         if (command.equalsIgnoreCase(STOCK.name()) && !mode.name().equalsIgnoreCase(STOCK.name())) {
             newMode = STOCK;
             ui.print("Mode has changed to STOCK.");
-        } else if (command.equalsIgnoreCase(Mode.DISPENSE.name()) && !mode.name().equalsIgnoreCase(DISPENSE.name())) {
-            newMode = Mode.DISPENSE;
-            ui.print("Mode has changed to DISPENSE.");
+        } else if (command.equalsIgnoreCase(Mode.PRESCRIPTION.name())
+                && !mode.name().equalsIgnoreCase(PRESCRIPTION.name())) {
+            newMode = Mode.PRESCRIPTION;
+            ui.print("Mode has changed to PRESCRIPTION.");
         } else if (command.equalsIgnoreCase(ORDER.name()) && !mode.name().equalsIgnoreCase(ORDER.name())) {
             newMode = ORDER;
             ui.print("Mode has changed to ORDER.");

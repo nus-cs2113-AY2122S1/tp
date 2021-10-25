@@ -34,10 +34,10 @@ public abstract class MedicineValidator {
         int optionalParametersLength = optionalParameters.length;
 
         // User did not provide parameters all the parameters
-        if (parameters.keySet().size() < requiredParametersLength) {
+        /*if (parameters.keySet().size() < requiredParametersLength) {
             ui.printInvalidParameter("", commandSyntax);
             return true;
-        }
+        }*/
 
         for (String requiredParameter : requiredParameters) {
             if (!parameters.containsKey(requiredParameter)) { // Checks if required parameters are found

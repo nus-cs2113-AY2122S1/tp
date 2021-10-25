@@ -6,13 +6,14 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 
+//@@author RemusTeo
 /**
- * FileParser class handles all validation of input from data/stock.txt, data/order.txt, data/dispense.txt
+ * FileParser class handles all validation of input from data/stock.txt, data/order.txt, data/prescription.txt
  */
 public class FileParser {
     public static HashSet<Integer> stockIds = new HashSet<>();
     public static HashSet<Integer> orderIds = new HashSet<>();
-    public static HashSet<Integer> dispenseIds = new HashSet<>();
+    public static HashSet<Integer> prescriptionIds = new HashSet<>();
 
     /**
      * Perform validation of Stock Id during parsing from file.
@@ -267,141 +268,150 @@ public class FileParser {
     }
 
     /**
-     * Perform validation of Dispense Id during parsing from file.
+     * Perform validation of Prescription Id during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense Id of integer data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription Id of integer data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static int parseDispenseId(String[] splitDispenseDetails, int dispenseRow) throws InvalidDataException {
+    public static int parsePrescriptionId(String[] splitPrescriptionDetails, int prescriptionRow)
+            throws InvalidDataException {
         try {
-            int dispenseId = Integer.parseInt(splitDispenseDetails[0]);
-            if (dispenseId <= 0) {
-                throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");
+            int prescriptionId = Integer.parseInt(splitPrescriptionDetails[0]);
+            if (prescriptionId <= 0) {
+                throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION "
+                        + "ID [data/prescription.txt]");
             }
-            if (dispenseIds.contains(dispenseId)) {
-                throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");
+            if (prescriptionIds.contains(prescriptionId)) {
+                throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION "
+                        + "ID [data/prescription.txt]");
             }
-            dispenseIds.add(dispenseId);
-            return dispenseId;
+            prescriptionIds.add(prescriptionId);
+            return prescriptionId;
         } catch (NumberFormatException e) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION "
+                    + "ID [data/prescription.txt]");
         }
     }
 
     /**
-     * Perform validation of Dispense medication name during parsing from file.
+     * Perform validation of Prescription medication name during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense medication name of String data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription medication name of String data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static String parseDispenseName(String[] splitDispenseDetails, int dispenseRow) throws InvalidDataException {
-        String dispenseName = splitDispenseDetails[1];
-        if (dispenseName.equals("")) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE MEDICATION NAME "
-                    + "[data/dispense.txt]");
+    public static String parsePrescriptionName(String[] splitPrescriptionDetails, int prescriptionRow)
+            throws InvalidDataException {
+        String prescriptionName = splitPrescriptionDetails[1];
+        if (prescriptionName.equals("")) {
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIBED MEDICATION NAME "
+                    + "[data/prescription.txt]");
         }
-        return dispenseName;
+        return prescriptionName;
     }
 
     /**
-     * Perform validation of Dispense quantity during parsing from file.
+     * Perform validation of Prescription quantity during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense quantity of integer data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription quantity of integer data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static int parseDispenseQuantity(String[] splitDispenseDetails, int dispenseRow) throws
+    public static int parsePrescriptionQuantity(String[] splitPrescriptionDetails, int prescriptionRow) throws
             InvalidDataException {
         try {
-            int dispenseQuantity = Integer.parseInt(splitDispenseDetails[2]);
-            if (dispenseQuantity <= 0) {
-                throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE QUANTITY"
-                        + " [data/dispense.txt]");
+            int prescriptionQuantity = Integer.parseInt(splitPrescriptionDetails[2]);
+            if (prescriptionQuantity <= 0) {
+                throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION QUANTITY"
+                        + " [data/prescription.txt]");
             }
-            return dispenseQuantity;
+            return prescriptionQuantity;
         } catch (NumberFormatException e) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE QUANTITY [data/dispense.txt]");
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION "
+                    + "QUANTITY [data/prescription.txt]");
         }
     }
 
     /**
-     * Perform validation of Dispense customer id during parsing from file.
+     * Perform validation of Prescription customer id during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense customer id of String data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription customer id of String data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static String parseDispenseCustomerId(String[] splitDispenseDetails, int dispenseRow) throws
+    public static String parsePrescriptionCustomerId(String[] splitPrescriptionDetails, int prescriptionRow) throws
             InvalidDataException {
-        String dispenseCustomerId = splitDispenseDetails[3];
-        if (dispenseCustomerId.equals("")) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE CUSTOMER ID "
-                    + "[data/dispense.txt]");
+        String prescriptionCustomerId = splitPrescriptionDetails[3];
+        if (prescriptionCustomerId.equals("")) {
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION CUSTOMER ID "
+                    + "[data/prescription.txt]");
         }
-        return dispenseCustomerId;
+        return prescriptionCustomerId;
     }
 
     /**
-     * Perform validation of Dispense date during parsing from file.
+     * Perform validation of Prescription date during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense date of Date data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription date of Date data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static Date parseDispenseDate(String[] splitDispenseDetails, int dispenseRow) throws InvalidDataException {
+    public static Date parsePrescriptionDate(String[] splitPrescriptionDetails, int prescriptionRow)
+            throws InvalidDataException {
         try {
-            String dispenseDateStr = splitDispenseDetails[4];
-            Date dispenseDate = DateParser.stringToDate(dispenseDateStr);
-            return dispenseDate;
+            String prescriptionDateStr = splitPrescriptionDetails[4];
+            Date prescriptionDate = DateParser.stringToDate(prescriptionDateStr);
+            return prescriptionDate;
         } catch (ParseException e) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE DATE [data/dispense.txt]");
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION DATE "
+                    + "[data/prescription.txt]");
         }
     }
 
     /**
-     * Perform validation of Dispense staff name during parsing from file.
+     * Perform validation of Prescription staff name during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense staff name of String data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription staff name of String data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static String parseDispenseStaff(String[] splitDispenseDetails, int dispenseRow) throws
+    public static String parsePrescriptionStaff(String[] splitPrescriptionDetails, int prescriptionRow) throws
             InvalidDataException {
-        String dispenseStaff = splitDispenseDetails[5];
-        if (dispenseStaff.equals("")) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE STAFF NAME "
-                    + "[data/dispense.txt]");
+        String prescriptionStaff = splitPrescriptionDetails[5];
+        if (prescriptionStaff.equals("")) {
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION STAFF NAME "
+                    + "[data/prescription.txt]");
         }
-        return dispenseStaff;
+        return prescriptionStaff;
     }
 
     /**
-     * Perform validation of Dispense stock id during parsing from file.
+     * Perform validation of Prescription stock id during parsing from file.
      *
-     * @param splitDispenseDetails Dispense details array fields split by delimiter '|'.
-     * @param dispenseRow          Dispense row identifier for use in error message.
-     * @return Dispense stock id of integer data type for creation of Dispense object.
+     * @param splitPrescriptionDetails Prescription details array fields split by delimiter '|'.
+     * @param prescriptionRow          Prescription row identifier for use in error message.
+     * @return Prescription stock id of integer data type for creation of Prescription object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static int parseDispenseStockId(String[] splitDispenseDetails, int dispenseRow) throws InvalidDataException {
+    public static int parsePrescriptionStockId(String[] splitPrescriptionDetails, int prescriptionRow)
+            throws InvalidDataException {
         try {
-            int dispenseStockId = Integer.parseInt(splitDispenseDetails[6]);
-            if (dispenseStockId <= 0) {
-                throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE STOCK ID "
-                        + "[data/dispense.txt]");
+            int prescriptionStockId = Integer.parseInt(splitPrescriptionDetails[6]);
+            if (prescriptionStockId <= 0) {
+                throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION STOCK ID "
+                        + "[data/prescription.txt]");
             }
-            return dispenseStockId;
+            return prescriptionStockId;
         } catch (NumberFormatException e) {
-            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE STOCK ID "
-                    + "[data/dispense.txt]");
+            throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID PRESCRIPTION STOCK ID "
+                    + "[data/prescription.txt]");
         }
     }
 }

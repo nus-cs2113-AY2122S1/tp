@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Represents the generic stock for the application. It contains the medicine name and quantity.
- * It is inherited by Dispense, Medicine and Order objects.
+ * It is inherited by Prescription, Medicine and Order objects.
  */
 
 public abstract class Medicine {

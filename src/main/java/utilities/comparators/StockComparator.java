@@ -5,6 +5,7 @@ import inventory.Stock;
 
 import java.util.Comparator;
 
+//@@author alvintan01
 /**
  * Helps to sort the medicines based on the column provided.
  */

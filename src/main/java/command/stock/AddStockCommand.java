@@ -18,6 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author deonchung
+
 /**
  * Add medication based on user input.
  * User input include name, price, quantity, expiry date, description and maximum quantity of medication.
@@ -45,7 +47,8 @@ public class AddStockCommand extends Command {
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
-                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)
+                        && !((Stock) medicine).isDeleted()) {
                     existingStock = (Stock) medicine;
                     nameExist = true;
                     break;

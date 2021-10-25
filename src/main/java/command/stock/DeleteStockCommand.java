@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author RemusTeo
 /**
  * Delete medication based on user input given stock id.
  */
@@ -112,6 +113,7 @@ public class DeleteStockCommand extends Command {
         ui.print("Deleted row with Stock Id: " + stockId);
     }
 
+    //@@author a-tph
     /**
      * Deletion of expired stocks given a date.
      *
