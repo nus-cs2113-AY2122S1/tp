@@ -128,8 +128,8 @@ public class IngredientList {
      * Subtracts amount from total ingredient amount
      * @param ingredientName name of ingredient
      * @param subtractAmount amount to be subtracted from total amount
-     * @throws SitusException
-     * @throws IOException
+     * @throws SitusException if the ingredient and/or expiry date are not matched
+     * @throws IOException if the removed ingredient cannot be removed from memory
      */
     public void subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
             SitusException, IOException {
