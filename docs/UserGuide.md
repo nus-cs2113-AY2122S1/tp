@@ -177,6 +177,7 @@ List all contacts | `list` | `list`
 View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com`
 Delete a contact | `rm <INDEX>` | `rm 1`
-Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search -g revflash`
+Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search Ashraf` 
+||`search -g revflash`
 Import contacts from .txt file|`import` | `import`
 Exit ConTech | `exit` | `exit`
