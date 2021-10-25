@@ -310,12 +310,12 @@ public class Parser {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
             if (person == payer) {
-                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person));
+                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
                 continue;
             }
-            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person));
-            person.setMoneyOwed(payer, expense.getAmountSplit().get(person));
-            person.setMoneyOwed(person, -expense.getAmountSplit().get(person));
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName())); //Remove.getName()
+            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
         }
     }
 
