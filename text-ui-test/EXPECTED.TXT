@@ -134,4 +134,4 @@ josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
 xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-Enter your command: Goodbye!
+Enter your command: Exiting the program now. Goodbye!
