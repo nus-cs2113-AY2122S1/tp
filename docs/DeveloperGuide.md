@@ -88,7 +88,7 @@ ArrayList, `IngredientList.ingredientList`
 #### Saving Data
 ![](images/storage_write_sequence.png)
 
-* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Ingredient)`
+* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`
   * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
 * `Storage.write()` will access the respective text file and save to its respective save format
 
