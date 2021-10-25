@@ -6,6 +6,8 @@ import seedu.situs.storage.Storage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /*
  * Represents a group of the same ingredient.
@@ -101,7 +103,7 @@ public class IngredientGroup {
                 e.printStackTrace();
             }
         }
-        return groupName + " | Total Amount: " + totalAmount + " kg"
+        return groupName + " | Total Amount: " + String.format("%.1f", totalAmount) + " kg"
                 + '\n' + printedGroup;
     }
 
@@ -113,7 +115,7 @@ public class IngredientGroup {
     public void add(Ingredient ingredient) {
         ingredientGroup.add(ingredient);
         this.totalAmount += ingredient.getAmount();
-        //storage.writeIngredientsToMemory(ingredientList);
+        ingredientGroup.sort(Comparator.comparing(Ingredient::getExpiry));
     }
 
 
@@ -146,7 +148,7 @@ public class IngredientGroup {
      */
     public void set(int ingredientNumber, Ingredient ingredient) throws IOException {
         ingredientGroup.set(ingredientNumber, ingredient);
-        //storage.writeIngredientsToMemory(ingredientList);
+        ingredientGroup.sort(Comparator.comparing(Ingredient::getExpiry));
     }
 
     /**
