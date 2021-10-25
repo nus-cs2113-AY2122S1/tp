@@ -35,8 +35,6 @@ class AddModCommandParserTest {
         assertEquals("CS1231", acp.searchForModule(moduleCode, moduleMasterList).getModuleCode());
         assertEquals("Discrete Structures", acp.searchForModule(moduleCode, moduleMasterList).getModuleName());
         assertEquals(4.0, acp.searchForModule(moduleCode, moduleMasterList).getModuleCredits());
-        assertEquals(AddModCommand.class, acp.parse(moduleCode, universityMasterList,
-                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
     @Test
