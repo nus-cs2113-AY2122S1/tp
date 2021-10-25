@@ -3,6 +3,7 @@ package expiryeliminator.storage;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -115,6 +116,8 @@ public class LoadData {
         String ingredientName = null;
         String expiryDateString;
         int quantityWithBatch = 0;
+        IngredientStorage ingredientStorage = new IngredientStorage(null);
+
         while (sc.hasNext()) {
             String line = sc.nextLine();
             if (!line.isBlank()) {
@@ -122,28 +125,20 @@ public class LoadData {
                     int ingredientNameSeparator = line.indexOf("(") - 1;
                     ingredientName = line.substring(0, ingredientNameSeparator);
                     unit = getUnit(line);
+                    Ingredient currentIngredient = new Ingredient(ingredientName, unit);
+                    ingredientStorage.setIngredient(currentIngredient);
+                    ingredients.add(ingredientName, unit);
                 } else {
                     int expiryDateStart = line.indexOf("(") + 1;
                     int expiryDateEnd = line.indexOf(")");
                     expiryDateString = line.substring(expiryDateStart, expiryDateEnd);
                     expiryDate = LocalDate.parse(expiryDateString);
                     quantityWithBatch = getQuantityWithBatch(line, expiryDateStart);
-                    if (!sc.hasNext()) {
-                        if (ingredientName != null) {
-                            ingredients.add(ingredientName, unit, quantityWithBatch, expiryDate);
-                            expiryDate = null;
-                            unit = null;
-                            ingredientName = null;
-                        }
-                    }
+                    ingredientStorage.add(quantityWithBatch, expiryDate);
+                    ingredients.getIngredients().put(ingredientName, ingredientStorage);
                 }
             } else {
-                if (ingredientName != null) {
-                    ingredients.add(ingredientName, unit, quantityWithBatch, expiryDate);
-                    expiryDate = null;
-                    unit = null;
-                    ingredientName = null;
-                }
+                ingredientStorage = new IngredientStorage(null);
             }
         }
     }
