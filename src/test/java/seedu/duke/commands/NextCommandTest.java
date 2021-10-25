@@ -46,6 +46,10 @@ public class NextCommandTest {
                 + "Budget: $1000.9"
                 + System.lineSeparator()
                 + "Tasks: "
+                + System.lineSeparator()
+                + "1. [T][ ] Collect Tickets (by: 18 Feb 2022 - 19:30)"
+                + System.lineSeparator()
+                + "2. [T][ ] Buy Boost (by: 19 Feb 2022 - 19:30)"
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         assertEquals("Hope you have prepared everything!", command1.execute().feedbackToUser);
@@ -53,12 +57,32 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask() {
+    public void nextCommandResult_nextEarliestTask_taskExists() {
+        setUp();
+        Command command1 = Parser.parseCommand("next task 1");
+        Ui.printTask(eventCatalog.get(0).getFromTaskList(0));
+        String expectedOutput = "Title: Collect Tickets"
+                + System.lineSeparator()
+                + "Deadline: 18 Feb 2022 - 19:30"
+                + System.lineSeparator()
+                + "Description: Collection point: Scape"
+                + System.lineSeparator()
+                + "Members: "
+                + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString());
+        assertEquals("Hope you have prepared everything!", command1.execute().feedbackToUser);
+        eventCatalog.clear();
+    }
 
+    @Test
+    public void nextCommandResult_nextEarliestTask_noTaskExists() {
+        setUp();
+        Command command1 = Parser.parseCommand("next task 2");
+        assertEquals("This Event has no tasks!", command1.execute().feedbackToUser);
+        eventCatalog.clear();
     }
 
     void setUp() {
-        // Setting up
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event1 = new Event("Peppa Pig's Concert",
                 "Asia world tour", event1DateTime,
@@ -72,10 +96,10 @@ public class NextCommandTest {
         Task task1 = new Task("Buy Boost", "Need the boost for the concert", taskDeadline1);
         LocalDateTime taskDeadline2 = Parser.convertDateTime("18-02-2022 1930");
         Task task2 = new Task("Collect Tickets", "Collection point: Scape", taskDeadline2);
-        eventCatalog.add(event2);
+        eventCatalog.add(event1);
         eventCatalog.get(0).addToTaskList(task1);
         eventCatalog.get(0).addToTaskList(task2);
-        eventCatalog.add(event1);
+        eventCatalog.add(event2);
         eventCatalog.sortCatalog();
     }
 }
