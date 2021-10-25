@@ -223,8 +223,9 @@ without crashing
 
 * For Manual Testing, you can write sample data into data text files (dishes.txt & ingredients.txt)
 * Write data in appropriate format
-  * Dishes: [dishName] | [dishWaste (kg)] | [dishWaste divided by number of constituents] | [ingredient 1|ingredient 2|etc]
-    * Example: chicken rice|2.0|1.0|chicken|rice
-  * Ingredients: [ingrName]|[ingrStored(kg)]|[ingrWasted(kg)]
-    * Example:chicken|2.33|1.0
+  * Dishes: [dishName] | [dishWaste (kg)] | [dishWaste divided by number of constituents] | [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]
+    * Example: chicken rice|2.0|1.0|17.7|chicken|rice
+  * Ingredients: [ingrName] | [ingrStored(kg)] | [ingrWasted(kg)] | [Wastage limit (if present else -1)]
+    * Example:chicken|2.33|1.0|22.2
+* The appropriate formats are also present in a text file called formats.txt for your usage
 
