@@ -7,11 +7,15 @@ public abstract class MedBotList {
         return "";
     }
 
+
+    public void addListItemFromStorage(ListItem listItem) {
+    }
+
     public void setLastId(int lastId) {
     }
 
-
-    public void addListItemFromStorage(ListItem listItem) {
+    public int getLastId() {
+        return 0;
     }
 
 

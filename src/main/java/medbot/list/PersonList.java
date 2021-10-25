@@ -301,4 +301,11 @@ public abstract class PersonList extends MedBotList {
     public void setLastId(int newLastId) {
         lastId = newLastId;
     }
+
+    @Override
+    public int getLastId() {
+        return lastId;
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package medbot;
 
+import medbot.list.SchedulerAppointmentList;
+import medbot.storage.AppointmentStorage;
 import medbot.storage.PatientStorage;
 import medbot.storage.StaffStorage;
 import medbot.command.Command;
@@ -21,16 +23,21 @@ public class MedBot {
         Ui ui = new Ui();
         PatientStorage patientStorage = null;
         StaffStorage staffStorage = null;
+        AppointmentStorage appointmentStorage = null;
+        SchedulerAppointmentList schedulerAppointmentList = new SchedulerAppointmentList();
         boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
         try {
             patientStorage = new PatientStorage();
             staffStorage = new StaffStorage();
+            appointmentStorage = new AppointmentStorage();
             String loadStorageErrorMessage = patientStorage.loadStorage(ListItemType.PATIENT,
                     scheduler.getPatientList());
             loadStorageErrorMessage += staffStorage.loadStorage(ListItemType.STAFF,
                     scheduler.getMedicalStaffList());
+            loadStorageErrorMessage += appointmentStorage.loadStorage(ListItemType.APPOINTMENT,
+                    scheduler.getSchedulerAppointmentList());
 
             if (!loadStorageErrorMessage.isBlank()) {
                 ui.printOutput(loadStorageErrorMessage);
@@ -51,6 +58,7 @@ public class MedBot {
 
                 patientStorage.saveData(scheduler.getPatientList());
                 staffStorage.saveData(scheduler.getMedicalStaffList());
+                appointmentStorage.saveData(scheduler.getSchedulerAppointmentList());
                 isInteracting = !command.isExit();
 
             } catch (MedBotException mbe) {

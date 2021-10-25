@@ -180,7 +180,7 @@ public abstract class Person extends ListItem {
     }
 
     /**
-     * Text to be written to storage/data.txt of a person
+     * Text to be written to storage file of a person
      *
      * @return storageString of a person
      */
@@ -229,15 +229,6 @@ public abstract class Person extends ListItem {
         return false;
     }
 
-    /**
-     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
-     *
-     * @param parameter an attribute of a person
-     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
-     */
-    protected String setAsStorageParameterOrNull(String parameter) {
-        return (parameter == null || parameter.isBlank()) ? "X" : parameter;
-    }
 
     private String formattedAttribute(String attribute, int outputLength) {
         int attributeLength = attribute.length();
