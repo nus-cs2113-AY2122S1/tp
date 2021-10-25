@@ -124,6 +124,7 @@ public class AddOrderCommand extends Command {
     private void addOrder(Ui ui, ArrayList<Medicine> medicines, String name, int quantity, Date date) {
         Order order = new Order(name, quantity, date);
         medicines.add(order);
+        ui.print("Order added: " + name);
         ui.printOrder(order);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
