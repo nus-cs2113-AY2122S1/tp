@@ -55,8 +55,6 @@ public class TranscriptUi {
     public static void printGradedModules(GradedModule module) {
         String moduleCode = module.getModuleCode();
         String moduleTitle = module.getTitle();
-        String moduleGrade = SEPARATION_SPACE + module.getGrade();
-        double moduleCredits = module.getModuleCredit();
         System.out.print(moduleCode);
         for (int i = 0; i < MODULE_CODE_LENGTH - moduleCode.length(); i++) {
             System.out.print(DELIMITER_SPACE);
@@ -65,6 +63,8 @@ public class TranscriptUi {
         for (int i = 0; i < MODULE_TITLE_LENGTH - moduleTitle.length(); i++) {
             System.out.print(DELIMITER_SPACE);
         }
+        String moduleGrade = SEPARATION_SPACE + module.getGrade();
+        double moduleCredits = module.getModuleCredit();
         System.out.print(SEPARATION_SPACE + moduleGrade);
         for (int i = 0; i < GRADE_LENGTH - moduleGrade.length(); i++) {
             System.out.print(DELIMITER_SPACE);
@@ -76,8 +76,6 @@ public class TranscriptUi {
     public static void printUngradedModules(UngradedModule module) {
         String moduleCode = module.getModuleCode();
         String moduleTitle = module.getTitle();
-        String moduleGrade = SEPARATION_SPACE + module.getGrade();
-        double moduleCredits = module.getModuleCredit();
         System.out.print(moduleCode);
         for (int i = 0; i < MODULE_CODE_LENGTH - moduleCode.length(); i++) {
             System.out.print(DELIMITER_SPACE);
@@ -86,6 +84,8 @@ public class TranscriptUi {
         for (int i = 0; i < MODULE_TITLE_LENGTH - moduleTitle.length(); i++) {
             System.out.print(DELIMITER_SPACE);
         }
+        String moduleGrade = SEPARATION_SPACE + module.getGrade();
+        double moduleCredits = module.getModuleCredit();
         System.out.print(SEPARATION_SPACE + moduleGrade);
         for (int i = 0; i < GRADE_LENGTH - moduleGrade.length(); i++) {
             System.out.print(DELIMITER_SPACE);

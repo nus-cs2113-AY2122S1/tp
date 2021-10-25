@@ -32,8 +32,8 @@ public class StoreResultsCommand extends Command {
             module = NusMods.fetchModOnline(moduleCode);
             Profile currentProfile = Duke.getProfileInUse();
             if (gradeType.equals(TextUi.GRADED)) {
-                GradedModule gModule = new GradedModule(module, grade);
-                currentProfile.getRecord().addModuleToRecord(gModule);
+                GradedModule grModule = new GradedModule(module, grade);
+                currentProfile.getRecord().addModuleToRecord(grModule);
             } else {
                 UngradedModule ugModule = new UngradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(ugModule);
