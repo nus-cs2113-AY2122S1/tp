@@ -14,23 +14,41 @@
 ## Features 
 
 
-###View Summary of expenses
+####View Summary of expenses
+Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
 
-```summary trip-index```
+```summary```
+
+```summary [name]```
 
 Example:
-Viewing summary of South Korea trip
+Viewing summary of everybody's expenses in South Korea trip
 
 Input:
-```summary 1```
+
+```summary```
 
 Output:
 ```
-This is the summary for your South Korea trip 13/12/2018.
-Total budget for this trip: $2000.00
-Total expenditure so far: $1247.00
-Current budget left for this trip: $753.00
+Tom has spent $50.00 on 3 expenses in the following split:
+food: $30.00
+travel: $20.00
+
+Sara has spent $150.00 on 6 expenses in the following split:
+food: $30.00
+travel: $20.00
+leisure: $100.00
+
+Ben has spent $75.00 on 3 expenses in the following split:
+food: $25.00
+travel: $20.00
+shopping: $30.00
+
 ```
+###Expenses
+
+
+
 
 
 ## FAQ
