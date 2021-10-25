@@ -13,7 +13,10 @@ public class CommandFactory {
             return null;
         case "error":
             //something
+        case "bye":
+            return new ExitCommand();
         default:
+            System.out.println("invalid command");
             return null;
         }
     }

@@ -36,20 +36,20 @@ public class Main {
         return sc.nextLine();
     }
 
-    public void runCommandLoopUntilExitCommand() {
+    public void runCommandLoop() {
         CommandFactory cmdFactory = new CommandFactory();
         String command;
         do {
             String[] input = read().split(" ");
             command = input[0];
             Command c = cmdFactory.getCommand(input[0]);
-            c.run();
+            if (c != null) {
+                c.run();
+            }
         } while (!command.equals("bye"));
-
     }
 
     public void exit() {
-        uiBot.showBye();
     }
 
     /**
@@ -57,8 +57,7 @@ public class Main {
      */
     public void run() {
         start();
-        runCommandLoopUntilExitCommand();
-        exit();
+        runCommandLoop();
     }
 
     /**
