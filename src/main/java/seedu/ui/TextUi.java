@@ -15,11 +15,14 @@ public class TextUi {
     public static final String LINE = "__________________________________________________________________________\n";
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = "  _    _       _ __  __           _     \n"
+        + " | |  | |     (_)  \\/  |         | |    \n"
+        + " | |  | |_ __  _| \\  / | ___   __| |___ \n"
+        + " | |  | | '_ \\| | |\\/| |/ _ \\ / _` / __|\n"
+        + " | |__| | | | | | |  | | (_) | (_| \\__ \\\n"
+        + "  \\____/|_| |_|_|_|  |_|\\___/ \\__,_|___/\n"
+        + "                                        \n"
+        + "                                        ";
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
