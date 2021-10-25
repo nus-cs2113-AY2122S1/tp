@@ -38,6 +38,16 @@ public class WordLimitGame extends Game {
         }
     }
 
+    @Override
+    public void store() {
+
+    }
+
+    @Override
+    public void getSummary() {
+
+    }
+
     public int getTotalSentence() {
         return eachWord.size();
     }
