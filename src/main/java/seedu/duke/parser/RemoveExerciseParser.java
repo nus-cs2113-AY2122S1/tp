@@ -22,7 +22,12 @@ public class RemoveExerciseParser extends Parser {
 
             return new RemoveExerciseCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + RemoveExerciseCommand.MESSAGE_USAGE);
+            if (Command.workoutMode != 0) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                        + RemoveExerciseCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                    + RemoveExerciseCommand.MESSAGE_USAGE_MAIN);
         }
     }
 

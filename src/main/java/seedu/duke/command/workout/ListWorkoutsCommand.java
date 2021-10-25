@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class ListWorkoutsCommand extends Command {
     public static final String COMMAND_WORD = "list";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all workouts.\n"
+            + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_EMPTY_WORKOUT_LIST = "Empty workout list";
 
     public ListWorkoutsCommand() {

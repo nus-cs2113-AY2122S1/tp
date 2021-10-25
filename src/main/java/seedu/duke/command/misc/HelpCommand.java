@@ -20,6 +20,8 @@ public class HelpCommand extends Command {
             + "\"create\" : Creates a new workout\n"
             + "\"delete\" : Deletes a workout\n"
             + "\"list\" : Lists all your workouts\n"
+            + "\"enter\" : Enters a specific workout. Workout mode ON.\n"
+            + "\"back\" : Returns to main view. Workout mode OFF.\n"
             + "\"recommend\" : Recommends workouts of a given difficulty\n"
             + "\"display\" : Shows all the exercises in a specified workout\n"
             + "\"edit\" : Edits a specific exercise in a specified workout\n"

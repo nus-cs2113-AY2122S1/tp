@@ -22,7 +22,12 @@ public class MarkExerciseAsDoneParser extends Parser {
 
             return new MarkExerciseAsDoneCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + MarkExerciseAsDoneCommand.MESSAGE_USAGE);
+            if (Command.workoutMode != 0) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                        + MarkExerciseAsDoneCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND
+                    + MarkExerciseAsDoneCommand.MESSAGE_USAGE_MAIN);
         }
     }
 

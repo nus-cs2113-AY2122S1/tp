@@ -16,12 +16,20 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public class MarkExerciseAsDoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    public static final String MESSAGE_USAGE = "done: Marks the exercise in the workout workout as complete.\n"
+
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Marks the exercise in the workout as complete.\n"
             + "Format: done [Exercise index], [Workout index]\n"
             + "Parameters:\n"
             + "\tExercise index - Index of exercise to mark done\n"
             + "\tWorkout index - Index of workout containing exercise to mark done\n"
             + "Example: " + COMMAND_WORD + " 1, 2  - Mark exercise 1 from workout 2 as done";
+
+    public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
+            + ": Marks the exercise in the workout the user is currently in as complete.\n"
+            + "Format: done [Exercise index]\n"
+            + "Parameters:\n"
+            + "\tExercise index - Index of exercise to mark done\n"
+            + "Example: " + COMMAND_WORD + " 1  - Mark exercise 1 from the current workout as done";
 
     public static final String MESSAGE_SUCCESS = "Completed: %s";
 

@@ -26,23 +26,23 @@ public class HelpParser extends Parser {
     private Command prepareHelpMessage(String commandArgs) {
         switch (commandArgs) {
         case DisplayExercisesCommand.COMMAND_WORD:
-            return new HelpCommand(DisplayExercisesCommand.MESSAGE_USAGE);
+            return new HelpCommand(DisplayExercisesCommand.MESSAGE_USAGE_MAIN);
         case ListWorkoutsCommand.COMMAND_WORD:
             return new HelpCommand(ListWorkoutsCommand.MESSAGE_USAGE);
         case RecommendWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(RecommendWorkoutCommand.MESSAGE_USAGE);
         case AddExerciseCommand.COMMAND_WORD:
-            return new HelpCommand(AddExerciseCommand.MESSAGE_USAGE);
+            return new HelpCommand(AddExerciseCommand.MESSAGE_USAGE_MAIN);
         case CreateWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(CreateWorkoutCommand.MESSAGE_USAGE);
         case DeleteWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(DeleteWorkoutCommand.MESSAGE_USAGE);
         case MarkExerciseAsDoneCommand.COMMAND_WORD:
-            return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE);
+            return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE_MAIN);
         case RemoveExerciseCommand.COMMAND_WORD:
-            return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE);
+            return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE_MAIN);
         case EditExerciseCommand.COMMAND_WORD:
-            return new HelpCommand(EditExerciseCommand.MESSAGE_USAGE);
+            return new HelpCommand(EditExerciseCommand.MESSAGE_USAGE_MAIN);
         case ExitCommand.COMMAND_WORD:
             return new HelpCommand(ExitCommand.MESSAGE_USAGE);
         default:

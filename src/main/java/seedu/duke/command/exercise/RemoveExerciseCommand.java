@@ -16,13 +16,22 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
+
+    public static final String MESSAGE_USAGE_MAIN = COMMAND_WORD + ": Removes the exercise from the workout.\n"
             + "Format: remove [Exercise index], [Workout index]\n"
             + "Parameters:\n"
             + "\tExercise index - Index of exercise to remove\n"
             + "\tWorkout index - Index of workout containing exercise to remove\n"
             + "Example: " + COMMAND_WORD + " 1, 2  - remove exercise 1 from workout 2";
-    public static final String MESSAGE_SUCCESS = "Removed exercise: %1$s";
+
+    public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
+            + ": Removes the exercise from the workout the user is currently in.\n"
+            + "Format: remove [Exercise index]\n"
+            + "Parameters:\n"
+            + "\tExercise index - Index of exercise to remove\n"
+            + "Example: " + COMMAND_WORD + " 1  - remove exercise 1 from the current workout";
+
+    public static final String MESSAGE_SUCCESS = "Removed exercise: %s";
     private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
 
     private final int workoutIndex;

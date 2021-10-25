@@ -17,6 +17,7 @@ import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
  */
 public class CreateWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "create";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout.\n"
             + "Format: create [workout description] or Format: create [workout description], [deadline]\n"
             + "Parameters:\n"
@@ -24,6 +25,7 @@ public class CreateWorkoutCommand extends Command {
             + "\tWorkout deadline - deadline of workout (optional)\n"
             + "Example: " + COMMAND_WORD + " abs (if no deadline set)\n"
             + "Example: " + COMMAND_WORD + " abs" + PARAMETER_SEPARATOR + "2021-12-25 (if you want to set a deadline)";
+
     public static final String MESSAGE_SUCCESS = "New workout created: %s";
 
     private Workout toCreate;
