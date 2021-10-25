@@ -62,7 +62,8 @@ public class FileStorage {
     private static class LocalDateDeserializer implements JsonDeserializer<LocalDate> {
 
         @Override
-        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
             String dateInString = json.getAsJsonPrimitive().getAsString();
             return LocalDate.parse(dateInString);
         }
