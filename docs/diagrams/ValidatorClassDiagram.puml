@@ -9,48 +9,49 @@ skinparam groupInheritance 3
 
 
 class "{abstract}\n MedicineValidator"{
-    +containsInvalidParameterValues(ui: Ui, parameters: LinkedHashMap<String, String>, medicines: ArrayList<Medicine>, commandSyntax: String): boolean &#123;abstract&#125;
-    +containsInvalidParameters(ui: Ui, parameters: LinkedHashMap<String, String>, requiredParameters: String[], optionalParameters: String[], commandSyntax: String, requiresOptionalParameters: boolean): boolean
-    +isValidName(ui: Ui, name: String): boolean
-    +isValidQuantity(ui: Ui, quantityString: String): boolean
+    +containsInvalidParameterValues(): boolean &#123;abstract&#125;
+    +containsInvalidParameters(): boolean
+    +isValidName(): boolean
+    +isValidQuantity(): boolean
+    +isValidColumn(): boolean &#123;abstract&#125;
 }
 
 class "StockValidator"{
     +StockValidator()
     +containsInvalidParameterValues(): boolean;
-    +isValidOrderId(ui: Ui, id: String, medicines: ArrayList<Medicine>): boolean
-    +isValidPrice(ui: Ui, priceString: String): boolean
-    +isValidExpiry(ui: Ui, expiryString: String): boolean
-    +isValidDescription(ui: Ui, description: String): boolean
-    +isValidMaxQuantity(ui: Ui, maxQuantityString: String): boolean
-    +isValidColumn(ui: Ui, columnName: String): boolean
-    +quantityValidityChecker(ui: Ui, quantity: int, maxQuantity int): boolean
-    +dateValidityChecker(ui: Ui, medicines: ArrayList<Medicine>, expiryDate Date, name String): boolean
+    +isValidOrderId(): boolean
+    +isValidPrice(): boolean
+    +isValidExpiry(): boolean
+    +isValidDescription(): boolean
+    +isValidMaxQuantity(): boolean
+    +isValidColumn(): boolean
+    +quantityValidityChecker(): boolean
+    +dateValidityChecker(): boolean
 }
 
 class "DispenseValidator"{
     +DispenseValidator()
     +containsInvalidParameterValues(): boolean;
-    +isValidDispenseId(ui: Ui, id: String, medicines: ArrayList<Medicine>): boolean
-    +isValidColumn(ui: Ui, customerId: String): boolean
-    +isValidStaffName(ui: Ui, staffName: String): boolean
-    +isValidColumn(ui: Ui, columnName: String): boolean
-    +isValidDate(ui: Ui, dateString: String): boolean
+    +isValidDispenseId(): boolean
+    +isValidColumn(): boolean
+    +isValidStaffName(): boolean
+    +isValidColumn(): boolean
+    +isValidDate(): boolean
 }
 
 class "OrderValidator"{
     +OrderValidator()
     +containsInvalidParameterValues(): boolean;
-    +isValidOrderId(ui: Ui, oid: String, medicines: ArrayList<Medicine>): boolean
-    +isValidDate(ui: Ui, dateString: String): boolean
-    +isValidStatus(ui: Ui, statusString: String): boolean
-    +isValidColumn(ui: Ui, columnName: String): boolean
+    +isValidOrderId(): boolean
+    +isValidDate(): boolean
+    +isValidStatus(): boolean
+    +isValidColumn(): boolean
 }
 
 "{abstract}\n MedicineValidator" <|---- "StockValidator"
 "{abstract}\n MedicineValidator" <|-- "DispenseValidator"
 "{abstract}\n MedicineValidator" <|---- "OrderValidator"
 
-note bottom of "{abstract}\n MedicineValidator" : Note: The input parameters for\ncontainsInvalidParameterValues()\nhas been left out from the subclasses\nto make this diagram more compact.
+note "The input parameters for all functions\nhas been left out to make this\ndiagram more compact." as n1
  '
 @enduml

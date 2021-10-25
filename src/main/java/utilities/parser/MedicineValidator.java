@@ -115,4 +115,6 @@ public abstract class MedicineValidator {
         }
         return false;
     }
+
+    abstract boolean isValidColumn(Ui ui, String columnName);
 }
