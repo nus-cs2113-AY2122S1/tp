@@ -4,14 +4,18 @@
 
 ## Introduction
 
-StonksXD is a smart money management application that does the following: 
-- tracks daily expenses, 
-- sets/adjusts spending limits
-- gives advice based on available data
+StonksXD is your go-to smart money management application that is able to: 
+- track your daily expenses 
+- sets/adjusts your spending limits
+- provide you with helpful financial tips and insights
 
-It is optimised for a once-a-day logging system and allows you to 
-view your financial records through both text and graphs in different currencies!
+It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. It also allows you to 
+view your financial records through both text and graphs, in different currencies, so you can use this application anywhere around the world!
 
+Using this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
+without having to learn how to write a single line of code.
+
+Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -45,7 +49,7 @@ view your financial records through both text and graphs in different currencies
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
+5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
 8. Type `balance` to view your net saving.
@@ -68,7 +72,7 @@ Format: `help`
 <details>
   <summary> Expected output in run window (Click to expand!)</summary>
 
-````
+```
 -----------------------------------------------------------------------------------------------------
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
@@ -92,7 +96,7 @@ To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To View Your Yearly Report: show_graph
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
-````
+```
 </details>
 
 <br>
@@ -353,22 +357,22 @@ Your total income is: $2800.00
 </details>
 <br>
 
-### Find entry using date: `find YYYY-MM-DD`
+### Find entry using date: `find DD/MM/YYYY`
 
 Finds and displays the income or expense entries recorded on the given date.
 
-Format: `find YYYY-MM-DD`
+Format: `find DD/MM/YYYY`
 
 - If the date given is not in the recognised format, it will be treated as a String and be passed into keyword search.
 
 Examples:
 
-- `find 2021-10-19` returns income and/or expense entries recorded on the given date.
+- `find 19/10/2021` returns income and/or expense entries recorded on the given date.
 
 <details>
   <summary> Expected output in run window </summary>
 
-If you enter `find 2021-10-19`, it will find the entry recorded on that date:
+If you enter `find 19/10/2021`, it will find the entry recorded on that date:
 ````
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
@@ -447,13 +451,13 @@ Shows the total expense you had accumulated during a given time period.
 Format: `btw_ex s/START_DATE e/END_DATE`
 
 Examples:
-- `btw_ex s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+- `btw_ex s/06/12/1987 e/21/11/1999` will return the total income of all entries between the given dates.
 <details>
   <summary> Expected output in run window </summary>
 
 If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
 
-- Give the command `btw_ex s/2021-07-10 e/2021-10-23`:
+- Give the command `btw_ex s/10/07/2021 e/23/10/2021`:
 ````
 -----------------------------------------------------------------------------------------------------
 Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
@@ -473,13 +477,13 @@ Format: `btw_in s/START_DATE e/END_DATE`
 - `START_DATE` & `END_DATE` have to be valid and non-empty
 
 Examples: 
-- `btw_in s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+- `btw_in s/06/12/1987 e/21/11/1999` will return the total income of all entries between the given dates.
 <details>
   <summary> Expected output in run window </summary>
 
 If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
 
-- Give the command `btw_in s/2021-07-10 e/2021-10-23`:
+- Give the command `btw_in s/10/07/2021 e/23/10/2021`:
 ````
 -----------------------------------------------------------------------------------------------------
 Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
@@ -525,7 +529,7 @@ All your entries have been cleared!
 ### View Yearly Report: `show_graph`
 
 Shows the monthly breakdown of the finances in a Yearly Report which also
-includes current month spendings and earnings.
+includes current month spending and earnings.
 
 Format: `show_graph`
 
@@ -579,7 +583,6 @@ Format: `end`
 ██   ██    ██    ██          ██  ██ 
 ██████     ██    ███████        ██ 
 -----------------------------------------------------------------------------------------------------
-
 ````
 </details>
 
@@ -596,24 +599,24 @@ Format: `end`
 
 ## Command Summary
 
-| Action | Format, Examples |
-| ------------ | ------------- |
-| View all possible commands | `help` |
-| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT` <br /> e.g., `add_ex d/KFC lunch a/10.20` |
-| Delete expense entry | `del_ex i/INDEX` <br /> e.g., `del_ex i/3` |
-| List all expense entries | `list_ex` |
-| View total expense | `total_ex` |
-| Create income entry | `add_in d/DESCRIPTION a/AMOUNT` <br /> e.g., `add_in d/work a/3200` |
-| Delete income entry | `del_in i/INDEX` <br /> e.g., `del_in i/2` |
-| List all income entries | `list_in` |
-| View total income | `total_in` |
-| Find entry using date | `find YYYY-MM-DD` <br /> e.g., `find 2021-10-19` |
-| Find entry using keyword | `find KEYWORD` <br /> e.g., `find FOOD` |
-| View total balance | `balance` |
-| Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` <br /> e.g., `btw_ex s/2021-07-10 e/2021-10-23` |
-| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` <br /> e.g., `btw_in s/2021-07-10 e/2021-10-23` |
-| Clear all entries | `clear_all_entries` |
-| View Yearly Report | `show_graph` |
-| To terminate program | `end` |
+| Action | Format | Examples |
+| ------------ | ------------- | ------------- |
+| View all possible commands | `help` | - |
+| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT`  |  `add_ex d/KFC lunch a/10.20` |
+| Delete expense entry | `del_ex i/INDEX` | `del_ex i/3` |
+| List all expense entries | `list_ex` | - |
+| View total expense | `total_ex` | - |
+| Create income entry | `add_in d/DESCRIPTION a/AMOUNT`  | `add_in d/work a/3200` |
+| Delete income entry | `del_in i/INDEX` | `del_in i/2` |
+| List all income entries | `list_in` | - |
+| View total income | `total_in` | - |
+| Find entry using date | `find YYYY-MM-DD` | `find 19/10/2021` |
+| Find entry using keyword | `find KEYWORD` | `find food` |
+| View total balance | `balance` | - |
+| Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` | `btw_ex s/10/07/2021 e/23/10/2021` |
+| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
+| Clear all entries | `clear_all_entries` | - |
+| View Yearly Report | `show_graph` | - |
+| To terminate program | `end` | - |
 
 
