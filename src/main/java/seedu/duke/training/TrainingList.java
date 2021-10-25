@@ -51,7 +51,6 @@ public class TrainingList {
     public TrainingSchedule deleteTrainingSchedule(int trainingNum) throws IndexOutOfBoundsException {
         try {
             int indexToDelete = trainingNum - 1;
-            assert indexToDelete >= 0;
             TrainingSchedule training = trainingList.get(indexToDelete);
             trainingList.remove(indexToDelete);
             return training;

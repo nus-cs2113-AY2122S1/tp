@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
+import seedu.duke.command.*;
 import seedu.duke.member.exception.InvalidMemberException;
 
 class MemberListTest {
@@ -59,14 +60,18 @@ class MemberListTest {
     @Test
     void deleteOneMember() {
         final String string = "delete /m 1";
-        Parser.deleteMember(fullMemberList, string);
+        int index = Parser.getIndex(string);
+        new DeleteMember(fullMemberList, index);
+        //Parser.deleteMember(fullMemberList, string);
         assertEquals(4, fullMemberList.getMemberList().size());
     }
 
     @Test
     void makeMemberEntry() {
         final String string = "add /m /n Lorem Ipsum /s A1231234B";
-        Parser.makeMemberEntry(fullMemberList, string);
+        Member newMember = Parser.getMemberDetails(string);
+        new AddMember(fullMemberList, newMember);
+        //Parser.makeMemberEntry(fullMemberList, string);
 
         assertEquals(fullMemberList.getMemberName(6), "Lorem Ipsum");
         assertEquals(fullMemberList.getMemberStudentNumber(6), "A1231234B");
@@ -75,7 +80,10 @@ class MemberListTest {
     @Test
     void editMember() {
         final String string = "edit /m 1 /n Ian Wang";
-        Parser.editMember(fullMemberList, string);
+        int index = Parser.getIndex(string);
+        Member memberDetail = Parser.getMemberDetails(string);
+        new EditMember(fullMemberList, index, memberDetail);
+
         try {
             assertEquals(fullMemberList.getMember(1).getName(), "Ian Wang");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
