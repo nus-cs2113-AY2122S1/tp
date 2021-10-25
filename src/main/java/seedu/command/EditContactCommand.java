@@ -7,9 +7,8 @@ import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class EditContactCommand extends Command {
     public static final int PERSONAL_CONTACT_INDEX = -1;
