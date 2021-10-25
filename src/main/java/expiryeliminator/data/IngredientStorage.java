@@ -33,7 +33,7 @@ public class IngredientStorage {
     }
 
     /**
-     * Set ingredient with input
+     * Set ingredient with associated input.
      *
      * @param ingredientInput ingredient to be copied to the ingredient object in the class.
      */
