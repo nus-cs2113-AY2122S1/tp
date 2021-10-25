@@ -13,11 +13,14 @@ import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Person;
+import medbot.person.PersonType;
 
 public abstract class ParserUtils {
     private static final String END_LINE = System.lineSeparator();
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
+    private static final String PARAMETER_PATIENT = "p/";
+    private static final String PARAMETER_STAFF = "s/";
     private static final String PARAMETER_EMAIL = "e/";
     private static final String PARAMETER_IC = "i/";
     private static final String PARAMETER_ADDRESS = "a/";
@@ -30,6 +33,8 @@ public abstract class ParserUtils {
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
     private static final String ERROR_NO_PARAMETER = "No parameters given";
     private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
+    private static final String ERROR_PERSON_TYPE_NOT_SPECIFIED = "Person type not specified.";
+    private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
     private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified.";
     private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified.";
     private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format.";
@@ -307,6 +312,18 @@ public abstract class ParserUtils {
             assert false;
             throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
         }
+    }
+
+    public static PersonType parsePersonType(String string) throws MedBotParserException {
+        String attributeSpecifier = string.substring(0, PARAMETER_BUFFER);
+        if (attributeSpecifier.equals(PARAMETER_PATIENT)) {
+            return PersonType.PATIENT;
+        }
+        if (attributeSpecifier.equals(PARAMETER_STAFF)) {
+            return PersonType.STAFF;
+        }
+
+        throw new MedBotParserException(ERROR_PERSON_TYPE_INVALID);
     }
 
     /**

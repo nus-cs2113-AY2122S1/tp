@@ -1,0 +1,4 @@
+1 | S1212121B | Aaa | X | X | X
+2 | S1234561C | Testes | X | X | X
+3 | S1231234A | John Smith | 91234567 | johnsmit@eg.com | Qweqwqwenoiqwenqw
+4 | S1010101B | John Tan The Patient | 98765432 | X | X
