@@ -12,12 +12,11 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Library staff who prefer keyboard inputs and require a text based application to quickly track and update the statuses of items within their catalogue
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
-
+This product aims to streamline the process of managing the book catalogues within their library. It will allow library staff to quickly track their books, such as finding out their location and status. Designed for fast typists, it also allows staff to track their inventory faster and more efficiently.
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
