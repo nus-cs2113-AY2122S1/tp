@@ -59,4 +59,25 @@ class RecipeTest {
             System.out.println(g.getMessage());
         }
     }
+
+    @Test
+    public void addIngredient_newIngredient_success() {
+        Recipe r = new Recipe("Chicken rice");
+        r.addIngredient("Chicken");
+        r.addIngredient("Rice");
+        r.addStep("Cook rice");
+        r.addStep("Cook chicken");
+        r.addStep("Mix");
+        r.addIngredient("Salt");
+        String expected = "Chicken rice" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Chicken" + System.lineSeparator()
+                + "2. Rice" + System.lineSeparator()
+                + "3. Salt" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Cook rice" + System.lineSeparator()
+                + "2. Cook chicken" + System.lineSeparator()
+                + "3. Mix" + System.lineSeparator();
+        assertEquals(expected, r.toString());
+    }
 }
