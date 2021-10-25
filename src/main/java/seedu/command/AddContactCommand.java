@@ -72,6 +72,7 @@ public class AddContactCommand extends Command {
         }
     }
 
+    //@@author ashrafjfr
     private boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         String[] addedContactDetails = extractContactDetails(addedContact);
@@ -131,4 +132,5 @@ public class AddContactCommand extends Command {
     private String stringCleaner(String input) {
         return input.replace(" ", "").toLowerCase();
     }
+    //@@author
 }
