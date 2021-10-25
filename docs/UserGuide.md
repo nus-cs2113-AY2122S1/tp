@@ -173,10 +173,10 @@ Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
 Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n John Doe -g johndoecoder -e john@email.com -te johndoe`
-List all contacts | `deadline <TASK_DESCRIPTION> /by <YYYY-MM-DD HH:MM>` | `deadline submit ip jar /by 2021-10-02 22:20`
-View a contact| `list` | `list`
-Edit a contact| `event <TASK_DESCRIPTION> /at <YYYY-MM-DD HH:MM>` | `event graduation party /at 2021-11-01 18:10`
-Delete a contact | `done <TASK_INDEX>` | `done 2`
-Search for a contact| `find <SEARCH_STRING>` | `find homework`
+List all contacts | `list` | `list`
+View a contact| `view <INDEX>` | `view 2`
+Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com`
+Delete a contact | `rm <INDEX>` | `rm 1`
+Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search -g revflash`
 Import contacts from .txt file|`import` | `import`
-Exit duke | `bye` | `bye`
+Exit ConTech | `exit` | `exit`
