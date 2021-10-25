@@ -17,7 +17,7 @@ public class FindUniCommand extends Command {
             Ui.printFindUniNull();
         } else {
             for (University university : result) {
-                Ui.printUniversity(university);
+                Ui.printUniversity(university, false);
             }
         }
     }
