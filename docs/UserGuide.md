@@ -262,8 +262,7 @@ CS1231 - CAS CS131 : Combinatoric Structures
 contains the data of your previous AddressBook home folder.
 
 
-**Q**: How do I save my selected universities and modules? 
-
+**Q**: How do I save my selected universities and modules?
 **A**: All your universities, modules and module mappings are automatically saved at 
 each command and will be auto-loaded on program start. 
 

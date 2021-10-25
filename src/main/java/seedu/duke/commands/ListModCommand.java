@@ -20,7 +20,7 @@ public class ListModCommand extends Command {
             for (int i = 0; i < moduleList.getSize(); i++) {
                 Module currentModule = moduleList.get(i);
                 assert currentModule.getModuleCode() != null;
-                Ui.printModule(currentModule, currentModule.getIndex());
+                Ui.printModule(currentModule, currentModule.getIndex(), true);
             }
         }
     }
