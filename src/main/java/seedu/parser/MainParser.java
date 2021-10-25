@@ -34,7 +34,7 @@ public class MainParser {
     private static final String DELETE_CONTACT_COMD = "rm";
     private static final String VIEW_CONTACT_COMD = "view";
     private static final String EXIT_COMD = "exit";
-    private static final String LIST_COMD = "list";
+    private static final String LIST_COMD = "ls";
     private static final String HELP_COMD = "help";
     private static final String SEARCH_COMD = "search";
     private static final String IMPORT_COMD = "import";
