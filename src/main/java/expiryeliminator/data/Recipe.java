@@ -4,14 +4,13 @@ import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
-import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Represents a recipe.
  */
 public class Recipe {
-    private final String name;
-    private final TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
+    private String name;
+    private TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
 
     /**
      * Initialises a recipe.
@@ -29,6 +28,14 @@ public class Recipe {
      */
     public String getName() {
         return name;
+    }
+
+    public void setName(String inputName) {
+        name = inputName;
+    }
+
+    public void setIngredientQuantities(String ingredientName, IngredientQuantity ingredientQuantity) {
+        ingredientQuantities.put(ingredientName, ingredientQuantity);
     }
 
 
