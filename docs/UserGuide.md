@@ -22,13 +22,15 @@ reference. We hope you enjoy using *Food-O-Rama*! 💕
     * `help`: [List all commands](#list-all-commands-help)
     * [Dish Commands](#add-new-dish-add-dish)
         * `add dish`: [Add new dish](#add-new-dish-add-dish)
-        * `add dish waste`: [Add a dish's wastage](#add-dish-wastage-add-dish-waste)
+        * `add dish waste`: [Add dish wastage](#add-dish-wastage-add-dish-waste)
+        * `set dish limit`: [Add a limit for dish wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
         * `del dish`: [Delete existing dish](#delete-existing-dish-del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes-list-dish)
     * [Ingredient Commands](#add-new-ingredient-add-ingr)
         * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
         * `add ingr waste`: [Add an ingredient's wastage](#add-ingredient-wastage-add-ingr-waste)
+        * `set ingr limit`: [Add a limit for ingredient wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
         * `link`: [Link ingredient to dish](#link-ingredient-to-dish-link)
         * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
         * `list ingr`: [View existing ingredients](#view-all-exising-ingredients-list-ingr)
@@ -86,11 +88,13 @@ java -jar Food-O-Rama.jar
 | View the list of commands | `help` |
 | Add new *dish* | `add dish [DISH_NAME]` |
 | Add the *dish wastage* | `add dish waste [DISH_NAME]`; followed by `[WEIGHT_IN_KG]` |
+| Set the limit for Dish Wastage | set dish limit [dishName] followed by [weight in KG] |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
 | View existing *dishes* | `list dish`|
 | Add a new *ingredient* | `add ingr [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
 | Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]`; followed by `[weight in KG]` |
 | Add *ingredient wastage* | `add ingr waste [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
+| Set the limit for Ingredient Wastage | set ingr limit [ingrName] followed by [weight in KG] |
 | Link *dish* to an *ingredient* | `link [DISH_NAME] / [INGR_NAME]` |
 | Delete existing *ingredient* | `del [INGR_NAME]` |
 | View existing *ingredients* | `list ingr` |
@@ -192,6 +196,7 @@ Format: `add dish waste [DISH_NAME]`
 * Can only be performed on existing `DISH_NAME`
 * ❕ You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
+
 Example of usage:
 
 `add dish waste chicken rice`
@@ -216,6 +221,66 @@ Wastage of chicken rice is now 2.5 kg
 ____________________________________________________________
 ```
 
+### Add a limit for dish wastage: `set dish limit`
+
+Set a limit for wastage of an existing dish
+
+Format: `set dish limit [DISH_NAME]`
+
+* Can only be performed on existing `DISH_NAME`
+* ❕ You will be prompted to enter the limit to watch out for in the next step.
+
+Example of usage:
+
+`set dish limit chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Enter the limit for prata in kg:
+____________________________________________________________
+```
+
+Example of usage:
+
+`3.5`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+The limit for prata is now 3.5 kg
+____________________________________________________________
+```
+
+When adding new wastage to the dish causes it to exceed the limit,
+the user will receive a prompt stating that the current dish has exceeded its limits.
+There will also be a indication showing it has exceeded the limit when listing dishes.
+
+Expected outcome:
+```
+____________________________________________________________
+Enter the weight of prata in kg:
+____________________________________________________________
+4.5
+____________________________________________________________
+Wastage of prata is now 4.5 kg
+____________________________________________________________
+____________________________________________________________
+Wastage of prata has exceeded the limit
+____________________________________________________________
+```
+```
+____________________________________________________________
+Here are the dishes you have:
+1. prata
+   Wastage: 4.5 kg
+   Ingredients Linked: None
+   Limit: 3.5 (exceeded)
+You can use command 'add' to add new dishes!
+____________________________________________________________
+```
 <br/>
 
 ### Delete existing dish : `del dish`
@@ -397,6 +462,67 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Wastage of chicken is now 1.5 kg
+____________________________________________________________
+```
+
+### Add a limit for ingredient wastage: `set ingr limit`
+
+Set a limit for wastage of an existing ingredient
+
+Format: `set ingr limit [INGR_NAME]`
+
+* Can only be performed on existing `INGR_NAME`
+* ❕ You will be prompted to enter the limit to watch out for in the next step.
+
+Example of usage:
+
+`set ingr limit chicken`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Enter the limit for chicken in kg:
+____________________________________________________________
+```
+
+Example of usage:
+
+`7.7`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+The limit for chicken is now 7.7 kg
+____________________________________________________________
+```
+
+When adding new wastage to the ingredient causes it to exceed the limit,
+the user will receive a prompt stating that the current ingredient has exceeded its limits.
+There will also be a indication showing it has exceeded the limit when listing ingredients.
+
+Expected outcome:
+```
+____________________________________________________________
+Enter the weight of chicken in kg:
+____________________________________________________________
+8.45
+____________________________________________________________
+Wastage of chicken is now 8.45 kg
+____________________________________________________________
+____________________________________________________________
+Wastage of chicken has exceeded the limit
+____________________________________________________________
+```
+```
+____________________________________________________________
+Here are the ingredients you have: 
+1. chicken
+   Storage: 2.2 kg
+   Wastage: 8.45 kg
+   Limit: 7.7 (exceeded)
+You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
 
