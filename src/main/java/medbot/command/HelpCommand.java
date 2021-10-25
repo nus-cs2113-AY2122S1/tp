@@ -15,9 +15,9 @@ public class HelpCommand extends Command {
         this.viewType = viewType;
     }
 
-    public HelpCommand(CommandType commandType, ViewType viewType) {
-        this.commandType = commandType;
+    public HelpCommand(ViewType viewType, CommandType commandType) {
         this.viewType = viewType;
+        this.commandType = commandType;
     }
 
 
@@ -25,7 +25,7 @@ public class HelpCommand extends Command {
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         String output;
         if (commandType == null) {
-            output = ui.getCommandList();
+            output = Ui.getCommandList(viewType);
             ui.printOutput(output);
             return;
         }
@@ -61,7 +61,7 @@ public class HelpCommand extends Command {
             output = ui.getExitHelpMessage();
             break;
         default:
-            output = ui.getCommandList();
+            output = Ui.getCommandList(viewType);
             break;
         }
         ui.printOutput(output);

@@ -217,16 +217,21 @@ public class Ui {
     /**
      * Prints a list of all available commands.
      *
+     * @param viewType the viewType context of the command.
      * @return all supported commands.
      */
-    public static String getCommandList() {
-        return "Here are the list of commands:" + END_LINE + END_LINE
-                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
-                + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
-                + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+    public static String getCommandList(ViewType viewType) throws MedBotException {
+        switch (viewType) {
+        case PATIENT_INFO:
+            return PatientUi.getPatientCommandList();
+        case MEDICAL_STAFF_INFO:
+            return StaffUi.getStaffCommandList();
+        case SCHEDULER:
+            return SchedulerUi.getSchedulerCommandList();
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
     }
 
     /**
