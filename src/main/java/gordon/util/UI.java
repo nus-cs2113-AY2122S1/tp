@@ -18,7 +18,7 @@ public class UI {
         System.out.println("4. Find a recipe: find \"Keyword\"");
         System.out.println("5. Check a specific recipe: check \"Name of Recipe\"");
         System.out.println("6. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"");
-        System.out.println("7. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"");
+        System.out.println("7. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\" ");
         System.out.println("8. List all tags: listTags");
         System.out.println("9. Help me: help");
     }
