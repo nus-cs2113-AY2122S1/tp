@@ -14,37 +14,22 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 5. Type the command in the command box and press Enter to execute it.
 6. Refer to the Features below for details for each command.
 
+## Program run through
+This SEPlanner allows the user to search for mapping through our platform. To do so, users can follow the following steps:
+  1. Add partner universities the user is interested in.
+  2. Add potential NUS modules that the user wants to add.
+  3. Search for potential mapping for a particular selected university.
+  4. Select a mapping and add the mapping.
+
 ## Features 
 
-### Viewing all selected universities: `list /suni`
-Displays all universities added by the user.
-Format: `list /suni`  
-Examples:
-`list /suni`  
-[35] Singapore Management Univeristy  
-[69] University of Leeds  
-[77] - University of Waterloo
-
-### Viewing all master universities: `list /muni`
-Displays all universities from the master list.
-Format: `list /muni`  
-Examples:
-```list /muni
-Here are the modules in the list:  
-[1] ACC1701X : Accounting for Decision Makers  
-[2] ACC2706 : Managerial Accounting  
-[3] AR2102 : Design 4  
-...  
-[803] TR3008 : Technological Innovation  
-[804] UD5221 : Urban Design Theory and Disco  
-[805] UD5628 : Critique of Contemporary Urban Design  
+### View all available universities: 
+Displays all modules from the master list of universities that the user can choose from.  
+#### Format: `list /muni`  
+#### Example of usage:
+* Input: `list /muni`  
+Expected output:
 ```
-
-### Viewing all master modules: `list /mmod`
-Displays all modules from the master list.  
-Format: `list /mmod`  
-Examples: 
-```list /mmod
 Here are the universities and module mappings in the list:  
 [1] - Aarhus School of Business  
 [2] - Aarhus University  
@@ -55,98 +40,95 @@ Here are the universities and module mappings in the list:
 [80] - Western University  
 ```
 
-### Adding a partner university: add /uni
-Adds a university that the user is interested in into the university list. 
-* The argument required here is the index of the university instead of its name.
-  This is to prevent too much typing by the user.  
-  Format: `add /uni UNIVERSITY_INDEX  `  
-  Example:  
-  Input    -> `add /uni 47`  
-  Output   -> `New university added: [47] - The University of Hong Kong`
-
-### Adding a NUS module: add /mod
-Adds a NUS module that the user wants to complete during SEP.
-* The argument required can be either the module code, or the module index.  
-  Format: add /mod MODULE_CODE add /mod MODULE_INDEX  
-  Examples:  
-  Input   -> `add /mod CS1010`  
-  Output  -> `New module added: [77] CS1010 : Programming Methodology`
-  Input   -> `add /mod 77`  
-  Output  -> `New module added: [77] CS1010 : Programming Methodology`
-
-### Viewing all selected universities: `list /suni`
-Displays all universities added by the user.
-Format: `list /suni`  
-Examples:
-```list /suni 
-[35] Singapore Management Univeristy  
-[69] University of Leeds  
-[77] - University of Waterloo  
+### View all selected universities:
+Displays all universities added, as well as all module mappings added to the university by the user.  
+#### Format: `list /suni`  
+#### Example of usage:
+* Input: `list /suni`  
+Expected output:
+```
+Here are the universities and module mappings in your list:
+[40] - Technical University of Munich
+    1 | IE4056 - WI001098 : Introduction to Production Scheduling Theory
+[80] - Western University
 ```
 
-### Viewing all selected modules: `list /smod`
-Displays all modules added by the user.  
-Format: `list /smod`  
-Examples:
-```list /smod
+### View all available modules: 
+Displays all modules from the master list of modules that the user can choose from.  
+#### Format: `list /mmod`  
+#### Example of usage:
+* Input: `list /mmod`  
+Expected output:  
+```
 Here are the modules in the list:  
-[1] CS1010 : Programming Methodology  
-[2] CS1231 : Discrete Structures  
-[3] CS3233 : Competitive Programming
-``` 
-
-### Finding a specific university: `find /uni`
-Displays detail of universities that matches the keyword by the user.  
-* The output also consists of the index of the university, which is needed for subsequent commands.  
-Format: `find /uni KEYWORD`
-Examples:  
-```
-find /uni tsing
-[29] - National Tsing Hua University
-[54] - Tsinghua University
+[1] ACC1701X : Accounting for Decision Makers  
+[2] ACC2706 : Managerial Accounting  
+[3] AR2102 : Design 4  
+...  
+[803] TR3008 : Technological Innovation  
+[804] UD5221 : Urban Design Theory and Disco  
+[805] UD5628 : Critique of Contemporary Urban Design  
 ```
 
-### Finding a specific module: `find /mod`
-Displays detail of modules that matches the keyword by the user.
-* The output also consists of the index of the module, which is needed for subsequent commands.  
-  Format: `find /mod KEYWORD`
-  Examples:
+### View all selected modules
+Displays all modules from the master list of modules that the user can choose from.  
+#### Format: `list /smod`  
+#### Example of usage:
+* Input: `list /smod`  
+Expected output:
 ```
-find /mod CS10
-[1] CS1010 : Programming Methodology
-[2] CS1010E : Programming Methodology
-[3] CS1010J : Programming Methodology
-[4] CS1010S : Programming Methodology
+Here are the modules in the list:
+[102] CS3220   : Computer Architecture
+[319] IE4044   : Exchange Elective
+[801] ST4991   : Exchange Enrichment Module
+[77] CS1010   : Programming Methodology
+[72] CM4271   : MEDICINAL CHEMISTRY
+[47] CM1417   : Fundamentals of Chemistry
 ```
 
-### Searching for available module mappings: `searchmap`
-Displays all available module mappings for a specific university.
-The mappings displayed will be based on the list of selected modules.
+### Add a partner university
+Add a partner university the user is interested into the user selected university list.
+#### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
+>This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
+> 
+#### Examples of usage: 
+* Input: `add /uni 24`  
+Expected output:
+```
+show output here
+```
+* Input: `add /uni University of California`  
+Expected output:
+```
+show output here
+```
 
-Mappings here are labeled with an index, this index will be used for subsequent commands.
+### Add a NUS module
+Add a NUS module that the user wants to complete during SEP into the user selected module list.  
+#### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
+>This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments. The `<MODULE_INDEX>` can be found via `list /mmod` command.  
+> 
+#### Example of usage:
+* Input: `add /mod 77`  
+Expected output:
+```
+show output here
+```
+* Input: `add /mod CS1010`  
+Expected output:
+```
+show output here
+```
 
-Format: searchmap UNIVERSITY_INDEX
-
-Examples:
-
-* Input: `searchmap 4`
-
-* Output:
-  ```
-  Potential mappings for Boston University:
-  [1] CS1231 - MET CS 248 : Discrete Mathematics
-  [2] CS1231 - CAS CS131 : Combinatoric Structures
-  ```
-### Adding a module mapping: add /map
+### Add a module mapping
 Adds a specific pair of module mapping under a selected university.
 
-Format: add /map UNIVERSITY_INDEX MODULE_MAPPING_INDEX
-
-Examples:
-
-* Input: `add /map 4 2`
-
-* Output:
+Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
+>The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
+> 
+####Example of usage
+* Input: `add /map 4 2`  
+Expected output:
 ```
 The following module mapping has been added under:
 [4] Boston University
@@ -154,37 +136,81 @@ CS1231 - MET CS 248 : Discrete Mathematics
 CS1231 - CAS CS131 : Combinatoric Structures
 ```
 
-### Removing a selected university: `remove /uni`  
-Removes a university from the selected list.
-Format: `remove /uni UNIVERSITY_INDEX`  
-Examples: 
+### Finding a specific university
+Look for universities that matches the user entered keyword.
+* The output also consists of the index of the university, which is needed for subsequent commands.  
+Format: `find /uni <KEYWORD>`
+#### Example of usage:  
+* Input: `find /uni California`  
+Expected output:
 ```
-remove /uni 4
-The following university has been removed: 
-[4] Boston University
+show output here
 ```
 
-### Removing a selected module: `remove /mod`  
-Removes a module from the selected list.
-Format: `remove /mod MODULE_CODE` `remove /mod MODULE_INDEX`
-Examples:
+### Finding a specific module
+Look for modules that matches the user entered keyword.
+* The output also consists of the index of the module, which is needed for subsequent commands.  
+#### Format: `find /mod <KEYWORD>`
+#### Example of usage:
+* Input: `find /mod CS1010`  
+Expected output:
 ```
-remove /mod CS1231
+show output here
+```
+
+### Searching for available module mappings:
+Displays all available module mappings for a specific university that matches the list of selected modules.
+> Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+#### Format: `searchmap <UNIVERSITY_INDEX>`
+#### Example of usage:
+* Input: `searchmap 4`  
+Expected Output:
+  ```
+  Potential mappings for Boston University:
+  [1] CS1231 - MET CS 248 : Discrete Mathematics
+  [2] CS1231 - CAS CS131 : Combinatoric Structures
+  ```
+
+### Remove a selected university
+Remove a partner university from the user selected university list.
+#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
+#### Examples of usage: 
+* Input: `remove /uni 4` 
+Expected output:
+```
+show output here
+```
+* Input: `remove /uni Boston University`  
+Expected output:
+```
+show output here
+```
+
+### Remove a selected NUS module
+Removes a module from the user selected module list.
+#### Format: `remove /mod <MODULE_CODE>` `remove /mod <MODULE_INDEX>`
+#### Examples of usage:
+* Input: `remvoe /mod 81`  
+  Expected output:
+```
 The following module has been removed: 
 [81] CS1231 : Discrete Structures
 ```
+* Input: `remove /mod CS1231`  
+Expected output:
 ```
-remove /mod 81
 The following module has been removed: 
 [81] CS1231 : Discrete Structures
 ```
 
-### Removing a selected module mapping: `remove /map`  
+
+### Remove a selected module mapping
 Removes a module mapping under a selected university.
-Format: `remove /map UNIVERSITY_INDEX MAPPING_INDEX`  
-Examples: 
+#### Format: `remove /map <UNIVERSITY_INDEX> <MAPPING_INDEX>`  
+#### Example of usage: 
+* Input: `remove /map 4 2`  
+Expected output:  
 ```
-remove /map 4 2
 The following module mapping has been removed:
 [4] Boston University
 CS1231 - CAS CS131 : Combinatoric Structures
@@ -202,7 +228,6 @@ contains the data of your previous AddressBook home folder.
 **A**: All your universities, modules and module mappings are automatically saved at 
 each command and will be auto-loaded on program start. 
 
-
 ## Command Summary
 
 Command | Format | Purpose
@@ -211,5 +236,13 @@ Command | Format | Purpose
 `remove` | `remove /uni <UNI_INDEX>` `remove /mod <MOD_INDEX>` `remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
 `list` | `list /muni` `list /mmod` `list /suni` `list /smod` | List master/selected university list or module list
 `searchmap` | `searchmap <UNI_INDEX>`| Search for potential mappings for the selected university
-`find` | `find /uni <UNI_NAME>` `find /mod <MOD_CODE>` | Find the possible university or module
+`find` | `find /uni <KEYWORD>` `find /mod <KEYWORD>` | Find the possible university or module
 `exit` | `exit` | Exit the application
+
+## Glossary
+1. `UNI_INDEX` - The unique identifier corresponding to a particular university.
+2. `MOD_INDEX` - The unique identifier corresponding to a particular module.
+3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the module selected list.
+4. `university selected list` - 
+5. `module selected list` -
+6. 
