@@ -1,6 +1,9 @@
 package seedu.traveller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 //@@author Uxinnn
 public class Day {
     protected ItemsList itemsList;
@@ -32,5 +35,9 @@ public class Day {
 
     public void editItem(int index, Item item) {
         itemsList.editItem(index, item);
+    }
+
+    public ArrayList<Item> searchItem(String itemKey) {
+        return itemsList.searchItem(itemKey);
     }
 }

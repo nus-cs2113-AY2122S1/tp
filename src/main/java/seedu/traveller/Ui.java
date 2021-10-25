@@ -2,6 +2,7 @@ package seedu.traveller;
 
 import seedu.traveller.exceptions.TravellerException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,8 +75,18 @@ public class Ui {
         System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
     }
 
-    public void printSearchItem(String tripName, String itemName) {
-        System.out.println("\tYou have just search item keyword " + itemName + " in trip called " + tripName);
+    public void printSearchItem(String tripName, int dayIndex, String itemKey, ArrayList<Item> keyString) {
+        System.out.println("\tYou have just search item keyword " + itemKey
+                + " on day " + dayIndex + " in trip called " + tripName + "\n");
+        System.out.println("\tResults: ");
+        if (keyString.size() == 0) {
+            System.out.println("\tThere are no results found.");
+        } else {
+            int i = 1;
+            for (Item key : keyString) {
+                System.out.println("\t" + i++ + ". " + key);
+            }
+        }
     }
 
     public void printEditItem(String tripName, int dayIndex, String itemName, String itemTime, int itemIndex) {
