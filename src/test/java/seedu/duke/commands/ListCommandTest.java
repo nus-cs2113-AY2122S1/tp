@@ -89,18 +89,18 @@ public class ListCommandTest {
                 "Asia world tour", event1DateTime,
                 "Indoor Stadium", 1000.90);
         event1.markAsDone();
-        LocalDateTime event2DateTime = Parser.convertDateTime("20-02-2022 2030");
-        Event event2 = new Event("Funfair",
-                "For charity", event2DateTime,
-                "Parade square", 2000.10);
+        eventCatalog.add(event1);
         LocalDateTime taskDeadline1 = Parser.convertDateTime("19-02-2022 1930");
         Task task1 = new Task("Buy Boost", "Need the boost for the concert", taskDeadline1);
         LocalDateTime taskDeadline2 = Parser.convertDateTime("18-02-2022 1930");
         Task task2 = new Task("Collect Tickets", "Collection point: Scape", taskDeadline2);
-        eventCatalog.add(event1);
+        LocalDateTime event2DateTime = Parser.convertDateTime("20-02-2022 2030");
+        Event event2 = new Event("Funfair",
+                "For charity", event2DateTime,
+                "Parade square", 2000.10);
+        eventCatalog.add(event2);
         eventCatalog.get(0).addToTaskList(task1);
         eventCatalog.get(0).addToTaskList(task2);
-        eventCatalog.add(event2);
         eventCatalog.sortCatalog();
     }
 }
