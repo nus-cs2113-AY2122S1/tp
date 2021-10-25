@@ -172,7 +172,7 @@ ____________________________________________________________
 Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
-Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n John Doe -g johndoecoder -e john@email.com -te johndoe` <br>`add -n Marcus`<br/>
+Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
 List all contacts | `list` | `list`
 View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
