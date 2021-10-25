@@ -124,6 +124,7 @@ Adds medication into the inventory.
 
 > :warning: Warning
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
+> * If medication and expiry date exists, price, description and maximum quantity will be optional parameters. If you include `p/PRICE` or `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing price, existing description and existing maximum quantity.
 
 Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
@@ -142,10 +143,23 @@ Medication added: panadol
 +----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
 ```
 
-Example 2 (If medication does not
-exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
+Example 2 (If medication and expiry date exists): `addstock n/panadol p/10 q/10 e/14-09-2021 d/for fever m/1000`
 
 Expected Output 2:
+
+```
+Same Medication and Expiry Date exist. Update existing quantity.
++====+=========+========+==========+=============+==========================================+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |               DESCRIPTION                | MAX_QUANTITY | 
++====+=========+========+==========+=============+==========================================+==============+
+| 2  | PANADOL | $20.00 |    30    | 14-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER   |     1000     | 
+|    |         |        |          |             |                AND PAINS                 |              | 
++----+---------+--------+----------+-------------+------------------------------------------+--------------+
+```
+
+Example 3 (If medication does not exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
+
+Expected Output 3:
 
 ```
 Medication added: paracetamol
@@ -282,7 +296,12 @@ Example: `addprescription n/panadol q/5 s/john c/123`
 Expected Output:
 
 ```
-Prescribed:panadol Quantity:5 Expiry Date:13-09-2021
+Prescribed:panadol Quantity:1 Expiry Date:14-09-2021
++====+=========+==========+=============+============+=======+==========+
+| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
++====+=========+==========+=============+============+=======+==========+
+| 9  | panadol |    5     |     123     | 26-10-2021 | john  |    2     | 
++----+---------+----------+-------------+------------+-------+----------+
 ```
 
 ### Deleting prescriptions: `deleteprescription`

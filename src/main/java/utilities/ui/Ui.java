@@ -337,7 +337,11 @@ public class Ui {
         System.out.println("For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/");
     }
 
-
+    /**
+     * Prints out the order in a table format.
+     *
+     * @param order Order to be printed.
+     */
     public void printOrder(Order order) {
         ArrayList<Order> orders = new ArrayList<>();
         orders.add(order);
@@ -399,6 +403,17 @@ public class Ui {
             System.out.println(row);
             printRowBorder(columnWidths);
         }
+    }
+
+    /**
+     * Prints out the prescription in a table format.
+     *
+     * @param prescription Prescription to be printed.
+     */
+    public void printPrescription(Prescription prescription) {
+        ArrayList<Prescription> prescriptions = new ArrayList<>();
+        prescriptions.add(prescription);
+        printPrescriptions(prescriptions);
     }
 
     /**
