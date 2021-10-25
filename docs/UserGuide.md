@@ -6,6 +6,13 @@ Libmgr is a desktop app for managing the inventory of libraries, optimised for u
 Designed for fast typists, it can help to augment the day-to-day tasks of a librarian and can help them to get tasks
 done in an efficient manner.
 
+- [Quick Start](#Quick-Start)
+- [Features](#Features)
+  - [Removing an item: `remove`](#Removing-an-item)
+  - [Exiting the program: `exit`](#Exiting-the-program)
+- [FAQ](#FAQ)
+- [Command Summary](#Command-Summary)
+
 ## Quick Start
 
 1. Ensure that you have Java `11` or above installed.
@@ -15,19 +22,21 @@ done in an efficient manner.
 
 ## Features
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Removing an item
+Removes an existing item from the catalogue.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `remove i/ID`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The item specified by `ID` will be deleted.
 
-Example of usage: 
+Examples of usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`remove i/012350`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Exiting the program
+Exits the program.
+
+Format: `exit`
 
 ## FAQ
 
