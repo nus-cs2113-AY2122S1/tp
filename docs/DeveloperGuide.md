@@ -81,6 +81,7 @@ The rest of the program consist of four components.
 * `Inventory`: Contains a collection of classes used by MediVault to represent
 different medication information.
 * `Errors`: Contains collection of classes that handles exceptions during execution of MediVault.
+
 ### Command
 
 ![CommandClassDiagram](diagrams/diagram_images/CommandClassDiagram.png)
