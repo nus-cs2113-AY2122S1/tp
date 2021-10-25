@@ -5,16 +5,16 @@
 
 box Command COLOR_COMMAND_BOX
     participant ":DeleteStockCommand" as deleteStock COLOR_COMMAND
-    participant ":CommandSyntax" as commandSyntax COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":Ui" as ui COLOR_UTILITIES
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
     participant ":StockValidator" as stockValidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant ":Medicine" as medicine COLOR_INVENTORY
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
     participant ":Stock" as stock COLOR_INVENTORY
 end box
 
@@ -25,8 +25,11 @@ deleteStock -> ui : getInstance()
 deleteStock <-- ui
 deleteStock -> medicine : getInstance()
 deleteStock <-- medicine
-deleteStock -> commandSyntax : containsInvalidParameters()
-deleteStock <-- commandSyntax : isInvalidParameter
+create stockValidator
+deleteStock -> stockValidator: new StockValidator()
+deleteStock <-- stockValidator
+deleteStock -> stockValidator : containsInvalidParameters()
+deleteStock <-- stockValidator : isInvalidParameter
 
 opt !isInvalidParameter
     deleteStock -> stockValidator : containsInvalidParameterValues()
