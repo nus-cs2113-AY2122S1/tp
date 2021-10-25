@@ -15,7 +15,7 @@ Below is a guide on how you can get started using our program to start Sched'ing
         - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
         - [2.2.3 Event: `event`](#223-event-event)
     - [2.3 Listing your tasks: `list`](#23-listing-all-your-tasks-list)
-    - [2.4 Sorting your tasklist: `sort`](#24-sorting-your-tasklist-sort)
+    - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
     - [2.5 Deleting your tasks: `delete`](#25-deleting-your-tasks-delete)
     - [2.6 Exiting the program: `bye`](#26-exiting-the-program-bye)
 - [3. FAQ](#3-faq)
@@ -63,7 +63,7 @@ Displays all commands available for the SchedUrMods application.
 > - Command arguments within `[ ]` are optional fields and may be arranged in any order or left out.
 
 ### 2.2.1 Todo: `todo`
-Adds your **todo** task to your tasklist.
+Adds your **todo** task to your task list.
 
 **Format:** `todo <description> [--flag <argument>]`
 - `[description]` specifies the description of your todo.
@@ -73,7 +73,7 @@ Adds your **todo** task to your tasklist.
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
 **Example:** `todo read book --priority low --doOn 20-10-2021 02:00:00 --recur daily`
-- Adds a todo task with description `read book` to the tasklist.
+- Adds a todo task with description `read book` to the task list.
 - Specifies the priority to be `low`.
 - Specifies the task is to be done on `20-10-2021 02:00:00`.
 - Specifies the task is to repeat `daily`.
@@ -89,7 +89,7 @@ Adds your **todo** task to your tasklist.
 ```
 
 ### 2.2.2 Deadline: `deadline`
-Adds your **deadline** task to your tasklist.
+Adds your **deadline** task to your task list.
 
 **Format:** `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `[description]` specifies the description of your deadline.
@@ -99,7 +99,7 @@ Adds your **deadline** task to your tasklist.
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
 **Example:** `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`
-- Adds a deadline task with description `CS2106 Lab 3` to the tasklist.
+- Adds a deadline task with description `CS2106 Lab 3` to the task list.
 - Specifies the priority to be `high`.
 - Specifies the task is to be done on `20-10-2021 02:00:00`.
 - without recurrence.
@@ -115,7 +115,7 @@ Adds your **deadline** task to your tasklist.
 ```
 
 ### 2.2.3 Event: `event`
-Adds your **event** task to your tasklist.
+Adds your **event** task to your task list.
 
 **Format:** `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `[description]` specifies the description of your event.
@@ -125,7 +125,7 @@ Adds your **event** task to your tasklist.
   - How often your event is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
 **Example:** `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`
-- Adds an event task with description `Marquee Christmas Party` to the tasklist.
+- Adds an event task with description `Marquee Christmas Party` to the task list.
 - Specifies the priority to be `high`.
 - Specifies the task to start on `25-12-2020 22:00:00` and end on `26-12-2020 04:00:00`.
 - with no recurrence.
@@ -141,16 +141,16 @@ Adds your **event** task to your tasklist.
 ```
 
 ### 2.3 Listing all your tasks: `list`
-Lists tasks in your tasklist.
+Lists tasks in your task list.
 
 **Format:** `list [--filter <argument>]`
-- `[--flag <argument>]` specifies the filter to be applied to your tasklist.
+- `[--flag <argument>]` specifies the filter to be applied to your task list.
   - Type of task: `[--type todo|deadline|event]`
   - Priority of the task: `[--priority high|medium|low]`
   - Recurrence of the task: `[--recur daily|weekly|monthly|yearly]`
 
 **Example (without filter):** `list`
-- List all tasks currently stored in your tasklist.
+- List all tasks currently stored in your task list.
 
 **Expected Outcome:**
 
@@ -186,17 +186,17 @@ Lists tasks in your tasklist.
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
 
-### 2.4 Sorting your tasklist: `sort`
-Sorts your tasklist by a given criteria.
+### 2.4 Sorting your task list: `sort`
+Sorts your task list by a given criteria.
 
 **Format:** `sort --by <criteria>`
-- `<criteria>` specifies what to sort your tasklist by.
+- `<criteria>` specifies what to sort your task list by.
   - Type of task: `type`.
   - Description of task: `description`
   - Priority of the task: `priority`
 
 **Example:** `sort --by priority` + `list`
-- Sort your current tasklist by `priority`
+- Sort your current task list by `priority`
 - Print out the sorted list with the `list` command
 
 **Expected Outcome:**
