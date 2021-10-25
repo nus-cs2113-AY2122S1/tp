@@ -87,7 +87,7 @@ public class StaffUi {
     }
 
     /**
-     * Prints a message when viewing the profile of a staff.
+     * Returns the profile of a staff.
      *
      * @param staffInfo the Info of the patient to be printed.
      * @return the staff information
@@ -98,7 +98,7 @@ public class StaffUi {
     }
 
     /**
-     * Prints all staffs in a list.
+     * Returns all staffs' information in a list.
      *
      * @param staffListString String containing information of all staff.
      * @return all Staffs' information.
@@ -111,6 +111,11 @@ public class StaffUi {
         return output;
     }
 
+    /**
+     * Returns the header of the staff information table.
+     *
+     * @return the header of the staff information table.
+     */
     public static String getStaffTableHeader() {
         String output = "Here is a list of all staffs:" + END_LINE;
         output += "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE;

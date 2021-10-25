@@ -159,7 +159,7 @@ public class Ui {
     /**
      * Returns the successful message of archiving a person.
      *
-     * @param personId  the ID of the person to be archived.
+     * @param personId the ID of the person to be archived.
      * @param viewType the viewType context of the command.
      * @return The successful message of archiving the person
      */
@@ -183,7 +183,7 @@ public class Ui {
     /**
      * Returns the successful message of un-archiving a person.
      *
-     * @param personId  the ID of the person to be un-archived.
+     * @param personId the ID of the person to be un-archived.
      * @param viewType the viewType context of the command.
      * @return The successful message of un-archiving the person
      */
@@ -211,7 +211,7 @@ public class Ui {
      * @return The current view message
      * @throws MedBotException when the current view is unidentifiable
      */
-    public static String getCurrentViewMessage(ViewType viewType)throws MedBotException {
+    public static String getCurrentViewMessage(ViewType viewType) throws MedBotException {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
@@ -230,12 +230,13 @@ public class Ui {
 
         return output;
     }
+
     /**
      * Prints an exit message when MedBot is exiting.
      *
      * @return the exit Message
      */
-    public String getExitMessage() {
+    public static String getExitMessage() {
         return "Thank you for using MedBot!" + END_LINE + "See you again!";
     }
 
