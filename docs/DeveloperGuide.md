@@ -2,8 +2,9 @@
 
 ## Table of Contents
 
+* [Introduction](#introduction)
 * [Acknowledgements](#Acknowledgements)
-* [Setting up, getting started](#Setting-up,-getting-started)
+* [Setting up and getting started](#Setting-up and getting-started)
     * [Setting up](#setting-up)
     * [Before writing code](#before-writing-code)
 * [Design](#Design)
@@ -12,18 +13,17 @@
     * [Utilities](#Utilities)
     * [Inventory](#Inventory)
     * [Errors](#Errors)
-
 * [Implementation](#Implementation)
     * [Main Logic](#Main-Logic)
     * [AddStockCommand](#AddStockCommand)
-    * [AddDispenseCommand](#AddDispenseCommand)
+    * [AddPrescriptionCommand](#AddPrescriptionCommand)
     * [AddOrderCommand](#AddOrderCommand)
     * [DeleteStockCommand](#DeleteStockCommand)
-    * [DeleteDispenseCommand](#DeleteDispenseCommand)
+    * [DeletePrescriptionCommand](#DeletePrescriptionCommand)
     * [DeleteOrderCommand](#DeleteOrderCommand)
     * [ListCommand](#ListCommand)
     * [UpdateStockCommand](#UpdateStockCommand)
-    * [UpdateDispenseCommand](#UpdateDispenseCommand)
+    * [UpdatePrescriptionCommand](#UpdatePrescriptionCommand)
     * [UpdateOrderCommand](#UpdateOrderCommand)
 * [Product scope](#Product-scope)
 * [Target user profile](#Target-user-profile)
@@ -33,14 +33,19 @@
 * [Glossary](#Glossary)
 * [Instructions for manual testing](#Instructions-for-manual-testing)
 
+## Introduction
+MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
+It is an integrated solution that provides real-time tracking of stock, orders and prescribing of medication. The
+purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.0.
+
 ## Acknowledgements
 
-* Inspiration for App Idea and OOP Structure :https://github.com/se-edu/addressbook-level2
+* Inspiration for App Idea and OOP Structure: https://github.com/se-edu/addressbook-level2
 * Inspiration for User Guide: https://se-education.org/addressbook-level3/UserGuide.html
 * Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
 * PlantUML Tutorial: https://se-education.org/guides/tutorials/plantUml.html
 
-## Setting up, getting started
+## Setting up and getting started
 
 ### Setting up
 
@@ -83,7 +88,7 @@ The **Command** class diagram above shows how **Command** interact with other cl
 
 The Command Component consists of **17** subclasses where each subclass represents a command feature.
 
-Let `*` be either of the three class: `Stock`, `Order` or `Dispense`.
+Let `*` be either of the three class: `Stock`, `Prescription` or `Order`.
 
 * `Add*Command`: Adds a new `*` information into MediVault.
 * `Delete*Command`: Removes the visibility of the `*` record in MediVault.
@@ -97,22 +102,25 @@ Let `*` be either of the three class: `Stock`, `Order` or `Dispense`.
 
 ### Utilities
 
-The class diagram below shows how the validator classes in implemented to help ensure that the user input is
-valid. `StockValidator`, `DispenseValidator` and `OrderValidator` inherits from `MedicineValidator`. The class methods
-are also shown in the diagram.
+The class diagram below shows how the validator classes is implemented to help ensure that the user input is
+valid. `StockValidator`, `PrescriptionValidator` and `OrderValidator` inherits from `MedicineValidator`. The class
+methods are also shown in the diagram.
 
 ![ValidatorClassDiagram](diagrams/diagram_images/ValidatorClassDiagram.png)
 {combine ui, storage, parser, comparators?}
 
 ### Inventory
 
-The class diagram below shows how the objects in MediVault is implemented. `Stock`, `Dispense`
+The class diagram below shows how the objects in MediVault is implemented. `Stock`, `Prescription`
 and `Order` inherits from the abstract `Medicine` class. The attributes that each object has is also shown in the
 diagram.
 
 ![InventoryClassDiagram](diagrams/diagram_images/InventoryClassDiagram.png)
 
 ### Errors
+
+- `InvalidCommandException` will be thrown when the user enters an invalid command.
+- `InvalidDataException` will be thrown when MediVault encountered invalid data in the data files.
 
 ## Implementation
 
@@ -125,12 +133,12 @@ logic:
   `Storage` class to the application.
 * MediVault gets the user input via the `Ui` class and uses the `CommandParser` class to parse the input given by the
   user.
-* The parameters will be parsed to a `LinkedHashMap` to make the parameters easily accessible.
+* The parameters will be parsed to a `LinkedHashMap<String, String>` to make the parameters easily accessible.
 * If a valid command is received, the `CommandParser` will call the `Command` object constructor and return the object
   to MediVault.
 * MediVault will then invoke the `execute()` function of the `Command` object to execute the command.
-* Should there be an invalid command, `CommandParser` will throw `InvalidCommand` and MediVault will display the error
-  message using the `Ui` class.
+* Should there be an invalid command, `CommandParser` will throw `InvalidCommandException` and MediVault will display
+  the error message using the `Ui` class.
 
 Given below is the sequence diagram for the interactions within the main application logic.
 
@@ -138,56 +146,57 @@ Given below is the sequence diagram for the interactions within the main applica
 
 ### AddStockCommand
 
-MediVault initialises a AddStockCommand when CommandParser identifies the `addstock` or  `add` in the stock mode.
+MediVault creates an `AddStockCommand` object when CommandParser identifies `addstock` or `add` in `stock`
+mode.
 
 * MediVault adds medicine stock when the `parameter` and `parameterValues` provided by the user are valid.
-* User will not be able to input medication if `max_quantity` is less than `quantity`.
-* User will not be able to input medication if the same name exist and the `expiry_date` is same.
+* Users will not be able to input medication if `max_quantity` is less than `quantity`.
+* Users will not be able to input medication if the same name exist and the `expiry_date` is same.
 * MediVault will ignore the `description` and `max_quantity` of user input if the same medication name already exist.
 
-The sequence diagram for AddStockCommand is shown below.
+The sequence diagram for `AddStockCommand` is shown below.
 
 ![AddStockSequenceDiagram](diagrams/diagram_images/AddStockSequenceDiagram.png)
 
-### AddDispenseCommand
+### AddPrescriptionCommand
 
-MediVault initialises a AddDispenseCommand when CommandParser identifies the `adddispense` or  `add` in the dispense
-mode.
+MediVault creates an `AddPrescriptionCommand` object when CommandParser identifies `addprescription` or  
+`add` in `prescription` mode.
 
-* MediVault adds dispense when the `parameter` and `parameterValues` provided by the user are valid.
-* MediVault will update the quantity left in the stock automatically after dispense.
-* MediVault will dispense medication with the earliest date if there are medication with multiple expiry date.
-* User will not be able to dispense medication if the quantity is more than the total stock quantity.
+* MediVault adds the prescription when the `parameter` and `parameterValues` provided by the user are valid.
+* MediVault will update the quantity left in the stock automatically after prescribing.
+* MediVault will prescribe medication with the earliest date if there are medication with multiple expiry dates.
+* Users will not be able to prescribe medication if the quantity is more than the total stock quantity.
 
-The sequence diagram for AddDispenseCommand is shown below.
+The sequence diagram for `AddPrescriptionCommand` is shown below.
 
-![AddDispenseCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
+![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
 
 ### AddOrderCommand
 
-MediVault initialises an AddOrderCommand class when CommandParser identifies the
-`addorder` or the `add` keyword in the `order` mode.
+MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword 
+in `order` mode.
 
 * MediVault adds order information when `parameter` and `parameterValues` provided by the user are valid.
 * As the order date is an optional parameter, MediVault will use the date the order was placed as the default date.
-* User will not be unable to add order if the order quantity exceeds maximum stock quantity.
+* Users will not be unable to add orders if the order quantity exceeds maximum stock quantity.
 
-The sequence diagram for AddOrderCommand is shown below.
+The sequence diagram for `AddOrderCommand` is shown below.
 
 ![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
 ### DeleteStockCommand
 
-MediVault initialises an DeleteStockCommand class when CommandParser identifies the
-`deletestock` or the `delete` keyword in the `stock` mode.
+MediVault creates an `DeleteStockCommand` object when CommandParser identifies `deletestock` or the `delete` keyword
+in `stock` mode.
 
-* MediVault allow for deletion of stock by stock id through `deletestock i/STOCK_ID`.
-* MediVault allow for deletion of stock by expiry date through `deletestock e/EXPIRY_DATE`.
-* MediVault delete medicine stock information when parameter and parameterValues provided by the user are valid.
-* MediVault perform a check to determine if it is executing deletion by stock id or deletion by expiry and executes
+* MediVault allows deletion of a stock by stock id through `deletestock i/STOCK_ID`.
+* MediVault allows deletion of stocks by expiry date through `deletestock e/EXPIRY_DATE`.
+* MediVault deletes medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
+* MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry and executes
   accordingly.
 
-The sequence diagram for DeleteStockCommand is shown below.
+The sequence diagram for `DeleteStockCommand` is shown below.
 ![DeleteStockSequenceDiagram](diagrams/diagram_images/DeleteStockSequenceDiagram.png)
 
 After MediVault determines that it is executing deletion by stock id, it will execute accordingly.
@@ -200,28 +209,29 @@ After MediVault determines that it is executing deletion by expiry date, it will
 The sequence diagram for delete by expiry date is shown below.
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
 
-### DeleteDispenseCommand
+### DeletePrescriptionCommand
 
-MediVault initialises a DeleteDispenseCommand when CommandParser identifies the `deletedispense` or  `delete` in the
-dispense mode.
+MediVault creates a `DeletePrescriptionCommand` object when CommandParser identifies `deleteprescription` or 
+`delete` in `prescription` mode.
 
-* MediVault delete dispense when the `parameter` and `parameterValues` provided by the user are valid.
-* MediVault will delete dispense based on the user input of `DISPENSE_ID`.
-* MediVault will add dispense quantity to the stock quantity after successful deletion of dispense.
-* User will not be able to delete dispense if the total quantity after dispense will be more than the maximum quantity.
+* MediVault deletes the prescription when the `parameter` and `parameterValues` provided by the user are valid.
+* MediVault will delete the prescription based on the user input of `PRESCRIPTION_ID`.
+* MediVault will add the prescription quantity to the stock quantity after successful deletion of prescription.
+* User will not be able to delete prescriptions if the total quantity after prescription will be more than the maximum
+  quantity.
 
-The sequence diagram for DeleteDispenseCommand is shown below.
+The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
-![DeleteDispenseCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
+![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
 
 ### DeleteOrderCommand
 
-MediVault initialises a DeleteOrderCommand when CommandParser identifies the `deleteorder` or  `delete` in the order
+MediVault creates a `DeleteOrderCommand` object when CommandParser identifies `deleteorder` or  `delete` in `order`
 mode.
 
-* MediVault delete order when the `parameter` and `parameterValues` provided by the user are valid.
+* MediVault deletes the order when the `parameter` and `parameterValues` provided by the user are valid.
 
-The sequence diagram for DeleteOrderCommand is shown below.
+The sequence diagram for `DeleteOrderCommand` is shown below.
 
 ![DeleteOrderCommandDiagram](diagrams/diagram_images/DeleteOrderSequenceDiagram.png)
 
@@ -230,14 +240,14 @@ The sequence diagram for DeleteOrderCommand is shown below.
 There are three variations of the list command.
 
 1. `liststock`
-2. `listdispense`
+2. `listprescription`
 3. `listorders`
 
-The sequence diagram below shows how the list operation works in general.
+The sequence diagram below shows how the `list` operation works in general.
 
 ![ListSequenceDiagram](diagrams/diagram_images/ListSequenceDiagram.png)
 
-Note: Replace `*` in the diagram with `Stock`, `Dispense` or `Order` depending on the command entered.
+Note: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
 
 All three variations of `list` are similar as they are implemented by iterating through the `Medicine` ArrayList and
 filtering out the respective object types. If the parameter `sort` or `rsort` is provided, the respective constructor of
@@ -249,45 +259,44 @@ respective `print()` method from the `Ui` class will be called to display the re
 
 ### UpdateStockCommand
 
-MediVault initialises an UpdateStockCommand class when CommandParser identifies the
-`updatestock` or the `update` keyword in the `stock` mode.
+MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or 
+the `update` keyword in `stock` mode.
 
 * MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
 * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
   against the stored medicine stock information.
 
-The sequence diagram for UpdateStockCommand is shown below.
+The sequence diagram for `UpdateStockCommand` is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
-MediVault adds a new _stock_ record when a user updates contains the `n/NAME` parameter. The old stock record still
+MediVault adds a new stock record when a user updates contains the `n/NAME` parameter. The old stock record still
 exists in MediVault, but it will not be visible to user when listed. This approach solves the issue when a user is
-unable to delete a _
-dispense_ record when the medicine _stock_ name gets updated.
+unable to delete a prescription record when the medicine stock name gets updated.
 
-### UpdateDispenseCommand
+### UpdatePrescriptionCommand
 
-MediVault initialises an UpdateDispenseCommand class when CommandParser identifies the
-`updatedispense` or the `update` keyword in the `dispense` mode.
+MediVault initialises an `UpdatePrescriptionCommand` class when CommandParser identifies 
+`updateprescription` or the `update` keyword in `prescription` mode.
 
 * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
-* When a user updates dispense information containing either `n/NAME`, `q/QUANTITY` or both, MediVault restores the
-  dispensed stocks or dispense more stocks depending on the user input.
+* When a user updates prescription information containing either `n/NAME`, `q/QUANTITY` or both, MediVault restores the
+  prescribed stocks or prescribes more stocks depending on the user input.
 
-The sequence diagram for UpdateDispenseCommand is shown below.
+The sequence diagram for `UpdatePrescriptionCommand` is shown below.
 
-![UpdateDispenseSequenceDiagram](diagrams/diagram_images/UpdatePrescriptionSequenceDiagram.png)
+![UpdatePrescriptionSequenceDiagram](diagrams/diagram_images/UpdatePrescriptionSequenceDiagram.png)
 
-MediVault adds a new _dispense_ record when a user updates contains either the `n/NAME`, `q/QUANTITY`
-parameter or both. The old _dispense_ record is permanently removed from MediVault. This approach solves the issue when
-a user dispenses a medication with an amount that is more than the current batch of stock with the same _stock_ id but
-less than the total stock quantity. MediVault will correctly add new _dispense_ records with the corresponding _stock_
-Id.
+MediVault adds a new prescription record when a user updates contains either the `n/NAME`, `q/QUANTITY`
+parameter or both. The old prescription record is permanently removed from MediVault. This approach solves the issue
+when a user prescription a medication with an amount that is more than the current batch of stock with the same stock
+id but less than the total stock quantity. MediVault will correctly add new prescription records with the
+corresponding stock id.
 
 ### UpdateOrderCommand
 
-MediVault initialises an UpdateOrderCommand class when CommandParser identifies the
-`updateorder` or the `update` keyword in the `order` mode.
+MediVault initialises an `UpdateOrderCommand` class when CommandParser identifies
+`updateorder` or the `update` keyword in `order` mode.
 
 * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
 * MediVault restricts updating of order information that are already **delivered**.
@@ -300,10 +309,10 @@ The sequence diagram for UpdateOrderCommand is shown below.
 
 ### Target user profile
 
-* pharmacist handling storing, ordering and dispensing of medication
-* has a need to manage large number of stocks in the pharmacy
-* may forget how much medicine stock is left in the pharmacy
-* is a fast typist
+* Pharmacist handling storing, ordering and dispensing of medication
+* Has a need to manage large number of stocks in the pharmacy
+* May forget how much medicine stock is left in the pharmacy
+* Is a fast typist
 
 ### Value proposition
 

@@ -58,10 +58,9 @@ autoactivate on
 
         end
 note right of command
-Note that Command throws
-InvalidCommand to MediVault
-when an invalid command is
-entered.
+Note that processCommand throws
+InvalidCommandException when
+an invalid command is entered.
 end note
 
 @enduml

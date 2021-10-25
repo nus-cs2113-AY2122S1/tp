@@ -7,6 +7,7 @@ skinparam classAttributeIconSize 0
 ' to join all the arrows
 skinparam groupInheritance 3
 
+
 class "{abstract}\n MedicineValidator"{
     +containsInvalidParameterValues(ui: Ui, parameters: LinkedHashMap<String, String>, medicines: ArrayList<Medicine>, commandSyntax: String): boolean &#123;abstract&#125;
     +containsInvalidParameters(ui: Ui, parameters: LinkedHashMap<String, String>, requiredParameters: String[], optionalParameters: String[], commandSyntax: String, requiresOptionalParameters: boolean): boolean
@@ -46,9 +47,10 @@ class "OrderValidator"{
     +isValidColumn(ui: Ui, columnName: String): boolean
 }
 
-"{abstract}\n MedicineValidator" <|-- "StockValidator"
+"{abstract}\n MedicineValidator" <|---- "StockValidator"
 "{abstract}\n MedicineValidator" <|-- "DispenseValidator"
-"{abstract}\n MedicineValidator" <|-- "OrderValidator"
+"{abstract}\n MedicineValidator" <|---- "OrderValidator"
 
-note "Note: The input parameter for\ncontainsInvalidParameterValues()\nhas been left out from the subclasses\nto make this diagram more compact." as n1
+note bottom of "{abstract}\n MedicineValidator" : Note: The input parameters for\ncontainsInvalidParameterValues()\nhas been left out from the subclasses\nto make this diagram more compact.
+ '
 @enduml
