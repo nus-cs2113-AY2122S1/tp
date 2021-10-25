@@ -172,9 +172,7 @@ ____________________________________________________________
 Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
-Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> 
--te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n John Doe 
--g johndoecoder -e john@email.com -te johndoe`
+Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n John Doe -g johndoecoder -e john@email.com -te johndoe`
 List all contacts | `deadline <TASK_DESCRIPTION> /by <YYYY-MM-DD HH:MM>` | `deadline submit ip jar /by 2021-10-02 22:20`
 View a contact| `list` | `list`
 Edit a contact| `event <TASK_DESCRIPTION> /at <YYYY-MM-DD HH:MM>` | `event graduation party /at 2021-11-01 18:10`
