@@ -15,7 +15,6 @@ end box
 
 box Inventory COLOR_INVENTORY_BOX
     participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
-    participant ":Stock" as stock COLOR_INVENTORY
 end box
 
 autoactivate on
@@ -37,15 +36,19 @@ opt !isInvalidParameter
     opt !isInvalidParameterValues
         opt !(hasStockId && hasExpiryDate)
             alt hasStockId && !hasExpiryDate
-                ref over deleteStock, stock
+                ref over deleteStock, medicine
                     Deletion of stock by id
                 end ref
             else !hasStockId && hasExpiryDate
-                ref over deleteStock, stock
+                ref over deleteStock, medicine
                     Deletion of stock by expiry
                 end ref
             end
         end
     end
 end
+deleteStock -> storage : getInstance()
+deleteStock <-- storage
+deleteStock -> storage: saveData()
+deleteStock <-- storage
 @enduml
