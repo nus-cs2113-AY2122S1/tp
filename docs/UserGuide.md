@@ -14,7 +14,7 @@ time required to look up for various usernames when working with colleagues.
 * **[Features](#features)**
     * **[Viewing help : `help`](#help)**
     * **[Adding a contact : `add`](#add)**
-    * **[Listing all contacts : `list`](#list)**
+    * **[Listing all contacts : `ls`](#list)**
     * **[Viewing a contact : `view`](#view)**
     * **[Deleting a contact : `rm`](#delete)**
     * **[Editing a contact : `edit`](#edit)**
@@ -38,7 +38,7 @@ time required to look up for various usernames when working with colleagues.
    Some example commands you can try:
    * `add -n Alex Lee -g alexlee -e alex.lee@contech.sg -te alexl33`: Adds a contact named `Alex Lee` 
      to the ConTech Book.
-   * `list`: Lists all contacts.
+   * `ls`: Lists all contacts.
    * `view 1`: Displays all the details of the contact at index `1`.   
    * `rm 1`: Deletes the contact at index `1` in the list.
    * `exit`: Exits the program.
@@ -64,8 +64,8 @@ add: ConTech adds the specified contact with provided parameters.
  Note: Parameters need not be in order and are optional except for NAME.
  Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 
-list: Displays the name of all saved contacts.
- Example: list
+ls: Displays the name of all saved contacts.
+ Example: ls
 
 edit: Edit any parameter in an existing contact.
  Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
@@ -100,7 +100,7 @@ ____________________________________________________________
 ### Adding a contact: `add`
 
 <a name="list"></a>
-### Listing all contacts: `list`
+### Listing all contacts: `ls`
 
 <a name="view"></a>
 ### Viewing a contact: `view`
