@@ -68,6 +68,10 @@ The storage component can implement the below features:
 
 
 ### University and module related classes
+
+<img src="images/University.png" width = "280"/>  
+<img src="images/Module.png" width = "280"/>  
+
 This component consist of the following classes:  
 #### University
 The University class consists of basic information of the school, including its name, 
