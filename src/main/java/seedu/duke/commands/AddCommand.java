@@ -246,7 +246,7 @@ public class AddCommand extends Command {
                 isCorrectMember = true;
             } catch (NumberFormatException e) {
                 System.out.println("Please enter the number corresponding to the member "
-                + "you want to assign this task to. ");
+                        + "you want to assign this task to. ");
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
