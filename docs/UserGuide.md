@@ -96,7 +96,7 @@ Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
-- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, or `entertainment`.
+- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, `overall` or `misc`.
 
 Examples:
 
@@ -226,7 +226,7 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
-- `CATEGORY` has to be either `salary`, `allowance`, or `adhoc`.
+- `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
 
 Examples:
 

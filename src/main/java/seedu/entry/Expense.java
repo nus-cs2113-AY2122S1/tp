@@ -27,7 +27,7 @@ public class Expense extends Entry {
     
     @Override
     public String toString() {
-        String expenseDate = date.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String expenseDate = date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         return String.format("[E] %s - $%.2f (%s)", description, value, expenseDate);
     }
 }
