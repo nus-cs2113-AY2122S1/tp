@@ -48,7 +48,7 @@ public class Parser {
         case "update":
             return new UpdateCommand(command);
         case "next":
-            return new NextCommand();
+            return new NextCommand(command);
         default:
             System.out.println("Im sorry i did not catch that maybe these instructions below will help"
                     + System.lineSeparator() /*+ ui.lineBreak*/);
