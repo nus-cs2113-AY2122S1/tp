@@ -31,7 +31,8 @@ import java.util.Scanner;
  *
  * <p>Reads in user input by implementing the {@code Scanner} class.</p>
  *
- * <p>The {@code parseMaster()} method parses through the user's input to find the best match for the user's intended command.</p>
+ * <p>The {@code parseMaster()} method parses through the user's input to find the best match for the user's intended
+ * command.</p>
  *
  * <p>The corresponding command is then returned to the {@code Gordon} class.</p>
  *
