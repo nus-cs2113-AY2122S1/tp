@@ -69,7 +69,7 @@ public class AddCommandParser {
         } else {
             uniIndex = Integer.parseInt(arguments);
             // Check if university exists
-            if (uniIndex > universityMasterList.getSize()) {
+            if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
@@ -94,7 +94,7 @@ public class AddCommandParser {
         } else {
             int modIndex = Integer.parseInt(arguments);
             // Check if module exists
-            if (modIndex > moduleMasterList.getSize()) {
+            if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             module = moduleMasterList.get(modIndex - 1);

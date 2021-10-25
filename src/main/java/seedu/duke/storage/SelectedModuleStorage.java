@@ -18,8 +18,7 @@ public class SelectedModuleStorage {
 
     private static final String FILE_PATH = "data/selectedModules.txt";
 
-    public static void write(ModuleList moduleList) throws IOException {
-        logger.log(Level.INFO, "File writing operation started");
+    public void updateSelectedModuleList(ModuleList moduleList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < moduleList.getSize(); i++) {
             Module curr = moduleList.get(i);
@@ -29,7 +28,7 @@ public class SelectedModuleStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public static ArrayList<Module> load() throws IOException {
+    public ArrayList<Module> readSelectedModuleList() throws IOException {
         File file = loadFile();
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -43,7 +42,7 @@ public class SelectedModuleStorage {
         return modules;
     }
 
-    private static File loadFile() throws IOException {
+    private File loadFile() throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             file.getParentFile().mkdirs();

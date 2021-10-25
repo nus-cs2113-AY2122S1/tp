@@ -20,8 +20,7 @@ public class SelectedUniversityStorage {
 
     private static final String FILE_PATH = "data/selectedUniversities.txt";
 
-    public static void write(UniversityList universityList) throws IOException {
-        logger.log(Level.INFO, "File writing operation started");
+    public void updateSelectedUniversityList(UniversityList universityList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < universityList.getSize(); i++) {
             University curr = universityList.get(i);
@@ -31,15 +30,14 @@ public class SelectedUniversityStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public static ArrayList<University> load() throws IOException {
+    public ArrayList<University> readSelectedUniversityList(
+            UniversityList universityMasterList) throws IOException {
         File file = loadFile();
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         ArrayList<University> universities = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappings = new ArrayList<>();
         String curr = " ";
-        UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
-        int index = 0;
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (curr.equals(" ")) {
@@ -57,11 +55,14 @@ public class SelectedUniversityStorage {
                 moduleMappings.add(new ModuleMapping(local, mapped));
             }
         }
+        if (!curr.equals(" ")) {
+            universities.add(new University(curr, moduleMappings, universityMasterList));
+        }
         logger.log(Level.INFO, "Module mappings stored in the file are successfully loaded");
         return universities;
     }
 
-    private static File loadFile() throws IOException {
+    private File loadFile() throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             file.getParentFile().mkdirs();

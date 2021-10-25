@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.modules.ModuleList;
+import seedu.duke.storage.Storage;
 import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
@@ -13,13 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchMapCommandParserTest {
 
+    private static Storage storage = new Storage(); 
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
 
     @Test
     public void testCorrectUniversityName_success() throws IOException {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            UniversityList universityMasterList = new UniversityList();
             SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
             assertEquals("Boston University", command.getSelectedUniversity().getName());
@@ -31,7 +33,7 @@ public class SearchMapCommandParserTest {
     @Test
     public void test_NonExistentUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             new SearchMapCommandParser().parse("non existent", universityMasterList,
                     universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
@@ -44,7 +46,7 @@ public class SearchMapCommandParserTest {
     @Test
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             new SearchMapCommandParser().parse("", universityMasterList, universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
             System.out.println(e.getMessage());

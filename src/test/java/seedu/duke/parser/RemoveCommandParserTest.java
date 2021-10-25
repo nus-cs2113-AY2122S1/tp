@@ -5,6 +5,7 @@ import seedu.duke.commands.RemoveModCommand;
 import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RemoveCommandParserTest {
 
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
     private static UniversityList universityMasterList;
@@ -25,8 +27,8 @@ class RemoveCommandParserTest {
         String arguments = "/uni someUniversityName";
         RemoveCommandParser rcp = new RemoveCommandParser();
         try {
-            moduleMasterList = new ModuleList(ModuleStorage.load());
-            universityMasterList = new UniversityList(UniversityStorage.load());
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(storage.readUniversityList());
             assertEquals(RemoveUniCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {

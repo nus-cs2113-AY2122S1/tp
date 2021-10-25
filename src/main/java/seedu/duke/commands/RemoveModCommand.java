@@ -23,7 +23,7 @@ public class RemoveModCommand extends Command {
             assert moduleSelectedList.getSize() != 0;
             moduleSelectedList.removeModule(moduleToRemove.getModuleCode());
             assert !moduleSelectedList.isModuleExist(moduleToRemove.getModuleCode());
-            SelectedModuleStorage.write(moduleSelectedList);
+            storage.updateSelectedModuleList(moduleSelectedList);
             System.out.println("This module is removed: ");
             Ui.printModule(moduleToRemove, moduleIndexToRemove);
         }
@@ -36,7 +36,7 @@ public class RemoveModCommand extends Command {
         assert moduleToRemove.getModuleCode() != null;
         moduleSelectedList.removeModule(moduleToRemove.getModuleCode());
         assert moduleSelectedList.getSize() != 0;
-        SelectedModuleStorage.write(moduleSelectedList);
+        storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("This module is removed: ");
         Ui.printModule(moduleToRemove, moduleIndexToRemove);
     }
