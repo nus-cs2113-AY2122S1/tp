@@ -70,9 +70,8 @@ Format: `help`
 <font size=1>_Below is a collapsible section that allows you to see the run time output. Do check them if you want to visualize what the product looks like!_</font>
 
 <details>
-  <summary> Expected output in run window (Click to expand!)</summary>
-
-```
+<summary> Expected output in run window (Click to expand!)</summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
@@ -96,7 +95,7 @@ To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To View Your Yearly Report: show_graph
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
-```
+</pre>
 </details>
 
 <br>
@@ -115,14 +114,13 @@ Examples:
 - `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
 
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
 [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 
 <br>
@@ -602,11 +600,11 @@ Format: `end`
 | Action | Format | Examples |
 | ------------ | ------------- | ------------- |
 | View all possible commands | `help` | - |
-| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT`  |  `add_ex d/KFC lunch a/10.20` |
+| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`  |  `add_ex d/KFC lunch a/10.20 c/food` |
 | Delete expense entry | `del_ex i/INDEX` | `del_ex i/3` |
 | List all expense entries | `list_ex` | - |
 | View total expense | `total_ex` | - |
-| Create income entry | `add_in d/DESCRIPTION a/AMOUNT`  | `add_in d/work a/3200` |
+| Create income entry | `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`  | `add_in d/work a/3200 c/salary` |
 | Delete income entry | `del_in i/INDEX` | `del_in i/2` |
 | List all income entries | `list_in` | - |
 | View total income | `total_in` | - |
