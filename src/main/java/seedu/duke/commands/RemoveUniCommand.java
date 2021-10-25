@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiUniversity;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -25,7 +26,7 @@ public class RemoveUniCommand extends Command {
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
             storage.updateSelectedUniversityList(universitySelectedList);
             System.out.println("This university is removed: ");
-            Ui.printUniversity(universityToRemove, true);
+            UiUniversity.printUniversity(universityToRemove, true);
         }
     }
 }

@@ -3,6 +3,8 @@ package seedu.duke.commands;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiInvalid;
+import seedu.duke.ui.UiModule;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -14,10 +16,10 @@ public class FindModCommand extends Command {
                 .filter((module) -> module.getModuleCode().toLowerCase().contains(userInput.toLowerCase()))
                 .collect(Collectors.toList());
         if (result.size() == 0) {
-            Ui.printFindModNull();
+            UiInvalid.printFindModNull();
         } else {
             for (int i = 0; i < result.size(); i++) {
-                Ui.printModule(result.get(i), result.get(i).getMasterListIndex(moduleMasterList), false);
+                UiModule.printModule(result.get(i), result.get(i).getMasterListIndex(moduleMasterList), false);
             }
         }
     }

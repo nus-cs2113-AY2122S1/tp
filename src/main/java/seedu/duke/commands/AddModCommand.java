@@ -4,6 +4,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.SelectedModuleStorage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiModule;
 
 import java.io.IOException;
 
@@ -26,6 +27,6 @@ public class AddModCommand extends Command {
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
         storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
-        Ui.printModule(moduleToAdd, moduleIndexToAdd, true);
+        UiModule.printModule(moduleToAdd, moduleIndexToAdd, true);
     }
 }
