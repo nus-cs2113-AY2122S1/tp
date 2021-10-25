@@ -128,11 +128,46 @@ travel: $20.00
 shopping: $30.00
 
 ```
+
 ###Expenses
-
-
-
-
+##Available Currencies
+Currency Name | ISO Code
+------------ | -----------
+United States Dollar | USD
+Singapore Dollar | SGD
+Australian Dollar | AUD
+Canadian Dollar | CAD
+New Zealand Dollar | NZD
+Euro | EUR
+Pound Sterling| GBP
+Malaysian Ringgit | MYR
+Hong Kong Dollar | HKD
+Thai Baht | THB
+Russian Ruble | RUB
+South African Rand | ZAR
+Turkish Lira | TRY
+Brazilian Real | BRL
+Danish Krone | DKK
+Polish Zloty | PLN
+Israeli New Shekel | ILS
+Saudi Riyal | SAR
+Chinese Yuan | CNY
+Japanese Yen | JPY
+South Korean Won | KRW
+Indonesian Rupiah | IDR
+Indian Rupee | INR
+Swiss Franc | CHF
+Swedish Krona | SEK
+Norwegian Krone | NOK
+Mexican Peso | MXN
+New Taiwan Dollar | TWD
+Hungarian Forint | HUF
+Czech Koruna | CZK
+Chilean Peso | CLP
+Philippine Peso | PHP
+United Arab Emirates Dirham | AED
+Colombian Peso | COP
+Romanian Leu | RON
 
 ## FAQ
 
