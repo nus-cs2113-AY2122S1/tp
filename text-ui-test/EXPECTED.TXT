@@ -36,7 +36,6 @@ People involved: [yikai, josh]
 Payer: josh
 Category: breakfast
 
-No matching expenses found.
 Enter your command: 2. d a c
 date: 19 Oct 2021
 Amount Spent: USD $1.00
@@ -44,7 +43,6 @@ People involved: [yikai, josh, xiyuan]
 Payer: yikai
 Category: lunch
 
-No matching expenses found.
 Enter your command: 2. d a c
 date: 19 Oct 2021
 Amount Spent: USD $1.00
@@ -59,7 +57,6 @@ People involved: [yikai, josh]
 Payer: josh
 Category: breakfast
 
-No matching expenses found.
 Enter your command: 1. c a b
 date: 19 Oct 2021
 Amount Spent: USD $8.00
@@ -67,7 +64,6 @@ People involved: [yikai, yuzhao, qian]
 Payer: yikai
 Category: breakfast
 
-No matching expenses found.
 Enter your command: 3. d a c
 date: 19 Oct 2021
 Amount Spent: USD $2.00
@@ -75,7 +71,6 @@ People involved: [yikai, josh]
 Payer: josh
 Category: breakfast
 
-No matching expenses found.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: 1. c a b | Cost: USD $8.00

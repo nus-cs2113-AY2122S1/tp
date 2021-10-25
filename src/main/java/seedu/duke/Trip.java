@@ -77,7 +77,7 @@ public class Trip {
                 isThereExpenses = true;
             }
         }
-        if (isThereExpenses) {
+        if (!isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
@@ -95,7 +95,7 @@ public class Trip {
                 isThereExpenses = true;
             }
         }
-        if (isThereExpenses) {
+        if (!isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
@@ -110,7 +110,7 @@ public class Trip {
                 isThereExpenses = true;
             }
         }
-        if (isThereExpenses) {
+        if (!isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
