@@ -91,7 +91,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 2. Adding Dish Wastage : 'add dish waste [dishName]' followed by '[weight in KG]'                "
             + "            #" + System.lineSeparator()
-            + "# 3. Adding Dish Limit : 'add dish limit [dishName]' followed by '[weight in KG]'                  "
+            + "# 3. Adding Dish Limit : 'set dish limit [dishName]' followed by '[weight in KG]'                  "
             + "            #" + System.lineSeparator()
             + "# 4. Deleting a Dish : 'del dish [dishName]                                                        "
             + "            #" + System.lineSeparator()
@@ -103,9 +103,10 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
             + "            #" + System.lineSeparator()
-            + "# 8. Adding Ingredient Limit : 'add ingr limit [ingrName]' followed by '[weight in KG]'            "
+            + "# 8. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by '[weight in KG]'            "
             + "            #" + System.lineSeparator()
             + "# 9. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                              "
+            + "            #" + System.lineSeparator()
             + "# 10. Deleting an Ingredient : 'del ingr [ingrName]'                                               "
             + "            #" + System.lineSeparator()
             + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
@@ -117,6 +118,7 @@ public class Ui {
             + "# 14. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
             + "            #" + System.lineSeparator()
             + "# 15. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "            #" + System.lineSeparator()
             + "# 16. View full list of commands and examples: 'help'                                              "
             + "            #" + System.lineSeparator()
             + "# 17. Exiting the program: 'bye'                                                                   "
@@ -135,9 +137,9 @@ public class Ui {
             + "2. Adding Dish Wastage : 'add dish waste [dishName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add dish waste chicken rice' ; '0.8'" + System.lineSeparator()
-            + "3. Adding Dish Limit : 'add dish limit [dishName]' followed by "
+            + "3. Adding Dish Limit : 'set dish limit [dishName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add dish limit chicken rice' ; '16.9'" + System.lineSeparator()
+            + "    Example: 'set dish limit chicken rice' ; '16.9'" + System.lineSeparator()
             + "4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
             + "    Example: 'find dish chicken rice'" + System.lineSeparator()
             + "5. Deleting a Dish : 'del [dishName]" + System.lineSeparator()
@@ -155,9 +157,9 @@ public class Ui {
             + "12. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "13. Adding Ingredient Limit : 'add ingr limit [ingrName]' followed by "
+            + "13. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add ingr limit chicken' ; '42.7'" + System.lineSeparator()
+            + "    Example: 'set ingr limit chicken' ; '42.7'" + System.lineSeparator()
             + "14. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
             + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
             + "15. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()

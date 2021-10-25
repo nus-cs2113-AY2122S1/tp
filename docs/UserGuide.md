@@ -254,6 +254,33 @@ The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
+When adding new wastage to the dish causes it to exceed the limit,
+the user will receive a prompt stating that the current dish has exceeded its limits.
+There will also be a indication showing it has exceeded the limit when listing dishes.
+
+Expected outcome:
+```
+____________________________________________________________
+Enter the weight of prata in kg:
+____________________________________________________________
+4.5
+____________________________________________________________
+Wastage of prata is now 4.5 kg
+____________________________________________________________
+____________________________________________________________
+Wastage of prata has exceeded the limit
+____________________________________________________________
+```
+```
+____________________________________________________________
+Here are the dishes you have:
+1. prata
+   Wastage: 4.5 kg
+   Ingredients Linked: None
+   Limit: 3.5 (exceeded)
+You can use command 'add' to add new dishes!
+____________________________________________________________
+```
 <br/>
 
 ### Delete existing dish : `del dish`
@@ -468,6 +495,34 @@ Expected Outcome:
 ```
 ____________________________________________________________
 The limit for chicken is now 7.7 kg
+____________________________________________________________
+```
+
+When adding new wastage to the ingredient causes it to exceed the limit,
+the user will receive a prompt stating that the current ingredient has exceeded its limits.
+There will also be a indication showing it has exceeded the limit when listing ingredients.
+
+Expected outcome:
+```
+____________________________________________________________
+Enter the weight of chicken in kg:
+____________________________________________________________
+8.45
+____________________________________________________________
+Wastage of chicken is now 8.45 kg
+____________________________________________________________
+____________________________________________________________
+Wastage of chicken has exceeded the limit
+____________________________________________________________
+```
+```
+____________________________________________________________
+Here are the ingredients you have: 
+1. chicken
+   Storage: 2.2 kg
+   Wastage: 8.45 kg
+   Limit: 7.7 (exceeded)
+You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
 
