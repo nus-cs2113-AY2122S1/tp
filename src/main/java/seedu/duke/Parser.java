@@ -257,17 +257,28 @@ public class Parser {
         if (inputParams == null) {
             openTrip.viewAllExpenses();
         } else {
-            String[] paramString = inputParams.split(" ", 3);
+            String[] paramString = inputParams.split(" ", 4);
             String secondCommand = paramString[0];
-            String expenseCategory = paramString[1];
-            String expenseAttribute = paramString[2];
+            String expenseCategory = null;
+            String expenseAttribute = null;
+            Integer index = null;
             if (secondCommand.equals("filter")) {
-                try {
-                    openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
-                } catch (IndexOutOfBoundsException e) {
-                    Ui.printNoExpensesError();
-                }
+                expenseCategory = paramString[1];
+                expenseAttribute = paramString[2];
+            } else if (secondCommand.equals("index")) {
+                index = Integer.parseInt(paramString[1]);
             }
+            try {
+                if (secondCommand.equals("filter")) {
+                    openTrip.getFilteredExpenses(index, expenseCategory, expenseAttribute);
+                } else if (secondCommand.equals("index")) {
+                    Expense e = openTrip.getExpenseAtIndex(index);
+                    Ui.printFilteredExpenses(e, index - 1);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printNoExpensesError();
+            }
+
         }
 
     }
