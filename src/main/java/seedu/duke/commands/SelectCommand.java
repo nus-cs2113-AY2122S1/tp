@@ -46,7 +46,7 @@ public class SelectCommand extends Command {
 
     public CommandResult execute() {
         if (!isCorrectFormat) {
-            return new CommandResult("Something went wrong.");
+            return new CommandResult("Try again!");
         }
 
         Item selectedItem;
@@ -79,6 +79,9 @@ public class SelectCommand extends Command {
             eventIndexToSelect = index;
             Parser.updateIndexOfLastSelectedEvent(index);
         } else {
+            if (Parser.noEventSelected()) {
+                throw new DukeException("Select an event first!");
+            }
             if (!isValidTaskIndex(Parser.getIndexOfLastSelectedEvent(), index)) {
                 throw new DukeException("Invalid task index!");
             }

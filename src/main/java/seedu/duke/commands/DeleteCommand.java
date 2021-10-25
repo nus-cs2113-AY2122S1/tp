@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.parser.Parser;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -75,6 +76,7 @@ public class DeleteCommand extends Command {
             if (isEventFlag(itemFlag)) {
                 assert indexToDelete < eventCatalog.size();
                 deletedItem = deleteEvent(indexToDelete);
+                Parser.updateIndexToNoEventSelected();
                 return new CommandResult(Ui.getEventDeletionMessage(deletedItem));
             } else if (isTaskFlag(itemFlag)) {
                 assert indexToDelete < eventCatalog.size();
