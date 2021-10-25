@@ -43,8 +43,7 @@ public class StonksGraph {
     }
 
     private void setBalance(double amount) {
-        String stringAmount = Double.toString(amount);
-        
+        String stringAmount = String.format("%.2f", amount);
         writeToGraph(2,4,"Account Balance: $");
         writeToGraph(2,22, stringAmount);
     }
