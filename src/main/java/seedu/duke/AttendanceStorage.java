@@ -38,7 +38,7 @@ public class AttendanceStorage {
     }
 
     /**
-     * This method will load all attendances into the list
+     * This method will load all attendances into the list.
      *
      * @param dukeAttendanceFolder the folder path containing all the attendances
      */
@@ -63,10 +63,10 @@ public class AttendanceStorage {
             while (dukeAttendanceScanner.hasNextLine()) {
                 String fullAttendanceDetails = dukeAttendanceScanner.nextLine();
                 //System.out.println(fullAttendanceDetails);
-                String[] AttendanceDetails = fullAttendanceDetails.split("\\,", 2);
+                String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
 
-                name = AttendanceDetails[0];
-                attended = AttendanceDetails[1];
+                name = attendanceDetails[0];
+                attended = attendanceDetails[1];
 
                 Attendance attendance = new Attendance(name, trainingName, attended);
                 attendanceList.addAttendance(attendance);
@@ -108,9 +108,9 @@ public class AttendanceStorage {
         File currentDir = new File("");
         try {
             String dukeAttendanceFilePath = currentDir.getCanonicalPath() + "/DukeAttendance/" + trainingName + ".csv";
-            File AttendanceCsvFile = new File(dukeAttendanceFilePath);
-            AttendanceCsvFile.createNewFile();
-            writeFirstAttendance(AttendanceCsvFile, attendance);
+            File attendanceCsvFile = new File(dukeAttendanceFilePath);
+            attendanceCsvFile.createNewFile();
+            writeFirstAttendance(attendanceCsvFile, attendance);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,7 +132,7 @@ public class AttendanceStorage {
     }
 
     /**
-     * this method rewrites the entire specific csv file
+     * this method rewrites the entire specific csv file.
      */
     public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile,
             String trainingName) {
@@ -158,7 +158,7 @@ public class AttendanceStorage {
 
 
     /**
-     * This method removes the extension from the file name
+     * This method removes the extension from the file name.
      *
      * @param filename full file name including extension
      */
@@ -173,7 +173,7 @@ public class AttendanceStorage {
     //haven't done
 
     /**
-     * This method will list all the attendance training names
+     * This method will list all the attendance training names.
      */
     public static String getAllTrainingNames() {
         return "kk";
