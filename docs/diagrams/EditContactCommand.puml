@@ -5,18 +5,29 @@ hide footbox
 -> ":MainParser": execute()
 activate ":MainParser"
 
-":MainParser" -> ":MainParser" :getCommandWord(userInput:String)
+
+":MainParser" -> ":MainParser":getCommandWord(userInput:String)
+activate ":MainParser"
 ":MainParser" -> ":EditContactParser" :EditContactParser(userInput:String)
 activate ":EditContactParser"
 
+
 ":EditContactParser" -> ":EditContactParser" :parseContactDetails(userInput:String)
+activate ":EditContactParser"
+":EditContactParser" --> ":EditContactParser" :details:String[]
+deactivate ":EditContactParser"
+
 
 ":EditContactParser" -> ":IndexParser" :getIndexFromInput(userInput:String)
 activate ":IndexParser"
 ":IndexParser" --> ":EditContactParser" :userIndex:int
 deactivate ":IndexParser"
 
-":EditContactParser" -> ":EditContactCommand" : execute(contactDetails:String[], contactIndex:int)
+":EditContactParser" --> ":MainParser" : EditContactCommand(details, userIndex):Command
+deactivate ":EditContactParser"
+
+":MainParser" -> ":EditContactCommand" : EditContactCommand:Command
+
 activate ":EditContactCommand"
 
 ":EditContactCommand" -> ":ContactList" : editContact(contactDetails:String[], contactIndex:int)
@@ -37,4 +48,12 @@ alt#gold #lightgreen NAME_INDEX
     ":ContactList" -> ":ContactList" : setEmail(contactDetails(i))
 end
 end
+
+":ContactList"-->":EditContactCommand"
+deactivate ":ContactList"
+
+":EditContactCommand"-->":MainParser"
+deactivate ":EditContactCommand"
+deactivate ":MainParser"
+
 @enduml
