@@ -109,18 +109,6 @@ Given below is the sequence diagram for the interactions within the main applica
 
 ![MainLogicSequenceDiagram](diagrams/diagram_images/MainLogicSequenceDiagram.png)
 
-### AddStockCommand
-
-MediVault creates an `AddStockCommand` object when CommandParser identifies `addstock` or `add` in `stock`
-mode.
-
-* MediVault adds medicine stock when the `parameter` and `parameterValues` provided by the user are valid.
-* Users will not be able to input medication if `max_quantity` is less than `quantity`.
-* Users will not be able to input medication if the same name exist and the `expiry_date` is same.
-* MediVault will ignore the `description` and `max_quantity` of user input if the same medication name already exist.
-
-The sequence diagram for `AddStockCommand` is shown below.
-
 ### List Command
 
 There are three variations of the list command.
