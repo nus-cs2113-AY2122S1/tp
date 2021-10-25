@@ -41,7 +41,7 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public void getFilteredExpenses(Integer index, String expenseCategory, String expenseAttribute) {
+    public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
 
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
@@ -71,6 +71,7 @@ public class Trip {
         }
 
     }
+
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;

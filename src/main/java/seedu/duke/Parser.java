@@ -258,28 +258,26 @@ public class Parser {
         if (inputParams == null) {
             openTrip.viewAllExpenses();
         } else {
-            String[] paramString = inputParams.split(" ", 4);
+            String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
-            String expenseCategory = null;
-            String expenseAttribute = null;
-            Integer index = null;
+            String expenseCategory = paramString[1];
+            String expenseAttribute = paramString[2];
             if (secondCommand.equals("filter")) {
-                expenseCategory = paramString[1];
-                expenseAttribute = paramString[2];
-            } else if (secondCommand.equals("index")) {
-                index = Integer.parseInt(paramString[1]);
-            }
-            try {
-                if (secondCommand.equals("filter")) {
-                    openTrip.getFilteredExpenses(index, expenseCategory, expenseAttribute);
-                } else if (secondCommand.equals("index")) {
-                    Expense e = openTrip.getExpenseAtIndex(index);
-                    Ui.printFilteredExpenses(e, index - 1);
+                try {
+                    openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
+                } catch (IndexOutOfBoundsException e) {
+                    Ui.printNoExpensesError();
                 }
-            } catch (IndexOutOfBoundsException e) {
-                Ui.printNoExpensesError();
-            }
+            } else if (secondCommand.equals("index")) {
+                String expenseIndex = inputParams.split(" ", 2)[1];
+                try {
+                    int index = Integer.parseInt(expenseIndex);
+                    System.out.println(openTrip.getExpenseAtIndex(index));
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    Ui.printUnknownExpenseIndexError();
+                }
 
+            }
         }
 
     }

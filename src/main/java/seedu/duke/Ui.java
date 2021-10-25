@@ -95,13 +95,10 @@ public class Ui {
                 + "expense [amount] [category] [people] /[description].");
     }
 
-    //todo pls check this
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
                 + "view filter [category, payer, description, person] [search keyword]");
-        //+ "view [filter, index] [number (for index), category, payer, description] [search keyword]");
-
     }
 
 
@@ -274,6 +271,7 @@ public class Ui {
             System.out.println("\tview: list all expenses");
             System.out.println("\tview [filter] [search keyword]: list filtered expenses.");
             System.out.println("\t\tfilter options: [category, description, payer, person]");
+            System.out.println("\tview index [expense num]");
             System.out.println("\tsummary: shows how much each person spent in total for this trip");
             System.out.println("\tamount [person]: for settling repayment at the end of the trip, " +
                     "shows how much this person owes to others, " +

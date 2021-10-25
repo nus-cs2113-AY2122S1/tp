@@ -10,19 +10,26 @@ No preloaded data found! We have created a file for you.
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
+
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: budget was not recognised. Please try again after this process is complete
 Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: There is USD $2.00 left to be assigned. How much did qian spend?: Your expense has been added successfully
+Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
+
+There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: There is USD $2.00 left to be assigned. How much did qian spend?: Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: There is USD $1.00 left to be assigned. How much did yikai spend?: There is USD $0.67 left to be assigned. How much did josh spend?: There is USD $0.34 left to be assigned. How much did xiyuan spend?: Your expense has been added successfully
+Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
+
+There is USD $1.00 left to be assigned. How much did yikai spend?: There is USD $0.67 left to be assigned. How much did josh spend?: There is USD $0.34 left to be assigned. How much did xiyuan spend?: Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: There is USD $2.00 left to be assigned. How much did yikai spend?: There is USD $1.00 left to be assigned. How much did josh spend?: Your expense has been added successfully
+Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
+
+There is USD $2.00 left to be assigned. How much did yikai spend?: There is USD $1.00 left to be assigned. How much did josh spend?: Your expense has been added successfully
 Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
@@ -63,20 +70,6 @@ Enter your command: 1. 	c a b
 	Amount Spent: USD $8.00
 	People involved: [yikai, yuzhao, qian]
 	Payer: yikai
-	Category: breakfast
-
-2. 	d a c
-	date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: [yikai, josh, xiyuan]
-	Payer: yikai
-	Category: lunch
-
-3. 	d a c
-	date: 19 Oct 2021
-	Amount Spent: USD $2.00
-	People involved: [yikai, josh]
-	Payer: josh
 	Category: breakfast
 
 Enter your command: 3. 	d a c
@@ -86,20 +79,15 @@ Enter your command: 3. 	d a c
 	Payer: josh
 	Category: breakfast
 
-Enter your command: 2. 	d a c
-	date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: [yikai, josh, xiyuan]
-	Payer: yikai
-	Category: lunch
-
+Enter your command: Please format your inputs as follows:
+view filter [category, payer, description, person] [search keyword]
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
-Enter your command: List of Expenses: 
+Enter your command: List of Expenses:
 	1. c a b | 19 Oct 2021
 	2. d a c | 19 Oct 2021
 	3. d a c | 19 Oct 2021
-Enter your command: List of all Expenses in detail: 
+Enter your command: List of all Expenses in detail:
 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
@@ -124,14 +112,14 @@ Enter your command: List of all Expenses in detail:
 Enter your command: Your expense of USD $1.00 has been successfully removed
 Enter your command: Your expense of USD $8.00 has been successfully removed
 Enter your command: Your expense of USD $2.00 has been successfully removed
-Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
-yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
-qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
-josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
-xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
 Enter your command: Goodbye!
