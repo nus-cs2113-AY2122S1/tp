@@ -31,24 +31,10 @@ public class UpdateCommand extends Command {
         Ui.printLineBreak();
     }
 
-    private void updateIntroMessage() {
-        System.out.println("Please type the item you would like to update in the following manner "
-                + System.lineSeparator() + "-----------------------------------------------------------------------   "
-                + System.lineSeparator() + "title/[NEW NAME]   "
-                + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
-                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
-                + System.lineSeparator() + "venue/[NEW VENUE]"
-                + System.lineSeparator() + "budget/[NEW BUDGET]"
-                + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
-                + System.lineSeparator()
-                + "You may type more then one update at a given time but separate them with a [>]"
-                + System.lineSeparator() + Ui.getLineBreak());
-    }
-
     public CommandResult execute() {
         boolean exit = false;
         while (!exit) {
-            updateIntroMessage();
+            Ui.updateIntroMessage();
             String userInput = Ui.readInput();
             Ui.printLineBreak();
             if (userInput.equalsIgnoreCase("exit")) {
@@ -56,9 +42,9 @@ public class UpdateCommand extends Command {
             }
             String[] userUpdates = userInput.trim().split(">");
             try {
-                CommandResult x = implementUpdates(userUpdates);
-                if (x != null) {
-                    return x;
+                CommandResult result = implementUpdates(userUpdates);
+                if (result != null) {
+                    return result;
                 }
                 postUpdateMessage();
                 String exitInput = Ui.readInput();

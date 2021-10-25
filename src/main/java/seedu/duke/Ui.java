@@ -147,4 +147,25 @@ public class Ui {
         AtomicInteger i = new AtomicInteger();
         list.forEach(member -> System.out.println(i.getAndIncrement() + 1 + ". " + member));
     }
+    public static void listUsageCommands() {
+        System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
+                + System.lineSeparator() + "-----------------------"
+                + System.lineSeparator() + "To list Task: list [Event Index] -t"
+                + System.lineSeparator() + "To list Members of a Task: "
+                + "list [Event Index] t/[Task Index]");
+    }
+    public static void updateIntroMessage() {
+        System.out.println("Please type the item you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------   "
+                + System.lineSeparator() + "title/[NEW NAME]   "
+                + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "venue/[NEW VENUE]"
+                + System.lineSeparator() + "budget/[NEW BUDGET]"
+                + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator() + Ui.getLineBreak());
+    }
+
 }

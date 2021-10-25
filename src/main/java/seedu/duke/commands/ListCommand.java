@@ -23,31 +23,16 @@ public class ListCommand extends Command {
     }
 
     public CommandResult execute() {
-        Event event1;
         try {
             switch (listType) {
             case "list":
-                System.out.println("OVERALL SCHEDULE"
-                        + System.lineSeparator() + "=======================");
-                Ui.printEventCatalog();
-                listUsageCommands();
+                listingOverallSchedule();
                 break;
             case "task":
-
-                event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
-                System.out.println("Event: " + event1.getTitle()
-                        + System.lineSeparator() + "=======================");
-                Ui.printList(event1.getTaskList());
+                listingTaskDetails();
                 break;
             case "member":
-                Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
-                String[] memberCommand = userCommand[2].split("/");
-                int taskNum = Integer.parseInt(memberCommand[1]) - 1;
-                Task task = event2.getFromTaskList(taskNum);
-                System.out.println("Event: " + event2.getTitle()
-                        + System.lineSeparator() + "Task: " + task.getTitle()
-                        + System.lineSeparator() + "=======================");
-                Ui.printMemberList(task.getMemberList());
+                listingMemberDetails();
                 break;
             default:
                 return new CommandResult("please specify type for list "
@@ -55,17 +40,35 @@ public class ListCommand extends Command {
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             System.out.println("Please check through the format carefully");
-            listUsageCommands();
+            Ui.listUsageCommands();
         }
         return new CommandResult("--------END OF LIST-----------");
 
     }
 
-    private void listUsageCommands() {
-        System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
-                + System.lineSeparator() + "-----------------------"
-                + System.lineSeparator() + "To list Task: list [Event Index] -t"
-                + System.lineSeparator() + "To list Members of a Task: "
-                + "list [Event Index] t/[Task Index]");
+    private void listingOverallSchedule() {
+        System.out.println("OVERALL SCHEDULE"
+                + System.lineSeparator() + "=======================");
+        Ui.printEventCatalog();
+        Ui.listUsageCommands();
+    }
+
+    private void listingTaskDetails() {
+        Event event1;
+        event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+        System.out.println("Event: " + event1.getTitle()
+                + System.lineSeparator() + "=======================");
+        Ui.printList(event1.getTaskList());
+    }
+
+    private void listingMemberDetails() {
+        Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+        String[] memberCommand = userCommand[2].split("/");
+        int taskNum = Integer.parseInt(memberCommand[1]) - 1;
+        Task task = event2.getFromTaskList(taskNum);
+        System.out.println("Event: " + event2.getTitle()
+                + System.lineSeparator() + "Task: " + task.getTitle()
+                + System.lineSeparator() + "=======================");
+        Ui.printMemberList(task.getMemberList());
     }
 }
