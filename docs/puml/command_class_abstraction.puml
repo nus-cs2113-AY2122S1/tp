@@ -1,4 +1,8 @@
 @startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
 class seedu.duke.command.ListCommand {
 - {static} Ui ui
 + void execute(ArrayList<String>)

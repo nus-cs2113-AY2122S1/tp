@@ -1,4 +1,8 @@
 @startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
 class seedu.duke.Duke {
 + {static} void main(String[])
 }
@@ -40,7 +44,7 @@ class seedu.duke.Ui {
 - {static} String EXIT_LOGO
 - {static} String WELCOME_MESSSAGE
 - {static} String NEWPAGE_MESSSAGE
-# {static} String HELP_ME
+- {static} String HELP_ME
 - {static} String EXIT_MESSAGE
 - {static} String INVALID_COMMAND
 - {static} String INVALID_PARAMETERS
