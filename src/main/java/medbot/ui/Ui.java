@@ -205,6 +205,32 @@ public class Ui {
     }
 
     /**
+     * Returns the message indicate the current viewType.
+     *
+     * @param viewType the viewType context of the command.
+     * @return The current view message
+     * @throws MedBotException when the current view is unidentifiable
+     */
+    public static String getCurrentViewMessage(ViewType viewType)throws MedBotException {
+        String output;
+        switch (viewType) {
+        case PATIENT_INFO:
+            output = "You are currently in the Patient's View.";
+            break;
+        case MEDICAL_STAFF_INFO:
+            output = "You are currently in the Staff's View.";
+            break;
+        case SCHEDULER:
+            output = "You are currently in the Scheduler's View.";
+            break;
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+
+        return output;
+    }
+    /**
      * Prints an exit message when MedBot is exiting.
      *
      * @return the exit Message
