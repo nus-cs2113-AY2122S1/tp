@@ -2,7 +2,15 @@ package terminus.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +23,7 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 
 /**
@@ -160,9 +169,14 @@ public class ModuleStorage {
         contentManager.purgeData();
         for (File file : listOfFiles) {
             if (isValidFile(file)) {
-                TerminusLogger.info(String.format("Loading note file %s.", file.getAbsolutePath()));
-                contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
-                        Files.readString(Paths.get(file.getAbsolutePath()))));
+                try {
+                    TerminusLogger.info(String.format("Loading note file %s.", file.getAbsolutePath()));
+                    contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
+                            Files.readString(Paths.get(file.getAbsolutePath()))));
+                } catch (IOException e) {
+                    // Read String error
+                    TerminusLogger.severe(String.format("Loading note file %s failed.", file.getAbsolutePath()));
+                }
             } else {
                 TerminusLogger.info(String.format("File %s is not a valid note file.", file.getAbsolutePath()));
             }
@@ -291,6 +305,44 @@ public class ModuleStorage {
     }
 
     /**
+     * Exports all notes of a module to a PDF file.
+     *
+     * @param module The Name of the module to export
+     * @param notes The list of notes to export
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException,InvalidArgumentException {
+        Document tempDocument = new Document();
+        Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
+        if (Files.notExists(modDirPath.getParent())) {
+            TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
+            throw new IOException("Parent directory does not exist.");
+        }
+        if (notes.isEmpty()) {
+            TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
+            throw new InvalidArgumentException("There are no notes to export.");
+        }
+        try {
+            final PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+            Font header = FontFactory
+                    .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
+            Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
+
+            tempDocument.open();
+            for (Note note : notes) {
+                Paragraph title = new Paragraph(note.getName(), header);
+                Paragraph content = new Paragraph(note.getData(), text);
+                tempDocument.add(title);
+                tempDocument.add(content);
+            }
+            tempDocument.close();
+            writer.close();
+        } catch (DocumentException e) {
+            throw new IOException(Messages.FAIL_TO_EXPORT);
+        }
+    }
+
+    /**
      * Deletes all files within itself and itself from a specified file.
      *
      * @param file The file to be deleted.
@@ -325,6 +377,24 @@ public class ModuleStorage {
         return true;
     }
 
+    public void updateModuleDirectory(String oldName, String newName) throws IOException {
+        Path modDirPath = Paths.get(filePath.getParent().toString(), oldName);
+        Path newModDirPath = Paths.get(filePath.getParent().toString(), newName);
+        if (Files.notExists(newModDirPath) && Files.notExists(modDirPath)) {
+            TerminusLogger.info("Creating directory: " + newModDirPath);
+            Files.createDirectories(newModDirPath);
+        } else if (Files.exists(modDirPath) && Files.notExists(newModDirPath)) {
+            TerminusLogger.info("Renaming directory: " + modDirPath);
+            File oldFile = new File(modDirPath.toString());
+            File newFile = new File(newModDirPath.toString());
+            if (!oldFile.renameTo(newFile)) {
+                throw new IOException(Messages.ERROR_CHANGE_FILE_NAME);
+            }
+        } else {
+            TerminusLogger.info("Directory: " + newModDirPath + " already exists.");
+        }
+    }
+
     private boolean isValidFile(File file) throws IOException {
         boolean isValid = true;
         if (!Files.isReadable(Paths.get(file.getAbsolutePath()))) {
@@ -333,8 +403,18 @@ public class ModuleStorage {
             isValid = false;
         } else if (!isValidFileSize(file)) {
             isValid = false;
+        } else if (!isTextFile(file)) {
+            isValid = false;
         }
         return isValid;
+    }
+
+    private boolean isTextFile(File file) throws IOException {
+        String contentType = Files.probeContentType(Paths.get(file.getAbsolutePath()));
+        if (contentType == null) {
+            return false;
+        }
+        return contentType.equals(CommonFormat.CONTENT_TYPE_TEXT_FILE);
     }
 
     private boolean isValidFileSize(File file) throws IOException {

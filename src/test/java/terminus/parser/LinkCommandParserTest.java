@@ -61,21 +61,34 @@ public class LinkCommandParserTest {
         assertThrows(InvalidArgumentException.class,
             () -> linkCommandParser.parseCommand("add \"test desc\" \"test day\" \"00:00\""));
         assertThrows(InvalidArgumentException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"today\" \"00:00\" \"https://zoom.us/test\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"today\" \"00:00\" \"2\" \"https://zoom.us/test\""));
         assertThrows(InvalidArgumentException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"monday\" \"x:30\" \"https://zoom.us/test\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"monday\" \"x:30\" \"3\" \"https://zoom.us/test\""));
         assertThrows(InvalidArgumentException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"zoom.test\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"1\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Monday\" \"10:00\" \"1\" \"empty\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"1\" \"zoom\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"-1\" \"zoom.test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"23:00\" \"25\" \"zoom.test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"23:00\" \"12\" \"zoom.test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"23:00\" \"12\" \"zoom.test\""));
+
     }
 
     @Test
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(linkCommandParser.parseCommand(
-                "add \"test desc\" \"Tuesday\" \"10:00\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
+                "add \"test desc\" \"Tuesday\" \"10:00\" \"1\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
         assertTrue(linkCommandParser.parseCommand(
-                "add \"    test     \" \"Wednesday\" \"10:00\" \"    https://zoom.us/test    \"") instanceof AddLinkCommand);
+                "add \"    test     \" \"Wednesday\" \"10:00\" \"2\" \"    https://zoom.us/test    \"") instanceof AddLinkCommand);
         assertTrue(linkCommandParser.parseCommand(
-                "add \"CS2113T Lecture\" \"Friday\" \"16:00\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
+                "add \"CS2113T Lecture\" \"Friday\" \"16:00\" \"3\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
     }
 
     @Test

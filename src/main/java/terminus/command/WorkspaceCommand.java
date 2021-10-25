@@ -6,7 +6,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
-import terminus.ui.Ui;
 
 public abstract class WorkspaceCommand extends Command {
 
@@ -21,23 +20,22 @@ public abstract class WorkspaceCommand extends Command {
     /**
      * Returns the Command Result after execution. If no other arguments, returns the workspace.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return The CommandResult containing success or failure of command and CommandParser Object.
      * @throws InvalidCommandException when the command could not be found.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
+     * @throws IOException             when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
             TerminusLogger.info("Parsing workspace command");
-            return commandMap.parseCommand(arguments).execute(ui, moduleManager);
+            return commandMap.parseCommand(arguments).execute(moduleManager);
         } else {
             TerminusLogger.info("Switching workspace to: " + commandMap.getWorkspace());
-            return new CommandResult(true, commandMap);
+            return new CommandResult(commandMap);
         }
     }
 

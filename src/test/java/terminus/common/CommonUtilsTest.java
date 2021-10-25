@@ -2,6 +2,7 @@ package terminus.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -193,9 +194,9 @@ public class CommonUtilsTest {
     }
 
     @Test
-    void isValidUrl_invalidInput_exceptionThrown() {
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(""));
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(".."));
+    void isValidUrl_invalidInput_exceptionThrown() throws InvalidArgumentException {
+        assertFalse(CommonUtils.isValidUrl(""));
+        assertFalse(CommonUtils.isValidUrl(".."));
     }
 
     @Test
@@ -236,4 +237,43 @@ public class CommonUtilsTest {
         assertThrows(AssertionError.class, () -> CommonUtils.getFileNameOnly(null));
     }
 
+    @Test
+    void isValidDuration_success() {
+        assertTrue(CommonUtils.isValidDuration(0));
+        assertTrue(CommonUtils.isValidDuration(1));
+        assertTrue(CommonUtils.isValidDuration(2));
+        assertFalse(CommonUtils.isValidDuration(-3));
+        assertFalse(CommonUtils.isValidDuration(34));
+        assertFalse(CommonUtils.isValidDuration(-1));
+        assertFalse(CommonUtils.isValidDuration(25));
+    }
+
+    @Test
+    void hasDurationOverflow_success() {
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(22,22), 2));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(22,00), 3));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(23,00), 2));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(00,22), 24));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(02,22), 23));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(22,22), 1));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,59), 0));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(00,00), 0));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,00), 0));
+    }
+
+    @Test
+    void isValidIndex() {
+        String[] list = new String[50];
+        assertTrue(CommonUtils.isValidIndex(5, list));
+        assertTrue(CommonUtils.isValidIndex(50, list));
+        assertTrue(CommonUtils.isValidIndex(1, list));
+        assertFalse(CommonUtils.isValidIndex(0, list));
+        assertFalse(CommonUtils.isValidIndex(51, list));
+        assertFalse(CommonUtils.isValidIndex(100, list));
+    }
+
+    @Test
+    void getCurrentDay_success() {
+        assertNotNull(CommonUtils.getCurrentDay());
+    }
 }

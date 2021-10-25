@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import terminus.exception.InvalidArgumentException;
 
 /**
@@ -72,7 +73,7 @@ public class CommonUtils {
      * Returns the class name without its packages.
      *
      * @param type Content class type.
-     * @param <T> Content object type.
+     * @param <T>  Content object type.
      * @return A string of the class name from the class type without its packages.
      */
     public static <T> String getClassName(T type) {
@@ -97,8 +98,7 @@ public class CommonUtils {
             new URL(url).toURI();
             return true;
         } catch (Exception e) {
-            throw new InvalidArgumentException(
-                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, url));
+            return false;
         }
     }
 
@@ -117,12 +117,48 @@ public class CommonUtils {
         return false;
     }
 
+    /**
+     * Checks if the given integer is a valid duration.
+     *
+     * @param duration The integer to be checked
+     * @return True if the integer between 0 and 24 inclusive, false otherwise
+     */
+    public static boolean isValidDuration(int duration) {
+        if (duration < 0 || duration > 24) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the given LocalTime and integer has an overflow.
+     *
+     * @param startTime The startTime attribute of the Link object
+     * @param duration  The duration attribute of the Link object
+     * @return True if there is no overflow in time, false otherwise
+     */
+    public static boolean hasDurationOverflow(LocalTime startTime, int duration) {
+        LocalTime endTime = startTime.plusHours(duration);
+        LocalTime midnight = LocalTime.of(00, 00);
+        if (!endTime.equals(midnight) && startTime.getHour() > endTime.getHour()) {
+            return true;
+        } else if (!startTime.equals(midnight) && duration == 24) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the given String is null or empty.
+     *
+     * @param string The string to be checked
+     * @return True if String is null or empty, false otherwise
+     */
     public static boolean isStringNullOrEmpty(String string) {
         return string == null || string.isBlank();
     }
 
     /**
-     * <<<<<<< HEAD
      * Checks if the given name is a valid file name.
      *
      * @param name The string to be checked.
@@ -170,5 +206,16 @@ public class CommonUtils {
     public static String getCurrentDay() {
         String currentDay = LocalDate.now().getDayOfWeek().toString();
         return currentDay;
+    }
+
+    /**
+     * Returns a boolean if the index give is valid.
+     *
+     * @param index The index to check
+     * @param listOfModule The full list of modules
+     * @return True if the index is valid or else it is false
+     */
+    public static boolean isValidIndex(int index, String[] listOfModule) {
+        return listOfModule.length >= index && index > 0;
     }
 }

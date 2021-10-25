@@ -9,10 +9,11 @@ import terminus.parser.CommandParser;
 public class Ui {
 
     private static final String PROMPT = "[%s] >>> ";
+    private static final Ui UI = new Ui();
 
     private final Scanner scanner;
 
-    public Ui() {
+    private Ui() {
         this(System.in);
     }
     
@@ -72,5 +73,9 @@ public class Ui {
     public String getUserInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
+    }
+    
+    public static Ui getInstance() {
+        return UI;
     }
 }
