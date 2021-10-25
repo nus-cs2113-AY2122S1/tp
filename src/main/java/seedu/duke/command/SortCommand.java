@@ -7,6 +7,7 @@ import seedu.duke.task.TaskManager;
 import java.util.HashMap;
 import java.util.Map;
 
+//@@author APZH
 public class SortCommand extends Command {
 
     private static final CommandEnum COMMAND = CommandEnum.SORT;
@@ -15,6 +16,7 @@ public class SortCommand extends Command {
         super(COMMAND, commandArguments);
     }
 
+    //@@author APZH
     @Override
     public CommandResult executeCommand() throws Exception {
         String message = "";
