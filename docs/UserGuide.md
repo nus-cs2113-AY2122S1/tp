@@ -169,6 +169,16 @@ ____________________________________________________________
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Action | Command Format | Example
+--- | --- | --- | 
+List all valid commands and usage | `help` | `help`
+Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> 
+-te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n John Doe 
+-g johndoecoder -e john@email.com -te johndoe`
+List all contacts | `deadline <TASK_DESCRIPTION> /by <YYYY-MM-DD HH:MM>` | `deadline submit ip jar /by 2021-10-02 22:20`
+View a contact| `list` | `list`
+Edit a contact| `event <TASK_DESCRIPTION> /at <YYYY-MM-DD HH:MM>` | `event graduation party /at 2021-11-01 18:10`
+Delete a contact | `done <TASK_INDEX>` | `done 2`
+Search for a contact| `find <SEARCH_STRING>` | `find homework`
+Import contacts from .txt file|`import` | `import`
+Exit duke | `bye` | `bye`
