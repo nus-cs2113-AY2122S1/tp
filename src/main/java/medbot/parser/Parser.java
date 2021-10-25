@@ -103,7 +103,7 @@ public abstract class Parser {
             return new HelpCommand(getViewType());
         }
         CommandType commandType = parseHelpCommandType(commandTypeString);
-        return new HelpCommand(commandType,getViewType());
+        return new HelpCommand(getViewType(),commandType);
     }
 
     private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {

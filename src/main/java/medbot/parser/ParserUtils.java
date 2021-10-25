@@ -139,10 +139,9 @@ public abstract class ParserUtils {
         List<String> p = Arrays.asList(parameters);
         assert parameters.length >= 1;
 
-        List<String> parametersWithoutSpecifiers = p.stream()
+        return p.stream()
                 .map(s -> s.substring(PARAMETER_BUFFER))
                 .collect(toList());
-        return parametersWithoutSpecifiers;
     }
 
     static String[] getSpecifiers(String userInput) throws MedBotParserException {
