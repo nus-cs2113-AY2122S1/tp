@@ -5,6 +5,7 @@ import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
 import java.util.LinkedList;
+
 import medbot.list.ListItem;
 
 import medbot.Appointment;
@@ -180,7 +181,7 @@ public abstract class Person extends ListItem {
     }
 
     /**
-     * Text to be written to storage file of a person
+     * Text to be written to storage file of a person.
      *
      * @return storageString of a person
      */
