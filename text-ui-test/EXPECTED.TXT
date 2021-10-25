@@ -26,6 +26,7 @@ To find out more information about the command, such as input format and paramet
 "display" : Shows all the exercises in a specified workout
 "edit" : Edits a specific exercise in a specified workout
 "search" : Displays workouts or exercises that contain the specified keyword
+"clear" : Clears all exercises in a specified workout or all workouts in the list
 "bye" : Ends the program
 ________________________________________________________
 ________________________________________________________
@@ -228,6 +229,12 @@ ________________________________________________________
 			________________________________________________________
 ________________________________________________________
 Back to Main View
+________________________________________________________
+________________________________________________________
+All exercises in workout 1 have been cleared!
+________________________________________________________
+________________________________________________________
+All workouts have been cleared!
 ________________________________________________________
 ________________________________________________________
 Bye. Hope you get your desired body soon, have a great day!
