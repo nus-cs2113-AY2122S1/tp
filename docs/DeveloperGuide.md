@@ -85,11 +85,14 @@ of all available NUS modules, as well as the selected modules the user wants to 
 The ModuleMapping class consists of two modules, local and mapped module. It represents the pair of modules as 
 an available pair of module mapping in the user's SEP application. 
 
-### Parser
-
-The parser component can implement the following features:
+### Parser Component
+The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
+#### Parser
+This is the main parser class that will handle raw inputs and identify command words and invoke the respective command parsers.
+#### AddCommandParser, RemoveCommandParser, FindCommandParser, SearchMapCommandParser, HelpCommandParser, ExitCommandParser
+These class when invoked, will handle the flags and arguments and invoke the specific Command classes and handle the arguments.
 
 
 ## Product scope
