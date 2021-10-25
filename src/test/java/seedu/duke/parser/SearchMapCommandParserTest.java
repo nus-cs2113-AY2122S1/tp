@@ -17,11 +17,22 @@ public class SearchMapCommandParserTest {
     private static Storage storage = new Storage(); 
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
+    private static ModuleList moduleMasterList;
+    private static UniversityList universityMasterList;
+
+    static {
+        try {
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(
+                    storage.readUniversityList(moduleMasterList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testCorrectUniversityName_success() throws IOException {
         try {
-            UniversityList universityMasterList = new UniversityList();
             SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
             assertEquals("Boston University", command.getSelectedUniversity().getName());
@@ -33,11 +44,8 @@ public class SearchMapCommandParserTest {
     @Test
     public void test_NonExistentUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             new SearchMapCommandParser().parse("non existent", universityMasterList,
                     universitySelectedList, moduleSelectedList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (ParseException e) {
             assertEquals("university does not exist", e.getMessage());
         }
@@ -46,10 +54,7 @@ public class SearchMapCommandParserTest {
     @Test
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             new SearchMapCommandParser().parse("", universityMasterList, universitySelectedList, moduleSelectedList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (ParseException e) {
             assertEquals("no description given", e.getMessage());
         }

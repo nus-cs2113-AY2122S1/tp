@@ -20,11 +20,18 @@ public class AddUniCommandParserTest {
     private static UniversityList universityMasterList;
     private static ModuleList moduleMasterList;
 
+    static {
+        try {
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(
+                    storage.readUniversityList(moduleMasterList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void test_validUniversityName_success() throws IOException {
-        moduleMasterList = new ModuleList(storage.readModuleList());
-        universityMasterList = new UniversityList(
-                storage.readUniversityList());
         AddCommandParser commandParser = new AddCommandParser();
         assertEquals(true, commandParser.isUniversityExist("Aarhus School of Business", universityMasterList));
         assertEquals(true, commandParser.isUniversityExist("Aarhus University", universityMasterList));
@@ -33,8 +40,6 @@ public class AddUniCommandParserTest {
     @Test
     public void test_invalidUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(
-                    storage.readUniversityList());
             AddCommandParser commandParser = new AddCommandParser();
             commandParser.parse("non-existent university name", universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
@@ -49,7 +54,6 @@ public class AddUniCommandParserTest {
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
             AddCommandParser commandParser = new AddCommandParser();
-            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
             commandParser.parse("", universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
