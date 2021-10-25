@@ -21,6 +21,8 @@ some code block
 
 ## Features 
 
+### Trips
+
 #### Create New Trip
 
 Creates a new trip in the program.
@@ -29,11 +31,11 @@ You must have at least one trip created (or loaded from the save file) to use an
 
 The input syntax to create a trip is:
 ```
-create [location] [date] [local currency] [exchange rate] [persons in trip]
+create [location] [date] [local-currency] [exchange-rate] [persons-in-trip]
 ```
 
 - `date` must follow the format of dd-MM-yyyy
-- `persons in trip` should be separated with commas and without spaces between each name
+- `persons-in-trip` should be separated with commas and without spaces between each name
 
 For example,
 
@@ -47,15 +49,33 @@ If your trip is successfully created, you'll see the following message:
 Your trip to America on 02 Feb 2021 has been successfully added.
 ```
 
+#### Open Trip
+
+In order to add, edit or delete expenses within a trip, you must first open the trip containing
+the expenses you wish to add/modify/delete.
+
+To open a trip, enter
+
+```
+open [trip-number]
+```
+
+If successful, you'll see the following message:
+
+```
+You have opened the following trip:
+America | 02 Feb 2021
+```
+
 #### Delete a trip
 
 Deletes a trip from the program.
 
 The input syntax to delete a trip is:
 ```
-delete [tripnumber]
+delete [trip-number]
 ```
-- `[tripnumber]` is the index of the trip you wish to delete, and can be found by using `whatcommand` command.
+- `[trip-number]` is the index of the trip you wish to delete, and can be found by using `whatcommand` command.
 
 If your trip is successfully deleted, you'll see the following message:
 
