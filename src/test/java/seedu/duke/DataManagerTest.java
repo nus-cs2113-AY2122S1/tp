@@ -47,13 +47,13 @@ public class DataManagerTest {
         assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
         assertEquals(ExpenseCategory.FOOD, financialTracker.getExpenses().get(0).getCategory());
-        
+
         assertEquals(.5, financialTracker.getExpenses().get(1).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(1).getDescription());
 
         assertEquals(12.5, financialTracker.getIncomes().get(0).getValue());
         assertEquals("qwe", financialTracker.getIncomes().get(0).getDescription());
-        
+
         assertEquals(12.5, financialTracker.getIncomes().get(1).getValue());
         assertEquals("qwe", financialTracker.getIncomes().get(1).getDescription());
     }
@@ -72,7 +72,7 @@ public class DataManagerTest {
         dataManager.saveEntries();
         dataManager.loadEntries();
     }
-    
+
     @Test
     public void saveBudget_validBudgets_validBudgetData() {
         FinancialTracker financialTracker = new FinancialTracker();
@@ -86,14 +86,14 @@ public class DataManagerTest {
                 break;
             }
             budgetManager.setBudget(i, category);
-            i++;
+            i ++;
         }
         dataManager.saveBudgetSettings();
         String testData = parser.convertBudgetSettingsToData(budgetManager);
         String expectedData = "0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
-    
+
     @Test
     public void loadBudget_validBudgetData_validBudgets() {
         saveBudget_validBudgets_validBudgetData();
@@ -109,7 +109,7 @@ public class DataManagerTest {
                 break;
             }
             assertEquals(budgetManager.getBudget(category), i);
-            i++;
+            i ++;
         }
     }
 }

@@ -160,20 +160,20 @@ public class DataManager {
             ui.printError(Messages.UNABLE_TO_FIND_BUDGET_FILE);
             return;
         }
-        
+
         Scanner sc = new Scanner(fis);
         sc.nextLine();
         String data = sc.nextLine();
         try {
             ArrayList<Double> budgetSettings = parser.convertDataToBudgetSettings(data);
-            int i = 0;
+            int budgetIndex = 0;
             for (ExpenseCategory category : ExpenseCategory.values()) {
                 // Not expected to have a budget related to NULL
                 if (category == ExpenseCategory.NULL) {
                     break;
                 }
-                budgetManager.setBudget(budgetSettings.get(i), category);
-                i++;
+                budgetManager.setBudget(budgetSettings.get(budgetIndex), category);
+                budgetIndex += 1;
             }
         } catch (NullPointerException | NumberFormatException e) {
             ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
