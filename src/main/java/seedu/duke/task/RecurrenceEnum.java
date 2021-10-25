@@ -2,6 +2,8 @@ package seedu.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import seedu.duke.exception.InvalidRecurrenceException;
 
 //@@author SeanRobertDH
@@ -28,11 +30,15 @@ public enum RecurrenceEnum {
         return super.toString().toLowerCase();
     }
 
-    public LocalDateTime getRecurredDate(LocalDateTime date) {
+    public List<LocalDateTime> getNextNRecurredDates(LocalDateTime date, int n) {
+        ArrayList<LocalDateTime>  recurredDates = new ArrayList<>(n);
         if (this == NONE) {
-            return date;
+            return recurredDates;
         }
-        return date.plus(1, chronoUnit);
+        for (int i = 1; i <= n; i++) {
+            recurredDates.add(date.plus(i, chronoUnit));
+        }
+        return recurredDates;
     }
 
     public static RecurrenceEnum getRecurrence(String recurrence) throws InvalidRecurrenceException {
