@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
+import seedu.duke.command.exercise.DisplayExercisesCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 
@@ -65,5 +66,13 @@ class MarkExerciseAsDoneParserTest {
         parser = new MarkExerciseAsDoneParser("done 1,   ");
         result = parser.parseInput();
         assertTrue(result instanceof IncorrectCommand);
+    }
+    
+    @Test
+    void parseInput_invalidWorkoutIndexButValidWorkoutMode_returnsMarkExerciseAsDoneCommand() {
+        Command.workoutMode = 1;
+        parser = new MarkExerciseAsDoneParser("done 1");
+        result = parser.parseInput();
+        assertTrue(result instanceof MarkExerciseAsDoneCommand);
     }
 }

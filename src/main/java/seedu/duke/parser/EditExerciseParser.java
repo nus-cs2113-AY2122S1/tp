@@ -30,7 +30,9 @@ public class EditExerciseParser extends Parser {
 
             // String excluding the exerciseIndex and workoutIndex
             String[] params = commandArgs.split(PARAMETER_SEPARATOR);
-            ArrayList<String> paramsWithoutIndices = new ArrayList<>(Arrays.asList(params).subList(2, params.length));
+            int separatorIndex = (params.length > 3) ? 2 : 1; 
+            ArrayList<String> paramsWithoutIndices = new ArrayList<>(Arrays.asList(params)
+                    .subList(separatorIndex, params.length));
 
             String newArgs = String.join(PARAMETER_SEPARATOR, paramsWithoutIndices);
             String[] exerciseArgs = getExerciseArgs(newArgs, true);

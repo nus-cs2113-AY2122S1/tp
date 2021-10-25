@@ -50,6 +50,7 @@ public class RecommendWorkoutCommand extends Command {
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
      * @return all the information to be displayed to the user
+     * @throws GetJackDException if an error occurs within the storage
      */
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
@@ -62,7 +63,7 @@ public class RecommendWorkoutCommand extends Command {
             assert !list.isEmpty();
             for (Object o : list) {
                 assert o instanceof Exercise;
-                exerciseList.add((Exercise)o);
+                exerciseList.add((Exercise) o);
             }
             String recommendedWorkoutName = workoutLevel + " " + m.getKey();
             Workout recommendedWorkout = new Workout(recommendedWorkoutName, exerciseList);
