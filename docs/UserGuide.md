@@ -2,32 +2,41 @@
 
 ## Introduction
 
-{Give a product intro}
+Libmgr is a desktop app for managing the inventory of libraries, optimised for use via a Command Line Interface (CLI).
+Designed for fast typists, it can help to augment the day-to-day tasks of a librarian and can help them to get tasks
+done in an efficient manner.
+
+- [Quick Start](#Quick-Start)
+- [Features](#Features)
+  - [Removing an item: `remove`](#Removing-an-item)
+  - [Exiting the program: `exit`](#Exiting-the-program)
+- [FAQ](#FAQ)
+- [Command Summary](#Command-Summary)
 
 ## Quick Start
 
-{Give steps to get started quickly}
+1. Ensure that you have Java `11` or above installed.
+2. Down the latest version of `Libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
+4. Open a terminal/command prompt and run `java -jar Libmgr.jar` to start the application.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+## Features
 
-## Features 
+### Removing an item
+Removes an existing item from the catalogue.
 
-{Give detailed description of each feature}
+Format: `remove i/ID`
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+* The item specified by `ID` will be deleted.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Examples of usage:
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+`remove i/012350`
 
-Example of usage: 
+### Exiting the program
+Exits the program.
 
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Format: `exit`
 
 ## FAQ
 
