@@ -70,6 +70,9 @@ public class University implements Comparator<University> {
         }
         return selectedMappings;
     }
+    public int getSelectedMappingListSize(ModuleList selectedModuleList) {
+        return getSelectedMappings(selectedModuleList).size();
+    }
 
     public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList) {
         ModuleMapping selectedMapping = null;

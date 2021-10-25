@@ -7,6 +7,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -39,7 +40,7 @@ public class AddCommandParser {
             handleModFlagArgs(flagArguments, moduleMasterList, moduleSelectedList);
             return new AddModCommand(module, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
-            handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList);
+            handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList, universityMasterList);
             return new AddMapCommand(uniIndex, mapIndex,universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         default:
@@ -116,7 +117,7 @@ public class AddCommandParser {
     }
 
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
-                                   ModuleList moduleSelectedList) throws ParseException {
+                                   ModuleList moduleSelectedList, UniversityList universityMasterList) throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
         University currentUni = new University();
@@ -133,6 +134,7 @@ public class AddCommandParser {
         for (University uni : universitySelectedList.getList()) {
             if (uni.getIndex() == uniIndex) {
                 validUni = true;
+                //university object from selected list
                 currentUni = uni;
                 break;
             }
@@ -140,13 +142,14 @@ public class AddCommandParser {
         if (!validUni) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
         }
-        if (currentUni.getMappingListSize() == 0) {
+        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
-        if (mapIndex > currentUni.getMappingListSize()) {
+        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) < mapIndex) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
-        if (currentUni.isExistMapping(currentUni.getSelectedMappings(moduleSelectedList).get(mapIndex))) {
+        //THIS IS NOT WORKING
+        if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList).get(mapIndex - 1))) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
         }
     }
