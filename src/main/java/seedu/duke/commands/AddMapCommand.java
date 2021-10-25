@@ -4,6 +4,7 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -22,7 +23,7 @@ public class AddMapCommand extends Command {
         System.out.println("New module mapping added: ");
         ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex - 1);
         universityToMap.addMapping(selectedMapping);
-        Ui.printMapping(selectedMapping, universityToMap.getMappingListSize());
+        UiMapping.printMapping(selectedMapping, universityToMap.getMappingListSize());
         storage.updateSelectedUniversityList(universitySelectedList);
     }
 }

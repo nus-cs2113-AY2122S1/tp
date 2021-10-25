@@ -1,6 +1,8 @@
 package seedu.duke.commands;
 
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiInvalid;
+import seedu.duke.ui.UiUniversity;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -14,10 +16,10 @@ public class FindUniCommand extends Command {
                 .filter((university) -> university.getName().toLowerCase().contains(userInput.toLowerCase()))
                 .collect(Collectors.toList());
         if (result.size() == 0) {
-            Ui.printFindUniNull();
+            UiInvalid.printFindUniNull();
         } else {
             for (University university : result) {
-                Ui.printUniversity(university, false);
+                UiUniversity.printUniversity(university, false);
             }
         }
     }

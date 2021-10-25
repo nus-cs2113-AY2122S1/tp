@@ -50,6 +50,8 @@ Step 10. The user executes `exit` command to terminate the program.
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
 
+<img src="images/Ui_UML.png" width = "280"/>
+
 The UI component 
 * Displays different object types such as University, Module and Module mapping.
 * Provides means of customization for display formatting. 
