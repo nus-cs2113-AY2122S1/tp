@@ -189,6 +189,10 @@ public class Ui {
         System.out.println("Input is not a number");
     }
 
+    public static void promptForTripIndex() {
+        System.out.print("Please enter a valid trip number: ");
+    }
+
     public static void emptyArgForDeleteCommand() {
         System.out.println();
         System.out.println("Which trip to delete?");

@@ -147,6 +147,8 @@ public class Storage {
             setOpenTrip(listOfTrips.get(tripIndex));
         } catch (NumberFormatException e) {
             Ui.argNotNumber();
+            Ui.promptForTripIndex();
+            promptUserForValidTrip();
         }
     }
 
