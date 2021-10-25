@@ -39,11 +39,19 @@ public class ParserTest {
                 + "3. List all your recipes: listRecipes" + System.lineSeparator()
                 + "4. Find a recipe: find \"Keyword\"" + System.lineSeparator()
                 + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
-                + "6. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
-                + "7. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
+                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
                 + System.lineSeparator()
-                + "8. List all tags: listTags" + System.lineSeparator()
-                + "9. Help me: help" + System.lineSeparator();
+                + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel "
+                + System.lineSeparator()
+                + "8. Add cooking and preparation time to recipe: "
+                + "set \"recipe name\" \"/time\" cookingTime, preparationTime" + System.lineSeparator()
+                + "9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice " + System.lineSeparator()
+                + "10. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
+                + "11. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
+                + System.lineSeparator()
+                + "12. List all tags: listTags" + System.lineSeparator()
+                + "13. Help me: help" + System.lineSeparator()
+                + "" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 

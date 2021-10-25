@@ -4,14 +4,12 @@ skinparam ArrowColor black
 skinparam classBorderColor black
 
 class Gordon #white {
-Parser parser
 Gordon()
 Run()
 }
 
 rectangle Util {
     class Parser {
-    Parser()
     parseMaster()
     parseNextLine()
     }
@@ -27,8 +25,14 @@ rectangle Util {
     }
 }
 
-Gordon --> Parser
-Parser --> Command
-Parser -> UI
+rectangle exception {
+    class GordonException LOGIC_PINK_1 {
+    }
+}
+
+Gordon "1" -> "1" Parser : creates >
+Parser --> Command : creates >
+Parser --> UI : uses >
+GordonException <-- Parser : creates <
 
 @enduml

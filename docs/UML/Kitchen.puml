@@ -19,7 +19,7 @@ rectangle "Kitchen" {
     class Recipe LOGIC_BLUE_1
 
     Cookbook --> "<<Enumeration>> \n Difficulty"
-    Cookbook *- Recipe
-    Cookbook *--- Tag
+    Cookbook *- "*" Recipe : contains >
+    Cookbook *-right-- "*" Tag : contains >
 }
 @enduml

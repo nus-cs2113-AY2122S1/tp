@@ -147,6 +147,8 @@ The `Command` class can be classified into 4 main functionalities:
 
 ### Storage component
 
+![Storage Diagram](./RenderedUML/Storage.svg)
+
 ### UI Component
 
 ### Tag Component

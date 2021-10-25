@@ -1,27 +1,12 @@
-test
-Difficulty: 
-Hard
+Coffee
 Calories (kcal): 
-123
-Preparation time: 
-69 minute(s)
-Cooking time: 
-420 minute(s)
-Total price of ingredients: 
-$5.99
+10
 Ingredients needed: 
-1. Chicken
+1. Coffee beans
+2. Water
+3. Sugar
 Method: 
-1. Cook
-Tags: 
-
-Duck Rice
-Ingredients needed: 
-1. Duck
-Method: 
-1. Cook
-Tags: 
-1. Hawker Food
-2. Poultry
-3. Favorite
+1. Boil water
+2. Grind beans
+3. Pour water over grounds
 

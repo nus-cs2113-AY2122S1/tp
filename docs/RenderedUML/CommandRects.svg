@@ -22,13 +22,13 @@ entity SetPriceCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#00
 entity TagAddCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="134" x="87" y="547"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="114" x="97" y="570.1318">TagAddCommand</text><!--MD5=[e76a050bc3eb791f621319ec0bb703ba]
 entity TagDeleteCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="150" x="79" y="618"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="130" x="89" y="641.1318">TagDeleteCommand</text><!--MD5=[2a4a08cc86a26429ea88be4dc682d381]
 entity TagUntagCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="146" x="81" y="689"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="126" x="91" y="712.1318">TagUntagCommand</text><!--MD5=[c07313676d19d325c6834c65a019c3ea]
-reverse link {abstract}\nCommand to Basic Commands--><path d="M474.26,643 C491.9825,643 511.9981,643 532.11,643 C537.138,643 542.172,643 547.1776,643 C549.6805,643 552.1762,643 554.6606,643 " fill="none" id="{abstract}\nCommand-backto-Basic Commands" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="474.03,650,454.03,643,474.03,636,474.03,650" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[9315aecf2f8cb5721e6fdf24197292ab]
-link Tag Commands to {abstract}\nCommand--><path d="M253.5746,751.1374 C257.1846,750.2725 260.7782,749.3277 264.3323,748.2956 C271.4406,746.2316 278.3913,743.8188 285,741 C316.9,727.4 347.71,703.68 370.89,682.99 " fill="none" id="Tag Commands-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="366.21,677.78,385.63,669.3,375.73,688.04,366.21,677.78" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[377a86b21c869f6d5d91d9401992d597]
-link Find Commands to {abstract}\nCommand--><path d="M183.4187,464.0171 C184.8725,464.5036 186.3644,465.0141 187.8899,465.5491 C193.9923,467.6891 200.6341,470.2209 207.5363,473.1763 C235.145,484.9975 266.92,503.595 285,531 C301.51,556.03 274.55,574.36 293,598 C307.02,615.97 329.12,626.77 350.42,633.25 " fill="none" id="Find Commands-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="352.22,626.49,369.9,638.16,348.8,640.06,352.22,626.49" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[8c7667364076495cbd17e51a4a7f0ea7]
-reverse link {abstract}\nCommand to Set Commands--><path d="M412,596.72 C412,595.54 412,594.3594 412,593.1783 C412,592.5877 412,591.9971 412,591.4063 C412,591.1109 412,590.8155 412,590.5201 C412,590.3724 412,590.2247 412,590.0769 C412,590.0585 412,590.04 412,590.0215 " fill="none" id="{abstract}\nCommand-backto-Set Commands" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="419,596.79,412,616.79,405,596.79,419,596.79" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[e3a9edfed28896ae295ad61328090d67]
+reverse link {abstract}\nCommand to Basic Commands--><path d="M474.26,643 C491.9825,643 511.9981,643 532.11,643 C537.138,643 542.172,643 547.1776,643 C549.6805,643 552.1762,643 554.6606,643 " fill="none" id="{abstract}\nCommand-backto-Basic Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="474.03,650,454.03,643,474.03,636,474.03,650" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[9315aecf2f8cb5721e6fdf24197292ab]
+link Tag Commands to {abstract}\nCommand--><path d="M253.5746,751.1374 C257.1846,750.2725 260.7782,749.3277 264.3323,748.2956 C271.4406,746.2316 278.3913,743.8188 285,741 C316.9,727.4 347.71,703.68 370.89,682.99 " fill="none" id="Tag Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="366.21,677.78,385.63,669.3,375.73,688.04,366.21,677.78" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[377a86b21c869f6d5d91d9401992d597]
+link Find Commands to {abstract}\nCommand--><path d="M183.4187,464.0171 C184.8725,464.5036 186.3644,465.0141 187.8899,465.5491 C193.9923,467.6891 200.6341,470.2209 207.5363,473.1763 C235.145,484.9975 266.92,503.595 285,531 C301.51,556.03 274.55,574.36 293,598 C307.02,615.97 329.12,626.77 350.42,633.25 " fill="none" id="Find Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="352.22,626.49,369.9,638.16,348.8,640.06,352.22,626.49" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[8c7667364076495cbd17e51a4a7f0ea7]
+reverse link {abstract}\nCommand to Set Commands--><path d="M412,596.72 C412,595.54 412,594.3594 412,593.1783 C412,592.5877 412,591.9971 412,591.4063 C412,591.1109 412,590.8155 412,590.5201 C412,590.3724 412,590.2247 412,590.0769 C412,590.0585 412,590.04 412,590.0215 " fill="none" id="{abstract}\nCommand-backto-Set Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="419,596.79,412,616.79,405,596.79,419,596.79" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[1c0fd487afe3d50eda54ee193dd271a6]
 @startuml
 !include Style.puml
-skinparam ArrowColor LOGIC_GREEN_4
+skinparam ArrowColor black
 left to right direction
 
 rectangle "Command" {
@@ -109,11 +109,13 @@ rectangle "Command" {
 
 
 
+hide circle
 skinparam backgroundColor white
 skinparam defaultFontName Arial
 skinparam shadowing false
 skinparam arrowThickness 2
-skinparam ArrowColor #3c5648
+skinparam classAttributeIconSize 0
+skinparam ArrowColor black
 left to right direction
 
 rectangle "Command" {
@@ -193,5 +195,5 @@ Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
 Default Encoding: Cp1252
 Language: en
-Country: SG
+Country: US
 --></g></svg>
