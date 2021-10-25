@@ -102,6 +102,30 @@ ____________________________________________________________
 <a name="list"></a>
 ### Listing all contacts: `list`
 
+Lists all the saved contacts with the index and contact name.
+
+Usage: `list`
+* The indexes start from 0, this is done as computing professionals 
+ are more familiar with index start from 0.
+ 
+Expected outcome of usage:
+
+```
+____________________________________________________________
+ConTech has 7 contacts stored.
+Here's the list :
+____________________________________________________________
+
+0. Andre
+1. Marcus
+2. Le Zong
+3. Mayank
+4. George
+5. Jim
+6. Akshay
+____________________________________________________________
+```
+
 <a name="view"></a>
 ### Viewing a contact: `view`
 Displays all the details saved to a contact in the ConTech Book.
@@ -141,7 +165,7 @@ ____________________________________________________________
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: 
 
 ## Command Summary
 
