@@ -15,7 +15,7 @@ It is an integrated solution that provides real-time tracking of stock, orders a
 * [Features](#features)
     * [Managing Stocks](#managing-stocks)
         * [Adding stocks](#adding-stocks-addstock)
-        * [Deleting stocks](#deleting-stocks-deletestock)
+        * [Deleting stocks](#deleting-a-medication-stock-deletestock)
         * [Updating stocks](#updating-stocks-updatestock)
         * [Listing stocks](#listing-stocks-liststock)
     * [Managing Prescriptions](#managing-prescriptions)
@@ -162,9 +162,9 @@ Medication added: paracetamol
 Deletes medication from the inventory.
 
 * Able to delete a specific stock by specifying stock Id using `i/STOCK_ID`.
-* Able to delete multiple stocks that have expiry date before and equals to specified date using `e/EXPIRY_DATE`.
+* Able to delete multiple stocks that have expiry date before and equals to specified date using `expiring/EXPIRY_DATE`.
 
-Format: `deletestock [i/STOCK_ID e/EXPIRY_DATE]`
+Format: `deletestock [i/STOCK_ID expiring/EXPIRY_DATE]`
 
 Example 1 (Deletion by stock Id): `deletestock i/3`
 
@@ -174,7 +174,7 @@ Expected output:
 Deleted row with Stock Id: 3
 ```
 
-Example 2 (Deletion by expiry date): `deletestock e/10-10-2021`
+Example 2 (Deletion by expiry date): `deletestock expiring/10-10-2021`
 
 Expected output:
 
@@ -441,7 +441,7 @@ Updated! Number of rows affected: 1
 +----+---------+----------+------------+---------+
 ```
 
-### Listing order : `listorder`
+### Listing orders: `listorder`
 
 Lists all order records in the application.
 
@@ -500,7 +500,62 @@ Expended output:
 
 ### Receiving order : `receiveorder`
 
-### Archiving data : `archive`
+## Managing Data
+
+This section of the user guide explains the features and usage of commands related to data management. This includes the archive commands, purge command as well as data storage files related information. 
+
+### Archive orders: `archiveorder`
+
+Archive order records into data/order_archive.txt file. 
+
+> :information_source: Note:
+> * MediVault will remove all order records that have status of DELIVERED from the current orders that matches the user specified date and before. 
+> * MediVault will then archive it into data/order_archive.txt file.
+> * The date parameter is compulsory. 
+
+> :warning: Warning
+> * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
+
+Format: `archiveorder d/DATE`
+
+Example: `archiveorder d/10-10-2021`
+
+Expected Output: 
+```
+Archived orders from 10-10-2021
+```
+
+Expected Output (in data/order_archive.txt):
+```
+[ORDER ID: 2] 10 PANADOL WAS ORDERED ON 09-10-2021. STATUS: DELIVERED
+[ORDER ID: 3] 50 VICODIN WAS ORDERED ON 10-10-2021. STATUS: DELIVERED
+```
+
+### Archive prescriptions: `archiveprescription`
+
+Archive prescription records into data/prescription_archive.txt file. 
+
+> :information_source: Note:
+> * MediVault will remove all prescription records from the current prescriptions that matches the user specified date and before. 
+> * MediVault will then archive it into data/prescription_archive.txt file.
+> * The date parameter for this command is compulsory. 
+
+> :warning: Warning
+> * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
+
+Format: `archiveprescription d/DATE`
+
+Example: `archiveprescription d/10-10-2021`
+
+Expected Output: 
+```
+Archived prescriptions from 10-10-2021
+```
+Expected Output (in data/prescription_archive.txt): 
+```
+[PRESCRIPTION ID: 1] 10 PANADOL [STOCK ID: 1] WAS PRESCRIBED BY JANE TO S1234567A ON 09-10-2021
+[PRESCRIPTION ID: 2] 10 VICODIN [STOCK ID: 3] WAS PRESCRIBED BY PETER TO S2345678B ON 10-10-2021
+```
 
 ### Purging existing data : `purge`
 
@@ -520,23 +575,24 @@ All data has been cleared!
 
 ### Data Storage
 
-MediVault will automatically save data after any operation that modifies stock, order or dispense. The data will be
-stored in 3 separate files (data/stock.txt, data/order.txt, data/dispense.txt). Data is saved in a specific format with
-fields delimited by a pipe `|`.
+MediVault will automatically save your data after any operation that modifies stock, order or prescriptions. The data will be stored in 3 separate files `data/stock.txt`, `data/order.txt` and `data/prescription.txt`. Data is saved in a specific format with fields delimited by a pipe `|`.
 
-* For data/stock.txt
-    * `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY`
-* For data/order.txt
-    * `ID|NAME|QUANTITY|DATE|STATUS`
-* For data/dispense.txt
-    * `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+Data formats:
+* For `data/stock.txt`: `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
+* For `data/order.txt`: `ID|NAME|QUANTITY|DATE|STATUS`
+* For `data/prescription.txt`: `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+
 
 ### Data Editing
 
-It is possible to directly edit the data files but it is **NOT** recommended unless you know exactly what you are doing.
-If MediVault detects corruption or invalid data, you may not be able to load the data into the program. In that case,
-either fix the data or in the worst case scenario, delete the corresponding data file. Also, it may result in unintended
-behaviour if data file is tampered with while the program is running.
+> :warning: Warning
+> * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
+> * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
+> * In order for MediVault to work, you have to fix the error in the data file.
+> * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
+> * In the worst case scenario where you are unable to fix it,  you may have to delete the corresponding data file.
+> * It may result in unintended behaviour if data file is tampered with while the program is running.
+> * Editing the data directly poses a significant risk to corruption of data. 
 
 ## Miscellaneous
 
