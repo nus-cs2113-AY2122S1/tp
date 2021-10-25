@@ -22,6 +22,7 @@ class SelectCommandTest {
         Command command2 = Parser.parseCommand("select -t 1");
         CommandResult feedback2 = command2.execute();
         assertTrue(feedback2.feedbackToUser.contains("Hype myself up"));
+        eventCatalog.clear();
     }
 
 
