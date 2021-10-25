@@ -4,14 +4,18 @@
 
 ## Introduction
 
-StonksXD is a smart money management application that does the following: 
-- tracks daily expenses, 
-- sets/adjusts spending limits
-- gives advice based on available data
+StonksXD is your go-to smart money management application that is able to: 
+- track your daily expenses 
+- sets/adjusts your spending limits
+- provide you with helpful financial tips and insights
 
-It is optimised for a once-a-day logging system and allows you to 
-view your financial records through both text and graphs in different currencies!
+It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. It also allows you to 
+view your financial records through both text and graphs, in different currencies, so you can use this application anywhere around the world!
 
+Using this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
+without having to learn how to write a single line of code.
+
+Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -45,7 +49,7 @@ view your financial records through both text and graphs in different currencies
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
+5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
 8. Type `balance` to view your net saving.
@@ -612,8 +616,8 @@ Format: `end`
 | View total balance | `balance` | - |
 | Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` | `btw_ex s/10/07/2021 e/23/10/2021` |
 | Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
-| Clear all entries | `clear_all_entries` | d |
-| View Yearly Report | `show_graph` | d |
+| Clear all entries | `clear_all_entries` | - |
+| View Yearly Report | `show_graph` | - |
 | To terminate program | `end` | - |
 
 
