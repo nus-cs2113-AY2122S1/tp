@@ -35,21 +35,42 @@ public class Storage {
                     "delete", "expense", "quit", "help", "amount", "close"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
-        put("USD", new String[]{"$", "%.02f"});
-        put("SGD", new String[]{"$", "%.02f"});
-        put("AUD", new String[]{"$", "%.02f"});
-        put("CAD", new String[]{"$", "%.02f"});
-        put("EUR", new String[]{"€", "%.02f"});
-        put("GBP", new String[]{"£", "%.02f"});
-        put("MYR", new String[]{"RM", "%.02f"});
-        put("HKD", new String[]{"$", "%.02f"});
-        put("THB", new String[]{"฿", "%.02f"});
-        put("CNY", new String[]{"¥", "%.0f"});
-        put("JPY", new String[]{"¥", "%.0f"});
-        put("KRW", new String[]{"₩", "%.0f"});
-        put("IDR", new String[]{"Rp", "%.0f"});
-        put("INR", new String[]{"Rs", "%.0f"});
-    }};
+            put("USD", new String[] {"$", "%.02f"});
+            put("SGD", new String[] {"$", "%.02f"});
+            put("AUD", new String[] {"$", "%.02f"});
+            put("CAD", new String[] {"$", "%.02f"});
+            put("NZD", new String[] {"$", "%.02f"});
+            put("EUR", new String[] {"€", "%.02f"});
+            put("GBP", new String[] {"£", "%.02f"});
+            put("MYR", new String[] {"RM", "%.02f"});
+            put("HKD", new String[] {"$", "%.02f"});
+            put("THB", new String[] {"฿", "%.02f"});
+            put("RUB", new String[] {"₽", "%.02f"});
+            put("ZAR", new String[] {"R", "%.02f"});
+            put("TRY", new String[] {"₺", "%.02f"});
+            put("BRL", new String[] {"R$", "%.02f"});
+            put("DKK", new String[] {"Kr.", "%.02f"});
+            put("PLN", new String[] {"zł", "%.02f"});
+            put("ILS", new String[] {"₪", "%.02f"});
+            put("SAR", new String[] {"SR", "%.02f"});
+            put("CNY", new String[] {"¥", "%.0f"});
+            put("JPY", new String[] {"¥", "%.0f"});
+            put("KRW", new String[] {"₩", "%.0f"});
+            put("IDR", new String[] {"Rp", "%.0f"});
+            put("INR", new String[] {"Rs", "%.0f"});
+            put("CHF", new String[] {"SFr.", "%.0f"});
+            put("SEK", new String[] {"kr", "%.0f"});
+            put("NOK", new String[] {"kr", "%.0f"});
+            put("MXN", new String[] {"$", "%.0f"});
+            put("TWD", new String[] {"NT$", "%.0f"});
+            put("HUF", new String[] {"Ft", "%.0f"});
+            put("CZK", new String[] {"Kc", "%.0f"});
+            put("CLP", new String[] {"$", "%.0f"});
+            put("PHP", new String[] {"₱", "%.0f"});
+            put("AED", new String[] {"د.إ", "%.0f"});
+            put("COP", new String[] {"$", "%.0f"});
+            put("RON", new String[] {"lei", "%.0f"});
+        }};
 
     public static HashMap<String, String[]> getAvailableCurrency() {
         return availableCurrency;
@@ -57,24 +78,30 @@ public class Storage {
 
     protected static void writeToFile() throws IOException {
         String jsonString = new Gson().toJson(listOfTrips);
-        FileWriter fileWriter = new FileWriter(FILE_PATH);
-        fileWriter.write(jsonString);
-        fileWriter.close();
+        FileStorage.writeToFile(jsonString);
     }
 
     protected static void readFromFile() {
-        File file = new File(FILE_PATH);
         try {
-            Scanner scanner = new Scanner(file);
-            String jsonString = scanner.nextLine();
-            Type tripType = new TypeToken<ArrayList<Trip>>() {
-            }.getType();
+
+            String jsonString = FileStorage.readFromFile();
+            Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
+            tryCreateNewFile();
+        }
+    }
+
+    private static void tryCreateNewFile() {
+        try {
+            FileStorage.newBlankFile();
+        } catch (IOException ex) {
+            Ui.printCreateFileFailure();
+            System.exit(1);
         }
     }
 
@@ -87,13 +114,7 @@ public class Storage {
                 System.exit(1);
                 return;
             } else if (input.contains("y")) {
-                try {
-                    FileWriter fileWriter = new FileWriter(FILE_PATH);
-                    fileWriter.close();
-                } catch (IOException e) {
-                    Ui.printCreateFileFailure();
-                    System.exit(1);
-                }
+                tryCreateNewFile();
                 return;
             }
         }
@@ -182,10 +203,7 @@ public class Storage {
     }
 
     public static Boolean isListOfTripsEmpty() {
-        if (listOfTrips.size() == 0) {
-            return true;
-        }
-        return false;
+        return listOfTrips.isEmpty();
     }
 
 

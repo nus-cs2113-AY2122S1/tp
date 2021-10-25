@@ -41,7 +41,8 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
+    public void getFilteredExpenses(Integer index, String expenseCategory, String expenseAttribute) {
+
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
@@ -145,7 +146,7 @@ public class Trip {
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
             if (e.getPersonsList().contains(person)) {
-                currentAmount = e.getAmountSplit().get(person); //why is this null?
+                currentAmount = e.getAmountSplit().get(person.getName()); //Remove .getName()
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
                 expensesInvolved++;
@@ -357,4 +358,7 @@ public class Trip {
 
     }
 
+    public Expense getExpenseAtIndex(Integer index) {
+        return listOfExpenses.get(index - 1);
+    }
 }
