@@ -82,9 +82,11 @@ public class Storage {
             String jsonString = FileStorage.readFromFile();
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
-        } catch (JsonParseException | NoSuchElementException e) {
+        } catch (JsonParseException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyFileWarning();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
             createNewFile();
