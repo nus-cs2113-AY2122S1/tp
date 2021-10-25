@@ -116,12 +116,14 @@ Add a partner university the user is interested into the user selected universit
 * Input: `add /uni 24`  
 Expected output:
 ```
-show output here
+New university added: 
+[24] - Korea Advanced Inst of Sci & Tech
 ```
 * Input: `add /uni University of California`  
 Expected output:
 ```
-show output here
+New university added: 
+[59] - University of California
 ```
 
 ### Add a NUS module
@@ -133,12 +135,14 @@ Add a NUS module that the user wants to complete during SEP into the user select
 * Input: `add /mod 77`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 * Input: `add /mod CS1010`  
 Expected output:
 ```
-show output here
+New module added: 
+[77] CS1010   : Programming Methodology
 ```
 
 ### Add a module mapping
@@ -147,7 +151,7 @@ Adds a specific pair of module mapping under a selected university.
 Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
 >The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
 > 
-####Example of usage
+#### Example of usage:
 * Input: `add /map 4 2`  
 Expected output:
 ```
@@ -165,7 +169,16 @@ Format: `find /uni <KEYWORD>`
 * Input: `find /uni California`  
 Expected output:
 ```
-show output here
+[59] - University of California
+[60] - University of California, Berkeley
+[61] - University of California, Davis
+[62] - University of California, Irvine
+[63] - University of California, Los Angeles
+[64] - University of California, Merced
+[65] - University of California, Riverside
+[66] - University of California, San Diego
+[67] - University of California, Santa Barbara
+[68] - University of California, Santa Cruz
 ```
 
 ### Finding a specific module
@@ -176,7 +189,10 @@ Look for modules that matches the user entered keyword.
 * Input: `find /mod CS1010`  
 Expected output:
 ```
-show output here
+[77] CS1010   : Programming Methodology
+[78] CS1010E  : Programming Methodology
+[79] CS1010J  : Programming Methodology
+[80] CS1010S  : Programming Methodology
 ```
 
 ### Searching for available module mappings:
@@ -186,11 +202,11 @@ Displays all available module mappings for a specific university that matches th
 #### Example of usage:
 * Input: `searchmap 4`  
 Expected Output:
-  ```
-  Potential mappings for Boston University:
-  [1] CS1231 - MET CS 248 : Discrete Mathematics
-  [2] CS1231 - CAS CS131 : Combinatoric Structures
-  ```
+```
+Potential mappings for Boston University:
+[1] CS1231 - MET CS 248 : Discrete Mathematics
+[2] CS1231 - CAS CS131 : Combinatoric Structures
+```
 
 ### Removing a selected university
 Remove a partner university from the user selected university list.
@@ -199,12 +215,14 @@ Remove a partner university from the user selected university list.
 * Input: `remove /uni 4` 
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 * Input: `remove /uni Boston University`  
 Expected output:
 ```
-show output here
+This university is removed: 
+[4] - Boston University
 ```
 
 ### Removing a selected NUS module
