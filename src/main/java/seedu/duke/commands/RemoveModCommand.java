@@ -20,6 +20,6 @@ public class RemoveModCommand extends Command {
         assert moduleSelectedList.getSize() != 0;
         storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("This module is removed: ");
-        Ui.printModule(moduleToRemove, moduleIndexToRemove);
+        Ui.printModule(moduleToRemove, moduleIndexToRemove, false);
     }
 }

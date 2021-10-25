@@ -117,7 +117,8 @@ public class AddCommandParser {
     }
 
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
-                                   ModuleList moduleSelectedList, UniversityList universityMasterList) throws ParseException {
+                                   ModuleList moduleSelectedList, UniversityList universityMasterList)
+                                    throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
         University currentUni = new University();

@@ -25,7 +25,7 @@ public class RemoveUniCommand extends Command {
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
             storage.updateSelectedUniversityList(universitySelectedList);
             System.out.println("This university is removed: ");
-            Ui.printUniversity(universityToRemove);
+            Ui.printUniversity(universityToRemove, true);
         }
     }
 }
