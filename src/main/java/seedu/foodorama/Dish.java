@@ -143,7 +143,7 @@ public class Dish implements Comparable<Dish> {
         }
         return dishName + System.lineSeparator()
                 + "   Wastage: " + wastage + " kg" + System.lineSeparator()
-                + "   Parts: " + partList + System.lineSeparator()
+                + "   Ingredients Linked: " + partList + System.lineSeparator()
                 + "   Limit: " + limitString;
     }
 

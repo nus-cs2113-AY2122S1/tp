@@ -73,6 +73,31 @@ The `Storage` class is responsible for the reading and writing of *Food-O-Rama* 
 * After every operation writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted, into a text file called ingredients.txt
 * After every operation writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are any, into a text file called dishes.txt
 
+#### Loading Data
+![](images/storage_load_sequence.png)
+
+* At the start of the program, Duke calls `Storage.load()`
+  * This method in the `Storage` class is responsible for invoking `loadIngredients()` and `loadDishes()`
+* After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and is added to the active
+ArrayList, `IngredientList.ingredientList`
+* Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to the active
+  ArrayList, `DishList.dishList`
+  
+❕ *Note: `dishes.txt` and `ingredients.txt` can be found in the `data` folder from the root directory.*    
+
+#### Saving Data
+![](images/storage_write_sequence.png)
+
+* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`
+  * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
+* `Storage.write()` will access the respective text file and save to its respective save format
+
+
+* ❕ **Save Formats:**
+  * Dishes
+    * `DISH_NAME | DISH_WASTAGE | INGREDIENTS_LINKED`
+  * Ingredients
+    * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE`
 
 ### Data Structures
 
