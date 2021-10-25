@@ -133,7 +133,7 @@ public class Ui {
 
     public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
         System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed");
+                + tripDate + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {

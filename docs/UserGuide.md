@@ -9,9 +9,59 @@
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `PayMeBack` from [here](http://link.to/duke), and move the downloaded file to
+   your preferred folder.
+3. Open any command-line application (such as Terminal, Command Prompt, Powershell) and navigate to the folder
+   containing your downloaded copy of `PayMeBack`.
+4. In the command-line interface, type `java -jar PayMeBack.jar`.
+5. If the program starts successfully, you should see the following on your screen:
+```
+some code block
+```
 
 ## Features 
+
+#### Create New Trip
+
+Creates a new trip in the program.
+
+You must have at least one trip created (or loaded from the save file) to use any other function.
+
+The input syntax to create a trip is:
+```
+create [location] [date] [local currency] [exchange rate] [persons in trip]
+```
+
+- `date` must follow the format of dd-MM-yyyy
+- `persons in trip` should be separated with commas and without spaces between each name
+
+For example,
+
+```
+create America 02-02-2021 USD 0.74 ben,jerry,tom
+```
+
+If your trip is successfully created, you'll see the following message:
+
+```
+Your trip to America on 02 Feb 2021 has been successfully added.
+```
+
+#### Delete a trip
+
+Deletes a trip from the program.
+
+The input syntax to delete a trip is:
+```
+delete [tripnumber]
+```
+- `[tripnumber]` is the index of the trip you wish to delete, and can be found by using `whatcommand` command.
+
+If your trip is successfully deleted, you'll see the following message:
+
+```
+Your trip to America on 02 Feb 2021 has been successfully removed.
+```
 
 
 ###View Summary of expenses
