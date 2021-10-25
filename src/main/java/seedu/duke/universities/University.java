@@ -70,6 +70,9 @@ public class University implements Comparator<University> {
         }
         return selectedMappings;
     }
+    public int getSelectedMappingListSize(ModuleList selectedModuleList) {
+        return getSelectedMappings(selectedModuleList).size();
+    }
 
     public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList) {
         ModuleMapping selectedMapping = null;
@@ -115,6 +118,11 @@ public class University implements Comparator<University> {
         }
         return 0;
     }
+
+    public boolean isExistMapping(ModuleMapping mapping) {
+        return list.contains(mapping);
+    }
+
 
     public String toFileFormat() {
         String result = name + System.lineSeparator();

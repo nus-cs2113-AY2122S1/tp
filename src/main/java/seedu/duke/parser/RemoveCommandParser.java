@@ -77,9 +77,13 @@ public class RemoveCommandParser {
             }
             university = new University(uniName, new ArrayList<>(), universityMasterList);
         } else {
-            uniIndex = Integer.parseInt(arguments);
+            try {
+                uniIndex = Integer.parseInt(arguments);
+            } catch (NumberFormatException e) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            }
             // Check if university exists
-            if (uniIndex > universityMasterList.getSize()) {
+            if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
@@ -104,9 +108,14 @@ public class RemoveCommandParser {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
         } else {
-            int modIndex = Integer.parseInt(arguments);
+            int modIndex;
+            try {
+                modIndex = Integer.parseInt(arguments);
+            } catch (NumberFormatException e) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+            }
             // Check if module exists
-            if (modIndex > moduleMasterList.getSize()) {
+            if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
@@ -127,8 +136,12 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
-        uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
-        mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
+        try {
+            uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
+            mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
+        }
     }
 
     private boolean isTextMatches(String arguments) {
