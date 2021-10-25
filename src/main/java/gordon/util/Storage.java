@@ -50,7 +50,7 @@ public class Storage {
         }
     }
 
-    public String loadDifficulty(Recipe r, String buffer, Scanner loadScanner) {
+    private String loadDifficulty(Recipe r, String buffer, Scanner loadScanner) {
         if (buffer.trim().equals("Difficulty:")) {
             String line = loadScanner.nextLine().trim();
             for (Difficulty d : Difficulty.values()) {
@@ -64,7 +64,7 @@ public class Storage {
         }
     }
 
-    public String loadCalories(Recipe r, String buffer, Scanner loadScanner) {
+    private String loadCalories(Recipe r, String buffer, Scanner loadScanner) {
         if (buffer.trim().equals("Calories (kcal):")) {
             String line = loadScanner.nextLine().trim();
             r.setCalories(Integer.parseInt(line));
@@ -74,7 +74,7 @@ public class Storage {
         }
     }
 
-    public String loadTimes(Recipe r, String buffer, Scanner loadScanner) {
+    private String loadTimes(Recipe r, String buffer, Scanner loadScanner) {
         String line = buffer;
         int prep = -1;
         int cook = -1;
@@ -108,7 +108,7 @@ public class Storage {
         }
     }
 
-    public String loadIngredients(Recipe r, String buffer, Scanner loadScanner) {
+    private String loadIngredients(Recipe r, String buffer, Scanner loadScanner) {
         String line = buffer;
         if (line.trim().equals("Ingredients needed:")) {
             while (loadScanner.hasNext()) {
@@ -128,7 +128,7 @@ public class Storage {
         }
     }
 
-    public String loadSteps(Recipe r, String buffer, Scanner loadScanner) {
+    private String loadSteps(Recipe r, String buffer, Scanner loadScanner) {
         String line = buffer;
         if (line.trim().equals("Method:")) {
             while (loadScanner.hasNext()) {
@@ -148,7 +148,7 @@ public class Storage {
         }
     }
 
-    public void loadTags(Recipe r, String buffer, Scanner loadScanner, Cookbook cookbook) {
+    private void loadTags(Recipe r, String buffer, Scanner loadScanner, Cookbook cookbook) {
         String line = buffer;
 
         if (line.trim().equals("Tags:")) {

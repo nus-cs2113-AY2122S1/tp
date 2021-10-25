@@ -1,0 +1,23 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+rectangle Util {
+    class Storage {
+    saveCookbook(cookbook : Cookbook)
+    }
+}
+
+rectangle Exception {
+    class GordonException LOGIC_PINK_1 {
+    }
+}
+
+rectangle Kitchen {
+    class Cookbook LOGIC_BLUE_1
+}
+
+Storage --> GordonException : creates >
+Storage --> Cookbook : saves and loads >
+@enduml
