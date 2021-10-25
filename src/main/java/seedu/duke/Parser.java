@@ -24,6 +24,10 @@ public class Parser {
         return arg.trim().toLowerCase().contains("list /att");
     }
 
+    public static boolean hasFilteredListAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("list /att /t");
+    }
+
     public static boolean hasAddMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /m");
     }
@@ -89,6 +93,8 @@ public class Parser {
             keyword = Keyword.LIST_TRAINING_KEYWORD;
         } else if (hasListAttendanceKeyword(query)) {
             keyword = Keyword.LIST_ATTENDANCE_KEYWORD;
+        } else if (hasFilteredListAttendanceKeyword(query)) {
+            keyword = Keyword.LIST_FILTERED_ATTENDANCE_KEYWORD;
         } else if (hasDeleteMemberKeyword(query)) {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
         } else if (hasDeleteTrainingKeyword(query)) {
@@ -111,6 +117,36 @@ public class Parser {
             keyword = Keyword.NO_KEYWORD;
         }
         return keyword;
+    }
+
+    public static String getTrainingName(String query) {
+        String[] words = query.trim().split("[\\s]+");
+        StringBuilder sentenceAfterDeletion = new StringBuilder();
+        for (String word : words) {
+            if (word.contains("/")) {
+                break;
+            } else {
+                sentenceAfterDeletion.append(word).append(" ");
+            }
+        }
+        return sentenceAfterDeletion.toString();
+    }
+
+    public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String query) {
+        // e.g. list /att /t Friday Training /d 0
+        String[] wordsAfterT = query.trim().split("/t");
+
+        String trainingName = getTrainingName(wordsAfterT[1]);
+        String presentOrAbsent = "";
+
+        AttendanceList filteredAttendanceList = new AttendanceList();
+        for (Attendance attendance : attendanceList.getAttendanceList()) {
+            if (attendance.getTrainingName().equals(trainingName)) {
+                filteredAttendanceList.addAttendance(attendance);
+            }
+        }
+        System.out.println(filteredAttendanceList.getAttendanceListSize());
+        return filteredAttendanceList;
     }
 
     /**

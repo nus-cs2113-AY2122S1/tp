@@ -7,6 +7,10 @@ import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Ui {
 
     private static final String LINE_SEPARATOR = ("_____________________________________________________");
@@ -104,6 +108,9 @@ public class Ui {
         }
     }
 
+
+
+
     public static void printHelp() {
         System.out.println("usage: " + "\n"
                 + "    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] \n"
@@ -111,10 +118,12 @@ public class Ui {
                 + "    add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>] \n"
                 + "    delete [/m <MEMBER_INDEX_NUMBER>] \n"
                 + "    delete [/t <TRAINING_INDEX_NUMBER>] \n"
-                + "    delete [/att <ATTENDANCE_INDEX_NUMBER>] \n"
+                + "    delete [/att /n <TRAINING_NAME> <ATTENDANCE_INDEX_TO_DELETE>] \n"
                 + "    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE "
                 + "NUMBER>]\n"
                 + "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"
-                + "    list [/m] [/t] [/att]");
+                + "    list [/m] [/t] \n"
+                + "    list [/att /t <TRAINING_NAME> [/d <1_OR_0>]] \n"
+                + "    bye -- exits the programme.");
     }
 }

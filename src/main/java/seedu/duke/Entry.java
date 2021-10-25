@@ -41,6 +41,8 @@ public class Entry {
         case LIST_ATTENDANCE_KEYWORD:
             Ui.printList(attendanceList);
             break;
+        case LIST_FILTERED_ATTENDANCE_KEYWORD:
+            Ui.printList(Parser.getFilteredAttendanceList(attendanceList, entry));
         case ADD_MEMBER_KEYWORD:
             Member member = Parser.getMemberDetails(entry);
             new AddMember(members, member);
