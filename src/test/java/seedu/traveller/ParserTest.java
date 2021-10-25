@@ -8,7 +8,6 @@ import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddItemCommand;
 import seedu.traveller.commands.SearchItemCommand;
-import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
@@ -40,9 +39,8 @@ public class ParserTest {
 
         addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
         searchItemCommand = new SearchItemCommand("trip4", "sleep at home");
-        editItemCommand = new EditItemCommand("trip4", 1, "7am", "wake up from bed");
+        editItemCommand = new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
         //deleteItemCommand = new DeleteItemCommand("trip4", "wake up from bed");
-
 
         exitCommand = new ExitCommand();
     }

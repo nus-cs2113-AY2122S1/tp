@@ -29,4 +29,8 @@ public class Day {
     public String toString() {
         return itemsList.toString();
     }
+
+    public void editItem(int index, Item item) {
+        itemsList.editItem(index, item);
+    }
 }

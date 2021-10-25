@@ -39,6 +39,7 @@ public class Parser {
     private static final int DAY_LENGTH = 6;
     private static final int NAME_LENGTH = 7;
     private static final int TIME_LENGTH = 7;
+    private static final int INDEX_LENGTH = 8;
 
 
     /**
@@ -274,32 +275,50 @@ public class Parser {
     private static Command parseEditItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit-item command input");
         Command command;
-        String[] input = userInput.split(" ");
-
         String tripName;
         String itemName;
         String itemTime;
-        int itemIndex;
+        String itemIndex;
+        String rawDayNumber;
 
         try {
-            tripName = input[1];
-            itemIndex = Integer.valueOf(input[0]);
-
-            String nameSeparator = " /name ";
-            int nameIdx = userInput.indexOf(nameSeparator);
-            itemName = userInput.substring(nameIdx + NAME_LENGTH);
+            String daySeparator = " /day ";
+            int dayIdx = userInput.indexOf(daySeparator);
+            tripName = userInput.substring(0, dayIdx);
 
             String timeSeparator = " /time ";
             int timeIdx = userInput.indexOf(timeSeparator);
+            rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, timeIdx);
+
+            String nameSeparator = " /name ";
+            int nameIdx = userInput.indexOf(nameSeparator);
             itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
 
+            String indexSeparator = " /index ";
+            int indexIdx = userInput.indexOf(indexSeparator);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH, indexIdx);
+
+            itemIndex = userInput.substring(indexIdx + INDEX_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
         }
+        int dayIndex = parseValidDay(rawDayNumber);
+        assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new EditItemCommand(tripName, itemIndex, itemTime, itemName);
+        command = new EditItemCommand(tripName, Integer.valueOf(dayIndex), itemTime,
+                itemName, Integer.valueOf(itemIndex));
 
         return command;
+
+        /*
+
+
+        command = new AddItemCommand(tripName, dayIndex, itemTime, itemName);
+
+        return command;
+    }
+         */
+
     }
 
     /**

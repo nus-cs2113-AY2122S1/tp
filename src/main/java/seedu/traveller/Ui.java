@@ -78,9 +78,9 @@ public class Ui {
         System.out.println("\tYou have just search item keyword " + itemName + " in trip called " + tripName);
     }
 
-    public void printEditItem(String tripName, int itemIndex, String itemName, String itemTime) {
-        System.out.println("\tYou have just edited item " + itemIndex + " of "
-                + tripName + " to " + itemName + " at " + itemTime);
+    public void printEditItem(String tripName, int dayIndex, String itemName, String itemTime, int itemIndex) {
+        System.out.println("\tYou have just edited item " + itemIndex  + " on day " + dayIndex
+                + " of " + tripName + " to " + itemName + " at " + itemTime);
     }
 
     public void printEdit(String tripName) {
