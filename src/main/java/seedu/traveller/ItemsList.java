@@ -30,7 +30,7 @@ public class ItemsList {
         logger.log(Level.INFO, "Editing an item to itemsList");
         items.add(item);
         Collections.swap(items, index, getSize() - 1);
-        items.remove(getSize() - 1);
+        items.remove(getSize() - 2);
     }
 
     public ArrayList<Item> searchItem(String keyword) {

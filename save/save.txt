@@ -2,3 +2,5 @@ new trip1 /from SIN /to MLY
 add-day trip1 /day 3
 add-item trip1 /day 0 /time 10pm /name breakfast
 add-item trip1 /day 1 /time 9pm /name breakfast
+edit-item trip1 /day 1 /time 5pm /name dinner /index 1
+view trip1
