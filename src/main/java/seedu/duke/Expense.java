@@ -177,12 +177,28 @@ public class Expense {
                 + System.lineSeparator()
                 + "\t" + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
-                + "\t" + "People involved: " + this.getPersonsList().toString()
+                + "\t" + "People involved: "
                 + System.lineSeparator()
+                + getPersonExpense()
                 + "\t" + "Payer: " + this.getPayer()
                 + System.lineSeparator()
                 + "\t" + "Category: " + this.category)
                 + System.lineSeparator();
+    }
+
+    public String getPersonExpense() {
+        StringBuilder returnString = new StringBuilder();
+        String name = null;
+        String formattedSpace = "\t";
+        for (Person p : personsList) {
+            name = p.getName();
+            returnString.append(formattedSpace);
+            returnString.append(personsList.indexOf(p) + 1).append(". ");
+            returnString.append(name).append(" ");
+            returnString.append(getAmountSplit().get(name));
+            returnString.append(System.lineSeparator());
+        }
+        return returnString.toString();
     }
 
     //Getters and setters
