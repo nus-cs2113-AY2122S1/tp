@@ -32,7 +32,7 @@ public class EditTraining {
                 trainingToChange.setTrainingVenue(toChange.getTrainingVenue());
             }
 
-            trainings.getTrainingList().set(index-1, trainingToChange);
+            trainings.getTrainingList().set(index - 1, trainingToChange);
             //TODO: Print and Save
 
         } catch (AssertionError e) {

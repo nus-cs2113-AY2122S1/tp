@@ -111,7 +111,7 @@ public class Member {
     /* public void setPresentOrAbsent(String presentOrAbsent) {
          this.presentOrAbsent = presentOrAbsent;
      }
- */
+    */
     public String getName() {
         return name;
     }
@@ -127,12 +127,12 @@ public class Member {
     public int getPhoneNumber() {
         return phoneNumber;
     }
-/*
+    /*
     public String getAttendance() {
         return presentOrAbsent;
     }
-*/
-    
+    */
+
     /**
      * Formats description of member to be displayed to user.
      *

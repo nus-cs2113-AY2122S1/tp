@@ -60,7 +60,7 @@ public class AttendanceList {
         return attendanceList.get(index - 1).trainingName;
     }
 
-    public  String getAttendancePresentOrLate(int index) {//added by xy
+    public String getAttendancePresentOrLate(int index) {//added by xy
         return attendanceList.get(index - 1).attended;
     }
 
