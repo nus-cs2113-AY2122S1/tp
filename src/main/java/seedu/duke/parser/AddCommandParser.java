@@ -20,6 +20,7 @@ public class AddCommandParser {
 
     private String flag;
     private int uniIndex;
+    private int modIndex;
     private int mapIndex;
     private University university;
     private Module module;
@@ -67,7 +68,11 @@ public class AddCommandParser {
             }
             university = new University(uniName, new ArrayList<>(), universityMasterList);
         } else {
-            uniIndex = Integer.parseInt(arguments);
+            try {
+                uniIndex = Integer.parseInt(arguments);
+            } catch (NumberFormatException e) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+            }
             // Check if university exists
             if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
@@ -92,7 +97,11 @@ public class AddCommandParser {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
         } else {
-            int modIndex = Integer.parseInt(arguments);
+            try {
+                modIndex = Integer.parseInt(arguments);
+            } catch (NumberFormatException e) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+            }
             // Check if module exists
             if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
@@ -114,8 +123,12 @@ public class AddCommandParser {
         if (argumentSubstrings.length < 2) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
-        uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
-        mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
+        try {
+            uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
+            mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
+        }
         for (University uni : universitySelectedList.getList()) {
             if (uni.getIndex() == uniIndex) {
                 validUni = true;
