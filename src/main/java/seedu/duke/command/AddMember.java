@@ -1,4 +1,5 @@
 package seedu.duke.command;
+
 import static seedu.duke.MemberStorage.writeMemberFile;
 
 import java.io.File;

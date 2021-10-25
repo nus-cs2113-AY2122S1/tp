@@ -15,21 +15,21 @@ public class Attendance {
      * @param trainingName        Name of training event
      * @param attended            attendance status
      */
-    public Attendance(String memberName, String trainingName ,String attended) {
+    public Attendance(String memberName, String trainingName, String attended) {
         this.memberName = memberName;
         this.trainingName = trainingName;
         this.attended = attended;
     }
 
-    public String getTrainingName(){
+    public String getTrainingName() {
         return trainingName;
     }
 
-    public String getMemberName(){
+    public String getMemberName() {
         return memberName;
     }
 
-    public String getAttended(){
+    public String getAttended() {
         return attended;
     }
 

@@ -6,16 +6,12 @@ import seedu.duke.attendance.AttendanceList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class AttendanceStorage {
     /**
-     * This method searches the current directory for a folder named DukeAttendance
+     * This method searches the current directory for a folder named DukeAttendance.
      * If the folder exists, it will load the attendances into the attendance list
      * else it will create an empty folder called DukeAttendance
      *
@@ -23,12 +19,14 @@ public class AttendanceStorage {
     public static void setUpAttendanceStorage(AttendanceList attendanceList){
         File currentDir = new File("");
         try {
-            String DukeAttendanceFolderPath = currentDir.getCanonicalPath() + "/DukeAttendance"; //is / instead of \\ to make it OS independent. need to test it tho on UNIX
+            //is / instead of \\ to make it OS independent. need to test it tho on UNIX
+            String DukeAttendanceFolderPath = currentDir.getCanonicalPath() + "/DukeAttendance";
+
             //System.out.println(DukeAttendanceFolderPath);
-            File DukeAttendanceFolder = new File(DukeAttendanceFolderPath);
-            if(DukeAttendanceFolder.isDirectory()){
+            File dukeAttendanceFolder = new File(DukeAttendanceFolderPath);
+            if (dukeAttendanceFolder.isDirectory()) {
                 System.out.println("attendance file exists");
-                loadAttendanceFiles(DukeAttendanceFolder, attendanceList);
+                loadAttendanceFiles(dukeAttendanceFolder, attendanceList);
             } else {
                 System.out.println("attendance file does not exists");
                 new File(DukeAttendanceFolderPath).mkdirs();
@@ -44,16 +42,16 @@ public class AttendanceStorage {
      *
      * @param DukeAttendanceFolder the folder path containing all the attendances
      */
-    public static void loadAttendanceFiles(File DukeAttendanceFolder,AttendanceList attendanceList){
+    public static void loadAttendanceFiles(File DukeAttendanceFolder,AttendanceList attendanceList) {
         File[] dukeAttendanceFiles = DukeAttendanceFolder.listFiles();
 
-        for(File file : dukeAttendanceFiles){
+        for(File file : dukeAttendanceFiles) {
             //System.out.println(file.getName()); //this can show all the names of attendance files
             loadIndividualAttendanceFile(file,attendanceList);
         }
     }
 
-    public static void loadIndividualAttendanceFile(File attendanceCsvFile ,AttendanceList attendanceList){
+    public static void loadIndividualAttendanceFile(File attendanceCsvFile ,AttendanceList attendanceList) {
         String fileName = attendanceCsvFile.getName();
 
         String name;
@@ -86,7 +84,7 @@ public class AttendanceStorage {
      *  @param attendance the attendance entry to be added
      */
     //assumption is that the attendance folder is created already
-    public static void writeToAttendance(AttendanceList attendanceList,Attendance attendance){
+    public static void writeToAttendance(AttendanceList attendanceList,Attendance attendance) {
         String trainingName = attendance.getTrainingName();
         File currentDir = new File("");
         try {
@@ -95,7 +93,7 @@ public class AttendanceStorage {
             System.out.println(DukeAttendanceFilePath);
 
             File DukeSpecificAttendanceFile = new File(DukeAttendanceFilePath);
-            if(DukeSpecificAttendanceFile.exists()){
+            if(DukeSpecificAttendanceFile.exists()) {
                 rewriteAttendanceCsv(attendanceList , DukeSpecificAttendanceFile ,trainingName);
             } else {
                 //create new file and write to it
@@ -106,7 +104,7 @@ public class AttendanceStorage {
         }
     }
 
-    public static void initializeAttendanceCsv(AttendanceList attendanceList ,Attendance attendance){
+    public static void initializeAttendanceCsv(AttendanceList attendanceList ,Attendance attendance) {
         String trainingName = attendance.getTrainingName();
         File currentDir = new File("");
         try {
@@ -119,7 +117,7 @@ public class AttendanceStorage {
         }
     }
 
-    public static void writeFirstAttendance(File AttendanceCsvFile , Attendance attendance){
+    public static void writeFirstAttendance(File AttendanceCsvFile , Attendance attendance) {
         try(PrintWriter dukeAttendanceWriter = new PrintWriter(AttendanceCsvFile)) {
             dukeAttendanceWriter.write("name");
             dukeAttendanceWriter.write(',');
@@ -138,23 +136,24 @@ public class AttendanceStorage {
      * this method rewrites the entire specific csv file
      *
      */
-    public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile ,String trainingName){
+    public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile ,
+            String trainingName) {
         int attendanceListSize = attendanceList.getAttendanceListSize();
-        try(PrintWriter dukeAttendanceWriter = new PrintWriter(currentAttendanceFile)){
+        try(PrintWriter dukeAttendanceWriter = new PrintWriter(currentAttendanceFile)) {
             dukeAttendanceWriter.write("name");
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write("attendance");
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                if(attendanceList.getAttendanceTrainingName(i).equals(trainingName)){
+                if(attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
                     dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
                     dukeAttendanceWriter.write(',');
                     dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
                     dukeAttendanceWriter.write('\n');
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
@@ -166,7 +165,7 @@ public class AttendanceStorage {
      *
      * @param filename full file name including extension
      */
-    public static String getFileTrainingName(String filename){
+    public static String getFileTrainingName(String filename) {
         int fileNameLength = filename.length();
         int NumberToRemove = fileNameLength - 4;
         String trainingName = filename.substring(0,NumberToRemove);

@@ -1,4 +1,5 @@
 package seedu.duke.command;
+
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 import seedu.duke.Ui;

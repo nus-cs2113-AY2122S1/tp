@@ -1,4 +1,5 @@
 package seedu.duke.command;
+
 import seedu.duke.Ui;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.attendance.Attendance;

@@ -1,7 +1,7 @@
 package seedu.duke.command;
+
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
-import seedu.duke.Ui;
 
 /**
  * Edits a TrainingSchedule located in TrainingList.
@@ -18,7 +18,7 @@ public class EditTraining {
         try {
             assert index >= 1;
 
-            TrainingSchedule trainingToChange = trainings.getTrainingList().get(index-1);
+            TrainingSchedule trainingToChange = trainings.getTrainingList().get(index - 1);
 
             if (!toChange.getTrainingName().equals("")) {
                 trainingToChange.setTrainingName(toChange.getTrainingName());
