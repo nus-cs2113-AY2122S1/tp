@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Ui;
+
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -42,6 +42,7 @@ public class UpdateCommandTest {
         Command command1 = Parser.parseCommand("update 2");
         command1.execute();
         assertEquals("Charlie Puth Concert", eventCatalog.get(1).getTitle());
+        assertEquals("21 Feb 2022 - 20:00", eventCatalog.get(1).getStringDateTime());
         System.setIn(sysInBackup);
     }
 
