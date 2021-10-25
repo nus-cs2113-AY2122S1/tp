@@ -3,6 +3,7 @@ package seedu.typists.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -13,7 +14,7 @@ public class TimeModeGame extends Game {
     private static final Logger logger = Logger.getLogger("Foo");
 
     protected final ArrayList<String[]> wordLines;
-    protected ArrayList<String[]> userLines;
+    public ArrayList<String[]> userLines;
 
     protected int gameTime;
     protected double realGameTime;
@@ -62,13 +63,17 @@ public class TimeModeGame extends Game {
                     timeOver = true;
                     realGameTime = (double) currTime / 1000;
                 } else {
-                    ui.printLine(wordLines.get(i));
+                    try {
+                        ui.printLine(wordLines.get(i));
+                    } catch (IndexOutOfBoundsException e) {
+                        logger.log(Level.WARNING, "no more content.");
+                    }
                     inputs.add(in.nextLine());
                     i++;
                 }
             }
             updateUserLines(inputs);
-            System.out.println("Game Finished.");
+            ui.printScreen("Game Finished.");
         }
     }
 
