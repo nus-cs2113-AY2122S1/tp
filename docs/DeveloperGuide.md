@@ -40,6 +40,7 @@ purpose of this guide is to help developers set up and continue with the develop
         * [AddOrderCommand](#addordercommand)
         * [DeleteOrderCommand](#deleteordercommand)
         * [UpdateOrderCommand](#updateordercommand)
+        * [ReceiveOrderCommand](#receiveordercommand)
     * [Archive Commands](#archive-commands)
         * [ArchivePrescriptionCommand](#archiveprescriptioncommand)
         * [ArchiveOrderCommand](#archiveordercommand)
@@ -167,6 +168,8 @@ The sequence diagram below shows how the `list` operation works in general.
 #### DeleteOrderCommand
 
 #### UpdateOrderCommand
+
+### ReceiveOrderCommand
 
 ### Archive Commands
 
