@@ -49,7 +49,7 @@ public class ItemsListTest {
 
         Item item3 = new Item("2pm", "Check-in HotelCalifornia");
 
-        itemsList.editItem(1, item3);
+        itemsList.editItem(0, item3);
         assertEquals(item3, itemsList.getItem(0));
     }
 
