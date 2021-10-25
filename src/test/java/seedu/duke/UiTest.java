@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.commands.FindCommand;
 import seedu.entry.Entry;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
@@ -12,6 +13,7 @@ import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
 import seedu.utility.StonksGraph;
 import seedu.utility.Ui;
+import seedu.utility.BudgetManager;
 
 
 import java.io.ByteArrayOutputStream;
@@ -43,10 +45,13 @@ public class UiTest {
             + "----------------------------------";
     private static final String currentDate =
             "(" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
     
     private final Ui testUI = new Ui();
     private final FinancialTracker financialTracker = new FinancialTracker();
+    private BudgetManager budgetManager = new BudgetManager();
+
 
     public void initialiseFinancialTracker() {
         financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
@@ -276,7 +281,7 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
-                + "x   Account Balance: $0.0                                                  Legend:                 x"
+                + "x   Account Balance: $0.00                                                 Legend:                 x"
                 + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
                 + "x   Current month ( MONTH ) total income: $0.00                                  o is Income       x"
                 + "x   Your Yearly Report                                                                             x"
@@ -347,6 +352,79 @@ public class UiTest {
                 + "Threshold for budget reminders set to 58.71" + newLine
                 + SEPARATOR_LINE;
         testUI.printThresholdConfirmation(58.71);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void filterByKeyword_testFood_printOnlyFoodEntries() {
+        FindCommand testFindCommand = new FindCommand("food");
+        initialiseFinancialTracker();
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Below is a list of all your findings!" + newLine
+                + SEPARATOR_LINE + newLine
+                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
+                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
+        FindCommand testFindCommand = new FindCommand("25/10/2021");
+        initialiseFinancialTracker();
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
+        Income incomeWithDiffDate = new Income("Paycheck August", 25.0, IncomeCategory.SALARY, date);
+        financialTracker.addIncome(incomeWithDiffDate);
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Below is a list of all your findings!" + newLine
+                + SEPARATOR_LINE + newLine
+                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
+                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + "4: [I] Paycheck August - $25.00 (25/10/2021)" + newLine
+                + "5: [I] Rob a bank - $2000.00 (25/10/2021)" + newLine
+                + "6: [I] Paycheck July - $25.00 (25/10/2021)" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void filterByDate_dateNoMatch_printNoEntryFound() {
+        FindCommand testFindCommand = new FindCommand("25/10/2099");
+        initialiseFinancialTracker();
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your search did not match any of the entries!" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void filterByKeyword_matchInDescription_printEntriesFound() {
+        FindCommand testFindCommand = new FindCommand("game");
+        initialiseFinancialTracker();
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Below is a list of all your findings!" + newLine
+                + SEPARATOR_LINE + newLine
+                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void filterByKeyword_matchInAmount_printEntriesFound() {
+        FindCommand testFindCommand = new FindCommand("19.73");
+        initialiseFinancialTracker();
+        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Below is a list of all your findings!" + newLine
+                + SEPARATOR_LINE + newLine
+                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 }
