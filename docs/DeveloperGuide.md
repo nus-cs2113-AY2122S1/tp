@@ -87,7 +87,17 @@ Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
+The image below shows how the Ui uses printing and separators to provide user feedback for listing commands.
+
+
 ![img_1](https://user-images.githubusercontent.com/69465661/138105673-1d21722d-0f77-4dcf-86d6-d38bffc08a40.png)
+
+
+The image below illustrates the sequence diagram in the context of listing methods
+which includes listExpense, listIncome and listFind.
+
+
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/69465661/138629733-63b2a115-5405-4af5-8a74-4d18f51c8f96.png)
 
 ### Command Component
 

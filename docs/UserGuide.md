@@ -31,6 +31,7 @@ view your financial records through both text and graphs in different currencies
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
     - [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
     - [Clear all entries: `clear_all_entries`](#clear-all-entries-clear_all_entries)
+    - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
@@ -69,12 +70,12 @@ Format: `help`
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
 List Out All Commands: help
-Adding Expense: add_ex d/DESCRIPTION a/AMOUNT
+Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Expense: del_ex i/INDEX
 Listing Expense: list_ex
 Show Total Expense: total_ex
 Show Total Expense between 2 dates: btw_ex s/START_DATE e/END_DATE
-Adding Income: add_in d/DESCRIPTION a/AMOUNT
+Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Income: del_in i/INDEX
 Listing Income: list_in
 Show Total Income: total_in
@@ -82,6 +83,10 @@ To Find Using Date: find YYYY-MM-DD
 To Find Based On Keyword: find KEYWORD
 To Display Total Balance: balance
 Show Total Income between 2 dates: btw_in s/START_DATE e/END_DATE
+To Set Budgets: set_budget c/CATEGORY a/AMOUNT
+To Check Budgets: check_budget c/CATEGORY
+To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
+To View Your Yearly Report: show_graph
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
 ````
@@ -108,7 +113,7 @@ Examples:
 ````
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
-[E] KFC lunch - $10.20 (19 Oct 2021)
+[E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 </details>
@@ -137,9 +142,9 @@ Before deletion the expense list is as follows:
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] pillow - $500.00 (18 Oct 2021)
-2: [E] bought cookies - $500.00 (18 Jan 2021)
-3: [E] bought home - $555.00 (18 Jul 2021)
+1: [E] pillow - $500.00 (18/10/2021)
+2: [E] bought cookies - $500.00 (18/01/2021)
+3: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -149,7 +154,7 @@ When command `del_ex i/1` is given, you get the following message:
 ````
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[E] pillow - $500.00 (18 Oct 2021)
+[E] pillow - $500.00 (18/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -157,8 +162,8 @@ After deletion, we see that the list has removed the previous first entry!
 
 ````
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 </details>
@@ -177,11 +182,11 @@ Format: `list_ex`
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
-3: [E] bought car - $4777.00 (18 Jun 2021)
-4: [E] bought condo - $87654888878.00 (18 May 2021)
-5: [E] KFC lunch - $10.20 (19 Oct 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought car - $4777.00 (18/06/2021)
+4: [E] bought condo - $87654888878.00 (18/05/2021)
+5: [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -201,9 +206,9 @@ Format: `total_ex`
 Here we have a simple expense list with three items:
 ````
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $100.00 (18 Jan 2021)
-2: [E] bought home - $200.50 (18 Jul 2021)
-3: [E] bought car - $300.00 (18 Jun 2021)
+1: [E] bought cookies - $100.00 (18/01/2021)
+2: [E] bought home - $200.50 (18/07/2021)
+3: [E] bought car - $300.00 (18/06/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -238,7 +243,7 @@ Examples:
 ````
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
-[I] lunch money - $1000.00 (19 Oct 2021)
+[I] lunch money - $1000.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -267,9 +272,9 @@ Before deletion the income list is as follows:
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a bank - $800.00 (18 Oct 2021)
-2: [I] rob a church - $300.00 (18 Nov 2021)
-3: [I] rob a car - $400.00 (18 Dec 2021)
+1: [I] rob a bank - $800.00 (18/10/2021)
+2: [I] rob a church - $300.00 (18/11/2021)
+3: [I] rob a car - $400.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -279,7 +284,7 @@ When command `del_in i/1` is given, you get the following message:
 ````
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[I] rob a bank - $800.00 (18 Oct 2021)
+[I] rob a bank - $800.00 (18/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -287,8 +292,8 @@ After deletion, we see that the list has removed the previous first entry!
 
 ````
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -308,11 +313,11 @@ Format: `list_in`
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
-3: [I] rob a home - $500.00 (18 Sep 2021)
-4: [I] rob a child - $600.00 (18 Aug 2021)
-5: [I] lunch money - $1000.00 (19 Oct 2021)
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
+3: [I] rob a home - $500.00 (18/09/2021)
+4: [I] rob a child - $600.00 (18/08/2021)
+5: [I] lunch money - $1000.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 </details>
@@ -329,9 +334,9 @@ Format: `total_in`
 Here we have a simple income list with three items:
 ````
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
-3: [I] rob a home - $500.00 (18 Sep 2021)
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
+3: [I] rob a home - $500.00 (18/09/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 <br>
@@ -364,7 +369,7 @@ If you enter `find 2021-10-19`, it will find the entry recorded on that date:
 ````
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
-[I] Birthday Money! - $200.00 (19 Oct 2021)
+[I] Birthday Money! - $200.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -394,7 +399,7 @@ If you wish to search based on category, for e.g. all `food` expenses:
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!
 -----------------------------------------------------------------------------------------------------
-1: [E] KFC lunch - $10.20 (19 Oct 2021)
+1: [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -405,10 +410,10 @@ If you wish to search based on description, for e.g. all entries that contain th
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
-3: [E] bought car - $4777.00 (18 Jun 2021)
-4: [E] bought condo - $87654888878.00 (18 May 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought car - $4777.00 (18/06/2021)
+4: [E] bought condo - $87654888878.00 (18/05/2021)
 -----------------------------------------------------------------------------------------------------
 ````
 </details>
@@ -502,6 +507,47 @@ All your entries have been cleared!
 </details>
 <br>
 
+### View Yearly Report: `show_graph`
+
+Shows the monthly breakdown of the finances in a Yearly Report which also
+includes current month spendings and earnings.
+
+Format: `show_graph`
+
+<details>
+  <summary> Expected output in run window </summary>
+
+````
+show_graph
+-----------------------------------------------------------------------------------------------------
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x                                                                                                  x
+x   Account Balance: $-398.2                                               Legend:                 x
+x   Current month (OCTOBER) total expense: $410.20                               # is Expense      x
+x   Current month (OCTOBER) total income: $0.00                                  o is Income       x
+x   Your Yearly Report                                                                             x
+x ------------------------------------------------------------------------------------------------ x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                           #                      x
+x                                                                           #                      x
+x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
+x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-----------------------------------------------------------------------------------------------------
+````
+
+</details>
+
+<br>
+
+
 ### Terminate program: `end`
 
 Exits the program when the user is done.
@@ -548,6 +594,7 @@ Format: `end`
 | Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` <br /> e.g., `btw_ex s/2021-07-10 e/2021-10-23` |
 | Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` <br /> e.g., `btw_in s/2021-07-10 e/2021-10-23` |
 | Clear all entries | `clear_all_entries` |
+| View Yearly Report | `show_graph` |
 | To terminate program | `end` |
 
 
