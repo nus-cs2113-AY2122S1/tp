@@ -59,4 +59,12 @@ public class WorldMap {
         }
         return country;
     }
+
+    public static void editMap(Double dist, String sourceCountryName, String targetCountryName) {
+        Country sourceCountry = getCountry(sourceCountryName);
+        Country targetCountry = getCountry(targetCountryName);
+
+        graphList.modifyEdge(dist, sourceCountry, targetCountry);
+        assert !(dist < 0.00000001) : "distance should be greater than 0.";
+    }
 }

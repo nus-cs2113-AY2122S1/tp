@@ -10,16 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class ShortestCommand extends Command {
-    private static final Logger logger = Logger.getLogger(ShortestCommand.class.getName());
+public class EditMapCommand extends Command {
+    private static final Logger logger = Logger.getLogger(EditMapCommand.class.getName());
     private final String startCountry;
     private final String endCountry;
+    private final double dist;
 
-    public ShortestCommand(String startCountry, String endCountry) {
+    public EditMapCommand(String startCountry, String endCountry, Double dist) {
         logger.setLevel(Level.INFO);
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        logger.log(Level.INFO, "Created an search command: \n" + this);
+        this.dist = dist;
+        logger.log(Level.INFO, "Created an edit world map command: \n" + this);
     }
 
     public String getStartCountry() {
@@ -30,21 +32,20 @@ public class ShortestCommand extends Command {
         return this.endCountry;
     }
 
+    public Double getDist() {
+        return this.dist;
+    }
+
     @Override
     public String toString() {
-        return "Shortest command: "
+        return "Edit map command: "
                 + "\n\tstartCountry: " + startCountry
-                + "\n\tendCountry: " + endCountry;
+                + "\n\tendCountry: " + endCountry
+                + "\n\tdistance: " + dist;
     }
 
     public void execute(TripsList tripsList, Ui ui) {
-        MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
-        List<Double> distances = result.getDistances();
-        double sum = 0.0;
-        for (double d : distances) {
-            sum += d;
-        }
-        assert sum >= 0 : "The distance should be more than or equal to 0.";
-        ui.printShortest(this.startCountry, this.endCountry, sum);
+        WorldMap.editMap(dist, this.startCountry, this.endCountry);
+        ui.printEditMap(this.startCountry, this.endCountry, dist);
     }
 }
