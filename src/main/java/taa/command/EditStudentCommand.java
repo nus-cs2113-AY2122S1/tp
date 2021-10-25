@@ -29,6 +29,22 @@ public class EditStudentCommand extends Command {
         super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+    }
+
     /**
      * Executes the edit_student command and edits the particulars of a student.
      *
@@ -39,14 +55,6 @@ public class EditStudentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
@@ -54,10 +62,7 @@ public class EditStudentCommand extends Command {
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
-        }
-
+        assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = module.getStudentList();
@@ -73,7 +78,6 @@ public class EditStudentCommand extends Command {
         student.setName(newName);
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
     }
 

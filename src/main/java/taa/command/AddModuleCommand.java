@@ -22,6 +22,22 @@ public class AddModuleCommand extends Command {
         super(argument, ADD_MODULE_ARGUMENT_KEYS);
     }
 
+    @Override
+    public void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!argumentMap.containsKey(KEY_MODULE_CODE)) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
+        if (moduleCode.contains(" ")) {
+            throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
+        }
+    }
+
     /**
      * Executes the add_module command and adds a module.
      *
@@ -32,19 +48,8 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!argumentMap.containsKey(KEY_MODULE_CODE)) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
-
         assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        if (moduleCode.contains(" ")) {
-            throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
-        }
 
         Module module = moduleList.getModuleWithCode(moduleCode);
         if (module != null) {
@@ -52,14 +57,12 @@ public class AddModuleCommand extends Command {
         }
 
         String name = argumentMap.getOrDefault(KEY_MODULE_NAME, "");
-
         module = new Module(moduleCode, name);
         moduleList.addModule(module);
 
         TaaLogger.LOGGER.logInfo(String.format("Added module: %s", module));
 
         storage.save(moduleList);
-
         ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
     }
 

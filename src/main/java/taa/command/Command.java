@@ -39,6 +39,7 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
+    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
@@ -64,17 +65,19 @@ public abstract class Command {
         this.argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
     }
 
+    protected abstract String getUsage();
+
+    public abstract void checkArgument() throws TaaException;
+
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
+
     public boolean isExit() {
         return isExit;
     }
 
-    protected abstract String getUsage();
-
     protected String getUsageMessage() {
         return String.format(MESSAGE_FORMAT_USAGE_MESSAGE, getUsage());
     }
-
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
 
     protected String getMissingArgumentMessage() {
         String usageMessage = getUsageMessage();
