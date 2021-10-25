@@ -49,7 +49,8 @@ public class ListCommandParserTest {
     static {
         try {
             moduleMasterList = new ModuleList(storage.readModuleList());
-            universityMasterList = new UniversityList(storage.readUniversityList());
+            universityMasterList = new UniversityList(
+                    storage.readUniversityList(moduleMasterList));
         } catch (IOException e) {
             e.printStackTrace();
         }

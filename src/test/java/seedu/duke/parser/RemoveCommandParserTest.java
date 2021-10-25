@@ -28,7 +28,7 @@ class RemoveCommandParserTest {
         RemoveCommandParser rcp = new RemoveCommandParser();
         try {
             moduleMasterList = new ModuleList(storage.readModuleList());
-            universityMasterList = new UniversityList(storage.readUniversityList());
+            universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
             assertEquals(RemoveUniCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
