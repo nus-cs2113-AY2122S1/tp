@@ -53,6 +53,7 @@ public class AddModuleCommand extends Command {
         if (!moduleName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         }
+        moduleName = moduleName.toUpperCase();
     }
 
     /**

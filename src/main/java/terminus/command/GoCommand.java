@@ -25,7 +25,7 @@ public class GoCommand extends WorkspaceCommand {
      */
     @Override
     public String getFormat() {
-        return "go <module name>";
+        return CommonFormat.COMMAND_GO_FORMAT;
     }
 
     /**
@@ -35,7 +35,7 @@ public class GoCommand extends WorkspaceCommand {
      */
     @Override
     public String getHelpMessage() {
-        return "Go to a specific module's workspace";
+        return Messages.MESSAGE_COMMAND_GO;
     }
 
     @Override
@@ -54,7 +54,8 @@ public class GoCommand extends WorkspaceCommand {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException, IOException {
+        moduleName = moduleName.toUpperCase();
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
             throw new InvalidArgumentException("Module not found! Type 'module view' for the list of modules.");
