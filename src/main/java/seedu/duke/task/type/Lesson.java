@@ -1,58 +1,48 @@
 package seedu.duke.task.type;
 
-import seedu.duke.nusmods.NusModsParser;
-import seedu.duke.task.Task;
-import seedu.duke.task.TypeEnum;
+import seedu.duke.nusmods.Semester;
+import seedu.duke.task.RecurrenceEnum;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
-public class Lesson extends Task {
+/**
+ * A single lesson class e.g. CS2101 C02 Thursday
+ */
+public class Lesson extends Event {
 
-    private final TypeEnum taskType = TypeEnum.LESSON;
+    private int[] skipOccurrences;
 
     public String getModuleCode() {
         return moduleCode;
     }
 
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
+    private String moduleCode;
+
     public String getClassNo() {
         return classNo;
     }
 
-    private final String moduleCode;
-    private final String classNo;
-
-    public Event[] toEvent() {
-        try {
-            return new NusModsParser().getLessonEvents(this);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-    public TypeEnum getTaskType() {
-        return this.taskType;
-    }
-
-    @Override
-    public String getTaskEntryDescription() {
-        return moduleCode + ' ' + classNo;
-    }
-
-    public Lesson(String moduleCode, String classNo) {
-        super(moduleCode + ' ' + classNo);
-        this.moduleCode = moduleCode;
+    public void setClassNo(String classNo) {
         this.classNo = classNo;
     }
 
-    @Override
-    public boolean needReminder() {
-        return false;
+    private String classNo;
+
+    public Lesson(String moduleCode, String classNo, DayOfWeek weekday, LocalTime start, LocalTime end, int[] weeks) {
+        super(moduleCode, Semester.getSemester().getStartingMonday().with(weekday).atTime(start),
+                Semester.getSemester().getStartingMonday().with(weekday).atTime(end),
+                RecurrenceEnum.WEEKLY);
+        setModuleCode(moduleCode);
+        setClassNo(classNo);
+        setSkipOccurrences(Semester.acadWeeksToRealWeeks(weeks));
     }
 
-    @Override
-    public String getReminder(LocalDateTime now) {
-        return null;
+    public void setSkipOccurrences(int[] skipOccurrences) {
+        this.skipOccurrences = skipOccurrences;
     }
 }

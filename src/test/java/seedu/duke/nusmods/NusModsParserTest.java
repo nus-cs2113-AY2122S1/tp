@@ -2,7 +2,6 @@ package seedu.duke.nusmods;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Lesson;
 
 import java.io.File;
@@ -16,10 +15,10 @@ class NusModsParserTest {
 
     @Test
     void getModuleEvents_CS2113T_success() throws IOException {
-        Event[] moduleLessons = parser.getLessonEvents(new Lesson("CS2113T", "C02"));
+        Lesson[] moduleLessons = parser.getLessons("CS2113T", "C02");
 
-        for (int i = 0; i < moduleLessons.length; i++) {
-            System.out.println(moduleLessons[i].getTaskEntryDescription());
+        for (Lesson moduleLesson : moduleLessons) {
+            System.out.println(moduleLesson.getTaskEntryDescription());
         }
 
         assertEquals(4, moduleLessons.length);
@@ -34,7 +33,7 @@ class NusModsParserTest {
         }
         System.setProperty("https.proxyHost", "localhost"); // simulate network down
         assertThrows(IOException.class,
-            () -> parser.getLessonEvents(new Lesson("CS2113T", "C02")));
+            () -> parser.getLessons("CS2113T", "C02"));
         System.clearProperty("https.proxyHost"); // simulate network down
     }
 }
