@@ -15,13 +15,13 @@ import java.lang.reflect.Type;
 
 public class AssessmentListDeserializer extends StorageDeserializer implements JsonDeserializer<AssessmentList> {
     private static final String MEMBER_ASSESSMENTS = "assessments";
-    private static final String[] MEMBERS = {MEMBER_ASSESSMENTS};
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_ASSESSMENTS};
 
     @Override
     public AssessmentList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        if (!hasMembers(jsonObject, MEMBERS)) {
+        if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 

@@ -18,20 +18,19 @@ import java.util.HashMap;
 public class StudentDeserializer extends StorageDeserializer implements JsonDeserializer<Student> {
     private static final String MEMBER_ID = "id";
     private static final String MEMBER_NAME = "name";
+    private static final String MEMBER_COMMENT = "comment";
     private static final String MEMBER_ATTENDANCELIST = "attendanceList";
     private static final String MEMBER_RESULTS = "results";
-    private static final String[] MEMBERS = {
+    private static final String[] COMPULSORY_MEMBERS = {
         MEMBER_ID,
-        MEMBER_NAME,
-        MEMBER_ATTENDANCELIST,
-        MEMBER_RESULTS
+        MEMBER_NAME
     };
 
     @Override
     public Student deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        if (!hasMembers(jsonObject, MEMBERS)) {
+        if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 
@@ -43,24 +42,34 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
         Student student = new Student(id, name);
 
+        JsonElement commentJson = jsonObject.get(MEMBER_COMMENT);
+        if (commentJson != null) {
+            String comment = commentJson.getAsString();
+            student.setComment(comment);
+        }
+
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
 
         JsonElement attendanceListJson = jsonObject.get(MEMBER_ATTENDANCELIST);
-        AttendanceList attendanceList = gson.fromJson(attendanceListJson, AttendanceList.class);
-        if (attendanceList != null) {
-            for (Attendance attendance : attendanceList.getAttendances()) {
-                student.getAttendanceList().addAttendance(attendance);
+        if (attendanceListJson != null) {
+            AttendanceList attendanceList = gson.fromJson(attendanceListJson, AttendanceList.class);
+            if (attendanceList != null) {
+                for (Attendance attendance : attendanceList.getAttendances()) {
+                    student.getAttendanceList().addAttendance(attendance);
+                }
             }
         }
 
         JsonElement resultsJson = jsonObject.get(MEMBER_RESULTS);
-        Type resultsType = new TypeToken<HashMap<String, Double>>(){}.getType();
-        HashMap<String, Double> results = gson.fromJson(resultsJson, resultsType);
-        if (results != null) {
-            for (String key : results.keySet()) {
-                double value = results.get(key);
-                student.setMarks(key, value);
+        if (resultsJson != null) {
+            Type resultsType = new TypeToken<HashMap<String, Double>>(){}.getType();
+            HashMap<String, Double> results = gson.fromJson(resultsJson, resultsType);
+            if (results != null) {
+                for (String key : results.keySet()) {
+                    double value = results.get(key);
+                    student.setMarks(key, value);
+                }
             }
         }
 

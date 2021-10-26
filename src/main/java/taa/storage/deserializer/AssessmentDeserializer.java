@@ -14,13 +14,13 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
     private static final String MEMBER_NAME = "name";
     private static final String MEMBER_WEIGHTAGE = "weightage";
     private static final String MEMBER_MAXIMUM_MARKS = "maximumMarks";
-    private static final String[] MEMBERS = {MEMBER_NAME, MEMBER_MAXIMUM_MARKS, MEMBER_WEIGHTAGE};
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_NAME, MEMBER_MAXIMUM_MARKS, MEMBER_WEIGHTAGE};
 
     @Override
     public Assessment deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        if (!hasMembers(jsonObject, MEMBERS)) {
+        if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 
