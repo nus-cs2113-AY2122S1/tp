@@ -75,6 +75,7 @@ public class TimeModeGame extends Game {
             }
             updateUserLines(inputs);
             ui.printScreen("Game Finished.");
+            handleSummary(wordLines, userLines, realGameTime, "Word-limited");
         }
     }
 
