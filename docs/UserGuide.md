@@ -12,6 +12,8 @@ conventional GUI apps.
 You can find out more about _Ha(ppy)Bit_'s Developer Guide or 
 its developers (😀 us!) at our [Main Page](README.md).
 
+------------
+
 * [Quick Start](#quick-start)
   * [Loading Screen Navigation](#loading-screen-navigation)
 * [Using this Guide](#using-this-guide)
@@ -33,15 +35,18 @@ its developers (😀 us!) at our [Main Page](README.md).
 * [Command Summary](#command-summary)
 * [Useful Links](#useful-links)
 
+------------
+
 ## Quick Start
 
-1. Ensure you have Java `11` installed in your computer. If you do not have it installed,
+1. Hype yourself up by dancing. Here begins your journey with _Ha(ppy)Bit_.
+2. Ensure you have Java `11` installed in your computer. If you do not have it installed,
    download it [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
-3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
-4. Open your terminal of choice inside the folder containing `tp.jar` file.
-5. Run the file by typing the command `java -jar tp.jar`.
-6. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
+3. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
+4. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
+5. Open your terminal of choice inside the folder containing `tp.jar` file.
+6. Run the file by typing the command `java -jar tp.jar`.
+7. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
 
    ```
    ==============================================================================
@@ -61,7 +66,7 @@ its developers (😀 us!) at our [Main Page](README.md).
     
     Option:
    ```
-Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
+    Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
 ### Loading Screen Navigation
 In the current loading screen, users will be able to execute the following actions based on the number they input.
@@ -133,7 +138,7 @@ Returning users can continue using _Ha(ppy)Bit_ where they left off.
     
     Command:
     ```
-Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
+    Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
 ## Using this Guide
 We understand there may a lot to take in from this user guide. Here are some things to take note
@@ -163,9 +168,8 @@ Unfamiliar symbols may confuse. Here is comprehensive collection of all emojis a
 
 > 😀 &#8594; Used to show developers' exuberance!!!
 
-> 👍 &#8594; Used to show developers' love and support for you, the users!
+> 👍 &#8594; Used to show developers' love and support for you, the users.
 
-------
 
 >  📃 **Notes about command format:**
 > * words enclosed in angle brackets, `<>` are the parameters which is the input the user is supposed to provide.
@@ -448,7 +452,7 @@ ________________________________________________________________________________
 
 ### Exit the Program: `bye`
 Exits the program. <br>
-(Don't stay on Ha(ppy)Bit too long! You have a life out there, waiting for you to live it!)
+(Don't stay on _Ha(ppy)Bit_ too long. You have a life out there, go live it!)
 
 > ⚠ **Warning:** <br>
 > Make sure to use this command before exiting the program
@@ -501,9 +505,9 @@ your data will be there!
 Action | Command Format | Example
 ------------ | ------------ | ------------
 Set goal | `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` | `set n/Reduce spending e/31122022`
+List goals | `list` | `list`
 Update goal | `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>` | `update g/1 n/Decrease Spending`
 Remove goal | `remove g/<GOAL_INDEX>` | `remove g/1`
-List goals | `list` | `list`
 Add habit | `add n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVAL>` | `add n/Don't drink BBT g/1 i/3`
 Done habit | `done g/<GOAL_INDEX> h/<HABIT_INDEX>` | `done g/1 h/1`
 Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete g/1 g/1`
