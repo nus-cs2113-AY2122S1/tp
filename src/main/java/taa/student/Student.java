@@ -134,17 +134,6 @@ public class Student implements ClassChecker {
 
     @Override
     public boolean verify() {
-        if (id.isEmpty() || name.isEmpty()) {
-            return false;
-        }
-
-        /*//do this in module instead
-        for (String assessmentName : results.keySet()) {
-            if (!isMarksWithinRange(results.get(assessmentName))) {
-                return false;
-            }
-        }*/
-
-        return true;
+        return !id.isEmpty() && !name.isEmpty();
     }
 }

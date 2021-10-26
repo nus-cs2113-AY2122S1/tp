@@ -82,7 +82,7 @@ public class DeleteMarkCommand extends Command {
             throw new TaaException(MESSAGE_NO_MARKS);
         }
 
-        deleteMark(ui, student, assessmentName);
+        deleteMark(ui, student, assessment);
         storage.save(moduleList);
     }
 
@@ -91,11 +91,11 @@ public class DeleteMarkCommand extends Command {
      *
      * @param ui The ui instance to handle interactions with the user.
      * @param student The student whose marks are to be deleted.
-     * @param assessmentName The name of the assessment to delete marks for.
+     * @param assessment The assessment to delete marks for.
      */
-    private void deleteMark(Ui ui, Student student, String assessmentName) {
-        student.deleteMark(assessmentName);
-        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_DELETED, student, assessmentName));
+    private void deleteMark(Ui ui, Student student, Assessment assessment) {
+        student.deleteMark(assessment.getName());
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_DELETED, student, assessment.getName()));
     }
 
     /**
