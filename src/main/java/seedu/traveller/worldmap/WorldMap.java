@@ -1,6 +1,7 @@
 package seedu.traveller.worldmap;
 
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
 
 
@@ -89,12 +90,21 @@ public class WorldMap {
         throw new EmptyVertexException(countryName);
     }
 
-    public static void editMap(Double dist, String sourceCountryName, String targetCountryName)
-            throws EmptyVertexException {
-        Country sourceCountry = getCountry(sourceCountryName);
-        Country targetCountry = getCountry(targetCountryName);
+    public static void distanceNonZero(double dist) throws NonZeroDistanceException {
+        if (dist < 0.1) {
+            throw new NonZeroDistanceException(dist);
+        }
+    }
 
-        graphList.modifyEdge(dist, sourceCountry, targetCountry);
-        assert !(dist < 0.00000001) : "distance should be greater than 0.";
+    public static void editMap(Double dist, String sourceCountryName, String targetCountryName) {
+        try {
+            Country sourceCountry = getCountry(sourceCountryName);
+            Country targetCountry = getCountry(targetCountryName);
+
+            graphList.modifyEdge(dist, sourceCountry, targetCountry);
+            distanceNonZero(dist);
+        } catch (EmptyVertexException | NonZeroDistanceException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
