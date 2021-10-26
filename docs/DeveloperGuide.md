@@ -75,7 +75,7 @@ The Ui component consolidates and formats the output of the program before displ
 in the command line. 
 
 <p align = "center">
-<img src="images/Ui_UML" width = "800" />
+<img src="images/Ui_UML.png" width = "800" />
 </p>
 
 The above class diagram illustrates the relationship between the classes within the Ui components.
