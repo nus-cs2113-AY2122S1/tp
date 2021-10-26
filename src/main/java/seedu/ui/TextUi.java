@@ -206,9 +206,8 @@ public abstract class TextUi {
         printDoubleLineMessage(message + fields);
     }
 
-    public static void deleteFieldsMessage(boolean[] deletedFields, Contact contact) {
-        String message = "The specified fields for " + contact.getName() + " have been deleted.\n";
-        //String fields = deletedFieldsGenerator(deletedFields, contact);
+    public static void deleteFieldsMessage(Contact contact) {
+        String message = "The specified fields for " + contact.getName() + " have been deleted.";
         printDoubleLineMessage(message);
     }
 
