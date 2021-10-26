@@ -42,11 +42,13 @@ public class Ui {
     }
 
     public static String getLineBreak() {
-        return "______________________________________________________________________";
+        return "_____________________________________________________________________________________________"
+                + "_______________";
     }
 
     public static void printLineBreak() {
-        System.out.println("______________________________________________________________________");
+        System.out.println("________________________________________________________________________________________"
+                + "____________________");
     }
 
     public static void promptForDescription() {
@@ -89,7 +91,7 @@ public class Ui {
     }
 
     public static String getMemberAddedMessage(Member member) {
-        return String.format("Member added: %s\n", member.getName());
+        return String.format("Member added: %s", member.getName());
     }
 
     public static void printGreetingMessage() {
