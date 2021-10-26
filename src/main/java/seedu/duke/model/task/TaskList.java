@@ -5,6 +5,7 @@ import seedu.duke.model.task.exceptions.TaskIndexException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,10 +13,11 @@ public class TaskList {
     private final List<Task> taskList;
 
     public TaskList() {
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public TaskList(List<Task> taskList) {
+        Collections.sort(taskList);
         this.taskList = taskList;
     }
 
@@ -49,11 +51,13 @@ public class TaskList {
 
     public void addTask(Task newTask) {
         taskList.add(newTask);
+        Collections.sort(taskList);
     }
 
     public void deleteTask(int taskIndex) throws TaskIndexException {
         try {
             taskList.remove(taskIndex);
+            Collections.sort(taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {

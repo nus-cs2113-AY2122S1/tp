@@ -4,9 +4,12 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.commons.core.Priority;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.util.exceptions.InvalidDayException;
 import seedu.duke.ui.Ui;
 
-public class Task {
+import static seedu.duke.commons.util.DayUtil.compareDay;
+
+public class Task implements Comparable<Task> {
     private final String title;
     private final String dayOfTheWeek;
     private final String priority;
@@ -84,6 +87,17 @@ public class Task {
             // Ignoring the particular line
             ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
             return null;
+        }
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        try {
+            return compareDay(this.getDayOfTheWeek(), t.getDayOfTheWeek());
+        } catch (InvalidDayException e) {
+            // Ignore and return 0
+            System.out.println("Error: Day comparison result is incorrect.");
+            return 0;
         }
     }
 
