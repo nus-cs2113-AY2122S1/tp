@@ -117,20 +117,10 @@ public class Ingredient implements  Comparable<Ingredient> {
         ingredientWasteDish += value;
     }
 
-    public String toGraph(double max) {
+    public int getGraphHeight(double max, int resolution) {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
-        String bar = "[";
-        int num = (int)(10 * wastage / max);
-        for (int i = 0; i < 10; i++) {
-            if (i < num) {
-                bar = bar + "█";
-            } else  {
-                bar = bar + " ";
-            }
-        }
-        bar = bar + "]";
-        return ingredientName + System.lineSeparator()
-                + "   Wastage: " + bar + " " + wastage + " kg";
+        int num = (int)(resolution * wastage / max);
+        return num;
     }
 
     @Override

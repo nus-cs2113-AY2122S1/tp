@@ -88,15 +88,19 @@ public class Storage {
         try {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
-                String in = s.nextLine();
-                String[] params = in.split("\\|");
-                for (int i = 0; i < params.length; i++) {
-                    params[i] = params[i].trim();
+                try {
+                    String in = s.nextLine();
+                    String[] params = in.split("\\|");
+                    for (int i = 0; i < params.length; i++) {
+                        params[i] = params[i].trim();
+                    }
+                    Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
+                            Double.parseDouble(params[2]));
+                    ingredientToAdd.setLimit(Double.parseDouble(params[3]));
+                    IngredientList.ingredientList.add(ingredientToAdd);
+                } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
+                    System.out.println("Invalid data entry, disregarding");
                 }
-                Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
-                        Double.parseDouble(params[2]));
-                ingredientToAdd.setLimit(Double.parseDouble(params[3]));
-                IngredientList.ingredientList.add(ingredientToAdd);
             }
         } catch (FileNotFoundException e) {
             try {
@@ -115,23 +119,27 @@ public class Storage {
         try {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
-                String in = s.nextLine();
-                String[] params = in.split("\\|");
-                for (int i = 0; i < params.length; i++) {
-                    params[i] = params[i].trim();
-                }
-                Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
-                dishToAdd.setLimit(Double.parseDouble(params[3]));
-                if (params.length > 4) {
-                    //System.out.println("Contains constituents");
-                    for (int i = 3; i < params.length; i++) {
-                        int ingredientIndex = IngredientList.find(params[i]);
-                        Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
-                        dishToAdd.getParts().add(dishComponent);
-                        dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
+                try {
+                    String in = s.nextLine();
+                    String[] params = in.split("\\|");
+                    for (int i = 0; i < params.length; i++) {
+                        params[i] = params[i].trim();
                     }
+                    Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
+                    dishToAdd.setLimit(Double.parseDouble(params[3]));
+                    if (params.length > 4) {
+                        //System.out.println("Contains constituents");
+                        for (int i = 3; i < params.length; i++) {
+                            int ingredientIndex = IngredientList.find(params[i]);
+                            Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
+                            dishToAdd.getParts().add(dishComponent);
+                            dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
+                        }
+                    }
+                    DishList.dishList.add(dishToAdd);
+                } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
+                    System.out.println("Invalid data entry, disregarding");
                 }
-                DishList.dishList.add(dishToAdd);
             }
         } catch (FileNotFoundException e) {
             try {
