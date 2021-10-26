@@ -1,6 +1,7 @@
 package seedu.typists.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +11,6 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.FileHandler;
 import java.util.logging.ConsoleHandler;
 
-import static java.lang.System.out;
 import static seedu.typists.common.Messages.SUMMARY;
 
 public class SummaryUi {
@@ -49,7 +49,7 @@ public class SummaryUi {
                 (Double) summary.get("correctWordPercentage"),
                 (Integer) summary.get("totalWordCount"));
         assert summary.get("errorWords") instanceof List;
-        printErrorWords((List<String>) summary.get("errorWords"));
+        printErrorWords((ArrayList<String>) summary.get("errorWords"));
     }
 
     private static void printErrorStatistics(int errorWordCount, double errorWordPercentage, int totalWordCount) {
@@ -68,31 +68,32 @@ public class SummaryUi {
                 + "|" + String.format("%.2f", correctWordPercentage) + "%\n");
     }
 
-    private static void printErrorWords(List<String> errorWords) {
+    static void printErrorWords(ArrayList<String> errorWords) {
         setUpLog();
-        out.print("Mistakes: ");
-        if (errorWords == null) {
-            out.print("No words typed wrongly.\n");
+        assert errorWords!= null;
+        System.out.print("Mistakes: ");
+        if (errorWords.size()==0) {
+            System.out.print("No words typed wrongly.\n");
             return;
         }
         for (int i = 0; i < errorWords.size(); i++) {
             assert errorWords != null;
-            if (i != 0 && i % 8 == 0) {
-                out.print("\n");
+            if (i % 8 == 0) {
+                System.out.print("\n");
             }
-            out.print(errorWords.get(i));
+            System.out.print(errorWords.get(i));
             if (i != (errorWords.size() - 1)) {
-                out.print("|");
+                System.out.print("|");
             }
         }
         if ((errorWords.size() - 1) % 8 != 0) {
-            out.print("\n");
+            System.out.print("\n");
         }
     }
 
     private static void printOverview(double timeElapsed, String gameMode, double wpm) {
         System.out.print(SUMMARY + '\n');
-        System.out.println("Game Mode: " + gameMode + '\n');
+        System.out.print("Game Mode: " + gameMode + '\n');
         System.out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         System.out.print("Total Time taken for the game: " + String.format("%.2f", timeElapsed) + " seconds\n");
     }
