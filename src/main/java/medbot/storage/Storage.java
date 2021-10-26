@@ -114,7 +114,7 @@ public abstract class Storage {
      * @param medBotList instance of a subclass of MedBotList
      */
     void updateLastId(ListItem listItem, MedBotList medBotList) {
-        int listItemId = listItem.getListItemId();
+        int listItemId = listItem.getId();
         if (medBotList.getLastId() < listItemId) {
             medBotList.setLastId(listItemId);
         }
@@ -206,9 +206,6 @@ public abstract class Storage {
      * @return a ListItem object
      * @throws MedBotException if a ListItem object fails to be created
      */
-    protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
-        return new ListItem();
-    }
-
+    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException;
 }
 

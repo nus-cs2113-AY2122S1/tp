@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import static medbot.ui.Ui.END_LINE;
 
 
-public abstract class PersonList extends MedBotList {
+public abstract class PersonList implements MedBotList {
 
     //Sorted to ensure that persons will always be printed in ascending order of ID when storage is manipulated
     private final SortedMap<Integer, Person> persons = new TreeMap<>();
@@ -32,12 +32,12 @@ public abstract class PersonList extends MedBotList {
      * @return personId that was allocated to the person
      */
     public int addPerson(Person person) {
-        int personId = person.getListItemId();
+        int personId = person.getId();
 
         //if person not created from storage data
         if (personId <= 0) {
             personId = generatePersonId();
-            person.setListItemId(personId);
+            person.setId(personId);
         }
         persons.put(personId, person);
         return personId;

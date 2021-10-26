@@ -1,20 +1,13 @@
 package medbot.list;
 
 
-public abstract class MedBotList {
+public interface MedBotList {
 
-    public String getStorageString() {
-        return "";
-    }
+    String getStorageString();
 
+    void setLastId(int lastId);
 
-    public void setLastId(int lastId) {
-    }
-
-    public int getLastId() {
-        return 0;
-    }
-
+    int getLastId();
 
 }
 

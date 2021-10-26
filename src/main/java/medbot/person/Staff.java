@@ -8,7 +8,7 @@ public class Staff extends Person {
 
     @Override
     public String toString() {
-        return "Staff ID: " + getListItemId() + " " + super.toString();
+        return "Staff ID: " + getId() + " " + super.toString();
     }
 
 }

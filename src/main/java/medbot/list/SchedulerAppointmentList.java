@@ -9,9 +9,7 @@ import java.util.List;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
-import java.util.HashMap;
-
-public class SchedulerAppointmentList extends MedBotList {
+public class SchedulerAppointmentList implements MedBotList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
@@ -33,7 +31,7 @@ public class SchedulerAppointmentList extends MedBotList {
             throw new MedBotException(getAppointmentNotFoundErrorMessage(appointmentId));
         }
         Appointment appointment = new Appointment();
-        appointment.setListItemId(appointmentId);
+        appointment.setId(appointmentId);
         appointment.mergeAppointmentData(appointments.get(appointmentId));
         return appointment;
     }
@@ -51,13 +49,13 @@ public class SchedulerAppointmentList extends MedBotList {
      */
     public int addAppointment(Appointment appointment) throws MedBotException {
         assert appointment.isComplete();
-        int appointmentId = appointment.getListItemId();
+        int appointmentId = appointment.getId();
         if (appointments.containsKey(appointmentId)) {
             throw new MedBotException("Appointment with id " + appointmentId + " already exits!");
         }
         if (appointmentId == 0) {
             appointmentId = generateAppointmentId();
-            appointment.setListItemId(appointmentId);
+            appointment.setId(appointmentId);
         }
         appointments.put(appointmentId, appointment);
         return appointmentId;

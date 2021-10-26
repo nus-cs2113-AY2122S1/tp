@@ -312,7 +312,7 @@ public class Scheduler {
     public void editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
         Appointment oldAppointment = schedulerAppointmentList.getAppointment(appointmentId);
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
-        newAppointment.setListItemId(appointmentId);
+        newAppointment.setId(appointmentId);
         assert newAppointment.isComplete();
 
         checkAvailability(newAppointment);
@@ -338,7 +338,7 @@ public class Scheduler {
         int patientId = appointment.getPatientId();
         int staffId = appointment.getMedicalStaffId();
         int dateTimeCode = appointment.getDateTimeCode();
-        int appointmentId = appointment.getListItemId();
+        int appointmentId = appointment.getId();
         checkPatientAvailability(patientId, dateTimeCode, appointmentId);
         checkMedicalStaffAvailability(staffId, dateTimeCode, appointmentId);
     }
@@ -362,7 +362,7 @@ public class Scheduler {
         Appointment appointment = schedulerAppointmentList.getAppointment(appointmentId);
         String patientName = patientList.getPersonName(appointment.getPatientId());
         String staffName = medicalStaffList.getPersonName(appointment.getMedicalStaffId());
-        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getListItemId())
+        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getId())
                 + VERTICAL_LINE_SPACED + appointment.getDateTimeString()
                 + VERTICAL_LINE_SPACED + formatPatientId(appointment.getPatientId())
                 + VERTICAL_LINE_SPACED + formatNameString(patientName)
