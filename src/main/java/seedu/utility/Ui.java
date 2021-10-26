@@ -271,9 +271,11 @@ public class Ui {
     /**
      * Prints the termination message of the STONKS XD program.
      */
-    public void printBye() {
+    public void printBye(String advice) {
         printLine();
         System.out.println(Messages.BYE_MESSAGE);
+        System.out.println(newLine);
+        System.out.println(Messages.TIP_HEADER + advice);
         printLine();
     }
 

@@ -4,14 +4,18 @@
 
 ## Introduction
 
-StonksXD is a smart money management application that does the following: 
-- tracks daily expenses, 
-- sets/adjusts spending limits
-- gives advice based on available data
+StonksXD is your go-to smart money management application that is able to: 
+- track your daily expenses 
+- sets/adjusts your spending limits
+- provide you with helpful financial tips and insights
 
-It is optimised for a once-a-day logging system and allows you to 
-view your financial records through both text and graphs in different currencies!
+It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. It also allows you to 
+view your financial records through both text and graphs, in different currencies, so you can use this application anywhere around the world!
 
+Using this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
+without having to learn how to write a single line of code.
+
+Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -31,6 +35,10 @@ view your financial records through both text and graphs in different currencies
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
     - [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
     - [Clear all entries: `clear_all_entries`](#clear-all-entries-clear_all_entries)
+    - [Set budget: `set_budget`](#set-budget-set_budget)
+    - [Check budget: `check_budget`](#check-budget-check_budget)
+    - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
+    - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
@@ -41,7 +49,7 @@ view your financial records through both text and graphs in different currencies
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
+5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
 8. Type `balance` to view your net saving.
@@ -59,22 +67,21 @@ Shows a list of all possible commands.
 
 Format: `help`
 
-<font size=1>_Below is a collapsible section that allows you to see the run time output. Do check them if you want to visualize what the product looks like!_</font>
+<font size=1><i>Below is a collapsible section that allows you to see the run time output. Do check them if you want to visualize what the product looks like!</i></font>
 
 <details>
-  <summary> Expected output in run window (Click to expand!)</summary>
-
-````
+<summary> Expected output in run window (Click to expand!)</summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
 List Out All Commands: help
-Adding Expense: add_ex d/DESCRIPTION a/AMOUNT
+Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Expense: del_ex i/INDEX
 Listing Expense: list_ex
 Show Total Expense: total_ex
 Show Total Expense between 2 dates: btw_ex s/START_DATE e/END_DATE
-Adding Income: add_in d/DESCRIPTION a/AMOUNT
+Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Income: del_in i/INDEX
 Listing Income: list_in
 Show Total Income: total_in
@@ -82,11 +89,14 @@ To Find Using Date: find YYYY-MM-DD
 To Find Based On Keyword: find KEYWORD
 To Display Total Balance: balance
 Show Total Income between 2 dates: btw_in s/START_DATE e/END_DATE
+To Set Budgets: set_budget c/CATEGORY a/AMOUNT
+To Check Budgets: check_budget c/CATEGORY
+To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
+To View Your Yearly Report: show_graph
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
-
 <br>
 
 ### Create expense entry: `add_ex`
@@ -103,16 +113,14 @@ Examples:
 - `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
 
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
-[E] KFC lunch - $10.20 (19 Oct 2021)
+[E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
-
 <br>
 
 ### Delete expense entry: `del_ex`
@@ -129,38 +137,34 @@ Examples:
 - `del_ex i/1` Deletes the 1st entry from the expense list.
 
 <details>
-  <summary> Expected output in run window </summary>
-
+<summary> Expected output in run window </summary>
+<br>
 Before deletion the expense list is as follows:
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] pillow - $500.00 (18 Oct 2021)
-2: [E] bought cookies - $500.00 (18 Jan 2021)
-3: [E] bought home - $555.00 (18 Jul 2021)
+1: [E] pillow - $500.00 (18/10/2021)
+2: [E] bought cookies - $500.00 (18/01/2021)
+3: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 <br>
-
 When command `del_ex i/1` is given, you get the following message:
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[E] pillow - $500.00 (18 Oct 2021)
+[E] pillow - $500.00 (18/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 <br>
 After deletion, we see that the list has removed the previous first entry!
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 <br>
 
@@ -171,22 +175,19 @@ Displays the previously added expense entries in the form of a list.
 Format: `list_ex`
 
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
-3: [E] bought car - $4777.00 (18 Jun 2021)
-4: [E] bought condo - $87654888878.00 (18 May 2021)
-5: [E] KFC lunch - $10.20 (19 Oct 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought car - $4777.00 (18/06/2021)
+4: [E] bought condo - $87654888878.00 (18/05/2021)
+5: [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
-
 <br>
 
 ### View total expense: `total_ex`
@@ -196,25 +197,23 @@ Displays the total amount of all expenses in your list.
 Format: `total_ex`
 
 <details>
-  <summary> Expected output in run window </summary>
-
-Here we have a simple expense list with three items:
-````
------------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $100.00 (18 Jan 2021)
-2: [E] bought home - $200.50 (18 Jul 2021)
-3: [E] bought car - $300.00 (18 Jun 2021)
------------------------------------------------------------------------------------------------------
-````
+<summary> Expected output in run window </summary>
 <br>
-
-If we give the command `total_ex`, it will display the total expenditure:
-````
+Here we have a simple expense list with three items:
+<pre>
+-----------------------------------------------------------------------------------------------------
+1: [E] bought cookies - $100.00 (18/01/2021)
+2: [E] bought home - $200.50 (18/07/2021)
+3: [E] bought car - $300.00 (18/06/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If we give the command <code>total_ex</code>, it will display the total expenditure:
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your total expense is: $600.50
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
 <br>
 
@@ -234,13 +233,12 @@ Examples:
 
 <details>
   <summary> Expected output in run window </summary>
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
-[I] lunch money - $1000.00 (19 Oct 2021)
+[I] lunch money - $1000.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 
 </details>
 <br>
@@ -259,38 +257,34 @@ Examples:
 - `del_in i/1` Deletes the 1st entry from the income list.
 
 <details>
-  <summary> Expected output in run window </summary>
-
+<summary> Expected output in run window </summary>
+<br>
 Before deletion the income list is as follows:
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a bank - $800.00 (18 Oct 2021)
-2: [I] rob a church - $300.00 (18 Nov 2021)
-3: [I] rob a car - $400.00 (18 Dec 2021)
+1: [I] rob a bank - $800.00 (18/10/2021)
+2: [I] rob a church - $300.00 (18/11/2021)
+3: [I] rob a car - $400.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 <br>
-
-When command `del_in i/1` is given, you get the following message:
-
-````
+When command <code>del_in i/1</code> is given, you get the following message:
+<pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[I] rob a bank - $800.00 (18 Oct 2021)
+[I] rob a bank - $800.00 (18/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 <br>
 After deletion, we see that the list has removed the previous first entry!
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 
 </details>
 <br>
@@ -302,19 +296,18 @@ Displays the previously added income entries in the form of a list.
 Format: `list_in`
 
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
-3: [I] rob a home - $500.00 (18 Sep 2021)
-4: [I] rob a child - $600.00 (18 Aug 2021)
-5: [I] lunch money - $1000.00 (19 Oct 2021)
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
+3: [I] rob a home - $500.00 (18/09/2021)
+4: [I] rob a child - $600.00 (18/08/2021)
+5: [I] lunch money - $1000.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 <br>
 
@@ -324,50 +317,48 @@ Displays the total amount of all income entries in your list.
 
 Format: `total_in`
 <details>
-  <summary> Expected output in run window </summary>
-
-Here we have a simple income list with three items:
-````
------------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18 Nov 2021)
-2: [I] rob a car - $400.00 (18 Dec 2021)
-3: [I] rob a home - $500.00 (18 Sep 2021)
------------------------------------------------------------------------------------------------------
-````
+<summary> Expected output in run window </summary>
 <br>
-
-If we give the command `total_in`, it will display the total income:
-````
+Here we have a simple income list with three items:
+<pre>
+-----------------------------------------------------------------------------------------------------
+1: [I] rob a church - $300.00 (18/11/2021)
+2: [I] rob a car - $400.00 (18/12/2021)
+3: [I] rob a home - $500.00 (18/09/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If we give the command <code>total_in</code>, it will display the total income:
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your total income is: $2800.00
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 <br>
 
-### Find entry using date: `find YYYY-MM-DD`
+### Find entry using date: `find DD/MM/YYYY`
 
 Finds and displays the income or expense entries recorded on the given date.
 
-Format: `find YYYY-MM-DD`
+Format: `find DD/MM/YYYY`
 
 - If the date given is not in the recognised format, it will be treated as a String and be passed into keyword search.
 
 Examples:
 
-- `find 2021-10-19` returns income and/or expense entries recorded on the given date.
+- `find 19/10/2021` returns income and/or expense entries recorded on the given date.
 
 <details>
-  <summary> Expected output in run window </summary>
-
-If you enter `find 2021-10-19`, it will find the entry recorded on that date:
-````
+<summary> Expected output in run window </summary>
+<br>
+If you enter <code>find 19/10/2021</code>, it will find the entry recorded on that date:
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
-[I] Birthday Money! - $200.00 (19 Oct 2021)
+[I] Birthday Money! - $200.00 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
 <br>
 
@@ -385,32 +376,30 @@ Examples:
 - `find FOOD` returns income and/or expense entries that contain the keyword `FOOD` in their description or categories.
 
 <details>
-  <summary> Expected output in run window </summary>
-
-If you wish to search based on category, for e.g. all `food` expenses: 
-
-- Give the command `find food` and it will return the following:
-````
+<summary> Expected output in run window </summary>
+<br>
+If you wish to search based on category, for e.g. all <code>food</code> expenses:
+<br>
+<ul><li>Give the command <code>find food</code> and it will return the following:</li></ul>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!
 -----------------------------------------------------------------------------------------------------
-1: [E] KFC lunch - $10.20 (19 Oct 2021)
+1: [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
-````
-
-If you wish to search based on description, for e.g. all entries that contain the keyword `bought`:
-
-- Give the command `find bought` and it will return the following:
-````
+</pre>
+If you wish to search based on description, for e.g. all entries that contain the keyword <code>bought</code>:
+<ul><li>Give the command <code>find bought</code> and it will return the following:</li></ul>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all your findings!
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18 Jan 2021)
-2: [E] bought home - $555.00 (18 Jul 2021)
-3: [E] bought car - $4777.00 (18 Jun 2021)
-4: [E] bought condo - $87654888878.00 (18 May 2021)
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought car - $4777.00 (18/06/2021)
+4: [E] bought condo - $87654888878.00 (18/05/2021)
 -----------------------------------------------------------------------------------------------------
-````
+</pre>
 </details>
 <br>
 
@@ -421,14 +410,11 @@ Shows the net balance you have leftover from your expenses and incomes.
 Format: `balance`
 <details>
   <summary> Expected output in run window </summary>
-
-````
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your current balance is: $-87654891720.20
 -----------------------------------------------------------------------------------------------------
-````
-Wow, you are way too poor.... :(
-
+</pre>
 </details>
 <br>
 
@@ -439,19 +425,18 @@ Shows the total expense you had accumulated during a given time period.
 Format: `btw_ex s/START_DATE e/END_DATE`
 
 Examples:
-- `btw_ex s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.
 <details>
-  <summary> Expected output in run window </summary>
-
-If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
-
-- Give the command `btw_ex s/2021-07-10 e/2021-10-23`:
-````
+<summary> Expected output in run window </summary>
+<br>
+If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021
+<br>
+<ul><li>Give the command <code>btw_ex s/10/07/2021 e/23/10/2021</code></li></ul>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
 <br>
 
@@ -465,19 +450,17 @@ Format: `btw_in s/START_DATE e/END_DATE`
 - `START_DATE` & `END_DATE` have to be valid and non-empty
 
 Examples: 
-- `btw_in s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.</li></ul>
 <details>
-  <summary> Expected output in run window </summary>
-
-If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
-
-- Give the command `btw_in s/2021-07-10 e/2021-10-23`:
-````
+<summary> Expected output in run window </summary>
+<br>
+If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021
+<ul><li>Give the command <code>btw_in s/10/07/2021 e/23/10/2021</code></li></ul>
+<pre>
 -----------------------------------------------------------------------------------------------------
 Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
 <br>
 
@@ -488,19 +471,68 @@ Clears all the income and expense entries StonksXD is currently keeping track of
 Format: `clear_all_entries`
 
 <details>
-  <summary> Expected output in run window </summary>
-
+<summary> Expected output in run window </summary>
+<br>
 If you wish to clear all your entries and start afresh:
-
-- Give the command `clear_all_entries`:
-````
+<br>
+<ul><li> Give the command <code>clear_all_entries</code></li></ul>
+<pre>
 -----------------------------------------------------------------------------------------------------
 All your entries have been cleared!
 -----------------------------------------------------------------------------------------------------
-````
-
+</pre>
 </details>
 <br>
+
+### Set budget: `set_budget`
+
+- TODO
+
+### Check budget: `check_budget`
+
+- TODO
+
+### Set threshold: `set_threshold`
+
+- TODO
+
+### View Yearly Report: `show_graph`
+
+Shows the monthly breakdown of the finances in a Yearly Report which also
+includes current month spending and earnings.
+
+Format: `show_graph`
+
+<details>
+<summary> Expected output in run window </summary>
+<pre>
+show_graph
+-----------------------------------------------------------------------------------------------------
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x                                                                                                  x
+x   Account Balance: $-398.2                                               Legend:                 x
+x   Current month (OCTOBER) total expense: $410.20                               # is Expense      x
+x   Current month (OCTOBER) total income: $0.00                                  o is Income       x
+x   Your Yearly Report                                                                             x
+x ------------------------------------------------------------------------------------------------ x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                           #                      x
+x                                                                           #                      x
+x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
+x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
+
 
 ### Terminate program: `end`
 
@@ -508,9 +540,8 @@ Exits the program when the user is done.
 
 Format: `end`
 <details>
-  <summary> Expected output in run window </summary>
-
-````
+<summary> Expected output in run window </summary>
+<pre>
 -----------------------------------------------------------------------------------------------------
 ██████  ██    ██ ███████        ██  
 ██   ██  ██  ██  ██          ██  ██ 
@@ -518,8 +549,7 @@ Format: `end`
 ██   ██    ██    ██          ██  ██ 
 ██████     ██    ███████        ██ 
 -----------------------------------------------------------------------------------------------------
-
-````
+</pre>
 </details>
 
 
@@ -527,27 +557,32 @@ Format: `end`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Your data is saved in 2 `.csv` files called `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. To transfer the data, make a copy of these files and paste them in the same directory as the `.jar` file on your new machine. 
+
+**Q**: What if my program terminates unexpectedly?
+
+**A**: All data will be stored inside the respective `.csv` files.
 
 ## Command Summary
 
-| Action | Format, Examples |
-| ------------ | ------------- |
-| View all possible commands | `help` |
-| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT` <br /> e.g., `add_ex d/KFC lunch a/10.20` |
-| Delete expense entry | `del_ex i/INDEX` <br /> e.g., `del_ex i/3` |
-| List all expense entries | `list_ex` |
-| View total expense | `total_ex` |
-| Create income entry | `add_in d/DESCRIPTION a/AMOUNT` <br /> e.g., `add_in d/work a/3200` |
-| Delete income entry | `del_in i/INDEX` <br /> e.g., `del_in i/2` |
-| List all income entries | `list_in` |
-| View total income | `total_in` |
-| Find entry using date | `find YYYY-MM-DD` <br /> e.g., `find 2021-10-19` |
-| Find entry using keyword | `find KEYWORD` <br /> e.g., `find FOOD` |
-| View total balance | `balance` |
-| Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` <br /> e.g., `btw_ex s/2021-07-10 e/2021-10-23` |
-| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` <br /> e.g., `btw_in s/2021-07-10 e/2021-10-23` |
-| Clear all entries | `clear_all_entries` |
-| To terminate program | `end` |
+| Action | Format | Examples |
+| ------------ | ------------- | ------------- |
+| View all possible commands | `help` | - |
+| Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`  |  `add_ex d/KFC lunch a/10.20 c/food` |
+| Delete expense entry | `del_ex i/INDEX` | `del_ex i/3` |
+| List all expense entries | `list_ex` | - |
+| View total expense | `total_ex` | - |
+| Create income entry | `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`  | `add_in d/work a/3200 c/salary` |
+| Delete income entry | `del_in i/INDEX` | `del_in i/2` |
+| List all income entries | `list_in` | - |
+| View total income | `total_in` | - |
+| Find entry using date | `find YYYY-MM-DD` | `find 19/10/2021` |
+| Find entry using keyword | `find KEYWORD` | `find food` |
+| View total balance | `balance` | - |
+| Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` | `btw_ex s/10/07/2021 e/23/10/2021` |
+| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
+| Clear all entries | `clear_all_entries` | - |
+| View Yearly Report | `show_graph` | - |
+| To terminate program | `end` | - |
 
 

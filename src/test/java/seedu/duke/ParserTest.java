@@ -22,16 +22,19 @@ import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.utility.BudgetManager;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class ParserTest {
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String DATA_SEPARATOR = ",";
-    
+    private static final int TOTAL_EXPENSE_CATEGORY = 7;
+
     @Test
     public void parseCommand_validHelpCommand_returnHelpCommand() {
         Parser testParser = new Parser();
@@ -242,5 +245,30 @@ public class ParserTest {
         assertThrows(InvalidIncomeDataFormatException.class, 
             () -> testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR 
                     + "SALARY" + "|" + "11/11/2121"));
+    }
+    
+    @Test
+    public void convertBudgetSettingsToData_validBudget_validData() {
+        BudgetManager testBudgetManager = new BudgetManager();
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            testBudgetManager.setBudget(12, category);
+        }
+        Parser testParser = new Parser();
+        String testData = testParser.convertBudgetSettingsToData(testBudgetManager);
+        assertEquals(testData, "12.0,12.0,12.0,12.0,12.0,12.0,12.0");
+        
+    }
+    
+    @Test
+    public void convertDataToBudgetSettings() {
+        String testData = "12.0,12.0,12.0,12.0,12.0,12.0,12";
+        Parser parser = new Parser();
+        ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
+        for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
+            assertEquals(12, testBudgets.get(i));
+        }
     }
 }
