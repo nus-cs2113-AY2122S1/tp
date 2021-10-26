@@ -53,7 +53,7 @@ public class Parser {
         Matcher m = p.matcher(input);
         m.find();
         args.put(null,m.group());
-        while(m.find()) {
+        while (m.find()) {
             String[] currentArg = m.group().split("/", 2);
             args.put(currentArg[0].strip(), currentArg[1].strip());
         }

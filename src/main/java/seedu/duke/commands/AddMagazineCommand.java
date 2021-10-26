@@ -53,11 +53,11 @@ public class AddMagazineCommand extends Command {
 
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
-        if(checkMissingArgs()) {
+        if (checkMissingArgs()) {
             ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
             return;
         }
-        if(checkAdditionalArgs()) {
+        if (checkAdditionalArgs()) {
             ui.print(WARN_ADDITIONAL_ARGS);
         }
         try {

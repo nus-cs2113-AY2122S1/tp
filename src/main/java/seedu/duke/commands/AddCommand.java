@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
-        switch(args.get(null)) {
+        switch (args.get(null)) {
         case AddAudioCommand.COMMAND_WORD:
             new AddAudioCommand(args).execute(ui, catalogue);
             break;
