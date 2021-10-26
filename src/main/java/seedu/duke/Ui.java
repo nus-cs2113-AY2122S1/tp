@@ -58,11 +58,13 @@ public class Ui {
     }
 
     public static String getLineBreak() {
-        return "______________________________________________________________________";
+        return "_____________________________________________________________________________________________"
+                + "_______________";
     }
 
     public static void printLineBreak() {
-        System.out.println("______________________________________________________________________");
+        System.out.println("________________________________________________________________________________________"
+                + "____________________");
     }
 
     public static String getInvalidCommandMessage() {
@@ -109,7 +111,7 @@ public class Ui {
     }
 
     public static String getMemberAddedMessage(Member member) {
-        return String.format("Member added: %s\n", member.getName());
+        return String.format("Member added: %s", member.getName());
     }
 
     public static void printGreetingMessage() {
@@ -208,6 +210,19 @@ public class Ui {
                 + System.lineSeparator()
                 + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
+    }
+
+    public static void printUpdatedEvent(Event event) {
+        System.out.println("Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: ");
+        for (Task t : event.getTaskList()) {
+            printTask(t);
+        }
+        //printList(event.getTaskList());
     }
 
 }

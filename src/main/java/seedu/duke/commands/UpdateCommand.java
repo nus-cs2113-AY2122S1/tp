@@ -52,7 +52,6 @@ public class UpdateCommand extends Command {
                     return new CommandResult(executeResult);
                 }
                 String[] userUpdates = userInput.trim().split(">");
-
                 CommandResult result = implementUpdates(userUpdates);
                 if (result != null) {
                     return result;
@@ -72,7 +71,7 @@ public class UpdateCommand extends Command {
 
     private CommandResult implementUpdates(String[] userUpdates) throws DukeException {
         for (String update : userUpdates) {
-            String[] attribute = update.trim().split("/");
+            String[] attribute = update.trim().split("/+");
             if (update.contains(TITLE_FLAG)) {
                 eventToBeUpdated.setTitle(attribute[1]);
             } else if (update.contains(DATE_FLAG)) {
@@ -84,9 +83,10 @@ public class UpdateCommand extends Command {
             } else if (update.contains(DESCRIPTION_FLAG)) {
                 eventToBeUpdated.setDescription(attribute[1]);
             } else if (update.contains(TASK_FLAG)) {
+                attribute[1] = attribute[1].replaceAll("\\s", "");
                 updateTask(attribute[1]);
             } else {
-                return new CommandResult("invalid Update, you have returned to the main page!");
+                return new CommandResult("Invalid update, you have returned to the main page!");
             }
         }
         return null;
@@ -108,7 +108,8 @@ public class UpdateCommand extends Command {
             } else if (update.contains(DESCRIPTION_FLAG)) {
                 taskToBeUpdated.setDescription(attribute[1]);
             } else if (update.contains(MEMBER_FLAG)) {
-                updateMember(taskToBeUpdated);
+                attribute[1] = attribute[1].replaceAll("\\s", "");
+                updateMember(attribute[1], taskToBeUpdated);
             } else {
                 System.out.println("invalid Command!");
             }
@@ -116,27 +117,34 @@ public class UpdateCommand extends Command {
         Ui.printLineBreak();
     }
 
-    private void updateMember(Task taskToBeUpdated) throws DukeException {
-        System.out.println("Please key in the update for the Members Name");
+    private void updateMember(String memberToBeUpdated, Task taskToBeUpdated) throws DukeException {
+        taskToBeUpdated.memberList.remove(Integer.parseInt(memberToBeUpdated) - 1);
+        Ui.printLineBreak();
         Ui.promptForMemberIndex();
         boolean isCorrectMember = false;
         while (!isCorrectMember) {
             try {
-                Ui.printMemberRoster();
-                Ui.printLineBreak();
-                int memberIndex = Integer.parseInt(Ui.readInput());
-                Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(taskToBeUpdated);
-                Duke.memberRoster.get(memberIndex - 1).sortTasks();
-                taskToBeUpdated.addMember(Duke.memberRoster.get(memberIndex - 1));
-                isCorrectMember = true;
+                isCorrectMember = isMemberUpdated(taskToBeUpdated);
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 throw new DukeException("This member does not exist. Please enter the index corresponding to "
                         + "the correct member. ");
             } catch (NumberFormatException e) {
+                Ui.printLineBreak();
                 System.out.println("Please enter the number corresponding to the member "
                         + "you want to assign this task to. ");
             }
         }
+    }
+
+    private boolean isMemberUpdated(Task taskToBeUpdated) {
+        Ui.printMemberRoster();
+        Ui.printLineBreak();
+        int memberIndex = Integer.parseInt(Ui.readInput());
+        Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(taskToBeUpdated);
+        Duke.memberRoster.get(memberIndex - 1).sortTasks();
+        taskToBeUpdated.addMember(Duke.memberRoster.get(memberIndex - 1));
+        return true;
     }
 
     private void updateTaskIntroMessage() {
@@ -166,7 +174,7 @@ public class UpdateCommand extends Command {
 
     private void postUpdateMessage() {
         System.out.println("Here is the updated Event");
-        Ui.printEvent(eventToBeUpdated);
+        Ui.printUpdatedEvent(eventToBeUpdated);
     }
 
 
