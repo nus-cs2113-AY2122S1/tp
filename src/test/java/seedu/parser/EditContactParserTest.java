@@ -45,4 +45,18 @@ class EditContactParserTest {
         assertArrayEquals(expectedResult, actualResult);
     }
 
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidFlag_expectInvalidFlagException() {
+        String testInput = "edit 1 -name akshaygivemarksplsss";
+        assertThrows(InvalidFlagException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_missingFlags_expectMissingArgEditException() {
+        String testInput = "edit 2";
+        assertThrows(MissingArgEditException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
 }
