@@ -1,6 +1,6 @@
 package seedu.traveller.worldmap;
 
-import seedu.traveller.exceptions.IllegalFlightFileException;
+import seedu.traveller.worldmap.exceptions.IllegalFlightFileException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
 import seedu.traveller.worldmap.exceptions.FlightDataNotFoundException;
 
@@ -72,7 +72,9 @@ public class DataLoader {
             for (int i = 0; i < numberOfCountries; i++) {
                 if (i == 0) {
                     rawInput = scanner.nextLine().split(separator, numberOfCountries);
-                    assert rawInput.length == numberOfCountries;
+                    if (rawInput.length == numberOfCountries) {
+                        throw new IllegalFlightFileException();
+                    }
                     loadCountries(rawInput, graphList);
                     continue;
                 }

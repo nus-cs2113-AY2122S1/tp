@@ -99,6 +99,7 @@ public class SaveLoader {
 
     private void createSave() throws IOException {
         File save = new File(filePath);
+        save.getParentFile().mkdirs();
         save.createNewFile();
     }
 }

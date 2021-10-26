@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.exceptions.TravellerException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +25,7 @@ public class DayTest {
     }
 
     @Test
-    public void deleteDay_success() {
+    public void deleteDay_success() throws TravellerException {
         Item item1 = new Item("7-9pm", "Eat dinner");
         Item item2 = new Item("12am", "See northern lights");
         day.addItem(item1);

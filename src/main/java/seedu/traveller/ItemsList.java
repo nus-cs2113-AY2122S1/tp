@@ -1,5 +1,9 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.DayNotFoundException;
+import seedu.traveller.exceptions.ItemNotFoundException;
+import seedu.traveller.exceptions.TravellerException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -48,9 +52,13 @@ public class ItemsList {
         return items.get(itemNumber);
     }
 
-    public void deleteItem(int itemNumber) {
+    public void deleteItem(int itemNumber) throws TravellerException {
         logger.log(Level.INFO, "Deleted an item of index " + itemNumber + " from itemsList");
-        items.remove(itemNumber);
+        try {
+            items.remove(itemNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ItemNotFoundException(itemNumber);
+        }
     }
 
     public int getSize() {

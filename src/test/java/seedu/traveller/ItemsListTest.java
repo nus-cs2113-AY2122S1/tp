@@ -3,6 +3,7 @@ package seedu.traveller;
 import org.junit.jupiter.api.Test;
 
 import seedu.traveller.Item;
+import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ItemsListTest {
     }
 
     @Test
-    public void deleteDay_success() {
+    public void deleteDay_success() throws TravellerException {
         Item item1 = new Item("7-9pm", "Eat dinner");
         Item item2 = new Item("12am", "See northern lights");
         itemsList.addItem(item1);

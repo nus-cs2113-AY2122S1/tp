@@ -1,10 +1,10 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
-import java.util.List;
 
-//@@author Uxinnn
+
 public class Day {
     protected ItemsList itemsList;
 
@@ -20,7 +20,7 @@ public class Day {
         return itemsList.getItem(itemNumber);
     }
 
-    public void deleteItem(int itemNumber) {
+    public void deleteItem(int itemNumber) throws TravellerException {
         itemsList.deleteItem(itemNumber);
     }
 
