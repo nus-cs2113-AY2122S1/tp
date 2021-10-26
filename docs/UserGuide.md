@@ -80,13 +80,18 @@ help
 ____________________________________________________
 These are the commands I can currently carry out:
 	(intended action - command format)
-	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT u/UNITS e/EXPIRY
+	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
 	2. list all ingredients - list
-	3. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT u/UNITS e/EXPIRY
-	4. delete an ingredient - delete INDEX
-	5. view SITUS's current date - date
-	6. edit SITUS's current date - date yyyy-mm-dd
-	7. exit SITUS - exit
+	3. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
+	4. subtract an ingredient's stock - subtract n/INGREDIENT_NAME a/AMOUNT
+	5. delete an ingredient - delete INDEX
+	6. search ingredients by expiry - expire DATE
+	7. search ingredients by name - find INGREDIENT_NAMES
+	8. view alerts - alert ALERT_TYPE
+	9. set alert thresholds - set ALERT_TYPE VALUE
+	10. view SITUS's current date - date
+	11. edit SITUS's current date - date DATE (in yyyy-mm-dd format)
+	12. exit SITUS - exit
 ____________________________________________________
 ```
 
