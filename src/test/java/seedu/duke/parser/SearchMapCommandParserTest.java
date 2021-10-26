@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.Storage;
-import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchMapCommandParserTest {
 
-    private static Storage storage = new Storage(); 
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
     private static ModuleList moduleMasterList;

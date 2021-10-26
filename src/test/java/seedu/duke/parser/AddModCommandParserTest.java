@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.AddModCommand;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
