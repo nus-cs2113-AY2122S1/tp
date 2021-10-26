@@ -441,8 +441,6 @@ public class Parser {
             String distSeparator = " /dist ";
             int toIdx = userInput.indexOf(toSeparator);
             int distIdx = userInput.indexOf(distSeparator);
-            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
-            String endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
             String rawDist = userInput.substring(distIdx + DIST_LENGTH);
 
             try {
@@ -454,6 +452,8 @@ public class Parser {
             double dist = Double.parseDouble(rawDist);
             WorldMap.distanceNonZero(dist);
 
+            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            String endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
             assert !(dist < 0.1) : "distance should be more than 0.1.";
