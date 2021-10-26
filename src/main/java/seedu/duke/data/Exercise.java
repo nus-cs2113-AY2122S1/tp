@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author JMattChiam
+
 /**
  * Represents an exercise inside a workout.
  * It contains basic information of an exercise such as reps, sets and status.
@@ -14,22 +16,8 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
 public class Exercise {
     private static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
     protected String description;
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setSets(int sets) {
-        this.sets = sets;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
     protected int sets;
     protected int reps;
-
     protected Boolean isDone = false;
 
     public Exercise(String description, int sets, int reps) {
@@ -49,12 +37,24 @@ public class Exercise {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getSets() {
         return sets;
     }
 
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
+
     public int getReps() {
         return reps;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
     }
 
     public Boolean getIsDone() {

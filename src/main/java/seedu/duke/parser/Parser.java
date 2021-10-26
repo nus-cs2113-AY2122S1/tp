@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author qqkoh
+
 /**
  * To make sense of user commands by extracting keywords and descriptions.
  */
@@ -58,8 +60,6 @@ public abstract class Parser {
      * @return int[2] the indices of workout and exercise
      * @throws GetJackDException when workout or exercise indices are not valid
      */
-
-    //1, 1, crunches, 5 10 -> "1", "1", "crunches", "5 10"
     static int[] parseWorkoutAndExerciseIndex(String commandArgs, boolean isEdit) throws GetJackDException {
         String[] args = commandArgs.split(PARAMETER_SEPARATOR);
         if ((args.length < 2 && Command.workoutMode == 0) || args.length < 1) {
@@ -77,8 +77,8 @@ public abstract class Parser {
      * Given a string and a keyword, this method splits the string around the keyword into 2.
      *
      * @param input   String
-     * @param keyword keyword that we want to split the string around.
-     * @return String array of size 2, none of the elements in the array contain the keyword.
+     * @param keyword keyword that we want to split the string around
+     * @return String array of size 2, none of the elements in the array contain the keyword
      */
     static String[] splitCommandWordsAndArgs(String input, String keyword) {
         final String[] split = input.trim().split(keyword, 2);
@@ -93,9 +93,9 @@ public abstract class Parser {
     /**
      * Parses a string as an integer.
      *
-     * @param index String that we want to parse as an integer.
+     * @param index String that we want to parse as an integer
      * @return integer obtained from the String
-     * @throws GetJackDException if index is empty, or index cannot be parsed as integer.
+     * @throws GetJackDException if index is empty, or index cannot be parsed as integer
      */
     static int parseArgsAsIndex(String index) throws GetJackDException {
         if (index.isEmpty()) {
@@ -115,10 +115,10 @@ public abstract class Parser {
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
      * commandArgs passed in as [exercise description], [sets and reps], [workout index or name]
      *
-     * @param commandArgs user input without the command word.
+     * @param commandArgs user input without the command word
      * @param isEdit      whether this function was called for the EditExerciseParser or not
-     * @return string array containing workoutIndex, exerciseName, sets and reps.
-     * @throws GetJackDException if any of the above-mentioned arguments are empty.
+     * @return string array containing workoutIndex, exerciseName, sets and reps
+     * @throws GetJackDException if any of the above-mentioned arguments are empty
      */
     static String[] getExerciseArgs(String commandArgs, boolean isEdit) throws GetJackDException {
         if (!commandArgs.contains(PARAMETER_SEPARATOR)) {

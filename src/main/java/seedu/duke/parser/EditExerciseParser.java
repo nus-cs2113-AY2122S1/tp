@@ -8,6 +8,8 @@ import seedu.duke.exception.GetJackDException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//@@author KishorKumar11
+
 /**
  * Parses and processes input for the edit command.
  */
@@ -24,13 +26,13 @@ public class EditExerciseParser extends Parser {
 
     private Command prepareEditExercise(String commandArgs) {
         try {
-            int[] indices = parseWorkoutAndExerciseIndex(commandArgs,true);
+            int[] indices = parseWorkoutAndExerciseIndex(commandArgs, true);
             int exerciseIndex = indices[0];
             workoutIndex = indices[1];
 
             // String excluding the exerciseIndex and workoutIndex
             String[] params = commandArgs.split(PARAMETER_SEPARATOR);
-            int separatorIndex = (params.length > 3) ? 2 : 1; 
+            int separatorIndex = (params.length > 3) ? 2 : 1;
             ArrayList<String> paramsWithoutIndices = new ArrayList<>(Arrays.asList(params)
                     .subList(separatorIndex, params.length));
 

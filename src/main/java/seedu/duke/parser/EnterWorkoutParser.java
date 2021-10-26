@@ -5,6 +5,8 @@ import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.exception.GetJackDException;
 
+//@@author IshaaanVyas
+
 /**
  * Parses and processes input for the enter command.
  */
@@ -31,8 +33,7 @@ public class EnterWorkoutParser extends Parser {
             int workoutIndex = parseWorkoutIndex(commandArgs);
             return new EnterWorkoutCommand(workoutIndex);
         } catch (GetJackDException e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND
-                    + EnterWorkoutCommand.MESSAGE_USAGE);
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + EnterWorkoutCommand.MESSAGE_USAGE);
         }
     }
 

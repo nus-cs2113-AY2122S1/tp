@@ -9,15 +9,17 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author IshaaanVyas
+
 /**
  * To exit back to Main View.
  */
 public class ExitWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "back";
+    public static final String MESSAGE_SUCCESS = "Back to Main View";
     private static final String NL = System.lineSeparator();
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Go back to main view"
             + NL + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Back to Main View";
     private static final Logger LOGGER = Logger.getLogger(EnterWorkoutCommand.class.getName());
 
     /**

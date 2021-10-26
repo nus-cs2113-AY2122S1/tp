@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author IshaaanVyas
+
 /**
  * Represents a list of all workouts in the form of a ArrayList of Workout Objects (All workouts stored by user).
  * Adding, deleting and other operations related to workouts will be executed from here.
@@ -73,6 +75,8 @@ public class WorkoutList {
 
         return workouts.get(displayIndex - 1);
     }
+
+    //@@author jonathanmui4
 
     /**
      * Sorts Workouts according to deadlines with the workouts due earlier being top of the list. Workouts without

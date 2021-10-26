@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
 
+//@@author qqkoh
+
 /**
  * For adding a new exercise to a workout.
  */
@@ -76,7 +78,7 @@ public class AddExerciseCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
-    
+
     public int getWorkoutIndex() {
         return workoutIndex;
     }

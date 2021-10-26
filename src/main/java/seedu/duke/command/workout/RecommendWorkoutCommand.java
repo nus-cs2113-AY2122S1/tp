@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author KishorKumar11
+
 /**
  * To recommend workouts with exercises of a difficulty level provided by the user.
  */
@@ -70,10 +72,11 @@ public class RecommendWorkoutCommand extends Command {
             workouts.addWorkout(recommendedWorkout);
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
-
         }
         return new CommandResult(getRecommendedWorkouts(workoutLevel), true);
     }
+
+    //@@author qqkoh
 
     /**
      * Gets users recommend workouts based on the difficulty provided.

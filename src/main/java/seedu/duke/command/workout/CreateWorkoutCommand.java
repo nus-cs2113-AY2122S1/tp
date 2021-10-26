@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
 
+//@@author qqkoh
+
 /**
  * To create a new Workout.
  */
@@ -44,7 +46,7 @@ public class CreateWorkoutCommand extends Command {
      * Instantiates object and creates a new workout with deadline.
      *
      * @param description description of new workout.
-     * @param deadline deadline of new workout.
+     * @param deadline    deadline of new workout.
      */
     public CreateWorkoutCommand(String description, LocalDate deadline) {
         this.toCreateWithDeadline = new DeadlineWorkout(description, deadline);

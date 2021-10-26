@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import static seedu.duke.data.WorkoutList.LOGGER;
 
+//@@author IshaaanVyas
+
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.
  * It also contains a deadline set by the user.
@@ -16,7 +18,6 @@ import static seedu.duke.data.WorkoutList.LOGGER;
 public class Workout {
     protected final String workoutName;
     protected final ArrayList<Exercise> exercises;
-
 
     /**
      * Default Constructor.

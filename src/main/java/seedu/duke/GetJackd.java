@@ -13,6 +13,8 @@ import seedu.duke.ui.Ui;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+//@@author KishorKumar11
+
 /**
  * GetJack'd is an application used to help motivated individuals to achieve their fitness goals.
  *

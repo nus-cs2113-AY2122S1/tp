@@ -2,6 +2,8 @@ package seedu.duke.storage.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//@@author jonathanmui4
+
 public class ExerciseModel {
     private String description;
     private String sets;
