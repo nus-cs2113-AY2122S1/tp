@@ -115,7 +115,7 @@ public class AddParser extends Parser {
      */
     private static int getGoalIndex(String input) throws HaBitParserException {
         String[] parameters = splitInput(input);
-        String goalIndex = getAndCheckParameter(parameters, GOAL_INDEX_FLAG, ERROR_GOAL_INDEX_FORMAT);
+        String goalIndex = getAndCheckParameter(parameters, FLAG_GOAL_INDEX, ERROR_GOAL_INDEX_FORMAT);
         return stringToInt(goalIndex.substring(2), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
     }
 
@@ -127,7 +127,7 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If the name flag is absent, or used without fielding a name.
      */
     private static String getName(String[] parameters) throws HaBitParserException {
-        String name = getAndCheckParameter(parameters, NAME_FLAG, ERROR_NAME_FORMAT);
+        String name = getAndCheckParameter(parameters, FLAG_NAME, ERROR_NAME_FORMAT);
         return name.substring(FLAG_LENGTH);
     }
 
@@ -139,10 +139,10 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If the goal type flag is used without fielding a proper goal type.
      */
     private static GoalType getType(String[] parameters) throws HaBitParserException {
-        String flag = getParameter(parameters, GOAL_TYPE_FLAG);
+        String flag = getParameter(parameters, FLAG_GOAL_TYPE);
         if (flag == null) {
             return GoalType.DEFAULT;
-        } else if (flag.equals(GOAL_TYPE_FLAG)) {
+        } else if (flag.equals(FLAG_GOAL_TYPE)) {
             throw new HaBitParserException(ERROR_GOAL_TYPE_FORMAT);
         }
         return getGoalType(flag.substring(FLAG_LENGTH));
@@ -173,7 +173,7 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If the interval flag is used without fielding an interval, or non-integer interval.
      */
     private static int getInterval(String[] parameters) throws HaBitParserException {
-        String interval = getAndCheckParameter(parameters, INTERVAL_FLAG, ERROR_INTERVAL_FORMAT);
+        String interval = getAndCheckParameter(parameters, FLAG_INTERVAL, ERROR_INTERVAL_FORMAT);
         return stringToInt(interval.substring(FLAG_LENGTH), ERROR_INTERVAL_NON_INTEGER);
     }
 
@@ -273,8 +273,8 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If string fails to convert into a date.
      */
     private static Date getStartDate(String[] parameters) throws HaBitParserException {
-        String strStartDate = getParameter(parameters, START_DATE_FLAG);
-        if (strStartDate == null || strStartDate.equals(START_DATE_FLAG)) {
+        String strStartDate = getParameter(parameters, FLAG_START_DATE);
+        if (strStartDate == null || strStartDate.equals(FLAG_START_DATE)) {
             return new Date();
         }
         return stringToDate(strStartDate.substring(FLAG_LENGTH));
@@ -288,8 +288,8 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If string fails to convert into a date.
      */
     private static Date getEndDate(String[] parameters) throws HaBitParserException {
-        String strEndDate = getParameter(parameters, END_DATE_FLAG);
-        if (strEndDate == null || strEndDate.equals(END_DATE_FLAG)) {
+        String strEndDate = getParameter(parameters, FLAG_END_DATE);
+        if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_END_DATE_FORMAT);
         }
         return stringToDate(strEndDate.substring(FLAG_LENGTH));

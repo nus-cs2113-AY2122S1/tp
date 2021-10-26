@@ -11,12 +11,13 @@ public abstract class Parser {
     protected static final String LABEL_SYNTAX = "[a-zA-Z]/";
     protected static final String DATE_FORMAT = "ddMMyyyy";
 
-    protected static final String GOAL_INDEX_FLAG = "g/";
-    protected static final String NAME_FLAG = "n/";
-    protected static final String GOAL_TYPE_FLAG = "f/";
-    protected static final String INTERVAL_FLAG = "i/";
-    protected static final String START_DATE_FLAG = "s/";
-    protected static final String END_DATE_FLAG = "e/";
+    protected static final String FLAG_GOAL_INDEX = "g/";
+    protected static final String FLAG_NAME = "n/";
+    protected static final String FLAG_GOAL_TYPE = "f/";
+    protected static final String FLAG_INTERVAL = "i/";
+    protected static final String FLAG_START_DATE = "s/";
+    protected static final String FLAG_END_DATE = "e/";
+    protected static final String FLAG_HABIT_INDEX = "h/";
 
     /**
      * Splits the input into the various parameters.
