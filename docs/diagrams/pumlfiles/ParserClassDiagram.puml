@@ -8,26 +8,29 @@ BackgroundColor DarkOrchid
 ArrowColor Purple
 BorderColor Purple
 }
-
+package medbot.parser #DDDDDD {
 class "{abstract}\n Parser"
 class "{abstract}\n XYZCommandParser"
-class "{abstract}\n ParserUtils"
-class "{abstract}\n Command"
-class XYZCommand
-
-"{abstract}\n Command" <|- XYZCommand
+class "{abstract}\n ParserUtils" {
+    {static} preprocessInput(userInput: String): String
+    {static} getParameters(userInput: String): String
+    {static} updateMultipleAppointmentInformation(person: Person, attributeStrings: String[])
+    {static} updateMultiplePersonalInformation(person: Person, attributeStrings: String[])
+}
 
 "{abstract}\n Parser" ..> "{abstract}\n XYZCommandParser"
-
 "{abstract}\n XYZCommandParser" .> "{abstract}\n ParserUtils" : > uses
 
-"{abstract}\n XYZCommandParser" ..> XYZCommand : > returns
-
-
-enum ViewType {
-PATIENT_INFO
-SCHEDULER
-MEDICAL_STAFF_INFO
+note left of "{abstract}\n XYZCommandParser" : XYZCommandParser =\nPatientCommandParser/\nSchedulerCommandParser/\nStaffCommandParser
+note top of "{abstract}\n ParserUtils" : Only some key methods are listed*
 }
+
+class "{abstract}\n Command"
+
+"{abstract}\n Parser" <.up.MedBot
+"{abstract}\n Command" <|- XYZCommand
+"{abstract}\n XYZCommandParser" ..> XYZCommand :  > returns
+
+note right of XYZCommand : XYZCommand = PatientCommand/\nSchedulerCommand/StaffCommand
 
 @enduml
