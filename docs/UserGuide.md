@@ -111,7 +111,7 @@ Allows you to add a task, lesson or module to your list of tasks, lessons or mod
 
 > 💡 A task contains a title, the day of the week of the task, and an optional task information.
 
-Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}`
+Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 * `TITLE` refers to the title of the task you wish to create
 * `DAY_OF_THE_WEEK` can be any of the following, not case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day on which you want to do the task
@@ -137,7 +137,7 @@ in the list. The empty braces `[ ]` before the task title indicates that the tas
 section](#marking-a-task-as-done---done) on marking a task as done to change the completion status of the task. 
 
 ```
-$ add task CS2113 tP -d MON -i add documentation -p L
+$ add task CS2113 tP -d MON -p L -i add documentation
     _______________________________________________________________________________
          Noted. I've added this task:
            [ ] CS2113 tP (Monday)
@@ -269,6 +269,29 @@ $ list lesson tomorrow
 ```
 In this example, the current day is Tuesday and hence, there is one lesson on Wednesday, "cs2101 tutorial" from 10am to 
 12 pm with no attached meeting link.
+
+You can also choose to view tasks by priority with `list`.
+
+Format: `list task priority`
+
+```
+$ list task priority
+    _______________________________________________________________________________
+     Here are the tasks sorted by priority:
+     1. [ ] prepare for presentation (Wednesday)
+            Priority: L
+            Info: -
+     2. [X] math homework (Thursday)
+            Priority: M
+            Info: -
+     3. [ ] cs2113 tP (Friday)
+            Priority: H
+            Info: add documentation
+    _______________________________________________________________________________
+
+```
+As seen in this example, you can view your existing tasks sorted by priority, with low priority tasks shown at the top
+of the list and high priority tasks shown at the bottom.
 
 ```
 $ list module
