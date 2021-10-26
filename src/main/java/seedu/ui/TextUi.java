@@ -11,6 +11,8 @@ public abstract class TextUi {
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
 
     private static final String LINE = "____________________________________________________________\n";
+    public static final int GITHUB_INDEX = 1;
+    public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -195,6 +197,37 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void confirmDeleteFieldMessage(boolean[] hasDeletedDetail, Contact contact) {
+        String message = "Delete the following fields for " + contact.getName() + "?  (y/n)\n";
+        String fields = deletedFieldsGenerator(hasDeletedDetail, contact);
+        printDoubleLineMessage(message + fields);
+    }
+
+    public static void deleteFieldsMessage(Contact contact) {
+        String message = "The specified fields for " + contact.getName() + " have been deleted.";
+        printDoubleLineMessage(message);
+    }
+
+    public static String deletedFieldsGenerator(boolean[] hasDeletedDetail, Contact contact) {
+        StringBuilder output = new StringBuilder();
+        assert hasDeletedDetail.length == 7;
+        String[] contactDetails = contact.getContactStringArray();
+        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+            if (contactDetails[i] != null && hasDeletedDetail[i]) {
+                output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
+            }
+        }
+        if (output.toString().isEmpty()) {
+            return "";
+        }
+        return output.toString();
+    }
+
+    public static void noDeleteFields() {
+        String message = "The specified fields are already empty.\n" + "No fields will be deleted";
+        printDoubleLineMessage(message);
+    }
+
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
@@ -306,5 +339,4 @@ public abstract class TextUi {
         String message = "ConTech has successfully imported " + numberOfLines + " lines";
         printDoubleLineMessage(message);
     }
-
 }

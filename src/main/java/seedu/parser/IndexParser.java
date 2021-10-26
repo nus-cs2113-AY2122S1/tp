@@ -19,7 +19,7 @@ public class IndexParser {
 
 
     public static int getIndexFromInput(String userInput)
-            throws NumberFormatException, MissingArgException {
+            throws NumberFormatException, MissingArgException, IndexOutOfBoundsException {
         //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
         if (destructuredInputs.length <= COMD_WORD_LENGTH) {
@@ -38,9 +38,12 @@ public class IndexParser {
         if (significantIndex.equalsIgnoreCase(REMOVE_ALL_INDEX)) {
             return REMOVE_ALL_ID;
         }
-
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
-        return Integer.parseInt(significantIndex);
+        int index = Integer.parseInt(significantIndex);
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        return index;
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
