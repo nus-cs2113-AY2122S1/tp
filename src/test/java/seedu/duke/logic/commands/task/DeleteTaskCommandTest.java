@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author ptejasv
 class DeleteTaskCommandTest {
     @Test
     public void deleteTask_taskToDelete_taskDeleted() {
@@ -38,6 +39,7 @@ class DeleteTaskCommandTest {
         }
     }
 
+    //@@author richwill28
     @Test
     public void deleteTask_indexOutOfBounds_exceptionThrown() {
         TaskList taskList = new TaskList();

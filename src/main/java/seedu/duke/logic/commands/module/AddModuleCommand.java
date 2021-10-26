@@ -12,6 +12,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author ptejasv
 public class AddModuleCommand extends Command {
     private final String moduleCode;
 

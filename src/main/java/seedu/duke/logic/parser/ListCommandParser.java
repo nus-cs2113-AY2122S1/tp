@@ -15,6 +15,7 @@ import static seedu.duke.logic.parser.ParserUtil.isAll;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
+//@@author richwill28
 public class ListCommandParser {
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);
@@ -66,6 +67,7 @@ public class ListCommandParser {
         return new ListTaskCommand(userResponse.toLowerCase());
     }
 
+    //@@author Roycius
     private static Command parseListModuleCommand(String userResponse) throws ParseException {
         if (!userResponse.isBlank() && !isAll(userResponse) && !userResponse.equals("grade")) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);

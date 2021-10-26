@@ -9,6 +9,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author rebchua39
 public abstract class Command {
     public boolean isExit() {
         return false;

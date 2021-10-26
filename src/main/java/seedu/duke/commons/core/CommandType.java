@@ -1,5 +1,6 @@
 package seedu.duke.commons.core;
 
+//@@author richwill28
 public enum CommandType {
     ADD,
     ALL,

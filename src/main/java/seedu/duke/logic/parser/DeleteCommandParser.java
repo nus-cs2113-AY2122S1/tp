@@ -12,6 +12,7 @@ import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
+//@@author richwill28
 public class DeleteCommandParser {
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);
@@ -43,6 +44,7 @@ public class DeleteCommandParser {
         }
     }
 
+    //@@author ptejasv
     private static Command parseDeleteTaskCommand(String userResponse) throws ParseException {
         try {
             int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
@@ -52,6 +54,7 @@ public class DeleteCommandParser {
         }
     }
 
+    //@@author Roycius
     private static Command parseDeleteModuleCommand(String userResponse) throws ParseException {
         try {
             String moduleCode = userResponse.toUpperCase();

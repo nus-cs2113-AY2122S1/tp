@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author richwill28
 class ModuleListTest {
     @Test
     public void isEmpty_emptyList_true() {
@@ -39,6 +40,7 @@ class ModuleListTest {
         });
     }
 
+    //@@author rebchua39
     @Test
     public void calculateCap_gradeWithValidGradePoint_expectedCap() {
         try {
