@@ -270,10 +270,10 @@ Times set successfully.
 
 Finds recipes by their attributes, e.g. time needed, calories etc.
 
-#### Format: `find /ATTRIBUTE VALUE`
+#### Format: `find /ATTRIBUTE VALUE ` 
 
 * The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
-* If the `ATTRIBUTE` of any recipe is not set, it will show up in the results.
+* If the `ATTRIBUTE` of any recipe is not set, Gordon will send you an error.
 
 #### Example of usage:
 
