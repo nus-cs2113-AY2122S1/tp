@@ -355,4 +355,8 @@ public class Ui {
         System.out.println("Finished allocating expense amount, but there are people involved that don't need to pay ");
         System.out.println();
     }
+
+    public static void AskUserToConfirm() {
+        System.out.print("There will be people involved that don't need to pay, are you sure? (y/n)");
+    }
 }
