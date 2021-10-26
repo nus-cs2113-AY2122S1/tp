@@ -23,26 +23,11 @@ public class AddCommand extends Command {
 
     /**
      * Sole Constructor.
-     *
      * @param args Arguments supplied by user in the add command
      */
     public AddCommand(HashMap<String, String> args) {
         this.args = args;
     }
-
-    /**
-     * Processes Add Command, including exceptions.
-     *
-     * @param ui Object that handles user IO
-     * @param catalogue Object that encapsulates the library catalogue
-     * @throws LibmgrException when user input is invalid
-     */
-//    public void handlesAddCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
-//        Item newItem = new Item(title, id, Status.AVAILABLE);
-//        catalogue.add(newItem);
-//        ui.print(ADD_MESSAGE, newItem);
-//    }
-
 
     /**
      * Executes add command.
@@ -58,6 +43,7 @@ public class AddCommand extends Command {
             new AddAudioCommand(args).execute(ui, catalogue);
             break;
         case COMMAND_ADD_BOOK:
+            new AddBookCommand(args).execute(ui, catalogue);
             break;
         case COMMAND_ADD_MAGAZINE:
             break;
@@ -66,12 +52,5 @@ public class AddCommand extends Command {
         default:
             ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
         }
-
-//        try {
-//            //handlesAddCommand(ui, catalogue);
-//
-//        } catch (LibmgrException e) {
-//            ui.print(e.getMessage());
-//        }
     }
 }
