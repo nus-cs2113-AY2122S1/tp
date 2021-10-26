@@ -9,11 +9,11 @@ import java.util.List;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
-public class SchedulerAppointmentList  {
+public class SchedulerAppointmentList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
-    private int lastId = 0;
+    private int lastId = 1;
 
     public SchedulerAppointmentList() {
 
@@ -67,9 +67,9 @@ public class SchedulerAppointmentList  {
      * @return a unique id to be allocated to an appointment
      */
     private int generateAppointmentId() {
-        do {
+        while (appointments.containsKey(lastId)) {
             lastId++;
-        } while (appointments.containsKey(lastId));
+        }
         return lastId;
     }
 

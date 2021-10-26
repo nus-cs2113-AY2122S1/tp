@@ -18,7 +18,7 @@ public abstract class PersonList {
 
     //Sorted to ensure that persons will always be printed in ascending order of ID when storage is manipulated
     private final SortedMap<Integer, Person> persons = new TreeMap<>();
-    private int lastId = 0;
+    private int lastId = 1;
 
     public int size() {
         return persons.size();
@@ -49,9 +49,9 @@ public abstract class PersonList {
      * @return a unique id to be allocated to a person
      */
     private int generatePersonId() {
-        do {
+        while (persons.containsKey(lastId)) {
             lastId++;
-        } while (persons.containsKey(lastId));
+        }
 
         return lastId;
     }
