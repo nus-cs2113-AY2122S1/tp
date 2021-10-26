@@ -5,6 +5,8 @@ import seedu.commands.AddIncomeCommand;
 import seedu.commands.CheckBudgetCommand;
 import seedu.commands.ClearAllEntriesCommand;
 import seedu.commands.Command;
+import seedu.commands.CurrencyConversionCommand;
+import seedu.commands.CurrencyTypes;
 import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
 import seedu.commands.ExitCommand;
@@ -29,9 +31,11 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.BlankCurrencyTypeException;
 import seedu.exceptions.BlankExpenseCategoryException;
 import seedu.exceptions.BlankIncomeCategoryException;
 import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseCategoryException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
@@ -42,6 +46,7 @@ import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeDescriptionException;
 import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.SameCurrencyTypeException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -105,6 +110,9 @@ public class Parser {
     private static final Pattern SET_THRESHOLD_ARGUMENT_FORMAT =
             Pattern.compile("t/(?<threshold>[^/]+)");
 
+    private static final Pattern CURRENCY_CONVERSION_FORMAT =
+            Pattern.compile("m/(?<currency>.+)");
+
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
     private static final String ADD_INCOME_KEYWORD = "add_in";
@@ -124,6 +132,7 @@ public class Parser {
     private static final String SET_BUDGET_KEYWORD = "set_budget";
     private static final String CHECK_BUDGET_KEYWORD = "check_budget";
     private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
+    private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
 
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
@@ -132,9 +141,8 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
-    
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
     /**
      * Parses user input into command for execution.
@@ -181,7 +189,7 @@ public class Parser {
     private boolean isGeneralRelatedCommand(String commandWord) {
         return (commandWord.equals(HELP_COMMAND_KEYWORD) || commandWord.equals(FIND_KEYWORD)
                 || commandWord.equals(EXIT_KEYWORD) || commandWord.equals(SHOW_GRAPH_KEYWORD)
-                || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD));
+                || commandWord.equals(CONVERT_CURRENCY_KEYWORD) || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD));
     }
 
     private boolean isBudgetRelatedCommand(String commandWord) {
@@ -248,6 +256,8 @@ public class Parser {
             return prepareExit(arguments);
         case SHOW_GRAPH_KEYWORD:
             return prepareShowGraph(arguments);
+        case CONVERT_CURRENCY_KEYWORD:
+            return prepareCurrencyConversion(arguments);
         case CLEAR_ALL_ENTRIES_KEYWORD:
             return prepareClearAllEntries(arguments);
         default:
@@ -301,6 +311,34 @@ public class Parser {
         return new FindCommand(arguments);
     }
 
+    private Command prepareCurrencyConversion(String arguments) {
+        final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
+        if (isMatch(matcher)) {
+            try {
+                CurrencyTypes currencyType = extractCurrencyType(matcher);
+                return new CurrencyConversionCommand(currencyType);
+            } catch (InputException e) {
+                return new InvalidCommand(e.getMessage());
+            }
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private CurrencyTypes extractCurrencyType(Matcher matcher)
+            throws BlankCurrencyTypeException, InvalidCurrencyTypeException, SameCurrencyTypeException {
+        String currencyType = matcher.group("currency").trim();
+        if (currencyType.isBlank()) {
+            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
+        }
+        switch (currencyType.toUpperCase()) {
+        case "USD":
+            return CurrencyTypes.USD;
+        case "SGD":
+            return CurrencyTypes.SGD;
+        default:
+            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
+        }
+    }
 
     private Command prepareHelp(String arguments) {
         if (arguments.isBlank()) {
@@ -320,6 +358,7 @@ public class Parser {
                 double expenseAmount = extractExpenseAmount(matcher);
                 String expenseDescription = extractExpenseDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
+                CurrencyTypes currencyType = extractCurrencyType(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
                 return new AddExpenseCommand(expense);
             } catch (InputException e) {
@@ -580,7 +619,7 @@ public class Parser {
                 + income.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
-    public Expense convertDataToExpense(String data) throws InputException, InvalidExpenseDataFormatException, 
+    public Expense convertDataToExpense(String data) throws InputException, InvalidExpenseDataFormatException,
             DateTimeParseException {
         final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
         if (matcher.matches()) {
@@ -601,7 +640,7 @@ public class Parser {
         return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
-    public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException, 
+    public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException,
             DateTimeParseException {
         final Matcher matcher = INCOME_DATA_FORMAT.matcher(data);
         if (matcher.matches()) {
@@ -713,12 +752,12 @@ public class Parser {
 
         return new SetThresholdCommand(thresholdValue);
     }
-    
+
     public String convertBudgetSettingsToString(BudgetManager budgetManager) {
-        return budgetManager.overallBudget.getLimit() + DATA_SEPARATOR + budgetManager.foodBudget.getLimit() 
-                + DATA_SEPARATOR + budgetManager.transportBudget.getLimit() + DATA_SEPARATOR 
-                + budgetManager.medicalBudget.getLimit() + DATA_SEPARATOR + budgetManager.billsBudget.getLimit() 
-                + DATA_SEPARATOR + budgetManager.entertainmentBudget.getLimit() + DATA_SEPARATOR 
+        return budgetManager.overallBudget.getLimit() + DATA_SEPARATOR + budgetManager.foodBudget.getLimit()
+                + DATA_SEPARATOR + budgetManager.transportBudget.getLimit() + DATA_SEPARATOR
+                + budgetManager.medicalBudget.getLimit() + DATA_SEPARATOR + budgetManager.billsBudget.getLimit()
+                + DATA_SEPARATOR + budgetManager.entertainmentBudget.getLimit() + DATA_SEPARATOR
                 + budgetManager.miscBudget.getLimit();
     }
 }

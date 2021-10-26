@@ -86,7 +86,12 @@ public class FinancialTracker {
         entries.addAll(getIncomes());
         return entries;
     }
-    
+
+    public double convertEntry(double value, double multiplier) {
+        assert value >= 0;
+        assert multiplier >= 0;
+        return (value) * (multiplier);
+    }
     
     public double getTotalExpense() {
         double totalExpense = 0;

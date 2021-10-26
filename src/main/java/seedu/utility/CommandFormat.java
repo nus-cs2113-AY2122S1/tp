@@ -26,9 +26,10 @@ public class CommandFormat {
     private static final String SET_THRESHOLD_FORMAT = "To Set Threshold Value for Reminders: "
             + "set_threshold t/THRESHOLD";
     private static final String GRAPH_FORMAT = "To View Your Yearly Report: show_graph";
+    private static final String CONVERT_CURRENCY_FORMAT = "To change entries into a different currency: set_curr/CURRENCY";
 
     public static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT,
             LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, INCOME_BETWEEN_FORMAT,
-            SET_BUDGET_FORMAT, CHECK_BUDGET_FORMAT, SET_THRESHOLD_FORMAT, GRAPH_FORMAT, END_FORMAT);
+            SET_BUDGET_FORMAT, CHECK_BUDGET_FORMAT, SET_THRESHOLD_FORMAT, GRAPH_FORMAT, CONVERT_CURRENCY_FORMAT, END_FORMAT);
 }

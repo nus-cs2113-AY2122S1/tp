@@ -20,6 +20,14 @@ public class Income extends Entry {
         this.category = category;
     }
 
+    public double getIncomeValue() {
+        return value;
+    }
+
+    public void setIncomeValue(double newValue) {
+        this.value = newValue;
+    }
+
     @Override
     public IncomeCategory getCategory() {
         return category;
