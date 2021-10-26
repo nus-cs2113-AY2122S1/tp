@@ -126,8 +126,8 @@ $ add task CS2113 tP -d MON
     _______________________________________________________________________________
      Noted. I've added this task:
        [ ] CS2113 tP (Monday)
-            Info: -
             Priority: L
+            Info: -
      Now you have 2 tasks in the list.
     _______________________________________________________________________________
 ```
@@ -141,8 +141,8 @@ $ add task CS2113 tP -d MON -i add documentation -p L
     _______________________________________________________________________________
          Noted. I've added this task:
            [ ] CS2113 tP (Monday)
-                Info: add documentation
                 Priority: L
+                Info: add documentation
          Now you have 3 tasks in the list.
     _______________________________________________________________________________
 ```
@@ -210,11 +210,11 @@ $ list task
     _______________________________________________________________________________
      Here are the tasks in your list:
      1. [X] cs2113t tp (Wednesday)
-            Info: add documentation
             Priority: H
+            Info: add documentation
      2. [ ] prepare for presentation (Friday)
-            Info: -
             Priority: L
+            Info: -
     _______________________________________________________________________________
 ```
 This example lists out all 2 tasks. The first task in this list is marked as complete, as indicated by the `[X]` beside the
@@ -297,8 +297,8 @@ $ done task 2
     _______________________________________________________________________________
      Nice! I've marked this task as done: 
        [X] prepare for presentation (Friday)
-            Info: -
             Priority: L
+            Info: -
      Now you have 0 pending tasks.
     _______________________________________________________________________________
 ```
@@ -330,8 +330,8 @@ $ delete task 1
     _______________________________________________________________________________
      Ok. The following task has been deleted:
        [X] cs2113t tp (Wednesday)
-            Info: add documentation
             Priority: H
+            Info: add documentation
      Now you have 1 task(s) in the list.
     _______________________________________________________________________________
 ```
@@ -380,11 +380,11 @@ $ find task cs2113
     _______________________________________________________________________________
      Here are the matching tasks in your list:
      1. [X] cs2113tp (Wednesday)
-            Info: -
             Priority: L
+            Info: -
      2. [ ] cs2113t ip (Thursday)
-            Info: -
             Priority: L
+            Info: -
     _______________________________________________________________________________
 ```
 In this first example, there are 2 tasks in the list that match the keyword "cs2113t". You can see relevant information about them,
