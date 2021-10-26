@@ -24,8 +24,15 @@ import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.InvalidNumberOfDaysException;
 import seedu.traveller.exceptions.InvalidSearchFormatException;
+import seedu.traveller.exceptions.CountryNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
+import seedu.traveller.worldmap.Country;
+import seedu.traveller.worldmap.WorldMap;
+
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -350,11 +357,17 @@ public class Parser {
             int toIdx = userInput.indexOf(toSeparator);
             String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+
+            WorldMap.getCountry(startCountryCode);
+            WorldMap.getCountry(endCountryCode);
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
+
             command = new ShortestCommand("dist", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidSearchFormatException();
+            throw new InvalidShortestFormatException();
+        } catch (EmptyVertexException e) {
+            throw new CountryNotFoundException();
         }
         return command;
     }
@@ -373,11 +386,17 @@ public class Parser {
             int toIdx = userInput.indexOf(toSeparator);
             String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+
+            WorldMap.getCountry(startCountryCode);
+            WorldMap.getCountry(endCountryCode);
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
+
             command = new ShortestCommand("cost", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidSearchFormatException();
+            throw new InvalidShortestFormatException();
+        } catch (EmptyVertexException e) {
+            throw new CountryNotFoundException();
         }
         return command;
     }

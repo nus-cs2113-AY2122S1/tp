@@ -1,6 +1,7 @@
 package seedu.traveller.worldmap;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,13 @@ public class WorldMapTest {
     }
 
     @Test
-    public void getCountry_sin_success() {
+    public void getCountry_sin_success() throws EmptyVertexException {
         Country countrySin = WorldMap.getCountry("SIN");
         assertEquals(new Country("SIN", 0).toString(), countrySin.toString());
     }
 
     @Test
-    public void calcMinDistance_sinMly_success() {
+    public void calcMinDistance_sinMly_success() throws EmptyVertexException {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
 
@@ -38,7 +39,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinDistance_sinJpn_success() {
+    public void calcMinDistance_sinJpn_success() throws EmptyVertexException {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
         Country countryJpn = new Country("JPN", 3);
@@ -59,7 +60,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinDistance_jpnSin_success() {
+    public void calcMinDistance_jpnSin_success() throws EmptyVertexException {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
         Country countryJpn = new Country("JPN", 3);
@@ -82,7 +83,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void updateMinDistance_jpnSin_success() {
+    public void updateMinDistance_jpnSin_success() throws EmptyVertexException {
         WorldMap.printWorld();
         Country countrySin = WorldMap.getCountry("SIN");
         Country countryJpn = WorldMap.getCountry("JPN");
