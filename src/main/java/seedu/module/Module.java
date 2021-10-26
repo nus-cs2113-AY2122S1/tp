@@ -22,7 +22,7 @@ public class Module extends BaseModule {
     private String acadYear;
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
-    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
+    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"};
     private static final String[] SU_GRADES = {"S", "U", "CS", "CU"};
 
 
@@ -195,6 +195,18 @@ public class Module extends BaseModule {
             }
             return true;
         }
+    }
+
+    public String getExam(int sem) {
+        for (Semester semester : semesterData) {
+            if (semester.getSemester() == sem) {
+                if (semester.getExamDate() != null) {
+                    return String.format("(Exam: %s)", semester.getExamInfo());
+                }
+                break;
+            }
+        }
+        return "(No Exam)";
     }
 
     /**

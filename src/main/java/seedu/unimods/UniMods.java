@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.unimods;
 
 import seedu.command.Command;
 import seedu.exceptions.FetchException;
@@ -12,7 +12,7 @@ import seedu.user.Profile;
 
 import java.util.ArrayList;
 
-public class Duke {
+public class UniMods {
     private static String path = "data/Modules.json";
     private static String timetablePath = "data/timetable.json";
     public static Timetable timetable;
@@ -22,7 +22,7 @@ public class Duke {
     private static Profile profileInUse;
 
     public static void main(String[] args) {
-        new Duke().setup();
+        new UniMods().setup();
     }
 
     private void setup() {

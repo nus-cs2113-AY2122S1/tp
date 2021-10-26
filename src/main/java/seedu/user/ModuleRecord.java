@@ -6,6 +6,7 @@ import seedu.module.Module;
 import seedu.module.PrerequisiteTree;
 import seedu.module.UngradedModule;
 import seedu.ui.TextUi;
+import seedu.ui.TranscriptUi;
 
 import java.util.ArrayList;
 import java.util.SortedSet;
@@ -110,6 +111,7 @@ public class ModuleRecord {
         }
         if (denominator != 0) {
             cap = numerator / denominator;
+            cap = Math.round(cap * 100) / 100.0;
             return cap;
         }
         return 0.0;
@@ -216,5 +218,15 @@ public class ModuleRecord {
         return moduleCodes.contains(moduleCode);
     }
 
+    public void printGradedModuleInfo() {
+        for (int i = 0; i < gradedModules.size(); i++) {
+            TranscriptUi.printGradedModules(gradedModules.get(i));
+        }
+    }
 
+    public void printUngradedModuleInfo() {
+        for (int i = 0; i < ungradedModules.size(); i++) {
+            TranscriptUi.printUngradedModules(ungradedModules.get(i));
+        }
+    }
 }

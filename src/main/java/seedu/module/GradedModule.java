@@ -42,7 +42,7 @@ public class GradedModule extends BaseModule {
         case "F":
             return 0.0;
         default:
-            return 0;
+            return 0.0;
         }
     }
 

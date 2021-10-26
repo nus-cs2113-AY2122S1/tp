@@ -15,9 +15,10 @@ import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.StoreResultsCommand;
 import seedu.command.TimetableCommand;
+import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.flags.SearchFlags;
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
@@ -59,7 +60,11 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("show")) {
             command = parseShowCommand(text);
         } else if (lowerCaseText.startsWith("timetable")) {
-            command = new TimetableCommand(Duke.timetable);
+            boolean showUserItemsOnly = false;
+            if (lowerCaseText.contains("-u")) {
+                showUserItemsOnly = true;
+            }
+            command = new TimetableCommand(timetable, showUserItemsOnly);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
@@ -76,6 +81,8 @@ public class CommandParser {
             command = new CalculateCapCommand();
         } else if (lowerCaseText.startsWith("remove")) {
             command = parseRemoveCommand(text);
+        } else if (lowerCaseText.startsWith("transcript")) {
+            command = new TranscriptCommand();
         } else if (lowerCaseText.startsWith("semester")) {
             command = new ChangeSemesterCommand(timetable);
         } else {
@@ -181,7 +188,7 @@ public class CommandParser {
 
     private Command parseCheckCommand(String text) {
         String moduleToBeChecked = text.substring(CHECK_LENGTH).trim();
-        return new CheckCommand(moduleToBeChecked, Duke.getProfileInUse());
+        return new CheckCommand(moduleToBeChecked, UniMods.getProfileInUse());
     }
 
     /**
