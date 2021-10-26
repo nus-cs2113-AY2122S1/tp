@@ -6,13 +6,17 @@ public class HelpCommand extends Command {
     private static final String HELP_MESSAGE = "These are the commands I can currently carry out:\n"
             + "\t(intended action - command format)\n"
             + "\t1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY\n"
-            + "\t2. subtract an ingredient - subtract n/INGREDIENT_NAME a/AMOUNT\n"
-            + "\t3. list all ingredients - list\n"
-            + "\t4. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT e/EXPIRY\n"
+            + "\t2. list all ingredients - list\n"
+            + "\t3. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT e/EXPIRY\n"
+            + "\t4. subtract an ingredient's stock - subtract n/INGREDIENT_NAME a/AMOUNT\n"
             + "\t5. delete an ingredient - delete INDEX\n"
-            + "\t6. view SITUS's current date - date\n"
-            + "\t7. edit SITUS's current date - date yyyy-mm-dd\n"
-            + "\t8. exit SITUS - exit";
+            + "\t6. search ingredients by expiry - expire DATE\n"
+            + "\t7. search ingredients by name - find INGREDIENT_NAMES\n"
+            + "\t8. view alerts - alert ALERT_TYPE\n"
+            + "\t9. set alert thresholds - set ALERT_TYPE VALUE\n"
+            + "\t10. view SITUS's current date - date\n"
+            + "\t11. edit SITUS's current date - date DATE (in yyyy-mm-dd format)\n"
+            + "\t12. exit SITUS - exit";
 
     @Override
     public String run() {
