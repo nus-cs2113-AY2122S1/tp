@@ -22,8 +22,8 @@ To find out more information about the command, such as input format and paramet
 "create" : Creates a new workout
 "delete" : Deletes a workout
 "list" : Lists all your workouts
-"enter" : Enters a specific workout. Workout mode ON.
-"back" : Returns to main view. Workout mode OFF.
+"enter" : Enters a specific workout. Workout mode ON
+"back" : Returns to main view. Workout mode OFF
 "recommend" : Recommends workouts of a given difficulty
 "display" : Shows all the exercises in a specified workout
 "edit" : Edits a specific exercise in a specified workout
