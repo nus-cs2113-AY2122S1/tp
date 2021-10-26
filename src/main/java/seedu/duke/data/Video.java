@@ -59,7 +59,7 @@ public class Video extends Item {
      */
     @Override
     public String toString() {
-        return "[V]" + super.toString() + super.separator + getPublisher()
+        return "[V] " + super.toString() + super.separator + getPublisher()
                 + super.separator + getDuration();
     }
 }
