@@ -29,7 +29,7 @@ public abstract class Command {
     public static final String COMMAND_LIST_MARKS = "list_marks";
     public static final String COMMAND_AVERAGE_MARKS = "average_marks";
     public static final String COMMAND_MEDIAN_MARK = "median_mark";
-    public static final String COMMAND_SET_MARKS = "set_marks";
+    public static final String COMMAND_SET_MARKS = "set_mark";
     public static final String COMMAND_EDIT_MARK = "edit_mark";
     public static final String COMMAND_DELETE_MARK = "delete_mark";
     public static final String COMMAND_SORT_BY_SCORES = "sort_by_scores";
