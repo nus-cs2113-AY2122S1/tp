@@ -139,7 +139,7 @@ public class Ui {
     }
 
     public void printReadSave() {
-        System.out.println("\tNow reading save data.");
+        System.out.println("Now reading save data.");
     }
 
     public void printWriteSave() {
@@ -184,4 +184,7 @@ public class Ui {
                 + "\texit : Exits the program.");
     }
 
+    public void printReadSaveError(int lineNumber) {
+        System.out.println("Unable to read line " + lineNumber + ". Save data has been tampered with.");
+    }
 }

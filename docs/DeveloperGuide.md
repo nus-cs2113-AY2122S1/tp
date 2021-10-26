@@ -80,8 +80,8 @@ is then performed on this graph to obtain the shortest travel path from 1 countr
 {TODO: Add details}
 
 #### 1.1.4. DataLoader class
-The `DataLoader` class reads in data from *flightData/flights.txt* to create the vertexes and edges in `GraphList`.
-Its main function is the `readData` function which passes the relevant lines in *flights.txt* to either `loadCountries`
+The `DataLoader` class reads in data from *flightData/dist.txt* or *flightData/cost.txt* to create the vertexes and edges in `GraphList`.
+Its main function is the `readData` function which passes the relevant lines in *dist.txt* or *cost.txt* to either `loadCountries`
 or `loadDistances` to create vertexes or edges respectively.
 
 While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this number by
@@ -90,13 +90,16 @@ changing the variable `numberOfCountries` in the class.
 ![](documentationPics/dataSequenceDiagram.png)
 <div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
 
-The first line of *flights.txt* contains the 5 country codes, which are read added as vertexes.
+The first line of *dist.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as edges between the vertexes.
 
->![](documentationPics/tip.png) As *flights.txt* is read in a specific way, there are certain things to take note when modifying it.
+>![](documentationPics/tip.png) As *dist.txt* and *cost.txt* are both read in a specific way, there are certain things to take note when modifying it.
 >1. Country codes must only be 3 letters.
->2. Distances must be numbers as it will be parsed into a double.
+>2. Distances/Costs must be numbers as it will be parsed into a double.
 >3. **numberOfCountries** should be changed to the number of countries on the first line.
+> 
+> ![](documentationPics/warning.png) Invalid information that cannot be read by DataLoader will result in the disregard of the entire text file.
+> Please follow the format as stated above for [manual testing](#6-instructions-for-manual-testing).
 
 ### 1.2. Main Traveller
 The Main Traveller is the other of the 2 major components of the Traveller project.
@@ -169,6 +172,11 @@ The return strings of each trip, day and item will correspond to the command tha
 >![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
 > To read up more on what the `SaveLoader` class writes, take a look at the `getSaveX` functions from the `Trip` class
 > as shown in the diagram.
+> 
+> ![](documentationPics/warning.png) Invalid commands that are in *save.txt* will be disregarded and not be read/executed.
+> This may result in other following commands to become invalid as well. (Eg. A previous existing trip not being created due to an edited save.
+> Resulting in days/items belonging to that trip becoming invalid.) As *SaveLoader* writes *save.txt* based on the existing trips when Traveller is closed,
+> invalid commands in *save.txt* will be deleted.
 
 ## 2. Product Scope
 ### 2.1. Target User Profile
@@ -212,7 +220,7 @@ _{More to be added}_
 ## 6. Instructions for manual testing
 
 ###6.1 Data file
-The data file *flightData/flights.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+The data file *flightData/dist.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
 To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
 there is no flight between the two countries (no edge between the vertexes).
 
@@ -229,5 +237,5 @@ Element11 (Row 1, Column 1) is the distance from SIN to MLY (and vice versa).
 Element32 (Row 3, Column 2) is the distance from MLY to JPN (and vice versa).
 
 ###6.2 Save file
-The save file *save/save.txt* can be modified following the formatting stated [here](#125-saveloader-class). 
-Each line is a command which is executed to add a trip/days/items to the list.
+The save file *save/save.txt* can be modified following the formatting stated [here](#125-saveloader-class) and the corresponding command formats
+which can be found in our [UserGuide](https://ay2122s1-cs2113t-w13-1.github.io/tp/UserGuide.html).
