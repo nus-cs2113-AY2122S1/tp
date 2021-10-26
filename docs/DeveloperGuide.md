@@ -68,6 +68,7 @@ The UI component
 * Summarizes different parts of the program into callable methods.
 
 ### Storage
+#### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)
 <p align = "center">
 <img src="images/storage.png" width = "500" />
 </p>
@@ -79,6 +80,16 @@ The storage component can implement the below features:
 * Save both user's module mappings for each university and their selected NUS modules in text
   file and read them back into corresponding objects.
 
+The purpose of each class in the storage component, except the `Storage` class, is to handle a specific file. The `Storage` 
+class is used to link all the other classes. This is done by creating an object of other classes, to access all the necessary
+methods required.
+
+The classes `SelectedUniversityStorage` and `SelectedModuleStorage` are responsible for reading and updating the text files
+storing your selected university list and your selected module list. These classes inherit from the `UserStorage` class as the `loadFile` function
+is identical other than the file path.
+
+The classes `UniversityStorage` and `ModuleStorage` are responsible for extracting the Master University List and Master Module List
+from the CSV type files (`University.csv` and `modules.csv`) stored in the resources root.
 
 ### University and module related classes
 
@@ -170,8 +181,11 @@ a list of potential exchange Universities based on the users study plan, module 
 * *glossary item* - Definition
 * *Master University List* The list of all partner universities.
 * *Master Module List* - The list of all NUS modules available for mapping.
-* *Selected University List* - The list of partner universities the user selected.
-* *Selected Module List* - The list of modules the user selected.
+* *Selected University List* - The list of partner universities the user selected along with the user's selected module mappings
+                               for each university
+* *Selected Module List* - The list of NUS modules the user selected.
+* *CSV* - Comma-separated Values
+* *SEP* - Student Exchange Programme
 
 ## Instructions for manual testing
 
