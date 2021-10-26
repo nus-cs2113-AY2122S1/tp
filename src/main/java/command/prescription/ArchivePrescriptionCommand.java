@@ -3,7 +3,6 @@ package command.prescription;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Order;
 import inventory.Prescription;
 import inventory.Medicine;
 import utilities.parser.DateParser;
@@ -19,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author RemusTeo
+
 /**
  * Archive prescription based on user input given date.
  */
