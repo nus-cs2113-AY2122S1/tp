@@ -6,24 +6,22 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 import static seedu.typists.common.Utils.getWordLineFromStringArray;
 import static seedu.typists.common.Utils.getWordLines;
 
 public class TimeModeGame extends Game {
-    private static final Logger logger = Logger.getLogger("Foo");
-
-    protected final ArrayList<String[]> wordLines;
-    public ArrayList<String[]> userLines;
-
+    protected static final Logger logger = Logger.getLogger("Foo");
     protected int gameTime;
-    protected double realGameTime;
+    protected final ArrayList<String[]> wordLines;
+
+    public double realGameTime;
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {
         super();
         assert targetWordSet != null : "text passed into Time Game should not be null.";
         this.wordLines = getWordLines(targetWordSet, wordsPerLine);
         this.userLines = new ArrayList<>();
+        this.displayedLines = new ArrayList<>();
         this.gameTime = getGameTime();
     }
 
@@ -64,7 +62,9 @@ public class TimeModeGame extends Game {
                     realGameTime = (double) currTime / 1000;
                 } else {
                     try {
-                        ui.printLine(wordLines.get(i));
+                        String[] display = wordLines.get(i);
+                        ui.printLine(display);
+                        displayedLines.add(display);
                     } catch (IndexOutOfBoundsException e) {
                         logger.log(Level.WARNING, "no more content.");
                     }
@@ -77,6 +77,7 @@ public class TimeModeGame extends Game {
             handleSummary(wordLines, userLines, realGameTime, "Word-limited");
         }
     }
+
 
     public void updateUserLines(List<String> stringArray) {
         userLines = getWordLineFromStringArray(stringArray);
