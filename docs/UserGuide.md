@@ -13,6 +13,7 @@ efficiency at work by cutting down the time required to look up for various user
 
 * **[Quick Start](#start)**
 * **[Features](#features)**
+    * **[Contact flags : `-flag`](#flag)**
     * **[Viewing help : `help`](#help)**
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
@@ -48,6 +49,20 @@ efficiency at work by cutting down the time required to look up for various user
 
 <a name="features"></a>
 ## Features 
+
+<a name="flag"></a>
+### Contact flags: `-flag`
+When using commands such as `add`,`edit` and `search`, the user can specify details with the use of flags in the form `-FLAG`.
+
+ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill
+the fields. These `flags` include:
+- `-n`: for your contact's name
+- `-g`: for your contact's GitHub account username
+- `-l`: for your contact's LinkedIn handle
+- `-te`: for your contact's Telegram handle
+- `-tw`: for your contact's Twitter handle
+- `-e`: for your contact's email address
+
 
 <a name="help"></a>
 ### Viewing help: `help`
@@ -104,16 +119,9 @@ Adds a specified contact to the ConTech Book.
 
 Usage: `add -n NAME -g GITHUB -l LINKEDIN -te TELEGRAM -tw TWITTER -e EMAIL`
 
-- ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill 
-the fields. These `flags` include:
-  - `-n`: for your contact's name
-  - `-g`: for your contact's GitHub account username
-  - `-l`: for your contact's LinkedIn handle
-  - `-te`: for your contact's Telegram handle
-  - `-tw`: for your contact's Twitter handle
-  - `-e`: for your contact's email
 - ConTech is robust and allows you to specify your fields in any order.
 - The `-n` name field is the only compulsory field required to add a contact, the rest are optional.
+- Up to five other `FLAGS` and `DETAILS` can be specified
 - ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
 
 Expected outcome of usage:
@@ -136,7 +144,7 @@ ____________________________________________________________
 
 Lists all the saved contacts with the index and contact name.
 
-Usage: `list`
+Usage: `ls`
 * The indexes start from 0, this is done as computing professionals 
  are more familiar with index start from 0.
  
@@ -192,6 +200,8 @@ Usage: `edit INDEX -FLAG DETAIL`
 - Up to six `FLAGS` and `DETAILS` can be specified in any order
 - The index refers to the index number shown in the displayed contact list.
 - The index must be within the range of indexes displayed in the contact list (zero-based).
+- ConTech also has built-in duplicate checkers and will alert you if there is already a contact with the same details when editing.
+
 
 Expected outcome of usage: 
 ```
@@ -269,7 +279,7 @@ Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
 Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
-List all contacts | `list` | `list`
+List all contacts | `ls` | `ls`
 View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
 Delete contact fields| `<COMMAND>` | `<EXAMPLE>`
