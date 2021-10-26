@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 
-
 public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
@@ -101,7 +100,7 @@ public class Appointment extends ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + listItemId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
+        return "Appointment Id: " + listItemId + " Date/Time: " + getDateTimeString() + " Patient ID: "
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 

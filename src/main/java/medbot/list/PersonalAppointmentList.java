@@ -1,13 +1,13 @@
 package medbot.list;
 
+import medbot.Appointment;
+import medbot.exceptions.MedBotException;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
-
-import medbot.Appointment;
-import medbot.exceptions.MedBotException;
 
 public class PersonalAppointmentList {
     private static final String ERROR_APPOINTMENT_ID_NOT_SET = "Appointment ID is not set.";
@@ -98,11 +98,11 @@ public class PersonalAppointmentList {
     private String getAppointmentNotFoundErrorMessage(int dateTimeCode) {
         return "No appointment at : " + Appointment.formatDateTimeCode(dateTimeCode) + "found.";
     }
-    
+
     public List<Integer> listAppointments() {
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointments) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }
@@ -113,7 +113,7 @@ public class PersonalAppointmentList {
         NavigableSet<Appointment> appointmentsAfter = appointments.tailSet(referenceAppointment, true);
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsAfter) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }
@@ -124,7 +124,7 @@ public class PersonalAppointmentList {
         NavigableSet<Appointment> appointmentsBefore = appointments.headSet(referenceAppointment, true);
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsBefore) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }

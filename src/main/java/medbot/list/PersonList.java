@@ -63,9 +63,9 @@ public abstract class PersonList extends MedBotList {
      * @return a String containing the person's information
      * @throws MedBotException if there is no person with that id
      */
-    public String getPersonName(int personId) throws MedBotException {
+    public String getPersonInfo(int personId) throws MedBotException {
         checkPersonExists(personId);
-        return persons.get(personId).getName();
+        return persons.get(personId).toString();
     }
 
     /**
@@ -75,9 +75,9 @@ public abstract class PersonList extends MedBotList {
      * @return a String containing the person's information
      * @throws MedBotException if there is no person with that id
      */
-    public String getPersonInfo(int personId) throws MedBotException {
+    public String getPersonName(int personId) throws MedBotException {
         checkPersonExists(personId);
-        return persons.get(personId).toString();
+        return persons.get(personId).getName();
     }
 
     /**
@@ -233,10 +233,10 @@ public abstract class PersonList extends MedBotList {
     }
 
     /**
-     * Returns a List containing the appointmentIds of the appointments of the person with the specified personId.
+     * Returns a String containing the information of the appointments of the person with the specified personId.
      *
      * @param personId the id of the person whose appointments will be listed
-     * @return a List of appointmentIds belonging to the specified person
+     * @return a String containing the information of the person's appointments
      * @throws MedBotException if there is no person with the specified personId
      */
     public List<Integer> listAppointments(int personId, FilterType filterType, int dateTimeCode)
@@ -318,6 +318,5 @@ public abstract class PersonList extends MedBotList {
     public int getLastId() {
         return lastId;
     }
-
 
 }

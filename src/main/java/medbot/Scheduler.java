@@ -1,7 +1,5 @@
 package medbot;
 
-import java.util.LinkedList;
-
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
@@ -9,6 +7,7 @@ import medbot.list.SchedulerAppointmentList;
 import medbot.person.Person;
 import medbot.utilities.FilterType;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Scheduler {
@@ -363,7 +362,7 @@ public class Scheduler {
         Appointment appointment = schedulerAppointmentList.getAppointment(appointmentId);
         String patientName = patientList.getPersonName(appointment.getPatientId());
         String staffName = medicalStaffList.getPersonName(appointment.getMedicalStaffId());
-        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getAppointmentId())
+        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getListItemId())
                 + VERTICAL_LINE_SPACED + appointment.getDateTimeString()
                 + VERTICAL_LINE_SPACED + formatPatientId(appointment.getPatientId())
                 + VERTICAL_LINE_SPACED + formatNameString(patientName)
