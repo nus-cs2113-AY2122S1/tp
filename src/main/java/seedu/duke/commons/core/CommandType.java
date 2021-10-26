@@ -8,14 +8,14 @@ public enum CommandType {
     EXIT,
     FIND,
     GRADE,
+    HELP,
     INVALID,
     LESSON,
     LIST,
     MODULE,
-    SET,
-    TASK,
     MODULEINFO,
-    HELP;
+    SET,
+    TASK;
 
     /**
      * Determines the correct command type from the input parameter.

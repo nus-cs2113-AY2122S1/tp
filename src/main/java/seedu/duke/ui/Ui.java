@@ -83,23 +83,100 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    /**
-     * Displays a list of possible input commands and link to user guide.
-     */
+//    /**
+//     * Displays a list of possible input commands and link to user guide.
+//     */
+//    public void printHelpMessage() {
+//        System.out.print(LINE);
+//        System.out.println(PADDING + "Here is a list of possible commands:");
+//        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}");
+//        System.out.println(PADDING + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}");
+//        System.out.println(PADDING + "add module [MODULE_CODE]");
+//        System.out.println(PADDING + "list [task/lesson/module]");
+//        System.out.println(PADDING + "done [INDEX]");
+//        System.out.println(PADDING + "delete [task/lesson/module] [INDEX]");
+//        System.out.println(PADDING + "find [task/lesson] [KEYWORD]");
+//        System.out.println(PADDING + "moduleinfo [MODULE_CODE]");
+//        System.out.println(PADDING + "exit");
+//        System.out.println(PADDING + "More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html");
+//        System.out.print(LINE);
+//    }
+
     public void printHelpMessage() {
         System.out.print(LINE);
-        System.out.println(PADDING + "Here is a list of possible commands:");
-        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}");
-        System.out.println(PADDING + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}");
-        System.out.println(PADDING + "add module [MODULE_CODE]");
-        System.out.println(PADDING + "list [task/lesson/module]");
-        System.out.println(PADDING + "done [INDEX]");
-        System.out.println(PADDING + "delete [task/lesson/module] [INDEX]");
-        System.out.println(PADDING + "find [task/lesson] [KEYWORD]");
-        System.out.println(PADDING + "moduleinfo [MODULE_CODE]");
-        System.out.println(PADDING + "exit");
-        System.out.println(PADDING + "More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html");
-        System.out.print(LINE);
+        System.out.println(PADDING
+                + "COMMAND   "
+                + "FORMAT                                  "
+                + "PURPOSE                                 ");
+        System.out.println(PADDING
+                + "--------  "
+                + "--------------------------------------  "
+                + "------------------------------          ");
+
+        System.out.println(PADDING
+                + "add      "
+                + "add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}"
+                + "To add a task to the list  ");
+        System.out.println(PADDING
+                + "      "
+                + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}"
+                + "To add a lesson to the list       ");
+        System.out.println(PADDING
+                + "      "
+                + "add module [MODULE_CODE]          "
+                + "To add a module to the list    ");
+
+        System.out.println(PADDING
+                + "delete  "
+                + "delete [task/lesson/module] [INDEX] "
+                + "To remove a task/lesson/module from the list             ");
+
+        System.out.println(PADDING
+                + "done  "
+                + "done task [INDEX] "
+                + "To mark a task as done                      ");
+
+        System.out.println(PADDING
+                + "exit     "
+                + "exit       "
+                + "To exit the app                         ");
+
+        System.out.println(PADDING
+                + "find      "
+                + "find [task/lesson] [KEYWORD]                                "
+                + "To find a task/lesson containing the keyword                ");
+
+        System.out.println(PADDING
+                + "list      "
+                + "list task {PERIOD/PRIORITY}                       "
+                + "To list all the tasks in the list                 ");
+        System.out.println(PADDING
+                + "list      "
+                + "list lesson {PERIOD}                       "
+                + "To list all the lessons in the list               ");
+        System.out.println(PADDING
+                + "list    "
+                + "list module                      "
+                + "To list all the modules in the list                        ");
+
+        System.out.println(PADDING
+                + "date      "
+                + "date YYYY-MM-DD                         "
+                + "To filter the tasks by date             ");
+        System.out.println(PADDING
+                + "find      "
+                + "find KEYWORD                            "
+                + "To filter the tasks by keyword          ");
+        System.out.println(PADDING
+                + "exit      "
+                + "exit                                    "
+                + "To exit the app                         ");
+        System.out.println();
+        System.out.println(PADDING + "Notes: [UPPER_CASE] -> Compulsory parameter");
+        System.out.println(PADDING + "       {UPPER_CASE} -> Optional parameter");
+        System.out.println(PADDING
+                + "       More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html");
+        System.out.println(LINE);
     }
 
     // Task-related methods
