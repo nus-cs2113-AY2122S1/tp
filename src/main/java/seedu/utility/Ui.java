@@ -358,7 +358,7 @@ public class Ui {
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
 
-        if(overallLimit > 0) {
+        if (overallLimit > 0) {
             double newLimit = limit + overallLimit - overallAmount;
             System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
                     month, overallAmount, overallLimit);
@@ -378,7 +378,7 @@ public class Ui {
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
 
-        if(overallLimit > 0) {
+        if (overallLimit > 0) {
             double newLimit = currAmount + overallLimit - overallAmount;
             System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
                     month, overallAmount, overallLimit);
