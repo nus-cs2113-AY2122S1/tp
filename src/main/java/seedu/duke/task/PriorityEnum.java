@@ -38,6 +38,7 @@ public enum PriorityEnum {
         return this == comparison;
     }
 
+    ////@@author APZH
     public boolean isHigherPriorityThan(PriorityEnum comparison) {
         return this.getValue() > comparison.getValue();
     }
