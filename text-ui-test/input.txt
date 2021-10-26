@@ -24,13 +24,13 @@ rm 9909
 add -n bory -g marcus
 add       -n   andre   -g ng-andre
 y
-list
+ls
 view 1
 add -n bory -g
 rm abc
 add -g lezongmun -n lezong
 add -g      github
-list
+ls
 view 3
 rm 0
 y
@@ -47,7 +47,7 @@ n
 n
     rm    1
 y
-list
+ls
 view abc
 add -n yusdhsdsd -g -sdj11222
 add -n yusdhsdsd -g sdj0-11222
@@ -78,7 +78,7 @@ search boris
 search -n bory
 search -g lezong
 search -zxca lezong
-list
+ls
 add -n ashraf -g ashrafjfr
 add -n ashraf -te ashrafjfr
 y
@@ -89,4 +89,11 @@ view 0
 import
 search -n lezai
 search -n badgithub
+ls
+rm all
+asdsad
+ls
+rm all
+y
+ls
 exit

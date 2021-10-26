@@ -7,9 +7,8 @@ import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class EditContactCommand extends Command {
     public static final int PERSONAL_CONTACT_INDEX = -1;
@@ -88,7 +87,7 @@ public class EditContactCommand extends Command {
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
-            return userEditConfirmation.equalsIgnoreCase("n");
+            return !userEditConfirmation.equalsIgnoreCase("y");
         }
         return false;
     }
@@ -102,10 +101,10 @@ public class EditContactCommand extends Command {
     }
 
     private boolean hasDuplicateField(String input, String saved) {
-        return stringCleaner(saved).equals(stringCleaner(input));
+        return cleanString(saved).equals(cleanString(input));
     }
 
-    private String stringCleaner(String input) {
+    private String cleanString(String input) {
         return input.replace(" ", "").toLowerCase();
     }
 
@@ -137,6 +136,10 @@ public class EditContactCommand extends Command {
             }
         }
         return contactDetails;
+    }
+
+    public int getContactIndex() {
+        return this.contactIndex;
     }
 
     //@@author ng-andre

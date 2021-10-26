@@ -5,10 +5,10 @@ import seedu.contact.ContactList;
 import java.util.ArrayList;
 
 public abstract class TextUi {
-    private static final String LOGO = "   _____         _______        _     \n"
+    private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
-            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      \n";
+            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
 
     private static final String LINE = "____________________________________________________________\n";
 
@@ -184,15 +184,26 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void confirmDeleteMessage(Contact deletedContact, int deletedIndex) {
+    public static void confirmDeleteContactMessage(Contact deletedContact, int deletedIndex) {
         String message = "Delete this contact?  (y/n)\n"
                 + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
+        printDoubleLineMessage(message);
+    }
+
+    public static void confirmDeleteAllMessage() {
+        String message = "Delete all of your contacts?  (y/n)";
         printDoubleLineMessage(message);
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void deleteAllContactsMessage(int listSize) {
+        String message = "ConTech has removed all " + listSize
+                + " of your contact(s).";
         printDoubleLineMessage(message);
     }
 
@@ -212,20 +223,26 @@ public abstract class TextUi {
                 + " Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER\n"
                 + " Note: Parameters need not be in order and are optional except for NAME.\n"
                 + " Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n\n"
-                + "list: Displays the name of all saved contacts.\n"
-                + " Example: list\n\n"
+                + "ls: Displays the name of all saved contacts.\n"
+                + " Example: ls\n\n"
                 + "edit: Edit any parameter in an existing contact.\n"
                 + " Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER\n"
                 + " Note: Parameters need not be in order and are optional except for INDEX.\n"
-                + " Example: edit 1 -e john.doe@email.com\n\n"
+                + "       \"me\" is used as the INDEX for personal contact.\n"
+                + " Examples: edit 1 -e john.doe@email.com\n"
+                + "           edit me -e john.doe@email.com\n\n"
                 + "view: Displays all details for index specified contact.\n"
                 + " Parameter: INDEX\n"
                 + " Note: Index starts from 0.\n"
                 + " Example: view 2\n\n"
+                + "me: Displays all details for personal contact.\n"
+                + " Example: me\n\n"
                 + "rm: Deletes the index specified contact.\n"
                 + " Parameter: INDEX\n"
                 + " Note: Index starts from 0.\n"
-                + " Example: rm 0\n\n"
+                + "       \"all\" is used as the INDEX to delete all contacts.\n"
+                + " Examples: rm 0\n"
+                + "           rm all\n\n"
                 + "search: Search for a contact containing a specified query.\n"
                 + " Note: Flags may be used to specify a detail type to search.\n"
                 + "       If no flag is specified, contact name is searched by default.\n"

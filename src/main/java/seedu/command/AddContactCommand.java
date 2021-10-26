@@ -90,7 +90,7 @@ public class AddContactCommand extends Command {
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, "add");
             String userAddConfirmation = UserInputTextUi.getUserConfirmation();
-            return userAddConfirmation.equalsIgnoreCase("n");
+            return !userAddConfirmation.equalsIgnoreCase("y");
         }
         return false;
     }

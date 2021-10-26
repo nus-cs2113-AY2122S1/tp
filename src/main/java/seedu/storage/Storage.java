@@ -17,7 +17,6 @@ public class Storage {
     private final ContactsDecoder contactsDecoder;
     private final ContactsEncoder contactsEncoder;
     public static final String SEPARATOR = ",";
-    private static boolean isFirstRun = false;
 
     public Storage(String contactFilePath, String personalContactFilePath, ContactsDecoder contactsDecoder,
                    ContactsEncoder contactsEncoder) {
@@ -29,10 +28,7 @@ public class Storage {
         this.contactsEncoder  = contactsEncoder;
     }
 
-    public static boolean getIsFirstRun() {
-        return isFirstRun;
-    }
-
+    //@@author lezongmun
     private boolean hasExistingPersonalContactFile() throws FileErrorException {
         try {
             if (!personalContactFile.exists()) {
@@ -48,10 +44,12 @@ public class Storage {
         return true;
     }
 
+    //@@author lezongmun
     private boolean hasEmptyExistingPersonalContactFile() {
         return personalContactFile.exists() && personalContactFile.length() == 0;
     }
 
+    //@@author
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {
@@ -74,9 +72,9 @@ public class Storage {
         return contactsDecoder.readContacts(contactFile, contactFilePath);
     }
 
+    //@@author lezongmun
     public Contact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile() || hasEmptyExistingPersonalContactFile()) {
-            isFirstRun = true;
             // get new contact's name
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
             addPersonalContactParser.collectPersonalDetails();
