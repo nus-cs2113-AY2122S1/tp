@@ -31,6 +31,7 @@ an overview of all the commands you can use with NUSBuddy.
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
   * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
   * [Finding Tasks or lessons by keyword - `find`](#finding-tasks-or-lessons-by-keyword---find)
+  * [Retrieving Module information - `moduleinfo`](#retrieving-module-information---moduleinfo)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
@@ -405,6 +406,30 @@ $ find lesson cs2113t
 In this example, there is one lesson with "cs2113t" in its title, "cs2113t lecture". You can view additional information
 about this lesson, specifically the day of the lesson, its start and end time, and attached meeting link. This matching
 lesson is scheduled for Friday from 2pm to 6pm and has no attached meeting link.
+
+### Retrieving Module information - `moduleinfo`
+
+Shows you a complete list of information regarding any module on NUSMods. You can find information such as the module title,
+modular credits, department, faculty, preclusion, pre-requisites and other details using this command.
+
+Format: `moduleinfo [MODULE_CODE]`
+* `MODULE_CODE` refers to the module code as per NUSMods, not case-sensitive
+
+Example usage:
+```
+$ moduleinfo cs2113t
+    _______________________________________________________________________________
+     CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+     Department: Computer Science
+     Faculty: Computing
+     Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+     Pre-requisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+     Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+    _______________________________________________________________________________
+```
+This example shows the information about the module CS2113T. The title of this module is "Software Engineering & 
+Object-Oriented Programming", and it bears 4 modular credits. It is under the Computer Science department and Computing
+faculty. You can also see the preclusion, pre-requisites and core requisites with additional notes.
 
 ### Exiting the program - `exit`
 
