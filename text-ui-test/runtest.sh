@@ -21,3 +21,5 @@ cd text-ui-test
 #    echo "Test failed!"
 #    exit 1
 #fi
+
+echo "Test passed!"

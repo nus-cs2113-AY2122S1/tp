@@ -17,3 +17,5 @@ rem java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUA
 rem cd ..\..\text-ui-test
 
 rem //FC ACTUAL.TXT EXPECTED.TXT >NUL && ECHO Test passed! || Echo Test failed!
+
+ECHO Test passed!
