@@ -35,6 +35,7 @@ The other core components of SEPlanner are:
 
 
 ### Command Implementation
+<img src="images/Package%20commands.png" width = "280"/>  
 
 Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
 
