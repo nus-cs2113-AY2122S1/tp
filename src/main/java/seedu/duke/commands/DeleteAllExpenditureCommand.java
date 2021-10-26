@@ -17,9 +17,9 @@ public class DeleteAllExpenditureCommand extends DeleteCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        int sizeBeforeDeletion = recordList.getExpenditureListSize(month);
+        int sizeBeforeDeletion = allRecordList.getExpenditureListSize(month);
         for (int i = 1; i <= sizeBeforeDeletion; i++) {
-            recordList.deleteExpenditure(1, month);
+            allRecordList.deleteExpenditure(1, month);
         }
         TextUi.showAllExpenditureDeletedMessage();
     }

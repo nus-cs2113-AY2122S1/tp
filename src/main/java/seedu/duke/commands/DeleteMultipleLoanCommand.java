@@ -22,8 +22,8 @@ public class DeleteMultipleLoanCommand extends DeleteCommand {
     @Override
     public void execute(boolean isLoadingStorage) {
         for (int i = startIndex; i <= endIndex; i++) {
-            TextUi.showMultipleLoanDeletedMessage(i, endIndex, recordList.getLoan(startIndex - 1, month));
-            recordList.deleteLoan(startIndex, month);
+            TextUi.showMultipleLoanDeletedMessage(i, endIndex, allRecordList.getLoan(startIndex - 1, month));
+            allRecordList.deleteLoan(startIndex, month);
         }
     }
 }

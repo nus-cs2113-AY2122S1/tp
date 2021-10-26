@@ -66,12 +66,15 @@ e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 
 <br />
 
-## Commands
+# Commands
 
-## `add`
+# `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
+
+______________
+<br />
 
 ### `-b` : Add a Budget
 
@@ -93,6 +96,8 @@ Expected outcome: Budget of $500.00 is added to the december of that particular 
 Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
+________________________
+<br />
 
 ### `-e` : Add an expenditure
 

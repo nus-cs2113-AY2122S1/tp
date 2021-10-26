@@ -31,7 +31,7 @@ public class AddLoanCommand extends AddCommand {
 
     public void execute() {
         Loan newLoan = new Loan(name, amount, date);
-        recordList.addLoan(name, amount, date, false);
+        allRecordList.addLoan(name, amount, date, false);
         TextUi.showLoanAddedMessage(newLoan, false);
     }
 
@@ -44,7 +44,7 @@ public class AddLoanCommand extends AddCommand {
     @Override
     public void execute(boolean isLoadingStorage) {
         Loan newLoan = new Loan(name, amount, date);
-        recordList.addLoan(name, amount, date, isLoadingStorage);
+        allRecordList.addLoan(name, amount, date, isLoadingStorage);
         TextUi.showLoanAddedMessage(newLoan, isLoadingStorage);
     }
 }
