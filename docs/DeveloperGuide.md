@@ -101,9 +101,10 @@ the details to be edited. An `EditContactCommand` with the specified parameters 
 
 
 ### <a name="Delete"></a>Deleting a contact: `rm`
-This feature is processed using the `DeleteContactCommand`. Whenever the user wants to remove a contact from the contact
-list using the `rm` command, `DeleteContactCommand` is created in the `MainParser` and executed in`Duke`. The sequence 
-diagram below shows how the `execute()` function of `DeleteContactCommand` works. 
+This feature is processed using the `DeleteContactCommand`. Whenever the user wants to remove a 
+from the contact list using the `rm` command, `DeleteContactCommand` is created in the `MainParser` 
+and executed in`Duke`. The sequence diagram below shows how the `execute()` function of 
+`DeleteContactCommand` works. 
 
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
