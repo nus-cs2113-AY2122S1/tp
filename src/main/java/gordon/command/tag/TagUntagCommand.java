@@ -9,6 +9,7 @@ public class TagUntagCommand extends Command {
     private String recipeName;
     private String[] tagNames;
 
+    
     public TagUntagCommand(String recipeName, String[] tagNames) {
         this.recipeName = recipeName;
         this.tagNames = tagNames;
