@@ -195,6 +195,17 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void confirmDeleteFieldMessage() {
+        String message = "Delete the specified fields?  (y/n)";
+        printDoubleLineMessage(message);
+    }
+
+    public static void deleteFieldsMessage() {
+        String message = "The specified fields have been deleted.";
+        printDoubleLineMessage(message);
+    }
+
+
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
