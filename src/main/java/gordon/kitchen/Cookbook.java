@@ -9,6 +9,11 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/** <h1>Cookbook class</h1>
+ *
+ * <p>Handles the commands given in the {@code Command} class that relates to the cookbook and
+ * updates the cookbook accordingly</p>
+ */
 public class Cookbook {
     protected ArrayList<Recipe> recipes;
     protected ArrayList<Tag> cookbookTags;
@@ -50,6 +55,14 @@ public class Cookbook {
         return recipes.size();
     }
 
+    /**
+     *<h2>void addRecipe(Recipe)</h2>
+     *
+     * <p>This methods  adds the recipe to the cookbook if it does not already exist.</p>
+     *
+     * @param r  Recipe to be added to the cookbook
+     * @throws GordonException  if the recipe already exists in the cookbook
+     */
     public void addRecipe(Recipe r) throws GordonException {
         boolean contains = recipes.stream()
                 .map(Recipe::getName)
@@ -63,6 +76,14 @@ public class Cookbook {
         recipes.add(r);
     }
 
+    /**
+     * <h2>void removeRecipe(index)</h2>
+     *
+     * <p>This method check removes the recipe at the specified index of the cookbook.</p>
+     *
+     * @param index  The index of the recipe to be removed from {@code ArrayList<Recipe> recipes}
+     * @throws GordonException  if the index given is out of bounds of {@code ArrayList<Recipe> recipes}
+     */
     public void removeRecipe(int index) throws GordonException {
         try {
             assert (index >= 0);
@@ -72,6 +93,14 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>void isRecipeExist(name)</h2>
+     *
+     * <p>This method checks whether a specified recipe exists in the cookbook.</p>
+     *
+     * @param name  The name of the recipe being checked
+     * @throws GordonException  if the recipe specified does not exist in the cookbook
+     */
     public void isRecipeExist(String name) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -81,6 +110,13 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RECIPE_FOUND);
     }
 
+    /**
+     * <h2>void checkRecipe(name)</h2>
+     *
+     * <p>This method checks whether there are recipes in the cookbook that matches the recipe being queried.</p>
+     * @param name  Recipe name being queried
+     * @throws GordonException  if there is no matching recipe found.
+     */
     public void checkRecipe(String name) throws GordonException {
         boolean isRecipeFound = false;
 
@@ -99,6 +135,15 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>void setCalories(name)</h2>
+     *
+     * <p>This method adds the calories to a specified recipe</p>
+     *
+     * @param name  The name of the recipe being updated
+     * @param newCalories  The number of calories the recipe is being labelled with
+     * @throws GordonException  if there is no matching recipe found
+     */
     public void setCalories(String name, int newCalories) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -110,6 +155,16 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    /**
+     * <h2>void setTimes(name, prepTime, cookTime)</h2>
+     *
+     * <p>This method adds the preparation time and cooking time to the recipe.</p>
+     *
+     * @param name  The name of the recipe being updated
+     * @param prepTime  The preparation time the recipe is being labelled with
+     * @param cookTime  The cooking time the recipe is being labelled with
+     * @throws GordonException  if there is no matching recipe found
+     */
     public void setTimes(String name, int prepTime, int cookTime) throws GordonException {
         for (Recipe recipe : recipes) {
             // (?i) enables case insensitivity
@@ -123,6 +178,15 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    /**
+     * <h2>void setPrice(name, newPrice)</h2>
+     *
+     * <p>This method adds the price to a recipe.</p>
+     *
+     * @param name  The name of the recipe being updated
+     * @param newPrice  The price the recipe is being labelled with
+     * @throws GordonException  if there is no matching recipe found.
+     */
     public void setPrice(String name, float newPrice) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -134,6 +198,15 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    /**
+     * <h2>void setDifficulty(name, newDifficulty)</h2>
+     *
+     * <p>This method adds the difficulty level to a recipe.</p>
+     *
+     * @param name  The name of the recipe being updated
+     * @param newDifficulty  The difficulty the recipe is being labelled with
+     * @throws GordonException  if there is no matching recipe found
+     */
     public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
         for (Recipe recipe : recipes) {
             // (?i) enables case insensitivity
@@ -149,6 +222,14 @@ public class Cookbook {
   
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
+
+    /**
+     * <h2>void addCookbookTag(tag)</h2>
+     *
+     * <p>This method adds a new tag to the cookbook</p>
+     *
+     * @param tag  The tag to be added to cookbook
+     */
     public void addCookbookTag(Tag tag) {
         // Prevent duplicate master-Tags at Cookbook level
         if (!doesCookbookTagExists(tag.getTagName())) {
@@ -156,6 +237,13 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>void deleteCookbookTag(tag)</h2>
+     *
+     * <p>This method deletes a tag from the cookbook</p>
+     *
+     * @param tag  The tag to be deleted from cookbook
+     */
     public void deleteCookbookTag(Tag tag) {
         cookbookTags.remove(tag);
     }
@@ -181,6 +269,15 @@ public class Cookbook {
     }
 
     public void addTagToRecipes(Tag tag) {
+    /**
+     * <h2>addTagToRecipes(tag)</h2>
+     *
+     * <p>This method updates ther</p>
+     * @param tag The tag that contains the associated recipes
+     *
+     */
+    public void addTagToRecipes(Tag tag) throws GordonException {
+>>>>>>> 12091c3687bfe24fd205b7b3c5a91b82e81b4ad3
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
