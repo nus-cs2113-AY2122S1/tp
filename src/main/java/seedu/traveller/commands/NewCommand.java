@@ -1,7 +1,7 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.Trip;
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.DuplicateTripException;
 import seedu.traveller.exceptions.TravellerException;
@@ -73,6 +73,6 @@ public class NewCommand extends Command {
         List<Double> distances = result.getDistances();
         Trip trip = new Trip(getTripName(), getStartCountry(), getEndCountry(), path, distances);
         tripsList.addTrip(trip);
-        ui.printNewTripCreated(getEndCountry());
+        ui.printNewTripCreated(getTripName());
     }
 }
