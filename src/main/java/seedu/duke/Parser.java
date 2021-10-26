@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -249,9 +250,9 @@ public class Parser {
                 Ui.printNoExpensesError();
             }
         }
-
     }
 
+    //@@author leeyikai
     private static void executeView(String inputParams) {
         Trip openTrip = Storage.getOpenTrip();
         Storage.setOpenTripAsLastTrip();
@@ -260,9 +261,10 @@ public class Parser {
         } else {
             String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
-            String expenseCategory = paramString[1];
+            String expenseCategory = null;
             String expenseAttribute = null;
-            if (!secondCommand.equals("index")) {
+            if (!isNumeric(secondCommand)) {
+                expenseCategory = paramString[1];
                 expenseAttribute = paramString[2];
             }
             if (secondCommand.equals("filter")) {
@@ -271,10 +273,9 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     Ui.printNoExpensesError();
                 }
-            } else if (secondCommand.equals("index")) {
-                String expenseIndex = inputParams.split(" ", 2)[1];
+            } else if (isNumeric(secondCommand)) {
                 try {
-                    int index = Integer.parseInt(expenseIndex);
+                    int index = Integer.parseInt(secondCommand);
                     System.out.println(openTrip.getExpenseAtIndex(index));
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     Ui.printUnknownExpenseIndexError();
@@ -283,6 +284,15 @@ public class Parser {
             }
         }
 
+    }
+
+    private static boolean isNumeric(String secondCommand) {
+        try {
+            int i = Integer.parseInt(secondCommand);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private static void executeDelete(String inputParams) {

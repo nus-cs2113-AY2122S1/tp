@@ -41,6 +41,7 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
+    //@@author leeyikai
     public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
 
         if (listOfExpenses.isEmpty()) {
@@ -72,7 +73,7 @@ public class Trip {
 
     }
 
-
+    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
@@ -86,7 +87,7 @@ public class Trip {
             Ui.printNoMatchingExpenseError();
         }
     }
-
+    //@@author leeyikai
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -105,6 +106,7 @@ public class Trip {
         }
     }
 
+    //@@author leeyikai
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -120,6 +122,7 @@ public class Trip {
         }
     }
 
+    //@@author leeyikai
     private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                    String personToSearchFor) {
         boolean areThereExpenses = false;
