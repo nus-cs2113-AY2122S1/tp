@@ -17,7 +17,7 @@ public class TaskLine {
     private String priority;
     private String recurrence;
 
-    public TaskLine (Task task) {
+    public TaskLine(Task task) {
         type = task.getTaskType().toString();
         description = task.getDescription();
         priority = task.getPriority().toString();

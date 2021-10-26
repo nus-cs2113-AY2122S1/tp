@@ -66,6 +66,7 @@ public class Reminder {
     public void setInformation() {
         information = new ReminderInformation(reminderDone, userTime, message);
     }
+
     public ReminderInformation getInformation() {
         return information;
     }

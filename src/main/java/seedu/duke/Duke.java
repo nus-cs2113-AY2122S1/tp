@@ -48,6 +48,7 @@ public class Duke implements TaskManagerObserver {
     public String checkReminder() {
         return reminderManager.sendReminder(taskManager);
     }
+
     public void startProgram() {
 
         ui.printLogo();

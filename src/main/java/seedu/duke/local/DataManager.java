@@ -47,7 +47,7 @@ public class DataManager {
         TaskFileWriter.storetoHardDisk(getStringLineList());
     }
 
-    public static void deleteTask(int index){
+    public static void deleteTask(int index) {
         if (index >= 0 && index < getSize()) {
             taskLines.remove(index);
         }
@@ -59,12 +59,12 @@ public class DataManager {
         updateStorage();
     }
 
-    public static void updateReminderTime (int index, long time) {
+    public static void updateReminderTime(int index, long time) {
         taskLines.get(index).updateTime(time);
         updateStorage();
     }
 
-    public static void updateReminderMessage (int index, String message) {
+    public static void updateReminderMessage(int index, String message) {
         taskLines.get(index).updateMessage(message);
         updateStorage();
     }

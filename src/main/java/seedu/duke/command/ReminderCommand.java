@@ -1,12 +1,14 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.*;
+import seedu.duke.exception.MissingReminderFieldException;
+import seedu.duke.exception.MissingUserMessageException;
+import seedu.duke.exception.MissingUserTimeException;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.reminder.ReminderManager;
 
 import java.util.Map;
 
-public class ReminderCommand extends Command{
+public class ReminderCommand extends Command {
     private static final String USAGE = "reminder";
 
     public ReminderCommand(TaskManager taskManager, Map<String, String> commandArguments) {

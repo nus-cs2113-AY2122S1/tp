@@ -2,7 +2,7 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Todo;
 
-public class TodoLine extends TaskLine{
+public class TodoLine extends TaskLine {
     private String type;
 
     private String description;
@@ -16,7 +16,7 @@ public class TodoLine extends TaskLine{
     private String reminderMessage;
 
 
-    public TodoLine (Todo task) {
+    public TodoLine(Todo task) {
         super();
         type = task.getTaskType().toString();
         description = task.getDescription();
@@ -36,7 +36,7 @@ public class TodoLine extends TaskLine{
     public String getString() {
         return type + "|" + description + "|" + doOnDate + "|"
                 + priority + "|" + recurrence + "|"
-                +reminderTime + "|" + reminderMessage;
+                + reminderTime + "|" + reminderMessage;
     }
 
     public void updateTime(long userTime) {

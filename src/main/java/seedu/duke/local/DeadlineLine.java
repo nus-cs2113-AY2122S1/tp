@@ -2,7 +2,7 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Deadline;
 
-public class DeadlineLine extends TaskLine{
+public class DeadlineLine extends TaskLine {
     private String type;
 
     private String description;
@@ -16,7 +16,7 @@ public class DeadlineLine extends TaskLine{
     private String reminderMessage;
 
 
-    public DeadlineLine (Deadline task) {
+    public DeadlineLine(Deadline task) {
         type = task.getTaskType().toString();
         description = task.getDescription();
         priority = task.getPriority().toString();
