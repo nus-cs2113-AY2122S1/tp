@@ -7,20 +7,16 @@ import seedu.duke.commons.util.exceptions.ModuleLoadException;
 import seedu.duke.model.module.Module;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author ptejasv
 public class JsonUtil {
     private static final Logger logger = Logger.getLogger(JsonUtil.class.getName());
-    private static final String ROOT_DIRECTORY = System.getProperty("user.dir");
-    private static final String MODULE_FILE_NAME = "ModuleInfo.json";
-    private static final Path FULL_MODULE_FILEPATH = Paths.get(ROOT_DIRECTORY, "src", "main",
-            "resources", MODULE_FILE_NAME);
+    private static final String MODULE_INFO_FILEPATH = "/ModuleInfo.json";
 
     /**
      * Loads module information from ModuleInfo.json to an Array of Module objects.
@@ -32,7 +28,8 @@ public class JsonUtil {
         Gson gson = new Gson();
         Module[] modules;
 
-        Reader reader = new FileReader(FULL_MODULE_FILEPATH.toString());
+        InputStream in = JsonUtil.class.getResourceAsStream(MODULE_INFO_FILEPATH);
+        Reader reader = new InputStreamReader(in);
         modules = gson.fromJson(reader, Module[].class);
 
         if (modules.length == 0) {
