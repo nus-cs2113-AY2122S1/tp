@@ -51,103 +51,101 @@ public class Parser {
      * @throws TourPlannerException if there are missing fields,duplicated prefixes, missing prefixes and erroneous
      *                              'cut' index given
      */
-    public static Command parse(String input) throws TourPlannerException, ParseException {
+    public static Command parse(String input) throws TourPlannerException {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         String dummy;
         String contact_num;
-
         switch (command) {
-        case "bye":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ByeCommand();
-        case "add":
-            if(params.contains("-c")) {
-                if(!params.contains("@")) {
-                    throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
+            case "bye":
+                if (!params.equals("")) {
+                    throw new TourPlannerException(ERROR_EXTRA_INPUT);
                 }
-                int index1 = params.indexOf("/cn");
-                int index2 = params.lastIndexOf("/");
-                if(index1 == index2) {
-                    dummy = params.substring(index1 + 3);
-                    contact_num = dummy.trim();
-                    for(int i = 0; i < contact_num.length(); i++) {
-                        char ch = contact_num.charAt(i);
-                        if(!(ch <= '9' && ch >= '0')) {
-                            throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                return new ByeCommand();
+            case "add":
+                if(params.contains("-c")) {
+                    if(!params.contains("@")) {
+                        throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
+                    }
+                    int index1 = params.indexOf("/cn");
+                    int index2 = params.lastIndexOf("/");
+                    if(index1 == index2) {
+                        dummy = params.substring(index1 + 3);
+                        contact_num = dummy.trim();
+                        for(int i = 0; i < contact_num.length(); i++) {
+                            char ch = contact_num.charAt(i);
+                            if(!(ch <= '9' && ch >= '0')) {
+                                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                            }
+                        }
+                    }
+                    else {
+                        dummy = params.substring(index1 + 3, index2);
+                        contact_num = dummy.trim();
+                        for(int i = 0; i < contact_num.length(); i++) {
+                            char ch = contact_num.charAt(i);
+                            if(!(ch <= '9' && ch >= '0')) {
+                                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                            }
                         }
                     }
                 }
-                else {
-                    dummy = params.substring(index1 + 3, index2);
-                    contact_num = dummy.trim();
-                    for(int i = 0; i < contact_num.length(); i++) {
-                        char ch = contact_num.charAt(i);
-                        if(!(ch <= '9' && ch >= '0')) {
-                            throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
-                        }
+                if(params.contains("-t")) {
+                    int index1 = params.indexOf("/p");
+                    int index2 = params.lastIndexOf("/");
+                    String time;
+                    if(index1 == index2) {
+                        dummy = params.substring(index1 + 2);
+                        time = dummy.trim();
+                    }
+                    else {
+                        dummy = params.substring(index1 + 2, index2);
+                        time = dummy.trim();
+                    }
+                    int tour_time = Integer.parseInt(time);
+                    if(tour_time >= 2400) {
+                        throw new TourPlannerException(ERROR_TOUR_TIME_WRONG);
                     }
                 }
-            }
-            if(params.contains("-t")) {
-                int index1 = params.indexOf("/p");
-                int index2 = params.lastIndexOf("/");
-                String time;
-                if(index1 == index2) {
-                    dummy = params.substring(index1 + 2);
-                    time = dummy.trim();
+                if(params.contains("-f")) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM");
+                    int index1 = params.indexOf("/dt");
+                    int index2 = params.indexOf("/df");
+                    Date start = null, end = null;
+                    try {
+                        if (index1 > index2) {
+                            dummy = params.substring(index1 + 3).trim();
+                            start = formatter.parse(dummy);
+                            dummy = params.substring(index2 + 3, index1);
+                            end = formatter.parse(dummy);
+                        } else {
+                            dummy = params.substring(index2 + 3).trim();
+                            end = formatter.parse(dummy);
+                            dummy = params.substring(index1 + 3, index2);
+                            start = formatter.parse(dummy);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (end.before(start)) {
+                        throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
+                    }
                 }
-                else {
-                    dummy = params.substring(index1 + 2, index2);
-                    time = dummy.trim();
+                return parseAdd(params);
+            case "list":
+                return parseList(params);
+            case "clear":
+                if (!params.equals("")) {
+                    throw new TourPlannerException(ERROR_EXTRA_INPUT);
                 }
-                int tour_time = Integer.parseInt(time);
-                if(tour_time >= 2400) {
-                    throw new TourPlannerException(ERROR_TOUR_TIME_WRONG);
-                }
-            }
-            if(params.contains("-f")) {
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM");
-                int index1 = params.indexOf("/dt");
-                int index2 = params.indexOf("/df");
-                String dt, df;
-                Date start;
-                Date end;
-                if(index1 > index2) {
-                    dummy = params.substring(index1 + 3).trim();
-                    start = formatter.parse(dummy);
-                    dummy = params.substring(index2 + 3, index1);
-                    end = formatter.parse(dummy);
-                }
-                else {
-                    dummy = params.substring(index2 + 3).trim();
-                    end = formatter.parse(dummy);
-                    dummy = params.substring(index1 + 3, index1);
-                    start = formatter.parse(dummy);
-                }
-                if(!end.after(start)) {
-                    throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
-                }
-            }
-
-
-            return parseAdd(params);
-        case "list":
-            return parseList(params);
-        case "clear":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ClearCommand();
-        case "find":
-            return parseFind(params);
-        case "sort":
-            return parseSort(params);
-        default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+                return new ClearCommand();
+            case "find":
+                return parseFind(params);
+            case "sort":
+                return parseSort(params);
+            default:
+                throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
@@ -180,24 +178,24 @@ public class Parser {
         int repeatPrefixChecker = 0;
 
         switch (identifier) {
-        case "-c":
-            prefixes = Arrays.asList("/cn", "/m");
-            repeatPrefixChecker = 3;
-            break;
-        case "-t":
-            prefixes = Arrays.asList("/n", "/p");
-            repeatPrefixChecker = 3;
-            break;
-        case "-f":
-            prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
-            repeatPrefixChecker = 5;
-            break;
-        case "-p":
-            prefixes = Arrays.asList("/t", "/f");
-            repeatPrefixChecker = 3;
-            break;
-        default:
-            break;
+            case "-c":
+                prefixes = Arrays.asList("/cn", "/m");
+                repeatPrefixChecker = 3;
+                break;
+            case "-t":
+                prefixes = Arrays.asList("/n", "/p");
+                repeatPrefixChecker = 3;
+                break;
+            case "-f":
+                prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
+                repeatPrefixChecker = 5;
+                break;
+            case "-p":
+                prefixes = Arrays.asList("/t", "/f");
+                repeatPrefixChecker = 3;
+                break;
+            default:
+                break;
         }
 
         if (!containAllPrefixes(argString, prefixes)) {
@@ -290,21 +288,21 @@ public class Parser {
     private static int obtainArrayIndex(String prefix, String identifier) {
         int index;
         switch (identifier) {
-        case "-c":
-            index = obtainClientArrayIndex(prefix);
-            break;
-        case "-t":
-            index = obtainTourArrayIndex(prefix);
-            break;
-        case "-f":
-            index = obtainFlightArrayIndex(prefix);
-            break;
-        case "-p":
-            index = obtainPackageArrayIndex(prefix);
-            break;
-        default:
-            index = 0;
-            break;
+            case "-c":
+                index = obtainClientArrayIndex(prefix);
+                break;
+            case "-t":
+                index = obtainTourArrayIndex(prefix);
+                break;
+            case "-f":
+                index = obtainFlightArrayIndex(prefix);
+                break;
+            case "-p":
+                index = obtainPackageArrayIndex(prefix);
+                break;
+            default:
+                index = 0;
+                break;
         }
         return index;
     }
@@ -312,15 +310,15 @@ public class Parser {
     private static int obtainPackageArrayIndex(String prefix) {
         int index;
         switch (prefix) {
-        case "/t":
-            index = 1;
-            break;
-        case "/f":
-            index = 2;
-            break;
-        default:
-            index = 0;
-            break;
+            case "/t":
+                index = 1;
+                break;
+            case "/f":
+                index = 2;
+                break;
+            default:
+                index = 0;
+                break;
         }
         return index;
     }
@@ -329,21 +327,21 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/t":
-            index = 1;
-            break;
-        case "/f":
-            index = 2;
-            break;
-        case "/dt":
-            index = 3;
-            break;
-        case "/df":
-            index = 4;
-            break;
-        default:
-            index = 0;
-            break;
+            case "/t":
+                index = 1;
+                break;
+            case "/f":
+                index = 2;
+                break;
+            case "/dt":
+                index = 3;
+                break;
+            case "/df":
+                index = 4;
+                break;
+            default:
+                index = 0;
+                break;
         }
         return index;
     }
@@ -352,15 +350,15 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/n":
-            index = 1;
-            break;
-        case "/p":
-            index = 2;
-            break;
-        default:
-            index = 0;
-            break;
+            case "/n":
+                index = 1;
+                break;
+            case "/p":
+                index = 2;
+                break;
+            default:
+                index = 0;
+                break;
         }
         return index;
     }
@@ -369,15 +367,15 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/cn":
-            index = 1;
-            break;
-        case "/m":
-            index = 2;
-            break;
-        default:
-            index = 0;
-            break;
+            case "/cn":
+                index = 1;
+                break;
+            case "/m":
+                index = 2;
+                break;
+            default:
+                index = 0;
+                break;
         }
         return index;
     }
@@ -434,35 +432,35 @@ public class Parser {
         String[] values = valuesList.toArray(new String[valuesList.size()]);
 
         switch (identifier) {
-        case "-c":
-            Client client = new Client(values);
-            return new AddClientCommand(client);
-        case "-f":
-            Flight flight = new Flight(values);
-            return new AddFlightCommand(flight);
-        case "-t":
-            Tour tour = new Tour(values);
-            return new AddTourCommand(tour);
-        case "-p":
-            return new AddClientPackageCommand(values);
-        default:
-            break;
+            case "-c":
+                Client client = new Client(values);
+                return new AddClientCommand(client);
+            case "-f":
+                Flight flight = new Flight(values);
+                return new AddFlightCommand(flight);
+            case "-t":
+                Tour tour = new Tour(values);
+                return new AddTourCommand(tour);
+            case "-p":
+                return new AddClientPackageCommand(values);
+            default:
+                break;
         }
         return null;
     }
 
     private static Command parseList(String params) throws TourPlannerException {
         switch (params) {
-        case "-c":
-            return new ListClientCommand();
-        case "-t":
-            return new ListTourCommand();
-        case "-f":
-            return new ListFlightCommand();
-        case "-p":
-            return new ListClientPackageCommand();
-        default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            case "-c":
+                return new ListClientCommand();
+            case "-t":
+                return new ListTourCommand();
+            case "-f":
+                return new ListFlightCommand();
+            case "-p":
+                return new ListClientPackageCommand();
+            default:
+                throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
@@ -470,14 +468,14 @@ public class Parser {
         String prefix = params.split(" ")[0];
         String suffix = params.split(" ")[1];
         switch (prefix) {
-        case "-c":
-            return new FindClientCommand(suffix);
-        case "-t":
-            return new FindTourCommand(suffix);
-        case "-f":
-            return new FindFlightCommand(suffix);
-        default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            case "-c":
+                return new FindClientCommand(suffix);
+            case "-t":
+                return new FindTourCommand(suffix);
+            case "-f":
+                return new FindFlightCommand(suffix);
+            default:
+                throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
@@ -486,14 +484,12 @@ public class Parser {
         String identifier = identifierAndFilter[0];
         String filter = identifierAndFilter[1];
         switch (identifier) {
-        case "-t":
-            return new SortTourCommand(filter);
-        case "-c":
-            return new SortClientCommand(filter);
-        default:
-            return null;
+            case "-t":
+                return new SortTourCommand(filter);
+            case "-c":
+                return new SortClientCommand(filter);
+            default:
+                return null;
         }
     }
 }
-
-   
