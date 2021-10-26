@@ -25,6 +25,7 @@ an overview of all the commands you can use with NUSBuddy.
 
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Getting help - `help`](#getting-help--help)
   * [Adding a Task, Lesson or Module - `add`](#adding-a-task-lesson-or-module---add)
   * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
@@ -78,6 +79,32 @@ from deleting these files in order to preserve your data.
 > [PARAM] denotes a compulsory parameter, while {PARAM} denotes an optional parameter you can choose to omit.
 >
 > [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
+
+### Getting help -`help`
+
+Shows you a summary of the commands you can use with NUSBuddy, and the format of their parameters if applicable.
+
+Format: `help`
+
+Example usage:
+```
+$ help
+    _______________________________________________________________________________
+     Here is a list of possible commands:
+     add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}
+     add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}
+     add module [MODULE_CODE]
+     list [task/lesson/module]
+     done [INDEX]
+     delete [task/lesson/module] [INDEX]
+     find [task/lesson] [KEYWORD]
+     moduleinfo [MODULE_CODE]
+     exit
+     More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
+    _______________________________________________________________________________
+```
+You can use this as a quick syntax guide while using NUSBuddy. The format of the syntax shown by `help` is the same as
+the one used by this guide, which can be found [here](#features).
 
 ### Adding a Task, Lesson or Module - `add`
 
