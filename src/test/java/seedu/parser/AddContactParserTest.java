@@ -33,6 +33,7 @@ class AddContactParserTest {
         inputContactDetails = new String[NUMBER_OF_DETAILS];
     }
 
+    //@@author mayankp291
     @Test
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
             MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
@@ -44,6 +45,7 @@ class AddContactParserTest {
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
+    //@@author
     @Test
     void parseContactDetails_onlyAddInput_expectException() {
         inputUserInput = "   add  ";
