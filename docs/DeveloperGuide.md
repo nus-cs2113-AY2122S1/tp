@@ -69,6 +69,16 @@ for the example: `view 2`
 
 ### <a name="text-ui"></a>TextUi
 ### <a name="main-parser"></a>MainParser
+The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
+not only the identifier for commands, but also calls its relevant sub-parsers to further destructure
+the inputs, allowing ConTech to perform its commands.
+
+The diagram below shows a sequence diagram of how `MainParser` works, and a reference diagram is used
+to indicate that further parsing is done by sub-parsers for each different command type. This reference diagram
+will be referred to later on.
+
+![Main Parser Sequence Diagram](images/MainParserSequenceDiagram.png)
+
 ### <a name="command"></a>Command
 ### <a name="contact-list"></a>ContactList
 ### <a name="storage"></a>Storage
