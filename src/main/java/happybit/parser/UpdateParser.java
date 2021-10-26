@@ -8,7 +8,8 @@ public class UpdateParser extends Parser {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
-    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. Eg: n/Reach for the starts";
+    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
+            + "Eg: n/Reach for the starts";
     private static final int FLAG_LENGTH = 2;
 
     /**
@@ -19,6 +20,7 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         String newGoalName = getNewGoalName(parameters);

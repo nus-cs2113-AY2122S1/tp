@@ -15,6 +15,7 @@ class DoneParserTest {
     private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the habit index. Eg: h/1";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
 
+
     @Test
     void parseDoneHabitCommand_validInput_success() throws HaBitParserException {
         DoneHabitCommand testCommand = (DoneHabitCommand) DoneParser.parseDoneHabitCommand(" g/1 h/1 ");
@@ -90,6 +91,16 @@ class DoneParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseDoneHabitCommand_nullInput_exceptionThrown() {
+        try {
+            DoneParser.parseDoneHabitCommand(null);
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 }

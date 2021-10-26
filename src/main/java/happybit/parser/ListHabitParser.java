@@ -19,6 +19,7 @@ public class ListHabitParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseListHabitCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         return new ListHabitsCommand(goalIndex);

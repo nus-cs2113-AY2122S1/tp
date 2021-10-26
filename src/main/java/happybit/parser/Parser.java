@@ -1,5 +1,7 @@
 package happybit.parser;
 
+import happybit.exception.HaBitParserException;
+
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -18,6 +20,9 @@ public abstract class Parser {
     protected static final String FLAG_START_DATE = "s/";
     protected static final String FLAG_END_DATE = "e/";
     protected static final String FLAG_HABIT_INDEX = "h/";
+
+    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+            + "Enter the help command to view command formats";
 
     /**
      * Splits the input into the various parameters.
@@ -61,6 +66,18 @@ public abstract class Parser {
             }
         }
         return null;
+    }
+
+    /**
+     * Checks if the input is null.
+     *
+     * @param input String of the user input.
+     * @throws HaBitParserException If the user input is null (blank).
+     */
+    protected static void checkNoDescription(String input) throws HaBitParserException {
+        if (input == null) {
+            throw new HaBitParserException(ERROR_NO_PARAMS);
+        }
     }
 
 }

@@ -64,6 +64,16 @@ class DeleteParserTest {
         }
     }
 
+    @Test
+    void parseDeleteGoalCommand_nullInput_exceptionThrown() {
+        try {
+            DeleteParser.parseDeleteGoalCommand(null);
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
+        }
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are tests for parseDeleteHabitCommand.
@@ -145,6 +155,16 @@ class DeleteParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseDeleteHabitCommand_nullInput_exceptionThrown() {
+        try {
+            DeleteParser.parseDeleteHabitCommand(null);
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 }

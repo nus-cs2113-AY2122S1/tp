@@ -24,7 +24,6 @@ public class AddParser extends Parser {
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goalIndex has to be a number.";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number.";
-    private static final String ERROR_NO_PARAMS = "Command cannot be called without parameters.";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
@@ -178,18 +177,6 @@ public class AddParser extends Parser {
     }
 
     // The following are sub-methods of the main 'extractor' methods.
-
-    /**
-     * Checks if the input is null.
-     *
-     * @param input String of the user input.
-     * @throws HaBitParserException If the user input is null (blank).
-     */
-    private static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException(ERROR_NO_PARAMS);
-        }
-    }
 
     /**
      * Gets the parameter from the parameter array and check its validity.

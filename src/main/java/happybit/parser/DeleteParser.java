@@ -20,7 +20,8 @@ public class DeleteParser extends Parser {
      * @return Command to delete specified goal.
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
-    public static Command parseDeleteGoalCommand(String input) throws HaBitParserException  {
+    public static Command parseDeleteGoalCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         return new DeleteGoalCommand(goalIndex);
@@ -34,6 +35,7 @@ public class DeleteParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseDeleteHabitCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);

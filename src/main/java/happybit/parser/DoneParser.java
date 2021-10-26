@@ -13,6 +13,7 @@ public class DoneParser extends Parser {
     private static final int FLAG_LENGTH = 2;
 
     public static Command parseDoneHabitCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);
