@@ -11,6 +11,16 @@ section will show you how to use commands to perform actions on tasks, lessons a
 the [FAQ](#faq) section can help with troubleshooting your problem, and the [command summary](#command-summary) will give you
 an overview of all the commands you can use with NUSBuddy.
 
+> Icons used in this guide:
+> 
+> This guide uses blocks of text with icons to denote certain warnings, notes and extra features.
+> 
+> 💡 refers to an important note 
+> 
+> ❗️ refers to a warning
+> 
+> ℹ️ refers to additional information that may be useful to note
+
 ## Table of contents
 
 * [Quick Start](#quick-start)
@@ -64,10 +74,10 @@ from deleting these files in order to preserve your data.
 ## Features
 
 > 💡 The **CONSTANT_CASE** in the command denotes the parameter that you can enter your value into.
-
-> 💡 [PARAM] denotes a compulsory parameter, while {PARAM} denotes an optional parameter you can choose to omit.
-
-> 💡 [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
+>
+> [PARAM] denotes a compulsory parameter, while {PARAM} denotes an optional parameter you can choose to omit.
+>
+> [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
 
 ### Adding a Task or Lesson - `add`
 
