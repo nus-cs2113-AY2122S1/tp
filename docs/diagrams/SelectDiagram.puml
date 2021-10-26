@@ -15,7 +15,9 @@ activate SelectCommand #lightblue
 opt isValidFlag
 SelectCommand -> SelectCommand: prepareInputs(command)
 activate SelectCommand #lightgreen
+opt isEventFlag
 Parser -> SelectCommand: updateIndexOfLastSelectedEvent(index)
+end
 return
 |||
 end
