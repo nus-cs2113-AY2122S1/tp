@@ -41,7 +41,12 @@ public class Import {
                     }
                     break;
                 case HABIT_TYPE:
-                    Habit habit = ImportParser.habitParser(lineData);
+                    Habit habit;
+                    try {
+                        habit = ImportParser.habitParser(lineData);
+                    } catch (ParseException e) {
+                        throw new HaBitStorageException(e.toString());
+                    }
                     int goalIndex = Integer.parseInt(lineData[NUM_INDEX]);
 
                     goalList.addHabitToGoal(habit, goalIndex);

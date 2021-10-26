@@ -4,7 +4,9 @@ import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
 import happybit.ui.PrintManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GoalList {
     private static final String ERROR_EMPTY_GOAL_LIST = "There are no goals!";
@@ -227,13 +229,36 @@ public class GoalList {
      *
      * @param goalIndex    Index of the goal in goalList.
      * @param habitIndex   Index of the habit in goal.
-     * @param newHabitName New name user wants to change the habit to.
      * @param printManager Prints messages to the console.
+     * @param newHabitName New name user wants to change the habit to.
      * @throws HaBitCommandException If the goalIndex and/or habitIndex is not within its respective list range.
      */
     public void updateHabitNameFromGoal(int goalIndex, int habitIndex, String newHabitName, PrintManager printManager)
         throws HaBitCommandException {
         // To be implemented
+    }
+
+    /**
+     * To allow for recurring tasks, reset isDone to false for that habit once next date reached.
+     * Check and set on start up for all goals and all habits within goals
+     * After importing data into goalList
+     *
+     */
+    public void setRecurringTasks() {
+        for (Goal goal : goalList) {
+            ArrayList<Habit> currGoalsHabits = goal.getHabitList();
+            for (Habit habit : currGoalsHabits) {
+                // if currDate is at the nextDate set by user; set isDone to false
+                Date currDate = new Date();
+                SimpleDateFormat currDateFormatter = new SimpleDateFormat("ddMMyyyy");
+                String currDateString = currDateFormatter.format(currDate);
+                String habitNextDate = habit.getNextDateString();
+                if (currDateString.equals(habitNextDate)) {
+                    habit.setUncompleted();
+                    habit.setHabitDate(habit.getNextDate());
+                }
+            }
+        }
     }
 
     /*

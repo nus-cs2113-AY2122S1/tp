@@ -3,6 +3,7 @@ package happybit.storage;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
+import happybit.habit.Habit;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Storage {
 
     protected String filePath;
     protected String fileDir;
+    protected Export export;
 
     public Storage() {
         this(DEFAULT_FILEPATH, DEFAULT_DIR);
@@ -22,6 +24,7 @@ public class Storage {
     public Storage(String filePath, String fileDir) {
         this.filePath = filePath;
         this.fileDir = fileDir;
+        export = new Export(this.filePath);
     }
 
     public GoalList load() throws HaBitStorageException {
@@ -59,7 +62,28 @@ public class Storage {
         }
     }
 
+    /**
+     * To export goal list to storage file.
+     *
+     * @param goalList an array list of goals
+     * @throws HaBitStorageException IOException
+     */
     public void export(ArrayList<Goal> goalList) throws HaBitStorageException {
-        Export.exportStorage(goalList, this.filePath);
+        export.exportStorage(goalList);
+    }
+
+    /**
+     * To export a goal to storage file.
+     *
+     * @param goal a goal object
+     * @param index the index of goal in goal list
+     * @throws HaBitStorageException IOException
+     */
+    public void export(Goal goal, int index) throws HaBitStorageException {
+        export.exportGoal(goal, index);
+    }
+
+    public void export(Habit habit, int index) throws HaBitStorageException {
+        export.exportHabit(habit, index);
     }
 }
