@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.Status;
+import seedu.duke.common.Status;
 
 public class Magazine extends Item {
     private String publisher;

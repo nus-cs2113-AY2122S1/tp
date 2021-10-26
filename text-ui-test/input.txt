@@ -1,3 +1,2 @@
 hello
-add t/The Hunger Games i/123
 exit

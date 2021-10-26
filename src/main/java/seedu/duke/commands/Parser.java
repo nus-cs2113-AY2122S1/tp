@@ -1,6 +1,8 @@
 package seedu.duke.commands;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import static seedu.duke.commands.RemoveCommand.COMMAND_REMOVE;
 
@@ -31,7 +33,8 @@ public class Parser {
         } else if (input.startsWith(SearchCommand.COMMAND_WORD)) {
             return new SearchCommand(input);
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
-            return new AddCommand(input);
+
+            return new AddCommand(extractArgs(input));
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
             return new LoanCommand(input);
         } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
@@ -41,5 +44,19 @@ public class Parser {
         } else {
             return new UnknownCommand();
         }
+    }
+
+    public HashMap<String, String> extractArgs(String input) {
+        HashMap<String, String> args = new HashMap<>();
+        String splitByDelimiter = ".+?(?=\\s\\w/)|.+?$";
+        Pattern p = Pattern.compile(splitByDelimiter);
+        Matcher m = p.matcher(input);
+        m.find();
+        args.put(null,m.group());
+        while (m.find()) {
+            String[] currentArg = m.group().split("/", 2);
+            args.put(currentArg[0].strip(), currentArg[1].strip());
+        }
+        return args;
     }
 }
