@@ -16,7 +16,7 @@ This section describes some noteworthy details on how certain features are desig
 
 (insert relevant information here about taking in user input and parsing it etc.)
 
-####Delete Functionality
+#### Delete Functionality
 How deleting works:
 
 1. When the `Parser` class parses `delete` as the command from the user, a new `Command` object, `DeleteCommand` is created.
@@ -25,6 +25,13 @@ How deleting works:
 4. The constructor processes the usage for `DeleteCommand` and executes the actual deletion through `execute` which returns a `CommandResult` object with the associated deletion message from the `Ui` class.
 5. `delete all` will not immediately invoke the `clear()` method on the global `eventCatalog` ArrayList and will instead prompt a confirmation from the user before deleting all `Event`s.
 
+#### Select Functionality
+
+
+How selecting an `Event` or an event's nested `Task` works:
+1. When the `Parser` class parses `select` as the command from the user, a new `Command` object, `SelectCommand` is created.
+2. If the command contains a valid flag (`-e` or `-t`), `SelectCommand` processes the input from the user by calling `prepareInputs`.
+3. 
 
 
 ### Storage component
