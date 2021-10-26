@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Task;
 import seedu.duke.items.mainlists.MemberRoster;
@@ -44,6 +45,9 @@ public class Duke {
                 Ui.printLineBreak();
             } catch (NullPointerException | NumberFormatException | StringIndexOutOfBoundsException e) {
                 System.out.println("Please key in the commands accurately, use help to view the guide");
+                Ui.printLineBreak();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
                 Ui.printLineBreak();
             }
         } while (ByeCommand.isRunning);

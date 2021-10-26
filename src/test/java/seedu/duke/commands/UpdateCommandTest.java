@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -20,6 +21,12 @@ import static seedu.duke.Duke.eventCatalog;
 public class UpdateCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
+    private static ByteArrayInputStream in;
+
+    public void setInput(String input) {
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+    }
 
     @BeforeEach
     public void setUpStream() {
@@ -34,11 +41,9 @@ public class UpdateCommandTest {
     }
 
     @Test
-    public void updateCommand_updateNameDateOfEvent_success() {
+    public void updateCommand_updateNameDateOfEvent_success() throws DukeException {
         final InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream(("title/Charlie Puth Concert> "
-                + "date/21-02-2022 2000").getBytes());
-        System.setIn(in);
+        setInput("title/Charlie Puth Concert> date/21-02-2022 2000");
 
         Command command1 = Parser.parseCommand("update 2");
         command1.execute();

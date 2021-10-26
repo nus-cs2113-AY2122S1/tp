@@ -194,6 +194,7 @@ public class AddCommand extends Command {
             Duke.eventCatalog.get(eventIndex - 1).addToTaskList(task);
             Duke.eventCatalog.sortCatalog();
         } catch (IndexOutOfBoundsException e) {
+            Ui.printLineBreak();
             throw new DukeException("No such event. Please enter a valid event for your task. ");
         }
     }
@@ -204,6 +205,7 @@ public class AddCommand extends Command {
             Duke.memberRoster.get(memberIndex - 1).sortTasks();
             task.addMember(Duke.memberRoster.get(memberIndex - 1));
         } catch (IndexOutOfBoundsException e) {
+            Ui.printLineBreak();
             throw new DukeException("This member does not exist. Please enter the index corresponding to "
                     + "the correct member. ");
         }
@@ -222,6 +224,7 @@ public class AddCommand extends Command {
                 addTaskToEvent(eventIndex, task);
                 isCorrectEvent = true;
             } catch (NumberFormatException e) {
+                Ui.printLineBreak();
                 System.out.println("Please enter the number corresponding to the event "
                         + "you want to add to. ");
                 Ui.printLineBreak();
@@ -235,6 +238,7 @@ public class AddCommand extends Command {
     }
 
     private void getMemberForTask(Task task) {
+        Ui.printLineBreak();
         Ui.promptForMemberIndex();
         boolean isCorrectMember = false;
         while (!isCorrectMember) {
@@ -256,13 +260,20 @@ public class AddCommand extends Command {
 
     public CommandResult execute() {
         if (isCorrectFormat) {
+            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                Member member = new Member(memberName);
+                addToMemberRoster(member);
+                return new CommandResult(Ui.getMemberAddedMessage(member));
+            }
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
+
                 Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 int eventIndex = getEventForTask(task);
                 getMemberForTask(task);
+                Ui.printLineBreak();
                 return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
             }
 
@@ -270,12 +281,6 @@ public class AddCommand extends Command {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
-            }
-
-            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
-                Member member = new Member(memberName);
-                addToMemberRoster(member);
-                return new CommandResult(Ui.getMemberAddedMessage(member));
             }
         }
         return new CommandResult("Item unable to be added!");

@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 class DeleteCommandTest {
 
     @Test
-    void deleteOneEvent_listOfTwoEvents_oneEventRemaining() {
+    void deleteOneEvent_listOfTwoEvents_oneEventRemaining() throws DukeException {
         setUp();
         Command command1 = Parser.parseCommand("delete -e 2");
         command1.execute();

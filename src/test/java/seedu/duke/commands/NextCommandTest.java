@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -31,7 +32,7 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestEvent() {
+    public void nextCommandResult_nextEarliestEvent() throws DukeException {
         setUp();
         Command command1 = Parser.parseCommand("next event");
         Ui.printEvent(eventCatalog.get(0));
@@ -57,7 +58,7 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask_taskExists() {
+    public void nextCommandResult_nextEarliestTask_taskExists() throws DukeException {
         setUp();
         Command command1 = Parser.parseCommand("next task 1");
         Ui.printTask(eventCatalog.get(0).getFromTaskList(0));
@@ -75,7 +76,7 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask_noTaskExists() {
+    public void nextCommandResult_nextEarliestTask_noTaskExists() throws DukeException {
         setUp();
         Command command1 = Parser.parseCommand("next task 2");
         assertEquals("This Event has no tasks!", command1.execute().feedbackToUser);

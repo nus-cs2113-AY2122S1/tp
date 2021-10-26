@@ -14,23 +14,39 @@ public class Ui {
             + "help\n"
             + "\t - Show a summary of the commands and options that I can handle\n\n"
             + "list\n"
-            + "\t - Lists all the events and tasks currently in the schedule\n"
-            + "\t - An additional -e or -t flag can be appended to list either events or tasks only\n"
-            + "\t - E.g. list -e OR list -t\n\n"
-            + "add -e n/TITLE d/DATE v/VENUE b/BUDGET\n"
+            + "\t - Lists all the events in your schedule in chronological order\n"
+            + "\t - To list Tasks: list [Event Index] -t\n"
+            + "\t - To list Members of a Task: list [Event Index] t/[Task Index]\n\n"
+            + "add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET\n"
             + "\t - Add an event to the schedule\n\n"
-            + "delete -e n/INDEX\n"
-            + "\t - Deletes an event given its index in the overall schedule\n\n"
-            + "select -e n/INDEX\n"
-            + "\t - Selects an event given its index in the overall schedule and displays its details\n\n"
+            + "delete -e INDEX\n"
+            + "\t - Delete an event given its index\n\n"
+            + "select -e INDEX\n"
+            + "\t - Select an event and display its details\n\n"
+            + "find EVENT_KEYWORD(S)\n"
+            + "\t - Find an event based on the given keyword/query\n\n"
+            + "done -e INDEX\n"
+            + "\t - Mark an event as done given its index\n\n"
+            + "undo -e INDEX\n"
+            + "\t - Un-mark an event as done given its index\n\n"
             + "add -t n/TITLE d/DATE\n"
             + "\t - Add a task to the schedule\n\n"
-            + "delete -t n/INDEX\n"
+            + "delete -t INDEX\n"
             + "\t - Deletes a task given its index in the overall schedule\n\n"
-            + "select -t n/INDEX\n"
-            + "\t - Selects a task given its index in the overall schedule and displays its details\n\n"
-            + "update -e OR -t\n"
-            + "\t - Displays the respective list of events or tasks that you can choose and update";
+            + "select -t INDEX\n"
+            + "\t - Displays more details about the selected task. Requires an event to first be selected.\n\n"
+            + "done -t INDEX\n"
+            + "\t - Mark a task as done given its index. Requires an event to first be selected.\n\n"
+            + "undo -t INDEX\n"
+            + "\t - Un-mark a task as done given its index\n\n"
+            + "add -m MEMBER_NAME\n"
+            + "\t - Add a member to your current roster of members\n\n"
+            + "delete -m MEMBER_NAME\n"
+            + "\t - Delete a member from your roster given his/her name\n\n"
+            + "update EVENT_INDEX\n"
+            + "\t - Choose an event to update. You can update tasks/members under that event from there.\n\n"
+            + "bye\n"
+            + "\t - Exit the program. Bye!";
 
     public static String readInput() {
         Scanner in = new Scanner(System.in);
@@ -42,11 +58,17 @@ public class Ui {
     }
 
     public static String getLineBreak() {
-        return "______________________________________________________________________";
+        return "_____________________________________________________________________________________________"
+                + "_______________";
     }
 
     public static void printLineBreak() {
-        System.out.println("______________________________________________________________________");
+        System.out.println("________________________________________________________________________________________"
+                + "____________________");
+    }
+
+    public static String getInvalidCommandMessage() {
+        return "I'm sorry I did not catch that! Try entering <help> for a list of commands.";
     }
 
     public static void promptForDescription() {
@@ -89,7 +111,7 @@ public class Ui {
     }
 
     public static String getMemberAddedMessage(Member member) {
-        return String.format("Member added: %s\n", member.getName());
+        return String.format("Member added: %s", member.getName());
     }
 
     public static void printGreetingMessage() {
@@ -131,18 +153,19 @@ public class Ui {
     }
 
     public static String getTask(Task task) {
-        return task.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + task.getDescription() + System.lineSeparator() + task.getMemberList()
-                + System.lineSeparator() + task.getEvent();
+        return "Title: " + task.getTitle() + System.lineSeparator()
+                + "Deadline: " + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + "Description: " + task.getDescription() + System.lineSeparator()
+                + "Members: " + System.lineSeparator() + task.getMemberListAsString();
     }
 
     public static String getEvent(Event event) {
-        return event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
-                + event.getDescription() + System.lineSeparator()
-                + event.getVenue() + System.lineSeparator()
-                + event.getBudget() + System.lineSeparator() + event.getTaskList();
+        return "Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: " + System.lineSeparator() + event.getTaskListAsString();
     }
 
     public static void printTask(Task task) {
@@ -188,6 +211,19 @@ public class Ui {
                 + System.lineSeparator()
                 + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
+    }
+
+    public static void printUpdatedEvent(Event event) {
+        System.out.println("Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: ");
+        for (Task t : event.getTaskList()) {
+            printTask(t);
+        }
+        //printList(event.getTaskList());
     }
 
 }
