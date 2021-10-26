@@ -28,7 +28,7 @@ an overview of all the commands you can use with NUSBuddy.
   * [Adding a Task, Lesson or Module - `add`](#adding-a-task-lesson-or-module---add)
   * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
-  * [Deleting Tasks and Lessons - `delete`](#deleting-tasks-or-lessons---delete)
+  * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
   * [Finding Tasks or lessons by keyword - `find`](#finding-tasks-or-lessons-by-keyword---find)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
@@ -86,7 +86,7 @@ Allows you to add a task, lesson or module to your list of tasks, lessons or mod
 > 💡 A task contains a title, the day of the week of the task, and an optional task information.
 
 Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}`
-* `TITLE` refers to the name of the task you wish to create
+* `TITLE` refers to the title of the task you wish to create
 * `DAY_OF_THE_WEEK` can be any of the following, non case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day on which you want to do the task
 * the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
@@ -94,6 +94,7 @@ and refers to the day on which you want to do the task
 to assign to the new task
 
 Example usage:
+
 ```
 $ add task CS2113 tP -d MON
     _______________________________________________________________________________
@@ -106,7 +107,7 @@ $ add task CS2113 tP -d MON
 ```
 This first example shows that an incomplete new task "CS2113 tP" has been added to the list of tasks, and is to be done 
 on Monday. It has no additional information, and has no assigned priority. You can also see the number of tasks you have 
-in the list. The empty braces `[ ]` before the task name indicates that the task is incomplete. You can [visit this 
+in the list. The empty braces `[ ]` before the task title indicates that the task is incomplete. You can [visit this 
 section](#marking-a-task-as-done---done) on marking a task as done to change the completion status of the task. 
 
 ```
@@ -133,6 +134,7 @@ and refers to the day which your lesson occurs on
 * the `-l` flag is optional and `ZOOM_LINK` refers to a meeting link you may have for online lessons 
 
 Example usage:
+
 ```
 $ add lesson CS2113 Lecture -d MON -s 14:00 -e 15:00
     _______________________________________________________________________________
@@ -154,6 +156,7 @@ Format: `add module [MODULE_CODE]`
 * only valid module codes found on NUSMods can be entered into `MODULE_CODE`
 
 Example usage:
+
 ```
 $ add module cs2113t
     _______________________________________________________________________________
@@ -189,9 +192,9 @@ $ list task
     _______________________________________________________________________________
 ```
 This example lists out all 2 tasks. The first task in this list is marked as complete, as indicated by the `[X]` beside the
-task name, "cs2113t tp". The "Wednesday" in brackets also indicates that the task is assigned to be done on Wednesday. 
+task title, "cs2113t tp". The "Wednesday" in brackets also indicates that the task is assigned to be done on Wednesday. 
 Additional information for the task is listed as "add documentation", and the task has High priority. The second task
-on the list is marked as incomplete, as indicated by the `[ ]` beside the task name, "prepare for presentation". It is 
+on the list is marked as incomplete, as indicated by the `[ ]` beside the task title, "prepare for presentation". It is 
 assigned for Friday. The " - " symbol beside "Info:" indicates that the task was added with no additional information, 
 the "None" beside "Priority:" indicates that there was no priority assigned to it either.
      
@@ -219,6 +222,7 @@ Format: `list [task/lesson] [today/tomorrow]`
 * scheduled for the current day or the next day
 
 Example usage:
+
 ```
 $ list task today
     _______________________________________________________________________________
@@ -255,92 +259,115 @@ title, the module bears 2 modular credits.
 
 ### Marking a Task as done - `done`
 
-Indicate that the specified task is completed.
+Allows you to indicate that a task is complete.
 
-Format: `done [INDEX]`
+Format: `done task [INDEX]`
+* `INDEX` refers to the index of the task. You can view this index as the number beside the task title using `list task`.
 
 Example usage:
 
 ```
-$ done 1
+$ done task 2
     _______________________________________________________________________________
      Nice! I've marked this task as done: 
-       [T][X] Title: CS2113 tP (Day: MON)
-     Now you have 1 pending tasks.
+       [X] prepare for presentation (Friday)
+            Info: -
+            Priority: None
+     Now you have 0 pending tasks.
     _______________________________________________________________________________
 ```
+The example output shows that the second task in the list, "prepare for presentation" is now marked as complete. You
+can also see the complete information about the task, and the number of remaining tasks not marked as done. In this 
+example, there are no more pending tasks on the list.
 
-### Deleting Tasks or Lessons - `delete`
+### Deleting Tasks, Lessons or Modules - `delete`
 
-`delete` can be used to perform any of the following actions:
-* delete all tasks and lessons 
-* delete all tasks 
-* delete all lessons 
-* delete a specific task or lesson
+Enables you to remove a task, lesson or module from your list.
+
+> ❗️ Once removed, deleted tasks, lessons or modules cannot be restored.
 
 Format: 
-* `delete [task/lesson] [INDEX]`: deletes the task or lesson at the specified index
-* `delete [task/lesson] all`: deletes all tasks or lessons as specified
-* `delete all`: deletes all tasks and lessons
+
+To delete a task or lesson: `delete [task/lesson] [INDEX]`
+* `delete task` will only display results that are tasks
+* `delete lesson` will only display results that are lessons
+* `INDEX` refers to the index of the task or lesson on your list. You can view this index using `list task` or `list lesson`
+as the number beside the task or lesson title.
 
 Example usage:
 
 ```
-delete lesson 2
-    _______________________________________________________________________________
-     Ok. The following lesson has been deleted:
-       [L] Title: CS2113 Tutorial (Day: THU) (Start: 11am, End: 12pm)
-     Now you have 1 lesson(s) in the list.
-    _______________________________________________________________________________
-
-delete task 1
+$ delete task 1
     _______________________________________________________________________________
      Ok. The following task has been deleted:
-       [T][ ] Title: CS2113 tP (Day: WED)
+       [X] cs2113t tp (Wednesday)
+            Info: add documentation
+            Priority: High
      Now you have 1 task(s) in the list.
     _______________________________________________________________________________
-
-delete lesson all
-    _______________________________________________________________________________
-     All your lessons have been successfully removed.
-    _______________________________________________________________________________
-
-delete all
-    _______________________________________________________________________________
-     All your tasks and lessons have been successfully removed.
-    _______________________________________________________________________________
+```
+In this example output, the first task on the list has been deleted. You can see complete information about the deleted 
+task, which has the title "cs2113 tp", was assigned for Wednesday, and was marked as complete. You can also see the number
+of tasks left on the list, and in this case, there is 1 task on the list.
 
 ```
+$ delete lesson 2
+    _______________________________________________________________________________
+     Ok. The following lesson has been deleted:
+       cg2028 lab
+        Thursday, 02:00 PM - 05:00 PM
+        Meeting URL: meetingLink.com
+     Now you have 3 lesson(s) in the list.
+    _______________________________________________________________________________
+```
+This example output shows that the second lesson on the list, "cg2028" lab, has been deleted. Along with additional 
+information including the day, start time, end time and meeting link for the lesson, you can view the number of remaining
+lessons on the list, 3 in this case.
 
 ### Finding Tasks or Lessons by keyword - `find`
 
-Locate tasks and lessons that match the specified keyword.
+Allows you to locate tasks and lessons that match a keyword of your choice.
 
 Format: `find [task/lesson] [KEYWORD]`
+* `find task` will only display results that are tasks
+* `find lesson` will only display results that are lessons
+* `KEYWORD` refers to the word that you intend to find matching tasks and lessons for, non case-sensitive
 
 Example usage:
 
 ```
-find task cs2113
+$ find task cs2113
     _______________________________________________________________________________
      Here are the matching tasks in your list:
-     1. [T][ ] Title: CS2113 tP (Day: WED)
-     2. [T][ ] Title: CS2113 iP (Day: WED)
-               Info: New increment
+     1. [X] cs2113tp (Wednesday)
+            Info: -
+            Priority: None
+     2. [ ] cs2113t ip (Thursday)
+            Info: -
+            Priority: None
     _______________________________________________________________________________
-
-find lesson cs2113
-    _______________________________________________________________________________
-     Here are the matching lessons in your list:
-     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 2pm)
-     2. [L] Title: CS2113 Tutorial (Day: THU) (Start: 11am, End: 12pm)
-    _______________________________________________________________________________
+```
+In this first example, there are 2 tasks in the list that match the keyword "cs2113t". You can see relevant information about them,
+including the day assigned to the task, the completion status, additional information and priority. The first matching 
+task in the list, for example, is marked as complete, as shown by the `[X]`, is assigned for Wednesday, and has no additional
+information or priority.
 
 ```
+$ find lesson cs2113t
+    _______________________________________________________________________________
+     Here are the matching lessons in your list:
+     1. cs2113t lecture
+        Friday, 04:00 PM - 06:00 PM
+        Meeting URL: -
+    _______________________________________________________________________________
+```
+In this example, there is one lesson with "cs2113t" in its title, "cs2113t lecture". You can view additional information
+about this lesson, specifically the day of the lesson, its start and end time, and attached meeting link. This matching
+lesson is scheduled for Friday from 2pm to 6pm and has no attached meeting link.
 
 ### Exiting the program - `exit`
 
-Exit the program.
+Exits the program.
 
 Format: `exit`
 
