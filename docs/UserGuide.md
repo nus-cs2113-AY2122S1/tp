@@ -1,7 +1,15 @@
 # User Guide
 
-NUS Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line Interface (CLI)** so students can spend most of their time using the terminal and focus on actual works. 
-It is designed to be fast, flexible, and unobtrusive.
+NUS Buddy is a **fast, flexible and unobtrusive weekly planner**.
+Designed specifically for NUS students, it includes an intuitive **task and lesson manager**, as well as a **module planner** 
+with CAP calculation features that can be accessed quickly via a Command Line Interface (CLI), taking up the least of 
+your time, so you can focus on tasks and lessons that are important to you.
+
+This user guide will help you get started on using NUSBuddy so you can go about organising your tasks, lessons and modules 
+right away. The [quick start](#quick-start) guide will show you how to set up NUSBuddy on your computer, and the [features](#features)
+section will show you how to use commands to perform actions on tasks, lessons and modules. If you have issues using NUSBuddy,
+the [FAQ](#faq) section can help with troubleshooting your problem, and the [command summary](#command-summary) will give you
+an overview of all the commands you can use with NUSBuddy.
 
 ## Table of contents
 
@@ -25,16 +33,41 @@ It is designed to be fast, flexible, and unobtrusive.
 3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
 4. To launch the app, run the command `java -jar {filename}.jar`.
 
+You should see the following output when you start NUSBuddy for the first time.
+```
+    _______________________________________________________________________________
+     I can't retrieve the saved task data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved lesson data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved module data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+       _   _       _   _   ____           ____     _   _   ____     ____   __   __ 
+      | \ |"|   U |"|u| | / __"| u     U | __")uU |"|u| | |  _"\   |  _"\  \ \ / / 
+     <|  \| |>   \| |\| |<\___ \/       \|  _ \/ \| |\| |/| | | | /| | | |  \ V /  
+     U| |\  |u    | |_| | u___) |        | |_) |  | |_| |U| |_| |\U| |_| |\U_|"|_u 
+      |_| \_|    <<\___/  |____/>>       |____/  <<\___/  |____/ u |____/ u  |_|   
+      ||   \\,-.(__) )(    )(  (__)     _|| \\_ (__) )(    |||_     |||_ .-,//|(_  
+      (_")  (_/     (__)  (__)         (__) (__)    (__)  (__)_)   (__)_) \_) (__) 
+    _______________________________________________________________________________
+
+```
+> ❗️ The new files created are data files used to store information your list of tasks, lessons and modules. Please refrain 
+from deleting these files in order to preserve your data.
+
 ## Features
 
-> The **CONSTANT_CASE** in the command denotes the parameter. Optional parameter is enclosed with brackets like this 
-> **[CONSTANT_CASE]**.
+> 💡 The **CONSTANT_CASE** in the command denotes the parameter that you can enter your value into.
 
-> [PARAM] → COMPULSORY
+> 💡 [PARAM] denotes a compulsory parameter, while {PARAM} denotes an optional parameter you can choose to omit.
 
-> {PARAM} → OPTIONAL
-
-> [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter
+> 💡 [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
 
 ### Adding a Task or Lesson - `add`
 
