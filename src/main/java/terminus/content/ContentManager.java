@@ -107,6 +107,6 @@ public class ContentManager<T extends Content> {
         if (contents.size() < 1) {
             return false;
         }
-        return contents.stream().anyMatch(x -> x.getName().equals(name));
+        return contents.stream().anyMatch(x -> x.getName().toLowerCase().equals(name.toLowerCase()));
     }
 }
