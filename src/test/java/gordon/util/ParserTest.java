@@ -49,8 +49,10 @@ public class ParserTest {
                 + "10. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
                 + "11. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
                 + System.lineSeparator()
-                + "12. List all tags: listTags" + System.lineSeparator()
-                + "13. Help me: help" + System.lineSeparator()
+                + "12. Delete tags from Cookbook: deleteTag \"/ tagName1 + tagName2 + ...\""
+                + System.lineSeparator()
+                + "13. List all tags: listTags" + System.lineSeparator()
+                + "14. Help me: help" + System.lineSeparator()
                 + "" + System.lineSeparator();
         inputOutputTest(input, expected);
     }

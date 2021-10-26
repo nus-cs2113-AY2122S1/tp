@@ -168,7 +168,7 @@ public class Storage {
                 } else {
                     cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
                 }
-                r.addTagToRecipe(createdTag, r.getName());
+                r.addTagToRecipe(createdTag, r.getName(), true);
             }
         }
     }

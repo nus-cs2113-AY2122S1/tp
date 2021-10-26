@@ -180,11 +180,11 @@ public class Cookbook {
         }
     }
 
-    public void addTagToRecipes(Tag tag) throws GordonException {
+    public void addTagToRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
-                recipe.addTagToRecipe(tag, recipe.getName());
+                recipe.addTagToRecipe(tag, recipe.getName(), false);
             }
         }
     }
