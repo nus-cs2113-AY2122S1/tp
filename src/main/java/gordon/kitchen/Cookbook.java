@@ -285,7 +285,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void untagTagFromRecipe(tag, recipeName)</h2>
+     * <h2>void untagTagFromRecipe(tag, recipeName).</h2>
      *
      * <p>This method removes a specified tag from a specified recipe.</p>
      *
@@ -304,8 +304,8 @@ public class Cookbook {
         }
     }
 
-    /**
-     * <h2>void deleteTagFromRecipes(tag)</h2>
+    /**.
+     * <h2>void deleteTagFromRecipes(tag).</h2>
      *
      * <p>This method removes all instances of a specified tag from all its associated recipes.</p>
      *
@@ -332,7 +332,8 @@ public class Cookbook {
     }
 
     /**
-     * <h2>Tag extractCookbookTag(tagName)</h2>
+     * <h2>Tag extractCookbookTag(tagName).</h2>
+     * 
      * @param tagName  The name of the tag to be extracted
      * @return  The extracted tag
      * @throws GordonException  if no matching tag is found
