@@ -14,6 +14,7 @@ activate IngredientRepository
 
 loop ingredientStorages
 
+
     loop ingredientStorageBatches
 
         alt batchExpiryDate < currentDate
@@ -30,18 +31,18 @@ loop ingredientStorages
 
     loop expiryDatesToRemove
 
-        IngredientRepository -> IngredientStorage: remove(expiryDate)
-        activate IngredientStorage
+        IngredientRepository -> ingredientStorage: remove(expiryDate)
+        activate ingredientStorage
 
-        IngredientStorage --> IngredientRepository
-        deactivate IngredientStorage
+        ingredientStorage --> IngredientRepository
+        deactivate ingredientStorage
 
     end
 
 end
 
-IngredientStorage -> DeleteExpiredIngredientsCommand: Boolean
-deactivate IngredientStorage
+IngredientRepository -> DeleteExpiredIngredientsCommand: Boolean
+deactivate IngredientRepository
 
 DeleteExpiredIngredientsCommand --> Parser: String
 deactivate DeleteExpiredIngredientsCommand

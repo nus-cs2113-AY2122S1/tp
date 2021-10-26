@@ -3,10 +3,17 @@
 
 autonumber
 
--> Parser: parseCommand()
+-> Parser: parseCommand(userInput)
 activate Parser
 
-Parser -> ViewIngredientCommand: execute()
+create ViewIngredientCommand
+Parser -> ViewIngredientCommand: ViewIngredientCommand(ingredientName: String))
+activate ViewIngredientCommand
+
+return
+return command
+
+-> ViewIngredientCommand: execute()
 activate ViewIngredientCommand
 
 ViewIngredientCommand -> IngredientRepository: find(ingredientName: String)
@@ -15,11 +22,8 @@ activate IngredientRepository
 IngredientRepository --> ViewIngredientCommand: ingredient: IngredientStorage
 deactivate IngredientRepository
 
-ViewIngredientCommand --> Parser: String
+<-- ViewIngredientCommand: String
 deactivate ViewIngredientCommand
-
-<-- Parser: Command
-deactivate Parser
 
 
 @enduml

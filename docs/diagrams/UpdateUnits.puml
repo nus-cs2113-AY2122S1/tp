@@ -3,10 +3,17 @@
 
 autonumber
 
--> Parser: parseCommand()
+-> Parser: parseCommand(userInput)
 activate Parser
 
-Parser -> UpdateUnitsCommand: execute()
+create UpdateUnitsCommand
+Parser -> UpdateUnitsCommand : UpdateUnitsCommand(ingredientName: String, newUnits: String))
+activate UpdateUnitsCommand
+
+return
+return command
+
+-> UpdateUnitsCommand: execute()
 activate UpdateUnitsCommand
 
 UpdateUnitsCommand -> IngredientRepository: find(ingredientName: String)
@@ -27,10 +34,7 @@ activate RecipeList
 RecipeList --> UpdateUnitsCommand:
 deactivate RecipeList
 
-UpdateUnitsCommand --> Parser: String
+<-- UpdateUnitsCommand: String
 deactivate UpdateUnitsCommand
-
-<-- Parser: Command
-deactivate Parser
 
 @enduml
