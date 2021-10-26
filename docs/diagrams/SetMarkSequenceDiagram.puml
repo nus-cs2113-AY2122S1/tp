@@ -9,7 +9,6 @@ Participant ":SetMarkCommand" as setMarkCommand
 Participant ":ModuleList" as moduleList
 Participant ":Module" as module
 Participant ":AssessmentList" as assessmentList
-Participant ":Assessment" as assessment
 Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":Storage" as storage
