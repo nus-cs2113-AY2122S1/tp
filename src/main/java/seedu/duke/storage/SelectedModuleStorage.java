@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
-public class SelectedModuleStorage {
+public class SelectedModuleStorage extends UserStorage {
     private static Logger logger = Logger.getLogger("SelectedModuleStorageLog");
 
     private static final String FILE_PATH = "data/selectedModules.txt";
@@ -29,7 +29,7 @@ public class SelectedModuleStorage {
     }
 
     public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
-        File file = loadFile();
+        File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         ArrayList<Module> modules = new ArrayList<>();
@@ -40,14 +40,5 @@ public class SelectedModuleStorage {
         }
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         return modules;
-    }
-
-    private File loadFile() throws IOException {
-        File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        }
-        return file;
     }
 }
