@@ -93,8 +93,8 @@ For a quick summary of all commands, please click [here](#4-command-summary) ins
 <br/>
 
 ### 2.1. Getting help: `help`
-The help command would return the basic commands that are able to be input into CLI.
-The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide
+The help command would return the basic commands that are supported by Traveller.
+The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide.
 
 #### Format: `help`
 
@@ -107,7 +107,7 @@ The CLI then returns the shortest path from one point to another.
 #### Format: `new TRIP_NAME /from START /to END`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
-   * `START` and `END` destinations must be countries included in `flightData/flights.txt`.
+   * `START` and `END` destinations must be countries included in *flightData/flights.txt*.
 
 #### Usage Example:
 
@@ -120,7 +120,7 @@ ____________________________________________________________
 ```
 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
-> Take a look in `flightData/flights.txt` to see how Traveller recognises them!
+> Take a look in *flightData/flights.txt* to see how Traveller recognises them!
 
 <br/>
 
@@ -162,6 +162,7 @@ ____________________________________________________________
 ```
 
 > ![](documentationPics/info.png) Days are 0-indexed based. That is, the first day of your trip is day 0.
+> 
 > ![](documentationPics/tip.png) If your item spans the whole day, just type in `All day` for the time field!
 
 <br/>
@@ -354,7 +355,7 @@ Exits the program.
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
 **A**: Traveller can only read specific words as destinations. 
-Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
+Please check in *flightData/flights.txt* for all supported destinations and their specific wordings.
 
 <br/>
 

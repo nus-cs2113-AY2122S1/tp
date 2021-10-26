@@ -73,6 +73,6 @@ public class NewCommand extends Command {
         List<Double> distances = result.getDistances();
         Trip trip = new Trip(getTripName(), getStartCountry(), getEndCountry(), path, distances);
         tripsList.addTrip(trip);
-        ui.printNewTripCreated(getEndCountry());
+        ui.printNewTripCreated(getTripName());
     }
 }
