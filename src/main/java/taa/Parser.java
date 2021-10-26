@@ -25,7 +25,7 @@ import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
 import taa.command.MedianMarkCommand;
 import taa.command.SetAttendanceCommand;
-import taa.command.SetMarksCommand;
+import taa.command.SetMarkCommand;
 import taa.command.SortByScoresCommand;
 import taa.command.SetCommentCommand;
 import taa.command.DeleteCommentCommand;
@@ -119,7 +119,7 @@ public class Parser {
             break;
 
         case Command.COMMAND_SET_MARKS:
-            command = new SetMarksCommand(argument);
+            command = new SetMarkCommand(argument);
             break;
 
         case Command.COMMAND_EDIT_MARK:

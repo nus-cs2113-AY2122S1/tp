@@ -14,7 +14,7 @@ import taa.util.Util;
 /**
  * Class that deals with the command for the setting of marks.
  */
-public class SetMarksCommand extends Command {
+public class SetMarkCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_ASSESSMENT_NAME = "a";
@@ -32,7 +32,7 @@ public class SetMarksCommand extends Command {
         + "Marks must be between %d and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_MARKS_ADDED = "Marks set for %s: %,.2f for %s";
 
-    public SetMarksCommand(String argument) {
+    public SetMarkCommand(String argument) {
         super(argument, SET_MARKS_ARGUMENT_KEYS);
     }
 

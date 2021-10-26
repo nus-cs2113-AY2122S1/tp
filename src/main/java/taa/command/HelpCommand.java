@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
         new EditAssessmentCommand(""),
         new DeleteAssessmentCommand(""),
         new ListMarksCommand(""),
-        new SetMarksCommand(""),
+        new SetMarkCommand(""),
         new EditMarkCommand(""),
         new DeleteMarkCommand(""),
         new AverageMarksCommand(""),
