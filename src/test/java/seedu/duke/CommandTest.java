@@ -17,6 +17,7 @@ import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -95,5 +96,6 @@ public class CommandTest {
         testCommand4.execute(testTracker, testUi, budgetManager);
         assertEquals(2600, testTracker.getTotalIncome());
     }
+
 }
 
