@@ -13,10 +13,6 @@ public class TimetableCommand extends Command {
     }
 
     public void execute() {
-        if (showUserItemsOnly) {
-            timeTable.showUserItemsTimetable();
-        } else {
-            timeTable.showTimetable();
-        }
+        timeTable.showTimetable(showUserItemsOnly);
     }
 }

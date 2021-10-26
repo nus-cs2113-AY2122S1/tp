@@ -1,6 +1,6 @@
 package seedu.command;
 
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.user.Profile;
 
 public class TranscriptCommand extends Command {
@@ -10,7 +10,7 @@ public class TranscriptCommand extends Command {
     }
 
     public void execute() {
-        Profile currentProfile = Duke.getProfileInUse();
+        Profile currentProfile = UniMods.getProfileInUse();
         currentProfile.showTranscript();
     }
 }

@@ -1,8 +1,8 @@
 package seedu.ui;
 
-import seedu.duke.Duke;
 import seedu.module.GradedModule;
 import seedu.module.UngradedModule;
+import seedu.unimods.UniMods;
 import seedu.user.Profile;
 
 import java.time.LocalDateTime;
@@ -85,7 +85,7 @@ public class TranscriptUi {
     public static void printConclusion() {
         System.out.println("\nTotal Credits Fulfilled : " + mcsCompleted);
         System.out.println();
-        Profile currentProfile = Duke.getProfileInUse();
+        Profile currentProfile = UniMods.getProfileInUse();
         TextUi.printCap(currentProfile.getCap());
         System.out.println("\n\t" + notice);
     }
