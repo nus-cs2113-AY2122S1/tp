@@ -5,9 +5,9 @@ import java.util.List;
 public class SchedulerUi {
     private static final String END_LINE = System.lineSeparator();
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
-            + "----------------------------------------------------- " + END_LINE;
+            + "-------------------------------------------------- " + END_LINE;
     private static final String APPOINTMENT_TABLE_HEADER = " |  ID  |     Date/Time     | Patient ID |"
-            + "     Patient Name     | Staff ID |      Staff Name      | ";
+            + "     Patient Name     | Staff ID |      Staff Name      | " + END_LINE;
 
     public static String getAddSchedulerHelpMessage() {
         return " " + END_LINE;
