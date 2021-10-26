@@ -44,7 +44,10 @@ The other core components of SEPlanner are:
 
 ### Command Implementation
 
-<img src="images/Package%20commands.png" width = "280"/>  
+<p align = "center">
+<img src="images/Package%20commands.png" width = "800" />
+</p>
+
 
 Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
 
@@ -71,7 +74,9 @@ Step 10. The user executes `exit` command to terminate the program.
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
 
-<img src="images/Ui_UML.png" width = "280"/>
+<p align = "center">
+<img src="images/Ui_UML" width = "800" />
+</p>
 
 The above class diagram illustrates the relationship between the classes within the Ui components.
 
