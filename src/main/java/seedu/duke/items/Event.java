@@ -45,6 +45,16 @@ public class Event extends Item {
         return taskList;
     }
 
+    public String getTaskListAsString() {
+        StringBuilder tasks = new StringBuilder();
+        int counter = 1;
+        for (Task task: taskList) {
+            tasks.append(counter).append(". ");
+            tasks.append(task.getTitle()).append("\n");
+        }
+        return tasks.toString();
+    }
+
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
