@@ -40,9 +40,8 @@ public class AddExpenditureCommand extends AddCommand {
     }
 
     public void execute() {
-        Expenditure newExpenditure = new Expenditure(description, spending, date, category);
-        allRecordList.addExpenditure(description, spending, date, category, false);
-        TextUi.showExpenditureAddedMessage(newExpenditure, false, allRecordList);
+        Expenditure addedExpenditure = allRecordList.addExpenditure(description, spending, date, category, false);
+        TextUi.showExpenditureAddedMessage(addedExpenditure, false, allRecordList);
     }
 
 
