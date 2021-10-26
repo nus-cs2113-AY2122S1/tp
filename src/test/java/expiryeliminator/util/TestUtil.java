@@ -233,6 +233,24 @@ public class TestUtil {
         }
     }
 
+    public static IngredientRepository generateIngredientRepositoryWithExpiredIngredients(int quantity1,
+                                                                                          int quantity2) {
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDateMinusThreeDays = currentDate.minus(3, ChronoUnit.DAYS);
+        final LocalDate currentDateMinusThreeWeeks = currentDate.minus(3, ChronoUnit.WEEKS);
+
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+
+        try {
+            ingredientRepository.add("Chicken", null, quantity1, currentDateMinusThreeDays);
+            ingredientRepository.add("Salt", null, quantity2, currentDateMinusThreeWeeks);
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
     public static IngredientStorage generateFirstIngredient() {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
