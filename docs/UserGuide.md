@@ -87,7 +87,7 @@ Allows you to add a task, lesson or module to your list of tasks, lessons or mod
 
 Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}`
 * `TITLE` refers to the title of the task you wish to create
-* `DAY_OF_THE_WEEK` can be any of the following, non case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
+* `DAY_OF_THE_WEEK` can be any of the following, not case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day on which you want to do the task
 * the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
 * the `-p` flag is optional and `PRIORITY` can be either `low`, `medium` or `high`, referring to the priority you wish 
@@ -127,7 +127,7 @@ been added for Monday, and has the additional information "add documentation", w
 
 Format: `add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {ZOOM_LINK}`
 * `TITLE` refers to the title of the lesson to add, typically a module code or subject name
-* `DAY_OF_THE_WEEK` can be any of the following, non case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
+* `DAY_OF_THE_WEEK` can be any of the following, not case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day which your lesson occurs on
 * `START_TIME` refers to the time at which your lesson starts in HH:MM format ie; 2pm would be 14:00
 * `END_TIME` refers to the time at which your lesson ends in HH:MM format
@@ -152,7 +152,7 @@ meeting link, and that it is the only lesson in the list.
 > retrieved from NUSMods using the module code.
 
 Format: `add module [MODULE_CODE]`
-* `MODULE_CODE` refers to the module code you can find on NUSMods, non case-sensitive
+* `MODULE_CODE` refers to the module code you can find on NUSMods, not case-sensitive
 * only valid module codes found on NUSMods can be entered into `MODULE_CODE`
 
 Example usage:
@@ -294,6 +294,9 @@ To delete a task or lesson: `delete [task/lesson] [INDEX]`
 * `INDEX` refers to the index of the task or lesson on your list. You can view this index using `list task` or `list lesson`
 as the number beside the task or lesson title.
 
+To delete a module: `delete module [MODULE_CODE]`
+* `MODULE_CODE` refers to the module code assigned to the module as per NUSMods, not case-sensitive
+
 Example usage:
 
 ```
@@ -324,6 +327,17 @@ This example output shows that the second lesson on the list, "cg2028" lab, has 
 information including the day, start time, end time and meeting link for the lesson, you can view the number of remaining
 lessons on the list, 3 in this case.
 
+```
+$ delete module cg2028
+    _______________________________________________________________________________
+     Ok. The following module has been deleted:
+       CG2028 Computer Organization (2MCs) 
+     Now you have 2 module(s) in the list.
+    _______________________________________________________________________________
+```
+In this example, the module CG2028 was deleted from the list. You can see information about the deleted module including 
+the module title and modular credits. You can also see the number of remaining modules in the list, 2 in this case.
+
 ### Finding Tasks or Lessons by keyword - `find`
 
 Allows you to locate tasks and lessons that match a keyword of your choice.
@@ -331,7 +345,7 @@ Allows you to locate tasks and lessons that match a keyword of your choice.
 Format: `find [task/lesson] [KEYWORD]`
 * `find task` will only display results that are tasks
 * `find lesson` will only display results that are lessons
-* `KEYWORD` refers to the word that you intend to find matching tasks and lessons for, non case-sensitive
+* `KEYWORD` refers to the word that you intend to find matching tasks and lessons for, not case-sensitive
 
 Example usage:
 
