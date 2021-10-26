@@ -436,7 +436,7 @@ public class Parser {
     }
 
     private static boolean getUserToConfirm() {
-        Ui.AskUserToConfirm();
+        Ui.askUserToConfirm();
         boolean isValidInput = false;
         boolean doesUserAgree = false;
         while (!isValidInput) {

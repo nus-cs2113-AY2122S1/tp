@@ -359,7 +359,7 @@ public class Ui {
         System.out.println();
     }
 
-    public static void AskUserToConfirm() {
+    public static void askUserToConfirm() {
         System.out.print("There will be people involved that don't need to pay, are you sure? (y/n)");
     }
     //@@author
