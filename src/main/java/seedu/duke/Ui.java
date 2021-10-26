@@ -31,14 +31,17 @@ public class Ui {
     private static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
     private static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
     private static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
+    private static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
+    private static final String SORT_FLIGHT_BY_DEPARTURE_MESSAGE = "Sorted by departing flight times";
+    private static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
+    private static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     /**
      * Empty Ui class constructor.
      */
     public Ui() {
-        ;
     }
 
     /**
@@ -208,7 +211,6 @@ public class Ui {
         }
     }
 
-
     public void showSortedClientById(ClientList clients, ArrayList<String> sortedClientIds)
             throws TourPlannerException {
         show(SORT_CLIENT_ID_MESSAGE);
@@ -223,11 +225,46 @@ public class Ui {
     public void showSortedClientByName(ClientList clients, ArrayList<String> sortedClientNames)
             throws TourPlannerException {
         clients.initTempArray();
-        show(SORT_CLIENT_ID_MESSAGE);
+        show(SORT_CLIENT_NAME_MESSAGE);
         int listIndex = 1;
         for (String clientName : sortedClientNames) {
             Client currClient = clients.getClientByName(clientName);
             show(listIndex + ". " + currClient + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+    public void showSortedFlightById(FlightList flights, ArrayList<String> sortedIds)
+            throws TourPlannerException {
+        show(SORT_FLIGHT_ID_MESSAGE);
+        int listIndex = 1;
+        for (String flightId : sortedIds) {
+            Flight currFlight = flights.getFlightById(flightId);
+            show(listIndex + ". " + currFlight + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+    public void showSortedFlightByReturn(FlightList flights, ArrayList<String> sortedFlightByArriveDates)
+            throws TourPlannerException {
+        show(SORT_FLIGHT_BY_ARRIVAL_MESSAGE);
+        flights.initTempArray();
+        int listIndex = 1;
+        for (String flightArriveDate : sortedFlightByArriveDates) {
+            Flight currFlight = flights.getFlightByArriveDate(flightArriveDate);
+            show(listIndex + ". " + currFlight + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+    public void showSortedFlightByDeparture(FlightList flights, ArrayList<String> sortedFlightByDepartureDates)
+            throws TourPlannerException {
+        show(SORT_FLIGHT_BY_DEPARTURE_MESSAGE);
+        flights.initTempArray();
+        int listIndex = 1;
+        for (String flightDepartDate : sortedFlightByDepartureDates) {
+            Flight currFlight = flights.getFlightByDepartDate(flightDepartDate);
+            show(listIndex + ". " + currFlight + System.lineSeparator());
             listIndex++;
         }
     }
@@ -310,7 +347,5 @@ public class Ui {
         show(BYE_MESSAGE);
         showLine();
     }
-
-
 }
 
