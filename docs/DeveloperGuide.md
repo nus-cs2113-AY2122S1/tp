@@ -1,3 +1,7 @@
+---
+layout: page
+title: Developer Guide
+---
 
 ## Contents 
 * __Acknowledgements__
