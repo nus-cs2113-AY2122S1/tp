@@ -98,7 +98,7 @@ Tips give helpful information to make your experience better.
 Warnings caution you about certain actions that might be dangerous.
 </div>
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
 Notes are important pieces of information. 
 </div>
 
