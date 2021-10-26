@@ -22,8 +22,9 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.MissingArgAddException;
 import seedu.exception.MissingArgEditException;
-import seedu.exception.MissingArgException;
+import seedu.exception.MissingArgSearchException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingIndexException;
 import seedu.exception.MissingNameException;
@@ -165,7 +166,7 @@ public class MainParser {
     private Command parseAddContact(String userInput) {
         contactParser = addContactParser;
         try {
-            String[] details = contactParser.parseContactDetails(userInput);
+            String[] details = addContactParser.parseContactDetails(userInput);
             //check if name is specified in input
             if (details[NAME_INDEX] == null) {
                 throw new MissingNameException();
@@ -174,14 +175,10 @@ public class MainParser {
             return new AddContactCommand(details);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        } catch (MissingArgEditException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
+        } catch (MissingDetailException | MissingArgAddException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
         } catch (MissingNameException e) {
             return new FailedCommand(FailedCommandType.MISSING_NAME);
-        } catch (MissingDetailException e) {
-            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -195,18 +192,14 @@ public class MainParser {
         try {
             int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
             String[] details = editContactParser.parseContactDetails(userInput);
-            //throws InvalidFlagException, MissingDetailException, MissingArgException
+            //throws InvalidFlagException, MissingDetailException, MissingArgEditException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingArgEditException e) {
+        } catch (MissingDetailException | MissingIndexException | MissingArgEditException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
-        } catch (MissingDetailException e) {
-            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
-        } catch (MissingIndexException e) {
-            return new FailedCommand(FailedCommandType.MISSING_INDEX);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -247,7 +240,7 @@ public class MainParser {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
             return new ViewContactCommand(viewedIndex);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (MissingIndexException e) {
             return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
@@ -259,7 +252,7 @@ public class MainParser {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
             return new DeleteContactCommand(deletedIndex);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (MissingIndexException e) {
             return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
@@ -273,8 +266,8 @@ public class MainParser {
             int detailFlag = searchContactParser.getDetailFlag(searchInput);
             String query = searchContactParser.parseSearchQuery(searchInput);
             return new SearchContactCommand(query, detailFlag);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingArgSearchException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_SEARCH);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         }

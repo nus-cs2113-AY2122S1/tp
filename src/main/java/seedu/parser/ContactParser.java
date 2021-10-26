@@ -21,7 +21,8 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public abstract String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingArgException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
-            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException, MissingArgEditException;
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException,
+            MissingArgEditException, MissingArgAddException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact

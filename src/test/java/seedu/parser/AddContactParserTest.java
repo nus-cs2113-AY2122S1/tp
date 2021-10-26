@@ -11,6 +11,7 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.MissingArgAddException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
@@ -37,7 +38,7 @@ class AddContactParserTest {
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
             MissingDetailException, MissingArgException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, MissingArgAddException {
         inputUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw    twit -te   tel69  -e yoyo@gmail.com";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
         expectedOutput = new String[]{"andre", "ng-andre", "linkedin", "tel69", "twit", "yoyo@gmail.com"};
