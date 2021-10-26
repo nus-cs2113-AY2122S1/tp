@@ -5,7 +5,7 @@ import seedu.entry.Entry;
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
-public abstract class dateOperator {
+public abstract class DateOperator {
     public static boolean isBetweenStartAndEndDates(LocalDate startDate, LocalDate endDate, Entry item) {
         LocalDate date = item.getDate();
         return (date.isAfter(startDate) || date.isEqual(startDate))
