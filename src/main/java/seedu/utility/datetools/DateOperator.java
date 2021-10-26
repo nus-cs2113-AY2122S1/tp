@@ -8,8 +8,10 @@ import java.util.function.Predicate;
 public abstract class DateOperator {
     public static boolean isBetweenStartAndEndDates(LocalDate startDate, LocalDate endDate, Entry item) {
         LocalDate date = item.getDate();
-        return (date.isAfter(startDate) || date.isEqual(startDate))
-                && (date.isBefore(endDate) || date.isEqual(endDate));
+        return ((date.isAfter(startDate) || date.isEqual(startDate))
+                && (date.isBefore(endDate) || date.isEqual(endDate)))
+                || ((date.isAfter(endDate) || date.isEqual(endDate))
+                && (date.isBefore(startDate) || date.isEqual(startDate)));
     }
 
     public static boolean isSameYear(int inputYear, Entry item) {
