@@ -2,6 +2,7 @@ package seedu.parser;
 
 import seedu.command.AddCommand;
 import seedu.command.CalculateCapCommand;
+import seedu.command.ChangeSemesterCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -17,7 +18,7 @@ import seedu.command.TimetableCommand;
 import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.flags.SearchFlags;
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
@@ -38,7 +39,13 @@ public class CommandParser {
     private String gradeType = "";
     public static boolean isErrorThrown = false;
 
-
+    /**
+     * Parses user input into different Command objects depending on the input.
+     *
+     * @param text User input.
+     * @param timetable Timetable object for timetable commands.
+     * @return command A Command object which class depends on the input.
+     */
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
         text = text.trim();
@@ -53,7 +60,11 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("show")) {
             command = parseShowCommand(text);
         } else if (lowerCaseText.startsWith("timetable")) {
-            command = new TimetableCommand(Duke.timetable);
+            boolean showUserItemsOnly = false;
+            if (lowerCaseText.contains("-u")) {
+                showUserItemsOnly = true;
+            }
+            command = new TimetableCommand(timetable, showUserItemsOnly);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
@@ -72,6 +83,8 @@ public class CommandParser {
             command = parseRemoveCommand(text);
         } else if (lowerCaseText.startsWith("transcript")) {
             command = new TranscriptCommand();
+        } else if (lowerCaseText.startsWith("semester")) {
+            command = new ChangeSemesterCommand(timetable);
         } else {
             command = new InvalidCommand();
         }
@@ -175,7 +188,7 @@ public class CommandParser {
 
     private Command parseCheckCommand(String text) {
         String moduleToBeChecked = text.substring(CHECK_LENGTH).trim();
-        return new CheckCommand(moduleToBeChecked, Duke.getProfileInUse());
+        return new CheckCommand(moduleToBeChecked, UniMods.getProfileInUse());
     }
 
     /**

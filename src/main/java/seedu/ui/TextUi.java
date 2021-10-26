@@ -1,6 +1,5 @@
 package seedu.ui;
 
-
 import seedu.module.Lesson;
 import seedu.module.Module;
 
@@ -16,11 +15,14 @@ public class TextUi {
     public static final String LINE = "__________________________________________________________________________\n";
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = "  _    _       _ __  __           _     \n"
+        + " | |  | |     (_)  \\/  |         | |    \n"
+        + " | |  | |_ __  _| \\  / | ___   __| |___ \n"
+        + " | |  | | '_ \\| | |\\/| |/ _ \\ / _` / __|\n"
+        + " | |__| | | | | | |  | | (_) | (_| \\__ \\\n"
+        + "  \\____/|_| |_|_|_|  |_|\\___/ \\__,_|___/\n"
+        + "                                        \n"
+        + "                                        ";
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
@@ -115,69 +117,33 @@ public class TextUi {
         System.out.println(module.getFullInfo());
     }
 
-    public static boolean printMatchingMod(Module module, String searchTerm) {
-        if (codeContains(module, searchTerm)) {
-            System.out.println(module);
-            return true;
-        }
-        /*
-        // title match not used for now
-        if (codeMatch(module, searchTerm) || titleMatch(module, searchTerm)) {
-            System.out.println(module);
-        }
-        */
-        return false;
-    }
-
-    private static boolean codeContains(Module module, String searchTerm) {
-        return module.getModuleCode().toLowerCase().contains(searchTerm.toLowerCase());
-    }
-
-    public static boolean codeMatch(Module module, String searchTerm) {
-        return module.getModuleCode().equalsIgnoreCase(searchTerm.toLowerCase());
-    }
-
-    private static boolean titleMatch(Module module, String searchTerm) {
-        return module.getTitle().toLowerCase().contains(searchTerm.toLowerCase());
-    }
-
     public static void printErrorMessage() {
         System.out.println("Error occurred.");
     }
 
     public static void printUpdateStartMessage() {
         System.out.println("Updating, standby...");
+        System.out.println("Press ENTER to cancel the update.");
+    }
+
+    public static void printUpdateInterruptMessage() {
+        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
     }
 
     public static void printUpdateSuccessMessage() {
         System.out.println("Local data updated successfully.");
     }
 
+    public static void printSearchInterruptMessage() {
+        System.out.println(LINE + "SEARCH CANCELLED.\n" + LINE);
+    }
+
     public static void printWelcomeMessage() {
         System.out.println(STARTUP);
     }
 
-    public static void printLoadStartMessage() {
-        System.out.println("Loading modules from save...");
-    }
-
-    public static void printLoadError() {
-        System.out.println("Save data failed to load. Fetch data from NUSMods with \"update\".");
-    }
-
-    public static void printLoadSuccessMessage(int count) {
-        System.out.println(count + " mods loaded from save.");
-        if (count < 10000) {
-            System.out.println("Save data seems to be incomplete or missing. Please run \"update\".");
-        }
-    }
-
     public static void printNotFoundMessage() {
         System.out.println("No matching mod found.");
-    }
-
-    private static void printFullInfo(Module module) {
-        System.out.println(module.getFullInfo());
     }
 
     public static void printNoConnectionMessage() {
@@ -260,5 +226,44 @@ public class TextUi {
 
     public static void printModuleRemoved(String moduleCode) {
         System.out.println(moduleCode + " is successfully removed from your Transcript.");
+    }
+
+    public static int changeSemesterCommand() {
+        System.out.println("Change semester? (This will reset timetable)");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return Integer.parseInt(input);
+    }
+
+    public static void printSemesters(int semester) {
+        printCurrentSemester(semester);
+        System.out.println("1. Semester 1");
+        System.out.println("2. Semester 2");
+        System.out.println("3. Special Term 1");
+        System.out.println("4. Special Term 2");
+        System.out.println("5. cancel");
+    }
+
+    public static void printCurrentSemester(int semester) {
+        String currentSem = "";
+        switch (semester) {
+        case 1:
+            currentSem = "Semester 1";
+            break;
+        case 2:
+            currentSem = "Semester 2";
+            break;
+        case 3:
+            currentSem = "Special Term 1";
+            break;
+        case 4:
+            currentSem = "Special Term 2";
+            break;
+        default:
+            currentSem = "Semester 1";
+        }
+        System.out.println("Current semester: " + currentSem);
     }
 }

@@ -22,7 +22,7 @@ public class Timetable implements Comparable<Timetable> {
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
 
-    private final int semester;
+    private int semester;
     private int earliestHour;
     private int latestHour;
 
@@ -276,7 +276,30 @@ public class Timetable implements Comparable<Timetable> {
         TimetableUI.printDaySchedule("FRI", friday, earliestHour, latestHour);
         TimetableUI.printDaySchedule("SAT", saturday, earliestHour, latestHour);
         TimetableUI.printDaySchedule("SUN", sunday, earliestHour, latestHour);
+        TimetableUI.printModules(modules, this.semester);
+    }
+
+    public void showUserItemsTimetable() {
+
+        TimetableUI.printScheduleHours(earliestHour, latestHour);
+        TimetableUI.printDaySchedule("MON", getUserItems(monday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("TUE", getUserItems(tuesday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("WED", getUserItems(wednesday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("THU", getUserItems(thursday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("FRI", getUserItems(friday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("SAT", getUserItems(saturday), earliestHour, latestHour);
+        TimetableUI.printDaySchedule("SUN", getUserItems(sunday), earliestHour, latestHour);
         TimetableUI.printModules(modules);
+    }
+
+    public TimetableItem[] getUserItems(TimetableItem[] schedule) {
+        TimetableItem[] userItemSchedule = schedule.clone();
+        for (int i = 0; i < userItemSchedule.length; i++) {
+            if (userItemSchedule[i] instanceof TimetableLesson) {
+                userItemSchedule[i] = null;
+            }
+        }
+        return userItemSchedule;
     }
 
     public TimetableLesson getLesson(DayOfWeek day, int startHour) {
@@ -314,6 +337,11 @@ public class Timetable implements Comparable<Timetable> {
 
     public int getSemester() {
         return semester;
+    }
+
+    public void setSemester(int semester) {
+        assert (semester > 0 && semester < 5);
+        this.semester = semester;
     }
 
     public int getEarliestHour() {
