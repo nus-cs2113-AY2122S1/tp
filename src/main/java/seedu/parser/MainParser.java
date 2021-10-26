@@ -188,8 +188,8 @@ public class MainParser {
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
-            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
             String[] details = editContactParser.parseContactDetails(userInput);
+            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
             //throws InvalidFlagException, MissingDetailException, MissingArgEditException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {

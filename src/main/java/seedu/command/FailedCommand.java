@@ -57,10 +57,10 @@ public class FailedCommand extends Command {
             ExceptionTextUi.invalidFormatMessage();
             break;
         case NUM_OUT_OF_BOUND:
-            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
             break;
         case NUM_OUT_OF_BOUND_EDIT:
-            ExceptionTextUi.numOutOfRangeEditMessage(contactList.getListSize() - 1);
+            ExceptionTextUi.numOutOfRangeEditMessage(contactList.getListSize());
             break;
         case INVALID_DELETE:
             ExceptionTextUi.invalidDeleteFlag();
