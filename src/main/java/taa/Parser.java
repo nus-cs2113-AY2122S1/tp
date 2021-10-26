@@ -27,6 +27,9 @@ import taa.command.MedianMarkCommand;
 import taa.command.SetAttendanceCommand;
 import taa.command.SetMarksCommand;
 import taa.command.SortByScoresCommand;
+import taa.command.SetCommentCommand;
+import taa.command.DeleteCommentCommand;
+import taa.command.ListCommentCommand;
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
@@ -141,6 +144,18 @@ public class Parser {
 
         case Command.COMMAND_SORT_BY_SCORES:
             command = new SortByScoresCommand(argument);
+            break;
+
+        case Command.COMMAND_SET_COMMENT:
+            command = new SetCommentCommand(argument);
+            break;
+
+        case Command.COMMAND_DELETE_COMMENT:
+            command = new DeleteCommentCommand(argument);
+            break;
+
+        case Command.COMMAND_LIST_COMMENT:
+            command = new ListCommentCommand(argument);
             break;
 
         default:

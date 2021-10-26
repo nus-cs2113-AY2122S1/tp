@@ -15,14 +15,24 @@ import java.util.HashMap;
 public class Student implements ClassChecker {
     private String id;
     private String name;
+    private String comment;
     private final AttendanceList attendanceList;
     private final HashMap<String, Double> results;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
+        this.comment = "";
         this.attendanceList = new AttendanceList();
         this.results = new HashMap<>();
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return this.comment;
     }
 
     /**

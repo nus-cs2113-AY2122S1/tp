@@ -33,6 +33,9 @@ public abstract class Command {
     public static final String COMMAND_EDIT_MARK = "edit_mark";
     public static final String COMMAND_DELETE_MARK = "delete_mark";
     public static final String COMMAND_SORT_BY_SCORES = "sort_by_scores";
+    public static final String COMMAND_SET_COMMENT = "set_comment";
+    public static final String COMMAND_DELETE_COMMENT = "delete_comment";
+    public static final String COMMAND_LIST_COMMENT = "list_comment";
     public static final String COMMAND_HELP = "help";
 
     // Common messages
@@ -45,6 +48,7 @@ public abstract class Command {
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
+    protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";
