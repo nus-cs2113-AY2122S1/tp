@@ -5,7 +5,7 @@ participant ":Duke" as Duke
 activate Duke
 
 create ":Parser" as Parser
-Duke -> Parser:runSlam()
+Duke -> Parser
 activate Parser #yellow
 
 create ":SelectCommand" as SelectCommand
