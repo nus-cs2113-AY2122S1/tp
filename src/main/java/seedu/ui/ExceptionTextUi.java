@@ -138,6 +138,15 @@ public class ExceptionTextUi {
                 + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
                 + "      example : edit 0 -n George -g procoder -te george123"
                 + "NOTE : At least one flag and description required";
+    public static void missingArgAddMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n"
+                + "NOTE : At least name and description required\n"
+                + "       Order of parameters do not matter";
+        printDoubleLineMessage(message);
+    }
         printDoubleLineMessage(message);
     }
 
