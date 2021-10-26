@@ -1,7 +1,35 @@
 package taa;
 
 
-import taa.command.*;
+import taa.command.AddAssessmentCommand;
+import taa.command.AddModuleCommand;
+import taa.command.AddStudentCommand;
+import taa.command.AverageMarksCommand;
+import taa.command.Command;
+import taa.command.DeleteAssessmentCommand;
+import taa.command.DeleteAttendanceCommand;
+import taa.command.DeleteMarkCommand;
+import taa.command.DeleteModuleCommand;
+import taa.command.DeleteStudentCommand;
+import taa.command.EditAssessmentCommand;
+import taa.command.EditMarkCommand;
+import taa.command.EditModuleCommand;
+import taa.command.EditStudentCommand;
+import taa.command.ExitCommand;
+import taa.command.FindStudentCommand;
+import taa.command.HelpCommand;
+import taa.command.ListAssessmentsCommand;
+import taa.command.ListAttendanceCommand;
+import taa.command.ListMarksCommand;
+import taa.command.ListModulesCommand;
+import taa.command.ListStudentsCommand;
+import taa.command.MedianMarkCommand;
+import taa.command.SetAttendanceCommand;
+import taa.command.SetMarksCommand;
+import taa.command.SortByScoresCommand;
+import taa.command.SetCommentCommand;
+import taa.command.DeleteCommentCommand;
+import taa.command.ListCommentCommand;
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
