@@ -30,7 +30,12 @@ public class Ui {
     }
 
     public static void printWrongInputMessage() {
-        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
+        System.out.println("Wrong input. Please key in --help for some help on how to use the programme. \n"
+         + "If you would like to exit the programme, type 'bye'");
+    }
+
+    public static void printListAllMessage() {
+        System.out.println("===== Would you like to list the full attendance sheet? (y / n) =====");
     }
 
     public static void printMatchingTrainingList(TrainingList trainings, String query) {
@@ -108,9 +113,6 @@ public class Ui {
         }
     }
 
-
-
-
     public static void printHelp() {
         System.out.println("usage: " + "\n"
                 + "    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] \n"
@@ -118,7 +120,7 @@ public class Ui {
                 + "    add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>] \n"
                 + "    delete [/m <MEMBER_INDEX_NUMBER>] \n"
                 + "    delete [/t <TRAINING_INDEX_NUMBER>] \n"
-                + "    delete [/att /n <TRAINING_NAME> <ATTENDANCE_INDEX_TO_DELETE>] \n"
+                + "    delete [/att /t <TRAINING_NAME> /i <ATTENDANCE_INDEX_TO_DELETE>] \n"
                 + "    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE "
                 + "NUMBER>]\n"
                 + "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"

@@ -39,10 +39,9 @@ public class Entry {
             Ui.printList(trainings);
             break;
         case LIST_ATTENDANCE_KEYWORD:
-            Ui.printList(attendanceList);
-            break;
-        case LIST_FILTERED_ATTENDANCE_KEYWORD:
             Ui.printList(Parser.getFilteredAttendanceList(attendanceList, entry));
+            Parser.askToListAll(attendanceList);
+            break;
         case ADD_MEMBER_KEYWORD:
             Member member = Parser.getMemberDetails(entry);
             new AddMember(members, member);
@@ -67,8 +66,8 @@ public class Entry {
             new DeleteTraining(trainings, trainingIndex);
             break;
         case DELETE_ATTENDANCE_KEYWORD:
-            attendanceIndex = Parser.getIndex(entry);
-            new DeleteAttendance(attendanceList, attendanceIndex);
+            attendanceIndex = Parser.getLastIndex(entry);
+            new DeleteAttendance(attendanceList, entry, Parser.getFilteredAttendanceList(attendanceList, entry), attendanceIndex);
             //Parser.deleteAttendance(attendanceList, entry);
             break;
         case FIND_MEMBER_KEYWORD:

@@ -1,15 +1,48 @@
 package seedu.duke.command;
 
 import seedu.duke.Ui;
+
+import java.io.File;
+import java.io.IOException;
+
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.attendance.Attendance;
+import seedu.duke.Parser;
+
 import seedu.duke.AttendanceStorage;
 
 public class DeleteAttendance {
-    public DeleteAttendance(AttendanceList attendanceList, int index) {
+    public static String getName(AttendanceList filteredAttendenceList, int index) {
+        return filteredAttendenceList.getAttendanceMemberName(index);
+    }
+
+    public DeleteAttendance(AttendanceList attendanceList, String entry, AttendanceList filteredAttendanceList,
+                            int index) {
+        File currentDir = new File("");
+        String[] trainingNameAndLabel = entry.trim().split("/t");
+
         try {
             assert index >= 1;
-            Attendance toDelete = attendanceList.deleteAttendance(index); //index-1 is handled in deleteAttendance()
+            //index-1 is handled in deleteAttendance()
+            String name = getName(filteredAttendanceList, index);
+            String trainingName = Parser.getTrainingName(trainingNameAndLabel[1].trim());
+            System.out.println(Parser.getIndexFromFullList(name, trainingName,
+                    attendanceList));
+            Attendance toDelete = attendanceList.deleteAttendance(Parser.getIndexFromFullList(name, trainingName,
+                    attendanceList));
+
+            System.out.println("===================");
+            System.out.println(trainingName);
+            String DukeAttendanceFilePath = currentDir.getCanonicalPath() + "\\DukeAttendance\\" + trainingName.trim() + ".csv";
+            System.out.println(DukeAttendanceFilePath);
+            File DukeSpecificAttendanceFile = new File(DukeAttendanceFilePath);
+
+            if (DukeSpecificAttendanceFile.exists()) {
+                AttendanceStorage.rewriteAttendanceCsv(filteredAttendanceList, DukeSpecificAttendanceFile,
+                        trainingName);
+            } else {
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+            }
             Ui.printDeletedAttendanceMessage(toDelete);
 
             //Update save file
@@ -17,6 +50,8 @@ public class DeleteAttendance {
             System.out.println("There is no such member number...");
         } catch (AssertionError e) {
             System.out.println("The index to delete must be an integer >= 1");
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
