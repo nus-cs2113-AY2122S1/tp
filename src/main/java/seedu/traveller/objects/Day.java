@@ -16,7 +16,7 @@ public class Day {
         itemsList.addItem(item);
     }
 
-    public Item getItem(int itemNumber) {
+    public Item getItem(int itemNumber) throws TravellerException {
         return itemsList.getItem(itemNumber);
     }
 

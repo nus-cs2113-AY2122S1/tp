@@ -59,6 +59,7 @@ public class SearchItemCommand extends Command {
         Trip trip = tripsList.getTrip(getTripName());
         Day day = trip.getDay(getDayIndex());
 
+
         ArrayList<Item> keyString;
         keyString = day.searchItem(itemKey);
 
