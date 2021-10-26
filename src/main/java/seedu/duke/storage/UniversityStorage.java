@@ -48,7 +48,7 @@ public class UniversityStorage {
         if (!curr.equals(" ")) {
             universityList.add(new University(curr, moduleMappingList, ++index));
         }
-        logger.log(Level.INFO, "Completed loading of universities");
+//        logger.log(Level.INFO, "Completed loading of universities");
         return universityList;
     }
 
