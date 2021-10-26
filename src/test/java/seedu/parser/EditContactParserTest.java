@@ -99,4 +99,18 @@ class EditContactParserTest {
         assertThrows(InvalidTelegramUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
     }
 
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidGithubCharacters_exceptInvalidGithubUsernameException() {
+        String testInput = "edit 1 -g akshay@git";
+        assertThrows(InvalidGithubUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidGithubLength_exceptInvalidGithubUsernameException() {
+        String testInput = "edit 1 -g akshaynarayanismazingprofbutgithubusernameistoolongsoexpectexception";
+        assertThrows(InvalidGithubUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
 }
