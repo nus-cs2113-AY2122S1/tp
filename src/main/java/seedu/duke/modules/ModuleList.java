@@ -1,5 +1,7 @@
 package seedu.duke.modules;
 
+import seedu.duke.universities.University;
+
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -16,6 +18,8 @@ public class ModuleList {
     public void addModule(Module module) {
         assert module != null;
         list.add(module);
+        list.sort(new Module());
+        assert !list.isEmpty();
     }
 
     public void removeModule(String moduleCode) {
@@ -36,12 +40,34 @@ public class ModuleList {
         return list.get(index);
     }
 
-    public boolean searchModule(String moduleCode) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).moduleCode.equals(moduleCode)) {
+    public boolean isModuleExist(String moduleCode) {
+        for (Module module : list) {
+            if (module.moduleCode.equals(moduleCode)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Module getModule(String moduleCode) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).moduleCode.equals(moduleCode)) {
+                return list.get(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Module> getList() {
+        return list;
+    }
+
+    public void listModules() {
+        assert list.size() != 0;
+        for (int i = 0; i < list.size(); i++) {
+            Module curr = list.get(i);
+            String output = (i + 1) + ". " + curr.moduleName;
+            System.out.println(output);
+        }
     }
 }

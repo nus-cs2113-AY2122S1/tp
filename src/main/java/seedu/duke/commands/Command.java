@@ -1,10 +1,11 @@
 package seedu.duke.commands;
 
-import seedu.duke.modules.ModuleList;
-import seedu.duke.universities.UniversityList;
+import seedu.duke.storage.Storage;
 
-public class Command {
+public abstract class Command {
+    protected Storage storage;
 
     public Command() {
+        this.storage = new Storage();
     }
 }

@@ -1,12 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddUniCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.AddModCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.RemoveCommand;
-import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
@@ -35,7 +29,7 @@ public class Parser {
     public Command parseCommand(String userInput) throws ParseException, IOException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException("matcher class exception", 1);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MATCHERCLASS, 1);
         }
 
         String commandWord = matcher.group("commandWord");
@@ -46,18 +40,22 @@ public class Parser {
             return new ListCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_REMOVE:
-            return new RemoveCommandParser().parse(arguments, universitySelectedList,
-                    moduleSelectedList);
+            return new RemoveCommandParser().parse(arguments, universityMasterList, moduleMasterList,
+                    universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_SEARCHMAP:
             return new SearchMapCommandParser().parse(arguments, universityMasterList,
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_ADD:
             return new AddCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
+        case Constants.COMMAND_FIND:
+            return new FindCommandParser().parse(arguments, universityMasterList, moduleMasterList);
+        case Constants.COMMAND_HELP:
+            return new HelpCommandParser().parse();
         case Constants.COMMAND_EXIT:
-            return new ExitCommandParser().parse(universitySelectedList, moduleSelectedList);
+            return new ExitCommandParser().parse();
         default:
-            throw new ParseException("Command not found", 1);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTCOMMAND, 1);
         }
     }
 }

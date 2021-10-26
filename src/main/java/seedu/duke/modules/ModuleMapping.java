@@ -25,5 +25,4 @@ public class ModuleMapping {
         this.mappedModule = mappedModule;
     }
 
-
 }

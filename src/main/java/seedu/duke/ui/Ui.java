@@ -1,36 +1,15 @@
 package seedu.duke.ui;
 
-import seedu.duke.constants.AsciiConstants;
-import seedu.duke.modules.Module;
-import seedu.duke.modules.ModuleMapping;
-import seedu.duke.universities.University;
+import seedu.duke.enumerations.PaddingType;
 import seedu.duke.constants.Constants;
-import seedu.duke.universities.UniversityList;
 
 import static java.lang.System.out;
+
 public class Ui {
 
-    public static void printModule(Module mod, int index) {
-        printIndex(index, false);
-        out.println(" " + mod.getModuleCode());
-    }
-
-    public static void printUniversity(University uni, int index, UniversityList universityMasterList) {
-        printIndex(index, false);
-        out.println(" " + uni.getMasterListIndex(universityMasterList) + "-" + uni.getName());
-    }
-
-    public static void printModuleMapping(ModuleMapping mm, int index) {
-        printIndex(index, false);
-        String mappingDetails
-                = " " + mm.mappedModule.getModuleCode()
-                + " - " + mm.mappedModule.getModuleCode()
-                + " : " + mm.mappedModule.getModuleName();
-        System.out.println(mappingDetails);
-    }
-    
     public static void printIndex(int index, boolean println) {
-        String format = Constants.INDEX_WRAP_FRONT + index + Constants.INDEX_WRAP_BACK;
+        StringBuilder padding = stringPadder(String.valueOf(index), PaddingType.INDEX);
+        String format = Constants.INDEX_WRAP_FRONT + index + Constants.INDEX_WRAP_BACK + padding;
         if (println) {
             out.println(format);
         } else {
@@ -38,16 +17,48 @@ public class Ui {
         }
     }
 
-    public static void printGlobe() {
-        out.println(AsciiConstants.GLOBE);
-    }
-
-    public static void printLogo() {
-        out.println(AsciiConstants.LOGO);
+    static StringBuilder stringPadder(String input, PaddingType type) {
+        StringBuilder padding = new StringBuilder();
+        int benchmarkLength;
+        String fill = " ";
+        switch (type) {
+        case INDEX: {
+            benchmarkLength = Constants.INDEX_LENGTH;
+            break;
+        }
+        case MODULECODE: {
+            benchmarkLength = Constants.MODULE_CODE_LENGTH;
+            break;
+        }
+        case MODULENAME: {
+            benchmarkLength = Constants.MODUlE_NAME_LENGTH;
+            break;
+        }
+        case UNIVERSITYNAME: {
+            benchmarkLength = Constants.UNIVERSITY_NAME_LENGTH;
+            fill = "-";
+            break;
+        }
+        default:
+            throw new IllegalStateException("Unexpected value: " + type);
+        }
+        int paddingCount = benchmarkLength - input.length();
+        for (int i = 0; i < paddingCount; i++) {
+            padding.append(fill);
+        }
+        return padding;
     }
 
     public static void welcome() {
-        printGlobe();
-        printLogo();
+        UiAscii.printGlobe();
+        UiAscii.printLogo();
+    }
+
+    public static void promptInput() {
+        out.print("Enter a command:");
+    }
+
+    public static void printLineSeparator() {
+        out.println(Constants.LINE_SEPARATOR);
     }
 }

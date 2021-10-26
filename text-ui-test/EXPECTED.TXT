@@ -1,316 +1,39 @@
-Enter a command
-Here are all the universities available for you:
-[1] Aalto University
-[2] Aalto University, Helsinki
-[3] Aalto University, Mikkeli
-[4] Aarhus School of Business
-[5] Aarhus University
-[6] Amsterdam University College
-[7] Arizona State University
-[8] Athens University of Economics & Business
-[9] Beihang University
-[10] BI Norwegian Business School
-[11] Bilkent University
-[12] Bogazici University, Turkey
-[13] Boston College, Massachusetts
-[14] Boston University
-[15] Brandeis University
-[16] Bremen University of Applied Sciences
-[17] Budapest University of Technology and Economics
-[18] California Poly State Uni, SLO
-[19] California State University East bay
-[20] Carnegie Mellon University
-[21] Case Western Reserve University
-[22] CentraleSupelec - Ecole Centrale Paris
-[23] Chalmers University of Technology
-[24] Chang Gung University
-[25] Charles University in Prague
-[26] Chongqing University
-[27] Chulalongkorn University
-[28] City University of Hong Kong
-[29] City, University of London
-[30] Clarkson University
-[31] Colgate University
-[32] Columbia University
-[33] Concordia University
-[34] Copenhagen Business School
-[35] Cornell Univ Coll of Agriculture & Life Sciences
-[36] Cornell Univ Coll of Human Ecology
-[37] Corvinus University of Budapest
-[38] Cracow University of Technology
-[39] Czech Technical University
-[40] Dalhousie University
-[41] Delft University of Technology
-[42] Dresden University of Technology
-[43] Duke University
-[44] Durham University
-[45] Eckerd College
-[46] Ecole Centrale Des Arts Et Manufactures, Paris
-[47] Ecole Polytechnique Federale de Lausanne
-[48] Ecole Speciale D'Architecture, Paris
-[49] Eindhoven University of Technology
-[50] Emory University
-[51] Erasmus University
-[52] Esc. Sup. De Admin. Y Dir. De Empresas
-[53] ESSEC Business School
-[54] ETH Zurich
-[55] European Business School
-[56] Ewha Women's University,Seoul
-[57] Free University of Berlin
-[58] Fudan University
-[59] Georg-August-University
-[60] Georgetown University Law Center
-[61] Georgetown University, Washington D.C.
-[62] Georgia Institute of Technology
-[63] Grenoble Institute of Technology (Grenoble INP)
-[64] Hamburg University of Technology (TUHH)
-[65] Hankuk University of Foreign Studies
-[66] Hanyang University
-[67] Hautes Etudes Commerciales (HEC) Paris
-[68] HEC Montreal
-[69] Heidelberg University (Rupr-Karls-Uni Heidelberg)
-[70] Helmut Schmidt University
-[71] Hokkaido University
-[72] Hong Kong University of Science & Technology
-[73] Humboldt University of Berlin
-[74] Humboldt-Universitaet zu Berlin
-[75] Imperial College London
-[76] Indiana University, Bloomington
-[77] Inst Tech y de Estudios Superiores de Monterrey
-[78] Institut d'Etudes Politiques de Grenoble
-[79] Interdisciplinary Center Herzliya (IDC)
-[80] Iowa State University
-[81] Jagiellonian University, Poland
-[82] Johns Hopkins University
-[83] Justus Liebig University, Giessen
-[84] Karlsruhe Institute of Technology
-[85] Karolinska Institute
-[86] Khon Kaen University
-[87] King's College London
-[88] Korea Advanced Inst of Sci & Tech
-[89] Korea University
-[90] KTH Royal Institute of Technology
-[91] Kyoto University
-[92] Kyushu University
-[93] La Trobe University
-[94] LaTrobe University
-[95] Leiden University
-[96] Leiden University Medical Center (LUMC)
-[97] Linkoping University
-[98] London School of Economics & Political Science
-[99] Loughborough University
-[100] Ludwig-Maximilians-University of Munich
-[101] Lund University
-[102] Maastricht University
-[103] Mahidol University
-[104] Management Center Innsbruck
-[105] Mannheim Business School
-[106] McGill University
-[107] McMaster University
-[108] Meiji University
-[109] Minzu University of China
-[110] Monash University
-[111] Nanjing University
-[112] Nanyang Technological University
-[113] National Cheng Kung University
-[114] National Chengchi University
-[115] National Chiao Tung University
-[116] National Taiwan University
-[117] National Taiwan University of Science & Technology
-[118] National Tsing Hua University
-[119] New York University
-[120] NOC Beijing
-[121] NOC Israel
-[122] NOC Munich
-[123] NOC Shanghai
-[124] NOC Shenzhen
-[125] NOC Silicon Valley
-[126] NOC Stockholm
-[127] NOC Toronto
-[128] Northwestern University
-[129] Norwegian Sch of Veterinary Science
-[130] Norwegian School of Economics
-[131] Norwegian University of Science & Technology
-[132] Osaka University
-[133] Oulu University
-[134] Oxford Brookes University
-[135] Peking University
-[136] Pennsylvania State University
-[137] Pohang University of Science & Technology
-[138] Purdue University
-[139] Queen's University at Kingston
-[140] Radboud University Nijmegen
-[141] Renmin University of China
-[142] Rheinisch Friedrich-Wilhelms University of Bonn
-[143] Rice University
-[144] Richard Ivey Sch of Biz, Univ of Western Ontario
-[145] Riga Technical University
-[146] Ritsumeikan University,Kyoto
-[147] RWTH Aachen University
-[148] Sabanci University
-[149] Sciences Po
-[150] Seoul National University
-[151] Shanghai Jiao Tong University
-[152] Simon Fraser University
-[153] Singapore Management University
-[154] Singapore University of Technology and Design
-[155] Stanford University
-[156] Stockholm School of Economics
-[157] Sungkyunkwan University
-[158] Suzhou University
-[159] Swiss Federal Institute of Technology Lausanne
-[160] Tallinn University of Technology
-[161] Tampere University of Technology
-[162] Technical University of Berlin
-[163] Technical University of Darmstadt
-[164] Technical University of Denmark
-[165] Technical University of Munich
-[166] Texas A & M University,College Station,Texas
-[167] Thammasat University
-[168] The Australian National University
-[169] The Chinese University of Hong Kong
-[170] The College of William & Mary
-[171] The George Washington University
-[172] The Hebrew University of Jerusalem
-[173] The Hong Kong Polytechnic University
-[174] The LNM Institute of Information Technology
-[175] The University of Adelaide
-[176] The University of Arizona
-[177] The University of Auckland
-[178] The University of British Columbia
-[179] The University of British Columbia (Okanagan)
-[180] The University of Edinburgh
-[181] The University of Hong Kong
-[182] The University of Manchester
-[183] The University of Melbourne
-[184] The University of New South Wales
-[185] The University of Nottingham
-[186] The University of Queensland
-[187] The University of Sheffield
-[188] The University of Sydney
-[189] The University of Texas at Austin
-[190] The University of Tokyo
-[191] The University of Western Australia
-[192] Tianjin University
-[193] Tianjin University of Finance and Economics
-[194] Tilburg University
-[195] Tohoku University
-[196] Tokyo Institute of Technology
-[197] Tokyo University of Foreign Studies
-[198] Tokyo University of Marine Science and Technology
-[199] Tongji University
-[200] Trinity College Dublin
-[201] Tsinghua University
-[202] Tulane University
-[203] Tunghai University
-[204] Universidad Autonoma de Madrid
-[205] Universidad Catolica De Honduras
-[206] Universidade Nova De Lisboa
-[207] Universita degli Studi di Trento
-[208] Universitat Autonoma de Barcelona
-[209] Universiteit van Stellenbosch
-[210] University College Cork, Ireland
-[211] University College Dublin
-[212] University College London
-[213] University College London, University of London
-[214] University of Aberdeen
-[215] University of Alberta
-[216] University of Amsterdam
-[217] University of Antwerp
-[218] University of Applied Sciences Esslingen
-[219] University of Bath
-[220] University of Birmingham
-[221] University of Bordeaux
-[222] University of Bristol
-[223] University of Brussels, Solvay Business School
-[224] University of Calgary
-[225] University of California
-[226] University of California, Berkeley
-[227] University of California, Davis
-[228] University of California, Irvine
-[229] University of California, Los Angeles
-[230] University of California, Merced
-[231] University of California, Riverside
-[232] University of California, San Diego
-[233] University of California, Santa Barbara
-[234] University of California, Santa Cruz
-[235] University of Cambridge
-[236] University of Canterbury
-[237] University of Colorado Boulder
-[238] University of Commerce 'Luigi Bocconi' Milan
-[239] University of Connecticut
-[240] University of Copenhagen
-[241] University of Delaware
-[242] University of Dundee
-[243] University of Florida
-[244] University of Geneva
-[245] University of Georgia
-[246] University of Glasgow
-[247] University of Goteborg
-[248] University of Gothenburg
-[249] University of Guelph
-[250] University of Hawaii, Manoa
-[251] University of Helsinki
-[252] University of Hohenheim
-[253] University of Illinois, Urbana-Champaign
-[254] University of Innsbruck
-[255] University of Kaiserslautern, FRG
-[256] University of Konstanz
-[257] University of Lausanne
-[258] University of Leeds
-[259] University of Liverpool
-[260] University of Mannheim
-[261] University of Maryland
-[262] University of Miami
-[263] University of Michigan, Ann Arbor
-[264] University of Minnesota
-[265] University of Newcastle upon Tyne
-[266] University of North Carolina, Chapel Hill
-[267] University of North Carolina, Kenan-Flagler
-[268] University of Notre Dame
-[269] University of Oregon
-[270] University of Oslo
-[271] University of Otago
-[272] University of Ottawa
-[273] University of Oxford
-[274] University of Pennsylvania
-[275] University of Pittsburgh
-[276] University of San Diego
-[277] University of Seoul
-[278] University of Southampton
-[279] University of Southern California
-[280] University of St Andrews
-[281] University of St Gallen
-[282] University of Stockholm
-[283] University of Strathclyde
-[284] University of Stuttgart
-[285] University of Technology of Compiegne
-[286] University of Technology of Troyes
-[287] University of the Republic, Uruguay
-[288] University of Toronto
-[289] University of Toronto (Mississauga)
-[290] University of Victoria, British Columbia
-[291] University of Virginia
-[292] University of Warwick
-[293] University of Washington, Seattle
-[294] University of Waterloo
-[295] University of Wisconsin-Madison
-[296] University of Wurzburg
-[297] University of York
-[298] University of Zagreb
-[299] University of Zurich
-[300] Uppsala University
-[301] Utrecht University
-[302] Vanderbilt University
-[303] Victoria University
-[304] Victoria University of Wellington
-[305] Vilnius University
-[306] Warsaw School of Economics
-[307] Waseda University
-[308] Western University
-[309] WHU - Otto Beisheim School of Management
-[310] Xiamen University
-[311] Yale University
-[312] Yonsei University
-[313] York University
-Enter a command
+                                                       /(#######################(*
+                                                 /(#(((((((((((###############(((((((.
+                                             (#((((((###((######################(((((((/
+                                            /#(((((((((((((((((#################((((((((((((,
+                                          (#((((((((((((((#########################(((((((((((*
+                                        /(((((((((((((((##########################((((######((((.
+                                       #(((((((((((((##############################((##(((#####((/
+                                     .##((((((#(((#################################((((((((((((((((
+                                      ###(((######(#################################(((((((((((((((((
+                                    (###(((#######################################(((((((((((((((((#,
+                                   .######((((####################################(((((((((((((((((((
+                                   *#########((###################################(#(((((((((((((((((
+                                   /##########(((((((((#############################(((((((((((((((((
+                                   *############(((((((((((####################################((((((
+                                    ###########((((((((((((((((###############################(#(((#(
+                                    (##########((((((((((((((((((((#############################((((.
+                                     ###########(#((((((((((((((((((((((#######################(((#/
+                                      ############(#((((((((((((((((((########################(#((/
+                                       (############(((((((((((((((((########################(#((,
+                                        .############(#(((((((((((((#########################(((
+                                          ,##########(#((((((((((###########################((
+                                             ##########((((((((############################/
+                                               .########(((#############################(
+                                                   *####((###########################.
+                                                        ,##(###################(
+
+    d888888o.   8 8888888888   8 888888888o   8 8888                  .8.          b.             8 b.             8 8 8888888888   8 888888888o.
+  .`8888:' `88. 8 8888         8 8888    `88. 8 8888                 .888.         888o.          8 888o.          8 8 8888         8 8888    `88.
+  8.`8888.   Y8 8 8888         8 8888     `88 8 8888                :88888.        Y88888o.       8 Y88888o.       8 8 8888         8 8888     `88
+  `8.`8888.     8 8888         8 8888     ,88 8 8888               . `88888.       .`Y888888o.    8 .`Y888888o.    8 8 8888         8 8888     ,88
+   `8.`8888.    8 888888888888 8 8888.   ,88' 8 8888              .8. `88888.      8o. `Y888888o. 8 8o. `Y888888o. 8 8 888888888888 8 8888.   ,88'
+    `8.`8888.   8 8888         8 888888888P'  8 8888             .8`8. `88888.     8`Y8o. `Y88888o8 8`Y8o. `Y88888o8 8 8888         8 888888888P'
+     `8.`8888.  8 8888         8 8888         8 8888            .8' `8. `88888.    8   `Y8o. `Y8888 8   `Y8o. `Y8888 8 8888         8 8888`8b
+ 8b   `8.`8888. 8 8888         8 8888         8 8888           .8'   `8. `88888.   8      `Y8o. `Y8 8      `Y8o. `Y8 8 8888         8 8888 `8b.
+ `8b.  ;8.`8888 8 8888         8 8888         8 8888          .888888888. `88888.  8         `Y8o.` 8         `Y8o.` 8 8888         8 8888   `8b.
+  `Y8888P ,88P' 8 888888888888 8 8888         8 888888888888 .8'       `8. `88888. 8            `Yo 8            `Yo 8 888888888888 8 8888     `88.
+
+=================================================================================
+Enter a command:

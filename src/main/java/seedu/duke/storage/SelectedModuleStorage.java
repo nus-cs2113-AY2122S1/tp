@@ -13,13 +13,12 @@ import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
-public class SelectedModuleStorage {
+public class SelectedModuleStorage extends UserStorage {
     private static Logger logger = Logger.getLogger("SelectedModuleStorageLog");
 
     private static final String FILE_PATH = "data/selectedModules.txt";
 
-    public static void write(ModuleList moduleList) throws IOException {
-        logger.log(Level.INFO, "File writing operation started");
+    public void updateSelectedModuleList(ModuleList moduleList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < moduleList.getSize(); i++) {
             Module curr = moduleList.get(i);
@@ -29,26 +28,17 @@ public class SelectedModuleStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public static ArrayList<Module> load() throws IOException {
-        File file = loadFile();
+    public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
+        File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         ArrayList<Module> modules = new ArrayList<>();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] attributes = line.split(" # ");
-            modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2])));
+            modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), moduleMasterList));
         }
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         return modules;
-    }
-
-    private static File loadFile() throws IOException {
-        File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        }
-        return file;
     }
 }

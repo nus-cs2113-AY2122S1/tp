@@ -17,6 +17,7 @@ public class UniversityList {
     public void addUniversity(University addedUniversity) {
         assert addedUniversity != null;
         list.add(addedUniversity);
+        list.sort(new University());
         assert !list.isEmpty();
     }
 
@@ -52,7 +53,7 @@ public class UniversityList {
     }
 
     public University get(int index) {
-        assert index <= list.size();
+        assert index < list.size();
         return list.get(index);
     }
 
@@ -63,6 +64,15 @@ public class UniversityList {
             }
         }
         return false;
+    }
+
+    public University getUniversity(String universityName) {
+        for (University university : list) {
+            if (university.name.equals(universityName)) {
+                return university;
+            }
+        }
+        return null;
     }
 
 }

@@ -2,7 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
@@ -12,35 +12,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AddModCommandParserTest {
-
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
+    private static UniversityList universityMasterList;
+    private static ModuleList moduleMasterList;
+
+    static {
+        try {
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
-    void parse_validModuleCode_expectModuleObject() throws IOException {
+    void parse_validModuleCode_expectModuleObject() {
         String moduleCode = "CS1231";
-        AddModCommandParser acp = new AddModCommandParser();
-        ModuleList moduleMasterList = new ModuleList(ModuleStorage.load());
+        AddCommandParser acp = new AddCommandParser();
         assertEquals("CS1231", acp.searchForModule(moduleCode, moduleMasterList).getModuleCode());
         assertEquals("Discrete Structures", acp.searchForModule(moduleCode, moduleMasterList).getModuleName());
-        assertEquals(4, acp.searchForModule(moduleCode, moduleMasterList).getModuleCredits());
+        assertEquals(4.0, acp.searchForModule(moduleCode, moduleMasterList).getModuleCredits());
     }
 
     @Test
     void parse_invalidModuleCode_expectException() throws IOException {
         String moduleCode = "CS1011";
-        AddModCommandParser acp = new AddModCommandParser();
-        ModuleList moduleMasterList = new ModuleList(ModuleStorage.load());
-        assertThrows(ParseException.class, () -> acp.parse(moduleCode,
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
     @Test
     void parse_nullInput_expectException() throws IOException {
         String moduleCode = "";
-        AddModCommandParser acp = new AddModCommandParser();
-        ModuleList moduleMasterList = new ModuleList(ModuleStorage.load());
-        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList,
-                universitySelectedList, moduleSelectedList));
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 }

@@ -1,28 +1,26 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.SearchMapCommand;
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
-
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SearchMapCommandParser {
 
-    private Logger logger = Logger.getLogger("SearchMapCommandLog");
+    private final Logger logger = Logger.getLogger("SearchMapCommandLog");
 
     public SearchMapCommand parse(String arguments, UniversityList universityMasterList,
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException {
-        logger.log(Level.INFO, "start parsing searchmap command");
+        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
         if (input.length() == 0) {
-            logger.log(Level.WARNING, "no university given");
-            throw new ParseException("no description given", 1);
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
         University university;
@@ -35,11 +33,11 @@ public class SearchMapCommandParser {
         }
 
         if (university == null) {
-            logger.log(Level.WARNING, "university not found");
-            throw new ParseException("university does not exist", 1);
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
         assert university.getName() != null;
-        logger.log(Level.INFO, "parse success");
+        logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
     }
 
@@ -47,7 +45,7 @@ public class SearchMapCommandParser {
         try {
             Integer.parseInt(input);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }

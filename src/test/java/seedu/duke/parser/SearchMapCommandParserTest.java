@@ -3,7 +3,7 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.UniversityStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
@@ -13,13 +13,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchMapCommandParserTest {
 
+    private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
     private static ModuleList moduleSelectedList = new ModuleList();
+    private static ModuleList moduleMasterList;
+    private static UniversityList universityMasterList;
+
+    static {
+        try {
+            moduleMasterList = new ModuleList(storage.readModuleList());
+            universityMasterList = new UniversityList(
+                    storage.readUniversityList(moduleMasterList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testCorrectUniversityName_success() throws IOException {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
             SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
             assertEquals("Boston University", command.getSelectedUniversity().getName());
@@ -31,25 +43,19 @@ public class SearchMapCommandParserTest {
     @Test
     public void test_NonExistentUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
             new SearchMapCommandParser().parse("non existent", universityMasterList,
                     universitySelectedList, moduleSelectedList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (ParseException e) {
-            assertEquals("university does not exist", e.getMessage());
+            assertEquals("University not found.", e.getMessage());
         }
     }
 
     @Test
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
             new SearchMapCommandParser().parse("", universityMasterList, universitySelectedList, moduleSelectedList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (ParseException e) {
-            assertEquals("no description given", e.getMessage());
+            assertEquals("Missing arguments.", e.getMessage());
         }
     }
 }
