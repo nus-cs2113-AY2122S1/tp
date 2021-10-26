@@ -94,6 +94,8 @@ find
 delete
 switch
 exit
+archive
+unarchive
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
@@ -169,6 +171,10 @@ Address: ADDRESS
 
 ### List information of all current patients: `list`
 
+`list` will show all unarchived patients.
+
+To show archived patients, use `list -ar`
+
 Format: list
 
 Example Output:
@@ -203,6 +209,53 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
+### Find patients based on attributes: `find`
+
+Find all patients that contains the given attributes.
+
+Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+* The attributes given do not have to be in full.
+* At least one attribute must be present.
+
+Example:
+`find n/Smith`
+
+Expected output:
+```
+Here is a list of all patients:
+For full details of each patient, please use the command "view PATIENT_ID"
+ ----------------------------------------------------------------------------------------------------- 
+ |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
+ ----------------------------------------------------------------------------------------------------- 
+ | 3    | S1231234A | John Smith           | 91234567  | johnsmit@eg.com      | Qweqwqwenoiqwenqw    | 
+ ----------------------------------------------------------------------------------------------------- 
+```
+
+### Archive a patient: `archive`
+
+Archive a patient in the list. Archived patients are not shown with `list` command.
+To show all archived patients, use `list -ar`.
+
+This command only works for currently unarchived patients.
+
+Format: `archive PATIENT_ID`
+
+Expected output:
+
+`The patient with ID: 1 is archived successfully.`
+
+### Unarchive a patient: `unarchive`
+
+Unarchive a patient in the list. Unarchived patients are shown on `list`
+
+This command only works for currently archived patients.
+
+Format: `unarchive PATIENT_ID`
+
+Expected output:
+
+`The patient with ID: 1 is unarchived successfully.`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -229,6 +282,8 @@ Address: ADDRESS
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
 | **find**     | `find [i/PERSON_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`find i/s1231234A`|
+| **archive**  | `archive PATIENT_ID`<br/>eg., `archive 1`|
+| **unarchive**| `unarchive PATIENT_ID`<br/>eg., `unarchive 1`|
 
 ### Scheduler View
 
