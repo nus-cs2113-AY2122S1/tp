@@ -8,6 +8,7 @@ import seedu.traveller.exceptions.TripNotFoundException;
 import seedu.traveller.worldmap.Country;
 import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -45,7 +46,7 @@ public class EditCommand extends Command {
         current.setDistances(distances);
     }
 
-    public void execute(TripsList tripsList, Ui ui) throws TravellerException {
+    public void execute(TripsList tripsList, Ui ui) throws TravellerException, EmptyVertexException {
         int tripIndex = tripsList.getTripIndex(this.tripName);
         if (tripIndex == -1) {
             throw new TripNotFoundException();

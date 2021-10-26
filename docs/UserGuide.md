@@ -327,7 +327,7 @@ ____________________________________________________________
 ### 2.14. Edit Distances in Map: `edit-map`
 Edits and updates the distance from the source to destination country.
 
-#### Format: `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist DISTANCE`
+#### Format: `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist NEW_DISTANCE`
 
 #### Usage Example:
 ```

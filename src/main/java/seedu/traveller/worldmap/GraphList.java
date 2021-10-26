@@ -40,10 +40,6 @@ public class GraphList {
         this.nameArray.add(v.name);
     }
 
-    public boolean doesContains(String data) {
-        return this.nameArray.contains(data);
-    }
-
     public Country findVertex(String s) throws EmptyVertexException {
         for (Country v: this.vertexArray) {
             if (Objects.equals(v.name, s)) {
@@ -79,7 +75,4 @@ public class GraphList {
         Country.addNeighbour(distance, endCountry, startCountry);
     }
 
-    public boolean edgeExists(Country s, Country t) {
-        return edgeMatrix[s.key][t.key] > 0.0001;  // floating point exception
-    }
 }

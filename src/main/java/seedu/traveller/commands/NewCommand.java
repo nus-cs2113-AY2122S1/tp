@@ -8,6 +8,7 @@ import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.Country;
 import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -59,7 +60,7 @@ public class NewCommand extends Command {
      * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
      * @throws TravellerException To be thrown if there exists another trip with the specified <code>tripName</code>.
      */
-    public void execute(TripsList tripsList, Ui ui) throws TravellerException {
+    public void execute(TripsList tripsList, Ui ui) throws TravellerException, EmptyVertexException {
         for (int i = 0; i < tripsList.getSize(); i++) {
             if (tripsList.getTrip(i).getTripName().equals(getTripName())) {
                 throw new DuplicateTripException(getTripName());

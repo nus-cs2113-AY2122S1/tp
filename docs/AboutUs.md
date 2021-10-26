@@ -6,4 +6,4 @@ Display | Name | Github Profile | Portfolio
 ![](./profilePics/FoongXinYu.jpg) | Foong Xin Yu | [Github](https://github.com/Uxinnn) | [Portfolio](./team/foongxinyu.md)
 ![](./profilePics/GavienPat.png) | Gavien Pat | [Github](https://github.com/gavienwz) | [Portfolio](./team/gavienpat.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Cui Minjing | [Github](https://github.com/Cuiminjing) | [Portfolio](./team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Jared Cheang | [Github](https://github.com/jach23) | [Portfolio](./team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Jared Cheang | [Github](https://github.com/jach23) | [Portfolio](./team/jaredcheang.md)

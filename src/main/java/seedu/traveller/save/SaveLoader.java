@@ -8,6 +8,8 @@ import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.InvalidSaveFileException;
 import seedu.traveller.exceptions.SaveDataNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -111,7 +113,7 @@ public class SaveLoader {
                 input = scanner.nextLine();
                 Command c = Parser.parse(input);
                 c.execute(tripsList, ui);
-            } catch (TravellerException e) {
+            } catch (TravellerException | EmptyVertexException e) {
                 ui.printReadSaveError(lineNumber);
             }
             lineNumber++;

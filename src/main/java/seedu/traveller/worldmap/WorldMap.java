@@ -1,7 +1,9 @@
 package seedu.traveller.worldmap;
 
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
+import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 
 
 public class WorldMap {
@@ -46,7 +48,8 @@ public class WorldMap {
         }
     }
 
-    public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
+    public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName)
+            throws EmptyVertexException {
         Country sourceCountry = getCountry(sourceCountryName);
         Country targetCountry = getCountry(targetCountryName);
         if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
@@ -58,7 +61,8 @@ public class WorldMap {
         return logic.getToGoal(sourceCountry,targetCountry);
     }
 
-    public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName) {
+    public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName)
+            throws EmptyVertexException {
         altWorldMap();
 
         Country sourceCountry = getCountry(sourceCountryName);
@@ -76,21 +80,41 @@ public class WorldMap {
         return minResult;
     }
 
-    public static Country getCountry(String countryName) {
-        Country country = new Country("",-1);
+    public static Country getCountry(String countryName) throws EmptyVertexException {
+        Country country;
         try {
             country = graphList.findVertex(countryName);
+            return country;
         } catch (EmptyVertexException e) {
             System.out.println(e.getMessage());
         }
-        return country;
+        throw new EmptyVertexException(countryName);
+    }
+
+    public static void distanceNonZero(double dist) throws NonZeroDistanceException {
+        if (dist < 0.1) {
+            throw new NonZeroDistanceException(dist);
+        }
+    }
+
+    public static void distanceNonString(String rawDist)
+            throws NonStringDistanceException {
+        try {
+            double dist = Double.parseDouble(rawDist);
+        } catch (NumberFormatException e) {
+            throw new NonStringDistanceException(rawDist);
+        }
     }
 
     public static void editMap(Double dist, String sourceCountryName, String targetCountryName) {
-        Country sourceCountry = getCountry(sourceCountryName);
-        Country targetCountry = getCountry(targetCountryName);
+        try {
+            Country sourceCountry = getCountry(sourceCountryName);
+            Country targetCountry = getCountry(targetCountryName);
 
-        graphList.modifyEdge(dist, sourceCountry, targetCountry);
-        assert !(dist < 0.00000001) : "distance should be greater than 0.";
+            graphList.modifyEdge(dist, sourceCountry, targetCountry);
+            distanceNonZero(dist);
+        } catch (EmptyVertexException | NonZeroDistanceException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

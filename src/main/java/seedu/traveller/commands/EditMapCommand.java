@@ -3,6 +3,7 @@ package seedu.traveller.commands;
 import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.worldmap.WorldMap;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class EditMapCommand extends Command {
                 + "\n\tdistance: " + dist;
     }
 
-    public void execute(TripsList tripsList, Ui ui) {
+    public void execute(TripsList tripsList, Ui ui) throws EmptyVertexException {
         WorldMap.editMap(dist, this.startCountry, this.endCountry);
         ui.printEditMap(this.startCountry, this.endCountry, dist);
     }
