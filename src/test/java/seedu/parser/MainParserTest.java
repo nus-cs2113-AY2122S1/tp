@@ -55,7 +55,7 @@ public class MainParserTest {
 
     @Test
     public void parseDeleteCommand_validDeleteAllIndex_expectDeleteAddIdMatch() {
-        String testIndex = "-rf";
+        String testIndex = "all";
         int testId = -2;
         testUserInput = "rm " + testIndex;
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
