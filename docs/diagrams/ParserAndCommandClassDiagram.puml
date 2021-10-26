@@ -1,16 +1,16 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-Command <|-- ExitCommand
-Command <|-- ListCommand
-Command <|-- AddCommand
-Command <|-- LoanCommand
+Command <|-up- ExitCommand
+Command <|-up- ListCommand
+Command <|-up- AddCommand
+Command <|-up- LoanCommand
 Command <|-- RemoveCommand
 Command <|-- ReserveCommand
 Command <|-- ReturnCommand
 Command <|-- SearchCommand
-Command <|-- UnknownCommand
-Command <.. Parser: creates
+Command <|-left- UnknownCommand
+Command <.right. Parser: creates
 
 class Parser {
 - parse(input: String): Command
