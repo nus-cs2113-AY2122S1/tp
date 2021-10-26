@@ -20,6 +20,8 @@ public class Messages {
     public static final String WELCOME_MESSAGE = "Welcome to libmgr";
     public static final String EXIT_MESSAGE = "See you soon!";
     public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean";
+    public static final String INVALID_VALUES = "  (!) Invalid/missing values";
+
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
     public static final String LIST_AVAILABLE_MESSAGE = "  (+) Listing out available items in library";
@@ -46,7 +48,7 @@ public class Messages {
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
     // Invalid Formats
     public static final String ADD_INVALID_FORMAT = "  (!) Invalid/missing values!" + System.lineSeparator()
-            + "  (!) Format: add t/TITLE i/ID";
+            + "  (!) Format: add [a/b/m/v] [ARGUMENTS]";
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm ID";
     public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()

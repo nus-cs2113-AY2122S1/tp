@@ -1,16 +1,15 @@
 package seedu.duke.commands;
 
-import seedu.duke.LibmgrException;
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.Status.AVAILABLE;
-import static seedu.duke.Status.LOANED;
+import static seedu.duke.common.Status.AVAILABLE;
+import static seedu.duke.common.Status.LOANED;
 import static seedu.duke.common.Messages.RETURN_SUCCESS;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.WRONG_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.ALREADY_RESERVED_MESSAGE;
 
 /**
  * Class encapsulating command to update the status of the item to be returned.
