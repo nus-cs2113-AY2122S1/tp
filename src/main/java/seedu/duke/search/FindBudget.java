@@ -1,7 +1,6 @@
 package seedu.duke.search;
 
 import seedu.duke.data.AllRecordList;
-import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 
 import java.util.ArrayList;

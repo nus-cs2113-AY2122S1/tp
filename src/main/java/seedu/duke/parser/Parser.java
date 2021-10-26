@@ -42,9 +42,6 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
-//import java.time.LocalDate;
-//import java.util.Locale;
-
 public class Parser {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */

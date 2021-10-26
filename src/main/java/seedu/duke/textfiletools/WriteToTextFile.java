@@ -1,8 +1,11 @@
 package seedu.duke.textfiletools;
 
-import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.ui.TextUi;
+
+import static seedu.duke.common.Messages.MESSAGE_FILE_NOT_EXIST;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_IO;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -31,8 +34,8 @@ public class WriteToTextFile {
 
             writeLineToFile.write(textToWrite);
             writeLineToFile.close();
-        } catch (IOException ioe) { // Exception to be added.
-            System.out.println("IOException: " + ioe.getMessage());
+        } catch (IOException ioe) {
+            System.out.println(MESSAGE_INVALID_IO + ioe.getMessage());
         }
     }
 
@@ -41,7 +44,7 @@ public class WriteToTextFile {
             File inFile = new File(storageDirectory);
 
             if (!inFile.isFile()) {
-                System.out.println("Parameter is not an existing file");
+                TextUi.showInvalidCommandMessage(MESSAGE_FILE_NOT_EXIST);
                 return;
             }
 
@@ -67,5 +70,9 @@ public class WriteToTextFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void convertToCsvFile() {
+
     }
 }

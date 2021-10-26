@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.search.FindBudget;
-
 public class EditBudgetCommand extends EditCommand {
     public int month;
     public double amount;

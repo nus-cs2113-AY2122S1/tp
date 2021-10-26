@@ -1,6 +1,5 @@
 package seedu.duke.data.records;
 
-
 /**
  * Superclass of budget. Each record instance has a month and amount
  * attribute which allows it to be placed into the corresponding MonthList.
