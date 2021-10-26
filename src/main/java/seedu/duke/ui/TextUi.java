@@ -360,7 +360,7 @@ public class TextUi {
 
     public static void statsIntro(AllRecordList recordList) {
         Command command = new StatYearCommand(1);
-        command.setRecordList(recordList);
+        command.setAllRecordList(recordList);
 
         ((StatYearCommand) command).overallStatisticsIntro();
 

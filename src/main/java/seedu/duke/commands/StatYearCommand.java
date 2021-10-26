@@ -13,7 +13,7 @@ public class StatYearCommand extends StatCommand {
         double totalBudgetAmount = 0.0;
 
         for (int i = 1; i <= 12; i++) {
-            totalBudgetAmount += recordList.getBudget(i).getAmount();
+            totalBudgetAmount += allRecordList.getBudget(i).getAmount();
         }
 
         return totalBudgetAmount;
@@ -23,8 +23,8 @@ public class StatYearCommand extends StatCommand {
         double totalExpenditureAmount = 0.0;
 
         for (int i = 1; i <= 12; i++) {
-           for (int j = 0; j < recordList.getExpenditureListSize(i); j += 1) {
-               totalExpenditureAmount += recordList.getExpenditure(j, i).getAmount();
+           for (int j = 0; j < allRecordList.getExpenditureListSize(i); j += 1) {
+               totalExpenditureAmount += allRecordList.getExpenditure(j, i).getAmount();
            }
         }
 
