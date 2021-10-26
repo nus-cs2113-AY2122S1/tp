@@ -19,7 +19,7 @@ public class StonksXD {
     private DataManager dataManager;
     private BudgetManager budgetManager;
     private FinancialAdvisor financialAdvisor;
-    private boolean terminatingFlag;
+    private boolean isNonTerminatingCommand;
     private String advice;
 
     public StonksXD() {
@@ -31,30 +31,19 @@ public class StonksXD {
         this.dataManager = new DataManager(parser, finances, ui, budgetManager);
         dataManager.loadAll();
         
-        this.terminatingFlag = true;
+        this.isNonTerminatingCommand = true;
         
         this.financialAdvisor = new FinancialAdvisor();
         this.advice = financialAdvisor.getRandomAdvice();
     }
-
-    private boolean isNonTerminatingCommand() {
-        return terminatingFlag;
-    }
-
-    private void setTerminatingFlag() {
-        terminatingFlag = false;
-    }
-
+    
     public void run() {
         ui.printWelcome();
-        while (isNonTerminatingCommand()) {
+        while (isNonTerminatingCommand) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
             command.execute(finances, ui, budgetManager);
-            if (command.isExit()) {
-                assert command.getClass() == ExitCommand.class;
-                setTerminatingFlag();
-            }
+            isNonTerminatingCommand = command.isExit();
             dataManager.saveAll();
         }
         // Commented this part to pass Github test 
