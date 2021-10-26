@@ -49,6 +49,7 @@ public class AddCommand extends Command {
             new AddMagazineCommand(args).execute(ui, catalogue);
             break;
         case COMMAND_ADD_VIDEO:
+            new AddVideoCommand(args).execute(ui, catalogue);
             break;
         default:
             ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);

@@ -59,7 +59,7 @@ public class Audio extends Item {
      */
     @Override
     public String toString() {
-        return "[A]" + super.toString() + super.separator + getArtist()
+        return "[A] " + super.toString() + super.separator + getArtist()
                 + super.separator + getDuration();
     }
 }
