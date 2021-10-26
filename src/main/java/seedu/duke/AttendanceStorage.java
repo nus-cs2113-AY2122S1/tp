@@ -38,13 +38,13 @@ public class AttendanceStorage {
     }
 
     /**
-     * This method will load all attendances into the list.
+     * This method will load all attendances into the list
+
      *
      * @param dukeAttendanceFolder the folder path containing all the attendances
      */
     public static void loadAttendanceFiles(File dukeAttendanceFolder, AttendanceList attendanceList) {
         File[] dukeAttendanceFiles = dukeAttendanceFolder.listFiles();
-
         for (File file : dukeAttendanceFiles) {
             //System.out.println(file.getName()); //this can show all the names of attendance files
             loadIndividualAttendanceFile(file, attendanceList);
@@ -64,7 +64,6 @@ public class AttendanceStorage {
                 String fullAttendanceDetails = dukeAttendanceScanner.nextLine();
                 //System.out.println(fullAttendanceDetails);
                 String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
-
                 name = attendanceDetails[0];
                 attended = attendanceDetails[1];
 
@@ -144,12 +143,12 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
-                    dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
-                    dukeAttendanceWriter.write(',');
-                    dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
-                    dukeAttendanceWriter.write('\n');
-                }
+                //if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
+                dukeAttendanceWriter.write(',');
+                dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
+                dukeAttendanceWriter.write('\n');
+                //}
             }
         } catch (Exception e) {
             e.getStackTrace();

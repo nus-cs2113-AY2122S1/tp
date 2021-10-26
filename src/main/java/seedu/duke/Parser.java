@@ -24,6 +24,10 @@ public class Parser {
         return arg.trim().toLowerCase().contains("list /att");
     }
 
+    public static boolean hasFilteredListAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains(" /att /t");
+    }
+
     public static boolean hasAddMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /m");
     }
@@ -111,6 +115,50 @@ public class Parser {
             keyword = Keyword.NO_KEYWORD;
         }
         return keyword;
+    }
+
+    public static String getTrainingName(String query) {
+        String[] words = query.trim().split("[\\s]+");
+        StringBuilder sentenceAfterDeletion = new StringBuilder();
+        for (String word : words) {
+            if (word.contains("/")) {
+                break;
+            } else {
+                sentenceAfterDeletion.append(word).append(" ");
+            }
+        }
+        return sentenceAfterDeletion.toString();
+    }
+
+    public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String query) {
+        // e.g. list /att /t Friday Training /d 0
+        String[] trainingNameAndLabel = query.trim().split("/t");
+
+        String presentOrAbsent = "";
+
+        AttendanceList filteredAttendanceList = new AttendanceList();
+        try {
+            String trainingName = getTrainingName(trainingNameAndLabel[1].trim());
+            for (Attendance attendance : attendanceList.getAttendanceList()) {
+                if (attendance.getTrainingName().equals(trainingName.trim())) {
+                    filteredAttendanceList.addAttendance(attendance);
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printWrongInputMessage();
+        }
+        return filteredAttendanceList;
+    }
+
+    public static Integer getIndexFromFullList(String name, String trainingName, AttendanceList attendanceList) {
+        int index = 0;
+        for (Attendance attendance : attendanceList.getAttendanceList()) {
+            if (attendance.getMemberName().equals(name) & attendance.getTrainingName().equals(trainingName)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
 
     /**
@@ -240,6 +288,18 @@ public class Parser {
         return new Attendance(memberName, trainingName, presentOrAbsent);
     }
 
+    public static Integer getLastIndex(String query) {
+        try {
+            String regex = "[\\s]+";
+            String[] words = query.trim().split(regex);
+            int indexNumber = Integer.parseInt(words[words.length - 1].trim());
+            return indexNumber;
+        } catch (NumberFormatException e) {
+            System.out.println("Index must be a number");
+            return -1;
+        }
+    }
+
     /**
      * Returns an integer Index from the given String query.
      *
@@ -293,6 +353,15 @@ public class Parser {
 
     public static void wrongInputTypeMessage() {
         Ui.printWrongInputMessage();
+    }
+
+    public static void askToListAll(AttendanceList attendanceList) {
+        Ui.printListAllMessage();
+        Scanner userInput = new Scanner(System.in);
+        String query = userInput.nextLine();
+        if (query.equals("y")) {
+            Ui.printList(attendanceList);
+        }
     }
 
     /**
