@@ -29,7 +29,7 @@
 
 - Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
   https://github.com/se-edu/addressbook-level2
-- Inspiration for User Guide and Developer Guide: AddressBook (Level 2) <br />
+- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) <br />
   https://se-education.org/addressbook-level3/DeveloperGuide.html <br/>
   https://se-education.org/addressbook-level3/UserGuide.html
 - Converting text for ConTech: <br />
@@ -62,7 +62,7 @@ ConTech comprises five main components, namely:
 **How the architecture components interact with each other**
 
 The five main components interact with each other, as shown in the sequence diagram below
-for the example "view 2"
+for the example: `view 2`
 
 ![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
 
