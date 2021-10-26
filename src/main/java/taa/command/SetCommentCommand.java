@@ -16,8 +16,8 @@ public class SetCommentCommand extends Command {
     private static final String KEY_STUDENT_COMMENT = "t";
     private static final String[] SET_COMMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX, KEY_STUDENT_COMMENT};
 
-    private static final String MESSAGE_FORMAT_SET_COMMAND_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> " +
-            "%s/<KEY_STUDENT_COMMENT";
+    private static final String MESSAGE_FORMAT_SET_COMMAND_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+            + "%s/<KEY_STUDENT_COMMENT";
     private static final String MESSAGE_FORMAT_SET_COMMENT = "Comment added to student:\n %s | %s";
 
     public SetCommentCommand(String argument) {
