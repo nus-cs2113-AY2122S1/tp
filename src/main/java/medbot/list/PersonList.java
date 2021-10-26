@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import static medbot.ui.Ui.END_LINE;
 
 
-public abstract class PersonList implements MedBotList {
+public abstract class PersonList {
 
     //Sorted to ensure that persons will always be printed in ascending order of ID when storage is manipulated
     private final SortedMap<Integer, Person> persons = new TreeMap<>();
@@ -293,7 +293,6 @@ public abstract class PersonList implements MedBotList {
      *
      * @return storageString of all persons
      */
-    @Override
     public String getStorageString() {
         String output = "";
         for (int key : persons.keySet()) {

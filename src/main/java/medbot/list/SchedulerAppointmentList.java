@@ -9,7 +9,7 @@ import java.util.List;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
-public class SchedulerAppointmentList implements MedBotList {
+public class SchedulerAppointmentList  {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
@@ -111,7 +111,6 @@ public class SchedulerAppointmentList implements MedBotList {
      *
      * @return storageString of all appointments
      */
-    @Override
     public String getStorageString() {
         String output = "";
         for (int key : appointments.keySet()) {

@@ -5,7 +5,6 @@ import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
 import medbot.list.ListItemType;
-import medbot.list.MedBotList;
 import medbot.person.Patient;
 import medbot.person.Staff;
 import medbot.utilities.Pair;
@@ -75,12 +74,12 @@ public abstract class Storage {
 
 
     /**
-     * Add a ListItem object to a MedBotList subclass (eg. PatientList),
+     * Add a ListItem object to the corresponding list,
      * from the text in a storage line in a storage file.
      *
      * @param listItemType enum of ListItem type
      * @param storageLine  a line in storage file
-     * @throws MedBotException if fail to add a ListItem to a MedBotList subclass
+     * @throws MedBotException if fail to add a ListItem to the list
      */
     protected void addListItemFromStorageLine(ListItemType listItemType, Scheduler scheduler, String storageLine)
             throws MedBotException {
@@ -109,15 +108,15 @@ public abstract class Storage {
     }
 
     /**
-     * Write MedBotList subclass (PatientList etc.) storageString to storage file.
+     * Writes the storageString to storage file.
      *
-     * @param medBotList instance of a subclass of MedBotList
+     * @param storageString String containing the data of the list.
      * @throws MedBotException if unable to write to storage text file.
      */
-    public void saveData(MedBotList medBotList) throws MedBotException {
+    public void saveData(String storageString) throws MedBotException {
         try {
             FileWriter fw = new FileWriter(dataPath);
-            fw.write(medBotList.getStorageString());
+            fw.write(storageString);
             fw.close();
         } catch (IOException e) {
             throw new MedBotException(ERROR_SAVE_STORAGE);

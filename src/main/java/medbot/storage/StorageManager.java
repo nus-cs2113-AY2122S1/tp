@@ -51,9 +51,9 @@ public class StorageManager {
      * @throws MedBotException if unable to save data to any of the storage text files
      */
     public void saveToStorage(Scheduler scheduler) throws MedBotException {
-        patientStorage.saveData(scheduler.getPatientList());
-        staffStorage.saveData(scheduler.getMedicalStaffList());
-        appointmentStorage.saveData(scheduler.getSchedulerAppointmentList());
+        patientStorage.saveData(scheduler.getPatientStorageString());
+        staffStorage.saveData(scheduler.getStaffStorageString());
+        appointmentStorage.saveData(scheduler.getAppointmentStorageString());
     }
 
     /**
@@ -64,9 +64,6 @@ public class StorageManager {
      * @throws FileNotFoundException if storage text files cannot be found
      */
     private String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
-        PatientList patientList = scheduler.getPatientList();
-        MedicalStaffList medicalStaffList = scheduler.getMedicalStaffList();
-        SchedulerAppointmentList schedulerAppointmentList = scheduler.getSchedulerAppointmentList();
 
         return patientStorage.loadStorage(PATIENT, scheduler)
                 + staffStorage.loadStorage(STAFF, scheduler)

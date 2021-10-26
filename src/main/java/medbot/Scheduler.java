@@ -32,17 +32,7 @@ public class Scheduler {
     private final MedicalStaffList medicalStaffList = new MedicalStaffList();
     private final SchedulerAppointmentList schedulerAppointmentList = new SchedulerAppointmentList();
 
-    public PatientList getPatientList() { //todo will eventually remove this method for encapsulation
-        return patientList;
-    }
-
-    public MedicalStaffList getMedicalStaffList() { //todo will eventually remove this method for encapsulation
-        return medicalStaffList;
-    }
-
-    public SchedulerAppointmentList getSchedulerAppointmentList() {
-        return schedulerAppointmentList;
-    }
+    //Patient and Staff Management methods
 
     /**
      * Adds the given patient into the scheduler, allocates an id to the patient and returns the id value.
@@ -228,12 +218,18 @@ public class Scheduler {
         medicalStaffList.unarchivePerson(staffId);
     }
 
+    //Storage methods
+
     public int getLastPatientId() {
         return patientList.getLastId();
     }
 
     public void setLastPatientId(int lastPatientId) {
         patientList.setLastId(lastPatientId);
+    }
+
+    public String getPatientStorageString() {
+        return patientList.getStorageString();
     }
 
     public int getLastStaffId() {
@@ -243,6 +239,24 @@ public class Scheduler {
     public void setLastStaffId(int lastStaffId) {
         medicalStaffList.setLastId(lastStaffId);
     }
+
+    public String getStaffStorageString() {
+        return medicalStaffList.getStorageString();
+    }
+
+    public int getLastAppointmentId() {
+        return schedulerAppointmentList.getLastId();
+    }
+
+    public void setLastAppointmentId(int lastAppointmentId) {
+        schedulerAppointmentList.setLastId(lastAppointmentId);
+    }
+
+    public String getAppointmentStorageString() {
+        return schedulerAppointmentList.getStorageString();
+    }
+
+    //Appointment Management methods
 
     /**
      * Returns a copy of the appointment at the specified id.
@@ -326,14 +340,6 @@ public class Scheduler {
         checkAvailability(newAppointment);
         deleteAppointment(appointmentId);
         insertAppointment(newAppointment);
-    }
-
-    public int getLastAppointmentId() {
-        return schedulerAppointmentList.getLastId();
-    }
-
-    public void setLastAppointmentId(int lastAppointmentId) {
-        schedulerAppointmentList.setLastId(lastAppointmentId);
     }
 
     private int insertAppointment(Appointment appointment) throws MedBotException {
