@@ -69,7 +69,7 @@ Each individual Command object includes:
 
 Given below is a class diagram of how the `Command` class and its subclasses are implemented.
 
-![Ui Sequence Diagram](diagrams/command_class_diagram.png)
+![Command Class Diagram](diagrams/command_class_diagram.png)
 
 ## Implementation
 
