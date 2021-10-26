@@ -28,6 +28,21 @@ public enum PriorityEnum {
         return super.toString().toLowerCase();
     }
 
+    ////@@author APZH
+    public boolean isLowerPriorityThan(PriorityEnum comparison) {
+        return this.getValue() < comparison.getValue();
+    }
+
+    ////@@author APZH
+    public boolean isEqualPriorityTo(PriorityEnum comparison) {
+        return this == comparison;
+    }
+
+    public boolean isHigherPriorityThan(PriorityEnum comparison) {
+        return this.getValue() > comparison.getValue();
+    }
+
+    //@@author SeanRobertDH
     /**
      * Returns the Priority enum corresponding to int argument.
      *
@@ -50,4 +65,6 @@ public enum PriorityEnum {
         }
         throw new InvalidPriorityException(priority);
     }
+
+
 }
