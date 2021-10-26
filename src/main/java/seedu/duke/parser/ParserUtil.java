@@ -1,18 +1,33 @@
 package seedu.duke.parser;
 
+import seedu.duke.data.records.Category;
 import seedu.duke.exception.EmptyDescriptionException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class ParserUtil {
 
-    public static int parseMonth(String monthString) throws NumberFormatException {
-        return Integer.parseInt(monthString.trim());
+    public static int parseMonth(String monthString, boolean isCompulsory) throws NumberFormatException {
+        if (isCompulsory) {
+            return Integer.parseInt(monthString.trim());
+        } else {
+            return LocalDate.now().getMonthValue();
+        }
     }
 
     public static int parseIndex(String indexString) throws NumberFormatException {
         return Integer.parseInt(indexString.trim()) - 1;
+    }
+
+    public static int[] parseMultipleIndexes(String indexString) throws NumberFormatException {
+        String[] indexSplit = indexString.trim().split("-", 2);
+        String index1 = indexSplit[0].trim();
+        String index2 = indexSplit[1].trim();
+        int startIndex = Integer.parseInt(index1);
+        int endIndex = Integer.parseInt(index2);
+
+        int[] indexArray = {startIndex, endIndex};
+        return indexArray;
     }
 
     public static String parseDescription(String descString, boolean isCompulsory) throws EmptyDescriptionException {
@@ -25,7 +40,7 @@ public class ParserUtil {
 
     public static double parseAmount(String amountString, boolean isCompulsory) {
         try {
-            return Integer.parseInt(amountString.trim());
+            return Double.parseDouble(amountString.trim());
         } catch (NumberFormatException e) {
             if (isCompulsory) {
                 throw new NumberFormatException();
@@ -35,11 +50,10 @@ public class ParserUtil {
     }
 
     public static LocalDate parseDate(String dateString) {
-        try {
+        if (!dateString.equals("")) {
             return LocalDate.parse(dateString.trim());
-        } catch (DateTimeParseException e) {
-            return LocalDate.now();
         }
+        return LocalDate.now();
     }
 
     public static String parseName(String nameString, boolean isCompulsory) throws EmptyDescriptionException {
@@ -48,5 +62,20 @@ public class ParserUtil {
             throw new EmptyDescriptionException();
         }
         return name;
+    }
+
+    public static Category parseCategory(String categoryString) {
+        if (categoryString.equals("")) {
+            return Category.GENERAL;
+        }
+        return Category.valueOf(categoryString);
+    }
+
+    public static int parseType(String typeString, boolean isCompulsory) {
+        if (isCompulsory) {
+            return Integer.parseInt(typeString.trim());
+        } else {
+            return 0;
+        }
     }
 }

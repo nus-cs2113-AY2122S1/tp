@@ -19,8 +19,8 @@ public class DeleteSingleLoanCommand extends DeleteCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        TextUi.showSingleLoanDeletedMessage(index,
-                allRecordList.getLoan(index - 1, month));
-        allRecordList.deleteLoan(index, month);
+        TextUi.showSingleLoanDeletedMessage(index + 1,
+                allRecordList.getLoan(index, month));
+        allRecordList.deleteLoan(index + 1, month);
     }
 }
