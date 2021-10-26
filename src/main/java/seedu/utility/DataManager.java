@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -157,16 +158,19 @@ public class DataManager {
         FileInputStream fis;
         try {
             fis = new FileInputStream(ADVICE_FILE_NAME);
-        } catch (FileNotFoundException e) {
-            ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
-            return;
-        }
-        Scanner sc = new Scanner(fis);
-        sc.nextLine();
+            Scanner sc = new Scanner(fis);
+            sc.nextLine();
 
-        while (sc.hasNextLine()) {
-            String data = sc.nextLine();
-            financialAdvisor.addAdvice(data);
+            while (sc.hasNextLine()) {
+                String data = sc.nextLine();
+                financialAdvisor.addAdvice(data);
+            }
+        } catch (FileNotFoundException | NoSuchElementException | IllegalStateException e) {
+            if (e instanceof FileNotFoundException) {
+                ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
+            } else {
+                ui.printError(Messages.ERROR_LOADING_ADVICE);
+            }
         }
     }
     

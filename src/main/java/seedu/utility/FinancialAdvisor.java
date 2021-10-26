@@ -17,7 +17,11 @@ public class FinancialAdvisor {
     }
     
     public String getRandomAdvice() {
-        int adviceIndex = random.nextInt(financialAdvices.size());
-        return financialAdvices.get(adviceIndex);
+        int bound = financialAdvices.size();
+        if (bound > 0) {
+            int adviceIndex = random.nextInt(bound);
+            return financialAdvices.get(adviceIndex);
+        }
+        return Messages.DISPLAY_ADVICE_ERROR;
     }
 }
