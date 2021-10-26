@@ -2,6 +2,7 @@ package seedu.duke.nusmods;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.task.type.Lesson;
 
 import java.io.File;
@@ -14,7 +15,7 @@ class NusModsParserTest {
     NusModsParser parser = new NusModsParser();
 
     @Test
-    void getModuleEvents_CS2113T_success() throws IOException {
+    void getModuleEvents_CS2113T_success() throws GetTaskFailedException {
         Lesson[] moduleLessons = parser.getLessons("CS2113T", "C02");
 
         for (Lesson moduleLesson : moduleLessons) {

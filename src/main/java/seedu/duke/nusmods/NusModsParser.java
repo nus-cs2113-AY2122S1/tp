@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import seedu.duke.task.type.Event;
+import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.task.type.Lesson;
 
 import java.io.File;
@@ -34,30 +34,37 @@ public class NusModsParser {
      * @param moduleCode The module code to be queried
      * @param classNo The class number to be queried
      * @return An array of Lessons denoting all class occurrences
-     * @throws IOException If there is neither network connection nor local cache
+     * @throws GetTaskFailedException If there is neither network connection nor local cache
      */
-    public Lesson[] getLessons(String moduleCode, String classNo) throws IOException {
-        JsonObject obj = JsonParser.parseReader(getModuleReader(moduleCode)).getAsJsonObject();
+    public Lesson[] getLessons(String moduleCode, String classNo) throws GetTaskFailedException {
+        Reader moduleReader;
+        try {
+            moduleReader = getModuleReader(moduleCode);
+        } catch (IOException ioe) {
+            throw new GetTaskFailedException(ioe.getMessage());
+        }
+        JsonObject obj = JsonParser.parseReader(moduleReader).getAsJsonObject();
         JsonArray semesterData = obj.getAsJsonArray("semesterData");
         Lesson[] lessons = null;
         for (JsonElement element : semesterData) {
             JsonObject semesterObject = element.getAsJsonObject();
-            if (Semester.fromInt(semesterObject.get("semester").getAsInt()) == Semester.getSemester()) {
-                JsonArray timetable = semesterObject.get("timetable").getAsJsonArray();
-                lessons = StreamSupport.stream(timetable.spliterator(), true)
-                    .map(JsonElement::getAsJsonObject)
-                    .filter(l -> classNo.equals(l.get("classNo").getAsString()))
-                    .map(l -> {
-                        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-                        return new Lesson(moduleCode, classNo,
-                            DayOfWeek.from(DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
-                                    .parse(l.get("day").getAsString())),
-                            LocalTime.parse(l.get("startTime").getAsString(), timeFormatter),
-                            LocalTime.parse(l.get("endTime").getAsString(), timeFormatter),
-                            Semester.acadWeeksToRealWeeks((new Gson()).fromJson(l.get("weeks"), int[].class)));
-                    })
-                    .toArray(Lesson[]::new);
+            if (Semester.fromInt(semesterObject.get("semester").getAsInt()) != Semester.getSemester()) {
+                continue;
             }
+            JsonArray timetable = semesterObject.get("timetable").getAsJsonArray();
+            lessons = StreamSupport.stream(timetable.spliterator(), true)
+                .map(JsonElement::getAsJsonObject)
+                .filter(l -> classNo.equals(l.get("classNo").getAsString()))
+                .map(l -> {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+                    return new Lesson(moduleCode, classNo,
+                        DayOfWeek.from(DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
+                                .parse(l.get("day").getAsString())),
+                        LocalTime.parse(l.get("startTime").getAsString(), timeFormatter),
+                        LocalTime.parse(l.get("endTime").getAsString(), timeFormatter),
+                        Semester.acadWeeksToRealWeeks((new Gson()).fromJson(l.get("weeks"), int[].class)));
+                })
+                .toArray(Lesson[]::new);
         }
         return lessons;
     }
