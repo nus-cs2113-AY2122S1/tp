@@ -4,7 +4,6 @@ import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
-import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,7 +45,7 @@ public class ShortestCommand extends Command {
                 + "\n\tendCountry: " + endCountry;
     }
 
-    public void execute(TripsList tripsList, Ui ui) throws EmptyVertexException {
+    public void execute(TripsList tripsList, Ui ui) {
         MinCalcResult result;
 
         assert Objects.equals(this.distOrCost,"dist") || Objects.equals(this.distOrCost,"cost");
@@ -58,6 +57,9 @@ public class ShortestCommand extends Command {
         }
 
         assert result != null;
+        if (result.getError() == 1) {
+            return;
+        }
         List<Double> distances = result.getDistances();
 
         double sum = 0.0;

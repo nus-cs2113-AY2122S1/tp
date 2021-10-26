@@ -5,7 +5,6 @@ import seedu.traveller.save.SaveLoader;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.WorldMap;
-import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.logging.LogManager;
 
@@ -31,7 +30,7 @@ public class Traveller {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tripsList, ui);
                 isExit = c.getExit();
-            } catch (TravellerException | EmptyVertexException e) {
+            } catch (TravellerException e) {
                 ui.printError(e.getMessage());
             } finally {
                 ui.printLine();

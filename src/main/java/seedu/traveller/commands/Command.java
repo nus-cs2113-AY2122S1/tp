@@ -3,7 +3,6 @@ package seedu.traveller.commands;
 import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 
 //@@author Uxinnn
@@ -23,7 +22,7 @@ public abstract class Command {
      * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
      * @throws TravellerException To be thrown if an error is encountered during the execution.
      */
-    public abstract void execute(TripsList tripsList, Ui ui) throws TravellerException, EmptyVertexException;
+    public abstract void execute(TripsList tripsList, Ui ui) throws TravellerException;
 
     public boolean getExit() {
         return this.isExit;
