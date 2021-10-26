@@ -57,9 +57,13 @@ public class Ui {
     public static void printLogo() {
         out.println(AsciiConstants.LOGO);
     }
+    
+    public static void printExit() {
+        out.println(AsciiConstants.EXIT);
+    };
 
     public static void promptInput() {
-        out.print("Enter a command:");
+        out.print("Enter a command: ");
     }
 
     public static void printLineSeparator() {
