@@ -360,7 +360,7 @@ ____________________________________________________________
 
 Views all existing Dishes in your Dish list.
 
-*Tip❕* Useful to check all your Dishes available.
+*Tip* ❕ Useful to check all your Dishes available.
 
 Format: `list dish`
 
@@ -646,7 +646,7 @@ ____________________________________________________________
 
 View all existing Ingredients in the Ingredient list.
 
-*Tip❕* Useful to check all your Ingredients available
+*Tip* ❕ Useful to check all your Ingredients available
 
 Format: `list ingr`
 
