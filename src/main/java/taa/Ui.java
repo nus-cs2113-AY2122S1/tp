@@ -6,14 +6,14 @@ public class Ui {
     private static final String INPUT_PROMPT = "$ ";
 
     private static final String MESSAGE_BORDER = "------------------------------------------------------------";
-    private static final String MESSAGE_WELCOME = "Welcome to\n" + "\n" +
-            ".___________.    ___           ___      \n" +
-            "|           |   /   \\         /   \\     \n" +
-            "`---|  |----`  /  ^  \\       /  ^  \\    \n" +
-            "    |  |      /  /_\\  \\     /  /_\\  \\   \n" +
-            "    |  |     /  _____  \\   /  _____  \\  \n" +
-            "    |__|    /__/     \\__\\ /__/     \\__\\ \n" + "\n" +
-            "What can I do for you?";
+    private static final String MESSAGE_WELCOME = "Welcome to\n" + "\n"
+            + ".___________.    ___           ___      \n"
+            + "|           |   /   \\         /   \\     \n"
+            + "`---|  |----`  /  ^  \\       /  ^  \\    \n"
+            + "    |  |      /  /_\\  \\     /  /_\\  \\   \n"
+            + "    |  |     /  _____  \\   /  _____  \\  \n"
+            + "    |__|    /__/     \\__\\ /__/     \\__\\ \n" + "\n"
+            + "What can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
     private static final String MESSAGE_FORMAT_EXCEPTION = "An exception has occurred:\n%s";
