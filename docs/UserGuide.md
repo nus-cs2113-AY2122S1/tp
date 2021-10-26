@@ -94,7 +94,7 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 | View the list of commands | `help` |
 | Add new *dish* | `add dish [DISH_NAME]` |
 | Add the *dish wastage* | `add dish waste [DISH_NAME]`; followed by `[WEIGHT_IN_KG]` |
-| Set the limit for Dish Wastage | `set dish limit [DISH_NAME]` ; followed by `[WEIGHT_IN_KG]` |
+| Set the limit for *dish wastage* | `set dish limit [DISH_NAME]` ; followed by `[WEIGHT_IN_KG]` |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
 | View existing *dishes* | `list dish`|
 | Add a new *ingredient* | `add ingr [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
@@ -136,39 +136,42 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Here are the commands you can use:
-1. Adding a Dish : 'add dish [DISH_NAME]'
+1. Adding a Dish : 'add dish [dishName]'
     Example: 'add dish chicken rice'
-2. Adding Dish Wastage : 'add dish waste [DISH_NAME]' followed by '[weight in KG]'
+2. Adding Dish Wastage : 'add dish waste [dishName]' followed by '[weight in KG]'
     Example: 'add dish waste chicken rice' ; '0.8'
-3. Finding a Dish : 'find dish [keyword]'
+3. Adding Dish Limit : 'set dish limit [dishName]' followed by '[weight in KG]'
+    Example: 'set dish limit chicken rice' ; '16.9'
+4. Finding a Dish : 'find dish [keyword]'
     Example: 'find dish chicken rice'
-4. Deleting a Dish : 'del [DISH_NAME]
+5. Deleting a Dish : 'del [dishName]
     Example: 'del dish chicken rice'
-5. Viewing all Dishes : 'list dish'
-6. Sorting Dishes according to Dish Wastage : 'sort dish'
-7. Viewing Graph of Dish Wastage : 'graph dish'
-8. Clearing all Dishes : 'clear dish'
-9. Adding a new Ingredient : 'add ingr [INGR_NAME]' followed by '[weight in KG]'
+6. Viewing all Dishes : 'list dish'
+7. Sorting Dishes according to Dish Wastage : 'sort dish'
+8. Viewing Graph of Dish Wastage : 'graph dish'
+9. Clearing all Dishes : 'clear dish'
+10. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'
     Example: 'add ingr chicken' ; '2'
-10. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]' followed by '[weight in KG]'
+11. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]' followed by '[weight in KG]'
     Example: 'add ingr stored chicken' ; '1.5'
-11. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'
+12. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'
     Example: 'add ingr waste chicken' ; '0.7'
-12. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [ingrName]'
+13. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by '[weight in KG]'
+    Example: 'set ingr limit chicken' ; '42.7'
+14. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'
     Example: 'link chicken rice / chicken'
-13. Finding an Ingredient : 'find ingr [keyword]'
+15. Finding an Ingredient : 'find ingr [keyword]'
     Example: 'find ingr chicken'
-14. Deleting an Ingredient : 'del [ingrName]'
+16. Deleting an Ingredient : 'del [ingrName]'
     Example: 'del ingr chicken'
-15. Viewing all Ingredients : 'list ingr'
-16. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'
-17. Viewing Graph of Ingredient Wastage : 'graph ingr'
-18. Clearing all Ingredients : 'clear ingr'
-19. Clearing both Dishes and Ingredients : 'clear all'
-20. Viewing this list of commands: help
-21. Exiting the program: bye
+17. Viewing all Ingredients : 'list ingr'
+18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'
+19. Viewing Graph of Ingredient Wastage : 'graph ingr'
+20. Clearing all Ingredients : 'clear ingr'
+21. Clearing both Dishes and Ingredients : 'clear all'
+22. Viewing this list of commands: help
+23. Exiting the program: bye
 ____________________________________________________________
-
 ```
 
 <br/>
@@ -206,7 +209,7 @@ Incur wastage on an existing dish.
 
 Format: `add dish waste [DISH_NAME]`
 
-* Can only be performed on existing `DISH_NAME`\
+* Can only be performed on existing `DISH_NAME`
 
 * *Note* 💡 You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
@@ -688,12 +691,17 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Here are the dishes you have:
-1. chicken rice
-   Wastage: [██████████] 2.5 kg
-2. pasta
-   Wastage: [████      ] 1.0 kg
-You can use command 'add' to add new dishes!
+           █       A. prata:3.0kg
+           █       B. chicken rice:12.0kg
+           █       C. chicken chop:7.0kg
+   █   █   █       D. chicken cutlet:12.0kg
+   █   █   █       E. pork chop:4.0kg
+   █   █   █       F. nasi lemak:16.0kg
+   █ █ █   █       G. biryani:3.0kg
+   █ █ █   █  
+   █ █ █ █ █  
+ █ █ █ █ █ █ █
+ A B C D E F G
 ____________________________________________________________
 
 ```
@@ -718,12 +726,17 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Here are the dishes you have: 
-1. fish
-   Wastage: [██████████] 10.0 kg
-2. chicken
-   Wastage: [█         ] 1.5 kg
-You can use command 'add' to add new dishes!
+     █         A. rice:2.0kg
+     █         B. flour:3.0kg
+     █         C. egg:10.0kg
+     █   █     D. pork:4.0kg
+     █   █     E. chicken:7.0kg
+     █   █
+     █ █ █
+   █ █ █ █
+ █ █ █ █ █
+ █ █ █ █ █
+ A B C D E
 ____________________________________________________________
 ```
 
