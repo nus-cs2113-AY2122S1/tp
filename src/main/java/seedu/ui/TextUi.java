@@ -30,7 +30,7 @@ public abstract class TextUi {
 
     // Used to print a line after displayed data
     public static void printBottomLine() {
-        System.out.println("\n" + LINE);
+        System.out.println(LINE);
     }
 
     public static void welcomeMessage() {
@@ -164,7 +164,7 @@ public abstract class TextUi {
     }
 
     public static void contactsEmptyListMessage() {
-        String message = "You have not stored any contacts in ConTech";
+        String message = "You do not have any stored contacts";
         printDoubleLineMessage(message);
     }
 

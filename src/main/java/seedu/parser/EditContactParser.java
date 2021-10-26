@@ -8,21 +8,21 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
-import seedu.exception.MissingArgException;
+import seedu.exception.MissingArgEditException;
 import seedu.exception.MissingDetailException;
 
 public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
     public String[] parseContactDetails(String userInput)
-            throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException,
-            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
-            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
+            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException, InvalidNameException,
+            InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException, MissingArgEditException {
 
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
         if (inputDetails.length < NUMBER_OF_EDIT_ARGS) {
             //if arguments are missing e.g. edit 2
-            throw new MissingArgException();
+            throw new MissingArgEditException();
         }
 
         assert (inputDetails.length == NUMBER_OF_EDIT_ARGS);
@@ -32,7 +32,7 @@ public class EditContactParser extends ContactParser {
         //handles illegal input "edit 0 -" and "edit 0 [invalid string]"
         //valid input will take the form of [, -flag input] so min length should be 2
         if (destructuredInputs.length < NUMBER_OF_EDIT_ARGS - 1) {
-            throw new MissingArgException();
+            throw new MissingArgEditException();
         }
 
         //initialise null array of strings
