@@ -136,7 +136,8 @@ public class ModuleStorage {
         for (String mod : moduleManager.getAllModules()) {
             modDirPath = Paths.get(filePath.getParent().toString(), mod);
             // Check if module name is a valid module and file name
-            if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
+            if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER) || !mod.equals(
+                    mod.toUpperCase())) {
                 // Skip this module and remove from moduleManager
                 TerminusLogger.warning(String.format("Invalid module name detected: %s", mod));
                 moduleManager.removeModule(mod);

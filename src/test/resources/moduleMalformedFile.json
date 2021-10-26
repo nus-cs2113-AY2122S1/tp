@@ -16,7 +16,15 @@
         "contents": []
       }
     },
-    "okay": {
+    "lowercase": {
+      "linkManager": {
+        "contents": []
+      },
+      "questionManager": {
+        "contents": []
+      }
+    },
+    "OKAY": {
       "linkManager": {
         "contents": []
       },
