@@ -41,4 +41,22 @@ public class DeleteHabitCommand extends DeleteCommand {
         }
     }
 
+    /**
+     * Getter for goalIndex (Used in JUnit test).
+     *
+     * @return Index of goal to be deleted from goalList.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
+    }
+
+    /**
+     * Getter for habitIndex (Used in JUnit test).
+     *
+     * @return Index of habit in goal to be deleted.
+     */
+    public int getHabitIndex() {
+        return habitIndex;
+    }
+
 }
