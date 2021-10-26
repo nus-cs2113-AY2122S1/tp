@@ -1,15 +1,10 @@
 package seedu.duke;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -82,21 +77,23 @@ public class Storage {
         FileStorage.writeToFile(jsonString);
     }
 
-    protected static void readFromFile() {
+    public static void readFromFile() {
         try {
             String jsonString = FileStorage.readFromFile();
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
-        } catch (JsonParseException | NoSuchElementException e) {
+        } catch (JsonParseException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyFileWarning();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
-            tryCreateNewFile();
+            createNewFile();
         }
     }
 
-    private static void tryCreateNewFile() {
+    public static void createNewFile() {
         try {
             FileStorage.newBlankFile();
             Ui.newFileSuccessfullyCreated();
@@ -116,7 +113,7 @@ public class Storage {
                 System.exit(1);
                 return;
             } else if (input.contains("y")) {
-                tryCreateNewFile();
+                createNewFile();
                 return;
             }
         }
@@ -205,6 +202,11 @@ public class Storage {
     public static void setLastExpense(Expense lastExpense) {
         Storage.lastExpense = lastExpense;
     }
+
+    public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
+        Storage.listOfTrips = listOfTrips;
+    }
+
 
 
 }

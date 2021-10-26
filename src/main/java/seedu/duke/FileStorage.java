@@ -38,7 +38,7 @@ public class FileStorage {
         return scanner.nextLine();
     }
 
-    public static void newBlankFile() throws IOException {
+    protected static void newBlankFile() throws IOException {
         FileWriter fileWriter = initializeFileWriter();
         fileWriter.close();
     }

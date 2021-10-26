@@ -303,6 +303,12 @@ public class Ui {
         System.out.println("A new save file has been created!");
     }
 
+    public static void printEmptyFileWarning() {
+        System.out.println("A save file was found, but it is empty.");
+        System.out.println("If you wish to recover the contents of your save file, please exit the program now.");
+        System.out.println("Otherwise, you may continue to use the program.");
+    }
+
     public static void printInvalidPerson(String name) {
         System.out.println(name + " is not part of the trip. "
                 + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
