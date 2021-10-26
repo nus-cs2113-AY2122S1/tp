@@ -152,6 +152,14 @@ public class ExceptionTextUi {
                 + "       Order of parameters do not matter";
         printDoubleLineMessage(message);
     }
+
+    public static void missingArgSearchMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      search <FLAG> <QUERY>\n"
+                + "      example : search Ashraf\n"
+                + "                search -g revflash\n"
+                + "NOTE : Flag is optional and only one can be specified";
         printDoubleLineMessage(message);
     }
 
