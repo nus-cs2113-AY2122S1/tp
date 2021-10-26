@@ -278,9 +278,9 @@ public class Ui {
             System.out.println("\t\tfilter options: [category, description, payer, person]");
             System.out.println("\tview index [expense num]");
             System.out.println("\tsummary: shows how much each person spent in total for this trip");
-            System.out.println("\tamount [person]: for settling repayment at the end of the trip, " +
-                    "shows how much this person owes to others, " +
-                    "or how much others owe this person");
+            System.out.println("\tamount [person]: for settling repayment at the end of the trip,"
+                    + "shows how much this person owes to others, "
+                    + "or how much others owe this person");
             System.out.println("\topen [trip num]: open another trip");
             System.out.println("\tquit: exit the program");
             System.out.println();
