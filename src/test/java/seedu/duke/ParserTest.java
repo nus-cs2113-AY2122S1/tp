@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ParserTest {
 
     private static final String CORRECT_ADDCLIENT_ONE = "add -c j12 /n john /cn 91234567 /m johndoe@gmail.com";
-    private static final String CORRECT_ADDCLIENT_TWO = "   add -c j12 /n  john  /cn   91234567 /m    johndoe@gmail.com";
+    private static final String CORRECT_ADDCLIENT_TWO = " add -c j12 /n  john  /cn   91234567 /m    johndoe@gmail.com";
     private static final String CORRECT_ADDCLIENT_THREE = "add -c j12 /n john /m johndoe@gmail.com /cn 91234567";
     private static final String CORRECT_ADDFLIGHT_ONE =
             "add -f SQ-JPN1 /d JPN /r SG /dd 23/10/21 13:00 /rd 27/10/21 02:00";
