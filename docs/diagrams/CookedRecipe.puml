@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+box Logic
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create CookedRecipeCommand
+Parser -> CookedRecipeCommand : CookedRecipeCommand(name)
+activate CookedRecipeCommand
+
+return
+return command
+
+-> CookedRecipeCommand : execute(ingredients, recipes)
+activate CookedRecipeCommand
+end box
+
+box Model
+CookedRecipeCommand -> RecipeList : findRecipe(name)
+activate RecipeList
+
+return recipe
+
+CookedRecipeCommand -> Recipe : getIngredientQuantities()
+activate Recipe
+return ingredientsInRecipe
+
+CookedRecipeCommand -> CookedRecipeCommand : allIngredientsAreSufficient(ingredientsInRecipe,ingredients)
+activate CookedRecipeCommand
+return
+opt all ingredients are sufficient
+loop all ingredients in recipe
+CookedRecipeCommand -> IngredientRepository : findWithNullReturn(name)
+activate IngredientRepository
+return ingredientStorage
+CookedRecipeCommand -> IngredientStorage : remove(quantity)
+activate IngredientStorage
+return ingredient
+end
+
+end box
+
+end
+
+return message
+destroy CookedRecipeCommand
+
+@enduml
