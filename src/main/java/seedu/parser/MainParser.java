@@ -15,6 +15,7 @@ import seedu.command.PersonalContactCommand;
 import seedu.command.SearchContactCommand;
 import seedu.command.ViewContactCommand;
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidDeleteDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.InvalidGithubUsernameException;
@@ -48,6 +49,7 @@ public class MainParser {
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
     private final SearchContactParser searchContactParser = new SearchContactParser();
+    private final DeleteContactParser deleteContactParser = new DeleteContactParser();
 
     public Command parseCommand(String userInput) {
         CommandType commandType = getCommandType(userInput);
@@ -251,11 +253,18 @@ public class MainParser {
     private Command parseDeleteContact(String userInput) {
         try {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
-            return new DeleteContactCommand(deletedIndex);
+            boolean[] deleteDetails = deleteContactParser.getDeleteDetails(userInput);
+            return new DeleteContactCommand(deletedIndex, deleteDetails);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        } catch (InvalidFlagException e) {
+            return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        } catch (InvalidDeleteDetailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_DELETE);
+        } catch (IndexOutOfBoundsException e) {
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         }
     }
 
