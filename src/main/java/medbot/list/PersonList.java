@@ -1,6 +1,5 @@
 package medbot.list;
 
-import java.util.LinkedList;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
@@ -8,6 +7,7 @@ import medbot.utilities.FilterType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import static medbot.ui.Ui.END_LINE;
@@ -31,7 +31,7 @@ public abstract class PersonList extends MedBotList {
      */
     public int addPerson(Person person) {
         int personId = generatePersonId();
-        person.setPersonId(personId);
+        person.setListItemId(personId);
         persons.put(personId, person);
         return personId;
     }
@@ -287,7 +287,7 @@ public abstract class PersonList extends MedBotList {
     @Override
     public void addListItemFromStorage(ListItem personItem) {
         Person person = (Person) personItem;
-        int personId = person.getId();
+        int personId = person.getListItemId();
         persons.put(personId, person);
     }
 

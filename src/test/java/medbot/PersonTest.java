@@ -1,15 +1,10 @@
 package medbot;
 
+import medbot.person.Patient;
 import org.junit.jupiter.api.Test;
 
-import medbot.person.Patient;
-import medbot.person.Person;
-
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class PersonTest {
     private static final String END_LINE = System.lineSeparator();
@@ -47,10 +42,10 @@ class PersonTest {
     @Test
     public void testSetNull() {
         Patient patient = new Patient();
-        patient.setPersonId(123);
+        patient.setListItemId(123);
         patient.setName("Ben");
         patient.setNull();
-        assertEquals(patient.getPersonId(), 123);
+        assertEquals(patient.getListItemId(), 123);
         assertNull(patient.getName());
         assertNull(patient.getEmailAddress());
         assertNull(patient.getResidentialAddress());

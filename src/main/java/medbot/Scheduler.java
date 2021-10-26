@@ -1,6 +1,7 @@
 package medbot;
 
 import java.util.LinkedList;
+
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
@@ -291,7 +292,7 @@ public class Scheduler {
     public void editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
         Appointment oldAppointment = schedulerAppointmentList.getAppointment(appointmentId);
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
-        newAppointment.setAppointmentId(appointmentId);
+        newAppointment.setListItemId(appointmentId);
         assert newAppointment.isComplete();
 
         checkAvailability(newAppointment);
@@ -317,7 +318,7 @@ public class Scheduler {
         int patientId = appointment.getPatientId();
         int staffId = appointment.getMedicalStaffId();
         int dateTimeCode = appointment.getDateTimeCode();
-        int appointmentId = appointment.getAppointmentId();
+        int appointmentId = appointment.getListItemId();
         checkPatientAvailability(patientId, dateTimeCode, appointmentId);
         checkMedicalStaffAvailability(staffId, dateTimeCode, appointmentId);
     }

@@ -2,22 +2,25 @@ package medbot.list;
 
 public class ListItem {
 
+    protected int listItemId = 0;
 
-    public int getId() {
-        return 0;
-    }
-
-    public void setId(int id) {
+    /**
+     * Returns id of ListItem object.
+     *
+     * @return id of ListItem object
+     */
+    public int getListItemId() {
+        return listItemId;
     }
 
     /**
-     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     * Sets value of id.
      *
-     * @param parameter an attribute of a person
-     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     * @param id new value of id to be set
      */
-    protected String setAsStorageParameterOrNull(String parameter) {
-        return (parameter == null || parameter.isBlank()) ? "X" : parameter;
+    public void setListItemId(int id) {
+        this.listItemId = id;
     }
+
 
 }

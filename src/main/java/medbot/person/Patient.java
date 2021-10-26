@@ -9,7 +9,7 @@ public class Patient extends Person {
     }
 
     public String toString() {
-        return "Patient ID: " + getPersonId() + " " + super.toString();
+        return "Patient ID: " + getListItemId() + " " + super.toString();
     }
 
     /**
@@ -19,7 +19,7 @@ public class Patient extends Person {
      */
     @Override
     public String getStorageString() {
-        return getPersonId() + VERTICAL_LINE_SPACED
+        return getListItemId() + VERTICAL_LINE_SPACED
                 + super.getStorageString();
     }
 }

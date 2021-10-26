@@ -10,7 +10,7 @@ public class Staff extends Person {
 
     @Override
     public String toString() {
-        return "Staff ID: " + getPersonId() + " " + super.toString();
+        return "Staff ID: " + getListItemId() + " " + super.toString();
     }
 
     /**
@@ -20,7 +20,7 @@ public class Staff extends Person {
      */
     @Override
     public String getStorageString() {
-        return getPersonId() + VERTICAL_LINE_SPACED
+        return getListItemId() + VERTICAL_LINE_SPACED
                 + super.getStorageString();
     }
 }
