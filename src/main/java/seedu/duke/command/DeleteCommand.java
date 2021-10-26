@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
+import seedu.duke.local.DataManager;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 import seedu.duke.utility.Utility;
@@ -79,6 +80,7 @@ public class DeleteCommand extends Command {
         TaskManager.checkIndexValid(indexes.last() - 1);
         for (Integer index : indexes) {
             Task deletedTask = TaskManager.deleteTask(index - 1 - offset++);
+            DataManager.deleteTask(index - 1 - offset);
             message += deletedTask.getTaskEntryDescription() + '\n';
         }
         return message;

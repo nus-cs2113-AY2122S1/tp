@@ -11,7 +11,8 @@ public class Reminder {
     private LocalDateTime reminderTime;
     private boolean reminderDone;
     private long userTime = 10;
-    private String message = "Reminder! 10 min before the following task:\n";
+    private String message = "Reminder! 10 min before the following task:";
+    private ReminderInformation information;
 
     public Reminder() {
         this.reminderDone = false;
@@ -55,10 +56,17 @@ public class Reminder {
             if (reminderTime.isAfter(now.minusSeconds(BUFFER_SECOND))
                     && reminderTime.isBefore(now.plusSeconds(BUFFER_SECOND))) {
                 this.reminderDone = true;
-                return (message + "\t" + task);
+                return (message + "\n" + "\t" + task + "\n");
             }
         }
         return "";
+    }
+
+    public void setInformation() {
+        information = new ReminderInformation(reminderDone, userTime, message);
+    }
+    public ReminderInformation getInformation() {
+        return information;
     }
 
     public String getRecurrenceMessage(LocalDateTime now, String task, RecurrenceEnum recurrence) {

@@ -1,14 +1,13 @@
 package seedu.duke.storage;
 
 import java.io.File;
-import java.io.IOException;
 
-public class createFile {
+public class FileCreater {
     public static final String LIST_STORAGE_FOLDER = "./data/";
-    public static final String LIST_STORAGE_FILE = "./data/list.txt";
+    public static final String LIST_STORAGE_FILE = "./data/task.txt";
     public static final String DIARY_STORAGE_FILE = "./data/diary.txt";
 
-    public static void createListFile() {
+    public static void createListFile(){
         File newFile = new File(LIST_STORAGE_FILE);
         if (!newFile.exists()) {
             newFile.mkdir();
@@ -27,5 +26,11 @@ public class createFile {
         if (!newFile.exists()) {
             newFile.mkdir();
         }
+    }
+
+    public static void createAll() {
+        createFolder();
+        createListFile();
+        createDiaryFile();
     }
 }

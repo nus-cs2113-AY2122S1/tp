@@ -41,11 +41,11 @@ class ReminderManagerTest {
         TaskManager.addTask(eventTest);
 
         expectedOut = "Reminder! 10 min before the following task:\n" + "\t"
-                + todoWithReminder.getTaskEntryDescription()
+                + todoWithReminder.getTaskEntryDescription() + "\n"
                 + "Reminder! 10 min before the following task:\n" + "\t"
-                + deadlineWithReminder.getTaskEntryDescription()
+                + deadlineWithReminder.getTaskEntryDescription() + "\n"
                 + "Reminder! 10 min before the following task:\n" + "\t"
-                + eventTest.getTaskEntryDescription();
+                + eventTest.getTaskEntryDescription() + "\n";
 
         assertEquals(expectedOut, ReminderManager.sendReminder());
     }

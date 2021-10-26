@@ -7,6 +7,7 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
+import seedu.duke.task.reminder.ReminderInformation;
 
 public class Event extends Task {
 
@@ -18,7 +19,6 @@ public class Event extends Task {
     private static final String END_DATE_NOT_NULL_ASSERTION = "endDate for Event cannot be null";
     private static final String START_DATE_BEFORE_END_DATE_ASSERTION = "Start date must be before end date!";
 
-    private Reminder reminder;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
@@ -87,6 +87,10 @@ public class Event extends Task {
     @Override
     public void updateReminderTime(long reminderTime) {
         reminder.setUserTime(reminderTime);
+    }
+
+    public ReminderInformation getReminderInformation() {
+        return reminder.getInformation();
     }
 
     @Override

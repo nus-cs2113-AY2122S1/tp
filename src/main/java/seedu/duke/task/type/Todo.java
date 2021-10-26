@@ -7,6 +7,7 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
+import seedu.duke.task.reminder.ReminderInformation;
 
 public class Todo extends Task {
 
@@ -15,8 +16,6 @@ public class Todo extends Task {
     private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
     private LocalDateTime doOnDate;
-
-    private Reminder reminder;
 
     public Todo(String description) {
         super(description);
@@ -84,6 +83,10 @@ public class Todo extends Task {
     @Override
     public void updateReminderTime(long reminderTime) {
         reminder.setUserTime(reminderTime);
+    }
+
+    public ReminderInformation getReminderInformation() {
+        return reminder.getInformation();
     }
 
     @Override

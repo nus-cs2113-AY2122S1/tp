@@ -6,6 +6,8 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetTaskFailedException;
+import seedu.duke.local.DataManager;
+import seedu.duke.local.TasktoLineConverter;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 
@@ -26,6 +28,7 @@ public abstract class TaskCommand extends Command {
             }
             Task task = createTask();
             TaskManager.addTask(task);
+            DataManager.addTaskLine(TasktoLineConverter.convertTaskToLine(task));
             message = String.format(TASK_CREATED_MESSAGE, task.getTaskEntryDescription());
         } catch (NullPointerException npe) {
             message = getUsage();

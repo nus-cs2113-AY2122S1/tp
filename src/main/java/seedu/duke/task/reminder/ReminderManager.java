@@ -15,7 +15,7 @@ public class ReminderManager {
         String message = "";
         for (int i = 0; i < TaskManager.getTaskList().size(); i++) {
             if (TaskManager.getTask(i).needReminder()) {
-                message += (TaskManager.getTask(i).getReminder(now));
+                message += TaskManager.getTask(i).getReminder(now);
             }
         }
         return message;

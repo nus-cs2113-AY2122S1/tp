@@ -2,6 +2,7 @@ package seedu.duke.task;
 
 import java.time.LocalDateTime;
 import seedu.duke.command.flags.TaskFlag;
+import seedu.duke.task.reminder.Reminder;
 
 public abstract class Task {
 
@@ -18,6 +19,8 @@ public abstract class Task {
     private String description;
     private PriorityEnum priority;
     private RecurrenceEnum recurrence;
+
+    protected Reminder reminder;
 
     protected Task(String description) {
         setDescription(description);
