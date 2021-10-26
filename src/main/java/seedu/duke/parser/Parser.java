@@ -21,12 +21,10 @@ import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
-import seedu.duke.commands.YearCommand;
+import seedu.duke.commands.StatBudgetCommand;
 import seedu.duke.commands.StatCommand;
 import seedu.duke.commands.StatYearCommand;
-import seedu.duke.commands.StatBudgetCommand;
-import seedu.duke.commands.DeleteSingleLoanCommand;
-
+import seedu.duke.commands.YearCommand;
 import seedu.duke.data.records.Category;
 import seedu.duke.exception.EmptyDescriptionException;
 
@@ -43,11 +41,6 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
-
-//import java.time.LocalDate;
-//import java.util.Locale;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
 public class Parser {
@@ -189,13 +182,19 @@ public class Parser {
     private Command prepareEditCommand(String commandParams) throws EmptyDescriptionException {
         String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
-        switch (editOption) {
-        case ("-b"):
-            return prepareEditBudgetCommand(paramsToEdit);
-        case ("-e"):
-            return EditExpenditureParser.parse(commandParams);
-        default:
-            return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
+        try {
+            switch (editOption) {
+            case ("-b"):
+                return EditBudgetParser.parse(paramsToEdit);
+            case ("-e"):
+                return EditExpenditureParser.parse(paramsToEdit);
+            case ("-l"):
+                return EditLoanParser.parse(paramsToEdit);
+            default:
+                return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
+            }
+        } catch (NumberFormatException | EmptyDescriptionException e) {
+            return new InvalidCommand("Missing inputs!");
         }
     }
 
@@ -296,7 +295,7 @@ public class Parser {
             String addParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (addType) {
             case ("-b"):
-                return prepareAddBudgetCommand(addParams);
+                return AddBudgetParser.parse(addParams);
             case ("-e"):
                 return prepareAddExpenditureCommand(addParams);
             case ("-l"):
