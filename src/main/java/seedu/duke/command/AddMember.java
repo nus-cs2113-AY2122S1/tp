@@ -20,6 +20,15 @@ public class AddMember {
     String invalidGenderErrorMessage = "Invalid gender provided. Please enter M for male, F for female.";
     String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 phone digit number";
 
+    String validStudentNumberRegex = "^[A-Z]\\d{7}[A-Z]";
+    String validGenderRegex = "^[M|F]";
+    String validPhoneNumberRegex = "^\\d{8}";
+
+    private String name;
+    private String studentNumber;
+    private String gender;
+    private String phoneNumber;
+
     /**
      * Constructor. Adds a Member to the MemberList and saves it to hard disk.
      *
@@ -49,14 +58,10 @@ public class AddMember {
      * @throws InvalidAddMemberException If there is an error with any of the parameters given.
      */
     public boolean verifyMemberDetails(Member member) throws InvalidAddMemberException {
-        String name = member.getName();
-        String studentNumber = member.getStudentNumber();
-        String gender = member.getGender();
-        String phoneNumber = member.getPhoneNumber();
-
-        String validStudentNumberRegex = "^[A-Z]\\d{7}[A-Z]";
-        String validGenderRegex = "^[M|F]";
-        String validPhoneNumberRegex = "^\\d{8}";
+        name = member.getName();
+        studentNumber = member.getStudentNumber();
+        gender = member.getGender();
+        phoneNumber = member.getPhoneNumber();
 
         boolean validName = name != null && !name.trim().isEmpty();
         if (!validName) {
