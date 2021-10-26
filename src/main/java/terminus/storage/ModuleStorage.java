@@ -172,7 +172,10 @@ public class ModuleStorage {
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
-        assert listOfFiles != null;
+        if (listOfFiles == null) {
+            return;
+        }
+        assert moduleManager.getModule(mod) != null;
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfFiles) {
@@ -287,6 +290,9 @@ public class ModuleStorage {
             throw new IOException("Directory cannot be cleared.");
         }
         File[] listOfFiles = folder.listFiles();
+        if (listOfFiles == null) {
+            return;
+        }
         for (File file : listOfFiles) {
             cleanAllFilesInclusive(file);
             if (file.exists()) {

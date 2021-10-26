@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.List;
+import javax.swing.text.AbstractDocument.Content;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,12 +29,14 @@ import terminus.content.Link;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
+import terminus.module.NusModule;
 
 public class ModuleStorageTest {
 
     private static final Path RESOURCE_FOLDER = Path.of("src", "test", "resources");
     private static final Path SAVE_FILE = RESOURCE_FOLDER.resolve("saveFile.json");
     private static final Path MALFORMED_FILE = RESOURCE_FOLDER.resolve("malformedFile.json");
+    private static final Path MODULE_MALFORMED_FILE = RESOURCE_FOLDER.resolve("moduleMalformedFile.json");
     private static final Path VALID_FILE = RESOURCE_FOLDER.resolve("validFile.json");
     private ModuleManager moduleManager;
     private ModuleStorage moduleStorage;
@@ -80,6 +83,20 @@ public class ModuleStorageTest {
     }
 
     @Test
+    void loadFile_firstInitialize() throws IOException {
+        Path dataFolder = RESOURCE_FOLDER.resolve("data");
+        Path dataJsonFile = dataFolder.resolve("main.json");
+        assertFalse(Files.exists(dataFolder));
+        assertFalse(Files.exists(dataJsonFile));
+        this.moduleStorage.init(dataJsonFile);
+        ModuleManager moduleManager = this.moduleStorage.loadFile();
+        assertTrue(Files.exists(dataFolder));
+        assertTrue(Files.exists(dataJsonFile));
+        this.moduleStorage.init(VALID_FILE);
+        moduleStorage.cleanAfterDeleteModule("data");
+    }
+
+    @Test
     void loadFile_invalidJson_exceptionThrown() {
         this.moduleStorage.init(MALFORMED_FILE);
         assertThrows(JsonSyntaxException.class, moduleStorage::loadFile);
@@ -117,10 +134,30 @@ public class ModuleStorageTest {
     }
 
     @Test
+    void removeNoteFromModule_missingModuleFolder() throws IOException {
+        File deletedFile = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test.txt").toString());
+        assertTrue(deletedFile.exists());
+        moduleStorage.cleanAfterDeleteModule(tempModule);
+        moduleStorage.removeNoteFromModule(tempModule, "test");
+        assertFalse(deletedFile.exists());
+    }
+
+    @Test
     void addNoteFromModule_success() throws IOException {
         File file = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test1.txt").toString());
         assertFalse(file.exists());
         this.moduleStorage.addNoteFromModule(tempModule, new Note("test1", "test1"));
+        assertTrue(file.exists());
+    }
+
+    @Test
+    void addNoteFromModule_missingModuleDirectory() throws IOException {
+        File folder = new File(Paths.get(RESOURCE_FOLDER.toString(), "test1").toString());
+        assertFalse(folder.exists());
+        File file = new File(Paths.get(RESOURCE_FOLDER.toString(), "test1", "test1.txt").toString());
+        assertFalse(file.exists());
+        this.moduleStorage.addNoteFromModule("test1", new Note("test1", "test1"));
+        assertTrue(folder.exists());
         assertTrue(file.exists());
     }
 
@@ -326,6 +363,37 @@ public class ModuleStorageTest {
         assertFalse(Files.exists(modPath));
         moduleStorage.loadNotesFromModule(moduleManager, tempModule);
         assertTrue(Files.exists(modPath));
+    }
+
+    @Test
+    void loadNotesFromModule_missingModule() throws IOException {
+        Path faultyPath = Paths.get(RESOURCE_FOLDER.toString(), "faulty");
+        assertTrue(Files.exists(faultyPath));
+        assertThrows(AssertionError.class, () -> moduleStorage.loadNotesFromModule(moduleManager, "faulty"));
+    }
+
+    @Test
+    void loadNotesFromModule_faultyFile() throws IOException {
+        Path faultyPath = Paths.get(RESOURCE_FOLDER.toString(), "faulty");
+        assertTrue(Files.exists(faultyPath));
+        moduleManager.setModule("faulty", new NusModule());
+        moduleStorage.loadNotesFromModule(moduleManager, "faulty");
+        ContentManager noteContentManager = moduleManager.getModule("faulty").getContentManager(Note.class);
+        assertEquals(0, noteContentManager.getTotalContents());
+        Path randomFilePath = Paths.get(faultyPath.toString(), "test.txt");
+        File randomFile = new File(randomFilePath.toString());
+        randomFile.createNewFile();
+        moduleStorage.loadNotesFromModule(moduleManager, "faulty");
+        assertEquals(1, noteContentManager.getTotalContents());
+        randomFile.delete();
+    }
+
+    @Test
+    void loadAllFile_success() throws IOException {
+        this.moduleStorage.init(MODULE_MALFORMED_FILE);
+        ModuleManager module = moduleStorage.loadFile();
+        assertEquals(1,module.getAllModules().length);
+        moduleStorage.cleanAfterDeleteModule("okay");
     }
 
 }
