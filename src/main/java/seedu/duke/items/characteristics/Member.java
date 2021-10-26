@@ -4,6 +4,7 @@ import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Member {
 
@@ -36,6 +37,10 @@ public class Member {
         return tasks.toString();
     }
 
+    public void addToAssignedTasks(Task task) {
+        assignedTasks.add(task);
+    }
+
     public void sortTasks() {
         EventCatalog.bubbleSortItems(assignedTasks);
     }
@@ -43,6 +48,13 @@ public class Member {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static Comparator<Member> NameComparator = (member1, member2) -> {
+        String name1 = member1.getName().toUpperCase();
+        String name2 = member2.getName().toUpperCase();
+
+        return name1.compareTo(name2);
+    };
 
     @Override
     public String toString() {

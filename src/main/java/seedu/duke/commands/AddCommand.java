@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
@@ -15,6 +16,7 @@ public class AddCommand extends Command {
 
     protected static final String TASK_FLAG = "-t";
     protected static final String EVENT_FLAG = "-e";
+    protected static final String MEMBER_FLAG = "-m";
     protected static final String TITLE_FLAG = "n/";
     protected static final String DATE_FLAG = "d/";
     protected static final String VENUE_FLAG = "v/";
@@ -27,6 +29,8 @@ public class AddCommand extends Command {
 
     protected static String eventVenue;
     protected static double eventBudget;
+
+    protected static String memberName;
 
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
@@ -45,6 +49,8 @@ public class AddCommand extends Command {
                 prepareTask(response);
             } else if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 prepareEvent(response);
+            } else if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                prepareMember(response);
             } else {
                 throw new DukeException("Invalid item flag entered. Please specify task '-t' or event '-e'"
                         + "after the 'add' command. ");
@@ -103,6 +109,9 @@ public class AddCommand extends Command {
         if (Duke.eventCatalog.isEmpty()) {
             throw new DukeException("There is no event to assign this task to! Please add "
                     + "an event using the flag '-e'. ");
+        }
+        if (Duke.memberRoster.isEmpty()) {
+            throw new DukeException("There are no members in your roster to assign this task to!");
         }
         if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
@@ -166,9 +175,18 @@ public class AddCommand extends Command {
         }
     }
 
+    private void prepareMember(String response) {
+        memberName = response.substring(response.indexOf(MEMBER_FLAG) + 3).trim().toUpperCase();
+    }
+
     private static void addToEventCatalog(Event event) {
         Duke.eventCatalog.add(event);
         Duke.eventCatalog.sortCatalog();
+    }
+
+    private static void addToMemberRoster(Member member) {
+        Duke.memberRoster.add(member);
+        Duke.memberRoster.sortRoster();
     }
 
     private void addTaskToEvent(int eventIndex, Task task) throws DukeException {
@@ -180,39 +198,84 @@ public class AddCommand extends Command {
         }
     }
 
+    private void addTaskToMember(int memberIndex, Task task) throws DukeException {
+        try {
+            Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(task);
+            Duke.memberRoster.get(memberIndex - 1).sortTasks();
+            task.addMember(Duke.memberRoster.get(memberIndex - 1));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("This member does not exist. Please enter the index corresponding to "
+                    + "the correct member. ");
+        }
+    }
+
+    private int getEventForTask(Task task) {
+        Ui.promptForEventIndex();
+        int eventIndex = 0;
+        boolean isCorrectEvent = false;
+        while (!isCorrectEvent) {
+            try {
+                assert !Duke.eventCatalog.isEmpty() : "The event catalog should not be empty";
+                Ui.printEventCatalog();
+                Ui.printLineBreak();
+                eventIndex = Integer.parseInt(Ui.readInput());
+                addTaskToEvent(eventIndex, task);
+                isCorrectEvent = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number corresponding to the event "
+                        + "you want to add to. ");
+                Ui.printLineBreak();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                Ui.printLineBreak();
+            }
+        }
+        assert eventIndex > 0 : "Event index should be valid";
+        return eventIndex;
+    }
+
+    private void getMemberForTask(Task task) {
+        Ui.promptForMemberIndex();
+        boolean isCorrectMember = false;
+        while (!isCorrectMember) {
+            try {
+                Ui.printMemberRoster();
+                Ui.printLineBreak();
+                int memberIndex = Integer.parseInt(Ui.readInput());
+                addTaskToMember(memberIndex, task);
+                isCorrectMember = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number corresponding to the member "
+                        + "you want to assign this task to. ");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                Ui.printLineBreak();
+            }
+        }
+    }
+
     public CommandResult execute() {
         if (isCorrectFormat) {
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                Ui.promptForEventIndex();
-                boolean isCorrectEvent = false;
-                while (!isCorrectEvent) {
-                    try {
-                        assert !Duke.eventCatalog.isEmpty() : "The event catalog should not be empty";
-                        Ui.printEventCatalog();
-                        Ui.printLineBreak();
-                        int eventIndex = Integer.parseInt(Ui.readInput());
-                        Task task = new Task(itemTitle, itemDescription, itemDateTime);
-                        addTaskToEvent(eventIndex, task);
-                        isCorrectEvent = true;
-                        return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter the number corresponding to the event "
-                                + "you want to add to. ");
-                        Ui.printLineBreak();
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.printLineBreak();
-                    }
-                }
-
+                Task task = new Task(itemTitle, itemDescription, itemDateTime);
+                int eventIndex = getEventForTask(task);
+                getMemberForTask(task);
+                return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
             }
+
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
+            }
+
+            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                Member member = new Member(memberName);
+                addToMemberRoster(member);
+                return new CommandResult(Ui.getMemberAddedMessage(member));
             }
         }
         return new CommandResult("Item unable to be added!");

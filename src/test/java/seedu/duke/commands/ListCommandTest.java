@@ -3,19 +3,18 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Ui;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.Duke.eventCatalog;
 
-public class NextCommandTest {
+public class ListCommandTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -23,63 +22,65 @@ public class NextCommandTest {
     @BeforeEach
     public void setUpStream() {
         System.setOut(new PrintStream(outContent));
+        setUp();
     }
 
     @AfterEach
     public void restoreStream() {
         System.setOut(originalOut);
+        eventCatalog.clear();
     }
 
     @Test
-    public void nextCommandResult_nextEarliestEvent() {
-        setUp();
-        Command command1 = Parser.parseCommand("next event");
-        Ui.printEvent(eventCatalog.get(0));
-        String expectedOutput = "Title: Peppa Pig's Concert"
+    public void listCommand_overallScheduleTest() {
+        Command command1 = Parser.parseCommand("list");
+        command1.execute();
+        String expectedOutput = "OVERALL SCHEDULE"
                 + System.lineSeparator()
-                + "Date: 19 Feb 2022 - 20:00"
+                + "======================="
                 + System.lineSeparator()
-                + "Description: Asia world tour"
+                + "1. [E][X] Peppa Pig's Concert (at: 19 Feb 2022 - 20:00)"
                 + System.lineSeparator()
-                + "Venue: Indoor Stadium"
+                + "2. [E][ ] Funfair (at: 20 Feb 2022 - 20:30)"
                 + System.lineSeparator()
-                + "Budget: $1000.9"
                 + System.lineSeparator()
-                + "Tasks: "
+                + "FURTHER COMMANDS"
+                + System.lineSeparator()
+                + "-----------------------"
+                + System.lineSeparator()
+                + "To list Task: list [Event Index] -t"
+                + System.lineSeparator()
+                + "To list Members of a Task: list [Event Index] t/[Task Index]"
+                + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString());
+    }
+
+    @Test
+    public void listCommand_taskListTest() {
+        Command command1 = Parser.parseCommand("list 1 -t");
+        command1.execute();
+        String expectedOutput = "Event: Peppa Pig's Concert"
+                + System.lineSeparator()
+                + "======================="
                 + System.lineSeparator()
                 + "1. [T][ ] Collect Tickets (by: 18 Feb 2022 - 19:30)"
                 + System.lineSeparator()
                 + "2. [T][ ] Buy Boost (by: 19 Feb 2022 - 19:30)"
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
-        assertEquals("Hope you have prepared everything!", command1.execute().feedbackToUser);
-        eventCatalog.clear();
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask_taskExists() {
-        setUp();
-        Command command1 = Parser.parseCommand("next task 1");
-        Ui.printTask(eventCatalog.get(0).getFromTaskList(0));
-        String expectedOutput = "Title: Collect Tickets"
+    public void listCommand_memberListTest() {
+        Command command1 = Parser.parseCommand("list 1 t/1");
+        command1.execute();
+        String expectedOutput = "Event: Peppa Pig's Concert"
                 + System.lineSeparator()
-                + "Deadline: 18 Feb 2022 - 19:30"
+                + "Task: Collect Tickets"
                 + System.lineSeparator()
-                + "Description: Collection point: Scape"
-                + System.lineSeparator()
-                + "Members: "
+                + "======================="
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
-        assertEquals("Hope you have prepared everything!", command1.execute().feedbackToUser);
-        eventCatalog.clear();
-    }
-
-    @Test
-    public void nextCommandResult_nextEarliestTask_noTaskExists() {
-        setUp();
-        Command command1 = Parser.parseCommand("next task 2");
-        assertEquals("This Event has no tasks!", command1.execute().feedbackToUser);
-        eventCatalog.clear();
     }
 
     void setUp() {

@@ -39,6 +39,8 @@ public class NextCommand extends Command {
                 Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2]) - 1).getFromTaskList(0));
             } else if (nextItem.equalsIgnoreCase("event")) {
                 Ui.printEvent((Duke.eventCatalog.get(0)));
+            } else {
+                nextCommandErrorMessage();
             }
         } catch (NumberFormatException e) {
             nextCommandErrorMessage();

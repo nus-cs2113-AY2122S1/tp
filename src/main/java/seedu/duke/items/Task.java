@@ -36,6 +36,10 @@ public class Task extends Item {
         this.event = event;
     }
 
+    public void addMember(Member member) {
+        memberList.add(member);
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s (by: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
