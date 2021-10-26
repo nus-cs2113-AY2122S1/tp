@@ -68,7 +68,7 @@ The UI component
 * Summarizes different parts of the program into callable methods.
 
 ### Storage
-<img src="images/storage.png" width = "1000" />
+<img src="images/storage.png" width = "500" />
 
 The storage component can implement the below features:
 
