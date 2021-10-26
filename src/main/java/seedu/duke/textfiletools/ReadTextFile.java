@@ -1,5 +1,8 @@
 package seedu.duke.textfiletools;
 
+import static seedu.duke.common.Messages.MESSAGE_INVALID_IO;
+import static seedu.duke.common.Messages.MESSAGE_WARNING_FILE_DIRECTORY;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -27,8 +30,8 @@ public class ReadTextFile {
             }
             readTextFile.close();
         } catch (IOException except) {
-            System.out.println("IO EXCEPTION!");
-            System.out.println("Ensure that you have files in correct directory and named correctly!");
+            System.out.print(MESSAGE_INVALID_IO);
+            System.out.println(MESSAGE_WARNING_FILE_DIRECTORY);
             except.printStackTrace();
         }
 
@@ -46,14 +49,12 @@ public class ReadTextFile {
      */
     public ArrayList<String> readTextFileToString() throws IOException {
         ArrayList<String> arrayListOfRawCommands = new ArrayList<String>();
-        //---------------------------------------------------------
-        // Change to exception...
+
         File inFile = new File(fileDirectory);
 
         if (!inFile.isFile()) {
             System.out.println("Parameter is not an existing file");
         }
-        //---------------------------------------------------------
 
         BufferedReader fileReader = new BufferedReader(new FileReader(fileDirectory));
 

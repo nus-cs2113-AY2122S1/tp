@@ -4,13 +4,10 @@ import seedu.duke.commands.Command;
 import seedu.duke.data.AllRecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
-import seedu.duke.textfiletools.WriteToTextFile;
 import seedu.duke.ui.TextUi;
 
-import java.io.IOException;
-
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH;
-
+import static seedu.duke.common.Messages.MESSAGE_INVALID_INPUT;
 
 public class Duke {
     private final TextUi textUi;
@@ -43,10 +40,11 @@ public class Duke {
                 command.execute(false);
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error! Your inputs are missing or incorrect!");
+                System.out.println(MESSAGE_INVALID_INPUT);
                 TextUi.printDivider();
             } catch (NullPointerException npe) {
                 System.out.println(MESSAGE_INVALID_MONTH);
+                TextUi.printDivider();
             }
         }
     }

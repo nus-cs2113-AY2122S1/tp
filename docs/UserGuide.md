@@ -6,21 +6,27 @@
 * [Features](#features)
 * [Commands](#commands)
   * [Add](#add) 
-    * [Budget: `b/`](#add-budget)
-    * [Expenditure: `e/`](#add-expenditure)
-    * [Loan: `l/`](#add-loan)
+    * [Budget: `-b`](#add-budget)
+    * [Expenditure: `-e`](#add-expenditure)
+    * [Loan: `-l`](#add-loan)
   * [Edit](#edit)
-    * [Budget: `b/`](#edit-budget)
-    * [Expenditure: `e/`](#edit-expenditure)
-    * [Loan: `l/`](#edit-loan)
+    * [Budget: `-b`](#edit-budget)
+    * [Expenditure: `-e`](#edit-expenditure)
+    * [Loan: `-l`](#edit-loan)
   * [Database Selector](#dbselect)
-	* [year](#year)
+    * [year](#year)
   * [Find & Filter](#find&filter)
     * [Find](#find)
   * [Listing](#listing)
     * [List](#list)
-  * [Deletion](#deletion)
-    * [Delete](#delete)
+  * [Delete](#delete)
+    * [Budget: `-b`](#delete-budget)
+    * [Expenditure: `-e`](#delete-expenditure)
+    * [Loan: `-l`](#delete-loan)
+  * [Statistics](#statistics)
+    * [Stat](#stat) 
+      * [Budget: `-b`](#stat-budget)
+      * [Budget: `-l`](#stat-year)
   * [Guides](#guides)
     * [Help](#help)
   * [Exit](#exit)
@@ -40,11 +46,24 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## Features
 
-### Notes about the command format:
-* Words in UPPER_CASE are the parameters to be supplied by the user. <br />
-e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add b/ a/500 m/12`
+1. Storage
+	Allows saving and loading of budget and loan data.
+	
+2. Statistics
 
+3. Loan Tracker
+
+4. Loan Reminder
+
+5. Budget Tracker
+
+6. Expenditure Categories
+
+## Notes about the command format:
+* Words in UPPER_CASE are the parameters to be supplied by the user. <br />
+e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`
 * Words encased in `<>` are optional parameters.
+
 <br />
 
 ## Commands
@@ -54,7 +73,7 @@ e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
 
-### `-b` - Add a Budget
+### `-b` : Add a Budget
 
 Adds a new budget to a specific month.
 
@@ -75,21 +94,24 @@ Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
 
-### `-e` - Add an expenditure
+### `-e` : Add an expenditure
 
 Adds a new expenditure to a month.
 
-Format: `add -e c/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
+Format: `add -e n/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
 to add specific information about the expenditure.
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
 system will be entered by default.
+* The `<CATEGORY>` must be one of the following values:
+  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
+  * If left empty, the default value will be _GENERAL_
 
 Example of usage:
 
-`add -e c/CS2113T Textbooks a/60 d/2021-08-20`
+`add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
 Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
 
@@ -106,9 +128,54 @@ Date: 2021-08-20
 
 ## `edit` 
 
+Edits a budget or expenditure entry.
+
 ### Edit Budget: `edit`  
 
+Edit the amount of budget allowance for a particular month.
+
+Format: `edit -b m/MONTH a/AMOUNT`
+
+* The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
+* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+
+Example of usage:
+
+`edit -b m/10 a/10000`
+
+Expected outcome: A message will be shown to alert the user that the budget for october have been changed 
+to $10000.
+
+```
+========================================================
+
+========================================================
+```
+
 ### Edit Expenditure: `edit` 
+
+Edit the amount of budget allowance for a particular month.
+
+Format: `edit -e m/MONTH i/INDEX a/AMOUNT d/<DATE_OF_EXPENDITURE> n/DESCRIPTION`
+
+* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+* The `INDEX` must strictly be within the range of the total number of expenditure for that particular month.
+* The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current 
+date according to the system will be entered by default.
+
+Example of usage:
+
+`edit -e m/10 i/2 a/1000 d/2021-10-12 n/Chicken Rice`
+
+Expected outcome: A message will be shown to alert the user that the expenditure number 2 for 12 october 2021
+have been changed to $1000 with description of Chicken Rice.
+
+```
+========================================================
+
+========================================================
+```
 
 ### Edit Loan: `edit` 
 
@@ -142,7 +209,7 @@ You are currently working on year 2020 database!
 
 ### Listing all Budget & Expenditure: `list`
 
-Adds a new expenditure to a specific budget of a month.
+List all the Budget and expenditure for that particular year.
 
 Format: `list m/all`
 
@@ -236,7 +303,139 @@ Your expenditures:
 
 ## `delete`
 
-### Delete: `delete`
+Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
+
+### `-b` - Delete a budget 
+
+Deletes the budget of a specific month
+
+Format: `delete -b m/MONTH`
+
+* The `MONTH` represents the month of the budget will be deleted and cannot be empty.
+
+Example of usage:
+
+`delete -b m/10`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted the Budget for this month!
+Now the budget amount is 0.00!      
+========================================================
+```
+
+### `-e` - Delete (an) expenditure(s)
+
+Deletes (an) expenditure(s) of a specific month
+
+Format:`delete -e m/MONTH` 
+<br/> `delete -e  m/MONTH i/INDEX`
+<br/> `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO `
+
+* The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the expenditures of this month will be deleted.
+
+Examples of usage:
+
+ `delete -e m/10 i/3-5`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Expenditure 3.chicken rice3          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 4.chicken rice4          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
+========================================================
+```
+
+### `-l` - Delete (a) loan record(s)
+
+Deletes (a) loan record(s) of a specific month
+
+Format:`delete -l m/MONTH` 
+<br/> `delete -l m/MONTH i/INDEX`
+<br/> `delete -l m/MONTH i/INDEX_FROM-INDEX_TO`
+
+* The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the loan records of this month will be deleted.
+
+Examples of usage:
+
+ `delete -l m/10 i/3-5`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Loan 3.Wei Xuan               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
+========================================================
+```
+
+## `stat`
+
+The command word `stat` display some statistics graphs and paramters about the expenditure for 
+the year or month.
+
+### `-b` : View Statistics for the Month
+
+
+Display the statistics for a particular a particular month's budget and expenditure. 
+
+Format: `stat -b m/MONTH t/TYPE_OF_GRAPHICAL VIEW`
+
+* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+* The `TYPE_OF_GRAPHICAL_VIEW` is ... 
+
+Example of usage:
+
+`stat -b m/10 t/1`
+
+Expected outcome: A box plot of expenditure amount for october.
+
+```
+========================================================
+========================================================
+```
+
+### `-l` : View Statistics for the Year
+
+Display the statistics for a particular the current database year which the user is working on. 
+
+Format: `stat -l t/TYPE_OF_GRAPHICAL_VIEW`
+
+* The `TYPE_OF_GRAPHICAL_VIEW` is ... 
+
+Example of usage:
+
+`stat -l t/1`
+
+Expected outcome: A histogram of the percentage of money spend for each month of the year will be shown
+with vertical axis showing percentage ranging from 0 to 100%.
+
+```
+========================================================
+Percentage of Money Spent in 2021
+     JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC 
+100%                          #                      
+90%                       #   #                      
+80%                       #   #               #      
+70%                       #   #               #      
+60%                       #   #           #   #      
+50%                       #   #       #   #   #      
+40%                       #   #       #   #   #      
+30%                       #   #       #   #   #      
+20%           #   #       #   #       #   #   #      
+10%           #   #       #   #       #   #   #     
+========================================================
+```
+
+`stat -l t/2`
 
 ## `help`
  
