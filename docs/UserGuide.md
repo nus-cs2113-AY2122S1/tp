@@ -88,13 +88,12 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<div class="alert alert-info">
 
-** :information_source: Notes about the command format: **<br>
-
-* Some filler content. 
+<i class="fas fa-info-circle"></i> <strong>Note:</strong> You can use this <a href="https://gist.github.com/rxaviers/7360908">list of emoji shortcodes</a>, but keep in mind that emoji shortcodes vary from application to application. Refer to your Markdown application's documentation for more information.
 
 </div>
+
 
 ### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
