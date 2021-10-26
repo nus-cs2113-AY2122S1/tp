@@ -60,7 +60,7 @@ public class RecordList {
             storeCurrentExpenditure.saveNewlyAddedExpenditure(description, amount, date);
         }
         */
-        assert getExpenditureListSize() == numberOfRecords;
+        //assert getExpenditureListSize() == numberOfRecords;
     }
 
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
