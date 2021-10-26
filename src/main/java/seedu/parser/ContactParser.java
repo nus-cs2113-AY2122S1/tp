@@ -1,6 +1,16 @@
 package seedu.parser;
 
-import seedu.exception.*;
+import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
+import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.MissingArgAddException;
+import seedu.exception.MissingArgEditException;
+import seedu.exception.MissingDetailException;
 
 import java.util.logging.Logger;
 
@@ -19,7 +29,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
 
     public abstract String[] parseContactDetails(String userInput)
-            throws InvalidFlagException, MissingArgException, MissingDetailException, ForbiddenDetailException,
+            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException,
             MissingArgEditException, MissingArgAddException;

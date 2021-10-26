@@ -27,7 +27,6 @@ import seedu.exception.MissingArgEditException;
 import seedu.exception.MissingArgSearchException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingIndexException;
-import seedu.exception.MissingNameException;
 
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
@@ -169,7 +168,7 @@ public class MainParser {
             String[] details = addContactParser.parseContactDetails(userInput);
             //check if name is specified in input
             if (details[NAME_INDEX] == null) {
-                throw new MissingNameException();
+                throw new MissingArgAddException();
             }
             assert details.length == NUMBER_OF_FIELDS;
             return new AddContactCommand(details);
@@ -177,8 +176,6 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingDetailException | MissingArgAddException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
-        } catch (MissingNameException e) {
-            return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
