@@ -73,7 +73,6 @@ public class Trip {
 
     }
 
-    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
@@ -87,7 +86,6 @@ public class Trip {
             Ui.printNoMatchingExpenseError();
         }
     }
-    //@@author leeyikai
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
@@ -107,7 +105,6 @@ public class Trip {
         }
     }
 
-    //@@author leeyikai
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -122,8 +119,8 @@ public class Trip {
             Ui.printNoMatchingExpenseError();
         }
     }
+    //@@author
 
-    //@@author leeyikai
     private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                    String personToSearchFor) {
         boolean areThereExpenses = false;
@@ -146,6 +143,7 @@ public class Trip {
             Ui.printNoMatchingExpenseError();
         }
     }
+
 
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
