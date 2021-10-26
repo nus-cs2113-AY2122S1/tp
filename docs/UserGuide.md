@@ -1,4 +1,10 @@
+---
+layout: page
+title: User Guide
+---
+
 # User Guide
+
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
@@ -73,13 +79,38 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 ```
 
 ## Program run through
+
 This SEPlanner allows the user to search for mapping through our platform. To do so, users can follow the following steps:
   1. Add partner universities the user is interested in.
   2. Add potential NUS modules that the user wants to add.
   3. Search for potential mapping for a particular selected university.
   4. Select a mapping and add the mapping.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information about this guide:**<br>
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
+Tips give helpful information to make your experience better.
+</div>
+
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
+Warnings caution you about certain actions that might be dangerous.
+</div>
+
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
+Notes are important pieces of information. 
+</div>
+
+
+</div>
+
+
 ## Features
+
+
+
+
 ### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
 #### Format: `list /muni`  
@@ -144,10 +175,16 @@ Here are the modules in the list:
 ```
 
 ### Adding a partner university
+
 Add a partner university the user is interested into the user selected university list.
+
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
->This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
-> 
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
+This command accepts either the `<UNIVERSITY_INDEX>` or `<![img.png](img.png)UNIVERSITY_NAME>` as arguments. 
+The `<UNIVERSITY_INDEX>` can be found via `list /muni` command. 
+</div> 
+
 * Example 1  
 Input: `add /uni 24`  
 Expected output:
@@ -164,10 +201,16 @@ New university added:
 ```
 
 ### Adding a NUS module
+
 Add a NUS module that the user wants to complete during SEP into the user selected module list.  
+
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
->This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments. The `<MODULE_INDEX>` can be found via `list /mmod` command.  
-> 
+
+<div markdown="block" class="alert alert-info">
+This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
+The `<MODULE_INDEX>` can be found via `list /mmod` command.  
+</div>
+
 * Example 1: using index  
 Input: `add /mod 77`  
 Expected output:
@@ -187,8 +230,13 @@ New module added:
 Adds a specific pair of module mapping under a selected university.
 
 ####Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
->The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
-> 
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be 
+found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
+</div>
+
 * Example 1  
 Input: `add /map 4 2`  
 Expected output:
@@ -235,7 +283,11 @@ Expected output:
 
 ### Searching for available module mappings:
 Displays all available module mappings for a specific university that matches the list of selected modules.
-> Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+
+<div markdown="block" class="alert alert-info">
+Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+</div>
+
 #### Format: `searchmap <UNIVERSITY_INDEX>`
 * Example 1  
 Input: `searchmap 4`  
@@ -301,6 +353,9 @@ CS1231 - CAS CS131 : Combinatoric Structures
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
 contains the data of your previous AddressBook home folder.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Do not delete the `/data` directory or any of its files as this will cause you to lose your saved information!
+</div>
 
 **Q**: How do I save my selected universities and modules?  
 **A**: All your universities, modules and module mappings are automatically saved at 
