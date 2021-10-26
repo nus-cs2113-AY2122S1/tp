@@ -10,10 +10,10 @@ import seedu.duke.training.TrainingSchedule;
 
 public class AttendanceListTest {
 
-    private String teckHwee;
-    private String ianWang;
-    private String glen;
-    private String izdiyad;
+    private Member teckHwee;
+    private Member ianWang;
+    private Member glenn;
+    private Member izdiyad;
 
     private AttendanceList attendanceList;
 
@@ -32,7 +32,7 @@ public class AttendanceListTest {
 
         teckHwee = new Member("Tan Teck Hwee", "A0123456A", 'F', 98765432);
         ianWang = new Member("Ian Wang", "A0234567B", 'M', 98441232);
-        glen = new Member("Glenn", "A0345678C", 'M', 91233344);
+        glenn = new Member("Glenn", "A0345678C", 'M', 91233344);
         izdiyad = new Member("Izdiyad", "A0456789D", 'M', 94376452);
 
         training1 = new TrainingSchedule("October Friday Weekly Training 1", "MPSH1", "1 Oct 2021");
@@ -40,10 +40,10 @@ public class AttendanceListTest {
         training3 = new TrainingSchedule("October Friday Weekly Training 3", "MPSH1", "15 Oct 2021");
         training4 = new TrainingSchedule("October Friday Weekly Training 4", "MPSH1", "22 Oct 2021");
 
-        entry1 = new Attendance(teckHwee, training1);
-        entry2 = new Attendance(ianWang, training2);
-        entry3 = new Attendance(glen, training3);
-        entry4 = new Attendance(izdiyad, training4);
+        entry1 = new Attendance(teckHwee.getName(), training1.getTrainingName(), "1");
+        entry2 = new Attendance(ianWang.getName(), training2.getTrainingName(), "1");
+        entry3 = new Attendance(glenn.getName(), training3.getTrainingName(), "1");
+        entry4 = new Attendance(izdiyad.getName(), training4.getTrainingName(), "1");
 
         ArrayList<Attendance> inputAttendanceList = new ArrayList<Attendance>();
         inputAttendanceList.add(entry1);
@@ -62,6 +62,5 @@ public class AttendanceListTest {
         assertTrue(attendanceList.getAttendanceList().size() == 0);
 
     }
-
 
 }

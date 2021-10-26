@@ -1,9 +1,5 @@
 package seedu.duke;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +7,6 @@ import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
-import seedu.duke.member.exception.InvalidMemberException;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
@@ -27,6 +22,10 @@ public class Parser {
 
     public static boolean hasListAttendanceKeyword(String arg) {
         return arg.trim().toLowerCase().contains("list /att");
+    }
+
+    public static boolean hasFilteredListAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains(" /att /t");
     }
 
     public static boolean hasAddMemberKeyword(String arg) {
@@ -118,6 +117,50 @@ public class Parser {
         return keyword;
     }
 
+    public static String getTrainingName(String query) {
+        String[] words = query.trim().split("[\\s]+");
+        StringBuilder sentenceAfterDeletion = new StringBuilder();
+        for (String word : words) {
+            if (word.contains("/")) {
+                break;
+            } else {
+                sentenceAfterDeletion.append(word).append(" ");
+            }
+        }
+        return sentenceAfterDeletion.toString();
+    }
+
+    public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String query) {
+        // e.g. list /att /t Friday Training /d 0
+        String[] trainingNameAndLabel = query.trim().split("/t");
+
+        String presentOrAbsent = "";
+
+        AttendanceList filteredAttendanceList = new AttendanceList();
+        try {
+            String trainingName = getTrainingName(trainingNameAndLabel[1].trim());
+            for (Attendance attendance : attendanceList.getAttendanceList()) {
+                if (attendance.getTrainingName().equals(trainingName.trim())) {
+                    filteredAttendanceList.addAttendance(attendance);
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printWrongInputMessage();
+        }
+        return filteredAttendanceList;
+    }
+
+    public static Integer getIndexFromFullList(String name, String trainingName, AttendanceList attendanceList) {
+        int index = 0;
+        for (Attendance attendance : attendanceList.getAttendanceList()) {
+            if (attendance.getMemberName().equals(name) & attendance.getTrainingName().equals(trainingName)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
     /**
      * Returns the description of the task only, without the date or the keyword.
      *
@@ -204,78 +247,6 @@ public class Parser {
     }
 
     /**
-     * Edit member by input given by user.
-     *
-     * @param query user raw data input.
-     * @return Edited member according to user input.
-     */
-    public static ArrayList<Member> editMemberDetails(MemberList members, String query) throws InvalidMemberException,
-            NumberFormatException {
-        try {
-            String regex = "(\\/[a-z])+";
-
-            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-            Matcher matcher = pattern.matcher(query);
-
-            String[] words = query.trim().split(regex);
-
-            Member editedMember = new Member();
-            Member oldMember = new Member();
-            String name = "";
-            String studentNumber = "";
-            char gender = ' ';
-            int phoneNumber = 0;
-            int memberNumber = 0;
-
-            int wordIndex = 1;
-            while (matcher.find()) {
-                switch (matcher.group()) {
-                case "/m":
-                    memberNumber = Integer.parseInt(words[wordIndex].trim());
-                    oldMember = new Member(members.getMember(memberNumber));
-                    editedMember = members.getMember(memberNumber);
-                    break;
-                case "/n":
-                    name = words[wordIndex].trim();
-                    assert name != "" : "Name should not be empty";
-                    editedMember.setName(name);
-                    break;
-                case "/s":
-                    studentNumber = words[wordIndex].trim();
-                    assert studentNumber != "" : "Student Number should not be empty";
-                    editedMember.setStudentNumber(studentNumber);
-                    break;
-                case "/g":
-                    gender = words[wordIndex].trim().charAt(0);
-                    assert gender != ' ' : "Gender should not be empty. Put M for male, F for female";
-                    editedMember.setGender(gender);
-                    break;
-                case "/p":
-                    phoneNumber = Integer.parseInt(words[wordIndex].trim());
-                    assert phoneNumber != 0 : "Phone Number should not be empty";
-                    editedMember.setPhoneNumber(phoneNumber);
-                    break;
-                default:
-                    break;
-                }
-                wordIndex++;
-            }
-            ArrayList<Member> oldMemberAndEditedMember = new ArrayList<Member>();
-            oldMemberAndEditedMember.add(oldMember);
-            oldMemberAndEditedMember.add(editedMember);
-
-            File dukeMemberFile = new File("dukeMembers.csv");
-            writeMemberFile(dukeMemberFile, members);
-
-            return oldMemberAndEditedMember;
-        } catch (InvalidMemberException e) {
-            throw new InvalidMemberException(e.getMessage());
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
-    /**
      * Creates Attendance object from input given by user.
      *
      * @param query user raw data input.
@@ -314,87 +285,31 @@ public class Parser {
             }
             wordIndex++;
         }
-        return new Attendance(memberName, trainingName,presentOrAbsent);
+        return new Attendance(memberName, trainingName, presentOrAbsent);
     }
 
-    /**
-     * Creates Member class by input given by user.
-     *
-     * @param query user raw data input.
-     * @return Member according to user input.
-     */
-    public static Integer getMemberIndex(String query) throws NumberFormatException {
+    public static Integer getLastIndex(String query) {
+        try {
+            String regex = "[\\s]+";
+            String[] words = query.trim().split(regex);
+            int indexNumber = Integer.parseInt(words[words.length - 1].trim());
+            return indexNumber;
+        } catch (NumberFormatException e) {
+            System.out.println("Index must be a number");
+            return -1;
+        }
+    }
+
+    public static Integer getIndex(String query) {
         try {
             String regex = "(\\/[a-z])+";
             String[] words = query.trim().split(regex);
-            int memberNumber = Integer.parseInt(words[1].trim());
-            assert memberNumber > 0 : "Member index cannot less than 0";
-            return memberNumber;
+            int indexNumber = Integer.parseInt(words[1].trim());
+            return indexNumber;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            System.out.println("Index must be a number");
+            return -1;
         }
-
-    }
-
-    /**
-     * Function creates a new member to be input in MemberList Class.
-     *
-     * @param members MemberList which contains list of members
-     * @param query   user input
-     */
-    public static void makeMemberEntry(MemberList members, String query) {
-        Member member = getMemberDetails(query);
-        members.addMember(member);
-        File dukeMemberFile = new File("dukeMembers.csv");
-        writeMemberFile(dukeMemberFile, members);
-        Ui.printAddedMemberMessage(member);
-    }
-
-    /**
-     * Function edits an existing member and shows the change to user.
-     *
-     * @param members MemberList which contains list of members
-     * @param query   user input
-     */
-    public static void editMember(MemberList members, String query) {
-        try {
-            ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
-            Member oldMember = oldMemberAndNewMember.get(0);
-            Member newMember = oldMemberAndNewMember.get(1);
-            Ui.printEditMessage(oldMember, newMember);
-        } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("Please input a valid number for member index.");
-        }
-    }
-
-    /**
-     * Creates a TrainingSchedule to put into TrainingList.
-     *
-     * @param trainings TrainingList containing all TrainingSchedule
-     * @param query     User input command to parse
-     */
-    public static void makeTrainingEntry(TrainingList trainings, String query) {
-        TrainingSchedule training = getTrainingDescription(query);
-        trainings.addTrainingSchedule(training);
-        Ui.printAddedTrainingMessage(training);
-    }
-
-    /**
-     * Creates an Attendance Entry to put into AttendanceList.
-     *
-     * @param attendanceList AttendanceList containing all Attendance lists
-     * @param query          User input command to parse
-     */
-    public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
-        Attendance attendance = getAttendanceDetails(query);
-        assert attendance != null : "attendance should not be empty";
-
-        attendanceList.addAttendance(attendance);
-        AttendanceStorage.writeToAttendance(attendanceList,attendance);
-
-        Ui.printAddedAttendanceMessage(attendance);
     }
 
     /**
@@ -405,7 +320,7 @@ public class Parser {
      * @param query     user input
      */
     public static void findInTraining(TrainingList trainings, String query) {
-        //Leave for v2.0
+        //Leave for v2.0, implement as class in commands package
     }
 
     /**
@@ -416,7 +331,7 @@ public class Parser {
      * @param query   user input
      */
     public static void findInMembers(MemberList members, String query) {
-        //Leave for v2.0
+        //Leave for v2.0, implement as class in commands package
     }
 
     /**
@@ -424,162 +339,22 @@ public class Parser {
      * words are found, the user will be notified.
      *
      * @param attendanceList ArrayList of tasks
-     * @param query   user input
+     * @param query          user input
      */
     public static void findInAttendanceEntries(AttendanceList attendanceList, String query) {
-        //Leave for v2.0
-    }
-
-    /**
-     * Function deletes a member from the MemberList class.
-     *
-     * @param members MemberList which contains list of members
-     * @param query   user input
-     */
-    public static void deleteMember(MemberList members, String query) {
-        try {
-            int memberNumber = getMemberIndex(query);
-            Member member = members.deleteMember(memberNumber);
-            File dukeMemberFile = new File("dukeMembers.csv");
-            writeMemberFile(dukeMemberFile, members);
-            Ui.printDeletedMemberMessage(member);
-        } catch (IndexOutOfBoundsException exception) {
-            System.out.println("There is no such member number...");
-        } catch (NumberFormatException e) {
-            System.out.println("Please input a proper number...");
-        }
+        //Leave for v2.0, implement as class in commands package
     }
 
     public static void wrongInputTypeMessage() {
         Ui.printWrongInputMessage();
     }
 
-    /**
-     * Removes an entry from a TrainingList based on input index.
-     *
-     * @param trainings TrainingList containing all recorded TrainingSchedules.
-     * @param query     String input that contains the integer index of the entry to remove.
-     */
-    public static void deleteTraining(TrainingList trainings, String query) {
-        try {
-
-            int trainingIndex = -1;
-
-            String regex = "(\\/[a-z])+";
-
-            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-            Matcher matcher = pattern.matcher(query);
-
-            String[] words = query.trim().split(regex);
-
-            int wordIndex = 1;
-            while (matcher.find()) {
-                if (matcher.group().equals("/t")) {
-                    trainingIndex = Integer.parseInt(words[wordIndex].trim());
-                }
-                wordIndex++;
-            }
-
-            if (trainingIndex != -1) {
-                TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
-                Ui.printDeletedTrainingMessage(toDelete);
-            }
-        } catch (IndexOutOfBoundsException exception) {
-            System.out.println("There is no such training number...");
-        } catch (NumberFormatException e) {
-            System.out.println("Please input a proper number...");
-        }
-
-    }
-
-    /**
-     * Edits an entry from a TrainingList based on input index. /t INDEX is compulsory, /n, /a and /v are optional
-     * fields.
-     *
-     * @param trainings TrainingList containing all TrainingSchedules recorded.
-     * @param query     String input of TrainingSchedule to be edited, identified by index after /t.
-     */
-    public static void editTraining(TrainingList trainings, String query) {
-        try {
-            int index = -1;
-            String name = "";
-            String venue = "";
-            String time = "";
-
-            String regex = "(\\/[a-z])+";
-
-            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-            Matcher matcher = pattern.matcher(query);
-
-            String[] words = query.trim().split(regex);
-
-            int wordIndex = 1;
-            while (matcher.find()) {
-                switch (matcher.group()) {
-                case "/t":
-                    index = Integer.parseInt(words[wordIndex].trim());
-                    break;
-                case "/n":
-                    name = words[wordIndex].trim();
-                    break;
-                case "/a":
-                    time = words[wordIndex].trim();
-                    break;
-                case "/v":
-                    venue = words[wordIndex].trim();
-                    break;
-                default:
-                    break;
-                }
-
-                wordIndex++;
-            }
-
-            if (index != -1) {
-                int listIndex = index - 1;
-                TrainingSchedule trainingToChange = trainings.getTrainingList().get(listIndex);
-                if (!name.equals("")) {
-                    trainingToChange.setTrainingName(name);
-                }
-                if (!time.equals("")) {
-                    trainingToChange.setTrainingTime(time);
-                }
-                if (!venue.equals("")) {
-                    trainingToChange.setTrainingVenue(venue);
-                }
-
-                trainings.getTrainingList().set(listIndex, trainingToChange);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such training number...");
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index...");
-        }
-
-    }
-
-    public static Integer getAttendanceIndex(String query) {
-        int attNumber = Integer.parseInt(query.replaceFirst("delete /att", "").trim());
-        assert attNumber > 0 : "smallest attNumber is 1";
-        return attNumber;
-    }
-
-    /**
-     * Removes an entry from a AttendanceList based on input index.
-     *
-     * @param attendanceList AttendanceList containing all Attendance entries.
-     * @param query     String input that contains the integer index of the entry to remove.
-     */
-    public static void deleteAttendance(AttendanceList attendanceList, String query) {
-        try {
-            int attNumber = getAttendanceIndex(query);
-            Attendance entry = attendanceList.deleteAttendance(attNumber);
-            assert entry != null : "entry should not be empty";
-            Ui.printDeletedAttendanceMessage(entry);
-        } catch (IndexOutOfBoundsException exception) {
-            System.out.println("There is no such attendance number...");
-        } catch (NumberFormatException e) {
-            System.out.println("Please input a proper number...");
+    public static void askToListAll(AttendanceList attendanceList) {
+        Ui.printListAllMessage();
+        Scanner userInput = new Scanner(System.in);
+        String query = userInput.nextLine();
+        if (query.equals("y")) {
+            Ui.printList(attendanceList);
         }
     }
 
@@ -591,7 +366,7 @@ public class Parser {
         int flag = 0;
         Scanner userInput = new Scanner(System.in);
         while (!query.equals("bye")) {
-            System.out.print("=>");
+            System.out.print("=> ");
             if (userInput.hasNextLine()) {
                 query = userInput.nextLine();
             }

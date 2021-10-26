@@ -81,9 +81,9 @@ public class MemberList {
     public Member deleteMember(int memberNumber) throws IndexOutOfBoundsException {
         try {
             int index = memberNumber - 1;
-            Member task = memberList.get(index);
+            Member member = memberList.get(index);
             memberList.remove(index);
-            return task;
+            return member;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
