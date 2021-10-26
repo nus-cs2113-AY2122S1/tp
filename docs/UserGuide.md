@@ -3,7 +3,6 @@ layout: page
 title: User Guide
 ---
 
-
 # User Guide
 
 ## Introduction
@@ -89,9 +88,9 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 
 ## Features
 
-<div class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-<i class="fas fa-info-circle"></i> <strong>Note:</strong> You can use this <a href="https://gist.github.com/rxaviers/7360908">list of emoji shortcodes</a>, but keep in mind that emoji shortcodes vary from application to application. Refer to your Markdown application's documentation for more information.
+**:information_source: Notes about the command format:**<br>
 
 </div>
 
@@ -162,8 +161,12 @@ Here are the modules in the list:
 ### Adding a partner university
 Add a partner university the user is interested into the user selected university list.
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
->This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
-> 
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:**
+This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
+</div> 
+
 * Example 1  
 Input: `add /uni 24`  
 Expected output:
