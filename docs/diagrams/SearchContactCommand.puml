@@ -6,22 +6,38 @@ hide footbox
 activate ":MainParser"
 
 ":MainParser" -> ":MainParser" :getCommandWord(userInput:String)
+activate ":MainParser"
 ":MainParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
 activate ":SearchContactParser"
 
 ":SearchContactParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
-":SearchContactParser" -> ":SearchContactParser" :getDetailFlag(userInput:String)
+activate ":SearchContactParser"
+":SearchContactParser" --> ":SearchContactParser" :searchInput:String
+deactivate ":SearchContactParser"
+
+":SearchContactParser" -> ":SearchContactParser" :getDetailFlag(searchInput:String))
+activate ":SearchContactParser"
+":SearchContactParser" --> ":SearchContactParser" :detailFlag:int
+deactivate ":SearchContactParser"
+
+":SearchContactParser" -> ":SearchContactParser" :parseSearchQuery(searchInput:String)
+activate ":SearchContactParser"
+":SearchContactParser" --> ":SearchContactParser" :query:String
+deactivate ":SearchContactParser"
 
 
-":SearchContactParser" -> ":SearchContactCommand" : execute(query:String, detailIndex:int)
+":SearchContactParser" --> ":MainParser" : SearchContactCommand(query:String, detailFlag:int)
+deactivate ":SearchContactParser"
+
+":MainParser" -> ":SearchContactCommand" : SearchContactCommand:Command
 activate ":SearchContactCommand"
 
-":SearchContactCommand" -> ":ContactList" : searchContact(query:String, detailIndex:int)
+":SearchContactCommand" -> ":ContactList" : searchContact(query:String, detailFlag:int)
 activate ":ContactList"
 
 loop for all contacts
 ":ContactList" -> ":ContactList" :getDetailFlag(userInput:String)
-alt#gold #lightgreen NAME_INDEX
+loop#gold #lightgreen for all contacts
     alt contact.getName().contains(query)
     ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
     activate ":TextUI"
@@ -61,4 +77,13 @@ alt#gold #lightgreen NAME_INDEX
     deactivate ":TextUI"
     end end
 end
+
+":ContactList"-->":SearchContactCommand"
+deactivate ":ContactList"
+
+":SearchContactCommand"-->":MainParser"
+deactivate ":SearchContactCommand"
+deactivate ":MainParser"
+
+
 @enduml
