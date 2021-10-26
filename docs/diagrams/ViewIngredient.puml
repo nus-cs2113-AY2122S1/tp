@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create ViewIngredientCommand
+Parser -> ViewIngredientCommand: ViewIngredientCommand(ingredientName: String))
+activate ViewIngredientCommand
+
+return
+return command
+
+-> ViewIngredientCommand: execute()
+activate ViewIngredientCommand
+
+ViewIngredientCommand -> IngredientRepository: find(ingredientName: String)
+activate IngredientRepository
+
+IngredientRepository --> ViewIngredientCommand: ingredient: IngredientStorage
+deactivate IngredientRepository
+
+<-- ViewIngredientCommand: String
+deactivate ViewIngredientCommand
+
+
+@enduml
