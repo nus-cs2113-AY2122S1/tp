@@ -1,7 +1,7 @@
 package seedu.command;
 
 
-import seedu.duke.Duke;
+import seedu.unimods.UniMods;
 import seedu.exceptions.FetchException;
 import seedu.module.GradedModule;
 import seedu.module.Module;
@@ -30,11 +30,13 @@ public class StoreResultsCommand extends Command {
                 return;
             }
             module = NusMods.fetchModOnline(moduleCode);
-            Profile currentProfile = Duke.getProfileInUse();
+            Profile currentProfile = UniMods.getProfileInUse();
             if (gradeType.equals(TextUi.GRADED)) {
-                currentProfile.getRecord().addModuleToRecord(new GradedModule(module, grade));
+                GradedModule grModule = new GradedModule(module, grade);
+                currentProfile.getRecord().addModuleToRecord(grModule);
             } else {
-                currentProfile.getRecord().addModuleToRecord(new UngradedModule(module, grade));
+                UngradedModule ugModule = new UngradedModule(module, grade);
+                currentProfile.getRecord().addModuleToRecord(ugModule);
             }
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);

@@ -298,16 +298,16 @@ public class Timetable implements Comparable<Timetable> {
      * <p>Also displays all the modules taken and the total number of MCs taken for the
      * timetable
      */
-    public void showTimetable() {
+    public void showTimetable(boolean showUserItemsOnly) {
         TimetableUI.printScheduleHours(earliestHour, latestHour);
-        TimetableUI.printDaySchedule("MON", monday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("TUE", tuesday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("WED", wednesday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("THU", thursday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("FRI", friday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("SAT", saturday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("SUN", sunday, earliestHour, latestHour);
-        TimetableUI.printModules(modules);
+        TimetableUI.printDaySchedule("MON", monday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("TUE", tuesday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("WED", wednesday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("THU", thursday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("FRI", friday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("SAT", saturday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("SUN", sunday, earliestHour, latestHour,showUserItemsOnly);
+        TimetableUI.printModules(modules, this.semester);
     }
 
     public TimetableLesson getLesson(DayOfWeek day, int startHour) {

@@ -7,7 +7,7 @@
 It’s August 5th, and the Academic Year is right around the corner!
 ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS 
+Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS
 modules and lets you pick and choose the modules and classes you want to take for that semester!
 Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
 total workload:
@@ -41,8 +41,8 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run 
-`java -jar unimods.jar`.
+2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run
+   `java -jar unimods.jar`.
 
 3. Copy the file to the folder you want to use as the home folder for your Unimods.
 4. Double-click the file to start the app.
@@ -175,34 +175,35 @@ You can also apply the following flags to refine the search:
 - **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
 - **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
 - **-s :** search for mods offered in the semester e.g. `-s 2`
-(:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
+  (:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
 - **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`
 - **-f :** search for mods from a faculty e.g `-f Computing`
 - **-d :** search for mods from a department `-d Computer Science`
-- **-q :** performs a local search using locally saved module data which might not be the most updated version, 
-but is very quick e.g. `-q`
+- **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
+  very quick e.g. `-q`
 
 :information_source: Command, search term and flag regex are case insensitive.
 
-:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be ignored.
+:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be
+ignored.
 
-:warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every 
-single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform 
+:warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every
+single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform
 them with the -q flag, which will execute in a matter of seconds.
 
 <br>
 
 ## Update local database: `update`
 
-Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a 
-good WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee 
-while waiting!
+Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a good
+WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
+waiting!
 
 :information_source: Command is case insensitive.
 
-:information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from 
-NUSMods, it will update that mod in the local database. You should only realistically only need to do this before 
-the start of a new semester, when mods are being updated for the coming semester.
+:information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from
+NUSMods, it will update that mod in the local database. You should only realistically only need to do this before the
+start of a new semester, when mods are being updated for the coming semester.
 
 <br>
 
@@ -388,16 +389,42 @@ __________________________________________________________________________
 ```
 
 <br>
-## Exit: `exit`
 
-You can end the application anytime by typing `exit` into the terminal
+## View Unofficial Transcript : `transcript`
+
+You can view your Unofficial Transcript to get an idea of your degree progress.This will disaply the modules you have
+completed and their corresponding grades. The total number of credits completed and the CAP will also be displayed.
+
+You can type `transcript` to view your Unofficial Transcript.
+
+For Example:
 
 ```shell
-~$ exit
-____________________________________________________________________________
-> Bye friend!
-> See you again! :)
-____________________________________________________________________________
+~$==>transcript
+								--	National University of Singapore	--
+									--	Unofficial Transcript	--
+									------------------------------
+
+Date Issued : 26-10-2021
+
+MODULE                                                                              GRADE  CREDITS
+
+CS2113T     Software Engineering & Object-Oriented Programming                        A+    4.0   
+CS1231      Discrete Structures                                                       A-    4.0   
+MA1512      Differential Equations for Engineering                                    B+    2.0   
+CS1010      Programming Methodology                                                   C+    4.0   
+EE2026      Digital Design                                                            B+    4.0   
+CG2271      Real-Time Operating Systems                                               A     4.0   
+CG1111      Engineering Principles and Practice I                                     S     6.0   
+CG1112      Engineering Principles and Practice II                                    U     6.0   
+CFG1002     Career Catalyst                                                           CS    2.0   
+
+Total Credits Fulfilled : 36.0
+
+Cumulative Average Point : 4.18
+
+	This is not an official transcript issued by the Office of the Registrar.
+__________________________________________________________________________
 ```
 
 <br>
