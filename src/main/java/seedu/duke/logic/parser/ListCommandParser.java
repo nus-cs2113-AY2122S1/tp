@@ -38,8 +38,13 @@ public class ListCommandParser {
     }
 
     private static Command parseListLessonCommand(String userResponse) throws ParseException {
-        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
-                && !isToday(userResponse) && !isTomorrow(userResponse)) {
+        boolean isBlank = userResponse.isBlank();
+        boolean isDayOfTheWeek = DayOfTheWeek.is(userResponse);
+        boolean isToday = isToday(userResponse);
+        boolean isTomorrow = isTomorrow(userResponse);
+        boolean isValid = isBlank || isDayOfTheWeek || isToday || isTomorrow;
+
+        if (!isValid) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
@@ -47,8 +52,14 @@ public class ListCommandParser {
     }
 
     private static Command parseListTaskCommand(String userResponse) throws ParseException {
-        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
-                && !isToday(userResponse) && !isTomorrow(userResponse)) {
+        boolean isBlank = userResponse.isBlank();
+        boolean isDayOfTheWeek = DayOfTheWeek.is(userResponse);
+        boolean isToday = isToday(userResponse);
+        boolean isTomorrow = isTomorrow(userResponse);
+        boolean isPriority = userResponse.equalsIgnoreCase("priority");
+        boolean isValid = isBlank || isDayOfTheWeek || isToday || isTomorrow || isPriority;
+
+        if (!isValid) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 

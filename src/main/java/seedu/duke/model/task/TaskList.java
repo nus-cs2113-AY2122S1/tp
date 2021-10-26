@@ -6,7 +6,9 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -16,8 +18,10 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> taskList) {
-        Collections.sort(taskList);
+    public TaskList(List<Task> taskList, boolean isSortByDay) {
+        if (isSortByDay) {
+            Collections.sort(taskList);
+        }
         this.taskList = taskList;
     }
 
@@ -88,7 +92,7 @@ public class TaskList {
     public TaskList filterTasksByKeyword(String keyword) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getTitle().toLowerCase().contains(keyword))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), true);
     }
 
     /**
@@ -100,7 +104,23 @@ public class TaskList {
     public TaskList filterTasksByPeriod(String period) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getDayOfTheWeek().toLowerCase().contains(period))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), true);
+    }
+
+    public TaskList sortTasksByPriority() {
+        List<Task> sortedTaskList = new ArrayList<>(taskList);
+        sortedTaskList.sort((t1, t2) -> {
+            Map<String, Integer> order = new HashMap<>();
+            order.put("L", 1);
+            order.put("M", 2);
+            order.put("H", 3);
+
+            String p1 = t1.getPriority();
+            String p2 = t2.getPriority();
+            return Integer.compare(order.get(p1), order.get(p2));
+        });
+
+        return new TaskList(sortedTaskList, false);
     }
 
     /**

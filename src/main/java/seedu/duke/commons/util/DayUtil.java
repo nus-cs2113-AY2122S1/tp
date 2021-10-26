@@ -29,7 +29,7 @@ public class DayUtil {
     }
 
     public static int compareDay(String d1, String d2) throws InvalidDayException {
-        Map<String, Integer> order = new HashMap<String, Integer>();
+        Map<String, Integer> order = new HashMap<>();
         order.put("Monday", 1);
         order.put("Tuesday", 2);
         order.put("Wednesday", 3);

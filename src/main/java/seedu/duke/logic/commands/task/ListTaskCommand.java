@@ -18,6 +18,8 @@ public class ListTaskCommand extends Command {
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList) {
         if (period.isBlank()) {
             ui.printTaskList(taskList);
+        } else if (period.equalsIgnoreCase("priority")) {
+            ui.printTasksByPriority(taskList);
         } else {
             ui.printTasksWithPeriod(taskList, period);
         }
