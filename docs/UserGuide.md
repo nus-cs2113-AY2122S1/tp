@@ -86,13 +86,23 @@ This SEPlanner allows the user to search for mapping through our platform. To do
   3. Search for potential mapping for a particular selected university.
   4. Select a mapping and add the mapping.
 
-## Features
-
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes this guide:**<br>
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**'
+Tips give helpful information to make your experience better.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Warnings caution you about certain actions that might be dangerous or are important to note.
+</div>
 
 </div>
+
+
+## Features
+
+
 
 
 ### Viewing all available universities: 
@@ -164,8 +174,7 @@ Add a partner university the user is interested into the user selected universit
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Note:**
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 This command accepts either the `<UNIVERSITY_INDEX>` or `<![img.png](img.png)UNIVERSITY_NAME>` as arguments. 
 The `<UNIVERSITY_INDEX>` can be found via `list /muni` command. 
 </div> 
@@ -191,8 +200,7 @@ Add a NUS module that the user wants to complete during SEP into the user select
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Note:**
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
 The `<MODULE_INDEX>` can be found via `list /mmod` command.  
 </div>
@@ -271,7 +279,7 @@ Expected output:
 Displays all available module mappings for a specific university that matches the list of selected modules.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-> Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
 </div>
 
 #### Format: `searchmap <UNIVERSITY_INDEX>`
@@ -340,7 +348,7 @@ CS1231 - CAS CS131 : Combinatoric Structures
 contains the data of your previous AddressBook home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Do not delete the `/data` directory or any of its files as this will cause you to loose your saved information!
+Do not delete the `/data` directory or any of its files as this will cause you to lose your saved information!
 </div>
 
 **Q**: How do I save my selected universities and modules?  
