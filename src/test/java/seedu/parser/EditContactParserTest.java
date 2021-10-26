@@ -12,15 +12,13 @@ import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgEditException;
 import seedu.exception.MissingDetailException;
-import seedu.parser.EditContactParser;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 class EditContactParserTest {
-    private EditContactParser editContactParser = new EditContactParser();
+    private final EditContactParser editContactParser = new EditContactParser();
 
     @Test
     void parseContactDetails() throws MissingDetailException,
@@ -85,6 +83,20 @@ class EditContactParserTest {
     void parseEditCommand_invalidTwitterCharacters_exceptInvalidTwitterUsernameException() {
         String testInput = "edit 1 -tw aks-haAaa";
         assertThrows(InvalidTwitterUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidTelegramLength_exceptInvalidTelegramUsernameException() {
+        String testInput = "edit 1 -te absd";
+        assertThrows(InvalidTelegramUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidTelegramCharacters_exceptInvalidTelegramUsernameException() {
+        String testInput = "edit 1 -te JKasn- kasd";
+        assertThrows(InvalidTelegramUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
     }
 
 }
