@@ -179,6 +179,7 @@ additional devices or platforms.
 |v1.0|programmer|be able to copy and paste the displayed contact's URLs|visit the contact's accounts|
 |v2.0|programmer|save my personal details|the application is aware of the user|
 |v2.0|forgetful user|be able to search for my contacts by name|find their contact details|
+|v2.0|programmer|import a list of contacts quickly from an input txt file|save time typing each contact
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 
