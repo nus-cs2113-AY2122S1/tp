@@ -53,9 +53,9 @@ class MemberListTest {
 
     @Test
     void getExistingMemberDetails() {
-        assertEquals(fullMemberList.getMemberName(1), "Tan Teck Hwee");
+        assertEquals(fullMemberList.getMemberName(1), "TAN TECK HWEE");
         assertEquals(fullMemberList.getMemberStudentNumber(1), "A0123456A");
-        assertEquals(fullMemberList.getMemberGender(1), 'F');
+        assertEquals(fullMemberList.getMemberGender(1), "F");
         assertEquals(fullMemberList.getMemberPhoneNumber(1), "98765432");
     }
 
@@ -70,13 +70,15 @@ class MemberListTest {
 
     @Test
     void makeMemberEntry() {
-        final String string = "add /m /n Lorem Ipsum /s A1231234B";
+        final String string = "add /m /n Lorem Ipsum /s A1231234B /g M /p 91118888";
         Member newMember = Parser.getMemberDetails(string);
         new AddMember(fullMemberList, newMember);
         //Parser.makeMemberEntry(fullMemberList, string);
 
-        assertEquals(fullMemberList.getMemberName(6), "Lorem Ipsum");
+        assertEquals(fullMemberList.getMemberName(6), "LOREM IPSUM");
         assertEquals(fullMemberList.getMemberStudentNumber(6), "A1231234B");
+        assertEquals(fullMemberList.getMemberGender(6), "M");
+        assertEquals(fullMemberList.getMemberPhoneNumber(6), "91118888");
     }
 
     @Test
@@ -87,7 +89,7 @@ class MemberListTest {
         new EditMember(fullMemberList, index, memberDetail);
 
         try {
-            assertEquals(fullMemberList.getMember(1).getName(), "Ian Wang");
+            assertEquals(fullMemberList.getMember(1).getName(), "IAN WANG");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
