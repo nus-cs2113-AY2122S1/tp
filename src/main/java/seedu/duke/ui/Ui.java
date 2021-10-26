@@ -6,8 +6,6 @@ import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
-import seedu.duke.model.module.Grade;
-import seedu.duke.model.module.FullModuleList;
 import seedu.duke.model.module.Module;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.module.exceptions.ModuleNotFoundException;
@@ -362,7 +360,7 @@ public class Ui {
         for (int i = 0; i < moduleList.getSize(); i++) {
             Module module = moduleList.getModule(i);
             System.out.println(PADDING + (i + 1) + ". " + module);
-            System.out.println(PADDING + "   Grade: " + Grade.gradeToString(module.getGrade()));
+            System.out.println(PADDING + "   Grade: " + module.getGrade());
         }
         printCap(moduleList);
         System.out.print(LINE);
@@ -382,7 +380,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);
-        System.out.println(PADDING + "   Grade: " + Grade.gradeToString(module.getGrade()));
+        System.out.println(PADDING + "   Grade: " + module.getGrade());
         System.out.print(LINE);
     }
 

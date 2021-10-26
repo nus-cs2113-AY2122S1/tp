@@ -16,8 +16,7 @@ public class Module {
     private String prerequisite;
     private String corequisite;
     // todo add additional information
-    private Grade grade;
-    private Grade targetGrade; //not in use
+    private String grade;
 
     public Module(String moduleCode, String title, String moduleCredit) {
         // subject to change
@@ -31,7 +30,7 @@ public class Module {
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
-        this.grade = Grade.deserializeGrade(grade);
+        this.grade = grade;
     }
 
     public String getModuleCode() {
@@ -70,50 +69,38 @@ public class Module {
         return corequisite;
     }
 
-    public void setGrade(Grade grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
-    public void setTargetGrade(Grade targetGrade) {
-        this.targetGrade = targetGrade;
-    }
-
-    public String getGradeAsString() {
-        return Grade.gradeToString(grade);
-    }
-
-    public Grade getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public Grade getTargetGrade() {
-        return targetGrade;
-    }
-
-    public double getGradePoint(Grade grade) {
+    public double getGradePoint(String grade) {
         switch (grade) {
-        case A_PLUS:
+        case "A+":
             //Fallthrough
-        case A:
+        case "A":
             return 5.0;
-        case A_MINUS:
+        case "A-":
             return 4.5;
-        case B_PLUS:
+        case "B+":
             return 4.0;
-        case B:
+        case "B":
             return 3.5;
-        case B_MINUS:
+        case "B-":
             return 3.0;
-        case C_PLUS:
+        case "C+":
             return 2.5;
-        case C:
+        case "C":
             return 2.0;
-        case D_PLUS:
+        case "D+":
             return 1.5;
-        case D:
+        case "D":
             return 1.0;
-        case F:
-            return 0;
+        case "F":
+            return 0.0;
         default:
             return -1;
         }
