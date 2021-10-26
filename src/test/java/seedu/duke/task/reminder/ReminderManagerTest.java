@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import org.junit.jupiter.api.Test;
 import seedu.duke.task.Task;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
@@ -22,6 +22,7 @@ class ReminderManagerTest {
 
     @Test
     void sendReminder() {
+        TaskManager taskManager = new TaskManager();
         Calendar start = Calendar.getInstance();
         start.add(Calendar.MINUTE, 10);
         Calendar end = Calendar.getInstance();
@@ -30,15 +31,15 @@ class ReminderManagerTest {
         LocalDateTime endDate = end.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         Task todoWithReminder = new Todo("lecture with reminder", startDate);
-        TaskManager.addTask(todoWithReminder);
+        taskManager.addTask(todoWithReminder);
         Task todoWithoutReminder = new Todo("lecture without reminder", endDate);
-        TaskManager.addTask(todoWithoutReminder);
+        taskManager.addTask(todoWithoutReminder);
         Task deadlineWithReminder = new Deadline("exercise 1", startDate);
-        TaskManager.addTask(deadlineWithReminder);
+        taskManager.addTask(deadlineWithReminder);
         Task deadlineWithoutReminder = new Deadline("exercise 1", endDate);
-        TaskManager.addTask(deadlineWithoutReminder);
+        taskManager.addTask(deadlineWithoutReminder);
         Task eventTest = new Event("meeting", startDate, endDate);
-        TaskManager.addTask(eventTest);
+        taskManager.addTask(eventTest);
 
         expectedOut = "Reminder! 10 min before the following task:\n" + "\t"
                 + todoWithReminder.getTaskEntryDescription() + "\n"
@@ -47,6 +48,6 @@ class ReminderManagerTest {
                 + "Reminder! 10 min before the following task:\n" + "\t"
                 + eventTest.getTaskEntryDescription() + "\n";
 
-        assertEquals(expectedOut, ReminderManager.sendReminder());
+        assertEquals(expectedOut, ReminderManager.sendReminder(taskManager));
     }
 }

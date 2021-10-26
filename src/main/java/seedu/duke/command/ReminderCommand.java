@@ -1,23 +1,28 @@
 package seedu.duke.command;
 
 import seedu.duke.exception.*;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.reminder.ReminderManager;
 
 import java.util.Map;
 
 public class ReminderCommand extends Command{
-    private static final CommandEnum COMMAND = CommandEnum.REMINDER;
+    private static final String USAGE = "reminder";
 
-    public ReminderCommand(Map<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    public ReminderCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
+    }
+
+    @Override
+    protected String getUsage() {
+        return null;
     }
 
     @Override
     public CommandResult executeCommand() throws Exception {
         String message = "";
         try {
-            message = ReminderManager.customizeReminder(commandArguments);
+            message = ReminderManager.customizeReminder(taskManager, commandArguments);
         } catch (NumberFormatException nfe) {
             message = "Please use integer values for time and index";
         } catch (MissingUserTimeException mute) {

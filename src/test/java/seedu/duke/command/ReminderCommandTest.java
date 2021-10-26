@@ -8,8 +8,9 @@ import seedu.duke.local.TasktoLineConverter;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
-import seedu.duke.task.TaskManager;
 import seedu.duke.task.factory.TodoFactory;
+import seedu.duke.task.taskmanager.TaskManager;
+import seedu.duke.task.taskmanager.TaskManagerObserver;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReminderCommandTest {
     private ArrayList<String> expectedOut = new ArrayList<>();
     private String expectedResult = "";
+    TaskManager taskManager = new TaskManager();
     Task todoReminder;
     Task todoNoReminder;
     Task deadline;
@@ -42,36 +44,36 @@ public class ReminderCommandTest {
         todoNoReminder = new Todo("go jogging");
         deadline = new Deadline("return book", startDate, RecurrenceEnum.WEEKLY);
         event = new Event("project meeting", startDate, endDate, RecurrenceEnum.MONTHLY);
-        TaskManager.addTask(todoReminder);
-        TaskManager.addTask(todoNoReminder);
-        TaskManager.addTask(deadline);
-        TaskManager.addTask(event);
-        DataManager.setUpDataManager();
+        taskManager.addTask(todoReminder);
+        taskManager.addTask(todoNoReminder);
+        taskManager.addTask(deadline);
+        taskManager.addTask(event);
+        DataManager.setUpDataManager(taskManager);
 
         Map<String, String> arguments1 = new HashMap<>();
         arguments1.put(Command.MAIN_ARGUMENT, "1");
         arguments1.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
-        Command customize1 = new ReminderCommand(arguments1);
+        Command customize1 = new ReminderCommand(taskManager, arguments1);
         result += customize1.executeCommand().getMessage();
 
         Map<String, String> arguments2 = new HashMap<>();
         arguments2.put(Command.MAIN_ARGUMENT, "2");
         arguments2.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
-        Command customize2 = new ReminderCommand(arguments2);
+        Command customize2 = new ReminderCommand(taskManager, arguments2);
         result += customize2.executeCommand().getMessage();
 
         Map<String, String> arguments3 = new HashMap<>();
         arguments3.put(Command.MAIN_ARGUMENT, "3");
         arguments3.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
         arguments3.put(ReminderFlag.TIME_AHEAD, "15");
-        Command customize3 = new ReminderCommand(arguments3);
+        Command customize3 = new ReminderCommand(taskManager, arguments3);
         result += customize3.executeCommand().getMessage();
 
         Map<String, String> arguments4 = new HashMap<>();
-        arguments3.put(Command.MAIN_ARGUMENT, "5");
-        arguments3.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
-        arguments3.put(ReminderFlag.TIME_AHEAD, "15");
-        Command customize4 = new ReminderCommand(arguments3);
+        arguments4.put(Command.MAIN_ARGUMENT, "5");
+        arguments4.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
+        arguments4.put(ReminderFlag.TIME_AHEAD, "15");
+        Command customize4 = new ReminderCommand(taskManager, arguments4);
         result += customize4.executeCommand().getMessage();
 
         expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|" +

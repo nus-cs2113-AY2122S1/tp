@@ -2,22 +2,29 @@ package seedu.duke.command.addtask;
 
 import java.util.Map;
 
-import seedu.duke.command.CommandEnum;
-import seedu.duke.exception.GetTaskFailedException;
-import seedu.duke.task.Task;
+import seedu.duke.command.flags.TodoFlag;
+import seedu.duke.parser.DateParser;
+import seedu.duke.task.factory.TaskFactory;
 import seedu.duke.task.factory.TodoFactory;
+import seedu.duke.task.taskmanager.TaskManager;
 
 //@@author SeanRobertDH
 public class TodoCommand extends TaskCommand {
-    private static final CommandEnum COMMAND = CommandEnum.TODO;
 
-    public TodoCommand(Map<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    private static String USAGE = "todo <description> [%s %s]";
+
+    public TodoCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
     }
 
     @Override
-    Task createTask() throws GetTaskFailedException {
-        return TodoFactory.getTodo(commandArguments);
+    TaskFactory setTaskFactory() {
+        return new TodoFactory(commandArguments);
+    }
+
+    @Override
+    protected String getTaskUsage() {
+        return String.format(USAGE, TodoFlag.DO_ON_DATE, DateParser.getDefaultDateFormat());
     }
 
 }

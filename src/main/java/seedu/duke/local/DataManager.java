@@ -1,7 +1,7 @@
 package seedu.duke.local;
 
 import seedu.duke.storage.TaskFileWriter;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ public class DataManager {
 
     }
 
-    public static void setUpDataManager() {
-        for (int i = 0; i < TaskManager.getTaskListSize(); i++) {
-            taskLines.add(TasktoLineConverter.convertTaskToLine(TaskManager.getTask(i)));
+    public static void setUpDataManager(TaskManager taskManager) {
+        for (int i = 0; i < taskManager.getTaskListSize(); i++) {
+            taskLines.add(TasktoLineConverter.convertTaskToLine(taskManager.getTask(i)));
         }
     }
 
