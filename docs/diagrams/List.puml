@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ -> Parser: parseCommand()
+activate Parser
+
+Parser -> ListCommand: execute()
+activate ListCommand
+
+opt ingredientRepository.size() >0
+    ListCommand -> ingredientRepository: printWholeList()
+    activate ingredientRepository
+
+        loop ingredientStorages
+            ingredientRepository -> ingredientStorage
+            activate ingredientStorage
+
+            ingredientStorage --> ingredientRepository: String
+            deactivate ingredientStorage
+        end
+
+    ingredientRepository --> ListCommand: String
+end
+
+deactivate ingredientRepository
+ListCommand --> Parser: String
+
+deactivate ListCommand
+<-- Parser: Command
+deactivate Parser
+
+@enduml
