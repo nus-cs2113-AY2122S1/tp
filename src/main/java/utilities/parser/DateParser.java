@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 //@@author alvintan01
+
 /**
  * Contains the parser for date objects.
  */
@@ -40,5 +42,21 @@ public class DateParser {
      */
     public static String dateToString(Date date) {
         return new SimpleDateFormat(OUTPUT_DATE_FORMAT).format(date);
+    }
+
+    /**
+     * Helps to remove time from date object.
+     *
+     * @param date Date object which time will be removed.
+     * @return Date object without time.
+     */
+    public static Date removeTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 }

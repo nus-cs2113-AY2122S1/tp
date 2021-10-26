@@ -72,8 +72,9 @@ public class ArchivePrescriptionCommand extends Command {
                 continue;
             }
             Prescription prescription = (Prescription) medicine;
-            if (prescription.getDate().before(prescribeArchiveDate)
-                    || prescription.getDate().equals(prescribeArchiveDate)) {
+            Date prescriptionDate = DateParser.removeTime(prescription.getDate());
+            if (prescriptionDate.before(prescribeArchiveDate)
+                    || prescriptionDate.equals(prescribeArchiveDate)) {
                 filteredPrescription.add(prescription);
             }
         }
