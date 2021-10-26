@@ -23,7 +23,7 @@ an overview of all the commands you can use with NUSBuddy.
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Getting help - `help`](#getting-help--help)
+  * [Getting help - `help`](#getting-help---help)
   * [Adding a Task, Lesson or Module - `add`](#adding-a-task-lesson-or-module---add)
   * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
@@ -79,7 +79,7 @@ from deleting these files in order to preserve your data.
 >
 > [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
 
-### Getting help -`help`
+### Getting help - `help`
 
 Shows you a summary of the commands you can use with NUSBuddy, and the format of their parameters if applicable.
 
