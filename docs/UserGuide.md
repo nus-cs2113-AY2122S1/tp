@@ -19,9 +19,9 @@
 <!-- Images -->
 ![Markdown Logo](https://www.denofgeek.com/wp-content/uploads/2019/10/robot-chicken-gordon-ramsay-adult-swim.jpg?resize=768%2C432)
 
-It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon CLI application.
+It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon application.
 
-I am a CLI-based recipe database application, and I can help you to;
+I am a Command Line Interface (CLI)-based recipe database application, and I can help you to;
 1) Store your recipes
 2) Check them when you're ready to cook
 3) Organise your collection of recipes
@@ -31,10 +31,22 @@ It's absolutely bonkers. Now let's get down to business.
 
 ## How do you start Gordon?
 
-1. Ensure that you have Java 11 or above installed.
 1. Checkout the latest version of **Gordon** [here](https://github.com/AY2122S1-CS2113T-W13-2/tp).
-1. Copy the absolute path of the Gordon.jar file, `ABSOLUTE_PATH`
-1. In your terminal, type `java -jar ABSOLUTE_PATH` to run Gordon
+   1. Go to the Releases section on the right of the page
+   1. Download the tp.jar file
+1. Find the tp.jar file in your computer
+   1. Search for tp.jar in your search bar
+   1. Right-click on the file
+   1. Select properties
+   1. Copy the location of the file
+1. Ensure that you have Java 11 or above installed.
+   1. Search for Command Prompt in your search bar, then open the Command Prompt
+   1. Type 'java -version'
+      1. The terminal should display this:
+      ![](images/userguide%20terminal%20screenshot.jpg)
+      1. If you don't have Java 11, you can install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+1. Run the Gordon program 
+   1. In your terminal, type `java -jar` then paste the location of the file to run Gordon
 
 ## What can Gordon do?
 
