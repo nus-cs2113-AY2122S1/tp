@@ -11,25 +11,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
 
-    private static final String CORRECT_ADDCLIENT_ONE = "add -c john /cn 91234567 /m johndoe@gmail.com";
-    private static final String CORRECT_ADDCLIENT_TWO = "   add -c   john  /cn   91234567 /m    johndoe@gmail.com";
-    private static final String CORRECT_ADDCLIENT_THREE = "add -c john /m johndoe@gmail.com /cn 91234567";
+    private static final String CORRECT_ADDCLIENT_ONE = "add -c j12 /n john /cn 91234567 /m johndoe@gmail.com";
+    private static final String CORRECT_ADDCLIENT_TWO = "   add -c j12 /n  john  /cn   91234567 /m    johndoe@gmail.com";
+    private static final String CORRECT_ADDCLIENT_THREE = "add -c j12 /n john /m johndoe@gmail.com /cn 91234567";
     private static final String CORRECT_ADDFLIGHT_ONE =
-            "add -f SQ-JPN1 /t JPN /f SG /dt 23/10/2021 13:00 /df 27/10/2021 02:00";
+            "add -f SQ-JPN1 /d JPN /r SG /dd 23/10/21 13:00 /rd 27/10/21 02:00";
     private static final String CORRECT_ADDFLIGHT_TWO =
-            "add    -f SQ-JPN1    /t JPN    /f SG /dt   23/10/2021 13:00 /df 27/10/2021 02:00";
+            "add -f    SQ-JPN1 /d    JPN /r SG /dd    23/10/21 13:00 /rd   27/10/21 02:00";
     private static final String CORRECT_ADDFLIGHT_THREE =
-            "add -f SQ-JPN1 /f SG /t JPN /df 27/10/2021 02:00 /dt 23/10/2021 13:00";
-    private static final String CORRECT_ADDTOUR_ONE = "add -t johndoe /n australiaromance /p 1300";
-    private static final String CORRECT_ADDTOUR_TWO = "add -t johndoe  /n     australiaromance /p    1300";
-    private static final String CORRECT_ADDTOUR_THREE = "add -t johndoe /p 1300 /n australiaromance";
-    private static final String WRONG_ADDCLIENT_MISSING_PREFIX = "add -c john /m johndoe@gmail.com";
-    private static final String WRONG_ADDTOUR_MISSING_PREFIX = "add -t johndoe /n australiaromance";
-    private static final String WRONG_ADDFLIGHT_MISSING_PREFIX = "add -f SQ-JPN1 /t JPN /f SG";
-    private static final String WRONG_ADDCLIENT_MISSING_NAME = "add -c /cn 91234567 /m johndoe@gmail.com";
-    private static final String WRONG_ADDFLIGHT_MISSING_NAME =
-            "add -f /t JPN /f SG /dt 23/10/2021 13:00 /df 27/10/2021 02:00";
-    private static final String WRONG_ADDTOUR_MISSING_NAME = "add -t /n australiaromance /p 1300";
+            "add -f SQ-JPN1 /d JPN /dd 23/10/21 13:00 /r SG /rd 27/10/21 02:00";
+    private static final String CORRECT_ADDTOUR_ONE = "add -t aus1369 /n australiaromance /p 1300";
+    private static final String CORRECT_ADDTOUR_TWO = "add  -t     aus1369 /n   australiaromance  /p 1300";
+    private static final String CORRECT_ADDTOUR_THREE = "add -t aus1369 /p 1300 /n australiaromance";
+    private static final String WRONG_ADDCLIENT_MISSING_PREFIX = "add -c j12 /n john /m johndoe@gmail.com";
+    private static final String WRONG_ADDTOUR_MISSING_PREFIX = "add -t aus1369 /p 1300";
+    private static final String WRONG_ADDFLIGHT_MISSING_PREFIX = "add -f SQ-JPN1 /d JPN /r SG /dd 23/10/21 13:00";
+    private static final String WRONG_ADDCLIENT_MISSING_ID = "add -c /n botuan /cn 91234567 /m johndoe@gmail.com";
+    private static final String WRONG_ADDFLIGHT_MISSING_ID =
+            "add -f /d JPN /r SG /dd 23/10/21 13:00 /rd 27/10/21 02:00";
+    private static final String WRONG_ADDTOUR_MISSING_ID = "add -t /n australiaromance /p 1300";
 
     @Test
     void parse_addClientCommand_correctCommandCreated() throws TourPlannerException {
@@ -66,21 +66,21 @@ public class ParserTest {
 
     @Test
     void parse_missingPrefixes_failure() {
-        //missing /cn
+        //missing contact number
         assertParseFailure(WRONG_ADDCLIENT_MISSING_PREFIX, Parser.ERROR_MISSING_PREFIXES);
 
-        //missing /p
+        //missing tour name
         assertParseFailure(WRONG_ADDTOUR_MISSING_PREFIX, Parser.ERROR_MISSING_PREFIXES);
 
-        //missing /dt and /df
+        //missing return flight date
         assertParseFailure(WRONG_ADDFLIGHT_MISSING_PREFIX, Parser.ERROR_MISSING_PREFIXES);
     }
 
     @Test
     void parse_missingIdOrName_failure() {
-        assertParseFailure(WRONG_ADDCLIENT_MISSING_NAME, Parser.ERROR_MISSING_NAME);
-        assertParseFailure(WRONG_ADDFLIGHT_MISSING_NAME, Parser.ERROR_MISSING_NAME);
-        assertParseFailure(WRONG_ADDTOUR_MISSING_NAME, Parser.ERROR_MISSING_NAME);
+        assertParseFailure(WRONG_ADDCLIENT_MISSING_ID, Parser.ERROR_MISSING_NAME);
+        assertParseFailure(WRONG_ADDFLIGHT_MISSING_ID, Parser.ERROR_MISSING_NAME);
+        assertParseFailure(WRONG_ADDTOUR_MISSING_ID, Parser.ERROR_MISSING_NAME);
     }
 
     private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
