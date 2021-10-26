@@ -88,7 +88,7 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 ## Features
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Notes about the command format:**<br>
+** :information_source: Notes about the command format: **<br>
 </div>
 
 ### Viewing all available universities: 
