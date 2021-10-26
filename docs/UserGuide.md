@@ -1,4 +1,9 @@
+---
+title: SEPlanner
+output: html_document
+---
 # User Guide
+
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
