@@ -88,14 +88,20 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes this guide:**<br>
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**'
+**:information_source: Information about this guide:**<br>
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 Tips give helpful information to make your experience better.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Warnings caution you about certain actions that might be dangerous or are important to note.
+Warnings caution you about certain actions that might be dangerous.
 </div>
+
+<div markdown="block" class="alert alert-info">
+Notes are important pieces of information. 
+</div>
+
 
 </div>
 
@@ -200,7 +206,7 @@ Add a NUS module that the user wants to complete during SEP into the user select
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
 This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
 The `<MODULE_INDEX>` can be found via `list /mmod` command.  
 </div>
@@ -278,7 +284,7 @@ Expected output:
 ### Searching for available module mappings:
 Displays all available module mappings for a specific university that matches the list of selected modules.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="block" class="alert alert-info">
 Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
 </div>
 
