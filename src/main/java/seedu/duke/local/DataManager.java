@@ -8,7 +8,11 @@ import java.util.ArrayList;
 public class DataManager {
     private static ArrayList<TaskLine> taskLines = new ArrayList<>(128);
 
-    public DataManager(TaskManager taskManager) {
+    public DataManager() {
+
+    }
+
+    public static void setUpDataManager() {
         for (int i = 0; i < TaskManager.getTaskListSize(); i++) {
             taskLines.add(TasktoLineConverter.convertTaskToLine(TaskManager.getTask(i)));
         }
@@ -36,6 +40,7 @@ public class DataManager {
 
     public static void addTaskLine(TaskLine taskLine) {
         taskLines.add(taskLine);
+        updateStorage();
     }
 
     public static void updateStorage() {
@@ -43,10 +48,24 @@ public class DataManager {
     }
 
     public static void deleteTask(int index){
-        taskLines.remove(index);
+        if (index >= 0 && index < getSize()) {
+            taskLines.remove(index);
+        }
+        updateStorage();
     }
 
     public static void clear() {
         taskLines.clear();
+        updateStorage();
+    }
+
+    public static void updateReminderTime (int index, long time) {
+        taskLines.get(index).updateTime(time);
+        updateStorage();
+    }
+
+    public static void updateReminderMessage (int index, String message) {
+        taskLines.get(index).updateMessage(message);
+        updateStorage();
     }
 }

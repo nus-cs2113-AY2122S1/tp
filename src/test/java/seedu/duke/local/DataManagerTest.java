@@ -1,16 +1,12 @@
 package seedu.duke.local;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
-import seedu.duke.task.TaskManager;
-import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;

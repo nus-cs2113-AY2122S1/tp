@@ -38,4 +38,12 @@ public class TodoLine extends TaskLine{
                 + priority + "|" + recurrence + "|"
                 +reminderTime + "|" + reminderMessage;
     }
+
+    public void updateTime(long userTime) {
+        reminderTime = Long.toString(userTime);
+    }
+
+    public void updateMessage(String message) {
+        reminderMessage = message;
+    }
 }

@@ -30,4 +30,12 @@ public class TaskLine {
 
     public TaskLine() {
     }
+
+    public void updateTime(long userTime) {
+
+    }
+
+    public void updateMessage(String message) {
+
+    }
 }

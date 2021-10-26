@@ -1,5 +1,6 @@
 package seedu.duke.local;
 
+import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.type.Event;
 
 public class EventLine extends TaskLine{
@@ -33,5 +34,13 @@ public class EventLine extends TaskLine{
         return type + "|" + description + "|" + startDate + "|" + endDate + "|"
                 + priority + "|" + recurrence + "|"
                 +reminderTime + "|" + reminderMessage;
+    }
+
+    public void updateTime(long userTime) {
+        reminderTime = Long.toString(userTime);
+    }
+
+    public void updateMessage(String message) {
+        reminderMessage = message;
     }
 }

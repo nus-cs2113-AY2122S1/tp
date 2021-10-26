@@ -16,6 +16,7 @@ public enum CommandEnum {
     TODO("todo <description> [%s %s]"),
     DEADLINE("deadline <description> <%s %s>"),
     EVENT("event <description> <%s %s> <%s %s>"),
+    REMINDER("reminder"),
     INVALID("");
 
     private static final String OPTIONAL_ARGUMENT_FORMAT = "[%s]";
@@ -36,6 +37,8 @@ public enum CommandEnum {
             //Fallthrough
         case LIST:
             //Fallthrough
+        case REMINDER:
+
         case DELETE:
             return usage;
         case TODO:
