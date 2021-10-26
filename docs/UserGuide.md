@@ -20,9 +20,9 @@ its developers (😀 us!) at our [Main Page](README.md).
 * [Features](#features)
     * [Ask for Help: `help`](#ask-for-help-help)
     * [Set a Goal: `set`](#set-a-goal-set)
+    * [List all Goals: `list`](#list-all-goals-list)
     * [Update a Goal: `update`](#update-a-goal-update)
     * [Remove a Goal: `remove`](#remove-a-goal-remove)
-    * [List all Goals: `list`](#list-all-goals-list)
     * [Add a Habit: `add`](#add-a-habit-add)
     * [Complete a Habit: `done`](#complete-a-habit-done)
     * [Delete a Habit: `delete`](#delete-a-habit-delete)
@@ -65,7 +65,7 @@ Any keyboard input will appear after `Option: `. Here is where interaction betwe
 
 ### Loading Screen Navigation
 In the current loading screen, users will be able to execute the following actions based on the number they input.
-1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
+1. `About Ha(ppy)Bit` - Shows brief description of the program and a short meet the team section
 
     ```
    Option: 1
@@ -91,7 +91,7 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 
-2. User Guide - Opens up User Guide github page in user's web browser.
+2. `User Guide` - Opens up User Guide github page in user's web browser.
 
    ```
     Option: 2
@@ -101,7 +101,7 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 
-3. Developer Guide - Opens up Developer Guide github page in user's web browser.
+3. `Developer Guide` - Opens up Developer Guide github page in user's web browser.
 
     ```
     Option: 3
@@ -111,12 +111,14 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 
-4. Demo Video - Links to Demo Video (Not done yet)
+4. `Demo Video` - Links to Demo Video (Not done yet)
     ```
    video not available.
     ```
 
-5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
+5. `Start Application` - Brings user to the application. 
+New user can begin their journey with _Ha(ppy)Bit_ (😀 thanks!) here.
+Returning users can continue using _Ha(ppy)Bit_ where they left off.
 
     ```
     Starting application...
@@ -159,7 +161,9 @@ Unfamiliar symbols may confuse. Here is comprehensive collection of all emojis a
 > 💡 **Pro-Tip!** {explanation here} are we targeting advance and basic users?
 > then we need to use this strategically.
 
-> 😀 &#8594; Used to show developers' exuberance.
+> 😀 &#8594; Used to show developers' exuberance!!!
+
+> 👍 &#8594; Used to show developers' love and support for you, the users!
 
 ------
 
@@ -205,7 +209,7 @@ Press enter to return to command mode...
 
 ### Set a Goal: `set`
 Sets a new goal for a long term achievement you wish to accomplish. Goals must have an end date while the goal type and
-start dates are optional.
+start dates are optional (well, we wouldn't you to be procrastinating on your goals right?)
 
 Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>`
 
@@ -218,7 +222,7 @@ Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>`
 >> `fd` &#8594; Food <br>
 >> `ex` &#8594; Exercise <br>
 >> `sd` &#8594; Study
-> 4. Otherwise, goal type will be `df`&#8594; Default.
+> 4. Otherwise, goal type will be `df` &#8594; Default.
 
 Example:
 ```
@@ -234,10 +238,35 @@ ________________________________________________________________________________
 Press enter to return to command mode...
 
 ```
-### Update a Goal: `Update`
-Updates an attribute of a goal specified by its index.
 
-Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p
+### List all Goals: `list`
+Lists all goals currently set by the user. Here you can see the attributes a goal can have.
+
+Format: `list`
+
+Output:
+```
+There are 3 goals currently being tracked:
+-----------------------------------------------------------------------------
+|Index|Name      |Type      |Start Date     |End Date       |Habit Count    |
+-----------------------------------------------------------------------------
+|1    |example   |Default   |24-Oct-2021    |01-Jan-2022    |0              |
+-----------------------------------------------------------------------------
+|2    |test 1    |Default   |24-Oct-2021    |30-Oct-2021    |0              |
+-----------------------------------------------------------------------------
+|3    |test 2    |Default   |24-Oct-2021    |27-Oct-2021    |0              |
+-----------------------------------------------------------------------------
+```
+
+> 📃 **Note**: <br>
+> Each goal has a corresponding <GOAL_INDEX> depending on its location in the list.
+> They may change when the goals are deleted (more on how later.) Remembering the index of a goal
+> can help in executing commands faster without having to refer to the list every time. 
+
+### Update a Goal: `Update`
+Updates an attribute (Name, Date, or Goal Type) of a goal specified by its index. <br>
+(To err is human. That's why we have the `update` feature; designed to be more forgiving,
+when we have the occasional oopsies. 👍 )
 
 #### Updating Name
 
@@ -298,7 +327,9 @@ Output:
 ```
 
 ### Remove a Goal: `remove`
-Removes a goal specified by its index.
+Removes a goal specified by its index. <br>
+(Life gets us sometimes. Things don't go as planned. But this isn't calling it quits. It's admitting
+defeat today, but to return stronger to fight another time. We got ya fam.)
 
 Format: `remove g/<GOAL_INDEX>`
 
@@ -319,27 +350,11 @@ ________________________________________________________________________________
 Press enter to return to command mode...
 ```
 
-### List all Goals: `list`
-Lists all goals currently set by the user.
-
-Format: `list`
-
-Output:
-```
-There are 3 goals currently being tracked:
------------------------------------------------------------------------------
-|Index|Name      |Type      |Start Date     |End Date       |Habit Count    |
------------------------------------------------------------------------------
-|1    |example   |Default   |24-Oct-2021    |01-Jan-2022    |0              |
------------------------------------------------------------------------------
-|2    |test 1    |Default   |24-Oct-2021    |30-Oct-2021    |0              |
------------------------------------------------------------------------------
-|3    |test 2    |Default   |24-Oct-2021    |27-Oct-2021    |0              |
------------------------------------------------------------------------------
-```
-
 ### Add a Habit: `add`
-Adds a habit that is linked to a goal.
+Adds a habit that is linked to a goal. <br>
+(Habits are meant to easy and doable. Completing them over time, with consistent dedication, 
+one of these habits will be the metaphorical straw that breaks the camel's back. Your goals reached,
+without even pulling a muscle.)
 
 Format: `add  n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVALS>`
 
@@ -432,7 +447,8 @@ ________________________________________________________________________________
 ```
 
 ### Exit the Program: `bye`
-Exits the program.
+Exits the program. <br>
+(Don't stay on Ha(ppy)Bit too long! You have a life out there, waiting for you to live it!)
 
 > ⚠ **Warning:** <br>
 > Make sure to use this command before exiting the program
@@ -478,7 +494,7 @@ your data will be there!
 
 **Q**: Are there any books you recommend?
 <br>
-**A**: Data Structures and Algorithms in Java -> [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
+**A**: Data Structures and Algorithms in Java &#8594; [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
 
 ## Command Summary
 
