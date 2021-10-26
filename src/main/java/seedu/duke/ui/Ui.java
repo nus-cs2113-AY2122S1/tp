@@ -63,7 +63,7 @@ public class Ui {
     };
 
     public static void promptInput() {
-        out.print("Enter a command:");
+        out.print("Enter a command: ");
     }
 
     public static void printLineSeparator() {
