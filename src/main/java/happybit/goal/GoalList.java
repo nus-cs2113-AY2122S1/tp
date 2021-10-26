@@ -251,6 +251,14 @@ public class GoalList {
         // To be implemented
     }
 
+    public void viewGoalProgress(int goalIndex) {
+        // todo
+    }
+
+    public void viewHabitStreak(int goalIndex, int habitIndex) {
+        // todo
+    }
+
     /**
      * Check and set on start up for all goals and all habits within goals.
      * After importing data into goalList.
@@ -264,11 +272,16 @@ public class GoalList {
                 // means next iteration:
                 // update habitDate and nextHabitDate and addProgress()
                 Date currDate = new Date();
-                if (habit.getInterval() != 0 && habit.isNextCycle(currDate)) {
-                    Date newHabitDate = habit.getNextHabitDate();
-                    habit.setHabitDate(newHabitDate);
-                    habit.setNextHabitDate();
-                    habit.addProgress();
+                if (habit.getInterval() != 0) {
+                    if (habit.isNextCycle(currDate)) {
+                        Date newHabitDate = habit.getNextHabitDate();
+                        habit.setHabitDate(newHabitDate);
+                        habit.setNextHabitDate();
+                        habit.addProgress();
+                    }
+                    // todo
+                    // need to check if currDate past nextHabitDate;
+                    // increment until currDate >= habitDate and < nextHabitDate
                 }
             }
         }

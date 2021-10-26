@@ -1,5 +1,10 @@
 package happybit.command;
 
+import happybit.exception.HaBitCommandException;
+import happybit.goal.GoalList;
+import happybit.storage.Storage;
+import happybit.ui.PrintManager;
+
 public class ViewStreakCommand extends Command {
     protected int goalIndex;
     protected int habitIndex;
@@ -13,5 +18,10 @@ public class ViewStreakCommand extends Command {
     public ViewStreakCommand(int goalIndex, int habitIndex) {
         this.goalIndex = goalIndex;
         this.habitIndex = habitIndex;
+    }
+
+    @Override
+    public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
+        // todo
     }
 }

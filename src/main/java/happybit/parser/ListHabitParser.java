@@ -20,9 +20,7 @@ public class ListHabitParser extends ParserUtils {
      * @throws HaBitParserException If commandInstruction is not an integer.
      */
     public static Command parseListHabitCommand(String commandInstruction) throws HaBitParserException {
-        if (commandInstruction == null) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
-        }
+        checkNoDescription(commandInstruction);
 
         int goalIndex = getGoalIndex(commandInstruction);
         return new ListHabitsCommand(goalIndex);
@@ -35,6 +33,12 @@ public class ListHabitParser extends ParserUtils {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+
+    private static void checkNoDescription(String input) throws HaBitParserException {
+        if (input == null) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+    }
 
     private static int getGoalIndex(String commandInstruction) throws HaBitParserException {
         String[] params = splitInput(commandInstruction);

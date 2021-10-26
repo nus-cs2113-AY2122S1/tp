@@ -141,7 +141,7 @@ public class Habit {
     public boolean isNextCycle(Date currDate) {
         LocalDate currDateLD = convertDateToLocalDate(currDate);
         LocalDate nextHabitDateLD = convertDateToLocalDate(nextHabitDate);
-        if (currDateLD.isEqual(nextHabitDateLD)) {
+        if (currDateLD.isEqual(nextHabitDateLD) || currDateLD.isAfter(nextHabitDateLD)) {
             return true;
         }
         return false;
@@ -166,14 +166,7 @@ public class Habit {
         // check if already past habit Date; not done on time
         // all marking as Done progress will be for current iteration
         // past added progress not updated will remain as undone => allow user to go back and change
-        LocalDate currDateLD = convertDateToLocalDate(currDate);
-        LocalDate habitDateLD = convertDateToLocalDate(habitDate);
-        // if date user marks as done is after habitDate
-        boolean isDoneOnTime = true;
-        if (currDateLD.isAfter(habitDateLD)) {
-            isDoneOnTime = false;
-        }
-        Progress doneProgress = new Progress(isDoneOnTime, currDate);
+        Progress doneProgress = new Progress(currDate);
         // find desired instance using current iteration habitDate
         progressHashMap.put(habitDate, doneProgress);
     }
