@@ -10,33 +10,33 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
 ?
 
 ## Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-  * Employee
-    * [Adding an employee: `add-employee`](#adding-an-employee-add-employee)
-    * [Removing an employee: `remove-employee`](#removing-an-employee-remove-employee)
-    * [Listing all employees: `list-employee`](#listing-all-employees-list-employee)
-  * Dish
-    * [Adding a dish: `add-dish`](#adding-a-dish-add-dish)
-    * [Removing a dish: `remove-dish`](#removing-a-dish-remove-dish)
-    * [Editing a dish's price: `edit-dish`](#editing-a-dishs-price-edit-dish)
-    * [Adding a discount to a dish: `discount-dish`](#adding-a-discount-to-a-dish-discount-dish)
-    * [Listing all dishes: `list-menu`](#listing-all-dishes-list-menu)
-  * Ingredient
-    * [Adding an ingredient: `add-ingredient`](#adding-an-ingredient-add-ingredient)
-    * [Removing an ingredient: `remove-ingredient`](#removing-an-ingredient-remove-ingredient)
-    * [Listing all ingredients: `list-ingredient`](#listing-all-ingredients-list-ingredient)
-  * Finance
-    * [Adding a finance record: `add-finance`](#adding-a-finance-record-add-finance)
-    * [Removing a finance record: `remove-finance`](#removing-a-finance-record-remove-finance)
-    * [Editing a finance record: `edit-finance`](#editing-a-finance-record-edit-finance)
-    * [Showing total account of finance records: `show-finance`](#showing-total-account-of-finance-records-show-finance)
-    * [Listing all finance records: `list-finance`](#listing-all-finance-records-list-finance)
-  * [Exiting the program: `bye`](#exiting-the-program-bye)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+1. [Quick start](#1-quick-start)
+2. [Features](#2-features)
+   1. Employee
+      1. [Adding an employee: `add-employee`](#2ia-adding-an-employee-add-employee)
+      2. [Removing an employee: `remove-employee`](#2ib-removing-an-employee-remove-employee)
+      3. [Listing all employees: `list-employee`](#2ic-listing-all-employees-list-employee)
+   2. Dish
+      1. [Adding a dish: `add-dish`](#2iia-adding-a-dish-add-dish)
+      2. [Removing a dish: `remove-dish`](#2iib-removing-a-dish-remove-dish)
+      3. [Editing a dish's price: `edit-dish`](#2iic-editing-a-dishs-price-edit-dish)
+      4. [Adding a discount to a dish: `discount-dish`](#2iid-adding-a-discount-to-a-dish-discount-dish)
+      5. [Listing all dishes: `list-menu`](#2iie-listing-all-dishes-list-menu)
+   3. Ingredient
+      1. [Adding an ingredient: `add-ingredient`](#2iiia-adding-an-ingredient-add-ingredient)
+      2. [Removing an ingredient: `remove-ingredient`](#2iiib-removing-an-ingredient-remove-ingredient)
+      3. [Listing all ingredients: `list-ingredient`](#2iiic-listing-all-ingredients-list-ingredient)
+   4. Finance
+      1. [Adding a finance record: `add-finance`](#2iva-adding-a-finance-record-add-finance)
+      2. [Removing a finance record: `remove-finance`](#2ivb-removing-a-finance-record-remove-finance)
+      3. [Editing a finance record: `edit-finance`](#2ivc-editing-a-finance-record-edit-finance)
+      4. [Showing total account of finance records: `show-finance`](#2ivd-showing-total-account-of-finance-records-show-finance)
+      5. [Listing all finance records: `list-finance`](#2ive-listing-all-finance-records-list-finance)
+   5. [Exiting the program: `bye`](#2v-exiting-the-program-bye)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
-## Quick start
+## 1. Quick start
 1. Ensure you have **Java 11** or above installed on your computer.
 2. Download the latest `tp.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-4/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Restaurant Buddy.
@@ -49,14 +49,14 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
 6. Type a command in Restaurant Buddy's command box and press enter to execute it.
 7. Refer to the **[Features](#features)** below for details of all available commands.
 
-## Features
+## 2. Features
 
 **Notes about the command format:**
   * Words in UPPER_CASE are the parameters to be supplied by the user. 
     e.g. in `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
     parameters which can be used as `add-employee/John/81145812`.
 
-### Adding an employee: `add-employee`
+### 2.i.a Adding an employee: `add-employee`
 
 Adds an employee to the employee list.
 
@@ -74,7 +74,7 @@ employee list.
 ---------------------------------------------
 ```
 
-### Removing an employee: `remove-employee`
+### 2.i.b Removing an employee: `remove-employee`
 
 Removes an employee from the employee list.
 
@@ -92,7 +92,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Listing all employees: `list-employee`
+### 2.i.c Listing all employees: `list-employee`
 
 Lists all employees in the employee list.
 
@@ -110,7 +110,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Adding a dish: `add-dish`
+### 2.ii.a Adding a dish: `add-dish`
 
 Adds a dish to the menu.
 
@@ -126,7 +126,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Removing a dish: `remove-dish`
+### 2.ii.b Removing a dish: `remove-dish`
 
 Removes a dish from the menu.
 
@@ -144,7 +144,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Editing a dish's price: `edit-dish`
+### 2.ii.c Editing a dish's price: `edit-dish`
 
 Edits the price of a dish in the menu.
 
@@ -163,7 +163,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Adding a discount to a dish: `discount-dish`
+### 2.ii.d Adding a discount to a dish: `discount-dish`
 
 Adds a discount to a dish in the menu.
 
@@ -183,7 +183,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Listing all dishes: `list-menu`
+### 2.ii.e Listing all dishes: `list-menu`
 
 Lists all dishes in the menu.
 
@@ -201,7 +201,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Adding an ingredient: `add-ingredient`
+### 2.iii.a Adding an ingredient: `add-ingredient`
 
 Adds an ingredient to the ingredient list.
 
@@ -218,7 +218,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Removing an ingredient: `remove-ingredient`
+### 2.iii.b Removing an ingredient: `remove-ingredient`
 
 Removes an ingredient from the ingredient list.
 
@@ -236,7 +236,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Listing all ingredients: `list-ingredient`
+### 2.iii.c Listing all ingredients: `list-ingredient`
 
 Lists all ingredients in the ingredient list.
 
@@ -254,7 +254,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Adding a finance record: `add-finance`
+### 2.iv.a Adding a finance record: `add-finance`
 
 Adds a finance record to the finance list.
 
@@ -271,7 +271,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Removing a finance record: `remove-finance`
+### 2.iv.b Removing a finance record: `remove-finance`
 
 Removes the specified finance record from the finance list.
 
@@ -289,7 +289,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Editing a finance record: `edit-finance`
+### 2.iv.c Editing a finance record: `edit-finance`
 
 Edits a finance record in the finance list.
 
@@ -309,7 +309,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Showing total account of finance records: `show-finance`
+### 2.iv.d Showing total account of finance records: `show-finance`
 
 Shows the total account of all finance records in the finance list.
 
@@ -323,7 +323,7 @@ Example:
 ---------------------------------------------
 ```
 
-### Listing all finance records: `list-finance`
+### 2.iv.e Listing all finance records: `list-finance`
 
 Lists all finance records in the finance list.
 
@@ -342,7 +342,7 @@ Example:
 ```
 
 
-### Exiting the program: `bye`
+### 2.v Exiting the program: `bye`
 
 Exits the program.
 
@@ -360,13 +360,13 @@ Example:
 ---------------------------------------------
 ```
 
-## FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another computer?
 
 **A**: Copy the _home folder_ of Restaurant Buddy over to the other computer and run it as usual.
 
-## Command Summary
+## 4. Command Summary
 
 | Command | Format |
 | ------------ | ------------- |
