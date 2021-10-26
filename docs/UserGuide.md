@@ -116,8 +116,8 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}`
 * `DAY_OF_THE_WEEK` can be any of the following, not case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day on which you want to do the task
 * the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
-* the `-p` flag is optional and `PRIORITY` can be either `low`, `medium` or `high`, referring to the priority you wish 
-to assign to the new task
+* the `-p` flag is optional and `PRIORITY` can be either `L`, `M` or `H`, for low, medium and high priority respectively
+* the default priority for each task is set to low (L)
 
 Example usage:
 
@@ -127,22 +127,22 @@ $ add task CS2113 tP -d MON
      Noted. I've added this task:
        [ ] CS2113 tP (Monday)
             Info: -
-            Priority: None
+            Priority: L
      Now you have 2 tasks in the list.
     _______________________________________________________________________________
 ```
 This first example shows that an incomplete new task "CS2113 tP" has been added to the list of tasks, and is to be done 
-on Monday. It has no additional information, and has no assigned priority. You can also see the number of tasks you have 
+on Monday. It has no additional information, and has low priority. You can also see the number of tasks you have 
 in the list. The empty braces `[ ]` before the task title indicates that the task is incomplete. You can [visit this 
 section](#marking-a-task-as-done---done) on marking a task as done to change the completion status of the task. 
 
 ```
-$ add task CS2113 tP -d MON -i add documentation -p low
+$ add task CS2113 tP -d MON -i add documentation -p L
     _______________________________________________________________________________
          Noted. I've added this task:
            [ ] CS2113 tP (Monday)
                 Info: add documentation
-                Priority: Low
+                Priority: L
          Now you have 3 tasks in the list.
     _______________________________________________________________________________
 ```
@@ -211,10 +211,10 @@ $ list task
      Here are the tasks in your list:
      1. [X] cs2113t tp (Wednesday)
             Info: add documentation
-            Priority: High
+            Priority: H
      2. [ ] prepare for presentation (Friday)
             Info: -
-            Priority: None
+            Priority: L
     _______________________________________________________________________________
 ```
 This example lists out all 2 tasks. The first task in this list is marked as complete, as indicated by the `[X]` beside the
@@ -222,7 +222,7 @@ task title, "cs2113t tp". The "Wednesday" in brackets also indicates that the ta
 Additional information for the task is listed as "add documentation", and the task has High priority. The second task
 on the list is marked as incomplete, as indicated by the `[ ]` beside the task title, "prepare for presentation". It is 
 assigned for Friday. The " - " symbol beside "Info:" indicates that the task was added with no additional information, 
-the "None" beside "Priority:" indicates that there was no priority assigned to it either.
+the "L" beside "Priority:" indicates that it has low priority.
      
 ```
 $ list lesson
@@ -298,7 +298,7 @@ $ done task 2
      Nice! I've marked this task as done: 
        [X] prepare for presentation (Friday)
             Info: -
-            Priority: None
+            Priority: L
      Now you have 0 pending tasks.
     _______________________________________________________________________________
 ```
@@ -331,7 +331,7 @@ $ delete task 1
      Ok. The following task has been deleted:
        [X] cs2113t tp (Wednesday)
             Info: add documentation
-            Priority: High
+            Priority: H
      Now you have 1 task(s) in the list.
     _______________________________________________________________________________
 ```
@@ -381,16 +381,16 @@ $ find task cs2113
      Here are the matching tasks in your list:
      1. [X] cs2113tp (Wednesday)
             Info: -
-            Priority: None
+            Priority: L
      2. [ ] cs2113t ip (Thursday)
             Info: -
-            Priority: None
+            Priority: L
     _______________________________________________________________________________
 ```
 In this first example, there are 2 tasks in the list that match the keyword "cs2113t". You can see relevant information about them,
 including the day assigned to the task, the completion status, additional information and priority. The first matching 
 task in the list, for example, is marked as complete, as shown by the `[X]`, is assigned for Wednesday, and has no additional
-information or priority.
+information, with low priority.
 
 ```
 $ find lesson cs2113t
