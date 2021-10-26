@@ -18,7 +18,12 @@ public abstract class Record {
         return amount;
     }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public int getMonth() {
         return this.month;
     }
+
 }

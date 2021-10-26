@@ -68,6 +68,18 @@ public class AllRecordList {
         allRecordList.get(month).getBudget().setAmount(amount);
     }
 
+    public void editExpenditure(int month, int index, double amount, String description, LocalDate date) {
+        if (amount != 0.00) {
+            allRecordList.get(month).getExpenditure(index).setAmount(amount);
+        }
+        if (!description.equals("")) {
+            allRecordList.get(month).getExpenditure(index).setDescription(description);
+        }
+        if (!date.equals(LocalDate.now())) {
+            allRecordList.get(month).getExpenditure(index).setDate(date);
+        }
+    }
+
     public void clearAll() {
         allRecordList.clear();
         for (int i = 1; i <= 12; i++) {
@@ -125,6 +137,5 @@ public class AllRecordList {
     public int getMonthListSize(int month) {
         return allRecordList.get(month).getSize();
     }
-
 
 }

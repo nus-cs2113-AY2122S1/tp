@@ -26,6 +26,14 @@ public class Expenditure extends Record {
         return date.getMonthValue();
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public String getCategory() {
         return category.toString();
     }

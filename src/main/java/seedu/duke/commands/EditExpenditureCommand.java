@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.search.FindBudget;
-
 import java.time.LocalDate;
 
 public class EditExpenditureCommand extends EditCommand {
@@ -13,13 +11,14 @@ public class EditExpenditureCommand extends EditCommand {
 
     public EditExpenditureCommand(int month, int index, double amount, LocalDate date, String description) {
         this.month = month;
-        this.amount = amount;
         this.index = index;
+
+        this.amount = amount;
         this.date = date;
         this.description = description;
     }
 
     public void execute(boolean isLoadingStorage) {
-        // recordList.editExpenditure(this.month, this.amount); // Not done yet
+        recordList.editExpenditure(this.month, this.index, this.amount, this.description, this.date); // Not done yet
     }
 }

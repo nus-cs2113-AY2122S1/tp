@@ -6,38 +6,38 @@ import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.AddLoanCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.DeleteAllLoanCommand;
 import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DeleteMultipleExpenditureCommand;
+import seedu.duke.commands.DeleteMultipleLoanCommand;
 import seedu.duke.commands.DeleteSingleExpenditureCommand;
+import seedu.duke.commands.DeleteSingleLoanCommand;
+import seedu.duke.commands.EditBudgetCommand;
+import seedu.duke.commands.EditCommand;
+import seedu.duke.commands.EditExpenditureCommand;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.YearCommand;
-import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.EditCommand;
-import seedu.duke.commands.EditExpenditureCommand;
-import seedu.duke.commands.EditBudgetCommand;
-import seedu.duke.commands.DeleteMultipleLoanCommand;
-import seedu.duke.commands.DeleteAllLoanCommand;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
-import seedu.duke.commands.DeleteSingleLoanCommand;
 import seedu.duke.data.records.Category;
+import seedu.duke.exception.EmptyDescriptionException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 
 import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -62,6 +62,27 @@ public class Parser {
     //        return expenditureParams.split(" ", 3);
     //    }
 
+    public static HashMap<String, String> splitArguments(String commandParams, String[] prefixes) {
+        HashMap<String, String> argumentMap = new HashMap<>();
+        for (String prefix : prefixes) {
+            String parameterValue;
+            int startIndex = commandParams.indexOf(prefix) + 2;
+            if (startIndex == 1) {
+                argumentMap.put(prefix, "");
+                continue;
+            }
+            String substring = commandParams.substring(startIndex);
+            if (substring.contains("/")) {
+                int endIndex = substring.indexOf("/") - 2;
+                parameterValue = substring.substring(0, endIndex);
+            } else {
+                parameterValue = substring;
+            }
+            argumentMap.put(prefix, parameterValue);
+        }
+        return argumentMap;
+    }
+
     /**
      * Parses user input into command for execution.
      *
@@ -74,75 +95,135 @@ public class Parser {
         String commandParams = commandTypeAndParams[1].trim();
         assert commandType.equals(commandType.toLowerCase());
         Command command;
-        switch (commandType) {
-        case AddCommand.COMMAND_WORD:
-            command = prepareAddCommand(commandParams);
-            break;
-        case DeleteCommand.COMMAND_WORD:
-            command = prepareDeleteCommand(commandParams);
-            break;
-        case ListRecordsCommand.COMMAND_WORD:
-            command = prepareListMonthCommand(commandParams);
-            break;
-        case ExitCommand.COMMAND_WORD:
-            command = new ExitCommand();
-            break;
-        case YearCommand.COMMAND_WORD:
-            command = prepareYearCommand(commandParams);;
-            break;
-        case HelpCommand.COMMAND_WORD:
-            command = new HelpCommand();
-            break;
-        case FindCommand.COMMAND_WORD:
-            command = prepareFindCommand(commandParams);
-            break;
-        case EditCommand.COMMAND_WORD:
-            command = prepareEditCommand(commandParams);
-            break;
-        default:
-            command = new InvalidCommand("Sorry. I don't understand your command!");
-            break;
+        try {
+            switch (commandType) {
+            case AddCommand.COMMAND_WORD:
+                command = prepareAddCommand(commandParams);
+                break;
+            case DeleteCommand.COMMAND_WORD:
+                command = prepareDeleteCommand(commandParams);
+                break;
+            case ListRecordsCommand.COMMAND_WORD:
+                command = prepareListMonthCommand(commandParams);
+                break;
+            case ExitCommand.COMMAND_WORD:
+                command = new ExitCommand();
+                break;
+            case YearCommand.COMMAND_WORD:
+                command = prepareYearCommand(commandParams);
+                break;
+            case HelpCommand.COMMAND_WORD:
+                command = new HelpCommand();
+                break;
+            case FindCommand.COMMAND_WORD:
+                command = prepareFindCommand(commandParams);
+                break;
+            case EditCommand.COMMAND_WORD:
+                command = prepareEditCommand(commandParams);
+                break;
+            default:
+                command = new InvalidCommand("Sorry. I don't understand your command!");
+                break;
+            }
+        } catch (NumberFormatException e) {
+            command = new InvalidCommand("Month/ Index inputs don't exist! They are compulsory!");
+        } catch (EmptyDescriptionException e) {
+            command = new InvalidCommand("Expenditure description is empty!");
         }
         return command;
-    }
-
-    private Command prepareEditCommand(String commandParams) {
-        String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
-        String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
-        switch (editOption) {
-        case ("-b"):
-            return prepareEditBudgetCommand(paramsToEdit);
-        case ("-e"):
-            return prepareEditExpenditureCommand(paramsToEdit);
-        default:
-            return new InvalidCommand(MESSAGE_INVALID_EDIT_COMMAND);
-        }
     }
 
     private Command prepareEditBudgetCommand(String commandParams) {
         String[] split = commandParams.trim().split("m/|a/", 3);
         assert split[0].equals("");
 
-        int month = Integer.parseInt(split[1].trim());
-        double amount = Double.parseDouble(split[TYPE_IDENTIFIER_END_INDEX].trim());
+        int month;
+        double amount;
+        month = Integer.parseInt(split[1].trim());
+        amount = Double.parseDouble(split[TYPE_IDENTIFIER_END_INDEX].trim());
 
         return new EditBudgetCommand(month, amount);
     }
 
+    private Command prepareEditCommand(String commandParams) throws EmptyDescriptionException {
+        String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+        String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
+        switch (editOption) {
+        case ("-b"):
+            return prepareEditBudgetCommand(paramsToEdit);
+        case ("-e"):
+            return EditExpenditureParser.parse(commandParams);
+        default:
+            return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
+        }
+    }
+
     private Command prepareEditExpenditureCommand(String commandParams) {
-        String[] split = commandParams.trim().split("m/|i/|a/|d/", 5);
+
+        String[] split = commandParams.trim().split("m/|i/", 4);
         assert split[0].equals("");
 
-        int month = Integer.parseInt(split[1].trim());
-        int index = Integer.parseInt(split[TYPE_IDENTIFIER_END_INDEX].trim());
-        double amount = Double.parseDouble(split[3].trim());
+        int month;
+        int index;
+
+        month = Integer.parseInt(split[1].trim());
+        int indexOfFirstSpace = split[2].indexOf(" ");
+        String indexString = split[2].substring(0, indexOfFirstSpace);
+        index = Integer.parseInt(indexString.trim()) - 1;
+
+        String paramString = split[2].substring(indexOfFirstSpace);
+        String description;
         LocalDate date;
-        if (split[4].equals("")) {
-            date = LocalDate.now();
+        double amount;
+
+        if (paramString.contains("c/")) {
+            int startIndex = commandParams.indexOf("c/") + 2;
+            String substring = commandParams.substring(startIndex);
+            if (substring.contains("/")) {
+                int endIndex = substring.indexOf("/") - 2;
+                description = substring.substring(0, endIndex);
+            } else {
+                description = substring;
+            }
         } else {
-            date = LocalDate.parse(split[4].trim());
+            description = "";
         }
-        String description = split[4].trim();
+
+        if (paramString.contains("a/")) {
+            int startIndex = commandParams.indexOf("a/") + 2;
+            String substring = commandParams.substring(startIndex);
+            if (substring.contains("/")) {
+                int endIndex = substring.indexOf("/") - 2;
+                amount = Double.parseDouble(substring.substring(0, endIndex));
+            } else {
+                amount = Double.parseDouble(substring);
+            }
+        } else {
+            amount = 0.00;
+        }
+
+        if (paramString.contains("d/")) {
+            int startIndex = commandParams.indexOf("d/") + 2;
+            String substring = commandParams.substring(startIndex);
+            if (substring.contains("/")) {
+                int endIndex = substring.indexOf("/") - 2;
+                date = LocalDate.parse(substring.substring(0, endIndex));
+            } else {
+                date = LocalDate.parse(substring);
+            }
+        } else {
+            date = LocalDate.now();
+        }
+
+
+        //        double amount = Double.parseDouble(split[3].trim());
+        //        LocalDate date;
+        //        if (split[4].equals("")) {
+        //            date = LocalDate.now();
+        //        } else {
+        //            date = LocalDate.parse(split[4].trim());
+        //        }
+        //        String description = split[4].trim();
 
         return new EditExpenditureCommand(month, index, amount, date, description);
     }
