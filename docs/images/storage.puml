@@ -2,7 +2,7 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
-skinparam groupComposition 3
+
 ModuleStorage "1" ----* Storage
     ModuleStorage : - {static} logger : Logger
 
