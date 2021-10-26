@@ -58,15 +58,6 @@ activate util
 util --> command
 deactivate util
 
-alt Exception
-command --> taa : throw :TaaException
-taa -> ui : printException(message:String)
-activate ui
-ui -> user : Display Exception message
-ui --> taa
-deactivate ui
-
-else else
 command --> taa
 deactivate command
 
@@ -83,15 +74,6 @@ activate moduleList
 moduleList --> command
 deactivate moduleList
 
-alt Exception
-command --> taa : throw :TaaException
-taa -> ui : printException(message:String)
-activate ui
-ui -> user : Display Exception message
-ui --> taa
-deactivate ui
-
-else else
 command -> storage : save(moduleList:ModuleList)
 activate storage
 storage --> command
@@ -115,7 +97,6 @@ taa -[hidden]-> command
 destroy command
 taa -[hidden]-> command
 
-end
 end
 
 @enduml
