@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -92,8 +93,8 @@ public class ModuleStorageTest {
         ModuleManager moduleManager = this.moduleStorage.loadFile();
         assertTrue(Files.exists(dataFolder));
         assertTrue(Files.exists(dataJsonFile));
-        this.moduleStorage.init(VALID_FILE);
-        moduleStorage.cleanAfterDeleteModule("data");
+        Files.delete(dataJsonFile);
+        Files.delete(dataFolder);
     }
 
     @Test
