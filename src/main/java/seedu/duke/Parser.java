@@ -309,12 +309,12 @@ public class Parser {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
             if (person == payer) {
-                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
+                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName()));
                 continue;
             }
-            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
-            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName())); //Remove.getName()
-            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
         }
     }
 
@@ -353,6 +353,7 @@ public class Parser {
         //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
+    //@@author joshualeeky
     protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
         expense.setPayer(person);
@@ -360,7 +361,6 @@ public class Parser {
     }
 
     protected static void updateIndividualSpending(Expense expense) {
-        boolean isEqualSplitPromptDisplayed = false;
         boolean isLogDisplayed = false;
 
         Ui.printGetPersonPaid();
@@ -369,12 +369,9 @@ public class Parser {
         if (payer != null) {
             expense.setPayer(payer);
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
+            Ui.equalSplitPrompt();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
-                if (!isEqualSplitPromptDisplayed) {
-                    Ui.equalSplitPrompt();
-                    isEqualSplitPromptDisplayed = true;
-                }
                 double amountRemaining = expense.getAmountSpent() - total;
                 if (Math.abs(amountRemaining) < EPSILON) {
                     amountBeingPaid.put(person, 0d);

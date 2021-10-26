@@ -15,7 +15,6 @@ public class Expense {
     private String category;
     private LocalDate date;
     private Person payer;
-    //private HashMap<Person, Double> amountSplit = new HashMap<>();
     private HashMap<String, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
@@ -64,6 +63,7 @@ public class Expense {
         return userInput.split("/")[1].trim();
     }
 
+    //@@author joshualeeky
     /**
      * Obtains a list of Person objects from array of names of people.
      *
@@ -95,6 +95,8 @@ public class Expense {
         return validListOfPeople;
     }
 
+    //@@author
+
     public void setPayer(Person person) {
         this.payer = person;
     }
@@ -102,14 +104,6 @@ public class Expense {
     public Person getPayer() {
         return payer;
     }
-
-    //public void setAmountSplit(Person person, double amount) {
-    //    amountSplit.put(person, amount);
-    //}
-
-    //public HashMap<Person, Double> getAmountSplit() {
-    //    return amountSplit;
-    //}
 
 
     public void setAmountSplit(Person person, double amount) {

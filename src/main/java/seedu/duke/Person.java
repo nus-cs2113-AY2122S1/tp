@@ -3,9 +3,9 @@ package seedu.duke;
 
 import java.util.HashMap;
 
+//@@author joshualeeky
 public class Person {
     private String name;
-    //private HashMap<Person, Double> moneyOwed = new HashMap<>();
     private HashMap<String, Double> moneyOwed = new HashMap<>();
 
     public Person(String name) {
@@ -24,10 +24,6 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-
-    //public HashMap<Person, Double> getMoneyOwed() {
-    //    return this.moneyOwed;
-    //}
 
     public HashMap<String, Double> getMoneyOwed() {
         return this.moneyOwed;

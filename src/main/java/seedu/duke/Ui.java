@@ -23,7 +23,7 @@ public class Ui {
         System.out.println("Exiting the program now. Goodbye!");
     }
 
-
+    //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
                 + Storage.getOpenTrip().getForeignCurrencySymbol()
@@ -36,6 +36,7 @@ public class Ui {
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
+    //@@author
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
@@ -226,7 +227,7 @@ public class Ui {
 
     public static void invalidArgForAmount() {
         System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
-        System.out.println("This are the people involved in this trip");
+        System.out.println("These are the people involved in this trip:");
         Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
         System.out.println();
     }

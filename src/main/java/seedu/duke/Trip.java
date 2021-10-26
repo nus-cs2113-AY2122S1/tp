@@ -150,7 +150,7 @@ public class Trip {
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
             if (e.getPersonsList().contains(person)) {
-                currentAmount = e.getAmountSplit().get(person.getName()); //Remove .getName()
+                currentAmount = e.getAmountSplit().get(person.getName());
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
                 expensesInvolved++;
@@ -231,6 +231,7 @@ public class Trip {
     }
 
 
+    //@@author joshualeeky
     public String getForeignCurrency() {
         return foreignCurrency;
     }
@@ -272,7 +273,7 @@ public class Trip {
     public void setRepaymentCurrency(String repaymentCurrency) {
         this.repaymentCurrency = repaymentCurrency.toUpperCase();
         setRepaymentCurrencyFormat(this.repaymentCurrency);
-        setForeignCurrencySymbol(this.repaymentCurrency);
+        setRepaymentCurrencySymbol(this.repaymentCurrency);
 
     }
 
@@ -300,6 +301,7 @@ public class Trip {
         }
     }
 
+    //@@author
     public String getLocation() {
         return this.location;
     }
@@ -341,6 +343,14 @@ public class Trip {
         }
     }
 
+
+    public Expense getExpenseAtIndex(Integer index) {
+        return listOfExpenses.get(index - 1);
+    }
+
+
+    //@@author joshualeeky
+
     /**
      * Splits the user-entered {@link String} of people involved in a trip into a String array.
      *
@@ -359,10 +369,5 @@ public class Trip {
             }
         }
         return listOfPeople;
-
-    }
-
-    public Expense getExpenseAtIndex(Integer index) {
-        return listOfExpenses.get(index - 1);
     }
 }
