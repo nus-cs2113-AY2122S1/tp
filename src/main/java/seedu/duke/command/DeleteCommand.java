@@ -5,14 +5,14 @@ import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
 import seedu.duke.task.Task;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.utility.Utility;
 
 //@@author SeanRobertDH
 public class DeleteCommand extends Command {
-    private static final CommandEnum COMMAND = CommandEnum.DELETE;
 
     private static final String TASK_DELETED = "Tasks deleted:\n";
+    private static final String USAGE = "delete <index>";
     private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     private static final String SPACE_REGEX = "[\\s|_]+";
@@ -20,8 +20,8 @@ public class DeleteCommand extends Command {
     private static final String LIST_NUMBERS = "-";
 
 
-    public DeleteCommand(Map<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    public DeleteCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
     }
 
     @Override
@@ -32,14 +32,14 @@ public class DeleteCommand extends Command {
             if (mainArgument == null) {
                 throw new NullPointerException();
             }
-            if (TaskManager.isEmpty()) {
+            if (taskManager.isEmpty()) {
                 throw new EmptyTasklistException();
             }
             String[] taskIndexStrings = splitIndexesString(mainArgument);
             TreeSet<Integer> tasksToDelete = getTasksToDelete(taskIndexStrings);
             message += deleteTasks(tasksToDelete);
         } catch (NullPointerException npe) {
-            message = getUsage();
+            message = getUsageMessage();
         } catch (EmptyTasklistException etle) {
             message = etle.getMessage();
         } catch (NumberFormatException nfe) {
@@ -48,6 +48,11 @@ public class DeleteCommand extends Command {
             message = itie.getMessage();
         }
         return new CommandResult(message, true, false);
+    }
+
+    @Override
+    protected String getUsage() {
+        return USAGE;
     }
 
     private String[] splitIndexesString(String argument) {
@@ -75,10 +80,10 @@ public class DeleteCommand extends Command {
     private String deleteTasks(TreeSet<Integer> indexes) throws InvalidTaskIndexException {
         String message = "";
         int offset = 0;
-        TaskManager.checkIndexValid(indexes.first() - 1);
-        TaskManager.checkIndexValid(indexes.last() - 1);
+        taskManager.checkIndexValid(indexes.first() - 1);
+        taskManager.checkIndexValid(indexes.last() - 1);
         for (Integer index : indexes) {
-            Task deletedTask = TaskManager.deleteTask(index - 1 - offset++);
+            Task deletedTask = taskManager.deleteTask(index - 1 - offset++);
             message += deletedTask.getTaskEntryDescription() + '\n';
         }
         return message;

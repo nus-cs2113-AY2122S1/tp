@@ -1,20 +1,25 @@
 package seedu.duke.command.addtask;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.ModuleStringFormatIncorrectException;
 import seedu.duke.nusmods.NusModsParser;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 
 import java.util.Arrays;
 import java.util.Map;
 
 public class ModuleCommand extends Command {
-    private static final CommandEnum COMMAND = CommandEnum.MODULE;
 
-    public ModuleCommand(Map<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    private static final String USAGE = "module {<module code>:<class number>...}...";
+
+    public ModuleCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
+    }
+
+    @Override
+    protected String getUsage() {
+        return USAGE;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ModuleCommand extends Command {
                 }
                 String moduleCode = pair[0];
                 for (String classNo : pair[1].split(",")) {
-                    TaskManager.addTasks(Arrays.asList(new NusModsParser().getLessons(moduleCode, classNo)));
+                    taskManager.addTasks(Arrays.asList(new NusModsParser().getLessons(moduleCode, classNo)));
                     message += "Added " + moduleCode + ' ' + classNo + System.lineSeparator();
                 }
             }

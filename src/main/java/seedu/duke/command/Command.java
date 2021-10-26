@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import java.util.HashMap;
 import java.util.Map;
+import seedu.duke.task.taskmanager.TaskManager;
 
 /**
  * Represents a command.
@@ -11,16 +12,21 @@ public abstract class Command {
 
     private static final String USAGE_REGEX = "Usage: %s";
 
-    private final CommandEnum command;
+    protected final TaskManager taskManager;
     protected final Map<String, String> commandArguments;
 
-    public Command(CommandEnum command) {
-        this.command = command;
-        commandArguments = null;
+    public Command() {
+        this.taskManager = null;
+        this.commandArguments = null;
     }
 
-    public Command(CommandEnum command, Map<String, String> commandArguments) {
-        this.command = command;
+    public Command(TaskManager taskManager) {
+        this.taskManager = taskManager;
+        this.commandArguments = null;
+    }
+
+    public Command(TaskManager taskManager, Map<String, String> commandArguments) {
+        this.taskManager = taskManager;
         this.commandArguments = commandArguments;
     }
 
@@ -28,8 +34,10 @@ public abstract class Command {
         return commandArguments.get(MAIN_ARGUMENT);
     }
 
-    protected String getUsage() {
-        return String.format(USAGE_REGEX, command.getUsage());
+    protected abstract String getUsage();
+
+    protected String getUsageMessage() {
+        return String.format(USAGE_REGEX, getUsage());
     }
 
     public abstract CommandResult executeCommand() throws Exception;

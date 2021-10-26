@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.DateParser;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
@@ -26,15 +28,20 @@ class TaskManagerTest {
     private static final String VALID_DATE1 = "22-10-2021 02:00";
     private static final String VALID_DATE2 = "22-10-2021 05:00";
 
+    private TaskManager taskManager;
+
+
+
     private TaskManagerTest() throws ParseDateFailedException {
+        taskManager = new TaskManager();
         LocalDateTime startDate = DateParser.stringToDate(VALID_DATE1);
         LocalDateTime endDate = DateParser.stringToDate(VALID_DATE2);
         newToDo = new Todo("read book", PriorityEnum.LOW, startDate, RecurrenceEnum.DAILY);
         newDeadline = new Deadline("return book", startDate, PriorityEnum.MEDIUM, RecurrenceEnum.WEEKLY);
         newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.HIGH, RecurrenceEnum.MONTHLY);
-        TaskManager.addTask(newToDo);
-        TaskManager.addTask(newEvent);
-        TaskManager.addTask(newDeadline);
+        taskManager.addTask(newToDo);
+        taskManager.addTask(newEvent);
+        taskManager.addTask(newDeadline);
     }
 
     @Test
@@ -43,7 +50,7 @@ class TaskManagerTest {
         listArguments.put("random_flag", "random_criteria");
         try {
             System.out.println("Testing List Command");
-            System.out.println(TaskManager.listTasklist(listArguments));
+            System.out.println(taskManager.listTasklist(listArguments));
         } catch (EmptyTasklistException ete) {
             System.out.println(ete);
         } catch (ListFormatException lfe) {
@@ -63,8 +70,8 @@ class TaskManagerTest {
 
         try {
             System.out.println("Testing Sort by Priority Command");
-            TaskManager.sortTasklist(sortArguments);
-            System.out.println(TaskManager.listTasklist(listArguments));
+            taskManager.sortTasklist(sortArguments);
+            System.out.println(taskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -81,8 +88,8 @@ class TaskManagerTest {
 
         try {
             System.out.println("Testing Sort by Description Command");
-            TaskManager.sortTasklist(sortArguments);
-            System.out.println(TaskManager.listTasklist(listArguments));
+            taskManager.sortTasklist(sortArguments);
+            System.out.println(taskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -99,8 +106,8 @@ class TaskManagerTest {
 
         try {
             System.out.println("Testing Sort by Task Type Command");
-            TaskManager.sortTasklist(sortArguments);
-            System.out.println(TaskManager.listTasklist(listArguments));
+            taskManager.sortTasklist(sortArguments);
+            System.out.println(taskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -114,7 +121,7 @@ class TaskManagerTest {
         sortArguments.put("random_flag", "random_criteria");
 
         try {
-            TaskManager.sortTasklist(sortArguments);
+            taskManager.sortTasklist(sortArguments);
             fail(); // the test should not reach here
         } catch (Exception e) {
             System.out.println("SortFormatException caught");
@@ -130,7 +137,7 @@ class TaskManagerTest {
         commandArguments.put("by", "");
 
         try {
-            TaskManager.sortTasklist(commandArguments);
+            taskManager.sortTasklist(commandArguments);
             fail(); // the test should not reach here
         } catch (Exception e) {
             System.out.println("EmptySortCriteriaException caught");
