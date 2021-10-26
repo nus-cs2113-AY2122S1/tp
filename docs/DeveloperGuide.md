@@ -63,7 +63,45 @@ purpose of this guide is to help developers set up and continue with the develop
 
 ### Architecture
 
+The **Architecture Diagram** for MediVault is shown below.
+
+![ArchitectureDiagram](diagrams/diagram_images/ArchitectureDiagram.png)
+
+A quick overview of the main components and how they interact with each other is given below.
+
+The main class that runs MediVault is called `MediVault`. It is responsible for,
+* At program launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+The rest of the program consist of four components.
+* `Command`: Executes command based on the user input that is processed by `Utilities`
+  component. The list of commands can be found in our User Guide [here](UserGuide.md).
+* `Utilities`: Contains important driver classes for MediVault
+  * includes `parser`, `ui`, `storage` and `comparators`.
+* `Inventory`: Contains a collection of classes used by MediVault to represent
+different medication information.
+* `Errors`: Contains collection of classes that handles exceptions during execution of MediVault.
+
 ### Command
+
+![CommandClassDiagram](diagrams/diagram_images/CommandClassDiagram.png)
+
+The **Command** class diagram above shows how **Command** interact with other classes in MediVault.
+
+The Command Component consists of **18** subclasses where each subclass represents a command feature.
+
+Let `*` be either of the three class: `Stock`, `Prescription` or `Order`.
+
+* `Add*Command`: Adds a new `*` information into MediVault.
+* `Delete*Command`: Removes the visibility of the `*` record in MediVault.
+* `Update*Command`: Updates the `*` information.
+* `List*Command`: Lists the `*` records.
+* `ReceiveOrderCommand`: Marks an order as received and adds the ordered medication into the current stocks.
+* `ArchivePresciptionCommand`: Archives all the prescription records before a given date.
+* `ArchiveOrderCommand`: Archives all the order records before a given date.
+* `PurgeCommand`: Wipes all records in MediVault.
+* `HelpCommand`: Shows the help page.
+* `ExitCommand`: Exits MediVault.
 
 ### Utilities
 
@@ -141,6 +179,21 @@ The sequence diagram below shows how the `list` operation works in general.
 
 #### UpdateStockCommand
 
+MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or
+the `update` keyword in `stock` mode.
+> :information_source: Note:
+> * MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
+> * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
+against the stored medicine stock information.
+
+The sequence diagram for `UpdateStockCommand` is shown below.
+
+![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
+
+MediVault adds a new stock record when a user updates contains the `n/NAME` parameter. The old stock record still
+exists in MediVault, but it will not be visible to user when listed. This approach solves the issue when a user is
+unable to delete a prescription record when the medicine stock name gets updated.
+
 ### Prescription Commands
 
 #### AddPrescriptionCommand
@@ -149,6 +202,27 @@ The sequence diagram below shows how the `list` operation works in general.
 
 #### UpdatePrescriptionCommand
 
+MediVault initialises an `UpdatePrescriptionCommand` class when CommandParser identifies
+`updateprescription` or the `update` keyword in `prescription` mode.
+
+> :information_source: Note
+> * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
+> * When a user updates prescription information containing either `n/NAME`, `q/QUANTITY` or both, MediVault restores the 
+prescribed stocks or prescribes more stocks depending on the user input.
+
+The sequence diagram for `UpdatePrescriptionCommand` is shown below.
+
+![UpdatePrescriptionSequenceDiagram](diagrams/diagram_images/UpdatePrescriptionSequenceDiagram.png)
+
+MediVault adds a new prescription record when a user updates contains either the `n/NAME`, `q/QUANTITY`
+parameter or both. The old prescription record is **permanently removed** from MediVault. 
+
+This approach solves the issue when a medication is prescribed to a user with an amount that is 
+**more than** the current batch of stock with the same Stock ID but **less than** the total 
+stock quantity. 
+> :bulb: MediVault automatically adds new prescription records when a medication is prescribed
+> from stocks with different Stock IDs.
+
 ### Order Commands
 
 #### AddOrderCommand
@@ -156,6 +230,17 @@ The sequence diagram below shows how the `list` operation works in general.
 #### DeleteOrderCommand
 
 #### UpdateOrderCommand
+
+MediVault initialises an `UpdateOrderCommand` class when CommandParser identifies
+`updateorder` or the `update` keyword in `order` mode.
+
+> :information_source: Note:
+> * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
+> * MediVault restricts updating of order information that are already **delivered**.
+
+The sequence diagram for UpdateOrderCommand is shown below.
+
+![UpdateOrderSequenceDiagram](diagrams/diagram_images/UpdateOrderSequenceDiagram.png)
 
 ### ReceiveOrderCommand
 

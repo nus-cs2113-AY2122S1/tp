@@ -13,22 +13,22 @@ skinparam classBackgroundColor COLOR_COMMAND_BOX
 
 package "Command Component" <<Rectangle>> {
     class "{abstract}\nCommand" as Command
-    class AddDispenseCommand
+    class AddPrescriptionCommand
     class AddStockCommand
     class AddOrderCommand
-    class ArchiveDispenseCommand
+    class ArchivePrescriptionCommand
     class ArchiveOrderCommand
-    class DeleteDispenseCommand
+    class DeletePrescriptionCommand
     class DeleteStockCommand
     class DeleteOrderCommand
     class ExitCommand
     class HelpCommand
-    class ListDispenseCommand
+    class ListPrescriptionCommand
     class ListStockCommand
     class ListOrderCommand
     class PurgeCommand
     class ReceiveOrderCommand
-    class UpdateDispenseCommand
+    class UpdatePrescriptionCommand
     class UpdateStockCommand
     class UpdateOrderCommand
 
@@ -45,10 +45,10 @@ class Command {
     +execute(): void{abstract}
 }
 
-class AddDispenseCommand {
-    +AddDispenseCommand()
+class AddPrescriptionCommand {
+    +AddPrescriptionCommand()
     +execute(): void
-    -dispense(): void
+    -prescribe(): void
 }
 
 class AddStockCommand {
@@ -64,8 +64,8 @@ class AddOrderCommand {
     -addOrder(): void
 }
 
-class ArchiveDispenseCommand {
-    +ArchiveDispenseCommand()
+class ArchivePrescriptionCommand {
+    +ArchivePrescriptionCommand()
     +execute(): void
 }
 
@@ -74,8 +74,8 @@ class ArchiveOrderCommand {
     +execute(): void
 }
 
-class DeleteDispenseCommand {
-    +DeleteDispenseCommand()
+class DeletePrescriptionCommand {
+    +DeletePrescriptionCommand()
     +execute(): void
     -setStockQuantity(): boolean
 }
@@ -100,10 +100,10 @@ class HelpCommand {
     +execute(): void
 }
 
-class ListDispenseCommand {
-    +ListDispenseCommand()
+class ListPrescriptionCommand {
+    +ListPrescriptionCommand()
     +execute(): void
-    -filterDispenses(): ArrayList<Dispense>
+    -filterPrescriptions(): ArrayList<Prescription>
 }
 
 class ListStockCommand {
@@ -126,8 +126,8 @@ class ReceiveOrderCommand {
     +execute(): void
 }
 
-class UpdateDispenseCommand {
-    +UpdateDispenseCommand()
+class UpdatePrescriptionCommand {
+    +UpdatePrescriptionCommand()
     +execute(): void
     -processGivenNameAndQuantity(): boolean
     -processGivenName(): boolean
@@ -151,27 +151,34 @@ class UpdateStockCommand {
     -setUpdatesByStockId(): void
 }
 
-AddDispenseCommand ----|> Command
+AddPrescriptionCommand ----|> Command
 AddStockCommand ----|> Command
 AddOrderCommand ----|> Command
-DeleteDispenseCommand ---|> Command
+DeletePrescriptionCommand ---|> Command
 DeleteStockCommand ---|> Command
 DeleteOrderCommand ---|> Command
 ExitCommand --|> Command
 HelpCommand --|> Command
 PurgeCommand --|> Command
-ListDispenseCommand --up|> Command
+ListPrescriptionCommand --up|> Command
 ListStockCommand --up|> Command
 ListOrderCommand --up|> Command
 ReceiveOrderCommand ---up|> Command
-ArchiveDispenseCommand ---up|> Command
+ArchivePrescriptionCommand ---up|> Command
 ArchiveOrderCommand ---up|> Command
 UpdateOrderCommand ----up|> Command
-UpdateDispenseCommand ----up|> Command
+UpdatePrescriptionCommand ----up|> Command
 UpdateStockCommand ----up|> Command
 
 MediVault ---.right|> Command: executes >
 Command ---.right|> Inventory: affects >
+
+note as ConstraintsNote
+The input parameters for
+methods and constructors are
+left out as member details
+can get outdated over time.
+end note
 
 
 @enduml
