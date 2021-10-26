@@ -8,7 +8,7 @@ import seedu.duke.ui.TextUI;
 /**
  * Main class of the application.
  */
-public class Libmgr {
+public class Duke {
     private static TextUI ui;
     private static Catalogue catalogue;
     private static Parser parser;
