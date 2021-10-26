@@ -125,7 +125,7 @@ The list teaches you how to use all commands available in *Food-O-Rama*.
 
 Format: `help`
 
-* *Note💡* Only the command `help` is required.
+* *Note* 💡 Only the command `help` is required.
 
 Example of usage:
 
@@ -182,7 +182,7 @@ menu to Food-O-Rama*.
 
 Format: `add dish [DISH_NAME]`
 
-* *Tip❕*  The `DISH_NAME` can be in a natural language format.
+* *Tip* ❕ The `DISH_NAME` can be in a natural language format.
 
 Example of usage:
 
@@ -208,7 +208,7 @@ Format: `add dish waste [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`\
 
-* *Note💡* You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
+* *Note* 💡 You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
 
 Example of usage:
@@ -245,7 +245,7 @@ having more Dishes wasted than what was prepared initially*.
 Format: `set dish limit [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
-* *Note💡* You will be prompted to enter the limit to watch out for in the next step.
+* *Note* 💡 You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -271,7 +271,7 @@ The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
-*Note💡*
+*Note* 💡
 
 When adding new wastage to the Dish exceeds the limit,
 you will receive a prompt that the current Dish limit has exceeded.
@@ -312,7 +312,7 @@ Delete an existing Dish from your Dish list.
 Format: `del dish [DISH_NAME]`
 
 * The `DISH_NAME` has to be existing in the Dish list for it to be deleted.
-* *Note💡* You will be prompted with a confirmation message to delete the dish.
+* *Note* 💡 You will be prompted with a confirmation message to delete the dish.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -394,7 +394,7 @@ inventory to Food-O-Rama*.
 Format: `add ingr [INGR_NAME]`
 
 * The `INGR_NAME` can be in a natural language format.
-* *Tip❕* You will be prompted to enter the weight of `INGR_NAME` in the next step.
+* *Tip* ❕ You will be prompted to enter the weight of `INGR_NAME` in the next step.
 
 Example of usage:
 
@@ -432,7 +432,7 @@ Add more storage to an Ingredient that exists in the Ingredient list by weight.
 Format: `add ingr stored [INGR_NAME]`
 
 * The `INGR_NAME` has to be an existing Ingredient in the Ingredient list.
-* *Note💡* You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
+* *Note* 💡 You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
 
 Example of usage:
 
@@ -469,7 +469,7 @@ Incur wastage on an existing Ingredient.
 Format: `add ingr waste [INGR_NAME]`
 
 * Can only be performed on existing `[INGR_NAME]`
-* *Note💡* You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
+* *Note* 💡 You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
 
 Example of usage:
 
@@ -506,7 +506,7 @@ having more Ingredients wasted than what was stored initially*.
 Format: `set ingr limit [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
-* *Note💡* You will be prompted to enter the limit to watch out for in the next step.
+* *Note* 💡 You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -532,7 +532,7 @@ The limit for chicken is now 7.7 kg
 ____________________________________________________________
 ```
 
-*Note💡*
+*Note* 💡
 
 When adding new wastage to the Ingredient exceeds the limit,
 you will receive a prompt that the current Dish limit has exceeded.
@@ -598,7 +598,7 @@ Delete an existing Ingredient from your Ingredient list.
 Format: `del ingr [INGR_NAME]`
 
 * The `INGR_NAME` has to be existing in the Ingredient list for it to be deleted.
-* *Note💡*  You will be prompted with a confirmation message to delete the ingredient.
+* *Note* 💡  You will be prompted with a confirmation message to delete the ingredient.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -733,7 +733,7 @@ ____________________________________________________________
 
 Retrieves a list of Dishes inclusive of the matching keyword.
 
-*Tip❕* Useful to find certain Dishes available in your Dish list
+*Tip* ❕ Useful to find certain Dishes available in your Dish list
 
 Format: `find dish [KEYWORD]`
 
@@ -765,7 +765,7 @@ ____________________________________________________________
 
 Retrieves a list of Ingredients inclusive of the matching keyword.
 
-*Tip❕* Useful to find certain Ingredients available in your Ingredient list.
+*Tip* ❕ Useful to find certain Ingredients available in your Ingredient list.
 
 Format: `find ingr [KEYWORD]`
 
@@ -797,12 +797,12 @@ ____________________________________________________________
 
 Removes all existing Dishes from the list of Ingredients.
 
-*Tip❕* Useful to obtain an empty Dish list.
+*Tip* ❕ Useful to obtain an empty Dish list.
 
 Format: `clear dish`
 
 * `clear dish` does not require additional parameters
-* *Note💡*  You will be prompted with a confirmation message to delete all dishes.
+* *Note* 💡  You will be prompted with a confirmation message to delete all dishes.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -850,12 +850,12 @@ ____________________________________________________________
 
 Removes all existing Ingredients from the list of ingredients.
 
-*Tip❕* Useful to obtain an empty Ingredient list.
+*Tip* ❕ Useful to obtain an empty Ingredient list.
 
 Format: `clear ingr`
 
 * `clear ingr` does not require additional parameters
-* *Note💡*  You will be prompted with a confirmation message to delete all ingredients.
+* *Note* 💡  You will be prompted with a confirmation message to delete all ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
     
@@ -901,12 +901,12 @@ ____________________________________________________________
 
 Removes all existing Dishes and Ingredients from their respective lists.
 
-*Tip❕* Useful to obtain both empty Ingredient list & Dish list.
+*Tip* ❕ Useful to obtain both empty Ingredient list & Dish list.
 
 Format: `clear all`
 
 * `clear all` does not require additional parameters
-* *Note💡* You will be prompted with a confirmation message to delete all dishes and ingredients.
+* *Note* 💡 You will be prompted with a confirmation message to delete all dishes and ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -952,7 +952,7 @@ ____________________________________________________________
 
 Sorts all Dishes in **descending order** of wastage.
 
-*Tip❕* Useful to immediately see the most wasted Dish.
+*Tip* ❕ Useful to immediately see the most wasted Dish.
 
 Format: `sort dish`
 
@@ -989,7 +989,7 @@ ____________________________________________________________
 
 Sorts all Ingredients in **descending order** of wastage.
 
-*Tip❕* Useful to immediaely see the most wasted Ingredient.
+*Tip* ❕ Useful to immediaely see the most wasted Ingredient.
 
 Format: `sort ingr`
 
@@ -1031,7 +1031,7 @@ Exit Food-O-Rama and save all data entries.
 
 Format: `bye`
 
-* *Note💡* All data will be saved automatically.
+* *Note* 💡 All data will be saved automatically.
 
 Example of usage:
 
