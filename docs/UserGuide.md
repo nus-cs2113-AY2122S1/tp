@@ -229,15 +229,18 @@ Stock Id changed from:
 
 ### Listing medication stocks: `liststock`
 
-Lists all existing medication in the inventory.
+Lists all existing medications in the inventory.
+
 
 * All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
-* Example 1 demonstrates the list of all medication without parameters.
-* Example 2 demonstrates list by medication name.
+* You are able to `liststock` by any column and sort or reverse sort them.
+
 
 Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
-Example 1: `liststock`
+
+Example 1 (Listing all medications): `liststock`
+
 
 Expected output:
 
@@ -265,7 +268,7 @@ Expected output:
 +----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
 ```
 
-Example 2: `liststock n/panadol`
+Example 2 (Filter by name): `liststock n/panadol`
 
 Expected output:
 
