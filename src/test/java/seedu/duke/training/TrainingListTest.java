@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
-import seedu.duke.command.*;
+import seedu.duke.command.EditTraining;
+import seedu.duke.command.AddTraining;
+import seedu.duke.command.DeleteTraining;
 
 public class TrainingListTest {
 

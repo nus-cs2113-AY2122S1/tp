@@ -300,6 +300,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an integer Index from the given String query.
+     *
+     * @param query String user input.
+     * @return int Index that is in query.
+     */
     public static Integer getIndex(String query) {
         try {
             String regex = "(\\/[a-z])+";

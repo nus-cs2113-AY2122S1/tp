@@ -1,10 +1,19 @@
 package seedu.duke.command;
+
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 import seedu.duke.Ui;
 
+/**
+ * Deletes a TrainingSchedule from the TrainingList.
+ */
 public class DeleteTraining {
 
+    /**
+     * Constructor. Deletes a TrainingSchedule from the TrainingList given its index.
+     * @param trainings TrainingList to delete TrainingSchedule from.
+     * @param index Index of the TrainingSchedule to delete. Note that the actual index is index-1.
+     */
     public DeleteTraining(TrainingList trainings, int index) {
         try {
             assert index >= 1;

@@ -1,9 +1,15 @@
 package seedu.duke;
 
-import static java.lang.System.exit;
-
-import seedu.duke.attendance.*;
-import seedu.duke.command.*;
+import seedu.duke.attendance.AttendanceList;
+import seedu.duke.attendance.Attendance;
+import seedu.duke.command.DeleteAttendance;
+import seedu.duke.command.DeleteMember;
+import seedu.duke.command.DeleteTraining;
+import seedu.duke.command.AddAttendance;
+import seedu.duke.command.AddMember;
+import seedu.duke.command.AddTraining;
+import seedu.duke.command.EditMember;
+import seedu.duke.command.EditTraining;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingSchedule;
@@ -13,6 +19,7 @@ public class Entry {
     private static final TrainingList trainings = new TrainingList();
     private static final MemberList members = new MemberList();
     private static final AttendanceList attendanceList = new AttendanceList();
+
     /**
      * Returns void. Function is responsible for adding different Tasks to the task list.
      *
@@ -45,7 +52,6 @@ public class Entry {
         case ADD_MEMBER_KEYWORD:
             Member member = Parser.getMemberDetails(entry);
             new AddMember(members, member);
-            //Parser.makeMemberEntry(members, entry);
             break;
         case ADD_TRAINING_KEYWORD:
             TrainingSchedule training = Parser.getTrainingDescription(entry);
@@ -54,12 +60,10 @@ public class Entry {
         case ADD_ATTENDANCE_KEYWORD:
             Attendance attendance = Parser.getAttendanceDetails(entry);
             new AddAttendance(attendanceList, attendance);
-            //Parser.makeAttendanceEntry(attendanceList, entry);
             break;
         case DELETE_MEMBER_KEYWORD:
             memberIndex = Parser.getIndex(entry);
             new DeleteMember(members, memberIndex);
-            //Parser.deleteMember(members, entry);
             break;
         case DELETE_TRAINING_KEYWORD:
             trainingIndex = Parser.getIndex(entry);
@@ -88,7 +92,6 @@ public class Entry {
             memberIndex = Parser.getIndex(entry);
             Member newMemberDetail = Parser.getMemberDetails(entry);
             new EditMember(members, memberIndex, newMemberDetail);
-            //Parser.editMember(members, entry);
             break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();

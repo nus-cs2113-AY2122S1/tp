@@ -11,6 +11,11 @@ import seedu.duke.Parser;
 
 import seedu.duke.AttendanceStorage;
 
+/**
+     * Constructor. Deletes an Attendance object from the AttendanceList given its index.
+     * @param attendanceList AttendanceList containing all Attendance.
+     * @param index Index of the Attendance to delete. Note that the actual index is -1 of given index.
+     */
 public class DeleteAttendance {
     public static String getName(AttendanceList filteredAttendenceList, int index) {
         return filteredAttendenceList.getAttendanceMemberName(index);
@@ -20,7 +25,7 @@ public class DeleteAttendance {
                             int index) {
         File currentDir = new File("");
         String[] trainingNameAndLabel = entry.trim().split("/t");
-
+      
         try {
             assert index >= 1;
             //index-1 is handled in deleteAttendance()

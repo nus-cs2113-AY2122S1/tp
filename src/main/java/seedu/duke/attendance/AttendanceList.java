@@ -52,16 +52,15 @@ public class AttendanceList {
         return attendanceList.size();
     }
 
-    public String getAttendanceMemberName(int index){ //added by xy
-        return attendanceList.get(index-1).memberName;
+    public String getAttendanceMemberName(int index) { //added by xy
+        return attendanceList.get(index - 1).memberName;
     }
 
-    public String getAttendanceTrainingName(int index){ //added by xy
-        return attendanceList.get(index-1).trainingName;
+    public String getAttendanceTrainingName(int index) { //added by xy
+        return attendanceList.get(index - 1).trainingName;
     }
 
-    public  String getAttendancePresentOrLate(int index){//added by xy
-        return attendanceList.get(index-1).attended;
+    public String getAttendancePresentOrLate(int index) { //added by xy
+        return attendanceList.get(index - 1).attended;
     }
-
 }

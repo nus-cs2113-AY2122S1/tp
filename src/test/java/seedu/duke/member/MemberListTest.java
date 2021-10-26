@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
-import seedu.duke.command.*;
+import seedu.duke.command.EditMember;
+import seedu.duke.command.AddMember;
+import seedu.duke.command.DeleteMember;
 import seedu.duke.member.exception.InvalidMemberException;
 
 class MemberListTest {
