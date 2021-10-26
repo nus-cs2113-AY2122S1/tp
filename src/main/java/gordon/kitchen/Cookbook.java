@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** <h1>Cookbook class</h1>
+/** <h1>Cookbook class.</h1>
  *
  * <p>Handles the commands given in the {@code Command} class that relates to the cookbook and
  * updates the cookbook accordingly</p>
@@ -56,7 +56,7 @@ public class Cookbook {
     }
 
     /**
-     *<h2>void addRecipe(Recipe)</h2>
+     *<h2>void addRecipe(Recipe).</h2>
      *
      * <p>This methods  adds the recipe to the cookbook if it does not already exist.</p>
      *
@@ -77,7 +77,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void removeRecipe(index)</h2>
+     * <h2>void removeRecipe(index).</h2>
      *
      * <p>This method check removes the recipe at the specified index of the cookbook.</p>
      *
@@ -94,7 +94,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void isRecipeExist(name)</h2>
+     * <h2>void isRecipeExist(name).</h2>
      *
      * <p>This method checks whether a specified recipe exists in the cookbook.</p>
      *
@@ -111,7 +111,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void checkRecipe(name)</h2>
+     * <h2>void checkRecipe(name).</h2>
      *
      * <p>This method checks whether there are recipes in the cookbook that matches the recipe being queried.</p>
      * @param name  Recipe name being queried
@@ -136,7 +136,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setCalories(name)</h2>
+     * <h2>void setCalories(name).</h2>
      *
      * <p>This method adds the calories to a specified recipe</p>
      *
@@ -156,7 +156,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setTimes(name, prepTime, cookTime)</h2>
+     * <h2>void setTimes(name, prepTime, cookTime).</h2>
      *
      * <p>This method adds the preparation time and cooking time to the recipe.</p>
      *
@@ -164,6 +164,7 @@ public class Cookbook {
      * @param prepTime  The preparation time the recipe is being labelled with
      * @param cookTime  The cooking time the recipe is being labelled with
      * @throws GordonException  if there is no matching recipe found
+     *
      */
     public void setTimes(String name, int prepTime, int cookTime) throws GordonException {
         for (Recipe recipe : recipes) {
@@ -179,7 +180,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setPrice(name, newPrice)</h2>
+     * <h2>void setPrice(name, newPrice).</h2>
      *
      * <p>This method adds the price to a recipe.</p>
      *
@@ -199,7 +200,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setDifficulty(name, newDifficulty)</h2>
+     * <h2>void setDifficulty(name, newDifficulty).</h2>
      *
      * <p>This method adds the difficulty level to a recipe.</p>
      *
@@ -224,7 +225,7 @@ public class Cookbook {
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
 
     /**
-     * <h2>void addCookbookTag(tag)</h2>
+     * <h2>void addCookbookTag(tag).</h2>
      *
      * <p>This method adds a new tag to the cookbook</p>
      *
@@ -238,7 +239,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void deleteCookbookTag(tag)</h2>
+     * <h2>void deleteCookbookTag(tag).</h2>
      *
      * <p>This method deletes a tag from the cookbook</p>
      *
@@ -269,17 +270,16 @@ public class Cookbook {
     }
 
     /**
-     * <h2>addTagToRecipes(tag)</h2>
+     * <h2>addTagToRecipes(tag).</h2>
      *
-     * <p>This method adds a tag to recipes that is already associated with that particular tag.</p>
-     *
+     * <p>This method links a Tag to all its associated Recipes</p>
      * @param tag The tag that contains the associated recipes
      */
     public void addTagToRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
-                recipe.addTagToRecipe(tag, recipe.getName());
+                recipe.addTagToRecipe(tag, recipe.getName(), false);
             }
         }
     }

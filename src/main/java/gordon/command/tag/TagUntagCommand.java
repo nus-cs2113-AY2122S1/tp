@@ -23,7 +23,7 @@ public class TagUntagCommand extends Command {
                 Tag extractedTag = cookbook.extractCookbookTag(tagName.trim());       // Tag must exist to be untagged
                 cookbook.untagTagFromRecipe(extractedTag, recipeName.trim());         // remove tag from Recipe
                 cookbook.deleteRecipeFromCookbookTag(tagName.trim(), recipeName);     // modify master-Tag in Cookbook
-                System.out.println("Successfully untagged " + recipeName + " under " + tagName.trim());
+                System.out.println("Successfully untagged " + recipeName + " from " + tagName.trim());
             }
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());

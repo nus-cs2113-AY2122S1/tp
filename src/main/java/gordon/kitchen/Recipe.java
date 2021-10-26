@@ -70,14 +70,18 @@ public class Recipe {
     }
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
-    public void addTagToRecipe(Tag tag, String recipeName) {
+    public void addTagToRecipe(Tag tag, String recipeName, boolean isStorage) {
         try {
             // Checking if tag has been linked to recipe before
             if (doesRecipeTagExists(tag.getTagName())) {
                 throw new GordonException(GordonException.DUPLICATE_TAG_NAME);
             }
             recipeTags.add(tag.getTagName());
-            System.out.println("Successfully tagged " + recipeName + " under " + tag.getTagName());
+
+            if (!isStorage) {
+                System.out.println("Successfully tagged " + recipeName + " under " + tag.getTagName());
+            }
+
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }
@@ -111,6 +115,14 @@ public class Recipe {
         return name.trim();
     }
 
+    /**
+     * <h2>void setTimes(prepTime, cookTime).</h2>
+     *
+     * <p>This method sets the time values of each recipe.</p>
+     *
+     * @param prepTime The preparation time to be set to the recipe
+     * @param cookTime The cooking time to be set to the recipe
+     */
     public void setTimes(int prepTime, int cookTime) {
         preparationTime = prepTime;
         cookingTime = cookTime;
@@ -125,6 +137,13 @@ public class Recipe {
         return totalPrice;
     }
 
+    /**
+     * <h2>void setTotalPrice(newPrice).</h2>
+     *
+     * <p>This method sets the total price of a recipe.</p>
+     *
+     * @param newPrice The new total price that will be set to the recipe
+     */
     public void setTotalPrice(float newPrice) {
         this.totalPrice = newPrice;
     }
@@ -133,6 +152,13 @@ public class Recipe {
         return calories;
     }
 
+    /**
+     * <h2>void setCalories(calories).</h2>
+     *
+     * <p>This method sets the calories for the recipe.</p>
+     *
+     * @param calories The number of calories that will be set to the recipe
+     */
     public void setCalories(int calories) {
         this.calories = calories;
     }

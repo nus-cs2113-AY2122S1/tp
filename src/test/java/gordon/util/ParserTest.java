@@ -37,20 +37,24 @@ public class ParserTest {
                 + System.lineSeparator()
                 + "2. Delete a recipe: deleteRecipe \"Index of recipe\"" + System.lineSeparator()
                 + "3. List all your recipes: listRecipes" + System.lineSeparator()
-                + "4. Find a recipe: find \"Keyword\"" + System.lineSeparator()
-                + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
-                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
+                + "4. Find a recipe: find \"keyword\" \"number/item name\","
+                + "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time"
                 + System.lineSeparator()
-                + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel "
+                + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
+                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories"
+                + System.lineSeparator()
+                + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel"
                 + System.lineSeparator()
                 + "8. Add cooking and preparation time to recipe: "
-                + "set \"recipe name\" \"/time\" cookingTime, preparationTime" + System.lineSeparator()
-                + "9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice " + System.lineSeparator()
-                + "10. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
-                + "11. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
+                + "set \"recipe name\" \"/time\" cookingTime \",\" preparationTime" + System.lineSeparator()
+                + "9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice" + System.lineSeparator()
+                + "10. Tag a recipe: tag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
+                + "11. Untag a recipe: untag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\""
                 + System.lineSeparator()
-                + "12. List all tags: listTags" + System.lineSeparator()
-                + "13. Help me: help" + System.lineSeparator()
+                + "12. Delete tags from Cookbook: deleteTag \"/ tagName1 + tagName2 + ...\""
+                + System.lineSeparator()
+                + "13. List all tags: listTags" + System.lineSeparator()
+                + "14. Help me: help" + System.lineSeparator()
                 + "" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
