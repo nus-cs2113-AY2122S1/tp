@@ -1,5 +1,10 @@
+---
+layout: page
+title: Developer Guide
+---
 
 ## Contents 
+
 * __Acknowledgements__
 * __Getting Started__
 * __Design & Implementation__
@@ -26,7 +31,11 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
 ### Main Components
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> aebe59071b0860e845fda25f2f2fcadcfaf402a7
 The main class of SEPlanner is the `Duke` class. It is responsible for initializing the other components when the program 
 gets started while handling interactions between the other components.  
 The other core components of SEPlanner are:  
@@ -183,6 +192,7 @@ The `Module` object representing the particular module from Selected Module List
 #### FindCommandParser
 
 * This object when invoked, will first identify the flag `/uni` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
+
 #### SearchMapCommandParser
 
 * This object when invoked, will take the first argument and convert it into an integer representing `<UNI_INDEX>` and pass it to the constructor for `SearchMapCommand`.

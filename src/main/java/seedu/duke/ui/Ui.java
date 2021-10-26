@@ -57,9 +57,14 @@ public class Ui {
     public static void printLogo() {
         out.println(AsciiConstants.LOGO);
     }
+
+    public static void printPlane() {
+        out.println(AsciiConstants.PLANE);
+    }
     
     public static void printExit() {
-        out.println(AsciiConstants.EXIT);
+        out.print(AsciiConstants.EXIT);
+        out.println(AsciiConstants.PLANE);
     };
 
     public static void promptInput() {
