@@ -84,20 +84,6 @@ public class ModuleStorageTest {
     }
 
     @Test
-    void loadFile_firstInitialize() throws IOException {
-        Path dataFolder = RESOURCE_FOLDER.resolve("newFolder");
-        Path dataJsonFile = dataFolder.resolve("main.json");
-        assertFalse(Files.exists(dataFolder));
-        assertFalse(Files.exists(dataJsonFile));
-        this.moduleStorage.init(dataJsonFile);
-        ModuleManager moduleManager = this.moduleStorage.loadFile();
-        assertTrue(Files.exists(dataFolder));
-        assertTrue(Files.exists(dataJsonFile));
-        Files.delete(dataJsonFile);
-        Files.delete(dataFolder);
-    }
-
-    @Test
     void loadFile_invalidJson_exceptionThrown() {
         this.moduleStorage.init(MALFORMED_FILE);
         assertThrows(JsonSyntaxException.class, moduleStorage::loadFile);
