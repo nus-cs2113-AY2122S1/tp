@@ -41,13 +41,13 @@ public class ParserTest {
                 + "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time"
                 + System.lineSeparator()
                 + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
-                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
+                + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories"
                 + System.lineSeparator()
-                + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel "
+                + "7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel"
                 + System.lineSeparator()
                 + "8. Add cooking and preparation time to recipe: "
                 + "set \"recipe name\" \"/time\" cookingTime \",\" preparationTime" + System.lineSeparator()
-                + "9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice " + System.lineSeparator()
+                + "9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice" + System.lineSeparator()
                 + "10. Tag a recipe: tag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\"" + System.lineSeparator()
                 + "11. Untag a recipe: untag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\""
                 + System.lineSeparator()
