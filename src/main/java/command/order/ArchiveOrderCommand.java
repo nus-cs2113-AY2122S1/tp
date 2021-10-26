@@ -72,8 +72,9 @@ public class ArchiveOrderCommand extends Command {
                 continue;
             }
             Order order = (Order) medicine;
+            Date orderDate = DateParser.removeTime(order.getDate());
             if (order.getStatus().equalsIgnoreCase("DELIVERED")) {
-                if (order.getDate().before(orderArchiveDate) || order.getDate().equals(orderArchiveDate)) {
+                if (orderDate.before(orderArchiveDate) || orderDate.equals(orderArchiveDate)) {
                     filteredOrders.add(order);
                 }
             }
