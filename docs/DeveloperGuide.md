@@ -27,7 +27,7 @@ In addition, the `Command` class facilitates the execution of user instructions.
 Given below is a sequence diagram of how the core components of MedBot interact with each other 
 when the user inputs the command `delete 1`.
 
-<img src="https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/diagrams/MedBot_architecture.png"  alt="MedBot Architecture"/>
+![MedBot Architecture](diagrams/MedBot_architecture.png)
 
 ### Ui Component
 The Ui Component is handled by the `Ui` class. It is the main class that a user directly interacts with.
