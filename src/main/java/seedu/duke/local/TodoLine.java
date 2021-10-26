@@ -2,7 +2,7 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Todo;
 
-public class TodoLine {
+public class TodoLine extends TaskLine{
     private String type;
 
     private String description;
@@ -22,9 +22,15 @@ public class TodoLine {
         description = task.getDescription();
         priority = task.getPriority().toString();
         recurrence = task.getRecurrence().toString();
-        doOnDate = task.getDoOnDate().toString();
-        reminderTime = task.getReminderInformation().getUserTime();
-        reminderMessage = task.getReminderInformation().getMessage();
+        if (task.getDoOnDate() == null) {
+            doOnDate = null;
+            reminderTime = null;
+            reminderMessage = null;
+        } else {
+            doOnDate = task.getDoOnDate().toString();
+            reminderTime = task.getReminderInformation().getUserTime();
+            reminderMessage = task.getReminderInformation().getMessage();
+        }
     }
 
     public String getString() {

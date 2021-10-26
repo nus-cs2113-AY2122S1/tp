@@ -2,7 +2,7 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Event;
 
-public class EventLine {
+public class EventLine extends TaskLine{
     public String type;
 
     public String description;

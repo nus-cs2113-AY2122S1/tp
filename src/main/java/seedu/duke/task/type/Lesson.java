@@ -3,6 +3,7 @@ package seedu.duke.task.type;
 import seedu.duke.nusmods.NusModsParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
+import seedu.duke.task.reminder.ReminderInformation;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -64,5 +65,10 @@ public class Lesson extends Task {
     @Override
     public void updateReminderTime(long reminderTime) {
 
+    }
+
+    @Override
+    public ReminderInformation getReminderInformation() {
+        return null;
     }
 }

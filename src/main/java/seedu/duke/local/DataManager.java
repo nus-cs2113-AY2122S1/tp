@@ -36,6 +36,9 @@ public class DataManager {
 
     public static void addTaskLine(TaskLine taskLine) {
         taskLines.add(taskLine);
+    }
+
+    public static void updateStorage() {
         TaskFileWriter.storetoHardDisk(getStringLineList());
     }
 

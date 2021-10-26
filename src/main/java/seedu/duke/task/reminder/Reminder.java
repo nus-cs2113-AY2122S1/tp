@@ -22,6 +22,7 @@ public class Reminder {
         this.taskTime = time;
         this.reminderTime = taskTime.minusMinutes(userTime);
         setReminderDone();
+        setInformation();
     }
 
     public void setUserTime(long userTime) {

@@ -29,6 +29,6 @@ public class DeadlineLine extends TaskLine{
     public String getString() {
         return type + "|" + description + "|" + dueDate + "|"
                 + priority + "|" + recurrence + "|"
-                +reminderTime + "|" + reminderMessage;
+                + reminderTime + "|" + reminderMessage;
     }
 }
