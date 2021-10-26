@@ -9,6 +9,9 @@ import java.util.HashMap;
 public abstract class Game {
     protected final TextUi ui;
 
+    public ArrayList<String[]> displayedLines;
+    public ArrayList<String[]> userLines;
+
     public Game() {
         this.ui = new TextUi();
     }
