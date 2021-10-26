@@ -4,7 +4,7 @@ import seedu.ui.TimetableUI.LineType;
 
 public class TimetableUserItem extends TimetableItem {
 
-    private String description;
+    private final String description;
 
     public TimetableUserItem(String title, String day, String startTime, String endTime, String description) {
         super(title, day, startTime, endTime);
@@ -19,4 +19,13 @@ public class TimetableUserItem extends TimetableItem {
         }
         return str;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDescription() {
+        return description.length() > 0;
+    }
+
 }

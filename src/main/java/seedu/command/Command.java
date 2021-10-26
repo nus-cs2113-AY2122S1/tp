@@ -11,7 +11,7 @@ public abstract class Command {
 
     }
 
-    public abstract void execute() throws IntegerException, ModuleExistException, FetchException;
+    public abstract void execute() throws IntegerException, ModuleExistException, FetchException, AddException;
 
     public boolean isExit() {
         return this instanceof ExitCommand;

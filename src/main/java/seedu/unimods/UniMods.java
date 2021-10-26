@@ -1,6 +1,8 @@
 package seedu.unimods;
 
+import seedu.command.AddCommand;
 import seedu.command.Command;
+import seedu.exceptions.AddException;
 import seedu.exceptions.FetchException;
 import seedu.exceptions.IntegerException;
 import seedu.exceptions.ModuleExistException;
@@ -54,6 +56,8 @@ public class UniMods {
             e.printMessage();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        } catch (AddException e) {
+            e.printMessage();
         }
     }
 

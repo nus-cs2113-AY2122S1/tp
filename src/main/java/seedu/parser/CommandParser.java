@@ -1,5 +1,6 @@
 package seedu.parser;
 
+import org.w3c.dom.Text;
 import seedu.command.AddCommand;
 import seedu.command.CalculateCapCommand;
 import seedu.command.ChangeSemesterCommand;
@@ -17,6 +18,7 @@ import seedu.command.StoreResultsCommand;
 import seedu.command.TimetableCommand;
 import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.flags.AddFlag;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
@@ -65,8 +67,8 @@ public class CommandParser {
                 showUserItemsOnly = true;
             }
             command = new TimetableCommand(timetable, showUserItemsOnly);
-        } else if (lowerCaseText.startsWith("add")) {
-            command = parseAddCommand(text, timetable);
+        } else if (lowerCaseText.equals("add")) {
+            command = parseAddCommand(timetable);
         } else if (lowerCaseText.startsWith("help")) {
             command = new HelpCommand();
         } else if (lowerCaseText.startsWith("delete")) {
@@ -201,10 +203,15 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    private Command parseAddCommand(String input, Timetable timetable) {
-        input = input.substring(ADD_LENGTH).trim();
-        String moduleCode = input.toUpperCase();
-        return new AddCommand(moduleCode, timetable);
-    }
+    private Command parseAddCommand(Timetable timetable) {
+        AddFlag flag = AddFlag.INVALID;
+        try {
+            flag = TextUi.getAddFlag();
+        } catch (UniModsException e) {
+            e.printMessage();
+        }
+        assert flag != AddFlag.INVALID;
 
+        return new AddCommand(timetable, flag);
+    }
 }

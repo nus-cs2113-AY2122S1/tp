@@ -1,5 +1,7 @@
 package seedu.ui;
 
+import seedu.command.flags.AddFlag;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 
@@ -72,6 +74,32 @@ public class TextUi {
         while (input.isEmpty()) {
             System.out.print(PROMPT_CURSOR);
             input = in.nextLine();
+        }
+        return input;
+    }
+
+    public static AddFlag getAddFlag() throws UniModsException {
+        System.out.println("1. Module");
+        System.out.println("2. Event");
+        System.out.print("Option: ");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        if (input.equals("1")) {
+            return AddFlag.LESSON;
+        } else if (input.equals("2")) {
+            return AddFlag.EVENT;
+        } else {
+            throw new UniModsException("Invalid Selection, please choose either 1 or 2");
+        }
+    }
+
+    public String getReply(String question) {
+        System.out.print(question);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
         }
         return input;
     }

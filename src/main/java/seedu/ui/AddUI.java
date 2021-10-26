@@ -4,12 +4,15 @@ import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
+import seedu.timetable.TimetableUserItem;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AddUI {
 
     private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
+    private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String SMALL_GAP = "%14s";
     private static final String FIXED_FORMAT = "%88.88s";
     private static final String LECTURE = "Lecture";
@@ -21,6 +24,7 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
+    private static final int TIME = 100;
     private static final String RUN = "Run";
     private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
@@ -30,6 +34,7 @@ public class AddUI {
     private static final String NO_LAB_FOUND = "               *Module has no Labs*";
     private static final String DISCLAIMER = " [CONFLICT]";
 
+    public static Scanner in = new Scanner(System.in);
 
     /**
      * Function initialises arraylist for each lesson type and add the details of
@@ -45,7 +50,6 @@ public class AddUI {
      */
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
                                    Timetable timetable, Module module) {
-
         ArrayList<String> lectureLessons;
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
@@ -76,7 +80,6 @@ public class AddUI {
      */
     public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessons, int length,
             String lessonType, Timetable timetable) {
-
         ArrayList<String> completeList = new ArrayList<>();
         int serial = SERIAL_STARTING;
         String detail;
@@ -118,7 +121,6 @@ public class AddUI {
      * @param lab the list of Strings representing the lab details
      */
     public void printLessons(ArrayList<String> lec, ArrayList<String> tt, ArrayList<String> lab) {
-
         int index = Math.max(lec.size(), Math.max(tt.size(), lab.size()));
         for (int j = 0; index > j; j++) {
             String output = "";
@@ -149,7 +151,6 @@ public class AddUI {
      */
     public void getCommand(ArrayList<Lesson> lessons, String lessonType,
                            Timetable timetable, Module module) throws IntegerException {
-
         String classNumber = "";
         if (isArrayExist(lessons, ZERO)) {
             String flag;
@@ -193,7 +194,6 @@ public class AddUI {
      */
     public void addLessonToTimetable(ArrayList<Lesson> lessons,
                                      Timetable timetable, Module module, String classNumber) {
-
         assert (lessons.size() > ZERO);
         for (Lesson lesson : lessons) {
             if (lesson.getClassNo().equals(classNumber)) {
@@ -219,7 +219,6 @@ public class AddUI {
      * @return true if the next lesson in the index has the same class number, false otherwise
      */
     public boolean classNumberGap(ArrayList<Lesson> lessonList, Lesson lesson) {
-
         int index = lessonList.indexOf(lesson);
         if (lessonList.size() != index + BALANCE_ARRAY) {
             String classNumber = lessonList.get(index).getClassNo();
@@ -260,7 +259,6 @@ public class AddUI {
      * @param lb The list of lessons that are laboratory
      */
     public void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
-
         String header;
         if (isArrayExist(lt, ZERO) || isArrayExist(tt, ZERO) || isArrayExist(lb, ZERO)) {
             header = String.format(SMALL_GAP, "") + String.format(FIXED_LENGTH_FORMAT, LECTURE_SLOT)
@@ -269,5 +267,36 @@ public class AddUI {
             header = String.format(FIXED_FORMAT, NO_LESSON_FOUND);
         }
         System.out.println(header);
+    }
+
+    public String getReply(String question) {
+        System.out.print(question);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return input;
+    }
+
+    public void printEventMessage(TimetableUserItem event, String date) {
+        String startTime = String.format(FIXED_TIME_FORMAT, event.getStartHour() * TIME);
+        String endTime = String.format(FIXED_TIME_FORMAT, event.getEndHour() * TIME);
+
+        String output = "Alright!! Event: " + event.getTitle() + " on " + date + ", from "
+                + startTime + " to " + endTime;
+        if (event.isDescription()) {
+            output = output.concat(" at " + event.getDescription());
+        }
+        output = output.concat(" has been added to your timetable");
+        System.out.println(output);
+    }
+
+    public String getModuleCode() {
+        System.out.print("Enter Module Code to add it into Timetable: ");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return input.toUpperCase();
     }
 }

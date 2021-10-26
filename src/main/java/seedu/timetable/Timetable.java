@@ -413,6 +413,10 @@ public class Timetable implements Comparable<Timetable> {
         return false;
     }
 
+    public boolean isEventConflict(TimetableItem timetableItem) {
+
+    }
+
     public boolean isLessonExist(Lesson lesson, Integer time) {
         return getLesson(lesson.getParsedDay(), time) != null;
     }
