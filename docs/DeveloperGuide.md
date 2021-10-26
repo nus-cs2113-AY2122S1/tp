@@ -57,8 +57,33 @@ purpose of this guide is to help developers set up and continue with the develop
 
 ### Setting up
 
+1. Fork [this](https://github.com/AY2122S1-CS2113T-T10-1/tp/) repo, and clone the fork into your computer.
+2. Ensure that you have [IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows)
+   and [JDK 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed.
+3. Configure the JDK
+    * Follow the guide
+      at [se-edu/guides IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure
+      Intellij is configured to use JDK 11.
+
+4. Import the project as a Gradle project
+    * Follow the
+      guide [se-edu/guides IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+      to import the project into IDEA.
+    * Note: Importing a Gradle project is slightly different from importing a normal Java project.
+5. Verify the setup
+    * Locate the file `src/main/java/MediVault.java` then run the `MediVault.main()` and try a few commands
+    * Run the [test](https://se-education.org/addressbook-level3/Testing.html) to ensure they all pass.
+
 ### Before writing code
 
+1. Configure the coding style
+    * If using IDEA, follow the
+      guide [se-edu/guides IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html)
+      to set up IDEA’s coding style to match ours.
+2. Set up CI
+    * This project comes with a GitHub Actions config files (in `.github/workflows folder`). When GitHub detects those
+      files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set
+      up required.
 ## Design
 
 ### Architecture
@@ -175,12 +200,26 @@ The sequence diagram below shows how the `list` operation works in general.
 
 #### AddStockCommand
 
+MediVault creates an `AddStockCommand` object when CommandParser identifies `addstock` or `add` in `stock`
+mode.
+> :information_source: Note:
+> * MediVault adds medicine stock when the `parameter` and `parameterValues` provided by the user are valid.
+> * Users will not be able to input medication if `max_quantity` is less than `quantity`.
+> * MediVault will ignore the `price`, `description` and `max_quantity` of user input if the same medication name and expiry date already exist.
+> * MediVault will ignore the `description` and `max_quantity` of user input if the same medication name already exist.
+
+The sequence diagram for `AddStockCommand` is shown below.
+
+![AddStockSequenceDiagram](diagrams/diagram_images/AddStockSequenceDiagram.png)
+
+
 #### DeleteStockCommand
 
 #### UpdateStockCommand
 
 MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or
 the `update` keyword in `stock` mode.
+
 > :information_source: Note:
 > * MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
 > * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
@@ -198,7 +237,36 @@ unable to delete a prescription record when the medicine stock name gets updated
 
 #### AddPrescriptionCommand
 
+MediVault creates an `AddPrescriptionCommand` object when CommandParser identifies `addprescription` or  
+`add` in `prescription` mode.
+
+> :information_source: Note:
+> * MediVault adds the prescription when the `parameter` and `parameterValues` provided by the user are valid.
+> * MediVault will update the quantity left in the stock automatically after prescribing.
+> * MediVault will prescribe medication with the earliest date if there are medication with multiple expiry dates.
+> * Users will not be able to prescribe medication if the quantity is more than the total stock quantity.
+
+The sequence diagram for `AddPrescriptionCommand` is shown below.
+
+![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
+
 #### DeletePrescriptionCommand
+
+MediVault creates a `DeletePrescriptionCommand` object when CommandParser identifies `deleteprescription` or
+`delete` in `prescription` mode.
+
+> :information_source: Note:
+> * MediVault deletes the prescription when the `parameter` and `parameterValues` provided by the user are valid.
+> * MediVault will delete the prescription based on the user input of `PRESCRIPTION_ID`.
+> * MediVault will add the prescription quantity to the stock quantity after successful deletion of prescription.
+> * User will not be able to delete prescriptions if the total quantity after prescription will be more than the maximum
+  quantity.
+
+The sequence diagram for `DeletePrescriptionCommand` is shown below.
+
+![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
+
+> :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
 
 #### UpdatePrescriptionCommand
 
@@ -220,6 +288,7 @@ parameter or both. The old prescription record is **permanently removed** from M
 This approach solves the issue when a medication is prescribed to a user with an amount that is 
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
 stock quantity. 
+
 > :bulb: MediVault automatically adds new prescription records when a medication is prescribed
 > from stocks with different Stock IDs.
 
@@ -228,6 +297,16 @@ stock quantity.
 #### AddOrderCommand
 
 #### DeleteOrderCommand
+
+MediVault creates a `DeleteOrderCommand` object when CommandParser identifies `deleteorder` or  `delete` in `order`
+mode.
+
+> :information_source: Note
+> * MediVault deletes the order when the `parameter` and `parameterValues` provided by the user are valid.
+
+The sequence diagram for `DeleteOrderCommand` is shown below.
+
+![DeleteOrderCommandDiagram](diagrams/diagram_images/DeleteOrderSequenceDiagram.png)
 
 #### UpdateOrderCommand
 
