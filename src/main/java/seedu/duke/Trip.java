@@ -88,6 +88,7 @@ public class Trip {
         }
     }
     //@@author leeyikai
+
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
         boolean areThereExpenses = false;
