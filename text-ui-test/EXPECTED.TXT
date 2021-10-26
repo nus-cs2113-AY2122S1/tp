@@ -98,16 +98,8 @@ Enter your command: 3. 	d a c
 	Payer: josh
 	Category: breakfast
 
-Enter your command: 	d a c
-	date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: 
-		1) yikai, USD $0.33
-		2) josh, USD $0.33
-		3) xiyuan, USD $0.34
-	Payer: yikai
-	Category: lunch
-
+Enter your command: Please format your inputs as follows: 
+view filter [category, payer, description, person] [search keyword]
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: List of Expenses: 

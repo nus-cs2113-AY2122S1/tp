@@ -43,6 +43,7 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
+    //@@author leeyikai
     public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
 
         if (listOfExpenses.isEmpty()) {
@@ -144,6 +145,7 @@ public class Trip {
             Ui.printNoMatchingExpenseError();
         }
     }
+    //@@author
 
     //@@author lixiyuan416
     private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,

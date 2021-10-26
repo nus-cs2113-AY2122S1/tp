@@ -279,7 +279,7 @@ public class Ui {
             System.out.println("\tview: list all expenses");
             System.out.println("\tview filter [options] [search keyword]: list filtered expenses.");
             System.out.println("\t\tfilter options: [category, description, payer, person, date]");
-            System.out.println("\tview index [expense num]");
+            System.out.println("\tview [index]");
             System.out.println("\tsummary: shows how much each person spent in total for this trip");
             System.out.println("\tamount [person]: for settling repayment at the end of the trip,"
                     + "shows how much this person owes to others, "
