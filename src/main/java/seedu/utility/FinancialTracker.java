@@ -208,18 +208,9 @@ public class FinancialTracker {
         return incomes.isEmpty();
     }
 
-    //method used for testing
-    public Expense getExpense(int expenseIndex) {
-        return expenses.get(expenseIndex);
-    }
-
-    //method used for testing
-    public Income getIncome(int incomeIndex) {
-        return incomes.get(incomeIndex);
-    }
-    
     public void clearAllEntries() {
         expenses.clear();
         incomes.clear();
+        balance = 0;
     }
 }
