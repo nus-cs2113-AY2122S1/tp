@@ -48,8 +48,7 @@ public class WorldMap {
         }
     }
 
-    public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName)
-            throws EmptyVertexException {
+    public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
         Country sourceCountry = getCountry(sourceCountryName);
         Country targetCountry = getCountry(targetCountryName);
         if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
@@ -61,8 +60,7 @@ public class WorldMap {
         return logic.getToGoal(sourceCountry,targetCountry);
     }
 
-    public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName)
-            throws EmptyVertexException {
+    public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName) {
         altWorldMap();
 
         Country sourceCountry = getCountry(sourceCountryName);
@@ -80,15 +78,14 @@ public class WorldMap {
         return minResult;
     }
 
-    public static Country getCountry(String countryName) throws EmptyVertexException {
-        Country country;
+    public static Country getCountry(String countryName) {
+        Country country = new Country("",-1);;
         try {
             country = graphList.findVertex(countryName);
-            return country;
         } catch (EmptyVertexException e) {
             System.out.println(e.getMessage());
         }
-        throw new EmptyVertexException(countryName);
+        return country;
     }
 
     public static void distanceNonZero(double dist) throws NonZeroDistanceException {
@@ -113,7 +110,7 @@ public class WorldMap {
 
             graphList.modifyEdge(dist, sourceCountry, targetCountry);
             distanceNonZero(dist);
-        } catch (EmptyVertexException | NonZeroDistanceException e) {
+        } catch (NonZeroDistanceException e) {
             System.out.println(e.getMessage());
         }
     }

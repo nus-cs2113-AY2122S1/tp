@@ -72,11 +72,11 @@ public class Ui {
     }
 
     public void printDeleteDay(String tripName, int index) {
-        System.out.println("\tYou have just deleted day " + index + " of " + tripName);
+        System.out.println("\tYou have just deleted day " + index + " of " + tripName + ".");
     }
 
     public void printDeleteItem(String tripName, int dayIndex, int itemIndex) {
-        System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
+        System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex + ".");
     }
 
     public void printSearchItem(String tripName, int dayIndex, String itemKey, ArrayList<Item> keyString) {
@@ -95,7 +95,7 @@ public class Ui {
 
     public void printEditItem(String tripName, int dayIndex, String itemName, String itemTime, int itemIndex) {
         System.out.println("\tYou have just edited item " + itemIndex  + " on day " + dayIndex
-                + " of " + tripName + " to " + itemName + " at " + itemTime);
+                + " of " + tripName + " to " + itemName + " at " + itemTime + ".");
     }
 
     public void printEdit(String tripName) {

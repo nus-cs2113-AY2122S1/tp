@@ -80,8 +80,8 @@ public class ItemsList {
         StringBuilder itemsListString = new StringBuilder();
         for (int i = 0; i < getSize(); i++) {
             String itemEntry = "\n\t\t\t\t\t" + i + ":\t";
-            itemsListString.append(items.get(i).toString());
             itemsListString.append(itemEntry);
+            itemsListString.append(items.get(i).toString());
         }
         return itemsListString.toString();
     }
