@@ -159,12 +159,15 @@ Here are the modules in the list:
 ```
 
 ### Adding a partner university
+
 Add a partner university the user is interested into the user selected university list.
+
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Note:**
-This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. The `<UNIVERSITY_INDEX>` can be found via `list /muni` command.
+This command accepts either the `<UNIVERSITY_INDEX>` or `<![img.png](img.png)UNIVERSITY_NAME>` as arguments. 
+The `<UNIVERSITY_INDEX>` can be found via `list /muni` command. 
 </div> 
 
 * Example 1  
@@ -183,10 +186,17 @@ New university added:
 ```
 
 ### Adding a NUS module
+
 Add a NUS module that the user wants to complete during SEP into the user selected module list.  
+
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
->This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments. The `<MODULE_INDEX>` can be found via `list /mmod` command.  
-> 
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:**
+This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
+The `<MODULE_INDEX>` can be found via `list /mmod` command.  
+</div>
+
 * Example 1: using index  
 Input: `add /mod 77`  
 Expected output:
@@ -206,8 +216,13 @@ New module added:
 Adds a specific pair of module mapping under a selected university.
 
 ####Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
->The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
-> 
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be 
+found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
+</div>
+
 * Example 1  
 Input: `add /map 4 2`  
 Expected output:
@@ -254,7 +269,11 @@ Expected output:
 
 ### Searching for available module mappings:
 Displays all available module mappings for a specific university that matches the list of selected modules.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 > Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+</div>
+
 #### Format: `searchmap <UNIVERSITY_INDEX>`
 * Example 1  
 Input: `searchmap 4`  
@@ -320,6 +339,9 @@ CS1231 - CAS CS131 : Combinatoric Structures
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
 contains the data of your previous AddressBook home folder.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Do not delete the `/data` directory or any of its files as this will cause you to loose your saved information!
+</div>
 
 **Q**: How do I save my selected universities and modules?  
 **A**: All your universities, modules and module mappings are automatically saved at 
