@@ -91,6 +91,16 @@ Expected Output:
 Thank you for using MedBot!
 See you again!
 ```
+### Get the current view: `get view`
+
+Gets the current viewType of the program.
+
+Format: `get view`
+
+Expected Output (when the program is in Patient's View):
+```
+"You are currently in the Patient's View."
+```
 
 ### Accessing user guide: `help`
 
@@ -115,6 +125,7 @@ switch
 exit
 archive
 unarchive
+get view
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
@@ -370,8 +381,8 @@ Format:
 | :---         | :-----            |
 | **switch**   | `switch [VIEW_TYPE]` <br/>eg., `switch s`|
 | **help**     | `help [COMMAND]` <br/>eg., `help add`|
+| **get view**     | `get view`|
 | **exit**     | `exit`|
-
 ### Patient/Medical Staff Information View
 
 | Action       | Format + Examples        |

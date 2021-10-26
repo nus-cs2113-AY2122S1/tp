@@ -29,7 +29,6 @@ In addition, the `Command` class facilitates the execution of user instructions.
 Given below is a sequence diagram of how the core components of MedBot interact with each other when the user inputs the
 command `delete 1`.
 
-
 ![MedBot Architecture](diagrams/MedBot_architecture.png)
 
 ### Ui Component
@@ -51,19 +50,19 @@ parses `help delete` input given by a user.
 
 ### Parser Component
 
-The Parser Component is responsible for parsing the user input
-and returning the corresponding command class to be executed.
+The Parser Component is responsible for parsing the user input and returning the corresponding command class to be
+executed.
 
 Here's a partial class diagram to better illustrate the Parser Component:
 
 ![ParserClassDiagram](diagrams/ParserClassDiagram.png)
 
 How the `Parser` component works:
-* When `Parser` is called by MedBot to parse the user input, it will call the view
-specific parser `XYZCommandParser` depending on the current view type (`XYZ` is a placeholder
-for the specific command name eg. `PatientCommandParser`).
+
+* When `Parser` is called by MedBot to parse the user input, it will call the view specific parser `XYZCommandParser`
+  depending on the current view type (`XYZ` is a placeholder for the specific command name eg. `PatientCommandParser`).
 * The `XYZCommandParser` will then create and return the corresponding
-`XYZcommand` object by utilising the `ParserUtils` to help it process the user input.
+  `XYZcommand` object by utilising the `ParserUtils` to help it process the user input.
 
 The sequence diagram below better illustrates the working process described above:
 
@@ -71,15 +70,13 @@ The sequence diagram below better illustrates the working process described abov
 
 <em>(User is trying to add a patient's information in the PatientInfoView)</em>
 
-
-
 ### Scheduler Component
 
 ### Storage Component
 
-### Individual Commands
+### Command Class
 
-The Command class is responsible for handling the execution of user input.
+The Command class and its subclasses are responsible for handling the execution of user input.
 
 Each individual Command object includes:
 
@@ -244,11 +241,10 @@ The edited `Person` is then passed into the `Ui` class to be displayed through`U
 
 ### Target user profile
 
-{Describe the target user profile}
+Head nurses who prefer using Command Line Interface(CLI) instead of traditional Graphical User Interface (GUI)
+for their daily jobs
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
 
 1. Easily manage patient info, consultation requirements
 2. Easily manage nurse/doctor schedules
