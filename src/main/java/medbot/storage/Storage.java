@@ -50,7 +50,6 @@ public abstract class Storage {
      * returns all line numbers of storage file that are invalid.
      *
      * @param listItemType enum of ListItem type
-     * @param medBotList   instance of a subclass of MedBotList
      * @return Error message if there are formatting errors in storage file
      * @throws FileNotFoundException if storage file cannot be found
      */
@@ -80,23 +79,31 @@ public abstract class Storage {
      *
      * @param listItemType enum of ListItem type
      * @param storageLine  a line in storage file
-     * @param medBotList   instance of a subclass of MedBotList
      * @throws MedBotException if fail to add a ListItem to a MedBotList subclass
      */
     protected void addListItemFromStorageLine(ListItemType listItemType, Scheduler scheduler, String storageLine)
             throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
 
+        MedBotList medBotList = null;
         switch (listItemType) {
         case PATIENT:
             scheduler.addPatient((Patient) listItem);
+            medBotList = scheduler.getPatientList();
             break;
         case STAFF:
             scheduler.addStaff((Staff) listItem);
+            medBotList = scheduler.getMedicalStaffList();
             break;
         case APPOINTMENT:
             scheduler.addAppointment((Appointment) listItem);
+            medBotList = scheduler.getSchedulerAppointmentList();
+            break;
+        default:
+            throw new MedBotException("Not a list item");
+
         }
+        updateLastId(listItem, medBotList);
     }
 
 
@@ -106,7 +113,7 @@ public abstract class Storage {
      * @param listItem   instance of a  ListItem subclass (eg. Patient, Appointment)
      * @param medBotList instance of a subclass of MedBotList
      */
-    void setListItemIdAsLastId(ListItem listItem, MedBotList medBotList) {
+    void updateLastId(ListItem listItem, MedBotList medBotList) {
         int listItemId = listItem.getListItemId();
         if (medBotList.getLastId() < listItemId) {
             medBotList.setLastId(listItemId);

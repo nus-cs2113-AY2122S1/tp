@@ -1,9 +1,9 @@
 package medbot.list;
 
-import java.util.HashMap;
-
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
+
+import java.util.HashMap;
 
 public class SchedulerAppointmentList extends MedBotList {
     private static final String END_LINE = System.lineSeparator();
@@ -122,12 +122,6 @@ public class SchedulerAppointmentList extends MedBotList {
         return output;
     }
 
-    @Override
-    public void addListItemFromStorage(ListItem appointmentItem) {
-        Appointment appointment = (Appointment) appointmentItem;
-        int appointmentId = appointment.getListItemId();
-        appointments.put(appointmentId, appointment);
-    }
 
     @Override
     public void setLastId(int lastId) {
