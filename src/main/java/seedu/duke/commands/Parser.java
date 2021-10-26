@@ -48,13 +48,13 @@ public class Parser {
 
     public HashMap<String, String> extractArgs(String input) {
         HashMap<String, String> args = new HashMap<>();
-        String splitByDelimiter = ".+?(?=\\s\\w\\/)|.+?$";
+        String splitByDelimiter = ".+?(?=\\s\\w/)|.+?$";
         Pattern p = Pattern.compile(splitByDelimiter);
         Matcher m = p.matcher(input);
         m.find();
         args.put(null,m.group());
         while(m.find()) {
-            String[] currentArg = m.group().split("\\/");
+            String[] currentArg = m.group().split("/", 2);
             args.put(currentArg[0].strip(), currentArg[1].strip());
         }
         return args;
