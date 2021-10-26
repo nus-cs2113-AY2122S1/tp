@@ -13,7 +13,7 @@ import taa.command.mark.DeleteMarkCommand;
 import taa.command.mark.EditMarkCommand;
 import taa.command.mark.ListMarksCommand;
 import taa.command.mark.MedianMarkCommand;
-import taa.command.mark.SetMarksCommand;
+import taa.command.mark.SetMarkCommand;
 import taa.command.module.AddModuleCommand;
 import taa.command.module.DeleteModuleCommand;
 import taa.command.module.EditModuleCommand;
@@ -52,7 +52,7 @@ public class HelpCommand extends Command {
         new EditAssessmentCommand(""),
         new DeleteAssessmentCommand(""),
         new ListMarksCommand(""),
-        new SetMarksCommand(""),
+        new SetMarkCommand(""),
         new EditMarkCommand(""),
         new DeleteMarkCommand(""),
         new AverageMarksCommand(""),

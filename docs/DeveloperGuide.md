@@ -129,32 +129,24 @@ Below is an example scenario of how the add assessment feature behaves at each s
 <br>
 
 ### Set Marks
-The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store
-`assessmentName` and the `marks` for it as a key-value pair.<br>
+The sequence diagram shown below illustrates how the `set_mark` command works:
+![SetMarkSequenceDiagram](diagrams/SetMarkSequenceDiagram.png)
 
-`SetMarksCommand` implements the following methods:
-* `SetMarksCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Checks input for errors before calling the
-  `setMarks` command and saving the data.
-* `SetMarksCommand#setMarks(ui:Ui, student:Student, assessmentName:String, marks:double)` - Puts a key-value pair with
-  `assessmentName` as key and `marks` as the value into the `results` HashMap of `student`.
+Steps:
+1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
+2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
+   is returned.
+3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid.
+4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called.
+5. The `module:Module` which the student and assessment belongs to is retrieved with 
+`getModuleWithCode(moduleCode:String)`.
+6. Using `module:Module`, we are able to get the `studentList:StudentList` and `assessmentList:AssessmentList`.
+7. The `student:Student` and `assessment:Assessment` are then retrieved from their lists using 
+`getStudentAt(studentIndex:Integer)` and `getAssessment(assessmentName:String)` respectively.
+8. Finally, `setMarks(assessmentName:String, marks:Double)` is called to set the marks of the assessment in the 
+student's `results` HashMap.
+9. A message will then be printed out to indicate to the user that the marks have been set successfully.
 
-Below is an example scenario of how the set marks mechanism behaves at each step:
-* Precursor Step - The user must have executed the commands to create `module`, `assessment`, and `student` entities.
-  For purpose of this example, the user will have created `CS2113T` as the `module`, `Midterms` as the `assessment` with
-  a maximum mark of `100`, and `Jim Ho` as the `student`.
-* Step 1 - The user executes the `set_marks c/CS2113T s/1 a/Midterms m/50` command to set marks for student at index `1`
-  for the `Midterms` assessment under the `CS2113T` module. The `set_marks` command calls the  `SetMarksCommand#execute`
-  method. Within  `SetMarksCommand#execute`, `StudentList#getStudentAt("1")` is called to ensure that the student to be
-  marked (in this case student at index `1`) exists.
-* Step 2 - `AssessmentList#getAssessment(Midterms)` is then called to ensure that the `Midterms` assessment exists and
-  that the student has yet to be marked for it.
-* Step 3 - `Assessment#getMaximumMarks();` is then called to ensure that the marks to be given for the `Midterms`
-  assessment do not exceed the maximum marks attributed to it.
-* Step 4 - If the above steps do not output an error, the `SetMarksCommand#setMarks` command is then called, which in
-  turn calls the `Student#setMarks` command to put the key-value pair into the `results` HashMap of the student at index
-  `1`.
-
-<br>
 
 ### Set Attendance
 The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
