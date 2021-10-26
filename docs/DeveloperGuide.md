@@ -6,17 +6,30 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+This section provides an overview of the design architecture and implementation of Libmgr. Each sub-section provides a detailed explanation of the design of each component
 
+### Architecture Diagram
+
+### Entrypoint of Libmgr
+
+![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
+
+---
+
+### Data Package
+
+The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
+
+![ItemsClassDiagram](img/ItemsClassDiagram.png)
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Library staff who prefer keyboard inputs and require a text based application to quickly track and update the statuses of items within their catalogue
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This product aims to streamline the process of managing the book catalogues within their library. It will allow library staff to quickly track their books, such as finding out their location and status. Designed for fast typists, it also allows staff to track their inventory faster and more efficiently.
 
 ## User Stories
 

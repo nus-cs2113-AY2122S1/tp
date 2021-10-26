@@ -1,0 +1,50 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as Libmgr
+Participant "ui:TextUI" as ui
+Participant "catalogue:Catalogue" as catalogue
+Participant "parser:Parser" as parser
+Participant ":Command" as command
+
+activate Libmgr
+
+create ui
+Libmgr -> ui
+activate ui
+ui -> ui:print(LOGO)
+ui -> ui:print(WELCOME)
+return
+
+create catalogue
+Libmgr -> catalogue
+activate catalogue
+return
+
+create parser
+Libmgr -> parser
+activate parser
+return
+
+loop !userCommand.isExit()
+    Libmgr -> ui:read()
+    activate ui
+    return userInput:String
+    Libmgr -> parser:parse(userInput:String)
+    activate parser
+    create command
+    parser -> command
+    activate command
+    return userCommand:Command
+    return userCommand:Command
+    Libmgr -> command:execute(ui:TextUI, catalogue:Catalogue)
+    activate command
+    return
+    destroy command
+end
+
+destroy ui
+destroy catalogue
+destroy parser
+destroy Libmgr
+@enduml
