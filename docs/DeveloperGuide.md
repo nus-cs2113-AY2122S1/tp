@@ -15,6 +15,22 @@ This section describes some noteworthy details on how certain features are desig
 **API**: `Parser.java` {NOTE: this may change based on further implementations}
 
 (insert relevant information here about taking in user input and parsing it etc.)
+#### List Functionality
+![](images/ListDiagram.png)
+
+How List works:
+1. When the `parser` class parses `list` as the command from the user, a new `Command` object, `ListCommand` is created.
+2. The `ListCommand` constructor will parse through the user command to remove the empty space by calling `checkForEmptyCells`
+3. Then it would initialize the `listType` value depending on the `userCommand`
+4. This processed information would be passed back to `parser` then on to `Duke`.
+5. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order
+6. list can display 4 types of list depending on the `listType` 
+7. `list` : to list the Overall Schedule 
+8. `list -m` : to list all the members in the Overall Members List
+9. `list {Event_Num} -t` : to display all the tasks in a unique Event
+10. `list {Event_Num} t/{Task_Num}` : to display all the members involved in a specific task
+
+
 
 #### Delete Functionality
 How deleting works:
