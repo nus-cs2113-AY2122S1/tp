@@ -23,7 +23,9 @@ class SummaryManagerTest {
         actualInput.addAll(expectedInput);
         double timeElapsed = 10.9021;
         String gameMode = "Time-limited";
-        HashMap<String, Object> actual = SummaryManager.generateSummary(expectedInput, actualInput, timeElapsed, gameMode);
+        HashMap<String, Object> actual = SummaryManager.generateSummary(
+                expectedInput, actualInput, timeElapsed, gameMode
+        );
         HashMap<String, Object> expected = initializeExpectedOutput(
                 timeElapsed, gameMode, errorWordCount, correctWordCount, totalWordCount, errorWords
         );
@@ -58,7 +60,8 @@ class SummaryManagerTest {
         ArrayList<String[]> expectedInput = new ArrayList<>();
         expectedInput.add(new String[]{"one", "two", "three", "four"});
         expectedInput.add(new String[]{"five", "six", "seven", "eight", "nine", "ten"});
-        ArrayList<String[]> actualInput = new ArrayList<>();double timeElapsed = 10.9021;
+        ArrayList<String[]> actualInput = new ArrayList<>();
+        double timeElapsed = 10.9021;
         String gameMode = "Time-limited";
         int totalWordCount = expectedInput.get(0).length + expectedInput.get(1).length;
         int errorWordCount = totalWordCount;
@@ -74,6 +77,7 @@ class SummaryManagerTest {
         assertEquals(expected, actual);
 
     }
+
     HashMap<String, Object> initializeExpectedOutput(
             double timeElapsed, String gameMode, int errorWordCount,
             int correctWordCount, int totalWordCount, ArrayList<String> errorWords

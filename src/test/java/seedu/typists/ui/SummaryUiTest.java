@@ -19,6 +19,7 @@ class SummaryUiTest {
     //This code (lines 15 to 38) was referenced from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -62,7 +63,8 @@ class SummaryUiTest {
         int correctWordCount = 0;
         int totalWordCount = 10;
         ArrayList<String> errorWords = new ArrayList<>(
-                Arrays.asList(new String[]{"one","two","three","four","five","six","seven","eight","nine","ten"})
+                Arrays.asList(
+                        new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"})
         );
         HashMap<String, Object> summary = initializeSummary(
                 timeElapsed, gameMode, errorWordCount, correctWordCount, totalWordCount, errorWords
@@ -86,7 +88,6 @@ class SummaryUiTest {
         String actual = outputStreamCaptor.toString();
         assertEquals(expected, actual);
     }
-
 
 
     @Test

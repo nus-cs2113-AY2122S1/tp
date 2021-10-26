@@ -70,9 +70,9 @@ public class SummaryUi {
 
     static void printErrorWords(ArrayList<String> errorWords) {
         setUpLog();
-        assert errorWords!= null;
+        assert errorWords != null;
         System.out.print("Mistakes: ");
-        if (errorWords.size()==0) {
+        if (errorWords.size() == 0) {
             System.out.print("No words typed wrongly.\n");
             return;
         }
