@@ -1,6 +1,7 @@
 package medbot;
 
 
+import medbot.exceptions.MedBotParserException;
 import medbot.list.ListItem;
 
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
@@ -8,11 +9,13 @@ import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
     private int appointmentId = 0;
     private int patientId = 0;
     private int medicalStaffId = 0;
@@ -106,6 +109,7 @@ public class Appointment extends ListItem {
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 
+
     /**
      * Text to be written to storage file of a person.
      *
@@ -113,8 +117,25 @@ public class Appointment extends ListItem {
      */
     public String getStorageString() {
         return appointmentId + VERTICAL_LINE_SPACED
-                + getDateTimeString(dateTimeCode) + VERTICAL_LINE_SPACED
+                + getDateTimeStorageString(dateTimeCode) + VERTICAL_LINE_SPACED
                 + patientId + VERTICAL_LINE_SPACED
                 + medicalStaffId;
+    }
+
+    private String getDateTimeStorageString(int dateTimeCode) {
+        long epochSecond = (long) dateTimeCode * 60;
+        LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
+        return localDateTime.format(DATE_TIME_FORMATTER_STORAGE);
+    }
+
+    //TODO native methods
+    @Override
+    public void setId(int appointmentId) {
+        setAppointmentId(appointmentId);
+    }
+
+    @Override
+    public int getId() {
+        return getAppointmentId();
     }
 }
