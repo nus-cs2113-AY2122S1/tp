@@ -364,8 +364,8 @@ public class Ui {
         System.out.printf("Since you have already exceeded your %s OVERALL budget: $%.2f/$%.2f",
                 month, overallAmount, overallLimit);
         System.out.print(newLine);
-        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month +
-                        " " + budgetName + " budget!");
+        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
+                + " " + budgetName + " budget!");
         printLine();
     }
 
@@ -378,8 +378,8 @@ public class Ui {
         System.out.printf("Since you have also exceeded your %s OVERALL budget: $%.2f/$%.2f",
                 month, overallAmount, overallLimit);
         System.out.print(newLine);
-        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month +
-                " " + budgetName + " budget!");
+        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
+                + " " + budgetName + " budget!");
         printLine();
     }
 
