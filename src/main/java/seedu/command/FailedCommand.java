@@ -24,6 +24,7 @@ public class FailedCommand extends Command {
         case INVALID_NUM: // Fallthrough
         case INVALID_FORMAT: // Fallthrough
         case NUM_OUT_OF_BOUND: // Fallthrough
+        case INVALID_DELETE: //Fallthrough
             invalidUserInputExecute();
             break;
         case MISSING_ARG: // Fallthrough
@@ -52,6 +53,9 @@ public class FailedCommand extends Command {
             break;
         case NUM_OUT_OF_BOUND:
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+            break;
+        case INVALID_DELETE:
+            ExceptionTextUi.invalidDeleteFlag();
             break;
         default:
             return;
