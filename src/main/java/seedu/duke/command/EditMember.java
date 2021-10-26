@@ -12,6 +12,8 @@ import seedu.duke.member.MemberList;
  */
 public class EditMember {
 
+    private Member oldMember;
+
     /**
      * Constructor. Edits a Member in MemberList. Member is identified by its index.
      *
@@ -25,7 +27,7 @@ public class EditMember {
 
             Member memberToChange = members.getMemberList().get(index - 1);
 
-            Member oldMember = new Member(memberToChange);
+            oldMember = new Member(memberToChange);
 
             if (!toChange.getName().equals("")) {
                 memberToChange.setName(toChange.getName());

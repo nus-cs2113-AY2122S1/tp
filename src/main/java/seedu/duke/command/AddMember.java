@@ -59,19 +59,21 @@ public class AddMember {
         String validPhoneNumberRegex = "^\\d{8}";
 
         boolean validName = name != null && !name.trim().isEmpty();
-        boolean validStudentNumber = studentNumber.matches(validStudentNumberRegex);
-        boolean validGender = gender.matches(validGenderRegex);
-        boolean validPhoneNumber = phoneNumber.matches(validPhoneNumberRegex);
-
         if (!validName) {
             throw new InvalidAddMemberException(invalidNameErrorMessage);
         }
+
+        boolean validStudentNumber = studentNumber.matches(validStudentNumberRegex);
         if (!validStudentNumber) {
             throw new InvalidAddMemberException(invalidStudentNumberErrorMessage);
         }
+
+        boolean validGender = gender.matches(validGenderRegex);
         if (!validGender) {
             throw new InvalidAddMemberException(invalidGenderErrorMessage);
         }
+
+        boolean validPhoneNumber = phoneNumber.matches(validPhoneNumberRegex);
         if (!validPhoneNumber) {
             throw new InvalidAddMemberException(invalidPhoneNumberErrorMessage);
         }
