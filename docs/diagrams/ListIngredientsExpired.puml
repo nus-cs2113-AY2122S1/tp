@@ -2,40 +2,52 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+
  -> Parser: parseCommand()
 activate Parser
+
 Parser -> ListIngredientsExpiredCommand: execute()
 activate ListIngredientsExpiredCommand
+
 ListIngredientsExpiredCommand -> ingredientRepository: findExpiredIngredients()
 activate ingredientRepository
-ingredientRepository -> ingredientRepository: values()
 
-ingredientRepository -> ingredientStorage: getIngredient()
-activate ingredientStorage
-ingredientStorage -> ingredientRepository: ingredient: Ingredient
+loop ingredientStorages
 
- ingredientRepository -> expiredIngredientStorageIngredientStorage: new IngredientStorage(ingredient)
- activate expiredIngredientStorage
- expiredIngredientStorage -> ingredientRepository: expiredIngredientStorage
+    ingredientRepository -> IngredientStorage: getIngredient()
+    activate IngredientStorage
 
+    IngredientStorage --> ingredientRepository: ingredient: Ingredient
+    deactivate IngredientStorage
 
+    ingredientRepository -> IngredientStorage: new(ingredient: Ingredient)
+    activate IngredientStorage
 
-'    loop ingredientRepository.size
-'        activate ingredientRepository
-'        ingredientRepository -> ingredientStorage: values()
-'        activate ingredientStorage
-'        ingredientStorage -> Ingredient: toString()
-'        activate Ingredient
-'
-'        Ingredient --> ingredientStorage: String
-'        deactivate Ingredient
-'        ingredientStorage --> ingredientRepository: String
-'        deactivate ingredientStorage
-'    end
-'ingredientRepository --> ListIngredientsExpiredCommand: String
-'deactivate ingredientRepository
-'ListIngredientsExpiredCommand --> Parser: String
-'deactivate ListIngredientsExpiredCommand
-'<-- Parser: Command
-'deactivate Parser
+    IngredientStorage -> ingredientRepository: expiredIngredientStorage: IngredientStorage
+    deactivate IngredientStorage
+
+    loop ingredientStorageBatches
+
+            opt expiryDateOfBatch < currentDate
+
+                ingredientRepository -> expiredIngredientStorage: add( ingredientBatch)
+                activate expiredIngredientStorage
+
+            end
+    end
+
+    expiredIngredientStorage --> ingredientRepository:expiredIngredientStorage: IngredientStorage
+    deactivate expiredIngredientStorage
+
+end
+
+ingredientRepository --> ListIngredientsExpiredCommand: String
+deactivate ingredientRepository
+
+ListIngredientsExpiredCommand --> Parser: String
+deactivate ListIngredientsExpiredCommand
+
+<-- Parser: Command
+deactivate Parser
+
 @enduml

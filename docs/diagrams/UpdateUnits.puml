@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> Parser: parseCommand()
+activate Parser
+
+Parser -> UpdateUnitsCommand: execute()
+activate UpdateUnitsCommand
+
+UpdateUnitsCommand -> IngredientRepository: find(ingredientName: String)
+activate IngredientRepository
+
+IngredientRepository --> UpdateUnitsCommand: ingredientStorage: IngredientStorage
+deactivate IngredientRepository
+
+UpdateUnitsCommand -> IngredientStorage: updateUnits(unit: String)
+activate IngredientStorage
+
+IngredientStorage --> UpdateUnitsCommand
+deactivate IngredientStorage
+
+UpdateUnitsCommand -> RecipeList: updateUnits(ingredientName: String, unit: String)
+activate RecipeList
+
+RecipeList --> UpdateUnitsCommand:
+deactivate RecipeList
+
+UpdateUnitsCommand --> Parser: String
+deactivate UpdateUnitsCommand
+
+<-- Parser: Command
+deactivate Parser
+
+@enduml

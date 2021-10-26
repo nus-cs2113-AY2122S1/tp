@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ -> Parser: parseCommand()
+activate Parser
+
+Parser -> DeleteExpiredIngredientsCommand: execute()
+activate DeleteExpiredIngredientsCommand
+
+DeleteExpiredIngredientsCommand -> IngredientRepository: deleteExpiredIngredients()
+activate IngredientRepository
+
+loop ingredientStorages
+
+    loop ingredientStorageBatches
+
+        alt batchExpiryDate < currentDate
+
+            IngredientRepository -> expiryDatesToRemove: add(ingredientStorageBatch)
+            activate expiryDatesToRemove
+
+        end
+
+    end
+
+    expiryDatesToRemove -> IngredientRepository: expiryDatesToRemove
+    deactivate expiryDatesToRemove
+
+    loop expiryDatesToRemove
+
+        IngredientRepository -> IngredientStorage: remove(expiryDate)
+        activate IngredientStorage
+
+        IngredientStorage --> IngredientRepository
+        deactivate IngredientStorage
+
+    end
+
+end
+
+IngredientStorage -> DeleteExpiredIngredientsCommand: Boolean
+deactivate IngredientStorage
+
+DeleteExpiredIngredientsCommand --> Parser: String
+deactivate DeleteExpiredIngredientsCommand
+
+<-- Parser: Command
+deactivate Parser
+
+@enduml

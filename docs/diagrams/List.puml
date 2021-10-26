@@ -2,31 +2,31 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+
  -> Parser: parseCommand()
 activate Parser
+
 Parser -> ListCommand: execute()
 activate ListCommand
-ListCommand -> ingredientRepository: printWholeList()
-activate ingredientRepository
-ingredientRepository -> ingredientRepository: values()
 
-    loop values
-        ingredientRepository -> ingredientStorage
-        activate ingredientStorage
+opt ingredientRepository.size() >0
+    ListCommand -> ingredientRepository: printWholeList()
+    activate ingredientRepository
 
-        loop numberOfBatches
-            ingredientStorage -> Ingredient: toString()
-            activate Ingredient
-            Ingredient --> ingredientStorage: String
-            deactivate Ingredient
+        loop ingredientStorages
+            ingredientRepository -> ingredientStorage
+            activate ingredientStorage
+
+            ingredientStorage --> ingredientRepository: String
+            deactivate ingredientStorage
         end
-        ingredientStorage --> ingredientRepository: String
-        deactivate ingredientStorage
-    end
 
-ingredientRepository --> ListCommand: String
+    ingredientRepository --> ListCommand: String
+end
+
 deactivate ingredientRepository
 ListCommand --> Parser: String
+
 deactivate ListCommand
 <-- Parser: Command
 deactivate Parser
