@@ -1,16 +1,12 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.flags.EventFlag;
 import seedu.duke.command.flags.ReminderFlag;
 import seedu.duke.local.DataManager;
-import seedu.duke.local.TasktoLineConverter;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
-import seedu.duke.task.factory.TodoFactory;
 import seedu.duke.task.taskmanager.TaskManager;
-import seedu.duke.task.taskmanager.TaskManagerObserver;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
@@ -48,7 +44,6 @@ public class ReminderCommandTest {
         taskManager.addTask(event);
         DataManager.setUpDataManager(taskManager);
 
-        String result = "";
         Map<String, String> arguments1 = new HashMap<>();
         arguments1.put(Command.MAIN_ARGUMENT, "1");
         arguments1.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
@@ -75,6 +70,8 @@ public class ReminderCommandTest {
         Command customize4 = new ReminderCommand(taskManager, arguments4);
         customize4.executeCommand();
 
+        ArrayList<String> results = DataManager.getStringLineList();
+
         expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|"
                 + "10|HEY!");
         expectedOut.add("todo|go jogging|null|medium|none|null|null");
@@ -83,6 +80,6 @@ public class ReminderCommandTest {
         expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|"
                 + "10|Reminder! 10 min before the following task:");
 
-        assertEquals(expectedOut, DataManager.getStringLineList());
+        assertEquals(expectedOut, results);
     }
 }
