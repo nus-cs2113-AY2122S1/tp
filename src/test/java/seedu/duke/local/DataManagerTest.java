@@ -39,13 +39,13 @@ public class DataManagerTest {
         DataManager.addTaskLine(TasktoLineConverter.convertTaskToLine(deadline));
         DataManager.addTaskLine(TasktoLineConverter.convertTaskToLine(event));
 
-        expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|" +
-                "10|Reminder! 10 min before the following task:");
+        expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|"
+                + "10|Reminder! 10 min before the following task:");
         expectedOut.add("todo|go jogging|null|medium|none|null|null");
-        expectedOut.add("deadline|return book|2021-10-30T02:00|medium|weekly|" +
-                "10|Reminder! 10 min before the following task:");
-        expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|" +
-                "10|Reminder! 10 min before the following task:");
+        expectedOut.add("deadline|return book|2021-10-30T02:00|medium|weekly|"
+                + "10|Reminder! 10 min before the following task:");
+        expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|"
+                + "10|Reminder! 10 min before the following task:");
 
         assertEquals(expectedOut, DataManager.getStringLineList());
     }

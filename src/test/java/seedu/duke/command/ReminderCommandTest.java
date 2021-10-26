@@ -38,7 +38,6 @@ public class ReminderCommandTest {
 
     @Test
     void executeCommandTest() throws Exception {
-        String result = "";
 
         todoReminder = new Todo("go jogging", PriorityEnum.LOW, startDate, RecurrenceEnum.DAILY);
         todoNoReminder = new Todo("go jogging");
@@ -50,6 +49,7 @@ public class ReminderCommandTest {
         taskManager.addTask(event);
         DataManager.setUpDataManager(taskManager);
 
+        String result = "";
         Map<String, String> arguments1 = new HashMap<>();
         arguments1.put(Command.MAIN_ARGUMENT, "1");
         arguments1.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
@@ -76,13 +76,13 @@ public class ReminderCommandTest {
         Command customize4 = new ReminderCommand(taskManager, arguments4);
         result += customize4.executeCommand().getMessage();
 
-        expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|" +
-                "10|HEY!");
+        expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|"
+                + "10|HEY!");
         expectedOut.add("todo|go jogging|null|medium|none|null|null");
-        expectedOut.add("deadline|return book|2021-10-30T02:00|medium|weekly|" +
-                "15|HEY!");
-        expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|" +
-                "10|Reminder! 10 min before the following task:");
+        expectedOut.add("deadline|return book|2021-10-30T02:00|medium|weekly|"
+                + "15|HEY!");
+        expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|"
+                + "10|Reminder! 10 min before the following task:");
 
         assertEquals(expectedOut, DataManager.getStringLineList());
     }
