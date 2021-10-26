@@ -1,10 +1,20 @@
 package seedu.situs.parser;
 
-import seedu.situs.Situs;
-import seedu.situs.command.*;
+import seedu.situs.command.AddCommand;
+import seedu.situs.command.AlertCommand;
+import seedu.situs.command.AlertExpiringSoonCommand;
+import seedu.situs.command.AlertLowStockCommand;
+import seedu.situs.command.DateCommand;
+import seedu.situs.command.DeleteCommand;
+import seedu.situs.command.ExpireCommand;
+import seedu.situs.command.HelpCommand;
+import seedu.situs.command.ListCommand;
+import seedu.situs.command.UpdateCommand;
+import seedu.situs.command.FindCommand;
+import seedu.situs.command.SubtractCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
-import seedu.situs.storage.Storage;
+
 
 
 import java.io.IOException;
@@ -160,9 +170,6 @@ public class Parser {
                     new Ingredient(ingredientName, ingredientAmount, ingredientExpiry);
             String resultMsg = new UpdateCommand(updatedIngredient).run();
 
-            if (resultMsg.equals(EMPTY_STRING)) {
-                resultMsg = NOT_FOUND_MESSAGE;
-            }
             return resultMsg;
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
