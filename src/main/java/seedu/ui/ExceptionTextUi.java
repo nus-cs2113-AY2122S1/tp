@@ -162,11 +162,29 @@ public class ExceptionTextUi {
         if (listSize == 0) {
             message = "There are no contacts stored in ConTech.";
         } else if (listSize == 1) {
-            message = "The number you have input is out of range.\n"
+            message = "The index you have input is out of range.\n"
                     + "You only have 1 contact stored.";
         } else {
-            message = "The number you have input is out of range.\n"
-                    + "Please input a number between 0 and " + maxIndex + ".";
+            message = "The index you have input is out of range.\n"
+                    + "Please input a index between 0 and " + maxIndex;
+        }
+        printDoubleLineMessage(message);
+    }
+
+    public static void numOutOfRangeEditMessage(int listSize) {
+        String message;
+        int maxIndex = listSize - 1;
+        if (listSize == 0) {
+            message = "There are no contacts stored in ConTech.\n"
+                    + "Please input index -1 if you wish to edit your Personal Contact details.";
+        } else if (listSize == 1) {
+            message = "The index you have input is out of range.\n"
+                    + "You only have 1 contact stored.\n"
+                    + "Please input index -1 if you wish to edit your Personal Contact details.";
+        } else {
+            message = "The index you have input is out of range.\n"
+                    + "Please input a number between 0 and " + maxIndex + "to edit saved contacts.\n"
+                    + "Otherwise, input index -1 if you wish to edit your Personal Contact details.";
         }
         printDoubleLineMessage(message);
     }
