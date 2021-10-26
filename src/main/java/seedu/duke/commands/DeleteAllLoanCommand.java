@@ -17,9 +17,9 @@ public class DeleteAllLoanCommand extends DeleteCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        int sizeBeforeDeletion = recordList.getLoanListSize(month);
+        int sizeBeforeDeletion = allRecordList.getLoanListSize(month);
         for (int i = 1; i <= sizeBeforeDeletion; i++) {
-            recordList.deleteLoan(1, month);
+            allRecordList.deleteLoan(1, month);
         }
         TextUi.showAllLoanDeletedMessage();
     }

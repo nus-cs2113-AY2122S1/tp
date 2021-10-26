@@ -21,10 +21,10 @@ import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
-import seedu.duke.commands.StatBudgetCommand;
 import seedu.duke.commands.StatCommand;
 import seedu.duke.commands.StatYearCommand;
 import seedu.duke.commands.YearCommand;
+import seedu.duke.commands.StatCategoryCommand;
 import seedu.duke.data.records.Category;
 import seedu.duke.exception.EmptyDescriptionException;
 
@@ -152,8 +152,8 @@ public class Parser {
     private Command prepareStatCommand(String commandParams) {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         switch (statOption) {
-        case ("-b"):
-            return prepareStatBudgetCommand(commandParams);
+        case ("-c"):
+            return prepareStatCategoryCommand(commandParams);
         case ("-l"):
             return prepareStatYearCommand(commandParams);
         default:
@@ -170,13 +170,13 @@ public class Parser {
         return new StatYearCommand(type);
     }
 
-    private Command prepareStatBudgetCommand(String commandParams) {
+    private Command prepareStatCategoryCommand(String commandParams) {
         String[] split = commandParams.trim().split("m/", 2);
         assert split[0].equals("");
 
         int month = Integer.parseInt(split[1].trim());
 
-        return new StatBudgetCommand(month);
+        return new StatCategoryCommand(month);
     }
 
     private Command prepareEditCommand(String commandParams) throws EmptyDescriptionException {

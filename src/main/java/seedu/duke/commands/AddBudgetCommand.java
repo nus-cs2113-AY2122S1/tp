@@ -16,7 +16,7 @@ public class AddBudgetCommand extends AddCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        recordList.addBudget(amount, month, isLoadingStorage);
+        allRecordList.addBudget(amount, month, isLoadingStorage);
         TextUi.showBudgetAddedMessage(amount, isLoadingStorage);
     }
 }

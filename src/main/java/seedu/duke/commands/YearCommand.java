@@ -14,7 +14,7 @@ public class YearCommand extends Command {
     public void execute(boolean isLoadingStorage) {
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
-        recordList.clearAll();
-        recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
+        allRecordList.clearAll();
+        allRecordList.storageDirectory = budgetStorage.loadStorage(allRecordList, recordListDirectory);
     }
 }

@@ -126,12 +126,27 @@ public class RecordList {
     }
 
     public boolean checkOverspending() {
+        double totalSpending = getTotalAmountSpent();
+
+        return (totalSpending > budget.getAmount() && budget.getAmount() > 0);
+    }
+
+    public double getTotalAmountSpent() {
         double totalSpending = 0.0;
         for (Record record: expenditureRecords) {
             totalSpending += record.getAmount();
         }
+        return totalSpending;
+    }
 
-        return (totalSpending > budget.getAmount() && budget.getAmount() > 0);
+    public double getCategorySpending(String categoryString, double categorySpending) {
+        for (Expenditure expenditure: expenditureRecords) {
+            String expenditureCategory = expenditure.getCategory();
+            if (expenditureCategory.equals(categoryString)) {
+                categorySpending += expenditure.getAmount();
+            }
+        }
+        return categorySpending;
     }
 
     public int getSize() {
