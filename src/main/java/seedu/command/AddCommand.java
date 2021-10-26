@@ -93,8 +93,13 @@ public class AddCommand extends Command {
             String location = addUI.getReply(FIFTH_QN).trim();
 
             TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime, location);
+            if (timetable.isEventConflict(event)) {
+                throw new AddException("Selected timeslot is occupied, please delete before proceeding");
+            }
 
             timetable.addEvent(event.getDayOfWeek(), event);
+            timetable.addToEvents(event);
+
             addUI.printEventMessage(event, date);
         }
     }

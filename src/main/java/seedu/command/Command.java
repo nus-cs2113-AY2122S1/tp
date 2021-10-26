@@ -1,9 +1,6 @@
 package seedu.command;
 
-import seedu.exceptions.AddException;
-import seedu.exceptions.FetchException;
-import seedu.exceptions.IntegerException;
-import seedu.exceptions.ModuleExistException;
+import seedu.exceptions.*;
 
 public abstract class Command {
 
@@ -11,7 +8,7 @@ public abstract class Command {
 
     }
 
-    public abstract void execute() throws IntegerException, ModuleExistException, FetchException, AddException;
+    public abstract void execute() throws IntegerException, ModuleExistException, FetchException, AddException, EditException;
 
     public boolean isExit() {
         return this instanceof ExitCommand;

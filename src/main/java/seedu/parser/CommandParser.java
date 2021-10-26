@@ -1,23 +1,7 @@
 package seedu.parser;
 
 import org.w3c.dom.Text;
-import seedu.command.AddCommand;
-import seedu.command.CalculateCapCommand;
-import seedu.command.ChangeSemesterCommand;
-import seedu.command.CheckCommand;
-import seedu.command.ClearCommand;
-import seedu.command.Command;
-import seedu.command.DeleteCommand;
-import seedu.command.ExitCommand;
-import seedu.command.HelpCommand;
-import seedu.command.InvalidCommand;
-import seedu.command.RemoveCommand;
-import seedu.command.SearchCommand;
-import seedu.command.ShowCommand;
-import seedu.command.StoreResultsCommand;
-import seedu.command.TimetableCommand;
-import seedu.command.TranscriptCommand;
-import seedu.command.UpdateCommand;
+import seedu.command.*;
 import seedu.command.flags.AddFlag;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
@@ -85,6 +69,8 @@ public class CommandParser {
             command = parseRemoveCommand(text);
         } else if (lowerCaseText.startsWith("transcript")) {
             command = new TranscriptCommand();
+        } else if (lowerCaseText.startsWith("edit")) {
+            command = new EditCommand(timetable);
         } else if (lowerCaseText.startsWith("semester")) {
             command = new ChangeSemesterCommand(timetable);
         } else {
@@ -141,8 +127,6 @@ public class CommandParser {
         if (split.length < 2 || split[0].equals("") || split[1].equals("")) {
             isErrorThrown = true;
             throw new UniModsException(TextUi.ERROR_INVALID_RESULT_COMMAND);
-        } else {
-            return;
         }
     }
 

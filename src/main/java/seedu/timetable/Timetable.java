@@ -26,6 +26,7 @@ public class Timetable implements Comparable<Timetable> {
     private int earliestHour;
     private int latestHour;
 
+    private final ArrayList<TimetableUserItem> events = new ArrayList<>();
     private final ArrayList<Module> modules;
     private final TimetableLogger logger = new TimetableLogger();
 
@@ -211,7 +212,7 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Calls the function deleteFromSchedule to delete the module from the
+     * Calls the function deleteLessonFromSchedule to delete the module from the
      * timetable's daily plan.
      *
      * @param module Module to be Deleted
@@ -219,13 +220,13 @@ public class Timetable implements Comparable<Timetable> {
      */
     public void deleteFromLessons(Module module) {
         String moduleCode = module.getModuleCode();
-        deleteFromSchedule(moduleCode, monday);
-        deleteFromSchedule(moduleCode, tuesday);
-        deleteFromSchedule(moduleCode, wednesday);
-        deleteFromSchedule(moduleCode, thursday);
-        deleteFromSchedule(moduleCode, friday);
-        deleteFromSchedule(moduleCode, saturday);
-        deleteFromSchedule(moduleCode, sunday);
+        deleteLessonFromSchedule(moduleCode, monday);
+        deleteLessonFromSchedule(moduleCode, tuesday);
+        deleteLessonFromSchedule(moduleCode, wednesday);
+        deleteLessonFromSchedule(moduleCode, thursday);
+        deleteLessonFromSchedule(moduleCode, friday);
+        deleteLessonFromSchedule(moduleCode, saturday);
+        deleteLessonFromSchedule(moduleCode, sunday);
     }
 
     /**
@@ -237,10 +238,43 @@ public class Timetable implements Comparable<Timetable> {
      * @param moduleCode ModuleCode to be Deleted
      * @see Module
      */
-    public void deleteFromSchedule(String moduleCode, TimetableItem[] schedule) {
+    public void deleteLessonFromSchedule(String moduleCode, TimetableItem[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null && schedule[i].getTitle().equals(moduleCode)) {
                 schedule[i] = null;
+            }
+        }
+    }
+
+    public void editEventFromSchedule(TimetableUserItem event, String input) {
+        TimetableItem[] schedule = getSunday();
+        switch (event.getParsedDay()) {
+        case MONDAY:
+            schedule = getMonday();
+            break;
+        case TUESDAY:
+            schedule = getTuesday();
+            break;
+        case WEDNESDAY:
+            schedule = getWednesday();
+            break;
+        case THURSDAY:
+            schedule = getThursday();
+            break;
+        case FRIDAY:
+            schedule = getFriday();
+            break;
+        case SATURDAY:
+            schedule = getSaturday();
+            break;
+        case SUNDAY:
+            schedule = getSunday();
+            break;
+        }
+        String title = event.getTitle();
+        for (int i = 0; i < schedule.length; i++) {
+            if (schedule[i] != null && schedule[i].getTitle().equals(title)) {
+                schedule[i].setTitle(input);
             }
         }
     }
@@ -392,6 +426,10 @@ public class Timetable implements Comparable<Timetable> {
         return this.sunday;
     }
 
+    public ArrayList<TimetableUserItem> getEvents() {
+        return events;
+    }
+
     @Override
     public int compareTo(Timetable timetable) {
         int flag = 0;
@@ -413,11 +451,25 @@ public class Timetable implements Comparable<Timetable> {
         return false;
     }
 
-    public boolean isEventConflict(TimetableItem timetableItem) {
-
+    public boolean isEventConflict(TimetableUserItem timetableUserItem) {
+        ArrayList<Integer> duration = timetableUserItem.getStartToEndTime();
+        for (Integer time : duration) {
+            if (isEventExist(timetableUserItem, time)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isLessonExist(Lesson lesson, Integer time) {
         return getLesson(lesson.getParsedDay(), time) != null;
+    }
+
+    public boolean isEventExist(TimetableUserItem timetableUserItem, Integer time) {
+        return getLesson(timetableUserItem.getParsedDay(), time) != null;
+    }
+    
+    public void addToEvents(TimetableUserItem timetableUserItem) {
+        events.add(timetableUserItem);
     }
 }

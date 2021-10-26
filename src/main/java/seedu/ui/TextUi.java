@@ -4,6 +4,8 @@ import seedu.command.flags.AddFlag;
 import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
+import seedu.timetable.Timetable;
+import seedu.timetable.TimetableUserItem;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -81,7 +83,7 @@ public class TextUi {
     public static AddFlag getAddFlag() throws UniModsException {
         System.out.println("1. Module");
         System.out.println("2. Event");
-        System.out.print("Option: ");
+        System.out.print("Choose your option: ");
         String input = in.nextLine();
         while (input.isEmpty()) {
             input = in.next();
@@ -95,7 +97,7 @@ public class TextUi {
         }
     }
 
-    public String getReply(String question) {
+    public static String getReply(String question) {
         System.out.print(question);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -293,5 +295,17 @@ public class TextUi {
             currentSem = "Semester 1";
         }
         System.out.println("Current semester: " + currentSem);
+    }
+
+    public static void printEvents(Timetable timetable) {
+        ArrayList<TimetableUserItem> timetableUserItem = timetable.getEvents();
+        int serial = SERIAL;
+        for (TimetableUserItem userItem : timetableUserItem) {
+            System.out.println(serial + ": " + userItem.toString());
+        }
+    }
+
+    public static void printEditMessage() {
+        System.out.println("Noted, event name has been changed");
     }
 }
