@@ -1,9 +1,9 @@
 package seedu.duke.model.task;
 
 import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.core.Priority;
-import seedu.duke.model.task.exceptions.DeserializeTaskException;
+import seedu.duke.DukeException;
+import seedu.duke.commons.core.Messages;
 import seedu.duke.ui.Ui;
 
 public class Task {
@@ -68,21 +68,10 @@ public class Task {
         try {
             String[] params = line.split("\\s*[|]\\s*");
 
-            String dayOfTheWeek = params[2];
-            if (!DayOfTheWeek.is(dayOfTheWeek)) {
-                throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
-            }
-            dayOfTheWeek = DayOfTheWeek.toProper(dayOfTheWeek);
-
-            String priority = params[4];
-            if (!Priority.is(priority)) {
-                throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
-            }
-            priority = Priority.toProper(priority);
-
             String title = params[1];
-            String information = params[3];
-
+            String dayOfTheWeek = DayOfTheWeek.toProper(params[2]);
+            String priority = Priority.toProper(params[3]);
+            String information = params[4];
             Task task = new Task(title, dayOfTheWeek, priority, information);
 
             boolean isTaskDone = params[0].equals("1");
@@ -91,7 +80,7 @@ public class Task {
             }
 
             return task;
-        } catch (ArrayIndexOutOfBoundsException | DeserializeTaskException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             // Ignoring the particular line
             ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
             return null;
