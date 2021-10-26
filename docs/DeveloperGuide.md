@@ -66,17 +66,30 @@ Step 9. The user executes `remove /map 4 1` command to remove the first mapping 
 
 Step 10. The user executes `exit` command to terminate the program.
 
-### Ui
+### User Interface
 
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
 
 <img src="images/Ui_UML.png" width = "280"/>
 
-The UI component 
-* Displays different object types such as University, Module and Module mapping.
-* Provides means of customization for display formatting. 
-* Summarizes different parts of the program into callable methods.
+The above class diagram illustrates the relationship between the classes within the Ui components.
+
+The UI class
+* Contains helper methods for the other Ui classes.
+* Provides means of printing constants.
+
+The UiInvalid class contains methods for printing messages from the Parser component.
+
+The UiMapping class contains methods for printing Module Mappings. 
+
+The UiModule class contains methods for printing Modules. 
+
+The UiUniversity class contains methods for printing Universities. 
+
+The UiWelcome class contains a method for printing the welcome greeting. 
+
+
 
 ### Storage
 
