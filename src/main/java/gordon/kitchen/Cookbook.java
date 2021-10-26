@@ -272,7 +272,7 @@ public class Cookbook {
     /**
      * <h2>addTagToRecipes(tag).</h2>
      *
-     * <p>This method links a Tag to all it's associated Recipes</p>
+     * <p>This method links a Tag to all its associated Recipes</p>
      * @param tag The tag that contains the associated recipes
      */
     public void addTagToRecipes(Tag tag) {
@@ -284,6 +284,14 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>void untagTagFromRecipe(tag, recipeName).</h2>
+     *
+     * <p>This method removes a specified tag from a specified recipe.</p>
+     *
+     * @param tag  The tag that is to be removed
+     * @param recipeName  The recipe that requires tag removal
+     */
     public void untagTagFromRecipe(Tag tag, String recipeName) {
         for (Recipe recipe : recipes) {
             // ensure that we fetch the correct Recipe
@@ -296,6 +304,13 @@ public class Cookbook {
         }
     }
 
+    /**.
+     * <h2>void deleteTagFromRecipes(tag).</h2>
+     *
+     * <p>This method removes all instances of a specified tag from all its associated recipes.</p>
+     *
+     * @param tag  The tag that needs to be removed from all associated recipes
+     */
     public void deleteTagFromRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
@@ -316,6 +331,13 @@ public class Cookbook {
         return output.toString();
     }
 
+    /**
+     * <h2>Tag extractCookbookTag(tagName).</h2>
+     * 
+     * @param tagName  The name of the tag to be extracted
+     * @return  The extracted tag
+     * @throws GordonException  if no matching tag is found
+     */
     public Tag extractCookbookTag(String tagName) throws GordonException {
         for (Tag tag : cookbookTags) {
             if (tag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
