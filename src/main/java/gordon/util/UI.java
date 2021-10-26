@@ -18,11 +18,11 @@ public class UI {
         System.out.println("4. Find a recipe: find \"keyword\" \"number/item name\","
                 + "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time");
         System.out.println("5. Check a specific recipe: check \"Name of Recipe\"");
-        System.out.println("6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories ");
-        System.out.println("7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel ");
+        System.out.println("6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories");
+        System.out.println("7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel");
         System.out.println("8. Add cooking and preparation time to recipe: "
                 + "set \"recipe name\" \"/time\" cookingTime \",\" preparationTime");
-        System.out.println("9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice ");
+        System.out.println("9. Add price to recipe: set \"recipe name\" \"/price\" recipePrice");
         System.out.println("10. Tag a recipe: tag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\"");
         System.out.println("11. Untag a recipe: untag \"/ recipe name\" \"/ tagName1 + tagName2 + ...\"");
         System.out.println("12. Delete tags from Cookbook: deleteTag \"/ tagName1 + tagName2 + ...\"");
