@@ -181,7 +181,7 @@ Add a partner university the user is interested into the user selected universit
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
-This command accepts either the `<UNIVERSITY_INDEX>` or `<![img.png](img.png)UNIVERSITY_NAME>` as arguments. 
+This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. 
 The `<UNIVERSITY_INDEX>` can be found via `list /muni` command. 
 </div> 
 
