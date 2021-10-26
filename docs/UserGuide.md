@@ -41,13 +41,22 @@ List all expenses added to the current trip.
 
 To view all expenses in a trip, ensure you are already inside a trip, then type ```view```
 
+####View Expenses By Index
+
+Show expense with corresponding index in the current trip. User must already be inside a trip and 
+have at least 1 expense.
+
+```view index```
+
+####Filter Expenses By Attributes
+
 To filter the list of expenses (i.e. only show expenses matching the entered attribute information), type
 
 ```view filter [expense-attribute] [attribute-information]```
 
 For example, to only show expenses in Johor Bahru, enter
 
-```view filter 1 description Johor Bahru```
+```view filter description Johor Bahru```
 
 
 Be sure that the ```expense-attribute``` information entered is exactly the same or a substring of what is stored, otherwise the program may not be able to find the expense. 
@@ -56,7 +65,7 @@ This means that if you had originally entered JB as the expense location, filter
 
 Note that the program currently only supports filtering using a single attribute.
 
-
+####
 
 ## FAQ
 
