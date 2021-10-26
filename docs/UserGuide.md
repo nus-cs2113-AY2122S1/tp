@@ -6,12 +6,14 @@
 If you are a computing professional that often uses the command line for work, **ConTech** can get your contact 
 management tasks done faster than any traditional GUI app. 
 
-With our `add`, `edit`, `view`, and many more [features](#features) specifically set for computing-related contacts 
-such as saving a colleague's GitHub username, **ConTech** aims to improve your efficiency at work by cutting down the
-time required to look up for various usernames when working with colleagues. 
+With our various [features](#features) such as `add`, `edit`, `view`, and other commands, you can easily perform such 
+actions on your **ConTech** Book in a quick and efficient manner. **ConTech** is optimised for computing-related contacts 
+such as saving a colleague's GitHub username or even mass-loading from a list of contacts. **ConTech** aims to improve your 
+efficiency at work by cutting down the time required to look up for various usernames when working with colleagues. 
 
 * **[Quick Start](#start)**
 * **[Features](#features)**
+    * **[Contact flags : `-flag`](#flag)**
     * **[Viewing help : `help`](#help)**
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
@@ -49,60 +51,19 @@ time required to look up for various usernames when working with colleagues.
 <a name="features"></a>
 ## Features 
 
-<a name="help"></a>
-### Viewing help: `help`
-Displays a help message explaining what commands are available and each input format.
+<a name="flag"></a>
+### Contact flags: `-flag`
+When using commands such as `add`,`edit` and `search`, the user can specify details with the use of flags in the form `-FLAG`.
 
-Usage: `help`
+ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill
+the fields. These `flags` include:
+- `-n`: for your contact's name
+- `-g`: for your contact's GitHub account username
+- `-l`: for your contact's LinkedIn handle
+- `-te`: for your contact's Telegram handle
+- `-tw`: for your contact's Twitter handle
+- `-e`: for your contact's email address
 
-Expected outcome of usage:
-
-```
-help
-____________________________________________________________
-add: ConTech adds the specified contact with provided parameters.
- Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
- Note: Parameters need not be in order and are optional except for NAME.
- Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-
-ls: Displays the name of all saved contacts.
- Example: ls
-
-edit: Edit any parameter in an existing contact.
- Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
- Note: Parameters need not be in order and are optional except for INDEX.
-       "me" is used as the INDEX for personal contact.
- Examples: edit 1 -e john.doe@email.com
-           edit me -e john.doe@email.com
-
-view: Displays all details for index specified contact.
- Parameter: INDEX
- Note: Index starts from 0.
- Example: view 2
-
-me: Displays all details for personal contact.
- Example: me
-
-rm: Deletes the index specified contact.
- Parameter: INDEX
- Note: Index starts from 0.
-       "all" is used as the INDEX to delete all contacts.
- Examples: rm 0
-           rm all
-
-search: Search for a contact containing a specified query.
- Note: Flags may be used to specify a detail type to search.
-       If no flag is specified, contact name is searched by default.
- Example: search -g QUERY
-
-help: Displays application usage instructions.
- Example: help
-
-import: Imports contacts from a CSV Text File.
- Note: Please ensure that data is saved in data/import.txt
- Example: import
-____________________________________________________________
-```
 
 <a name="add"></a>
 ### Adding a contact: `add`
@@ -111,16 +72,9 @@ Adds a specified contact to the ConTech Book.
 
 Usage: `add -n NAME -g GITHUB -l LINKEDIN -te TELEGRAM -tw TWITTER -e EMAIL`
 
-- ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill 
-the fields. These `flags` include:
-  - `-n`: for your contact's name
-  - `-g`: for your contact's GitHub account username
-  - `-l`: for your contact's LinkedIn handle
-  - `-te`: for your contact's Telegram handle
-  - `-tw`: for your contact's Twitter handle
-  - `-e`: for your contact's email
 - ConTech is robust and allows you to specify your fields in any order.
 - The `-n` name field is the only compulsory field required to add a contact, the rest are optional.
+- Up to five other `FLAGS` and `DETAILS` can be specified
 - ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
 
 Expected outcome of usage:
@@ -263,6 +217,8 @@ Usage: `edit INDEX -FLAG DETAIL`
 - Up to six `FLAGS` and `DETAILS` can be specified in any order
 - The index refers to the index number shown in the displayed contact list.
 - The index must be within the range of indexes displayed in the contact list (zero-based).
+- ConTech also has built-in duplicate checkers and will alert you if there is already a contact with the same details when editing.
+
 
 Expected outcome of usage: 
 ```
@@ -277,6 +233,7 @@ ____________________________________________________________
 
 <a name="search"></a>
 ### Searching for a contact: `search`
+
 Search the ConTech Book for a contact whose details contain the specified query.
 
 Usage: `search [-FLAG] QUERY`
@@ -306,6 +263,66 @@ ____________________________________________________________
 
 <a name="import"></a>
 ### Importing contacts: `import`
+Import contacts from a CSV text file into your contact list. 
+
+Usage: `import`
+
+- Data to be imported should be stored in the file `data/import.txt`.
+- Invalid or corrupt data will not be imported into the contact list and will be discarded.
+- Duplicate contacts will trigger a confirmation message, allowing the user to choose if the duplicate contact should be added.
+
+Expected outcome of usage:
+
+{to be added}
+
+<a name="help"></a>
+### Viewing help: `help`
+Displays a help message explaining what commands are available and each input format.
+
+Usage: `help`
+
+Expected outcome of usage:
+
+```
+help
+____________________________________________________________
+add: ConTech adds the specified contact with provided parameters.
+ Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
+ Note: Parameters need not be in order and are optional except for NAME.
+ Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
+
+ls: Displays the name of all saved contacts.
+ Example: ls
+
+edit: Edit any parameter in an existing contact.
+ Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
+ Note: Parameters need not be in order and are optional except for INDEX.
+ Example: edit 1 -e john.doe@email.com
+
+view: Displays all details for index specified contact.
+ Parameter: INDEX
+ Note: Index starts from 0.
+ Example: view 2
+
+rm: Deletes the index specified contact.
+ Parameter: INDEX
+ Note: Index starts from 0.
+ Example: rm 0
+
+search: Search for a contact containing a specified query.
+ Note: Flags may be used to specify a detail type to search.
+       If no flag is specified, contact name is searched by default.
+ Example: search -g QUERY
+
+help: Displays application usage instructions.
+ Example: help
+
+import: Imports contacts from a CSV Text File.
+ Note: Please ensure that data is saved in data/import.txt
+ Example: import
+____________________________________________________________
+```
+
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
@@ -341,7 +358,7 @@ Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
 Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
-List all contacts | `list` | `list`
+List all contacts | `ls` | `ls`
 View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
 Delete contact fields| `<COMMAND>` | `<EXAMPLE>`

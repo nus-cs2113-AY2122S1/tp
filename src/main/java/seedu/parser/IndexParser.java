@@ -4,7 +4,7 @@ package seedu.parser;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
-import seedu.exception.MissingArgException;
+import seedu.exception.MissingIndexException;
 
 
 public class IndexParser {
@@ -16,14 +16,14 @@ public class IndexParser {
     private static final int PERSONAL_CONTACT_ID = -1;
     private static final String REMOVE_ALL_INDEX = "all";
     private static final int REMOVE_ALL_ID = -2;
-
+    private static final String numbers = "[0-9]+";
 
     public static int getIndexFromInput(String userInput)
-            throws NumberFormatException, MissingArgException {
+            throws NumberFormatException, MissingIndexException {
         //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
         if (destructuredInputs.length <= COMD_WORD_LENGTH) {
-            throw new MissingArgException();
+            throw new MissingIndexException();
         }
         assert destructuredInputs.length == 2;
         // split index string into words
@@ -38,9 +38,15 @@ public class IndexParser {
         if (significantIndex.equalsIgnoreCase(REMOVE_ALL_INDEX)) {
             return REMOVE_ALL_ID;
         }
-
+        if (!significantIndex.matches(numbers)) {
+            throw new MissingIndexException();
+        }
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
-        return Integer.parseInt(significantIndex);
+        int index = Integer.parseInt(significantIndex);
+        if (index < 0) {
+            throw new NumberFormatException();
+        }
+        return index;
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {

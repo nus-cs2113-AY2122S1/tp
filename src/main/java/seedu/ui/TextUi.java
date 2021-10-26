@@ -11,6 +11,8 @@ public abstract class TextUi {
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
 
     private static final String LINE = "____________________________________________________________\n";
+    public static final int GITHUB_INDEX = 1;
+    public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -28,7 +30,7 @@ public abstract class TextUi {
 
     // Used to print a line after displayed data
     public static void printBottomLine() {
-        System.out.println("\n" + LINE);
+        System.out.println(LINE);
     }
 
     public static void welcomeMessage() {
@@ -162,7 +164,7 @@ public abstract class TextUi {
     }
 
     public static void contactsEmptyListMessage() {
-        String message = "You have not stored any contacts in ConTech";
+        String message = "You do not have any stored contacts";
         printDoubleLineMessage(message);
     }
 
@@ -192,6 +194,37 @@ public abstract class TextUi {
 
     public static void confirmDeleteAllMessage() {
         String message = "Delete all of your contacts?  (y/n)";
+        printDoubleLineMessage(message);
+    }
+
+    public static void confirmDeleteFieldMessage(boolean[] hasDeletedDetail, Contact contact) {
+        String message = "Delete the following fields for " + contact.getName() + "?  (y/n)\n";
+        String fields = deletedFieldsGenerator(hasDeletedDetail, contact);
+        printDoubleLineMessage(message + fields);
+    }
+
+    public static void deleteFieldsMessage(Contact contact) {
+        String message = "The specified fields for " + contact.getName() + " have been deleted.";
+        printDoubleLineMessage(message);
+    }
+
+    public static String deletedFieldsGenerator(boolean[] hasDeletedDetail, Contact contact) {
+        StringBuilder output = new StringBuilder();
+        assert hasDeletedDetail.length == 7;
+        String[] contactDetails = contact.getContactStringArray();
+        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+            if (contactDetails[i] != null && hasDeletedDetail[i]) {
+                output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
+            }
+        }
+        if (output.toString().isEmpty()) {
+            return "";
+        }
+        return output.toString();
+    }
+
+    public static void noDeleteFields() {
+        String message = "The specified fields are already empty.\n" + "No fields will be deleted";
         printDoubleLineMessage(message);
     }
 
@@ -306,5 +339,4 @@ public abstract class TextUi {
         String message = "ConTech has successfully imported " + numberOfLines + " lines";
         printDoubleLineMessage(message);
     }
-
 }
