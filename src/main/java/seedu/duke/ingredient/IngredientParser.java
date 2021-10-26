@@ -1,10 +1,13 @@
 package seedu.duke.ingredient;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
         try {
-            Ingredient newIngredient = new Ingredient(command[1], command[2]);
+            Ingredient newIngredient = new Ingredient(command[1], command[2], command[3], LocalDate.parse(command[4]));
 
             ingredients.ingredientList.add(newIngredient);
             ingredients.totalIngredients++;
@@ -12,6 +15,8 @@ public class IngredientParser {
             IngredientUI.printAddIngredientMessage(newIngredient);
 
         } catch (ArrayIndexOutOfBoundsException e) {
+            IngredientUI.printInvalidCommandSyntaxMessage();
+        } catch (DateTimeParseException e) {
             IngredientUI.printInvalidCommandSyntaxMessage();
         }
     }
@@ -48,5 +53,17 @@ public class IngredientParser {
         assert ingredients.ingredientList.size() > 0 : "Ingredient list should not be empty";
 
         IngredientUI.printIngredientListMessage(ingredients);
+    }
+
+    public void findExpiredIngredient(String[] command, IngredientList ingredients) {
+        try {
+            LocalDate inputDate = LocalDate.parse(command[1]);
+
+            IngredientUI.printExpiredIngredientMessage(inputDate, ingredients);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            IngredientUI.printInvalidCommandSyntaxMessage();
+        } catch (DateTimeParseException e) {
+            IngredientUI.printInvalidCommandSyntaxMessage();
+        }
     }
 }
