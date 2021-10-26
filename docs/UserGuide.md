@@ -906,7 +906,7 @@ Removes all existing Dishes and Ingredients from their respective lists.
 Format: `clear all`
 
 * `clear all` does not require additional parameters
-* *Tip ❕*  You will be prompted with a confirmation message to delete all dishes and ingredients.
+* *Note💡* You will be prompted with a confirmation message to delete all dishes and ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
