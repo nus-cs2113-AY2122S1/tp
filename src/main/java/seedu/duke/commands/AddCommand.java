@@ -238,6 +238,7 @@ public class AddCommand extends Command {
     }
 
     private void getMemberForTask(Task task) {
+        Ui.printLineBreak();
         Ui.promptForMemberIndex();
         boolean isCorrectMember = false;
         while (!isCorrectMember) {
@@ -268,9 +269,9 @@ public class AddCommand extends Command {
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
+
                 Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 int eventIndex = getEventForTask(task);
-                Ui.printLineBreak();
                 getMemberForTask(task);
                 Ui.printLineBreak();
                 return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));

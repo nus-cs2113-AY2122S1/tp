@@ -126,9 +126,11 @@ public class UpdateCommand extends Command {
             try {
                 isCorrectMember = isMemberUpdated(taskToBeUpdated);
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 throw new DukeException("This member does not exist. Please enter the index corresponding to "
                         + "the correct member. ");
             } catch (NumberFormatException e) {
+                Ui.printLineBreak();
                 System.out.println("Please enter the number corresponding to the member "
                         + "you want to assign this task to. ");
             }
@@ -136,15 +138,13 @@ public class UpdateCommand extends Command {
     }
 
     private boolean isMemberUpdated(Task taskToBeUpdated) {
-        boolean isCorrectMember;
         Ui.printMemberRoster();
         Ui.printLineBreak();
         int memberIndex = Integer.parseInt(Ui.readInput());
         Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(taskToBeUpdated);
         Duke.memberRoster.get(memberIndex - 1).sortTasks();
         taskToBeUpdated.addMember(Duke.memberRoster.get(memberIndex - 1));
-        isCorrectMember = true;
-        return isCorrectMember;
+        return true;
     }
 
     private void updateTaskIntroMessage() {
@@ -174,7 +174,7 @@ public class UpdateCommand extends Command {
 
     private void postUpdateMessage() {
         System.out.println("Here is the updated Event");
-        Ui.printEvent(eventToBeUpdated);
+        Ui.printUpdatedEvent(eventToBeUpdated);
     }
 
 

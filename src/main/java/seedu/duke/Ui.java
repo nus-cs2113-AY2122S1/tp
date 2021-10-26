@@ -192,4 +192,17 @@ public class Ui {
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
+    public static void printUpdatedEvent(Event event) {
+        System.out.println("Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: ");
+        for (Task t : event.getTaskList()) {
+            printTask(t);
+        }
+        //printList(event.getTaskList());
+    }
+
 }
