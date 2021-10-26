@@ -165,7 +165,6 @@ public class CommonUtils {
      * @return True if name is a valid file name, false otherwise.
      */
     public static boolean isValidFileName(String name) {
-
         if (name == null || name.isBlank() || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
             return false;
         }
@@ -176,7 +175,7 @@ public class CommonUtils {
             return false;
         }
         try {
-            Paths.get(name);
+            Paths.get(name.trim());
             return true;
         } catch (InvalidPathException e) {
             return false;

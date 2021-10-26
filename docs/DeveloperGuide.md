@@ -513,46 +513,40 @@ To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
 
 ![](attachments/StorageInitializeSequenceDiagram.png)
 
-When `Terminus` just started, it will need to initialize a ModuleStorage object and loads any
-related data from the `data` directory containing all previously saved data.
+**Step 1:** When `Terminus` just started, it will initialize a `ModuleStorage` object and loads any
+related data from the `data` directory into it.
 
-Firstly, `Terminus` will initialise an instance of `ModuleStorage` which is a singleton class
-object. `Terminus` will then set the filepath of the `ModuleStorage` with the main `.json` file
-filepath which contains data such as `module`, `questions` and `schedules`. `Terminus` do so by
-calling the `init()` function provided by `ModuleStorage`.
+**Step 2:** Next, `Terminus` will create an instance of `ModuleStorage` which is a **singleton class**
+object. Subsequently, `Terminus` calls the `init()` function provided by ModuleStorage to set the filepath of the ModuleStorage with the main `.json` file
+filepath which contains data such as `module`, `questions` and `schedules`.
 
-Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
-provided by `ModuleStorage`. Within the `ModuleStorage` method `loadFile()`, it will first check if
-the main directory of `data` exists. This is because for first time execution of `Terminus`, there
+**Step 3:** Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
+which is provided by `ModuleStorage`. 
+
+**Step 4:** Within the `ModuleStorage` of `loadFile()`, it will first check if
+the main directory of `data` exists. This is needed for the first time execution of `Terminus` as there
 should not be any `data` folder within the same folder in which `Terminus` was executed from. Hence,
 if no `data` directory was found, it will create a `data` directory and create the main `.json`
-file as well. However, if `data` directory exists, it will locate the main `.json` file within
-the `data` directory. This main `.json` file is very important in telling `Terminus` what `modules`
-does it have before this current execution of `Terminus`.
+file. However, if `data` directory exists, it will locate the main `.json` file within
+the `data` directory. This main `.json` will tell `Terminus` what `modules`
+does it have prior this current session of `Terminus`.
 
-After which, the main `.json` contents will be loaded into `ModuleManager` by using
-plugin `GsonBuilder`. This `ModuleManager` will then be used throughout the execution of `Terminus`.
-For more information, please refer to ModuleManager Section.
+**Step 5:** Once the main `.json` has been loaded, a plugin `GsonBuilder` will proceed to load the `.json` 
+data into a `ModuleManager` object. This `ModuleManager` will then be used throughout the execution of `Terminus`.
+For more information, please refer to [Module Component](#35-module-component).
 
-Next, `ModuleStorage` will proceed to load any note data from the `modules` stated within
-the `ModuleManager` object. Firstly, due to the restriction of `Terminus workspace`, it will filter
-out any `modules` whose name does not fit the criteria of a valid `module` name. Subsequently, it
-will check if the `module` has an existing folder with the same name as the provided `module` name.
-If no folder was found that means that it does not have any note data and hence it will create a
-folder for that `module` and proceed to check on other `modules` in the `ModuleManager`. If the
-specified `module` folder was found, it will proceed to load any `.txt` file within that folder as
-note data for that `module`.
+**Step 6:** Next, `ModuleStorage` will proceed to load any note data from the `modules` in the `ModuleManager` 
+object. Due to the restriction of **TermiNUS**, it will filter any `module` whose name does not fit the criteria of a valid `module` name. 
+Subsequently, it will check for module that has a folder in the `data` directory in order to retrieve its note data.
+If no folder was found it will simply create one for itself and proceed to check on other `module` in the `ModuleManager`. 
 
-`Note data` is stored in such a format where the `name` of the `.txt`
-file is the `name` of the note and the `contents` of the `.txt` file will be the data for
-that `Note` object. For example, if a `module` has **5** `Note` objects in Terminus, it should
-have **5** `text` files in its `module` folder.
-
-These `.txt` files are then processed accordingly, checking whether if its **accessible**, **less
-than 1MB** and **filename is a valid note name**. They are then loaded as `Note` object for
-the `module`. For the rest that failed the criteria of a valid `Note` object, these files will then
-be ignored.
-
-Lastly, after `ModuleStorage` has loaded all content data for all `modules` in the ModuleManager, it
+**Step 7:** Finally, after `ModuleStorage` has loaded all contents for the validated `modules` in the ModuleManager, it
 will return the `ModuleManager` back to `Terminus` for further operations.
-=======
+
+
+Notes in TermiNUS is stored as a **text** file where the **name** of the file is the **name** of the note 
+and the **contents** of the file will be the **content** for that Note. For example, if a module has **5 Notes** object in TermiNUS, it should have **5 text files** within its module folder.
+
+
+
+
