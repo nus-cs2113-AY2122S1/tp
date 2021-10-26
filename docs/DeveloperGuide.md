@@ -61,6 +61,8 @@ Describes the step-by-step sequence from User Input to the Output.
 
 The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
 
+![](images/input_parser_sequence.png)
+
 * Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
 * Throws an exception if no matching command is found
 * Takes rest of user input as parameterString
