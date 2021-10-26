@@ -1,6 +1,5 @@
 package medbot.person;
 
-
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
@@ -175,8 +174,8 @@ public abstract class Person extends ListItem {
      * @return storageString of a person
      */
     public String getStorageString() {
-
-        return setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
+        return getListItemId() + VERTICAL_LINE_SPACED
+                + setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(name) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
