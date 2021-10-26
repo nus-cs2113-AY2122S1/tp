@@ -25,8 +25,8 @@ an overview of all the commands you can use with NUSBuddy.
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Adding a Task or Lesson - `add`](#adding-a-task-or-lesson---add)
-  * [Listing Tasks or Lessons - `list`](#listing-tasks-or-lessons---list)
+  * [Adding a Task, Lesson or Module - `add`](#adding-a-task-lesson-or-module---add)
+  * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
   * [Deleting Tasks and Lessons - `delete`](#deleting-tasks-or-lessons---delete)
   * [Finding Tasks or lessons by keyword - `find`](#finding-tasks-or-lessons-by-keyword---find)
@@ -79,53 +79,100 @@ from deleting these files in order to preserve your data.
 >
 > [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter.
 
-### Adding a Task or Lesson - `add`
+### Adding a Task, Lesson or Module - `add`
 
-Add a task or lesson to the list. 
+Allows you to add a task, lesson or module to your list of tasks, lessons or modules. 
 
-A task contains a title, the day of the week of the task, and an optional task information.
+> 💡 A task contains a title, the day of the week of the task, and an optional task information.
 
-Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}`
-
-A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the lesson.
-
-Format: `add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME]`
+Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}`
+* `TITLE` refers to the name of the task you wish to create
+* `DAY_OF_THE_WEEK` can be any of the following, non case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
+and refers to the day on which you want to do the task
+* the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
+* the `-p` flag is optional and `PRIORITY` can be either `low`, `medium` or `high`, referring to the priority you wish 
+to assign to the new task
 
 Example usage:
-
 ```
 $ add task CS2113 tP -d MON
     _______________________________________________________________________________
      Noted. I've added this task:
-       [T][ ] Title: CS2113 tP (Day: MON)
-     Now you have 1 tasks in the list.
-    _______________________________________________________________________________
-    
-$ add task CS2113 tP -d MON -i add documentation
-    _______________________________________________________________________________
-     Noted. I've added this task:
-       [T][ ] Title: CS2113 tP (Day: MON)
-               Info: add documentation
+       [ ] CS2113 tP (Monday)
+            Info: -
+            Priority: None
      Now you have 2 tasks in the list.
     _______________________________________________________________________________
+```
+This first example shows that an incomplete new task "CS2113 tP" has been added to the list of tasks, and is to be done 
+on Monday. It has no additional information, and has no assigned priority. You can also see the number of tasks you have 
+in the list. The empty braces `[ ]` before the task name indicates that the task is incomplete. You can [visit this 
+section](#marking-a-task-as-done---done) on marking a task as done to change the completion status of the task. 
 
-$ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
+```
+$ add task CS2113 tP -d MON -i add documentation -p low
+    _______________________________________________________________________________
+         Noted. I've added this task:
+           [ ] CS2113 tP (Monday)
+                Info: add documentation
+                Priority: Low
+         Now you have 3 tasks in the list.
+    _______________________________________________________________________________
+```
+This second example shows how to use the optional flags with `add task`. This example shows that the task "CS2113 tP" has
+been added for Monday, and has the additional information "add documentation", with low priority assigned.
+
+> 💡 A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the lesson.
+
+Format: `add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {ZOOM_LINK}`
+* `TITLE` refers to the title of the lesson to add, typically a module code or subject name
+* `DAY_OF_THE_WEEK` can be any of the following, non case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
+and refers to the day which your lesson occurs on
+* `START_TIME` refers to the time at which your lesson starts in HH:MM format ie; 2pm would be 14:00
+* `END_TIME` refers to the time at which your lesson ends in HH:MM format
+* the `-l` flag is optional and `ZOOM_LINK` refers to a meeting link you may have for online lessons 
+
+Example usage:
+```
+$ add lesson CS2113 Lecture -d MON -s 14:00 -e 15:00
     _______________________________________________________________________________
      Noted. I've added this lesson:
-       [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
+       CS2113 Lecture
+        Monday, 02:00 PM - 03:00 PM
+        Meeting URL: -
      Now you have 1 lessons in the list.
     _______________________________________________________________________________
-    
 ```
+This example shows that the lesson "CS2113 Lecture" has been added for Monday, and is from 2pm to 6pm with no attached 
+meeting link, and that it is the only lesson in the list.
 
-### Listing Tasks or Lessons - `list`
+> 💡 A module is referred to by its module code. Information about the module, such as its number of modular credits is 
+> retrieved from NUSMods using the module code.
 
-`list` can be used to perform any of the following actions:
-- list all tasks and lessons
-- list all tasks only
-- list all lessons only
+Format: `add module [MODULE_CODE]`
+* `MODULE_CODE` refers to the module code you can find on NUSMods, non case-sensitive
+* only valid module codes found on NUSMods can be entered into `MODULE_CODE`
 
-Format: `list [task/lesson/all]`
+Example usage:
+```
+$ add module cs2113t
+    _______________________________________________________________________________
+     Noted. I've added this module:
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+     Now you have 2 modules in the list.
+    _______________________________________________________________________________
+```
+This example shows that CS2113T, which has 4 modular credits, has been added to the list of modules, and that there are 
+2 modules in the list of modules.
+
+### Listing Tasks, Lessons or Modules - `list`
+
+Allows you to view a complete list of the tasks, lessons or modules that you have added to your list.
+
+Format: `list [task/lesson/module]`
+* `list task` will list out all added tasks
+* `list lesson` will list out all added lessons
+* `list module` will list out all added modules
 
 Example usage:
 
@@ -133,28 +180,78 @@ Example usage:
 $ list task
     _______________________________________________________________________________
      Here are the tasks in your list:
-     1. [T][ ] Title: CS2113 tP (Day: MON)
-     2. [T][ ] Title: CS2113 tp (Day: MON)
-                Info: add documentation
+     1. [X] cs2113t tp (Wednesday)
+            Info: add documentation
+            Priority: High
+     2. [ ] prepare for presentation (Friday)
+            Info: -
+            Priority: None
     _______________________________________________________________________________
+```
+This example lists out all 2 tasks. The first task in this list is marked as complete, as indicated by the `[X]` beside the
+task name, "cs2113t tp". The "Wednesday" in brackets also indicates that the task is assigned to be done on Wednesday. 
+Additional information for the task is listed as "add documentation", and the task has High priority. The second task
+on the list is marked as incomplete, as indicated by the `[ ]` beside the task name, "prepare for presentation". It is 
+assigned for Friday. The " - " symbol beside "Info:" indicates that the task was added with no additional information, 
+the "None" beside "Priority:" indicates that there was no priority assigned to it either.
      
+```
 $ list lesson
     _______________________________________________________________________________
      Here are the lessons in your list:
-     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
-    _______________________________________________________________________________
-    
-$ list all
-    _______________________________________________________________________________
-     Here are the tasks in your list:
-     1. [T][ ] Title: CS2113 tP (Day: MON)
-     2. [T][ ] Title: CS2113 tp (Day: MON)
-                Info: add documentation
-     
-     Here are the lessons in your list:
-     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
+     1. cs2113t lecture
+        Friday, 04:00 PM - 06:00 PM
+        Meeting URL: -
+     2. cg2028 lab
+        Thursday, 02:00 PM - 05:00 PM
+        Meeting URL: meetingLink.com
     _______________________________________________________________________________
 ```
+This example shows that there are 2 lessons in the list, "cs2113t lecture" and "cg2028 lab". "cs2113t lecture" is on 
+Friday, from 2pm to 6pm, and has no attached meeting link, and "cg2028 lab" is on Thursday, from 2pm to 5pm, with 
+meetingLink.com as the meeting link for the session.
+
+Another format of using `list` can show you your upcoming tasks and lessons for the current and next day.
+
+Format: `list [task/lesson] [today/tomorrow]`
+* similar to the above format, `list task` is used for tasks and `list lesson` for lessons
+* `today/tomorrow` is an option that you can choose, and will determine whether NUSBuddy displays upcoming tasks or lessons
+* scheduled for the current day or the next day
+
+Example usage:
+```
+$ list task today
+    _______________________________________________________________________________
+     There is no task on TUE.
+    _______________________________________________________________________________
+``` 
+This example shows that there are no tasks scheduled for Tuesday, which is in this case the current day as determined 
+by the operating system.
+
+```
+$ list lesson tomorrow
+    _______________________________________________________________________________
+     Here are the lessons on WED:
+     1. cs2101 tutorial
+        Wednesday, 10:00 AM - 12:00 PM
+        Meeting URL: -
+    _______________________________________________________________________________
+```
+In this example, the current day is Tuesday and hence, there is one lesson on Wednesday, "cs2101 tutorial" from 10am to 
+12 pm with no attached meeting link.
+
+```
+$ list module
+    _______________________________________________________________________________
+     Here are the modules in your list:
+     1. CG2028 Computer Organization (2MCs) 
+     2. CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+     3. CS2101 Effective Communication for Computing Professionals (4MCs) 
+    _______________________________________________________________________________
+```
+This example shows the expected output for a list with 3 modules added, CG2028, CS2113T and CS2101. Using the first
+module as an example, the module title for CG2028 is "Computer Organization" and as indicated by `(2MCs) ` beside the 
+title, the module bears 2 modular credits. 
 
 ### Marking a Task as done - `done`
 
