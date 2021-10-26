@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     private static final String FIFTH_QN = "Location of Event (Optional): ";
     private final int semester;
     private final Timetable timetable;
-    private final AddFlag flag ;
+    private final AddFlag flag;
     public AddUI addUI = new AddUI();
 
     public AddCommand(Timetable timetable, AddFlag flag) {

@@ -40,6 +40,6 @@ public class EditCommand extends Command {
         TimetableUserItem event = events.get(index);
         tt.editEventFromSchedule(event, answer);
 
-        TextUi.
+        TextUi.printEditMessage();
     }
 }

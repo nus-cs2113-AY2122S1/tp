@@ -270,6 +270,8 @@ public class Timetable implements Comparable<Timetable> {
         case SUNDAY:
             schedule = getSunday();
             break;
+        default:
+            break;
         }
         String title = event.getTitle();
         for (int i = 0; i < schedule.length; i++) {
