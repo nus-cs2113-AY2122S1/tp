@@ -1,6 +1,6 @@
 package seedu.traveller.worldmap;
 
-import seedu.traveller.exceptions.IllegalFlightFileException;
+import seedu.traveller.worldmap.exceptions.IllegalFlightFileException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
 import seedu.traveller.worldmap.exceptions.FlightDataNotFoundException;
 

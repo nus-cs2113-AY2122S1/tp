@@ -1,6 +1,6 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
@@ -66,9 +66,9 @@ public class ShortestCommand extends Command {
         assert sum >= 0 : "The distance should be more than or equal to 0.";
 
         if (Objects.equals(this.distOrCost, "dist")) {
-            ui.printShortestDist(this.startCountry, this.endCountry, sum);
+            ui.printShortestDist(this.startCountry, this.endCountry, sum, distances);
         } else {
-            ui.printShortestCost(this.startCountry, this.endCountry, sum);
+            ui.printShortestCost(this.startCountry, this.endCountry, sum, distances);
         }
 
     }

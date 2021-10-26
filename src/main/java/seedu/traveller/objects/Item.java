@@ -1,4 +1,4 @@
-package seedu.traveller;
+package seedu.traveller.objects;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

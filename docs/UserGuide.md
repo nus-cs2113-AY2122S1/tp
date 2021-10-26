@@ -52,10 +52,10 @@ each functionality are explained in the [features](#2-features) section.
   * [2.9. edit](#29-edit-a-trip-edit)
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
-  * [2.12. shortest](#212-shortest-dist)
-  * [2.13. shortest](#213-shortest-cost)
-  * [2.14. edit-map](#214-edit-map)
-  * [2.??. exit](#213-exiting-the-program-exit)
+  * [2.12. shortest-dist](#212-shortest-distance-shortest-dist)
+  * [2.13. shortest-cost](#213-least-cost-shortest-cost)
+  * [2.14. edit-map](#214-edit-distances-in-map-edit-map)
+  * [2.15. exit](#215-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -93,8 +93,8 @@ For a quick summary of all commands, please click [here](#4-command-summary) ins
 <br/>
 
 ### 2.1. Getting help: `help`
-The help command would return the basic commands that are able to be input into CLI.
-The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide
+The help command would return the basic commands that are supported by Traveller.
+The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide.
 
 #### Format: `help`
 
@@ -107,7 +107,7 @@ The CLI then returns the shortest path from one point to another.
 #### Format: `new TRIP_NAME /from START /to END`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
-   * `START` and `END` destinations must be countries included in `flightData/flights.txt`.
+   * `START` and `END` destinations must be countries included in *flightData/flights.txt*.
 
 #### Usage Example:
 
@@ -120,7 +120,7 @@ ____________________________________________________________
 ```
 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
-> Take a look in `flightData/flights.txt` to see how Traveller recognises them!
+> Take a look in *flightData/flights.txt* to see how Traveller recognises them!
 
 <br/>
 
@@ -129,13 +129,13 @@ Your overseas trip may span multiple days.
 
 This command allows you to create any number of days in your trip.
 
-#### Format: `add-day TRIP_NAME NUMBER_OF_DAYS`
+#### Format: `add-day TRIP_NAME /day NUMBER_OF_DAYS`
 
 #### Usage Example:
 
 ```
 ____________________________________________________________
-$ add-day myTrip 3
+$ add-day myTrip /day 3
 ____________________________________________________________
 	Added 3 days to trip trip1.
 ____________________________________________________________
@@ -162,6 +162,7 @@ ____________________________________________________________
 ```
 
 > ![](documentationPics/info.png) Days are 0-indexed based. That is, the first day of your trip is day 0.
+> 
 > ![](documentationPics/tip.png) If your item spans the whole day, just type in `All day` for the time field!
 
 <br/>
@@ -228,7 +229,7 @@ ____________________________________________________________
 ### 2.8. Deleting an item from a day: `delete-item`
 Deletes an existing item from a trip.
 
-#### Format: `delete-day TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
+#### Format: `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 
 #### Usage Example:
 ```
@@ -258,7 +259,7 @@ Edits an existing trip from the trip list.
 ### 2.10. Edit an item: `edit-item`
 Edits and updates existing item from a trip and updates it to a new corresponding item.
 
-#### Format: `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+#### Format: `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
 
 #### Usage Example:
 ```
@@ -274,7 +275,7 @@ ________________________________________________________________________________
 ### 2.11. Searching for an item: `search-item`
 Searches for an item keyword from a trip and returns the resulting matching items.
 
-#### Format: `search-item TRIP_NAME /name ITEM_NAME`
+#### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
 #### Usage Example:
 ```
@@ -300,6 +301,9 @@ ____________________________________________________________
 $ shortest-dist /from SIN /to JPN
 ____________________________________________________________
 	The shortest distance from SIN to JPN is 6.0.
+	Distance breakdown: 
+	1.0
+	5.0
 ____________________________________________________________
 ```
 
@@ -314,13 +318,16 @@ ____________________________________________________________
 $ shortest-cost /from SIN /to JPN
 ____________________________________________________________
 	The least cost from SIN to JPN is 550.0.
+	Cost breakdown: 
+	150.0
+	400.0
 ____________________________________________________________
 ```
 
 ### 2.14. Edit Distances in Map: `edit-map`
 Edits and updates the distance from the source to destination country.
 
-#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+#### Format: `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist DISTANCE`
 
 #### Usage Example:
 ```
@@ -332,7 +339,7 @@ ____________________________________________________________
 ```
 
 
-### 2.?? Exiting the program: `exit`
+### 2.15 Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
@@ -354,7 +361,7 @@ Exits the program.
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
 **A**: Traveller can only read specific words as destinations. 
-Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
+Please check in *flightData/flights.txt* for all supported destinations and their specific wordings.
 
 <br/>
 
@@ -366,15 +373,17 @@ Action | Format
 --- | ---
 **help**| `help`
 **new** | `new TRIP_NAME /from START /to END`
-**add-day**| `add-day TRIP_NAME NUMBER_OF_DAYS`
+**add-day**| `add-day TRIP_NAME /day NUMBER_OF_DAYS`
 **add-item**|`add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
 **view** | `view TRIP_NAME`
 **delete** | `delete TRIP_NAME`
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from START /to END`
-**edit-item** | `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
-**search-item** |  `search-item TRIP_NAME /name ITEM_NAME`
-**shortest** | `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
+**search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
+**shortest-dist** | `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**edit-map** | `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist DISTANCE`
 **exit** | `exit`
 

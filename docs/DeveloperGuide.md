@@ -3,8 +3,10 @@
 ![Traveller](./documentationPics/logo.png)
 ## Preface
 Traveller is a travel planner app that is designed to help holidaymakers like you optimise your trips!
+
 It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI),
 while still retaining the ease of use of a GUI.
+
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
 ### Purpose of developer guide
@@ -21,10 +23,6 @@ Use the Table of Contents below to easily navigate to the section you desire.
 |![](documentationPics/info.png)|Shows how this developer guide is formatted.|
 |![](documentationPics/tip.png)|Shows useful tips when developing Traveller.|
 |![](documentationPics/warning.png)|Shows potential problems when developing Traveller.|
-
-### Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ---
 
@@ -56,7 +54,7 @@ The World Map is the part of the application that handles the calculation of the
 while the Main Traveller code handles the interaction with users, and the general logic of the application.
 
 ![](documentationPics/designOverview.png)
-Figure 1: Design Overview of Traveller
+<div style="text-align: center;">Figure 1: Design Overview of Traveller</div>
 
 ### 1.1. World Map
 The World Map is 1 of the 2 major components of the Traveller project.
@@ -66,7 +64,8 @@ As shown in figure 2, the World Map consists of 4 sub-components, the [`WorldMap
 Additionally, the World Map uses 2 other classes to pass data around, the `Country` class, and the `Distance` class.
 
 ![](documentationPics/worldMapDesign.png)
-Figure 2: Design of the World Map
+<div style="text-align: center;">Figure 2: Design of the World Map</div>
+
 
 These 4 sub-components are implemented to maintain an internal graph of countries and distances. Dijkstra's algorithm 
 is then performed on this graph to obtain the shortest travel path from 1 country to another.
@@ -89,7 +88,7 @@ While `DataLoader` is hardcoded to accept only 5 countries at its implementation
 changing the variable `numberOfCountries` in the class.
 
 ![](documentationPics/dataSequenceDiagram.png)
-Figure 3: DataLoader Sequence Diagram
+<div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
 
 The first line of *dist.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as edges between the vertexes.
@@ -110,7 +109,7 @@ TripsList class, Ui class, and Storage class.
 Additionally, the `Command` class is used to execute various actions in the various sub-components.
 
 ![](documentationPics/mainTravellerDesign.png)
-Figure 4: Design of the Main Traveller
+<div style="text-align: center;">Figure 4: Design of the Main Traveller</div>
 
 
 
@@ -137,7 +136,7 @@ It's main function is the `parse` function, which takes in a user input string o
 `Command` object. Figure 4 below illustrates the code of the `parse` function via a sequence diagram.
 
 ![](documentationPics/parserSequenceDiagram.png)
-Figure 5: Parser Sequence Diagram
+<div style="text-align: center;">Figure 5: Parser Sequence Diagram</div>
 
 The steps illustrated by Figure 4 is summarised below.
 1. The `parse` command is called once per iteration of the main `run` loop in `Traveller`.
@@ -166,7 +165,7 @@ each corresponding command.
 Following the loading of the save file, writing of the save is handled as shown below.
 
 ![](documentationPics/saveSequenceDiagram.png)
-Figure 6: Save Sequence Diagram
+<div style="text-align: center;">Figure 6: Save Sequence Diagram</div>
 
 The return strings of each trip, day and item will correspond to the command that will be executed in order to add it to the tripList/ DaysList or ItemsList.
 
