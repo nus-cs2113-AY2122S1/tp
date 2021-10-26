@@ -361,7 +361,6 @@ public class Parser {
     }
 
     protected static void updateIndividualSpending(Expense expense) {
-        boolean isEqualSplitPromptDisplayed = false;
         boolean isLogDisplayed = false;
 
         Ui.printGetPersonPaid();
@@ -370,12 +369,9 @@ public class Parser {
         if (payer != null) {
             expense.setPayer(payer);
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
+            Ui.equalSplitPrompt();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
-                if (!isEqualSplitPromptDisplayed) {
-                    Ui.equalSplitPrompt();
-                    isEqualSplitPromptDisplayed = true;
-                }
                 double amountRemaining = expense.getAmountSpent() - total;
                 if (Math.abs(amountRemaining) < EPSILON) {
                     amountBeingPaid.put(person, 0d);

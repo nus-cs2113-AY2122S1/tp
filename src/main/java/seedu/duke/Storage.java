@@ -207,10 +207,6 @@ public class Storage {
         Storage.lastExpense = lastExpense;
     }
 
-    public static Boolean isListOfTripsEmpty() {
-        return listOfTrips.isEmpty();
-    }
-
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
         Storage.listOfTrips = listOfTrips;
     }
