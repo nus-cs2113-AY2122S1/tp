@@ -16,8 +16,16 @@ public class Loan extends Record {
         return debtorName;
     }
 
+    public void setName(String debtorName) {
+        this.debtorName = debtorName;
+    }
+
     public String getDate() {
         return date.toString();
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String toString() {

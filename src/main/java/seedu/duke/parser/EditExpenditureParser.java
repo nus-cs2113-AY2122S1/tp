@@ -6,18 +6,22 @@ import seedu.duke.exception.EmptyDescriptionException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class EditExpenditureParser {
-    public static final String[] PREFIX_ARRAY = {"m/","i/","c/","a/","d/"};
+public class EditExpenditureParser implements ParserPrefix {
+    public static final String[] PREFIX_ARRAY = { PREFIX_MONTH,
+        PREFIX_INDEX,
+        PREFIX_DESCRIPTION,
+        PREFIX_AMOUNT,
+        PREFIX_DATE };
 
     public static EditExpenditureCommand parse(String args) throws NumberFormatException, EmptyDescriptionException {
         HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
-        int month = ParserUtil.parseMonth(argumentMap.get(ParserPrefix.PREFIX_MONTH));
-        int index = ParserUtil.parseIndex(argumentMap.get(ParserPrefix.PREFIX_INDEX));
-        String description = ParserUtil.parseDescription(argumentMap.get(ParserPrefix.PREFIX_DESCRIPTION), false);
-        double amount = ParserUtil.parseAmount(argumentMap.get(ParserPrefix.PREFIX_AMOUNT),false);
-        LocalDate date = ParserUtil.parseDate(argumentMap.get(ParserPrefix.PREFIX_DATE));
+        int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH));
+        int index = ParserUtil.parseIndex(argumentMap.get(PREFIX_INDEX));
+        String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_NOT_COMPULSORY);
+        double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_NOT_COMPULSORY);
+        LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
 
-        return new EditExpenditureCommand(month, index,amount, date, description);
+        return new EditExpenditureCommand(month, index, amount, date, description);
     }
 }

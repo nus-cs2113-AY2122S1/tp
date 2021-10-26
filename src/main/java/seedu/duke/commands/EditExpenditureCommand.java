@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.records.Expenditure;
+
 import java.time.LocalDate;
 
 public class EditExpenditureCommand extends EditCommand {
@@ -19,6 +21,8 @@ public class EditExpenditureCommand extends EditCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        allRecordList.editExpenditure(this.month, this.index, this.amount, this.description, this.date); // Not done yet
+        Expenditure targetExpenditure = allRecordList.editExpenditure(month, index, amount, description, date);
+        System.out.println("Expenditure has been successfully edited!");
+        System.out.println("New values: " + targetExpenditure);
     }
 }
