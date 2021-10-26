@@ -46,6 +46,7 @@ public class AddCommand extends Command {
             new AddBookCommand(args).execute(ui, catalogue);
             break;
         case COMMAND_ADD_MAGAZINE:
+            new AddMagazineCommand(args).execute(ui, catalogue);
             break;
         case COMMAND_ADD_VIDEO:
             break;

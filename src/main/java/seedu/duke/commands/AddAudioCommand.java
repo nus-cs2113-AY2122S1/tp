@@ -9,10 +9,10 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 
 public class AddAudioCommand extends Command {
     public static final String COMMAND_FORMAT = "  Format: add a t/TITLE i/ID a/ARTIST d/DURATION";
-    public static final String WARN_ADDITIONAL_ARGS = "  (*) Additional arguments detected, ignoring them";
     public static final String ADD_MESSAGE = "  (+) Added new audio item to the catalogue";
     public static final String COMMAND_WORD = "add a";
     public static final String KEY_TITLE = "t";

@@ -2,8 +2,8 @@ package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Status;
-import seedu.duke.data.Book;
 import seedu.duke.data.Catalogue;
+import seedu.duke.data.Magazine;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
@@ -11,30 +11,34 @@ import java.util.HashMap;
 import static seedu.duke.common.Messages.INVALID_VALUES;
 import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 
-public class AddBookCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add b t/TITLE i/ID a/AUTHOR";
-    public static final String ADD_MESSAGE = "  (+) Added new book item to the catalogue";
+public class AddMagazineCommand extends Command {
+    public static final String COMMAND_FORMAT = "  Format: add b t/TITLE i/ID p/PUBLISHER e/edition";
+
+    public static final String ADD_MESSAGE = "  (+) Added new magazine item to the catalogue";
     public static final String COMMAND_WORD = "add b";
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
-    public static final String KEY_AUTHOR = "a";
+    public static final String KEY_PUBLISHER = "p";
+    public static final String KEY_EDITION = "e";
 
     private HashMap<String, String> args;
     private String title;
     private String id;
     private Status status;
-    private String author;
+    private String publisher;
+    private String edition;
 
-    public AddBookCommand(HashMap<String, String> args) {
+    public AddMagazineCommand(HashMap<String, String> args) {
         this.args = args;
         this.title = args.get(KEY_TITLE);
         this.id = args.get(KEY_ID);
         this.status = Status.AVAILABLE;
-        this.author = args.get(KEY_AUTHOR);
+        this.publisher = args.get(KEY_PUBLISHER);
+        this.edition = args.get(KEY_EDITION);
     }
 
     private Boolean checkMissingArgs() {
-        return title == null | id == null | author == null;
+        return title == null | id == null | publisher == null | edition == null;
     }
 
     private Boolean checkAdditionalArgs() {
@@ -42,7 +46,8 @@ public class AddBookCommand extends Command {
         tempArgs.remove(null);
         tempArgs.remove(KEY_TITLE);
         tempArgs.remove(KEY_ID);
-        tempArgs.remove(KEY_AUTHOR);
+        tempArgs.remove(KEY_PUBLISHER);
+        tempArgs.remove(KEY_EDITION);
         return tempArgs.size() > 0;
     }
 
@@ -56,9 +61,9 @@ public class AddBookCommand extends Command {
             ui.print(WARN_ADDITIONAL_ARGS);
         }
         try {
-            Book newBook = new Book(title, id, status, author);
-            catalogue.add(newBook);
-            ui.print(ADD_MESSAGE, newBook);
+            Magazine newMagazine = new Magazine(title, id, status, publisher, edition);
+            catalogue.add(newMagazine);
+            ui.print(ADD_MESSAGE, newMagazine);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         }
