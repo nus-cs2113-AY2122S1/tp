@@ -10,6 +10,13 @@
   - [ContactList](#contact-list)
   - [Storage](#storage)
 - [Implementation](#implementation)
+  - [Supported contact details](#supported-details) 
+  - [Adding a contact](#Add)
+  - [Viewing a contact](#View)
+  - [Editing a contact](#Edit)
+  - [Deleting a contact](#Delete)
+  - [Searching a contact](#Search)
+  - [Listing all contacts](#List)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -22,7 +29,7 @@
 
 - Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
   https://github.com/se-edu/addressbook-level2
-- Inspiration for User Guide and Developer Guide: AddressBook (Level 2) <br />
+- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) <br />
   https://se-education.org/addressbook-level3/DeveloperGuide.html <br/>
   https://se-education.org/addressbook-level3/UserGuide.html
 - Converting text for ConTech: <br />
@@ -55,13 +62,23 @@ ConTech comprises five main components, namely:
 **How the architecture components interact with each other**
 
 The five main components interact with each other, as shown in the sequence diagram below
-for the example "view 2"
+for the example: `view 2`
 
 ![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
 
 
 ### <a name="text-ui"></a>TextUi
 ### <a name="main-parser"></a>MainParser
+The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
+not only the identifier for commands, but also calls its relevant sub-parsers to further destructure
+the inputs, allowing ConTech to perform its commands.
+
+The diagram below shows a sequence diagram of how `MainParser` works, and a reference diagram is used
+to indicate that further parsing is done by sub-parsers for each different command type. This reference diagram
+will be referred to later on.
+
+![Main Parser Sequence Diagram](images/MainParserSequenceDiagram.png)
+
 ### <a name="command"></a>Command
 ### <a name="contact-list"></a>ContactList
 ### <a name="storage"></a>Storage
@@ -77,9 +94,36 @@ corresponding `ContactList` and `Contact` objects. It is thus dependent on the c
 
 ## <a name="implementation"></a>Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### <a name="supported-details"></a>Supported Contact Details
+The currently supported contact details are provided in the table below:
 
-{NOT DONE}
+|Flag|Detail of contact|
+|----|------|
+|`-n`|Name|
+|`-g`|Github username|
+|`-l`|LinkedIn handle|
+|`-te`|Telegram handle|
+|`-tw`|Twitter handle|
+|`-e`|Email|
+
+### <a name="Add"></a>Adding a contact: `add`
+This feature is processed using `AddContactCommand`. This feature allows a user to add a contact to their contact list.
+The user is able to add a contact by entering a command in the form of `add [DETAILS WITH FLAGS]`, where
+the details with flags are specified in the form `-<flag> <detail>`.
+
+The user's input is parsed in `MainParser` and `AddContactParser`, the latter which inherits `ContactParser`. 
+`ContactParser` inherits `RegexParser` (for regex checks regarding each detail) and implements the `ContactDetails`
+interface (which uniquely allows the parsers to easily identify each detail based on their indexes).
+
+As the contacts are identified by their names, the name field is made compulsory at the `MainParser` level.
+The diagram below shows the process of parsing the user's input.
+
+![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
+
+Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
+executed in `Duke`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
+
+![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
@@ -91,11 +135,11 @@ The sequence diagram below illustrates the `execute()` function in `ViewContactC
 
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
-a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]` where the details with flags are 
-specified in the form `-flag detail` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user input
-will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String array with
-the details to be edited. An `EditContactCommand` with the specified parameters will then be created and executed in 
-`Duke`. The sequence diagram below shows how the whole process is carried out.
+a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]`, where the details with flags are 
+specified in the form `-<flag> <detail>` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user 
+input will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String 
+array with the details to be edited. An `EditContactCommand` with the specified parameters will then be created and 
+executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
@@ -109,7 +153,7 @@ diagram below shows how the `execute()` function of `DeleteContactCommand` works
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
 
-### <a name="Search"></a>Searching a contact: `edit`
+### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
 a user must enter a command in the form `search [FLAG] [SEARCH QUERY]`. If no flag is specified, the search will be done
 on contact names buy default. From the user input, the search query and the search flag are obtained from the 
@@ -119,7 +163,7 @@ will be created and executed in `Duke`. The sequence diagram below shows how the
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
 
-### <a name="List"></a>Listing all contacts: `list`
+### <a name="List"></a>Listing all contacts: `ls`
 This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
 command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
 function in `TextUi` class.
@@ -153,6 +197,7 @@ additional devices or platforms.
 |v1.0|programmer|be able to copy and paste the displayed contact's URLs|visit the contact's accounts|
 |v2.0|programmer|save my personal details|the application is aware of the user|
 |v2.0|forgetful user|be able to search for my contacts by name|find their contact details|
+|v2.0|programmer|import a list of contacts quickly from an input txt file|save time typing each contact
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 

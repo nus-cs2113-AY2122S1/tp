@@ -73,7 +73,7 @@ Adds a specified contact to the ConTech Book.
 Usage: `add -n NAME -g GITHUB -l LINKEDIN -te TELEGRAM -tw TWITTER -e EMAIL`
 
 - ConTech is robust and allows you to specify your fields in any order.
-- The `-n` name field is the only compulsory field required to add a contact, the rest are optional.
+- The `-n` name field is the only compulsory field required to add a contact. The rest are optional.
 - Up to five other `FLAGS` and `DETAILS` can be specified
 - ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
 
