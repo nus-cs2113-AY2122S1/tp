@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author RemusTeo
+
 /**
  * Archive orders based on user input given date.
  */
@@ -63,10 +64,18 @@ public class ArchiveOrderCommand extends Command {
             e.printStackTrace();
         }
 
+        ArrayList<Medicine> filteredOrders = ordersToArchive(medicines, orderArchiveDate);
+        removeFromOrders(medicines, filteredOrders);
+
+        Storage storage = Storage.getInstance();
+        storage.archiveData(filteredOrders);
+        storage.saveData(medicines);
+        ui.print("Archived delivered orders from " + DateParser.dateToString(orderArchiveDate));
+        logger.log(Level.INFO, "Successful archive of order");
+    }
+
+    private ArrayList<Medicine> ordersToArchive(ArrayList<Medicine> medicines, Date orderArchiveDate) {
         ArrayList<Medicine> filteredOrders = new ArrayList<>();
-
-        assert (filteredOrders != null) : "Array is not initialised";
-
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Order)) {
                 continue;
@@ -79,16 +88,13 @@ public class ArchiveOrderCommand extends Command {
                 }
             }
         }
+        return filteredOrders;
+    }
 
+    private void removeFromOrders(ArrayList<Medicine> medicines, ArrayList<Medicine> filteredOrders) {
         for (Medicine medicine : filteredOrders) {
             medicines.remove(medicine);
         }
-
-        Storage storage = Storage.getInstance();
-        storage.archiveData(filteredOrders);
-        storage.saveData(medicines);
-        ui.print("Archived delivered orders from " + DateParser.dateToString(orderArchiveDate));
-        logger.log(Level.INFO, "Successful archive of order");
     }
 }
 

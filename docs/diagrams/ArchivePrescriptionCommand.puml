@@ -1,0 +1,49 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":ArchivePrescriptionCommand" as archivePrescription COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant ":PrescriptionValidator" as prescriptionValidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
+-> archivePrescription: execute()
+archivePrescription -> ui : getInstance()
+archivePrescription <-- ui
+archivePrescription -> medicine : getInstance()
+archivePrescription <-- medicine
+create prescriptionValidator
+archivePrescription -> prescriptionValidator: new PrescriptionValidator()
+archivePrescription <-- prescriptionValidator
+archivePrescription -> prescriptionValidator : containsInvalidParameters()
+archivePrescription <-- prescriptionValidator : isInvalidParameter
+
+opt !isInvalidParameter
+    archivePrescription -> prescriptionValidator : containsInvalidParameterValues()
+    archivePrescription <-- prescriptionValidator : isInvalidParameterValues
+    opt !isInvalidParameterValues
+        archivePrescription -> archivePrescription : prescriptionsToArchive()
+        archivePrescription --> archivePrescription : filteredPrescriptions
+        archivePrescription -> archivePrescription : removeFromPrescriptions()
+        archivePrescription --> archivePrescription
+    end
+end
+archivePrescription -> storage : getInstance()
+archivePrescription <-- storage
+archivePrescription -> storage : archiveData()
+archivePrescription <-- storage
+archivePrescription -> storage: saveData()
+archivePrescription <-- storage
+@enduml
