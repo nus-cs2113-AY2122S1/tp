@@ -33,7 +33,7 @@ public class ModuleManagerTest {
         IntStream.range(0, 5).forEach(i -> moduleManager.addModule(TEMP_MODULE + i));
         String[] listOfModules = moduleManager.getAllModules();
         assertEquals(5, listOfModules.length);
-        assertTrue(Arrays.asList(listOfModules).contains(TEMP_MODULE + 3));
+        assertTrue(Arrays.asList(listOfModules).contains(TEMP_MODULE.toUpperCase() + 3));
     }
 
     @Test

@@ -17,7 +17,7 @@ public class ModuleManager {
      * @return The NusModule Object for the given module name
      */
     public NusModule getModule(String moduleName) {
-        return moduleMap.get(moduleName);
+        return moduleMap.get(moduleName.toUpperCase());
     }
 
     /**
@@ -26,7 +26,7 @@ public class ModuleManager {
      * @param moduleName The module name of the new module
      */
     public void addModule(String moduleName) {
-        moduleMap.put(moduleName, new NusModule());
+        moduleMap.put(moduleName.toUpperCase(), new NusModule());
     }
 
     /**
@@ -36,7 +36,7 @@ public class ModuleManager {
      * @param module The NusModule object to set
      */
     public void setModule(String moduleName, NusModule module) {
-        moduleMap.put(moduleName, module);
+        moduleMap.put(moduleName.toUpperCase(), module);
     }
 
     /**
@@ -54,6 +54,6 @@ public class ModuleManager {
      * @param moduleName The module name of the module to remove
      */
     public void removeModule(String moduleName) {
-        moduleMap.remove(moduleName);
+        moduleMap.remove(moduleName.toUpperCase());
     }
 }

@@ -12,7 +12,7 @@ Type any of the following to get started:
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Module test has been added
+[] >>> Module TEST has been added
 [] >>> 
 Entering test workspace
 
