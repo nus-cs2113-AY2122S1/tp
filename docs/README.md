@@ -11,6 +11,6 @@ Sounds like the app for you? Head over to our [User Guide](UserGuide.md) to get 
 -----------
 
 You might be interested in:
-* 💻  [User Guide](UserGuide.md): great starting point for new users. 
+* 💻 [User Guide](UserGuide.md): great starting point for new users. 
 * 📖 [Developer Guide](DeveloperGuide.md): what makes Ha(ppy)Bit tick?
 * 👩‍💻👨‍💻 [About Us](AboutUs.md): find out about the developers behind Ha(ppy)Bit.
