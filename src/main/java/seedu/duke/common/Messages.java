@@ -41,6 +41,8 @@ public class Messages {
             + "  (!) Format: add t/TITLE i/ID";
     public static final String INVALID_TITLE = "  (!) Please enter a valid title";
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
+    // Edit
+    public static final String EDIT_MESSAGE = " (+) Edited item details:";
     // Generic Errors
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
 }
