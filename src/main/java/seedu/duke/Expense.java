@@ -20,6 +20,7 @@ public class Expense {
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private double exchangeRate;
 
+    //@@author lixiyuan416
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
@@ -37,6 +38,7 @@ public class Expense {
         this.personsList = listOfPersons;
         this.exchangeRate = exchangeRate;
     }
+    //@@author
 
     /**
      * Constructor for {@link Expense} class - contains parsing, date prompting and amount assignment.
@@ -114,6 +116,7 @@ public class Expense {
         return amountSplit;
     }
 
+    //@@author lixiyuan416
     /**
      * Prompts user for date.
      *

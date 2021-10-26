@@ -361,7 +361,8 @@ public class Parser {
     }
 
     protected static void updateIndividualSpending(Expense expense) {
-        boolean isLogDisplayed = false;
+        boolean hasLogged = false;
+        boolean shouldContinue = true;
 
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
@@ -374,13 +375,18 @@ public class Parser {
             for (Person person : expense.getPersonsList()) {
                 double amountRemaining = expense.getAmountSpent() - total;
                 if (Math.abs(amountRemaining) < EPSILON) {
-                    amountBeingPaid.put(person, 0d);
-                    if (!isLogDisplayed) {
-                        Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
-                        Ui.autoAssignIndividualSpending();
-                        isLogDisplayed = true;
+                    if (!hasLogged) {
+                        shouldContinue = getUserToConfirm();
                     }
-                    continue;
+
+                    if (shouldContinue) {
+                        amountBeingPaid.put(person, 0d);
+                        hasLogged = manageLog(hasLogged);
+                        continue;
+                    } else {
+                        updateIndividualSpending(expense);
+                        return;
+                    }
                 }
                 Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
                 String amountString = Storage.getScanner().nextLine().strip();
@@ -418,6 +424,35 @@ public class Parser {
             updateIndividualSpending(expense);
         }
     }
+
+    //@@author lixiyuan416
+    private static boolean manageLog(boolean isLogDisplayed) {
+        if (!isLogDisplayed) {
+            Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
+            Ui.autoAssignIndividualSpending();
+            isLogDisplayed = true;
+        }
+        return isLogDisplayed;
+    }
+
+    private static boolean getUserToConfirm() {
+        Ui.askUserToConfirm();
+        boolean isValidInput = false;
+        boolean doesUserAgree = false;
+        while (!isValidInput) {
+            String userReply = Storage.getScanner().nextLine();
+            if (userReply.equalsIgnoreCase("y")) {
+                isValidInput = true;
+                doesUserAgree = true;
+            } else if (userReply.equalsIgnoreCase("n")) {
+                isValidInput = true;
+            } else {
+                System.out.println("Enter y/n");
+            }
+        }
+        return doesUserAgree;
+    }
+    //@@author
 
     private static Person getValidPersonInExpenseFromString(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {

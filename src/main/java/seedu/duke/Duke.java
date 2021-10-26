@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Duke {
@@ -15,6 +16,8 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         Storage.setScanner(in);
         Logger logger = Logger.getLogger("ProgramLogger");
+        //Temporary disable logger
+        logger.setLevel(Level.OFF);
         Storage.setLogger(logger);
 
         FileStorage.initializeGson();
