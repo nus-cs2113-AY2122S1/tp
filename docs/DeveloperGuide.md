@@ -71,7 +71,7 @@ The UI component
 ### Storage
 #### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)
 <p align = "center">
-<img src="images/storage.png" width = "500" />
+<img src="images/storage.png" width = "800" />
 </p>
 
 The storage component can implement the below features:
