@@ -41,7 +41,6 @@ public class Lesson extends Event {
         setModuleCode(moduleCode);
         setClassNo(classNo);
         setOccurrences(weeks);
-        System.out.println(Arrays.toString(occurrences));
     }
 
     public void setOccurrences(int[] occurrences) {
