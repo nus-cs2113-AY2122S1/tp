@@ -27,11 +27,14 @@ How deleting works:
 
 #### Select Functionality
 
+![](images/SelectDiagram.png)
 
 How selecting an `Event` or an event's nested `Task` works:
 1. When the `Parser` class parses `select` as the command from the user, a new `Command` object, `SelectCommand` is created.
 2. If the command contains a valid flag (`-e` or `-t`), `SelectCommand` processes the input from the user by calling `prepareInputs`.
-3. 
+3. If the user selects an `Event`, `SelectCommand` updates the index of this `Event` in `Parser`.
+4. `SelectCommand` then passes the processed inputs back to `Parser`, which passes it back to `Duke`.
+5. `Duke` then calls the `execute` method in `SelectCommand` which will return an object of type `CommandResult`, and the respective output will be printed.
 
 
 ### Storage component
