@@ -34,7 +34,7 @@ they can plan multiple activities per day.
 #### Documentation
 * User Guide (UG)
   * Created overall structure of the UG.
-  * Kept it updated.
+  * Kept it updated and debugged.
   * Wrote Introduction, Contents Table, Quick Start, new, add-day, add-item, view sections.
 * Developer Guide (DG)
   * Created overall structure of the DG.
