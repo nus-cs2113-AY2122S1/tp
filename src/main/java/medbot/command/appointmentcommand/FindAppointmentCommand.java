@@ -4,6 +4,7 @@ import medbot.Scheduler;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
 import medbot.person.PersonType;
+import medbot.ui.SchedulerUi;
 import medbot.ui.Ui;
 import medbot.utilities.FilterType;
 
@@ -34,7 +35,9 @@ public class FindAppointmentCommand extends Command {
         default:
         }
         if (output.isEmpty()) {
-            output = ui.getNoAppointmentsFoundMessage();
+            output = SchedulerUi.getNoAppointmentsFoundMessage();
+        } else {
+            output = SchedulerUi.getFindAppointmentListMessage(output);
         }
         ui.printOutput(output);
     }
