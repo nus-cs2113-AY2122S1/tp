@@ -22,7 +22,6 @@ import java.util.logging.Level;
 
 public class FileStorage {
 
-    private static final String FILE_PATH = "trips.json";
     private static Gson gson;
 
     /**
