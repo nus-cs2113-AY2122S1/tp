@@ -12,7 +12,7 @@ import static seedu.duke.common.Messages.INVALID_VALUES;
 import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 
 public class AddMagazineCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add b t/TITLE i/ID p/PUBLISHER e/edition";
+    public static final String COMMAND_FORMAT = "  Format: add b t/TITLE i/ID p/PUBLISHER e/EDITION";
 
     public static final String ADD_MESSAGE = "  (+) Added new magazine item to the catalogue";
     public static final String COMMAND_WORD = "add b";
