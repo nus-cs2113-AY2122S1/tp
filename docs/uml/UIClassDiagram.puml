@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class Terminus {
+  - moduleStorage: ModuleStorage
+  + {static} main(args: String[]): void
+  + run(): void
+  - start(): void
+  - runCommandsUntilExit(): void
+  - handleIoException(): void
+  - exit(): void
+}
+
+class Ui {
+  - {static} UI: ui
+  - scanner: Scanner
+  + {static} getInstance(): Ui
+  - Ui()
+  + Ui(in: InputStream)
+  + printParserBanner(parser: CommandParser, moduleManager: ModuleManager): void
+  + requestCommand(workspaceName: String): String
+  + printSection(strings: String[]): void
+  + printExitMessage(): void
+  + getUserInput(prompt: String): String
+}
+
+class GameEnvironment {
+  - questionGenerator: QuestionGenerator
+  + {static} createNewEnvironment(questions: List<Question>, questionCount: int)
+  GameEnvironment(ui: Ui, generator: QuestionGenerator)
+  + run(): void
+  - showPreGameInformation(): void
+  - promptQuestion(): Question
+  - getUserFeedback(): int
+  - updateQuestionDifficulty(question: Question: difficulty: int): void
+}
+
+Terminus -> "1" Ui
+Ui "1" <-- GameEnvironment
+
+@enduml

@@ -132,17 +132,30 @@ Import the coding style xml file into your IntelliJ IDEA.
 ### 3.1 Architecture
 
 ### 3.2 UI Component
+![](attachments/UIClassDiagram.png)
+
+The Ui Component consists of the `Ui` class which handles all input and output operations within 
+TermiNUS application. To reduce coupling, we have used `Ui` on only the main runner `Terminus`, and 
+the Active Recall `GameEnvironment`. If future features require the extended use of `Ui`, they may 
+call `getInstance()` from `Ui` to get the same singleton class as both `GameEnvironment` and 
+`Terminus`.
+
+The `Ui` implements the following functionality:
+- Printing large custom banners with moving to new workspaces.
+- Getting of user input through `getUserInput()` and `requestCommand()`.
+- Printing string arrays to the output through `printSection()`.
+
 
 ### 3.3 Parser Component
 ![](attachments/ParserClassDiagram.png)
 
-The CommandParser Component consist the the `CommandParser` and multiple `XYZCommandParser`, 
+The CommandParser Component consist of the `CommandParser` and multiple `XYZCommandParser`, 
 each representing a specific type command parser. The `CommandParser` will receive a command in 
 `parseCommand` function and check the according `HashMap<String, Command>` before 
 returning the according `Command` object back. 
 
 The `CommandParser` implements the following functionality:
-- parsing the command string and giving the respective `Command` object 
+- Parsing the command string and giving the respective `Command` object 
 - Keeps track of the workspace
 - Provides functionality to list all commands for the help `Command`
 
@@ -274,79 +287,78 @@ Once all the relevant `Link` objects have been collected, the application will s
 
 
 ### 4.2 Active Recall Implementation
-![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
+
+This section details the technical implementation of Active Recall.
 
 To view the high-level diagram, head to 
 [3.7 Active Recall Component](#37-active-recall-component).
 
-When the user executes the `TestCommand`, the `GameEnvironment` will be created with the static 
-method `GameEnvironment.createNewEnvironment()`, where it will handle the creation of
+#### 4.2.1 Current Implementation
+
+![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
+
+**Step 1:** When the user executes the `TestCommand`, the `GameEnvironment` will be created with the
+static method `GameEnvironment.createNewEnvironment()`, where it will handle the creation of
 `QuestionGenerator` as well. 
 
-The `QuestionGenerator` creates a `NavigableMap<Double, Question>` to store all the questions, where
-the `Double` is the `question.getWeight() + total`, where total is the current sum of all the 
-weights currently in the bank. The rationale for the `NavigableMap` and key value will be explained 
-at `promptQuestion()` below.
+**Step 2:** The `QuestionGenerator` creates a `NavigableMap<Double, Question>` to store all the 
+questions, where the `Double` is the `question.getWeight() + total`, where total is the current sum 
+of all the weights currently in the bank. The rationale for the `NavigableMap` and key value will be
+explained at `promptQuestion()` below.
 
-The newly created `GameEnvironment` will be returned to `TestCommand` where it would call the `run` 
-method within the object.
+**Step 3:** The newly created `GameEnvironment` will be returned to `TestCommand` where it would 
+call the `run` method within the object.
 
-The `run()` method consists of 4 main steps (with step 2 to 4 repeating for every question):
-1. `showPreGameInformation()`
-2. `promptQuestion()`
-3. `getUserFeedback()`
-4. `updateQuestionDifficulty(question, difficulty)`
-
-The `showPreGameInformation()` method will print the information once on the current Active Recall 
+**Step 4:** The `showPreGameInformation()` method will print the information once on the current Active Recall 
 session, such as the actual question pool size, and may include more information and statistics in 
 the future.
 
-Next, the `run()` method will start a loop and check if there are questions in the local 
+**Step 5:** Next, the `run()` method will start a loop and check if there are questions in the local 
 `questionGenerator` to ensure that the session can continue. After which, the `promptQuestion()` is 
 called, where the next question is pulled from `questionGenerator.next()` and displayed to the user.
 
-Within the `next()` method in the `QuestionGenerator`, it will find a random `double` number from 
-`0` to `total`, and look up a `Question` that is closest to the value. This was the reason for 
-using `NavigableMap` as it provides a method called `.higherEntry(key)`, which guarantees a 
-`Question` is returned provided the value never exceeds the total weight of the question pool (which
-should never happen as the random number generator can only generate between `0` and `total`).
+**Step 6:** Within the `next()` method in the `QuestionGenerator`, it will find a random `double` 
+number from `0` to `total`, and look up a `Question` that is closest to the value. When the 
+<kbd>Enter</kbd> key is pressed by the user, the answer is then displayed and the `promptQuestion()` 
+passes the `Question` object back to the `run()` method.
 
-To prevent the user from viewing the answers before they are ready, we have decided to require the 
-user to press Enter to display the answer as a method of confirmation, as it is the most effective 
-way to ensure the answer does not get revealed unless the user intents to view it. The answer is 
-then displayed when the <kbd>Enter</kbd> key is hit, and the `promptQuestion()` passes the 
-`Question` asked back to the `run()` method.
-
-The program now runs `getUserFeedback()` to collect user feedback. This is where we utilized the 
-same `Ui` class to handle the input of the user data for consistency and future-proofing, and return
+**Step 7:** The program now runs `getUserFeedback()` to collect user feedback, and return
 the difficulty back to `run()` after cleaning the input. This is also when the user can decide if 
 they wish to quit the session, and if they do, the difficulty value will be set to `EXIT_CODE = -1`.
 
-If the `difficulty` is checked to be the `EXIT_CODE`, the loop will break and return. Otherwise, the
+**Step 8:** If the `difficulty` is checked to be the `EXIT_CODE`, the loop will break and return. Otherwise, the
 `Question`'s difficulty will now be changed in the `updateQuestionDifficulty(question, difficulty)` 
 method, where we use the difference between the extremes and the current difficulty to apply into 
-the logistic curve to determine the amount to increase or decrease the weight of the randomness by. 
+the logistic curve to determine the amount to increase or decrease the weight of the randomness by.
 
-The parameters of the logistic curve can be viewed here:
-https://www.desmos.com/calculator/qefovvnuhx.  
-The input `x` value is the difference between the extreme and the current weight (e.g. if the weight 
-is `0.5` the extreme is the `MAX_VALUE = 0.9` when the question is deemed hard, then the difference
-`x` will be `0.9 - 0.5 = 0.4`). The resultant `y` value is used to add or subtract the existing
-weight if the question is deemed hard or easy to increase or decrease the chances of the questions 
-appearing respectively (e.g. using the same `x = 0.4` value, the `y` value will be `0.225` and it 
-will be added to `0.5` to form the new weight `0.725`).
+**Step 9:** Once the adjustment of weights of the question is done, **Step 5 to 9** is repeated if 
+there are questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
+and the input will be passed back to the `CommandParser`.
 
-The rationale behind using the logistic curve is to ensure that as harder questions appear more 
-often and easier questions appear less. We also want to ensure once the user finds a hard question 
+#### 4.2.2 Design Consideration
+
+The reason for using `NavigableMap` to generate questions was because it provides a method called 
+`.higherEntry(key)`, which guarantees a `Question` is returned provided the value never exceeds 
+the total weight of the question pool (which should never happen as the random number generator can 
+only generate between `0` and `total`).
+
+To prevent the user from viewing the answers before they are ready, we have decided to require the
+user to press Enter to display the answer as a method of confirmation, as it is the most effective
+way to ensure the answer does not get revealed unless the user intents to view it.
+
+The rationale behind using the logistic curve is to ensure that as harder questions appear more
+often and easier questions appear less. We also want to ensure once the user finds a hard question
 easy, it should quickly move down a difficulty and vice versa. The application of the logistic curve
-also prevents the values from increasing too rapidly, and dominating the question pools. It also 
-prevents the case where easy questions disappear entirely from the question pool due to low weights. 
-We will continue to seek user feedback and tweak the curve parameters if needed if there are any 
+also prevents the values from increasing too rapidly, and dominating the question pools. It also
+prevents the case where easy questions disappear entirely from the question pool due to low weights.
+We will continue to seek user feedback and tweak the curve parameters if needed if there are any
 issues.
 
-Once the adjustment of weights of the question is done, the process is repeated if there are 
-questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
-and the input will be passed back to the `CommandParser`.
+![](attachments/desmos-graph.png)
+The parameters of the logistic curve can be viewed here:
+[https://www.desmos.com/calculator/qefovvnuhx](https://www.desmos.com/calculator/qefovvnuhx).
+
+
 
 ### 4.3 Workspace Implementation
 

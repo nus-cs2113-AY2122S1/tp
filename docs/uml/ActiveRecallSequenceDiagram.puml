@@ -16,10 +16,13 @@ participant ":DifficultyModifier" as DifficultyModifier #lightskyblue
 participant ":Question" as Question #lightskyblue
 endbox
 
--> TestCommand : execute(ui, moduleManager)
+-> TestCommand : execute(moduleManager)
 activate TestCommand
-TestCommand -> GameEnvironment : createNewEnvironment(ui, questions, count)
-activate GameEnvironment 
+TestCommand -> GameEnvironment : createNewEnvironment(questions, count)
+activate GameEnvironment
+  GameEnvironment -> Ui : getInstance()
+  activate Ui
+  return ui
   create QuestionGenerator
   GameEnvironment -> QuestionGenerator : new QuestionGenerator(questions, count)
   activate QuestionGenerator
