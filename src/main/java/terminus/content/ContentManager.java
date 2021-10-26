@@ -103,10 +103,16 @@ public class ContentManager<T extends Content> {
         this.contents = new ArrayList<>();
     }
 
+    /**
+     * Checks if name is unique in the Arraylist contents.
+     *
+     * @param name The new content name to be added.
+     * @return True if there is a similar name, false otherwise.
+     */
     public boolean isDuplicateName(String name) {
         if (contents.size() < 1) {
             return false;
         }
-        return contents.stream().anyMatch(x -> x.getName().equals(name));
+        return contents.stream().anyMatch(x -> x.getName().toLowerCase().equals(name.toLowerCase()));
     }
 }

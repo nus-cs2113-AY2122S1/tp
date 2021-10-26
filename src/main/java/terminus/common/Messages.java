@@ -55,6 +55,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
     public static final String ERROR_MESSAGE_NO_QUESTIONS =
         "There are no questions to be tested on. Type 'questions add' to get started";
+    public static final String ERROR_MESSAGE_INVALID_DURATION_FORMAT = "Invalid duration format.";
 
     public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
     public static final String ERROR_FILE_NOT_DELETED = "Unable to delete the file.";
@@ -101,4 +102,5 @@ public class Messages {
     public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
     public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";
     public static final String UPDATE_MODULE_RESPONSE_MESSAGE = "Updated %s to %s successfully.";
+    public static final String MESSAGE_COMMAND_GO = "Go to a specific module's workspace";
 }

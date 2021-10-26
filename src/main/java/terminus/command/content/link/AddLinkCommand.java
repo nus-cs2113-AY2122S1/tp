@@ -6,6 +6,7 @@ import static terminus.common.CommonUtils.isValidUrl;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -68,7 +69,14 @@ public class AddLinkCommand extends Command {
         this.description = argArray.get(0);
         this.day = argArray.get(1);
         this.startTime = CommonUtils.convertToLocalTime(userStartTime);
-        this.duration = Integer.parseInt(argArray.get(3));
+
+        try {
+            this.duration = Integer.parseInt(argArray.get(3));
+        } catch (NumberFormatException e) {
+            TerminusLogger.warning(String.format("Invalid Duration"));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION_FORMAT));
+        }
+
         this.link = argArray.get(4);
 
         if (!isValidDay(this.day)) {

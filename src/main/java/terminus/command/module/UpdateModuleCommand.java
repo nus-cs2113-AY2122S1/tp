@@ -55,6 +55,7 @@ public class UpdateModuleCommand extends Command {
         } else if (!CommonUtils.isValidFileName(newName)) {
             throw new InvalidArgumentException(Messages.ERROR_INVALID_FILE_NAME);
         }
+        newName = newName.toUpperCase();
     }
 
     @Override
