@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Task;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.items.Event;
@@ -22,6 +23,7 @@ public class UpdateCommand extends Command {
     protected static final String DESCRIPTION_FLAG = "description/";
     protected static final String TASK_FLAG = "task/";
     protected static final String MEMBER_FLAG = "member/";
+    protected static final String REMOVE_FLAG = "remove/";
 
     public UpdateCommand(String[] command) {
         if (command.length < 2) {
@@ -110,11 +112,41 @@ public class UpdateCommand extends Command {
             } else if (update.contains(MEMBER_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                 updateMember(attribute[1], taskToBeUpdated);
-            } else {
+            } else if (update.contains(REMOVE_FLAG)) {
+                attribute[1] = attribute[1].replaceAll("\\s", "");
+                removeMember(attribute[1], taskToBeUpdated);
+            }  else {
                 System.out.println("invalid Command!");
             }
         }
         Ui.printLineBreak();
+    }
+
+    private void removeMember(String index, Task taskToBeUpdated) {
+        Ui.printLineBreak();
+        int memberIndex = Integer.parseInt(index) - 1;
+        Member memberToBeRemoved = taskToBeUpdated.memberList.get(memberIndex);
+        System.out.println("Are you sure you want to remove " + memberToBeRemoved.getName() + " from this task (y/n)");
+        Ui.printLineBreak();
+        boolean exit = false;
+        while (!exit) {
+            String userInput = Ui.readInput();
+            Ui.printLineBreak();
+            if (taskToBeUpdated.memberList.size() <= 1) {
+                System.out.println("Task cannot be carried out without a member, no member removed!");
+                exit = true;
+            } else if (userInput.equalsIgnoreCase("y")) {
+                System.out.println(memberToBeRemoved.getName() + " removed from Task!");
+                taskToBeUpdated.memberList.remove(memberIndex);
+                exit = true;
+            } else if (userInput.equalsIgnoreCase("n")) {
+                System.out.println("No member removed from Task!");
+                exit = true;
+            } else {
+                System.out.println("please key in [y] for yes and [n] for no");
+                Ui.printLineBreak();
+            }
+        }
     }
 
     private void updateMember(String memberToBeUpdated, Task taskToBeUpdated) throws DukeException {
@@ -155,6 +187,7 @@ public class UpdateCommand extends Command {
                 + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
                 + System.lineSeparator() + "description/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
+                + System.lineSeparator() + "remove/[MEMBER INDEX]"
                 + System.lineSeparator()
                 + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
@@ -173,7 +206,9 @@ public class UpdateCommand extends Command {
     }
 
     private void postUpdateMessage() {
-        System.out.println("Here is the updated Event");
+        System.out.println("Here is the Event"
+                + System.lineSeparator()
+                + "---------------------------");
         Ui.printUpdatedEvent(eventToBeUpdated);
     }
 

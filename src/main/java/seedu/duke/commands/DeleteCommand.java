@@ -22,7 +22,8 @@ public class DeleteCommand extends Command {
 
     // input from user
     private String itemFlag;
-    private int indexToDelete;
+    private int eventIndexToDelete;
+    private int taskIndexToDelete;
 
     private boolean isDeleteAll;
     private boolean isCorrectFormat;
@@ -37,7 +38,7 @@ public class DeleteCommand extends Command {
 
         isCorrectFormat = true;
         isDeleteAll = false;
-        logger.setLevel(Level.INFO);
+        logger.setLevel(Level.SEVERE);
 
         try {
             logger.log(Level.INFO, "going to start processing");
@@ -79,13 +80,13 @@ public class DeleteCommand extends Command {
 
             String deletedItem;
             if (isEventFlag(itemFlag)) {
-                assert indexToDelete < eventCatalog.size();
-                deletedItem = deleteEvent(indexToDelete);
+                assert eventIndexToDelete < eventCatalog.size();
+                deletedItem = deleteEvent(eventIndexToDelete);
                 Parser.updateIndexToNoEventSelected();
                 return new CommandResult(Ui.getEventDeletionMessage(deletedItem));
             } else if (isTaskFlag(itemFlag)) {
-                assert indexToDelete < eventCatalog.size();
-                deletedItem = deleteTask(indexToDelete);
+                assert eventIndexToDelete < eventCatalog.size();
+                deletedItem = deleteTask(taskIndexToDelete);
                 return new CommandResult(Ui.getTaskDeletionMessage(deletedItem));
             } else if (isMemberFlag(itemFlag)) {
                 deletedItem = deleteMember(indexOfMemberToDelete);
@@ -99,11 +100,21 @@ public class DeleteCommand extends Command {
         if (command.length == 2) {
             if (isMemberFlag(itemFlag)) {
                 throw new DukeException("Please give me the name of the member you wish to delete!");
-            } else {
+            } else if (isEventFlag(itemFlag)) {
                 throw new DukeException("Please give me the index of the event you wish to delete!");
+            } else if (isTaskFlag(itemFlag)) {
+                throw new DukeException("Please give me the index of the task you wish to delete!");
+            } else {
+                throw new DukeException("Please enter a valid index!");
             }
-        } else if (isEventFlag(itemFlag) || isTaskFlag(itemFlag)) {
-            indexToDelete = getIndex(command[2]);
+        } else if (isEventFlag(itemFlag)) {
+            eventIndexToDelete = getIndex(command[2]);
+            Parser.updateIndexOfLastSelectedEvent(eventIndexToDelete);
+        } else if (isTaskFlag(itemFlag)) {
+            if (Parser.noEventSelected()) {
+                throw new DukeException("Select an event first!");
+            }
+            taskIndexToDelete = getIndex(command[2]);
         } else if (isMemberFlag(itemFlag)) {
             indexOfMemberToDelete = getMemberIndex(command[2]);
             if (!memberExists()) {
@@ -121,8 +132,9 @@ public class DeleteCommand extends Command {
     }
 
     private static String deleteTask(int index) {
-        String taskTitle = eventCatalog.get(index).getTitle();
-        eventCatalog.remove(index);
+        int lastEventIndex = Parser.getIndexOfLastSelectedEvent();
+        String taskTitle = eventCatalog.get(lastEventIndex).getTaskList().get(index).getTitle();
+        eventCatalog.get(lastEventIndex).getTaskList().remove(index);
         return taskTitle;
     }
 
