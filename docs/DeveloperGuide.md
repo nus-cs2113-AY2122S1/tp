@@ -12,11 +12,15 @@ This section provides an overview of the design architecture and implementation 
 
 ### Entrypoint of Libmgr
 
+![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
+
 ---
 
 ### Data Package
 
 The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
+
+![ItemsClassDiagram](img/ItemsClassDiagram.png)
 
 ## Product scope
 ### Target user profile
