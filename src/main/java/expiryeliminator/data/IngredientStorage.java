@@ -10,7 +10,7 @@ import expiryeliminator.data.exception.IllegalValueException;
  * Represents the storage of a particular ingredient.
  */
 public class IngredientStorage {
-    private final Ingredient ingredient;
+    private Ingredient ingredient;
     private int quantity = 0;
     private final TreeMap<LocalDate, Integer> ingredientBatches = new TreeMap<>();
 
@@ -30,6 +30,15 @@ public class IngredientStorage {
      */
     public Ingredient getIngredient() {
         return ingredient;
+    }
+
+    /**
+     * Set ingredient with associated input.
+     *
+     * @param ingredientInput ingredient to be copied to the ingredient object in the class.
+     */
+    public void setIngredient(Ingredient ingredientInput) {
+        ingredient = ingredientInput;
     }
 
     /**
