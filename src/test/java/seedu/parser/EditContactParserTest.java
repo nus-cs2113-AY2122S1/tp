@@ -113,4 +113,24 @@ class EditContactParserTest {
         assertThrows(InvalidGithubUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
     }
 
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidEmail_exceptInvalidEmailException() {
+        String testInput = "edit 1 -e akshay@@gmail.com";
+        assertThrows(InvalidEmailException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidEmailMissingDetails_exceptInvalidEmailException() {
+        String testInput = "edit 1 -e akshaygmail.com";
+        assertThrows(InvalidEmailException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidName_exceptInvalidNameException() {
+        String testInput = "edit 1 -n akshaygivema123rksplsss";
+        assertThrows(InvalidNameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
 }
