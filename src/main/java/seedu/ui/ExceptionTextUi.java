@@ -132,6 +132,15 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void missingArgEditMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      example : edit 0 -n George -g procoder -te george123"
+                + "NOTE : At least one flag and description required";
+        printDoubleLineMessage(message);
+    }
+
     public static void missingIndexMessage() {
         String message = "There seems to be missing index in your request.\n"
                 + "Please enter index in the following way: \n"
