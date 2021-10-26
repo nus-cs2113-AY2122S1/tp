@@ -59,4 +59,18 @@ class EditContactParserTest {
         assertThrows(MissingArgEditException.class, () -> editContactParser.parseContactDetails(testInput));
     }
 
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_noFlags_expectMissingArgEditException() {
+        String testInput = "edit";
+        assertThrows(MissingArgEditException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_missingDescription_expectMissingDetailException() {
+        String testInput = "edit 1 -n";
+        assertThrows(MissingDetailException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
 }
