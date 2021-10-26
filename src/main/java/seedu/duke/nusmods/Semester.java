@@ -2,11 +2,11 @@ package seedu.duke.nusmods;
 
 import seedu.duke.exception.ImpossibleError;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Period;
 import java.time.Year;
-import java.time.DayOfWeek;
+import java.time.temporal.ChronoUnit;
 import java.util.stream.IntStream;
 
 import static java.time.temporal.TemporalAdjusters.firstInMonth;
@@ -19,21 +19,29 @@ public enum Semester {
         return Semester.values()[n - 1];
     }
 
-    public static Semester getSemester() {
-        // FIXME
-        return S1;
+    public static Semester getSemester(LocalDate date) {
+        for (Semester s : Semester.values()) {
+            if (ChronoUnit.DAYS.between(s.getStartingMonday(), date) <= s.getWeekLength() * 7) {
+                return s;
+            }
+        }
+        throw new ImpossibleError();
     }
 
-    public Period getLength() {
+    public static Semester getSemester() {
+        return getSemester(LocalDate.now());
+    }
+
+    public long getWeekLength() {
         switch (this) {
         case S1:
-            return Period.ofWeeks(18);
+            return 18;
         case S2:
-            return Period.ofWeeks(17);
+            return 17;
         case ST1:
         case ST2:
         default:
-            return Period.ofWeeks(6);
+            return 6;
         }
     }
 

@@ -13,7 +13,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.stream.StreamSupport;
@@ -26,7 +30,7 @@ public class NusModsParser {
     private static final int TIMEOUT = 5000;
 
     /**
-     * Get Lesson objects of a particular class
+     * Get Lesson objects of a particular class.
      * @param moduleCode The module code to be queried
      * @param classNo The class number to be queried
      * @return An array of Lessons denoting all class occurrences
