@@ -2,7 +2,6 @@ package seedu.duke.logic.commands.task;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
-import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
@@ -26,8 +25,8 @@ public class DoneTaskCommandTest {
         LessonList lessonList = new LessonList();
         ModuleList moduleList = new ModuleList();
 
-        taskList.addTask(new Task("task 1", "mon", "", "None"));
-        taskList.addTask(new Task("task 2", "fri", "someInfo", "Low"));
+        taskList.addTask(new Task("task 1", "Monday", "L", "-"));
+        taskList.addTask(new Task("task 2", "Friday", "L", "someInfo"));
 
         try {
             new DoneTaskCommand(0).execute(ui, storage, taskList, lessonList, moduleList);

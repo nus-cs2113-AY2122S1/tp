@@ -1,24 +1,27 @@
 package seedu.duke.model.task;
 
 import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.core.Priority;
-import seedu.duke.model.task.exceptions.DeserializeTaskException;
+import seedu.duke.DukeException;
+import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.util.exceptions.InvalidDayException;
 import seedu.duke.ui.Ui;
 
-public class Task {
+import static seedu.duke.commons.util.DayUtil.compareDay;
+
+public class Task implements Comparable<Task> {
     private final String title;
     private final String dayOfTheWeek;
+    private final String priority;
     private final String information;
     private boolean isDone;
-    private final String priority;
 
-    public Task(String title, String dayOfTheWeek, String information, String priority) {
+    public Task(String title, String dayOfTheWeek, String priority, String information) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
+        this.priority = priority;
         this.information = information;
         this.isDone = false;
-        this.priority = priority;
     }
 
     public String getTitle() {
@@ -29,12 +32,12 @@ public class Task {
         return dayOfTheWeek;
     }
 
-    public String getInformation() {
-        return information;
-    }
-
     public String getPriority() {
         return priority;
+    }
+
+    public String getInformation() {
+        return information;
     }
 
     public String getStatusIcon() {
@@ -55,7 +58,7 @@ public class Task {
      * @return serialized task data
      */
     public String serialize() {
-        return (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information + " | " + priority;
+        return (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + priority + " | " + information;
     }
 
     /**
@@ -68,22 +71,11 @@ public class Task {
         try {
             String[] params = line.split("\\s*[|]\\s*");
 
-            String dayOfTheWeek = params[2];
-            if (!DayOfTheWeek.is(dayOfTheWeek)) {
-                throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
-            }
-            dayOfTheWeek = DayOfTheWeek.toProper(dayOfTheWeek);
-
-            String information = params[3];
-
-            String priority = params[4];
-            if (!Priority.is(priority)) {
-                throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_TASK);
-            }
-            priority = Priority.toProper(priority);
-
             String title = params[1];
-            Task task = new Task(title, dayOfTheWeek, information, priority);
+            String dayOfTheWeek = DayOfTheWeek.toProper(params[2]);
+            String priority = Priority.toProper(params[3]);
+            String information = params[4];
+            Task task = new Task(title, dayOfTheWeek, priority, information);
 
             boolean isTaskDone = params[0].equals("1");
             if (isTaskDone) {
@@ -91,7 +83,7 @@ public class Task {
             }
 
             return task;
-        } catch (ArrayIndexOutOfBoundsException | DeserializeTaskException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             // Ignoring the particular line
             ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
             return null;
@@ -99,11 +91,22 @@ public class Task {
     }
 
     @Override
+    public int compareTo(Task t) {
+        try {
+            return compareDay(this.getDayOfTheWeek(), t.getDayOfTheWeek());
+        } catch (InvalidDayException e) {
+            // Ignore and return 0
+            System.out.println("Error: Day comparison result is incorrect.");
+            return 0;
+        }
+    }
+
+    @Override
     public String toString() {
         return getStatusIcon() + " " + title + " (" + dayOfTheWeek + ")"
+                + System.lineSeparator() + Ui.PADDING + "       Priority: " + priority
                 + (information.isBlank()
                         ? ""
-                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information
-                + System.lineSeparator() + Ui.PADDING + "       Priority: " + priority);
+                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information);
     }
 }

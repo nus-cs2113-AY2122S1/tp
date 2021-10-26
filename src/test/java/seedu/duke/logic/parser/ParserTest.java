@@ -72,7 +72,7 @@ public class ParserTest {
 
     @Test
     public void parseMarkTaskDone_indexNotANumber_exceptionThrown() {
-        String userResponse = "done m";
+        String userResponse = "done task m";
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 

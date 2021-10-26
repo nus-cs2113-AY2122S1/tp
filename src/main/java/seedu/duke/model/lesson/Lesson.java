@@ -4,14 +4,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import seedu.duke.commons.core.DayOfTheWeek;
+import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
-import seedu.duke.commons.util.exceptions.TimeParseException;
-import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
 import seedu.duke.ui.Ui;
-
-import static seedu.duke.commons.core.DayOfTheWeek.is;
-import static seedu.duke.commons.core.DayOfTheWeek.toProper;
 
 public class Lesson {
     private final String title;
@@ -68,12 +65,7 @@ public class Lesson {
             String[] params = line.split("\\s*[|]\\s*");
 
             String title = params[0];
-
-            String dayOfTheWeek = params[1];
-            if (!is(dayOfTheWeek)) {
-                throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_LESSON);
-            }
-            dayOfTheWeek = toProper(dayOfTheWeek);
+            String dayOfTheWeek = DayOfTheWeek.toProper(params[1]);
 
             String startTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[2]))
                     .format(DateTimeFormatter.ofPattern("hh:mm a"));
@@ -82,10 +74,8 @@ public class Lesson {
                     .format(DateTimeFormatter.ofPattern("hh:mm a"));
 
             String meetingUrl = params[4];
-
             return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DeserializeLessonException
-                | TimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DukeException e) {
             // Ignoring the particular line
             ui.printMessage(Messages.ERROR_DESERIALIZING_LESSON);
             return null;

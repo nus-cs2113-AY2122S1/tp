@@ -1,5 +1,7 @@
 package seedu.duke.commons.core;
 
+import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
+
 public enum DayOfTheWeek {
     MON, TUE, WED, THU, FRI, SAT, SUN;
 
@@ -13,6 +15,7 @@ public enum DayOfTheWeek {
         if (param.length() < 3) {
             return false;
         }
+
         for (DayOfTheWeek day : DayOfTheWeek.values()) {
             if (param.substring(0, 3).equalsIgnoreCase(day.toString())) {
                 return true;
@@ -21,7 +24,11 @@ public enum DayOfTheWeek {
         return false;
     }
 
-    public static String toProper(String param) {
+    public static String toProper(String param) throws DayOfTheWeekException {
+        if (!is(param)) {
+            throw new DayOfTheWeekException(Messages.ERROR_INVALID_DAY);
+        }
+
         switch (param.substring(0, 3).toLowerCase()) {
         case "mon":
             return "Monday";
@@ -38,7 +45,7 @@ public enum DayOfTheWeek {
         case "sun":
             return "Sunday";
         default:
-            return "";
+            throw new DayOfTheWeekException(Messages.ERROR_INVALID_DAY);
         }
     }
 }

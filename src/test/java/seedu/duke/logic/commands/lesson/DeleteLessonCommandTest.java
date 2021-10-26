@@ -19,8 +19,8 @@ class DeleteLessonCommandTest {
     @Test
     public void deleteLesson_lessonToDelete_lessonDeleted() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("lesson 1", "tue", "12:00", "14:00", ""));
-        lessonList.addLesson(new Lesson("lesson 2", "thu", "15:00", "17:00", "https://example.com/"));
+        lessonList.addLesson(new Lesson("lesson 1", "Tuesday", "12:00 PM", "02:00 PM", "-"));
+        lessonList.addLesson(new Lesson("lesson 2", "Thursday", "03:00 PM", "05:00 PM", "https://example.com/"));
 
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -40,8 +40,8 @@ class DeleteLessonCommandTest {
     @Test
     public void deleteLesson_indexOutOfBounds_exceptionThrown() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("lesson 1", "tue", "12:00", "14:00", ""));
-        lessonList.addLesson(new Lesson("lesson 2", "thu", "15:00", "17:00", ""));
+        lessonList.addLesson(new Lesson("lesson 1", "Tuesday", "12:00 PM", "02:00 PM", "-"));
+        lessonList.addLesson(new Lesson("lesson 2", "Thursday", "03:00 PM", "05:00 PM", "-"));
 
         Ui ui = new Ui();
         Storage storage = new Storage();

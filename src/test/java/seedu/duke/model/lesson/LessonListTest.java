@@ -18,7 +18,7 @@ public class LessonListTest {
     @Test
     public void isEmpty_nonEmptyList_false() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("CS2113T Lecture", "MON", "2pm", "4pm", ""));
+        lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", "-"));
         assertFalse(lessonList.isEmpty());
     }
 
@@ -26,8 +26,8 @@ public class LessonListTest {
     public void testDeleteLesson() {
         try {
             LessonList lessonList = new LessonList();
-            lessonList.addLesson(new Lesson("CS2113T Lecture", "MON", "2pm", "4pm", ""));
-            lessonList.addLesson(new Lesson("CS2113T Tutorial", "TUE", "12am", "1pm", ""));
+            lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", "-"));
+            lessonList.addLesson(new Lesson("CS2113T Tutorial", "Tuesday", "12:00 PM", "01:00 PM", "-"));
             assertEquals(2, lessonList.getSize());
             lessonList.deleteLesson(1);
             assertEquals(1, lessonList.getSize());
@@ -42,7 +42,7 @@ public class LessonListTest {
     public void deleteLesson_indexOutOfBounds_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
             LessonList lessonList = new LessonList();
-            lessonList.addLesson(new Lesson("CS2113T Lecture", "MON", "2pm", "4pm", ""));
+            lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", ""));
             lessonList.deleteLesson(1);
         });
     }

@@ -161,6 +161,14 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public void printTasksByPriority(TaskList taskList) {
+        TaskList sortedTaskList = taskList.sortTasksByPriority();
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the tasks sorted by priority:");
+        System.out.print(sortedTaskList);
+        System.out.println(LINE);
+    }
+
     // TODO: Combine the two methods below
 
     /**
