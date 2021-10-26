@@ -98,7 +98,7 @@ public class EditMarkCommand extends Command {
             throw new TaaException(MESSAGE_NO_MARKS);
         }
 
-        editMark(ui, student, assessmentName, marks);
+        editMark(ui, student, assessment, marks);
         storage.save(moduleList);
     }
 
@@ -107,13 +107,14 @@ public class EditMarkCommand extends Command {
      *
      * @param ui The ui instance to handle interactions with the user.
      * @param student The student whose marks are to be edited.
-     * @param assessmentName The name of the assessment to edit marks for.
+     * @param assessment The assessment to edit marks for.
      */
-    private void editMark(Ui ui, Student student, String assessmentName, double newMarks) {
-        double previousMark = student.getMarks(assessmentName);
-        student.deleteMark(assessmentName);
-        student.setMarks(assessmentName, newMarks);
-        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_EDITED, student, previousMark, newMarks, assessmentName));
+    private void editMark(Ui ui, Student student, Assessment assessment, double newMarks) {
+        double previousMark = student.getMarks(assessment.getName());
+        student.deleteMark(assessment.getName());
+        student.setMarks(assessment.getName(), newMarks);
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_EDITED, student, previousMark, newMarks,
+                assessment.getName()));
     }
 
     /**

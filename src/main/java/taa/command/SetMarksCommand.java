@@ -100,7 +100,7 @@ public class SetMarksCommand extends Command {
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, 0, maxMarks));
         }
 
-        setMarks(ui, student, assessmentName, marks);
+        setMarks(ui, student, assessment, marks);
         storage.save(moduleList);
     }
 
@@ -109,13 +109,13 @@ public class SetMarksCommand extends Command {
      *
      * @param ui             The ui instance to handle interactions with the user.
      * @param student        The student instance to set the mark for.
-     * @param assessmentName The name of the assessment to be marked.
+     * @param assessment     The assessment to be marked.
      * @param marks          The marks to set for the assessment.
      */
-    private void setMarks(Ui ui, Student student, String assessmentName, double marks) {
+    private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
         assert marks >= 0;
-        student.setMarks(assessmentName, marks);
-        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, student, marks, assessmentName));
+        student.setMarks(assessment.getName(), marks);
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, student, marks, assessment.getName()));
     }
 
     /**
