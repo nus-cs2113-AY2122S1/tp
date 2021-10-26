@@ -178,13 +178,8 @@ The current date is obtained via the `CurrentDate` class, with which the thresho
 The expiry date of `Ingredient` object in each `IngredientGroup` in the `IngredientList` class is taken and compared to the threshold date. 
 The information of the `Ingredient` is taken note of to be printed when the function returns.
 
-<<<<<<< HEAD
-### Update
-
-On command, the `UpdateCommand` class instantiates it's `UpdateCommand` constructor with the input ingredient information.
-=======
 For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
->>>>>>> 9ac62d704a800cb53eec8dfc24ebe0cd5e1c3d83
+
 
 ![image](images/AlertStockSequenceDiagram.png)
 
@@ -234,6 +229,7 @@ The sequence diagram below illustrates the above command example
 |v2.0|user|receive alerts of ingredients that are running out|place orders to replenish stock preemptively|
 |v2.0|user|determine the threshold for alerts myself|adjust when I receive alerts based on demand and supply|
 |v2.0|user|find stock of an ingredient by name|view stock of an ingredient without having to go through the entire list|
+|v2.0|user|subtract stock from current inventory according to the restaurant's usage|automatically update inventory's stock|
 
 ## Non-Functional Requirements
 
