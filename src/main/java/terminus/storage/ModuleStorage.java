@@ -162,6 +162,10 @@ public class ModuleStorage {
      */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        if (Files.notExists(modDirPath)) {
+            Files.createDirectories(modDirPath);
+            return;
+        }
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
@@ -311,7 +315,7 @@ public class ModuleStorage {
      * @param notes The list of notes to export
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException,InvalidArgumentException {
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException, InvalidArgumentException {
         Document tempDocument = new Document();
         Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {
