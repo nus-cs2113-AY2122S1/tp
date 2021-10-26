@@ -19,6 +19,8 @@ import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.IllegalTripNameException;
 import seedu.traveller.exceptions.InvalidAddDayFormatException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
+import seedu.traveller.exceptions.InvalidDeleteDayFormatException;
+import seedu.traveller.exceptions.InvalidDeleteItemFormatCommand;
 import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
@@ -46,6 +48,7 @@ public class Parser {
     private static final int TO_LENGTH = 5;
     private static final int DAY_LENGTH = 6;
     private static final int NAME_LENGTH = 7;
+    private static final int ITEM_LENGTH = 7;
     private static final int TIME_LENGTH = 7;
     private static final int INDEX_LENGTH = 8;
     private static final int KEY_LENGTH = 6;
@@ -154,7 +157,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
         }
-        int dayIndex = parseValidDay(rawDayNumber);
+        int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
         command = new AddItemCommand(tripName, dayIndex, itemTime, itemName);
@@ -231,16 +234,25 @@ public class Parser {
      * @param userInput Raw user input, with the first command option (delete-day) removed.
      * @return Command A <code>DeleteDayCommand</code> object.
      */
-    private static Command parseDeleteDayCommand(String userInput) {
-        logger.log(Level.INFO, "Delete-day command input");
-        Command command;
+    private static Command parseDeleteDayCommand(String userInput) throws TravellerException {
         String tripName;
-        String day;
-        String daySeparator = " /day ";
-        int dayIdx = userInput.indexOf(daySeparator);
-        tripName = userInput.substring(0, dayIdx);
-        day = userInput.substring(userInput.length() - 1, userInput.length());
-        command = new DeleteDayCommand(tripName,Integer.valueOf(day));
+        String rawDayIndex;
+
+        try {
+            String daySeparator = " /day ";
+            int dayIdx = userInput.indexOf(daySeparator);
+            tripName = userInput.substring(0, dayIdx);
+            rawDayIndex = userInput.substring(dayIdx + DAY_LENGTH);
+        } catch (StringIndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Invalid delete-day command format: " + userInput);
+            throw new InvalidDeleteDayFormatException();
+        }
+        int dayIndex = parseValidIndex(rawDayIndex);
+        assert dayIndex >= 0 : "Day index is negative.";
+
+        Command command;
+        logger.log(Level.INFO, "Delete-day command input");
+        command = new DeleteDayCommand(tripName, dayIndex);
         return command;
     }
 
@@ -249,19 +261,32 @@ public class Parser {
      * @param userInput Raw user input, with the first command option (delete-item) removed.
      * @return A <code>DeleteItemCommand</code> object.
      */
-    private static Command parseDeleteItemCommand(String userInput) {
+    private static Command parseDeleteItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Delete-item command input");
         String tripName;
-        String day;
-        String item;
-        String daySeparator = " /day ";
-        String itemSeparator = " /item ";
-        int dayIdx = userInput.indexOf(daySeparator);
-        int itemIdx = userInput.indexOf(itemSeparator);
-        tripName = userInput.substring(0, dayIdx);
-        day = userInput.substring(dayIdx + DAY_LENGTH, itemIdx);
-        item = userInput.substring(userInput.length() - 1, userInput.length());
-        Command command = new DeleteItemCommand(tripName,Integer.valueOf(day),Integer.valueOf(item));
+        String rawDayNumber;
+        String rawItemNumber;
+        try {
+            String daySeparator = " /day ";
+            int dayIdx = userInput.indexOf(daySeparator);
+            tripName = userInput.substring(0, dayIdx);
+
+            String itemSeparator = " /item ";
+            int itemIdx = userInput.indexOf(itemSeparator);
+            rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, itemIdx);
+
+            rawItemNumber = userInput.substring(itemIdx + ITEM_LENGTH);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidDeleteItemFormatCommand();
+        }
+        int dayNumber = parseValidIndex(rawDayNumber);
+        assert dayNumber >= 0 : "Day number is negative.";
+
+        int itemNumber = parseValidIndex(rawItemNumber);
+        assert itemNumber >= 0 : "Item number is negative.";
+
+        Command command;
+        command = new DeleteItemCommand(tripName, dayNumber, itemNumber);
         return command;
     }
 
@@ -285,7 +310,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
         }
-        int dayIndex = parseValidDay(rawDayNumber);
+        int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
         command = new SearchItemCommand(tripName, Integer.valueOf(dayIndex), keyword);
@@ -323,7 +348,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
         }
-        int dayIndex = parseValidDay(rawDayNumber);
+        int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
         command = new EditItemCommand(tripName, Integer.valueOf(dayIndex),
@@ -428,24 +453,24 @@ public class Parser {
      * @return Command An <code>AddDayCommand</code> object.
      */
     private static Command parseAddDayCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Add-day command input");
         String tripName;
-        String rawDaysNumber = "";
+        String rawDaysIndex = "";
 
         try {
             String daySeparator = " /day ";
             int dayIdx = userInput.indexOf(daySeparator);
             tripName = userInput.substring(0, dayIdx);
-            rawDaysNumber = userInput.substring(dayIdx + DAY_LENGTH);
+            rawDaysIndex = userInput.substring(dayIdx + DAY_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Invalid add-day command format: " + userInput);
             throw new InvalidAddDayFormatException();
         }
-        int daysNumber = parseValidDay(rawDaysNumber);
-        assert daysNumber >= 0 : "Number of days is negative.";
+        int daysIndex = parseValidIndex(rawDaysIndex);
+        assert daysIndex >= 0 : "Number of days is negative.";
 
         Command command;
-        logger.log(Level.INFO, "Add-day command input");
-        command = new AddDayCommand(tripName, daysNumber);
+        command = new AddDayCommand(tripName, daysIndex);
         return command;
     }
 
@@ -468,23 +493,23 @@ public class Parser {
     }
 
     /**
-     * Used to check if a user input value for the day field is valid.
-     * @param rawDaysNumber Raw day value as inputted by user.
-     * @return Day values as an integer.
-     * @throws TravellerException If <code>rawDaysNumber</code> is not an integer or is negative.
+     * Used to check if a user input value for the day/item field is valid.
+     * @param rawIndex Raw day or item index as inputted by user.
+     * @return Day or item index as an integer.
+     * @throws TravellerException If <code>rawIndex</code> is not an integer or is negative.
      */
-    private static int parseValidDay(String rawDaysNumber) throws TravellerException {
-        int daysNumber;
+    private static int parseValidIndex(String rawIndex) throws TravellerException {
+        int index;
 
         try {
-            daysNumber = Integer.parseInt(rawDaysNumber);
+            index = Integer.parseInt(rawIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidNumberOfDaysException(rawDaysNumber);
+            throw new InvalidNumberOfDaysException(rawIndex);
         }
-        if (daysNumber < 0) {
-            throw new InvalidNumberOfDaysException(daysNumber);
+        if (index < 0) {
+            throw new InvalidNumberOfDaysException(index);
         }
-        return daysNumber;
+        return index;
     }
 }
 

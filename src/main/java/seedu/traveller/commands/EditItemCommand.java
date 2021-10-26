@@ -1,12 +1,12 @@
 
 package seedu.traveller.commands;
 
-import seedu.traveller.Day;
-import seedu.traveller.Trip;
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.Day;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.Item;
+import seedu.traveller.objects.Item;
 
 import java.util.Objects;
 import java.util.logging.Level;

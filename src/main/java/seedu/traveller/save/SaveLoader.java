@@ -1,14 +1,15 @@
 package seedu.traveller.save;
 
 import seedu.traveller.Parser;
-import seedu.traveller.Trip;
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.SaveDataNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -100,6 +101,7 @@ public class SaveLoader {
 
     private void createSave() throws IOException {
         File save = new File(filePath);
+        save.getParentFile().mkdirs();
         save.createNewFile();
     }
 }
