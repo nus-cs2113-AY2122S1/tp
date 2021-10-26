@@ -1,6 +1,5 @@
 package seedu.parser;
 
-
 import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;

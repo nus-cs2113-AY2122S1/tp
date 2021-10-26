@@ -12,9 +12,6 @@ public abstract class TextUi {
 
     private static final String LINE = "____________________________________________________________\n";
     public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
     public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
@@ -214,36 +211,10 @@ public abstract class TextUi {
     public static String deletedFieldsGenerator(boolean[] deletedFields, Contact contact) {
         StringBuilder output = new StringBuilder();
         assert deletedFields.length == 7;
-        for (int i = 1; i < 6; i++) {
-            switch (i) {
-            case GITHUB_INDEX:
-                if (contact.getGithub() != null && deletedFields[GITHUB_INDEX]) {
-                    output.append(ViewMessageFormatterUi.viewGithubFormatter(contact)).append("\n");
-                }
-                break;
-            case LINKEDIN_INDEX:
-                if (contact.getLinkedin() != null && deletedFields[LINKEDIN_INDEX]) {
-                    output.append(ViewMessageFormatterUi.viewLinkedinFormatter(contact)).append("\n");
-                }
-                break;
-            case TELEGRAM_INDEX:
-                if (contact.getTelegram() != null && deletedFields[TELEGRAM_INDEX]) {
-                    output.append(ViewMessageFormatterUi.viewTelegramFormatter(contact)).append("\n");
-                }
-                break;
-            case TWITTER_INDEX:
-                if (contact.getTwitter() != null && deletedFields[TWITTER_INDEX]) {
-                    output.append(ViewMessageFormatterUi.viewTwitterFormatter(contact)).append("\n");
-                }
-                break;
-            case EMAIL_INDEX:
-                if (contact.getEmail() != null && deletedFields[EMAIL_INDEX]) {
-                    output.append(ViewMessageFormatterUi.viewEmailFormatter(contact)).append("\n");
-                }
-                break;
-            default:
-                //should never reach here
-                assert false;
+        String[] contactDetails = contact.getContactStringArray();
+        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+            if (contactDetails[i] != null && deletedFields[i]) {
+                output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
             }
         }
         if (output.toString().isEmpty()) {
