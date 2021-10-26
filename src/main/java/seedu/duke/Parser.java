@@ -261,7 +261,10 @@ public class Parser {
             String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
             String expenseCategory = paramString[1];
-            String expenseAttribute = paramString[2];
+            String expenseAttribute = null;
+            if (!secondCommand.equals("index")) {
+                expenseAttribute = paramString[2];
+            }
             if (secondCommand.equals("filter")) {
                 try {
                     openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
