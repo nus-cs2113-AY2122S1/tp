@@ -135,6 +135,28 @@ public class Cookbook {
         }
     }
 
+    public void setIngredients(String name, ArrayList<String> newIngredients) throws GordonException {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+                recipe.replaceIngredients(newIngredients);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
+    public void setSteps(String name, ArrayList<String> newSteps) throws GordonException {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+                recipe.replaceSteps(newSteps);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
     /**
      * <h2>void setCalories(name).</h2>
      *

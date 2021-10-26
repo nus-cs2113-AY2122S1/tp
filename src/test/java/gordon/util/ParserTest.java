@@ -184,6 +184,82 @@ public class ParserTest {
     }
 
     @Test
+    public void testSetIngredients() {
+        String input = "addRecipe recipeA "
+                + "/ingredients a+b+c "
+                + "/steps a+b+c\n"
+                + "set recipeZ /Ingredients x+y+z\n"
+                + "set recipeA /Ingredients x+y+z\n"
+                + "check recipeA\n"
+                + "exit\n";
+        String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
+                + "recipeA" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "Setting ingredients..." + System.lineSeparator()
+                + "GordonException: Search returns no result." + System.lineSeparator()
+                + "Setting ingredients..." + System.lineSeparator()
+                + "Ingredients set successfully." + System.lineSeparator()
+                + "Finding recipes called recipeA....." + System.lineSeparator()
+                + "====================" + System.lineSeparator()
+                + "recipeA" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. x" + System.lineSeparator()
+                + "2. y" + System.lineSeparator()
+                + "3. z" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "====================" + System.lineSeparator();
+        inputOutputTest(input, expected);
+    }
+
+    @Test
+    public void testSetSteps() {
+        String input = "addRecipe recipeA "
+                + "/ingredients a+b+c "
+                + "/steps a+b+c\n"
+                + "set recipeZ /Steps x+y+z\n"
+                + "set recipeA /Steps x+y+z\n"
+                + "check recipeA\n"
+                + "exit\n";
+        String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
+                + "recipeA" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "Setting steps..." + System.lineSeparator()
+                + "GordonException: Search returns no result." + System.lineSeparator()
+                + "Setting steps..." + System.lineSeparator()
+                + "Steps set successfully." + System.lineSeparator()
+                + "Finding recipes called recipeA....." + System.lineSeparator()
+                + "====================" + System.lineSeparator()
+                + "recipeA" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. a" + System.lineSeparator()
+                + "2. b" + System.lineSeparator()
+                + "3. c" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. x" + System.lineSeparator()
+                + "2. y" + System.lineSeparator()
+                + "3. z" + System.lineSeparator()
+                + "====================" + System.lineSeparator();
+        inputOutputTest(input, expected);
+    }
+
+    @Test
     public void testSetCalories() {
         String input = "addRecipe Chicken Rice "
                 + "/ingredients Chicken+Rice "

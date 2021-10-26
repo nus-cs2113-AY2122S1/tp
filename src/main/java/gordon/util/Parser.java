@@ -14,7 +14,9 @@ import gordon.command.find.FindDifficultyCommand;
 import gordon.command.find.FindIngredientsCommand;
 import gordon.command.set.SetCaloriesCommand;
 import gordon.command.set.SetDifficultyCommand;
+import gordon.command.set.SetIngredientsCommand;
 import gordon.command.set.SetPriceCommand;
+import gordon.command.set.SetStepsCommand;
 import gordon.command.set.SetTimeCommand;
 import gordon.command.tag.TagAddCommand;
 import gordon.command.tag.TagDeleteCommand;
@@ -24,6 +26,7 @@ import gordon.kitchen.Recipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**.
@@ -144,8 +147,8 @@ public class Parser {
         }
         String newLine = line.substring(stepsIndex + STEPS_WORD_LENGTH);
         String[] stepsList = newLine.split("\\+");
-        for (int i = 0; i < stepsList.length; i++) {
-            r.addStep(stepsList[i].trim(), i);
+        for (String s : stepsList) {
+            r.addStep(s.trim());
         }
     }
 
@@ -203,7 +206,17 @@ public class Parser {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
         String target = splitContent[1].substring(0, spaceIndex);
-        switch (target) {
+        switch (target.toLowerCase()) {
+        case "ingredients":
+            String newLine = splitContent[1].substring(spaceIndex + 1).trim();
+            ArrayList<String> newIngredients = new ArrayList<>();
+            Collections.addAll(newIngredients, newLine.split("\\+"));
+            return new SetIngredientsCommand(recipeName, newIngredients);
+        case "steps":
+            newLine = splitContent[1].substring(spaceIndex + 1).trim();
+            ArrayList<String> newSteps = new ArrayList<>();
+            Collections.addAll(newSteps, newLine.split("\\+"));
+            return new SetStepsCommand(recipeName, newSteps);
         case "calories":
             try {
                 int cal = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
