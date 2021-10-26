@@ -16,68 +16,79 @@ class DoneParserTest {
     private static final String ERROR_INVALID_GOAL_INDEX = "Please enter a valid integer for the goal index";
     private static final String ERROR_INVALID_HABIT_INDEX = "Please enter a valid integer for the habit index";
 
-    @Test
-    void parseInvalidInput_noDescription_exceptionThrown() {
-        try {
-            DoneParser.parseDoneHabitCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(ERROR_NO_PARAMETER, e.getMessage());
-        }
+    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the habit index. Eg: h/1";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
 
+    @Test
+    void parseDoneHabitCommand_validInput_success() throws HaBitParserException {
+        DoneHabitCommand testCommand = (DoneHabitCommand) DoneParser.parseDoneHabitCommand(" g/1 h/1 ");
+        assertEquals(0, testCommand.getGoalIndex());
+        assertEquals(0, testCommand.getHabitIndex());
+    }
+
+    @Test
+    void parseDoneHabitCommand_missingParameters_exceptionThrown() {
         try {
             DoneParser.parseDoneHabitCommand("");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_NO_PARAMETER, e.getMessage());
+            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
         }
     }
 
     @Test
-    void parseInvalidInput_extraParameters_exceptionThrown() {
+    void parseDoneHabitCommand_missingGoalIndex_exceptionThrown() {
         try {
-            DoneParser.parseDoneHabitCommand("1 2 3");
+            DoneParser.parseDoneHabitCommand("g/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_EXTRA_PARAMETERS, e.getMessage());
+            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
         }
     }
 
     @Test
-    void parseInvalidInput_missingParameters_exceptionThrown() {
+    void parseDoneHabitCommand_nonIntegerGoalIndex_exceptionThrown() {
         try {
-            DoneParser.parseDoneHabitCommand("1");
+            DoneParser.parseDoneHabitCommand("g/A");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_MISSING_PARAMETERS, e.getMessage());
+            assertEquals(ERROR_GOAL_INDEX_NON_INTEGER, e.getMessage());
         }
-    }
 
-    @Test
-    void parseInvalidInput_invalidGoalIndex_exceptionThrown() {
         try {
-            DoneParser.parseDoneHabitCommand("a 1");
+            DoneParser.parseDoneHabitCommand("g/$");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INVALID_GOAL_INDEX, e.getMessage());
+            assertEquals(ERROR_GOAL_INDEX_NON_INTEGER, e.getMessage());
         }
     }
 
     @Test
-    void parseInvalidInput_invalidHabitIndex_exceptionThrown() {
+    void parseDoneHabitCommand_missingHabitIndex_exceptionThrown() {
         try {
-            DoneParser.parseDoneHabitCommand("1 a");
+            DoneParser.parseDoneHabitCommand("g/1 h/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INVALID_HABIT_INDEX, e.getMessage());
+            assertEquals(ERROR_HABIT_INDEX_FORMAT, e.getMessage());
         }
     }
 
     @Test
-    void parseValidInput_twoIntegersSpaced_success() throws HaBitParserException {
-        DoneHabitCommand testCommand = (DoneHabitCommand) DoneParser.parseDoneHabitCommand("1 2");
-        assertEquals(0, testCommand.getGoalIndex());
-        assertEquals(1, testCommand.getHabitIndex());
-    }
+    void parseDoneHabitCommand_nonIntegerHabitIndex_exceptionThrown() {
+        try {
+            DoneParser.parseDoneHabitCommand("g/1 h/a");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
 
+        try {
+            DoneParser.parseDoneHabitCommand("g/1 h/$");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
 }
