@@ -352,18 +352,31 @@ The sequence diagram for `DeleteOrderCommand` is shown below.
 
 #### UpdateOrderCommand
 
-MediVault initialises an `UpdateOrderCommand` class when CommandParser identifies
+MediVault creates an `UpdateOrderCommand` object when CommandParser identifies
 `updateorder` or the `update` keyword in `order` mode.
 
 > :information_source: Note:
 > * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
 > * MediVault restricts updating of order information that are already **delivered**.
 
-The sequence diagram for UpdateOrderCommand is shown below.
+The sequence diagram for `UpdateOrderCommand` is shown below.
 
 ![UpdateOrderSequenceDiagram](diagrams/diagram_images/UpdateOrderSequenceDiagram.png)
 
 ### ReceiveOrderCommand
+
+MediVault creates an `ReceiveOrderCommand` object when CommandParser identifies
+`receiveorder` or the `receive` keyword in `order` mode.
+
+> :information_source: Note:
+> * MediVault will add the order to stock if the `parameters` and `parameterValues` provided by the user are valid.
+> * `ReceiveOrderCommand` will call `AddStockCommand` once the `parameters` and `parameterValues` are validated.
+> * If the order contains a medication already in stock, the `d/DESCRIPTION` and `m/MAX_QUANTITY` will be ignored
+> and existing values will be used.
+
+The sequence diagram for `ReceiveOrderCommand` is shown below.
+
+![ReceiveOrderSequenceDiagram](diagrams/diagram_images/ReceiveOrderSequenceDiagram.png)
 
 ### Archive Commands
 

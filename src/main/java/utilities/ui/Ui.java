@@ -1,9 +1,9 @@
 package utilities.ui;
 
 import command.CommandSyntax;
-import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Order;
+import inventory.Prescription;
 import inventory.Stock;
 import utilities.parser.DateParser;
 import utilities.parser.OrderManager;
@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Ui {
     private static final int TABLE_PADDING = 2;
     private static final int DESCRIPTION_MAX_WIDTH = 40;
-    private static final int HELP_MAX_WIDTH = 90;
+    private static final int HELP_MAX_WIDTH = 50;
     private static Ui ui = null;
     private static Scanner scanner;
 
@@ -209,7 +209,7 @@ public class Ui {
                         + String.format(maxQuantityFormat, "");
                 orderQuantity = 0; // Reset the quantity count to prevent looping
             }
-            System.out.println(row);
+            System.out.println(row.toUpperCase());
             printRowBorder(columnWidths);
         }
     }
@@ -400,7 +400,7 @@ public class Ui {
                     + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(order.getQuantity())))
                     + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(order.getDate())))
                     + String.format(statusFormat, centerString(statusWidth, String.valueOf(order.getStatus())));
-            System.out.println(row);
+            System.out.println(row.toUpperCase());
             printRowBorder(columnWidths);
         }
     }
@@ -482,7 +482,7 @@ public class Ui {
                     + String.format(staffFormat, centerString(staffWidth, prescription.getStaff()))
                     + String.format(stockIdFormat, centerString(stockIdWidth,
                     String.valueOf(prescription.getStockId())));
-            System.out.println(row);
+            System.out.println(row.toUpperCase());
             printRowBorder(columnWidths);
         }
     }
