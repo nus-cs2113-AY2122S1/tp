@@ -107,7 +107,7 @@ The CLI then returns the shortest path from one point to another.
 #### Format: `new TRIP_NAME /from START /to END`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
-   * `START` and `END` destinations must be countries included in *flightData/flights.txt*.
+   * `START` and `END` destinations must be countries included in *flightData/dist.txt* or *flightData/cost.txt*.
 
 #### Usage Example:
 
@@ -120,7 +120,7 @@ ____________________________________________________________
 ```
 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
-> Take a look in *flightData/flights.txt* to see how Traveller recognises them!
+> Take a look in *flightData/dist.txt* or *flightData/cost.txt* to see how Traveller recognises them!
 
 <br/>
 
@@ -355,13 +355,13 @@ Exits the program.
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
    * *Traveller.jar*
-   * *flightData* folder with *flights.txt* inside
+   * *flightData* folder with *dist.txt* and *cost.txt* inside
    * *save* folder with *save.txt* inside
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
 **A**: Traveller can only read specific words as destinations. 
-Please check in *flightData/flights.txt* for all supported destinations and their specific wordings.
+Please check in *flightData/dist.txt* or *flightData/cost.txt* for all supported destinations and their specific wordings.
 
 <br/>
 

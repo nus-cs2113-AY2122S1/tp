@@ -220,7 +220,7 @@ _{More to be added}_
 ## 6. Instructions for manual testing
 
 ###6.1 Data file
-The data file *flightData/flights.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+The data file *flightData/dist.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
 To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
 there is no flight between the two countries (no edge between the vertexes).
 
