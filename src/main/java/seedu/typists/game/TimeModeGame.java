@@ -14,7 +14,6 @@ public class TimeModeGame extends Game {
     protected int gameTime;
     protected final ArrayList<String[]> wordLines;
 
-
     public double realGameTime;
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {
@@ -79,15 +78,6 @@ public class TimeModeGame extends Game {
         }
     }
 
-    @Override
-    public void store() {
-        
-    }
-
-    @Override
-    public void getSummary() {
-
-    }
 
     public void updateUserLines(List<String> stringArray) {
         userLines = getWordLineFromStringArray(stringArray);
