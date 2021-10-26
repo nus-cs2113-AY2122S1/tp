@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
 public class UpdateCommand extends Command {
     protected Integer eventNumber;
     protected Event eventToBeUpdated;
+    protected boolean isError = false;
     protected static final String TITLE_FLAG = "title/";
     protected static final String DATE_FLAG = "date/";
     protected static final String DEADLINE_FLAG = "deadline/";
@@ -23,44 +24,50 @@ public class UpdateCommand extends Command {
     protected static final String MEMBER_FLAG = "member/";
 
     public UpdateCommand(String[] command) {
-        this.eventNumber = Integer.parseInt(command[1]) - 1;
-        this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
-        System.out.println("Here are the details of the event:" + System.lineSeparator()
-                + "======================================" + System.lineSeparator());
-        Ui.printEvent(Duke.eventCatalog.get(eventNumber));
-        Ui.printLineBreak();
+        if (command.length < 2) {
+            if (command[0].equalsIgnoreCase("update")) {
+                System.out.println("please specify which event you would like to update in the format"
+                        + System.lineSeparator() + "update [Event_num]");
+            }
+            Ui.printLineBreak();
+            this.isError = true;
+        } else {
+            this.eventNumber = Integer.parseInt(command[1]) - 1;
+            this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
+            System.out.println("Here are the details of the event:" + System.lineSeparator()
+                    + "======================================");
+            Ui.printEvent(Duke.eventCatalog.get(eventNumber));
+            Ui.printLineBreak();
+        }
     }
 
     public CommandResult execute() {
-        boolean exit = false;
-        while (!exit) {
-            Ui.updateIntroMessage();
-            String userInput = Ui.readInput();
-            Ui.printLineBreak();
-            if (userInput.equalsIgnoreCase("exit")) {
-                return new CommandResult("returning to main page...");
-            }
-            String[] userUpdates = userInput.trim().split(">");
+        String executeResult = "returning to main page...";
+        if (!isError) {
             try {
+                Ui.updateIntroMessage();
+                String userInput = Ui.readInput();
+                Ui.printLineBreak();
+                if (userInput.equalsIgnoreCase("exit")) {
+                    return new CommandResult(executeResult);
+                }
+                String[] userUpdates = userInput.trim().split(">");
+
                 CommandResult result = implementUpdates(userUpdates);
                 if (result != null) {
                     return result;
                 }
                 postUpdateMessage();
-                String exitInput = Ui.readInput();
                 Ui.printLineBreak();
-                if (exitInput.equalsIgnoreCase("y")) {
-                    Duke.eventCatalog.sortCatalog();
-                    exit = true;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("please follow the error closely");
+            } catch (NullPointerException | NumberFormatException e) {
+                executeResult = "please follow the format closely"
+                        + System.lineSeparator() + "returning to main page...";
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                executeResult = e.getMessage()
+                        + System.lineSeparator() + "returning to main page...";
             }
-
         }
-        return new CommandResult("Item Have been updated accordingly!");
+        return new CommandResult(executeResult);
     }
 
     private CommandResult implementUpdates(String[] userUpdates) throws DukeException {
@@ -79,7 +86,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(TASK_FLAG)) {
                 updateTask(attribute[1]);
             } else {
-                return new CommandResult("invalid Command, you have returned to the main page!");
+                return new CommandResult("invalid Update, you have returned to the main page!");
             }
         }
         return null;
@@ -101,7 +108,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(DESCRIPTION_FLAG)) {
                 taskToBeUpdated.setDescription(attribute[1]);
             } else if (update.contains(MEMBER_FLAG)) {
-                updateMember(attribute[1], taskToBeUpdated);
+                updateMember(taskToBeUpdated);
             } else {
                 System.out.println("invalid Command!");
             }
@@ -109,10 +116,27 @@ public class UpdateCommand extends Command {
         Ui.printLineBreak();
     }
 
-    private void updateMember(String index, Task taskToBeUpdated) {
+    private void updateMember(Task taskToBeUpdated) throws DukeException {
         System.out.println("Please key in the update for the Members Name");
-        String userInput = Ui.readInput();
-        taskToBeUpdated.getFromMemberList(Integer.parseInt(index) - 1).setName(userInput);
+        Ui.promptForMemberIndex();
+        boolean isCorrectMember = false;
+        while (!isCorrectMember) {
+            try {
+                Ui.printMemberRoster();
+                Ui.printLineBreak();
+                int memberIndex = Integer.parseInt(Ui.readInput());
+                Duke.memberRoster.get(memberIndex - 1).addToAssignedTasks(taskToBeUpdated);
+                Duke.memberRoster.get(memberIndex - 1).sortTasks();
+                taskToBeUpdated.addMember(Duke.memberRoster.get(memberIndex - 1));
+                isCorrectMember = true;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("This member does not exist. Please enter the index corresponding to "
+                        + "the correct member. ");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number corresponding to the member "
+                        + "you want to assign this task to. ");
+            }
+        }
     }
 
     private void updateTaskIntroMessage() {
@@ -143,8 +167,6 @@ public class UpdateCommand extends Command {
     private void postUpdateMessage() {
         System.out.println("Here is the updated Event");
         Ui.printEvent(eventToBeUpdated);
-        System.out.println("If you are satisfied with your updates? y to exit, n to continue");
-        Ui.printLineBreak();
     }
 
 
