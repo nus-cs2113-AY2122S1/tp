@@ -5,7 +5,7 @@ import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 
 //@@author SeanRobertDH
-public class HelpCommandParser {
+public class TaskUsageParser {
 
     private static final String STRING_REGEX = "%s";
 

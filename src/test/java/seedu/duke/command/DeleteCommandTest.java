@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.flags.DeadlineFlag;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.factory.DeadlineFactory;
 import seedu.duke.task.factory.EventFactory;
 import seedu.duke.task.factory.TodoFactory;
@@ -25,9 +26,11 @@ class DeleteCommandTest {
 
     private static final String TO_DELETE = "TO DELETE";
 
-    @AfterEach
+    private TaskManager taskManager;
+
+    @BeforeEach
     void clearTaskmanager() {
-        TaskManager.clear();
+        taskManager = new TaskManager();
     }
 
     @Test
@@ -37,23 +40,23 @@ class DeleteCommandTest {
         arguments.put(EventFlag.DESCRIPTION, "1");
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
-        TaskManager.addTask(EventFactory.getEvent(arguments));
+        taskManager.addTask(new EventFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, "2");
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
-        TaskManager.addTask(DeadlineFactory.getDeadline(arguments));
+        taskManager.addTask(new DeadlineFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, "4");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, "5");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "   __3__, , _");
-        new DeleteCommand(arguments).executeCommand();
+        new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -63,23 +66,23 @@ class DeleteCommandTest {
         arguments.put(EventFlag.DESCRIPTION, "1");
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
-        TaskManager.addTask(EventFactory.getEvent(arguments));
+        taskManager.addTask(new EventFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, "2");
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
-        TaskManager.addTask(DeadlineFactory.getDeadline(arguments));
+        taskManager.addTask(new DeadlineFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5      ");
-        new DeleteCommand(arguments).executeCommand();
+        new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -89,23 +92,23 @@ class DeleteCommandTest {
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
-        TaskManager.addTask(EventFactory.getEvent(arguments));
+        taskManager.addTask(new EventFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, "2");
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
-        TaskManager.addTask(DeadlineFactory.getDeadline(arguments));
+        taskManager.addTask(new DeadlineFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5,   1   ");
-        new DeleteCommand(arguments).executeCommand();
+        new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -115,23 +118,23 @@ class DeleteCommandTest {
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
-        TaskManager.addTask(EventFactory.getEvent(arguments));
+        taskManager.addTask(new EventFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, "2");
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
-        TaskManager.addTask(DeadlineFactory.getDeadline(arguments));
+        taskManager.addTask(new DeadlineFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, "4");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, _ _ 3    _,_   5");
-        new DeleteCommand(arguments).executeCommand();
+        new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -141,33 +144,33 @@ class DeleteCommandTest {
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
-        TaskManager.addTask(EventFactory.getEvent(arguments));
+        taskManager.addTask(new EventFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
-        TaskManager.addTask(DeadlineFactory.getDeadline(arguments));
+        taskManager.addTask(new DeadlineFactory(arguments).getTask());
 
         arguments.put(EventFlag.DESCRIPTION, "3");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1-2, _ _ 4    _,_   5");
-        new DeleteCommand(arguments).executeCommand();
+        new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_noMainArgument_expectUsage() throws Exception {
         Map<String, String> arguments = new HashMap<>();
 
-        Command delete = new DeleteCommand(arguments);
+        Command delete = new DeleteCommand(taskManager, arguments);
         String result = delete.executeCommand().getMessage();
 
-        assertEquals(delete.getUsage(), result);
+        assertEquals(delete.getUsageMessage(), result);
     }
 
     @Test
@@ -175,7 +178,7 @@ class DeleteCommandTest {
         Map<String, String> arguments = new HashMap<>();
         arguments.put(Command.MAIN_ARGUMENT, "1");
 
-        Command delete = new DeleteCommand(arguments);
+        Command delete = new DeleteCommand(taskManager, arguments);
         String result = delete.executeCommand().getMessage();
 
         assertEquals(new EmptyTasklistException().getMessage(), result);
@@ -189,11 +192,11 @@ class DeleteCommandTest {
         Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "3");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, 2, 3-4, blarg");
 
-        Command delete = new DeleteCommand(arguments);
+        Command delete = new DeleteCommand(taskManager, arguments);
         String result = delete.executeCommand().getMessage();
 
         assertEquals("blarg is not an integer!", result);
@@ -204,11 +207,11 @@ class DeleteCommandTest {
         Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "3");
-        TaskManager.addTask(TodoFactory.getTodo(arguments));
+        taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, 2, 3-4");
 
-        Command delete = new DeleteCommand(arguments);
+        Command delete = new DeleteCommand(taskManager, arguments);
         String result = delete.executeCommand().getMessage();
 
         assertEquals(new InvalidTaskIndexException(4).getMessage(), result);

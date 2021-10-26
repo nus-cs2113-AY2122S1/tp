@@ -33,7 +33,7 @@ class TodoFactoryTest {
         arguments.put(TodoFlag.DO_ON_DATE, VALID_DATE1);
         arguments.put(TodoFlag.PRIORITY, PriorityEnum.HIGH.toString());
 
-        Todo todo = TodoFactory.getTodo(arguments);
+        Todo todo = (Todo) new TodoFactory(arguments).getTask();
 
         assertEquals(todo.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(todo.getDoOnDate()), VALID_DATE1);
@@ -47,7 +47,7 @@ class TodoFactoryTest {
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
 
-        Todo todo = TodoFactory.getTodo(arguments);
+        Todo todo = (Todo) new TodoFactory(arguments).getTask();
 
         assertEquals(todo.getDescription(), DESCRIPTION);
         assertNull(todo.getDoOnDate());
@@ -64,7 +64,7 @@ class TodoFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> TodoFactory.getTodo(arguments));
+            () -> new TodoFactory(arguments).getTask());
 
         RecurrenceWithoutDateException rwde = new RecurrenceWithoutDateException();
 
@@ -77,7 +77,7 @@ class TodoFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> TodoFactory.getTodo(arguments));
+            () -> new TodoFactory(arguments).getTask());
 
         RequiredArgmentNotProvidedException ranpe =
             new RequiredArgmentNotProvidedException(TodoFlag.DESCRIPTION, TypeEnum.TODO.toString());
@@ -95,7 +95,7 @@ class TodoFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> TodoFactory.getTodo(arguments));
+            () -> new TodoFactory(arguments).getTask());
 
         InvalidPriorityException ipe = new InvalidPriorityException(invalidPriority);
 

@@ -1,75 +1,54 @@
 package seedu.duke.task.factory;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 import seedu.duke.exception.GetTaskFailedException;
-import seedu.duke.exception.InvalidPriorityException;
-import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
-import seedu.duke.exception.RecurrenceWithoutDateException;
 import seedu.duke.command.flags.TodoFlag;
-import seedu.duke.exception.RequiredArgmentNotProvidedException;
+import seedu.duke.exception.RecurrenceWithoutDateException;
 import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
+import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Todo;
 
 //@@author SeanRobertDH
-public class TodoFactory {
+public class TodoFactory extends TaskFactory {
     private static final TypeEnum taskType = TypeEnum.TODO;
 
-    public static Todo getTodo(Map<String, String> flags) throws GetTaskFailedException {
+    LocalDateTime doOnDate;
+
+    public TodoFactory(Map<String, String> flags) {
+        super(taskType, TodoFlag.REQUIRED_FLAGS, flags);
+    }
+
+
+    @Override
+    void setAdditionalVariables() throws GetTaskFailedException {
         try {
-            checkForRequiredArguments(flags);
-
-            String description = flags.get(TodoFlag.DESCRIPTION);
-            String priority = flags.get(TodoFlag.PRIORITY);
             String doOn = flags.get(TodoFlag.DO_ON_DATE);
-            String recurrence = flags.get(TodoFlag.RECURRENCE);
-
-            PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
-            LocalDateTime doOnDate = TaskParser.getDate(doOn);
-            RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
+            doOnDate = TaskParser.getDate(doOn);
 
             boolean hasRecurrence = recurrenceEnum != null && recurrenceEnum != RecurrenceEnum.NONE;
+
             if (doOnDate == null && hasRecurrence) {
                 throw new RecurrenceWithoutDateException();
             }
-
-            return getConstructor(description, priorityEnum, doOnDate, recurrenceEnum);
-
-        } catch (RequiredArgmentNotProvidedException ranpe) {
-            throw new GetTaskFailedException(ranpe.getMessage());
         } catch (ParseDateFailedException pdfe) {
             throw new GetTaskFailedException(pdfe.getMessage());
-        } catch (InvalidPriorityException ipe) {
-            throw new GetTaskFailedException(ipe.getMessage());
-        } catch (InvalidRecurrenceException ire) {
-            throw new GetTaskFailedException(ire.getMessage());
         } catch (RecurrenceWithoutDateException rwde) {
             throw new GetTaskFailedException(rwde.getMessage());
         }
     }
 
-    private static void checkForRequiredArguments(Map<String, String> flags)
-            throws RequiredArgmentNotProvidedException {
-        for (String requiredArgument : TodoFlag.REQUIRED_FLAGS) {
-            String flag = flags.get(requiredArgument);
-            if (flag == null) {
-                throw new RequiredArgmentNotProvidedException(requiredArgument, taskType.toString());
-            }
-        }
-    }
-
-    private static Todo getConstructor(String description,
-            PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
-        if (priority == null) {
-            return getTodoWithDefaultPriority(description, doOn, recurrence);
+    @Override
+    Task decideConstructor() {
+        if (priorityEnum == null) {
+            return getTodoWithDefaultPriority(description, doOnDate, recurrenceEnum);
         } else {
-            return getTodoWithPriority(description, priority, doOn, recurrence);
+            return getTodoWithPriority(description, priorityEnum, doOnDate, recurrenceEnum);
         }
     }
 
@@ -86,7 +65,7 @@ public class TodoFactory {
     }
 
     private static Todo getTodoWithPriority(String description,
-            PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
+                                            PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (doOn == null) {
             return new Todo(description, priority);
         } else {
