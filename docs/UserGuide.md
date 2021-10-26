@@ -1016,6 +1016,16 @@ Expected Outcome:
 Food-O-Rama data (*dish and ingredients list*) are saved automatically after any command that changes the data.
 There is no need to save manually.
 
+### Accessing the data
+
+Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These
+files can be found under the *'Data'* folder in the same directory as the .jar
+file.
+
+### Manipulating the data
+
+Food-O-Rama data can be written manually by editing the text files in *'Data'*.
+Refer to *Instructions for Manual Testing* for the appropriate data format.
 
 ## 😯 FAQ
 
