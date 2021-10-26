@@ -14,7 +14,6 @@ public class Parser {
      * @param userInput the {@link String} containing the user input
      * @return whether the program should continue running after processing the given user input
      */
-    //TODO: this method needs refactoring and extraction - currently about 100 lines
     public static boolean parseUserInput(String userInput) {
         String[] rawInput = userInput.split(" ", 2);
         String inputCommand = rawInput[0].toLowerCase();
@@ -31,7 +30,8 @@ public class Parser {
             Storage.getLogger().log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
             return true;
-        } else if (Storage.getListOfTrips().isEmpty() && !inputCommand.equals("create")) {
+        } else if (Storage.getListOfTrips().isEmpty()
+                && !inputCommand.equals("create")) {
             Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
             return true;

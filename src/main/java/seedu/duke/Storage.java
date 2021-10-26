@@ -1,22 +1,18 @@
 package seedu.duke;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.logging.Level;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Storage {
@@ -35,70 +31,74 @@ public class Storage {
                     "delete", "expense", "quit", "help", "amount", "close"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
-            put("USD", new String[] {"$", "%.02f"});
-            put("SGD", new String[] {"$", "%.02f"});
-            put("AUD", new String[] {"$", "%.02f"});
-            put("CAD", new String[] {"$", "%.02f"});
-            put("NZD", new String[] {"$", "%.02f"});
-            put("EUR", new String[] {"€", "%.02f"});
-            put("GBP", new String[] {"£", "%.02f"});
-            put("MYR", new String[] {"RM", "%.02f"});
-            put("HKD", new String[] {"$", "%.02f"});
-            put("THB", new String[] {"฿", "%.02f"});
-            put("RUB", new String[] {"₽", "%.02f"});
-            put("ZAR", new String[] {"R", "%.02f"});
-            put("TRY", new String[] {"₺", "%.02f"});
-            put("BRL", new String[] {"R$", "%.02f"});
-            put("DKK", new String[] {"Kr.", "%.02f"});
-            put("PLN", new String[] {"zł", "%.02f"});
-            put("ILS", new String[] {"₪", "%.02f"});
-            put("SAR", new String[] {"SR", "%.02f"});
-            put("CNY", new String[] {"¥", "%.0f"});
-            put("JPY", new String[] {"¥", "%.0f"});
-            put("KRW", new String[] {"₩", "%.0f"});
-            put("IDR", new String[] {"Rp", "%.0f"});
-            put("INR", new String[] {"Rs", "%.0f"});
-            put("CHF", new String[] {"SFr.", "%.0f"});
-            put("SEK", new String[] {"kr", "%.0f"});
-            put("NOK", new String[] {"kr", "%.0f"});
-            put("MXN", new String[] {"$", "%.0f"});
-            put("TWD", new String[] {"NT$", "%.0f"});
-            put("HUF", new String[] {"Ft", "%.0f"});
-            put("CZK", new String[] {"Kc", "%.0f"});
-            put("CLP", new String[] {"$", "%.0f"});
-            put("PHP", new String[] {"₱", "%.0f"});
-            put("AED", new String[] {"د.إ", "%.0f"});
-            put("COP", new String[] {"$", "%.0f"});
-            put("RON", new String[] {"lei", "%.0f"});
-        }};
+        put("USD", new String[]{"$", "%.02f"});
+        put("SGD", new String[]{"$", "%.02f"});
+        put("AUD", new String[]{"$", "%.02f"});
+        put("CAD", new String[]{"$", "%.02f"});
+        put("NZD", new String[]{"$", "%.02f"});
+        put("EUR", new String[]{"€", "%.02f"});
+        put("GBP", new String[]{"£", "%.02f"});
+        put("MYR", new String[]{"RM", "%.02f"});
+        put("HKD", new String[]{"$", "%.02f"});
+        put("THB", new String[]{"฿", "%.02f"});
+        put("RUB", new String[]{"₽", "%.02f"});
+        put("ZAR", new String[]{"R", "%.02f"});
+        put("TRY", new String[]{"₺", "%.02f"});
+        put("BRL", new String[]{"R$", "%.02f"});
+        put("DKK", new String[]{"Kr.", "%.02f"});
+        put("PLN", new String[]{"zł", "%.02f"});
+        put("ILS", new String[]{"₪", "%.02f"});
+        put("SAR", new String[]{"SR", "%.02f"});
+        put("CNY", new String[]{"¥", "%.0f"});
+        put("JPY", new String[]{"¥", "%.0f"});
+        put("KRW", new String[]{"₩", "%.0f"});
+        put("IDR", new String[]{"Rp", "%.0f"});
+        put("INR", new String[]{"Rs", "%.0f"});
+        put("CHF", new String[]{"SFr.", "%.0f"});
+        put("SEK", new String[]{"kr", "%.0f"});
+        put("NOK", new String[]{"kr", "%.0f"});
+        put("MXN", new String[]{"$", "%.0f"});
+        put("TWD", new String[]{"NT$", "%.0f"});
+        put("HUF", new String[]{"Ft", "%.0f"});
+        put("CZK", new String[]{"Kc", "%.0f"});
+        put("CLP", new String[]{"$", "%.0f"});
+        put("PHP", new String[]{"₱", "%.0f"});
+        put("AED", new String[]{"د.إ", "%.0f"});
+        put("COP", new String[]{"$", "%.0f"});
+        put("RON", new String[]{"lei", "%.0f"});
+    }};
 
     public static HashMap<String, String[]> getAvailableCurrency() {
         return availableCurrency;
     }
 
     protected static void writeToFile() throws IOException {
-        String jsonString = new Gson().toJson(listOfTrips);
+        String jsonString = FileStorage.getGson().toJson(listOfTrips);
         FileStorage.writeToFile(jsonString);
     }
 
-    protected static void readFromFile() {
+    public static void readFromFile() {
         try {
 
             String jsonString = FileStorage.readFromFile();
-            Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
-            listOfTrips = new Gson().fromJson(jsonString, tripType);
+            Type tripType = new TypeToken<ArrayList<Trip>>() {
+            }.getType();
+            listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyFileWarning();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
-            tryCreateNewFile();
+            createNewFile();
         }
     }
 
-    private static void tryCreateNewFile() {
+    public static void createNewFile() {
         try {
             FileStorage.newBlankFile();
+            Ui.newFileSuccessfullyCreated();
         } catch (IOException ex) {
             Ui.printCreateFileFailure();
             System.exit(1);
@@ -110,11 +110,12 @@ public class Storage {
             Ui.printJsonParseUserInputPrompt();
             String input = scanner.nextLine().strip();
             if (input.contains("n")) {
+                Ui.goodBye();
                 Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
                 System.exit(1);
                 return;
             } else if (input.contains("y")) {
-                tryCreateNewFile();
+                createNewFile();
                 return;
             }
         }
@@ -148,6 +149,8 @@ public class Storage {
             setOpenTrip(listOfTrips.get(tripIndex));
         } catch (NumberFormatException e) {
             Ui.argNotNumber();
+            Ui.promptForTripIndex();
+            promptUserForValidTrip();
         }
     }
 
@@ -206,5 +209,8 @@ public class Storage {
         return listOfTrips.isEmpty();
     }
 
+    public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
+        Storage.listOfTrips = listOfTrips;
+    }
 
 }

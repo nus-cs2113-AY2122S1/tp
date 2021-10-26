@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public static void goodBye() {
-        System.out.println("Goodbye!");
+        System.out.println("Exiting the program now. Goodbye!");
     }
 
 
@@ -138,7 +138,7 @@ public class Ui {
 
     public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
         System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed");
+                + tripDate + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
@@ -194,6 +194,10 @@ public class Ui {
         System.out.println("Input is not a number");
     }
 
+    public static void promptForTripIndex() {
+        System.out.print("Please enter a valid trip number: ");
+    }
+
     public static void emptyArgForDeleteCommand() {
         System.out.println();
         System.out.println("Which trip to delete?");
@@ -228,19 +232,20 @@ public class Ui {
     }
 
     public static void printAmount(Person person, Trip trip) {
-        System.out.println(person.getName() + " spent " + stringForeignMoney(person.getMoneyOwed().get(person))
-                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person)) + ") on the trip so far");
+        System.out.println(person.getName() + " spent "
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
-                if (person.getMoneyOwed().get(otherPerson) > 0) {
+                if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
                     System.out.println(otherPerson.getName() + " owes "
-                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + person.getName());
-                } else if (person.getMoneyOwed().get(otherPerson) < 0) {
+                } else if (person.getMoneyOwed().get(otherPerson.getName()) < 0) {
                     System.out.println(person.getName() + " owes "
-                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + otherPerson.getName());
                 } else {
                     System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
@@ -314,6 +319,16 @@ public class Ui {
 
     public static void printCreateFileFailure() {
         System.out.println("The save file could not be created. Exiting the program now...");
+    }
+
+    public static void newFileSuccessfullyCreated() {
+        System.out.println("A new save file has been created!");
+    }
+
+    public static void printEmptyFileWarning() {
+        System.out.println("A save file was found, but it is empty.");
+        System.out.println("If you wish to recover the contents of your save file, please exit the program now.");
+        System.out.println("Otherwise, you may continue to use the program.");
     }
 
     public static void printInvalidPerson(String name) {

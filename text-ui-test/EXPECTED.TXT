@@ -7,6 +7,7 @@ Welcome to
             /____/                                     
 
 No preloaded data found! We have created a file for you.
+A new save file has been created!
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
@@ -33,49 +34,67 @@ There is USD $2.00 left to be assigned. How much did yikai spend?: There is USD 
 Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
-	People involved: [yikai, yuzhao, qian]
+	People involved: 
+	1. yikai 5.0
+	2. yuzhao 1.0
+	3. qian 2.0
 	Payer: yikai
 	Category: breakfast
 
 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved: [yikai, josh]
+	People involved: 
+	1. yikai 1.0
+	2. josh 1.0
 	Payer: josh
 	Category: breakfast
 
 Enter your command: 2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
-	People involved: [yikai, josh, xiyuan]
+	People involved: 
+	1. yikai 0.33
+	2. josh 0.33
+	3. xiyuan 0.34
 	Payer: yikai
 	Category: lunch
 
 Enter your command: 2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
-	People involved: [yikai, josh, xiyuan]
+	People involved: 
+	1. yikai 0.33
+	2. josh 0.33
+	3. xiyuan 0.34
 	Payer: yikai
 	Category: lunch
 
 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved: [yikai, josh]
+	People involved: 
+	1. yikai 1.0
+	2. josh 1.0
 	Payer: josh
 	Category: breakfast
 
 Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
-	People involved: [yikai, yuzhao, qian]
+	People involved: 
+	1. yikai 5.0
+	2. yuzhao 1.0
+	3. qian 2.0
 	Payer: yikai
 	Category: breakfast
 
 Enter your command: 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved: [yikai, josh]
+	People involved:
+	1. yikai 1.0
+	2. josh 1.0
 	Payer: josh
 	Category: breakfast
 
@@ -91,21 +110,29 @@ Enter your command: List of all Expenses in detail:
 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
-	People involved: [yikai, yuzhao, qian]
+	People involved:
+	1. yikai 5.0
+	2. yuzhao 1.0
+	3. qian 2.0
 	Payer: yikai
 	Category: breakfast
 
 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
-	People involved: [yikai, josh, xiyuan]
+	People involved:
+	1. yikai 0.33
+	2. josh 0.33
+	3. xiyuan 0.34
 	Payer: yikai
 	Category: lunch
 
 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved: [yikai, josh]
+	People involved:
+	1. yikai 1.0
+	2. josh 1.0
 	Payer: josh
 	Category: breakfast
 
@@ -122,4 +149,4 @@ josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
 xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
 
-Enter your command: Goodbye!
+Enter your command: Exiting the program now. Goodbye!
