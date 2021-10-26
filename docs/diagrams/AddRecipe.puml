@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+box Logic
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create AddRecipeCommand
+Parser -> AddRecipeCommand : AddRecipeCommand(recipe, ingredientNames, quantities)
+activate AddRecipeCommand
+
+return
+return command
+
+-> AddRecipeCommand : execute(ingredients,recipes)
+activate AddRecipeCommand
+end box
+
+box Model
+create Recipe
+AddRecipeCommand -> Recipe : Recipe(name)
+activate Recipe
+
+return
+
+loop all ingredients
+AddRecipeCommand -> Recipe : add(ingredientName, quantity, ingredients)
+activate Recipe
+create IngredientQuantity
+Recipe -> IngredientQuantity : IngredientQuantity(ingredientName, quantity)
+activate IngredientQuantity
+return
+end
+
+return
+
+AddRecipeCommand -> RecipeList : add(recipe)
+activate RecipeList
+end box
+
+return
+return message
+destroy AddRecipeCommand
+@enduml
