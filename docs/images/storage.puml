@@ -6,31 +6,30 @@ skinparam groupInheritance 2
 ModuleStorage "1" ---* Storage
     ModuleStorage : - {static} logger : Logger
 
-    ModuleStorage : + ArrayList<Module> readModuleList(InputStream inputStream);
-    ModuleStorage : + String[] extractAttributes(String line);
-
+    ModuleStorage : + readModuleList() : ArrayList<Module>
+    ModuleStorage : + extractAttributes(String line) : String[]
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" ---* Storage
-    SelectedUniversityStorage : - {static} logger : Logger;
+    SelectedUniversityStorage : - {static} logger : Logger
     SelectedUniversityStorage : + updateSelectedUniversityList()
     SelectedUniversityStorage : + readSelectedUniversityList() : ArrayList<University>
 
 UserStorage <|-- SelectedModuleStorage
 SelectedModuleStorage "1" ------* Storage
-    SelectedModuleStorage : - {static} logger : Logger
-    SelectedModuleStorage : + updateSelectedModuleList()
-    SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
+     SelectedModuleStorage : - {static} logger : Logger
+     SelectedModuleStorage : + updateSelectedModuleList()
+     SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
 
 UniversityStorage "1" ---* Storage
-    UniversityStorage : - {static} logger : Logger;
-    UniversityStorage : + readUniversityList() : ArrayList<University>;
-    UniversityStorage : + extractAttributes() : String[];
+    UniversityStorage : - {static} logger : Logger
+        UniversityStorage : + readUniversityList() : ArrayList<University>
+        UniversityStorage : + extractAttributes() : String[]
 
 class UserStorage {
-    # loadFile() : File;
+    # loadFile() : File
 }
 class Storage {
-    - {static} logger : Logger;
+    - {static} logger : Logger
 
     + readModuleList() : ArrayList<Module>
     + readUniversityList() : ArrayList<University>
