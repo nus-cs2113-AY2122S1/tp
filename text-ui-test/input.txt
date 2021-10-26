@@ -90,10 +90,10 @@ import
 search -n lezai
 search -n badgithub
 ls
-rm -rf
+rm all
 asdsad
 ls
-rm -rf
+rm all
 y
 ls
 exit
