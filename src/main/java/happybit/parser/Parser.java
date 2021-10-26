@@ -27,7 +27,6 @@ public class Parser {
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "bye";
 
-
     /**
      * Parses the user input.
      *
