@@ -38,7 +38,8 @@ public class EditContactCommand extends Command {
                 handleDuplicates(editedContact);
             }
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
-            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
+            //triggerred when inputs are "edit <wrong_index> <proper flags>"
+            ExceptionTextUi.numOutOfRangeEditMessage(contactList.getListSize());
         }
     }
 

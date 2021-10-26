@@ -127,11 +127,50 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void missingArgMessage() {
-        String message = "There seems to be missing parameters in your request.\n" + "Please specify your command.";
+    //@@author mayankp291
+    public static void missingArgEditMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      example : edit 0 -n George -g procoder -te george123\n"
+                + "NOTE : At least one flag and description required\n"
+                + "       Order of parameters do not matter except for INDEX\n"
+                + "       \"me\" is used as the INDEX for personal contact.";
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
+    public static void missingArgAddMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n"
+                + "NOTE : At least name and description required\n"
+                + "       Order of parameters do not matter";
+        printDoubleLineMessage(message);
+    }
+
+    //@@author mayankp291
+    public static void missingArgSearchMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please enter command in this format:\n"
+                + "      search <FLAG> <QUERY>\n"
+                + "      example : search Ashraf\n"
+                + "                search -g revflash\n"
+                + "NOTE : Flag is optional and only one can be specified";
+        printDoubleLineMessage(message);
+    }
+
+    //@@author mayankp291
+    public static void missingIndexMessage() {
+        String message = "There seems to be missing or invalid index in your request.\n"
+                + "Please enter command in the following way:\n"
+                + "      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>\n"
+                + "Where <COMMAND_WORD> is rm or view";
+        printDoubleLineMessage(message);
+    }
+
+    //@@author
     public static void invalidNumMessage() {
         String message = "That does not seem to be a number.\n" + "Please provide a number instead.";
         printDoubleLineMessage(message);
@@ -155,15 +194,35 @@ public class ExceptionTextUi {
         if (listSize == 0) {
             message = "There are no contacts stored in ConTech.";
         } else if (listSize == 1) {
-            message = "The number you have input is out of range.\n"
+            message = "The index you have input is out of range.\n"
                     + "You only have 1 contact stored.";
         } else {
-            message = "The number you have input is out of range.\n"
-                    + "Please input a number between 0 and " + maxIndex + ".";
+            message = "The index you have input is out of range.\n"
+                    + "Please input a index between 0 and " + maxIndex;
         }
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
+    public static void numOutOfRangeEditMessage(int listSize) {
+        String message;
+        int maxIndex = listSize - 1;
+        if (listSize == 0) {
+            message = "There are no contacts stored in ConTech.\n"
+                    + "Please input index \"me\" if you wish to edit your Personal Contact details.";
+        } else if (listSize == 1) {
+            message = "The index you have input is out of range.\n"
+                    + "You only have 1 contact stored.\n"
+                    + "Please input index \"me\" if you wish to edit your Personal Contact details.";
+        } else {
+            message = "The index you have input is out of range.\n"
+                    + "Please input a number between 0 and " + maxIndex + " to edit saved contacts.\n"
+                    + "Otherwise, input index \"me\" if you wish to edit your Personal Contact details.";
+        }
+        printDoubleLineMessage(message);
+    }
+
+    //@@author
     public static void corruptLineMessage(String line, int lineIndex, String contactFilePath) {
         System.out.println(contactFilePath + ":" + lineIndex + " - \"" + line + "\" is corrupted and not loaded.");
     }

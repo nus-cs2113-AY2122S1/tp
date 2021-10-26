@@ -81,7 +81,7 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "rm";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_ARG;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -89,11 +89,12 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_invalidNumber_expectFailedCommandType() {
         testUserInput = "rm abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
 
+    //@@author mayankp291
     @Test
     public void parseDeleteCommand_outOfRangeIndex_expectException() {
         ContactList contactList = new ContactList();
@@ -107,10 +108,10 @@ public class MainParserTest {
         DeleteContactCommand deleteContactCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
         deleteContactCommand.setContactList(contactList);
         int deletedIndex = deleteContactCommand.getContactIndex();
-
         assertThrows(IndexOutOfBoundsException.class, () -> contactList.deleteContact(deletedIndex));
     }
 
+    //@@author mayankp291
     @Test
     public void parseAddCommand_validInputsWithIrregularSpaces_expectAddContactCommand() {
         testUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw twit -te teles123 -e andre@twix.com";
@@ -125,6 +126,7 @@ public class MainParserTest {
         assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
     }
 
+    //@@author mayankp291
     @Test
     public void parseAddCommand_validInputsWithExtraCharacters_expectAddContactCommand() {
         testUserInput = "         add   1231267azldasd -n   marcus    -g  marcus-bory  ";
@@ -135,6 +137,7 @@ public class MainParserTest {
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
     }
 
+    //@@author
     @Test
     public void parseAddCommand_validInputs_expectAddContactCommand() {
         testUserInput = "add -n andre -g ng-andre -l linkedin -tw twit -te teles123 -e andre@twix.com";
@@ -149,6 +152,7 @@ public class MainParserTest {
         assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
     }
 
+    //@@author mayankp291
     @Test
     public void parseAddCommand_validInputsWithPartialFlags_expectAddContactCommand() {
         testUserInput = "         add -n   ashraf  -g fdada-121   -tw 66123ada -e ash@yahoo.com  ";
@@ -225,6 +229,7 @@ public class MainParserTest {
         assertEquals(expectedFailedCommandType, actualCommand.getType());
     }
 
+    //@@author mayankp291
     @Test
     public void parseViewCommand_validIndex_expectViewContactIndexMatch() {
         final int testIndex = 1;
@@ -233,6 +238,7 @@ public class MainParserTest {
         assertEquals(testIndex,testResultCommand.getIndex());
     }
 
+    //@@author
     @Test
     public void parseViewCommand_multipleIndexes_expectViewContactIndexMatch() {
         int testIndex = 1;
@@ -241,6 +247,7 @@ public class MainParserTest {
         assertEquals(testIndex,testResultCommand.getIndex());
     }
 
+    //@@author mayankp291
     @Test
     public void parseViewCommand_invalidIndex_expectException() {
         testIndex = 99999;
@@ -248,6 +255,7 @@ public class MainParserTest {
         assertThrows(NullPointerException.class, testResultCommand::execute);
     }
 
+    //@@author
     @Test
     public void parseViewCommand_validIndexWithSpaces_expectViewContactIndexMatch() {
         testIndex = 1;
@@ -259,15 +267,16 @@ public class MainParserTest {
     @Test
     public void parseViewCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "view";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_ARG;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
 
+
     @Test
     public void parseViewCommand_invalidInput_expectFailedCommandType() {
         testUserInput = "view abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -277,7 +286,7 @@ public class MainParserTest {
     public void parseAddCommand_missingName_expectFailedCommand() {
         testUserInput = " add -g      github ";
         final FailedCommand actualCommand = getParsedCommand(testUserInput, FailedCommand.class);
-        final FailedCommand expectedCommand = new FailedCommand(FailedCommandType.MISSING_NAME);
+        final FailedCommand expectedCommand = new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
         assertEquals(expectedCommand.getType(), actualCommand.getType());
     }
 }

@@ -22,9 +22,11 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
-import seedu.exception.MissingArgException;
+import seedu.exception.MissingArgAddException;
+import seedu.exception.MissingArgEditException;
+import seedu.exception.MissingArgSearchException;
 import seedu.exception.MissingDetailException;
-import seedu.exception.MissingNameException;
+import seedu.exception.MissingIndexException;
 
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
@@ -164,21 +166,17 @@ public class MainParser {
     private Command parseAddContact(String userInput) {
         contactParser = addContactParser;
         try {
-            String[] details = contactParser.parseContactDetails(userInput);
+            String[] details = addContactParser.parseContactDetails(userInput);
             //check if name is specified in input
             if (details[NAME_INDEX] == null) {
-                throw new MissingNameException();
+                throw new MissingArgAddException();
             }
             assert details.length == NUMBER_OF_FIELDS;
             return new AddContactCommand(details);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        } catch (MissingNameException e) {
-            return new FailedCommand(FailedCommandType.MISSING_NAME);
-        } catch (MissingDetailException e) {
-            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
+        } catch (MissingDetailException | MissingArgAddException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -191,17 +189,15 @@ public class MainParser {
         contactParser = editContactParser;
         try {
             String[] details = editContactParser.parseContactDetails(userInput);
-            //throws InvalidFlagException, MissingDetailException, MissingArgException
-            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingArgException
+            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
+            //throws InvalidFlagException, MissingDetailException, MissingArgEditException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingDetailException | MissingIndexException | MissingArgEditException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
-        } catch (MissingDetailException e) {
-            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND_EDIT);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -241,10 +237,10 @@ public class MainParser {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
             return new ViewContactCommand(viewedIndex);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
+        } catch (MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
     }
 
@@ -254,16 +250,14 @@ public class MainParser {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
             boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
             return new DeleteContactCommand(deletedIndex, hasDeletedDetail);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
+        } catch (MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (InvalidDeleteDetailException e) {
             return new FailedCommand(FailedCommandType.INVALID_DELETE);
-        } catch (IndexOutOfBoundsException e) {
-            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         }
     }
 
@@ -275,8 +269,8 @@ public class MainParser {
             int detailFlag = searchContactParser.getDetailFlag(searchInput);
             String query = searchContactParser.parseSearchQuery(searchInput);
             return new SearchContactCommand(query, detailFlag);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingArgSearchException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_SEARCH);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         }
