@@ -101,7 +101,7 @@ public class WorldMap {
             throws NonStringDistanceException {
         try {
             double dist = Double.parseDouble(rawDist);
-            } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new NonStringDistanceException(rawDist);
         }
     }
