@@ -2,7 +2,7 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
-skinparam groupComposition 3
+
 ModuleStorage "1" ----* Storage
     ModuleStorage : - {static} logger : Logger
 
@@ -16,7 +16,7 @@ SelectedUniversityStorage "1" ----* Storage
     SelectedUniversityStorage : + readSelectedUniversityList() : ArrayList<University>
 
 UserStorage <|-- SelectedModuleStorage
-SelectedModuleStorage "1" ------* Storage
+SelectedModuleStorage "1" ----* Storage
     SelectedModuleStorage : - {static} logger : Logger
     SelectedModuleStorage : + updateSelectedModuleList()
     SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
