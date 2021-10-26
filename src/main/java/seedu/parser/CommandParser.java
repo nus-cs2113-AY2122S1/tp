@@ -1,22 +1,24 @@
 package seedu.parser;
 
-import seedu.command.AddCommand;
-import seedu.command.CalculateCapCommand;
-import seedu.command.ChangeSemesterCommand;
-import seedu.command.CheckCommand;
-import seedu.command.ClearCommand;
 import seedu.command.Command;
-import seedu.command.DeleteCommand;
 import seedu.command.ExitCommand;
-import seedu.command.HelpCommand;
-import seedu.command.InvalidCommand;
-import seedu.command.RemoveCommand;
-import seedu.command.SearchCommand;
-import seedu.command.ShowCommand;
-import seedu.command.StoreResultsCommand;
 import seedu.command.TimetableCommand;
-import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.HelpCommand;
+import seedu.command.CalculateCapCommand;
+import seedu.command.EditCommand;
+import seedu.command.InvalidCommand;
+import seedu.command.TranscriptCommand;
+import seedu.command.RemoveCommand;
+import seedu.command.ChangeSemesterCommand;
+import seedu.command.ClearCommand;
+import seedu.command.StoreResultsCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.SearchCommand;
+import seedu.command.CheckCommand;
+import seedu.command.ShowCommand;
+import seedu.command.AddCommand;
+import seedu.command.flags.AddFlag;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
@@ -65,8 +67,8 @@ public class CommandParser {
                 showUserItemsOnly = true;
             }
             command = new TimetableCommand(timetable, showUserItemsOnly);
-        } else if (lowerCaseText.startsWith("add")) {
-            command = parseAddCommand(text, timetable);
+        } else if (lowerCaseText.equals("add")) {
+            command = parseAddCommand(timetable);
         } else if (lowerCaseText.startsWith("help")) {
             command = new HelpCommand();
         } else if (lowerCaseText.startsWith("delete")) {
@@ -83,6 +85,8 @@ public class CommandParser {
             command = parseRemoveCommand(text);
         } else if (lowerCaseText.startsWith("transcript")) {
             command = new TranscriptCommand();
+        } else if (lowerCaseText.startsWith("edit")) {
+            command = new EditCommand(timetable);
         } else if (lowerCaseText.startsWith("semester")) {
             command = new ChangeSemesterCommand(timetable);
         } else {
@@ -90,7 +94,6 @@ public class CommandParser {
         }
         return command;
     }
-
 
     /**
      * Parses user input into a RemoveCommand.
@@ -140,8 +143,6 @@ public class CommandParser {
         if (split.length < 2 || split[0].equals("") || split[1].equals("")) {
             isErrorThrown = true;
             throw new UniModsException(TextUi.ERROR_INVALID_RESULT_COMMAND);
-        } else {
-            return;
         }
     }
 
@@ -202,10 +203,15 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    private Command parseAddCommand(String input, Timetable timetable) {
-        input = input.substring(ADD_LENGTH).trim();
-        String moduleCode = input.toUpperCase();
-        return new AddCommand(moduleCode, timetable);
-    }
+    private Command parseAddCommand(Timetable timetable) {
+        AddFlag flag = AddFlag.INVALID;
+        try {
+            flag = TextUi.getAddFlag();
+        } catch (UniModsException e) {
+            e.printMessage();
+        }
+        assert flag != AddFlag.INVALID;
 
+        return new AddCommand(timetable, flag);
+    }
 }

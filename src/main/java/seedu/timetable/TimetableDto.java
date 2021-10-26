@@ -75,7 +75,6 @@ public class TimetableDto {
                 day[i] = userItems[i];
             } else {
                 day[i] = null;
-
             }
         }
         return day;

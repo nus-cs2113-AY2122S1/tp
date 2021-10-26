@@ -1,7 +1,11 @@
 package seedu.ui;
 
+import seedu.command.flags.AddFlag;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
+import seedu.timetable.Timetable;
+import seedu.timetable.TimetableUserItem;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -72,6 +76,32 @@ public class TextUi {
         while (input.isEmpty()) {
             System.out.print(PROMPT_CURSOR);
             input = in.nextLine();
+        }
+        return input;
+    }
+
+    public static AddFlag getAddFlag() throws UniModsException {
+        System.out.println("1. Module");
+        System.out.println("2. Event");
+        System.out.print("Choose your option: ");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        if (input.equals("1")) {
+            return AddFlag.LESSON;
+        } else if (input.equals("2")) {
+            return AddFlag.EVENT;
+        } else {
+            throw new UniModsException("Invalid Selection, please choose either 1 or 2");
+        }
+    }
+
+    public static String getReply(String question) {
+        System.out.print(question);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
         }
         return input;
     }
@@ -265,5 +295,17 @@ public class TextUi {
             currentSem = "Semester 1";
         }
         System.out.println("Current semester: " + currentSem);
+    }
+
+    public static void printEvents(Timetable timetable) {
+        ArrayList<TimetableUserItem> timetableUserItem = timetable.getEvents();
+        int serial = SERIAL;
+        for (TimetableUserItem userItem : timetableUserItem) {
+            System.out.println(serial + ": " + userItem.toString());
+        }
+    }
+
+    public static void printEditMessage() {
+        System.out.println("Noted, event name has been changed");
     }
 }

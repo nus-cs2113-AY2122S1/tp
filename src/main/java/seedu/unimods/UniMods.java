@@ -1,8 +1,10 @@
 package seedu.unimods;
 
 import seedu.command.Command;
-import seedu.exceptions.FetchException;
+import seedu.exceptions.AddException;
+import seedu.exceptions.EditException;
 import seedu.exceptions.IntegerException;
+import seedu.exceptions.FetchException;
 import seedu.exceptions.ModuleExistException;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
@@ -54,6 +56,10 @@ public class UniMods {
             e.printMessage();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        } catch (AddException e) {
+            e.printMessage();
+        } catch (EditException e) {
+            e.printMessage();
         }
     }
 

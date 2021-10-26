@@ -5,7 +5,6 @@ import java.util.Locale;
 import seedu.module.Lesson;
 import seedu.module.LessonType;
 import seedu.module.Module;
-import seedu.ui.TimetableUI.LineType;
 
 /**
  * Timetable Lesson that can be added to a timetable if the user is taking this

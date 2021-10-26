@@ -5,7 +5,6 @@ import seedu.timetable.TimetableItem;
 import seedu.timetable.TimetableLesson;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class TimetableUI {
@@ -98,7 +97,7 @@ public class TimetableUI {
         TimetableItem prevTimetableItem = null;
         for (int i = start; i <= end; i++) {
             TimetableItem timetableItem = schedule[i];
-            infoLine += addInfoToString(timetableItem,prevTimetableItem, type);
+            infoLine = infoLine.concat(addInfoToString(timetableItem,prevTimetableItem, type));
             prevTimetableItem = timetableItem;
         }
         System.out.println(infoLine);

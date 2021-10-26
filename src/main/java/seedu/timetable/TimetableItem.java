@@ -8,7 +8,7 @@ import seedu.ui.TimetableUI.LineType;
 
 public abstract class TimetableItem {
 
-    protected final String title;
+    protected String title;
     protected final DayOfWeek dayOfWeek;
     protected final String startTime;
     protected final String endTime;
@@ -57,6 +57,10 @@ public abstract class TimetableItem {
      */
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String input) {
+        title = input;
     }
 
     public String getType() {
