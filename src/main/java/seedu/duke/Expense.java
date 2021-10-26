@@ -95,7 +95,7 @@ public class Expense {
         return validListOfPeople;
     }
 
-//@@author
+    //@@author
 
     public void setPayer(Person person) {
         this.payer = person;
