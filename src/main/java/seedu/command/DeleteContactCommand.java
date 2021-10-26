@@ -10,8 +10,13 @@ import seedu.ui.UserInputTextUi;
 
 
 public class DeleteContactCommand extends Command {
-    private static String ACKNOWLEDGE_DELETE = "y";
-    private static int DELETE_ALL_CONTACTS = -2;
+    private static final String ACKNOWLEDGE_DELETE = "y";
+    private static final int DELETE_ALL_CONTACTS = -2;
+    public static final int GITHUB_INDEX = 1;
+    public static final int LINKEDIN_INDEX = 2;
+    public static final int TELEGRAM_INDEX = 3;
+    public static final int TWITTER_INDEX = 4;
+    public static final int EMAIL_INDEX = 5;
 
     private final int contactIndex;
 
