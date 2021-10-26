@@ -115,9 +115,9 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 * `TITLE` refers to the title of the task you wish to create
 * `DAY_OF_THE_WEEK` can be any of the following, not case-sensitive: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
 and refers to the day on which you want to do the task
-* the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
 * the `-p` flag is optional and `PRIORITY` can be either `L`, `M` or `H`, for low, medium and high priority respectively
 * the default priority for each task is set to low (L)
+* the `-i` flag is optional and `INFORMATION` refers to any additional information about the task to add
 
 Example usage:
 
