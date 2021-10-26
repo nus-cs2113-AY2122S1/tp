@@ -2,15 +2,20 @@ package seedu.timetable;
 
 import seedu.ui.TimetableUI.LineType;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+
 public class TimetableUserItem extends TimetableItem {
 
-    private String description;
+
+    private final String day;
 
     public TimetableUserItem(String title, String day, String startTime, String endTime,
-                             String description, TaskType type) {
+                             String location) {
         super(title, day, startTime, endTime);
-        this.description = description;
-        this.type = type.name();
+        this.type = "TASK";
+        this.venue = location;
+        this.day = day;
     }
 
     @Override
@@ -20,6 +25,36 @@ public class TimetableUserItem extends TimetableItem {
             return this.getTitle().equals(userItem.getTitle()) && this.getType().equals(userItem.getType());
         }
         return false;
+    }
+
+    public String getDescription() {
+        return getTitle();
+    }
+
+    public boolean isDescription() {
+        return getTitle().length() > 0;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    @Override
+    public String toString() {
+        String output = "Event: " + getTitle() + " on " + getDay() + ", from "
+                + startTime + " to " + endTime;
+        if (isDescription()) {
+            output = output.concat(" at " + getDescription());
+        }
+        return output;
     }
 
 

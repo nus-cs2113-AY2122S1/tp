@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,25 +24,22 @@ public class NusMods {
     private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
 
     /**
-     * Retrieves mod list from NUSMods API then iterates through it and prints all matching mods.
+     * Retrieves mod list from NUSMods API then iterates through it and prints all matching mods. Can be interrupted
+     * by pressing ENTER.
      *
      * @param searchTerm  searchTerm that has to be contained in the moduleCode.
      * @param searchFlags secondary variables that will be checked to narrow the search.
      * @throws IOException if there is no connection.
      */
     public static void searchModsOnline(String searchTerm, SearchFlags searchFlags) throws IOException {
-        InputStream inputStream = getOnlineModList();
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        int count = 0;
-        reader.beginArray();
-        while (reader.hasNext()) {
-            Module module = new Gson().fromJson(reader, Module.class);
-            if (isMatch(module, searchTerm, searchFlags)) {
-                count++;
-            }
+        SearchThread searchThread = new SearchThread(searchTerm, searchFlags);
+        searchThread.start();
+        InterruptThread interruptThread = new InterruptThread(searchThread);
+        interruptThread.start();
+        while (searchThread.isAlive()) {
+            //locks code here while thread is running
         }
-        reader.endArray();
-        TextUi.printModsFound(count);
+        interruptThread.interrupt();
     }
 
     /**
@@ -118,47 +116,20 @@ public class NusMods {
     }
 
     /**
-     * Fetches a mod from NUSMods and prints its full information.
-     *
-     * @param moduleCode mod to fetch.
-     * @throws IOException if there is no connection.
-     */
-    public static void showModOnline(String moduleCode) throws IOException {
-        Module module;
-        try {
-            module = fetchModOnline(moduleCode);
-        } catch (FetchException e) {
-            throw new IOException();
-        }
-        TextUi.printModFullDescription(module);
-    }
-
-    /**
-     * Fetches all mods from NUSMods and saves all of them into the local storage.
+     * Fetches all mods from NUSMods and saves all of them into the local storage. Can be interrupted by pressing
+     * ENTER.
      *
      * @throws IOException if there is no connection.
      */
-    public static void update() throws IOException, ModStorage.FileErrorException {
-        TextUi.printUpdateStartMessage();
-        InputStream inputStream = getOnlineModList();
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        int count = 0;
-        reader.beginArray();
-        while (reader.hasNext()) {
-            Module module = new Gson().fromJson(reader, Module.class);
-            String moduleCode = module.getModuleCode();
-            try {
-                InputStream modStream = getOnlineModInfo(moduleCode);
-                ModStorage.saveModInfo(moduleCode, modStream);
-                count++;
-                System.out.println(count);
-            } catch (Exception e) {
-                logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
-                TextUi.printErrorMessage();
-            }
+    public static void updateSequence() throws IOException {
+        UpdateThread updateThread = new UpdateThread();
+        updateThread.start();
+        InterruptThread interruptThread = new InterruptThread(updateThread);
+        interruptThread.start();
+        while (updateThread.isAlive()) {
+            //locks code here while thread is running
         }
-        reader.endArray();
-        TextUi.printUpdateSuccessMessage();
+        interruptThread.interrupt();
     }
 
     /**
@@ -186,5 +157,158 @@ public class NusMods {
             }
         }
         return module;
+    }
+
+    /**
+     * Class for interrupt thread that will interrupt another thread if prompted by hitting ENTER.
+     */
+    public static class InterruptThread extends Thread {
+
+        private final Thread thread;
+
+        /**
+         * Constructor for Interrupt thread. Takes in a thread to interrupt on pressing enter.
+         *
+         * @param thread Thread to be interrupted.
+         */
+        public InterruptThread(Thread thread) {
+            this.thread = thread;
+        }
+
+        /**
+         * Runs the thread checking for user input. On pressing enter, this thread interrupts its assigned thread,
+         * then ends. Also ends on being interrupted itself.
+         */
+        public void run() {
+            try {
+                while (System.in.available() == 0) {
+                    try {
+                        sleep(10);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+                //clears the newline from System.in in the main loop
+                Scanner s = new Scanner(System.in);
+                s.nextLine();
+            } catch (IOException e) {
+                TextUi.printErrorMessage();
+            }
+            thread.interrupt();
+        }
+    }
+
+    /**
+     * Class for search thread that runs the search function.
+     */
+    public static class SearchThread extends Thread {
+
+        private final String searchTerm;
+        private final SearchFlags searchFlags;
+
+        /**
+         * Constructor for the online search function that takes in a search term and search flags.
+         *
+         * @param searchTerm search term to search for.
+         * @param searchFlags search flags to check for.
+         */
+        public SearchThread(String searchTerm, SearchFlags searchFlags) {
+            this.searchTerm = searchTerm;
+            this.searchFlags = searchFlags;
+        }
+
+        /**
+         * Attempts to run the online search function. Prints an error message if it is unable to reach
+         * the NUSMods API.
+         */
+        public void run() {
+            try {
+                search(searchTerm, searchFlags);
+            } catch (IOException e) {
+                TextUi.printNoConnectionMessage();
+            }
+        }
+
+        /**
+         * Retrieves mod list from NUSMods API then iterates through it and prints all matching mods. If interrupted,
+         * immediately returns.
+         *
+         * @param searchTerm  searchTerm that has to be contained in the moduleCode.
+         * @param searchFlags secondary variables that will be checked to narrow the search.
+         * @throws IOException if there is no connection.
+         */
+        private static void search(String searchTerm, SearchFlags searchFlags) throws IOException {
+            InputStream inputStream = getOnlineModList();
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            int count = 0;
+            reader.beginArray();
+            while (reader.hasNext()) {
+                if (currentThread().isInterrupted()) {
+                    TextUi.printSearchInterruptMessage();
+                    return;
+                }
+                Module module = new Gson().fromJson(reader, Module.class);
+                if (isMatch(module, searchTerm, searchFlags)) {
+                    count++;
+                }
+            }
+            reader.endArray();
+            TextUi.printModsFound(count);
+        }
+    }
+
+    /**
+     * Class for update thread that runs the update function.
+     */
+    public static class UpdateThread extends Thread {
+
+        /**
+         * Attempts to run the update function. Prints an error message if unable to reach the NUSMods API, and
+         * Update interrupt message if cancelled early within the 1000ms sleep window.
+         */
+        public void run() {
+            try {
+                update();
+            } catch (IOException e) {
+                TextUi.printNoConnectionMessage();
+            } catch (InterruptedException e) {
+                TextUi.printUpdateInterruptMessage();
+            }
+        }
+
+        /**
+         * Updates local data by pulling all data for all the mods from the NUSMods API. If interrupted, immediately
+         * returns. Also has a 1000ms delay before starting to display the cancel command for users.
+         *
+         * @throws IOException if unable to reach NUSmods API.
+         * @throws InterruptedException if interrupted in the first 1000ms sleep window.
+         */
+        private static void update() throws IOException, InterruptedException {
+            TextUi.printUpdateStartMessage();
+            sleep(1000);
+            InputStream inputStream = getOnlineModList();
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            int count = 0;
+            reader.beginArray();
+            while (reader.hasNext()) {
+                if (currentThread().isInterrupted()) {
+                    TextUi.printUpdateInterruptMessage();
+                    return;
+                }
+                Module module = new Gson().fromJson(reader, Module.class);
+                String moduleCode = module.getModuleCode();
+                try {
+                    InputStream modStream = getOnlineModInfo(moduleCode);
+                    ModStorage.saveModInfo(moduleCode, modStream);
+                    count++;
+                    System.out.println(count);
+                } catch (Exception e) {
+                    logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
+                    TextUi.printErrorMessage();
+                }
+            }
+            reader.endArray();
+            TextUi.printUpdateSuccessMessage();
+        }
     }
 }

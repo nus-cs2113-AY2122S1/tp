@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import seedu.exceptions.UniModsException;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -76,7 +75,6 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
         case BEGIN_OBJECT:
             return getWeeksObject(jsonReader);
         default:
-            //throw new UniModsException("Type was not array or object, but " + jsonReader.peek());
             throw new IOException();
         }
     }

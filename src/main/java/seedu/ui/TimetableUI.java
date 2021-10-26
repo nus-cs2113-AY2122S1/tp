@@ -2,6 +2,8 @@ package seedu.ui;
 
 import seedu.module.Module;
 import seedu.timetable.TimetableItem;
+import seedu.timetable.TimetableLesson;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -27,12 +29,12 @@ public class TimetableUI {
      * 
      * @param modules the list of modules taken in the timetable
      */
-    public static void printModules(List<Module> modules) {
+    public static void printModules(List<Module> modules, int semester) {
         double counter = 0;
         System.out.println(STAR_DIVIDER);
         System.out.println(MODULES_HEADER);
         for (Module module : modules) {
-            System.out.println(module);
+            System.out.println(module + " " + module.getExam(semester));
             counter += module.getModuleCredit();
         }
 
@@ -66,15 +68,30 @@ public class TimetableUI {
      * @param start    the earliest hour that has any activity
      * @param end      the last hour that has any activity
      */
-    public static void printDaySchedule(String day, TimetableItem[] schedule, int start, int end) {
+    public static void printDaySchedule(String day, TimetableItem[] schedule, int start, int end,
+                                        boolean showUserItemsOnly) {
+        TimetableItem[] displaySchedule = schedule;
+        if (showUserItemsOnly) {
+            displaySchedule = getUserItems(schedule);
+        }
         for (int u = start; u <= end; u++) {
             System.out.print(DIVIDER);
         }
         System.out.println();
-        printLine(day, schedule, start, end, LineType.TITLE);
-        printLine(day, schedule, start, end, LineType.TYPE);
-        printLine(day, schedule, start, end, LineType.VENUE);
+        printLine(day, displaySchedule, start, end, LineType.TITLE);
+        printLine(day, displaySchedule, start, end, LineType.TYPE);
+        printLine(day, displaySchedule, start, end, LineType.VENUE);
 
+    }
+
+    public static TimetableItem[] getUserItems(TimetableItem[] schedule) {
+        TimetableItem[] userItemSchedule = schedule.clone();
+        for (int i = 0; i < userItemSchedule.length; i++) {
+            if (userItemSchedule[i] instanceof TimetableLesson) {
+                userItemSchedule[i] = null;
+            }
+        }
+        return userItemSchedule;
     }
 
     private static void printLine(String day, TimetableItem[] schedule, int start, int end, LineType type) {

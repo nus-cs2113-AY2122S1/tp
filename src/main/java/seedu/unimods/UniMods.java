@@ -1,8 +1,10 @@
-package seedu.duke;
+package seedu.unimods;
 
 import seedu.command.Command;
-import seedu.exceptions.FetchException;
+import seedu.exceptions.AddException;
+import seedu.exceptions.EditException;
 import seedu.exceptions.IntegerException;
+import seedu.exceptions.FetchException;
 import seedu.exceptions.ModuleExistException;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
@@ -12,7 +14,7 @@ import seedu.user.Profile;
 
 import java.util.ArrayList;
 
-public class Duke {
+public class UniMods {
     private static String path = "data/Modules.json";
     private static String timetablePath = "data/timetable.json";
     public static Timetable timetable;
@@ -22,7 +24,7 @@ public class Duke {
     private static Profile profileInUse;
 
     public static void main(String[] args) {
-        new Duke().setup();
+        new UniMods().setup();
     }
 
     private void setup() {
@@ -54,6 +56,10 @@ public class Duke {
             e.printMessage();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        } catch (AddException e) {
+            e.printMessage();
+        } catch (EditException e) {
+            e.printMessage();
         }
     }
 

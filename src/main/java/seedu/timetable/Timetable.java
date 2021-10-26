@@ -9,6 +9,7 @@ import seedu.ui.TimetableUI;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 
 /**
@@ -22,10 +23,13 @@ public class Timetable implements Comparable<Timetable> {
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
 
-    private final int semester;
+    private int semester;
     private int earliestHour;
     private int latestHour;
 
+    private boolean isEmpty = true;
+
+    private final ArrayList<TimetableUserItem> events = new ArrayList<>();
     private final ArrayList<Module> modules;
     private final TimetableLogger logger = new TimetableLogger();
 
@@ -70,44 +74,50 @@ public class Timetable implements Comparable<Timetable> {
      * an internal list if not already added. This can be a Lecture, Tutorial or
      * Laboratory
      *
-     * @param module   module to be added to the timetable
-     * @param semester semester of the timetable
-     * @param lesson   lesson to be added to the timetable
+     * @param day  Day that item should be added to schedule
+     * @param item   Item that should be added to schedule
      * @see TimetableLesson
      */
-    public void addLesson(Module module, Integer semester, Lesson lesson) {
-        TimetableLesson timetableLesson = new TimetableLesson(module, semester, lesson);
-
-        switch (timetableLesson.getDayOfWeek()) {
+    public void addItem(DayOfWeek day, TimetableItem item) {
+        switch (day) {
         case MONDAY:
-            addItemToSchedule(timetableLesson, monday);
+            addItemToSchedule(item, monday);
             break;
         case TUESDAY:
-            addItemToSchedule(timetableLesson, tuesday);
+            addItemToSchedule(item, tuesday);
             break;
         case WEDNESDAY:
-            addItemToSchedule(timetableLesson, wednesday);
+            addItemToSchedule(item, wednesday);
             break;
         case THURSDAY:
-            addItemToSchedule(timetableLesson, thursday);
+            addItemToSchedule(item, thursday);
             break;
         case FRIDAY:
-            addItemToSchedule(timetableLesson, friday);
+            addItemToSchedule(item, friday);
             break;
         case SATURDAY:
-            addItemToSchedule(timetableLesson, saturday);
+            addItemToSchedule(item, saturday);
             break;
         case SUNDAY:
-            addItemToSchedule(timetableLesson, sunday);
+            addItemToSchedule(item, sunday);
             break;
         default:
             break;
         }
+    }
 
+    public void addLesson(Module module, Integer semester, Lesson lesson) {
+        TimetableLesson timetableLesson = new TimetableLesson(module, semester, lesson);
+        addItem(timetableLesson.getDayOfWeek(), timetableLesson);
         addModuleToList(module);
 
         logger.log(Level.INFO, String.format("%s added to timetable",
                 timetableLesson.getTitle() + ", " + timetableLesson.getLessonType()));
+    }
+
+    public void addEvent(DayOfWeek date, TimetableUserItem timetableUserItem) {
+        addItem(date, timetableUserItem);
+        logger.log(Level.INFO, String.format("%s added to timetable", timetableUserItem.getTitle()));
     }
 
     /**
@@ -129,35 +139,7 @@ public class Timetable implements Comparable<Timetable> {
         assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
     }
 
-    public void addEvent(DayOfWeek date, TimetableUserItem timetableUserItem) {
-        switch (date) {
-        case MONDAY:
-            addItemToSchedule(timetableUserItem, monday);
-            break;
-        case TUESDAY:
-            addItemToSchedule(timetableUserItem, tuesday);
-            break;
-        case WEDNESDAY:
-            addItemToSchedule(timetableUserItem, wednesday);
-            break;
-        case THURSDAY:
-            addItemToSchedule(timetableUserItem, thursday);
-            break;
-        case FRIDAY:
-            addItemToSchedule(timetableUserItem, friday);
-            break;
-        case SATURDAY:
-            addItemToSchedule(timetableUserItem, saturday);
-            break;
-        case SUNDAY:
-            addItemToSchedule(timetableUserItem, sunday);
-            break;
-        default:
-            break;
-        }
 
-        logger.log(Level.INFO, String.format("%s added to timetable", timetableUserItem.getTitle()));
-    }
 
     /**
      * Adds a timetable item to a specific day schedule E.g.
@@ -175,6 +157,7 @@ public class Timetable implements Comparable<Timetable> {
             schedule[i] = timetableItem;
         }
         adjustStartAndEndHours(start, end);
+        isEmpty = false;
     }
 
     /**
@@ -193,39 +176,37 @@ public class Timetable implements Comparable<Timetable> {
     /**
      * Deletes the module from the list of modules taken by the user.
      *
-     * @param module Module to be Deleted
+     * @param moduleCode Module Code of the module to be Deleted
+     *                   E.g. CS2113T
      * @see Module
      */
-    public void deleteModuleFromList(Module module) throws UniModsException {
-        String moduleCode = module.getModuleCode();
+    public void deleteModuleFromList(String moduleCode) throws UniModsException {
         for (int i = 0; i < modules.size(); i++) {
-            if (modules.get(i).getModuleCode().equals(moduleCode)) {
+            if (modules.get(i).getModuleCode().toUpperCase(Locale.ROOT).equals(moduleCode)) {
                 modules.remove(modules.get(i));
-                TextUi.printModuleDeleted(moduleCode);
-                deleteFromLessons(module);
-                logger.log(Level.INFO, String.format("%s added to timetable", module.getModuleCode()));
                 return;
             }
         }
-        throw new UniModsException(TextUi.ERROR_MODULE_NOT_FOUND);
     }
 
     /**
-     * Calls the function deleteFromSchedule to delete the module from the
+     * Calls the function deleteLessonFromSchedule to delete the item from the
      * timetable's daily plan.
      *
-     * @param module Module to be Deleted
+     * @param title Title of the Item to be deleted.
+     *              Module Code for modules, Descriptions for Personal tasks.
+     *
      * @see Module
      */
-    public void deleteFromLessons(Module module) {
-        String moduleCode = module.getModuleCode();
-        deleteFromSchedule(moduleCode, monday);
-        deleteFromSchedule(moduleCode, tuesday);
-        deleteFromSchedule(moduleCode, wednesday);
-        deleteFromSchedule(moduleCode, thursday);
-        deleteFromSchedule(moduleCode, friday);
-        deleteFromSchedule(moduleCode, saturday);
-        deleteFromSchedule(moduleCode, sunday);
+    public void deleteFromSchedules(String title) {
+        deleteItemFromSchedule(title, monday);
+        deleteItemFromSchedule(title, tuesday);
+        deleteItemFromSchedule(title, wednesday);
+        deleteItemFromSchedule(title, thursday);
+        deleteItemFromSchedule(title, friday);
+        deleteItemFromSchedule(title, saturday);
+        deleteItemFromSchedule(title, sunday);
+        TextUi.printModuleDeleted(title);
     }
 
     /**
@@ -237,10 +218,45 @@ public class Timetable implements Comparable<Timetable> {
      * @param moduleCode ModuleCode to be Deleted
      * @see Module
      */
-    public void deleteFromSchedule(String moduleCode, TimetableItem[] schedule) {
+    private void deleteItemFromSchedule(String title, TimetableItem[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
-            if (schedule[i] != null && schedule[i].getTitle().equals(moduleCode)) {
+            if (schedule[i] != null && schedule[i].getTitle().toUpperCase(Locale.ROOT).equals(title)) {
                 schedule[i] = null;
+            }
+        }
+    }
+
+    public void editEventFromSchedule(TimetableUserItem event, String input) {
+        TimetableItem[] schedule = getSunday();
+        switch (DayOfWeek.valueOf(event.getDay().toUpperCase(Locale.ROOT))) {
+        case MONDAY:
+            schedule = getMonday();
+            break;
+        case TUESDAY:
+            schedule = getTuesday();
+            break;
+        case WEDNESDAY:
+            schedule = getWednesday();
+            break;
+        case THURSDAY:
+            schedule = getThursday();
+            break;
+        case FRIDAY:
+            schedule = getFriday();
+            break;
+        case SATURDAY:
+            schedule = getSaturday();
+            break;
+        case SUNDAY:
+            schedule = getSunday();
+            break;
+        default:
+            break;
+        }
+        String title = event.getTitle();
+        for (int i = 0; i < schedule.length; i++) {
+            if (schedule[i] != null && schedule[i].getTitle().equals(title)) {
+                schedule[i].setTitle(input);
             }
         }
     }
@@ -249,16 +265,14 @@ public class Timetable implements Comparable<Timetable> {
      * Removes all modules from the list of modules taken by the user. Calls the
      * clearTimetableFromLessons() function to delete all the scheduled lessons.
      */
-    public void clearTimetable() {
-        //Commented out if check for now because userItems dont show up in modules
-        //if (modules.size() > 0) {
+    public void clearTimetable() throws UniModsException {
+        if (isEmpty) {
+            throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
+        }
         modules.clear();
         clearTimetableFromLessons();
         TextUi.printTimetableCleared();
         logger.log(Level.INFO, "All modules removed from timetable");
-        //} else {
-        //throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
-        //}
     }
 
     /**
@@ -299,53 +313,55 @@ public class Timetable implements Comparable<Timetable> {
      * <p>Also displays all the modules taken and the total number of MCs taken for the
      * timetable
      */
-    public void showTimetable() {
+    public void showTimetable(boolean showUserItemsOnly) {
         TimetableUI.printScheduleHours(earliestHour, latestHour);
-        TimetableUI.printDaySchedule("MON", monday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("TUE", tuesday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("WED", wednesday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("THU", thursday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("FRI", friday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("SAT", saturday, earliestHour, latestHour);
-        TimetableUI.printDaySchedule("SUN", sunday, earliestHour, latestHour);
-        TimetableUI.printModules(modules);
+        TimetableUI.printDaySchedule("MON", monday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("TUE", tuesday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("WED", wednesday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("THU", thursday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("FRI", friday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("SAT", saturday, earliestHour, latestHour, showUserItemsOnly);
+        TimetableUI.printDaySchedule("SUN", sunday, earliestHour, latestHour,showUserItemsOnly);
+        TimetableUI.printModules(modules, this.semester);
     }
 
-    public TimetableLesson getLesson(DayOfWeek day, int startHour) {
-        TimetableItem lesson;
-        switch (day) {
+    public TimetableItem getItem(String day, int startHour) {
+        TimetableItem item;
+        switch (DayOfWeek.valueOf(day.toUpperCase(Locale.ROOT))) {
         case MONDAY:
-            lesson = monday[startHour];
+            item = monday[startHour];
             break;
         case TUESDAY:
-            lesson = tuesday[startHour];
+            item = tuesday[startHour];
             break;
         case WEDNESDAY:
-            lesson = wednesday[startHour];
+            item = wednesday[startHour];
             break;
         case THURSDAY:
-            lesson = thursday[startHour];
+            item = thursday[startHour];
             break;
         case FRIDAY:
-            lesson = friday[startHour];
+            item = friday[startHour];
             break;
         case SATURDAY:
-            lesson = saturday[startHour];
+            item = saturday[startHour];
             break;
         case SUNDAY:
-            lesson = sunday[startHour];
+            item = sunday[startHour];
             break;
         default:
             return null;
         }
-        if (lesson instanceof TimetableLesson) {
-            return (TimetableLesson) lesson;
-        }
-        return null;
+        return item;
     }
 
     public int getSemester() {
         return semester;
+    }
+
+    public void setSemester(int semester) {
+        assert (semester > 0 && semester < 5);
+        this.semester = semester;
     }
 
     public int getEarliestHour() {
@@ -388,6 +404,10 @@ public class Timetable implements Comparable<Timetable> {
         return this.sunday;
     }
 
+    public ArrayList<TimetableUserItem> getEvents() {
+        return events;
+    }
+
     @Override
     public int compareTo(Timetable timetable) {
         int flag = 0;
@@ -399,17 +419,28 @@ public class Timetable implements Comparable<Timetable> {
         return flag;
     }
 
-    public boolean isConflict(Lesson lesson) {
-        ArrayList<Integer> duration = lesson.getStartToEndTime();
-        for (Integer time : duration) {
-            if (isLessonExist(lesson, time)) {
+    public boolean isConflict(String day, int start, int end) {
+        for (int i = start; i < end; i++) {
+            if (isItemExist(day, i)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isLessonExist(Lesson lesson, Integer time) {
-        return getLesson(lesson.getParsedDay(), time) != null;
+    public boolean isConflict(Lesson lesson) {
+        return isConflict(lesson.getDay(),lesson.getStartHour(), lesson.getEndHour());
+    }
+
+    public boolean isConflict(TimetableUserItem userItem) {
+        return isConflict(userItem.getDay(),userItem.getStartHour(), userItem.getEndHour());
+    }
+
+    public boolean isItemExist(String day, int time) {
+        return getItem(day, time) != null;
+    }
+    
+    public void addToEvents(TimetableUserItem timetableUserItem) {
+        events.add(timetableUserItem);
     }
 }

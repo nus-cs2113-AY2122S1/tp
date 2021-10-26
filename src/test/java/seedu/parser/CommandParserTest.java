@@ -44,7 +44,7 @@ public class CommandParserTest {
 
     @Test
     public void parse_Search_returnsSearchCommand() {
-        final String[]searchInputs = {"search", " search ", "SEARCH", " seaRCH"};
+        final String[] searchInputs = {"search", " search ", "SEARCH", " seaRCH"};
         parseMultipleInputsForCommand(new SearchCommand("", new SearchFlags()), searchInputs);
     }
 
@@ -57,13 +57,7 @@ public class CommandParserTest {
     @Test
     public void parse_Timetable_returnsTimetableCommand() {
         final String[] showInputs = {"timetable", " timetable ", "TIMETABLE", " TIMeTabLe"};
-        parseMultipleInputsForCommand(new TimetableCommand(new Timetable(0)), showInputs);
-    }
-
-    @Test
-    public void parse_Add_returnsAddCommand() {
-        final String[] addInputs = {"add", " add ", "ADD", " ADd"};
-        parseMultipleInputsForCommand(new AddCommand("", new Timetable(1)), addInputs);
+        parseMultipleInputsForCommand(new TimetableCommand(new Timetable(0), false), showInputs);
     }
 
     private void parseMultipleInputsForCommand(Command expectedCommand, String[] inputs) {

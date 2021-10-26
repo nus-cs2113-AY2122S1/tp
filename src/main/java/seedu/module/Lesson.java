@@ -3,6 +3,8 @@ package seedu.module;
 import com.google.gson.annotations.JsonAdapter;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Lesson {
@@ -48,27 +50,6 @@ public class Lesson {
         return day;
     }
 
-    public DayOfWeek getParsedDay() {
-        switch (getDay()) {
-        case "Monday":
-            return DayOfWeek.MONDAY;
-        case "Tuesday":
-            return DayOfWeek.TUESDAY;
-        case "Wednesday":
-            return DayOfWeek.WEDNESDAY;
-        case "Thursday":
-            return DayOfWeek.THURSDAY;
-        case "Friday":
-            return DayOfWeek.FRIDAY;
-        case "Saturday":
-            return DayOfWeek.SATURDAY;
-        case "Sunday":
-            return DayOfWeek.SUNDAY;
-        default:
-            return null;
-        }
-    }
-
     public String getLessonType() {
         return lessonType;
     }
@@ -89,15 +70,18 @@ public class Lesson {
         return size;
     }
 
-    public ArrayList<Integer> getStartToEndTime() {
-        int length = ((Integer.parseInt(getEndTime())) - Integer.parseInt(getStartTime())) / DIVISOR;
-        ArrayList<Integer> time = new ArrayList<>();
-        int startTime = Integer.parseInt(getStartTime()) / DIVISOR;
-        time.add(startTime);
-        for (int i = 1; length > i; i++) {
-            startTime += ONE;
-            time.add(startTime);
-        }
-        return time;
+    private LocalTime parseTime(String time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        return LocalTime.parse(time, formatter);
+    }
+
+    public int getStartHour() {
+        LocalTime startTime = parseTime(this.startTime);
+        return startTime.getHour();
+    }
+
+    public int getEndHour() {
+        LocalTime endTime = parseTime(this.endTime);
+        return endTime.getHour();
     }
 }

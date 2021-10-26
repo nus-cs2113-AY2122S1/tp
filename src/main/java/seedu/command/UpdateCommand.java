@@ -20,9 +20,9 @@ public class UpdateCommand extends Command {
     public void execute() {
         try {
             logger.log(Level.INFO, "Updating local data");
-            NusMods.update();
+            NusMods.updateSequence();
             logger.log(Level.INFO, "Update complete");
-        } catch (IOException | ModStorage.FileErrorException e) {
+        } catch (IOException e) {
             logger.log(Level.WARNING, "UPDATE ERROR");
             e.printStackTrace();
         }

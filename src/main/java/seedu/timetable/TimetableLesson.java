@@ -1,5 +1,6 @@
 package seedu.timetable;
 
+import java.time.LocalTime;
 import java.util.Locale;
 
 import seedu.module.Lesson;

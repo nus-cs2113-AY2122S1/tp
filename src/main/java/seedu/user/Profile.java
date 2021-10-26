@@ -1,6 +1,7 @@
 package seedu.user;
 
 import seedu.timetable.Timetable;
+import seedu.ui.TranscriptUi;
 
 public class Profile {
 
@@ -39,5 +40,13 @@ public class Profile {
 
     public ModuleRecord getRecord() {
         return record;
+    }
+
+    public void showTranscript() {
+        TranscriptUi.printIntroduction();
+        TranscriptUi.printHeadings();
+        record.printGradedModuleInfo();
+        record.printUngradedModuleInfo();
+        TranscriptUi.printConclusion();
     }
 }

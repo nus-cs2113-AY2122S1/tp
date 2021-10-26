@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import seedu.command.flags.SearchFlags;
 import seedu.module.Module;
-import seedu.online.NusMods;
 import seedu.ui.TextUi;
 
 import java.io.BufferedReader;
@@ -15,9 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.util.logging.Logger;
-
-import static seedu.online.NusMods.isMatch;
 
 public class ModStorage {
 
@@ -91,11 +87,6 @@ public class ModStorage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            // Handle the case where dir is not really a directory.
-            // Checking dir.isDirectory() above would not be sufficient
-            // to avoid race conditions with another process that deletes
-            // directories.
         }
         TextUi.printLocalSearchMessage();
     }

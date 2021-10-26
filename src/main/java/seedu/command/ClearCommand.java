@@ -16,12 +16,12 @@ public class ClearCommand extends Command {
     }
 
     public void execute() {
-        //try {
-        timetable.clearTimetable();
-        logger.log(Level.INFO, "Timetable is now empty");
-        //} catch (UniModsException e) {
-        //    System.out.println(e.getMessage());
-        //    logger.log(Level.WARNING, e.getMessage());
-        //}
+        try {
+            timetable.clearTimetable();
+            logger.log(Level.INFO, "Timetable is now empty");
+        } catch (UniModsException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
+        }
     }
 }
