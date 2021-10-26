@@ -53,7 +53,11 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        String logo = "gg";
+        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
+                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
+                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
+                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
+                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
         show(logo);
