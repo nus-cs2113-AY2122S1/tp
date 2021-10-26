@@ -22,6 +22,9 @@ public class CurrencyConversionCommand extends Command {
         case SGD:
             currencyMultiplier = 0.67;
             break;
+        default:
+            currencyMultiplier = 1.0;
+            break;
         }
     }
 
