@@ -15,14 +15,18 @@ public class GraphCommand extends Command {
         switch (parameters.get(0)) {
         case "dish":
             if (DishList.dishList.isEmpty()) {
-                throw new FoodoramaException("List is empty, nothing to show");
+                throw new FoodoramaException(ui.getLineDivider() + System.lineSeparator()
+                        + "List is empty, nothing to show" + System.lineSeparator()
+                        + ui.getLineDivider());
             }
             DishList.graph();
             break;
 
         case "ingr":
             if (IngredientList.ingredientList.isEmpty()) {
-                throw new FoodoramaException("List is empty, nothing to show");
+                throw new FoodoramaException(ui.getLineDivider() + System.lineSeparator()
+                        + "List is empty, nothing to show" + System.lineSeparator()
+                        + ui.getLineDivider());
             }
             IngredientList.graph();
             break;

@@ -467,6 +467,7 @@ public class Ui {
         assert dishList != null : "dishList cannot be null";
         int graphPortions = 10;
         if (!dishList.isEmpty()) {
+            System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the dishes
             ArrayList<Integer> lengths = new ArrayList();
             double max = DishList.getGreatestWaste();
@@ -481,20 +482,20 @@ public class Ui {
                 for (int j = 0; j < listSize * 2; j++) {
                     if (i < graphPortions) {
                         if (j % 2 == 0) {
-                            System.out.print(" "); //Every other column is blank
+                            System.out.print("  "); //Every other column is blank
                         } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                            System.out.print("█");
+                            System.out.print("[|]");
                         } else {
-                            System.out.print(" ");
+                            System.out.print("   ");
                         }
                     } else if (i == graphPortions) {
                         if (j % 2 == 0) {
-                            System.out.print(" ");
+                            System.out.print("   ");
                         } else {
-                            System.out.print((char)(j / 2 + 65));
+                            System.out.print((char)(j / 2 + 65) + " ");
                         }
                     } else {
-                        System.out.print(" ");
+                        System.out.print("   ");
                     }
                 }
                 if (i < listSize) {
@@ -504,8 +505,11 @@ public class Ui {
                     System.out.print(System.lineSeparator());
                 }
             }
+            System.out.println(LINE_DIVIDER);
         } else {
+            System.out.println(LINE_DIVIDER);
             System.out.println("There are no dishes to graph");
+            System.out.println(LINE_DIVIDER);
         }
     }
 
@@ -513,6 +517,7 @@ public class Ui {
         assert ingredientList != null : "ingredientList cannot be null";
         int graphPortions = 10;
         if (!ingredientList.isEmpty()) {
+            System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the ingredients
             ArrayList<Integer> lengths = new ArrayList();
             double max = IngredientList.getGreatestWaste();
@@ -527,20 +532,20 @@ public class Ui {
                 for (int j = 0; j < listSize * 2; j++) {
                     if (i < graphPortions) {
                         if (j % 2 == 0) {
-                            System.out.print(" "); //Every other column is blank
+                            System.out.print("  "); //Every other column is blank
                         } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                            System.out.print("█");
+                            System.out.print("[|]");
                         } else {
-                            System.out.print(" ");
+                            System.out.print("   ");
                         }
                     } else if (i == graphPortions) {
                         if (j % 2 == 0) {
-                            System.out.print(" ");
+                            System.out.print("   ");
                         } else {
-                            System.out.print((char)(j / 2 + 65));
+                            System.out.print((char)(j / 2 + 65) + " ");
                         }
                     } else {
-                        System.out.print(" ");
+                        System.out.print("   ");
                     }
                 }
                 if (i < listSize) {
@@ -550,8 +555,11 @@ public class Ui {
                     System.out.print(System.lineSeparator());
                 }
             }
+            System.out.println(LINE_DIVIDER);
         } else {
+            System.out.println(LINE_DIVIDER);
             System.out.println("There are no ingredients to graph");
+            System.out.println(LINE_DIVIDER);
         }
     }
 

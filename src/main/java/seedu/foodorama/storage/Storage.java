@@ -129,7 +129,7 @@ public class Storage {
                     dishToAdd.setLimit(Double.parseDouble(params[3]));
                     if (params.length > 4) {
                         //System.out.println("Contains constituents");
-                        for (int i = 3; i < params.length; i++) {
+                        for (int i = 4; i < params.length; i++) {
                             int ingredientIndex = IngredientList.find(params[i]);
                             Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
                             dishToAdd.getParts().add(dishComponent);
