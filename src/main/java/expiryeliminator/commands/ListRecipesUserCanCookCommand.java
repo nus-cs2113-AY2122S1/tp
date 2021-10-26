@@ -6,6 +6,7 @@ import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.Recipe;
 
+import java.time.LocalDate;
 import java.util.TreeMap;
 
 /**
@@ -20,7 +21,9 @@ public class ListRecipesUserCanCookCommand extends Command {
     public static final String MESSAGE_RECIPES_WITH_ENOUGH_INGREDIENTS_TO_COOK = "Here are the recipes you can cook "
             + "with the ingredients you have:\n"
             + "\n%1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists recipes that you can cook with the ingredients "
+    public static final String MESSAGE_INGREDIENTS_EXPIRED = "Note that some of these ingredients have expired:\n"
+            + "\n%1$s\n" + "Please remove them if you don't want to use them for your recipe.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists recipes that you can cook with the ingredients\n"
             + "you currently have.\n"
             + "Example: " + COMMAND_WORD;
 
@@ -36,12 +39,28 @@ public class ListRecipesUserCanCookCommand extends Command {
         return true;
     }
 
+    private String checkForExpiredIngredients(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
+                                                IngredientRepository ingredients) {
+        String expiredIngredients = "";
+        for (IngredientQuantity i : ingredientsFromRecipe.values()) {
+            IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
+            assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
+            LocalDate expiryDate = ingredient.getEarliestExpiryDate();
+            if (expiryDate.isBefore(LocalDate.now()) || expiryDate.equals(LocalDate.now())) {
+                expiredIngredients += ingredient.getIngredient() + "\n";
+            }
+        }
+        return expiredIngredients;
+    }
+
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         String recipeList = "";
+        String expiredIngredients = "";
         for (Recipe r : recipes.getRecipes().values()) {
             if (allIngredientsAreSufficient(r.getIngredientQuantities(),ingredients)) {
                 recipeList += r + "\n";
+                expiredIngredients += checkForExpiredIngredients(r.getIngredientQuantities(),ingredients);
             }
         }
 
@@ -49,6 +68,9 @@ public class ListRecipesUserCanCookCommand extends Command {
             return ListRecipeCommand.MESSAGE_EMPTY_RECIPE_LIST;
         } else if (recipeList.isEmpty()) {
             return MESSAGE_NOT_ENOUGH_INGREDIENTS;
+        } else if (!expiredIngredients.isBlank()) {
+            return String.format(MESSAGE_RECIPES_WITH_ENOUGH_INGREDIENTS_TO_COOK,recipeList)
+                    + String.format(MESSAGE_INGREDIENTS_EXPIRED,expiredIngredients);
         }
         return String.format(MESSAGE_RECIPES_WITH_ENOUGH_INGREDIENTS_TO_COOK,recipeList);
     }
