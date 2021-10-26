@@ -9,13 +9,14 @@ StonksXD is your go-to smart money management application that is able to:
 - sets/adjusts your spending limits
 - provide you with helpful financial tips and insights
 
-It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. It also allows you to 
-view your financial records through both text and graphs, in different currencies, so you can use this application anywhere around the world!
+It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
+It also allows you to view your financial records in different currencies through both text and graphs,
+so you can use this application anywhere around the world!
 
-Using this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
+With this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
 without having to learn how to write a single line of code.
 
-Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use
+Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use.
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -38,8 +39,9 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Set budget: `set_budget`](#set-budget-set_budget)
     - [Check budget: `check_budget`](#check-budget-check_budget)
     - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
-    - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
+    - [View yearly report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
+    - [Saving of data](#saving-of-data)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -52,18 +54,18 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
-8. Type `balance` to view your net saving.
+8. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
 9. Refer to the [Features](#features) below for details of each command.
 
 ## Features 
 
 ### Notes
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be used as `a/12.30`.
+- Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
+  e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
 
 ### View all possible commands: `help`
-Shows a list of all possible commands.
+This shows a list of all possible commands. Use this command when you are lost while using the app!
 
 Format: `help`
 
@@ -100,13 +102,13 @@ To Terminate The Program: end
 <br>
 
 ### Create expense entry: `add_ex`
-Adds an expense entry.
+This command adds an expense entry to your list. Use this to keep track of your daily expenses!
 
 Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
-- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, `overall` or `misc`.
+- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 
 Examples:
 
@@ -125,7 +127,8 @@ Your most recent spending:
 
 ### Delete expense entry: `del_ex`
 
-Delete unwanted expense entries by providing the index of said entry.
+This deletes an unwanted expense entry by providing the index of said entry. 
+Index can be found via the `list_ex` command below.
 
 Format: `del_ex i/INDEX`
 
@@ -170,7 +173,8 @@ After deletion, we see that the list has removed the previous first entry!
 
 ### List all expense entries: `list_ex`
 
-Displays the previously added expense entries in the form of a list.
+This displays the previously added expense entries in the form of a list.
+Use this to find the index of an entry you want to delete.
 
 Format: `list_ex`
 
@@ -192,7 +196,8 @@ Below is a list of all of your recent spending!
 
 ### View total expense: `total_ex`
 
-Displays the total amount of all expenses in your list.
+This displays the total amount of all expenses in your list. 
+This is great for giving you a quick snapshot of how much you've spent!
 
 Format: `total_ex`
 
@@ -219,7 +224,7 @@ Your total expense is: $600.50
 
 ### Create income entry: `add_in`
 
-Adds an income entry.
+This adds an income entry to your list. Use this to keep track of your income!
 
 Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
@@ -245,7 +250,8 @@ Your most recent earning:
 
 ### Delete income entry: `del_in`
 
-Delete unwanted income entries by providing the index of said entry.
+This deletes an unwanted income entries by providing the index of said entry. 
+The index can be found using the `list_in` command found below.
 
 Format: `del_in i/INDEX`
 
@@ -291,7 +297,8 @@ After deletion, we see that the list has removed the previous first entry!
 
 ### List all income entries: `list_in`
 
-Displays the previously added income entries in the form of a list.
+This displays the previously added income entries in the form of a list. 
+Use this to find the index of the entries you want to delete.
 
 Format: `list_in`
 
@@ -313,7 +320,9 @@ Below is a list of all of your recent earnings!
 
 ### View total income: `total_in`
 
-Displays the total amount of all income entries in your list.
+This displays the total amount of all income entries in your list.
+This is great for giving you a quick snapshot of how much you've earned!
+
 
 Format: `total_in`
 <details>
@@ -339,7 +348,7 @@ Your total income is: $2800.00
 
 ### Find entry using date: `find DD/MM/YYYY`
 
-Finds and displays the income or expense entries recorded on the given date.
+This finds and displays the income or expense entries recorded on the given date. 
 
 Format: `find DD/MM/YYYY`
 
@@ -364,7 +373,7 @@ Your most recent earning:
 
 ### Find entry using keyword: `find KEYWORD`
 
-Finds and displays the income or expense entries that contain the given keyword.
+This finds and displays the income or expense entries that contain the given keyword.
 
 Format: `find KEYWORD`
 
@@ -405,7 +414,8 @@ Below is a list of all your findings!
 
 ### View total balance: `balance`
 
-Shows the net balance you have leftover from your expenses and incomes.
+This shows the net balance you have after subtracting your expenses from your incomes.
+Use this to get a snapshot of whether you're in the red!
 
 Format: `balance`
 <details>
@@ -420,7 +430,8 @@ Your current balance is: $-87654891720.20
 
 ### Show total expense between 2 dates: `btw_ex`
 
-Shows the total expense you had accumulated during a given time period.
+This shows the total expense you had accumulated during a given time period.
+This is great for checking weekly or monthly expenses!
 
 Format: `btw_ex s/START_DATE e/END_DATE`
 
@@ -442,7 +453,8 @@ Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 
 ### Show total income between 2 dates: `btw_in`
 
-Shows the total income you had accumulated during a given time period.
+This shows the total income you had accumulated during a given time period.
+This is great for checking weekly or monthly income!
 
 Format: `btw_in s/START_DATE e/END_DATE`
 
@@ -467,6 +479,8 @@ Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 ### Clear all entries: `clear_all_entries`
 
 Clears all the income and expense entries StonksXD is currently keeping track of.
+Use this when you want to start StonksXD afresh. Be careful when you use it though! 
+This cannot be undone!
 
 Format: `clear_all_entries`
 
@@ -486,20 +500,87 @@ All your entries have been cleared!
 
 ### Set budget: `set_budget`
 
-- TODO
+This sets a budget for one of the many preset expense categories. 
+Reminders will be given when your spending approaches the budget limit!
+
+Format: `set_budget c/CATEGORY a/AMOUNT`
+
+- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
+- `AMOUNT` has to be a valid non-negative number.
+- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
+
+Examples:
+
+- `set_budget c/bills a/100` Sets the `bills` budget to $100.
+
+<details>
+<summary> Expected output in run window </summary>
+<br>
+When command <code>set_budget c/bills a/100</code> is given, you get the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+BILLS budget has been set to $100.00
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
 
 ### Check budget: `check_budget`
 
-- TODO
+This checks the budget limit of one of the many preset expense categories.
+Use this when you forget your budget limits!
+
+Format: `check_budget c/CATEGORY`
+
+- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
+- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
+
+Examples:
+
+- `check_budget c/bills` checks the budget limit of the `bills` budget.
+
+<details>
+<summary> Expected output in run window </summary>
+<br>
+When command <code>check_budget c/bills</code> is given, you get the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current BILLS limit is $100.00
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
 
 ### Set threshold: `set_threshold`
 
-- TODO
+This sets the threshold beyond which reminders will be given when approaching the budget limit.
 
-### View Yearly Report: `show_graph`
+Format: `set_threshold t/THRESHOLD`
 
-Shows the monthly breakdown of the finances in a Yearly Report which also
+- `THRESHOLD` has to be a value between 0 and 1.
+- Setting `THRESHOLD` to 0.1 produces reminders when you have used up more than 90% of your budget!
+
+Examples:
+
+- `set_budget t/0.2` sets the threshold value of all budget categories to 80%.
+
+<details>
+<summary> Expected output in run window </summary>
+<br>
+When command <code>set_threshold t/0.2</code> is given, you get the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Threshold for budget reminders set to 0.2
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
+
+### View yearly report: `show_graph`
+
+This shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
+We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
 Format: `show_graph`
 
@@ -536,7 +617,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### Terminate program: `end`
 
-Exits the program when the user is done.
+This exits the program when you are done using it.
 
 Format: `end`
 <details>
@@ -551,7 +632,25 @@ Format: `end`
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
+<br>
 
+
+### Saving of Data
+
+StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. 
+
+- `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
+- `StonksXD_Budget.csv` will store all the budget values.
+
+The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
+when not using the program.
+
+#### Note
+
+StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
+When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
+is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
+corrupted and not be loaded into StonksXD. 
 
 ## FAQ
 
