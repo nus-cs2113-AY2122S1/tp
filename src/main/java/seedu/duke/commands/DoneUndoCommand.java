@@ -16,59 +16,68 @@ public class DoneUndoCommand extends Command {
     protected static final String UNDO = "undo";
 
     protected static String action;
-    protected static String[] indexes;
-    protected static ArrayList<Item> sortedList = new ArrayList<>();
+    protected static String itemType;
+    protected static int[] indexes;
 
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
 
     public DoneUndoCommand(String[] command) {
         isCorrectFormat = true;
-        sortedList.clear();
         try {
             if (command.length == 1) {
-                throw new DukeException("Please specify the indexes of the items you want to mark done or undo. ");
+                throw new DukeException("Please specify the indexes of the items you want to mark done or undo "
+                        + "using the event '-e' or task '-t' flags. ");
             }
             action = command[0];
-
-            if (command[1].equalsIgnoreCase(TASK_FLAG)) {
-                if (command.length == 2) {
-                    throw new DukeException("Please specify the indexes of the tasks you want "
-                            + "to mark done or undo. ");
-                }
-                indexes = command[2].split(",");
-                sortedList = new ArrayList<>(Duke.taskList);
-                EventCatalog.bubbleSortItems(sortedList);
-            } else if (command[1].equalsIgnoreCase(EVENT_FLAG)) {
-                if (command.length == 2) {
-                    throw new DukeException("Please specify the indexes of the events you want to "
-                            + "mark done or undo. ");
-                }
-                indexes = command[2].split(",");
-                sortedList = new ArrayList<>(Duke.eventCatalog);
-                EventCatalog.bubbleSortItems(sortedList);
-            } else {
-                indexes = command[1].split(",");
-                sortedList = Parser.makeMainList();
-                EventCatalog.bubbleSortItems(sortedList);
+            itemType = command[1];
+            if (command.length == 2) {
+                throw new DukeException("Please specify the indexes of the tasks or events you want "
+                        + "to mark done or undo. ");
             }
+            extractInt(command.toString());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             isCorrectFormat = false;
         }
     }
 
+    private static void extractInt(String input) throws DukeException {
+        String parsedInput = input.replaceAll("[^\\d]", " ").trim();
+        if (parsedInput.isBlank()) {
+            throw new DukeException("Indexes entered need to be valid numbers. ");
+        }
+
+        String[] stringIndexes = parsedInput.split(" +");
+        indexes = new int[stringIndexes.length];
+
+        for (int i = 0; i < stringIndexes.length; i++) {
+            indexes[i] = Integer.parseInt(stringIndexes[i]);
+        }
+    }
+
     private String done() throws DukeException {
         try {
             StringBuilder listOfItems = new StringBuilder();
-            for (String index : indexes) {
-                sortedList.get(Integer.parseInt(index) - 1).markAsDone();
-                listOfItems.append(sortedList.get(Integer.parseInt(index) - 1)).append("\n");
+            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
+                if (Parser.noEventSelected()) {
+                    throw new DukeException("Please select which event the task is under using the "
+                            + "'select' command. ");
+                }
+                for (int index : indexes) {
+                    Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
+                            .getFromTaskList(index - 1).markAsDone();
+                    listOfItems.append(Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
+                            .getFromTaskList(index - 1)).append("\n");
+                }
+            }
+            if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
+                for (int index : indexes) {
+                    Duke.eventCatalog.get(index - 1).markAsDone();
+                    listOfItems.append(Duke.eventCatalog.get(index - 1)).append("\n");
+                }
             }
             return listOfItems.toString();
-        } catch (NumberFormatException e) {
-            throw new DukeException("Indexes can only be integers separated by commas, e.g. "
-                    + "'1,4,5,9'. ");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("One or more of the items do not exist. ");
         }
@@ -77,14 +86,25 @@ public class DoneUndoCommand extends Command {
     private String undo() throws DukeException {
         try {
             StringBuilder listOfItems = new StringBuilder();
-            for (String index : indexes) {
-                sortedList.get(Integer.parseInt(index) - 1).undo();
-                listOfItems.append(sortedList.get(Integer.parseInt(index) - 1)).append("\n");
+            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
+                if (Parser.noEventSelected()) {
+                    throw new DukeException("Please select which event the task is under using the "
+                            + "'select' command. ");
+                }
+                for (int index : indexes) {
+                    Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
+                            .getFromTaskList(index - 1).undo();
+                    listOfItems.append(Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
+                            .getFromTaskList(index - 1)).append("\n");
+                }
+            }
+            if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
+                for (int index : indexes) {
+                    Duke.eventCatalog.get(index - 1).undo();
+                    listOfItems.append(Duke.eventCatalog.get(index - 1)).append("\n");
+                }
             }
             return listOfItems.toString();
-        } catch (NumberFormatException e) {
-            throw new DukeException("Indexes can only be integers separated by commas, e.g. "
-                    + "'1,4,5,9'. ");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("One or more of the items do not exist. ");
         }
