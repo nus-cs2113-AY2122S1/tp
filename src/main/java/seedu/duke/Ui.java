@@ -14,23 +14,39 @@ public class Ui {
             + "help\n"
             + "\t - Show a summary of the commands and options that I can handle\n\n"
             + "list\n"
-            + "\t - Lists all the events and tasks currently in the schedule\n"
-            + "\t - An additional -e or -t flag can be appended to list either events or tasks only\n"
-            + "\t - E.g. list -e OR list -t\n\n"
-            + "add -e n/TITLE d/DATE v/VENUE b/BUDGET\n"
+            + "\t - Lists all the events in your schedule in chronological order\n"
+            + "\t - To list Tasks: list [Event Index] -t\n"
+            + "\t - To list Members of a Task: list [Event Index] t/[Task Index]\n\n"
+            + "add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET\n"
             + "\t - Add an event to the schedule\n\n"
-            + "delete -e n/INDEX\n"
-            + "\t - Deletes an event given its index in the overall schedule\n\n"
-            + "select -e n/INDEX\n"
-            + "\t - Selects an event given its index in the overall schedule and displays its details\n\n"
+            + "delete -e INDEX\n"
+            + "\t - Delete an event given its index\n\n"
+            + "select -e INDEX\n"
+            + "\t - Select an event and display its details\n\n"
+            + "find EVENT_KEYWORD(S)\n"
+            + "\t - Find an event based on the given keyword/query\n\n"
+            + "done -e INDEX\n"
+            + "\t - Mark an event as done given its index\n\n"
+            + "undo -e INDEX\n"
+            + "\t - Un-mark an event as done given its index\n\n"
             + "add -t n/TITLE d/DATE\n"
             + "\t - Add a task to the schedule\n\n"
-            + "delete -t n/INDEX\n"
+            + "delete -t INDEX\n"
             + "\t - Deletes a task given its index in the overall schedule\n\n"
-            + "select -t n/INDEX\n"
-            + "\t - Selects a task given its index in the overall schedule and displays its details\n\n"
-            + "update -e OR -t\n"
-            + "\t - Displays the respective list of events or tasks that you can choose and update";
+            + "select -t INDEX\n"
+            + "\t - Displays more details about the selected task. Requires an event to first be selected.\n\n"
+            + "done -t INDEX\n"
+            + "\t - Mark a task as done given its index. Requires an event to first be selected.\n\n"
+            + "undo -t INDEX\n"
+            + "\t - Un-mark a task as done given its index\n\n"
+            + "add -m MEMBER_NAME\n"
+            + "\t - Add a member to your current roster of members\n\n"
+            + "delete -m MEMBER_NAME\n"
+            + "\t - Delete a member from your roster given his/her name\n\n"
+            + "update EVENT_INDEX\n"
+            + "\t - Choose an event to update. You can update tasks/members under that event from there.\n\n"
+            + "bye\n"
+            + "\t - Exit the program. Bye!";
 
     public static String readInput() {
         Scanner in = new Scanner(System.in);
@@ -49,6 +65,10 @@ public class Ui {
     public static void printLineBreak() {
         System.out.println("________________________________________________________________________________________"
                 + "____________________");
+    }
+
+    public static String getInvalidCommandMessage() {
+        return "I'm sorry I did not catch that! Try entering <help> for a list of commands.";
     }
 
     public static void promptForDescription() {
