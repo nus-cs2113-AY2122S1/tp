@@ -38,7 +38,8 @@ public class BudgetManager {
 
     private boolean checkOverallBudget(Expense expense, ArrayList<Expense> expenses, Ui ui) {
         boolean isOverallExceeded = false;
-        if (overallBudget.getLimit() != 0) {
+        boolean isOverallBudgetActive = overallBudget.getLimit() != 0;
+        if (isOverallBudgetActive) {
             String month = LocalDate.now().getMonth().toString();
             double currAmount = overallBudget.calAmount(expenses);
             assert currAmount >= 0;
@@ -46,9 +47,11 @@ public class BudgetManager {
             assert limit >= 0;
             double diff = limit - currAmount;
             double thresholdLimit = threshold * limit;
-            if ((diff > 0) & (diff < thresholdLimit)) {
+            boolean isNearingLimit = (diff > 0) & (diff < thresholdLimit);
+            boolean isExceededLimit = diff <= 0;
+            if (isNearingLimit) {
                 ui.printOverallBudgetWarning(month, currAmount, limit);
-            } else if (diff <= 0) {
+            } else if (isExceededLimit) {
                 ui.printOverallBudgetExceeded(month, currAmount, limit);
                 isOverallExceeded = true;
             }
@@ -59,7 +62,8 @@ public class BudgetManager {
     private void checkBudget(Expense expense, ArrayList<Expense> expenses, Budget budget, boolean isOverallExceeded,
                              Ui ui) {
         assert budget != overallBudget;
-        if (budget.getLimit() != 0) {
+        boolean isBudgetActive = budget.getLimit() != 0;
+        if (isBudgetActive) {
             String month = LocalDate.now().getMonth().toString();
             double currOverallAmount = overallBudget.calAmount(expenses);
             double overallLimit = overallBudget.getLimit();
@@ -69,19 +73,21 @@ public class BudgetManager {
             assert limit >= 0;
             double diff = limit - currAmount;
             double thresholdLimit = threshold * limit;
+            boolean isNearingLimit = (diff > 0) & (diff < thresholdLimit);
+            boolean isExceededLimit = diff <= 0;
             if (isOverallExceeded) {
-                if ((diff > 0) & (diff < thresholdLimit)) {
+                if (isNearingLimit) {
                     ui.printOverallExceededBudgetWarning(month, budget.getName(), currAmount, limit,
                             currOverallAmount, overallLimit);
-                } else if (diff <= 0) {
+                } else if (isExceededLimit) {
                     ui.printOverallExceededBudgetExceeded(month, budget.getName(), currAmount, limit,
                             currOverallAmount, overallLimit);
                 }
             } else {
-                if ((diff > 0) & (diff < thresholdLimit)) {
+                if (isNearingLimit) {
                     ui.printOverallNotExceededBudgetWarning(month, budget.getName(), currAmount, limit,
                             currOverallAmount, overallLimit);
-                } else if (diff <= 0) {
+                } else if (isExceededLimit) {
                     ui.printOverallNotExceededBudgetExceeded(month, budget.getName(), currAmount, limit,
                             currOverallAmount, overallLimit);
                 }
