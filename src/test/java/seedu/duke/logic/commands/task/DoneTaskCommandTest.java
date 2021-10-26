@@ -25,8 +25,8 @@ public class DoneTaskCommandTest {
         LessonList lessonList = new LessonList();
         ModuleList moduleList = new ModuleList();
 
-        taskList.addTask(new Task("task 1", "mon", "None", ""));
-        taskList.addTask(new Task("task 2", "fri", "Low", "someInfo"));
+        taskList.addTask(new Task("task 1", "Monday", "L", "-"));
+        taskList.addTask(new Task("task 2", "Friday", "L", "someInfo"));
 
         try {
             new DoneTaskCommand(0).execute(ui, storage, taskList, lessonList, moduleList);
