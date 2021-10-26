@@ -1,6 +1,7 @@
 # Gordon's User Guide
 
 ## Contents
+* [How do you use this guide?](#how-do-you-use-this-guide)
 * [Who is Gordon?](#who-is-gordon)
 * [How do you start Gordon?](#how-do-you-start-gordon)
 * [What can Gordon do?](#what-can-gordon-do)
@@ -13,6 +14,17 @@
   1. [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set)
   1. [Find a recipe by attribute](#8-find-a-recipe-by-attribute-find)
 * [Cheat sheet](#cheat-sheet)  
+
+## How do you use this guide?
+* Use the [Contents](#contents) section to navigate to anywhere in this user guide
+* Use the [Cheat sheet](#cheat-sheet) for a quick lookup of commands
+* Code is enclosed in shaded boxes like `this`
+* Absolute commands you need to type are enclosed in quotation marks, like 'this'
+* Variable commands you can type are capitalised, like THIS
+* Whatever Gordon is telling you will be enclosed in larger shaded boxes
+```
+like this
+```
 
 ## Who is Gordon?
 
