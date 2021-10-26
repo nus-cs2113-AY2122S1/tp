@@ -5,6 +5,8 @@ import seedu.duke.command.CommandResult;
 import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
+//@@author JMattChiam
+
 /**
  * To display a help message which shows the user the commands to use.
  */
@@ -20,15 +22,15 @@ public class HelpCommand extends Command {
             + "\"create\" : Creates a new workout\n"
             + "\"delete\" : Deletes a workout\n"
             + "\"list\" : Lists all your workouts\n"
-            + "\"enter\" : Enters a specific workout. Workout mode ON.\n"
-            + "\"back\" : Returns to main view. Workout mode OFF.\n"
+            + "\"enter\" : Enters a specific workout. Workout mode ON\n"
+            + "\"back\" : Returns to main view. Workout mode OFF\n"
             + "\"recommend\" : Recommends workouts of a given difficulty\n"
             + "\"display\" : Shows all the exercises in a specified workout\n"
             + "\"edit\" : Edits a specific exercise in a specified workout\n"
             + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
             + "\"clear\" : Clears all exercises in a specified workout or all workouts in the list\n"
             + "\"bye\" : Ends the program";
-    
+
     private String commandDescription = null;
 
     public HelpCommand() {
@@ -61,6 +63,4 @@ public class HelpCommand extends Command {
         }
         return new CommandResult(commandDescription);
     }
-
-
 }

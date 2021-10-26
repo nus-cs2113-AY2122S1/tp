@@ -12,16 +12,18 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author IshaaanVyas
+
 /**
  * To enter into a Workout.
  */
 public class EnterWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "enter";
+    public static final String MESSAGE_SUCCESS = "Now inside Workout: %1$s";
     private static final String NL = System.lineSeparator();
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enter into a Workout to edit its exercises"
             + NL + "Parameters: WORKOUT_INDEX"
             + NL + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Now inside Workout: %1$s";
     private static final Logger LOGGER = Logger.getLogger(EnterWorkoutCommand.class.getName());
     private final int workoutIndex;
 

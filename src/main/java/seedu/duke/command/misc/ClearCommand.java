@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author KishorKumar11
+
 /**
  * Clears all the exercises present in the mentioned workoutIndex and all workouts in the application.
  */

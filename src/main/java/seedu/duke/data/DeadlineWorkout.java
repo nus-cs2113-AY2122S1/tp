@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.data.WorkoutList.LOGGER;
 
+//@@author jonathanmui4
+
 /**
  * A deadline workout is a workout with a deadline set by the user.
  */
@@ -17,7 +19,8 @@ public class DeadlineWorkout extends Workout {
 
     /**
      * Default Constructor.
-     *  @param workoutName  is the name that the user gives to the workout routine
+     *
+     * @param workoutName  is the name that the user gives to the workout routine
      * @param deadlineDate Workout deadline in the form of yyyy-mm-dd
      */
     public DeadlineWorkout(String workoutName, LocalDate deadlineDate) {
@@ -33,6 +36,7 @@ public class DeadlineWorkout extends Workout {
 
     /**
      * Converts the object to a String.
+     *
      * @return name of workout routine
      */
     @Override

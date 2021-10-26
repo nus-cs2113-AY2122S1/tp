@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author qqkoh
+
 /**
  * To remove an exercise from a Workout.
  */

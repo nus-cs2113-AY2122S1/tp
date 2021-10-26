@@ -4,6 +4,8 @@ import seedu.duke.command.Command;
 import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.command.misc.SearchCommand;
 
+//@@author qqkoh
+
 public class SearchParser extends Parser {
 
     public SearchParser(String userInputString) {

@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author qqkoh
+
 /**
  * To delete a Workout.
  */
@@ -32,7 +34,7 @@ public class DeleteWorkoutCommand extends Command {
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
      *
-     * @param workoutIndex display index of workout that we want to delete.
+     * @param workoutIndex display index of workout that we want to delete
      */
     public DeleteWorkoutCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;

@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author qqkoh
+
 /**
  * Sets isDone attribute in an exercise Object to true.
  */

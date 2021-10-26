@@ -8,6 +8,8 @@ import seedu.duke.exception.GetJackDException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+//@@author qqkoh
+
 /**
  * Parses and processes input for the create command.
  */
@@ -39,9 +41,6 @@ public class CreateWorkoutParser extends Parser {
             String deadline = arguments[1];
 
             workoutArgs = new String[]{workoutName, deadline};
-            for (String s : workoutArgs) {
-                assert (!s.contains(PARAMETER_SEPARATOR));
-            }
         }
         return workoutArgs;
     }

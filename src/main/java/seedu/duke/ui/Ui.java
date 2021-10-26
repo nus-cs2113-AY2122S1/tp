@@ -9,6 +9,8 @@ import seedu.duke.data.Exercise;
 import java.util.ArrayList;
 import java.util.Map;
 
+//@@author qqkoh
+
 public class Ui {
     private static final String INDENT = "\t\t\t";
     private static final String DIVIDER = "________________________________________________________";
@@ -48,7 +50,8 @@ public class Ui {
 
     /**
      * Prints a message with the required indent.
-     * @param message String to be printed to the user.
+     *
+     * @param message String to be printed to the user
      */
     private void printText(String message) {
         System.out.println(prefix + message.replace("\n", newLine));
@@ -78,7 +81,8 @@ public class Ui {
 
     /**
      * Prints an indexed list with the required indent.
-     * @param itemList list to be printed.
+     *
+     * @param itemList list to be printed
      */
     private void printList(ArrayList<?> itemList) {
         for (int i = 0; i < itemList.size(); i++) {
@@ -90,7 +94,8 @@ public class Ui {
 
     /**
      * Prints a map as multiple indexed lists with their accompanying message for each list.
-     * @param map map containing multiple list, each with its own message.
+     *
+     * @param map map containing multiple list, each with its own message
      */
     private void printMap(Map<String, ArrayList<?>> map) {
         for (Map.Entry<String, ArrayList<?>> m : map.entrySet()) {
@@ -101,8 +106,9 @@ public class Ui {
 
     /**
      * Gets the exercise table.
-     * @param map contains multiple exercise lists.
-     * @return exercise table.
+     *
+     * @param map contains multiple exercise lists
+     * @return exercise table
      */
     public AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> map) {
         AsciiTable at = new AsciiTable();
@@ -128,7 +134,8 @@ public class Ui {
 
     /**
      * Prints the exercise table.
-     * @param map contains multiple exercise lists.
+     *
+     * @param map contains multiple exercise lists
      */
     public void printExerciseTable(Map<String, ArrayList<?>> map) {
         assert map != null;
@@ -144,7 +151,8 @@ public class Ui {
 
     /**
      * Shows result to user.
-     * @param result result to be shown to user.
+     *
+     * @param result result to be shown to user
      */
     public void showResultToUser(CommandResult result) {
         printLineSeparator();

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 
+//@@author jonathanmui4 - reused
+
 /**
  * Handles functions required to convert Java Objects to JSON objects and vice versa using the Jackson Library.
  */

@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
+//@@author KishorKumar11
+
 /**
  * To edit an existing exercise in a workout.
  */

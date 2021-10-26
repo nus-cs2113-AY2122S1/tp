@@ -9,13 +9,15 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+//@@author IshaaanVyas
+
 /**
  * Utility class to set up logger with the required configurations for this project.
  */
 public class LoggerUtil {
+    public static final Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
     private static final String LOGGER_PATH = "log/programLog.log";
     private static final File FILE = new File(LOGGER_PATH);
-    public static final Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
     public static FileHandler fh;
     private static ConsoleHandler ch;
 
@@ -42,7 +44,7 @@ public class LoggerUtil {
      * Sets up logger object by setting its level to ALL and attaching the common FileHandler.
      * This method is to be called for every new logger to be set up in each class.
      *
-     * @param logger Logger object to be set up.
+     * @param logger Logger object to be set up
      */
     public static void setupLogger(Logger logger) {
         if (fh != null) {
