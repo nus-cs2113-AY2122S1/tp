@@ -466,7 +466,7 @@ public class Ui {
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
         int graphPortions = 10;
-        if(!dishList.isEmpty()) {
+        if (!dishList.isEmpty()) {
             //Get the n values for the dishes
             ArrayList<Integer> lengths = new ArrayList();
             double max = DishList.getGreatestWaste();
@@ -479,10 +479,10 @@ public class Ui {
             int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
-                    if(i < graphPortions) {
+                    if (i < graphPortions) {
                         if (j % 2 == 0) {
                             System.out.print(" "); //Every other column is blank
-                        } else if (i > graphPortions - 1 - lengths.get(j/2)) {
+                        } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
                             System.out.print("█");
                         } else {
                             System.out.print(" ");
@@ -491,15 +491,15 @@ public class Ui {
                         if (j % 2 == 0) {
                             System.out.print(" ");
                         } else {
-                            System.out.print((char)(j/2 + 65));
+                            System.out.print((char)(j / 2 + 65));
                         }
                     } else {
                         System.out.print(" ");
                     }
                 }
-                if(i < listSize) {
+                if (i < listSize) {
                     System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
-                    + ":" + dishList.get(i).getWastage() + "kg");
+                        + ":" + dishList.get(i).getWastage() + "kg");
                 } else {
                     System.out.print(System.lineSeparator());
                 }
@@ -512,7 +512,7 @@ public class Ui {
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
         assert ingredientList != null : "ingredientList cannot be null";
         int graphPortions = 10;
-        if(!ingredientList.isEmpty()) {
+        if (!ingredientList.isEmpty()) {
             //Get the n values for the ingredients
             ArrayList<Integer> lengths = new ArrayList();
             double max = IngredientList.getGreatestWaste();
@@ -525,10 +525,10 @@ public class Ui {
             int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
-                    if(i < graphPortions) {
+                    if (i < graphPortions) {
                         if (j % 2 == 0) {
                             System.out.print(" "); //Every other column is blank
-                        } else if (i > graphPortions - 1 - lengths.get(j/2)) {
+                        } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
                             System.out.print("█");
                         } else {
                             System.out.print(" ");
@@ -537,13 +537,13 @@ public class Ui {
                         if (j % 2 == 0) {
                             System.out.print(" ");
                         } else {
-                            System.out.print((char)(j/2 + 65));
+                            System.out.print((char)(j / 2 + 65));
                         }
                     } else {
                         System.out.print(" ");
                     }
                 }
-                if(i < listSize) {
+                if (i < listSize) {
                     System.out.println("     " + (char) (i + 65) + ". " + ingredientList.get(i).getIngredientName()
                             + ":" + ingredientList.get(i).getWastage() + "kg");
                 } else {
