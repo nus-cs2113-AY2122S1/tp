@@ -15,6 +15,7 @@ import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.StoreResultsCommand;
 import seedu.command.TimetableCommand;
+import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
@@ -80,6 +81,8 @@ public class CommandParser {
             command = new CalculateCapCommand();
         } else if (lowerCaseText.startsWith("remove")) {
             command = parseRemoveCommand(text);
+        } else if (lowerCaseText.startsWith("transcript")) {
+            command = new TranscriptCommand();
         } else if (lowerCaseText.startsWith("semester")) {
             command = new ChangeSemesterCommand(timetable);
         } else {

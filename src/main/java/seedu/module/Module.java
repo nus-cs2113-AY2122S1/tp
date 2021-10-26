@@ -22,7 +22,7 @@ public class Module extends BaseModule {
     private String acadYear;
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
-    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
+    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"};
     private static final String[] SU_GRADES = {"S", "U", "CS", "CU"};
 
 
