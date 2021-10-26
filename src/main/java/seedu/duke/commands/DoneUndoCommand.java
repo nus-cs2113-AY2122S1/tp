@@ -31,6 +31,10 @@ public class DoneUndoCommand extends Command {
             }
             action = command[0];
             itemType = command[1];
+            if (!(itemType.equalsIgnoreCase(TASK_FLAG) || itemType.equalsIgnoreCase(EVENT_FLAG))) {
+                throw new DukeException("Please specify the type of items you want to mark done or undo "
+                        + "using the event '-e' or task '-t' flags. ");
+            }
             if (command.length == 2) {
                 throw new DukeException("Please specify the indexes of the tasks or events you want "
                         + "to mark done or undo. ");
