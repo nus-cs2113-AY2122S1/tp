@@ -26,7 +26,7 @@ public class ModuleStorage {
             moduleList.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), ++index));
             line = br.readLine();
         }
-        logger.log(Level.INFO, "Completed loading of modules");
+//        logger.log(Level.INFO, "Completed loading of modules");
         return moduleList;
     }
 
