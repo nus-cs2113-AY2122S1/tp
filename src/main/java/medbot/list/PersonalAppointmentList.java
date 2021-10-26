@@ -1,6 +1,5 @@
 package medbot.list;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class PersonalAppointmentList {
      * @throws MedBotException if there is another appointment at that time
      */
     public void addAppointment(Appointment appointment) throws MedBotException {
-        int appointmentId = appointment.getAppointmentId();
+        int appointmentId = appointment.getListItemId();
         if (appointmentId == 0) {
             throw new MedBotException(ERROR_APPOINTMENT_ID_NOT_SET);
         }
@@ -56,7 +55,7 @@ public class PersonalAppointmentList {
     public int getAppointmentId(int dateTimeCode) {
         for (Appointment appointment : appointments) {
             if (appointment != null && appointment.getDateTimeCode() == dateTimeCode) {
-                return appointment.getAppointmentId();
+                return appointment.getListItemId();
             }
         }
         return -1;
@@ -72,7 +71,7 @@ public class PersonalAppointmentList {
 
         for (Appointment appointment : appointments) {
             if (appointment != null) {
-                appointmentIds.add(appointment.getAppointmentId());
+                appointmentIds.add(appointment.getListItemId());
             }
         }
         return appointmentIds;

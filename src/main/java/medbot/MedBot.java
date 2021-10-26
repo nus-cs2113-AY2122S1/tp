@@ -18,17 +18,17 @@ public class MedBot {
         Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
         StorageManager storageManager = null;
-        boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
         try {
             storageManager = new StorageManager(scheduler, ui);
-            ui.printWelcomeMessageTwo();
-
         } catch (FileNotFoundException | MedBotException e) {
             ui.printOutput(e.getMessage());
         }
 
+        ui.printWelcomeMessageTwo();
+
+        boolean isInteracting = true;
         while (isInteracting) {
             String userInput = ui.readInput();
             try {

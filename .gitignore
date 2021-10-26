@@ -29,3 +29,10 @@ text-ui-test/*.in
 MedbotData/
 
 gradle/wrapper/gradle-wrapper.properties
+
+
+MedBotData/appointment.bak
+MedBotData/patient.bak
+MedBotData/staff.bak
+text-ui-test/duplicate-sche.txt
+

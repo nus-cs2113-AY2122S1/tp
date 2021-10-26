@@ -68,8 +68,8 @@ public class StorageManager {
         MedicalStaffList medicalStaffList = scheduler.getMedicalStaffList();
         SchedulerAppointmentList schedulerAppointmentList = scheduler.getSchedulerAppointmentList();
 
-        return patientStorage.loadStorage(PATIENT, patientList)
-                + staffStorage.loadStorage(STAFF, medicalStaffList)
-                + appointmentStorage.loadStorage(APPOINTMENT, schedulerAppointmentList);
+        return patientStorage.loadStorage(PATIENT, scheduler)
+                + staffStorage.loadStorage(STAFF, scheduler)
+                + appointmentStorage.loadStorage(APPOINTMENT, scheduler);
     }
 }

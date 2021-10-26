@@ -1,21 +1,23 @@
 package medbot.list;
 
-import java.util.LinkedList;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
 import medbot.utilities.FilterType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import static medbot.ui.Ui.END_LINE;
 
 
 public abstract class PersonList extends MedBotList {
 
-    private final HashMap<Integer, Person> persons = new HashMap<>();
+    //Sorted to ensure that persons will always be printed in ascending order of ID when storage is manipulated
+    private final SortedMap<Integer, Person> persons = new TreeMap<>();
     private int lastId = 0;
 
     public int size() {
@@ -30,8 +32,13 @@ public abstract class PersonList extends MedBotList {
      * @return personId that was allocated to the person
      */
     public int addPerson(Person person) {
-        int personId = generatePersonId();
-        person.setPersonId(personId);
+        int personId = person.getListItemId();
+
+        //if person not created from storage data
+        if (personId <= 0) {
+            personId = generatePersonId();
+            person.setListItemId(personId);
+        }
         persons.put(personId, person);
         return personId;
     }
@@ -296,14 +303,6 @@ public abstract class PersonList extends MedBotList {
         }
         return output;
     }
-
-    @Override
-    public void addListItemFromStorage(ListItem personItem) {
-        Person person = (Person) personItem;
-        int personId = person.getId();
-        persons.put(personId, person);
-    }
-
 
     /**
      * Set lastId to a new number.

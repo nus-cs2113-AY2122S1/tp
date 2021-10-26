@@ -8,9 +8,6 @@ public abstract class MedBotList {
     }
 
 
-    public void addListItemFromStorage(ListItem listItem) {
-    }
-
     public void setLastId(int lastId) {
     }
 

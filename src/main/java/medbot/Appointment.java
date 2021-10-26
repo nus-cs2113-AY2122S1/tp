@@ -7,27 +7,19 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
+
+
+
 public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
 
-    private static final int LENGTH_ID_COLUMN = 4;
-    private static final String SPACE = " ";
-    private static final String VERTICAL_LINE_SPACED = " | ";
-
-    private int appointmentId = 0;
     private int patientId = 0;
     private int medicalStaffId = 0;
     private int dateTimeCode = 0;
 
-    public int getAppointmentId() {
-        return appointmentId;
-    }
-
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
 
     public int getPatientId() {
         return patientId;
@@ -109,7 +101,7 @@ public class Appointment extends ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString() + " Patient ID: "
+        return "Appointment Id: " + listItemId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 
@@ -119,7 +111,7 @@ public class Appointment extends ListItem {
      * @return storageString of a person
      */
     public String getStorageString() {
-        return appointmentId + VERTICAL_LINE_SPACED
+        return listItemId + VERTICAL_LINE_SPACED
                 + getDateTimeStorageString(dateTimeCode) + VERTICAL_LINE_SPACED
                 + patientId + VERTICAL_LINE_SPACED
                 + medicalStaffId;
@@ -131,14 +123,4 @@ public class Appointment extends ListItem {
         return localDateTime.format(DATE_TIME_FORMATTER_STORAGE);
     }
 
-    //TODO native methods
-    @Override
-    public void setId(int appointmentId) {
-        setAppointmentId(appointmentId);
-    }
-
-    @Override
-    public int getId() {
-        return getAppointmentId();
-    }
 }
