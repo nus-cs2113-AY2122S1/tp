@@ -3,25 +3,25 @@ package happybit.storage;
 import happybit.goal.Goal;
 import happybit.goal.GoalType;
 import happybit.habit.Habit;
+import happybit.progress.Progress;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class ImportParser {
     private static final String SLEEP = "[SL]";
     private static final String FOOD = "[FD]";
     private static final String EXERCISE = "[EX]";
     private static final String STUDY = "[SD]";
-    private static final String IS_DONE_VALUE = "1";
     private static final int GOAL_TYPE_INDEX = 2;
-    private static final int DONE_INDEX = 2;
     private static final int GOAL_NAME_INDEX = 3;
-    private static final int HABIT_NAME_INDEX = 3;
-    private static final int HABIT_DATE_INDEX = 4;
-    private static final int HABIT_INTERVAL_INDEX = 5;
     private static final int GOAL_START_INDEX = 4;
     private static final int GOAL_END_INDEX = 5;
+    private static final int HABIT_NAME_INDEX = 2;
+    private static final int HABIT_DATE_INDEX = 3;
+    private static final int HABIT_INTERVAL_INDEX = 4;
 
     protected static Goal goalParser(String[] lineData) throws ParseException {
         GoalType goalType;
@@ -60,11 +60,11 @@ public class ImportParser {
         Date habitLastDate = format.parse(lineData[HABIT_DATE_INDEX]);
         String habitName = lineData[HABIT_NAME_INDEX];
         int habitInterval = Integer.parseInt(lineData[HABIT_INTERVAL_INDEX]);
-        Habit habit = new Habit(habitName, habitLastDate, habitInterval);
-
-        if (lineData[DONE_INDEX].equals(IS_DONE_VALUE)) {
-            habit.setCompleted();
-        }
+        /**
+         * Need to import HashMap<Date, Progress> for each habit; import empty progress for now
+         */
+        HashMap<Date, Progress> tempProgressMap = new HashMap<>();
+        Habit habit = new Habit(habitName, habitLastDate, habitInterval, tempProgressMap);
 
         return habit;
     }
