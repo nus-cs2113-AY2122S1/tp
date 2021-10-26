@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -29,7 +30,7 @@ public class ByeCommandTest {
     }
 
     @Test
-    public void byeCommand_success() {
+    public void byeCommand_success() throws DukeException {
         Command command1 = Parser.parseCommand("bye");
         command1.execute();
         assertEquals("", outContent.toString());
