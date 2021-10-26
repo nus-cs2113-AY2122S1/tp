@@ -33,36 +33,13 @@ deactivate parser
 
 taa -> addModuleCommand : checkArguments()
 activate addModuleCommand
-alt Exception
-addModuleCommand --> taa : throw :TaaException
-taa -> ui : printException(message:String)
-activate ui
-ui -> user : Display Exception message
-ui --> taa
-deactivate ui
 
-else else
 addModuleCommand --> taa
 deactivate addModuleCommand
 
 taa -> addModuleCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
 activate addModuleCommand
 
-addModuleCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-
-moduleList --> addModuleCommand : module:Module
-deactivate moduleList
-
-alt module != null
-addModuleCommand --> taa : throw :TaaException
-taa -> ui : printException(message:String)
-activate ui
-ui -> user : Display Exception message
-ui --> taa
-deactivate ui
-
-else else
 create module
 addModuleCommand -> module
 activate module
@@ -86,7 +63,5 @@ ui --> addModuleCommand
 deactivate ui
 
 deactivate addModuleCommand
-end
-end
 
 @enduml
