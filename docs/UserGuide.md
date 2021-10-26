@@ -3,7 +3,16 @@
 ## Introduction
 
 The Smart Inventory Tracking and Updating System (SITUS) is a **desktop app for tracking
-ingredient inventory.**
+ingredient inventory designed for restaurant/ F&B inventory managers.** 
+
+Have you ever found yourself tired of clicking buttons endlessly when adding or removing items from your current 
+inventory-tracking software? Would you much rather type one line commands to achieve the same things a long-winded GUI 
+could do? Then SITUS is for you!
+
+SITUS allows you to not only track the stock of your ingredients but also their expiry dates, 
+search for ingredients by name or expiry date and even set and receive alerts when they are running low or expiring.
+
+This user guide will give you a quick rundown of all the things SITUS can do and how you can use them effectively.  
 
 ### How to use this guide
 #### Format notes
@@ -11,6 +20,8 @@ ingredient inventory.**
 * Words/phrases within square brackets `[square bracket]` are user's inputs. <br>
   For example in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
+  > Note: Ensure *ALL* parameters are specified when entering the command. There are no optional parameters for commands
+  > apart from [the `date` command](#210-view-set-current-date).
 * All information about ingredients expiring in **x** days is calculated based on the current date of the system.
 
 ## Contents
@@ -20,16 +31,17 @@ ingredient inventory.**
 &nbsp;&nbsp;[2.1. Help](#21-viewing-help) <br>
 &nbsp;&nbsp;[2.2. Add Ingredients](#22-add-ingredients) <br>
 &nbsp;&nbsp;[2.3. List Ingredients](#23-list-ingredients) <br>
-&nbsp;&nbsp;[2.4. Update Ingredients](#24-update-ingredients) <br>
-&nbsp;&nbsp;[2.5. Delete Ingredients](#25-delete-ingredients) <br>
-&nbsp;&nbsp;[2.6. Show Expiring Ingredients](#26-show-expiring-ingredients) <br>
-&nbsp;&nbsp;[2.7. Display Alerts](#27-display-alerts) <br>
-&nbsp;&nbsp;[2.8. Set Thresholds](#28-set-thresholds) <br>
-&nbsp;&nbsp;[2.9. Search Ingredients](#29-search-ingredients) <br>
-&nbsp;&nbsp;[2.10. View/ Set Current Date](#210-view-set-current-date) <br>
-&nbsp;&nbsp;[2.11. Exit Program](#211-exit-program) <br>
+&nbsp;&nbsp;[2.4. Update Ingredients](#24-update-ingredients-to-be-updated) <br>
+&nbsp;&nbsp;[2.5. Subtract Ingredients Stock](#25-subtract-ingredient-stock-to-be-added) <br>
+&nbsp;&nbsp;[2.6. Delete Ingredients](#26-delete-ingredients) <br>
+&nbsp;&nbsp;[2.7. Search Ingredients By Expiry](#27-search-ingredients-by-expiry) <br>
+&nbsp;&nbsp;[2.8. Search Ingredients By Name](#28-search-ingredients-by-name) <br>
+&nbsp;&nbsp;[2.9. Display Alerts](#29-display-alerts) <br>
+&nbsp;&nbsp;[2.10. Set Thresholds](#210-set-thresholds) <br>
+&nbsp;&nbsp;[2.11. View/ Set Current Date](#211-view-set-current-date) <br>
+&nbsp;&nbsp;[2.12. Exit Program](#212-exit-program) <br>
 [**3. FAQ**](#3-faq) <br>
-[**4. Command Summary**](#command-summary) <br>
+[**4. Command Summary**](#4-command-summary) <br>
 
 ## 1. Quick Start
 
@@ -38,7 +50,7 @@ ingredient inventory.**
 3. Copy the jar file to the folder that you want to use SITUS.
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Type `java -jar Situs.jar` in the terminal window.
-6. If successful, you should see the following message when the program starts up:
+6. If successful, you should see a similar message when the program starts up:
 
 ```
 ____________________________________________________
@@ -51,17 +63,18 @@ No ingredients expiring by [5 days from current date]
 No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ```
-
    
 ## 2. Features
 
-This section covers the commands SITUS can execute - how to use them and the expected output. 
+This section covers the commands SITUS can execute - how you can use them and the expected outputs. 
 
 ### 2.1. Viewing Help [to update]
 
-Shows a list of available commands and their syntax.
+You can view a quick summary of SITUS's commands and their syntax from within SITUS.
 
 Command: `help`
+
+Output:
 ```
 help
 ____________________________________________________
@@ -79,7 +92,7 @@ ____________________________________________________
 
 ### 2.2. Add Ingredients
 
-Add an ingredient to the ingredient list.
+You can add an ingredient to the ingredient list to start tracking it.
 
 `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
@@ -87,8 +100,6 @@ The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
 * `AMOUNT`: amount of the ingredient, in kilograms.
 * `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
-
-> Note: Ensure *ALL* parameters are specified when entering the command.
 
 Examples:
 * `add n/carrot a/20 e/01/03/2022`
@@ -116,9 +127,11 @@ ____________________________________________________
 
 ### 2.3. List Ingredients
 
-Displays a list of all ingredients in the ingredient list
+You can view the full list of your ingredients that SITUS is currently tracking.
 
 Command: `list`
+
+Output:
 ```
 list
 ____________________________________________________
@@ -134,7 +147,8 @@ ____________________________________________________
 
 ### 2.4. Update Ingredients [to be updated]
 
-Update the amount, unit and expiry of an ingredient in the ingredient list.
+You can update the amount, unit and expiry of an ingredient in your ingredient list if it needs
+changes.
 
 Command:
 `update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
@@ -148,6 +162,7 @@ Examples:
 * `update n/carrot a/100 e/05/04/2022`
 * `update n/potato a/0.6 e/30/12/2021`
 
+Outputs:
 ```
 update n/carrot a/100 u/sticks e/05/04/2022
 ____________________________________________________
@@ -163,18 +178,31 @@ Got it. This ingredient has been updated:
 ____________________________________________________
 ```
 
-### 2.5. Delete Ingredients
+### 2.5. Subtract Ingredient Stock [to be added]
 
-Delete an ingredient from the ingredient list based on its name and expiry date in the list.
-> Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
+**TO BE ADDED**
 
-Command: `delete n/[INGREDIENT_NUMBER] e/[EXPIRY_DATE]`
+Command:
+
+Output:
+
+### 2.6. Delete Ingredients
+
+You can delete an ingredient from the ingredient list based on its name and expiry date in the list if you wish to stop 
+tracking it.
+
+> Note: You are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the 
+> ingredient you intend to remove.
+
+Command: `delete n/[INGREDIENT_NAME] e/[EXPIRY_DATE]`
 
 The parameter used in the command are:
 * `INGREDIENT_NAME`: the ingredient name to remove
 * `EXPIRY_DATE`: the expiry date of the ingredient to remove, in format of `dd/mm/yyyy`
 
 Example: `delete n/ carrot e/ 01/03/2022`
+
+Output:
 ```
 delete n/ carrot e/ 01/03/2022
 ____________________________________________________
@@ -183,9 +211,9 @@ Got it. This ingredient has been removed:
 ____________________________________________________
 ```
 
-### 2.6. Show Expiring Ingredients
+### 2.7. Search Ingredients By Expiry
 
-List all ingredients that will expire by a specified date.
+You can search for ingredients that will expire by a specified date instead of looking through the full list for them. 
 
 Command: `expire [DATE]`
 
@@ -194,7 +222,7 @@ The parameter used in the command is:
 
 Example: `expire 26/12/2022`
 
-Full ingredient List: 
+Current list: 
 ```
 list
 ____________________________________________________
@@ -205,6 +233,8 @@ Here is the list of the ingredients currently in inventory:
     4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
+
+Output:
 ```
 expire 30/01/2022
 ____________________________________________________
@@ -215,9 +245,39 @@ There are 3 ingredients expiring by: 2022-01-30
 ____________________________________________________
 ```
 
-### 2.7 Display Alerts
+### 2.8. Search Ingredients By Name
 
-Displays the specified type of alert
+You can search for ingredients using keywords in their names to find specific ingredients without looking through the
+full list.
+
+Command: `find [INGREDIENT_NAMES]`
+* `INGREDIENT_NAMES`: The words to search for in the ingredient list
+> Note: One or more ingredient names can be entered. Separate them using *spaces*.
+
+Examples: `find radish`, `find potato tomato`
+
+Output:
+```
+find carrot
+____________________________________________________
+I found these ingredients for "radish":
+    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+____________________________________________________
+```
+```
+find potato tomato
+____________________________________________________
+I found these ingredients for "potato":
+    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+I found these ingredients for "tomato":
+    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+____________________________________________________
+```
+
+
+### 2.9. Display Alerts
+
+You can view the different types of alerts to see which ingredients are running low on stock or expiring.
 
 Command: `alerts [ALERT_TYPE]`
 
@@ -237,6 +297,8 @@ Here is the list of the ingredients currently in inventory:
     4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
+
+Output:
 ```
 alerts expiry
 ____________________________________________________
@@ -249,17 +311,17 @@ There are 1 ingredients with stock less than 5.0 kg
 ____________________________________________________
 ```
 
-For more information about setting thresholds, see [here](#28-set-thresholds).
+### 2.10. Set thresholds
 
-### 2.8 Set thresholds
-
-Sets the expiry threshold or the stock threshold for the [alerts](#27-display-alerts) command.
+You can set the expiry threshold or the stock threshold for the [alerts](#27-display-alerts) command.
 
 Command: `set [TYPE] [NEW_VALUE]`
 
 The parameters used in the command are:
 * `TYPE`: either `expiry` or `stock`
 * `NEW_VALUE`: the new threshold for which alerts will be displayed
+
+Outputs:
 ```
 set expiry 30
 ____________________________________________________
@@ -273,42 +335,17 @@ Successfully set low stock threshold to 4.0 kg
 ____________________________________________________
 ```
 
-### 2.9. Search Ingredients
 
-Search for ingredients using keywords in their names.
+### 2.11. View/ Set Current Date
 
-Command: `find [INGREDIENT_NAMES]`
-* `INGREDIENT_NAMES`: The words to search for in the ingredient list 
-> Note: One or more ingredient names can be entered. Separate them using *spaces*.
-
-Examples: `find radish`, `find potato tomato`
-
-```
-find carrot
-____________________________________________________
-I found these ingredients for "radish":
-    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-____________________________________________________
-```
-```
-find potato tomato
-____________________________________________________
-I found these ingredients for "potato":
-    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-I found these ingredients for "tomato":
-    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
-____________________________________________________
-```
-
-### 2.10. View/ Set Current Date
-
-View or set the system's current date. 
+You can view or set SITUS's current date to ensure it matches the actual date. 
 
 Command: `date [NEW_DATE]`
   * `NEW_DATE`: The date in the format of `dd/mm/yyyy`. 
   * To view current date: Leave field empty
   * To set a new current date: Key in the new date
-  
+
+Output:
 ```
 date
 ____________________________________________________
@@ -322,11 +359,13 @@ The current session date has been changed to 01/01/2022
 ____________________________________________________
 ```
 
-### 2.11. Exit Program
+### 2.12. Exit Program
 
-Exit the program once inventory check is completed.
+You can exit SITUS once your inventory check/ update is complete.
 
 Command: `exit`
+
+Output:
 ```
 exit
 ____________________________________________________
@@ -345,7 +384,7 @@ ____________________________________________________
 **A**: You can copy the `data` directory to the directory holding the jar file on the other computer.
 
 
-## Command Summary
+## 4. Command Summary
 
 | Action | Command |
 |---|---|
