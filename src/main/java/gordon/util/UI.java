@@ -15,7 +15,8 @@ public class UI {
         System.out.println("1. Add a recipe: addRecipe \"recipe name\" \"/ingredients\" 1+2 \"/steps\" 1+2");
         System.out.println("2. Delete a recipe: deleteRecipe \"Index of recipe\"");
         System.out.println("3. List all your recipes: listRecipes");
-        System.out.println("4. Find a recipe: find \"keyword\" \"number/item name\", where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time");
+        System.out.println("4. Find a recipe: find \"keyword\" \"number/item name\","
+                + "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time");
         System.out.println("5. Check a specific recipe: check \"Name of Recipe\"");
         System.out.println("6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories ");
         System.out.println("7. Add difficulty levels to recipe: set \"recipe name\" \"/difficulty\" difficultyLevel ");
