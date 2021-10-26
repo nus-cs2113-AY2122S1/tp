@@ -251,10 +251,10 @@ public class ModuleStorageTest {
         ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
         noteManager.deleteContent(1);
         assertThrows(InvalidArgumentException.class,
-                () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
+            () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
         this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(), "doesNotExist", "didNotExist"));
         assertThrows(IOException.class,
-                () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
+            () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
 
     }
 
@@ -310,6 +310,16 @@ public class ModuleStorageTest {
 
     @Test
     void loadNotesFromModule_missingModuleDirectory() throws IOException {
+        Path modPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        assertTrue(Files.exists(modPath));
+        moduleStorage.cleanAfterDeleteModule(tempModule);
+        assertFalse(Files.exists(modPath));
+        moduleStorage.loadNotesFromModule(moduleManager, tempModule);
+        assertTrue(Files.exists(modPath));
+    }
+
+    @Test
+    void loadNotesFromModule_invalidFileName() throws IOException {
         Path modPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
         assertTrue(Files.exists(modPath));
         moduleStorage.cleanAfterDeleteModule(tempModule);
