@@ -5,6 +5,7 @@ package seedu.parser;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.MissingArgException;
+import seedu.exception.MissingIndexException;
 
 
 public class IndexParser {
@@ -19,11 +20,11 @@ public class IndexParser {
 
 
     public static int getIndexFromInput(String userInput)
-            throws NumberFormatException, MissingArgException {
+            throws NumberFormatException, MissingIndexException {
         //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
         if (destructuredInputs.length <= COMD_WORD_LENGTH) {
-            throw new MissingArgException();
+            throw new MissingIndexException();
         }
         assert destructuredInputs.length == 2;
         // split index string into words

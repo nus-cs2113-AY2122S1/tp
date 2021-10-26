@@ -24,6 +24,7 @@ import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
+import seedu.exception.MissingIndexException;
 import seedu.exception.MissingNameException;
 
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
@@ -189,9 +190,9 @@ public class MainParser {
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
+            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
             String[] details = editContactParser.parseContactDetails(userInput);
             //throws InvalidFlagException, MissingDetailException, MissingArgException
-            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingArgException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
@@ -201,6 +202,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
+        } catch (MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -240,10 +243,10 @@ public class MainParser {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
             return new ViewContactCommand(viewedIndex);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        } catch (MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
     }
 
@@ -252,10 +255,10 @@ public class MainParser {
         try {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
             return new DeleteContactCommand(deletedIndex);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        } catch (MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
     }
 
