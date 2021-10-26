@@ -6,7 +6,7 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.FORMAT_INCORRECT;
+import static seedu.duke.common.Messages.ADD_INVALID_FORMAT;
 import static seedu.duke.common.Messages.INVALID_TITLE;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.ADD_MESSAGE;
@@ -38,14 +38,14 @@ public class AddCommand extends Command {
      */
     public void handlesAddCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (args.length() <= 4 || !args.contains("t/") || !args.contains("i/")) {
-            throw new LibmgrException(FORMAT_INCORRECT);
+            throw new LibmgrException(ADD_INVALID_FORMAT);
         }
         String parameters = args.substring(COMMAND_WORD.length() + 1);
         String[] argList = parameters.split("/");
         int stringLen = argList[1].length();
         // Check for wrong format order: i/ID t/TITLE
         if (!argList[0].equals("t") || !argList[1].substring(stringLen - 1).equals("i")) {
-            throw new LibmgrException(FORMAT_INCORRECT);
+            throw new LibmgrException(ADD_INVALID_FORMAT);
         }
         int endIndex = argList[1].length() - 1;
         if (endIndex <= 0) {

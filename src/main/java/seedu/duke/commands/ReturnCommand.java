@@ -10,6 +10,7 @@ import static seedu.duke.Status.LOANED;
 import static seedu.duke.common.Messages.RETURN_SUCCESS;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.WRONG_ITEM_MESSAGE;
+import static seedu.duke.common.Messages.ALREADY_RESERVED_MESSAGE;
 
 /**
  * Class encapsulating command to update the status of the item to be returned.
@@ -42,6 +43,8 @@ public class ReturnCommand extends Command {
 
         if (toBeReturned.getStatus().equals(LOANED)) {
             toBeReturned.setStatus(AVAILABLE);
+            toBeReturned.setLoanee(null);
+            toBeReturned.setDueDate();
             ui.print(RETURN_SUCCESS, toBeReturned);
         } else {
             ui.print(WRONG_ITEM_MESSAGE);
