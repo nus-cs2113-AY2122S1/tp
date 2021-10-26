@@ -13,13 +13,13 @@ import java.lang.reflect.Type;
 public class AttendanceDeserializer extends StorageDeserializer implements JsonDeserializer<Attendance> {
     private static final String MEMBER_LESSONNUMBER = "lessonNumber";
     private static final String MEMBER_ISPRESENT = "isPresent";
-    private static final String[] MEMBERS = {MEMBER_LESSONNUMBER, MEMBER_ISPRESENT};
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_LESSONNUMBER, MEMBER_ISPRESENT};
 
     @Override
     public Attendance deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        if (!hasMembers(jsonObject, MEMBERS)) {
+        if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 

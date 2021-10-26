@@ -1,27 +1,27 @@
-package taa.command;
+package taa.command.attendance;
 
-//@@author hozhenhong99
-import taa.storage.Storage;
-import taa.exception.TaaException;
 import taa.Ui;
+import taa.attendance.AttendanceList;
+import taa.command.Command;
+import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
+import taa.storage.Storage;
 import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class SetCommentCommand extends Command {
+public class ListAttendanceCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
-    private static final String KEY_STUDENT_COMMENT = "t";
-    private static final String[] SET_COMMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX, KEY_STUDENT_COMMENT};
+    private static final String[] LIST_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
 
-    private static final String MESSAGE_FORMAT_SET_COMMAND_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
-            + "%s/<KEY_STUDENT_COMMENT";
-    private static final String MESSAGE_FORMAT_SET_COMMENT = "Comment added to student:\n %s | %s";
+    private static final String MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
+    protected static final String MESSAGE_FORMAT_NO_ATTENDANCE = "There is no recorded attendance for %s.";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Attendance for %s:\n%s";
 
-    public SetCommentCommand(String argument) {
-        super(argument, SET_COMMENT_ARGUMENT_KEYS);
+    public ListAttendanceCommand(String argument) {
+        super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SetCommentCommand extends Command {
     }
 
     /**
-     * Executes the set_comment command and sets the comment of a student.
+     * Executes the list_attendance command and list all the attendance record of a student.
      *
      * @param moduleList The list of modules.
      * @param ui         The ui instance to handle interactions with the user.
@@ -66,22 +66,24 @@ public class SetCommentCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        String comment = argumentMap.get(KEY_STUDENT_COMMENT);
+        String message;
+        AttendanceList attendanceList = student.getAttendanceList();
+        if (attendanceList.getSize() == 0) {
+            message = String.format(MESSAGE_FORMAT_NO_ATTENDANCE, student);
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, student, attendanceList);
+        }
 
-        student.setComment(comment);
-
-        storage.save(moduleList);
-        ui.printMessage(String.format(MESSAGE_FORMAT_SET_COMMENT, student, comment));
+        ui.printMessage(message);
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_SET_COMMAND_USAGE,
-                COMMAND_SET_COMMENT,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_STUDENT_COMMENT
+            MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
+            COMMAND_LIST_ATTENDANCE,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX
         );
     }
 }

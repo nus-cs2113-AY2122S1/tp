@@ -15,13 +15,13 @@ import java.lang.reflect.Type;
 
 public class ModuleListDeserializer extends StorageDeserializer implements JsonDeserializer<ModuleList> {
     private static final String MEMBER_MODULES = "modules";
-    private static final String[] MEMBERS = {MEMBER_MODULES};
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_MODULES};
 
     @Override
     public ModuleList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        if (!hasMembers(jsonObject, MEMBERS)) {
+        if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 

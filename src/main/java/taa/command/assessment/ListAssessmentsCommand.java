@@ -1,24 +1,24 @@
-package taa.command;
+package taa.command.assessment;
 
-//@@author hozhenhong99
+import taa.command.Command;
 import taa.storage.Storage;
-import taa.exception.TaaException;
 import taa.Ui;
+import taa.assessment.AssessmentList;
+import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
-import taa.student.StudentList;
 
-public class ListStudentsCommand extends Command {
+public class ListAssessmentsCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
-    private static final String[] LIST_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE};
+    private static final String[] LIST_ASSESSMENTS_ARGUMENT_KEYS = {KEY_MODULE_CODE};
 
-    private static final String MESSAGE_NO_STUDENTS = "No students added yet!";
+    private static final String MESSAGE_LIST_EMPTY = "There are no assessments in the module.";
 
-    private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "%s %s/<MODULE_CODE>";
-    private static final String MESSAGE_FORMAT_OUTPUT = "Students for %s:\n%s";
+    private static final String MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE = "%s %s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Assessments for %s:\n%s";
 
-    public ListStudentsCommand(String argument) {
-        super(argument, LIST_STUDENT_ARGUMENT_KEYS);
+    public ListAssessmentsCommand(String argument) {
+        super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ListStudentsCommand extends Command {
     }
 
     /**
-     * Executes the list_student command and lists the students of a particular module.
+     * Executes the list_assessment command and list all the assessments of a particular module.
      *
      * @param moduleList The list of modules.
      * @param ui         The ui instance to handle interactions with the user.
@@ -49,11 +49,11 @@ public class ListStudentsCommand extends Command {
         }
 
         String message;
-        StudentList studentList = module.getStudentList();
-        if (studentList.getSize() == 0) {
-            message = MESSAGE_NO_STUDENTS;
+        AssessmentList assessmentList = module.getAssessmentList();
+        if (assessmentList.getSize() == 0) {
+            message = MESSAGE_LIST_EMPTY;
         } else {
-            message = String.format(MESSAGE_FORMAT_OUTPUT, module, studentList);
+            message = String.format(MESSAGE_FORMAT_OUTPUT, module, assessmentList);
         }
 
         ui.printMessage(message);
@@ -62,8 +62,8 @@ public class ListStudentsCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_LIST_STUDENT_USAGE,
-            COMMAND_LIST_STUDENTS,
+            MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE,
+            COMMAND_LIST_ASSESSMENTS,
             KEY_MODULE_CODE
         );
     }

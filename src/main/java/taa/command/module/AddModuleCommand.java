@@ -1,5 +1,6 @@
-package taa.command;
+package taa.command.module;
 
+import taa.command.Command;
 import taa.logger.TaaLogger;
 import taa.storage.Storage;
 import taa.exception.TaaException;

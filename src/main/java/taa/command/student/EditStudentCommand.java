@@ -1,6 +1,7 @@
-package taa.command;
+package taa.command.student;
 
 //@@author hozhenhong99
+import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
@@ -10,16 +11,24 @@ import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class DeleteStudentCommand extends Command {
+public class EditStudentCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
-    private static final String[] DELETE_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
+    private static final String KEY_NEW_ID = "i";
+    private static final String KEY_NEW_NAME = "n";
+    private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_NEW_ID,
+        KEY_NEW_NAME
+    };
 
-    private static final String MESSAGE_FORMAT_DELETE_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
-    private static final String MESSAGE_FORMAT_STUDENT_DELETED = "Student removed from %s:\n  %s";
+    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+        + "%s/<NEW_ID> %s/<NEW_NAME>";
+    private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
 
-    public DeleteStudentCommand(String argument) {
-        super(argument, DELETE_STUDENT_ARGUMENT_KEYS);
+    public EditStudentCommand(String argument) {
+        super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
     }
 
     @Override
@@ -39,7 +48,7 @@ public class DeleteStudentCommand extends Command {
     }
 
     /**
-     * Executes the delete_student command and deletes a student from the module.
+     * Executes the edit_student command and edits the particulars of a student.
      *
      * @param moduleList The list of modules.
      * @param ui         The ui instance to handle interactions with the user.
@@ -60,22 +69,29 @@ public class DeleteStudentCommand extends Command {
 
         StudentList studentList = module.getStudentList();
         assert studentIndex >= 0 && studentIndex < module.getStudentList().getSize();
-        Student student = studentList.deleteStudentAt(studentIndex);
+        Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
+        String newId = argumentMap.get(KEY_NEW_ID);
+        String newName = argumentMap.get(KEY_NEW_NAME);
+        student.setId(newId);
+        student.setName(newName);
+
         storage.save(moduleList);
-        ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_DELETED, moduleCode, student));
+        ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_DELETE_STUDENT_USAGE,
-            COMMAND_DELETE_STUDENT,
+            MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+            COMMAND_EDIT_STUDENT,
             KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX
+            KEY_STUDENT_INDEX,
+            KEY_NEW_ID,
+            KEY_NEW_NAME
         );
     }
 }

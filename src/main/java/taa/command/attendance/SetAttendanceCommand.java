@@ -1,6 +1,7 @@
-package taa.command;
+package taa.command.attendance;
 
 import taa.attendance.AttendanceList;
+import taa.command.Command;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.attendance.Attendance;
