@@ -1,54 +1,67 @@
 package medbot.command;
 
-import medbot.Ui;
-import medbot.list.PersonList;
+import medbot.Scheduler;
+import medbot.ui.Ui;
+import medbot.exceptions.MedBotException;
+import medbot.utilities.ViewType;
+
 
 public class HelpCommand extends Command {
 
     private CommandType commandType = null;
+    private ViewType viewType = null;
 
-    public HelpCommand() {
+    public HelpCommand(ViewType viewType) {
+        this.viewType = viewType;
     }
 
-    public HelpCommand(CommandType commandType) {
+    public HelpCommand(ViewType viewType, CommandType commandType) {
+        this.viewType = viewType;
         this.commandType = commandType;
     }
 
+
     @Override
-    public void execute(PersonList personList, Ui ui) {
+    public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         String output;
         if (commandType == null) {
-            output = ui.getCommandList();
+            output = Ui.getCommandList(viewType);
             ui.printOutput(output);
             return;
         }
         switch (commandType) {
-        case ADD_PATIENT:
-            output = ui.getAddHelpMessage();
+        case ADD:
+            output = ui.getAddHelpMessage(viewType);
             break;
-        case DELETE_PATIENT:
-            output = ui.getDeleteHelpMessage();
+        case DELETE:
+            output = ui.getDeleteHelpMessage(viewType);
             break;
-        case EDIT_PATIENT:
-            output = ui.getEditHelpMessage();
+        case EDIT:
+            output = ui.getEditHelpMessage(viewType);
+            break;
+        case LIST:
+            output = ui.getListHelpMessage(viewType);
+            break;
+        case FIND:
+            output = ui.getFindHelpMessage(viewType);
+            break;
+        case VIEW:
+            output = ui.getViewHelpMessage(viewType);
+            break;
+        case SWITCH:
+            output = ui.getSwitchHelpMessage();
+            break;
+        case ARCHIVE:
+            output = ui.getArchiveHelpMessage(viewType);
+            break;
+        case UNARCHIVE:
+            output = ui.getUnarchiveHelpMessage(viewType);
             break;
         case EXIT:
             output = ui.getExitHelpMessage();
             break;
-        case LIST_PATIENT:
-            output = ui.getListHelpMessage();
-            break;
-        case SWITCH:
-            output = ""; //todo
-            break;
-        case FIND_PATIENT:
-            output = ui.getFindHelpMessage();
-            break;
-        case VIEW_PATIENT:
-            output = ui.getViewHelpMessage();
-            break;
         default:
-            output = ui.getCommandList();
+            output = Ui.getCommandList(viewType);
             break;
         }
         ui.printOutput(output);

@@ -1,6 +1,6 @@
 package medbot.person;
 
-import static medbot.Ui.VERTICAL_LINE_SPACED;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 public class Patient extends Person {
 
@@ -13,7 +13,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Text to be written to storage/data.txt of a patient
+     * Text to be written to storage file of a patient.
      *
      * @return storageString of a patient
      */

@@ -1,11 +1,20 @@
 package medbot.person;
 
 
-import static medbot.Ui.VERTICAL_LINE_SPACED;
-import static medbot.Ui.ENDLINE;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
+import static medbot.ui.Ui.END_LINE;
 
+import java.util.LinkedList;
 
-public abstract class Person {
+import medbot.list.ListItem;
+
+import medbot.Appointment;
+import medbot.exceptions.MedBotException;
+
+import medbot.list.PersonalAppointmentList;
+import medbot.utilities.FilterType;
+
+public abstract class Person extends ListItem {
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
     private static final String PARAMETER_EMAIL = "e/";
@@ -30,13 +39,15 @@ public abstract class Person {
     protected String emailAddress = "";
     protected String residentialAddress = "";
     protected PersonType personType;
+    protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
+    protected boolean isArchived = false;
 
     public String toString() {
-        return  ENDLINE
-                + "IC: " + icNumber + ENDLINE
-                + "Name: " + name + ENDLINE
-                + "H/P: " + phoneNumber + ENDLINE
-                + "Email: " + emailAddress + ENDLINE
+        return END_LINE
+                + "IC: " + icNumber + END_LINE
+                + "Name: " + name + END_LINE
+                + "H/P: " + phoneNumber + END_LINE
+                + "Email: " + emailAddress + END_LINE
                 + "Address: " + residentialAddress;
     }
 
@@ -106,8 +117,71 @@ public abstract class Person {
         residentialAddress = null;
     }
 
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void archive() {
+        isArchived = true;
+    }
+
+    public void unarchive() {
+        isArchived = false;
+    }
+
     /**
-     * Text to be written to storage/data.txt of a person
+     * Returns the appointmentId of the appointment at the specified time code, or -1 if there is none.
+     *
+     * @param dateTimeCode the dateTimeCode to search for
+     * @return the appointmentId of the appointment with that dateTimeCode, or -1 if there is none
+     */
+    public int getAppointmentId(int dateTimeCode) {
+        return personalAppointmentList.getAppointmentId(dateTimeCode);
+    }
+
+    /**
+     * Returns an LinkedList of the appointmentId of all appointments.
+     *
+     * @return LinkedList of the appointmentId of all appointments
+     */
+    public LinkedList<Integer> getAllAppointmentIds() {
+        return personalAppointmentList.getAllAppointmentIds();
+    }
+
+    /**
+     * Adds the given appointment to the appointment list.
+     *
+     * @param appointment Appointment to be added to the appointment list
+     * @throws MedBotException if there is another appointment at that time
+     */
+    public void addAppointment(Appointment appointment) throws MedBotException {
+        personalAppointmentList.addAppointment(appointment);
+    }
+
+    /**
+     * Removes the appointment with the specified dateTimeCode.
+     *
+     * @param dateTimeCode the dateTimeCode of the appointment to be deleted
+     * @throws MedBotException if there is no appointment with that dateTimeCode.
+     */
+    public void deleteAppointment(int dateTimeCode) throws MedBotException {
+        personalAppointmentList.deleteAppointment(dateTimeCode);
+    }
+
+    public String listAppointments(FilterType filterType, int dateTimeCode) {
+        switch (filterType) {
+        case BEFORE:
+            return personalAppointmentList.listAppointmentsBefore(dateTimeCode);
+        case AFTER:
+            return personalAppointmentList.listAppointmentsAfter(dateTimeCode);
+        case NONE:
+        default:
+            return personalAppointmentList.listAppointments();
+        }
+    }
+
+    /**
+     * Text to be written to storage file of a person.
      *
      * @return storageString of a person
      */
@@ -156,15 +230,6 @@ public abstract class Person {
         return false;
     }
 
-    /**
-     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
-     *
-     * @param parameter an attribute of a person
-     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
-     */
-    protected String setAsStorageParameterOrNull(String parameter) {
-        return (parameter == null || parameter.isBlank()) ? "X" : parameter;
-    }
 
     private String formattedAttribute(String attribute, int outputLength) {
         int attributeLength = attribute.length();
@@ -205,5 +270,17 @@ public abstract class Person {
 
     private String getFormattedAddress() {
         return formattedAttribute(residentialAddress, LENGTH_ADDRESS_COLUMN);
+    }
+
+
+    //TODO: Change these to the native methods
+    @Override
+    public int getId() {
+        return getPersonId();
+    }
+
+    @Override
+    public void setId(int personId) {
+        setPersonId(personId);
     }
 }

@@ -1,13 +1,12 @@
 package medbot;
 
 import medbot.command.Command;
+import medbot.exceptions.MedBotException;
+import medbot.parser.Parser;
+import medbot.storage.StorageManager;
+import medbot.ui.Ui;
 
 import java.io.FileNotFoundException;
-
-import medbot.exceptions.MedBotException;
-import medbot.list.MedicalStaffList;
-import medbot.list.PatientList;
-import medbot.utilities.ViewType;
 
 public class MedBot {
     public static void main(String[] args) {
@@ -16,38 +15,32 @@ public class MedBot {
 
     public static void interactWithUser() {
 
-        PatientList patientList = new PatientList();
-        MedicalStaffList staffList = new MedicalStaffList();
+        Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
-        Storage storage = null;
-        ViewType viewContext;
+        StorageManager storageManager = null;
         boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
         try {
-            storage = new Storage();
-            String loadStorageErrorMessage = storage.loadStorage(patientList);
-
-            if (!loadStorageErrorMessage.isBlank()) {
-                ui.printOutput(loadStorageErrorMessage);
-            }
+            storageManager = new StorageManager(scheduler, ui);
             ui.printWelcomeMessageTwo();
 
         } catch (FileNotFoundException | MedBotException e) {
             ui.printOutput(e.getMessage());
         }
 
-        CommandManager commandManager = new CommandManager(patientList,staffList);
         while (isInteracting) {
             String userInput = ui.readInput();
             try {
-                viewContext = commandManager.getViewType();
-                Command command = Parser.parseCommand(userInput, viewContext);
-                commandManager.executeCommand(ui, storage, command);
+                Command command = Parser.parseCommand(userInput);
+                command.execute(scheduler, ui);
+
+                assert storageManager != null;
+                storageManager.saveToStorage(scheduler);
                 isInteracting = !command.isExit();
 
             } catch (MedBotException mbe) {
-                ui.printOutput(mbe.getMessage());
+                ui.printOutput(mbe.getMessage() + System.lineSeparator());
             }
         }
     }

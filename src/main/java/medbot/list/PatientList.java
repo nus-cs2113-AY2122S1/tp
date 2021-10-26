@@ -1,41 +1,22 @@
 package medbot.list;
 
-import medbot.exceptions.MedBotException;
-import medbot.person.Patient;
-
-import java.util.List;
+import static medbot.ui.Ui.END_LINE;
 
 public class PatientList extends PersonList {
 
-    public int addPerson(Patient patient) {
-        return super.addPerson(patient);
+    @Override
+    protected String getPersonNotFoundErrorMessage(int patientId) {
+        return "No Patient with ID " + patientId + " found." + END_LINE;
     }
 
-    public String getPersonInfo(int patientId) throws MedBotException {
-        return super.getPersonInfo(patientId);
+    @Override
+    protected String getAlreadyArchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already archived." + END_LINE;
     }
 
-    public void editPerson(int patientId, Patient newPatientData) throws MedBotException {
-        super.editPerson(patientId, newPatientData);
+    @Override
+    protected String getAlreadyUnarchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already unarchived." + END_LINE;
     }
 
-    public void deletePerson(int patientId) throws MedBotException {
-        super.deletePerson(patientId);
-    }
-
-    public List<String> findPatients(String[] parameters) {
-        return super.findPersons(parameters);
-    }
-
-    public String listPersons() {
-        return super.listPersons();
-    }
-
-    private String getNoPatientIdErrorMessage(int patientId) {
-        return "No Patient with ID " + super.getNoPersonIdErrorMessage(patientId);
-    }
-
-    public void addPersonFromStorage(Patient patient) {
-        super.addPersonFromStorage(patient);
-    }
 }
