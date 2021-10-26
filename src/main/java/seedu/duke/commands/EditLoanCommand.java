@@ -22,7 +22,7 @@ public class EditLoanCommand extends EditCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        Loan targetLoan = allRecordList.editLoan(month, index, amount, name, date);
+        Loan targetLoan = allRecordList.editLoan(month, index, amount, name, date, isLoadingStorage);
         System.out.println("Loan has been successfully edited!");
         System.out.println("New values: " + targetLoan);
     }

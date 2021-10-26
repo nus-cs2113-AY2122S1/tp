@@ -27,11 +27,11 @@ public class Duke {
 
     public void run() {
         TextUi.showWelcomeMessage();
-        boolean isExit = false;
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
         recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
         recordList.statIntro(recordList);
+        boolean isExit = false;
 
         while (!isExit) {
             try {

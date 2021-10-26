@@ -25,7 +25,7 @@ public class ParserUtil {
 
     public static double parseAmount(String amountString, boolean isCompulsory) {
         try {
-            return Integer.parseInt(amountString.trim());
+            return Double.parseDouble(amountString.trim());
         } catch (NumberFormatException e) {
             if (isCompulsory) {
                 throw new NumberFormatException();

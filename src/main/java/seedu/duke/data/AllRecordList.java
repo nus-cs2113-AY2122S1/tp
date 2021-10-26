@@ -1,11 +1,9 @@
 package seedu.duke.data;
 
-import seedu.duke.commands.Command;
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
-import seedu.duke.textfiletools.ReadTextFile;
 import seedu.duke.textfiletools.WriteToTextFile;
 import seedu.duke.ui.TextUi;
 
@@ -74,15 +72,21 @@ public class AllRecordList {
         }
     }
 
-    public Budget editBudget(int month, double amount) {
+    public Budget editBudget(int month, double amount, boolean isLoadingStorage) {
         Budget targetBudget = allRecordList.get(month).getBudget();
         if (amount != 0.00) {
             targetBudget.setAmount(amount);
         }
+
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
+
         return targetBudget;
     }
 
-    public Expenditure editExpenditure(int month, int index, double amount, String description, LocalDate date) {
+    public Expenditure editExpenditure(int month, int index, double amount,
+                                       String description, LocalDate date, boolean isLoadingStorage) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
         if (amount != 0.00) {
             targetExpenditure.setAmount(amount);
@@ -93,10 +97,15 @@ public class AllRecordList {
         if (!date.equals(LocalDate.now())) {
             targetExpenditure.setDate(date);
         }
+
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
+
         return targetExpenditure;
     }
 
-    public Loan editLoan(int month, int index, double amount, String name, LocalDate date) {
+    public Loan editLoan(int month, int index, double amount, String name, LocalDate date, boolean isLoadingStorage) {
         Loan targetLoan = allRecordList.get(month).getLoan(index);
         if (amount != 0.00) {
             targetLoan.setAmount(amount);
@@ -107,6 +116,11 @@ public class AllRecordList {
         if (!date.equals(LocalDate.now())) {
             targetLoan.setDate(date);
         }
+
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
+
         return targetLoan;
     }
 

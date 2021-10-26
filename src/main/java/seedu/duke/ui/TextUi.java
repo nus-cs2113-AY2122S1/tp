@@ -50,10 +50,9 @@ public class TextUi {
         DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
         System.out.println();
-        System.out.println(DIVIDER + LS
-                + "Current Date and Time: "+ dateTime.format(now) + LS);
-        System.out.println("Database will be set to: "
-                + now.getYear());
+        System.out.println(DIVIDER + LS + "Current Date and Time: "
+                + dateTime.format(now) + LS);
+        System.out.println("Database will be set to: " + now.getYear());
         Delay.wait(1000);
 
         System.out.println(DIVIDER + LS
@@ -218,7 +217,8 @@ public class TextUi {
         } else if (printInfo) {
             System.out.println("You did not overspend for " + monthString + ", Good JOB!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
-            System.out.println(percentage + "% of your overall budget has been spent");
+            System.out.printf("%.2f", percentage);
+            System.out.println("% of your overall budget has been spent");
         }
         getMonthListView(records, i, monthString, budget);
     }
