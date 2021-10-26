@@ -6,9 +6,10 @@
 If you are a computing professional that often uses the command line for work, **ConTech** can get your contact 
 management tasks done faster than any traditional GUI app. 
 
-With our `add`, `edit`, `view`, and many more [features](#features) specifically set for computing-related contacts 
-such as saving a colleague's GitHub username, **ConTech** aims to improve your efficiency at work by cutting down the
-time required to look up for various usernames when working with colleagues. 
+With our various [features](#features) such as `add`, `edit`, `view`, and other commands, you can easily perform such 
+actions on your **ConTech** Book in a quick and efficient manner. **ConTech** is optimised for computing-related contacts 
+such as saving a colleague's GitHub username or even mass-loading from a list of contacts. **ConTech** aims to improve your 
+efficiency at work by cutting down the time required to look up for various usernames when working with colleagues. 
 
 * **[Quick Start](#start)**
 * **[Features](#features)**
