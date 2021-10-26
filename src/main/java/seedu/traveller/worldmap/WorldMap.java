@@ -3,6 +3,7 @@ package seedu.traveller.worldmap;
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
+import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 
 
 public class WorldMap {
@@ -93,6 +94,15 @@ public class WorldMap {
     public static void distanceNonZero(double dist) throws NonZeroDistanceException {
         if (dist < 0.1) {
             throw new NonZeroDistanceException(dist);
+        }
+    }
+
+    public static void distanceNonString(String rawDist)
+            throws NonStringDistanceException {
+        try {
+            double dist = Double.parseDouble(rawDist);
+            } catch (NumberFormatException e) {
+            throw new NonStringDistanceException(rawDist);
         }
     }
 

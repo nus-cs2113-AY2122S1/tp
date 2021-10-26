@@ -29,12 +29,14 @@ import seedu.traveller.exceptions.InvalidSearchFormatException;
 import seedu.traveller.exceptions.InvalidEditMapFormatException;
 import seedu.traveller.exceptions.CountryNotFoundException;
 import seedu.traveller.exceptions.DistanceNonNegativeException;
+import seedu.traveller.exceptions.DistanceNonStringException;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.InvalidShortestFormatException;
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import seedu.traveller.worldmap.Country;
 import seedu.traveller.worldmap.WorldMap;
+import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 
 import java.util.Objects;
@@ -439,8 +441,15 @@ public class Parser {
             int distIdx = userInput.indexOf(distSeparator);
             String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
-            double dist = Double.parseDouble(userInput.substring(distIdx + DIST_LENGTH));
+            String rawDist = userInput.substring(distIdx + DIST_LENGTH);
 
+            try {
+                WorldMap.distanceNonString(rawDist);
+            } catch (NonStringDistanceException e) {
+                throw new DistanceNonStringException();
+            }
+
+            double dist = Double.parseDouble(rawDist);
             WorldMap.getCountry(startCountryCode);
             WorldMap.getCountry(endCountryCode);
             WorldMap.distanceNonZero(dist);
