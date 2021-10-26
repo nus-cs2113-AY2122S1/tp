@@ -17,9 +17,9 @@ reference. We hope you enjoy using *Food-O-Rama*!
 
 ## 🧾 Table of Contents
 
-*Note 💡 Lightbulb requires your attention.*
+*Note* 💡 Lightbulb requires your attention.
 
-*Tip ❕  Exclamation mark gives additional information to use Food-O-Rama more effectively.*
+*Tip* ❕  Exclamation mark gives additional information to use Food-O-Rama more effectively.
 
 * [Quick Start](#-quick-start)
 * [List of Commands](#-list-of-commands)
