@@ -25,7 +25,8 @@
   * [4.2 Active Recall](#42-active-recall-implementation)
   * [4.3 Workspace]()
   * [4.4 Adding and Deleting Content]()
-  * [4.5 Storage]()
+  * [4.5 Storage](#45-storage-implementation)
+    + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
 - [5. Documentation, Logging, Testing and DevOps]()
 - [Appendix A: Product Scope]()
 - [Appendix B: User Stories ]()
@@ -503,3 +504,49 @@ If the newly added `Link` object has the same `day` attribute and overlapping `s
 
 **Step 7:** The `StringBuilder` object will be converted to a `String` object before being returned to `ConflictManager` and `AddLinkCommand`.
 Then the `AddLinkCommand` will display all the conflicting schedule during its execution
+
+### 4.5 Storage Implementation
+
+To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
+
+#### 4.5.1 Initialize Storage Implementation
+
+![](attachments/StorageInitializeSequenceDiagram.png)
+
+**Step 1:** When `Terminus` just started, it will initialize a `ModuleStorage` object and loads any
+related data from the `data` directory into it.
+
+**Step 2:** Next, `Terminus` will create an instance of `ModuleStorage` which is a **singleton class**
+object. Subsequently, `Terminus` calls the `init()` function provided by ModuleStorage to set the filepath of the ModuleStorage with the main `.json` file
+filepath which contains data such as `module`, `questions` and `schedules`.
+
+**Step 3:** Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
+which is provided by `ModuleStorage`. 
+
+**Step 4:** Within the `ModuleStorage` of `loadFile()`, it will first check if
+the main directory of `data` exists. This is needed for the first time execution of `Terminus` as there
+should not be any `data` folder within the same folder in which `Terminus` was executed from. Hence,
+if no `data` directory was found, it will create a `data` directory and create the main `.json`
+file. However, if `data` directory exists, it will locate the main `.json` file within
+the `data` directory. This main `.json` will tell `Terminus` what `modules`
+does it have prior this current session of `Terminus`.
+
+**Step 5:** Once the main `.json` has been loaded, a plugin `GsonBuilder` will proceed to load the `.json` 
+data into a `ModuleManager` object. This `ModuleManager` will then be used throughout the execution of `Terminus`.
+For more information, please refer to [Module Component](#35-module-component).
+
+**Step 6:** Next, `ModuleStorage` will proceed to load any note data from the `modules` in the `ModuleManager` 
+object. Due to the restriction of **TermiNUS**, it will filter any `module` whose name does not fit the criteria of a valid `module` name. 
+Subsequently, it will check for module that has a folder in the `data` directory in order to retrieve its note data.
+If no folder was found it will simply create one for itself and proceed to check on other `module` in the `ModuleManager`. 
+
+**Step 7:** Finally, after `ModuleStorage` has loaded all contents for the validated `modules` in the ModuleManager, it
+will return the `ModuleManager` back to `Terminus` for further operations.
+
+
+Notes in TermiNUS is stored as a **text** file where the **name** of the file is the **name** of the note 
+and the **contents** of the file will be the **content** for that Note. For example, if a module has **5 Notes** object in TermiNUS, it should have **5 text files** within its module folder.
+
+
+
+
