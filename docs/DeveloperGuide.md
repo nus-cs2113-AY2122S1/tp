@@ -6,6 +6,7 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * https://www.baeldung.com/java-testing-system-out-println
+* https://github.com/fastily/jwiki
 
 ##Architecture
 
@@ -25,7 +26,11 @@ There are 3 types:
     2. Custom Wikipedia article
     3. Random words
 
+The following UML diagram illustrates the way content selection works in the program.
+
 ![](uml/Content.png)
+
+There only exists one content string for all sessions.
 
 ### Word Limit Game
 
