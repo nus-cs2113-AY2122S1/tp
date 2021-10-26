@@ -164,7 +164,7 @@ public class ExceptionTextUi {
     //@@author mayankp291
     public static void missingIndexMessage() {
         String message = "There seems to be missing or invalid index in your request.\n"
-                + "Please enter command in the following way: \n"
+                + "Please enter command in the following way:\n"
                 + "      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>\n"
                 + "Where <COMMAND_WORD> is rm or view";
         printDoubleLineMessage(message);

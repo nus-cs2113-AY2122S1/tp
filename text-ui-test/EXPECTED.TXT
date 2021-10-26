@@ -131,7 +131,10 @@ You only have 1 contact stored.
 ____________________________________________________________
 
 ____________________________________________________________
-There are no contacts stored in ConTech.
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
@@ -228,8 +231,10 @@ NOTE : At least name and description required
 ____________________________________________________________
 
 ____________________________________________________________
-The index you have input is out of range.
-Please input a index between 0 and 3
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
@@ -370,8 +375,10 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-The index you have input is out of range.
-Please input a index between 0 and 2
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
