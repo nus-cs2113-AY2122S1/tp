@@ -215,6 +215,36 @@ The sequence diagram for `AddStockCommand` is shown below.
 
 #### DeleteStockCommand
 
+MediVault creates an `DeleteStockCommand` object when CommandParser identifies `deletestock` or the `delete` keyword
+in `stock` mode.
+
+* MediVault allows deletion of a stock by specifying stock id.
+* MediVault allows deletion of expiring stocks by specifying an expiry date.
+
+> :information_source: Note:
+> * MediVault deletes medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
+> * MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry then executes
+  accordingly.
+
+The sequence diagram for `DeleteStockCommand` is shown below.
+
+![DeleteStockSequenceDiagram](diagrams/diagram_images/DeleteStockSequenceDiagram.png)
+
+After MediVault determines that it is executing deletion by stock id, it will execute accordingly. Currently, it only
+allows for deletion of 1 stock at a time.
+
+The sequence diagram for deletion by stock id is shown below.
+
+![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByIdSequenceDiagram.png)
+
+After MediVault determines that it is executing deletion by expiry date, it will execute accordingly. The behaviour of
+this command is to delete all stock that have <= specified date. This is because we would want to delete all expired
+stock and if a date is specified, all the date before will also be expired hence implement deletion of <= date.
+
+The sequence diagram for delete by expiry date is shown below.
+
+![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
+
 #### UpdateStockCommand
 
 MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or
@@ -338,7 +368,39 @@ The sequence diagram for UpdateOrderCommand is shown below.
 
 #### ArchivePrescriptionCommand
 
+MediVault creates an `ArchivePrescriptionCommand` object when CommandParser identifies `archiveprescription` or the 
+`archive` keyword in `prescription` mode.
+
+* MediVault archives prescription records by specifying a date.
+* MediVault will remove prescription records that have date <= specified date and output it into the file named 
+`data/prescription_archive.txt`
+
+> :information_source: Note:
+> * MediVault archive prescription information when `parameter` and `parameterValues` provided by the user are valid.
+> * MediVault will output prescription information into a user readable format in `data/prescription_archive.txt`.
+> * To modify the format, edit the code in `toFileFormat()` method in the Prescription Class.
+
+The sequence diagram for ArchivePrescriptionCommand is shown below.
+
+(To be implemented)
+
 #### ArchiveOrderCommand
+
+MediVault creates an `ArchiveOrderCommand` object when CommandParser identifies `archiveorder` or the
+`archive` keyword in `order` mode.
+
+* MediVault archives order records by specifying a date.
+* MediVault will remove only DELIVERED order records that have date <= specified date and output it into the file named
+`data/order_archive.txt`
+
+> :information_source: Note:
+> * MediVault archive order information when `parameter` and `parameterValues` provided by the user are valid.
+> * MediVault will output order information into a user readable format in `data/prescription_archive.txt`.
+> * To modify the format, edit the code in `toFileFormat()` method in the Order Class.
+
+The sequence diagram for ArchiveOrderCommand is shown below.
+
+(To be implemented)
 
 ## Product Scope
 
