@@ -1,0 +1,25 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+->":MainParser":userInput:String
+activate ":MainParser"
+
+":MainParser"->":MainParser":parseCommand(userInput:String)
+activate ":MainParser"
+
+":MainParser"->":MainParser":getCommandType(userInput:String)
+activate ":MainParser"
+":MainParser"-->":MainParser":commandType:CommandType
+deactivate ":MainParser"
+
+":MainParser"->":MainParser":getCommandWord(userInput:String)
+activate ":MainParser"
+":MainParser"-->":MainParser":commandWord:CommandWord
+deactivate ":MainParser"
+
+ref over ":MainParser": Detailed Parsing\nbased on CommandType
+
+<--":MainParser"::Command
+deactivate ":MainParser"
+deactivate ":MainParser"
+@enduml

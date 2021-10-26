@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+-> ":AddContactCommand": execute()
+activate ":AddContactCommand"
+
+create "addedContact:Contact"
+":AddContactCommand" -> "addedContact:Contact":Contact()
+activate "addedContact:Contact"
+
+"addedContact:Contact" --> ":AddContactCommand"
+deactivate "addedContact:Contact"
+
+alt#gold #lightgreen hasDuplicates(addedContact:Contact, contactList:ContactList)
+    ":AddContactCommand" -> ":TextUi":ignoreContact("add")
+    activate ":TextUi"
+    ":TextUi" --> ":AddContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue else
+    ":AddContactCommand" -> ":ContactList":addContact(addedContact:Contact)
+    activate ":ContactList"
+    ":ContactList" --> ":AddContactCommand"
+    deactivate ":ContactList"
+
+    ":AddContactCommand" -> ":TextUi":addContactMessage(addedContact:Contact, contactList.getSize():int)
+    activate ":TextUi"
+    ":TextUi" --> ":AddContactCommand"
+    deactivate ":TextUi"
+end
+
+@enduml
