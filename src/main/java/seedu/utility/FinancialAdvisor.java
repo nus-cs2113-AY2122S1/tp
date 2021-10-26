@@ -25,10 +25,14 @@ public class FinancialAdvisor {
     
     public String getRandomAdvice() {
         int bound = ADVICES.size();
-        if (bound > 0) {
+        if (isValidRandomRange(bound)) {
             int adviceIndex = random.nextInt(bound);
             return ADVICES.get(adviceIndex);
         }
         return Messages.DISPLAY_ADVICE_ERROR;
+    }
+
+    private boolean isValidRandomRange(int bound) {
+        return bound > 0;
     }
 }
