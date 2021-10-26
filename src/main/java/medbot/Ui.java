@@ -1,5 +1,10 @@
 package medbot;
 
+import medbot.list.PersonList;
+import medbot.utilities.ViewType;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,6 +14,7 @@ import java.util.Scanner;
 public class Ui {
     public static final String VERTICAL_LINE_SPACED_ESCAPED = " \\| ";
     public static final String VERTICAL_LINE_SPACED = " | ";
+    public static final String ENDLINE = System.lineSeparator();
 
     private Scanner inputScanner = new Scanner(System.in);
 
@@ -36,14 +42,14 @@ public class Ui {
      * Prints a welcome message when MedBot is first loaded.
      */
     public void printWelcomeMessageOne() {
-        printOutput("Hello, I'm MedBot!" + System.lineSeparator());
+        printOutput("Hello, I'm MedBot!");
     }
 
     /**
      * Prints a welcome message when MedBot file storage is successfully loaded.
      */
     public void printWelcomeMessageTwo() {
-        printOutput("How can I help you today?" + "\n\n");
+        printOutput("How can I help you today?" + ENDLINE);
     }
 
     /**
@@ -54,7 +60,7 @@ public class Ui {
      */
     public String getAddPatientMessage(int patientId) {
         assert patientId > 0;
-        return "Added patient with patient ID: " + patientId;
+        return "Added patient with patient ID: " + patientId + ENDLINE;
     }
 
     /**
@@ -65,7 +71,7 @@ public class Ui {
      */
     public String getDeletePatientMessage(int patientId) {
         assert patientId > 0;
-        return "Patient with id " + patientId + " deleted from system.";
+        return "Patient with id " + patientId + " deleted from system." + ENDLINE;
     }
 
     /**
@@ -76,8 +82,28 @@ public class Ui {
      */
     public String getEditPatientMessage(int patientId, String patientInfo) {
         assert patientId > 0;
-        return "The information of patient with ID " + patientId + " has been edited to:"
-                + System.lineSeparator() + patientInfo;
+        return "The information of patient with ID " + patientId + " has been edited to:" + ENDLINE + ENDLINE
+                + patientInfo + ENDLINE;
+    }
+
+    /**
+     * Returns the information of the filtered patients.
+     *
+     * @param patients the filtered patients to be printed.
+     * @return The information of the filtered patients
+     */
+    public String getFindPatientsMessage(List<String> patients) {
+        if (patients.size() == 0) {
+            return "There is no patient with such attributes." + ENDLINE;
+        }
+        String output = getPatientTableHeader();
+        for (String patient : patients) {
+            output += patient;
+        }
+        output += ENDLINE;
+        output += getPatientTableRowSeparator();
+
+        return output;
     }
 
     /**
@@ -86,7 +112,7 @@ public class Ui {
      * @return the exit Message
      */
     public String getExitMessage() {
-        return "Thank you for using MedBot!\nSee you again!";
+        return "Thank you for using MedBot!" + ENDLINE + "See you again!";
     }
 
     /**
@@ -96,7 +122,8 @@ public class Ui {
      * @return the Patient information
      */
     public String getPatientInfo(String patientInfo) {
-        return "Here's the requested patient:\n" + patientInfo;
+        return "Here's the requested patient:" + ENDLINE + ENDLINE
+                + patientInfo + ENDLINE;
     }
 
     /**
@@ -105,12 +132,41 @@ public class Ui {
      * @param patientList the list containing patients to be printed.
      * @return all Patients' information.
      */
-    public String getAllPatientsString(PatientList patientList) {
-        String output = "Here is a list of all patients:\n";
-        output += patientList.listPatients();
+    public String getAllPatientsString(PersonList patientList) {
+        String output = getPatientTableHeader();
+        output += patientList.listPersons(false);
+        output += getPatientTableRowSeparator();
 
         return output;
     }
+
+    private String getPatientTableHeader() {
+        String output = "Here is a list of all patients:" + ENDLINE;
+        output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE;
+        output += getPatientTableRowSeparator();
+        output += " |  ID  | IC Number |         Name         |"
+                + " Phone No. |        Email         |       Address        | " + ENDLINE;
+        output += getPatientTableRowSeparator();
+
+        return output;
+    }
+
+    private String getPatientTableRowSeparator() {
+        return " ------------------------------------------------"
+                + "----------------------------------------------------- " + ENDLINE;
+    }
+
+
+    /**
+     *
+     *
+     *
+     * HELP COMMANDS BELOW
+     *
+     *
+     *
+     */
+
 
     /**
      * Prints a list of all available commands.
@@ -118,37 +174,58 @@ public class Ui {
      * @return all supported commands.
      */
     public String getCommandList() {
-        return "Here are the list of commands:\n\n"
-                + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
-                + "exit\n" + "\n"
-                + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]\n\n"
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes";
+        return "Here are the list of commands:" + ENDLINE + ENDLINE
+                + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
+                + "find" + ENDLINE + "delete" + ENDLINE + "switch" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
+                + "help [COMMAND]" + ENDLINE + ENDLINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + ENDLINE;
     }
 
     /**
-     * Prints information about list command.
+     * Prints information about list command for the info views.
      *
      * @return the information on list command.
      */
-    public String getListHelpMessage() {
-        return "View information of all current patients.\n"
-                + "Format: list\n" + "Expected Output for 2 patients: \n"
+    public String getListInfoHelpMessage() {
+        return "View information of all current patients." + ENDLINE
+                + "Format: list" + ENDLINE
+                + "Expected Output for 2 patients: " + ENDLINE
                 + "Patient ID: [PATIENT_ID_1] IC: [PATIENT_IC]"
-                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n"
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + ENDLINE
                 + "Patient ID: [PATIENT_ID_2] IC: [PATIENT_IC]"
-                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n";
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + ENDLINE;
     }
 
     /**
-     * Prints information about help command.
+     * Prints information about list command for the scheduler view.
      *
-     * @return the information on help command.
+     * @return the information on list command.
      */
-    public String getViewHelpMessage() {
-        return "View a patient’s personal information.\n" + "Format: view PATIENT_ID\n"
-                + "Expected Output:\n" + "id: PATIENT_ID " + "name: NAME "
-                + "phone number: PHONE_NUMBER " + "email: EMAIL " + "address: ADDRESS\n";
+    public String getListAppointmentHelpMessage() {
+        return "View list of all appointments in the scheduler.";
+    }
+
+    /**
+     * Prints information about view command for the info views.
+     *
+     * @return the information on view command.
+     */
+    public String getViewInfoHelpMessage() {
+        return "View a patient’s personal information." + ENDLINE
+                + "Format: view PATIENT_ID" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "id: PATIENT_ID " + "name: NAME " + "phone number: PHONE_NUMBER "
+                + "email: EMAIL " + "address: ADDRESS" + ENDLINE;
+    }
+
+    /**
+     * Prints information about view command for the scheduler view.
+     *
+     * @return the information on view command.
+     */
+    public String getViewAppointmentHelpMessage() {
+        return "View a list of appointments that a person has.";
     }
 
     /**
@@ -156,12 +233,16 @@ public class Ui {
      *
      * @return the information on add command.
      */
-    public String getAddHelpMessage() {
-        return "Add a patient to the patient’s list.\n"
-                + "Format:\n"
-                + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
-                + "Expected output:\n"
-                + "Added patient with patient ID: PATIENT_ID";
+    public String getAddInfoHelpMessage() {
+        return "Add a patient to the patient’s list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Expected output:" + ENDLINE
+                + "Added patient with patient ID: PATIENT_ID" + ENDLINE;
+    }
+
+    public String getAddAppointmentHelpMessage() {
+        return "Add an appointment to the scheduler as well as to each individual's appointment lists.";
     }
 
     /**
@@ -169,14 +250,18 @@ public class Ui {
      *
      * @return the information on edit command.
      */
-    public String getEditHelpMessage() {
-        return "Edit the personal and medical information of a patient in the list.\n"
-                + "Format:\n"
-                + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
-                + "Expected output: \n"
-                + "The information of patient with ID PATIENT_ID has been edited to:\n"
+    public String getEditInfoHelpMessage() {
+        return "Edit the personal and medical information of a patient in the list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Expected output: " + ENDLINE
+                + "The information of patient with ID PATIENT_ID has been edited to:" + ENDLINE
                 + "Patient ID: [PATIENT_ID] IC: [PATIENT_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
-                + "Email: [EMAIL] Address: [ADDRESS] \n";
+                + "Email: [EMAIL] Address: [ADDRESS] " + ENDLINE;
+    }
+
+    public String getEditAppointmentHelpMessage() {
+        return "Edit an appointment within the list.";
     }
 
     /**
@@ -184,21 +269,56 @@ public class Ui {
      *
      * @return the information on delete command.
      */
-    public String getDeleteHelpMessage() {
-        return "Delete a patient from the list.\n"
-                + "Format:\n"
-                + "delete PATIENT_ID\n"
-                + "Expected Output:\n"
-                + "Patient with id PATIENT_ID deleted from system.\n";
+    public String getDeleteInfoHelpMessage() {
+        return "Delete a patient from the list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "delete PATIENT_ID" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
+    }
+
+    public String getDeleteAppointmentHelpMessage() {
+        return "Delete an appointment from the list.";
+    }
+
+    /**
+     * Prints information about find command.
+     *
+     * @return the information on find command.
+     */
+    public String getFindInfoHelpMessage() {
+        return "Find patients from the list based on given attributes." + ENDLINE
+                + "Format: find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "    * The attributes do not have to be in full." + ENDLINE
+                + "    * At least one attribute must be present." + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "Patient ID: PATIENT_ID IC: PATIENT_IC Name: NAME "
+                + "H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS" + ENDLINE;
+    }
+
+    /**
+     * Prints information about switch command.
+     *
+     * @return the information on switch command.
+     */
+    public String getSwitchHelpMessage() {
+        return "Switches between the different views of MedBot." + ENDLINE
+                + "Format: switch [VIEW_TYPE]" + ENDLINE
+                + "    * If the switch command is called without any parameters, the view that" + ENDLINE
+                + "    * is switched to will depend on the current view." + ENDLINE
+                + "(PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "[VIEW_TYPE_ASCI_TEXT_BANNER]" + ENDLINE + ENDLINE
+                + "View has been switched to [VIEW_TYPE]";
     }
 
     /**
      * Prints information about exit command.
      *
-     * @return the information on exot command.
+     * @return the information on exit command.
      */
     public String getExitHelpMessage() {
-        return "Exits the program.\n" + "Format: exit\n";
+        return "Exits the program." + ENDLINE + "Format: exit" + ENDLINE;
     }
 
     /**
@@ -207,7 +327,79 @@ public class Ui {
      * @return the error message on unrecognised command.
      */
     public String getUnrecognisedCommandHelpMessage() {
-        return "Sorry, that's not a recognised command. To view a list of commands, type:\n" + "help\n";
+        return "Sorry, that's not a recognised command. To view a list of commands, type:" + ENDLINE + "help" + ENDLINE;
+    }
+
+    /**
+     * Utility function that performs a pseudo-clear of the console. Use this for testing from within
+     * the IDE.
+     */
+    public static void clearConsoleFromIde() {
+        System.out.print(ENDLINE + ENDLINE + ENDLINE + ENDLINE + ENDLINE);
+    }
+
+    /**
+     * Utility function that clears the console. Does not work within the IDE console.
+     */
+    public static void clearConsole() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Error clearing the console");
+        }
+    }
+
+    /**
+     * Prints switched view message.
+     */
+    public void printSwitchedViewMessage(ViewType viewType) {
+        switch (viewType) {
+        case PATIENT_INFO:
+            System.out.println("  ___  _ _____ ___ ___ _  _ _____ \n"
+                    + " | _ \\/_\\_   _|_ _| __| \\| |_   _|\n"
+                    + " |  _/ _ \\| |  | || _|| .` | | |  \n"
+                    + " |_|/_/ \\_\\_|_|___|___|_|\\_| |_|  \n"
+                    + " |_ _| \\| | __/ _ \\               \n"
+                    + "  | || .` | _| (_) |              \n"
+                    + " |___|_|\\_|_|_\\___/    __         \n"
+                    + " \\ \\ / /_ _| __\\ \\    / /         \n"
+                    + "  \\ V / | || _| \\ \\/\\/ /          \n"
+                    + "   \\_/ |___|___| \\_/\\_/           \n"
+                    + "                                  ");
+            break;
+        case SCHEDULER:
+            System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
+                    + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
+                    + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"
+                    + " |___/\\___|_||_|___|___/_\\___/|____|___|_|_\\\n"
+                    + " \\ \\ / /_ _| __\\ \\    / /                   \n"
+                    + "  \\ V / | || _| \\ \\/\\/ /                    \n"
+                    + "   \\_/ |___|___| \\_/\\_/                     \n"
+                    + "                                            ");
+            break;
+        case MEDICAL_STAFF_INFO:
+            System.out.println("  ___ _____ _   ___ ___  \n"
+                    + " / __|_   _/_\\ | __| __| \n"
+                    + " \\__ \\ | |/ _ \\| _|| _|  \n"
+                    + " |___/_|_/_/_\\_\\_| |_|   \n"
+                    + " |_ _| \\| | __/ _ \\      \n"
+                    + "  | || .` | _| (_) |     \n"
+                    + " |___|_|\\_|_|_\\___/    __\n"
+                    + " \\ \\ / /_ _| __\\ \\    / /\n"
+                    + "  \\ V / | || _| \\ \\/\\/ / \n"
+                    + "   \\_/ |___|___| \\_/\\_/  \n"
+                    + "                         ");
+            break;
+        default:
+            break;
+
+        }
+
+        System.out.println("View has been switched to " + viewType);
     }
 
 
