@@ -33,6 +33,9 @@ public class Parser {
         case MODULEINFO:
             simplifiedUserResponse = removeFirstParam(userResponse, "moduleinfo");
             return ModuleInfoCommandParser.parse(simplifiedUserResponse);
+        case SET:
+            simplifiedUserResponse = removeFirstParam(userResponse, "set");
+            return SetCommandParser.parse(simplifiedUserResponse);
         case HELP:
             return HelpCommandParser.parse();
         case EXIT:

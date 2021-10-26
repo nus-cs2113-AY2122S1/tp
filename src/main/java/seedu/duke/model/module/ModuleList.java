@@ -37,21 +37,35 @@ public class ModuleList {
         }
     }
 
+    public Module getModule(String moduleCode) throws DukeException {
+        for (Module module : moduleList) {
+            if (module.getModuleCode().equals(moduleCode)) {
+                return module;
+            }
+        }
+        throw new DukeException("The module is not in the list.");
+    }
+
     public boolean isEmpty() {
         return moduleList.isEmpty();
     }
 
-    public void addModule(Module newModule) {
+    public void addModule(Module newModule) throws DukeException {
+        for (Module module : moduleList) {
+            if (module.getModuleCode().equals(newModule.getModuleCode())) {
+                throw new DukeException("You have already added that module.");
+            }
+        }
+        newModule.setGrade("NONE");
         moduleList.add(newModule);
     }
 
-    public void deleteModule(int moduleIndex) throws ModuleIndexException {
+    public void deleteModule(String moduleCode) throws DukeException {
         try {
-            moduleList.remove(moduleIndex);
-        } catch (IndexOutOfBoundsException e) {
-            throw new ModuleIndexException(Messages.ERROR_INVALID_INDEX);
-        } catch (NumberFormatException e) {
-            throw new ModuleIndexException(Messages.ERROR_INVALID_NUMBER);
+            Module module = getModule(moduleCode);
+            moduleList.remove(module);
+        } catch (NullPointerException e) {
+            throw new DukeException("The module is not in the list.");
         }
     }
 
@@ -76,6 +90,25 @@ public class ModuleList {
 
     public void deleteAllModules() {
         moduleList.clear();
+    }
+
+    public double calculateCap() {
+        int totalModuleCredit = 0;
+        double totalWeightedGradePoint = 0;
+        for (Module module : moduleList) {
+            String actualGrade = module.getGrade();
+            double gradePoint = module.getGradePoint(actualGrade);
+            boolean isGradePointValid = (gradePoint >= 0);
+            if (isGradePointValid) {
+                int moduleCredit = Integer.parseInt(module.getModuleCredit());
+                totalModuleCredit += moduleCredit;
+                totalWeightedGradePoint += moduleCredit * gradePoint;
+            }
+        }
+        if (totalModuleCredit == 0) {
+            return -1;
+        }
+        return totalWeightedGradePoint / totalModuleCredit;
     }
 
     @Override

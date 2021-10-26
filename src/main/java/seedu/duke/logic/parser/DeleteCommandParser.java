@@ -54,8 +54,8 @@ public class DeleteCommandParser {
 
     private static Command parseDeleteModuleCommand(String userResponse) throws ParseException {
         try {
-            int moduleIndex = parseToZeroIndex(Integer.parseInt(userResponse));
-            return new DeleteModuleCommand(moduleIndex);
+            String moduleCode = userResponse.toUpperCase();
+            return new DeleteModuleCommand(moduleCode);
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.ERROR_INVALID_NUMBER);
         }

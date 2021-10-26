@@ -56,7 +56,7 @@ public class ListCommandParser {
     }
 
     private static Command parseListModuleCommand(String userResponse) throws ParseException {
-        if (!userResponse.isBlank() && !isAll(userResponse)) {
+        if (!userResponse.isBlank() && !isAll(userResponse) && !userResponse.equals("grade")) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 

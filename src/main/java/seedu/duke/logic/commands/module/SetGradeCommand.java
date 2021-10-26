@@ -11,19 +11,22 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
-public class DeleteModuleCommand extends Command {
-    private final String moduleCode;
+public class SetGradeCommand extends Command {
+    private String moduleCode;
+    private String grade;
 
-    public DeleteModuleCommand(String moduleCode) {
+    public SetGradeCommand(String moduleCode, String grade) {
         this.moduleCode = moduleCode;
+        this.grade = grade;
     }
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        Module deletedModule = moduleList.getModule(moduleCode);
-        moduleList.deleteModule(moduleCode);
+        Module module = moduleList.getModule(moduleCode);
+        module.setGrade(grade);
+        assert (module.getGrade() != null) : "module should have a valid grade";
         storage.saveData(moduleList);
-        ui.printModuleDeleted(deletedModule, moduleList.getSize());
+        ui.printModuleWithGradeChanged(module);
     }
 }
