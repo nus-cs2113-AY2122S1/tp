@@ -88,8 +88,8 @@ public class SaveLoader {
 
     /**
      * This function reads from the save.txt file.
-     * Each line is a command to create a trip object or the corresponding day/item objects, to replicate the previous state
-     * before Traveller was closed.
+     * Each line is a command to create a trip object or the corresponding day/item objects,
+     * to replicate the previous state before Traveller was closed.
      * When a line is an invalid command, it will print an error message and disregard that line.
      * @throws SaveDataNotFoundException The save file doesn't exist.
      */
@@ -125,7 +125,8 @@ public class SaveLoader {
     }
 
     /**
-     * This function writes to save.txt the minimal number of commands to recreate the trip objects and their corresponding days/list.
+     * This function writes to save.txt the minimal number of commands to recreate the trip objects
+     * and their corresponding days/list.
      * Each line written is a command in the format of commands that is written by the user.
      * @throws IOException If an I/O error occurs due to file writer class.
      * @throws TravellerException If an error occurs in referencing the current trip.
@@ -146,7 +147,7 @@ public class SaveLoader {
 
     /**
      * Creates save.txt. Is called if the save text file doesn't exist.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs due to file class.
      */
     private void createSave() throws IOException {
         File save = new File(filePath);

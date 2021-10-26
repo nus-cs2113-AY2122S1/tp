@@ -25,7 +25,7 @@ public class DataLoader {
     /**
      * This function is responsible for adding the countries (vertexes).
      * @param countryCodes The relevant line that is read from the text file.
-     * @param graphList
+     * @param graphList The graphList that contains the country and distance matrices.
      * @throws IllegalFlightFileException When the text file contains unreadable data. (Invalid Country Codes)
      */
     protected void loadCountries(String[] countryCodes, GraphList graphList) throws IllegalFlightFileException {
@@ -71,7 +71,8 @@ public class DataLoader {
     }
 
     /**
-     * This is the main function of the class. It reads the text file for information and passes the countries and distances to be added to the world map.
+     * This is the main function of the class. It reads the text file for information
+     * and passes the countries and distances to be added to the world map.
      * The first line read contains the countries, while the remaining lines read contains the distances.
      * @return graphlist which contains the Country (vertex) matrix and Distance (edge matrix).
      * @throws WorldMapException When the text file doesn't exist or when it contains invalid data.
@@ -110,7 +111,8 @@ public class DataLoader {
     }
 
     /**
-     * This is the main function of the class. It reads the text file for information and passes the countries and costs to be added to the world map.
+     * This is the main function of the class. It reads the text file for information
+     * and passes the countries and costs to be added to the world map.
      * The first line read contains the countries, while the remaining lines read contains the costs.
      * @return graphlist which contains the Country (vertex) matrix and Cost (edge matrix).
      * @throws WorldMapException When the text file doesn't exist or when it contains invalid data.
