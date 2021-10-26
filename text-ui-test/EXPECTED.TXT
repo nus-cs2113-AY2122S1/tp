@@ -92,25 +92,25 @@ Enter your command: 1. 	c a b
 Enter your command: 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved:
+	People involved: 
 	1. yikai 1.0
 	2. josh 1.0
 	Payer: josh
 	Category: breakfast
 
-Enter your command: Please format your inputs as follows:
+Enter your command: Please format your inputs as follows: 
 view filter [category, payer, description, person] [search keyword]
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
-Enter your command: List of Expenses:
+Enter your command: List of Expenses: 
 	1. c a b | 19 Oct 2021
 	2. d a c | 19 Oct 2021
 	3. d a c | 19 Oct 2021
-Enter your command: List of all Expenses in detail:
+Enter your command: List of all Expenses in detail: 
 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
-	People involved:
+	People involved: 
 	1. yikai 5.0
 	2. yuzhao 1.0
 	3. qian 2.0
@@ -120,7 +120,7 @@ Enter your command: List of all Expenses in detail:
 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
-	People involved:
+	People involved: 
 	1. yikai 0.33
 	2. josh 0.33
 	3. xiyuan 0.34
@@ -130,7 +130,7 @@ Enter your command: List of all Expenses in detail:
 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
-	People involved:
+	People involved: 
 	1. yikai 1.0
 	2. josh 1.0
 	Payer: josh
@@ -139,14 +139,14 @@ Enter your command: List of all Expenses in detail:
 Enter your command: Your expense of USD $1.00 has been successfully removed
 Enter your command: Your expense of USD $8.00 has been successfully removed
 Enter your command: Your expense of USD $2.00 has been successfully removed
-Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
+Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
+yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
+qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
+josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split:
+xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
 Enter your command: Exiting the program now. Goodbye!
