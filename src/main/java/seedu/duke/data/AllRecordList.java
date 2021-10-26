@@ -1,10 +1,13 @@
 package seedu.duke.data;
 
+import seedu.duke.commands.Command;
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
+import seedu.duke.textfiletools.ReadTextFile;
 import seedu.duke.textfiletools.WriteToTextFile;
+import seedu.duke.ui.TextUi;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +18,9 @@ import java.util.Hashtable;
  * where month ranges from 1 to 12.
  */
 public class AllRecordList {
+    public static final String LS = System.lineSeparator();
+    private static final String DIVIDER = "========================================================";
+
     public final Hashtable<Integer, RecordList> allRecordList;
     public static String storageDirectory;
 
@@ -26,6 +32,10 @@ public class AllRecordList {
         for (int i = 1; i <= 12; i++) {
             allRecordList.put(i, new RecordList(i));
         }
+    }
+
+    public void statIntro(AllRecordList recordList) {
+        TextUi.statsIntro(recordList);
     }
 
     private void saveToStorage(String storageDirectory) {

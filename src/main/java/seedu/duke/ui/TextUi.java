@@ -1,9 +1,13 @@
 package seedu.duke.ui;
 
+import seedu.duke.commands.Command;
+import seedu.duke.commands.StatYearCommand;
 import seedu.duke.data.AllRecordList;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,6 +44,24 @@ public class TextUi {
     //    }
 
     public static void showWelcomeMessage() {
+        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println();
+        System.out.println(DIVIDER + LS
+                + "Current Date and Time: "+ dateTime.format(now) + LS);
+        System.out.println("Database will be set to: "
+                + now.getYear());
+        Delay.wait(1000);
+
+        System.out.println(DIVIDER + LS
+                + "If you like to change the database, "
+                + "please use the \"year DATABASE_YEAR\" command");
+
+        System.out.println();
+
+        System.out.println("Loading... Please Wait");
+        Delay.loadingBar(40);
+
         System.out.println(DIVIDER + LS
                 + LOGO + LS
                 + "    Hello! I'm Budget Tracker\n"
@@ -70,17 +92,22 @@ public class TextUi {
             double amountLeft = amount - totalSpending;
 
             double percentageLeft;
-            if (amountLeft > 0) {
+            if (amount == 0) {
+                System.out.println("Your Budget is: $0.00");
+                System.out.println("Have you forgotten to enter the budget first?");
+            } else if (amountLeft > 0) {
                 percentageLeft = (amountLeft / amount) * 100;
                 System.out.print("Percentage of Budget Left: ");
+                System.out.printf("%.2f", percentageLeft);
+                System.out.println("%");
+                System.out.println(DIVIDER);
             } else {
                 percentageLeft = (totalSpending / amount) * 100;
                 System.out.print("You overspend your Budget by: ");
+                System.out.printf("%.2f", percentageLeft);
+                System.out.println("%");
+                System.out.println(DIVIDER);
             }
-
-            System.out.printf("%.2f", percentageLeft);
-            System.out.println("%");
-            System.out.println(DIVIDER);
         }
     }
 
@@ -290,6 +317,17 @@ public class TextUi {
      */
     public static void printDivider() {
         System.out.println(DIVIDER);
+    }
+
+    public static void statsIntro(AllRecordList recordList) {
+        Command command = new StatYearCommand(1);
+        command.setRecordList(recordList);
+
+        ((StatYearCommand) command).overallStatisticsIntro();
+
+        Delay.wait(500);
+        System.out.println();
+        Delay.loadingBar(40);
     }
 
 

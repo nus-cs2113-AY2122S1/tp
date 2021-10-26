@@ -1,6 +1,15 @@
 package seedu.duke.ui;
 
 public class Delay {
+    public static void loadingBar(int ms) {
+        for (int i = 0; i < 56; i++) {
+            System.out.print("=");
+            wait(ms);
+        }
+
+        System.out.println();
+    }
+
     /**
      * Causes a delay in execution of code for specified duration
      * in ms before returning control back to the caller of this
