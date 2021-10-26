@@ -10,11 +10,13 @@ Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more 
 conventional GUI apps.
 
 You can find out more about _Ha(ppy)Bit_'s Developer Guide or 
-its developers (us!) at our [Main Page](README.md).
+its developers (😀 us!) at our [Main Page](README.md).
 
 * [Quick Start](#quick-start)
-* [Navigation](#navigation)
-* [Terminology](#terminology)
+  * [Loading Screen Navigation](#loading-screen-navigation)
+* [Using this Guide](#using-this-guide)
+  * [Terminology](#terminology)
+  * [Icons & Format]()
 * [Features](#features)
     * [Ask for Help: `help`](#ask-for-help-help)
     * [Set a Goal: `set`](#set-a-goal-set)
@@ -34,12 +36,12 @@ its developers (us!) at our [Main Page](README.md).
 ## Quick Start
 
 1. Ensure you have Java `11` installed in your computer. If you do not have it installed,
-   download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+   download it [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
 5. Run the file by typing the command `java -jar tp.jar`.
-6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app.
+6. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
 
    ```
    ==============================================================================
@@ -59,8 +61,9 @@ its developers (us!) at our [Main Page](README.md).
     
     Option:
    ```
+Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
-## Navigation
+### Loading Screen Navigation
 In the current loading screen, users will be able to execute the following actions based on the number they input.
 1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
 
@@ -128,13 +131,37 @@ In the current loading screen, users will be able to execute the following actio
     
     Command:
     ```
+Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
-## Terminology
+## Using this Guide
+We understand there may a lot to take in from this user guide. Here are some things to take note
+of which make the guide more friendly and helpful.
+
+### Terminology
 
 Name  | Description | Example
------ | --------------------------------------------------------- | -------------------
-Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
-Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`
+----- | ---------------------------------------------------------------- | -------------------
+Goal  | A long term achievement you wish to accomplish.                  |`Lose 5kg by Dec`
+Habit | Checkpoints; small, actionable tasks to be done to achieve goal. | `Run 5km`
+
+Here we distinguish between goals and habits. Although they are commonly used words, the way we
+design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
+to know that the purpose of `habits` is to break down daunting, colossal `goals` into easy, bite-sized
+`habits`; tasks that you can complete within a day.
+
+### Icons & Format
+Unfamiliar symbols may confuse. Here is comprehensive collection of all emojis and syntax we employ.  
+
+> 📃 **Notes**: {explanation here}
+
+> ⚠ **Warning**:  {explanation here}
+ 
+> 💡 **Pro-Tip!** {explanation here} are we targeting advance and basic users?
+> then we need to use this strategically.
+
+> 😀 &#8594; Used to show developers' exuberance.
+
+------
 
 >  📃 **Notes about command format:**
 > * words enclosed in angle brackets, `<>` are the parameters which is the input the user is supposed to provide.
