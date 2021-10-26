@@ -238,6 +238,7 @@ public class TaskManager implements Subject {
         }
     }
 
+    //@@author SeanRobertDH
     public void checkFilteredListIndexValid(int index) throws InvalidTaskIndexException {
         if (index < 0 || index > latestFilteredList.size() - 1) {
             throw new InvalidTaskIndexException(++index);
@@ -249,6 +250,7 @@ public class TaskManager implements Subject {
         taskList.clear();
     }
 
+    //@@author SeanRobertDH
     public Task deleteTask(int index) throws InvalidTaskIndexException {
         checkIndexValid(index);
         Task deletedTask = taskList.remove(index);
@@ -256,6 +258,7 @@ public class TaskManager implements Subject {
         return deletedTask;
     }
 
+    //@@author SeanRobertDH
     public Task deleteFilteredTask(int index) throws InvalidTaskIndexException {
         checkFilteredListIndexValid(index);
         Task deletedTask = latestFilteredList.remove(index);
