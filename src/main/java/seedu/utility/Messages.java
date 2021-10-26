@@ -36,10 +36,10 @@ public class Messages {
     public static final String BLANK_CATEGORY_MESSAGE = "Your category is empty!";
     public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a DD/MM/YYYY format!";
     public static final String ALL_DATA_CLEARED = "All your entries have been cleared!";
-    public static final String INVALID_EXPENSE_CATEGORY_MESSAGE = "Input only 1 of these 5 categories: Food, " 
-            + "Transport, Bills, Medical or Entertainment.";
-    public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 3 categories: Salary, " 
-            + "Allowance or Adhoc.";
+    public static final String INVALID_EXPENSE_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, " 
+            + "Transport, Bills, Medical, Entertainment or Misc.";
+    public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 4 categories: Salary, " 
+            + "Allowance, Adhoc, or Others.";
     public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
             + "Transport, Bills, Medical, Entertainment or Overall";
     public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
