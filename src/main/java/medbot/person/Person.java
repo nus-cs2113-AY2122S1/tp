@@ -1,11 +1,9 @@
 package medbot.person;
 
 
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
-import static medbot.ui.Ui.END_LINE;
-
 import java.util.LinkedList;
 
+import java.util.List;
 import medbot.list.ListItem;
 
 import medbot.Appointment;
@@ -23,6 +21,8 @@ public abstract class Person extends ListItem {
     private static final int PARAMETER_BUFFER = 2;
 
     private static final String SPACE = " ";
+    private static final String END_LINE = System.lineSeparator();
+    private static final String VERTICAL_LINE_SPACED = " | ";
 
     private static final int LENGTH_ID_COLUMN = 4;
     private static final int LENGTH_IC_COLUMN = 9;
@@ -168,7 +168,7 @@ public abstract class Person extends ListItem {
         personalAppointmentList.deleteAppointment(dateTimeCode);
     }
 
-    public String listAppointments(FilterType filterType, int dateTimeCode) {
+    public List<Integer> listAppointments(FilterType filterType, int dateTimeCode) {
         switch (filterType) {
         case BEFORE:
             return personalAppointmentList.listAppointmentsBefore(dateTimeCode);
