@@ -60,6 +60,14 @@ The other core components of SEPlanner are:
 `Storage` : Loads data from, and stores data back to the user's local machine.  
 `UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.  
 
+### Command Interaction 
+
+<p align = "center">
+<img src="images/CommandInteraction.png" width = "800" />
+</p>
+
+The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
+is entered. 
 
 ### Command Implementation
 
@@ -94,7 +102,7 @@ The Ui component consolidates and formats the output of the program before displ
 in the command line. 
 
 <p align = "center">
-<img src="images/Ui_UML" width = "800" />
+<img src="images/Ui_UML.png" width = "800" />
 </p>
 
 The above class diagram illustrates the relationship between the classes within the Ui components.
