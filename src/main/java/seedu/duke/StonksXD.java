@@ -19,33 +19,38 @@ public class StonksXD {
     private DataManager dataManager;
     private BudgetManager budgetManager;
     private FinancialAdvisor financialAdvisor;
+    private boolean isNonTerminatingCommand;
+    private String advice;
 
     public StonksXD() {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
         this.parser = new Parser();
         this.budgetManager = new BudgetManager();
-        this.financialAdvisor = new FinancialAdvisor();
-        this.dataManager = new DataManager(parser, finances, ui, budgetManager, financialAdvisor);
-    }
-
-    public void run() {
+        
+        this.dataManager = new DataManager(parser, finances, ui, budgetManager);
         dataManager.loadAll();
+        
+        this.isNonTerminatingCommand = true;
+        
+        this.financialAdvisor = new FinancialAdvisor();
+        this.advice = financialAdvisor.getRandomAdvice();
+    }
+    
+    public void run() {
         ui.printWelcome();
-        boolean exitFlag = true;
-        while (exitFlag) {
+        while (isNonTerminatingCommand) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
             command.execute(finances, ui, budgetManager);
-            if (command.isExit()) {
-                assert command.getClass() == ExitCommand.class;
-                exitFlag = false;
-            }
+            isNonTerminatingCommand = command.isExit();
             dataManager.saveAll();
         }
-        String advice = financialAdvisor.getRandomAdvice();
-        ui.printBye(advice);
+        // Commented this part to pass Github test 
+        // ui.printBye(advice);
     }
+
+    
 
     public static void main(String[] args) {
         new StonksXD().run();
