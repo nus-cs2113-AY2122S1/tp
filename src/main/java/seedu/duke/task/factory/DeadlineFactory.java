@@ -1,7 +1,7 @@
 package seedu.duke.task.factory;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.util.Map;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
@@ -14,10 +14,11 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Deadline;
 
+//@@author SeanRobertDH
 public class DeadlineFactory {
     private static final TypeEnum taskType = TypeEnum.DEADLINE;
 
-    public static Deadline getDeadline(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Deadline getDeadline(Map<String, String> flags) throws GetTaskFailedException {
         try {
             checkForRequiredArguments(flags);
 
@@ -26,7 +27,7 @@ public class DeadlineFactory {
             String priority = flags.get(DeadlineFlag.PRIORITY);
             String recurrence = flags.get(DeadlineFlag.RECURRENCE);
 
-            Date dueDate = TaskParser.getDate(due);
+            LocalDateTime dueDate = TaskParser.getDate(due);
             PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
             RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
@@ -43,7 +44,7 @@ public class DeadlineFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(Map<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : DeadlineFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
@@ -54,7 +55,7 @@ public class DeadlineFactory {
     }
 
     private static Deadline getConstructor(String description,
-            Date due, PriorityEnum priority, RecurrenceEnum recurrence) {
+            LocalDateTime due, PriorityEnum priority, RecurrenceEnum recurrence) {
         if (priority == null) {
             return getDeadlineWithDefaultPriority(description, due, recurrence);
         } else {
@@ -62,7 +63,8 @@ public class DeadlineFactory {
         }
     }
 
-    private static Deadline getDeadlineWithDefaultPriority(String description, Date due, RecurrenceEnum recurrence) {
+    private static Deadline getDeadlineWithDefaultPriority(String description,
+            LocalDateTime due, RecurrenceEnum recurrence) {
         if (recurrence == null) {
             return new Deadline(description, due);
         } else {
@@ -71,7 +73,7 @@ public class DeadlineFactory {
     }
 
     private static Deadline getDeadlineWithPriority(String description,
-            Date due, PriorityEnum priority, RecurrenceEnum recurrence) {
+            LocalDateTime due, PriorityEnum priority, RecurrenceEnum recurrence) {
         if (recurrence == null) {
             return new Deadline(description, due, priority);
         } else {

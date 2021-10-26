@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author SeanRobertDH
 public class HelpCommand extends Command {
 
     private static final CommandEnum COMMAND = CommandEnum.HELP;

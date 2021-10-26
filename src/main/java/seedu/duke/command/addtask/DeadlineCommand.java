@@ -1,15 +1,17 @@
 package seedu.duke.command.addtask;
 
-import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.command.CommandEnum;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.task.Task;
 import seedu.duke.task.factory.DeadlineFactory;
 
+//@@author SeanRobertDH
 public class DeadlineCommand extends TaskCommand {
     private static final CommandEnum COMMAND = CommandEnum.DEADLINE;
 
-    public DeadlineCommand(HashMap<String, String> commandArguments) {
+    public DeadlineCommand(Map<String, String> commandArguments) {
         super(COMMAND, commandArguments);
     }
 

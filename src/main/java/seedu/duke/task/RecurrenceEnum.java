@@ -1,9 +1,24 @@
 package seedu.duke.task;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import seedu.duke.exception.InvalidRecurrenceException;
 
+//@@author SeanRobertDH
 public enum RecurrenceEnum {
-    NONE, DAILY, WEEKLY, MONTHLY, YEARLY;
+    NONE(null),
+    DAILY(ChronoUnit.DAYS),
+    WEEKLY(ChronoUnit.WEEKS),
+    MONTHLY(ChronoUnit.MONTHS),
+    YEARLY(ChronoUnit.YEARS);
+
+    private final ChronoUnit chronoUnit;
+
+    RecurrenceEnum(ChronoUnit chronoUnit) {
+        this.chronoUnit = chronoUnit;
+    }
 
     /**
      * Returns the name of enum in lowercase.
@@ -15,6 +30,17 @@ public enum RecurrenceEnum {
         return super.toString().toLowerCase();
     }
 
+    public List<LocalDateTime> getNextNRecurredDates(LocalDateTime date, int n) {
+        ArrayList<LocalDateTime>  recurredDates = new ArrayList<>(n);
+        if (this == NONE) {
+            return recurredDates;
+        }
+        for (int i = 1; i <= n; i++) {
+            recurredDates.add(date.plus(i, chronoUnit));
+        }
+        return recurredDates;
+    }
+
     public static RecurrenceEnum getRecurrence(String recurrence) throws InvalidRecurrenceException {
         for (RecurrenceEnum recurrenceEnum : values()) {
             if (recurrence.equalsIgnoreCase(recurrenceEnum.name())) {
@@ -22,17 +48,5 @@ public enum RecurrenceEnum {
             }
         }
         throw new InvalidRecurrenceException(recurrence);
-    }
-
-    public static String getRecurrencesListString(String argumentSplit) {
-        String listString = "%s";
-        for (RecurrenceEnum recurrence : RecurrenceEnum.values()) {
-            if (recurrence == NONE) {
-                continue;
-            }
-            listString = String.format(listString, recurrence.toString() + argumentSplit + "%s");
-        }
-        listString = listString.replaceAll("%s", "");
-        return listString.substring(0, listString.length() - 1);
     }
 }

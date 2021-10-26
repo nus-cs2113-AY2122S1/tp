@@ -3,8 +3,6 @@ package seedu.duke.task.reminder;
 import seedu.duke.task.RecurrenceEnum;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.sql.Timestamp;
 
 public class Reminder {
     private static final long BUFFER_SECOND = 30;
@@ -19,8 +17,8 @@ public class Reminder {
         this.reminderDone = false;
     }
 
-    public Reminder(Date time) {
-        this.taskTime = new Timestamp(time.getTime()).toLocalDateTime();
+    public Reminder(LocalDateTime time) {
+        this.taskTime = time;
         this.reminderTime = taskTime.minusMinutes(userTime);
         setReminderDone();
     }

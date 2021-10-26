@@ -1,7 +1,7 @@
 package seedu.duke.task.factory;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.util.Map;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
@@ -15,10 +15,11 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Event;
 
+//@@author SeanRobertDH
 public class EventFactory {
     private static final TypeEnum taskType = TypeEnum.EVENT;
 
-    public static Event getEvent(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Event getEvent(Map<String, String> flags) throws GetTaskFailedException {
         try {
             checkForRequiredArguments(flags);
 
@@ -28,12 +29,12 @@ public class EventFactory {
             String priority = flags.get(EventFlag.PRIORITY);
             String recurrence = flags.get(EventFlag.RECURRENCE);
 
-            Date startDate = TaskParser.getDate(start);
-            Date endDate = TaskParser.getDate(end);
+            LocalDateTime startDate = TaskParser.getDate(start);
+            LocalDateTime endDate = TaskParser.getDate(end);
             PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
             RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
-            if (startDate.after(endDate)) {
+            if (startDate.isAfter(endDate)) {
                 throw new StartDateAfterEndDateException();
             }
 
@@ -51,7 +52,7 @@ public class EventFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(Map<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : EventFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
@@ -62,7 +63,7 @@ public class EventFactory {
     }
 
     private static Event getConstructor(String description,
-            Date start, Date end, PriorityEnum priority, RecurrenceEnum recurrence) {
+            LocalDateTime start, LocalDateTime end, PriorityEnum priority, RecurrenceEnum recurrence) {
         if (priority == null) {
             return getEventWithDefaultPriority(description, start, end, recurrence);
         } else {
@@ -71,7 +72,7 @@ public class EventFactory {
     }
 
     private static Event getEventWithDefaultPriority(String description,
-            Date start, Date end, RecurrenceEnum recurrence) {
+            LocalDateTime start, LocalDateTime end, RecurrenceEnum recurrence) {
         if (recurrence == null) {
             return new Event(description, start, end);
         } else {
@@ -80,7 +81,7 @@ public class EventFactory {
     }
 
     private static Event getEventWithPriority(String description,
-            Date start, Date end, PriorityEnum priority, RecurrenceEnum recurrence) {
+            LocalDateTime start, LocalDateTime end, PriorityEnum priority, RecurrenceEnum recurrence) {
         if (recurrence == null) {
             return new Event(description,
                 start, end, priority);

@@ -1,6 +1,7 @@
 package seedu.duke.command.addtask;
 
-import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
@@ -8,10 +9,11 @@ import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 
+//@@author SeanRobertDH
 public abstract class TaskCommand extends Command {
     private static String TASK_CREATED_MESSAGE = "Task created!\n%s";
 
-    public TaskCommand(CommandEnum command, HashMap<String, String> commandArguments) {
+    public TaskCommand(CommandEnum command, Map<String, String> commandArguments) {
         super(command, commandArguments);
     }
 

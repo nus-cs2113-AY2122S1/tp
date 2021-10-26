@@ -3,6 +3,7 @@ package seedu.duke.log;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -10,6 +11,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+//@@author SeanRobertDH
 public class Log {
 
     private static final Level DEFAULT_CONSOLE_SEVERITY = Level.SEVERE;
@@ -20,10 +22,13 @@ public class Log {
 
     private static final int METHOD_STACKTRACE_POSITION = 3;
 
-    private static HashMap<String, Logger> loggers = new HashMap<>();
+    private static final boolean DO_APPEND_TO_FILE = true;
+    private static final boolean USE_DEFAULT_HANDLERS = false;
 
-    public static FileHandler getFileHandler() throws IOException {
-        FileHandler fileHandler = new FileHandler(LOG_FILE_NAME, true);
+    private static Map<String, Logger> loggers = new HashMap<>();
+
+    private static FileHandler getFileHandler() throws IOException {
+        FileHandler fileHandler = new FileHandler(LOG_FILE_NAME, DO_APPEND_TO_FILE);
         fileHandler.setLevel(DEFAULT_LOG_FILE_SEVERITY);
         return fileHandler;
     }
@@ -34,18 +39,22 @@ public class Log {
         if (loggers.containsKey(className)) {
             return loggers.get(className);
         } else {
-            Logger logger = Logger.getLogger(className);
-            logger.setUseParentHandlers(false);
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setLevel(DEFAULT_CONSOLE_SEVERITY);
-
-            consoleHandler.setFormatter(getLogFormat());
-
-            logger.addHandler(consoleHandler);
-
-            loggers.put(className, logger);
-            return logger;
+            return createLogger(className);
         }
+    }
+
+    private static Logger createLogger(String className) {
+        Logger logger = Logger.getLogger(className);
+        logger.setUseParentHandlers(USE_DEFAULT_HANDLERS);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(DEFAULT_CONSOLE_SEVERITY);
+
+        consoleHandler.setFormatter(getLogFormat());
+
+        logger.addHandler(consoleHandler);
+
+        loggers.put(className, logger);
+        return logger;
     }
 
     private static SimpleFormatter getLogFormat() {
@@ -61,81 +70,41 @@ public class Log {
         };
     }
 
-    public static void fine(String message) {
+    private static void logMessage(Level level, String message) {
         Logger logger = getLogger();
         try {
             FileHandler fileHandler = getFileHandler();
             fileHandler.setFormatter(getLogFormat());
             logger.addHandler(fileHandler);
-            logger.fine(message);
+            logger.log(level, message);
             fileHandler.close();
         } catch (IOException ioe) {
-            logger.severe(IOEXCEPTION_MESSAGE);
-        }
-    }
-
-    public static void finer(String message) {
-        Logger logger = getLogger();
-        try {
-            FileHandler fileHandler = getFileHandler();
-            fileHandler.setFormatter(getLogFormat());
-            logger.addHandler(fileHandler);
-            logger.finer(message);
-            fileHandler.close();
-        } catch (IOException ioe) {
+            //The console logger still works, so we log a message to console.
             logger.severe(IOEXCEPTION_MESSAGE);
         }
     }
 
     public static void finest(String message) {
-        Logger logger = getLogger();
-        try {
-            FileHandler fileHandler = getFileHandler();
-            fileHandler.setFormatter(getLogFormat());
-            logger.addHandler(fileHandler);
-            logger.finest(message);
-            fileHandler.close();
-        } catch (IOException ioe) {
-            logger.severe(IOEXCEPTION_MESSAGE);
-        }
+        logMessage(Level.FINEST, message);
+    }
+
+    public static void finer(String message) {
+        logMessage(Level.FINER, message);
+    }
+
+    public static void fine(String message) {
+        logMessage(Level.FINE, message);
     }
 
     public static void info(String message) {
-        Logger logger = getLogger();
-        try {
-            FileHandler fileHandler = getFileHandler();
-            fileHandler.setFormatter(getLogFormat());
-            logger.addHandler(fileHandler);
-            logger.info(message);
-            fileHandler.close();
-        } catch (IOException ioe) {
-            logger.severe(IOEXCEPTION_MESSAGE);
-        }
-    }
-
-    public static void severe(String message) {
-        Logger logger = getLogger();
-        try {
-            FileHandler fileHandler = getFileHandler();
-            fileHandler.setFormatter(getLogFormat());
-            logger.addHandler(fileHandler);
-            logger.severe(message);
-            fileHandler.close();
-        } catch (IOException ioe) {
-            logger.severe(IOEXCEPTION_MESSAGE);
-        }
+        logMessage(Level.INFO, message);
     }
 
     public static void warning(String message) {
-        Logger logger = getLogger();
-        try {
-            FileHandler fileHandler = getFileHandler();
-            fileHandler.setFormatter(getLogFormat());
-            logger.addHandler(fileHandler);
-            logger.warning(message);
-            fileHandler.close();
-        } catch (IOException ioe) {
-            logger.severe(IOEXCEPTION_MESSAGE);
-        }
+        logMessage(Level.WARNING, message);
+    }
+
+    public static void severe(String message) {
+        logMessage(Level.SEVERE, message);
     }
 }

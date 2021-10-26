@@ -2,6 +2,7 @@ package seedu.duke.task;
 
 import seedu.duke.exception.InvalidPriorityException;
 
+//@@author SeanRobertDH
 public enum PriorityEnum {
     HIGH(2),
     MEDIUM(1),
@@ -27,6 +28,22 @@ public enum PriorityEnum {
         return super.toString().toLowerCase();
     }
 
+    ////@@author APZH
+    public boolean isLowerPriorityThan(PriorityEnum comparison) {
+        return this.getValue() < comparison.getValue();
+    }
+
+    ////@@author APZH
+    public boolean isEqualPriorityTo(PriorityEnum comparison) {
+        return this == comparison;
+    }
+
+    ////@@author APZH
+    public boolean isHigherPriorityThan(PriorityEnum comparison) {
+        return this.getValue() > comparison.getValue();
+    }
+
+    //@@author SeanRobertDH
     /**
      * Returns the Priority enum corresponding to int argument.
      *
@@ -50,12 +67,5 @@ public enum PriorityEnum {
         throw new InvalidPriorityException(priority);
     }
 
-    public static String getPrioritiesListString(String argumentSplit) {
-        String listString = "%s";
-        for (PriorityEnum priority : PriorityEnum.values()) {
-            listString = String.format(listString, priority.toString() + argumentSplit + "%s");
-        }
-        listString = listString.replaceAll("%s", "");
-        return listString.substring(0, listString.length() - 1);
-    }
+
 }
