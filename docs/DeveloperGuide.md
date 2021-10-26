@@ -94,9 +94,18 @@ corresponding `ContactList` and `Contact` objects. It is thus dependent on the c
 
 ## <a name="implementation"></a>Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### <a name="supported-details"></a>Supported Contact Details
+The currently supported contact details are provided in the table below:
 
-{NOT DONE}
+|Flag|Detail of contact|
+|----|------|
+|`-n`|Name|
+|`-g`|Github username|
+|`-l`|LinkedIn handle|
+|`-te`|Telegram handle|
+|`-tw`|Twitter handle|
+|`-e`|Email|
+
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
