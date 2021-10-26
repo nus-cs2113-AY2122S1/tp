@@ -1,6 +1,7 @@
-package taa.command;
+package taa.command.student;
 
 //@@author hozhenhong99
+import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
@@ -10,16 +11,18 @@ import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class DeleteCommentCommand extends Command {
+public class SetCommentCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
-    private static final String[] DELETE_COMMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
+    private static final String KEY_STUDENT_COMMENT = "t";
+    private static final String[] SET_COMMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX, KEY_STUDENT_COMMENT};
 
-    private static final String MESSAGE_FORMAT_DELETE_COMMAND_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
-    private static final String MESSAGE_FORMAT_DELETE_COMMENT = "Comment deleted from student:\n %s";
+    private static final String MESSAGE_FORMAT_SET_COMMAND_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+            + "%s/<KEY_STUDENT_COMMENT>";
+    private static final String MESSAGE_FORMAT_SET_COMMENT = "Comment added to student:\n  %s | %s";
 
-    public DeleteCommentCommand(String argument) {
-        super(argument, DELETE_COMMENT_ARGUMENT_KEYS);
+    public SetCommentCommand(String argument) {
+        super(argument, SET_COMMENT_ARGUMENT_KEYS);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class DeleteCommentCommand extends Command {
     }
 
     /**
-     * Executes the delete_comment command and deletes a comment from a student.
+     * Executes the set_comment command and sets the comment of a student.
      *
      * @param moduleList The list of modules.
      * @param ui         The ui instance to handle interactions with the user.
@@ -63,23 +66,23 @@ public class DeleteCommentCommand extends Command {
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
-        if (student.getComment().equals("")) {
-            throw new TaaException(MESSAGE_NO_COMMENT_ADDED);
-        }
 
-        student.setComment("");
+        String comment = argumentMap.get(KEY_STUDENT_COMMENT);
+
+        student.setComment(comment);
 
         storage.save(moduleList);
-        ui.printMessage(String.format(MESSAGE_FORMAT_DELETE_COMMENT, student));
+        ui.printMessage(String.format(MESSAGE_FORMAT_SET_COMMENT, student, comment));
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_DELETE_COMMAND_USAGE,
+                MESSAGE_FORMAT_SET_COMMAND_USAGE,
                 COMMAND_SET_COMMENT,
                 KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX
+                KEY_STUDENT_INDEX,
+                KEY_STUDENT_COMMENT
         );
     }
 }

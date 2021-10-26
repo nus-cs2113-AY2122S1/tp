@@ -1,6 +1,7 @@
-package taa.command;
+package taa.command.module;
 
 import taa.Ui;
+import taa.command.Command;
 import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;

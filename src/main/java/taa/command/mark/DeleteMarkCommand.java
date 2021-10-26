@@ -1,8 +1,9 @@
-package taa.command;
+package taa.command.mark;
 
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.command.Command;
 import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;

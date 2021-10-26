@@ -1,26 +1,25 @@
-package taa.command;
+package taa.command.student;
 
 //@@author hozhenhong99
+import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
-import taa.student.Student;
 import taa.student.StudentList;
 
-public class AddStudentCommand extends Command {
+public class ListStudentsCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
-    private static final String KEY_STUDENT_ID = "i";
-    private static final String KEY_STUDENT_NAME = "n";
-    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_ID, KEY_STUDENT_NAME};
+    private static final String[] LIST_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE};
 
-    private static final String MESSAGE_FORMAT_ADD_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_ID> "
-        + "%s/<STUDENT_NAME>";
-    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student has been added to %s:\n  %s";
+    private static final String MESSAGE_NO_STUDENTS = "No students added yet!";
 
-    public AddStudentCommand(String argument) {
-        super(argument, ADD_STUDENT_ARGUMENT_KEYS);
+    private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "%s %s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Students for %s:\n%s";
+
+    public ListStudentsCommand(String argument) {
+        super(argument, LIST_STUDENT_ARGUMENT_KEYS);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class AddStudentCommand extends Command {
     }
 
     /**
-     * Executes the add_student command and adds a student to a particular module.
+     * Executes the list_student command and lists the students of a particular module.
      *
      * @param moduleList The list of modules.
      * @param ui         The ui instance to handle interactions with the user.
@@ -50,25 +49,23 @@ public class AddStudentCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        String studentID = argumentMap.get(KEY_STUDENT_ID);
-        String studentName = argumentMap.get(KEY_STUDENT_NAME);
-        Student student = new Student(studentID, studentName);
-
+        String message;
         StudentList studentList = module.getStudentList();
-        studentList.addStudent(student);
+        if (studentList.getSize() == 0) {
+            message = MESSAGE_NO_STUDENTS;
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, module, studentList);
+        }
 
-        storage.save(moduleList);
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
+        ui.printMessage(message);
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_ADD_STUDENT_USAGE,
-            COMMAND_ADD_STUDENT,
-            KEY_MODULE_CODE,
-            KEY_STUDENT_ID,
-            KEY_STUDENT_NAME
+            MESSAGE_FORMAT_LIST_STUDENT_USAGE,
+            COMMAND_LIST_STUDENTS,
+            KEY_MODULE_CODE
         );
     }
 }

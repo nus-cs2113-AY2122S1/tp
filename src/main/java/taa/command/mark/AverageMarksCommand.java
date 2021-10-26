@@ -1,5 +1,6 @@
-package taa.command;
+package taa.command.mark;
 
+import taa.command.Command;
 import taa.storage.Storage;
 import taa.assessment.Assessment;
 import taa.exception.TaaException;

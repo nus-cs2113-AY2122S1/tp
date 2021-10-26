@@ -1,8 +1,9 @@
-package taa.command;
+package taa.command.student;
 
 //@@author hozhenhong99
 import taa.Ui;
 import taa.attendance.AttendanceList;
+import taa.command.Command;
 import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
@@ -70,7 +71,7 @@ public class ListCommentCommand extends Command {
     protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
-                COMMAND_LIST_ATTENDANCE,
+                COMMAND_LIST_COMMENT,
                 KEY_MODULE_CODE
         );
     }
