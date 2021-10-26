@@ -74,17 +74,30 @@ public class Storage {
     }
 
     //@@author
+
+    /**
+     * Serializes the {@link Storage#listOfTrips} into a JSON String using {@link com.google.gson.Gson}
+     * to be written to the save file.
+     *
+     * @throws IOException if {@link FileStorage#writeToFile(String, String)} fails
+     *
+     * @see FileStorage#writeToFile(String, String)
+     */
     protected static void writeToFile() throws IOException {
         String jsonString = FileStorage.getGson().toJson(listOfTrips);
-        FileStorage.writeToFile(jsonString);
+        FileStorage.writeToFile(jsonString, FILE_PATH);
     }
 
+    /**
+     * Parsers the JSON string returned from {@link FileStorage#readFromFile(String)}
+     * to populate the {@link Storage#listOfTrips}.
+     *
+     * @see FileStorage#readFromFile(String)
+     */
     public static void readFromFile() {
         try {
-
-            String jsonString = FileStorage.readFromFile();
-            Type tripType = new TypeToken<ArrayList<Trip>>() {
-            }.getType();
+            String jsonString = FileStorage.readFromFile(FILE_PATH);
+            Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
@@ -97,9 +110,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new blank file at the specified file path ({@link Storage#FILE_PATH}).
+     *
+     * @see FileStorage#newBlankFile(String)
+     */
     public static void createNewFile() {
         try {
-            FileStorage.newBlankFile();
+            FileStorage.newBlankFile(FILE_PATH);
             Ui.newFileSuccessfullyCreated();
         } catch (IOException ex) {
             Ui.printCreateFileFailure();
@@ -107,6 +125,12 @@ public class Storage {
         }
     }
 
+    /**
+     * If {@link Storage#readFromFile()} throws a {@link JsonParseException}, asks the user whether to overwrite
+     * the corrupted file or close the program.
+     *
+     * @see Storage#createNewFile()
+     */
     private static void askOverwriteOrClose() {
         while (true) {
             Ui.printJsonParseUserInputPrompt();
@@ -136,7 +160,11 @@ public class Storage {
         return validCommands;
     }
 
-
+    /**
+     * Gets the currently open trip. If no trip is open, asks the user to enter a trip index to open that trip.
+     *
+     * @return the currently opened trip
+     */
     public static Trip getOpenTrip() {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
@@ -145,6 +173,11 @@ public class Storage {
         return openTrip;
     }
 
+    /**
+     * If the user enters an invalid trip number, asks the user to re-enter a valid trip number.
+     *
+     * @see Storage#getOpenTrip()
+     */
     private static void promptUserForValidTrip() {
         try {
             int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
