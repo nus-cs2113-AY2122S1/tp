@@ -1,42 +1,191 @@
-# User Guide
+# SLAM User Guide
+Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders in NUS to manage their group events, tasks, members and various activities. This application allows you to effectively plan and manage the organisation of events by allowing users to create and add such events to their schedule. Leading up to the actual date and time of the event, committee heads can add tasks (e.g. meetings, purchase of logistics) to complete under each event to keep track of progress. Group members can also be added and assigned to these tasks. This application uses a Command Line Interface (CLI); that is, the application is operated by typing commands into a Command Box.
 
-## Introduction
+---
 
-{Give a product intro}
+# Table of Contents
+1. [Quick Start](#1-quick-start)
+2. [Navigating This Document](#2-navigating-this-document)
+   1. [Events](#21-events)
+   2. [Tasks](#22-tasks)
+3. [General Commands](#3-general-commands)
+   1. [Help](#31-help)
+   2. [Exiting the program](#32-exiting-the-program)
+4. [Event Commands](#4-event-commands)
+   1. [Add an event](#41-add-an-event)
+   2. [Select an event](#42-select-an-event)
+   3. [Mark an event as done](#43-mark-an-event-as-done)
+   4. [Mark an event as undone](#44-mark-an-event-as-undone)
+   5. [Delete an event](#45-delete-an-event)
+5. [Task Commands](#5-task-commands)
+   1. [Add a task](#51-add-a-task)
+   2. [Mark a task as done](#52-mark-a-task-as-done)
+   3. [Mark a task as undone](#53-mark-a-task-as-undone)
+   4. [Delete a task](#54-delete-a-task)
+6. [Member Commands](#6-member-commands)
+   1. [Add a member](#61-add-a-member)
+   2. [Delete a member](#62-delete-a-member)
+7. [Saving the data](#7-saving-the-data)
+8. [FAQ](#8-faq)
+9. [Command summary](#9-command-summary)
 
-## Quick Start
+---
 
-{Give steps to get started quickly}
+## 1. Quick Start
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have Java 11 or above installed on your computer.
+2. Download the latest `.jar` file release of SLAM from [here](https://github.com/AY2122S1-CS2113T-W12-3/tp/).
+3. Place the downloaded `.jar` file in the directory you intend to store **SLAM**’s data at.
+4. Double-click the `.jar` file to launch the app. If double-clicking does not work, open the command prompt, navigate to the directory the file is located at, and enter the following command to launch the program:
+```
+ java -jar SLAM.jar
+```
+5. Congratulations! You are good to go. 
 
-## Features 
+---
 
-{Give detailed description of each feature}
+## 2. Navigating this document 
+This document shows you the available features in **SLAM**, and provides you with the relevant commands to use them.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+> 💡 **Notes about reading this document:**
+> - Parameters that are supplied by the user are written in `UPPER_CASE`<br /> E.g. in `add -e n/TITLE`, a possible parameter for `TITLE` can be `Concert`
+> - 🚨 **IMPORTANT** 🚨<br /> When inputting date & time as commands, the format should always be DD-mm-YYYY hhMM<br /> E.g. 31-12-2021 2359
+    Since **SLAM** is an application revolving around the management of events, tasks and committee members, it is important to be aware of the respective details that **SLAM** can use in managing the overall catalog.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### 2.1 Events
+The following two tables show the fields which **SLAM** works with in managing events in the overall catalog.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+| **Required Fields** | **Description**                      |
+| ------------------- | -------------------------------- |
+| Title | The title of the event                         |
+| Date & Time | The date and time the event is happening | 
+| Venue | The venue at which the event is happening      |
+| Budget | The amount of budget allocated to the event   |
 
-Example of usage: 
+| **Optional Fields** | Description                      |
+| ------------------- | -------------------------------- |
+| Title | The title of the event                         |
 
-`todo n/Write the rest of the User Guide d/next week`
+### 2.2 Tasks
+The following two tables show the fields which **SLAM** works with in managing the tasks you can add and keep track of under each event created.
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+| **Required Fields** | **Description**                       |
+| ------------------- | --------------------------------- |
+| Title | The title of the task                           |
+| Deadline | The deadline the task has to be completed by |
 
-## FAQ
+| **Optional Fields** | **Description**                     |
+| ------------------- | ------------------------------- |
+| Description         | A brief description of the task |
+
+
+[Back to table of contents](#table-of-contents)
+
+---
+
+## 3. General Commands
+This section contains the general basic commands for **SLAM**.
+
+### 3.1 Help 
+This allows you to quickly view all the available commands and how to use them, all in one place.
+
+**Format:** `help`
+
+### 3.2 Exiting the program
+Allows you to safely terminate the program.
+
+**Format:** `bye` 
+
+[Back to table of contents](#table-of-contents)
+
+---
+
+## 4. Event Commands
+This section contains the available commands to manage events in **SLAM**.
+
+### 4.1 Add an Event
+
+### 4.2 Select an Event
+This allows you to select an event from your list using the event’s numerical position in the list (i.e. the event’s ID). Upon selection, more details about that event will be displayed, and you may perform additional commands with the selected event (e.g. adding tasks to complete).
+
+**Format:** `select -e EVENT_ID`
+
+**Example:** `select -e 1`
+> 💡 The `select` command is especially useful to keep in mind! An event needs to be selected before any changes to its tasks can be done.
+
+**Expected Output:**
+```
+> select -e 1
+```
+```
+Here are the details of the event:
+Title: Tembusu Concert
+Date: 19 Feb 2022 - 20:00
+Description: Semesterly Arts Week Fundraiser
+Venue: MPH
+Budget: $1000.0
+Tasks:
+1. Make props
+```
+
+### 4.3 Mark an Event as `done`
+
+### 4.4 Mark an Event as `undone`
+
+### 4.5 Delete an Event 
+
+### 5.6 Find Event(s) based on keyword(s)
+
+### 4.7 List all Events
+
+### 4.8 Display next upcoming Event
+
+### 4.9 Update an Event
+
+[Back to table of contents](#table-of-contents)
+
+---
+
+## 5. Task Commands
+This section contains the available commands for managing tasks for events in **SLAM**. Because all tasks belong to a specific event in your catalog, an event must first be selected ([see Section 5.2 on Selecting Events](#52-select-an-event)) before any of the below commands can be used.
+
+### 5.1 Add a task 
+Note: For this current version of **SLAM**, pre-selecting an `Event` is not required for this command.
+
+### 5.2 Mark a Task as `done`
+
+### 5.3 Mark a Task as `undone`
+
+### 5.4 Delete a Task
+
+[Back to table of contents](#table-of-contents)
+
+---
+
+## 6. Member Commands
+This section contains the available commands for managing members in `SLAM`.
+
+### 6.1 Add a member 
+
+### 6.2 Delete a member
+
+[Back to table of contents](#table-of-contents)
+
+---
+
+## 7. Saving the Data
+**SLAM** data is saved in the hard disk automatically after you exit the program. There is no need to save manually.
+
+[Back to table of contents](#table-of-contents)
+
+## 8. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
 **A**: {your answer here}
 
-## Command Summary
+[Back to table of contents](#table-of-contents)
 
-{Give a 'cheat sheet' of commands here}
+## 9. Command Summary
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+[Back to table of contents](#table-of-contents)
