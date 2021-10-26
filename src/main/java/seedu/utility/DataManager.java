@@ -167,7 +167,7 @@ public class DataManager {
             }
         } catch (FileNotFoundException | NoSuchElementException | IllegalStateException e) {
             if (e instanceof FileNotFoundException) {
-                ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
+                ui.printError(Messages.UNABLE_TO_FIND_ADVICE_FILE);
             } else {
                 ui.printError(Messages.ERROR_LOADING_ADVICE);
             }
