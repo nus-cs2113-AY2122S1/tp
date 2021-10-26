@@ -6,8 +6,8 @@ skinparam groupInheritance 2
 ModuleStorage "1" ----* Storage
     ModuleStorage : - {static} logger : Logger
 
-    ModuleStorage : + ArrayList<Module> readModuleList()
-    ModuleStorage : + String[] extractAttributes(String line)
+    ModuleStorage : + readModuleList() : ArrayList<Module>
+    ModuleStorage : + extractAttributes(String line) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" ----* Storage
