@@ -1,12 +1,9 @@
 package seedu.duke.storage;
 
 import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.Command;
 import seedu.duke.data.AllRecordList;
-import seedu.duke.data.RecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.textfiletools.ReadTextFile;
-import seedu.duke.textfiletools.WriteToTextFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,20 +63,5 @@ public class Storage {
                 e.printStackTrace();
             }
         }
-    }
-
-
-    //--------------------------------------------------------------------------------------
-    public void saveNewlyAddedExpenditure(String description, double spending, LocalDate date) {
-        String expenditureToAdd = "add -e";
-        expenditureToAdd += (" c/" + description + " a/" + spending + " d/" + date);
-        assert expenditureToAdd.length() >= description.length();
-        WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
-    }
-
-    public void saveNewlyAddedBudget(double budgetLimit, int month) {
-        String expenditureToAdd = "add -b";
-        expenditureToAdd += (" a/" + budgetLimit + " m/" + month);
-        WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
 }
