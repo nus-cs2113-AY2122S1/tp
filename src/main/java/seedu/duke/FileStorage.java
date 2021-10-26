@@ -52,7 +52,7 @@ public class FileStorage {
     }
 
     /**
-     * Creates a new blank file at the given <code>filePath</code>
+     * Creates a new blank file at the given <code>filePath</code>.
      *
      * @param filePath path location to create the file at
      * @throws IOException if file creation fails (thrown from {@link FileWriter}).
@@ -78,7 +78,7 @@ public class FileStorage {
 
     /**
      * Registers the custom serializers and deserializers for {@link LocalDate} type, and creates an
-     * instance of {@link Gson}
+     * instance of {@link Gson}.
      */
     public static void initializeGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
