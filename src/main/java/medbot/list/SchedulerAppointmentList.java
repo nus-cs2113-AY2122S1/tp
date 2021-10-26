@@ -9,13 +9,11 @@ import java.util.List;
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
-import java.util.HashMap;
-
-public class SchedulerAppointmentList extends MedBotList {
+public class SchedulerAppointmentList {
     private static final String END_LINE = System.lineSeparator();
 
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
-    private int lastId = 0;
+    private int lastId = 1;
 
     public SchedulerAppointmentList() {
 
@@ -33,7 +31,7 @@ public class SchedulerAppointmentList extends MedBotList {
             throw new MedBotException(getAppointmentNotFoundErrorMessage(appointmentId));
         }
         Appointment appointment = new Appointment();
-        appointment.setListItemId(appointmentId);
+        appointment.setId(appointmentId);
         appointment.mergeAppointmentData(appointments.get(appointmentId));
         return appointment;
     }
@@ -51,13 +49,13 @@ public class SchedulerAppointmentList extends MedBotList {
      */
     public int addAppointment(Appointment appointment) throws MedBotException {
         assert appointment.isComplete();
-        int appointmentId = appointment.getListItemId();
+        int appointmentId = appointment.getId();
         if (appointments.containsKey(appointmentId)) {
             throw new MedBotException("Appointment with id " + appointmentId + " already exits!");
         }
         if (appointmentId == 0) {
             appointmentId = generateAppointmentId();
-            appointment.setListItemId(appointmentId);
+            appointment.setId(appointmentId);
         }
         appointments.put(appointmentId, appointment);
         return appointmentId;
@@ -69,9 +67,9 @@ public class SchedulerAppointmentList extends MedBotList {
      * @return a unique id to be allocated to an appointment
      */
     private int generateAppointmentId() {
-        do {
+        while (appointments.containsKey(lastId)) {
             lastId++;
-        } while (appointments.containsKey(lastId));
+        }
         return lastId;
     }
 
@@ -113,7 +111,6 @@ public class SchedulerAppointmentList extends MedBotList {
      *
      * @return storageString of all appointments
      */
-    @Override
     public String getStorageString() {
         String output = "";
         for (int key : appointments.keySet()) {
@@ -125,12 +122,10 @@ public class SchedulerAppointmentList extends MedBotList {
     }
 
 
-    @Override
     public void setLastId(int lastId) {
         this.lastId = lastId;
     }
 
-    @Override
     public int getLastId() {
         return lastId;
     }

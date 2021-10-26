@@ -42,10 +42,10 @@ class PersonTest {
     @Test
     public void testSetNull() {
         Patient patient = new Patient();
-        patient.setListItemId(123);
+        patient.setId(123);
         patient.setName("Ben");
         patient.setNull();
-        assertEquals(patient.getListItemId(), 123);
+        assertEquals(patient.getId(), 123);
         assertNull(patient.getName());
         assertNull(patient.getEmailAddress());
         assertNull(patient.getResidentialAddress());

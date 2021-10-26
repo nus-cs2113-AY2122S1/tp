@@ -32,17 +32,7 @@ public class Scheduler {
     private final MedicalStaffList medicalStaffList = new MedicalStaffList();
     private final SchedulerAppointmentList schedulerAppointmentList = new SchedulerAppointmentList();
 
-    public PatientList getPatientList() { //todo will eventually remove this method for encapsulation
-        return patientList;
-    }
-
-    public MedicalStaffList getMedicalStaffList() { //todo will eventually remove this method for encapsulation
-        return medicalStaffList;
-    }
-
-    public SchedulerAppointmentList getSchedulerAppointmentList() {
-        return schedulerAppointmentList;
-    }
+    //Patient and Staff Management methods
 
     /**
      * Adds the given patient into the scheduler, allocates an id to the patient and returns the id value.
@@ -228,6 +218,46 @@ public class Scheduler {
         medicalStaffList.unarchivePerson(staffId);
     }
 
+    //Storage methods
+
+    public int getLastPatientId() {
+        return patientList.getLastId();
+    }
+
+    public void setLastPatientId(int lastPatientId) {
+        patientList.setLastId(lastPatientId);
+    }
+
+    public String getPatientStorageString() {
+        return patientList.getStorageString();
+    }
+
+    public int getLastStaffId() {
+        return medicalStaffList.getLastId();
+    }
+
+    public void setLastStaffId(int lastStaffId) {
+        medicalStaffList.setLastId(lastStaffId);
+    }
+
+    public String getStaffStorageString() {
+        return medicalStaffList.getStorageString();
+    }
+
+    public int getLastAppointmentId() {
+        return schedulerAppointmentList.getLastId();
+    }
+
+    public void setLastAppointmentId(int lastAppointmentId) {
+        schedulerAppointmentList.setLastId(lastAppointmentId);
+    }
+
+    public String getAppointmentStorageString() {
+        return schedulerAppointmentList.getStorageString();
+    }
+
+    //Appointment Management methods
+
     /**
      * Returns a copy of the appointment at the specified id.
      *
@@ -254,14 +284,6 @@ public class Scheduler {
             throws MedBotException {
         List<Integer> appointmentIds = patientList.listAppointments(patientId, filterType, dateTimeCode);
         return generateAppointmentTable(appointmentIds);
-    }
-
-    private String generateAppointmentTable(List<Integer> appointmentIds) throws MedBotException {
-        String output = EMPTY_STRING;
-        for (int appointmentId : appointmentIds) {
-            output += generateAppointmentTableRow(appointmentId) + END_LINE;
-        }
-        return output;
     }
 
     /**
@@ -312,7 +334,7 @@ public class Scheduler {
     public void editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
         Appointment oldAppointment = schedulerAppointmentList.getAppointment(appointmentId);
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
-        newAppointment.setListItemId(appointmentId);
+        newAppointment.setId(appointmentId);
         assert newAppointment.isComplete();
 
         checkAvailability(newAppointment);
@@ -338,7 +360,7 @@ public class Scheduler {
         int patientId = appointment.getPatientId();
         int staffId = appointment.getMedicalStaffId();
         int dateTimeCode = appointment.getDateTimeCode();
-        int appointmentId = appointment.getListItemId();
+        int appointmentId = appointment.getId();
         checkPatientAvailability(patientId, dateTimeCode, appointmentId);
         checkMedicalStaffAvailability(staffId, dateTimeCode, appointmentId);
     }
@@ -358,11 +380,19 @@ public class Scheduler {
         }
     }
 
+    private String generateAppointmentTable(List<Integer> appointmentIds) throws MedBotException {
+        String output = EMPTY_STRING;
+        for (int appointmentId : appointmentIds) {
+            output += generateAppointmentTableRow(appointmentId) + END_LINE;
+        }
+        return output;
+    }
+
     private String generateAppointmentTableRow(int appointmentId) throws MedBotException {
         Appointment appointment = schedulerAppointmentList.getAppointment(appointmentId);
         String patientName = patientList.getPersonName(appointment.getPatientId());
         String staffName = medicalStaffList.getPersonName(appointment.getMedicalStaffId());
-        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getListItemId())
+        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getId())
                 + VERTICAL_LINE_SPACED + appointment.getDateTimeString()
                 + VERTICAL_LINE_SPACED + formatPatientId(appointment.getPatientId())
                 + VERTICAL_LINE_SPACED + formatNameString(patientName)

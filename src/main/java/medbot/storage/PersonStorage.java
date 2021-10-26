@@ -51,7 +51,7 @@ public abstract class PersonStorage extends Storage {
             person = new Staff();
         }
 
-        person.setListItemId(personId);
+        person.setId(personId);
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
             //updatePersonalInformation does error-checking of person details and updates patient info
             updatePersonalInformation(person, prefixPlusPersonParameter);
