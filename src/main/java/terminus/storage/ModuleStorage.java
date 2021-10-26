@@ -167,11 +167,12 @@ public class ModuleStorage {
             return;
         }
         if (!Files.isReadable(modDirPath)) {
-            throw new IOException("Directory not readable.");
+            return;
         }
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfFiles) {
@@ -283,7 +284,7 @@ public class ModuleStorage {
     private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
         if (!Files.isReadable(directoryPath)) {
-            throw new IOException("Directory not readable.");
+            throw new IOException("Directory cannot be cleared.");
         }
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
