@@ -28,6 +28,8 @@ public class FailedCommand extends Command {
             break;
         case MISSING_ARG: // Fallthrough
         case MISSING_ARGS_EDIT: // Fallthrough
+        case MISSING_ARGS_ADD: // Fallthrough
+        case MISSING_ARGS_SEARCH: // Fallthrough
         case MISSING_DETAIL: // Fallthrough
         case MISSING_NAME: // Fallthrough
         case MISSING_INDEX: // Fallthrough
@@ -67,6 +69,12 @@ public class FailedCommand extends Command {
             break;
         case MISSING_ARGS_EDIT:
             ExceptionTextUi.missingArgEditMessage();
+            break;
+        case MISSING_ARGS_ADD:
+            ExceptionTextUi.missingArgAddMessage();
+            break;
+        case MISSING_ARGS_SEARCH:
+            ExceptionTextUi.missingArgSearchMessage();
             break;
         case MISSING_DETAIL:
             ExceptionTextUi.missingDetailMessage();
