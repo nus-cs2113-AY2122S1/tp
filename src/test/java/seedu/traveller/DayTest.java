@@ -17,7 +17,7 @@ public class DayTest {
     }
 
     @Test
-    public void addItem_success() {
+    public void addItem_success() throws TravellerException {
         Item item1 = new Item("7-9pm", "Eat dinner");
         Item item2 = new Item("12am", "See northern lights");
         day.addItem(item1);

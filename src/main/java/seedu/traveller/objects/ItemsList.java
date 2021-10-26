@@ -1,5 +1,6 @@
 package seedu.traveller.objects;
 
+import seedu.traveller.exceptions.DayNotFoundException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -47,8 +48,14 @@ public class ItemsList {
         return keywordString;
     }
 
-    public Item getItem(int itemNumber) {
-        return items.get(itemNumber);
+    public Item getItem(int itemNumber) throws TravellerException {
+        Item item;
+        try {
+            item = items.get(itemNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ItemNotFoundException(itemNumber);
+        }
+        return item;
     }
 
     public void deleteItem(int itemNumber) throws TravellerException {
@@ -72,13 +79,14 @@ public class ItemsList {
     public String toString() {
         StringBuilder itemsListString = new StringBuilder();
         for (int i = 0; i < getSize(); i++) {
-            String itemEntry = "\n\t\t\t\t\t" + i + ":\t" + getItem(i).toString();
+            String itemEntry = "\n\t\t\t\t\t" + i + ":\t";
+            itemsListString.append(items.get(i).toString());
             itemsListString.append(itemEntry);
         }
         return itemsListString.toString();
     }
 
-    public String getItemInfo(int itemIndex) {
+    public String getItemInfo(int itemIndex) throws TravellerException {
         Item current = getItem(itemIndex);
         return " /time " + current.getItemTime() + " /name " + current.getItemName() + "\n";
     }

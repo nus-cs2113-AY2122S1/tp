@@ -30,9 +30,14 @@ import seedu.traveller.exceptions.InvalidEditMapFormatException;
 import seedu.traveller.exceptions.CountryNotFoundException;
 import seedu.traveller.exceptions.DistanceNonNegativeException;
 import seedu.traveller.exceptions.DistanceNonStringException;
-import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.InvalidSearchItemFormatException;
+import seedu.traveller.exceptions.InvalidEditItemIndexException;
+import seedu.traveller.exceptions.InvalidEditItemFormatException;
 import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.exceptions.TravellerException;
+
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+
 
 import seedu.traveller.worldmap.Country;
 import seedu.traveller.worldmap.WorldMap;
@@ -313,7 +318,7 @@ public class Parser {
 
             keyword = userInput.substring(keywordIdx + KEY_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidAddItemFormatException();
+            throw new InvalidSearchItemFormatException();
         }
         int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
@@ -329,7 +334,8 @@ public class Parser {
         String tripName;
         String itemName;
         String itemTime;
-        String itemIndex;
+        int itemIndex;
+        String rawIndex;
         String rawDayNumber;
 
         try {
@@ -349,15 +355,22 @@ public class Parser {
             int indexIdx = userInput.indexOf(indexSeparator);
             itemName = userInput.substring(nameIdx + NAME_LENGTH, indexIdx);
 
-            itemIndex = userInput.substring(indexIdx + INDEX_LENGTH);
+            rawIndex = userInput.substring(indexIdx + INDEX_LENGTH);
+
+            try {
+                itemIndex = Integer.parseInt(rawIndex);
+            } catch (NumberFormatException e) {
+                throw new InvalidEditItemIndexException();
+            }
+
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidAddItemFormatException();
+            throw new InvalidEditItemFormatException();
         }
         int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new EditItemCommand(tripName, Integer.valueOf(dayIndex),
-                itemTime, itemName, Integer.valueOf(itemIndex));
+        command = new EditItemCommand(tripName, dayIndex,
+                itemTime, itemName, itemIndex);
 
         return command;
     }

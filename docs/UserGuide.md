@@ -259,7 +259,7 @@ Edits an existing trip from the trip list.
 ### 2.10. Edit an item: `edit-item`
 Edits and updates existing item from a trip and updates it to a new corresponding item.
 
-#### Format: `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
+#### Format: `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_TIME /name NEW_NAME /index ITEM_INDEX`
 
 #### Usage Example:
 ```

@@ -65,6 +65,9 @@ public class EditItemCommand extends Command {
         Trip trip = tripsList.getTrip(getTripName());
         Day day = trip.getDay(getDayIndex());
         Item newItem = new Item(getItemTime(), getItemName());
+
+        day.getItem(itemIndex);
+
         assert Objects.equals(newItem.getItemTime(), getItemTime()) :
                 "Item time in created item and command do not match.";
         assert Objects.equals(newItem.getItemName(), getItemName()) :
