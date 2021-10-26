@@ -85,8 +85,7 @@ public class ModuleStorageTest {
 
     @Test
     void loadFile_firstInitialize() throws IOException {
-        moduleStorage.cleanAfterDeleteModule(tempModule);
-        Path dataFolder = RESOURCE_FOLDER.resolve(tempModule);
+        Path dataFolder = RESOURCE_FOLDER.resolve("newFolder");
         Path dataJsonFile = dataFolder.resolve("main.json");
         assertFalse(Files.exists(dataFolder));
         assertFalse(Files.exists(dataJsonFile));
@@ -94,6 +93,8 @@ public class ModuleStorageTest {
         ModuleManager moduleManager = this.moduleStorage.loadFile();
         assertTrue(Files.exists(dataFolder));
         assertTrue(Files.exists(dataJsonFile));
+        Files.delete(dataJsonFile);
+        Files.delete(dataFolder);
     }
 
     @Test
