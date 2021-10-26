@@ -28,5 +28,6 @@ public class UI {
         System.out.println("12. Delete tags from Cookbook: deleteTag \"/ tagName1 + tagName2 + ...\"");
         System.out.println("13. List all tags: listTags");
         System.out.println("14. Help me: help");
+        System.out.println("");
     }
 }
