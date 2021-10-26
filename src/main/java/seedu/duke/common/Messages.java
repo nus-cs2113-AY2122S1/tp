@@ -24,6 +24,8 @@ public class Messages {
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
     public static final String LIST_AVAILABLE_MESSAGE = "  (+) Listing out available items in library";
     public static final String LIST_LOANED_MESSAGE = "  (+) Listing out loaned items in library";
+    public static final String LIST_DEADLINE_TODAY = "  (+) Listing out loaned items that have to be returned today";
+    public static final String LIST_DEADLINE_OVERDUE = "  (+) Listing out loaned items that are overdue";
     // Loan and Return
     public static final String LOAN_SUCCESS = "  (+) Item has been loaned out:";
     public static final String LOAN_SUCCESS_RESERVED = "  (+) The reserved item has been loaned out:";

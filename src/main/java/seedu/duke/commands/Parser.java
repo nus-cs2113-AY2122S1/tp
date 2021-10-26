@@ -34,6 +34,8 @@ public class Parser {
             return new ReturnCommand(input);
         } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
             return new ReserveCommand(input);
+        } else if (input.startsWith(DeadlineCommand.COMMAND_WORD)) {
+            return new DeadlineCommand(input);
         } else {
             return new UnknownCommand();
         }
