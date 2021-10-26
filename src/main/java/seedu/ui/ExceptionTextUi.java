@@ -132,6 +132,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void missingArgEditMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
@@ -143,6 +144,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void missingArgAddMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
@@ -153,6 +155,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void missingArgSearchMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
@@ -163,6 +166,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void missingIndexMessage() {
         String message = "There seems to be missing index in your request.\n"
                 + "Please enter command in the following way: \n"
@@ -171,6 +175,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author
     public static void invalidNumMessage() {
         String message = "That does not seem to be a number.\n" + "Please provide a number instead.";
         printDoubleLineMessage(message);
@@ -203,6 +208,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void numOutOfRangeEditMessage(int listSize) {
         String message;
         int maxIndex = listSize - 1;
@@ -221,6 +227,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author
     public static void corruptLineMessage(String line, int lineIndex, String contactFilePath) {
         System.out.println(contactFilePath + ":" + lineIndex + " - \"" + line + "\" is corrupted and not loaded.");
     }
