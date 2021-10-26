@@ -166,6 +166,9 @@ public class ModuleStorage {
             Files.createDirectories(modDirPath);
             return;
         }
+        if (!Files.isReadable(modDirPath)) {
+            throw new IOException("Directory not readable.");
+        }
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
@@ -279,6 +282,9 @@ public class ModuleStorage {
      */
     private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
+        if (!Files.isReadable(directoryPath)) {
+            throw new IOException("Directory not readable.");
+        }
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             cleanAllFilesInclusive(file);
