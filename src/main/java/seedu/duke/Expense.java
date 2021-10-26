@@ -70,6 +70,7 @@ public class Expense {
         return userInput.split("/")[1].trim();
     }
 
+//@@author joshualeeky
     /**
      * Obtains a list of Person objects from array of names of people.
      *
@@ -100,6 +101,8 @@ public class Expense {
         }
         return validListOfPeople;
     }
+
+//@@author
 
     public void setPayer(Person person) {
         this.payer = person;

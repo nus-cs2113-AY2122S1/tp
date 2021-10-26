@@ -23,7 +23,7 @@ public class Ui {
         System.out.println("Exiting the program now. Goodbye!");
     }
 
-
+//@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
                 + Storage.getOpenTrip().getForeignCurrencySymbol()
@@ -36,6 +36,7 @@ public class Ui {
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
+//@@author
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {

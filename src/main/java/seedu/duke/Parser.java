@@ -354,6 +354,7 @@ public class Parser {
         //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
+//@@author joshualeeky
     protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
         expense.setPayer(person);

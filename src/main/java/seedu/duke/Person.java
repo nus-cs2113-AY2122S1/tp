@@ -3,6 +3,7 @@ package seedu.duke;
 
 import java.util.HashMap;
 
+//@@author joshualeeky
 public class Person {
     private String name;
     //private HashMap<Person, Double> moneyOwed = new HashMap<>();
