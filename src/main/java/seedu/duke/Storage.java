@@ -26,7 +26,7 @@ public class Storage {
     private static Scanner scanner;
     private static Logger logger;
 
-//@@author joshualeeky
+    //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
                     "delete", "expense", "quit", "help", "amount", "close"));
@@ -73,7 +73,7 @@ public class Storage {
         return availableCurrency;
     }
 
-//@@author
+    //@@author
     protected static void writeToFile() throws IOException {
         String jsonString = FileStorage.getGson().toJson(listOfTrips);
         FileStorage.writeToFile(jsonString);

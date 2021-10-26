@@ -309,12 +309,12 @@ public class Parser {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
             if (person == payer) {
-                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
+                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName()));
                 continue;
             }
-            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
-            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName())); //Remove.getName()
-            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName())); //Remove.getName()
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
         }
     }
 
@@ -353,7 +353,7 @@ public class Parser {
         //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
-//@@author joshualeeky
+    //@@author joshualeeky
     protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
         expense.setPayer(person);
