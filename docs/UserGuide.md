@@ -123,7 +123,7 @@ shopping: $30.00
 
 ```
 ---
-####List Expenses
+
 
 ###Expenses
 #### Available Currencies
@@ -186,6 +186,37 @@ Denotes the people involved in sharing the expense. Multiple people involved are
 
 `[description]`
 Specifies the description of the expense.
+
+####List Expenses
+
+List all expenses added to the current trip.
+
+To view all expenses in a trip, ensure you are already inside a trip, then type ```view```
+
+####View Expenses By Index
+
+Show expense with corresponding index in the current trip. User must already be inside a trip and
+have at least 1 expense.
+
+```view [index]```
+
+####Filter Expenses By Attributes
+
+To filter the list of expenses (i.e. only show expenses matching the entered attribute information), type
+
+```view filter [expense-attribute] [attribute-information]```
+
+For example, to only show expenses in Johor Bahru, enter
+
+```view filter description Johor Bahru```
+
+
+Be sure that the ```expense-attribute``` information entered is exactly the same or a substring of what is stored, otherwise the program may not be able to find the expense.
+This means that if you had originally entered JB as the expense location, filtering by Johor Bahru will not show the expense with the location entered as JB.
+
+
+Note that the program currently only supports filtering using a single attribute.
+
 =======
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `PayMeBack` from [here](http://link.to/duke), and move the downloaded file to
@@ -197,6 +228,8 @@ Specifies the description of the expense.
 ```
 some code block
 ```
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
