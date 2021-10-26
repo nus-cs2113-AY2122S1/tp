@@ -4,6 +4,7 @@ import seedu.typists.command.Command;
 import seedu.typists.game.DataProcessor;
 import seedu.typists.game.TimeModeGame;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static seedu.typists.Main.content;
@@ -14,7 +15,7 @@ import static seedu.typists.Main.LINE_LENGTH;
 public class TimeGameCommand implements Command {
 
     @Override
-    public void run() {
+    public void run(ArrayList<String> args) {
         TimeModeGame game = createGame();
         game.runGame();
         process(game);
