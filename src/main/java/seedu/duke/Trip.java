@@ -183,13 +183,14 @@ public class Trip {
     }
     //@@author
 
+    //@@author itsleeqian
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
-            if (e.getPersonsList().contains(person)) {
+            if (containsPerson(e.getPersonsList(), person.getName())) {
                 currentAmount = e.getAmountSplit().get(person.getName());
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
@@ -208,12 +209,29 @@ public class Trip {
                 + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")"
                 + " on "
                 + expensesInvolved
-                + " expenses in the following split: ");
+                + " expenses on the following categories: ");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
                     + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")");
         }
     }
+
+    /**
+     * Returns true if personsList contains a person with a specific name
+     * This is to replace the list.contains() method due to bugs with json deserialization
+     * @param personsList list of persons to check
+     * @param name the name to check for
+     * @return true if personsList contains a person with a specific name
+     */
+    public boolean containsPerson(ArrayList<Person> personsList, String name) {
+        for (Person person : personsList) {
+            if (person.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //@@author
 
 
     public LocalDate getDateOfTrip() {
