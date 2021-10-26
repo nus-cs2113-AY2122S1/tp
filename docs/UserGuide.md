@@ -1,15 +1,16 @@
 # User Guide
 
-_Ha(ppy)Bit_ is a desktop app aimed to **empower students** to improve their **well-being**,
-amidst the hectic and stressful **university life**.
-The app enables students to cultivate **good habits**, through the setting and tracking of **goals**.
+_Ha(ppy)Bit_ is a desktop app aimed to **empower students** to achieve their
+**goals**—whether personal, academical, or health—amidst the hectic and stressful
+**university life**, through cultivating good **habits**.
 The app operates on a [Command Line Interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface)
 while still comprising features typically found in a
 [Graphical User Interface (GUI)](https://en.wikipedia.org/wiki/Graphical_user_interface).
 Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your
 conventional GUI apps.
 
-You can find out more about _Ha(ppy)Bit_ at our [Main Page](README.md).
+You can find out more about _Ha(ppy)Bit_'s Developer Guide or 
+its developers (us!) at our [Main Page](README.md).
 
 * [Quick Start](#quick-start)
 * [Navigation](#navigation)
@@ -135,7 +136,7 @@ Name  | Description | Example
 Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`
 
->  ❗ **Notes about command format:**
+>  📃 **Notes about command format:**
 > * words enclosed in angle brackets, `<>` are the parameters which is the input the user is supposed to provide.
 > * e.g `view g/<goal index>` can be `view g/1`.
 > * The parameters enclosed in curly brackets, `{}`, are optional.
@@ -145,7 +146,7 @@ Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`
 Below are the commands that the app supports.
 Each section describes the function of the command and the command format.
 
-> ❗ **Note:** <br>
+> 📃 **Note:** <br>
 > For all commands and features, apart from the positioning of the command word,
 > all other flags and parameters can be placed in any order as long as
 > their respective tags are present e.g. `n/, s/, e/` etc.
@@ -181,7 +182,7 @@ start dates are optional.
 
 Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
 > 2. The two flags contained within the `{}` brackets indicate the
 > optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
@@ -215,7 +216,7 @@ Note: As of now, only goal name may be updated. To update other goal features yo
 
 Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -232,7 +233,7 @@ ________________________________________________________________________________
 Press enter to return to command mode...
 ```
 
-> ❗ **Note:** <br>
+> 📃 **Note:** <br>
 > The update features below are still underway.
 
 #### Updating Start/End Date
@@ -240,7 +241,7 @@ Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
 _or_ <br>
 Format: `update g/<GOAL_INDEX> e/<NEW_END_DATE>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -256,7 +257,7 @@ Output:
 #### Updating Goal Type
 Format: `update g/<GOAL_INDEX> t/<NEW_GOAL_TYPE>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -274,7 +275,7 @@ Removes a goal specified by its index.
 
 Format: `remove g/<GOAL_INDEX>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
@@ -315,7 +316,7 @@ Adds a habit that is linked to a goal.
 
 Format: `add  n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVALS>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<INTERVALS>` is an integer indicating the number of days between each recurring instance of a habit.
 
@@ -339,7 +340,7 @@ Marks a habit under a goal as done.
 
 Format: `done g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<HABIT_INDEX>` is an integer.
 
@@ -363,7 +364,7 @@ Deletes a habit under a goal.
 
 Format: `delete g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 > 2. `<HABIT_INDEX>` is an integer.
 
@@ -386,7 +387,7 @@ Lists all habits under a specific goal.
 
 Format: `view g/<GOAL_INDEX>`
 
-> ❗ **Note:**
+> 📃 **Note:**
 > 1. `<GOAL_INDEX>` is an integer.
 
 Example:
