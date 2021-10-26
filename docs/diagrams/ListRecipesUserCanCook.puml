@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+box Logic
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create ListRecipeUserCanCookCommand
+Parser -> ListRecipeUserCanCookCommand : ListRecipeUserCanCookCommand()
+activate ListRecipeUserCanCookCommand
+
+return
+return command
+
+-> ListRecipeUserCanCookCommand : execute()
+activate ListRecipeUserCanCookCommand
+end box
+
+box Data
+ListRecipeUserCanCookCommand -> RecipeList : getRecipes()
+activate RecipeList
+return recipes
+end box
+
+loop recipes in RecipeList
+ListRecipeUserCanCookCommand -> ListRecipeUserCanCookCommand : IngredientsAreSufficient(ingredientsInRecipe,ingredients)
+activate ListRecipeUserCanCookCommand
+opt ingredients are sufficient
+return recipe
+end
+end
+
+return recipes user can cook
+destroy ListRecipeUserCanCookCommand
+
+
+@enduml

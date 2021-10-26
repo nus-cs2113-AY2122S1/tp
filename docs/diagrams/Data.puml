@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+component "Data" {
+  [IngredientStorage] o--> "1"[Ingredient]
+  [IngredientRepository] o--> "*" [IngredientStorage]
+  [IngredientQuantity] o--> "1" [Ingredient]
+  [Recipe] o--> "*" [IngredientQuantity]
+  [RecipeList] o--> "*" [Recipe]
+}
+
+XYZCommand ..> [RecipeList]
+XYZCommand ..> [IngredientRepository]
+
+@enduml
