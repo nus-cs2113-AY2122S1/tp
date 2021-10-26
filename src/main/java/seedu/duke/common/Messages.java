@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_FILE_NOT_EXIST = "The file does not exist!";
     public static final String MESSAGE_INVALID_INPUT = "Error! Your inputs are missing or incorrect!";
     public static final String MESSAGE_INVALID_IO = "IOException: ";
-    public static final String MESSAGE_WARNING_FILE_DIRECTORY = "Ensure that you have files in correct directory and named correctly!";
+    public static final String MESSAGE_WARNING_FILE_DIRECTORY = "Ensure "
+            + "that you have files " + "in correct directory and named correctly!";
 
 }

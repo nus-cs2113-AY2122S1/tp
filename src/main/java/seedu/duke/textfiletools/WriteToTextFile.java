@@ -72,7 +72,7 @@ public class WriteToTextFile {
         }
     }
 
-    public void convertToCSVFile() {
+    public void convertToCsvFile() {
 
     }
 }
