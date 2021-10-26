@@ -125,7 +125,7 @@ public class Ui {
         show("Total Clients: " + count);
     }
 
-    public void showFindClient(ClientList clients, String name) {
+    public void showFindClient(ClientList clients, ClientPackageList clientPackages, String name) {
         int foundClients = 0;
         int count = clients.getClientCount();
         for (int i = 0; i < count; i++) {
@@ -135,11 +135,20 @@ public class Ui {
                     show(FIND_SUCCESS_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
                 }
                 show((foundClients + 1) + ". " + currClient + "\n");
+                showFlightTourOfClient(currClient, clientPackages);
                 foundClients++;
             }
         }
         if (foundClients == 0) {
             show(FIND_FAIL_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
+        }
+    }
+
+    private void showFlightTourOfClient(Client currClient, ClientPackageList clientPackages) {
+        ArrayList<ClientPackage> clientPackagesWithClient;
+        clientPackagesWithClient = clientPackages.getClientPackageByClient(currClient);
+        for (ClientPackage clientPackage: clientPackagesWithClient) {
+            System.out.println(clientPackage + "\n");
         }
     }
 
