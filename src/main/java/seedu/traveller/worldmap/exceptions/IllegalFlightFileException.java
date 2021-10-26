@@ -1,7 +1,6 @@
-package seedu.traveller.exceptions;
+package seedu.traveller.worldmap.exceptions;
 
-import seedu.traveller.worldmap.exceptions.WorldMapException;
-
+//@@author gavienwz
 public class IllegalFlightFileException extends WorldMapException {
 
     @Override

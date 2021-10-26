@@ -1,5 +1,6 @@
 package seedu.traveller;
 
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.save.SaveLoader;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
@@ -8,7 +9,6 @@ import seedu.traveller.worldmap.WorldMap;
 import java.util.logging.LogManager;
 
 
-//@@author Uxinnn
 public class Traveller {
     private final Ui ui;
     private final TripsList tripsList;
