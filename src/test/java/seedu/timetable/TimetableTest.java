@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import seedu.module.Lesson;
 import seedu.module.LessonType;
 import seedu.module.Module;
+import seedu.ui.TimetableUI;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
@@ -71,7 +72,7 @@ public class TimetableTest {
         TimetableLesson timetableLesson = (TimetableLesson) timetable.getMonday()[2];
 
         assertTrue(Arrays.asList(timetable.getMonday()).contains(timetableLesson));
-        TimetableItem[] schedule = timetable.getUserItems(timetable.getMonday());
+        TimetableItem[] schedule = TimetableUI.getUserItems(timetable.getMonday());
         for (TimetableItem item : schedule) {
             assertNull(item);
         }
