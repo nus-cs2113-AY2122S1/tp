@@ -13,7 +13,7 @@ public abstract class PersonUi {
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
-    };
+    }
 
     protected static String getListHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
@@ -22,9 +22,12 @@ public abstract class PersonUi {
                 + "Format: list" + END_LINE
                 + "Expected Output for 2 " + person + "s: " + END_LINE
                 + capFistLetterPerson + " ID: [" + uppercasePerson + "_ID_1] IC: [" + uppercasePerson + "_IC]"
-                + "Name: ["+ uppercasePerson + "_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE
-                + capFistLetterPerson + " ID: [" + uppercasePerson + "_ID_2] IC: [" + uppercasePerson + "_IC]"
-                + "Name: [" + uppercasePerson + "_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE;
+                + "Name: [" + uppercasePerson + "_NAME] H/P: "
+                + "[PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE
+                + capFistLetterPerson + " ID: [" + uppercasePerson
+                + "_ID_2] IC: [" + uppercasePerson + "_IC]"
+                + "Name: [" + uppercasePerson + "_NAME] H/P: "
+                + "[PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE;
     }
 
     protected static String getViewHelpMessage(String person) {

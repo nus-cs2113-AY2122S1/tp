@@ -6,12 +6,15 @@ public class PatientUi extends PersonUi {
     public static String getPatientCommandList() {
         return getCommandList();
     }
+
     public static String getListPatientHelpMessage() {
         return getListHelpMessage(PATIENT);
     }
+
     public static String getViewPatientHelpMessage() {
         return getViewHelpMessage(PATIENT);
     }
+
     public static String getAddPatientHelpMessage() {
         return getAddHelpMessage(PATIENT);
     }
