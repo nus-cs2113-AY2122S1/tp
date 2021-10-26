@@ -64,54 +64,6 @@ the fields. These `flags` include:
 - `-e`: for your contact's email address
 
 
-<a name="help"></a>
-### Viewing help: `help`
-Displays a help message explaining what commands are available and each input format.
-
-Usage: `help`
-
-Expected outcome of usage:
-
-```
-help
-____________________________________________________________
-add: ConTech adds the specified contact with provided parameters.
- Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
- Note: Parameters need not be in order and are optional except for NAME.
- Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-
-ls: Displays the name of all saved contacts.
- Example: ls
-
-edit: Edit any parameter in an existing contact.
- Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
- Note: Parameters need not be in order and are optional except for INDEX.
- Example: edit 1 -e john.doe@email.com
-
-view: Displays all details for index specified contact.
- Parameter: INDEX
- Note: Index starts from 0.
- Example: view 2
-
-rm: Deletes the index specified contact.
- Parameter: INDEX
- Note: Index starts from 0.
- Example: rm 0
-
-search: Search for a contact containing a specified query.
- Note: Flags may be used to specify a detail type to search.
-       If no flag is specified, contact name is searched by default.
- Example: search -g QUERY
-
-help: Displays application usage instructions.
- Example: help
-
-import: Imports contacts from a CSV Text File.
- Note: Please ensure that data is saved in data/import.txt
- Example: import
-____________________________________________________________
-```
-
 <a name="add"></a>
 ### Adding a contact: `add`
 
@@ -246,6 +198,55 @@ ____________________________________________________________
 
 <a name="import"></a>
 ### Importing contacts: `import`
+
+<a name="help"></a>
+### Viewing help: `help`
+Displays a help message explaining what commands are available and each input format.
+
+Usage: `help`
+
+Expected outcome of usage:
+
+```
+help
+____________________________________________________________
+add: ConTech adds the specified contact with provided parameters.
+ Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
+ Note: Parameters need not be in order and are optional except for NAME.
+ Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe
+
+ls: Displays the name of all saved contacts.
+ Example: ls
+
+edit: Edit any parameter in an existing contact.
+ Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
+ Note: Parameters need not be in order and are optional except for INDEX.
+ Example: edit 1 -e john.doe@email.com
+
+view: Displays all details for index specified contact.
+ Parameter: INDEX
+ Note: Index starts from 0.
+ Example: view 2
+
+rm: Deletes the index specified contact.
+ Parameter: INDEX
+ Note: Index starts from 0.
+ Example: rm 0
+
+search: Search for a contact containing a specified query.
+ Note: Flags may be used to specify a detail type to search.
+       If no flag is specified, contact name is searched by default.
+ Example: search -g QUERY
+
+help: Displays application usage instructions.
+ Example: help
+
+import: Imports contacts from a CSV Text File.
+ Note: Please ensure that data is saved in data/import.txt
+ Example: import
+____________________________________________________________
+```
+
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
