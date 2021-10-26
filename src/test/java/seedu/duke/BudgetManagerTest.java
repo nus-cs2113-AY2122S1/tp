@@ -56,12 +56,6 @@ public class BudgetManagerTest {
 
     @Test
     public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
-                + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $11.00/$20.00" + newLine
-                + "You can directly increase your " + currentMonth + " FOOD budget up to $21.00!" + newLine
-                + SEPARATOR_LINE;
-
         budgetManager.setBudget(20, ExpenseCategory.OVERALL);
         budgetManager.setBudget(12, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -69,23 +63,29 @@ public class BudgetManagerTest {
         Expense testExpense = new Expense("dinner", 6, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
+
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
+                + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $11.00/$20.00" + newLine
+                + "You can directly increase your " + currentMonth + " FOOD budget up to $21.00!" + newLine
+                + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
-                + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $10.00/$12.00" + newLine
-                + "You can directly increase your " + currentMonth + " FOOD budget up to $12.00!"
-                + newLine + SEPARATOR_LINE;
-
         budgetManager.setBudget(12, ExpenseCategory.OVERALL);
         budgetManager.setBudget(4, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
         Expense testExpense = new Expense("breakfast", 10, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
+
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
+                + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $10.00/$12.00" + newLine
+                + "You can directly increase your " + currentMonth + " FOOD budget up to $12.00!"
+                + newLine + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
