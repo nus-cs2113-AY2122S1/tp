@@ -11,6 +11,6 @@ public class FindCommand extends Command {
     }
 
     public void execute(boolean isLoadingStorage) {
-        FindBudget.findExpenditure(recordList, keyword);
+        FindBudget.findExpenditure(allRecordList, keyword);
     }
 }

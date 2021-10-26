@@ -27,7 +27,7 @@ public class Storage {
             for (i = 0; i < commandStorage.size(); i += 1) {
                 String userInput = commandStorage.get(i);
                 AddCommand command = (AddCommand) parser.parseCommand(userInput);
-                command.setRecordList(recordList);
+                command.setAllRecordList(recordList);
                 command.execute(true);
             }
 

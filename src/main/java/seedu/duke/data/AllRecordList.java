@@ -102,6 +102,10 @@ public class AllRecordList {
         saveToStorage(storageDirectory);
     }
 
+    public RecordList getMonthRecord(int month) {
+        return allRecordList.get(month);
+    }
+
     public ArrayList<Expenditure> getExpenditureRecords(int month) {
         return allRecordList.get(month).getExpenditureRecords();
     }
@@ -136,6 +140,14 @@ public class AllRecordList {
 
     public int getMonthListSize(int month) {
         return allRecordList.get(month).getSize();
+    }
+
+    public double getTotalAmountSpent(int month) {
+        return allRecordList.get(month).getTotalAmountSpent();
+    }
+
+    public double getCategorySpending(int month, String categoryString, double categorySpending) {
+        return allRecordList.get(month).getCategorySpending(categoryString, categorySpending);
     }
 
 }

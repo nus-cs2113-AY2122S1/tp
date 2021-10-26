@@ -10,6 +10,6 @@ public class EditBudgetCommand extends EditCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        recordList.editBudget(this.month, this.amount);
+        allRecordList.editBudget(this.month, this.amount);
     }
 }

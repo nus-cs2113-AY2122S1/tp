@@ -19,6 +19,6 @@ public class EditExpenditureCommand extends EditCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        recordList.editExpenditure(this.month, this.index, this.amount, this.description, this.date); // Not done yet
+        allRecordList.editExpenditure(this.month, this.index, this.amount, this.description, this.date); // Not done yet
     }
 }

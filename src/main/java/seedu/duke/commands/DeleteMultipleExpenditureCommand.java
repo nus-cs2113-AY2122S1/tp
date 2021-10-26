@@ -22,8 +22,8 @@ public class DeleteMultipleExpenditureCommand extends DeleteCommand {
     @Override
     public void execute(boolean isLoadingStorage) {
         for (int i = startIndex; i <= endIndex; i++) {
-            TextUi.showMultipleExpenditureDeletedMessage(i, endIndex, recordList.getExpenditure(startIndex - 1, month));
-            recordList.deleteExpenditure(startIndex, month);
+            TextUi.showMultipleExpenditureDeletedMessage(i, endIndex, allRecordList.getExpenditure(startIndex - 1, month));
+            allRecordList.deleteExpenditure(startIndex, month);
         }
     }
 }

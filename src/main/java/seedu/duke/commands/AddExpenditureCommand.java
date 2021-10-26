@@ -30,6 +30,7 @@ public class AddExpenditureCommand extends AddCommand {
      * @param description description of the expenditure, e.g. chicken rice
      * @param amount amount spent for expenditure
      * @param date date on which expenditure was made
+     * @param category category which expenditure falls under
      */
     public AddExpenditureCommand(String description, double amount, LocalDate date, Category category) {
         this.description = description;
@@ -40,8 +41,8 @@ public class AddExpenditureCommand extends AddCommand {
 
     public void execute() {
         Expenditure newExpenditure = new Expenditure(description, spending, date, category);
-        recordList.addExpenditure(description, spending, date, category, false);
-        TextUi.showExpenditureAddedMessage(newExpenditure, false, recordList);
+        allRecordList.addExpenditure(description, spending, date, category, false);
+        TextUi.showExpenditureAddedMessage(newExpenditure, false, allRecordList);
     }
 
 
@@ -54,7 +55,7 @@ public class AddExpenditureCommand extends AddCommand {
     @Override
     public void execute(boolean isLoadingStorage) {
         Expenditure newExpenditure = new Expenditure(description, spending, date, category);
-        recordList.addExpenditure(description, spending, date, category, isLoadingStorage);
-        TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage, recordList);
+        allRecordList.addExpenditure(description, spending, date, category, isLoadingStorage);
+        TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage, allRecordList);
     }
 }

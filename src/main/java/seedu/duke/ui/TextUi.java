@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 import seedu.duke.data.AllRecordList;
+import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 
@@ -25,6 +26,8 @@ public class TextUi {
             + " |____/ \\__,_|\\__,_|\\__, |\\___|\\__||_|_|  \\__,_|\\___|_|\\_\\___|_|\n"
             + "                     __/ |\n"
             + "                    |___/";
+
+    private static final String buffer = "     ";
 
     private final Scanner in;
 
@@ -268,6 +271,42 @@ public class TextUi {
         System.out.println("Successfully deleted the Budget for this month!");
         System.out.println("Now the budget amount is 0.00!");
         System.out.println(DIVIDER);
+    }
+
+    public static void drawVerticalPercentage(double[] barPercentage, String typeOfStat) {
+        System.out.println("Percentage of Money Spent");
+        if(typeOfStat.equals("year")){
+            System.out.println(buffer + "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
+        } else if (typeOfStat.equals("category")) {
+            printCategoryString();
+        }
+        for (int i = 10; i > 0; i--) {
+            if (i == 10) {
+                System.out.print("100% ");
+            } else {
+                System.out.print((i * 10) + "%  ");
+            }
+            printRow(barPercentage, i);
+            System.out.println();
+        }
+    }
+
+    private static void printRow(double[] barPercentage, int i) {
+        for (double v : barPercentage) {
+            if ((i * 10) <= v) {
+                System.out.print(" #  ");
+            } else {
+                System.out.print("    ");
+            }
+        }
+    }
+
+    private static void printCategoryString() {
+        System.out.print(buffer);
+        for (Category category : Category.values()) {
+            System.out.printf("%s", " " + category.toString() + " ");
+        }
+        System.out.println();
     }
 
     public static void showExitMessage() {
