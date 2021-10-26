@@ -6,13 +6,14 @@ import java.util.logging.Level;
 
 public class Parser {
 
+    private static final double EPSILON = 0.001;
+
     /**
      * Parses the user-entered command and additional information/flags.
      *
      * @param userInput the {@link String} containing the user input
      * @return whether the program should continue running after processing the given user input
      */
-    //TODO: this method needs refactoring and extraction - currently about 100 lines
     public static boolean parseUserInput(String userInput) {
         String[] rawInput = userInput.split(" ", 2);
         String inputCommand = rawInput[0].toLowerCase();
@@ -29,7 +30,8 @@ public class Parser {
             Storage.getLogger().log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
             return true;
-        } else if (Storage.getListOfTrips().isEmpty() && !inputCommand.equals("create")) {
+        } else if (Storage.getListOfTrips().isEmpty()
+                && !inputCommand.equals("create")) {
             Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
             return true;
@@ -48,10 +50,9 @@ public class Parser {
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
      * for further updates.
      *
-     *
      * @param inputCommand Valid command executed by the user
-     * @param inputParams Additional information appended to the command by the user
-     *                    (inputParams are not checked and may not be valid)
+     * @param inputParams  Additional information appended to the command by the user
+     *                     (inputParams are not checked and may not be valid)
      */
     private static void handleValidCommands(String inputCommand, String inputParams) {
         switch (inputCommand) {
@@ -126,7 +127,7 @@ public class Parser {
         try {
             executeAmount(inputParams);
         } catch (NullPointerException e) {
-            Ui.printPersonNotInTrip();
+            Ui.invalidArgForAmount();
         }
     }
 
@@ -267,6 +268,15 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     Ui.printNoExpensesError();
                 }
+            } else if (secondCommand.equals("index")) {
+                String expenseIndex = inputParams.split(" ", 2)[1];
+                try {
+                    int index = Integer.parseInt(expenseIndex);
+                    System.out.println(openTrip.getExpenseAtIndex(index));
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    Ui.printUnknownExpenseIndexError();
+                }
+
             }
         }
 
@@ -299,12 +309,12 @@ public class Parser {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
             if (person == payer) {
-                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person));
+                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person.getName()));
                 continue;
             }
-            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person));
-            person.setMoneyOwed(payer, expense.getAmountSplit().get(person));
-            person.setMoneyOwed(person, -expense.getAmountSplit().get(person));
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person.getName()));
+            person.setMoneyOwed(person, -expense.getAmountSplit().get(person.getName()));
         }
     }
 
@@ -343,6 +353,7 @@ public class Parser {
         //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
+    //@@author joshualeeky
     protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
         expense.setPayer(person);
@@ -350,15 +361,27 @@ public class Parser {
     }
 
     protected static void updateIndividualSpending(Expense expense) {
+        boolean isLogDisplayed = false;
+
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = getValidPersonInExpenseFromString(input, expense);
         if (payer != null) {
             expense.setPayer(payer);
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
+            Ui.equalSplitPrompt();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
                 double amountRemaining = expense.getAmountSpent() - total;
+                if (Math.abs(amountRemaining) < EPSILON) {
+                    amountBeingPaid.put(person, 0d);
+                    if (!isLogDisplayed) {
+                        Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
+                        Ui.autoAssignIndividualSpending();
+                        isLogDisplayed = true;
+                    }
+                    continue;
+                }
                 Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
@@ -366,7 +389,8 @@ public class Parser {
                     return;
                 } else {
                     try {
-                        double amount = Double.parseDouble(amountString);
+                        double amount = Double.parseDouble(String.format(
+                                amountString, Storage.getOpenTrip().getForeignCurrencyFormat()));
                         total += amount;
                         if (total > expense.getAmountSpent()) {
                             Ui.printIncorrectAmount(expense.getAmountSpent());
@@ -434,11 +458,11 @@ public class Parser {
         }
     }
 
-    private static void executeAmount(String name) {
+    private static void executeAmount(String inputParams) {
         Trip trip = Storage.getOpenTrip();
-        Person toBeChecked = getValidPersonInTripFromString(name, trip);
+        Person toBeChecked = getValidPersonInTripFromString(inputParams, trip);
         if (toBeChecked == null) {
-            Ui.printPersonNotInTrip();
+            Ui.invalidArgForAmount();
         } else {
             Ui.printAmount(toBeChecked, trip);
         }
@@ -452,11 +476,12 @@ public class Parser {
         }
         return null;
     }
+    //@@author
+
 
     private static boolean checkValidCommand(String inputCommand) {
         return Storage.getValidCommands().contains(inputCommand);
     }
-
 
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {

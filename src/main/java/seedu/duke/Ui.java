@@ -20,10 +20,10 @@ public class Ui {
     }
 
     public static void goodBye() {
-        System.out.println("Goodbye!");
+        System.out.println("Exiting the program now. Goodbye!");
     }
 
-
+    //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
                 + Storage.getOpenTrip().getForeignCurrencySymbol()
@@ -36,6 +36,7 @@ public class Ui {
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
+    //@@author
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
@@ -80,6 +81,7 @@ public class Ui {
         System.out.println("You have opened the following trip: "
                 + System.lineSeparator()
                 + trip.getLocation() + " | " + trip.getDateOfTripString());
+        System.out.println();
     }
 
     public static void printCreateFormatError() {
@@ -97,7 +99,7 @@ public class Ui {
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "view filter [category, payer, description] [search keyword]");
+                + "view filter [category, payer, description, person] [search keyword]");
     }
 
 
@@ -116,7 +118,11 @@ public class Ui {
     }
 
     public static void printSingleUnknownTripIndexError() {
-        System.out.println("Please re-enter your trip number. You should only enter a single trip number at a time");
+        System.out.println("Invalid trip number, try again");
+        System.out.println("Syntax: open [trip number]");
+        System.out.println("--------------------------");
+        printAllTrips();
+        System.out.println("--------------------------");
     }
 
     public static void printUnknownTripIndexError() {
@@ -133,7 +139,7 @@ public class Ui {
 
     public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
         System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed");
+                + tripDate + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
@@ -189,6 +195,10 @@ public class Ui {
         System.out.println("Input is not a number");
     }
 
+    public static void promptForTripIndex() {
+        System.out.print("Please enter a valid trip number: ");
+    }
+
     public static void emptyArgForDeleteCommand() {
         System.out.println();
         System.out.println("Which trip to delete?");
@@ -215,24 +225,28 @@ public class Ui {
         System.out.println("The person you entered is not in the expense, please try again.");
     }
 
-    public static void printPersonNotInTrip() {
-        System.out.println("The person you entered is not in the opened trip, please try again.");
+    public static void invalidArgForAmount() {
+        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
+        System.out.println("These are the people involved in this trip:");
+        Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        System.out.println();
     }
 
     public static void printAmount(Person person, Trip trip) {
-        System.out.println(person.getName() + " spent " + stringForeignMoney(person.getMoneyOwed().get(person))
-                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person)) + ") on the trip so far");
+        System.out.println(person.getName() + " spent "
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
-                if (person.getMoneyOwed().get(otherPerson) > 0) {
+                if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
                     System.out.println(otherPerson.getName() + " owes "
-                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + person.getName());
-                } else if (person.getMoneyOwed().get(otherPerson) < 0) {
+                } else if (person.getMoneyOwed().get(otherPerson.getName()) < 0) {
                     System.out.println(person.getName() + " owes "
-                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson))
-                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson)) + ")"
+                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + otherPerson.getName());
                 } else {
                     System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
@@ -252,18 +266,32 @@ public class Ui {
     }
 
     public static void displayHelp() {
-        System.out.println("Create a trip to get started!");
-        System.out.println("create [place] [date] [exchange rate] [people]");
-        System.out.println();
-        System.out.println("Type open [trip number] to open your trip");
-        System.out.println("While a trip is open, type [expense] to create an expense for that trip");
-        System.out.println();
+        if (!Storage.checkOpenTrip()) {
+            System.out.println("Type \"open [trip number]\" to open your trip");
+            System.out.println("While a trip is open, type \"expense\" to create an expense for that trip");
+            System.out.println("Type \"quit\" to exit");
+            System.out.println();
+        } else {
+            System.out.println("You are inside a trip. Trip specific commands:");
+            System.out.println("\texpense: creates an expense");
+            System.out.println("\tview: list all expenses");
+            System.out.println("\tview [filter] [search keyword]: list filtered expenses.");
+            System.out.println("\t\tfilter options: [category, description, payer, person]");
+            System.out.println("\tview index [expense num]");
+            System.out.println("\tsummary: shows how much each person spent in total for this trip");
+            System.out.println("\tamount [person]: for settling repayment at the end of the trip,"
+                    + "shows how much this person owes to others, "
+                    + "or how much others owe this person");
+            System.out.println("\topen [trip num]: open another trip");
+            System.out.println("\tquit: exit the program");
+            System.out.println();
+        }
     }
 
     public static void printInvalidFilterError() {
         System.out.println("Please filter using the following valid filter attributes: "
                 + System.lineSeparator()
-                + "[category], [description], [payer]");
+                + "[category], [description], [payer], [person]");
     }
 
     public static void printFileNotFoundError() {
@@ -294,6 +322,16 @@ public class Ui {
         System.out.println("The save file could not be created. Exiting the program now...");
     }
 
+    public static void newFileSuccessfullyCreated() {
+        System.out.println("A new save file has been created!");
+    }
+
+    public static void printEmptyFileWarning() {
+        System.out.println("A save file was found, but it is empty.");
+        System.out.println("If you wish to recover the contents of your save file, please exit the program now.");
+        System.out.println("Otherwise, you may continue to use the program.");
+    }
+
     public static void printInvalidPerson(String name) {
         System.out.println(name + " is not part of the trip. "
                 + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
@@ -308,4 +346,13 @@ public class Ui {
     }
 
 
+    public static void equalSplitPrompt() {
+        System.out.println("Enter \"equal\" if expense is to be evenly split, enter individual spending otherwise");
+        System.out.println();
+    }
+
+    public static void autoAssignIndividualSpending() {
+        System.out.println("Finished allocating expense amount, but there are people involved that don't need to pay ");
+        System.out.println();
+    }
 }

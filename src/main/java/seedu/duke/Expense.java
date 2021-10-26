@@ -8,12 +8,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-
-/**
- * Constructor requires a Person class which is the user, amount spent, and a description.
- * printDate prints out a nicely formatted date.
- * getExpenseSummary assumes user pays the bill first, and expense is equally split among his friends.
- */
 public class Expense {
     private double amountSpent;
     private String description;
@@ -21,7 +15,7 @@ public class Expense {
     private String category;
     private LocalDate date;
     private Person payer;
-    private HashMap<Person, Double> amountSplit = new HashMap<>();
+    private HashMap<String, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private double exchangeRate;
@@ -29,11 +23,11 @@ public class Expense {
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent (placeholder)
-     * @param category (placeholder)
+     * @param amountSpent   (placeholder)
+     * @param category      (placeholder)
      * @param listOfPersons (placeholder)
-     * @param description (placeholder)
-     * @param exchangeRate (placeholder)
+     * @param description   (placeholder)
+     * @param exchangeRate  (placeholder)
      */
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
                    String description, double exchangeRate) {
@@ -51,7 +45,8 @@ public class Expense {
      */
     public Expense(String inputDescription) {
         String[] expenseInfo = inputDescription.split(" ", 3);
-        this.amountSpent = Double.parseDouble(expenseInfo[0]);
+        this.amountSpent = Double.parseDouble(String.format(
+                expenseInfo[0], Storage.getOpenTrip().getForeignCurrencyFormat()));
         this.category = expenseInfo[1].toLowerCase();
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
@@ -68,6 +63,7 @@ public class Expense {
         return userInput.split("/")[1].trim();
     }
 
+    //@@author joshualeeky
     /**
      * Obtains a list of Person objects from array of names of people.
      *
@@ -99,6 +95,8 @@ public class Expense {
         return validListOfPeople;
     }
 
+    //@@author
+
     public void setPayer(Person person) {
         this.payer = person;
     }
@@ -107,11 +105,12 @@ public class Expense {
         return payer;
     }
 
+
     public void setAmountSplit(Person person, double amount) {
-        amountSplit.put(person, amount);
+        amountSplit.put(person.getName(), amount);
     }
 
-    public HashMap<Person, Double> getAmountSplit() {
+    public HashMap<String, Double> getAmountSplit() {
         return amountSplit;
     }
 
@@ -167,12 +166,29 @@ public class Expense {
                 + System.lineSeparator()
                 + "\t" + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
-                + "\t" + "People involved: " + this.getPersonsList().toString()
+                + "\t" + "People involved: "
                 + System.lineSeparator()
+                + getPersonExpense()
                 + "\t" + "Payer: " + this.getPayer()
                 + System.lineSeparator()
                 + "\t" + "Category: " + this.category)
                 + System.lineSeparator();
+    }
+
+    public String getPersonExpense() {
+        StringBuilder returnString = new StringBuilder();
+        String name;
+        String formattedSpace = "\t";
+        for (Person p : personsList) {
+            name = p.getName();
+            returnString.append(formattedSpace);
+            returnString.append(formattedSpace);
+            returnString.append(personsList.indexOf(p) + 1).append(") ");
+            returnString.append(name).append(", ");
+            returnString.append(Ui.stringForeignMoney(getAmountSplit().get(name)));
+            returnString.append(System.lineSeparator());
+        }
+        return returnString.toString();
     }
 
     //Getters and setters

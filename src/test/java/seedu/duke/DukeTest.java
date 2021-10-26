@@ -1,11 +1,26 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 class DukeTest {
+
+    @Test
+    public void testNewTrip() {
+        String[] stringArray = {"Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
+        Trip trip = new Trip(stringArray);
+        assertEquals("Canada", trip.getLocation());
+        assertEquals("02 Mar 2021", trip.getDateOfTripString());
+        assertEquals("2021-03-02", trip.getDateOfTrip().toString());
+        assertEquals("CAD", trip.getForeignCurrency());
+        assertEquals(0.123, trip.getExchangeRate());
+        assertEquals(3, trip.getListOfPersons().size());
+        assertEquals("ben", trip.getListOfPersons().get(0).getName());
+        assertEquals("jerry", trip.getListOfPersons().get(1).getName());
+        assertEquals("tom", trip.getListOfPersons().get(2).getName());
+    }
 
     @Test
     public void testSetLocation() {

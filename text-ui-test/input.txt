@@ -26,6 +26,7 @@ view filter category lunch
 view filter description d a c
 view filter description c a b
 view filter payer josh
+view index 2
 yikai
 equal
 list

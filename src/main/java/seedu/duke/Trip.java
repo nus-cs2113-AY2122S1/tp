@@ -42,6 +42,7 @@ public class Trip {
     }
 
     public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
+
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
@@ -57,6 +58,9 @@ public class Trip {
             case "payer":
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
+            case "person":
+                findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
+                break;
             default:
                 Ui.printInvalidFilterError();
                 break;
@@ -67,6 +71,7 @@ public class Trip {
         }
 
     }
+
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -115,6 +120,29 @@ public class Trip {
         }
     }
 
+    private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
+                                                   String personToSearchFor) {
+        boolean areThereExpenses = false;
+        for (Expense e : listOfCurrentExpenses) {
+            boolean isExpenseToBeAdded = false;
+            ArrayList<Person> personList = e.getPersonsList();
+            for (Person p : personList) {
+                if (p.getName().equalsIgnoreCase(personToSearchFor)) {
+                    isExpenseToBeAdded = true;
+                    break;
+                }
+            }
+            if (isExpenseToBeAdded) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+                areThereExpenses = true;
+            }
+        }
+        if (!areThereExpenses) {
+            Ui.printNoMatchingExpenseError();
+        }
+    }
+
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
@@ -122,7 +150,7 @@ public class Trip {
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
             if (e.getPersonsList().contains(person)) {
-                currentAmount = e.getAmountSplit().get(person); //why is this null?
+                currentAmount = e.getAmountSplit().get(person.getName());
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
                 expensesInvolved++;
@@ -203,7 +231,7 @@ public class Trip {
     }
 
 
-
+    //@@author joshualeeky
     public String getForeignCurrency() {
         return foreignCurrency;
     }
@@ -245,7 +273,7 @@ public class Trip {
     public void setRepaymentCurrency(String repaymentCurrency) {
         this.repaymentCurrency = repaymentCurrency.toUpperCase();
         setRepaymentCurrencyFormat(this.repaymentCurrency);
-        setForeignCurrencySymbol(this.repaymentCurrency);
+        setRepaymentCurrencySymbol(this.repaymentCurrency);
 
     }
 
@@ -273,6 +301,7 @@ public class Trip {
         }
     }
 
+    //@@author
     public String getLocation() {
         return this.location;
     }
@@ -309,10 +338,19 @@ public class Trip {
         } else {
             System.out.println("List of all Expenses in detail: ");
             for (Expense expense : listOfExpenses) {
+                System.out.print(listOfExpenses.indexOf(expense) + 1 + ". ");
                 Ui.printExpenseDetails(expense);
             }
         }
     }
+
+
+    public Expense getExpenseAtIndex(Integer index) {
+        return listOfExpenses.get(index - 1);
+    }
+
+
+    //@@author joshualeeky
 
     /**
      * Splits the user-entered {@link String} of people involved in a trip into a String array.
@@ -328,11 +366,9 @@ public class Trip {
         }
         for (Person person : listOfPeople) {
             for (Person personToAdd : listOfPeople) {
-                person.getMoneyOwed().put(personToAdd, 0.0);
+                person.getMoneyOwed().put(personToAdd.getName(), 0.0); // Remove .getName()
             }
         }
         return listOfPeople;
-
     }
-
 }

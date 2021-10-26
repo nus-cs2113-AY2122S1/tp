@@ -8,6 +8,20 @@ public class Duke {
 
     private static boolean isProgramRunning = true;
 
+    private static void beginWelcome() {
+
+        Ui.printWelcome();
+
+        Scanner in = new Scanner(System.in);
+        Storage.setScanner(in);
+        Logger logger = Logger.getLogger("ProgramLogger");
+        Storage.setLogger(logger);
+
+        FileStorage.initializeGson();
+        Storage.readFromFile();
+
+    }
+
     /**
      * Reads and returns user input with leading and trailing whitespaces removed.
      *
@@ -24,17 +38,10 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        Ui.printWelcome();
-
-        Scanner in = new Scanner(System.in);
-        Storage.setScanner(in);
-        //Storage.readFromFile();
-
-        Logger logger = Logger.getLogger("ProgramLogger");
-        Storage.setLogger(logger);
+        beginWelcome();
 
         while (isProgramRunning) {
-            isProgramRunning = Parser.parseUserInput(readUserInput(in));
+            isProgramRunning = Parser.parseUserInput(readUserInput(Storage.getScanner()));
             try {
                 Storage.writeToFile();
             } catch (IOException e) {
