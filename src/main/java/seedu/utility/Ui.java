@@ -338,37 +338,90 @@ public class Ui {
         printLine();
     }
 
-    /**
-     * Prints the budget exceeding warning feedback.
-     *
-     * @param month The month when budget exceeded.
-     * @param budgetName The name of the budget.
-     * @param currAmount The current amount which is close to exceeding the budget.
-     * @param limit The budget's limit that got exceeded.
-     */
-    public void printBudgetWarning(String month, String budgetName, double currAmount, double limit) {
+    public void printOverallBudgetWarning(String month, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You are almost reaching the %s OVERALL budget: $%.2f/$%.2f",
+                month, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Consider readjusting your " + month + " OVERALL budget!");
+        printLine();
+    }
+
+    public void printOverallBudgetExceeded(String month, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You have exceeded the %s OVERALL budget: $%.2f/$%.2f", month, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Consider readjusting your " + month + " OVERALL budget!");
+        printLine();
+    }
+
+    public void printOverallExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
+                                                  double overallAmount, double overallLimit) {
         printLine();
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
-        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+        System.out.printf("Since you have already exceeded your %s OVERALL budget: $%.2f/$%.2f",
+                month, overallAmount, overallLimit);
+        System.out.print(newLine);
+        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
+                + " " + budgetName + " budget!");
+        printLine();
+    }
+
+    public void printOverallExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
+                                                   double overallAmount, double overallLimit) {
+        printLine();
+        System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
+                month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+        System.out.printf("Since you have also exceeded your %s OVERALL budget: $%.2f/$%.2f",
+                month, overallAmount, overallLimit);
+        System.out.print(newLine);
+        System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
+                + " " + budgetName + " budget!");
+        printLine();
+    }
+
+    public void printOverallNotExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
+                                                  double overallAmount, double overallLimit) {
+
+        printLine();
+        System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
+                month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+
+        if (overallLimit > 0) {
+            double newLimit = limit + overallLimit - overallAmount;
+            System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
+                    month, overallAmount, overallLimit);
+            System.out.print(newLine);
+            System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
+            System.out.print(newLine);
+        } else {
+            System.out.println("Consider readjusting your " + month + " " + budgetName + " budget!");
+        }
         printLine();
     }
 
 
-    /**
-     * Prints the budget exceeded feedback.
-     *
-     * @param month The month when budget exceeded.
-     * @param budgetName The name of the budget.
-     * @param currAmount The current amount which exceeded the budget.
-     * @param limit The budget's limit.
-     */
-    public void printBudgetExceeded(String month, String budgetName, double currAmount, double limit) {
+    public void printOverallNotExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
+                                                     double overallAmount, double overallLimit) {
         printLine();
-        System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f", month, budgetName, currAmount, limit);
+        System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
+                month, budgetName, currAmount, limit);
         System.out.print(newLine);
-        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+
+        if (overallLimit > 0) {
+            double newLimit = currAmount + overallLimit - overallAmount;
+            System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
+                    month, overallAmount, overallLimit);
+            System.out.print(newLine);
+            System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
+            System.out.print(newLine);
+        } else {
+            System.out.println("Consider readjusting your " + month + " " + budgetName + " budget!");
+        }
         printLine();
     }
 
