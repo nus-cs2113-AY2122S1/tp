@@ -3,9 +3,11 @@ package medbot.ui;
 import java.util.List;
 
 public class SchedulerUi {
-    public static final String END_LINE = System.lineSeparator();
-    public static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
-            + "----------------------------------------------------- " + END_LINE;
+    private static final String END_LINE = System.lineSeparator();
+    private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
+            + "-------------------------------------------------- " + END_LINE;
+    private static final String APPOINTMENT_TABLE_HEADER = " |  ID  |     Date/Time     | Patient ID |"
+            + "     Patient Name     | Staff ID |      Staff Name      | " + END_LINE;
 
     public static String getAddSchedulerHelpMessage() {
         return " " + END_LINE;
@@ -31,6 +33,13 @@ public class SchedulerUi {
         return " " + END_LINE;
     }
 
+    public static String getNoAppointmentsFoundMessage() {
+        return "Sorry, no appointments meeting that criteria were found!";
+    }
+
+    public static String getNoAppointmentsMessage() {
+        return "Sorry, there are no appointments found.";
+    }
 
     /**
      * Returns a schedule information.
@@ -79,6 +88,22 @@ public class SchedulerUi {
         output += END_LINE;
         output += TABLE_ROW_SEPARATOR;
         return output;
+    }
+
+    public static String getFindAppointmentListMessage(String appointmentString) {
+        return "Here is a list of matched appointments:" + END_LINE
+                + TABLE_ROW_SEPARATOR
+                + APPOINTMENT_TABLE_HEADER
+                + TABLE_ROW_SEPARATOR
+                + appointmentString;
+    }
+
+    public static String getListAppointmentListMessage(String appointmentString) {
+        return "Here is a list of all appointments:" + END_LINE
+                + TABLE_ROW_SEPARATOR
+                + APPOINTMENT_TABLE_HEADER
+                + TABLE_ROW_SEPARATOR
+                + appointmentString;
     }
 
 }

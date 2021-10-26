@@ -455,10 +455,6 @@ public class Ui {
                 + END_LINE + "help" + END_LINE;
     }
 
-    public String getNoAppointmentsFoundMessage() {
-        return "Sorry, no appointments meeting that criteria were found!";
-    }
-
     /**
      * Utility function that performs a pseudo-clear of the console. Use this for testing from within
      * the IDE.

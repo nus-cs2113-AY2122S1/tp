@@ -1,13 +1,9 @@
 package medbot;
 
-import medbot.list.SchedulerAppointmentList;
-import medbot.storage.AppointmentStorage;
-import medbot.storage.PatientStorage;
-import medbot.storage.StaffStorage;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
-import medbot.list.ListItemType;
 import medbot.parser.Parser;
+import medbot.storage.StorageManager;
 import medbot.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -21,27 +17,12 @@ public class MedBot {
 
         Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
-        PatientStorage patientStorage = null;
-        StaffStorage staffStorage = null;
-        AppointmentStorage appointmentStorage = null;
-        SchedulerAppointmentList schedulerAppointmentList = new SchedulerAppointmentList();
+        StorageManager storageManager = null;
         boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
         try {
-            patientStorage = new PatientStorage();
-            staffStorage = new StaffStorage();
-            appointmentStorage = new AppointmentStorage();
-            String loadStorageErrorMessage = patientStorage.loadStorage(ListItemType.PATIENT,
-                    scheduler.getPatientList());
-            loadStorageErrorMessage += staffStorage.loadStorage(ListItemType.STAFF,
-                    scheduler.getMedicalStaffList());
-            loadStorageErrorMessage += appointmentStorage.loadStorage(ListItemType.APPOINTMENT,
-                    scheduler.getSchedulerAppointmentList());
-
-            if (!loadStorageErrorMessage.isBlank()) {
-                ui.printOutput(loadStorageErrorMessage);
-            }
+            storageManager = new StorageManager(scheduler, ui);
             ui.printWelcomeMessageTwo();
 
         } catch (FileNotFoundException | MedBotException e) {
@@ -53,12 +34,9 @@ public class MedBot {
             try {
                 Command command = Parser.parseCommand(userInput);
                 command.execute(scheduler, ui);
-                assert patientStorage != null;
-                assert staffStorage != null;
 
-                patientStorage.saveData(scheduler.getPatientList());
-                staffStorage.saveData(scheduler.getMedicalStaffList());
-                appointmentStorage.saveData(scheduler.getSchedulerAppointmentList());
+                assert storageManager != null;
+                storageManager.saveToStorage(scheduler);
                 isInteracting = !command.isExit();
 
             } catch (MedBotException mbe) {

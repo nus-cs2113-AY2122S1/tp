@@ -3,16 +3,19 @@ package medbot;
 
 import medbot.list.ListItem;
 
-import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-
 public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
+
+    private static final int LENGTH_ID_COLUMN = 4;
+    private static final String SPACE = " ";
+    private static final String VERTICAL_LINE_SPACED = " | ";
+
     private int appointmentId = 0;
     private int patientId = 0;
     private int medicalStaffId = 0;
@@ -50,7 +53,11 @@ public class Appointment extends ListItem {
         this.dateTimeCode = dateTimeCode;
     }
 
-    public static String getDateTimeString(int dateTimeCode) {
+    public String getDateTimeString() {
+        return formatDateTimeCode(dateTimeCode);
+    }
+
+    public static String formatDateTimeCode(int dateTimeCode) {
         long epochSecond = (long) dateTimeCode * 60;
         LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
         return localDateTime.format(DATE_TIME_FORMATTER) + "HRS";
@@ -102,7 +109,7 @@ public class Appointment extends ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
+        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString() + " Patient ID: "
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 
@@ -113,8 +120,25 @@ public class Appointment extends ListItem {
      */
     public String getStorageString() {
         return appointmentId + VERTICAL_LINE_SPACED
-                + getDateTimeString(dateTimeCode) + VERTICAL_LINE_SPACED
+                + getDateTimeStorageString(dateTimeCode) + VERTICAL_LINE_SPACED
                 + patientId + VERTICAL_LINE_SPACED
                 + medicalStaffId;
+    }
+
+    private String getDateTimeStorageString(int dateTimeCode) {
+        long epochSecond = (long) dateTimeCode * 60;
+        LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
+        return localDateTime.format(DATE_TIME_FORMATTER_STORAGE);
+    }
+
+    //TODO native methods
+    @Override
+    public void setId(int appointmentId) {
+        setAppointmentId(appointmentId);
+    }
+
+    @Override
+    public int getId() {
+        return getAppointmentId();
     }
 }

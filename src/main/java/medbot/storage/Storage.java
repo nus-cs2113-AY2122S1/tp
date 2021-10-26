@@ -18,10 +18,6 @@ import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 public abstract class Storage {
     protected static final String ERROR_LOAD_STORAGE = "Error: Unable to load data file.";
     protected static final String ERROR_SAVE_STORAGE = "Error: Unable to save data.";
-    protected static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n\n"
-            + "Please decide if you wish to:" + "\n"
-            + "1. Enter 'exit' to exit Medbot to correct the storage file" + "\n"
-            + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     protected File dataFile;
     protected String dataPath;
@@ -70,10 +66,6 @@ public abstract class Storage {
             lineNumber++;
         }
 
-        //TODO unify the error message
-        if (!loadStorageErrorMessage.isBlank()) {
-            loadStorageErrorMessage += ERROR_INVALID_STORAGE_LINE_INSTRUCTION;
-        }
         return loadStorageErrorMessage;
     }
 
