@@ -55,4 +55,14 @@ public class Lesson extends Task {
     public String getReminder(LocalDateTime now) {
         return null;
     }
+
+    @Override
+    public void updateReminderMessage(String message) {
+
+    }
+
+    @Override
+    public void updateReminderTime(long reminderTime) {
+
+    }
 }

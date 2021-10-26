@@ -68,6 +68,10 @@ public abstract class Task {
 
     public abstract String getReminder(LocalDateTime now);
 
+    public abstract void updateReminderMessage(String message);
+
+    public abstract void updateReminderTime(long reminderTime);
+
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;
     }

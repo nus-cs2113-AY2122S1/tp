@@ -13,6 +13,7 @@ public class Reminder {
     private LocalDateTime reminderTime;
     private boolean reminderDone;
     private long userTime = 10;
+    private String message = "Reminder! 10 min before the following task:\n";
 
     public Reminder() {
         this.reminderDone = false;
@@ -22,6 +23,19 @@ public class Reminder {
         this.taskTime = new Timestamp(time.getTime()).toLocalDateTime();
         this.reminderTime = taskTime.minusMinutes(userTime);
         setReminderDone();
+    }
+
+    public void setUserTime(long userTime) {
+        this.userTime = userTime;
+        updateReminderTime();
+    }
+
+    public void updateReminderTime() {
+        this.reminderTime = taskTime.minusMinutes(userTime);
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setRecurReminderTime(LocalDateTime newReminderTime) {
@@ -43,7 +57,7 @@ public class Reminder {
             if (reminderTime.isAfter(now.minusSeconds(BUFFER_SECOND))
                     && reminderTime.isBefore(now.plusSeconds(BUFFER_SECOND))) {
                 this.reminderDone = true;
-                return ("Reminder! 10 min before the following task:\n" + "\t" + task);
+                return (message + "\t" + task);
             }
         }
         return "";

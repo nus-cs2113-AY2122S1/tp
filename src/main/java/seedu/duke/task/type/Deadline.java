@@ -65,7 +65,17 @@ public class Deadline extends Task {
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
     }
-    
+
+    @Override
+    public void updateReminderMessage(String message) {
+        reminder.setMessage(message);
+    }
+
+    @Override
+    public void updateReminderTime(long reminderTime) {
+        reminder.setUserTime(reminderTime);
+    }
+
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()

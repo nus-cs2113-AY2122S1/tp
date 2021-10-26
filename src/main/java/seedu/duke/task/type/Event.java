@@ -80,6 +80,16 @@ public class Event extends Task {
     }
 
     @Override
+    public void updateReminderMessage(String message) {
+        reminder.setMessage(message);
+    }
+
+    @Override
+    public void updateReminderTime(long reminderTime) {
+        reminder.setUserTime(reminderTime);
+    }
+
+    @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()
             + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
