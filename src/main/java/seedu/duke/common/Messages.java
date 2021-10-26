@@ -26,6 +26,8 @@ public class Messages {
     public static final String LIST_LOANED_MESSAGE = "  (+) Listing out loaned items in library";
     // Loan and Return
     public static final String LOAN_SUCCESS = "  (+) Item has been loaned out:";
+    public static final String LOAN_SUCCESS_RESERVED = "  (+) The reserved item has been loaned out:";
+    public static final String RESERVE_SUCCESS = "  (+) You have successfully reserved an item:";
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
     public static final String WRONG_ITEM_MESSAGE = "  (!) Item is not on loan!";

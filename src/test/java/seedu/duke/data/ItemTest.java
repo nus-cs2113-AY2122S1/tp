@@ -2,12 +2,13 @@ package seedu.duke.data.item;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.Status;
 import seedu.duke.data.Item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemTest {
-    Item item = new Item("Junglebook", "1", "available");
+    Item item = new Item("Junglebook", "1", Status.AVAILABLE);
 
     @Test
     void testGetTitle() {
@@ -33,12 +34,12 @@ class ItemTest {
 
     @Test
     void testGetStatus() {
-        assertEquals("available", item.getStatus());
+        assertEquals(Status.AVAILABLE, item.getStatus());
     }
 
     @Test
     void testSetStatus() {
-        item.setStatus("notAvailable");
-        assertEquals("notAvailable", item.getStatus());
+        item.setStatus(Status.LOANED);
+        assertEquals(Status.LOANED, item.getStatus());
     }
 }

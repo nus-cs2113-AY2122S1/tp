@@ -22,8 +22,13 @@
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|librarian|add items to the catalogue|keep the full catalogue up to date|
+|v1.0|librarian|remove items from the catalogue|keep the full catalogue up to date|
+|v1.0|librarian|update the status of an item when it is loaned out|keep the full catalogue up to date|
+|v1.0|librarian|update the status of an item when it is returned|keep the full catalogue up to date|
+|v1.0|librarian|check the list of items available in the library||
+|v1.0|librarian|check the list of items on loan||
+|v1.0|librarian|check the list of all items in the library||
 
 ## Non-Functional Requirements
 

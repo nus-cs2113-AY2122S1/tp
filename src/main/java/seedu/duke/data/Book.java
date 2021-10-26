@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.Status;
+
 public class Book extends Item {
     private String author;
 
@@ -11,7 +13,7 @@ public class Book extends Item {
      * @param status The status of the book, can be either "Loaned" or "Available".
      * @param author The author of the book.
      */
-    public Book(String title, String id, String status, String author) {
+    public Book(String title, String id, Status status, String author) {
         super(title, id, status);
         this.author = author;
     }

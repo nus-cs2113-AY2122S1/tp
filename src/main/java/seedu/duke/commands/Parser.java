@@ -24,12 +24,8 @@ public class Parser {
             return new ExitCommand();
         } else if (input.startsWith(COMMAND_REMOVE)) {
             return new RemoveCommand(input);
-        } else if (input.equals(ListAllCommand.COMMAND_WORD)) {
-            return new ListAllCommand();
-        } else if (input.equals(ListAvailableCommand.COMMAND_WORD)) {
-            return new ListAvailableCommand();
-        } else if (input.equals(ListLoanedCommand.COMMAND_WORD)) {
-            return new ListLoanedCommand();
+        } else if (input.startsWith(ListCommand.COMMAND_WORD)) {
+            return new ListCommand(input);
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommand(input);
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
@@ -38,6 +34,8 @@ public class Parser {
             return new ReturnCommand(input);
         } else if (input.startsWith(EditCommand.COMMAND_WORD)) {
             return new EditCommand(input);
+        } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
+            return new ReserveCommand(input);
         } else {
             return new UnknownCommand();
         }
