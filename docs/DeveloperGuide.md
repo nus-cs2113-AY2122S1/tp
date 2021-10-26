@@ -3,8 +3,10 @@
 ![Traveller](./documentationPics/logo.png)
 ## Preface
 Traveller is a travel planner app that is designed to help holidaymakers like you optimise your trips!
+
 It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI),
 while still retaining the ease of use of a GUI.
+
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
 ### Purpose of developer guide
@@ -21,10 +23,6 @@ Use the Table of Contents below to easily navigate to the section you desire.
 |![](documentationPics/info.png)|Shows how this developer guide is formatted.|
 |![](documentationPics/tip.png)|Shows useful tips when developing Traveller.|
 |![](documentationPics/warning.png)|Shows potential problems when developing Traveller.|
-
-### Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ---
 
@@ -67,6 +65,9 @@ Additionally, the World Map uses 2 other classes to pass data around, the `Count
 
 ![](documentationPics/worldMapDesign.png)
 Figure 2: Design of the World Map
+<p align="center">
+  <img src="documentationPics/worldMapDesign.png"  alt="abc"/>
+</p>
 
 These 4 sub-components are implemented to maintain an internal graph of countries and distances. Dijkstra's algorithm 
 is then performed on this graph to obtain the shortest travel path from 1 country to another.
