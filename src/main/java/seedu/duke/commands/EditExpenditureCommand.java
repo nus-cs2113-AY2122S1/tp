@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.search.FindBudget;
-
 import java.time.LocalDate;
 
 public class EditExpenditureCommand extends EditCommand {
