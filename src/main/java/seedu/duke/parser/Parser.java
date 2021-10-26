@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 
 import seedu.duke.Duke;
+import seedu.duke.Ui;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
 
@@ -14,6 +15,7 @@ import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
 import seedu.duke.commands.UpdateCommand;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Item;
 
 import java.time.LocalDateTime;
@@ -26,7 +28,7 @@ public class Parser {
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
-    public static Command parseCommand(String response) {
+    public static Command parseCommand(String response) throws DukeException {
         String[] command = response.split(" ");
         switch (command[0]) {
         case "list":
@@ -51,9 +53,7 @@ public class Parser {
         case "next":
             return new NextCommand(command);
         default:
-            System.out.println("Im sorry i did not catch that maybe these instructions below will help"
-                    + System.lineSeparator() /*+ ui.lineBreak*/);
-            return new HelpCommand();
+            throw new DukeException(Ui.getInvalidCommandMessage());
         }
     }
 
