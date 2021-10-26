@@ -50,6 +50,10 @@ public class IngredientStorage {
         return quantity;
     }
 
+    public LocalDate getEarliestExpiryDate() {
+        return ingredientBatches.firstKey();
+    }
+
     /**
      * Returns the different batches of ingredients and their respective quantity and expiry date.
      *
