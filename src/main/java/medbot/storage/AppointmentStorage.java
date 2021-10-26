@@ -37,7 +37,7 @@ public class AppointmentStorage extends Storage {
 
         Appointment appointment = new Appointment();
 
-        appointment.setListItemId(appointmentId);
+        appointment.setId(appointmentId);
         for (String prefixPlusAppointmentParameter : prefixPlusAppointmentParameters) {
             updateAppointmentInformation(appointment, prefixPlusAppointmentParameter);
         }

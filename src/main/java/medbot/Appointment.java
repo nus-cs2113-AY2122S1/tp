@@ -10,15 +10,23 @@ import java.time.format.DateTimeFormatter;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 
-public class Appointment extends ListItem {
+public class Appointment implements ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
 
+    private int appointmentId = 0;
     private int patientId = 0;
     private int medicalStaffId = 0;
     private int dateTimeCode = 0;
 
+    public int getId() {
+        return appointmentId;
+    }
+
+    public void setId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
 
     public int getPatientId() {
         return patientId;
@@ -100,7 +108,7 @@ public class Appointment extends ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + listItemId + " Date/Time: " + getDateTimeString() + " Patient ID: "
+        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString() + " Patient ID: "
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
 
@@ -110,7 +118,7 @@ public class Appointment extends ListItem {
      * @return storageString of a person
      */
     public String getStorageString() {
-        return listItemId + VERTICAL_LINE_SPACED
+        return appointmentId + VERTICAL_LINE_SPACED
                 + getDateTimeStorageString(dateTimeCode) + VERTICAL_LINE_SPACED
                 + patientId + VERTICAL_LINE_SPACED
                 + medicalStaffId;

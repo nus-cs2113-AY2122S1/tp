@@ -14,11 +14,11 @@ import java.util.TreeMap;
 import static medbot.ui.Ui.END_LINE;
 
 
-public abstract class PersonList extends MedBotList {
+public abstract class PersonList {
 
     //Sorted to ensure that persons will always be printed in ascending order of ID when storage is manipulated
     private final SortedMap<Integer, Person> persons = new TreeMap<>();
-    private int lastId = 0;
+    private int lastId = 1;
 
     public int size() {
         return persons.size();
@@ -32,12 +32,12 @@ public abstract class PersonList extends MedBotList {
      * @return personId that was allocated to the person
      */
     public int addPerson(Person person) {
-        int personId = person.getListItemId();
+        int personId = person.getId();
 
         //if person not created from storage data
         if (personId <= 0) {
             personId = generatePersonId();
-            person.setListItemId(personId);
+            person.setId(personId);
         }
         persons.put(personId, person);
         return personId;
@@ -49,9 +49,9 @@ public abstract class PersonList extends MedBotList {
      * @return a unique id to be allocated to a person
      */
     private int generatePersonId() {
-        do {
+        while (persons.containsKey(lastId)) {
             lastId++;
-        } while (persons.containsKey(lastId));
+        }
 
         return lastId;
     }
@@ -293,7 +293,6 @@ public abstract class PersonList extends MedBotList {
      *
      * @return storageString of all persons
      */
-    @Override
     public String getStorageString() {
         String output = "";
         for (int key : persons.keySet()) {
@@ -305,16 +304,14 @@ public abstract class PersonList extends MedBotList {
     }
 
     /**
-     * Set lastId to a new number.
+     * Set lastId to newLastId.
      *
      * @param newLastId lastId to be set to this
      */
-    @Override
     public void setLastId(int newLastId) {
         lastId = newLastId;
     }
 
-    @Override
     public int getLastId() {
         return lastId;
     }

@@ -12,7 +12,7 @@ import java.util.List;
 import static medbot.ui.Ui.END_LINE;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
-public abstract class Person extends ListItem {
+public abstract class Person implements ListItem {
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
     private static final String PARAMETER_EMAIL = "e/";
@@ -29,7 +29,7 @@ public abstract class Person extends ListItem {
     private static final int LENGTH_EMAIL_COLUMN = 20;
     private static final int LENGTH_ADDRESS_COLUMN = 20;
 
-
+    private int personId;
     protected String icNumber = "";
     protected String name = "";
     protected String phoneNumber = "";
@@ -38,6 +38,14 @@ public abstract class Person extends ListItem {
     protected PersonType personType;
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
     protected boolean isArchived = false;
+
+    public int getId() {
+        return personId;
+    }
+
+    public void setId(int personId) {
+        this.personId = personId;
+    }
 
     public String toString() {
         return END_LINE
@@ -175,7 +183,7 @@ public abstract class Person extends ListItem {
      * @return storageString of a person
      */
     public String getStorageString() {
-        return getListItemId() + VERTICAL_LINE_SPACED
+        return getId() + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(name) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
@@ -238,7 +246,7 @@ public abstract class Person extends ListItem {
     }
 
     private String getFormattedPersonId() {
-        return formattedAttribute(Integer.toString(listItemId), LENGTH_ID_COLUMN);
+        return formattedAttribute(Integer.toString(personId), LENGTH_ID_COLUMN);
     }
 
     private String getFormattedIcNumber() {

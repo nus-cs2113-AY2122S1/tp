@@ -5,7 +5,6 @@ import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
 import medbot.list.ListItemType;
-import medbot.list.MedBotList;
 import medbot.person.Patient;
 import medbot.person.Staff;
 import medbot.utilities.Pair;
@@ -17,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Math.max;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 public abstract class Storage {
@@ -74,63 +74,49 @@ public abstract class Storage {
 
 
     /**
-     * Add a ListItem object to a MedBotList subclass (eg. PatientList),
+     * Add a ListItem object to the corresponding list,
      * from the text in a storage line in a storage file.
      *
      * @param listItemType enum of ListItem type
      * @param storageLine  a line in storage file
-     * @throws MedBotException if fail to add a ListItem to a MedBotList subclass
+     * @throws MedBotException if fail to add a ListItem to the list
      */
     protected void addListItemFromStorageLine(ListItemType listItemType, Scheduler scheduler, String storageLine)
             throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
 
-        MedBotList medBotList = null;
         switch (listItemType) {
         case PATIENT:
             scheduler.addPatient((Patient) listItem);
-            medBotList = scheduler.getPatientList();
+            int lastPatientId = max(listItem.getId(), scheduler.getLastPatientId());
+            scheduler.setLastPatientId(lastPatientId);
             break;
         case STAFF:
             scheduler.addStaff((Staff) listItem);
-            medBotList = scheduler.getMedicalStaffList();
+            int lastStaffId = max(listItem.getId(), scheduler.getLastStaffId());
+            scheduler.setLastStaffId(lastStaffId);
             break;
         case APPOINTMENT:
             scheduler.addAppointment((Appointment) listItem);
-            medBotList = scheduler.getSchedulerAppointmentList();
+            int lastAppointmentId = max(listItem.getId(), scheduler.getLastAppointmentId());
+            scheduler.setLastAppointmentId(lastAppointmentId);
             break;
         default:
             throw new MedBotException("Not a list item");
 
         }
-        updateLastId(listItem, medBotList);
     }
 
-
     /**
-     * Sets id of ListItem object to be lastId of a MedBotList subclass (eg. PatientList)
+     * Writes the storageString to storage file.
      *
-     * @param listItem   instance of a  ListItem subclass (eg. Patient, Appointment)
-     * @param medBotList instance of a subclass of MedBotList
-     */
-    void updateLastId(ListItem listItem, MedBotList medBotList) {
-        int listItemId = listItem.getListItemId();
-        if (medBotList.getLastId() < listItemId) {
-            medBotList.setLastId(listItemId);
-        }
-    }
-
-
-    /**
-     * Write MedBotList subclass (PatientList etc.) storageString to storage file.
-     *
-     * @param medBotList instance of a subclass of MedBotList
+     * @param storageString String containing the data of the list.
      * @throws MedBotException if unable to write to storage text file.
      */
-    public void saveData(MedBotList medBotList) throws MedBotException {
+    public void saveData(String storageString) throws MedBotException {
         try {
             FileWriter fw = new FileWriter(dataPath);
-            fw.write(medBotList.getStorageString());
+            fw.write(storageString);
             fw.close();
         } catch (IOException e) {
             throw new MedBotException(ERROR_SAVE_STORAGE);
@@ -206,9 +192,6 @@ public abstract class Storage {
      * @return a ListItem object
      * @throws MedBotException if a ListItem object fails to be created
      */
-    protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
-        return new ListItem();
-    }
-
+    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException;
 }
 
