@@ -4,7 +4,7 @@ import seedu.duke.commons.core.exceptions.PriorityException;
 
 //@@author ptejasv
 public enum Priority {
-    L, M, H;
+    L, LOW, M, MEDIUM, H, HIGH;
 
     /**
      * Determines if the input parameter is a valid priority type.
@@ -25,13 +25,28 @@ public enum Priority {
      * Returns a properly capitalised priority type.
      *
      * @param param the priority with any capitalisation
-     * @return either "L", "M", or "H"
+     * @return either "LOW", "MEDIUM", or "HIGH"
      */
     public static String toProper(String param) throws PriorityException {
         if (!is(param)) {
             throw new PriorityException(Messages.ERROR_INVALID_PRIORITY);
         }
 
-        return param.substring(0, 1).toUpperCase() + param.substring(1).toLowerCase();
+        switch (param.toUpperCase()) {
+        case "L":
+            // Fallthrough
+        case "LOW":
+            return "LOW";
+        case "M":
+            // Fallthrough
+        case "MEDIUM":
+            return "MEDIUM";
+        case "H":
+            // Fallthrough
+        case "HIGH":
+            return "HIGH";
+        default:
+            throw new PriorityException(Messages.ERROR_INVALID_PRIORITY);
+        }
     }
 }
