@@ -157,7 +157,7 @@ public class SaveLoader {
      * Creates a directory. Is called if the save directory doesn't exist.
      */
     private void createDir() {
-        File dir = new File(filePath);
+        File dir = new File(directoryPath);
         dir.mkdir();
     }
 }
