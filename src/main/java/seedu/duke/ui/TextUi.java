@@ -275,7 +275,7 @@ public class TextUi {
 
     public static void drawVerticalPercentage(double[] barPercentage, String typeOfStat) {
         System.out.println("Percentage of Money Spent");
-        if(typeOfStat.equals("year")){
+        if (typeOfStat.equals("year")) {
             System.out.println(buffer + "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
         } else if (typeOfStat.equals("category")) {
             printCategoryString();

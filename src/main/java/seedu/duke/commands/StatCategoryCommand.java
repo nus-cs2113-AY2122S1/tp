@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static java.lang.Math.round;
 
-public class StatCategoryCommand extends StatCommand{
+public class StatCategoryCommand extends StatCommand {
     int month;
 
     public StatCategoryCommand(int month) {
@@ -30,7 +30,7 @@ public class StatCategoryCommand extends StatCommand{
             categorySpending = allRecordList.getCategorySpending(month, categoryString, categorySpending);
 
             if (categorySpending != 0) {
-                barPercentage[categoryIndex] = round((categorySpending/monthSpending) * 100);
+                barPercentage[categoryIndex] = round((categorySpending / monthSpending) * 100);
             } else {
                 barPercentage[categoryIndex] = 0;
             }

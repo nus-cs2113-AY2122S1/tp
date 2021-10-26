@@ -16,13 +16,12 @@ public class DeleteMultipleExpenditureCommand extends DeleteCommand {
         this.month = month;
     }
 
-    /**
-     * LocalDate.now().getMonthValue() is being used as a placeholder
-     */
+
     @Override
     public void execute(boolean isLoadingStorage) {
         for (int i = startIndex; i <= endIndex; i++) {
-            TextUi.showMultipleExpenditureDeletedMessage(i, endIndex, allRecordList.getExpenditure(startIndex - 1, month));
+            TextUi.showMultipleExpenditureDeletedMessage(i, endIndex,
+                    allRecordList.getExpenditure(startIndex - 1, month));
             allRecordList.deleteExpenditure(startIndex, month);
         }
     }
