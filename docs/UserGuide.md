@@ -29,8 +29,6 @@ It is an integrated solution that provides real-time tracking of stock, orders a
         * [Updating orders](#updating-orders-updateorder)
         * [Deleting orders](#deleting-an-order-deleteorder)
         * [Receiving orders](#receiving-orders-receiveorder)
-        * [Data Storage](#data-storage)
-        * [Data Editing](#data-editing)
     * [Managing Data](#managing-data)
         * [Archive orders](#archive-orders-archiveorder)
         * [Archive prescriptions](#archive-prescriptions-archiveprescription)
@@ -38,6 +36,9 @@ It is an integrated solution that provides real-time tracking of stock, orders a
     * [Miscellaneous](#miscellaneous)
         * [Help](#showing-help-page--help)
         * [Exit](#exiting-medivault--exit)
+* [Data Handling](#data-handling)
+    * [Data Storage](#data-storage)
+    * [Data Editing](#data-editing)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -105,16 +106,25 @@ Mode has changed to PRESCRIPTION.
 > * Parameters enclosed in `[]` should contain **one or more** optional parameters.
 > * Parameters enclosed in `{}` are **totally** optional parameters.
 > * Parameters you specify can be in any order.
->  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
+    >
+
+* E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
+
 > * MediVault ignores additional parameters provided when commands do not require one.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
->  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
+    >
+
+* E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
+
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
->  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
+    >
+
+* E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
+
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
-> sort in descending order.
+    > sort in descending order.
 
 ## Managing Stocks
 
@@ -157,7 +167,8 @@ Same Medication and Expiry Date exist. Update existing quantity.
 +----+---------+--------+----------+-------------+------------------------------------------+--------------+
 ```
 
-Example 3 (If medication does not exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
+Example 3 (If medication does not
+exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 3:
 
@@ -169,20 +180,17 @@ Medication added: paracetamol
 | 10 | paracetamol | $10.00 |    10    | 02-11-2021  | used to treat fever and pain |     500      | 
 +----+-------------+--------+----------+-------------+------------------------------+--------------+
 ```
+
 ### Listing medication stocks: `liststock`
 
 Lists all existing medications in the inventory.
 
-
 * All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
 * You are able to `liststock` by any column and sort or reverse sort them.
 
-
 Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
-
 Example 1 (Listing all medications): `liststock`
-
 
 Expected output:
 
@@ -234,7 +242,9 @@ Updates existing medication stock information in the inventory.
 > * The Stock ID must exist in MediVault.
 > * You cannot update the Stock ID.
     >
+
 * The allocation of Stock ID is determined by MediVault.
+
 > * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
     **all** entries that has same existing medication name given the `i/ID` with your input values for these parameters.
 > * A new Stock ID will be assigned to the current stock if your update has the `n/NAME` parameter.
@@ -644,29 +654,6 @@ Y
 All data has been cleared!
 ```
 
-### Data Storage
-
-MediVault will automatically save your data after any operation that modifies stock, order or prescriptions. The data
-will be stored in 3 separate files `data/stock.txt`, `data/order.txt` and `data/prescription.txt`. Data is saved in a
-specific format with fields delimited by a pipe `|`.
-
-Data formats:
-
-* For `data/stock.txt`: `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
-* For `data/order.txt`: `ID|NAME|QUANTITY|DATE|STATUS`
-* For `data/prescription.txt`: `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
-
-### Data Editing
-
-> :warning: Warning
-> * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
-> * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
-> * In order for MediVault to work, you have to fix the error in the data file.
-> * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
-> * In the worst case scenario where you are unable to fix it, you may have to delete the corresponding data file.
-> * It may result in unintended behaviour if data file is tampered with while the program is running.
-> * Editing the data directly poses a significant risk to corruption of data.
-
 ## Miscellaneous
 
 ### Showing help page : `help`
@@ -744,6 +731,31 @@ Expected output:
 ```
 Quitting MediVault...
 ```
+
+## Data Handling
+
+### Data Storage
+
+MediVault will automatically save your data after any operation that modifies stock, order or prescriptions. The data
+will be stored in 3 separate files `data/stock.txt`, `data/order.txt` and `data/prescription.txt`. Data is saved in a
+specific format with fields delimited by a pipe `|`.
+
+Data formats:
+
+* For `data/stock.txt`: `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
+* For `data/order.txt`: `ID|NAME|QUANTITY|DATE|STATUS`
+* For `data/prescription.txt`: `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+
+### Data Editing
+
+> :warning: Warning
+> * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
+> * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
+> * In order for MediVault to work, you have to fix the error in the data file.
+> * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
+> * In the worst case scenario where you are unable to fix it, you may have to delete the corresponding data file.
+> * It may result in unintended behaviour if data file is tampered with while the program is running.
+> * Editing the data directly poses a significant risk to corruption of data.
 
 ## FAQ
 
