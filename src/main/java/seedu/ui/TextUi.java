@@ -11,6 +11,11 @@ public abstract class TextUi {
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
 
     private static final String LINE = "____________________________________________________________\n";
+    public static final int GITHUB_INDEX = 1;
+    public static final int LINKEDIN_INDEX = 2;
+    public static final int TELEGRAM_INDEX = 3;
+    public static final int TWITTER_INDEX = 4;
+    public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -195,16 +200,63 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void confirmDeleteFieldMessage() {
-        String message = "Delete the specified fields?  (y/n)";
+    public static void confirmDeleteFieldMessage(boolean[] deletedFields, Contact contact) {
+        String message = "Delete the following fields for " + contact.getName() + "?  (y/n)\n";
+        String fields = deletedFieldsGenerator(deletedFields, contact);
+        printDoubleLineMessage(message + fields);
+    }
+
+    public static void deleteFieldsMessage(boolean[] deletedFields, Contact contact) {
+        String message = "The specified fields for " + contact.getName() + " have been deleted.\n";
+        //String fields = deletedFieldsGenerator(deletedFields, contact);
         printDoubleLineMessage(message);
     }
 
-    public static void deleteFieldsMessage() {
-        String message = "The specified fields have been deleted.";
-        printDoubleLineMessage(message);
+    public static String deletedFieldsGenerator(boolean[] deletedFields, Contact contact) {
+        StringBuilder output = new StringBuilder();
+        assert deletedFields.length == 7;
+        for (int i = 1; i < 6; i++) {
+            switch (i) {
+            case GITHUB_INDEX:
+                if (contact.getGithub() != null && deletedFields[GITHUB_INDEX]) {
+                    output.append(ViewMessageFormatterUi.viewGithubFormatter(contact)).append("\n");
+                }
+                break;
+            case LINKEDIN_INDEX:
+                if (contact.getLinkedin() != null && deletedFields[LINKEDIN_INDEX]) {
+                    output.append(ViewMessageFormatterUi.viewLinkedinFormatter(contact)).append("\n");
+                }
+                break;
+            case TELEGRAM_INDEX:
+                if (contact.getTelegram() != null && deletedFields[TELEGRAM_INDEX]) {
+                    output.append(ViewMessageFormatterUi.viewTelegramFormatter(contact)).append("\n");
+                }
+                break;
+            case TWITTER_INDEX:
+                if (contact.getTwitter() != null && deletedFields[TWITTER_INDEX]) {
+                    output.append(ViewMessageFormatterUi.viewTwitterFormatter(contact)).append("\n");
+                }
+                break;
+            case EMAIL_INDEX:
+                if (contact.getEmail() != null && deletedFields[EMAIL_INDEX]) {
+                    output.append(ViewMessageFormatterUi.viewEmailFormatter(contact)).append("\n");
+                }
+                break;
+            default:
+                //should never reach here
+                assert false;
+            }
+        }
+        if (output.toString().isEmpty()) {
+            return "";
+        }
+        return output.toString();
     }
 
+    public static void noDeleteFields() {
+        String message = "The specified fields are already empty.\n" + "No fields will be deleted";
+        printDoubleLineMessage(message);
+    }
 
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
@@ -317,5 +369,4 @@ public abstract class TextUi {
         String message = "ConTech has successfully imported " + numberOfLines + " lines";
         printDoubleLineMessage(message);
     }
-
 }
