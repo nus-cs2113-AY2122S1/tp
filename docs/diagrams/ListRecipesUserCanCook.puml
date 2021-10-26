@@ -17,7 +17,7 @@ return command
 activate ListRecipeUserCanCookCommand
 end box
 
-box Model
+box Data
 ListRecipeUserCanCookCommand -> RecipeList : getRecipes()
 activate RecipeList
 return recipes

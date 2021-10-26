@@ -17,7 +17,7 @@ return command
 activate DeleteRecipeCommand
 end box
 
-box Model
+box Data
 DeleteRecipeCommand -> RecipeList : remove(recipeName)
 activate RecipeList
 return

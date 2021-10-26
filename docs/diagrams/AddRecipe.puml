@@ -17,7 +17,7 @@ return command
 activate AddRecipeCommand
 end box
 
-box Model
+box Data
 create Recipe
 AddRecipeCommand -> Recipe : Recipe(name)
 activate Recipe

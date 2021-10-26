@@ -17,7 +17,7 @@ return command
 activate CookedRecipeCommand
 end box
 
-box Model
+box Data
 CookedRecipeCommand -> RecipeList : findRecipe(name)
 activate RecipeList
 
