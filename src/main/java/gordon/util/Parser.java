@@ -211,11 +211,17 @@ public class Parser {
             String newLine = splitContent[1].substring(spaceIndex + 1).trim();
             ArrayList<String> newIngredients = new ArrayList<>();
             Collections.addAll(newIngredients, newLine.split("\\+"));
+            for (int i = 0; i < newIngredients.size(); i++) {
+                newIngredients.set(i, newIngredients.get(i).trim());
+            }
             return new SetIngredientsCommand(recipeName, newIngredients);
         case "steps":
             newLine = splitContent[1].substring(spaceIndex + 1).trim();
             ArrayList<String> newSteps = new ArrayList<>();
             Collections.addAll(newSteps, newLine.split("\\+"));
+            for (int i = 0; i < newSteps.size(); i++) {
+                newSteps.set(i, newSteps.get(i).trim());
+            }
             return new SetStepsCommand(recipeName, newSteps);
         case "calories":
             try {
