@@ -19,7 +19,15 @@ public class FindCommand extends Command {
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
-    
+
+
+    /**
+     * Filters through both the expense list and income list to search for entries with matching search keywords.
+     *
+     * @param finances The financial tracker containing all the entries.
+     * @param ui The user interface which provide feedback to the user.
+     * @param budgetManager The budgeting manager that manages all the budget related operations.
+     */
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         ArrayList<Entry> entries = finances.getEntries();
         ArrayList<Entry> filteredEntries = new ArrayList<>();
