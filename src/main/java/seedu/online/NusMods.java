@@ -188,6 +188,9 @@ public class NusMods {
                         return;
                     }
                 }
+                //clears the newline from System.in in the main loop
+                Scanner s = new Scanner(System.in);
+                s.nextLine();
             } catch (IOException e) {
                 TextUi.printErrorMessage();
             }
