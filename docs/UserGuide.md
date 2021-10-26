@@ -38,8 +38,9 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Set budget: `set_budget`](#set-budget-set_budget)
     - [Check budget: `check_budget`](#check-budget-check_budget)
     - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
-    - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
+    - [View yearly report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
+    - [Saving of data](#saving-of-data)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -496,7 +497,7 @@ All your entries have been cleared!
 
 - TODO
 
-### View Yearly Report: `show_graph`
+### View yearly report: `show_graph`
 
 Shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
@@ -551,7 +552,25 @@ Format: `end`
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
+<br>
 
+
+### Saving of Data
+
+StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. 
+
+- `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
+- `StonksXD_Budget.csv` will store all the budget values.
+
+The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
+when not using the program.
+
+#### Note
+
+StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
+When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
+is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
+corrupted and not be loaded into StonksXD. 
 
 ## FAQ
 
