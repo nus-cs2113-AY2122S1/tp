@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -32,7 +33,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_overallScheduleTest() {
+    public void listCommand_overallScheduleTest() throws DukeException {
         Command command1 = Parser.parseCommand("list");
         command1.execute();
         String expectedOutput = "OVERALL SCHEDULE"
@@ -56,7 +57,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_taskListTest() {
+    public void listCommand_taskListTest() throws DukeException {
         Command command1 = Parser.parseCommand("list 1 -t");
         command1.execute();
         String expectedOutput = "Event: Peppa Pig's Concert"
@@ -71,7 +72,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_memberListTest() {
+    public void listCommand_memberListTest() throws DukeException {
         Command command1 = Parser.parseCommand("list 1 t/1");
         command1.execute();
         String expectedOutput = "Event: Peppa Pig's Concert"
