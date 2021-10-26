@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+-> Duke: userInput
+activate Duke
+Duke -> InputParser: getCommandName(userInput)
+activate InputParser
+activate FoodoramaException
+  alt if exception
+InputParser -> FoodoramaException: throw new
+activate Ui
+FoodoramaException -> Ui: getInvalidCommandMsg()
+FoodoramaException<- Ui : INVALID_COMMAND
+FoodoramaException -> Duke: exceptionMsg
+deactivate Ui
+deactivate FoodoramaException
+else else
+InputParser -> Duke: userCommandName
+end
+Duke -> InputParser: getParameters(userInput, userCommandName)
+InputParser -> Duke: parameters
+deactivate InputParser
+
+
+deactivate Duke
+
+@enduml
