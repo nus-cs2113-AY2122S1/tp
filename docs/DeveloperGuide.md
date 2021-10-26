@@ -52,15 +52,11 @@ Steps:
 1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
 2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
 is returned.
-3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid. **If an exception occurs, the exception
-message will be printed out and the command execution ends here.**
-4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called.
-5. Within `AddModuleCommand.checkArguments()`, `ModuleList.getModuleWithCode(moduleCode:String)` is called and will return a
-`Module` object if a module with the `moduleCode` is found. **If `ModuleList.getModuleWithCode(moduleCode:String)` returns
-an object, an exception will occur (the exception message will be printed out) and the command execution ends here.**
-6. A new `Module` object is created and the `ModuleList.addModule(module:Module)` method be invoked to add the `Module`
+3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid.
+4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called. A new
+`Module` object is created and the `ModuleList.addModule(module:Module)` method is invoked to add the `Module`
 object into the list of modules.
-7. Lastly, a message indicating that the module has been added will be printed out.
+5. Lastly, a message indicating that the module has been added will be printed out.
 
 ### Add Student
 The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which
