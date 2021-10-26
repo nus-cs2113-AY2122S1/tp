@@ -20,10 +20,10 @@ public class AddFlightCommandTest {
 
         Flight retrieveFlight = ((AddFlightCommand) addFlight).getFlight();
         assertEquals("SQ-JPN1", retrieveFlight.getId());
-        assertEquals("JPN", retrieveFlight.getToDestination());
-        assertEquals("SG", retrieveFlight.getFromDestination());
-        assertEquals("23/10/21 1300", retrieveFlight.getToDate());
-        assertEquals("27/10/21 0200", retrieveFlight.getFromDate());
+        assertEquals("JPN", retrieveFlight.getReturnDestination());
+        assertEquals("SG", retrieveFlight.getDepartDestination());
+        assertEquals("23/10/21 1300", retrieveFlight.getReturnDate());
+        assertEquals("27/10/21 0200", retrieveFlight.getDepartDate());
     }
 
     @Test
@@ -40,10 +40,10 @@ public class AddFlightCommandTest {
 
         Flight retrieveFlight = testFlightList.getFlightById(0);
         assertEquals("SQ-JPN1", retrieveFlight.getId());
-        assertEquals("JPN", retrieveFlight.getToDestination());
-        assertEquals("SG", retrieveFlight.getFromDestination());
-        assertEquals("23/10/21 1300", retrieveFlight.getToDate());
-        assertEquals("27/10/21 0200", retrieveFlight.getFromDate());
+        assertEquals("JPN", retrieveFlight.getReturnDestination());
+        assertEquals("SG", retrieveFlight.getDepartDestination());
+        assertEquals("23/10/21 1300", retrieveFlight.getReturnDate());
+        assertEquals("27/10/21 0200", retrieveFlight.getDepartDate());
     }
 
 }
