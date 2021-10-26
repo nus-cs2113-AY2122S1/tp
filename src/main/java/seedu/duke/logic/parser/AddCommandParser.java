@@ -20,6 +20,7 @@ import static seedu.duke.logic.parser.ParserUtil.hasCorrectFlagSequence;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
+//@@author richwill28
 public class AddCommandParser {
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);
@@ -42,6 +43,7 @@ public class AddCommandParser {
         }
     }
 
+    //@@author Roycius
     private static Command parseAddLessonCommand(String userResponse) throws ParseException {
         String[] params = userResponse.split(" -d | -s | -e | -l ");
         if (params.length < 4 || params.length > 5) {
@@ -145,6 +147,7 @@ public class AddCommandParser {
         }
     }
 
+    //@@author ptejasv
     public static Command parseAddModuleCommand(String userResponse) {
         String moduleCode = userResponse.strip().toUpperCase();
         return new AddModuleCommand(moduleCode);

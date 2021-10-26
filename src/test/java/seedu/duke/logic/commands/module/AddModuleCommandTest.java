@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author ptejasv
 class AddModuleCommandTest {
     @Test
     public void addModule_invalidModuleCode_exceptionThrown() {

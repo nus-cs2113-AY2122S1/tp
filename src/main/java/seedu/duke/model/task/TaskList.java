@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+//@@author rebchua39
 public class TaskList {
     private final List<Task> taskList;
 
@@ -83,6 +84,7 @@ public class TaskList {
         }
     }
 
+    //@@author richwill28
     /**
      * Filters the list of tasks based on the specified keyword.
      *
@@ -123,6 +125,7 @@ public class TaskList {
         return new TaskList(sortedTaskList, false);
     }
 
+    //@@author Roycius
     /**
      * Serializes the task list into its file data storage format.
      *

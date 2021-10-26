@@ -10,6 +10,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author Roycius
 public class ModuleInfoCommand extends Command {
     private final String moduleCode;
 

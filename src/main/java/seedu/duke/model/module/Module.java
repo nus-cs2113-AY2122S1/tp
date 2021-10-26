@@ -4,6 +4,7 @@ import seedu.duke.commons.core.Messages;
 import seedu.duke.model.module.exceptions.DeserializeModuleException;
 import seedu.duke.ui.Ui;
 
+//@@author ptejasv
 public class Module {
     private String moduleCode;
     private String title;
@@ -69,6 +70,7 @@ public class Module {
         return corequisite;
     }
 
+    //@@author rebchua39
     public void setGrade(String grade) {
         this.grade = grade;
     }
@@ -106,6 +108,7 @@ public class Module {
         }
     }
 
+    //@@author Roycius
     public String serialize() {
         // subject to change
         return moduleCode + " | " + title + " | " + moduleCredit + " | " + grade;

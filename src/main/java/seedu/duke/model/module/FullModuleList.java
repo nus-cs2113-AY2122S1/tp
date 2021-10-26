@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//@@author ptejasv
 /**
  * This class is used to hold the complete list of modules found on NUSMods loaded from ModuleInfo.json. This list
  * cannot be manipulated.

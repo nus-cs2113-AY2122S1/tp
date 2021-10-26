@@ -9,6 +9,7 @@ import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.util.DayUtil.compareDay;
 
+//@@author Roycius
 public class Task implements Comparable<Task> {
     private final String title;
     private final String dayOfTheWeek;
@@ -90,6 +91,7 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    //@@author richwill28
     @Override
     public int compareTo(Task t) {
         try {

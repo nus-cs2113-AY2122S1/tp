@@ -3,6 +3,7 @@ package seedu.duke.commons.util;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.exceptions.TimeParseException;
 
+//@@author richwill28
 public class TimeUtil {
     /**
      * Parses 12-hour time format to 24-hour time format.

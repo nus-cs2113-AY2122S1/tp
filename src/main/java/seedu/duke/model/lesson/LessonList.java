@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+//@@author Roycius
 public class LessonList {
     private final List<Lesson> lessonList;
 
@@ -51,10 +52,7 @@ public class LessonList {
         }
     }
 
-    public void deleteAllLessons() {
-        lessonList.clear();
-    }
-
+    //@@author richwill28
     /**
      * Filters the list of lessons based on the specified keyword.
      *
@@ -79,6 +77,7 @@ public class LessonList {
                 .collect(Collectors.toList()));
     }
 
+    //@@author Roycius
     /**
      * Serializes the lesson list data into the correct format for storage file.
      *

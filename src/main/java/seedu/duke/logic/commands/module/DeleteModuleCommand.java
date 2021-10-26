@@ -11,6 +11,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author Roycius
 public class DeleteModuleCommand extends Command {
     private final String moduleCode;
 

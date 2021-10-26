@@ -10,6 +10,7 @@ import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
 import seedu.duke.ui.Ui;
 
+//@@author Roycius
 public class Lesson {
     private final String title;
     private final String dayOfTheWeek;

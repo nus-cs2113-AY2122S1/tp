@@ -11,6 +11,7 @@ import seedu.duke.model.task.TaskList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+//@@author ptejasv
 public class DeleteLessonCommand extends Command {
     private final int lessonIndex;
 

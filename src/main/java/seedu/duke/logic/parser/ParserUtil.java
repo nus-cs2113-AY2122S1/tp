@@ -2,6 +2,7 @@ package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
 
+//@@author richwill28
 public class ParserUtil {
     public static boolean hasCorrectFlagSequence(String userResponse, String... flags) {
         for (int i = 0; i < flags.length - 1; i++) {

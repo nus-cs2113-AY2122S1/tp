@@ -6,6 +6,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.ui.Ui;
 
+//@@author rebchua39
 public class ExitCommand extends Command {
     @Override
     public boolean isExit() {

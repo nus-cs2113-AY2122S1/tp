@@ -20,6 +20,7 @@ import seedu.duke.model.task.TaskList;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.ui.Ui;
 
+//@@author richwill28
 public class Duke {
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 

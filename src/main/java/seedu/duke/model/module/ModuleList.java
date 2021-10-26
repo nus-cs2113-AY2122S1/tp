@@ -8,12 +8,13 @@ import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
+//@@author ptejasv
 /**
  * This class is used to store and manipulate the user's list of modules that they can modify using command line
  * commands.
  */
 public class ModuleList {
-    private List<Module> moduleList;
+    private final List<Module> moduleList;
 
     public ModuleList() {
         moduleList = new ArrayList<>();
@@ -69,6 +70,11 @@ public class ModuleList {
         }
     }
 
+    public void deleteAllModules() {
+        moduleList.clear();
+    }
+
+    //@@author Roycius
     public String serialize() {
         StringBuilder data = new StringBuilder();
         for (Module module : moduleList) {
@@ -88,10 +94,7 @@ public class ModuleList {
         return moduleList;
     }
 
-    public void deleteAllModules() {
-        moduleList.clear();
-    }
-
+    //@@author rebchua39
     public double calculateCap() {
         int totalModuleCredit = 0;
         double totalWeightedGradePoint = 0;

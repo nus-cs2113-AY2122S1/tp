@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author Roycius
 public class ParserTest {
     @Test
     public void testParseAddTask() {
@@ -82,6 +83,7 @@ public class ParserTest {
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
+    //@@author rebchua39
     @Test
     public void testSetGrade() {
         String userResponse = "set grade cs1010 b";

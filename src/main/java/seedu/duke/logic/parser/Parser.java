@@ -9,6 +9,7 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
+//@@author richwill28
 public class Parser {
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);

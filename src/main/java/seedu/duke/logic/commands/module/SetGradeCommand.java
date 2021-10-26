@@ -11,6 +11,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author rebchua39
 public class SetGradeCommand extends Command {
     private String moduleCode;
     private String grade;
