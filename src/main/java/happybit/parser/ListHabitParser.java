@@ -9,7 +9,8 @@ public class ListHabitParser extends ParserUtils {
 
     private static final String GOAL_INDEX_FLAG = "g/";
     private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";
-    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. Please check your command format.";
+    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
+        + "Please check your command format.";
 
     /**
      * Parses instruction to create ListHabitsCommand for specified goal number.
