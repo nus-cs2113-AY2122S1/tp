@@ -31,11 +31,7 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
 ### Main Components
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> aebe59071b0860e845fda25f2f2fcadcfaf402a7
 The main class of SEPlanner is the `Duke` class. It is responsible for initializing the other components when the program 
 gets started while handling interactions between the other components.  
 The other core components of SEPlanner are:  
@@ -77,10 +73,21 @@ in the command line.
 
 <img src="images/Ui_UML.png" width = "280"/>
 
+The above class diagram illustrates the relationship between the classes within the Ui components.
+
 The UI class
-* Contains helper methods for the other Ui classes
-* Provides means of customization for display formatting. 
-* Summarizes different parts of the program into callable methods.
+* Contains helper methods for the other Ui classes.
+* Provides means of printing constants.
+
+The UiInvalid class contains methods for printing messages from the Parser component.
+
+The UiMapping class contains methods for printing Module Mappings. 
+
+The UiModule class contains methods for printing Modules. 
+
+The UiUniversity class contains methods for printing Universities. 
+
+The UiWelcome class contains a method for printing the welcome greeting. 
 
 
 
