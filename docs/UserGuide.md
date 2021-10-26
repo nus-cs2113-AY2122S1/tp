@@ -3,8 +3,6 @@ layout: page
 title: User Guide
 ---
 
-# User Guide
-
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
