@@ -113,13 +113,13 @@ public class TaskList {
         List<Task> sortedTaskList = new ArrayList<>(taskList);
         sortedTaskList.sort((t1, t2) -> {
             Map<String, Integer> order = new HashMap<>();
-            order.put("L", 1);
-            order.put("M", 2);
-            order.put("H", 3);
+            order.put("LOW", 1);
+            order.put("MEDIUM", 2);
+            order.put("HIGH", 3);
 
             String p1 = t1.getPriority();
             String p2 = t2.getPriority();
-            return Integer.compare(order.get(p1), order.get(p2));
+            return Integer.compare(order.get(p2), order.get(p1));
         });
 
         return new TaskList(sortedTaskList, false);
