@@ -67,7 +67,7 @@ public class AddPrescriptionCommand extends Command {
             return;
         }
 
-        Date prescribeDate = new Date(); //prescribe date will be today's date
+
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
@@ -83,39 +83,47 @@ public class AddPrescriptionCommand extends Command {
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
         int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
+
         if (prescriptionQuantity > totalStock) {
             ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
             ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: " + totalStock);
             return;
         }
+        Date prescribeDate = new Date(); //prescribe date will be today's date
+        String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         for (Stock stock : filteredStocks) {
             int existingQuantity = stock.getQuantity();
             int existingId = stock.getStockId();
             Date existingExpiry = stock.getExpiry();
+            String expiryString = DateParser.dateToString(existingExpiry);
 
-            int setStockValue = 0;
+            if (existingExpiry.after(prescribeDate) || prescribeDateString.equals(expiryString)) {
 
-            if (existingQuantity == quantityToPrescribe) {
-                prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
-                        stock, existingId, existingExpiry, setStockValue);
-                return;
-            }
+                int setStockValue = 0;
 
-            if (existingQuantity > quantityToPrescribe) {
-                setStockValue = existingQuantity - quantityToPrescribe;
-                prescribe(ui, medicines, medicationName, customerId, staffName, quantityToPrescribe, prescribeDate,
-                        stock, existingId, existingExpiry, setStockValue);
-                return;
-            }
+                if (existingQuantity == quantityToPrescribe) {
+                    prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
+                            stock, existingId, existingExpiry, setStockValue);
+                    return;
+                }
 
-            if (existingQuantity < prescriptionQuantity && existingQuantity != 0) {
-                quantityToPrescribe = quantityToPrescribe - existingQuantity;
-                prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
-                        stock, existingId, existingExpiry, setStockValue);
+                if (existingQuantity > quantityToPrescribe) {
+                    setStockValue = existingQuantity - quantityToPrescribe;
+                    prescribe(ui, medicines, medicationName, customerId, staffName, quantityToPrescribe, prescribeDate,
+                            stock, existingId, existingExpiry, setStockValue);
+                    return;
+                }
+
+                if (existingQuantity < prescriptionQuantity && existingQuantity != 0) {
+                    quantityToPrescribe = quantityToPrescribe - existingQuantity;
+                    prescribe(ui, medicines, medicationName, customerId, staffName, existingQuantity, prescribeDate,
+                            stock, existingId, existingExpiry, setStockValue);
+                }
             }
 
         }
+        ui.print("Unable to Prescribe! Medicine has expired!");
 
     }
 

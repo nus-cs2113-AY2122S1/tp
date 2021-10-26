@@ -274,6 +274,7 @@ MediVault creates an `AddPrescriptionCommand` object when CommandParser identifi
 > * MediVault adds the prescription when the `parameter` and `parameterValues` provided by the user are valid.
 > * MediVault will update the quantity left in the stock automatically after prescribing.
 > * MediVault will prescribe medication with the earliest date if there are medication with multiple expiry dates.
+> * Users will not be able to prescribe expired medication.
 > * Users will not be able to prescribe medication if the quantity is more than the total stock quantity.
 
 The sequence diagram for `AddPrescriptionCommand` is shown below.
