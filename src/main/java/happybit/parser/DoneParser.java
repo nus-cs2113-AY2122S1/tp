@@ -4,21 +4,18 @@ import happybit.command.Command;
 import happybit.command.DoneHabitCommand;
 import happybit.exception.HaBitParserException;
 
-public class DoneParser {
-    private static final String ERROR_NO_PARAMETER = "Please provide the goal and habit index"
-            + " of the habit to be marked as done";
-    private static final String ERROR_EXTRA_PARAMETERS = "Please provide only 2 integers";
-    private static final String ERROR_MISSING_PARAMETERS = "The habit index is missing.";
-    private static final String ERROR_INVALID_GOAL_INDEX = "Please enter a valid integer for the goal index";
-    private static final String ERROR_INVALID_HABIT_INDEX = "Please enter a valid integer for the habit index";
-    private static final int GOAL_ARG_INDEX = 0;
-    private static final int HABIT_ARG_INDEX = 1;
+public class DoneParser extends Parser {
 
-    public static Command parseDoneHabitCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
-        String[] arguments = getArguments(commandInstruction);
-        int goalIndex = getGoalIndex(arguments);
-        int habitIndex = getHabitIndex(arguments);
+    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the habit index. Eg: h/1";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
+    private static final int FLAG_LENGTH = 2;
+
+    public static Command parseDoneHabitCommand(String input) throws HaBitParserException {
+        String[] parameters = splitInput(input);
+        int goalIndex = getGoalIndex(parameters);
+        int habitIndex = getHabitIndex(parameters);
         return new DoneHabitCommand(goalIndex, habitIndex);
     }
 
@@ -29,41 +26,46 @@ public class DoneParser {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+    /** Gets the goal index from user input.
+     * @param parameters String array of command parameters.
+     * @return Goal index.
+     * @throws HaBitParserException If the goal index flag or goal index is absent, or non-integer goal index.
+     */
+    private static int getGoalIndex(String[] parameters) throws HaBitParserException {
+        String strGoalIndex = getParameter(parameters, FLAG_GOAL_INDEX);
+        if (strGoalIndex == null || strGoalIndex.equals(FLAG_GOAL_INDEX)) {
+            throw new HaBitParserException(ERROR_GOAL_INDEX_FORMAT);
+        }
+        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
+    }
 
-    private static int getHabitIndex(String[] arguments) throws HaBitParserException {
-        int habitIndex;
+    /** Gets the habit index from user input.
+     *
+     * @param parameters String array of command parameters.
+     * @return Habit index.
+     * @throws HaBitParserException If the habit index flag or habit index is absent, or non-integer habit index.
+     */
+    private static int getHabitIndex(String[] parameters) throws HaBitParserException {
+        String strHabitIndex = getParameter(parameters, FLAG_HABIT_INDEX);
+        if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
+            throw new HaBitParserException(ERROR_HABIT_INDEX_FORMAT);
+        }
+        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), ERROR_HABIT_INDEX_NON_INTEGER) - 1;
+    }
+
+    /**
+     * Converts a string to an integer.
+     *
+     * @param strInt       String representation of an integer.
+     * @param errorMessage Error message to call if string fails to parse.
+     * @return Integer parsed from the string.
+     * @throws HaBitParserException If the string fails to parse.
+     */
+    private static int stringToInt(String strInt, String errorMessage) throws HaBitParserException {
         try {
-            habitIndex = Integer.parseInt(arguments[HABIT_ARG_INDEX]) - 1;
+            return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
-            throw new HaBitParserException(ERROR_INVALID_HABIT_INDEX);
-        }
-        return habitIndex;
-    }
-
-    private static int getGoalIndex(String[] arguments) throws HaBitParserException {
-        int goalIndex;
-        try {
-            goalIndex = Integer.parseInt(arguments[GOAL_ARG_INDEX]) - 1;
-        } catch (NumberFormatException e) {
-            throw new HaBitParserException(ERROR_INVALID_GOAL_INDEX);
-        }
-        return goalIndex;
-    }
-
-    private static String[] getArguments(String commandInstruction) throws HaBitParserException {
-        String[] arguments = commandInstruction.split("\\s");
-        if (arguments.length > 2) {
-            throw new HaBitParserException(ERROR_EXTRA_PARAMETERS);
-        } else if (arguments.length < 2) {
-            throw new HaBitParserException(ERROR_MISSING_PARAMETERS);
-        }
-        return arguments;
-    }
-
-    private static void checkNoDescription(String commandInstruction) throws HaBitParserException {
-        if (commandInstruction == null || commandInstruction.trim().equals("")) {
-            throw new HaBitParserException(ERROR_NO_PARAMETER);
+            throw new HaBitParserException(errorMessage);
         }
     }
-
 }
