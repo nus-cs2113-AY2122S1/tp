@@ -106,6 +106,24 @@ The currently supported contact details are provided in the table below:
 |`-tw`|Twitter handle|
 |`-e`|Email|
 
+### <a name="Add"></a>Adding a contact: `add`
+This feature is processed using `AddContactCommand`. This feature allows a user to add a contact to their contact list.
+The user is able to add a contact by entering a command in the form of `add [DETAILS WITH FLAGS]`, where
+the details with flags are specified in the form `-<flag> <detail>`.
+
+The user's input is parsed in `MainParser` and `AddContactParser`, the latter which inherits `ContactParser`. 
+`ContactParser` inherits `RegexParser` (for regex checks regarding each detail) and implements the `ContactDetails`
+interface (which uniquely allows the parsers to easily identify each detail based on their indexes).
+
+As the contacts are identified by their names, the name field is made compulsory at the `MainParser` level.
+The diagram below shows the process of parsing the user's input.
+
+![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
+
+Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
+executed in `Duke`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
+
+![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
