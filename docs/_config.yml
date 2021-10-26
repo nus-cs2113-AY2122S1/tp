@@ -1,1 +1,12 @@
-theme: jekyll-theme-cayman
+title: "SEPlanner"
+theme: minima
+
+header_pages:
+  - UserGuide.md
+  - DeveloperGuide.md
+  - AboutUs.md
+
+markdown: kramdown
+
+plugins:
+  - jemoji
