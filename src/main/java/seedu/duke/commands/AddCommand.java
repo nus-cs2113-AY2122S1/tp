@@ -267,7 +267,6 @@ public class AddCommand extends Command {
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
-
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 int eventIndex = getEventForTask(task);
@@ -276,14 +275,13 @@ public class AddCommand extends Command {
                 Ui.printLineBreak();
                 return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
             }
+
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
             }
-
         }
         return new CommandResult("Item unable to be added!");
     }
-
 }
