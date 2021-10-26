@@ -1,7 +1,7 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.Trip;
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
@@ -13,6 +13,8 @@ import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//@@author gavienwz
 
 
 public class EditCommand extends Command {

@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.objects.Trip;
 import seedu.traveller.worldmap.Country;
 
 import java.util.ArrayList;

@@ -1,6 +1,9 @@
 package seedu.traveller;
 
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.objects.Item;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +139,7 @@ public class Ui {
     }
 
     public void printReadSave() {
-        System.out.println("\tNow reading save data.");
+        System.out.println("Now reading save data.");
     }
 
     public void printWriteSave() {
@@ -181,4 +184,7 @@ public class Ui {
                 + "\texit : Exits the program.");
     }
 
+    public void printReadSaveError(int lineNumber) {
+        System.out.println("Unable to read line " + lineNumber + ". Save data has been tampered with.");
+    }
 }
