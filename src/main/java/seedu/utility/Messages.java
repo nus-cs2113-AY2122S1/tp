@@ -62,6 +62,4 @@ public class Messages {
 
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
-    public static final String ERROR_LOADING_ADVICE = "./FinancialAdvice.txt cannot be loaded";
-    public static final String UNABLE_TO_FIND_ADVICE_FILE = "FinancialAdvice.txt cannot be found";
 }

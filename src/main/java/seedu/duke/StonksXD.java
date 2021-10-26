@@ -26,7 +26,7 @@ public class StonksXD {
         this.parser = new Parser();
         this.budgetManager = new BudgetManager();
         this.financialAdvisor = new FinancialAdvisor();
-        this.dataManager = new DataManager(parser, finances, ui, budgetManager, financialAdvisor);
+        this.dataManager = new DataManager(parser, finances, ui, budgetManager);
     }
 
     public void run() {

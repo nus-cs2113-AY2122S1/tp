@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DataManagerTest {
 
     public static final String DATE_FORMAT = "dd/MM/yyyy";
-    private static FinancialAdvisor financialAdvisor = new FinancialAdvisor();
 
     @Test
     public void saveEntries_validEntries_correctDataFileContent() {
@@ -33,7 +32,7 @@ public class DataManagerTest {
         Parser parser = new Parser();
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, financialAdvisor);
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         dataManager.saveEntries();
     }
 
@@ -44,7 +43,7 @@ public class DataManagerTest {
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, financialAdvisor);
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         dataManager.loadEntries();
         assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
@@ -70,7 +69,7 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, financialAdvisor);
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         dataManager.saveEntries();
         dataManager.loadEntries();
     }
@@ -81,7 +80,7 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, financialAdvisor);
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
             if (category == ExpenseCategory.NULL) {
@@ -103,7 +102,7 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, financialAdvisor);
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
         dataManager.loadBudgetSettings();
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
