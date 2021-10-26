@@ -25,12 +25,12 @@ public class SelectedModuleStorage extends UserStorage {
             fw.write(curr.toFileFormat());
         }
         fw.close();
-        logger.log(Level.INFO, "File writing operation completed");
+//        logger.log(Level.INFO, "File writing operation completed");
     }
 
     public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
         File file = loadFile(FILE_PATH);
-        logger.log(Level.INFO, "File is either created or opened");
+//        logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         ArrayList<Module> modules = new ArrayList<>();
         while (scanner.hasNext()) {
@@ -38,7 +38,7 @@ public class SelectedModuleStorage extends UserStorage {
             String[] attributes = line.split(" # ");
             modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), moduleMasterList));
         }
-        logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
+//        logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         return modules;
     }
 }

@@ -12,4 +12,8 @@ public class UiAscii {
     public static void printLogo() {
         out.println(AsciiConstants.LOGO);
     }
+
+    public static void printExit() {
+        out.println(AsciiConstants.EXIT);
+    };
 }
