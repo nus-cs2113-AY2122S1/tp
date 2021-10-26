@@ -6,6 +6,7 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiWelcome;
 import seedu.duke.universities.UniversityList;
 
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         Storage storage = new Storage();
         try {
-            Ui.welcome();
+            UiWelcome.welcome();
             ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
             UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
             UniversityList universitySelectedList = new UniversityList(

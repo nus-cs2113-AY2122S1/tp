@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.constants.AsciiConstants;
 import seedu.duke.enumerations.PaddingType;
 import seedu.duke.constants.Constants;
 
@@ -49,9 +50,12 @@ public class Ui {
         return padding;
     }
 
-    public static void welcome() {
-        UiAscii.printGlobe();
-        UiAscii.printLogo();
+    public static void printGlobe() {
+        out.println(AsciiConstants.GLOBE);
+    }
+
+    public static void printLogo() {
+        out.println(AsciiConstants.LOGO);
     }
 
     public static void promptInput() {

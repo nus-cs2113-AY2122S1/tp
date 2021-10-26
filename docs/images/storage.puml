@@ -2,12 +2,12 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
-skinparam groupComposition 3
+
 ModuleStorage "1" ----* Storage
     ModuleStorage : - {static} logger : Logger
 
-    ModuleStorage : + ArrayList<Module> readModuleList()
-    ModuleStorage : + String[] extractAttributes(String line)
+    ModuleStorage : + readModuleList() : ArrayList<Module>
+    ModuleStorage : + extractAttributes(String line) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" ----* Storage
@@ -16,7 +16,7 @@ SelectedUniversityStorage "1" ----* Storage
     SelectedUniversityStorage : + readSelectedUniversityList() : ArrayList<University>
 
 UserStorage <|-- SelectedModuleStorage
-SelectedModuleStorage "1" ------* Storage
+SelectedModuleStorage "1" ----* Storage
     SelectedModuleStorage : - {static} logger : Logger
     SelectedModuleStorage : + updateSelectedModuleList()
     SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
