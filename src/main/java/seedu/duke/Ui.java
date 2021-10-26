@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.items.Event;
-import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
@@ -59,6 +58,10 @@ public class Ui {
         System.out.println("Please choose which event you want to add your task to. ");
     }
 
+    public static void promptForMemberIndex() {
+        System.out.println("Please choose which member you want to assign your task to. ");
+    }
+
     public static String getTaskDeletionMessage(String taskTitle) {
         return String.format("This task has been removed: %s\n", taskTitle);
     }
@@ -83,6 +86,10 @@ public class Ui {
         return String.format("Event added: %s\n"
                         + "Total number of events = %s",
                 event.getTitle(), Duke.eventCatalog.size());
+    }
+
+    public static String getMemberAddedMessage(Member member) {
+        return String.format("Member added: %s\n", member.getName());
     }
 
     public static void printGreetingMessage() {
@@ -110,13 +117,17 @@ public class Ui {
     }
 
 
-    public static <T extends Item> void printList(ArrayList<T> list) {
+    public static <T> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
     }
 
     public static void printEventCatalog() {
         printList(Duke.eventCatalog);
+    }
+
+    public static void printMemberRoster() {
+        printList(Duke.memberRoster);
     }
 
     public static String getTask(Task task) {
