@@ -26,7 +26,7 @@ public class Storage {
 
     private static final Logger LOGGER = Logger.getLogger(TextUi.class.getName());
 
-    public ArrayList<GameRecord> readGameRecords(String gameMode) {
+    public static ArrayList<GameRecord> readGameRecords(String gameMode) {
 
         ArrayList<String> gameRecordsStringArrayList = readFile(gameMode);
         ArrayList<GameRecord> gameRecords = convertToGameRecords(gameRecordsStringArrayList);
@@ -34,13 +34,13 @@ public class Storage {
 
     }
 
-    public void writeGameRecords(ArrayList<GameRecord> gameRecords, String gameMode) {
+    public static void writeGameRecords(ArrayList<GameRecord> gameRecords, String gameMode) {
         assert gameRecords != null;
         ArrayList<String> gameRecordsStringArrayList = convertToGameRecordsStringArrayList(gameRecords);
         writeToFile(gameRecordsStringArrayList, gameMode);
     }
 
-    private ArrayList<String> readFile(String gameMode) {
+    private static ArrayList<String> readFile(String gameMode) {
         ArrayList<String> fileLines = new ArrayList<>();
         String filename = getFileName(gameMode);
         try {
@@ -59,7 +59,7 @@ public class Storage {
         return fileLines;
     }
 
-    private void writeToFile(ArrayList<String> gameRecordsStringArrayList, String gameMode) {
+    private static void writeToFile(ArrayList<String> gameRecordsStringArrayList, String gameMode) {
         String filename = getFileName(gameMode);
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
@@ -80,7 +80,7 @@ public class Storage {
 
     }
 
-    private ArrayList<GameRecord> convertToGameRecords(ArrayList<String> gameRecordsStringArrayList) {
+    private static ArrayList<GameRecord> convertToGameRecords(ArrayList<String> gameRecordsStringArrayList) {
         ArrayList<GameRecord> gameRecords = new ArrayList<>();
         if (gameRecordsStringArrayList.isEmpty()) {
             return gameRecords;
@@ -93,7 +93,7 @@ public class Storage {
         }
     }
 
-    private ArrayList<String> convertToGameRecordsStringArrayList(ArrayList<GameRecord> gameRecords) {
+    private static ArrayList<String> convertToGameRecordsStringArrayList(ArrayList<GameRecord> gameRecords) {
         ArrayList<String> gameRecordsStringArrayList = new ArrayList<>();
         if (gameRecords.isEmpty()) {
             return gameRecordsStringArrayList;
@@ -105,12 +105,12 @@ public class Storage {
         return gameRecordsStringArrayList;
     }
 
-    private String convertGameRecordToString(GameRecord gameRecord) {
+    private static String convertGameRecordToString(GameRecord gameRecord) {
         return gameRecord.getStringFormat();
     }
 
 
-    private String getFileName(String gameMode) {
+    private static String getFileName(String gameMode) {
         assert ((gameMode == "Time-limited") || (gameMode == "Word-limited"));
         String filename = gameMode.toLowerCase(Locale.ROOT) + "_records.txt";
         return filename;

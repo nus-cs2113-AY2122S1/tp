@@ -1,16 +1,20 @@
 package seedu.typists.game;
 
+import seedu.typists.storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameRecordsManager {
 
     private static GameRecordsManager instance = null;
-    private ArrayList<GameRecord> timeLimitedGameRecords = null;
-    private ArrayList<GameRecord> wordLimitedGameRecords = null;
+    private ArrayList<GameRecord> timeLimitedGameRecords;
+    private ArrayList<GameRecord> wordLimitedGameRecords;
 
     private GameRecordsManager() {
         // get gameRecords using some file reader.
+        timeLimitedGameRecords = Storage.readGameRecords("Time-limited");
+        wordLimitedGameRecords = Storage.readGameRecords("Word-limited");
     }
 
     public static GameRecordsManager getGameRecordsManager() {
