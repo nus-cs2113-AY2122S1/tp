@@ -2,24 +2,18 @@
 
 ## Introduction
 
-{Give a product intro}
+PayMeBack is a CLI-based expense tracker for a group of friends travelling overseas together.
+
+In such a group, it is easier for an individual to pay for expenses on behalf of the group rather than each
+individual paying for their share for every activity. At the end of the day, it is quite troublesome to
+manually calculate how much money each individual owes to another. PayMeBack is designed to make this process
+easy and fuss-free.
 
 ## Quick Start
+1. Ensure that you have Java 11 installed.
+1. Down the latest version of `PayMeBack.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-2/tp/releases).
 
-{Give steps to get started quickly}
-
-1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `PayMeBack` from [here](http://link.to/duke), and move the downloaded file to
-   your preferred folder.
-3. Open any command-line application (such as Terminal, Command Prompt, Powershell) and navigate to the folder
-   containing your downloaded copy of `PayMeBack`.
-4. In the command-line interface, type `java -jar PayMeBack.jar`.
-5. If the program starts successfully, you should see the following on your screen:
-```
-some code block
-```
-
-## Features 
+## Features
 
 ### Saving your data
 
@@ -97,7 +91,7 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 ```
 
 
-####View Summary of expenses
+#### View Summary of expenses
 Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
 
 ```summary```
@@ -130,7 +124,7 @@ shopping: $30.00
 ```
 
 ###Expenses
-##Available Currencies
+#### Available Currencies
 Currency Name | ISO Code
 ------------ | -----------
 United States Dollar | USD
@@ -169,6 +163,38 @@ United Arab Emirates Dirham | AED
 Colombian Peso | COP
 Romanian Leu | RON
 
+#### Create Expense
+
+``expense [amount] [category] [people] /[description]``
+
+Creates a new expense entry for the current trip. User
+needs to open a trip to use this command.
+All arguments are compulsory.
+
+
+``[cat]``
+
+Adds a category tag to the expense. Multiple tags are allowed,separated by commas.
+
+
+
+`[people]`
+Denotes the people involved in sharing the expense. Multiple people involved are separated by commas. This argument assumes that the expense is being split equally among the people involved.
+
+
+`[description]`
+Specifies the description of the expense.
+=======
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `PayMeBack` from [here](http://link.to/duke), and move the downloaded file to
+   your preferred folder.
+3. Open any command-line application (such as Terminal, Command Prompt, Powershell) and navigate to the folder
+   containing your downloaded copy of `PayMeBack`.
+4. In the command-line interface, type `java -jar PayMeBack.jar`.
+5. If the program starts successfully, you should see the following on your screen:
+```
+some code block
+```
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -176,7 +202,4 @@ Romanian Leu | RON
 **A**: {your answer here}
 
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
 * Add todo `todo n/TODO_NAME d/DEADLINE`

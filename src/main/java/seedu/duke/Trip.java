@@ -41,7 +41,7 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public void getFilteredExpenses(Integer index, String expenseCategory, String expenseAttribute) {
+    public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
 
         if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
@@ -58,6 +58,9 @@ public class Trip {
             case "payer":
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
+            case "person":
+                findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
+                break;
             default:
                 Ui.printInvalidFilterError();
                 break;
@@ -68,6 +71,7 @@ public class Trip {
         }
 
     }
+
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -106,6 +110,29 @@ public class Trip {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equalsIgnoreCase(expenseAttribute)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+                areThereExpenses = true;
+            }
+        }
+        if (!areThereExpenses) {
+            Ui.printNoMatchingExpenseError();
+        }
+    }
+
+    private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
+                                                   String personToSearchFor) {
+        boolean areThereExpenses = false;
+        for (Expense e : listOfCurrentExpenses) {
+            boolean isExpenseToBeAdded = false;
+            ArrayList<Person> personList = e.getPersonsList();
+            for (Person p : personList) {
+                if (p.getName().equalsIgnoreCase(personToSearchFor)) {
+                    isExpenseToBeAdded = true;
+                    break;
+                }
+            }
+            if (isExpenseToBeAdded) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
                 areThereExpenses = true;
@@ -344,4 +371,3 @@ public class Trip {
         return listOfPeople;
     }
 }
-
