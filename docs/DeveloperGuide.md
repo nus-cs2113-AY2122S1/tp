@@ -117,6 +117,13 @@ the index of the ingredient to be removed from the existing instance of `Ingredi
 `Ingredient` from the list. It then calls a method from `IngredientUI` which displays to the user that the deletion was 
 successful.
 
+###Find Expired Ingredients Feature
+The mechanism of finding expired ingredients is facilitated by `IngredientParser` as well as the Java `LocalDate` 
+class. `IngredientParser` converts the input String into a `LocalDate` object and calls a method from `IngredientUI`.
+This method loops through the current `IngredientList` and finds all instances of `Ingredient` with an expiry date
+before the input `LocalDate` object. It then displays to the user the list of ingredients that are expired, or informs
+the user that no ingredients are expired.
+
 ###Add Dish Feature
 The mechanism of adding a dish into the menu is facilitated by `DishParser`. It creates a new instance of 
 `Dish`, and adds it to the existing instance of `Menu`. It then calls a method from `DishUI` to display a confirmation 
