@@ -1,6 +1,4 @@
 # User Guide
-{::options parse_block_html="true" /}
-
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
@@ -82,17 +80,6 @@ This SEPlanner allows the user to search for mapping through our platform. To do
   4. Select a mapping and add the mapping.
 
 ## Features
-<div class="panel panel-info"> 
-**Note** 
-{: .panel-heading}
-<div class="panel-body>
-NOTE DESCRIPTION
-</div>
-</div>
-
-My important paragraph.
-{: .alert .alert-info}
-
 ### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
 #### Format: `list /muni`  
