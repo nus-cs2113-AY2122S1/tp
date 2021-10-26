@@ -38,9 +38,12 @@ public class IndexParser {
         if (significantIndex.equalsIgnoreCase(REMOVE_ALL_INDEX)) {
             return REMOVE_ALL_ID;
         }
-
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
-        return Integer.parseInt(significantIndex);
+        int index = Integer.parseInt(significantIndex);
+        if (index < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return index;
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
