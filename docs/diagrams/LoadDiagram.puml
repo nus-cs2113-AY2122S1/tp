@@ -1,0 +1,39 @@
+@startuml
+autonumber
+
+title Load Functionality
+
+-> ":StorageFile": load(memberRoster : MemberRoster\n eventCatalog : EventCatalog)
+activate ":StorageFile" #yellow
+|||
+":StorageFile" -> File:new File(DEFAULT_FILE_PATH)
+activate File #lightblue
+return saveFile: File
+|||
+loop lines
+    alt classType != 't'
+        ":StorageFile" -> ":StorageFile": add
+        note right: Adds to the respective roster/catalog
+        activate ":StorageFile" #orange
+        ":StorageFile"-> ":XYZDecoder": decodeXYZFromString(line)
+        activate ":XYZDecoder" #lightblue
+        note right: Decoders for Member,\n Task and Event objects
+        return :DecodedObject
+        return
+    |||
+    else classType == 't'
+        ":StorageFile" -> eventCatalog: get(lastAddedEvent)
+        activate eventCatalog #lightblue
+        return currEvent: Event
+        |||
+        ":StorageFile"-> ":XYZDecoder": decodeXYZFromString(line)
+        activate ":XYZDecoder" #lightblue
+        return task:Task
+        |||
+        ":StorageFile" -> ":TaskSetter": setXYZAttributes()
+        note over ":TaskSetter": Sets the currEvent for the Task,\n adds the task to the currEvent\n and assigns task to respective members
+        activate ":TaskSetter" #lightblue
+        return
+    end
+return
+@enduml

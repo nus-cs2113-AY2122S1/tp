@@ -44,10 +44,26 @@ How selecting an `Event` or an event's nested `Task` works:
 ![](images/SaveDiagram.png)
 
 How the `save` functionality works: 
-1. When the `save` method is called, it constructs a new `File` object using the configured `DEFAULT_FILE_PATH`
-2. Checks for the presence of the `File` object on the local system and creates the `data` directory and `.txt` file if required.
-3. For each `Event` in the provided `eventsList`, the `encodeEventsList` method will be called to parse each event and its respective tasks into an overall `ArrayList<String>` and return this. 
-4. The `writeToFile` method will be called to write the returned `ArrayList<String>` into the `.txt` save file locally for future uses of the program.
+1. When the `save` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH` (see Step 2 in diagram).
+2. Checks for the presence of the `File` object on the local system and creates the `data` directory and `.txt` file if required (see Steps 4-5 in diagram).
+3. For each `Member` in the provided `memberRoster`, the `encodeMemebersList` method will be called to parse each member and its respective member into an overall `ArrayList<String>` and return this (see Steps 6-7 in diagram).  
+4. For each `Event` in the provided `eventsList`, the `encodeEventsList` method will be called to parse each event and its respective tasks into an overall `ArrayList<String>` and return this (see Steps 8-9 in diagram). 
+5. The `writeToFile` method will be called to write the two returned `ArrayList<String>` into the `.txt` save file locally for future uses of the program (see Steps 10-11 in diagram).
+
+#### Load Functionality 
+
+![](images/LoadDiagram.png)
+
+How the `load` functionality works: 
+1. When the `load` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH` (see Step 2 in diagram). 
+2. If the detected line contains data regarding a `Member` or `Event` object, the `StorageFile` instance will decode and construct the `Member` and `Event` objects, adding them to `MemberRoster` and `EventCatalog` respectively (see Steps 4-7 in diagram)
+3. If the detected line contains data regarding a `Task` object:
+   1. The `StorageFile` instance will get the previously added event (see Step 8 in diagram) and save it as an `Event` variable `currEvent`
+   2. The current encoded line will be decoded to construct a new `task:Task` object (see Step 10-11 in diagram). 
+   3. The past added event will be set to the `event` attribute of the new `task`, and the `task` will be added to the list of tasks in `currEvent`. The `task` will also be assigned to `Member` objects in `MemberRoster` if the `Member` objects are assigned to the `task` (bidirectional association) (see Steps 12-13 in diagram).
+
+The `load` functionality asserts the following based on **SLAM**'s core design principles:
+- No tasks can exist without a member assigned to it, but a member can exist without an assigned task. As such, member objects will be first created and added to the roster when loading ([refer to Save functionality to understand how this is achieved](#save-functionality)).
 
 ## Product scope
 ### Target user profile
