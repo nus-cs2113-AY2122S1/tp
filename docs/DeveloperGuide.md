@@ -137,8 +137,7 @@ Initialization of all the classes required for Terminus class to run
 
 ![](attachments/MainLogic.png)
 
-Main loop logic of Terminus  g
-
+Main loop logic of Terminus
 
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
