@@ -12,13 +12,13 @@ public class DeleteContactParser implements ContactDetails {
     public static final int NUMBER_OF_DELETE_ARGS = 3;
     public static final String BUFFER = " ";
 
-    boolean[] getDeleteDetails(String userInput) throws InvalidFlagException, InvalidDeleteDetailException {
-        boolean[] deleteDetails = new boolean[7]; //all false by default
+    boolean[] hasDeletedDetail(String userInput) throws InvalidFlagException, InvalidDeleteDetailException {
+        boolean[] hasDeletedDetail = new boolean[7]; //all false by default
         //deleteDetails[6] is true if delete entire contact
         String[] inputDetails = userInput.trim().split(" ", NUMBER_OF_DELETE_ARGS);
         if (inputDetails.length < NUMBER_OF_DELETE_ARGS) { //no flags specified, delete entire contact
-            deleteDetails[DELETE_CONTACT_INDEX] = true;
-            return deleteDetails;
+            hasDeletedDetail[DELETE_CONTACT_INDEX] = true;
+            return hasDeletedDetail;
         }
         assert inputDetails.length == NUMBER_OF_DELETE_ARGS; //flags may be specified
         String[] destructuredInputs = (BUFFER + inputDetails[USER_INFO_INDEX]).split(DETAIL_SEPARATOR);
@@ -26,8 +26,8 @@ public class DeleteContactParser implements ContactDetails {
         //valid input will take the form of [, -flag input] so min length should be 2
         if (destructuredInputs.length < NUMBER_OF_DELETE_ARGS - 1) {
             //input is in the form delete INDEX [invalid string] so delete entire contact
-            deleteDetails[DELETE_CONTACT_INDEX] = true;
-            return deleteDetails;
+            hasDeletedDetail[DELETE_CONTACT_INDEX] = true;
+            return hasDeletedDetail;
         }
         for (int i = 1; i < destructuredInputs.length; i++) {
             int flag = getIndexToStore(destructuredInputs[i].trim());
@@ -35,9 +35,9 @@ public class DeleteContactParser implements ContactDetails {
             if (flag == 0) { //cannot delete -n
                 throw new InvalidDeleteDetailException();
             } else {
-                deleteDetails[flag] = true;
+                hasDeletedDetail[flag] = true;
             }
         }
-        return deleteDetails;
+        return hasDeletedDetail;
     }
 }

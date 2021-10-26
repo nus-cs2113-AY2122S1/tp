@@ -197,9 +197,9 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void confirmDeleteFieldMessage(boolean[] deletedFields, Contact contact) {
+    public static void confirmDeleteFieldMessage(boolean[] hasDeletedDetail, Contact contact) {
         String message = "Delete the following fields for " + contact.getName() + "?  (y/n)\n";
-        String fields = deletedFieldsGenerator(deletedFields, contact);
+        String fields = deletedFieldsGenerator(hasDeletedDetail, contact);
         printDoubleLineMessage(message + fields);
     }
 
@@ -208,12 +208,12 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static String deletedFieldsGenerator(boolean[] deletedFields, Contact contact) {
+    public static String deletedFieldsGenerator(boolean[] hasDeletedDetail, Contact contact) {
         StringBuilder output = new StringBuilder();
-        assert deletedFields.length == 7;
+        assert hasDeletedDetail.length == 7;
         String[] contactDetails = contact.getContactStringArray();
         for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
-            if (contactDetails[i] != null && deletedFields[i]) {
+            if (contactDetails[i] != null && hasDeletedDetail[i]) {
                 output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
             }
         }

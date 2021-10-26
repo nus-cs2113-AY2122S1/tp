@@ -252,8 +252,8 @@ public class MainParser {
     private Command parseDeleteContact(String userInput) {
         try {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
-            boolean[] deleteDetails = deleteContactParser.getDeleteDetails(userInput);
-            return new DeleteContactCommand(deletedIndex, deleteDetails);
+            boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
+            return new DeleteContactCommand(deletedIndex, hasDeletedDetail);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
