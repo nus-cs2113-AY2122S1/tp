@@ -1,5 +1,6 @@
 package seedu.timetable;
 
+import java.time.LocalTime;
 import java.util.Locale;
 
 import seedu.module.Lesson;
@@ -84,12 +85,16 @@ public class TimetableLesson extends TimetableItem {
         return this.semester;
     }
 
-    public boolean equals(TimetableLesson lesson) {
-        if (lesson == null) {
-            return false;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TimetableLesson) {
+            TimetableLesson lesson = (TimetableLesson) obj;
+            return this.getTitle().equals(lesson.getTitle())
+                    && this.getClassNo().equals(this.getClassNo())
+                    && this.getLessonType().equals(lesson.getLessonType());
         }
-        return this.getTitle().equals(lesson.getTitle()) && this.getClassNo().equals(this.getClassNo())
-                && this.getLessonType().equals(lesson.getLessonType());
+        return false;
+
     }
 
 }

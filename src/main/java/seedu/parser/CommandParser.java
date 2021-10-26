@@ -23,6 +23,7 @@ import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
+import seedu.timetable.TaskType;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
 
@@ -153,8 +154,8 @@ public class CommandParser {
      * @return DeleteeCommand with module code that is to be deleted from the timetable.
      */
     public Command parseDeleteCommand(String text, Timetable timetable) {
-        String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
-        return new DeleteCommand(moduleToBeDeleted, timetable);
+        String itemToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
+        return new DeleteCommand(itemToBeDeleted, timetable);
     }
 
     /**

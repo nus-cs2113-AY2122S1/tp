@@ -15,11 +15,13 @@ public class TimetableUI {
 
     private static final int TIME_MULTIPLIER = 100;
     private static final String FIXED_LENGTH_FORMAT = "%-16.16s";
+    private static final int    FIXED_LENGTH = 16;
     private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String DIVIDER = "----------------";
     private static final String MODULES_HEADER = "Modules taken this semester: \n";
     private static final String CREDIT_COUNT_HEADER = "\nTotal MCs taken this semester: ";
     private static final String STAR_DIVIDER = "\n*******************";
+    private static int sameCounter = 0;
 
     /**
      * Prints the list of modules taken in the timetable, and the total number of
@@ -115,6 +117,7 @@ public class TimetableUI {
             TimetableItem prevItem, LineType type) {
         String str = "";
         if (!Objects.equals(timetableItem, prevItem)) {
+            sameCounter = 0;
             str = "|   ";
             switch (type) {
             case TITLE:
@@ -129,6 +132,9 @@ public class TimetableUI {
             default:
                 str += "";
             }
+        } else if (type == LineType.TITLE) {
+            sameCounter += 1;
+            str += addTitle(timetableItem);
         }
         return String.format(FIXED_LENGTH_FORMAT,str);
     }
@@ -136,10 +142,16 @@ public class TimetableUI {
     private static String addTitle(TimetableItem timetableItem) {
         String str = "";
         if (timetableItem != null) {
-            str = timetableItem.getTitle();
+            String title = timetableItem.getTitle();
+            int startIndex = sameCounter > 0 ? (sameCounter * FIXED_LENGTH) - 4 : 0;
+            if (title.length() > startIndex) {
+                str += title.substring(startIndex);
+            }
         }
         return str;
     }
+
+
 
     private static String addItemType(TimetableItem timetableItem) {
         String str = "";
@@ -152,7 +164,8 @@ public class TimetableUI {
     private static String addVenue(TimetableItem timetableItem) {
         String str = "";
         if (timetableItem != null) {
-            str = timetableItem.getVenue();
+            String venue = timetableItem.getVenue();
+            str = venue == null ? "" : venue;
         }
         return str;
     }

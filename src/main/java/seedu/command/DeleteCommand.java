@@ -12,24 +12,20 @@ import java.util.logging.Logger;
 public class DeleteCommand extends Command {
 
     private static final Logger logger = Logger.getLogger("");
-    private final String moduleToBeDeleted;
+    private final String itemToBeDeleted;
     private final Timetable timetable;
 
-    public DeleteCommand(String moduleToBeDeleted, Timetable timetable) {
-        this.moduleToBeDeleted = moduleToBeDeleted;
+    public DeleteCommand(String itemToBeDeleted, Timetable timetable) {
+        this.itemToBeDeleted = itemToBeDeleted;
         this.timetable = timetable;
     }
 
     public void execute() {
-        Module module;
         try {
-            module = NusMods.fetchModOnline(moduleToBeDeleted);
-            timetable.deleteModuleFromList(module);
+            timetable.deleteModuleFromList(itemToBeDeleted);
+            timetable.deleteFromSchedules(itemToBeDeleted);
             logger.log(Level.INFO, "The module was deleted successfully!");
-        } catch (FetchException e) {
-            System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
-            logger.log(Level.WARNING, "The module code entered is invalid!");
-        } catch (UniModsException e) {
+        }  catch (UniModsException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "The module you are trying to delete does not exist in the timetable!");
         }
