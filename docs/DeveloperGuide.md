@@ -42,13 +42,32 @@ The `Ui` class serves as an abstraction over these smaller classes:
 Given below is a sequence diagram of how the `Ui` component works after the `Parser` 
 parses `help delete` input given by a user.
 
-![Ui Sequence Diagram](https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/diagrams/Ui_sequence_diagram.png)
+<img src="diagrams/Ui_sequence_diagram.png"  alt="Ui Sequence Diagram"/>
+
+[comment]: <> (![Ui Sequence Diagram]&#40;https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/diagrams/Ui_sequence_diagram.png&#41;)
 
 ### Parser Component
 
 ### Scheduler Component
 
 ### Storage Component
+
+
+### Individual Commands
+The Command class is responsible for handling the execution of user input.
+
+Each individual Command object includes:
+* `isExit()`: Return true only if it is an `ExitCommand` .
+* `execute(Scheduler, Ui)`: Using the `Ui` class and data from the `Scheduler` to 
+execute and print out the result to the user.
+* Various attributes specific to the command, some common ones:
+  * `id`: The id of `Person`/`Appointment` object to execute the command on. 
+  * `viewType`: The current `ViewType` of the program.
+
+Given below is a class diagram of how the `Command` class and 
+its subclasses are implemented.
+
+<img src="diagrams/command_class_diagram.png"  alt="Ui Sequence Diagram"/>
 
 ## Implementation
 
