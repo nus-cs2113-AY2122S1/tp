@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -166,28 +167,30 @@ public class Parser {
         Matcher matcher = pattern.matcher(query);
 
         String[] words = query.trim().split(regex);
-
+        int parameterSize = words.length;
         String name = "";
         String studentNumber = "";
-        char gender = ' ';
-        int phoneNumber = 0;
+        String gender = "";
+        String phoneNumber = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
+            boolean overParameterSize = wordIndex >= parameterSize;
+            if (overParameterSize) {
+                break;
+            }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim();
-                assert name != "" : "Name should not be empty";
+                name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/s":
-                studentNumber = words[wordIndex].trim();
-                assert studentNumber != "" : "Student Number should not be empty";
+                studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/g":
-                gender = words[wordIndex].trim().charAt(0);
+                gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/p":
-                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                phoneNumber = words[wordIndex].trim();
                 break;
             default:
                 break;

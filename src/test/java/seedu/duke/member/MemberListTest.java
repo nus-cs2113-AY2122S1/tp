@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
-import seedu.duke.command.EditMember;
 import seedu.duke.command.AddMember;
 import seedu.duke.command.DeleteMember;
+import seedu.duke.command.EditMember;
 import seedu.duke.member.exception.InvalidMemberException;
 
 class MemberListTest {
@@ -25,11 +25,11 @@ class MemberListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", 'F', 98765432);
-        ianWang = new Member("Ian Wang", "A0234567B", 'M', 98441232);
-        glenn = new Member("Glenn", "A0345678C", 'M', 91233344);
-        izdiyad = new Member("Izdiyad", "A0456789D", 'M', 94376452);
-        xingYuan = new Member("Xing Yuan", "A0567891E", 'M', 96987132);
+        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
+        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232");
+        glenn = new Member("Glenn", "A0345678C", "M", "91233344");
+        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452");
+        xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132");
 
         ArrayList<Member> memberList = new ArrayList<Member>();
         memberList.add(teckHwee);

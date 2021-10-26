@@ -31,7 +31,7 @@ public class MemberList {
         return memberList.get(index - 1).studentNumber;
     }
 
-    public char getMemberGender(int index) { //added by xy
+    public String getMemberGender(int index) { //added by xy
         return memberList.get(index - 1).gender;
     }
 
@@ -53,6 +53,7 @@ public class MemberList {
      *
      * @param memberNumber member number according to member list
      * @return member request by memberNumber
+     * @throws InvalidMemberException If member do not exist
      */
     public Member getMember(int memberNumber) throws InvalidMemberException {
         Member member = new Member();
