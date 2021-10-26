@@ -70,8 +70,6 @@ public class ReminderCommandTest {
         Command customize4 = new ReminderCommand(taskManager, arguments4);
         customize4.executeCommand();
 
-        ArrayList<String> results = DataManager.getStringLineList();
-
         expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|"
                 + "10|HEY!");
         expectedOut.add("todo|go jogging|null|medium|none|null|null");
@@ -79,6 +77,8 @@ public class ReminderCommandTest {
                 + "15|HEY!");
         expectedOut.add("event|project meeting|2021-10-30T02:00|2021-10-30T05:00|medium|monthly|"
                 + "10|Reminder! 10 min before the following task:");
+        
+        ArrayList<String> results = DataManager.getStringLineList();
 
         assertEquals(expectedOut, results);
     }
