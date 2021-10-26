@@ -37,8 +37,9 @@ public class ParserTest {
                 + System.lineSeparator()
                 + "2. Delete a recipe: deleteRecipe \"Index of recipe\"" + System.lineSeparator()
                 + "3. List all your recipes: listRecipes" + System.lineSeparator()
-                + "4. Find a recipe: find \"keyword\" \"number/item name\"," +
-                "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time" + System.lineSeparator()
+                + "4. Find a recipe: find \"keyword\" \"number/item name\","
+                + "where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time"
+                + System.lineSeparator()
                 + "5. Check a specific recipe: check \"Name of Recipe\"" + System.lineSeparator()
                 + "6. Add calories to recipe: set \"recipe name\" \"/calories\" numberOfCalories "
                 + System.lineSeparator()
