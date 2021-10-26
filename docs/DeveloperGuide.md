@@ -29,7 +29,42 @@ Gonna to change this .puml diagram later - zhansen
 
 ### Time Limit Game
 
-### Storage
+### \[Proposed\] View Statistics feature
+An enhancement of view best statistics feature.
+#### \[Proposed Implementation\]
+The top-level logic of view statistics feature resides in ViewStatistics. It implements the Command
+interface. The key methods in the ViewStatistics class is
+* `retrieveStatistics()` - Decides which of the 3 methods below to run
+* `calculateBestStatistics()` - Returns the best statistics over the past n games
+* `calculateWorstStatistics()` - Returns the worst statistics over the past n games
+* `calculateAverageStatistics()` - Returns the average statistics over the past n games
+<!-- -->
+Given below is an example usage scenario and how the program implements the feature
+
+Step 1: The user launches the application (scenario assumes that there are several game records already stored in multiple files). 
+1. The program carries out the initialization code and creates a HistoryManager object.
+<!-- -->
+
+Step 2: The user executes `view -m best -g game error -n 9` to view his/her best statistics for the error game mode over the past 9 games.
+1. A ViewCommand object is then instantiated.
+2. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.
+3. RetrieveStatisticsManager then calls the getNGames() method of historyManager() and self-invokes calculateBestStatistics().
+4. calculateBestStatistics() returns a HashMap containing the statistics. 
+5. The statistics are then displayed using the displayStatistics() method of StatisticsUI class.
+<!-- -->
+
+The following sequence diagram shows how the above scenario is executed
+
+The following class diagram shows the relationship among the main involved classes
+
+
+#### Alternative Implementation
+* One implementation considered is to do away with the retrieveStatistics() method and immediately call one of calculateBestStatistics,
+calculateWorstStatistics() or calculateAverageStatistics() based on the gamer's imput using a switch statement. This implementation choice 
+was not used because it violates the Single Responsibility Principle and does not do SLAP well.
+* Another implementation considered was for HistoryManager to do the main logic. This implementation was not done as it violates the
+Single Responsibility Principle
+<!-- -->
 
 ## Product scope
 
