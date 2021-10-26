@@ -13,8 +13,6 @@ public class CommandFactory {
             return new WordGameCommand();
         case "content":
             return new ContentCommand();
-        case "error":
-            return new ErrorCommand();
         case "bye":
             return new ExitCommand();
         default:

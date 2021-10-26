@@ -15,9 +15,17 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### Choose game mode
-
 ### Choose the game content
+
+Input the 'content' command to start the text selection.
+
+There are 3 types:
+
+    1. Opening paragraphs from famous books
+    2. Custom Wikipedia article
+    3. Random words
+
+![](uml/Content.png)
 
 ### Word Limit Game
 
