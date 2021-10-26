@@ -9,12 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class DoneParserTest {
-    private static final String ERROR_NO_PARAMETER = "Please provide the goal and habit index"
-            + " of the habit to be marked as done";
-    private static final String ERROR_EXTRA_PARAMETERS = "Please provide only 2 integers";
-    private static final String ERROR_MISSING_PARAMETERS = "The habit index is missing.";
-    private static final String ERROR_INVALID_GOAL_INDEX = "Please enter a valid integer for the goal index";
-    private static final String ERROR_INVALID_HABIT_INDEX = "Please enter a valid integer for the habit index";
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
@@ -31,7 +25,7 @@ class DoneParserTest {
     @Test
     void parseDoneHabitCommand_missingParameters_exceptionThrown() {
         try {
-            DoneParser.parseDoneHabitCommand("");
+            DoneParser.parseDoneHabitCommand(" ");
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
@@ -69,6 +63,13 @@ class DoneParserTest {
     void parseDoneHabitCommand_missingHabitIndex_exceptionThrown() {
         try {
             DoneParser.parseDoneHabitCommand("g/1 h/");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_FORMAT, e.getMessage());
+        }
+
+        try {
+            DoneParser.parseDoneHabitCommand("g/1 ");
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_FORMAT, e.getMessage());

@@ -26,7 +26,10 @@ public class DoneParser extends Parser {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-    /** Gets the goal index from user input.
+
+    /**
+     * Gets the goal index from user input.
+     *
      * @param parameters String array of command parameters.
      * @return Goal index.
      * @throws HaBitParserException If the goal index flag or goal index is absent, or non-integer goal index.
@@ -39,7 +42,8 @@ public class DoneParser extends Parser {
         return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
     }
 
-    /** Gets the habit index from user input.
+    /**
+     * Gets the habit index from user input.
      *
      * @param parameters String array of command parameters.
      * @return Habit index.
