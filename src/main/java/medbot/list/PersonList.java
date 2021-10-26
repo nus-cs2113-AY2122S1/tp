@@ -305,16 +305,14 @@ public abstract class PersonList implements MedBotList {
     }
 
     /**
-     * Set lastId to a new number.
+     * Set lastId to newLastId.
      *
      * @param newLastId lastId to be set to this
      */
-    @Override
     public void setLastId(int newLastId) {
         lastId = newLastId;
     }
 
-    @Override
     public int getLastId() {
         return lastId;
     }

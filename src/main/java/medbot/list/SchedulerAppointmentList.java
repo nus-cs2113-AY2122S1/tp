@@ -123,12 +123,10 @@ public class SchedulerAppointmentList implements MedBotList {
     }
 
 
-    @Override
     public void setLastId(int lastId) {
         this.lastId = lastId;
     }
 
-    @Override
     public int getLastId() {
         return lastId;
     }

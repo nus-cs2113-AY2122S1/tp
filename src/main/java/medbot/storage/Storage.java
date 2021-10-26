@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Math.max;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 public abstract class Storage {
@@ -85,41 +86,27 @@ public abstract class Storage {
             throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
 
-        MedBotList medBotList = null;
         switch (listItemType) {
         case PATIENT:
             scheduler.addPatient((Patient) listItem);
-            medBotList = scheduler.getPatientList();
+            int lastPatientId = max(listItem.getId(), scheduler.getLastPatientId());
+            scheduler.setLastPatientId(lastPatientId);
             break;
         case STAFF:
             scheduler.addStaff((Staff) listItem);
-            medBotList = scheduler.getMedicalStaffList();
+            int lastStaffId = max(listItem.getId(), scheduler.getLastStaffId());
+            scheduler.setLastStaffId(lastStaffId);
             break;
         case APPOINTMENT:
             scheduler.addAppointment((Appointment) listItem);
-            medBotList = scheduler.getSchedulerAppointmentList();
+            int lastAppointmentId = max(listItem.getId(), scheduler.getLastAppointmentId());
+            scheduler.setLastAppointmentId(lastAppointmentId);
             break;
         default:
             throw new MedBotException("Not a list item");
 
         }
-        updateLastId(listItem, medBotList);
     }
-
-
-    /**
-     * Sets id of ListItem object to be lastId of a MedBotList subclass (eg. PatientList)
-     *
-     * @param listItem   instance of a  ListItem subclass (eg. Patient, Appointment)
-     * @param medBotList instance of a subclass of MedBotList
-     */
-    void updateLastId(ListItem listItem, MedBotList medBotList) {
-        int listItemId = listItem.getId();
-        if (medBotList.getLastId() < listItemId) {
-            medBotList.setLastId(listItemId);
-        }
-    }
-
 
     /**
      * Write MedBotList subclass (PatientList etc.) storageString to storage file.

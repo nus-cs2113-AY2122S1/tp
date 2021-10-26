@@ -228,6 +228,22 @@ public class Scheduler {
         medicalStaffList.unarchivePerson(staffId);
     }
 
+    public int getLastPatientId() {
+        return patientList.getLastId();
+    }
+
+    public void setLastPatientId(int lastPatientId) {
+        patientList.setLastId(lastPatientId);
+    }
+
+    public int getLastStaffId() {
+        return medicalStaffList.getLastId();
+    }
+
+    public void setLastStaffId(int lastStaffId) {
+        medicalStaffList.setLastId(lastStaffId);
+    }
+
     /**
      * Returns a copy of the appointment at the specified id.
      *
@@ -254,14 +270,6 @@ public class Scheduler {
             throws MedBotException {
         List<Integer> appointmentIds = patientList.listAppointments(patientId, filterType, dateTimeCode);
         return generateAppointmentTable(appointmentIds);
-    }
-
-    private String generateAppointmentTable(List<Integer> appointmentIds) throws MedBotException {
-        String output = EMPTY_STRING;
-        for (int appointmentId : appointmentIds) {
-            output += generateAppointmentTableRow(appointmentId) + END_LINE;
-        }
-        return output;
     }
 
     /**
@@ -320,6 +328,14 @@ public class Scheduler {
         insertAppointment(newAppointment);
     }
 
+    public int getLastAppointmentId() {
+        return schedulerAppointmentList.getLastId();
+    }
+
+    public void setLastAppointmentId(int lastAppointmentId) {
+        schedulerAppointmentList.setLastId(lastAppointmentId);
+    }
+
     private int insertAppointment(Appointment appointment) throws MedBotException {
         try {
             int appointmentId = schedulerAppointmentList.addAppointment(appointment);
@@ -356,6 +372,14 @@ public class Scheduler {
         if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_STAFF_APPOINTMENT_CLASH, clashAppointmentId));
         }
+    }
+
+    private String generateAppointmentTable(List<Integer> appointmentIds) throws MedBotException {
+        String output = EMPTY_STRING;
+        for (int appointmentId : appointmentIds) {
+            output += generateAppointmentTableRow(appointmentId) + END_LINE;
+        }
+        return output;
     }
 
     private String generateAppointmentTableRow(int appointmentId) throws MedBotException {
