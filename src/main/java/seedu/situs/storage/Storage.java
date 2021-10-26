@@ -185,7 +185,8 @@ public class Storage {
             String dataToWrite = ig.getIngredientGroupName() + "|";
 
             for (int i = 1; i <= ig.getIngredientGroupSize(); i++) {
-                dataToWrite += ig.get(i).getAmount() + "%" + Ingredient.dateToString(ig.get(i).getExpiry()) + "|";
+                dataToWrite += String.format("%.1f", ig.get(i).getAmount()) + "%"
+                        + Ingredient.dateToString(ig.get(i).getExpiry()) + "|";
             }
 
             dataToWrite += System.lineSeparator();
