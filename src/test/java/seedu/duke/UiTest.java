@@ -382,23 +382,10 @@ public class UiTest {
                 + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$190.00" + newLine
                 + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00"
                 + newLine
-                + "You can directly increase your OCTOBER MEDICAL budget up to $240.00!"
+                + "You can directly increase your OCTOBER MEDICAL budget up to $250.00!"
                 + newLine + SEPARATOR_LINE;
         testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 190,
                 250, 300);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallNotExceededBudgetExceeded_givenBudget_printUnableToReadjustMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$150.00" + newLine
-                + "You do not have enough in your OCTOBER OVERALL budget to readjust your OCTOBER MEDICAL budget."
-                + newLine
-                + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 150,
-                290, 300);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 

@@ -379,19 +379,12 @@ public class Ui {
         System.out.print(newLine);
 
         if(overallLimit > 0) {
-            double newLimit = limit + overallLimit - overallAmount;
-            if (newLimit >= currAmount) {
-                System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
-                        month, overallAmount, overallLimit);
-                System.out.print(newLine);
-                System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
-                System.out.print(newLine);
-            } else {
-                System.out.println("You do not have enough in your " + month + " OVERALL budget to readjust your "
-                        + month + " " + budgetName + " budget.");
-                System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month +
-                        " " + budgetName + " budget!");
-            }
+            double newLimit = currAmount + overallLimit - overallAmount;
+            System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
+                    month, overallAmount, overallLimit);
+            System.out.print(newLine);
+            System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
+            System.out.print(newLine);
         } else {
             System.out.println("Consider readjusting your " + month + " " + budgetName + " budget!");
         }
