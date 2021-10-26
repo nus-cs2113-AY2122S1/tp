@@ -208,6 +208,13 @@ public class Ui {
         System.out.println("---------------------------");
     }
 
+    public static void invalidArgForAmount() {
+        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
+        System.out.println("These are the people involved in this trip:");
+        Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        System.out.println();
+    }
+
     public static void printInvalidDeleteFormatError() {
         System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
     }
@@ -225,12 +232,6 @@ public class Ui {
         System.out.println("The person you entered is not in the expense, please try again.");
     }
 
-    public static void invalidArgForAmount() {
-        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
-        System.out.println("These are the people involved in this trip:");
-        Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
-        System.out.println();
-    }
 
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent "
@@ -265,6 +266,7 @@ public class Ui {
         printListOfPeople(personArrayList);
     }
 
+    //@@author lixiyuan416
     public static void displayHelp() {
         if (!Storage.checkOpenTrip()) {
             System.out.println("Type \"open [trip number]\" to open your trip");
@@ -287,6 +289,7 @@ public class Ui {
             System.out.println();
         }
     }
+    //@@author
 
     public static void printInvalidFilterError() {
         System.out.println("Please filter using the following valid filter attributes: "
@@ -345,7 +348,7 @@ public class Ui {
                 + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
-
+    //@@author lixiyuan416
     public static void equalSplitPrompt() {
         System.out.println("Enter \"equal\" if expense is to be evenly split, enter individual spending otherwise");
         System.out.println();
@@ -359,4 +362,5 @@ public class Ui {
     public static void AskUserToConfirm() {
         System.out.print("There will be people involved that don't need to pay, are you sure? (y/n)");
     }
+    //@@author
 }

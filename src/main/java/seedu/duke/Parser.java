@@ -425,6 +425,7 @@ public class Parser {
         }
     }
 
+    //@@author lixiyuan416
     private static boolean manageLog(boolean isLogDisplayed) {
         if (!isLogDisplayed) {
             Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
@@ -451,6 +452,7 @@ public class Parser {
         }
         return doesUserAgree;
     }
+    //@@author
 
     private static Person getValidPersonInExpenseFromString(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {
