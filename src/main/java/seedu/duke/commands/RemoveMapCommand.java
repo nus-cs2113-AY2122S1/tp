@@ -24,7 +24,7 @@ public class RemoveMapCommand extends Command {
         Module localModule = moduleMasterList.get(moduleIndexToMap - 1);
         Module mappedModule = universityToMap.getMappedModule(localModule, moduleSelectedList);
         universityToMap.removeMapping(selectedMapping);
-        UiMapping.printMapping(selectedMapping, universityToMap.getMappingListSize());
+        UiMapping.printMapping(selectedMapping, moduleIndexToMap);
         storage.updateSelectedUniversityList(universitySelectedList);
     }
 }

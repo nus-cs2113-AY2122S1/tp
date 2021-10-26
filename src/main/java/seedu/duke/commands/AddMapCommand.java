@@ -23,7 +23,7 @@ public class AddMapCommand extends Command {
         System.out.println("New module mapping added: ");
         ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex - 1);
         universityToMap.addMapping(selectedMapping);
-        UiMapping.printMapping(selectedMapping, universityToMap.getMappingListSize());
+        UiMapping.printMapping(selectedMapping, selectedMappingIndex);
         storage.updateSelectedUniversityList(universitySelectedList);
     }
 }
