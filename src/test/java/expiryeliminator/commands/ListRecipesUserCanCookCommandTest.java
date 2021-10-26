@@ -34,4 +34,15 @@ public class ListRecipesUserCanCookCommandTest {
                 TestUtil.generateChickenRecipe() + "\n");
         assertEquals(command.execute(ingredients,recipes),message);
     }
+
+    @Test
+    public void listRecipesUserCanCookCommand_enoughIngredientsButSomeAreExpired_listRecipeUserCanCook() {
+        final RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
+        final IngredientRepository ingredients = TestUtil.generateIngredientRepositoryWithExpiredIngredients(1,20);
+        Command command = new ListRecipesUserCanCookCommand();
+        String message = String.format(ListRecipesUserCanCookCommand.MESSAGE_RECIPES_WITH_ENOUGH_INGREDIENTS_TO_COOK,
+                TestUtil.generateChickenRecipe() + "\n"
+                        + String.format(ListRecipesUserCanCookCommand.MESSAGE_INGREDIENTS_EXPIRED,"Chicken\nSalt\n"));
+        assertEquals(command.execute(ingredients,recipes),message);
+    }
 }
