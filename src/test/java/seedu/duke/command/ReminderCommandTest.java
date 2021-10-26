@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReminderCommandTest {
     private ArrayList<String> expectedOut = new ArrayList<>();
-    private String expectedResult = "";
     TaskManager taskManager = new TaskManager();
     Task todoReminder;
     Task todoNoReminder;
@@ -54,27 +53,27 @@ public class ReminderCommandTest {
         arguments1.put(Command.MAIN_ARGUMENT, "1");
         arguments1.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
         Command customize1 = new ReminderCommand(taskManager, arguments1);
-        result += customize1.executeCommand().getMessage();
+        customize1.executeCommand();
 
         Map<String, String> arguments2 = new HashMap<>();
         arguments2.put(Command.MAIN_ARGUMENT, "2");
         arguments2.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
         Command customize2 = new ReminderCommand(taskManager, arguments2);
-        result += customize2.executeCommand().getMessage();
+        customize2.executeCommand();
 
         Map<String, String> arguments3 = new HashMap<>();
         arguments3.put(Command.MAIN_ARGUMENT, "3");
         arguments3.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
         arguments3.put(ReminderFlag.TIME_AHEAD, "15");
         Command customize3 = new ReminderCommand(taskManager, arguments3);
-        result += customize3.executeCommand().getMessage();
+        customize3.executeCommand();
 
         Map<String, String> arguments4 = new HashMap<>();
         arguments4.put(Command.MAIN_ARGUMENT, "5");
         arguments4.put(ReminderFlag.REMINDER_MESSAGE, "HEY!");
         arguments4.put(ReminderFlag.TIME_AHEAD, "15");
         Command customize4 = new ReminderCommand(taskManager, arguments4);
-        result += customize4.executeCommand().getMessage();
+        customize4.executeCommand();
 
         expectedOut.add("todo|go jogging|2021-10-30T02:00|low|daily|"
                 + "10|HEY!");
