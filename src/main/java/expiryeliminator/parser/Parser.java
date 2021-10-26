@@ -299,7 +299,7 @@ public class Parser {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewIngredientCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CookedRecipeCommand.MESSAGE_USAGE));
         }
 
         final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
