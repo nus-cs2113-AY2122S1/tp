@@ -73,4 +73,18 @@ class EditContactParserTest {
         assertThrows(MissingDetailException.class, () -> editContactParser.parseContactDetails(testInput));
     }
 
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidTwitterLength_exceptInvalidTwitterUsernameException() {
+        String testInput = "edit 1 -tw aksha237861238129389asdas12";
+        assertThrows(InvalidTwitterUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
+    //@@author mayankp291
+    @Test
+    void parseEditCommand_invalidTwitterCharacters_exceptInvalidTwitterUsernameException() {
+        String testInput = "edit 1 -tw aks-haAaa";
+        assertThrows(InvalidTwitterUsernameException.class, () -> editContactParser.parseContactDetails(testInput));
+    }
+
 }
