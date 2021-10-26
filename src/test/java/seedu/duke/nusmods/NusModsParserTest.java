@@ -35,7 +35,7 @@ class NusModsParserTest {
             }
             System.setProperty("https.proxyHost", "localhost"); // simulate network down
             assertThrows(GetTaskFailedException.class,
-                    () -> parser.getLessons("CS2113T", "C02"));
+                () -> parser.getLessons("CS2113T", "C02"));
         } finally {
             System.clearProperty("https.proxyHost"); // revive network regardlessly
         }
