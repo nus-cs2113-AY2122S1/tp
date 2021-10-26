@@ -377,7 +377,8 @@ public class Parser {
                     return;
                 } else {
                     try {
-                        double amount = Double.parseDouble(amountString);
+                        double amount = Double.parseDouble(String.format(
+                                amountString, Storage.getOpenTrip().getForeignCurrencyFormat()));
                         total += amount;
                         if (total > expense.getAmountSpent()) {
                             Ui.printIncorrectAmount(expense.getAmountSpent());
