@@ -52,4 +52,14 @@ public class Task extends Item {
     public Member getFromMemberList(int index) {
         return memberList.get(index);
     }
+
+    public String getMemberListAsString() {
+        StringBuilder members = new StringBuilder();
+        int counter = 1;
+        for (Member member : memberList) {
+            members.append(counter).append(" ");
+            members.append(member).append("\n");
+        }
+        return members.toString();
+    }
 }

@@ -153,18 +153,19 @@ public class Ui {
     }
 
     public static String getTask(Task task) {
-        return task.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + task.getDescription() + System.lineSeparator() + task.getMemberList()
-                + System.lineSeparator() + task.getEvent();
+        return "Title: " + task.getTitle() + System.lineSeparator()
+                + "Deadline: " + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + "Description: " + task.getDescription() + System.lineSeparator()
+                + "Members: " + System.lineSeparator() + task.getMemberListAsString();
     }
 
     public static String getEvent(Event event) {
-        return event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
-                + event.getDescription() + System.lineSeparator()
-                + event.getVenue() + System.lineSeparator()
-                + event.getBudget() + System.lineSeparator() + event.getTaskList();
+        return "Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: " + System.lineSeparator() + event.getTaskListAsString();
     }
 
     public static void printTask(Task task) {

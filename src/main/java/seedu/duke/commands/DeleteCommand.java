@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
 
         isCorrectFormat = true;
         isDeleteAll = false;
-        logger.setLevel(Level.INFO);
+        logger.setLevel(Level.SEVERE);
 
         try {
             logger.log(Level.INFO, "going to start processing");
@@ -99,8 +99,12 @@ public class DeleteCommand extends Command {
         if (command.length == 2) {
             if (isMemberFlag(itemFlag)) {
                 throw new DukeException("Please give me the name of the member you wish to delete!");
-            } else {
+            } else if (isEventFlag(itemFlag)) {
                 throw new DukeException("Please give me the index of the event you wish to delete!");
+            } else if (isTaskFlag(itemFlag)) {
+                throw new DukeException("Please give me the index of the task you wish to delete!");
+            } else {
+                throw new DukeException("Please enter a valid index!");
             }
         } else if (isEventFlag(itemFlag) || isTaskFlag(itemFlag)) {
             indexToDelete = getIndex(command[2]);
