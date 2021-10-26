@@ -84,7 +84,6 @@ public class CommandParser {
         return command;
     }
 
-
     /**
      * Parses user input into a RemoveCommand.
      *
