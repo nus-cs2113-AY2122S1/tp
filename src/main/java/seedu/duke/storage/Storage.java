@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
@@ -88,16 +89,18 @@ public class Storage {
     }
 
     private static Ingredient decodeIngredient(String toRead) {
-        String[] description = toRead.trim().split("\\|", 3);
-        Ingredient ingredient = new Ingredient(description[1], description[2]);
+        String[] description = toRead.trim().split("\\|", 5);
+        Ingredient ingredient = new Ingredient(description[1], description[2], description[3], LocalDate.parse(description[4]));
         return ingredient;
     }
 
     private static String encodeIngredient(String toWrite) {
         String encodedItem = null;
-        String[] description = toWrite.trim().split(" ", 2);
+        String[] description = toWrite.trim().split(" ", 4);
         encodedItem = "add-ingredient" + "|" + description[0] + "|"
-                + description[1].substring(1, description[1].length() - 1);
+                + description[1].substring(1, description[1].length() - 1) + "|"
+                + description[2].substring(2, description[2].length() - 1) + "|"
+                + description[3].substring(1, description[3].length() - 1);
         assert (!encodedItem.contains("["));
         assert (!encodedItem.contains("]"));
         return encodedItem;

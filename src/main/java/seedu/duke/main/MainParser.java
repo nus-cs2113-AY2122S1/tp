@@ -18,7 +18,7 @@ public class MainParser {
         IngredientParser ingredientParser = new IngredientParser();
         FinanceParser financeParser = new FinanceParser();
 
-        String[] command = userInput.trim().split("/", 3);
+        String[] command = userInput.trim().split("/", 5);
 
         switch (command[0]) {
         case "add-employee":
@@ -53,6 +53,9 @@ public class MainParser {
             break;
         case "list-ingredient":
             ingredientParser.listIngredient(ingredientList);
+            break;
+        case "find-expired-ingredient":
+            ingredientParser.findExpiredIngredient(command, ingredientList);
             break;
         case "add-finance":
             financeParser.addFinance(command, financeList);
