@@ -1,8 +1,8 @@
 package seedu.typists;
 
 import seedu.typists.content.Content;
-import seedu.typists.parser.Command;
-import seedu.typists.parser.CommandFactory;
+import seedu.typists.command.Command;
+import seedu.typists.command.CommandFactory;
 import seedu.typists.ui.TextUi;
 
 import seedu.typists.storage.StorageFile;

@@ -1,4 +1,4 @@
-package seedu.typists.parser;
+package seedu.typists.command;
 
 import static seedu.typists.Main.uiBot;
 

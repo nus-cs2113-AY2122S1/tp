@@ -1,5 +1,6 @@
-package seedu.typists.parser;
+package seedu.typists.command;
 
+import seedu.typists.command.Command;
 import seedu.typists.game.DataProcessor;
 import seedu.typists.game.TimeModeGame;
 
@@ -30,8 +31,9 @@ public class TimeGameCommand implements Command {
 
     public void printUserInput(TimeModeGame tg) {
         uiBot.printScreen("user input is: ");
-        for (String[] sa: tg.userLines) {
+        for (String[] sa : tg.userLines) {
             uiBot.printScreen(Arrays.toString(sa));
         }
     }
+
 }
