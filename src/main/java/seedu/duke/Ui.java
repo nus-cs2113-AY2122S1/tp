@@ -70,6 +70,10 @@ public class Ui {
         return String.format("This event has been removed: %s\n", eventTitle);
     }
 
+    public static String getMemberDeletionMessage(String name) {
+        return String.format("This member has been removed: %s\n", name);
+    }
+
     public static String getTaskAddedMessage(int eventIndex, Task task) {
         assert eventIndex < Duke.eventCatalog.size() : "Number entered cannot be more than "
                 + "number of events";
@@ -111,6 +115,7 @@ public class Ui {
         return getLineBreak() + System.lineSeparator() + "Here are the details of the event:" + System.lineSeparator()
                 + getEvent(event) + System.lineSeparator() + getLineBreak();
     }
+
 
     public static <T> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
