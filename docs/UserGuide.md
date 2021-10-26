@@ -94,11 +94,11 @@ This SEPlanner allows the user to search for mapping through our platform. To do
 Tips give helpful information to make your experience better.
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
 Warnings caution you about certain actions that might be dangerous.
 </div>
 
-<div markdown="block" class="alert alert-info">:information_source: **Note:**
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
 Notes are important pieces of information. 
 </div>
 

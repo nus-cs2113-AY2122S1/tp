@@ -147,7 +147,8 @@ public class AddCommandParser {
         if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) < mapIndex || mapIndex < 1) {
+        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList)
+                < mapIndex || mapIndex < 1) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
         if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList)
