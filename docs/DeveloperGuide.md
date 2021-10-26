@@ -25,6 +25,64 @@
 ## Implementation
 This section describes how the features are implemented.
 
+### List all Ingredients Feature
+
+The list ingredients feature is performed by `IngredientRepository`. It loops through all the different
+ingredient storages, and concatenates them into a string which is shown as the output list. Below is the
+sequence diagram for how list works.
+
+![](diagrams/List.png)
+
+### List Expired Ingredients Feature
+
+The list expired ingredients feature is performed by `IngredientRepository`. It loops through all the
+ingredient storages. For each ingredient storage, it gets the type of ingredient being stored in that 
+storage, and creates an empty storage for that ingredient type to store the batches of that ingredient 
+that are expired. The code then loops through all the batches of that ingredients, and add the expired 
+batches to the expire ingredient storage. The expired ingredient storage is converted into a string and
+is shown as the output. Below is the sequence diagram for how list expired ingredients works.
+
+![](diagrams/ListIngredientsExpired.png)
+
+### Delete Expired Ingredients Feature
+
+The delete expired ingredients feature is performed by the `IngredientRepository`. It loops through all
+the ingredient storages. For each ingredient storage, it loops through all the batches of that ingredient.
+If the batch has expired, it adds the expiry date of that batch to an array. After it has looped though
+all the batches of a specific ingredient, it proceeds to remove all those ingredient batches from the
+repository. This process then repeats for the next type of ingredient. Below is the sequence diagram for
+how delete expired ingredients works.
+
+![](diagrams/DeleteExpiredIngredients.png)
+
+### View Ingredient Feature
+
+The view ingredient feature is performed by the `IngredientRepository`. It finds if the ingredient
+repository contains an ingredient with the same name as the user input, and return the storage of that
+ingredient. The storage data is represented as a string that is shown as an output. Below is the sequence
+diagram for how view ingredient works.
+
+![](diagrams/ViewIngredient.png)
+
+### Update Units Feature
+
+The update units feature is performed by both the `IngredientRepository` and `RecipeList`. First, it finds
+the ingredient storage of the ingredient and updates the units there. Then it finds the recipes which 
+contain the ingredient and updates the units there. Below is the sequence diagram for how update unit
+works.
+
+![](diagrams/UpdateUnits.png)
+
+### Shopping List Feature
+
+The shopping list feature is performed by the `IngredientRepository`. It loops through all the recipes 
+the user wants to cook and collates all the ingredients and quantities into totalIngredients. It then
+loops through all the ingredient storages to see if there is enough ingredients. If there isn't it adds 
+the ingredient and respective quantity to the shopping list. It returns the shopping list as a String to
+be shown as the output. Below is the sequence diagram for how the shopping list feature works.
+
+![](diagrams/ShoppingList.png)
+
 ### Add Recipe Feature
 
 The add recipe feature is performed by `RecipeList`. It adds a `Recipe` and its respective 
