@@ -28,13 +28,16 @@ class NusModsParserTest {
     @Test
     void getModuleEvents_noNetworkAndNoLocalCache_failure() {
         try {
-            FileUtils.deleteDirectory(new File(NusModsParser.CACHEDIR)); // remove local cache if existing
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                FileUtils.deleteDirectory(new File(NusModsParser.CACHEDIR)); // remove local cache if existing
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.setProperty("https.proxyHost", "localhost"); // simulate network down
+            assertThrows(GetTaskFailedException.class,
+                    () -> parser.getLessons("CS2113T", "C02"));
+        } finally {
+            System.clearProperty("https.proxyHost"); // revive network regardlessly
         }
-        System.setProperty("https.proxyHost", "localhost"); // simulate network down
-        assertThrows(IOException.class,
-            () -> parser.getLessons("CS2113T", "C02"));
-        System.clearProperty("https.proxyHost"); // simulate network down
     }
 }
