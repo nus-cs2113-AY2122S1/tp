@@ -41,7 +41,11 @@ public class AddExpenditureCommand extends AddCommand {
     }
 
     public void execute() {
-        Expenditure addedExpenditure = allRecordList.addExpenditure(description, spending, date, category, IS_NOT_LOADING_STORAGE);
+        Expenditure addedExpenditure = allRecordList.addExpenditure(description,
+                spending,
+                date,
+                category,
+                IS_NOT_LOADING_STORAGE);
         TextUi.showExpenditureAddedMessage(addedExpenditure, IS_NOT_LOADING_STORAGE, allRecordList);
     }
 
