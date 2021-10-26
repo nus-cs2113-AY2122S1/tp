@@ -261,9 +261,7 @@ public class Parser {
         String[] words = query.trim().split(regex);
 
         String memberName = "";
-        String studentNumber = "";
-        char gender = ' ';
-        int phoneNumber = 0;
+
 
         String trainingName = "";
         String presentOrAbsent = "";
@@ -288,17 +286,18 @@ public class Parser {
         return new Attendance(memberName, trainingName, presentOrAbsent);
     }
 
-    public static Integer getLastIndex(String query) {
-        try {
-            String regex = "[\\s]+";
-            String[] words = query.trim().split(regex);
-            int indexNumber = Integer.parseInt(words[words.length - 1].trim());
-            return indexNumber;
-        } catch (NumberFormatException e) {
-            System.out.println("Index must be a number");
-            return -1;
-        }
+    public static int getAttendanceIndex(String entry) {
+        String[] substring = entry.split("/i",0);
+        int trainingIndex = Integer.parseInt(substring[1].trim());
+        return trainingIndex;
     }
+
+   public static String getAttendanceTrainingName(String entry){
+        int trainingNameStartIndex = entry.indexOf("/t")+2;
+        int trainingNameEndIndex = entry.indexOf("/i");
+        String trainingName = entry.substring(trainingNameStartIndex,trainingNameEndIndex).trim();
+        return trainingName;
+   }
 
     /**
      * Returns an integer Index from the given String query.
@@ -380,5 +379,7 @@ public class Parser {
             flag = 1;
         }
     }
+
+
 }
 

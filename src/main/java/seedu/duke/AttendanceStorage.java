@@ -132,6 +132,9 @@ public class AttendanceStorage {
 
     /**
      * this method rewrites the entire specific csv file.
+     *
+     * @param attendanceList the current attendance list
+     * @param currentAttendanceFile the current attendance file
      */
     public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile,
             String trainingName) {
@@ -170,7 +173,6 @@ public class AttendanceStorage {
 
     //this function cheesing cos it just goes into the attendance folder and read the csv names
     //haven't done
-
     /**
      * This method will list all the attendance training names.
      */
@@ -179,6 +181,40 @@ public class AttendanceStorage {
     }
 
 
+    /**
+     * This method will delete the attendance entry from the main list
+     *
+     * @param attendanceList the current attendance list
+     * @param trainingName
+     * @param index
+     */
+    public static void deleteAttendance(AttendanceList attendanceList, String trainingName , int index){
+        //the index passed in is based on the sub attendance list of the training name passed in
+        //so need to loop through the attendance list for that particular training name amd when it reaches the count
+        //delete it
+        int count = 1 ;
+        for(int i = 1 ; i < attendanceList.getAttendanceListSize(); i++){
+            if(attendanceList.getAttendanceTrainingName(i).equals(trainingName) ){
+                if(count == index ){
+                    attendanceList.deleteAttendance(i);
+                    break;
+                } else {
+                    count++;
+                }
+            }
+        }
+    }
+
+    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList,String trainingName) {
+        File currentDir = new File("");
+        try {
+            String dukeAttendanceFilePath = currentDir.getCanonicalPath() + "/DukeAttendance/" + trainingName + ".csv";
+            File dukeSpecificAttendanceFile = new File(dukeAttendanceFilePath);
+            rewriteAttendanceCsv(attendanceList, dukeSpecificAttendanceFile, trainingName);
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+    }
 }
 
 
