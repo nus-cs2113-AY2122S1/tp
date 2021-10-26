@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box
+
+-> SortDishCommand: parameters
+
+activate SortDishCommand
+
+SortDishCommand -> DishList: execute();
+
+activate DishList
+
+SortDishCommand -> UI : execute();
+
+activate UI
+
+DishList -> DishList: ingredientList.sort(dishComparator)
+
+UI -> UI: ui.printSortDishMsg();
+
+DishList -> DishList : list();
+
+<-- UI: output to be displayed
+
+ deactivate UI
+
+<-- DishList: output to be displayed
+
+ deactivate DishList
+
+ deactivate SortDishCommand
+
+@enduml
