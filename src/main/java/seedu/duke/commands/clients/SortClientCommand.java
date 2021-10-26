@@ -20,7 +20,7 @@ public class SortClientCommand extends Command {
             ui.showSortedClientByName(clients, sortedNames);
             break;
         case "/id":
-            ArrayList<String> sortedIds = clients.getSortedClientCodes();
+            ArrayList<String> sortedIds = clients.getSortedClientIds();
             ui.showSortedClientById(clients, sortedIds);
             break;
         default:
