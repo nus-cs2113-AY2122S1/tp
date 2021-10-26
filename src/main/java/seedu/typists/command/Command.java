@@ -1,5 +1,7 @@
 package seedu.typists.command;
 
+import java.util.ArrayList;
+
 public interface Command {
-    void run();
+    void run(ArrayList<String> args);
 }
