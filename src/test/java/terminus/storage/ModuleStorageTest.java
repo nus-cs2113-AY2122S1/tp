@@ -406,9 +406,8 @@ public class ModuleStorageTest {
         Path modPath = Paths.get(RESOURCE_FOLDER.toString(), "lock");
         assertTrue(Files.exists(modPath));
         moduleManager.setModule("lock", new NusModule());
-        moduleStorage.saveNotesFromModule(moduleManager,"lock",true);
-        assertEquals(0, moduleManager
-                .getModule("lock").getContentManager(Note.class).getTotalContents());
+        assertThrows(IOException.class, () -> moduleStorage
+                .saveNotesFromModule(moduleManager, "lock", true));
     }
 
 }
