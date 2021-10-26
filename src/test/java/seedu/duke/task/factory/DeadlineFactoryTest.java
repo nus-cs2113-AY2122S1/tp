@@ -34,7 +34,7 @@ class DeadlineFactoryTest {
         arguments.put(DeadlineFlag.PRIORITY, Integer.toString(PriorityEnum.HIGH.getValue()));
         arguments.put(DeadlineFlag.RECURRENCE, RecurrenceEnum.MONTHLY.toString());
 
-        Deadline deadline = DeadlineFactory.getDeadline(arguments);
+        Deadline deadline = (Deadline) new DeadlineFactory(arguments).getTask();
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);
@@ -49,7 +49,7 @@ class DeadlineFactoryTest {
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
 
-        Deadline deadline = DeadlineFactory.getDeadline(arguments);
+        Deadline deadline = (Deadline) new DeadlineFactory(arguments).getTask();
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);
@@ -65,7 +65,7 @@ class DeadlineFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> DeadlineFactory.getDeadline(arguments));
+            () -> new DeadlineFactory(arguments).getTask());
 
         RequiredArgmentNotProvidedException ranpe =
             new RequiredArgmentNotProvidedException(DeadlineFlag.DUE_DATE, TypeEnum.DEADLINE.toString());
@@ -84,7 +84,7 @@ class DeadlineFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> DeadlineFactory.getDeadline(arguments));
+            () -> new DeadlineFactory(arguments).getTask());
 
         InvalidRecurrenceException ire = new InvalidRecurrenceException(invalidRecurrence);
 
@@ -101,7 +101,7 @@ class DeadlineFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> DeadlineFactory.getDeadline(arguments));
+            () -> new DeadlineFactory(arguments).getTask());
 
         ParseDateFailedException pdfe = new ParseDateFailedException(DateParser.getDefaultDateFormat());
 
