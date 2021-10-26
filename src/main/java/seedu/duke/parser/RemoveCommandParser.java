@@ -44,7 +44,7 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new RemoveModCommand(module, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
-            handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList);
+            handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList, universityMasterList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
@@ -129,9 +129,12 @@ public class RemoveCommandParser {
     }
 
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
-                                   ModuleList moduleSelectedList) throws ParseException {
+                                   ModuleList moduleSelectedList,
+                                   UniversityList universityMasterList) throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
+        University currentUni = new University();
+        boolean validUni = false;
         if (argumentSubstrings.length < 2) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
@@ -142,6 +145,23 @@ public class RemoveCommandParser {
         } catch (NumberFormatException e) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
         }
+        for (University uni : universitySelectedList.getList()) {
+            if (uni.getIndex() == uniIndex) {
+                validUni = true;
+                currentUni = uni;
+                break;
+            }
+        }
+        if (!validUni) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+        }
+        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+        }
+        if (currentUni.getMappingListSize() < mapIndex || mapIndex < 1) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
+        }
+
     }
 
     private boolean isTextMatches(String arguments) {
