@@ -7,6 +7,7 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
+import expiryeliminator.storage.SaveData;
 
 import java.util.TreeMap;
 
@@ -60,6 +61,7 @@ public class CookedRecipeCommand extends Command {
                 IngredientStorage ingredient = ingredients.findWithNullReturn(s);
                 assert ingredient != null : "Ingredient should be added in when recipe is added.";
                 ingredient.remove(ingredientsInRecipe.get(s).getQuantity());
+                SaveData.saveIngredientRepoToFile(ingredients);
                 ingredientsLeft += ingredient + "\n";
             }
         } catch (NotFoundException e) {
