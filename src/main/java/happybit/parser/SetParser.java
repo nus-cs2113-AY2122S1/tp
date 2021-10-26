@@ -4,7 +4,7 @@ import happybit.command.Command;
 import happybit.command.SetCommand;
 import happybit.exception.HaBitParserException;
 
-public class SetParser extends Parser {
+public class SetParser {
 
     public static Command parseSetGoalCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);

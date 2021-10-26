@@ -14,14 +14,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-public class AddParser extends ParserUtils {
+public class AddParser extends Parser {
 
-    private static final String GOAL_INDEX_FLAG = "g/";
-    private static final String NAME_FLAG = "n/";
-    private static final String GOAL_TYPE_FLAG = "f/";
-    private static final String INTERVAL_FLAG = "i/";
-    private static final String START_DATE_FLAG = "s/";
-    private static final String END_DATE_FLAG = "e/";
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Exp: g/2";
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 'f/' flag to define the goal type. Exp: f/df";
@@ -34,7 +28,6 @@ public class AddParser extends ParserUtils {
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
-    private static final String DATE_FORMAT = "ddMMyyyy";
     private static final String SLEEP_LABEL = "sl";
     private static final String FOOD_LABEL = "fd";
     private static final String EXERCISE_LABEL = "ex";
