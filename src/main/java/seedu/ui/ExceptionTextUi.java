@@ -333,4 +333,10 @@ public class ExceptionTextUi {
                 + "    * Length between 3 to 100 characters";
         printDoubleLineMessage(message);
     }
+
+    public static void invalidDeleteFlag() {
+        String message = "Contact name cannot be deleted. \n"
+                + "Please delete the entire contact instead.";
+        printDoubleLineMessage(message);
+    }
 }

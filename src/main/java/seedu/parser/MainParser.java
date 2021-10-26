@@ -1,6 +1,5 @@
 package seedu.parser;
 
-
 import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
@@ -15,6 +14,7 @@ import seedu.command.PersonalContactCommand;
 import seedu.command.SearchContactCommand;
 import seedu.command.ViewContactCommand;
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidDeleteDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.InvalidGithubUsernameException;
@@ -50,6 +50,7 @@ public class MainParser {
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
     private final SearchContactParser searchContactParser = new SearchContactParser();
+    private final DeleteContactParser deleteContactParser = new DeleteContactParser();
 
     public Command parseCommand(String userInput) {
         CommandType commandType = getCommandType(userInput);
@@ -196,7 +197,7 @@ public class MainParser {
         } catch (MissingDetailException | MissingIndexException | MissingArgEditException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
+            return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND_EDIT);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -247,11 +248,16 @@ public class MainParser {
     private Command parseDeleteContact(String userInput) {
         try {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
-            return new DeleteContactCommand(deletedIndex);
-        } catch (NumberFormatException e) {
+            boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
+            return new DeleteContactCommand(deletedIndex, hasDeletedDetail);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (MissingIndexException e) {
             return new FailedCommand(FailedCommandType.MISSING_INDEX);
+        } catch (InvalidFlagException e) {
+            return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        } catch (InvalidDeleteDetailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_DELETE);
         }
     }
 

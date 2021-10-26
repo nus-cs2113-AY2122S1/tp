@@ -5,6 +5,14 @@ package seedu.ui;
 import seedu.contact.Contact;
 
 public class ViewMessageFormatterUi {
+    public static final int NAME_INDEX = 0;
+    public static final int GITHUB_INDEX = 1;
+    public static final int LINKEDIN_INDEX = 2;
+    public static final int TELEGRAM_INDEX = 3;
+    public static final int TWITTER_INDEX = 4;
+    public static final int EMAIL_INDEX = 5;
+    public static final int NUMBER_OF_FIELDS = 6;
+
     public static String viewNameFormatter(Contact contact) {
         if (contact.getName() == null) {
             return "";
@@ -47,4 +55,23 @@ public class ViewMessageFormatterUi {
         return "\nTwitter:  twitter.com/" + contact.getTwitter();
     }
 
+    public static String viewDetailFormatter(Contact contact, int index) {
+        switch (index) {
+        case NAME_INDEX:
+            return viewNameFormatter(contact);
+        case GITHUB_INDEX:
+            return viewGithubFormatter(contact);
+        case LINKEDIN_INDEX:
+            return viewLinkedinFormatter(contact);
+        case TELEGRAM_INDEX:
+            return viewTelegramFormatter(contact);
+        case TWITTER_INDEX:
+            return viewTwitterFormatter(contact);
+        case EMAIL_INDEX:
+            return viewEmailFormatter(contact);
+        default:
+            assert false; //should never reach here
+            return null;
+        }
+    }
 }
