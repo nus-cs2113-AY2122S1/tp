@@ -35,7 +35,7 @@ public class Parser {
             return new ListCommand(command);
         case "done":
         case "undo":
-            return new DoneUndoCommand(command);
+            return new DoneUndoCommand(command, response);
         case "delete":
             return new DeleteCommand(command);
         case "add":
