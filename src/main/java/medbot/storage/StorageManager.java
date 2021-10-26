@@ -17,6 +17,10 @@ public class StorageManager {
     private static PatientStorage patientStorage;
     private static StaffStorage staffStorage;
     private static AppointmentStorage appointmentStorage;
+    protected static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n"
+            + "Please decide if you wish to:" + "\n"
+            + "1. Enter 'exit' to exit Medbot to correct the storage files" + "\n"
+            + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     /**
      * Initializes all storage classes to be used for Medbot, and prints out any errors in storage files.
@@ -33,6 +37,8 @@ public class StorageManager {
 
         String loadStorageErrorMessage = loadStoragesAndGetErrorMessage(scheduler);
         if (!loadStorageErrorMessage.isBlank()) {
+            loadStorageErrorMessage += ERROR_INVALID_STORAGE_LINE_INSTRUCTION;
+            ui.printOutput("");
             ui.printOutput(loadStorageErrorMessage);
         }
     }
