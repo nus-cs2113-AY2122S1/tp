@@ -35,7 +35,7 @@ public class CommandSyntax {
     public static final String PURGE_COMMAND = "purge";
     public static final String RECEIVE_ORDER_COMMAND = "receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION "
             + "m/MAX_QUANTITY}";
-    public static final String UPDATE_PRESCRIPTION_COMMAND = "updateprescription i/ID [n/name q/QUANTITY c/CUSTOMER_ID "
+    public static final String UPDATE_PRESCRIPTION_COMMAND = "updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID "
             + "d/DATE s/STAFF_NAME]";
     public static final String UPDATE_ORDER_COMMAND = "updateorder i/ID [n/NAME q/QUANTITY d/DATE]";
     public static final String UPDATE_STOCK_COMMAND = "updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "

@@ -168,8 +168,7 @@ public class UpdatePrescriptionCommand extends Command {
         // Guarantee is be able to restore & prescription
         PrescriptionManager.restoreStock(targetRestoreStock, totalQuantity);
         ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
-                targetPrescriptionStocks,
-                prescriptionQuantity, customerId, date, staffName);
+                targetPrescriptionStocks, prescriptionQuantity, customerId, date, staffName);
         // Add to prescription
         for (Prescription updatedPrescription : updatedPrescriptions) {
             medicines.add(updatedPrescription);
@@ -230,9 +229,7 @@ public class UpdatePrescriptionCommand extends Command {
         // Guarantee to be able to restore & prescription
         PrescriptionManager.restoreStock(targetRestoreStock, totalQuantity);
         ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
-                targetPrescriptionStocks,
-                restoredQuantity, customerId, date,
-                staffName);
+                targetPrescriptionStocks, restoredQuantity, customerId, date, staffName);
 
         // Add to prescription
         for (Prescription updatedPrescription : updatedPrescriptions) {
@@ -306,8 +303,7 @@ public class UpdatePrescriptionCommand extends Command {
             }
             // guarantee can prescription
             ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
-                    targetPrescriptionStocks,
-                    prescribedQuantity, customerId, date, staffName);
+                    targetPrescriptionStocks, prescribedQuantity, customerId, date, staffName);
 
             medicines.remove(prescription);
 
