@@ -10,6 +10,7 @@ import seedu.duke.command.AddMember;
 import seedu.duke.command.AddTraining;
 import seedu.duke.command.EditMember;
 import seedu.duke.command.EditTraining;
+import seedu.duke.command.FindMember;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingSchedule;
@@ -73,7 +74,8 @@ public class Entry {
             new DeleteAttendance(attendanceList, attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
-            Parser.findInMembers(members, entry);
+            String name = Parser.findInMembers(members, entry);
+            new FindMember(members, name);
             break;
         case FIND_TRAINING_KEYWORD:
             Parser.findInTraining(trainings, entry);

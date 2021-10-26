@@ -279,8 +279,14 @@ public class Parser {
      * @param members ArrayList of tasks
      * @param query   user input
      */
-    public static void findInMembers(MemberList members, String query) {
-        //Leave for v2.0, implement as class in commands package
+    public static String findInMembers(MemberList members, String query) {
+        try {
+            String regex = "(\\/[a-z])+";
+            String[] words = query.trim().split(regex);
+            return words[1].trim().toUpperCase(Locale.ROOT);
+        } catch (IndexOutOfBoundsException e) {
+            return "";
+        }
     }
 
     /**

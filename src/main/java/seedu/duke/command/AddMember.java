@@ -36,7 +36,7 @@ public class AddMember {
                 writeMemberFile(dukeMemberFile, members);
             }
         } catch (InvalidAddMemberException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package seedu.duke.member;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberList {
@@ -88,6 +89,24 @@ public class MemberList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
+    }
+
+    /**
+     * Find member as request by user.
+     *
+     * @param name member name given by user to search for
+     * @return MemberList class with members that matches the search
+     */
+    public MemberList findMember(String name) {
+        Pattern findRegex = Pattern.compile(".*" + name + ".*");
+        ArrayList<Member> membersThatMatchFind = new ArrayList<Member>();
+        for (Member member : memberList) {
+            boolean foundNameMatch = findRegex.matcher(member.getName()).matches();
+            if (foundNameMatch) {
+                membersThatMatchFind.add(member);
+            }
+        }
+        return new MemberList(membersThatMatchFind);
     }
 
 }
