@@ -16,6 +16,7 @@ time required to look up for various usernames when working with colleagues.
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
     * **[Viewing a contact : `view`](#view)**
+    * **[Viewing personal contact : `me`](#me)**
     * **[Deleting a contact : `rm`](#delete)**
     * **[Editing a contact : `edit`](#edit)**
     * **[Searching for a contact : `search`](#search)**
@@ -70,17 +71,24 @@ ls: Displays the name of all saved contacts.
 edit: Edit any parameter in an existing contact.
  Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER
  Note: Parameters need not be in order and are optional except for INDEX.
- Example: edit 1 -e john.doe@email.com
+       "me" is used as the INDEX for personal contact.
+ Examples: edit 1 -e john.doe@email.com
+           edit me -e john.doe@email.com
 
 view: Displays all details for index specified contact.
  Parameter: INDEX
  Note: Index starts from 0.
  Example: view 2
 
+me: Displays all details for personal contact.
+ Example: me
+
 rm: Deletes the index specified contact.
  Parameter: INDEX
  Note: Index starts from 0.
- Example: rm 0
+       "all" is used as the INDEX to delete all contacts.
+ Examples: rm 0
+           rm all
 
 search: Search for a contact containing a specified query.
  Note: Flags may be used to specify a detail type to search.
@@ -135,7 +143,7 @@ ____________________________________________________________
 
 Lists all the saved contacts with the index and contact name.
 
-Usage: `list`
+Usage: `ls`
 * The indexes start from 0, this is done as computing professionals 
  are more familiar with index start from 0.
  
@@ -177,9 +185,73 @@ ____________________________________________________________
    Telegram: t.me/alexl33
 ____________________________________________________________
 ```
+<a name="me"></a>
+### Viewing personal contact: `me`
+Displays all the details saved to the personal contact in the ConTech Book.
+
+Usage: `me`
+* Displays all the details of the personal contact.
+
+Expected outcome of usage:
+```
+me
+____________________________________________________________
+Name:     Marcus Bo
+Github:   github.com/marcusbohre
+Email:    marcus.bo@contech.sg
+Telegram: t.me/m4rcusb0
+____________________________________________________________
+```
 
 <a name="delete"></a>
 ### Deleting a contact: `rm`
+Removes the contact with a specified index from the ConTech Book. Before any deletion, ConTech Book will
+display the details of the specified contact to be deleted, and prompt user to confirm deletion.
+
+Usages:
+
+`rm INDEX`
+* Deletes the contact with the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index must be within the range of indexes displayed in the contact list _(zero-based)_.
+  
+`rm all`
+* Deletes all contacts in the ConTech Book
+
+Expected outcome of usages:
+* Remove selected contact:
+```
+rm 0
+____________________________________________________________
+Delete this contact?  (y/n)
+0. Alex Lee
+Github:   github.com/alexlee
+Email:    alex.lee@contech.sg
+Telegram: t.me/alex133
+____________________________________________________________
+```
+```
+y
+____________________________________________________________
+ConTech has removed the specified contact: Alex Lee
+You now have 2 contact(s).
+____________________________________________________________
+```
+
+* Remove all contacts:
+
+```
+rm all
+____________________________________________________________
+Delete all of your contacts?  (y/n)
+____________________________________________________________
+```
+```
+y
+____________________________________________________________
+ConTech has removed all 2 of your contact(s).
+____________________________________________________________
+```
 
 <a name="edit"></a>
 ### Editing a contact : `edit`
@@ -205,7 +277,6 @@ ____________________________________________________________
 
 <a name="search"></a>
 ### Searching for a contact: `search`
-
 Search the ConTech Book for a contact whose details contain the specified query.
 
 Usage: `search [-FLAG] QUERY`
@@ -258,7 +329,9 @@ ____________________________________________________________
 
 **A**: 
 
-## Command Summary
+
+
+## <a name="summary"></a>Command Summary
 
 Below is a concise summary of frequently used commands in ConTech.
 The command format and examples are provided for each command for
