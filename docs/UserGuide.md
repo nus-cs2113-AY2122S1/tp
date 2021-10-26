@@ -78,6 +78,7 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 ```
 
 ## Program run through
+
 This SEPlanner allows the user to search for mapping through our platform. To do so, users can follow the following steps:
   1. Add partner universities the user is interested in.
   2. Add potential NUS modules that the user wants to add.
@@ -85,6 +86,11 @@ This SEPlanner allows the user to search for mapping through our platform. To do
   4. Select a mapping and add the mapping.
 
 ## Features
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about the command format:**<br>
+</div>
+
 ### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
 #### Format: `list /muni`  
