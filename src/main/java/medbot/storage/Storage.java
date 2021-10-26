@@ -1,9 +1,13 @@
 package medbot.storage;
 
+import medbot.Appointment;
+import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
 import medbot.list.ListItemType;
 import medbot.list.MedBotList;
+import medbot.person.Patient;
+import medbot.person.Staff;
 import medbot.utilities.Pair;
 
 import java.io.File;
@@ -50,7 +54,7 @@ public abstract class Storage {
      * @return Error message if there are formatting errors in storage file
      * @throws FileNotFoundException if storage file cannot be found
      */
-    public String loadStorage(ListItemType listItemType, MedBotList medBotList) throws FileNotFoundException {
+    public String loadStorage(ListItemType listItemType, Scheduler scheduler) throws FileNotFoundException {
         int lineNumber = 1;
         Scanner s = new Scanner(dataFile);
         String loadStorageErrorMessage = "";
@@ -58,7 +62,7 @@ public abstract class Storage {
         while (s.hasNext()) {
             try {
                 String storageLine = s.nextLine();
-                addListItemFromStorageLine(listItemType, storageLine, medBotList);
+                addListItemFromStorageLine(listItemType, scheduler, storageLine);
 
             } catch (Exception e) {
                 loadStorageErrorMessage += loadStorageLineErrorMessage(lineNumber);
@@ -79,12 +83,22 @@ public abstract class Storage {
      * @param medBotList   instance of a subclass of MedBotList
      * @throws MedBotException if fail to add a ListItem to a MedBotList subclass
      */
-    protected void addListItemFromStorageLine(ListItemType listItemType, String storageLine, MedBotList medBotList)
+    protected void addListItemFromStorageLine(ListItemType listItemType, Scheduler scheduler, String storageLine)
             throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
-        medBotList.addListItemFromStorage(listItem);
-        setListItemIdAsLastId(listItem, medBotList);
+
+        switch (listItemType) {
+        case PATIENT:
+            scheduler.addPatient((Patient) listItem);
+            break;
+        case STAFF:
+            scheduler.addStaff((Staff) listItem);
+            break;
+        case APPOINTMENT:
+            scheduler.addAppointment((Appointment) listItem);
+        }
     }
+
 
     /**
      * Sets id of ListItem object to be lastId of a MedBotList subclass (eg. PatientList)
