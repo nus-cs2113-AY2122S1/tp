@@ -1,12 +1,12 @@
 package seedu.duke.commands;
 
-import seedu.duke.LibmgrException;
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.Status.AVAILABLE;
-import static seedu.duke.Status.RESERVED;
+import static seedu.duke.common.Status.AVAILABLE;
+import static seedu.duke.common.Status.RESERVED;
 import static seedu.duke.common.Messages.RESERVE_INVALID_FORMAT;
 import static seedu.duke.common.Messages.RESERVE_SUCCESS;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;

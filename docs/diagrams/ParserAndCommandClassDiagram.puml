@@ -1,0 +1,105 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Command <|-up- ExitCommand
+Command <|-up- ListCommand
+Command <|-up- AddCommand
+Command <|-up- LoanCommand
+Command <|-- RemoveCommand
+Command <|-- ReserveCommand
+Command <|-- ReturnCommand
+Command <|-- SearchCommand
+Command <|-left- UnknownCommand
+Command <.right. Parser: creates
+
+class Parser {
+- parse(input: String): Command
+}
+
+abstract class Command {
++ execute(ui: TextUI, catalogue: Catalogue)
++ isExit(): Boolean
+}
+
+class AddCommand {
++ {static} {final} COMMAND_WORD: String = "add"
+# args: String
+# title: String
+# id: String
++ AddCommand(args: String)
++ handlesAddCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class ExitCommand {
++ {static} {final} COMMAND_WORD: String = "exit"
++ ExitCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class ListCommand {
++ {static} {final} COMMAND_WORD: String = "list"
++ {static} {final} LIST_ALL_COMMAND: String = "list all"
++ {static} {final} LIST_AVAILABLE_COMMAND: String = "list available"
++ {static} {final} LIST_LOANED_COMMAND: String = "list loaned"
++ input: String = ""
++ ListCommand(input: String)
++ handlesListCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class LoanCommand {
++ {static} {final} COMMAND_WORD: String = "loan"
+# args: String
+# id: String
+# username: String
+# dueDate: String
++ LoanCommand(args: String)
++ handleLoanCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class RemoveCommand {
++ {static} {final} COMMAND_REMOVE: String = "rm"
++ RemoveCommand(args: String)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class ReserveCommand {
++ {static} {final} COMMAND_WORD: String = "reserve"
++ args: String
++ id: String
++ username: String
++ ReserveCommand(args: String)
++ handleReserveCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+
+}
+
+class ReturnCommand {
++ {static} {final} COMMAND_WORD: String = "return"
++ args: String
++ id: String
++ ReturnCommand(args: String)
++ handleReturnCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class SearchCommand {
++ {static} {final} COMMAND_WORD: String = "search"
++ {static} {final} SEARCH_ID_COMMAND: String = "search i/"
++ {static} {final} SEARCH_TITLE_COMMAND: String = "search t/"
++ {static} {final} SEARCH_STATUS_COMMAND: String = "search s/"
++ input: String = ""
++ SearchCommand(input: String)
++ handlesSearchCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class UnknownCommand {
++ UnknownCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+
+@enduml

@@ -1,6 +1,8 @@
-# Duke project template
+# Libmgr
+![CI](https://github.com/AY2122S1-CS2113-T16-1/tp/actions/workflows/gradle.yml/badge.svg)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+
+This project is based on Duke, a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
 
