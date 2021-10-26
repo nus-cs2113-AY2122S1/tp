@@ -166,9 +166,6 @@ public class ModuleStorage {
             Files.createDirectories(modDirPath);
             return;
         }
-        if (!Files.isReadable(modDirPath)) {
-            return;
-        }
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
@@ -286,12 +283,9 @@ public class ModuleStorage {
      */
     private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
-        if (!Files.isReadable(directoryPath)) {
-            throw new IOException("Directory cannot be cleared.");
-        }
         File[] listOfFiles = folder.listFiles();
         if (listOfFiles == null) {
-            return;
+            throw new IOException("Directory cannot be cleared.");
         }
         for (File file : listOfFiles) {
             cleanAllFilesInclusive(file);
