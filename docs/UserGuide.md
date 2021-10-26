@@ -17,41 +17,42 @@ reference. We hope you enjoy using *Food-O-Rama*!
 
 ## 🧾 Table of Contents
 
+*Note 💡 Lightbulb requires your attention.*
 
-*Tip ❕  Exclamation mark requires your attention.*
+*Tip ❕  Exclamation mark gives additional information to use Food-O-Rama more effectively.*
 
 * [Quick Start](#-quick-start)
 * [List of Commands](#-list-of-commands)
 * [Features](#-features)
-    * `help`: [List all commands](#list-all-commands-help)
-    * [Dish Commands](#add-new-dish-add-dish)
-        * `add dish`: [Add new dish](#add-new-dish-add-dish)
-        * `add dish waste`: [Add dish wastage](#add-dish-wastage-add-dish-waste)
+    * `help`: [List all commands](#list-all-commands--help)
+    * [Dish Commands](#add-a-new-dish--add-dish)
+        * `add dish`: [Add new dish](#add-a-new-dish--add-dish)
+        * `add dish waste`: [Add dish wastage](#add-a-dishs-wastage--add-dish-waste)
         * `set dish limit`: [Add a limit for dish wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
-        * `del dish`: [Delete existing dish](#delete-existing-dish-del-dish)
-        * `list dish`: [View existing dishes](#view-existing-dishes-list-dish)
-    * [Ingredient Commands](#add-new-ingredient-add-ingr)
-        * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
-        * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
-        * `add ingr waste`: [Add an ingredient's wastage](#add-ingredient-wastage-add-ingr-waste)
+        * `del dish`: [Delete existing dish](#delete-existing-dish--del-dish)
+        * `list dish`: [View existing dishes](#view-existing-dishes--list-dish)
+    * [Ingredient Commands](#add-new-ingredient--add-ingr)
+        * `add ingr`: [Add new ingredient](#add-new-ingredient--add-ingr)
+        * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient--add-ingr-stored)
+        * `add ingr waste`: [Add an ingredient's wastage](#add-an-ingredients-wastage--add-ingr-waste)
         * `set ingr limit`: [Add a limit for ingredient wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
-        * `link`: [Link ingredient to dish](#link-ingredient-to-dish-link)
-        * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
-        * `list ingr`: [View existing ingredients](#view-all-exising-ingredients-list-ingr)
-    * [Graph Commands](#graphical-representation-of-dishes-wastage-graph-dish)
-        * `graph dish`: [Display graph of dish wastage](#graphical-representation-of-dishes-wastage-graph-dish)
-        * `graph ingr`: [Display graph of ingredient wastage](#graphical-representation-of-ingredients-wastage-graph-ingr)
-    * [Find Commands](#find-dishes-with-matching-keyword-find-dish)
-        * `find dish`: [Find dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
-        * `find ingr`: [Find ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
-    * [Clear Commands](#clears-dish-entries-in-the-list-of-dishes-totally-clear-dish)
-        * `clear dish`: [Remove all dishes](#clears-dish-entries-in-the-list-of-dishes-totally-clear-dish)
-        * `clear ingr`: [Remove all ingredients](#clears-ingredient-entries-in-the-list-of-ingredients-totally-clear-ingr)
-        * `clear all`: [Remove all dishes & ingredients](#clears-ingredient--dish-entries-in-the-list-of-dishes-totally-clear-all)
-    * [Sort Commands](#sort-the-dishes-by-amount-of-wastage-sort-dish)
-        * `sort dish`: [Sort dishes by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-dish)
-        * `sort ingr`: [Sort ingredients by amount of wastage](#sort-the-ingredients-by-amount-of-wastage-sort-ingr)
-    * `bye`: [Exit Food-O-Rama](#exit-food-o-rama-bye)
+        * `link`: [Link ingredient to dish](#link-ingredient-to-dish--link)
+        * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient--del-ingr)
+        * `list ingr`: [View existing ingredients](#view-existing-ingredients--list-ingr)
+    * [Graph Commands](#display-graph-of-dish-wastage--graph-dish)
+        * `graph dish`: [Display graph of dish wastage](#display-graph-of-dish-wastage--graph-dish)
+        * `graph ingr`: [Display graph of ingredient wastage](#display-a-graph-of-ingredient-wastage--graph-ingr)
+    * [Find Commands](#find-dishes-with-matching-keyword--find-dish)
+        * `find dish`: [Find dishes with matching keyword](#find-dishes-with-matching-keyword--find-dish)
+        * `find ingr`: [Find ingredients with matching keyword](#find-ingredients-with-matching-keyword--find-ingr)
+    * [Clear Commands](#remove-all-dishes--clear-dish)
+        * `clear dish`: [Remove all dishes](#remove-all-dishes--clear-dish)
+        * `clear ingr`: [Remove all ingredients](#remove-all-ingredients--clear-ingr)
+        * `clear all`: [Remove all dishes & ingredients](#remove-all-dishes-and-ingredients--clear-all)
+    * [Sort Commands](#sort-dishes-by-amount-of-wastage--sort-dish)
+        * `sort dish`: [Sort dishes by amount of wastage](#sort-dishes-by-amount-of-wastage--sort-dish)
+        * `sort ingr`: [Sort ingredients by amount of wastage](#sort-ingredients-by-amount-of-wastage--sort-ingr)
+    * `bye`: [Exit Food-O-Rama](#exit-food-o-rama--bye)
     * [Saving the data](#saving-the-data)
 
 ## 📖 Quick Start
@@ -124,7 +125,7 @@ The list teaches you how to use all commands available in *Food-O-Rama*.
 
 Format: `help`
 
-* Only the command `help` is required.
+* *Note💡* Only the command `help` is required.
 
 Example of usage:
 
@@ -207,7 +208,7 @@ Format: `add dish waste [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`\
 
-* *Tip❕* You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
+* *Note💡* You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
 
 Example of usage:
@@ -244,7 +245,7 @@ having more Dishes wasted than what was prepared initially*.
 Format: `set dish limit [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
-* *Tip❕* You will be prompted to enter the limit to watch out for in the next step.
+* *Note💡* You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -270,7 +271,7 @@ The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
-*Tip❕* 
+*Note💡*
 
 When adding new wastage to the Dish exceeds the limit,
 you will receive a prompt that the current Dish limit has exceeded.
@@ -311,7 +312,7 @@ Delete an existing Dish from your Dish list.
 Format: `del dish [DISH_NAME]`
 
 * The `DISH_NAME` has to be existing in the Dish list for it to be deleted.
-* *Tip❕* You will be prompted with a confirmation message to delete the dish.
+* *Note💡* You will be prompted with a confirmation message to delete the dish.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -359,7 +360,7 @@ ____________________________________________________________
 
 Views all existing Dishes in your Dish list.
 
-*Tip❕* Useful to check all your Dishes available
+*Tip❕* Useful to check all your Dishes available.
 
 Format: `list dish`
 
@@ -431,7 +432,7 @@ Add more storage to an Ingredient that exists in the Ingredient list by weight.
 Format: `add ingr stored [INGR_NAME]`
 
 * The `INGR_NAME` has to be an existing Ingredient in the Ingredient list.
-* *Tip❕* You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
+* *Note💡* You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
 
 Example of usage:
 
@@ -468,7 +469,7 @@ Incur wastage on an existing Ingredient.
 Format: `add ingr waste [INGR_NAME]`
 
 * Can only be performed on existing `[INGR_NAME]`
-* *Tip❕* You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
+* *Note💡* You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
 
 Example of usage:
 
@@ -505,7 +506,7 @@ having more Ingredients wasted than what was stored initially*.
 Format: `set ingr limit [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
-* *Tip❕* You will be prompted to enter the limit to watch out for in the next step.
+* *Note💡* You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -531,7 +532,7 @@ The limit for chicken is now 7.7 kg
 ____________________________________________________________
 ```
 
-*Tip ❕* 
+*Note💡*
 
 When adding new wastage to the Ingredient exceeds the limit,
 you will receive a prompt that the current Dish limit has exceeded.
@@ -597,7 +598,7 @@ Delete an existing Ingredient from your Ingredient list.
 Format: `del ingr [INGR_NAME]`
 
 * The `INGR_NAME` has to be existing in the Ingredient list for it to be deleted.
-* *Tip❕*  You will be prompted with a confirmation message to delete the ingredient.
+* *Note💡*  You will be prompted with a confirmation message to delete the ingredient.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -764,7 +765,7 @@ ____________________________________________________________
 
 Retrieves a list of Ingredients inclusive of the matching keyword.
 
-*Tip❕ Useful to find certain Ingredients available in your Ingredient list.*
+*Tip❕* Useful to find certain Ingredients available in your Ingredient list.
 
 Format: `find ingr [KEYWORD]`
 
@@ -796,12 +797,12 @@ ____________________________________________________________
 
 Removes all existing Dishes from the list of Ingredients.
 
-*Tip❕ Useful to obtain an empty Dish list.*
+*Tip❕* Useful to obtain an empty Dish list.
 
 Format: `clear dish`
 
 * `clear dish` does not require additional parameters
-* *Tip ❕*  You will be prompted with a confirmation message to delete all dishes.
+* *Note💡*  You will be prompted with a confirmation message to delete all dishes.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -849,12 +850,12 @@ ____________________________________________________________
 
 Removes all existing Ingredients from the list of ingredients.
 
-*Tip❕ Useful to obtain an empty Ingredient list.*
+*Tip❕* Useful to obtain an empty Ingredient list.
 
 Format: `clear ingr`
 
 * `clear ingr` does not require additional parameters
-* *Tip ❕*  You will be prompted with a confirmation message to delete all ingredients.
+* *Note💡*  You will be prompted with a confirmation message to delete all ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
     
@@ -900,7 +901,7 @@ ____________________________________________________________
 
 Removes all existing Dishes and Ingredients from their respective lists.
 
-*Tip❕ Useful to obtain both empty Ingredient list & Dish list.*
+*Tip❕* Useful to obtain both empty Ingredient list & Dish list.
 
 Format: `clear all`
 
@@ -951,7 +952,7 @@ ____________________________________________________________
 
 Sorts all Dishes in **descending order** of wastage.
 
-*Tip❕ Useful to immediaely see the most wasted Dish.*
+*Tip❕* Useful to immediately see the most wasted Dish.
 
 Format: `sort dish`
 
@@ -988,7 +989,7 @@ ____________________________________________________________
 
 Sorts all Ingredients in **descending order** of wastage.
 
-*Tip❕ Useful to immediaely see the most wasted Ingredient.*
+*Tip❕* Useful to immediaely see the most wasted Ingredient.
 
 Format: `sort ingr`
 
@@ -1030,7 +1031,7 @@ Exit Food-O-Rama and save all data entries.
 
 Format: `bye`
 
-* All data will be saved automatically.
+* *Note💡* All data will be saved automatically.
 
 Example of usage:
 
