@@ -160,13 +160,14 @@ public class PrintManager {
 
     private void printHabitDetails(Habit habit, String currIndex) {
         String intervalPrint = "";
+        String nextHabitDatePrint = "N.A.";
         int habitIntervals = habit.getInterval();
         if (habitIntervals > 0) {
             intervalPrint = "(every " + habit.getInterval() + " day(s))";
+            nextHabitDatePrint = habit.getNextHabitDateString();
         }
         // String intervalPrint = "(every " + habit.getInterval() + " days)";
         String lastHabitDatePrint = habit.getHabitDateString();
-        String nextHabitDatePrint = habit.getNextHabitDateString();
         System.out.println(currIndex + WHITE_SPACE + habit.getHabitName() + WHITE_SPACE + intervalPrint);
         System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
     }

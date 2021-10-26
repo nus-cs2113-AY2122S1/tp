@@ -2,3 +2,4 @@
 0##H##run 2.4km##25102021##1
 0##H##go to the gym##24102021##2
 1##G##Default##Do User Guide##24102021##25102021
+1##H##Fix user guide bugs##26102021##0
