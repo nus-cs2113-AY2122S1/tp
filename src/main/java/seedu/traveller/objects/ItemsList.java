@@ -1,6 +1,5 @@
-package seedu.traveller;
+package seedu.traveller.objects;
 
-import seedu.traveller.exceptions.DayNotFoundException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 

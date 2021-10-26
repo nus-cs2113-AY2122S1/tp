@@ -1,11 +1,9 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
-import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

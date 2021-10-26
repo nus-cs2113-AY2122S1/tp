@@ -1,5 +1,6 @@
 package seedu.traveller;
 
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.save.SaveLoader;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;

@@ -2,6 +2,8 @@ package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.objects.Day;
+import seedu.traveller.objects.Item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

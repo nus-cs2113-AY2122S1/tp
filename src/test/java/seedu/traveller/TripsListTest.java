@@ -2,7 +2,8 @@ package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.worldmap.Country;
 
 import java.util.ArrayList;

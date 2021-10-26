@@ -1,6 +1,9 @@
 package seedu.traveller;
 
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.objects.Item;
+import seedu.traveller.objects.Trip;
+import seedu.traveller.objects.TripsList;
 
 import java.util.ArrayList;
 import java.util.Scanner;

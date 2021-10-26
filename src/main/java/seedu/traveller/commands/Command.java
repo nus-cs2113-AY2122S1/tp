@@ -1,6 +1,6 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.TripsList;
+import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 

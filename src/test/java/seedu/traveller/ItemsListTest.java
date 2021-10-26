@@ -2,8 +2,9 @@ package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.traveller.Item;
+import seedu.traveller.objects.Item;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.objects.ItemsList;
 
 import java.util.ArrayList;
 import java.util.List;
