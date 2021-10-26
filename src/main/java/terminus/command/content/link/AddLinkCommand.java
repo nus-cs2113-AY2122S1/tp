@@ -68,7 +68,14 @@ public class AddLinkCommand extends Command {
         this.description = argArray.get(0);
         this.day = argArray.get(1);
         this.startTime = CommonUtils.convertToLocalTime(userStartTime);
-        this.duration = Integer.parseInt(argArray.get(3));
+
+        try {
+            this.duration = Integer.parseInt(argArray.get(3));
+        } catch (NumberFormatException e) {
+            TerminusLogger.warning(String.format("Invalid Duration"));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION_FORMAT));
+        }
+
         this.link = argArray.get(4);
 
         if (!isValidDay(this.day)) {

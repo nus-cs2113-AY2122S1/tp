@@ -55,6 +55,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
     public static final String ERROR_MESSAGE_NO_QUESTIONS =
         "There are no questions to be tested on. Type 'questions add' to get started";
+    public static final String ERROR_MESSAGE_INVALID_DURATION_FORMAT = "Invalid duration format.";
 
     public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
     public static final String ERROR_FILE_NOT_DELETED = "Unable to delete the file.";
