@@ -132,6 +132,13 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void missingIndexMessage() {
+        String message = "There seems to be missing index in your request.\n"
+                + "Please enter index in the following way: \n"
+                + "<COMMAND_WORD> <INDEX> <FLAGS_IF_REQUIRED>";
+        printDoubleLineMessage(message);
+    }
+
     public static void invalidNumMessage() {
         String message = "That does not seem to be a number.\n" + "Please provide a number instead.";
         printDoubleLineMessage(message);
