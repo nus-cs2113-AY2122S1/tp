@@ -338,6 +338,7 @@ public class Trip {
         } else {
             System.out.println("List of all Expenses in detail: ");
             for (Expense expense : listOfExpenses) {
+                System.out.print(listOfExpenses.indexOf(expense) + 1 + ". ");
                 Ui.printExpenseDetails(expense);
             }
         }
