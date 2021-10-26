@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 //@@author Roycius
 public class ParserTest {
     @Test
-    public void testParseAddTask() {
+    public void parseAddTask_dayAndInfo_valid() {
         String userResponse = "add task CS2113T tP -d MON -i before tutorial";
         try {
             Command command = Parser.parse(userResponse);
