@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class FileTest {
     void testRegularFile() throws FileNotFoundException {
         File file = new File("trips.json");
         assertTrue(file.canRead());
-        String jsonString = FileStorage.readFromFile();
+        String jsonString = FileStorage.readFromFile("trips.json");
         assertFalse(jsonString.isEmpty());
         Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
         FileStorage.initializeGson();
@@ -48,13 +49,25 @@ class FileTest {
     }
 
     @Test
-    void testEmptyFile() {
-        Storage.createNewFile();
-        assertThrows(NoSuchElementException.class, FileStorage::readFromFile);
+    void testNoFile() {
+        assertThrows(FileNotFoundException.class, () ->
+                FileStorage.readFromFile("randomfile.json"));
     }
 
     @Test
-    void testCorruptedFile() {
-
+    void testEmptyFile() {
+        try {
+            FileStorage.newBlankFile("tripsempty.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertThrows(NoSuchElementException.class, () ->
+                FileStorage.readFromFile("tripsempty.json"));
     }
+
+//    @Test
+//    void testCorruptedFile() {
+//        assertThrows(JsonParseException.class, () ->
+//                FileStorage.readFromFile("tripscorrupted.json"));
+//    }
 }
