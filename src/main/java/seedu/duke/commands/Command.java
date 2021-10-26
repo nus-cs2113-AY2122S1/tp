@@ -6,12 +6,12 @@ import seedu.duke.data.AllRecordList;
  * Basic command that other commands extend off of.
  */
 public abstract class Command {
-    protected AllRecordList recordList;
+    protected AllRecordList allRecordList;
 
     public abstract void execute(boolean isLoadingStorage);
 
-    public void setRecordList(AllRecordList recordList) {
-        this.recordList = recordList;
+    public void setAllRecordList(AllRecordList allRecordList) {
+        this.allRecordList = allRecordList;
     }
 
     public boolean isExit() {

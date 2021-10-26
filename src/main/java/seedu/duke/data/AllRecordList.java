@@ -74,20 +74,40 @@ public class AllRecordList {
         }
     }
 
-    public void editBudget(int month, double amount) {
-        allRecordList.get(month).getBudget().setAmount(amount);
+    public Budget editBudget(int month, double amount) {
+        Budget targetBudget = allRecordList.get(month).getBudget();
+        if (amount != 0.00) {
+            targetBudget.setAmount(amount);
+        }
+        return targetBudget;
     }
 
-    public void editExpenditure(int month, int index, double amount, String description, LocalDate date) {
+    public Expenditure editExpenditure(int month, int index, double amount, String description, LocalDate date) {
+        Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
         if (amount != 0.00) {
-            allRecordList.get(month).getExpenditure(index).setAmount(amount);
+            targetExpenditure.setAmount(amount);
         }
         if (!description.equals("")) {
-            allRecordList.get(month).getExpenditure(index).setDescription(description);
+            targetExpenditure.setDescription(description);
         }
         if (!date.equals(LocalDate.now())) {
-            allRecordList.get(month).getExpenditure(index).setDate(date);
+            targetExpenditure.setDate(date);
         }
+        return targetExpenditure;
+    }
+
+    public Loan editLoan(int month, int index, double amount, String name, LocalDate date) {
+        Loan targetLoan = allRecordList.get(month).getLoan(index);
+        if (amount != 0.00) {
+            targetLoan.setAmount(amount);
+        }
+        if (!name.equals("")) {
+            targetLoan.setName(name);
+        }
+        if (!date.equals(LocalDate.now())) {
+            targetLoan.setDate(date);
+        }
+        return targetLoan;
     }
 
     public void clearAll() {
@@ -110,6 +130,10 @@ public class AllRecordList {
     public void deleteLoan(int index, int month) {
         allRecordList.get(month).deleteLoan(index);
         saveToStorage(storageDirectory);
+    }
+
+    public RecordList getMonthRecord(int month) {
+        return allRecordList.get(month);
     }
 
     public ArrayList<Expenditure> getExpenditureRecords(int month) {
@@ -148,4 +172,11 @@ public class AllRecordList {
         return allRecordList.get(month).getSize();
     }
 
+    public double getTotalAmountSpent(int month) {
+        return allRecordList.get(month).getTotalAmountSpent();
+    }
+
+    public double getCategorySpending(int month, String categoryString, double categorySpending) {
+        return allRecordList.get(month).getCategorySpending(categoryString, categorySpending);
+    }
 }

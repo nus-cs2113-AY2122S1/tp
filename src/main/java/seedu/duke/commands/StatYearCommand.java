@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import seedu.duke.ui.TextUi;
+
 public class StatYearCommand extends StatCommand {
     private int type = 0;
 
@@ -70,10 +72,10 @@ public class StatYearCommand extends StatCommand {
         barPercentage = new double[12];
 
         for (int i = 1; i <= 12; i++) {
-            for (int j = 0; j < recordList.getExpenditureListSize(i); j += 1) {
-                totalSpending += recordList.getExpenditure(j, i).getAmount();
+            for (int j = 0; j < allRecordList.getExpenditureListSize(i); j += 1) {
+                totalSpending += allRecordList.getExpenditure(j, i).getAmount();
             }
-            amount = recordList.getBudget(i).getAmount();
+            amount = allRecordList.getBudget(i).getAmount();
 
             if (amount != 0) {
                 barPercentage[i - 1] = (totalSpending / amount) * 100;
@@ -83,6 +85,6 @@ public class StatYearCommand extends StatCommand {
 
         }
 
-        drawVerticalPercentatge(barPercentage);
+        TextUi.drawVerticalPercentage(barPercentage, "year");
     }
 }

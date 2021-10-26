@@ -23,7 +23,7 @@ public class ParserUtil {
         return description;
     }
 
-    public static double parseAmount(String amountString, boolean isCompulsory) throws NumberFormatException {
+    public static double parseAmount(String amountString, boolean isCompulsory) {
         try {
             return Integer.parseInt(amountString.trim());
         } catch (NumberFormatException e) {
@@ -40,5 +40,13 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             return LocalDate.now();
         }
+    }
+
+    public static String parseName(String nameString, boolean isCompulsory) throws EmptyDescriptionException {
+        String name = nameString.trim();
+        if (name.equals("") && isCompulsory) {
+            throw new EmptyDescriptionException();
+        }
+        return name;
     }
 }

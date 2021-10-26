@@ -37,7 +37,7 @@ public class Duke {
             try {
                 String userInput = textUi.getUserInput();
                 Command command = parser.parseCommand(userInput);
-                command.setRecordList(recordList);
+                command.setAllRecordList(recordList);
                 command.execute(false);
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
