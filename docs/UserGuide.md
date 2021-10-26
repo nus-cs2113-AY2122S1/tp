@@ -99,7 +99,38 @@ ____________________________________________________________
 <a name="add"></a>
 ### Adding a contact: `add`
 
-<a name="list"></a>
+Adds a specified contact to the ConTech Book.
+
+Usage: `add -n NAME -g GITHUB -l LINKEDIN -te TELEGRAM -tw TWITTER -e EMAIL`
+
+- ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill 
+the fields. These `flags` include:
+  - `-n`: for your contact's name
+  - `-g`: for your contact's GitHub account username
+  - `-l`: for your contact's LinkedIn handle
+  - `-te`: for your contact's Telegram handle
+  - `-tw`: for your contact's Twitter handle
+  - `-e`: for your contact's email
+- ConTech is robust and allows you to specify your fields in any order.
+- The `-n` name field is the only compulsory field required to add a contact, the rest are optional.
+- ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
+
+Expected outcome of usage:
+
+```
+add -n Le Zong -g lezongmun -e lezongmun@gmail.com -te lezongg
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     Le Zong
+Github:   github.com/lezongmun
+Email:    lezongmun@gmail.com
+Telegram: t.me/lezongg
+
+You now have 1 contact(s).
+____________________________________________________________
+```
+
+<a name="ls"></a>
 ### Listing all contacts: `ls`
 
 Lists all the saved contacts with the index and contact name.
@@ -111,7 +142,7 @@ Usage: `list`
 Expected outcome of usage:
 
 ```
-list
+ls
 ____________________________________________________________
 ConTech has 7 contacts stored.
 Here's the list :
