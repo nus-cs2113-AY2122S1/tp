@@ -48,12 +48,16 @@ public class RecordList {
      * @param description description of the expenditure
      * @param amount amount spent
      * @param date date on which the expenditure took place
+     * @param category category which the expenditure falls under
      * @param isLoadingStorage indicate if this command is called during loading or runtime
+     * @return Expenditure which was added.
      */
-    public void addExpenditure(String description, double amount, LocalDate date, Category category,
+    public Expenditure addExpenditure(String description, double amount, LocalDate date, Category category,
                                boolean isLoadingStorage) {
-        expenditureRecords.add(new Expenditure(description, amount, date, category));
+        Expenditure expenditureToAdd = new Expenditure(description, amount, date, category);
+        expenditureRecords.add(expenditureToAdd);
         numberOfRecords += 1;
+        return expenditureToAdd;
         /*
         if (!isLoadingStorage) {
             Storage storeCurrentExpenditure = new Storage();
