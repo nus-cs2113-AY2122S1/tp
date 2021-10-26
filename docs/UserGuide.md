@@ -13,7 +13,7 @@ an overview of all the commands you can use with NUSBuddy.
 
 > Icons used in this guide:
 > 
-> This guide uses blocks of text with icons to denote certain warnings, notes and extra features.
+> This guide uses blocks of text with icons to denote certain warnings and notes.
 > 
 > 💡 refers to an important note 
 > 
