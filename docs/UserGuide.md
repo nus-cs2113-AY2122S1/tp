@@ -18,8 +18,6 @@ an overview of all the commands you can use with NUSBuddy.
 > 💡 refers to an important note 
 > 
 > ❗️ refers to a warning
-> 
-> ℹ️ refers to additional information that may be useful to note
 
 ## Table of contents
 
