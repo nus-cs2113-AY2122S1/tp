@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteModuleCommandTest {
     @Test
-    public void deleteLesson_indexOutOfBounds_exceptionThrown() {
+    public void deleteLesson_emptyList_exceptionThrown() {
         ModuleList moduleList = new ModuleList();
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
-        assertThrows(DukeException.class, () -> new DeleteModuleCommand(1)
+        assertThrows(DukeException.class, () -> new DeleteModuleCommand("CS1010")
                 .execute(ui, storage, taskList, lessonList, moduleList));
     }
 }

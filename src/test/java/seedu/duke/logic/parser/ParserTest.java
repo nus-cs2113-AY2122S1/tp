@@ -84,7 +84,7 @@ public class ParserTest {
 
     @Test
     public void testSetGrade() {
-        String userResponse = "set grade 1 b";
+        String userResponse = "set grade cs1010 b";
         try {
             Command command = Parser.parse(userResponse);
             assertTrue(command instanceof SetGradeCommand);
@@ -101,7 +101,7 @@ public class ParserTest {
 
     @Test
     public void setGrade_missingArgument_exceptionThrown() {
-        String userResponse = "set grade 1";
+        String userResponse = "set grade cs1010";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 }

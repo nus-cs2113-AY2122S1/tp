@@ -21,7 +21,7 @@ class ModuleListTest {
             moduleList.addModule(new Module("CS2105", "Introduction to Computer Networks", "4 MC"));
             moduleList.addModule(new Module("CS2106", "Introduction to Operating Systems", "4 MC"));
             assertEquals(2, moduleList.getSize());
-            moduleList.deleteModule(1);
+            moduleList.deleteModule("CS2105");
             assertEquals(1, moduleList.getSize());
             moduleList.deleteAllModules();
             assertEquals(0, moduleList.getSize());
@@ -31,42 +31,43 @@ class ModuleListTest {
     }
 
     @Test
-    public void deleteModule_indexOutOfBounds_exceptionThrown() {
+    public void deleteModule_emptyList_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
             ModuleList moduleList = new ModuleList();
             moduleList.addModule(new Module("CS3244", "Machine Learning", "4 MC"));
-            moduleList.deleteModule(1);
-        });
-    }
-
-    @Test
-    public void deleteModule_negativeIndex_exceptionThrown() {
-        assertThrows(DukeException.class, () -> {
-            new ModuleList().deleteModule(-1);
+            moduleList.deleteModule("CS1010");
         });
     }
 
     @Test
     public void calculateCap_gradeWithValidGradePoint_expectedCap() {
-        ModuleList moduleList = new ModuleList();
-        Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
-        Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
-        moduleList.addModule(module1);
-        moduleList.addModule(module2);
-        module1.setGrade(Grade.A);
-        module2.setGrade(Grade.B);
-        assertEquals(4.25, moduleList.calculateCap());
+        try {
+            ModuleList moduleList = new ModuleList();
+            Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
+            Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
+            moduleList.addModule(module1);
+            moduleList.addModule(module2);
+            module1.setGrade("A");
+            module2.setGrade("B");
+            assertEquals(4.25, moduleList.calculateCap());
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test
     public void calculateCap_gradeWithoutValidGradePoint_defaultCap() {
-        ModuleList moduleList = new ModuleList();
-        Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
-        Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
-        moduleList.addModule(module1);
-        moduleList.addModule(module2);
-        module1.setGrade(Grade.S);
-        module2.setGrade(Grade.NONE);
-        assertEquals(-1, moduleList.calculateCap());
+        try {
+            ModuleList moduleList = new ModuleList();
+            Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
+            Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
+            moduleList.addModule(module1);
+            moduleList.addModule(module2);
+            module1.setGrade("S");
+            module2.setGrade("NONE");
+            assertEquals(-1, moduleList.calculateCap());
+        } catch (DukeException e) {
+            fail();
+        }
     }
 }
