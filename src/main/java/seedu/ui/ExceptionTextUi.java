@@ -136,8 +136,13 @@ public class ExceptionTextUi {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
                 + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
-                + "      example : edit 0 -n George -g procoder -te george123"
-                + "NOTE : At least one flag and description required";
+                + "      example : edit 0 -n George -g procoder -te george123\n"
+                + "NOTE : At least one flag and description required\n"
+                + "       Order of parameters do not matter except for INDEX\n"
+                + "       \"me\" is used as the INDEX for personal contact.";
+        printDoubleLineMessage(message);
+    }
+
     public static void missingArgAddMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
