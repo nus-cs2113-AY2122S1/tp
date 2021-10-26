@@ -268,6 +268,13 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>addTagToRecipes(tag)</h2>
+     *
+     * <p>This method updates ther</p>
+     * @param tag The tag that contains the associated recipes
+     * @throws GordonException
+     */
     public void addTagToRecipes(Tag tag) throws GordonException {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
