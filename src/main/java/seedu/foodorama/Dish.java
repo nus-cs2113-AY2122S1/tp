@@ -147,19 +147,9 @@ public class Dish implements Comparable<Dish> {
                 + "   Limit: " + limitString;
     }
 
-    public String toGraph(double max) {
-        String bar = "[";
-        int num = (int)(10 * wastage / max);
-        for (int i = 0; i < 10; i++) {
-            if (i < num) {
-                bar = bar + "█";
-            } else  {
-                bar = bar + " ";
-            }
-        }
-        bar = bar + "]";
-        return dishName + System.lineSeparator()
-                + "   Wastage: " + bar + " " + wastage + " kg";
+    public int getGraphHeight(double max, int resolution) {
+        int num = (int)(resolution * wastage / max);
+        return num;
     }
 
     public String formatData() {

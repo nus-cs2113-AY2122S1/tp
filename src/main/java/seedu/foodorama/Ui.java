@@ -465,26 +465,94 @@ public class Ui {
 
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
-        double max = DishList.getGreatestWaste();
-        System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Here are the dishes you have:");
-        for (int i = 0; i < dishList.size(); i++) {
-            System.out.println((i + 1) + ". " + dishList.get(i).toGraph(max));
+        int graphPortions = 10;
+        if(!dishList.isEmpty()) {
+            //Get the n values for the dishes
+            ArrayList<Integer> lengths = new ArrayList();
+            double max = DishList.getGreatestWaste();
+            for (int i = 0; i < dishList.size(); i++) {
+                lengths.add(dishList.get(i).getGraphHeight(max, graphPortions));
+            }
+            //2d visualization
+            //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
+            int listSize = dishList.size();
+            int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < listSize * 2; j++) {
+                    if(i < graphPortions) {
+                        if (j % 2 == 0) {
+                            System.out.print(" "); //Every other column is blank
+                        } else if (i > graphPortions - 1 - lengths.get(j/2)) {
+                            System.out.print("█");
+                        } else {
+                            System.out.print(" ");
+                        }
+                    } else if (i == graphPortions) {
+                        if (j % 2 == 0) {
+                            System.out.print(" ");
+                        } else {
+                            System.out.print((char)(j/2 + 65));
+                        }
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+                if(i < listSize) {
+                    System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
+                    + ":" + dishList.get(i).getWastage() + "kg");
+                } else {
+                    System.out.print(System.lineSeparator());
+                }
+            }
+        } else {
+            System.out.println("There are no dishes to graph");
         }
-        System.out.println("You can use command 'add' to add new dishes!" + System.lineSeparator()
-                + LINE_DIVIDER);
     }
 
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
         assert ingredientList != null : "ingredientList cannot be null";
-        double max = IngredientList.getGreatestWaste();
-        System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Here are the dishes you have: ");
-        for (int i = 0; i < ingredientList.size(); i++) {
-            System.out.println((i + 1) + ". " + ingredientList.get(i).toGraph(max));
+        int graphPortions = 10;
+        if(!ingredientList.isEmpty()) {
+            //Get the n values for the ingredients
+            ArrayList<Integer> lengths = new ArrayList();
+            double max = IngredientList.getGreatestWaste();
+            for (int i = 0; i < ingredientList.size(); i++) {
+                lengths.add(ingredientList.get(i).getGraphHeight(max, graphPortions));
+            }
+            //2d visualization
+            //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
+            int listSize = ingredientList.size();
+            int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < listSize * 2; j++) {
+                    if(i < graphPortions) {
+                        if (j % 2 == 0) {
+                            System.out.print(" "); //Every other column is blank
+                        } else if (i > graphPortions - 1 - lengths.get(j/2)) {
+                            System.out.print("█");
+                        } else {
+                            System.out.print(" ");
+                        }
+                    } else if (i == graphPortions) {
+                        if (j % 2 == 0) {
+                            System.out.print(" ");
+                        } else {
+                            System.out.print((char)(j/2 + 65));
+                        }
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+                if(i < listSize) {
+                    System.out.println("     " + (char) (i + 65) + ". " + ingredientList.get(i).getIngredientName()
+                            + ":" + ingredientList.get(i).getWastage() + "kg");
+                } else {
+                    System.out.print(System.lineSeparator());
+                }
+            }
+        } else {
+            System.out.println("There are no ingredients to graph");
         }
-        System.out.println("You can use command 'add' to add new dishes!" + System.lineSeparator()
-                + LINE_DIVIDER);
     }
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
