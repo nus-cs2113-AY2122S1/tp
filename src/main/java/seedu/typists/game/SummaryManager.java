@@ -11,7 +11,7 @@ public class SummaryManager {
             ArrayList<String[]> expectedInput, ArrayList<String[]> actualInput, double timeElapsed, String gameMode) {
 
         assert timeElapsed >= 0;
-        assert expectedInput != null;
+        assert expectedInput.size() > 0;
         assert actualInput != null;
         assert ((gameMode.equals("Word-limited")) || (gameMode.equals("Time-limited")));
 
@@ -23,7 +23,7 @@ public class SummaryManager {
         summary.put("totalWordCount", calculateTotalWordCount(expectedInput));
         summary.put("errorWordPercentage", calculateErrorWordsPercentage(actualInput, expectedInput));
         summary.put("correctWordPercentage", calculateCorrectWordsPercentage(actualInput, expectedInput));
-        summary.put("wordsPerMinute", calculateWPM(timeElapsed, actualInput, expectedInput));
+        summary.put("wordsPerMinute", calculateWpm(timeElapsed, actualInput, expectedInput));
         summary.put("errorWords", getErrorWords(actualInput, expectedInput));
         return summary;
     }
@@ -32,68 +32,64 @@ public class SummaryManager {
             ArrayList<String[]> actualInput, ArrayList<String[]> expectedInput) {
 
         ArrayList<String> errorWords = new ArrayList<>();
-        ArrayList<String> mergedExpectedInput = mergeArrays(expectedInput);
 
         if (actualInput.isEmpty()) {
+            ArrayList<String> mergedExpectedInput = mergeArrays(expectedInput);
             return mergedExpectedInput;
         }
 
-        ArrayList<String> mergedActualInput = mergeArrays(actualInput);
+        int totalExpectedLines = expectedInput.size();
+        int outerLoopCount;
+        for (outerLoopCount = 0; outerLoopCount < totalExpectedLines; outerLoopCount++) {
 
-        int count = 0;
-        for (String expectedWord : mergedExpectedInput) {
-
-            if (mergedActualInput.isEmpty()) {
+            if (actualInput.size() == outerLoopCount) {
+                ArrayList<String[]> remainingLines = new ArrayList<>(
+                        expectedInput.subList(outerLoopCount, totalExpectedLines)
+                );
+                ArrayList<String> mergedRemainingLines = mergeArrays(remainingLines);
+                errorWords.addAll(mergedRemainingLines);
                 break;
             }
 
-            int result = mergedActualInput.indexOf(expectedWord);
+            ArrayList<String> expectedLine = new ArrayList<>(Arrays.asList(expectedInput.get(outerLoopCount)));
+            assert expectedLine.size() > 0;
+            ArrayList<String> actualLine = new ArrayList<>(Arrays.asList(actualInput.get(outerLoopCount)));
 
-            if (result == -1) {
-                String errorWord = expectedWord;
-                errorWords.add(errorWord);
-            } else {
-                mergedActualInput.remove(result);
+            for (String expectedWord : expectedLine) {
+
+                int innerLoopCount = 0;
+                if (actualLine.size() == 0) {
+                    ArrayList<String> remainingWords = new ArrayList<>(
+                            expectedLine.subList(innerLoopCount, expectedLine.size())
+                    );
+                    errorWords.addAll(remainingWords);
+                    break;
+                }
+
+                int result = actualLine.indexOf(expectedWord);
+
+                if (result == -1) {
+                    String errorWord = expectedWord;
+                    errorWords.add(errorWord);
+                } else {
+                    actualLine.remove(result);
+                }
+
+                innerLoopCount++;
             }
-            count++;
-        }
 
-        if (count != calculateTotalWordCount(expectedInput)) {
-            for (int i = count; i < calculateTotalWordCount(expectedInput); i++) {
-                errorWords.add(mergedExpectedInput.get(i));
-            }
         }
-
         return errorWords;
     }
 
     private static int calculateCorrectWordCount(ArrayList<String[]> actualInput, ArrayList<String[]> expectedInput) {
-        int correctWordCount = 0;
-
-        ArrayList<String> mergedExpectedInput = mergeArrays(expectedInput);
-        if (actualInput.isEmpty()) {
-            return correctWordCount;
-        }
-        ArrayList<String> mergedActualInput = mergeArrays(actualInput);
-
-        for (String userWord : mergedActualInput) {
-
-            if (mergedExpectedInput.isEmpty()) {
-                break;
-            }
-
-            int result = mergedExpectedInput.indexOf(userWord);
-
-            if (result == -1) {
-                continue;
-            } else {
-                mergedExpectedInput.remove(result);
-                correctWordCount++;
-            }
-
-        }
-
+        int errorWordCount = calculateErrorWordCount(actualInput, expectedInput);
+        assert errorWordCount >= 0;
+        int totalWordCount = calculateTotalWordCount(expectedInput);
+        assert totalWordCount >= errorWordCount;
+        int correctWordCount = totalWordCount - errorWordCount;
         return correctWordCount;
+
     }
 
     private static Double calculateCorrectWordsPercentage(
@@ -104,7 +100,7 @@ public class SummaryManager {
         return correctWordsPercentage;
     }
 
-    private static Double calculateWPM(
+    private static Double calculateWpm(
             Double timeElapsed, ArrayList<String[]> actualInput, ArrayList<String[]> expectedInput) {
         int correctWordCount = calculateCorrectWordCount(actualInput, expectedInput);
         double wordPerMinute = ((double) correctWordCount / timeElapsed) * 60;
@@ -113,14 +109,7 @@ public class SummaryManager {
 
 
     private static int calculateErrorWordCount(ArrayList<String[]> actualInput, ArrayList<String[]> expectedInput) {
-        int correctWordCount = calculateCorrectWordCount(actualInput, expectedInput);
-        assert correctWordCount >= 0;
-
-        int totalWordCount = calculateTotalWordCount(expectedInput);
-        assert correctWordCount >= 0;
-
-        assert totalWordCount >= correctWordCount;
-        int errorWordCount = totalWordCount - correctWordCount;
+        int errorWordCount = getErrorWords(actualInput, expectedInput).size();
         return errorWordCount;
     }
 

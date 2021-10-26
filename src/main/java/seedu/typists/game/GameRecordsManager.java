@@ -36,8 +36,10 @@ public class GameRecordsManager {
         double correctWordPercentage = (Double) gameSummary.get("correctWordPercentage");
         ArrayList<String> errorWords = (ArrayList<String>) gameSummary.get("errorWords");
 
-        GameRecord newGameRecord = new GameRecord(gameMode, timeElapsed, errorWordCount, correctWordCount, totalWordCount,
-                errorWordPercentage, correctWordPercentage, wpm, errorWords);
+        GameRecord newGameRecord = new GameRecord(
+                gameMode, timeElapsed, errorWordCount, correctWordCount, totalWordCount,
+                errorWordPercentage, correctWordPercentage, wpm, errorWords
+        );
         return newGameRecord;
     }
 

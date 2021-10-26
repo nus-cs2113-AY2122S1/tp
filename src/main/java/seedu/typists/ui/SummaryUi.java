@@ -13,7 +13,7 @@ import java.util.logging.ConsoleHandler;
 import static java.lang.System.out;
 import static seedu.typists.common.Messages.SUMMARY;
 
-public class SummaryUI {
+public class SummaryUi {
 
     private static final Logger LOGGER = Logger.getLogger(TextUi.class.getName());
 
@@ -32,13 +32,22 @@ public class SummaryUI {
         assert summary.get("timeElapsed") instanceof Double;
         assert summary.get("gameMode") instanceof String;
         assert summary.get("wordsPerMinute") instanceof Double;
-        printOverview((Double) summary.get("timeElapsed"), (String) summary.get("gameMode"), (Double) summary.get("wordsPerMinute"));
+        printOverview(
+                (Double) summary.get("timeElapsed"),
+                (String) summary.get("gameMode"),
+                (Double) summary.get("wordsPerMinute"));
         assert summary.get("errorWordCount") instanceof Integer;
         assert summary.get("errorWordPercentage") instanceof Double;
-        printErrorStatistics((Integer) summary.get("errorWordCount"), (Double) summary.get("errorWordPercentage"), (Integer) summary.get("totalWordCount"));
+        printErrorStatistics(
+                (Integer) summary.get("errorWordCount"),
+                (Double) summary.get("errorWordPercentage"),
+                (Integer) summary.get("totalWordCount"));
         assert summary.get("correctWordCount") instanceof Integer;
         assert summary.get("correctWordPercentage") instanceof Double;
-        printSuccessStatistics((Integer) summary.get("correctWordCount"), (Double) summary.get("correctWordPercentage"), (Integer) summary.get("totalWordCount"));
+        printSuccessStatistics(
+                (Integer) summary.get("correctWordCount"),
+                (Double) summary.get("correctWordPercentage"),
+                (Integer) summary.get("totalWordCount"));
         assert summary.get("errorWords") instanceof List;
         printErrorWords((List<String>) summary.get("errorWords"));
     }
@@ -48,7 +57,7 @@ public class SummaryUI {
                 + errorWordCount
                 + "/"
                 + totalWordCount
-                + "|" + String.format("%.2f", errorWordPercentage) + "%");
+                + "|" + String.format("%.2f", errorWordPercentage) + "%\n");
     }
 
     private static void printSuccessStatistics(int correctWordCount, double correctWordPercentage, int totalWordCount) {
@@ -56,11 +65,12 @@ public class SummaryUI {
                 + correctWordCount
                 + "/"
                 + totalWordCount
-                + "|" + String.format("%.2f", correctWordPercentage) + "%");
+                + "|" + String.format("%.2f", correctWordPercentage) + "%\n");
     }
 
     private static void printErrorWords(List<String> errorWords) {
         setUpLog();
+        out.print("Mistakes: ");
         if (errorWords == null) {
             out.print("No words typed wrongly.\n");
             return;
@@ -82,7 +92,7 @@ public class SummaryUI {
 
     private static void printOverview(double timeElapsed, String gameMode, double wpm) {
         System.out.print(SUMMARY + '\n');
-        System.out.println("Game Mode: " + gameMode);
+        System.out.println("Game Mode: " + gameMode + '\n');
         System.out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         System.out.print("Total Time taken for the game: " + String.format("%.2f", timeElapsed) + " seconds\n");
     }

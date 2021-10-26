@@ -14,8 +14,10 @@ public class GameRecord {
     private double wpm;
     private ArrayList<String> errorWords;
 
-    public GameRecord(String gameMode, double timeElapsed, int errorWordCount, int correctWordCount, int totalWordCount,
-                      double errorWordPercentage, double correctWordPercentage, double wpm, ArrayList<String> errorWords) {
+    public GameRecord(
+            String gameMode, double timeElapsed, int errorWordCount, int correctWordCount, int totalWordCount,
+            double errorWordPercentage, double correctWordPercentage, double wpm, ArrayList<String> errorWords
+    ) {
 
         this.gameMode = gameMode;
         this.timeElapsed = timeElapsed;
