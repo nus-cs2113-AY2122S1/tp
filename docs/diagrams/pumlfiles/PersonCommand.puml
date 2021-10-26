@@ -1,0 +1,68 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+skinparam groupInheritance 6
+
+class "{abstract} \n Command"{
+    + exit() : boolean
+    + {abstract} execute(Scheduler, Ui)
+}
+
+
+package medbot.command.personcommand {
+class "{abstract} \n AddPersonCommand"{
+    # person : Person
+    + {abstract} execute(Scheduler, Ui)
+}
+
+
+class "{abstract} \n ArchivePersonCommand"{
+    # personId : int
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class "{abstract} \n DeletePersonCommand"{
+    # personId : int
+    + {abstract} execute(Scheduler, Ui)
+}
+
+
+class "{abstract} \n EditPersonCommand"{
+    # personId : int
+    # person : Person
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class "{abstract} \n FindPersonCommand"{
+    # parameters: String[]
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class "{abstract} \n ListPersonCommand"{
+    # getArchived: boolean
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class "{abstract} \n UnarchivePersonCommand"{
+    # personId : int
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class "{abstract} \n ViewPersonCommand"{
+    # personId : int
+    + {abstract} execute(Scheduler, Ui)
+}
+"{abstract} \n Command" <|--- "{abstract} \n AddPersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n EditPersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n ArchivePersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n UnarchivePersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n DeletePersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n ListPersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n FindPersonCommand"
+"{abstract} \n Command" <|--- "{abstract} \n ViewPersonCommand"
+}
+
+
+@enduml

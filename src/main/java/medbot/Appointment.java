@@ -10,10 +10,12 @@ import java.time.format.DateTimeFormatter;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 
+
 public class Appointment extends ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
+
     private int patientId = 0;
     private int medicalStaffId = 0;
     private int dateTimeCode = 0;
@@ -43,7 +45,11 @@ public class Appointment extends ListItem {
         this.dateTimeCode = dateTimeCode;
     }
 
-    public static String getDateTimeString(int dateTimeCode) {
+    public String getDateTimeString() {
+        return formatDateTimeCode(dateTimeCode);
+    }
+
+    public static String formatDateTimeCode(int dateTimeCode) {
         long epochSecond = (long) dateTimeCode * 60;
         LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
         return localDateTime.format(DATE_TIME_FORMATTER) + "HRS";
@@ -98,7 +104,6 @@ public class Appointment extends ListItem {
         return "Appointment Id: " + listItemId + " Date/Time: " + getDateTimeString(dateTimeCode) + " Patient ID: "
                 + patientId + " Staff ID: " + medicalStaffId + "\n";
     }
-
 
     /**
      * Text to be written to storage file of a person.

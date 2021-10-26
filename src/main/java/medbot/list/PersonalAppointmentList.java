@@ -2,6 +2,7 @@ package medbot.list;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -95,37 +96,37 @@ public class PersonalAppointmentList {
     }
 
     private String getAppointmentNotFoundErrorMessage(int dateTimeCode) {
-        return "No appointment at : " + Appointment.getDateTimeString(dateTimeCode) + "found.";
+        return "No appointment at : " + Appointment.formatDateTimeCode(dateTimeCode) + "found.";
     }
-
-    public String listAppointments() {
-        String output = "";
+    
+    public List<Integer> listAppointments() {
+        List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointments) {
-            output += appointment + END_LINE;
+            appointmentIds.add(appointment.getAppointmentId());
         }
-        return output;
+        return appointmentIds;
     }
 
-    public String listAppointmentsAfter(int dateTimeCode) {
+    public List<Integer> listAppointmentsAfter(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
         referenceAppointment.setDateTimeCode(dateTimeCode);
         NavigableSet<Appointment> appointmentsAfter = appointments.tailSet(referenceAppointment, true);
-        String output = "";
+        List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsAfter) {
-            output += appointment + END_LINE;
+            appointmentIds.add(appointment.getAppointmentId());
         }
-        return output;
+        return appointmentIds;
     }
 
-    public String listAppointmentsBefore(int dateTimeCode) {
+    public List<Integer> listAppointmentsBefore(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
         referenceAppointment.setDateTimeCode(dateTimeCode);
         NavigableSet<Appointment> appointmentsBefore = appointments.headSet(referenceAppointment, true);
-        String output = "";
+        List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsBefore) {
-            output += appointment + END_LINE;
+            appointmentIds.add(appointment.getAppointmentId());
         }
-        return output;
+        return appointmentIds;
     }
 
 }

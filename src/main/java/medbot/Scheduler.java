@@ -12,6 +12,16 @@ import medbot.utilities.FilterType;
 import java.util.List;
 
 public class Scheduler {
+    private static final String EMPTY_STRING = "";
+    private static final String END_LINE = System.lineSeparator();
+    private static final String SPACE = " ";
+    private static final String VERTICAL_LINE_SPACED = " | ";
+
+    private static final int LENGTH_APPOINTMENT_ID_COLUMN = 4;
+    private static final int LENGTH_PATIENT_ID_COLUMN = 10;
+    private static final int LENGTH_STAFF_ID_COLUMN = 8;
+    private static final int LENGTH_NAME_COLUMN = 20;
+
     private static final String ERROR_ADD_INCOMPLETE_APPOINTMENT = "Incomplete appointment.";
     private static final String ERROR_PATIENT_APPOINTMENT_CLASH = "Patient unavailable, appointment %d at that time.";
     private static final String ERROR_STAFF_APPOINTMENT_CLASH = "Staff unavailable, appointment %d at that time.";
@@ -33,20 +43,6 @@ public class Scheduler {
 
     public SchedulerAppointmentList getSchedulerAppointmentList() {
         return schedulerAppointmentList;
-    }
-
-    public String listAllAppointments() {
-        return schedulerAppointmentList.listAppointments();
-    }
-
-    public String listMedicalStaffAppointments(int staffId, FilterType filterType, int dateTimeCode)
-            throws MedBotException {
-        return medicalStaffList.listAppointments(staffId, filterType, dateTimeCode);
-    }
-
-    public String listPatientAppointments(int patientId, FilterType filterType, int dateTimeCode)
-            throws MedBotException {
-        return patientList.listAppointments(patientId, filterType, dateTimeCode);
     }
 
     /**
@@ -244,6 +240,31 @@ public class Scheduler {
         return schedulerAppointmentList.getAppointment(appointmentId);
     }
 
+    public String listAllAppointments() throws MedBotException {
+        List<Integer> appointmentIds = schedulerAppointmentList.listAppointments();
+        return generateAppointmentTable(appointmentIds);
+    }
+
+    public String listMedicalStaffAppointments(int staffId, FilterType filterType, int dateTimeCode)
+            throws MedBotException {
+        List<Integer> appointmentIds = medicalStaffList.listAppointments(staffId, filterType, dateTimeCode);
+        return generateAppointmentTable(appointmentIds);
+    }
+
+    public String listPatientAppointments(int patientId, FilterType filterType, int dateTimeCode)
+            throws MedBotException {
+        List<Integer> appointmentIds = patientList.listAppointments(patientId, filterType, dateTimeCode);
+        return generateAppointmentTable(appointmentIds);
+    }
+
+    private String generateAppointmentTable(List<Integer> appointmentIds) throws MedBotException {
+        String output = EMPTY_STRING;
+        for (int appointmentId : appointmentIds) {
+            output += generateAppointmentTableRow(appointmentId) + END_LINE;
+        }
+        return output;
+    }
+
     /**
      * Adds the specified appointment to the scheduler if it does not clash with existing appointments.
      *
@@ -252,12 +273,12 @@ public class Scheduler {
      * @param appointment Appointment to be added to the scheduler
      * @throws MedBotException if the appointment is missing information or clashes with another appointment
      */
-    public void addAppointment(Appointment appointment) throws MedBotException {
+    public int addAppointment(Appointment appointment) throws MedBotException {
         if (!appointment.isComplete()) {
             throw new MedBotException(ERROR_ADD_INCOMPLETE_APPOINTMENT);
         }
         checkAvailability(appointment);
-        insertAppointment(appointment);
+        return insertAppointment(appointment);
     }
 
     /**
@@ -336,5 +357,52 @@ public class Scheduler {
         if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_STAFF_APPOINTMENT_CLASH, clashAppointmentId));
         }
+    }
+
+    private String generateAppointmentTableRow(int appointmentId) throws MedBotException {
+        Appointment appointment = schedulerAppointmentList.getAppointment(appointmentId);
+        String patientName = patientList.getPersonName(appointment.getPatientId());
+        String staffName = medicalStaffList.getPersonName(appointment.getMedicalStaffId());
+        return VERTICAL_LINE_SPACED + formatAppointmentId(appointment.getAppointmentId())
+                + VERTICAL_LINE_SPACED + appointment.getDateTimeString()
+                + VERTICAL_LINE_SPACED + formatPatientId(appointment.getPatientId())
+                + VERTICAL_LINE_SPACED + formatNameString(patientName)
+                + VERTICAL_LINE_SPACED + formatStaffId(appointment.getMedicalStaffId())
+                + VERTICAL_LINE_SPACED + formatNameString(staffName)
+                + VERTICAL_LINE_SPACED;
+    }
+
+    private String formatAppointmentId(int id) {
+        String idString = Integer.toString(id);
+        return formatAttributeString(idString, LENGTH_APPOINTMENT_ID_COLUMN);
+    }
+
+    private String formatPatientId(int id) {
+        String idString = Integer.toString(id);
+        return formatAttributeString(idString, LENGTH_PATIENT_ID_COLUMN);
+    }
+
+    private String formatStaffId(int id) {
+        String idString = Integer.toString(id);
+        return formatAttributeString(idString, LENGTH_STAFF_ID_COLUMN);
+    }
+
+    private String formatNameString(String nameString) {
+        return formatAttributeString(nameString, LENGTH_NAME_COLUMN);
+    }
+
+    private String formatAttributeString(String attribute, int outputLength) {
+        int attributeLength = attribute.length();
+        String output = attribute;
+
+        if (attributeLength > outputLength) {
+            output = output.substring(0, outputLength - 3) + "...";
+            return output;
+        }
+
+        for (int i = attributeLength; i < outputLength; i++) {
+            output += SPACE;
+        }
+        return output;
     }
 }

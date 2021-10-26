@@ -3,9 +3,11 @@ package medbot.ui;
 import java.util.List;
 
 public class SchedulerUi {
-    public static final String END_LINE = System.lineSeparator();
-    public static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
-            + "----------------------------------------------------- " + END_LINE;
+    private static final String END_LINE = System.lineSeparator();
+    private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
+            + "-------------------------------------------------- " + END_LINE;
+    private static final String APPOINTMENT_TABLE_HEADER = " |  ID  |     Date/Time     | Patient ID |"
+            + "     Patient Name     | Staff ID |      Staff Name      | " + END_LINE;
 
     public static String getAddSchedulerHelpMessage() {
         return " " + END_LINE;
@@ -31,6 +33,13 @@ public class SchedulerUi {
         return " " + END_LINE;
     }
 
+    public static String getNoAppointmentsFoundMessage() {
+        return "Sorry, no appointments meeting that criteria were found!";
+    }
+
+    public static String getNoAppointmentsMessage() {
+        return "Sorry, there are no appointments found.";
+    }
 
     /**
      * Returns a schedule information.
@@ -46,7 +55,7 @@ public class SchedulerUi {
     public static String getSchedulerCommandList() {
         return "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "get view" + END_LINE + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
@@ -79,6 +88,22 @@ public class SchedulerUi {
         output += END_LINE;
         output += TABLE_ROW_SEPARATOR;
         return output;
+    }
+
+    public static String getFindAppointmentListMessage(String appointmentString) {
+        return "Here is a list of matched appointments:" + END_LINE
+                + TABLE_ROW_SEPARATOR
+                + APPOINTMENT_TABLE_HEADER
+                + TABLE_ROW_SEPARATOR
+                + appointmentString;
+    }
+
+    public static String getListAppointmentListMessage(String appointmentString) {
+        return "Here is a list of all appointments:" + END_LINE
+                + TABLE_ROW_SEPARATOR
+                + APPOINTMENT_TABLE_HEADER
+                + TABLE_ROW_SEPARATOR
+                + appointmentString;
     }
 
 }

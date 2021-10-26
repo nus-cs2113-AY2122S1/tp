@@ -7,12 +7,20 @@ patients’ personal and medical information. By utilising text-based commands
 instead of traditional Graphical User Interface (GUI) based navigation, MedBot 
 can allow head nurses to get their management tasks done quicker and more efficiently.
 
-## Quick Start
+## Quick Start Guide
 
-{Give steps to get started quickly}
+### Installation
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `medbot.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
+3. Move the file to the folder that you want to use as the MedBot's root folder.
+4. Execute the `java -jar medbot.jar` command in the terminal in the same folder as the `medbot.jar` file to launch 
+MedBot. The following output should be observed:
+
+### Using MedBot
+
+1. Type in commands into the terminal and press **Enter** to execute it.
+2. Refer to the [Commands](#Commands) below for details on each command.
 
 ## Features 
 
@@ -60,6 +68,17 @@ Inputting `switch p`:
 View has been switched to PATIENT_INFO
 ```
 
+Here is the list of views and their corresponding `[VIEW_TYPE]` specifiers:
+
+| View               | Specifier | Alternate Specifier |
+| :---               | :---      | :---                |
+| Patient Info       | `p`       | `1`                 |
+| Medical Staff Info | `m`       | `2`                 |
+| Scheduler          | `s`       | `3`                 |
+
+Using either specifier will switch to the corresponding view.
+
+I.e., `switch m` and `switch 2` will both switch to the Medical Staff Info view
 
 ### Exit program: `exit`
 
@@ -94,6 +113,8 @@ find
 delete
 switch
 exit
+archive
+unarchive
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
@@ -101,7 +122,7 @@ help [COMMAND]
 *Note that all commands will remove any '|' inputs for format parsing purposes
 ```
 
-### Patient / Medical Staff Information
+### Patient / Medical Staff Information Commands
 
 Functionally, the commands for the patient information view and
 medical staff information view are the same. Here, we'll be using
@@ -127,6 +148,8 @@ Address: ADDRESS
 
 Examples:
 `add i/1234 n/”John Doe” p/87654321 e/john.doe@gmail.com a/”John Street, block 1234, #01-01”`
+
+Do note that the personal information of the patient does not have to be entered in any particular order.
 
 ### Delete a patient: `delete`
 
@@ -169,6 +192,10 @@ Address: ADDRESS
 
 ### List information of all current patients: `list`
 
+`list` will show all unarchived patients.
+
+To show archived patients, use `list -ar`
+
 Format: list
 
 Example Output:
@@ -203,6 +230,132 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
+### Find patients based on attributes: `find`
+
+Find all patients that contains the given attributes.
+
+Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+* The attributes given do not have to be in full.
+* At least one attribute must be present.
+
+Example:
+`find n/Smith`
+
+Expected output:
+```
+Here is a list of all patients:
+For full details of each patient, please use the command "view PATIENT_ID"
+ ----------------------------------------------------------------------------------------------------- 
+ |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
+ ----------------------------------------------------------------------------------------------------- 
+ | 3    | S1231234A | John Smith           | 91234567  | johnsmit@eg.com      | Qweqwqwenoiqwenqw    | 
+ ----------------------------------------------------------------------------------------------------- 
+```
+
+### Archive a patient: `archive`
+
+Archive a patient in the list. Archived patients are not shown with `list` command.
+To show all archived patients, use `list -ar`.
+
+This command only works for currently unarchived patients.
+
+Format: `archive PATIENT_ID`
+
+Expected output:
+
+`The patient with ID: 1 is archived successfully.`
+
+### Unarchive a patient: `unarchive`
+
+Unarchive a patient in the list. Unarchived patients are shown on `list`
+
+This command only works for currently archived patients.
+
+Format: `unarchive PATIENT_ID`
+
+Expected output:
+
+`The patient with ID: 1 is unarchived successfully.`
+
+### Scheduler Commands
+
+### Adding an appointment: `add`
+
+Adds an appointment to the list. MedBot will check if the appointment clashes with others and display an error message
+if it does.
+
+Format: `add p/PATIENT_ID s/STAFF_ID d/DATE_TIME`
+
+The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS should be written as `090221 0800`
+
+Expected output:
+```
+Appointment added: Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+```
+
+Do note that the appointments are managed at an hourly basis. For example, any appointments set to any time between
+0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 0859HRS. No subsequent appointment can then be
+scheduled for either the patient and the medical staff during that window.
+
+### Deleting an appointment: `delete`
+
+Delete an appointment from the list.
+
+Format: `delete APPOINTMENT_ID`
+
+Expected output:
+```
+
+```
+
+### Editing an appointment's information: `edit`
+
+Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error 
+message if it does.
+
+Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
+
+Expected output:
+```
+
+```
+
+### Viewing an appointment's information: `view`
+
+View the information of an appointment.
+
+Format: `view APPOINTMENT_ID`
+
+Expected output:
+```
+Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+```
+
+### Listing information of all appointments: `list`
+
+List the information of all appointments, including those of archived patients.
+
+Format: `list`
+
+Example output:
+
+```
+Here is a list of all appointments:
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name      | 
+ -------------------------------------------------------------------------------------------------- 
+ | 1    | 12 Nov 21 0900HRS | 1          | James Tan            | 2        | Dr Tay               | 
+ | 2    | 10 Dec 21 1000HRS | 1          | James Tan            | 2        | Dr Tay               | 
+ | 3    | 19 Nov 21 1400HRS | 2          | Eliot Ong            | 2        | Dr Tay               | 
+ | 4    | 31 Oct 21 1200HRS | 3          | Daniel Chan          | 1        | Dr Lim               | 
+```
+
+### Finding an appointment
+
+List the information of all appointments that match the given parameters.
+
+Format: 
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -229,10 +382,18 @@ Address: ADDRESS
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
 | **find**     | `find [i/PERSON_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`find i/s1231234A`|
+| **archive**  | `archive PATIENT_ID`<br/>eg., `archive 1`|
+| **unarchive**| `unarchive PATIENT_ID`<br/>eg., `unarchive 1`|
 
 ### Scheduler View
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
+| **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
+| **delete**   | `delete APPOINTMENT_ID`  |
+| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|
+| **find**     |                          |
+| **list**     | `list`                   |
+| **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 
 

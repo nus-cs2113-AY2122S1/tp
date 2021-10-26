@@ -1,5 +1,11 @@
 package medbot.list;
 
+
+import java.util.HashMap;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
@@ -98,12 +104,8 @@ public class SchedulerAppointmentList extends MedBotList {
         return "No appointment with ID " + appointmentId + " found.";
     }
 
-    public String listAppointments() {
-        String output = "";
-        for (int appointmentId : appointments.keySet()) {
-            output += appointments.get(appointmentId) + END_LINE;
-        }
-        return output;
+    public List<Integer> listAppointments() {
+        return new LinkedList<>(appointments.keySet());
     }
 
     /**

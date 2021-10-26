@@ -446,6 +446,15 @@ public class Ui {
     }
 
     /**
+     * Prints information about get View command.
+     *
+     * @return the information on get View command.
+     */
+    public String getGetCurrentViewHelpMessage() {
+        return "Get the current viewType." + END_LINE + "Format: get view" + END_LINE;
+    }
+
+    /**
      * Prints unrecognised command message.
      *
      * @return the error message on unrecognised command.
@@ -453,10 +462,6 @@ public class Ui {
     public String getUnrecognisedCommandHelpMessage() {
         return "Sorry, that's not a recognised command. To view a list of commands, type:"
                 + END_LINE + "help" + END_LINE;
-    }
-
-    public String getNoAppointmentsFoundMessage() {
-        return "Sorry, no appointments meeting that criteria were found!";
     }
 
     /**

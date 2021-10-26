@@ -135,6 +135,8 @@ public abstract class Parser {
             return CommandType.ARCHIVE;
         case COMMAND_UNARCHIVE:
             return CommandType.UNARCHIVE;
+        case COMMAND_GET_VIEW:
+            return CommandType.GET_VIEW;
         default:
             throw new MedBotParserException(ERROR_WRONG_COMMAND);
         }

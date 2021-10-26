@@ -60,6 +60,9 @@ public class HelpCommand extends Command {
         case EXIT:
             output = ui.getExitHelpMessage();
             break;
+        case GET_VIEW:
+            output = ui.getGetCurrentViewHelpMessage();
+            break;
         default:
             output = Ui.getCommandList(viewType);
             break;
