@@ -9,6 +9,8 @@ public class ListHabitParser extends ParserUtils {
 
     private static final String GOAL_INDEX_FLAG = "g/";
     private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";
+    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
+        + "Please check your command format.";
 
     /**
      * Parses instruction to create ListHabitsCommand for specified goal number.
@@ -18,6 +20,10 @@ public class ListHabitParser extends ParserUtils {
      * @throws HaBitParserException If commandInstruction is not an integer.
      */
     public static Command parseListHabitCommand(String commandInstruction) throws HaBitParserException {
+        if (commandInstruction == null) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+
         int goalIndex = getGoalIndex(commandInstruction);
         return new ListHabitsCommand(goalIndex);
     }
@@ -33,14 +39,17 @@ public class ListHabitParser extends ParserUtils {
     private static int getGoalIndex(String commandInstruction) throws HaBitParserException {
         String[] params = splitInput(commandInstruction);
         String goalParam = getParameter(params, GOAL_INDEX_FLAG);
-        String goalIndexString = goalParam.substring(goalParam.indexOf("/") + 1).trim();
-        int goalIndex;
+
+        if (goalParam == null) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+
         try {
-            goalIndex = Integer.parseInt(goalIndexString) - 1;
+            String goalIndexString = goalParam.substring(goalParam.indexOf("/") + 1).trim();
+            return Integer.parseInt(goalIndexString) - 1;
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_INVALID_GOAL_NUMBER);
         }
-        return goalIndex;
     }
 
 }

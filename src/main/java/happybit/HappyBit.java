@@ -23,7 +23,6 @@ public class HappyBit {
         storage = new Storage(filePath, fileDir);
         goalList = new GoalList();
         state = new State(goalList, printManager, storage);
-        goalList.setRecurringTasks();
     }
 
     /**

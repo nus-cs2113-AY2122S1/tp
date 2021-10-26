@@ -5,6 +5,8 @@ import happybit.habit.Habit;
 import happybit.ui.PrintManager;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -101,14 +103,14 @@ public class GoalList {
 
     /**
      * Adds a habit that is linked to a goal.
-     * For storage.
+     * From storage.
      *
      * @param habit     Habit to be linked to a goal.
      * @param goalIndex Integer index of goal in goalList.
      */
     public void addHabitToGoal(Habit habit, int goalIndex) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        goal.addHabit(habit);
+        goal.addHabitFromStorage(habit);
     }
 
     /**
@@ -158,8 +160,7 @@ public class GoalList {
     }
 
     /**
-     * Marks a habit under a goal as done
-     * Expand upon in v2.0 to include date and description
+     * Marks Progress for a goal as done.
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
@@ -173,7 +174,7 @@ public class GoalList {
         ArrayList<Habit> habitList = goal.getHabitList();
         Habit habit = getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
-        printManager.printDoneHabit(goal.getDescription(), habit.getHabitName());
+        printManager.printDoneHabit(goal.getDescription(), habit);
     }
 
     /**
@@ -204,7 +205,7 @@ public class GoalList {
         if (habitList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_HABIT_LIST);
         }
-        printManager.printHabitList(goal.getDescription(), habitList, numOfHabits);
+        printManager.printHabitList(goal.getGoalName(), habitList, numOfHabits);
     }
 
     /**
@@ -239,23 +240,35 @@ public class GoalList {
     }
 
     /**
-     * To allow for recurring tasks, reset isDone to false for that habit once next date reached.
-     * Check and set on start up for all goals and all habits within goals
-     * After importing data into goalList
+     * Changes interval of a habit previously set by the user.
+     * Need to check and update habitDate as well when executing this command.
+     *
+     * @param goalIndex Integer of goal index habit to update is under
+     * @param habitIndex Integer of habit index of habit to update
+     * @param newInterval Integer of new interval uses wishes to set
+     */
+    public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
+        // To be implemented
+    }
+
+    /**
+     * Check and set on start up for all goals and all habits within goals.
+     * After importing data into goalList.
      *
      */
     public void setRecurringTasks() {
         for (Goal goal : goalList) {
             ArrayList<Habit> currGoalsHabits = goal.getHabitList();
             for (Habit habit : currGoalsHabits) {
-                // if currDate is at the nextDate set by user; set isDone to false
+                // upon start up check if habitDate is equals nextHabitDate
+                // means next iteration:
+                // update habitDate and nextHabitDate and addProgress()
                 Date currDate = new Date();
-                SimpleDateFormat currDateFormatter = new SimpleDateFormat("ddMMyyyy");
-                String currDateString = currDateFormatter.format(currDate);
-                String habitNextDate = habit.getNextDateString();
-                if (currDateString.equals(habitNextDate)) {
-                    habit.setUncompleted();
-                    habit.setHabitDate(habit.getNextDate());
+                if (habit.getInterval() != 0 && habit.isNextCycle(currDate)) {
+                    Date newHabitDate = habit.getNextHabitDate();
+                    habit.setHabitDate(newHabitDate);
+                    habit.setNextHabitDate();
+                    habit.addProgress();
                 }
             }
         }
@@ -316,5 +329,7 @@ public class GoalList {
             this.chosenGoalIndex -= 1;
         }
     }
+
+
 
 }

@@ -55,11 +55,11 @@ public class Goal {
      * @return String containing goal name and type.
      */
     public String getDescription() {
-        return getGoalTypeCharacter() + " " + goalName;
+        return getGoalType() + " " + goalName;
     }
 
     /**
-     * Getter for startDate of the goal in string format.
+     * Getter for startDate of the goal in string format. (For storage)
      *
      * @return Start date formatted as a string.
      */
@@ -69,12 +69,32 @@ public class Goal {
     }
 
     /**
-     * Getter for endDate of the goal in string format.
+     * Getter for startDate of the goal in string format. (For printing)
+     *
+     * @return Start date formatted as a string.
+     */
+    public String getPrintableStartDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        return dateFormat.format(this.startDate);
+    }
+
+    /**
+     * Getter for endDate of the goal in string format. (For storage)
      *
      * @return End date formatted as a string.
      */
     public String getEndDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(this.endDate);
+    }
+
+    /**
+     * Getter for endDate of the goal in string format. (For printing)
+     *
+     * @return End date formatted as a string.
+     */
+    public String getPrintableEndDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         return dateFormat.format(this.endDate);
     }
 
@@ -88,11 +108,34 @@ public class Goal {
     }
 
     /**
+     * Returns the size of the habitList.
+     *
+     * @return Size of habitList.
+     */
+    public int getHabitListSize() {
+        return habitList.size();
+    }
+
+    /**
      * Adds a habit to the goal.
+     * From user input, need to addProgress().
      *
      * @param habit Habit to be added to the goal.
      */
     public void addHabit(Habit habit) {
+        habitList.add(habit);
+        // get newly added habit and add progress
+        Habit newHabit = habitList.get(getListLength() - 1);
+        newHabit.addProgress();
+    }
+
+    /**
+     * Adds a habit to the current goal.
+     * From storage, no need to addProgress() as progress obtained from storage.
+     *
+     * @param habit Habit being added to habitList
+     */
+    public void addHabitFromStorage(Habit habit) {
         habitList.add(habit);
     }
 
@@ -112,7 +155,8 @@ public class Goal {
      */
     public void doneHabit(int habitIndex) {
         Habit habit = habitList.get(habitIndex);
-        habit.setCompleted();
+        // update key value pair in map for current iteration
+        habit.updateProgress();
     }
 
     /**
@@ -130,18 +174,18 @@ public class Goal {
      *
      * @return String of the goalType 2-character code.
      */
-    public String getGoalTypeCharacter() {
+    public String getGoalType() {
         switch (this.goalType) {
         case SLEEP:
-            return "[SL]";
+            return "Sleep";
         case FOOD:
-            return "[FD]";
+            return "Food";
         case EXERCISE:
-            return "[EX]";
+            return "Exercise";
         case STUDY:
-            return "[SD]";
+            return "Study";
         default:
-            return "[DF]";
+            return "Default";
         }
     }
 
