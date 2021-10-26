@@ -12,17 +12,17 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class DeleteModuleCommand extends Command {
-    private final int moduleIndex;
+    private final String moduleCode;
 
-    public DeleteModuleCommand(int moduleIndex) {
-        this.moduleIndex = moduleIndex;
+    public DeleteModuleCommand(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        Module deletedModule = moduleList.getModule(moduleIndex);
-        moduleList.deleteModule(moduleIndex);
+        Module deletedModule = moduleList.getModule(moduleCode);
+        moduleList.deleteModule(moduleCode);
         storage.saveData(moduleList);
         ui.printModuleDeleted(deletedModule, moduleList.getSize());
     }
