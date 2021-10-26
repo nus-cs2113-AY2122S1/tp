@@ -27,7 +27,6 @@ public class IngredientGroup {
     private String groupName; //name of ingredient
     private Double totalAmount; //sum of all amounts of the ingredient
 
-    private Storage storage;
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
@@ -63,7 +62,7 @@ public class IngredientGroup {
     }
 
     /**
-     * Subtracts amount from total amount
+     * Subtracts amount from total amount.
      * @param subtractAmount amount to subtract from total amount
      */
     public void subtractFromTotalAmount(double subtractAmount) {
