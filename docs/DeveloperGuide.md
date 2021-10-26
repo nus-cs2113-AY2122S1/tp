@@ -30,6 +30,19 @@ when the user inputs the command `delete 1`.
 ![MedBot Architecture](https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/diagrams/MedBot_architecture.png)
 
 ### Ui Component
+The Ui Component is handled by the `Ui` class. It is the main class that a user directly interacts with.
+This class is responsible for reading user inputs and printing outputs to users.
+
+The `Ui` class serves as an abstraction over these smaller classes:
+* `PersonUi`: Handles the Ui for persons
+  * `PatientUi`: Inherits `PersonUi` to handle patient-related Ui
+  * `StaffUi`: Inherits `PersonUi` to handle staff-related Ui
+* `SchedulerUi`: Handles the Ui for schedulers.
+
+Given below is a sequence diagram of how the `Ui` component works after the `Parser` 
+parses `help delete` input given by a user.
+
+![Ui Sequence Diagram](https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/diagrams/Ui_sequence_diagram.png)
 
 ### Parser Component
 
