@@ -165,8 +165,9 @@ public class ExceptionTextUi {
 
     public static void missingIndexMessage() {
         String message = "There seems to be missing index in your request.\n"
-                + "Please enter index in the following way: \n"
-                + "<COMMAND_WORD> <INDEX> <FLAGS_IF_REQUIRED>";
+                + "Please enter command in the following way: \n"
+                + "      <COMMAND_WORD> <INDEX>"
+                + "Where <COMMAND_WORD> is rm or view";
         printDoubleLineMessage(message);
     }
 
@@ -207,15 +208,15 @@ public class ExceptionTextUi {
         int maxIndex = listSize - 1;
         if (listSize == 0) {
             message = "There are no contacts stored in ConTech.\n"
-                    + "Please input index -1 if you wish to edit your Personal Contact details.";
+                    + "Please input index \"me\" if you wish to edit your Personal Contact details.";
         } else if (listSize == 1) {
             message = "The index you have input is out of range.\n"
                     + "You only have 1 contact stored.\n"
-                    + "Please input index -1 if you wish to edit your Personal Contact details.";
+                    + "Please input index \"me\" if you wish to edit your Personal Contact details.";
         } else {
             message = "The index you have input is out of range.\n"
-                    + "Please input a number between 0 and " + maxIndex + "to edit saved contacts.\n"
-                    + "Otherwise, input index -1 if you wish to edit your Personal Contact details.";
+                    + "Please input a number between 0 and " + maxIndex + " to edit saved contacts.\n"
+                    + "Otherwise, input index \"me\" if you wish to edit your Personal Contact details.";
         }
         printDoubleLineMessage(message);
     }
