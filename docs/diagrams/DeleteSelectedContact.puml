@@ -1,0 +1,59 @@
+@startuml
+hide footbox
+mainframe sd delete selected contact
+":DeleteContactCommand" -> ":DeleteContactCommand":deleteOnConfirmation(deletedContact:Contact)
+activate ":DeleteContactCommand"
+
+'obtain contact to be deleted using index
+":DeleteContactCommand" -> ":IndexParser": getContactFromIndex(contactIndex: int, contactList: ContactList)
+activate ":IndexParser"
+":IndexParser" --> ":DeleteContactCommand": deletedContact:Contact
+deactivate ":IndexParser"
+
+'confirm delete message
+":DeleteContactCommand" -> ":TextUi" :confirmDeleteContactMessage(deletedContact: Contact, contactIndex: int)
+activate ":TextUi"
+":TextUi" --> ":DeleteContactCommand"
+deactivate ":TextUi"
+
+'get confirmation from user to delete
+":DeleteContactCommand" -> ":UserInputTextUi":getUserConfirmation()
+activate ":UserInputTextUi"
+":UserInputTextUi" --> ":DeleteContactCommand" :userConfirmation:String
+deactivate ":UserInputTextUi"
+
+alt#gold #lightgreen delete confirmed
+    'execute delete for selected contact
+    ":DeleteContactCommand" -> ":ContactList":deleteContact(contactIndex: int)
+    activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand"
+    deactivate ":ContactList"
+
+    'get name of deleted contact
+    ":DeleteContactCommand" -> ":Contact" :getName()
+    activate ":Contact"
+    ":Contact" --> ":DeleteContactCommand":deletedName: String
+    deactivate ":Contact"
+
+    'get size of list for delete message
+    ":DeleteContactCommand" -> ":ContactList": getListSize()
+    activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand": contactListSize: int
+    deactivate ":ContactList"
+
+    'Print message to show delete executed
+    ":DeleteContactCommand" -> ":TextUi": deleteContactMessage(deletedName: String, contactListSize: int)
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue delete cancelled
+    'Print message to show delete cancelled
+    ":DeleteContactCommand" -> ":TextUi":cancelDeleteContactMessage()
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+end
+
+deactivate ":DeleteContactCommand"
+@enduml

@@ -3,53 +3,13 @@ hide footbox
 'https://plantuml.com/sequence-diagram
 -> ":DeleteContactCommand": execute()
 activate ":DeleteContactCommand"
+alt#gold #lightgreen delete all contacts
+    ref over ":DeleteContactCommand", ":DeleteContactCommand" :delete all contacts
 
-":DeleteContactCommand" -> ":IndexParser" :getContactFromIndex(contactIndex:int, contactList: ContactList)
-activate ":IndexParser"
-":IndexParser" --> ":DeleteContactCommand" :deletedContact:Contact
-deactivate ":IndexParser"
-
-":DeleteContactCommand" -> ":DeleteContactCommand":deleteOnConfirmation(deletedContact:Contact)
-activate ":DeleteContactCommand"
-":DeleteContactCommand" -> ":TextUi":ConfirmDeleteMessage(deletedContact:Contact, contactIndex:int)
-activate ":TextUi"
-":TextUi" --> ":DeleteContactCommand"
-deactivate ":TextUi"
-
-":DeleteContactCommand" -> ":UserInputTextUi":getUserConfirmation()
-activate ":UserInputTextUi"
-":UserInputTextUi" --> ":DeleteContactCommand" :userConfirmation:String
-deactivate ":UserInputTextUi"
-
-alt#gold #lightgreen userConfirmation.equalsIgnoreCase("y")
-    ":DeleteContactCommand" -> ":ContactList": deleteContact(contactIndex:int)
-    activate ":ContactList"
-    ":ContactList" --> ":DeleteContactCommand"
-    deactivate ":ContactList"
-    ":DeleteContactCommand" -> ":Contact" :getName()
-    activate ":Contact"
-    ":Contact" --> ":DeleteContactCommand":deletedName:String
-    deactivate ":Contact"
-
-    ":DeleteContactCommand" -> ":ContactList":getListSize()
-    activate ":ContactList"
-    ":ContactList" --> ":DeleteContactCommand" :contactListSize:int
-    deactivate ":ContactList"
-
-    ":DeleteContactCommand" -> ":TextUi":deleteContactMessage(deletedName:String, contactListSize:int)
-    activate ":TextUi"
-    ":TextUi" --> ":DeleteContactCommand"
-    deactivate ":TextUi"
-
-
-else #lightblue else
-    ":DeleteContactCommand" -> ":TextUi":cancelDeleteContactMessage()
-    activate ":TextUi"
-    ":TextUi" --> ":DeleteContactCommand"
-    deactivate ":TextUi"
-
+else #lightblue delete selected contact
+    ref over ":DeleteContactCommand", ":DeleteContactCommand" :delete selected contact
 end
-deactivate ":DeleteContactCommand"
+
 deactivate ":DeleteContactCommand"
 
 @enduml

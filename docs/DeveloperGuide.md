@@ -108,6 +108,10 @@ diagram below shows how the `execute()` function of `DeleteContactCommand` works
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
+![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
+
+![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
+
 
 ### <a name="Search"></a>Searching a contact: `edit`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
