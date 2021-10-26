@@ -1,4 +1,5 @@
 # User Guide
+{::options parse_block_html="true" /}
 
 ## Introduction
 
@@ -80,7 +81,17 @@ This SEPlanner allows the user to search for mapping through our platform. To do
   3. Search for potential mapping for a particular selected university.
   4. Select a mapping and add the mapping.
 
-## Features 
+## Features
+<div class="panel panel-info"> 
+**Note** 
+{: .panel-heading}
+<div class="panel-body>
+NOTE DESCRIPTION
+</div>
+</div>
+
+My important paragraph.
+{: .alert .alert-info}
 
 ### Viewing all available universities: 
 Displays all modules from the master list of universities that the user can choose from.  
