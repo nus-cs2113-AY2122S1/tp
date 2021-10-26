@@ -66,7 +66,12 @@ public class DeleteContactCommand extends Command {
     private void deleteFields() {
         Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
-        TextUi.confirmDeleteFieldMessage();
+        if (TextUi.deletedFieldsGenerator(deleteDetails, deletedContact).isEmpty()) {
+            //if no fields exist, return false
+            TextUi.noDeleteFields();
+            return;
+        }
+        TextUi.confirmDeleteFieldMessage(deleteDetails, deletedContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
         if (userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE)) {
             if (deleteDetails[GITHUB_INDEX]) {
@@ -84,7 +89,7 @@ public class DeleteContactCommand extends Command {
             if (deleteDetails[EMAIL_INDEX]) {
                 deletedContact.setEmail(null);
             }
-            TextUi.deleteFieldsMessage();
+            TextUi.deleteFieldsMessage(deletedContact);
         } else {
             assert !userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE);
             TextUi.cancelDeleteContactMessage();
