@@ -1,8 +1,16 @@
 package seedu.duke;
 
-import static java.lang.System.exit;
-
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.attendance.Attendance;
+import seedu.duke.command.DeleteAttendance;
+import seedu.duke.command.DeleteMember;
+import seedu.duke.command.DeleteTraining;
+import seedu.duke.command.AddAttendance;
+import seedu.duke.command.AddMember;
+import seedu.duke.command.AddTraining;
+import seedu.duke.command.EditMember;
+import seedu.duke.command.EditTraining;
+import seedu.duke.command.FindMember;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingSchedule;
@@ -22,9 +30,13 @@ public class Entry {
      */
     public static void addEntry(String entry, int flag) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
+        int trainingIndex = -1;
+        int memberIndex = -1;
+        int attendanceIndex = -1;
 
         if (flag == 0) {
             MemberStorage.setupMemberFile(members);
+            AttendanceStorage.setUpAttendanceStorage(attendanceList);
         }
 
         switch (keyword) {
@@ -38,25 +50,32 @@ public class Entry {
             Ui.printList(attendanceList);
             break;
         case ADD_MEMBER_KEYWORD:
-            Parser.makeMemberEntry(members, entry);
+            Member member = Parser.getMemberDetails(entry);
+            new AddMember(members, member);
             break;
         case ADD_TRAINING_KEYWORD:
-            Parser.makeTrainingEntry(trainings, entry);
+            TrainingSchedule training = Parser.getTrainingDescription(entry);
+            new AddTraining(trainings, training);
             break;
         case ADD_ATTENDANCE_KEYWORD:
-            Parser.makeAttendanceEntry(attendanceList, entry);
+            Attendance attendance = Parser.getAttendanceDetails(entry);
+            new AddAttendance(attendanceList, attendance);
             break;
         case DELETE_MEMBER_KEYWORD:
-            Parser.deleteMember(members, entry);
+            memberIndex = Parser.getIndex(entry);
+            new DeleteMember(members, memberIndex);
             break;
         case DELETE_TRAINING_KEYWORD:
-            Parser.deleteTraining(trainings, entry);
+            trainingIndex = Parser.getIndex(entry);
+            new DeleteTraining(trainings, trainingIndex);
             break;
         case DELETE_ATTENDANCE_KEYWORD:
-            Parser.deleteAttendance(attendanceList, entry);
+            attendanceIndex = Parser.getIndex(entry);
+            new DeleteAttendance(attendanceList, attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
-            Parser.findInMembers(members, entry);
+            String name = Parser.findInMembers(members, entry);
+            new FindMember(members, name);
             break;
         case FIND_TRAINING_KEYWORD:
             Parser.findInTraining(trainings, entry);
@@ -65,10 +84,14 @@ public class Entry {
             Parser.findInAttendanceEntries(attendanceList, entry);
             break;
         case EDIT_TRAINING_KEYWORD:
-            Parser.editTraining(trainings, entry);
+            trainingIndex = Parser.getIndex(entry);
+            TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);
+            new EditTraining(trainings, trainingIndex, newTrainingDetail);
             break;
         case EDIT_MEMBER_KEYWORD:
-            Parser.editMember(members, entry);
+            memberIndex = Parser.getIndex(entry);
+            Member newMemberDetail = Parser.getMemberDetails(entry);
+            new EditMember(members, memberIndex, newMemberDetail);
             break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();

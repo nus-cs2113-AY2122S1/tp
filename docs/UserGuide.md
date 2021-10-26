@@ -1,16 +1,18 @@
 # User Guide
 
-## Introduction
+## What is Duke?
 
-Duke is an greenfield application aimed to assist CCAs with their administrative issues.
+**Duke** is a simple and easy to use command-line based application aimed to assist you, a CCA manager, to easily add, delete or alter information about your 
+CCA members. Moreover, **Duke** also allows you to perform its functions on any training-related activities
+you may have in order to help you organise your CCA's timetable.
 
-Duke is designed for users who are familiar with Command Line Interface (CLI) operations.
+**Duke** is designed for users who are familiar with Command Line Interface (CLI) operations.
 
 - [Pre-requisites](#pre-requisites)
 - [Commands](#commands)
 - [Command Summary](#command-summary)
 
-## Pre-requisites
+## Pre-requisites - _Things to prepare before you start using Duke_
 1. Duke runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
    1. You can download Java [here](https://java.com/en/download/) 
 2. Download the latest .jar of Duke [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
@@ -25,10 +27,15 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    |____/ \__,_|_|\_\___|
 
    What would you like to do?
-   >
+   =>
    ```
 
 ## Commands 
+#### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) |
+
+###Add
+**Duke** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
+as any training-related information regarding your CCA's venue bookings and timings.  
 
 1. `add` This adds entries to the Entry List stored in Duke.
     * The `add` keyword takes in 3 different arguments:
@@ -56,7 +63,8 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       
     * **Expected Output:**
    ```
-   Added a Member: Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
+   Added a Member: 
+   Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
    
    Added a Training entry:
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
@@ -64,6 +72,10 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    Added an Attendance entry:
    Name: Mark | Training Name: Monday Training | Present: [1]
    ```
+
+###List
+**Duke** allows you to list out all the information you may need after you have input your entries. There are 3 different
+kinds of entries you may want to list out, which are your member, training and attendance lists.
 
 2. `list` This lists out entries in Duke's Entry List.
    * The `list` keyword takes in 2 different arguments:
@@ -86,6 +98,10 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
     ```
    [1] Name: Mark | Training Name: Monday Training | Present: [1]
     ```
+###Delete
+**Duke** has a delete function which allows you to remove any members who have left the CCA, trainings which have been
+cancelled, or remove any incorrect entries to your attendance list. This means that wrong data can be easily cleared, 
+allowing for a simple way to tidy up your file entries.
 
 3. `delete` This deletes entries from the Entry List in Duke.
     * The `delete` keyword removes entries based on their index:
@@ -111,6 +127,10 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
     You have removed attendance entry:
     Name: Mark | Training Name: Monday Training | Present: [1]
    ```
+   
+###Edit
+If you have to perform minor changes to your entries, **Duke** allows you to edit your entries by using the edit function.
+This means that you will not have to delete the entry and then add a new one later on.
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
     * `/m <INDEX>` edits the member detail stored at the given index

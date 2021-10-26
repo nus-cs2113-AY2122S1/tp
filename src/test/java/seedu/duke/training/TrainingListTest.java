@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
+import seedu.duke.command.EditTraining;
+import seedu.duke.command.AddTraining;
+import seedu.duke.command.DeleteTraining;
 
 public class TrainingListTest {
 
@@ -69,7 +72,10 @@ public class TrainingListTest {
     @Test
     void editTrainingSchedule() {
         final String input = "edit /t 1 /a 30 Oct 2021 /v MPSH 3";
-        Parser.editTraining(trainingList, input);
+        int index = Parser.getIndex(input);
+        TrainingSchedule editedTraining = Parser.getTrainingDescription(input);
+        new EditTraining(trainingList, index, editedTraining);
+        //Parser.editTraining(trainingList, input);
         assertEquals(trainingList.getTrainingTime(1), "30 Oct 2021");
         assertEquals(trainingList.getTrainingVenue(1), "MPSH 3");
     }

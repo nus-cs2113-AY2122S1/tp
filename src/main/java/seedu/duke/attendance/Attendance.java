@@ -5,25 +5,32 @@ import seedu.duke.training.TrainingSchedule;
 
 public class Attendance {
 
-    protected Member member;
-    protected TrainingSchedule schedule;
+    protected String memberName;
+    protected String trainingName;
+    protected String attended;
 
     /**
      * Constructor for any type of Attendance.
-     * @param member          Name of member
-     * @param schedule        Name of training event
+     * @param memberName          Name of member
+     * @param trainingName        Name of training event
+     * @param attended            attendance status
      */
-    public Attendance(Member member, TrainingSchedule schedule) {
-        setMember(member);
-        setSchedule(schedule);
+    public Attendance(String memberName, String trainingName, String attended) {
+        this.memberName = memberName;
+        this.trainingName = trainingName;
+        this.attended = attended;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public String getTrainingName() {
+        return trainingName;
     }
 
-    public void setSchedule(TrainingSchedule schedule) {
-        this.schedule = schedule;
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public String getAttended() {
+        return attended;
     }
 
     /**
@@ -34,6 +41,6 @@ public class Attendance {
     @Override
     public String toString() {
         return String.format("Name: %s | Training Name: %s | Present: [%s] ",
-                member.getName(), schedule.getTrainingName(), member.getAttendance());
+                memberName, trainingName, attended);
     }
 }

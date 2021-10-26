@@ -1,5 +1,8 @@
 package seedu.duke.attendance;
 
+import seedu.duke.member.Member;
+import seedu.duke.member.exception.InvalidMemberException;
+
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
@@ -47,5 +50,17 @@ public class AttendanceList {
 
     public int getAttendanceListSize() { //added by xy
         return attendanceList.size();
+    }
+
+    public String getAttendanceMemberName(int index) { //added by xy
+        return attendanceList.get(index - 1).memberName;
+    }
+
+    public String getAttendanceTrainingName(int index) { //added by xy
+        return attendanceList.get(index - 1).trainingName;
+    }
+
+    public String getAttendancePresentOrLate(int index) { //added by xy
+        return attendanceList.get(index - 1).attended;
     }
 }
