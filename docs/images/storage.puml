@@ -8,6 +8,7 @@ ModuleStorage "1" ---* Storage
 
     ModuleStorage : + readModuleList() : ArrayList<Module>
     ModuleStorage : + extractAttributes(String line) : String[]
+
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" ---* Storage
     SelectedUniversityStorage : - {static} logger : Logger
