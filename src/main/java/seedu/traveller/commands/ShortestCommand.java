@@ -66,9 +66,9 @@ public class ShortestCommand extends Command {
         assert sum >= 0 : "The distance should be more than or equal to 0.";
 
         if (Objects.equals(this.distOrCost, "dist")) {
-            ui.printShortestDist(this.startCountry, this.endCountry, sum);
+            ui.printShortestDist(this.startCountry, this.endCountry, sum, distances);
         } else {
-            ui.printShortestCost(this.startCountry, this.endCountry, sum);
+            ui.printShortestCost(this.startCountry, this.endCountry, sum, distances);
         }
 
     }

@@ -3,6 +3,7 @@ package seedu.traveller;
 import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,13 +99,21 @@ public class Ui {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printShortestDist(String startCountry, String endCountry, double distance) {
+    public void printShortestDist(String startCountry, String endCountry, double distance, List<Double> distances) {
         System.out.println("\tThe shortest distance from " + startCountry
                 + " to " + endCountry + " is " + distance + ".");
+        System.out.println("\tDistance breakdown: ");
+        for (Double d : distances) {
+            System.out.println("\t" + d);
+        }
     }
 
-    public void printShortestCost(String startCountry, String endCountry, double cost) {
+    public void printShortestCost(String startCountry, String endCountry, double cost, List<Double> costs) {
         System.out.println("\tThe least cost from " + startCountry + " to " + endCountry + " is " + cost + ".");
+        System.out.println("\tCost breakdown: ");
+        for (Double c : costs) {
+            System.out.println("\t" + c);
+        }
     }
 
     public void printEditMap(String startCountry, String endCountry, double dist) {
