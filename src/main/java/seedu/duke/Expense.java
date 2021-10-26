@@ -124,8 +124,7 @@ public class Expense {
      */
     public LocalDate prompDate() {
         Scanner sc = Storage.getScanner();
-        System.out.println("Enter date of expense:");
-        System.out.println("\tPress enter to use today's date");
+        Ui.expensePromptDate();
         String inputDate = sc.nextLine();
         while (!isDateValid(inputDate)) {
             inputDate = sc.nextLine();
@@ -145,7 +144,7 @@ public class Expense {
             return true;
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
-            System.out.println("\tPlease enter date as DD-MM-YYYY, or enter nothing to use today's date");
+            Ui.expenseDateInvalid();
             return false;
         }
     }

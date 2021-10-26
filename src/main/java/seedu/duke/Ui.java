@@ -277,8 +277,8 @@ public class Ui {
             System.out.println("You are inside a trip. Trip specific commands:");
             System.out.println("\texpense: creates an expense");
             System.out.println("\tview: list all expenses");
-            System.out.println("\tview [filter] [search keyword]: list filtered expenses.");
-            System.out.println("\t\tfilter options: [category, description, payer, person]");
+            System.out.println("\tview filter [options] [search keyword]: list filtered expenses.");
+            System.out.println("\t\tfilter options: [category, description, payer, person, date]");
             System.out.println("\tview [index]");
             System.out.println("\tsummary: shows how much each person spent in total for this trip");
             System.out.println("\tamount [person]: for settling repayment at the end of the trip,"
@@ -361,6 +361,19 @@ public class Ui {
 
     public static void askUserToConfirm() {
         System.out.print("There will be people involved that don't need to pay, are you sure? (y/n)");
+    }
+
+    public static void expenseDateInvalid() {
+        System.out.println("\tPlease enter date as DD-MM-YYYY, or enter nothing to use today's date");
+    }
+
+    public static void expensePromptDate() {
+        System.out.println("Enter date of expense:");
+        System.out.println("\tPress enter to use today's date");
+    }
+
+    public static void viewFilterDateInvalid() {
+        System.out.println("\tPlease enter date as DD-MM-YYYY");
     }
     //@@author
 }

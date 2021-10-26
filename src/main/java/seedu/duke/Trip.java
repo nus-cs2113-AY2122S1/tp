@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class Trip {
 
@@ -22,6 +23,7 @@ public class Trip {
     private String repaymentCurrencyFormat = "%.02f";
     private String repaymentCurrencySymbol = "$";
     private String location;
+    private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Trip() {
         //empty constructor
@@ -62,6 +64,9 @@ public class Trip {
             case "person":
                 findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
                 break;
+            case "date":
+                findMatchingDateExpenses(listOfExpenses, expenseAttribute);
+                break;
             default:
                 Ui.printInvalidFilterError();
                 break;
@@ -72,6 +77,27 @@ public class Trip {
         }
 
     }
+
+    //@@author lixiyuan416
+    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        boolean areThereExpenses = false;
+        String inputDate = expenseAttribute;
+        while (!isDateValid(inputDate)) {
+            inputDate = Storage.getScanner().nextLine();
+        }
+        LocalDate dateToFind = LocalDate.parse(inputDate, inputPattern);
+        for (Expense e : listOfCurrentExpenses) {
+            if (e.getDate().isEqual(dateToFind)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+                areThereExpenses = true;
+            }
+        }
+        if (!areThereExpenses) {
+            Ui.printNoMatchingExpenseError();
+        }
+    }
+    //@@author
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -121,6 +147,7 @@ public class Trip {
     }
     //@@author
 
+    //@@author lixiyuan416
     private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                    String personToSearchFor) {
         boolean areThereExpenses = false;
@@ -144,6 +171,17 @@ public class Trip {
         }
     }
 
+    private boolean isDateValid(String inputDate) {
+        try {
+            LocalDate.parse(inputDate, inputPattern);
+            return true;
+        } catch (DateTimeParseException e) {
+            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+            Ui.viewFilterDateInvalid();
+            return false;
+        }
+    }
+    //@@author
 
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
