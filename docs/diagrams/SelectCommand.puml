@@ -1,0 +1,33 @@
+@startuml
+title SelectCommand
+
+participant ":Duke" as Duke
+activate Duke
+
+create ":Parser" as Parser
+Duke -> Parser:runSlam()
+activate Parser #yellow
+
+create ":SelectCommand" as SelectCommand
+Parser -> SelectCommand
+activate SelectCommand #lightblue
+
+opt isValidFlag
+SelectCommand -> SelectCommand: prepareInputs(command)
+activate SelectCommand #lightgreen
+Parser -> SelectCommand: updateIndexOfLastSelectedEvent(index)
+return
+|||
+end
+return
+|||
+return
+
+Duke -> SelectCommand
+activate SelectCommand #lightblue
+SelectCommand -> SelectCommand: execute()
+activate SelectCommand #lightgreen
+return
+SelectCommand -> Duke: CommandResult
+
+@enduml
