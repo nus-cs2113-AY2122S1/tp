@@ -1,6 +1,6 @@
 {
   "moduleMap": {
-    "test": {
+    "TEST": {
       "linkManager": {
         "contents": [
           {
