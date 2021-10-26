@@ -13,13 +13,11 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.List;
-import javax.swing.text.AbstractDocument.Content;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -376,11 +374,41 @@ public class ModuleStorageTest {
     }
 
     @Test
+    void loadNotesFromModule_invalidModuleName_listOfFileNull() throws IOException {
+        Path modPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        assertTrue(Files.exists(modPath));
+        File randomFile = new File(Paths.get(modPath.toString(),"test.txt").toString());
+        randomFile.createNewFile();
+        moduleStorage.init(modPath.resolve("test.txt"));
+        moduleStorage.loadNotesFromModule(moduleManager, "test.txt");
+    }
+
+    @Test
     void loadAllFile_success() throws IOException {
         this.moduleStorage.init(MODULE_MALFORMED_FILE);
         ModuleManager module = moduleStorage.loadFile();
         assertEquals(1,module.getAllModules().length);
         moduleStorage.cleanAfterDeleteModule("okay");
+    }
+
+    @Test
+    void loadNotesFromModule_fileLock() throws IOException {
+        Path modPath = Paths.get(RESOURCE_FOLDER.toString(), "lock");
+        assertTrue(Files.exists(modPath));
+        moduleManager.setModule("lock", new NusModule());
+        moduleStorage.loadNotesFromModule(moduleManager, "lock");
+        assertEquals(0, moduleManager
+                .getModule("lock").getContentManager(Note.class).getTotalContents());
+    }
+
+    @Test
+    void saveNotesFromModule_invalidModule() throws IOException {
+        Path modPath = Paths.get(RESOURCE_FOLDER.toString(), "lock");
+        assertTrue(Files.exists(modPath));
+        moduleManager.setModule("lock", new NusModule());
+        moduleStorage.saveNotesFromModule(moduleManager,"lock",true);
+        assertEquals(0, moduleManager
+                .getModule("lock").getContentManager(Note.class).getTotalContents());
     }
 
 }
