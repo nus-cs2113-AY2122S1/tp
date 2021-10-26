@@ -70,14 +70,18 @@ public class Recipe {
     }
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
-    public void addTagToRecipe(Tag tag, String recipeName) {
+    public void addTagToRecipe(Tag tag, String recipeName, boolean isStorage) {
         try {
             // Checking if tag has been linked to recipe before
             if (doesRecipeTagExists(tag.getTagName())) {
                 throw new GordonException(GordonException.DUPLICATE_TAG_NAME);
             }
             recipeTags.add(tag.getTagName());
-            System.out.println("Successfully tagged " + recipeName + " under " + tag.getTagName());
+
+            if (!isStorage) {
+                System.out.println("Successfully tagged " + recipeName + " under " + tag.getTagName());
+            }
+
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }

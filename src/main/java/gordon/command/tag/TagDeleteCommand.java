@@ -20,7 +20,7 @@ public class TagDeleteCommand extends Command {
                     Tag extractedTag = cookbook.extractCookbookTag(tagName.trim());
                     cookbook.deleteTagFromRecipes(extractedTag);
                     cookbook.deleteCookbookTag(extractedTag);
-                    System.out.println("Successfully deleted " + extractedTag.getTagName());
+                    System.out.println("Successfully deleted " + extractedTag.getTagName() + " tag");
                 }
             }
         } catch (GordonException e) {
