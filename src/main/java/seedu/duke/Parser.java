@@ -49,6 +49,7 @@ public class Parser {
     public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number";
     public static final String ERROR_TOUR_TIME_WRONG = "Invalid Tour Time";
     public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time";
+    public static final String ERROR_PRICE_FORMAT = "Invalid Price";
 
     /**
      * Parses user's input into command to execute.
@@ -101,18 +102,20 @@ public class Parser {
                 if(params.contains("-t")) {
                     int index1 = params.indexOf("/p");
                     int index2 = params.lastIndexOf("/");
-                    String time;
+                    String price;
                     if(index1 == index2) {
                         dummy = params.substring(index1 + 2);
-                        time = dummy.trim();
+                        price = dummy.trim();
                     }
                     else {
                         dummy = params.substring(index1 + 2, index2);
-                        time = dummy.trim();
+                        price = dummy.trim();
                     }
-                    int tour_time = Integer.parseInt(time);
-                    if(tour_time >= 2400) {
-                        throw new TourPlannerException(ERROR_TOUR_TIME_WRONG);
+                    for(int i = 0; i < price.length(); i++) {
+                        char ch = price.charAt(i);
+                        if(!(ch <= '9' && ch >= '0')) {
+                            throw new TourPlannerException(ERROR_PRICE_FORMAT);
+                        }
                     }
                 }
                 if(params.contains("-f")) {
