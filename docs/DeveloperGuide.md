@@ -5,20 +5,39 @@ title: Developer Guide
 
 ## Contents 
 
-* __Acknowledgements__
-* __Getting Started__
-* __Design & Implementation__
-* __Product Scope__
-  1. Target user profile
-  2. Value proposition
-* __User Stories__
-* __Non-Functional Requirements__
-* __Glossary__
-* __Instructions for manual testing__ 
+* [Acknowledgements](#Acknowledgements)
+* [Getting Started](#getting-started)
+* [Design & Implementation](#design--implementation)
+  1. [Main Components](#main-components) 
+  2. [Command Implementation](#command-implementation)
+  3. [Ui](#ui)
+  4. [Storage](#storage)
+  5. [University and module related classes](#university-and-module-related-classes)
+    * [University](#university)
+    * [UniversityList](#universitylist)
+    * [Module](#module)
+    * [ModuleList](#modulelist)
+    * [ModuleMapping](#modulemapping)
+  6. [Parser Component](#parser-component)
+    * [Parser](#parser)
+    * [AddCommandParser](#addcommandparser)
+    * [RemoveCommandParser](#removecommandparser)
+    * [FindCommandParser](#findcommandparser)
+    * [SearchMapCommandParser](#searchmapcommandparser)
+    * [HelpCommandParser](#helpcommandparser)
+    * [ExitCommandParser](#exitcommandparser)
+* [Product Scope](#product-scope)
+  1. [Target User Profile](#target-user-profile)
+  2. [Value Proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
 * __EduRec:__ For the list of possible module mappings
+* __AB3:__ For the format of user guide and developer guide
 
 ## Getting started 
 
@@ -131,7 +150,7 @@ The following diagrams are the class diagrams of the classes:
 
 This component consist of the following classes: 
 
-### University 
+#### University 
 
 * Stores basic information of a university.
 * Stores the unique index for each university in `index`, this index can be used to refer to a specific university in the commands.
@@ -219,11 +238,11 @@ This object will invoke an instance of `ExitCommand`.
 
 ## Product scope
 
-### Target user profile
+### Target User Profile
 
 __SEPlanner__ is targeted at Computer Engineering students in NUS planning for their Student Exchange Program (SEP). 
 
-### Value proposition
+### Value Proposition
 
 Student Exchange Program is one of the most stressful and difficult things to plan for in a NUS students life. 
 With multiple sources of information and a frustrating webpage to navigate, SEPlanner aims to organise 
@@ -263,6 +282,7 @@ a list of potential exchange Universities based on the users study plan, module 
 * *Selected Module List* - The list of NUS modules the user selected.
 * *CSV* - Comma-separated Values
 * *SEP* - Student Exchange Programme
+* *NUS* - National University of Singapore
 
 ## Instructions for manual testing
 
