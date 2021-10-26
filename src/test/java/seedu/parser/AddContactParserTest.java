@@ -48,7 +48,7 @@ class AddContactParserTest {
     @Test
     void parseContactDetails_onlyAddInput_expectException() {
         inputUserInput = "   add  ";
-        assertThrows(MissingArgException.class, () -> addContactParser.parseContactDetails(inputUserInput));
+        assertThrows(MissingArgAddException.class, () -> addContactParser.parseContactDetails(inputUserInput));
     }
 
     @Test

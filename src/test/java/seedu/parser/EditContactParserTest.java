@@ -2,7 +2,16 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exception.*;
+import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
+import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.MissingArgEditException;
+import seedu.exception.MissingDetailException;
 import seedu.parser.EditContactParser;
 
 import java.util.Arrays;

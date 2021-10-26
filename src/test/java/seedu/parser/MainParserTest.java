@@ -81,7 +81,7 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "rm";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_ARG;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -89,7 +89,7 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_invalidNumber_expectFailedCommandType() {
         testUserInput = "rm abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.NUM_OUT_OF_BOUND;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -259,7 +259,7 @@ public class MainParserTest {
     @Test
     public void parseViewCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "view";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_ARG;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -267,7 +267,7 @@ public class MainParserTest {
     @Test
     public void parseViewCommand_invalidInput_expectFailedCommandType() {
         testUserInput = "view abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.NUM_OUT_OF_BOUND;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -277,7 +277,7 @@ public class MainParserTest {
     public void parseAddCommand_missingName_expectFailedCommand() {
         testUserInput = " add -g      github ";
         final FailedCommand actualCommand = getParsedCommand(testUserInput, FailedCommand.class);
-        final FailedCommand expectedCommand = new FailedCommand(FailedCommandType.MISSING_NAME);
+        final FailedCommand expectedCommand = new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
         assertEquals(expectedCommand.getType(), actualCommand.getType());
     }
 }
