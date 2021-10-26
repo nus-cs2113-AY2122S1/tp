@@ -72,9 +72,7 @@ public class DataLoader {
             for (int i = 0; i < numberOfCountries; i++) {
                 if (i == 0) {
                     rawInput = scanner.nextLine().split(separator, numberOfCountries);
-                    if (rawInput.length == numberOfCountries) {
-                        throw new IllegalFlightFileException();
-                    }
+                    assert rawInput.length == numberOfCountries;
                     loadCountries(rawInput, graphList);
                     continue;
                 }
