@@ -198,6 +198,17 @@ ____________________________________________________________
 
 <a name="import"></a>
 ### Importing contacts: `import`
+Import contacts from a CSV text file into your contact list. 
+
+Usage: `import`
+
+- Data to be imported should be stored in the file `data/import.txt`.
+- Invalid or corrupt data will not be imported into the contact list and will be discarded.
+- Duplicate contacts will trigger a confirmation message, allowing the user to choose if the duplicate contact should be added.
+
+Expected outcome of usage:
+
+{to be added}
 
 <a name="help"></a>
 ### Viewing help: `help`
