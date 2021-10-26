@@ -19,7 +19,7 @@ public class IndexParser {
 
 
     public static int getIndexFromInput(String userInput)
-            throws NumberFormatException, MissingArgException {
+            throws NumberFormatException, MissingArgException, IndexOutOfBoundsException {
         //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
         if (destructuredInputs.length <= COMD_WORD_LENGTH) {
@@ -41,7 +41,7 @@ public class IndexParser {
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         int index = Integer.parseInt(significantIndex);
         if (index < 0) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException();
         }
         return index;
     }
