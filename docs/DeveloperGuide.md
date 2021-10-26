@@ -18,7 +18,10 @@
 
 ### Choose the game content
 
-Input the 'content' command to start the text selection.
+Once the game starts, the main class instantiates a Content object containing a string, which is set to a default 
+value (lorem ipsum paragraph). The string can only be changed through the setContent() method.
+
+Users can input the 'content' command to start the text selection.
 
 There are 3 types:
 
@@ -30,7 +33,9 @@ The following UML diagram illustrates the way content selection works in the pro
 
 ![](uml/Content.png)
 
-There only exists one content string for all sessions.
+There only exists one private content string for all sessions. Each time a set method is called, the string is changed 
+depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
+method is called and the text is set accordingly.
 
 ### Word Limit Game
 
