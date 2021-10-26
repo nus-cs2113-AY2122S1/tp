@@ -1,9 +1,13 @@
 package medbot.storage;
 
+import medbot.Appointment;
+import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
 import medbot.list.ListItemType;
 import medbot.list.MedBotList;
+import medbot.person.Patient;
+import medbot.person.Staff;
 import medbot.utilities.Pair;
 
 import java.io.File;
@@ -42,15 +46,14 @@ public abstract class Storage {
 
 
     /**
-     * Reads in storage/data.txt file, parses each line and adds the data into the program
+     * Reads in storage file, parses each line and adds the data into the program
      * returns all line numbers of storage file that are invalid.
      *
      * @param listItemType enum of ListItem type
-     * @param medBotList   instance of a subclass of MedBotList
-     * @return Error message if there are formatting errors in storage/data.txt
-     * @throws FileNotFoundException if storage/data.txt cannot be found
+     * @return Error message if there are formatting errors in storage file
+     * @throws FileNotFoundException if storage file cannot be found
      */
-    public String loadStorage(ListItemType listItemType, MedBotList medBotList) throws FileNotFoundException {
+    public String loadStorage(ListItemType listItemType, Scheduler scheduler) throws FileNotFoundException {
         int lineNumber = 1;
         Scanner s = new Scanner(dataFile);
         String loadStorageErrorMessage = "";
@@ -58,7 +61,7 @@ public abstract class Storage {
         while (s.hasNext()) {
             try {
                 String storageLine = s.nextLine();
-                addListItemFromStorageLine(listItemType, storageLine, medBotList);
+                addListItemFromStorageLine(listItemType, scheduler, storageLine);
 
             } catch (Exception e) {
                 loadStorageErrorMessage += loadStorageLineErrorMessage(lineNumber);
@@ -70,15 +73,48 @@ public abstract class Storage {
     }
 
 
-    protected void addListItemFromStorageLine(ListItemType listItemType, String storageLine, MedBotList medBotList)
+    /**
+     * Add a ListItem object to a MedBotList subclass (eg. PatientList),
+     * from the text in a storage line in a storage file.
+     *
+     * @param listItemType enum of ListItem type
+     * @param storageLine  a line in storage file
+     * @throws MedBotException if fail to add a ListItem to a MedBotList subclass
+     */
+    protected void addListItemFromStorageLine(ListItemType listItemType, Scheduler scheduler, String storageLine)
             throws MedBotException {
         ListItem listItem = createListItem(storageLine, listItemType);
-        medBotList.addListItemFromStorage(listItem);
-        setListItemIdAsLastId(listItem, medBotList);
+
+        MedBotList medBotList = null;
+        switch (listItemType) {
+        case PATIENT:
+            scheduler.addPatient((Patient) listItem);
+            medBotList = scheduler.getPatientList();
+            break;
+        case STAFF:
+            scheduler.addStaff((Staff) listItem);
+            medBotList = scheduler.getMedicalStaffList();
+            break;
+        case APPOINTMENT:
+            scheduler.addAppointment((Appointment) listItem);
+            medBotList = scheduler.getSchedulerAppointmentList();
+            break;
+        default:
+            throw new MedBotException("Not a list item");
+
+        }
+        updateLastId(listItem, medBotList);
     }
 
-    void setListItemIdAsLastId(ListItem listItem, MedBotList medBotList) {
-        int listItemId = listItem.getId();
+
+    /**
+     * Sets id of ListItem object to be lastId of a MedBotList subclass (eg. PatientList)
+     *
+     * @param listItem   instance of a  ListItem subclass (eg. Patient, Appointment)
+     * @param medBotList instance of a subclass of MedBotList
+     */
+    void updateLastId(ListItem listItem, MedBotList medBotList) {
+        int listItemId = listItem.getListItemId();
         if (medBotList.getLastId() < listItemId) {
             medBotList.setLastId(listItemId);
         }
@@ -86,7 +122,7 @@ public abstract class Storage {
 
 
     /**
-     * Write List's (PatientList etc.) storageString to storage file.
+     * Write MedBotList subclass (PatientList etc.) storageString to storage file.
      *
      * @param medBotList instance of a subclass of MedBotList
      * @throws MedBotException if unable to write to storage text file.
@@ -99,6 +135,36 @@ public abstract class Storage {
         } catch (IOException e) {
             throw new MedBotException(ERROR_SAVE_STORAGE);
         }
+    }
+
+
+    /**
+     * Parse a line from the storage file by splitting its constituent parts.
+     *
+     * @param storageLine a line from the storage file
+     * @return listItem details, consisting of person ID and other parameters
+     */
+    protected Pair<Integer, ArrayList<String>> parseStorageLine(String storageLine, String[] parameterPrefixes) {
+        if (storageLine.isBlank()) {
+            return null;
+        }
+
+        String[] listItemParameters = splitStorageLine(storageLine);
+        ArrayList<String> prefixPlusListItemParameters = new ArrayList<>();
+        Integer listItemId = Integer.parseInt(listItemParameters[0]);
+
+        for (int i = 0; i < parameterPrefixes.length; i++) {
+            // i + 1, since listItemParameters[0] is the listItemId
+            if (isStorageParameterNull(listItemParameters[i + 1])) {
+                continue;
+            }
+            // i + 1, since listItemParameters[0] is the listItemId
+            String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
+            prefixPlusListItemParameters.add(prefixPlusListItemParameter);
+        }
+        assert listItemParameters.length == parameterPrefixes.length + 1;
+
+        return new Pair<>(listItemId, prefixPlusListItemParameters);
     }
 
     /**
@@ -144,15 +210,5 @@ public abstract class Storage {
         return new ListItem();
     }
 
-
-    /**
-     * Template Method. Parses a line from storage file and organises the data.
-     *
-     * @param storageLine a line in the storage file
-     * @return a Pair containing the data required to create a ListItem type
-     */
-    protected Pair<Integer, ArrayList<String>> parseStorageLine(String storageLine) {
-        return new Pair<>(0, new ArrayList<>());
-    }
 }
 

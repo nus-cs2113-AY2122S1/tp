@@ -1,16 +1,16 @@
 package medbot.person;
 
-
-import java.util.LinkedList;
-
-import java.util.List;
-import medbot.list.ListItem;
-
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
-
+import medbot.list.ListItem;
 import medbot.list.PersonalAppointmentList;
 import medbot.utilities.FilterType;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import static medbot.ui.Ui.END_LINE;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 
 public abstract class Person extends ListItem {
     private static final String PARAMETER_NAME = "n/";
@@ -21,8 +21,6 @@ public abstract class Person extends ListItem {
     private static final int PARAMETER_BUFFER = 2;
 
     private static final String SPACE = " ";
-    private static final String END_LINE = System.lineSeparator();
-    private static final String VERTICAL_LINE_SPACED = " | ";
 
     private static final int LENGTH_ID_COLUMN = 4;
     private static final int LENGTH_IC_COLUMN = 9;
@@ -32,7 +30,6 @@ public abstract class Person extends ListItem {
     private static final int LENGTH_ADDRESS_COLUMN = 20;
 
 
-    private int personId = 0;
     protected String icNumber = "";
     protected String name = "";
     protected String phoneNumber = "";
@@ -99,14 +96,6 @@ public abstract class Person extends ListItem {
 
     public void setResidentialAddress(String residentialAddress) {
         this.residentialAddress = residentialAddress;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public void setNull() {
@@ -186,8 +175,8 @@ public abstract class Person extends ListItem {
      * @return storageString of a person
      */
     public String getStorageString() {
-
-        return setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
+        return getListItemId() + VERTICAL_LINE_SPACED
+                + setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(name) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
@@ -249,7 +238,7 @@ public abstract class Person extends ListItem {
     }
 
     private String getFormattedPersonId() {
-        return formattedAttribute(Integer.toString(personId), LENGTH_ID_COLUMN);
+        return formattedAttribute(Integer.toString(listItemId), LENGTH_ID_COLUMN);
     }
 
     private String getFormattedIcNumber() {
@@ -273,14 +262,13 @@ public abstract class Person extends ListItem {
     }
 
 
-    //TODO: Change these to the native methods
-    @Override
-    public int getId() {
-        return getPersonId();
-    }
-
-    @Override
-    public void setId(int personId) {
-        setPersonId(personId);
+    /**
+     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     *
+     * @param parameter an attribute of a person
+     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     */
+    protected String setAsStorageParameterOrNull(String parameter) {
+        return (parameter == null || parameter.isBlank()) ? "X" : parameter;
     }
 }

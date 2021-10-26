@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+control Medbot as X #red
+box #beige
+participant ":Parser" as A #DarkOrchid
+participant ":PatientCommandParser" as B #DarkOrchid
+participant ":ParserUtils" as C #DarkOrchid
+participant "patient:Patient" as D #DarkOrchid
+end box
+
+note right of C: Minor utility functions\nin ParserUtils have\nbeen omitted for brevity.
+
+X -> A : parseCommand(userInput)
+activate A
+A -> B : parsePatientCommand(userInput)
+activate B
+B -> B : parseAddCommand(userInput)
+activate B
+B -> C : getParameters(userInput)
+activate C
+return parameters
+create D
+B -> D
+activate D
+return patient
+B -> C : updateMultiplePersonalInformation(patient, parameters)
+activate C
+return
+return AddPatientCommand(patient)
+return AddPatientCommand(patient)
+return AddPatientCommand(patient)
+
+
+
+@enduml

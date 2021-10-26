@@ -1,14 +1,15 @@
 package medbot.list;
 
+
 import java.util.HashMap;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
-import medbot.person.Person;
 
-import static medbot.ui.Ui.END_LINE;
+import java.util.HashMap;
 
 public class SchedulerAppointmentList extends MedBotList {
     private static final String END_LINE = System.lineSeparator();
@@ -32,7 +33,7 @@ public class SchedulerAppointmentList extends MedBotList {
             throw new MedBotException(getAppointmentNotFoundErrorMessage(appointmentId));
         }
         Appointment appointment = new Appointment();
-        appointment.setAppointmentId(appointmentId);
+        appointment.setListItemId(appointmentId);
         appointment.mergeAppointmentData(appointments.get(appointmentId));
         return appointment;
     }
@@ -50,13 +51,13 @@ public class SchedulerAppointmentList extends MedBotList {
      */
     public int addAppointment(Appointment appointment) throws MedBotException {
         assert appointment.isComplete();
-        int appointmentId = appointment.getAppointmentId();
+        int appointmentId = appointment.getListItemId();
         if (appointments.containsKey(appointmentId)) {
             throw new MedBotException("Appointment with id " + appointmentId + " already exits!");
         }
         if (appointmentId == 0) {
             appointmentId = generateAppointmentId();
-            appointment.setAppointmentId(appointmentId);
+            appointment.setListItemId(appointmentId);
         }
         appointments.put(appointmentId, appointment);
         return appointmentId;
@@ -123,12 +124,6 @@ public class SchedulerAppointmentList extends MedBotList {
         return output;
     }
 
-    @Override
-    public void addListItemFromStorage(ListItem appointmentItem) {
-        Appointment appointment = (Appointment) appointmentItem;
-        int appointmentId = appointment.getId();
-        appointments.put(appointmentId, appointment);
-    }
 
     @Override
     public void setLastId(int lastId) {

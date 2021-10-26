@@ -1,14 +1,13 @@
 package medbot.list;
 
-import java.util.ArrayList;
+import medbot.Appointment;
+import medbot.exceptions.MedBotException;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
-
-import medbot.Appointment;
-import medbot.exceptions.MedBotException;
 
 public class PersonalAppointmentList {
     private static final String ERROR_APPOINTMENT_ID_NOT_SET = "Appointment ID is not set.";
@@ -36,7 +35,7 @@ public class PersonalAppointmentList {
      * @throws MedBotException if there is another appointment at that time
      */
     public void addAppointment(Appointment appointment) throws MedBotException {
-        int appointmentId = appointment.getAppointmentId();
+        int appointmentId = appointment.getListItemId();
         if (appointmentId == 0) {
             throw new MedBotException(ERROR_APPOINTMENT_ID_NOT_SET);
         }
@@ -56,7 +55,7 @@ public class PersonalAppointmentList {
     public int getAppointmentId(int dateTimeCode) {
         for (Appointment appointment : appointments) {
             if (appointment != null && appointment.getDateTimeCode() == dateTimeCode) {
-                return appointment.getAppointmentId();
+                return appointment.getListItemId();
             }
         }
         return -1;
@@ -72,7 +71,7 @@ public class PersonalAppointmentList {
 
         for (Appointment appointment : appointments) {
             if (appointment != null) {
-                appointmentIds.add(appointment.getAppointmentId());
+                appointmentIds.add(appointment.getListItemId());
             }
         }
         return appointmentIds;
@@ -99,11 +98,11 @@ public class PersonalAppointmentList {
     private String getAppointmentNotFoundErrorMessage(int dateTimeCode) {
         return "No appointment at : " + Appointment.formatDateTimeCode(dateTimeCode) + "found.";
     }
-    
+
     public List<Integer> listAppointments() {
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointments) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }
@@ -114,7 +113,7 @@ public class PersonalAppointmentList {
         NavigableSet<Appointment> appointmentsAfter = appointments.tailSet(referenceAppointment, true);
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsAfter) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }
@@ -125,7 +124,7 @@ public class PersonalAppointmentList {
         NavigableSet<Appointment> appointmentsBefore = appointments.headSet(referenceAppointment, true);
         List<Integer> appointmentIds = new LinkedList<>();
         for (Appointment appointment : appointmentsBefore) {
-            appointmentIds.add(appointment.getAppointmentId());
+            appointmentIds.add(appointment.getListItemId());
         }
         return appointmentIds;
     }

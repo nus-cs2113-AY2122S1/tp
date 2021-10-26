@@ -14,6 +14,8 @@ import static medbot.parser.ParserUtils.updatePersonalInformation;
 
 public abstract class PersonStorage extends Storage {
 
+    private static final String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
+
     /**
      * Generic constructor for PatientStorage and StaffStorage.
      *
@@ -35,7 +37,7 @@ public abstract class PersonStorage extends Storage {
     @Override
     protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
 
-        Pair<Integer, ArrayList<String>> personDetails = parseStorageLine(storageLine);
+        Pair<Integer, ArrayList<String>> personDetails = parseStorageLine(storageLine, parameterPrefixes);
         if (personDetails == null) {
             return null;
         }
@@ -49,7 +51,7 @@ public abstract class PersonStorage extends Storage {
             person = new Staff();
         }
 
-        person.setId(personId);
+        person.setListItemId(personId);
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
             //updatePersonalInformation does error-checking of person details and updates patient info
             updatePersonalInformation(person, prefixPlusPersonParameter);
@@ -58,38 +60,5 @@ public abstract class PersonStorage extends Storage {
         return person;
     }
 
-
-    /**
-     * Parse a line from the storage file by splitting its constituent parts.
-     *
-     * @param storageLine a line from the storage file
-     * @return person details, consisting of person ID and other parameters
-     */
-    protected Pair<Integer, ArrayList<String>> parseStorageLine(String storageLine) {
-        if (storageLine.isBlank()) {
-            return null;
-        }
-
-        String[] personParameters = splitStorageLine(storageLine);
-        String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
-
-        ArrayList<String> prefixPlusPersonParameters = new ArrayList<>();
-
-        Integer patientId = Integer.parseInt(personParameters[0]);
-
-        for (int i = 0; i < parameterPrefixes.length; i++) {
-            // i + 1, since personParameters[0] is the patientId
-            if (isStorageParameterNull(personParameters[i + 1])) {
-                continue;
-            }
-            // i + 1, since personParameters[0] is the patientId
-            String prefixPlusPersonParameter = parameterPrefixes[i] + personParameters[i + 1];
-            prefixPlusPersonParameters.add(prefixPlusPersonParameter);
-        }
-
-        assert personParameters.length == parameterPrefixes.length + 1;
-
-        return new Pair<>(patientId, prefixPlusPersonParameters);
-    }
 
 }

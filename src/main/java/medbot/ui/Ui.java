@@ -446,6 +446,15 @@ public class Ui {
     }
 
     /**
+     * Prints information about get View command.
+     *
+     * @return the information on get View command.
+     */
+    public String getGetCurrentViewHelpMessage() {
+        return "Get the current viewType." + END_LINE + "Format: get view" + END_LINE;
+    }
+
+    /**
      * Prints unrecognised command message.
      *
      * @return the error message on unrecognised command.

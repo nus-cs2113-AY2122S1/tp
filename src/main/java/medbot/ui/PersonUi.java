@@ -9,7 +9,7 @@ public abstract class PersonUi {
         return "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
                 + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
-                + END_LINE + END_LINE
+                + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
@@ -41,11 +41,11 @@ public abstract class PersonUi {
 
     protected static String getAddHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Add a " + person +  " to the " + person + "’s list." + END_LINE
+        return "Add a " + person + " to the " + person + "’s list." + END_LINE
                 + "Format:" + END_LINE
                 + "add i/" + uppercasePerson + "_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + END_LINE
                 + "Expected output:" + END_LINE
-                + "Added " + person + " with " + person + " ID: " + uppercasePerson +  "_ID" + END_LINE;
+                + "Added " + person + " with " + person + " ID: " + uppercasePerson + "_ID" + END_LINE;
     }
 
     protected static String getEditHelpMessage(String person) {
