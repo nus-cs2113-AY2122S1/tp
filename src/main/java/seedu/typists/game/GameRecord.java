@@ -34,5 +34,35 @@ public class GameRecord {
         return gameMode;
     }
 
+    public double getTimeElapsed() {
+        return timeElapsed;
+    }
 
+    public int getErrorWordCount() {
+        return errorWordCount;
+    }
+
+    public int getCorrectWordCount() {
+        return correctWordCount;
+    }
+
+    public int getTotalWordCount() {
+        return totalWordCount;
+    }
+
+    public double getErrorWordPercentage() {
+        return errorWordPercentage;
+    }
+
+    public double getCorrectWordPercentage() {
+        return correctWordPercentage;
+    }
+
+    public double getWpm() {
+        return wpm;
+    }
+
+    public ArrayList<String> getErrorWords() {
+        return errorWords;
+    }
 }

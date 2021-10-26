@@ -52,4 +52,19 @@ public class GameRecordsManager {
         }
     }
 
+    public ArrayList<GameRecord> getGameRecords(String gameMode, int numberOfRecords) {
+        assert ((gameMode == "Time-limited") || (gameMode == "Word-limited"));
+        if (gameMode == "Time-limited") {
+            return new ArrayList<>(timeLimitedGameRecords.subList(
+                    timeLimitedGameRecords.size() - numberOfRecords,
+                    timeLimitedGameRecords.size()
+            ));
+        } else {
+            return new ArrayList<>(wordLimitedGameRecords.subList(
+                    wordLimitedGameRecords.size() - numberOfRecords,
+                    wordLimitedGameRecords.size()
+            ));
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 package seedu.typists.ui;
 
+import seedu.typists.game.GameRecord;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +52,19 @@ public class SummaryUi {
                 (Integer) summary.get("totalWordCount"));
         assert summary.get("errorWords") instanceof List;
         printErrorWords((ArrayList<String>) summary.get("errorWords"));
+    }
+
+    public static void displaySummary(GameRecord gameRecord) {
+        printOverview(gameRecord.getTimeElapsed(),
+                gameRecord.getGameMode(),
+                gameRecord.getWpm());
+        printErrorStatistics(gameRecord.getErrorWordCount(),
+                gameRecord.getErrorWordPercentage(),
+                gameRecord.getTotalWordCount());
+        printSuccessStatistics(gameRecord.getCorrectWordCount(),
+                gameRecord.getCorrectWordPercentage(),
+                gameRecord.getTotalWordCount());
+        printErrorWords(gameRecord.getErrorWords());
     }
 
     private static void printErrorStatistics(int errorWordCount, double errorWordPercentage, int totalWordCount) {
