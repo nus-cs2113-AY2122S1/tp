@@ -1,13 +1,5 @@
 package medbot.person;
 
-
-
-import java.util.LinkedList;
-
-import java.util.List;
-import medbot.list.ListItem;
-
-
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItem;
@@ -15,6 +7,7 @@ import medbot.list.PersonalAppointmentList;
 import medbot.utilities.FilterType;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static medbot.ui.Ui.END_LINE;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
@@ -28,8 +21,6 @@ public abstract class Person extends ListItem {
     private static final int PARAMETER_BUFFER = 2;
 
     private static final String SPACE = " ";
-    private static final String END_LINE = System.lineSeparator();
-    private static final String VERTICAL_LINE_SPACED = " | ";
 
     private static final int LENGTH_ID_COLUMN = 4;
     private static final int LENGTH_IC_COLUMN = 9;
