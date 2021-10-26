@@ -136,7 +136,8 @@ public class ModuleStorage {
         for (String mod : moduleManager.getAllModules()) {
             modDirPath = Paths.get(filePath.getParent().toString(), mod);
             // Check if module name is a valid module and file name
-            if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
+            if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER) || !mod.equals(
+                    mod.toUpperCase())) {
                 // Skip this module and remove from moduleManager
                 TerminusLogger.warning(String.format("Invalid module name detected: %s", mod));
                 moduleManager.removeModule(mod);
@@ -162,9 +163,17 @@ public class ModuleStorage {
      */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        if (Files.notExists(modDirPath)) {
+            Files.createDirectories(modDirPath);
+            return;
+        }
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
+        if (listOfFiles == null) {
+            return;
+        }
+        assert moduleManager.getModule(mod) != null;
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfFiles) {
@@ -276,6 +285,9 @@ public class ModuleStorage {
     private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
+        if (listOfFiles == null) {
+            throw new IOException("Directory cannot be cleared.");
+        }
         for (File file : listOfFiles) {
             cleanAllFilesInclusive(file);
             if (file.exists()) {
@@ -311,7 +323,7 @@ public class ModuleStorage {
      * @param notes The list of notes to export
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException,InvalidArgumentException {
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException, InvalidArgumentException {
         Document tempDocument = new Document();
         Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {

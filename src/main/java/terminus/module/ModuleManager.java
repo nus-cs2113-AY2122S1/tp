@@ -54,6 +54,8 @@ public class ModuleManager {
      * @param moduleName The module name of the module to remove
      */
     public void removeModule(String moduleName) {
-        moduleMap.remove(moduleName.toUpperCase());
+        if (moduleMap.remove(moduleName.toUpperCase()) == null) {
+            moduleMap.remove(moduleName);
+        }
     }
 }
