@@ -73,7 +73,7 @@ public class AddCommandParser {
             try {
                 uniIndex = Integer.parseInt(arguments);
             } catch (NumberFormatException e) {
-                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             // Check if university exists
             if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
