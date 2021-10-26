@@ -256,6 +256,11 @@ public class AddCommand extends Command {
 
     public CommandResult execute() {
         if (isCorrectFormat) {
+            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
+                Member member = new Member(memberName);
+                addToMemberRoster(member);
+                return new CommandResult(Ui.getMemberAddedMessage(member));
+            }
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
@@ -270,12 +275,6 @@ public class AddCommand extends Command {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
-            }
-
-            if (itemType.equalsIgnoreCase(MEMBER_FLAG)) {
-                Member member = new Member(memberName);
-                addToMemberRoster(member);
-                return new CommandResult(Ui.getMemberAddedMessage(member));
             }
         }
         return new CommandResult("Item unable to be added!");
