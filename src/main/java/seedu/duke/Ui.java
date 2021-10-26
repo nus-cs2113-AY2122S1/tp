@@ -291,7 +291,7 @@ public class Ui {
     public static void printInvalidFilterError() {
         System.out.println("Please filter using the following valid filter attributes: "
                 + System.lineSeparator()
-                + "[category], [description], [payer]");
+                + "[category], [description], [payer], [person]");
     }
 
     public static void printFileNotFoundError() {
