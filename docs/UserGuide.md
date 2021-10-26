@@ -1,7 +1,8 @@
 ---
-title: SEPlanner
-output: html_document
+layout: page
+title: User Guide
 ---
+
 # User Guide
 
 ## Introduction
