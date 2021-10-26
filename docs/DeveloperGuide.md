@@ -249,6 +249,7 @@ MediVault creates an `AddPrescriptionCommand` object when CommandParser identifi
 The sequence diagram for `AddPrescriptionCommand` is shown below.
 
 ![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
+
 #### DeletePrescriptionCommand
 
 MediVault creates a `DeletePrescriptionCommand` object when CommandParser identifies `deleteprescription` or
@@ -266,6 +267,7 @@ The sequence diagram for `DeletePrescriptionCommand` is shown below.
 ![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
 
 > :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
+
 #### UpdatePrescriptionCommand
 
 MediVault initialises an `UpdatePrescriptionCommand` class when CommandParser identifies
@@ -286,6 +288,7 @@ parameter or both. The old prescription record is **permanently removed** from M
 This approach solves the issue when a medication is prescribed to a user with an amount that is 
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
 stock quantity. 
+
 > :bulb: MediVault automatically adds new prescription records when a medication is prescribed
 > from stocks with different Stock IDs.
 
@@ -304,6 +307,7 @@ mode.
 The sequence diagram for `DeleteOrderCommand` is shown below.
 
 ![DeleteOrderCommandDiagram](diagrams/diagram_images/DeleteOrderSequenceDiagram.png)
+
 #### UpdateOrderCommand
 
 MediVault initialises an `UpdateOrderCommand` class when CommandParser identifies
