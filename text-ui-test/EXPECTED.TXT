@@ -139,14 +139,14 @@ Enter your command: List of all Expenses in detail:
 Enter your command: Your expense of USD $1.00 has been successfully removed
 Enter your command: Your expense of USD $8.00 has been successfully removed
 Enter your command: Your expense of USD $2.00 has been successfully removed
-Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
 
-yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
 
-qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+qian has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
 
-josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+josh has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
 
-xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
+xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
 
 Enter your command: Exiting the program now. Goodbye!
