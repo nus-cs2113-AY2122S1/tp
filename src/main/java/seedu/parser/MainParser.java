@@ -22,6 +22,7 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.MissingArgEditException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingIndexException;
@@ -175,6 +176,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingArgEditException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (MissingNameException e) {
             return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
@@ -196,8 +199,8 @@ public class MainParser {
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingArgException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingArgEditException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         } catch (MissingDetailException e) {

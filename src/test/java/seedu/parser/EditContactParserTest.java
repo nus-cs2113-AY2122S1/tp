@@ -2,16 +2,7 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exception.ForbiddenDetailException;
-import seedu.exception.InvalidEmailException;
-import seedu.exception.InvalidFlagException;
-import seedu.exception.InvalidGithubUsernameException;
-import seedu.exception.InvalidLinkedinUsernameException;
-import seedu.exception.InvalidNameException;
-import seedu.exception.InvalidTelegramUsernameException;
-import seedu.exception.InvalidTwitterUsernameException;
-import seedu.exception.MissingArgException;
-import seedu.exception.MissingDetailException;
+import seedu.exception.*;
 import seedu.parser.EditContactParser;
 
 import java.util.Arrays;
@@ -24,7 +15,7 @@ class EditContactParserTest {
 
     @Test
     void parseContactDetails() throws MissingDetailException,
-            MissingArgException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            MissingArgEditException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
             InvalidTwitterUsernameException, InvalidEmailException {
         String[] expectedResult = {null, "github", null, null, null, null};

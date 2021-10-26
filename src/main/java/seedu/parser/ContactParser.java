@@ -1,15 +1,6 @@
 package seedu.parser;
 
-import seedu.exception.ForbiddenDetailException;
-import seedu.exception.InvalidEmailException;
-import seedu.exception.InvalidFlagException;
-import seedu.exception.InvalidGithubUsernameException;
-import seedu.exception.InvalidLinkedinUsernameException;
-import seedu.exception.InvalidNameException;
-import seedu.exception.InvalidTelegramUsernameException;
-import seedu.exception.InvalidTwitterUsernameException;
-import seedu.exception.MissingArgException;
-import seedu.exception.MissingDetailException;
+import seedu.exception.*;
 
 import java.util.logging.Logger;
 
@@ -30,7 +21,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public abstract String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingArgException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
-            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException;
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException, MissingArgEditException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact

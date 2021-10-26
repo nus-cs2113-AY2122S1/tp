@@ -27,8 +27,10 @@ public class FailedCommand extends Command {
             invalidUserInputExecute();
             break;
         case MISSING_ARG: // Fallthrough
+        case MISSING_ARGS_EDIT: // Fallthrough
         case MISSING_DETAIL: // Fallthrough
         case MISSING_NAME: // Fallthrough
+        case MISSING_INDEX: // Fallthrough
             missingUserInputExecute();
             break;
         default:
@@ -63,11 +65,17 @@ public class FailedCommand extends Command {
         case MISSING_ARG:
             ExceptionTextUi.missingArgMessage();
             break;
+        case MISSING_ARGS_EDIT:
+            ExceptionTextUi.missingArgEditMessage();
+            break;
         case MISSING_DETAIL:
             ExceptionTextUi.missingDetailMessage();
             break;
         case MISSING_NAME:
             ExceptionTextUi.missingNameMessage();
+            break;
+        case MISSING_INDEX:
+            ExceptionTextUi.missingIndexMessage();
             break;
         default:
             return;
