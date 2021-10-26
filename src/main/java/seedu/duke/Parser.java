@@ -5,18 +5,25 @@ import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.ClearCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
+import seedu.duke.commands.clientpackages.CutClientPackageCommand;
 import seedu.duke.commands.clientpackages.ListClientPackageCommand;
-import seedu.duke.commands.clients.SortClientCommand;
-import seedu.duke.commands.clients.ListClientCommand;
+
 import seedu.duke.commands.clients.AddClientCommand;
+import seedu.duke.commands.clients.CutClientCommand;
 import seedu.duke.commands.clients.FindClientCommand;
+import seedu.duke.commands.clients.ListClientCommand;
+import seedu.duke.commands.clients.SortClientCommand;
 import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.commands.flights.CutFlightCommand;
 import seedu.duke.commands.flights.FindFlightCommand;
 import seedu.duke.commands.flights.ListFlightCommand;
+
+import seedu.duke.commands.tours.SortTourCommand;
+import seedu.duke.commands.tours.CutTourCommand;
 import seedu.duke.commands.tours.AddTourCommand;
 import seedu.duke.commands.tours.FindTourCommand;
 import seedu.duke.commands.tours.ListTourCommand;
-import seedu.duke.commands.tours.SortTourCommand;
+
 import seedu.duke.data.Client;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
@@ -178,24 +185,24 @@ public class Parser {
         int repeatPrefixChecker = 0;
 
         switch (identifier) {
-            case "-c":
-                prefixes = Arrays.asList("/cn", "/m");
-                repeatPrefixChecker = 3;
-                break;
-            case "-t":
-                prefixes = Arrays.asList("/n", "/p");
-                repeatPrefixChecker = 3;
-                break;
-            case "-f":
-                prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
-                repeatPrefixChecker = 5;
-                break;
-            case "-p":
-                prefixes = Arrays.asList("/t", "/f");
-                repeatPrefixChecker = 3;
-                break;
-            default:
-                break;
+        case "-c":
+            prefixes = Arrays.asList("/n", "/cn", "/m");
+            repeatPrefixChecker = 4;
+            break;
+        case "-t":
+            prefixes = Arrays.asList("/n", "/p");
+            repeatPrefixChecker = 3;
+            break;
+        case "-f":
+            prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
+            repeatPrefixChecker = 5;
+            break;
+        case "-p":
+            prefixes = Arrays.asList("/c", "/t", "/f");
+            repeatPrefixChecker = 4;
+            break;
+        default:
+            break;
         }
 
         if (!containAllPrefixes(argString, prefixes)) {
@@ -288,21 +295,21 @@ public class Parser {
     private static int obtainArrayIndex(String prefix, String identifier) {
         int index;
         switch (identifier) {
-            case "-c":
-                index = obtainClientArrayIndex(prefix);
-                break;
-            case "-t":
-                index = obtainTourArrayIndex(prefix);
-                break;
-            case "-f":
-                index = obtainFlightArrayIndex(prefix);
-                break;
-            case "-p":
-                index = obtainPackageArrayIndex(prefix);
-                break;
-            default:
-                index = 0;
-                break;
+        case "-c":
+            index = obtainClientArrayIndex(prefix);
+            break;
+        case "-t":
+            index = obtainTourArrayIndex(prefix);
+            break;
+        case "-f":
+            index = obtainFlightArrayIndex(prefix);
+            break;
+        case "-p":
+            index = obtainPackageArrayIndex(prefix);
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
@@ -310,15 +317,18 @@ public class Parser {
     private static int obtainPackageArrayIndex(String prefix) {
         int index;
         switch (prefix) {
-            case "/t":
-                index = 1;
-                break;
-            case "/f":
-                index = 2;
-                break;
-            default:
-                index = 0;
-                break;
+        case "/c":
+            index = 1;
+            break;
+        case "/t":
+            index = 2;
+            break;
+        case "/f":
+            index = 3;
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
@@ -327,21 +337,21 @@ public class Parser {
         int index;
 
         switch (prefix) {
-            case "/t":
-                index = 1;
-                break;
-            case "/f":
-                index = 2;
-                break;
-            case "/dt":
-                index = 3;
-                break;
-            case "/df":
-                index = 4;
-                break;
-            default:
-                index = 0;
-                break;
+        case "/t":
+            index = 1;
+            break;
+        case "/f":
+            index = 2;
+            break;
+        case "/dt":
+            index = 3;
+            break;
+        case "/df":
+            index = 4;
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
@@ -350,15 +360,15 @@ public class Parser {
         int index;
 
         switch (prefix) {
-            case "/n":
-                index = 1;
-                break;
-            case "/p":
-                index = 2;
-                break;
-            default:
-                index = 0;
-                break;
+        case "/n":
+            index = 1;
+            break;
+        case "/p":
+            index = 2;
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
@@ -367,15 +377,18 @@ public class Parser {
         int index;
 
         switch (prefix) {
-            case "/cn":
-                index = 1;
-                break;
-            case "/m":
-                index = 2;
-                break;
-            default:
-                index = 0;
-                break;
+        case "/n":
+            index = 1;
+            break;
+        case "/cn":
+            index = 2;
+            break;
+        case "/m":
+            index = 3;
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
@@ -432,35 +445,54 @@ public class Parser {
         String[] values = valuesList.toArray(new String[valuesList.size()]);
 
         switch (identifier) {
-            case "-c":
-                Client client = new Client(values);
-                return new AddClientCommand(client);
-            case "-f":
-                Flight flight = new Flight(values);
-                return new AddFlightCommand(flight);
-            case "-t":
-                Tour tour = new Tour(values);
-                return new AddTourCommand(tour);
-            case "-p":
-                return new AddClientPackageCommand(values);
-            default:
-                break;
+        case "-c":
+            Client client = new Client(values);
+            return new AddClientCommand(client);
+        case "-f":
+            Flight flight = new Flight(values);
+            return new AddFlightCommand(flight);
+        case "-t":
+            Tour tour = new Tour(values);
+            return new AddTourCommand(tour);
+        case "-p":
+            return new AddClientPackageCommand(values);
+        default:
+            break;
         }
         return null;
     }
 
     private static Command parseList(String params) throws TourPlannerException {
         switch (params) {
-            case "-c":
-                return new ListClientCommand();
-            case "-t":
-                return new ListTourCommand();
-            case "-f":
-                return new ListFlightCommand();
-            case "-p":
-                return new ListClientPackageCommand();
-            default:
-                throw new TourPlannerException(ERROR_INVALID_INPUT);
+        case "-c":
+            return new ListClientCommand();
+        case "-t":
+            return new ListTourCommand();
+        case "-f":
+            return new ListFlightCommand();
+        case "-p":
+            return new ListClientPackageCommand();
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+
+    private static Command parseCut(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[0];
+        String args = identifierAndArgs[1];
+
+        switch (identifier) {
+        case "-c":
+            return new CutClientCommand(args);
+        case "-t":
+            return new CutTourCommand(args);
+        case "-f":
+            return new CutFlightCommand(args);
+        case "-p":
+            return new CutClientPackageCommand(args);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
@@ -468,14 +500,14 @@ public class Parser {
         String prefix = params.split(" ")[0];
         String suffix = params.split(" ")[1];
         switch (prefix) {
-            case "-c":
-                return new FindClientCommand(suffix);
-            case "-t":
-                return new FindTourCommand(suffix);
-            case "-f":
-                return new FindFlightCommand(suffix);
-            default:
-                throw new TourPlannerException(ERROR_INVALID_INPUT);
+        case "-c":
+            return new FindClientCommand(suffix);
+        case "-t":
+            return new FindTourCommand(suffix);
+        case "-f":
+            return new FindFlightCommand(suffix);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
@@ -484,12 +516,14 @@ public class Parser {
         String identifier = identifierAndFilter[0];
         String filter = identifierAndFilter[1];
         switch (identifier) {
-            case "-t":
-                return new SortTourCommand(filter);
-            case "-c":
-                return new SortClientCommand(filter);
-            default:
-                return null;
+        case "-t":
+            return new SortTourCommand(filter);
+        case "-c":
+            return new SortClientCommand(filter);
+        default:
+            return null;
         }
     }
 }
+
+   
