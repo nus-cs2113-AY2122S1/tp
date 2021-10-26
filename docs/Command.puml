@@ -1,0 +1,147 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+
+package medbot.command {
+class "{abstract} \n Command"{
+
+    + exit() : boolean
+    + execute(Scheduler, Ui) {'abstract'}
+}
+together {
+class ExitCommand {
++ exit() : boolean
++ execute(Scheduler, Ui)
+}
+class GetCurrentViewCommand {
+- viewType: ViewType
++ execute(Scheduler, Ui)
+}
+
+class HelpCommand {
+- viewType: ViewType
+- commandType: CommandType
++ execute(Scheduler, Ui)
+}
+
+class SwitchCommand {
+- newViewType: ViewType
++ execute(Scheduler, Ui)
+}
+}
+
+"{abstract} \n Command" <|-up- HelpCommand
+"{abstract} \n Command" <|-up- ExitCommand
+"{abstract} \n Command" <|-up- SwitchCommand
+"{abstract} \n Command" <|-up- GetCurrentViewCommand
+
+
+package medbot.command.personcommand {
+class "{abstract} \n AddPersonCommand"{
+    # person : Person
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+
+class "{abstract} \n ArchivePersonCommand"{
+    # personId : int
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+class "{abstract} \n DeletePersonCommand"{
+    # personId : int
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+
+class "{abstract} \n EditPersonCommand"{
+    # personId : int
+    # person : Person
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+class "{abstract} \n FindPersonCommand"{
+    # parameters: String[]
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+class "{abstract} \n ListPersonCommand"{
+    # getArchived: boolean
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+class "{abstract} \n UnarchivePersonCommand"{
+    # personId : int
+    + execute(Scheduler, Ui) {'abstract'}
+}
+
+class "{abstract} \n ViewPersonCommand"{
+    # personId : int
+    + execute(Scheduler, Ui) {'abstract'}
+}
+"{abstract} \n Command" <|-- "{abstract} \n AddPersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n EditPersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n ArchivePersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n UnarchivePersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n DeletePersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n ListPersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n FindPersonCommand"
+"{abstract} \n Command" <|-- "{abstract} \n ViewPersonCommand"
+}
+
+package medbot.command.appointmentcommand {
+class AddAppointmentCommand{
+    # appointment : Appointment
+    + execute(Scheduler, Ui)
+}
+
+class EditAppointmentCommand{
+
+    # appointmentId : int
+    # appointment : Appointment
+    + execute(Scheduler, Ui)
+}
+
+class FindAppointmentCommand{
+    # appointmentId: int
+    # personType : PersonType
+    # filterType : FilterType
+    # dateTimeCode: int
+    + execute(Scheduler, Ui)
+}
+
+class ListAppointmentCommand{
+    + execute(Scheduler, Ui)
+}
+class DeleteAppointmentCommand{
+    # appointmentId: int
+    + execute(Scheduler, Ui)
+}
+class ViewAppointmentCommand{
+    appointmentId: int
+    + execute(Scheduler, Ui)
+}
+"{abstract} \n Command" <|-up AddAppointmentCommand
+"{abstract} \n Command" <|-up EditAppointmentCommand
+"{abstract} \n Command" <|-up DeleteAppointmentCommand
+"{abstract} \n Command" <|-up ListAppointmentCommand
+"{abstract} \n Command" <|-up FindAppointmentCommand
+"{abstract} \n Command" <|-up ViewAppointmentCommand
+}
+enum "<<Enumeration>> \n CommandType" {
+  HELP
+  EXIT
+  SWITCH
+  ADD
+  DELETE
+  EDIT
+  VIEW
+  LIST
+  FIND
+  ARCHIVE
+  UNARCHIVE
+}
+}
+@enduml
