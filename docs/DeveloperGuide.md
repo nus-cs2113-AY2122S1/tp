@@ -294,7 +294,18 @@ stock quantity.
 
 ### Order Commands
 
-#### AddOrderCommand
+### AddOrderCommand
+
+MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword
+in `order` mode.
+
+* MediVault adds order information when `parameter` and `parameterValues` provided by the user are valid.
+* As the order date is an optional parameter, MediVault will use the date the order was placed as the default date.
+* Users will not be unable to add orders if the order quantity exceeds maximum stock quantity.
+
+The sequence diagram for `AddOrderCommand` is shown below.
+
+![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
 #### DeleteOrderCommand
 

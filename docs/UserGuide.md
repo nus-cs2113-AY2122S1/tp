@@ -229,15 +229,18 @@ Stock Id changed from:
 
 ### Listing medication stocks: `liststock`
 
-Lists all existing medication in the inventory.
+Lists all existing medications in the inventory.
+
 
 * All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
-* Example 1 demonstrates the list of all medication without parameters.
-* Example 2 demonstrates list by medication name.
+* You are able to `liststock` by any column and sort or reverse sort them.
+
 
 Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
-Example 1: `liststock`
+
+Example 1 (Listing all medications): `liststock`
+
 
 Expected output:
 
@@ -265,7 +268,7 @@ Expected output:
 +----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
 ```
 
-Example 2: `liststock n/panadol`
+Example 2 (Filter by name): `liststock n/panadol`
 
 Expected output:
 
@@ -399,11 +402,12 @@ Expected output:
 
 Adds an order for medicine.
 
-* The date parameter is optional, if there is no input for date, MediVault will set it as the date you added in the
-  order.
-    * Assuming you place an order on 21 October 2021:
-        * `addorder n/panadol q/150 d/21-10-2021` is the same as `addorder n/panadol q/150`
-* If the order quantity exceeds the maximum stock quantity allowed, you are unable to add that order.
+Adds an order for a stock.
+
+
+> :information_source: Note:
+> * The date parameter is optional, MediVault will set it as the date you added in the order if the parameter is omitted.
+> * If the order quantity exceeds the maximum stock quantity allowed, you are unable to add the order.
 
 Format: `addorder n/NAME q/QUANTITY {d/DATE}`
 
