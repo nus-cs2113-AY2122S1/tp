@@ -53,8 +53,7 @@ public class Storage {
         } catch (NullPointerException e) {
             LOGGER.log(Level.SEVERE, "Caught NullPointerException when creating file", e);
         } catch (FileNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Caught FileNotFoundException when initializing scanner.", e);
-            assert false;
+            LOGGER.log(Level.INFO, "create new file with filename: " + filename);
         }
         return fileLines;
     }

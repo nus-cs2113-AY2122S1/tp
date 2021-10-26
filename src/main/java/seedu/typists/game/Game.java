@@ -23,16 +23,18 @@ public abstract class Game {
 
     public abstract void runGame();
 
-    public void handleSummary(
+    public HashMap<String, Object> handleSummary(
             ArrayList<String[]> expectedInput, ArrayList<String[]> actualInput, double timeElapsed, String gameMode
     ) {
         HashMap<String, Object> summary = SummaryManager.generateSummary(
                 expectedInput, actualInput, timeElapsed, gameMode
         );
         SummaryUi.displaySummary(summary);
+        return summary;
     }
 
-    public void handleStorage() {
-
+    public void handleStorage(HashMap<String, Object> summary) {
+        GameRecordsManager gameRecordsManager = GameRecordsManager.getGameRecordsManager();
+        gameRecordsManager.addGameRecord(summary);
     }
 }

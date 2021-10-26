@@ -17,6 +17,11 @@ public class GameRecordsManager {
         wordLimitedGameRecords = Storage.readGameRecords("Word-limited");
     }
 
+    public void updateGameRecords() {
+        Storage.writeGameRecords(timeLimitedGameRecords, "Time-limited");
+        Storage.writeGameRecords(wordLimitedGameRecords, "Word-limited");
+    }
+
     public static GameRecordsManager getGameRecordsManager() {
         if (instance == null) {
             instance = new GameRecordsManager();
@@ -27,6 +32,7 @@ public class GameRecordsManager {
     public void addGameRecord(HashMap<String, Object> gameSummary) {
         GameRecord newGameRecord = createGameRecord(gameSummary);
         addRecordToArray(newGameRecord);
+        writeRecordToFile(newGameRecord);
     }
 
     private GameRecord createGameRecord(HashMap<String, Object> gameSummary) {
@@ -54,6 +60,17 @@ public class GameRecordsManager {
         } else {
             timeLimitedGameRecords.add(gameRecord);
         }
+    }
+
+    private void writeRecordToFile(GameRecord gameRecord) {
+        String gameMode = gameRecord.getGameMode();
+        if (gameMode == "Word Limited") {
+            Storage.writeGameRecords(wordLimitedGameRecords, "Word-limited");
+        } else {
+            Storage.writeGameRecords(timeLimitedGameRecords, "Time-limited");
+
+        }
+
     }
 
 }

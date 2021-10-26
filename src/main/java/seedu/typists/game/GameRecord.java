@@ -36,7 +36,7 @@ public class GameRecord {
     }
 
     public String getStringFormat() {
-        String separator = "\\|";
+        String separator = "|";
         String formatted = gameMode
                 + separator
                 + timeElapsed
