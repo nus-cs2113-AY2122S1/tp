@@ -3,7 +3,7 @@ hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 
-ModuleStorage "1" ----* Storage
+ModuleStorage "1" ---* Storage
     ModuleStorage : - {static} logger : Logger
 
     ModuleStorage : + ArrayList<Module> readModuleList(InputStream inputStream);
@@ -16,14 +16,15 @@ SelectedUniversityStorage "1" -----* Storage
     SelectedUniversityStorage : + readSelectedUniversityList() : ArrayList<University>
 
 UserStorage <|-- SelectedModuleStorage
-SelectedModuleStorage "1" -----* Storage
-    SelectedModuleStorage : - {static} logger : Logger
-    SelectedModuleStorage : + updateSelectedModuleList()
-    SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
+SelectedModuleStorage "1" ------* Storage
+     SelectedModuleStorage : - {static} logger : Logger
+     SelectedModuleStorage : + updateSelectedModuleList()
+     SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
 
-UniversityStorage "1" ----* Storage
-    UniversityStorage : - {static} logger : Logger;
-    UniversityStorage : + readUniversityList() : ArrayList<University>;
+UniversityStorage "1" ---* Storage
+    UniversityStorage : - {static} logger : Logger
+    UniversityStorage : + readUniversityList() : ArrayList<University>
+    UniversityStorage : + extractAttributes() : String[]
     UniversityStorage : + extractAttributes() : String[];
 
 class UserStorage {
