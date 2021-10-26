@@ -38,8 +38,9 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Set budget: `set_budget`](#set-budget-set_budget)
     - [Check budget: `check_budget`](#check-budget-check_budget)
     - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
-    - [View Yearly Report: `show_graph`](#view-yearly-report-show_graph)
+    - [View yearly report: `show_graph`](#view-yearly-report-show_graph)
     - [Terminate program: `end`](#terminate-program-end)
+    - [Saving of data](#saving-of-data)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -494,7 +495,7 @@ All your entries have been cleared!
 
 - TODO
 
-### View Yearly Report: `show_graph`
+### View yearly report: `show_graph`
 
 Shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
