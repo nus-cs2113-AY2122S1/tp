@@ -69,16 +69,14 @@ public class PrescriptionManager {
                 Prescription prescription;
                 if (stock.getQuantity() <= prescribeQuantity) {
                     prescription = new Prescription(stock.getMedicineName(), stock.getQuantity(), customerId, date,
-                            staffName,
-                            stock.getStockId());
+                            staffName, stock.getStockId());
                     newPrescriptions.add(prescription);
                     prescribeQuantity -= stock.getQuantity();
                     stock.setQuantity(0);
                 } else {
                     int remainingStocks = stock.getQuantity() - prescribeQuantity;
                     prescription = new Prescription(stock.getMedicineName(), prescribeQuantity, customerId, date,
-                            staffName,
-                            stock.getStockId());
+                            staffName, stock.getStockId());
                     newPrescriptions.add(prescription);
                     stock.setQuantity(remainingStocks);
                     prescribeQuantity = 0;

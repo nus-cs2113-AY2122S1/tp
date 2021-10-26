@@ -59,6 +59,7 @@ Terminology | Meaning
 Stock | Refers to a medication.
 Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
+Parameters | Prefixes for MediVault to understand the type of information you provide.
 
 # Quick Start
 
@@ -103,28 +104,21 @@ Mode has changed to PRESCRIPTION.
 # Features
 
 > :bulb: Notes about the commands:
+> 
+> You can refer to [Glossary](#glossary) to understand technical terms mentioned below.
 > * Parameters enclosed in `[]` should contain **one or more** optional parameters.
 > * Parameters enclosed in `{}` are **totally** optional parameters.
-> * Parameters you specify can be in any order.
-    >
-
-* E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
-
+> * Parameters you specify can be in any order. 
+>  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
 > * MediVault ignores additional parameters provided when commands do not require one.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
-    >
-
-* E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
-
+>  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
-    >
-
-* E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
-
+>  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
-    > sort in descending order.
+> sort in descending order.
 
 ## Managing Stocks
 
@@ -187,6 +181,7 @@ Lists all existing medications in the inventory.
 
 * All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
 * You are able to `liststock` by any column and sort or reverse sort them.
+* When you update an order information, MediVault reflects the pending stocks shown here.
 
 Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
@@ -241,31 +236,66 @@ Updates existing medication stock information in the inventory.
 > :warning: Warning
 > * The Stock ID must exist in MediVault.
 > * You cannot update the Stock ID.
-    >
-
-* The allocation of Stock ID is determined by MediVault.
-
+> * The allocation of Stock ID is determined by MediVault.
 > * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
     **all** entries that has same existing medication name given the `i/ID` with your input values for these parameters.
+
+> :information_source: Note:
 > * A new Stock ID will be assigned to the current stock if your update has the `n/NAME` parameter.
+> * When you update the `n/NAME` parameter, there may be an existing prescription record that is present.
+> * By allocating a new Stock ID to the updated stock record, MediVault preserves the name of the old record
+    > so that when you delete a prescription record, it is **guaranteed** to automatically update the quantity
+    > of the stock.
 
 Format: `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 
-Example:
-`update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/Treats infections to ear, nose, throat, skin, or urinary tract m/100`
+Initial stock records:
 
-Expected output:
+```
++====+=========+========+==========+=============+=============+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+==========+=============+=============+==============+
+| 1  | PANADOL | $20.00 |    20    | 13-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 3  | VICODIN | $10.00 |    20    | 30-09-2021  | SEVERE PAIN |     500      | 
++----+---------+--------+----------+-------------+-------------+--------------+
+```
+
+> :information_source: Note:
+> * Examples stated below are **independent** from each other.
+
+Example 1 (Updating parameters containing `n/NAME`):
+`update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/BODY INFECTIONS m/100`
+
+Expected output 1:
 
 ```
 Updated! Number of rows affected: 1
 Stock Id changed from:
-3 -> 7
-+====+========+========+==========+=============+===============================================+==============+
-| ID |  NAME  | PRICE  | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
-+====+========+========+==========+=============+===============================================+==============+
-| 7  | amoxil | $20.00 |    50    | 01-12-2021  | Treats infections to ear, nose, throat, skin, |     100      | 
-|    |        |        |          |             |                or urinary tract               |              | 
-+----+--------+--------+----------+-------------+-----------------------------------------------+--------------+
+3 -> 4
++====+========+========+==========+=============+=================+==============+
+| ID |  NAME  | PRICE  | QUANTITY | EXPIRY_DATE |   DESCRIPTION   | MAX_QUANTITY | 
++====+========+========+==========+=============+=================+==============+
+| 4  | amoxil | $20.00 |    50    | 01-12-2021  | BODY INFECTIONS |     100      | 
++----+--------+--------+----------+-------------+-----------------+--------------+
+```
+
+Example 2 (Updating parameters **without** `n/NAME`):
+`update i/1 p/30 d/FEVER`
+
+Expected Output 2:
+
+```
+Updated! Number of rows affected: 2
++====+=========+========+==========+=============+=============+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+==========+=============+=============+==============+
+| 1  | PANADOL | $30.00 |    20    | 13-09-2021  |    FEVER    |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  |    FEVER    |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
 ```
 
 ### Deleting a medication stock: `deletestock`
@@ -371,15 +401,52 @@ Expected output:
 Updates an existing prescription information.
 
 > :warning: Warning
-> * A new Prescription ID will be assigned to the current prescription if you update the medication in the prescription.
-> * You cannot update the Stock or the Prescription ID. The allocation of ID is determined by MediVault.
-> * When you update a prescription, the stock information may be affected as well
+> * You cannot update the Stock or the Prescription ID. 
+> * The allocation of Prescription ID is determined by MediVault.
+> * Your provided `n/NAME` parameter **must** exist in stocks.
+> * When you update a prescription record, the stock information may be affected as well
 
-Format: `updateprescription i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+> :information_source: Note:
+> * MediVault allocates a **new** Prescription ID when you update prescription records containing the `n/NAME` and 
+    > `q/QUANTITY` parameter.
+> * This is because MediVault deletes the old prescription record and adds the updated prescription record as a **new** 
+    > prescription record.
 
-Example: `updateprescription i/1 q/5`
+Format: `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 
-Expected output:
+Initial stock records:
+
+```
++====+=========+========+==========+=============+=============+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+==========+=============+=============+==============+
+| 1  | PANADOL | $20.00 |    20    | 13-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 3  | VICODIN | $10.00 |    20    | 30-09-2021  | SEVERE PAIN |     500      | 
++----+---------+--------+----------+-------------+-------------+--------------+
+```
+
+Initial prescription records:
+
+```
++====+=========+==========+=============+============+=======+==========+
+| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
++====+=========+==========+=============+============+=======+==========+
+| 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | 
++----+---------+----------+-------------+------------+-------+----------+
+| 2  | VICODIN |    10    |  S2345678B  | 10-10-2021 | PETER |    3     | 
++----+---------+----------+-------------+------------+-------+----------+
+```
+
+> :information_source: Note:
+> * Examples stated below are **independent** from each other.
+
+Example 1 (Update prescription containing `n/NAME` or `q/QUANTITY`: 
+`updateprescription i/1 q/5`
+
+Expected output 1:
 
 ```
 Restored 5 PANADOL
@@ -387,7 +454,35 @@ Updated prescription information!
 +====+=========+==========+=============+============+=======+==========+
 | ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
 +====+=========+==========+=============+============+=======+==========+
-| 6  | PANADOL |    5     |  S1234567A  | 09-10-2021 | Jane  |    1     | 
+| 3  | PANADOL |    5     |  S1234567A  | 09-10-2021 | JANE  |    1     | 
++----+---------+----------+-------------+------------+-------+----------+
+```
+
+Updated stock record for Example 1:
+
+```
++====+=========+========+==========+=============+=============+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+==========+=============+=============+==============+
+| 1  | PANADOL | $20.00 |    25    | 13-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  |  HEADACHES  |     1000     | 
++----+---------+--------+----------+-------------+-------------+--------------+
+| 3  | VICODIN | $10.00 |    20    | 30-09-2021  | SEVERE PAIN |     500      | 
++----+---------+--------+----------+-------------+-------------+--------------+
+```
+
+Example 2 (Update prescription without both `n/NAME` and `q/QUANTITY` parameter:
+`updateprescription i/1 s/JACK`
+
+Expected output 2:
+
+```
+Updated prescription information!
++====+=========+==========+=============+============+=======+==========+
+| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
++====+=========+==========+=============+============+=======+==========+
+| 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JACK  |    1     | 
 +----+---------+----------+-------------+------------+-------+----------+
 ```
 
@@ -501,13 +596,22 @@ Updates an existing order information.
 
 > :warning: Warning
 > * You cannot update the Order ID or the status of the order.
-    >  * The allocation of ID is determined by MediVault.
+> * The allocation of Order ID is determined by MediVault.
 > * The status of the order will only be changed when you run the `receiveorder` command.
-> * When you update an order information, MediVault reflects the pending stocks shown in the current medication stocks.
 
-Format: `updateorder i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+Format: `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
 
-Example: `updateorder i/1 q/50`
+Initial order records:
+
+```
++====+=========+==========+============+===========+
+| ID |  NAME   | QUANTITY |    DATE    |  STATUS   | 
++====+=========+==========+============+===========+
+| 1  | PANADOL |   100    | 09-10-2021 |  PENDING  | 
++----+---------+----------+------------+-----------+
+```
+
+Example: `updateorder i/1 q/50 d/10-10-2021`
 
 Expected output:
 
@@ -516,7 +620,7 @@ Updated! Number of rows affected: 1
 +====+=========+==========+============+=========+
 | ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
 +====+=========+==========+============+=========+
-| 1  | PANADOL |    50    | 09-10-2021 | PENDING | 
+| 1  | PANADOL |    50    | 10-10-2021 | PENDING | 
 +----+---------+----------+------------+---------+
 ```
 
@@ -690,7 +794,7 @@ Parameters in [square braces] indicate that at least one of the parameter(s) mus
 +---------------------+--------------------------------------------------------------------------------------------+
 | deleteprescription  | deleteprescription i/ID                                                                    | 
 +---------------------+--------------------------------------------------------------------------------------------+
-| updateprescription  | updateprescription i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]              | 
+| updateprescription  | updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]              | 
 +---------------------+--------------------------------------------------------------------------------------------+
 |  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID           | 
 |                     | sort/COLUMN_NAME rsort/COLUMN NAME}                                                        | 
@@ -775,7 +879,7 @@ updatestock | `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d
 liststock | `liststock {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
 addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
-updateprescription | `updatepesprescriptiondispense i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+updateprescription | `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
 archiveprescription | `archiveprescription d/DATE`
 addorder | `addorder n/NAME q/QUANTITY {d/DATE}`
