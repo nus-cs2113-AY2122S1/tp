@@ -130,15 +130,38 @@ This component consist of the following classes:
 * Stores the partner university module in `mappedModule`.
 
 ### Parser Component
-<img src="images/Parser.png" width="280"/>
+<img src="images/Parser.png" width="5362"/>  
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
-#### Parser
-This is the main parser class that will handle raw inputs and identify command words and invoke the respective command parsers.
-#### AddCommandParser, RemoveCommandParser, FindCommandParser, SearchMapCommandParser, HelpCommandParser, ExitCommandParser
-These class when invoked, will handle the flags and arguments and invoke the specific Command classes and handle the arguments.
+* Ensures that the command, flags and arguments are entered in the correct format.
 
+#### Parser
+* This is the main parser class that will handle raw inputs and identify command words and invoke the respective command parsers instance and return the respective `Command` object.
+#### AddCommandParser
+* This object when invoked, will first identify the flag `/uni`, `/mod` or `/map`. Once the flag is identified, the arguments corresponding to the flags will be extracted.
+* For `/uni` the argument should either be an integer representing `<UNI_INDEX>` or a String representing `<UNI_NAME>`.
+A new `University` object will be created and passed as an argument to the constructor for `AddUniCommand`.
+* For `/mod` the argument should either be an integer representing `<MOD_INDEX>` or a String representing `<MODULE_CODE>`.
+A `Module` object will be duplicated from the Master Module List and passed as an argument to the constructor for `AddModCommand`.
+* Both the `/uni` and `/mod` flag will be checking for the type of inputs passes in and handle them accordingly.
+* For `/map` the argument should be two integers representing `<UNI_INDEX>` and `<MAPPING_INDEX>` and will be passed into the constructor for `AddMapCommand`.
+#### RemoveCommandParser
+* This object when invoked, will first identify the flag `/uni`, `/mod` or `/map`. Once the flag is identified, the arguments corresponding to the flags will be extracted.
+* For `/uni` the argument should either be an integer representing `<UNI_INDEX>` or a String representing `<UNI_NAME>`.
+The `University` object representing the particular university from the Selected University List will be passed as an argument to the constructor for `RemoveUniCommand`.
+* For `/mod` the argument should either be an integer representing `<MOD_INDEX>` or a String representing `<MODULE_CODE>`.
+The `Module` object representing the particular module from Selected Module List and passed as an argument to the constructor for `RemoveModCommand`.
+* Both the `/uni` and `/mod` flag will be checking for the type of inputs passes in and handle them accordingly.
+* For `/map` the argument should be two integers representing `<UNI_INDEX>` and `<MAPPING_INDEX>` and will be passed into the constructor for `RemoveMapCommand`.
+#### FindCommandParser
+* This object when invoked, will first identify the flag `/uni` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
+#### SearchMapCommandParser
+* This object when invoked, will take the first argument and convert it into an integer representing `<UNI_INDEX>` and pass it to the constructor for `SearchMapCommand`.
+#### HelpCommandParser
+This object will invoke an instance of `HelpCommand`.
+#### ExitCommandParser
+This object will invoke an instance of `ExitCommand`.
 
 ## Product scope
 ### Target user profile
@@ -178,7 +201,6 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Glossary
 
-* *glossary item* - Definition
 * *Master University List* The list of all partner universities.
 * *Master Module List* - The list of all NUS modules available for mapping.
 * *Selected University List* - The list of partner universities the user selected along with the user's selected module mappings
