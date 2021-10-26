@@ -2,6 +2,11 @@
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
 * [Implementation](#implementation)
+  * [Add Module](#add-module)
+  * [Add Student](#add-student)
+  * [Add Assessment](#add-assessment)
+  * [Set Marks](#set-marks)
+  * [Set Attendance](#set-attendance)
 * [Project scope](#product-scope)
 * [User Stories](#user-stories)
 * [Non-Functional Requirements](#non-functional-requirements)
@@ -58,6 +63,8 @@ is returned.
 object into the list of modules.
 5. Lastly, a message indicating that the module has been added will be printed out.
 
+<br>
+
 ### Add Student
 The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which
 stores student internally as an ArrayList `students`.
@@ -83,6 +90,71 @@ called to ensure that there is an existing module with code `CS2113T`.
 * Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
 `a0217978j` and `jonny` respectively. Then, `StudentList#addModule` is called to add the newly created `Student` 
 object into the `students` ArrayList within `StudentList`.
+
+<br>
+
+### Add Assessment
+The add assessment mechanism is facilitated by `AddAssessmentCommand`. It extends `Command` and uses `AssessmentList`
+which stores assessment internally as an ArrayList `assessments`.<br>
+
+`AddAssessmentCommand` implements the following methods:
+* `AddAssessmentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
+
+`AssessmentList` implements the following methods:
+* `AssessmentList#getSize()` - Returns the no. of assessments currently in the list.
+* `AssessmentList#getAssessments()` - Returns an ArrayList containing all the assessments.
+* `AssessmentList#getAssessment(assessmentName:String)` - Returns an assessment with a particular name specified by the
+  user.
+* `AssessmentList#addAssessment(assessment:Assessment)` - Adds an assessment to the `assessments` ArrayList.
+* `AssessmentList#deleteAssessment(assessmentName:String)` - Deletes an assessment with the name specified by the user
+  from the `assessments` ArrayList.
+
+Below is an example scenario of how the add assessment feature behaves at each step:
+* Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
+  command calls the `AddAssessmentCommand#execute` method. Within `AddAssessmentCommand#execute`,
+  `ModuleList#getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
+* Step 2 - If an existing module with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
+  to ensure that they are valid.
+* Step 3 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name,
+  maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `Module` with
+  code `cs2113t`. Then, `AssessmentList#addAssessment` is called to add the newly created `Assessment` object into the
+  `assessments` ArrayList within `AssessmentList`.
+* Step 4 - Within `AssessmentList#addAssessment`, the name of the newly created `Assessment` object is checked to ensure
+  there is no existing assessment with name `midterms`. At the same time, the weightage of the newly created
+  `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` module
+  will not exceed 100 with the addition of the weightage of the newly created `Assessment` object.
+* Step 5 - If the name and weightage of the newly created `Assessment` object are valid, the newly created `Assessment`
+  object is added into the `assessments` ArrayList within `AssessmentList`.
+
+<br>
+
+### Set Marks
+The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store
+`assessmentName` and the `marks` for it as a key-value pair.<br>
+
+`SetMarksCommand` implements the following methods:
+* `SetMarksCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Checks input for errors before calling the
+  `setMarks` command and saving the data.
+* `SetMarksCommand#setMarks(ui:Ui, student:Student, assessmentName:String, marks:double)` - Puts a key-value pair with
+  `assessmentName` as key and `marks` as the value into the `results` HashMap of `student`.
+
+Below is an example scenario of how the set marks mechanism behaves at each step:
+* Precursor Step - The user must have executed the commands to create `module`, `assessment`, and `student` entities.
+  For purpose of this example, the user will have created `CS2113T` as the `module`, `Midterms` as the `assessment` with
+  a maximum mark of `100`, and `Jim Ho` as the `student`.
+* Step 1 - The user executes the `set_marks c/CS2113T s/1 a/Midterms m/50` command to set marks for student at index `1`
+  for the `Midterms` assessment under the `CS2113T` module. The `set_marks` command calls the  `SetMarksCommand#execute`
+  method. Within  `SetMarksCommand#execute`, `StudentList#getStudentAt("1")` is called to ensure that the student to be
+  marked (in this case student at index `1`) exists.
+* Step 2 - `AssessmentList#getAssessment(Midterms)` is then called to ensure that the `Midterms` assessment exists and
+  that the student has yet to be marked for it.
+* Step 3 - `Assessment#getMaximumMarks();` is then called to ensure that the marks to be given for the `Midterms`
+  assessment do not exceed the maximum marks attributed to it.
+* Step 4 - If the above steps do not output an error, the `SetMarksCommand#setMarks` command is then called, which in
+  turn calls the `Student#setMarks` command to put the key-value pair into the `results` HashMap of the student at index
+  `1`.
+
+<br>
 
 ### Set Attendance
 The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
@@ -117,65 +189,7 @@ with lesson number `1` and attendance record `Present` is set as its lesson numb
 Then, `AttendanceList#addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
 ArrayList within `AttendanceList`.
 
-### Add Assessment
-The add assessment mechanism is facilitated by `AddAssessmentCommand`. It extends `Command` and uses `AssessmentList`
-which stores assessment internally as an ArrayList `assessments`.<br>
-
-`AddAssessmentCommand` implements the following methods:
-* `AddAssessmentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
-
-`AssessmentList` implements the following methods:
-* `AssessmentList#getSize()` - Returns the no. of assessments currently in the list.
-* `AssessmentList#getAssessments()` - Returns an ArrayList containing all the assessments.
-* `AssessmentList#getAssessment(assessmentName:String)` - Returns an assessment with a particular name specified by the 
-  user.
-* `AssessmentList#addAssessment(assessment:Assessment)` - Adds an assessment to the `assessments` ArrayList.
-* `AssessmentList#deleteAssessment(assessmentName:String)` - Deletes an assessment with the name specified by the user 
-  from the `assessments` ArrayList.
-
-Below is an example scenario of how the add assessment feature behaves at each step:
-* Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
-  command calls the `AddAssessmentCommand#execute` method. Within `AddAssessmentCommand#execute`,
-  `ModuleList#getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
-* Step 2 - If an existing module with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
-  to ensure that they are valid.
-* Step 3 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name, 
-  maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `Module` with
-  code `cs2113t`. Then, `AssessmentList#addAssessment` is called to add the newly created `Assessment` object into the
-  `assessments` ArrayList within `AssessmentList`.
-* Step 4 - Within `AssessmentList#addAssessment`, the name of the newly created `Assessment` object is checked to ensure
-  there is no existing assessment with name `midterms`. At the same time, the weightage of the newly created
-  `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` module 
-  will not exceed 100 with the addition of the weightage of the newly created `Assessment` object.
-* Step 5 - If the name and weightage of the newly created `Assessment` object are valid, the newly created `Assessment` 
-  object is added into the `assessments` ArrayList within `AssessmentList`.
-
-### Set Marks
-The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store 
-`assessmentName` and the `marks` for it as a key-value pair.<br>  
-
-`SetMarksCommand` implements the following methods:
-* `SetMarksCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Checks input for errors before calling the 
-`setMarks` command and saving the data.
-* `SetMarksCommand#setMarks(ui:Ui, student:Student, assessmentName:String, marks:double)` - Puts a key-value pair with
-`assessmentName` as key and `marks` as the value into the `results` HashMap of `student`.
-
-Below is an example scenario of how the set marks mechanism behaves at each step:
-* Precursor Step - The user must have executed the commands to create `module`, `assessment`, and `student` entities.
-For purpose of this example, the user will have created `CS2113T` as the `module`, `Midterms` as the `assessment` with
-a maximum mark of `100`, and `Jim Ho` as the `student`.
-* Step 1 - The user executes the `set_marks c/CS2113T s/1 a/Midterms m/50` command to set marks for student at index `1`
-for the `Midterms` assessment under the `CS2113T` module. The `set_marks` command calls the  `SetMarksCommand#execute` 
-method. Within  `SetMarksCommand#execute`, `StudentList#getStudentAt("1")` is called to ensure that the student to be 
-marked (in this case student at index `1`) exists.
-* Step 2 - `AssessmentList#getAssessment(Midterms)` is then called to ensure that the `Midterms` assessment exists and
-that the student has yet to be marked for it.
-* Step 3 - `Assessment#getMaximumMarks();` is then called to ensure that the marks to be given for the `Midterms` 
-assessment do not exceed the maximum marks attributed to it.
-* Step 4 - If the above steps do not output an error, the `SetMarksCommand#setMarks` command is then called, which in 
-turn calls the `Student#setMarks` command to put the key-value pair into the `results` HashMap of the student at index 
-`1`.
-
+<br>
 
 ## Product scope
 ### Target user profile
@@ -194,20 +208,26 @@ turn calls the `Student#setMarks` command to put the key-value pair into the `re
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Teaching Assistant|Add module|Keep track of all the modules that I am teaching|
+|v1.0|Teaching Assistant|Add student|Keep track of students taking the module|
+|v1.0|Teaching Assistant|Add assessment|Monitor what assessments there are in the module|
+|v1.0|Teaching Assistant|Set marks|Record how much marks students score for the assessment|
+|v1.0|Teaching Assistant|Set attendance|Monitor the attendance of students|
+|v1.0|Teaching Assistant|Calculate the average marks of an assessment|Estimate the capabilities of students|
+|v2.0|Teaching Assistant|Edit module|Change module details (e.g. code and name)|
+|v2.0|Teaching Assistant|Delete module|Remove unnecessary data and reduce clutter|
+|v2.0|Teaching Assistant|Edit student|Change any student's information|
+|v2.0|Teaching Assistant|Delete student|Remove students who are no longer part of the class|
+|v2.0|Teaching Assistant|Edit assessment|Change the name or weightage of the assessment|
+|v2.0|Teaching Assistant|Delete assessment|Remove a particular assessment from the module|
+|v2.0|Teaching Assistant|Edit marks|Modify the marks of the student for a particular assessment|
+|v2.0|Teaching Assistant|Delete marks|Remove the marks entry of a student for a particular assessment|
+|v2.0|Teaching Assistant|Delete attendance|Remove the attendance entry of a student|
 
 ## Non-Functional Requirements
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+1. Should work on any mainstream OS as long as it has `Java 11` installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
 be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 * Mainstream OS: Windows, Linux, Unix, OS-X
-
-
-## Method Summary
-
-Method | Description |
-  ------ | --------------- |
-add_module | adds a module lol
