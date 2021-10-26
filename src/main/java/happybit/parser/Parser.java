@@ -22,6 +22,8 @@ public class Parser {
     private static final String COMMAND_DELETE_GOAL = "remove";
     private static final String COMMAND_DELETE_HABIT = "delete";
     private static final String COMMAND_COMPLETE_HABIT = "done";
+    private static final String COMMAND_VIEW_GOAL_PROGRESS = "progress";
+    private static final String COMMAND_VIEW_HABIT_STREAK = "streak";
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "bye";
 
@@ -132,6 +134,10 @@ public class Parser {
             return DeleteParser.parseDeleteHabitCommand(details);
         case COMMAND_COMPLETE_HABIT:
             return DoneParser.parseDoneHabitCommand(details);
+        case COMMAND_VIEW_GOAL_PROGRESS:
+            return ProgressParser.parseViewGoalProgressCommand(details);
+        case COMMAND_VIEW_HABIT_STREAK:
+            return StreakParser.parseViewHabitStreakCommand(details);
         case COMMAND_UPDATE_GOAL_NAME:
             return UpdateParser.parseUpdateGoalNameCommand(details);
         case COMMAND_EXIT:
