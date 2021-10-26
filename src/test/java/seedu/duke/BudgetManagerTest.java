@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BudgetManagerTest {
+
     /*
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -35,7 +36,7 @@ public class BudgetManagerTest {
             + "----------------------------------";
     private static final String currentMonth =
             LocalDate.now().getMonth().toString();
-    */
+     */
     BudgetManager budgetManager = new BudgetManager();
     FinancialTracker finances = new FinancialTracker();
 
@@ -54,20 +55,7 @@ public class BudgetManagerTest {
     /*
     @Test
     public void handleBudget_validEntries_correctReminders() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "FOOD budget has been set to $12.00"
-                + SEPARATOR_LINE + newLine
-                + SEPARATOR_LINE + newLine
-                + "Threshold for budget reminders set to 0.1"
-                + SEPARATOR_LINE + newLine
-                + SEPARATOR_LINE + newLine
-                + "You are almost reaching the " + currentMonth + " FOOD budget: $10.70/$12.00" + newLine
-                + "Would you like to readjust your " + currentMonth + " FOOD budget?" + newLine
-                + SEPARATOR_LINE + newLine
-                + SEPARATOR_LINE + newLine
-                + "You have exceeded the " + currentMonth + " FOOD budget: $15.95/$12.00" + newLine
-                + "Would you like to readjust your " + currentMonth + " FOOD budget?" + newLine
-                + SEPARATOR_LINE;
+        String expectedOutput = ""
 
         budgetManager.setBudget(12, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -76,4 +64,5 @@ public class BudgetManagerTest {
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
     */
+
 }
