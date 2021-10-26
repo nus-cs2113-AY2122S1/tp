@@ -1,8 +1,6 @@
 package seedu.utility;
 
-import seedu.budget.OverallBudget;
-import seedu.budget.FoodBudget;
-import seedu.budget.TransportBudget;
+
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
@@ -14,16 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
+ */
 public class FinancialTracker {
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
     private double balance;
-    
+
+    /**
+     * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
+     */
     public FinancialTracker() {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
     }
-    
+
+    /**
+     * Returns balance of the financial tracker.
+     *
+     * @return Balance of the financial tracker.
+     */
     public double getBalance() {
         return balance;
     }
@@ -46,7 +56,7 @@ public class FinancialTracker {
         balance += income.getValue();
     }
 
-    public int indexOffset(int index) {
+    private int indexOffset(int index) {
         return index - 1;
     }
 
@@ -80,14 +90,23 @@ public class FinancialTracker {
         return incomes;
     }
 
+    /**
+     * Returns an ArrayList of Entry elements, which include all incomes and expenses entries in the financial tracker.
+     *
+     * @return ArrayList of Entry elements.
+     */
     public ArrayList<Entry> getEntries() {
         ArrayList<Entry> entries = new ArrayList<>();
         entries.addAll(getExpenses());
         entries.addAll(getIncomes());
         return entries;
     }
-    
-    
+
+    /**
+     * Returns the total expense of all expenses in the financial tracker.
+     *
+     * @return Total expense of all expenses in the financial tracker.
+     */
     public double getTotalExpense() {
         double totalExpense = 0;
         for (Expense expense : expenses) {
@@ -106,6 +125,11 @@ public class FinancialTracker {
         return totalExpense;
     }
 
+    /**
+     * Returns the total income of all incomes in the financial tracker.
+     *
+     * @return Total income of all incomes in the financial tracker.
+     */
     public double getTotalIncome() {
         double totalIncome = 0;
         for (Income income : incomes) {
@@ -123,8 +147,14 @@ public class FinancialTracker {
         }
         return totalIncome;
     }
-    
-    //returns the total expense between a specific rage
+
+    /**
+     * Returns total expense between two given dates.
+     *
+     * @param start Starting date (Left boundary).
+     * @param end End Date (Right boundary).
+     * @return Total expense between two given dates.
+     */
     public double getExpenseBetween(LocalDate start, LocalDate end) {
         List<Expense> accumulatedExpense = expenses.stream()
                 .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
@@ -157,7 +187,13 @@ public class FinancialTracker {
         return monthlyBreakdown;
     }
 
-    //returns the total expense between a specific rage
+    /**
+     * Returns total income between two given dates.
+     *
+     * @param start Starting date (Left boundary).
+     * @param end End Date (Right boundary).
+     * @return Total income between two given dates.
+     */
     public double getIncomeBetween(LocalDate start, LocalDate end) {
         List<Income> accumulatedIncome = incomes.stream()
                 .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
@@ -184,25 +220,46 @@ public class FinancialTracker {
         }
         return monthlyBreakdown;
     }
-    
-    //method used for testing
+
+    /**
+     * Returns the size of the expenses ArrayList.
+     *
+     * @return Size of the expenses array list.
+     */
     public int getExpenseSize() {
         return expenses.size();
     }
 
-    //method used for testing
+    /**
+     * Returns the size of the incomes ArrayList.
+     *
+     * @return Size of the incomes array list.
+     */
     public int getIncomeSize() {
         return incomes.size();
     }
 
+    /**
+     * Returns true if expenses list of financial tracker is empty.
+     *
+     * @return Whether the expense list is empty.
+     */
     public boolean isExpensesEmpty() {
         return expenses.isEmpty();
     }
 
+    /**
+     * Returns true if incomes list of financial tracker is empty.
+     *
+     * @return Whether the income list is empty.
+     */
     public boolean isIncomesEmpty() {
         return incomes.isEmpty();
     }
 
+    /**
+     * Delete all entries from both expenses and income list in financial tracker and set balance to zero.
+     */
     public void clearAllEntries() {
         expenses.clear();
         incomes.clear();
