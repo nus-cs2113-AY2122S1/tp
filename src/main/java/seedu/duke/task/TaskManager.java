@@ -218,6 +218,10 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public static void addTasks(List<Task> tasks) {
+        taskList.addAll(tasks);
+    }
+
 
     public static void checkIndexValid(int index) throws InvalidTaskIndexException {
         if (index < 0 || index > getTaskListSize() - 1) {

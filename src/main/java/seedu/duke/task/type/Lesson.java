@@ -5,13 +5,14 @@ import seedu.duke.task.RecurrenceEnum;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 /**
  * A single lesson class e.g. CS2101 C02 Thursday
  */
 public class Lesson extends Event {
 
-    private int[] skipOccurrences;
+    private int[] occurrences;
 
     public String getModuleCode() {
         return moduleCode;
@@ -39,10 +40,11 @@ public class Lesson extends Event {
                 RecurrenceEnum.WEEKLY);
         setModuleCode(moduleCode);
         setClassNo(classNo);
-        setSkipOccurrences(Semester.acadWeeksToRealWeeks(weeks));
+        setOccurrences(weeks);
+        System.out.println(Arrays.toString(occurrences));
     }
 
-    public void setSkipOccurrences(int[] skipOccurrences) {
-        this.skipOccurrences = skipOccurrences;
+    public void setOccurrences(int[] occurrences) {
+        this.occurrences = occurrences;
     }
 }

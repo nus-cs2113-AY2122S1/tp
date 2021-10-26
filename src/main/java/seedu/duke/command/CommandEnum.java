@@ -16,6 +16,7 @@ public enum CommandEnum {
     TODO("todo <description> [%s %s]"),
     DEADLINE("deadline <description> <%s %s>"),
     EVENT("event <description> <%s %s> <%s %s>"),
+    MODULE("module [<module code>:[<class number> ...] ...]"),
     INVALID("");
 
     private static final String OPTIONAL_ARGUMENT_FORMAT = "[%s]";
@@ -37,6 +38,8 @@ public enum CommandEnum {
         case LIST:
             //Fallthrough
         case DELETE:
+            return usage;
+        case MODULE:
             return usage;
         case TODO:
             usage = String.format(usage, TodoFlag.DO_ON_DATE, DateParser.getDefaultDateFormat());
