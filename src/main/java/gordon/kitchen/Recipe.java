@@ -49,16 +49,6 @@ public class Recipe {
         steps.add(step);
     }
 
-    public void addStep(String step, int index) throws GordonException {
-        try {
-            steps.add(index, step);
-        } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INDEX_OOB);
-        } catch (IllegalArgumentException e) {
-            throw new GordonException(GordonException.INDEX_INVALID);
-        }
-    }
-
     public void removeStep(int index) throws GordonException {
         try {
             steps.remove(index);
@@ -67,6 +57,14 @@ public class Recipe {
         } catch (IllegalArgumentException e) {
             throw new GordonException(GordonException.INDEX_INVALID);
         }
+    }
+
+    public void replaceIngredients(ArrayList<String> newIngredients) {
+        ingredients = newIngredients;
+    }
+
+    public void replaceSteps(ArrayList<String> newSteps) {
+        steps = newSteps;
     }
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
