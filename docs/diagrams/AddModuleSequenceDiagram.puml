@@ -40,12 +40,6 @@ deactivate addModuleCommand
 taa -> addModuleCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
 activate addModuleCommand
 
-addModuleCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-
-moduleList --> addModuleCommand : module:Module
-deactivate moduleList
-
 create module
 addModuleCommand -> module
 activate module
