@@ -6,6 +6,7 @@ import seedu.duke.DukeException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author Roycius
 public class UiTest {
     @Test
     public void moduleInfo_invalidModuleCode_exceptionThrown() {

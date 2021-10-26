@@ -7,6 +7,7 @@ import seedu.duke.commons.util.exceptions.ModuleLoadException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author ptejasv
 class FullModuleListTest {
     @Test
     public void retrieveModuleInformation_getAllModules_modulesRetrieved() {

@@ -17,6 +17,7 @@ import static seedu.duke.commons.util.DayUtil.getTomorrow;
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
 
+//@@author richwill28
 public class Ui {
     public static final String LINE =
             "    ______________________________________________________________________________________"
@@ -83,6 +84,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a list of possible input commands and link to user guide.
+     */
     public void printHelpMessage() {
         System.out.print(LINE);
         System.out.println(PADDING
@@ -332,6 +336,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    //@@author ptejasv
     // Module-related methods
 
     /**
@@ -349,6 +354,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    //@@author Roycius
     /**
      * Displays a message to inform user that the specified module
      * has been successfully deleted.
@@ -389,6 +395,7 @@ public class Ui {
         System.out.print(LINE);
     }
 
+    //@@author rebchua39
     public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
@@ -428,85 +435,5 @@ public class Ui {
     public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
         Module module = Duke.fullModuleList.findModule(moduleCode);
         System.out.print(module.getFullInfo());
-    }
-
-    // All-related methods
-
-    /**
-     * Displays both the list of tasks and lessons.
-     *
-     * @param taskList the list of tasks
-     * @param lessonList the list of lessons
-     */
-    public void printAllList(TaskList taskList, LessonList lessonList) {
-        System.out.print(LINE);
-        System.out.println(PADDING + "Here are the tasks in your list:");
-        System.out.println(taskList);
-        System.out.println(PADDING + "Here are the lessons in your list:");
-        System.out.print(lessonList);
-        System.out.println(LINE);
-    }
-
-    // TODO: Combine the two methods below
-
-    /**
-     * Displays the list of tasks and lessons filtered based on the
-     * specified keyword.
-     *
-     * @param taskList the unfiltered list of tasks
-     * @param lessonList the unfiltered list of lessons
-     * @param keyword the specified keyword
-     */
-    public void printAllWithKeyword(TaskList taskList, LessonList lessonList, String keyword) {
-        System.out.print(LINE);
-
-        TaskList filteredTaskList = taskList.filterTasksByKeyword(keyword);
-        if (filteredTaskList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching task in your list.");
-        } else {
-            System.out.println(PADDING + "Here are the matching tasks in your list:");
-            System.out.print(filteredTaskList);
-        }
-        System.out.println();
-
-        LessonList filteredLessonList = lessonList.filterLessonsByKeyword(keyword);
-        if (filteredLessonList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching lesson in your list.");
-        } else {
-            System.out.println(PADDING + "Here are the matching lessons in your list:");
-            System.out.print(filteredLessonList);
-        }
-
-        System.out.println(LINE);
-    }
-
-    /**
-     * Displays the list of tasks and lessons filtered based on the
-     * specified period.
-     *
-     * @param taskList the unfiltered list of tasks
-     * @param lessonList the unfiltered list of lessons
-     * @param period the specified period
-     */
-    public void printAllWithPeriod(TaskList taskList, LessonList lessonList, String period) {
-        System.out.print(LINE);
-
-        TaskList filteredTaskList = taskList.filterTasksByPeriod(period);
-        if (filteredTaskList.isEmpty()) {
-            System.out.println(PADDING + "There is no task on " + period.toUpperCase() + ".");
-        } else {
-            System.out.println(PADDING + "Here are the tasks on " + period.toUpperCase() + ":");
-            System.out.print(filteredTaskList);
-        }
-
-        LessonList filteredLessonList = lessonList.filterLessonsByPeriod(period);
-        if (filteredLessonList.isEmpty()) {
-            System.out.println(PADDING + "There is no lesson on " + period.toUpperCase() + ".");
-        } else {
-            System.out.println(PADDING + "Here are the lessons on " + period.toUpperCase() + ":");
-            System.out.print(filteredLessonList);
-        }
-
-        System.out.println(LINE);
     }
 }

@@ -2,6 +2,7 @@ package seedu.duke.commons.core;
 
 import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 
+//@@author richwill28
 public enum DayOfTheWeek {
     MON, TUE, WED, THU, FRI, SAT, SUN;
 

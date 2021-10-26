@@ -10,6 +10,7 @@ import seedu.duke.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author Roycius
 public class DeleteModuleCommandTest {
     @Test
     public void deleteLesson_emptyList_exceptionThrown() {

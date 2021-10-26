@@ -11,6 +11,7 @@ import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
+//@@author rebchua39
 public class SetCommandParser {
     private static String[] grades = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U", "NONE"};
 
