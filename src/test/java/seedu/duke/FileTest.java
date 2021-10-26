@@ -65,9 +65,9 @@ class FileTest {
                 FileStorage.readFromFile("tripsempty.json"));
     }
 
-//    @Test
-//    void testCorruptedFile() {
-//        assertThrows(JsonParseException.class, () ->
-//                FileStorage.readFromFile("tripscorrupted.json"));
-//    }
+    //@Test
+    //void testCorruptedFile() {
+        //assertThrows(JsonParseException.class, () ->
+                //FileStorage.readFromFile("tripscorrupted.json"));
+    //}
 }
