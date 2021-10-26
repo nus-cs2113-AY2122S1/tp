@@ -1,2 +1,4 @@
-package seedu.exception;public class MissingIndexException {
+package seedu.exception;
+
+public class MissingIndexException extends Exception {
 }
