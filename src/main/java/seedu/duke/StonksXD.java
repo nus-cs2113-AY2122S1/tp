@@ -6,6 +6,7 @@ import seedu.commands.ExitCommand;
 import seedu.utility.BudgetManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
+import seedu.utility.FinancialAdvisor;
 
 import seedu.utility.Parser;
 import seedu.utility.Ui;
@@ -17,13 +18,15 @@ public class StonksXD {
     private Parser parser;
     private DataManager dataManager;
     private BudgetManager budgetManager;
+    private FinancialAdvisor financialAdvisor;
 
     public StonksXD() {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
         this.parser = new Parser();
         this.budgetManager = new BudgetManager();
-        this.dataManager = new DataManager(this.parser, this.finances, this.ui, this.budgetManager);
+        this.financialAdvisor = new FinancialAdvisor();
+        this.dataManager = new DataManager(parser, finances, ui, budgetManager, financialAdvisor);
     }
 
     public void run() {
@@ -40,7 +43,8 @@ public class StonksXD {
             }
             dataManager.saveAll();
         }
-        ui.printBye();
+        String advice = financialAdvisor.getRandomAdvice();
+        ui.printBye(advice);
     }
 
     public static void main(String[] args) {

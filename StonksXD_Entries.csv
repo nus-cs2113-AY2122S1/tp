@@ -1,17 +1,5 @@
 entry_type,entry_description,amount,category,date
 E,qwe,12.5,FOOD,11/11/2121
-E,KFC,9.87,FOOD,25/10/2021
-E,gongcha,4.9,FOOD,25/10/2021
-E,IKEA chair,500.0,FOOD,25/10/2021
-E,taxi ride,32.0,TRANSPORT,25/10/2021
-E,water bills,200.0,BILLS,25/10/2021
-E,covid swab test,5000.0,MEDICAL,25/10/2021
-E,netflix subscription,19.0,ENTERTAINMENT,25/10/2021
-E,doge coin,5000.0,BILLS,25/10/2021
-E,chickenrice,2.0,FOOD,25/10/2021
-E,mcdonalds,15.0,FOOD,25/10/2021
-E,university tuition fee,8000.0,BILLS,25/10/2021
-E,mrbean drink,3.0,FOOD,25/10/2021
-E,cg2271 sensor,50.0,BILLS,25/10/2021
-E,koi golden bb milk tea,3.9,FOOD,25/10/2021
+E,qwe,0.5,FOOD,11/11/2121
+I,qwe,12.5,ALLOWANCE,11/11/2121
 I,qwe,12.5,ALLOWANCE,11/11/2121

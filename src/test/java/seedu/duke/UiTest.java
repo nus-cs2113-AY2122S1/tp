@@ -363,9 +363,9 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -378,16 +378,17 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
-        FindCommand testFindCommand = new FindCommand("25/10/2021");
+        String currDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        FindCommand testFindCommand = new FindCommand(currDate);
         initialiseFinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income incomeWithDiffDate = new Income("Paycheck August", 25.0, IncomeCategory.SALARY, date);
@@ -396,12 +397,12 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
-                + "4: [I] Paycheck August - $25.00 (25/10/2021)" + newLine
-                + "5: [I] Rob a bank - $2000.00 (25/10/2021)" + newLine
-                + "6: [I] Paycheck July - $25.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
+                + "4: [I] Paycheck August - $25.00 " + currentDate + newLine
+                + "5: [I] Rob a bank - $2000.00 " + currentDate + newLine
+                + "6: [I] Paycheck July - $25.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -425,7 +426,7 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -438,7 +439,7 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
