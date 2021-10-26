@@ -3,6 +3,7 @@ package command.prescription;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
+import inventory.Order;
 import inventory.Prescription;
 import inventory.Medicine;
 import utilities.parser.DateParser;
@@ -55,39 +56,44 @@ public class ArchivePrescriptionCommand extends Command {
             return;
         }
 
-        Date prescribeArchiveDate = null;
+        Date prescriptionArchiveDate = null;
         String prescriptionArchiveDateStr = parameters.get(CommandParameters.DATE);
         try {
-            prescribeArchiveDate = DateParser.stringToDate(prescriptionArchiveDateStr);
+            prescriptionArchiveDate = DateParser.stringToDate(prescriptionArchiveDateStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Medicine> filteredPrescription = new ArrayList<>();
+        ArrayList<Medicine> filteredPrescriptions = prescriptionsToArchive(medicines, prescriptionArchiveDate);
+        removeFromPrescriptions(medicines, filteredPrescriptions);
 
-        assert (filteredPrescription != null) : "Array is not initialised";
+        Storage storage = Storage.getInstance();
+        storage.archiveData(filteredPrescriptions);
+        storage.saveData(medicines);
+        ui.print("Archived prescriptions from " + DateParser.dateToString(prescriptionArchiveDate));
+        logger.log(Level.INFO, "Successful archive of prescriptions");
+    }
 
+    private ArrayList<Medicine> prescriptionsToArchive(ArrayList<Medicine> medicines, Date prescriptionArchiveDate) {
+        ArrayList<Medicine> filteredPrescriptions = new ArrayList<>();
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Prescription)) {
                 continue;
             }
             Prescription prescription = (Prescription) medicine;
             Date prescriptionDate = DateParser.removeTime(prescription.getDate());
-            if (prescriptionDate.before(prescribeArchiveDate)
-                    || prescriptionDate.equals(prescribeArchiveDate)) {
-                filteredPrescription.add(prescription);
+            if (prescriptionDate.before(prescriptionArchiveDate)
+                    || prescriptionDate.equals(prescriptionArchiveDate)) {
+                filteredPrescriptions.add(prescription);
             }
         }
+        return filteredPrescriptions;
+    }
 
-        for (Medicine medicine : filteredPrescription) {
+    private void removeFromPrescriptions(ArrayList<Medicine> medicines, ArrayList<Medicine> filteredPrescriptions) {
+        for (Medicine medicine : filteredPrescriptions) {
             medicines.remove(medicine);
         }
-
-        Storage storage = Storage.getInstance();
-        storage.archiveData(filteredPrescription);
-        storage.saveData(medicines);
-        ui.print("Archived prescriptions from " + DateParser.dateToString(prescribeArchiveDate));
-        logger.log(Level.INFO, "Successful archive of prescriptions");
     }
 }
 

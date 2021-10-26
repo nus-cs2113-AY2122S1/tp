@@ -392,11 +392,11 @@ MediVault creates an `ArchivePrescriptionCommand` object when CommandParser iden
 > :information_source: Note:
 > * MediVault archive prescription information when `parameter` and `parameterValues` provided by the user are valid.
 > * MediVault will output prescription information into a user readable format in `data/prescription_archive.txt`.
-> * To modify the format, edit the code in `toFileFormat()` method in the Prescription Class.
+> * To modify the format, edit the code in `toArchiveFormat()` method in the Prescription Class.
 
 The sequence diagram for ArchivePrescriptionCommand is shown below.
 
-(To be implemented)
+![ArchivePrescriptionSequenceDiagram](diagrams/diagram_images/ArchivePrescriptionSequenceDiagram.png)
 
 #### ArchiveOrderCommand
 
@@ -410,11 +410,11 @@ MediVault creates an `ArchiveOrderCommand` object when CommandParser identifies 
 > :information_source: Note:
 > * MediVault archive order information when `parameter` and `parameterValues` provided by the user are valid.
 > * MediVault will output order information into a user readable format in `data/prescription_archive.txt`.
-> * To modify the format, edit the code in `toFileFormat()` method in the Order Class.
+> * To modify the format, edit the code in `toArchiveFormat()` method in the Order Class.
 
 The sequence diagram for ArchiveOrderCommand is shown below.
 
-(To be implemented)
+![ArchiveOrderSequenceDiagram](diagrams/diagram_images/ArchiveOrderSequenceDiagram.png)
 
 ## Product Scope
 

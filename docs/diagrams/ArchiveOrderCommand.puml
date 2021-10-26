@@ -1,0 +1,49 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":ArchiveOrderCommand" as archiveOrder COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant ":OrderValidator" as orderValidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
+-> archiveOrder: execute()
+archiveOrder -> ui : getInstance()
+archiveOrder <-- ui
+archiveOrder -> medicine : getInstance()
+archiveOrder <-- medicine
+create orderValidator
+archiveOrder -> orderValidator: new OrderValidator()
+archiveOrder <-- orderValidator
+archiveOrder -> orderValidator : containsInvalidParameters()
+archiveOrder <-- orderValidator : isInvalidParameter
+
+opt !isInvalidParameter
+    archiveOrder -> orderValidator : containsInvalidParameterValues()
+    archiveOrder <-- orderValidator : isInvalidParameterValues
+    opt !isInvalidParameterValues
+        archiveOrder -> archiveOrder : ordersToArchive()
+        archiveOrder --> archiveOrder : filteredOrders
+        archiveOrder -> archiveOrder : removeFromOrders()
+        archiveOrder --> archiveOrder
+    end
+end
+archiveOrder -> storage : getInstance()
+archiveOrder <-- storage
+archiveOrder -> storage : archiveData()
+archiveOrder <-- storage
+archiveOrder -> storage: saveData()
+archiveOrder <-- storage
+@enduml
