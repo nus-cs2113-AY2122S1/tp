@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.commands.RemoveModCommand;
 import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.ModuleStorage;
 import seedu.duke.storage.Storage;
-import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
 import java.text.ParseException;

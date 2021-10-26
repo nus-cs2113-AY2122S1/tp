@@ -27,9 +27,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.ModuleStorage;
 import seedu.duke.storage.Storage;
-import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;

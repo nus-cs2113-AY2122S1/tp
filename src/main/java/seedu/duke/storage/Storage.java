@@ -26,38 +26,38 @@ public class Storage {
     }
 
     public ArrayList<Module> readModuleList() throws IOException {
-        logger.log(Level.INFO, "Start loading module data");
+//        logger.log(Level.INFO, "Start loading module data");
         InputStream inputStream = ModuleStorage.class.getResourceAsStream(
                 "/modules.csv");
         return moduleStorage.readModuleList(inputStream);
     }
 
     public ArrayList<University> readUniversityList(ModuleList moduleMasterList) throws IOException {
-        logger.log(Level.INFO, "Start loading university data");
+//        logger.log(Level.INFO, "Start loading university data");
         InputStream inputStream = UniversityStorage.class.getResourceAsStream(
                 "/University.csv");
         return universityStorage.readUniversityList(inputStream, moduleMasterList);
     }
 
     public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
-        logger.log(Level.INFO, "Start loading selected module data");
+//        logger.log(Level.INFO, "Start loading selected module data");
         return selectedModuleStorage.readSelectedModuleList(moduleMasterList);
     }
 
     public ArrayList<University> readSelectedUniversityList(
             UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
-        logger.log(Level.INFO, "Start loading selected university data");
+//        logger.log(Level.INFO, "Start loading selected university data");
         return selectedUniversityStorage.readSelectedUniversityList(universityMasterList, moduleMasterList);
     }
 
     public void updateSelectedModuleList(ModuleList moduleList) throws IOException {
-        logger.log(Level.INFO, "File writing operation started");
+//        logger.log(Level.INFO, "File writing operation started");
         selectedModuleStorage.updateSelectedModuleList(moduleList);
     }
 
     public void updateSelectedUniversityList(UniversityList universityList)
             throws IOException {
-        logger.log(Level.INFO, "File writing operation started");
+//        logger.log(Level.INFO, "File writing operation started");
         selectedUniversityStorage.updateSelectedUniversityList(universityList);
     }
 }

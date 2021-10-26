@@ -14,6 +14,7 @@ import seedu.duke.universities.UniversityList;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -146,10 +147,10 @@ public class AddCommandParser {
         if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) < mapIndex) {
+        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList)
+                < mapIndex || mapIndex < 1) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
-        //THIS IS NOT WORKING
         if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList)
                 .get(mapIndex - 1))) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);

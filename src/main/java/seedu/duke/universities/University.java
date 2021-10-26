@@ -5,6 +5,7 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.ui.Ui;
 import seedu.duke.constants.Constants;
+import seedu.duke.ui.UiMapping;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -45,14 +46,14 @@ public class University implements Comparator<University> {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
             System.out.print(Constants.INDENTATION);
-            Ui.printMappingForList(currentMapping, i + 1);
+            UiMapping.printMappingForList(currentMapping, i + 1);
         }
     }
 
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
-            Ui.printMappingForList(selectedMappings.get(i), i + 1);
+            UiMapping.printMappingForList(selectedMappings.get(i), i + 1);
         }
     }
 

@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UiUniversity;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -23,6 +24,6 @@ public class AddUniCommand extends Command {
                 .getName().equals(universityToAdd.getName());
         storage.updateSelectedUniversityList(universitySelectedList);
         System.out.println("New university added: ");
-        Ui.printUniversity(universityToAdd, false);
+        UiUniversity.printUniversity(universityToAdd, false);
     }
 }
