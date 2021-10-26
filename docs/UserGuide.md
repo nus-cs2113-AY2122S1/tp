@@ -205,16 +205,20 @@ Example:
 
 Adds an ingredient to the ingredient list.
 
-Format: `add-ingredient/INGREDIENT_NAME/QUANTITY`
+Format: `add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE`
   * `QUANTITY` must be a positive integer.
+  * `EXPIRY_DATE` must be a valid date in YYYY-MM-DD format.
 
 Example:
-`add-ingredient/Carrot/50` Adds `50` `carrots` to the ingredient list.
+`add-ingredient/Carrot/50/1.50/2021-10-21` Adds `50` `carrots` with unit price `1.50` and expiry date `2021-10-21` 
+to the ingredient list.
 ```
 ---------------------------------------------
  Got it. This ingredient was added:
    Ingredient Name: Carrot
    Ingredient Quantity: 50
+   Ingredient Unit Price: 1.50
+   Expiry Date: 2021-10-21
 ---------------------------------------------
 ```
 
@@ -247,10 +251,27 @@ Example:
 ```
 ---------------------------------------------
  Here are the ingredients in your list:
-   1. Potato [55]
-   2. Stock Cube [30]
-   3. Chilli [23]
-   4. Onion [44]
+   1. Potato [55] [$1.50] [2021-11-01]
+   2. Stock Cube [30] [$0.50] [2021-12-20]
+   3. Chilli [23] [$0.70] [2021-11-18]
+   4. Onion [44] [$1.00] [2021-10-29]
+---------------------------------------------
+```
+
+### 2.iii.d Finding expired ingredients: `find-expired-ingredient`
+
+Finds all ingredients from the ingredient list that are currently expired.
+
+Format: `find-expired-ingredient/CURRENT_DATE`
+  * `CURRENT_DATE` must be a valid date in YYYY-MM-DD format.
+
+Example:
+`find-expired-ingredient/2021-11-05`
+```
+---------------------------------------------
+ These ingredients are expired:
+   Potato [55] [$1.50] [2021-11-01]
+   Onion [44] [$1.00] [2021-10-29]
 ---------------------------------------------
 ```
 
