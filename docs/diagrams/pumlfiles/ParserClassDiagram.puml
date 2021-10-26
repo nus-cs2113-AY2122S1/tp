@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam class {
+BackgroundColor DarkOrchid
+ArrowColor Purple
+BorderColor Purple
+}
+
+class "{abstract}\n Parser"
+class "{abstract}\n XYZCommandParser"
+class "{abstract}\n ParserUtils"
+class "{abstract}\n Command"
+class XYZCommand
+
+"{abstract}\n Command" <|- XYZCommand
+
+"{abstract}\n Parser" ..> "{abstract}\n XYZCommandParser"
+
+"{abstract}\n XYZCommandParser" .> "{abstract}\n ParserUtils" : > uses
+
+"{abstract}\n XYZCommandParser" ..> XYZCommand : > returns
+
+
+enum ViewType {
+PATIENT_INFO
+SCHEDULER
+MEDICAL_STAFF_INFO
+}
+
+@enduml
