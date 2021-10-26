@@ -210,11 +210,16 @@ public class Parser {
                 return;
             }
         } else {
-            int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
-            tripToEdit = Storage.getListOfTrips().get(indexToEdit);
-            Storage.setLastTrip(tripToEdit);
+            tripToEdit = openTripWithIndex(tripToEditInfo[0]);
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
+    }
+
+    private static Trip openTripWithIndex(String tripIndexInString) {
+        int indexToEdit = Integer.parseInt(tripIndexInString) - 1;
+        Trip tripToEdit = Storage.getListOfTrips().get(indexToEdit);
+        Storage.setLastTrip(tripToEdit);
+        return tripToEdit;
     }
 
     //assumes that listOfTrips have at least 1 trip
@@ -531,7 +536,13 @@ public class Parser {
         return Storage.getValidCommands().contains(inputCommand);
     }
 
-
+    /**
+     * Parses the user input to determine which attributes to edit,
+     * and calls the relevant setters to edit those attributes.
+     *
+     * @param tripToEdit user-specified trip to be edited
+     * @param attributesToEdit String of all attributes to be added and their new values
+     */
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
         String[] attributesToEditSplit = attributesToEdit.split("-");
         for (String attributeToEdit : attributesToEditSplit) {
@@ -558,9 +569,8 @@ public class Parser {
             case "paycur":
                 tripToEdit.setForeignCurrency(data);
                 break;
-            case "person":
-                //TODO: add edit persons branch
-                break;
+            //case "person":
+                //break;
             default:
                 System.out.println(splitCommandAndData[0] + " was not recognised. "
                         + "Please try again after this process is complete");

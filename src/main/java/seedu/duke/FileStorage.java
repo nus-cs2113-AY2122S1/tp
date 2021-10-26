@@ -25,28 +25,62 @@ public class FileStorage {
     private static final String FILE_PATH = "trips.json";
     private static Gson gson;
 
-    public static void writeToFile(String jsonString) throws IOException {
+    /**
+     * Gets the {@link FileWriter} from {@link FileStorage#initializeFileWriter(String)}, and writes the
+     * JSON String to the file.
+     *
+     * @param jsonString parsed JSON string containing all data from the program.
+     * @throws IOException if writing to file fails.
+     */
+    public static void writeToFile(String jsonString, String filePath) throws IOException {
         Storage.getLogger().log(Level.INFO, "starting write to save file");
-        FileWriter fileWriter = initializeFileWriter();
+        FileWriter fileWriter = initializeFileWriter(filePath);
         fileWriter.write(jsonString);
         fileWriter.close();
     }
 
-    public static String readFromFile() throws FileNotFoundException {
-        File file = new File(FILE_PATH);
+    /**
+     * Reads the raw JSON String from the indicated save file.
+     *
+     * @param filePath path of the JSON file to be read from.
+     * @return JSON String from the file.
+     * @throws FileNotFoundException if there is no file corresponding to the <code>filePath</code>.
+     */
+    public static String readFromFile(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         return scanner.nextLine();
     }
 
-    protected static void newBlankFile() throws IOException {
-        FileWriter fileWriter = initializeFileWriter();
+    /**
+     * Creates a new blank file at the given <code>filePath</code>
+     *
+     * @param filePath path location to create the file at
+     * @throws IOException if file creation fails (thrown from {@link FileWriter}).
+     */
+    protected static void newBlankFile(String filePath) throws IOException {
+        FileWriter fileWriter = initializeFileWriter(filePath);
         fileWriter.close();
     }
 
-    public static FileWriter initializeFileWriter() throws IOException {
-        return new FileWriter(FILE_PATH);
+    /**
+     * Initializes a new instance of {@link FileWriter} with the given <code>filePath</code>.
+     *
+     * @param filePath path location to create the file at.
+     * @return instance of {@link FileWriter}.
+     * @throws IOException if the FileWriter could not be created.
+     *
+     * @see FileStorage#newBlankFile(String)
+     * @see FileStorage#writeToFile(String, String)
+     */
+    public static FileWriter initializeFileWriter(String filePath) throws IOException {
+        return new FileWriter(filePath);
     }
 
+    /**
+     * Registers the custom serializers and deserializers for {@link LocalDate} type, and creates an
+     * instance of {@link Gson}
+     */
     public static void initializeGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
