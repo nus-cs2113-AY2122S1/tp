@@ -38,13 +38,12 @@ public class ModuleStorageTest {
     private ModuleManager moduleManager;
     private ModuleStorage moduleStorage;
 
-    private String tempModule = "test";
+    private String tempModule = "test".toUpperCase();
 
     @AfterAll
     static void reset() throws IOException {
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
-        moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     /**
