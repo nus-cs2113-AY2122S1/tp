@@ -29,6 +29,7 @@ In addition, the `Command` class facilitates the execution of user instructions.
 Given below is a sequence diagram of how the core components of MedBot interact with each other when the user inputs the
 command `delete 1`.
 
+
 ![MedBot Architecture](diagrams/MedBot_architecture.png)
 
 ### Ui Component
@@ -49,6 +50,28 @@ parses `help delete` input given by a user.
 ![Ui Sequence Diagram](diagrams/Ui_sequence_diagram.png)
 
 ### Parser Component
+
+The Parser Component is responsible for parsing the user input
+and returning the corresponding command class to be executed.
+
+Here's a partial class diagram to better illustrate the Parser Component:
+
+![ParserClassDiagram](diagrams/ParserClassDiagram.png)
+
+How the `Parser` component works:
+* When `Parser` is called by MedBot to parse the user input, it will call the view
+specific parser `XYZCommandParser` depending on the current view type (`XYZ` is a placeholder
+for the specific command name eg. `PatientCommandParser`).
+* The `XYZCommandParser` will then create and return the corresponding
+`XYZcommand` object by utilising the `ParserUtils` to help it process the user input.
+
+The sequence diagram below better illustrates the working process described above:
+
+![ParserSequenceDiagram](diagrams/ParserSequenceDiagram.png)
+
+<em>(User is trying to add a patient's information in the PatientInfoView)</em>
+
+
 
 ### Scheduler Component
 

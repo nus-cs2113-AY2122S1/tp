@@ -163,7 +163,7 @@ public abstract class ParserUtils {
                 i++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MedBotParserException("too many specifiers");
+            throw new MedBotParserException("Too many attribute specifiers.");
         }
         //update exception handling ltr
         return specifiers;
