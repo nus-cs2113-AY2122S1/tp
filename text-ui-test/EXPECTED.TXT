@@ -35,9 +35,9 @@ Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
 	People involved: 
-	1. yikai 5.0
-	2. yuzhao 1.0
-	3. qian 2.0
+		1) yikai, USD $5.00
+		2) yuzhao, USD $1.00
+		3) qian, USD $2.00
 	Payer: yikai
 	Category: breakfast
 
@@ -45,8 +45,8 @@ Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
 	People involved: 
-	1. yikai 1.0
-	2. josh 1.0
+		1) yikai, USD $1.00
+		2) josh, USD $1.00
 	Payer: josh
 	Category: breakfast
 
@@ -54,9 +54,9 @@ Enter your command: 2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
 	People involved: 
-	1. yikai 0.33
-	2. josh 0.33
-	3. xiyuan 0.34
+		1) yikai, USD $0.33
+		2) josh, USD $0.33
+		3) xiyuan, USD $0.34
 	Payer: yikai
 	Category: lunch
 
@@ -64,9 +64,9 @@ Enter your command: 2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
 	People involved: 
-	1. yikai 0.33
-	2. josh 0.33
-	3. xiyuan 0.34
+		1) yikai, USD $0.33
+		2) josh, USD $0.33
+		3) xiyuan, USD $0.34
 	Payer: yikai
 	Category: lunch
 
@@ -74,8 +74,8 @@ Enter your command: 2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
 	People involved: 
-	1. yikai 1.0
-	2. josh 1.0
+		1) yikai, USD $1.00
+		2) josh, USD $1.00
 	Payer: josh
 	Category: breakfast
 
@@ -83,9 +83,9 @@ Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
 	People involved: 
-	1. yikai 5.0
-	2. yuzhao 1.0
-	3. qian 2.0
+		1) yikai, USD $5.00
+		2) yuzhao, USD $1.00
+		3) qian, USD $2.00
 	Payer: yikai
 	Category: breakfast
 
@@ -93,8 +93,8 @@ Enter your command: 3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
 	People involved: 
-	1. yikai 1.0
-	2. josh 1.0
+		1) yikai, USD $1.00
+		2) josh, USD $1.00
 	Payer: josh
 	Category: breakfast
 
@@ -107,32 +107,32 @@ Enter your command: List of Expenses:
 	2. d a c | 19 Oct 2021
 	3. d a c | 19 Oct 2021
 Enter your command: List of all Expenses in detail: 
-	c a b
+1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
 	People involved: 
-	1. yikai 5.0
-	2. yuzhao 1.0
-	3. qian 2.0
+		1) yikai, USD $5.00
+		2) yuzhao, USD $1.00
+		3) qian, USD $2.00
 	Payer: yikai
 	Category: breakfast
 
-	d a c
+2. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $1.00
 	People involved: 
-	1. yikai 0.33
-	2. josh 0.33
-	3. xiyuan 0.34
+		1) yikai, USD $0.33
+		2) josh, USD $0.33
+		3) xiyuan, USD $0.34
 	Payer: yikai
 	Category: lunch
 
-	d a c
+3. 	d a c
 	date: 19 Oct 2021
 	Amount Spent: USD $2.00
 	People involved: 
-	1. yikai 1.0
-	2. josh 1.0
+		1) yikai, USD $1.00
+		2) josh, USD $1.00
 	Payer: josh
 	Category: breakfast
 

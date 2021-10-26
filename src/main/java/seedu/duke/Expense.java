@@ -177,14 +177,15 @@ public class Expense {
 
     public String getPersonExpense() {
         StringBuilder returnString = new StringBuilder();
-        String name = null;
+        String name;
         String formattedSpace = "\t";
         for (Person p : personsList) {
             name = p.getName();
             returnString.append(formattedSpace);
-            returnString.append(personsList.indexOf(p) + 1).append(". ");
-            returnString.append(name).append(" ");
-            returnString.append(getAmountSplit().get(name));
+            returnString.append(formattedSpace);
+            returnString.append(personsList.indexOf(p) + 1).append(") ");
+            returnString.append(name).append(", ");
+            returnString.append(Ui.stringForeignMoney(getAmountSplit().get(name)));
             returnString.append(System.lineSeparator());
         }
         return returnString.toString();
