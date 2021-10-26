@@ -28,7 +28,6 @@ public class FailedCommand extends Command {
         case INVALID_DELETE: //Fallthrough
             invalidUserInputExecute();
             break;
-        case MISSING_ARG: // Fallthrough
         case MISSING_ARGS_EDIT: // Fallthrough
         case MISSING_ARGS_ADD: // Fallthrough
         case MISSING_ARGS_SEARCH: // Fallthrough
@@ -72,9 +71,6 @@ public class FailedCommand extends Command {
 
     private void missingUserInputExecute() {
         switch (type) {
-        case MISSING_ARG:
-            ExceptionTextUi.missingArgMessage();
-            break;
         case MISSING_ARGS_EDIT:
             ExceptionTextUi.missingArgEditMessage();
             break;

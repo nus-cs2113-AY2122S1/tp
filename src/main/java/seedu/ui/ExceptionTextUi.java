@@ -127,11 +127,6 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void missingArgMessage() {
-        String message = "There seems to be missing parameters in your request.\n" + "Please specify your command.";
-        printDoubleLineMessage(message);
-    }
-
     //@@author mayankp291
     public static void missingArgEditMessage() {
         String message = "There seems to be missing parameters in your request.\n"
@@ -168,9 +163,9 @@ public class ExceptionTextUi {
 
     //@@author mayankp291
     public static void missingIndexMessage() {
-        String message = "There seems to be missing index in your request.\n"
+        String message = "There seems to be missing or invalid index in your request.\n"
                 + "Please enter command in the following way: \n"
-                + "      <COMMAND_WORD> <INDEX>"
+                + "      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>\n"
                 + "Where <COMMAND_WORD> is rm or view";
         printDoubleLineMessage(message);
     }

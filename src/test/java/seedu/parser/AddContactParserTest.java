@@ -12,7 +12,6 @@ import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgAddException;
-import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,7 +35,7 @@ class AddContactParserTest {
 
     @Test
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
-            MissingDetailException, MissingArgException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
             InvalidTwitterUsernameException, InvalidEmailException, MissingArgAddException {
         inputUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw    twit -te   tel69  -e yoyo@gmail.com";
