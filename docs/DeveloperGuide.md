@@ -202,7 +202,7 @@ This component consist of the following classes:
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
-* Ensures that the command, flags and arguments are entered in the correct format.
+* Ensures that the command, flags and arguments are entered in the correct format.  
 
 #### Parser
 

@@ -27,6 +27,9 @@ public class SearchMapCommandParser {
 
         if (isNumeric(input)) {
             int index = Integer.parseInt(input);
+            if (index > universityMasterList.getSize() || index < 1) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            }
             university = universityMasterList.get(index - 1);
         } else {
             university = searchForUniversity(input, universityMasterList);
