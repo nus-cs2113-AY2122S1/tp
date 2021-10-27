@@ -26,4 +26,9 @@ public class GameUi extends TextUi {
                         + " seconds."
         );
     }
+
+    public void printGameMode1Progress(int a, int b) throws InterruptedException {
+        viewAnimateLeft("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
+    }
+
 }

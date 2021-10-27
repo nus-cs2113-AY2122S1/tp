@@ -10,8 +10,9 @@ import java.util.HashMap;
 public abstract class Game {
     protected final GameUi ui;
 
-    public ArrayList<String[]> displayedLines;
-    public ArrayList<String[]> userLines;
+    public ArrayList<String[]> displayedLines = new ArrayList<>();
+    public ArrayList<String[]> userLines = new ArrayList<>();
+    public double gameTime;
 
     public Game() {
         this.ui = new GameUi();
