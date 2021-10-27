@@ -9,18 +9,18 @@ expense 8.00 breakfast yikai,yuzhao,qian /c a b
 yikai
 5.00
 1.00
-2.00
+y
 expense 1.00 lunch yikai,josh,xiyuan /d a c
 19-10-2021
 yikai
 0.33
 0.33
-0.34
+y
 expense 2.00 breakfast yikai,josh /d a c
 19-10-2021
 josh
 1.00
-1.00
+y
 view filter category breakfast
 view filter category lunch
 view filter description d a c

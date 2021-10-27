@@ -19,18 +19,15 @@ Enter your command: budget was not recognised. Please try again after this proce
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-
-There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: There is USD $2.00 left to be assigned. How much did qian spend?: Your expense has been added successfully
+There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $2.00 to qian? (y/n): Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-
-There is USD $1.00 left to be assigned. How much did yikai spend?: There is USD $0.67 left to be assigned. How much did josh spend?: There is USD $0.34 left to be assigned. How much did xiyuan spend?: Your expense has been added successfully
+There is USD $1.00 left to be assigned. How much did yikai spend?: There is USD $0.67 left to be assigned. How much did josh spend?: Assign the remaining USD $0.34 to xiyuan? (y/n): Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-
-There is USD $2.00 left to be assigned. How much did yikai spend?: There is USD $1.00 left to be assigned. How much did josh spend?: Your expense has been added successfully
+There is USD $2.00 left to be assigned. How much did yikai spend?: Assign the remaining USD $1.00 to josh? (y/n): Your expense has been added successfully
 Enter your command: 1. 	c a b
 	date: 19 Oct 2021
 	Amount Spent: USD $8.00
