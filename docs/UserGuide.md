@@ -131,6 +131,29 @@ Date: 2021-08-20
 
 ### Adding a Loan: `add`
 
+Adds a new loan to a month.
+
+Format: `add -e n/<BORROWER_NAME> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
+
+* `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
+* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
+  system will be entered by default.
+
+Example of usage:
+
+`add -l n/Yap Wei Xuan a/500 d/2021-08-20`
+
+Expected outcome:
+
+```
+========================================================
+Loan successfully added!
+Borrower Name: Yap Wei Xuan
+Amount: $500.00
+Date: 2021-08-20
+========================================================
+```
+
 ## `edit` 
 
 Edits a budget or expenditure entry.
@@ -183,6 +206,28 @@ have been changed to $1000 with description of Chicken Rice.
 ```
 
 ### Edit Loan: `edit` 
+Edits the loan for a particular month.
+
+Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
+
+* `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+* `INDEX` must strictly be within the range of the total number of expenditure for that particular month, and cannot be empty.
+* `AMOUNT, DATE_OF_LOAN, BORROWER_NAME` are optional. If not specified, the values will not be changed for that specific parameter. However, at least one of these must be present.
+* `AMOUNT` if entered, can be entered with 2 decimal places.
+* `DATE_OF_EXPENDITURE` if entered, must strictly be in the form of _YYYY-MM-DD_.
+
+Example of usage:
+
+`edit -l m/10 i/2 a/1000 d/2021-10-12 n/Wei Hng`
+
+Expected outcome:
+
+```
+========================================================
+Loan has been successfully edited!
+New values: Wei Hng         | $1000.0       | 2021-10-12       
+========================================================
+```
 
 ## `year`
 
