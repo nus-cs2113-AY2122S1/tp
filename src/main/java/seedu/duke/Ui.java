@@ -360,7 +360,7 @@ public class Ui {
     }
 
     public static void autoAssignIndividualSpending() {
-        System.out.println("Finished allocating expense amount, but there are people involved that don't need to pay ");
+        System.out.println("Finished allocating expense amount. There are people involved that did not need to pay.");
         System.out.println();
     }
 

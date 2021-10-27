@@ -380,7 +380,6 @@ public class Parser {
     protected static void updateIndividualSpending(Expense expense) {
         boolean hasLogged = false;
         boolean shouldContinue = true;
-
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = getValidPersonInExpenseFromString(input, expense);
@@ -391,12 +390,11 @@ public class Parser {
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
                 double amountRemaining = expense.getAmountSpent() - total;
-                if (Math.abs(amountRemaining) < EPSILON) {
+                if (amountRemaining < EPSILON) {
                     if (!hasLogged) {
                         Ui.askUserToConfirm();
                         shouldContinue = getUserToConfirm();
                     }
-
                     if (shouldContinue) {
                         amountBeingPaid.put(person, 0d);
                         hasLogged = manageLog(hasLogged);
@@ -515,7 +513,7 @@ public class Parser {
     //@@author lixiyuan416
     private static boolean manageLog(boolean isLogDisplayed) {
         if (!isLogDisplayed) {
-            Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
+            Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split.");
             Ui.autoAssignIndividualSpending();
             isLogDisplayed = true;
         }
