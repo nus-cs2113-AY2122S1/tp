@@ -15,6 +15,14 @@ public class Flight {
         returnDate = values[4];
     }
 
+    public Flight(String flightId, String to, String from, String toDate, String fromDate) {
+        id = flightId;
+        toDestination = to;
+        fromDestination = from;
+        this.toDate = toDate;
+        this.fromDate = fromDate;
+    }
+
     public String getId() {
         return id;
     }

@@ -10,6 +10,6 @@ public class FindClientCommand extends Command {
     }
 
     public void execute() {
-        ui.showFindClient(clients, name);
+        ui.showFindClient(clients, clientPackages, name);
     }
 }
