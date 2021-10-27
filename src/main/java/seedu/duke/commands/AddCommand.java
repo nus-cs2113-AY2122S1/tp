@@ -1,14 +1,13 @@
 package seedu.duke.commands;
 
-import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.ADD_INVALID_FORMAT;
 import static seedu.duke.common.Messages.INVALID_VALUES;
 
+//@@author exetr
 /**
  * Class encapsulating an add command.
  */

@@ -2,6 +2,7 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+//@@author exetr
 public class Audio extends Item {
     private String artist;
     private String duration;

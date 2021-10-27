@@ -7,6 +7,7 @@ import java.util.Scanner;
 import static seedu.duke.common.Messages.LOGO;
 import static seedu.duke.common.Messages.WELCOME_MESSAGE;
 
+//@@author exetr
 /**
  * Class encapsulating input and output of the application.
  */

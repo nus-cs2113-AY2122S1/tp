@@ -5,22 +5,26 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
+import java.util.HashMap;
+
+import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
-import static seedu.duke.common.Messages.RESERVE_INVALID_FORMAT;
-import static seedu.duke.common.Messages.RESERVE_SUCCESS;
-import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.INVALID_ID;
-import static seedu.duke.data.Item.ARG_ID;
-import static seedu.duke.data.Item.ARG_LOANEE;
 
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
  */
 public class ReserveCommand extends Command {
-    // Format: reserve i/ID u/USERNAME
-    public static final String COMMAND_WORD = "reserve";
-    protected String args;
+    public static final String COMMAND_FORMAT = "  (!) Format: res i/ID u/USER";
+    public static final String COMMAND_WORD = "res";
+    public static final String SUCCESS_RES = "  (+) You have successfully reserved an item:";
+    public static final String ERR_RESERVED = "";
+    public static final String KEY_ID = "i";
+    public static final String KEY_USER = "u";
+
+    protected HashMap<String, String> args;
     protected String id;
     protected String username;
 
@@ -28,8 +32,31 @@ public class ReserveCommand extends Command {
      * Class Constructor.
      * @param args Arguments supplied by user in the loan command
      */
-    public ReserveCommand(String args) {
+    public ReserveCommand(HashMap<String, String> args) {
         this.args = args;
+        this.id = args.get(KEY_ID);
+        this.username = args.get(KEY_USER);
+    }
+
+    /**
+     * Checks for whether user has supplied any empty values any of the attributes.
+     * @return Boolean True if any attributes are missing
+     */
+    private Boolean checkMissingArgs() {
+        return id == null | username == null;
+    }
+
+    /**
+     * Checks for whether user supplied extra arguments, program will not record these
+     * additional arguments.
+     * @return Boolean True if any additional arguments detected
+     */
+    private Boolean checkAdditionalArgs() {
+        HashMap<String, String> tempArgs = args;
+        tempArgs.remove(null);
+        tempArgs.remove(KEY_ID);
+        tempArgs.remove(KEY_USER);
+        return tempArgs.size() > 0;
     }
 
     /**
@@ -39,16 +66,12 @@ public class ReserveCommand extends Command {
      * @throws LibmgrException when user input is invalid
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
-        // Check validity of arguments
-        if (!args.contains(ARG_ID) | !args.contains(ARG_LOANEE)) {
-            throw new LibmgrException(RESERVE_INVALID_FORMAT);
+        if (checkMissingArgs()) {
+            ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
+            return;
         }
-        // Process arguments
-        try {
-            id = args.substring(args.indexOf(ARG_ID) + ARG_ID.length(), args.indexOf(ARG_LOANEE)).strip();
-            username = args.substring(args.indexOf(ARG_LOANEE) + ARG_LOANEE.length()).strip();
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new LibmgrException(RESERVE_INVALID_FORMAT);
+        if (checkAdditionalArgs()) {
+            ui.print(WARN_ADDITIONAL_ARGS);
         }
 
         // Get item to be updated
@@ -59,7 +82,7 @@ public class ReserveCommand extends Command {
             toBeReserved.setLoanee(username);
             assert toBeReserved.getStatus() == RESERVED : "Status not set as reserved";
             assert toBeReserved.getLoanee() != null : "Loanee still null";
-            ui.print(RESERVE_SUCCESS, toBeReserved);
+            ui.print(SUCCESS_RES, toBeReserved);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);
         }
@@ -74,10 +97,6 @@ public class ReserveCommand extends Command {
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
             handleLoanCommand(ui, catalogue);
-        } catch (IndexOutOfBoundsException e) {
-            ui.print(INVALID_ID);
-        } catch (NullPointerException e) {
-            ui.print(INVALID_ID);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         }

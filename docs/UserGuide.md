@@ -8,10 +8,20 @@ done in an efficient manner.
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
-  - [Adding an item: `add`](#Adding-an-item)
-  - [Removing an item: `remove`](#Removing-an-item)
-  - [Editing an item: `edit`](#Editing-an-item)
-  - [Exiting the program: `exit`](#Exiting-the-program)
+    - [Adding an item: `add`](#Adding-an-item)
+        - [Adding an audio item: `add a`](#Adding-an-audio-item)
+        - [Adding a book item: `add b`](#Adding-a-book-item)
+        - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
+        - [Adding a video item: `add v`](#Adding-a-video-item)
+    - [List items: `list`]()
+    - [Search items: `search`]()
+    - [Reserve items: `res`]()
+    - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
+    - [Loan items: `loan`]()
+    - [Return items: `return`]()
+    - [Removing an item: `rm`](#Removing-an-item)
+    - [Editing an item: `edit`](#Editing-an-item)
+    - [Exiting the program: `exit`](#Exiting-the-program)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
@@ -24,12 +34,143 @@ done in an efficient manner.
 
 ## Features
 
+##### Notes about command formats
+
+> ℹ️ Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
+e.g. In `add b t/TITLE ...`, `TITLE` is a parameter that can be used like `add b t/Don Quixote ...`
+
+> ℹ️ Parameters can be in any order<br>
+e.g. `add a t/TITLE i/ID a/ARTIST d/DURATION` can be used as `add a a/ARTIST i/ID t/TITLE d/DURATION`
+
+> ⚠️ Parameters must be separated with a space<br>
+e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is invalid
+
 ### Adding an item
-Adds a new item to the catalogue. Supported item types are Book, Audio, Magazine and Video. 
+Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
-![UGAddCommand](img/UGAddCommand.png)
+#### Adding an audio item
+Add a new audio item to the catalogue
 
-### Editing an item 
+Format: `add a t/TITLE i/ID a/ARTIST d/DURATION`
+
+Example: `add a t/Thriller i/5920 a/Michael Jackson d/42:16`
+
+Expected Output:
+```
+> add a t/Thriller i/5920 a/Michael Jackson d/42:16
+  (+) Added new audio item to the catalogue
+  [A] 5920 | AVAILABLE | Thriller | Michael Jackson | 42:16
+```
+
+#### Adding a book item
+Add a new book item to the catalogue
+
+Format: `add b t/TITLE i/ID a/AUTHOR`
+
+Example: `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`
+
+Expected Output:
+```
+> add b t/To Kill a Mockingbird i/2551 a/Harper Lee
+  (+) Added new book item to the catalogue
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
+```
+
+#### Adding a magazine item
+Add a new magazine item to the catalogue
+
+Format: `add m t/TITLE i/ID p/PUBLISHER e/EDITION`
+
+Example: `add m t/Time Magazine i/58720a p/Time USA e/oct252021`
+
+Expected Output:
+```
+> add m t/Time Magazine i/58720a p/Time USA e/oct252021
+  (+) Added new magazine item to the catalogue
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+```
+
+#### Adding a video item
+Add a new video item to the catalogue
+
+Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
+
+Example: `add v t/Casino Royale i/095680 p/Sony Pictures e/144 minutes`
+
+Expected Output:
+```
+> add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes
+  (+) Added new video item to the catalogue
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
+
+### List items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Search items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Reserve items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Un-reserve items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Loan items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Return items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Editing an item
 Edits an attribute of an existing item in the catalogue
 
 Format: `edit ID MARKER/new attribute`
@@ -39,22 +180,34 @@ Format: `edit ID MARKER/new attribute`
 * For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
 * For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
 
-Examples of usage: 
+Examples of usage:
 
 `edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
 
-![UGEditCommand](img/UGEditCommand.png)
+Expected Output:
+```
+  [B] 123 | AVAILABLE | The Hunger Games | Suzanne Collins
+> edit 123 t/Harry Potter
+  (+) Edited item details:
+  [B] 123 | AVAILABLE | Harry Potter | Suzanne Collins
+```
+
 
 ### Removing an item
 Removes an existing item from the catalogue.
 
-Format: `remove i/ID`
+Format: `rm ID`
 
 * The item specified by `ID` will be deleted.
 
-Examples of usage:
+Example: `rm 095680`
 
-`remove i/012350`
+Expected Output:
+```
+> rm 095680
+  (+) Removed the following item:
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
 
 ### Exiting the program
 Exits the program.
@@ -63,10 +216,10 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: What happens if I mistype a command not recognised by the program? 
+**Q**: What happens if I mistype a command not recognised by the program?
 
 **A**: A message will be shown saying that the program does not recognise your command.
-You can then key in a command again. 
+You can then key in a command again.
 
 ## Command Summary
 
