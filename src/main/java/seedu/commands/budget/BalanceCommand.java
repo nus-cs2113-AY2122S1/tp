@@ -15,6 +15,6 @@ public class BalanceCommand extends Command {
      * @param budgetManager The budgeting manager that manages all the budget related operations.
      */
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
-        ui.printBalance(finances.getBalance());
+        ui.printBalance(finances.calculateBalance());
     }
 }

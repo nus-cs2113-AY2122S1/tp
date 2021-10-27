@@ -39,6 +39,23 @@ public class FinancialTracker {
     public double getBalance() {
         return balance;
     }
+
+    /**
+     * Returns balance of the financial tracker. This is different from getBalance() as it ensures balance will always
+     * be correct, especially when converting to different currencies.
+     *
+     * @return Balance of the financial tracker.
+     */
+    public double calculateBalance() {
+        double balance = 0;
+        for (Income income : incomes) {
+            balance += income.getValue();
+        }
+        for (Expense expense : expenses) {
+            balance -= expense.getValue();
+        }
+        return balance;
+    }
     
     public void addExpense(Expense expense) {
         int expenseSize = 0;
@@ -123,6 +140,9 @@ public class FinancialTracker {
         for (Expense expense : expenses) {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
+            if (totalExpense >= Double.MAX_VALUE) {
+                return 0;
+            }
         }
         assert totalExpense >= 0;
         return totalExpense;

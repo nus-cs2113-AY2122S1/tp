@@ -84,19 +84,22 @@ Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Expense: del_ex i/INDEX
 Listing Expense: list_ex
 Show Total Expense: total_ex
-Show Total Expense between 2 dates: btw_ex s/START_DATE e/END_DATE
+Show Total Expense between 2 dates (Date Format: DD/MM/YYYY): btw_ex s/START_DATE e/END_DATE
 Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Income: del_in i/INDEX
 Listing Income: list_in
 Show Total Income: total_in
-To Find Using Date: find YYYY-MM-DD
+To Find Using Date: find DD/MM/YYYY
 To Find Based On Keyword: find KEYWORD
 To Display Total Balance: balance
-Show Total Income between 2 dates: btw_in s/START_DATE e/END_DATE
+Show Total Income between 2 dates (Date Format: DD/MM/YYYY): btw_in s/START_DATE e/END_DATE
 To Set Budgets: set_budget c/CATEGORY a/AMOUNT
 To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
+To Clear All Expense and Income Entries: clear_all_entries
 To View Your Yearly Report: show_graph
+To change entries into a different currency: set_curr c/CURRENCY
+To check the currency that entries are currently in: check_curr
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
 </pre>
@@ -131,7 +134,6 @@ They might look something like this.
 <pre>-----------------------------------------------------------------------------------------------------
 You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
 Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
 You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
 Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
@@ -641,6 +643,33 @@ Format: `set_curr c/CURRENCY`
 - As of v2.0, StonksXD supports 2 different currencies: SGD and USD.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
+<details>
+<summary> Expected output in run window </summary>
+<br>
+Let's take the following budget limit for <code>FOOD</code> expenses as an example:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $10.00
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If you wish to convert the above (and all entries) to USD, simply enter <code>set_curr c/USD</code>. You will receive the following confirmation message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+All entries have been converted to USD!
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in USD!
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $7.40
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+To convert back to SGD, just enter <code>set_curr c/SGD</code> and all entries will revert back to their original denominations.
+</details>
+<br>
 
 ### Check current currency: `check_curr`
 
@@ -648,6 +677,17 @@ This shows you what currency setting you are currently on.
 
 Format: `check_curr`
 
+<details>
+<summary> Expected output in run window </summary>
+<br>
+If you are unsure what currency your values are in, just enter <code>check_curr</code> and it will show the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+You currency setting currently: SGD
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
 
 ### Terminate program: `end`
 
