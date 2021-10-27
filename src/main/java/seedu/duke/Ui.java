@@ -365,7 +365,7 @@ public class Ui {
     }
 
     public static void askUserToConfirm() {
-        System.out.print("There will be people involved that don't need to pay, are you sure? (y/n)");
+        System.out.print("There will be people involved that don't need to pay, are you sure? (y/n): ");
     }
 
     public static void expenseDateInvalid() {
