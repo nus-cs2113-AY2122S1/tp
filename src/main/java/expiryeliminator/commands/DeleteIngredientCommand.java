@@ -39,8 +39,6 @@ public class DeleteIngredientCommand extends Command {
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
-        // TODO: Don't allow deleting ingredient if there is a recipe that uses that ingredient
-
         assert ingredients != null : "Ingredient repository cannot be null";
         assert recipes != null : "Recipe list cannot be null";
 
