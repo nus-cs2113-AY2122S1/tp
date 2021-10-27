@@ -69,97 +69,28 @@ public class Parser {
         String params = commandAndParams[1];
         String dummy;
         String contactNum;
-        switch (command) {
-            case "bye":
-                if (!params.equals("")) {
-                    throw new TourPlannerException(ERROR_EXTRA_INPUT);
-                }
-                return new ByeCommand();
-            case "add":
-                if(params.contains("-c")) {
-                    if(!params.contains("@")) {
-                        throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
-                    }
-                    int index1 = params.indexOf("/cn");
-                    int index2 = params.lastIndexOf("/");
-                    if(index1 == index2) {
-                        dummy = params.substring(index1 + 3);
-                        contactNum = dummy.trim();
-                        for(int i = 0; i < contactNum.length(); i++) {
-                            char ch = contactNum.charAt(i);
-                            if(!(ch <= '9' && ch >= '0')) {
-                                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
-                            }
-                        }
-                    }
-                    else {
-                        dummy = params.substring(index1 + 3, index2);
-                        contactNum = dummy.trim();
-                        for(int i = 0; i < contactNum.length(); i++) {
-                            char ch = contactNum.charAt(i);
-                            if(!(ch <= '9' && ch >= '0')) {
-                                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
-                            }
-                        }
-                    }
-                }
-                if(params.contains("-t")) {
-                    int index1 = params.indexOf("/p");
-                    int index2 = params.lastIndexOf("/");
-                    String price;
-                    if(index1 == index2) {
-                        dummy = params.substring(index1 + 2);
-                        price = dummy.trim();
-                    }
-                    else {
-                        dummy = params.substring(index1 + 2, index2);
-                        price = dummy.trim();
-                    }
-                    for(int i = 0; i < price.length(); i++) {
-                        char ch = price.charAt(i);
-                        if(!(ch <= '9' && ch >= '0')) {
-                            throw new TourPlannerException(ERROR_PRICE_FORMAT);
-                        }
-                    }
-                }
-                if(params.contains("-f")) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM");
-                    int index1 = params.indexOf("/dt");
-                    int index2 = params.indexOf("/df");
-                    Date start = null, end = null;
-                    try {
-                        if (index1 > index2) {
-                            dummy = params.substring(index1 + 3).trim();
-                            start = formatter.parse(dummy);
-                            dummy = params.substring(index2 + 3, index1);
-                            end = formatter.parse(dummy);
-                        } else {
-                            dummy = params.substring(index2 + 3).trim();
-                            end = formatter.parse(dummy);
-                            dummy = params.substring(index1 + 3, index2);
-                            start = formatter.parse(dummy);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    if (end.before(start)) {
-                        throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
-                    }
-                }
-                return parseAdd(params);
-            case "list":
-                return parseList(params);
-            case "clear":
-                if (!params.equals("")) {
-                    throw new TourPlannerException(ERROR_EXTRA_INPUT);
-                }
-                return new ClearCommand();
-            case "find":
-                return parseFind(params);
-            case "sort":
-                return parseSort(params);
-            default:
-                throw new TourPlannerException(ERROR_INVALID_INPUT);
+        case "bye":
+            if (!params.equals("")) {
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
+            }
+            return new ByeCommand();
+        case "add":
+            return parseAdd(params);
+        case "cut":
+            return parseCut(params);
+        case "list":
+            return parseList(params);
+        case "clear":
+            if (!params.equals("")) {
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
+            }
+            return new ClearCommand();
+        case "find":
+            return parseFind(params);
+        case "sort":
+            return parseSort(params);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
