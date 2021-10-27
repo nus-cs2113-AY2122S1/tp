@@ -30,7 +30,7 @@ public class Duke {
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
         recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
-        recordList.statIntro(recordList);
+        // recordList.statIntro(recordList);
         boolean isExit = false;
 
         while (!isExit) {
