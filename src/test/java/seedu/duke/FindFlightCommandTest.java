@@ -25,10 +25,10 @@ public class FindFlightCommandTest {
     void findFlightCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Flight sqjpn = new Flight("SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00");
-        Flight sqkor = new Flight("SQ-KOR", "KOR", "SG",
-                "23/10/2021 18:00", "30/10/2021 03:00");
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
+                "20/10/2021 18:00", "21/10/2021 03:00"});
+        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG",
+                "23/10/2021 18:00", "30/10/2021 03:00"});
         testFlightList.add(sqjpn);
         testFlightList.add(sqkor);
         Command findFlight = new FindFlightCommand("SQ-JPN");
@@ -53,8 +53,8 @@ public class FindFlightCommandTest {
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
         Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Flight sqjpn = new Flight("SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00");
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
+                "20/10/2021 18:00", "21/10/2021 03:00"});
         ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
         dummyClientList.add(botuan);
         dummyTourList.add(jpn);
@@ -82,10 +82,10 @@ public class FindFlightCommandTest {
     void findFlightCommand_invalidData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Flight sqjpn = new Flight("SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00");
-        Flight sqkor = new Flight("SQ-KOR", "KOR", "SG",
-                "23/10/2021 18:00", "30/10/2021 03:00");
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
+                "20/10/2021 18:00", "21/10/2021 03:00"});
+        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG",
+                "23/10/2021 18:00", "30/10/2021 03:00"});
         testFlightList.add(sqjpn);
         testFlightList.add(sqkor);
         Command findFlight = new FindFlightCommand("SQ-ZBW");
