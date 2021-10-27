@@ -1,4 +1,5 @@
 //@@author marcusbory
+
 package seedu.storage;
 
 import seedu.contact.Contact;
