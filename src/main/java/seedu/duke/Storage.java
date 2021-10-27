@@ -74,7 +74,7 @@ public class Storage {
     }
 
     public static double formatForeignMoneyDouble(double money) {
-       return Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), money));
+        return Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), money));
     }
 
     public static double formatRepaymentMoneyDouble(double money) {

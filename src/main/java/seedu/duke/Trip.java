@@ -214,7 +214,7 @@ public class Trip {
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
                 + " (" + currTrip.getRepaymentCurrency() + " " + currTrip.getRepaymentCurrencySymbol()
-                + totalRepaymentAmountSpent + ") on "
+                + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
                 + expensesInvolved
                 + " expenses on the following categories: ");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
