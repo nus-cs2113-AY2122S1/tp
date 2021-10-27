@@ -643,6 +643,33 @@ Format: `set_curr c/CURRENCY`
 - As of v2.0, StonksXD supports 2 different currencies: SGD and USD.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
+<details>
+<summary> Expected output in run window </summary>
+<br>
+Let's take the following budget limit for <code>FOOD</code> expenses as an example:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $10.00
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If you wish to convert the above (and all entries) to USD, simply enter <code>set_curr c/USD</code>. You will receive the following confirmation message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+All entries have been converted to USD!
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in USD!
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $7.40
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+To convert back to SGD, just enter <code>set_curr c/SGD</code> and all entries will revert back to their original denominations.
+</details>
+<br>
 
 ### Check current currency: `check_curr`
 
@@ -650,6 +677,17 @@ This shows you what currency setting you are currently on.
 
 Format: `check_curr`
 
+<details>
+<summary> Expected output in run window </summary>
+<br>
+If you are unsure what currency your values are in, just enter <code>check_curr</code> and it will show the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+You currency setting currently: SGD
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
 
 ### Terminate program: `end`
 
