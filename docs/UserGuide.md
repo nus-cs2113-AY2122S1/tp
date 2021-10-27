@@ -488,7 +488,7 @@ Updated prescription information!
 
 ### Deleting prescriptions: `deleteprescription`
 
-If you made a mistake and want to delete a prescription record you may do so by using this command and specifying of the 
+If you made a mistake and want to delete a prescription record you may do so by using this command along with a specific 
 Prescription ID.
 
 Format: `deleteprescription i/PRESCRIPTION_ID`
@@ -627,7 +627,7 @@ Updated! Number of rows affected: 1
 
 ### Deleting an order: `deleteorder`
 
-If you made a mistake and want to delete an order, you may do so by using this command and specifying of the Order ID.
+If you made a mistake and want to delete an order, you may do so by using this command along with a specific Order ID.
 
 Format: `deleteorder i/ORDER_ID`
 
