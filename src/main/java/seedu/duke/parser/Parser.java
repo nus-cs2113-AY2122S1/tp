@@ -148,9 +148,13 @@ public class Parser {
     }
 
     private Command prepareListMonthCommand(String commandParams) {
-        System.out.println(commandParams);
         try {
-            String listOption = commandParams.substring(2, 5);
+            String listOption = null;
+            if (commandParams.length() >= 5) {
+                listOption = commandParams.substring(2, 5);
+            } else {
+                listOption = commandParams.substring(2);
+            }
             String upperCaseOnly = commandParams.replaceAll("[^A-Z]", "");
             Category category = Category.ALL;
             switch (upperCaseOnly) {
@@ -175,7 +179,6 @@ public class Parser {
             default:
                 category = Category.ALL;
             }
-            System.out.println(upperCaseOnly + " vs " + category);
             switch (listOption) {
             case ("all"):
                 return new ListRecordsCommand(category);
