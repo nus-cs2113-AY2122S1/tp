@@ -11,14 +11,20 @@ public class StorageUI {
     }
 
     public static void printFileReadException() {
+        MainUI.printSingleLine();
         System.out.println("Cannot read the file");
+        MainUI.printSingleLine();
     }
 
     public static void printFileWriteError() {
+        MainUI.printSingleLine();
         System.out.println("Cannot be written in the file!");
+        MainUI.printSingleLine();
     }
 
     public static void printOutOfBoundsException() {
+        MainUI.printSingleLine();
         System.out.println("Exception out of bounds array caught");
+        MainUI.printSingleLine();
     }
 }

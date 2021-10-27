@@ -33,7 +33,7 @@ public class Storage {
         IngredientParser ingredientParser = new IngredientParser();
         FinanceParser financeParser = new FinanceParser();
         if (!file.exists()) {
-            StorageUI.printFileNotFound();
+            //StorageUI.printFileNotFound();
         }
         try {
             Scanner fileReader = new Scanner(file);
@@ -58,7 +58,7 @@ public class Storage {
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
-            StorageUI.printFileReadException();
+            //StorageUI.printFileReadException();
         }
     }
 
