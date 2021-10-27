@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.Status;
+import seedu.duke.common.Status;
 
 public class Audio extends Item {
     private String artist;
@@ -59,7 +59,7 @@ public class Audio extends Item {
      */
     @Override
     public String toString() {
-        return "[A]" + super.toString() + super.separator + getArtist()
+        return "[A] " + super.toString() + super.separator + getArtist()
                 + super.separator + getDuration();
     }
 }
