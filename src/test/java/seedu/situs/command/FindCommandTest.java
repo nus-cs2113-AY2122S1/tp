@@ -15,7 +15,7 @@ public class FindCommandTest {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final String EXPECTED_MESSAGE_START = "I found these ingredients for \"xyz\":\n\t";
     private static final String EXPECTED_MESSAGE_END = ". Testxyz | Total Amount: 3.0 kg\n\t\t"
-            + "Amount Left: 3.0 kg | Expiry Date: 21/10/2021";
+            + "1.1. Amount Left: 3.0 kg | Expiry Date: 21/10/2021";
 
     @Test
     public void findCommandTest_ingredientNotFound_success() throws SitusException {

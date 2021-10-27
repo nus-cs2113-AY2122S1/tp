@@ -46,6 +46,7 @@ public class IngredientList {
      * Gets instance of ingredient list.
      *
      * @return ingredient list
+     * @throws SitusException if data file could not be accessed
      */
     public static IngredientList getInstance() throws SitusException {
         if (instance == null) {
@@ -108,6 +109,8 @@ public class IngredientList {
      * Adds ingredient to ingredient list.
      *
      * @param ingredient ingredient to be added
+     * @throws IOException if memory could not be written to
+     * @throws IndexOutOfBoundsException if an error occurred when adding ingredient
      */
     public void add(Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
         String ingredientName = ingredient.getName();
@@ -129,20 +132,20 @@ public class IngredientList {
     //@@author AayushMathur7
     /**
      * Subtracts amount from total ingredient amount.
-     * @param ingredientName name of ingredient
+     * @param groupNumber group number of ingredient
      * @param subtractAmount amount to be subtracted from total amount
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public void subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
+    public void subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
             SitusException, IOException {
         try {
             int i = 0;
-            int ingredientIndex = findIngredientIndexInList(ingredientName);
+            IngredientGroup currentGroup = getIngredientGroup(groupNumber);
+            int ingredientIndex = findIngredientIndexInList(currentGroup.getIngredientGroupName());
             if (ingredientIndex < 0) {
                 throw new SitusException("Ingredient not found!");
             }
-            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
 
             if (currentGroup.getTotalAmount() < subtractAmount) {
                 throw new SitusException(INVALID_SUBTRACT);
@@ -188,33 +191,21 @@ public class IngredientList {
     /**
      * Removes an ingredient from ingredient group.
      *
-     * @param ingredientName the ingredient name to remove
-     * @param expiryDate the expiration date of the removed ingredient
+     * @param groupNumber the group number of the ingredient to remove
+     * @param ingredientNumber the number of the ingredient within group to remove
      * @return an ingredient object of the removed ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public Ingredient removeIngredientFromGroup(String ingredientName, LocalDate expiryDate)
+    public Ingredient removeIngredientFromGroup(int groupNumber, int ingredientNumber)
             throws SitusException, IOException {
         Ingredient removedIngredient;
-        int groupIndexToRemove = findIngredientIndexInList(ingredientName);
 
-        if (groupIndexToRemove < 0) {
-            throw new SitusException(INGREDIENT_NOT_FOUND);
-        }
+        removedIngredient = getIngredientGroup(groupNumber)
+                .remove(ingredientNumber);
 
-        int ingredientIndexToRemove = getIngredientGroup(groupIndexToRemove + 1)
-                .findIngredientIndexByExpiry(expiryDate);
-
-        if (ingredientIndexToRemove < 0) {
-            throw new SitusException("No matching ingredient and expiry date found");
-        }
-
-        removedIngredient = getIngredientGroup(groupIndexToRemove + 1)
-                .remove(ingredientIndexToRemove + 1);
-
-        if (getIngredientGroup(groupIndexToRemove + 1).getIngredientGroupSize() <= 0) {
-            ingredientList.remove(groupIndexToRemove);
+        if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
+            ingredientList.remove(groupNumber - 1);
         }
 
         storage.writeIngredientsToMemory(ingredientList);
@@ -241,32 +232,23 @@ public class IngredientList {
     /**
      * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
      *
-     * @param updatedIngredient to be updated ingredient
+     * @param groupNumber group number of ingredient to be updated
+     * @param ingredientNumber number of ingredient within group to be updated
+     * @param newAmount the new amount of the ingredient to be updated
+     * @return the updated ingredient
      * @throws SitusException index out of bounds, cannot access
-     * @return expiryIsRepeated boolean of an ingredient existing with a give expiry date
+     * @throws IOException if the ingredient list could not be saved to memory
      */
-    public boolean update(Ingredient updatedIngredient) throws SitusException, IOException {
+    public Ingredient update(int groupNumber, int ingredientNumber, double newAmount)
+            throws SitusException, IOException {
         int i;
-        boolean expiryIsRepeated = false;
-        int ingredientIndex = findIngredientIndexInList(updatedIngredient.getName());
 
-        if (ingredientIndex < 0) {
-            throw new SitusException(INGREDIENT_NOT_FOUND);
-        }
-
-        IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
-        for (i = 0; i < currentGroup.getIngredientGroupSize(); i++) {
-            if (updatedIngredient.getExpiry().equals((currentGroup.getIngredientExpiry(i + 1)))) {
-                if (updatedIngredient.getAmount() <= 0) {
-                    throw new SitusException(NEGATIVE_NUMBER);
-                }
-                currentGroup.updateTotalAmount(currentGroup.get(i + 1).getAmount(), updatedIngredient.getAmount());
-                (currentGroup.get(i + 1)).setAmount(updatedIngredient.getAmount());
-                expiryIsRepeated = true;
-            }
-        }
+        IngredientGroup updatedGroup = getIngredientGroup(groupNumber);
+        Ingredient updatedIngredient = updatedGroup.get(ingredientNumber);
+        updatedGroup.updateTotalAmount(updatedIngredient.getAmount(), newAmount);
+        updatedIngredient.setAmount(newAmount);
         storage.writeIngredientsToMemory(ingredientList);
-        return expiryIsRepeated;
+        return updatedIngredient;
     }
 
 }

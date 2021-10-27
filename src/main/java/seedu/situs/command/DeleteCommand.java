@@ -12,35 +12,30 @@ public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
-    private static final String INVALID_DATE_FORMAT = "Please write the date in this format: dd-mm-yyyy\n"
-            + "e.g 14/10/2021";
 
-    private String ingredientName;
-    private String ingredientExpiryDate;
+    private int groupNumber;
+    private int ingredientNumber;
 
     /**
      * Constructor method for <code>DeleteCommand</code>.
      *
-     * @param ingredientName the ingredient name to remove from the list
-     * @param ingredientExpiryDate the ingredient expiry date as String
+     * @param groupNumber the group number of the ingredient to remove from the list
+     * @param ingredientNumber the ingredient number to remove
      */
-    public DeleteCommand(String ingredientName, String ingredientExpiryDate) {
-        this.ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
-        this.ingredientExpiryDate = ingredientExpiryDate;
+    public DeleteCommand(int groupNumber, int ingredientNumber) {
+        this.groupNumber = groupNumber;
+        this.ingredientNumber = ingredientNumber;
     }
 
     @Override
     public String run() throws SitusException {
         try {
             String resultMsg;
-            LocalDate expiryDate = Ingredient.stringToDate(ingredientExpiryDate);
             Ingredient removedIngredient = IngredientList.getInstance()
-                    .removeIngredientFromGroup(ingredientName, expiryDate);
+                    .removeIngredientFromGroup(groupNumber, ingredientNumber);
 
-            resultMsg = DELETE_MESSAGE + removedIngredient.getName() + " | " + removedIngredient.toString();
+            resultMsg = DELETE_MESSAGE + removedIngredient.getName() + " | " + removedIngredient;
             return resultMsg;
-        } catch (DateTimeParseException e) {
-            throw new SitusException(INVALID_DATE_FORMAT);
         } catch (IOException e) {
             throw new SitusException(STORAGE_ERROR_MESSAGE);
         }

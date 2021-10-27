@@ -23,7 +23,7 @@ This user guide will give you a quick rundown of all the things SITUS can do for
   For example, in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
   > Note: Ensure *ALL* parameters are specified when entering the command. There are no optional parameters for commands
-  > apart from [the `date` command](#210-view-set-current-date).
+  > apart from [the `date` command](#211-view-set-current-date).
 * All information about ingredients expiring in **x** days is calculated based on the current date of the system.
 
 ## Contents
@@ -33,8 +33,8 @@ This user guide will give you a quick rundown of all the things SITUS can do for
 &nbsp;&nbsp;[2.1. Help](#21-viewing-help) <br>
 &nbsp;&nbsp;[2.2. Add Ingredients](#22-add-ingredients) <br>
 &nbsp;&nbsp;[2.3. List Ingredients](#23-list-ingredients) <br>
-&nbsp;&nbsp;[2.4. Update Ingredients](#24-update-ingredients-to-be-updated) <br>
-&nbsp;&nbsp;[2.5. Subtract Ingredients Stock](#25-subtract-ingredient-stock-to-be-added) <br>
+&nbsp;&nbsp;[2.4. Update Ingredients](#24-update-ingredients) <br>
+&nbsp;&nbsp;[2.5. Subtract Ingredients Stock](#25-subtract-ingredient-stock) <br>
 &nbsp;&nbsp;[2.6. Delete Ingredients](#26-delete-ingredients) <br>
 &nbsp;&nbsp;[2.7. Search Ingredients By Expiry](#27-search-ingredients-by-expiry) <br>
 &nbsp;&nbsp;[2.8. Search Ingredients By Name](#28-search-ingredients-by-name) <br>
@@ -70,7 +70,7 @@ ____________________________________________________
 
 This section covers the commands SITUS can execute - how you can use them and the expected outputs. 
 
-### 2.1. Viewing Help [to update]
+### 2.1. Viewing Help
 
 You can view a quick summary of SITUS's commands and their syntax from within SITUS.
 
@@ -84,9 +84,9 @@ These are the commands I can currently carry out:
 	(intended action - command format)
 	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
 	2. list all ingredients - list
-	3. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
-	4. subtract an ingredient's stock - subtract n/INGREDIENT_NAME a/AMOUNT
-	5. delete an ingredient - delete INDEX
+	3. update an ingredient - update GROUP_INDEX.INGREDIENT_INDEX a/AMOUNT
+	4. subtract an ingredient's stock - subtract GROUP_INDEX a/AMOUNT
+	5. delete an ingredient - delete GROUP_INDEX.INGREDIENT_INDEX
 	6. search ingredients by expiry - expire DATE
 	7. search ingredients by name - find INGREDIENT_NAMES
 	8. view alerts - alert ALERT_TYPE
@@ -108,11 +108,9 @@ The parameters used in the command are:
 * `AMOUNT`: the ingredient amount to be added, in kilograms.
 * `EXPIRY`: the expiration date of ingredient, in format of `dd/mm/yyyy`.
 
-Examples:
-* `add n/carrot a/20 e/01/03/2022`
-* `add n/potato a/5 e/25/12/2021`
+Examples: `add n/carrot a/20 e/01/03/2022`, `add n/potato a/5 e/25/12/2021`
 
-Output:
+Outputs:
 ```
 add n/carrot a/20 e/01/03/2022
 ____________________________________________________
@@ -143,14 +141,16 @@ Output:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-    1. Carrot | Total Amount: 20.0 kg
-        Amount Left: 20.0 kg | Expiry Date: 01/03/2022
-	    
-    2. Potato | Total Amount: 5.0 kg
-        Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	1. Carrot | Total Amount: 20.0 kg
+		1.1. Amount Left: 20.0 kg | Expiry Date: 01/03/2022
 
+	2. Potato | Total Amount: 5.0 kg
+		2.1. Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
+
+> Note: You are recommended to use `list` before most of SITUS's commands as many of them require the index of the 
+> ingredients (the numbers before each ingredient in the list, such as 1.1 or 2.1).
 
 ### 2.4. Update Ingredients
 
@@ -158,41 +158,43 @@ You can update the amount, unit and expiry of an ingredient in your ingredient l
 changes.
 
 Command:
-`update n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
+`update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: the ingredient name to update
+* `GROUP_INDEX`: the index of the group the ingredient to update is in
+* `INGREDIENT_INDEX` : the index of the ingredient to update within its group
 * `AMOUNT`: the ingredient amount to be updated, in kilograms
-* `EXPIRY`: the updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
 
-Example: `update n/carrot a/100 e/05/04/2022`
+Example: `update 1.1 a/100`
 
-Outputs:
+Output (using list shown in the [list section](#23-list-ingredients)):
 ```
-update n/carrot a/100 e/05/04/2022
+update 1.1 a/100
 ____________________________________________________
 Got it. This ingredient has been updated:
-    Carrot | Amount Left: 100.0 kg | Expiry Date: 05/04/2022
+	Carrot | Amount Left: 100.0 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
 ### 2.5. Subtract Ingredient Stock
 
-You can subtract a given amount from an ingredient's total amount.
+You can subtract a given amount from an ingredient's total amount if you have used/ sold that amount. If the amount 
+given is equal to the existing stock of the ingredient, the ingredient is automatically removed from the list (instead 
+of displaying zero stock for the item.)
 
-Command: `subtract n/[INGREDIENT_NAME] a/[AMOUNT]`
+Command: `subtract GROUP_INDEX a/[AMOUNT]`
 
 The parameters used in the command are:
 
-* `INGREDIENT_NAME`: the ingredient name to subtract
+* `GROUP_INDEX`: the index of the ingredient group to subtract from
 * `AMOUNT`: the ingredient amount to be subtracted, in kilograms
 
-Example: `subtract n/carrot a/100`
+Example: `subtract 1 a/100`
 
-Output:
+Output (using list shown in the [list section](#23-list-ingredients)):
 
 ```
-subtract n/carrot a/100
+subtract 1 a/100
 ____________________________________________________
 Got it. 100.0 kg has been subtracted from Carrot
 ____________________________________________________
@@ -201,25 +203,22 @@ ____________________________________________________
 ### 2.6. Delete Ingredients
 
 You can delete an ingredient from the ingredient list based on its name and expiry date in the list if you wish to stop 
-tracking it.
+tracking it (e.g. if that batch has expired).
 
-> Note: You are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the 
-> ingredient you intend to remove.
-
-Command: `delete n/[INGREDIENT_NAME] e/[EXPIRY_DATE]`
+Command: `delete GROUP_INDEX.INGREDIENT_INDEX`
 
 The parameter used in the command are:
-* `INGREDIENT_NAME`: the ingredient name to remove
-* `EXPIRY_DATE`: the expiry date of the ingredient to remove, in format of `dd/mm/yyyy`
+* `GROUP_INDEX`: the index of the group the ingredient to delete is in
+* `INGREDIENT_INDEX` : the index of the ingredient to update within its group
 
-Example: `delete n/carrot e/01/03/2022`
+Example: `delete 1.1`
 
-Output:
+Output (using list shown in the [list section](#23-list-ingredients)):
 ```
-delete n/carrot e/01/03/2022
+delete 1.1
 ____________________________________________________
 Got it. This ingredient has been removed:
-    Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 50.0 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -234,15 +233,22 @@ The parameter used in the command is:
 
 Example: `expire 26/12/2022`
 
-Current list: 
+This is the current list: 
 ```
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-    2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	1. Potato | Total Amount: 0.6 kg
+		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+
+	2. Carrot | Total Amount: 200.0 kg
+		2.1. Amount Left: 200.0 kg | Expiry Date: 01/03/2022
+
+	3. Radish | Total Amount: 43.8 kg
+		3.1. Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+
+	4. Tomato | Total Amount: 23.7 kg
+		4.1. Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
@@ -268,21 +274,24 @@ Command: `find [INGREDIENT_NAMES]`
 
 Examples: `find radish`, `find potato tomato`
 
-Output:
+Outputs:
 ```
 find carrot
 ____________________________________________________
-I found these ingredients for "radish":
-    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+I found these ingredients for "carrot":
+	2. Carrot | Total Amount: 200.0 kg
+		2.1. Amount Left: 200.0 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 ```
 find potato tomato
 ____________________________________________________
 I found these ingredients for "potato":
-    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	1. Potato | Total Amount: 0.6 kg
+		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
 I found these ingredients for "tomato":
-    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	4. Tomato | Total Amount: 23.7 kg
+		4.1. Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
@@ -298,19 +307,7 @@ There are 3 possible `[ALERT_TYPE]`:
 2. `stock`: displays all ingredients with stock lower than the threshold value
 3. `all`: displays both of the above
 
-Full Ingredient List: 
-```
-list
-____________________________________________________
-Here is the list of the ingredients currently in inventory:
-    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-    2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
-____________________________________________________
-```
-
-Output:
+Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry):
 ```
 alerts expiry
 ____________________________________________________
@@ -319,19 +316,22 @@ ____________________________________________________
 alerts stock
 ____________________________________________________
 There are 1 ingredients with stock less than 5.0 kg
-    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	Potato | Total Amount: 0.6 kg
+		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
 ____________________________________________________
 ```
 
 ### 2.10. Set thresholds
 
-You can set the expiry threshold or the stock threshold for the [alerts](#27-display-alerts) command.
+You can set the expiry threshold or the stock threshold for the [alerts](#29-display-alerts) command.
 
 Command: `set [TYPE] [NEW_VALUE]`
 
 The parameters used in the command are:
 * `TYPE`: either `expiry` or `stock`
-* `NEW_VALUE`: the new threshold for which alerts will be displayed
+* `NEW_VALUE`: the new threshold for which alerts will be displayed (in days for `expiry` and kilograms for `stock`)
+
+Examples: `set expiry 30`, `set stock 4.0`
 
 Outputs:
 ```
@@ -354,10 +354,12 @@ You can view or set SITUS's current date to ensure it matches the actual date.
 
 Command: `date [NEW_DATE]`
   * `NEW_DATE`: The date in the format of `dd/mm/yyyy`. 
-  * To view current date: Leave field empty
-  * To set a new current date: Key in the new date
+  * To view current date, leave this field empty
+  * To set a new current date, key in the new date
 
-Output:
+Examples: `date`, `date 01/01/2022`
+
+Outputs:
 ```
 date
 ____________________________________________________
@@ -389,7 +391,8 @@ ____________________________________________________
 
 **Q**: How do I save my ingredient list?
 
-**A**: The ingredient list is automatically saved after any operations that edits its contents. They are saved under `data\"ingredients.txt"`
+**A**: The ingredient list is automatically saved after any operations that edits its contents. They are saved under 
+`data\"ingredients.txt"`
 
 **Q**: How do I transfer my data to another computer?
 
@@ -398,16 +401,19 @@ ____________________________________________________
 
 ## 4. Command Summary
 
+The following table shows a summary of all of SITUS's commands and links to their sections for your convenience.
+
 | Action | Command |
 |---|---|
-| Add ingredient | `add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]` |
-| List ingredients | `list` |
-| Update ingredient | `update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]` |
-| Delete ingredient | `delete [INGREDIENT_NUMBER]` |
-| Show expiring ingredients | `expire [DATE]` |
-| Show alerts | `alert [ALERT_TYPE]` |
-| Set thresholds | `set [TYPE] [NEW_VALUE]` |
-| Search for ingredients | `find [INGREDIENT_NAMES]` |
-| View/set current date | `date [NEW_DATE]` |
-| Exit program | `exit` |
-| View help | `help` |
+| [View help](#21-viewing-help) | `help` |
+| [Add ingredient](#22-add-ingredients) | `add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]` |
+| [List ingredients](#23-list-ingredients) | `list` |
+| [Update ingredient](#24-update-ingredients) | `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]` |
+| [Subtract Ingredients Stock](#25-subtract-ingredient-stock) | `subtract GROUP_INDEX a/[AMOUNT]` | 
+| [Delete ingredient](#26-delete-ingredients) | `delete GROUP_INDEX.INGREDIENT_INDEX` |
+| [Search Ingredients By Expiry](#27-search-ingredients-by-expiry) | `expire [DATE]` |
+| [Search Ingredients By Name](#28-search-ingredients-by-name) | `find [INGREDIENT_NAMES]` |
+| [Display Alerts](#29-display-alerts) | `alert [ALERT_TYPE]` |
+| [Set Thresholds](#210-set-thresholds) | `set [TYPE] [NEW_VALUE]` |
+| [View/ Set Current Date](#211-view-set-current-date)] | `date [NEW_DATE]` |
+| [Exit Program](#212-exit-program)] | `exit` |

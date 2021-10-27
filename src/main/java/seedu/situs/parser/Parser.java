@@ -49,10 +49,14 @@ public class Parser {
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
+    private static final String DELETE_DELIM = "[ .]";
+    private static final String UPDATE_DELIM = " \\s|\\.|a/";
+    private static final String SUBTRACT_DELIM = " \\s|a/";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
-    private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 3;
-    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 4;
+    private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 2;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 3;
+    private static final int DELETE_COMMAND_ARGUMENT_COUNT = 3;
 
 
     public static boolean isExit(String command) {
@@ -146,7 +150,7 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws SitusException {
-        String[] details = command.split(DELIMITER);
+        String[] details = command.replace(COMMAND_UPDATE, "").split(UPDATE_DELIM);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -154,7 +158,7 @@ public class Parser {
 
         assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
 
-        for (int i = 1; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
+        for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -162,19 +166,15 @@ public class Parser {
         }
 
         try {
-            String ingredientName = details[1];
-            double ingredientAmount = Double.parseDouble(details[2]);
-            LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
+            int groupNumber = Integer.parseInt(details[0]);
+            int ingredientNumber = Integer.parseInt(details[1]);
+            double newAmount = Double.parseDouble(details[2]);
 
-            Ingredient updatedIngredient =
-                    new Ingredient(ingredientName, ingredientAmount, ingredientExpiry);
-            String resultMsg = new UpdateCommand(updatedIngredient).run();
+            String resultMsg = new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
 
             return resultMsg;
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
-        } catch (DateTimeParseException e) {
-            throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
@@ -216,7 +216,7 @@ public class Parser {
     }
 
     private static String parseSubtractCommand(String command) throws SitusException {
-        String[] details = command.split("n/|a/");
+        String[] details = command.replace(COMMAND_SUBTRACT, "").split(SUBTRACT_DELIM);
 
         if (details.length != SUBTRACT_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -224,20 +224,17 @@ public class Parser {
 
         assert (details.length == SUBTRACT_COMMAND_ARGUMENT_COUNT);
 
-        for (int i = 1; i < SUBTRACT_COMMAND_ARGUMENT_COUNT; i++) {
+        for (int i = 0; i < SUBTRACT_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
-        String ingredientName = details[1];
-        double subtractAmount = Double.parseDouble(details[2]);
-        return new SubtractCommand(ingredientName, subtractAmount).run();
+        int groupNumber = Integer.parseInt(details[0]);
+        double subtractAmount = Double.parseDouble(details[1]);
+        return new SubtractCommand(groupNumber, subtractAmount).run();
     }
-
-
-
 
     /**
      * Calls and executes the {@code list} command.
@@ -257,21 +254,22 @@ public class Parser {
      * @throws SitusException if trying to access non-existing ingredients
      */
     private static String parseDeleteCommand(String command) throws SitusException {
-        String[] details = command.split("n/|e/");
+        String[] details = command.split(DELETE_DELIM);
 
-        if (details.length != 3) {
+        if (details.length != DELETE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-
+        int[] detailsToInt = new int[2];
         for (int i = 1; i < details.length; i++) {
-            details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
+            details[i] = details[i].trim();
+            detailsToInt[i - 1] = Integer.parseInt(details[i]);
         }
 
-        return new DeleteCommand(details[1], details[2]).run();
+        return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
     }
 
     /**
