@@ -186,13 +186,16 @@ public class Trip {
     }
     //@@author
 
+    //@@author itsleeqian
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
+        double totalRepaymentAmountSpent = 0;
+        Trip currTrip = Storage.getOpenTrip();
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
-            if (e.getPersonsList().contains(person)) {
+            if (containsPerson(e.getPersonsList(), person.getName())) {
                 currentAmount = e.getAmountSplit().get(person.getName());
                 String currentCategory = e.getCategory();
                 totalAmountSpent += currentAmount;
@@ -206,17 +209,39 @@ public class Trip {
                 }
             }
         }
+        // To resolve rounding error
+        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
+            totalRepaymentAmountSpent += Storage.formatRepaymentMoneyDouble(
+                    set.getValue() / currTrip.getExchangeRate());
+        }
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
-                + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")"
-                + " on "
+                + " (" + currTrip.getRepaymentCurrency() + " " + currTrip.getRepaymentCurrencySymbol()
+                + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
                 + expensesInvolved
-                + " expenses in the following split: ");
+                + " expenses on the following categories: ");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
-                    + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")");
+                    + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");
         }
     }
+
+    /**
+     * Returns true if personsList contains a person with a specific name
+     * This is to replace the list.contains() method due to bugs with json deserialization
+     * @param personsList list of persons to check
+     * @param name the name to check for
+     * @return true if personsList contains a person with a specific name
+     */
+    public boolean containsPerson(ArrayList<Person> personsList, String name) {
+        for (Person person : personsList) {
+            if (person.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //@@author
 
 
     public LocalDate getDateOfTrip() {
