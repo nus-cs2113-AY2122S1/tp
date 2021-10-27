@@ -207,7 +207,7 @@ public class Goal {
     public String getGoalTypeCharacter() {
         switch (this.goalType) {
         case SLEEP:
-            return "[SL]]";
+            return "[SL]";
         case FOOD:
             return "[FD]";
         case EXERCISE:

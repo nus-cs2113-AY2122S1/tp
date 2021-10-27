@@ -45,4 +45,21 @@ public class AddHabitCommand extends AddCommand {
         }
     }
 
+    /**
+     * Getter for Habit (Used in JUnit test).
+     *
+     * @return New habit to be added to specified goal number.
+     */
+    public Habit getHabit() {
+        return habit;
+    }
+
+    /**
+     * Getter for goal index (Used in JUnit test).
+     *
+     * @return Goal index to add new habit to.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
+    }
 }

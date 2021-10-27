@@ -39,4 +39,12 @@ public class AddGoalCommand extends AddCommand {
         }
     }
 
+    /**
+     * Getter for goal (Used in JUnit test).
+     *
+     * @return New goal to be added to goalList.
+     */
+    public Goal getGoal() {
+        return goal;
+    }
 }
