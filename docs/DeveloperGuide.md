@@ -31,9 +31,15 @@ Gonna to change this .puml diagram later - zhansen
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
-The top-level logic of view statistics feature resides in ViewStatistics. It implements the Command
-interface. The key methods in the ViewStatistics class is
-* `retrieveStatistics()` - Decides which of the 3 methods below to run
+The top-level logic of view statistics feature resides in ViewCommand. It implements the Command
+interface. The key method of the class is `executeCommand()`.  
+`executeCommand()` logic:
+1. Calls the retrieveStatistics() method of StatisticsManager to get the statistics.
+2. Calls the displayStatistics() method of ViewCommandUi to display the statistics retrieved.
+<!-- -->
+StatisticsManager performs the logic for processing the game records to obtain the statistics.  
+Its key methods are:  
+* `retrieveStatistics()` - Decides which of the three methods below to run
 * `calculateBestStatistics()` - Returns the best statistics over the past n games
 * `calculateWorstStatistics()` - Returns the worst statistics over the past n games
 * `calculateAverageStatistics()` - Returns the average statistics over the past n games
@@ -42,27 +48,27 @@ Given below is an example usage scenario and how the program implements the feat
 
 Step 1: The user launches the application (scenario assumes that there are several game records already stored in multiple files). 
 
-Step 2: The user executes `view -m best -g game error -n 9` to view his/her best statistics for the error game mode over the past 9 games. 
+Step 2: The user executes `view -m best -g time -n 9` to view his/her best statistics for the error game mode over the past 9 games. 
 
 Step 3: A ViewCommand object is then instantiated.  
 
 ![Alt text](uml/ViewStatistics-1.drawio.svg)
 
-Step 4. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.  
+Step 4. ViewCommand calls the retrieveStatistics() method of StatisticsManager.  
 ![Alt text](uml/ViewStatistics-2.drawio.svg)
 
-
-Step 5: RetrieveStatisticsManager creates a GameRecordsManager object.
+Step 5: StatisticsManager creates a GameRecordsManager object.
 * The constructor of GameRecordsManager calls the readGameRecords() method of the Storage class to retrieve the gamer's past game records from the text files.
 <!-- -->
 ![Alt text](uml/ViewStatistics-3.drawio.svg)
-Step 6. RetrieveStatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
+Step 6. StatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
+* Calculated statistics is returned.
 
-Step 7. RetrieveStatisticsManager calls displayStatistics of the ViewCommandUI class to display the statistics.
+Step 7. ViewCommand calls the displayStatistics() method of the ViewCommandUi class to display the statistics.
 ![Alt test](uml/ViewStatistics-4.drawio.svg)
 
 
-The following sequence diagram shows how the above scenario is executed
+The following sequence diagram shows how the above scenario is executed.
 ![Alt test](uml/ViewStatistics-5.drawio.svg)
 
 
@@ -71,8 +77,8 @@ The following sequence diagram shows how the above scenario is executed
 * One implementation considered is to do away with the retrieveStatistics() method and immediately call one of calculateBestStatistics,
 calculateWorstStatistics() or calculateAverageStatistics() based on the gamer's imput using a switch statement. This implementation choice 
 was not used because it violates the Single Responsibility Principle and does not do SLAP well.
-* Another implementation considered was for HistoryManager to do the main logic. This implementation was not done as it violates the
-Single Responsibility Principle
+* Another implementation considered was for GameRecordsManager to do the main logic. This implementation was not done as it violates the
+Single Responsibility Principle.
 <!-- -->
 
 ## Product scope
