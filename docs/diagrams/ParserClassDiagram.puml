@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+together {
+    abstract class SingleArgParser<T> {
+        +parse(argString: String) : T
+    }
+    abstract class MultipleArgParser<T> extends SingleArgParser {
+        +parse(argList: ArrayList<String>) : ArrayList<T>
+    }
+    class ExpiryDateParser<LocalDate> extends SingleArgParser {
+        +parse(argString: String) : LocalDate
+    }
+    class IngredientParser<String> extends MultipleArgParser {
+        +parse(argString: String) : String
+    }
+    class QuantityParser<Integer> extends MultipleArgParser {
+        +parse(argString: String) : Integer
+    }
+    class RecipeParser<String> extends MultipleArgParser {
+        +parse(argString: String) : String
+    }
+    class UnitParser<String> extends SingleArgParser {
+        +parse(argString: String) : String
+    }
+}
+
+together {
+    abstract class Prefix {
+    #prefix : String
+    +getPrefix() : String
+}
+class SingleArgPrefix extends Prefix {
+    +SingleArgPrefix(prefix: String)
+}
+class MultipleArgPrefix extends Prefix {
+    +MultipleArgPrefix(singleArgPrefix: SingleArgPrefix)
+}
+class OptionalArgPrefix extends SingleArgPrefix {
+    +OptionalArgPrefix(prefix : String)
+    +OptionalArgPrefix(singleArgPrefix: SingleArgPrefix)
+}
+
+class ArgParser {
+    +ArgParser(prefixList: Prefix[])
+    +parse(args: String) : void
+    +getSingleArg(prefix: SingleArgPrefix) : String
+    +getArgList(prefix: MultipleArgPrefix) : ArrayList<String>
+}
+class Parser {
+    +parseCommand(userInput: String) : Command
+}
+
+ArgParser ..> Prefix
+ArgParser ..> SingleArgPrefix
+ArgParser ..> MultipleArgPrefix
+Parser ..> ArgParser
+MultipleArgPrefix .> SingleArgPrefix
+
+
+@enduml
