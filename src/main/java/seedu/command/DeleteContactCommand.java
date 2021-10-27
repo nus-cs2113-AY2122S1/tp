@@ -33,7 +33,7 @@ public class DeleteContactCommand extends Command {
 
     private void deleteSelectedContact() throws IndexOutOfBoundsException {
         // throws IndexOutOfBoundsException if index is outside of the range
-        Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+        Contact deletedContact = contactList.getContactAtIndex(contactIndex);
         // index must be within range since no exceptions thrown
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
         // ask for confirmation to delete from user
@@ -64,7 +64,7 @@ public class DeleteContactCommand extends Command {
     }
 
     private void deleteFields() {
-        Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+        Contact deletedContact = contactList.getContactAtIndex(contactIndex);
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
         if (TextUi.deletedFieldsGenerator(hasDeletedDetail, deletedContact).isEmpty()) {
             //if no fields exist, return false
