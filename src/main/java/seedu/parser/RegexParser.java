@@ -104,7 +104,7 @@ public abstract class RegexParser {
 
     protected void checkNameRegex(String detailToParse) throws InvalidNameException {
         //only letters and spaces allowed
-        String nameRegex = "^[ A-Za-z]+$";
+        String nameRegex = "^([a-zA-Z]+\\s)*[a-zA-Z]+$";
         if (!detailToParse.matches(nameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for name failed");
             throw new InvalidNameException();
