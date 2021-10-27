@@ -44,9 +44,9 @@ public class TrainingList {
     /**
      * Deletes training schedule based on index input by user. Index must be valid.
      *
-     * @param trainingNum Index of the TrainingSchedule user wishes to delete
-     * @return TrainingSchedule to be deleted
-     * @throws IndexOutOfBoundsException Thrown when an invalid index is input to be deleted
+     * @param trainingNum Index of the TrainingSchedule user wishes to delete.
+     * @return TrainingSchedule to be deleted.
+     * @throws IndexOutOfBoundsException Thrown when an invalid index is input to be deleted.
      */
     public TrainingSchedule deleteTrainingSchedule(int trainingNum) throws IndexOutOfBoundsException {
         try {
@@ -56,6 +56,36 @@ public class TrainingList {
             return training;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
+        }
+    }
+
+    /**
+     * Finds all TrainingSchedules that contains user query.
+     * @param name Query that user input.
+     * @return TrainingList containing all matching TrainingSchedules.
+     */
+    public TrainingList findTraining(String name) {
+        String nameToFind = name.trim().toUpperCase();
+        TrainingList matching = new TrainingList();
+        for (TrainingSchedule training : trainingList) {
+            String formattedName = training.getTrainingName().trim().toUpperCase();
+
+            if (formattedName.contains(nameToFind)) {
+                matching.addTrainingSchedule(training);
+            }
+        }
+
+        return matching;
+    }
+
+    /**
+     * Updates the index of all TrainingSchedules. Called after deleting a training
+     */
+    public void updateIndex() {
+        int newIndex = 1;
+        for (TrainingSchedule training : trainingList) {
+            training.setTrainingIndex(newIndex);
+            newIndex++;
         }
     }
 }

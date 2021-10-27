@@ -11,6 +11,7 @@ import seedu.duke.command.DeleteTraining;
 import seedu.duke.command.EditMember;
 import seedu.duke.command.EditTraining;
 import seedu.duke.command.FindMember;
+import seedu.duke.command.FindTraining;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
@@ -57,6 +58,7 @@ public class Entry {
             break;
         case ADD_TRAINING_KEYWORD:
             TrainingSchedule training = Parser.getTrainingDescription(entry);
+            training.setTrainingIndex(trainings.getTrainingListSize() + 1);
             new AddTraining(trainings, training);
             break;
         case ADD_ATTENDANCE_KEYWORD:
@@ -68,12 +70,11 @@ public class Entry {
             new DeleteMember(members, parameter);
             break;
         case DELETE_TRAINING_KEYWORD:
-            trainingIndex = Parser.getIndex(entry);
-            new DeleteTraining(trainings, trainingIndex);
+            parameter = Parser.getParameter(entry);
+            new DeleteTraining(trainings, parameter);
             break;
         case DELETE_ATTENDANCE_KEYWORD:
             //delete /att /t Friday Training /i 2
-
             attendanceIndex = Parser.getAttendanceIndex(entry);
             //havent handle if i is not a number aka number format exception
 
@@ -81,11 +82,12 @@ public class Entry {
             new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
-            String name = Parser.findInMembers(entry);
+            String name = Parser.getQuery(entry);
             new FindMember(members, name);
             break;
         case FIND_TRAINING_KEYWORD:
-            Parser.findInTraining(trainings, entry);
+            String trainingToFind = Parser.getQuery(entry);
+            new FindTraining(trainings, trainingToFind);
             break;
         case FIND_ATTENDANCE_KEYWORD:
             Parser.findInAttendanceEntries(attendanceList, entry);

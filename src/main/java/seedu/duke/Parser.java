@@ -345,20 +345,9 @@ public class Parser {
      * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param trainings ArrayList of tasks
-     * @param query     user input
-     */
-    public static void findInTraining(TrainingList trainings, String query) {
-        //Leave for v2.0, implement as class in commands package
-    }
-
-    /**
-     * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
-     * words are found, the user will be notified.
-     *
      * @param query user input
      */
-    public static String findInMembers(String query) {
+    public static String getQuery(String query) {
         try {
             String[] words = query.trim().split(regex);
             return words[1].trim();
