@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.commands.FindCommand;
+import seedu.commands.general.FindCommand;
 import seedu.entry.Entry;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
