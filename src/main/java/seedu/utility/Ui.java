@@ -1,6 +1,6 @@
 package seedu.utility;
 
-import seedu.commands.CurrencyTypes;
+import seedu.commands.general.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
@@ -320,6 +320,16 @@ public class Ui {
     }
 
     /**
+     * Prints the error message as feedback through the standard output, specifically for the loading of data process.
+     *
+     * @param errorMessage The error message to be printed out due to certain exceptions or invalid inputs.
+     */
+    public void printLoadingError(String errorMessage) {
+        printLine();
+        System.out.println(errorMessage);
+    }
+
+    /**
      * Prints a message to user through standard output confirming all entries have been cleared.
      */
     public void printAllEntriesCleared() {
@@ -340,7 +350,7 @@ public class Ui {
     }
 
     public void printOverallBudgetWarning(String month, double currAmount, double limit) {
-        printLine();
+
         System.out.printf("You are almost reaching the %s OVERALL budget: $%.2f/$%.2f",
                 month, currAmount, limit);
         System.out.print(newLine);
@@ -349,7 +359,7 @@ public class Ui {
     }
 
     public void printOverallBudgetExceeded(String month, double currAmount, double limit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s OVERALL budget: $%.2f/$%.2f", month, currAmount, limit);
         System.out.print(newLine);
         System.out.println("Consider readjusting your " + month + " OVERALL budget!");
@@ -358,7 +368,7 @@ public class Ui {
 
     public void printOverallExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
                                                   double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -372,7 +382,7 @@ public class Ui {
 
     public void printOverallExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
                                                    double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -387,7 +397,7 @@ public class Ui {
     public void printOverallNotExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
                                                   double overallAmount, double overallLimit) {
 
-        printLine();
+
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -408,7 +418,7 @@ public class Ui {
 
     public void printOverallNotExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
                                                      double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -464,15 +474,21 @@ public class Ui {
         printLine();
     }
 
-    public void printCurrencyChangedConfirmation(CurrencyTypes currency) {
+    public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
         System.out.println("All entries have been converted to " + currency + "!");
         printLine();
     }
 
-    public void printSameCurrencyTypeMessage(CurrencyTypes currency) {
+    public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
         System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + ": " + currency);
+        printLine();
+    }
+
+    public void printCurrentCurrency(CurrencyType currency) {
+        printLine();
+        System.out.println(Messages.CURRENT_CURRENCY_MESSAGE + currency.toString());
         printLine();
     }
 }

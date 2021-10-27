@@ -15,16 +15,16 @@ public class Messages {
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
     public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Entries.csv has corrupted entries, " 
             + "some or all data maybe lost.";
-    public static final String HAS_CORRUPTED_BUDGET_SETTINGS = "StonksXD_Budget.csv has corrupted settings, "
+    public static final String HAS_CORRUPTED_SETTINGS = "StonksXD_Settings.csv has corrupted settings, "
             + "some or all settings maybe lost.";
     public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Entries.csv, a new one " 
             + "has been made.";
-    public static final String UNABLE_TO_FIND_BUDGET_FILE = "Unable to find StonksXD_Budget.csv, a new one " 
+    public static final String UNABLE_TO_FIND_SETTINGS_FILE = "Unable to find StonksXD_Settings.csv, a new one " 
             + "has been made.";
     public static final String ERROR_SAVING_ENTRIES = "Unable to save entries into StonksXD_Data.csv, " 
             + "some or all data maybe lost.";
-    public static final String ERROR_SAVING_BUDGET_SETTINGS = "Unable to save budget settings into " 
-            + "StonksXD_Budget.csv, some or all data maybe lost.";
+    public static final String ERROR_SAVING_SETTINGS = "Unable to save settings into " 
+            + "StonksXD_Settings.csv, some or all data maybe lost.";
     public static final String SEARCH_NO_MATCH_MESSAGE = "Your search did not match any of the entries!";
     public static final String TYPE_SOMETHING_MESSAGE = "Type something!";
     public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
@@ -65,4 +65,5 @@ public class Messages {
 
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
+    public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
 }

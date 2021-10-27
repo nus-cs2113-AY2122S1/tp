@@ -40,6 +40,8 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Check budget: `check_budget`](#check-budget-check_budget)
     - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
     - [View yearly report: `show_graph`](#view-yearly-report-show_graph)
+    - [Set currency: `set_curr`](#set-currency-set_curr)
+    - [Check current currency: `check_curr`](#check-current-currency-check_curr)
     - [Terminate program: `end`](#terminate-program-end)
     - [Saving of data](#saving-of-data)
 - [FAQ](#faq)
@@ -120,6 +122,20 @@ Examples:
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
 [E] KFC lunch - $10.20 (19/10/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
+
+Note: Budget reminders of different kinds might also appear when expenses are added! 
+They might look something like this.
+
+<pre>-----------------------------------------------------------------------------------------------------
+You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
+Consider readjusting your OCTOBER OVERALL budget!
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
+Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
+You can directly increase your OCTOBER FOOD budget up to $32.00!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -615,6 +631,24 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 <br>
 
 
+### Set currency: `set_curr`
+
+This allows you to see everything money-related in a different currency. Any money-related amount you key in from now 
+onwards will be treated as the new currency set.
+
+Format: `set_curr c/CURRENCY`
+
+- As of v2.0, StonksXD supports 2 different currencies: SGD and USD.
+- If you try to set currency to currency you're already using, a warning will be shown.
+
+
+### Check current currency: `check_curr`
+
+This shows you what currency setting you are currently on.
+
+Format: `check_curr`
+
+
 ### Terminate program: `end`
 
 This exits the program when you are done using it.
@@ -637,20 +671,22 @@ Format: `end`
 
 ### Saving of Data
 
-StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. 
+StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
 
 - `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
-- `StonksXD_Budget.csv` will store all the budget values.
+- `StonksXD_Settings.csv` will store all the budget values as well as the currency setting.
 
 The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
 when not using the program.
 
 #### Note
 
-StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
+1. StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
 When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
 is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
-corrupted and not be loaded into StonksXD. 
+corrupted and not be loaded into StonksXD.
+2. Changing the currency setting in `StonksXD_Settings.csv` is almost never recommended. This is because this will 
+cause all your entries and budgets to be recognised as a different currency. 
 
 ## FAQ
 
@@ -682,6 +718,8 @@ corrupted and not be loaded into StonksXD.
 | Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
 | Clear all entries | `clear_all_entries` | - |
 | View Yearly Report | `show_graph` | - |
+| Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
+| Check current currency | `check_curr` | `-` |
 | To terminate program | `end` | - |
 
 

@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.commands.FindCommand;
+import seedu.commands.general.FindCommand;
 import seedu.entry.Entry;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
@@ -311,8 +311,7 @@ public class UiTest {
 
     @Test
     public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
+        String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
                 + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
                 + SEPARATOR_LINE;
         testUI.printOverallBudgetWarning("OCTOBER", 49, 50);
@@ -321,8 +320,7 @@ public class UiTest {
 
     @Test
     public void printOverallBudgetExceeded_exceeded_printBudgetExceededMsg() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER OVERALL budget: $900.00/$50.00" + newLine
+        String expectedOutput = "You have exceeded the OCTOBER OVERALL budget: $900.00/$50.00" + newLine
                 + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
                 + SEPARATOR_LINE;
         testUI.printOverallBudgetExceeded("OCTOBER", 900, 50);
@@ -331,8 +329,7 @@ public class UiTest {
 
     @Test
     public void printOverallExceededBudgetWarning_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
                 + "Since you have already exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
                 + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
                 + newLine + SEPARATOR_LINE;
@@ -343,8 +340,7 @@ public class UiTest {
 
     @Test
     public void printOverallExceededBudgetExceeded_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER MEDICAL budget: $201.00/$201.00" + newLine
+        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $201.00/$201.00" + newLine
                 + "Since you have also exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
                 + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
                 + newLine + SEPARATOR_LINE;
@@ -355,8 +351,7 @@ public class UiTest {
 
     @Test
     public void printOverallNotExceededBudgetWarning_givenBudget_printDirectlyReadjustMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
                 + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00" + newLine
                 + "You can directly increase your OCTOBER MEDICAL budget up to $251.00!"
                 + newLine + SEPARATOR_LINE;
@@ -367,8 +362,7 @@ public class UiTest {
 
     @Test
     public void printOverallNotExceededBudgetWarning_givenBudget_printOnlyBudgetReadjustMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
                 + "Consider readjusting your OCTOBER MEDICAL budget!" + newLine
                 + SEPARATOR_LINE;
         testUI.printOverallNotExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
@@ -378,8 +372,7 @@ public class UiTest {
 
     @Test
     public void printOverallNotExceededBudgetExceeded_givenBudget_printDirectlyReadjustMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$190.00" + newLine
+        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $200.00/$190.00" + newLine
                 + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00"
                 + newLine
                 + "You can directly increase your OCTOBER MEDICAL budget up to $250.00!"
@@ -391,8 +384,7 @@ public class UiTest {
 
     @Test
     public void printOverallNotExceededBudgetExceeded_givenBudget_printOnlyBudgetReadjustMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$150.00" + newLine
+        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $200.00/$150.00" + newLine
                 + "Consider readjusting your OCTOBER MEDICAL budget!"
                 + newLine + SEPARATOR_LINE;
         testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 150,

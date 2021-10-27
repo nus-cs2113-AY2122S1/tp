@@ -1,6 +1,7 @@
-package seedu.commands;
+package seedu.commands.general;
 
 import seedu.budget.Budget;
+import seedu.commands.Command;
 import seedu.entry.Entry;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
@@ -9,16 +10,16 @@ import seedu.utility.Ui;
 import java.util.ArrayList;
 
 public class CurrencyConversionCommand extends Command {
-    protected CurrencyTypes from;
-    protected  CurrencyTypes to;
+    protected CurrencyType from;
+    protected CurrencyType to;
     protected double exchangeRate;
 
-    public CurrencyConversionCommand(CurrencyTypes to) {
-        this.from = CurrencyTypes.SGD;
+    public CurrencyConversionCommand(CurrencyType to) {
+        this.from = CurrencyType.SGD;
         this.to = to;
     }
 
-    public double determineExchangeRate(CurrencyTypes to) {
+    public double determineExchangeRate(CurrencyType to) {
         switch (to) {
         case USD:
             return exchangeRate = 0.74;
@@ -29,8 +30,8 @@ public class CurrencyConversionCommand extends Command {
         }
     }
 
-    public boolean isBaseYear(CurrencyTypes from) {
-        return !from.equals(CurrencyTypes.SGD);
+    public boolean isBaseYear(CurrencyType from) {
+        return !from.equals(CurrencyType.SGD);
     }
 
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
@@ -62,7 +63,7 @@ public class CurrencyConversionCommand extends Command {
         finances.setCurrency(to);
     }
 
-    private double convertItem(CurrencyTypes from, CurrencyTypes to, double value) {
+    private double convertItem(CurrencyType from, CurrencyType to, double value) {
         if (isBaseYear(from)) {
             double fromRate = determineExchangeRate(from);
             assert fromRate >= 0;
