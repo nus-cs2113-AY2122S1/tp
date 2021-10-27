@@ -16,6 +16,15 @@ public class ReadTextFile {
         this.fileDirectory = fileDirectory;
     }
 
+    public boolean checkTextFileEmpty() {
+        File database = new File(fileDirectory);
+        if (database.length() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Reads a text file and then print its content into the terminal.
      */

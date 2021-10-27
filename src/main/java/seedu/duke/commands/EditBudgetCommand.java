@@ -12,7 +12,7 @@ public class EditBudgetCommand extends EditCommand {
     }
 
     public void execute(boolean isLoadingStorage) {
-        Budget targetBudget = allRecordList.editBudget(this.month, this.amount);
+        Budget targetBudget = allRecordList.editBudget(this.month, this.amount, isLoadingStorage);
         System.out.println("Budget successfully edited!");
         System.out.println("New budget: " + targetBudget);
     }

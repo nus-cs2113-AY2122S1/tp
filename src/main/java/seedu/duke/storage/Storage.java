@@ -15,11 +15,12 @@ public class Storage {
 
     public String loadStorage(AllRecordList recordList, String recordListDirectory) {
         try {
+            ReadTextFile newReader;
             LocalDate date = LocalDate.now();
             if (recordListDirectory.equals("")) {
                 recordListDirectory = dataStorageDirectory + date.getYear() + ".txt";
             }
-            ReadTextFile newReader = new ReadTextFile(recordListDirectory);
+            newReader = new ReadTextFile(recordListDirectory);
             ArrayList<String> commandStorage = newReader.readTextFileToString();
             Parser parser = new Parser();
             int i;

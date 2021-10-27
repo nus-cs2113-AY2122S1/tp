@@ -2,6 +2,7 @@ package seedu.duke.textfiletools;
 
 import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.records.Loan;
 import seedu.duke.ui.TextUi;
 
 import java.io.File;
@@ -63,6 +64,16 @@ public class WriteToTextFile {
                     String date = currentExpenditure.getDate();
                     String category = currentExpenditure.getCategory();
                     fileWrite.println("add -e n/" + description + " a/" + amount + " d/" + date + " c/" + category);
+                    fileWrite.flush();
+                }
+
+                for (int k = 0; k < currentMonthRecordList.getLoanListSize(); k++) {
+                    ArrayList<Loan> loanRecords = currentMonthRecordList.getLoanRecords();
+                    Loan currentLoan = loanRecords.get(k);
+                    String name = currentLoan.getName();
+                    double amount = currentLoan.getAmount();
+                    String date = currentLoan.getDate();
+                    fileWrite.println("add -l n/" + name + " a/" + amount + " d/" + date);
                     fileWrite.flush();
                 }
             }
