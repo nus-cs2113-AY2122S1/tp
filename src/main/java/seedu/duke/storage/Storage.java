@@ -45,7 +45,7 @@ public class Storage {
                 if (line.startsWith("add-employee")) {
                     Employee newEmployee = decodeEmployee(line);
                     employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
-                } else if (line.startsWith("add-ingredient")) {
+                } else if (line.startsWith("add-dish")) {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
                 } else if (line.startsWith("add-menu")) {
