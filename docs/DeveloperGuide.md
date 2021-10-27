@@ -13,28 +13,31 @@ Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addre
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Architecture
 
-![](../docs/team/Images/Architecture.png)
+![](Architecture.drawio.png)
 
 The __Architecture Diagram__ above explains the high-level design of the StonksXD app.
 Given below is a quick overview of the main components of the application and how they interact with each other:
+<br>
 
 `Ui` is the class responsible for interfacing with the user. 
 It receives user input and passes it to`StonksXD`.
 It also receives data from `Command` to output to the user.
 
-`Ui` &rarr; `StonksXD`
+`User` &harr; `Ui` &rarr; `StonksXD`
 
 `Ui` &larr; `Command`
 
+<br>
 
 `StonksXD` is the main class of the app. It has 2 main functions: 
-1. Upon opening the app, it loads saved data from `DataManager`. Before closing the app, it pushes save data to `DataManager`.
+1. Upon opening the app, it loads saved data by calling `DataManager`. Before closing the app, it calls `DataManager` again to save data.
 2. Runs a loop receiving new user input from `Ui` and passing it to `Parser`.
 
-`Ui` &rarr; `StonksXD` &rlarr; `DataManager`
+`StonksXD` &rarr; `DataManager`
 
-`StonksXD` &rarr; `Parser`
+`Ui` &rarr; `StonksXD` &rarr; `Parser`
 
+<br>
 
 `Parser` is the class responsible for interpreting the user input. 
 It ensures the appropriate input format, and passes the input data to the appropriate command.
@@ -46,17 +49,17 @@ It ensures the appropriate input format, and passes the input data to the approp
 It contains child classes for all possible commands.
 It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output.
 
-`Parser` &rarr; `Command` &rlarr; `FinancialTracker`
+`Parser` &rarr; `Command` &harr; `FinancialTracker`
 
-`Parser` &rarr; `Command` &rlarr; `BudgetManager`
+`Parser` &rarr; `Command` &harr; `BudgetManager`
 
-`Ui` &rlarr; `Command`
+`Ui` &harr; `Command`
 
 
 `FinancialTracker` is the class containing and handling all income and expense entries input by the user.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
 
-`Command` &rlarr; `FinancialTracker`
+`Command` &harr; `FinancialTracker`
 
 `FinancialTracker` &rarr; `DataManager`
 
@@ -64,7 +67,7 @@ It interacts with `Command` to execute tasks, and writes to `DataManager` to sav
 `BudgetManager` is the class containing and handling all budget information.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
 
-`Command` &rlarr; `BudgetManager`
+`Command` &harr; `BudgetManager`
 
 `BudgetManager` &rarr; `DataManager`
 
@@ -77,7 +80,7 @@ It receives data from `FinancialTracker` and `BudgetManager` and interacts with 
 
 `BudgetManager` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
 
-`StonksXD` &rlarr; `DataManager` &rlarr; `StonksXD_data.csv`
+`StonksXD` &harr; `DataManager` &harr; `StonksXD_data.csv`
 
 
 The sections below provide more information on the respective components.
@@ -87,7 +90,17 @@ Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
+The image below shows how the Ui uses printing and separators to provide user feedback for listing commands.
+
+
 ![img_1](https://user-images.githubusercontent.com/69465661/138105673-1d21722d-0f77-4dcf-86d6-d38bffc08a40.png)
+
+
+The image below illustrates the sequence diagram in the context of listing methods
+which includes listExpense, listIncome and listFind.
+
+
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/69465661/138629733-63b2a115-5405-4af5-8a74-4d18f51c8f96.png)
 
 ### Command Component
 
@@ -97,32 +110,53 @@ Each method is abstracted into an appropriate child class (for e.g. `AddExpenseC
 
 After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
 
-UML Diagram 
+The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and the other classes involved with it as well.
+
+![img_2.png](AddExpenseCommandSD.drawio.PNG)
 
 _------Work in Progress------_
 
 ### Data Saving Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
-`StonksXD_Data.csv`, which is located in the same directory as the program. DataManager requires an instance of the 
-`Parser`, `FinancialTracker` and `Ui` class to function. 
+`StonksXD_Entries.csv` and `StonksXD_Budget.csv`, which are located in the same directory as the program. 
 
-- When saving data into the csv file, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
+- `StonksXD_Entries.csv` will be storing users' income and expense entries.
+- `StonksXD_Budget.csv` will be storing users' budget settings.
+
+`DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui` and `BudgetManager` at the moment of 
+creation. 
+
+- When saving data into the csv files, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
 interact with the csv file.
-- When loading data from the csv file, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
+- When loading data from the csv files, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
 the csv file. 
 
 The image below illustrates the class diagram in the context of data saving and loading.
 
-![img_2.png](DataManagerCD.drawio.png)
+![img_3.png](DataManagerCD.drawio.png)
 
-The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Data.csv`.
 
--Work in progress-
+`DataManager` has 2 main objectives which are to save data into csv files and load data from csv files. The sequence of
+saving and loading are the same for both `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. Because of this, we will 
+only be showing sequence diagrams in the context of saving and loading entries.
 
-The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Data.csv` into the 
+When saving data,
+1. A `FileWriter` will be created first and be used to create a `BufferedWriter`.
+2. The header, that consist of all the categories, will be witten into the csv file.
+3. DataManager will obtain all current entries and incomes and write them to the file line by line.
+
+The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Entries.csv`.
+
+![img_4.png](SavingFeatureSD.drawio.png)
+
+When loading data,
+1. -Work in progress-
+
+The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Entries.csv` into the 
 program.
 
 -Work in progress-
+
 
 
 

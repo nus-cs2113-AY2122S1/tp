@@ -27,7 +27,7 @@ public class Income extends Entry {
 
     @Override
     public String toString() {
-        String incomeDate = date.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String incomeDate = date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         return String.format("[I] %s - $%.2f (%s)", description, value, incomeDate);
     }
 }

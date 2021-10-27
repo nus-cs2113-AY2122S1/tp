@@ -11,6 +11,6 @@ public class ShowGraphCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         StonksGraph stonksGraph = new StonksGraph(finances);
-        ui.printGraph(stonksGraph.convertGridToString());
+        ui.printGraph(stonksGraph);
     }
 }

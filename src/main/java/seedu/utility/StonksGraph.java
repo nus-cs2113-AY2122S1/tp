@@ -11,19 +11,21 @@ public class StonksGraph {
     private static final int ROWS_OFFSET = ROWS - 1;
     private static final int COLS_OFFSET = COLS - 1;
     private static final int BAR_VALUE = 200;
+    private static final char INCOME_BAR = 'o';
+    private static final char EXPENSE_BAR = '#';
+    private static final char X_AXIS_CHAR = '~';
+    private static final char SEPARATOR_CHAR = '-';
     private final char[][] grid = new char [ROWS][COLS];
     private static final char BORDER_CHAR = 'x';
     private static final char NON_BORDER_CHAR = ' ';
 
     /**
-     * It will call all the differnet methods here like balance, date(which mth), a bar in the middle(How many% full).
-     * need to rmb to key in case where input is damm long(troll input).
-     *
+     * Constructor for the StonksGraph which firsts sets the border, then the balance and finally the report itself.
      */
     public StonksGraph(FinancialTracker finances) {
         setBorder();
         setBalance(finances.getBalance());
-        setBar(finances);
+        drawReport(finances);
     }
     
     private void setBorder() {
@@ -43,10 +45,9 @@ public class StonksGraph {
     }
 
     private void setBalance(double amount) {
-        String stringAmount = Double.toString(amount);
-        
-        writeToGraph(2,4,"TOTAL AMOUNT: ");
-        writeToGraph(2,19, stringAmount);
+        String stringAmount = String.format("%.2f", amount);
+        writeToGraph(2,4,"Account Balance: $");
+        writeToGraph(2,22, stringAmount);
     }
 
 
@@ -59,8 +60,12 @@ public class StonksGraph {
             i++;
         }
     }
-    
-    
+
+    /**
+     * Converts the 2d array grid into a String.
+     *
+     * @return A string which represents the 2D grid in 1D form.
+     */
     public String convertGridToString() {
         StringBuilder convertedString = new StringBuilder();
         for (int x = 0; x < ROWS; x++) {
@@ -79,10 +84,10 @@ public class StonksGraph {
     }
 
     /**
-     * Returns month as an int base on which columm it is at.
+     * Returns month as an int based on which column it is at.
      *
-     * @param colCount the columns of the grid
-     * @return Returns an integer that represents the month
+     * @param colCount The column count of the grid.
+     * @return Returns an integer that represents the month.
      */
     private int getMonth(int colCount) {
         if (colCount >= 4 && colCount <= 6) {
@@ -112,52 +117,50 @@ public class StonksGraph {
         }
     }
 
-
-    private void setBar(FinancialTracker finances) {
-        writeToGraph(4,4, "Your Yearly Report");
-        drawSeparator();
-        drawLegend();
-        drawXAxisLabels();
-        drawXAxis();
-        ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
-        ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
-        
-        int currentMonthInIndex = currentMonthInIndex();
+    /**
+     * Draw the total expenses and incomes for the current month in the yearly report.
+     *
+     * @param monthIncomeBreakdowns ArrayList containing all the totalIncomes for each month of the year.
+     * @param monthExpenseBreakdowns ArrayList containing all the totalExpenses for each month of the year.
+     */
+    private void drawCurrentMonth(ArrayList<Double> monthIncomeBreakdowns, ArrayList<Double> monthExpenseBreakdowns) {
         Month currentMonth = currentMonth();
-        double currentMonthExpense = monthlyExpenseBreakdowns.get(currentMonthInIndex);
-        double currentMonthIncome = monthlyIncomeBreakdowns.get(currentMonthInIndex);
-        System.out.printf("Current month (" + currentMonth + ") total expense: " + "$%.2f\n", currentMonthExpense);
-        System.out.printf("Current month (" + currentMonth + ") total income: " + "$%.2f\n", currentMonthIncome);
+        int currentMonthInIndex = currentMonthInIndex();
+        double currentMonthExpense = monthExpenseBreakdowns.get(currentMonthInIndex);
+        double currentMonthIncome = monthIncomeBreakdowns.get(currentMonthInIndex);
+        String currentMonthExpenseAsString =
+                String.format("Current month (" + currentMonth + ") total expense: " + "$%.2f", currentMonthExpense);
+        String currentMonthIncomeAsString =
+                String.format("Current month (" + currentMonth + ") total income: " + "$%.2f", currentMonthIncome);
+        writeToGraph(3,4, currentMonthExpenseAsString);
+        writeToGraph(4,4, currentMonthIncomeAsString);
+    }
 
-        for (int x = 0; x < ROWS; x++) {
-            for (int y = 0; y < COLS; y++) {
-                int monthIndex = getMonth(y) - 1;
-                int incomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
-                int expenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
-
-                if (x >= 7 && x < 17) {
-                    if (isExpenseBar(y)) {
-                        setExpenseBar(x, y, expenseBar);
-                    }
-                    if (isIncomeBar(y)) {
-                        setIncomeBar(x, y, incomeBar);
-                    }
-                }
-            }
-        }
+    /**
+     * Returns true it's within the rows where the barchart is suppose to be.
+     */
+    private boolean isWithinRowsConsistingOfBarGraph(int x) {
+        return x >= 7 && x < 17;
     }
 
     private void drawLegend() {
         writeToGraph(2, 75, "Legend:");
         writeToGraph(3, 80, " # is Expense");
-        writeToGraph(4, 80, " o is Expense");
+        writeToGraph(4, 80, " o is Income ");
     }
 
+
+    /**
+     * Returns true if position is that of each month's expense bar.
+     */
     private boolean isExpenseBar(int y) {
         return y == 4 || y == 12 || y == 20 || y == 28 || y == 36 || y == 44 || y == 52 || y == 60
                 || y == 68 || y == 76 || y == 84 || y == 92;
     }
 
+    /**
+     * Returns true if position is that of each month's income bar.
+     */
     private boolean isIncomeBar(int y) {
         return y == 5 || y == 13 || y == 21 || y == 29 || y == 37 || y == 45 || y == 53 || y == 61
                 || y == 69 || y == 77 || y == 85 || y == 93;
@@ -180,35 +183,79 @@ public class StonksGraph {
 
     private void drawXAxis() {
         for (int i = 2;i < 98; i++) {
-            grid[17][i] = '~';
+            grid[17][i] = X_AXIS_CHAR;
         }
     }
 
     private void drawSeparator() {
         for (int i = 2;i < 98; i++) {
-            grid[5][i] = '-';
+            grid[6][i] = SEPARATOR_CHAR;
         }
     }
 
     private void setIncomeBar(int x, int y, int incomeBar) {
         if (x >= 17 - incomeBar && x < 17) {
-            grid[x][y] = 'o';
+            grid[x][y] = INCOME_BAR;
         }
     }
 
     private void setExpenseBar(int x, int y, int expenseBar) {
         if (x >= 17 - expenseBar && x < 17) {
-            grid[x][y] = '#';
+            grid[x][y] = EXPENSE_BAR;
         }
     }
     
     private int currentMonthInIndex() {
         LocalDate currentDate = LocalDate.now();
-        return currentDate.getMonthValue();
+        return currentDate.getMonthValue() - 1;
     }
     
     private Month currentMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonth();
     }
+
+    private int currentYear() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getYear();
+    }
+
+    private void drawBar(int x, int y, int noOfIncomeBar, int noOfExpenseBar) {
+        if (isWithinRowsConsistingOfBarGraph(x)) {
+            if (isExpenseBar(y)) {
+                setExpenseBar(x, y, noOfExpenseBar);
+            } else if (isIncomeBar(y)) {
+                setIncomeBar(x, y, noOfIncomeBar);
+            }
+        }
+    }
+
+
+
+    /**
+     * Draws the yearly report shown in show_graph command.
+     * Which includes the legend, current month totals , monthly breakdown, axes.
+     *
+     * @param finances The financial tracker with all the various entries.
+     */
+    private void drawReport(FinancialTracker finances) {
+        writeToGraph(5,4, "Your Yearly Report");
+        drawSeparator();
+        drawLegend();
+        drawXAxisLabels();
+        drawXAxis();
+        ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(currentYear());
+        ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(currentYear());
+        drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
+        for (int x = 0; x < ROWS; x++) {
+            for (int y = 0; y < COLS; y++) {
+                int monthIndex = getMonth(y) - 1;
+                int noOfIncomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
+                int noOfExpenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
+                drawBar(x, y, noOfIncomeBar, noOfExpenseBar);
+            }
+        }
+    }
+
+
 }
