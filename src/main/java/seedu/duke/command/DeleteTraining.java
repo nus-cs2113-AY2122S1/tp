@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import java.util.*;
+import java.util.Scanner;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 import seedu.duke.Ui;
@@ -58,11 +58,9 @@ public class DeleteTraining {
 
         if (candidateList.getTrainingListSize() == 0) {
             System.out.println("Could not find any matching training names for \"" + name + "\"");
-        }
-        else if (candidateList.getTrainingListSize() == 1) {
+        } else if (candidateList.getTrainingListSize() == 1) {
             deleteTrainingByIndex(trainings, candidateList.getTrainingList().get(0).getTrainingIndex());
-        }
-        else if (candidateList.getTrainingListSize() > 1) {
+        } else if (candidateList.getTrainingListSize() > 1) {
             System.out.println("Below are the possible matches. Please key in the INDEX NUMBER ONLY to delete");
             for (TrainingSchedule training : candidateList.getTrainingList()) {
                 System.out.println(training.toString());
