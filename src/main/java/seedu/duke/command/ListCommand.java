@@ -9,6 +9,7 @@ import seedu.duke.exception.InvalidTaskIndexException;
 import seedu.duke.exception.InvalidTaskTypeException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
+import seedu.duke.exception.TaskIsNonRecurringException;
 import seedu.duke.task.taskmanager.TaskManager;
 
 //@@author APZH
@@ -46,6 +47,8 @@ public class ListCommand extends Command {
             message = ipe.toString();
         } catch (InvalidRecurrenceException ire) {
             message = ire.toString();
+        } catch (TaskIsNonRecurringException tnrx) {
+            message = tnrx.toString();
         }
         return new CommandResult(message, false, false);
     }
