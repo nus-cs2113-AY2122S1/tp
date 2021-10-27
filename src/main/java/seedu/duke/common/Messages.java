@@ -49,9 +49,9 @@ public class Messages {
     public static final String ALREADY_RESERVED_MESSAGE = "  (!) Sorry, the item has already been reserved for someone";
     // Remove
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
-    // Add
-    public static final String INVALID_TITLE = "  (!) Please enter a valid title";
-
+    // Edit
+    public static final String EDIT_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
     // Invalid Formats
     public static final String ADD_INVALID_FORMAT = "  (!) Invalid/missing values!" + System.lineSeparator()
             + "  (!) Format: add [a/b/m/v] [ARGUMENTS]";
@@ -61,6 +61,17 @@ public class Messages {
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
+    public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID marker/attribute";
+    public static final String EDIT_INVALID_AUDIO = "  (!) Attribute Marker not valid for Audio"
+            + System.lineSeparator() + "  (!) Should only be t/, i/, a/ or d/";
+    public static final String EDIT_INVALID_BOOK = "  (!) Attribute Marker not valid for Book" + System.lineSeparator()
+            + "  (!) Should only be t/, i/ or a/";
+    public static final String EDIT_INVALID_MAGAZINE = "  (!) Attribute Marker not valid for Magazine"
+            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or e/";
+    public static final String EDIT_INVALID_VIDEO = "  (!) Attribute Marker not valid for Video"
+            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or d/";
+
     // Generic Errors
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
 }

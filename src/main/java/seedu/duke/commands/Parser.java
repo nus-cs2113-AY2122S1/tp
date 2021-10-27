@@ -33,12 +33,13 @@ public class Parser {
         } else if (input.startsWith(SearchCommand.COMMAND_WORD)) {
             return new SearchCommand(input);
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
-
             return new AddCommand(extractArgs(input));
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
             return new LoanCommand(input);
         } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
             return new ReturnCommand(input);
+        } else if (input.startsWith(EditCommand.COMMAND_WORD)) {
+            return new EditCommand(input);
         } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
             return new ReserveCommand(input);
         } else if (input.startsWith(DeadlineCommand.COMMAND_WORD)) {
