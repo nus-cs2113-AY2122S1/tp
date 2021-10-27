@@ -44,6 +44,7 @@ It ensures the appropriate input format, and passes the input data to the approp
 
 `StonksXD` &rarr; `Parser` &rarr; `Command`
 
+<br>
 
 `Command` is the class responsible for the execution of all commands.
 It contains child classes for all possible commands.
@@ -53,34 +54,39 @@ It interacts with `FinancialTracker` and `BudgetManager` to execute commands, be
 
 `Parser` &rarr; `Command` &harr; `BudgetManager`
 
-`Ui` &harr; `Command`
+`Ui` &larr; `Command`
 
+<br>
 
 `FinancialTracker` is the class containing and handling all income and expense entries input by the user.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
 
 `Command` &harr; `FinancialTracker`
 
-`FinancialTracker` &rarr; `DataManager`
+`FinancialTracker` &harr; `DataManager`
 
+<br>
 
 `BudgetManager` is the class containing and handling all budget information.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
 
 `Command` &harr; `BudgetManager`
 
-`BudgetManager` &rarr; `DataManager`
+`BudgetManager` &harr; `DataManager`
 
+<br>
 
-`DataManager` is the class responsible for reading data from the `StonksXD_data.csv` file upon boot up,
-and writing save data to the file before terminating the program.
-It receives data from `FinancialTracker` and `BudgetManager` and interacts with `StonksXD`.
+`DataManager` is the class responsible for reading data from the `StonksXD_entries.csv` and `StonksXD_budget.csv` files upon boot up,
+and writing save data to the files before terminating the program.
+It interacts with `FinancialTracker` and `BudgetManager` and receives commands from `StonksXD`.
 
-`FinancialTracker` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+`FinancialTracker` &harr; `DataManager`
 
-`BudgetManager` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+`BudgetManager` &harr; `DataManager`
 
-`StonksXD` &harr; `DataManager` &harr; `StonksXD_data.csv`
+`DataManager` &larr; `StonksXD_data.csv`
 
 
 The sections below provide more information on the respective components.
@@ -113,6 +119,30 @@ After obtaining the attributes of an entry from the `entry` class and the requir
 The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and the other classes involved with it as well.
 
 ![img_2.png](AddExpenseCommandSD.drawio.PNG)
+
+### Budget Component
+
+The Budget component consists mainly of the `BudgetManager` class and the `Budget` class.
+
+<br>
+
+The `BudgetManager` class is the main class containing all methods relating to budget operations.
+On the other hand, the `Budget` class is the parent class of all the budget categories. 
+There are currently 7 child classes of `Budget` (i.e. 7 legal budget categories in the program).
+
+<br>
+
+How the Budget compoment works:
+- Upon start-up, a new `BudgetManager` is initialised in `StonksXD`.
+- `BudgetManager` initialises all `Budget` sub-classes with respective budget limit values loaded from `DataManager`.
+- When an entry is added by the user, `BudgetManager` parses the category input by the user and calls the relevant `Budget` sub-class.
+- The `handleBudget` method is performed on the `Budget` sub-class.
+- The relevant budgeting information is then sent to the `Ui` class for printing.
+
+<br>
+
+Below is a sequence diagram of the Budget component when `handleBudget` is executed:
+![](BudgetComponent.drawio.png)
 
 _------Work in Progress------_
 
