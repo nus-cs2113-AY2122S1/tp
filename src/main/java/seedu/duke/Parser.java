@@ -185,7 +185,7 @@ public class Parser {
             int previousIndex = indexes.get(i);
             int nextIndex = indexes.get(i + 1);
             String prefix = prefixes.get(i);
-            String value = extractValue(argString, prefix, previousIndex, nextIndex);
+            String value = extractValue(argString, prefix, previousIndex, nextIndex, identifier);
             int inputIndex = obtainArrayIndex(prefix, identifier);
             extractedValues.set(inputIndex, value);
         }
@@ -194,7 +194,7 @@ public class Parser {
         int finalIndex = indexes.get(indexes.size() - 1);
 
         int inputIndex = obtainArrayIndex(finalPrefix, identifier);
-        String value = extractValue(argString, finalPrefix, finalIndex, argString.length());
+        String value = extractValue(argString, finalPrefix, finalIndex, argString.length(), identifier);
         extractedValues.set(inputIndex, value);
         return extractedValues;
     }
@@ -215,8 +215,11 @@ public class Parser {
      * @return value corresponding to prefix given
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static String extractValue(String argString, String prefix, int startIndex, int endIndex)
-            throws TourPlannerException {
+    private static String extractValue
+    (String argString, String prefix, int startIndex, int endIndex, String identifier) {
+        switch (identifier) {
+        case "-c":
+        }
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replaceFirst(prefix, "").trim();
         return value;
