@@ -52,12 +52,12 @@ public class CurrencyConversionCommand extends Command {
         finances.setCurrency(to);
     }
 
-//   public void convertBudgets(ArrayList<Budget> budgets, FinancialTracker finances) {
-//       double newValue = convertEntry(from, to, budgets.getBudget());
-//       assert newValue >= 0;
-//       budgets.setBudgetValue(newValue);
-//       finances.setCurrency(to);
-//   }
+    //   public void convertBudgets(ArrayList<Budget> budgets, FinancialTracker finances) {
+    //       double newValue = convertEntry(from, to, budgets.getBudget());
+    //       assert newValue >= 0;
+    //       budgets.setBudgetValue(newValue);
+    //       finances.setCurrency(to);
+    //   }
 
     private double convertEntry(CurrencyTypes from, CurrencyTypes to, double value) {
         if (isBaseYear(from)) {
