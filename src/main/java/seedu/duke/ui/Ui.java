@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import seedu.duke.Duke;
@@ -414,7 +415,7 @@ public class Ui {
         if (isCapValid) {
             DecimalFormat df = new DecimalFormat("0.00");
             cap = moduleList.calculateCap();
-            System.out.println(PADDING + "Your current CAP is: " + cap);
+            System.out.println(PADDING + "Your current CAP is: " + df.format(cap));
         } else {
             System.out.println(PADDING + "If you have received grades for your modules, set them to see your CAP!");
         }
