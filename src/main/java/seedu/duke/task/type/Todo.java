@@ -1,6 +1,9 @@
 package seedu.duke.task.type;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import seedu.duke.command.flags.TodoFlag;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
@@ -20,7 +23,7 @@ public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
-        setDoOnDate(null);
+        setDoOnDate(DateParser.roundUpHour(LocalDateTime.now()));
     }
 
     public Todo(String description, PriorityEnum priority) {
@@ -62,9 +65,7 @@ public class Todo extends Task {
 
     public void setDoOnDate(LocalDateTime doOnDate) {
         this.doOnDate = doOnDate;
-        if (doOnDate != null) {
-            reminder = new Reminder(doOnDate);
-        }
+        reminder = new Reminder(doOnDate);
     }
 
     public String getReminder(LocalDateTime now) {
@@ -83,5 +84,13 @@ public class Todo extends Task {
             description += String.format(TODO_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDoOnDate()));
         }
         return description;
+    }
+
+    @Override
+    protected void taskEdit(Map<String, String> arguments) throws ParseDateFailedException {
+        if (arguments.containsKey(TodoFlag.DO_ON_DATE)) {
+            String todo = arguments.get(TodoFlag.DO_ON_DATE);
+            setDoOnDate(DateParser.stringToDate(todo));
+        }
     }
 }

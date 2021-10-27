@@ -5,10 +5,14 @@ import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.InvalidTaskIndexException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.SortFormatException;
+import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.log.Log;
 
 import java.util.List;
@@ -70,8 +74,7 @@ public class TaskManager implements Subject {
                 throw new ListFormatException();
             }
         }
-        latestFilteredList.clear();
-        latestFilteredList = filteredTasks;
+        updateFilteredTaskList(filteredTasks);
         for (int i = 0; i < filteredTasks.size(); i++) {
             taskEntries += i + 1 + ". " + filteredTasks.get(i).getTaskEntryDescription() + "\n";
         }
@@ -233,33 +236,17 @@ public class TaskManager implements Subject {
 
     public void addTasks(List<Task> tasks) {
         taskList.addAll(tasks);
-    }
-
-    //@@author SeanRobertDH
-    public void checkIndexValid(int index) throws InvalidTaskIndexException {
-        if (index < 0 || index > getTaskListSize() - 1) {
-            throw new InvalidTaskIndexException(++index);
-        }
+        updateObservers(this);
     }
 
     //@@author SeanRobertDH
     public void checkFilteredListIndexValid(int index) throws InvalidTaskIndexException {
+        if (latestFilteredList.isEmpty()) {
+            latestFilteredList = taskList;
+        }
         if (index < 0 || index > latestFilteredList.size() - 1) {
             throw new InvalidTaskIndexException(++index);
         }
-    }
-
-    //@@author SeanRobertDH
-    public void clear() {
-        taskList.clear();
-    }
-
-    //@@author SeanRobertDH
-    public Task deleteTask(int index) throws InvalidTaskIndexException {
-        checkIndexValid(index);
-        Task deletedTask = taskList.remove(index);
-        updateObservers(this);
-        return deletedTask;
     }
 
     //@@author SeanRobertDH
@@ -269,5 +256,41 @@ public class TaskManager implements Subject {
         taskList.remove(deletedTask);
         updateObservers(this);
         return deletedTask;
+    }
+
+    //@@author SeanRobertDH
+    private void updateFilteredTaskList(List<Task> replacementTaskList) {
+        latestFilteredList = replacementTaskList;
+    }
+
+    //@@author SeanRobertDH
+    public Task editFilteredTask(int index, Map<String, String> arguments)
+        throws InvalidTaskIndexException, InvalidPriorityException,
+            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
+        checkFilteredListIndexValid(index);
+        latestFilteredList.get(index).edit(arguments);
+        return latestFilteredList.get(index);
+    }
+
+    /*
+    //@@author SeanRobertDH
+    public void checkIndexValid(int index) throws InvalidTaskIndexException {
+        if (index < 0 || index > getTaskListSize() - 1) {
+            throw new InvalidTaskIndexException(++index);
+        }
+    }
+
+    //@@author SeanRobertDH
+    public Task deleteTask(int index) throws InvalidTaskIndexException {
+        checkIndexValid(index);
+        Task deletedTask = taskList.remove(index);
+        updateObservers(this);
+        return deletedTask;
+    }
+    */
+
+    //@@author SeanRobertDH
+    public void clear() {
+        taskList.clear();
     }
 }
