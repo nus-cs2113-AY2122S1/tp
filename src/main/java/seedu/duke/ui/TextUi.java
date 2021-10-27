@@ -184,24 +184,26 @@ public class TextUi {
         return monthString;
     }
 
-    public static void showRecordsListView(AllRecordList records, int month, boolean isListAll) {
+    public static void showRecordsListView(AllRecordList records, int month, boolean isListAll, Category category) {
         if (isListAll) {
             for (int i = 1; i <= 12; i++) {
-                printRecordList(records, i);
+                printRecordList(records, i, category);
             }
         } else {
-            printRecordList(records, month);
+            printRecordList(records, month, category);
         }
     }
 
-    private static void printRecordList(AllRecordList records, int i) {
+    private static void printRecordList(AllRecordList records, int i, Category category) {
         String monthString = getMonth(i);
         double totalSpending = 0.0;
         double currentMonthBudget = records.getBudget(i).getRawValue();
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
-            totalSpending += expenditure.getAmount();
+            if(expenditure.returnCategory() == category || category == Category.ALL) {
+                totalSpending += expenditure.getAmount();
+            }
         }
         String budget = "";
         boolean printInfo = true;
@@ -224,19 +226,19 @@ public class TextUi {
             System.out.printf("%.2f", percentage);
             System.out.println("% of your overall budget has been spent");
         }
-        getMonthListView(records, i, monthString, budget);
+        getMonthListView(records, i, monthString, budget, category);
     }
 
     /**
      * Possible error: Names/Descriptions longer than 20characters get truncated.
      */
-    private static void getMonthListView(AllRecordList list, int month, String monthString, String budget) {
+    private static void getMonthListView(AllRecordList list, int month, String monthString, String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
         if (list.getMonthListSize(month) > 0) {
             System.out.printf("%-30.30s %-20.20s %-20.20s %-20.20s%n", "  Description", "| Amount",
                     "| Date ", "| Category");
-            printEnumeratedExpenditureList(list.getExpenditureRecords(month));
+            printEnumeratedExpenditureList(list.getExpenditureRecords(month), category);
         } else {
             System.out.println("No Expenditure records yet.");
         }
@@ -250,10 +252,12 @@ public class TextUi {
         printDivider();
     }
 
-    private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
+    private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList, Category category) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            System.out.println(currentExpenditure.toString(i));
+            if (currentExpenditure.returnCategory() == category || category == Category.ALL) {
+                System.out.println(currentExpenditure.toString(i));
+            }
         }
     }
 

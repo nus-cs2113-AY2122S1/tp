@@ -20,9 +20,9 @@ public class HelpCommand extends Command {
         System.out.println(DIVIDER);
         System.out.println("5. find [m/MONTH] b/DESCRIPTION");
         System.out.println(DIVIDER);
-        System.out.println("6. list m/all");
+        System.out.println("6. list m/all [c/CATEGORY]");
         System.out.println(DIVIDER);
-        System.out.println("7. list m/MONTH");
+        System.out.println("7. list m/MONTH [c/CATEGORY]");
         System.out.println(DIVIDER);
         System.out.println("8. delete m/MONTH");
         System.out.println(DIVIDER);
