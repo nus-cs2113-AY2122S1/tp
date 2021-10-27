@@ -1,16 +1,25 @@
 package seedu.typists.game;
 
+import seedu.typists.storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameRecordsManager {
 
     private static GameRecordsManager instance = null;
-    private ArrayList<GameRecord> timeLimitedGameRecords = null;
-    private ArrayList<GameRecord> wordLimitedGameRecords = null;
+    private ArrayList<GameRecord> timeLimitedGameRecords;
+    private ArrayList<GameRecord> wordLimitedGameRecords;
 
     private GameRecordsManager() {
         // get gameRecords using some file reader.
+        timeLimitedGameRecords = Storage.readGameRecords("Time-limited");
+        wordLimitedGameRecords = Storage.readGameRecords("Word-limited");
+    }
+
+    public void updateGameRecords() {
+        Storage.writeGameRecords(timeLimitedGameRecords, "Time-limited");
+        Storage.writeGameRecords(wordLimitedGameRecords, "Word-limited");
     }
 
     public static GameRecordsManager getGameRecordsManager() {
@@ -23,6 +32,7 @@ public class GameRecordsManager {
     public void addGameRecord(HashMap<String, Object> gameSummary) {
         GameRecord newGameRecord = createGameRecord(gameSummary);
         addRecordToArray(newGameRecord);
+        writeRecordToFile(newGameRecord);
     }
 
     private GameRecord createGameRecord(HashMap<String, Object> gameSummary) {
@@ -45,11 +55,51 @@ public class GameRecordsManager {
 
     private void addRecordToArray(GameRecord gameRecord) {
         String gameMode = gameRecord.getGameMode();
-        if (gameMode == "Word Limited") {
+        if (gameMode.equals("Word Limited")) {
             wordLimitedGameRecords.add(gameRecord);
         } else {
             timeLimitedGameRecords.add(gameRecord);
         }
     }
 
+
+    public ArrayList<GameRecord> getGameRecords(String gameMode, int numberOfRecords) {
+
+        assert ((gameMode.equals("Time-limited")) || (gameMode.equals("Word-limited")));
+        if (gameMode.equals("Time-limited")) {
+            if (numberOfRecords > timeLimitedGameRecords.size()) {
+                return null;
+            }
+            return new ArrayList<>(timeLimitedGameRecords.subList(
+                    timeLimitedGameRecords.size() - numberOfRecords,
+                    timeLimitedGameRecords.size()
+            ));
+        } else {
+            if (numberOfRecords > wordLimitedGameRecords.size()) {
+                return null;
+            }
+            return new ArrayList<>(wordLimitedGameRecords.subList(
+                    wordLimitedGameRecords.size() - numberOfRecords,
+                    wordLimitedGameRecords.size()
+            ));
+        }
+    }
+
+    private void writeRecordToFile(GameRecord gameRecord) {
+        String gameMode = gameRecord.getGameMode();
+        if (gameMode == "Word Limited") {
+            Storage.writeGameRecords(wordLimitedGameRecords, "Word-limited");
+        } else {
+            Storage.writeGameRecords(timeLimitedGameRecords, "Time-limited");
+
+        }
+    }
+
+    public int getNumberOfGameRecords(String gameMode) {
+        if (gameMode.equals("Word-limited")) {
+            return wordLimitedGameRecords.size();
+        } else {
+            return timeLimitedGameRecords.size();
+        }
+    }
 }
