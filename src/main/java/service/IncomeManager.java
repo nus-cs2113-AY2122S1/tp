@@ -38,4 +38,8 @@ public class IncomeManager {
             ui.printMessage((i + 1) + ". \t| " + incomes.get(i));
         }
     }
+
+    public static void updateIncome(String incomeName, Double incomeValue) {
+        IncomeList.updateIncome(incomeName, incomeValue);
+    }
 }

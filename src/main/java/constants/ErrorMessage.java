@@ -18,6 +18,8 @@ public final class ErrorMessage {
 
     public static final String deleteIncomeErrorMsg = "Error with deleting income. Ensure you "
             + "keyed in the correct id or income name and try again!";
+    public static final String updateIncomeErrorMsg = "Error with updating income. Ensure you keyed "
+            + "the income name and try again!";
 
     // budget error messages
     public static final String addBudgetErrorMsg = "Error with adding budget. Ensure you keyed "

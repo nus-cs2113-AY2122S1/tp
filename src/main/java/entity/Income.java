@@ -23,6 +23,10 @@ public class Income {
         return this.value;
     }
 
+    public void updateValue(double value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return String.format("%-16s | %-6.2f | %s", description, value, date);
