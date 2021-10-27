@@ -4,6 +4,7 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 import static seedu.duke.common.Messages.EXIT_MESSAGE;
 
+//@@author exetr
 /**
  * Class encapsulating an exit command.
  */

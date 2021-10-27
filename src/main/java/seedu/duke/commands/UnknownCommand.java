@@ -3,12 +3,12 @@ package seedu.duke.commands;
 import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.UNKNOWN_MESSAGE;
-
+//@@author exetr
 /**
  * Class encapsulating an unknown command not recognised by the application.
  */
 public class UnknownCommand extends Command {
+    public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean";
 
     /**
      * Single constructor, no parameters.
