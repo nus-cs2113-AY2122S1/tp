@@ -67,6 +67,7 @@ public class Parser {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
+        
         switch (command) {
         case "bye":
             if (!params.equals("")) {

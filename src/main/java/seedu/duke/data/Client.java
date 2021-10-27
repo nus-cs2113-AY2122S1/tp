@@ -22,6 +22,13 @@ public class Client {
         email = values[3];
     }
 
+    public Client(String clientId, String clientName, String clientContactNum, String clientEmail) {
+        id = clientId;
+        name = clientName;
+        contactNum = clientContactNum;
+        email = clientEmail;
+    }
+
     public String getId() {
         return id;
     }
