@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.typists.common.Messages.MESSAGE_TIME_GAME_END;
-import static seedu.typists.common.Utils.*;
+import static seedu.typists.common.Utils.getWordLineFromStringArray;
+import static seedu.typists.common.Utils.splitStringIntoWordList;
 
 public class TimeModeGame extends Game {
     protected static final Logger logger = Logger.getLogger("Foo");
@@ -77,7 +78,7 @@ public class TimeModeGame extends Game {
         }
     }
 
-    public String[] getDisplayLines (int row) {
+    public String[] getDisplayLines(int row) {
         int startIndex = (row - 1) * wordsPerLine;
         assert startIndex >= 0 : "word index should be non-negative";
         String[] line = new String[wordsPerLine];
