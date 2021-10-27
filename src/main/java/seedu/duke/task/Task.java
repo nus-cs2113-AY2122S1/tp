@@ -8,7 +8,7 @@ public abstract class Task {
     private static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
     protected static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
-    private static final String TASK_ENTRY_DESCRIPTION_REGEX = "%s [%s]";
+    private static final String TASK_ENTRY_DESCRIPTION_REGEX = "%s <%s> {%s}";
 
     private static final String DESCRIPTION_NOT_EMPTY_ASSERTION = "description should not be empty.";
     private static final String DESCRIPTION_NOT_NULL_ASSERTION = "description should not be null.";
@@ -42,7 +42,7 @@ public abstract class Task {
     }
 
     public String getTaskEntryDescription() {
-        return String.format(TASK_ENTRY_DESCRIPTION_REGEX, getDescription(), getPriority());
+        return String.format(TASK_ENTRY_DESCRIPTION_REGEX, getDescription(), getPriority(), getRecurrence());
     }
 
     public String getDescription() {

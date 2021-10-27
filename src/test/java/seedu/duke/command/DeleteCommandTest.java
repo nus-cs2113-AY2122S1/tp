@@ -56,7 +56,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "   __3__, , _");
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -82,7 +82,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5      ");
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -108,7 +108,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5,   1   ");
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -134,7 +134,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1, _ _ 3    _,_   5");
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -160,7 +160,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1-2, _ _ 4    _,_   5");
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test

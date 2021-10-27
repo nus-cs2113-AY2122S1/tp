@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     private static final TypeEnum TASK_TYPE = TypeEnum.DEADLINE;
 
+    private static final String DEADLINE_ICON = "[D]";
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (dueDate: %s)";
 
     private static final String DUE_DATE_NOT_NULL_ASSERTION = "dueDate for Deadline cannot be null.";
@@ -67,7 +68,7 @@ public class Deadline extends Task {
     
     @Override
     public String getTaskEntryDescription() {
-        return super.getTaskEntryDescription()
+        return DEADLINE_ICON + " " + super.getTaskEntryDescription()
                 + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
     }
 }
