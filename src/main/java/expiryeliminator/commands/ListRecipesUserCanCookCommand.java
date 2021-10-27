@@ -46,7 +46,7 @@ public class ListRecipesUserCanCookCommand extends Command {
             IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
             assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
             LocalDate expiryDate = ingredient.getEarliestExpiryDate();
-            if (expiryDate.isBefore(LocalDate.now()) || expiryDate.equals(LocalDate.now())) {
+            if (expiryDate.isBefore(LocalDate.now())) {
                 expiredIngredients += ingredient.getIngredient() + "\n";
             }
         }
