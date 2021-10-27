@@ -300,7 +300,7 @@ Updated! Number of rows affected: 2
 
 ### Deleting a medication stock: `deletestock`
 
-Deletes a medication from the inventory.
+If you made a mistake and want to delete a medication from the inventory, you may do so by using this command.
 
 * Able to delete a specific stock by specifying Stock ID using `i/ID`.
 * Able to delete multiple stocks that have expiry date before and equals to specified date using `expiring/EXPIRY_DATE`.
@@ -488,7 +488,8 @@ Updated prescription information!
 
 ### Deleting prescriptions: `deleteprescription`
 
-Deletes a prescription record by specifying the Prescription ID.
+If you made a mistake and want to delete a prescription record you may do so by using this command along with a specific 
+Prescription ID.
 
 Format: `deleteprescription i/PRESCRIPTION_ID`
 
@@ -626,7 +627,7 @@ Updated! Number of rows affected: 1
 
 ### Deleting an order: `deleteorder`
 
-Deletes order by specifying the Order ID.
+If you made a mistake and want to delete an order, you may do so by using this command along with a specific Order ID.
 
 Format: `deleteorder i/ORDER_ID`
 
