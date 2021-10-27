@@ -50,7 +50,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Stonks XD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
 `java -jar tp.java` in the command line. `Stonks XD` will start up.
