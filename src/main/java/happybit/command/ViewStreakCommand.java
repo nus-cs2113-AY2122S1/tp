@@ -22,6 +22,8 @@ public class ViewStreakCommand extends Command {
 
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        // todo
+
+        goalList.viewHabitStreak(goalIndex, habitIndex, printManager);
+        // todo add Huien export
     }
 }

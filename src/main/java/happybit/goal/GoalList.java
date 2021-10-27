@@ -1,7 +1,9 @@
 package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
+import happybit.progress.Progress;
 import happybit.ui.PrintManager;
 
 import java.text.SimpleDateFormat;
@@ -9,6 +11,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class GoalList {
     private static final String ERROR_EMPTY_GOAL_LIST = "There are no goals!";
@@ -251,12 +254,19 @@ public class GoalList {
         // To be implemented
     }
 
-    public void viewGoalProgress(int goalIndex) {
+    public void viewGoalProgress(int goalIndex, PrintManager printManager) throws HaBitCommandException {
         // todo
+        Goal goal = getGoal(goalIndex);
+        // todo incorporate Daren printManager implementation
     }
 
-    public void viewHabitStreak(int goalIndex, int habitIndex) {
+    public void viewHabitStreak(int goalIndex, int habitIndex, PrintManager printManager) throws HaBitCommandException {
         // todo
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habitList = goal.getHabitList();
+        Habit habit = getHabit(habitList, habitIndex);
+        HashMap<Date, Progress> habitProgress = habit.getProgressHashMap();
+        // todo incorporate Daren printManager implementation
     }
 
     /**
@@ -268,20 +278,17 @@ public class GoalList {
         for (Goal goal : goalList) {
             ArrayList<Habit> currGoalsHabits = goal.getHabitList();
             for (Habit habit : currGoalsHabits) {
-                // upon start up check if habitDate is equals nextHabitDate
-                // means next iteration:
-                // update habitDate and nextHabitDate and addProgress()
                 Date currDate = new Date();
                 if (habit.getInterval() != 0) {
+                    // todo change to a loop to ensure dates missed still have Progress objects initiated and linked to it
+                    // loop until nextHabitDate currDate >= habitDate
                     if (habit.isNextCycle(currDate)) {
                         Date newHabitDate = habit.getNextHabitDate();
                         habit.setHabitDate(newHabitDate);
                         habit.setNextHabitDate();
+                        // Progress added everytime habitDate is set
                         habit.addProgress();
                     }
-                    // todo
-                    // need to check if currDate past nextHabitDate;
-                    // increment until currDate >= habitDate and < nextHabitDate
                 }
             }
         }

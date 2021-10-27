@@ -147,6 +147,10 @@ public class Habit {
         return false;
     }
 
+    public HashMap<Date, Progress> getProgressHashMap() {
+        return progressHashMap;
+    }
+
     /**
      * Method called whenever habitDate is set (new habit instantiation) or changed(recurring).
      * Adds new KeyValuePair with habitDate as key and Progress object as value.
