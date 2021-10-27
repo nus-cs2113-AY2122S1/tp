@@ -74,6 +74,17 @@ public class TextUi {
                 + DIVIDER);
     }
 
+    public static void showLoanReminder(int index, Loan dueLoan) {
+        if (index == 1) {
+            System.out.println("Loan Reminder:");
+        }
+        System.out.println(index + "."
+                + "Your loan to "
+                + dueLoan.getName() + ", "
+                + "$" + dueLoan.getAmount()
+                + " is due!!");
+    }
+
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, boolean isLoadingStorage,
                                                    AllRecordList recordList) {
         if (!isLoadingStorage) {

@@ -19,7 +19,7 @@ public class DeleteExpenditureParser implements ParserPrefix {
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH),IS_COMPULSORY);
 
         String indexString = argumentMap.get(PREFIX_INDEX);
-        if (indexString.equals("")) {
+        if (!args.contains("i/")) {
             return new DeleteAllExpenditureCommand(month);
         } else if (indexString.contains("-")) {
             int[] indexArray = ParserUtil.parseMultipleIndexes(indexString);

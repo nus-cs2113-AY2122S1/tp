@@ -25,14 +25,16 @@ original source as well}
 
 ## Implementation
 ###Delete feature
-The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains two usages which are deletion of Budget and deletion of Expenditure.
+The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
-For example, when user keys delete b/ m/MONTH , The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
+For example, when user keys ```delete -b m/MONTH```, The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
+
+A more specific example with sequence diagram will be given at the end of this section.
 
 Similarly, we have our Parser to parse the commands for deletion of expenditures and loans:
-* ```delete e/ m/MONTH``` — If the value at the position after ‘e/’ is “”, we use for loop to delete all expenditures within a month.
-* ```delete e/INDEX m/MONTH``` — If the value at the position after ‘e/’ is an integer, we use DeleteSingleExpenditureCommand to delete this specific expenditure in this specific month.
-* ```delete e/INDEX-INDEX m/MONTH``` — If the value at the position after ‘e/’ is a range of integers, we firstly use split[] to extract the starting and ending integers, and then we use DeleteMultipleExpenditureCommand to delete the expenditures in this range in this specific month. (also by using for loop)
+* ```delete -e m/MONTH``` — If there's no index value specified in the input, we use for loop to delete all expenditures within a month.
+* ```delete -e m/MONTH i/INDEX``` — If the value at the position after ‘i/’ is an integer, we use DeleteSingleExpenditureCommand to delete this specific expenditure in this specific month.
+* ```delete -e m/MONTH i/INDEX-INDEX``` — If the value at the position after ‘i/’ is a range of integers, we firstly use split[] to extract the starting and ending integers, and then we use DeleteMultipleExpenditureCommand to delete the expenditures in this range in this specific month. (also by using for loop)
 
 <br/>
 
@@ -46,9 +48,19 @@ Given below is an example usage scenario and how the delete feature behaves at e
 
 **Step 1**. The user launches the application for the first time.
 <br/> **Step 2**. The user adds a budget and some expenditures to the current month.
-<br/> **Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some of the expenditures.
-<br/> **Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete e/3-5 m/10```
-<br/> **Step 5**. The Parser starts to parse the command, it extracts starting index 3, ending index 5, and month 10. As this is a range of expenditures to be deleted, the Parser class calls DeleteMultipleExpenditureCommand to work. By using a for loop, the 3 expenditures are successfully deleted and prints out a showMultipleExpenditureDeletedMessage from TextUi class.
+<br/> **Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some expenditures.
+<br/> **Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete -e m/10 i/3-5``` for Parser class to parse:
+* ```parseCommand(String userInput)``` specifies the user input as a delete command, then calls the method ```prepareDeleteCommand(String commandParams)``` inside the class.
+* By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
+* Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
+<br/>
+  ![Figure Delete_Parse](diagrams/parseDeleteInputCommand-Sequence_Diagram.png)
+
+**Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
+* ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
+* ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
+<br/>
+  ![Figure Delete_Execute](diagrams/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
 
 
 ###Edit feature

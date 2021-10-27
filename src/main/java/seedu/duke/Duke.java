@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.time.LocalDate;
+import java.lang.String;
+
 import seedu.duke.commands.Command;
 import seedu.duke.data.AllRecordList;
 import seedu.duke.parser.Parser;
@@ -12,6 +15,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_INPUT;
 public class Duke {
     private final TextUi textUi;
     private final Parser parser;
+    private static int loanCounter = 1;
     private final AllRecordList recordList;
     private final String recordListDirectory = "";
 
@@ -27,12 +31,27 @@ public class Duke {
 
     public void run() {
         TextUi.showWelcomeMessage();
-        // System.out.println("Welcome");
+        LocalDate dateNow= LocalDate.now();
+        String[] dateNowString = dateNow.toString().split("-",3);
+        int dateMonthNow = Integer.parseInt(dateNowString[1]);
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
         recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
         boolean isExit = false;
         recordList.statIntro(recordList);
+
+        /**
+         * Loan reminder to warn user that the following loans are due!
+         */
+        for (int i = 0; i < recordList.getLoanListSize(dateMonthNow); i++) {
+            recordList.getLoan(i,dateMonthNow).setDueDate();
+            if (dateNow.isAfter(recordList.getLoan(i,dateMonthNow).getDueDate())) {
+                textUi.showLoanReminder(loanCounter, recordList.getLoan(i, dateMonthNow));
+                loanCounter++;
+            }
+        }
+
+        textUi.printDivider();
 
         while (!isExit) {
             try {
