@@ -340,7 +340,7 @@ public class Ui {
     }
 
     public void printOverallBudgetWarning(String month, double currAmount, double limit) {
-        
+
         System.out.printf("You are almost reaching the %s OVERALL budget: $%.2f/$%.2f",
                 month, currAmount, limit);
         System.out.print(newLine);
