@@ -160,7 +160,41 @@ same time.
 
 ### Product Scope
 
+**Target user profile:**
+* needs to manage a significant amount of different types of restaurant data
+* prefers using a desktop application
+* is able to type quickly
+* prefers typing as compared to mouse interactions
+* is reasonably comfortable using CLI apps
+
+**Value proposition:** manage restaurant data faster than a typical mouse/GUI driven application
+
 ### User Stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| **Priority**	| **As a ...** | **I want to ...** | **So that I can ...** |
+| ------------ | ------------- | ------------- | ------------- |
+| `* * *` | restaurant manager | view all my current employees | keep track of them |
+| `* * *` | restaurant manager | add new employees | keep track of newly hired employees |
+| `* * *` | restaurant manager | delete employees | remove entries I no longer need |
+| `* * *` | restaurant manager | keep track of the ingredients I have left | know when to order more |
+| `* * *` | restaurant manager | add new ingredients | adjust to changes in my menu |
+| `* * *` | restaurant manager | delete ingredients | remove entries I no longer need |
+| `* * *` | restaurant manager | view my menu | keep track of it |
+| `* * *` | restaurant manager | add new dishes into my menu | increase the variety of my menu |
+| `* * *` | restaurant manager | remove dishes from my menu | focus more on my other dishes |
+| `* *` | restaurant manager | view all my employees' salaries | better manage my finances |
+| `* *` | restaurant manager | increase my employees' salaries | give them a raise when they are performing well |
+| `* *` | restaurant manager | decrease my employees' salaries | reduce my expenses when the cash flow is tight |
+| `* *` | restaurant manager | keep track of my employees' offs | plan my manpower effectively |
+| `* *` | restaurant manager | change the price of a dish |  adjust it according to other external factors |
+| `* *` | restaurant manager | add a discount to a dish | organise promotions to attract more customers |
+| `* *` | restaurant manager | add daily earnings and expenditure | keep track of my finances |
+| `*` | restaurant manager | check for loss of utensils | account for them and order more accordingly |
+| `*` | restaurant manager | check the prices for advertisements | evaluate the benefits they bring |
+| `*` | restaurant manager | view customer complaints | improve my restaurant based on their feedback |
+| `*` | restaurant manager | keep track of popular dishes | plan the menu in the way that maximises my revenue |
 
 ### Non Functional Requirements
 
