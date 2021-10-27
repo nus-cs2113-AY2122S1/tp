@@ -19,7 +19,7 @@ public class SearchMapCommandParser {
 //        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
         if (input.length() == 0) {
-            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+//            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
@@ -27,6 +27,9 @@ public class SearchMapCommandParser {
 
         if (isNumeric(input)) {
             int index = Integer.parseInt(input);
+            if (index > universityMasterList.getSize() || index < 1) {
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            }
             university = universityMasterList.get(index - 1);
         } else {
             university = searchForUniversity(input, universityMasterList);

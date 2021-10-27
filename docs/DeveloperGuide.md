@@ -5,20 +5,39 @@ title: Developer Guide
 
 ## Contents 
 
-* __Acknowledgements__
-* __Getting Started__
-* __Design & Implementation__
-* __Product Scope__
-  1. Target user profile
-  2. Value proposition
-* __User Stories__
-* __Non-Functional Requirements__
-* __Glossary__
-* __Instructions for manual testing__ 
+* [Acknowledgements](#Acknowledgements)
+* [Getting Started](#getting-started)
+* [Design & Implementation](#design--implementation)
+  * [Main Components](#main-components) 
+  * [Command Implementation](#command-implementation)
+  * [Ui](#ui)
+  * [Storage](#storage)
+  * [University and module related classes](#university-and-module-related-classes)
+    * [University](#university)
+    * [UniversityList](#universitylist)
+    * [Module](#module)
+    * [ModuleList](#modulelist)
+    * [ModuleMapping](#modulemapping)
+  * [Parser Component](#parser-component)
+    * [Parser](#parser)
+    * [AddCommandParser](#addcommandparser)
+    * [RemoveCommandParser](#removecommandparser)
+    * [FindCommandParser](#findcommandparser)
+    * [SearchMapCommandParser](#searchmapcommandparser)
+    * [HelpCommandParser](#helpcommandparser)
+    * [ExitCommandParser](#exitcommandparser)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
 * __EduRec:__ For the list of possible module mappings
+* __AB3:__ For the format of user guide and developer guide
 
 ## Getting started 
 
@@ -41,10 +60,21 @@ The other core components of SEPlanner are:
 `Storage` : Loads data from, and stores data back to the user's local machine.  
 `UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.  
 
+### Command Interaction 
+
+<p align = "center">
+<img src="images/CommandInteraction.png" width = "800" />
+</p>
+
+The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
+is entered. 
 
 ### Command Implementation
 
-<img src="images/Package%20commands.png" width = "280"/>  
+<p align = "center">
+<img src="images/Package%20commands.png" width = "800" />
+</p>
+
 
 Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
 
@@ -66,17 +96,32 @@ Step 9. The user executes `remove /map 4 1` command to remove the first mapping 
 
 Step 10. The user executes `exit` command to terminate the program.
 
-### Ui
+### User Interface
 
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
 
-<img src="images/Ui_UML.png" width = "280"/>
+<p align = "center">
+<img src="images/Ui_UML.png" width = "800" />
+</p>
 
-The UI component 
-* Displays different object types such as University, Module and Module mapping.
-* Provides means of customization for display formatting. 
-* Summarizes different parts of the program into callable methods.
+The above class diagram illustrates the relationship between the classes within the Ui components.
+
+The UI class
+* Contains helper methods for the other Ui classes.
+* Provides means of printing constants.
+
+The UiInvalid class contains methods for printing messages from the Parser component.
+
+The UiMapping class contains methods for printing Module Mappings. 
+
+The UiModule class contains methods for printing Modules. 
+
+The UiUniversity class contains methods for printing Universities. 
+
+The UiWelcome class contains a method for printing the welcome greeting. 
+
+
 
 ### Storage
 
@@ -113,7 +158,7 @@ The following diagrams are the class diagrams of the classes:
 
 This component consist of the following classes: 
 
-### University 
+#### University 
 
 * Stores basic information of a university.
 * Stores the unique index for each university in `index`, this index can be used to refer to a specific university in the commands.
@@ -157,7 +202,7 @@ This component consist of the following classes:
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
-* Ensures that the command, flags and arguments are entered in the correct format.
+* Ensures that the command, flags and arguments are entered in the correct format.  
 
 #### Parser
 
@@ -201,11 +246,11 @@ This object will invoke an instance of `ExitCommand`.
 
 ## Product scope
 
-### Target user profile
+### Target User Profile
 
 __SEPlanner__ is targeted at Computer Engineering students in NUS planning for their Student Exchange Program (SEP). 
 
-### Value proposition
+### Value Proposition
 
 Student Exchange Program is one of the most stressful and difficult things to plan for in a NUS students life. 
 With multiple sources of information and a frustrating webpage to navigate, SEPlanner aims to organise 
@@ -245,6 +290,7 @@ a list of potential exchange Universities based on the users study plan, module 
 * *Selected Module List* - The list of NUS modules the user selected.
 * *CSV* - Comma-separated Values
 * *SEP* - Student Exchange Programme
+* *NUS* - National University of Singapore
 
 ## Instructions for manual testing
 
