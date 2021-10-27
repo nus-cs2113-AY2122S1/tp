@@ -405,7 +405,7 @@ public class Ui {
             System.out.println(PADDING + "   Grade: " + module.getGrade());
         }
         printCap(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     private void printCap(ModuleList moduleList) {
