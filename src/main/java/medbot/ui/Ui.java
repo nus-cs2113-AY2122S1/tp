@@ -150,8 +150,8 @@ public class Ui {
         }
         for (String person : persons) {
             output += person;
+            output += END_LINE;
         }
-        output += END_LINE;
         output += TABLE_ROW_SEPARATOR;
         return output;
     }
