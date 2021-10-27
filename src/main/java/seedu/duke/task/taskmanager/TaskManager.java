@@ -13,6 +13,7 @@ import seedu.duke.exception.InvalidTaskTypeException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.SortFormatException;
+import seedu.duke.exception.TaskIsNonRecurringException;
 import seedu.duke.log.Log;
 
 import java.time.LocalDateTime;
@@ -99,7 +100,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     public String listTaskRecurrence(Map<String, String> parameters) throws EmptyTasklistException,
-            InvalidTaskIndexException, ListFormatException {
+            InvalidTaskIndexException, ListFormatException, TaskIsNonRecurringException {
         if (taskList.size() == 0) {
             throw new EmptyTasklistException();
         }
@@ -115,9 +116,14 @@ public class TaskManager implements Subject {
         if (taskIndex < 0 || taskIndex > taskList.size() - 1) {
             throw new InvalidTaskIndexException(taskId);
         }
+        RecurrenceEnum recurValue = taskList.get(taskIndex).getRecurrence();
+        if (recurValue.equals(RecurrenceEnum.NONE)) {
+            throw new TaskIsNonRecurringException();
+        }
         int numOfRecurredDates = 4;
         LocalDateTime initialDate;
         List<LocalDateTime> recurredDatesList = new ArrayList<>();
+
         if (taskList.get(taskIndex) instanceof Todo) {
             Todo task = (Todo) taskList.get(taskIndex);
             initialDate = task.getDoOnDate();
