@@ -22,14 +22,6 @@ public class Expense extends Entry {
         this.category = category;
     }
 
-    public double getExpenseValue() {
-        return value;
-    }
-
-    public void setExpenseValue(double newValue) {
-        this.value = newValue;
-    }
-
     @Override
     public ExpenseCategory getCategory() {
         return category;

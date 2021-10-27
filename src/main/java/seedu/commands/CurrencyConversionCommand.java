@@ -1,5 +1,6 @@
 package seedu.commands;
 
+import seedu.budget.Budget;
 import seedu.entry.Entry;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
@@ -24,11 +25,11 @@ public class CurrencyConversionCommand extends Command {
         case SGD:
             return exchangeRate = 1.35;
         default:
-            return exchangeRate = 1.0;
+            return exchangeRate = 1.00;
         }
     }
 
-    public boolean isNotBaseYear(CurrencyTypes from) {
+    public boolean isBaseYear(CurrencyTypes from) {
         return !from.equals(CurrencyTypes.SGD);
     }
 
@@ -51,8 +52,15 @@ public class CurrencyConversionCommand extends Command {
         finances.setCurrency(to);
     }
 
+//    public void convertBudgets(ArrayList<Budget> budgets, FinancialTracker finances) {
+//        double newValue = convertEntry(from, to, budgets.getBudget());
+//        assert newValue >= 0;
+//        budgets.setBudgetValue(newValue);
+//        finances.setCurrency(to);
+//    }
+
     private double convertEntry(CurrencyTypes from, CurrencyTypes to, double value) {
-        if (isNotBaseYear(from)) {
+        if (isBaseYear(from)) {
             double fromRate = determineExchangeRate(from);
             assert fromRate >= 0;
             value = (value / fromRate);
