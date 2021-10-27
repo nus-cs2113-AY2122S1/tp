@@ -777,6 +777,16 @@ Github:   github.com/ashrafjfr
 ____________________________________________________________
 
 ____________________________________________________________
+There appears to be duplicated flags in your command.
+Please kindly remove them to prevent any ambiguous action performed.
+____________________________________________________________
+
+____________________________________________________________
+There appears to be duplicated flags in your command.
+Please kindly remove them to prevent any ambiguous action performed.
+____________________________________________________________
+
+____________________________________________________________
 Delete all of your contacts?  (y/n)
 ____________________________________________________________
 
