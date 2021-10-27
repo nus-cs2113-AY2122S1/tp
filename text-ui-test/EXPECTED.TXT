@@ -17,4 +17,4 @@
      | bye: exit typist
      | ===========================================================
 Updating game records...
-     | Bye. Hope to see you again soon!
+     | Thanks for using Typist! See you next time!

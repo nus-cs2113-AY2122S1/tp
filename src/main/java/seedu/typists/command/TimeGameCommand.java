@@ -36,7 +36,7 @@ public class TimeGameCommand implements Command {
         }
     }
 
-    public int getTime (ArrayList<String> args, String key) throws InvalidCommandException, IncompleteCommandException {
+    public int getTime(ArrayList<String> args, String key) throws InvalidCommandException, IncompleteCommandException {
         if (!args.contains(key)) {
             throw new IncompleteCommandException();
         }
