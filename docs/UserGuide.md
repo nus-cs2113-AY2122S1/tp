@@ -316,7 +316,7 @@ Format: `delete APPOINTMENT_ID`
 
 Expected output:
 ```
-
+deleted appointment with Id: APPOINTMENT_ID
 ```
 
 ### Editing an appointment's information: `edit`
@@ -328,7 +328,7 @@ Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
 
 Expected output:
 ```
-
+Appointment APPOINTMENT_ID changed to Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
 ```
 
 ### Viewing an appointment's information: `view`
@@ -359,6 +359,31 @@ Here is a list of all appointments:
  | 2    | 10 Dec 21 1000HRS | 1          | James Tan            | 2        | Dr Tay               | 
  | 3    | 19 Nov 21 1400HRS | 2          | Eliot Ong            | 2        | Dr Tay               | 
  | 4    | 31 Oct 21 1200HRS | 3          | Daniel Chan          | 1        | Dr Lim               | 
+```
+
+### Finding a person's appointments: `find`
+
+Finds a person's list of appointments. The list can be filtered
+by date-time to display the list of appointments before/after a certain date.
+
+Format: `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`
+
+* The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS should be written as `090221 0800`
+* `PERSON_TYPE` is `p` (patient)  or `s` (staff)
+* `FILTER_TYPE` is `b` (before) or `a` (after)
+
+Example:
+`find s/1 b/161022 2200`
+
+Expected output:
+```
+Here is a list of matched appointments:
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name      | 
+ -------------------------------------------------------------------------------------------------- 
+ | 2    | 15 Oct 21 1800HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
+ | 3    | 22 Oct 21 2100HRS | 2          | Jane Doe             | 1        | John Tan The Doc     | 
+ | 1    | 22 Oct 21 2200HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
 ```
 
 ### Finding an appointment
@@ -403,7 +428,7 @@ Format:
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
 | **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|
-| **find**     |                          |
+| **find**     | `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]` <br/> E.g. `find p/1 b/110322 1200`             |
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 

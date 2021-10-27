@@ -111,34 +111,6 @@ Given below are class diagrams of how the `Command` class and its subclasses are
 
 This section describes some noteworthy details on how certain features are implemented.
 
-#### Design Considerations
-
-**Aspect: How different views are identified**
-
-Currently, an enum property in the `Parser` class is used to differentiate between views.
-
-Pros:
-
-* Straightforward to implement
-
-Cons:
-
-* Maintainability concerns as complexity of Uis increase
-
-#### Alternatives Considered
-
-3 sub `Ui` classes & sub `Parser` classes that inherit from the main `Ui` and `Parser` class.
-
-Pros:
-
-* Potential for reduced coupling where only sub `Ui` or sub `Parser` classes affected by changes in other class
-
-Cons:
-
-* Less straightforward implementation
-
-<br>
-
 ### Switch view feature
 
 #### Implementation
@@ -148,22 +120,15 @@ The switch view mechanism is heavily linked to the `Parser` class. By having a
 appropriate `SwitchCommand` class, which modifies the corresponding `ViewType`
 of the `Parser`. The 3 possible views and the corresponding user input commands are as follows:
 
-* `switch patientinfo` - switches to the patient info view.
-* `switch staffinfo` - switches to the medical staff info view.
-* `switch scheduler` - switches to the scheduler view.
+* `switch p` or `switch 1` - switches to the patient info view.
+* `switch m` or `switch 2` - switches to the medical staff info view.
+* `switch s` or `switch 3` - switches to the scheduler view.
 * `switch` - will switch to another view depending on the current view.
 
-Each command essentially evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
+Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
 `ViewType` property in the `Parser` class.
 
-By having different views, we can execute different commands given the same user input. This will be demonstrated in the
-example usage scenario below, and how the switch view mechanism works for different views.
-
-![Image of Sequence Diagram](diagrams/SwitchViewDiagram.png)
-
-<!--
-Update with image + explanation
--->
+[Design Considerations to be added]
 
 ### Find feature
 
