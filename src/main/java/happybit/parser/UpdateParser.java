@@ -47,8 +47,8 @@ public class UpdateParser {
         }
     }
 
-    //public static Command parseUpdateHabitNameCommand(String commandInstruction) throws HabitParserException {
-
-    //}
+    public static Command parseUpdateHabitNameCommand(String commandInstruction) throws HaBitParserException {
+        return null;
+    }
 
 }

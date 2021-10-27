@@ -4,7 +4,7 @@ import happybit.command.Command;
 import happybit.command.ViewStreakCommand;
 import happybit.exception.HaBitParserException;
 
-public class StreakParser extends ParserUtils {
+public class StreakParser extends Parser {
 
     private static final String GOAL_INDEX_FLAG = "g/";
     private static final String HABIT_INDEX_FLAG = "h/";

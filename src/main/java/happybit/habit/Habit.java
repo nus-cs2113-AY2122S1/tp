@@ -170,7 +170,7 @@ public class Habit {
      * Gets the statistics of the habit's completion.
      * Statistics includes: expired, completed, remaining intervals, and completion rate.
      *
-     * @return Statistics of habit's completion.
+     * @return Statistics of habit's completion.    
      */
     public int[] getListStatistics() {
         int[] statistics = new int[4];
