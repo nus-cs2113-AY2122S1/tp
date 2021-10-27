@@ -13,7 +13,13 @@ done in an efficient manner.
     - [Adding a book item: `add b`](#Adding-a-book-item)
     - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
     - [Adding a video item: `add v`](#Adding-a-video-item)
-  - [Removing an item: `remove`](#Removing-an-item)
+  - [List items: `list`]()
+  - [Search items: `search`]()
+  - [Reserve items: `res`]()
+  - [Un-reserve items: `unres`]()
+  - [Loan items: `loan`]()
+  - [Return items: `return`]()
+  - [Removing an item: `rm`](#Removing-an-item)
   - [Exiting the program: `exit`](#Exiting-the-program)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
@@ -95,6 +101,72 @@ Expected Output:
 > add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes
   (+) Added new video item to the catalogue
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
+
+### List items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Search items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Reserve items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Un-reserve items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Loan items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
+```
+
+### Return items
+{DESCRIPTION}
+
+Format: ``
+
+Example: ``
+
+Expected Output:
+```
 ```
 
 ### Removing an item

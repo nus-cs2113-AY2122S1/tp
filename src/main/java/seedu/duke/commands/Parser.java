@@ -53,7 +53,7 @@ public class Parser {
      * Key represents the type of input (null representing command word).
      * Value contains values supplied by user that are associated to the argument types.
      * @param input User input string
-     * @return HashMap<String, String> Containing key-value pairs for different arguments
+     * @return HashMap(String, String) Containing key-value pairs for different arguments
      */
     public HashMap<String, String> extractArgs(String input) {
         HashMap<String, String> args = new HashMap<>();
