@@ -7,9 +7,11 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
+
+import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
+import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
 
@@ -99,6 +101,8 @@ public class ReserveCommand extends Command {
             handleLoanCommand(ui, catalogue);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
+        } catch (NullPointerException e) {
+            ui.print(INVALID_ID);
         }
     }
 }

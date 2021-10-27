@@ -13,12 +13,15 @@ done in an efficient manner.
         - [Adding a book item: `add b`](#Adding-a-book-item)
         - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
         - [Adding a video item: `add v`](#Adding-a-video-item)
-    - [List items: `list`]()
-    - [Search items: `search`]()
-    - [Reserve items: `res`]()
-    - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
-    - [Loan items: `loan`]()
-    - [Return items: `return`]()
+    - [List items: `list`](#List-items)
+    - [Search items: `search`](#Search-item-by-ID)
+      - [Search item by ID: `search i/`](#Search-item-by-ID)
+      - [Search item by title: `search t/`](#Search-item-by-title)
+      - [Search item by status: `search s/`](#Search-item-by-status)
+    - [Reserve items: `res`](#Reserve-items)
+    - [Un-reserve items: `unres`](#Unreserve-items)
+    - [Loan items: `loan`](#Loan-items)
+    - [Return items: `return`](#Return-items)
     - [Removing an item: `rm`](#Removing-an-item)
     - [Editing an item: `edit`](#Editing-an-item)
     - [Exiting the program: `exit`](#Exiting-the-program)
@@ -95,7 +98,7 @@ Add a new video item to the catalogue
 
 Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
 
-Example: `add v t/Casino Royale i/095680 p/Sony Pictures e/144 minutes`
+Example: `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`
 
 Expected Output:
 ```
@@ -155,7 +158,7 @@ Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
 
 Format: `search s/STATUS`
 
-Example: `search t/AVAILABLE`
+Example: `search s/AVAILABLE`
 
 Expected Output:
 ```
@@ -167,47 +170,63 @@ Expected Output:
 ```
 
 ### Reserve items
-{DESCRIPTION}
+Reserves an item for a specific person.
 
-Format: ``
+Format: `res i/ID u/USERNAME`
 
-Example: ``
-
-Expected Output:
-```
-```
-
-### Un-reserve items
-{DESCRIPTION}
-
-Format: ``
-
-Example: ``
+Example: `res i/2551 u/johnsmith`
 
 Expected Output:
 ```
+> res i/2551 u/johnsmith
+  (+) You have successfully reserved an item:
+  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+```
+
+### Unreserve items
+Make a previously reserved item available again.
+
+Format: `unres ID`
+
+Example: `unres 2551`
+
+Expected Output:
+```
+> unres 2551
+  (+) Item unreserved:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Loan items
-{DESCRIPTION}
+Loan out an item to an individual until a specific due date.
 
-Format: ``
+> ℹ️ Items that have been previously reserved by an individual can only be loaned out to the same individual
 
-Example: ``
+> ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
+
+Format: `loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)`
+
+Example: `loan i/2551 d/12-11-2021 u/johnsmith`
 
 Expected Output:
 ```
+> loan i/2551 d/12-11-2021 u/johnsmith
+  (+) Item has been loaned out:
+  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Return items
-{DESCRIPTION}
+Mark a previously loaned item as returned, making it available again.
 
-Format: ``
+Format: `return ID`
 
-Example: ``
+Example: `return 2551`
 
 Expected Output:
 ```
+> return 2551
+  (+) Item has been returned:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Editing an item
