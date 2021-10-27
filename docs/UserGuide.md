@@ -1,10 +1,10 @@
-# StonksXD User Guide
+# Stonks XD User Guide
 
 ![](https://melmagazine.com/wp-content/uploads/2019/07/Stonks_Meme.jpg)
 
 ## Introduction
 
-StonksXD is your go-to smart money management application that is able to: 
+Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
 - sets/adjusts your spending limits
 - provide you with helpful financial tips and insights
@@ -51,11 +51,13 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
-4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
-6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
-7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
+3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
+`java -jar tp.java` in the command line. `Stonks XD` will start up.
+5. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
+to show all available commands and their format.)
+6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
+7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
 8. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
 9. Refer to the [Features](#features) below for details of each command.
 
@@ -496,8 +498,8 @@ Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 
 ### Clear all entries: `clear_all_entries`
 
-Clears all the income and expense entries StonksXD is currently keeping track of.
-Use this when you want to start StonksXD afresh. Be careful when you use it though! 
+Clears all the income and expense entries Stonks XD is currently keeping track of.
+Use this when you want to start Stonks XD afresh. Be careful when you use it though! 
 This cannot be undone!
 
 Format: `clear_all_entries`
@@ -640,7 +642,7 @@ onwards will be treated as the new currency set.
 
 Format: `set_curr c/CURRENCY`
 
-- As of v2.0, StonksXD supports 2 different currencies: SGD and USD.
+- As of v2.0, Stonks XD supports 2 different currencies: SGD and USD.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
 <details>
@@ -711,7 +713,7 @@ Format: `end`
 
 ### Saving of Data
 
-StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
+Stonks XD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
 
 - `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
 - `StonksXD_Settings.csv` will store all the budget values as well as the currency setting.
@@ -721,10 +723,10 @@ when not using the program.
 
 #### Note
 
-1. StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
+1. Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
 When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
 is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
-corrupted and not be loaded into StonksXD.
+corrupted and not be loaded into Stonks XD.
 2. Changing the currency setting in `StonksXD_Settings.csv` is almost never recommended. This is because this will 
 cause all your entries and budgets to be recognised as a different currency. 
 
