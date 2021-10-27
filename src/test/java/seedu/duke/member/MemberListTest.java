@@ -26,10 +26,15 @@ class MemberListTest {
     public void setUp() throws Exception {
 
         teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
+        teckHwee.setIndex(1);
         ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232");
+        ianWang.setIndex(2);
         glenn = new Member("Glenn", "A0345678C", "M", "91233344");
+        glenn.setIndex(3);
         izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452");
+        izdiyad.setIndex(4);
         xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132");
+        xingYuan.setIndex(5);
 
         ArrayList<Member> memberList = new ArrayList<Member>();
         memberList.add(teckHwee);

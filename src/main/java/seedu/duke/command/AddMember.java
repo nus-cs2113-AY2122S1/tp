@@ -39,6 +39,8 @@ public class AddMember {
         try {
             boolean validMember = verifyMemberDetails(member);
             if (validMember) {
+                int newMemberIndex = members.getMemberListSize() + 1;
+                member.setIndex(newMemberIndex);
                 members.addMember(member);
                 Ui.printAddedMemberMessage(member);
                 File dukeMemberFile = new File("dukeMembers.csv");

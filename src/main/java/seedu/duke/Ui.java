@@ -102,10 +102,8 @@ public class Ui {
         if (members.getMemberListSize() == 0) {
             System.out.println("Member list is empty!");
         }
-        int display = 1;
         for (Member member : members.getMemberList()) {
-            System.out.println("[" + display + "] " + member.toString());
-            display++;
+            System.out.println(member.toString());
         }
     }
 

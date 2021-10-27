@@ -42,7 +42,7 @@ as any training-related information regarding your CCA's venue bookings and timi
       * `/m` adds member-related information.
         * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
-        * use `/g` to input _gender_ of your member.
+        * use `/g` to input _gender_ of your member. Either _M_ for male and _F_ for female.
         * use `/p` to input _phone number_ of your member.
       * `/t` adds training-related information.
         * use `/n` to input _name_ of the training entry.
@@ -53,7 +53,7 @@ as any training-related information regarding your CCA's venue bookings and timi
         * use `/a` to input _timing_ of the training entry.
         * use `/d` to input _attendance status_ of your member, 1 for present and 0 for absent.
     * **Format:**
-      * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>]
+      * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE_NUMBER>]
       * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
       * add [/att </m MEMBER_NAME>  </n TRAINING_NAME> </d 1_OR_0>]
     * **Examples:**
@@ -64,7 +64,7 @@ as any training-related information regarding your CCA's venue bookings and timi
     * **Expected Output:**
    ```
    Added a Member: 
-   Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
+   Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
    
    Added a Training entry:
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
@@ -90,7 +90,7 @@ kinds of entries you may want to list out, which are your member, training and a
    
    * **Expected Output:**
    ```
-   [1] Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
+   [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
     ```
     ```
    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
@@ -104,20 +104,20 @@ cancelled, or remove any incorrect entries to your attendance list. This means t
 allowing for a simple way to tidy up your file entries.
 
 3. `delete` This deletes entries from the Entry List in Duke.
-    * The `delete` keyword removes entries based on their index:
-      * `/m <INDEX>` is used to delete a member from the members list 
+    * The `delete` keyword removes entries based on their index/name:
+      * `/m <INDEX> or <MEMBER_NAME>` is used to delete a member from the members list 
       * `/t <INDEX>` is used to delete a training schedule from the trainings list
       * `/att <INDEX>` is used to delete an attendance entry from the attendance list
       * You can get the index of a member or training by calling `list /m`, `list /t` or `list /att` respectively
     * **Examples:**
-      - `delete /m 1`
+      - `delete /m 1` or `delete /m JOHN HWEE`
       - `delete /t 2`
       - `delete /att 3`
     
     * **Expected Output:**
     ```
     You have removed member:
-    Member Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888
+    Member Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
    ```
     You have removed training entry:
@@ -160,7 +160,7 @@ Action| Syntax |Remarks|
 |add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
 |add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
 |add attendance| add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]|
-|delete member| delete [/m <MEMBER_INDEX_NUMBER>]| Get the index by calling `list /m`
+|delete member| delete [/m <MEMBER_INDEX_NUMBER>] OR [/m <MEMBER_NAME>] | Get the index or name by calling `list /m`
 |delete training|delete [/t <TRAINING_INDEX_NUMBER>]| Get the index by calling `list /t`
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>]| Get the index by calling `list /att`
 |edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields

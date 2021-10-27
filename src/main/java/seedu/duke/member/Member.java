@@ -18,6 +18,9 @@ public class Member {
 
     protected String phoneNumber;
 
+    /* Index of member from the arraylist. */
+    protected int index;
+
     /**
      * Constructor for any type of member.
      *
@@ -61,7 +64,16 @@ public class Member {
         setAsActiveMember();
         setGender(member.gender);
         setPhoneNumber(member.phoneNumber);
+        setIndex(member.index);
         //setPresentOrAbsent(presentOrAbsent);
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public boolean checkIfActive() {
@@ -124,8 +136,8 @@ public class Member {
      */
     @Override
     public String toString() {
-        return String.format("Name: %s | Student Number: %s | Gender: %s | Phone Number: %s", this.name,
-                this.studentNumber, this.gender, this.phoneNumber);
+        return String.format("[%d] Name: %s | Student Number: %s | Gender: %s | Phone Number: %s", this.index,
+                this.name, this.studentNumber, this.gender, this.phoneNumber);
     }
 
 }
