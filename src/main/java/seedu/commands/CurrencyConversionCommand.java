@@ -39,27 +39,30 @@ public class CurrencyConversionCommand extends Command {
             return;
         }
         ArrayList<Entry> entries = finances.getEntries();
+        ArrayList<Budget> budgets = budgetManager.getBudgets();
         convertEntries(entries, finances);
+        convertBudgets(budgets, finances, budgetManager);
         ui.printCurrencyChangedConfirmation(to);
     }
 
     public void convertEntries(ArrayList<Entry> entries, FinancialTracker finances) {
         for (Entry entry : entries) {
-            double newValue = convertEntry(from, to, entry.getValue());
+            double newValue = convertItem(from, to, entry.getValue());
             assert newValue >= 0;
             entry.setValue(newValue);
         }
         finances.setCurrency(to);
     }
 
-    //   public void convertBudgets(ArrayList<Budget> budgets, FinancialTracker finances) {
-    //       double newValue = convertEntry(from, to, budgets.getBudget());
-    //       assert newValue >= 0;
-    //       budgets.setBudgetValue(newValue);
-    //       finances.setCurrency(to);
-    //   }
+    public void convertBudgets(ArrayList<Budget> budgets, FinancialTracker finances, BudgetManager budgetManager) {
+        for (Budget budget : budgets) {
+            double newValue = convertItem(from, to, budget.getLimit());
+            budget.setLimit(newValue);
+        }
+        finances.setCurrency(to);
+    }
 
-    private double convertEntry(CurrencyTypes from, CurrencyTypes to, double value) {
+    private double convertItem(CurrencyTypes from, CurrencyTypes to, double value) {
         if (isBaseYear(from)) {
             double fromRate = determineExchangeRate(from);
             assert fromRate >= 0;
