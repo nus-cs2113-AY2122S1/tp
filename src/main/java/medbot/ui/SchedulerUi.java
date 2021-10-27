@@ -95,7 +95,8 @@ public class SchedulerUi {
                 + TABLE_ROW_SEPARATOR
                 + APPOINTMENT_TABLE_HEADER
                 + TABLE_ROW_SEPARATOR
-                + appointmentString;
+                + appointmentString
+                + TABLE_ROW_SEPARATOR;
     }
 
     public static String getListAppointmentListMessage(String appointmentString) {
@@ -103,7 +104,8 @@ public class SchedulerUi {
                 + TABLE_ROW_SEPARATOR
                 + APPOINTMENT_TABLE_HEADER
                 + TABLE_ROW_SEPARATOR
-                + appointmentString;
+                + appointmentString
+                + TABLE_ROW_SEPARATOR;
     }
 
 }

@@ -362,7 +362,7 @@ public class Scheduler {
         int dateTimeCode = appointment.getDateTimeCode();
         int appointmentId = appointment.getId();
         checkPatientAvailability(patientId, dateTimeCode, appointmentId);
-        checkMedicalStaffAvailability(staffId, dateTimeCode, appointmentId);
+        checkStaffAvailability(staffId, dateTimeCode, appointmentId);
     }
 
     private void checkPatientAvailability(int patientId, int dateTimeCode, int appointmentId) throws MedBotException {
@@ -372,7 +372,7 @@ public class Scheduler {
         }
     }
 
-    private void checkMedicalStaffAvailability(int staffId, int dateTimeCode, int appointmentId)
+    private void checkStaffAvailability(int staffId, int dateTimeCode, int appointmentId)
             throws MedBotException {
         int clashAppointmentId = medicalStaffList.getAppointmentId(staffId, dateTimeCode);
         if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
