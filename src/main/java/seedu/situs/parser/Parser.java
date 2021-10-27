@@ -230,10 +230,13 @@ public class Parser {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
-
-        int groupNumber = Integer.parseInt(details[0]);
-        double subtractAmount = Double.parseDouble(details[1]);
-        return new SubtractCommand(groupNumber, subtractAmount).run();
+        try {
+            int groupNumber = Integer.parseInt(details[0]);
+            double subtractAmount = Double.parseDouble(details[1]);
+            return new SubtractCommand(groupNumber, subtractAmount).run();
+        } catch (NumberFormatException e) {
+            throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -261,15 +264,18 @@ public class Parser {
         }
 
         int[] detailsToInt = new int[2];
-        for (int i = 1; i < details.length; i++) {
-            if (details[i].equals(EMPTY_STRING)) {
-                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        try {
+            for (int i = 1; i < details.length; i++) {
+                if (details[i].equals(EMPTY_STRING)) {
+                    throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+                }
+                details[i] = details[i].trim();
+                detailsToInt[i - 1] = Integer.parseInt(details[i]);
             }
-            details[i] = details[i].trim();
-            detailsToInt[i - 1] = Integer.parseInt(details[i]);
+            return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
+        } catch (NumberFormatException e) {
+            throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
-
-        return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
     }
 
     /**
