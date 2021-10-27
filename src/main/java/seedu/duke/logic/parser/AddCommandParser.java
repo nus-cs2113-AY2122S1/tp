@@ -101,7 +101,7 @@ public class AddCommandParser {
             throw new ParseException(e.getMessage());
         }
 
-        String priority = "L";
+        String priority = "LOW";
         String information = "-";
 
         switch (params.length) {
