@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.commands.CurrencyTypes;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
@@ -452,7 +453,6 @@ public class Ui {
         printLine();
     }
 
-
     /**
      * Prints the threshold set feedback for setting budgets.
      *
@@ -461,6 +461,18 @@ public class Ui {
     public void printThresholdConfirmation(double threshold) {
         printLine();
         System.out.println("Threshold for budget reminders set to " + threshold);
+        printLine();
+    }
+
+    public void printCurrencyChangedConfirmation(CurrencyTypes currency) {
+        printLine();
+        System.out.println("All entries have been converted to " + currency + "!");
+        printLine();
+    }
+
+    public void printSameCurrencyTypeMessage(CurrencyTypes currency) {
+        printLine();
+        System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + ": " + currency);
         printLine();
     }
 }

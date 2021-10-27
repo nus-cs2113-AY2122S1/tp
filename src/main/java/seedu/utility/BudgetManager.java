@@ -117,6 +117,18 @@ public class BudgetManager {
         return budget.getLimit();
     }
 
+    public ArrayList<Budget> getBudgets() {
+        ArrayList<Budget> budgets = new ArrayList<>();
+        budgets.add(overallBudget);
+        budgets.add(foodBudget);
+        budgets.add(transportBudget);
+        budgets.add(medicalBudget);
+        budgets.add(billsBudget);
+        budgets.add(entertainmentBudget);
+        budgets.add(miscBudget);
+        return budgets;
+    }
+
     private Budget expenseCategoryToBudget(ExpenseCategory category) {
         assert category != ExpenseCategory.NULL;
         Budget budget;

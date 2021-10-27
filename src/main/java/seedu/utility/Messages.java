@@ -43,6 +43,9 @@ public class Messages {
     public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
             + "Transport, Bills, Medical, Entertainment or Overall";
     public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
+    public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion";
+    public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
+    public static final String SAME_CURRENCY_TYPE_MESSAGE = "Your lists are already in the requested currency type!";
 
 
     public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
