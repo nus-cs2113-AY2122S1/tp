@@ -33,7 +33,6 @@ public class Parser {
         } else if (input.startsWith(SearchCommand.COMMAND_WORD)) {
             return new SearchCommand(input);
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
-
             return new AddCommand(extractArgs(input));
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
             return new LoanCommand(input);
