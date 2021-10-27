@@ -67,7 +67,7 @@ public class Parser {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
-        
+
         switch (command) {
         case "bye":
             if (!params.equals("")) {
@@ -215,11 +215,8 @@ public class Parser {
      * @return value corresponding to prefix given
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static String extractValue
-    (String argString, String prefix, int startIndex, int endIndex, String identifier) {
-        switch (identifier) {
-        case "-c":
-        }
+    private static String extractValue(String argString,
+                                       String prefix, int startIndex, int endIndex, String identifier) {
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replaceFirst(prefix, "").trim();
         return value;

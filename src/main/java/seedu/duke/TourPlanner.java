@@ -6,7 +6,6 @@ import seedu.duke.data.ClientPackageList;
 import seedu.duke.data.FlightList;
 import seedu.duke.data.TourList;
 
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,15 +28,25 @@ public class TourPlanner {
      *
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TourPlannerException {
         Ui ui = new Ui();
+        Storage storage;
+
+        try {
+            storage = new Storage();
+            storage.loadFile();
+        } catch (TourPlannerException e) {
+            ui.show(e.getMessage());
+        }
+        storage = new Storage();
+        TourList tours = storage.getTours();
+        FlightList flights = storage.getFlights();
+        ClientList clients = storage.getClients();
+        ClientPackageList clientPackages = storage.getClientPackages();
         ui.showWelcome();
         boolean isExit = false;
         String command;
-        ClientList clients = new ClientList();
-        FlightList flights = new FlightList();
-        TourList tours = new TourList();
-        ClientPackageList clientPackages = new ClientPackageList();
+
         while (!isExit) {
             command = ui.readCommand();
             try {
@@ -55,5 +64,6 @@ public class TourPlanner {
                 ui.showLine();
             }
         }
+        storage.saveFile(clientPackages);
     }
 }
