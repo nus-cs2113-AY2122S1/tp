@@ -269,17 +269,35 @@ public class Scheduler {
         return schedulerAppointmentList.getAppointment(appointmentId);
     }
 
+    /**
+     * Returns all current appointments.
+     *
+     * @return the String list of all appointments.
+     * @throws MedBotException when the appointment List cannot be generated.
+     */
     public String listAllAppointments() throws MedBotException {
         List<Integer> appointmentIds = schedulerAppointmentList.listAppointments();
         return generateAppointmentTable(appointmentIds);
     }
 
+    /**
+     * Returns all current appointments of a staff.
+     *
+     * @return the String list of all appointments of a staff.
+     * @throws MedBotException when the appointment List cannot be generated.
+     */
     public String listMedicalStaffAppointments(int staffId, FilterType filterType, int dateTimeCode)
             throws MedBotException {
         List<Integer> appointmentIds = medicalStaffList.listAppointments(staffId, filterType, dateTimeCode);
         return generateAppointmentTable(appointmentIds);
     }
 
+    /**
+     * Returns all current appointments of a patient.
+     *
+     * @return the String list of all appointments of a patient.
+     * @throws MedBotException when the appointment List cannot be generated.
+     */
     public String listPatientAppointments(int patientId, FilterType filterType, int dateTimeCode)
             throws MedBotException {
         List<Integer> appointmentIds = patientList.listAppointments(patientId, filterType, dateTimeCode);

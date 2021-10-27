@@ -165,6 +165,12 @@ public abstract class PersonList {
         return output;
     }
 
+    /**
+     * Archive a person in the list.
+     *
+     * @param personId the id of the person to archive.
+     * @throws MedBotException when the person have already been archive.
+     */
     public void archivePerson(int personId) throws MedBotException {
         checkPersonExists(personId);
         if (persons.get(personId).isArchived()) {
@@ -173,6 +179,12 @@ public abstract class PersonList {
         persons.get(personId).archive();
     }
 
+    /**
+     * Unarchive an archived person in the list.
+     *
+     * @param personId the id of the person to unarchive.
+     * @throws MedBotException when the person have not been archived.
+     */
     public void unarchivePerson(int personId) throws MedBotException {
         checkPersonExists(personId);
         if (!persons.get(personId).isArchived()) {

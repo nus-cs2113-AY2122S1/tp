@@ -359,6 +359,13 @@ public abstract class ParserUtils {
         }
     }
 
+    /**
+     * Parses the person type from the input string.
+     *
+     * @param string the String to be parsed.
+     * @return the personType (Patient or Staff).
+     * @throws MedBotParserException when the person type cannot be parsed.
+     */
     public static PersonType parsePersonType(String string) throws MedBotParserException {
         String attributeSpecifier = string.substring(0, PARAMETER_BUFFER);
         if (attributeSpecifier.equals(PARAMETER_PATIENT)) {
@@ -371,6 +378,13 @@ public abstract class ParserUtils {
         throw new MedBotParserException(ERROR_PERSON_TYPE_INVALID);
     }
 
+    /**
+     * Returns the filter type of the appointment class.
+     *
+     * @param attributeSpecifier the String to be parsed.
+     * @return the FilterType
+     * @throws MedBotParserException when the filter type cannot be
+     */
     public static FilterType parseFilterType(String attributeSpecifier) throws MedBotParserException {
 
         if (attributeSpecifier.equals(PARAMETER_BEFORE)) {
@@ -383,6 +397,13 @@ public abstract class ParserUtils {
         throw new MedBotParserException(ERROR_FILTER_TYPE_INVALID);
     }
 
+    /**
+     * Returns the flag in the list command (show archived listItem or not).
+     *
+     * @param attributeString the String to be parsed.
+     * @return the boolean indicate whether we show archived listItem or not.
+     * @throws MedBotParserException when the String is of wrong format.
+     */
     public static boolean parseListParameter(String attributeString) throws MedBotParserException {
         if (attributeString.trim().equals(PARAMETER_ARCHIVE)) {
             return true;

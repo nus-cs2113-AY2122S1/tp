@@ -95,6 +95,12 @@ public class PersonalAppointmentList {
         throw new MedBotException(getAppointmentNotFoundErrorMessage(dateTimeCode));
     }
 
+    /**
+     * Returns the error message when no appointment was found.
+     *
+     * @param dateTimeCode the dateTimeCode to look for.
+     * @return the String indicates the error message.
+     */
     private String getAppointmentNotFoundErrorMessage(int dateTimeCode) {
         return "No appointment at : " + Appointment.formatDateTimeCode(dateTimeCode) + "found.";
     }
@@ -107,6 +113,12 @@ public class PersonalAppointmentList {
         return appointmentIds;
     }
 
+    /**
+     * Returns the list of appointment after the date time indicated.
+     *
+     * @param dateTimeCode the date time of the appointments to look for.
+     * @returnThe list of appointments after the date.
+     */
     public List<Integer> listAppointmentsAfter(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
         referenceAppointment.setDateTimeCode(dateTimeCode);
@@ -118,6 +130,12 @@ public class PersonalAppointmentList {
         return appointmentIds;
     }
 
+    /**
+     * Returns the list of appointment before the date time indicated.
+     *
+     * @param dateTimeCode the date time of the appointments to look for.
+     * @returnThe list of appointments before the date.
+     */
     public List<Integer> listAppointmentsBefore(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
         referenceAppointment.setDateTimeCode(dateTimeCode);

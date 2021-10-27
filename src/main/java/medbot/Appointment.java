@@ -56,6 +56,12 @@ public class Appointment implements ListItem {
         return formatDateTimeCode(dateTimeCode);
     }
 
+    /**
+     * Returns the dateTimeCode as a String.
+     *
+     * @param dateTimeCode the dateTime code to be parsed.
+     * @return the date time as a String.
+     */
     public static String formatDateTimeCode(int dateTimeCode) {
         long epochSecond = (long) dateTimeCode * 60;
         LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);
