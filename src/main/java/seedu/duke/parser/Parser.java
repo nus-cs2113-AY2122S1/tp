@@ -11,6 +11,7 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.StatCommand;
 import seedu.duke.commands.YearCommand;
+import seedu.duke.data.records.Category;
 import seedu.duke.exception.EmptyDescriptionException;
 
 import java.util.HashMap;
@@ -147,14 +148,40 @@ public class Parser {
     }
 
     private Command prepareListMonthCommand(String commandParams) {
+        System.out.println(commandParams);
         try {
-            String listOption = commandParams.substring(2);
+            String listOption = commandParams.substring(2, 5);
+            String upperCaseOnly = commandParams.replaceAll("[^A-Z]", "");
+            Category category = Category.ALL;
+            switch (upperCaseOnly) {
+            case ("GENERAL"):
+                category = Category.GENERAL;
+                break;
+            case ("CLOTHES"):
+                category = Category.CLOTHES;
+                break;
+            case ("FOOD"):
+                category = Category.FOOD;
+                break;
+            case ("ENTERTAINMENT"):
+                category = Category.ENTERTAINMENT;
+                break;
+            case ("GIFTS"):
+                category = Category.GIFTS;
+                break;
+            case ("HEALTH"):
+                category = Category.HEALTH;
+                break;
+            default:
+                category = Category.ALL;
+            }
+            System.out.println(upperCaseOnly + " vs " + category);
             switch (listOption) {
             case ("all"):
-                return new ListRecordsCommand();
+                return new ListRecordsCommand(category);
             default:
                 int listMonth = Integer.parseInt(listOption);
-                return new ListRecordsCommand(listMonth);
+                return new ListRecordsCommand(listMonth, category);
             }
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));

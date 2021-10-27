@@ -42,6 +42,10 @@ public class Expenditure extends Record {
         return category.toString();
     }
 
+    public Category returnCategory() {
+        return category;
+    }
+
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s %-20.20s",
                 this.description, "| $" + this.amount, "| " + this.date.toString(), "| " + this.category.toString());
