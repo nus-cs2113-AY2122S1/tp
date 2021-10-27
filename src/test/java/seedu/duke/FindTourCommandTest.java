@@ -51,8 +51,8 @@ public class FindTourCommandTest {
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
         Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Flight sqjpn = new Flight("SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00");
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
+                "20/10/2021 18:00", "21/10/2021 03:00"});
         ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
         dummyClientList.add(botuan);
         testTourList.add(jpn);
