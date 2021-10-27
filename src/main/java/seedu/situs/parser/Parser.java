@@ -257,21 +257,22 @@ public class Parser {
      * @throws SitusException if trying to access non-existing ingredients
      */
     private static String parseDeleteCommand(String command) throws SitusException {
-        String[] details = command.split("n/|e/");
+        String[] details = command.split("[ .]");
 
         if (details.length != 3) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-
+        int[] detailsToInt = new int[2];
         for (int i = 1; i < details.length; i++) {
-            details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
+            details[i] = details[i].trim();
+            detailsToInt[i - 1] = Integer.parseInt(details[i]);
         }
 
-        return new DeleteCommand(details[1], details[2]).run();
+        return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
     }
 
     /**

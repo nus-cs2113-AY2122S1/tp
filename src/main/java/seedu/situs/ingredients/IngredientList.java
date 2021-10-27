@@ -187,33 +187,21 @@ public class IngredientList {
     /**
      * Removes an ingredient from ingredient group.
      *
-     * @param ingredientName the ingredient name to remove
-     * @param expiryDate the expiration date of the removed ingredient
+     * @param groupNumber the group number of the ingredient to remove
+     * @param ingredientNumber the number of the ingredient to remove
      * @return an ingredient object of the removed ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public Ingredient removeIngredientFromGroup(String ingredientName, LocalDate expiryDate)
+    public Ingredient removeIngredientFromGroup(int groupNumber, int ingredientNumber)
             throws SitusException, IOException {
         Ingredient removedIngredient;
-        int groupIndexToRemove = findIngredientIndexInList(ingredientName);
 
-        if (groupIndexToRemove < 0) {
-            throw new SitusException(INGREDIENT_NOT_FOUND);
-        }
+        removedIngredient = getIngredientGroup(groupNumber)
+                .remove(ingredientNumber);
 
-        int ingredientIndexToRemove = getIngredientGroup(groupIndexToRemove + 1)
-                .findIngredientIndexByExpiry(expiryDate);
-
-        if (ingredientIndexToRemove < 0) {
-            throw new SitusException("No matching ingredient and expiry date found");
-        }
-
-        removedIngredient = getIngredientGroup(groupIndexToRemove + 1)
-                .remove(ingredientIndexToRemove + 1);
-
-        if (getIngredientGroup(groupIndexToRemove + 1).getIngredientGroupSize() <= 0) {
-            ingredientList.remove(groupIndexToRemove);
+        if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
+            ingredientList.remove(groupNumber);
         }
 
         storage.writeIngredientsToMemory(ingredientList);
