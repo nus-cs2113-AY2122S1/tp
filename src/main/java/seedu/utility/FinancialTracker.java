@@ -1,6 +1,5 @@
 package seedu.utility;
 
-
 import seedu.commands.CurrencyTypes;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
@@ -106,6 +105,7 @@ public class FinancialTracker {
     }
 
     public CurrencyTypes getCurrency() {
+        assert currency != null;
         return currency;
     }
 

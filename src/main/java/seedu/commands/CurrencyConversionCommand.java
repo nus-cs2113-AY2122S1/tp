@@ -12,17 +12,17 @@ public class CurrencyConversionCommand extends Command {
     protected  CurrencyTypes to;
     protected double exchangeRate;
 
-    public CurrencyConversionCommand(CurrencyTypes from, CurrencyTypes to) {
-        this.from = from;
+    public CurrencyConversionCommand(CurrencyTypes to) {
+        this.from = CurrencyTypes.SGD;
         this.to = to;
     }
 
     public double determineExchangeRate(CurrencyTypes to) {
         switch (to) {
         case USD:
-            return exchangeRate = 1.5;
+            return exchangeRate = 0.74;
         case SGD:
-            return exchangeRate = 0.67;
+            return exchangeRate = 1.35;
         default:
             return exchangeRate = 1.0;
         }
@@ -53,10 +53,12 @@ public class CurrencyConversionCommand extends Command {
 
     private double convertEntry(CurrencyTypes from, CurrencyTypes to, double value) {
         if (isNotBaseYear(from)) {
-            double rate = determineExchangeRate(from);
-            value = value / rate;
+            double fromRate = determineExchangeRate(from);
+            assert fromRate >= 0;
+            value = (value / fromRate);
         }
         double toRate = determineExchangeRate(to);
-        return value * toRate;
+        assert toRate >= 0;
+        return (value * toRate);
     }
 }
