@@ -282,17 +282,17 @@ public class Parser {
     }
 
     public static int getAttendanceIndex(String entry) {
-        String[] substring = entry.split("/i",0);
+        String[] substring = entry.split("/i", 0);
         int trainingIndex = Integer.parseInt(substring[1].trim());
         return trainingIndex;
     }
 
-   public static String getAttendanceTrainingName(String entry){
-        int trainingNameStartIndex = entry.indexOf("/t")+2;
+    public static String getAttendanceTrainingName(String entry) {
+        int trainingNameStartIndex = entry.indexOf("/t") + 2;
         int trainingNameEndIndex = entry.indexOf("/i");
-        String trainingName = entry.substring(trainingNameStartIndex,trainingNameEndIndex).trim();
+        String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
         return trainingName;
-   }
+    }
 
     /**
      * Returns an integer Index from the given String query.

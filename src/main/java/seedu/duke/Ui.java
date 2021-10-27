@@ -7,10 +7,6 @@ import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Ui {
 
     private static final String LINE_SEPARATOR = ("_____________________________________________________");
@@ -34,7 +30,7 @@ public class Ui {
 
     public static void printWrongInputMessage() {
         System.out.println("Wrong input. Please key in --help for some help on how to use the programme. \n"
-         + "If you would like to exit the programme, type 'bye'");
+                + "If you would like to exit the programme, type 'bye'");
     }
 
     public static void printListAllMessage() {
