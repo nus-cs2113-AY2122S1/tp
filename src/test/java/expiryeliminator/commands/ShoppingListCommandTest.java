@@ -22,7 +22,8 @@ public class ShoppingListCommandTest {
         ArrayList<String> recipeInput = new ArrayList<>();
         recipeInput.add("Chicken Soup");
         //output message string
-        String outputList = "Here is your shopping list!\n" + "\n" + "\n" + "Chicken (qty: 1)\n" + "Salt (qty: 20)";
+        String outputList = "Here is your shopping list!\n" + "\n" + "\n" + "Chicken (qty: 1 grams)\n"
+                + "Salt (qty: 20 grams)";
 
         Command command = new ShoppingListCommand(recipeInput);
 
@@ -41,8 +42,8 @@ public class ShoppingListCommandTest {
         recipeInput.add("Chicken Soup");
         recipeInput.add("Pork Soup");
         //output message string
-        String outputList = "Here is your shopping list!\n" + "\n" + "\n" + "Chicken (qty: 1)\n" + "Pork (qty: 1)\n"
-                + "Salt (qty: 40)";
+        String outputList = "Here is your shopping list!\n" + "\n" + "\n" + "Chicken (qty: 1 grams)\n"
+                + "Pork (qty: 1)\n" + "Salt (qty: 40 grams)";
 
         Command command = new ShoppingListCommand(recipeInput);
 

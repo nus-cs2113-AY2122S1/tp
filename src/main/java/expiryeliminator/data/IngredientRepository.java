@@ -236,6 +236,7 @@ public class IngredientRepository {
     public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
             IngredientQuantity> totalIngredients) throws IllegalValueException {
         int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
+        String units = recipe.getIngredientQuantities().get(ingredientName).getUnit();
         if (totalIngredients.containsKey(ingredientName)) {
             try {
                 int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
@@ -244,7 +245,7 @@ public class IngredientRepository {
                 e.printStackTrace();
             }
         } else {
-            Ingredient ingredientItem = new Ingredient(ingredientName);
+            Ingredient ingredientItem = new Ingredient(ingredientName, units);
             IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
             totalIngredients.put(ingredientName, ingredientAndQuantityItem);
         }
