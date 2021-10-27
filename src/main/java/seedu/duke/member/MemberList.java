@@ -75,7 +75,7 @@ public class MemberList {
     }
 
     /**
-     * Delete member as request by user by name
+     * Delete member as request by user by name.
      *
      * @param memberName member name given by user
      * @return member to be displayed as deleted
@@ -105,7 +105,7 @@ public class MemberList {
     }
 
     /**
-     * Delete member as request by user by index
+     * Delete member as request by user by index.
      *
      * @param memberNumber member number given by user
      * @return member to be displayed as deleted

@@ -252,10 +252,10 @@ public class Parser {
     }
 
     /**
-     * Returns parameter as given by user
+     * Returns parameter as given by user.
      *
-     * @param query String user input.
-     * @return Object parameter that is given in query which will either be int or string as given by user.
+     * @param query String user input
+     * @return Object parameter that is given in query which will either be int or string as given by user
      */
     public static Object getParameter(String query) {
         String[] words = query.trim().split(regex);
