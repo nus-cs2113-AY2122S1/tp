@@ -9,7 +9,7 @@
      | Welcome to Typist -- the ultimate cli typing game.
      | Brought to you by -- AY2122S1-CS2113-T13-4.
      | Manual:
-     | content: set the content
+     | content: set the content (or <-c> with game command)
      | word: start a new word game
      | time: start a new timer game <-t> to specify time <-sn> to start immediately
      | history: view past game records
