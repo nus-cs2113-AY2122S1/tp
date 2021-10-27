@@ -70,9 +70,13 @@ public class Entry {
             new DeleteTraining(trainings, trainingIndex);
             break;
         case DELETE_ATTENDANCE_KEYWORD:
-            attendanceIndex = Parser.getLastIndex(entry);
-            new DeleteAttendance(attendanceList, entry, Parser.getFilteredAttendanceList(attendanceList, entry), attendanceIndex);
-            //Parser.deleteAttendance(attendanceList, entry);
+            //delete /att /t Friday Training /i 2
+
+            attendanceIndex = Parser.getAttendanceIndex(entry);
+            //havent handle if i is not a number aka number format exception
+
+            String trainingName = Parser.getAttendanceTrainingName(entry);
+            new DeleteAttendance(attendanceList, trainingName , attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
             Parser.findInMembers(members, entry);
