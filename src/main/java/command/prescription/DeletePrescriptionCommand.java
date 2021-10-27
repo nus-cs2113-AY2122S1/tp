@@ -99,11 +99,14 @@ public class DeletePrescriptionCommand extends Command {
                 continue;
             }
             Stock stock = (Stock) medicine;
-            if (stock.isDeleted()) {
-                stock.setDeleted(false);
-            }
+
             if (stock.getStockId() == stockIdToPrescribe) {
+                if (stock.isDeleted()) {
+                    stock.setDeleted(false);
+                }
+
                 int quantityToRestore = stock.getQuantity() + prescribedQuantity;
+
                 if (quantityToRestore > stock.getMaxQuantity()) {
                     ui.print("Unable to delete prescription. Quantity added will exceed maximum quantity.");
                     ui.print("Maximum quantity: " + stock.getMaxQuantity() + " Total Quantity after deletion: "
