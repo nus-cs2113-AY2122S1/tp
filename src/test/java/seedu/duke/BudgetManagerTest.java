@@ -64,8 +64,7 @@ public class BudgetManagerTest {
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
 
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
+        String expectedOutput = "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
                 + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $11.00/$20.00" + newLine
                 + "You can directly increase your " + currentMonth + " FOOD budget up to $21.00!" + newLine
                 + SEPARATOR_LINE;
@@ -81,8 +80,7 @@ public class BudgetManagerTest {
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
 
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
+        String expectedOutput = "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
                 + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $10.00/$12.00" + newLine
                 + "You can directly increase your " + currentMonth + " FOOD budget up to $12.00!"
                 + newLine + SEPARATOR_LINE;
