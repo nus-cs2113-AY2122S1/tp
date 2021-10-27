@@ -10,6 +10,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.SortCommand;
 import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
+import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
 
@@ -80,6 +81,8 @@ public class CommandParser {
             return new DeleteCommand(taskManager, commandOptions);
         case SORT:
             return new SortCommand(taskManager, commandOptions);
+        case MODULE:
+            return new ModuleCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }

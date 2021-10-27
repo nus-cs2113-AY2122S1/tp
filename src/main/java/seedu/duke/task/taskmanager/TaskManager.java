@@ -231,6 +231,10 @@ public class TaskManager implements Subject {
         updateObservers(this);
     }
 
+    public void addTasks(List<Task> tasks) {
+        taskList.addAll(tasks);
+    }
+
     //@@author SeanRobertDH
     public void checkIndexValid(int index) throws InvalidTaskIndexException {
         if (index < 0 || index > getTaskListSize() - 1) {
