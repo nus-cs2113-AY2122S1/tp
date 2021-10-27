@@ -201,7 +201,7 @@ public class TextUi {
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
-            if(expenditure.returnCategory() == category || category == Category.ALL) {
+            if (expenditure.returnCategory() == category || category == Category.ALL) {
                 totalSpending += expenditure.getAmount();
             }
         }
@@ -232,7 +232,8 @@ public class TextUi {
     /**
      * Possible error: Names/Descriptions longer than 20characters get truncated.
      */
-    private static void getMonthListView(AllRecordList list, int month, String monthString, String budget, Category category) {
+    private static void getMonthListView(AllRecordList list, int month, String monthString,
+                                         String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
         if (list.getMonthListSize(month) > 0) {
