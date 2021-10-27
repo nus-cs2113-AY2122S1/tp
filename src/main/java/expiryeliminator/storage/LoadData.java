@@ -125,7 +125,6 @@ public class LoadData {
         String expiryDateString;
         int quantityWithBatch = 0;
         IngredientStorage ingredientStorage = new IngredientStorage(null);
-
         while (sc.hasNext()) {
             String line = sc.nextLine();
             if (!line.isBlank()) {
