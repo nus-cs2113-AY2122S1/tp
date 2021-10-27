@@ -11,13 +11,15 @@ import static seedu.typists.Main.LINE_LENGTH;
 
 
 public class TimeGameCommand implements Command {
-    private static final String SIGNIFIER = "-t";
+    private static final String TIME_SIGNIFIER = "-t";
+    private static final String START_SIGNIFIER = "-sn";
 
     @Override
     public void run(ArrayList<String> args) {
+        boolean startNow = getStartNow(args, START_SIGNIFIER);
         try {
-            int timeInSeconds = getTime(args, SIGNIFIER);
-            TimeModeGame game = createGame(timeInSeconds);
+            int timeInSeconds = getTime(args, TIME_SIGNIFIER);
+            TimeModeGame game = createGame(timeInSeconds, startNow);
             game.runGame();
             game.gameSummary();
         } catch (InvalidCommandException e) {
@@ -28,12 +30,16 @@ public class TimeGameCommand implements Command {
         } catch (IncompleteCommandException | IndexOutOfBoundsException e) {
             System.out.println(
                     "Please specify duration of the game using "
-                    + SIGNIFIER + "\n"
+                    + TIME_SIGNIFIER + "\n"
                     + "e.g. time -t 60 "
             );
         } catch (NumberFormatException e) {
             System.out.println("Duration should be a number");
         }
+    }
+
+    public boolean getStartNow(ArrayList<String> args, String key) {
+        return args.contains(key);
     }
 
     public int getTime(ArrayList<String> args, String key) throws InvalidCommandException, IncompleteCommandException {
@@ -48,7 +54,7 @@ public class TimeGameCommand implements Command {
         return time;
     }
 
-    public TimeModeGame createGame(int timeInSeconds) {
-        return new TimeModeGame(timeInSeconds,content.getContent(), LINE_LENGTH);
+    public TimeModeGame createGame(int timeInSeconds, boolean isReady) {
+        return new TimeModeGame(timeInSeconds,content.getContent(), LINE_LENGTH, isReady);
     }
 }

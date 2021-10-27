@@ -71,7 +71,7 @@ public class Messages {
     public static final String MESSAGE_HELP = "Manual:\n"
             + "content: set the content\n"
             + "word: start a new word game\n"
-            + "time: start a new timer game\n"
+            + "time: start a new timer game <-t> to specify time <-sn> to start immediately\n"
             + "history: view past game records\n"
             + "clear: clear all game records\n"
             + "bye: exit typist";
