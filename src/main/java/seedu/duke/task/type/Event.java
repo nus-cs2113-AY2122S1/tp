@@ -1,7 +1,12 @@
 package seedu.duke.task.type;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import seedu.duke.command.flags.EventFlag;
+import seedu.duke.exception.ParseDateFailedException;
+import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.parser.DateParser;
+import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -40,7 +45,7 @@ public class Event extends Task {
     }
 
     public Event(String description, LocalDateTime startDate,
-            LocalDateTime endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+                 LocalDateTime endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
         this(description, startDate, endDate);
         setPriority(priority);
         setRecurrence(recurrence);
@@ -74,7 +79,7 @@ public class Event extends Task {
         }
         this.endDate = endDate;
     }
-  
+
     @Override
     public boolean needReminder() {
         return (reminder != null);
@@ -89,5 +94,25 @@ public class Event extends Task {
 
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
+    }
+
+    @Override
+    protected void taskEdit(Map<String, String> arguments)
+            throws ParseDateFailedException, StartDateAfterEndDateException {
+        LocalDateTime startDate = getStartDate();
+        LocalDateTime endDate = getEndDate();
+        if (arguments.containsKey(EventFlag.START_DATE)) {
+            String start = arguments.get(EventFlag.START_DATE);
+            startDate = TaskParser.getDate(start);
+        }
+        if (arguments.containsKey(EventFlag.END_DATE)) {
+            String end = arguments.get(EventFlag.END_DATE);
+            endDate = TaskParser.getDate(end);
+        }
+        if (startDate.isAfter(endDate)) {
+            throw new StartDateAfterEndDateException();
+        }
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
 }

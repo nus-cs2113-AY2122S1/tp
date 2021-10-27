@@ -2,6 +2,9 @@ package seedu.duke.task.type;
 
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import seedu.duke.command.flags.DeadlineFlag;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
@@ -70,5 +73,13 @@ public class Deadline extends Task {
     public String getTaskEntryDescription() {
         return DEADLINE_ICON + " " + super.getTaskEntryDescription()
                 + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
+    }
+
+    @Override
+    protected void taskEdit(Map<String, String> arguments) throws ParseDateFailedException {
+        if (arguments.containsKey(DeadlineFlag.DUE_DATE)) {
+            String due = arguments.get(DeadlineFlag.DUE_DATE);
+            setDueDate(DateParser.stringToDate(due));
+        }
     }
 }

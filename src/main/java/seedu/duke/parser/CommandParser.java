@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
@@ -17,12 +18,14 @@ import seedu.duke.log.Log;
 import java.util.HashMap;
 import java.util.Map;
 import seedu.duke.task.taskmanager.TaskManager;
+import seedu.duke.utility.Utility;
 
 //@@author APZH
 public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
+    private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     //@@author APZH
     public static Map<String, String> getCommandOptions(String commandArguments) {
@@ -83,6 +86,8 @@ public class CommandParser {
             return new SortCommand(taskManager, commandOptions);
         case MODULE:
             return new ModuleCommand(taskManager, commandOptions);
+        case EDIT:
+            return new EditCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }
@@ -103,5 +108,11 @@ public class CommandParser {
         return flagsToArguments;
     }
 
-
+    //@@author SeanRobertDH
+    public static Integer parseTaskIndex(String index) throws NumberFormatException {
+        if (!Utility.isInteger(index)) {
+            throw new NumberFormatException(String.format(INVALID_TASK_INDEX, index));
+        }
+        return Integer.parseInt(index);
+    }
 }

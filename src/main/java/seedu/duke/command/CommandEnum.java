@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 //@@author SeanRobertDH
 public enum CommandEnum {
-    BYE, HELP, TODO, DEADLINE, EVENT, LIST, DELETE, SORT, MODULE, INVALID;
+    BYE, HELP, TODO, DEADLINE, EVENT, LIST, DELETE, SORT, MODULE, EDIT, INVALID;
 
     public static CommandEnum getCommand(String command) {
         for (CommandEnum commandEnum : CommandEnum.values()) {

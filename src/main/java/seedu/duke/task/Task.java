@@ -1,7 +1,14 @@
 package seedu.duke.task;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import seedu.duke.command.flags.EditFlag;
 import seedu.duke.command.flags.TaskFlag;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.ParseDateFailedException;
+import seedu.duke.exception.StartDateAfterEndDateException;
+import seedu.duke.parser.TaskParser;
 
 public abstract class Task {
 
@@ -78,4 +85,23 @@ public abstract class Task {
     }
 
     public abstract TypeEnum getTaskType();
+
+    public void edit(Map<String, String> arguments) throws InvalidPriorityException,
+            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
+        if (arguments.containsKey(EditFlag.DESCRIPTION)) {
+            setDescription(arguments.get(EditFlag.DESCRIPTION));
+        }
+        if (arguments.containsKey(TaskFlag.PRIORITY)) {
+            String priority = arguments.get(TaskFlag.PRIORITY);
+            setPriority(TaskParser.getPriorityEnum(priority));
+        }
+        if (arguments.containsKey(TaskFlag.RECURRENCE)) {
+            String recurrence = arguments.get(TaskFlag.RECURRENCE);
+            setRecurrence(TaskParser.getRecurrenceEnum(recurrence));
+        }
+        taskEdit(arguments);
+    }
+
+    protected abstract void taskEdit(Map<String, String> arguments)
+        throws ParseDateFailedException, StartDateAfterEndDateException;
 }
