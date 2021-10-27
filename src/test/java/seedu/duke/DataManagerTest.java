@@ -74,7 +74,7 @@ public class DataManagerTest {
     }
 
     @Test
-    public void saveBudget_validBudgets_validBudgetData() {
+    public void saveSettings_validSettings_validSettingData() {
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
         Parser parser = new Parser();
@@ -88,21 +88,21 @@ public class DataManagerTest {
             budgetManager.setBudget(i, category);
             i += 1;
         }
-        dataManager.saveBudgetSettings();
-        String testData = parser.convertBudgetSettingsToData(budgetManager);
-        String expectedData = "0.0,1.0,2.0,3.0,4.0,5.0,6.0";
+        dataManager.saveSettings();
+        String testData = parser.convertSettingsToData(financialTracker, budgetManager);
+        String expectedData = "SGD,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
 
     @Test
     public void loadBudget_validBudgetData_validBudgets() {
-        saveBudget_validBudgets_validBudgetData();
+        saveSettings_validSettings_validSettingData();
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
-        dataManager.loadBudgetSettings();
+        dataManager.loadSettings();
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
             if (category == ExpenseCategory.NULL) {

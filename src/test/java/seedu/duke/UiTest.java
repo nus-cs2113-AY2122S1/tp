@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.commands.FindCommand;
+import seedu.commands.general.FindCommand;
 import seedu.entry.Entry;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
@@ -310,22 +310,93 @@ public class UiTest {
     }
 
     @Test
-    public void printBudgetWarning_givenBudget_printBudgetWarningMsg() {
+    public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the OCTOBER food budget: $49.00/$50.00" + newLine
-                + "Would you like to readjust your OCTOBER food budget?" + newLine
+                + "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
+                + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
                 + SEPARATOR_LINE;
-        testUI.printBudgetWarning("OCTOBER", "food", 49, 50);
+        testUI.printOverallBudgetWarning("OCTOBER", 49, 50);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    public void printBudgetExceeded_exceeded_printBudgetExceededMsg() {
+    public void printOverallBudgetExceeded_exceeded_printBudgetExceededMsg() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the OCTOBER food budget: $900.00/$50.00" + newLine
-                + "Would you like to readjust your OCTOBER food budget?" + newLine
+                + "You have exceeded the OCTOBER OVERALL budget: $900.00/$50.00" + newLine
+                + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
                 + SEPARATOR_LINE;
-        testUI.printBudgetExceeded("OCTOBER", "food", 900, 50);
+        testUI.printOverallBudgetExceeded("OCTOBER", 900, 50);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallExceededBudgetWarning_givenBudget_printBudgetWarningMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+                + "Since you have already exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
+                + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
+                + newLine + SEPARATOR_LINE;
+        testUI.printOverallExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
+                502, 500);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallExceededBudgetExceeded_givenBudget_printBudgetWarningMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have exceeded the OCTOBER MEDICAL budget: $201.00/$201.00" + newLine
+                + "Since you have also exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
+                + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
+                + newLine + SEPARATOR_LINE;
+        testUI.printOverallExceededBudgetExceeded("OCTOBER", "MEDICAL", 201, 201,
+                502, 500);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallNotExceededBudgetWarning_givenBudget_printDirectlyReadjustMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+                + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00" + newLine
+                + "You can directly increase your OCTOBER MEDICAL budget up to $251.00!"
+                + newLine + SEPARATOR_LINE;
+        testUI.printOverallNotExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
+                250, 300);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallNotExceededBudgetWarning_givenBudget_printOnlyBudgetReadjustMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
+                + "Consider readjusting your OCTOBER MEDICAL budget!" + newLine
+                + SEPARATOR_LINE;
+        testUI.printOverallNotExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
+                250, 0);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallNotExceededBudgetExceeded_givenBudget_printDirectlyReadjustMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$190.00" + newLine
+                + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00"
+                + newLine
+                + "You can directly increase your OCTOBER MEDICAL budget up to $250.00!"
+                + newLine + SEPARATOR_LINE;
+        testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 190,
+                250, 300);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printOverallNotExceededBudgetExceeded_givenBudget_printOnlyBudgetReadjustMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have exceeded the OCTOBER MEDICAL budget: $200.00/$150.00" + newLine
+                + "Consider readjusting your OCTOBER MEDICAL budget!"
+                + newLine + SEPARATOR_LINE;
+        testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 150,
+                290, 0);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -363,9 +434,9 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -378,16 +449,17 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
-        FindCommand testFindCommand = new FindCommand("25/10/2021");
+        String currDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        FindCommand testFindCommand = new FindCommand(currDate);
         initialiseFinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income incomeWithDiffDate = new Income("Paycheck August", 25.0, IncomeCategory.SALARY, date);
@@ -396,12 +468,12 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
-                + "2: [E] Bought cookies - $5.00 (25/10/2021)" + newLine
-                + "3: [E] Bought cakes - $7.00 (25/10/2021)" + newLine
-                + "4: [I] Paycheck August - $25.00 (25/10/2021)" + newLine
-                + "5: [I] Rob a bank - $2000.00 (25/10/2021)" + newLine
-                + "6: [I] Paycheck July - $25.00 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + "2: [E] Bought cookies - $5.00 " + currentDate + newLine
+                + "3: [E] Bought cakes - $7.00 " + currentDate + newLine
+                + "4: [I] Paycheck August - $25.00 " + currentDate + newLine
+                + "5: [I] Rob a bank - $2000.00 " + currentDate + newLine
+                + "6: [I] Paycheck July - $25.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -425,7 +497,7 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
@@ -438,7 +510,7 @@ public class UiTest {
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
-                + "1: [E] Bought a game - $19.73 (25/10/2021)" + newLine
+                + "1: [E] Bought a game - $19.73 " + currentDate + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }

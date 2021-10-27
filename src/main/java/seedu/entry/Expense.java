@@ -19,7 +19,7 @@ public class Expense extends Entry {
         this.date = date;
         this.category = category;
     }
-    
+
     @Override
     public ExpenseCategory getCategory() {
         return category;
