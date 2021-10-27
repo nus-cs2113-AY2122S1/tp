@@ -194,7 +194,7 @@ Output:
 ```
 subtract n/carrot a/100
 ____________________________________________________
-Got it. This 100.0 kg has been subtracted from Carrot
+Got it. 100.0 kg has been subtracted from Carrot
 ____________________________________________________
 ```
 
