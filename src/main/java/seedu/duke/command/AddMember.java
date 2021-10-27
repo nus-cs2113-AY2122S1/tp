@@ -24,10 +24,10 @@ public class AddMember {
     String validGenderRegex = "^[M|F]";
     String validPhoneNumberRegex = "^\\d{8}";
 
-    private String name;
-    private String studentNumber;
-    private String gender;
-    private String phoneNumber;
+    String name;
+    String studentNumber;
+    String gender;
+    String phoneNumber;
 
     /**
      * Constructor. Adds a Member to the MemberList and saves it to hard disk.
