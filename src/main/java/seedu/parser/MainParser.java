@@ -13,6 +13,7 @@ import seedu.command.ListContactsCommand;
 import seedu.command.PersonalContactCommand;
 import seedu.command.SearchContactCommand;
 import seedu.command.ViewContactCommand;
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidDeleteDetailException;
 import seedu.exception.InvalidEmailException;
@@ -176,6 +177,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingDetailException | MissingArgAddException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
+        } catch (DuplicateDetailException e) {
+            return new FailedCommand(FailedCommandType.DUPLICATE_DETAIL);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -196,6 +199,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND_EDIT);
+        } catch (DuplicateDetailException e) {
+            return new FailedCommand(FailedCommandType.DUPLICATE_DETAIL);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
