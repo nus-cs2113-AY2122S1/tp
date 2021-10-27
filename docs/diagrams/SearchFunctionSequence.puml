@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Libmgr" as Libmgr
+Participant ":SearchCommand" as searchCommand
+Participant "ui:TextUI" as ui
+Participant "catalogue:Catalogue" as catalogue
+Participant "item:Item" as item
+
+activate Libmgr
+Libmgr -> searchCommand:execute(ui, catalogue)
+activate searchCommand
+searchCommand -> searchCommand:handleSearchCommand(ui, catalogue)
+activate searchCommand
+searchCommand -> ui:print(SEARCH_MESSAGE)
+activate ui
+return
+searchCommand -> ui:print(DIVIDER)
+activate ui
+return
+searchCommand -> catalogue:getAllItems()
+activate catalogue
+return :ArrayList<Item>
+alt userInput starts with SEARCH_ID_COMMAND
+    loop temp:Item in :ArrayList<Item>
+        searchCommand -> item:getID()
+        activate item
+        return id:Integer
+        alt id equals to keyword from userInput
+        searchCommand -> ui:print(temp)
+        activate ui
+        return
+        end
+    end
+else userInput starts with SEARCH_TITLE_COMMAND
+    loop temp:Item in :ArrayList<Item>
+        searchCommand -> item:getTitle()
+        activate item
+        return title:String
+        alt title contains keyword from userInput
+        searchCommand -> ui:print(temp)
+        activate ui
+        return
+        end
+    end
+else userInput starts with SEARCH_STATUS_COMMAND
+    loop temp:Item in :ArrayList<Item>
+        searchCommand -> item:getStatus()
+        activate item
+        return status:Status
+        alt status equals to keyword from userInput
+        searchCommand -> ui:print(temp)
+        activate ui
+        return
+        end
+    end
+end
+return
+return
+destroy searchCommand
+
+
+
+
+@enduml
