@@ -6,7 +6,7 @@ import happybit.exception.HaBitParserException;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
-import happybit.parser.Parser;
+import happybit.parser.MainParser;
 import happybit.storage.Storage;
 
 import java.util.Scanner;
@@ -48,7 +48,6 @@ public class UiMain extends UiManager {
         this.printManager = printManager;
         this.storage = storage;
         loadData();
-        this.goalList.setRecurringTasks();
     }
 
     /**
@@ -93,7 +92,7 @@ public class UiMain extends UiManager {
         while (!isExit && !isReturn) {
             userInput = readUserInput(in);
             try {
-                Command command = Parser.parse(userInput);
+                Command command = MainParser.parse(userInput);
                 command.runCommand(goalList, printManager, storage);
                 isExit = isExitCommand(command);
                 isReturn = isReturnCommand(command);

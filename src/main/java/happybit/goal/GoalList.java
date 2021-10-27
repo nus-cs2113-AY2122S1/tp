@@ -4,9 +4,6 @@ import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
 import happybit.ui.PrintManager;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -52,7 +49,7 @@ public class GoalList {
     public GoalType getChosenGoalType() {
         GoalType goalType = GoalType.DEFAULT;
         try {
-            goalType = getGoal(chosenGoalIndex).goalType;
+            goalType = this.getGoal(chosenGoalIndex).goalType;
         } catch (HaBitCommandException e) {
             // Exception should never be thrown here
         }
@@ -123,8 +120,10 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        goal.addHabit(habit);
-        printManager.printAddedHabit(habit.getHabitName(), goal.getDescription());
+        Habit newHabit = updateHabitEndDate(goal, habit);
+        newHabit.populateIntervalsDuringHabitCreation();
+        goal.addHabit(newHabit);
+        printManager.printAddedHabit(newHabit.getHabitName(), goal.getDescription());
     }
 
     /**
@@ -170,11 +169,11 @@ public class GoalList {
      */
     public void doneHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager)
             throws HaBitCommandException {
-        Goal goal = getGoal(goalIndex);
+        Goal goal = this.getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
-        Habit habit = getHabit(habitList, habitIndex);
+        Habit habit = this.getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
-        printManager.printDoneHabit(goal.getDescription(), habit);
+        printManager.printDoneHabit(goal.getDescription(), habit, new Date());
     }
 
     /**
@@ -251,29 +250,13 @@ public class GoalList {
         // To be implemented
     }
 
-    /**
-     * Check and set on start up for all goals and all habits within goals.
-     * After importing data into goalList.
-     *
-     */
-    public void setRecurringTasks() {
-        for (Goal goal : goalList) {
-            ArrayList<Habit> currGoalsHabits = goal.getHabitList();
-            for (Habit habit : currGoalsHabits) {
-                // upon start up check if habitDate is equals nextHabitDate
-                // means next iteration:
-                // update habitDate and nextHabitDate and addProgress()
-                Date currDate = new Date();
-                if (habit.getInterval() != 0 && habit.isNextCycle(currDate)) {
-                    Date newHabitDate = habit.getNextHabitDate();
-                    habit.setHabitDate(newHabitDate);
-                    habit.setNextHabitDate();
-                    habit.addProgress();
-                }
-            }
-        }
+    public void viewGoalProgress(int goalIndex) {
+        // todo
     }
 
+    public void viewHabitStreak(int goalIndex, int habitIndex) {
+        // todo
+    }
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -330,6 +313,17 @@ public class GoalList {
         }
     }
 
-
+    /**
+     * Sets the endDate of the habit to be similar to the goal.
+     *
+     * @param goal  Goal that a habit is to be added to.
+     * @param habit Habit to be added to the goal.
+     * @return Habit with its endDate updated.
+     */
+    private Habit updateHabitEndDate(Goal goal, Habit habit) {
+        Date goalEndDate = goal.getEndDate();
+        habit.setEndDate(goalEndDate);
+        return habit;
+    }
 
 }

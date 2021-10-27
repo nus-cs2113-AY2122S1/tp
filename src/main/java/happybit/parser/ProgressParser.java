@@ -1,29 +1,21 @@
 package happybit.parser;
 
 import happybit.command.Command;
-import happybit.command.ListHabitsCommand;
+import happybit.command.ViewProgressCommand;
 import happybit.exception.HaBitParserException;
+import happybit.habit.Habit;
 
-
-public class ListHabitParser extends Parser {
+public class ProgressParser extends Parser {
 
     private static final String GOAL_INDEX_FLAG = "g/";
     private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";
     private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
-        + "Please check your command format.";
+            + "Please check your command format.";
 
-    /**
-     * Parses instruction to create ListHabitsCommand for specified goal number.
-     *
-     * @param commandInstruction Goal number.
-     * @return ListHabitsCommand that will list habits under specified goal number.
-     * @throws HaBitParserException If commandInstruction is not an integer.
-     */
-    public static Command parseListHabitCommand(String commandInstruction) throws HaBitParserException {
+    public static Command parseViewGoalProgressCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
-
         int goalIndex = getGoalIndex(commandInstruction);
-        return new ListHabitsCommand(goalIndex);
+        return new ViewProgressCommand(goalIndex);
     }
 
     /*
@@ -40,14 +32,10 @@ public class ListHabitParser extends Parser {
         }
     }
 
-    private static int getGoalIndex(String commandInstruction) throws HaBitParserException {
-        String[] params = splitInput(commandInstruction);
+    private static int getGoalIndex(String input) throws HaBitParserException {
+        String[] params = splitInput(input);
         String goalParam = getParameter(params, GOAL_INDEX_FLAG);
-
-        if (goalParam == null) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
-        }
-
+        checkNoDescription(goalParam);
         try {
             String goalIndexString = goalParam.substring(goalParam.indexOf("/") + 1).trim();
             return Integer.parseInt(goalIndexString) - 1;
@@ -55,5 +43,4 @@ public class ListHabitParser extends Parser {
             throw new HaBitParserException(ERROR_INVALID_GOAL_NUMBER);
         }
     }
-
 }

@@ -5,8 +5,6 @@ import java.util.Date;
 public class Progress {
     // as long as marked done between each interval
     protected boolean isDone;
-    // if marked done ON habitDate
-    protected boolean isDoneOnTime;
     // date it was set as Done
     protected Date completedDate;
 
@@ -16,19 +14,17 @@ public class Progress {
      */
     public Progress() {
         this.isDone = false;
-        this.isDoneOnTime = false;
         this.completedDate = null;
     }
 
     /**
      * Constructor for Progress when called from updateProgress.
      * isDone set to true
-     * completedDate set
-     * isDoneOnTime indicator set based on input passed in
+     *
+     * @param completedDate Date user marks it as done/
      */
-    public Progress(boolean isDoneOnTime, Date completedDate) {
+    public Progress(Date completedDate) {
         this.isDone = true;
-        this.isDoneOnTime = isDoneOnTime;
         this.completedDate = completedDate;
     }
 
@@ -38,13 +34,5 @@ public class Progress {
 
     public boolean getDone() {
         return this.isDone;
-    }
-
-    public void setDoneOnTime() {
-        this.isDoneOnTime = true;
-    }
-
-    public boolean getDoneOnTime() {
-        return this.isDoneOnTime;
     }
 }

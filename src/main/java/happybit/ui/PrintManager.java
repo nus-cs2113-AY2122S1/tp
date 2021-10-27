@@ -3,8 +3,6 @@ package happybit.ui;
 import happybit.goal.Goal;
 import happybit.habit.Habit;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -56,6 +54,12 @@ public class PrintManager {
         printDashes();
     }
 
+    /**
+     * Prints the list of goals in the goalList.
+     *
+     * @param goals      List of goals.
+     * @param numOfGoals Number of goals in the goal list.
+     */
     public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
         String[] headers = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count"};
         String[][] data = populateGoalData(goals, numOfGoals, headers.length);
@@ -63,18 +67,18 @@ public class PrintManager {
         printTable(headers, data);
     }
 
+    /**
+     * Prints the list of habits in the habitList.
+     *
+     * @param goalDescription Goal that the list of habits are for.
+     * @param habits          List of habits.
+     * @param numOfHabits     Number of habits in the habitList.
+     */
     public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
-        int index = 1;
-        printDashes();
-        assert (numOfHabits > 0) : "List cannot be empty here";
-        System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
-                + goalDescription + "\".");
-        for (Habit habit : habits) {
-            String currIndex = index + ". ";
-            printHabitDetails(habit, currIndex);
-            index++;
-        }
-        printDashes();
+        String[] headers = {"Index", "Name", "Interval", "Completion", "Completed", "Remaining", "Expired"};
+        String[][] data = populateHabitData(habits, numOfHabits, headers.length);
+        System.out.println("There are " + numOfHabits + " habits currently being tracked for " + goalDescription + ":");
+        printTable(headers, data);
     }
 
     public void printAddedGoal(String goalDescription) {
@@ -102,16 +106,19 @@ public class PrintManager {
         printDashes();
     }
 
-    public void printDoneHabit(String goalDescription, Habit habit) {
+    public void printDoneHabit(String goalDescription, Habit habit, Date completionDate) {
+        String[] strDates = habit.getDoneHabitDates(completionDate);
         printDashes();
         System.out.println("You have completed your habit of \"" + habit.getHabitName() + "\" under the goal \""
-                + goalDescription + "\" set for " + habit.getHabitDateString() + ". Well Done!");
-        if (habit.getInterval() > 0) {
-            System.out.println("Your next date set for this habit is " + habit.getNextHabitDateString());
+                + goalDescription + "\" set for " + strDates[0] + ". Well Done!");
+        if (habit.getIntervalLength() > 0) {
+            System.out.println("Your next date set for this habit is " + strDates[2]);
         } else {
             System.out.println("Update the habit with a regular interval value to make it recurring!");
         }
         printDashes();
+
+
     }
 
     public void printUpdatedGoal(String oldGoalDescription, String goalDescription) {
@@ -158,19 +165,6 @@ public class PrintManager {
      * =========================================================================
      */
 
-    private void printHabitDetails(Habit habit, String currIndex) {
-        String intervalPrint = "";
-        int habitIntervals = habit.getInterval();
-        if (habitIntervals > 0) {
-            intervalPrint = "(every " + habit.getInterval() + " day(s))";
-        }
-        // String intervalPrint = "(every " + habit.getInterval() + " days)";
-        String lastHabitDatePrint = habit.getHabitDateString();
-        String nextHabitDatePrint = habit.getNextHabitDateString();
-        System.out.println(currIndex + WHITE_SPACE + habit.getHabitName() + WHITE_SPACE + intervalPrint);
-        System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
-    }
-
     private void printDashes() {
         System.out.println(DASHES);
     }
@@ -190,7 +184,7 @@ public class PrintManager {
         int[] columnLengths = new int[numOfColumns];
         int minimumLength;
         for (int columnIndex = 0; columnIndex < numOfColumns; columnIndex++) {
-            minimumLength = minimumMultipleOfFive(headers[columnIndex].length());
+            minimumLength = headers[columnIndex].length() + 2;
             columnLengths[columnIndex] = getMinimumLength(minimumLength, columnIndex, numOfRows, data);
         }
         return columnLengths;
@@ -207,7 +201,7 @@ public class PrintManager {
      */
     private int getMinimumLength(int minimumLength, int columnIndex, int numOfRows, String[][] data) {
         for (int rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
-            int comparedLength = minimumMultipleOfFive(data[rowIndex][columnIndex].length());
+            int comparedLength = data[rowIndex][columnIndex].length() + 2;
             if (comparedLength > minimumLength) {
                 minimumLength = comparedLength;
             }
@@ -283,20 +277,6 @@ public class PrintManager {
         System.out.println(NEWLINE + lineSeparator);
     }
 
-    /**
-     * Rounds up a number to the closest multiple of 5.
-     *
-     * @param num Number to be rounded up.
-     * @return Multiple of 5 that is rounded up from the input number.
-     */
-    private int minimumMultipleOfFive(int num) {
-        int result = 0;
-        while (num > result) {
-            result += 5;
-        }
-        return result;
-    }
-
     // The following are sub-methods of list printing.
 
     /**
@@ -316,6 +296,29 @@ public class PrintManager {
             data[goalIndex][3] = goals.get(goalIndex).getPrintableStartDate();
             data[goalIndex][4] = goals.get(goalIndex).getPrintableEndDate();
             data[goalIndex][5] = String.valueOf(goals.get(goalIndex).getHabitListSize());
+        }
+        return data;
+    }
+
+    /**
+     * Populate a 2D array with habit data.
+     *
+     * @param habits       Arraylist containing all the habits.
+     * @param numOfHabits  Number of habits.
+     * @param numOfColumns Number of data columns.
+     * @return 2D string array containing habit data.
+     */
+    private String[][] populateHabitData(ArrayList<Habit> habits, int numOfHabits, int numOfColumns) {
+        String[][] data = new String[numOfHabits][numOfColumns];
+        for (int habitIndex = 0; habitIndex < numOfHabits; habitIndex++) {
+            data[habitIndex][0] = String.valueOf(habitIndex + 1);
+            data[habitIndex][1] = habits.get(habitIndex).getHabitName();
+            data[habitIndex][2] = String.valueOf(habits.get(habitIndex).getIntervalLength());
+            int[] habitStatistics = habits.get(habitIndex).getListStatistics();
+            data[habitIndex][3] = habitStatistics[3] + "%";
+            data[habitIndex][4] = String.valueOf(habitStatistics[1]);
+            data[habitIndex][5] = String.valueOf(habitStatistics[2]);
+            data[habitIndex][6] = String.valueOf(habitStatistics[0]);
         }
         return data;
     }
