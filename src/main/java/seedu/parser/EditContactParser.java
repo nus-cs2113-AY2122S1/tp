@@ -1,5 +1,6 @@
 package seedu.parser;
 
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -17,7 +18,8 @@ public class EditContactParser extends ContactParser {
     public String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingDetailException, ForbiddenDetailException, InvalidNameException,
             InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException, MissingArgEditException {
+            InvalidTwitterUsernameException, InvalidEmailException, MissingArgEditException,
+            DuplicateDetailException {
 
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
         if (inputDetails.length < NUMBER_OF_EDIT_ARGS) {

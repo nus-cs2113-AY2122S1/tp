@@ -1,6 +1,7 @@
 //@@author marcusbory
 package seedu.parser;
 
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -29,7 +30,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
             throws InvalidFlagException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException,
-            MissingArgEditException, MissingArgAddException;
+            MissingArgEditException, MissingArgAddException, DuplicateDetailException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact
@@ -43,7 +44,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public void parseDetail(String[] contactDetails, String detail)
             throws InvalidFlagException, MissingDetailException, ForbiddenDetailException, InvalidNameException,
             InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
         // for commands that specify a flag, but do not specify any argument for that
         // flag
@@ -60,6 +61,9 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
         }
         checkRegex(flag, detailToStore);
         int indexToStore = getIndexToStore(flag);
+        if (contactDetails[indexToStore] != null) {
+            throw new DuplicateDetailException();
+        }
         contactDetails[indexToStore] = detailToStore;
     }
 }
