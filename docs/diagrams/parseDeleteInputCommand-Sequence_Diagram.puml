@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ":Parser": parseCommand(String userInput)
+activate ":Parser"
+
+":Parser" -> ":Parser": parseDeleteCommand(String commandParams)
+activate ":Parser"
+
+":Parser" -> ":DeleteExpenditureParser": DeleteExpenditureParser.parse(deleteParams)
+activate ":DeleteExpenditureParser"
+
+create "command:DeleteMultipleExpenditureCommand"
+":DeleteExpenditureParser" -> "command:DeleteMultipleExpenditureCommand": new
+activate "command:DeleteMultipleExpenditureCommand"
+return command:DeleteMultipleExpenditureCommand
+
+return command:DeleteMultipleExpenditureCommand
+
+return command:DeleteMultipleExpenditureCommand
+
+return command:DeleteMultipleExpenditureCommand
+
+@enduml

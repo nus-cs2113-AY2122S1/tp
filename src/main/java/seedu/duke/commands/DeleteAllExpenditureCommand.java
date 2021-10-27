@@ -5,7 +5,7 @@ import seedu.duke.ui.TextUi;
 public class DeleteAllExpenditureCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete all expenditure record.\n"
-            + "Parameters: e/ m/MONTH";
+            + "Parameters: -e m/MONTH";
     public final int month;
 
     public DeleteAllExpenditureCommand(int month) {

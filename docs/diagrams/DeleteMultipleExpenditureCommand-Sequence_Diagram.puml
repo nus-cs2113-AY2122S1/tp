@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> "command:DeleteMultipleExpenditureCommand" : execute(boolean isLoadingStorage)
+activate "command:DeleteMultipleExpenditureCommand"
+
+loop while the related expenditures are not deleted yet
+"command:DeleteMultipleExpenditureCommand" -> ":allRecordList" : deleteExpenditure(int startIndex, int month)
+activate ":allRecordList"
+return
+
+end
+
+return
+@enduml
