@@ -5,15 +5,15 @@ import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 import seedu.duke.ui.TextUi;
 
-import static seedu.duke.common.Messages.MESSAGE_FILE_NOT_EXIST;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_IO;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import static seedu.duke.common.Messages.MESSAGE_FILE_NOT_EXIST;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_IO;
 
 public class WriteToTextFile {
     /**
@@ -63,7 +63,7 @@ public class WriteToTextFile {
                     double amount = currentExpenditure.getAmount();
                     String date = currentExpenditure.getDate();
                     String category = currentExpenditure.getCategory();
-                    fileWrite.println("add -e c/" + description + " a/" + amount + " d/" + date + " c/" + category);
+                    fileWrite.println("add -e n/" + description + " a/" + amount + " d/" + date + " c/" + category);
                     fileWrite.flush();
                 }
 

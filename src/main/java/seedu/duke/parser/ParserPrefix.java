@@ -6,8 +6,10 @@ public interface ParserPrefix {
 
     String PREFIX_MONTH = "m/";
     String PREFIX_INDEX = "i/";
-    String PREFIX_DESCRIPTION = "c/";
+    String PREFIX_DESCRIPTION = "n/";
     String PREFIX_AMOUNT = "a/";
     String PREFIX_DATE = "d/";
     String PREFIX_NAME = "n/";
+    String PREFIX_CATEGORY = "c/";
+    String PREFIX_TYPE = "t/";
 }

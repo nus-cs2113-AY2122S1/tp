@@ -16,7 +16,7 @@ public class EditExpenditureParser implements ParserPrefix {
     public static EditExpenditureCommand parse(String args) throws NumberFormatException, EmptyDescriptionException {
         HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
-        int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH));
+        int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH), IS_COMPULSORY);
         int index = ParserUtil.parseIndex(argumentMap.get(PREFIX_INDEX));
         String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_NOT_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_NOT_COMPULSORY);

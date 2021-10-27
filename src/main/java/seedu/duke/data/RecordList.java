@@ -48,12 +48,16 @@ public class RecordList {
      * @param description description of the expenditure
      * @param amount amount spent
      * @param date date on which the expenditure took place
+     * @param category category which the expenditure falls under
      * @param isLoadingStorage indicate if this command is called during loading or runtime
+     * @return Expenditure which was added.
      */
-    public void addExpenditure(String description, double amount, LocalDate date, Category category,
+    public Expenditure addExpenditure(String description, double amount, LocalDate date, Category category,
                                boolean isLoadingStorage) {
-        expenditureRecords.add(new Expenditure(description, amount, date, category));
+        Expenditure expenditureToAdd = new Expenditure(description, amount, date, category);
+        expenditureRecords.add(expenditureToAdd);
         numberOfRecords += 1;
+        return expenditureToAdd;
         /*
         if (!isLoadingStorage) {
             Storage storeCurrentExpenditure = new Storage();
@@ -66,7 +70,7 @@ public class RecordList {
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
         loanRecords.add(new Loan(name, amount, date));
         numberOfRecords += 1;
-        assert getLoanListSize() == numberOfRecords;
+        //assert getLoanListSize() == numberOfRecords;
     }
 
     public void deleteBudget() {
@@ -78,13 +82,13 @@ public class RecordList {
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index - 1);
         numberOfRecords -= 1;
-        assert getExpenditureListSize() == numberOfRecords;
+        //assert getExpenditureListSize() == numberOfRecords;
     }
 
     public void deleteLoan(int index) {
         loanRecords.remove(index - 1);
         numberOfRecords -= 1;
-        assert getLoanListSize() == numberOfRecords;
+        //assert getLoanListSize() == numberOfRecords;
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {

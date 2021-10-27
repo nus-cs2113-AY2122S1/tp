@@ -11,6 +11,7 @@ import java.time.LocalDate;
  */
 public class AddExpenditureCommand extends AddCommand {
 
+    public static final boolean IS_NOT_LOADING_STORAGE = false;
     private final String description;
     private final double spending;
     private final LocalDate date;
@@ -40,9 +41,12 @@ public class AddExpenditureCommand extends AddCommand {
     }
 
     public void execute() {
-        Expenditure newExpenditure = new Expenditure(description, spending, date, category);
-        allRecordList.addExpenditure(description, spending, date, category, false);
-        TextUi.showExpenditureAddedMessage(newExpenditure, false, allRecordList);
+        Expenditure addedExpenditure = allRecordList.addExpenditure(description,
+                spending,
+                date,
+                category,
+                IS_NOT_LOADING_STORAGE);
+        TextUi.showExpenditureAddedMessage(addedExpenditure, IS_NOT_LOADING_STORAGE, allRecordList);
     }
 
 
