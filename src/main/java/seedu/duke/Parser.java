@@ -13,9 +13,11 @@ import seedu.duke.commands.clients.CutClientCommand;
 import seedu.duke.commands.clients.FindClientCommand;
 import seedu.duke.commands.clients.ListClientCommand;
 import seedu.duke.commands.clients.SortClientCommand;
+
 import seedu.duke.commands.flights.AddFlightCommand;
 import seedu.duke.commands.flights.CutFlightCommand;
 import seedu.duke.commands.flights.FindFlightCommand;
+import seedu.duke.commands.flights.SortFlightCommand;
 import seedu.duke.commands.flights.ListFlightCommand;
 
 import seedu.duke.commands.tours.SortTourCommand;
@@ -30,7 +32,12 @@ import seedu.duke.data.Tour;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Date;
 
 
 /**
@@ -39,15 +46,12 @@ import java.util.*;
 public class Parser {
     public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
-    public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
-    public static final String ERROR_INVALID_CLIENT_INDEX = "Invalid client index!";
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
     public static final String ERROR_MISSING_NAME = "Missing name/id! Please try again.";
     public static final String ERROR_EMAIL_FORMAT_WRONG = "Invalid Email!";
     public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number";
-    public static final String ERROR_TOUR_TIME_WRONG = "Invalid Tour Time";
     public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time";
     public static final String ERROR_PRICE_FORMAT = "Invalid Price";
 
@@ -183,7 +187,6 @@ public class Parser {
     private static TreeMap<Integer, String> extractPrefixIndexes(String argString, String identifier)
             throws TourPlannerException {
 
-
         List<String> prefixes = null;
         int repeatPrefixChecker = 0;
 
@@ -197,7 +200,7 @@ public class Parser {
             repeatPrefixChecker = 3;
             break;
         case "-f":
-            prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
+            prefixes = Arrays.asList("/d", "/r", "/dd", "/rd");
             repeatPrefixChecker = 5;
             break;
         case "-p":
@@ -340,16 +343,16 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/t":
+        case "/d":
             index = 1;
             break;
-        case "/f":
+        case "/r":
             index = 2;
             break;
-        case "/dt":
+        case "/dd":
             index = 3;
             break;
-        case "/df":
+        case "/rd":
             index = 4;
             break;
         default:
@@ -449,12 +452,15 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
+            handleClientException(values);
             Client client = new Client(values);
             return new AddClientCommand(client);
         case "-f":
+            handleFlightException(values);
             Flight flight = new Flight(values);
             return new AddFlightCommand(flight);
         case "-t":
+            handleTourException(values);
             Tour tour = new Tour(values);
             return new AddTourCommand(tour);
         case "-p":
@@ -463,6 +469,47 @@ public class Parser {
             break;
         }
         return null;
+    }
+
+    private static void handleTourException(String[] values) throws TourPlannerException {
+        String price = values[2];
+        for (int i = 0; i < price.length(); i++) {
+            char ch = price.charAt(i);
+            if (!(ch <= '9' && ch >= '0')) {
+                throw new TourPlannerException(ERROR_PRICE_FORMAT);
+            }
+        }
+    }
+
+    private static void handleFlightException(String[] values) throws TourPlannerException {
+        SimpleDateFormat formatter = new SimpleDateFormat("d/M/yy HH:mm");
+        Date start = null;
+        Date end = null;
+        String startDateString = values[3];
+        String endDateString = values[4];
+        try {
+            start = formatter.parse(startDateString);
+            end = formatter.parse(endDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (end.before(start)) {
+            throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
+        }
+    }
+
+    private static void handleClientException(String[] values) throws TourPlannerException {
+        String contactNum = values[2];
+        String email = values[3];
+        if (!email.contains("@")) {
+            throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
+        }
+        for (int i = 0; i < contactNum.length(); i++) {
+            char ch = contactNum.charAt(i);
+            if (!(ch <= '9' && ch >= '0')) {
+                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+            }
+        }
     }
 
     private static Command parseList(String params) throws TourPlannerException {
@@ -523,6 +570,8 @@ public class Parser {
             return new SortTourCommand(filter);
         case "-c":
             return new SortClientCommand(filter);
+        case "-f":
+            return new SortFlightCommand(filter);
         default:
             return null;
         }

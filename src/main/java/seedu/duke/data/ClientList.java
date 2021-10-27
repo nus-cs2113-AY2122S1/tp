@@ -93,7 +93,7 @@ public class ClientList {
         clientCount = 0;
     }
 
-    public ArrayList<String> getSortedClientCodes() {
+    public ArrayList<String> getSortedClientIds() {
         Collections.sort(clientIds);
         return clientIds;
     }
