@@ -19,7 +19,7 @@ public class SearchMapCommandParser {
 //        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
         if (input.length() == 0) {
-            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+//            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
