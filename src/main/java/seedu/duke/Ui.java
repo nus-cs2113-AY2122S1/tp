@@ -38,7 +38,14 @@ public class Ui {
     }
 
     public static void printMatchingTrainingList(TrainingList trainings, String query) {
-        // version 2.0
+        if (trainings.getTrainingListSize() > 0) {
+            System.out.println("The following trainings matches your search \"" + query + "\"");
+            for (TrainingSchedule training : trainings.getTrainingList()) {
+                System.out.println(training.toString());
+            }
+        } else {
+            System.out.println("Sorry, there is no training that matches your search \"" + query + "\"");
+        }
     }
 
     public static void printMatchingMemberList(MemberList members, String name) {
@@ -113,10 +120,8 @@ public class Ui {
         if (trainings.getTrainingListSize() == 0) {
             System.out.println("Training schedule list is empty!");
         }
-        int display = 1;
         for (TrainingSchedule trainingEntries : trainings.getTrainingList()) {
-            System.out.println("[" + display + "] " + trainingEntries.toString());
-            display++;
+            System.out.println(trainingEntries.toString());
         }
     }
 
