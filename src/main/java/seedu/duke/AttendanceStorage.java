@@ -1,20 +1,17 @@
 package seedu.duke;
 
-import seedu.duke.attendance.Attendance;
-import seedu.duke.attendance.AttendanceList;
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import seedu.duke.attendance.Attendance;
+import seedu.duke.attendance.AttendanceList;
 
 public class AttendanceStorage {
 
     /**
-     * This method searches the current directory for a folder named DukeAttendance.
-     * If the folder exists, it will load the attendances into the attendance list.
-     * Else it will create an empty folder called DukeAttendance
+     * This method searches the current directory for a folder named DukeAttendance. If the folder exists, it will load
+     * the attendances into the attendance list. Else it will create an empty folder called DukeAttendance
      */
     public static void setUpAttendanceStorage(AttendanceList attendanceList) {
         File currentDir = new File("");
@@ -38,8 +35,7 @@ public class AttendanceStorage {
     }
 
     /**
-     * This method will load all attendances into the list
-
+     * This method will load all attendances into the list.
      *
      * @param dukeAttendanceFolder the folder path containing all the attendances
      */
@@ -133,7 +129,7 @@ public class AttendanceStorage {
     /**
      * this method rewrites the entire specific csv file.
      *
-     * @param attendanceList the current attendance list
+     * @param attendanceList        the current attendance list
      * @param currentAttendanceFile the current attendance file
      */
     public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile,
@@ -173,6 +169,7 @@ public class AttendanceStorage {
 
     //this function cheesing cos it just goes into the attendance folder and read the csv names
     //haven't done
+
     /**
      * This method will list all the attendance training names.
      */
@@ -182,20 +179,20 @@ public class AttendanceStorage {
 
 
     /**
-     * This method will delete the attendance entry from the main list
+     * This method will delete the attendance entry from the main list.
      *
      * @param attendanceList the current attendance list
-     * @param trainingName
-     * @param index
+     * @param trainingName name of training
+     * @param index index of attendance
      */
-    public static void deleteAttendance(AttendanceList attendanceList, String trainingName , int index){
+    public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
         //the index passed in is based on the sub attendance list of the training name passed in
         //so need to loop through the attendance list for that particular training name amd when it reaches the count
         //delete it
-        int count = 1 ;
-        for(int i = 1 ; i < attendanceList.getAttendanceListSize(); i++){
-            if(attendanceList.getAttendanceTrainingName(i).equals(trainingName) ){
-                if(count == index ){
+        int count = 1;
+        for (int i = 1; i < attendanceList.getAttendanceListSize(); i++) {
+            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                if (count == index) {
                     attendanceList.deleteAttendance(i);
                     break;
                 } else {
@@ -205,13 +202,13 @@ public class AttendanceStorage {
         }
     }
 
-    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList,String trainingName) {
+    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName) {
         File currentDir = new File("");
         try {
             String dukeAttendanceFilePath = currentDir.getCanonicalPath() + "/DukeAttendance/" + trainingName + ".csv";
             File dukeSpecificAttendanceFile = new File(dukeAttendanceFilePath);
             rewriteAttendanceCsv(attendanceList, dukeSpecificAttendanceFile, trainingName);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }

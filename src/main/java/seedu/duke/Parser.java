@@ -7,11 +7,12 @@ import java.util.regex.Pattern;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
-import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
+
+    static String regex = "(\\/[a-z])+";
 
     public static boolean hasListMemberKeyword(String arg) {
         return arg.trim().matches("^list /m");
@@ -169,8 +170,6 @@ public class Parser {
      * @return description of task.
      */
     public static TrainingSchedule getTrainingDescription(String query) {
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
@@ -214,34 +213,34 @@ public class Parser {
      * @return Member according to user input.
      */
     public static Member getMemberDetails(String query) {
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
         String[] words = query.trim().split(regex);
-
+        int parameterSize = words.length;
         String name = "";
         String studentNumber = "";
-        char gender = ' ';
-        int phoneNumber = 0;
+        String gender = "";
+        String phoneNumber = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
+            boolean overParameterSize = wordIndex >= parameterSize;
+            if (overParameterSize) {
+                break;
+            }
             switch (matcher.group()) {
             case "/n":
                 name = words[wordIndex].trim();
-                assert name != "" : "Name should not be empty";
                 break;
             case "/s":
                 studentNumber = words[wordIndex].trim();
-                assert studentNumber != "" : "Student Number should not be empty";
                 break;
             case "/g":
-                gender = words[wordIndex].trim().charAt(0);
+                gender = words[wordIndex].trim();
                 break;
             case "/p":
-                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                phoneNumber = words[wordIndex].trim();
                 break;
             default:
                 break;
@@ -259,8 +258,6 @@ public class Parser {
      * @return Attendance according to user input.
      */
     public static Attendance getAttendanceDetails(String query) {
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
@@ -296,7 +293,7 @@ public class Parser {
     }
 
     public static int getAttendanceIndex(String entry) {
-        String[] substring = entry.split("/i",0);
+        String[] substring = entry.split("/i", 0);
         int trainingIndex = Integer.parseInt(substring[1].trim());
         return trainingIndex;
     }
@@ -304,7 +301,7 @@ public class Parser {
     public static String getAttendanceTrainingName(String entry) {
         int trainingNameStartIndex = entry.indexOf("/t") + 2;
         int trainingNameEndIndex = entry.indexOf("/i");
-        String trainingName = entry.substring(trainingNameStartIndex,trainingNameEndIndex).trim();
+        String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
         return trainingName;
     }
 
@@ -316,13 +313,31 @@ public class Parser {
      */
     public static Integer getIndex(String query) {
         try {
-            String regex = "(\\/[a-z])+";
             String[] words = query.trim().split(regex);
             int indexNumber = Integer.parseInt(words[1].trim());
             return indexNumber;
         } catch (NumberFormatException e) {
             System.out.println("Index must be a number");
             return -1;
+        }
+    }
+
+    /**
+     * Returns parameter as given by user.
+     *
+     * @param query String user input
+     * @return Object parameter that is given in query which will either be int or string as given by user
+     */
+    public static Object getParameter(String query) {
+        String[] words = query.trim().split(regex);
+        try {
+            int indexNumber = Integer.parseInt(words[1].trim());
+            return indexNumber;
+        } catch (NumberFormatException e) {
+            String parameter = words[1].trim();
+            return parameter;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
     }
 
@@ -341,11 +356,15 @@ public class Parser {
      * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param members ArrayList of tasks
-     * @param query   user input
+     * @param query user input
      */
-    public static void findInMembers(MemberList members, String query) {
-        //Leave for v2.0, implement as class in commands package
+    public static String findInMembers(String query) {
+        try {
+            String[] words = query.trim().split(regex);
+            return words[1].trim();
+        } catch (IndexOutOfBoundsException e) {
+            return "";
+        }
     }
 
     /**

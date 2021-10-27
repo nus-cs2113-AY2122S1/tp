@@ -7,10 +7,6 @@ import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Ui {
 
     private static final String LINE_SEPARATOR = ("_____________________________________________________");
@@ -34,7 +30,7 @@ public class Ui {
 
     public static void printWrongInputMessage() {
         System.out.println("Wrong input. Please key in --help for some help on how to use the programme. \n"
-         + "If you would like to exit the programme, type 'bye'");
+                + "If you would like to exit the programme, type 'bye'");
     }
 
     public static void printListAllMessage() {
@@ -45,12 +41,31 @@ public class Ui {
         // version 2.0
     }
 
-    public static void printMatchingMemberList(MemberList members, String query) {
-        // version 2.0
+    public static void printMatchingMemberList(MemberList members, String name) {
+        if (members.getMemberListSize() > 0) {
+            System.out.println("The following members matches your search \"" + name + "\"");
+            for (Member member : members.getMemberList()) {
+                System.out.println(member.toString());
+            }
+        } else {
+            System.out.println("Sorry there is no members that matches your search \"" + name + "\"");
+        }
     }
 
     public static void printDeletedMemberMessage(Member member) {
         System.out.println("You have removed member: " + "\n" + member);
+    }
+
+    public static void printDeleteMemberErrorMessage(String errorMessage, MemberList members, String name) {
+        System.out.println(errorMessage);
+        if (members.getMemberListSize() > 0) {
+            System.out.println("The following members that have similar name as your delete \"" + name + "\"");
+            for (Member member : members.getMemberList()) {
+                System.out.println(member.toString());
+            }
+        } else {
+            System.out.println("Sorry there is no members that have similar name as your delete \"" + name + "\"");
+        }
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
