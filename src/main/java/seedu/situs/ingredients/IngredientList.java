@@ -166,14 +166,15 @@ public class IngredientList {
                 }
                 i++;
             }
-            i = 0;
 
-            // remove ingredients in group where amount = 0
+            i = 0;
+            // remove ingredients in group where amount is approx. 0
             while (i < currentGroup.getIngredientGroupSize()) {
                 if (currentGroup.get(i + 1).getAmount() < 0.01) {
                     currentGroup.remove(i + 1);
+                } else {
+                    i++;
                 }
-                i++;
             }
 
             storage.writeIngredientsToMemory(ingredientList);
@@ -242,6 +243,7 @@ public class IngredientList {
      *
      * @param updatedIngredient to be updated ingredient
      * @throws SitusException index out of bounds, cannot access
+     * @return expiryIsRepeated boolean of an ingredient existing with a give expiry date
      */
     public boolean update(Ingredient updatedIngredient) throws SitusException, IOException {
         int i;

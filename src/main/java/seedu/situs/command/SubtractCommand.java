@@ -5,6 +5,9 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to subtract given amount from an ingredient
+ */
 public class SubtractCommand extends Command {
 
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
@@ -13,6 +16,11 @@ public class SubtractCommand extends Command {
     private String ingredientName;
     private Double subtractAmount;
 
+    /**
+     * Constructor method for <code>SubtractCommand</code>
+     * @param ingredientName the ingredient name to subtract amount from
+     * @param subtractAmount the amount to be subtracted
+     */
     public SubtractCommand(String ingredientName, Double subtractAmount) {
         this.ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
         this.subtractAmount = subtractAmount;
