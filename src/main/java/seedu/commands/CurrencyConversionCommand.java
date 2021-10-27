@@ -1,7 +1,6 @@
 package seedu.commands;
 
-import seedu.entry.Expense;
-import seedu.entry.Income;
+import seedu.entry.Entry;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -9,46 +8,55 @@ import seedu.utility.Ui;
 import java.util.ArrayList;
 
 public class CurrencyConversionCommand extends Command {
+    protected CurrencyTypes from;
+    protected  CurrencyTypes to;
+    protected double exchangeRate;
 
-    protected CurrencyTypes currencyType;
-    protected double currencyMultiplier;
+    public CurrencyConversionCommand(CurrencyTypes from, CurrencyTypes to) {
+        this.from = from;
+        this.to = to;
+    }
 
-    public CurrencyConversionCommand(CurrencyTypes currencyType) {
-        this.currencyType = currencyType;
-        switch (currencyType) {
+    public double determineExchangeRate(CurrencyTypes to) {
+        switch (to) {
         case USD:
-            currencyMultiplier = 1.5;
-            break;
+            return exchangeRate = 1.5;
         case SGD:
-            currencyMultiplier = 0.67;
-            break;
+            return exchangeRate = 0.67;
         default:
-            currencyMultiplier = 1.0;
-            break;
+            return exchangeRate = 1.0;
         }
+    }
+
+    public boolean isNotBaseYear(CurrencyTypes from) {
+        return !from.equals(CurrencyTypes.SGD);
     }
 
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
-        ArrayList<Expense> expenses = finances.getExpenses();
-        ArrayList<Income> incomes = finances.getIncomes();
-        convertExpenses(expenses, finances);
-        convertIncomes(incomes, finances);
-        ui.printCurrencyChangedConfirmation(currencyType);
+        if (finances.getCurrency() == to) {
+            ui.printSameCurrencyTypeMessage(to);
+            return;
+        }
+        ArrayList<Entry> entries = finances.getEntries();
+        convertEntries(entries, finances);
+        ui.printCurrencyChangedConfirmation(to);
     }
 
-    public void convertExpenses(ArrayList<Expense> expenses, FinancialTracker finances) {
-        for (Expense expense : expenses) {
-            double newValue = finances.convertEntry(expense.getExpenseValue(), currencyMultiplier);
+    public void convertEntries(ArrayList<Entry> entries, FinancialTracker finances) {
+        for (Entry entry : entries) {
+            double newValue = convertEntry(from, to, entry.getValue());
             assert newValue >= 0;
-            expense.setExpenseValue(newValue);
+            entry.setValue(newValue);
         }
+        finances.setCurrency(to);
     }
 
-    public void convertIncomes(ArrayList<Income> incomes, FinancialTracker finances) {
-        for (Income income : incomes) {
-            double newValue = finances.convertEntry(income.getIncomeValue(), currencyMultiplier);
-            assert newValue >= 0;
-            income.setIncomeValue(newValue);
+    private double convertEntry(CurrencyTypes from, CurrencyTypes to, double value) {
+        if (isNotBaseYear(from)) {
+            double rate = determineExchangeRate(from);
+            value = value / rate;
         }
+        double toRate = determineExchangeRate(to);
+        return value * toRate;
     }
 }

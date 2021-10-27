@@ -113,7 +113,7 @@ public class Parser {
             Pattern.compile("t/(?<threshold>[^/]+)");
 
     private static final Pattern CURRENCY_CONVERSION_FORMAT =
-            Pattern.compile("m/(?<currency>.+)");
+            Pattern.compile("f/(?<baseCurrency>.+)" + "t/(?<newCurrency>.+)");
 
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
@@ -322,8 +322,9 @@ public class Parser {
         final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
         if (isMatch(matcher)) {
             try {
-                CurrencyTypes currencyType = extractCurrencyType(matcher);
-                return new CurrencyConversionCommand(currencyType);
+                CurrencyTypes baseCurrencyType = extractBaseCurrencyType(matcher);
+                CurrencyTypes newCurrencyType = extractNewCurrencyType(matcher);
+                return new CurrencyConversionCommand(baseCurrencyType, newCurrencyType);
             } catch (InputException e) {
                 return new InvalidCommand(e.getMessage());
             }
@@ -331,13 +332,29 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    private CurrencyTypes extractCurrencyType(Matcher matcher)
-            throws BlankCurrencyTypeException, InvalidCurrencyTypeException, SameCurrencyTypeException {
-        String currencyType = matcher.group("currency").trim();
-        if (currencyType.isBlank()) {
+    private CurrencyTypes extractBaseCurrencyType(Matcher matcher)
+            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
+        String baseCurrency = matcher.group("baseCurrency").trim();
+        if (baseCurrency.isBlank()) {
             throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
         }
-        switch (currencyType.toUpperCase()) {
+        switch (baseCurrency.toUpperCase()) {
+        case "USD":
+            return CurrencyTypes.USD;
+        case "SGD":
+            return CurrencyTypes.SGD;
+        default:
+            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
+        }
+    }
+
+    private CurrencyTypes extractNewCurrencyType(Matcher matcher)
+            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
+        String newCurrency = matcher.group("newCurrency").trim();
+        if (newCurrency.isBlank()) {
+            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
+        }
+        switch (newCurrency.toUpperCase()) {
         case "USD":
             return CurrencyTypes.USD;
         case "SGD":
@@ -365,7 +382,6 @@ public class Parser {
                 double expenseAmount = extractExpenseAmount(matcher);
                 String expenseDescription = extractExpenseDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-                CurrencyTypes currencyType = extractCurrencyType(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
                 return new AddExpenseCommand(expense);
             } catch (InputException e) {
