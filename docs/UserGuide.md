@@ -25,9 +25,7 @@ done in an efficient manner.
 ## Features
 
 ### Adding an item
-Adds a new item to the catalogue. Supported item types are Book, Audio, Magazine and Video. 
-
-![UGAddCommand](img/UGAddCommand.png)
+Adds a new item to the catalogue. Supported item types are Book, Audio, Magazine and Video.
 
 ### Editing an item 
 Edits an attribute of an existing item in the catalogue
@@ -43,7 +41,6 @@ Examples of usage:
 
 `edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
 
-![UGEditCommand](img/UGEditCommand.png)
 
 ### Removing an item
 Removes an existing item from the catalogue.
