@@ -4,7 +4,7 @@ import seedu.typists.ui.TextUi;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.typists.common.Utils.getWordLine;
+import static seedu.typists.common.Utils.getWordLines;
 
 public class ErrorGame extends Game {
     private final TextUi ui;
@@ -15,8 +15,8 @@ public class ErrorGame extends Game {
     public ErrorGame(String targetWordSet, int wordsPerLine) {
         ui = new TextUi();
         inputLines = new ArrayList<>();
-        wordLines = getWordLine(targetWordSet, wordsPerLine);
-        startGame();
+        wordLines = getWordLines(targetWordSet, wordsPerLine);
+        runGame();
     }
 
     public boolean readyToStartGame() {
@@ -29,7 +29,7 @@ public class ErrorGame extends Game {
         return true;
     }
 
-    public void startGame() {
+    public void runGame() {
         if (readyToStartGame()) {
             for (int i = 0; i < wordLines.size(); i++) {
                 ui.printLine(wordLines.get(i));
@@ -42,5 +42,10 @@ public class ErrorGame extends Game {
             i++;
         }
         System.out.println("Game Finished.");
+    }
+
+    @Override
+    public void gameSummary() {
+
     }
 }

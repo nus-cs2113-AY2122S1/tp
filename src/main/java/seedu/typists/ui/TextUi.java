@@ -1,6 +1,10 @@
 package seedu.typists.ui;
 
-import java.io.IOException;
+import seedu.typists.common.Error;
+import seedu.typists.content.Animation;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -15,16 +19,13 @@ import static seedu.typists.common.Messages.MESSAGE_HELP;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
 import static seedu.typists.common.Messages.SUMMARY;
 
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Logger;
-import java.util.logging.LogManager;
-import java.util.logging.Level;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.FileHandler;
-import java.util.logging.ConsoleHandler;
+
 
 /**
  * Text UI of the application.
@@ -35,7 +36,7 @@ public class TextUi {
     private static final String DIVIDER = "===========================================================";
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
-    private static final Logger LOGGER = Logger.getLogger(TextUi.class.getName());
+
 
     //get current timestamp
     //unused because it interferes with the EXPECTED.TXT in runtest
@@ -78,30 +79,10 @@ public class TextUi {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * Print error message.
-     *
-     * @param meg obtained from DukeException message
-     */
-    public void showText(String meg) {
-        System.out.println(meg);
-    }
-
-    public void showNumber(int i) {
-        System.out.println(String.valueOf(i));
-    }
-
     public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+        printScreen("Thanks for using Typist! See you next time!");
     }
 
-    public void printGameMode1Progress(int a, int b) {
-        System.out.println("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
-    }
 
     public void printKeyboard() {
         out.println(KEYBOARD);
@@ -116,7 +97,7 @@ public class TextUi {
     }
 
     public void printBookSelection() {
-        System.out.println("Input '0' to go back.\n"
+        printScreen("Input '0' to go back.\n"
                 + "Content list:\n"
                 + "1. A Confederacy of Dunces\n"
                 + "2. Moby Dick\n"
@@ -135,17 +116,60 @@ public class TextUi {
                 + "15. The Adventures of Huckleberry Finn");
     }
 
-    public void showErrorSummary(int wrongWordCount, int totalWordCount, double sentenceErrorRate) {
-        out.println("Wrong words:  " + wrongWordCount + "/" + totalWordCount);
-        out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
+    public void viewAnimateLeft(String string) throws InterruptedException {
+        Animation animation = new Animation();
+        animation.resetAnimLeft();
+        int k = 0;
+        while (k < 6) {
+            animation.animateLeft(string);
+            Thread.sleep(300);
+            k++;
+        }
+        System.out.println("");
     }
 
-    public void showWordLimitSummary(int errorWordCount, int totalWordTyped) {
-        out.print(SUMMARY + '\n');
-        out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
+    public void viewAnimateRight(String string) throws InterruptedException {
+        Animation animation = new Animation();
+        animation.resetAnimRight();
+        int k = 0;
+        while (k < 6) {
+            animation.animateRight(string);
+            Thread.sleep(300);
+            k++;
+        }
+        System.out.println("");
     }
 
-    public void showSummary(int errorWordCount, double errorPercentage, List<String> errorWords, double wpm,
+    public void showAnimatedWordLimitSummary(int errorWordCount, int totalWordTyped) throws InterruptedException {
+        viewAnimateRight("Wrong Words: " + errorWordCount + "/" + totalWordTyped);
+    }
+
+    public void showAnimatedSentenceErrorRateSummary(double sentenceErrorRate) throws InterruptedException {
+        viewAnimateRight("Sentence Error Rate: " + sentenceErrorRate);
+    }
+
+    public void showAnimatedError(ArrayList<String> content,
+                                  ArrayList<String> typed,
+                                  int totalWord)
+            throws InterruptedException {
+        TextUi ui = new TextUi();
+        out.println(SUMMARY);
+        Error error = new Error();
+
+        ui.showAnimatedWordLimitSummary(
+                error.wrongWordCount(content, typed),
+                totalWord
+        );
+
+        double sentenceErrorRate = error.sentenceErrorRate(content, typed);
+        BigDecimal bd = new BigDecimal(sentenceErrorRate);
+        bd = bd.round(new MathContext(3));
+        double rounded = bd.doubleValue();
+        ui.showAnimatedSentenceErrorRateSummary(rounded);
+    }
+
+
+    /*public void showSummary(int errorWordCount, double errorPercentage, List<String> errorWords, double wpm,
                             int totalWordTyped, double gameTime) {
         assert errorWordCount >= 0;
         assert errorPercentage >= 0;
@@ -160,48 +184,16 @@ public class TextUi {
         printErrorWords(errorWords);
         out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         out.print("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds\n");
+    }*/
+
+    public void showAnimatedSummary(int errorWordCount, double errorPercentage, double wpm,
+                                    int totalWordTyped, double gameTime) throws InterruptedException {
+        out.print(SUMMARY + '\n');
+        viewAnimateRight("Wrong Words: " + errorWordCount + "/" + totalWordTyped);
+        viewAnimateRight("Error Percentage: " + String.format("%.2f", errorPercentage));
+        viewAnimateRight("WPM: " + String.format("%.2f", wpm));
+        viewAnimateRight("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
     }
 
-    void printErrorWords(List<String> errorWords) {
-        setUpLog();
-        if (errorWords == null) {
-            out.print("No words typed wrongly.\n");
-            return;
-        }
-        for (int i = 0; i < errorWords.size(); i++) {
-            assert errorWords != null;
-            if (i != 0 && i % 8 == 0) {
-                out.print("\n");
-            }
-            out.print(errorWords.get(i));
-            if (i != (errorWords.size() - 1)) {
-                out.print("|");
-            }
-        }
-        if ((errorWords.size() - 1) % 8 != 0) {
-            out.print("\n");
-        }
-    }
 
-    void setUpLog() {
-        LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.ALL);
-
-        ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel(Level.SEVERE);
-        LOGGER.addHandler(ch);
-
-        try {
-            FileHandler fh = new FileHandler(TextUi.class.getName() + ".log");
-            fh.setFormatter(new SimpleFormatter());
-            fh.setLevel(Level.FINE);
-            LOGGER.addHandler(fh);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "File logger failed to set up\n", e);
-        }
-
-        LOGGER.info("Set up log in TextUi");
-
-
-    }
 }

@@ -1,74 +1,83 @@
 package seedu.typists.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import seedu.typists.ui.TextUi;
-import static seedu.typists.common.Utils.getWordLine;
+import static seedu.typists.common.Messages.MESSAGE_TIME_GAME_END;
+import static seedu.typists.common.Utils.getWordLineFromStringArray;
+import static seedu.typists.common.Utils.splitStringIntoWordList;
+import static seedu.typists.common.Utils.getDisplayLines;
 
 public class TimeModeGame extends Game {
-    private static final Logger logger = Logger.getLogger("Foo");
-    private final TextUi ui;
+    protected final int timeInSeconds;
+    protected final ArrayList<String> wordLists;
+    protected int wordsPerLine;
+    protected double gameTime;
+    protected final boolean isReady;
 
-    protected final ArrayList<String[]> wordLines;
-
-    protected ArrayList<String> inputLines;
-    protected int gameTime;
-    protected double realGameTime;
-
-    public TimeModeGame(String targetWordSet, int wordsPerLine) {
+    public TimeModeGame(int timeInSeconds, String targetWordSet, int wordsPerLine, boolean isReady) {
+        super();
         assert targetWordSet != null : "text passed into Time Game should not be null.";
-        this.ui = new TextUi();
-        this.inputLines = new ArrayList<>();
-        this.wordLines = getWordLine(targetWordSet, wordsPerLine);
-        this.gameTime = getGameTime();
-        startGame();
+        this.wordLists = splitStringIntoWordList(targetWordSet);
+        this.timeInSeconds = timeInSeconds;
+        this.wordsPerLine = wordsPerLine;
+        this.isReady = isReady;
     }
 
-    public boolean readyToStartTimer() {
-        Scanner in = new Scanner(System.in);
-        String command = "";
-        while (!command.equals("yes")) {
-            ui.printScreen("Do you want to start now?");
-            command = in.nextLine();
+    public boolean getReady(boolean isReady) {
+        if (!isReady) {
+            return ui.readyToStartTimer();
         }
         return true;
     }
 
-    public int getGameTime() {
+    public void runGame() {
         Scanner in = new Scanner(System.in);
-        ui.printScreen("Enter how long (in seconds) you want the game to run: ");
-        try {
-            return Integer.parseInt(in.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Not a Number!");
-            return getGameTime();
-        }
-    }
+        List<String> inputs = new ArrayList<>();
 
-    public void startGame() {
-        Scanner in = new Scanner(System.in);
-
-        if (readyToStartTimer()) {
-            int i = 0;
-            long beginTime = System.currentTimeMillis();
+        if (getReady(isReady)) {
+            int currentRow = 1;
+            long beginTime = getTimeNow();
             boolean timeOver = false;
 
             while (!timeOver) {
-                long currTime = System.currentTimeMillis() - beginTime;
-                if (currTime >= gameTime * 1000L) {
+                long currTime = getTimeNow() - beginTime;
+                if (currTime >= timeInSeconds * 1000L) {
+                    gameTime = (double) currTime / 1000;
                     timeOver = true;
-                    realGameTime = (double) currTime / 1000;
                 } else {
-                    ui.printLine(wordLines.get(i));
-                    String userInput = in.nextLine();
-                    inputLines.add(userInput);
-                    i++;
+                    String[] display = getDisplayLines(wordLists, wordsPerLine, currentRow);
+                    ui.printLine(display);
+                    displayedLines.add(display);
+                    inputs.add(in.nextLine());
+                    currentRow++;
                 }
             }
-            System.out.println("Game Finished.");
+
+            updateUserLines(inputs);
+            endGame();
         }
     }
+
+    public void endGame() {
+        ui.printEnd(MESSAGE_TIME_GAME_END);
+        double overshoot = gameTime - timeInSeconds;
+        assert overshoot >= 0;
+        if (overshoot > 0) {
+            ui.printOvershoot(overshoot);
+        }
+    }
+
+    public void gameSummary() {
+        HashMap<String, Object> summary = handleSummary(displayedLines, userLines, gameTime, "Time-limited");
+        handleStorage(summary);
+    }
+
+
+    public void updateUserLines(List<String> stringArray) {
+        userLines = getWordLineFromStringArray(stringArray);
+    }
 }
+
