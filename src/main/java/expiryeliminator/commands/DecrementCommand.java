@@ -14,8 +14,8 @@ public class DecrementCommand extends Command {
     public static final String COMMAND_WORD = "decrement";
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Decreases the quantity of a specified ingredient by a specified amount.\n"
-                    + "Parameters: i/INGREDIENT q/QUANTITY\n"
-                    + "Example: " + COMMAND_WORD + " i/Red Apple q/5";
+                    + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
+                    + "Example: " + COMMAND_WORD + " i/Red Apple q/5 e/2021-12-25";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_QUANTITY_NEGATIVE = "Sorry, you currently only have %1$s of this ingredient.\n"
