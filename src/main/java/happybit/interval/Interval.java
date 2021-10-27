@@ -74,6 +74,15 @@ public class Interval {
     }
 
     /**
+     * Getter for completed date of interval.
+     * 
+     * @return Completed date of interval.
+     */
+    public Date getCompletedDate() {
+        return this.completedDate;
+    }
+
+    /**
      * Setter for end date of interval.
      * The setting of end date is not done in the constructor due to inaccessibility of goalList at that stage.
      *
