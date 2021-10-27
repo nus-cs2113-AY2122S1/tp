@@ -31,9 +31,9 @@ done in an efficient manner.
 ## Quick Start
 
 1. Ensure that you have Java `11` or above installed.
-2. Down the latest version of `Libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
+2. Down the latest version of `libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
-4. Open a terminal/command prompt and run `java -jar Libmgr.jar` to start the application.
+4. Open a terminal/command prompt and run `java -jar libmgr.jar` to start the application.
 
 ## Features
 

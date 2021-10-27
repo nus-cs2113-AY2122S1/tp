@@ -145,6 +145,15 @@ public class Item {
      */
     @Override
     public String toString() {
-        return getID() + separator + getStatus() + separator + getTitle();
+        String output;
+        if (status.equals(Status.RESERVED)) {
+            output = getID() + separator + getStatus() + " (" + getLoanee() + ")" + separator + getTitle();
+        } else if (status.equals(Status.LOANED)) {
+            output = getID() + separator + getStatus() + " (" + getLoanee() + " TILL " + getDueDateString() + ")"
+                    + separator + getTitle();
+        } else {
+            output = getID() + separator + getStatus() + separator + getTitle();
+        }
+        return output;
     }
 }
