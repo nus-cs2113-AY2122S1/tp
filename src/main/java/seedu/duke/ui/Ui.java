@@ -410,7 +410,9 @@ public class Ui {
 
     private void printCap(ModuleList moduleList) {
         double cap = moduleList.calculateCap();
-        if (cap >= 0) {
+        boolean isCapValid = (cap >= 0);
+        if (isCapValid) {
+            DecimalFormat df = new DecimalFormat("0.00");
             cap = moduleList.calculateCap();
             System.out.println(PADDING + "Your current CAP is: " + cap);
         } else {
