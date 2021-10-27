@@ -43,8 +43,8 @@ public class Storage {
                     continue;
                 }
                 if (line.startsWith("add-employee")) {
-                    Employee newEmployee = decodeEmployee(line);
-                    employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
+                    String[] command = line.trim().split("/", 5);
+                    employeeParser.addEmployeeFromStorage(command, employeeList);
                 } else if (line.startsWith("add-ingredient")) {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
@@ -72,19 +72,6 @@ public class Storage {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
         encodedItem = "add-finance" + "|" + description[0] + "|" + description[1];
-        return encodedItem;
-    }
-
-    private static Employee decodeEmployee(String toRead) {
-        String[] description = toRead.trim().split("\\|", 3);
-        Employee employee = new Employee(description[1], description[2]);
-        return employee;
-    }
-
-    private static String encodeEmployee(String toWrite) {
-        String encodedItem = null;
-        String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-employee" + "|" + description[0] + "|" + description[1];
         return encodedItem;
     }
 
@@ -130,7 +117,7 @@ public class Storage {
 
             for (int i = 0; i < employeeList.employeeList.size(); i += 1) {
                 Employee employee = employeeList.employeeList.get(i);
-                fileWriter.write(String.format("%s\n", encodeEmployee(employee.toString())));
+                fileWriter.write(String.format("%s\n", employee.toStringStorage()));
             }
             for (int i = 0; i < ingredientList.ingredientList.size(); i += 1) {
                 Ingredient ingredient = ingredientList.ingredientList.get(i);
