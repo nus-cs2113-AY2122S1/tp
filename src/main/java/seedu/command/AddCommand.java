@@ -112,6 +112,10 @@ public class AddCommand extends Command {
         for (Lesson lesson : lessons) {
             if (lesson.getLessonType().equals(lessonType)) {
                 completeList.add(lesson);
+            } else if (lessonType == LECTURE) {
+                if (lesson.getLessonType() != TUTORIAL && lesson.getLessonType() != LAB) {
+                    completeList.add(lesson);
+                }
             }
         }
         Collections.sort(completeList, new ClassNumComparator());
