@@ -10,9 +10,13 @@ public class DoneParser extends Parser {
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the habit index. Eg: h/1";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
+    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
+            + "Please check your command format.";
+
     private static final int FLAG_LENGTH = 2;
 
     public static Command parseDoneHabitCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);
@@ -26,6 +30,13 @@ public class DoneParser extends Parser {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+
+    private static void checkNoDescription(String input) throws HaBitParserException {
+        if (input == null) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+    }
+
     /** Gets the goal index from user input.
      * @param parameters String array of command parameters.
      * @return Goal index.

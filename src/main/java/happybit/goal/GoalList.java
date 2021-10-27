@@ -1,14 +1,12 @@
 package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
-import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
-import happybit.progress.Progress;
+import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class GoalList {
     private static final String ERROR_EMPTY_GOAL_LIST = "There are no goals!";
@@ -264,23 +262,13 @@ public class GoalList {
      * @param habitIndex Integer of habit index of habit to update
      * @param newInterval Integer of new interval uses wishes to set
      */
-    public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
-        // To be implemented
-    }
-
-    public void viewGoalProgress(int goalIndex, PrintManager printManager) throws HaBitCommandException {
-        // todo
+    public void updateHabitIntervalFromGoal(int goalIndex, int habitIndex, int newInterval, PrintManager printManager)
+        throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        // todo incorporate Daren printManager implementation
-    }
-
-    public void viewHabitStreak(int goalIndex, int habitIndex, PrintManager printManager) throws HaBitCommandException {
-        // todo
-        Goal goal = getGoal(goalIndex);
-        ArrayList<Habit> habitList = goal.getHabitList();
-        Habit habit = getHabit(habitList, habitIndex);
-        HashMap<Date, Progress> habitProgress = habit.getProgressHashMap();
-        // todo incorporate Daren printManager implementation
+        ArrayList<Habit> habits = goal.getHabitList();
+        Habit habit = getHabit(habits, habitIndex);
+        habit.updateLengthOfInterval(newInterval);
+        printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
 
     /**
@@ -308,6 +296,12 @@ public class GoalList {
         }
     }
      */
+
+    public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
+        Goal goal = this.getGoal(goalIndex);
+        Habit habit = this.getHabit(goal.getHabitList(), habitIndex);
+        habit.addInterval(interval);
+    }
 
     /*
      * NOTE : ==================================================================

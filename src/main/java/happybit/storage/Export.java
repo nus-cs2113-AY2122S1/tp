@@ -55,17 +55,19 @@ public class Export {
 
     protected void writeHabit(FileWriter fileWriter, ArrayList<Habit> habitList, int index) throws IOException {
         for (Habit habit : habitList) {
+            int habitIndex = habitList.indexOf(habit);
             ArrayList<Interval> intervals = habit.getIntervals();
             String habitToWrite = this.habitString(habit, index);
 
             fileWriter.write(habitToWrite);
-            this.writeInterval(fileWriter, intervals);
+            this.writeInterval(fileWriter, intervals, index, habitIndex);
         }
     }
 
-    protected void writeInterval(FileWriter fileWriter, ArrayList<Interval> intervalList) throws IOException {
+    protected void writeInterval(FileWriter fileWriter, ArrayList<Interval> intervalList, int goalIndex,
+                                 int habitIndex) throws IOException {
         for (Interval interval : intervalList) {
-            String intervalToWrite = this.intervalString(interval);
+            String intervalToWrite = this.intervalString(interval, goalIndex, habitIndex);
 
             fileWriter.write(intervalToWrite);
         }
@@ -89,7 +91,7 @@ public class Export {
                 + habit.getIntervalLength() + NEWLINE;
     }
 
-    protected String intervalString(Interval interval) {
+    protected String intervalString(Interval interval, int goalIndex, int habitIndex) {
         SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
         String startDate = format.format(interval.getStartDate());
         String endDate = format.format(interval.getEndDate());
@@ -101,8 +103,9 @@ public class Export {
             completedDate = format.format(interval.getCompletedDate());
         }
 
-        return INTERVAL_TYPE + DELIMITER
-                + HABIT_TYPE + DELIMITER
+        return goalIndex + DELIMITER
+                + INTERVAL_TYPE + DELIMITER
+                + habitIndex + DELIMITER
                 + startDate + DELIMITER
                 + endDate + DELIMITER
                 + completedDate + NEWLINE;

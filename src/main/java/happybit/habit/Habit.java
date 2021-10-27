@@ -118,6 +118,10 @@ public class Habit {
         this.intervals = intervals;
     }
 
+    public void addInterval(Interval interval) {
+        this.intervals.add(interval);
+    }
+
     /**
      * Fills the interval list with all intervals during habit creation.
      * Method is called in goalList after the endDate has been added.
@@ -195,10 +199,6 @@ public class Habit {
         return statistics;
     }
 
-    public HashMap<Date, Progress> getProgressHashMap() {
-        return progressHashMap;
-    }
-
     /**
      * Computes the completion rate of the habit.
      * Calculated by taking the number of completed intervals / total number of intervals.
@@ -225,6 +225,8 @@ public class Habit {
         }
         return this.habitName + FROM + currInterval.getDescription();
     }
+
+
 
     /*
      * NOTE : ==================================================================
