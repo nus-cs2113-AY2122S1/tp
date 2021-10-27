@@ -105,7 +105,7 @@ public class AddParser extends Parser {
         String[] parameters = splitInput(input);
         String habitName = getName(parameters);
         int interval = getInterval(parameters);
-        return new Habit(habitName, interval, null);
+        return new Habit(habitName, interval);
     }
 
     /**

@@ -121,6 +121,7 @@ public class GoalList {
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         habit = updateHabitEndDate(goal, habit);
+        habit.populateIntervalsDuringHabitCreation();
         goal.addHabit(habit);
         printManager.printAddedHabit(habit.getHabitName(), goal.getDescription());
     }

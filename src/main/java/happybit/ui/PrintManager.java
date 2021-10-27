@@ -311,12 +311,12 @@ public class PrintManager {
     private String[][] populateHabitData(ArrayList<Habit> habits, int numOfHabits, int numOfColumns) {
         String[][] data = new String[numOfHabits][numOfColumns];
         for (int habitIndex = 0; habitIndex < numOfHabits; habitIndex++) {
-            int[] habitStatistics = habits.get(habitIndex).getListStatistics();
             data[habitIndex][0] = String.valueOf(habitIndex + 1);
             data[habitIndex][1] = habits.get(habitIndex).getHabitName();
             data[habitIndex][2] = String.valueOf(habits.get(habitIndex).getIntervalLength());
-            data[habitIndex][3] = String.valueOf(habitStatistics[3]);
-            data[habitIndex][4] = String.valueOf(habitStatistics[3]);
+            int[] habitStatistics = habits.get(habitIndex).getListStatistics();
+            data[habitIndex][3] = habitStatistics[3] + "%";
+            data[habitIndex][4] = String.valueOf(habitStatistics[1]);
             data[habitIndex][5] = String.valueOf(habitStatistics[2]);
             data[habitIndex][6] = String.valueOf(habitStatistics[0]);
         }

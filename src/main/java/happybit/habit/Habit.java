@@ -23,14 +23,11 @@ public class Habit {
      *
      * @param habitName      Name of habit linked to a goal.
      * @param intervalLength Length of each interval for a habit.
-     * @param endDate        End date of the habit (similar to goal).
      */
-    public Habit(String habitName, int intervalLength, Date endDate) {
+    public Habit(String habitName, int intervalLength) {
         this.habitName = habitName;
         this.startDate = getStartOfDay(new Date());
-        this.endDate = getEndOfDay(endDate);
         this.intervalLength = intervalLength;
-        populateIntervals(this.startDate);
     }
 
     /**
@@ -104,6 +101,14 @@ public class Habit {
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    /**
+     * Fills the interval list with all intervals during habit creation.
+     * Method is called in goalList after the endDate has been added.
+     */
+    public void populateIntervalsDuringHabitCreation() {
+        populateIntervals(this.startDate);
     }
 
     /**
@@ -222,7 +227,7 @@ public class Habit {
      * is not a multiple of the interval length (prevents endDate from overrunning habit days).
      */
     private void populateIntervalsIfNonZeroLengthInterval() {
-        int numOfCheckpoints = getNumOfCheckpoints();
+        int numOfCheckpoints = getNumOfIntervals();
         Date assignedStartDate = this.startDate;
         Date assignedEndDate = getEndOfDay(addDaysToDate(assignedStartDate, this.intervalLength));
         for (int checkpoint = 0; checkpoint < numOfCheckpoints; checkpoint++) {
@@ -231,7 +236,7 @@ public class Habit {
             assignedStartDate = addDaysToDate(assignedStartDate, this.intervalLength);
             assignedEndDate = addDaysToDate(assignedEndDate, this.intervalLength);
         }
-        intervals.get(numOfCheckpoints - 1).setEndDate(this.endDate);
+        this.intervals.get(numOfCheckpoints - 1).setEndDate(this.endDate);
     }
 
     /**
@@ -252,7 +257,7 @@ public class Habit {
      *
      * @return Total number of checkpoints.
      */
-    private int getNumOfCheckpoints() {
+    private int getNumOfIntervals() {
         int numberOfDays = daysBetweenStartAndEndDates();
         if (numberOfDays % this.intervalLength != 0) {
             return numberOfDays / this.intervalLength + 1;
@@ -449,7 +454,7 @@ public class Habit {
     }
 
     /**
-     * Computes the number of habits that are remaining (includes current interval if not done)
+     * Computes the number of habits that are remaining (includes current interval if not done).
      *
      * @return Number of remaining intervals.
      */
@@ -457,7 +462,7 @@ public class Habit {
         int count = 0;
         Date currDate = new Date();
         for (Interval interval : intervals) {
-            if (currDate.compareTo(interval.getStartDate()) > 0 && !interval.getDone()) {
+            if (interval.getEndDate().compareTo(currDate) > 0 && !interval.getDone()) {
                 count++;
             }
         }
