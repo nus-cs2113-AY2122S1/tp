@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -227,7 +228,7 @@ public class Parser {
                 return;
             }
         } else {
-            tripToEdit = openTripWithIndex(tripToEditInfo[0]);
+            tripToEdit = openTripWithIndex(tripToEditInfo[0].strip());
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
@@ -569,40 +570,46 @@ public class Parser {
      * and calls the relevant setters to edit those attributes.
      *
      * @param tripToEdit user-specified trip to be edited
-     * @param attributesToEdit String of all attributes to be added and their new values
+     * @param attributeToEdit String of all attributes to be added and their new values
      */
-    private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
-        String[] attributesToEditSplit = attributesToEdit.split("-");
-        for (String attributeToEdit : attributesToEditSplit) {
-            String[] splitCommandAndData = attributeToEdit.split(" ");
-            String data = splitCommandAndData[1];
-            switch (splitCommandAndData[0]) {
-            /*case "budget":
-                tripToEdit.setBudget(data);
-                break;*/
-            case "location":
-                tripToEdit.setLocation(data);
-                break;
-            case "date":
-                tripToEdit.setDateOfTrip(data);
-                break;
-            case "exchangerate":
-                tripToEdit.setExchangeRate(data);
-                break;
-            //TODO: confirm syntax for input
-            case "basecur":
-                tripToEdit.setRepaymentCurrency(data);
-                break;
-            //TODO: confirm syntax for input
-            case "paycur":
-                tripToEdit.setForeignCurrency(data);
-                break;
-            //case "person":
-                //break;
-            default:
-                System.out.println(splitCommandAndData[0] + " was not recognised. "
-                        + "Please try again after this process is complete");
-            }
+    private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) {
+        String[] splitCommandAndData = attributeToEdit.split(" ");
+        String data = splitCommandAndData[1];
+        switch (splitCommandAndData[0]) {
+        /*case "budget":
+            tripToEdit.setBudget(data);
+            break;*/
+        case "-location":
+            String originalLoocation = tripToEdit.getLocation();
+            tripToEdit.setLocation(data);
+            Ui.changeLocationSuccessful(tripToEdit, originalLoocation);
+            break;
+        case "-date":
+            String originalDate = tripToEdit.getDateOfTripString();
+            tripToEdit.setDateOfTrip(data);
+            Ui.changeDateSuccessful(tripToEdit, originalDate);
+            break;
+        case "-exchangerate":
+            double originalExRate = tripToEdit.getExchangeRate();
+            tripToEdit.setExchangeRate(data);
+            Ui.changeExchangeRateSuccessful(tripToEdit, originalExRate);
+            break;
+        case "-homecur":
+            String originalHomeCurrency = tripToEdit.getRepaymentCurrency();
+            tripToEdit.setRepaymentCurrency(data);
+            Ui.changeHomeCurrencySuccessful(tripToEdit, originalHomeCurrency);
+            break;
+        case "-forcur":
+            String originalForeignCurrency = tripToEdit.getForeignCurrency();
+            tripToEdit.setForeignCurrency(data);
+            Ui.changeForeignCurrencySuccessful(tripToEdit, originalForeignCurrency);
+            break;
+        //case "person":
+            //break;
+        default:
+            System.out.println(splitCommandAndData[0] + " was not recognised. "
+                    + "Please try again after this process is complete");
         }
+
     }
 }

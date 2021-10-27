@@ -381,4 +381,30 @@ public class Ui {
         System.out.println("\tPlease enter date as DD-MM-YYYY");
     }
     //@@author
+
+    public static void changeForeignCurrencySuccessful(Trip tripToEdit, String original) {
+        System.out.println("Your foreign spending currency has been changed from "
+                + original + " to " + tripToEdit.getForeignCurrency());
+    }
+
+    public static void changeHomeCurrencySuccessful(Trip tripToEdit, String original) {
+        System.out.println("Your home currency has been changed from "
+                + original + " to " + tripToEdit.getRepaymentCurrency());
+    }
+
+    public static void changeExchangeRateSuccessful(Trip tripToEdit, double original) {
+        System.out.println("The exchange rate has been changed from "
+                + original + " to " + tripToEdit.getExchangeRate());
+    }
+
+    public static void changeDateSuccessful(Trip tripToEdit, String original) {
+        System.out.println("The date of your trip has been changed from "
+                + original + " to " + tripToEdit.getDateOfTripString());
+    }
+
+    public static void changeLocationSuccessful(Trip tripToEdit, String original) {
+        System.out.println("The location of your trip has been changed from "
+                + original + " to " + tripToEdit.getLocation());
+    }
+
 }
