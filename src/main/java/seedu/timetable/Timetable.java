@@ -52,6 +52,8 @@ public class Timetable implements Comparable<Timetable> {
         this.semester = semester;
         this.earliestHour = DEFAULT_START;
         this.latestHour = DEFAULT_END;
+
+        checkIfEmpty();
     }
 
     public Timetable(int semester, int earliestHour, int latestHour, ArrayList<Module> modules, TimetableItem[] mon,
@@ -83,7 +85,7 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     private void isScheduleEmpty(TimetableItem[] schedule) {
-        for(TimetableItem item : schedule) {
+        for (TimetableItem item : schedule) {
             if (item != null) {
                 isEmpty = false;
                 return;
