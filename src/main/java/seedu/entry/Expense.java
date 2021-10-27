@@ -1,5 +1,7 @@
 package seedu.entry;
 
+import seedu.commands.CurrencyTypes;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,7 +21,7 @@ public class Expense extends Entry {
         this.date = date;
         this.category = category;
     }
-    
+
     @Override
     public ExpenseCategory getCategory() {
         return category;
