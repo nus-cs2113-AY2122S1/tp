@@ -30,9 +30,16 @@ command -> scheduler ACTIVATION_COLOR_1: addAppointment(appointment)
 scheduler -> scheduler ACTIVATION_COLOR_1a: checkPatientAvailability\n(patientId, dateTimeCode)
 scheduler -> PL ACTIVATION_COLOR_2: getAppointmentId\n(patientId, dateTimeCode)
 PL -> patient ACTIVATION_COLOR_3: getAppointmentId\n(dateTimeCode)
-patient --> PL
-PL --> scheduler
-note left: Exception is thrown here if patient\nhas an existing appointment at\nthis date and time.
+patient --> PL: appointmentId
+PL --> scheduler: appointmentId
+
+break appointmentId != -1
+note over command, scheduler
+Exception is thrown here if patient
+has an existing appointment at
+this date and time.
+end note
+end
 
 scheduler --> scheduler
 scheduler -> scheduler ACTIVATION_COLOR_1a: checkStaffAvailability\n(staffId, dateTimeCode)
@@ -40,7 +47,15 @@ scheduler -> SL ACTIVATION_COLOR_4: getAppointmentId\n(staffId, dateTimeCode)
 SL -> staff ACTIVATION_COLOR_5: getAppointmentId\n(dateTimeCode)
 staff --> SL
 SL --> scheduler
-note left: Exception is thrown here if staff\nhas an existing appointment\nat this date and time.
+
+break appointmentId != -1
+note over command, scheduler
+Exception is thrown here if staff
+has an existing appointment at
+this date and time.
+end note
+end
+
 scheduler --> scheduler
 scheduler -> scheduler ACTIVATION_COLOR_1a: insertAppointment(appointment)
 scheduler -> AL ACTIVATION_COLOR_6: addAppointment(appointment)
