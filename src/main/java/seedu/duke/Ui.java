@@ -36,6 +36,12 @@ public class Ui {
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
+
+    public static void askAutoAssignRemainder(Person person, double remainder) {
+        System.out.print("Assign the remaining " + stringForeignMoney(remainder)
+                + " to " + person.getName() + "? (y/n): ");
+    }
+
     //@@author
 
     public static void printListOfPeople(ArrayList<Person> people) {
@@ -258,7 +264,7 @@ public class Ui {
 
     public static void printIncorrectAmount(double amount) {
         System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
-                + "of the expense should equal " + amount);
+                + "of the expense should equal " + stringForeignMoney(amount));
     }
 
     public static void printPeopleInvolved(ArrayList<Person> personArrayList) {
@@ -351,7 +357,6 @@ public class Ui {
     //@@author lixiyuan416
     public static void equalSplitPrompt() {
         System.out.println("Enter \"equal\" if expense is to be evenly split, enter individual spending otherwise");
-        System.out.println();
     }
 
     public static void autoAssignIndividualSpending() {

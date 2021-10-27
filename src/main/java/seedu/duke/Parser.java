@@ -393,6 +393,7 @@ public class Parser {
                 double amountRemaining = expense.getAmountSpent() - total;
                 if (Math.abs(amountRemaining) < EPSILON) {
                     if (!hasLogged) {
+                        Ui.askUserToConfirm();
                         shouldContinue = getUserToConfirm();
                     }
 
@@ -401,6 +402,18 @@ public class Parser {
                         hasLogged = manageLog(hasLogged);
                         continue;
                     } else {
+                        updateIndividualSpending(expense);
+                        return;
+                    }
+                } else if (expense.getPersonsList().indexOf(person) == expense.getPersonsList().size() - 1) {
+                    Ui.askAutoAssignRemainder(person, amountRemaining);
+                    shouldContinue = getUserToConfirm();
+                    if (shouldContinue) {
+                        total += amountRemaining;
+                        amountBeingPaid.put(person, Storage.formatForeignMoneyDouble(amountRemaining));
+                        break;
+                    } else {
+                        Ui.printIncorrectAmount(expense.getAmountSpent());
                         updateIndividualSpending(expense);
                         return;
                     }
@@ -510,7 +523,6 @@ public class Parser {
     }
 
     private static boolean getUserToConfirm() {
-        Ui.askUserToConfirm();
         boolean isValidInput = false;
         boolean doesUserAgree = false;
         while (!isValidInput) {
