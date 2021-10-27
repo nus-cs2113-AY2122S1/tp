@@ -122,6 +122,20 @@ Your most recent spending:
 [E] KFC lunch - $10.20 (19/10/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
+
+Note: Budget reminders of different kinds might also appear when expenses are added! 
+They might look something like this.
+
+<pre>-----------------------------------------------------------------------------------------------------
+You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
+Consider readjusting your OCTOBER OVERALL budget!
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
+Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
+You can directly increase your OCTOBER FOOD budget up to $32.00!
+-----------------------------------------------------------------------------------------------------
+</pre>
 </details>
 <br>
 
