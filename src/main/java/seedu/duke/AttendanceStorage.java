@@ -35,7 +35,7 @@ public class AttendanceStorage {
     }
 
     /**
-     * This method will load all attendances into the list
+     * This method will load all attendances into the list.
      *
      * @param dukeAttendanceFolder the folder path containing all the attendances
      */
