@@ -1,7 +1,5 @@
 package seedu.entry;
 
-import seedu.commands.CurrencyTypes;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

@@ -1,6 +1,6 @@
 package seedu.utility;
 
-import seedu.commands.CurrencyTypes;
+import seedu.commands.general.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
@@ -21,7 +21,7 @@ public class FinancialTracker {
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
     private double balance;
-    private CurrencyTypes currency = CurrencyTypes.SGD;
+    private CurrencyType currency = CurrencyType.SGD;
 
     /**
      * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
@@ -104,12 +104,12 @@ public class FinancialTracker {
         return entries;
     }
 
-    public CurrencyTypes getCurrency() {
+    public CurrencyType getCurrency() {
         assert currency != null;
         return currency;
     }
 
-    public void setCurrency(CurrencyTypes currency) {
+    public void setCurrency(CurrencyType currency) {
         this.currency = currency;
     }
 
