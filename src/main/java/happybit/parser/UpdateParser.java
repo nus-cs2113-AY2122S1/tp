@@ -84,7 +84,7 @@ public class UpdateParser extends Parser {
     private static int getHabitIndex(String[] parameters) throws HaBitParserException {
         String strHabitIndex = getParameter(parameters, HABIT_INDEX_FLAG);
         if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT );
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
         }
         return stringToInt(strHabitIndex.substring(FLAG_LENGTH), ERROR_INVALID_HABIT_NUMBER) - 1;
     }
@@ -109,7 +109,7 @@ public class UpdateParser extends Parser {
     private static int getInterval(String[] parameters) throws HaBitParserException {
         String strInterval = getParameter(parameters, INTERVAL_INDEX_FLAG);
         if (strInterval == null || strInterval.equals(INTERVAL_INDEX_FLAG)) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT );
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
         }
         return stringToInt(strInterval.substring(FLAG_LENGTH), ERROR_INVALID_INTERVAL_NUMBER);
     }
