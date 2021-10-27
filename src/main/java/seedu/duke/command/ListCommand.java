@@ -22,7 +22,11 @@ public class ListCommand extends Command {
         String message = "";
 
         try {
-            message = taskManager.listTasklist(commandArguments);
+            if (commandArguments.containsKey(MAIN_ARGUMENT)) {
+                message = taskManager.listTaskRecurrence(commandArguments);
+            } else {
+                message = taskManager.listTasklistWithFilter(commandArguments);
+            }
         } catch (EmptyTasklistException ete) {
             message = ete.toString();
         } catch (ListFormatException lfe) {
