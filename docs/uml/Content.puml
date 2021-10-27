@@ -1,4 +1,6 @@
 @startuml
+skinparam classAttributeIconSize 0
+hide circle
 
 Content <|-- Note
 Content <|-- Link
@@ -21,7 +23,8 @@ class ContentManager <T extends Content> {
   + setContent(contents: ArrayList<T> ): void
 }
 !endsub
-abstract class Content {
+
+abstract class "{abstract}\nContent" as Content{
   # name: String
   # data: String
 }
