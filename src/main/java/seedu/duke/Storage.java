@@ -53,10 +53,10 @@ public class Storage {
                 String tourCode = null;
                 String tourPrice = null;
                 String flightId = null;
-                String from = null;
-                String to = null;
-                String fromDate = null;
-                String toDate = null;
+                String returnDestination = null;
+                String departDestination = null;
+                String returnDate = null;
+                String departDate = null;
                 if (line.contains("Package ID")) {
                     clientPackageId = line.substring(12);
                 } else if (line.contains("Client")) {
@@ -81,16 +81,21 @@ public class Storage {
                     flightId = line.substring(11);
                     line = scanner.nextLine();
                     int index = line.indexOf(", ");
-                    from = line.substring(18, index);
-                    fromDate = line.substring(index + 2);
+                    returnDestination = line.substring(18, index);
+                    returnDate = line.substring(index + 2);
                     line = scanner.nextLine();
                     index = line.indexOf(", ");
-                    to = line.substring(15, index);
-                    toDate = line.substring(index + 2);
+                    departDestination = line.substring(15, index);
+                    departDate = line.substring(index + 2);
                 }
-                Client client = new Client(clientId, clientName, clientContactNum, clientEmail);
-                Tour tour = new Tour(tourCode, tourName, tourPrice);
-                Flight flight = new Flight(flightId, to, from, toDate, fromDate);
+                String[] clientDetails = {clientId, clientName, clientContactNum, clientEmail};
+                String[] tourDetails = {tourCode, tourName, tourPrice};
+                String[] flightDetails = {flightId, departDestination, returnDestination, departDate, returnDate};
+
+                Client client = new Client(clientDetails);
+                Tour tour = new Tour(tourDetails);
+                Flight flight = new Flight(flightDetails);
+
                 ClientPackage clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
                 clientPackages.add(clientPackage);
             }
@@ -101,11 +106,10 @@ public class Storage {
         return null;
     }
 
-
     public void saveFile(ArrayList<ClientPackage> clientPackages) {
         try {
             FileWriter writer = new FileWriter(filePath.toString());
-            for(ClientPackage clientPackage : clientPackages) {
+            for (ClientPackage clientPackage : clientPackages) {
                 writer.write(clientPackage.toString() + System.lineSeparator());
             }
             writer.close();
