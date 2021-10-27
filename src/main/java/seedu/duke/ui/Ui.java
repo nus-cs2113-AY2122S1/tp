@@ -379,7 +379,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
         System.out.print(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
@@ -392,7 +392,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     //@@author rebchua39
@@ -423,7 +423,7 @@ public class Ui {
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);
         System.out.println(PADDING + "   Grade: " + module.getGrade());
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
