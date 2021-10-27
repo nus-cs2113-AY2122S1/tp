@@ -301,12 +301,12 @@ public class Parser {
         return trainingIndex;
     }
 
-   public static String getAttendanceTrainingName(String entry){
-        int trainingNameStartIndex = entry.indexOf("/t")+2;
+    public static String getAttendanceTrainingName(String entry) {
+        int trainingNameStartIndex = entry.indexOf("/t") + 2;
         int trainingNameEndIndex = entry.indexOf("/i");
         String trainingName = entry.substring(trainingNameStartIndex,trainingNameEndIndex).trim();
         return trainingName;
-   }
+    }
 
     /**
      * Returns an integer Index from the given String query.
