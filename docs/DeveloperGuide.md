@@ -30,7 +30,6 @@ Gonna to change this .puml diagram later - zhansen
 ### Time Limit Game
 
 ### \[Proposed\] View Statistics feature
-An enhancement of view best statistics feature.
 #### \[Proposed Implementation\]
 The top-level logic of view statistics feature resides in ViewStatistics. It implements the Command
 interface. The key methods in the ViewStatistics class is
@@ -39,19 +38,24 @@ interface. The key methods in the ViewStatistics class is
 * `calculateWorstStatistics()` - Returns the worst statistics over the past n games
 * `calculateAverageStatistics()` - Returns the average statistics over the past n games
 <!-- -->
-Given below is an example usage scenario and how the program implements the feature
+Given below is an example usage scenario and how the program implements the feature.
 
 Step 1: The user launches the application (scenario assumes that there are several game records already stored in multiple files). 
-1. The program carries out the initialization code and creates a HistoryManager object.
-<!-- -->
 
-Step 2: The user executes `view -m best -g game error -n 9` to view his/her best statistics for the error game mode over the past 9 games.
-1. A ViewCommand object is then instantiated.
-2. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.
-3. RetrieveStatisticsManager then calls the getNGames() method of historyManager() and self-invokes calculateBestStatistics().
-4. calculateBestStatistics() returns a HashMap containing the statistics. 
-5. The statistics are then displayed using the displayStatistics() method of StatisticsUI class.
-<!-- -->
+Step 2: The user executes `view -m best -g game error -n 9` to view his/her best statistics for the error game mode over the past 9 games. 
+
+Step 3: A ViewCommand object is then instantiated.
+
+Step 4. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.
+
+Step 5: RetrieveStatisticsManager creates a GameRecordsManager object.
+* The constructor of GameRecordsManager calls the readGameRecords() method of the Storage class to retrieve the gamer's past game records from the text files.
+
+Step 7. RetrieveStatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
+* calculateBestStatistics() returns a HashMap containing the statistics.
+
+Step 8. RetrieveStatisticsManager calls displayStatistics of the ViewStatisticsUI class to display the statistics.
+
 
 The following sequence diagram shows how the above scenario is executed
 
@@ -99,3 +103,5 @@ Our product is a typing game, intent to provide enjoyment for people who are fam
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
