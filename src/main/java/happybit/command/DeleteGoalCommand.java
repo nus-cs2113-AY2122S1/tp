@@ -38,4 +38,13 @@ public class DeleteGoalCommand extends DeleteCommand {
         }
     }
 
+    /**
+     * Getter for goalIndex (Used in JUnit test).
+     *
+     * @return Index of goal to be deleted from goalList.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
+    }
+
 }
