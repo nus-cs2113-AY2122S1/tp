@@ -15,21 +15,29 @@ public class TimeModeGame extends Game {
     protected final ArrayList<String> wordLists;
     protected int wordsPerLine;
     protected double gameTime;
+    protected final boolean is_ready;
 
-    public TimeModeGame(int timeInSeconds, String targetWordSet, int wordsPerLine) {
+    public TimeModeGame(int timeInSeconds, String targetWordSet, int wordsPerLine, boolean is_ready) {
         super();
         assert targetWordSet != null : "text passed into Time Game should not be null.";
         this.wordLists = splitStringIntoWordList(targetWordSet);
         this.timeInSeconds = timeInSeconds;
         this.wordsPerLine = wordsPerLine;
+        this.is_ready = is_ready;
     }
 
+    public boolean getReady(boolean is_ready) {
+        if (!is_ready) {
+            return ui.readyToStartTimer();
+        }
+        return true;
+    }
 
     public void runGame() {
         Scanner in = new Scanner(System.in);
         List<String> inputs = new ArrayList<>();
 
-        if (ui.readyToStartTimer()) {
+        if (getReady(is_ready)) {
             int currentRow = 1;
             long beginTime = getTimeNow();
             boolean timeOver = false;
