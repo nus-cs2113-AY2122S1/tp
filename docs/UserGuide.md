@@ -1,15 +1,21 @@
 # User Guide
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
-## Introduction
+## Introduction 
 
-{Give a product intro}
+Typist is a CLI typing game. 
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have Java 11 or above installed. 
+2. Down the latest version of `Typist` from [here](http://link.to/duke).
+3. Navigate to the folder containing the jar file and run `java -jar tp.jar`
 
 ## Features
 
@@ -42,6 +48,8 @@ Examples
 * command example 1
 * command example 2
 <!-- -->
+
+### Open Game: `time`
 
 ### View past records: `history`
 View past game records.  

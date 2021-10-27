@@ -69,9 +69,8 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
     public static final String MESSAGE_HELP = "Manual:\n"
-            + "content: set the content (or <-c> with game command)\n"
-            + "word: start a new word game\n"
-            + "time: start a new timer game <-t> to specify time <-sn> to start immediately\n"
+            + "content: set the content\n"
+            + "game: start a new game\n"
             + "history: view past game records\n"
             + "clear: clear all game records\n"
             + "bye: exit typist";
@@ -80,7 +79,7 @@ public class Messages {
 
     //This sample text is gotten from https://www.lipsum.com/
     public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting "
-            + "imply dummy text of the printing and typesetting industry ipsum is simply dummy "
+            + "imply dummy text of the printing and typesetting industry ipum is simply dummy "
             + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
             + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
             + "industry industry industry industry industry industry industry industry industry industry industry "
