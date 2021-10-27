@@ -18,6 +18,11 @@ public class AppointmentStorage extends Storage {
         super(APPOINTMENT_DATA_PATH);
     }
 
+
+    public AppointmentStorage(String testDataPath) throws MedBotException {
+        super(testDataPath);
+    }
+
     /**
      * Instantiates a ListItem interfaced object.
      *

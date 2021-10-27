@@ -11,5 +11,9 @@ public class PatientStorage extends PersonStorage {
         super(PATIENT_DATA_PATH);
     }
 
+    public PatientStorage(String testDataPath) throws MedBotException {
+        super(testDataPath);
+    }
+
 
 }

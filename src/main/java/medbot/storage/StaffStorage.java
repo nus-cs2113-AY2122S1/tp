@@ -10,4 +10,8 @@ public class StaffStorage extends PersonStorage {
         super(STAFF_DATA_PATH);
     }
 
+    public StaffStorage(String testDataPath) throws MedBotException {
+        super(testDataPath);
+    }
+
 }

@@ -54,13 +54,13 @@ public class StorageManager {
     }
 
     /**
-     * Load storage text file data into Medbot program. Print any errors in the storage text file data.
+     * Load storage text file data into MedBot program. Print any errors in the storage text file data.
      *
      * @param scheduler instance of Scheduler class
      * @return error message of the relevant lines with errors in the storage text files
      * @throws FileNotFoundException if storage text files cannot be found
      */
-    private String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
+    public String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
 
         return patientStorage.loadStorage(PATIENT, scheduler)
                 + staffStorage.loadStorage(STAFF, scheduler)
