@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.LibmgrException;
+import seedu.duke.common.LibmgrException;
 
 import java.util.ArrayList;
 
