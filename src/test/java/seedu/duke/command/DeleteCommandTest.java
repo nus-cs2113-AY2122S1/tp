@@ -246,7 +246,7 @@ class DeleteCommandTest {
         new ListCommand(taskManager, listArguments).executeCommand();
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
@@ -280,7 +280,7 @@ class DeleteCommandTest {
         new ListCommand(taskManager, listArguments).executeCommand();
         new DeleteCommand(taskManager, arguments).executeCommand();
 
-        assertFalse(taskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
+        assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
     }
 
 }
