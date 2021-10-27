@@ -67,8 +67,8 @@ public class Parser {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
-        String dummy;
-        String contactNum;
+        
+        switch (command) {
         case "bye":
             if (!params.equals("")) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
