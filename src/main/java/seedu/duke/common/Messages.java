@@ -58,4 +58,5 @@ public class Messages {
     // Generic Errors
     public static final String WARN_ADDITIONAL_ARGS = "  (*) Additional arguments detected, ignoring them";
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
+    public static final String INVALID_DATE = "  (!) Invalid date format! It should be in dd-mm-yyyy";
 }
