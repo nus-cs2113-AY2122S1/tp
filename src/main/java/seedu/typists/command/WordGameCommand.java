@@ -9,8 +9,13 @@ import static seedu.typists.Main.content;
 import static seedu.typists.Main.uiBot;
 
 public class WordGameCommand implements Command {
+    private static final String CONTENT_SIGNIFIER = "-c";
+
     @Override
     public void run(ArrayList<String> args) {
+        if (args.contains(CONTENT_SIGNIFIER)) {
+            content.setContent();
+        }
         startWordLimitGame();
     }
 
