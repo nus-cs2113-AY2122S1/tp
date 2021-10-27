@@ -2,10 +2,7 @@
 
 package seedu.parser;
 
-import seedu.contact.Contact;
-import seedu.contact.ContactList;
 import seedu.exception.MissingIndexException;
-
 
 public class IndexParser {
     private static final int COMD_WORD_LENGTH = 1;
@@ -47,9 +44,5 @@ public class IndexParser {
             throw new NumberFormatException();
         }
         return index;
-    }
-
-    public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
-        return contactList.getContactAtIndex(index);
     }
 }

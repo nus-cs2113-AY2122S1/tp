@@ -46,7 +46,6 @@ public class MainParser {
     private static final int ISOLATE_COMD_WORD = 2;
     public static final int NAME_INDEX = 0;
 
-    private ContactParser contactParser;
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
     private final SearchContactParser searchContactParser = new SearchContactParser();
@@ -165,7 +164,6 @@ public class MainParser {
 
     //@@author marcusbory
     private Command parseAddContact(String userInput) {
-        contactParser = addContactParser;
         try {
             String[] details = addContactParser.parseContactDetails(userInput);
             //check if name is specified in input
@@ -187,7 +185,6 @@ public class MainParser {
 
     //@@author ng-andre
     private Command parseEditContact(String userInput) { // userInput is raw user input
-        contactParser = editContactParser;
         try {
             String[] details = editContactParser.parseContactDetails(userInput);
             int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
