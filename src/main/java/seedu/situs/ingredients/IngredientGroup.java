@@ -175,7 +175,7 @@ public class IngredientGroup {
      *
      * @param ingredientNumber The index of the ingredient to be located
      * @return The indexed ingredient object
-     * @throws SitusException The ingredient is out of bounds
+     * @throws IndexOutOfBoundsException The ingredient is out of bounds
      */
     public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
         return ingredientGroup.get(ingredientNumber - 1);

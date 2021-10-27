@@ -129,20 +129,20 @@ public class IngredientList {
     //@@author AayushMathur7
     /**
      * Subtracts amount from total ingredient amount.
-     * @param ingredientName name of ingredient
+     * @param groupNumber group number of ingredient
      * @param subtractAmount amount to be subtracted from total amount
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public void subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
+    public void subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
             SitusException, IOException {
         try {
             int i = 0;
-            int ingredientIndex = findIngredientIndexInList(ingredientName);
+            IngredientGroup currentGroup = getIngredientGroup(groupNumber);
+            int ingredientIndex = findIngredientIndexInList(currentGroup.getIngredientGroupName());
             if (ingredientIndex < 0) {
                 throw new SitusException("Ingredient not found!");
             }
-            IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
 
             if (currentGroup.getTotalAmount() < subtractAmount) {
                 throw new SitusException(INVALID_SUBTRACT);
@@ -189,7 +189,7 @@ public class IngredientList {
      * Removes an ingredient from ingredient group.
      *
      * @param groupNumber the group number of the ingredient to remove
-     * @param ingredientNumber the number of the ingredient to remove
+     * @param ingredientNumber the number of the ingredient within group to remove
      * @return an ingredient object of the removed ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
@@ -230,11 +230,13 @@ public class IngredientList {
      * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
      *
      * @param groupNumber group number of ingredient to be updated
-     * @param ingredientNumber number of ingredient to be updated
+     * @param ingredientNumber number of ingredient within group to be updated
      * @param newAmount the new amount of the ingredient to be updated
      * @throws SitusException index out of bounds, cannot access
+     * @throws IOException if the ingredient list could not be saved to memory
      */
-    public Ingredient update(int groupNumber, int ingredientNumber, double newAmount) throws SitusException, IOException {
+    public Ingredient update(int groupNumber, int ingredientNumber, double newAmount)
+            throws SitusException, IOException {
         int i;
 
         IngredientGroup updatedGroup = getIngredientGroup(groupNumber);
