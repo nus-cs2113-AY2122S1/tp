@@ -7,6 +7,7 @@ import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
 
+import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -67,6 +68,27 @@ public class Timetable implements Comparable<Timetable> {
         this.friday = fri;
         this.saturday = sat;
         this.sunday = sun;
+
+        checkIfEmpty();
+    }
+
+    private void checkIfEmpty() {
+        isScheduleEmpty(monday);
+        isScheduleEmpty(tuesday);
+        isScheduleEmpty(wednesday);
+        isScheduleEmpty(thursday);
+        isScheduleEmpty(friday);
+        isScheduleEmpty(saturday);
+        isScheduleEmpty(sunday);
+    }
+
+    private void isScheduleEmpty(TimetableItem[] schedule) {
+        for(TimetableItem item : schedule) {
+            if (item != null) {
+                isEmpty = false;
+                return;
+            }
+        }
     }
 
     /**
