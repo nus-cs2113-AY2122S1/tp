@@ -15,7 +15,7 @@ public abstract class Parser {
 
     protected static final String FLAG_GOAL_INDEX = "g/";
     protected static final String FLAG_NAME = "n/";
-    protected static final String FLAG_GOAL_TYPE = "f/";
+    protected static final String FLAG_GOAL_TYPE = "t/";
     protected static final String FLAG_INTERVAL = "i/";
     protected static final String FLAG_START_DATE = "s/";
     protected static final String FLAG_END_DATE = "e/";

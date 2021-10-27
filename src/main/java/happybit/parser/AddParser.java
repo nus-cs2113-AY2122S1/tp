@@ -18,10 +18,11 @@ public class AddParser extends Parser {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Exp: g/2";
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
-    private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 'f/' flag to define the goal type. Exp: f/df";
+    private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_INTERVAL_FORMAT = "Use the 'i/' flag to define the interval. Exp: i/7";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
+    private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goalIndex has to be a number.";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number.";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
@@ -83,7 +84,7 @@ public class AddParser extends Parser {
      */
     private static Goal getGoal(String input) throws HaBitParserException {
         String[] parameters = splitInput(input);
-        String goalName = getName(parameters);
+        String goalName = getName(parameters).trim();
         GoalType goalType = getType(parameters);
         Date[] dates = getDate(parameters);
         Date startDate = dates[START_DATE];
@@ -100,7 +101,7 @@ public class AddParser extends Parser {
      */
     private static Habit getHabit(String input) throws HaBitParserException {
         String[] parameters = splitInput(input);
-        String habitName = getName(parameters);
+        String habitName = getName(parameters).trim();
         int interval = getInterval(parameters);
         return new Habit(habitName, interval);
     }
@@ -158,6 +159,10 @@ public class AddParser extends Parser {
         Date[] dates = new Date[2];
         dates[START_DATE] = getStartDate(parameters);
         dates[END_DATE] = getEndDate(parameters);
+
+        assert dates[START_DATE] != null;
+        assert dates[END_DATE] != null;
+
         checkDateNotBeforeToday(dates[START_DATE]);
         checkDateNotBeforeToday(dates[END_DATE]);
         checkStartDateBeforeOrEqualEndDate(dates[START_DATE], dates[END_DATE]);
@@ -261,8 +266,10 @@ public class AddParser extends Parser {
      */
     private static Date getStartDate(String[] parameters) throws HaBitParserException {
         String strStartDate = getParameter(parameters, FLAG_START_DATE);
-        if (strStartDate == null || strStartDate.equals(FLAG_START_DATE)) {
+        if (strStartDate == null) {
             return new Date();
+        } else if (strStartDate.equals(FLAG_START_DATE)) {
+            throw new HaBitParserException(ERROR_START_DATE_FORMAT);
         }
         return stringToDate(strStartDate.substring(FLAG_LENGTH));
     }
