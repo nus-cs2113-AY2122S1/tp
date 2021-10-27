@@ -16,8 +16,8 @@ public class AddIngredientCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the ingredient repository. "
             + "Expiry date must be yyyy-mm-dd.\n"
             + "Quantity must be an integer. Ingredient names are case insensitive and must be unique.\n"
-            + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
-            + "Example: " + COMMAND_WORD + " i/Red Apple q/5 e/2021-12-25";
+            + "Parameters: i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]\n"
+            + "Example: " + COMMAND_WORD + " u/grams i/Chicken q/5 e/2021-12-25";
 
     private static final String MESSAGE_INGREDIENT_ADDED = "I've added this ingredient:\n" + "\n%1$s\n"
             + "Now you have %2$s ingredient(s)";

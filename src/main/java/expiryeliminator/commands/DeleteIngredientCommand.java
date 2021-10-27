@@ -2,6 +2,7 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
+import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
@@ -19,6 +20,9 @@ public class DeleteIngredientCommand extends Command {
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_INGREDIENT_DELETED = "I've deleted this ingredient for you:\n" + "%1$s\n"
             + "Now you have %2$s ingredient(s)";
+    private static final String MESSAGE_INGREDIENT_USED_IN_RECIPE = "Sorry. You cannot delete an ingredient that is "
+            + "being used in a recipe.\n"
+            + "Please delete the recipe(s) that contain the ingredient first:\n%1$s";
 
     private final String ingredientName;
 
@@ -35,9 +39,19 @@ public class DeleteIngredientCommand extends Command {
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
-        // TODO: Don't allow deleting ingredient if there is a recipe that uses that ingredient
-
         assert ingredients != null : "Ingredient repository cannot be null";
+        assert recipes != null : "Recipe list cannot be null";
+
+        StringBuilder recipesContainingIngredient = new StringBuilder();
+        for (Recipe recipe : recipes.getRecipes().values()) {
+            if (recipe.contains(ingredientName)) {
+                recipesContainingIngredient.append("\n").append(recipe.getName());
+            }
+        }
+        if (recipesContainingIngredient.length() > 0) {
+            return String.format(MESSAGE_INGREDIENT_USED_IN_RECIPE, recipesContainingIngredient);
+        }
+
         final IngredientStorage ingredient;
         try {
             ingredient = ingredients.remove(ingredientName);

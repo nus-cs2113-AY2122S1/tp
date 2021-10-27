@@ -15,8 +15,8 @@ public class IncrementCommand extends Command {
     public static final String COMMAND_WORD = "increment";
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Increases the quantity of a specified ingredient by a specified amount.\n"
-                    + "Parameters: i/INGREDIENT q/QUANTITY\n"
-                    + "Example: " + COMMAND_WORD + " i/Red Apple q/3";
+                    + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
+                    + "Example: " + COMMAND_WORD + " i/Red Apple q/3 e/2021-12-25";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s:\n"

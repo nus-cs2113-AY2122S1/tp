@@ -15,24 +15,24 @@
      Invalid command format!
      add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
      Quantity must be an integer. Ingredient names are case insensitive and must be unique.
-     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
-     Example: add i/Red Apple q/5 e/2021-12-25
+     Parameters: i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]
+     Example: add u/grams i/Chicken q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
      Quantity must be an integer. Ingredient names are case insensitive and must be unique.
-     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
-     Example: add i/Red Apple q/5 e/2021-12-25
+     Parameters: i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]
+     Example: add u/grams i/Chicken q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
      Quantity must be an integer. Ingredient names are case insensitive and must be unique.
-     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
-     Example: add i/Red Apple q/5 e/2021-12-25
+     Parameters: i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]
+     Example: add u/grams i/Chicken q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
@@ -118,29 +118,29 @@
     ____________________________________________________________________________________________________
      Invalid command format!
      increment: Increases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: increment i/Red Apple q/3
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: increment i/Red Apple q/3 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      increment: Increases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: increment i/Red Apple q/3
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: increment i/Red Apple q/3 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      increment: Increases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: increment i/Red Apple q/3
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: increment i/Red Apple q/3 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      increment: Increases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: increment i/Red Apple q/3
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: increment i/Red Apple q/3 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
@@ -169,15 +169,15 @@
     ____________________________________________________________________________________________________
      Invalid command format!
      decrement: Decreases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: decrement i/Red Apple q/5
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: decrement i/Red Apple q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Invalid command format!
      decrement: Decreases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: decrement i/Red Apple q/5
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: decrement i/Red Apple q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
@@ -188,8 +188,8 @@
     ____________________________________________________________________________________________________
      Invalid command format!
      decrement: Decreases the quantity of a specified ingredient by a specified amount.
-     Parameters: i/INGREDIENT q/QUANTITY
-     Example: decrement i/Red Apple q/5
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: decrement i/Red Apple q/5 e/2021-12-25
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________

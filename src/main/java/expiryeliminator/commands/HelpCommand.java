@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
                 + "\n\n" + AddIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + AddRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + DeleteIngredientCommand.MESSAGE_USAGE
+                + "\n\n" + DeleteExpiredIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + DeleteRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + DecrementCommand.MESSAGE_USAGE
                 + "\n\n" + IncrementCommand.MESSAGE_USAGE
@@ -28,6 +29,8 @@ public class HelpCommand extends Command {
                 + "\n\n" + ViewIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + ListIngredientExpiringCommand.MESSAGE_USAGE
                 + "\n\n" + ListIngredientsExpiredCommand.MESSAGE_USAGE
+                + "\n\n" + UpdateUnitsCommand.MESSAGE_USAGE
+                + "\n\n" + ShoppingListCommand.MESSAGE_USAGE
                 + "\n\n" + HelpCommand.MESSAGE_USAGE
                 + "\n\n" + ByeCommand.MESSAGE_USAGE;
     }
