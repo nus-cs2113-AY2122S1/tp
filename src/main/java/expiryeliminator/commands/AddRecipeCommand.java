@@ -7,7 +7,6 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Adds a recipe, together with the ingredients needed.
@@ -74,6 +73,6 @@ public class AddRecipeCommand extends Command {
         if (message.equals("")) {
             return String.format(MESSAGE_RECIPE_ADDED, recipe, recipes.size());
         }
-        return String.format(MESSAGE_RECIPE_ADDED_WITH_REMINDER, recipe, recipes.size(),message);
+        return String.format(MESSAGE_RECIPE_ADDED_WITH_REMINDER, recipe, recipes.size(), message);
     }
 }
