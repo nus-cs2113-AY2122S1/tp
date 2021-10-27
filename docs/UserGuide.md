@@ -2,7 +2,7 @@
 
 ## Introduction
 
-{Give a product intro}
+Expiry Eliminator (v1.0) is a desktop app for managing the freshness of ingredients in your kitchen and the recipes you want to cook, optimized for use via a Command Line Interface (CLI). If you can type fast, Expiry Eliminator can help you manage your ingredients and recipes quickly.
 
 ## Quick Start
 
@@ -15,20 +15,25 @@
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
+### Adding an ingredient: `add`
 
-Adds a new item to the list of todo items.
+Adds an ingredient to the ingredient repository.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+- Unit is optional.
+- Quantity and expiry date is optional, but you cannot have one and not the other (i.e. you either don't provide both quantity and expiry date, or you provide both quantity and expiry date).
+- Expiry date must be in the format of `yyyy-mm-dd`.
+- Quantity must be an integer.
+- Note that ingredient names are case insensitive, and will be automatically stored in title case (e.g. `ReD aPplE` will be stored as `Red Apple`).
+- Ingredient names must be unique.
+- If the ingredient name already exists, an error message will be shown.
 
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Example of usage:
+- `add i/Red Apple`
+- `add i/Salt u/g`
+- `add i/Red Apple q/5 e/2021-10-08`
+- `add i/Salt u/g q/1000 e/2021-01-01`
 
 ### Adding a recipe: `add recipe`
 
