@@ -250,6 +250,13 @@ public class GoalList {
         // To be implemented
     }
 
+    public void viewGoalProgress(int goalIndex) {
+        // todo
+    }
+
+    public void viewHabitStreak(int goalIndex, int habitIndex) {
+        // todo
+    }
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the

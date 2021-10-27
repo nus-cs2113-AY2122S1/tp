@@ -176,8 +176,8 @@ public class Habit {
         int[] statistics = new int[4];
         statistics[0] = computeNumOfExpiredIntervals();
         statistics[1] = computeNumOfCompletedIntervals();
-        statistics[2] = computeNumOfRemainingIntervals();
         statistics[3] = computeHabitCompletionRate(statistics[1]);
+        statistics[2] = computeNumOfRemainingIntervals();
         return statistics;
     }
 
