@@ -12,6 +12,7 @@ public class Todo extends Task {
 
     private static final TypeEnum TASK_TYPE = TypeEnum.TODO;
 
+    private static final String TODO_ICON = "[T]";
     private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
     private LocalDateTime doOnDate;
@@ -78,7 +79,7 @@ public class Todo extends Task {
 
     @Override
     public String getTaskEntryDescription() {
-        String description = super.getTaskEntryDescription();
+        String description = TODO_ICON + " " + super.getTaskEntryDescription();
         if (getDoOnDate() != null) {
             description += String.format(TODO_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDoOnDate()));
         }
