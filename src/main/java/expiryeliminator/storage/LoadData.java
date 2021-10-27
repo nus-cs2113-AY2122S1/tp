@@ -59,16 +59,24 @@ public class LoadData {
         String theDigits = line.replaceAll("[^0-9]", "");
         int lengthOfQuantity = theDigits.length();
         int quantityStartIndex = line.indexOf(theDigits);
-        int unitStartIndex = quantityStartIndex + lengthOfQuantity + 1;
+        int unitStartIndex = quantityStartIndex + lengthOfQuantity;
         int unitEndIndex = line.indexOf(")");
         int quantity = Integer.parseInt(theDigits);
-        String unit = line.substring(unitStartIndex, unitEndIndex);
-        if (unit.isBlank()) {
-            unit = null;
-        }
+        String unit = getUnitForIngredientRepo(line, unitStartIndex, unitEndIndex);
         Ingredient ingredient = new Ingredient(ingredientName, unit);
         IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
         currentRecipe.setIngredientQuantities(ingredientName, ingredientQuantity);
+    }
+
+
+    private static String getUnitForIngredientRepo(String line, int unitStartIndex, int unitEndIndex) {
+        String unit = line.substring(unitStartIndex, unitEndIndex);
+        if (unit.isBlank()) {
+            unit = null;
+        } else {
+            unit = unit.substring(1);
+        }
+        return unit;
     }
 
     public static void loadIngredientRepo(IngredientRepository ingredients) {
@@ -93,7 +101,7 @@ public class LoadData {
         return quantityWithBatch;
     }
 
-    private static String getUnit(String line) {
+    private static String getUnitForRecipeList(String line) {
         String unit;
         String theDigits = line.replaceAll("[^0-9]", "");
         int lengthOfQuantity = theDigits.length();
@@ -117,14 +125,13 @@ public class LoadData {
         String expiryDateString;
         int quantityWithBatch = 0;
         IngredientStorage ingredientStorage = new IngredientStorage(null);
-
         while (sc.hasNext()) {
             String line = sc.nextLine();
             if (!line.isBlank()) {
                 if (!line.contains("-")) {
                     int ingredientNameSeparator = line.indexOf("(") - 1;
                     ingredientName = line.substring(0, ingredientNameSeparator);
-                    unit = getUnit(line);
+                    unit = getUnitForRecipeList(line);
                     Ingredient currentIngredient = new Ingredient(ingredientName, unit);
                     ingredientStorage.setIngredient(currentIngredient);
                     ingredients.add(ingredientName, unit);
