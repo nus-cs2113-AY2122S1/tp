@@ -78,7 +78,7 @@ public class Entry {
             //havent handle if i is not a number aka number format exception
 
             String trainingName = Parser.getAttendanceTrainingName(entry);
-            new DeleteAttendance(attendanceList, trainingName , attendanceIndex);
+            new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
             String name = Parser.findInMembers(entry);
