@@ -15,6 +15,39 @@ This section describes some noteworthy details on how certain features are desig
 **API**: `Parser.java` {NOTE: this may change based on further implementations}
 
 (insert relevant information here about taking in user input and parsing it etc.)
+#### List Functionality
+![](images/ListDiagram.png)
+
+How List works:
+1. When the `parser` class parses `list` as the command from the user, a new `Command` object, `ListCommand` is created.
+2. The `ListCommand` constructor will parse through the user command to remove the empty space by calling `checkForEmptyCells`
+3. Then it would initialize the `listType` value depending on the `userCommand`
+4. This processed information would be passed back to `parser` then on to `Duke`.
+5. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order
+6. list can display 4 types of list depending on the `listType` 
+7. `list` : to list the Overall Schedule 
+8. `list -m` : to list all the members in the Overall Members List
+9. `list {Event_Num} -t` : to display all the tasks in a unique Event
+10. `list {Event_Num} t/{Task_Num}` : to display all the members involved in a specific task
+
+#### Next Functionality
+
+How Next works:
+1. When the `Parser` class parses `next` as the command from the user, a new `Command` object, `NextCommand` is created.
+2. Within the constructor `NextCommand` process the inputs from the user
+3. `Duke` then calls `execute` within the `NextCommand` where in it will display the most upcoming event or task depending on the user input
+4. `task` will display next upcoming task and `event` will display next upcoming event
+
+#### Update Functionality
+![](images/UpdateDiagram.png)
+
+How Updating works:
+1. When the `Parser` class parses `update` as the command from the user, a new `Command` object, `UpdateCommand` is created.
+2. The `UpdateCommand` constructor processes the entire input from the user by calling `prepareUpdates`.
+3. It will the display to the user the selected `Event`
+4. `Duke` then calls the `execute`  method in `UpdateCommand`
+5. `UpdateCommand` will interact with `Duke` and the Users Inputs to finish the updates the User requires within a loop
+6. Once all the updates are completed, and we exit the loop, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
 
 #### Delete Functionality
 How deleting works:

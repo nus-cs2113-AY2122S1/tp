@@ -28,19 +28,27 @@ public class UpdateCommand extends Command {
     public UpdateCommand(String[] command) {
         if (command.length < 2) {
             if (command[0].equalsIgnoreCase("update")) {
-                System.out.println("please specify which event you would like to update in the format"
-                        + System.lineSeparator() + "update [Event_num]");
+                updateCommandErrorMessage();
             }
             Ui.printLineBreak();
             this.isError = true;
         } else {
-            this.eventNumber = Integer.parseInt(command[1]) - 1;
-            this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
-            System.out.println("Here are the details of the event:" + System.lineSeparator()
-                    + "======================================");
-            Ui.printEvent(Duke.eventCatalog.get(eventNumber));
-            Ui.printLineBreak();
+            prepareUpdates(command);
         }
+    }
+
+    private void updateCommandErrorMessage() {
+        System.out.println("please specify which event you would like to update in the format"
+                + System.lineSeparator() + "update [Event_num]");
+    }
+
+    private void prepareUpdates(String[] command) {
+        this.eventNumber = Integer.parseInt(command[1]) - 1;
+        this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================");
+        Ui.printEvent(Duke.eventCatalog.get(eventNumber));
+        Ui.printLineBreak();
     }
 
     public CommandResult execute() {

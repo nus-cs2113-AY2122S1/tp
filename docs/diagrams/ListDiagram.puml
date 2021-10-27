@@ -1,0 +1,28 @@
+@startuml
+title ListCommand
+
+participant ":Duke" as Duke
+activate Duke
+
+create ":Parser" as Parser
+Duke -> Parser
+activate Parser #yellow
+
+create ":ListCommand" as ListCommand
+Parser -> ListCommand: ListCommand(command)
+activate ListCommand #lightblue
+ListCommand -> ListCommand: checkForEmptyCells(command)
+activate ListCommand #lightgreen
+return
+return
+return
+
+Duke -> ListCommand
+activate ListCommand #lightblue
+ListCommand -> ListCommand: execute()
+activate ListCommand #lightgreen
+return
+ListCommand --> Duke : CommandResult
+deactivate
+
+@enduml
