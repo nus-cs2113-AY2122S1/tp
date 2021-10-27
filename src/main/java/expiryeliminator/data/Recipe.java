@@ -77,6 +77,15 @@ public class Recipe {
         return ingredientNameIfNotInList;
     }
 
+    /**
+     * Checks if the recipe contains the given ingredient name.
+     *
+     * @return True if the recipe contains the given ingredient name; false otherwise.
+     */
+    public Boolean contains(String ingredientName) {
+        return ingredientQuantities.containsKey(ingredientName);
+    }
+
     @Override
     public String toString() {
         StringBuilder ingredientsWithQuantities = new StringBuilder(name + "\n");
