@@ -1,5 +1,6 @@
-package seedu.commands;
+package seedu.commands.expense;
 
+import seedu.commands.Command;
 import seedu.entry.Expense;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;

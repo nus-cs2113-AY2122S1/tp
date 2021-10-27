@@ -7,22 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.HelpCommand;
+import seedu.commands.general.CurrencyType;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.general.HelpCommand;
 import seedu.commands.InvalidCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.expense.ListExpenseCommand;
+import seedu.commands.income.ListIncomeCommand;
+import seedu.commands.income.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.BlankCurrencyTypeException;
 import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidSettingsDataException;
 import seedu.utility.BudgetManager;
+import seedu.utility.FinancialTracker;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
@@ -248,7 +253,7 @@ public class ParserTest {
     }
     
     @Test
-    public void convertBudgetSettingsToData_validBudget_validData() {
+    public void convertSettingsToData_validSettings_validData() {
         BudgetManager testBudgetManager = new BudgetManager();
         for (ExpenseCategory category : ExpenseCategory.values()) {
             if (category == ExpenseCategory.NULL) {
@@ -257,18 +262,28 @@ public class ParserTest {
             testBudgetManager.setBudget(12, category);
         }
         Parser testParser = new Parser();
-        String testData = testParser.convertBudgetSettingsToData(testBudgetManager);
-        assertEquals(testData, "12.0,12.0,12.0,12.0,12.0,12.0,12.0");
+        FinancialTracker financialTracker = new FinancialTracker();
+        String testData = testParser.convertSettingsToData(financialTracker, testBudgetManager);
+        assertEquals(testData, "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12.0");
         
     }
     
     @Test
-    public void convertDataToBudgetSettings() {
-        String testData = "12.0,12.0,12.0,12.0,12.0,12.0,12";
+    public void convertDataToBudgetSettings() throws InvalidSettingsDataException {
+        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
         for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
             assertEquals(12, testBudgets.get(i));
         }
+    }
+    
+    @Test 
+    public void convertDataToCurrencySetting() throws InvalidCurrencyTypeException, InvalidSettingsDataException, 
+            BlankCurrencyTypeException {
+        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
+        Parser parser = new Parser();
+        CurrencyType currency = parser.convertDataToCurrencySetting(testData);
+        assertEquals(currency.toString(), "SGD");
     }
 }
