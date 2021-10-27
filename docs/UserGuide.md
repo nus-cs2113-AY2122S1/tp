@@ -8,20 +8,20 @@ done in an efficient manner.
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
-  - [Adding an item: `add`](#Adding-an-item)
-    - [Adding an audio item: `add a`](#Adding-an-audio-item)
-    - [Adding a book item: `add b`](#Adding-a-book-item)
-    - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
-    - [Adding a video item: `add v`](#Adding-a-video-item)
-  - [List items: `list`]()
-  - [Search items: `search`]()
-  - [Reserve items: `res`]()
-  - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
-  - [Loan items: `loan`]()
-  - [Return items: `return`]()
-  - [Removing an item: `rm`](#Removing-an-item)
-  - [Editing an item: `edit`](#Editing-an-item)
-  - [Exiting the program: `exit`](#Exiting-the-program)
+    - [Adding an item: `add`](#Adding-an-item)
+        - [Adding an audio item: `add a`](#Adding-an-audio-item)
+        - [Adding a book item: `add b`](#Adding-a-book-item)
+        - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
+        - [Adding a video item: `add v`](#Adding-a-video-item)
+    - [List items: `list`]()
+    - [Search items: `search`]()
+    - [Reserve items: `res`]()
+    - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
+    - [Loan items: `loan`]()
+    - [Return items: `return`]()
+    - [Removing an item: `rm`](#Removing-an-item)
+    - [Editing an item: `edit`](#Editing-an-item)
+    - [Exiting the program: `exit`](#Exiting-the-program)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
@@ -36,7 +36,7 @@ done in an efficient manner.
 
 ##### Notes about command formats
 
-> ℹ️ Words in `UPPER_CASE` are parameters to be supplied by the user.<br> 
+> ℹ️ Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
 e.g. In `add b t/TITLE ...`, `TITLE` is a parameter that can be used like `add b t/Don Quixote ...`
 
 > ℹ️ Parameters can be in any order<br>
@@ -44,7 +44,7 @@ e.g. `add a t/TITLE i/ID a/ARTIST d/DURATION` can be used as `add a a/ARTIST i/I
 
 > ⚠️ Parameters must be separated with a space<br>
 e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is invalid
- 
+
 ### Adding an item
 Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
@@ -170,7 +170,7 @@ Expected Output:
 ```
 ```
 
-### Editing an item 
+### Editing an item
 Edits an attribute of an existing item in the catalogue
 
 Format: `edit ID MARKER/new attribute`
@@ -180,7 +180,7 @@ Format: `edit ID MARKER/new attribute`
 * For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
 * For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
 
-Examples of usage: 
+Examples of usage:
 
 `edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
 
@@ -209,10 +209,10 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: What happens if I mistype a command not recognised by the program? 
+**Q**: What happens if I mistype a command not recognised by the program?
 
 **A**: A message will be shown saying that the program does not recognise your command.
-You can then key in a command again. 
+You can then key in a command again.
 
 ## Command Summary
 
