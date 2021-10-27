@@ -15,6 +15,7 @@ public class StonksGraph {
     private static final char EXPENSE_BAR = '#';
     private static final char X_AXIS_CHAR = '~';
     private static final char SEPARATOR_CHAR = '-';
+    private static final int MAX_NUMBER_OF_DIGITS = 30;
     private final char[][] grid = new char [ROWS][COLS];
     private static final char BORDER_CHAR = 'x';
     private static final char NON_BORDER_CHAR = ' ';
@@ -45,14 +46,19 @@ public class StonksGraph {
     }
 
     private void setBalance(double amount) {
-        String stringAmount = String.format("%.2f", amount);
-        writeToGraph(2,4,"Account Balance: $");
-        writeToGraph(2,22, stringAmount);
+        String stringAmount = String.format("$%.2f", amount);
+        if (stringAmount.length() > MAX_NUMBER_OF_DIGITS) {
+            stringAmount = "Too Large!";
+        }
+        writeToGraph(2,4,"Account Balance: ");
+        writeToGraph(2,21,  stringAmount);
     }
+
 
 
     private void writeToGraph(int rowCount, int colCount, String toAdd) {
         int stringLength = toAdd.length();
+
         int i = 0;
         while (i < stringLength) {
             grid[rowCount][colCount] = toAdd.charAt(i);
@@ -128,12 +134,26 @@ public class StonksGraph {
         int currentMonthInIndex = currentMonthInIndex();
         double currentMonthExpense = monthExpenseBreakdowns.get(currentMonthInIndex);
         double currentMonthIncome = monthIncomeBreakdowns.get(currentMonthInIndex);
-        String currentMonthExpenseAsString =
-                String.format("Current month (" + currentMonth + ") total expense: " + "$%.2f", currentMonthExpense);
-        String currentMonthIncomeAsString =
-                String.format("Current month (" + currentMonth + ") total income: " + "$%.2f", currentMonthIncome);
-        writeToGraph(3,4, currentMonthExpenseAsString);
-        writeToGraph(4,4, currentMonthIncomeAsString);
+
+        String stringCurrentMonthExpense = String.format("$%.2f", currentMonthExpense);
+        String stringCurrentMonthIncome = String.format("$%.2f", currentMonthIncome);
+
+        if (stringCurrentMonthExpense.length() > MAX_NUMBER_OF_DIGITS) {
+            stringCurrentMonthExpense = "Too Large!";
+        }
+
+        if (stringCurrentMonthIncome.length() > MAX_NUMBER_OF_DIGITS) {
+            stringCurrentMonthIncome = "Too Large!";
+        }
+
+
+        String currentExpenseString = "Current month (" + currentMonth + ") total expense: ";
+        String currentIncomeString = "Current month (" + currentMonth + ") total income: ";
+        writeToGraph(3,4, currentExpenseString);
+        writeToGraph(3, 43, stringCurrentMonthExpense);
+        writeToGraph(4,4, currentIncomeString);
+        writeToGraph(4, 43, stringCurrentMonthIncome);
+
     }
 
     /**
