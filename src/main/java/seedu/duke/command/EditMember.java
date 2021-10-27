@@ -37,11 +37,11 @@ public class EditMember {
                 memberToChange.setStudentNumber(toChange.getStudentNumber());
             }
 
-            if (toChange.getGender().equals("")) {
+            if (!toChange.getGender().equals("")) {
                 memberToChange.setGender(toChange.getGender());
             }
 
-            if (toChange.getPhoneNumber().equals("")) {
+            if (!toChange.getPhoneNumber().equals("")) {
                 memberToChange.setPhoneNumber(toChange.getPhoneNumber());
             }
 
