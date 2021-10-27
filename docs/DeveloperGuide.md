@@ -27,7 +27,7 @@ The data component consists of a `data` package which holds classes that aim to 
 The commands component consists of a 'commands' package which holds a main Parser class to execute all the commands, as well as 
 individual class files, each corresponding to a specific command, that inherit from an abstract command class.
 
-![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram.png)
+![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
 
 
 ## Product scope
