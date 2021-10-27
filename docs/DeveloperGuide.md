@@ -57,47 +57,55 @@ The Sequence Diagram below will show how the components interact with each other
 
 ![Sequence Diagram](./RenderedUML/AddSequence.svg)
 
-### Cookbook component
+### Kitchen component
 
-The Diagram below is the class diagram for the ``Kitchen`` package
+The Diagram below is the class diagram for the `Cookbook` and `Recipe` Classes in the ``Kitchen`` package
+
+`COOKBOOK`
 
 ![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
 
+`RECIPE`
+
+![Recipe Class Diagram](./RenderedUML/Recipe.svg)
+
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
+The `Recipe` Class is instantiated by the `Parser` Class, and contains methods to update an existing recipe.
 
 The `Cookbook` class consists of 2 main attributes
 1. The array `recipes` that stores all the main recipes currently in Gordon.
 2. The array `cookbookTags` that stores all the tags currently in Gordon.
 
-The `Cookbook` class can be classified into 3 main functionalities:
+The `Kichen` package can be classified into 3 main functionalities:
 
 1. Recipe Management : 
-  - Add recipes using the `addRecipe` method
-  - Remove recipes using the `removeRecipe` method
-  - Check whether a recipe exist using the `checkRecipe` method
-  - Add calories to a recipe using the `setCalories` method
-  - Add price to a recipe using the `setPrice` method
-  - Add preparation time to a recipe using the `setTimes` method
+  - Add recipes using the `addRecipe` method in `Cookbook`.
+  - Remove recipes using the `removeRecipe` method in `Cookbook`.
+  - Check whether a recipe exist using the `checkRecipe` method in `Cookbook`.
+  - Replace ingredients in a recipe using the `setIngredients` method in `Cookbook` that calls the `replaceIngredients` method in `Recipe`.
+  - Replace steps in a recipe using the `setSteps` method in `Cookbook` that calls the `replaceSteps` method in `Recipe`.
+  - Add calories to a recipe using the `setCalories` method in `Cookbook` that calls the `setCalories` method in `Recipe`.
+  - Add price to a recipe using the `setPrice` method in `Cookbook` that calls the `setPrice` method in `Recipe`.
+  - Add preparation time to a recipe using the `setTimes` method in `Cookbook` that calls the `setTimes` method in `Recipe`.
+  - Add difficulty level to a recipe using the `setDifficulty` method in `Cookbook` that calls the `setDifficulty` method in `Recipe`.
 
 2. Tag Management :
-  - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method
-  - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method
+  - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method in `Cookbook`.
+  - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method in `Cookbook`.
   - Add a recipe to the list of recipes associated with a particular tag using the `appendRecipeToCookbookTag` method
   - Remove a recipe from the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
-  - Add a tag to a recipe using the `addTagToRecipes` method
-  - Delete a tag from a recipe using the `deleteTagFromRecipes` method
-  - List all tags in the `cookbookTags` array using the `listCookBookTags` method
-  - Check whether a particular tag exists using the `doesCookBookTagExist` method
+  - Add a tag to a recipe using the `addTagToRecipes` method in `Cookbook` that calls the `addTagToRecipe` method in `Recipe`.
+  - Delete a tag from a recipe using the `deleteTagFromRecipes` method that calls the `deleteTagFromRecipe` method in `Recipe`.
+  - List all tags in the `cookbookTags` array using the `listCookBookTags` method in `Cookbook`.
+  - Check whether a particular tag exists using the `doesCookBookTagExist` method in `Cookbook`.
 
 3. Filter Recipes : 
-  - Filter recipes in the `recipes` array by ingredients using the `filterByIngredients` method
-  - Filter recipes in the `recipes` array by tags using the `filterByTags` method
-  - Filter recipes in the `recipes` array by difficulty using the `filterByDifficulty` method
-  - Filter recipes in the `recipes` array by price using the `filterByPrice` method
-  - Filter recipes in the `recipes` array by calories using the `filterByCalories` method
-  - Filter recipes in the `recipes` array by time using the `filterByTime` method
-
-### Recipe component
+  - Filter recipes in the `recipes` array by ingredients using the `filterByIngredients` method in `Cookbook`.
+  - Filter recipes in the `recipes` array by tags using the `filterByTags` method in `Cookbook`.
+  - Filter recipes in the `recipes` array by difficulty using the `filterByDifficulty` method in `Cookbook`.
+  - Filter recipes in the `recipes` array by price using the `filterByPrice` method in `Cookbook`.
+  - Filter recipes in the `recipes` array by calories using the `filterByCalories` method in `Cookbook`.
+  - Filter recipes in the `recipes` array by time using the `filterByTime` method in `Cookbook`.
 
 ### Parser component
 
@@ -147,7 +155,14 @@ The `Command` class can be classified into 4 main functionalities:
 
 ### Storage component
 
+The Diagram below is the class diagram for the Storage Class
+
 ![Storage Diagram](./RenderedUML/Storage.svg)
+
+Functions of the Storage class:
+* When Gordon is launched, loads the recipes and tags stored in `saveFile.txt` using the `Scanner` Class.
+* When Gordon exits, saves the recipes the list of recipes and tags in `Cookbook` to `saveFile.txt`.
+
 
 ### UI Component
 
