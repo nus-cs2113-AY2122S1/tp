@@ -34,7 +34,7 @@ class EventFactoryTest {
         arguments.put(EventFlag.PRIORITY, Integer.toString(PriorityEnum.LOW.getValue()));
         arguments.put(EventFlag.RECURRENCE, RecurrenceEnum.YEARLY.toString());
 
-        Event event = EventFactory.getEvent(arguments);
+        Event event = (Event) new EventFactory(arguments).getTask();
 
         assertEquals(event.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);
@@ -51,7 +51,7 @@ class EventFactoryTest {
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
 
-        Event event = EventFactory.getEvent(arguments);
+        Event event = (Event) new EventFactory(arguments).getTask();
 
         assertEquals(event.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);
@@ -69,7 +69,7 @@ class EventFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> EventFactory.getEvent(arguments));
+            () -> new EventFactory(arguments).getTask());
 
         RequiredArgmentNotProvidedException ranpe =
             new RequiredArgmentNotProvidedException(EventFlag.END_DATE, TypeEnum.EVENT.toString());
@@ -86,7 +86,7 @@ class EventFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> EventFactory.getEvent(arguments));
+            () -> new EventFactory(arguments).getTask());
 
         RequiredArgmentNotProvidedException ranpe =
             new RequiredArgmentNotProvidedException(EventFlag.START_DATE, TypeEnum.EVENT.toString());
@@ -104,7 +104,7 @@ class EventFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> EventFactory.getEvent(arguments));
+            () -> new EventFactory(arguments).getTask());
 
         StartDateAfterEndDateException sdaede = new StartDateAfterEndDateException();
 
@@ -124,7 +124,7 @@ class EventFactoryTest {
 
         GetTaskFailedException thrown = assertThrows(
             GetTaskFailedException.class,
-            () -> EventFactory.getEvent(arguments));
+            () -> new EventFactory(arguments).getTask());
 
         InvalidPriorityException ipe = new InvalidPriorityException(invalidPriority);
 

@@ -1,8 +1,8 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandEnum;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.CommandEnum;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
@@ -10,11 +10,13 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.SortCommand;
 import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
+import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
 
 import java.util.HashMap;
 import java.util.Map;
+import seedu.duke.task.taskmanager.TaskManager;
 
 //@@author APZH
 public class CommandParser {
@@ -52,7 +54,7 @@ public class CommandParser {
     }
 
     //@@author APZH
-    public static Command parseCommand(String userInput) {
+    public static Command parseCommand(TaskManager taskManager, String userInput) {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
@@ -62,24 +64,25 @@ public class CommandParser {
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);
         }
-
         switch (commandEnum) {
         case BYE:
             return new ByeCommand();
         case HELP:
             return new HelpCommand();
         case TODO:
-            return new TodoCommand(commandOptions);
+            return new TodoCommand(taskManager, commandOptions);
         case DEADLINE:
-            return new DeadlineCommand(commandOptions);
+            return new DeadlineCommand(taskManager, commandOptions);
         case EVENT:
-            return new EventCommand(commandOptions);
+            return new EventCommand(taskManager, commandOptions);
         case LIST:
-            return new ListCommand(commandOptions);
+            return new ListCommand(taskManager, commandOptions);
         case DELETE:
-            return new DeleteCommand(commandOptions);
+            return new DeleteCommand(taskManager, commandOptions);
         case SORT:
-            return new SortCommand(commandOptions);
+            return new SortCommand(taskManager, commandOptions);
+        case MODULE:
+            return new ModuleCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }

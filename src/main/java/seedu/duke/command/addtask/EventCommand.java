@@ -2,23 +2,30 @@ package seedu.duke.command.addtask;
 
 import java.util.Map;
 
-import seedu.duke.command.CommandEnum;
-import seedu.duke.exception.GetTaskFailedException;
-import seedu.duke.task.Task;
+import seedu.duke.command.flags.EventFlag;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.factory.EventFactory;
+import seedu.duke.task.factory.TaskFactory;
+import seedu.duke.task.taskmanager.TaskManager;
 
 //@@author SeanRobertDH
 public class EventCommand extends TaskCommand {
-    private static final CommandEnum COMMAND = CommandEnum.EVENT;
 
-    public EventCommand(Map<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    private static final String USAGE = "event <description> <%s %s> <%s %s>";
+
+    public EventCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
     }
 
     @Override
-    Task createTask() throws GetTaskFailedException {
-        return EventFactory.getEvent(commandArguments);
+    TaskFactory setTaskFactory() {
+        return new EventFactory(commandArguments);
     }
 
-
+    @Override
+    protected String getTaskUsage() {
+        return String.format(USAGE,
+            EventFlag.START_DATE, DateParser.getDefaultDateFormat(),
+            EventFlag.END_DATE, DateParser.getDefaultDateFormat());
+    }
 }
