@@ -44,17 +44,22 @@ Step 1: The user launches the application (scenario assumes that there are sever
 
 Step 2: The user executes `view -m best -g game error -n 9` to view his/her best statistics for the error game mode over the past 9 games. 
 
-Step 3: A ViewCommand object is then instantiated.
+Step 3: A ViewCommand object is then instantiated.  
 
-Step 4. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.
+![Alt text](uml/ViewStatistics-1.drawio.svg)
+
+Step 4. ViewCommand calls the retrieveStatistics() method of RetrieveStatisticsManager.  
+![Alt text](uml/ViewStatistics-2.drawio.svg)
+
 
 Step 5: RetrieveStatisticsManager creates a GameRecordsManager object.
 * The constructor of GameRecordsManager calls the readGameRecords() method of the Storage class to retrieve the gamer's past game records from the text files.
-
-Step 7. RetrieveStatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
+<!-- -->
+![Alt text](uml/ViewStatistics-3.drawio.svg)
+Step 6. RetrieveStatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
 * calculateBestStatistics() returns a HashMap containing the statistics.
 
-Step 8. RetrieveStatisticsManager calls displayStatistics of the ViewStatisticsUI class to display the statistics.
+Step 7. RetrieveStatisticsManager calls displayStatistics of the ViewStatisticsUI class to display the statistics.
 
 
 The following sequence diagram shows how the above scenario is executed
@@ -103,5 +108,4 @@ Our product is a typing game, intent to provide enjoyment for people who are fam
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
 
