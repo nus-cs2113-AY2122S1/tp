@@ -12,6 +12,15 @@ import java.util.Date;
 
 public class Habit {
 
+    private static final int START_DATE_INDEX = 0;
+    private static final int END_DATE_INDEX = 1;
+    private static final int NEXT_START_DATE_INDEX = 2;
+    private static final int COMPLETION_RATE_INDEX = 0;
+    private static final int COMPLETED_INDEX = 1;
+    private static final int REMAINING_INDEX = 2;
+    private static final int EXPIRED_INDEX = 3;
+    private static final String FROM = " from ";
+
     protected String habitName;
     protected Date startDate;
     protected Date endDate;
@@ -109,6 +118,10 @@ public class Habit {
         this.intervals = intervals;
     }
 
+    public void addInterval(Interval interval) {
+        this.intervals.add(interval);
+    }
+
     /**
      * Fills the interval list with all intervals during habit creation.
      * Method is called in goalList after the endDate has been added.
@@ -144,9 +157,9 @@ public class Habit {
         String[] strDates = new String[3];
         for (Interval interval : intervals) {
             if (interval.isWithinInterval(completionDate)) {
-                strDates[0] = dateToString(interval.getStartDate());
-                strDates[1] = dateToString(interval.getEndDate());
-                strDates[2] = dateToString(getStartOfNextDay(interval.getEndDate()));
+                strDates[START_DATE_INDEX] = dateToString(interval.getStartDate());
+                strDates[END_DATE_INDEX] = dateToString(interval.getEndDate());
+                strDates[NEXT_START_DATE_INDEX] = dateToString(getStartOfNextDay(interval.getEndDate()));
             }
         }
         return strDates;
@@ -159,7 +172,6 @@ public class Habit {
      */
     public void updateHabitName(String habitName) {
         this.habitName = habitName;
-        updateIntervals();
     }
 
     /**
@@ -176,15 +188,42 @@ public class Habit {
      * Gets the statistics of the habit's completion.
      * Statistics includes: expired, completed, remaining intervals, and completion rate.
      *
-     * @return Statistics of habit's completion.    
+     * @return Statistics of habit's completion.
      */
     public int[] getListStatistics() {
         int[] statistics = new int[4];
-        statistics[0] = computeNumOfExpiredIntervals();
-        statistics[1] = computeNumOfCompletedIntervals();
-        statistics[3] = computeHabitCompletionRate(statistics[1]);
-        statistics[2] = computeNumOfRemainingIntervals();
+        statistics[COMPLETION_RATE_INDEX] = computeHabitCompletionRate();
+        statistics[COMPLETED_INDEX] = computeNumOfCompletedIntervals();
+        statistics[REMAINING_INDEX] = computeNumOfRemainingIntervals();
+        statistics[EXPIRED_INDEX] = computeNumOfExpiredIntervals();
         return statistics;
+    }
+
+    /**
+     * Computes the completion rate of the habit.
+     * Calculated by taking the number of completed intervals / total number of intervals.
+     *
+     * @return Completion rate of habit.
+     */
+    public int computeHabitCompletionRate() {
+        int numOfCompletedIntervals = computeNumOfCompletedIntervals();
+        int totalIntervals = getTotalIntervals();
+        return numOfCompletedIntervals / totalIntervals;
+    }
+
+    /**
+     * Returns details of the current interval if due but not completed.
+     *
+     * @return Details of habit interval.
+     */
+    public String getIntervalDescriptionIfDue() {
+        int intervalIndex = getIndexOfCurrentInterval();
+        Interval currInterval = intervals.get(intervalIndex);
+        boolean isIntervalDone = currInterval.getDone();
+        if (isIntervalDone) {
+            return null;
+        }
+        return this.habitName + FROM + currInterval.getDescription();
     }
 
     /*
@@ -423,7 +462,6 @@ public class Habit {
      * computeNumOfExpiredIntervals()
      * computeNumOfCompletedIntervals()
      * computeNumOfRemainingIntervals()
-     * computeHabitCompletionRate()
      */
 
     /**
@@ -473,17 +511,6 @@ public class Habit {
             }
         }
         return count;
-    }
-
-    /**
-     * Computes the completion rate of the habit.
-     * Calculated by taking the number of completed intervals / total number of intervals.
-     *
-     * @return Completion rate of habit.
-     */
-    private int computeHabitCompletionRate(int numOfCompletedIntervals) {
-        int totalIntervals = getTotalIntervals();
-        return numOfCompletedIntervals / totalIntervals;
     }
 
 }

@@ -55,7 +55,7 @@ public class Goal {
      * @return String containing goal name and type.
      */
     public String getDescription() {
-        return getGoalType() + " " + goalName;
+        return getGoalTypeCharacter() + " " + goalName;
     }
 
     /**
@@ -179,9 +179,9 @@ public class Goal {
 
 
     /**
-     * Gets the corresponding 2-character code for the goalType.
+     * Gets the name of the goalType.
      *
-     * @return String of the goalType 2-character code.
+     * @return String of the goalType name.
      */
     public String getGoalType() {
         switch (this.goalType) {
@@ -198,7 +198,109 @@ public class Goal {
         }
     }
 
+    /**
+     * Gets the corresponding 2-character code for the goalType.
+     *
+     * @return String of the goalType 2-character code.
+     */
+    public String getGoalTypeCharacter() {
+        switch (this.goalType) {
+        case SLEEP:
+            return "[SL]]";
+        case FOOD:
+            return "[FD]";
+        case EXERCISE:
+            return "[EX]";
+        case STUDY:
+            return "[SD]";
+        default:
+            return "[DF]";
+        }
+    }
 
+    /**
+     * Computes the average completion rate of the goal.
+     *
+     * @return Average completion rate of the goal (as an int).
+     */
+    public String computeAverageCompletionRate() {
+        int habitListSize = getHabitListSize();
+        if (habitListSize == 0) {
+            return "Not Applicable";
+        } else {
+            int sum = 0;
+            for (Habit habit : this.habitList) {
+                sum += habit.computeHabitCompletionRate();
+            }
+            return sum / getHabitListSize() + "%";
+        }
+    }
+
+    /**
+     * Gets an arraylist of all due habits of the goal.
+     *
+     * @return Arraylist of all due habits of the goal.
+     */
+    public ArrayList<String> getDueHabits() {
+        ArrayList<String> dueHabits = new ArrayList<>();
+        String dueHabitDescription;
+        for (int habitIndex = 0; habitIndex < getHabitListSize(); habitIndex++) {
+            dueHabitDescription = this.habitList.get(habitIndex).getIntervalDescriptionIfDue();
+            if (dueHabitDescription != null) {
+                dueHabits.add("H:" + (habitIndex + 1) + " | " + dueHabitDescription);
+            }
+        }
+        return dueHabits;
+    }
+
+    /* The following commands will be used for implementing the quick view of goal.
+     * isCompleted()
+     * getCompletionRates()
+     * getHabitNames()
+     */
+
+    /**
+     * Checks whether the goal is completed.
+     *
+     * @return True if the goal is completed, false if not.
+     */
+    public boolean isCompleted() {
+        Date currDate = new Date();
+        return currDate.after(this.endDate);
+    }
+
+    /**
+     * Gets the completion rate of each habit and the total average.
+     * Total average is saved as the last index in the integer arraylist.
+     *
+     * @return ArrayList containing a list of all completion rates.
+     */
+    public ArrayList<Integer> getCompletionRates() {
+        ArrayList<Integer> completionRates = new ArrayList<>();
+        int sum = 0;
+        int completionRate;
+        for (Habit habit : this.habitList) {
+            completionRate = habit.computeHabitCompletionRate();
+            completionRates.add(completionRate);
+            sum += completionRate;
+        }
+        int averageCompletionRate = sum / getHabitListSize();
+        completionRates.add(averageCompletionRate);
+        return completionRates;
+    }
+
+    /**
+     * Gets an arrayList of all the habit names.
+     *
+     * @return Arraylist containing a list of all habit names.
+     */
+    public ArrayList<String> getHabitNames() {
+        ArrayList<String> habitNames = new ArrayList<>();
+        for (Habit habit : this.habitList) {
+            habitNames.add(habit.getHabitName());
+        }
+        return habitNames;
+    }
 
     /*
      * NOTE : ==================================================================

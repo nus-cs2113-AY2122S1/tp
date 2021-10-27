@@ -2,6 +2,7 @@ package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
+import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
 import java.util.ArrayList;
@@ -208,6 +209,21 @@ public class GoalList {
     }
 
     /**
+     * Lists all the habits that can be marked as done but are not completed.
+     *
+     * @return Arraylist containing details of all the habits to be done.
+     */
+    public ArrayList<String> listDueHabits() {
+        ArrayList<String> habitsToDoList = new ArrayList<>();
+        for (int goalIndex = 0; goalIndex < getListLength(); goalIndex++) {
+            for (String s : goalList.get(goalIndex).getDueHabits()) {
+                habitsToDoList.add("G:" + (goalIndex + 1) + " " + s);
+            }
+        }
+        return habitsToDoList;
+    }
+
+    /**
      * Changes and updates the name of a goal with a new name from user.
      *
      * @param goalIndex    Index of the goal in goalList.
@@ -254,9 +270,12 @@ public class GoalList {
         // todo
     }
 
-    public void viewHabitStreak(int goalIndex, int habitIndex) {
-        // todo
+    public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
+        Goal goal = this.getGoal(goalIndex);
+        Habit habit = this.getHabit(goal.getHabitList(), habitIndex);
+        habit.addInterval(interval);
     }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the

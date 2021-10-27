@@ -33,9 +33,11 @@ public class PrintManager {
     private static final String NEWLINE = System.lineSeparator();
     private static final String DASHES = "______________________________________________________________"
             + "__________________________________________________________";
-    public static final String HORIZONTAL_SYMBOL = "-";
-    public static final String VERTICAL_BAR = "|";
-    public static final String WHITE_SPACE = " ";
+    private static final String HORIZONTAL_SYMBOL = "-";
+    private static final String VERTICAL_BAR = "|";
+    private static final String WHITE_SPACE = " ";
+
+
 
     public void printCommandList() {
         printDashes();
@@ -61,9 +63,9 @@ public class PrintManager {
      * @param numOfGoals Number of goals in the goal list.
      */
     public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
-        String[] headers = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count"};
+        String[] headers = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count", "Completion Rate"};
         String[][] data = populateGoalData(goals, numOfGoals, headers.length);
-        System.out.println("There are " + numOfGoals + " goals currently being tracked:");
+        System.out.println(numOfGoals + " goal(s) currently being tracked:");
         printTable(headers, data);
     }
 
@@ -77,7 +79,7 @@ public class PrintManager {
     public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
         String[] headers = {"Index", "Name", "Interval", "Completion", "Completed", "Remaining", "Expired"};
         String[][] data = populateHabitData(habits, numOfHabits, headers.length);
-        System.out.println("There are " + numOfHabits + " habits currently being tracked for " + goalDescription + ":");
+        System.out.println(numOfHabits + " habit(s) currently being tracked for " + goalDescription + ":");
         printTable(headers, data);
     }
 
@@ -117,8 +119,6 @@ public class PrintManager {
             System.out.println("Update the habit with a regular interval value to make it recurring!");
         }
         printDashes();
-
-
     }
 
     public void printUpdatedGoal(String oldGoalDescription, String goalDescription) {
@@ -296,6 +296,7 @@ public class PrintManager {
             data[goalIndex][3] = goals.get(goalIndex).getPrintableStartDate();
             data[goalIndex][4] = goals.get(goalIndex).getPrintableEndDate();
             data[goalIndex][5] = String.valueOf(goals.get(goalIndex).getHabitListSize());
+            data[goalIndex][6] = goals.get(goalIndex).computeAverageCompletionRate();
         }
         return data;
     }
@@ -315,10 +316,10 @@ public class PrintManager {
             data[habitIndex][1] = habits.get(habitIndex).getHabitName();
             data[habitIndex][2] = String.valueOf(habits.get(habitIndex).getIntervalLength());
             int[] habitStatistics = habits.get(habitIndex).getListStatistics();
-            data[habitIndex][3] = habitStatistics[3] + "%";
+            data[habitIndex][3] = habitStatistics[0] + "%";
             data[habitIndex][4] = String.valueOf(habitStatistics[1]);
             data[habitIndex][5] = String.valueOf(habitStatistics[2]);
-            data[habitIndex][6] = String.valueOf(habitStatistics[0]);
+            data[habitIndex][6] = String.valueOf(habitStatistics[3]);
         }
         return data;
     }
