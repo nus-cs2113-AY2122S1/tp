@@ -11,6 +11,11 @@ import seedu.ui.TextUi;
 import seedu.user.Profile;
 
 public class StoreResultsCommand extends Command {
+
+    public static final String commandSyntax = "store <GRADE> <MODULE_CODE>";
+    public static final String commandAction =
+            "Assigns a grade to a module and stores it on record ";
+
     private String moduleCode;
     private String grade;
     private String gradeType;

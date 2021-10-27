@@ -9,6 +9,9 @@ import java.io.IOException;
 
 public class CheckCommand extends Command {
 
+    public static final String commandSyntax = "check <MODULE_CODE>";
+    public static final String commandAction = "Check whether the module's pre-requisite is met";
+
     private final String moduleCode;
     private final Profile profile;
 

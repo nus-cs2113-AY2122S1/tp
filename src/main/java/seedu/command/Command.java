@@ -9,6 +9,8 @@ import seedu.exceptions.FetchException;
 
 public abstract class Command {
 
+    public static final String commandSyntax = null;
+    public static final String commandAction = null;
     public Command() {
 
     }
@@ -19,4 +21,6 @@ public abstract class Command {
     public boolean isExit() {
         return this instanceof ExitCommand;
     }
+
+
 }
