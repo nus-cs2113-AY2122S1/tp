@@ -35,7 +35,7 @@ public class Parser {
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommand(extractArgs(input));
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
-            return new LoanCommand(input);
+            return new LoanCommand(extractArgs(input));
         } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
             return new ReturnCommand(input);
         } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {

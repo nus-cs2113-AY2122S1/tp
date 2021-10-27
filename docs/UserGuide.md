@@ -16,7 +16,7 @@ done in an efficient manner.
   - [List items: `list`]()
   - [Search items: `search`]()
   - [Reserve items: `res`]()
-  - [Un-reserve items: `unres`]()
+  - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
   - [Loan items: `loan`]()
   - [Return items: `return`]()
   - [Removing an item: `rm`](#Removing-an-item)
