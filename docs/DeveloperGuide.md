@@ -57,14 +57,14 @@ Step 5: RetrieveStatisticsManager creates a GameRecordsManager object.
 <!-- -->
 ![Alt text](uml/ViewStatistics-3.drawio.svg)
 Step 6. RetrieveStatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
-* calculateBestStatistics() returns a HashMap containing the statistics.
 
-Step 7. RetrieveStatisticsManager calls displayStatistics of the ViewStatisticsUI class to display the statistics.
+Step 7. RetrieveStatisticsManager calls displayStatistics of the ViewCommandUI class to display the statistics.
+![Alt test](uml/ViewStatistics-4.drawio.svg)
 
 
 The following sequence diagram shows how the above scenario is executed
+![Alt test](uml/ViewStatistics-5.drawio.svg)
 
-The following class diagram shows the relationship among the main involved classes
 
 
 #### Alternative Implementation
