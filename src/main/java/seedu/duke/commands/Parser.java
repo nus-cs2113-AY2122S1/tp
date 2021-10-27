@@ -42,6 +42,8 @@ public class Parser {
             return new ReserveCommand(extractArgs(input));
         } else if (input.startsWith(DeadlineCommand.COMMAND_WORD)) {
             return new DeadlineCommand(input);
+        } else if (input.startsWith(UnreserveCommand.COMMAND_WORD)) {
+            return new UnreserveCommand(input);
         } else {
             return new UnknownCommand();
         }
