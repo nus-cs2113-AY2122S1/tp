@@ -47,8 +47,8 @@ public class Expense {
      */
     public Expense(String inputDescription) {
         String[] expenseInfo = inputDescription.split(" ", 3);
-        this.amountSpent = Double.parseDouble(String.format(
-                expenseInfo[0], Storage.getOpenTrip().getForeignCurrencyFormat()));
+        this.amountSpent = Double.parseDouble(expenseInfo[0]);
+        this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
         this.category = expenseInfo[1].toLowerCase();
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);

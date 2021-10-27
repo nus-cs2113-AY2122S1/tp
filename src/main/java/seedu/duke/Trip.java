@@ -187,6 +187,8 @@ public class Trip {
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
+        double totalRepaymentAmountSpent = 0;
+        Trip currTrip = Storage.getOpenTrip();
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
         for (Expense e : listOfExpenses) {
@@ -204,15 +206,20 @@ public class Trip {
                 }
             }
         }
+        // To resolve rounding error
+        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
+            totalRepaymentAmountSpent += Storage.formatRepaymentMoneyDouble(
+                    set.getValue() / currTrip.getExchangeRate());
+        }
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
-                + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")"
-                + " on "
+                + " (" + currTrip.getRepaymentCurrency() + " " + currTrip.getRepaymentCurrencySymbol()
+                + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
                 + expensesInvolved
                 + " expenses on the following categories: ");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
-                    + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")");
+                    + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");
         }
     }
 
