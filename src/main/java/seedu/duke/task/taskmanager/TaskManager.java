@@ -15,6 +15,7 @@ import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.SortFormatException;
 import seedu.duke.exception.StartDateAfterEndDateException;
+import seedu.duke.exception.TaskIsNonRecurringException;
 import seedu.duke.log.Log;
 
 import java.time.LocalDateTime;

@@ -50,7 +50,8 @@ class TodoFactoryTest {
         Todo todo = (Todo) new TodoFactory(arguments).getTask();
 
         assertEquals(todo.getDescription(), DESCRIPTION);
-        assertNull(todo.getDoOnDate());
+        assertEquals(0, todo.getDoOnDate().getMinute());
+        assertEquals(LocalDateTime.now().getHour() + 1, todo.getDoOnDate().getHour());
         assertEquals(todo.getPriority(), PriorityEnum.MEDIUM);
         assertEquals(todo.getRecurrence(), RecurrenceEnum.NONE);
     }
