@@ -64,7 +64,7 @@ public class ParserTest {
         String input = "addRecipe Chicken Rice "
                 + "/ingredients Chicken+Rice "
                 + "/steps Add chicken+Add rice+Mix\n"
-                + "addRecipe Chicken Rice "
+                + "addRecipe chicken rice "
                 + "/ingredients Chicken+Rice "
                 + "/steps Add chicken+Add rice+Mix\n"
                 + "exit\n";
