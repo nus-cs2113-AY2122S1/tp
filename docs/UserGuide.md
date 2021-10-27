@@ -22,6 +22,54 @@ done in an efficient manner.
 
 ## Features
 
+### Listing all
+Lists all items in the library.
+
+Format: `list all`
+
+### Listing available
+Lists all available items in the library.
+
+Format: `list available`
+
+### Listing loaned
+Lists all loaned items in the library.
+
+Format: `list loaned`
+
+### Searching by ID
+Search for the item matching the keyword ID 
+
+Format: `search i/ID`
+
+* The item specified by `ID` will be listed out.
+
+Examples of usage:
+
+`search i/001`
+
+### Searching by title
+Search for items containing the keyword title
+
+Format: `search t/title`
+
+* The items with titles containing specified `title` will be listed out.
+
+Examples of usage:
+
+`search t/beauty and beast`
+
+### Searching by status
+Search for items matching the keyword status
+
+Format: `search s/AVAILABLE` or `search s/LOANED` or `search s/RESERVED`
+
+* The items with the corresponding `status` matching the keyword will be listed out.
+
+Examples of usage:
+
+`search s/AVAILABLE`
+
 ### Removing an item
 Removes an existing item from the catalogue.
 
