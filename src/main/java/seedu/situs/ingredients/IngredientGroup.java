@@ -165,7 +165,7 @@ public class IngredientGroup {
      * @param ingredientNumber The index of the ingredient to be updated
      * @param ingredient       The update ingredient object
      */
-    public void set(int ingredientNumber, Ingredient ingredient) throws IOException {
+    public void set(int ingredientNumber, Ingredient ingredient) {
         ingredientGroup.set(ingredientNumber, ingredient);
         ingredientGroup.sort(Comparator.comparing(Ingredient::getExpiry));
     }

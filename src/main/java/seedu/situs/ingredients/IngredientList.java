@@ -46,6 +46,7 @@ public class IngredientList {
      * Gets instance of ingredient list.
      *
      * @return ingredient list
+     * @throws SitusException if data file could not be accessed
      */
     public static IngredientList getInstance() throws SitusException {
         if (instance == null) {
@@ -108,6 +109,8 @@ public class IngredientList {
      * Adds ingredient to ingredient list.
      *
      * @param ingredient ingredient to be added
+     * @throws IOException if memory could not be written to
+     * @throws IndexOutOfBoundsException if an error occurred when adding ingredient
      */
     public void add(Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
         String ingredientName = ingredient.getName();
@@ -232,6 +235,7 @@ public class IngredientList {
      * @param groupNumber group number of ingredient to be updated
      * @param ingredientNumber number of ingredient within group to be updated
      * @param newAmount the new amount of the ingredient to be updated
+     * @return the updated ingredient
      * @throws SitusException index out of bounds, cannot access
      * @throws IOException if the ingredient list could not be saved to memory
      */
