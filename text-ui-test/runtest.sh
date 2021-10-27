@@ -13,7 +13,7 @@ then
     rm StonksXD_Entries.csv
 fi
 
-if [ -e "./StonksXD_Budget.csv" ]
+if [ -e "./StonksXD_Settings.csv" ]
 then
     rm StonksXD_Budget.csv
 fi

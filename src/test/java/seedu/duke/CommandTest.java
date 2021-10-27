@@ -2,13 +2,13 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.commands.AddExpenseCommand;
-import seedu.commands.AddIncomeCommand;
-import seedu.commands.ClearAllEntriesCommand;
-import seedu.commands.DeleteExpenseCommand;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.TotalExpenseCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.income.AddIncomeCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
+import seedu.commands.expense.DeleteExpenseCommand;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.expense.TotalExpenseCommand;
+import seedu.commands.income.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;

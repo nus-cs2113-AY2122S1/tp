@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.commands.Command;
-import seedu.commands.ExitCommand;
 
 import seedu.utility.BudgetManager;
 import seedu.utility.DataManager;
