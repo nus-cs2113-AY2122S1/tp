@@ -84,19 +84,22 @@ Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Expense: del_ex i/INDEX
 Listing Expense: list_ex
 Show Total Expense: total_ex
-Show Total Expense between 2 dates: btw_ex s/START_DATE e/END_DATE
+Show Total Expense between 2 dates (Date Format: DD/MM/YYYY): btw_ex s/START_DATE e/END_DATE
 Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Income: del_in i/INDEX
 Listing Income: list_in
 Show Total Income: total_in
-To Find Using Date: find YYYY-MM-DD
+To Find Using Date: find DD/MM/YYYY
 To Find Based On Keyword: find KEYWORD
 To Display Total Balance: balance
-Show Total Income between 2 dates: btw_in s/START_DATE e/END_DATE
+Show Total Income between 2 dates (Date Format: DD/MM/YYYY): btw_in s/START_DATE e/END_DATE
 To Set Budgets: set_budget c/CATEGORY a/AMOUNT
 To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
+To Clear All Expense and Income Entries: clear_all_entries
 To View Your Yearly Report: show_graph
+To change entries into a different currency: set_curr c/CURRENCY
+To check the currency that entries are currently in: check_curr
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
 </pre>
@@ -131,7 +134,6 @@ They might look something like this.
 <pre>-----------------------------------------------------------------------------------------------------
 You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
 Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
 You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
 Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
