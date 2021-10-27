@@ -11,7 +11,7 @@ public class EmployeeParser {
 
     public void addEmployee(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to add employee");
-        boolean isEmptyCommand = command[1].stripLeading().stripTrailing().equals("")
+        /*boolean isEmptyCommand = command[1].stripLeading().stripTrailing().equals("")
                 || command[2].stripLeading().stripTrailing().equals("");
 
         if (isEmptyCommand) {
@@ -19,9 +19,12 @@ public class EmployeeParser {
             logger.log(Level.FINE, "one or more fields left empty");
             logger.log(Level.FINE, "unable to add employee");
             return;
-        }
+        }*/
+        // add exception for empty fields / insufficient information
+        // add exception for invalid format for fields (command[2] and [4] not numbers, command[3] not PERM, TEMP or ADHOC)
 
-        Employee employee = new Employee(command[1], command[2]);
+        Employee.employmentStatus status = convertToStatus(command[3]);
+        Employee employee = new Employee(command[1], Integer.parseInt(command[2]), status, Integer.parseInt(command[4]));
 
         masterList.employeeList.add(employee);
         masterList.totalEmployee += 1;
@@ -35,9 +38,20 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
-    public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee) {
-        masterList.employeeList.add(employee);
-        masterList.totalEmployee += 1;
+    private Employee.employmentStatus convertToStatus(String input) {
+        switch (input) {
+        case "perm":
+        case "PERM":
+            return Employee.employmentStatus.PERM;
+        case "temp":
+        case "TEMP":
+            return Employee.employmentStatus.TEMP;
+        case "adhoc":
+        case "ADHOC":
+            return Employee.employmentStatus.ADHOC;
+        default:
+            return Employee.employmentStatus.UNCLASSIFIED;
+        }
     }
 
     public void deleteEmployee(String[] command, EmployeeList masterList) {
@@ -88,7 +102,9 @@ public class EmployeeParser {
         System.out.println(" Here are the employees in your list:");
         for (int i = 1; i <= masterList.totalEmployee; i += 1) {
             System.out.println("   " + i + ". " + masterList.employeeList.get(i - 1).getName()
-                    + " - " + masterList.employeeList.get(i - 1).getPhoneNum());
+                    + " - " + masterList.employeeList.get(i - 1).getPhoneNum()
+                    + " - " + masterList.employeeList.get(i - 1).getStatus() + " STAFF"
+                    + " - " + "$" + masterList.employeeList.get(i - 1).getSalary());
         }
         MainUI.printSingleLine();
     }

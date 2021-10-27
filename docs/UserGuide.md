@@ -46,7 +46,7 @@ colour blue - an example is the blue text in the contents section below
 ## Contents
 1. [Quick start](#1-quick-start)
 2. [Features](#2-features)
-   1. Employee
+   1. [Employee](#2i-employee)
       1. [Adding an employee: `add-employee`](#2ia-adding-an-employee-add-employee)
       2. [Removing an employee: `remove-employee`](#2ib-removing-an-employee-remove-employee)
       3. [Listing all employees: `list-employee`](#2ic-listing-all-employees-list-employee)
@@ -87,23 +87,31 @@ colour blue - an example is the blue text in the contents section below
 
 **Notes about the command format:**
   * Words in UPPER_CASE are the parameters to be supplied by the user. 
-    e.g. in `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
-    parameters which can be used as `add-employee/John/81145812`.
+    e.g. in `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
+    parameters which can be used as `add-employee/John/81145812/PERM/6000`.
+
+
+### 2.i Employee
+
+Employee refers to any person working at your restaurant. Restaurant Buddy needs some details from you about the employees.
+This includes: employee name, phone number, employment status and salary.
 
 ### 2.i.a Adding an employee: `add-employee`
 
 Adds an employee to the employee list.
 
-Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`
+Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY`
   * `PHONE_NUMBER` must be a positive integer.
+  * `EMPLOYMENT_STATUS` must be either PERM, TEMP or ADHOC.
+  * `SALARY` must be a positive integer.
 
 Example:
-`add-employee/John/81145812` Adds the employee named `Dylan` with `81304854` as his phone number to the 
-employee list.
+`add-employee/John/81145812/PERM/6000` Adds the employee named `John` with `81145812` as his phone number to the 
+employee list. In addition, `PERM` staff and gets paid $`6000`.
 ```
 ---------------------------------------------
  I have added: 
-   Dylan 81304854
+   John - 81145812 - PERM STAFF - $6000
  You now have 1 employees.
 ---------------------------------------------
 ```
@@ -122,7 +130,7 @@ Example:
 ```
 ---------------------------------------------
  I have deleted: 
-   Bob 83245053
+   John - 81145812 - PERM STAFF - $6000
 ---------------------------------------------
 ```
 
@@ -137,10 +145,10 @@ Example:
 ```
 ---------------------------------------------
  Here are the employees in your list:
-   1. Don - 81145812
-   2. Jack - 83408743
-   3. Alice - 81230844
-   4. David - 81230412
+   1. Don - 81145812 - PERM STAFF - $1000
+   2. Jack - 83408743 - PERM STAFF - $2000
+   3. Alice - 81230844 - TEMP STAFF - $900
+   4. David - 81230412 - ADHOC STAFF - $100
 ---------------------------------------------
 ```
 
