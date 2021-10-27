@@ -3,6 +3,7 @@ package seedu.duke.command;
 import static seedu.duke.MemberStorage.writeMemberFile;
 
 import java.io.File;
+
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
