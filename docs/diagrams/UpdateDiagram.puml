@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title UpdateCommand
+
+participant ":Duke" as Duke
+activate Duke
+
+create ":Parser" as Parser
+Duke -> Parser
+activate Parser #yellow
+
+create ":UpdateCommand" as UpdateCommand
+Parser -> UpdateCommand: UpdateCommand(command)
+
+return
+
+activate UpdateCommand #lightblue
+UpdateCommand -> UpdateCommand: prepareUpdates()
+activate UpdateCommand #lightgreen
+return
+alt isError
+    UpdateCommand -> Duke : errorMessages()
+else !isError
+    UpdateCommand -> Duke : Ui.printEvent()
+    Duke -> UpdateCommand: execute()
+    UpdateCommand -> Duke: Ui.updateIntroMessage()
+    Duke -> UpdateCommand: Ui.readInput()
+        loop Until User completes updates
+            UpdateCommand -> UpdateCommand: implementUpdates()
+            activate UpdateCommand #lightgreen
+            return
+            UpdateCommand -> Duke
+            Duke -> UpdateCommand: Ui.readInput()
+        end
+
+    UpdateCommand -> Duke: postUpdateMessage()
+    UpdateCommand -> Duke: CommandResult(executeResult);
+    deactivate UpdateCommand
+end
+
+@enduml
