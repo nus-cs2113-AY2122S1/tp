@@ -6,23 +6,23 @@ import seedu.situs.ingredients.IngredientList;
 import java.io.IOException;
 
 /**
- * Represents a command to subtract given amount from an ingredient
+ * Represents a command to subtract given amount from an ingredient.
  */
 public class SubtractCommand extends Command {
 
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
 
-    private String ingredientName;
+    private int groupNumber;
     private Double subtractAmount;
 
     /**
-     * Constructor method for <code>SubtractCommand</code>
-     * @param ingredientName the ingredient name to subtract amount from
+     * Constructor method for <code>SubtractCommand</code>.
+     * @param groupNumber the ingredient name to subtract amount from
      * @param subtractAmount the amount to be subtracted
      */
-    public SubtractCommand(String ingredientName, Double subtractAmount) {
-        this.ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
+    public SubtractCommand(int groupNumber, Double subtractAmount) {
+        this.groupNumber = groupNumber;
         this.subtractAmount = subtractAmount;
     }
 
@@ -31,9 +31,10 @@ public class SubtractCommand extends Command {
         try {
             String resultMsg;
             IngredientList.getInstance()
-                    .subtractIngredientFromGroup(ingredientName, subtractAmount);
+                    .subtractIngredientFromGroup(groupNumber, subtractAmount);
             resultMsg = "Got it. " + subtractAmount
-                    + " kg has been subtracted from " + ingredientName;
+                    + " kg has been subtracted from "
+                    + IngredientList.getInstance().getIngredientGroup(groupNumber).getIngredientGroupName();
             return resultMsg;
         } catch (IndexOutOfBoundsException e) {
             throw new SitusException(INVALID_NUMBER);

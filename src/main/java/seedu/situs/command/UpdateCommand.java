@@ -7,24 +7,31 @@ import seedu.situs.ingredients.IngredientList;
 import java.io.IOException;
 
 /**
- * Represents a command to update ingredient amount for different expiry dates
+ * Represents a command to update ingredient amount for different expiry dates.
  */
 public class UpdateCommand extends Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
-    private static final String INVALID_EXPIRY_DATE = "Expiry date is wrong! Try another date";
     private static final String STORAGE_ERROR = "Cannot update ingredient to memory!";
-    private Ingredient updatedIngredient;
+
+    private final int groupNumber;
+    private final int ingredientNumber;
+    private final double newAmount;
 
     /**
-     * Constructor method for <code>SubtractCommand</code>
-     * @param ingredient the ingredient to be updated to
+     * Constructor method for <code>UpdateCommand</code>.
+     *
+     * @param groupNumber the group number of the ingredient to be updated
+     * @param ingredientNumber the number of the ingredient to be updated
+     * @param newAmount the new amount of the ingredient to be updated
      */
-    public UpdateCommand(Ingredient ingredient) {
+    public UpdateCommand(int groupNumber, int ingredientNumber, double newAmount) {
 
-        this.updatedIngredient = ingredient;
+        this.groupNumber = groupNumber;
+        this.ingredientNumber = ingredientNumber;
+        this.newAmount = newAmount;
     }
 
     @Override
@@ -35,10 +42,9 @@ public class UpdateCommand extends Command {
                 resultMsg = LIST_EMPTY_MESSAGE;
                 return resultMsg;
             }
-            boolean expiryIsRepeated = IngredientList.getInstance().update(this.updatedIngredient);
-            resultMsg = expiryIsRepeated
-                    ? UPDATE_MESSAGE + updatedIngredient.getName() + " | " + updatedIngredient.toString()
-                        : INVALID_EXPIRY_DATE;
+            Ingredient updatedIngredient = IngredientList.getInstance()
+                    .update(groupNumber, ingredientNumber, newAmount);
+            resultMsg = UPDATE_MESSAGE + updatedIngredient.getName() + " | " + updatedIngredient;
             return resultMsg;
 
         } catch (IndexOutOfBoundsException e) {

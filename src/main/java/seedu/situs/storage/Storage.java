@@ -144,9 +144,11 @@ public class Storage {
     }
 
     /**
-     * Writes the threshold data to memory.
+     * Writes the threshold data to memory. Code adapted from
+     * <a href="https://coderedirect.com/questions/564153/how-to-replace-a-specific-line-in-a-file-using-java">
+     *     Code Redirect</a>
      *
-     * @link https://coderedirect.com/questions/564153/how-to-replace-a-specific-line-in-a-file-using-java
+     *
      * @throws IOException when error with file
      */
     public void writeThresholdData() throws IOException {
