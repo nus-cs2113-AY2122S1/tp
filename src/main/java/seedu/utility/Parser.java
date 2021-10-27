@@ -578,7 +578,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (expenseAmount <= 0) {
+        if (expenseAmount <= 0.001) {
             throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         }
         assert expenseAmount > 0;
@@ -592,7 +592,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (incomeAmount <= 0) {
+        if (incomeAmount <= 0.001) {
             throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         }
         assert incomeAmount > 0;
