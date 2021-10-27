@@ -16,7 +16,7 @@ import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
  * This class consists of the logic for the AddVideo command.
  */
 public class AddVideoCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add v t/TITLE i/ID p/PUBLISHER e/DURATION";
+    public static final String COMMAND_FORMAT = "  Format: add v t/TITLE i/ID p/PUBLISHER d/DURATION";
     public static final String ADD_MESSAGE = "  (+) Added new video item to the catalogue";
     public static final String COMMAND_WORD = "add v";
     public static final String KEY_TITLE = "t";
