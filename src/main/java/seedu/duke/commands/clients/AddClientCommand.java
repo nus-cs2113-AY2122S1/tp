@@ -1,5 +1,6 @@
 package seedu.duke.commands.clients;
 
+import seedu.duke.TourPlannerException;
 import seedu.duke.data.Client;
 import seedu.duke.commands.Command;
 
@@ -33,7 +34,12 @@ public class AddClientCommand extends Command {
      */
     @Override
     public void execute() {
-        clients.add(client);
-        ui.showAddClient(client);
+        try {
+            Client existingClient = clients.getClientById(client.getId());
+            System.out.println("Client ID already exists. Please try another client ID.");
+        } catch (TourPlannerException e) {
+            clients.add(client);
+            ui.showAddClient(client);
+        }
     }
 }

@@ -17,10 +17,10 @@ public class Flight {
 
     public Flight(String flightId, String to, String from, String toDate, String fromDate) {
         id = flightId;
-        toDestination = to;
-        fromDestination = from;
-        this.toDate = toDate;
-        this.fromDate = fromDate;
+        departDestination = to;
+        returnDestination = from;
+        this.departDate = toDate;
+        this.returnDate = fromDate;
     }
 
     public String getId() {

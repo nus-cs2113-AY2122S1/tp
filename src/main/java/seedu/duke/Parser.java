@@ -49,7 +49,8 @@ public class Parser {
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
-    public static final String ERROR_MISSING_NAME = "Missing name/id! Please try again.";
+    public static final String ERROR_MISSING_NAME_ID = "Missing name/id! Please try again.";
+    public static final String ERROR_MISSING_NAME = "Missing name! Please try again.";
     public static final String ERROR_EMAIL_FORMAT_WRONG = "Invalid Email!";
     public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number";
     public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time";
@@ -67,7 +68,7 @@ public class Parser {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
-        
+
         switch (command) {
         case "bye":
             if (!params.equals("")) {
@@ -156,7 +157,7 @@ public class Parser {
         boolean hasUniquePrefixes = prefixIndexes.size() == repeatPrefixChecker;
 
         if (!hasUniquePrefixes) {
-            throw new TourPlannerException(ERROR_MISSING_NAME);
+            throw new TourPlannerException(ERROR_MISSING_NAME_ID);
         }
         return prefixIndexes;
     }
@@ -478,8 +479,12 @@ public class Parser {
     }
 
     private static Command parseFind(String params) throws TourPlannerException {
-        String prefix = params.split(" ")[0];
-        String suffix = params.split(" ")[1];
+        String[] prefixSuffix = params.split(" ", 2);
+        if (prefixSuffix.length < 2) {
+            throw new TourPlannerException(ERROR_MISSING_NAME);
+        }
+        String prefix = prefixSuffix[0];
+        String suffix = prefixSuffix[1];
         switch (prefix) {
         case "-c":
             return new FindClientCommand(suffix);
