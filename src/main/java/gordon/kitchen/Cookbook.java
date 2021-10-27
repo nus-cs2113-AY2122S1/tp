@@ -66,8 +66,9 @@ public class Cookbook {
     public void addRecipe(Recipe r) throws GordonException {
         boolean contains = recipes.stream()
                 .map(Recipe::getName)
+                .map(String::toLowerCase)
                 .collect(Collectors.toCollection(ArrayList::new))
-                .contains(r.name);
+                .contains(r.name.toLowerCase());
 
         if (contains) {
             throw new GordonException(GordonException.DUPLICATE_RECIPE_NAME);
