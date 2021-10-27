@@ -22,7 +22,7 @@ public class DoneUndoCommand extends Command {
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
 
-    public DoneUndoCommand(String[] command) {
+    public DoneUndoCommand(String[] command, String response) {
         isCorrectFormat = true;
         try {
             if (command.length == 1) {
@@ -39,7 +39,7 @@ public class DoneUndoCommand extends Command {
                 throw new DukeException("Please specify the indexes of the tasks or events you want "
                         + "to mark done or undo. ");
             }
-            extractInt(command.toString());
+            extractInt(response);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             isCorrectFormat = false;

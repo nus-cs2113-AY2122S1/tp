@@ -1,4 +1,5 @@
 @startuml
+autonumber
 title Save Functionality
 
 -> StorageFile: save(eventsList : ArrayList<Event>)
@@ -13,11 +14,15 @@ StorageFile -> StorageFile: checkFileIsValid(saveFile)
 activate StorageFile #orange
 return
 |||
+StorageFile -> MemberEncoder: encodeMembersList(memberRoster)
+activate MemberEncoder #lightblue
+return MemberEncoder: List<String>
+|||
 StorageFile -> EventEncoder: encodeEventsList(eventsList)
 activate EventEncoder #lightblue
 return encodedEvents: List<String>
 |||
-StorageFile -> StorageFile: writeToFile
+StorageFile -> StorageFile: writeToFile(saveFile,\n encodeMembersList,\n encodeMembersList)
 activate StorageFile #orange
 return
 |||

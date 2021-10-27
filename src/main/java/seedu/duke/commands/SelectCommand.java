@@ -106,17 +106,11 @@ public class SelectCommand extends Command {
     }
 
     private static boolean isValidEventIndex(int eventIndex) {
-        if (eventIndex < 0 || eventIndex > Duke.eventCatalog.size()) {
-            return false;
-        }
-        return true;
+        return eventIndex >= 0 && eventIndex <= Duke.eventCatalog.size();
     }
 
     private static boolean isValidTaskIndex(int eventIndex, int taskIndex) {
-        if (taskIndex < 0 || taskIndex > Duke.eventCatalog.get(eventIndex).getTaskList().size()) {
-            return false;
-        }
-        return true;
+        return taskIndex >= 0 && taskIndex <= Duke.eventCatalog.get(eventIndex).getTaskList().size();
     }
 
     private static Event getEventFromIndex(int eventIndex) {
