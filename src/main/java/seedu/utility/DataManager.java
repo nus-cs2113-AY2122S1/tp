@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -147,7 +148,7 @@ public class DataManager {
             ui.printError(Messages.ERROR_SAVING_BUDGET_SETTINGS);
         }
     }
-
+    
     /**
      * Loads all settings from StonksXD_Budget.csv into StonksXD.
      * This allows users to not lose all their budget settings when the previous instance of StonksXD closed.
