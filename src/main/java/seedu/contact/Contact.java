@@ -50,6 +50,7 @@ public class Contact {
                     //control should never reach here
                     assert false;
                 }
+    //@@author marcusbory
             }
         }
     }
@@ -101,6 +102,7 @@ public class Contact {
     public void setTelegram(String telegram) {
         this.telegram = telegram;
     }
+    //@@author
 
     //@@author ng-andre
     public String[] getContactStringArray() {

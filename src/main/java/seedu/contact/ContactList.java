@@ -1,3 +1,4 @@
+//@@author marcusbory
 package seedu.contact;
 
 import seedu.exception.InvalidFlagException;
@@ -60,6 +61,7 @@ public class ContactList {
     }
 
     public Contact getContactAtIndex(int index) {
+    //@@author marcusbory
         sortContacts();
         return contacts.get(index);
     }

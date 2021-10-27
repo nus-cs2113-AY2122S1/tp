@@ -163,6 +163,7 @@ public class MainParser {
         return command;
     }
 
+    //@@author marcusbory
     private Command parseAddContact(String userInput) {
         contactParser = addContactParser;
         try {
