@@ -11,9 +11,9 @@ public class UiModule {
     public static void printModule(Module mod, int index, boolean printMC) {
         Ui.printIndex(index, false);
         StringBuilder codePadding = Ui.stringPadder(mod.getModuleCode(), PaddingType.MODULECODE);
-        StringBuilder namePadding = Ui.stringPadder(mod.getModuleName(), PaddingType.MODULENAME);
         String output;
         if (printMC) {
+            StringBuilder namePadding = Ui.stringPadder(mod.getModuleName(), PaddingType.MODULENAME);
             output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR
                     + mod.getModuleName() + namePadding + mod.getModuleCredits();
         } else {
