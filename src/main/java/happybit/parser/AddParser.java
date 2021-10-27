@@ -226,6 +226,7 @@ public class AddParser extends Parser {
      */
     private static Date stringToDate(String strDate) throws HaBitParserException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        formatter.setLenient(false);
         try {
             return formatter.parse(strDate);
         } catch (ParseException e) {
