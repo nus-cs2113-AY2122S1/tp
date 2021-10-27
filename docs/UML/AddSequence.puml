@@ -18,7 +18,7 @@ activate Parser
 Parser --> Parser
 deactivate Parser
 
-Parser -> Recipe: <<create>>
+Parser -> Recipe**: <<create>>
 activate Recipe
 
 ' Ingredients
@@ -37,7 +37,7 @@ Parser -> Parser: parseSteps
 activate Parser
 
 loop for all steps
-Parser -> Recipe: addSteps
+Parser -> Recipe: addStep
 end
 
 Parser --> Parser
@@ -45,6 +45,7 @@ deactivate Parser
 
 Recipe --> Parser: r
 deactivate Recipe
+destroy Recipe
 
 Parser --> Gordon: addCommand
 deactivate Parser

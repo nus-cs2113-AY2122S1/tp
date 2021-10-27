@@ -27,7 +27,7 @@
    1. Run the seedu.address.Main and try a few commands.
    1. Run the tests to ensure they all pass.
 
-## Design
+## Design & Implementation
 
 ### Architecture
 
@@ -172,12 +172,6 @@ The `Tag` class contains the basic functionalities related to a _Tag_, and encap
 2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
 3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
 4. 'removeAssociatedRecipeName' removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
-
-## Implementation
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### XYZ
 
 ## Product scope
 ### Target user profile
