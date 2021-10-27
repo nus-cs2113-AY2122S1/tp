@@ -7,33 +7,25 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.typists.common.Utils.getWordLineFromStringArray;
-import static seedu.typists.common.Utils.getWordLines;
+import static seedu.typists.common.Messages.MESSAGE_TIME_GAME_END;
+import static seedu.typists.common.Utils.*;
 
 public class TimeModeGame extends Game {
     protected static final Logger logger = Logger.getLogger("Foo");
     protected int gameTime;
-    protected final ArrayList<String[]> wordLines;
+    protected final ArrayList<String> wordLists;
+    protected int wordsPerLine;
 
     public double realGameTime;
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {
         super();
         assert targetWordSet != null : "text passed into Time Game should not be null.";
-        this.wordLines = getWordLines(targetWordSet, wordsPerLine);
+        this.wordLists = splitStringIntoWordList(targetWordSet);
         this.userLines = new ArrayList<>();
         this.displayedLines = new ArrayList<>();
         this.gameTime = getGameTime();
-    }
-
-    public boolean readyToStartTimer() {
-        Scanner in = new Scanner(System.in);
-        String command = "";
-        while (!command.equals("yes")) {
-            ui.printScreen("Do you want to start now?");
-            command = in.nextLine();
-        }
-        return true;
+        this.wordsPerLine = wordsPerLine;
     }
 
     public int getGameTime() {
@@ -47,37 +39,61 @@ public class TimeModeGame extends Game {
         }
     }
 
+
     public void runGame() {
         Scanner in = new Scanner(System.in);
         List<String> inputs = new ArrayList<>();
 
-        if (readyToStartTimer()) {
-            int i = 0;
-            long beginTime = System.currentTimeMillis();
+        if (ui.readyToStartTimer()) {
+            int currentRow = 1;
+            long beginTime = getTimeNow();
             boolean timeOver = false;
 
             while (!timeOver) {
-                long currTime = System.currentTimeMillis() - beginTime;
+                long currTime = getTimeNow() - beginTime;
                 if (currTime >= gameTime * 1000L) {
-                    timeOver = true;
                     realGameTime = (double) currTime / 1000;
+                    timeOver = true;
                 } else {
-                    try {
-                        String[] display = wordLines.get(i);
-                        ui.printLine(display);
-                        displayedLines.add(display);
-                    } catch (IndexOutOfBoundsException e) {
-                        logger.log(Level.WARNING, "no more content.");
-                    }
+                    String[] display = getDisplayLines(currentRow);
+                    ui.printLine(display);
+                    displayedLines.add(display);
                     inputs.add(in.nextLine());
-                    i++;
+                    currentRow++;
                 }
             }
+
             updateUserLines(inputs);
-            ui.printScreen("Game Finished.");
-            HashMap<String, Object> summary = handleSummary(displayedLines, userLines, realGameTime, "Word-limited");
-            handleStorage(summary);
+            endGame();
         }
+    }
+
+    public void endGame() {
+        ui.printEnd(MESSAGE_TIME_GAME_END);
+        double overshoot = realGameTime - gameTime;
+        assert overshoot >= 0;
+        if (overshoot > 0) {
+            ui.printOvershoot(overshoot);
+        }
+    }
+
+    public String[] getDisplayLines (int row) {
+        int startIndex = (row - 1) * wordsPerLine;
+        assert startIndex >= 0 : "word index should be non-negative";
+        String[] line = new String[wordsPerLine];
+        try {
+            for (int i = 0; i < wordsPerLine; i++) {
+                line[i] = wordLists.get(startIndex + i);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "exceed content maximum.");
+        }
+        return line;
+    }
+
+    public void gameSummary() {
+        HashMap<String, Object> summary = handleSummary(displayedLines, userLines, realGameTime, "Word-limited");
+        handleStorage(summary);
     }
 
 

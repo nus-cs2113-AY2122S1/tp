@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static seedu.typists.common.Messages.HISTORY;
 
-public class HistoryCommandUi {
+public class HistoryCommandUi extends TextUi {
     public static void displayGameRecords(ArrayList<GameRecord> gameRecords, int numberOfGameRecords) {
         if (gameRecords == null) {
             System.out.print("The number of game records you requested to view is more than what you have.\n"

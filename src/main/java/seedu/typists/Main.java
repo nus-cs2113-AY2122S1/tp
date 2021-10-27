@@ -53,8 +53,6 @@ public class Main {
         } while (!command.equals("bye"));
     }
 
-    public void exit() {
-    }
 
     /**
      * Runs the program until termination.
