@@ -2,7 +2,6 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Deletes all expired ingredients one shot.
