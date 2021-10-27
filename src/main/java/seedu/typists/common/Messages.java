@@ -26,6 +26,13 @@ public class Messages {
                     + " / __  // / ___/ // / / /_/ / _, _/ / /  \n"
                     + "/_/ /_/___//____//_/  \\____/_/ |_| /_/";
 
+    public static final String CLEAR_RECORDS =
+            "   ________    _________    ____     ____  ________________  ____  ____  _____\n"
+                    + "  / ____/ /   / ____/   |  / __ \\   / __ \\/ ____/ ____/ __ \\/ __ \\/ __ \\/ ___/\n"
+                    + " / /   / /   / __/ / /| | / /_/ /  / /_/ / __/ / /   / / / / /_/ / / / /\\__ \\ \n"
+                    + "/ /___/ /___/ /___/ ___ |/ _, _/  / _, _/ /___/ /___/ /_/ / _, _/ /_/ /___/ / \n"
+                    + "\\____/_____/_____/_/  |_/_/ |_|  /_/ |_/_____/\\____/\\____/_/ |_/_____//____/  \n";
+
 
     public static final String KEYBOARD =
             ",---,---,---,---,---,---,---,---,---,---,---,---,---,-------,\n"
@@ -66,6 +73,7 @@ public class Messages {
             + "word: start a new word game\n"
             + "time: start a new timer game\n"
             + "history: view past game records\n"
+            + "clear: clear all game records\n"
             + "bye: exit typist";
 
     public static String MESSAGE_TIME_GAME_END = "Timer's UP!";

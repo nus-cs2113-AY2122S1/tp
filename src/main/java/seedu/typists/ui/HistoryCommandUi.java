@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import static seedu.typists.common.Messages.HISTORY;
 
-public class HistoryCommandUi extends TextUi {
+public class HistoryCommandUi {
+    private static final String SUMMARY_SEPARATOR =
+            "==================================================================";
+
     public static void displayGameRecords(ArrayList<GameRecord> gameRecords, int numberOfGameRecords) {
         if (gameRecords == null) {
             System.out.print("The number of game records you requested to view is more than what you have.\n"
@@ -19,6 +22,7 @@ public class HistoryCommandUi extends TextUi {
         }
         for (GameRecord gameRecord : gameRecords) {
             SummaryUi.displaySummary(gameRecord);
+            System.out.print(SUMMARY_SEPARATOR + "\n");
         }
     }
 
