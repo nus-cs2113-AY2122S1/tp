@@ -18,7 +18,7 @@ public class RemoveMapCommand extends Command {
                             ModuleList moduleSelectedList) throws IOException {
         University selectedUniversity = universityMasterList.get(universityIndexToMap - 1);
         University universityToMap = universitySelectedList.getUniversity(selectedUniversity.getName());
-        ArrayList<ModuleMapping> selectedMappings = universityToMap.getSelectedMappings(moduleSelectedList);
+        ArrayList<ModuleMapping> selectedMappings = universityToMap.getList();
         System.out.println("This module mapping is removed: ");
         ModuleMapping selectedMapping = selectedMappings.get(moduleIndexToMap - 1);
         Module localModule = moduleMasterList.get(moduleIndexToMap - 1);
