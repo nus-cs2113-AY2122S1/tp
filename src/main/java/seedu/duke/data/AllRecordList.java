@@ -15,8 +15,8 @@ import java.util.Hashtable;
  * where month ranges from 1 to 12.
  */
 public class AllRecordList {
-    public final Hashtable<Integer, RecordList> allRecordList;
     public static String storageDirectory;
+    public final Hashtable<Integer, RecordList> allRecordList;
 
     /**
      * Constructor that creates 12 RecordLists upon construction.
@@ -47,13 +47,15 @@ public class AllRecordList {
      * @param amount           amount spent
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
-    public void addExpenditure(String description, double amount, LocalDate date, Category category,
-                               boolean isLoadingStorage) {
+    public Expenditure addExpenditure(String description, double amount, LocalDate date, Category category,
+                                      boolean isLoadingStorage) {
         int month = date.getMonthValue();
-        allRecordList.get(month).addExpenditure(description, amount, date, category, isLoadingStorage);
+        Expenditure addedExpenditure = allRecordList.get(month)
+                .addExpenditure(description, amount, date, category, isLoadingStorage);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }
+        return addedExpenditure;
     }
 
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {

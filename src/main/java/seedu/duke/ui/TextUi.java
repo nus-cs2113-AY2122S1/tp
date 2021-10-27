@@ -5,9 +5,11 @@ import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Math.round;
 import static seedu.duke.common.Messages.MESSAGE_EXIT;
 
 public class TextUi {
@@ -28,6 +30,7 @@ public class TextUi {
             + "                    |___/";
 
     private static final String buffer = "     ";
+    public static final int percentageRepresentedByEachBar = 5;
 
     private final Scanner in;
 
@@ -78,7 +81,7 @@ public class TextUi {
                 System.out.print("Percentage of Budget Left: ");
             } else {
                 percentageLeft = (totalSpending / amount) * 100;
-                System.out.print("You overspend your Budget by: ");
+                System.out.print("You overspent your Budget by: ");
             }
 
             System.out.printf("%.2f", percentageLeft);
@@ -170,8 +173,8 @@ public class TextUi {
         double currentMonthBudget = records.getBudget(i).getRawValue();
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
-        for (int j = 0; j < currentMonthRecordList.size(); j++) {
-            totalSpending += currentMonthRecordList.get(j).getAmount();
+        for (Expenditure expenditure : currentMonthRecordList) {
+            totalSpending += expenditure.getAmount();
         }
         String budget = "";
         boolean printInfo = true;
@@ -203,8 +206,8 @@ public class TextUi {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
         if (list.getMonthListSize(month) > 0) {
-            System.out.printf("%-20.20s  %-20.20s %-20.20s %-20.20s%n", "  Information", "   | Amount",
-                    "   | Date ", "   | Category");
+            System.out.printf("%-30.30s %-20.20s %-20.20s %-20.20s%n", "  Description", "| Amount",
+                    "| Date ", "| Category");
             printEnumeratedExpenditureList(list.getExpenditureRecords(month));
         } else {
             System.out.println("No Expenditure records yet.");
@@ -216,13 +219,13 @@ public class TextUi {
         } else {
             System.out.println("No Loan records yet.");
         }
-        System.out.println(DIVIDER);
+        printDivider();
     }
 
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            System.out.println(i + 1 + "." + currentExpenditure);
+            System.out.println(currentExpenditure.toString(i));
         }
     }
 
@@ -273,25 +276,17 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    public static void drawVerticalPercentage(double[] barPercentage, String typeOfStat) {
+    public static void drawVerticalPercentage(double[] barPercentage) {
         System.out.println("Percentage of Money Spent");
-        if (typeOfStat.equals("year")) {
-            System.out.println(buffer + "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
-        } else if (typeOfStat.equals("category")) {
-            printCategoryString();
-        }
+        System.out.println(buffer + "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
         for (int i = 10; i > 0; i--) {
-            if (i == 10) {
-                System.out.print("100% ");
-            } else {
-                System.out.print((i * 10) + "%  ");
-            }
-            printRow(barPercentage, i);
+            System.out.printf("%-5s", (i * 10) + "%");
+            printVerticalPercentageRow(barPercentage, i);
             System.out.println();
         }
     }
 
-    private static void printRow(double[] barPercentage, int i) {
+    private static void printVerticalPercentageRow(double[] barPercentage, int i) {
         for (double v : barPercentage) {
             if ((i * 10) <= v) {
                 System.out.print(" #  ");
@@ -301,11 +296,45 @@ public class TextUi {
         }
     }
 
-    private static void printCategoryString() {
-        System.out.print(buffer);
+    public static void displayStats(double[] categoryPercentage, String topCategory, double topCategorySpending) {
+        drawHorizontalGraph(categoryPercentage);
+        System.out.println("The category you spent the most on is: " + topCategory);
+        System.out.println("The amount you spent on this category is: $" + topCategorySpending);
+        printDivider();
+    }
+
+    public static void drawHorizontalGraph(double[] barPercentage) {
+        printHorizontalGraphHeader();
         for (Category category : Category.values()) {
-            System.out.printf("%s", " " + category.toString() + " ");
+            System.out.printf("%-14s", category.toString());
+            int categoryIndex = category.ordinal();
+            double percentageToPrint = barPercentage[categoryIndex];
+            printHorizontalGraphRow(percentageToPrint);
         }
+    }
+
+    private static void printHorizontalGraphHeader() {
+        System.out.printf("%-14s", " ");
+        for (int i = 1; i <= 10; i++) {
+            System.out.printf("%-6s", " " + (i * 10) + "%");
+        }
+        System.out.println();
+    }
+
+    private static void printHorizontalGraphRow(double percentageToPrint) {
+        int totalNumberOfBars = 20;
+        long numberOfBarsToPrint = round(percentageToPrint / percentageRepresentedByEachBar);
+        DecimalFormat df = new DecimalFormat("###.##");
+        for (int i = 0; i < totalNumberOfBars; i++) {
+            String barToPrint;
+            if (i < numberOfBarsToPrint) {
+                barToPrint = "###";
+            } else {
+                barToPrint = "   ";
+            }
+            System.out.print(barToPrint);
+        }
+        System.out.print(" " + df.format(percentageToPrint) + "%");
         System.out.println();
     }
 

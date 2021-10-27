@@ -32,6 +32,6 @@ public class StatYearCommand extends StatCommand {
 
         }
 
-        TextUi.drawVerticalPercentage(barPercentage, "year");
+        TextUi.drawVerticalPercentage(barPercentage);
     }
 }
