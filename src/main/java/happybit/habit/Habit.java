@@ -118,6 +118,10 @@ public class Habit {
         this.intervals = intervals;
     }
 
+    public void addInterval(Interval interval) {
+        this.intervals.add(interval);
+    }
+
     /**
      * Fills the interval list with all intervals during habit creation.
      * Method is called in goalList after the endDate has been added.
