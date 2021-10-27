@@ -16,10 +16,10 @@ public class TimeGameCommand implements Command {
 
     @Override
     public void run(ArrayList<String> args) {
-        boolean is_StartNow = getStartNow(args, START_SIGNIFIER);
+        boolean startNow = getStartNow(args, START_SIGNIFIER);
         try {
             int timeInSeconds = getTime(args, TIME_SIGNIFIER);
-            TimeModeGame game = createGame(timeInSeconds, is_StartNow);
+            TimeModeGame game = createGame(timeInSeconds, startNow);
             game.runGame();
             game.gameSummary();
         } catch (InvalidCommandException e) {
