@@ -1,15 +1,19 @@
 package happybit.interval;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Interval {
+
+    private static final String DATE_CONNECTOR_WORD = " to ";
+
     protected boolean isDone;
     protected Date startDate;
     protected Date endDate;
     protected Date completedDate;
 
     /**
-     * Constructor for Progress class.
+     * Constructor for Interval class.
      * isDone and isDoneOnTime is initialised to false.
      * completedDate is initialised to null.
      *
@@ -24,7 +28,7 @@ public class Interval {
     }
 
     /**
-     * Updates the checkpoint once marked as completed.
+     * Updates the interval once marked as completed.
      *
      * @param completionDate Date that the checkpoint was completed.
      */
@@ -33,18 +37,48 @@ public class Interval {
         this.completedDate = completionDate;
     }
 
+    /**
+     * Gets the description of the interval (in terms of dates).
+     *
+     * @return Description of the interval.
+     */
+    public String getDescription() {
+        return dateToString(startDate) + DATE_CONNECTOR_WORD + dateToString(endDate);
+    }
+
+    /**
+     * Getter for whether the interval is completed.
+     *
+     * @return True if interval is completed, false otherwise.
+     */
     public boolean getDone() {
         return this.isDone;
     }
 
+    /**
+     * Getter for start date of interval.
+     *
+     * @return Start date of interval.
+     */
     public Date getStartDate() {
         return this.startDate;
     }
 
+    /**
+     * Getter for end date of interval.
+     *
+     * @return End date of interval.
+     */
     public Date getEndDate() {
         return this.endDate;
     }
 
+    /**
+     * Setter for end date of interval.
+     * The setting of end date is not done in the constructor due to inaccessibility of goalList at that stage.
+     *
+     * @param endDate End date of interval.
+     */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
@@ -70,5 +104,14 @@ public class Interval {
      * =========================================================================
      */
 
-
+    /**
+     * Converts date into a string.
+     *
+     * @param date Date to be converted.
+     * @return String format of a date.
+     */
+    private String dateToString(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+        return formatter.format(date);
+    }
 }

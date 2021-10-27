@@ -208,6 +208,21 @@ public class GoalList {
     }
 
     /**
+     * Lists all the habits that can be marked as done but are not completed.
+     *
+     * @return Arraylist containing details of all the habits to be done.
+     */
+    public ArrayList<String> listDueHabits() {
+        ArrayList<String> habitsToDoList = new ArrayList<>();
+        for (int goalIndex = 0; goalIndex < getListLength(); goalIndex++) {
+            for (String s : goalList.get(goalIndex).getDueHabits()) {
+                habitsToDoList.add("G:" + (goalIndex + 1) + " " + s);
+            }
+        }
+        return habitsToDoList;
+    }
+
+    /**
      * Changes and updates the name of a goal with a new name from user.
      *
      * @param goalIndex    Index of the goal in goalList.
@@ -254,9 +269,6 @@ public class GoalList {
         // todo
     }
 
-    public void viewHabitStreak(int goalIndex, int habitIndex) {
-        // todo
-    }
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
