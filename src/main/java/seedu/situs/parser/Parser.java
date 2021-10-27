@@ -49,10 +49,12 @@ public class Parser {
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
+    private static final String INDEX_DELIM = "[ .]";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
     private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 3;
     private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 4;
+    private static final int DELETE_COMMAND_ARGUMENT_COUNT = 3;
 
 
     public static boolean isExit(String command) {
@@ -257,9 +259,9 @@ public class Parser {
      * @throws SitusException if trying to access non-existing ingredients
      */
     private static String parseDeleteCommand(String command) throws SitusException {
-        String[] details = command.split("[ .]");
+        String[] details = command.split(INDEX_DELIM);
 
-        if (details.length != 3) {
+        if (details.length != DELETE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 

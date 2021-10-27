@@ -12,8 +12,6 @@ public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
-    private static final String INVALID_DATE_FORMAT = "Please write the date in this format: dd-mm-yyyy\n"
-            + "e.g 14/10/2021";
 
     private int groupNumber;
     private int ingredientNumber;
@@ -36,7 +34,7 @@ public class DeleteCommand extends Command {
             Ingredient removedIngredient = IngredientList.getInstance()
                     .removeIngredientFromGroup(groupNumber, ingredientNumber);
 
-            resultMsg = DELETE_MESSAGE + removedIngredient.getName() + " | " + removedIngredient.toString();
+            resultMsg = DELETE_MESSAGE + removedIngredient.getName() + " | " + removedIngredient;
             return resultMsg;
         } catch (IOException e) {
             throw new SitusException(STORAGE_ERROR_MESSAGE);
