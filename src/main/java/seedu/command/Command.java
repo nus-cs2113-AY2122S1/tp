@@ -11,6 +11,7 @@ public abstract class Command {
 
     public static final String commandSyntax = null;
     public static final String commandAction = null;
+
     public Command() {
 
     }

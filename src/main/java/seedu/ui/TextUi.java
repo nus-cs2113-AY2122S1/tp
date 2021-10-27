@@ -123,6 +123,7 @@ public class TextUi {
     public static void printHelpHeader() {
         System.out.print(HELP_HEADER);
     }
+
     public static void printHelpFooter() {
         System.out.println(HELP_FOOTER);
     }
