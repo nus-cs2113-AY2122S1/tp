@@ -12,12 +12,6 @@ import java.util.ArrayList;
 
 public class EditContactCommand extends Command {
     public static final int PERSONAL_CONTACT_INDEX = -1;
-    public static final int NAME_INDEX = 0;
-    public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
-    public static final int EMAIL_INDEX = 5;
     public static final int NUMBER_OF_FIELDS = 6;
     public static final String EDIT_TYPE = "edit";
     String[] contactDetails;
@@ -64,16 +58,15 @@ public class EditContactCommand extends Command {
     }
 
     //@@author ashrafjfr
-    private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
-            throws InvalidFlagException {
+    private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex) {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         boolean[] hasEditedField = hasEditedFields(contactDetails);
-        String[] postEditContactDetails = extractContactDetails(postEditContact);
+        String[] postEditContactDetails = postEditContact.getContactStringArray();
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
                 continue;
             }
-            String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            String[] currentContactDetails = contactList.getContactAtIndex(i).getContactStringArray();
             for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
                 if (!hasEditedField[j]) {
                     continue;
@@ -107,40 +100,6 @@ public class EditContactCommand extends Command {
 
     private String cleanString(String input) {
         return input.replace(" ", "").toLowerCase();
-    }
-
-    private String[] extractContactDetails(Contact contact) throws InvalidFlagException {
-        String[] contactDetails = new String[NUMBER_OF_FIELDS];
-        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            switch (i) {
-            case NAME_INDEX:
-                contactDetails[NAME_INDEX] = contact.getName();
-                break;
-            case GITHUB_INDEX:
-                contactDetails[GITHUB_INDEX] = contact.getGithub();
-                break;
-            case LINKEDIN_INDEX:
-                contactDetails[LINKEDIN_INDEX] = contact.getLinkedin();
-                break;
-            case TELEGRAM_INDEX:
-                contactDetails[TELEGRAM_INDEX] = contact.getTelegram();
-                break;
-            case TWITTER_INDEX:
-                contactDetails[TWITTER_INDEX] = contact.getTwitter();
-                break;
-            case EMAIL_INDEX:
-                contactDetails[EMAIL_INDEX] = contact.getEmail();
-                break;
-            default:
-                assert false;
-                throw new InvalidFlagException();
-            }
-        }
-        return contactDetails;
-    }
-
-    public int getContactIndex() {
-        return this.contactIndex;
     }
 
     //@@author ng-andre

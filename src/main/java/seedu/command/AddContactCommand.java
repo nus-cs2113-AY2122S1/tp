@@ -10,6 +10,7 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
+import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 public class AddContactCommand extends Command {
     private final String name;
@@ -18,13 +19,6 @@ public class AddContactCommand extends Command {
     private final String telegram;
     private final String twitter;
     private final String email;
-    public static final int NUMBER_OF_FIELDS = 6;
-    public static final int NAME_INDEX = 0;
-    public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
-    public static final int EMAIL_INDEX = 5;
 
     public String getLinkedin() {
         return linkedin;
@@ -76,9 +70,9 @@ public class AddContactCommand extends Command {
     //@@author ashrafjfr
     private boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
-        String[] addedContactDetails = extractContactDetails(addedContact);
+        String[] addedContactDetails = addedContact.getContactStringArray();
         for (int i = 0; i < contactList.getListSize(); i++) {
-            String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            String[] currentContactDetails = contactList.getContactAtIndex(i).getContactStringArray();
             for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
                 if (addedContactDetails[j] != null && currentContactDetails[j] != null) {
                     if (hasDuplicateField(addedContactDetails[j], currentContactDetails[j])) {
@@ -94,36 +88,6 @@ public class AddContactCommand extends Command {
             return !userAddConfirmation.equalsIgnoreCase("y");
         }
         return false;
-    }
-
-    private String[] extractContactDetails(Contact contact) throws InvalidFlagException {
-        String[] contactDetails = new String[NUMBER_OF_FIELDS];
-        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            switch (i) {
-            case NAME_INDEX:
-                contactDetails[NAME_INDEX] = contact.getName();
-                break;
-            case GITHUB_INDEX:
-                contactDetails[GITHUB_INDEX] = contact.getGithub();
-                break;
-            case LINKEDIN_INDEX:
-                contactDetails[LINKEDIN_INDEX] = contact.getLinkedin();
-                break;
-            case TELEGRAM_INDEX:
-                contactDetails[TELEGRAM_INDEX] = contact.getTelegram();
-                break;
-            case TWITTER_INDEX:
-                contactDetails[TWITTER_INDEX] = contact.getTwitter();
-                break;
-            case EMAIL_INDEX:
-                contactDetails[EMAIL_INDEX] = contact.getEmail();
-                break;
-            default:
-                assert false;
-                throw new InvalidFlagException();
-            }
-        }
-        return contactDetails;
     }
 
     private boolean hasDuplicateField(String input, String saved) {
