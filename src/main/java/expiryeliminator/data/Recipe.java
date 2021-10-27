@@ -10,7 +10,7 @@ import expiryeliminator.data.exception.IllegalValueException;
  */
 public class Recipe {
     private String name;
-    private TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
+    private final TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
 
     /**
      * Initialises a recipe.

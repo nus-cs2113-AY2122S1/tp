@@ -4,7 +4,6 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Updates the units of ingredients both in the ingredient repository and in recipes.
