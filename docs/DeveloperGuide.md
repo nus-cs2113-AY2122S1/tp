@@ -14,6 +14,10 @@ This section provides an overview of the design architecture and implementation 
 
 ![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
 
+### Searching feature of Libmgr
+
+![SearchFunction](img/SearchFunctionSequence.png)
+
 ---
 
 ### Data Package

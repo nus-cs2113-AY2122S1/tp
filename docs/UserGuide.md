@@ -105,25 +105,65 @@ Expected Output:
 ```
 
 ### List items
-{DESCRIPTION}
+List out all items in the catalogue
 
-Format: ``
+Format: `list`
 
-Example: ``
-
-Expected Output:
-```
-```
-
-### Search items
-{DESCRIPTION}
-
-Format: ``
-
-Example: ``
+Example: `list`
 
 Expected Output:
 ```
+  (+) Listing out all items in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Search item by ID 
+Search items by ID (input keyword must be exactly the same)
+
+Format: `search i/ID` 
+
+Example: `search i/095680`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Search item by title
+Search items by title (input keyword can be part of the actual title)
+
+Format: `search t/TITLE`
+
+Example: `search t/Time`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+### Search item by status
+Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
+
+Format: `search s/STATUS`
+
+Example: `search t/AVAILABLE`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
 ```
 
 ### Reserve items
