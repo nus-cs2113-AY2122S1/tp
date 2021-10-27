@@ -20,7 +20,7 @@ public class ViewContactCommand extends Command {
 
     public void execute() {
         try {
-            Contact viewingContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+            Contact viewingContact = contactList.getContactAtIndex(contactIndex);
             assert contactIndex >= 0 && contactIndex < contactList.getListSize();
             TextUi.viewContactMessage(viewingContact, contactIndex);
         } catch (IndexOutOfBoundsException e) {

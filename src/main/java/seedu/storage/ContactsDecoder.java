@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.storage;
 
 import seedu.contact.Contact;
@@ -86,7 +88,7 @@ public class ContactsDecoder extends RegexParser {
         return personalContact;
     }
 
-    //@@author
+    //@@author marcusbory
     private void decodeContact(ContactList contactList, String contactText, int lineIndex, String contactFilePath) {
         // Add the decoded details into the contact list
         try {

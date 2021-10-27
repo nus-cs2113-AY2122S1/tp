@@ -212,7 +212,7 @@ public abstract class TextUi {
         StringBuilder output = new StringBuilder();
         assert hasDeletedDetail.length == 7;
         String[] contactDetails = contact.getContactStringArray();
-        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+        for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) { //from GitHub to Email
             if (contactDetails[i] != null && hasDeletedDetail[i]) {
                 output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
             }

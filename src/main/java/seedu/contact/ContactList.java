@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.contact;
 
 import seedu.exception.InvalidFlagException;
@@ -55,11 +57,8 @@ public class ContactList {
         }
     }
 
-    public int getIndexOfContact(Contact contact) {
-        return contacts.indexOf(contact);
-    }
-
-    public Contact getContactAtIndex(int index) {
+    //@@author marcusbory
+    public Contact getContactAtIndex(int index) throws IndexOutOfBoundsException {
         sortContacts();
         return contacts.get(index);
     }

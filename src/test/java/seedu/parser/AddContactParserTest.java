@@ -3,6 +3,7 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.contact.DetailType;
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -38,7 +39,8 @@ class AddContactParserTest {
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
             MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException, MissingArgAddException {
+            InvalidTwitterUsernameException, InvalidEmailException, MissingArgAddException,
+            DuplicateDetailException {
         inputUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw    twit -te   tel69  -e yoyo@gmail.com";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
         expectedOutput = new String[]{"andre", "ng-andre", "linkedin", "tel69", "twit", "yoyo@gmail.com"};
@@ -89,7 +91,7 @@ class AddContactParserTest {
     void parseDetail_inputsWithTrailingSpaces_expectNewContactDetail() throws InvalidFlagException,
             MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         inputDetail = "n             andre";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("andre", inputContactDetails[DetailType.NAME.getIndex()]);
@@ -99,7 +101,7 @@ class AddContactParserTest {
     void parseDetail_inputsWithSpaceInDetail_expectNewContactDetail() throws InvalidFlagException,
             MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         inputDetail = "n Marcus Bory";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("Marcus Bory", inputContactDetails[DetailType.NAME.getIndex()]);

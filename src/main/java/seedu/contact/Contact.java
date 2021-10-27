@@ -24,32 +24,47 @@ public class Contact {
     }
 
     //@@author ng-andre
+    public void setDetail(String updatedDetail, int index) {
+        switch (index) {
+        case NAME_INDEX:
+            setName(updatedDetail);
+            break;
+        case GITHUB_INDEX:
+            setGithub(updatedDetail);
+            break;
+        case LINKEDIN_INDEX:
+            setLinkedin(updatedDetail);
+            break;
+        case TELEGRAM_INDEX:
+            setTelegram(updatedDetail);
+            break;
+        case TWITTER_INDEX:
+            setTwitter(updatedDetail);
+            break;
+        case EMAIL_INDEX:
+            setEmail(updatedDetail);
+            break;
+        default:
+            //control should never reach here
+            assert false;
+            return;
+        }
+    }
+
+    //@@author ng-andre
     public void editContact(String[] contactDetails) {
         for (int i = 0; i < contactDetails.length; i++) {
             if (contactDetails[i] != null) {
-                switch (i) {
-                case NAME_INDEX:
-                    setName(contactDetails[i]);
-                    break;
-                case GITHUB_INDEX:
-                    setGithub(contactDetails[i]);
-                    break;
-                case LINKEDIN_INDEX:
-                    setLinkedin(contactDetails[i]);
-                    break;
-                case TELEGRAM_INDEX:
-                    setTelegram(contactDetails[i]);
-                    break;
-                case TWITTER_INDEX:
-                    setTwitter(contactDetails[i]);
-                    break;
-                case EMAIL_INDEX:
-                    setEmail(contactDetails[i]);
-                    break;
-                default:
-                    //control should never reach here
-                    assert false;
-                }
+                setDetail(contactDetails[i], i);
+            }
+        }
+    }
+
+    //@@author marcusbory
+    public void deleteContactFields(boolean[] hasDeletedDetails) {
+        for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) {
+            if (hasDeletedDetails[i]) {
+                setDetail(null, i);
             }
         }
     }
@@ -101,6 +116,7 @@ public class Contact {
     public void setTelegram(String telegram) {
         this.telegram = telegram;
     }
+    //@@author
 
     //@@author ng-andre
     public String[] getContactStringArray() {

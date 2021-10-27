@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.parser;
 
 import seedu.contact.DetailType;

@@ -13,6 +13,7 @@ import seedu.command.ListContactsCommand;
 import seedu.command.PersonalContactCommand;
 import seedu.command.SearchContactCommand;
 import seedu.command.ViewContactCommand;
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidDeleteDetailException;
 import seedu.exception.InvalidEmailException;
@@ -46,7 +47,6 @@ public class MainParser {
     private static final int ISOLATE_COMD_WORD = 2;
     public static final int NAME_INDEX = 0;
 
-    private ContactParser contactParser;
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
     private final SearchContactParser searchContactParser = new SearchContactParser();
@@ -81,16 +81,16 @@ public class MainParser {
         String commandWord = getCommandWord(userInput);
         CommandType commandType;
         switch (commandWord) {
-        case ADD_CONTACT_COMD:
-        case EDIT_CONTACT_COMD:
-        case DELETE_CONTACT_COMD:
+        case ADD_CONTACT_COMD: // Fallthrough
+        case EDIT_CONTACT_COMD: // Fallthrough
+        case DELETE_CONTACT_COMD: // Fallthrough
         case IMPORT_COMD:
             commandType = CommandType.MANIPULATION;
             break;
-        case VIEW_CONTACT_COMD:
-        case SEARCH_COMD:
-        case LIST_COMD:
-        case HELP_COMD:
+        case VIEW_CONTACT_COMD: // Fallthrough
+        case SEARCH_COMD: // Fallthrough
+        case LIST_COMD: // Fallthrough
+        case HELP_COMD: // Fallthrough
         case PERSONAL_CONTACT_COMD:
             commandType = CommandType.QUERY;
             break;
@@ -163,8 +163,8 @@ public class MainParser {
         return command;
     }
 
+    //@@author marcusbory
     private Command parseAddContact(String userInput) {
-        contactParser = addContactParser;
         try {
             String[] details = addContactParser.parseContactDetails(userInput);
             //check if name is specified in input
@@ -177,6 +177,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingDetailException | MissingArgAddException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_ADD);
+        } catch (DuplicateDetailException e) {
+            return new FailedCommand(FailedCommandType.DUPLICATE_DETAIL);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {
@@ -186,7 +188,6 @@ public class MainParser {
 
     //@@author ng-andre
     private Command parseEditContact(String userInput) { // userInput is raw user input
-        contactParser = editContactParser;
         try {
             String[] details = editContactParser.parseContactDetails(userInput);
             int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingIndexException
@@ -198,6 +199,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND_EDIT);
+        } catch (DuplicateDetailException e) {
+            return new FailedCommand(FailedCommandType.DUPLICATE_DETAIL);
         } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
                 | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
                 | InvalidTwitterUsernameException | ForbiddenDetailException e) {

@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.storage;
 
 import seedu.contact.Contact;
@@ -49,7 +51,7 @@ public class Storage {
         return personalContactFile.exists() && personalContactFile.length() == 0;
     }
 
-    //@@author
+    //@@author marcusbory
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {
