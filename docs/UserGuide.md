@@ -8,7 +8,9 @@ done in an efficient manner.
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
+  - [Adding an item: `add`](#Adding-an-item)
   - [Removing an item: `remove`](#Removing-an-item)
+  - [Editing an item: `edit`](#Editing-an-item)
   - [Exiting the program: `exit`](#Exiting-the-program)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
@@ -21,6 +23,27 @@ done in an efficient manner.
 4. Open a terminal/command prompt and run `java -jar Libmgr.jar` to start the application.
 
 ## Features
+
+### Adding an item
+Adds a new item to the catalogue. Supported item types are Book, Audio, Magazine and Video. 
+
+![UGAddCommand](img/UGAddCommand.png)
+
+### Editing an item 
+Edits an attribute of an existing item in the catalogue
+
+Format: `edit ID MARKER/new attribute`
+
+* For Book, valid markers are: t/TITLE, i/ID and a/AUTHOR
+* For Audio, valid markers are: t/TITLE, i/ID, a/ARTIST and d/DURATION
+* For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
+* For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
+
+Examples of usage: 
+
+`edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
+
+![UGEditCommand](img/UGEditCommand.png)
 
 ### Removing an item
 Removes an existing item from the catalogue.
@@ -40,9 +63,10 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: What happens if I mistype a command not recognised by the program? 
 
-**A**: {your answer here}
+**A**: A message will be shown saying that the program does not recognise your command.
+You can then key in a command again. 
 
 ## Command Summary
 
