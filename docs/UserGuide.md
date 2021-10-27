@@ -134,6 +134,27 @@ Arguments:
   - The id number shall be an positive integer.
   - If not a positive integer is provided, then an error message is shown.
 
+<br />
+
+#### Updating an income source - `update`
+Updates an income source.
+
+Format: `income update [NAME] -v [VALUE]`
+
+Arguments:
+- `NAME`
+  - The name of the income source is case sensitive, and shall contain any characters except for “-”.
+  - The length of the name is limited to 64 characters.
+  - Names can be non-unique.
+- `VALUE`
+  - The value shall be any positive number (integer or float values).
+  - Float values with more than two decimal places specified are truncated to two decimal places.
+  - If a non-numeric string, negative number, or zero is provided, an error message is shown.
+
+Example of usage:
+
+- `income update Pocket Money -v 50`
+
 <hr />
 
 ### Budget - `budget`
