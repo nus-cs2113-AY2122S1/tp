@@ -26,7 +26,7 @@ public class Duke {
     }
 
     public void run() {
-        TextUi.showWelcomeMessage();
+        // TextUi.showWelcomeMessage();
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
         recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
