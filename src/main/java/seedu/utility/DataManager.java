@@ -105,7 +105,7 @@ public class DataManager {
         try {
             fis = new FileInputStream(ENTRIES_FILE_NAME);
         } catch (FileNotFoundException e) {
-            ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
+            ui.printLoadingError(Messages.UNABLE_TO_FIND_DATA_FILE);
             return;
         }
         Scanner sc = new Scanner(fis);
@@ -127,7 +127,7 @@ public class DataManager {
         }
 
         if (hasCorruptedLines) {
-            ui.printError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
+            ui.printLoadingError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
         }
     }
 
@@ -163,7 +163,7 @@ public class DataManager {
         try {
             fis = new FileInputStream(SETTINGS_FILE_NAME);
         } catch (FileNotFoundException e) {
-            ui.printError(Messages.UNABLE_TO_FIND_SETTINGS_FILE);
+            ui.printLoadingError(Messages.UNABLE_TO_FIND_SETTINGS_FILE);
             return;
         }
 
@@ -185,7 +185,7 @@ public class DataManager {
             financialTracker.setCurrency(currency);
         } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException 
                 | InvalidCurrencyTypeException | BlankCurrencyTypeException e) {
-            ui.printError(Messages.HAS_CORRUPTED_SETTINGS);
+            ui.printLoadingError(Messages.HAS_CORRUPTED_SETTINGS);
         }
     }
 }

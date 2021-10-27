@@ -320,6 +320,16 @@ public class Ui {
     }
 
     /**
+     * Prints the error message as feedback through the standard output, specifically for the loading of data process.
+     *
+     * @param errorMessage The error message to be printed out due to certain exceptions or invalid inputs.
+     */
+    public void printLoadingError(String errorMessage) {
+        printLine();
+        System.out.println(errorMessage);
+    }
+
+    /**
      * Prints a message to user through standard output confirming all entries have been cleared.
      */
     public void printAllEntriesCleared() {
