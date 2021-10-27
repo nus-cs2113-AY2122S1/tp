@@ -17,6 +17,7 @@ public class Event extends Task {
 
     private static final TypeEnum TASK_TYPE = TypeEnum.EVENT;
 
+    private static final String EVENT_ICON = "[E]";
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (startDate: %s - endDate: %s)";
 
     private static final String START_DATE_NOT_NULL_ASSERTION = "startDate for Event cannot be null";
@@ -86,7 +87,7 @@ public class Event extends Task {
 
     @Override
     public String getTaskEntryDescription() {
-        return super.getTaskEntryDescription()
+        return EVENT_ICON + " " + super.getTaskEntryDescription()
             + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
             DateParser.dateToString(getStartDate()), DateParser.dateToString(getEndDate()));
     }
