@@ -17,6 +17,11 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
    3. [Mark an event as done](#43-mark-an-event-as-done)
    4. [Mark an event as undone](#44-mark-an-event-as-undone)
    5. [Delete an event](#45-delete-an-event)
+   6. [Find Event(s) based on keywords(s)](#46-find-events-based-on-keywords)
+   7. [List all Events](#47-list-all-events)
+   8. [Display next upcoming Event](#48-display-next-upcoming-event)
+   9. [Update an Event](#49-update-an-event)
+   10. [Delete all Events](#410-delete-all-events)
 5. [Task Commands](#5-task-commands)
    1. [Add a task](#51-add-a-task)
    2. [Mark a task as done](#52-mark-a-task-as-done)
@@ -64,7 +69,7 @@ The following two tables show the fields which **SLAM** works with in managing e
 
 | **Optional Fields** | Description                      |
 | ------------------- | -------------------------------- |
-| Title | The title of the event                         |
+| Description | A brief description of the event                         |
 
 ### 2.2 Tasks
 The following two tables show the fields which **SLAM** works with in managing the tasks you can add and keep track of under each event created.
@@ -132,15 +137,49 @@ Tasks:
 
 ### 4.4 Mark an Event as `undone`
 
-### 4.5 Delete an Event 
+### 4.5 Delete an Event
+Deletes an event from the list.
 
-### 5.6 Find Event(s) based on keyword(s)
+**Format:** `delete -e EVENT_ID`
+
+**Example:** `delete -e 1`
+
+> 🚨 If you choose to `delete` an event, all of its associated tasks will be deleted too.
+
+**Expected Output:**
+```
+> delete -e 1
+```
+```
+This event has been removed: Tembusu Concert
+```
+
+### 4.6 Find Event(s) based on keyword(s)
 
 ### 4.7 List all Events
 
 ### 4.8 Display next upcoming Event
 
 ### 4.9 Update an Event
+
+### 4.10 Delete all Events
+This allows you to delete all events.
+
+> 🚨 As this can potentially affect a huge amount of your data, the program will confirm with you again if you want to delete all events.
+
+**Format:** `delete all`
+
+After entering `delete all`, this is what you will see:
+
+```
+> delete all
+```
+```
+Are you sure you want to delete all events? (Y/N)
+> Y
+I have deleted everything!
+```
+> 🚨 Once you confirmed that you want to delete all events, the action is irreversible!
 
 [Back to table of contents](#table-of-contents)
 
