@@ -184,7 +184,14 @@ Examples of usage:
 
 `edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
 
-![UGEditCommand](img/UGEditCommand.png)
+Expected Output:
+```
+  [B] 123 | AVAILABLE | The Hunger Games | Suzanne Collins
+> edit 123 t/Harry Potter
+  (+) Edited item details:
+  [B] 123 | AVAILABLE | Harry Potter | Suzanne Collins
+```
+
 
 ### Removing an item
 Removes an existing item from the catalogue.
