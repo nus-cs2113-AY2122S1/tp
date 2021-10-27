@@ -102,6 +102,11 @@ public class SchedulerAppointmentList {
         return "No appointment with ID " + appointmentId + " found.";
     }
 
+    /**
+     * Gets the list of all current appointments.
+     *
+     * @return the list of all current appointments.
+     */
     public List<Integer> listAppointments() {
         return new LinkedList<>(appointments.keySet());
     }

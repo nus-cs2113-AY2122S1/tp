@@ -100,11 +100,25 @@ public abstract class SchedulerCommandParser {
         return new EditAppointmentCommand(appointmentId, appointment);
     }
 
+    /**
+     * Parses user input and returns a ViewAppointmentCommand with the specified appointment ID.
+     *
+     * @param userInput String containing the full user input.
+     * @return ViewAppointmentCommand with the specified appointment ID.
+     * @throws MedBotParserException if the appointment ID is not specified or not a number.
+     */
     private static Command parseViewAppointmentCommand(String userInput) throws MedBotParserException {
         int appointmentId = ParserUtils.parseId(userInput.substring(4));
         return new ViewAppointmentCommand(appointmentId);
     }
 
+    /**
+     * Parses user input and returns a FindAppointmentCommand with the specified information to find.
+     *
+     * @param userInput String containing the full user input.
+     * @return FindAppointmentCommand with the specified person ID, person type, the filter type and the dateTime code.
+     * @throws MedBotParserException if the input cannot be parsed.
+     */
     private static Command parseFindAppointmentCommand(String userInput) throws MedBotParserException {
         String[] attributeStrings = ParserUtils.getParametersWithoutSpecifiers(userInput).toArray(new String[0]);
         String[] attributeSpecifiers = ParserUtils.getSpecifiers(userInput);

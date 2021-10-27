@@ -530,9 +530,7 @@ public class Ui {
             break;
         default:
             break;
-
         }
-
         System.out.println("View has been switched to " + viewType);
     }
 }

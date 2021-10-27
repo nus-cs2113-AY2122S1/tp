@@ -13,8 +13,11 @@ public class MedBot {
         interactWithUser();
     }
 
+    /**
+     * Runs a loop to get inputs from the user and executes the commands
+     * until an 'exit' command is given.
+     */
     public static void interactWithUser() {
-
         Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
         StorageManager storageManager = null;
@@ -25,9 +28,7 @@ public class MedBot {
         } catch (FileNotFoundException | MedBotException e) {
             ui.printOutput(e.getMessage());
         }
-
         ui.printWelcomeMessageTwo();
-
         boolean isInteracting = true;
         while (isInteracting) {
             String userInput = ui.readInput();
