@@ -5,6 +5,7 @@ import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.parser.Parser;
+import expiryeliminator.storage.SaveData;
 import expiryeliminator.ui.Ui;
 import expiryeliminator.storage.LoadData;
 
@@ -48,6 +49,8 @@ public class ExpiryEliminator {
             final Command command = Parser.parseCommand(userInput);
             isExit = command.isExit();
             final String feedback = command.execute(ingredients, recipes);
+            SaveData.saveIngredientRepoToFile(ingredients);
+            SaveData.saveRecipeListToFile(recipes);
             ui.showToUser(feedback);
         }
     }

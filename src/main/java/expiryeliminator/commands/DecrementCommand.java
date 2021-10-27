@@ -52,7 +52,6 @@ public class DecrementCommand extends Command {
         }
         try {
             ingredientStorage.remove(quantity);
-            SaveData.saveIngredientRepoToFile(ingredients);
         } catch (IllegalValueException e) {
             return String.format(MESSAGE_QUANTITY_NEGATIVE, ingredientStorage.getQuantity(), quantity,
                     ingredientStorage);

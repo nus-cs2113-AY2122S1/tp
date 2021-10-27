@@ -53,7 +53,6 @@ public class IncrementCommand extends Command {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         ingredientStorage.add(quantity, expiryDate);
-        SaveData.saveIngredientRepoToFile(ingredients);
         return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage);
     }
 }
