@@ -11,12 +11,6 @@ public class Tour {
         price = Float.parseFloat(values[2]);
     }
 
-    public Tour(String tourCode, String tourName, String tourPrice) {
-        code = tourCode;
-        name = tourName;
-        price = Float.parseFloat(tourPrice);
-    }
-
     public String getCode() {
         return code;
     }
@@ -31,8 +25,8 @@ public class Tour {
 
     @Override
     public String toString() {
-        return  "Name: " + name + System.lineSeparator()
+        return "Name: " + name + System.lineSeparator()
                 + "Code: " + code + System.lineSeparator()
-                + "Price per pax: $" + String.format("%.02f",price);
+                + "Price per pax: $" + String.format("%.02f", price);
     }
 }

@@ -1,0 +1,19 @@
+Client: 
+Client ID: j134
+Name: john
+Contact Number: 91234567
+Email: johndoe@gmail.com
+
+Tour: 
+Name: australiaromance
+Code: aus1369
+Price per pax: $1300.00
+
+Flight: 
+Flight ID: MSIA-KOR1
+Departure Flight: KOR, 24/6/21 02:00
+Return Flight: MSIA, 29/10/21 12:00
+
+Package ID: p123
+
+

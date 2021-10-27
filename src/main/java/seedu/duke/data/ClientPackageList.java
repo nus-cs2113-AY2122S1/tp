@@ -12,6 +12,10 @@ public class ClientPackageList {
     private static ArrayList<ClientPackage> clientPackages;
     private static int clientPackageCount = 0;
 
+    public static ArrayList<ClientPackage> getClientPackages() {
+        return clientPackages;
+    }
+
     public ClientPackageList() {
         clientPackages = new ArrayList<>();
         clientPackageCount = 0;
