@@ -1,6 +1,8 @@
 package seedu.duke.member;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.regex.Pattern;
 import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberList {
@@ -31,7 +33,7 @@ public class MemberList {
         return memberList.get(index - 1).studentNumber;
     }
 
-    public char getMemberGender(int index) { //added by xy
+    public String getMemberGender(int index) { //added by xy
         return memberList.get(index - 1).gender;
     }
 
@@ -53,6 +55,7 @@ public class MemberList {
      *
      * @param memberNumber member number according to member list
      * @return member request by memberNumber
+     * @throws InvalidMemberException If member do not exist
      */
     public Member getMember(int memberNumber) throws InvalidMemberException {
         Member member = new Member();
@@ -72,13 +75,43 @@ public class MemberList {
     }
 
     /**
-     * Delete member as request by user.
+     * Delete member as request by user by name.
+     *
+     * @param memberName member name given by user
+     * @return member to be displayed as deleted
+     * @throws InvalidMemberException When unable to find member with the same name to be deleted
+     */
+    public Member deleteMemberByName(String memberName) throws InvalidMemberException {
+        memberName = memberName.toUpperCase(Locale.ROOT);
+        Pattern findRegex = Pattern.compile("^" + memberName + "$");
+        boolean foundNameMatch = false;
+        Member removedMember = new Member();
+        for (Member member : memberList) {
+            foundNameMatch = findRegex.matcher(member.getName()).matches();
+            if (foundNameMatch) {
+                memberList.remove(member);
+                removedMember = new Member(member);
+                return removedMember;
+            }
+        }
+
+        MemberList membersThatMatchFind;
+        if (!foundNameMatch) {
+            membersThatMatchFind = this.findMember(memberName);
+            throw new InvalidMemberException("Unable to find a member that is called: " + memberName,
+                    membersThatMatchFind);
+        }
+        return removedMember;
+    }
+
+    /**
+     * Delete member as request by user by index.
      *
      * @param memberNumber member number given by user
      * @return member to be displayed as deleted
      * @throws IndexOutOfBoundsException When an invalid member is selected to be deleted
      */
-    public Member deleteMember(int memberNumber) throws IndexOutOfBoundsException {
+    public Member deleteMemberByIndex(int memberNumber) throws IndexOutOfBoundsException {
         try {
             int index = memberNumber - 1;
             Member member = memberList.get(index);
@@ -87,6 +120,24 @@ public class MemberList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
+    }
+
+    /**
+     * Find member as request by user.
+     *
+     * @param name member name given by user to search for
+     * @return MemberList class with members that matches the search
+     */
+    public MemberList findMember(String name) {
+        Pattern findRegex = Pattern.compile(".*" + name.toUpperCase(Locale.ROOT) + ".*");
+        ArrayList<Member> membersThatMatchFind = new ArrayList<Member>();
+        for (Member member : memberList) {
+            boolean foundNameMatch = findRegex.matcher(member.getName()).matches();
+            if (foundNameMatch) {
+                membersThatMatchFind.add(member);
+            }
+        }
+        return new MemberList(membersThatMatchFind);
     }
 
 }

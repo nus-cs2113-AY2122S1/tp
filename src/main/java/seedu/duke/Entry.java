@@ -1,21 +1,23 @@
 package seedu.duke;
 
-import seedu.duke.attendance.AttendanceList;
 import seedu.duke.attendance.Attendance;
-import seedu.duke.command.DeleteAttendance;
-import seedu.duke.command.DeleteMember;
-import seedu.duke.command.DeleteTraining;
+import seedu.duke.attendance.AttendanceList;
 import seedu.duke.command.AddAttendance;
 import seedu.duke.command.AddMember;
 import seedu.duke.command.AddTraining;
+import seedu.duke.command.DeleteAttendance;
+import seedu.duke.command.DeleteMember;
+import seedu.duke.command.DeleteTraining;
 import seedu.duke.command.EditMember;
 import seedu.duke.command.EditTraining;
+import seedu.duke.command.FindMember;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
-import seedu.duke.training.TrainingSchedule;
 import seedu.duke.training.TrainingList;
+import seedu.duke.training.TrainingSchedule;
 
 public class Entry {
+
     private static final TrainingList trainings = new TrainingList();
     private static final MemberList members = new MemberList();
     private static final AttendanceList attendanceList = new AttendanceList();
@@ -24,7 +26,7 @@ public class Entry {
      * Returns void. Function is responsible for adding different Tasks to the task list.
      *
      * @param entry user raw data input
-     * @param flag indicates whether the program is run the first time
+     * @param flag  indicates whether the program is run the first time
      * @throws IndexOutOfBoundsException if user keys in done [number] when there is no such task.
      */
     public static void addEntry(String entry, int flag) throws NullPointerException {
@@ -62,8 +64,8 @@ public class Entry {
             new AddAttendance(attendanceList, attendance);
             break;
         case DELETE_MEMBER_KEYWORD:
-            memberIndex = Parser.getIndex(entry);
-            new DeleteMember(members, memberIndex);
+            Object parameter = Parser.getParameter(entry);
+            new DeleteMember(members, parameter);
             break;
         case DELETE_TRAINING_KEYWORD:
             trainingIndex = Parser.getIndex(entry);
@@ -79,7 +81,8 @@ public class Entry {
             new DeleteAttendance(attendanceList, trainingName , attendanceIndex);
             break;
         case FIND_MEMBER_KEYWORD:
-            Parser.findInMembers(members, entry);
+            String name = Parser.findInMembers(entry);
+            new FindMember(members, name);
             break;
         case FIND_TRAINING_KEYWORD:
             Parser.findInTraining(trainings, entry);

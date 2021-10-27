@@ -1,20 +1,22 @@
 package seedu.duke.member;
 
+import java.util.Locale;
+
 public class Member {
 
     protected String name;
     protected String studentNumber;
 
     /* Gender of member: M = Male, F = Female */
-    protected char gender;
+    protected String gender;
 
     /* Status of member. True if still in team, False if left the team */
-    protected boolean isActive;
+    protected Boolean isActive;
 
     /* 1 if present, 0 if absent */
     //String presentOrAbsent;
 
-    protected int phoneNumber;
+    protected String phoneNumber;
 
     /**
      * Constructor for any type of member.
@@ -24,7 +26,7 @@ public class Member {
      * @param gender        Gender of student M/F
      * @param phoneNumber   Phone number of student
      */
-    public Member(String name, String studentNumber, char gender, int phoneNumber) {
+    public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
         setStudentNumber(studentNumber);
         setAsActiveMember();
@@ -36,17 +38,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(String name, String studentNumber, String gender, String phoneNumber) {
-        setName(name);
-        setStudentNumber(studentNumber);
-        setAsActiveMember();
-        setGender(gender);
-        setPhoneNumber(phoneNumber);
-        // setPresentOrAbsent(presentOrAbsent);
-
-    }
-
-    public Member(String name, String studentNumber, char gender, int phoneNumber, String presentOrAbsent) {
+    public Member(String name, String studentNumber, String gender, String phoneNumber, String presentOrAbsent) {
         setName(name);
         setStudentNumber(studentNumber);
         setAsActiveMember();
@@ -72,22 +64,6 @@ public class Member {
         //setPresentOrAbsent(presentOrAbsent);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender.charAt(0);
-    }
-
     public boolean checkIfActive() {
         return isActive;
     }
@@ -100,14 +76,6 @@ public class Member {
         this.isActive = false;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = Integer.parseInt(phoneNumber);
-    }
-
     /* public void setPresentOrAbsent(String presentOrAbsent) {
          this.presentOrAbsent = presentOrAbsent;
      }
@@ -116,16 +84,32 @@ public class Member {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name.toUpperCase(Locale.ROOT);
+    }
+
     public String getStudentNumber() {
         return studentNumber;
     }
 
-    public char getGender() {
+    public void setStudentNumber(String studentNumber) {
+        this.studentNumber = studentNumber.toUpperCase(Locale.ROOT);
+    }
+
+    public String getGender() {
         return gender;
     }
 
-    public int getPhoneNumber() {
+    public void setGender(String gender) {
+        this.gender = gender.toUpperCase(Locale.ROOT);
+    }
+
+    public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     /*
     public String getAttendance() {
@@ -140,7 +124,7 @@ public class Member {
      */
     @Override
     public String toString() {
-        return String.format("Name: %s | Student Number: %s | Gender: %c | Phone Number: %d", this.name,
+        return String.format("Name: %s | Student Number: %s | Gender: %s | Phone Number: %s", this.name,
                 this.studentNumber, this.gender, this.phoneNumber);
     }
 

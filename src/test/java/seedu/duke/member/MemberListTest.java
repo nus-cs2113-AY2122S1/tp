@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
-import seedu.duke.command.EditMember;
 import seedu.duke.command.AddMember;
 import seedu.duke.command.DeleteMember;
+import seedu.duke.command.EditMember;
 import seedu.duke.member.exception.InvalidMemberException;
 
 class MemberListTest {
@@ -25,11 +25,11 @@ class MemberListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", 'F', 98765432);
-        ianWang = new Member("Ian Wang", "A0234567B", 'M', 98441232);
-        glenn = new Member("Glenn", "A0345678C", 'M', 91233344);
-        izdiyad = new Member("Izdiyad", "A0456789D", 'M', 94376452);
-        xingYuan = new Member("Xing Yuan", "A0567891E", 'M', 96987132);
+        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
+        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232");
+        glenn = new Member("Glenn", "A0345678C", "M", "91233344");
+        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452");
+        xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132");
 
         ArrayList<Member> memberList = new ArrayList<Member>();
         memberList.add(teckHwee);
@@ -43,19 +43,23 @@ class MemberListTest {
 
     @Test
     void deleteMember() {
-        fullMemberList.deleteMember(5);
-        fullMemberList.deleteMember(4);
-        fullMemberList.deleteMember(3);
-        fullMemberList.deleteMember(2);
-        fullMemberList.deleteMember(1);
-        assertTrue(fullMemberList.getMemberList().size() == 0);
+        try {
+            fullMemberList.deleteMemberByIndex(5);
+            fullMemberList.deleteMemberByIndex(4);
+            fullMemberList.deleteMemberByIndex(3);
+            fullMemberList.deleteMemberByIndex(2);
+            fullMemberList.deleteMemberByName("TAN TECK HWEE");
+            assertTrue(fullMemberList.getMemberList().size() == 0);
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
     void getExistingMemberDetails() {
-        assertEquals(fullMemberList.getMemberName(1), "Tan Teck Hwee");
+        assertEquals(fullMemberList.getMemberName(1), "TAN TECK HWEE");
         assertEquals(fullMemberList.getMemberStudentNumber(1), "A0123456A");
-        assertEquals(fullMemberList.getMemberGender(1), 'F');
+        assertEquals(fullMemberList.getMemberGender(1), "F");
         assertEquals(fullMemberList.getMemberPhoneNumber(1), "98765432");
     }
 
@@ -70,13 +74,15 @@ class MemberListTest {
 
     @Test
     void makeMemberEntry() {
-        final String string = "add /m /n Lorem Ipsum /s A1231234B";
+        final String string = "add /m /n Lorem Ipsum /s A1231234B /g M /p 91118888";
         Member newMember = Parser.getMemberDetails(string);
         new AddMember(fullMemberList, newMember);
         //Parser.makeMemberEntry(fullMemberList, string);
 
-        assertEquals(fullMemberList.getMemberName(6), "Lorem Ipsum");
+        assertEquals(fullMemberList.getMemberName(6), "LOREM IPSUM");
         assertEquals(fullMemberList.getMemberStudentNumber(6), "A1231234B");
+        assertEquals(fullMemberList.getMemberGender(6), "M");
+        assertEquals(fullMemberList.getMemberPhoneNumber(6), "91118888");
     }
 
     @Test
@@ -87,7 +93,7 @@ class MemberListTest {
         new EditMember(fullMemberList, index, memberDetail);
 
         try {
-            assertEquals(fullMemberList.getMember(1).getName(), "Ian Wang");
+            assertEquals(fullMemberList.getMember(1).getName(), "IAN WANG");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());

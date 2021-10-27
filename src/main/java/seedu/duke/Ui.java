@@ -45,12 +45,31 @@ public class Ui {
         // version 2.0
     }
 
-    public static void printMatchingMemberList(MemberList members, String query) {
-        // version 2.0
+    public static void printMatchingMemberList(MemberList members, String name) {
+        if (members.getMemberListSize() > 0) {
+            System.out.println("The following members matches your search \"" + name + "\"");
+            for (Member member : members.getMemberList()) {
+                System.out.println(member.toString());
+            }
+        } else {
+            System.out.println("Sorry there is no members that matches your search \"" + name + "\"");
+        }
     }
 
     public static void printDeletedMemberMessage(Member member) {
         System.out.println("You have removed member: " + "\n" + member);
+    }
+
+    public static void printDeleteMemberErrorMessage(String errorMessage, MemberList members, String name) {
+        System.out.println(errorMessage);
+        if (members.getMemberListSize() > 0) {
+            System.out.println("The following members that have similar name as your delete \"" + name + "\"");
+            for (Member member : members.getMemberList()) {
+                System.out.println(member.toString());
+            }
+        } else {
+            System.out.println("Sorry there is no members that have similar name as your delete \"" + name + "\"");
+        }
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
