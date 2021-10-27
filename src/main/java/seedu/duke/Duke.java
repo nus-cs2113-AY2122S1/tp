@@ -31,14 +31,13 @@ public class Duke {
 
     public void run() {
         TextUi.showWelcomeMessage();
-        LocalDate dateNow= LocalDate.now();
-        String[] dateNowString = dateNow.toString().split("-",3);
-        int dateMonthNow = Integer.parseInt(dateNowString[1]);
         Storage budgetStorage = new Storage();
         budgetStorage.makeStorageTextFile(recordListDirectory);
         recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
-        boolean isExit = false;
         recordList.statIntro(recordList);
+        LocalDate dateNow = LocalDate.now();
+        String[] dateNowString = dateNow.toString().split("-",3);
+        int dateMonthNow = Integer.parseInt(dateNowString[1]);
 
         /**
          * Loan reminder to warn user that the following loans are due!
@@ -52,6 +51,8 @@ public class Duke {
         }
 
         textUi.printDivider();
+
+        boolean isExit = false;
 
         while (!isExit) {
             try {

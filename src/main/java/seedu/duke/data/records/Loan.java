@@ -26,8 +26,7 @@ public class Loan extends Record {
             } else {
                 dueDateDay += 14;
             }
-        }
-        else {
+        } else {
             if (dueDateDay > 15) {
                 dueDateMonth = 1;
                 dueDateYear += 1;
@@ -37,7 +36,7 @@ public class Loan extends Record {
             }
         }
 
-        String dueDateString = dueDateYear+ "-" + dueDateMonth + "-" + dueDateDay;
+        String dueDateString = dueDateYear + "-" + dueDateMonth + "-" + dueDateDay;
 
         return dueDateString;
     }
@@ -68,9 +67,13 @@ public class Loan extends Record {
         this.date = date;
     }
 
-    public void setDueDate() { dueDate = LocalDate.parse(getDueDateString()); }
+    public void setDueDate() {
+        dueDate = LocalDate.parse(getDueDateString());
+    }
 
-    public LocalDate getDueDate() { return dueDate; }
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",
