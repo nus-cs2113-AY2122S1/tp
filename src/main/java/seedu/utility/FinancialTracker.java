@@ -140,6 +140,9 @@ public class FinancialTracker {
         for (Expense expense : expenses) {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
+            if (totalExpense >= Double.MAX_VALUE) {
+                return 0;
+            }
         }
         assert totalExpense >= 0;
         return totalExpense;
