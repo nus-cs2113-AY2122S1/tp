@@ -2,9 +2,6 @@ package medbot.storage;
 
 import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
-import medbot.list.MedicalStaffList;
-import medbot.list.PatientList;
-import medbot.list.SchedulerAppointmentList;
 import medbot.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -23,7 +20,7 @@ public class StorageManager {
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     /**
-     * Initializes all storage classes to be used for Medbot, and prints out any errors in storage files.
+     * Initializes all storage classes to be used for MedBot, and prints out any errors in storage files.
      *
      * @param scheduler instance of scheduler class
      * @param ui        instance of ui class
@@ -45,7 +42,7 @@ public class StorageManager {
 
 
     /**
-     * Save all relevant data from Medbot program to storage text files.
+     * Save all relevant data from MedBot program to storage text files.
      *
      * @param scheduler instance of Scheduler class
      * @throws MedBotException if unable to save data to any of the storage text files
@@ -57,13 +54,13 @@ public class StorageManager {
     }
 
     /**
-     * Load storage text file data into Medbot program. Print any errors in the storage text file data.
+     * Load storage text file data into MedBot program. Print any errors in the storage text file data.
      *
      * @param scheduler instance of Scheduler class
      * @return error message of the relevant lines with errors in the storage text files
      * @throws FileNotFoundException if storage text files cannot be found
      */
-    private String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
+    public String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
 
         return patientStorage.loadStorage(PATIENT, scheduler)
                 + staffStorage.loadStorage(STAFF, scheduler)

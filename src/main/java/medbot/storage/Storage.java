@@ -174,7 +174,7 @@ public abstract class Storage {
     }
 
     /**
-     * Error message that shows the line number of a line in storage/data.txt with improper formatting.
+     * Error message that shows the line number of a line in storage file with improper formatting.
      *
      * @param lineNumber the line number with improper formatting in storage/data.txt
      * @return Error message
@@ -185,11 +185,11 @@ public abstract class Storage {
     }
 
     /**
-     * Template Method. Instantiates a ListItem object.
+     * Template Method. Instantiates a ListItem interfaced object.
      *
      * @param storageLine  a line in storage file
      * @param listItemType enum of ListItem type
-     * @return a ListItem object
+     * @return a ListItem interfaced object
      * @throws MedBotException if a ListItem object fails to be created
      */
     protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException;

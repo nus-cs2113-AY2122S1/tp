@@ -109,6 +109,7 @@ that store patient, staff and appointment information respectively. It has vario
 modification of the information stored in the lists, and for the interfacing between the Scheduler and Storage 
 components. A `Scheduler` class object is instantiated upon MedBot startup.
 
+
 #### How the Scheduler component works:
 
 * When MedBot calls the `.execute(Scheduler, Ui)` method of a `Command` object, a corresponding method of the
@@ -124,6 +125,7 @@ the `Scheduler` object will be called.
 ### 3.5 Storage Component
 
 ### 3.6 Command Class
+
 
 The Command class and its subclasses are responsible for handling the execution of user input.
 

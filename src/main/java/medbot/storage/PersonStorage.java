@@ -45,10 +45,15 @@ public abstract class PersonStorage extends Storage {
         ArrayList<String> prefixPlusPersonParameters = personDetails.second;
 
         Person person;
-        if (listItemType == ListItemType.PATIENT) {
+        switch (listItemType) {
+        case PATIENT:
             person = new Patient();
-        } else {
+            break;
+        case STAFF:
             person = new Staff();
+            break;
+        default:
+            throw new MedBotException("Invalid listItemType");
         }
 
         person.setId(personId);
