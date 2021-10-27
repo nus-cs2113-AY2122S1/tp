@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.Status;
+import seedu.duke.common.Status;
 
 public class Magazine extends Item {
     private String publisher;
@@ -60,7 +60,7 @@ public class Magazine extends Item {
      */
     @Override
     public String toString() {
-        return "[M]" + super.toString() + super.separator + getPublisher()
+        return "[M] " + super.toString() + super.separator + getPublisher()
                 + super.separator + getEdition();
     }
 }

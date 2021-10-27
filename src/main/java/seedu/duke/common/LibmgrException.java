@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.common;
 
 /**
  * Class that encapsulates an exception in libmgr.
