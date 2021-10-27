@@ -19,11 +19,11 @@ public class AppointmentStorage extends Storage {
     }
 
     /**
-     * Instantiates a ListItem object.
+     * Instantiates a ListItem interfaced object.
      *
      * @param storageLine  a line in storage file
      * @param listItemType enum of ListItem type
-     * @return a ListItem object
+     * @return a ListItem interfaced object
      * @throws MedBotException if fail to instantiate a ListItem object
      */
     @Override

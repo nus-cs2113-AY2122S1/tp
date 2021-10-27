@@ -124,6 +124,12 @@ public class Appointment implements ListItem {
                 + medicalStaffId;
     }
 
+    /**
+     * Converts dateTimeCode to a String in the format of ddMMyy HH00.
+     *
+     * @param dateTimeCode date time code
+     * @return returns a string of the date in the format of ddMMyy HH00
+     */
     private String getDateTimeStorageString(int dateTimeCode) {
         long epochSecond = (long) dateTimeCode * 60;
         LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(epochSecond, 0, ZONE_OFFSET);

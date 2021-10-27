@@ -74,6 +74,8 @@ The sequence diagram below better illustrates the working process described abov
 
 ### Storage Component
 
+The `Storage component`,
+
 ### Command Class
 
 The Command class and its subclasses are responsible for handling the execution of user input.
