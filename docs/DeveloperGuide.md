@@ -221,7 +221,7 @@ Updating is performed on individual ingredients within the ingredient groups. Fo
 Then, calling `update n/carrot a/1.9 e/25/12/2021` will update the second entry in the carrot category. The sequence diagram 
 below illustrates the above command example.
 
-[ADD DIAGRAM]
+![image](images/UpdateSequenceDiagram.png)
 
 After individual ingredient has been updated, the ingredient inventory list is
 ```

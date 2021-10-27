@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":UpdateCommand" as update COMMAND_COLOUR
+Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
+Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
+Participant ":Ingredient" as ingredient INGREDIENT_COLOUR
+Participant ":Storage" as storage STORAGE_COLOUR
+
+-> parser : parse("update 1.2 a/150.0")
+activate parser PARSER_COLOUR
+
+parser -> parser : parseUpdateCommand()
+activate parser PARSER_COLOUR_S1
+
+parser -> update **: UpdateCommand(1, 2, 150.0)
+activate update COMMAND_COLOUR
+return
+
+parser -> update : run()
+activate update COMMAND_COLOUR
+
+update -> ingredient_list : getInstance()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return instance
+
+update -> ingredient_list : update(1, 2, 150.0)
+activate ingredient_list INGREDIENTLIST_COLOUR
+
+ingredient_list -> ingredient_list : getIngredientGroup(1)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return updatedGroup
+
+ingredient_list -> ingredient_group : get(2)
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return updatedIngredient
+
+ingredient_list -> ingredient : getAmount()
+activate ingredient INGREDIENT_COLOUR
+return amount
+
+ingredient_list -> ingredient_group : updateTotalAmount(amount, 150.0)
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return
+
+ingredient_list -> ingredient : setAmount(150.0)
+activate ingredient INGREDIENT_COLOUR
+return
+
+ingredient_list -> storage : writeIngredientsToMemory
+activate storage STORAGE_COLOUR
+return
+
+return removedIngredient
+
+return resultMsg
+
+return resultMsg
+
+return CLI message
+
+@enduml

@@ -241,12 +241,13 @@ public class IngredientList {
      */
     public Ingredient update(int groupNumber, int ingredientNumber, double newAmount)
             throws SitusException, IOException {
-        int i;
 
         IngredientGroup updatedGroup = getIngredientGroup(groupNumber);
         Ingredient updatedIngredient = updatedGroup.get(ingredientNumber);
+
         updatedGroup.updateTotalAmount(updatedIngredient.getAmount(), newAmount);
         updatedIngredient.setAmount(newAmount);
+
         storage.writeIngredientsToMemory(ingredientList);
         return updatedIngredient;
     }
