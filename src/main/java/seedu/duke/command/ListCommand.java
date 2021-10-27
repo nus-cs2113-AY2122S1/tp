@@ -3,6 +3,10 @@ package seedu.duke.command;
 import java.util.Map;
 
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.InvalidTaskIndexException;
+import seedu.duke.exception.InvalidTaskTypeException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.task.taskmanager.TaskManager;
@@ -20,12 +24,13 @@ public class ListCommand extends Command {
     @Override
     public CommandResult executeCommand() {
         String message = "";
+        boolean containsMainArgument = commandArguments.containsKey(MAIN_ARGUMENT);
 
         try {
-            if (commandArguments.containsKey(MAIN_ARGUMENT)) {
-                message = taskManager.listTaskRecurrence(commandArguments);
-            } else {
+            if (!containsMainArgument || (containsMainArgument && commandArguments.get(MAIN_ARGUMENT).equals(""))) {
                 message = taskManager.listTasklistWithFilter(commandArguments);
+            } else if (containsMainArgument) {
+                message = taskManager.listTaskRecurrence(commandArguments);
             }
         } catch (EmptyTasklistException ete) {
             message = ete.toString();
@@ -33,8 +38,15 @@ public class ListCommand extends Command {
             message = lfe.toString();
         } catch (MissingFilterArgumentException mfae) {
             message = mfae.toString();
+        } catch (InvalidTaskIndexException itie) {
+            message = itie.toString();
+        } catch (InvalidTaskTypeException itte) {
+            message = itte.toString();
+        } catch (InvalidPriorityException ipe) {
+            message = ipe.toString();
+        } catch (InvalidRecurrenceException ire) {
+            message = ire.toString();
         }
-
         return new CommandResult(message, false, false);
     }
 
