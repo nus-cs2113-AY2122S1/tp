@@ -10,6 +10,7 @@ import seedu.duke.command.flags.EventFlag;
 import seedu.duke.command.flags.ListFlag;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
+import seedu.duke.local.DataManager;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.factory.DeadlineFactory;
@@ -55,6 +56,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "   __3__, , _");
+        DataManager.setUpDataManager(taskManager);
         new DeleteCommand(taskManager, arguments).executeCommand();
 
         assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
@@ -81,6 +83,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5      ");
+        DataManager.setUpDataManager(taskManager);
         new DeleteCommand(taskManager, arguments).executeCommand();
 
         assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
@@ -107,6 +110,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5,   1   ");
+        DataManager.setUpDataManager(taskManager);
         new DeleteCommand(taskManager, arguments).executeCommand();
 
         assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
@@ -133,6 +137,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, _ _ 3    _,_   5");
+        DataManager.setUpDataManager(taskManager);
         new DeleteCommand(taskManager, arguments).executeCommand();
 
         assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
@@ -159,6 +164,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1-2, _ _ 4    _,_   5");
+        DataManager.setUpDataManager(taskManager);
         new DeleteCommand(taskManager, arguments).executeCommand();
 
         assertFalse(taskManager.listTasklistWithFilter(new HashMap<>()).contains(TO_DELETE));
@@ -196,6 +202,7 @@ class DeleteCommandTest {
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, 2, 3-4, blarg");
+        DataManager.setUpDataManager(taskManager);
 
         Command delete = new DeleteCommand(taskManager, arguments);
         String result = delete.executeCommand().getMessage();
@@ -208,6 +215,7 @@ class DeleteCommandTest {
         Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "3");
+        DataManager.setUpDataManager(taskManager);
         taskManager.addTask(new TodoFactory(arguments).getTask());
 
         arguments.put(Command.MAIN_ARGUMENT, "1, 2, 3-4");

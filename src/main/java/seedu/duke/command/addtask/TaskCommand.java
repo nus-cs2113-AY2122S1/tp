@@ -5,6 +5,8 @@ import java.util.Map;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetTaskFailedException;
+import seedu.duke.local.DataManager;
+import seedu.duke.local.TasktoLineConverter;
 import seedu.duke.parser.TaskUsageParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.taskmanager.TaskManager;
@@ -29,9 +31,11 @@ public abstract class TaskCommand extends Command {
             if (getMainArgument() == null) {
                 throw new NullPointerException();
             }
+
             TaskFactory taskFactory = setTaskFactory();
             Task task = taskFactory.getTask();
             taskManager.addTask(task);
+            DataManager.addTaskLine(TasktoLineConverter.convertTaskToLine(task));
             message = String.format(TASK_CREATED_MESSAGE, task.getTaskEntryDescription());
         } catch (NullPointerException npe) {
             message = getUsageMessage();

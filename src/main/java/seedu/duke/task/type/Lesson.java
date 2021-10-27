@@ -1,5 +1,9 @@
 package seedu.duke.task.type;
 
+import seedu.duke.nusmods.NusModsParser;
+import seedu.duke.task.Task;
+import seedu.duke.task.TypeEnum;
+import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.nusmods.Semester;
 import seedu.duke.task.RecurrenceEnum;
 
@@ -45,5 +49,20 @@ public class Lesson extends Event {
 
     public void setOccurrences(int[] occurrences) {
         this.occurrences = occurrences;
+    }
+
+    @Override
+    public void updateReminderMessage(String message) {
+
+    }
+
+    @Override
+    public void updateReminderTime(long reminderTime) {
+
+    }
+
+    @Override
+    public ReminderInformation getReminderInformation() {
+        return null;
     }
 }

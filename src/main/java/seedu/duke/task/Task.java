@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import seedu.duke.command.flags.EditFlag;
 import seedu.duke.command.flags.TaskFlag;
+import seedu.duke.task.reminder.Reminder;
+import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
@@ -25,6 +27,8 @@ public abstract class Task {
     private String description;
     private PriorityEnum priority;
     private RecurrenceEnum recurrence;
+
+    protected Reminder reminder;
 
     protected Task(String description) {
         setDescription(description);
@@ -74,6 +78,12 @@ public abstract class Task {
     public abstract boolean needReminder();
 
     public abstract String getReminder(LocalDateTime now);
+
+    public abstract void updateReminderMessage(String message);
+
+    public abstract void updateReminderTime(long reminderTime);
+
+    public abstract ReminderInformation getReminderInformation();
 
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;

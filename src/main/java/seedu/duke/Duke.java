@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.storage.FileCreater;
 import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
@@ -53,6 +54,8 @@ public class Duke {
 
         Command userCommand;
         CommandResult commandResult = null;
+
+        FileCreater.createAll();
 
         do {
 
