@@ -66,9 +66,11 @@ Examples
 <!-- -->
 
 ### Saving the data
-Typists automatically stores the updated game records when gamer enters the `bye` command to exit Typists.
+Typists automatically stores the updated game records into text files when gamer enters the 
+`bye` command to exit Typists.
 
-### Editing the data file
+
+### !Warning: Editing the data file
 Typists is a game application and only game records will be stored. 
 Gamers should not edit the data it will manipulate the integrity of the records.
 In the event where the data is editted and the wrong format is inputted, the game will crash when it tries to read the file. 
