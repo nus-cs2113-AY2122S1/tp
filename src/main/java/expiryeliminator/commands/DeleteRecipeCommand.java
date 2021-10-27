@@ -30,7 +30,6 @@ public class DeleteRecipeCommand extends Command {
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         try {
             Recipe deletedRecipe = recipes.remove(recipeName);
-            SaveData.saveRecipeListToFile(recipes);
             return String.format(MESSAGE_RECIPE_DELETED, deletedRecipe, recipes.size());
         } catch (NotFoundException e) {
             return MESSAGE_RECIPE_NOT_FOUND;

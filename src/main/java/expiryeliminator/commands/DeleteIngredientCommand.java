@@ -42,7 +42,6 @@ public class DeleteIngredientCommand extends Command {
         final IngredientStorage ingredient;
         try {
             ingredient = ingredients.remove(ingredientName);
-            SaveData.saveIngredientRepoToFile(ingredients);
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
