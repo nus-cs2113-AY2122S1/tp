@@ -21,11 +21,6 @@ public class Item {
 
     // Literals
     protected String separator = " | ";
-    public static final String ARG_TITLE = "t/";
-    public static final String ARG_ID = "i/";
-    public static final String ARG_STATUS = "s/";
-    public static final String ARG_LOANEE = "u/";
-    public static final String ARG_DUE = "d/";
 
     /**
      * Constructor for class item.
