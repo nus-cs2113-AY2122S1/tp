@@ -92,7 +92,7 @@ These are the commands I can currently carry out:
 	8. view alerts - alert ALERT_TYPE
 	9. set alert thresholds - set ALERT_TYPE VALUE
 	10. view SITUS's current date - date
-	11. edit SITUS's current date - date DATE (in yyyy-mm-dd format)
+	11. edit SITUS's current date - date DATE (in dd/mm/yyyy format)
 	12. exit SITUS - exit
 ____________________________________________________
 ```
