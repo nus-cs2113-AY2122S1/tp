@@ -2,10 +2,13 @@ package happybit.command;
 
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
+import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
+
+import java.util.Date;
 
 public class AddHabitCommand extends AddCommand {
 

@@ -94,6 +94,8 @@ public class AddParser extends Parser {
 
     /**
      * Gets the habit from user input.
+     * Habit is initialised with a null endDate first,
+     * and altered in AddHabitCommand where there will be access to the goalList.
      *
      * @param input User input.
      * @return Habit with details from user input.
@@ -103,7 +105,7 @@ public class AddParser extends Parser {
         String[] parameters = splitInput(input);
         String habitName = getName(parameters);
         int interval = getInterval(parameters);
-        return new Habit(habitName, interval);
+        return new Habit(habitName, interval, null);
     }
 
     /**

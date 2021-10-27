@@ -47,7 +47,7 @@ public class Export {
                     + goal.getGoalType() + DELIMITER
                     + goal.getGoalName() + DELIMITER
                     + goal.getStartDate() + DELIMITER
-                    + goal.getEndDate() + NEWLINE;
+                    + goal.getStringEndDate() + NEWLINE;
 
             fileWriter.write(goalToWrite);
 
@@ -55,8 +55,9 @@ public class Export {
                 String habitToWrite = index + DELIMITER
                         + HABIT_TYPE + DELIMITER
                         + habit.getHabitName() + DELIMITER
-                        + habit.getHabitDateString() + DELIMITER
-                        + habit.getInterval() + NEWLINE;
+                        + habit.getStartDate() + DELIMITER
+                        + habit.getEndDate() + DELIMITER
+                        + habit.getIntervalLength() + NEWLINE;
 
                 fileWriter.write(habitToWrite);
             }
@@ -73,7 +74,7 @@ public class Export {
                     + goal.getGoalType() + DELIMITER
                     + goal.getGoalName() + DELIMITER
                     + goal.getStartDate() + DELIMITER
-                    + goal.getEndDate() + NEWLINE;
+                    + goal.getStringEndDate() + NEWLINE;
 
             fileWriter.write(goalToWrite);
             fileWriter.close();
@@ -89,8 +90,9 @@ public class Export {
             String habitToWrite = index + DELIMITER
                     + HABIT_TYPE + DELIMITER
                     + habit.getHabitName() + DELIMITER
-                    + habit.getHabitDateString() + DELIMITER
-                    + habit.getInterval() + NEWLINE;
+                    + habit.getStartDate() + DELIMITER
+                    + habit.getEndDate() + DELIMITER
+                    + habit.getIntervalLength() + NEWLINE;
 
             fileWriter.write(habitToWrite);
             fileWriter.close();

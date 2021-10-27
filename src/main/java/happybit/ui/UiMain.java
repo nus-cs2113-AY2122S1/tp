@@ -48,7 +48,6 @@ public class UiMain extends UiManager {
         this.printManager = printManager;
         this.storage = storage;
         loadData();
-        this.goalList.setRecurringTasks();
     }
 
     /**

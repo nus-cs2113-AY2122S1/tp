@@ -79,11 +79,20 @@ public class Goal {
     }
 
     /**
+     * Getter for endDate of the goal.
+     *
+     * @return End date of a goal.
+     */
+    public Date getEndDate() {
+        return this.endDate;
+    }
+
+    /**
      * Getter for endDate of the goal in string format. (For storage)
      *
      * @return End date formatted as a string.
      */
-    public String getEndDate() {
+    public String getStringEndDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         return dateFormat.format(this.endDate);
     }
@@ -126,7 +135,7 @@ public class Goal {
         habitList.add(habit);
         // get newly added habit and add progress
         Habit newHabit = habitList.get(getListLength() - 1);
-        newHabit.addProgress();
+        //newHabit.addProgress();
     }
 
     /**
@@ -156,7 +165,7 @@ public class Goal {
     public void doneHabit(int habitIndex) {
         Habit habit = habitList.get(habitIndex);
         // update key value pair in map for current iteration
-        habit.updateProgress();
+        //habit.updateProgress();
     }
 
     /**
