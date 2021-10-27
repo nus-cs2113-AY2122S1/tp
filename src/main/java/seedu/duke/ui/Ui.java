@@ -397,6 +397,12 @@ public class Ui {
     }
 
     //@@author rebchua39
+
+    /**
+     * Displays the list of modules with the grade for each module and the cumulative average point (CAP).
+     * @param moduleList the list of modules
+     * @throws DukeException when there is an error in retrieving a module in the list
+     */
     public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
@@ -409,6 +415,10 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays the user's cumulative average point (CAP) or a message if there is no valid CAP.
+     * @param moduleList the list of modules
+     */
     private void printCap(ModuleList moduleList) {
         double cap = moduleList.calculateCap();
         boolean isCapValid = (cap >= 0);
@@ -421,6 +431,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a message to inform the user that the grade for the specified module has been successfully changed.
+     * @param module the module object whose grade has been changed
+     */
     public void printModuleWithGradeChanged(Module module) {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
