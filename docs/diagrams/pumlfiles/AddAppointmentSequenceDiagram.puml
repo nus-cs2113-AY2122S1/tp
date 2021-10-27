@@ -1,0 +1,59 @@
+@startuml
+!define ENTITY_COLOR_0 #FF4600
+!define ENTITY_COLOR_1 #FF7100
+!define ENTITY_COLOR_2 #FF9700
+!define ENTITY_COLOR_3 #FFBE00
+!define ENTITY_COLOR_4 #FFF400
+!define ENTITY_COLOR_5 #B6F400
+!define ENTITY_COLOR_6 #8CF400
+
+!define ACTIVATION_COLOR_0 #FF8E66
+!define ACTIVATION_COLOR_1 #FFAC6D
+!define ACTIVATION_COLOR_1a #FFC093
+!define ACTIVATION_COLOR_1b #FFD6BA
+!define ACTIVATION_COLOR_2 #FFBF66
+!define ACTIVATION_COLOR_3 #FFD366
+!define ACTIVATION_COLOR_4 #FFF766
+!define ACTIVATION_COLOR_5 #CDF260
+!define ACTIVATION_COLOR_6 #B5F260
+
+participant ":AddAppointmentCommand" as command ENTITY_COLOR_0
+participant ":Scheduler" as scheduler ENTITY_COLOR_1
+participant ":PatientList" as PL ENTITY_COLOR_2
+participant ":Patient" as patient ENTITY_COLOR_3
+participant ":MedicalStaffList" as SL ENTITY_COLOR_4
+participant ":Staff" as staff ENTITY_COLOR_5
+participant ":SchedulerAppointmentList" as AL ENTITY_COLOR_6
+
+autoactivate on
+command -> scheduler ACTIVATION_COLOR_1: addAppointment(appointment)
+scheduler -> scheduler ACTIVATION_COLOR_1a: checkPatientAvailability\n(patientId, dateTimeCode)
+scheduler -> PL ACTIVATION_COLOR_2: getAppointmentId\n(patientId, dateTimeCode)
+PL -> patient ACTIVATION_COLOR_3: getAppointmentId\n(dateTimeCode)
+patient --> PL
+PL --> scheduler
+note left: Exception is thrown here if patient\nhas an existing appointment at\nthis date and time.
+
+scheduler --> scheduler
+scheduler -> scheduler ACTIVATION_COLOR_1a: checkStaffAvailability\n(staffId, dateTimeCode)
+scheduler -> SL ACTIVATION_COLOR_4: getAppointmentId\n(staffId, dateTimeCode)
+SL -> staff ACTIVATION_COLOR_5: getAppointmentId\n(dateTimeCode)
+staff --> SL
+SL --> scheduler
+note left: Exception is thrown here if staff\nhas an existing appointment\nat this date and time.
+scheduler --> scheduler
+scheduler -> scheduler ACTIVATION_COLOR_1a: insertAppointment(appointment)
+scheduler -> AL ACTIVATION_COLOR_6: addAppointment(appointment)
+AL --> scheduler: appointmentId
+scheduler -> PL ACTIVATION_COLOR_2: addAppointment\n(patientId, appointment)
+PL -> patient ACTIVATION_COLOR_3: addAppointment\n(appointment)
+patient --> PL
+PL --> scheduler
+scheduler -> SL ACTIVATION_COLOR_4: addAppointment(staffId, appointment)
+SL -> staff ACTIVATION_COLOR_5: addAppointment\n(staffId)
+staff --> SL
+SL --> scheduler
+scheduler --> scheduler
+scheduler --> command
+
+@enduml
