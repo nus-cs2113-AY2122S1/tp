@@ -6,6 +6,9 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to update ingredient amount for different expiry dates
+ */
 public class UpdateCommand extends Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
@@ -15,6 +18,10 @@ public class UpdateCommand extends Command {
     private static final String STORAGE_ERROR = "Cannot update ingredient to memory!";
     private Ingredient updatedIngredient;
 
+    /**
+     * Constructor method for <code>SubtractCommand</code>
+     * @param ingredient the ingredient to be updated to
+     */
     public UpdateCommand(Ingredient ingredient) {
 
         this.updatedIngredient = ingredient;
@@ -30,7 +37,7 @@ public class UpdateCommand extends Command {
             }
             boolean expiryIsRepeated = IngredientList.getInstance().update(this.updatedIngredient);
             resultMsg = expiryIsRepeated
-                    ? UPDATE_MESSAGE + updatedIngredient.toString()
+                    ? UPDATE_MESSAGE + updatedIngredient.getName() + " | " + updatedIngredient.toString()
                         : INVALID_EXPIRY_DATE;
             return resultMsg;
 

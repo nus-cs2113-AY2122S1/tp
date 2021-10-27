@@ -6,19 +6,21 @@ The Smart Inventory Tracking and Updating System (SITUS) is a **desktop app for 
 ingredient inventory designed for restaurant/ F&B inventory managers.** 
 
 Have you ever found yourself tired of clicking buttons endlessly when adding or removing items from your current 
-inventory-tracking software? Would you much rather type one line commands to achieve the same things a long-winded GUI 
-could do? Then SITUS is for you!
+inventory-tracking software? Would you much rather type a single line command to achieve the same things a long-winded GUI 
+could do? 
+
+**If so, SITUS is for you!**
 
 SITUS allows you to not only track the stock of your ingredients but also their expiry dates, 
-search for ingredients by name or expiry date and even set and receive alerts when they are running low or expiring.
+search for ingredients by name or expiry date, and even set and receive alerts when stocks they are running low or reaching expiry.
 
-This user guide will give you a quick rundown of all the things SITUS can do and how you can use them effectively.  
+This user guide will give you a quick rundown of all the things SITUS can do for you and how you can use these tools effortlessly.  
 
 ### How to use this guide
 #### Format notes
 * Words/phrases in this format: `example`, are command snippets
 * Words/phrases within square brackets `[square bracket]` are user's inputs. <br>
-  For example in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
+  For example, in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
   > Note: Ensure *ALL* parameters are specified when entering the command. There are no optional parameters for commands
   > apart from [the `date` command](#210-view-set-current-date).
@@ -102,9 +104,9 @@ You can add an ingredient to the ingredient list to start tracking it.
 `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: name of the ingredient.
-* `AMOUNT`: amount of the ingredient, in kilograms.
-* `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
+* `INGREDIENT_NAME`: the ingredient name to add
+* `AMOUNT`: the ingredient amount to be added, in kilograms.
+* `EXPIRY`: the expiration date of ingredient, in format of `dd/mm/yyyy`.
 
 Examples:
 * `add n/carrot a/20 e/01/03/2022`
@@ -150,46 +152,51 @@ Here is the list of the ingredients currently in inventory:
 ____________________________________________________
 ```
 
-### 2.4. Update Ingredients [to be updated]
+### 2.4. Update Ingredients
 
 You can update the amount, unit and expiry of an ingredient in your ingredient list if it needs
 changes.
 
 Command:
-`update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
+`update n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: name of the ingredient.
-* `AMOUNT`: updated amount of the ingredient, in kilograms.
-* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
+* `INGREDIENT_NAME`: the ingredient name to update
+* `AMOUNT`: the ingredient amount to be updated, in kilograms
+* `EXPIRY`: the updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
 
-Examples:
-* `update n/carrot a/100 e/05/04/2022`
-* `update n/potato a/0.6 e/30/12/2021`
+Example: `update n/carrot a/100 e/05/04/2022`
 
 Outputs:
 ```
-update n/carrot a/100 u/sticks e/05/04/2022
+update n/carrot a/100 e/05/04/2022
 ____________________________________________________
 Got it. This ingredient has been updated:
-    Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
-____________________________________________________
-```
-```
-update n/potato a/0.6 u/kg e/30/12/2021
-____________________________________________________
-Got it. This ingredient has been updated:
-    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    Carrot | Amount Left: 100.0 kg | Expiry Date: 05/04/2022
 ____________________________________________________
 ```
 
-### 2.5. Subtract Ingredient Stock [to be added]
+### 2.5. Subtract Ingredient Stock
 
-**TO BE ADDED**
+You can subtract a given amount from an ingredient's total amount.
 
-Command:
+Command: `subtract n/[INGREDIENT_NAME] a/[AMOUNT]`
+
+The parameters used in the command are:
+
+* `INGREDIENT_NAME`: the ingredient name to subtract
+* `AMOUNT`: the ingredient amount to be subtracted, in kilograms
+
+Example: `subtract n/carrot a/100`
 
 Output:
+
+```
+subtract n/carrot a/100
+____________________________________________________
+Got it. This 100.0 kg has been subtracted from Carrot
+____________________________________________________
+```
 
 ### 2.6. Delete Ingredients
 
@@ -205,11 +212,11 @@ The parameter used in the command are:
 * `INGREDIENT_NAME`: the ingredient name to remove
 * `EXPIRY_DATE`: the expiry date of the ingredient to remove, in format of `dd/mm/yyyy`
 
-Example: `delete n/ carrot e/ 01/03/2022`
+Example: `delete n/carrot e/01/03/2022`
 
 Output:
 ```
-delete n/ carrot e/ 01/03/2022
+delete n/carrot e/01/03/2022
 ____________________________________________________
 Got it. This ingredient has been removed:
     Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
@@ -256,7 +263,7 @@ You can search for ingredients using keywords in their names to find specific in
 full list.
 
 Command: `find [INGREDIENT_NAMES]`
-* `INGREDIENT_NAMES`: The words to search for in the ingredient list
+* `INGREDIENT_NAMES`: the words to search for in the ingredient list
 > Note: One or more ingredient names can be entered. Separate them using *spaces*.
 
 Examples: `find radish`, `find potato tomato`

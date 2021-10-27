@@ -35,10 +35,6 @@ public class Ingredient {
         return expiry;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setAmount(Double amount) {
         this.amount = amount;
     }
