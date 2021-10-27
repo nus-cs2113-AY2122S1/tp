@@ -1,13 +1,47 @@
 # User Guide
 
 ## Introduction
-Restaurant Buddy is a desktop application for restaurant managers to help **keep track of restaurant data** 
-such as its employees, dishes and ingredients in storage via a **Command Line Interface (CLI)**.
+Restaurant Buddy is a desktop application designed for restaurant managers to help **keep track of restaurant data** 
+such as its employees, dishes in the menu and ingredients in storage via a **Command Line Interface (CLI)**.
+In particular, Restaurant Buddy was developed specifically for users who can type fast and prefer typing to other 
+means of input. 
 
 ## Purpose
-?
-## How to use
-?
+This user guide is designed for managers (or employees undertaking managerial roles) who oversee operations 
+at a restaurant. This user guide provides the necessary information on how to utilise Restaurant Buddy 
+to its fullest potential. There is little to no prior technical knowledge needed, everything you need to get
+started will be included in the next section under "How To Use". However, a simple understanding of how
+a restaurant runs is assumed.
+
+## How To Use
+Restaurant Buddy is a Command-Line-Interface (CLI) application. This means that the interaction between you
+and the application is purely through a single line of words. In order to do a desired action, simply type in the 
+command according to a specified format and press enter on your keyboard. The format of inputs that you can type 
+into the application is specified in the document later on from Section 2: Features onwards. These are also highlighted
+throughout the user guide.
+
+In this user guide, there are multiple references to terms like 'employee', 'dish', 'ingredient' and 'finance'.
+These four terms are the key areas that Restaurant Buddy aims to help restaurant managers through. These four
+terms are defined below:
+- 'Employee' refers to any person working for the restaurant.
+- 'Dish' refers to any individual food or beverage that is sold at the restaurant. Multiple 'dish' collated in
+a single list makes up a 'menu'.
+- 'Ingredient' refers to any materials that is used to create a 'dish' that is currently in storage at the restaurant.
+- 'Finance' refers to the amount of money earned or spent, recorded at the end of the day or week.
+
+In addition, there are certain conventions throughout the user guide:
+- highlighted words such as `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` indicates a command that can be typed onto
+the command line interface
+- expected output is placed inside a box such as the box below
+```
+---------------------------------------------
+This is an example of expected outputs.
+Restaurant Buddy communicates with you this way!
+---------------------------------------------
+```
+- hyperlinks (which brings you directly to the section of the user guide you are interested in) are words in the 
+colour blue - an example is the blue text in the contents section below
+
 
 ## Contents
 1. [Quick start](#1-quick-start)
@@ -47,7 +81,7 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
    desktop.
 5. Type `java -jar tp.jar` in the command prompt and press enter to run Restaurant Buddy.
 6. Type a command in Restaurant Buddy's command box and press enter to execute it.
-7. Refer to the **[Features](#features)** below for details of all available commands.
+7. Refer to the **[Features](#2-features)** below for details of all available commands.
 
 ## 2. Features
 
