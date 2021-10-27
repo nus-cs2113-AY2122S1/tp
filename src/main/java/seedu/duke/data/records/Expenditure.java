@@ -49,13 +49,16 @@ public class Expenditure extends Record {
 
     public String toString(int indexOfExpenditure) {
         int displayIndex = indexOfExpenditure + DISPLAY_INDEX_OFFSET;
-        int displayIndexCharactersNeeded = (int) ceil((double)displayIndex/10) + 1;
+        int displayIndexCharactersNeeded = (int) ceil((double)displayIndex / 10) + 1;
         int numberOfDescriptionColumnCharacters = 30 - displayIndexCharactersNeeded - ellipsesCharactersNeeded;
         String descriptionToPrint = this.description;
         if (this.description.length() > numberOfDescriptionColumnCharacters) {
             descriptionToPrint = this.description.substring(0, numberOfDescriptionColumnCharacters) + "...";
         }
         return String.format("%-30.30s %-20.20s %-20.20s %-20.20s",
-                displayIndex + "." + descriptionToPrint, "| $" + this.amount, "| " + this.date.toString(), "| " + this.category.toString());
+                displayIndex + "." + descriptionToPrint,
+                "| $" + this.amount,
+                "| " + this.date.toString(),
+                "| " + this.category.toString());
     }
 }

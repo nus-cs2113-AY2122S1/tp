@@ -323,7 +323,7 @@ public class TextUi {
 
     private static void printHorizontalGraphRow(double percentageToPrint) {
         int totalNumberOfBars = 20;
-        long numberOfBarsToPrint = round(percentageToPrint/percentageRepresentedByEachBar);
+        long numberOfBarsToPrint = round(percentageToPrint / percentageRepresentedByEachBar);
         DecimalFormat df = new DecimalFormat("###.##");
         for (int i = 0; i < totalNumberOfBars; i++) {
             String barToPrint;
