@@ -3,9 +3,11 @@ package happybit.storage;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.habit.Habit;
+import happybit.interval.Interval;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Export {
@@ -13,6 +15,7 @@ public class Export {
     private static final String DELIMITER = "##";
     private static final String GOAL_TYPE = "G";
     private static final String HABIT_TYPE = "H";
+    private static final String INTERVAL_TYPE = "I";
 
     protected String filePath;
 
@@ -42,28 +45,70 @@ public class Export {
         for (Goal goal : goalList) {
             int index = goalList.indexOf(goal);
             ArrayList<Habit> habits = goal.getHabitList();
-            String goalToWrite = index + DELIMITER
-                    + GOAL_TYPE + DELIMITER
-                    + goal.getGoalTypeCharacter() + DELIMITER
-                    + goal.getGoalName() + DELIMITER
-                    + goal.getStartDate() + DELIMITER
-                    + goal.getEndDate() + NEWLINE;
+            String goalToWrite = this.goalString(goal, index);
 
             fileWriter.write(goalToWrite);
-
-            for (Habit habit : habits) {
-                int doneValue = habit.getDone() ? 1 : 0;
-                String habitToWrite = index + DELIMITER
-                        + HABIT_TYPE + DELIMITER
-                        + doneValue + DELIMITER
-                        + habit.getHabitName() + DELIMITER
-                        + habit.getHabitDateString() + DELIMITER
-                        + habit.getInterval() + NEWLINE;
-
-                fileWriter.write(habitToWrite);
-            }
+            this.writeHabit(fileWriter, habits, index);
         }
         fileWriter.close();
+    }
+
+    protected void writeHabit(FileWriter fileWriter, ArrayList<Habit> habitList, int index) throws IOException {
+        for (Habit habit : habitList) {
+            int habitIndex = habitList.indexOf(habit);
+            ArrayList<Interval> intervals = habit.getIntervals();
+            String habitToWrite = this.habitString(habit, index);
+
+            fileWriter.write(habitToWrite);
+            this.writeInterval(fileWriter, intervals, index, habitIndex);
+        }
+    }
+
+    protected void writeInterval(FileWriter fileWriter, ArrayList<Interval> intervalList, int goalIndex,
+                                 int habitIndex) throws IOException {
+        for (Interval interval : intervalList) {
+            String intervalToWrite = this.intervalString(interval, goalIndex, habitIndex);
+
+            fileWriter.write(intervalToWrite);
+        }
+    }
+
+    protected String goalString(Goal goal, int index) {
+        return index + DELIMITER
+                + GOAL_TYPE + DELIMITER
+                + goal.getGoalType() + DELIMITER
+                + goal.getGoalName() + DELIMITER
+                + goal.getStartDate() + DELIMITER
+                + goal.getStringEndDate() + NEWLINE;
+    }
+
+    protected String habitString(Habit habit, int index) {
+        return index + DELIMITER
+                + HABIT_TYPE + DELIMITER
+                + habit.getHabitName() + DELIMITER
+                + habit.getStartDate() + DELIMITER
+                + habit.getEndDate() + DELIMITER
+                + habit.getIntervalLength() + NEWLINE;
+    }
+
+    protected String intervalString(Interval interval, int goalIndex, int habitIndex) {
+        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        String startDate = format.format(interval.getStartDate());
+        String endDate = format.format(interval.getEndDate());
+        String completedDate;
+
+        if (interval.getCompletedDate() == null) {
+            completedDate = "null";
+        } else {
+            completedDate = format.format(interval.getCompletedDate());
+        }
+
+        return goalIndex + DELIMITER
+                + INTERVAL_TYPE + DELIMITER
+                + habitIndex + DELIMITER
+                + startDate + DELIMITER
+                + endDate + DELIMITER
+                + completedDate + NEWLINE;
     }
 
     protected void exportGoal(Goal goal, int index) throws HaBitStorageException {
@@ -72,10 +117,10 @@ public class Export {
 
             String goalToWrite = index + DELIMITER
                     + GOAL_TYPE + DELIMITER
-                    + goal.getGoalTypeCharacter() + DELIMITER
+                    + goal.getGoalType() + DELIMITER
                     + goal.getGoalName() + DELIMITER
                     + goal.getStartDate() + DELIMITER
-                    + goal.getEndDate() + NEWLINE;
+                    + goal.getStringEndDate() + NEWLINE;
 
             fileWriter.write(goalToWrite);
             fileWriter.close();
@@ -88,13 +133,12 @@ public class Export {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
 
-            int doneValue = habit.getDone() ? 1 : 0;
             String habitToWrite = index + DELIMITER
                     + HABIT_TYPE + DELIMITER
-                    + doneValue + DELIMITER
                     + habit.getHabitName() + DELIMITER
-                    + habit.getHabitDateString() + DELIMITER
-                    + habit.getInterval() + NEWLINE;
+                    + habit.getStartDate() + DELIMITER
+                    + habit.getEndDate() + DELIMITER
+                    + habit.getIntervalLength() + NEWLINE;
 
             fileWriter.write(habitToWrite);
             fileWriter.close();
@@ -102,4 +146,8 @@ public class Export {
             throw new HaBitStorageException(e.getMessage());
         }
     }
+
+    /**
+     * Need to export HashMap<Date, Progress> for each habit; nothing exported as of now
+     */
 }

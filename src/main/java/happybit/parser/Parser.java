@@ -7,7 +7,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class Parser {
+public class Parser {
 
     protected static final String DELIMITER = "\u0001";
     protected static final String LABEL_SYNTAX = "[a-zA-Z]/";

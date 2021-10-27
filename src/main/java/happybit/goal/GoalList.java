@@ -2,9 +2,9 @@ package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
+import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -50,7 +50,7 @@ public class GoalList {
     public GoalType getChosenGoalType() {
         GoalType goalType = GoalType.DEFAULT;
         try {
-            goalType = getGoal(chosenGoalIndex).goalType;
+            goalType = this.getGoal(chosenGoalIndex).goalType;
         } catch (HaBitCommandException e) {
             // Exception should never be thrown here
         }
@@ -101,14 +101,14 @@ public class GoalList {
 
     /**
      * Adds a habit that is linked to a goal.
-     * For storage.
+     * From storage.
      *
      * @param habit     Habit to be linked to a goal.
      * @param goalIndex Integer index of goal in goalList.
      */
     public void addHabitToGoal(Habit habit, int goalIndex) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        goal.addHabit(habit);
+        goal.addHabitFromStorage(habit);
     }
 
     /**
@@ -121,8 +121,10 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        goal.addHabit(habit);
-        printManager.printAddedHabit(habit.getHabitName(), goal.getDescription());
+        Habit newHabit = updateHabitEndDate(goal, habit);
+        newHabit.populateIntervalsDuringHabitCreation();
+        goal.addHabit(newHabit);
+        printManager.printAddedHabit(newHabit.getHabitName(), goal.getDescription());
     }
 
     /**
@@ -158,8 +160,7 @@ public class GoalList {
     }
 
     /**
-     * Marks a habit under a goal as done
-     * Expand upon in v2.0 to include date and description
+     * Marks Progress for a goal as done.
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
@@ -169,11 +170,11 @@ public class GoalList {
      */
     public void doneHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager)
             throws HaBitCommandException {
-        Goal goal = getGoal(goalIndex);
+        Goal goal = this.getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
-        Habit habit = getHabit(habitList, habitIndex);
+        Habit habit = this.getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
-        printManager.printDoneHabit(goal.getDescription(), habit.getHabitName());
+        printManager.printDoneHabit(goal.getDescription(), habit, new Date());
     }
 
     /**
@@ -204,7 +205,22 @@ public class GoalList {
         if (habitList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_HABIT_LIST);
         }
-        printManager.printHabitList(goal.getDescription(), habitList, numOfHabits);
+        printManager.printHabitList(goal.getGoalName(), habitList, numOfHabits);
+    }
+
+    /**
+     * Lists all the habits that can be marked as done but are not completed.
+     *
+     * @return Arraylist containing details of all the habits to be done.
+     */
+    public ArrayList<String> listDueHabits() {
+        ArrayList<String> habitsToDoList = new ArrayList<>();
+        for (int goalIndex = 0; goalIndex < getListLength(); goalIndex++) {
+            for (String s : goalList.get(goalIndex).getDueHabits()) {
+                habitsToDoList.add("G:" + (goalIndex + 1) + " " + s);
+            }
+        }
+        return habitsToDoList;
     }
 
     /**
@@ -239,26 +255,25 @@ public class GoalList {
     }
 
     /**
-     * To allow for recurring tasks, reset isDone to false for that habit once next date reached.
-     * Check and set on start up for all goals and all habits within goals
-     * After importing data into goalList
+     * Changes interval of a habit previously set by the user.
+     * Need to check and update habitDate as well when executing this command.
      *
+     * @param goalIndex Integer of goal index habit to update is under
+     * @param habitIndex Integer of habit index of habit to update
+     * @param newInterval Integer of new interval uses wishes to set
      */
-    public void setRecurringTasks() {
-        for (Goal goal : goalList) {
-            ArrayList<Habit> currGoalsHabits = goal.getHabitList();
-            for (Habit habit : currGoalsHabits) {
-                // if currDate is at the nextDate set by user; set isDone to false
-                Date currDate = new Date();
-                SimpleDateFormat currDateFormatter = new SimpleDateFormat("ddMMyyyy");
-                String currDateString = currDateFormatter.format(currDate);
-                String habitNextDate = habit.getNextDateString();
-                if (currDateString.equals(habitNextDate)) {
-                    habit.setUncompleted();
-                    habit.setHabitDate(habit.getNextDate());
-                }
-            }
-        }
+    public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
+        // To be implemented
+    }
+
+    public void viewGoalProgress(int goalIndex) {
+        // todo
+    }
+
+    public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
+        Goal goal = this.getGoal(goalIndex);
+        Habit habit = this.getHabit(goal.getHabitList(), habitIndex);
+        habit.addInterval(interval);
     }
 
     /*
@@ -315,6 +330,19 @@ public class GoalList {
         } else if (this.chosenGoalIndex > deletedGoalIndex) {
             this.chosenGoalIndex -= 1;
         }
+    }
+
+    /**
+     * Sets the endDate of the habit to be similar to the goal.
+     *
+     * @param goal  Goal that a habit is to be added to.
+     * @param habit Habit to be added to the goal.
+     * @return Habit with its endDate updated.
+     */
+    private Habit updateHabitEndDate(Goal goal, Habit habit) {
+        Date goalEndDate = goal.getEndDate();
+        habit.setEndDate(goalEndDate);
+        return habit;
     }
 
 }

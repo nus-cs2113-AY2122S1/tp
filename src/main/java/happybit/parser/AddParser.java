@@ -94,6 +94,8 @@ public class AddParser extends Parser {
 
     /**
      * Gets the habit from user input.
+     * Habit is initialised with a null endDate first,
+     * and altered in AddHabitCommand where there will be access to the goalList.
      *
      * @param input User input.
      * @return Habit with details from user input.

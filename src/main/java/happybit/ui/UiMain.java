@@ -9,6 +9,7 @@ import happybit.goal.GoalType;
 import happybit.parser.MainParser;
 import happybit.storage.Storage;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UiMain extends UiManager {
@@ -165,11 +166,12 @@ public class UiMain extends UiManager {
     }
 
     /**
-     * Clears the console and re-prints the title.
+     * Clears the console and re-prints the title and due habits.
      */
     private void resetDisplay() {
         clearConsoleScreen();
         printTitle();
+        printDueHabits();
     }
 
     /**
@@ -192,6 +194,20 @@ public class UiMain extends UiManager {
             break;
         default:
             printLogo();
+        }
+    }
+
+    /**
+     * Prints the list of habits to be marked as done.
+     */
+    private void printDueHabits() {
+        ArrayList<String> dueHabits = this.goalList.listDueHabits();
+        if (!dueHabits.isEmpty()) {
+            System.out.println("These are the habit(s) that you have yet to complete:");
+            for (int listIndex = 0; listIndex < dueHabits.size(); listIndex++) {
+                System.out.println(listIndex + 1 + ") " + dueHabits.get(listIndex));
+            }
+            System.out.println();
         }
     }
 

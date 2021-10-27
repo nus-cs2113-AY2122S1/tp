@@ -8,6 +8,8 @@ import happybit.habit.Habit;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
+import java.util.Date;
+
 public class AddHabitCommand extends AddCommand {
 
     protected Habit habit;

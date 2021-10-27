@@ -28,6 +28,6 @@ public class ViewProgressCommand extends Command {
      */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        // To be implemented
+        // todo
     }
 }
