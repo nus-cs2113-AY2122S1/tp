@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -413,8 +412,8 @@ public class Parser {
                     return;
                 } else {
                     try {
-                        double amount = Double.parseDouble(String.format(
-                                amountString, Storage.getOpenTrip().getForeignCurrencyFormat()));
+                        double amount = Double.parseDouble(amountString);
+                        amount = Storage.formatForeignMoneyDouble(amount);
                         total += amount;
                         if (total > expense.getAmountSpent()) {
                             Ui.printIncorrectAmount(expense.getAmountSpent());
@@ -443,35 +442,6 @@ public class Parser {
         }
     }
 
-    //@@author lixiyuan416
-    private static boolean manageLog(boolean isLogDisplayed) {
-        if (!isLogDisplayed) {
-            Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
-            Ui.autoAssignIndividualSpending();
-            isLogDisplayed = true;
-        }
-        return isLogDisplayed;
-    }
-
-    private static boolean getUserToConfirm() {
-        Ui.askUserToConfirm();
-        boolean isValidInput = false;
-        boolean doesUserAgree = false;
-        while (!isValidInput) {
-            String userReply = Storage.getScanner().nextLine();
-            if (userReply.equalsIgnoreCase("y")) {
-                isValidInput = true;
-                doesUserAgree = true;
-            } else if (userReply.equalsIgnoreCase("n")) {
-                isValidInput = true;
-            } else {
-                System.out.println("Enter y/n");
-            }
-        }
-        return doesUserAgree;
-    }
-    //@@author
-
     private static Person getValidPersonInExpenseFromString(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {
             if (name.equalsIgnoreCase(person.getName())) {
@@ -483,8 +453,7 @@ public class Parser {
 
     private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
         double total = 0.0;
-        double amount = Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(),
-                (expense.getAmountSpent() / expense.getPersonsList().size())));
+        double amount = Storage.formatForeignMoneyDouble(expense.getAmountSpent() / expense.getPersonsList().size());
         for (Person people : expense.getPersonsList()) {
             amountBeingPaid.put(people, amount);
             total += amount;
@@ -528,6 +497,34 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    //@@author lixiyuan416
+    private static boolean manageLog(boolean isLogDisplayed) {
+        if (!isLogDisplayed) {
+            Storage.getLogger().log(Level.INFO, "Some people were allocated 0 for this expense split");
+            Ui.autoAssignIndividualSpending();
+            isLogDisplayed = true;
+        }
+        return isLogDisplayed;
+    }
+
+    private static boolean getUserToConfirm() {
+        Ui.askUserToConfirm();
+        boolean isValidInput = false;
+        boolean doesUserAgree = false;
+        while (!isValidInput) {
+            String userReply = Storage.getScanner().nextLine();
+            if (userReply.equalsIgnoreCase("y")) {
+                isValidInput = true;
+                doesUserAgree = true;
+            } else if (userReply.equalsIgnoreCase("n")) {
+                isValidInput = true;
+            } else {
+                System.out.println("Enter y/n");
+            }
+        }
+        return doesUserAgree;
     }
     //@@author
 

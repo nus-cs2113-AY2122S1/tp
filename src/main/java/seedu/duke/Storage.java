@@ -73,6 +73,14 @@ public class Storage {
         return availableCurrency;
     }
 
+    public static double formatForeignMoneyDouble(double money) {
+       return Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), money));
+    }
+
+    public static double formatRepaymentMoneyDouble(double money) {
+        return Double.parseDouble(String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(), money));
+    }
+
     //@@author
 
     /**
