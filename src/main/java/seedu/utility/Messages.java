@@ -47,7 +47,6 @@ public class Messages {
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
     public static final String SAME_CURRENCY_TYPE_MESSAGE = "Your lists are already in the requested currency type!";
 
-
     public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
             + "-------------------------------------";
 
