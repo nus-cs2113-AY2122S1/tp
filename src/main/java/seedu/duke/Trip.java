@@ -25,6 +25,9 @@ public class Trip {
     private String location;
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    /**
+     * Empty {@link Trip} constructor (included for legacy test support).
+     */
     public Trip() {
         //empty constructor
     }

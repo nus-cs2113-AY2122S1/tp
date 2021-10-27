@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -51,9 +50,11 @@ public class Parser {
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
      * for further updates.
      *
-     * @param inputCommand Valid command executed by the user
+     * @param inputCommand Valid command executed by the user.
      * @param inputParams  Additional information appended to the command by the user
-     *                     (inputParams are not checked and may not be valid)
+     *                     (inputParams are not checked and may not be valid).
+     *
+     * @see Parser#parseUserInput(String)
      */
     private static void handleValidCommands(String inputCommand, String inputParams) {
         switch (inputCommand) {
@@ -78,7 +79,7 @@ public class Parser {
             break;
 
         case "delete":
-            handleDeleteTrip(inputParams);
+            handleDelete(inputParams);
             break;
 
         case "list":
@@ -106,6 +107,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Confirms that the user had entered parameters for creating a new expense, and redirects to
+     * {@link Parser#executeCreateExpense(String)} to create the expense
+     *
+     * @param inputParams attributes of expense to be created.
+     */
     private static void handleCreateExpense(String inputParams) {
         try {
             assert inputParams != null;
@@ -132,6 +139,7 @@ public class Parser {
         }
     }
 
+
     private static void handleViewTrip(String inputParams) {
         try {
             executeView(inputParams);
@@ -140,7 +148,7 @@ public class Parser {
         }
     }
 
-    private static void handleDeleteTrip(String inputParams) {
+    private static void handleDelete(String inputParams) {
         try {
             assert inputParams != null;
             executeDelete(inputParams);
@@ -180,21 +188,30 @@ public class Parser {
         }
     }
 
+    /**
+     * Confirms that the user entered paramaters, and calls {@link Parser#executeCreateTrip(String)}.
+     *
+     * @param inputParams attributes of the trip to be created.
+     */
     private static void handleCreateTrip(String inputParams) {
         try {
             assert inputParams != null;
-            executeCreate(inputParams);
+            executeCreateTrip(inputParams);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             Ui.printCreateFormatError();
         }
     }
 
-    private static void executeCreate(String indexAsString) {
-        String[] newTripInfo = indexAsString.split(" ", 5);
+    /**
+     * Creates a new instance of {@link Trip} and adds it to the <code>listOfTrips</code>
+     *
+     * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
+     */
+    private static void executeCreateTrip(String attributesInString) {
+        String[] newTripInfo = attributesInString.split(" ", 5);
         Trip newTrip = new Trip(newTripInfo);
         Storage.getListOfTrips().add(newTrip);
-        System.out.println("Your trip to " + newTrip.getLocation() + " on "
-                + newTrip.getDateOfTripString() + " has been successfully added!");
+        Ui.newTripSuccessfullyCreated(newTrip);
         Storage.setLastTrip(newTrip);
     }
 
@@ -300,6 +317,15 @@ public class Parser {
     }
     //@@author
 
+    /**
+     * Checks whether to delete trip or delete expense (by determining if a trip is open),
+     * and calls the appropriate method.
+     *
+     * @param inputParams attributes of trip to be deleted (if valid, this should be the trip/expense index)
+     *
+     * @see Parser#executeDeleteTrip(int)
+     * @see Parser#executeDeleteExpense(int)
+     */
     private static void executeDelete(String inputParams) {
         int index = Integer.parseInt(inputParams) - 1;
         if (!Storage.checkOpenTrip()) {
@@ -336,17 +362,21 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes a trip from the <code>listOfTrips</code>
+     *
+     * @param tripIndex index of Trip to be applied to <code>listOfTrips</code>
+     */
     private static void executeDeleteTrip(int tripIndex) {
         ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
         try {
-            String tripLocation = listOfTrips.get(tripIndex).getLocation();
-            String tripDate = listOfTrips.get(tripIndex).getDateOfTripString();
+            Trip tripToDelete = listOfTrips.get(tripIndex);
             listOfTrips.remove(tripIndex);
-            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+            Ui.printDeleteTripSuccessful(tripToDelete);
+            Storage.setLastTrip(null);
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
         }
-        Storage.setLastTrip(null);
 
     }
 

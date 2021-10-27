@@ -23,6 +23,11 @@ public class Ui {
         System.out.println("Exiting the program now. Goodbye!");
     }
 
+    public static void newTripSuccessfullyCreated(Trip newTrip) {
+        System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                + newTrip.getDateOfTripString() + " has been successfully added!");
+    }
+
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
@@ -137,9 +142,9 @@ public class Ui {
         System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
     }
 
-    public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
-        System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed.");
+    public static void printDeleteTripSuccessful(Trip tripDeleted) {
+        System.out.println("Your trip to " + tripDeleted.getLocation() + " on "
+                + tripDeleted.getDateOfTripString() + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
