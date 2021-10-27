@@ -1,10 +1,14 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+hide circle
+skinparam classAttributeIconSize 0
+
 Command <|-up- ExitCommand
 Command <|-up- ListCommand
 Command <|-up- AddCommand
 Command <|-up- LoanCommand
+Command <|-- EditCommand
 Command <|-- RemoveCommand
 Command <|-- ReserveCommand
 Command <|-- ReturnCommand
@@ -28,6 +32,17 @@ class AddCommand {
 # id: String
 + AddCommand(args: String)
 + handlesAddCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class EditCommand {
++ {static} {final} COMMAND_WORD: String = "edit"
++ EditCommand(args: String)
++ handlesEditCommand(ui: TextUI, catalogue: Catalogue)
++ handlesEditVideoCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditMagazineCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditAudioCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditBookCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 
