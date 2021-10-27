@@ -213,6 +213,19 @@ class TaskManagerTest {
 
     //@@author APZH
     @Test
+    void testListTaskRecurrenceFormat() {
+        Map<String, String> listArguments = new HashMap<>();
+        listArguments.put("mainArgument", "1");
+        try {
+            System.out.println("testListTaskRecurrenceFormat");
+            System.out.println(taskManager.listTaskRecurrence(listArguments));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    //@@author APZH
+    @Test
     void listTaskRecurrence_ThrowsException_IfTaskIdBiggerThanTaskListSize() {
 
         String expectedErrorMessage = "[!] The task ID you entered is not valid...\n"
