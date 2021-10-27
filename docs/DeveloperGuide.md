@@ -83,6 +83,9 @@ stores student internally as an ArrayList `students`.
 ArrayList.
 * `StudentList#findStudent(keyword:String)` - Returns an ArrayList of students containing the keyword
 
+The sequence diagram shown below illustrates how the `add_student` command works:
+![AddStudentSequenceDiagram](diagrams/AddStudentSequenceDiagram.png)
+
 Below is an example scenario of how the add student feature behaves at each step:<br>
 * Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
 calls the `AddStudentCommand#execute` method. Within `AddStudentCommand#execute`, `ModuleList#getModule("CS2113T")` is 
