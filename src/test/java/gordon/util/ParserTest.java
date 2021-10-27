@@ -189,7 +189,7 @@ public class ParserTest {
                 + "/ingredients a+b+c "
                 + "/steps a+b+c\n"
                 + "set recipeZ /Ingredients x+y+z\n"
-                + "set recipeA /Ingredients x+y+z\n"
+                + "set recipeA /Ingredients x + y +z     \n"
                 + "check recipeA\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
@@ -227,7 +227,7 @@ public class ParserTest {
                 + "/ingredients a+b+c "
                 + "/steps a+b+c\n"
                 + "set recipeZ /Steps x+y+z\n"
-                + "set recipeA /Steps x+y+z\n"
+                + "set recipeA /Steps x +y + z\n"
                 + "check recipeA\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
