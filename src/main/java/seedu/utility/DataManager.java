@@ -1,11 +1,15 @@
 package seedu.utility;
 
+import seedu.commands.general.CurrencyType;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
+import seedu.exceptions.BlankCurrencyTypeException;
 import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidSettingsDataException;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -14,7 +18,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -27,8 +30,9 @@ public class DataManager {
     private static final String NEWLINE = System.lineSeparator();
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
-    private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
-    private static final String BUDGET_CSV_HEADER = "food,transport,medical,bills,entertainment,misc,overall";
+    private static final String SETTINGS_FILE_NAME = "./StonksXD_Settings.csv";
+    private static final String SETTINGS_CSV_HEADER = "currency,food,transport,medical,bills,entertainment," +
+            "misc,overall";
     private final Parser parser;
     private final FinancialTracker financialTracker;
     private final Ui ui;
@@ -47,7 +51,7 @@ public class DataManager {
      */
     public void saveAll() {
         saveEntries();
-        saveBudgetSettings();
+        saveSettings();
     }
 
     /**
@@ -56,7 +60,7 @@ public class DataManager {
      */
     public void loadAll() {
         loadEntries();
-        loadBudgetSettings();
+        loadSettings();
     }
 
     /**
@@ -128,37 +132,38 @@ public class DataManager {
     }
 
     /**
-     * Saves all budget settings into a csv file StonksXD_Budget.csv.
-     * This allows users to not lose all their budget settings when program closes.
+     * Saves all budget and currency settings into a csv file StonksXD_Budget.csv.
+     * This allows users to not lose all their budget and currency settings when program closes.
      */
-    public void saveBudgetSettings() {
+    public void saveSettings() {
         try {
-            FileWriter writer = new FileWriter(BUDGET_FILE_NAME);
+            FileWriter writer = new FileWriter(SETTINGS_FILE_NAME);
             BufferedWriter buffer = new BufferedWriter(writer);
             String data;
-
+            
             // Categories header for the CSV file
-            buffer.write(BUDGET_CSV_HEADER);
+            buffer.write(SETTINGS_CSV_HEADER);
             buffer.write(NEWLINE);
-            data = parser.convertBudgetSettingsToData(budgetManager);
+            data = parser.convertSettingsToData(financialTracker, budgetManager);
             buffer.write(data);
             buffer.write(NEWLINE);
             buffer.close();
         } catch (IOException e) {
-            ui.printError(Messages.ERROR_SAVING_BUDGET_SETTINGS);
+            ui.printError(Messages.ERROR_SAVING_SETTINGS);
         }
     }
     
     /**
-     * Loads all settings from StonksXD_Budget.csv into StonksXD.
-     * This allows users to not lose all their budget settings when the previous instance of StonksXD closed.
+     * Loads all budget and currency settings from StonksXD_Budget.csv into StonksXD.
+     * This allows users to not lose all their budget and currency settings when the previous instance of 
+     * StonksXD closed.
      */
-    public void loadBudgetSettings() {
+    public void loadSettings() {
         FileInputStream fis;
         try {
-            fis = new FileInputStream(BUDGET_FILE_NAME);
+            fis = new FileInputStream(SETTINGS_FILE_NAME);
         } catch (FileNotFoundException e) {
-            ui.printError(Messages.UNABLE_TO_FIND_BUDGET_FILE);
+            ui.printError(Messages.UNABLE_TO_FIND_SETTINGS_FILE);
             return;
         }
 
@@ -176,8 +181,11 @@ public class DataManager {
                 budgetManager.setBudget(budgetSettings.get(budgetIndex), category);
                 budgetIndex += 1;
             }
-        } catch (NullPointerException | NumberFormatException e) {
-            ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
+            CurrencyType currency = parser.convertDataToCurrencySetting(data);
+            financialTracker.setCurrency(currency);
+        } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException 
+                | InvalidCurrencyTypeException | BlankCurrencyTypeException e) {
+            ui.printError(Messages.HAS_CORRUPTED_SETTINGS);
         }
     }
 }

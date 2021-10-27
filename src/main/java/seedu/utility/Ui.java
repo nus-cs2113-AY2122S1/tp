@@ -1,6 +1,6 @@
 package seedu.utility;
 
-import seedu.commands.CurrencyTypes;
+import seedu.commands.general.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
@@ -464,15 +464,21 @@ public class Ui {
         printLine();
     }
 
-    public void printCurrencyChangedConfirmation(CurrencyTypes currency) {
+    public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
         System.out.println("All entries have been converted to " + currency + "!");
         printLine();
     }
 
-    public void printSameCurrencyTypeMessage(CurrencyTypes currency) {
+    public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
         System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + ": " + currency);
+        printLine();
+    }
+
+    public void printCurrentCurrency(CurrencyType currency) {
+        printLine();
+        System.out.println(Messages.CURRENT_CURRENCY_MESSAGE + currency.toString());
         printLine();
     }
 }

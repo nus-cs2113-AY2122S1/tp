@@ -1,29 +1,30 @@
 package seedu.utility;
 
-import seedu.commands.AddExpenseCommand;
-import seedu.commands.AddIncomeCommand;
-import seedu.commands.CheckBudgetCommand;
-import seedu.commands.ClearAllEntriesCommand;
+import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.general.CheckCurrentCurrencyCommand;
+import seedu.commands.income.AddIncomeCommand;
+import seedu.commands.budget.CheckBudgetCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
 import seedu.commands.Command;
-import seedu.commands.CurrencyConversionCommand;
-import seedu.commands.CurrencyTypes;
-import seedu.commands.DeleteExpenseCommand;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.ExitCommand;
-import seedu.commands.HelpCommand;
+import seedu.commands.general.CurrencyConversionCommand;
+import seedu.commands.general.CurrencyType;
+import seedu.commands.expense.DeleteExpenseCommand;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.general.ExitCommand;
+import seedu.commands.general.HelpCommand;
 import seedu.commands.InvalidCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
-import seedu.commands.SetBudgetCommand;
-import seedu.commands.SetThresholdCommand;
-import seedu.commands.ShowGraphCommand;
-import seedu.commands.TotalExpenseBetweenCommand;
-import seedu.commands.TotalExpenseCommand;
-import seedu.commands.TotalIncomeBetweenCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.expense.ListExpenseCommand;
+import seedu.commands.income.ListIncomeCommand;
+import seedu.commands.budget.SetBudgetCommand;
+import seedu.commands.budget.SetThresholdCommand;
+import seedu.commands.general.ShowGraphCommand;
+import seedu.commands.expense.TotalExpenseBetweenCommand;
+import seedu.commands.expense.TotalExpenseCommand;
+import seedu.commands.income.TotalIncomeBetweenCommand;
+import seedu.commands.income.TotalIncomeCommand;
 
-import seedu.commands.FindCommand;
-import seedu.commands.BalanceCommand;
+import seedu.commands.general.FindCommand;
+import seedu.commands.budget.BalanceCommand;
 
 
 import seedu.entry.Expense;
@@ -46,14 +47,12 @@ import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeDescriptionException;
 import seedu.exceptions.InvalidIncomeIndexException;
-import seedu.exceptions.SameCurrencyTypeException;
+import seedu.exceptions.InvalidSettingsDataException;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -113,7 +112,7 @@ public class Parser {
             Pattern.compile("t/(?<threshold>[^/]+)");
 
     private static final Pattern CURRENCY_CONVERSION_FORMAT =
-            Pattern.compile("c/(?<newCurrency>.+)");
+            Pattern.compile("c/(?<currency>.+)");
 
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
@@ -135,6 +134,7 @@ public class Parser {
     private static final String CHECK_BUDGET_KEYWORD = "check_budget";
     private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
     private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
+    private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
 
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
@@ -144,8 +144,10 @@ public class Parser {
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
 
-    private static final Pattern BUDGET_SETTINGS_DATA_FORMAT
-            = Pattern.compile("(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)" 
+//    private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR 
+//            + "(?<budget>.+)");
+    private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR 
+            + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)" 
             + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)" + DATA_SEPARATOR 
             + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
     
@@ -196,7 +198,8 @@ public class Parser {
     private boolean isGeneralRelatedCommand(String commandWord) {
         return (commandWord.equals(HELP_COMMAND_KEYWORD) || commandWord.equals(FIND_KEYWORD)
                 || commandWord.equals(EXIT_KEYWORD) || commandWord.equals(SHOW_GRAPH_KEYWORD)
-                || commandWord.equals(CONVERT_CURRENCY_KEYWORD) || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD));
+                || commandWord.equals(CONVERT_CURRENCY_KEYWORD) || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD)
+                || commandWord.equals(CHECK_CURRENT_CURRENCY_KEYWORD));
     }
 
     private boolean isBudgetRelatedCommand(String commandWord) {
@@ -264,9 +267,11 @@ public class Parser {
         case SHOW_GRAPH_KEYWORD:
             return prepareShowGraph(arguments);
         case CONVERT_CURRENCY_KEYWORD:
-            return prepareCurrencyConversion(arguments);
+            return prepareConvertCurrency(arguments);
         case CLEAR_ALL_ENTRIES_KEYWORD:
             return prepareClearAllEntries(arguments);
+        case CHECK_CURRENT_CURRENCY_KEYWORD:
+            return prepareCheckCurrentCurrency(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -318,11 +323,11 @@ public class Parser {
         return new FindCommand(arguments);
     }
 
-    private Command prepareCurrencyConversion(String arguments) {
+    private Command prepareConvertCurrency(String arguments) {
         final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
         if (isMatch(matcher)) {
             try {
-                CurrencyTypes newCurrencyType = extractNewCurrencyType(matcher);
+                CurrencyType newCurrencyType = extractCurrencyType(matcher);
                 return new CurrencyConversionCommand(newCurrencyType);
             } catch (InputException e) {
                 return new InvalidCommand(e.getMessage());
@@ -331,17 +336,17 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    private CurrencyTypes extractNewCurrencyType(Matcher matcher)
+    private CurrencyType extractCurrencyType(Matcher matcher)
             throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
-        String newCurrency = matcher.group("newCurrency").trim();
+        String newCurrency = matcher.group("currency").trim();
         if (newCurrency.isBlank()) {
             throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
         }
         switch (newCurrency.toUpperCase()) {
         case "USD":
-            return CurrencyTypes.USD;
+            return CurrencyType.USD;
         case "SGD":
-            return CurrencyTypes.SGD;
+            return CurrencyType.SGD;
         default:
             throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
         }
@@ -548,6 +553,13 @@ public class Parser {
     private Command prepareShowGraph(String arguments) {
         if (arguments.isBlank()) {
             return new ShowGraphCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareCheckCurrentCurrency(String arguments) {
+        if (arguments.isBlank()) {
+            return new CheckCurrentCurrencyCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
@@ -759,8 +771,10 @@ public class Parser {
         return new SetThresholdCommand(thresholdValue);
     }
     
-    public String convertBudgetSettingsToData(BudgetManager budgetManager) {
-        StringBuilder data = new StringBuilder();
+    public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager) {
+        CurrencyType currency = financialTracker.getCurrency();
+        StringBuilder data = new StringBuilder(currency.toString() + ",");
+        
         for (ExpenseCategory category : ExpenseCategory.values()) {
             // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
             if (category == ExpenseCategory.OVERALL) {
@@ -773,10 +787,10 @@ public class Parser {
         return data.toString();
     }
     
-    public ArrayList<Double> convertDataToBudgetSettings(String data) throws NumberFormatException, 
-            NullPointerException {
-        ArrayList<Double> budgetSettings = new ArrayList<Double>();
-        final Matcher matcher = BUDGET_SETTINGS_DATA_FORMAT.matcher(data.trim());
+    public ArrayList<Double> convertDataToBudgetSettings(String data) throws NumberFormatException,
+            NullPointerException, InvalidSettingsDataException {
+        ArrayList<Double> budgetSettings = new ArrayList<>();
+        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
         if (matcher.matches()) {
             for (ExpenseCategory category : ExpenseCategory.values()) {
                 // Not expected to have a budget related to NULL
@@ -785,7 +799,18 @@ public class Parser {
                 }
                 budgetSettings.add(Double.parseDouble(matcher.group(category.toString().toLowerCase())));
             }
+            return budgetSettings;
         }
-        return budgetSettings;
+        throw new InvalidSettingsDataException();
+    }
+    
+    public CurrencyType convertDataToCurrencySetting(String data) throws InvalidCurrencyTypeException,
+            BlankCurrencyTypeException, InvalidSettingsDataException {
+        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            return extractCurrencyType(matcher);
+        }
+        throw new InvalidSettingsDataException();
+        
     }
 }
