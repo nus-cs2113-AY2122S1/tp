@@ -44,9 +44,7 @@ public class Storage {
                 }
                 if (line.startsWith("add-employee")) {
                     String[] command = line.trim().split("/", 5);
-                    employeeParser.addEmployee(command, employeeList);
-                    //Employee newEmployee = decodeEmployee(line);
-                    //employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
+                    employeeParser.addEmployeeFromStorage(command, employeeList);
                 } else if (line.startsWith("add-ingredient")) {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);

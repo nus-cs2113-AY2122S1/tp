@@ -5,13 +5,11 @@ public class Employee {
     public enum employmentStatus {
         PERM,
         TEMP,
-        ADHOC,
-        UNCLASSIFIED
+        ADHOC
     }
 
     private String name;
     private int phoneNum;
-
     private employmentStatus status;
     private int salary;
 
