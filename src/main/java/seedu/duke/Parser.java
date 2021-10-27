@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -168,19 +169,24 @@ public class Parser {
      * @return description of task.
      */
     public static TrainingSchedule getTrainingDescription(String query) {
-        String name = "";
-        String venue = "";
-        String time = "";
-
         String regex = "(\\/[a-z])+";
 
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
         String[] words = query.trim().split(regex);
+        int parameterSize = words.length;
+
+        String name = "";
+        String venue = "";
+        String time = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
+            boolean overParameterSize = wordIndex >= parameterSize;
+            if (overParameterSize) {
+                break;
+            }
             switch (matcher.group()) {
             case "/n":
                 name = words[wordIndex].trim();
@@ -189,7 +195,7 @@ public class Parser {
                 time = words[wordIndex].trim();
                 break;
             case "/v":
-                venue = words[wordIndex].trim();
+                venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             default:
                 break;
@@ -259,20 +265,21 @@ public class Parser {
         Matcher matcher = pattern.matcher(query);
 
         String[] words = query.trim().split(regex);
+        int parameterSize = words.length;
 
         String memberName = "";
-        String studentNumber = "";
-        char gender = ' ';
-        int phoneNumber = 0;
-
         String trainingName = "";
         String presentOrAbsent = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
+            boolean overParameterSize = wordIndex >= parameterSize;
+            if (overParameterSize) {
+                break;
+            }
             switch (matcher.group()) {
             case "/m":
-                memberName = words[wordIndex].trim();
+                memberName = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/n":
                 trainingName = words[wordIndex].trim();
