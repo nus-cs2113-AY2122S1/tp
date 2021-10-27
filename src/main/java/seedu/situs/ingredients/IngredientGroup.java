@@ -113,7 +113,8 @@ public class IngredientGroup {
 
         for (int i = 1; i <= getIngredientGroupSize(); i++) {
             try {
-                printedGroup += "\t\t" + getIngredientInfo(i);
+                printedGroup += "\t\t" + (IngredientList.getInstance().findIngredientIndexInList(this.groupName) + 1)
+                        + "." + i + ". " + getIngredientInfo(i);
                 if (i < getIngredientGroupSize()) {
                     printedGroup += '\n';
                 }
@@ -121,6 +122,7 @@ public class IngredientGroup {
                 e.printStackTrace();
             }
         }
+
         return groupName + " | Total Amount: " + String.format("%.1f", totalAmount) + " kg"
                 + '\n' + printedGroup;
     }
