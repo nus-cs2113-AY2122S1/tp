@@ -42,13 +42,8 @@ public class DeleteIngredientCommand extends Command {
         // TODO: Don't allow deleting ingredient if there is a recipe that uses that ingredient
 
         assert ingredients != null : "Ingredient repository cannot be null";
-        assert recipes != null;
-        final IngredientStorage ingredient;
-        try {
-            ingredient = ingredients.remove(ingredientName);
-        } catch (NotFoundException e) {
-            return MESSAGE_INGREDIENT_NOT_FOUND;
-        }
+        assert recipes != null : "Recipe list cannot be null";
+
         StringBuilder recipesContainingIngredient = new StringBuilder();
         for (Recipe recipe : recipes.getRecipes().values()) {
             if (recipe.contains(ingredientName)) {
@@ -57,6 +52,13 @@ public class DeleteIngredientCommand extends Command {
         }
         if (recipesContainingIngredient.length() > 0) {
             return String.format(MESSAGE_INGREDIENT_USED_IN_RECIPE, recipesContainingIngredient);
+        }
+
+        final IngredientStorage ingredient;
+        try {
+            ingredient = ingredients.remove(ingredientName);
+        } catch (NotFoundException e) {
+            return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         return String.format(MESSAGE_INGREDIENT_DELETED, ingredient, ingredients.size());
     }
