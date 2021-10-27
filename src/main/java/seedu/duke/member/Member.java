@@ -1,5 +1,7 @@
 package seedu.duke.member;
 
+import java.util.Locale;
+
 public class Member {
 
     protected String name;
@@ -83,7 +85,7 @@ public class Member {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 
     public String getStudentNumber() {
@@ -91,7 +93,7 @@ public class Member {
     }
 
     public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
+        this.studentNumber = studentNumber.toUpperCase(Locale.ROOT);
     }
 
     public String getGender() {
@@ -99,7 +101,7 @@ public class Member {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender = gender.toUpperCase(Locale.ROOT);
     }
 
     public String getPhoneNumber() {

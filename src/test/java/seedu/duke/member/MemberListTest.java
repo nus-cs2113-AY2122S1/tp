@@ -43,12 +43,16 @@ class MemberListTest {
 
     @Test
     void deleteMember() {
-        fullMemberList.deleteMember(5);
-        fullMemberList.deleteMember(4);
-        fullMemberList.deleteMember(3);
-        fullMemberList.deleteMember(2);
-        fullMemberList.deleteMember(1);
-        assertTrue(fullMemberList.getMemberList().size() == 0);
+        try {
+            fullMemberList.deleteMemberByIndex(5);
+            fullMemberList.deleteMemberByIndex(4);
+            fullMemberList.deleteMemberByIndex(3);
+            fullMemberList.deleteMemberByIndex(2);
+            fullMemberList.deleteMemberByName("TAN TECK HWEE");
+            assertTrue(fullMemberList.getMemberList().size() == 0);
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test

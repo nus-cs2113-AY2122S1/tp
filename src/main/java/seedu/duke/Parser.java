@@ -1,17 +1,17 @@
 package seedu.duke;
 
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
-import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
+
+    static String regex = "(\\/[a-z])+";
 
     public static boolean hasListMemberKeyword(String arg) {
         return arg.trim().matches("^list /m");
@@ -125,8 +125,6 @@ public class Parser {
         String venue = "";
         String time = "";
 
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
@@ -161,8 +159,6 @@ public class Parser {
      * @return Member according to user input.
      */
     public static Member getMemberDetails(String query) {
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
@@ -181,13 +177,13 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                name = words[wordIndex].trim();
                 break;
             case "/s":
-                studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                studentNumber = words[wordIndex].trim();
                 break;
             case "/g":
-                gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                gender = words[wordIndex].trim();
                 break;
             case "/p":
                 phoneNumber = words[wordIndex].trim();
@@ -208,17 +204,12 @@ public class Parser {
      * @return Attendance according to user input.
      */
     public static Attendance getAttendanceDetails(String query) {
-        String regex = "(\\/[a-z])+";
-
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(query);
 
         String[] words = query.trim().split(regex);
 
         String memberName = "";
-        String studentNumber = "";
-        char gender = ' ';
-        int phoneNumber = 0;
 
         String trainingName = "";
         String presentOrAbsent = "";
@@ -251,13 +242,31 @@ public class Parser {
      */
     public static Integer getIndex(String query) {
         try {
-            String regex = "(\\/[a-z])+";
             String[] words = query.trim().split(regex);
             int indexNumber = Integer.parseInt(words[1].trim());
             return indexNumber;
         } catch (NumberFormatException e) {
             System.out.println("Index must be a number");
             return -1;
+        }
+    }
+
+    /**
+     * Returns parameter as given by user
+     *
+     * @param query String user input.
+     * @return Object parameter that is given in query which will either be int or string as given by user.
+     */
+    public static Object getParameter(String query) {
+        String[] words = query.trim().split(regex);
+        try {
+            int indexNumber = Integer.parseInt(words[1].trim());
+            return indexNumber;
+        } catch (NumberFormatException e) {
+            String parameter = words[1].trim();
+            return parameter;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
     }
 
@@ -276,14 +285,12 @@ public class Parser {
      * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param members ArrayList of tasks
-     * @param query   user input
+     * @param query user input
      */
-    public static String findInMembers(MemberList members, String query) {
+    public static String findInMembers(String query) {
         try {
-            String regex = "(\\/[a-z])+";
             String[] words = query.trim().split(regex);
-            return words[1].trim().toUpperCase(Locale.ROOT);
+            return words[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return "";
         }
