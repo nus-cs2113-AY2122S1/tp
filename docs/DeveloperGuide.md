@@ -20,6 +20,15 @@
  - `Ingredient` stores the information of the ingredients, which are its name and unit, 
    e.g. Chicken and grams.
 
+### Parser
+
+This is a (partial) class diagram of the Parser component. Note that the `Parser` class in actuality is dependent on 
+many of the classes depicted in the diagram: `SingleArgPrefix`, `MultipleArgPrefix`, `OptionalArgPrefix`,
+`ExpiryDateParser`, `UnitParser`, `IngredientParser`, `QuantityParser`, `RecipeParser`. The dependencies have been 
+omitted from the diagram for simplicity.
+
+![](diagrams/ParserClassDiagram.png)
+
 
 
 ## Implementation
