@@ -340,7 +340,7 @@ public class Ui {
     }
 
     public void printOverallBudgetWarning(String month, double currAmount, double limit) {
-        printLine();
+        
         System.out.printf("You are almost reaching the %s OVERALL budget: $%.2f/$%.2f",
                 month, currAmount, limit);
         System.out.print(newLine);
@@ -349,7 +349,7 @@ public class Ui {
     }
 
     public void printOverallBudgetExceeded(String month, double currAmount, double limit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s OVERALL budget: $%.2f/$%.2f", month, currAmount, limit);
         System.out.print(newLine);
         System.out.println("Consider readjusting your " + month + " OVERALL budget!");
@@ -358,7 +358,7 @@ public class Ui {
 
     public void printOverallExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
                                                   double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -372,7 +372,7 @@ public class Ui {
 
     public void printOverallExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
                                                    double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -387,7 +387,7 @@ public class Ui {
     public void printOverallNotExceededBudgetWarning(String month, String budgetName, double currAmount, double limit,
                                                   double overallAmount, double overallLimit) {
 
-        printLine();
+
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
@@ -408,7 +408,7 @@ public class Ui {
 
     public void printOverallNotExceededBudgetExceeded(String month, String budgetName, double currAmount, double limit,
                                                      double overallAmount, double overallLimit) {
-        printLine();
+
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
         System.out.print(newLine);
