@@ -33,6 +33,11 @@ individual class files, each corresponding to a specific command, that inherit f
 
 ![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
 
+#### Edit Command 
+
+The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
+
+![EditCommandSequence](img/EditCommandSequence.png)
 
 ## Product scope
 ### Target user profile
