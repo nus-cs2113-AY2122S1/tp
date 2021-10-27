@@ -21,7 +21,6 @@ public class DeleteExpiredIngredientCommand extends Command {
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         Boolean haveExpired = ingredients.deleteExpiredIngredients();
-        SaveData.saveIngredientRepoToFile(ingredients);
         if (haveExpired) {
             return MESSAGE_DELETED_ALL_EXPIRED;
         } else {

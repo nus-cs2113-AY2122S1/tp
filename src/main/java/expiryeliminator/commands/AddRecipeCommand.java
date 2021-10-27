@@ -68,7 +68,6 @@ public class AddRecipeCommand extends Command {
 
         try {
             recipes.add(recipe);
-            SaveData.saveRecipeListToFile(recipes);
         } catch (DuplicateDataException e) {
             return String.format(MESSAGE_RECIPE_ALREADY_EXISTS, name);
         }

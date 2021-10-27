@@ -63,7 +63,6 @@ public class UpdateRecipeCommand extends Command {
         try {
             recipes = recipes.updateRecipe(recipes, recipe);
             if (recipes != null) {
-                SaveData.saveRecipeListToFile(recipes);
                 return String.format(MESSAGE_RECIPE_UPDATED, recipe);
             } else {
                 return String.format(RECIPE_UPDATE_FAIL, recipe);

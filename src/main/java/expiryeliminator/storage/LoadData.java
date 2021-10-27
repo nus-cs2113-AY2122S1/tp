@@ -59,7 +59,7 @@ public class LoadData {
         String theDigits = line.replaceAll("[^0-9]", "");
         int lengthOfQuantity = theDigits.length();
         int quantityStartIndex = line.indexOf(theDigits);
-        int unitStartIndex = quantityStartIndex + lengthOfQuantity;
+        int unitStartIndex = quantityStartIndex + lengthOfQuantity + 1;
         int unitEndIndex = line.indexOf(")");
         int quantity = Integer.parseInt(theDigits);
         String unit = line.substring(unitStartIndex, unitEndIndex);

@@ -71,7 +71,6 @@ public class AddIngredientCommand extends Command {
             } else {
                 ingredientStorage = ingredients.add(name, unit, quantity, expiryDate);
             }
-            SaveData.saveIngredientRepoToFile(ingredients);
         } catch (DuplicateDataException e) {
             return String.format(MESSAGE_INGREDIENT_ALREADY_EXISTS, name);
         }
