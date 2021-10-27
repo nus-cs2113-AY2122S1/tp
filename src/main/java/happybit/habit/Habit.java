@@ -226,7 +226,31 @@ public class Habit {
         return this.habitName + FROM + currInterval.getDescription();
     }
 
+    /**
+     * Returns consecutive streak for current habit.
+     *
+     * @return Longest chain streak for the habit
+     */
+    public int getStreak() {
+        int streak = 0;
+        int curr_streak = 0;
+        boolean isConsecutive = false;
 
+        for (Interval interval : intervals) {
+            if (interval.getDone()) {
+                isConsecutive = true;
+                curr_streak ++;
+            } else {
+                isConsecutive = false;
+                if (curr_streak >= streak) {
+                    streak = curr_streak;
+                }
+                curr_streak = 0;
+            }
+        }
+
+        return streak;
+    }
 
     /*
      * NOTE : ==================================================================
