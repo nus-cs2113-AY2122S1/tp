@@ -1,5 +1,6 @@
 package seedu.typists.game;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameRecord {
@@ -31,38 +32,63 @@ public class GameRecord {
     }
 
     public String getGameMode() {
+
         return gameMode;
     }
+
 
     public double getTimeElapsed() {
         return timeElapsed;
     }
 
     public int getErrorWordCount() {
+
         return errorWordCount;
     }
 
     public int getCorrectWordCount() {
+
         return correctWordCount;
     }
 
     public int getTotalWordCount() {
+
         return totalWordCount;
     }
 
     public double getErrorWordPercentage() {
+
         return errorWordPercentage;
     }
 
     public double getCorrectWordPercentage() {
+
         return correctWordPercentage;
     }
 
     public double getWpm() {
+
         return wpm;
     }
 
     public ArrayList<String> getErrorWords() {
         return errorWords;
+    }
+
+    public String getStringFormat() {
+        String separator = "|";
+        String formatted = gameMode
+                + separator
+                + timeElapsed
+                + separator
+                + errorWordCount
+                + separator
+                + correctWordCount
+                + separator
+                + totalWordCount
+                + separator
+                + errorWords.toString();
+        return formatted;
+
     }
 }
