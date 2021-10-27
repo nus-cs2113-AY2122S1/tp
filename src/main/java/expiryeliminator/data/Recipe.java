@@ -94,6 +94,4 @@ public class Recipe {
         }
         return ingredientsWithQuantities.toString();
     }
-
-    //TODO(vincentlauhl): Allow users to modify recipe.
 }
