@@ -80,16 +80,16 @@ public class MainParser {
         String commandWord = getCommandWord(userInput);
         CommandType commandType;
         switch (commandWord) {
-        case ADD_CONTACT_COMD:
-        case EDIT_CONTACT_COMD:
-        case DELETE_CONTACT_COMD:
+        case ADD_CONTACT_COMD: // Fallthrough
+        case EDIT_CONTACT_COMD: // Fallthrough
+        case DELETE_CONTACT_COMD: // Fallthrough
         case IMPORT_COMD:
             commandType = CommandType.MANIPULATION;
             break;
-        case VIEW_CONTACT_COMD:
-        case SEARCH_COMD:
-        case LIST_COMD:
-        case HELP_COMD:
+        case VIEW_CONTACT_COMD: // Fallthrough
+        case SEARCH_COMD: // Fallthrough
+        case LIST_COMD: // Fallthrough
+        case HELP_COMD: // Fallthrough
         case PERSONAL_CONTACT_COMD:
             commandType = CommandType.QUERY;
             break;
