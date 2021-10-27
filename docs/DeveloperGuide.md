@@ -77,11 +77,11 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 
 The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
-When user keys list ```m/Month```, The Parser class will analyse the whole command, extract “m/” and “MONTH”, and analyse whether MONTH is an integer or “all”. The boolean isListAll will be assigned as true if the value after “m/” is “all”. Then the class ListRecordsCommand will execute the listing by using TextUi.showRecordsListView(recordList, MONTH, isListAll)).
+When user keys ```list m/Month [c/CATEGORY]```, The Parser class will analyse the whole command, extract "m/", "MONTH", "c/" and "CATEGORY", analyse whether MONTH is an integer or “all”, and check whether CATEGORY has been assigned. The boolean isListAll will be assigned as true if the value after “m/” is “all”. Then the class ListRecordsCommand will execute the listing by using TextUi.showRecordsListView(recordList, MONTH, isListAll)).
 
 Similarly, we have our Parser to parse the commands for listing of expenditures
-* ```list m/Month``` — If the value at the position after ‘m/’ is an integer, we use hashtable to list the budget and all expenditures of a  specific month.
-* ```list m/all``` — If the value at the position after ‘m/’ is “all”, we use for loop to list all the budget and expenditures of every month.
+* ```list m/Month [c/CATEGORY]``` — If the value at the position after ‘m/’ is an integer, we use hashtable to list the budget and all expenditures of a  specific month.
+* ```list m/all [[c/CATEGORY]``` — If the value at the position after ‘m/’ is “all”, we use for loop to list all the budget and expenditures of every month.
 
 Given below is an example usage scenario and how the list feature behaves at each step.
 
