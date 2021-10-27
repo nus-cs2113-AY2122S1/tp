@@ -93,6 +93,9 @@ ls
 rm all
 asdsad
 ls
+rm 0 -e -te -tw
+y
+view 0
 rm all
 y
 ls
