@@ -19,8 +19,8 @@ public class DeleteSingleExpenditureCommand extends DeleteCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        TextUi.showSingleExpenditureDeletedMessage(index,
-                allRecordList.getExpenditure(index - 1, month));
-        allRecordList.deleteExpenditure(index, month);
+        TextUi.showSingleExpenditureDeletedMessage(index + 1,
+                allRecordList.getExpenditure(index, month));
+        allRecordList.deleteExpenditure(index + 1, month);
     }
 }

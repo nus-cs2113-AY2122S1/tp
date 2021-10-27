@@ -66,7 +66,7 @@ public class RecordList {
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
         loanRecords.add(new Loan(name, amount, date));
         numberOfRecords += 1;
-        assert getLoanListSize() == numberOfRecords;
+        //assert getLoanListSize() == numberOfRecords;
     }
 
     public void deleteBudget() {
@@ -78,13 +78,13 @@ public class RecordList {
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index - 1);
         numberOfRecords -= 1;
-        assert getExpenditureListSize() == numberOfRecords;
+        //assert getExpenditureListSize() == numberOfRecords;
     }
 
     public void deleteLoan(int index) {
         loanRecords.remove(index - 1);
         numberOfRecords -= 1;
-        assert getLoanListSize() == numberOfRecords;
+        //assert getLoanListSize() == numberOfRecords;
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {
