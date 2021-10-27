@@ -1,16 +1,40 @@
 # Developer Guide
 
-## Acknowledgements
+## Table of Content
+- [1. Acknowledgements](#1-acknowledgements)
+- [2. Introduction](#2-introduction)
+- [3. Design](#3-design)
+  - [3.1 Architecture](#31-architecture)
+    - [3.1.1 Main Components](#311-main-components)
+    - [3.1.2 Component Interaction](#312-component-interaction)
+  - [3.2 Ui Component](#32-ui-component)
+  - [3.3 Parser Component](#33-parser-component)
+  - [3.4 Scheduler Component](#34-scheduler-component)
+  - [3.5 Storage Component](#35-storage-component)
+  - [3.6 Command Class](#36-command-class)
+- [4. Implementation](#4-implementation)
+  - [4.1 Switch View Feature](#41-switch-view-feature)
+  - [4.2 Find Feature](#42-find-feature)
+  - [4.3 Edit Feature](#43-edit-feature)
+  - [4.4 Appointment Management](#44-appointment-management)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
 
-Inspired by AB3's [Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+## 1. Acknowledgements
 
-## Design
+* Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
 
-### Architecture
+## 2. Introduction
+
+MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
+scheduler appointments between them and medical staff.
+
+## 3. Design
+
+### 3.1 Architecture
 
 Given below is a quick overview of the main components of MedBot and how they interact with one another.
 
-#### Main Components
+#### 3.1.1 Main Components
 
 The main class of MedBot is the `MedBot` class. It is responsible for initialising the other core components of MedBot
 at application startup and for handling the interactions between these components.
@@ -24,14 +48,14 @@ The 4 core components of MedBot are:
 
 In addition, the `Command` class facilitates the execution of user instructions.
 
-#### Component Interaction
+#### 3.1.2 Component Interaction
 
 Given below is a simplified sequence diagram of how the core components of MedBot interact with each other when the user inputs the
 command `delete 1`.
 
 ![MedBot Architecture](diagrams/MedBot_architecture.png)
 
-### Ui Component
+### 3.2 Ui Component
 
 The Ui Component is handled by the `Ui` class. It is the main class that a user directly interacts with. This class is
 responsible for reading user inputs and printing outputs to users.
@@ -48,7 +72,7 @@ parses `help delete` input given by a user.
 
 ![Ui Sequence Diagram](diagrams/Ui_sequence_diagram.png)
 
-### Parser Component
+### 3.3 Parser Component
 
 The Parser Component is responsible for parsing the user input and returning the corresponding command class to be
 executed.
@@ -70,7 +94,7 @@ The sequence diagram below better illustrates the working process described abov
 
 <em>(User is trying to add a patient's information in the PatientInfoView)</em>
 
-### Scheduler Component
+### 3.4 Scheduler Component
 
 The Scheduler Component is responsible for the storage and modification of patient, staff and appointment information.
 
@@ -78,7 +102,7 @@ Here is a partial class diagram to better illustrate the Scheduler Component.
 
 ![SchedulerClassDiagram](diagrams/SchedulerClassDiagram.png)
 
-#### Overview of the `Scheduler` Class
+#### Scheduler Class
 
 The `Scheduler` class consists of 3 internal lists, `patientList`, `medicalStaffList` and `schedulerAppointmentList`,
 that store patient, staff and appointment information respectively. It has various public methods for the viewing and
@@ -97,9 +121,9 @@ For example:
 the `Scheduler` object will be called.
 * The `addStaff(Person)` method will then add the `Person` to the `medicalStaffList`
 
-### Storage Component
+### 3.5 Storage Component
 
-### Command Class
+### 3.6 Command Class
 
 The Command class and its subclasses are responsible for handling the execution of user input.
 
@@ -132,11 +156,11 @@ Given below are class diagrams of how the `Command` class and its subclasses are
 
 ![Appointment Command Class Diagram](diagrams/appointment_command.png)
 
-## Implementation
+## 4. Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Switch view feature
+### 4.1 Switch view feature
 
 #### Implementation
 
@@ -155,7 +179,7 @@ Each command evokes the `Parser#setViewType(ViewType)` method, which will set th
 
 [Design Considerations to be added]
 
-### Find feature
+### 4.2 Find feature
 
 #### Functionality
 
@@ -191,7 +215,7 @@ Step 5.
 The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
 `Ui#getFindPatientsMessage()`.
 
-### Edit feature
+### 4.3 Edit feature
 
 #### Functionality
 
@@ -228,7 +252,7 @@ Step 5.
 The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
 
 
-### Appointment management
+### 4.4 Appointment management
 
 #### Functionality
 
@@ -270,7 +294,7 @@ Below is a simplified sequence diagram of the `addAppointment(Appointment)` meth
 
 ![Add Appointment Sequence Diagram](diagrams/AddAppointmentSequenceDiagram.png)
 
-## Product scope
+## Appendix A: Product scope
 
 ### Target user profile
 
