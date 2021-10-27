@@ -49,7 +49,7 @@ public class GoalList {
     public GoalType getChosenGoalType() {
         GoalType goalType = GoalType.DEFAULT;
         try {
-            goalType = getGoal(chosenGoalIndex).goalType;
+            goalType = this.getGoal(chosenGoalIndex).goalType;
         } catch (HaBitCommandException e) {
             // Exception should never be thrown here
         }
@@ -120,10 +120,10 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        habit = updateHabitEndDate(goal, habit);
-        habit.populateIntervalsDuringHabitCreation();
-        goal.addHabit(habit);
-        printManager.printAddedHabit(habit.getHabitName(), goal.getDescription());
+        Habit newHabit = updateHabitEndDate(goal, habit);
+        newHabit.populateIntervalsDuringHabitCreation();
+        goal.addHabit(newHabit);
+        printManager.printAddedHabit(newHabit.getHabitName(), goal.getDescription());
     }
 
     /**
@@ -169,9 +169,9 @@ public class GoalList {
      */
     public void doneHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager)
             throws HaBitCommandException {
-        Goal goal = getGoal(goalIndex);
+        Goal goal = this.getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
-        Habit habit = getHabit(habitList, habitIndex);
+        Habit habit = this.getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
         printManager.printDoneHabit(goal.getDescription(), habit, new Date());
     }

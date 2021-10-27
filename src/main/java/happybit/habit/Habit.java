@@ -38,14 +38,12 @@ public class Habit {
      * @param startDate      Start date of a habit.
      * @param endDate        End date of a habit.
      * @param intervalLength integer storing length of interval for habit.
-     * @param intervals      List storing all the intervals.
      */
-    public Habit(String habitName,  Date startDate, Date endDate, int intervalLength, ArrayList<Interval> intervals) {
+    public Habit(String habitName,  Date startDate, Date endDate, int intervalLength) {
         this.habitName = habitName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.intervalLength = intervalLength;
-        this.intervals = intervals;
     }
 
     /**
@@ -101,6 +99,10 @@ public class Habit {
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public void setIntervals(ArrayList<Interval> intervals) {
+        this.intervals = intervals;
     }
 
     /**
