@@ -32,6 +32,9 @@ public class Messages {
     public static final String LIST_LOANED_MESSAGE = "  (+) Listing out loaned items in library";
     public static final String LIST_FORMAT_INCORRECT = " (!) Invalid listing command" + System.lineSeparator()
             + " (!) Format: 'list all' OR 'list available' OR 'list loaned'";
+    // List deadline
+    public static final String LIST_DEADLINE_TODAY = "  (+) Listing out loaned items that have to be returned today";
+    public static final String LIST_DEADLINE_OVERDUE = "  (+) Listing out loaned items that are overdue";
     // Search
     public static final String SEARCH_MESSAGE = "  (+) Here are the searching results in library";
     public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()
