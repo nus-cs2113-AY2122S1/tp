@@ -201,7 +201,7 @@ public class IngredientList {
                 .remove(ingredientNumber);
 
         if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
-            ingredientList.remove(groupNumber);
+            ingredientList.remove(groupNumber - 1);
         }
 
         storage.writeIngredientsToMemory(ingredientList);
