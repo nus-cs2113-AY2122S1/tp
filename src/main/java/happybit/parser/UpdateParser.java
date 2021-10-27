@@ -78,7 +78,7 @@ public class UpdateParser extends Parser {
         if (strGoalIndex == null || strGoalIndex.equals(FLAG_GOAL_INDEX)) {
             throw new HaBitParserException(ERROR_GOAL_INDEX_FORMAT);
         }
-        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_INVALID_GOAL_NUMBER) - 1;
+        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
     }
 
     private static int getHabitIndex(String[] parameters) throws HaBitParserException {
