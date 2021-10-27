@@ -12,11 +12,6 @@ import seedu.ui.UserInputTextUi;
 public class DeleteContactCommand extends Command {
     private static final String ACKNOWLEDGE_DELETE = "y";
     private static final int DELETE_ALL_CONTACTS = -2;
-    public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
-    public static final int EMAIL_INDEX = 5;
 
     private final int contactIndex;
     private final boolean[] hasDeletedDetails;
@@ -74,21 +69,7 @@ public class DeleteContactCommand extends Command {
         TextUi.confirmDeleteFieldMessage(hasDeletedDetails, deletedContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
         if (userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE)) {
-            if (hasDeletedDetail[GITHUB_INDEX]) {
-                deletedContact.setGithub(null);
-            }
-            if (hasDeletedDetail[LINKEDIN_INDEX]) {
-                deletedContact.setLinkedin(null);
-            }
-            if (hasDeletedDetail[TELEGRAM_INDEX]) {
-                deletedContact.setTelegram(null);
-            }
-            if (hasDeletedDetail[TWITTER_INDEX]) {
-                deletedContact.setTwitter(null);
-            }
-            if (hasDeletedDetail[EMAIL_INDEX]) {
-                deletedContact.setEmail(null);
-            }
+            deletedContact.deleteContactFields(hasDeletedDetails);
             TextUi.deleteFieldsMessage(deletedContact);
         } else {
             assert !userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE);

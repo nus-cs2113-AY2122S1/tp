@@ -61,6 +61,10 @@ public class Contact {
     }
 
     //@@author marcusbory
+    public void deleteContactFields(boolean[] hasDeletedDetails) {
+        for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) {
+            if (hasDeletedDetails[i]) {
+                setDetail(null, i);
             }
         }
     }
