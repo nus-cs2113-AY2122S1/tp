@@ -40,16 +40,17 @@ public class Import {
                     goalList.addGoal(ImportParser.goalParser(lineData));
                     break;
                 case HABIT_TYPE:
-                    Habit habit = ImportParser.habitParser(lineData);
-                    int goalIndex = Integer.parseInt(lineData[GOAL_INDEX]);
                     ArrayList<Interval> tempIntervalList = new ArrayList<>();
 
-                    while (lineData[GOAL_INDEX].equals(INTERVAL_TYPE)) {
+                    if (lineData[GOAL_INDEX].equals(INTERVAL_TYPE)) {
                         tempIntervalList.add(ImportParser.intervalParser(lineData));
-                    }
+                    } else {
+                        Habit habit = ImportParser.habitParser(lineData);
+                        int goalIndex = Integer.parseInt(lineData[GOAL_INDEX]);
 
-                    habit.setIntervals(tempIntervalList);
-                    goalList.addHabitToGoal(habit, goalIndex);
+                        habit.setIntervals(tempIntervalList);
+                        goalList.addHabitToGoal(habit, goalIndex);
+                    }
                     break;
                 default:
                     throw new HaBitStorageException("error while loading");

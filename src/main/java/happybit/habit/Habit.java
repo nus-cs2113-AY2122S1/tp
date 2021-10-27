@@ -91,6 +91,10 @@ public class Habit {
         return this.intervals.size();
     }
 
+    public ArrayList<Interval> getIntervals() {
+        return this.intervals;
+    }
+
     /**
      * Setter for endDate of habit.
      * Used in AddHabitCommand to manually set the endDate since goalList is only accessible there.

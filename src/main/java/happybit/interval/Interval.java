@@ -45,6 +45,10 @@ public class Interval {
         return this.endDate;
     }
 
+    public Date getCompletedDate() {
+        return this.completedDate;
+    }
+
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
