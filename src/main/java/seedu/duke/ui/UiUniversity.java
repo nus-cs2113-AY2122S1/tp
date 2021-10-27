@@ -9,9 +9,9 @@ public class UiUniversity {
 
     public static void printUniversity(University uni, boolean printMC) {
         Ui.printIndex(uni.getIndex(), false);
-        StringBuilder padding = Ui.stringPadder(uni.getName(), PaddingType.UNIVERSITYNAME);
         String output;
         if (printMC) {
+            StringBuilder padding = Ui.stringPadder(uni.getName(), PaddingType.UNIVERSITYNAME);
             output = uni.getName() + " " + padding + " " + uni.getMC();
         } else {
             output = uni.getName();
