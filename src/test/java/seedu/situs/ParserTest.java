@@ -19,16 +19,16 @@ public class ParserTest {
         }
     }
 
-    /*@Test
+    @Test
     public void parseDeleteCommand_taskNumberInvalidInput_expectException() {
         try {
-            String inputString = "delete -1";
+            String inputString = "delete 1.100";
             String resultMsg = Parser.parse(inputString);
             fail();
-        } catch (DukeException e) {
+        } catch (SitusException e) {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
-    }*/
+    }
 
     @Test
     public void parseCommand_invalidCommandInput_success() throws SitusException {
