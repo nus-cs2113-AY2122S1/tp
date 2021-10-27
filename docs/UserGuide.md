@@ -53,7 +53,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
-`java -jar tp.java` in the command line. `Stonks XD` will start up.
+`java -jar StonksXD.jar` in the command line. `Stonks XD` will start up.
 5. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
 to show all available commands and their format.)
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
