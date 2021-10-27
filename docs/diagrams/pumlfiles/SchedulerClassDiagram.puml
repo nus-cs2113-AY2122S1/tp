@@ -1,0 +1,119 @@
+@startuml
+!define SCHEDULER_COLOR #CDF260
+
+skinparam class {
+    BackgroundColor SCHEDULER_COLOR
+}
+
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+
+package "MedBot" <<Rectangle>> {
+}
+
+package "Storage" <<Rectangle>> {
+}
+
+package "Command" <<Rectangle>> {
+}
+
+package "Scheduler Component" <<Rectangle>> {
+    class Scheduler
+    class "{abstract}\nPersonList" as PersonList
+    class PatientList
+    class "MedicalStaffList" as StaffList
+    class SchedulerAppointmentList
+    class "{abstract}\nPerson" as Person
+    class Patient
+    class Staff
+    class PersonalAppointmentList
+    class Appointment
+    note left: Not drawn: appointment is an\nassociation class between\nPatient and Staff
+    enum "<<enumeration>>\nPersonType" as PersonType
+}
+
+MedBot -down-> "1" Scheduler
+Storage .right.> Scheduler
+Command .up.> Scheduler
+
+MedBot -[hidden]down-> Storage
+Storage -[hidden]down-> Command
+
+class Scheduler {
+    +addPatient(patient: Person): int
+    +deletePatient(patientId: int): void
+    +editPatient(patientId: int, newPatientData: Person): void
+    +addStaff(staff: Person): int
+    +deleteStaff(staffId: int): void
+    +editStaff(staffId: int, newStaffData: Person): void
+    +addAppointment(appointment: Appointment): int
+    +deleteAppointment(appointmentId: int): void
+    +editAppointment(appointmentId: int, newAppointment: Appointment): void
+}
+
+class PersonList {
+    +addPerson(person: Person)
+    +editPerson(personId: int, person: newPersonData)
+    +deletePerson(personId: int)
+}
+
+class Person {
+    #icNumber: String
+    #name:String
+    #phoneNumber: String
+    #emailAddress: String
+    #residentialAddress: String
+    #isArchived: boolean
+}
+
+enum PersonType {
+    PATIENT
+    STAFF
+}
+
+class PersonalAppointmentList {
+    +addAppointment(appointment: Appointment): void
+    +deleteAppointment(appointmentId: int): void
+    +getAppointmentId(dateTimeCode: int): int
+}
+
+class SchedulerAppointmentList {
+    +addAppointment(appointment: Appointment): int
+    +deleteAppointment(appointmentId: int): void
+    +getAppointment(appointmentId: int): Appointment
+}
+
+class Appointment {
+    -appointmentId: int
+    -patientId: int
+    -medicalStaffId: int
+    -dateTimeCode: int
+}
+
+
+
+PersonList <|-down- PatientList
+PersonList <|-down- StaffList
+Person <|-up- Patient
+Person <|-up- Staff
+Person -right-> "1" PersonType
+Person -left-> "1" PersonalAppointmentList
+PatientList o-down- "*" Patient
+StaffList o-down- "*" Staff
+Scheduler -right-> "1" PatientList
+Scheduler -right-> "1" StaffList
+Scheduler -down--> "1" SchedulerAppointmentList
+PersonalAppointmentList o-down- "*" Appointment
+SchedulerAppointmentList o-down- "*" Appointment
+
+
+SchedulerAppointmentList -[hidden]right- PersonalAppointmentList
+
+
+
+note as MethodsNote
+Note: Not all methods are
+included in this diagram.
+end note
+@enduml

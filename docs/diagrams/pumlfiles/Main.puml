@@ -40,6 +40,9 @@ command --> medbot ACTIVATION_COLOR_1:
 destroy command
 medbot -> storage ACTIVATION_COLOR_6: saveData()
 storage --> medbot
-medbot -->user
+medbot --> ui
+ui --> user
+
+
 
 @enduml
