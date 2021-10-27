@@ -23,8 +23,6 @@ public class EmployeeParser {
             masterList.totalEmployee += 1;
 
             EmployeeUI.printAddEmployeeMessage(masterList);
-            logger.log(Level.FINE, "end of adding employee");
-            assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
         } catch (ArrayIndexOutOfBoundsException e) {
             logger.log(Level.FINE, "error input: out of bound index");
         } catch (NumberFormatException e) {
@@ -32,7 +30,8 @@ public class EmployeeParser {
         } catch (InvalidParameterException e) {
             logger.log(Level.FINE, "error input: employee status format incorrect");
         }
-
+        logger.log(Level.FINE, "end of adding employee");
+        assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
     public void addEmployeeFromStorage(String[] command, EmployeeList masterList) {
@@ -49,6 +48,7 @@ public class EmployeeParser {
     }
 
     private Employee.employmentStatus convertToStatus(String input) throws InvalidParameterException{
+        logger.log(Level.FINE, "going to convert employee status from string to enum");
         switch (input) {
         case "perm":
         case "PERM":
@@ -66,40 +66,33 @@ public class EmployeeParser {
 
     public void deleteEmployee(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to delete employee");
-        boolean isEmptyCommand = command[1].stripLeading().stripTrailing().equals("");
+        try {
 
-        if (isEmptyCommand) {
-            MainUI.printWrongCommandMessage();
-            logger.log(Level.FINE, "one or more fields left empty");
-            logger.log(Level.FINE, "unable to delete employee");
-            return;
-        }
+            int employeeIndex = Integer.parseInt(command[1]) - 1;
+            if (masterList.totalEmployee < 1) {
+                EmployeeUI.printNoEmployeeMessage();
+                return;
+            }
+            EmployeeUI.printRemoveEmployeeMessage(masterList, employeeIndex);
 
-        int employeeIndex = Integer.parseInt(command[1]) - 1;
-        if (masterList.totalEmployee < 1) {
-            EmployeeUI.printNoEmployeeMessage();
-            return;
-        }
-        if (employeeIndex < 0 || employeeIndex >= masterList.totalEmployee) {
-            EmployeeUI.printInvalidRemoveMessage();
+            masterList.employeeList.remove(employeeIndex);
+            masterList.totalEmployee -= 1;
+
+        } catch (ArrayIndexOutOfBoundsException e) {
             logger.log(Level.FINE, "index from user input for removing employee is out of range");
-            return;
         }
-        EmployeeUI.printRemoveEmployeeMessage(masterList, employeeIndex);
-
-        masterList.employeeList.remove(employeeIndex);
-        masterList.totalEmployee -= 1;
-
         logger.log(Level.FINE, "end of deleting employee");
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
     public void listEmployee(EmployeeList masterList) {
+        logger.log(Level.FINE, "going to list employee");
         if (masterList.totalEmployee < 1) {
             EmployeeUI.printNoEmployeeMessage();
             return;
         }
         EmployeeUI.printEmployeeListMessage(masterList);
+        logger.log(Level.FINE, "end of listing employee");
     }
 
 }
