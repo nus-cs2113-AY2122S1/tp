@@ -21,6 +21,8 @@ public class UpdateUnitsCommand extends Command {
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_INGREDIENT_UNIT_UPDATED = "The units for this "
             + "ingredient has been updated to %1$s.\n";
+    private static final String MESSAGE_INGREDIENT_UNIT_DELETED = "The units for this "
+            + "ingredient has been deleted";
 
     private final String ingredientName;
     private final String newUnit;
@@ -55,6 +57,12 @@ public class UpdateUnitsCommand extends Command {
         
         SaveData.saveIngredientRepoToFile(ingredients);
 
-        return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
+        if (newUnit == null) {
+            return MESSAGE_INGREDIENT_UNIT_DELETED;
+        } else {
+            return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
+        }
+
+
     }
 }
