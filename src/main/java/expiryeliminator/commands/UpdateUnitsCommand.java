@@ -52,8 +52,6 @@ public class UpdateUnitsCommand extends Command {
         ingredientStorage.updateUnits(newUnit);
         //update units of ingredient in recipe list
         recipes.updateUnits(ingredientName, newUnit);
-        
-        SaveData.saveIngredientRepoToFile(ingredients);
 
         return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
     }
