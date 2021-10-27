@@ -229,32 +229,20 @@ public class IngredientList {
     /**
      * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
      *
-     * @param updatedIngredient to be updated ingredient
+     * @param groupNumber group number of ingredient to be updated
+     * @param ingredientNumber number of ingredient to be updated
+     * @param newAmount the new amount of the ingredient to be updated
      * @throws SitusException index out of bounds, cannot access
-     * @return expiryIsRepeated boolean of an ingredient existing with a give expiry date
      */
-    public boolean update(Ingredient updatedIngredient) throws SitusException, IOException {
+    public Ingredient update(int groupNumber, int ingredientNumber, double newAmount) throws SitusException, IOException {
         int i;
-        boolean expiryIsRepeated = false;
-        int ingredientIndex = findIngredientIndexInList(updatedIngredient.getName());
 
-        if (ingredientIndex < 0) {
-            throw new SitusException(INGREDIENT_NOT_FOUND);
-        }
-
-        IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
-        for (i = 0; i < currentGroup.getIngredientGroupSize(); i++) {
-            if (updatedIngredient.getExpiry().equals((currentGroup.getIngredientExpiry(i + 1)))) {
-                if (updatedIngredient.getAmount() <= 0) {
-                    throw new SitusException(NEGATIVE_NUMBER);
-                }
-                currentGroup.updateTotalAmount(currentGroup.get(i + 1).getAmount(), updatedIngredient.getAmount());
-                (currentGroup.get(i + 1)).setAmount(updatedIngredient.getAmount());
-                expiryIsRepeated = true;
-            }
-        }
+        IngredientGroup updatedGroup = getIngredientGroup(groupNumber);
+        Ingredient updatedIngredient = updatedGroup.get(ingredientNumber);
+        updatedGroup.updateTotalAmount(updatedIngredient.getAmount(), newAmount);
+        updatedIngredient.setAmount(newAmount);
         storage.writeIngredientsToMemory(ingredientList);
-        return expiryIsRepeated;
+        return updatedIngredient;
     }
 
 }
