@@ -216,7 +216,7 @@ You are currently working on year 2020 database!
 
 List all the Budget and expenditure for that particular year.
 
-Format: `list m/all`
+Format: `list m/all [c/CATEGORY]`
 
 * The command format must strictly be as shown above.
 
@@ -286,7 +286,7 @@ Your expenditures:
 
 Adds a new expenditure to a specific budget of a month.
 
-Format: `list m/<month>`
+Format: `list m/MONTH [c/CATEGORY]`
 
 * The 'month' must strictly be within the range of 1 to 12.
 
