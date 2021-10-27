@@ -330,7 +330,7 @@ public class Parser {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateUnitsCommand.MESSAGE_USAGE));
         }
         final String unitString = argParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
