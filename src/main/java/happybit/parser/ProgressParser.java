@@ -5,7 +5,7 @@ import happybit.command.ViewProgressCommand;
 import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
 
-public class ProgressParser extends ParserUtils {
+public class ProgressParser extends Parser {
 
     private static final String GOAL_INDEX_FLAG = "g/";
     private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";

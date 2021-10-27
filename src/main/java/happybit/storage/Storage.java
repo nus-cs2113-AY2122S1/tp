@@ -28,7 +28,7 @@ public class Storage {
     }
 
     public GoalList load() throws HaBitStorageException {
-        createFile(this.filePath, this.fileDir);
+        this.createFile(this.filePath, this.fileDir);
 
         return Import.importStorage(this.filePath);
     }
@@ -39,12 +39,13 @@ public class Storage {
 
         if (!storageDir.exists()) {
             boolean isDirCreated = storageDir.mkdirs();
+            System.out.printf("Directory %s does not exist." + System.lineSeparator(), fileDir);
 
             if (isDirCreated) {
-                System.out.println("Directory created: " + fileDir);
+                System.out.println("Directory created.");
                 assert storageDir.exists() : "directory should have been created";
             } else {
-                System.out.println("Directory not created");
+                System.out.println("Directory not created.");
             }
         }
 
@@ -52,10 +53,10 @@ public class Storage {
             boolean isFileCreated = storageFile.createNewFile();
 
             if (isFileCreated) {
-                System.out.println("File created: " + filePath);
+                System.out.println("File created at: " + filePath);
                 assert storageFile.exists() : "file should have been created";
             } else {
-                System.out.println("File exists");
+                System.out.printf("Storage file found at %s." + System.lineSeparator(), filePath);
             }
         } catch (IOException e) {
             System.out.println("Error occurred while creating file: " + e);
