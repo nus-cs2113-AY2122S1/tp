@@ -54,7 +54,7 @@ public class TimeGameCommand implements Command {
         return time;
     }
 
-    public TimeModeGame createGame(int timeInSeconds, boolean is_ready) {
-        return new TimeModeGame(timeInSeconds,content.getContent(), LINE_LENGTH, is_ready);
+    public TimeModeGame createGame(int timeInSeconds, boolean isReady) {
+        return new TimeModeGame(timeInSeconds,content.getContent(), LINE_LENGTH, isReady);
     }
 }
