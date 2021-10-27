@@ -271,32 +271,6 @@ public class GoalList {
         printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
 
-    /**
-     * Check and set on start up for all goals and all habits within goals.
-     * After importing data into goalList.
-     *
-
-    public void setRecurringTasks() {
-        for (Goal goal : goalList) {
-            ArrayList<Habit> currGoalsHabits = goal.getHabitList();
-            for (Habit habit : currGoalsHabits) {
-                Date currDate = new Date();
-                if (habit.getInterval() != 0) {
-                    // todo change to a loop to ensure dates missed still have Progress objects initiated and linked to it
-                    // loop until nextHabitDate currDate >= habitDate
-                    if (habit.isNextCycle(currDate)) {
-                        Date newHabitDate = habit.getNextHabitDate();
-                        habit.setHabitDate(newHabitDate);
-                        habit.setNextHabitDate();
-                        // Progress added everytime habitDate is set
-                        habit.addProgress();
-                    }
-                }
-            }
-        }
-    }
-     */
-
     public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
         Goal goal = this.getGoal(goalIndex);
         Habit habit = this.getHabit(goal.getHabitList(), habitIndex);

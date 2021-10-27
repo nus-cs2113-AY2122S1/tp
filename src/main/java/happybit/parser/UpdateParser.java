@@ -106,12 +106,12 @@ public class UpdateParser extends Parser {
         return getInteger(intervalParam, ERROR_INVALID_INTERVAL_NUMBER);
     }
 
-    private static int getInteger(String input, String error_message) throws HaBitParserException {
+    private static int getInteger(String input, String errorMessage) throws HaBitParserException {
         try {
             String integerString = input.substring(input.indexOf("/") + 1).trim();
             return Integer.parseInt(integerString);
         } catch (NumberFormatException e) {
-            throw new HaBitParserException(error_message);
+            throw new HaBitParserException(errorMessage);
         }
     }
 

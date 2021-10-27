@@ -233,19 +233,19 @@ public class Habit {
      */
     public int getStreak() {
         int streak = 0;
-        int curr_streak = 0;
+        int currStreak = 0;
         boolean isConsecutive = false;
 
         for (Interval interval : intervals) {
             if (interval.getDone()) {
                 isConsecutive = true;
-                curr_streak ++;
+                currStreak++;
             } else {
                 isConsecutive = false;
-                if (curr_streak >= streak) {
-                    streak = curr_streak;
+                if (currStreak >= streak) {
+                    streak = currStreak;
                 }
-                curr_streak = 0;
+                currStreak = 0;
             }
         }
 
