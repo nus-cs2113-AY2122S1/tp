@@ -118,30 +118,7 @@ public class Parser {
     private static TreeMap<Integer, String> extractPrefixIndexes(String argString, String identifier)
             throws TourPlannerException {
 
-        List<String> prefixes = null;
-        int repeatPrefixChecker = 0;
-
-        switch (identifier) {
-        case "-c":
-            prefixes = Arrays.asList("/n", "/cn", "/m");
-            repeatPrefixChecker = 4;
-            break;
-        case "-t":
-            prefixes = Arrays.asList("/n", "/p");
-            repeatPrefixChecker = 3;
-            break;
-        case "-f":
-            prefixes = Arrays.asList("/d", "/r", "/dd", "/rd");
-            repeatPrefixChecker = 5;
-            break;
-        case "-p":
-            prefixes = Arrays.asList("/c", "/t", "/f");
-            repeatPrefixChecker = 4;
-            break;
-        default:
-            break;
-        }
-
+        List<String> prefixes = generatePrefixesFromIdentifier(identifier);
         if (!containAllPrefixes(argString, prefixes)) {
             throw new TourPlannerException(ERROR_MISSING_PREFIXES);
         }
@@ -153,12 +130,32 @@ public class Parser {
             prefixIndexes.put(prefixIndex, prefix);
         });
 
-        boolean hasUniquePrefixes = prefixIndexes.size() == repeatPrefixChecker;
+        int expectedNumberOfPrefixIndexes = generateExpectedNumberOfPrefixIndexes(identifier);
+        boolean hasUniquePrefixIndexes = prefixIndexes.size() == expectedNumberOfPrefixIndexes;
 
-        if (!hasUniquePrefixes) {
+        if (!hasUniquePrefixIndexes) {
             throw new TourPlannerException(ERROR_MISSING_NAME);
         }
         return prefixIndexes;
+    }
+
+    private static int generateExpectedNumberOfPrefixIndexes(String identifier) {
+        int numberOfPrefixIndexes = 0;
+        switch (identifier) {
+        case "-c":
+        case "-p":
+            numberOfPrefixIndexes = 4;
+            break;
+        case "-t":
+            numberOfPrefixIndexes = 3;
+            break;
+        case "-f":
+            numberOfPrefixIndexes = 5;
+            break;
+        default:
+            break;
+        }
+        return numberOfPrefixIndexes;
     }
 
     /**
@@ -215,11 +212,39 @@ public class Parser {
      * @return value corresponding to prefix given
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static String extractValue(String argString,
-                                       String prefix, int startIndex, int endIndex, String identifier) {
+    private static String extractValue(String argString, String prefix, int startIndex, int endIndex, String identifier)
+            throws TourPlannerException {
+        List<String> prefixes = generatePrefixesFromIdentifier(identifier);
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replaceFirst(prefix, "").trim();
+        for (String p : prefixes) {
+            boolean hasDuplicatePrefix = value.contains(p);
+            if (hasDuplicatePrefix) {
+                throw new TourPlannerException(ERROR_DUPLICATE_PREFIXES);
+            }
+        }
         return value;
+    }
+
+    private static List<String> generatePrefixesFromIdentifier(String identifier) {
+        List<String> prefixes = null;
+        switch (identifier) {
+        case "-c":
+            prefixes = Arrays.asList("/n", "/cn", "/m");
+            break;
+        case "-t":
+            prefixes = Arrays.asList("/n", "/p");
+            break;
+        case "-f":
+            prefixes = Arrays.asList("/d", "/r", "/dd", "/rd");
+            break;
+        case "-p":
+            prefixes = Arrays.asList("/c", "/t", "/f");
+            break;
+        default:
+            break;
+        }
+        return prefixes;
     }
 
     /**
