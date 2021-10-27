@@ -2,13 +2,13 @@ package seedu.duke.task.type;
 
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import seedu.duke.parser.UtilityParser;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
+import seedu.duke.task.reminder.ReminderInformation;
 
 public class Deadline extends Task {
 
@@ -18,26 +18,24 @@ public class Deadline extends Task {
 
     private static final String DUE_DATE_NOT_NULL_ASSERTION = "dueDate for Deadline cannot be null.";
 
-    private Reminder reminder;
+    private LocalDateTime dueDate;
 
-    private Date dueDate;
-
-    public Deadline(String description, Date dueDate) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         setDueDate(dueDate);
     }
 
-    public Deadline(String description, Date dueDate, PriorityEnum priority) {
+    public Deadline(String description, LocalDateTime dueDate, PriorityEnum priority) {
         this(description, dueDate);
         setPriority(priority);
     }
     
-    public Deadline(String description, Date dueDate, RecurrenceEnum recurrence) {
+    public Deadline(String description, LocalDateTime dueDate, RecurrenceEnum recurrence) {
         this(description, dueDate);
         setRecurrence(recurrence);
     }
 
-    public Deadline(String description, Date dueDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+    public Deadline(String description, LocalDateTime dueDate, PriorityEnum priority, RecurrenceEnum recurrence) {
         this(description, dueDate);
         setPriority(priority);
         setRecurrence(recurrence);
@@ -47,11 +45,11 @@ public class Deadline extends Task {
         return this.TASK_TYPE;
     }
 
-    public Date getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         assert dueDate != null : DUE_DATE_NOT_NULL_ASSERTION;
         this.dueDate = dueDate;
         reminder = new Reminder(dueDate);
@@ -65,10 +63,24 @@ public class Deadline extends Task {
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
     }
-    
+
+    @Override
+    public void updateReminderMessage(String message) {
+        reminder.setMessage(message);
+    }
+
+    @Override
+    public void updateReminderTime(long reminderTime) {
+        reminder.setUserTime(reminderTime);
+    }
+
+    public ReminderInformation getReminderInformation() {
+        return reminder.getInformation();
+    }
+
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()
-                + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, UtilityParser.getDateAsString(getDueDate()));
+                + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
     }
 }

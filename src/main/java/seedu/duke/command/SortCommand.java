@@ -2,24 +2,26 @@ package seedu.duke.command;
 
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
-import seedu.duke.task.TaskManager;
+import seedu.duke.task.taskmanager.TaskManager;
 
-import java.util.HashMap;
+import java.util.Map;
 
+//@@author APZH
 public class SortCommand extends Command {
 
-    private static final CommandEnum COMMAND = CommandEnum.SORT;
+    private static final String USAGE = "sort";
 
-    public SortCommand(HashMap<String, String> commandArguments) {
-        super(COMMAND, commandArguments);
+    public SortCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+        super(taskManager, commandArguments);
     }
 
+    //@@author APZH
     @Override
     public CommandResult executeCommand() throws Exception {
         String message = "";
 
         try {
-            message = TaskManager.sortTasklist(commandArguments);
+            message = taskManager.sortTasklist(commandArguments);
         } catch (EmptyTasklistException ete) {
             message = ete.toString();
         } catch (EmptySortCriteriaException esce) {
@@ -27,6 +29,11 @@ public class SortCommand extends Command {
         }
 
         return new CommandResult(message, true, false);
+    }
+
+    @Override
+    protected String getUsage() {
+        return USAGE;
     }
 
 }

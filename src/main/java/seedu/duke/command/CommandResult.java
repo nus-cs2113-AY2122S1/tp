@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.task.taskmanager.TaskManager;
+
 /**
  * Represents the result of a command execution.
  */
@@ -12,7 +14,6 @@ public class CommandResult {
     private String message;
 
     public CommandResult(String message, boolean isModified, boolean isExited) {
-        this.isModified = isModified;
         this.isExited = isExited;
         this.message = message;
     }

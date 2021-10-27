@@ -1,28 +1,36 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.parser.CommandParser;
-import seedu.duke.task.TaskManager;
+import seedu.duke.storage.FileCreater;
 import seedu.duke.task.reminder.ReminderManager;
+import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
 
 import java.util.Scanner;
+import seedu.duke.task.taskmanager.TaskManagerObserver;
 
-public class Duke {
+public class Duke implements TaskManagerObserver {
 
     private final Scanner in;
     private final Ui ui;
     private ReminderManager reminderManager;
+    private TaskManager taskManager;
 
     public Duke() {
         in = new Scanner(System.in);
         ui = new Ui();
         reminderManager = new ReminderManager();
+        taskManager = new TaskManager(this);
     }
 
     public String readInput() {
         ui.printCursor();
+        if (!in.hasNextLine()) {
+            return CommandEnum.BYE.toString();
+        }
         String input = in.nextLine();
         return input;
     }
@@ -38,7 +46,7 @@ public class Duke {
     }
 
     public String checkReminder() {
-        return reminderManager.sendReminder();
+        return reminderManager.sendReminder(taskManager);
     }
 
     public void startProgram() {
@@ -48,11 +56,13 @@ public class Duke {
         Command userCommand;
         CommandResult commandResult = null;
 
+        FileCreater.createAll();
+
         do {
 
             String userInput = readInput();
 
-            userCommand = CommandParser.parseCommand(userInput);
+            userCommand = CommandParser.parseCommand(taskManager, userInput);
 
             commandResult = runCommand(userCommand);
 
@@ -67,4 +77,8 @@ public class Duke {
         duke.startProgram();
     }
 
+
+    public void update(TaskManager taskManager) {
+        this.taskManager = taskManager;
+    }
 }

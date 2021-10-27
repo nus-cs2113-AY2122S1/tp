@@ -1,8 +1,8 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandEnum;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.CommandEnum;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
@@ -14,16 +14,19 @@ import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
 
 import java.util.HashMap;
+import java.util.Map;
+import seedu.duke.task.taskmanager.TaskManager;
 
+//@@author APZH
 public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
 
+    //@@author APZH
+    public static Map<String, String> getCommandOptions(String commandArguments) {
 
-    public static HashMap getCommandOptions(String commandArguments) {
-
-        HashMap<String, String> flagsToArguments = new HashMap<>();
+        Map<String, String> flagsToArguments = new HashMap<>();
         String[] tokens = commandArguments.split(WHITESPACE_REGEX);
         String mainArgument = "";
 
@@ -49,41 +52,42 @@ public class CommandParser {
         return flagsToArguments;
     }
 
-    public static Command parseCommand(String userInput) {
+    //@@author APZH
+    public static Command parseCommand(TaskManager taskManager, String userInput) {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
         CommandEnum commandEnum = CommandEnum.getCommand(command);
-        HashMap<String, String> commandOptions = new HashMap<>();
+        Map<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);
         }
-
         switch (commandEnum) {
         case BYE:
             return new ByeCommand();
         case HELP:
             return new HelpCommand();
         case TODO:
-            return new TodoCommand(commandOptions);
+            return new TodoCommand(taskManager, commandOptions);
         case DEADLINE:
-            return new DeadlineCommand(commandOptions);
+            return new DeadlineCommand(taskManager, commandOptions);
         case EVENT:
-            return new EventCommand(commandOptions);
+            return new EventCommand(taskManager, commandOptions);
         case LIST:
-            return new ListCommand(commandOptions);
+            return new ListCommand(taskManager, commandOptions);
         case DELETE:
-            return new DeleteCommand(commandOptions);
+            return new DeleteCommand(taskManager, commandOptions);
         case SORT:
-            return new SortCommand(commandOptions);
+            return new SortCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }
     }
 
+    //@@author APZH
     // Used to debug and check the whether the user command mapping of flag->value works
-    public static String printCommandOptions(HashMap<String, String> commandOptions) {
+    public static String printCommandOptions(Map<String, String> commandOptions) {
 
         String flagsToArguments = "";
 

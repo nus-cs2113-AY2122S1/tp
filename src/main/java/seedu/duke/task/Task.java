@@ -2,6 +2,8 @@ package seedu.duke.task;
 
 import java.time.LocalDateTime;
 import seedu.duke.command.flags.TaskFlag;
+import seedu.duke.task.reminder.Reminder;
+import seedu.duke.task.reminder.ReminderInformation;
 
 public abstract class Task {
 
@@ -18,6 +20,8 @@ public abstract class Task {
     private String description;
     private PriorityEnum priority;
     private RecurrenceEnum recurrence;
+
+    protected Reminder reminder;
 
     protected Task(String description) {
         setDescription(description);
@@ -67,6 +71,12 @@ public abstract class Task {
     public abstract boolean needReminder();
 
     public abstract String getReminder(LocalDateTime now);
+
+    public abstract void updateReminderMessage(String message);
+
+    public abstract void updateReminderTime(long reminderTime);
+
+    public abstract ReminderInformation getReminderInformation();
 
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;

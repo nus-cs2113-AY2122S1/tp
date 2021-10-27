@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
@@ -28,10 +28,10 @@ public class TaskParser {
         return RecurrenceEnum.getRecurrence(recurrence);
     }
 
-    public static Date getDate(String date) throws ParseDateFailedException {
+    public static LocalDateTime getDate(String date) throws ParseDateFailedException {
         if (date == null) {
             return null;
         }
-        return UtilityParser.getStringAsDate(date);
+        return DateParser.stringToDate(date);
     }
 }

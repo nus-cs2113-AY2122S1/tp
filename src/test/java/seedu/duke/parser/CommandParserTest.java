@@ -4,12 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandParserTest {
 
-    private static HashMap<String, String> commandOptions = new HashMap<>();
+    private static Map<String, String> commandOptions = new HashMap<>();
 
     private final String commandArguments = "cs2113 tp project --type deadline --start 22-09-2021"
             + " --end 29-09-2021 --recur weekly --priority 2";
