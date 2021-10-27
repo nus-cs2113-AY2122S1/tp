@@ -7,6 +7,8 @@ import happybit.goal.Goal;
 import happybit.habit.Habit;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -35,18 +37,18 @@ class AddParserTest {
      */
 
     @Test
-    void parseAddGoalCommand_validInputAllParameters_success() throws HaBitParserException {
+    void parseAddGoalCommand_validInputAllParameters_success() throws HaBitParserException, ParseException {
         AddGoalCommand testCommand = (AddGoalCommand)
                 AddParser.parseAddGoalCommand(" n/ Test t/sd s/31122021 e/31122022");
         Goal testGoal = testCommand.getGoal();
         assertEquals("Test", testGoal.getGoalName());
         assertEquals("[SD]", testGoal.getGoalTypeCharacter());
         assertEquals("31122021", testGoal.getStartDate());
-        assertEquals("31122022", testGoal.getEndDate());
+        assertEquals(new SimpleDateFormat("ddMMyyyy").parse("31122022"), testGoal.getEndDate());
     }
 
     @Test
-    void parseAddGoalCommand_validInputMinimalParameters_success() throws HaBitParserException {
+    void parseAddGoalCommand_validInputMinimalParameters_success() throws HaBitParserException, ParseException {
 
         AddGoalCommand testCommand = (AddGoalCommand)
                 AddParser.parseAddGoalCommand(" n/ Test  e/31122022");
@@ -54,7 +56,7 @@ class AddParserTest {
         assertEquals("Test", testGoal.getGoalName());
         assertEquals("[DF]", testGoal.getGoalTypeCharacter());
         assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), testGoal.getStartDate());
-        assertEquals("31122022", testGoal.getEndDate());
+        assertEquals(new SimpleDateFormat("ddMMyyyy").parse("31122022"), testGoal.getEndDate());
     }
 
     @Test
@@ -203,7 +205,7 @@ class AddParserTest {
         Habit habit = testCommand.getHabit();
         assertEquals(0, testCommand.getGoalIndex());
         assertEquals("Test", habit.getHabitName());
-        assertEquals(3, habit.getInterval());
+        assertEquals(3, habit.getIntervalLength());
     }
 
     @Test

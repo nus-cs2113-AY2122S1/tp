@@ -36,12 +36,6 @@ public class StreakParser extends Parser {
      * =========================================================================
      */
 
-    private static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException(ERROR_NO_PARAMS);
-        }
-    }
-
     private static int getGoalIndex(String[] params) throws HaBitParserException {
         String goalParam = getParameter(params, GOAL_INDEX_FLAG);
         checkNoDescription(goalParam);

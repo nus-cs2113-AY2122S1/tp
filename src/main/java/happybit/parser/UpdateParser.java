@@ -27,6 +27,10 @@ public class UpdateParser extends Parser {
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
+    public static Command parseUpdateHabitNameCommand(String commandInstruction) {
+        return null;
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the

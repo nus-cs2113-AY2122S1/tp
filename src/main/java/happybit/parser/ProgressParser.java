@@ -26,12 +26,6 @@ public class ProgressParser extends Parser {
      * =========================================================================
      */
 
-    private static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
-        }
-    }
-
     private static int getGoalIndex(String input) throws HaBitParserException {
         String[] params = splitInput(input);
         String goalParam = getParameter(params, GOAL_INDEX_FLAG);
