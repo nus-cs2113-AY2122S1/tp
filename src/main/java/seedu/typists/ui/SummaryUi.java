@@ -34,6 +34,7 @@ public class SummaryUi {
         assert summary.get("timeElapsed") instanceof Double;
         assert summary.get("gameMode") instanceof String;
         assert summary.get("wordsPerMinute") instanceof Double;
+        printHeader();
         printOverview(
                 (Double) summary.get("timeElapsed"),
                 (String) summary.get("gameMode"),
@@ -98,7 +99,7 @@ public class SummaryUi {
             if (i % 8 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(errorWords.get(i));
+            System.out.print(errorWords.get(i).trim());
             if (i != (errorWords.size() - 1)) {
                 System.out.print("|");
             }
@@ -109,10 +110,13 @@ public class SummaryUi {
     }
 
     private static void printOverview(double timeElapsed, String gameMode, double wpm) {
-        System.out.print(SUMMARY + '\n');
         System.out.print("Game Mode: " + gameMode + '\n');
         System.out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         System.out.print("Total Time taken for the game: " + String.format("%.2f", timeElapsed) + " seconds\n");
+    }
+
+    private static void printHeader() {
+        System.out.print(SUMMARY + '\n');
     }
 
     public static void setUpLog() {

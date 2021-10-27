@@ -87,6 +87,12 @@ public class GameRecord {
                 + separator
                 + totalWordCount
                 + separator
+                + errorWordPercentage
+                + separator
+                + correctWordPercentage
+                + separator
+                + wpm
+                + separator
                 + errorWords.toString();
         return formatted;
 
