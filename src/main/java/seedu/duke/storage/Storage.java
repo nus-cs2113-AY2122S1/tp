@@ -45,10 +45,10 @@ public class Storage {
                 if (line.startsWith("add-employee")) {
                     Employee newEmployee = decodeEmployee(line);
                     employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
-                } else if (line.startsWith("add-dish")) {
+                } else if (line.startsWith("add-ingredient")) {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
-                } else if (line.startsWith("add-menu")) {
+                } else if (line.startsWith("add-dish")) {
                     Dish newDish = decodeDish(line);
                     dishParser.loadDishFromStorage(menu, newDish);
                 } else if (line.startsWith("add-finance")) {
