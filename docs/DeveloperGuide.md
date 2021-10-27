@@ -1,4 +1,3 @@
-![Image of Yakasastocat](https://octodex.github.com/images/yaktocat.png)
 # Developer Guide Draft
 
 ## Introduction
@@ -28,6 +27,7 @@ help **keep track of restaurant data** such as its employees, dishes and ingredi
 ## Design
 
 ### Architecture
+
 The Main component has 2 classes, `MainParser` and `MainUI`. It is responsible for parsing user commands and 
 displaying messages to interact with the user.
 
@@ -167,7 +167,8 @@ same time.
 * prefers typing as compared to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition:** manage restaurant data faster than a typical mouse/GUI driven application
+**Value proposition:** manage restaurant data faster than a typical mouse/_graphical user interface (GUI)_ driven 
+application
 
 ### User Stories
 
@@ -197,8 +198,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | restaurant manager | keep track of popular dishes | plan the menu in the way that maximises my revenue |
 
 ### Non Functional Requirements
+1. You need to have a _mainstream operating system (OS)_ with Java `11` or above installed.
+2. For normal usage without noticeable lag, total data entries stored should be less than 1000.
+3. To be faster than a typical mouse/GUI driven application, you need to have an above average typing speed for regular 
+   English text (i.e. not code, not system admin commands).
 
 ### Glossary
+* **Mainstream OS:** Windows, Linux, Unix, macOS
+* **GUI:** A type of user interface that allows users to interact with applications through graphical icons.
 
 ### Instructions for Manual Testing
 
