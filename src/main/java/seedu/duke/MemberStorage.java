@@ -1,21 +1,18 @@
 package seedu.duke;
 
-import seedu.duke.attendance.AttendanceList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class MemberStorage {
+
     /**
-     * This method sets up the duke members csv file.
-     * It firsts tries to find if the file exists in the current directory.
-     * If the file exists, it will call the loadDukeMemberFile method.
-     * If not it will create a new duke member csv file in the current directory.
+     * This method sets up the duke members csv file. It firsts tries to find if the file exists in the current
+     * directory. If the file exists, it will call the loadDukeMemberFile method. If not it will create a new duke
+     * member csv file in the current directory.
      *
      * @param members the list of current members
      */
@@ -44,16 +41,17 @@ public class MemberStorage {
      * This method loads the duke member file and writes to the current member list. Only happens on start-up.
      *
      * @param dukeMemberFile CSV file to read data from.
-     * @param memberList MemberList to write to.
+     * @param memberList     MemberList to write to.
      */
     public static void loadDukeMemberFile(File dukeMemberFile, MemberList memberList) {
         String name;
         String studentNumber;
         String gender;
         String phoneNumber;
-        try  {
+        try {
             Scanner dukeMemberScanner = new Scanner(dukeMemberFile);
             dukeMemberScanner.nextLine(); //skips the first header row
+            int index = 1;
             while (dukeMemberScanner.hasNextLine()) {
                 String fullMemberDetails = dukeMemberScanner.nextLine();
                 assert fullMemberDetails != null : "fullMemberDetails should not be empty";
@@ -62,10 +60,12 @@ public class MemberStorage {
 
                 name = memberDetails[0]; //used this to prevent magic numbers
                 studentNumber = memberDetails[1];
-                gender =  memberDetails[2];
+                gender = memberDetails[2];
                 phoneNumber = memberDetails[3];
-                Member member = new Member(name,studentNumber,gender,phoneNumber);
+                Member member = new Member(name, studentNumber, gender, phoneNumber);
+                member.setIndex(index);
                 memberList.addMember(member);
+                index++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class MemberStorage {
     /**
      * This method rewrites the entire duke member file.
      *
-     * @param dukeMemberFile  the member file
+     * @param dukeMemberFile the member file
      * @param memberList     the current member list
      */
     public static void writeMemberFile(File dukeMemberFile, MemberList memberList) {

@@ -84,23 +84,31 @@ public class MemberList {
     public Member deleteMemberByName(String memberName) throws InvalidMemberException {
         memberName = memberName.toUpperCase(Locale.ROOT);
         Pattern findRegex = Pattern.compile("^" + memberName + "$");
-        boolean foundNameMatch = false;
+
+        boolean foundNameMatch;
+        boolean hasDeletedMember = false;
+
         Member removedMember = new Member();
+        Member memberToBeRemoved = new Member();
+
         for (Member member : memberList) {
             foundNameMatch = findRegex.matcher(member.getName()).matches();
+            if (hasDeletedMember) {
+                member.setIndex(member.getIndex() - 1);
+            }
             if (foundNameMatch) {
-                memberList.remove(member);
+                memberToBeRemoved = member;
                 removedMember = new Member(member);
-                return removedMember;
+                hasDeletedMember = true;
             }
         }
-
         MemberList membersThatMatchFind;
-        if (!foundNameMatch) {
+        if (!hasDeletedMember) {
             membersThatMatchFind = this.findMember(memberName);
             throw new InvalidMemberException("Unable to find a member that is called: " + memberName,
                     membersThatMatchFind);
         }
+        memberList.remove(memberToBeRemoved);
         return removedMember;
     }
 
@@ -115,8 +123,13 @@ public class MemberList {
         try {
             int index = memberNumber - 1;
             Member member = memberList.get(index);
+            Member removedMember = new Member(member);
+            for (int i = memberNumber; i < this.getMemberListSize(); i++) {
+                Member memberToChangeIndex = memberList.get(i);
+                memberToChangeIndex.setIndex(i);
+            }
             memberList.remove(index);
-            return member;
+            return removedMember;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
