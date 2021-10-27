@@ -110,7 +110,7 @@ public class Parser {
 
     /**
      * Confirms that the user had entered parameters for creating a new expense, and redirects to
-     * {@link Parser#executeCreateExpense(String)} to create the expense
+     * {@link Parser#executeCreateExpense(String)} to create the expense.
      *
      * @param inputParams attributes of expense to be created.
      */
@@ -204,7 +204,7 @@ public class Parser {
     }
 
     /**
-     * Creates a new instance of {@link Trip} and adds it to the <code>listOfTrips</code>
+     * Creates a new instance of {@link Trip} and adds it to the <code>listOfTrips</code>.
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
@@ -364,7 +364,7 @@ public class Parser {
     }
 
     /**
-     * Deletes a trip from the <code>listOfTrips</code>
+     * Deletes a trip from the <code>listOfTrips</code>.
      *
      * @param tripIndex index of Trip to be applied to <code>listOfTrips</code>
      */
