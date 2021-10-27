@@ -11,6 +11,12 @@ public class Tour {
         price = Float.parseFloat(values[2]);
     }
 
+    public Tour(String tourCode, String tourName, String tourPrice) {
+        code = tourCode;
+        name = tourName;
+        price = Float.parseFloat(tourPrice);
+    }
+
     public String getCode() {
         return code;
     }

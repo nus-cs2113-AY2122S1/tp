@@ -64,7 +64,7 @@ public class Parser {
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         String dummy;
-        String contact_num;
+        String contactNum;
         switch (command) {
             case "bye":
                 if (!params.equals("")) {
@@ -80,9 +80,9 @@ public class Parser {
                     int index2 = params.lastIndexOf("/");
                     if(index1 == index2) {
                         dummy = params.substring(index1 + 3);
-                        contact_num = dummy.trim();
-                        for(int i = 0; i < contact_num.length(); i++) {
-                            char ch = contact_num.charAt(i);
+                        contactNum = dummy.trim();
+                        for(int i = 0; i < contactNum.length(); i++) {
+                            char ch = contactNum.charAt(i);
                             if(!(ch <= '9' && ch >= '0')) {
                                 throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
                             }
@@ -90,9 +90,9 @@ public class Parser {
                     }
                     else {
                         dummy = params.substring(index1 + 3, index2);
-                        contact_num = dummy.trim();
-                        for(int i = 0; i < contact_num.length(); i++) {
-                            char ch = contact_num.charAt(i);
+                        contactNum = dummy.trim();
+                        for(int i = 0; i < contactNum.length(); i++) {
+                            char ch = contactNum.charAt(i);
                             if(!(ch <= '9' && ch >= '0')) {
                                 throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
                             }
