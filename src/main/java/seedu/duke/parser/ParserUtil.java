@@ -8,11 +8,10 @@ import java.time.LocalDate;
 public class ParserUtil {
 
     public static int parseMonth(String monthString, boolean isCompulsory) throws NumberFormatException {
-        if (isCompulsory) {
-            return Integer.parseInt(monthString.trim());
-        } else {
+        if (!isCompulsory && monthString.equals("")) {
             return LocalDate.now().getMonthValue();
         }
+        return Integer.parseInt(monthString.trim());
     }
 
     public static int parseIndex(String indexString) throws NumberFormatException {
