@@ -5,7 +5,6 @@ import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Decrement ingredient by a specified quantity.

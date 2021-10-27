@@ -1,15 +1,14 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientStorage;
-import expiryeliminator.data.IngredientRepository;
-import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.Recipe;
+import java.util.TreeMap;
+
 import expiryeliminator.data.IngredientQuantity;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
+import expiryeliminator.data.Recipe;
+import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.storage.SaveData;
-
-import java.util.TreeMap;
 
 /**
  * Updates the ingredient amounts in the repository based on the recipe that is cooked.
@@ -37,7 +36,7 @@ public class CookedRecipeCommand extends Command {
     }
 
     private boolean allIngredientsAreSufficient(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
-                                               IngredientRepository ingredients) {
+                                                IngredientRepository ingredients) {
         for (IngredientQuantity i : ingredientsFromRecipe.values()) {
             IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
             assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
@@ -54,14 +53,13 @@ public class CookedRecipeCommand extends Command {
         try {
             Recipe recipe = recipes.findRecipe(name);
             TreeMap<String, IngredientQuantity> ingredientsInRecipe = recipe.getIngredientQuantities();
-            if (!allIngredientsAreSufficient(ingredientsInRecipe,ingredients)) {
+            if (!allIngredientsAreSufficient(ingredientsInRecipe, ingredients)) {
                 return MESSAGE_INSUFFICIENT_QUANTITY;
             }
-            for (String s :ingredientsInRecipe.keySet()) {
+            for (String s : ingredientsInRecipe.keySet()) {
                 IngredientStorage ingredient = ingredients.findWithNullReturn(s);
                 assert ingredient != null : "Ingredient should be added in when recipe is added.";
                 ingredient.remove(ingredientsInRecipe.get(s).getQuantity());
-                SaveData.saveIngredientRepoToFile(ingredients);
                 ingredientsLeft += ingredient + "\n";
             }
         } catch (NotFoundException e) {
@@ -69,6 +67,6 @@ public class CookedRecipeCommand extends Command {
         } catch (IllegalValueException e) {
             assert false : "The ingredients should have sufficient quantity";
         }
-        return String.format(MESSAGE_RECIPE_COOKED,ingredientsLeft);
+        return String.format(MESSAGE_RECIPE_COOKED, ingredientsLeft);
     }
 }

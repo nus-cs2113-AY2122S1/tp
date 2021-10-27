@@ -6,7 +6,6 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Adds an ingredient, together with its associated quantity and expiry date.

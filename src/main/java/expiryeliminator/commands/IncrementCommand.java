@@ -6,7 +6,6 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.storage.SaveData;
 
 /**
  * Increment ingredient by a specified quantity.
