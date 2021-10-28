@@ -262,12 +262,13 @@ public class GoalList {
      * @param habitIndex Integer of habit index of habit to update
      * @param newInterval Integer of new interval uses wishes to set
      */
-    public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
-        // To be implemented
-    }
-
-    public void viewGoalProgress(int goalIndex) {
-        // todo
+    public void updateHabitIntervalFromGoal(int goalIndex, int habitIndex, int newInterval, PrintManager printManager)
+        throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habits = goal.getHabitList();
+        Habit habit = getHabit(habits, habitIndex);
+        habit.updateLengthOfInterval(newInterval);
+        printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
 
     public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {

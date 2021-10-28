@@ -226,6 +226,32 @@ public class Habit {
         return this.habitName + FROM + currInterval.getDescription();
     }
 
+    /**
+     * Returns consecutive streak for current habit.
+     *
+     * @return Longest chain streak for the habit
+     */
+    public int getStreak() {
+        int streak = 0;
+        int currStreak = 0;
+        boolean isConsecutive = false;
+
+        for (Interval interval : intervals) {
+            if (interval.getDone()) {
+                isConsecutive = true;
+                currStreak++;
+            } else {
+                isConsecutive = false;
+                if (currStreak >= streak) {
+                    streak = currStreak;
+                }
+                currStreak = 0;
+            }
+        }
+
+        return streak;
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the

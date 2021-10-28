@@ -2,15 +2,32 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.UpdateGoalNameCommand;
+import happybit.command.UpdateHabitIntervalCommand;
 import happybit.exception.HaBitParserException;
+import happybit.habit.Habit;
+
+import static happybit.parser.Parser.splitInput;
 
 public class UpdateParser extends Parser {
 
+    private static final String GOAL_INDEX_FLAG = "g/";
+    private static final String HABIT_INDEX_FLAG = "h/";
+    private static final String INTERVAL_INDEX_FLAG = "i/";
+    private static final String ERROR_BLANK = "No instruction given.";
+    private static final String ERROR_NOT_NUM = "Expected a number.";
+    private static final String ERROR_INCOMPLETE = "Instruction incomplete or improper.";
+    private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";
+    private static final String ERROR_INVALID_HABIT_NUMBER = "Please enter a valid habit number";
+    private static final String ERROR_INVALID_INTERVAL_NUMBER = "Please enter a valid interval number";
+    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
+            + "Please check your command format.";
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
             + "Eg: n/Reach for the starts";
     private static final int FLAG_LENGTH = 2;
+
+    //todo S L A P more in the future; refer to AddParser
 
     /**
      * Parses detail from user into goalIndex and goalName to create a new Command.
@@ -30,6 +47,16 @@ public class UpdateParser extends Parser {
     public static Command parseUpdateHabitNameCommand(String commandInstruction) {
         return null;
     }
+
+    public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
+        checkNoDescription(commandInstruction);
+        String[] parameters = splitInput(commandInstruction);
+        int goalIndex = getGoalIndex(parameters);
+        int habitIndex = getHabitIndex(parameters);
+        int interval = getInterval(parameters);
+        return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
+    }
+
 
     /*
      * NOTE : ==================================================================
@@ -51,7 +78,15 @@ public class UpdateParser extends Parser {
         if (strGoalIndex == null || strGoalIndex.equals(FLAG_GOAL_INDEX)) {
             throw new HaBitParserException(ERROR_GOAL_INDEX_FORMAT);
         }
-        return stringToInt(strGoalIndex.substring(FLAG_LENGTH)) - 1;
+        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
+    }
+
+    private static int getHabitIndex(String[] parameters) throws HaBitParserException {
+        String strHabitIndex = getParameter(parameters, HABIT_INDEX_FLAG);
+        if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), ERROR_INVALID_HABIT_NUMBER) - 1;
     }
 
     /**
@@ -69,6 +104,16 @@ public class UpdateParser extends Parser {
         return strHabitIndex.substring(FLAG_LENGTH).trim();
     }
 
+
+
+    private static int getInterval(String[] parameters) throws HaBitParserException {
+        String strInterval = getParameter(parameters, INTERVAL_INDEX_FLAG);
+        if (strInterval == null || strInterval.equals(INTERVAL_INDEX_FLAG)) {
+            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        }
+        return stringToInt(strInterval.substring(FLAG_LENGTH), ERROR_INVALID_INTERVAL_NUMBER);
+    }
+
     /**
      * Converts a string to an integer.
      *
@@ -76,11 +121,11 @@ public class UpdateParser extends Parser {
      * @return Integer parsed from the string.
      * @throws HaBitParserException If the string fails to parse.
      */
-    private static int stringToInt(String strInt) throws HaBitParserException {
+    private static int stringToInt(String strInt, String errorMessage) throws HaBitParserException {
         try {
             return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
-            throw new HaBitParserException(UpdateParser.ERROR_GOAL_INDEX_NON_INTEGER);
+            throw new HaBitParserException(errorMessage);
         }
     }
 }
