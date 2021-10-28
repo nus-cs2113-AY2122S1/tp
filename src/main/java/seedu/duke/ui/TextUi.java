@@ -81,7 +81,8 @@ public class TextUi {
         System.out.println(index + "."
                 + "Your loan to "
                 + dueLoan.getName() + ", "
-                + "$" + dueLoan.getAmount()
+                + "$" + dueLoan.getAmount() + ", "
+                + "on " + dueLoan.getDate()
                 + " is due!!");
     }
 
