@@ -47,6 +47,7 @@ public class DeleteMember {
 
     public void deleteMemberByString(MemberList members, String name) {
         try {
+            assert !name.equals("");
             Member toDelete = members.deleteMemberByName(name);
             Ui.printDeletedMemberMessage(toDelete);
             File dukeMemberFile = new File("dukeMembers.csv");
@@ -54,6 +55,8 @@ public class DeleteMember {
             //Update save file
         } catch (InvalidMemberException e) {
             Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
+        } catch (AssertionError e) {
+            System.out.println("Name cannot be empty!");
         }
     }
 }
