@@ -164,7 +164,7 @@ public class Expense {
     public String toString() {
         return ("\t" + this.getDescription()
                 + System.lineSeparator()
-                + "\t" + "date: " + this.getStringDate()
+                + "\t" + "Date: " + this.getStringDate()
                 + System.lineSeparator()
                 + "\t" + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
