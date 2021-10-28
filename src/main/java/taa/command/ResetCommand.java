@@ -51,6 +51,9 @@ public class ResetCommand extends Command {
 
     @Override
     protected String getUsage() {
-        return null;
+        return String.format(
+            MESSAGE_FORMAT_GENERIC_USAGE,
+            COMMAND_RESET
+        );
     }
 }
