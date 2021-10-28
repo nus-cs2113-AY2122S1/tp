@@ -105,6 +105,11 @@ public class Ui {
         printSeparator();
     }
 
+    public static void printNoCommasMessage() {
+        System.out.println("Invalid input! Inputs should not contain any commas (i.e. ',')");
+        printSeparator();
+    }
+
     public static void printList(MemberList members) {
         if (members.getMemberListSize() == 0) {
             System.out.println("Member list is empty!");

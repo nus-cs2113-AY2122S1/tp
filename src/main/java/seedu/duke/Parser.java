@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
@@ -24,10 +25,6 @@ public class Parser {
 
     public static boolean hasListAttendanceKeyword(String arg) {
         return arg.trim().toLowerCase().contains("list /att");
-    }
-
-    public static boolean hasFilteredListAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains(" /att /t");
     }
 
     public static boolean hasAddMemberKeyword(String arg) {
@@ -78,49 +75,50 @@ public class Parser {
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
      *
-     * @param query user raw data input.
+     * @param entry user raw data input.
      * @return keyword value from Keyword enum class.
      */
-    public static Keyword getKeywordStatus(String query) {
+    public static Keyword getKeywordStatus(String entry) {
         Keyword keyword;
-        if (hasAddMemberKeyword(query)) {
+        if (hasAddMemberKeyword(entry)) {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
-        } else if (hasAddTrainingKeyword(query)) {
+        } else if (hasAddTrainingKeyword(entry)) {
             keyword = Keyword.ADD_TRAINING_KEYWORD;
-        } else if (hasAddAttendanceKeyword(query)) {
+        } else if (hasAddAttendanceKeyword(entry)) {
             keyword = Keyword.ADD_ATTENDANCE_KEYWORD;
-        } else if (hasListMemberKeyword(query)) {
+        } else if (hasListMemberKeyword(entry)) {
             keyword = Keyword.LIST_MEMBER_KEYWORD;
-        } else if (hasListTrainingKeyword(query)) {
+        } else if (hasListTrainingKeyword(entry)) {
             keyword = Keyword.LIST_TRAINING_KEYWORD;
-        } else if (hasListAttendanceKeyword(query)) {
+        } else if (hasListAttendanceKeyword(entry)) {
             keyword = Keyword.LIST_ATTENDANCE_KEYWORD;
-        } else if (hasDeleteMemberKeyword(query)) {
+        } else if (hasDeleteMemberKeyword(entry)) {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
-        } else if (hasDeleteTrainingKeyword(query)) {
+        } else if (hasDeleteTrainingKeyword(entry)) {
             keyword = Keyword.DELETE_TRAINING_KEYWORD;
-        } else if (hasDeleteAttendanceKeyword(query)) {
+        } else if (hasDeleteAttendanceKeyword(entry)) {
             keyword = Keyword.DELETE_ATTENDANCE_KEYWORD;
-        } else if (hasFindMemberKeyword(query)) {
+        } else if (hasFindMemberKeyword(entry)) {
             keyword = Keyword.FIND_MEMBER_KEYWORD;
-        } else if (hasFindTrainingKeyword(query)) {
+        } else if (hasFindTrainingKeyword(entry)) {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
-        } else if (hasEditTrainingKeyword(query)) {
+        } else if (hasEditTrainingKeyword(entry)) {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
-        } else if (hasEditMemberKeyword(query)) {
+        } else if (hasEditMemberKeyword(entry)) {
             keyword = Keyword.EDIT_MEMBER_KEYWORD;
-        } else if (query.trim().equals("--help")) {
+        } else if (entry.trim().equals("--help")) {
             keyword = Keyword.HELP_KEYWORD;
-        } else if (hasExitKeyword(query)) {
+        } else if (hasExitKeyword(entry)) {
             keyword = Keyword.EXIT_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
         }
+        assert !keyword.equals("");
         return keyword;
     }
 
-    public static String getTrainingName(String query) {
-        String[] words = query.trim().split("[\\s]+");
+    public static String getTrainingName(String entry) {
+        String[] words = entry.trim().split("[\\s]+");
         StringBuilder sentenceAfterDeletion = new StringBuilder();
         for (String word : words) {
             if (word.contains("/")) {
@@ -132,13 +130,19 @@ public class Parser {
         return sentenceAfterDeletion.toString();
     }
 
-    public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String query) {
+    /**
+     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command is called.
+     *
+     * @param attendanceList full list of attendance sheet.
+     * @param entry user raw data input.
+     * @return smaller attendance list which has been filtered.
+     */
+    public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String entry) {
         // e.g. list /att /t Friday Training /d 0
-        String[] trainingNameAndLabel = query.trim().split("/t");
-
+        String[] trainingNameAndLabel = entry.trim().split("/t");
         String presentOrAbsent = "";
-
         AttendanceList filteredAttendanceList = new AttendanceList();
+
         try {
             String trainingName = getTrainingName(trainingNameAndLabel[1].trim());
             for (Attendance attendance : attendanceList.getAttendanceList()) {
@@ -152,28 +156,17 @@ public class Parser {
         return filteredAttendanceList;
     }
 
-    public static Integer getIndexFromFullList(String name, String trainingName, AttendanceList attendanceList) {
-        int index = 0;
-        for (Attendance attendance : attendanceList.getAttendanceList()) {
-            if (attendance.getMemberName().equals(name) & attendance.getTrainingName().equals(trainingName)) {
-                return index;
-            }
-            index++;
-        }
-        return -1;
-    }
-
     /**
      * Returns the description of the task only, without the date or the keyword.
      *
-     * @param query user raw data input.
+     * @param entry user raw data input.
      * @return description of task.
      */
-    public static TrainingSchedule getTrainingDescription(String query) {
+    public static TrainingSchedule getTrainingDescription(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
+        Matcher matcher = pattern.matcher(entry);
 
-        String[] words = query.trim().split(regex);
+        String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
 
         String name = "";
@@ -209,14 +202,14 @@ public class Parser {
     /**
      * Creates Member class by input given by user.
      *
-     * @param query user raw data input.
+     * @param entry user raw data input.
      * @return Member according to user input.
      */
-    public static Member getMemberDetails(String query) {
+    public static Member getMemberDetails(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
+        Matcher matcher = pattern.matcher(entry);
 
-        String[] words = query.trim().split(regex);
+        String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
         String name = "";
         String studentNumber = "";
@@ -254,14 +247,14 @@ public class Parser {
     /**
      * Creates Attendance object from input given by user.
      *
-     * @param query user raw data input.
+     * @param entry user raw data input.
      * @return Attendance according to user input.
      */
-    public static Attendance getAttendanceDetails(String query) {
+    public static Attendance getAttendanceDetails(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
+        Matcher matcher = pattern.matcher(entry);
 
-        String[] words = query.trim().split(regex);
+        String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
 
         String memberName = "";
@@ -292,20 +285,35 @@ public class Parser {
         return new Attendance(memberName, trainingName, presentOrAbsent);
     }
 
+    /**
+     * This function returns the index of the attendance to be deleted.
+     *
+     * @param entry user's input.
+     * @return index of deleted attendance.
+     */
     public static int getAttendanceIndex(String entry) {
         try {
             String[] substring = entry.split("/i", 0);
             int trainingIndex = Integer.parseInt(substring[1].trim());
+            assert trainingIndex >= 1: "trainingIndex should be greater than 1.";
+            return trainingIndex;
         } catch (IndexOutOfBoundsException e) {
             Ui.printWrongInputMessage();
         }
         return -1;
     }
 
+    /**
+     * This function returns the name of the training, for the attendance to be deleted.
+     *
+     * @param entry user's input.
+     * @return training name of deleted attendance entry.
+     */
     public static String getAttendanceTrainingName(String entry) {
         try {
             int trainingNameStartIndex = entry.indexOf("/t") + 2;
             int trainingNameEndIndex = entry.indexOf("/i");
+            assert trainingNameEndIndex >= 1: "trainingNameEndIndex should be greater than 1.";
             String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
             return trainingName;
         } catch (IndexOutOfBoundsException e) {
@@ -314,15 +322,16 @@ public class Parser {
     }
 
     /**
-     * Returns an integer Index from the given String query.
+     * Returns an integer Index from the given String entry.
      *
-     * @param query String user input.
-     * @return int Index that is in query.
+     * @param entry String user input.
+     * @return int Index that is in entry.
      */
-    public static Integer getIndex(String query) {
+    public static Integer getIndex(String entry) {
         try {
-            String[] words = query.trim().split(regex);
+            String[] words = entry.trim().split(regex);
             int indexNumber = Integer.parseInt(words[1].trim());
+            assert indexNumber >= 1: "indexNumber should be greater than 1.";
             return indexNumber;
         } catch (NumberFormatException e) {
             System.out.println("Index must be a number");
@@ -333,13 +342,14 @@ public class Parser {
     /**
      * Returns parameter as given by user.
      *
-     * @param query String user input
-     * @return Object parameter that is given in query which will either be int or string as given by user
+     * @param entry String user input
+     * @return Object parameter that is given in entry which will either be int or string as given by user
      */
-    public static Object getParameter(String query) {
-        String[] words = query.trim().split(regex);
+    public static Object getParameter(String entry) {
+        String[] words = entry.trim().split(regex);
         try {
             int indexNumber = Integer.parseInt(words[1].trim());
+            assert indexNumber >= 1: "indexNumber should be greater than 1.";
             return indexNumber;
         } catch (NumberFormatException e) {
             String parameter = words[1].trim();
@@ -350,14 +360,14 @@ public class Parser {
     }
 
     /**
-     * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
+     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param query user input
+     * @param entry user input
      */
-    public static String getQuery(String query) {
+    public static String getQuery(String entry) {
         try {
-            String[] words = query.trim().split(regex);
+            String[] words = entry.trim().split(regex);
             return words[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return "";
@@ -365,13 +375,13 @@ public class Parser {
     }
 
     /**
-     * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
+     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param attendanceList ArrayList of tasks
-     * @param query          user input
+     * @param attendanceList full list of attendance sheet.
+     * @param entry          user input
      */
-    public static void findInAttendanceEntries(AttendanceList attendanceList, String query) {
+    public static void findInAttendanceEntries(AttendanceList attendanceList, String entry) {
         //Leave for v2.0, implement as class in commands package
     }
 
@@ -379,11 +389,17 @@ public class Parser {
         Ui.printWrongInputMessage();
     }
 
+    /**
+     * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
+     * Otherwise, the full list will not be shown.
+     *
+     * @param attendanceList full list of attendance sheet.
+     */
     public static void askToListAll(AttendanceList attendanceList) {
         Ui.printListAllMessage();
         Scanner userInput = new Scanner(System.in);
-        String query = userInput.nextLine();
-        if (query.equals("y")) {
+        String entry = userInput.nextLine();
+        if (entry.equals("y")) {
             Ui.printList(attendanceList);
         }
     }
@@ -392,14 +408,14 @@ public class Parser {
      * Function waits for user input, or takes input from ./list.txt.
      */
     public static void waitForQuery() {
-        String query = "";
+        String entry = "";
         Scanner userInput = new Scanner(System.in);
-        while (!query.equals("bye")) {
+        while (!entry.equals("bye")) {
             System.out.print("=> ");
             if (userInput.hasNextLine()) {
-                query = userInput.nextLine();
+                entry = userInput.nextLine();
             }
-            Entry.addEntry(query);
+            Entry.addEntry(entry);
         }
     }
 

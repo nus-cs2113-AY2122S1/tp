@@ -28,4 +28,25 @@ class ParserTest {
         final String input = "ad ads dwd";
         assertEquals(Parser.getKeywordStatus(input), Keyword.NO_KEYWORD);
     }
+
+    @Test
+    void validTrainingName() {
+        final String entry = "Friday Training /d 0";
+        final String correctOutput = "Friday Training ";
+        assertEquals(Parser.getTrainingName(entry), correctOutput);
+    }
+
+    @Test
+    void validAttendanceIndex() {
+        final String entry = "delete /att /t Friday Training /i 2";
+        final int correctOutput = 2;
+        assertEquals(Parser.getAttendanceIndex(entry), correctOutput);
+    }
+
+    @Test
+    void validAttendanceTrainingName() {
+        final String entry = "delete /att /t Friday Training /i 2";
+        final String correctOutput = "Friday Training";
+        assertEquals(Parser.getAttendanceTrainingName(entry), correctOutput);
+    }
 }
