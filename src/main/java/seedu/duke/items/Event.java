@@ -51,6 +51,7 @@ public class Event extends Item {
         for (Task task: taskList) {
             tasks.append(counter).append(". ");
             tasks.append(task.getTitle()).append("\n");
+            counter++;
         }
         return tasks.toString();
     }
