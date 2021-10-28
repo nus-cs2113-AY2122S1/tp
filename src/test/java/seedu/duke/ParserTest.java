@@ -78,9 +78,9 @@ public class ParserTest {
 
     @Test
     void parse_missingIdOrName_failure() {
-        assertParseFailure(WRONG_ADDCLIENT_MISSING_ID, Parser.ERROR_MISSING_NAME);
-        assertParseFailure(WRONG_ADDFLIGHT_MISSING_ID, Parser.ERROR_MISSING_NAME);
-        assertParseFailure(WRONG_ADDTOUR_MISSING_ID, Parser.ERROR_MISSING_NAME);
+        assertParseFailure(WRONG_ADDCLIENT_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
+        assertParseFailure(WRONG_ADDFLIGHT_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
+        assertParseFailure(WRONG_ADDTOUR_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
     }
 
     private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)

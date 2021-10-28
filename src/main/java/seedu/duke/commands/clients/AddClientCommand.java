@@ -12,7 +12,7 @@ public class AddClientCommand extends Command {
 
 
     /**
-     * Class constructor for AddCommand.
+     * Class constructor for AddClientCommand.
      *
      * @param client client to be added
      */
@@ -31,6 +31,7 @@ public class AddClientCommand extends Command {
 
     /**
      * Executes the addition of client to client list.
+     * If given client ID already exists, the client will not be added.
      */
     @Override
     public void execute() {
@@ -39,7 +40,7 @@ public class AddClientCommand extends Command {
             System.out.println("Client ID already exists. Please try another client ID.");
         } catch (TourPlannerException e) {
             clients.add(client);
-            ui.showAddClient(client);
+            ui.showAdd(client);
         }
     }
 }

@@ -1,8 +1,6 @@
 package seedu.duke;
 
-
 import seedu.duke.commands.ByeCommand;
-import seedu.duke.commands.ClearCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
 import seedu.duke.commands.clientpackages.CutClientPackageCommand;
@@ -44,34 +42,60 @@ import java.util.Map;
  * Sense-makes the inputs given and distributes the information to other parts of the program.
  */
 public class Parser {
+
+    private static final String CLIENT_IDENTIFIER = "-c";
+    private static final String TOUR_IDENTIFIER = "-t";
+    private static final String FLIGHT_IDENTIFIER = "-f";
+    private static final String PACKAGE_IDENTIFIER = "-p";
+    private static final String CLIENT_PREFIX = "/c";
+    private static final String TOUR_PREFIX = "/t";
+    private static final String FLIGHT_PREFIX = "/f";
+    private static final String FLIGHT_DEPARTURE_PREFIX = "/d";
+    private static final String FLIGHT_RETURN_PREFIX = "/r";
+    private static final String FLIGHT_DEPARTURE_DATE_PREFIX = "/dd";
+    private static final String FLIGHT_RETURN_DATE_PREFIX = "/rd";
     public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
+    public static final String ERROR_MISSING_IDENTIFIER =
+            "Missing command filter! Please enter a command with this format: COMMAND -FILTER DATA \n"
+                    + "Example: find -t TOUR_ID";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
     public static final String ERROR_MISSING_NAME_ID = "Missing name/id! Please try again.";
-    public static final String ERROR_MISSING_NAME = "Missing name! Please try again.";
+    private static final String ERROR_MISSING_FIELDS = "Please do not leave your fields empty!";
     public static final String ERROR_EMAIL_FORMAT_WRONG = "Invalid Email!";
-    public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number";
-    public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time";
+    public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number!";
+    public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time!";
     public static final String ERROR_PRICE_FORMAT = "Invalid Price";
+    public static final String TOUR_NAME_PREFIX = "/n";
+    public static final String TOUR_PRICE_PREFIX = "/p";
+    public static final String CLIENT_NAME_PREFIX = "/n";
+    public static final String CLIENT_CONTACT_NUMBER_PREFIX = "/cn";
+    public static final String CLIENT_EMAIL_PREFIX = "/m";
+    public static final int IDENTIFIER_INDEX = 0;
+    public static final int ARGS_INDEX = 1;
+    public static final int COMMAND_INDEX = 0;
+    public static final int PARAMS_INDEX = 1;
+    public static final int MAX_VALUE_ARRAY_SIZE = 5;
+    public static final String EMPTY_STRING = "";
 
     /**
      * Parses user's input into command to execute.
      *
      * @param input full user's input string
      * @return the command parsed from user's input
-     * @throws TourPlannerException if there are missing fields,duplicated prefixes, missing prefixes and erroneous
-     *                              'cut' index given
+     * @throws TourPlannerException if there are missing fields, duplicated prefixes, missing prefixes and other general
+     *                              parsing errors.
      */
     public static Command parse(String input) throws TourPlannerException {
         String[] commandAndParams = splitCommandString(input, " ");
-        String command = commandAndParams[0];
-        String params = commandAndParams[1];
+        String command = commandAndParams[COMMAND_INDEX];
+        String params = commandAndParams[PARAMS_INDEX];
 
         switch (command) {
         case "bye":
-            if (!params.equals("")) {
+            if (!params.equals(EMPTY_STRING)) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ByeCommand();
@@ -81,11 +105,6 @@ public class Parser {
             return parseCut(params);
         case "list":
             return parseList(params);
-        case "clear":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ClearCommand();
         case "find":
             return parseFind(params);
         case "sort":
@@ -94,7 +113,6 @@ public class Parser {
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
-
 
     /**
      * Separates command word and arguments.
@@ -107,7 +125,6 @@ public class Parser {
         String[] split = input.trim().split(separator, 2);
         return split.length == 2 ? split : new String[]{split[0], ""};
     }
-
 
     /**
      * Extracts the indexes for prefixes and put into a map that sorts the list by the natural ordering of the keys.
@@ -143,14 +160,16 @@ public class Parser {
     private static int generateExpectedNumberOfPrefixIndexes(String identifier) {
         int numberOfPrefixIndexes = 0;
         switch (identifier) {
-        case "-c":
-        case "-p":
+        case CLIENT_IDENTIFIER:
             numberOfPrefixIndexes = 4;
             break;
-        case "-t":
+        case PACKAGE_IDENTIFIER:
+            numberOfPrefixIndexes = 4;
+            break;
+        case TOUR_IDENTIFIER:
             numberOfPrefixIndexes = 3;
             break;
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             numberOfPrefixIndexes = 5;
             break;
         default:
@@ -160,11 +179,12 @@ public class Parser {
     }
 
     /**
-     * Extract values into an array in a sorted manner to prepare for execution of add.
+     * Extract values from user's input command in a sorted fashion.
      *
      * @param prefixIndexes the treemap with prefix index as the key and the corresponding prefix as the value
      * @param argString     full user's argument string
-     * @return the array containing client's information in a sorted fashion
+     * @param identifier    specific identifier to determine specific data type (client, flight, tour, package)
+     * @return the array containing all extracted values in a sorted fashion
      * @throws TourPlannerException if there are duplicate prefixes found
      */
     private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes,
@@ -197,8 +217,13 @@ public class Parser {
         return extractedValues;
     }
 
+    /**
+     * Initialise an empty array list of size 5 - max array size for values.
+     *
+     * @param extractedValues empty extracted values array to be initialised with empty string values
+     */
     private static void initialiseArrayList(ArrayList<String> extractedValues) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < MAX_VALUE_ARRAY_SIZE; i++) {
             extractedValues.add("");
         }
     }
@@ -210,6 +235,7 @@ public class Parser {
      * @param prefix     prefix of value to be extracted
      * @param startIndex start index of substring
      * @param endIndex   end index of substring
+     * @param identifier specific identifier to determine specific data type (client, flight, tour, package)
      * @return value corresponding to prefix given
      * @throws TourPlannerException if there are duplicate prefixes found
      */
@@ -218,8 +244,12 @@ public class Parser {
         List<String> prefixes = generatePrefixesFromIdentifier(identifier);
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replaceFirst(prefix, "").trim();
-        for (String p : prefixes) {
-            boolean hasDuplicatePrefix = value.contains(p);
+
+        if (value.equals(EMPTY_STRING)) {
+            throw new TourPlannerException(ERROR_MISSING_FIELDS);
+        }
+        for (String pf : prefixes) {
+            boolean hasDuplicatePrefix = value.contains(pf);
             if (hasDuplicatePrefix) {
                 throw new TourPlannerException(ERROR_DUPLICATE_PREFIXES);
             }
@@ -227,23 +257,24 @@ public class Parser {
         return value;
     }
 
-    private static List<String> generatePrefixesFromIdentifier(String identifier) {
-        List<String> prefixes = null;
+    private static List<String> generatePrefixesFromIdentifier(String identifier) throws TourPlannerException {
+        List<String> prefixes;
         switch (identifier) {
-        case "-c":
-            prefixes = Arrays.asList("/n", "/cn", "/m");
+        case CLIENT_IDENTIFIER:
+            prefixes = Arrays.asList(CLIENT_NAME_PREFIX, CLIENT_CONTACT_NUMBER_PREFIX, CLIENT_EMAIL_PREFIX);
             break;
-        case "-t":
-            prefixes = Arrays.asList("/n", "/p");
+        case TOUR_IDENTIFIER:
+            prefixes = Arrays.asList(TOUR_NAME_PREFIX, TOUR_PRICE_PREFIX);
             break;
-        case "-f":
-            prefixes = Arrays.asList("/d", "/r", "/dd", "/rd");
+        case FLIGHT_IDENTIFIER:
+            prefixes = Arrays.asList(FLIGHT_DEPARTURE_PREFIX, FLIGHT_RETURN_PREFIX,
+                    FLIGHT_DEPARTURE_DATE_PREFIX, FLIGHT_RETURN_DATE_PREFIX);
             break;
-        case "-p":
-            prefixes = Arrays.asList("/c", "/t", "/f");
+        case PACKAGE_IDENTIFIER:
+            prefixes = Arrays.asList(CLIENT_PREFIX, TOUR_PREFIX, FLIGHT_PREFIX);
             break;
         default:
-            break;
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
         return prefixes;
     }
@@ -254,20 +285,20 @@ public class Parser {
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
      */
-
     private static int obtainArrayIndex(String prefix, String identifier) {
         int index;
+
         switch (identifier) {
-        case "-c":
+        case CLIENT_IDENTIFIER:
             index = obtainClientArrayIndex(prefix);
             break;
-        case "-t":
+        case TOUR_IDENTIFIER:
             index = obtainTourArrayIndex(prefix);
             break;
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             index = obtainFlightArrayIndex(prefix);
             break;
-        case "-p":
+        case PACKAGE_IDENTIFIER:
             index = obtainPackageArrayIndex(prefix);
             break;
         default:
@@ -277,16 +308,24 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns a value's insertion index into the ClientPackage input array, based on the given prefix.
+     * ClientPackage array: (Package ID, Client id, Tour id, Flight id)
+     *
+     * @param prefix prefix of value extracted
+     * @return respective insertion index
+     */
     private static int obtainPackageArrayIndex(String prefix) {
         int index;
+
         switch (prefix) {
-        case "/c":
+        case CLIENT_PREFIX:
             index = 1;
             break;
-        case "/t":
+        case TOUR_PREFIX:
             index = 2;
             break;
-        case "/f":
+        case FLIGHT_PREFIX:
             index = 3;
             break;
         default:
@@ -296,20 +335,27 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns a value's insertion index into the Flight input array, based on the given prefix.
+     * Flight array: (ID, Departure destination, Return destination, Departure Date,Return Date)
+     *
+     * @param prefix prefix of value extracted
+     * @return respective insertion index
+     */
     private static int obtainFlightArrayIndex(String prefix) {
         int index;
 
         switch (prefix) {
-        case "/d":
+        case FLIGHT_DEPARTURE_PREFIX:
             index = 1;
             break;
-        case "/r":
+        case FLIGHT_RETURN_PREFIX:
             index = 2;
             break;
-        case "/dd":
+        case FLIGHT_DEPARTURE_DATE_PREFIX:
             index = 3;
             break;
-        case "/rd":
+        case FLIGHT_RETURN_DATE_PREFIX:
             index = 4;
             break;
         default:
@@ -319,14 +365,21 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns a value's insertion index into the Tour input array, based on the given prefix.
+     * Tour array: (ID, Name, Price)
+     *
+     * @param prefix prefix of value extracted
+     * @return respective insertion index
+     */
     private static int obtainTourArrayIndex(String prefix) {
         int index;
 
         switch (prefix) {
-        case "/n":
+        case TOUR_NAME_PREFIX:
             index = 1;
             break;
-        case "/p":
+        case TOUR_PRICE_PREFIX:
             index = 2;
             break;
         default:
@@ -336,17 +389,24 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns a value's insertion index into the Client input array, based on the given prefix.
+     * Client array: (ID, Name, Contact Number, eMail)
+     *
+     * @param prefix prefix of value extracted
+     * @return respective insertion index
+     */
     private static int obtainClientArrayIndex(String prefix) {
         int index;
 
         switch (prefix) {
-        case "/n":
+        case CLIENT_NAME_PREFIX:
             index = 1;
             break;
-        case "/cn":
+        case CLIENT_CONTACT_NUMBER_PREFIX:
             index = 2;
             break;
-        case "/m":
+        case CLIENT_EMAIL_PREFIX:
             index = 3;
             break;
         default:
@@ -379,53 +439,6 @@ public class Parser {
             }
         }
         return true;
-    }
-
-    /**
-     * Parses string containing an integer value to int.
-     *
-     * @param params full user's argument/params string after splitting
-     * @return the client index from argument string
-     */
-    private static int stringToInt(String params) {
-        int index = Integer.parseInt(params);
-        return index;
-    }
-
-    /**
-     * Parses arguments with respect to the add client command.
-     *
-     * @param params full user's argument string
-     * @throws TourPlannerException if there are missing fields,duplicated or missing prefixes
-     */
-    private static Command parseAdd(String params) throws TourPlannerException {
-        String[] identifierAndArgs = splitCommandString(params, " ");
-        String identifier = identifierAndArgs[0];
-        String args = identifierAndArgs[1];
-
-        TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(args, identifier);
-        ArrayList<String> valuesList = extractValuesIntoArray(prefixIndexes, args, identifier);
-        String[] values = valuesList.toArray(new String[valuesList.size()]);
-
-        switch (identifier) {
-        case "-c":
-            handleClientException(values);
-            Client client = new Client(values);
-            return new AddClientCommand(client);
-        case "-f":
-            handleFlightException(values);
-            Flight flight = new Flight(values);
-            return new AddFlightCommand(flight);
-        case "-t":
-            handleTourException(values);
-            Tour tour = new Tour(values);
-            return new AddTourCommand(tour);
-        case "-p":
-            return new AddClientPackageCommand(values);
-        default:
-            break;
-        }
-        return null;
     }
 
     private static void handleTourException(String[] values) throws TourPlannerException {
@@ -469,72 +482,113 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments with respect to the add client command.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields,duplicated or missing prefixes
+     */
+    private static Command parseAdd(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[IDENTIFIER_INDEX];
+        String args = identifierAndArgs[ARGS_INDEX];
+
+        TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(args, identifier);
+        ArrayList<String> valuesList = extractValuesIntoArray(prefixIndexes, args, identifier);
+        String[] values = valuesList.toArray(new String[valuesList.size()]);
+
+        switch (identifier) {
+        case CLIENT_IDENTIFIER:
+            handleClientException(values);
+            Client client = new Client(values);
+            return new AddClientCommand(client);
+        case FLIGHT_IDENTIFIER:
+            handleFlightException(values);
+            Flight flight = new Flight(values);
+            return new AddFlightCommand(flight);
+        case TOUR_IDENTIFIER:
+            handleTourException(values);
+            Tour tour = new Tour(values);
+            return new AddTourCommand(tour);
+        case PACKAGE_IDENTIFIER:
+            return new AddClientPackageCommand(values);
+        default:
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
+        }
+    }
+
     private static Command parseList(String params) throws TourPlannerException {
         switch (params) {
-        case "-c":
+        case CLIENT_IDENTIFIER:
             return new ListClientCommand();
-        case "-t":
+        case TOUR_IDENTIFIER:
             return new ListTourCommand();
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             return new ListFlightCommand();
-        case "-p":
+        case PACKAGE_IDENTIFIER:
             return new ListClientPackageCommand();
         default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
     }
 
     private static Command parseCut(String params) throws TourPlannerException {
         String[] identifierAndArgs = splitCommandString(params, " ");
-        String identifier = identifierAndArgs[0];
-        String args = identifierAndArgs[1];
+        String identifier = identifierAndArgs[IDENTIFIER_INDEX];
+        String args = identifierAndArgs[ARGS_INDEX];
 
         switch (identifier) {
-        case "-c":
+        case CLIENT_IDENTIFIER:
             return new CutClientCommand(args);
-        case "-t":
+        case TOUR_IDENTIFIER:
             return new CutTourCommand(args);
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             return new CutFlightCommand(args);
-        case "-p":
+        case PACKAGE_IDENTIFIER:
             return new CutClientPackageCommand(args);
         default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
     }
 
     private static Command parseFind(String params) throws TourPlannerException {
         String[] prefixSuffix = params.split(" ", 2);
         if (prefixSuffix.length < 2) {
-            throw new TourPlannerException(ERROR_MISSING_NAME);
+            throw new TourPlannerException(ERROR_MISSING_NAME_ID);
         }
-        String prefix = prefixSuffix[0];
-        String suffix = prefixSuffix[1];
+        String prefix = prefixSuffix[IDENTIFIER_INDEX];
+        String suffix = prefixSuffix[ARGS_INDEX];
         switch (prefix) {
-        case "-c":
+        case CLIENT_IDENTIFIER:
             return new FindClientCommand(suffix);
-        case "-t":
+        case TOUR_IDENTIFIER:
             return new FindTourCommand(suffix);
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             return new FindFlightCommand(suffix);
         default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
     }
 
-    private static Command parseSort(String params) {
+    /**
+     * Parses arguments with respect to the sort command.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields,duplicated or missing prefixes
+     */
+    private static Command parseSort(String params) throws TourPlannerException {
         String[] identifierAndFilter = splitCommandString(params, " ");
-        String identifier = identifierAndFilter[0];
-        String filter = identifierAndFilter[1];
+        String identifier = identifierAndFilter[IDENTIFIER_INDEX];
+        String filter = identifierAndFilter[ARGS_INDEX];
         switch (identifier) {
-        case "-t":
+        case TOUR_IDENTIFIER:
             return new SortTourCommand(filter);
-        case "-c":
+        case CLIENT_IDENTIFIER:
             return new SortClientCommand(filter);
-        case "-f":
+        case FLIGHT_IDENTIFIER:
             return new SortFlightCommand(filter);
         default:
-            return null;
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
     }
 }

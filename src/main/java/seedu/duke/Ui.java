@@ -17,16 +17,22 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String ADD_MESSAGE = " has been added:";
+    private static final String ADD_CLIENT_MESSAGE = "Client has been added:";
+    private static final String ADD_FLIGHT_MESSAGE = "Flight has been added:";
+    private static final String ADD_TOUR_MESSAGE = "Tour has been added:";
+    private static final String ADD_CLIENT_PACKAGE_MESSAGE = "Client package has been added:";
+
+    private static final String CUT_CLIENT_MESSAGE = "Client has been deleted:";
+    private static final String CUT_FLIGHT_MESSAGE = "Flight has been deleted:";
+    private static final String CUT_TOUR_MESSAGE = "Tour has been deleted:";
+    private static final String CUT_CLIENT_PACKAGE_MESSAGE = "Client package has been deleted:";
+
     private static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
     private static final String LIST_MESSAGE = "Here is a list of all ";
     private static final String FIND_FAIL_MESSAGE_LEFT = "I'm sorry, there seems to be no ";
     private static final String FIND_SUCCESS_MESSAGE_LEFT = "This is the ";
     private static final String FIND_MESSAGE_RIGHT = "that matches your search";
     private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
-
-    private static final String CLEAR_MESSAGE = "All clients have been deleted";
-    private static final String CUT_MESSAGE = "Client has been deleted:";
 
     private static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
     private static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
@@ -37,6 +43,7 @@ public class Ui {
     private static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
     private static final Scanner in = new Scanner(System.in);
+
 
     /**
      * Empty Ui class constructor.
@@ -88,30 +95,39 @@ public class Ui {
     }
 
     /**
-     * Ui response to clear client list command.
-     */
-    public void showClear() {
-        show(CLEAR_MESSAGE);
-    }
-
-    /**
-     * Ui response to cut client command.
+     * Ui response to cut command.
+     * Checks the type of object before showing a customised message for deleting the specific object.
      *
      * @param object the object that was cut
      */
     public void showCut(Object object) {
-        show(CUT_MESSAGE + "\n" + object);
+        if (object instanceof Client) {
+            show(CUT_CLIENT_MESSAGE + "\n" + object);
+        } else if (object instanceof Flight) {
+            show(CUT_FLIGHT_MESSAGE + "\n" + object);
+        } else if (object instanceof Tour) {
+            show(CUT_TOUR_MESSAGE + "\n" + object);
+        } else if (object instanceof ClientPackage) {
+            show(CUT_CLIENT_PACKAGE_MESSAGE + "\n" + object);
+        }
     }
 
     /**
-     * Ui response to add client command.
+     * Ui response to add command.
+     * Checks the type of object before showing a customised message for deleting the specific object.
      *
-     * @param client the client that was just added
+     * @param object the object that was cut
      */
-
-    //Client Functions
-    public void showAddClient(Client client) {
-        show("Client" + ADD_MESSAGE + "\n" + client);
+    public void showAdd(Object object) {
+        if (object instanceof Client) {
+            show(ADD_CLIENT_MESSAGE + "\n" + object);
+        } else if (object instanceof Flight) {
+            show(ADD_FLIGHT_MESSAGE + "\n" + object);
+        } else if (object instanceof Tour) {
+            show(ADD_TOUR_MESSAGE + "\n" + object);
+        } else if (object instanceof ClientPackage) {
+            show(ADD_CLIENT_PACKAGE_MESSAGE + "\n" + object);
+        }
     }
 
     public void showListClient(ClientList clients) {
@@ -150,15 +166,9 @@ public class Ui {
     private void showFlightTourOfClient(Client currClient, ClientPackageList clientPackages) {
         ArrayList<ClientPackage> clientPackagesWithClient;
         clientPackagesWithClient = clientPackages.getClientPackageByClient(currClient);
-        for (ClientPackage clientPackage: clientPackagesWithClient) {
+        for (ClientPackage clientPackage : clientPackagesWithClient) {
             System.out.println(clientPackage + "\n");
         }
-    }
-
-
-    //Tour Functions
-    public void showAddTour(Tour tour) {
-        show("Tour" + ADD_MESSAGE + "\n" + tour);
     }
 
     public void showListTour(TourList tours) {
@@ -198,6 +208,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort tour by id.
+     *
+     * @param tours           the current list of tours in the database
+     * @param sortedTourCodes the list of sorted tour codes/ids (by alphabetical order)
+     * @throws TourPlannerException if there is no tours that can be found given the tour code
+     */
     public void showSortedTourById(TourList tours, ArrayList<String> sortedTourCodes)
             throws TourPlannerException {
         show(SORT_TOUR_ID_MESSAGE);
@@ -209,7 +226,14 @@ public class Ui {
         }
     }
 
-    public void showSortedTourByPrice(TourList tours, ArrayList<Float> sortedTourPrices) {
+    /**
+     * Ui response to sort tour by price.
+     *
+     * @param tours            the current list of tours in the database
+     * @param sortedTourPrices the list of sorted tour prices (by ascending order)
+     * @throws TourPlannerException if there is no tours that can be found given the tour price
+     */
+    public void showSortedTourByPrice(TourList tours, ArrayList<Float> sortedTourPrices) throws TourPlannerException {
         tours.initTempArray();
         show(SORT_TOUR_PRICE_MESSAGE);
         int listIndex = 1;
@@ -220,6 +244,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort client by id.
+     *
+     * @param clients         the current list of clients in the database
+     * @param sortedClientIds the list of sorted client IDs (by alphabetical order)
+     * @throws TourPlannerException if there is no clients that can be found given the client ID
+     */
     public void showSortedClientById(ClientList clients, ArrayList<String> sortedClientIds)
             throws TourPlannerException {
         show(SORT_CLIENT_ID_MESSAGE);
@@ -231,6 +262,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort client by name.
+     *
+     * @param clients           the current list of clients in the database
+     * @param sortedClientNames the list of sorted client names (by alphabetical order)
+     * @throws TourPlannerException if there is no clients that can be found given the client name
+     */
     public void showSortedClientByName(ClientList clients, ArrayList<String> sortedClientNames)
             throws TourPlannerException {
         clients.initTempArray();
@@ -243,6 +281,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort flight by ID.
+     *
+     * @param flights   the current list of flights in the database
+     * @param sortedIds the list of sorted flight IDs (by alphabetical order)
+     * @throws TourPlannerException if there is no flights that can be found given the flight ID
+     */
     public void showSortedFlightById(FlightList flights, ArrayList<String> sortedIds)
             throws TourPlannerException {
         show(SORT_FLIGHT_ID_MESSAGE);
@@ -254,6 +299,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort flight by return date.
+     *
+     * @param flights                   the current list of flights in the database
+     * @param sortedFlightByArriveDates the list of sorted return dates (by natural order of time)
+     * @throws TourPlannerException if there is no flights that can be found given the return date
+     */
     public void showSortedFlightByReturn(FlightList flights, ArrayList<String> sortedFlightByArriveDates)
             throws TourPlannerException {
         show(SORT_FLIGHT_BY_ARRIVAL_MESSAGE);
@@ -266,6 +318,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to sort flight by depart date.
+     *
+     * @param flights                      the current list of flights in the database
+     * @param sortedFlightByDepartureDates the list of sorted departure dates (by natural order of time)
+     * @throws TourPlannerException if there is no flights that can be found given the departure date
+     */
     public void showSortedFlightByDeparture(FlightList flights, ArrayList<String> sortedFlightByDepartureDates)
             throws TourPlannerException {
         show(SORT_FLIGHT_BY_DEPARTURE_MESSAGE);
@@ -276,10 +335,6 @@ public class Ui {
             show(listIndex + ". " + currFlight + System.lineSeparator());
             listIndex++;
         }
-    }
-
-    public void showAddFlight(Flight flight) {
-        show("Flight" + ADD_MESSAGE + "\n" + flight);
     }
 
     public void showListFlight(FlightList flights) {
@@ -319,11 +374,6 @@ public class Ui {
         }
     }
 
-    //ClientPackage Functions
-    public void showAddClientPackage(ClientPackage clientPackage) {
-        show("Client Package" + ADD_MESSAGE + "\n" + clientPackage);
-    }
-
     public void showListClientPackage(ClientPackageList clientPackages) {
         int count = clientPackages.getClientPackageCount();
         if (count == 0) {
@@ -351,7 +401,6 @@ public class Ui {
     /**
      * Prints an exit message to the text Ui to acknowledge exiting the application.
      */
-
     public void showBye() {
         show(BYE_MESSAGE);
         showLine();
