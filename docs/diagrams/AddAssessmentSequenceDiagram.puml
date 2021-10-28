@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":Command" as command
+Participant "<<class>>\nUtil" as util
+Participant ":ModuleList" as moduleList
+Participant ":AssessmentList" as assessmentList
+Participant ":Storage" as storage
+
+activate taa
+
+taa -> taa : loadModuleListFromStorage()
+activate taa
+
+taa -> storage : load()
+activate storage
+
+activate moduleList
+@enduml
