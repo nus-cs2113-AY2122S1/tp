@@ -127,10 +127,10 @@ public class PrintManager {
         printDashes();
     }
 
-    public void printUpdatedHabitInterval(String goalName, String habitName, int newInterval) {
+    public void printUpdatedHabit(String goalDescription, String oldHabitDescription, String newHabitDescription) {
         printDashes();
-        System.out.println("The interval for your habit \"" + habitName + "\" under your goal \"" + goalName
-                + "\" has been changed to " + newInterval);
+        System.out.println("Your habit \"" + oldHabitDescription + "\" of goal " + goalDescription
+                + " has been changed to \"" + newHabitDescription + "\".");
         printDashes();
     }
 

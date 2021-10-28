@@ -3,6 +3,8 @@ package happybit.parser;
 import happybit.command.Command;
 import happybit.command.UpdateGoalNameCommand;
 import happybit.command.UpdateHabitIntervalCommand;
+import happybit.command.UpdateHabitNameCommand;
+import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
 
@@ -24,16 +26,19 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
-            + "Eg: n/Reach for the starts";
+            + "Eg: n/Reach for the stars";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
+    private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
     private static final int FLAG_LENGTH = 2;
 
     //todo S L A P more in the future; refer to AddParser
 
     /**
-     * Parses detail from user into goalIndex and goalName to create a new Command.
+     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
      *
-     * @param input Details from user.
-     * @return A Command class with the goalIndex and goalName.
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex and newGoalName.
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
@@ -44,8 +49,20 @@ public class UpdateParser extends Parser {
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
-    public static Command parseUpdateHabitNameCommand(String commandInstruction) {
-        return null;
+    /**
+     * Parses detail from user into goalIndex, habitIndex, and newHabitName (information) to create a new Command.
+     *
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex, habitIndex, and newHabitName.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     */
+    public static Command parseUpdateHabitNameCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
+        String[] parameters = splitInput(input);
+        int goalIndex = getGoalIndex(parameters);
+        int habitIndex = getHabitIndex(parameters); //if name missing flag, will give (wrong) "has to be a number" error
+        String newHabitName = getNewHabitName(parameters);
+        return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
     }
 
     public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
@@ -78,7 +95,7 @@ public class UpdateParser extends Parser {
         if (strGoalIndex == null || strGoalIndex.equals(FLAG_GOAL_INDEX)) {
             throw new HaBitParserException(ERROR_GOAL_INDEX_FORMAT);
         }
-        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
+        return stringToInt(strGoalIndex.substring(FLAG_LENGTH), FLAG_GOAL_INDEX) - 1;
     }
 
     private static int getHabitIndex(String[] parameters) throws HaBitParserException {
@@ -90,6 +107,21 @@ public class UpdateParser extends Parser {
     }
 
     /**
+     * Gets the habit index from user input.
+     *
+     * @param parameters String array of command parameters.
+     * @return Habit index.
+     * @throws HaBitParserException If the habit index flag or habit index is absent, or non-integer.
+     */
+    private static int getHabitIndex(String[] parameters) throws HaBitParserException {
+        String strHabitIndex = getParameter(parameters, FLAG_HABIT_INDEX);
+        if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
+            throw new HaBitParserException(ERROR_HABIT_INDEX_FORMAT);
+        }
+        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), FLAG_HABIT_INDEX) - 1;
+    }
+
+    /**
      * Gets the new goal name from user input. All leading and trailing whitespaces will be removed.
      *
      * @param parameters String array of command parameters.
@@ -97,9 +129,24 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If the new goal name or its flag is absent.
      */
     private static String getNewGoalName(String[] parameters) throws HaBitParserException {
+        String strGoalIndex = getParameter(parameters, FLAG_NAME);
+        if (strGoalIndex == null || strGoalIndex.equals(FLAG_NAME)) {
+            throw new HaBitParserException(ERROR_GOAL_NAME_FORMAT);
+        }
+        return strGoalIndex.substring(FLAG_LENGTH).trim();
+    }
+
+    /**
+     * Gets the new habit name from user input. All leading and trailing whitespaces will be removed.
+     *
+     * @param parameters String array of command parameters.
+     * @return New goal name.
+     * @throws HaBitParserException If the new goal name or its flag is absent.
+     */
+    private static String getNewHabitName(String[] parameters) throws HaBitParserException {
         String strHabitIndex = getParameter(parameters, FLAG_NAME);
         if (strHabitIndex == null || strHabitIndex.equals(FLAG_NAME)) {
-            throw new HaBitParserException(ERROR_GOAL_NAME_FORMAT);
+            throw new HaBitParserException(ERROR_HABIT_NAME_FORMAT);
         }
         return strHabitIndex.substring(FLAG_LENGTH).trim();
     }
@@ -121,11 +168,17 @@ public class UpdateParser extends Parser {
      * @return Integer parsed from the string.
      * @throws HaBitParserException If the string fails to parse.
      */
-    private static int stringToInt(String strInt, String errorMessage) throws HaBitParserException {
+    private static int stringToInt(String strInt, String flag) throws HaBitParserException {
         try {
             return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
-            throw new HaBitParserException(errorMessage);
+            if (flag.equals(FLAG_GOAL_INDEX)) {
+                throw new HaBitParserException(UpdateParser.ERROR_GOAL_INDEX_NON_INTEGER);
+            } else if (flag.equals(FLAG_HABIT_INDEX)) {
+                throw new HaBitParserException(UpdateParser.ERROR_HABIT_INDEX_NON_INTEGER);
+            } else {
+                throw new HaBitParserException("Index has to be a number.");
+            }
         }
     }
 }

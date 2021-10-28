@@ -105,6 +105,15 @@ public class Habit {
     }
 
     /**
+     * Updates the habit name with a new one from user.
+     *
+     * @param habitName New habit name.
+     */
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
+
+    /**
      * Setter for endDate of habit.
      * Used in AddHabitCommand to manually set the endDate since goalList is only accessible there.
      *
