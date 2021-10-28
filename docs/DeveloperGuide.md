@@ -64,9 +64,9 @@ This is a (partial) sequence diagram of parsing an "add recipe" command. It demo
 
 ![](diagrams/ParserSequenceDiagram.png)
 
-*Note: The lifelines for `ArgsParser`, `RecipeParser`, `IngredientParser`, and `QuantityParser` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.*
+> **Note**: The lifelines for `ArgsParser`, `RecipeParser`, `IngredientParser`, and `QuantityParser` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
 
-*Note: This is a simplified diagram, and does not show that the code checks that there are an equal number of ingredients and quantities.*
+> **Note**: This is a simplified diagram, and does not show that the code checks that there are an equal number of ingredients and quantities.  
 
 ## Implementation
 This section describes how the features are implemented.
@@ -217,8 +217,7 @@ Young adults who are living in their own home.
 
 ### Value proposition
 
-To help young adults who are living in their own home keep track of ingredients and foods that they can make based on
-the ingredients they have in their kitchen.
+To help young adults who are living in their own home keep track of ingredients and foods that they can make based on the ingredients they have in their kitchen.
 
 ## User Stories
 
@@ -243,7 +242,8 @@ the ingredients they have in their kitchen.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on Windows, Mac, and any mainstream Linux OS as long as it has Java 11 or above installed.
+2. {more to be added}
 
 ## Glossary
 
