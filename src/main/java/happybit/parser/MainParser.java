@@ -15,9 +15,8 @@ public class MainParser {
     private static final String COMMAND_ADD_GOAL = "set";
     private static final String COMMAND_ADD_HABIT = "add";
     private static final String COMMAND_SET_GOAL = "goal";
-    private static final String COMMAND_UPDATE_GOAL_NAME = "update";
-    private static final String COMMAND_UPDATE_HABIT_NAME = "change";
-    private static final String COMMAND_UPDATE_HABIT_INTERVAL = "interval";
+    private static final String COMMAND_UPDATE_GOALS = "update";
+    private static final String COMMAND_UPDATE_HABITS = "change";
     private static final String COMMAND_LIST_GOAL = "list";
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
@@ -132,12 +131,10 @@ public class MainParser {
             return DeleteParser.parseDeleteHabitCommand(details);
         case COMMAND_COMPLETE_HABIT:
             return DoneParser.parseDoneHabitCommand(details);
-        case COMMAND_UPDATE_GOAL_NAME:
-            return UpdateParser.parseUpdateGoalNameCommand(details);
-        case COMMAND_UPDATE_HABIT_NAME:
-            return UpdateParser.parseUpdateHabitNameCommand(details);
-        case COMMAND_UPDATE_HABIT_INTERVAL:
-            return UpdateParser.parseUpdateHabitIntervalCommand(details);
+        case COMMAND_UPDATE_GOALS:
+            return UpdateParser.parseUpdateGoalCommands(details);
+        case COMMAND_UPDATE_HABITS:
+            return UpdateParser.parseUpdateHabitCommands(details);
         case COMMAND_EXIT:
             return new ExitCommand();
         case COMMAND_RETURN:
