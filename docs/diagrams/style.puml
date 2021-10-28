@@ -1,6 +1,6 @@
-//@@author se-edu-reused
-//taken from addressbook-level3
 /'
+ '//@@author se-edu-reused
+ '//taken from addressbook-level3
  'Commonly used styles and colors across diagrams.
  'Refer to https://plantuml-documentation.readthedocs.io/en/latest for a more
  'comprehensive list of skinparams.

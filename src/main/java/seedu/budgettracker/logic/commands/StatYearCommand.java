@@ -43,29 +43,9 @@ public class StatYearCommand extends StatCommand {
         System.out.printf("%.2f", expenditureTotal);
     }
 
-    public void drawVerticalPercentatge(double[] barPercentage) {
-        System.out.println("Percentage of Money Spent");
-        System.out.println("     JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
-        for (int i = 10; i > 0; i--) {
-            if (i == 10) {
-                System.out.print("100% ");
-            } else {
-                System.out.print((i * 10) + "%  ");
-            }
-            for (int j = 0; j < 12; j++) {
-                if ((i * 10) < barPercentage[j]) {
-                    System.out.print(" #  ");
-                } else {
-                    System.out.print("    ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     @Override
     public void execute(boolean isLoadingStorage) {
-        double amount = 0.0;
+        double amount;
 
         double[] barPercentage;
         barPercentage = new double[12];
