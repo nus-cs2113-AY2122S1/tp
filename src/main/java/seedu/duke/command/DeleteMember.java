@@ -1,12 +1,13 @@
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
 
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 /**
  * Deletes a Member from the MemberList.
@@ -15,21 +16,47 @@ public class DeleteMember {
 
     /**
      * Constructor. Deletes a Member from the MemberList given its index.
-     * @param members MemberList to delete Member from.
-     * @param index Index of Member object to delete. Note that the actual index is index -1.
+     *
+     * @param members   MemberList to delete Member from.
+     * @param parameter Index of Member object to delete. Note that the actual index is index -1.
      */
-    public DeleteMember(MemberList members, int index) {
+    public DeleteMember(MemberList members, Object parameter) {
+        if (parameter instanceof Integer) {
+            deleteMemberByIndex(members, (Integer) parameter);
+        } else if (parameter instanceof String) {
+            deleteMemberByString(members, (String) parameter);
+        } else {
+            System.out.println("Error in processing parameter, please input either name or index of member to delete.");
+        }
+    }
+
+    public void deleteMemberByIndex(MemberList members, int index) {
         try {
             assert index >= 1;
-            Member toDelete = members.deleteMember(index);
-            File dukeMemberFile = new File("dukeMembers.csv");
-            writeMemberFile(dukeMemberFile, members);
+            Member toDelete = members.deleteMemberByIndex(index);
             Ui.printDeletedMemberMessage(toDelete);
+            File dukeMemberFile = new File("CCAMembers.csv");
+            writeMemberFile(dukeMemberFile, members);
             //Update save file
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no such member number...");
         } catch (AssertionError e) {
             System.out.println("The index to delete must be an integer >= 1");
+        }
+    }
+
+    public void deleteMemberByString(MemberList members, String name) {
+        try {
+            assert !name.equals("");
+            Member toDelete = members.deleteMemberByName(name);
+            Ui.printDeletedMemberMessage(toDelete);
+            File dukeMemberFile = new File("CCAMembers.csv");
+            writeMemberFile(dukeMemberFile, members);
+            //Update save file
+        } catch (InvalidMemberException e) {
+            Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
+        } catch (AssertionError e) {
+            System.out.println("Name cannot be empty!");
         }
     }
 }
