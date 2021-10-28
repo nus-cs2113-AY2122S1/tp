@@ -26,6 +26,16 @@ public class Parser {
         if (inputCommand.equals("quit")) {
             Ui.goodBye();
             return false;
+        } else if (inputCommand.equals("close")) {
+            try {
+                Storage.setOpenTripAsLastTrip();
+                Storage.setLastExpense(null);
+                Storage.closeTrip();
+                return true;
+            } catch (NullPointerException e) {
+                Ui.printNoOpenTripError();
+                return true;
+            }
         } else if (!checkValidCommand(inputCommand)) {
             Storage.getLogger().log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
@@ -34,11 +44,6 @@ public class Parser {
                 && !inputCommand.equals("create")) {
             Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
-            return true;
-        } else if (inputCommand.equals("close")) {
-            Storage.setOpenTripAsLastTrip();
-            Storage.setLastExpense(null);
-            Storage.closeTrip();
             return true;
         }
 

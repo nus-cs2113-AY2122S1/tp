@@ -180,9 +180,8 @@ public class Ui {
     }
 
     public static void printNoOpenTripError() {
-        System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        System.out.println("You have not opened any trip yet. Please open a trip to proceed further.");
         printAllTrips();
-        System.out.print("Please enter the trip you would like to open: ");
     }
 
     public static void printAllTrips() {
