@@ -26,6 +26,7 @@ its developers (😀 us!) at our [Main Page](README.md).
     * [Update a Goal: `update`](#update-a-goal-update)
     * [Remove a Goal: `remove`](#remove-a-goal-remove)
     * [Add a Habit: `add`](#add-a-habit-add)
+    * [Change a Habit Name: `change`]()
     * [Complete a Habit: `done`](#complete-a-habit-done)
     * [Delete a Habit: `delete`](#delete-a-habit-delete)
     * [View all Habit: `view`](#view-all-habits-view)
@@ -272,12 +273,12 @@ Updates an attribute (Name, Date, or Goal Type) of a goal specified by its index
 (To err is human. That's why we have the `update` feature; designed to be more forgiving,
 when we have the occasional oopsies. 👍 )
 
+> 📃 **Note:**
+> 1. `<GOAL_INDEX>` used in the following commands is an integer.
+
 #### Updating Name
 
 Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
-
-> 📃 **Note:**
-> 1. `<GOAL_INDEX>` is an integer.
 
 Example:
 
@@ -301,9 +302,6 @@ Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
 _or_ <br>
 Format: `update g/<GOAL_INDEX> e/<NEW_END_DATE>`
 
-> 📃 **Note:**
-> 1. `<GOAL_INDEX>` is an integer.
-
 Example:
 
 ```
@@ -317,8 +315,18 @@ Output:
 #### Updating Goal Type
 Format: `update g/<GOAL_INDEX> t/<NEW_GOAL_TYPE>`
 
-> 📃 **Note:**
-> 1. `<GOAL_INDEX>` is an integer.
+Example:
+
+```
+
+```
+Output:
+```
+
+```
+
+#### Updating Goal Interval
+Format: `update g/<GOAL_INDEX> i/<INTERVALS>`
 
 Example:
 
@@ -380,6 +388,20 @@ ________________________________________________________________________________
 Press enter to return to command mode...
 ```
 
+### Change a Habit Name: `change`
+Changes and updates the name of a habit.
+
+Format: `change g/<GOAL_INDEX> h/<HABIT_INDEX> n/<NEW_HABIT_NAME>`
+
+Example:
+```
+
+```
+
+Output:
+```
+
+```
 
 ### Complete a Habit: `done`
 Marks a habit under a goal as done.

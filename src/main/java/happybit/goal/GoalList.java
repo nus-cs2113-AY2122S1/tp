@@ -13,6 +13,7 @@ public class GoalList {
     private static final String ERROR_INVALID_GOAL_INDEX = "There are no goals at that index.";
     private static final String ERROR_EMPTY_HABIT_LIST = "There are no habits listed under this goal!";
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
+    private static final String ERROR_IDENTICAL_NEW_NAME = "There is no change in name.";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
@@ -235,6 +236,9 @@ public class GoalList {
             throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         String oldGoalName = goal.getGoalName();
+
+        compareNewNameWithOldName(oldGoalName, newGoalName);
+
         goal.setGoalName(newGoalName);
         goalList.set(goalIndex, goal);
         printManager.printUpdatedGoal(oldGoalName, newGoalName);
@@ -250,8 +254,17 @@ public class GoalList {
      * @throws HaBitCommandException If the goalIndex and/or habitIndex is not within its respective list range.
      */
     public void updateHabitNameFromGoal(int goalIndex, int habitIndex, String newHabitName, PrintManager printManager)
-        throws HaBitCommandException {
-        // To be implemented
+            throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habitList = goal.getHabitList();
+        Habit habit = getHabit(habitList, habitIndex);
+        String oldHabitName = habit.getHabitName();
+
+        compareNewNameWithOldName(oldHabitName, newHabitName);
+
+        habit.setHabitName(newHabitName);
+        habitList.set(habitIndex, habit);
+        printManager.printUpdatedHabit(goal.getGoalName(), oldHabitName, newHabitName);
     }
 
     /**
@@ -346,4 +359,17 @@ public class GoalList {
         return habit;
     }
 
+    /**
+     * Checks new name given by user with old name to ensure that they are different.
+     * Throws an exception if they are the same (what are you even doing user.)
+     *
+     * @param oldName Current name of goal or habit.
+     * @param newName New goal or habit name given by user.
+     * @throws HaBitCommandException If old and new names are identical.
+     */
+    private void compareNewNameWithOldName(String oldName,String newName)  throws HaBitCommandException{
+        if (oldName.equals(newName)) {
+            throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
+        }
+    }
 }
