@@ -21,14 +21,10 @@ public abstract class StaffCommandParser {
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_HELP = "help";
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_SWITCH = "switch";
     private static final String COMMAND_ARCHIVE = "archive";
     private static final String COMMAND_UNARCHIVE = "unarchive";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
-    private static final String EMPTY_STRING = "";
 
     /**
      * Parses the user input and returns the corresponding command when the view type is MEDICAL_STAFF_INFO.

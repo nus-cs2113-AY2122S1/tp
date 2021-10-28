@@ -2,12 +2,35 @@ package medbot;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import medbot.person.Person;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import medbot.person.Patient;
 import medbot.person.Staff;
 
-class SchedulerTest {
+import java.util.ArrayList;
+
+// class SchedulerTest {
+
+//        private Scheduler scheduler;
+//        private ArrayList<Person> personList;
+//
+//        @BeforeEach
+//        void init() {
+//            Patient patient = new Patient();
+//            patient.setName("Bob Smith");
+//            Staff staff = new Staff();
+//            staff.setName("Dr Wong");
+//            personList.add(patient);
+//            personList.add(staff);
+//        }
+//
+//        private Patient intialisePatientWithName(String name) {
+//            Patient patient = new Patient();
+//            patient.setName(name);
+//            return patient;
+//        }
     /*
         Scheduler scheduler1 = new Scheduler();
 
@@ -33,12 +56,53 @@ class SchedulerTest {
         }
     */
 
+//    @Test
+//    public void testAddPatient_success() {
+//        Scheduler scheduler = new Scheduler();
+//        Patient patient = new Patient();
+//    }
+//
+//    @Test
+//    public void testAddPatient_failure() {
+//
+//    }
+//
+//    @Test
+//    public void testEditPatient_Success() {
+//
+//    }
+//
+//    @Test
+//    public void testEditPatient_Failure() {
+//
+//    }
+//
+//    @Test
+//    public void testDeletePatient_Success() {
+//
+//    }
+//
+//    @Test
+//    public void testDeletePatient_Failure() {
+//
+//    }
+//
+//    @Test
+//    public void testGetPatientInfo_Success() {
+//
+//    }
+//    @Test
+//    public void testAddStaff_success() {
+//
+//    }
+//
+//    @Test
+//    public void testAddStaff_failure() {
+//
+//    }
 
-    @Test
-    public void testAddPatient_success() {
-        Scheduler scheduler = new Scheduler();
-
-    }
 
 
-}
+
+
+//}

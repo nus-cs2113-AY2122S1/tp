@@ -35,9 +35,9 @@ public abstract class Person implements ListItem {
     protected String phoneNumber = "";
     protected String emailAddress = "";
     protected String residentialAddress = "";
-    protected PersonType personType;
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
     protected boolean isArchived = false;
+    protected PersonType personType;
 
     public int getId() {
         return personId;
@@ -165,6 +165,7 @@ public abstract class Person implements ListItem {
         personalAppointmentList.deleteAppointment(dateTimeCode);
     }
 
+    //@@author Kureans
     public List<Integer> listAppointments(FilterType filterType, int dateTimeCode) {
         switch (filterType) {
         case BEFORE:
@@ -177,6 +178,7 @@ public abstract class Person implements ListItem {
         }
     }
 
+    //@@author
     /**
      * Text to be written to storage file of a person.
      *

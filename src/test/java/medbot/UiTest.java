@@ -118,11 +118,12 @@ class UiTest {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
-                + END_LINE + "get view" + END_LINE + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
+                + "archive" + END_LINE + "unarchive" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 
         try {
             assertEquals(Ui.getCommandList(ViewType.PATIENT_INFO), expectedOutput);
@@ -136,11 +137,12 @@ class UiTest {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
-                + END_LINE + "get view" + END_LINE + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
+                + "archive" + END_LINE + "unarchive" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 
         try {
             assertEquals(Ui.getCommandList(ViewType.MEDICAL_STAFF_INFO), expectedOutput);
@@ -154,10 +156,11 @@ class UiTest {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "get view" + END_LINE + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
-                + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+                + "find" + END_LINE + "delete" + END_LINE + "get view" + END_LINE + "switch" + END_LINE + "exit"
+                + END_LINE + END_LINE + "To obtain more information on each command and their respective required "
+                + "inputs, type:" + END_LINE + "help [COMMAND]" + END_LINE + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 
         try {
             assertEquals(Ui.getCommandList(ViewType.SCHEDULER), expectedOutput);
