@@ -149,49 +149,8 @@ public class Parser {
 
     private Command prepareListMonthCommand(String commandParams) {
         try {
-<<<<<<< HEAD:src/main/java/seedu/duke/parser/Parser.java
             return ListRecordParser.parse(commandParams);
         } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
-=======
-            String listOption;
-            if (commandParams.length() >= 5) {
-                listOption = commandParams.substring(2, 5);
-            } else {
-                listOption = commandParams.substring(2);
-            }
-            String upperCaseOnly = commandParams.replaceAll("[^A-Z]", "");
-            Category category;
-            switch (upperCaseOnly) {
-            case ("GENERAL"):
-                category = Category.GENERAL;
-                break;
-            case ("CLOTHES"):
-                category = Category.CLOTHES;
-                break;
-            case ("FOOD"):
-                category = Category.FOOD;
-                break;
-            case ("ENTERTAINMENT"):
-                category = Category.ENTERTAINMENT;
-                break;
-            case ("GIFTS"):
-                category = Category.GIFTS;
-                break;
-            case ("HEALTH"):
-                category = Category.HEALTH;
-                break;
-            default:
-                category = Category.ALL;
-            }
-            switch (listOption) {
-            case ("all"):
-                return new ListRecordsCommand(category);
-            default:
-                int listMonth = Integer.parseInt(listOption);
-                return new ListRecordsCommand(listMonth, category);
-            }
-        } catch (StringIndexOutOfBoundsException e) {
->>>>>>> c753e76814a202cb46e4022277e336378edb2d68:src/main/java/seedu/budgettracker/logic/parser/Parser.java
             return new InvalidCommand(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
         }
     }
