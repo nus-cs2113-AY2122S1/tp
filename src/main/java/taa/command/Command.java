@@ -15,6 +15,7 @@ public abstract class Command {
     public static final String COMMAND_LIST_STUDENTS = "list_students";
     public static final String COMMAND_LIST_ASSESSMENTS = "list_assessments";
     public static final String COMMAND_LIST_ATTENDANCE = "list_attendance";
+    public static final String COMMAND_LIST_LESSON_ATTENDANCE = "list_lesson_attendance";
     public static final String COMMAND_ADD_MODULE = "add_module";
     public static final String COMMAND_EDIT_MODULE = "edit_module";
     public static final String COMMAND_DELETE_MODULE = "delete_module";

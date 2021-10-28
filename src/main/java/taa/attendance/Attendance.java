@@ -33,6 +33,10 @@ public class Attendance implements ClassChecker {
         return lessonNumber;
     }
 
+    public boolean getIsPresent() {
+        return isPresent;
+    }
+
     @Override
     public String toString() {
         String presentString = (isPresent) ? "Present" : "Absent";
