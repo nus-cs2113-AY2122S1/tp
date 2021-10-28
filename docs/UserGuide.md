@@ -16,7 +16,8 @@ and move the downloaded file to your preferred folder.
 3. Open any command-line application (such as Terminal, Command Prompt, Powershell) and navigate to the folder
    containing your downloaded copy of `PayMeBack`.
 4. In the command-line interface, and type `java -jar PayMeBack.jar`.
-5. If the program starts successfully, you should see the following on your screen:
+5. Note that for this user guide, all entries enclosed in square brackets, "[" and "]" refer to user inputs.
+6. If the program starts successfully, you should see the following on your screen:
 ```
 Welcome to
     ____              __  ___     ____             __  
@@ -57,23 +58,65 @@ You must have at least one trip created (or loaded from the save file) to use an
 
 The input syntax to create a trip is:
 ```
-create [location] [date] [foriegn-currency] [exchange-rate] [persons-in-trip]
+create [location] [date] [foriegn-currency-ISO-code] [exchange-rate] [persons-in-trip]
 ```
 
-- `date` must follow the format of dd-mm-yyyy.
-- `persons-in-trip` should be separated with commas.
-- `exchange-rate` should be how much 1 of your home currency costs in foreign currency.
+- `[date]` must follow the format of dd-mm-yyyy.
+- `[foriegn-currency-ISO-code]` Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+  - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
+- `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
   - Note that the default home currency is SGD, unless edited by the user.
+- `persons-in-trip` should be separated with commas.
 
+#### Compatible Currencies
+Currency Name | ISO Code
+------------ | -----------
+United States Dollar | USD
+Singapore Dollar | SGD
+Australian Dollar | AUD
+Canadian Dollar | CAD
+New Zealand Dollar | NZD
+Euro | EUR
+Pound Sterling| GBP
+Malaysian Ringgit | MYR
+Hong Kong Dollar | HKD
+Thai Baht | THB
+Russian Ruble | RUB
+South African Rand | ZAR
+Turkish Lira | TRY
+Brazilian Real | BRL
+Danish Krone | DKK
+Polish Zloty | PLN
+Israeli New Shekel | ILS
+Saudi Riyal | SAR
+Chinese Yuan | CNY
+Japanese Yen | JPY
+South Korean Won | KRW
+Indonesian Rupiah | IDR
+Indian Rupee | INR
+Swiss Franc | CHF
+Swedish Krona | SEK
+Norwegian Krone | NOK
+Mexican Peso | MXN
+New Taiwan Dollar | TWD
+Hungarian Forint | HUF
+Czech Koruna | CZK
+Chilean Peso | CLP
+Philippine Peso | PHP
+United Arab Emirates Dirham | AED
+Colombian Peso | COP
+Romanian Leu | RON
 
 For example,
+
+Input:
 
 ```
 create America 02-02-2021 USD 0.74 Ben, Jerry, Tom
 ```
 
-If your trip is successfully created, you'll see the following message:
+Output:
 
 ```
 Your trip to America on 02 Feb 2021 has been successfully added!
@@ -86,24 +129,28 @@ Your trip to America on 02 Feb 2021 has been successfully added!
 In order to add, edit or delete expenses within a trip, you must first open the trip containing
 the expenses you wish to access.
 
-To open a trip, enter:
-
+The input syntax for open:
 ```
 open [trip-number]
 ```
 
-If successful, you'll see the following message:
+For example,
 
+Input:
+````
+open 1
+````
+Output:
 ```
 You have opened the following trip:
 America | 02 Feb 2021
 ```
 <br />
 
-#### - Close Trips
+#### - Close Trip
 Closes the current trip you are in, allowing the `list` and `delete` command to be used.
 
-Only can be used if you have opened a trip.
+Only can be used if you have already opened a trip.
 
 The input syntax for close:
 ```
@@ -142,8 +189,13 @@ delete [trip-number]
 ```
 - `[trip-number]` is the index of the trip you wish to delete, and can be found by using `whatcommand` command.
 
-If your trip is successfully deleted, you'll see the following message:
+For example,
 
+Input:
+````
+delete 1
+````
+Output:
 ```
 Your trip to America on 02 Feb 2021 has been successfully removed.
 ```
@@ -194,16 +246,16 @@ Who paid for the expense?:
 PayMeBack will then ask for the amounts each person involved in the expense spent on that particular expense along
 with how much of the amount has yet to be assigned:
 ````
-Who paid for the expense?: Tom
+Who paid for the expense?: Ben
 Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $30.00 left to be assigned. How much did Tom spend?: 
+There is USD $30.00 left to be assigned. How much did Tom Ben?: 
 ````
 - The program will automatically cycle through every person involved in the expense.
 - Entering `equal` when the program asks for the amount spent for the first person will cause the program to evenly split the expense among all the people involved in it.
 
 If there is no amount remaining but there are still people left to be assigned, PayMeBack will prompt the user if they would like to assign 0 to the rest of the people involved in the expense:
 ````
-There is USD $30.00 left to be assigned. How much did Tom spend?: 30
+There is USD $30.00 left to be assigned. How much did Ben spend?: 30
 There will be people involved that don't need to pay, are you sure? (y/n): 
 ````
 - Entering `y` will allow PayMeBack to assign 0 to the remaining people involved in the expense.
@@ -211,8 +263,8 @@ There will be people involved that don't need to pay, are you sure? (y/n):
 
 PayMeBack will automatically prompt the user to assign the remaining amount when it requests for the amount spent of the last person in the expense:
 ````
-There is USD $30.00 left to be assigned. How much did Tom spend?: 20
-Assign the remaining USD $10.00 to Harry? (y/n): 
+There is USD $30.00 left to be assigned. How much did Ben spend?: 20
+Assign the remaining USD $10.00 to Jerry? (y/n): 
 ````
 - Entering `y` will allow PayMeBack to assign the amount to the persons stated.
 - Entering `n` will result in PayMeBack requesting for the name of the person who paid for the expense again, followed by the same sequence of steps.
@@ -226,54 +278,116 @@ Your expense has been added successfully
 
 #### - List Expenses
 
-List all expenses added to the current trip.
+List all expenses in the current opened trip.
 
-To view all expenses in a trip, ensure you are already inside a trip, then type ```view```
+To list all expenses in a trip, ensure you have opened a trip, then type ``list``.
+
+
+For example,
+
+Input:
+````
+Enter your command: list
+````
+
+Output:
+````
+List of Expenses: 
+	1. In-and-Out Burgers | 03 Feb 2021
+	2. Gift shopping at mall | 03 Feb 2021
+	3. Dinner at Taco Bell | 03 Feb 2021
+````
 
 <br />
 
-#### - View Expenses By Index
 
-Show expense with corresponding index in the current trip. User must already be inside a trip and
-have at least 1 expense.
+#### - View Expenses
+Shows the details of a particular expense of a trip.
 
-```view [index]```
+User must already be inside a trip and have at least 1 expense.
+
+The input syntax is as follows:
+````
+view [index]
+````
+- Entering `view` without index will print all expenses in the currently opened trip.
+For example,
+
+Input:
+````
+Enter your command: view 1
+````
+Output:
+````
+	In-and-Out Burgers
+	Date: 03 Feb 2021
+	Amount Spent: USD $30.00
+	People involved: 
+		1) Ben, USD $20.00
+		2) Jerry, USD $10.00
+	Payer: Ben
+	Category: food
+````
+
 
 <br />
 
 #### - Filter Expenses By Attributes
+Allows the user to view specific expenses based on an attribute of their choice.
 
-To filter the list of expenses (i.e. only show expenses matching the entered attribute information), type
+The input syntax is as follows:
+````
+view filter [expense-attribute] [search-keyword]
+````
+- `[expense-attribute]` can be either `[category]`, `[payer]`, `[person]` or `[description]`.
 
-```view filter [expense-attribute] [attribute-information]```
+For example, if the user would like to search for all expenses in the category "food",
 
-For example, to only show expenses in Johor Bahru, enter
+Input:
+````
+Enter your command: view filter category food
+````
+Output:
+````
+1.  In-and-Out Burgers
+    Date: 03 Feb 2021
+    Amount Spent: USD $30.00
+    People involved: 
+        1) Ben, USD $20.00
+        2) Jerry, USD $10.00
+    Payer: Ben
+    Category: food
+	
+3.  Dinner at Taco Bell
+    Date: 03 Feb 2021
+    Amount Spent: USD $20.00
+    People involved:
+        1) Ben, USD $8.00 
+        2) Jerry, USD $6.00
+        3) Tom, USD $6.00
+    Payer: Tom
+    Category: food
+````
 
-```view filter description Johor Bahru```
-
-
-Be sure that the ```expense-attribute``` information entered is exactly the same or a substring of what is stored, otherwise the program may not be able to find the expense.
-This means that if you had originally entered JB as the expense location, filtering by Johor Bahru will not show the expense with the location entered as JB.
-
-
-Note that the program currently only supports filtering using a single attribute.
 
 <br />
 
 ### Summary
 #### - View Summary of expenses
 Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
+The input syntax is as follows:
+````
+summary [name]
+````
+- Entering `summary` without a name will print the summary of everybody in the opened trip.
 
-```summary```
-
-```summary [name]```
-
-Example:
-Viewing summary of everybody's expenses in the America trip.
+For example,
 
 Input:
 
-```summary```
+```
+Enter your command: summary
+```
 
 Output:
 ```
@@ -296,44 +410,7 @@ shopping: USD $30.00 (SGD $40.54)
 
 
 
-#### Compatible Currencies
-Currency Name | ISO Code
------------- | -----------
-United States Dollar | USD
-Singapore Dollar | SGD
-Australian Dollar | AUD
-Canadian Dollar | CAD
-New Zealand Dollar | NZD
-Euro | EUR
-Pound Sterling| GBP
-Malaysian Ringgit | MYR
-Hong Kong Dollar | HKD
-Thai Baht | THB
-Russian Ruble | RUB
-South African Rand | ZAR
-Turkish Lira | TRY
-Brazilian Real | BRL
-Danish Krone | DKK
-Polish Zloty | PLN
-Israeli New Shekel | ILS
-Saudi Riyal | SAR
-Chinese Yuan | CNY
-Japanese Yen | JPY
-South Korean Won | KRW
-Indonesian Rupiah | IDR
-Indian Rupee | INR
-Swiss Franc | CHF
-Swedish Krona | SEK
-Norwegian Krone | NOK
-Mexican Peso | MXN
-New Taiwan Dollar | TWD
-Hungarian Forint | HUF
-Czech Koruna | CZK
-Chilean Peso | CLP
-Philippine Peso | PHP
-United Arab Emirates Dirham | AED
-Colombian Peso | COP
-Romanian Leu | RON
+
 
 
 
