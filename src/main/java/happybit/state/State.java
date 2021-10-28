@@ -37,7 +37,7 @@ public class State {
             UiStartup uiStartup = new UiStartup();
             uiStartup.run();
         } catch (HaBitUiException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 

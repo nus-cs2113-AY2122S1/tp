@@ -17,15 +17,14 @@ public class MainParser {
     private static final String COMMAND_SET_GOAL = "goal";
     private static final String COMMAND_UPDATE_GOAL_NAME = "update";
     private static final String COMMAND_UPDATE_HABIT_NAME = "change";
-    private static final String COMMAND_UPDATE_HABIT_INTERVAL = "update_interval";
+    private static final String COMMAND_UPDATE_HABIT_INTERVAL = "interval";
     private static final String COMMAND_LIST_GOAL = "list";
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
     private static final String COMMAND_DELETE_HABIT = "delete";
     private static final String COMMAND_COMPLETE_HABIT = "done";
     private static final String COMMAND_RETURN = "return";
-    private static final String COMMAND_EXIT = "bye";
-
+    private static final String COMMAND_EXIT = "exit";
 
     /**
      * Parses the user input.

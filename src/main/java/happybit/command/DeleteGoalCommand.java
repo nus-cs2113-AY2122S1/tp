@@ -34,7 +34,7 @@ public class DeleteGoalCommand extends DeleteCommand {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 

@@ -107,21 +107,6 @@ public class UpdateParser extends Parser {
     }
 
     /**
-     * Gets the habit index from user input.
-     *
-     * @param parameters String array of command parameters.
-     * @return Habit index.
-     * @throws HaBitParserException If the habit index flag or habit index is absent, or non-integer.
-     */
-    private static int getHabitIndex(String[] parameters) throws HaBitParserException {
-        String strHabitIndex = getParameter(parameters, FLAG_HABIT_INDEX);
-        if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
-            throw new HaBitParserException(ERROR_HABIT_INDEX_FORMAT);
-        }
-        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), FLAG_HABIT_INDEX) - 1;
-    }
-
-    /**
      * Gets the new goal name from user input. All leading and trailing whitespaces will be removed.
      *
      * @param parameters String array of command parameters.

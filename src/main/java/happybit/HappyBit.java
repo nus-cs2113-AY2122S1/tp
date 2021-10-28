@@ -1,6 +1,5 @@
 package happybit;
 
-import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.state.State;
 import happybit.storage.Storage;
@@ -50,7 +49,7 @@ public class HappyBit {
     private void run() {
         state.startupState();
         state.handleState();
-        printManager.showGoodbye();
+        printManager.printExit();
     }
 
 }

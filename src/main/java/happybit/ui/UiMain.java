@@ -76,7 +76,7 @@ public class UiMain extends UiManager {
         try {
             this.goalList = this.storage.load();
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class UiMain extends UiManager {
                 isReturn = isReturnCommand(command);
                 checkFlags(isExit, isReturn);
             } catch (HaBitParserException | HaBitCommandException e) {
-                printManager.showError(e.getMessage());
+                printManager.printError(e.getMessage());
                 waitApp(2);
                 resetDisplay();
             }
