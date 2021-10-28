@@ -147,49 +147,54 @@ Adds medication into the inventory.
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 > * If medication and expiry date exists, price, description and maximum quantity will be optional parameters. If you include `p/PRICE` or `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing price, existing description and existing maximum quantity.
 
+> :information_source: Note:
+> * Description will be standardised in the stock so that it will be easier for users to search for medication by the symptoms.
+>   * Users will be able to search for medication by symptoms using the list command as shown below.
+> * Expiry date is compulsory so that user will be able to track the expiry date for all medication.
+>   * Users will be able to view all the expired medication or expiring medication easily using the list command as shown below.
+> * Medication with same name but different expiry date will be added into MediVault in different rows. This will allow users to have different prices for different expiry dates.
+>   * Users might want to set a discount price for expiring medication.
+  
 Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
-Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
+Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2025`
 
 Expected Output 1:
 
 ```
 Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
-+====+=========+=======+==========+=============+===============================================+==============+
-| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
-+====+=========+=======+==========+=============+===============================================+==============+
-| 7  | panadol | $5.00 |    50    | 19-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
-|    |         |       |          |             |                     PAINS                     |              | 
-+----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
++====+=========+=======+==========+=============+=============+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+=======+==========+=============+=============+==============+
+| 7  | PANADOL | $5.00 |    50    | 19-09-2025  |  HEADACHES  |     1000     | 
++----+---------+-------+----------+-------------+-------------+--------------+
 ```
 
-Example 2 (If medication and expiry date exists): `addstock n/panadol p/10 q/10 e/14-09-2021 d/for fever m/1000`
+Example 2 (If medication and expiry date exists): `addstock n/panadol q/50 e/19-09-2025`
 
 Expected Output 2:
 
 ```
 Same Medication and Expiry Date exist. Update existing quantity.
-+====+=========+========+==========+=============+==========================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |               DESCRIPTION                | MAX_QUANTITY | 
-+====+=========+========+==========+=============+==========================================+==============+
-| 2  | PANADOL | $20.00 |    30    | 14-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER   |     1000     | 
-|    |         |        |          |             |                AND PAINS                 |              | 
-+----+---------+--------+----------+-------------+------------------------------------------+--------------+
++====+=========+=======+==========+=============+=============+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+=======+==========+=============+=============+==============+
+| 8  | PANADOL | $5.00 |   100    | 19-09-2025  |  HEADACHES  |     1000     | 
++----+---------+-------+----------+-------------+-------------+--------------+
 ```
 
-Example 3 (If medication does not
-exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
+Example 3 (If medication does not exist): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/fever m/500`
 
 Expected Output 3:
 
 ```
 Medication added: paracetamol
-+====+=============+========+==========+=============+==============================+==============+
-| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE |         DESCRIPTION          | MAX_QUANTITY | 
-+====+=============+========+==========+=============+==============================+==============+
-| 10 | paracetamol | $10.00 |    10    | 02-11-2021  | used to treat fever and pain |     500      | 
-+----+-------------+--------+----------+-------------+------------------------------+--------------+
++====+=============+========+==========+=============+=============+==============+
+| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=============+========+==========+=============+=============+==============+
+| 9  | PARACETAMOL | $10.00 |    10    | 02-11-2021  |    FEVER    |     500      | 
++----+-------------+--------+----------+-------------+-------------+--------------+
 ```
 
 ### Listing medication stocks: `liststock`
@@ -354,11 +359,11 @@ Example: `addprescription n/panadol q/5 s/john c/123`
 Expected Output:
 
 ```
-Prescribed:panadol Quantity:1 Expiry Date:14-09-2021
+Prescribed:PANADOL Quantity:1 Expiry Date:14-09-2021
 +====+=========+==========+=============+============+=======+==========+
 | ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
 +====+=========+==========+=============+============+=======+==========+
-| 9  | panadol |    5     |     123     | 26-10-2021 | john  |    2     | 
+| 9  | PANADOL |    5     |     123     | 26-10-2021 | JOHN  |    2     | 
 +----+---------+----------+-------------+------------+-------+----------+
 ```
 
