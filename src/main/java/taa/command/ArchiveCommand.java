@@ -20,6 +20,8 @@ public class ArchiveCommand extends Command {
     private static final String ARCHIVE_FILENAME_FORMAT = "taa_archive_%s.json";
     private static final String ARCHIVE_FILENAME_DATETIME_FORMAT = "yyyyMMdd'T'HHmmss_SSS";
 
+    private static final String MESSAGE_NO_DATA = "There is no data to archive.";
+
     private static final String MESSAGE_FORMAT_ARCHIVE_USAGE = "%s [%s/<FILENAME>]";
     private static final String MESSAGE_FORMAT_ARCHIVE_SAVED = "Archive saved:\n  %s";
 
@@ -29,11 +31,17 @@ public class ArchiveCommand extends Command {
 
     @Override
     public void checkArgument() throws TaaException {
-        // Nothing to check
+        if (!argument.isEmpty() && !argumentMap.containsKey(KEY_FILENAME)) {
+            throw new TaaException(getUsageMessage());
+        }
     }
 
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+        if (moduleList.getSize() <= 0) {
+            throw new TaaException(MESSAGE_NO_DATA);
+        }
+
         String filename;
         if (argumentMap.containsKey(KEY_FILENAME)) {
             filename = argumentMap.get(KEY_FILENAME);
