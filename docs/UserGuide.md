@@ -373,7 +373,7 @@ Lists all prescription records in the application.
 
 Format: `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
 
-Example 1 (Listing all prescriptions): `listprescriptions`
+Example 1 (Listing all prescriptions): `listprescription`
 
 Expected output:
 
@@ -393,7 +393,7 @@ Expected output:
 +----+--------------+----------+-------------+------------+-------+----------+
 ```
 
-Example 2 (Listing prescriptions sorted by staff): `listprescriptions sort/s`
+Example 2 (Listing prescriptions sorted by staff): `listprescription sort/s`
 
 Expected output:
 
@@ -671,17 +671,17 @@ Adds the received medication into the current stocks.
 
 Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
-Example 1 (If medication does not exist) : `receiveorder i/1 p/20 e/20-10-2021 d/used to treat fever and pain m/500`
+Example 1 (If medication does not exist) : `receiveorder i/1 p/10 e/20-10-2021 d/severe pain m/500`
 
 Expected output:
 
 ```
-Medication added: paracetamol
-+====+=============+========+==========+=============+==============================+==============+
-| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE |         DESCRIPTION          | MAX_QUANTITY | 
-+====+=============+========+==========+=============+==============================+==============+
-| 8  | paracetamol | $20.00 |    50    | 20-10-2021  | used to treat fever and pain |     500      | 
-+----+-------------+--------+----------+-------------+------------------------------+--------------+
+Medication added: VICODIN
++====+=========+========+=============+=============+=============+==============+
+| ID |  NAME   | PRICE  |  QUANTITY   | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+=============+=============+=============+==============+
+| 3  | VICODIN | $10.00 |     100     | 20-10-2021  | SEVERE PAIN |     500      |  
++----+---------+--------+-------------+-------------+-------------+--------------+
 ```
 
 Example 2 (If medication exists) : `receiveorder i/2 p/20 e/25-10-2021`
@@ -691,12 +691,11 @@ Expected output:
 ```
 Medicine exists. Using existing description and maximum quantity.
 Medication added: PANADOL
-+====+=========+========+==========+=============+==========================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |               DESCRIPTION                | MAX_QUANTITY | 
-+====+=========+========+==========+=============+==========================================+==============+
-| 8  | PANADOL | $20.00 |   100    | 25-10-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER   |     1000     | 
-|    |         |        |          |             |                AND PAINS                 |              | 
-+----+---------+--------+----------+-------------+------------------------------------------+--------------+
++====+=========+========+==============+=============+=============+==============+
+| ID |  NAME   | PRICE  |   QUANTITY   | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
++====+=========+========+==============+=============+=============+==============+
+| 1  | PANADOL | $20.00 |     100      | 25-10-2021  |  HEADACHE   |     1000     | 
++----+---------+--------+--------------+-------------+-------------+--------------+
 ```
 
 ## Managing Data
