@@ -120,11 +120,11 @@ Do familiarise yourself with these notations to better utilise the user guide.
 
 Adds a specified contact to the ConTech Book.
 
-Usage: `add -n NAME -g GITHUB -l LINKEDIN -te TELEGRAM -tw TWITTER -e EMAIL`
+Command format: `add <-n> <NAME> {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} {-tw <TWITTER>} {-e <EMAIL>}`
 
 - ConTech is robust and allows you to specify your fields in any order.
 - The `-n` name field is the only compulsory field required to add a contact. The rest are optional.
-- Up to five other `FLAGS` and `DETAILS` can be specified
+- Up to five other `flags` and `details` can be specified.
 - ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
 
 Expected outcome of usage:
@@ -145,11 +145,10 @@ ____________________________________________________________
 <a name="ls"></a>
 ### Listing all contacts: `ls`
 
-Lists all the saved contacts with the index and contact name.
+Lists all the contacts in the ConTech Book with their indexes and names.
 
-Usage: `ls`
-* The indexes start from 0, this is done as computing professionals 
- are more familiar with index start from 0.
+Command format: `ls`
+* Do note that the indexes start from 0, similar to array indexes, which you may be familiar with.
  
 Expected outcome of usage:
 
@@ -174,10 +173,18 @@ ____________________________________________________________
 ### Viewing a contact: `view`
 Displays all the details saved to a contact in the ConTech Book.
 
-Usage: `view INDEX`
+Command format: `view <INDEX>`
 * Displays all the details of the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index must be within the range of indexes displayed in the contact list _(zero-based)_.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can easily run the [`ls`](#list) command to view your contact indexes before running any 
+command 
+requiring indexes.
+
+</div>
 
 Expected outcome of usage:
 ```
@@ -189,11 +196,14 @@ ____________________________________________________________
    Telegram: t.me/alexl33
 ____________________________________________________________
 ```
+
 <a name="me"></a>
 ### Viewing personal contact: `me`
-Displays all the details saved to the personal contact in the ConTech Book.
+Displays all your details saved to the personal contact in the ConTech Book.
 
-Usage: `me`
+This refers to the details which you filled in while setting up **ConTech**.
+
+Command format: `me`
 * Displays all the details of the personal contact.
 
 Expected outcome of usage:
@@ -214,11 +224,14 @@ display the details of the specified contact to be deleted, and prompt user to c
 
 Usages:
 
-`rm INDEX`
+Command formats:
+
+`rm <INDEX>`
 * Deletes the contact with the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index must be within the range of indexes displayed in the contact list _(zero-based)_.
   
+`rm <INDEX> {-g} {-l} {-te} {-tw} {-e}`
 `rm all`
 * Deletes all contacts in the ConTech Book
 
@@ -262,12 +275,13 @@ ____________________________________________________________
 
 Edits the details of a specified contact in the ConTech Book.
 
-Usage: `edit INDEX -FLAG DETAIL`
+Command format: `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} {-tw <TWITTER>} {-e <EMAIL>}`
 
-- Up to six `FLAGS` and `DETAILS` can be specified in any order
+- Up to six `flags` and `details` can be specified, in any order.
 - The index refers to the index number shown in the displayed contact list.
 - The index must be within the range of indexes displayed in the contact list (zero-based).
 - ConTech also has built-in duplicate checkers and will alert you if there is already a contact with the same details when editing.
+- While all six `details` are optional, minimally **one** must be specified for any effect to take place.
 
 
 Expected outcome of usage: 
@@ -286,12 +300,12 @@ ____________________________________________________________
 
 Search the ConTech Book for a contact whose details contain the specified query.
 
-Usage: `search [-FLAG] QUERY`
+Command format: `search {-n | -g | -l | -te | -tw | -e} <QUERY>`
 
-- Only one flag can be specified. 
-- If no flag is specified, the default search field is contact name.
-- The search query is not case-sensitive.
-- All contacts with the specified field containing the search query will be displayed in view format.
+- Up to one `flag` can be specified for queries relating to that `flag`.
+- If no flag is specified, the default search detail is contact name.
+- The search query is **not** case-sensitive.
+- All contacts with the specified field containing the search query will be displayed in [`view`](#view) format.
 
 Expected outcome of usage:
 ```
@@ -378,7 +392,7 @@ ____________________________________________________________
 ### Exiting the program: `exit`
 Exits the application.
 
-Usage: `exit`
+Command format: `exit`
 
 Excepted outcome of usage: `exit`
 
@@ -407,12 +421,12 @@ a quick view when using the application.
 Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
-Add a new contact| `add <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
+Add a new contact| `add <INDEX> -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
 List all contacts | `ls` | `ls`
 View a contact| `view <INDEX>` | `view 2`
-Edit a contact| `edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
-Delete contact fields| `<COMMAND>` | `<EXAMPLE>`
+Edit a contact| `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
+Delete contact fields| `<rm <INDEX> {-g} {-l} {-te} {-tw} {-e}>` | `<rm 3 -g -te -l -e>`
 Delete a contact | `rm <INDEX>` | `rm 1`
-Search for a contact| `search <OPTIONAL_FLAG> <QUERY>` | `search Ashraf` <br>`search -g revflash`<br/>
+Search for a contact| <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} \<QUERY\></code> | `search Ashraf` <br>`search -g revflash`<br/>
 Import contacts from .txt file|`import` | `import`
 Exit ConTech | `exit` | `exit`
