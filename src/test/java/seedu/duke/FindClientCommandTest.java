@@ -3,7 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clients.FindClientCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

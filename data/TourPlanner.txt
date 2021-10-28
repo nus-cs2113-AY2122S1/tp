@@ -1,93 +1,19 @@
-Client:
+Client: 
 Client ID: j134
 Name: john
 Contact Number: 91234567
 Email: johndoe@gmail.com
 
-Tour:
+Tour: 
 Name: australiaromance
 Code: aus1369
 Price per pax: $1300.00
 
-Flight:
+Flight: 
 Flight ID: MSIA-KOR1
-Departure Flight: MSIA, 29/10/21 12:00
-Return Flight: KOR, 24/6/21 02:00
+Departure Flight: KOR, 24/6/21 02:00
+Return Flight: MSIA, 29/10/21 12:00
 
 Package ID: p123
 
 
-Client:
-Client ID: c001
-Name: Bo Tuan
-Contact Number: 93338333
-Email: borangutuan@mail.com
-
-Tour:
-Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-Flight:
-Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
-
-Package ID: p001
-
-
-Client:
-Client ID: c002
-Name: Sam
-Contact Number: 12223444
-Email: sam@mail.com
-
-Tour:
-Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-Flight:
-Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
-
-Package ID: p002
-
-
-Client:
-Client ID: c003
-Name: Wayne
-Contact Number: 56667888
-Email: wendy@mail.com
-
-Tour:
-Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-Flight:
-Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
-
-Package ID: p003
-
-
-Client:
-Client ID: c004
-Name: ChengXu
-Contact Number: 10101010
-Email: demonshaha@mail.com
-
-Tour:
-Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-Flight:
-Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
-
-Package ID: p004

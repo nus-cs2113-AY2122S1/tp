@@ -3,7 +3,14 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.tours.FindTourCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -50,13 +57,12 @@ public class FindTourCommandTest {
         System.setOut(new PrintStream(newConsole));
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00"});
-        ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
         dummyClientList.add(botuan);
+        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
         testTourList.add(jpn);
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
         dummyFlightList.add(sqjpn);
+        ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
         dummyPackageList.add(jpnPackage);
 
         Command findTour = new FindTourCommand("JPN");
