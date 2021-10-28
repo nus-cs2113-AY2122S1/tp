@@ -111,7 +111,7 @@ allowing for a simple way to tidy up your file entries.
     * **Examples:**
       - `delete /m 1` or `delete /m JOHN HWEE`
       - `delete /t 2`
-      - `delete /att 3` or `delete /m Mark` or delete /t Monday Training` 
+      - `delete /att 3` or `delete /m Mark` or `delete /t Monday Training` 
     
     * **Expected Output:**
     ```
@@ -130,6 +130,7 @@ allowing for a simple way to tidy up your file entries.
 ### Edit
 If you have to perform minor changes to your entries, **CCA Manager** allows you to edit your entries by using the edit function.
 This means that you will not have to delete the entry and then add a new one later on.
+
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
     * `/m <INDEX>` edits the member detail stored at the given index
