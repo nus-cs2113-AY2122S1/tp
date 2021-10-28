@@ -2,10 +2,9 @@
 
 ## Introduction
 
-MedBot is a Command Line Interface (CLI) application for head nurses to manage 
-patients’ personal and medical information. By utilising text-based commands 
-instead of traditional Graphical User Interface (GUI) based navigation, MedBot 
-can allow head nurses to get their management tasks done quicker and more efficiently.
+MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal and medical
+information. By utilising text-based commands instead of traditional Graphical User Interface (GUI) based navigation,
+MedBot can allow head nurses to get their management tasks done quicker and more efficiently.
 
 ## Quick Start Guide
 
@@ -14,24 +13,23 @@ can allow head nurses to get their management tasks done quicker and more effici
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `medbot.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
-4. Execute the `java -jar medbot.jar` command in the terminal in the same folder as the `medbot.jar` file to launch 
-MedBot. The following output should be observed:
+4. Execute the `java -jar medbot.jar` command in the terminal in the same folder as the `medbot.jar` file to launch
+   MedBot. The following output should be observed:
 
 ### Using MedBot
 
 1. Type in commands into the terminal and press **Enter** to execute it.
 2. Refer to the [Commands](#Commands) below for details on each command.
 
-## Features 
+## Features
 
 The main features of MedBot are:
 
-  * Manage patient and medical staff information efficiently
-  * Schedule medical appointments for patients seamlessly
+* Manage patient and medical staff information efficiently
+* Schedule medical appointments for patients seamlessly
 
-Each feature is contained inside a different view/tab in MedBot, which can be
-switched between using the `switch` command, which will be explained further
-down below.
+Each feature is contained inside a different view/tab in MedBot, which can be switched between using the `switch`
+command, which will be explained further down below.
 
 ## Commands
 
@@ -41,10 +39,8 @@ These commands will work the same for any view that you are currently in.
 
 ### Switching between views: `switch`
 
-Switches between the different views of MedBot.
-If the switch command is called without any parameters,
-the view that is switched to will depend on the current view
-in the order shown below.
+Switches between the different views of MedBot. If the switch command is called without any parameters, the view that is
+switched to will depend on the current view in the order shown below.
 
 (PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)
 
@@ -53,6 +49,7 @@ Format: `switch [VIEW_TYPE]`
 Expected Output:
 
 Inputting `switch p`:
+
 ```
   ___  _ _____ ___ ___ _  _ _____ 
  | _ \/_\_   _|_ _| __| \| |_   _|
@@ -87,10 +84,12 @@ Exits the program.
 Format: `exit`
 
 Expected Output:
+
 ```
 Thank you for using MedBot!
 See you again!
 ```
+
 ### Get the current view: `get view`
 
 Gets the current viewType of the program.
@@ -98,6 +97,7 @@ Gets the current viewType of the program.
 Format: `get view`
 
 Expected Output (when the program is in Patient's View):
+
 ```
 "You are currently in the Patient's View."
 ```
@@ -108,9 +108,10 @@ Provides an internal user guide that is accessible via the command line.
 
 Format: `help [COMMAND]`
 
-Expected Output: 
+Expected Output:
 
 Inputting `help` without parameters:
+
 ```
 Here are the list of commands:
 
@@ -133,20 +134,21 @@ help [COMMAND]
 *Note that all commands will remove any '|' inputs for format parsing purposes
 ```
 
-### Patient / Medical Staff Information Commands
+### Patient/Medical Staff Information Commands
 
-Functionally, the commands for the patient information view and
-medical staff information view are the same. Here, we'll be using
-`PATIENT_INFO_VIEW`-specific examples, but these commands would apply exactly
-the same for the `STAFF_INFO_VIEW` as well.
+Functionally, the commands for the patient information view and medical staff information view are the same. Here, we'll
+be using
+`PATIENT_INFO_VIEW`-specific examples, but these commands would apply exactly the same for the `STAFF_INFO_VIEW` as
+well.
 
-### Adding a patient: `add`
+### Adding a patient/medical staff: `add`
 
-Adds a patient to the patient list.
+Adds a patient/medical staff to the patient/medical staff list.
 
 Format: `add i/PATIENT_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 Expected output:
+
 ```
 Patient with the following information has been successfully added to the list:
 
@@ -158,9 +160,24 @@ Address: ADDRESS
 ```
 
 Examples:
-`add i/1234 n/”John Doe” p/87654321 e/john.doe@gmail.com a/”John Street, block 1234, #01-01”`
+`add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01`
 
-Do note that the personal information of the patient does not have to be entered in any particular order.
+#### Notes:
+
+- Personal information of the patient does not have to be entered in any particular order.
+- `NAME` and `ADDRESS` will be auto-capitalized for every word from user input.
+- `EMAIL` must be in the following format:
+    - any number of alphanumeric characters
+    - followed by an `@`
+    - followed by any number of alphanumeric characters
+    - followed by a `.`
+    - followed by any number of alphanumeric characters
+    - eg. jimbob@maximillion.com
+- `PATIENT_IC` must be in the following format:
+    - 1st character must be one of the alphabets: S,T,F,G or M.
+    - 2nd-8th characters must comprise digits 0-9, repetition allowed.
+    - 9th character must be an alphabet: A-Z.
+    - Alphabets will be auto-capitalized. The input alphabets therefore non-case-sensitive.
 
 ### Delete a patient: `delete`
 
@@ -169,6 +186,7 @@ Deletes a patient from the list.
 Format: `delete PATIENT_ID`
 
 Expected Output:
+
 ```
 Patient with the following information has been successfully deleted from the list:
 
@@ -190,6 +208,7 @@ View a patient’s personal information.
 Format: `view PATIENT_ID`
 
 Expected Output:
+
 ```
 Here's the requested patient:
 
@@ -210,16 +229,17 @@ To show archived patients, use `list -ar`
 Format: list
 
 Example Output:
+
 ```
 Here is a list of all patients:
 For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
  |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
  ----------------------------------------------------------------------------------------------------- 
- | 0    | S2121211A | Alice                |           |                      |                      | 
- | 1    | S1212121B | Bob                  |           |                      |                      | 
- | 2    | S1234561C | Charlie              |           |                      |                      | 
- | 3    | S1231234A | John Smith           | 91234567  | johnsmit@eg.com      | Qweqwqwenoiqwenqw    | 
+ | 1    | S2121211A | Alice                |           |                      |                      | 
+ | 2    | S1212121B | Bob                  |           |                      |                      | 
+ | 3    | S1234561C | Charlie              |           |                      |                      | 
+ | 4    | S1231234A | John Smith           | 91234567  | johnsmit@eg.com      | Qweqwqwenoiqwenqw    | 
  ----------------------------------------------------------------------------------------------------- 
 ```
 
@@ -230,6 +250,7 @@ Edit the personal and medical information of a patient in the list.
 Format: `edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 Expected output:
+
 ```
 The information of patient with ID [PATIENT_ID] has been edited to:
 
@@ -241,11 +262,15 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
+Notes:
+Refer to [Adding a patient - notes](#notes)
+
 ### Find patients based on attributes: `find`
 
 Find all patients that contains the given attributes.
 
 Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
 * The attributes given do not have to be in full.
 * At least one attribute must be present.
 
@@ -253,6 +278,7 @@ Example:
 `find n/Smith`
 
 Expected output:
+
 ```
 Here is a list of all patients:
 For full details of each patient, please use the command "view PATIENT_ID"
@@ -265,8 +291,8 @@ For full details of each patient, please use the command "view PATIENT_ID"
 
 ### Archive a patient: `archive`
 
-Archive a patient in the list. Archived patients are not shown with `list` command.
-To show all archived patients, use `list -ar`.
+Archive a patient in the list. Archived patients are not shown with `list` command. To show all archived patients,
+use `list -ar`.
 
 This command only works for currently unarchived patients.
 
@@ -300,6 +326,7 @@ Format: `add p/PATIENT_ID s/STAFF_ID d/DATE_TIME`
 The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS should be written as `090221 0800`
 
 Expected output:
+
 ```
 Appointment added: Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
 ```
@@ -315,18 +342,20 @@ Delete an appointment from the list.
 Format: `delete APPOINTMENT_ID`
 
 Expected output:
+
 ```
 deleted appointment with Id: APPOINTMENT_ID
 ```
 
 ### Editing an appointment's information: `edit`
 
-Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error 
+Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error
 message if it does.
 
 Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
 
 Expected output:
+
 ```
 Appointment APPOINTMENT_ID changed to Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
 ```
@@ -338,6 +367,7 @@ View the information of an appointment.
 Format: `view APPOINTMENT_ID`
 
 Expected output:
+
 ```
 Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
 ```
@@ -359,12 +389,13 @@ Here is a list of all appointments:
  | 2    | 10 Dec 21 1000HRS | 1          | James Tan            | 2        | Dr Tay               | 
  | 3    | 19 Nov 21 1400HRS | 2          | Eliot Ong            | 2        | Dr Tay               | 
  | 4    | 31 Oct 21 1200HRS | 3          | Daniel Chan          | 1        | Dr Lim               | 
+ -------------------------------------------------------------------------------------------------- 
 ```
 
 ### Finding a person's appointments: `find`
 
-Finds a person's list of appointments. The list can be filtered
-by date-time to display the list of appointments before/after a certain date.
+Finds a person's list of appointments. The list can be filtered by date-time to display the list of appointments
+before/after a certain date.
 
 Format: `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`
 
@@ -376,6 +407,7 @@ Example:
 `find s/1 b/161022 2200`
 
 Expected output:
+
 ```
 Here is a list of matched appointments:
  -------------------------------------------------------------------------------------------------- 
@@ -384,19 +416,25 @@ Here is a list of matched appointments:
  | 2    | 15 Oct 21 1800HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
  | 3    | 22 Oct 21 2100HRS | 2          | Jane Doe             | 1        | John Tan The Doc     | 
  | 1    | 22 Oct 21 2200HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
+ -------------------------------------------------------------------------------------------------- 
 ```
 
 ### Finding an appointment
 
 List the information of all appointments that match the given parameters.
 
-Format: 
+Format:
+
+
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: All data will be stored in the `MedBotData` directory that is created in the same working directory as `medbot.jar`. There are 3
+text files in `MedBotData` - `patient.txt`, `staff.txt` and `appointment.txt`. Simply transfer the `MedBotData` directory containing the
+three text files to the other computer, and run the `medbot.jar` in the same new location as the `MedBotData` directory.
+
 
 ## Command Summary
 
@@ -408,13 +446,16 @@ Format:
 | **help**     | `help [COMMAND]` <br/>eg., `help add`|
 | **get view**     | `get view`|
 | **exit**     | `exit`|
+
 ### Patient/Medical Staff Information View
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
-| **add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
+| **
+add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
 | **list**     | `list`|
-| **edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
+| **
+edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
 | **find**     | `find [i/PERSON_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`find i/s1231234A`|
