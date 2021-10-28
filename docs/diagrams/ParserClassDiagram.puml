@@ -1,33 +1,10 @@
 @startuml
 'https://plantuml.com/class-diagram
-skinparam classAttributeIconSize 0
+!include style.puml
 
-together {
-    abstract class SingleArgParser<T> {
-        +parse(argString: String) : T
-    }
-    abstract class MultipleArgParser<T> extends SingleArgParser {
-        +parse(argList: ArrayList<String>) : ArrayList<T>
-    }
-    class ExpiryDateParser<LocalDate> extends SingleArgParser {
-        +parse(argString: String) : LocalDate
-    }
-    class IngredientParser<String> extends MultipleArgParser {
-        +parse(argString: String) : String
-    }
-    class QuantityParser<Integer> extends MultipleArgParser {
-        +parse(argString: String) : Integer
-    }
-    class RecipeParser<String> extends MultipleArgParser {
-        +parse(argString: String) : String
-    }
-    class UnitParser<String> extends SingleArgParser {
-        +parse(argString: String) : String
-    }
-}
+class "{abstract}\nPrefix" as Prefix
 
-together {
-    abstract class Prefix {
+class Prefix {
     #prefix : String
     +getPrefix() : String
 }
@@ -42,21 +19,45 @@ class OptionalArgPrefix extends SingleArgPrefix {
     +OptionalArgPrefix(singleArgPrefix: SingleArgPrefix)
 }
 
-class ArgParser {
-    +ArgParser(prefixList: Prefix[])
-    +parse(args: String) : void
-    +getSingleArg(prefix: SingleArgPrefix) : String
-    +getArgList(prefix: MultipleArgPrefix) : ArrayList<String>
+class ArgsParser {
+    ~ArgsParser(prefixList: Prefix[])
+    ~parse(args: String) : void
+    ~getSingleArg(prefix: SingleArgPrefix) : String
+    ~getArgList(prefix: MultipleArgPrefix) : ArrayList<String>
 }
 class Parser {
-    +parseCommand(userInput: String) : Command
+    +{static}parseCommand(userInput: String) : Command
 }
 
-ArgParser ..> Prefix
-ArgParser ..> SingleArgPrefix
-ArgParser ..> MultipleArgPrefix
-Parser ..> ArgParser
+ArgsParser ..> Prefix
+ArgsParser ..> SingleArgPrefix
+ArgsParser ..> MultipleArgPrefix
+Parser ..> ArgsParser
+Parser "1" --> "4" SingleArgPrefix
+Parser "1" --> "3  " MultipleArgPrefix
+Parser "    1" --> "3 " OptionalArgPrefix
 MultipleArgPrefix .> SingleArgPrefix
 
+note bottom of MultipleArgPrefix
+Parser has the following prefixes:
+PREFIX_MULTIPLE_INGREDIENT
+PREFIX_MULTIPLE_QUANTITY
+PREFIX_MULTIPLE_RECIPE
+end note
+
+note right of SingleArgPrefix
+Parser has the following prefixes:
+PREFIX_RECIPE
+PREFIX_INGREDIENT
+PREFIX_QUANTITY
+PREFIX_EXPIRY
+end note
+
+note right of OptionalArgPrefix
+Parser has the following prefixes:
+PREFIX_OPTIONAL_UNIT
+PREFIX_OPTIONAL_QUANTITY
+PREFIX_OPTIONAL_EXPIRY
+end note
 
 @enduml
