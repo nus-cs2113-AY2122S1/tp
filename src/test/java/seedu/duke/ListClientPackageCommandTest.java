@@ -3,7 +3,14 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clientpackages.ListClientPackageCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.Tour;
+import seedu.duke.data.Flight;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -41,11 +48,12 @@ public class ListClientPackageCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Here is a list of all packages\n"
-                + "Package ID: p001\n" + "\n"
+        String expectedString = "Here is a list of all packages:\n"
+                + "1. Package ID: p001\n" + "\n"
                 + "Client: \n"
                 + "Client ID: c001";
-        String actualString = newConsole.toString().trim().replace("\r\n", "\n");
+        String[] actualStringArray = newConsole.toString().trim().split("\r\n", 2);
+        String actualString = actualStringArray[0] + "\n" + actualStringArray[1].trim().split("\r\n", 2)[0];
         assertEquals(expectedString, actualString);
     }
 }

@@ -61,7 +61,7 @@ public class FindFlightCommandTest {
         testFlightList.add(sqjpn);
         dummyPackageList.add(jpnPackage);
 
-        Command findFlight = new FindFlightCommand("SG-JPN");
+        Command findFlight = new FindFlightCommand("SQ-JPN");
         findFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         findFlight.execute();
 
