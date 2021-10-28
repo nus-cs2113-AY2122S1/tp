@@ -21,8 +21,9 @@ public class AddExpenditureCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
             + "Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]\n"
-            + "Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the "
-            + "default value.";
+            + "Note:\n"
+            + " * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.\n"
+            + " * If CATEGORY is not specified, GENERAL will be the default category.";
 
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional

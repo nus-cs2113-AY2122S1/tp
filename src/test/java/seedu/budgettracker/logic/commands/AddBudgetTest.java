@@ -12,7 +12,7 @@ public class AddBudgetTest {
         double spendingLimit = 20.00;
         int month = 12;
         RecordList currentBudgetList = new RecordList(month);
-        currentBudgetList.addBudget(spendingLimit, month, false);
+        currentBudgetList.addBudget(spendingLimit, false);
         assertEquals(20.00, currentBudgetList.getBudget().getAmount());
     }
 
