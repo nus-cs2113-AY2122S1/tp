@@ -72,7 +72,7 @@ public class InvestManager implements LoadableManager {
             fileString += investFileString + "\n";
         }
 
-        return fileString;
+        return fileString.strip();
     }
 
     @Override
