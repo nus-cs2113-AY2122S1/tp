@@ -518,10 +518,22 @@ Example of usage:
 
 `stat -e m/10`
 
-Expected outcome: A box plot of expenditure amount for october.
+Expected outcome: A graph showing the percentages which each category contributes to the overall monthly
+expenditures.
 
 ```
 ========================================================
+               10%   20%   30%   40%   50%   60%   70%   80%   90%   100% 
+GENERAL                                                                    0.85%
+CLOTHES       ###                                                          3.1%
+FOOD          ################################################             79.51%
+ENTERTAINMENT                                                              0%
+GIFTS         ###                                                          4.64%
+HEALTH                                                                     0%
+TECH          ######                                                       11.9%
+ALL                                                                        0%
+The category you spent the most on is: FOOD
+The amount you spent on this category is: $5136.5
 ========================================================
 ```
 <br />
