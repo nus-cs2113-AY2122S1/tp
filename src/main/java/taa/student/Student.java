@@ -100,6 +100,16 @@ public class Student implements ClassChecker {
     }
 
     /**
+     * Deletes the assessment and marks for the assessment in the results HashMap.
+     *
+     * @param assessmentName Key of the hashmap.
+     * @param marks Value to be stored under the key given.
+     */
+    public void deleteAssessmentAndMarks(String assessmentName, double marks) {
+        results.remove(assessmentName, marks);
+    }
+
+    /**
      * Gets the marks for the given assessment.
      *
      * @param assessmentName Assessment to get marks for.
