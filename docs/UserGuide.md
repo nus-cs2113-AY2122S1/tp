@@ -233,8 +233,15 @@ Command formats:
 * The index must be within the range of indexes displayed in the contact list _(zero-based)_.
   
 `rm <INDEX> {-g} {-l} {-te} {-tw} {-e}`
+* Deletes a specific detail belong to the contact at index `INDEX` according to the flag specified.
+* The index refers to the index number shown in the displayed contact list.
+* The index must be within the range of indexes displayed in the contact list _(zero-based)_.
+* While all fields are optional, minimally **one** must be specified for any effect to take place.
+* The `NAME` (denoted by `-n`) *cannot* be deleted. To delete entire contacts, please use `rm <INDEX>`.
+* If the specified detail is already empty, no deletion will take place for that detail.
+
 `rm all`
-* Deletes all contacts in the ConTech Book
+* Deletes all contacts in the ConTech Book.
 
 Expected outcome of usages:
 * Remove selected contact:
@@ -247,12 +254,28 @@ Github:   github.com/alexlee
 Email:    alex.lee@contech.sg
 Telegram: t.me/alex133
 ____________________________________________________________
-```
-```
+
 y
 ____________________________________________________________
 ConTech has removed the specified contact: Alex Lee
 You now have 2 contact(s).
+____________________________________________________________
+```
+
+* Remove specific details of a contact:
+```
+rm 3 -g -te -l -e
+____________________________________________________________
+Delete the following fields for Le Zong?  (y/n)
+
+Github:   github.com/lezongmun
+Telegram: t.me/lezongg
+Email:    lezongmun@gmail.com
+____________________________________________________________
+
+y
+____________________________________________________________
+The specified fields for Le Zong have been deleted.
 ____________________________________________________________
 ```
 
@@ -263,8 +286,7 @@ rm all
 ____________________________________________________________
 Delete all of your contacts?  (y/n)
 ____________________________________________________________
-```
-```
+
 y
 ____________________________________________________________
 ConTech has removed all 2 of your contact(s).
