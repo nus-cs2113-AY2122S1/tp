@@ -37,7 +37,7 @@ public class UpdateGoalNameCommand extends UpdateCommand {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 
@@ -58,4 +58,5 @@ public class UpdateGoalNameCommand extends UpdateCommand {
     public String getNewGoalName() {
         return goalName;
     }
+
 }

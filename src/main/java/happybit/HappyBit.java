@@ -1,6 +1,5 @@
 package happybit;
 
-import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.state.State;
 import happybit.storage.Storage;
@@ -42,15 +41,13 @@ public class HappyBit {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-
-
+    
     /**
      * Executes the main body of HappyBit.
      */
     private void run() {
-        state.startupState();
         state.handleState();
-        printManager.showGoodbye();
+        printManager.printExit();
     }
 
 }

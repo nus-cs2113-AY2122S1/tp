@@ -123,10 +123,6 @@ public class Habit {
         this.endDate = endDate;
     }
 
-    public void setIntervals(ArrayList<Interval> intervals) {
-        this.intervals = intervals;
-    }
-
     public void addInterval(Interval interval) {
         this.intervals.add(interval);
     }
@@ -175,15 +171,6 @@ public class Habit {
     }
 
     /**
-     * Updates the name of a habit.
-     *
-     * @param habitName New name the habit is to be updated with.
-     */
-    public void updateHabitName(String habitName) {
-        this.habitName = habitName;
-    }
-
-    /**
      * Updates a new interval for the specified habit.
      *
      * @param lengthOfInterval Integer value of the new interval user wishes to have.
@@ -217,7 +204,7 @@ public class Habit {
     public int computeHabitCompletionRate() {
         int numOfCompletedIntervals = computeNumOfCompletedIntervals();
         int totalIntervals = getTotalIntervals();
-        return numOfCompletedIntervals / totalIntervals;
+        return (int)((double)(numOfCompletedIntervals) / totalIntervals * 100);
     }
 
     /**
@@ -238,26 +225,24 @@ public class Habit {
     /**
      * Returns longest consecutive streak for current habit.
      *
-     * @return Longest chain streak for the habit
+     * @return Longest chain streak for the habit.
      */
     public int getStreak() {
         int streak = 0;
         int currStreak = 0;
-        boolean isConsecutive = false;
-
         for (Interval interval : intervals) {
             if (interval.getDone()) {
-                isConsecutive = true;
                 currStreak++;
             } else {
-                isConsecutive = false;
-                if (currStreak >= streak) {
+                if (currStreak > streak) {
                     streak = currStreak;
                 }
                 currStreak = 0;
             }
         }
-
+        if (currStreak > streak) {
+            streak = currStreak;
+        }
         return streak;
     }
 

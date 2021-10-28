@@ -133,9 +133,6 @@ public class Goal {
      */
     public void addHabit(Habit habit) {
         habitList.add(habit);
-        // get newly added habit and add progress
-        Habit newHabit = habitList.get(getListLength() - 1);
-        //newHabit.addProgress();
     }
 
     /**
@@ -254,7 +251,7 @@ public class Goal {
         return dueHabits;
     }
 
-    /* The following commands will be used for implementing the quick view of goal.
+    /* The following commands will be used for implementing the quick view of goal (not implemented)
      * isCompleted()
      * getCompletionRates()
      * getHabitNames()

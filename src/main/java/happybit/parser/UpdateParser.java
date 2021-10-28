@@ -95,13 +95,6 @@ public class UpdateParser extends Parser {
         return stringToInt(strGoalIndex.substring(FLAG_LENGTH), FLAG_GOAL_INDEX) - 1;
     }
 
-    /**
-     * Gets the habit index from user input.
-     *
-     * @param parameters String array of command parameters.
-     * @return Habit index.
-     * @throws HaBitParserException If the habit index flag or habit index is absent, or non-integer.
-     */
     private static int getHabitIndex(String[] parameters) throws HaBitParserException {
         String strHabitIndex = getParameter(parameters, FLAG_HABIT_INDEX);
         if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
@@ -172,4 +165,5 @@ public class UpdateParser extends Parser {
             }
         }
     }
+
 }

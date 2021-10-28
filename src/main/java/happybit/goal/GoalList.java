@@ -39,6 +39,8 @@ public class GoalList {
 
     /**
      * Getter for index of chosen goal.
+     * To be used for goal quick view (not implemented).
+     *
      * @return Integer index of chosen goal.
      */
     public int getChosenGoalIndex() {
@@ -171,6 +173,7 @@ public class GoalList {
 
     /**
      * Marks Progress for a goal as done.
+     * new Date() was used since we assume that the habit can only be marked as completed on the day itself.
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
@@ -184,7 +187,8 @@ public class GoalList {
         ArrayList<Habit> habitList = goal.getHabitList();
         Habit habit = this.getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
-        printManager.printDoneHabit(goal.getDescription(), habit, new Date());
+        String[] strDates = habit.getDoneHabitDates(new Date());
+        printManager.printDoneHabit(goal.getDescription(), habit.getHabitName(), strDates);
     }
 
     /**
@@ -250,7 +254,7 @@ public class GoalList {
 
         goal.setGoalName(newGoalName);
         goalList.set(goalIndex, goal);
-        printManager.printUpdatedGoal(oldGoalName, newGoalName);
+        printManager.printUpdatedGoalName(oldGoalName, newGoalName);
     }
 
     /**
@@ -273,7 +277,7 @@ public class GoalList {
 
         habit.setHabitName(newHabitName);
         habitList.set(habitIndex, habit);
-        printManager.printUpdatedHabit(goal.getGoalName(), oldHabitName, newHabitName);
+        printManager.printUpdatedHabitName(goal.getGoalName(), oldHabitName, newHabitName);
     }
 
     /**

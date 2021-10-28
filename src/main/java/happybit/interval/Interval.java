@@ -99,10 +99,7 @@ public class Interval {
      * @return Boolean of whether the date is within the interval.
      */
     public boolean isWithinInterval(Date compareDate) {
-        if (compareDate.compareTo(this.startDate) >= 0 && compareDate.compareTo(this.endDate) <= 0) {
-            return true;
-        }
-        return false;
+        return compareDate.after(this.startDate) && compareDate.before(this.endDate);
     }
 
     /*
@@ -123,4 +120,5 @@ public class Interval {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         return formatter.format(date);
     }
+
 }

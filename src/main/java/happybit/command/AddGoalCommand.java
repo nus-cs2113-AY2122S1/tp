@@ -35,7 +35,7 @@ public class AddGoalCommand extends AddCommand {
             int index = goalList.getListLength() - 1;
             storage.export(this.goal, index);
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 
@@ -47,4 +47,5 @@ public class AddGoalCommand extends AddCommand {
     public Goal getGoal() {
         return goal;
     }
+
 }
