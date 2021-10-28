@@ -14,6 +14,14 @@ import java.util.logging.Logger;
 
 public class Storage {
     public static final String FILENAME = "saveFile.txt";
+    public static final String DIFF_PRIMER = "Difficulty:";
+    public static final String CALORIES_PRIMER = "Calories (kcal):";
+    public static final String TIME_PREP_PRIMER = "Preparation time:";
+    public static final String TIME_COOK_PRIMER = "Cooking time:";
+    public static final String PRICE_PRIMER = "Total price of ingredients:";
+    public static final String INGREDIENTS_PRIMER = "Ingredients needed:";
+    public static final String STEPS_PRIMER = "Method:";
+    public static final String TAGS_PRIMER = "Tags:";
     static Logger logger;
 
     public Storage(String baseDir, Cookbook cookbook) {
@@ -51,7 +59,7 @@ public class Storage {
     }
 
     private String loadDifficulty(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Difficulty:")) {
+        if (buffer.trim().equals(DIFF_PRIMER)) {
             String line = loadScanner.nextLine().trim();
             for (Difficulty d : Difficulty.values()) {
                 if (line.equals(d.name())) {
@@ -65,7 +73,7 @@ public class Storage {
     }
 
     private String loadCalories(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Calories (kcal):")) {
+        if (buffer.trim().equals(CALORIES_PRIMER)) {
             String line = loadScanner.nextLine().trim();
             r.setCalories(Integer.parseInt(line));
             return loadScanner.nextLine();
@@ -79,14 +87,14 @@ public class Storage {
         int prep = -1;
         int cook = -1;
 
-        if (line.trim().equals("Preparation time:")) {
+        if (line.trim().equals(TIME_PREP_PRIMER)) {
             line = loadScanner.nextLine().trim();
             int spaceIndex = line.indexOf(" ");
             prep = Integer.parseInt(line.substring(0, spaceIndex));
             line = loadScanner.nextLine();
         }
 
-        if (line.trim().equals("Cooking time:")) {
+        if (line.trim().equals(TIME_COOK_PRIMER)) {
             line = loadScanner.nextLine().trim();
             int spaceIndex = line.indexOf(" ");
             cook = Integer.parseInt(line.substring(0, spaceIndex));
@@ -99,7 +107,7 @@ public class Storage {
     }
 
     private String loadPrice(Recipe r, String buffer, Scanner loadScanner) {
-        if (buffer.trim().equals("Total price of ingredients:")) {
+        if (buffer.trim().equals(PRICE_PRIMER)) {
             String line = loadScanner.nextLine().trim();
             r.setTotalPrice(Float.parseFloat(line.substring(1)));
             return loadScanner.nextLine();
@@ -110,7 +118,7 @@ public class Storage {
 
     private String loadIngredients(Recipe r, String buffer, Scanner loadScanner) {
         String line = buffer;
-        if (line.trim().equals("Ingredients needed:")) {
+        if (line.trim().equals(INGREDIENTS_PRIMER)) {
             while (loadScanner.hasNext()) {
                 line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
@@ -130,7 +138,7 @@ public class Storage {
 
     private String loadSteps(Recipe r, String buffer, Scanner loadScanner) {
         String line = buffer;
-        if (line.trim().equals("Method:")) {
+        if (line.trim().equals(STEPS_PRIMER)) {
             while (loadScanner.hasNext()) {
                 line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
@@ -151,7 +159,7 @@ public class Storage {
     private void loadTags(Recipe r, String buffer, Scanner loadScanner, Cookbook cookbook) {
         String line = buffer;
 
-        if (line.trim().equals("Tags:")) {
+        if (line.trim().equals(TAGS_PRIMER)) {
             while (loadScanner.hasNext()) {
                 line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
@@ -188,6 +196,7 @@ public class Storage {
         }
     }
 
+    //For JUnit tests
     public void deleteSaveFile(String baseDir) {
         File load = new File(baseDir, FILENAME);
         load.delete();
