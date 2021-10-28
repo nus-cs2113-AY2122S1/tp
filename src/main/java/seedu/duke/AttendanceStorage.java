@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 
@@ -133,7 +134,7 @@ public class AttendanceStorage {
      * @param currentAttendanceFile the current attendance file
      */
     public static void rewriteAttendanceCsv(AttendanceList attendanceList, File currentAttendanceFile,
-            String trainingName) {
+                                            String trainingName) {
         int attendanceListSize = attendanceList.getAttendanceListSize();
         try (PrintWriter dukeAttendanceWriter = new PrintWriter(currentAttendanceFile)) {
             dukeAttendanceWriter.write("name");
@@ -142,12 +143,12 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                //if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
-                dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
-                dukeAttendanceWriter.write(',');
-                dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
-                dukeAttendanceWriter.write('\n');
-                //}
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                    dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
+                    dukeAttendanceWriter.write(',');
+                    dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
+                    dukeAttendanceWriter.write('\n');
+                }
             }
         } catch (Exception e) {
             e.getStackTrace();
@@ -182,8 +183,8 @@ public class AttendanceStorage {
      * This method will delete the attendance entry from the main list.
      *
      * @param attendanceList the current attendance list
-     * @param trainingName name of training
-     * @param index index of attendance
+     * @param trainingName   name of training
+     * @param index          index of attendance
      */
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
         //the index passed in is based on the sub attendance list of the training name passed in
