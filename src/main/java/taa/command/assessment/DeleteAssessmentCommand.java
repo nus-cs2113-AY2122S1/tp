@@ -8,6 +8,10 @@ import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.storage.Storage;
+import taa.student.Student;
+import taa.student.StudentList;
+
+import java.util.ArrayList;
 
 public class DeleteAssessmentCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
@@ -54,6 +58,14 @@ public class DeleteAssessmentCommand extends Command {
         Assessment assessment = assessmentList.deleteAssessment(name);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
+        }
+
+        ArrayList<Student> students = module.getStudentList().getStudents();
+        for (Student s : students) {
+            if (s.marksExist(name)) {
+                double marks = s.getMarks(name);
+                s.deleteAssessmentAndMarks(name, marks);
+            }
         }
 
         assert storage != null : "storage should exist.";
