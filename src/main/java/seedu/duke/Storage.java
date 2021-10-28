@@ -186,8 +186,9 @@ public class Storage {
      *
      * @see Storage#getOpenTrip()
      */
-    private static void promptUserForValidTrip() {
+    public static void promptUserForValidTrip() {
         try {
+            System.out.print("Please enter the trip you would like to open: ");
             int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
             setOpenTrip(listOfTrips.get(tripIndex));
         } catch (NumberFormatException e) {
