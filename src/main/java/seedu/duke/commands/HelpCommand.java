@@ -14,10 +14,10 @@ public class HelpCommand extends Command {
                 + "7: add /uni <uni index/name> ------------ Add a university to the selected list\n"
                 + "8: add /mod <mod index/name> ~~~~~~~~~~~~ Add a module to the selected list\n"
                 + "9: searchmap <uni index> ---------------- Displays the available module mappings for "
-                + "10: selected modules for that university\n"
-                + "11: addmap <uni index> <mapping index> ~~ Add that module mapping to the selected list\n"
-                + "12: remove </uni or /mod> <index> ------- Remove the specified university/module \n"
-                + "13: remove /map <uni index> <map index> ~ Remove the specified module mapping";
+                + "selected modules for that university\n"
+                + "10: addmap <uni index> <mapping index> ~~ Add that module mapping to the selected list\n"
+                + "11: remove </uni or /mod> <index> ------- Remove the specified university/module \n"
+                + "12Z: remove /map <uni index> <map index> ~ Remove the specified module mapping";
         System.out.println(help);
     }
 }
