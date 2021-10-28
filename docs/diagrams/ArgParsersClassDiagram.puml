@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+class "{abstract}\nSingleArgParser<T>" as SingleArgParser
+class "{abstract}\nMultipleArgParser<T>" as MultipleArgParser
+
+class SingleArgParser {
+    + {abstract} parse(argString: String) : T
+}
+class MultipleArgParser extends SingleArgParser {
+    +parse(argList: ArrayList<String>) : ArrayList<T>
+}
+class ExpiryDateParser<LocalDate> extends SingleArgParser {
+    +parse(argString: String) : LocalDate
+}
+class IngredientParser<String> extends MultipleArgParser {
+    +parse(argString: String) : String
+}
+class QuantityParser<Integer> extends MultipleArgParser {
+    +parse(argString: String) : Integer
+}
+class RecipeParser<String> extends MultipleArgParser {
+    +parse(argString: String) : String
+}
+class UnitParser<String> extends SingleArgParser {
+    +parse(argString: String) : String
+}
+
+class Parser {
+    +parseCommand(userInput: String) : Command
+}
+
+Parser .up.> ExpiryDateParser
+Parser .up.> IngredientParser
+Parser .up.> QuantityParser
+Parser .up.> RecipeParser
+Parser .up.> UnitParser
+
+@enduml
