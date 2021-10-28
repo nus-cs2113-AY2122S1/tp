@@ -127,6 +127,13 @@ public class PrintManager {
         printDashes();
     }
 
+    public void printUpdatedHabit(String goalDescription, String oldHabitDescription, String newHabitDescription) {
+        printDashes();
+        System.out.println("Your habit \"" + oldHabitDescription + "\" of goal " + goalDescription
+                + " has been changed to \"" + newHabitDescription + "\".");
+        printDashes();
+    }
+
     public void showError(String message) {
         printDashes();
         System.out.println(message);
