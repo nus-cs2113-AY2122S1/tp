@@ -5,6 +5,8 @@ import happybit.state.State;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
+import java.util.concurrent.TimeUnit;
+
 public class HappyBit {
 
     private Storage storage;
@@ -48,6 +50,15 @@ public class HappyBit {
     private void run() {
         state.handleState();
         printManager.printExit();
+        wait3Seconds();
+    }
+
+    private void wait3Seconds() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            // Do nothing
+        }
     }
 
 }

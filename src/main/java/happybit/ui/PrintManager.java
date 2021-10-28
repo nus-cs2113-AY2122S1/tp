@@ -40,9 +40,8 @@ public class PrintManager {
     private static final String COMMAND_HELP = "open command list";
     private static final String COMMAND_ADD_GOAL = "set a goal";
     private static final String COMMAND_ADD_HABIT = "add a habit";
-    private static final String COMMAND_UPDATE_GOAL_NAME = "update a goal name";
-    private static final String COMMAND_UPDATE_HABIT_NAME = "change a habit name";
-    private static final String COMMAND_UPDATE_HABIT_INTERVAL = "update a habit interval";
+    private static final String COMMAND_UPDATE_GOAL = "update a goal name/type/end date";
+    private static final String COMMAND_UPDATE_HABIT = "change a habit name/interval";
     private static final String COMMAND_LIST_GOAL = "list all goals";
     private static final String COMMAND_LIST_HABIT = "view all habits of a goal";
     private static final String COMMAND_DELETE_GOAL = "remove a goal";
@@ -54,9 +53,10 @@ public class PrintManager {
     private static final String INSTR_HELP = "help";
     private static final String INSTR_ADD_GOAL = "set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>";
     private static final String INSTR_ADD_HABIT = "add g/<goal_index> n/<habit_name> i/<interval>";
-    private static final String INSTR_UPDATE_GOAL_NAME = "update g/<goal_index> n/<new_goal_name>";
-    private static final String INSTR_UPDATE_HABIT_NAME = "change g/<goal_index> h/<habit_index> n/<new_habit_name>";
-    private static final String INSTR_UPDATE_HABIT_INTERVAL = "interval g/<goal_index> h/<habit_index> i/<interval>";
+    private static final String INSTR_UPDATE_GOAL = "update g/<goal_index> { n/<goal_name> t/<goal_type> "
+            + "e/<end_date> }";
+    private static final String INSTR_UPDATE_HABIT = "change g/<goal_index> h/<habit_index> { n/<habit_name> "
+            + "i/<interval> }";
     private static final String INSTR_LIST_GOAL = "list";
     private static final String INSTR_LIST_HABIT = "view g/<goal_index>";
     private static final String INSTR_DELETE_GOAL = "remove g/<goal_index>";
@@ -470,33 +470,31 @@ public class PrintManager {
      * @return 2D string array containing command data.
      */
     private String[][] populateCommandData() {
-        String[][] data = new String[13][2];
+        String[][] data = new String[12][2];
         data[0][COMMAND_INDEX] = COMMAND_HELP;
         data[1][COMMAND_INDEX] = COMMAND_ADD_GOAL;
         data[2][COMMAND_INDEX] = COMMAND_ADD_HABIT;
-        data[3][COMMAND_INDEX] = COMMAND_UPDATE_GOAL_NAME;
-        data[4][COMMAND_INDEX] = COMMAND_UPDATE_HABIT_NAME;
-        data[5][COMMAND_INDEX] = COMMAND_UPDATE_HABIT_INTERVAL;
-        data[6][COMMAND_INDEX] = COMMAND_LIST_GOAL;
-        data[7][COMMAND_INDEX] = COMMAND_LIST_HABIT;
-        data[8][COMMAND_INDEX] = COMMAND_DELETE_GOAL;
-        data[9][COMMAND_INDEX] = COMMAND_DELETE_HABIT;
-        data[10][COMMAND_INDEX] = COMMAND_DONE_HABIT;
-        data[11][COMMAND_INDEX] = COMMAND_RETURN;
-        data[12][COMMAND_INDEX] = COMMAND_EXIT;
+        data[3][COMMAND_INDEX] = COMMAND_UPDATE_GOAL;
+        data[4][COMMAND_INDEX] = COMMAND_UPDATE_HABIT;
+        data[5][COMMAND_INDEX] = COMMAND_LIST_GOAL;
+        data[6][COMMAND_INDEX] = COMMAND_LIST_HABIT;
+        data[7][COMMAND_INDEX] = COMMAND_DELETE_GOAL;
+        data[8][COMMAND_INDEX] = COMMAND_DELETE_HABIT;
+        data[9][COMMAND_INDEX] = COMMAND_DONE_HABIT;
+        data[10][COMMAND_INDEX] = COMMAND_RETURN;
+        data[11][COMMAND_INDEX] = COMMAND_EXIT;
         data[0][INSTR_INDEX] = INSTR_HELP;
         data[1][INSTR_INDEX] = INSTR_ADD_GOAL;
         data[2][INSTR_INDEX] = INSTR_ADD_HABIT;
-        data[3][INSTR_INDEX] = INSTR_UPDATE_GOAL_NAME;
-        data[4][INSTR_INDEX] = INSTR_UPDATE_HABIT_NAME;
-        data[5][INSTR_INDEX] = INSTR_UPDATE_HABIT_INTERVAL;
-        data[6][INSTR_INDEX] = INSTR_LIST_GOAL;
-        data[7][INSTR_INDEX] = INSTR_LIST_HABIT;
-        data[8][INSTR_INDEX] = INSTR_DELETE_GOAL;
-        data[9][INSTR_INDEX] = INSTR_DELETE_HABIT;
-        data[10][INSTR_INDEX] = INSTR_DONE_HABIT;
-        data[11][INSTR_INDEX] = INSTR_RETURN;
-        data[12][INSTR_INDEX] = INSTR_EXIT;
+        data[3][INSTR_INDEX] = INSTR_UPDATE_GOAL;
+        data[4][INSTR_INDEX] = INSTR_UPDATE_HABIT;
+        data[5][INSTR_INDEX] = INSTR_LIST_GOAL;
+        data[6][INSTR_INDEX] = INSTR_LIST_HABIT;
+        data[7][INSTR_INDEX] = INSTR_DELETE_GOAL;
+        data[8][INSTR_INDEX] = INSTR_DELETE_HABIT;
+        data[9][INSTR_INDEX] = INSTR_DONE_HABIT;
+        data[10][INSTR_INDEX] = INSTR_RETURN;
+        data[11][INSTR_INDEX] = INSTR_EXIT;
         return data;
     }
 
