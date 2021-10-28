@@ -164,4 +164,4 @@ Action| Syntax |Remarks|
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>] OR <MEMBER_NAME> OR <TRAINING_NAME>| Get the index by calling `list /att`
 |edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
 |edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
-|list| list [/m] [/t] [/att /t <TRAINING_NAME> [/d <1_OR_0>]| /m for Member, /t for Training/, /att for Attendance, 1_or_0 is an optional field
+|list| list [/m] [/t] [/att /t <TRAINING_NAME> </d 1_OR_0>]| `/m` for Member, `/t` for Training, `/att` for Attendance where `<1_or_0>` is an optional field
