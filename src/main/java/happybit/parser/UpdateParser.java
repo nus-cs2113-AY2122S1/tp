@@ -143,9 +143,9 @@ public class UpdateParser extends Parser {
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);
         int interval = getInterval(parameters);
-        assert (goalIndex > 0);
-        assert (habitIndex > 0);
-        assert (interval > 0);
+        assert (goalIndex >= 0);
+        assert (habitIndex >= 0);
+        assert (interval >= 0);
         return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
     }
 
