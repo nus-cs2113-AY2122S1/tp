@@ -41,6 +41,16 @@ public class Goal {
     }
 
     /**
+     * Setter for type of goal.
+     * Used to edit the type of the goal.
+     *
+     * @param goalType New type the goal is to be updated with.
+     */
+    public void setGoalType(GoalType goalType) {
+        this.goalType = goalType;
+    }
+
+    /**
      * Getter for name of goal.
      *
      * @return Name of goal.
@@ -85,6 +95,10 @@ public class Goal {
      */
     public Date getEndDate() {
         return this.endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -133,9 +147,6 @@ public class Goal {
      */
     public void addHabit(Habit habit) {
         habitList.add(habit);
-        // get newly added habit and add progress
-        Habit newHabit = habitList.get(getListLength() - 1);
-        //newHabit.addProgress();
     }
 
     /**
@@ -184,7 +195,7 @@ public class Goal {
      *
      * @return String of the goalType name.
      */
-    public String getGoalType() {
+    public String getGoalTypeStr() {
         switch (this.goalType) {
         case SLEEP:
             return "Sleep";
@@ -197,6 +208,15 @@ public class Goal {
         default:
             return "Default";
         }
+    }
+
+    /**
+     * Gets the goalType.
+     *
+     * @return GoalType of Goal.
+     */
+    public GoalType getGoalType() {
+        return this.goalType;
     }
 
     /**
@@ -254,7 +274,7 @@ public class Goal {
         return dueHabits;
     }
 
-    /* The following commands will be used for implementing the quick view of goal.
+    /* The following commands will be used for implementing the quick view of goal (not implemented)
      * isCompleted()
      * getCompletionRates()
      * getHabitNames()
@@ -301,6 +321,22 @@ public class Goal {
             habitNames.add(habit.getHabitName());
         }
         return habitNames;
+    }
+
+    /**
+     * Checks if newHabit attempted to be added by user for curr Goal is already inside list.
+     *
+     * @param newName name attempted to be added
+     * @return True if name already inside, False other wise
+     */
+    public boolean duplicateInHabitList(String newName) {
+        ArrayList<String> currHabitNames = getHabitNames();
+        for (String currName : currHabitNames) {
+            if (newName.equals(currName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /*

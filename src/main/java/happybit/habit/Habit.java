@@ -105,6 +105,15 @@ public class Habit {
     }
 
     /**
+     * Updates the habit name with a new one from user.
+     *
+     * @param habitName New habit name.
+     */
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
+
+    /**
      * Setter for endDate of habit.
      * Used in AddHabitCommand to manually set the endDate since goalList is only accessible there.
      *
@@ -112,10 +121,6 @@ public class Habit {
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public void setIntervals(ArrayList<Interval> intervals) {
-        this.intervals = intervals;
     }
 
     public void addInterval(Interval interval) {
@@ -166,15 +171,6 @@ public class Habit {
     }
 
     /**
-     * Updates the name of a habit.
-     *
-     * @param habitName New name the habit is to be updated with.
-     */
-    public void updateHabitName(String habitName) {
-        this.habitName = habitName;
-    }
-
-    /**
      * Updates a new interval for the specified habit.
      *
      * @param lengthOfInterval Integer value of the new interval user wishes to have.
@@ -208,7 +204,7 @@ public class Habit {
     public int computeHabitCompletionRate() {
         int numOfCompletedIntervals = computeNumOfCompletedIntervals();
         int totalIntervals = getTotalIntervals();
-        return numOfCompletedIntervals / totalIntervals;
+        return (int)((double)(numOfCompletedIntervals) / totalIntervals * 100);
     }
 
     /**
@@ -227,28 +223,26 @@ public class Habit {
     }
 
     /**
-     * Returns consecutive streak for current habit.
+     * Returns longest consecutive streak for current habit.
      *
-     * @return Longest chain streak for the habit
+     * @return Longest chain streak for the habit.
      */
     public int getStreak() {
         int streak = 0;
         int currStreak = 0;
-        boolean isConsecutive = false;
-
         for (Interval interval : intervals) {
             if (interval.getDone()) {
-                isConsecutive = true;
                 currStreak++;
             } else {
-                isConsecutive = false;
-                if (currStreak >= streak) {
+                if (currStreak > streak) {
                     streak = currStreak;
                 }
                 currStreak = 0;
             }
         }
-
+        if (currStreak > streak) {
+            streak = currStreak;
+        }
         return streak;
     }
 

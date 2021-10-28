@@ -19,4 +19,5 @@ public class DeleteCommand extends Command {
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         // Do nothing
     }
+
 }

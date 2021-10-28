@@ -5,6 +5,8 @@ import happybit.habit.Habit;
 import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +15,11 @@ public class GoalList {
     private static final String ERROR_INVALID_GOAL_INDEX = "There are no goals at that index.";
     private static final String ERROR_EMPTY_HABIT_LIST = "There are no habits listed under this goal!";
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
+    private static final String ERROR_IDENTICAL_NEW_NAME = "There is no change in name.";
+    private static final String ERROR_IDENTICAL_NEW_TYPE = "There is no change in type.";
+    private static final String ERROR_IDENTICAL_NEW_DATE = "There is no change in end date";
+    private static final String ERROR_DUPLICATE_HABIT_NAME = "This habit name is already present for this goal";
+    private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
@@ -36,6 +43,8 @@ public class GoalList {
 
     /**
      * Getter for index of chosen goal.
+     * To be used for goal quick view (not implemented).
+     *
      * @return Integer index of chosen goal.
      */
     public int getChosenGoalIndex() {
@@ -94,7 +103,10 @@ public class GoalList {
      * @param goal Goal to be added.
      * @param printManager User Interface class for printing added goal.
      */
-    public void addGoal(Goal goal, PrintManager printManager) {
+    public void addGoal(Goal goal, PrintManager printManager) throws HaBitCommandException {
+        if (duplicateInGoalList(goal.getGoalName())) {
+            throw new HaBitCommandException(ERROR_DUPLICATE_GOAL_NAME);
+        }
         goalList.add(goal);
         printManager.printAddedGoal(goal.getDescription());
     }
@@ -121,6 +133,10 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
+        // check duplicate for currHabit
+        if (goal.duplicateInHabitList(habit.getHabitName())) {
+            throw new HaBitCommandException(ERROR_DUPLICATE_HABIT_NAME);
+        }
         Habit newHabit = updateHabitEndDate(goal, habit);
         newHabit.populateIntervalsDuringHabitCreation();
         goal.addHabit(newHabit);
@@ -161,6 +177,7 @@ public class GoalList {
 
     /**
      * Marks Progress for a goal as done.
+     * new Date() was used since we assume that the habit can only be marked as completed on the day itself.
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
@@ -174,7 +191,8 @@ public class GoalList {
         ArrayList<Habit> habitList = goal.getHabitList();
         Habit habit = this.getHabit(habitList, habitIndex);
         goal.doneHabit(habitIndex);
-        printManager.printDoneHabit(goal.getDescription(), habit, new Date());
+        String[] strDates = habit.getDoneHabitDates(new Date());
+        printManager.printDoneHabit(goal.getDescription(), habit.getHabitName(), strDates);
     }
 
     /**
@@ -235,9 +253,45 @@ public class GoalList {
             throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         String oldGoalName = goal.getGoalName();
+
+        compareNewNameWithOldName(oldGoalName, newGoalName);
+
         goal.setGoalName(newGoalName);
         goalList.set(goalIndex, goal);
-        printManager.printUpdatedGoal(oldGoalName, newGoalName);
+        printManager.printUpdatedGoalName(oldGoalName, newGoalName);
+    }
+
+    public void updateGoalEndDate(int goalIndex, Date newDate, PrintManager printManager) throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        Date oldDate = goal.getEndDate();
+        final String oldDateString = goal.getPrintableEndDate();
+        compareOldDateWithNewDate(oldDate, newDate);
+        goal.setEndDate(newDate);
+        String newDateString = goal.getPrintableEndDate();
+        // Go through all habits for Goal
+        // change endDate for all of them + call updateIntervals
+        ArrayList<Habit> habits = goal.getHabitList();
+        for (Habit habit : habits) {
+            habit.setEndDate(newDate);
+            // update Interval Lengths using same interval for habit
+            habit.updateLengthOfInterval(habit.getIntervalLength());
+        }
+        String goalName = goal.getGoalName();
+        printManager.printUpdatedGoalEndDate(goalName, oldDateString, newDateString);
+    }
+
+    public void updateGoalType(int goalIndex, GoalType newGoalType, PrintManager printManager)
+            throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        GoalType oldGoalType = goal.getGoalType();
+        final String oldGoalTypeName = goal.getGoalTypeStr();
+
+        compareNewTypeWithOldType(oldGoalType, newGoalType);
+
+        goal.setGoalType(newGoalType);
+        goalList.set(goalIndex, goal);
+        final String newGoalTypeName = goal.getGoalTypeStr();
+        printManager.printUpdatedGoalType(oldGoalTypeName, newGoalTypeName);
     }
 
     /**
@@ -250,8 +304,17 @@ public class GoalList {
      * @throws HaBitCommandException If the goalIndex and/or habitIndex is not within its respective list range.
      */
     public void updateHabitNameFromGoal(int goalIndex, int habitIndex, String newHabitName, PrintManager printManager)
-        throws HaBitCommandException {
-        // To be implemented
+            throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habitList = goal.getHabitList();
+        Habit habit = getHabit(habitList, habitIndex);
+        String oldHabitName = habit.getHabitName();
+
+        compareNewNameWithOldName(oldHabitName, newHabitName);
+
+        habit.setHabitName(newHabitName);
+        habitList.set(habitIndex, habit);
+        printManager.printUpdatedHabitName(goal.getGoalName(), oldHabitName, newHabitName);
     }
 
     /**
@@ -270,6 +333,7 @@ public class GoalList {
         habit.updateLengthOfInterval(newInterval);
         printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
+
 
     public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
         Goal goal = this.getGoal(goalIndex);
@@ -346,4 +410,67 @@ public class GoalList {
         return habit;
     }
 
+    /**
+     * Checks new name given by user with old name to ensure that they are different.
+     * Throws an exception if they are the same (what are you even doing user.)
+     *
+     * @param oldName Current name of goal or habit.
+     * @param newName New goal or habit name given by user.
+     * @throws HaBitCommandException If old and new names are identical.
+     */
+    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException {
+        if (oldName.equals(newName)) {
+            throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
+        }
+    }
+
+    /**
+     * Checks name of new goal being added by user to ensure it is not present in their goal list.
+     *
+     * @param newType Type of new goal being added in
+     * @return True if name already exists, False otherwise
+     */
+    private void compareNewTypeWithOldType(GoalType oldType, GoalType newType) throws HaBitCommandException {
+        if (newType == oldType) {
+            throw new HaBitCommandException(ERROR_IDENTICAL_NEW_TYPE);
+        }
+    }
+
+    private void compareOldDateWithNewDate(Date oldDate, Date newDate) throws HaBitCommandException {
+        LocalDate oldDateLD = convertDateToLocalDate(oldDate);
+        LocalDate newDateLD = convertDateToLocalDate(newDate);
+
+        if (oldDateLD.isEqual(newDateLD)) {
+            throw new HaBitCommandException((ERROR_IDENTICAL_NEW_DATE));
+        }
+    }
+
+    /**
+     * 'Type-casting' a Date to a LocalDate.
+     *
+     * @param date Date to be 'type-casted'.
+     * @return LocalDate that has been 'type-casted' from Date.
+     */
+    private LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 'Type-casting' a LocalDate to a Date.
+     *
+     * @param localDate LocalDate to be 'type-casted'.
+     * @return Date that has been 'type-casted' from LocalDate.
+     */
+    private Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    private boolean duplicateInGoalList(String newName) {
+        for (Goal goal : goalList) {
+            if (goal.getGoalName().equals(newName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

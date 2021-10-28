@@ -1,10 +1,11 @@
 package happybit;
 
-import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.state.State;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
+
+import java.util.concurrent.TimeUnit;
 
 public class HappyBit {
 
@@ -42,15 +43,22 @@ public class HappyBit {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-
-
+    
     /**
      * Executes the main body of HappyBit.
      */
     private void run() {
-        state.startupState();
         state.handleState();
-        printManager.showGoodbye();
+        printManager.printExit();
+        wait3Seconds();
+    }
+
+    private void wait3Seconds() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            // Do nothing
+        }
     }
 
 }
