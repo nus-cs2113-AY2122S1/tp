@@ -12,12 +12,12 @@ you may have in order to help you organise your CCA's timetable.
 - [Commands](#commands)
 - [Command Summary](#command-summary)
 
-## Pre-requisites - _Things to prepare before you start using Duke_
-1. Duke runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
+## Pre-requisites - _Things to prepare before you start using CCA Manager_
+1. CCA Manager runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
    1. You can download Java [here](https://java.com/en/download/) 
-2. Download the latest .jar of Duke [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
-3. Run Duke with the command `java -jar CCAManager.jar` on your Command Prompt `cmd.exe`
-4. You should see the following screen if you have successfully run Duke
+2. Download the latest .jar of CCA Manager [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
+3. Run CCA Manager with the command `java -jar CCAManager.jar` on your Command Prompt `cmd.exe`
+4. You should see the following screen if you have successfully run CCA Manager
    ```
    Welcome to
     ,-----. ,-----.  ,---.      ,--.   ,--.  ,---.  ,--.  ,--.  ,---.   ,----.   ,------.,------.
