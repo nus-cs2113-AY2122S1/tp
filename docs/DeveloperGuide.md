@@ -7,7 +7,7 @@ Third party library used: GSON under Apache License 2.0
 
 ## Design 
 
-###Architecture
+### Architecture
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -59,7 +59,7 @@ The  Person Class,
 * One `Person` object who was involved in the expense will then be appointed as the payer of the group, the user will then have to indicate how much (in foreign currency) each of the participating persons spent for that particular expense. This is then stored and updated in each of the respective `Person` object’s `moneyOwed` HashMap,  where a positive double refers to how much the person owes the respective Person object (i.e. the key of the HashMap) and a negative double refers to how much the Person object (i.e. the key of the HashMap) owes to that instance of the Person object.
   * Example: If the HashMap = {person2 = 22, person3 = -11} in the person1 object, then person1 owes person2 $22 and person3 owes person1 $11.
 
-###`Ui` Class
+### `Ui` Class
 
 The `Ui` class handles everything that the user sees, which includes exception handling messages, outputs to users and feedback.
 
@@ -70,7 +70,7 @@ The `Ui` class,
 - Obtains information from Storage, Parser, Trip and Expense components.
 - Prints the information through the terminal.
 
-###`Parser` Class
+### `Parser` Class
 
 The `Parser` class handles all input and executes the corresponding actions based on the user input. 
 It consists of methods that will execute most commands that is crucial to the functionality of our program.
