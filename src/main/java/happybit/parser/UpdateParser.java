@@ -6,6 +6,8 @@ import happybit.command.UpdateHabitIntervalCommand;
 import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
 
+import java.util.Date;
+
 public class UpdateParser extends Parser {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
@@ -34,6 +36,13 @@ public class UpdateParser extends Parser {
         int goalIndex = getGoalIndex(parameters);
         String newGoalName = getNewGoalName(parameters);
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
+    }
+
+    public static Command updateGoalEndDate(String input) throws HaBitParserException {
+        checkNoDescription(input);
+        String[] parameters = splitInput(input);
+        int goalIndex = getGoalIndex(parameters);
+        Date newDate = getDate(parameters);
     }
 
     /**
@@ -116,6 +125,10 @@ public class UpdateParser extends Parser {
             throw new HaBitParserException(ERROR_GOAL_NAME_FORMAT);
         }
         return strGoalIndex.substring(FLAG_LENGTH).trim();
+    }
+
+    private static Date getDate(String[] parameters) throws HaBitParserException {
+        //String strEndDate = getParameter
     }
 
     /**

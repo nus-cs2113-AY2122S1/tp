@@ -257,6 +257,10 @@ public class GoalList {
         printManager.printUpdatedGoalName(oldGoalName, newGoalName);
     }
 
+    public void updateGoalEndDate(int goalIndex, Date newDate) throws HaBitCommandException {
+
+    }
+
     /**
      * Changes and updates the name of a habit with a new name from user.
      *
@@ -296,6 +300,7 @@ public class GoalList {
         habit.updateLengthOfInterval(newInterval);
         printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
+
 
     public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
         Goal goal = this.getGoal(goalIndex);
