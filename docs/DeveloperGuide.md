@@ -65,12 +65,13 @@ The *sequence diagram* below shows how various components of the architecture in
 ![Architecture Sequence Diagram](images/ArchitectureSequence.png)
 
 ### **Note:**
+* Examples below have their arguments removed for the sake of brevity
 * `waitForQuery()`: Blocks until a user input is received.
-* `getKeywordStatus(entry)`: Given user input, return the `keyword`.
-* `getMemberDetails(entry)`: Given user input, return a `Member` object with all information from user input
-* `addMember(members, member)`: Calling a class that creates a new `Member` object and adds it to the MemberList `members`
-* `members.addMember(member)`: Adds a Member `member` to MemberList `members`
-* `writeMemberFile(memberFiles, members)`: Writes the content of MemberList `members` to the File `memberFiles`, which should be a `.csv` file in hard drive 
+* `getKeywordStatus()`: Given user input, return the `keyword`
+* `getMemberDetails()`: Given user input, return a `Member` object with all information from user input
+* `addMember()`: Calling a class that creates a new `Member` object and adds it to the MemberList `members`
+* `members.addMember()`: Adds a Member `member` to MemberList `members`
+* `writeMemberFile()`: Writes the content of MemberList `members` to the File `memberFiles`, which should be a `.csv` file in hard drive 
 
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"delete /m 1"`
 ![Architecture Sequence Diagram2](images/deleteMemberArchitecture.PNG)
