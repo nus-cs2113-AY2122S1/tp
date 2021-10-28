@@ -1,15 +1,20 @@
-# User Guide
+# ConTech User Guide
 
 ## Introduction
 
-**ConTech** is a **Command Line Interface (CLI) application for managing computing-related contacts**. 
+**ConTech** (pronounced as Contact) is a **Command Line Interface (CLI) application for managing computing-related 
+contacts**. Specially designed to be optimised for use on the CLI, **ConTech** allows you to seamlessly **add**, **edit**, 
+**view**, **list**, **search**, and **import** your contacts.
+
 If you are a computing professional that often uses the command line for work, **ConTech** can get your contact 
 management tasks done faster than any traditional GUI app. 
 
-With our various [features](#features) such as `add`, `edit`, `view`, and other commands, you can easily perform such 
-actions on your **ConTech** Book in a quick and efficient manner. **ConTech** is optimised for computing-related contacts 
-such as saving a colleague's GitHub username or even mass-loading from a list of contacts. **ConTech** aims to improve your 
-efficiency at work by cutting down the time required to look up for various usernames when working with colleagues. 
+This guide serves to introduce our various [features](#features) such as `add`, `edit`, `view`, and other commands, 
+and guide you to easily manage your **ConTech** Book. 
+
+**ConTech** aims to improve your efficiency at work, be it by cutting down the time required to look up for various 
+usernames when working with colleagues, or by importing hundreds of contacts with just one simple command.
+<br/>
 
 * **[Quick Start](#start)**
 * **[Features](#features)**
