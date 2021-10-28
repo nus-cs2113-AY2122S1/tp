@@ -47,13 +47,14 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 ## <a id="features"></a>Features
 
 1. Storage
-	Allows saving and loading of budget and loan data.
+<br/>  Allows saving and loading of budget and loan data.
 	
 2. Statistics
 
 3. Loan Tracker
 
 4. Loan Reminder
+<br/>  Every time when user starts the app, it reminds user of the loans that are due under the welcome screen.
 
 5. Budget Tracker
 
