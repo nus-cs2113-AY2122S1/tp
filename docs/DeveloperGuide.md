@@ -89,7 +89,7 @@ ingredients and quantities.*
 ## Implementation
 This section describes how the features are implemented.
 
-### List all Ingredients Feature
+### List All Ingredients Feature
 
 The list ingredients feature is performed by `IngredientRepository`. It loops through all the different
 ingredient storages, and concatenates them into a string which is shown as the output list. Below is the
