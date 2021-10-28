@@ -5,10 +5,10 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.tours.FindTourCommand;
 import seedu.duke.data.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindTourCommandTest {
 
@@ -35,12 +35,12 @@ public class FindTourCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the tours that matches your search\n" +
-                "Name: Japan Basic Tour\n" +
-                "Code: JPN\n" +
-                "Price per pax: $1500.00\n" + "\n" + "\n" +
-                "Subscribed Clients:\n" +
-                "Total Subscribed Clients: 0";
+        String expectedString = "This is the tours that matches your search\n"
+                + "Name: Japan Basic Tour\n"
+                + "Code: JPN\n"
+                + "Price per pax: $1500.00\n" + "\n" + "\n"
+                + "Subscribed Clients:\n"
+                + "Total Subscribed Clients: 0";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
@@ -65,13 +65,13 @@ public class FindTourCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the tours that matches your search\n" +
-                "Name: Japan Basic Tour\n" +
-                "Code: JPN\n" +
-                "Price per pax: $1500.00\n" + "\n" + "\n" +
-                "Subscribed Clients:\n" +
-                "1. Bo Tuan\n" + "\n" +
-                "Total Subscribed Clients: 1";
+        String expectedString = "This is the tours that matches your search\n"
+                + "Name: Japan Basic Tour\n"
+                + "Code: JPN\n"
+                + "Price per pax: $1500.00\n" + "\n" + "\n"
+                + "Subscribed Clients:\n"
+                + "1. Bo Tuan\n" + "\n"
+                + "Total Subscribed Clients: 1";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }

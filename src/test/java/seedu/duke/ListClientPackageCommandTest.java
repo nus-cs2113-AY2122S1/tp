@@ -2,7 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clientpackages.FindClientPackageCommand;
+import seedu.duke.commands.clientpackages.ListClientPackageCommand;
 import seedu.duke.data.*;
 
 import java.io.ByteArrayOutputStream;
@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FindClientPackageCommandTest {
+public class ListClientPackageCommandTest {
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
@@ -22,7 +22,7 @@ public class FindClientPackageCommandTest {
     Ui testUi = new Ui();
 
     @Test
-    void findTourCommand_validSubscription_correctlyConstructed() throws TourPlannerException {
+    void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
@@ -35,19 +35,17 @@ public class FindClientPackageCommandTest {
         dummyFlightList.add(sqjpn);
         testPackageList.add(jpnPackage);
 
-        Command findPackage = new FindClientPackageCommand(1);
-        findPackage.setData(dummyClientList, dummyFlightList, dummyTourList, testPackageList, testUi);
-        findPackage.execute();
+        Command listPackage = new ListClientPackageCommand();
+        listPackage.setData(dummyClientList, dummyFlightList, dummyTourList, testPackageList, testUi);
+        listPackage.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the packages that matches your search\n"
+        String expectedString = "Here is a list of all packages\n"
                 + "Package ID: p001\n" + "\n"
                 + "Client: \n"
                 + "Client ID: c001";
-
-        String[] actualStringArray = newConsole.toString().trim().split("\r\n", 2);
-        String actualString = actualStringArray[0] + "\n" + actualStringArray[1].trim().split("\r\n", 2)[0];
+        String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
 }

@@ -35,11 +35,11 @@ public class FindClientCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the client(s) that matches your search\n" +
-                "1. Client ID: c001\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 93338333\n" +
-                "Email: bt@mail.com";
+        String expectedString = "This is the client(s) that matches your search\n"
+                + "1. Client ID: c001\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 93338333\n"
+                + "Email: bt@mail.com";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
@@ -58,15 +58,15 @@ public class FindClientCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the client(s) that matches your search\n" +
-                "1. Client ID: c001\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 93338333\n" +
-                "Email: bt@mail.com\n" + "\n" +
-                "2. Client ID: c002\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 56667888\n" +
-                "Email: bbt@mail.com";
+        String expectedString = "This is the client(s) that matches your search\n"
+                + "1. Client ID: c001\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 93338333\n"
+                + "Email: bt@mail.com\n" + "\n"
+                + "2. Client ID: c002\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 56667888\n"
+                + "Email: bbt@mail.com";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }

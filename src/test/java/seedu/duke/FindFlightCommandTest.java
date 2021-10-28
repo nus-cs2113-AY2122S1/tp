@@ -37,12 +37,12 @@ public class FindFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flights that matches your search\n" +
-                "Flight ID: SQ-JPN\n" +
-                "Departure Flight: JPN, 20/10/2021 18:00\n" +
-                "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n" +
-                "Passengers:\n" +
-                "Total Passengers: 0";
+        String expectedString = "This is the flights that matches your search\n"
+                + "Flight ID: SQ-JPN\n"
+                + "Departure Flight: JPN, 20/10/2021 18:00\n"
+                + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"
+                + "Passengers:\n"
+                + "Total Passengers: 0";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
@@ -67,13 +67,13 @@ public class FindFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flights that matches your search\n" +
-                "Flight ID: SQ-JPN\n" +
-                "Departure Flight: JPN, 20/10/2021 18:00\n" +
-                "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n" +
-                "Passengers:\n" +
-                "1. Bo Tuan\n" + "\n" +
-                "Total Passengers: 1";
+        String expectedString = "This is the flights that matches your search\n"
+                + "Flight ID: SQ-JPN\n"
+                + "Departure Flight: JPN, 20/10/2021 18:00\n"
+                + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"
+                + "Passengers:\n"
+                + "1. Bo Tuan\n" + "\n"
+                + "Total Passengers: 1";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
