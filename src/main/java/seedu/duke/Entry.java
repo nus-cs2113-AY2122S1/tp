@@ -110,7 +110,7 @@ public class Entry {
                 new EditMember(members, memberIndex, newMemberDetail);
                 break;
             case NO_KEYWORD:
-                Parser.wrongInputTypeMessage();
+                Ui.printWrongInputMessage();
                 break;
             case HELP_KEYWORD:
                 Ui.printHelp();
