@@ -33,7 +33,7 @@ public class Attendance implements ClassChecker {
         return lessonNumber;
     }
 
-    public boolean getIsPresent(){
+    public boolean getIsPresent() {
         return isPresent;
     }
 
