@@ -219,10 +219,11 @@ ____________________________________________________________
 
 <a name="delete"></a>
 ### Deleting a contact: `rm`
-Removes the contact with a specified index from the ConTech Book. Before any deletion, ConTech Book will
-display the details of the specified contact to be deleted, and prompt user to confirm deletion.
+Removes the contact with a specified index from the ConTech Book. The `rm` command can also be used to delete 
+**all** your contacts at one go, or to remove specific fields for each of your contacts.
 
-Usages:
+To improve user experience, before any deletion, ConTech Book will display the details of the contact you specified to 
+be deleted, and prompt you to confirm deletion.
 
 Command formats:
 
