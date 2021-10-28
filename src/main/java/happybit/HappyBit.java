@@ -47,7 +47,6 @@ public class HappyBit {
      * Executes the main body of HappyBit.
      */
     private void run() {
-        state.startupState();
         state.handleState();
         printManager.printExit();
     }

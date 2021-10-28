@@ -12,6 +12,7 @@ public class State {
     protected GoalList goalList;
     protected PrintManager printManager;
     protected Storage storage;
+    protected boolean isExit = false;
 
     public State(GoalList goalList, PrintManager printManager, Storage storage) {
         this.goalList = goalList;
@@ -23,8 +24,9 @@ public class State {
      * Alternates between the 2 states.
      */
     public void handleState() {
-        if (mainState()) {
-            startupState();
+        startupState();
+        mainState();
+        if (!this.isExit) {
             handleState();
         }
     }
@@ -51,14 +53,11 @@ public class State {
 
     /**
      * Manages the main menu interface.
-     *
-     * @return Boolean of whether the isReturn flag is set.
      */
-    private boolean mainState() {
-        boolean isReturn = false;
+    private void mainState() {
         UiMain uiMain = new UiMain(goalList, printManager, storage);
-        isReturn = uiMain.run();
-        return isReturn;
+        uiMain.run();
+        this.isExit = uiMain.getIsExit();
     }
 
 }

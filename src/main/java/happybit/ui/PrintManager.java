@@ -32,7 +32,7 @@ public class PrintManager {
             + "to '%3$i'" + LS;
     private static final String MSG_EXIT = "Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + LS
             + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
-            + " — Will Durant" + LS;
+            + " — Will Durant";
 
     private static final String COMMAND_HELP = "open command list";
     private static final String COMMAND_ADD_GOAL = "set a goal";

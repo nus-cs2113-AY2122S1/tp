@@ -38,27 +38,39 @@ public class UiMain extends UiManager {
             + "    /______//        \\___ \\  )(  ) \\/ ( ) D ( )  / \n"
             + "   (______(/         (____/ (__) \\____/(____/(__/ \n";
 
-    private static final String RETURN_MESSAGE = "Press enter to return to command mode...\n";
+    private static final String MESSAGE_RETURN = "Press enter to return to command mode...\n";
+    private static final String MESSAGE_DUE_HABITS = "These are the habit(s) that you have yet to complete:";
+    private static final String HABIT_DETAILS = "%1$s) %2$s" + LS;
+    private static final int WAIT_TIME_IN_SECONDS = 2;
 
     protected GoalList goalList;
     protected PrintManager printManager;
     protected Storage storage;
+    protected boolean isExit;
 
     public UiMain(GoalList goalList, PrintManager printManager, Storage storage) {
         this.goalList = goalList;
         this.printManager = printManager;
         this.storage = storage;
+        this.isExit = false;
         loadData();
     }
 
     /**
      * Main function to execute main application interface.
-     *
-     * @return Boolean of whether the isReturn flag is set.
      */
-    public boolean run() {
+    public void run() {
         resetDisplay();
-        return processInput();
+        processInput();
+    }
+
+    /**
+     * Getter for whether the application should exit.
+     *
+     * @return True if isExit flag is set, false otherwise.
+     */
+    public boolean getIsExit() {
+        return this.isExit;
     }
 
     /*
@@ -82,10 +94,8 @@ public class UiMain extends UiManager {
 
     /**
      * Reads in user input and performs the corresponding command.
-     *
-     * @return Boolean of whether the isReturn flag is set.
      */
-    private boolean processInput() {
+    private void processInput() {
         String userInput;
         Scanner in = new Scanner(System.in);
         boolean isExit = false;
@@ -100,11 +110,11 @@ public class UiMain extends UiManager {
                 checkFlags(isExit, isReturn);
             } catch (HaBitParserException | HaBitCommandException e) {
                 printManager.printError(e.getMessage());
-                waitApp(2);
+                waitApp(WAIT_TIME_IN_SECONDS);
                 resetDisplay();
             }
         }
-        return isReturn;
+        this.isExit = isExit;
     }
 
     /**
@@ -156,7 +166,7 @@ public class UiMain extends UiManager {
      * Wait for user to press Enter.
      */
     private void waitForEnter() {
-        System.out.println(LS + RETURN_MESSAGE);
+        System.out.println(LS + MESSAGE_RETURN);
         Scanner in = new Scanner(System.in);
         String userInput = null;
         while (userInput == null) {
@@ -203,29 +213,12 @@ public class UiMain extends UiManager {
     private void printDueHabits() {
         ArrayList<String> dueHabits = this.goalList.listDueHabits();
         if (!dueHabits.isEmpty()) {
-            System.out.println("These are the habit(s) that you have yet to complete:");
+            System.out.println(MESSAGE_DUE_HABITS);
             for (int listIndex = 0; listIndex < dueHabits.size(); listIndex++) {
-                System.out.println(listIndex + 1 + ") " + dueHabits.get(listIndex));
+                System.out.printf(HABIT_DETAILS, (listIndex + 1), dueHabits.get(listIndex));
             }
             System.out.println();
         }
     }
 
-    // More work to be done next week before v2.0
-
-    private void printChosenGoal() {
-        if (goalList.getChosenGoalIndex() == -1) {
-            System.out.println("You may choose to view a goal with 'goal <GOAL_INDEX>'.");
-        } else {
-            printHabitList();
-        }
-    }
-
-    private void printHabitList() {
-
-    }
-
-    private void printProgressBar() {
-
-    }
 }
