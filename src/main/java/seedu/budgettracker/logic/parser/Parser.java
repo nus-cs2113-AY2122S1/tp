@@ -153,7 +153,7 @@ public class Parser {
             if (commandParams.length() >= 5) {
                 listOption = commandParams.substring(2, 5);
             } else {
-                listOption = commandParams.substring(2);
+                listOption = commandParams.trim().substring(2, 4);
             }
             String upperCaseOnly = commandParams.replaceAll("[^A-Z]", "");
             Category category;
