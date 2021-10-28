@@ -25,8 +25,11 @@ However, for first time users, you are highly encouraged to go through the user 
 bottom. This is because the guide is also written in a specific order to allow you to maximise your understanding 
 when learning how to use **ConTech**.
 
+### Table Of Contents
+
 * **[Quick Start](#start)**
 * **[Contact flags : `-flag`](#flag)**
+* **[Common notations used](#notations)**
 * **[Features](#features)**
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
@@ -61,8 +64,12 @@ when learning how to use **ConTech**.
 
 1. Refer to the [Features](#features) below for details of each command.
 
-<a name="features"></a>
-## Features 
+Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common notations 
+that will be used throughout this guide.
+
+However, if you would like to, you can refer to the [Features](#features) below for details of each feature and 
+its respective command.
+</div>
 
 <a name="flag"></a>
 ### Contact flags: `-flag`
@@ -78,6 +85,27 @@ fulfilled. These `flags` include:
 - `-tw`: for your contact's Twitter handle
 - `-e`: for your contact's email address
 
+<a name="notations"></a>
+### Common notations used
+Throughout the user guide, you will find the following notations:
+- Words in `UPPER_CASE` are meant to be parameters that you can supply to your commands.
+  - e.g. When adding a contact, in the command `add -n NAME -g GITHUB`, `NAME` and `GITHUB` are parameters which you 
+    can specify, such as `add -n Le Zong -g lezongmun`.
+  - e.g. When viewing a contact's details, in the command `view INDEX`, `INDEX` is a number (integer) representing 
+    your contact's index in the **ConTech** book which you can specify, such as `view 2`.
+- Items in curly braces `{}` are optional.
+- Items in angle braces `<>` are mandatory.
+  - e.g. When specified in the format `<-n> <NAME> {-g <GITHUB>}`, it means that:
+    - The `-n` flag and `NAME` detail are mandatory fields, without which the command would not execute.
+    - The `-g` flag is optional, however, if used, a `GITHUB` detail would have to be specified.
+- Items specified with a pipe `|` denote an either-or field.
+  - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
+
+Do familiarise yourself with these notations to better utilise the user guide.
+<br/>
+
+<a name="features"></a>
+## Features 
 
 <a name="add"></a>
 ### Adding a contact: `add`
