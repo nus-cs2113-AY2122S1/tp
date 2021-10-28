@@ -30,7 +30,7 @@ you may have in order to help you organise your CCA's timetable.
    ```
 
 ## Commands 
-#### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) |
+### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) |
 
 ### Add
 **CCA Manager** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
