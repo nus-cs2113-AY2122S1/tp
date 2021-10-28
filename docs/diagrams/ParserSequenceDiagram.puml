@@ -1,32 +1,43 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
 skinparam sequenceMessageAlign center
 
-participant ":Parser" as Parser
-participant "argParser:ArgParser" as ArgParser
+participant "<<class>>\nParser" as Parser
+participant ":ArgsParser" as ArgsParser
 participant ":RecipeParser" as RecipeParser
 participant ":IngredientParser" as IngredientParser
 participant ":QuantityParser" as QuantityParser
-participant "command:AddRecipeCommand" as AddRecipeCommand
+participant "c:AddRecipeCommand" as AddRecipeCommand
 
 -> Parser: prepareAddRecipe(args)
 activate Parser
 
-create ArgParser
-Parser -> ArgParser : new ArgParser(PREFIX_RECIPE, \nPREFIX_MULTIPLE_INGREDIENT, \nPREFIX_MULTIPLE_QUANTITY)
-activate ArgParser
-Parser <- ArgParser : argParser
+create ArgsParser
+Parser -> ArgsParser : ArgsParser()
+note right
+ArgsParser() is called with the following args:
+PREFIX_RECIPE
+PREFIX_MULTIPLE_INGREDIENT
+PREFIX_MULTIPLE_QUANTITY
+end note
+activate ArgsParser
+Parser <- ArgsParser
 
-deactivate ArgParser
-Parser -> ArgParser : parse(args)
-activate ArgParser
-Parser <- ArgParser
-deactivate ArgParser
+deactivate ArgsParser
+Parser -> ArgsParser : parse(args)
+activate ArgsParser
+Parser <- ArgsParser
+deactivate ArgsParser
 
-Parser -> ArgParser : getSingleArg(PREFIX_RECIPE)
-activate ArgParser
-Parser <- ArgParser : recipeArg
-deactivate ArgParser
+Parser -> ArgsParser : getSingleArg()
+note right
+getSingleArg() is called with PREFIX_RECIPE
+end note
+activate ArgsParser
+Parser <- ArgsParser : recipeArg
+deactivate ArgsParser
 
 create RecipeParser
 Parser -> RecipeParser
@@ -40,10 +51,13 @@ Parser <- RecipeParser : recipe
 deactivate RecipeParser
 destroy RecipeParser
 
-Parser -> ArgParser : getArgList(PREFIX_MULTIPLE_INGREDIENT)
-activate ArgParser
-Parser <- ArgParser : ingredientArgList
-deactivate ArgParser
+Parser -> ArgsParser : getArgList()
+note right
+getArgList() is called with PREFIX_MULTIPLE_INGREDIENT
+end note
+activate ArgsParser
+Parser <- ArgsParser : ingredientArgList
+deactivate ArgsParser
 
 create IngredientParser
 Parser -> IngredientParser
@@ -57,10 +71,13 @@ Parser <- IngredientParser : ingredients
 deactivate IngredientParser
 destroy IngredientParser
 
-Parser -> ArgParser : getArgList(PREFIX_MULTIPLE_QUANTITY)
-activate ArgParser
-Parser <- ArgParser : quantityArgList
-deactivate ArgParser
+Parser -> ArgsParser : getArgList()
+note right
+getArgList() is called with PREFIX_MULTIPLE_QUANTITY
+end note
+activate ArgsParser
+Parser <- ArgsParser : quantityArgList
+deactivate ArgsParser
 
 
 create QuantityParser
@@ -76,13 +93,12 @@ deactivate QuantityParser
 destroy QuantityParser
 
 create AddRecipeCommand
-Parser -> AddRecipeCommand : new AddRecipeCommand(recipe, ingredients, quantities)
+Parser -> AddRecipeCommand : AddRecipeCommand(recipe, ingredients, quantities)
 activate AddRecipeCommand
-Parser <- AddRecipeCommand : command
+Parser <- AddRecipeCommand : c
 deactivate AddRecipeCommand
-<- Parser: command
+<- Parser: c
+destroy ArgsParser
 deactivate Parser
-
-destroy ArgParser
 
 @enduml
