@@ -24,12 +24,67 @@
 
 This is a (partial) class diagram of the Parser component. Note that the `Parser` class in actuality is dependent on 
 many of the classes depicted in the diagram: `SingleArgPrefix`, `MultipleArgPrefix`, `OptionalArgPrefix`,
-`ExpiryDateParser`, `UnitParser`, `IngredientParser`, `QuantityParser`, `RecipeParser`. The dependencies have been 
-omitted from the diagram for simplicity.
+`ExpiryDateParser`, `UnitParser`, `IngredientParser`, `QuantityParser`, and `RecipeParser`. The dependency arrows
+have been omitted from the diagram for simplicity.
+
+- The `Parser` is the main component that communicates with the various subcomponents. It is called by the main
+`ExpiryEliminator` class and is responsible for parsing commands.
+- The `ArgParser` is responsible for parsing args. It does this by accepting a list of `Prefix` objects upon
+creation which will determine what prefixes it should look out for. Then, when instructed to parse, it parses an args
+string based on the prefixes.
+- Each `Prefix` object represent a prefix that can be present in the command args. (E.g. a prefix can correspond to `i/`,
+`r/`, or `q/`, etc.). In addition to that, a prefix either belongs to a `SingleArgPrefix`, `MultipleArgPrefix`, or
+`OptionalArgPrefix`.
+  - A `SingleArgPrefix` allows the prefix to appear exactly once in the args string.
+  - A `MultipleArgPrefix` allows the prefix to appear multiple (i.e. one or more) times in the args string.
+  - An `OptionalArgPrefix` allows the prefix to appear once or not at all in the args string.
+- With these different prefixes, we can clearly dictate how the command arguments should be structured.
+- The `SingleArgParser` and `MultipleArgParser` objects represents a parser for an individual arg type (e.g. ingredient
+name).
+  - A `SingleArgParser` represents a parser that accepts a single string and parses it according to the arg type.
+  - A `MultipleArgParser` represents a parser that accepts either a single string or a list of strings and parses it
+  according to the arg type.
 
 ![](diagrams/ParserClassDiagram.png)
 
+#### How the Parser works
+1. When the `Parser` needs to parse a command, (e.g. `add recipe r/Apple Pie i/Apple q/2 i/Flour q/400`), it first
+separates the command and args (e.g. command: `add recipe`, args: `r/Apple Pie i/Apple q/2 i/Flour q/400`).
+2. Then, it matches the command against a list of possible commands.
+   1. If it does not match, then it notifies the user that it is an invalid command, via the `IncorrectCommand` class.
+   2. If it finds a match, then it proceeds to parse the args and prepare the corresponding `Command` class
+3. Based on the command, there is a specified set of args that it can accept (e.g. `add recipe` needs a single recipe
+name, and one or more ingredients and quantities). An `ArgParser` is created based on what args are accepted. For
+example, for `add recipe`, the `ArgParser` is created via `new ArgParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT
+PREFIX_MULTIPLE_QUANTITY)`. `PREFIX_RECIPE` is created via `new SingleArgPrefix("r")`, and  `PREFIX_MULTIPLE_INGREDIENT`
+is created via `new MultipleArgPrefix(PREFIX_INGREDIENT)`.
+4. After the `ArgParser` is created, it parses the args based on the specified parameters. It throws an error if it
+detects an invalid prefix, missing prefix, or there are multiple args when there should have only been none. These
+errors are handled gracefully by the `Parser`.
+5. Assuming there are no errors, the `Parser` will then query the `ArgParser` for each type of arg and then parse the
+arg accordingly. For example, for `add recipe`, the `Parser` will ask `ArgParser` for the arg corresponding to
+`PREFIX_RECIPE`. Once it has the result, it will then create a `RecipeParser` and parse the arg given by `ArgParser`.
+If successful, it will retrieve the parsed data . If unsuccessful, it will handle the error gracefully. Note that
+there are separate methods to query `ArgParser` for a single arg (e.g. for a prefix that should only appear once) or for
+an arg list (e.g. for a prefix that can appear multiple times). The former method accepts a `SingleArgPrefix`, while
+the latter method only accepts a `MultipleArgPrefix`.
+6. Finally, the `Parser` will take all the parsed data and return the relevant `Command` class, to be executed by the
+`ExpiryEliminator`.
 
+This is a (partial) sequence diagram of parsing an "add recipe" command. It demonstrates the interaction between the
+`Parser`, `ArgParser`, and the corresponding single arg and multiple arg parsers (`RecipeParser`, `IngredientParser`, and `QuantityParser`).
+
+![](diagrams/ParserSequenceDiagram.png)
+
+*Note: The lifelines for `ArgParser`, `RecipeParser`, `IngredientParser`, and `QuantityParser` should end at the destroy
+marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.*
+
+*Note: The first activation bar for `ArgParser` should start at the top of the lifeline as it represents object
+creation. However, due to a limitation of PlantUML, when newlines are added to the message corresponding to the object
+creation, the activation bar does not start at the top of the lifeline.*
+
+*Note: This is a simplified diagram, and does not show that the code checks that there are an equal number of 
+ingredients and quantities.*
 
 ## Implementation
 This section describes how the features are implemented.
@@ -180,7 +235,8 @@ Young adults who are living in their own home.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+To help young adults who are living in their own home keep track of ingredients and foods that they can make based on
+the ingredients they have in their kitchen.
 
 ## User Stories
 
