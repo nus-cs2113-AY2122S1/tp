@@ -15,7 +15,8 @@ its developers (😀 us!) at our [Main Page](README.md).
 ------------
 
 * [Quick Start](#quick-start)
-  * [Loading Screen Navigation](#loading-screen-navigation)
+  * [Start-Up Interface](#start-up-interface)
+  * [Main Interface](#main-interface)
 * [Using this Guide](#using-this-guide)
   * [Terminology](#terminology)
   * [Icons & Format]()
@@ -51,30 +52,31 @@ its developers (😀 us!) at our [Main Page](README.md).
 
    ```
    ==============================================================================
-     _  _   __   ____  ____  _  _  ____  __  ____
-    / )( \ / _\ (  _ \(  _ \( \/ )(  _ \(  )(_  _)
-    ) __ (/    \ ) __/ ) __/ )  /  ) _ ( )(   )(
-    \_)(_/\_/\_/(__)  (__)  (__/  (____/(__) (__)     tracking habits made fun...
-    ==============================================================================
+    _  _   __   ____  ____  _  _  ____  __  ____
+   / )( \ / _\ (  _ \(  _ \( \/ )(  _ \(  )(_  _)
+   ) __ (/    \ ) __/ ) __/ )  /  ) _ ( )(   )(
+   \_)(_/\_/\_/(__)  (__)  (__/  (____/(__) (__)     tracking habits made fun...
+   ==============================================================================
 
-    Howdy! Welcome to Ha(ppy)Bit!
-    Select from one of the following menu items:
-    [1] About HappyBit
-    [2] User Guide
-    [3] Developer Guide
-    [4] Demo Video
-    [5] Start Application
+   Howdy! Welcome to Ha(ppy)Bit!
+   Select from one of the following menu items:
+       [1] About HappyBit
+       [2] User Guide
+       [3] Developer Guide
+       [4] Demo Video
+       [5] Start Application
     
-    Option:
+   Option:
    ```
-    Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
+   Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
-### Loading Screen Navigation
-In the current loading screen, users will be able to execute the following actions based on the number they input.
-1. `About Ha(ppy)Bit` - Shows brief description of the program and a short meet the team section
+### Start-Up Interface
+In the current loading screen, you will be able to execute the following actions based on your input.
 
-    ```
-   Option: 1
+#### Option 1: `About Ha(ppy)Bit`
+Learn more about our vision for _Ha(ppy)Bit_ and the team behind it.\
+
+    Option: 1
 
     Ha(ppy)Bit is a desktop app aimed to improve both the physical and mental lifestyle of students,
     through the setting and tracking of goals to cultivate good habits. The app operates on a Command
@@ -95,40 +97,51 @@ In the current loading screen, users will be able to execute the following actio
     
     
     Press enter to return to main menu...
-    ```
 
-2. `User Guide` - Opens up User Guide github page in user's web browser.
+#### Option 2: `User Guide`
+Learn what you can accomplish with this app.\
+This option opens the User Guide in your web browser.
 
-   ```
     Option: 2
 
     Opening in a web browser...
     
     Press enter to return to main menu...
-    ```
 
-3. `Developer Guide` - Opens up Developer Guide github page in user's web browser.
+#### Option 3: `Developer Guide`
+Learn about the app from the perspective of a software engineer.\
+This option opens the Developer Guide in your web browser.
 
-    ```
     Option: 3
 
     Opening in a web browser...
     
     Press enter to return to main menu...
-    ```
 
-4. `Demo Video` - Links to Demo Video (Not done yet)
-    ```
-   video not available.
-    ```
+#### Option 4: `Demo Video`
+Don't like reading long wordy guides? A video may be just the thing for you!\
+This option opens the Demo Video in your web browser.\
+(The video is currently unavailable and will be up in v2.1)
 
-5. `Start Application` - Brings user to the application. 
-New user can begin their journey with _Ha(ppy)Bit_ (😀 thanks!) here.
-Returning users can continue using _Ha(ppy)Bit_ where they left off.
+    Option: 4
 
-    ```
+    Opening in a web browser...
+
+    Press enter to return to main menu...
+
+#### Option 5: `Start Application`
+If you're a new user, look forward to beginning your _Ha(ppy)Bit_ journey here.\
+If you're a returning user, fret not! Everything you gained from your journey has been saved and will be loaded.\
+This option starts up the main interface of the application.
+    
+    Option: 5
+    
     Starting application...
     Type 'return' to return to main menu
+
+### Main Interface
+Upon formally starting the application, you should see the following screen. 
+(See [Start Application](#option-5-start-application) if you are unsure how to get here)
    
     ==============================================================================
      _  _   __   ____  ____  _  _  ____  __  ____
@@ -138,39 +151,38 @@ Returning users can continue using _Ha(ppy)Bit_ where they left off.
     ==============================================================================
     
     Command:
-    ```
-    Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
+    
+Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
 ## Using this Guide
-We understand there may a lot to take in from this user guide. Here are some things to take note
-of which make the guide more friendly and helpful.
+We understand there may be a lot to take in from this user guide. Here are some things to take note
+which may make the guide more friendly and helpful.
 
 ### Terminology
 
-Name  | Description | Example
------ | ---------------------------------------------------------------- | -------------------
-Goal  | A long term achievement you wish to accomplish.                  |`Lose 5kg by Dec`
-Habit | Checkpoints; small, actionable tasks to be done to achieve goal. | `Run 5km`
+Name     | Description                                                      | Example
+-----    | ---------------------------------------------------------------- | -------------------
+Goal     | A long term achievement you wish to accomplish.                  |`Lose 5kg by Dec`
+Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Run 5km`
+Interval | How often you want to repeat each habit                          |`Run 5km every 7 days` 
 
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
 to know that the purpose of `habits` is to break down daunting, colossal `goals` into easy, bite-sized
-`habits`; tasks that you can complete within a day.
+`habits`; tasks that you can complete within a day or as defined by your `interval`.
 
 ### Icons & Format
-Unfamiliar symbols may confuse. Here is comprehensive collection of all emojis and syntax we employ.  
+Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
 
-> 📃 **Notes**: {explanation here}
+> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
 
-> ⚠ **Warning**:  {explanation here}
+> ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
  
-> 💡 **Pro-Tip!** {explanation here} are we targeting advance and basic users?
-> then we need to use this strategically.
+> 💡 **Pro-Tip!** additional information that may make your tracking journey easier
 
 > 😀 &#8594; Used to show developers' exuberance!!!
 
-> 👍 &#8594; Used to show developers' love and support for you, the users.
-
+> 👍 &#8594; Used to show developers' love and support for you.
 
 >  📃 **Notes about command format:**
 > * words enclosed in angle brackets, `<>` are the parameters which is the input the user is supposed to provide.
@@ -179,35 +191,58 @@ Unfamiliar symbols may confuse. Here is comprehensive collection of all emojis a
 
 ## Features
 
-Below are the commands that the app supports.
-Each section describes the function of the command and the command format.
+Below are the commands supported by the application.
+Each section describes the function of each command and its format.
 
-> 📃 **Note:** <br>
-> For all commands and features, apart from the positioning of the command word,
-> all other flags and parameters can be placed in any order as long as
-> their respective tags are present e.g. `n/, s/, e/` etc.
+**Command Format**
+* Command may require one or more flags. You may choose to use the flags in any other but ensure that all flags for that
+  command is present.\
+  (e.g. `add` requires both the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and 
+  `add i/1 n/habit 1 g/1`)
+* Parameters enclosed in angle brackets `<>` are meant to be replaced.\
+  (e.g. `view g/<goal_index>` could be `view g/1`)
+* Parameters enclosed within curly brackets, `{}` are optional, although each command must have at least 1 parameter.
 
 ### Ask for Help: `help`
-Displays a list of all possible commands.
-If a user types in an invalid command, it will invoke this method by default.
+Ummm, I'm not sure what the commands are. Fortunately this command is here for you.\
+This command displays a list of all possible commands.
+If an invalid command is typed, this method will be invoked by default.
 
 Format: `help`
 
 Output:
 ```
-________________________________________________________________________________________________________________________
-Hello! These are all the possible commands for this habit tracker :) (flags within {} brackets are optional)
-- set a goal: set n/<goal name> { t/<goal type> s/<start date> } e/<end date>
-   -> Goal types include: default[df], sleep[sl], food[fd], exercise[ex] and study[sd]
-- update a goal: update g/<goal index> n/<new goal name>
-- remove a goal: remove g/<goal index>
-- list all goals for that habit: list
-- add a habit to a goal: add g/<goal index> n/<habit name> i/<interval>
-- delete a habit from a goal: delete g/<goal index> h/<habit index>
-- indicate a habit as done: done g/<goal index> h/<habit index>
-- View all the habits user has under a goal: view g/<goal index>
-- Exit habit tracker program: bye
-________________________________________________________________________________________________________________________
+Here are the list of commands:
+-------------------------------------------------------------------------------------------------
+| Description                | Format                                                           | 
+-------------------------------------------------------------------------------------------------
+| open command list          | help                                                             | 
+-------------------------------------------------------------------------------------------------
+| set a goal                 | set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>  | 
+-------------------------------------------------------------------------------------------------
+| add a habit                | add g/<goal_index> n/<habit_name> i/<interval>                   | 
+-------------------------------------------------------------------------------------------------
+| update a goal              | update { n/<goal_name> t/<goal_type> e/<end_date> }              | 
+-------------------------------------------------------------------------------------------------
+| change a habit             | change { g/<goal_index> n/<habit_name> i/<interval> }            | 
+-------------------------------------------------------------------------------------------------
+| list all goals             | list                                                             | 
+-------------------------------------------------------------------------------------------------
+| view all habits of a goal  | view g/<goal_index>                                              | 
+-------------------------------------------------------------------------------------------------
+| remove a goal              | remove g/<goal_index>                                            | 
+-------------------------------------------------------------------------------------------------
+| delete a habit             | delete g/<goal_index> h/<habit_index>                            | 
+-------------------------------------------------------------------------------------------------
+| mark a habit as done       | done g/<goal_index> h/<habit_index>                              | 
+-------------------------------------------------------------------------------------------------
+| return to start screen     | return                                                           | 
+-------------------------------------------------------------------------------------------------
+| exit the application       | exit                                                             | 
+-------------------------------------------------------------------------------------------------
+* Replace <> with relevant terms (Exp: <goal_name> --> goal 1)
+* Items enclosed within { } are optional
+* Use 'list' and 'view' to check the goal and habit indexes respectively
 
 Press enter to return to command mode...
 ```
@@ -218,20 +253,21 @@ start dates are optional (well, we wouldn't you to be procrastinating on your go
 
 Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>`
 
-> 📃 **Note:**
-> 1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
-> 2. The two flags contained within the `{}` brackets indicate the
-> optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
-> 3. The optional `<GOAL_TYPE>` argument can take one of the following flags:
->> `sl` &#8594; Sleep <br>
->> `fd` &#8594; Food <br>
->> `ex` &#8594; Exercise <br>
->> `sd` &#8594; Study
-> 4. Otherwise, goal type will be `df` &#8594; Default.
+* Goal name can be any name of your choosing (make it meaningful otherwise you won't know what you're tracking).
+* Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
+* Goal type is an optional parameter and can take one of the following arguments
+  * `sl` &#8594; Sleep
+  * `fd` &#8594; Food
+  * `ex` &#8594; Exercise
+  * `sd` &#8594; Study
+  * `df` &#8594; Default (This will be the goal type if the parameter is omitted)
+* Start date is an optional parameter. Omitting it will set the start date as today.
+
+> 📃 If more than 8 numbers are used for the date, only the 1st 8 numbers will be treated as the date.
 
 Example:
 ```
-Command: set n/Reduce Spending e/31122021
+Command: set n/Reduce Spending t/df s/29102021 e/31122021
 ```
 
 Output:
@@ -241,7 +277,6 @@ Your goal: [DF] Reduce Spending has been added.
 ________________________________________________________________________________________________________________________
 
 Press enter to return to command mode...
-
 ```
 
 ### List all Goals: `list`
