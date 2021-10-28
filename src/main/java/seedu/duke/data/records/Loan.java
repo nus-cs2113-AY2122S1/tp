@@ -2,7 +2,6 @@ package seedu.duke.data.records;
 
 import java.time.LocalDate;
 import java.lang.String;
-import java.time.format.DateTimeFormatter;
 
 public class Loan extends Record {
     protected String debtorName;
@@ -17,8 +16,6 @@ public class Loan extends Record {
 
     public String getDueDateString() {
         String[] dayString = date.toString().split("-", 3);
-        String dueDateString;
-        String dueDateMonthString;
         int dueDateYear = Integer.parseInt(dayString[0]);
         int dueDateMonth = Integer.parseInt(dayString[1]);
         int dueDateDay = Integer.parseInt(dayString[2]);
@@ -39,15 +36,9 @@ public class Loan extends Record {
             }
         }
 
-        if (dueDateMonth < 10) {
-            dueDateMonthString = "0" + dueDateMonth;
-            dueDateString = dueDateYear + "-" + dueDateMonthString + "-" + dueDateDay;
-        } else {
-            dueDateString = dueDateYear + "-" + dueDateMonth + "-" + dueDateDay;
-        }
+        String dueDateString = dueDateYear + "-" + dueDateMonth + "-" + dueDateDay;
 
         return dueDateString;
-
     }
 
     public int getDueDateMonth() {
@@ -77,9 +68,7 @@ public class Loan extends Record {
     }
 
     public void setDueDate() {
-        String dueDateString = getDueDateString();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.dueDate = LocalDate.parse(dueDateString, formatter);
+        dueDate = LocalDate.parse(getDueDateString());
     }
 
     public LocalDate getDueDate() {

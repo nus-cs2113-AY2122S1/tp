@@ -29,22 +29,6 @@ public class Duke {
         new Duke().run();
     }
 
-    /**
-     * Loan reminder to warn user that the following loans are due!
-     *
-     * @param dateNow the local date now
-     * @param dateMonthNow the month param of date now as an integer
-     */
-    public void loanReminder(LocalDate dateNow, int dateMonthNow) {
-        for (int i = 0; i < recordList.getLoanListSize(dateMonthNow); i++) {
-            recordList.getLoan(i,dateMonthNow).setDueDate();
-            if (dateNow.isAfter(recordList.getLoan(i,dateMonthNow).getDueDate())) {
-                textUi.showLoanReminder(loanCounter, recordList.getLoan(i, dateMonthNow));
-                loanCounter++;
-            }
-        }
-    }
-
     public void run() {
         TextUi.showWelcomeMessage();
         Storage budgetStorage = new Storage();
@@ -55,12 +39,15 @@ public class Duke {
         String[] dateNowString = dateNow.toString().split("-",3);
         int dateMonthNow = Integer.parseInt(dateNowString[1]);
 
-        // Calls loanReminder to remind user of loans that are due
-        loanReminder(dateNow, dateMonthNow);
-        if (dateMonthNow != 1) {
-            loanReminder(dateNow, dateMonthNow - 1);
-        } else {
-            loanReminder(dateNow, 12);
+        /**
+         * Loan reminder to warn user that the following loans are due!
+         */
+        for (int i = 0; i < recordList.getLoanListSize(dateMonthNow); i++) {
+            recordList.getLoan(i,dateMonthNow).setDueDate();
+            if (dateNow.isAfter(recordList.getLoan(i,dateMonthNow).getDueDate())) {
+                textUi.showLoanReminder(loanCounter, recordList.getLoan(i, dateMonthNow));
+                loanCounter++;
+            }
         }
 
         textUi.printDivider();
