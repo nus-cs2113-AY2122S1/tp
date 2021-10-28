@@ -77,7 +77,6 @@ public class Entry {
             //delete /att /t Friday Training /i 2
             attendanceIndex = Parser.getAttendanceIndex(entry);
             //havent handle if i is not a number aka number format exception
-
             String trainingName = Parser.getAttendanceTrainingName(entry);
             new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
             break;
