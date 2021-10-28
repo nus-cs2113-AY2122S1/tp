@@ -189,7 +189,7 @@ public class Ui {
             throws TourPlannerException {
         Tour foundTour = tours.getTourByCode(code);
         if (foundTour != null) {
-            show(FIND_SUCCESS_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
+            show(FIND_SUCCESS_MESSAGE_LEFT + "tour " + FIND_MESSAGE_RIGHT);
             show(foundTour + "\n" + "\n");
             int subbedClients = 0;
             int count = clientPackages.getClientPackageCount();
@@ -355,7 +355,7 @@ public class Ui {
             throws TourPlannerException {
         Flight foundFlight = flights.getFlightById(code);
         if (foundFlight != null) {
-            show(FIND_SUCCESS_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
+            show(FIND_SUCCESS_MESSAGE_LEFT + "flight " + FIND_MESSAGE_RIGHT);
             show(foundFlight + "\n" + "\n");
             int passengers = 0;
             int count = clientPackages.getClientPackageCount();
@@ -391,10 +391,10 @@ public class Ui {
     public void showFindClientPackage(ClientPackageList packages, int index) {
         ClientPackage foundPackage = packages.get(index - 1);
         if (foundPackage != null) {
-            show(FIND_SUCCESS_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
+            show(FIND_SUCCESS_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
             show(foundPackage + "\n" + "\n");
         } else {
-            show(FIND_FAIL_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
+            show(FIND_FAIL_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
         }
     }
 

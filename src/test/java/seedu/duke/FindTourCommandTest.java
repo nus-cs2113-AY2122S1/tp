@@ -12,10 +12,10 @@ import seedu.duke.data.FlightList;
 import seedu.duke.data.Tour;
 import seedu.duke.data.TourList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindTourCommandTest {
 
