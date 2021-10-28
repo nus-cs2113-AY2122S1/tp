@@ -36,7 +36,7 @@ public class Ui {
     public String getUserInput(String inputPrompt, boolean allowEmpty) {
         String input;
         do {
-            System.out.print(INPUT_PROMPT);
+            System.out.print(inputPrompt);
             input = scanner.nextLine();
         } while (input.trim().isEmpty() && !allowEmpty);
 
@@ -51,9 +51,19 @@ public class Ui {
      * @param message The message to print.
      */
     public void printMessage(String message) {
-        System.out.println(MESSAGE_BORDER);
+        printMessage(message, true);
+    }
+
+    public void printMessage(String message, boolean withBorders) {
+        if (withBorders) {
+            System.out.println(MESSAGE_BORDER);
+        }
+
         System.out.println(message);
-        System.out.println(MESSAGE_BORDER);
+
+        if (withBorders) {
+            System.out.println(MESSAGE_BORDER);
+        }
     }
 
     /**
