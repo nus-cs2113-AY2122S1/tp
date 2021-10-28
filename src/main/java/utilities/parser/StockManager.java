@@ -3,11 +3,14 @@ package utilities.parser;
 import command.CommandParameters;
 import inventory.Medicine;
 import inventory.Stock;
+import utilities.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 //@@author a-tph
+
 /**
  * Manages medicines that are stock objects.
  */
@@ -84,7 +87,7 @@ public class StockManager {
      *
      * @param medicines Arraylist of all medicines.
      * @param name      Name of the medicine.
-     * @param stockId        Stock Id of the medicine.
+     * @param stockId   Stock Id of the medicine.
      * @return Stock object of the provided stock id by user
      */
     public static Stock extractStockObject(ArrayList<Medicine> medicines, String name, int stockId) {
@@ -122,6 +125,41 @@ public class StockManager {
             }
         }
         return filteredStocks;
+    }
+
+    /**
+     * Check if the same expiry date and same medication exist.
+     *
+     * @param ui             Reference to the UI object to print messages.
+     * @param stockValidator Reference to StockValidator object.
+     * @param filteredStocks List of medication with the same medication name as user input.
+     * @param quantityToAdd  Quantity of medication to add.
+     * @param formatExpiry   Formatted Expiry Date of medication to add.
+     * @param totalStock     Total Quantity of the same stock.
+     * @return Boolean Value indicating if the same expiry date and same medication exist.
+    */
+    public static boolean expiryExist(Ui ui, StockValidator stockValidator, ArrayList<Stock> filteredStocks,
+                                      String quantityToAdd, Date formatExpiry, int totalStock) {
+        for (Stock stock : filteredStocks) {
+            int quantity = Integer.parseInt(quantityToAdd);
+
+            boolean isValidQuantity =
+                    stockValidator.quantityValidityChecker(ui, totalStock + quantity,
+                            stock.getMaxQuantity());
+
+            if (!isValidQuantity) {
+                return false;
+            }
+
+            if (formatExpiry.equals(stock.getExpiry())) {
+                quantity += stock.getQuantity();
+                stock.setQuantity(quantity);
+                ui.print("Same Medication and Expiry Date exist. Update existing quantity.");
+                ui.printStock(stock);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
