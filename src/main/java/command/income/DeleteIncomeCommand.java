@@ -4,6 +4,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import service.IncomeManager;
+import storage.DataManager;
 import terminal.Ui;
 
 import java.util.concurrent.Callable;
@@ -19,15 +20,18 @@ public class DeleteIncomeCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        IncomeManager incomeMgr = IncomeManager.getIncomeManager();
+        DataManager dataMgr = DataManager.getDataMgr();
         String incomeName;
 
         try {
             if (exclusive.names != null) {
                 incomeName = String.join(" ", exclusive.names);
-                IncomeManager.deleteIncome(incomeName);
+                incomeMgr.deleteIncome(incomeName);
             } else {
-                IncomeManager.deleteIncome(exclusive.id);
+                incomeMgr.deleteIncome(exclusive.id);
             }
+            dataMgr.write();
         } catch (Exception error) {
             ui.printMessage(deleteIncomeErrorMsg);
             return 1;

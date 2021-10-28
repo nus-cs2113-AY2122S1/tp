@@ -3,6 +3,7 @@ package command.budget;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import service.BudgetManager;
+import storage.DataManager;
 import terminal.Ui;
 import utils.Money;
 
@@ -19,10 +20,13 @@ public class UpdateBudgetCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        BudgetManager budgetMgr = BudgetManager.getBudgetMgr();
+        DataManager dataMgr = DataManager.getDataMgr();
 
         try {
             Double budgetValue = Money.truncate(value);
-            BudgetManager.updateBudget(budgetValue);
+            budgetMgr.updateBudget(budgetValue);
+            dataMgr.write();
         } catch (Exception error) {
             ui.printMessage(updateBudgetErrorMsg);
         }

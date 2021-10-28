@@ -1,7 +1,9 @@
 import command.MainCommand;
 import picocli.CommandLine;
+import storage.DataManager;
 import terminal.Ui;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Accouminate {
@@ -14,8 +16,16 @@ public class Accouminate {
         String[] splitUserInput;
         String userInput;
 
+        DataManager dataMgr = DataManager.getDataMgr();
         Ui ui = Ui.getUi();
         ui.printGreeting();
+
+        try {
+            dataMgr.loadAllManagers();
+        } catch (IOException e) {
+            ui.printErrorMessage(e.getMessage());
+            return;
+        }
 
         CommandLine cmd = new CommandLine(new MainCommand());
 

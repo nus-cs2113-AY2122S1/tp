@@ -4,6 +4,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import service.IncomeManager;
+import storage.DataManager;
 import terminal.Ui;
 import utils.Money;
 
@@ -23,12 +24,14 @@ public class AddIncomeCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        IncomeManager incomeMgr = IncomeManager.getIncomeManager();
+        DataManager dataMgr = DataManager.getDataMgr();
 
         try {
             String incomeName = String.join(" ", names);
             Double incomeValue = Money.truncate(value);
-            IncomeManager.addIncome(incomeName, incomeValue);
-
+            incomeMgr.addIncome(incomeName, incomeValue);
+            dataMgr.write();
         } catch (Exception error) {
             ui.printMessage(addIncomeErrorMsg);
             return 1;

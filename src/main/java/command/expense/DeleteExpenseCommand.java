@@ -4,6 +4,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import service.ExpenseManager;
+import storage.DataManager;
 import terminal.Ui;
 
 import java.util.concurrent.Callable;
@@ -21,15 +22,18 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
+        DataManager dataMgr = DataManager.getDataMgr();
         String expenseName;
 
         try {
             if (exclusive.names != null) {
                 expenseName = String.join(" ", exclusive.names);
-                ExpenseManager.deleteExpense(expenseName);
+                expenseMgr.deleteExpense(expenseName);
             } else {
-                ExpenseManager.deleteExpense(exclusive.id);
+                expenseMgr.deleteExpense(exclusive.id);
             }
+            dataMgr.write();
         } catch (Exception error) {
             ui.printMessage(deleteExpenseErrorMsg);
             return 1;

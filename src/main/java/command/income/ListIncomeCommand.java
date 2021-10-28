@@ -11,8 +11,9 @@ public class ListIncomeCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        IncomeManager incomeMgr = IncomeManager.getIncomeManager();
         ui.printMessage("Your incomes:");
-        IncomeManager.listIncomes();
+        incomeMgr.listIncomes();
         return 0;
     }
 }
