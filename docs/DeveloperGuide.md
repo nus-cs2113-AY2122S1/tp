@@ -31,6 +31,8 @@ Gonna to change this .puml diagram later - zhansen
 ![](uml/WordLimitMode.png)
 
 ### Time Limit Game
+Sequence Diagram for Time Mode Game:
+![image](https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png)
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
