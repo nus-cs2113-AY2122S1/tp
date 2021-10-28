@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 public class AttendanceList implements ClassChecker {
     private final ArrayList<Attendance> attendances;
+    public static int ATTENDANCE_NOT_FOUND = -1;
 
     public AttendanceList() {
         this.attendances = new ArrayList<>();
@@ -16,8 +17,6 @@ public class AttendanceList implements ClassChecker {
     public int getSize() {
         return attendances.size();
     }
-
-    public static int ATTENDANCE_NOT_FOUND = -1;
 
     /**
      * Gets the list of attendances. Note: This returns a new ArrayList instance.

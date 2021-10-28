@@ -2,6 +2,7 @@ package taa;
 
 
 import taa.command.assessment.AddAssessmentCommand;
+import taa.command.attendance.ListLessonAttendanceCommand;
 import taa.command.module.AddModuleCommand;
 import taa.command.student.AddStudentCommand;
 import taa.command.mark.AverageMarksCommand;
@@ -112,6 +113,10 @@ public class Parser {
 
         case Command.COMMAND_LIST_ATTENDANCE:
             command = new ListAttendanceCommand(argument);
+            break;
+
+        case Command.COMMAND_LIST_LESSON_ATTENDANCE:
+            command = new ListLessonAttendanceCommand(argument);
             break;
 
         case Command.COMMAND_DELETE_ATTENDANCE:
