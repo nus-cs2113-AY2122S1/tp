@@ -1,5 +1,6 @@
 package seedu.typists.game;
 
+import seedu.typists.exception.ExceedRangeException;
 import seedu.typists.exception.InvalidStringInputException;
 
 import java.util.ArrayList;
@@ -73,7 +74,12 @@ public class WordLimitGame extends Game {
         boolean isExit = false;
         while (!isExit) {
             row++;
-            String[] displayed = getDisplayLines(eachWord,wordsPerLine,row);
+            String[] displayed = new String[0];
+            try {
+                displayed = getDisplayLines(eachWord,wordsPerLine,row);
+            } catch (ExceedRangeException e) {
+                e.printStackTrace();
+            }
             displayedLines.add(displayed);
             ui.printLine(displayed);
 

@@ -1,6 +1,7 @@
 package seedu;
 
 import org.junit.jupiter.api.Test;
+import seedu.typists.exception.ExceedRangeException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void getDisplayLines_inRange_success() {
+    public void getDisplayLines_inRange_success() throws ExceedRangeException {
         String[] displayed = getDisplayLines(places, 3, 3);
         String[] result = { "is1", "test1", "text1"};
         for (int i = 0; i < displayed.length; i++) {
@@ -34,7 +35,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void getDisplayLines_outRange_success() {
+    public void getDisplayLines_outRange_success() throws ExceedRangeException {
         String[] displayed = getDisplayLines(places, 6, 2);
         String[] result = { "is1", "test1", "text1", "here1"};
         for (int i = 0; i < displayed.length; i++) {
