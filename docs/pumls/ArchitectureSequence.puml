@@ -9,7 +9,7 @@ Participant ":Command" as command
 Participant ":Member" as member #d83815
 Participant ":Storage" as storage #ffffff
 
-user -> ui : entry = "add /m Bob /s A01231234B /g M /p 98765432"
+user -> ui : entry
 
 ui -> parser
 activate parser
@@ -17,22 +17,22 @@ activate parser
 parser -> entry : waitForQuery()
 activate entry
 
-entry -> parser : getKeywordStatus(entry)
+entry -> parser : getKeywordStatus()
 
 parser --> entry : keyword = ADD_MEMBER
 deactivate entry
 
-entry -> parser : getMemberDetails(entry)
+entry -> parser : getMemberDetails()
 activate entry
-parser --> entry : member = new Member(Bob, A01231234B, M, 98765432)
+parser --> entry : member = new Member()
 
-entry -> command : new AddMember(memberList, member)
+entry -> command : new AddMember()
 activate command
 
-command -> member : members.addMember(member)
+command -> member : members.addMember()
 activate member
 
-member -> storage : writeMemberFile(memberFile, members)
+member -> storage : writeMemberFile()
 activate storage
 
 storage -> storage : save to disk
