@@ -1,5 +1,6 @@
 package taa.logger;
 
+//@@author leyondlee
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
