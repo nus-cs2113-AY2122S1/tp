@@ -81,7 +81,7 @@ public class Util {
         boolean result;
         try {
             boolean hasCreatedDir = true;
-            if (parentFile != null && !parentFile.exists()) {
+            if (parentFile != null && (!parentFile.exists() || !parentFile.isDirectory())) {
                 hasCreatedDir = parentFile.mkdirs();
             }
 
