@@ -23,7 +23,7 @@ public class Stock extends Investment {
         averagePrice = totalValue / numOfShares;
     }
 
-    public String toFileString(){
+    public String toFileString() {
         String price = averagePrice.toString();
         String num =  numOfShares.toString();
         return String.format("%s;%s;%s;%s", type, super.toFileString(), num, price);

@@ -13,7 +13,7 @@ public class Saving extends Investment {
         super.setTotalValue(initialValue + amount);
     }
 
-    public String toFileString(){
+    public String toFileString() {
         String value = super.getTotalValue().toString();
         return String.format("%s;%s;%s", type, super.toFileString(), value);
     }

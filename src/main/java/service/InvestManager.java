@@ -1,10 +1,10 @@
 package service;
 
-import entity.expense.Expense;
-import entity.expense.ExpenseList;
-import entity.income.Income;
-import entity.income.IncomeList;
-import entity.invest.*;
+import entity.invest.Saving;
+import entity.invest.SavingList;
+import entity.invest.Stock;
+import entity.invest.StockList;
+import entity.invest.Investment;
 import terminal.Ui;
 
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import static constants.ErrorMessage.invalidIndexMsg;
 public class InvestManager implements LoadableManager {
     private static InvestManager investMgr;
     private String fileLabel;
-    private final String SAVING_TYPE = "saving", STOCK_TYPE = "stock";
 
     private InvestManager() {
         fileLabel = "invest";
@@ -35,12 +34,12 @@ public class InvestManager implements LoadableManager {
             String type = splitLine[0];
             String name = splitLine[1];
 
-            if (type.equals(SAVING_TYPE)) {
+            if (type.equals("saving")) {
                 Double amount = Double.parseDouble(splitLine[2]);
                 Saving saving = new Saving(name, amount);
                 SavingList.addSavings(saving);
 
-            } else if (type.equals(STOCK_TYPE)) {
+            } else if (type.equals("stock")) {
                 Integer numOfShares = Integer.parseInt(splitLine[2]);
                 Double price = Double.parseDouble(splitLine[3]);
                 Stock stock = new Stock(name, numOfShares, price);
@@ -64,8 +63,9 @@ public class InvestManager implements LoadableManager {
     public String printToFile(ArrayList investments) {
         String fileString = "";
 
-        if (investments.size() == 0)
+        if (investments.size() == 0) {
             return fileString;
+        }
 
         for (Object invest : investments) {
             String investFileString = ((Investment)invest).toFileString();

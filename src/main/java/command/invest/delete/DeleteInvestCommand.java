@@ -11,8 +11,9 @@ import java.util.concurrent.Callable;
 
 import static constants.ErrorMessage.deleteExpenseErrorMsg;
 
-@Command(name = "delete", description = "Deletes investment record(s) from the database by the unique identifier (from list)",
-subcommands = {
+@Command(name = "delete",
+        description = "Deletes investment record(s) from the database by the unique identifier (from list)",
+        subcommands = {
         DeleteInvestStockCommand.class,
         DeleteInvestSavingsCommand.class
 })
