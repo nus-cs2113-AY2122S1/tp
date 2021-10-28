@@ -27,7 +27,7 @@ public class ModuleListDeserializer extends StorageDeserializer implements JsonD
         }
 
         JsonElement modulesJson = jsonObject.get(MEMBER_MODULES);
-        if (modulesJson == null || !modulesJson.isJsonArray()) {
+        if (!modulesJson.isJsonArray()) {
             return null;
         }
 
