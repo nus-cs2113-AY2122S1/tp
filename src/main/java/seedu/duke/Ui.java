@@ -23,6 +23,11 @@ public class Ui {
         System.out.println("Exiting the program now. Goodbye!");
     }
 
+    public static void newTripSuccessfullyCreated(Trip newTrip) {
+        System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                + newTrip.getDateOfTripString() + " has been successfully added!");
+    }
+
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
@@ -143,9 +148,9 @@ public class Ui {
         System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
     }
 
-    public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
-        System.out.println("Your trip to " + tripLocation + " on "
-                + tripDate + " has been successfully removed.");
+    public static void printDeleteTripSuccessful(Trip tripDeleted) {
+        System.out.println("Your trip to " + tripDeleted.getLocation() + " on "
+                + tripDeleted.getDateOfTripString() + " has been successfully removed.");
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
@@ -381,4 +386,30 @@ public class Ui {
         System.out.println("\tPlease enter date as DD-MM-YYYY");
     }
     //@@author
+
+    public static void changeForeignCurrencySuccessful(Trip tripToEdit, String original) {
+        System.out.println("Your foreign spending currency has been changed from "
+                + original + " to " + tripToEdit.getForeignCurrency());
+    }
+
+    public static void changeHomeCurrencySuccessful(Trip tripToEdit, String original) {
+        System.out.println("Your home currency has been changed from "
+                + original + " to " + tripToEdit.getRepaymentCurrency());
+    }
+
+    public static void changeExchangeRateSuccessful(Trip tripToEdit, double original) {
+        System.out.println("The exchange rate has been changed from "
+                + original + " to " + tripToEdit.getExchangeRate());
+    }
+
+    public static void changeDateSuccessful(Trip tripToEdit, String original) {
+        System.out.println("The date of your trip has been changed from "
+                + original + " to " + tripToEdit.getDateOfTripString());
+    }
+
+    public static void changeLocationSuccessful(Trip tripToEdit, String original) {
+        System.out.println("The location of your trip has been changed from "
+                + original + " to " + tripToEdit.getLocation());
+    }
+
 }

@@ -282,6 +282,7 @@ List all expenses in the current opened trip.
 
 To list all expenses in a trip, ensure you have opened a trip, then type ``list``.
 
+
 For example,
 
 Input:
@@ -299,8 +300,8 @@ List of Expenses:
 
 <br />
 
-#### - View Expenses
 
+#### - View Expenses
 Shows the details of a particular expense of a trip.
 
 User must already be inside a trip and have at least 1 expense.
