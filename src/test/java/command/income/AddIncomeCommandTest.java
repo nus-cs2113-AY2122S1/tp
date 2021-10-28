@@ -17,7 +17,7 @@ public class AddIncomeCommandTest {
             DataManager dataMgr = DataManager.getDataMgr();
             dataMgr.loadAllManagers();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
         CommandLine cmd = CommandLineFactory.getCmd();
         int exitCode = cmd.execute("income", "add", "Salary", "-v 1000");
