@@ -25,11 +25,17 @@ public class Utils {
         String[] line = new String[wordsPerLine];
         try {
             for (int i = 0; i < wordsPerLine; i++) {
+                if (startIndex + i > wordLists.size() - 1) {
+                    break;
+                }
                 line[i] = wordLists.get(startIndex + i);
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "exceed content maximum.");
         }
+        line = Arrays.stream(line)
+                .filter(s -> (s != null && s.length() > 0))
+                .toArray(String[]::new);
         return line;
     }
 
