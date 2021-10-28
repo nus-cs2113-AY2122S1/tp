@@ -3,8 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.flights.ListFlightCommand;
-import seedu.duke.data.*;
-
+import seedu.duke.data.Flight;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -26,9 +29,9 @@ public class ListFlightCommandTest {
         System.setOut(new PrintStream(newConsole));
 
         Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
-                "20/10/2021 18:00", "21/10/2021 03:00"});
+            "20/10/2021 18:00", "21/10/2021 03:00"});
         Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG",
-                "23/10/2021 18:00", "30/10/2021 03:00"});
+            "23/10/2021 18:00", "30/10/2021 03:00"});
         testFlightList.add(sqjpn);
         testFlightList.add(sqkor);
         Command listTour = new ListFlightCommand();
