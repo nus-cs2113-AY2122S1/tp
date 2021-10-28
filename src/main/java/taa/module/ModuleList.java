@@ -85,6 +85,10 @@ public class ModuleList implements ClassChecker {
         return modules.remove(module);
     }
 
+    public void deleteAllModules() {
+        modules.clear();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
