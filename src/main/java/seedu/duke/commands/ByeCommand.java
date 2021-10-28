@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.commands.Command;
-
 /**
  * Acknowledge that the user is exiting the application.
  */

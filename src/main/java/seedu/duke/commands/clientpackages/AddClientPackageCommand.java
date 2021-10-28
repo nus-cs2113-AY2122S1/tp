@@ -19,7 +19,7 @@ public class AddClientPackageCommand extends Command {
     public void execute() {
         createClientPackage();
         clientPackages.add(clientPackage);
-        ui.showAddClientPackage(clientPackage);
+        ui.showAdd(clientPackage);
     }
 
     private void createClientPackage() {
