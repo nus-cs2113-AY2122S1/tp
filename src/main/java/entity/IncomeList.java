@@ -24,4 +24,13 @@ public class IncomeList {
     public static ArrayList<Income> getIncomes() {
         return incomes;
     }
+
+    public static void updateIncome(String incomeName, Double incomeValue) {
+        for (int i = 0; i < incomes.size(); i++) {
+            if (incomes.get(i).getDescription().contains(incomeName)) {
+                incomes.get(i).updateValue(incomeValue);
+                break;
+            }
+        }
+    }
 }

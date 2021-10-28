@@ -91,5 +91,8 @@ public class IncomeManager implements LoadableManager{
     @Override
     public String getFileLabel() {
         return fileLabel;
+
+    public static void updateIncome(String incomeName, Double incomeValue) {
+        IncomeList.updateIncome(incomeName, incomeValue);
     }
 }
