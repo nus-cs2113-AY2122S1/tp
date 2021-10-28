@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam sequenceMessageAlign center
+
+participant ":Parser" as Parser
+participant "argParser:ArgParser" as ArgParser
+participant ":RecipeParser" as RecipeParser
+participant ":IngredientParser" as IngredientParser
+participant ":QuantityParser" as QuantityParser
+participant "command:AddRecipeCommand" as AddRecipeCommand
+
+-> Parser: prepareAddRecipe(args)
+activate Parser
+
+create ArgParser
+Parser -> ArgParser : new ArgParser(PREFIX_RECIPE, \nPREFIX_MULTIPLE_INGREDIENT, \nPREFIX_MULTIPLE_QUANTITY)
+activate ArgParser
+Parser <- ArgParser : argParser
+
+deactivate ArgParser
+Parser -> ArgParser : parse(args)
+activate ArgParser
+Parser <- ArgParser
+deactivate ArgParser
+
+Parser -> ArgParser : getSingleArg(PREFIX_RECIPE)
+activate ArgParser
+Parser <- ArgParser : recipeArg
+deactivate ArgParser
+
+create RecipeParser
+Parser -> RecipeParser
+activate RecipeParser
+Parser <- RecipeParser
+deactivate RecipeParser
+
+Parser -> RecipeParser : parse(recipeArg)
+activate RecipeParser
+Parser <- RecipeParser : recipe
+deactivate RecipeParser
+destroy RecipeParser
+
+Parser -> ArgParser : getArgList(PREFIX_MULTIPLE_INGREDIENT)
+activate ArgParser
+Parser <- ArgParser : ingredientArgList
+deactivate ArgParser
+
+create IngredientParser
+Parser -> IngredientParser
+activate IngredientParser
+Parser <- IngredientParser
+deactivate IngredientParser
+
+Parser -> IngredientParser : parse(ingredientArgList)
+activate IngredientParser
+Parser <- IngredientParser : ingredients
+deactivate IngredientParser
+destroy IngredientParser
+
+Parser -> ArgParser : getArgList(PREFIX_MULTIPLE_QUANTITY)
+activate ArgParser
+Parser <- ArgParser : quantityArgList
+deactivate ArgParser
+
+
+create QuantityParser
+Parser -> QuantityParser
+activate QuantityParser
+Parser <- QuantityParser
+deactivate QuantityParser
+
+Parser -> QuantityParser : parse(quantityArgList)
+activate QuantityParser
+Parser <- QuantityParser : quantities
+deactivate QuantityParser
+destroy QuantityParser
+
+create AddRecipeCommand
+Parser -> AddRecipeCommand : new AddRecipeCommand(recipe, ingredients, quantities)
+activate AddRecipeCommand
+Parser <- AddRecipeCommand : command
+deactivate AddRecipeCommand
+<- Parser: command
+deactivate Parser
+
+destroy ArgParser
+
+@enduml
