@@ -5,16 +5,9 @@ import happybit.command.UpdateGoalNameCommand;
 import happybit.command.UpdateHabitIntervalCommand;
 import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
-import happybit.habit.Habit;
-
-import static happybit.parser.Parser.splitInput;
 
 public class UpdateParser extends Parser {
 
-    private static final String ERROR_BLANK = "No instruction given.";
-    private static final String ERROR_NOT_NUM = "Expected a number.";
-    private static final String ERROR_INCOMPLETE = "Instruction incomplete or improper."
-            + "Please check your command format.";
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "

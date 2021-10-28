@@ -303,6 +303,22 @@ public class Goal {
         return habitNames;
     }
 
+    /**
+     * Checks if newHabit attempted to be added by user for curr Goal is already inside list.
+     *
+     * @param newName name attempted to be added
+     * @return True if name already inside, False other wise
+     */
+    public boolean duplicateInHabitList(String newName) {
+        ArrayList<String> currHabitNames = getHabitNames();
+        for (String currName : currHabitNames) {
+            if (newName.equals(currName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
