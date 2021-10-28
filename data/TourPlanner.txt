@@ -11,8 +11,8 @@ Price per pax: $1300.00
 
 Flight: 
 Flight ID: MSIA-KOR1
-Departure Flight: MSIA, 29/10/21 12:00
-Return Flight: KOR, 24/6/21 02:00
+Departure Flight: KOR, 24/6/21 02:00
+Return Flight: MSIA, 29/10/21 12:00
 
 Package ID: p123
 
@@ -30,8 +30,8 @@ Price per pax: $1500.00
 
 Flight: 
 Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
+Departure Flight: SG, 21/10/2021 03:00
+Return Flight: JPN, 20/10/2021 18:00
 
 Package ID: p001
 
@@ -49,8 +49,8 @@ Price per pax: $1500.00
 
 Flight: 
 Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
+Departure Flight: SG, 21/10/2021 03:00
+Return Flight: JPN, 20/10/2021 18:00
 
 Package ID: p002
 
@@ -68,8 +68,8 @@ Price per pax: $1500.00
 
 Flight: 
 Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
+Departure Flight: SG, 21/10/2021 03:00
+Return Flight: JPN, 20/10/2021 18:00
 
 Package ID: p003
 
@@ -87,8 +87,8 @@ Price per pax: $1500.00
 
 Flight: 
 Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/2021 18:00
-Return Flight: SG, 21/10/2021 03:00
+Departure Flight: SG, 21/10/2021 03:00
+Return Flight: JPN, 20/10/2021 18:00
 
 Package ID: p004
 
