@@ -1,7 +1,7 @@
 package service;
 
-import entity.Expense;
-import entity.ExpenseList;
+import entity.expense.Expense;
+import entity.expense.ExpenseList;
 import terminal.Ui;
 
 import java.text.Format;
@@ -57,7 +57,6 @@ public class ExpenseManager implements LoadableManager {
             String[] splitLine = line.split(";");
 
             String name = splitLine[0];
-            System.out.println(line);
             Double value = Double.parseDouble(splitLine[1]);
             String date = splitLine[2];
 
