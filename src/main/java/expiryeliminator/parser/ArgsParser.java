@@ -17,7 +17,7 @@ import expiryeliminator.parser.prefix.SingleArgPrefix;
 /**
  * Parses arguments based on a specified format and validates them.
  */
-public class ArgParser {
+class ArgsParser {
     /**
      * Maps each prefix to a list of argument strings that correspond to that prefix.
      */
@@ -36,7 +36,7 @@ public class ArgParser {
      *
      * @param prefixList List of prefixes that should be parsed.
      */
-    public ArgParser(Prefix... prefixList) {
+    ArgsParser(Prefix... prefixList) {
         assert prefixList.length > 0;
         this.prefixList = new ArrayList<>(Arrays.asList(prefixList));
 
@@ -56,7 +56,7 @@ public class ArgParser {
      * @throws MultipleArgsException If there is a prefix that appears more than once in the args when it should
      *         have only appeared once.
      */
-    public void parse(String args) throws InvalidPrefixException, MissingPrefixException, MultipleArgsException {
+    void parse(String args) throws InvalidPrefixException, MissingPrefixException, MultipleArgsException {
         args = args == null ? "" : args.trim();
 
         final Matcher matcher = ARGS_FORMAT.matcher(args);
@@ -98,7 +98,7 @@ public class ArgParser {
      * @param prefix Single arg prefix.
      * @return Arg that corresponds to the given prefix, or null if there is none (only for optional args).
      */
-    public String getSingleArg(SingleArgPrefix prefix) {
+    String getSingleArg(SingleArgPrefix prefix) {
         assert prefix != null && prefixList.contains(prefix)
                 : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
@@ -119,7 +119,7 @@ public class ArgParser {
      * @param prefix Multiple arg prefix.
      * @return List of args that correspond to the given prefix.
      */
-    public ArrayList<String> getArgList(MultipleArgPrefix prefix) {
+    ArrayList<String> getArgList(MultipleArgPrefix prefix) {
         assert prefix != null && prefixList.contains(prefix)
                 : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
