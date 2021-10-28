@@ -204,7 +204,7 @@ Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIP
 
 Example 1 (Listing all medications): `liststock`
 
-Expected output:
+Expected Output 1:
 
 ```
 +====+==============+========+==============+=============+===============================================+==============+
@@ -232,7 +232,7 @@ Expected output:
 
 Example 2 (Filter by name): `liststock n/panadol`
 
-Expected output:
+Expected Output 2:
 
 ```
 +====+=========+========+==============+=============+===============================================+==============+
@@ -254,15 +254,14 @@ Updates existing medication stock information in the inventory.
 > * The Stock ID must exist in MediVault.
 > * You cannot update the Stock ID.
 > * The allocation of Stock ID is determined by MediVault.
-> * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates
-    **all** entries that has same existing medication name given the `i/ID` with your input values for these parameters.
+> * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates **all** entries that 
+has same existing medication name given the `i/ID` with your input values for these parameters.
 
 > :information_source: Note:
 > * A new Stock ID will be assigned to the current stock if your update has the `n/NAME` parameter.
 > * When you update the `n/NAME` parameter, there may be an existing prescription record that is present.
-> * By allocating a new Stock ID to the updated stock record, MediVault preserves the name of the old record
-    > so that when you delete a prescription record, it is **guaranteed** to automatically update the quantity
-    > of the stock.
+> * By allocating a new Stock ID to the updated stock record, MediVault preserves the name of the old record so that 
+when you delete a prescription record, it is **guaranteed** to automatically update the quantity of the stock.
 
 Format: `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 
@@ -284,9 +283,9 @@ Initial stock records:
 > * Examples stated below are **independent** from each other.
 
 Example 1 (Updating parameters containing `n/NAME`):
-`update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/BODY INFECTIONS m/100`
+`update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/body infections m/100`
 
-Expected output 1:
+Expected Output 1:
 
 ```
 Updated! Number of rows affected: 1
@@ -295,12 +294,12 @@ Stock Id changed from:
 +====+========+========+==========+=============+=================+==============+
 | ID |  NAME  | PRICE  | QUANTITY | EXPIRY_DATE |   DESCRIPTION   | MAX_QUANTITY | 
 +====+========+========+==========+=============+=================+==============+
-| 4  | amoxil | $20.00 |    50    | 01-12-2021  | BODY INFECTIONS |     100      | 
+| 4  | AMOXIL | $20.00 |    50    | 01-12-2021  | BODY INFECTIONS |     100      | 
 +----+--------+--------+----------+-------------+-----------------+--------------+
 ```
 
 Example 2 (Updating parameters **without** `n/NAME`):
-`update i/1 p/30 d/FEVER`
+`update i/1 p/30 d/fever`
 
 Expected Output 2:
 
@@ -326,7 +325,7 @@ Format: `deletestock [i/ID expiring/EXPIRY_DATE]`
 
 Example 1 (Deletion by Stock ID): `deletestock i/3`
 
-Expected output:
+Expected Output 1:
 
 ```
 Deleted row with Stock Id: 3
@@ -334,7 +333,7 @@ Deleted row with Stock Id: 3
 
 Example 2 (Deletion by expiry date): `deletestock expiring/10-10-2021`
 
-Expected output:
+Expected Output 2:
 
 ```
 Deleted expired medications! Rows deleted: 4
@@ -375,7 +374,7 @@ Format: `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid
 
 Example 1 (Listing all prescriptions): `listprescription`
 
-Expected output:
+Expected Output 1:
 
 ```
 +====+==============+==========+=============+============+=======+==========+
@@ -395,7 +394,7 @@ Expected output:
 
 Example 2 (Listing prescriptions sorted by staff): `listprescription sort/s`
 
-Expected output:
+Expected Output 2:
 
 ```
 +====+==============+==========+=============+============+=======+==========+
@@ -425,9 +424,9 @@ Updates an existing prescription information.
 
 > :information_source: Note:
 > * MediVault allocates a **new** Prescription ID when you update prescription records containing the `n/NAME` and 
-    > `q/QUANTITY` parameter.
+`q/QUANTITY` parameter.
 > * This is because MediVault deletes the old prescription record and adds the updated prescription record as a **new** 
-    > prescription record.
+prescription record.
 
 Format: `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
 
@@ -463,7 +462,7 @@ Initial prescription records:
 Example 1 (Update prescription containing `n/NAME` or `q/QUANTITY`: 
 `updateprescription i/1 q/5`
 
-Expected output 1:
+Expected Output 1:
 
 ```
 Restored 5 PANADOL
@@ -490,9 +489,9 @@ Updated stock record for Example 1:
 ```
 
 Example 2 (Update prescription without both `n/NAME` and `q/QUANTITY` parameter:
-`updateprescription i/1 s/JACK`
+`updateprescription i/1 s/jack`
 
-Expected output 2:
+Expected Output 2:
 
 ```
 Updated prescription information!
@@ -512,7 +511,7 @@ Format: `deleteprescription i/PRESCRIPTION_ID`
 
 Example: `deleteprescription i/3`
 
-Expected output:
+Expected Output:
 
 ```
 Prescription deleted for Prescription ID 3
@@ -532,7 +531,7 @@ Format: `addorder n/NAME q/QUANTITY {d/DATE}`
 
 Example 1: `addorder n/panadol q/150 d/21-10-2021`
 
-Expected Output:
+Expected Output 1:
 
 ```
 Order added: panadol
@@ -545,7 +544,7 @@ Order added: panadol
 
 Example 2: `addorder n/panadol q/1000`
 
-Expected Output:
+Expected Output 2:
 
 ```
 Order for panadol exists. Unable to add order as total order quantity exceeds maximum stock quantity.
@@ -564,7 +563,7 @@ Format: `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsor
 
 Example 1: `listorder`
 
-Expected output:
+Expected Output 1:
 
 ```
 +====+==============+==========+============+===========+
@@ -631,7 +630,7 @@ Initial order records:
 
 Example: `updateorder i/1 q/50 d/10-10-2021`
 
-Expected output:
+Expected Output:
 
 ```
 Updated! Number of rows affected: 1
@@ -650,7 +649,7 @@ Format: `deleteorder i/ORDER_ID`
 
 Example: `deleteorder i/1`
 
-Expected output:
+Expected Output:
 
 ```
 Order deleted for Order ID 1
@@ -673,7 +672,7 @@ Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
 Example 1 (If medication does not exist) : `receiveorder i/1 p/10 e/20-10-2021 d/severe pain m/500`
 
-Expected output:
+Expected Output 1:
 
 ```
 Medication added: VICODIN
@@ -686,7 +685,7 @@ Medication added: VICODIN
 
 Example 2 (If medication exists) : `receiveorder i/2 p/20 e/25-10-2021`
 
-Expected output:
+Expected Output 2:
 
 ```
 Medicine exists. Using existing description and maximum quantity.
@@ -769,7 +768,7 @@ Format: `purge`
 
 Example: `purge`
 
-Expected output:
+Expected Output:
 
 ```
 Are you sure you want to delete all data? (Y/N)
@@ -787,7 +786,7 @@ Format:`help`
 
 Example: `help`
 
-Expected output:
+Expected Output:
 
 ``` 
 Welcome to the help page.
@@ -858,7 +857,7 @@ Format: `exit`
 
 Example: `exit`
 
-Expected output:
+Expected Output:
 
 ```
 Quitting MediVault...
