@@ -209,7 +209,7 @@ expire the soonest, including those that are already expired.)
 
 <br/>
 
-###List Recipes User Can Cook Feature
+### List Recipes User Can Cook Feature
 
 The list recipe user can cook feature is performed by the `ListRecipeUserCanCookCommand`.
 It returns a list of recipes that the user can cook with the ingredients the user currently
