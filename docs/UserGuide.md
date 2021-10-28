@@ -1,15 +1,21 @@
 # User Guide
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
-## Introduction
+## Introduction 
 
-{Give a product intro}
+Typist is a CLI typing game. 
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have Java 11 or above installed. 
+2. Down the latest version of `Typist` from [here](http://link.to/duke).
+3. Navigate to the folder containing the jar file and run `java -jar tp.jar`
 
 ## Features
 
@@ -42,6 +48,23 @@ Examples
 * command example 1
 * command example 2
 <!-- -->
+
+### Open Game: `game`
+Start a typing game.
+Format: `game GAME_MODE [-c]`
+* SET_CONTENT `-c` is optional, it allows user to set input content before game starts.
+* GAME_MODE 
+  * `-w` for game in Word Limit Mode 
+  * `-t` for game in Time Limit Mode
+* For Time Limit Game:
+  * Format: `game -t TIME_LIMIT [-sn] [-c]`
+  * START_NOW `-sn` allows user to start the game immediately without the "ready to start?" prompt.
+<!-- -->
+Examples
+* `game -t 30 -sn` 
+* `game -w -c`
+<!-- --> 
+
 
 ### View past records: `history`
 View past game records.  
@@ -99,18 +122,21 @@ Statistics of game is shown automatically after a game is finished.
 
 ## Example of usage:
 
->`new`
 ```
-| Enter how many words you want the game to run: 
-```
->`12`
-```
+game -w
+     | Enter how many words you want the game to run: 
+5
+     | lorem ipsum is simply dummy 
 lorem ipsum is simply dummy
+     | Your progress:5/5
 ```
->`lorem ipsum is simply dummy`
 ```
-Your progress:5/12
-text of the printing and
+game -t 30 -sn
+     | lorem ipsum is simply dummy text of the printing and 
+lorem ipsum is simply dummy text of the printing and 
+     | typesetting imply dummy text of the printing and typesetting industry 
+typesetting imply dummy text of the printing and typesetting industry
+     | Timer's UP!
 ```
 ## FAQ
 
@@ -120,6 +146,8 @@ text of the printing and
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Feature  | Command |
+| ------------- | ------------- | 
+| Start Word Limit Game| `game -w [-c]` | 
+| Start Time Limit Game | `game -t TIME_LIMIT [-sn] [-c]`
+| Get History | `history -h`|
