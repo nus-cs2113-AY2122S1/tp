@@ -3,7 +3,7 @@
 ## Introduction
 
 MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
-It is an integrated solution that provides real-time tracking of stock, orders and prescribing of medication.
+It is an integrated solution that provides real-time tracking of stock, prescriptions and orders.
 
 ## Contents
 
@@ -84,21 +84,38 @@ Welcome to MediVault!
 
 ### Changing Modes
 
-> :information_source: Power users can choose to omit mode selection to get things done faster.
+> :information_source: Advanced users can choose to omit mode selection to get things done faster.
 
 MediVault includes a mode feature to make the commands simpler for you. Your current mode is indicated in the square
 brackets on the bottom left of the console `[STOCK] >`. It allows you to type `add`, `list`, `update`, `delete` without
-typing in the full command. For example, when you are in `stock` mode, typing `list` is equivalent to `liststock`.
+typing in the full command. Additionally, you can type `archive` in both `prescription` and `order` mode and `receive`
+in `order` mode. For example, when you are in `order` mode, typing `list` is equivalent to `listorder`.
 
 Type `stock`, `prescription` or `order` to change to the respective modes.
 
-Example (Current mode is Stock): `prescription`
+Example (Current mode is Stock):
 
 Expected Output:
 
 ```
-Mode has changed to PRESCRIPTION.
-[PRESCRIPTION] > 
+[STOCK] > listorder
++====+=========+==========+============+=========+
+| ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
++====+=========+==========+============+=========+
+| 1  | PANADOL |   100    | 09-10-2021 | PENDING | 
++----+---------+----------+------------+---------+
+| 2  | VICODIN |    30    | 09-10-2021 | PENDING | 
++----+---------+----------+------------+---------+
+[STOCK] > order
+Mode has changed to ORDER.
+[ORDER] > list
++====+=========+==========+============+=========+
+| ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
++====+=========+==========+============+=========+
+| 1  | PANADOL |   100    | 09-10-2021 | PENDING | 
++----+---------+----------+------------+---------+
+| 2  | VICODIN |    30    | 09-10-2021 | PENDING | 
++----+---------+----------+------------+---------+
 ```
 
 # Features
@@ -539,7 +556,7 @@ Order for panadol exists. Unable to add order as total order quantity exceeds ma
 Lists all order records in the application.
 
 * All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
-* You are able to listorder by id, name, quantity, date, status and also sort/rsort by columns.
+* You are able to listorder by id, name, quantity, date, status and also sort and reverse sort by columns.
 * Example 1 demonstrates the list of all order records without parameters.
 * Example 2 demonstrates the list of all orders that are PENDING.
 
@@ -644,8 +661,10 @@ Order deleted for Order ID 1
 Adds the received medication into the current stocks.
 
 > :information_source: Note:
->* Your input order Id must exist
->* When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
+> * Your input order Id must exist
+> * When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
+> * The `e/EXPIRY_DATE` parameter is required so that MediVault knows the expiry date of the stock that just arrived.
+> * The `p/PRICE` parameter is also required so that stocks with different remaining shelf life can have different prices.
 
 > :warning: Warning
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
@@ -778,48 +797,57 @@ It allows you to type add, list, update, delete without typing in the full comma
 Type stock, prescription or order to change to respective modes.
 Note that parameters in {curly braces} are optional.
 Parameters in [square braces] indicate that at least one of the parameter(s) must be provided.
-+=====================+============================================================================================+
-|       COMMAND       |                                       COMMAND SYNTAX                                       | 
-+=====================+============================================================================================+
-|      addstock       | addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}            | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|     deletestock     | deletestock [i/ID expiring/EXPIRY_DATE]                                                    | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|     updatestock     | updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]    | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|      liststock      | liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE           | 
-|                     | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
-|                     | rsort/COLUMN NAME}                                                                         | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|   addprescription   | addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME                               | 
-+---------------------+--------------------------------------------------------------------------------------------+
-| deleteprescription  | deleteprescription i/ID                                                                    | 
-+---------------------+--------------------------------------------------------------------------------------------+
-| updateprescription  | updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]              | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID           | 
-|                     | sort/COLUMN_NAME rsort/COLUMN NAME}                                                        | 
-+---------------------+--------------------------------------------------------------------------------------------+
-| archiveprescription | archiveprescription d/DATE                                                                 | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|      addorder       | addorder n/NAME q/QUANTITY {d/DATE}                                                        | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|     deleteorder     | deleteorder i/ID                                                                           | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|     updateorder     | updateorder i/ID [n/NAME q/QUANTITY d/DATE]                                                | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|      listorder      | listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}      | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|    archiveorder     | archiveorder d/DATE                                                                        | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|    receiveorder     | receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}                     | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|        purge        | purge                                                                                      | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|        help         | help                                                                                       | 
-+---------------------+--------------------------------------------------------------------------------------------+
-|        exit         | exit                                                                                       | 
-+---------------------+--------------------------------------------------------------------------------------------+
++=====================+====================================================+
+|       COMMAND       |                   COMMAND SYNTAX                   | 
++=====================+====================================================+
+|      addstock       | addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE   | 
+|                     | {d/DESCRIPTION m/MAX_QUANTITY}                     | 
++---------------------+----------------------------------------------------+
+|     deletestock     | deletestock [i/ID expiring/EXPIRY_DATE]            | 
++---------------------+----------------------------------------------------+
+|     updatestock     | updatestock i/ID [n/NAME p/PRICE q/QUANTITY        | 
+|                     | e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]        | 
++---------------------+----------------------------------------------------+
+|      liststock      | liststock {i/ID p/PRICE q/QUANTITY                 | 
+|                     | low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE      | 
+|                     | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE            | 
+|                     | d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
+|                     | rsort/COLUMN NAME}                                 | 
++---------------------+----------------------------------------------------+
+|   addprescription   | addprescription n/NAME q/QUANTITY c/CUSTOMER_ID    | 
+|                     | s/STAFF_NAME                                       | 
++---------------------+----------------------------------------------------+
+| deleteprescription  | deleteprescription i/ID                            | 
++---------------------+----------------------------------------------------+
+| updateprescription  | updateprescription i/ID [n/NAME q/QUANTITY         | 
+|                     | c/CUSTOMER_ID d/DATE s/STAFF_NAME]                 | 
++---------------------+----------------------------------------------------+
+|  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID    | 
+|                     | d/DATE s/STAFF_NAME sid/STOCK_ID                   | 
+|                     | sort/COLUMN_NAME rsort/COLUMN NAME}                | 
++---------------------+----------------------------------------------------+
+| archiveprescription | archiveprescription d/DATE                         | 
++---------------------+----------------------------------------------------+
+|      addorder       | addorder n/NAME q/QUANTITY {d/DATE}                | 
++---------------------+----------------------------------------------------+
+|     deleteorder     | deleteorder i/ID                                   | 
++---------------------+----------------------------------------------------+
+|     updateorder     | updateorder i/ID [n/NAME q/QUANTITY d/DATE]        | 
++---------------------+----------------------------------------------------+
+|      listorder      | listorder {i/ID n/NAME q/QUANTITY d/DATE           | 
+|                     | s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}       | 
++---------------------+----------------------------------------------------+
+|    archiveorder     | archiveorder d/DATE                                | 
++---------------------+----------------------------------------------------+
+|    receiveorder     | receiveorder i/ID p/PRICE e/EXPIRY_DATE            | 
+|                     | {d/DESCRIPTION m/MAX_QUANTITY}                     | 
++---------------------+----------------------------------------------------+
+|        purge        | purge                                              | 
++---------------------+----------------------------------------------------+
+|        help         | help                                               | 
++---------------------+----------------------------------------------------+
+|        exit         | exit                                               | 
++---------------------+----------------------------------------------------+
 For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/
  ```
 
