@@ -1,4 +1,4 @@
-# Duke
+# CCA Manager
 
 This is a project for a greenfield Java project. CCA Manager is a CLI application, and it is designed to help CCA's manage their administrative issues.
 
