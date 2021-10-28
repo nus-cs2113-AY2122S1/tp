@@ -37,7 +37,7 @@ public class Utils {
         } catch (IndexOutOfBoundsException e) {
             throw new ExceedRangeException();
         }
-      
+
         //remove null elements
         line = Arrays.stream(line)
                 .filter(s -> (s != null && s.length() > 0))
