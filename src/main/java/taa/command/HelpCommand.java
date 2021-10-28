@@ -62,7 +62,8 @@ public class HelpCommand extends Command {
         new DeleteAttendanceCommand(""),
         new ExitCommand(""),
         new HelpCommand(""),
-        new ArchiveCommand("")
+        new ArchiveCommand(""),
+        new ResetCommand("")
     };
 
     public HelpCommand(String argument) {
