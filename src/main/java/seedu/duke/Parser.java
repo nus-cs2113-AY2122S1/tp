@@ -293,16 +293,24 @@ public class Parser {
     }
 
     public static int getAttendanceIndex(String entry) {
-        String[] substring = entry.split("/i", 0);
-        int trainingIndex = Integer.parseInt(substring[1].trim());
-        return trainingIndex;
+        try {
+            String[] substring = entry.split("/i", 0);
+            int trainingIndex = Integer.parseInt(substring[1].trim());
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printWrongInputMessage();
+        }
+        return -1;
     }
 
     public static String getAttendanceTrainingName(String entry) {
-        int trainingNameStartIndex = entry.indexOf("/t") + 2;
-        int trainingNameEndIndex = entry.indexOf("/i");
-        String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
-        return trainingName;
+        try {
+            int trainingNameStartIndex = entry.indexOf("/t") + 2;
+            int trainingNameEndIndex = entry.indexOf("/i");
+            String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
+            return trainingName;
+        } catch (IndexOutOfBoundsException e) {
+            return "null";
+        }
     }
 
     /**

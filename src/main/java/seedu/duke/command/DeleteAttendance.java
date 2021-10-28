@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.AttendanceStorage;
+import seedu.duke.Ui;
 import seedu.duke.attendance.AttendanceList;
 
 
