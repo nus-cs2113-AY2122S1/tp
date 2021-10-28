@@ -28,7 +28,6 @@ when learning how to use **ConTech**.
 * **[Quick Start](#start)**
 * **[Features](#features)**
     * **[Contact flags : `-flag`](#flag)**
-    * **[Viewing help : `help`](#help)**
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
     * **[Viewing a contact : `view`](#view)**
@@ -37,8 +36,8 @@ when learning how to use **ConTech**.
     * **[Editing a contact : `edit`](#edit)**
     * **[Searching for a contact : `search`](#search)**
     * **[Importing a contact : `import`](#import)**
+    * **[Viewing help : `help`](#help)**
     * **[Exiting the program : `exit`](#exit)**
-    
 * **[FAQ](#faq)**
 * **[Command Summary](#summary)**
 
