@@ -5,7 +5,7 @@ title: Developer Guide
 
 ## Contents 
 
-* [Acknowledgements](#Acknowledgements)
+* [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
   * [Main Components](#main-components) 
