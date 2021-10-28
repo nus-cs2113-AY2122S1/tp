@@ -46,8 +46,8 @@ public class Parser {
      * @return String array of command parameters that have been trimmed of leading/trailing whitespaces.
      */
     private static String[] trimParameters(String[] parameters) {
-        for (int i = 0; i < parameters.length; i++) {
-            parameters[i] = parameters[i].trim();
+        for (int i = 1; i < parameters.length; i++) {
+            parameters[i] = parameters[i].substring(0, 2) + parameters[i].substring(2).trim();
         }
         return parameters;
     }

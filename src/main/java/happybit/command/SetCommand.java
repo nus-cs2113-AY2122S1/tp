@@ -30,4 +30,5 @@ public class SetCommand extends Command {
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         goalList.setChosenGoalIndex(goalIndex);
     }
+
 }

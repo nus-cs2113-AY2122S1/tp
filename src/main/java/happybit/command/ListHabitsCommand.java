@@ -39,4 +39,5 @@ public class ListHabitsCommand extends ListCommand {
     public int getGoalIndex() {
         return goalIndex;
     }
+
 }

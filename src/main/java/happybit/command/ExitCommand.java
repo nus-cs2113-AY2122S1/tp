@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
     }
 
