@@ -105,4 +105,17 @@ public class Event extends Task {
         setStartDate(startDate);
         setEndDate(endDate);
     }
+
+    @Override
+    public void refreshDate() {
+        LocalDateTime newStartDate = getRecurrence().getNextRecurredDate(getStartDate());
+        LocalDateTime newEndDate = getRecurrence().getNextRecurredDate(getEndDate());
+        setEndDate(newEndDate);
+        setStartDate(newStartDate);
+    }
+
+    @Override
+    public LocalDateTime getListDate() {
+        return getStartDate();
+    }
 }

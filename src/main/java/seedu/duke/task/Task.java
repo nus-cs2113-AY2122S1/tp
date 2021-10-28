@@ -131,4 +131,8 @@ public abstract class Task {
 
     protected abstract void taskEdit(Map<String, String> arguments)
         throws ParseDateFailedException, StartDateAfterEndDateException;
+
+    public abstract void refreshDate();
+
+    public abstract LocalDateTime getListDate();
 }

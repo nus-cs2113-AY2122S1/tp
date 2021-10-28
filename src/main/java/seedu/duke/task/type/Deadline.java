@@ -32,7 +32,7 @@ public class Deadline extends Task {
         this(description, dueDate);
         setPriority(priority);
     }
-    
+
     public Deadline(String description, LocalDateTime dueDate, RecurrenceEnum recurrence) {
         this(description, dueDate);
         setRecurrence(recurrence);
@@ -61,7 +61,7 @@ public class Deadline extends Task {
     @Override
     public String getTaskEntryDescription() {
         return DEADLINE_ICON + " " + super.getTaskEntryDescription()
-                + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
+            + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
     }
 
     @Override
@@ -70,5 +70,16 @@ public class Deadline extends Task {
             String due = arguments.get(DeadlineFlag.DUE_DATE);
             setDueDate(DateParser.stringToDate(due));
         }
+    }
+
+    @Override
+    public void refreshDate() {
+        LocalDateTime newDueDate = getRecurrence().getNextRecurredDate(getDueDate());
+        setDueDate(newDueDate);
+    }
+
+    @Override
+    public LocalDateTime getListDate() {
+        return getDueDate();
     }
 }

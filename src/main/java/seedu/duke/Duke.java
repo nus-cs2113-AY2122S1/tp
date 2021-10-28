@@ -71,7 +71,6 @@ public class Duke {
             ui.printMessage(commandResult.getMessage());
 
         } while (commandResult.getIsExited() != true);
-
     }
 
     public static void main(String[] args) {

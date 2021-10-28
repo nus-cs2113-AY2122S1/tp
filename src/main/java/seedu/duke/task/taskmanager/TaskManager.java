@@ -106,6 +106,15 @@ public class TaskManager implements Subject {
         return LIST_HEADER + taskEntries;
     }
 
+    public void refreshListDates() {
+        for (Task task : taskList) {
+            if (task.getListDate().isBefore(LocalDateTime.now())) {
+                task.refreshDate();
+            }
+        }
+        updateObservers();
+    }
+
     //@@author APZH
     public String listTaskRecurrence(Map<String, String> parameters) throws EmptyTasklistException,
         InvalidTaskIndexException, ListFormatException, TaskIsNonRecurringException {
