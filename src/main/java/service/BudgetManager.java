@@ -6,9 +6,21 @@ import terminal.Ui;
 
 import java.util.ArrayList;
 
-public class BudgetManager {
+public class BudgetManager implements LoadableManager{
 
-    public static void addBudget(double budgetValue) {
+    private static BudgetManager budgetMgr;
+
+    private BudgetManager() {
+    }
+
+    public static BudgetManager getBudgetMgr() {
+        if (budgetMgr == null) {
+            budgetMgr = new BudgetManager();
+        }
+        return budgetMgr;
+    }
+
+    public void addBudget(double budgetValue) {
         Budget newBudget = new Budget(budgetValue);
         ArrayList<Budget> budgets = BudgetList.getBudgets();
         if (budgets.size() == 0) {
@@ -25,17 +37,17 @@ public class BudgetManager {
         }
     }
 
-    public static void deleteBudget() {
+    public void deleteBudget() {
         BudgetList.deleteBudget();
     }
 
-    public static void updateBudget(double budgetValue) {
+    public void updateBudget(double budgetValue) {
         BudgetList.deleteBudget();
         Budget newBudget = new Budget(budgetValue);
         BudgetList.addBudget(newBudget);
     }
 
-    public static void listBudgets() {
+    public void listBudgets() {
         Ui ui = Ui.getUi();
         String budgetListHeader = String.format("%s |  %-10s |", "Id.", "Value");
 
@@ -44,5 +56,15 @@ public class BudgetManager {
         if (budgets.size() == 1) {
             ui.printMessage(1 + ".  | " + budgets.get(0));
         }
+    }
+
+    @Override
+    public void parse(String fileString) {
+
+    }
+
+    @Override
+    public void toFileString() {
+
     }
 }

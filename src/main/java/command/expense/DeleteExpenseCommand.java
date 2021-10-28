@@ -21,14 +21,15 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
         String expenseName;
 
         try {
             if (exclusive.names != null) {
                 expenseName = String.join(" ", exclusive.names);
-                ExpenseManager.deleteExpense(expenseName);
+                expenseMgr.deleteExpense(expenseName);
             } else {
-                ExpenseManager.deleteExpense(exclusive.id);
+                expenseMgr.deleteExpense(exclusive.id);
             }
         } catch (Exception error) {
             ui.printMessage(deleteExpenseErrorMsg);

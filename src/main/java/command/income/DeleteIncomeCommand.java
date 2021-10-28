@@ -19,14 +19,15 @@ public class DeleteIncomeCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        IncomeManager incomeMgr = IncomeManager.getIncomeManager();
         String incomeName;
 
         try {
             if (exclusive.names != null) {
                 incomeName = String.join(" ", exclusive.names);
-                IncomeManager.deleteIncome(incomeName);
+                incomeMgr.deleteIncome(incomeName);
             } else {
-                IncomeManager.deleteIncome(exclusive.id);
+                incomeMgr.deleteIncome(exclusive.id);
             }
         } catch (Exception error) {
             ui.printMessage(deleteIncomeErrorMsg);

@@ -14,9 +14,10 @@ public class DeleteBudgetCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        BudgetManager budgetMgr = BudgetManager.getBudgetMgr();
 
         try {
-            BudgetManager.deleteBudget();
+            budgetMgr.deleteBudget();
         } catch (Exception error) {
             ui.printMessage(deleteBudgetErrorMsg);
             return 1;

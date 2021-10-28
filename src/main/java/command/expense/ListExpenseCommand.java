@@ -13,8 +13,9 @@ public class ListExpenseCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
         ui.printMessage("Your expenses:");
-        ExpenseManager.listExpenses();
+        expenseMgr.listExpenses();
         return 0;
     }
 }

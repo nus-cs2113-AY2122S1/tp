@@ -9,24 +9,35 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ExpenseManager {
+public class ExpenseManager implements LoadableManager{
 
-    public static void addExpense(String expenseName, double expenseValue) {
+    private static ExpenseManager expenseMgr;
+
+    private ExpenseManager() {
+    }
+
+    public static ExpenseManager getExpenseMgr() {
+        if (expenseMgr == null) {
+            expenseMgr = new ExpenseManager();
+        }
+        return expenseMgr;
+    }
+    public void addExpense(String expenseName, double expenseValue) {
         Format f = new SimpleDateFormat("dd/MM/yy");
         String today = f.format(new Date());
         Expense newExpense = new Expense(expenseName, expenseValue, today);
         ExpenseList.addExpense(newExpense);
     }
 
-    public static void deleteExpense(String expenseName) {
+    public void deleteExpense(String expenseName) {
         ExpenseList.deleteExpense(expenseName);
     }
 
-    public static void deleteExpense(int expenseNumber) {
+    public void deleteExpense(int expenseNumber) {
         ExpenseList.deleteExpense(expenseNumber - 1);
     }
 
-    public static void listExpenses() {
+    public void listExpenses() {
         Ui ui = Ui.getUi();
         String expenseListHeader = String.format("%s | %-25s | %-10s | %s", "Id.", "Name", "Value", "Date");
 
@@ -35,5 +46,15 @@ public class ExpenseManager {
         for (int i = 0; i < expenses.size(); i++) {
             ui.printMessage((i + 1) + ". \t| " + expenses.get(i));
         }
+    }
+
+    @Override
+    public void parse(String fileString) {
+
+    }
+
+    @Override
+    public void toFileString() {
+
     }
 }

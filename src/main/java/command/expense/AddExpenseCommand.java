@@ -3,6 +3,7 @@ package command.expense;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import service.BudgetManager;
 import service.ExpenseManager;
 import terminal.Ui;
 import utils.Money;
@@ -24,11 +25,12 @@ public class AddExpenseCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
 
         try {
             String expenseName = String.join(" ", names);
             Double expenseValue = Money.truncate(value);
-            ExpenseManager.addExpense(expenseName, expenseValue);
+            expenseMgr.addExpense(expenseName, expenseValue);
 
         } catch (Exception error) {
             ui.printMessage(addExpenseErrorMsg);

@@ -19,12 +19,11 @@ public class AddBudgetCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        BudgetManager budgetMgr = BudgetManager.getBudgetMgr();
 
         try {
             Double budgetValue = Money.truncate(value);
-            BudgetManager.addBudget(budgetValue);
-            
-
+            budgetMgr.addBudget(budgetValue);
         } catch (Exception error) {
             ui.printMessage(addBudgetErrorMsg);
             return 1;

@@ -11,8 +11,10 @@ public class ListBudgetCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
+        BudgetManager budgetMgr = BudgetManager.getBudgetMgr();
+
         ui.printMessage("list budget");
-        BudgetManager.listBudgets();
+        budgetMgr.listBudgets();
         return 0;
     }
 }
