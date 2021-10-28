@@ -3,7 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.tours.ListTourCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Tour;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
