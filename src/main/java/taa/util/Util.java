@@ -1,7 +1,10 @@
 package taa.util;
 
+//@@author leyondlee
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Util {
     /**
@@ -79,7 +82,7 @@ public class Util {
         boolean result;
         try {
             boolean hasCreatedDir = true;
-            if (parentFile != null) {
+            if (parentFile != null && (!parentFile.exists() || !parentFile.isDirectory())) {
                 hasCreatedDir = parentFile.mkdirs();
             }
 
@@ -93,5 +96,28 @@ public class Util {
         }
 
         return result;
+    }
+
+    public static String getAbsolutePath(String pathStr) {
+        Path path = Paths.get(pathStr).toAbsolutePath().normalize();
+        return path.toString();
+    }
+
+    public static boolean isFile(String path) {
+        if (!fileExists(path)) {
+            return false;
+        }
+
+        File file = new File(path);
+        return file.isFile();
+    }
+
+    public static boolean isFolder(String path) {
+        if (!fileExists(path)) {
+            return false;
+        }
+
+        File file = new File(path);
+        return file.isDirectory();
     }
 }

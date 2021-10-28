@@ -1,5 +1,6 @@
 package taa.storage.deserializer;
 
+//@@author leyondlee
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -63,8 +64,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
         JsonElement resultsJson = jsonObject.get(MEMBER_RESULTS);
         if (resultsJson != null) {
-            Type resultsType = new TypeToken<HashMap<String, Double>>(){}.getType();
-            HashMap<String, Double> results = gson.fromJson(resultsJson, resultsType);
+            HashMap<String, Double> results = convertResultsJson(gson, resultsJson);
             if (results != null) {
                 for (String key : results.keySet()) {
                     double value = results.get(key);
@@ -78,5 +78,17 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         }
 
         return student;
+    }
+
+    private HashMap<String, Double> convertResultsJson(Gson gson, JsonElement resultsJson) {
+        HashMap<String, Double> results;
+        try {
+            Type resultsType = new TypeToken<HashMap<String, Double>>(){}.getType();
+            results = gson.fromJson(resultsJson, resultsType);
+        } catch (JsonParseException e) {
+            results = null;
+        }
+
+        return results;
     }
 }

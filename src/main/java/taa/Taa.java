@@ -1,13 +1,18 @@
 package taa;
 
+//@@author leyondlee
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.logger.TaaLogger;
 import taa.module.ModuleList;
 import taa.storage.Storage;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Taa {
-    private static final String DATA_FILENAME = "./data/taa_data.json";
+    public static final String DATA_FOLDER = "./data";
+    public static final String DATA_FILENAME = "taa_data.json";
 
     private ModuleList moduleList;
     private final Ui ui;
@@ -15,7 +20,9 @@ public class Taa {
 
     public Taa() {
         this.ui = new Ui();
-        this.storage = new Storage(DATA_FILENAME);
+
+        Path dataFilePath = Paths.get(DATA_FOLDER, DATA_FILENAME);
+        this.storage = new Storage(dataFilePath.toString());
     }
 
     public Taa(boolean isLoggingEnabled) {

@@ -1,5 +1,6 @@
 package taa.command;
 
+//@@author leyondlee
 import taa.Ui;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.assessment.DeleteAssessmentCommand;
@@ -61,7 +62,9 @@ public class HelpCommand extends Command {
         new SetAttendanceCommand(""),
         new DeleteAttendanceCommand(""),
         new ExitCommand(""),
-        new HelpCommand("")
+        new HelpCommand(""),
+        new ArchiveCommand(""),
+        new ResetCommand("")
     };
 
     public HelpCommand(String argument) {

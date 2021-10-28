@@ -1,5 +1,6 @@
 package taa.module;
 
+//@@author leyondlee
 import taa.ClassChecker;
 
 import java.util.ArrayList;
@@ -83,6 +84,10 @@ public class ModuleList implements ClassChecker {
         assert module != null;
 
         return modules.remove(module);
+    }
+
+    public void deleteAllModules() {
+        modules.clear();
     }
 
     @Override
