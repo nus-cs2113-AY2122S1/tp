@@ -36,7 +36,7 @@ class StorageTest {
     private static final String APPOINTMENT_DATA_SAVED = "src/test/data/StorageTest/appointmentData-saved.txt";
     private static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n\n"
             + "Please decide if you wish to:" + "\n"
-            + "1. Enter 'exit' to exit Medbot to correct the storage file" + "\n"
+            + "1. Enter 'exit' to exit MedBot to correct the storage file" + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
 

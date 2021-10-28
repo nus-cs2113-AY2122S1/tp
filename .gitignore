@@ -26,7 +26,7 @@ text-ui-test/ACTUAL.TXT
 
 text-ui-test/*.in
 
-MedbotData/
+MedBotData/
 
 gradle/wrapper/gradle-wrapper.properties
 
@@ -36,4 +36,3 @@ MedBotData/patient.bak
 MedBotData/staff.bak
 text-ui-test/duplicate-sche.txt
 
-/MedBotData/

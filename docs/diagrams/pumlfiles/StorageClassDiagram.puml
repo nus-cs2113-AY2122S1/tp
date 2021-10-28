@@ -1,0 +1,48 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package medbot.storage {
+
+class StorageManager {
++ StorageManager(scheduler, ui)
++ saveToStorage(scheduler)
+}
+
+
+class "{abstract} \n Storage"{
++ loadStorage(listItemType, scheduler): String
++ saveData(storageString: String)
+# createListItem(storageLine, listItemType) {'abstract'}
+}
+
+together {
+class AppointmentStorage {
+# createListItem(storageLine, listItemType)
+}
+
+class "{abstract} \n PersonStorage"{
+# createListItem(storageLine, listItemType)
+}
+
+class PatientStorage
+class StaffStorage
+
+
+PatientStorage <-- StorageManager
+StaffStorage <-- StorageManager
+AppointmentStorage <-- StorageManager
+
+"{abstract} \n Storage" <|-- AppointmentStorage
+"{abstract} \n Storage" <|-- "{abstract} \n PersonStorage"
+"{abstract} \n PersonStorage" <|-- PatientStorage
+"{abstract} \n PersonStorage" <|-- StaffStorage
+
+
+enum ListItemType {
+PATIENT
+STAFF
+APPOINTMENT
+}
+
+@enduml
