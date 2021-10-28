@@ -24,7 +24,8 @@ public class Duke {
         in = new Scanner(System.in);
         ui = new Ui();
 
-        taskManager = new TaskManager();
+        DataManager dataManager = new DataManager();
+        taskManager = new TaskManager(dataManager);
 
         reminderManager = new ReminderManager();
     }

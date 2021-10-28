@@ -32,13 +32,12 @@ public class DataManager implements Observer {
 
     private static final boolean DO_APPEND_TO_FILE = false;
 
-    private List<Task> taskList;
     private File taskFile;
     private File diaryFile;
     private Gson gson;
+    private List<Task> taskList;
 
-    public DataManager(List<Task> taskList) {
-        this.taskList = taskList;
+    public DataManager() {
         FileCreator fileCreator = new FileCreator();
         taskFile = fileCreator.getTaskFile();
         diaryFile = fileCreator.getDiaryFile();
@@ -52,7 +51,8 @@ public class DataManager implements Observer {
             .setPrettyPrinting().create();
     }
 
-    public List<Task> loadTaskList() {
+    public List<Task> loadTaskList(int startingSize) {
+        taskList = new ArrayList<>(startingSize);
         try {
             Reader taskFileReader = new FileReader(taskFile);
             List<Task> loadedTaskList = gson.fromJson(taskFileReader, new TypeToken<ArrayList<Task>>() {

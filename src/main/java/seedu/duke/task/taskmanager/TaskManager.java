@@ -49,12 +49,16 @@ public class TaskManager implements Subject {
     private List<Task> taskList;
     private List<Task> latestFilteredList;
 
+    public TaskManager(DataManager dataManager) {
+        taskList = dataManager.loadTaskList(STARTING_SIZE);
+        addObserver(dataManager);
+
+        latestFilteredList = new ArrayList<>(STARTING_SIZE);
+
+    }
+
     public TaskManager() {
         taskList = new ArrayList<>(STARTING_SIZE);
-
-        DataManager dataManager = new DataManager(taskList);
-        taskList = dataManager.loadTaskList();
-        addObserver(dataManager);
 
         latestFilteredList = new ArrayList<>(STARTING_SIZE);
 
