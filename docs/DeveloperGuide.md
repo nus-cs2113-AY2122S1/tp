@@ -3,7 +3,7 @@
 ## Introduction
 
 MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
-It is an integrated solution that provides real-time tracking of stock, prescriptions and orders. The
+It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders. The
 purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.0.
 
 ## Acknowledgements
