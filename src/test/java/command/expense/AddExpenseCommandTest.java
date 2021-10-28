@@ -17,7 +17,7 @@ public class AddExpenseCommandTest {
             DataManager dataMgr = DataManager.getDataMgr();
             dataMgr.loadAllManagers();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
 
         CommandLine cmd = CommandLineFactory.getCmd();

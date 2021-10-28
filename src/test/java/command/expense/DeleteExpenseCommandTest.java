@@ -19,7 +19,7 @@ public class DeleteExpenseCommandTest {
             DataManager dataMgr = DataManager.getDataMgr();
             dataMgr.loadAllManagers();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
 
         Expense expense = new Expense("Eat Lunch", 10.99, "21-Nov-2021");
@@ -35,7 +35,7 @@ public class DeleteExpenseCommandTest {
             DataManager dataMgr = DataManager.getDataMgr();
             dataMgr.loadAllManagers();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
         Expense expense = new Expense("Eat Lunch", 10.99, "21-Nov-2021");
         ExpenseList.addExpense(expense);

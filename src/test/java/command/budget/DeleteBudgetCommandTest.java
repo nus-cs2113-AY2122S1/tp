@@ -19,7 +19,7 @@ public class DeleteBudgetCommandTest {
             DataManager dataMgr = DataManager.getDataMgr();
             dataMgr.loadAllManagers();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
 
         Budget budget = new Budget(1000);
