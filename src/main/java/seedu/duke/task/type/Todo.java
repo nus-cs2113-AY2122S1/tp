@@ -83,4 +83,15 @@ public class Todo extends Task {
             setDoOnDate(DateParser.stringToDate(todo));
         }
     }
+
+    @Override
+    public void refreshDate() {
+        LocalDateTime newDoOnDate = getRecurrence().getNextRecurredDate(getDoOnDate());
+        setDoOnDate(newDoOnDate);
+    }
+
+    @Override
+    public LocalDateTime getListDate() {
+        return getDoOnDate();
+    }
 }
