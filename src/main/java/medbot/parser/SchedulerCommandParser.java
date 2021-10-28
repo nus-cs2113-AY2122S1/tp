@@ -23,7 +23,6 @@ public abstract class SchedulerCommandParser {
     private static final String COMMAND_FIND = "find";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
-    private static final int PARAMETER_BUFFER = 2;
 
     /**
      * Parses the user input and returns the corresponding command when the view type is SCHEDULER.

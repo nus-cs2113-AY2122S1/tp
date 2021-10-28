@@ -12,7 +12,6 @@ import java.util.TreeSet;
 public class PersonalAppointmentList {
     private static final String ERROR_APPOINTMENT_ID_NOT_SET = "Appointment ID is not set.";
     private static final String ERROR_ADD_APPOINTMENT_CLASH = "New appointment clashes with another appointment.";
-    private static final String END_LINE = System.lineSeparator();
 
     private final NavigableSet<Appointment> appointments = new TreeSet<>((o1, o2) -> {
         if (o1.getDateTimeCode() > o2.getDateTimeCode()) {

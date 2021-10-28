@@ -35,7 +35,6 @@ public abstract class Person implements ListItem {
     protected String phoneNumber = "";
     protected String emailAddress = "";
     protected String residentialAddress = "";
-    protected PersonType personType;
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
     protected boolean isArchived = false;
 

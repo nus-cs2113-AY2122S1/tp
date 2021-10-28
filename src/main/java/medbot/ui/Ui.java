@@ -455,36 +455,10 @@ public class Ui {
     }
 
     /**
-     * Prints unrecognised command message.
-     *
-     * @return the error message on unrecognised command.
-     */
-    public String getUnrecognisedCommandHelpMessage() {
-        return "Sorry, that's not a recognised command. To view a list of commands, type:"
-                + END_LINE + "help" + END_LINE;
-    }
-
-    /**
-     * Utility function that performs a pseudo-clear of the console. Use this for testing from within
-     * the IDE.
+     * Utility function that performs a pseudo-clear of the console.
      */
     public static void clearConsoleFromIde() {
         System.out.print(END_LINE + END_LINE + END_LINE + END_LINE + END_LINE);
-    }
-
-    /**
-     * Utility function that clears the console. Does not work within the IDE console.
-     */
-    public static void clearConsole() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Error clearing the console");
-        }
     }
 
     /**

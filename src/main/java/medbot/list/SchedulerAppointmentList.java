@@ -73,17 +73,6 @@ public class SchedulerAppointmentList {
         return lastId;
     }
 
-
-    /**
-     * Returns if an appointment with the specified appointmentId exists.
-     *
-     * @param appointmentId the appointmentId to check for
-     * @return Boolean of whether an appointment with that appointmentId exists.
-     */
-    public boolean doesAppointmentExist(int appointmentId) {
-        return appointments.containsKey(appointmentId);
-    }
-
     /**
      * Removes the appointment with the specified appointmentId.
      *

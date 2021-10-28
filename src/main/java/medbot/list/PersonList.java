@@ -20,11 +20,6 @@ public abstract class PersonList {
     private final SortedMap<Integer, Person> persons = new TreeMap<>();
     private int lastId = 1;
 
-    public int size() {
-        return persons.size();
-    }
-
-
     /**
      * Adds the given person into the person list, allocates an id to the person and returns the id value.
      *

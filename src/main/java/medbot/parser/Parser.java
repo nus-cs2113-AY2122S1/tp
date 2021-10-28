@@ -36,10 +36,6 @@ public abstract class Parser {
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
     private static final String ERROR_NO_VIEW_FOUND = "Unidentified view." + END_LINE;
-
-    private static final String ERROR_PATIENT_ID_NOT_SPECIFIED = "Patient ID not specified." + END_LINE;
-    private static final String ERROR_STAFF_ID_NOT_SPECIFIED = "Staff ID not specified." + END_LINE;
-
     private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code." + END_LINE;
 
     private static ViewType viewType = ViewType.PATIENT_INFO;
