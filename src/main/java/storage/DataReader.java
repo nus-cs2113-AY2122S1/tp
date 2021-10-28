@@ -19,11 +19,11 @@ public class DataReader {
             File dataFile = new File(dataFilePath.toString());
 
             sc = new Scanner(dataFile);
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new FileNotFoundException("Cannot find the task data file");
         }
 
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             fileContents.add(sc.nextLine().strip());
         }
 

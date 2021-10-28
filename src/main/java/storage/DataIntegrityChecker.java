@@ -14,11 +14,11 @@ public class DataIntegrityChecker {
     public static void check() throws IOException {
         Path dataFolderPath = Paths.get(DataLocation.rootDirectory, DataLocation.dataLocation);
         boolean directoryExists = Files.exists(dataFolderPath);
-        if(!directoryExists) {
+        if (!directoryExists) {
             Files.createDirectory(dataFolderPath);
         }
 
-        for(String filename : DataLocation.dataFilenames.values()) {
+        for (String filename : DataLocation.dataFilenames.values()) {
             Path dataFilePath = Paths.get(dataFolderPath.toString(), filename);
             boolean dataFileExists = Files.exists(dataFilePath);
 

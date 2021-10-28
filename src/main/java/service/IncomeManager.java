@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class IncomeManager implements LoadableManager{
+public class IncomeManager implements LoadableManager {
 
     private static IncomeManager incomeMgr;
     private String fileLabel;
@@ -59,7 +59,7 @@ public class IncomeManager implements LoadableManager{
 
     @Override
     public void parse(String[] fileString) {
-        for(String line : fileString) {
+        for (String line : fileString) {
             String[] splitLine = line.split(";");
 
             String name = splitLine[0];

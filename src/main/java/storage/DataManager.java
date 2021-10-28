@@ -29,7 +29,7 @@ public class DataManager {
     public void loadAllManagers() throws IOException {
         DataIntegrityChecker.check();
 
-        for(LoadableManager mgr : mgrs) {
+        for (LoadableManager mgr : mgrs) {
             String label = mgr.getFileLabel();
             String filename = DataLocation.dataFilenames.get(label);
 
@@ -41,7 +41,7 @@ public class DataManager {
     public void write() throws IOException {
         DataIntegrityChecker.check();
 
-        for(LoadableManager mgr : mgrs) {
+        for (LoadableManager mgr : mgrs) {
             String label = mgr.getFileLabel();
             String filename = DataLocation.dataFilenames.get(label);
             String dataString = mgr.toFileString();

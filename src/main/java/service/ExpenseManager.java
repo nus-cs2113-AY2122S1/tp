@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ExpenseManager implements LoadableManager{
+public class ExpenseManager implements LoadableManager {
 
     private static ExpenseManager expenseMgr;
     private String fileLabel;
@@ -24,6 +24,7 @@ public class ExpenseManager implements LoadableManager{
         }
         return expenseMgr;
     }
+
     public void addExpense(String expenseName, double expenseValue) {
         Format f = new SimpleDateFormat("dd/MM/yy");
         String today = f.format(new Date());
@@ -52,7 +53,7 @@ public class ExpenseManager implements LoadableManager{
 
     @Override
     public void parse(String[] fileString) {
-        for(String line : fileString) {
+        for (String line : fileString) {
             String[] splitLine = line.split(";");
 
             String name = splitLine[0];

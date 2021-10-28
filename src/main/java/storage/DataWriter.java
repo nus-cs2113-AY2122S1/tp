@@ -16,7 +16,7 @@ public class DataWriter {
             FileWriter fw = new FileWriter(dataFilePath.toString());
             fw.write(data);
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new IOException("Cannot write to task data file.");
         }
     }

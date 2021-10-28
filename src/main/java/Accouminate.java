@@ -22,7 +22,7 @@ public class Accouminate {
 
         try {
             dataMgr.loadAllManagers();
-        } catch(IOException e) {
+        } catch (IOException e) {
             ui.printErrorMessage(e.getMessage());
             return;
         }

@@ -6,7 +6,7 @@ import terminal.Ui;
 
 import java.util.ArrayList;
 
-public class BudgetManager implements LoadableManager{
+public class BudgetManager implements LoadableManager {
 
     private static BudgetManager budgetMgr;
     private String fileLabel;
@@ -62,7 +62,7 @@ public class BudgetManager implements LoadableManager{
 
     @Override
     public void parse(String[] fileString) {
-        if(fileString.length != 0) {
+        if (fileString.length != 0) {
             Double budget = Double.parseDouble(fileString[0]);
             addBudget(budget);
         }
