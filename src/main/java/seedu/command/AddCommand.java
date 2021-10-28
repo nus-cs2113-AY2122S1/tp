@@ -30,6 +30,9 @@ public class AddCommand extends Command {
     private final AddFlag flag;
     public AddUI addUI = new AddUI();
 
+    public static final String commandSyntax = "add";
+    public static final String commandAction = "Add modules or tasks to the Timetable";
+
     public AddCommand(Timetable timetable, AddFlag flag) {
         this.semester = timetable.getSemester();
         this.timetable = timetable;
@@ -109,6 +112,10 @@ public class AddCommand extends Command {
         for (Lesson lesson : lessons) {
             if (lesson.getLessonType().equals(lessonType)) {
                 completeList.add(lesson);
+            } else if (lessonType == LECTURE) {
+                if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
+                    completeList.add(lesson);
+                }
             }
         }
         Collections.sort(completeList, new ClassNumComparator());

@@ -7,6 +7,10 @@ import seedu.ui.TextUi;
 import java.util.logging.Logger;
 
 public class ShowCommand extends Command {
+
+    public static final String commandSyntax = "show <MODULE_CODE>";
+    public static final String commandAction = "Displays the module's information and S/U-ability";
+
     private static Logger logger = Logger.getLogger("");
 
     private final String searchTerm;

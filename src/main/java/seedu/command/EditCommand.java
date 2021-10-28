@@ -8,6 +8,10 @@ import seedu.ui.TextUi;
 import java.util.ArrayList;
 
 public class EditCommand extends Command {
+
+    public static final String commandSyntax = "edit";
+    public static final String commandAction = "Edit a personal task in the timetable";
+
     private static final int ONE = 1;
 
     Timetable tt;
