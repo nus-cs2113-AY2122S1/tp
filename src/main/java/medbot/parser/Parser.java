@@ -10,6 +10,7 @@ import medbot.command.SwitchCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.utilities.ViewType;
 
+//@@author Kureans
 public abstract class Parser {
     private static final String END_LINE = System.lineSeparator();
     private static final String EMPTY_STRING = "";

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+//@@author Kureans
+
 public class PersonalAppointmentList {
     private static final String ERROR_APPOINTMENT_ID_NOT_SET = "Appointment ID is not set.";
     private static final String ERROR_ADD_APPOINTMENT_CLASH = "New appointment clashes with another appointment.";

@@ -1,5 +1,6 @@
 package medbot.ui;
 
+//@@author Kureans
 public abstract class PersonUi {
     protected static final String END_LINE = System.lineSeparator();
     protected static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
@@ -59,6 +60,7 @@ public abstract class PersonUi {
                 + "delete " + uppercasePerson + "_ID" + END_LINE;
     }
 
+    //@@author EricBryann
     public static String getArchiveHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
         return "Archive a " + person + " from the list." + END_LINE

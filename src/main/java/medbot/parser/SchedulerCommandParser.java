@@ -121,7 +121,6 @@ public abstract class SchedulerCommandParser {
     private static Command parseFindAppointmentCommand(String userInput) throws MedBotParserException {
         String[] attributeStrings = ParserUtils.getParametersWithoutSpecifiers(userInput).toArray(new String[0]);
         String[] attributeSpecifiers = ParserUtils.getSpecifiers(userInput);
-        //Todo: print corresponding error message for certain types of incorrect inputs
 
         assert (attributeSpecifiers.length == 1 || attributeSpecifiers.length == 2);
         assert (attributeStrings.length == 1 || attributeStrings.length == 2);

@@ -5,7 +5,7 @@ import medbot.ui.Ui;
 import medbot.exceptions.MedBotException;
 import medbot.utilities.ViewType;
 
-
+//@@author Kureans
 public class HelpCommand extends Command {
 
     private CommandType commandType = null;

@@ -454,6 +454,7 @@ public class Ui {
         return "Get the current viewType." + END_LINE + "Format: get view" + END_LINE;
     }
 
+    //@@author Kureans
     /**
      * Utility function that performs a pseudo-clear of the console.
      */
