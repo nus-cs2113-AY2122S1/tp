@@ -23,16 +23,20 @@ public class Ui {
      * @return Non-empty user input.
      */
     public String getUserInput() {
+        return getUserInput(INPUT_PROMPT, false);
+    }
+
+    public String getUserInput(String inputPrompt, boolean allowEmpty) {
         String input;
         do {
             System.out.print(INPUT_PROMPT);
             input = scanner.nextLine();
-        } while (input.trim().isEmpty());
-
-        assert !input.isEmpty();
+        } while (input.trim().isEmpty() && !allowEmpty);
 
         return input;
     }
+
+
 
     /**
      * Prints message within borders.
