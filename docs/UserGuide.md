@@ -16,6 +16,15 @@ and guide you to easily manage your **ConTech** Book.
 usernames when working with colleagues, or by importing hundreds of contacts with just one simple command.
 <br/>
 
+## How to use the User Guide
+
+To make full use of the user guide, we have provided a table of contents with their hyperlinks. This would allow you 
+to quickly access portions of the guide you require. 
+
+However, for first time users, you are highly encouraged to go through the user guide in order, from the top to 
+bottom. This is because the guide is also written in a specific order to allow you to maximise your understanding 
+when learning how to use **ConTech**.
+
 * **[Quick Start](#start)**
 * **[Features](#features)**
     * **[Contact flags : `-flag`](#flag)**
