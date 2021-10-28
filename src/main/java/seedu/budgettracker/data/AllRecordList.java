@@ -21,7 +21,7 @@ public class AllRecordList {
 
     public static String storageDirectory;
     private final Hashtable<Integer, RecordList> allRecordList;
-    private final int year;
+    protected int year;
 
     /**
      * Constructor that creates 12 RecordLists upon construction.
@@ -41,6 +41,14 @@ public class AllRecordList {
     private void saveToStorage(String storageDirectory) {
         WriteToTextFile textFileWriter = new WriteToTextFile();
         textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     /**
