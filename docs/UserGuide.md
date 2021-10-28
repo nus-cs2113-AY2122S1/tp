@@ -350,17 +350,42 @@ ____________________________________________________________
 
 <a name="import"></a>
 ### Importing contacts: `import`
-Import contacts from a CSV text file into your contact list. 
+Import contacts from a comma-separated value (CSV) text file into your contact list. 
 
-Usage: `import`
+Command format: `import`
 
 - Data to be imported should be stored in the file `data/import.txt`.
-- Invalid or corrupt data will not be imported into the contact list and will be discarded.
-- Duplicate contacts will trigger a confirmation message, allowing the user to choose if the duplicate contact should be added.
+- Data to be imported should adhere to the following format:
+  - CSV for **six** fields in the order of `NAME,GITHUB,LINKEDIN,TELEGRAM,TWITTER,EMAIL`
+  - For values that are empty, a `null` has to be specified.
+```
+Le Zong,lezongmun,null,lezongg,null,lezongmun@gmail.com
+marcus,null,null,null,null,null
+```
+- Invalid or corrupt data will not be imported into the contact list and will be discarded. Their line number in the
+  `import.txt` will be specified for convenience in identifying problems.
+- However, there is a limitation that duplicates will not be checked for when performing contact imports. Do import 
+  with caution.
 
 Expected outcome of usage:
+```
+import
+data/import.txt:3 - "andre,null" is corrupted and not loaded.
+data/import.txt:5 - There is an invalid field.
+____________________________________________________________
+The github username is not correctly formatted,
+Rules for Github username :
+* Only contain alphanumeric characters or hyphens
+* Only lowercase allowed
+* Maximum 39 characters allowed
+* Cannot have multiple consecutive hyphens
+* Cannot begin or end with a hyphen
+____________________________________________________________
 
-{to be added}
+____________________________________________________________
+ConTech has successfully imported 4 lines
+____________________________________________________________
+```
 
 <a name="help"></a>
 ### Viewing help: `help`
