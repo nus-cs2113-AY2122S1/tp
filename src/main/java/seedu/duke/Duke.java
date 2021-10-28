@@ -1,10 +1,12 @@
 package seedu.duke;
 
+import java.io.IOException;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
+import seedu.duke.local.DataManager;
 import seedu.duke.parser.CommandParser;
-import seedu.duke.storage.FileCreater;
+import seedu.duke.storage.FileCreator;
 import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
@@ -21,8 +23,11 @@ public class Duke {
     public Duke() {
         in = new Scanner(System.in);
         ui = new Ui();
+
+        DataManager dataManager = new DataManager();
+        taskManager = new TaskManager(dataManager);
+
         reminderManager = new ReminderManager();
-        taskManager = new TaskManager();
     }
 
     public String readInput() {
@@ -54,8 +59,6 @@ public class Duke {
 
         Command userCommand;
         CommandResult commandResult = null;
-
-        FileCreater.createAll();
 
         do {
 
