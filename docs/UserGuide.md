@@ -10,13 +10,18 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
    2. [Tasks](#22-tasks)
 3. [General Commands](#3-general-commands)
    1. [Help](#31-help)
-   2. [Exiting the program](#32-exiting-the-program)
+   3. [List all Events](#32-listing-events-tasks-or-members)
+   2. [Exiting the program](#33-exiting-the-program)
 4. [Event Commands](#4-event-commands)
    1. [Add an event](#41-add-an-event)
    2. [Select an event](#42-select-an-event)
    3. [Mark an event as done](#43-mark-an-event-as-done)
    4. [Mark an event as undone](#44-mark-an-event-as-undone)
    5. [Delete an event](#45-delete-an-event)
+   10. [Delete all Events](#46-delete-all-events)
+   6. [Find Event(s) based on keywords(s)](#47-find-events-based-on-keywords)
+   8. [Display next upcoming Event](#48-display-next-upcoming-event)
+   9. [Update an Event](#49-update-an-event)
 5. [Task Commands](#5-task-commands)
    1. [Add a task](#51-add-a-task)
    2. [Mark a task as done](#52-mark-a-task-as-done)
@@ -64,7 +69,7 @@ The following two tables show the fields which **SLAM** works with in managing e
 
 | **Optional Fields** | Description                      |
 | ------------------- | -------------------------------- |
-| Title | The title of the event                         |
+| Description | A brief description of the event                         |
 
 ### 2.2 Tasks
 The following two tables show the fields which **SLAM** works with in managing the tasks you can add and keep track of under each event created.
@@ -91,8 +96,83 @@ This allows you to quickly view all the available commands and how to use them, 
 
 **Format:** `help`
 
-### 3.2 Exiting the program
-Allows you to safely terminate the program.
+### 3.2 Listing Events, Tasks or Members
+You may use this feature of **SLAM** to view the desired selection of your **SLAM** database. 
+
+You may choose to view all your scheduled `events` in SLAM. SLAM sorts this chronologically for you so you don't have to. 
+
+**Format:** `list`
+
+**Example:** 
+```
+> list
+```
+
+```
+OVERALL SCHEDULE
+=======================
+1. [E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+2. [E][ ] Faculty Funfair (at: 20 Mar 2022 - 16:00)
+
+FURTHER COMMANDS
+-----------------------
+To list Task: list [Event Index] -t
+To list Members of a Task: list [Event Index] t/[Task Index]
+--------END OF LIST-----------
+```
+
+💡 `list` can also be used to display all members in your current roster. 
+
+**Format:** `list -m`
+
+**Example:** 
+```
+> list -m
+```
+
+```
+List of members in MemberRoster
+1. JOHN DOE
+2. JANE DOE
+--------END OF LIST-----------
+```
+
+💡 You may also choose to view all the `tasks` you have assigned to any specified event.
+
+**Format:** `list EVENT_INDEX -t`
+
+**Example:** `list 1 -t`
+
+**Expected Output:** 
+```
+> list 1 -t
+```
+```
+Event: Tembusu Concert
+========================
+1. [T][X] Buy stage lights (by: 10 Feb 2022 - 22:00)
+2. [T][ ] Stage layout meeting (by: 12 Feb 2022 - 20:00)
+--------END OF LIST-----------
+```
+
+💡 **SLAM** also allows you to choose to **view all the assigned members for a particular task** too.
+
+**Format:** `list EVENT_INDEX t/TASK_INDEX`
+
+**Example:** `list 1 t/1`
+
+**Expected Output:**
+```
+Event: Tembusu Concert
+Task: Buy stage lights
+=======================
+1. JOHN DOE
+2. JANE DOE
+--------END OF LIST-----------
+```
+
+### 3.3 Exiting the program
+This allows you to safely terminate the program.
 
 **Format:** `bye` 
 
@@ -132,17 +212,49 @@ Tasks:
 
 ### 4.4 Mark an Event as `undone`
 
-### 4.5 Delete an Event 
+### 4.5 Delete an Event
+Deletes an event from the list.
 
-### 5.6 Find Event(s) based on keyword(s)
+**Format:** `delete -e EVENT_ID`
 
-### 4.7 List all Events
+**Example:** `delete -e 1`
+
+> 🚨 If you choose to `delete` an event, all of its associated tasks will be deleted too.
+
+**Expected Output:**
+```
+> delete -e 1
+```
+```
+This event has been removed: Tembusu Concert
+```
+### 4.6 Delete all Events
+This allows you to delete all events.
+
+> 🚨 As this can potentially affect a huge amount of your data, the program will confirm with you again if you want to delete all events.
+
+**Format:** `delete all`
+
+After entering `delete all`, this is what you will see:
+
+```
+> delete all
+```
+```
+Are you sure you want to delete all events? (Y/N)
+> Y
+I have deleted everything!
+```
+> 🚨 Once you confirmed that you want to delete all events, the action is irreversible!
+
+[Back to table of contents](#table-of-contents)
+
+### 4.7 Find Event(s) based on keyword(s)
 
 ### 4.8 Display next upcoming Event
 
 ### 4.9 Update an Event
 
-[Back to table of contents](#table-of-contents)
 
 ---
 
@@ -180,12 +292,53 @@ This section contains the available commands for managing members in `SLAM`.
 
 ## 8. FAQ
 
-**Q**: How do I transfer my data to another computer? 
+>**Q**: How do I transfer my data to another computer? 
+>
+>**A**: You can transfer your data to another computer by copying the `data` folder found in the directory where SLAM was used, and pasting it in the directory of the device where **SLAM** is intended to be run.
 
-**A**: {your answer here}
+>**Q**: Can I delete all members from my current roster using `delete all`? 
+> 
+>**A**: The current verson of **SLAM** (2.0) does not allow for this. We are working on this on a future update for v2.1.
+
+>**Q**: Will deleting a member from my roster remove that member from all tasks he/she is assigned to? 
+>
+>**A**: SLAM 2.0 does not support this functionality and we are working on a fix for this for our v2.1 update. Hang on tight in the meanwhile and ensure your members produce work for you before kicking them out! 😉
 
 [Back to table of contents](#table-of-contents)
 
 ## 9. Command Summary
+
+### General commands
+| Command                   | Format                                              |
+|---------------------------|-----------------------------------------------------|
+| Display user manual       | `help`                                              |
+| List events/members/tasks | For events: `list`<br />For tasks: `list EVENT_INDEX -t`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
+| Exit program              | `bye`                                               |
+
+### Event commands
+| Command               | Format                                              |
+|-----------------------|-----------------------------------------------------|
+| Add an event          | `add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET` |
+| Delete an event       | `delete -e INDEX`                                   |
+| Delete all events     | `delete all`                                        |
+| Select an event       | `select -e INDEX`                                   | 
+| Find event(s)         | `find EVENT_KEYWORD(S)`                             |
+| Mark event as done    | `done -e INDEX`                                     | 
+| Un-mark event as done | `undo -e INDEX`                                     |
+
+### Task commands
+| Command               | Format                        |
+|-----------------------|-------------------------------|
+| Add a task            | `add -t n/TITLE d/dd-MM-yyyy` |
+| Delete a task         | `delete -t INDEX`             | 
+| Select a task         | `select -t INDEX`             |
+| Mark a task as done   | `done -t INDEX`               |
+| Un-mark a task as done| `undo -t INDEX`               |
+
+### Member commands
+| Command         | Format                  |
+|-----------------|-------------------------|
+| Add a member    | `add -m MEMBER_NAME`    | 
+| Delete a member | `delete -m MEMBER_NAME` |
 
 [Back to table of contents](#table-of-contents)

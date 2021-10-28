@@ -21,6 +21,8 @@ public class Ui {
             + "\t - Add an event to the schedule\n\n"
             + "delete -e INDEX\n"
             + "\t - Delete an event given its index\n\n"
+            + "delete all\n"
+            + "\t - Delete all events in your schedule\n\n"
             + "select -e INDEX\n"
             + "\t - Select an event and display its details\n\n"
             + "find EVENT_KEYWORD(S)\n"
