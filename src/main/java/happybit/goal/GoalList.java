@@ -376,12 +376,18 @@ public class GoalList {
      * @param newName New goal or habit name given by user.
      * @throws HaBitCommandException If old and new names are identical.
      */
-    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException{
+    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException {
         if (oldName.equals(newName)) {
             throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
         }
     }
 
+    /**
+     * Checks name of new goal being added by user to ensure it is not present in their goal list.
+     *
+     * @param newName Name of new goal being aded in
+     * @return True if name already exists, False otherwise
+     */
     private boolean duplicateInGoalList(String newName) {
         for (Goal goal : goalList) {
             if (goal.getGoalName().equals(newName)) {

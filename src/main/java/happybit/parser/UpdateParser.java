@@ -52,12 +52,22 @@ public class UpdateParser extends Parser {
         return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
     }
 
+    /**
+     * Parser to parse user's command of updating interval.
+     *
+     * @param commandInstruction Input from user.
+     * @return A Command instance for UpdateHabitIntervalCommand with the goalIndex, habitIndex and interval
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly
+     */
     public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
         String[] parameters = splitInput(commandInstruction);
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);
         int interval = getInterval(parameters);
+        assert (goalIndex > 0);
+        assert (habitIndex > 0);
+        assert (interval > 0);
         return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
     }
 

@@ -236,7 +236,7 @@ public class Habit {
     }
 
     /**
-     * Returns consecutive streak for current habit.
+     * Returns longest consecutive streak for current habit.
      *
      * @return Longest chain streak for the habit
      */
