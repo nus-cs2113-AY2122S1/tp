@@ -10,6 +10,7 @@ view
 edit
 find
 delete
+switch
 exit
 archive
 unarchive
@@ -18,13 +19,12 @@ get view
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
-*Note that all commands will remove any '|' inputs for format parsing purposes
+*Note that all commands will remove any '|' inputs for format parsing purposes. For 
+examples of the expected output, please refer to the actual user guide.
 
 Add a patient to the patient’s list.
 Format:
 add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
-Expected output:
-Added patient with patient ID: PATIENT_ID
 
 Incorrect IC number format.
 
