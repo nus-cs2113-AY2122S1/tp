@@ -1,4 +1,4 @@
-~~# User Guide
+# User Guide
 
 NUS Buddy is a **fast, flexible and unobtrusive weekly planner**.
 Designed specifically for NUS students, it includes an intuitive **task and lesson manager**, as well as a **module planner** 
