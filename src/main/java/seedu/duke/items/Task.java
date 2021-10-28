@@ -59,6 +59,7 @@ public class Task extends Item {
         for (Member member : memberList) {
             members.append(counter).append(" ");
             members.append(member).append("\n");
+            counter++;
         }
         return members.toString();
     }
