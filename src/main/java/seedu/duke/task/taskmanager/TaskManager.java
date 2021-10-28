@@ -108,7 +108,7 @@ public class TaskManager implements Subject {
 
     public void refreshListDates() {
         for (Task task : taskList) {
-            if (task.getListDate().isBefore(LocalDateTime.now())) {
+            if (task.getRecurrence() != RecurrenceEnum.NONE && task.getListDate().isBefore(LocalDateTime.now())) {
                 task.refreshDate();
             }
         }
