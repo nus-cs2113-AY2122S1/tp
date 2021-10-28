@@ -20,8 +20,8 @@ public class SchedulerUi {
     }
 
     public static String getEditSchedulerHelpMessage() {
-        return "Edit an appointment’s information. MedBot will check if the edited appointment clashes with " +
-                "others and display an error message if it does." + END_LINE
+        return "Edit an appointment’s information. MedBot will check if the edited appointment clashes with "
+                + "others and display an error message if it does." + END_LINE
                 + "Format: edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]" + END_LINE;
     }
 
@@ -65,7 +65,8 @@ public class SchedulerUi {
                 + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
     }
 
     public static String getFindAppointmentListMessage(String appointmentString) {

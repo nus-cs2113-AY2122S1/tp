@@ -4,7 +4,9 @@ import medbot.parser.Parser;
 import medbot.Scheduler;
 import medbot.ui.Ui;
 import medbot.utilities.ViewType;
+
 //@@author Kureans
+
 public class SwitchCommand extends Command {
     private ViewType newViewType = null;
 
