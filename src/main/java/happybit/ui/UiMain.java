@@ -41,7 +41,7 @@ public class UiMain extends UiManager {
     private static final String MESSAGE_RETURN = "Press enter to return to command mode...\n";
     private static final String MESSAGE_DUE_HABITS = "These are the habit(s) that you have yet to complete:";
     private static final String HABIT_DETAILS = "%1$s) %2$s" + LS;
-    private static final int WAIT_TIME_IN_SECONDS = 2;
+    private static final int WAIT_TIME_IN_SECONDS = 3;
 
     protected GoalList goalList;
     protected PrintManager printManager;
