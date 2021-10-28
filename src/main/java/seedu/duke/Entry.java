@@ -14,6 +14,9 @@ import seedu.duke.command.FindMember;
 import seedu.duke.command.FindTraining;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.storage.TrainingStorage;
+import seedu.duke.storage.MemberStorage;
+import seedu.duke.storage.AttendanceStorage;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
@@ -24,22 +27,25 @@ public class Entry {
     private static final AttendanceList attendanceList = new AttendanceList();
 
     /**
+     * Method run on start-up that reads in any existing files and copies their value into the respective lists.
+     */
+    public static void initializeFiles() {
+        MemberStorage.setupMemberFile(members);
+        AttendanceStorage.setUpAttendanceStorage(attendanceList);
+        TrainingStorage.setupTrainingFile(trainings);
+    }
+
+    /**
      * Returns void. Function is responsible for adding different Tasks to the task list.
      *
      * @param entry user raw data input
-     * @param flag  indicates whether the program is run the first time
      * @throws IndexOutOfBoundsException if user keys in done [number] when there is no such task.
      */
-    public static void addEntry(String entry, int flag) throws NullPointerException {
+    public static void addEntry(String entry) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
         int trainingIndex = -1;
         int memberIndex = -1;
         int attendanceIndex = -1;
-
-        if (flag == 0) {
-            MemberStorage.setupMemberFile(members);
-            AttendanceStorage.setUpAttendanceStorage(attendanceList);
-        }
 
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:

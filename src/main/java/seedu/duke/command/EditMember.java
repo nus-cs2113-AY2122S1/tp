@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
 import seedu.duke.Ui;
@@ -47,7 +47,7 @@ public class EditMember {
 
             members.getMemberList().set(index - 1, memberToChange);
             Ui.printEditMessage(oldMember, memberToChange);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
 
         } catch (AssertionError e) {

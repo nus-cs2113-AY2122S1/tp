@@ -1,5 +1,8 @@
 package seedu.duke.command;
 
+import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
+
+import java.io.File;
 import seedu.duke.command.exception.InvalidAddTrainingException;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
@@ -29,8 +32,9 @@ public class AddTraining {
             boolean validTraining = verifyTrainingDetails(trainingSched);
             if (validTraining) {
                 trainings.addTrainingSchedule(trainingSched);
-                //Save Data
                 Ui.printAddedTrainingMessage(trainingSched);
+                File trainingFile = new File("CCATrainings.csv");
+                writeTrainingFile(trainingFile, trainings);
             }
         } catch (InvalidAddTrainingException e) {
             System.out.println(e.getMessage());

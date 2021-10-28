@@ -23,18 +23,6 @@ class ParserTest {
         testMemberList = new MemberList(memberList);
     }
 
-    /*@Test
-    void failedMakeMemberEntry() {
-        final String input = "add /m asd";
-        Parser.makeMemberEntry(testMemberList, input);
-        try {
-            assertEquals(testMemberList.getMember(2).getName(), "");
-            assertEquals(testMemberList.getMember(2).getStudentNumber(), "");
-        } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
-
     @Test
     void invalidKeyword() {
         final String input = "ad ads dwd";

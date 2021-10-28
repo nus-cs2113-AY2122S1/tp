@@ -1,5 +1,8 @@
 package seedu.duke.command;
 
+import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
+
+import java.io.File;
 import java.util.Scanner;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
@@ -37,6 +40,8 @@ public class DeleteTraining {
             TrainingSchedule toDelete = trainings.deleteTrainingSchedule(index);
             trainings.updateIndex();
             Ui.printDeletedTrainingMessage(toDelete);
+            File trainingFile = new File("CCATrainings.csv");
+            writeTrainingFile(trainingFile, trainings);
             //Update save file
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid index number");
