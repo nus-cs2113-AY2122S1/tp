@@ -41,6 +41,16 @@ public class Goal {
     }
 
     /**
+     * Setter for type of goal.
+     * Used to edit the type of the goal.
+     *
+     * @param goalType New type the goal is to be updated with.
+     */
+    public void setGoalType(GoalType goalType) {
+        this.goalType = goalType;
+    }
+
+    /**
      * Getter for name of goal.
      *
      * @return Name of goal.
@@ -181,7 +191,7 @@ public class Goal {
      *
      * @return String of the goalType name.
      */
-    public String getGoalType() {
+    public String getGoalTypeStr() {
         switch (this.goalType) {
         case SLEEP:
             return "Sleep";
@@ -194,6 +204,15 @@ public class Goal {
         default:
             return "Default";
         }
+    }
+
+    /**
+     * Gets the goalType.
+     *
+     * @return GoalType of Goal.
+     */
+    public GoalType getGoalType() {
+        return this.goalType;
     }
 
     /**
