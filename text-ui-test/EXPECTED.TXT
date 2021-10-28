@@ -9,6 +9,7 @@ Welcome to
     |__|    /__/     \__\ /__/     \__\
 
 What can I do for you?
+Enter "help" to view the list of commands
 ------------------------------------------------------------
 $ ------------------------------------------------------------
 There are no modules in the list.
