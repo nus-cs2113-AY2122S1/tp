@@ -12,8 +12,10 @@ import java.util.Date;
 public class ExpenseManager implements LoadableManager{
 
     private static ExpenseManager expenseMgr;
+    private String fileLabel;
 
     private ExpenseManager() {
+        fileLabel = "expense";
     }
 
     public static ExpenseManager getExpenseMgr() {
@@ -49,12 +51,39 @@ public class ExpenseManager implements LoadableManager{
     }
 
     @Override
-    public void parse(String fileString) {
+    public void parse(String[] fileString) {
+        for(String line : fileString) {
+            String[] splitLine = line.split(";");
 
+            String name = splitLine[0];
+            System.out.println(line);
+            Double value = Double.parseDouble(splitLine[1]);
+            String date = splitLine[2];
+
+            Expense expense = new Expense(name, value, date);
+            ExpenseList.addExpense(expense);
+        }
     }
 
     @Override
-    public void toFileString() {
+    public String toFileString() {
+        String fileString = "";
+        ArrayList<Expense> expenses = ExpenseList.getExpenses();
 
+        for (int i = 0; i < expenses.size(); i++) {
+            Expense expense = expenses.get(i);
+            String name = expense.getDescription();
+            String value = ((Double)expense.getValue()).toString();
+            String date = expense.getDate();
+
+            fileString += String.format("%s;%s;%s\n", name, value, date);
+        }
+
+        return fileString;
+    }
+
+    @Override
+    public String getFileLabel() {
+        return fileLabel;
     }
 }

@@ -9,8 +9,10 @@ import java.util.ArrayList;
 public class BudgetManager implements LoadableManager{
 
     private static BudgetManager budgetMgr;
+    private String fileLabel;
 
     private BudgetManager() {
+        fileLabel = "budget";
     }
 
     public static BudgetManager getBudgetMgr() {
@@ -59,12 +61,22 @@ public class BudgetManager implements LoadableManager{
     }
 
     @Override
-    public void parse(String fileString) {
-
+    public void parse(String[] fileString) {
+        if(fileString.length != 0) {
+            Double budget = Double.parseDouble(fileString[0]);
+            addBudget(budget);
+        }
     }
 
     @Override
-    public void toFileString() {
+    public String toFileString() {
+        Budget budget = BudgetList.getBudgets().get(0);
+        Double budgetValue = budget.getValue();
+        return budgetValue.toString();
+    }
 
+    @Override
+    public String getFileLabel() {
+        return fileLabel;
     }
 }

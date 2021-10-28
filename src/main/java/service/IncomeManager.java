@@ -1,9 +1,13 @@
 package service;
 
+import entity.Expense;
+import entity.ExpenseList;
 import entity.Income;
 import entity.IncomeList;
+import storage.DataManager;
 import terminal.Ui;
 
+import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,8 +16,10 @@ import java.util.Date;
 public class IncomeManager implements LoadableManager{
 
     private static IncomeManager incomeMgr;
+    private String fileLabel;
 
     private IncomeManager() {
+        fileLabel = "income";
     }
 
     public static IncomeManager getIncomeManager() {
@@ -52,12 +58,38 @@ public class IncomeManager implements LoadableManager{
     }
 
     @Override
-    public void parse(String fileString) {
+    public void parse(String[] fileString) {
+        for(String line : fileString) {
+            String[] splitLine = line.split(";");
 
+            String name = splitLine[0];
+            Double value = Double.parseDouble(splitLine[1]);
+            String date = splitLine[2];
+
+            Income income = new Income(name, value, date);
+            IncomeList.addIncome(income);
+        }
     }
 
     @Override
-    public void toFileString() {
+    public String toFileString() {
+        String fileString = "";
+        ArrayList<Income> incomes = IncomeList.getIncomes();
 
+        for (int i = 0; i < incomes.size(); i++) {
+            Income income = incomes.get(i);
+            String name = income.getDescription();
+            String value = ((Double)income.getValue()).toString();
+            String date = income.getDate();
+
+            fileString += String.format("%s;%s;%s\n", name, value, date);
+        }
+
+        return fileString;
+    }
+
+    @Override
+    public String getFileLabel() {
+        return fileLabel;
     }
 }

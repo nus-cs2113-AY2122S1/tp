@@ -4,6 +4,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import service.ExpenseManager;
+import storage.DataManager;
 import terminal.Ui;
 
 import java.util.concurrent.Callable;
@@ -22,6 +23,7 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
         ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
+        DataManager dataMgr = DataManager.getDataMgr();
         String expenseName;
 
         try {
@@ -31,6 +33,7 @@ public class DeleteExpenseCommand implements Callable<Integer> {
             } else {
                 expenseMgr.deleteExpense(exclusive.id);
             }
+            dataMgr.write();
         } catch (Exception error) {
             ui.printMessage(deleteExpenseErrorMsg);
             return 1;
