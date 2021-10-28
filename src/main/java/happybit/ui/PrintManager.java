@@ -25,7 +25,10 @@ public class PrintManager {
     private static final String MSG_DELETE_HABIT = "The habit '%1$s' of goal '%2$s' has been deleted." + LS;
     private static final String MSG_DONE_HABIT = "The habit '%1$s' of goal '%2$s' has been completed for %3$s to %4$s."
             + LS + "The next interval will begin on %5$s" + LS;
-    private static final String MSG_UPDATE_GOAL_NAME = "The goal '%1$s' has been updated to '%2$s'." + LS;
+    private static final String MSG_UPDATE_GOAL_NAME = "The goal name '%1$s' has been updated to '%2$s'." + LS;
+    private static final String MSG_UPDATE_GOAL_TYPE = "The goal type '%1$s' has been updated to '%2$s'." + LS;
+    private static final String MSG_UPDATE_GOAL_END_DATE = "The goal end date of goal '%1$s' has been changed from "
+            + "'%2$s' to '%3$s'." + LS;
     private static final String MSG_UPDATE_HABIT_NAME = "The habit '%1$s' of goal '%2$s' has been changed to '%3$s'"
             + LS;
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
@@ -201,6 +204,18 @@ public class PrintManager {
     public void printUpdatedGoalName(String oldGoalDescription, String newGoalDescription) {
         printLine();
         System.out.printf(MSG_UPDATE_GOAL_NAME, oldGoalDescription, newGoalDescription);
+        printLine();
+    }
+
+    public void printUpdatedGoalType(String oldGoalTypeName, String newGoalTypeName) {
+        printLine();
+        System.out.printf(MSG_UPDATE_GOAL_TYPE, oldGoalTypeName, newGoalTypeName);
+        printLine();
+    }
+
+    public void printUpdatedGoalEndDate(String goalName, String oldGoalEndDate, String newGoalEndDate) {
+        printLine();
+        System.out.printf(MSG_UPDATE_GOAL_END_DATE, goalName, oldGoalEndDate, newGoalEndDate);
         printLine();
     }
 
@@ -416,7 +431,7 @@ public class PrintManager {
         for (int goalIndex = 0; goalIndex < numOfGoals; goalIndex++) {
             data[goalIndex][INDEX_INDEX] = String.valueOf(goalIndex + 1);
             data[goalIndex][GOAL_NAME_INDEX] = goals.get(goalIndex).getGoalName();
-            data[goalIndex][GOAL_TYPE_INDEX] = goals.get(goalIndex).getGoalType();
+            data[goalIndex][GOAL_TYPE_INDEX] = goals.get(goalIndex).getGoalTypeStr();
             data[goalIndex][GOAL_START_DATE_INDEX] = goals.get(goalIndex).getPrintableStartDate();
             data[goalIndex][GOAL_END_DATE_INDEX] = goals.get(goalIndex).getPrintableEndDate();
             data[goalIndex][GOAL_HABIT_NUM_INDEX] = String.valueOf(goals.get(goalIndex).getHabitListSize());

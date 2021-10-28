@@ -18,6 +18,6 @@ public class UpdateGoalEndDateCommand extends UpdateCommand {
 
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        goalList.updateGoalEndDate(goalIndex, newDate);
+        goalList.updateGoalEndDate(goalIndex, newDate, printManager);
     }
 }
