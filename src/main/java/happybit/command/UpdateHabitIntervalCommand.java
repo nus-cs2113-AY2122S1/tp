@@ -28,4 +28,15 @@ public class UpdateHabitIntervalCommand extends UpdateCommand {
         goalList.updateHabitIntervalFromGoal(goalIndex, habitIndex, newInterval, printManager);
     }
 
+    public int getGoalIndex() {
+        return goalIndex;
+    }
+
+    public int getHabitIndex() {
+        return habitIndex;
+    }
+
+    public int getNewInterval() {
+        return newInterval;
+    }
 }

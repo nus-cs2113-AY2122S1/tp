@@ -8,17 +8,6 @@ import happybit.exception.HaBitParserException;
 
 public class UpdateParser extends Parser {
 
-    private static final String GOAL_INDEX_FLAG = "g/";
-    private static final String HABIT_INDEX_FLAG = "h/";
-    private static final String INTERVAL_INDEX_FLAG = "i/";
-    private static final String ERROR_BLANK = "No instruction given.";
-    private static final String ERROR_NOT_NUM = "Expected a number.";
-    private static final String ERROR_INCOMPLETE = "Instruction incomplete or improper.";
-    private static final String ERROR_INVALID_GOAL_NUMBER = "Please enter a valid goal number";
-    private static final String ERROR_INVALID_HABIT_NUMBER = "Please enter a valid habit number";
-    private static final String ERROR_INVALID_INTERVAL_NUMBER = "Please enter a valid interval number";
-    private static final String ERROR_INVALID_COMMAND_FORMAT = "Could not access goal number. "
-            + "Please check your command format.";
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
@@ -26,6 +15,8 @@ public class UpdateParser extends Parser {
     private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
     private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
+    private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
     private static final int FLAG_LENGTH = 2;
 
     //todo S L A P more in the future; refer to AddParser
@@ -95,11 +86,11 @@ public class UpdateParser extends Parser {
     }
 
     private static int getHabitIndex(String[] parameters) throws HaBitParserException {
-        String strHabitIndex = getParameter(parameters, HABIT_INDEX_FLAG);
+        String strHabitIndex = getParameter(parameters, FLAG_HABIT_INDEX);
         if (strHabitIndex == null || strHabitIndex.equals(FLAG_HABIT_INDEX)) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+            throw new HaBitParserException(ERROR_HABIT_INDEX_FORMAT);
         }
-        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), ERROR_INVALID_HABIT_NUMBER) - 1;
+        return stringToInt(strHabitIndex.substring(FLAG_LENGTH), FLAG_HABIT_INDEX) - 1;
     }
 
     /**
@@ -135,11 +126,11 @@ public class UpdateParser extends Parser {
 
 
     private static int getInterval(String[] parameters) throws HaBitParserException {
-        String strInterval = getParameter(parameters, INTERVAL_INDEX_FLAG);
-        if (strInterval == null || strInterval.equals(INTERVAL_INDEX_FLAG)) {
-            throw new HaBitParserException(ERROR_INVALID_COMMAND_FORMAT);
+        String strInterval = getParameter(parameters, FLAG_INTERVAL);
+        if (strInterval == null || strInterval.equals(FLAG_INTERVAL)) {
+            throw new HaBitParserException(ERROR_INTERVAL_FORMAT);
         }
-        return stringToInt(strInterval.substring(FLAG_LENGTH), ERROR_INVALID_INTERVAL_NUMBER);
+        return stringToInt(strInterval.substring(FLAG_LENGTH), FLAG_INTERVAL);
     }
 
     /**
@@ -154,9 +145,11 @@ public class UpdateParser extends Parser {
             return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
             if (flag.equals(FLAG_GOAL_INDEX)) {
-                throw new HaBitParserException(UpdateParser.ERROR_GOAL_INDEX_NON_INTEGER);
+                throw new HaBitParserException(ERROR_GOAL_INDEX_NON_INTEGER);
             } else if (flag.equals(FLAG_HABIT_INDEX)) {
-                throw new HaBitParserException(UpdateParser.ERROR_HABIT_INDEX_NON_INTEGER);
+                throw new HaBitParserException(ERROR_HABIT_INDEX_NON_INTEGER);
+            } else if (flag.equals(FLAG_INTERVAL)) {
+                throw new HaBitParserException(ERROR_INTERVAL_NON_INTEGER);
             } else {
                 throw new HaBitParserException("Index has to be a number.");
             }

@@ -14,6 +14,8 @@ public class GoalList {
     private static final String ERROR_EMPTY_HABIT_LIST = "There are no habits listed under this goal!";
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
     private static final String ERROR_IDENTICAL_NEW_NAME = "There is no change in name.";
+    private static final String ERROR_DUPLICATE_HABIT_NAME = "This habit name is already present for this goal";
+    private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
@@ -97,7 +99,10 @@ public class GoalList {
      * @param goal Goal to be added.
      * @param printManager User Interface class for printing added goal.
      */
-    public void addGoal(Goal goal, PrintManager printManager) {
+    public void addGoal(Goal goal, PrintManager printManager) throws HaBitCommandException {
+        if (duplicateInGoalList(goal.getGoalName())) {
+            throw new HaBitCommandException(ERROR_DUPLICATE_GOAL_NAME);
+        }
         goalList.add(goal);
         printManager.printAddedGoal(goal.getDescription());
     }
@@ -124,6 +129,10 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
+        // check duplicate for currHabit
+        if (goal.duplicateInHabitList(habit.getHabitName())) {
+            throw new HaBitCommandException(ERROR_DUPLICATE_HABIT_NAME);
+        }
         Habit newHabit = updateHabitEndDate(goal, habit);
         newHabit.populateIntervalsDuringHabitCreation();
         goal.addHabit(newHabit);
@@ -371,9 +380,18 @@ public class GoalList {
      * @param newName New goal or habit name given by user.
      * @throws HaBitCommandException If old and new names are identical.
      */
-    private void compareNewNameWithOldName(String oldName,String newName)  throws HaBitCommandException {
+    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException{
         if (oldName.equals(newName)) {
             throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
         }
+    }
+
+    private boolean duplicateInGoalList(String newName) {
+        for (Goal goal : goalList) {
+            if (goal.getGoalName().equals(newName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
