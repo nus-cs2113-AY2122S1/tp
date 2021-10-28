@@ -3,7 +3,7 @@
 [-> WeeksAdapterFactory : create()
 activate WeeksAdapterFactory
 
-WeeksAdapterFactory --> WeeksAdapter** : create()
+WeeksAdapterFactory -> WeeksAdapter** : create()
 activate WeeksAdapter
 
 <-- WeeksAdapterFactory
