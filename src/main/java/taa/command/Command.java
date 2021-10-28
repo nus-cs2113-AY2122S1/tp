@@ -37,6 +37,7 @@ public abstract class Command {
     public static final String COMMAND_DELETE_COMMENT = "delete_comment";
     public static final String COMMAND_LIST_COMMENT = "list_comment";
     public static final String COMMAND_HELP = "help";
+    public static final String COMMAND_ARCHIVE = "archive";
 
     // Common messages
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
