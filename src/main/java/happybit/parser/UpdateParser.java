@@ -2,9 +2,11 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.UpdateGoalNameCommand;
+import happybit.command.UpdateGoalTypeCommand;
 import happybit.command.UpdateHabitIntervalCommand;
 import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
+import happybit.goal.GoalType;
 
 public class UpdateParser extends Parser {
 
@@ -12,12 +14,21 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
             + "Eg: n/Reach for the stars";
+    private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag set the new goal type. "
+            + "Eg: t/fd";
     private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
     private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
     private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
+    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+
     private static final int FLAG_LENGTH = 2;
+    private static final String SLEEP_LABEL = "sl";
+    private static final String FOOD_LABEL = "fd";
+    private static final String EXERCISE_LABEL = "ex";
+    private static final String STUDY_LABEL = "sd";
+    private static final String DEFAULT_LABEL = "df";
 
     //todo S L A P more in the future; refer to AddParser
 
@@ -34,6 +45,21 @@ public class UpdateParser extends Parser {
         int goalIndex = getGoalIndex(parameters);
         String newGoalName = getNewGoalName(parameters);
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
+    }
+
+    /**
+     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
+     *
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex and newGoalName.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     */
+    public static Command parseUpdateGoalTypeCommand(String input) throws HaBitParserException {
+        checkNoDescription(input);
+        String[] parameters = splitInput(input);
+        int goalIndex = getGoalIndex(parameters);
+        GoalType newGoalType = getNewGoalType(parameters);
+        return new UpdateGoalTypeCommand(goalIndex, newGoalType);
     }
 
     /**
@@ -109,6 +135,46 @@ public class UpdateParser extends Parser {
     }
 
     /**
+     * Gets the new goal type from user input. All leading and trailing whitespaces will be removed.
+     *
+     * @param parameters String array of command parameters.
+     * @return New goal type.
+     * @throws HaBitParserException If the new goal type or its flag is absent.
+     */
+    private static GoalType getNewGoalType(String[] parameters) throws HaBitParserException {
+        String strGoalType = getParameter(parameters, FLAG_GOAL_TYPE);
+        if (strGoalType == null || strGoalType.equals(FLAG_GOAL_TYPE)) {
+            throw new HaBitParserException(ERROR_GOAL_TYPE_FORMAT);
+        }
+        strGoalType = strGoalType.substring(FLAG_LENGTH).trim();
+        return getGoalType(strGoalType);
+    }
+
+    /**
+     * Gets Goal Type from a string label.
+     *
+     * @param label String containing label of goal type.
+     * @return Goal type corresponding to string label.
+     * @throws HaBitParserException If an invalid label is used.
+     */
+    private static GoalType getGoalType(String label) throws HaBitParserException {
+        switch (label) {
+        case SLEEP_LABEL:
+            return GoalType.SLEEP;
+        case FOOD_LABEL:
+            return GoalType.FOOD;
+        case EXERCISE_LABEL:
+            return GoalType.EXERCISE;
+        case STUDY_LABEL:
+            return GoalType.STUDY;
+        case DEFAULT_LABEL:
+            return GoalType.DEFAULT;
+        default:
+            throw new HaBitParserException(ERROR_GOAL_TYPE_LABEL);
+        }
+    }
+
+    /**
      * Gets the new habit name from user input. All leading and trailing whitespaces will be removed.
      *
      * @param parameters String array of command parameters.
@@ -144,13 +210,14 @@ public class UpdateParser extends Parser {
         try {
             return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
-            if (flag.equals(FLAG_GOAL_INDEX)) {
+            switch (flag) {
+            case FLAG_GOAL_INDEX:
                 throw new HaBitParserException(ERROR_GOAL_INDEX_NON_INTEGER);
-            } else if (flag.equals(FLAG_HABIT_INDEX)) {
+            case FLAG_HABIT_INDEX:
                 throw new HaBitParserException(ERROR_HABIT_INDEX_NON_INTEGER);
-            } else if (flag.equals(FLAG_INTERVAL)) {
+            case FLAG_INTERVAL:
                 throw new HaBitParserException(ERROR_INTERVAL_NON_INTEGER);
-            } else {
+            default:
                 throw new HaBitParserException("Index has to be a number.");
             }
         }
