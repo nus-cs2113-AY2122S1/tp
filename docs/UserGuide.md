@@ -49,7 +49,7 @@ The program will then attempt to save again the next time you run a command.
 
 ### Trips
 
-####_- Create New Trip_
+#### - Create New Trip
 
 Creates a new trip in the program.
 
@@ -81,7 +81,7 @@ Your trip to America on 02 Feb 2021 has been successfully added!
 
 <br />
 
-####- Open Trip
+#### - Open Trip
 
 In order to add, edit or delete expenses within a trip, you must first open the trip containing
 the expenses you wish to access.
@@ -100,7 +100,7 @@ America | 02 Feb 2021
 ```
 <br />
 
-####- Close Trips
+#### - Close Trips
 Closes the current trip you are in, allowing the `list` and `delete` command to be used.
 
 Only can be used if you have opened a trip.
@@ -117,7 +117,7 @@ America | 02 Feb 2021
 
 <br />
 
-####- List Trips
+#### - List Trips
 Lists down the trips that you have created. Note that no trip must be open when executing this command.
 
 The input syntax for list:
@@ -132,7 +132,7 @@ List of Trips:
 
 <br />
 
-####- Delete a Trip
+#### - Delete a Trip
 
 Deletes a trip from the program.
 
@@ -149,8 +149,8 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 ```
 <br />
 
-###Expenses
-####- Create Expense
+### Expenses
+#### - Create Expense
 Creates a new expense entry for the current trip. 
 
 A trip needs to open a trip to use this command.
@@ -224,7 +224,7 @@ Your expense has been added successfully
 
 <br />
 
-####- List Expenses
+#### - List Expenses
 
 List all expenses added to the current trip.
 
@@ -232,7 +232,7 @@ To view all expenses in a trip, ensure you are already inside a trip, then type 
 
 <br />
 
-####- View Expenses By Index
+#### - View Expenses By Index
 
 Show expense with corresponding index in the current trip. User must already be inside a trip and
 have at least 1 expense.
@@ -241,7 +241,7 @@ have at least 1 expense.
 
 <br />
 
-####- Filter Expenses By Attributes
+#### - Filter Expenses By Attributes
 
 To filter the list of expenses (i.e. only show expenses matching the entered attribute information), type
 
@@ -260,8 +260,8 @@ Note that the program currently only supports filtering using a single attribute
 
 <br />
 
-###Summary
-####- View Summary of expenses
+### Summary
+#### - View Summary of expenses
 Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
 
 ```summary```
