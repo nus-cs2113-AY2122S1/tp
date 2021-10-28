@@ -1,7 +1,7 @@
 # User Guide
 
 ## Table of Content
-* [Intro](#introducing-duke-cs2113t)
+* [Intro](#introduction)
 * [Getting Started](#getting-started)
 * [Features](#features)
 * [Commands](#commands)
@@ -34,17 +34,17 @@
 * [FAQ](#faq)
 * [Command summary](#command-summary)
 
-## Introduction
+## <a id="introduction"></a> Introduction
 
 Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a 
 Command Line Interface (CLI) for tech-savvy students who have trouble keeping track of their expenses.
 
-## Quick Start
+## <a id="getting-started"></a> Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Budget Tracker` from [here]().
 
-## Features
+## <a id="features"></a>Features
 
 1. Storage
 	Allows saving and loading of budget and loan data.
@@ -66,9 +66,9 @@ e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 
 <br />
 
-# Commands
+# <a id="commands"></a> Commands
 
-# `add`
+# &nbsp;&nbsp; `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
@@ -96,8 +96,9 @@ Expected outcome: Budget of $500.00 is added to the december of that particular 
 Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
-________________________
 <br />
+
+________________________
 
 ### `-e` : Add an expenditure
 
@@ -129,7 +130,12 @@ Date: 2021-08-20
 ========================================================
 ```
 
-### Adding a Loan: `add`
+<br />
+
+_________________________________________________________
+
+
+### `-l` : Add a Loan
 
 Adds a new loan to a month.
 
@@ -154,9 +160,19 @@ Date: 2021-08-20
 ========================================================
 ```
 
-## `edit` 
+<br />
+
+_________________________________________________________
+
+<br/>
+
+# &nbsp;&nbsp; `edit` 
 
 Edits a budget or expenditure entry.
+<br />
+
+_________________________________________________________
+
 
 ### Edit Budget: `edit`  
 
@@ -179,6 +195,10 @@ to $10000.
 
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
 
 ### Edit Expenditure: `edit` 
 
@@ -204,6 +224,10 @@ have been changed to $1000 with description of Chicken Rice.
 
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
 
 ### Edit Loan: `edit` 
 Edits the loan for a particular month.
@@ -228,8 +252,13 @@ Loan has been successfully edited!
 New values: Wei Hng         | $1000.0       | 2021-10-12       
 ========================================================
 ```
+<br />
 
-## `year`
+_________________________________________________________
+
+<br />
+
+# &nbsp;&nbsp; `year`
 
 ### Switching Database Year: `year`
 
@@ -250,12 +279,26 @@ Expected outcome: A message will be shown to alert the user that the database ha
 You are currently working on year 2020 database!
 ========================================================
 ```
+<br />
 
-## `find`
+_________________________________________________________
+
+
+#  &nbsp;&nbsp;`find`
 
 ### Finding a Particular Expenditure/Budget: `find`
 
-## `list`
+<br />
+
+_________________________________________________________
+
+<br/>
+
+# &nbsp;&nbsp;`list`
+
+<br />
+
+_________________________________________________________
 
 ### Listing all Budget & Expenditure: `list`
 
@@ -326,6 +369,10 @@ Your expenditures:
  None 
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
 
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
@@ -350,10 +397,18 @@ Your expenditures:
 1.Chicken Rice1          | $500.0             | 2021-10-13       
 ========================================================
 ```
+<br />
 
-## `delete`
+_________________________________________________________
+
+<br />
+
+# &nbsp;&nbsp; `delete`
 
 Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
+<br />
+
+_________________________________________________________
 
 ### `-b` - Delete a budget 
 
@@ -374,6 +429,10 @@ Successfully deleted the Budget for this month!
 Now the budget amount is 0.00!      
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
 
 ### `-e` - Delete (an) expenditure(s)
 
@@ -400,6 +459,10 @@ Successfully deleted Expenditure 4.chicken rice4          | $5.0               |
 Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
 
 ### `-l` - Delete (a) loan record(s)
 
@@ -426,25 +489,33 @@ Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-1
 Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
 ========================================================
 ```
+<br />
 
-## `stat`
+_________________________________________________________
+
+<br />
+
+# &nbsp;&nbsp; `stat`
 
 The command word `stat` display some statistics graphs and paramters about the expenditure for 
 the year or month.
 
-### `-b` : View Statistics for the Month
+_________________________________________________________
+<br />
 
 
-Display the statistics for a particular a particular month's budget and expenditure. 
+### `-e` : View Statistics for the Month by categories
 
-Format: `stat -b m/MONTH t/TYPE_OF_GRAPHICAL VIEW`
+
+Display the statistics for a particular month's budget and expenditure by categories. 
+
+Format: `stat -e m/MONTH`
 
 * The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
-* The `TYPE_OF_GRAPHICAL_VIEW` is ... 
 
 Example of usage:
 
-`stat -b m/10 t/1`
+`stat -e m/10`
 
 Expected outcome: A box plot of expenditure amount for october.
 
@@ -452,6 +523,11 @@ Expected outcome: A box plot of expenditure amount for october.
 ========================================================
 ========================================================
 ```
+<br />
+
+_________________________________________________________
+
+
 
 ### `-l` : View Statistics for the Year
 
@@ -487,7 +563,13 @@ Percentage of Money Spent in 2021
 
 `stat -l t/2`
 
-## `help`
+<br />
+
+_________________________________________________________
+
+<br />
+
+## &nbsp;&nbsp; `help`
  
 ### Command Guides: `help`
 
@@ -540,7 +622,13 @@ Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
 ========================================================
 ```
 
-## `bye`
+<br />
+
+_________________________________________________________
+
+<br />
+
+# &nbsp;&nbsp; `bye`
 
 ### Exiting the program: `bye`
  
