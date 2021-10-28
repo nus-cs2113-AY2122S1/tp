@@ -60,7 +60,7 @@ public class StorageManager {
      * @return error message of the relevant lines with errors in the storage text files
      * @throws FileNotFoundException if storage text files cannot be found
      */
-    public String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
+    private String loadStoragesAndGetErrorMessage(Scheduler scheduler) throws FileNotFoundException {
 
         return patientStorage.loadStorage(PATIENT, scheduler)
                 + staffStorage.loadStorage(STAFF, scheduler)
