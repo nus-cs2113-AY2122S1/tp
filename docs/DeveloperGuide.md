@@ -3,7 +3,7 @@
 ## Introduction
 
 MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
-It is an integrated solution that provides real-time tracking of stock, orders and prescribing of medication. The
+It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders. The
 purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.0.
 
 ## Acknowledgements
@@ -168,7 +168,7 @@ logic:
 > :warning: Warning
 > * Should there be an invalid command, `CommandParser` will throw `InvalidCommandException` and MediVault will display the error message using the `Ui` class.
 
-Given below is the sequence diagram for the interactions within the main application logic.
+Given below is the sequence diagram after `run()` is called for the interactions within the main application logic.
 
 ![MainLogicSequenceDiagram](diagrams/diagram_images/MainLogicSequenceDiagram.png)
 
