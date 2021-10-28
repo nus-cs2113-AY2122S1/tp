@@ -3,7 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clients.FindClientCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,11 +39,11 @@ public class FindClientCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the client(s) that matches your search\n" +
-                "1. Client ID: c001\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 93338333\n" +
-                "Email: bt@mail.com";
+        String expectedString = "This is the client(s) that matches your search\n"
+                + "1. Client ID: c001\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 93338333\n"
+                + "Email: bt@mail.com";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
@@ -58,15 +62,15 @@ public class FindClientCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the client(s) that matches your search\n" +
-                "1. Client ID: c001\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 93338333\n" +
-                "Email: bt@mail.com\n" + "\n" +
-                "2. Client ID: c002\n" +
-                "Name: Bo Tuan\n" +
-                "Contact Number: 56667888\n" +
-                "Email: bbt@mail.com";
+        String expectedString = "This is the client(s) that matches your search\n"
+                + "1. Client ID: c001\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 93338333\n"
+                + "Email: bt@mail.com\n" + "\n"
+                + "2. Client ID: c002\n"
+                + "Name: Bo Tuan\n"
+                + "Contact Number: 56667888\n"
+                + "Email: bbt@mail.com";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
