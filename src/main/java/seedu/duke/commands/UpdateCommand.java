@@ -26,21 +26,34 @@ public class UpdateCommand extends Command {
     protected static final String REMOVE_FLAG = "remove/";
 
     public UpdateCommand(String[] command) {
-        if (command.length < 2) {
-            if (command[0].equalsIgnoreCase("update")) {
-                System.out.println("please specify which event you would like to update in the format"
-                        + System.lineSeparator() + "update [Event_num]");
+        try {
+            if (command.length < 2) {
+                if (command[0].equalsIgnoreCase("update")) {
+                    updateCommandErrorMessage();
+                }
+                Ui.printLineBreak();
+                this.isError = true;
+            } else {
+                prepareUpdates(command);
             }
-            Ui.printLineBreak();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Event does not exist!");
             this.isError = true;
-        } else {
-            this.eventNumber = Integer.parseInt(command[1]) - 1;
-            this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
-            System.out.println("Here are the details of the event:" + System.lineSeparator()
-                    + "======================================");
-            Ui.printEvent(Duke.eventCatalog.get(eventNumber));
-            Ui.printLineBreak();
         }
+    }
+
+    private void updateCommandErrorMessage() {
+        System.out.println("please specify which event you would like to update in the format"
+                + System.lineSeparator() + "update [Event_num]");
+    }
+
+    private void prepareUpdates(String[] command) {
+        this.eventNumber = Integer.parseInt(command[1]) - 1;
+        this.eventToBeUpdated = Duke.eventCatalog.get(eventNumber);
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================");
+        Ui.printEvent(Duke.eventCatalog.get(eventNumber));
+        Ui.printLineBreak();
     }
 
     public CommandResult execute() {
@@ -115,7 +128,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(REMOVE_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                 removeMember(attribute[1], taskToBeUpdated);
-            }  else {
+            } else {
                 System.out.println("invalid Command!");
             }
         }
