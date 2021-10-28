@@ -24,4 +24,4 @@ public class UiMapping {
                 + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
         out.println(mappingDetails);
     }
-}
+}   
