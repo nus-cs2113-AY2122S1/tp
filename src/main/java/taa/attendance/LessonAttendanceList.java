@@ -10,7 +10,7 @@ public class LessonAttendanceList {
 
     private static final String MESSAGE_FORMAT_LESSON_ATTENDANCE = "%s [%s]";
     private static final String MESSAGE_HEAD_COUNT = "Total Attendance for this lesson: %d/%d";
-    private static int presentCount = 0;
+    private int presentCount = 0;
 
     public LessonAttendanceList() {
         this.lessonAttendances = new ArrayList<>();
