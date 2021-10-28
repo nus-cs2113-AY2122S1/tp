@@ -391,7 +391,14 @@ ____________________________________________________________
 ### Viewing help: `help`
 Displays a help message explaining what commands are available and each input format.
 
-Usage: `help`
+<div markdown="block" class="alert alert-info">
+
+:information_source: After learning of all the crucial features and commands of **ConTech**, you are ready to begin 
+using the app. A condensed version of this user guide can be accessed by typing `help`.
+
+</div>
+
+Command format: `help`
 
 Expected outcome of usage:
 
