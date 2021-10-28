@@ -184,6 +184,26 @@ This allows you to safely terminate the program.
 This section contains the available commands to manage events in **SLAM**.
 
 ### 4.1 Add an Event
+Adds an event to your current catalog of events.
+
+To add an event, first describe the event using the following command:
+
+**Format:** `add -e n/TITLE d/DATE_&_TIME v/VENUE b/BUDGET`
+
+**Example:** `add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500`
+
+Following which, **SLAM** will prompt you for an optional description for your event which should look like this:
+
+```
+> add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500
+```
+```
+Please add an optional description for your item and press enter.
+```
+```
+>
+```
+Key in your description and press `enter`, or just press `enter` if you have none. You have successfully added an event into **SLAM**!
 
 ### 4.2 Select an Event
 This allows you to select an event from your list using the event’s numerical position in the list (i.e. the event’s ID). Upon selection, more details about that event will be displayed, and you may perform additional commands with the selected event (e.g. adding tasks to complete).
@@ -209,8 +229,35 @@ Tasks:
 ```
 
 ### 4.3 Mark an Event as `done`
+This will allow you to mark an event as done after the event is over. 
+
+**Format:** `done -e EVENT_ID`
+
+**Example:** `done -e 1`
+
+**Expected Output:**
+```
+> done -e 1
+```
+```
+Nice! I have marked these items as done!
+[E][X] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+--------LIST UPDATED--------
+```
 
 ### 4.4 Mark an Event as `undone`
+This will allow you to undo an event that was marked done if the event is not over yet.
+
+**Format:** `undo -e EVENT_ID`
+
+**Example:** `undo -e 1`
+
+**Expected Output:**
+```
+Ok, I have unmarked these items:
+[E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+--------LIST UPDATED--------
+```
 
 ### 4.5 Delete an Event
 Deletes an event from the list.
@@ -263,6 +310,16 @@ This section contains the available commands for managing tasks for events in **
 
 ### 5.1 Add a task 
 Note: For this current version of **SLAM**, pre-selecting an `Event` is not required for this command.
+
+**Prerequisite:** You must have added at least one event and one member before adding a task.
+
+Adds a task to an existing event in your current catalog of events.
+
+To add a task, first describe the task using the following command:
+
+**Format:** `add -t n/TITLE d/DATE_&_TIME`
+
+**Example:** `add -t n/Buy stage lights d/10-11-2021 1600`
 
 ### 5.2 Mark a Task as `done`
 
