@@ -7,6 +7,13 @@ import java.time.LocalDate;
 
 public class ParserUtil {
 
+    public static int parseMonth(String monthString) throws NumberFormatException {
+        if (monthString.equals("all")) {
+            return 0;
+        }
+        return Integer.parseInt(monthString.trim());
+    }
+
     public static int parseMonth(String monthString, boolean isCompulsory) throws NumberFormatException {
         if (!isCompulsory && monthString.equals("")) {
             return LocalDate.now().getMonthValue();
@@ -66,6 +73,13 @@ public class ParserUtil {
     public static Category parseCategory(String categoryString) {
         if (categoryString.equals("")) {
             return Category.GENERAL;
+        }
+        return Category.valueOf(categoryString);
+    }
+
+    public static Category parseListCategory(String categoryString) {
+        if (categoryString.equals("")) {
+            return Category.ALL;
         }
         return Category.valueOf(categoryString);
     }
