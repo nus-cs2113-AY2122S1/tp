@@ -19,13 +19,12 @@ you may have in order to help you organise your CCA's timetable.
 3. Run Duke with the command `java -jar tP.jar` on your Command Prompt `cmd.exe`
 4. You should see the following screen if you have successfully run Duke
    ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-
+   Welcome to
+    ,-----. ,-----.  ,---.      ,--.   ,--.  ,---.  ,--.  ,--.  ,---.   ,----.   ,------.,------.
+   '  .--./'  .--./ /  O  \     |   `.'   | /  O  \ |  ,'.|  | /  O  \ '  .-./   |  .---'|  .--. '
+   |  |    |  |    |  .-.  |    |  |'.'|  ||  .-.  ||  |' '  ||  .-.  ||  | .---.|  `--, |  '--'.' 
+   '  '--'\'  '--'\|  | |  |    |  |   |  ||  | |  ||  | `   ||  | |  |'  '--'  ||  `---.|  |\  \ 
+    `-----' `-----'`--' `--'    `--'   `--'`--' `--'`--'  `--'`--' `--' `------' `------'`--' '--' 
    What would you like to do?
    =>
    ```
