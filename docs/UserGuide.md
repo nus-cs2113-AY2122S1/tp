@@ -32,7 +32,7 @@ you may have in order to help you organise your CCA's timetable.
 ## Commands 
 #### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) |
 
-###Add
+### Add
 **CCA Manager** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
 as any training-related information regarding your CCA's venue bookings and timings.  
 
@@ -72,7 +72,7 @@ as any training-related information regarding your CCA's venue bookings and timi
    Name: Mark | Training Name: Monday Training | Present: [1]
    ```
 
-###List
+### List
 **CCA Manager** allows you to list out all the information you may need after you have input your entries. There are 3 different
 kinds of entries you may want to list out, which are your member, training and attendance lists.
 
@@ -97,7 +97,7 @@ kinds of entries you may want to list out, which are your member, training and a
     ```
    [1] Name: Mark | Training Name: Monday Training | Present: [1]
     ```
-###Delete
+### Delete
 **CCA Manager** has a delete function which allows you to remove any members who have left the CCA, trainings which have been
 cancelled, or remove any incorrect entries to your attendance list. This means that wrong data can be easily cleared, 
 allowing for a simple way to tidy up your file entries.
@@ -127,7 +127,7 @@ allowing for a simple way to tidy up your file entries.
     Name: Mark | Training Name: Monday Training | Present: [1]
    ```
    
-###Edit
+### Edit
 If you have to perform minor changes to your entries, **CCA Manager** allows you to edit your entries by using the edit function.
 This means that you will not have to delete the entry and then add a new one later on.
 4. `edit` This edits an existing entry from either the members list or training list
