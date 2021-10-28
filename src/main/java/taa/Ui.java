@@ -73,7 +73,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public void printWelcomeMessage() {
-        printMessage(MESSAGE_WELCOME);
+        printMessage(String.format(MESSAGE_FORMAT_WELCOME, Command.COMMAND_HELP));
     }
 
     /**
