@@ -1,5 +1,8 @@
 package seedu.typists.common;
 
+import seedu.typists.exception.ExceedRangeException;
+import seedu.typists.exception.FaultyInputException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +13,6 @@ import java.util.logging.Logger;
  * Utility methods.
  */
 public class Utils {
-    protected static final Logger logger = Logger.getLogger("Foo");
 
     /** convert the line of text into an arraylist of word. */
     public static ArrayList<String> splitStringIntoWordList(String line) {
@@ -19,10 +21,12 @@ public class Utils {
 
 
     /** get one line that is supposed to be displayed at one time of game. **/
-    public static String[] getDisplayLines(ArrayList<String> wordLists, int wordsPerLine, int row) {
+    public static String[] getDisplayLines(ArrayList<String> wordLists, int wordsPerLine, int row)
+            throws ExceedRangeException {
         int startIndex = (row - 1) * wordsPerLine;
         assert startIndex >= 0 : "word index should be non-negative";
         String[] line = new String[wordsPerLine];
+
         try {
             for (int i = 0; i < wordsPerLine; i++) {
                 if (startIndex + i > wordLists.size() - 1) {
@@ -31,8 +35,10 @@ public class Utils {
                 line[i] = wordLists.get(startIndex + i);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "exceed content maximum.");
+            throw new ExceedRangeException();
         }
+      
+      //remove null elements
         line = Arrays.stream(line)
                 .filter(s -> (s != null && s.length() > 0))
                 .toArray(String[]::new);
