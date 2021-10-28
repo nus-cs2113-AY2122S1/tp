@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.Status;
+import seedu.duke.common.Status;
 
 public class Book extends Item {
     private String author;
@@ -40,6 +40,6 @@ public class Book extends Item {
      */
     @Override
     public String toString() {
-        return "[B]" + super.toString() + super.separator + getAuthor();
+        return "[B] " + super.toString() + super.separator + getAuthor();
     }
 }

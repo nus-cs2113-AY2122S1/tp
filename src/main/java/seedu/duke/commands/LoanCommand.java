@@ -1,16 +1,15 @@
 package seedu.duke.commands;
 
-import seedu.duke.LibmgrException;
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.Status.AVAILABLE;
-import static seedu.duke.Status.LOANED;
-import static seedu.duke.Status.RESERVED;
+import static seedu.duke.common.Status.AVAILABLE;
+import static seedu.duke.common.Status.LOANED;
+import static seedu.duke.common.Status.RESERVED;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.LOAN_SUCCESS;
-import static seedu.duke.common.Messages.LOAN_SUCCESS_RESERVED;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 import static seedu.duke.common.Messages.LOAN_INVALID_FORMAT;
 import static seedu.duke.data.Item.ARG_ID;

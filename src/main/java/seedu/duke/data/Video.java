@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.Status;
+import seedu.duke.common.Status;
 
 public class Video extends Item {
     private String publisher;
@@ -59,7 +59,7 @@ public class Video extends Item {
      */
     @Override
     public String toString() {
-        return "[V]" + super.toString() + super.separator + getPublisher()
+        return "[V] " + super.toString() + super.separator + getPublisher()
                 + super.separator + getDuration();
     }
 }
