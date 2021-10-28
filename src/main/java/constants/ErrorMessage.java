@@ -28,4 +28,6 @@ public final class ErrorMessage {
             + "budget stored in the system!";
     public static final String updateBudgetErrorMsg = "Error with updating budget. Ensure you keyed "
             + "the budget value and try again!";
+
+    public static final String invalidIndexMsg = "Invalid index";
 }

@@ -1,13 +1,9 @@
 package service;
 
-import entity.Expense;
-import entity.ExpenseList;
-import entity.Income;
-import entity.IncomeList;
-import storage.DataManager;
+import entity.income.Income;
+import entity.income.IncomeList;
 import terminal.Ui;
 
-import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

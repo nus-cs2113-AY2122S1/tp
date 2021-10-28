@@ -1,8 +1,8 @@
 package command.income;
 
 import command.CommandLineFactory;
-import entity.Income;
-import entity.IncomeList;
+import entity.income.Income;
+import entity.income.IncomeList;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,8 +1,8 @@
 package command.budget;
 
 import command.CommandLineFactory;
-import entity.Budget;
-import entity.BudgetList;
+import entity.budget.Budget;
+import entity.budget.BudgetList;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 import storage.DataManager;

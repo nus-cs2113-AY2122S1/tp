@@ -1,7 +1,7 @@
 package service;
 
-import entity.Budget;
-import entity.BudgetList;
+import entity.budget.Budget;
+import entity.budget.BudgetList;
 import terminal.Ui;
 
 import java.util.ArrayList;
@@ -70,9 +70,13 @@ public class BudgetManager implements LoadableManager {
 
     @Override
     public String toFileString() {
-        Budget budget = BudgetList.getBudgets().get(0);
-        Double budgetValue = budget.getValue();
-        return budgetValue.toString();
+        if (BudgetList.getBudgets().size() != 0) {
+            Budget budget = BudgetList.getBudgets().get(0);
+            Double budgetValue = budget.getValue();
+            return budgetValue.toString();
+        } else {
+            return "";
+        }
     }
 
     @Override
