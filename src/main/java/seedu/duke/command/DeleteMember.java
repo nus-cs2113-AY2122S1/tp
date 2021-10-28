@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
 
@@ -35,7 +35,7 @@ public class DeleteMember {
             assert index >= 1;
             Member toDelete = members.deleteMemberByIndex(index);
             Ui.printDeletedMemberMessage(toDelete);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
             //Update save file
         } catch (IndexOutOfBoundsException e) {
@@ -50,7 +50,7 @@ public class DeleteMember {
             assert !name.equals("");
             Member toDelete = members.deleteMemberByName(name);
             Ui.printDeletedMemberMessage(toDelete);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
             //Update save file
         } catch (InvalidMemberException e) {

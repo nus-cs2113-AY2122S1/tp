@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
 import seedu.duke.Ui;
@@ -43,7 +43,7 @@ public class AddMember {
                 member.setIndex(newMemberIndex);
                 members.addMember(member);
                 Ui.printAddedMemberMessage(member);
-                File dukeMemberFile = new File("dukeMembers.csv");
+                File dukeMemberFile = new File("CCAMembers.csv");
                 writeMemberFile(dukeMemberFile, members);
             }
         } catch (InvalidAddMemberException e) {

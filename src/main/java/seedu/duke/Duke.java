@@ -6,6 +6,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         Ui.printGreeting();
+        Entry.initializeFiles();
         Parser.waitForQuery();
     }
 }

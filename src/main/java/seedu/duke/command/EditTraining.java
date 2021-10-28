@@ -1,5 +1,8 @@
 package seedu.duke.command;
 
+import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
+
+import java.io.File;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
@@ -33,7 +36,8 @@ public class EditTraining {
             }
 
             trainings.getTrainingList().set(index - 1, trainingToChange);
-            //TODO: Print and Save
+            File trainingFile = new File("CCATrainings.csv");
+            writeTrainingFile(trainingFile, trainings);
 
         } catch (AssertionError e) {
             System.out.println("Index to edit must be an integer >= 1");
