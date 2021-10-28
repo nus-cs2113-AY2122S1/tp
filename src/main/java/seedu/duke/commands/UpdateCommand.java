@@ -26,15 +26,20 @@ public class UpdateCommand extends Command {
     protected static final String REMOVE_FLAG = "remove/";
 
     public UpdateCommand(String[] command) {
+
         if (command.length < 2) {
             if (command[0].equalsIgnoreCase("update")) {
                 updateCommandErrorMessage();
             }
             Ui.printLineBreak();
             this.isError = true;
+        } else if (Integer.parseInt(command[1]) > Duke.eventCatalog.size()) {
+            System.out.println("Event does not exist!");
+            this.isError = true;
         } else {
             prepareUpdates(command);
         }
+
     }
 
     private void updateCommandErrorMessage() {
@@ -123,7 +128,7 @@ public class UpdateCommand extends Command {
             } else if (update.contains(REMOVE_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                 removeMember(attribute[1], taskToBeUpdated);
-            }  else {
+            } else {
                 System.out.println("invalid Command!");
             }
         }
