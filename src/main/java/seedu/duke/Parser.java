@@ -131,10 +131,11 @@ public class Parser {
     }
 
     /**
-     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command is called.
+     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command
+     * is called.
      *
      * @param attendanceList full list of attendance sheet.
-     * @param entry user raw data input.
+     * @param entry          user raw data input.
      * @return smaller attendance list which has been filtered.
      */
     public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String entry) {
@@ -295,7 +296,7 @@ public class Parser {
         try {
             String[] substring = entry.split("/i", 0);
             int trainingIndex = Integer.parseInt(substring[1].trim());
-            assert trainingIndex >= 1: "trainingIndex should be greater than 1.";
+            assert trainingIndex >= 1 : "trainingIndex should be greater than 1.";
             return trainingIndex;
         } catch (IndexOutOfBoundsException e) {
             Ui.printWrongInputMessage();
@@ -313,7 +314,7 @@ public class Parser {
         try {
             int trainingNameStartIndex = entry.indexOf("/t") + 2;
             int trainingNameEndIndex = entry.indexOf("/i");
-            assert trainingNameEndIndex >= 1: "trainingNameEndIndex should be greater than 1.";
+            assert trainingNameEndIndex >= 1 : "trainingNameEndIndex should be greater than 1.";
             String trainingName = entry.substring(trainingNameStartIndex, trainingNameEndIndex).trim();
             return trainingName;
         } catch (IndexOutOfBoundsException e) {
@@ -331,7 +332,7 @@ public class Parser {
         try {
             String[] words = entry.trim().split(regex);
             int indexNumber = Integer.parseInt(words[1].trim());
-            assert indexNumber >= 1: "indexNumber should be greater than 1.";
+            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
             return indexNumber;
         } catch (NumberFormatException e) {
             System.out.println("Index must be a number");
@@ -349,7 +350,7 @@ public class Parser {
         String[] words = entry.trim().split(regex);
         try {
             int indexNumber = Integer.parseInt(words[1].trim());
-            assert indexNumber >= 1: "indexNumber should be greater than 1.";
+            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
             return indexNumber;
         } catch (NumberFormatException e) {
             String parameter = words[1].trim();
