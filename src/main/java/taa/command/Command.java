@@ -38,6 +38,9 @@ public abstract class Command {
     public static final String COMMAND_LIST_COMMENT = "list_comment";
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_ARCHIVE = "archive";
+    public static final String COMMAND_RESET = "reset";
+
+    protected static final String PROMPT_WITHIN_COMMAND = "> ";
 
     // Common messages
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
@@ -50,6 +53,8 @@ public abstract class Command {
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
     protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set";
+    protected static final String MESSAGE_DATA_REMOVED = "All data have been removed.";
+    protected static final String MESSAGE_ABORT = "Abort.";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";

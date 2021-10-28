@@ -2,6 +2,7 @@ package taa;
 
 
 import taa.command.ArchiveCommand;
+import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.module.AddModuleCommand;
 import taa.command.student.AddStudentCommand;
@@ -161,6 +162,10 @@ public class Parser {
 
         case Command.COMMAND_ARCHIVE:
             command = new ArchiveCommand(argument);
+            break;
+
+        case Command.COMMAND_RESET:
+            command = new ResetCommand(argument);
             break;
 
         default:
