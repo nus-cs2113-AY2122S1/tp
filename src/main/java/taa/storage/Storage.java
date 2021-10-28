@@ -17,7 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
-    private static final String MESSAGE_FORMAT_FAIL_CREATE_FILE = "Fail to create file - %s";
+    private static final String MESSAGE_FORMAT_FAIL_CREATE_FILE = "Fail to create file/folder - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_READ = "Unable to open file to read - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE = "Unable to open file to write - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_READ_JSON = "Unable to read from JSON file - %s";
