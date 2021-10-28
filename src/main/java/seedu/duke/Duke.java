@@ -30,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * Loan reminder to warn user that the following loans are due.
+     * Loan reminder to warn user that the following loans are due!
      *
      * @param dateNow the local date now
      * @param dateMonthNow the month param of date now as an integer
@@ -55,7 +55,7 @@ public class Duke {
         String[] dateNowString = dateNow.toString().split("-",3);
         int dateMonthNow = Integer.parseInt(dateNowString[1]);
 
-        // Calls loanReminder to remind user of loans that are due.
+        // Calls loanReminder to remind user of loans that are due
         loanReminder(dateNow, dateMonthNow);
         if (dateMonthNow != 1) {
             loanReminder(dateNow, dateMonthNow - 1);
