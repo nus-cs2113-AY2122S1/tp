@@ -263,12 +263,9 @@ public class GoalList {
 
     public void updateGoalEndDate(int goalIndex, Date newDate, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        String goalName = goal.getGoalName();
         Date oldDate = goal.getEndDate();
-        String oldDateString = goal.getPrintableEndDate();
-
+        final String oldDateString = goal.getPrintableEndDate();
         compareOldDateWithNewDate(oldDate, newDate);
-
         goal.setEndDate(newDate);
         String newDateString = goal.getPrintableEndDate();
         // Go through all habits for Goal
@@ -279,6 +276,7 @@ public class GoalList {
             // update Interval Lengths using same interval for habit
             habit.updateLengthOfInterval(habit.getIntervalLength());
         }
+        String goalName = goal.getGoalName();
         printManager.printUpdatedGoalEndDate(goalName, oldDateString, newDateString);
     }
 

@@ -16,7 +16,7 @@ public class MainParser {
     private static final String COMMAND_ADD_HABIT = "add";
     private static final String COMMAND_SET_GOAL = "goal";
     private static final String COMMAND_UPDATE_GOALS = "update";
-    private static final String COMMAND_UPDATE_HABITS= "change";
+    private static final String COMMAND_UPDATE_HABITS = "change";
     private static final String COMMAND_LIST_GOAL = "list";
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
