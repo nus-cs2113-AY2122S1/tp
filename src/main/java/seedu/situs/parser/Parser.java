@@ -150,7 +150,7 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws SitusException {
-        String[] details = command.replace(COMMAND_UPDATE, "").split(UPDATE_DELIM);
+        String[] details = command.replace(COMMAND_UPDATE, "").split(UPDATE_DELIM, 3);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
