@@ -1,0 +1,151 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Libmgr" as Libmgr
+participant ":EditCommand" as EditCommand
+participant ":Catalogue" as Catalogue
+participant ":Book" as Book
+participant ":Audio" as Audio
+participant ":Magazine" as Magazine
+participant ":Video" as Video
+
+
+activate Libmgr
+create EditCommand
+Libmgr -> EditCommand: execute(ui: TextUI, catalogue: Catalogue)
+activate EditCommand
+EditCommand -> EditCommand: handlesEditCommand(ui: TextUI, catalogue: Catalogue)
+activate EditCommand
+EditCommand -> Catalogue: getItem(argList2[0]: String)
+activate Catalogue
+Catalogue --> EditCommand: toEdit: Item
+deactivate Catalogue
+
+alt toEdit instanceof Book
+    EditCommand -> EditCommand: handlesEditBookCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
+    activate EditCommand
+
+    alt newAttributeMarker.equals("t")
+        EditCommand -> Book: setTitle(newAttribute: String)
+        activate Book
+        Book --> EditCommand
+        deactivate Book
+    else newAttributeMarker.equals("i")
+        EditCommand -> Book: setID(newAttribute: String)
+        activate Book
+        Book --> EditCommand
+        deactivate Book
+    else newAttributeMarker.equals("a")
+        EditCommand -> Book: setAuthor(newAttribute: String)
+        activate Book
+        Book --> EditCommand
+        deactivate Book
+    end
+
+    EditCommand --> EditCommand
+    deactivate EditCommand
+
+else toEdit instanceof Audio
+    EditCommand -> EditCommand: handlesEditAudioCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
+    activate EditCommand
+
+    alt newAttributeMarker.equals("t")
+        EditCommand -> Audio: setTitle(newAttribute: String)
+        activate Audio
+        Audio --> EditCommand
+        deactivate Audio
+    else newAttributeMarker.equals("i")
+        EditCommand -> Audio: setID(newAttribute: String)
+        activate Audio
+        Audio --> EditCommand
+        deactivate Audio
+    else newAttributeMarker.equals("a")
+        EditCommand -> Audio: setArtist(newAttribute: String)
+        activate Audio
+        Audio --> EditCommand
+        deactivate Audio
+    else newAttributeMarker.equals("d")
+        EditCommand -> Audio: setDuration(newAttribute: String)
+        activate Audio
+        Audio --> EditCommand
+        deactivate Audio
+    end
+
+    EditCommand --> EditCommand
+    deactivate EditCommand
+
+else toEdit instanceof Magazine
+    EditCommand -> EditCommand: handlesEditMagazineCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
+    activate EditCommand
+
+    alt newAttributeMarker.equals("t")
+        EditCommand -> Magazine: setTitle(newAttribute: String)
+        activate Magazine
+        Magazine --> EditCommand
+        deactivate Magazine
+    else newAttributeMarker.equals("i")
+        EditCommand -> Magazine: setID(newAttribute: String)
+        activate Magazine
+        Magazine --> EditCommand
+        deactivate Magazine
+    else newAttributeMarker.equals("p")
+        EditCommand -> Magazine: setPublisher(newAttribute: String)
+        activate Magazine
+        Magazine --> EditCommand
+        deactivate Magazine
+    else newAttributeMarker.equals("e")
+        EditCommand -> Magazine: setEdition(newAttribute: String)
+        activate Magazine
+        Magazine --> EditCommand
+        deactivate Magazine
+    end
+
+    EditCommand --> EditCommand
+    deactivate EditCommand
+
+else toEdit instanceof Video
+    EditCommand -> EditCommand: handlesEditVideoCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
+    activate EditCommand
+
+    alt newAttributeMarker.equals("t")
+        EditCommand -> Video: setTitle(newAttribute: String)
+        activate Video
+        Video --> EditCommand
+        deactivate Video
+    else newAttributeMarker.equals("i")
+        EditCommand -> Video: setID(newAttribute: String)
+        activate Video
+        Video --> EditCommand
+        deactivate Video
+    else newAttributeMarker.equals("p")
+        EditCommand -> Video: setPublisher(newAttribute: String)
+        activate Video
+        Video --> EditCommand
+        deactivate Video
+    else newAttributeMarker.equals("d")
+        EditCommand -> Video: setDuration(newAttribute: String)
+        activate Video
+        Video --> EditCommand
+        deactivate Video
+    end
+
+    EditCommand --> EditCommand
+    deactivate EditCommand
+end
+
+EditCommand --> EditCommand
+deactivate EditCommand
+
+EditCommand --> Libmgr
+deactivate EditCommand
+
+destroy Book
+destroy Audio
+destroy Magazine
+destroy Video
+destroy EditCommand
+destroy Catalogue
+destroy EditCommand
+
+
+@enduml

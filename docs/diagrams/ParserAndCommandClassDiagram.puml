@@ -1,16 +1,21 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+hide circle
+skinparam classAttributeIconSize 0
+
 Command <|-up- ExitCommand
 Command <|-up- ListCommand
 Command <|-up- AddCommand
 Command <|-up- LoanCommand
-Command <|-- RemoveCommand
+Command <|-- EditCommand
+Command <|-left- RemoveCommand
 Command <|-- ReserveCommand
 Command <|-- ReturnCommand
 Command <|-- SearchCommand
 Command <|-left- UnknownCommand
 Command <.right. Parser: creates
+Command <|-right- DeadlineCommand
 
 class Parser {
 - parse(input: String): Command
@@ -23,17 +28,38 @@ abstract class Command {
 
 class AddCommand {
 + {static} {final} COMMAND_WORD: String = "add"
-# args: String
-# title: String
-# id: String
-+ AddCommand(args: String)
-+ handlesAddCommand(ui: TextUI, catalogue: Catalogue)
++ {static} {final} COMMAND_FORMAT: String = "  Format: add [a|b|m|v] [ARGUMENTS]"
++ {static} {final} COMMAND_ADD_BOOK: String = "add b"
++ {static} {final} COMMAND_ADD_MAGAZINE: String = "add m"
++ {static} {final} COMMAND_ADD_VIDEO: String = "add v"
+# args: HashMap<String, String>
++ AddCommand(args: HashMap<String, String>)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class EditCommand {
++ {static} {final} COMMAND_WORD: String = "edit"
++ EditCommand(args: String)
++ handlesEditCommand(ui: TextUI, catalogue: Catalogue)
++ handlesEditVideoCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditMagazineCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditAudioCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
++ handlesEditBookCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 
 class ExitCommand {
 + {static} {final} COMMAND_WORD: String = "exit"
 + ExitCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class DeadlineCommand {
++ {static} {final} COMMAND_WORD: String = "deadline"
++ {static} {final} DEADLINE_TODAY_COMMAND: String = "deadline today"
++ {static} {final} DEADLINE_OVERDUE_COMMAND: String = "deadline overdue"
++ input: String = ""
++ DeadlineCommand(input: String)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 

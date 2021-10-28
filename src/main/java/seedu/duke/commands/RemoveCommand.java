@@ -8,6 +8,7 @@ import static seedu.duke.common.Messages.RM_INVALID_FORMAT;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.RM_SUCCESS;
 
+//@@author exetr
 public class RemoveCommand extends Command {
     public static final String COMMAND_REMOVE = "rm";
     protected String args;

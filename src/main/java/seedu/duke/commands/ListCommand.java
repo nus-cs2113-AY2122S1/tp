@@ -1,14 +1,11 @@
 package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
-import seedu.duke.common.Status;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.LIST_AVAILABLE_MESSAGE;
 import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
-import static seedu.duke.common.Messages.LIST_LOANED_MESSAGE;
 import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_FORMAT_INCORRECT;
 
@@ -18,9 +15,6 @@ import static seedu.duke.common.Messages.LIST_FORMAT_INCORRECT;
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
-    public static final String LIST_ALL_COMMAND = "list all";
-    public static final String LIST_AVAILABLE_COMMAND = "list available";
-    public static final String LIST_LOANED_COMMAND = "list loaned";
     public String input = "";
 
     /**
@@ -39,29 +33,11 @@ public class ListCommand extends Command {
      */
 
     public void handlesListCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
-        if (input.equals(LIST_ALL_COMMAND)) {
+        if (input.equals(COMMAND_WORD)) {
             ui.print(LIST_ALL_MESSAGE);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
                 ui.print(temp);
-            }
-            ui.print(DIVIDER);
-        } else if (input.equals(LIST_AVAILABLE_COMMAND)) {
-            ui.print(LIST_AVAILABLE_MESSAGE);
-            ui.print(DIVIDER);
-            for (Item temp : catalogue.getAllItems()) {
-                if (temp.getStatus().equals(Status.AVAILABLE)) {
-                    ui.print(temp);
-                }
-            }
-            ui.print(DIVIDER);
-        } else if (input.equals(LIST_LOANED_COMMAND)) {
-            ui.print(LIST_LOANED_MESSAGE);
-            ui.print(DIVIDER);
-            for (Item temp : catalogue.getAllItems()) {
-                if (temp.getStatus().equals(Status.LOANED)) {
-                    ui.print(temp);
-                }
             }
             ui.print(DIVIDER);
         } else {

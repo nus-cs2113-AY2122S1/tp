@@ -21,11 +21,6 @@ public class Item {
 
     // Literals
     protected String separator = " | ";
-    public static final String ARG_TITLE = "t/";
-    public static final String ARG_ID = "i/";
-    public static final String ARG_STATUS = "s/";
-    public static final String ARG_LOANEE = "u/";
-    public static final String ARG_DUE = "d/";
 
     /**
      * Constructor for class item.
@@ -150,6 +145,15 @@ public class Item {
      */
     @Override
     public String toString() {
-        return getID() + separator + getStatus() + separator + getTitle();
+        String output;
+        if (status.equals(Status.RESERVED)) {
+            output = getID() + separator + getStatus() + " (" + getLoanee() + ")" + separator + getTitle();
+        } else if (status.equals(Status.LOANED)) {
+            output = getID() + separator + getStatus() + " (" + getLoanee() + " TILL " + getDueDateString() + ")"
+                    + separator + getTitle();
+        } else {
+            output = getID() + separator + getStatus() + separator + getTitle();
+        }
+        return output;
     }
 }

@@ -8,30 +8,265 @@ done in an efficient manner.
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
-  - [Removing an item: `remove`](#Removing-an-item)
-  - [Exiting the program: `exit`](#Exiting-the-program)
+    - [Adding an item: `add`](#Adding-an-item)
+        - [Adding an audio item: `add a`](#Adding-an-audio-item)
+        - [Adding a book item: `add b`](#Adding-a-book-item)
+        - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
+        - [Adding a video item: `add v`](#Adding-a-video-item)
+    - [List items: `list`](#List-items)
+    - [Search items: `search`](#Search-item-by-ID)
+      - [Search item by ID: `search i/`](#Search-item-by-ID)
+      - [Search item by title: `search t/`](#Search-item-by-title)
+      - [Search item by status: `search s/`](#Search-item-by-status)
+    - [Reserve items: `res`](#Reserve-items)
+    - [Un-reserve items: `unres`](#Unreserve-items)
+    - [Loan items: `loan`](#Loan-items)
+    - [Return items: `return`](#Return-items)
+    - [Removing an item: `rm`](#Removing-an-item)
+    - [Editing an item: `edit`](#Editing-an-item)
+    - [Exiting the program: `exit`](#Exiting-the-program)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
 ## Quick Start
 
 1. Ensure that you have Java `11` or above installed.
-2. Down the latest version of `Libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
+2. Down the latest version of `libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
-4. Open a terminal/command prompt and run `java -jar Libmgr.jar` to start the application.
+4. Open a terminal/command prompt and run `java -jar libmgr.jar` to start the application.
 
 ## Features
+
+##### Notes about command formats
+
+> ℹ️ Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
+e.g. In `add b t/TITLE ...`, `TITLE` is a parameter that can be used like `add b t/Don Quixote ...`
+
+> ℹ️ Parameters can be in any order<br>
+e.g. `add a t/TITLE i/ID a/ARTIST d/DURATION` can be used as `add a a/ARTIST i/ID t/TITLE d/DURATION`
+
+> ⚠️ Parameters must be separated with a space<br>
+e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is invalid
+
+### Adding an item
+Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
+
+#### Adding an audio item
+Add a new audio item to the catalogue
+
+Format: `add a t/TITLE i/ID a/ARTIST d/DURATION`
+
+Example: `add a t/Thriller i/5920 a/Michael Jackson d/42:16`
+
+Expected Output:
+```
+> add a t/Thriller i/5920 a/Michael Jackson d/42:16
+  (+) Added new audio item to the catalogue
+  [A] 5920 | AVAILABLE | Thriller | Michael Jackson | 42:16
+```
+
+#### Adding a book item
+Add a new book item to the catalogue
+
+Format: `add b t/TITLE i/ID a/AUTHOR`
+
+Example: `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`
+
+Expected Output:
+```
+> add b t/To Kill a Mockingbird i/2551 a/Harper Lee
+  (+) Added new book item to the catalogue
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
+```
+
+#### Adding a magazine item
+Add a new magazine item to the catalogue
+
+Format: `add m t/TITLE i/ID p/PUBLISHER e/EDITION`
+
+Example: `add m t/Time Magazine i/58720a p/Time USA e/oct252021`
+
+Expected Output:
+```
+> add m t/Time Magazine i/58720a p/Time USA e/oct252021
+  (+) Added new magazine item to the catalogue
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+```
+
+#### Adding a video item
+Add a new video item to the catalogue
+
+Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
+
+Example: `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`
+
+Expected Output:
+```
+> add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes
+  (+) Added new video item to the catalogue
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
+
+### List items
+List out all items in the catalogue
+
+Format: `list`
+
+Example: `list`
+
+Expected Output:
+```
+  (+) Listing out all items in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Search item by ID 
+Search items by ID (input keyword must be exactly the same)
+
+Format: `search i/ID` 
+
+Example: `search i/095680`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Search item by title
+Search items by title (input keyword can be part of the actual title)
+
+Format: `search t/TITLE`
+
+Example: `search t/Time`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+### Search item by status
+Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
+
+Format: `search s/STATUS`
+
+Example: `search s/AVAILABLE`
+
+Expected Output:
+```
+  (+) Here are the searching results in library
+  ========================================
+  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Reserve items
+Reserves an item for a specific person.
+
+Format: `res i/ID u/USERNAME`
+
+Example: `res i/2551 u/johnsmith`
+
+Expected Output:
+```
+> res i/2551 u/johnsmith
+  (+) You have successfully reserved an item:
+  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+```
+
+### Unreserve items
+Make a previously reserved item available again.
+
+Format: `unres ID`
+
+Example: `unres 2551`
+
+Expected Output:
+```
+> unres 2551
+  (+) Item unreserved:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
+```
+
+### Loan items
+Loan out an item to an individual until a specific due date.
+
+> ℹ️ Items that have been previously reserved by an individual can only be loaned out to the same individual
+
+> ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
+
+Format: `loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)`
+
+Example: `loan i/2551 d/12-11-2021 u/johnsmith`
+
+Expected Output:
+```
+> loan i/2551 d/12-11-2021 u/johnsmith
+  (+) Item has been loaned out:
+  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
+```
+
+### Return items
+Mark a previously loaned item as returned, making it available again.
+
+Format: `return ID`
+
+Example: `return 2551`
+
+Expected Output:
+```
+> return 2551
+  (+) Item has been returned:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
+```
+
+### Editing an item
+Edits an attribute of an existing item in the catalogue
+
+Format: `edit ID MARKER/new attribute`
+
+* For Book, valid markers are: t/TITLE, i/ID and a/AUTHOR
+* For Audio, valid markers are: t/TITLE, i/ID, a/ARTIST and d/DURATION
+* For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
+* For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
+
+Examples of usage:
+
+`edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
+
+Expected Output:
+```
+  [B] 123 | AVAILABLE | The Hunger Games | Suzanne Collins
+> edit 123 t/Harry Potter
+  (+) Edited item details:
+  [B] 123 | AVAILABLE | Harry Potter | Suzanne Collins
+```
+
 
 ### Removing an item
 Removes an existing item from the catalogue.
 
-Format: `remove i/ID`
+Format: `rm ID`
 
 * The item specified by `ID` will be deleted.
 
-Examples of usage:
+Example: `rm 095680`
 
-`remove i/012350`
+Expected Output:
+```
+> rm 095680
+  (+) Removed the following item:
+  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
 
 ### Exiting the program
 Exits the program.
@@ -40,9 +275,10 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: What happens if I mistype a command not recognised by the program?
 
-**A**: {your answer here}
+**A**: A message will be shown saying that the program does not recognise your command.
+You can then key in a command again.
 
 ## Command Summary
 
