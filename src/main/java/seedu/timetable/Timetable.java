@@ -83,7 +83,7 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     private void isScheduleEmpty(TimetableItem[] schedule) {
-        for(TimetableItem item : schedule) {
+        for (TimetableItem item : schedule) {
             if (item != null) {
                 isEmpty = false;
                 return;
