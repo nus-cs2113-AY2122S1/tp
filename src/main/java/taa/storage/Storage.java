@@ -52,11 +52,11 @@ public class Storage {
             moduleList = gson.fromJson(jsonReader, ModuleList.class);
             jsonReader.close();
         } catch (FileNotFoundException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_READ, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_READ, Util.getAbsolutePath(filename)));
         } catch (JsonIOException | IOException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_READ_JSON, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_READ_JSON, Util.getAbsolutePath(filename)));
         } catch (JsonSyntaxException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_JSON_SYNTAX_ERROR, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_JSON_SYNTAX_ERROR, Util.getAbsolutePath(filename)));
         }
 
         return moduleList;
@@ -70,7 +70,7 @@ public class Storage {
      */
     public void save(ModuleList moduleList) throws TaaException {
         if (!Util.createFile(filename)) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, Util.getAbsolutePath(filename)));
         }
 
         assert Util.fileExists(filename);
@@ -82,9 +82,9 @@ public class Storage {
             gson.toJson(moduleList, ModuleList.class, jsonWriter);
             jsonWriter.close();
         } catch (IOException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, Util.getAbsolutePath(filename)));
         } catch (JsonIOException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON, Util.getAbsolutePath(filename)));
         }
     }
 }
