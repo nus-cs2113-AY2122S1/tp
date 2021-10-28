@@ -118,6 +118,10 @@ public class Habit {
         this.intervals = intervals;
     }
 
+    public void addInterval(Interval interval) {
+        this.intervals.add(interval);
+    }
+
     /**
      * Fills the interval list with all intervals during habit creation.
      * Method is called in goalList after the endDate has been added.
@@ -220,6 +224,32 @@ public class Habit {
             return null;
         }
         return this.habitName + FROM + currInterval.getDescription();
+    }
+
+    /**
+     * Returns consecutive streak for current habit.
+     *
+     * @return Longest chain streak for the habit
+     */
+    public int getStreak() {
+        int streak = 0;
+        int currStreak = 0;
+        boolean isConsecutive = false;
+
+        for (Interval interval : intervals) {
+            if (interval.getDone()) {
+                isConsecutive = true;
+                currStreak++;
+            } else {
+                isConsecutive = false;
+                if (currStreak >= streak) {
+                    streak = currStreak;
+                }
+                currStreak = 0;
+            }
+        }
+
+        return streak;
     }
 
     /*

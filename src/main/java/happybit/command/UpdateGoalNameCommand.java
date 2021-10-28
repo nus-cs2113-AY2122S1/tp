@@ -14,12 +14,12 @@ public class UpdateGoalNameCommand extends UpdateCommand {
     /**
      * Constructor for UpdateGoalNameCommand.
      *
-     * @param goalIndex Index of goal in goalList, where the goalName is to be updated.
-     * @param goalName  New name of the goal.
+     * @param goalIndex Index of goal in goalList to be updated with newGoalName.
+     * @param newGoalName  New name of the goal.
      */
-    public UpdateGoalNameCommand(int goalIndex, String goalName) {
+    public UpdateGoalNameCommand(int goalIndex, String newGoalName) {
         this.goalIndex = goalIndex;
-        this.goalName = goalName;
+        this.goalName = newGoalName;
     }
 
     /**
@@ -39,5 +39,23 @@ public class UpdateGoalNameCommand extends UpdateCommand {
         } catch (HaBitStorageException e) {
             printManager.showError(e.getMessage());
         }
+    }
+
+    /**
+     * Getter for goalIndex (Used in JUnit test).
+     *
+     * @return Index of goal in goalList, whose goalName is to be updated.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
+    }
+
+    /**
+     * Getter for habitIndex (Used in JUnit test).
+     *
+     * @return New goal name to be updated.
+     */
+    public String getNewGoalName() {
+        return goalName;
     }
 }

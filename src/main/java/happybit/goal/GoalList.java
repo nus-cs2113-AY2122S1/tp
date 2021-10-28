@@ -2,6 +2,7 @@ package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
+import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
 import java.util.ArrayList;
@@ -261,12 +262,19 @@ public class GoalList {
      * @param habitIndex Integer of habit index of habit to update
      * @param newInterval Integer of new interval uses wishes to set
      */
-    public void updateHabitInterval(int goalIndex, int habitIndex, int newInterval) {
-        // To be implemented
+    public void updateHabitIntervalFromGoal(int goalIndex, int habitIndex, int newInterval, PrintManager printManager)
+        throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habits = goal.getHabitList();
+        Habit habit = getHabit(habits, habitIndex);
+        habit.updateLengthOfInterval(newInterval);
+        printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
 
-    public void viewGoalProgress(int goalIndex) {
-        // todo
+    public void addIntervalToHabit(int goalIndex, int habitIndex, Interval interval) throws HaBitCommandException {
+        Goal goal = this.getGoal(goalIndex);
+        Habit habit = this.getHabit(goal.getHabitList(), habitIndex);
+        habit.addInterval(interval);
     }
 
     /*

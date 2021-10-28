@@ -7,7 +7,6 @@ import happybit.interval.Interval;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class ImportParser {
@@ -24,9 +23,9 @@ public class ImportParser {
     private static final int HABIT_START_INDEX = 3;
     private static final int HABIT_END_INDEX = 4;
     private static final int HABIT_INTERVAL_INDEX = 5;
-    private static final int INTERVAL_START_INDEX = 2;
-    private static final int INTERVAL_END_INDEX = 3;
-    private static final int INTERVAL_COMPLETE_INDEX = 4;
+    private static final int INTERVAL_START_INDEX = 3;
+    private static final int INTERVAL_END_INDEX = 4;
+    private static final int INTERVAL_COMPLETE_INDEX = 5;
 
     protected static Goal goalParser(String[] lineData) throws ParseException {
         GoalType goalType;

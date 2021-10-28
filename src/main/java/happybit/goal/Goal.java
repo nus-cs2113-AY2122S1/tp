@@ -165,7 +165,8 @@ public class Goal {
     public void doneHabit(int habitIndex) {
         Habit habit = habitList.get(habitIndex);
         // update key value pair in map for current iteration
-        //habit.updateProgress();
+        Date currDate = new Date();
+        habit.completeInterval(currDate);
     }
 
     /**
@@ -206,7 +207,7 @@ public class Goal {
     public String getGoalTypeCharacter() {
         switch (this.goalType) {
         case SLEEP:
-            return "[SL]]";
+            return "[SL]";
         case FOOD:
             return "[FD]";
         case EXERCISE:
