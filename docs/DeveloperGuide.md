@@ -5,12 +5,12 @@ title: Developer Guide
 
 ## Contents 
 
-* [Acknowledgements](#Acknowledgements)
+* [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
   * [Main Components](#main-components) 
   * [Command Implementation](#command-implementation)
-  * [Ui](#ui)
+  * [User Interface](#user-interface)
   * [Storage](#storage)
   * [University and module related classes](#university-and-module-related-classes)
     * [University](#university)
