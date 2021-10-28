@@ -44,15 +44,20 @@ when learning how to use **ConTech**.
 * **[FAQ](#faq)**
 * **[Command Summary](#summary)**
 
+<br />
+
 <a name="start"></a>
 ## Quick Start
 
+This section aims to get you started with using **ConTech**. 
+
 1. Ensure that you have Java `11` or above installed in your Computer.
-1. Download the latest version of `contech.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases).
-1. Copy the `contech.jar` file to the folder you want to use as the _home folder_ for **ConTech**.
-1. Open your desired _Command Line Interface_ from the folder with `contech.jar` and enter the following code: 
+2. Download the latest version of `contech.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases).
+3. Copy the `contech.jar` file to the folder you want to use as the _home folder_ for **ConTech**.
+4. Open your desired _Command Line Interface_ from the folder with `contech.jar` and enter the following code: 
 `java -jar contech.jar`.
-1. Type a command in the command box and press _Enter_ to execute it. e.g., typing `help` and pressing _Enter_ will 
+5. As a first time user, you would be required to type in your personal details.
+6. Type a command in the command box and press _Enter_ to execute it. e.g., typing `help` and pressing _Enter_ will 
    display the help message. <br>
    Some example commands you can try:
    * `add -n Alex Lee -g alexlee -e alex.lee@contech.sg -te alexl33`: Adds a contact named `Alex Lee` 
@@ -61,8 +66,11 @@ when learning how to use **ConTech**.
    * `view 1`: Displays all the details of the contact at index `1`.   
    * `rm 1`: Deletes the contact at index `1` in the list.
    * `exit`: Exits the program.
+   
+If you have reached this step without any issues, congratulations! You have successfully set up **ConTech**.
 
-1. Refer to the [Features](#features) below for details of each command.
+<div markdown="block" class="alert alert-info">
+:information_source: You are advised to go through the following two sections.
 
 Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common notations 
 that will be used throughout this guide.
