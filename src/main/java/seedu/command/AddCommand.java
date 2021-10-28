@@ -113,7 +113,7 @@ public class AddCommand extends Command {
             if (lesson.getLessonType().equals(lessonType)) {
                 completeList.add(lesson);
             } else if (lessonType == LECTURE) {
-                if (lesson.getLessonType() != TUTORIAL && lesson.getLessonType() != LAB) {
+                if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
                     completeList.add(lesson);
                 }
             }
