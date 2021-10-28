@@ -26,8 +26,8 @@ bottom. This is because the guide is also written in a specific order to allow y
 when learning how to use **ConTech**.
 
 * **[Quick Start](#start)**
+* **[Contact flags : `-flag`](#flag)**
 * **[Features](#features)**
-    * **[Contact flags : `-flag`](#flag)**
     * **[Adding a contact : `add`](#add)**
     * **[Listing all contacts : `ls`](#list)**
     * **[Viewing a contact : `view`](#view)**
@@ -66,10 +66,11 @@ when learning how to use **ConTech**.
 
 <a name="flag"></a>
 ### Contact flags: `-flag`
-When using commands such as `add`,`edit` and `search`, the user can specify details with the use of flags in the form `-FLAG`.
+When using commands such as `add`,`edit` and `search`, you can specify details with the use of flags in the form: 
+`-flag`.
 
-ConTech currently supports six `FLAGS` and has in built checkers to check if the format of the `DETAILS` fulfill
-the fields. These `flags` include:
+**ConTech** currently supports six `flags` and has in built checkers to check if the format of the `details` are 
+fulfilled. These `flags` include:
 - `-n`: for your contact's name
 - `-g`: for your contact's GitHub account username
 - `-l`: for your contact's LinkedIn handle
