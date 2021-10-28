@@ -32,7 +32,7 @@ activate command
 command -> member : members.addMember(member)
 activate member
 
-member -> storage : writeMemberFile
+member -> storage : writeMemberFile(memberFile, members)
 activate storage
 
 storage -> storage : save to disk
