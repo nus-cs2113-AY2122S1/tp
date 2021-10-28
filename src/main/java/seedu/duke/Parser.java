@@ -386,10 +386,6 @@ public class Parser {
         //Leave for v2.0, implement as class in commands package
     }
 
-    public static void wrongInputTypeMessage() {
-        Ui.printWrongInputMessage();
-    }
-
     /**
      * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
      * Otherwise, the full list will not be shown.
