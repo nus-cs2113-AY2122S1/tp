@@ -43,7 +43,9 @@ public class Ui {
         return input;
     }
 
-
+    public void printBorder() {
+        System.out.println(MESSAGE_BORDER);
+    }
 
     /**
      * Prints message within borders.
@@ -56,13 +58,13 @@ public class Ui {
 
     public void printMessage(String message, boolean withBorders) {
         if (withBorders) {
-            System.out.println(MESSAGE_BORDER);
+            printBorder();
         }
 
         System.out.println(message);
 
         if (withBorders) {
-            System.out.println(MESSAGE_BORDER);
+            printBorder();
         }
     }
 
