@@ -1,6 +1,7 @@
 package happybit.parser;
 
 import happybit.command.Command;
+import happybit.command.UpdateGoalEndDateCommand;
 import happybit.command.UpdateGoalNameCommand;
 import happybit.command.UpdateHabitIntervalCommand;
 import happybit.command.UpdateHabitNameCommand;
@@ -43,6 +44,7 @@ public class UpdateParser extends Parser {
         String[] parameters = splitInput(input);
         int goalIndex = getGoalIndex(parameters);
         Date newDate = getDate(parameters);
+        return new UpdateGoalEndDateCommand(goalIndex, newDate);
     }
 
     /**
