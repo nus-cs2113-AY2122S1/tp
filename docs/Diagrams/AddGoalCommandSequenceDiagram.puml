@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+-> ": AddGoalCommand": runCommand(goalList: GoalList, \nprintManager: PrintManager, storage: Storage)
+activate ": AddGoalCommand"
+
+": AddGoalCommand" -> "goalList: GoalList": addGoal(goal: Goal, printManager: PrintManager)
+activate "goalList: GoalList"
+
+"goalList: GoalList" -> "printManager: PrintManager" : printAddedGoal(goal.getDescription: String)
+activate "printManager: PrintManager"
+
+"goalList: GoalList" <-- "printManager: PrintManager"
+deactivate "printManager: PrintManager"
+
+": AddGoalCommand" <-- "goalList: GoalList"
+deactivate "goalList: GoalList"
+
+<-- ": AddGoalCommand"
+deactivate ": AddGoalCommand"
+@enduml

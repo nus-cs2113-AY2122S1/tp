@@ -1,0 +1,39 @@
+@startuml
+
+!include Style.puml
+
+header DeleteHabitCommand Feature
+
+-> ": DeleteGoalCommand": runCommand(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+activate ": DeleteGoalCommand"
+
+": DeleteGoalCommand" -> "goalList: GoalList": deleteHabitFromGoal(goalIndex: int,\n printManager: PrintManager)
+activate "goalList: GoalList"
+
+create "goal: Goal"
+"goalList: GoalList" -> "goal: Goal": getGoal(goalIndex: int)
+activate "goal: Goal"
+"goalList: GoalList" <-- "goal: Goal"
+
+create "habits: ArrayList<habit>"
+"goalList: GoalList" -> "habits: ArrayList<habit>"
+activate "habits: ArrayList<habit>"
+"goal: Goal" <- "habits: ArrayList<habit>": getHabitList()
+"goalList: GoalList" <-- "goal: Goal"
+
+create "habit: Habit"
+"goalList: GoalList" -> "habit: Habit"
+activate "habit: Habit"
+"habits: ArrayList<habit>" <- "habit: Habit": get(habitIndex: int)
+"habits: ArrayList<habit>" --> "habit: Habit"
+
+"goalList: GoalList" -> "goal: Goal": removeHabit(habitIndex: int)
+"goal: Goal" -> "goal: Goal": remove(habitIndex: int)
+activate "goal: Goal"
+deactivate "goal: Goal"
+
+
+"goalList: GoalList" -> ": PrintManager": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
+activate ": PrintManager"
+
+@enduml

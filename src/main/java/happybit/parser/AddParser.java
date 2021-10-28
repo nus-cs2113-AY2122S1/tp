@@ -14,24 +14,54 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-public class AddParser {
+public class AddParser extends Parser {
 
+    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Exp: g/2";
+    private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
+    private static final String ERROR_INTERVAL_FORMAT = "Use the 'i/' flag to define the interval. Exp: i/7";
+    private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
+    private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
+    private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goalIndex has to be a number.";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number.";
+    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+    private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
+    private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
+    private static final String SLEEP_LABEL = "sl";
+    private static final String FOOD_LABEL = "fd";
+    private static final String EXERCISE_LABEL = "ex";
+    private static final String STUDY_LABEL = "sd";
+    private static final String DEFAULT_LABEL = "df";
+
+    private static final int START_DATE = 0;
+    private static final int END_DATE = 1;
+    private static final int FLAG_LENGTH = 2;
+
+    /**
+     * Parses user input to add a goal.
+     *
+     * @param commandInstruction User input containing command parameters.
+     * @return Command to add goal.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     */
     public static Command parseAddGoalCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
-        GoalType goalType = getTypeFlag(commandInstruction);
-        Date[] dates = getDates(commandInstruction);
-        Date startDate = dates[0];
-        Date endDate = dates[1];
-        String goalName = getGoalDescription(commandInstruction);
-        Goal goal = new Goal(goalName, goalType, startDate, endDate);
+        Goal goal = getGoal(commandInstruction);
         return new AddGoalCommand(goal);
     }
 
+    /**
+     * Parses user input to add a habit.
+     *
+     * @param commandInstruction User input containing command parameters.
+     * @return Command to add habit.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     */
     public static Command parseAddHabitCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
         int goalIndex = getGoalIndex(commandInstruction);
-        String habitName = getHabitDescription(commandInstruction);
-        Habit habit = new Habit(habitName);
+        Habit habit = getHabit(commandInstruction);
         return new AddHabitCommand(habit, goalIndex);
     }
 
@@ -43,236 +73,223 @@ public class AddParser {
      * =========================================================================
      */
 
+    // The following are parameter 'extractor' methods.
+
     /**
-     * Checks if the input is null.
+     * Gets the goal from user input.
      *
-     * @param input String of the user input.
-     * @throws HaBitParserException If the user input is null (blank).
+     * @param input User input.
+     * @return Goal with details from user input.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
-    private static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException("Command cannot be called without parameters.");
+    private static Goal getGoal(String input) throws HaBitParserException {
+        String[] parameters = splitInput(input);
+        String goalName = getName(parameters).trim();
+        GoalType goalType = getType(parameters);
+        Date[] dates = getDate(parameters);
+        Date startDate = dates[START_DATE];
+        Date endDate = dates[END_DATE];
+        return new Goal(goalName, goalType, startDate, endDate);
+    }
+
+    /**
+     * Gets the habit from user input.
+     * Habit is initialised with a null endDate first,
+     * and altered in AddHabitCommand where there will be access to the goalList.
+     *
+     * @param input User input.
+     * @return Habit with details from user input.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     */
+    private static Habit getHabit(String input) throws HaBitParserException {
+        String[] parameters = splitInput(input);
+        String habitName = getName(parameters).trim();
+        int interval = getInterval(parameters);
+        return new Habit(habitName, interval);
+    }
+
+    /**
+     * Gets the goal index from user input.
+     *
+     * @param input User input.
+     * @return Goal index.
+     * @throws HaBitParserException If the goal index flag or goal index is absent, or non-integer goal index.
+     */
+    private static int getGoalIndex(String input) throws HaBitParserException {
+        String[] parameters = splitInput(input);
+        String goalIndex = getAndCheckParameter(parameters, FLAG_GOAL_INDEX, ERROR_GOAL_INDEX_FORMAT);
+        return stringToInt(goalIndex.substring(2), ERROR_GOAL_INDEX_NON_INTEGER) - 1;
+    }
+
+    /**
+     * Gets the name of the goal/habit.
+     *
+     * @param parameters String array of command parameters.
+     * @return Name parameter.
+     * @throws HaBitParserException If the name flag is absent, or used without fielding a name.
+     */
+    private static String getName(String[] parameters) throws HaBitParserException {
+        String name = getAndCheckParameter(parameters, FLAG_NAME, ERROR_NAME_FORMAT);
+        return name.substring(FLAG_LENGTH);
+    }
+
+    /**
+     * Gets the goal type.
+     *
+     * @param parameters String array of command parameters.
+     * @return Goal type parameter.
+     * @throws HaBitParserException If the goal type flag is used without fielding a proper goal type.
+     */
+    private static GoalType getType(String[] parameters) throws HaBitParserException {
+        String flag = getParameter(parameters, FLAG_GOAL_TYPE);
+        if (flag == null) {
+            return GoalType.DEFAULT;
+        } else if (flag.equals(FLAG_GOAL_TYPE)) {
+            throw new HaBitParserException(ERROR_GOAL_TYPE_FORMAT);
         }
-    }
-
-    // Section 1: Add Goal Methods
-
-    // Section 1.1: Add Goal - GoalType Methods
-
-    /**
-     * Checks for flag errors before returning the GoalType based on user input.
-     *
-     * @param input String of the user input.
-     * @return GoalType corresponding to flag in user input.
-     * @throws HaBitParserException If there are syntax errors in the flag provided.
-     */
-    private static GoalType getTypeFlag(String input) throws HaBitParserException {
-        checkMultipleFlags(input);
-        checkImproperFlags(input);
-        return checkTypeFlag(input);
+        return getGoalType(flag.substring(FLAG_LENGTH));
     }
 
     /**
-     * Checks for flag in user input and returns the GoalType.
+     * Gets the dates of the goal.
      *
-     * @param input String of the user input.
-     * @return GoalType corresponding to flag in user input.
+     * @param parameters String array of command parameters.
+     * @return Date array containing start and end dates.
+     * @throws HaBitParserException If the date flag is used without fielding a date.
      */
-    private static GoalType checkTypeFlag(String input) {
-        if (input.contains(" -sl ")) {
-            return GoalType.SLEEP;
-        } else if (input.contains(" -fd ")) {
-            return GoalType.FOOD;
-        } else if (input.contains(" -ex ")) {
-            return GoalType.EXERCISE;
-        } else if (input.contains(" -sd ")) {
-            return GoalType.STUDY;
-        }
-        return GoalType.DEFAULT;
-    }
-
-    /**
-     * Checks if there are multiple flags in the user input.
-     *
-     * @param input String of the user input.
-     * @throws HaBitParserException If there are multiple flags within the user input.
-     */
-    private static void checkMultipleFlags(String input) throws HaBitParserException {
-        String[] flagArray = {"-sl", "-fd", "-ex", "-sd", "-df"};
-        if (countInstancesInString(input, flagArray) > 1) {
-            throw new HaBitParserException("Multiple goal flags detected.");
-        }
-    }
-
-    /**
-     * Checks the syntax of flags used in the user input.
-     *
-     * @param input String of the user input.
-     * @throws HaBitParserException If there are errors in the flag syntax used.
-     */
-    private static void checkImproperFlags(String input) throws HaBitParserException {
-        String[] improperFlagArray = {" -sl", " -fd", " -ex", " -sd", " -df",
-            "-sl ", "-fd ", "-ex ", "-sd ", "-df ",
-            "-sl", "-fd", "-ex", "-sd", "-df"};
-        if (countInstancesInString(input, improperFlagArray) != 0) {
-            throw new HaBitParserException("Flags should be defined with a space before and after.");
-        }
-    }
-
-    /**
-     * Counts the number of elements in the String array that appears in a given String.
-     *
-     * @param input         String to be checked.
-     * @param instanceArray String array containing the String elements.
-     * @return Integer number of String elements that appeared in the given String.
-     */
-    private static int countInstancesInString(String input, String[] instanceArray) {
-        int count = 0;
-        for (String s : instanceArray) {
-            if (input.contains(s)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Checks if a given string has any flags.
-     *
-     * @param input         String to be checked.
-     * @return Boolean value of whether any elements in the String array exists within the checked String.
-     */
-    private static boolean doesFlagExist(String input) {
-        String[] flagArray = {"-sl", "-fd", "-ex", "-sd", "-df"};
-        int count = 0;
-        for (String s : flagArray) {
-            if (input.contains(s)) {
-                count++;
-            }
-        }
-        return count != 0;
-    }
-
-    // Section 1.2: Add Goal - Date Methods
-
-    /**
-     * Checks for date errors before returning the dates based on user input.
-     *
-     * @param input String of the user input.
-     * @return Date[] containing 2 dates: start and end date.
-     * @throws HaBitParserException If there are errors in parsing the date.
-     */
-    private static Date[] getDates(String input) throws HaBitParserException {
+    private static Date[] getDate(String[] parameters) throws HaBitParserException {
         Date[] dates = new Date[2];
-        if (numberOfDates(input) == 1) {
-            dates = getDatesIfOneDate(input);
-        } else if (numberOfDates(input) == 2) {
-            dates = getDatesIfTwoDates(input);
-        }
-        checkDateNotBeforeToday(dates[0]);
-        checkDateNotBeforeToday(dates[1]);
-        checkStartDateBeforeOrEqualEndDate(dates[0], dates[1]);
-        assert dates[0].compareTo(dates[1]) < 0;
+        dates[START_DATE] = getStartDate(parameters);
+        dates[END_DATE] = getEndDate(parameters);
+
+        assert dates[START_DATE] != null;
+        assert dates[END_DATE] != null;
+
+        checkDateNotBeforeToday(dates[START_DATE]);
+        checkDateNotBeforeToday(dates[END_DATE]);
+        checkStartDateBeforeOrEqualEndDate(dates[START_DATE], dates[END_DATE]);
         return dates;
     }
 
     /**
-     * Find the number of dates given in the input.
+     * Gets the interval of the habit.
      *
-     * @param input String of the user input.
-     * @return Integer number of dates given.
-     * @throws HaBitParserException If number of dates < 1 or > 2.
+     * @param parameters String array of command parameters.
+     * @return Interval parameter.
+     * @throws HaBitParserException If the interval flag is used without fielding an interval, or non-integer interval.
      */
-    private static int numberOfDates(String input) throws HaBitParserException {
-        if (input.matches("(.*) /(.*) /(.*) /(.*)")) {
-            throw new HaBitParserException("Too many dates provided.");
-        } else if (input.matches("(.*) /(.*) /(.*)")) {
-            return 2;
-        } else if (input.matches("(.*) /(.*)")) {
-            return 1;
+    private static int getInterval(String[] parameters) throws HaBitParserException {
+        String interval = getAndCheckParameter(parameters, FLAG_INTERVAL, ERROR_INTERVAL_FORMAT);
+        return stringToInt(interval.substring(FLAG_LENGTH), ERROR_INTERVAL_NON_INTEGER);
+    }
+
+    // The following are sub-methods of the main 'extractor' methods.
+
+    /**
+     * Gets the parameter from the parameter array and check its validity.
+     *
+     * @param parameters   String array of command parameters.
+     * @param flag         Command flag.
+     * @param errorMessage Error message to call if input parameter is invalid.
+     * @return Parameter.
+     * @throws HaBitParserException If parameter is absent.
+     */
+    private static String getAndCheckParameter(String[] parameters, String flag, String errorMessage)
+            throws HaBitParserException {
+        String parameter = getParameter(parameters, flag);
+        if (parameter == null || parameter.equals(flag)) {
+            throw new HaBitParserException(errorMessage);
         }
-        throw new HaBitParserException("No dates provided.");
+        return parameter;
     }
 
     /**
-     * Obtains the date from user input if only one date is specified.
+     * Converts a string to an integer.
      *
-     * @param input String of the user input.
-     * @return Date[] containing 2 dates: start and end date.
-     * @throws HaBitParserException If there are errors in parsing the date.
+     * @param strInt       String representation of an integer.
+     * @param errorMessage Error message to call if string fails to parse.
+     * @return Integer parsed from the string.
+     * @throws HaBitParserException If the string fails to parse.
      */
-    private static Date[] getDatesIfOneDate(String input) throws HaBitParserException {
-        Date[] dates = new Date[2];
-        dates[0] = new Date();
-        dates[1] = getFirstDate(input);
-        return dates;
-    }
-
-    /**
-     * Obtains the date from user input if only one date is specified.
-     *
-     * @param input String of the user input.
-     * @return Date[] containing 2 dates: start and end date.
-     * @throws HaBitParserException If there are errors in parsing the date.
-     */
-    private static Date[] getDatesIfTwoDates(String input) throws HaBitParserException {
-        Date[] dates = new Date[2];
-        dates[0] = getFirstDate(input);
-        dates[1] = getSecondDate(input);
-        return dates;
-    }
-
-    /**
-     * Gets the first date specified in the user input.
-     *
-     * @param input String of the user input.
-     * @return Date which is the first date specified.
-     * @throws HaBitParserException If there are issues with the date formatting.
-     */
-    private static Date getFirstDate(String input) throws HaBitParserException {
-        String strDate;
+    private static int stringToInt(String strInt, String errorMessage) throws HaBitParserException {
         try {
-            int firstDateStartIndex = input.indexOf('/') + 1;
-            strDate = input.substring(firstDateStartIndex, firstDateStartIndex + 8);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new HaBitParserException("Invalid date format. Use ddMMyyyy e.g, 28102021.");
+            return Integer.parseInt(strInt);
+        } catch (NumberFormatException e) {
+            throw new HaBitParserException(errorMessage);
         }
-        return stringToDate(strDate);
     }
 
     /**
-     * Gets the second date specified in the user input.
+     * Converts a string to a date.
      *
-     * @param input String of the user input.
-     * @return Date which is the second date specified.
-     * @throws HaBitParserException If there are issues with the date formatting.
-     */
-    private static Date getSecondDate(String input) throws HaBitParserException {
-        String strDate;
-        try {
-            int secondDateStartIndex = input.indexOf('/', input.indexOf('/') + 1) + 1;
-            strDate = input.substring(secondDateStartIndex, secondDateStartIndex + 8);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new HaBitParserException("Invalid date format. Use ddMMyyyy e.g, 28102021.");
-        }
-        return stringToDate(strDate);
-    }
-
-    /**
-     * Converts a String into a Date.
-     *
-     * @param strDate String representation of a start or end date.
-     * @return Date formatted from a string in the dd-MMM-yyyy format e.g, 07-Oct-2021.
+     * @param strDate String representation of a date.
+     * @return Date parsed from the string.
+     * @throws HaBitParserException If the string fails to parse.
      */
     private static Date stringToDate(String strDate) throws HaBitParserException {
-        Date date;
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        formatter.setLenient(false);
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            date = formatter.parse(strDate);
-        } catch (ParseException parseException) {
-            throw new HaBitParserException("Invalid date format. Use ddMMyyyy e.g, 28102021.");
+            return formatter.parse(strDate);
+        } catch (ParseException e) {
+            throw new HaBitParserException(ERROR_DATE_FORMAT);
         }
-        return date;
+    }
+
+    /**
+     * Gets Goal Type from a string label.
+     *
+     * @param label String containing label of goal type.
+     * @return Goal type corresponding to string label.
+     * @throws HaBitParserException If an invalid label is used.
+     */
+    private static GoalType getGoalType(String label) throws HaBitParserException {
+        switch (label) {
+        case SLEEP_LABEL:
+            return GoalType.SLEEP;
+        case FOOD_LABEL:
+            return GoalType.FOOD;
+        case EXERCISE_LABEL:
+            return GoalType.EXERCISE;
+        case STUDY_LABEL:
+            return GoalType.STUDY;
+        case DEFAULT_LABEL:
+            return GoalType.DEFAULT;
+        default:
+            throw new HaBitParserException(ERROR_GOAL_TYPE_LABEL);
+        }
+    }
+
+    /**
+     * Gets start date from parameters.
+     *
+     * @param parameters String array of command parameters.
+     * @return Start date.
+     * @throws HaBitParserException If string fails to convert into a date.
+     */
+    private static Date getStartDate(String[] parameters) throws HaBitParserException {
+        String strStartDate = getParameter(parameters, FLAG_START_DATE);
+        if (strStartDate == null) {
+            return new Date();
+        } else if (strStartDate.equals(FLAG_START_DATE)) {
+            throw new HaBitParserException(ERROR_START_DATE_FORMAT);
+        }
+        return stringToDate(strStartDate.substring(FLAG_LENGTH));
+    }
+
+    /**
+     * Gets end date from parameters.
+     *
+     * @param parameters String array of command parameters.
+     * @return End date.
+     * @throws HaBitParserException If string fails to convert into a date.
+     */
+    private static Date getEndDate(String[] parameters) throws HaBitParserException {
+        String strEndDate = getParameter(parameters, FLAG_END_DATE);
+        if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
+            throw new HaBitParserException(ERROR_END_DATE_FORMAT);
+        }
+        return stringToDate(strEndDate.substring(FLAG_LENGTH));
     }
 
     /**
@@ -285,7 +302,7 @@ public class AddParser {
         Instant anHourBeforeNow = now.minus(1, ChronoUnit.HOURS);
         Date currentDate = Date.from(anHourBeforeNow);
         if (compareDate.compareTo(currentDate) < 0) {
-            throw new HaBitParserException("Specified date has to come after today's date");
+            throw new HaBitParserException(ERROR_PAST_DATE);
         }
     }
 
@@ -296,80 +313,8 @@ public class AddParser {
      */
     private static void checkStartDateBeforeOrEqualEndDate(Date startDate, Date endDate) throws HaBitParserException {
         if (startDate.compareTo(endDate) > 0) {
-            throw new HaBitParserException("Start Date has to come before End Date.");
+            throw new HaBitParserException(ERROR_CHRONOLOGICAL_DATE);
         }
-    }
-
-    // Section 1.3: Add Goal - Description Methods
-
-    /**
-     * Checks for description errors before returning the description based on user input.
-     *
-     * @param input String of the user input.
-     * @return String containing description of the goal.
-     */
-    private static String getGoalDescription(String input) throws HaBitParserException {
-        String description = input.substring(0, findGoalDescriptionEndIndex(input)).strip();
-        if (description.isEmpty()) {
-            throw new HaBitParserException("Description cannot be empty.");
-        }
-        return description;
-    }
-
-    /**
-     * Finds the index + 1 of the last character of the description.
-     *
-     * @param input String of the user input.
-     * @return Integer of the description's last character + 1.
-     */
-    private static int findGoalDescriptionEndIndex(String input) {
-        int endIndex;
-        if (doesFlagExist(input)) {
-            endIndex = input.indexOf(" -");
-        } else {
-            endIndex = input.indexOf(" /");
-        }
-        return endIndex;
-    }
-
-    // Section 2: Add Habit Methods
-
-    /**
-     * Checks for goal index errors before returning the goal index based on user input.
-     *
-     * @param input String of the user input.
-     * @return Integer index of the goal that the habit should be added to.
-     * @throws HaBitParserException If the goal number was not specified or is not numeric.
-     */
-    private static int getGoalIndex(String input) throws HaBitParserException {
-        String[] words = input.split(" ");
-        int goalNumber;
-        try {
-            goalNumber = Integer.parseInt(words[0]);
-        } catch (NumberFormatException e) {
-            throw new HaBitParserException("Goal number has to be specified.");
-        }
-        return goalNumber - 1;
-    }
-
-    /**
-     * Checks for description errors before returning the description based on user input.
-     *
-     * @param input String of the user input.
-     * @return String description of the habit.
-     * @throws HaBitParserException If habit description (name) is empty.
-     */
-    private static String getHabitDescription(String input) throws HaBitParserException {
-        String description;
-        try {
-            description = input.substring(input.indexOf(' '));
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new HaBitParserException("Habit name cannot be empty.");
-        }
-        if (description.isEmpty()) {
-            throw new HaBitParserException("Habit name cannot be empty.");
-        }
-        return description;
     }
 
 }

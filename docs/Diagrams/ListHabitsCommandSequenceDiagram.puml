@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+
+-> ":ListHabitsCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage:Storage)
+activate ":ListHabitsCommand"
+
+":ListHabitsCommand" -> "goalList:GoalList" :listHabitsFromGoal(goatIndex:int,\nprintManager:PrintManager)
+activate "goalList:GoalList"
+"goalList:GoalList" -> "goalList:GoalList" :getGoal(goalIndex:int)
+activate "goalList:GoalList"
+"goalList:GoalList" --> "goalList:GoalList" :goal:Goal
+deactivate "goalList:GoalList"
+
+"goalList:GoalList" -> "goal:Goal": getHabitList()
+activate "goal:Goal"
+"goal:Goal" --> "goalList:GoalList": habitList: ArrayList<Habit>
+"goalList:GoalList" -> "goal:Goal": numberOfHabits()
+"goal:Goal" --> "goalList:GoalList" :numOfHabits: int
+deactivate "goal:Goal"
+
+alt#gold #lightblue numOfHabits = 0
+    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    activate ":HabitCommandException"
+    deactivate ":HabitCommandException"
+else #lightgreen
+    "goalList:GoalList" -> "printManager:PrintManager": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
+    activate "printManager:PrintManager"
+    deactivate "printManager:PrintManager"
+end
+
+deactivate "goalList:GoalList"
+deactivate ":ListHabitsCommand"
+
+@enduml

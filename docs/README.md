@@ -1,10 +1,16 @@
-# Ha(ppy)Bit
+![Ha(ppy)Bit Logo](Display_Images/HappyBit_logo.png)
 
-Ha(ppy)Bit is a desktop application to set and track goals to cultivate good habits.
+# Howdy! This is Ha(ppy)Bit.
+_Ha(ppy)Bit_ is a desktop app aimed to **empower students** to achieve their
+**goals**—whether personal, academical, or health—amidst the hectic and stressful
+**university life**, through cultivating good **habits**.
 Users can only run the app on a Command Line Interface (CLI).
 
-If you are interested in:
+Sounds like the app for you? Head over to our [User Guide](UserGuide.md) to get started!
 
-* using the app, head over to our [User Guide](UserGuide.md).
-* the system of Ha(ppy)Bit, our [Developer Guide](DeveloperGuide.md) will be helpful.
-* the developers behind Ha(ppy)Bit, find out [About Us](AboutUs.md).
+-----------
+
+You might be interested in:
+* 💻 [User Guide](UserGuide.md): great starting point for new users. 
+* 📖 [Developer Guide](DeveloperGuide.md): what makes Ha(ppy)Bit tick?
+* 👩‍💻 👨‍💻 [About Us](AboutUs.md): find out about the developers behind Ha(ppy)Bit.

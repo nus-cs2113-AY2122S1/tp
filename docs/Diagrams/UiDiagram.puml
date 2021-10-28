@@ -1,0 +1,31 @@
+@startuml
+!include Style.puml
+
+box "Ui" #White
+participant ":HappyBit" as HappyBit
+participant ":State" as State
+participant ":UiStartup" as Start
+participant ":UiMain" as Main
+end box
+
+activate HappyBit
+
+HappyBit -> State : run()
+activate State
+
+State -> Start : new UiStartUp()
+activate Start
+
+State <- Start : :UiStartUp
+deactivate Start
+
+State -> Main : new UiMain()
+activate Main
+
+State <- Main : :UiMain
+deactivate Main
+
+HappyBit <- State : void
+deactivate State
+
+@enduml

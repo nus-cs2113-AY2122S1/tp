@@ -1,0 +1,22 @@
+@startuml
+!include Style.puml
+
+-> ":ListGoalsCommand": runCommand(goalList:GoalList,\nprintManager:printManager, storage:Storage)
+activate ":ListGoalsCommand"
+
+":ListGoalsCommand" -> "goalList:GoalList":  listGoals(printManager:PrintManager)
+activate "goalList:GoalList"
+alt#gold #lightblue goalList.size == 0
+    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    activate ":HabitCommandException"
+    deactivate ":HabitCommandException"
+
+else #lightgreen
+    "goalList:GoalList" -> "printManager:PrintManager": printGoalList(goalList:ArrayList<Goal>,  goalList.size:int)
+    activate "printManager:PrintManager"
+    deactivate "printManager:PrintManager"
+end
+deactivate "goalList:GoalList"
+deactivate ":ListGoalsCommand"
+
+@enduml

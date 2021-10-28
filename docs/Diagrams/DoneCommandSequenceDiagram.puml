@@ -1,0 +1,36 @@
+@startuml
+!include Style.puml
+
+-> ":DoneHabitCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage: Storage)
+activate ":DoneHabitCommand"
+
+":DoneHabitCommand" -> "goalList:GoalList": doneHabitFromGoal(goalIndex: int,\nhabitIndex: int, printManager: PrintManager)
+activate "goalList:GoalList"
+"goalList:GoalList" -> "goalList:GoalList": getGoal(goalIndex: int)
+activate "goalList:GoalList"
+"goalList:GoalList" --> "goalList:GoalList": goal: Goal
+deactivate "goalList:GoalList"
+
+"goalList:GoalList" -> "goal:Goal": getHabitList()
+activate "goal:Goal"
+"goal:Goal" --> "goalList:GoalList": habits: ArrayList<Habit>
+deactivate "goal:Goal"
+
+"goalList:GoalList" -> "habits:ArrayList<Habit>": get(habitIndex:int)
+activate "habits:ArrayList<Habit>"
+"habits:ArrayList<Habit>" --> "goalList:GoalList": habit:Habit
+deactivate "habits:ArrayList<Habit>"
+"goalList:GoalList" -> "goal:Goal": doneHabit(habitIndex:int)
+activate "goal:Goal"
+"goal:Goal" --> "goalList:GoalList"
+deactivate "goal:Goal"
+
+"goalList:GoalList" -> "printManager:PrintManager": printDoneHabit(goalDescription: String, habitName: String)
+activate "printManager:PrintManager"
+"printManager:PrintManager" --> "goalList:GoalList"
+deactivate "printManager:PrintManager"
+"goalList:GoalList" --> ":DoneHabitCommand"
+deactivate "goalList:GoalList"
+deactivate ":DoneHabitCommand"
+
+@enduml

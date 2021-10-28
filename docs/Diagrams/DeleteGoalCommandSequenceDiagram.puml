@@ -1,0 +1,30 @@
+@startuml
+
+!include Style.puml
+
+header DeleteGoalCommand Feature
+
+-> ": DeleteGoalCommand": runCommand(goalList: GoalList,\n printManager: PrintManager, storage: Storage)
+activate ": DeleteGoalCommand"
+
+": DeleteGoalCommand" -> "goalList: GoalList": deleteGoal(goalIndex: int,\n printManager: PrintManager)
+activate "goalList: GoalList"
+
+create "goal: Goal"
+"goalList: GoalList" -> "goal: Goal": getGoal(goalIndex: int)
+activate "goal: Goal"
+return
+
+"goalList: GoalList" -> "goalList: GoalList": updateChosenGoalIndex(goalIndex: int)
+activate "goalList: GoalList"
+deactivate "goalList: GoalList"
+
+"goalList: GoalList" -> "goalList: GoalList": remove(goal: Goal)
+activate "goalList: GoalList"
+deactivate "goalList: GoalList"
+
+"goalList: GoalList" -> ": PrintManager": printRemovedGoal(goal.getDescription(): String)
+activate ": PrintManager"
+deactivate ": PrintManager"
+
+@enduml

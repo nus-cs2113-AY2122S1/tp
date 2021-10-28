@@ -1,138 +1,82 @@
 package happybit.parser;
 
-import happybit.command.Command;
-import happybit.command.HelpCommand;
-import happybit.command.ExitCommand;
-import happybit.command.ListGoalsCommand;
 import happybit.exception.HaBitParserException;
+
+import java.util.function.Function;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
 
-    private static final String DELIMITER = "@@@";
+    protected static final String DELIMITER = "\u0001";
+    protected static final String LABEL_SYNTAX = "[a-zA-Z]/";
+    protected static final String DATE_FORMAT = "ddMMyyyy";
 
-    private static final String COMMAND_HELP = "help";
-    private static final String COMMAND_ADD_GOAL = "set";
-    private static final String COMMAND_ADD_HABIT = "add";
-    private static final String COMMAND_UPDATE_GOAL_NAME = "update";
-    private static final String COMMAND_UPDATE_HABIT_NAME = "change";
-    private static final String COMMAND_LIST_GOAL = "list";
-    private static final String COMMAND_LIST_HABIT = "view";
-    private static final String COMMAND_DELETE_GOAL = "remove";
-    private static final String COMMAND_DELETE_HABIT = "delete";
-    private static final String COMMAND_COMPLETE_HABIT = "done";
-    private static final String COMMAND_EXIT = "bye";
+    protected static final String FLAG_GOAL_INDEX = "g/";
+    protected static final String FLAG_NAME = "n/";
+    protected static final String FLAG_GOAL_TYPE = "t/";
+    protected static final String FLAG_INTERVAL = "i/";
+    protected static final String FLAG_START_DATE = "s/";
+    protected static final String FLAG_END_DATE = "e/";
+    protected static final String FLAG_HABIT_INDEX = "h/";
+
+    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+            + "Enter the help command to view command formats";
 
     /**
-     * Parses the user input.
+     * Splits the input into the various parameters.
      *
-     * @param userInput String of the user input in the command line.
-     * @return Command to be executed based off user input.
-     * @throws HaBitParserException If there are syntax / missing information in the user input.
+     * @param input User input.
+     * @return String array containing the parameters.
      */
-    public static Command parse(String userInput) throws HaBitParserException {
-        String treatedUserInput = treatUserInput(userInput);
-        String[] words = treatedUserInput.split(" ");
-        String commandWord = words[0];
-        String commandInstruction = getCommandInstruction(words);
-        return parseCommand(commandWord, commandInstruction);
+    protected static String[] splitInput(String input) {
+        Function<MatchResult, String> replace = x -> DELIMITER + x.group();
+        Pattern pattern = Pattern.compile(LABEL_SYNTAX);
+        Matcher matcher = pattern.matcher(input);
+        String processedInput = matcher.replaceAll(replace);
+        String[] parameters = processedInput.split(DELIMITER);
+        return trimParameters(parameters);
     }
 
-    /*
-     * NOTE : ==================================================================
-     * The following are private methods that are used to implement SLAP for the
-     * above public methods. These methods are positioned at the bottom to better
-     * visualise the actual methods that can be called from outside this class.
-     * =========================================================================
-     */
-
     /**
-     * Treat the userInput by removing extra blank/white spaces.
+     * Removes leading and trailing whitespaces if any.
      *
-     * @param userInput String input by the user into the command line.
-     * @return String with removed extraneous whitespaces.
-     * @throws HaBitParserException If the delimiter appears in the user's input.
+     * @param parameters String array of command parameters.
+     * @return String array of command parameters that have been trimmed of leading/trailing whitespaces.
      */
-    private static String treatUserInput(String userInput) throws HaBitParserException {
-        if (userInput.contains(DELIMITER)) {
-            throw new HaBitParserException("Invalid character in the user input");
+    private static String[] trimParameters(String[] parameters) {
+        for (int i = 0; i < parameters.length; i++) {
+            parameters[i] = parameters[i].trim();
         }
-        String treatedInput = userInput.strip().replaceAll("\\s+"," ");
-        testEmptyString(treatedInput);
-        return treatedInput;
+        return parameters;
     }
 
     /**
-     * Checks if the string is empty.
+     * Finds the parameters corresponding to the given label and returns it.
      *
-     * @param userInput String of user's input with extraneous whitespace removed.
-     * @throws HaBitParserException If the treated user's input is empty.
+     * @param parameters String array of command parameters.
+     * @param label      Label of a parameter.
+     * @return Parameter if it exists, null otherwise.
      */
-    private static void testEmptyString(String userInput) throws HaBitParserException {
-        if (userInput.isEmpty()) {
-            throw new HaBitParserException("No user command detected");
-        }
-    }
-
-    /**
-     * Obtain the instruction of the user input command without the command word.
-     *
-     * @param words String array of user input command delimited by whitespaces.
-     * @return String containing the remainder of the user input without the command word.
-     */
-    private static String getCommandInstruction(String[] words) {
-        if (words.length == 1) {
-            return null;
-        }
-        return concatenateString(words);
-    }
-
-    /**
-     * Concatenate the string in a string array, excluding the first string.
-     *
-     * @param words String array containing the strings to be concatenated.
-     * @return String that has been concatenated.
-     */
-    private static String concatenateString(String[] words) {
-        StringBuilder instruction = new StringBuilder();
-        for (int i = 1; i < words.length; i++) {
-            instruction.append(words[i]);
-            if (i != words.length - 1) {
-                instruction.append(" ");
+    protected static String getParameter(String[] parameters, String label) {
+        for (String parameter : parameters) {
+            if (parameter.contains(label)) {
+                return parameter;
             }
         }
-        return instruction.toString();
+        return null;
     }
 
     /**
-     * Parse the command instruction based off the command word.
+     * Checks if the input is null.
      *
-     * @param command String of the command word.
-     * @param details String of the command instructions.
-     * @return Command to be executed based off user input.
+     * @param input String of the user input.
+     * @throws HaBitParserException If the user input is null (blank).
      */
-    private static Command parseCommand(String command, String details) throws HaBitParserException {
-        switch (command) {
-        case COMMAND_ADD_GOAL:
-            return AddParser.parseAddGoalCommand(details);
-        case COMMAND_ADD_HABIT:
-            return AddParser.parseAddHabitCommand(details);
-        case COMMAND_LIST_GOAL:
-            return new ListGoalsCommand();
-        case COMMAND_LIST_HABIT:
-            return ListParser.parseListHabitCommand(details);
-        case COMMAND_DELETE_GOAL:
-            return DeleteParser.parseDeleteGoalCommand(details);
-        case COMMAND_DELETE_HABIT:
-            return DeleteParser.parseDeleteHabitCommand(details);
-        case COMMAND_COMPLETE_HABIT:
-            return DoneParser.parseDoneHabitCommand(details);
-        case COMMAND_UPDATE_GOAL_NAME:
-            return UpdateParser.parseUpdateGoalNameCommand(details);
-        case COMMAND_EXIT:
-            return new ExitCommand();
-        case COMMAND_HELP:
-        default:
-            return new HelpCommand();
+    protected static void checkNoDescription(String input) throws HaBitParserException {
+        if (input == null) {
+            throw new HaBitParserException(ERROR_NO_PARAMS);
         }
     }
 
