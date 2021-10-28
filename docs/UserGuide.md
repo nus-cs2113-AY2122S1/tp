@@ -196,7 +196,7 @@ $ add lesson CG2028 Tutorial -d thu -s 13:00 -e 14:00
     ______________________________________________________________________________________
 ```
 
-> 💡 The inputed times are automatically converted to 12-hour clock format.
+> 💡 The input times are automatically converted to 12-hour clock format.
 
 #### Module
 
@@ -301,7 +301,7 @@ $ list lesson tomorrow
 
 Format: `list module {grade}`
 
-* `grade` displays grade for each module and your current CAP.
+* `grade` displays the grade for each module and your current CAP.
 
 ```shell
 $ list module
@@ -565,7 +565,7 @@ Data from NUS Buddy is automatically saved on your local machine.
 ## FAQ
 
 **Q:** How do I transfer my data to another Computer?<br>
-**A:** Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke home folder.<br>
+**A:** Launch the app once on the new computer and exit. Afterwards, replace the data folder in the Duke home folder of your new computer with that of your previous computer.<br>
 
 ## Command summary
 
