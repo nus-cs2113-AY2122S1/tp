@@ -76,4 +76,5 @@ public class DoneParser extends Parser {
             throw new HaBitParserException(errorMessage);
         }
     }
+
 }

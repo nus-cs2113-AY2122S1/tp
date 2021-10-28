@@ -41,8 +41,7 @@ public class HappyBit {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-
-
+    
     /**
      * Executes the main body of HappyBit.
      */

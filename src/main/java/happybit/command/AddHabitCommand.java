@@ -59,4 +59,5 @@ public class AddHabitCommand extends AddCommand {
     public int getGoalIndex() {
         return goalIndex;
     }
+
 }

@@ -15,7 +15,7 @@ public class PrintManager {
     private static final String LINE = "______________________________________________________________"
             + "__________________________________________________________";
 
-    private static final String MSG_ERROR = "ERROR: %1$s" + LS;
+    private static final String MSG_ERROR = "Error Detected: %1$s" + LS;
     private static final String MSG_LIST_COMMAND = "Here are the list of commands:";
     private static final String MSG_LIST_GOAL = "%1$s goal(s) currently being tracked:" + LS;
     private static final String MSG_LIST_HABIT = "%1$s habit(s) currently being tracked for %2$s:" + LS;
@@ -29,7 +29,7 @@ public class PrintManager {
     private static final String MSG_UPDATE_HABIT_NAME = "The habit '%1$s' of goal '%2$s' has been changed to '%3$s'"
             + LS;
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
-            + "to '%3$i'" + LS;
+            + "to '%3$s'" + LS;
     private static final String MSG_EXIT = "Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + LS
             + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
             + " — Will Durant";
@@ -71,7 +71,7 @@ public class PrintManager {
     private static final String[] GOAL_HEADERS = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count",
         "Completion Rate"};
     private static final String[] HABIT_HEADERS = {"Index", "Name", "Interval", "Completion", "Completed", "Remaining",
-        "Expired"};
+        "Expired", "Streak"};
 
     private static final int INDEX_INDEX = 0;
     private static final int GOAL_NAME_INDEX = 1;
@@ -86,6 +86,7 @@ public class PrintManager {
     private static final int HABIT_COMPLETED_INDEX = 4;
     private static final int HABIT_REMAINING_INDEX = 5;
     private static final int HABIT_EXPIRED_INDEX = 6;
+    private static final int HABIT_STREAK_INDEX = 7;
     private static final int COMPLETION_RATE_INDEX = 0;
     private static final int COMPLETED_INDEX = 1;
     private static final int REMAINING_INDEX = 2;
@@ -443,6 +444,7 @@ public class PrintManager {
             data[habitIndex][HABIT_COMPLETED_INDEX] = String.valueOf(habitStatistics[COMPLETED_INDEX]);
             data[habitIndex][HABIT_REMAINING_INDEX] = String.valueOf(habitStatistics[REMAINING_INDEX]);
             data[habitIndex][HABIT_EXPIRED_INDEX] = String.valueOf(habitStatistics[EXPIRED_INDEX]);
+            data[habitIndex][HABIT_STREAK_INDEX] = String.valueOf(habits.get(habitIndex).getStreak());
         }
         return data;
     }

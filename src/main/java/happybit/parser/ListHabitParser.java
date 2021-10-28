@@ -4,7 +4,6 @@ import happybit.command.Command;
 import happybit.command.ListHabitsCommand;
 import happybit.exception.HaBitParserException;
 
-
 public class ListHabitParser extends Parser {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
@@ -62,4 +61,5 @@ public class ListHabitParser extends Parser {
             throw new HaBitParserException(ListHabitParser.ERROR_GOAL_INDEX_NON_INTEGER);
         }
     }
+
 }

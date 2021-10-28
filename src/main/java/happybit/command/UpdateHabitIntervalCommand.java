@@ -27,4 +27,5 @@ public class UpdateHabitIntervalCommand extends UpdateCommand {
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         goalList.updateHabitIntervalFromGoal(goalIndex, habitIndex, newInterval, printManager);
     }
+
 }

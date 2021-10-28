@@ -47,4 +47,5 @@ public class AddGoalCommand extends AddCommand {
     public Goal getGoal() {
         return goal;
     }
+
 }

@@ -58,4 +58,5 @@ public class UpdateGoalNameCommand extends UpdateCommand {
     public String getNewGoalName() {
         return goalName;
     }
+
 }

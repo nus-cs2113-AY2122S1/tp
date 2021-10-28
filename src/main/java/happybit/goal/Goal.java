@@ -133,9 +133,6 @@ public class Goal {
      */
     public void addHabit(Habit habit) {
         habitList.add(habit);
-        // get newly added habit and add progress
-        Habit newHabit = habitList.get(getListLength() - 1);
-        //newHabit.addProgress();
     }
 
     /**
@@ -254,7 +251,7 @@ public class Goal {
         return dueHabits;
     }
 
-    /* The following commands will be used for implementing the quick view of goal.
+    /* The following commands will be used for implementing the quick view of goal (not implemented)
      * isCompleted()
      * getCompletionRates()
      * getHabitNames()
@@ -302,13 +299,5 @@ public class Goal {
         }
         return habitNames;
     }
-
-    /*
-     * NOTE : ==================================================================
-     * The following are private methods that are used to implement SLAP for the
-     * above public methods. These methods are positioned at the bottom to better
-     * visualise the actual methods that can be called from outside this class.
-     * =========================================================================
-     */
 
 }

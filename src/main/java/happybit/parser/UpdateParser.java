@@ -4,11 +4,7 @@ import happybit.command.Command;
 import happybit.command.UpdateGoalNameCommand;
 import happybit.command.UpdateHabitIntervalCommand;
 import happybit.command.UpdateHabitNameCommand;
-import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitParserException;
-import happybit.habit.Habit;
-
-import static happybit.parser.Parser.splitInput;
 
 public class UpdateParser extends Parser {
 
@@ -166,4 +162,5 @@ public class UpdateParser extends Parser {
             }
         }
     }
+
 }

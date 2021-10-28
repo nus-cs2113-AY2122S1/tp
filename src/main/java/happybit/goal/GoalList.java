@@ -37,6 +37,8 @@ public class GoalList {
 
     /**
      * Getter for index of chosen goal.
+     * To be used for goal quick view (not implemented).
+     *
      * @return Integer index of chosen goal.
      */
     public int getChosenGoalIndex() {
