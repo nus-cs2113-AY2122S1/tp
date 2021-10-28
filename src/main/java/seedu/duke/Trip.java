@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 
+import static seedu.duke.Parser.isNumeric;
+
 public class Trip {
 
     private LocalDate dateOfTrip;
@@ -303,13 +305,26 @@ public class Trip {
     public String getForeignCurrency() {
         return foreignCurrency;
     }
+    //@@author
 
+    //@@author itsleeqian
     public void setForeignCurrency(String foreignCurrency) {
-        this.foreignCurrency = foreignCurrency;
-        setForeignCurrencyFormat(this.foreignCurrency);
-        setForeignCurrencySymbol(this.foreignCurrency);
+        try {
+            if (isNumeric(foreignCurrency) || foreignCurrency.length() != 3) {
+                throw new NumberFormatException();
+            }
+            this.foreignCurrency = foreignCurrency;
+            setForeignCurrencyFormat(this.foreignCurrency);
+            setForeignCurrencySymbol(this.foreignCurrency);
+        } catch (NumberFormatException e) {
+            Ui.printIsoFormatError();
+            Scanner scanner = Storage.getScanner();
+            setForeignCurrency(scanner.nextLine().strip());
+        }
     }
+    //@@author
 
+    //@@author joshualeeky
     private void setForeignCurrencyFormat(String input) {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
@@ -322,7 +337,7 @@ public class Trip {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
-            this.foreignCurrencySymbol = "";
+            this.foreignCurrencySymbol = "$";
         }
     }
 
@@ -368,8 +383,8 @@ public class Trip {
             this.repaymentCurrencySymbol = "";
         }
     }
-
     //@@author
+
     public String getLocation() {
         return this.location;
     }

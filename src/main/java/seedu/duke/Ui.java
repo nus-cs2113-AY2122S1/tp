@@ -123,6 +123,10 @@ public class Ui {
                 + "Please enter the date again: ");
     }
 
+    public static void printIsoFormatError() {
+        System.out.print("Please re-enter your currency ISO (e.g. JPY, USD): ");
+    }
+
     public static void printUnknownCommandError() {
         System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter help "
                 + "to learn more.");

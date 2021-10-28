@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -210,6 +209,9 @@ public class Parser {
      */
     private static void executeCreateTrip(String attributesInString) {
         String[] newTripInfo = attributesInString.split(" ", 5);
+        if (newTripInfo.length < 5) {
+            throw new IndexOutOfBoundsException();
+        }
         Trip newTrip = new Trip(newTripInfo);
         Storage.getListOfTrips().add(newTrip);
         Ui.newTripSuccessfullyCreated(newTrip);
@@ -308,7 +310,7 @@ public class Parser {
         }
     }
 
-    private static boolean isNumeric(String secondCommand) {
+    public static boolean isNumeric(String secondCommand) {
         try {
             int i = Integer.parseInt(secondCommand);
             return true;
