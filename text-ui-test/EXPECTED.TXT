@@ -1,5 +1,5 @@
 Hello from
-  _    _       _ __  __           _
+   _    _       _ __  __           _
  | |  | |     (_)  \/  |         | |
  | |  | |_ __  _| \  / | ___   __| |___
  | |  | | '_ \| | |\/| |/ _ \ / _` / __|
@@ -7,7 +7,7 @@ Hello from
   \____/|_| |_|_|_|  |_|\___/ \__,_|___/
 
 
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
 
 What would you like to do?
 ==>CG1111 Engineering Principles and Practice I 6MC
@@ -24,12 +24,15 @@ CG4001 B. Eng. Dissertation 12MC
 CG4002 Computer Engineering Capstone Project 8MC
 CG4003 Advanced Project and Internship 12MC
 13 mods found.
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
 
 What would you like to do?
 ==>Title: Software Engineering & Object-Oriented Programming
+
 MCs: 4
+
 Department: Computer Science
+
 This module introduces the necessary skills for systematic and
 rigorous development of software systems. It covers requirements,
 design, implementation, quality assurance, and project management
@@ -38,14 +41,22 @@ module uses the Object Oriented Programming paradigm. Students of this
 module will receive hands-on practice of tools commonly used in the
 industry, such as test automation tools, build automation tools, and
 code revisioning tools will be covered.
+
 Prerequisites: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+
 S/U able: No
+
 Semester Availability: [1, 2]
 
-__________________________________________________________________________
+Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 09:00 AM
+              Sem 2: Thu May 05 01:00 PM - 01:00 PM
+
+
+
+________________________________________________________________________________________________________________________
 
 What would you like to do?
-==>__________________________________________________________________________
+==>________________________________________________________________________________________________________________________
 > Bye friend!
 > See you again! :)
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
