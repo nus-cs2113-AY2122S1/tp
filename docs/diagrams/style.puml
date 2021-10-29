@@ -1,0 +1,7 @@
+@startuml
+
+hide circle
+hide footbox
+skinparam classAttributeIconSize 0
+
+@enduml

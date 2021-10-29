@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+hide members
+
+class "{abstract}\nPrefix" as Prefix
+class SingleArgPrefix extends Prefix
+class MultipleArgPrefix extends Prefix
+class OptionalArgPrefix extends SingleArgPrefix
+class ArgsParser
+class Parser
+
+class "{abstract}\nSingleArgParser" as SingleArgParser
+class "{abstract}\nMultipleArgParser" as MultipleArgParser extends SingleArgParser
+class ExpiryDateParser extends SingleArgParser
+class IngredientParser extends MultipleArgParser
+class QuantityParser extends MultipleArgParser
+class RecipeParser extends MultipleArgParser
+class UnitParser extends SingleArgParser
+
+ArgsParser ..> Prefix
+ArgsParser ..> SingleArgPrefix
+ArgsParser ..> MultipleArgPrefix
+Parser ..> ArgsParser
+MultipleArgPrefix .> SingleArgPrefix
+
+@enduml
