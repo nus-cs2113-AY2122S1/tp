@@ -3,6 +3,7 @@ package command;
 import command.budget.BudgetCommand;
 import command.expense.ExpenseCommand;
 import command.income.IncomeCommand;
+import command.invest.InvestCommand;
 import picocli.CommandLine.Command;
 
 
@@ -10,6 +11,7 @@ import picocli.CommandLine.Command;
         BudgetCommand.class,
         ExpenseCommand.class,
         IncomeCommand.class,
+        InvestCommand.class,
         ExitCommand.class
 })
 public class MainCommand {

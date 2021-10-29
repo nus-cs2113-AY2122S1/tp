@@ -10,6 +10,7 @@ public class DataLocation {
     public static final Map<String, String> dataFilenames = Map.ofEntries(
             entry("income", "income.txt"),
             entry("budget", "budget.txt"),
-            entry("expense", "expense.txt")
+            entry("expense", "expense.txt"),
+            entry("invest", "invest.txt")
     );
 }

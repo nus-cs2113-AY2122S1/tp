@@ -1,4 +1,4 @@
-package entity;
+package entity.budget;
 
 public class Budget {
     private double value;

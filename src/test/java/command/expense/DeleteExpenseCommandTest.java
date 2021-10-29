@@ -1,8 +1,8 @@
 package command.expense;
 
 import command.CommandLineFactory;
-import entity.Expense;
-import entity.ExpenseList;
+import entity.expense.Expense;
+import entity.expense.ExpenseList;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 import storage.DataManager;

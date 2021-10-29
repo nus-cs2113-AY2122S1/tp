@@ -1,4 +1,4 @@
-package entity;
+package entity.income;
 
 import java.util.ArrayList;
 

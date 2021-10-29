@@ -1,4 +1,4 @@
-package entity;
+package entity.income;
 
 public class Income {
     private String description;
