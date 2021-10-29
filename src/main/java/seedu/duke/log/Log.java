@@ -2,7 +2,11 @@ package seedu.duke.log;
 
 import seedu.duke.constants.Constants;
 
-import java.util.logging.*;
+import java.util.logging.FileHandler;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Level;
 
 public class Log {
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
