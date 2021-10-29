@@ -9,6 +9,10 @@ import seedu.ui.TextUi;
 
 public class ChangeSemesterCommand extends Command {
 
+    public static final String commandSyntax = "semester";
+    public static final String commandAction =
+            "Changes the academic semester that you wish to plan for";
+
     private static Logger logger = Logger.getLogger("");
     private Timetable timetable;
 

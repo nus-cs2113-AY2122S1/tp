@@ -85,13 +85,14 @@ public class Module extends BaseModule {
         if (attributes != null) {
             isSUable = attributes.isSUable();
         }
-        String fullInfo = "Title: " + title + "\n"
-                + "MCs: " + (int) moduleCredit + "\n"
-                + "Department: " + department + "\n"
-                + wrap(description, 70) + "\n"
-                + "Prerequisites: " + prerequisite + "\n"
-                + "S/U able: " + isSUable + "\n"
-                + "Semester Availability: " + semesterData + "\n";
+        String fullInfo = "Title: " + title + "\n\n"
+                + "MCs: " + (int) moduleCredit + "\n\n"
+                + "Department: " + department + "\n\n"
+                + wrap(description, 70) + "\n\n"
+                + "Prerequisites: " + prerequisite + "\n\n"
+                + "S/U able: " + isSUable + "\n\n"
+                + "Semester Availability: " + semesterData + "\n\n"
+                + "Exam Date(s): " + getAllExams() + "\n\n";
         return fullInfo;
     }
 
@@ -195,6 +196,22 @@ public class Module extends BaseModule {
             }
             return true;
         }
+    }
+
+    public String getAllExams() {
+        String examdates = "";
+        boolean hasExam = false;
+        for (Semester semester : semesterData) {
+            if (semester.getExamDate() != null) {
+                examdates += "Sem " + semester.getSemester() + ": " + semester.getExamInfo()
+                        + "\n" + "              "; //placeholder
+                hasExam = true;
+            }
+        }
+        if (!hasExam) {
+            return "No Exam";
+        }
+        return examdates;
     }
 
     public String getExam(int sem) {

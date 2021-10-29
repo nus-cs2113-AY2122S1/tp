@@ -10,6 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SearchCommand extends Command {
+
+    public static final String commandSyntax = "search <MODULE_CODE>";
+    public static final String commandAction =
+            "Searches for modules that match the search expression";
     private static Logger logger = Logger.getLogger("");
     private final String searchTerm;
     private final SearchFlags searchFlags;

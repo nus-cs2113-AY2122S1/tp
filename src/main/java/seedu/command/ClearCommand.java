@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 
 public class ClearCommand extends Command {
 
+    public static final String commandSyntax = "clear";
+    public static final String commandAction = "Clears the timetable of everything";
+
     private static Logger logger = Logger.getLogger("");
     private Timetable timetable;
 
