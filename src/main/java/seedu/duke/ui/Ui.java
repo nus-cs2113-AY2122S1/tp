@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import seedu.duke.Duke;
@@ -379,7 +380,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
         System.out.print(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
@@ -392,10 +393,16 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     //@@author rebchua39
+
+    /**
+     * Displays the list of modules with the grade for each module and the cumulative average point (CAP).
+     * @param moduleList the list of modules
+     * @throws DukeException when there is an error in retrieving a module in the list
+     */
     public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
@@ -405,25 +412,35 @@ public class Ui {
             System.out.println(PADDING + "   Grade: " + module.getGrade());
         }
         printCap(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
+    /**
+     * Displays the user's cumulative average point (CAP) or a message if there is no valid CAP.
+     * @param moduleList the list of modules
+     */
     private void printCap(ModuleList moduleList) {
         double cap = moduleList.calculateCap();
-        if (cap >= 0) {
+        boolean isCapValid = (cap >= 0);
+        if (isCapValid) {
+            DecimalFormat df = new DecimalFormat("0.00");
             cap = moduleList.calculateCap();
-            System.out.println(PADDING + "Your current CAP is: " + cap);
+            System.out.println(PADDING + "Your current CAP is: " + df.format(cap));
         } else {
             System.out.println(PADDING + "If you have received grades for your modules, set them to see your CAP!");
         }
     }
 
+    /**
+     * Displays a message to inform the user that the grade for the specified module has been successfully changed.
+     * @param module the module object whose grade has been changed
+     */
     public void printModuleWithGradeChanged(Module module) {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);
         System.out.println(PADDING + "   Grade: " + module.getGrade());
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
