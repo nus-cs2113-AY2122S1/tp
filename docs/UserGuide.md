@@ -670,6 +670,7 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
+
  `no.` | `Command` | `Description` 
  --- | -------- | -------------- 
  1. | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` 
@@ -693,4 +694,5 @@ Bye, see you again soon!
  19. | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` 
  20. | `help` | `shows a list of command guides` 
  21. | `bye` | `terminates the app` 
+
 
