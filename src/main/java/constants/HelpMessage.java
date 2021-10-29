@@ -2,11 +2,12 @@ package constants;
 
 public final class HelpMessage {
 
-    public static final String helpMsg = "Expenses Functionality:\n"
+    public static final String helpMsg = "Expense Functionality:\n"
             + "expense add [NAME] -v [VALUE] -c [CATEGORY]\t Add a new expense\n"
             + "expense list [-c]\t List all expenses from a category\n"
             + "expense delete -n [NAME] -i [ID]\t Delete an existing expense\n"
-            + "expense update [NAME] -v [NEW_VALUE] -c [NEW_CATEGORY]\t Update the value & category of an expense\n"
+            + "expense update [NAME] -v [VALUE] -c [CATEGORY]\t Update the value & category of an expense\n"
+            + "expense warning -v [VALUE]\t Set a warning limit for expense with respect to budget\n "
             + "\nIncome Functionality:\n"
             + "income add [NAME] -v [VALUE]\t Add a new income\n"
             + "income list\t List all incomes\n"
