@@ -43,6 +43,8 @@ Examples:
 * ```add -t JPN /n Japan Basic Tour /p 1500 ``` calls for a <u>tour</u> to be added.
 * ```list -p ``` calls for all available <u>client packages</u> to be listed out.
 
+<br>
+
 ## Introduction to Data Fields
 
 <hr>
@@ -71,6 +73,8 @@ Examples of data fields in commands:
 * Sort tours:
     * ```/p``` - sorts tours by *price*
     * ```/d``` - sorts tours by *departure date and time*
+
+<br>
 
 ## Features
 
