@@ -86,6 +86,7 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    //@@author ng-andre
     private boolean[] hasEditedFields(String[] contactDetails) {
         boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {

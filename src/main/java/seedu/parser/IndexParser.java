@@ -15,6 +15,7 @@ public class IndexParser {
     private static final int REMOVE_ALL_ID = -2;
     private static final String numbers = "[0-9]+";
 
+    //@@author ng-andre
     public static int getIndexFromInput(String userInput)
             throws NumberFormatException, MissingIndexException {
         //split user input into 2 strings: command word string and index string
