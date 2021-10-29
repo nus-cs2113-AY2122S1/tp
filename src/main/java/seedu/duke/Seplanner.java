@@ -11,7 +11,7 @@ import seedu.duke.universities.UniversityList;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Seplanner {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
