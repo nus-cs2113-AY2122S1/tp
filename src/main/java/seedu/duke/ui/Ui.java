@@ -25,6 +25,10 @@ public class Ui {
 
     public static final String PADDING = "     ";
 
+    public static final String SHORT_LINE = PADDING
+            + "------------------------------------------------------------------------------------"
+            + System.lineSeparator();
+
     /**
      * Temporary logo.
      */
@@ -91,8 +95,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING
                 + "Here are the list of commands that you can try.");
-        System.out.println(PADDING
-                + "------------------------------------------------------------------------------------");
+        System.out.print(SHORT_LINE);
 
         System.out.println(PADDING + "add        "
                 + "task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}");
@@ -355,6 +358,7 @@ public class Ui {
     }
 
     //@@author Roycius
+
     /**
      * Displays a message to inform user that the specified module
      * has been successfully deleted.
@@ -379,6 +383,9 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
         System.out.print(moduleList);
+        System.out.print(SHORT_LINE);
+        printTotalMcs(moduleList);
+        printCap(moduleList);
         System.out.print(LINE);
     }
 
@@ -392,7 +399,13 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
+        printTotalMcs(moduleList);
+        printCap(moduleList);
         System.out.print(LINE);
+    }
+
+    private void printTotalMcs(ModuleList moduleList) {
+        System.out.println(PADDING + "You have a total of " + moduleList.getTotalMcs() + " MCs");
     }
 
     //@@author rebchua39
