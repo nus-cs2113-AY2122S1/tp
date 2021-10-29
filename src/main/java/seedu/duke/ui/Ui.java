@@ -435,6 +435,6 @@ public class Ui {
      */
     public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
         Module module = Duke.fullModuleList.findModule(moduleCode);
-        System.out.print(module.getFullInfo());
+        System.out.print(module.getFullInfo(false));
     }
 }

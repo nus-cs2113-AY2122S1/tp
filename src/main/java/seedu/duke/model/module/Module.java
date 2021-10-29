@@ -137,9 +137,10 @@ public class Module {
      *
      * @return a string of the full module information
      */
-    public String getFullInfo() {
+    public String getFullInfo(boolean hasGrade) {
         StringBuilder s = new StringBuilder();
-        s.append(Ui.SHORT_LINE).append(Ui.PADDING).append(this).append(System.lineSeparator());
+        s.append(Ui.SHORT_LINE).append(Ui.PADDING).append(moduleCode + " " + title + " (" + moduleCredit + "MCs) ");
+        s.append(hasGrade ? "Grade: " + grade : "").append(System.lineSeparator());
         s.append(Ui.PADDING).append("Department: ").append(department).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Faculty: ").append(faculty).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Preclusion: ").append(preclusion).append(System.lineSeparator());
