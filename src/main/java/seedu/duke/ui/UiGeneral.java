@@ -17,7 +17,7 @@ public class UiGeneral extends Ui {
     }
 
     public static void promptInput() {
-        out.print("Enter a command: ");
+        out.println("Enter a command: ");
     }
 
     public static void printLineSeparator() {

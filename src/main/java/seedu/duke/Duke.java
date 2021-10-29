@@ -44,7 +44,6 @@ public class Duke {
                     System.out.println();
                 }
             } while (!(cmd instanceof ExitCommand));
-            System.out.println();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
