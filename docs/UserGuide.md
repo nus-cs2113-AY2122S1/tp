@@ -100,7 +100,7 @@ $ help
        add        module [MODULE_CODE]
        list       task {PERIOD/PRIORITY}
        list       lesson {PERIOD}
-       list       module {grade}
+       list       module {verbose}
        delete     task [INDEX]
        delete     lesson [INDEX]
        delete     module [MODULE_CODE]
@@ -299,24 +299,42 @@ $ list lesson tomorrow
 
 #### Module
 
-Format: `list module {grade}`
+Format: `list module {verbose}`
 
-* `grade` displays the grade for each module and your current CAP.
+* `verbose` provides more detailed information.
 
 ```shell
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-       2. CG2028 Computer Organization (2MCs) 
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       2. CG2028 Computer Organization (2MCs) Grade: B
+       ------------------------------------------------------------------------------------
+       You have a total of 6 MCs
+       Your current CAP is: 4.50
       ______________________________________________________________________________________
 
-$ list module grade
+$ list module verbose
       ______________________________________________________________________________________
-       Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-          Grade: A+
-       Your current CAP is: 5.0
+       Here are the detailed information of your modules:
+       ------------------------------------------------------------------------------------
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       Department: Computer Science
+       Faculty: Computing
+       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+       Pre-requisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+       Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+       ------------------------------------------------------------------------------------
+       ------------------------------------------------------------------------------------
+       CG2028 Computer Organization (2MCs) Grade: B
+       Department: Computing and Engineering Programme
+       Faculty: Multi Disciplinary Programme
+       Preclusion: EE2024 Programming for Computer Interfaces
+       Pre-requisite: CS1010 Programming Methodology and (EE2026 Digital Design / EE2020 Digital Fundamentals)
+       Core Requisites: null
+       ------------------------------------------------------------------------------------
+       You have a total of 6 MCs
+       Your current CAP is: 4.50
       ______________________________________________________________________________________
 ```
 
@@ -449,8 +467,11 @@ Example:
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-       2. CG2028 Computer Organization (2MCs) 
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       2. CG2028 Computer Organization (2MCs) Grade: B
+       ------------------------------------------------------------------------------------
+       You have a total of 6 MCs
+       Your current CAP is: 4.50
       ______________________________________________________________________________________
 
 $ delete module CG2028
@@ -463,7 +484,11 @@ $ delete module CG2028
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       2. CG2028 Computer Organization (2MCs) Grade: B
+       ------------------------------------------------------------------------------------
+       You have a total of 6 MCs
+       Your current CAP is: 4.50
       ______________________________________________________________________________________
 ```
 
@@ -537,11 +562,18 @@ Format: `set grade [MODULE_CODE] [GRADE]`
 Example:
 
 ```shell
-$ set grade CS2113T A+
+$ set grade CS2113T A
       ______________________________________________________________________________________
        You have changed your grade for this module: 
-          CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-          Grade: A+
+          CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+          Grade: A
+      ______________________________________________________________________________________
+
+$ set grade CG2028 B
+      ______________________________________________________________________________________
+       You have changed your grade for this module: 
+          CG2028 Computer Organization (2MCs) Grade: B
+          Grade: B
       ______________________________________________________________________________________
 ```
 
@@ -576,7 +608,7 @@ Data from NUS Buddy is automatically saved on your local machine.
 | `add        module [MODULE_CODE]`                                                      | To add a module                                  |
 | `list       task {PERIOD/PRIORITY}`                                                    | To list all tasks                                |
 | `list       lesson {PERIOD}`                                                           | To list all lessons                              |
-| `list       module {grade}`                                                            | To list all modules                              |
+| `list       module {verbose}`                                                            | To list all modules                              |
 | `delete     task [INDEX]`                                                              | To delete a task                                 |
 | `delete     lesson [INDEX]`                                                            | To delete a lesson                               |
 | `delete     module [MODULE_CODE]`                                                      | To delete a module                               |

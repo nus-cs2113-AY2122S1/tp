@@ -110,10 +110,14 @@ public class Ui {
         System.out.println(PADDING + "list       "
                 + "lesson {PERIOD}");
         System.out.println(PADDING + "list       "
-                + "module");
+                + "module {VERBOSE}");
 
         System.out.println(PADDING + "delete     "
-                + "[task/lesson/module] [INDEX]");
+                + "task [INDEX]");
+        System.out.println(PADDING + "delete     "
+                + "lesson [INDEX]");
+        System.out.println(PADDING + "delete     "
+                + "module [MODULE_CODE]");
 
         System.out.println(PADDING + "done       "
                 + "task [INDEX]");
