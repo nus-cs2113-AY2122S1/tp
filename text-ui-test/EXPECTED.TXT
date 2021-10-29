@@ -1,3 +1,7 @@
+Member file not detected. Creating.
+attendance file does not exists
+attendance file created
+Training file not detected. Creating.
 Welcome to
  ,-----. ,-----.  ,---.      ,--.   ,--.  ,---.  ,--.  ,--.  ,---.   ,----.   ,------.,------.
 '  .--./'  .--./ /  O  \     |   `.'   | /  O  \ |  ,'.|  | /  O  \ '  .-./   |  .---'|  .--. '
@@ -5,9 +9,6 @@ Welcome to
 '  '--'\'  '--'\|  | |  |    |  |   |  ||  | |  ||  | `   ||  | |  |'  '--'  ||  `---.|  |\  \ 
  `-----' `-----'`--' `--'    `--'   `--'`--' `--'`--'  `--'`--' `--' `------' `------'`--' '--' 
 What would you like to do?
-=> file created
-attendance file does not exists
-attendance file created
-Added a Member: Name: Glenn | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+=> Added a Member: [1] Name: GLENN | Student Number: A0123456B | Gender: M | Phone Number: 98765432
 => You have successfully exited the programme.
 _____________________________________________________

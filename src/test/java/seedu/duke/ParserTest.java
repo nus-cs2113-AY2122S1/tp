@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
-import seedu.duke.member.exception.InvalidMemberException;
 
 class ParserTest {
 
@@ -17,28 +16,37 @@ class ParserTest {
     @BeforeEach
     public void setUp() {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", 'F', 98765432);
+        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
 
         ArrayList<Member> memberList = new ArrayList<>();
         memberList.add(teckHwee);
         testMemberList = new MemberList(memberList);
     }
 
-    /*@Test
-    void failedMakeMemberEntry() {
-        final String input = "add /m asd";
-        Parser.makeMemberEntry(testMemberList, input);
-        try {
-            assertEquals(testMemberList.getMember(2).getName(), "");
-            assertEquals(testMemberList.getMember(2).getStudentNumber(), "");
-        } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
-
     @Test
     void invalidKeyword() {
         final String input = "ad ads dwd";
         assertEquals(Parser.getKeywordStatus(input), Keyword.NO_KEYWORD);
+    }
+
+    @Test
+    void validTrainingName() {
+        final String entry = "Friday Training /d 0";
+        final String correctOutput = "Friday Training ";
+        assertEquals(Parser.getTrainingName(entry), correctOutput);
+    }
+
+    @Test
+    void validAttendanceIndex() {
+        final String entry = "delete /att /t Friday Training /i 2";
+        final int correctOutput = 2;
+        assertEquals(Parser.getAttendanceIndex(entry), correctOutput);
+    }
+
+    @Test
+    void validAttendanceTrainingName() {
+        final String entry = "delete /att /t Friday Training /i 2";
+        final String correctOutput = "Friday Training";
+        assertEquals(Parser.getAttendanceTrainingName(entry), correctOutput);
     }
 }

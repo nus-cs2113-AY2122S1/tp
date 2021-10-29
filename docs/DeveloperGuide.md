@@ -1,50 +1,77 @@
 # Developer Guide
 
-* [Acknowledgements](#acknowledgements)
-* [Getting Started](#getting-started)
+* [Introduction](#introduction)
+* [Setting Up](#setting-up)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [UI](#ui-component)
+  * [Parser](#parser-component)
+  * [Entry](#entry-component)
+  * [Command](#command-component)
+  * [Member](#member-component)
+  * [Training](#training-component)
+  * [Attendance](#attendance-component)
+  * [Storage](#storage-component)
+* [Restrictions](#restrictions)
 * [Appendix: Requirements](#appendix-requirements)
   * [Product Scope](#product-scope)
   * [User Stories](#user-stories)
   * [Non-functional Requirements](#non-functional-requirements)
+  
+## Introduction
 
-## Acknowledgements
+**CCA Manager** is a simple and easy to use command-line based application aimed to assist you, a CCA manager, to easily add, delete or alter information about your CCA members. 
+Moreover, **CCA Manager** also allows you to perform its functions on any training-related activities you may have in order to help you organise your CCA's timetable.
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
-## Getting Started
-
-This is a project for a greenfield Java project. CCA Manager is a CLI application, and it is designed to help CCA's manage their administrative issues.
+**CCA Manager** is written in `Java 11` and designed with OOP (Object Oriented Programming) as a guideline to help design a modular and organized structure for the application.
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
+
+
+## Setting Up
+
+**CCA Manager** is written in `Java 11`, which you can download [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+
+You can retrieve the latest JAR version of **CCA Manager** [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
+
+You can retrieve the source code for **CCA Manager** [here](https://github.com/AY2122S1-CS2113T-F12-4/tp). You can refer [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) 
+to learn how to fork and clone the repository of **CCA Manager** into your local workstation.
+
+We recommend the use of [IntelliJ](https://www.jetbrains.com/idea/download) when working on **CCA Manager**.
 
 ## Design
 
 ### Architecture
 
-
-![Architecture Diagram](images/Architecture.png)
+![Architecture Diagram](images/ArchitectureDiagram.png)
 
 The **architecture diagram** above presents a high-level overview of CCA Manager.
 
 **Components of the architecture**
 
-* `UI`: UI of CCA Manager
-* `Parser`: Parses user inputs into commands
-* `Training`: Stores training details as `TrainingSchedule` objects in `TrainingList`
-* `Members`: Stores member details as `Member` objects in `MemberList`
-* `Attendance`: Object that links a `Member` to a `TrainingSchedule`
-* `MemberStorage`: Reads data from, and writes data to, the hard disk
+* [`UI`: UI of CCA Manager](#ui-component)
+* [`Parser`: Parses user inputs into `keywords`](#parser-component)
+* [`Entry`: Converts `keywords` from `Parser` into `commands` to run](#entry-component)
+* [`Command`: Executes a command based on `keyword` given](#command-component)
+* [`Members`: Stores member details as `Member` objects in `MemberList`](#member-component)
+* [`Training`: Stores training details as `TrainingSchedule` objects in `TrainingList`](#training-component)
+* [`Attendance`: Object that links a `Member` to a `TrainingSchedule`](#attendance-component)
+* [`Storage`: Stores details of `Members`, `Training` and `Attendance` in hard disk space](#storage-component)
 
 **Components Interaction**
 
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"add /m Bob /s A01231234B /p 98765432"`
 
 ![Architecture Sequence Diagram](images/ArchitectureSequence.png)
+
 ### **Note:**
-* `makeMemberEntry()`: Creates a member in the memberList.
-* `writeMemberFile()`: Writes the data to the csv file.
+* Examples below have their arguments removed for the sake of brevity
+* `waitForQuery()`: Blocks until a user input is received.
+* `getKeywordStatus()`: Given user input, return the `keyword`
+* `getMemberDetails()`: Given user input, return a `Member` object with all information from user input
+* `addMember()`: Calling a class that creates a new `Member` object and adds it to the MemberList `members`
+* `members.addMember()`: Adds a Member `member` to MemberList `members`
+* `writeMemberFile()`: Writes the content of MemberList `members` to the File `memberFiles`, which should be a `.csv` file in hard drive 
 
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"delete /m 1"`
 ![Architecture Sequence Diagram2](images/deleteMemberArchitecture.PNG)
@@ -57,8 +84,92 @@ The *sequence diagram* below shows how various components of the architecture in
 
 The sections below give more details of each component.
 
+### UI Component
+*Hint: You can click on the API links to be redirected to its source code!*
+
+**API** : [Ui](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Ui.java)
+
+The `Ui` component handles the **output display** of **CCA Manager**. Whenever the user enters a command, the `Ui` class will print a message corresponding to the user input.
+
+**Current Functionalities**:
+* Display message on start-up
+* Help message when user inputs `--help`
+* Listing of `Members` in `MemberList`
+* Listing of `Training` in `TrainingList`
+* Listing of `Attendance` in `AttendanceList`
+* Displaying error messages on invalid command inputs
+
+### Parser Component
+**API** : [Parser](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Parser.java)
+
+The `Parser` component handles the **input parsing** of **CCA Manager**. User input is parsed to produce a `keyword` and corresponding inputs, such as `index` , `name`, etc. are identified.
+
+A `keyword` is an identifier used by **CCA Manager** to determine what operation (`add`, `edit`, `delete` or `list`) to do.
+
+**Current Functionalities**:
+* Retrieving `keyword` from user input.
+* Create a `TrainingSchedule` object from user input.
+* Create a `Member` object from user input
+* Create a `Attendance` object from user input.
+
+### Entry Component
+**API** : [Entry](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Entry.java)
+
+The `Entry` component performs a `command` based on the `keyword` given. If the user enters an invalid command, for example, the `Entry` component will direct the `Ui` component
+to print an error message. It uses a simple `switch-case` statement to handle the different `keyword` received.
+
+
+### Command Component
+**API** : [Command](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/command)
+
+The `Command` component directly interacts with the `Member`, `Training` or `Attendance` component based on the `keyword` given in order to perform a specific operation.
+
+**Current Functionalities**
+* Adding `Member` to `MemberList` in [Member Component](#member-component)
+* Adding `TrainingSchedule` to `TrainingList` in [Training Component](#training-component)
+* Adding `Attendance` to `AttendanceList` in [Attendance Component](#attendance-component)
+* Deleting `Member` from `MemberList` in Member Component
+* Deleting `TrainingSchedule` from `TrainingList` in Training Component
+* Deleting `Attendance` from `AttendanceList` in Attendance Component
+* Editing a field in `Member`
+* Editing a field in `Training`
+* Finding a specific `Member` in `MemberList`
+  * `Search by index` and `Search by member name` is supported
+* Finding a specific `TrainingSchedule` in `TrainingList`
+  * `Search by index` and `Search by training name` is supported
+
+
+### Member Component
+**API** : [Member](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/member)
+
+![Member Component Diagram](images/MemberComponent.png)
+
+The `Member` component,
+* instantiates an `MemberList` object comprising of 0 `Member` object.
+* stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
+* stores the `MemberList` object in a csv file with the help of `MemberStorage`.
+
+
+### Training Component
+**API** : [Training](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/training)
+
+The `Training` component consists of `TrainingList` and `TrainingSchedule`. Information regarding Trainings, such as `name`, `date/time` and `venue` are handled by the `Training` component.
+
+![Training Component](images/TrainingComponent.png)
+
+**Current Functionalities**
+
+The `Training` component,
+* instantiates a `TrainingList` object of 0 `TrainingSchedule` objects
+  * `TrainingSchedules` in a `TrainingList` hold an `Index` that **CCA Manager** uses in relevant commands, such as `delete by index` or `find by index`
+* `TrainingSchedule` is an object that holds the information of CCA information, such  as:
+  * Training Name
+  * Training Date
+  * Training Venue
+
+
 ### Attendance component
-**API** : [`Attendance.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/attendance/Attendance.java)
+**API** : [Attendance](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/attendance)
 
 ![Attendance Component Diagram](images/AttendanceComponent.png)
 
@@ -67,9 +178,8 @@ The `Attendance` component,
 * stores inputted `Attendance` objects in a list as an `ArrayList<Attendance>` in `AttendanceList` class.
 * stores the `AttendanceList` object in a csv file with the help of `AttendanceStorage`.
 
-###[Proposed] Storage component 
-#### **Proposed Implementation**
-**API** : ['Storage.java']()
+### Storage component
+**API** : [Storage]()
 
 The `Storage` component consists of 3 sub-components, corresponding to `member storage` , `attendance storage` 
 and `training schedule storage`
@@ -88,14 +198,11 @@ The `training schedule` component
 *can save trainings schedules and read them back into the `TrainingList` object. 
 *automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object
 
-**API** : [`Member.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/member/Member.java)
+## Restrictions
+# IMPORTANT!
+One restriction of the current implementation (`v2.0`) of **CCAManager** is that the user input cannot contain any commas.
 
-![Member Component Diagram](images/MemberComponent.png)
-
-The `Member` component,
-* instantiates an `MemberList` object comprising of 0 `Member` object.
-* stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
-* stores the `MemberList` object in a csv file with the help of `MemberStorage`.
+This is because data is saved in a `.csv` file, which uses commas as field delimiters. Hence, if user input were to contain commas, this may cause data to be imported inaccurately during the loading of existing files at start-up
 
 ## Appendix: Requirements
 ### Product scope
@@ -140,8 +247,10 @@ User can update CCA information faster than using a GUI, and offers a centralize
 1. Download the latest release from [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
 
 ### Initial Launch
-1. Place `tP.jar` in your folder of choice
-2. Run CCA Manager by calling `java -jar tP.jar` on `cmd`
+1. Place `CCAManager.jar` in your folder of choice
+2. Run `cmd.exe` 
+3. Run CCA Manager by calling `java -jar CCAManager.jar` on `cmd.exe`
+   1. Note that `cmd.exe` must be in the directory of `CCAManager.jar`
 
 ### Running Commands
 1. You can refer to the list of commands [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/docs/UserGuide.md)

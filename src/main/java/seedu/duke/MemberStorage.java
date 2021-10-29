@@ -1,4 +1,3 @@
-//@@xingyuan123
 package seedu.duke;
 
 import seedu.duke.attendance.AttendanceList;
@@ -126,4 +125,3 @@ public class MemberStorage {
     }
 
 }
-//@@xingyuan123
