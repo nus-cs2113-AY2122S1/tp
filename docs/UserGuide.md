@@ -667,7 +667,7 @@ Bye, see you again soon!
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
 | `no.` | `Command` | `Description` |
