@@ -36,7 +36,6 @@ public class Parser {
             return false;
         } else if (inputCommand.equals(CLOSE_COMMAND)) {
             try {
-                Storage.setOpenTripAsLastTrip();
                 Storage.setLastExpense(null);
                 Storage.closeTrip();
                 return true;
@@ -294,12 +293,10 @@ public class Parser {
         int indexToGet = Integer.parseInt(indexAsString) - 1;
         Storage.setOpenTrip(Storage.getListOfTrips().get(indexToGet));
         Ui.printOpenTripMessage(Storage.getOpenTrip());
-        Storage.setOpenTripAsLastTrip();
     }
 
     private static void executeSummary(String inputParams) {
         Trip currentTrip = Storage.getOpenTrip();
-        Storage.setOpenTripAsLastTrip();
         if (inputParams == null) {
             //list everybody's expense summary
             for (Person p : currentTrip.getListOfPersons()) {
@@ -327,7 +324,6 @@ public class Parser {
     //@@author leeyikai
     private static void executeView(String inputParams) {
         Trip openTrip = Storage.getOpenTrip();
-        Storage.setOpenTripAsLastTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
         } else {

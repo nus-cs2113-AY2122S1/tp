@@ -185,6 +185,7 @@ public class Storage {
             Ui.printNoOpenTripError();
             promptUserForValidTrip();
         }
+        lastTrip = openTrip;
         return openTrip;
     }
 
@@ -205,10 +206,6 @@ public class Storage {
         }
     }
 
-    public static void setOpenTripAsLastTrip() {
-        lastTrip = openTrip;
-    }
-
     /**
      * Checks if there is an open trip or not.
      *
@@ -220,6 +217,7 @@ public class Storage {
 
     public static void setOpenTrip(Trip openTrip) {
         Storage.openTrip = openTrip;
+        lastTrip = openTrip;
     }
 
     /**
@@ -227,7 +225,8 @@ public class Storage {
      */
     public static void closeTrip() {
         Trip tripToBeClosed = openTrip;
-        Storage.openTrip = null;
+        openTrip = null;
+        lastTrip = tripToBeClosed;
         Ui.printTripClosed(tripToBeClosed);
     }
 
