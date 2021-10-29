@@ -11,6 +11,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Storage {
@@ -48,18 +49,18 @@ public class Storage {
 
     public ArrayList<University> readSelectedUniversityList(
             UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
-//        logger.log(Level.INFO, "Start loading selected university data");
+        logger.log(Level.INFO, "Start loading selected university data");
         return selectedUniversityStorage.readSelectedUniversityList(universityMasterList, moduleMasterList);
     }
 
     public void updateSelectedModuleList(ModuleList moduleList) throws IOException {
-//        logger.log(Level.INFO, "File writing operation started");
+        logger.log(Level.INFO, "File writing operation started");
         selectedModuleStorage.updateSelectedModuleList(moduleList);
     }
 
     public void updateSelectedUniversityList(UniversityList universityList)
             throws IOException {
-//        logger.log(Level.INFO, "File writing operation started");
+        logger.log(Level.INFO, "File writing operation started");
         selectedUniversityStorage.updateSelectedUniversityList(universityList);
     }
 }
