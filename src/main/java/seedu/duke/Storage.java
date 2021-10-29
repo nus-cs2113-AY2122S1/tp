@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 
+import java.awt.desktop.AppReopenedEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -118,6 +119,8 @@ public class Storage {
         }
     }
 
+    private static final int EXIT_ERROR_CODE = 1;
+
     /**
      * Creates a new blank file at the specified file path ({@link Storage#FILE_PATH}).
      *
@@ -129,9 +132,12 @@ public class Storage {
             Ui.newFileSuccessfullyCreated();
         } catch (IOException ex) {
             Ui.printCreateFileFailure();
-            System.exit(1);
+            System.exit(EXIT_ERROR_CODE);
         }
     }
+
+    private static final String USER_REQUEST_END = "n";
+    private static final String USER_REQUEST_CONTINUE = "y";
 
     /**
      * If {@link Storage#readFromFile(String)} throws a {@link JsonParseException}, asks the user whether to overwrite
@@ -140,15 +146,16 @@ public class Storage {
      * @see Storage#createNewFile(String)
      */
     private static void askOverwriteOrClose() {
+
         while (true) {
             Ui.printJsonParseUserInputPrompt();
             String input = scanner.nextLine().strip();
-            if (input.contains("n")) {
+            if (input.contains(USER_REQUEST_END)) {
                 Ui.goodBye();
                 Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
-                System.exit(1);
+                System.exit(EXIT_ERROR_CODE);
                 return;
-            } else if (input.contains("y")) {
+            } else if (input.contains(USER_REQUEST_CONTINUE)) {
                 createNewFile(FILE_PATH);
                 return;
             }
