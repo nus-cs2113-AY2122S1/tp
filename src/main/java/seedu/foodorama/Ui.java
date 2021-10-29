@@ -285,6 +285,14 @@ public class Ui {
             + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient Index exceeds size of Ingredient List. Type 'list ingr' to view the correct"
+            + " Ingredient Index of the Ingredient you want to edit."
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+
+
     public void printLogo() {
         System.out.println(START_LOGO);
     }
@@ -323,6 +331,7 @@ public class Ui {
                 + "Sorry, the dish " + dishName + " does not exist in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
+
 
     public void printDishNotExistMsg() {
         System.out.println(DISH_NOTEXIST);
@@ -392,6 +401,10 @@ public class Ui {
         return INGR_NOTEXIST;
     }
 
+    public String getIngrIndexExceedSizeMsg() {
+        return INGR_INDEX_EXCEED_SIZE;
+    }
+
     public void printIngrNotExistMsg() {
         System.out.println(INGR_NOTEXIST);
     }
@@ -453,6 +466,43 @@ public class Ui {
 
     public void printConfirmClearAll() {
         System.out.println(CONFIRM_CLEAR_ALL);
+    }
+
+//    public void printAskNewNameDish(String dishName) {
+//        System.out.println("What would you like to change the Dish Name '"
+//                + dishName
+//                + "' to?");
+//    }
+//
+//    public void printAskNewNameDish(String dishName) {
+//        System.out.println("What would you like to change the Ingredient Name '"
+//                + dishName
+//                + "' to?");
+//    }
+
+    public void printDishNameChanged(String dishName) {
+        System.out.println("Dish Name has been updated to '"
+                + dishName
+                + "'!");
+    }
+
+    public void printAskNewNameIngr(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the Ingredient Name '" + ingrName
+                + "' to?" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printConfirmIngrEditMsg(String ingrName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change ingredient name from '" + ingrName + "' to '"
+                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printIngrNameChanged(String ingrName) {
+        System.out.println(LINE_DIVIDER+ System.lineSeparator()
+                + "Ingredient Name has been updated to '" + ingrName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printDisregardMsg() {

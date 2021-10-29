@@ -48,6 +48,7 @@ public class InputParser {
         case SET_INGR_LIMIT:
         case ADD_INGR:
         case ADD_DISH:
+        case EDIT_INGR:
         case LIST:
             parameters.add(parameterString);
             break;

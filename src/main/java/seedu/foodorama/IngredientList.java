@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private static final Ui ui = new Ui();
+    private static final String YES = "y";
+    private static final String NO = "n";
 
     public static void add(String ingredientName) throws FoodoramaException {
         ui.printEnterWeightOf(ingredientName);
@@ -66,13 +68,13 @@ public class IngredientList {
         } else {
             ui.printConfirmDelIngr();
             String confirmDel = input.nextLine().toLowerCase();
-            while (!(confirmDel.equals("y") | confirmDel.equals("n"))) {
+            while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
                 ui.clearTerminalAndPrintNewPage();
                 ui.printInvalidConfirmation();
                 confirmDel = input.nextLine().toLowerCase();
             }
             ui.clearTerminalAndPrintNewPage();
-            if (confirmDel.equals("y")) {
+            if (confirmDel.equals(YES)) {
                 //Get all dishes
                 for (Dish dish : DishList.dishList) {
                     //Find if they contain ingr in parts
@@ -99,18 +101,46 @@ public class IngredientList {
         ui.printConfirmClearIngr();
         String confirmClear = input.nextLine().toLowerCase();
 
-        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
+        while (!(confirmClear.equals(YES) | confirmClear.equals(NO))) {
             ui.clearTerminalAndPrintNewPage();
             ui.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
         ui.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals("y")) {
+        if (confirmClear.equals(YES)) {
             ingredientList.clear();
             assert ingredientList.size() == 0 : "ingredientList should be of size 0";
             ui.printIngrListCleared();
         } else {
             ui.printDisregardMsg();
+        }
+    }
+
+    public static void editName(int ingredientIndex) throws FoodoramaException {
+        if (ingredientIndex < 0 | ingredientIndex >= ingredientList.size()) {
+            throw new FoodoramaException(ui.getIngrIndexExceedSizeMsg());
+        } else {
+            String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
+            ui.printAskNewNameIngr(ingrName);
+
+            Scanner input = new Scanner(System.in);
+            String newName = input.nextLine();
+
+            ui.clearTerminalAndPrintNewPage();
+            ui.printConfirmIngrEditMsg(ingrName, newName);
+            String confirmChange = input.nextLine().toLowerCase();
+            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+                ui.clearTerminalAndPrintNewPage();
+                ui.printInvalidConfirmation();
+                confirmChange = input.nextLine().toLowerCase();
+            }
+            ui.clearTerminalAndPrintNewPage();
+            if (confirmChange.equals(YES)) {
+                ingredientList.get(ingredientIndex).setIngredientName(newName);
+                ui.printIngrNameChanged(newName);
+            } else {
+                ui.printDisregardMsg();
+            }
         }
     }
 }
