@@ -10,10 +10,14 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageManager;
+import terminus.storage.StorageTypeEnum;
 import terminus.ui.Ui;
 
 public class Terminus {
@@ -30,6 +34,8 @@ public class Terminus {
 
     private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
+
+    private StorageManager storageManager;
 
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
     private static final String MAIN_JSON = "main.json";
@@ -57,6 +63,7 @@ public class Terminus {
             this.ui = Ui.getInstance();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
+            this.storageManager = new StorageManager(DATA_DIRECTORY);
             this.moduleStorage = ModuleStorage.getInstance();
             this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
             TerminusLogger.info("Loading file...");
@@ -91,7 +98,14 @@ public class Terminus {
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(moduleManager);
-
+                if (result.hasChange()) {
+                    // Pass to Storage to handle the request
+                    String affectedModule = result.getModule();
+                    StorageActionEnum storageAction = result.getStorageAction();
+                    StorageTypeEnum storageType = result.getStorageType();
+                    String deletedItemName = result.getDeletedItemName();
+                    storageManager.execute(moduleManager, affectedModule, deletedItemName ,storageAction, storageType);
+                }
                 boolean isExitCommand = result.isExit();
                 boolean isWorkspaceCommand = result.getNewCommandParser() != null;
                 if (isExitCommand) {
@@ -125,6 +139,8 @@ public class Terminus {
             } catch (IOException e) {
                 TerminusLogger.warning("File saving has failed.");
                 handleIoException(e);
+            } catch (InvalidFileException e){
+                ui.printSection(e.getMessage());
             }
         }
     }

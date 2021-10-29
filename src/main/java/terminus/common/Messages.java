@@ -34,7 +34,7 @@ public class Messages {
     public static final String MESSAGE_RESPONSE_MODULE_FORMAT = "%d. %s";
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
     public static final String MESSAGE_RESPONSE_MODULE_DELETE = "Deleted module %s.";
-    public static final String MESSAGE_RESPONSE_RELOAD_NOTE = "Your Notes for %s has been reloaded.";
+    public static final String MESSAGE_RESPONSE_RELOAD_NOTE = "Your Notes for %s is being reloaded.";
 
     /*
      * Error Messages
@@ -57,8 +57,7 @@ public class Messages {
         "There are no questions to be tested on. Type 'questions add' to get started";
     public static final String ERROR_MESSAGE_INVALID_DURATION_FORMAT = "Invalid duration format.";
 
-    public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
-    public static final String ERROR_FILE_NOT_DELETED = "Unable to delete the file.";
+
     public static final String ERROR_FILES_NOT_DELETED = "Unable to delete some file.";
     public static final String ERROR_MESSAGE_FILE = "Unable to save/load file: %s";
     public static final String ERROR_MESSAGE_FOLDER = "Unable to save/load folder: %s";
@@ -67,6 +66,23 @@ public class Messages {
     public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
     public static final String ERROR_INVALID_FILE_NAME = "Name provided is invalid.";
     public static final String ERROR_CHANGE_FILE_NAME = "Unable to change file name";
+
+    public static final String ERROR_STORAGE_INVALID_ACTION = "Invalid storage operation detected : %s";
+    public static final String ERROR_STORAGE_INVALID_TYPE = "Invalid storage type detected : %s";
+    public static final String ERROR_STORAGE_CREATE_FOLDER = "Unable to create folder : %s";
+    public static final String ERROR_STORAGE_READ_FILE = "Unable to read file : %s";
+    public static final String ERROR_STORAGE_FILE_TOO_LARGE = "File too large detected : %s";
+    public static final String ERROR_STORAGE_FILE_EXIST = "Unable to create file/folder, name already exists : %s";
+    public static final String ERROR_STORAGE_FILE_NOT_DELETED = "Unable to delete the file/folder : %s.";
+    public static final String ERROR_STORAGE_CLEAN_FILE = "Unable to remove some files in folder : %s";
+    public static final String ERROR_STORAGE_WRITE_FILE = "Unable to write contents into file : %s";
+    public static final String ERROR_STORAGE_WRITE_DATA_NULL = "Data to be written is empty into file : %s";
+    public static final String ERROR_MISSING_MODULE_MANAGER = "Error: Module Manager cannot be null.";
+    public static final String ERROR_FILE_FOLDER_MISMATCH = "Error file was detected as folder : %s";
+    public static final String ERROR_MISSING_FOLDER = "Unable to find folder : %s";
+    public static final String ERROR_GET_FILES = "Unable to get files from folder : %s";
+    public static final String ERROR_GET_FILE_CONTENT = "Unable to get file content type : %s";
+
 
     /*
      * Banners

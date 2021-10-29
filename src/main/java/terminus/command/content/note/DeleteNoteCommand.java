@@ -7,6 +7,8 @@ import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class DeleteNoteCommand extends DeleteCommand<Note> {
 
@@ -15,11 +17,11 @@ public class DeleteNoteCommand extends DeleteCommand<Note> {
     }
 
     @Override
-    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException, IOException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException {
         CommandResult result = super.execute(moduleManager);
-        // Update file accordingly
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.removeNoteFromModule(getModuleName(), super.deletedContentName);
-        return result;
+        CommandResult newResult = new CommandResult(getModuleName(), StorageActionEnum.DELETE, StorageTypeEnum.TEXT,
+                result.getMessage());
+        newResult.setDeletedItemName(super.deletedContentName);
+        return newResult;
     }
 }
