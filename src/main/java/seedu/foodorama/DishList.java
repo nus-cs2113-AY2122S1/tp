@@ -1,11 +1,15 @@
 package seedu.foodorama;
 
+import seedu.foodorama.exceptions.FoodoramaException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DishList {
     public static ArrayList<Dish> dishList = new ArrayList<>();
     public static Ui ui = new Ui();
+    private static final String YES = "y";
+    private static final String NO = "n";
 
     public static void add(String dishName) {
         if (DishList.find(dishName) == -1) {
@@ -60,13 +64,13 @@ public class DishList {
         } else {
             ui.printConfirmDelDish();
             String confirmDel = input.nextLine().toLowerCase();
-            while (!(confirmDel.equals("y") | confirmDel.equals("n"))) {
+            while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
                 ui.clearTerminalAndPrintNewPage();
                 ui.printInvalidConfirmation();
                 confirmDel = input.nextLine().toLowerCase();
             }
             ui.clearTerminalAndPrintNewPage();
-            if (confirmDel.equals("y")) {
+            if (confirmDel.equals(YES)) {
                 dishList.remove(dishIndex);
                 ui.printDishNameRemoved(dishName);
                 assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
@@ -83,18 +87,48 @@ public class DishList {
         ui.printConfirmClearDish();
         String confirmClear = input.nextLine().toLowerCase();
 
-        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
+        while (!(confirmClear.equals(YES) | confirmClear.equals(NO))) {
             ui.clearTerminalAndPrintNewPage();
             ui.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
         ui.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals("y")) {
+        if (confirmClear.equals(YES)) {
             dishList.clear();
             assert dishList.size() == 0 : "dishList should be of size 0";
             ui.printDishListCleared();
         } else {
             ui.printDisregardMsg();
+        }
+    }
+
+    public static void editName(int dishIndex) throws FoodoramaException {
+        if (dishIndex == -1) {
+            throw new FoodoramaException(ui.getDishNotExistEdit());
+        } else if (dishIndex >= dishList.size()) {
+            throw new FoodoramaException(ui.getDishIndexExceedSizeMsg());
+        } else {
+            String dishName = dishList.get(dishIndex).getDishName();
+            ui.printAskNewNameDish(dishName);
+
+            Scanner input = new Scanner(System.in);
+            String newName = input.nextLine();
+
+            ui.clearTerminalAndPrintNewPage();
+            ui.printConfirmDishEditMsg(dishName, newName);
+            String confirmChange = input.nextLine().toLowerCase();
+            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+                ui.clearTerminalAndPrintNewPage();
+                ui.printInvalidConfirmation();
+                confirmChange = input.nextLine().toLowerCase();
+            }
+            ui.clearTerminalAndPrintNewPage();
+            if (confirmChange.equals(YES)) {
+                dishList.get(dishIndex).setDishName(newName);
+                ui.printDishNameChanged(newName);
+            } else {
+                ui.printDisregardMsg();
+            }
         }
     }
 }

@@ -186,9 +186,6 @@ public class Ui {
             + "Sorry, that is an invalid command." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INVALID_PARAMETERS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid parameter." + System.lineSeparator()
-            + LINE_DIVIDER;
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, please input a valid number" + System.lineSeparator()
@@ -228,19 +225,28 @@ public class Ui {
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String DISHINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+            + "Missing Parameter!\n"
+            + "Please type the Index OR Name of the Dish you would like to edit.\n"
+            + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     private static final String INGR_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
             + "Ingredient does not exist!\n"
             + "Please type the correct Index OR Name of the Ingredient you would like to edit.\n"
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String DISH_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
+            + "Dish does not exist!\n"
+            + "Please type the correct Index OR Name of the Dish you would like to edit.\n"
+            + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INGR_EXISTS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, this ingredient already exists in your list." + System.lineSeparator()
-            + LINE_DIVIDER;
 
     private static final String INGR_SORT = LINE_DIVIDER + System.lineSeparator()
             + "List of Ingredients has been sorted." + System.lineSeparator();
@@ -300,6 +306,12 @@ public class Ui {
     public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
             + "Ingredient Index exceeds size of Ingredient List. \nType 'list ingr' to view the correct"
             + " Ingredient Index of the Ingredient you want to edit."
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String DISH_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
+            + "Dish Index exceeds size of Dish List. \nType 'list dish' to view the correct"
+            + " Dish Index of the Dish you want to edit."
             + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -413,8 +425,16 @@ public class Ui {
         return INGRINDEX_MISSING;
     }
 
+    public String getDishIndexMissingMsg() {
+        return DISHINDEX_MISSING;
+    }
+
     public String getIngrNotExistEdit() {
         return INGR_NOT_EXIST_EDIT;
+    }
+
+    public String getDishNotExistEdit() {
+        return DISH_NOT_EXIST_EDIT;
     }
 
     public String getIngrNotExistMsg() {
@@ -423,6 +443,10 @@ public class Ui {
 
     public String getIngrIndexExceedSizeMsg() {
         return INGR_INDEX_EXCEED_SIZE;
+    }
+
+    public String getDishIndexExceedSizeMsg() {
+        return DISH_INDEX_EXCEED_SIZE;
     }
 
     public void printIngrNotExistMsg() {
@@ -434,10 +458,6 @@ public class Ui {
         return LINE_DIVIDER + System.lineSeparator()
                 + "Sorry, the ingredient" + ingrName + "already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
-    }
-
-    public void printInvalidParamMsg() {
-        System.out.println(INVALID_PARAMETERS);
     }
 
     public static String getHelpMsg() {
@@ -488,22 +508,22 @@ public class Ui {
         System.out.println(CONFIRM_CLEAR_ALL);
     }
 
-    //    public void printAskNewNameDish(String dishName) {
-    //        System.out.println("What would you like to change the Dish Name '"
-    //                + dishName
-    //                + "' to?");
-    //    }
-    //
-    //    public void printAskNewNameDish(String dishName) {
-    //        System.out.println("What would you like to change the Ingredient Name '"
-    //                + dishName
-    //                + "' to?");
-    //    }
+    public void printAskNewNameDish(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the Dish Name '" + dishName + "' to?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printConfirmDishEditMsg(String dishName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change Dish Name from '" + dishName + "' to '"
+                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+    }
 
     public void printDishNameChanged(String dishName) {
-        System.out.println("Dish Name has been updated to '"
-                + dishName
-                + "'!");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Dish Name has been updated to '" + dishName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printAskNewNameIngr(String ingrName) {
