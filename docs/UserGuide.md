@@ -17,7 +17,7 @@ Expiry Eliminator is a desktop app for managing the freshness of ingredients in 
 
 Adds an ingredient to the ingredient repository.
 
-Format: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]
+Format: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]`
 
 - Unit is optional.
 - Quantity and expiry date is optional, but you cannot have one and not the other (i.e. you either don't provide both quantity and expiry date, or you provide both quantity and expiry date).
@@ -34,6 +34,85 @@ Example of usage:
 - `add i/Salt u/g q/1000 e/2021-01-01`
 
 <br/>
+
+### Update units of an ingredient: `update units`
+
+Updates the units of all ingredients throughout the program.
+
+Format: `update units i/INGREDIENT u/UNITS`
+
+- Ingredients both in ingredient repository and recipes will also be updated to the new units.
+- If units is left blank, you will get a "units deleted" message.
+
+
+Example of usage:
+- `update units i/salt u/kilograms`
+- `update units i/salt u/`
+
+<br/>
+
+### Listing all ingredients: `list`
+
+Shows a list of all ingredients, its quantity and expiry dates.
+
+Format: `list`
+
+Example of usage:
+- `list`
+
+<br/>
+
+### Listing ingredients that are expiring: `list expiring`
+
+Shows a list of all ingredients, its quantity and expiry dates, that are expiring within the week.
+
+Format: `list expiring`
+
+Example of usage:
+- `list expiring`
+
+<br/>
+
+### Listing ingredients that have expired: `list expired`
+
+Shows a list of all ingredients, its quantity and expiry dates, that have expired.
+
+Format: `list expired`
+
+Example of usage:
+- `list expired`
+
+<br/>
+
+### List a specific ingredient: `view`
+
+Shows a specific ingredient with its quantity and expiry date.
+
+Format: `view i/INGREDIENT`
+
+- The ingredient name are case-insensitive, and will be automatically stored in title case
+  (E.g.: `SalT` would be recorded as `Salt`)
+- If the ingredient does not exist, it will notify the user.
+
+Example of usage:
+- `view i/salt`
+
+
+<br/>
+
+### Deleting all expired ingredients: `delete expired`
+
+Deletes all the expired ingredients in the repository.
+
+Format: `delete expired`
+
+- Ingredient is considered to have expired if its expiry date is before the current date.
+
+Example of usage:
+- `delete expired`
+
+<br/>
+
 
 ### Adding a recipe: `add recipe`
 
@@ -77,6 +156,7 @@ Example of usage:
 
 <br/>
 
+
 ### Remove ingredients when recipe is cooked : `cooked`
 
 Removes certain amount of ingredients from the Ingredient Repository based on the recipe that is cooked.
@@ -113,6 +193,25 @@ Format: `list recipes i can cook`
 
 Example of usage: 
 - `list recipes i can cook`
+
+<br/>
+
+
+### Create a shopping list of ingredients to buy for recipes user wants to make: `shopping list`
+
+Takes in multiple recipes the user wants to cook, and generates a shopping list of ingredients that
+the user does not have and needs to buy.
+
+Format: `shopping list r/RECIPE r/RECIPE r/RECIPE ....`
+
+- Can take in multiple recipe inputs
+
+Example of usage:
+- `shopping list r/Chicken Soup`
+- `shopping list r/Chicken Soup r/Pork Soup`
+
+<br/>
+
 
 ## FAQ
 
