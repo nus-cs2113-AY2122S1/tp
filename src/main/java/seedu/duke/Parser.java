@@ -8,6 +8,13 @@ public class Parser {
 
     private static final double EPSILON = 0.001;
 
+    private static final int SPLIT_COMMAND_FROM_INFO_LENGTH = 2;
+    private static final int INPUT_COMMAND = 0;
+    private static final int INPUT_INFO = 1;
+
+    private static final String QUIT_COMMAND = "quit";
+    private static final String CLOSE_COMMAND = "close";
+
     /**
      * Parses the user-entered command and additional information/flags.
      *
@@ -15,20 +22,20 @@ public class Parser {
      * @return whether the program should continue running after processing the given user input
      */
     public static boolean parseUserInput(String userInput) {
-        String[] rawInput = userInput.split(" ", 2);
-        String inputCommand = rawInput[0].toLowerCase();
+
+        String[] rawInput = userInput.split(" ", SPLIT_COMMAND_FROM_INFO_LENGTH);
+        String inputCommand = rawInput[INPUT_COMMAND].toLowerCase();
         String inputParams = null;
 
-        if (rawInput.length == 2) {
-            inputParams = rawInput[1];
+        if (rawInput.length == SPLIT_COMMAND_FROM_INFO_LENGTH) {
+            inputParams = rawInput[INPUT_INFO];
         }
 
-        if (inputCommand.equals("quit")) {
+        if (inputCommand.equals(QUIT_COMMAND)) {
             Ui.goodBye();
             return false;
-        } else if (inputCommand.equals("close")) {
+        } else if (inputCommand.equals(CLOSE_COMMAND)) {
             try {
-                Storage.setOpenTripAsLastTrip();
                 Storage.setLastExpense(null);
                 Storage.closeTrip();
                 return true;
@@ -51,6 +58,19 @@ public class Parser {
         return true;
     }
 
+    private static final String CREATE_COMMAND = "create";
+    private static final String EDIT_COMMAND = "edit";
+    private static final String OPEN_COMMAND = "open";
+    private static final String SUMMARY_COMMAND = "summary";
+    private static final String VIEW_COMMAND = "view";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String LIST_COMMAND = "list";
+    private static final String EXPENSE_COMMAND = "expense";
+    private static final String EDIT_EXP_COMMAND = "edit-exp";
+    private static final String AMOUNT_COMMAND = "amount";
+    private static final String HELP_COMMAND = "help";
+
+
     /**
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
      * for further updates.
@@ -62,48 +82,49 @@ public class Parser {
      * @see Parser#parseUserInput(String)
      */
     private static void handleValidCommands(String inputCommand, String inputParams) {
+
         switch (inputCommand) {
-        case "create":
+        case CREATE_COMMAND:
             handleCreateTrip(inputParams);
             break;
 
-        case "edit":
+        case EDIT_COMMAND:
             handleEditTrip(inputParams);
             break;
 
-        case "open":
+        case OPEN_COMMAND:
             handleOpenTrip(inputParams);
             break;
 
-        case "summary":
+        case SUMMARY_COMMAND:
             handleTripSummary(inputParams);
             break;
 
-        case "view":
+        case VIEW_COMMAND:
             handleViewTrip(inputParams);
             break;
 
-        case "delete":
+        case DELETE_COMMAND:
             handleDelete(inputParams);
             break;
 
-        case "list":
+        case LIST_COMMAND:
             executeList();
             break;
 
-        case "expense":
+        case EXPENSE_COMMAND:
             handleCreateExpense(inputParams);
             break;
 
-        case "edit-exp":
+        case EDIT_EXP_COMMAND:
             handleEditExpense(inputParams);
             break;
 
-        case "amount":
+        case AMOUNT_COMMAND:
             handleAmount(inputParams);
             break;
 
-        case "help":
+        case HELP_COMMAND:
             Ui.displayHelp();
             break;
 
@@ -223,6 +244,14 @@ public class Parser {
         Storage.setLastTrip(newTrip);
     }
 
+    /**
+     * Gets the trip to be edited and edits the specified attributes of the trip.
+     *
+     * @param inputDescription - user input of trip index and trip attributes to edit.
+     *
+     * @see Parser#editTripWithIndex(String)
+     * @see Parser#editTripPerAttribute(Trip, String)
+     */
     private static void executeEditTrip(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         assert tripToEditInfo[1] != null;
@@ -235,29 +264,39 @@ public class Parser {
                 return;
             }
         } else {
-            tripToEdit = openTripWithIndex(tripToEditInfo[0].strip());
+            tripToEdit = editTripWithIndex(tripToEditInfo[0].strip());
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
 
-    private static Trip openTripWithIndex(String tripIndexInString) {
+    /**
+     * Gets the trip to be edited from the user-entered index.
+     *
+     * @param tripIndexInString index of trip to be edited, as a {@link String} to be parsed.
+     * @return the {@link Trip} object to be edited.
+     */
+    private static Trip editTripWithIndex(String tripIndexInString) {
         int indexToEdit = Integer.parseInt(tripIndexInString) - 1;
         Trip tripToEdit = Storage.getListOfTrips().get(indexToEdit);
         Storage.setLastTrip(tripToEdit);
         return tripToEdit;
     }
 
-    //assumes that listOfTrips have at least 1 trip
+
+    /**
+     * Sets the user-specified trip as opened. Requires that the {@code listOfTrips} has at least one open trip.
+     *
+     * @param indexAsString index of trip to open, as a {@link String} to be parsed.
+     */
     private static void executeOpen(String indexAsString) {
+        //assumes that listOfTrips have at least 1 trip
         int indexToGet = Integer.parseInt(indexAsString) - 1;
         Storage.setOpenTrip(Storage.getListOfTrips().get(indexToGet));
         Ui.printOpenTripMessage(Storage.getOpenTrip());
-        Storage.setOpenTripAsLastTrip();
     }
 
     private static void executeSummary(String inputParams) {
         Trip currentTrip = Storage.getOpenTrip();
-        Storage.setOpenTripAsLastTrip();
         if (inputParams == null) {
             //list everybody's expense summary
             for (Person p : currentTrip.getListOfPersons()) {
@@ -285,7 +324,6 @@ public class Parser {
     //@@author leeyikai
     private static void executeView(String inputParams) {
         Trip openTrip = Storage.getOpenTrip();
-        Storage.setOpenTripAsLastTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
         } else {
@@ -400,6 +438,7 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
+        newExpense.prompDate().assignAmounts();
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
@@ -582,6 +621,15 @@ public class Parser {
         return Storage.getValidCommands().contains(inputCommand);
     }
 
+    private static final int ATTRIBUTE_DATA = 1;
+    private static final int EDIT_ATTRIBUTE = 0;
+    private static final String EDIT_LOCATION = "-location";
+    private static final String EDIT_DATE = "-date";
+    private static final String EDIT_EXRATE = "-exchangerate";
+    private static final String EDIT_FORCUR = "-forcur";
+    private static final String EDIT_HOMECUR = "-homecur";
+
+
     /**
      * Parses the user input to determine which attributes to edit,
      * and calls the relevant setters to edit those attributes.
@@ -591,32 +639,32 @@ public class Parser {
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) {
         String[] splitCommandAndData = attributeToEdit.split(" ");
-        String data = splitCommandAndData[1];
-        switch (splitCommandAndData[0]) {
+        String data = splitCommandAndData[ATTRIBUTE_DATA];
+        switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         /*case "budget":
             tripToEdit.setBudget(data);
             break;*/
-        case "-location":
+        case EDIT_LOCATION:
             String originalLoocation = tripToEdit.getLocation();
             tripToEdit.setLocation(data);
             Ui.changeLocationSuccessful(tripToEdit, originalLoocation);
             break;
-        case "-date":
+        case EDIT_DATE:
             String originalDate = tripToEdit.getDateOfTripString();
             tripToEdit.setDateOfTrip(data);
             Ui.changeDateSuccessful(tripToEdit, originalDate);
             break;
-        case "-exchangerate":
+        case EDIT_EXRATE:
             double originalExRate = tripToEdit.getExchangeRate();
             tripToEdit.setExchangeRate(data);
             Ui.changeExchangeRateSuccessful(tripToEdit, originalExRate);
             break;
-        case "-homecur":
+        case EDIT_HOMECUR:
             String originalHomeCurrency = tripToEdit.getRepaymentCurrency();
             tripToEdit.setRepaymentCurrency(data);
             Ui.changeHomeCurrencySuccessful(tripToEdit, originalHomeCurrency);
             break;
-        case "-forcur":
+        case EDIT_FORCUR:
             String originalForeignCurrency = tripToEdit.getForeignCurrency();
             tripToEdit.setForeignCurrency(data);
             Ui.changeForeignCurrencySuccessful(tripToEdit, originalForeignCurrency);
@@ -624,7 +672,7 @@ public class Parser {
         //case "person":
             //break;
         default:
-            System.out.println(splitCommandAndData[0] + " was not recognised. "
+            System.out.println(splitCommandAndData[EDIT_ATTRIBUTE] + " was not recognised. "
                     + "Please try again after this process is complete");
         }
 

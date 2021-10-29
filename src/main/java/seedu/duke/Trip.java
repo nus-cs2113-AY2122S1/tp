@@ -243,8 +243,9 @@ public class Trip {
     }
 
     /**
-     * Returns true if personsList contains a person with a specific name
-     * This is to replace the list.contains() method due to bugs with json deserialization
+     * Returns true if personsList contains a person with a specific name.
+     * This is to replace the list.contains() method due to bugs with json deserialization.
+     *
      * @param personsList list of persons to check
      * @param name the name to check for
      * @return true if personsList contains a person with a specific name
@@ -264,6 +265,11 @@ public class Trip {
         return dateOfTrip;
     }
 
+    /**
+     * Returns the {@link LocalDate} object as a formatted string (with the format dd MMMM yy).
+     *
+     * @return the formatted date as a {@link String}.
+     */
     public String getDateOfTripString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return getDateOfTrip().format(pattern);
@@ -468,6 +474,4 @@ public class Trip {
         }
         return listOfPeople;
     }
-
-
 }

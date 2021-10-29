@@ -78,7 +78,7 @@ public class FileStorage {
 
     /**
      * Registers the custom serializers and deserializers for {@link LocalDate} type, and creates an
-     * instance of {@link Gson}.
+     * instance of {@link Gson} stored in {@link FileStorage}.
      */
     public static void initializeGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
