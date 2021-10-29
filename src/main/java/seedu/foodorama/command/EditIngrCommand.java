@@ -14,8 +14,7 @@ public class EditIngrCommand extends Command {
         int ingredientIndex;
         if (isNumber(parameters.get(0))) {
             ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
-        }
-        else {
+        } else {
             String ingredientName = String.join(" ", parameters);
             if (ingredientName.isBlank()) {
                 throw new FoodoramaException(ui.getIngrIndexMissingMsg());
@@ -27,14 +26,12 @@ public class EditIngrCommand extends Command {
     }
 
 
-
-    public boolean isNumber (String number) {
+    public boolean isNumber(String number) {
         try {
             int ingredientIndex = Integer.parseInt(number) - 1;
             return true;
         } catch (NumberFormatException ignored) {
-
+            return false;
         }
-        return false;
     }
 }
