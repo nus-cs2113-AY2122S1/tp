@@ -23,7 +23,7 @@ public class UpdateRecipeCommand extends Command {
     public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the quantity of ingredients"
             + " in the recipe list.\n"
-            + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
+            + "Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...\n"
             + "Example: " + COMMAND_WORD
             + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
 
