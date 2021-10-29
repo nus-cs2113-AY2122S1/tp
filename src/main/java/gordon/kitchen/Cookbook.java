@@ -136,6 +136,14 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2>void setIngredients(name, newIngredients).</h2>
+     *
+     * <p>This method replaces the Ingredients list in the recipe with the new user input</p>
+     * @param name Recipe name being queried
+     * @param newIngredients The new Ingredients list to be added to the recipe
+     * @throws GordonException If there is no matching recipe found
+     */
     public void setIngredients(String name, ArrayList<String> newIngredients) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -147,6 +155,14 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    /**
+     * <h2>void setSteps(name, newSteps).</h2>
+     *
+     * <p>This method replaces the Steps list in the recipe with the new user input</p>
+     * @param name Recipe name being queried
+     * @param newSteps The new Steps list to be added to the recipe
+     * @throws GordonException If there is no matching recipe found
+     */
     public void setSteps(String name, ArrayList<String> newSteps) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -344,6 +360,12 @@ public class Cookbook {
         }
     }
 
+    /**
+     * <h2> String listCookbookTags().</h2>
+     *
+     * <p>This method prints out all tags that are currently in the cookbook</p>
+     * @return The list of all tags
+     */
     public String listCookbookTags() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < cookbookTags.size(); i++) {

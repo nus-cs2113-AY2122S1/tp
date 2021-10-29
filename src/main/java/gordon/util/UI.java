@@ -2,6 +2,13 @@ package gordon.util;
 
 public class UI {
     public void printIntro() {
+        System.out.println("\n"
+                + "   ______               __\n"
+                + "  / ____/___  _________/ /___  ____\n"
+                + " / / __/ __ \\/ ___/ __  / __ \\/ __ \\\n"
+                + "/ /_/ / /_/ / /  / /_/ / /_/ / / / /\n"
+                + "\\____/\\____/_/   \\__,_/\\____/_/ /_/\n"
+                + "\n");
         System.out.println("I'm Gordon! How are you.");
         System.out.println("Let's get to work shall we.");
         System.out.println("Here's what we can get started with." + System.lineSeparator());
