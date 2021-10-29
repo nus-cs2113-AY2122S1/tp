@@ -11,6 +11,7 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
+
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 public class AddContactCommand extends Command {
@@ -20,6 +21,15 @@ public class AddContactCommand extends Command {
     private final String telegram;
     private final String twitter;
     private final String email;
+
+    public AddContactCommand(String[] details) {
+        this.name = details[DetailType.NAME.getIndex()];
+        this.github = details[DetailType.GITHUB.getIndex()];
+        this.linkedin = details[DetailType.LINKEDIN.getIndex()];
+        this.telegram = details[DetailType.TELEGRAM.getIndex()];
+        this.twitter = details[DetailType.TWITTER.getIndex()];
+        this.email = details[DetailType.EMAIL.getIndex()];
+    }
 
     public String getLinkedin() {
         return linkedin;
@@ -43,15 +53,6 @@ public class AddContactCommand extends Command {
 
     public String getGithub() {
         return github;
-    }
-
-    public AddContactCommand(String[] details) {
-        this.name = details[DetailType.NAME.getIndex()];
-        this.github = details[DetailType.GITHUB.getIndex()];
-        this.linkedin = details[DetailType.LINKEDIN.getIndex()];
-        this.telegram = details[DetailType.TELEGRAM.getIndex()];
-        this.twitter = details[DetailType.TWITTER.getIndex()];
-        this.email = details[DetailType.EMAIL.getIndex()];
     }
 
     public void execute() {

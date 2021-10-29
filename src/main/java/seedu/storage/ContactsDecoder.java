@@ -17,12 +17,12 @@ import seedu.parser.AddPersonalContactParser;
 import seedu.parser.RegexParser;
 import seedu.ui.ExceptionTextUi;
 
-import static seedu.storage.Storage.SEPARATOR;
-import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
+import static seedu.storage.Storage.SEPARATOR;
 
 public class ContactsDecoder extends RegexParser {
     public ContactList readContacts(File contactFile, String contactFilePath) throws FileErrorException {

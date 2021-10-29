@@ -8,9 +8,9 @@ import static seedu.parser.ContactParser.USER_INFO_INDEX;
 
 //@@author ng-andre
 public class DeleteContactParser implements ContactDetails {
-    private static final int DELETE_CONTACT_INDEX = 6;
     public static final int NUMBER_OF_DELETE_ARGS = 3;
     public static final String BUFFER = " ";
+    private static final int DELETE_CONTACT_INDEX = 6;
 
     boolean[] hasDeletedDetail(String userInput) throws InvalidFlagException, InvalidDeleteDetailException {
         boolean[] hasDeletedDetail = new boolean[7]; //all false by default

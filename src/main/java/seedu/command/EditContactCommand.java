@@ -3,8 +3,8 @@ package seedu.command;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.InvalidFlagException;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class EditContactCommand extends Command {
     }
 
     private void updateContact(Contact postEditContact) throws IndexOutOfBoundsException {
-        contactList.editContactAtIndex(contactDetails,contactIndex);
+        contactList.editContactAtIndex(contactDetails, contactIndex);
         //sort the contact list based on name after a contact has been edited
         contactList.sortContacts();
         TextUi.editContactMessage(postEditContact);
@@ -86,6 +86,7 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    //@@author ng-andre
     private boolean[] hasEditedFields(String[] contactDetails) {
         boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
