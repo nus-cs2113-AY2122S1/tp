@@ -2,7 +2,7 @@ package seedu.duke.ui;
 
 import static java.lang.System.out;
 
-public class UiInvalid {
+public class UiInvalid extends Ui {
     public static void printFindModNull() {
         out.println("No modules found");
     }

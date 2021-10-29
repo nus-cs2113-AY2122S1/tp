@@ -6,7 +6,7 @@ import seedu.duke.constants.Constants;
 
 import static java.lang.System.out;
 
-public class Ui {
+public abstract class Ui {
 
     public static void printIndex(int index, boolean println) {
         StringBuilder padding = stringPadder(String.valueOf(index), PaddingType.INDEX);
@@ -18,7 +18,7 @@ public class Ui {
         }
     }
 
-    static StringBuilder stringPadder(String input, PaddingType type) {
+    protected static StringBuilder stringPadder(String input, PaddingType type) {
         StringBuilder padding = new StringBuilder();
         int benchmarkLength;
         String fill = " ";
@@ -50,28 +50,19 @@ public class Ui {
         return padding;
     }
 
-    public static void printGlobe() {
+    protected static void printGlobe() {
         out.println(AsciiConstants.GLOBE);
     }
 
-    public static void printLogo() {
+    protected static void printLogo() {
         out.println(AsciiConstants.LOGO);
     }
 
-    public static void printPlane() {
+    protected static void printPlane() {
         out.println(AsciiConstants.PLANE);
     }
-    
-    public static void printExit() {
-        out.print(AsciiConstants.EXIT);
-        out.println(AsciiConstants.PLANE);
-    };
 
-    public static void promptInput() {
-        out.print("Enter a command: ");
-    }
-
-    public static void printLineSeparator() {
-        out.println(Constants.LINE_SEPARATOR);
+    protected static void printBye() {
+        out.println(AsciiConstants.EXIT);
     }
 }

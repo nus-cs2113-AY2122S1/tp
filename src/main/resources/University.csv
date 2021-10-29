@@ -9,7 +9,7 @@ Aarhus School of Business,FIN2704X,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,FIN2704,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,MNO3761Z,Topics in L&HCM,4,460161U021,INTERCULTURAL COMMUNICATION,5
 Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U075,INTERNATIONAL LABOUR MARKETS,5
-Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U081  ,ORGANISATIONAL DESIGN,5
+Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U081 ï¿½,ORGANISATIONAL DESIGN,5
 Aarhus School of Business,MKT3761Z,Topics in Marketing,4,460181U002,CONSUMER NEUROSCIENCE/ NEUROMARKETING,5
 Aarhus School of Business,DAO2703,Operations and Technology Management,4,460151U030,OPERATIONS MANAGEMENT,10
 Aarhus School of Business,FIN3702,Inv. Analysis & Portfolio Mgt,4,460181U008,INVESTMENTS,5
@@ -1161,7 +1161,7 @@ King's College London,PS4882E,Topics in IR: Arms Control,5,SWF010,Military Strat
 King's College London,PS3749,Department exchange module,4,4AANB006,Political Philosophy I,7.5
 King's College London,PS3701,Political Science Exchange Mod,4,4SSWF001,CAUSES OF WAR,4
 King's College London,PS3702,Political Science Exchange Mod,4,4SSWF003,Experience Of War,4
-King's College London,LAF1201,French 1,4,4AALFR11,French 1 – One-Term,1
+King's College London,LAF1201,French 1,4,4AALFR11,French 1 ï¿½ One-Term,1
 King's College London,CS2107,Introduction to Information Security,4,6CCS3NSE,Network Security,15
 King's College London,CS3244,Machine Learning,4,6CC13ML1,Machine Learning,15
 King's College London,CS2104,Programming Language Concepts,4,5CCS2PLD,Programming Language Design Paradigms,15
@@ -1897,7 +1897,7 @@ Singapore Management University,MNO3703,Leading in the 21st Century,4,MGMT233,LE
 Singapore Management University,MNO3701,Human Capital Management,4,OBHR224,HUMAN CAPITAL STRATEGY,1
 Singapore Management University,DOS3713,Project Management,4,OPIM313,PROJECT MANAGEMENT,1
 Singapore Management University,DOS3712,Physical Distribution Mgt,4,OPIM314,LOGISTICS AND TRANSPORTATION MANAGEMENT,1
-Singapore Management University,FIN3761B,TIF: China’s Capital Markets,4,COR1306,CAPITAL MARKETS IN CHINA,1
+Singapore Management University,FIN3761B,TIF: Chinaï¿½s Capital Markets,4,COR1306,CAPITAL MARKETS IN CHINA,1
 Singapore Management University,BSP1703,Managerial Economics,4,ECON001,INTRODUCTORY ECONOMICS,1
 Singapore Management University,DAO2703,Operations and Technology Management,4,OPIM201,BUSINESS PROCESSES,1
 Singapore Management University,MNO3761X,Topics in L&HCM,4,MGMT223,SOCIAL ENTREPRENEURSHIP,1
@@ -2347,7 +2347,7 @@ The Australian National University,CS2030,Programming Methodology II,4,COMP2100,
 The Australian National University,CS2030,Programming Methodology II,4,COMP1140,Structured Programming (Advanced),6
 The Australian National University,CS2105,Intro to Computer Networks,4,COMP2410,Networked Information Systems,6
 The Australian National University,CS2102,Database Systems,4,COMP2400,Relational Databases,6
-The Australian National University,CS3243,Introduction to Artificial Int,4, COMP3620, Artificial Intelligence,6
+The Australian National University,CS3243,Introduction to Artificial Int,4,ï¿½COMP3620,ï¿½Artificial Intelligence,6
 The Australian National University,CS2103,Software Engineering,4,COMP2500,Software Construction for Software Engineers,6
 The Australian National University,EX4890,UEM Exchange Module,5,COMP3650,System Architectural Understanding and the Human Brain,6
 The Australian National University,IE4240,Project Management,4,MGMT7020,Technology and Project Management,6
@@ -3158,7 +3158,7 @@ The University of Sheffield,PS3242,US Foreign Policy,4,POL232,Contemporary US Fo
 The University of Sheffield,CS3244,Machine Learning,4,COM3240,Adaptive Intelligence,15
 The University of Sheffield,CS3245,Information Retrieval,4,COM3504,The Intelligent Web,15
 The University of Sheffield,CS3226,Web Programming and Applicatio,4,COM3501,Computer Security and Forensics,15
-The University of Sheffield,CS2113,Software Engineering & Object-,4,COM162,Object Oriented Design and Programming with Java,15
+The University of Sheffield,CS2113,Software Engineering & Object Oriented Programming,4,COM162,Object Oriented Design and Programming with Java,15
 The University of Sheffield,CS2103,Software Engineering,4,COM35420,Software Hut,15
 The University of Sheffield,CS5239,Computer System Performance An,4,COM5239,Network Performance Analysis,15
 The University of Sheffield,CS5241,Speech Processing,4,COM4511,Speech Technology,15

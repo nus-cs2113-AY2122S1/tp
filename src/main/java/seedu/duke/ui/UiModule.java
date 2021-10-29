@@ -6,14 +6,14 @@ import seedu.duke.modules.Module;
 
 import static java.lang.System.out;
 
-public class UiModule {
+public class UiModule extends Ui{
 
     public static void printModule(Module mod, int index, boolean printMC) {
-        Ui.printIndex(index, false);
-        StringBuilder codePadding = Ui.stringPadder(mod.getModuleCode(), PaddingType.MODULECODE);
+        printIndex(index, false);
+        StringBuilder codePadding = stringPadder(mod.getModuleCode(), PaddingType.MODULECODE);
         String output;
         if (printMC) {
-            StringBuilder namePadding = Ui.stringPadder(mod.getModuleName(), PaddingType.MODULENAME);
+            StringBuilder namePadding = stringPadder(mod.getModuleName(), PaddingType.MODULENAME);
             output = " " + mod.getModuleCode() + codePadding + Constants.MODULE_NAME_SEPARATOR
                     + mod.getModuleName() + namePadding + mod.getModuleCredits();
         } else {
