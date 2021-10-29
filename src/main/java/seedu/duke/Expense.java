@@ -168,7 +168,7 @@ public class Expense {
                 + System.lineSeparator()
                 + "\t" + "Amount Spent: " + Ui.stringForeignMoney(this.getAmountSpent())
                 + System.lineSeparator()
-                + "\t" + "People involved: "
+                + "\t" + "People involved:"
                 + System.lineSeparator()
                 + getPersonExpense()
                 + "\t" + "Payer: " + this.getPayer()

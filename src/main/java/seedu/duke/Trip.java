@@ -218,10 +218,11 @@ public class Trip {
         }
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
-                + " (" + currTrip.getRepaymentCurrency() + " " + currTrip.getRepaymentCurrencySymbol()
+                + " (" + currTrip.getRepaymentCurrency() + " "
+                //+ currTrip.getRepaymentCurrencySymbol()
                 + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
                 + expensesInvolved
-                + " expenses on the following categories: ");
+                + " expenses on the following categories:");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
                     + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");

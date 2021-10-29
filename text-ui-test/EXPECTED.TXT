@@ -19,79 +19,79 @@ Enter your command: budget was not recognised. Please try again after this proce
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $3.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $2.00 to qian? (y/n): Your expense has been added successfully
+There is USD 8.00 left to be assigned. How much did yikai spend?: There is USD 3.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD 2.00 to qian? (y/n): Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $1.00 left to be assigned. How much did yikai spend?: There is USD $0.67 left to be assigned. How much did josh spend?: Assign the remaining USD $0.34 to xiyuan? (y/n): Your expense has been added successfully
+There is USD 1.00 left to be assigned. How much did yikai spend?: There is USD 0.67 left to be assigned. How much did josh spend?: Assign the remaining USD 0.34 to xiyuan? (y/n): Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $2.00 left to be assigned. How much did yikai spend?: Assign the remaining USD $1.00 to josh? (y/n): Your expense has been added successfully
+There is USD 2.00 left to be assigned. How much did yikai spend?: Assign the remaining USD 1.00 to josh? (y/n): Your expense has been added successfully
 Enter your command: 1. 	c a b
 	Date: 19 Oct 2021
-	Amount Spent: USD $8.00
-	People involved: 
-		1) yikai, USD $5.00
-		2) yuzhao, USD $1.00
-		3) qian, USD $2.00
+	Amount Spent: USD 8.00
+	People involved:
+		1) yikai, USD 5.00
+		2) yuzhao, USD 1.00
+		3) qian, USD 2.00
 	Payer: yikai
 	Category: breakfast
 
 3. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $2.00
-	People involved: 
-		1) yikai, USD $1.00
-		2) josh, USD $1.00
+	Amount Spent: USD 2.00
+	People involved:
+		1) yikai, USD 1.00
+		2) josh, USD 1.00
 	Payer: josh
 	Category: breakfast
 
 Enter your command: 2. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: 
-		1) yikai, USD $0.33
-		2) josh, USD $0.33
-		3) xiyuan, USD $0.34
+	Amount Spent: USD 1.00
+	People involved:
+		1) yikai, USD 0.33
+		2) josh, USD 0.33
+		3) xiyuan, USD 0.34
 	Payer: yikai
 	Category: lunch
 
 Enter your command: 2. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: 
-		1) yikai, USD $0.33
-		2) josh, USD $0.33
-		3) xiyuan, USD $0.34
+	Amount Spent: USD 1.00
+	People involved:
+		1) yikai, USD 0.33
+		2) josh, USD 0.33
+		3) xiyuan, USD 0.34
 	Payer: yikai
 	Category: lunch
 
 3. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $2.00
-	People involved: 
-		1) yikai, USD $1.00
-		2) josh, USD $1.00
+	Amount Spent: USD 2.00
+	People involved:
+		1) yikai, USD 1.00
+		2) josh, USD 1.00
 	Payer: josh
 	Category: breakfast
 
 Enter your command: 1. 	c a b
 	Date: 19 Oct 2021
-	Amount Spent: USD $8.00
-	People involved: 
-		1) yikai, USD $5.00
-		2) yuzhao, USD $1.00
-		3) qian, USD $2.00
+	Amount Spent: USD 8.00
+	People involved:
+		1) yikai, USD 5.00
+		2) yuzhao, USD 1.00
+		3) qian, USD 2.00
 	Payer: yikai
 	Category: breakfast
 
 Enter your command: 3. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $2.00
-	People involved: 
-		1) yikai, USD $1.00
-		2) josh, USD $1.00
+	Amount Spent: USD 2.00
+	People involved:
+		1) yikai, USD 1.00
+		2) josh, USD 1.00
 	Payer: josh
 	Category: breakfast
 
@@ -106,44 +106,44 @@ Enter your command: List of Expenses:
 Enter your command: List of all Expenses in detail: 
 1. 	c a b
 	Date: 19 Oct 2021
-	Amount Spent: USD $8.00
-	People involved: 
-		1) yikai, USD $5.00
-		2) yuzhao, USD $1.00
-		3) qian, USD $2.00
+	Amount Spent: USD 8.00
+	People involved:
+		1) yikai, USD 5.00
+		2) yuzhao, USD 1.00
+		3) qian, USD 2.00
 	Payer: yikai
 	Category: breakfast
 
 2. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $1.00
-	People involved: 
-		1) yikai, USD $0.33
-		2) josh, USD $0.33
-		3) xiyuan, USD $0.34
+	Amount Spent: USD 1.00
+	People involved:
+		1) yikai, USD 0.33
+		2) josh, USD 0.33
+		3) xiyuan, USD 0.34
 	Payer: yikai
 	Category: lunch
 
 3. 	d a c
 	Date: 19 Oct 2021
-	Amount Spent: USD $2.00
-	People involved: 
-		1) yikai, USD $1.00
-		2) josh, USD $1.00
+	Amount Spent: USD 2.00
+	People involved:
+		1) yikai, USD 1.00
+		2) josh, USD 1.00
 	Payer: josh
 	Category: breakfast
 
-Enter your command: Your expense of USD $1.00 has been successfully removed
-Enter your command: Your expense of USD $8.00 has been successfully removed
-Enter your command: Your expense of USD $2.00 has been successfully removed
-Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
+Enter your command: Your expense of USD 1.00 has been successfully removed
+Enter your command: Your expense of USD 8.00 has been successfully removed
+Enter your command: Your expense of USD 2.00 has been successfully removed
+Enter your command: yikai has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
-yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
+yuzhao has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
-qian has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
+qian has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
-josh has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
+josh has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
-xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses on the following categories: 
+xiyuan has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
 Enter your command: Exiting the program now. Goodbye!
