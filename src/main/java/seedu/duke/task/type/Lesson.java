@@ -57,8 +57,8 @@ public class Lesson extends Event {
 
     @Override
     public String getTaskEntryDescription() {
-        return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNo() + ' '
-                + "First lesson: " + DateParser.dateToString(getStartDate())
+        return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNo() + ": "
+                + DateParser.dateToString(getStartDate())
                 + " to " + DateParser.dateToString(getEndDate());
     }
 
