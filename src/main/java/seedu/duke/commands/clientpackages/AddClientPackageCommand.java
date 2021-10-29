@@ -17,11 +17,16 @@ public class AddClientPackageCommand extends Command {
 
     @Override
     public void execute() {
-        createClientPackage();
-        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                && !clientPackage.getFlight().equals(null)) {
-            clientPackages.add(clientPackage);
-            ui.showAddClientPackage(clientPackage);
+        try {
+            createClientPackage();
+            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
+            System.out.println("Client package ID already exists. Please try another client package ID.");
+        } catch (TourPlannerException e) {
+            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                    && !clientPackage.getFlight().equals(null)) {
+                clientPackages.add(clientPackage);
+                ui.showAdd(clientPackage);
+            }
         }
     }
 
