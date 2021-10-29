@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class Storage {
 
-    private static final String FILE_PATH = "trips.json";
+    public static final String FILE_PATH = "trips.json";
     private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
     private static Trip lastTrip = null;
@@ -91,9 +91,9 @@ public class Storage {
      *
      * @see FileStorage#writeToFile(String, String)
      */
-    protected static void writeToFile() throws IOException {
+    protected static void writeToFile(String filePath) throws IOException {
         String jsonString = FileStorage.getGson().toJson(listOfTrips);
-        FileStorage.writeToFile(jsonString, FILE_PATH);
+        FileStorage.writeToFile(jsonString, filePath);
     }
 
     /**
@@ -102,9 +102,9 @@ public class Storage {
      *
      * @see FileStorage#readFromFile(String)
      */
-    public static void readFromFile() {
+    public static void readFromFile(String filePath) {
         try {
-            String jsonString = FileStorage.readFromFile(FILE_PATH);
+            String jsonString = FileStorage.readFromFile(filePath);
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
@@ -114,7 +114,7 @@ public class Storage {
             Ui.printEmptyFileWarning();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
-            createNewFile();
+            createNewFile(FILE_PATH);
         }
     }
 
@@ -123,9 +123,9 @@ public class Storage {
      *
      * @see FileStorage#newBlankFile(String)
      */
-    public static void createNewFile() {
+    public static void createNewFile(String filePath) {
         try {
-            FileStorage.newBlankFile(FILE_PATH);
+            FileStorage.newBlankFile(filePath);
             Ui.newFileSuccessfullyCreated();
         } catch (IOException ex) {
             Ui.printCreateFileFailure();
@@ -134,10 +134,10 @@ public class Storage {
     }
 
     /**
-     * If {@link Storage#readFromFile()} throws a {@link JsonParseException}, asks the user whether to overwrite
+     * If {@link Storage#readFromFile(String)} throws a {@link JsonParseException}, asks the user whether to overwrite
      * the corrupted file or close the program.
      *
-     * @see Storage#createNewFile()
+     * @see Storage#createNewFile(String)
      */
     private static void askOverwriteOrClose() {
         while (true) {
@@ -149,7 +149,7 @@ public class Storage {
                 System.exit(1);
                 return;
             } else if (input.contains("y")) {
-                createNewFile();
+                createNewFile(FILE_PATH);
                 return;
             }
         }
@@ -215,6 +215,9 @@ public class Storage {
         Storage.openTrip = openTrip;
     }
 
+    /**
+     * Closes the currently active trip, and sets the last edited trip as null.
+     */
     public static void closeTrip() {
         Trip tripToBeClosed = openTrip;
         Storage.openTrip = null;
