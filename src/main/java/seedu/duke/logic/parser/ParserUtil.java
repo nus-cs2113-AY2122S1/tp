@@ -32,7 +32,7 @@ public class ParserUtil {
         return userResponse.replaceFirst(firstParam, "").strip();
     }
 
-    public static boolean isAll(String userResponse) {
-        return userResponse.equalsIgnoreCase("all");
+    public static boolean isVerbose(String userResponse) {
+        return userResponse.equalsIgnoreCase("verbose");
     }
 }

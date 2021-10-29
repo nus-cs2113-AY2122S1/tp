@@ -386,7 +386,7 @@ public class Ui {
         System.out.print(SHORT_LINE);
         printTotalMcs(moduleList);
         printCap(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
@@ -401,7 +401,7 @@ public class Ui {
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
         printTotalMcs(moduleList);
         printCap(moduleList);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     private void printTotalMcs(ModuleList moduleList) {
@@ -409,18 +409,6 @@ public class Ui {
     }
 
     //@@author rebchua39
-    public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
-        System.out.print(LINE);
-        System.out.println(PADDING + "Here are the modules in your list:");
-        for (int i = 0; i < moduleList.getSize(); i++) {
-            Module module = moduleList.getModule(i);
-            System.out.println(PADDING + (i + 1) + ". " + module);
-            System.out.println(PADDING + "   Grade: " + module.getGrade());
-        }
-        printCap(moduleList);
-        System.out.print(LINE);
-    }
-
     private void printCap(ModuleList moduleList) {
         double cap = moduleList.calculateCap();
         if (cap >= 0) {
