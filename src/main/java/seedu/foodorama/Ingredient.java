@@ -2,6 +2,9 @@ package seedu.foodorama;
 
 import seedu.foodorama.exceptions.FoodoramaException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Ingredient implements  Comparable<Ingredient> {
@@ -12,19 +15,27 @@ public class Ingredient implements  Comparable<Ingredient> {
     private double ingredientWasteIngr;
     public double ingredientWasteDish;
     private double limit;
+    private LocalDate expiryDate;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Ingredient(String ingredientName, double ingredientWeight) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
         this.ingredientWasteIngr = 0;
         this.limit = -1;
+        this.expiryDate = null;
     }
 
-    public Ingredient(String ingredientName, double ingredientWeight, double ingredientWaste) {
+    public Ingredient(String ingredientName, double ingredientWeight, double ingredientWaste, String savedDate) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
         this.ingredientWasteIngr = ingredientWaste;
         this.limit = -1;
+        if (savedDate.equals("null")) {
+            this.expiryDate = null;
+        } else {
+            this.expiryDate = LocalDate.parse(savedDate, dtf);
+        }
     }
 
     public String getIngredientName() {
@@ -37,6 +48,14 @@ public class Ingredient implements  Comparable<Ingredient> {
 
     public void setLimit(double limit) {
         this.limit = limit;
+    }
+
+    public LocalDate getExpiryDate() {
+        return this.expiryDate;
+    }
+
+    public void setExpiryDate(LocalDate date) {
+        this.expiryDate = date;
     }
 
     public void setIngredientName(String ingredientName) {
@@ -97,6 +116,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     public String toString() {
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         String limitString;
+        String expiryDateString;
         if (limit == -1) {
             limitString = "No limit has been set";
         } else {
@@ -105,15 +125,34 @@ public class Ingredient implements  Comparable<Ingredient> {
                 limitString  = limitString + " (exceeded)";
             }
         }
-        //Todo add parts
+        if (this.expiryDate == null) {
+            expiryDateString = "No expiry date has been set";
+        } else {
+            long daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+            if (daysBetweenExpiryToday > 0) {
+                expiryDateString = expiryDate.format(dtf) + " (" + daysBetweenExpiryToday + " day(s) from today)";
+            } else {
+                expiryDateString = expiryDate.format(dtf)
+                        + " (EXPIRED " + Math.abs(daysBetweenExpiryToday) + " day(s) ago)";
+            }
+        }
+
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
                 + "   Wastage: " + totalWaste + " kg" + System.lineSeparator()
-                + "   Limit: " + limitString;
+                + "   Limit: " + limitString + System.lineSeparator()
+                + "   Expiry Date: " + expiryDateString;
     }
 
     public String formatData() {
-        return ingredientName + "|"  + ingredientWeight + "|" + ingredientWasteIngr + "|" + limit;
+        String expiryDateString;
+        if (expiryDate == null) {
+            expiryDateString = null;
+        } else {
+            expiryDateString = expiryDate.format(dtf);
+        }
+        return ingredientName + "|"  + ingredientWeight + "|" + ingredientWasteIngr + "|" + limit + "|"
+                + expiryDateString;
     }
 
 

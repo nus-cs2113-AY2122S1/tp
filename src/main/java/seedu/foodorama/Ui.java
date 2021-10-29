@@ -1,5 +1,7 @@
 package seedu.foodorama;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ui {
@@ -182,6 +184,9 @@ public class Ui {
             + "#                   Love, the Food-O-Rama Team <3                         #" + System.lineSeparator()
             + "###########################################################################";
 
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
+
     private static final String INVALID_COMMAND = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, that is an invalid command." + System.lineSeparator()
             + LINE_DIVIDER;
@@ -221,7 +226,7 @@ public class Ui {
 
     private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Missing Parameter!\n"
-            + "Please type the Index OR Name of the Ingredient you would like to edit.\n"
+            + "Please type the INDEX or NAME of the Ingredient.\n"
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -315,7 +320,17 @@ public class Ui {
             + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String EXPIRY_INCORRECT_FORMAT = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date of is in the incorrect format." + System.lineSeparator()
+            + "Please use the format 'dd/MM/yyyy'. " + System.lineSeparator() + LINE_DIVIDER;
 
+    public static final String EXPIRY_LONG_DATE = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date is unusually longer than 10 years." + System.lineSeparator()
+            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
+
+    public static final String EXPIRY_PASSED_DATE = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date cannot be set to a date before today." + System.lineSeparator()
+            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
 
     public void printLogo() {
         System.out.println(START_LOGO);
@@ -355,7 +370,6 @@ public class Ui {
                 + "Sorry, the dish " + dishName + " does not exist in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
-
 
     public void printDishNotExistMsg() {
         System.out.println(DISH_NOTEXIST);
@@ -545,6 +559,31 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
+    public void printAskIngrExpiryDate(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What is the expiry date of '" + ingrName + "'?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printSetIngrExpiryDate(String ingrName, LocalDate date, long daysAway) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The expiry date of '" + ingrName + "' has been set to " + date.format(dtf)
+                + " (" + daysAway + " day(s) from today)"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public String getIncorrectExpiryDateFormatMsg() {
+        return EXPIRY_INCORRECT_FORMAT;
+    }
+
+    public String getLongExpiryDateMsg() {
+        return EXPIRY_LONG_DATE;
+    }
+
+    public String getPassedExpiryDateMsg() {
+        return EXPIRY_PASSED_DATE;
+    }
+
     public void printDisregardMsg() {
         System.out.println(DISREGARD_MSG);
     }
@@ -559,7 +598,7 @@ public class Ui {
         if (!dishList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the dishes
-            ArrayList<Integer> lengths = new ArrayList();
+            ArrayList<Integer> lengths = new ArrayList<>();
             double max = DishList.getGreatestWaste();
             for (int i = 0; i < dishList.size(); i++) {
                 lengths.add(dishList.get(i).getGraphHeight(max, graphPortions));
@@ -609,7 +648,7 @@ public class Ui {
         if (!ingredientList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the ingredients
-            ArrayList<Integer> lengths = new ArrayList();
+            ArrayList<Integer> lengths = new ArrayList<>();
             double max = IngredientList.getGreatestWaste();
             for (int i = 0; i < ingredientList.size(); i++) {
                 lengths.add(ingredientList.get(i).getGraphHeight(max, graphPortions));
@@ -770,9 +809,9 @@ public class Ui {
                 + "Example (2 constituents, no limit): prata|2.0|1.0|-1|flour|egg" + System.lineSeparator()
                 + "Example (2 constituents, limit of 3): prata|2.0|1.0|3|flour|egg";
         String ingrFormat = "Ingredients: [Name] | [Amount stored (kg)] | [Amount wasted (kg)] | "
-                + "[Wastage limit (if present else -1)]";
-        String ingrExample = "Example (no limit): chicken|2.33|1.0|-1" + System.lineSeparator()
-                + "Example (limit of 2.5): chicken|2.33|1.0|2.5";
+                + "[Wastage limit (if present else -1)] | [Expiry Date in format dd/MM/yyyy (if set)]";
+        String ingrExample = "Example (no limit, expiry not set): chicken|2.33|1.0|-1|null" + System.lineSeparator()
+                + "Example (limit of 2.5, expiry set): chicken|2.33|1.0|2.5|30/10/2021";
         return dishFormat + System.lineSeparator()
                 + dishExample + System.lineSeparator()
                 + ingrFormat + System.lineSeparator()
