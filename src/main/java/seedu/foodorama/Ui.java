@@ -222,6 +222,11 @@ public class Ui {
             + "Sorry, the ingredient name cannot be blank." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+            + "Please type the Ingredient Index of the Ingredient you would like to edit.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
@@ -286,7 +291,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
-            + "Ingredient Index exceeds size of Ingredient List. Type 'list ingr' to view the correct"
+            + "Ingredient Index exceeds size of Ingredient List. \nType 'list ingr' to view the correct"
             + " Ingredient Index of the Ingredient you want to edit."
             + System.lineSeparator()
             + LINE_DIVIDER;
@@ -395,6 +400,10 @@ public class Ui {
 
     public String getIngrNameMissingMsg() {
         return INGRNAME_MISSING;
+    }
+
+    public String getIngrIndexMissingMsg() {
+        return INGRINDEX_MISSING;
     }
 
     public String getIngrNotExistMsg() {
