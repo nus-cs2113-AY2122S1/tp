@@ -12,6 +12,9 @@ public class Parser {
     private static final int INPUT_COMMAND = 0;
     private static final int INPUT_INFO = 1;
 
+    private static final String QUIT_COMMAND = "quit";
+    private static final String CLOSE_COMMAND = "close";
+
     /**
      * Parses the user-entered command and additional information/flags.
      *
@@ -19,9 +22,6 @@ public class Parser {
      * @return whether the program should continue running after processing the given user input
      */
     public static boolean parseUserInput(String userInput) {
-
-        final String QUIT_COMMAND = "quit";
-        final String CLOSE_COMMAND = "close";
 
         String[] rawInput = userInput.split(" ", SPLIT_COMMAND_FROM_INFO_LENGTH);
         String inputCommand = rawInput[INPUT_COMMAND].toLowerCase();
