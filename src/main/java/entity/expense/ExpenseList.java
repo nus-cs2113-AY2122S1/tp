@@ -4,36 +4,48 @@ import java.util.ArrayList;
 
 public class ExpenseList {
     private static final ArrayList<Expense> expenses = new ArrayList<>();
+    private static double runningExpenseValue = 0;
+
+    public static double getRunningExpenseValue() {
+        return runningExpenseValue;
+    }
 
     public static void addExpense(Expense newExpense) {
         expenses.add(newExpense);
+        runningExpenseValue += newExpense.getValue();
     }
 
     public static void deleteExpense(String expenseName) {
         for (int i = 0; i < expenses.size(); i++) {
             if (expenses.get(i).getDescription().contains(expenseName)) {
                 expenses.remove(i);
+                runningExpenseValue -= expenses.get(i).getValue();
             }
         }
     }
 
     public static void deleteExpense(int expenseIndex) {
         expenses.remove(expenseIndex);
+        runningExpenseValue -= expenses.get(expenseIndex).getValue();
     }
 
-    public static void updateExpense(String expenseName, double expenseValue) {
+    public static void updateExpense(String expenseName, double newExpenseValue) {
         for (Expense expense : expenses) {
             if (expense.getDescription().contains(expenseName)) {
-                expense.updateValue(expenseValue);
+                runningExpenseValue -= expense.getValue();
+                runningExpenseValue += newExpenseValue;
+                expense.updateValue(newExpenseValue);
             }
         }
     }
 
-    public static void updateExpense(String expenseName, double expenseValue, String category) {
+    public static void updateExpense(String expenseName, double newExpenseValue, String newCategory) {
         for (Expense expense : expenses) {
             if (expense.getDescription().contains(expenseName)) {
-                expense.updateValue(expenseValue);
-                expense.updateCategory(category);
+                runningExpenseValue -= expense.getValue();
+                runningExpenseValue += newExpenseValue;
+                expense.updateValue(newExpenseValue);
+                expense.updateCategory(newCategory);
             }
         }
     }
