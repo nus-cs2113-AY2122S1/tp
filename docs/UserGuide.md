@@ -187,7 +187,7 @@ Example of usage:
 
 Adds a recipe with its respective ingredients and quantities to the recipe list.
 
-Format: `add recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
+Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
 
 - Adds a recipe with the name `RECIPE` and its `INGREDIENT` with the corresponding `QUANTITY` for each ingredient. 
   `QUANTITY` must be a positive integer. It is not possible to have zero quantity.
@@ -292,7 +292,7 @@ Example of usage:
 
 Updates a recipe by modifying the quantity of ingredients in that recipe.
 
-Format: `update recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
+Format: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
 
 - It is not possible to update an ingredient to be zero quantity.
 
@@ -373,7 +373,7 @@ Format: `bye`
 10. Deleting all expired ingredients
     - Command: `delete expired`
 11. Adding a recipe
-    - Command: `add recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
+    - Command: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
     - E.g.: `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
     - E.g.: `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
 12. Deleting a recipe
@@ -390,7 +390,7 @@ Format: `bye`
     - Command: `view recipe r/RECIPE`
     - E.g.: `view recipe r/Curry Chicken`
 17. Updating quantities of ingredients in a recipe
-    - Command: `update recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
+    - Command: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
     - E.g.: `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
 18. Creating a shopping list of ingredients for a list of recipes
     - Command: `shopping list r/RECIPE...`
