@@ -132,6 +132,14 @@ Import the coding style xml file into your IntelliJ IDEA.
 
 ### 3.1 Architecture
 
+![](attachments/MainInit.png)  
+
+Initialization of all the classes required for Terminus class to run
+
+![](attachments/MainLogic.png)
+
+Main loop logic of Terminus
+
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
 
@@ -466,7 +474,8 @@ Custom commands and Command Parsers should be easy for others to implement.
 | Approach | Pros | Cons|
 | ---  |---|---|
 | Single Command Parser with all Commands inherit from a single `Command` Class, a large switch statement to separate commands.| Easy to implement and `execute` function for each class has higher flexibility as they can have different arguments| When extending to multilevel workspace can be tedious to implement.|
-| Multiple Command Parsers each with its own set of commands, require separate managing. | Easy to create new workspace and add command specific the to workspace.| Implementation can be tedious and difficult to upgrade and manage.
+| Multiple Command Parsers each with its own set of commands, require separate managing. | Easy to create new workspace and add command specific the to workspace.| Implementation can be tedious and difficult to upgrade and manage. |  
+
 Eventually the team decide to go with the second implementation, as we require multi-level 
 workspaces and would like to create our own workspace for each feature. Aside from that the 
 `Command` provide common functionality that many commands need hence reducing repetition of code.
