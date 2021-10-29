@@ -159,7 +159,7 @@ public class AddUI {
                 while (flag.equals(RUN)) {
                     String select = TextUi.getLessonCommand(lessonType);
                     int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-                    Lesson selectedLesson = lessons.get(indexOfLesson);
+                    Lesson selectedLesson = lessonEqualizer(lessons, indexOfLesson);
                     classNumber = selectedLesson.getClassNo();
                     if (timetable.isConflict(selectedLesson)) {
                         String choice = TextUi.printAskConfirmation(selectedLesson);
@@ -298,5 +298,20 @@ public class AddUI {
             input = in.next();
         }
         return input.toUpperCase();
+    }
+
+    public Lesson lessonEqualizer(ArrayList<Lesson> lessons, int index) {
+        int tally = 0;
+        for (int i = 1; lessons.size() > i; i++) {
+            Lesson prev = lessons.get(i - BALANCE_ARRAY);
+            Lesson curr = lessons.get(i);
+            if (!prev.getClassNo().equals(curr.getClassNo())) {
+                tally++;
+            }
+            if (tally == index) {
+                return lessons.get(i);
+            }
+        }
+        return lessons.get(tally);
     }
 }
