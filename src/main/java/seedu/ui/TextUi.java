@@ -118,7 +118,8 @@ public class TextUi {
 
     public static String printAskConfirmation(Lesson lesson) {
         String output = "Are you sure you want to add " + lesson.lessonDetails()
-                + " as it conflicts with your current timetable (y/n)";
+                + " as it conflicts with your current timetable (y/n)\n"
+                + "Note that conflicting lessons will override current lesson/event in timetable";
         System.out.print(output);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -193,6 +194,8 @@ public class TextUi {
 
     public static void printAddMessage(String moduleCode) {
         System.out.println("Now adding " + moduleCode + " into timetable");
+        System.out.println("Lessons with the same class number are packed together");
+        System.out.println("Adding any type of lesson will add all lessons with similar class number into timetable");
     }
 
     public static void printLessonMessage(String lessonType) {

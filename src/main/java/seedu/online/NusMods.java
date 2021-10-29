@@ -80,7 +80,7 @@ public class NusMods {
             ModStorage.saveModInfo(moduleCode, inputStream);
             return ModStorage.loadModInfo(moduleCode);
         } catch (Exception e) {
-            throw new FetchException("Unable to fetch module");
+            throw new FetchException("Unable to fetch module, please ensure that module exist");
         }
     }
 
