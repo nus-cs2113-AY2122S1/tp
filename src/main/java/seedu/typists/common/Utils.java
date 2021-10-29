@@ -61,7 +61,7 @@ public class Utils {
         return line;
     }
 
-    /** same as getDisplayLines but added remove null feature **/
+    /** same as getDisplayLines but added remove null feature. **/
     public static String[] getDisplayLinesWithoutNull(ArrayList<String> wordLists, int wordsPerLine, int row)
             throws ExceedRangeException {
         int startIndex = (row - 1) * wordsPerLine;
