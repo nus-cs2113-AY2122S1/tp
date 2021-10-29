@@ -66,13 +66,13 @@ public class GameCommand implements Command {
         } catch (InvalidCommandException e) {
             System.out.println(
                     "Please enter time in multiple of 30 seconds.\n"
-                            + "e.g. time -t 30 "
+                            + "e.g. game -t 30 "
             );
         } catch (IncompleteCommandException | IndexOutOfBoundsException e) {
             System.out.println(
                     "Please specify duration of the game using "
                             + TIME_SIGNIFIER + "\n"
-                            + "e.g. time -t 60 "
+                            + "e.g. game -t 60 "
             );
         } catch (NumberFormatException e) {
             System.out.println("Duration should be a number");
