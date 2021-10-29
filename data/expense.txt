@@ -1,4 +1,6 @@
 apples;40.0;29/10/21;-
-pear;15.0;29/10/21;-
 grapes;5.0;29/10/21;fruits
 orange;55.0;29/10/21;food
+expensive item;200.0;29/10/21;elect
+watermelon;30.0;29/10/21;fruits
+item;170.0;29/10/21;unknown

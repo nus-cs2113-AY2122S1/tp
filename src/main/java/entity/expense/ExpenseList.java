@@ -10,27 +10,27 @@ public class ExpenseList {
         return runningExpenseValue;
     }
 
-    public static void addRunningExpenseValue(double newExpenseValue) {
-        runningExpenseValue += newExpenseValue;
+    public static void setRunningExpenseValue(double newExpenseValue) {
+        runningExpenseValue = newExpenseValue;
     }
 
     public static void addExpense(Expense newExpense) {
-        expenses.add(newExpense);
         runningExpenseValue += newExpense.getValue();
+        expenses.add(newExpense);
     }
 
     public static void deleteExpense(String expenseName) {
         for (int i = 0; i < expenses.size(); i++) {
             if (expenses.get(i).getDescription().contains(expenseName)) {
-                expenses.remove(i);
                 runningExpenseValue -= expenses.get(i).getValue();
             }
         }
+        expenses.removeIf(expense -> expense.getDescription().contains(expenseName));
     }
 
     public static void deleteExpense(int expenseIndex) {
-        expenses.remove(expenseIndex);
         runningExpenseValue -= expenses.get(expenseIndex).getValue();
+        expenses.remove(expenseIndex);
     }
 
     public static void updateExpense(String expenseName, double newExpenseValue) {
