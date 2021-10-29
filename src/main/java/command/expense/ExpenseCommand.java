@@ -6,7 +6,8 @@ import picocli.CommandLine.Command;
         AddExpenseCommand.class,
         DeleteExpenseCommand.class,
         UpdateExpenseCommand.class,
-        ListExpenseCommand.class
+        ListExpenseCommand.class,
+        WarningExpenseCommand.class
 })
 public class ExpenseCommand {
 }

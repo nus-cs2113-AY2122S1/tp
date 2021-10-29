@@ -20,9 +20,9 @@ public class ExpenseList {
     }
 
     public static void deleteExpense(String expenseName) {
-        for (int i = 0; i < expenses.size(); i++) {
-            if (expenses.get(i).getDescription().contains(expenseName)) {
-                runningExpenseValue -= expenses.get(i).getValue();
+        for (Expense expense : expenses) {
+            if (expense.getDescription().contains(expenseName)) {
+                runningExpenseValue -= expense.getValue();
             }
         }
         expenses.removeIf(expense -> expense.getDescription().contains(expenseName));

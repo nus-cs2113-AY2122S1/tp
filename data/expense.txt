@@ -4,3 +4,4 @@ orange;55.0;29/10/21;food
 expensive item;200.0;29/10/21;elect
 watermelon;30.0;29/10/21;fruits
 item;170.0;29/10/21;unknown
+computer;100.0;29/10/21;electronics

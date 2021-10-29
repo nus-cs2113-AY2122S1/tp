@@ -16,11 +16,12 @@ import static constants.WarningMessage.expenseExceedBudgetWarning;
 
 public class ExpenseManager implements LoadableManager {
 
+    // Default Warning Amt
+    private double warningAmt = 100.0;
     private static ExpenseManager expenseMgr;
     private final String fileLabel;
     private final String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
             "Id.", "Name", "Value", "Date", "Category");
-    private final double leewayAmt = 100.0;
 
     private ExpenseManager() {
         fileLabel = "expense";
@@ -43,7 +44,7 @@ public class ExpenseManager implements LoadableManager {
         double totalBudgetValue = BudgetList.getBudgets().get(0).getValue();
         double totalExpenseValue = ExpenseList.getRunningExpenseValue();
         double currDiffToBurstBudget = totalBudgetValue - totalExpenseValue;
-        if (currDiffToBurstBudget < leewayAmt
+        if (currDiffToBurstBudget < warningAmt
                 && currDiffToBurstBudget > 0) {
             ui.printMessage(expenseNearingBudgetWarning);
         } else if (currDiffToBurstBudget == 0) {
@@ -51,6 +52,10 @@ public class ExpenseManager implements LoadableManager {
         } else if (currDiffToBurstBudget < 0) {
             ui.printMessage(expenseExceedBudgetWarning);
         }
+    }
+
+    public void setWarningAmt(double newWarningAmt) {
+        warningAmt = newWarningAmt;
     }
 
     public void addExpense(String expenseName, double expenseValue) {
@@ -100,7 +105,7 @@ public class ExpenseManager implements LoadableManager {
         Ui ui = Ui.getUi();
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
-        ArrayList<Expense> expenseInCategory = new ArrayList<Expense>();
+        ArrayList<Expense> expenseInCategory = new ArrayList<>();
         for (Expense expense : expenses) {
             if (expense.getCategory().contains(category)) {
                 expenseInCategory.add(expense);
