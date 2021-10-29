@@ -2,8 +2,10 @@ package seedu.duke.commands;
 
 import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
-import seedu.duke.data.*;
-
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
 
 /**
  * Abstract command that outlines the 'execute' and 'isExit' method.
