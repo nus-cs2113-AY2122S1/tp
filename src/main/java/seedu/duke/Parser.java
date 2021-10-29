@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -27,6 +26,16 @@ public class Parser {
         if (inputCommand.equals("quit")) {
             Ui.goodBye();
             return false;
+        } else if (inputCommand.equals("close")) {
+            try {
+                Storage.setOpenTripAsLastTrip();
+                Storage.setLastExpense(null);
+                Storage.closeTrip();
+                return true;
+            } catch (NullPointerException e) {
+                Ui.printNoOpenTripError();
+                return true;
+            }
         } else if (!checkValidCommand(inputCommand)) {
             Storage.getLogger().log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
@@ -35,11 +44,6 @@ public class Parser {
                 && !inputCommand.equals("create")) {
             Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
-            return true;
-        } else if (inputCommand.equals("close")) {
-            Storage.setOpenTripAsLastTrip();
-            Storage.setLastExpense(null);
-            Storage.closeTrip();
             return true;
         }
 
@@ -210,6 +214,9 @@ public class Parser {
      */
     private static void executeCreateTrip(String attributesInString) {
         String[] newTripInfo = attributesInString.split(" ", 5);
+        if (newTripInfo.length < 5) {
+            throw new IndexOutOfBoundsException();
+        }
         Trip newTrip = new Trip(newTripInfo);
         Storage.getListOfTrips().add(newTrip);
         Ui.newTripSuccessfullyCreated(newTrip);
@@ -308,7 +315,7 @@ public class Parser {
         }
     }
 
-    private static boolean isNumeric(String secondCommand) {
+    public static boolean isNumeric(String secondCommand) {
         try {
             int i = Integer.parseInt(secondCommand);
             return true;

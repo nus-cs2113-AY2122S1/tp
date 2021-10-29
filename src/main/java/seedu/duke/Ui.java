@@ -123,6 +123,10 @@ public class Ui {
                 + "Please enter the date again: ");
     }
 
+    public static void printIsoFormatError() {
+        System.out.print("Please re-enter your currency ISO (e.g. JPY, USD): ");
+    }
+
     public static void printUnknownCommandError() {
         System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter help "
                 + "to learn more.");
@@ -176,9 +180,8 @@ public class Ui {
     }
 
     public static void printNoOpenTripError() {
-        System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        System.out.println("You have not opened any trip yet. Please open a trip to proceed further.");
         printAllTrips();
-        System.out.print("Please enter the trip you would like to open: ");
     }
 
     public static void printAllTrips() {
