@@ -16,6 +16,13 @@ Expiry Eliminator is a desktop app for managing the freshness of ingredients in 
 
 ## Features
 
+> **Notes about the command format:**
+>
+> - Words in UPPER_CASE are the parameters to be supplied by the user (e.g. in `view i/INGREDIENT`, `INGREDIENT` is a parameter which can be used as `view i/Red Apple`).
+> - Parameters in square brackets are optional (e.g. `[u/UNIT]`).
+> - Parameters with `...` after them can be used multiple times, but must appear at least once (e.g. `q/QUANTITY...`).
+> - Parameters can be in any order.
+
 ### Adding an ingredient: `add`
 
 Adds an ingredient to the ingredient repository.
@@ -333,29 +340,63 @@ Format: `bye`
 
 ## Command Summary
 
-1. Add recipe 
-    - Command: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ……`
+1. Adding an ingredient
+    - Command: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]`
+    - E.g.: `add i/Red Apple`
+    - E.g.: `add i/Salt u/g`
+    - E.g.: `add i/Red Apple q/5 e/2021-10-08`
+    - E.g.: `add i/Salt u/g q/1000 e/2021-01-01`
+2. Incrementing quantities for an ingredient
+    - Command: `increment i/INGREDIENT q/QUANTITY e/EXPIRY_DATE`
+    - E.g.: `increment i/Red Apple q/6 e/2021-10-22`
+    - E.g.: `increment i/Salt q/200 e/2021-10-22`
+3. Decrementing quantities for an ingredient
+    - Command: `decrement i/INGREDIENT q/QUANTITY`
+    - E.g.: `decrement i/Red Apple q/2`
+    - E.g.: `decrement i/Salt q/10`
+4. Updating units of an ingredient
+    - Command: `update units i/INGREDIENT u/UNITS`
+    - E.g.: `update units i/salt u/kilograms`
+    - E.g.: `update units i/salt u/`
+5. Listing all ingredients
+    - Command: `list`
+6. Listing ingredients that are expiring
+    - Command: `list expiring`
+7. Listing ingredients that have expired
+    - Command: `list expired`
+8. Viewing a specific ingredient
+    - Command: `view i/INGREDIENT`
+    - E.g.: `view i/salt`
+9. Deleting an ingredient
+    - Command: `delete i/INGREDIENT`
+    - E.g. `delete i/Red Apple`
+10. Deleting all expired ingredients
+    - Command: `delete expired`
+11. Adding a recipe
+    - Command: `add recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
     - E.g.: `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
     - E.g.: `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
-2. Delete recipe 
-    - Command: `delete recipe r/RECIPE`
+12. Deleting a recipe
+    - Command : `delete recipe r/RECIPE`
     - E.g.: `delete recipe r/Chicken Soup`
-3. List recipes that can be cooked
-    - Command: `list recipes i can cook`
-    - E.g.: `list recipes i can cook`
-4. Remove ingredients when recipe is cooked
+13. Removing ingredients when a recipe is cooked:
     - Command: `cooked r/RECIPE`
     - E.g.: `cooked r/Chicken Soup`
-5. List all recipes in recipe list
+14. Listing recipes that can be cooked
+    - Command: `list recipes i can cook`
+15. Listing all recipes
     - Command: `list recipes`
-    - E.g.: `list recipes`
-6. Find a recipe in recipe list
+16. Viewing a specific recipe
     - Command: `view recipe r/RECIPE`
     - E.g.: `view recipe r/Curry Chicken`
-7. Update ingredients in a recipe
-    - Command: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY`
+17. Updating quantities of ingredients in a recipe
+    - Command: `update recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
     - E.g.: `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
-8. View Help
+18. Creating a shopping list of ingredients for a list of recipes
+    - Command: `shopping list r/RECIPE...`
+    - E.g.: `shopping list r/Chicken Soup`
+    - E.g.: `shopping list r/Chicken Soup r/Pork Soup`
+19. Viewing help
     - Command: `help`
-    - E.g.: `help`
-    
+20. Exiting the program
+    - Command: `bye`
