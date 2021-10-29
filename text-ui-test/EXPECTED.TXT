@@ -41,7 +41,7 @@ Enter your command: 1. 	c a b
 3. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 2.00
-	People involved: 
+	People involved:
 		1) yikai, USD 1.00
 		2) josh, USD 1.00
 	Payer: josh
@@ -50,7 +50,7 @@ Enter your command: 1. 	c a b
 Enter your command: 2. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 1.00
-	People involved: 
+	People involved:
 		1) yikai, USD 0.33
 		2) josh, USD 0.33
 		3) xiyuan, USD 0.34
@@ -60,7 +60,7 @@ Enter your command: 2. 	d a c
 Enter your command: 2. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 1.00
-	People involved: 
+	People involved:
 		1) yikai, USD 0.33
 		2) josh, USD 0.33
 		3) xiyuan, USD 0.34
@@ -70,7 +70,7 @@ Enter your command: 2. 	d a c
 3. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 2.00
-	People involved: 
+	People involved:
 		1) yikai, USD 1.00
 		2) josh, USD 1.00
 	Payer: josh
@@ -79,7 +79,7 @@ Enter your command: 2. 	d a c
 Enter your command: 1. 	c a b
 	Date: 19 Oct 2021
 	Amount Spent: USD 8.00
-	People involved: 
+	People involved:
 		1) yikai, USD 5.00
 		2) yuzhao, USD 1.00
 		3) qian, USD 2.00
@@ -89,7 +89,7 @@ Enter your command: 1. 	c a b
 Enter your command: 3. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 2.00
-	People involved: 
+	People involved:
 		1) yikai, USD 1.00
 		2) josh, USD 1.00
 	Payer: josh
@@ -107,7 +107,7 @@ Enter your command: List of all Expenses in detail:
 1. 	c a b
 	Date: 19 Oct 2021
 	Amount Spent: USD 8.00
-	People involved: 
+	People involved:
 		1) yikai, USD 5.00
 		2) yuzhao, USD 1.00
 		3) qian, USD 2.00
@@ -117,7 +117,7 @@ Enter your command: List of all Expenses in detail:
 2. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 1.00
-	People involved: 
+	People involved:
 		1) yikai, USD 0.33
 		2) josh, USD 0.33
 		3) xiyuan, USD 0.34
@@ -127,7 +127,7 @@ Enter your command: List of all Expenses in detail:
 3. 	d a c
 	Date: 19 Oct 2021
 	Amount Spent: USD 2.00
-	People involved: 
+	People involved:
 		1) yikai, USD 1.00
 		2) josh, USD 1.00
 	Payer: josh
