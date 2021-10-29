@@ -12,7 +12,8 @@ import picocli.CommandLine.Command;
         ExpenseCommand.class,
         IncomeCommand.class,
         InvestCommand.class,
-        ExitCommand.class
+        ExitCommand.class,
+        HelpCommand.class
 })
 public class MainCommand {
 }

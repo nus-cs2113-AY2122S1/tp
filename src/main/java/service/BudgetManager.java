@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class BudgetManager implements LoadableManager {
 
     private static BudgetManager budgetMgr;
-    private String fileLabel;
+    private final String fileLabel;
 
     private BudgetManager() {
         fileLabel = "budget";
@@ -63,7 +63,7 @@ public class BudgetManager implements LoadableManager {
     @Override
     public void parse(String[] fileString) {
         if (fileString.length != 0) {
-            Double budget = Double.parseDouble(fileString[0]);
+            double budget = Double.parseDouble(fileString[0]);
             addBudget(budget);
         }
     }
@@ -72,8 +72,8 @@ public class BudgetManager implements LoadableManager {
     public String toFileString() {
         if (BudgetList.getBudgets().size() != 0) {
             Budget budget = BudgetList.getBudgets().get(0);
-            Double budgetValue = budget.getValue();
-            return budgetValue.toString();
+            double budgetValue = budget.getValue();
+            return Double.toString(budgetValue);
         } else {
             return "";
         }

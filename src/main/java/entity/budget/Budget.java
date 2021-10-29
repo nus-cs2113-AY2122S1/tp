@@ -1,7 +1,7 @@
 package entity.budget;
 
 public class Budget {
-    private double value;
+    private final double value;
 
     public Budget(double value) {
         this.value = value;

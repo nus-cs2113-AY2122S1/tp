@@ -15,7 +15,7 @@ import static constants.ErrorMessage.deleteIncomeErrorMsg;
         description = "Deletes an income source from the database by its unique identifier or by its name.")
 public class DeleteIncomeCommand implements Callable<Integer> {
 
-    @ArgGroup(exclusive = true)
+    @ArgGroup()
     Exclusive exclusive;
 
     public Integer call() throws Exception {

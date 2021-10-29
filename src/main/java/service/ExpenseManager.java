@@ -1,5 +1,6 @@
 package service;
 
+import entity.budget.BudgetList;
 import entity.expense.Expense;
 import entity.expense.ExpenseList;
 import terminal.Ui;
@@ -9,10 +10,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static constants.WarningMessage.expenseNearingBudgetWarning;
+import static constants.WarningMessage.budgetNowZeroWarning;
+import static constants.WarningMessage.expenseExceedBudgetWarning;
+
 public class ExpenseManager implements LoadableManager {
 
+    // Default Warning Amt
+    private double warningAmt = 100.0;
     private static ExpenseManager expenseMgr;
-    private String fileLabel;
+    private final String fileLabel;
+    private final String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
+            "Id.", "Name", "Value", "Date", "Category");
 
     private ExpenseManager() {
         fileLabel = "expense";
@@ -25,11 +34,40 @@ public class ExpenseManager implements LoadableManager {
         return expenseMgr;
     }
 
-    public void addExpense(String expenseName, double expenseValue) {
+    private String getTodayDate() {
         Format f = new SimpleDateFormat("dd/MM/yy");
-        String today = f.format(new Date());
-        Expense newExpense = new Expense(expenseName, expenseValue, today);
+        return f.format(new Date());
+    }
+
+    public void checkIfBudgetExceeded() {
+        Ui ui = Ui.getUi();
+        double totalBudgetValue = BudgetList.getBudgets().get(0).getValue();
+        double totalExpenseValue = ExpenseList.getRunningExpenseValue();
+        double currDiffToBurstBudget = totalBudgetValue - totalExpenseValue;
+        if (currDiffToBurstBudget < warningAmt
+                && currDiffToBurstBudget > 0) {
+            ui.printMessage(expenseNearingBudgetWarning);
+        } else if (currDiffToBurstBudget == 0) {
+            ui.printMessage(budgetNowZeroWarning);
+        } else if (currDiffToBurstBudget < 0) {
+            ui.printMessage(expenseExceedBudgetWarning);
+        }
+    }
+
+    public void setWarningAmt(double newWarningAmt) {
+        warningAmt = newWarningAmt;
+    }
+
+    public void addExpense(String expenseName, double expenseValue) {
+        Expense newExpense = new Expense(expenseName, expenseValue, getTodayDate());
         ExpenseList.addExpense(newExpense);
+        checkIfBudgetExceeded();
+    }
+
+    public void addExpense(String expenseName, double expenseValue, String category) {
+        Expense newExpense = new Expense(expenseName, expenseValue, getTodayDate(), category);
+        ExpenseList.addExpense(newExpense);
+        checkIfBudgetExceeded();
     }
 
     public void deleteExpense(String expenseName) {
@@ -40,46 +78,78 @@ public class ExpenseManager implements LoadableManager {
         ExpenseList.deleteExpense(expenseNumber - 1);
     }
 
+    public void updateExpense(String expenseName, double expenseValue) {
+        ExpenseList.updateExpense(expenseName, expenseValue);
+        checkIfBudgetExceeded();
+    }
+
+    public void updateExpense(String expenseName, double expenseValue, String category) {
+        ExpenseList.updateExpense(expenseName, expenseValue, category);
+        checkIfBudgetExceeded();
+    }
+
     public void listExpenses() {
         Ui ui = Ui.getUi();
-        String expenseListHeader = String.format("%s | %-25s | %-10s | %s", "Id.", "Name", "Value", "Date");
-
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
         for (int i = 0; i < expenses.size(); i++) {
             ui.printMessage((i + 1) + ". \t| " + expenses.get(i));
         }
+
+        String totalExpenseValue = Double.toString(ExpenseList.getRunningExpenseValue());
+        String totalExpenseValuePrintInfo = String.format("%s %32s", "Total:", totalExpenseValue);
+        ui.printMessage(totalExpenseValuePrintInfo);
+    }
+
+    public void listExpenses(String category) {
+        Ui ui = Ui.getUi();
+        ui.printMessage(expenseListHeader);
+        ArrayList<Expense> expenses = ExpenseList.getExpenses();
+        ArrayList<Expense> expenseInCategory = new ArrayList<>();
+        for (Expense expense : expenses) {
+            if (expense.getCategory().contains(category)) {
+                expenseInCategory.add(expense);
+            }
+        }
+
+        for (int i = 0; i < expenseInCategory.size(); i++) {
+            ui.printMessage((i + 1) + ". \t| " + expenseInCategory.get(i));
+        }
     }
 
     @Override
     public void parse(String[] fileString) {
+        double newRunningExpenseValue = 0;
         for (String line : fileString) {
             String[] splitLine = line.split(";");
 
             String name = splitLine[0];
-            Double value = Double.parseDouble(splitLine[1]);
+            double value = Double.parseDouble(splitLine[1]);
             String date = splitLine[2];
+            String category = splitLine[3];
 
-            Expense expense = new Expense(name, value, date);
+            Expense expense = new Expense(name, value, date, category);
             ExpenseList.addExpense(expense);
+            newRunningExpenseValue += expense.getValue();
         }
+        ExpenseList.setRunningExpenseValue(newRunningExpenseValue);
     }
 
     @Override
     public String toFileString() {
-        String fileString = "";
+        StringBuilder fileString = new StringBuilder();
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
 
-        for (int i = 0; i < expenses.size(); i++) {
-            Expense expense = expenses.get(i);
+        for (Expense expense : expenses) {
             String name = expense.getDescription();
-            String value = ((Double)expense.getValue()).toString();
+            String value = ((Double) expense.getValue()).toString();
             String date = expense.getDate();
+            String category = expense.getCategory();
 
-            fileString += String.format("%s;%s;%s\n", name, value, date);
+            fileString.append(String.format("%s;%s;%s;%s\n", name, value, date, category));
         }
 
-        return fileString;
+        return fileString.toString();
     }
 
     @Override

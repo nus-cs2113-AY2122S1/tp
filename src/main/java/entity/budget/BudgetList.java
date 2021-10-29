@@ -3,7 +3,7 @@ package entity.budget;
 import java.util.ArrayList;
 
 public class BudgetList {
-    private static ArrayList<Budget> budgets = new ArrayList<>();
+    private static final ArrayList<Budget> budgets = new ArrayList<>();
 
     public static void addBudget(Budget newBudget) {
         budgets.add(newBudget);

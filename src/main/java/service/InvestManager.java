@@ -13,7 +13,7 @@ import static constants.ErrorMessage.invalidIndexMsg;
 
 public class InvestManager implements LoadableManager {
     private static InvestManager investMgr;
-    private String fileLabel;
+    private final String fileLabel;
 
     private InvestManager() {
         fileLabel = "invest";
@@ -61,18 +61,18 @@ public class InvestManager implements LoadableManager {
     }
 
     public String printToFile(ArrayList investments) {
-        String fileString = "";
+        StringBuilder fileString = new StringBuilder();
 
         if (investments.size() == 0) {
-            return fileString;
+            return fileString.toString();
         }
 
         for (Object invest : investments) {
             String investFileString = ((Investment)invest).toFileString();
-            fileString += investFileString + "\n";
+            fileString.append(investFileString).append("\n");
         }
 
-        return fileString.strip();
+        return fileString.toString().strip();
     }
 
     @Override

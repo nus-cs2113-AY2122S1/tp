@@ -29,6 +29,9 @@ After every command is executed, the user data is automatically saved on the com
 
 The main commands are separated according to their features. Subcommands are used with each main command to achieve user's desired task. For example, `[MAIN_CMD] [SUB_CMD] [ARGS] [-FLAGS]`.
 
+### Help - `help`
+The command `help` will show a list of all the available commands to the user.
+
 ### Expense - `expense`
 
 #### Adding an expense - `add`
@@ -38,15 +41,15 @@ Format: `expense add [NAME] -v [VALUE] -c [CATEGORY]`
 
 Arguments:
 - `NAME`
-  - The name of the expense is case sensitive, and shall contain any characters except for “-”.
+  - The name of the expense is case-sensitive, and shall contain any characters except for “-”.
   - The name can be non-unique.
 - `VALUE`
   - The value shall be any positive number (integer or float values).
   - Float values with more than two decimal places specified are truncated to two decimal places.
   - If a non-numeric string, negative number, or zero is provided, an error message is shown.
 - `CATEGORY`
-  - The name of the category is case sensitive, and shall contain any characters except for "-".
-  - The category is not a mandatory field.
+  - The name of the category is case-sensitive, and shall contain any characters except for "-".
+  - The category is **not** a mandatory field.
 
 Example of usage: 
 
@@ -60,9 +63,12 @@ Shows a list of all expenses, or a list of expenses grouped by their categories.
 Format: `expense list [-c]`
 
 Arguments:
-- `-c`
-  - If the category flag is not specified, all the expenses in the current month are listed, in reverse chronological order.
-  - If the category flag is specified, the expenses will be grouped by their categories.
+- `-c` - optional flag
+  - If the category flag is not specified, all the expenses in are listed, in chronological order.
+  - If the category flag is specified with a category, only expenses that belong to that category will be shown.
+
+Example of usage:
+- `expense list -c fruits`
 
 <br />
 
@@ -73,11 +79,11 @@ Format: `expense delete -n [NAME] -i [ID]`
 
 Arguments:
 - `NAME`
-  - The names of the expense are case sensitive, and can contain any characters except for “-”.
+  - The names of the expense are case-sensitive, and can contain any characters except for “-”.
   - The length of the name is limited to 64 characters.
   - If there are multiple repeated names, then all these expenses will be selected as candidates for deletion.
 - `ID`
-  - The id number shall be an positive integer.
+  - The id number shall be a positive integer.
   - If not a positive integer is provided, then an error message is shown.
 
 Both arguments are mutually exclusive. This means that if both the name and id are specified, an error message is displayed.
@@ -86,6 +92,53 @@ Example of usage:
 
 - `expense delete -n Eat lunch`
 - `expense delete -i 2`
+
+<br />
+
+#### Updating an expense - `update`
+Updates the value or category of an expense that has already been added.
+
+Format: `expense update [NAME] -v [VALUE] -c [CATEGORY]`
+
+Arguments:
+- `NAME`
+  - The names of the expense are case-sensitive, and can contain any characters except for “-”.
+  - The length of the name is limited to 64 characters.
+  - If there are multiple repeated names, then all these expenses will be selected as candidates for update.
+- `VALUE`
+  - Compulsory to specify a new value of update.
+  - The value must be a positive number that represents monetary value. Cents are also accepted.
+- `CATEGORY`
+  - The name of the category is case-sensitive, and shall contain any characters except for "-".
+  - The category is **not** a mandatory field.
+
+Both arguments can be specified together.
+
+Example of usage:
+
+- `expense update Eat lunch -v 10`
+- `expense update notebook -v 5 -c book`
+
+<br />
+
+#### Setting expense warning limit - `warning`
+A warning limit can be set such that the remaining budget after adding an expense is close to reaching the limit, warnings will be shown.
+
+Different Warnings:
+- If the remaining budget after adding an expense is **close** to reaching a limit.
+- If the remaining budget after adding an expense is **$0**.
+- If after adding an expense, the remaining budget has become **negative**. 
+
+Format: `expense warning -v [VALUE]`
+
+Arguments:
+- `VALUE`
+  - Compulsory to specify a value for the warning limit.
+  - The value must be a positive number that represents monetary value. Cents are also accepted.
+
+Example of usage:
+
+- `expense warning -v 100`
 
 <hr />
 
@@ -98,7 +151,7 @@ Format: `income add [NAME] -v [VALUE]`
 
 Arguments:
 - `NAME`
-  - The name of the income source is case sensitive, and shall contain any characters except for “-”.
+  - The name of the income source is case-sensitive, and shall contain any characters except for “-”.
   - The length of the name is limited to 64 characters.
   - Names can be non-unique.
 - `VALUE`
@@ -127,11 +180,11 @@ Format: `income delete -n [NAME] -i [ID]`
 
 Arguments:
 - `NAME`
-  - The names of the income sources are case sensitive, and can contain any characters except for “-”.
+  - The names of the income sources are case-sensitive, and can contain any characters except for “-”.
   - The length of the name is limited to 64 characters.
   - If there are multiple repeated names, then all these expenses will be selected as candidates for deletion.
 - `ID`
-  - The id number shall be an positive integer.
+  - The id number shall be a positive integer.
   - If not a positive integer is provided, then an error message is shown.
 
 <br />
@@ -143,7 +196,7 @@ Format: `income update [NAME] -v [VALUE]`
 
 Arguments:
 - `NAME`
-  - The name of the income source is case sensitive, and shall contain any characters except for “-”.
+  - The name of the income source is case-sensitive, and shall contain any characters except for “-”.
   - The length of the name is limited to 64 characters.
   - Names can be non-unique.
 - `VALUE`
@@ -206,9 +259,13 @@ Format: `budget delete`
 | Add expense | `expense add [NAME] -v [VALUE] -c [CATEGORY]` |
 | Delete expense | `expense delete -n [NAME] -i [ID]` |
 | List expenses | `expense list` |
+| Update expense | `expense update [NAME] -v [VALUE] -c [CATEGORY]` |
+| Expense warning limit | `expense warning -v [VALUE]` |
 | Add income | `income add [NAME] -v [VALUE]` |
 | Delete income | `income delete -n [NAME] -i [ID]` |
 | List incomes | `income list` |
 | Add budget | `budget add -v [VALUE]` |
 | List budget | `budget list` |
 | Delete budget | `budget delete` |
+| View all available commands | `help` |
+| Exit the application | `exit` |

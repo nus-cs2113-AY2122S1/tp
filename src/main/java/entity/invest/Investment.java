@@ -1,7 +1,7 @@
 package entity.invest;
 
 public class Investment {
-    private String name;
+    private final String name;
     private Double totalValue;
 
     public Investment(String name, Double totalValue) {
