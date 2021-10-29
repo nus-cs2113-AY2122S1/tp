@@ -8,6 +8,8 @@ Third party library used: GSON under Apache License 2.0
 ## Design 
 
 ### Architecture
+
+![](../Resources/Arch_Diag.JPG)
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -31,6 +33,8 @@ The remaining components are as follows:
 The ***Sequence Diagram*** below shows how the components interact with each other.
 For this particular interaction, the user has issued the command
 `create` with the correct input parameters.
+
+![](../Resources/ExampleSeq_Diag.JPG)
 
 The sections below provide more details of the components and classes in them.
 
