@@ -6,7 +6,7 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
-import seedu.duke.ui.UiWelcome;
+import seedu.duke.ui.UiGeneral;
 import seedu.duke.universities.UniversityList;
 
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         Storage storage = new Storage();
         try {
-            UiWelcome.welcome();
+            UiGeneral.welcome();
             ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
             UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
             UniversityList universitySelectedList = new UniversityList(
@@ -31,13 +31,17 @@ public class Duke {
             Command cmd = null;
             do {
                 try {
-                    Ui.printLineSeparator();
-                    Ui.promptInput();
+                    UiGeneral.printLineSeparator();
+                    System.out.println();
+                    UiGeneral.promptInput();
                     String userInput = in.nextLine();
                     cmd = mainParser.parseCommand(userInput);
+                    System.out.println();
 
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
+                    System.out.println();
+
                 }
             } while (!(cmd instanceof ExitCommand));
 

@@ -5,10 +5,10 @@ import seedu.duke.universities.University;
 
 import static java.lang.System.out;
 
-public class UiUniversity {
+public class UiUniversity extends Ui {
 
     public static void printUniversity(University uni, boolean printMC) {
-        Ui.printIndex(uni.getIndex(), false);
+        printIndex(uni.getIndex(), false);
         String output;
         if (printMC) {
             StringBuilder padding = Ui.stringPadder(uni.getName(), PaddingType.UNIVERSITYNAME);

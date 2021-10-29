@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
                 + "selected modules for that university\n"
                 + "10: addmap <uni index> <mapping index> ~~ Add that module mapping to the selected list\n"
                 + "11: remove </uni or /mod> <index> ------- Remove the specified university/module \n"
-                + "12Z: remove /map <uni index> <map index> ~ Remove the specified module mapping";
+                + "12: remove /map <uni index> <map index> ~ Remove the specified module mapping";
         System.out.println(help);
     }
 }
