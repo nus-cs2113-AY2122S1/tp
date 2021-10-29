@@ -1,17 +1,6 @@
 Word-limited|8.082|1|9|10|10.0|90.0|66.81514476614699|[dummy]
 Word-limited|10.075|0|10|10|0.0|100.0|59.55334987593052|[]
 Word-limited|11.066|1|9|10|10.0|90.0|48.79812036869691|[dummy]
-<<<<<<< Updated upstream
-Word-limited|10.052|2|8|10|20.0|80.0|47.751691205730204|[dummy,      printing]
-Time-limited|31.138|3|27|30|10.0|90.0|52.02646284282869|[typesetting,     typesetting,     industry]
+Word-limited|10.052|2|8|10|20.0|80.0|47.751691205730204|[dummy,   printing]
+Time-limited|31.138|3|27|30|10.0|90.0|52.02646284282869|[typesetting,  typesetting,  industry]
 Time-limited|31.34|0|70|70|0.0|100.0|134.01403956604977|[]
-Time-limited|32.909|3|15|18|16.666666666666664|83.33333333333334|27.348141845695707|[salutation,   from,   1826.]
-Time-limited|30.193|10|20|30|33.33333333333333|66.66666666666666|39.744311595402905|[English,  language.,  Hello,  salutation,  the,  English,  language.,  Hello,  English,  language.]
-Time-limited|0.0|0|0|0|NaN|NaN|NaN|[]
-=======
-Word-limited|10.052|2|8|10|20.0|80.0|47.751691205730204|[dummy,    printing]
-Time-limited|31.138|3|27|30|10.0|90.0|52.02646284282869|[typesetting,   typesetting,   industry]
-Time-limited|31.34|0|70|70|0.0|100.0|134.01403956604977|[]
-Time-limited|33.079|7|23|30|23.333333333333332|76.66666666666667|41.71831071072281|[typesetting, dummy, dummy, dummy, dummy, dummy, dummy]
-Time-limited|36.098|5|25|30|16.666666666666664|83.33333333333334|41.55354867305668|[Ishmael., nothing, particular, interest, shore,]
->>>>>>> Stashed changes
