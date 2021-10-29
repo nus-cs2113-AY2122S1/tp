@@ -10,6 +10,9 @@ import java.util.ArrayList;
  * Sorts name of client, or ID of client alphabetically.
  */
 public class SortClientCommand extends Command {
+    public static final String ERROR_MISSING_FILTER = "Missing filter! Sort clients with the format: \n"
+            + "sort -c /n (sort by name)\n"
+            + "sort -c /id (sort by id)";
     private final String filter;
 
     /**
@@ -42,7 +45,7 @@ public class SortClientCommand extends Command {
                 ui.showSortedClientById(clients, sortedIds);
                 break;
             default:
-                break;
+                throw new TourPlannerException(ERROR_MISSING_FILTER);
             }
         } catch (TourPlannerException e) {
             System.out.println(e.getMessage());

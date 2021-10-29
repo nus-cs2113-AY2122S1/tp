@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class SortTourCommand extends Command {
     private final String filter;
+    public static final String ERROR_MISSING_FILTER = "Missing filter! Sort tours with the format: \n"
+            + "sort -t /id (sort by ID alphabetically) \n"
+            + "sort -t /p (sort by increasing price)";
 
     /**
      * Class constructor for SortTourCommand.
@@ -41,7 +44,7 @@ public class SortTourCommand extends Command {
                 ui.showSortedTourByPrice(tours, sortedPrices);
                 break;
             default:
-                break;
+                throw new TourPlannerException(ERROR_MISSING_FILTER);
             }
         } catch (TourPlannerException e) {
             System.out.println(e.getMessage());

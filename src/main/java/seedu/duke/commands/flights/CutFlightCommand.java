@@ -47,6 +47,8 @@ public class CutFlightCommand extends Command {
     private void cutFlightPackage() {
         ArrayList<ClientPackage> clientPackagesWithFlight = clientPackages.getClientPackageByFlight(flight);
         for (ClientPackage clientPackage: clientPackagesWithFlight) {
+            System.out.println();
+            ui.showCut(clientPackage);
             clientPackages.cut(clientPackage);
         }
     }
