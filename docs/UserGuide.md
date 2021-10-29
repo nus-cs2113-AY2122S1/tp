@@ -100,7 +100,7 @@ $ help
        add        module [MODULE_CODE]
        list       task {PERIOD/PRIORITY}
        list       lesson {PERIOD}
-       list       module {grade}
+       list       module {verbose}
        delete     task [INDEX]
        delete     lesson [INDEX]
        delete     module [MODULE_CODE]
