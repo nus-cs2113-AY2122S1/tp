@@ -14,7 +14,7 @@ commands that you can execute.
 
 > Symbols used in this guide:
 > 
-> * 💡 denotes an important info 
+> * 💡 denotes important information
 > * ❗ denotes a warning
 
 ## Table of contents
@@ -76,11 +76,11 @@ You should see the following output when you start NUSBuddy for the first time.
 
 > 💡 The **UPPER_CASE** in the command denotes the parameter that you can enter your value into.
 > 
-> `[COMPULSORY_PARAM]`: Square brackets denotes compulsory parameter.
+> `[COMPULSORY_PARAM]`: Square brackets denote a compulsory parameter.
 > 
 > `[OPTION1/OPTION2]`: Denotes either `OPTION1` or `OPTION2` must be chosen as the parameter.
 > 
-> `{OPTIONAL_PARAM}`: Curly brackets denotes optional parameter.
+> `{OPTIONAL_PARAM}`: Braces denote an optional parameter.
 
 ### Getting help - `help`
 
