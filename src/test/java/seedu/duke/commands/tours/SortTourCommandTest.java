@@ -21,6 +21,12 @@ class SortTourCommandTest {
     private static final String VALID_SORT_BY_ID_FILTER = "/id";
     private static final String INVALID_FILTER = "/i";
     private static final String EMPTY_FILTER = "";
+    public static final String PRICE_ORDER_ONE = "1500.00";
+    public static final String PRICE_ORDER_THREE = "3000.00";
+    public static final String PRICE_ORDER_TWO = "1800.00";
+    public static final String ID_ORDER_TWO = "JPN";
+    public static final String ID_ORDER_THREE = "KOR";
+    public static final String ID_ORDER_ONE = "AUS";
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
@@ -32,12 +38,16 @@ class SortTourCommandTest {
     Ui testUi = new Ui();
 
     void initialiseTourListForTesting() {
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Tour kor = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
-        Tour aus = new Tour(new String[]{"AUS", "Australia Romantic Tour", "1800.00"});
+        Tour jpn = new Tour(new String[]{ID_ORDER_TWO, "Japan Basic Tour", PRICE_ORDER_ONE});
+        Tour kor = new Tour(new String[]{ID_ORDER_THREE, "Korea Cultural Tour", PRICE_ORDER_THREE});
+        Tour aus = new Tour(new String[]{ID_ORDER_ONE, "Australia Romantic Tour", PRICE_ORDER_TWO});
         testTourList.add(jpn);
         testTourList.add(kor);
         testTourList.add(aus);
+    }
+
+    Float parseFloat(String value) {
+        return Float.parseFloat(value);
     }
 
     @Test
@@ -54,9 +64,9 @@ class SortTourCommandTest {
 
         testTourList.initTempArray();
         String expectedString = Ui.SORT_TOUR_PRICE_MESSAGE + "\n"
-                + "1. " + testTourList.getTourByPrice(1500.00F) + "\n\n"
-                + "2. " + testTourList.getTourByPrice(1800.00F) + "\n\n"
-                + "3. " + testTourList.getTourByPrice(3000.00F);
+                + "1. " + testTourList.getTourByPrice(parseFloat(PRICE_ORDER_ONE)) + "\n\n"
+                + "2. " + testTourList.getTourByPrice(parseFloat(PRICE_ORDER_TWO)) + "\n\n"
+                + "3. " + testTourList.getTourByPrice(parseFloat(PRICE_ORDER_THREE));
 
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
@@ -76,9 +86,9 @@ class SortTourCommandTest {
 
         testTourList.initTempArray();
         String expectedString = Ui.SORT_TOUR_ID_MESSAGE + "\n"
-                + "1. " + testTourList.getTourById("AUS") + "\n\n"
-                + "2. " + testTourList.getTourById("JPN") + "\n\n"
-                + "3. " + testTourList.getTourById("KOR");
+                + "1. " + testTourList.getTourById(ID_ORDER_ONE) + "\n\n"
+                + "2. " + testTourList.getTourById(ID_ORDER_TWO) + "\n\n"
+                + "3. " + testTourList.getTourById(ID_ORDER_THREE);
 
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);

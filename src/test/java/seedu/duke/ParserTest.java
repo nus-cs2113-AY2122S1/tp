@@ -30,6 +30,11 @@ public class ParserTest {
     private static final String WRONG_ADDFLIGHT_MISSING_ID =
             "add -f /d JPN /r SG /dd 23/10/21 13:00 /rd 27/10/21 02:00";
     private static final String WRONG_ADDTOUR_MISSING_ID = "add -t /n australiaromance /p 1300";
+    private static final String WRONG_ADDCLIENT_DUPLICATE_PREFIX =
+            "add -c c001 /n Bo Tuan /cn 91234567 /m botuan@gmail.com /cn 13465789";
+    private static final String WRONG_ADDTOUR_DUPLICATE_PREFIX = "add -t aus1369 /n australiaromance /p 1300 /p 2400";
+    private static final String WRONG_ADDFLIGHT_DUPLICATE_PREFIX =
+            "add -f SQ-JPN1 /d JPN /d JAPAN /r SG /dd 23/10/21 13:00 /rd 27/10/21 02:00";
 
     @Test
     void parse_addClientCommand_correctCommandCreated() throws TourPlannerException {
@@ -82,6 +87,14 @@ public class ParserTest {
         assertParseFailure(WRONG_ADDFLIGHT_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
         assertParseFailure(WRONG_ADDTOUR_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
     }
+
+    @Test
+    void parse_duplicatePrefixes_failure() {
+        assertParseFailure(WRONG_ADDCLIENT_DUPLICATE_PREFIX, Parser.ERROR_DUPLICATE_PREFIXES);
+        assertParseFailure(WRONG_ADDTOUR_DUPLICATE_PREFIX, Parser.ERROR_DUPLICATE_PREFIXES);
+        assertParseFailure(WRONG_ADDFLIGHT_DUPLICATE_PREFIX, Parser.ERROR_DUPLICATE_PREFIXES);
+    }
+
 
     private <T extends Command> void parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
             throws TourPlannerException {
