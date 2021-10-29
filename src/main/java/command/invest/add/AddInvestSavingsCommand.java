@@ -8,8 +8,6 @@ import utils.Money;
 
 import java.util.concurrent.Callable;
 
-import static constants.ErrorMessage.addIncomeErrorMsg;
-
 @CommandLine.Command(name = "savings", description = "Add a savings account to your portfolio")
 public class AddInvestSavingsCommand implements Callable<Integer> {
     @CommandLine.Parameters(paramLabel = "NAME", arity = "1..*", description = "Name of the savings account")

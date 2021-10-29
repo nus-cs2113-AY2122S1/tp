@@ -16,7 +16,7 @@ import static constants.ErrorMessage.deleteExpenseErrorMsg;
                 + "by the unique identifier (from list) or by the name.")
 public class DeleteExpenseCommand implements Callable<Integer> {
 
-    @ArgGroup(exclusive = true, multiplicity = "1")
+    @ArgGroup(multiplicity = "1")
     Exclusive exclusive;
 
     @Override

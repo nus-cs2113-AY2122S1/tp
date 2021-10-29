@@ -1,9 +1,9 @@
 package entity.income;
 
 public class Income {
-    private String description;
+    private final String description;
     private double value;
-    private String date;
+    private final String date;
 
     public Income(String description, double value, String date) {
         this.description = description;

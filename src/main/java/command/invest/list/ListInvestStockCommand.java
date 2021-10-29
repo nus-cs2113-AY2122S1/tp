@@ -1,7 +1,6 @@
 package command.invest.list;
 
 import picocli.CommandLine.Command;
-import service.IncomeManager;
 import service.InvestManager;
 import terminal.Ui;
 
