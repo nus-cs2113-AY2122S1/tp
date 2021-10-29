@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":AddAssessmentCommand" as addAssessmentCommand
+Participant ":ModuleList" as moduleList
+Participant ":Module" as module
+Participant ":AssessmentList" as assessmentList
+Participant ":Assessment" as assessment
+Participant ":Storage" as storage
+
+activate taa
+
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : "add_assessment c/CS2113T\nn/Finals m/100 w/30"
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput)
+activate parser
+
+create addAssessmentCommand
+parser -> addAssessmentCommand
+activate addAssessmentCommand
+addAssessmentCommand -> parser
+deactivate addAssessmentCommand
+
+parser --> taa : command:AddAssessmentCommand
+deactivate parser
+
+taa -> addAssessmentCommand : checkArguments()
+activate addAssessmentCommand
+
+addAssessmentCommand --> taa
+deactivate addAssessmentCommand
+
+taa -> addAssessmentCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
+activate addAssessmentCommand
+
+addAssessmentCommand -> module
+activate module
+module --> addAssessmentCommand
+deactivate module
+
+create assessment
+addAssessmentCommand -> assessment
+activate assessment
+assessment --> addAssessmentCommand
+deactivate assessment
+
+addAssessmentCommand -> assessmentList : getAssessmentList()
+activate assessmentList
+assessmentList --> addAssessmentCommand
+deactivate assessmentList
+
+addAssessmentCommand -> assessmentList : addAssessment(assessment:Assessment)
+activate assessmentList
+assessmentList --> addAssessmentCommand
+deactivate assessmentList
+
+addAssessmentCommand -> storage : save(moduleList:ModuleList)
+activate storage
+storage --> addAssessmentCommand
+deactivate storage
+
+addAssessmentCommand -> ui : printMessage("Assessment added to CS2113T: ...")
+activate ui
+ui -> user : Display message:\n"Assessment added to CS2113T: ..."
+ui --> addAssessmentCommand
+deactivate ui
+
+deactivate addAssessmentCommand
+
+@enduml

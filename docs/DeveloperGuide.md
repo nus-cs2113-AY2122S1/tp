@@ -112,6 +112,9 @@ which stores assessment internally as an ArrayList `assessments`.<br>
 * `AssessmentList#deleteAssessment(assessmentName:String)` - Deletes an assessment with the name specified by the user
   from the `assessments` ArrayList.
 
+The sequence diagram shown below illustrates how the `add_assessment` command works:
+![AddAssessmentSequenceDiagram](diagrams/AddAssessmentSequenceDiagram.png)
+
 Below is an example scenario of how the add assessment feature behaves at each step:
 * Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
   command calls the `AddAssessmentCommand#execute` method. Within `AddAssessmentCommand#execute`,
