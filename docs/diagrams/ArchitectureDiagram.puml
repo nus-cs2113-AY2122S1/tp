@@ -8,12 +8,12 @@ Package " "<<Rectangle>>{
     Class UI UI_COLOR
     Class Logic LOGIC_COLOR
     Class Storage STORAGE_COLOR
-    Class Data MODEL_COLOR
-    Class Main #grey
+    Class Data DATA_COLOR
+    Class BudgetTracker #grey
     Class Commons LOGIC_COLOR_T2
 }
 
-Class "<$user>" as User MODEL_COLOR_T2
+Class "<$user>" as User DATA_COLOR_T2
 Class "<$documents>" as File UI_COLOR_T1
 
 
@@ -21,13 +21,13 @@ UI -[#green]> Logic
 UI -right[#green]-> Data
 Logic -[#blue]-> Storage
 Logic -down[#blue]-> Data
-Main -[#grey]-> UI
-Main -[#grey]-> Logic
-Main -[#grey]-> Storage
-Main -up[#grey]-> Data
-Main -down[hidden]-> Commons
+BudgetTracker -[#grey]-> UI
+BudgetTracker -[#grey]-> Logic
+BudgetTracker -[#grey]-> Storage
+BudgetTracker -up[#grey]-> Data
+BudgetTracker -down[hidden]-> Commons
 
 Storage -up[STORAGE_COLOR].> Data
-Storage .right[STORAGE_COLOR].>File
+Storage .down[STORAGE_COLOR].>File
 User ..> UI
 @enduml

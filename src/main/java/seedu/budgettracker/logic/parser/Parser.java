@@ -175,7 +175,7 @@ public class Parser {
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
+        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException | IllegalArgumentException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
 
