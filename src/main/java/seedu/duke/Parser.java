@@ -84,9 +84,6 @@ public class Parser {
      */
     private static void handleValidCommands(String inputCommand, String inputParams) {
 
-
-
-
         switch (inputCommand) {
         case CREATE_COMMAND:
             handleCreateTrip(inputParams);
@@ -445,7 +442,7 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
-        newExpense.prompDate();
+        newExpense.prompDate().assignAmounts();
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();

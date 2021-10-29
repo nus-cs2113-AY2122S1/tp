@@ -54,11 +54,6 @@ public class Expense {
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
-        if (personsList.size() == 1) {
-            Parser.updateOnePersonSpending(this, personsList.get(0));
-        } else {
-            Parser.updateIndividualSpending(this);
-        }
     }
     //@@author
 
@@ -100,6 +95,14 @@ public class Expense {
 
     //@@author
 
+    public void assignAmounts() {
+        if (personsList.size() == 1) {
+            Parser.updateOnePersonSpending(this, personsList.get(0));
+        } else {
+            Parser.updateIndividualSpending(this);
+        }
+    }
+
     public void setPayer(Person person) {
         this.payer = person;
     }
@@ -123,7 +126,7 @@ public class Expense {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public LocalDate prompDate() {
+    public Expense prompDate() {
         Scanner sc = Storage.getScanner();
         Ui.expensePromptDate();
         String inputDate = sc.nextLine();
@@ -131,9 +134,11 @@ public class Expense {
             inputDate = sc.nextLine();
         }
         if (inputDate.isEmpty()) {
-            return LocalDate.now();
+            this.date = LocalDate.now();
+        } else {
+            this.date = LocalDate.parse(inputDate, inputPattern);
         }
-        return LocalDate.parse(inputDate, inputPattern);
+        return this;
     }
 
     private Boolean isDateValid(String date) {
@@ -155,9 +160,10 @@ public class Expense {
     }
 
     public void printDate() {
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         System.out.println(formattedDate);
     }
+    //@@author
 
 
     //expense details
