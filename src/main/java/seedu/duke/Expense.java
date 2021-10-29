@@ -20,7 +20,6 @@ public class Expense {
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private double exchangeRate;
 
-    //@@author lixiyuan416
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
@@ -30,6 +29,7 @@ public class Expense {
      * @param description   (placeholder)
      * @param exchangeRate  (placeholder)
      */
+    //@@author lixiyuan416
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
                    String description, double exchangeRate) {
         this.amountSpent = amountSpent;
@@ -41,10 +41,11 @@ public class Expense {
     //@@author
 
     /**
-     * Constructor for {@link Expense} class - contains parsing, date prompting and amount assignment.
+     * Constructor for {@link Expense} class - contains parsing and amount assignment.
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
+    //@@author yeezao
     public Expense(String inputDescription) {
         String[] expenseInfo = inputDescription.split(" ", 3);
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
@@ -53,13 +54,13 @@ public class Expense {
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
-        this.date = prompDate();
         if (personsList.size() == 1) {
             Parser.updateOnePersonSpending(this, personsList.get(0));
         } else {
             Parser.updateIndividualSpending(this);
         }
     }
+    //@@author
 
     private static String getDescriptionParse(String userInput) {
         return userInput.split("/")[1].trim();

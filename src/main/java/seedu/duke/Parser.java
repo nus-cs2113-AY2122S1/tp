@@ -223,6 +223,14 @@ public class Parser {
         Storage.setLastTrip(newTrip);
     }
 
+    /**
+     * Gets the trip to be edited and edits the specified attributes of the trip.
+     *
+     * @param inputDescription - user input of trip index and trip attributes to edit.
+     *
+     * @see Parser#editTripWithIndex(String)
+     * @see Parser#editTripPerAttribute(Trip, String)
+     */
     private static void executeEditTrip(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         assert tripToEditInfo[1] != null;
@@ -235,20 +243,32 @@ public class Parser {
                 return;
             }
         } else {
-            tripToEdit = openTripWithIndex(tripToEditInfo[0].strip());
+            tripToEdit = editTripWithIndex(tripToEditInfo[0].strip());
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
 
-    private static Trip openTripWithIndex(String tripIndexInString) {
+    /**
+     * Gets the trip to be edited from the user-entered index.
+     *
+     * @param tripIndexInString index of trip to be edited, as a {@link String} to be parsed.
+     * @return the {@link Trip} object to be edited.
+     */
+    private static Trip editTripWithIndex(String tripIndexInString) {
         int indexToEdit = Integer.parseInt(tripIndexInString) - 1;
         Trip tripToEdit = Storage.getListOfTrips().get(indexToEdit);
         Storage.setLastTrip(tripToEdit);
         return tripToEdit;
     }
 
-    //assumes that listOfTrips have at least 1 trip
+
+    /**
+     * Sets the user-specified trip as opened. Requires that the {@code listOfTrips} has at least one open trip.
+     *
+     * @param indexAsString index of trip to open, as a {@link String} to be parsed.
+     */
     private static void executeOpen(String indexAsString) {
+        //assumes that listOfTrips have at least 1 trip
         int indexToGet = Integer.parseInt(indexAsString) - 1;
         Storage.setOpenTrip(Storage.getListOfTrips().get(indexToGet));
         Ui.printOpenTripMessage(Storage.getOpenTrip());
@@ -400,6 +420,7 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
+        newExpense.prompDate();
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
