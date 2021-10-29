@@ -299,10 +299,117 @@ I have deleted everything!
 ### 4.7 Find Event(s) based on keyword(s)
 
 ### 4.8 Display next upcoming Event
+The next command displays to you the next upcoming event or task of an event on the calendar
 
+To display the next upcoming event we key in `next event`
+
+**Format:** `next event`
+
+**Expected Output:**
+```
+> next event
+```
+```
+Title: Tembusu Concert
+Date: 19 Feb 2022 - 20:00
+Description: Semesterly Arts Week Fundraiser
+Venue: MPH
+Budget: $1000.0
+Tasks:
+1. Make props
+```
+
+To display the next upcoming task we key in `next task`
+
+**Format:** `next task EVENT_ID`
+
+**Expected Output:**
+```
+> next task 1
+```
+```
+Title: Make props
+Date: 18 Feb 2022 - 20:00
+Description: Semesterly Arts Week Fundraiser
+Members:
+1. John Doe
+```
 ### 4.9 Update an Event
+The Update command can be used to update details of events and tasks
 
+> 🚨 Any updates made is irreversible! So make updates with caution.
 
+To begin the update process we first key in `update EVENT_ID`
+
+**Format:** `update EVENT_ID`
+
+**Expected Output:**
+```
+> update 3
+```
+```
+Here are the details of the event:
+======================================
+Title: Peppa Pig's Concert
+Date: 19 Feb 2022 - 20:00
+Description: Asia world tour
+Venue: Indoor Stadium
+Budget: $1000.9
+Tasks: 
+1. [T][X] Hype myself up (by: 19 Feb 2022 - 19:50)
+2. [T][ ] Enter venue (by: 19 Feb 2022 - 19:55)
+_________________________________________________________________________________
+Please type the item you would like to update in the following manner 
+-----------------------------------------------------------------------   
+title/[NEW NAME]   
+date/[NEW DATE[d/dd-MM-yyyy HHmm]]
+description/[NEW DESCRIPTION]
+venue/[NEW VENUE]
+budget/[NEW BUDGET]
+task/[TASK NUM YOU WANT TO UPDATE]
+You may type more then one update at a given time but separate them with a [>]
+_________________________________________________________________________________
+```
+We can then update the detail of the specifc event by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
+
+1. `title/NEW_NAME` to update the title of the event
+2. `date/[dd-MM-yyyy HHmm]` to update the date of the event
+3. `description/[NEW DESCRIPTION]` to update the description of the event
+4. `venue/[NEW VENUE]` to update the venue of the event
+5. `budget/[NEW BUDGET]`to update the budget of the event
+6. `task/[TASK NUM YOU WANT TO UPDATE]` to update information on the taak attached to thes events
+
+We can then update the detail of the specifc task by keying in `task/[TASK NUM YOU WANT TO UPDATE]` in this segment.
+
+**Expected Output:**
+```
+> task/1
+```
+```
+Title: Hype myself up
+Deadline: 19 Feb 2022 - 19:50
+Description: Drink lots of sugar
+Members: 
+1. John Doe
+2. Jane Doe
+____________________________________________________________________________________
+Please type the item for task you would like to update in the following manner 
+-----------------------------------------------------------------------
+title/[NEW NAME]   
+deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]
+description/[NEW DESCRIPTION]
+member/[MEMBER INDEX]
+remove/[MEMBER INDEX]
+You may type more then one update at a given time but separate them with a [>]
+____________________________________________________________________________________
+```
+We can then update the details of the specifc task by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
+
+1. `title/NEW_NAME` to update the title of the event
+2. `date/[dd-MM-yyyy HHmm]` to update the date of the event
+3. `description/[NEW DESCRIPTION]` to update the description of the event
+4. `member/[MEMBER INDEX]` to change a member assigned to this task
+5. `remove/[MEMBER INDEX]` to remove a member assigned to this task
 ---
 
 ## 5. Task Commands
