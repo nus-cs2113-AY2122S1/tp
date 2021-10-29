@@ -5,7 +5,7 @@ import seedu.duke.constants.Constants;
 
 import static java.lang.System.out;
 
-public class UiGeneral extends Ui{
+public class UiGeneral extends Ui {
     public static void welcome() {
         printGlobe();
         printLogo();

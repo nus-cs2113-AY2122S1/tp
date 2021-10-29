@@ -6,7 +6,7 @@ import seedu.duke.modules.Module;
 
 import static java.lang.System.out;
 
-public class UiModule extends Ui{
+public class UiModule extends Ui {
 
     public static void printModule(Module mod, int index, boolean printMC) {
         printIndex(index, false);

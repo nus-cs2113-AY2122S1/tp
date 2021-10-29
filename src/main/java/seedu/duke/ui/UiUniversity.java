@@ -5,7 +5,7 @@ import seedu.duke.universities.University;
 
 import static java.lang.System.out;
 
-public class UiUniversity extends Ui{
+public class UiUniversity extends Ui {
 
     public static void printUniversity(University uni, boolean printMC) {
         printIndex(uni.getIndex(), false);
