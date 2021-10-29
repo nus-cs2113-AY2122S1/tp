@@ -19,7 +19,8 @@ public enum CommandNames {
     CLEAR_ALL("clear all", new ClearAllCommand()),
     HELP("help", new HelpCommand()),
     SORT_DISH("sort dish", new SortDishCommand()),
-    SORT_INGR("sort ingr", new SortIngrCommand());
+    SORT_INGR("sort ingr", new SortIngrCommand()),
+    EDIT_INGR("edit ingr", new EditIngrCommand());
 
 
     private String name;

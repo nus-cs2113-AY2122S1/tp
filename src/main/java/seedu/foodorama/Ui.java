@@ -222,6 +222,18 @@ public class Ui {
             + "Sorry, the ingredient name cannot be blank." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+            + "Missing Parameter!\n"
+            + "Please type the Index OR Name of the Ingredient you would like to edit.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGR_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient does not exist!\n"
+            + "Please type the correct Index OR Name of the Ingredient you would like to edit.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
@@ -285,6 +297,14 @@ public class Ui {
             + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient Index exceeds size of Ingredient List. \nType 'list ingr' to view the correct"
+            + " Ingredient Index of the Ingredient you want to edit."
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+
+
     public void printLogo() {
         System.out.println(START_LOGO);
     }
@@ -323,6 +343,7 @@ public class Ui {
                 + "Sorry, the dish " + dishName + " does not exist in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
+
 
     public void printDishNotExistMsg() {
         System.out.println(DISH_NOTEXIST);
@@ -388,8 +409,20 @@ public class Ui {
         return INGRNAME_MISSING;
     }
 
+    public String getIngrIndexMissingMsg() {
+        return INGRINDEX_MISSING;
+    }
+
+    public String getIngrNotExistEdit() {
+        return INGR_NOT_EXIST_EDIT;
+    }
+
     public String getIngrNotExistMsg() {
         return INGR_NOTEXIST;
+    }
+
+    public String getIngrIndexExceedSizeMsg() {
+        return INGR_INDEX_EXCEED_SIZE;
     }
 
     public void printIngrNotExistMsg() {
@@ -453,6 +486,43 @@ public class Ui {
 
     public void printConfirmClearAll() {
         System.out.println(CONFIRM_CLEAR_ALL);
+    }
+
+    //    public void printAskNewNameDish(String dishName) {
+    //        System.out.println("What would you like to change the Dish Name '"
+    //                + dishName
+    //                + "' to?");
+    //    }
+    //
+    //    public void printAskNewNameDish(String dishName) {
+    //        System.out.println("What would you like to change the Ingredient Name '"
+    //                + dishName
+    //                + "' to?");
+    //    }
+
+    public void printDishNameChanged(String dishName) {
+        System.out.println("Dish Name has been updated to '"
+                + dishName
+                + "'!");
+    }
+
+    public void printAskNewNameIngr(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the Ingredient Name '" + ingrName
+                + "' to?" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printConfirmIngrEditMsg(String ingrName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change ingredient name from '" + ingrName + "' to '"
+                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printIngrNameChanged(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Ingredient Name has been updated to '" + ingrName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printDisregardMsg() {

@@ -39,6 +39,10 @@ public class Ingredient implements  Comparable<Ingredient> {
         this.limit = limit;
     }
 
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
     public void updateIngredientWeight() throws FoodoramaException {
         ui.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
