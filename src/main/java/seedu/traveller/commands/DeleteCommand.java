@@ -7,7 +7,7 @@ import seedu.traveller.exceptions.TripNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//@@author Cuiminjing
 
 public class DeleteCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());

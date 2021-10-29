@@ -177,10 +177,20 @@ viewing trips, or deleting trips.
 thrown.
 
 #### 1.2.3. TripsList class
+The `TripsList` class is the main class to store the data for `Trip`, `Item`, and `Day`. 
+
+Its main functionalities are `add` and `delete`, which will control and edit the storage data. Also the `get` and `getSize` functions help get access to the data.
+
 {TODO: Add details}
 
 #### 1.2.4. Ui class
-{TODO: Add details}
+The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then print messages in the interface.
+
+{TODO: Add graft}
+The steps illustated by Figure 6 is summarised now.
+1. Run the `printWelcome` to greet the users.
+2. Read user input and pass it to the `Parser`
+3. Functions in `Ui` will be repeatedly called by `Command` class.
 
 #### 1.2.5. SaveLoader class
 The `SaveLoader` class handles the reading and writing of the save file which stores the existing trips when Traveller is exited.
@@ -208,8 +218,11 @@ The return strings of each trip, day and item will correspond to the command tha
 
 ## 2. Product Scope
 ### 2.1. Target User Profile
-* has a need to plan and manage trips and itineraries
+* has a need to plan a trip
+* want to optimise a flight
+* would like to design detailed travel plans
 * prefers desktop and CLI over apps and GUI
+* is familiar with command line interface
 * can type fast
 
 ### 2.2. Value Proposition
