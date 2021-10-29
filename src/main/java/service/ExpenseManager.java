@@ -12,7 +12,7 @@ import java.util.Date;
 public class ExpenseManager implements LoadableManager {
 
     private static ExpenseManager expenseMgr;
-    private String fileLabel;
+    private final String fileLabel;
 
     private ExpenseManager() {
         fileLabel = "expense";
@@ -25,10 +25,18 @@ public class ExpenseManager implements LoadableManager {
         return expenseMgr;
     }
 
-    public void addExpense(String expenseName, double expenseValue) {
+    private String getTodayDate() {
         Format f = new SimpleDateFormat("dd/MM/yy");
-        String today = f.format(new Date());
-        Expense newExpense = new Expense(expenseName, expenseValue, today);
+        return f.format(new Date());
+    }
+
+    public void addExpense(String expenseName, double expenseValue) {
+        Expense newExpense = new Expense(expenseName, expenseValue, getTodayDate());
+        ExpenseList.addExpense(newExpense);
+    }
+
+    public void addExpense(String expenseName, double expenseValue, String category) {
+        Expense newExpense = new Expense(expenseName, expenseValue, getTodayDate(), category);
         ExpenseList.addExpense(newExpense);
     }
 
@@ -46,7 +54,8 @@ public class ExpenseManager implements LoadableManager {
 
     public void listExpenses() {
         Ui ui = Ui.getUi();
-        String expenseListHeader = String.format("%s | %-25s | %-10s | %s", "Id.", "Name", "Value", "Date");
+        String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
+                "Id.", "Name", "Value", "Date", "Category");
 
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
@@ -61,29 +70,30 @@ public class ExpenseManager implements LoadableManager {
             String[] splitLine = line.split(";");
 
             String name = splitLine[0];
-            Double value = Double.parseDouble(splitLine[1]);
+            double value = Double.parseDouble(splitLine[1]);
             String date = splitLine[2];
+            String category = splitLine[3];
 
-            Expense expense = new Expense(name, value, date);
+            Expense expense = new Expense(name, value, date, category);
             ExpenseList.addExpense(expense);
         }
     }
 
     @Override
     public String toFileString() {
-        String fileString = "";
+        StringBuilder fileString = new StringBuilder();
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
 
-        for (int i = 0; i < expenses.size(); i++) {
-            Expense expense = expenses.get(i);
+        for (Expense expense : expenses) {
             String name = expense.getDescription();
-            String value = ((Double)expense.getValue()).toString();
+            String value = ((Double) expense.getValue()).toString();
             String date = expense.getDate();
+            String category = expense.getCategory();
 
-            fileString += String.format("%s;%s;%s\n", name, value, date);
+            fileString.append(String.format("%s;%s;%s;%s\n", name, value, date, category));
         }
 
-        return fileString;
+        return fileString.toString();
     }
 
     @Override
