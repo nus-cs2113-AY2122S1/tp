@@ -1,10 +1,9 @@
 package seedu.duke;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
-
-import java.awt.desktop.AppReopenedEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -85,7 +84,7 @@ public class Storage {
     //@@author
 
     /**
-     * Serializes the {@link Storage#listOfTrips} into a JSON String using {@link com.google.gson.Gson}
+     * Serializes the {@link Storage#listOfTrips} into a JSON String using {@link Gson}
      * to be written to the save file.
      *
      * @throws IOException if {@link FileStorage#writeToFile(String, String)} fails
@@ -108,6 +107,7 @@ public class Storage {
             String jsonString = FileStorage.readFromFile(filePath);
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = FileStorage.getGson().fromJson(jsonString, tripType);
+            Ui.printFileLoadedSuccessfully();
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
             askOverwriteOrClose();
@@ -221,7 +221,7 @@ public class Storage {
     }
 
     /**
-     * Closes the currently active trip, and sets the last edited trip as null.
+     * Closes the currently active trip, sets it as the last trip,  and sets the open trip as null.
      */
     public static void closeTrip() {
         Trip tripToBeClosed = openTrip;

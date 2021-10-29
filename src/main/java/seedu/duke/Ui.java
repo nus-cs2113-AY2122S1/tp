@@ -418,4 +418,15 @@ public class Ui {
                 + original + " to " + tripToEdit.getLocation());
     }
 
+    public static void printCouldNotSaveMessage() {
+        System.out.println("Sorry, there was an error saving your data. We'll try to save your data again"
+                + "the next time you enter a command.");
+    }
+
+    public static void printFileLoadedSuccessfully() {
+        System.out.println();
+        System.out.println("Your saved data was successfully loaded!");
+        System.out.println();
+    }
+
 }
