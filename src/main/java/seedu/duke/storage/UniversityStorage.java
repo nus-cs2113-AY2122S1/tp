@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 import static java.lang.Double.parseDouble;
 
 public class UniversityStorage {
-    private static final Logger logger = Logger.getLogger("UniversityStorageLog");
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     public ArrayList<University> readUniversityList(InputStream inputStream,
                                                     ModuleList moduleMasterList) throws IOException {
@@ -48,7 +49,7 @@ public class UniversityStorage {
         if (!curr.equals(" ")) {
             universityList.add(new University(curr, moduleMappingList, ++index));
         }
-//        logger.log(Level.INFO, "Completed loading of universities");
+        logger.log(Level.INFO, "Completed loading of universities");
         return universityList;
     }
 

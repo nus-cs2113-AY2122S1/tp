@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 
 import java.io.BufferedReader;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 import static java.lang.Double.parseDouble;
 
 public class ModuleStorage {
-    private static Logger logger = Logger.getLogger("ModuleStorageLog");
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     public ArrayList<Module> readModuleList(InputStream inputStream) throws IOException {
         ArrayList<Module> moduleList = new ArrayList<>();
@@ -26,7 +27,7 @@ public class ModuleStorage {
             moduleList.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), ++index));
             line = br.readLine();
         }
-//        logger.log(Level.INFO, "Completed loading of modules");
+        logger.log(Level.INFO, "Completed loading of modules");
         return moduleList;
     }
 
