@@ -210,7 +210,7 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 
 ![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
 
-1. A FileReader and created and subsequently used to create a BufferedReader that points to the given path.
+1. A FileReader is created and subsequently used to create a BufferedReader that points to the given path.
 2. An ArrayList of Strings is created.
 3. BufferedReader is used to read each line of data from the path and stored into the ArrayList. (with each item in the array representing 1 line in the file)
 4. BufferedReader is closed and the function returns the ArrayList containing the read data.
