@@ -110,7 +110,7 @@ Throughout the user guide, you will find the following notations:
   - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
 
 Do familiarise yourself with these notations to better utilise the user guide.
-<br/>
+<br />
 
 <a name="features"></a>
 ## Features 
@@ -302,6 +302,7 @@ Command format: `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TE
 
 - Up to six `flags` and `details` can be specified, in any order.
 - The index refers to the index number shown in the displayed contact list.
+- To edit personal fields, `me` can be specified in the `INDEX` parameter.
 - The index must be within the range of indexes displayed in the contact list (zero-based).
 - ConTech also has built-in duplicate checkers and will alert you if there is already a contact with the same details when editing.
 - While all six `details` are optional, minimally **one** must be specified for any effect to take place.
@@ -476,12 +477,12 @@ a quick view when using the application.
 Action | Command Format | Example
 --- | --- | --- | 
 List all valid commands and usage | `help` | `help`
-Add a new contact| `add <INDEX> -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `add -n Marcus` <br>`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br/>
+Add a new contact| `add <INDEX> -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `add -n Marcus` <br />`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br />
 List all contacts | `ls` | `ls`
 View a contact| `view <INDEX>` | `view 2`
-Edit a contact| `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `edit 1 -e john.doe@email.com` <br>`edit 0 -n Tan -g tanned -te tantan`<br/>
+Edit a contact| `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `edit 1 -e john.doe@email.com` <br />`edit 0 -n Tan -g tanned -te tantan`<br />
 Delete contact fields| `<rm <INDEX> {-g} {-l} {-te} {-tw} {-e}>` | `<rm 3 -g -te -l -e>`
 Delete a contact | `rm <INDEX>` | `rm 1`
-Search for a contact| <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} \<QUERY\></code> | `search Ashraf` <br>`search -g revflash`<br/>
+Search for a contact| <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} \<QUERY\></code> | `search Ashraf` <br />`search -g revflash`<br/>
 Import contacts from .txt file|`import` | `import`
 Exit ConTech | `exit` | `exit`
