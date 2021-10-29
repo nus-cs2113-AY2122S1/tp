@@ -98,5 +98,6 @@ destroy command
 taa -[hidden]-> command
 
 end
+deactivate taa
 
 @enduml
