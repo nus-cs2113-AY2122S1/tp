@@ -215,6 +215,10 @@ The following implemented functions are utilized heavily:
 
 ![](uml-diagrams/Search.png)
 
+*Fetch, Save and Load Mod*
+
+![](uml-diagrams/SearchRef.png)
+
 Utilizes `getOnlineModList()` to get all mods from online. If the module code contains the search term or matches the 
 level flag if inputted, `getOnlineModInfo()` is used to fetch the full data for further comparison with the remaining 
 flags. `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 

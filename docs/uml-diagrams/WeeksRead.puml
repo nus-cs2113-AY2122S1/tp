@@ -6,24 +6,25 @@ activate WeeksAdapterFactory
 WeeksAdapterFactory -> WeeksAdapter** : create()
 activate WeeksAdapter
 
-<-- WeeksAdapterFactory
-deactivate WeeksAdapterFactory
-
-alt BEGIN_ARRAY
+alt weeks is array
     WeeksAdapter -> WeeksAdapter : getWeeksIntArray()
     activate WeeksAdapter
     WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
-else BEGIN_OBJECT
+else weeks is object
     WeeksAdapter -> WeeksAdapter : getWeeksObject()
     activate WeeksAdapter
     WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
-else
-    <-- WeeksAdapter : Throw IOException
+else else
+    WeeksAdapter -> : Throw IOException
 end
 
-<-- WeeksAdapter
+WeeksAdapter-->WeeksAdapterFactory
 deactivate WeeksAdapter
+  destroy WeeksAdapter
+
+<-- WeeksAdapterFactory
+deactivate WeeksAdapterFactory
 
 @enduml
