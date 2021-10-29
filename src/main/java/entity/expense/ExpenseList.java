@@ -29,6 +29,15 @@ public class ExpenseList {
         }
     }
 
+    public static void updateExpense(String expenseName, double expenseValue, String category) {
+        for (Expense expense : expenses) {
+            if (expense.getDescription().contains(expenseName)) {
+                expense.updateValue(expenseValue);
+                expense.updateCategory(category);
+            }
+        }
+    }
+
     public static ArrayList<Expense> getExpenses() {
         return expenses;
     }

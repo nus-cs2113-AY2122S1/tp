@@ -52,6 +52,10 @@ public class ExpenseManager implements LoadableManager {
         ExpenseList.updateExpense(expenseName, expenseValue);
     }
 
+    public void updateExpense(String expenseName, double expenseValue, String category) {
+        ExpenseList.updateExpense(expenseName, expenseValue, category);
+    }
+
     public void listExpenses() {
         Ui ui = Ui.getUi();
         String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",

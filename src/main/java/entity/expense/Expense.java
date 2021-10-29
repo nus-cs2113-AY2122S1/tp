@@ -39,6 +39,10 @@ public class Expense {
         this.value = value;
     }
 
+    public void updateCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return String.format("%-25s | %-10.2f | %-8s | %-10s", description, value, date, category);

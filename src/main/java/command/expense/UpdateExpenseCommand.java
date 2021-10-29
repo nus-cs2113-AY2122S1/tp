@@ -23,6 +23,9 @@ public class UpdateExpenseCommand implements Callable<Integer> {
     @Option(names = {"-v", "--value"}, required = true, description = "Value of the expense item")
     Double value;
 
+    @Option(names = {"-c", "--category"}, description = "Category of the expense item")
+    String category;
+
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
@@ -31,8 +34,12 @@ public class UpdateExpenseCommand implements Callable<Integer> {
 
         try {
             String expenseName = String.join(" ", names);
-            Double expenseValue = Money.truncate(value);
-            expenseMgr.updateExpense(expenseName, expenseValue);
+            double expenseValue = Money.truncate(value);
+            if (category != null) {
+                expenseMgr.updateExpense(expenseName, expenseValue, category);
+            } else {
+                expenseMgr.updateExpense(expenseName, expenseValue);
+            }
         } catch (Exception error) {
             ui.printMessage(updateExpenseErrorMsg);
             return 1;
