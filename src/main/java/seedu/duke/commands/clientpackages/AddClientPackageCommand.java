@@ -20,8 +20,8 @@ public class AddClientPackageCommand extends Command {
         createClientPackage();
         if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
                 && !clientPackage.getFlight().equals(null)) {
-            clientPackages.add(clientPackage);
-            ui.showAddClientPackage(clientPackage);
+        clientPackages.add(clientPackage);
+        ui.showAddClientPackage(clientPackage);
         }
     }
 

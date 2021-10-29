@@ -1,0 +1,24 @@
+@startuml
+
+skinparam componentStyle rectangle
+component {
+    [TourPlanner] as TP
+    [Ui] as Ui
+    [Parser] as Parser
+    [Command] as Command
+    [ObjectList] as ObjectList
+    [Storage] as Storage
+}
+database Computer
+actor User
+
+User .> TP
+TP --> Ui
+TP --> Storage
+Storage ..> Computer
+Ui --> Parser
+Ui ..> ObjectList
+Parser -> Command
+Command --> ObjectList
+Command -> Ui
+@enduml
