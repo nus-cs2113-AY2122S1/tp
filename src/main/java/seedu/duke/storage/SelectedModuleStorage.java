@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 import static java.lang.Double.parseDouble;
 
 public class SelectedModuleStorage extends UserStorage {
-    private static Logger logger = Logger.getLogger("SelectedModuleStorageLog");
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     private static final String FILE_PATH = "data/selectedModules.txt";
 
@@ -25,12 +26,12 @@ public class SelectedModuleStorage extends UserStorage {
             fw.write(curr.toFileFormat());
         }
         fw.close();
-//        logger.log(Level.INFO, "File writing operation completed");
+        logger.log(Level.INFO, "File writing operation completed");
     }
 
     public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
         File file = loadFile(FILE_PATH);
-//        logger.log(Level.INFO, "File is either created or opened");
+        logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         ArrayList<Module> modules = new ArrayList<>();
         while (scanner.hasNext()) {
@@ -38,7 +39,7 @@ public class SelectedModuleStorage extends UserStorage {
             String[] attributes = line.split(" # ");
             modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2]), moduleMasterList));
         }
-//        logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
+        logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         return modules;
     }
 }
