@@ -27,6 +27,8 @@ If you can type fast, TAA can help keep track of your modules and students faste
   * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
   * [Viewing help: `help`](#viewing-help-help)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Archiving data: `archive`](#archiving-data-archive)
+  * [Resetting/Removing all data: `reset`](#resettingremoving-all-data-reset)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -70,7 +72,9 @@ Format: `edit_module c/<MODULE_CODE> [nc/<NEW_MODULE_NAME>] [n/<NEW_MODULE_NAME>
 * `NEW_MODULE_CODE` [Optional] refers to the updated code of the module.
 * `NEW_MODULE_NAME` [Optional] refers to the updated name of the module.
 > 💡 **Note:**<br />
-> Either `NEW_MODULE_CODE`, `NEW_MODULE_NAME`, or both must be provided.
+> At least one optional field must be provided:
+> * `NEW_MODULE_CODE`
+> * `NEW_MODULE_NAME`
 
 Examples:
 * `edit_module c/CS2113T nc/cs2113t`
@@ -187,15 +191,17 @@ Examples:
 ### Editing an assessment in a module: `edit_assessment`
 Edits an assessment of a module.
 
-Format: `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
-* At least one of the optional fields must be provided.
+Format: `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>] [w/<NEW_WEIGHTAGE>]`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
-* `NEW_ASSESSMENT_NAME` refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
-* `NEW_MAXIMUM_MARKS` refers to the new maximum marks of the assessment (e.g. 50).
-* `NEW_WEIGHTAGE` refers to the new weightage of the assessment (e.g. 20%).
+* `NEW_ASSESSMENT_NAME` [Optional] refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
+* `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50).
+* `NEW_WEIGHTAGE` [Optional] refers to the new weightage of the assessment (e.g. 20%).
 > 💡 **Note:**<br />
-> TODO
+> At least one optional field must be provided:
+> * `NEW_ASSESSMENT_NAME`
+> * `NEW_MAXIMUM_MARKS`
+> * `NEW_WEIGHTAGE`
 
 Examples:
 * `edit_assessment c/CS2101 n/OP1 m/20 w/10`
@@ -339,9 +345,26 @@ Format: `help`
 <br>
 
 ### Exiting the program: `exit`
-Exits the program
+Exits the program.
 
 Format: `exit`
+
+<br>
+
+### Archiving data: `archive`
+Saves the current program data to an archive.
+
+By default, archive file is stored in the `<TAA Root>/data/archive` folder.
+
+Format: `archive [f/<FILENAME>]`
+* `FILENAME` [Optional] refers to the name of the file to save the archive as.
+
+<br>
+
+### Resetting/Removing all data: `reset`
+Removes all saved data from the current program.
+
+Format: `reset`
 
 ## FAQ
 
