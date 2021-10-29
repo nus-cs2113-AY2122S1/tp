@@ -663,6 +663,10 @@ Email: wendy@mail.com
 Name: ChengXu
 Contact Number: 10101010
 ```
+## Storage
+
+This program can print all the cilentpackages into a text file will save the clientpackages you have added before by load and save functions.
+
 ## Exit application: ```exit```
 
 Exits the application.
