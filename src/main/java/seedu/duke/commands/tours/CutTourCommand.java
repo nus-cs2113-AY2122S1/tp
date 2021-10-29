@@ -47,6 +47,8 @@ public class CutTourCommand extends Command {
     private void cutTourPackage() {
         ArrayList<ClientPackage> clientPackagesWithTour = clientPackages.getClientPackageByTour(tour);
         for (ClientPackage clientPackage: clientPackagesWithTour) {
+            System.out.println();
+            ui.showCut(clientPackage);
             clientPackages.cut(clientPackage);
         }
     }
