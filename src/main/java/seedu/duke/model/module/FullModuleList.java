@@ -69,8 +69,10 @@ public class FullModuleList {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < moduleList.getSize(); i++) {
             Module module = moduleList.getModule(i);
+            String grade = module.getGrade();
             module = findModule(module.getModuleCode());
-            s.append(module.getFullInfo());
+            module.setGrade(grade);
+            s.append(module.getFullInfo(true));
         }
         return s.toString();
     }

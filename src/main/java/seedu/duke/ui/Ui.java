@@ -26,6 +26,10 @@ public class Ui {
 
     public static final String PADDING = "     ";
 
+    public static final String SHORT_LINE = PADDING
+            + "------------------------------------------------------------------------------------"
+            + System.lineSeparator();
+
     /**
      * Temporary logo.
      */
@@ -92,8 +96,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING
                 + "Here are the list of commands that you can try.");
-        System.out.println(PADDING
-                + "------------------------------------------------------------------------------------");
+        System.out.print(SHORT_LINE);
 
         System.out.println(PADDING + "add        "
                 + "task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}");
@@ -356,6 +359,7 @@ public class Ui {
     }
 
     //@@author Roycius
+
     /**
      * Displays a message to inform user that the specified module
      * has been successfully deleted.
@@ -380,6 +384,9 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
         System.out.print(moduleList);
+        System.out.print(SHORT_LINE);
+        printTotalMcs(moduleList);
+        printCap(moduleList);
         System.out.println(LINE);
     }
 
@@ -393,28 +400,16 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
-        System.out.println(LINE);
-    }
-
-    //@@author rebchua39
-
-    /**
-     * Displays the list of modules with the grade for each module and the cumulative average point (CAP).
-     * @param moduleList the list of modules
-     * @throws DukeException when there is an error in retrieving a module in the list
-     */
-    public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
-        System.out.print(LINE);
-        System.out.println(PADDING + "Here are the modules in your list:");
-        for (int i = 0; i < moduleList.getSize(); i++) {
-            Module module = moduleList.getModule(i);
-            System.out.println(PADDING + (i + 1) + ". " + module);
-            System.out.println(PADDING + "   Grade: " + module.getGrade());
-        }
+        printTotalMcs(moduleList);
         printCap(moduleList);
         System.out.println(LINE);
     }
 
+    private void printTotalMcs(ModuleList moduleList) {
+        System.out.println(PADDING + "You have a total of " + moduleList.getTotalMcs() + " MCs");
+    }
+
+    //@@author rebchua39
     /**
      * Displays the user's cumulative average point (CAP) or a message if there is no valid CAP.
      * @param moduleList the list of modules
@@ -451,6 +446,6 @@ public class Ui {
      */
     public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
         Module module = Duke.fullModuleList.findModule(moduleCode);
-        System.out.print(module.getFullInfo());
+        System.out.print(module.getFullInfo(false));
     }
 }

@@ -21,12 +21,10 @@ public class ListModuleCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        assert (argument.equalsIgnoreCase("all") | argument.isEmpty() | argument.equals("grade"))
-                : "list module command currently only accepts empty, \"all\" or \"grade\"";
-        if (argument.equalsIgnoreCase("all")) {
+        assert (argument.equalsIgnoreCase("verbose") | argument.isEmpty())
+                : "list module command currently only accepts empty, \"verbose\"";
+        if (argument.equalsIgnoreCase("verbose")) {
             ui.printModulesWithDetails(moduleList);
-        } else if (argument.equalsIgnoreCase("grade")) {
-            ui.printModulesWithGrade(moduleList);
         } else {
             ui.printModuleList(moduleList);
         }

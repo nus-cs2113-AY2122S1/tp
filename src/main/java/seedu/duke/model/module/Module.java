@@ -46,8 +46,8 @@ public class Module {
         return description;
     }
 
-    public String getModuleCredit() {
-        return moduleCredit;
+    public int getModuleCredit() {
+        return Integer.parseInt(moduleCredit);
     }
 
     public String getDepartment() {
@@ -137,15 +137,16 @@ public class Module {
      *
      * @return a string of the full module information
      */
-    public String getFullInfo() {
+    public String getFullInfo(boolean hasGrade) {
         StringBuilder s = new StringBuilder();
-        s.append(Ui.LINE).append(Ui.PADDING).append(this).append(System.lineSeparator());
+        s.append(Ui.SHORT_LINE).append(Ui.PADDING).append(moduleCode + " " + title + " (" + moduleCredit + "MCs) ");
+        s.append(hasGrade ? "Grade: " + grade : "").append(System.lineSeparator());
         s.append(Ui.PADDING).append("Department: ").append(department).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Faculty: ").append(faculty).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Preclusion: ").append(preclusion).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Pre-requisite: ").append(prerequisite).append(System.lineSeparator());
         s.append(Ui.PADDING).append("Core Requisites: ").append(corequisite).append(System.lineSeparator())
-                .append(Ui.LINE);
+                .append(Ui.SHORT_LINE);
         return s.toString();
     }
 
@@ -156,6 +157,6 @@ public class Module {
      */
     @Override
     public String toString() {
-        return moduleCode + " " + title + " (" + moduleCredit + "MCs) ";
+        return moduleCode + " " + title + " (" + moduleCredit + "MCs) " + "Grade: " + grade;
     }
 }

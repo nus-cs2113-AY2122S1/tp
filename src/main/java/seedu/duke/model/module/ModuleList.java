@@ -94,6 +94,14 @@ public class ModuleList {
         return moduleList;
     }
 
+    public int getTotalMcs() {
+        int totalMcs = 0;
+        for (Module module : moduleList) {
+            totalMcs += module.getModuleCredit();
+        }
+        return totalMcs;
+    }
+
     //@@author rebchua39
     public double calculateCap() {
         int totalModuleCredit = 0;
@@ -103,7 +111,7 @@ public class ModuleList {
             double gradePoint = module.getGradePoint(actualGrade);
             boolean isGradePointValid = (gradePoint >= 0);
             if (isGradePointValid) {
-                int moduleCredit = Integer.parseInt(module.getModuleCredit());
+                int moduleCredit = module.getModuleCredit();
                 totalModuleCredit += moduleCredit;
                 totalWeightedGradePoint += moduleCredit * gradePoint;
             }
