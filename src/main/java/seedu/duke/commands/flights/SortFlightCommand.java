@@ -12,6 +12,10 @@ import java.util.ArrayList;
  */
 public class SortFlightCommand extends Command {
     private final String filter;
+    public static final String ERROR_MISSING_FILTER = "Missing filter! Sort flights with the format: \n"
+            + "sort -f /d (sort by departure date and time) \n"
+            + "sort -f /r (sort by return date and time) \n"
+            + "sort -f /id (sort by id alphabetically)";
 
     /**
      * Class constructor for SortFlightCommand.
@@ -46,7 +50,7 @@ public class SortFlightCommand extends Command {
                 ui.showSortedFlightById(flights, sortedIds);
                 break;
             default:
-                break;
+                throw new TourPlannerException(ERROR_MISSING_FILTER);
             }
         } catch (TourPlannerException e) {
             System.out.println(e.getMessage());
