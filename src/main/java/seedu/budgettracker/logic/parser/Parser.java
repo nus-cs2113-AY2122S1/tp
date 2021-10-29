@@ -109,7 +109,7 @@ public class Parser {
                 break;
             }
         } catch (NumberFormatException e) {
-            command = new InvalidCommand("Month/ Index inputs don't exist! They are compulsory!");
+            command = new InvalidCommand("Incorrect inputs!");
         } catch (EmptyDescriptionException e) {
             command = new InvalidCommand("Expenditure description is empty!");
         }
