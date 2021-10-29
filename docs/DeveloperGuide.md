@@ -1,5 +1,8 @@
 # Developer Guide
 
+* Table of Contents
+{:toc}
+
 ## Acknowledgements
 
 - Documentation and code references [Address Book (Level 2)](https://github.com/se-edu/addressbook-level2) and [Address Book (Level 3)](https://github.com/se-edu/addressbook-level3).
