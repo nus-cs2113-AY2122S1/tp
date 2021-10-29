@@ -3,7 +3,6 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 
