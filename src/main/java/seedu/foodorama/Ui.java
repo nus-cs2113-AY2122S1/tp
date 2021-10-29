@@ -223,7 +223,14 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
-            + "Please type the Ingredient Index of the Ingredient you would like to edit.\n"
+            + "Missing Parameter!\n"
+            + "Please type the Index OR Name of the Ingredient you would like to edit.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGR_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient does not exist!\n"
+            + "Please type the correct Index OR Name of the Ingredient you would like to edit.\n"
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -404,6 +411,10 @@ public class Ui {
 
     public String getIngrIndexMissingMsg() {
         return INGRINDEX_MISSING;
+    }
+
+    public String getIngrNotExistEdit() {
+        return INGR_NOT_EXIST_EDIT;
     }
 
     public String getIngrNotExistMsg() {

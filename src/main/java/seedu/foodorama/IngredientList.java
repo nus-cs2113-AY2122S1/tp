@@ -117,7 +117,9 @@ public class IngredientList {
     }
 
     public static void editName(int ingredientIndex) throws FoodoramaException {
-        if (ingredientIndex < 0 | ingredientIndex >= ingredientList.size()) {
+        if (ingredientIndex == -1) {
+            throw new FoodoramaException(ui.getIngrNotExistEdit());
+        } else if (ingredientIndex >= ingredientList.size()) {
             throw new FoodoramaException(ui.getIngrIndexExceedSizeMsg());
         } else {
             String ingrName = ingredientList.get(ingredientIndex).getIngredientName();

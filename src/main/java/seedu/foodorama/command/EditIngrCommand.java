@@ -11,12 +11,30 @@ public class EditIngrCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        try {
-            int ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
-            IngredientList.editName(ingredientIndex);
-        } catch (NumberFormatException e) {
-            throw new FoodoramaException(ui.getIngrIndexMissingMsg());
+        int ingredientIndex;
+        if (isNumber(parameters.get(0))) {
+            ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
         }
+        else {
+            String ingredientName = String.join(" ", parameters);
+            if (ingredientName.isBlank()) {
+                throw new FoodoramaException(ui.getIngrIndexMissingMsg());
+            } else {
+                ingredientIndex = IngredientList.find(ingredientName);
+            }
+        }
+        IngredientList.editName(ingredientIndex);
+    }
 
+
+
+    public boolean isNumber (String number) {
+        try {
+            int ingredientIndex = Integer.parseInt(number) - 1;
+            return true;
+        } catch (NumberFormatException ignored) {
+
+        }
+        return false;
     }
 }
