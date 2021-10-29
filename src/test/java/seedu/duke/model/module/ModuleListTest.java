@@ -72,4 +72,25 @@ class ModuleListTest {
             fail();
         }
     }
+
+    //@@author Roycius
+    @Test
+    public void calculateTotalMcs_emptyList_zeroTotalMcs() {
+        ModuleList moduleList = new ModuleList();
+        assertEquals(0, moduleList.getTotalMcs());
+    }
+
+    @Test
+    public void calculateTotalMcs_nonEmptyList_correctTotalMcs() {
+        try {
+            ModuleList moduleList = new ModuleList();
+            Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
+            Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
+            moduleList.addModule(module1);
+            moduleList.addModule(module2);
+            assertEquals(8, moduleList.getTotalMcs());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
 }
