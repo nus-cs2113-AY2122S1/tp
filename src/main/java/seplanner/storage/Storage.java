@@ -1,17 +1,20 @@
 package seplanner.storage;
 
+import com.sun.tools.jconsole.JConsoleContext;
+import seplanner.constants.Constants;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Storage {
-    private static final Logger logger = Logger.getLogger("StorageManagerLog");
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private ModuleStorage moduleStorage;
     private UniversityStorage universityStorage;
     private SelectedModuleStorage selectedModuleStorage;
@@ -25,21 +28,21 @@ public class Storage {
     }
 
     public ArrayList<Module> readModuleList() throws IOException {
-//        logger.log(Level.INFO, "Start loading module data");
+        logger.log(Level.INFO, "Start loading module data");
         InputStream inputStream = ModuleStorage.class.getResourceAsStream(
                 "/modules.csv");
         return moduleStorage.readModuleList(inputStream);
     }
 
     public ArrayList<University> readUniversityList(ModuleList moduleMasterList) throws IOException {
-//        logger.log(Level.INFO, "Start loading university data");
+        logger.log(Level.INFO, "Start loading university data");
         InputStream inputStream = UniversityStorage.class.getResourceAsStream(
                 "/University.csv");
         return universityStorage.readUniversityList(inputStream, moduleMasterList);
     }
 
     public ArrayList<Module> readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
-//        logger.log(Level.INFO, "Start loading selected module data");
+        logger.log(Level.INFO, "Start loading selected module data");
         return selectedModuleStorage.readSelectedModuleList(moduleMasterList);
     }
 
