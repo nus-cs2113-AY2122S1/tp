@@ -11,9 +11,9 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 ### Installation
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `medbot.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
+2. Download the latest version of `tp.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
-4. Execute the `java -jar medbot.jar` command in the terminal in the same folder as the `medbot.jar` file to launch
+4. Execute the `java -jar tp.jar` command in the terminal in the same folder as the `tp.jar` file to launch
    MedBot. The following output should be observed:
 
 ### Using MedBot
@@ -33,7 +33,7 @@ command, which will be explained further down below.
 
 ## Commands
 
-### View Independent Commands
+### General Commands
 
 These commands will work the same for any view that you are currently in.
 
@@ -145,18 +145,14 @@ well.
 
 Adds a patient/medical staff to the patient/medical staff list.
 
-Format: `add i/PATIENT_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `add [i/PATIENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+At least one parameter must be provided, they can be entered in any order.
 
 Expected output:
 
 ```
-Patient with the following information has been successfully added to the list:
-
-IC: PATIENT_IC
-Name: NAME
-H/P: PHONE_NUMBER
-Email: EMAIL
-Address: ADDRESS
+Added patient with patient ID: PATIENT_ID
 ```
 
 Examples:
@@ -164,19 +160,11 @@ Examples:
 
 #### Notes:
 
-- Personal information of the patient does not have to be entered in any particular order.
 - `NAME` and `ADDRESS` will be auto-capitalized for every word from user input.
-- `EMAIL` must be in the following format:
-    - any number of alphanumeric characters
-    - followed by an `@`
-    - followed by any number of alphanumeric characters
-    - followed by a `.`
-    - followed by any number of alphanumeric characters
-    - eg. jimbob@maximillion.com
-- `PATIENT_IC` must be in the following format:
-    - 1st character must be one of the alphabets: S,T,F,G or M.
-    - 2nd-8th characters must comprise digits 0-9, repetition allowed.
-    - 9th character must be an alphabet: A-Z.
+- `EMAIL` must be in a valid email format
+    - eg. tim_ong@example.com
+- `PATIENT_IC` must be in a valid NRIC format:
+    - The checksum of the NRIC will not be checked.
     - Alphabets will be auto-capitalized. The input alphabets therefore non-case-sensitive.
 
 ### Delete a patient: `delete`
@@ -188,14 +176,7 @@ Format: `delete PATIENT_ID`
 Expected Output:
 
 ```
-Patient with the following information has been successfully deleted from the list:
-
-Patient ID: PATIENT_ID
-IC: PATIENT_IC
-Name: NAME
-H/P: PHONE_NUMBER
-Email: EMAIL
-Address: ADDRESS
+Patient with id PATIENT_ID deleted from system.
 ```
 
 Examples:
@@ -273,6 +254,7 @@ Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * The attributes given do not have to be in full.
 * At least one attribute must be present.
+* Archived patients will also be displayed.
 
 Example:
 `find n/Smith`
@@ -391,40 +373,6 @@ Here is a list of all appointments:
  | 4    | 31 Oct 21 1200HRS | 3          | Daniel Chan          | 1        | Dr Lim               | 
  -------------------------------------------------------------------------------------------------- 
 ```
-
-### Finding a person's appointments: `find`
-
-Finds a person's list of appointments. The list can be filtered by date-time to display the list of appointments
-before/after a certain date.
-
-Format: `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`
-
-* The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS should be written as `090221 0800`
-* `PERSON_TYPE` is `p` (patient)  or `s` (staff)
-* `FILTER_TYPE` is `b` (before) or `a` (after)
-
-Example:
-`find s/1 b/161022 2200`
-
-Expected output:
-
-```
-Here is a list of matched appointments:
- -------------------------------------------------------------------------------------------------- 
- |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name      | 
- -------------------------------------------------------------------------------------------------- 
- | 2    | 15 Oct 21 1800HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
- | 3    | 22 Oct 21 2100HRS | 2          | Jane Doe             | 1        | John Tan The Doc     | 
- | 1    | 22 Oct 21 2200HRS | 1          | John Smith           | 1        | John Tan The Doc     | 
- -------------------------------------------------------------------------------------------------- 
-```
-
-### Finding an appointment
-
-List the information of all appointments that match the given parameters.
-
-Format:
-
 
 
 ## FAQ
