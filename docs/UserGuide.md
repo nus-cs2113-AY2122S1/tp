@@ -85,7 +85,7 @@ Example of usage:
 
 Updates the units of the specified ingredient in both the ingredient repository and recipe list.
 
-Format: `update units i/INGREDIENT u/UNITS`
+Format: `update units i/INGREDIENT u/UNIT`
 
 - The units will be updated in both the ingredient repository and recipes.
 - If units is left blank, the units will be deleted (back to default value).
@@ -355,7 +355,7 @@ Format: `bye`
     - E.g.: `decrement i/Red Apple q/2`
     - E.g.: `decrement i/Salt q/10`
 4. Updating units of an ingredient
-    - Command: `update units i/INGREDIENT u/UNITS`
+    - Command: `update units i/INGREDIENT u/UNIT`
     - E.g.: `update units i/salt u/kilograms`
     - E.g.: `update units i/salt u/`
 5. Listing all ingredients
