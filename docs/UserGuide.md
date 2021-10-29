@@ -190,15 +190,17 @@ Total Flights: 2
 
 ### Find client
 
-Finds specific client(s) based on a particular name. It will return multiple clients if they have the same name.
+Finds specific client(s) based on a particular substring. It will return client(s) if their name contains 
+the substring. Note that the substring is case-insensitive. In addition, it will return the found 
+clients' subscribed packages.
 
 <br>
 
-Format: ```find -c [NAME]```
+Format: ```find -c [SUBSTRING]```
 
 Examples:
 
-* ```find -c Adam``` finds clients with 'Adam' as their name.
+* ```find -c Adam``` finds clients that contain 'Adam' in their name.
 
 An output of this format will be shown:
 
@@ -208,8 +210,27 @@ This is the client(s) that matches your search
 Name: Adam
 Contact Number: 93338333
 Email: adam@mail.com
-```
 
+Package ID: p123
+
+Client: 
+Client ID: c001
+Name: Adam
+Contact Number: 93338333
+Email: adam@mail.com
+
+Tour: 
+Name: australiaromance
+Code: aus1369
+Price per pax: $1300.00
+
+Flight: 
+Flight ID: MSIA-KOR1
+Departure Flight: MSIA, 29/10/21 12:00
+Return Flight: KOR, 24/6/21 02:00
+```
+In addition, ```find -c ad``` will yield the same results, since "ad" is
+contained in "Adam".
 <br>
 
 ### Find tour / flight / package
