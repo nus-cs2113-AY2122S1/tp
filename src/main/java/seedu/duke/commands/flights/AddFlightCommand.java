@@ -2,7 +2,6 @@ package seedu.duke.commands.flights;
 
 import seedu.duke.TourPlannerException;
 import seedu.duke.commands.Command;
-import seedu.duke.data.Client;
 import seedu.duke.data.Flight;
 
 /**
@@ -12,7 +11,7 @@ public class AddFlightCommand extends Command {
     private final Flight flight;
 
     /**
-     * Class constructor for AddCommand.
+     * Class constructor for AddFlightCommand.
      *
      * @param flight client to be added
      */
@@ -31,6 +30,7 @@ public class AddFlightCommand extends Command {
 
     /**
      * Executes the addition of flight to flight list.
+     * If given flight ID already exists, the flight will not be added.
      */
     @Override
     public void execute() {
@@ -39,7 +39,7 @@ public class AddFlightCommand extends Command {
             System.out.println("Flight ID already exists. Please try another flight ID.");
         } catch (TourPlannerException e) {
             flights.add(flight);
-            ui.showAddFlight(flight);
+            ui.showAdd(flight);
         }
     }
 }

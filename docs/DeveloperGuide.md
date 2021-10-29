@@ -121,41 +121,114 @@ Given below is an example usage scenario and how the find feature behaves at eac
 
 <br>
 
+Firstly, assume that in previous sessions, commands were executed to add clients, tours, flights and packages to the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` respectively. In particular, these specific commands were exceuted.
+
+* ```add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com```
+* ```add -t JPN /n Japan Tour /p 1500 ```
+* ```add -f SQ-JPN /d JPN /r SG /dd 20/10/2021 18:00 /rd 21/10/2021 03:00```
+* ```add -p p001 /c c001 /t JPN /f SQ-JPN```
 
 ### <u>Finding a particular client</u>
 
-**Step 1**: Assume that in previous sessions, commands were executed to add clients, tours, flights and packages to the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` respectively. In particular, these specific commands were exceuted.
+**Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named 
+Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser``` 
+class takes the command, and the first word in it (```find```) means that the 
+```parseFind()``` is to be called to determine which type of Object is to be 
+queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is 
+executed with the parameter ```Bo Tuan```
 
-* ```add -c Bo Tuan /cn 12345678```
-* ```add -t JPN /n Japan Tour /p 1500 ```
-* ```add -f SQ-JPN /t JPN /f SG /dt 20-10-2021 18:00 /df 21-10-2021 02:00```
-* ```add -p 0001 /c Bo Tuan /t JPN /f SQ-JPN ```
+
+
+**Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. 
+For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client. 
+If the name attribute is equals to ```Bo Tuan```, the ```Client``` object 
+is printed onto the console terminal.
 
 <br>
 
-**Step 2**: The user executes ```find -c Bo Tuan``` to query if a client named Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser``` class takes the command, and the first word in it (```find```) means that the ```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is executed with the parameter ```Bo Tuan```
+
+The following activity diagram summarizes the following steps.
+
+![image](findclient.png) (to change)
 
 <br>
 
-**Step 3**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client. If the name attribute is equals to ```Bo Tuan```, the ```Client``` object is printed onto the console terminal.
+### <u>Finding a particular tour</u>
 
-</br>
+**Step 1**: The user executes ```find -t JPN``` to query if a tour with code
+JPN exists in the TourList. The ```parse``` function in the ```Parser```
+class takes the command, and the first word in it (```find```) means that the
+```parseFind()``` is to be called to determine which type of Object is to be
+queried for. The second word (```-f```) means that a the ```FindTourCommand()``` is
+executed with the parameter ```JPN```
 
-**Step 4**: In addition, the ```FindClientCommand``` iterates through each ```Package``` object in the ```PackageList```. For every ```Package```, the ```getClient()``` function is called to retrieve the client attribute of the ```Package```. If the client attribute is equals to ```Bo Tuan```, the ```Package``` object is printed onto the console terminal.
+
+**Step 2**: The ```FindTourCommand``` iterates through each ```Tour``` object in the ```TourList```.
+For every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```JPN```, the ```Tour``` object
+is printed onto the console terminal.
+
+
+**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour attribute of the ClientPackage.
+If the tour attribute is equals to the same ```Tour``` object that was found in Step 2, the client attribute of that same
+ClientPackage will be retrieved using the ```getClient()``` function.
+
+
+**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class.
+The name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are
+iterated through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console
+terminal.
 
 <br>
 
 The following activity diagram summarizes the following steps.
 
-![image](yuemel.png)
+![image](findtour.png) 
+
+<br>
+
+### <u>Finding a particular flight</u>
+
+**Step 1**: The user executes ```find -f SQ-JPN``` to query if a tour with code
+JPN exists in the TourList. The ```parse``` function in the ```Parser```
+class takes the command, and the first word in it (```find```) means that the
+```parseFind()``` is to be called to determine which type of Object is to be
+queried for. The second word (```-f```) means that a the ```FindFlightCommand()``` is
+executed with the parameter ```SQ-JPN```
+
+
+**Step 2**: The ```FindFlightCommand``` iterates through each ```Flight``` object in the ```FlightList```.
+For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object
+is printed onto the console terminal.
+
+
+**Step 3**: In addition, the ```FindFlightCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getFlight()``` function is called to retrieve the tour attribute of the ClientPackage.
+If the tour attribute is equals to the same ```Flight``` object that was found in Step 2, the client attribute of that same
+ClientPackage will be retrieved using the ```getClient()``` function.
+
+
+**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class.
+The name is printed onto the console terminal under "Passengers". Once all  ```ClientPackage``` objects are
+iterated through in the ```ClientPackageList```, the total number of passengers will be printed on the console
+terminal.
+
+<br>
+
+The following activity diagram summarizes the following steps.
+
+![image](findflight.png) 
 
 <br>
 
 ### <u>Design Considerations</u>
 
 * Alternative: only iterate through the ```Package``` List.
-   * Pros: fast querying time.
-   * Cons: If the client has not subscribed to a package, none of their information can be accessed, including their contact number.
+  * Pros: fast querying time.
+  * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their contact number.
+
 
 ### <u>Listing clients, tours and flights</u>
 

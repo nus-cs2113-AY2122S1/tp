@@ -3,7 +3,7 @@
 participant ":Parser" as Parser
 participant ":FindClientCommand" as FCC
 participant ":ClientList" as ClientList
-participant ":PackageList" as PackageList
+
 
 
 -> Parser: execute "find -c Bo Tuan"
@@ -14,15 +14,12 @@ create FCC
 Parser -> FCC
 activate FCC
 
-FCC -> ClientList : findClient("Bo Tuan")
+FCC -> ClientList : getClientbyName("Bo Tuan")
 activate ClientList
-ClientList --> FCC : name and contact number
+ClientList --> FCC : name, contact number, email
 deactivate ClientList
 
-FCC -> PackageList : findPackage("Bo Tuan")
-activate PackageList
-PackageList --> FCC : packages purchased under name
-deactivate PackageList
+
 
 FCC --> Parser
 deactivate FCC

@@ -1,0 +1,33 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":FindTourCommand" as FTC
+participant ":TourList" as TourList
+participant "ClientPackageList" as ClientPackageList
+
+
+
+-> Parser: execute "find -t JPN"
+activate Parser
+Parser -> Parser : parseFind("-t JPN")
+
+create FTC
+Parser -> FTC
+activate FTC
+
+FTC -> TourList : getTour("JPN")
+activate TourList
+TourList --> FTC : code, name, price
+deactivate TourList
+
+FTC -> ClientPackageList : getClient() for every ClientPackage
+activate ClientPackageList
+ClientPackageList --> FTC : subscribed clients
+deactivate ClientPackageList
+
+FTC --> Parser
+deactivate FTC
+<-- Parser
+destroy FTC
+
+@enduml

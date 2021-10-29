@@ -1,0 +1,33 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":FindFlightCommand" as FFC
+participant ":FlightList" as FlightList
+participant "ClientPackageList" as ClientPackageList
+
+
+
+-> Parser: execute "find -f SQ-JPN"
+activate Parser
+Parser -> Parser : parseFind("-f SQ-JPN")
+
+create FFC
+Parser -> FFC
+activate FFC
+
+FFC -> FlightList : getFlight("JPN")
+activate FlightList
+FlightList --> FFC : id, destinations, dates
+deactivate FlightList
+
+FFC -> ClientPackageList : getClient() for every ClientPackage
+activate ClientPackageList
+ClientPackageList --> FFC : passengers
+deactivate ClientPackageList
+
+FFC --> Parser
+deactivate FFC
+<-- Parser
+destroy FFC
+
+@enduml

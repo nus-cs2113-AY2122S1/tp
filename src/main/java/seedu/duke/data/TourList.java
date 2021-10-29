@@ -1,8 +1,6 @@
 package seedu.duke.data;
 
 import seedu.duke.TourPlannerException;
-import seedu.duke.Ui;
-import seedu.duke.data.Tour;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,7 +54,7 @@ public class TourList {
         iteratedTourCodes = new ArrayList<String>();
     }
 
-    public Tour getTourByPrice(Float price) {
+    public Tour getTourByPrice(Float price) throws TourPlannerException {
         for (Tour currTour : tours) {
             String currTourCode = currTour.getCode();
             if (currTour.getPrice() == price && !iteratedTourCodes.contains(currTourCode)) {
@@ -64,7 +62,7 @@ public class TourList {
                 return currTour;
             }
         }
-        return null;
+        throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
     }
 
     public Tour getTourByCode(String code) throws TourPlannerException {
