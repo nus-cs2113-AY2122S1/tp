@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    //program exits immediately when ExitCommand is returned, so the execute method is not used
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList) {
-
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import seedu.duke.Duke;
@@ -409,22 +410,32 @@ public class Ui {
     }
 
     //@@author rebchua39
+    /**
+     * Displays the user's cumulative average point (CAP) or a message if there is no valid CAP.
+     * @param moduleList the list of modules
+     */
     private void printCap(ModuleList moduleList) {
         double cap = moduleList.calculateCap();
-        if (cap >= 0) {
+        boolean isCapValid = (cap >= 0);
+        if (isCapValid) {
+            DecimalFormat df = new DecimalFormat("0.00");
             cap = moduleList.calculateCap();
-            System.out.println(PADDING + "Your current CAP is: " + cap);
+            System.out.println(PADDING + "Your current CAP is: " + df.format(cap));
         } else {
             System.out.println(PADDING + "If you have received grades for your modules, set them to see your CAP!");
         }
     }
 
+    /**
+     * Displays a message to inform the user that the grade for the specified module has been successfully changed.
+     * @param module the module object whose grade has been changed
+     */
     public void printModuleWithGradeChanged(Module module) {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);
         System.out.println(PADDING + "   Grade: " + module.getGrade());
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
 
     /**
