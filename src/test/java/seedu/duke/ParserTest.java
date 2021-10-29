@@ -83,11 +83,10 @@ public class ParserTest {
         assertParseFailure(WRONG_ADDTOUR_MISSING_ID, Parser.ERROR_MISSING_NAME_ID);
     }
 
-    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
+    private <T extends Command> void parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
             throws TourPlannerException {
         final Command result = Parser.parse(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
-        return (T) result;
     }
 
     private void assertParseFailure(String input, String expectedMessage) {

@@ -1,13 +1,15 @@
-package seedu.duke;
+package seedu.duke.commands.flights;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.flights.ListFlightCommand;
-import seedu.duke.data.Flight;
 import seedu.duke.data.ClientList;
-import seedu.duke.data.TourList;
-import seedu.duke.data.FlightList;
 import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 

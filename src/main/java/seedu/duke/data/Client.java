@@ -56,9 +56,9 @@ public class Client {
     @Override
     public String toString() {
 
-        return "Client ID: " + id + System.lineSeparator()
-                + "Name: " + name + System.lineSeparator()
-                + "Contact Number: " + contactNum + System.lineSeparator()
+        return "Client ID: " + id + "\n"
+                + "Name: " + name + "\n"
+                + "Contact Number: " + contactNum + "\n"
                 + "Email: " + email;
     }
 }

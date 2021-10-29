@@ -20,6 +20,14 @@ public class AddTourCommand extends Command {
         this.tour = tour;
     }
 
+    /**
+     * Returns the tour object that was added.
+     *
+     * @return the added tour object
+     */
+    public Tour getTour() {
+        return tour;
+    }
 
     /**
      * Executes the addition of tour to tour list.
@@ -29,7 +37,7 @@ public class AddTourCommand extends Command {
     public void execute() {
         int newTourCount = tours.getTourCount() + 1;
         try {
-            Tour existingTour = tours.getTourByCode(tour.getCode());
+            Tour existingTour = tours.getTourById(tour.getId());
             System.out.println("Tour code already exists. Please try another tour code.");
         } catch (TourPlannerException e) {
             tours.add(tour);

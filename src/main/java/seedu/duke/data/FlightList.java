@@ -60,7 +60,7 @@ public class FlightList {
         return flightCount;
     }
 
-    public Flight getFlightById(int index) {
+    public Flight getFlightByIndex(int index) {
         return flights.get(index);
     }
 

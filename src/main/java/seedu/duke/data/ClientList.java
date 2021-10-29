@@ -56,7 +56,7 @@ public class ClientList {
      * @param index the index of the specific client in the client list
      * @return the client object corresponding to the index
      */
-    public Client getClient(int index) {
+    public Client getClientByIndex(int index) {
         return clients.get(index);
     }
 

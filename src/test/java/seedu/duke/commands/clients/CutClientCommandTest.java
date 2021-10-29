@@ -1,9 +1,10 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clients.CutClientCommand;
 import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackageList;
 import seedu.duke.data.FlightList;
@@ -49,7 +50,7 @@ public class CutClientCommandTest {
         cutClientCommand.execute();
         assertEquals(clients.getClientCount(), clientsWithoutBoTuan.getClientCount());
         for (int i = 0; i < clientsWithoutBoTuan.getClientCount(); i++) {
-            assertEquals(clients.getClient(i), clientsWithoutBoTuan.getClient(i));
+            assertEquals(clients.getClientByIndex(i), clientsWithoutBoTuan.getClientByIndex(i));
         }
     }
 
