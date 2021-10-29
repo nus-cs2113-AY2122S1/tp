@@ -59,7 +59,7 @@ deactivate
 
 game --> command
 deactivate
-destroy game 
+destroy game
 
 
 @enduml

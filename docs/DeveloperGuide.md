@@ -1,20 +1,27 @@
 
 # Developer Guide
 * [Acknowledgements](#acknowledgements)
-* [Design & Implementation](#design-&-implementation)
-
-* [Acknoledgements](#acknowledgements)
+* [Design](#design)
+  * [Architecture](#architecture)
+* [Implementation](#implementation)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
 
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * https://www.baeldung.com/java-testing-system-out-println
 
-## Architecture
 
+
+
+## Design
+### Architecture
 (Some architecture diagram)
 
-## Design & implementation
+## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
@@ -85,7 +92,6 @@ Single Responsibility Principle.
 <!-- -->
 
 ## Product scope
-
 Our product is a typing game, intent to provide enjoyment for people who are familiar with the CML.
 
 
