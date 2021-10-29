@@ -32,6 +32,7 @@ import seedu.exception.MissingIndexException;
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 public class MainParser {
+    public static final int NAME_INDEX = 0;
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
     private static final String DELETE_CONTACT_COMD = "rm";
@@ -42,11 +43,8 @@ public class MainParser {
     private static final String SEARCH_COMD = "search";
     private static final String IMPORT_COMD = "import";
     private static final String PERSONAL_CONTACT_COMD = "me";
-
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
-    public static final int NAME_INDEX = 0;
-
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
     private final SearchContactParser searchContactParser = new SearchContactParser();

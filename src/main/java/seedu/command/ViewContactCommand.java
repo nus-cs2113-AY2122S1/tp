@@ -3,8 +3,8 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.TextUi;
 
 public class ViewContactCommand extends Command {
     private final int contactIndex;

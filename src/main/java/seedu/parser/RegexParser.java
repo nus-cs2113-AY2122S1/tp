@@ -9,6 +9,7 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public abstract class RegexParser {
     public static final String EMAIL_FLAG = "e";
 
     protected static final String[] FLAG_SEQUENCE = {NAME_FLAG, GITHUB_FLAG, LINKEDIN_FLAG,
-        TELEGRAM_FLAG, TWITTER_FLAG, EMAIL_FLAG};
+            TELEGRAM_FLAG, TWITTER_FLAG, EMAIL_FLAG};
     private static final Logger LOGGER = Logger.getLogger(RegexParser.class.getName());
 
     public void checkRegex(String flag, String detailToParse)

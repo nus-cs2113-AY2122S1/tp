@@ -73,12 +73,12 @@ public class Contact {
         return name;
     }
 
-    public String getGithub() {
-        return github;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGithub() {
+        return github;
     }
 
     public void setGithub(String github) {
@@ -120,6 +120,6 @@ public class Contact {
 
     //@@author ng-andre
     public String[] getContactStringArray() {
-        return new String[]{ name, github, linkedin, telegram, twitter, email };
+        return new String[]{name, github, linkedin, telegram, twitter, email};
     }
 }

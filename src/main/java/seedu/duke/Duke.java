@@ -14,14 +14,14 @@ import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
 public class Duke {
+    private final ContactsDecoder contactsDecoder;
+    private final ContactsEncoder contactsEncoder;
     private String contactFilePath;
     private Storage storage;
     private MainParser parser;
     private ContactList contactList;
     private String personalContactFilePath;
     private Contact personalContact;
-    private final ContactsDecoder contactsDecoder;
-    private final ContactsEncoder contactsEncoder;
 
     public Duke(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
@@ -37,6 +37,14 @@ public class Duke {
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(this.contactFilePath);
         }
+    }
+
+    /**
+     * Main entry-point for the java.duke.Duke application.
+     */
+    public static void main(String[] args) {
+        new Duke("data/contacts.txt",
+                "data/me.txt").runConTech();
     }
 
     private void runConTech() {
@@ -59,13 +67,5 @@ public class Duke {
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(contactFilePath);
         }
-    }
-
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        new Duke("data/contacts.txt",
-                "data/me.txt").runConTech();
     }
 }
