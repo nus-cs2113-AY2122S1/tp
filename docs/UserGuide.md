@@ -399,11 +399,9 @@ three text files to the other computer, and run the `medbot.jar` in the same new
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
-| **
-add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
+| **add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
 | **list**     | `list`|
-| **
-edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
+| **edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
 | **find**     | `find [i/PERSON_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`find i/s1231234A`|
