@@ -81,7 +81,8 @@ public class TextUi {
         System.out.println(index + "."
                 + "Your loan to "
                 + dueLoan.getName() + ", "
-                + "$" + dueLoan.getAmount()
+                + "$" + dueLoan.getAmount() + ", "
+                + "on " + dueLoan.getDate()
                 + " is due!!");
     }
 
@@ -119,11 +120,10 @@ public class TextUi {
                 System.out.println(DIVIDER);
             } else {
                 percentageLeft = (totalSpending / amount) * 100;
-                System.out.print("You overspend your Budget by: ");
+                System.out.print("You overspent your Budget by: ");
                 System.out.printf("%.2f", percentageLeft);
                 System.out.println("%");
                 System.out.println(DIVIDER);
-                System.out.print("You overspent your Budget by: ");
             }
         }
     }

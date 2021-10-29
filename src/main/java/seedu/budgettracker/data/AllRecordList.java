@@ -21,7 +21,7 @@ public class AllRecordList {
 
     public static String storageDirectory;
     private final Hashtable<Integer, RecordList> allRecordList;
-    private final int year;
+    protected int year;
 
     /**
      * Constructor that creates 12 RecordLists upon construction.
@@ -43,6 +43,14 @@ public class AllRecordList {
         textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     /**
      * Add a budget record into a month RecordList.
      *
@@ -51,7 +59,7 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
-        allRecordList.get(month).addBudget(spendingLimit, month, isLoadingStorage);
+        allRecordList.get(month).addBudget(spendingLimit, isLoadingStorage);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }
