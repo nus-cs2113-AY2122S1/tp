@@ -11,11 +11,11 @@ import utils.Money;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import static constants.ErrorMessage.addExpenseErrorMsg;
+import static constants.ErrorMessage.updateExpenseErrorMsg;
 
-@Command(name = "add", mixinStandardHelpOptions = true,
-        description = "Adds an expense in the current month to the database.")
-public class AddExpenseCommand implements Callable<Integer> {
+@Command(name = "update", mixinStandardHelpOptions = true,
+        description = "Updates an expense in the current month from the list of expenses.")
+public class UpdateExpenseCommand implements Callable<Integer> {
 
     @Parameters(paramLabel = "NAME", arity = "1..*", description = "Name of the expense item")
     String[] names;
@@ -32,9 +32,9 @@ public class AddExpenseCommand implements Callable<Integer> {
         try {
             String expenseName = String.join(" ", names);
             Double expenseValue = Money.truncate(value);
-            expenseMgr.addExpense(expenseName, expenseValue);
+            expenseMgr.updateExpense(expenseName, expenseValue);
         } catch (Exception error) {
-            ui.printMessage(addExpenseErrorMsg);
+            ui.printMessage(updateExpenseErrorMsg);
             return 1;
         }
 

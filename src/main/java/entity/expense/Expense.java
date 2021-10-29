@@ -23,6 +23,10 @@ public class Expense {
         return this.value;
     }
 
+    public void updateValue(double value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return String.format("%-25s | %-10.2f | %s", description, value, date);

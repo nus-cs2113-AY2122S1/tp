@@ -21,6 +21,14 @@ public class ExpenseList {
         expenses.remove(expenseIndex);
     }
 
+    public static void updateExpense(String expenseName, double expenseValue) {
+        for (int i = 0; i < expenses.size(); i++) {
+            if (expenses.get(i).getDescription().contains(expenseName)) {
+                expenses.get(i).updateValue(expenseValue);
+            }
+        }
+    }
+
     public static ArrayList<Expense> getExpenses() {
         return expenses;
     }

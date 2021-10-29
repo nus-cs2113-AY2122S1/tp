@@ -40,6 +40,10 @@ public class ExpenseManager implements LoadableManager {
         ExpenseList.deleteExpense(expenseNumber - 1);
     }
 
+    public void updateExpense(String expenseName, double expenseValue) {
+        ExpenseList.updateExpense(expenseName, expenseValue);
+    }
+
     public void listExpenses() {
         Ui ui = Ui.getUi();
         String expenseListHeader = String.format("%s | %-25s | %-10s | %s", "Id.", "Name", "Value", "Date");
