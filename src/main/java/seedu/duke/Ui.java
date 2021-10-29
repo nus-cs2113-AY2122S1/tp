@@ -11,6 +11,7 @@ import seedu.duke.data.ClientPackageList;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -129,11 +130,12 @@ public class Ui {
     }
 
     public void showFindClient(ClientList clients, ClientPackageList clientPackages, String name) {
+        String lowercaseName = name.toLowerCase();
         int foundClients = 0;
         int count = clients.getClientCount();
         for (int i = 0; i < count; i++) {
             Client currClient = clients.getClient(i);
-            if (currClient.getName().equals(name)) {
+            if (currClient.getName().toLowerCase().contains(lowercaseName)) {
                 if (foundClients == 0) {
                     show(FIND_SUCCESS_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
                 }

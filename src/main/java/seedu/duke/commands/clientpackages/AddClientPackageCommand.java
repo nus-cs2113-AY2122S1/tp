@@ -18,8 +18,11 @@ public class AddClientPackageCommand extends Command {
     @Override
     public void execute() {
         createClientPackage();
-        clientPackages.add(clientPackage);
-        ui.showAddClientPackage(clientPackage);
+        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                && !clientPackage.getFlight().equals(null)) {
+            clientPackages.add(clientPackage);
+            ui.showAddClientPackage(clientPackage);
+        }
     }
 
     private void createClientPackage() {
