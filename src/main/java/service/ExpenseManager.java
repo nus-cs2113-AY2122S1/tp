@@ -18,6 +18,8 @@ public class ExpenseManager implements LoadableManager {
 
     private static ExpenseManager expenseMgr;
     private final String fileLabel;
+    private final String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
+            "Id.", "Name", "Value", "Date", "Category");
     private final double leewayAmt = 100.0;
 
     private ExpenseManager() {
@@ -83,9 +85,6 @@ public class ExpenseManager implements LoadableManager {
 
     public void listExpenses() {
         Ui ui = Ui.getUi();
-        String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
-                "Id.", "Name", "Value", "Date", "Category");
-
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
         for (int i = 0; i < expenses.size(); i++) {
@@ -95,6 +94,22 @@ public class ExpenseManager implements LoadableManager {
         String totalExpenseValue = Double.toString(ExpenseList.getRunningExpenseValue());
         String totalExpenseValuePrintInfo = String.format("%s %32s", "Total:", totalExpenseValue);
         ui.printMessage(totalExpenseValuePrintInfo);
+    }
+
+    public void listExpenses(String category) {
+        Ui ui = Ui.getUi();
+        ui.printMessage(expenseListHeader);
+        ArrayList<Expense> expenses = ExpenseList.getExpenses();
+        ArrayList<Expense> expenseInCategory = new ArrayList<Expense>();
+        for (Expense expense : expenses) {
+            if (expense.getCategory().contains(category)) {
+                expenseInCategory.add(expense);
+            }
+        }
+
+        for (int i = 0; i < expenseInCategory.size(); i++) {
+            ui.printMessage((i + 1) + ". \t| " + expenseInCategory.get(i));
+        }
     }
 
     @Override
