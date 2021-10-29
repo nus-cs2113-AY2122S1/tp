@@ -416,8 +416,7 @@ edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] 
 | :---         | :---                     |
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
-| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|
-| **find**     | `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]` <br/> E.g. `find p/1 b/110322 1200`             |
+| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         |
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 
