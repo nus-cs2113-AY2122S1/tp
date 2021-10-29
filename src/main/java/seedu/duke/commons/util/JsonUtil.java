@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 //@@author ptejasv
 public class JsonUtil {
-    private static final Logger logger = Logger.getLogger(JsonUtil.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(JsonUtil.class.getName());
     private static final String MODULE_INFO_FILEPATH = "/ModuleInfo.json";
 
     /**
@@ -36,7 +36,7 @@ public class JsonUtil {
             throw new ModuleLoadException(Messages.ERROR_MODULE_LOAD_FAILED);
         }
 
-        logger.log(Level.INFO, "successfully loaded NUSMods module information from json file");
+        LOGGER.log(Level.INFO, "successfully loaded NUSMods module information from json file");
 
         return modules;
     }
