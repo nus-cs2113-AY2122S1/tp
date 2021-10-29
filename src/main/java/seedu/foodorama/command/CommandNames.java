@@ -4,6 +4,7 @@ public enum CommandNames {
     ADD_DISH_WASTE("add dish waste", new AddDishWasteCommand()),
     ADD_INGR_WASTE("add ingr waste", new AddIngrWasteCommand()),
     ADD_INGR_STORED("add ingr stored", new AddIngrStoredCommand()),
+    SET_INGR_EXPIRY("set ingr expiry", new SetIngrExpiryCommand()),
     SET_DISH_LIMIT("set dish limit", new SetDishLimitCommand()),
     SET_INGR_LIMIT("set ingr limit", new SetIngrLimitCommand()),
     LINK("link", new AddDishIngrCommand()),

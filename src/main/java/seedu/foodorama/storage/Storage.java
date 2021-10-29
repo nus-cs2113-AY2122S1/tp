@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +24,7 @@ public class Storage {
     private static final String FILE_NAME_DISH = "dishes.txt";
     private static final String FILE_NAME_INGR = "ingredients.txt";
     private static final String FILE_NAME_FORMAT = "formats.txt";
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void write(String mode) {
         try {
@@ -95,11 +99,11 @@ public class Storage {
                         params[i] = params[i].trim();
                     }
                     Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
-                            Double.parseDouble(params[2]));
+                            Double.parseDouble(params[2]), params[4]);
                     ingredientToAdd.setLimit(Double.parseDouble(params[3]));
                     IngredientList.ingredientList.add(ingredientToAdd);
-                } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
-                    System.out.println("Invalid data entry, disregarding");
+                } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeParseException ignored) {
+                    System.out.println("Invalid data entry, disregarding.");
                 }
             }
         } catch (FileNotFoundException e) {
