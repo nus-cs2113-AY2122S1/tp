@@ -132,39 +132,39 @@ public class Ui {
 
     protected static final String HELP_ME = LINE_DIVIDER + System.lineSeparator()
             + "Here are the commands you can use:" + System.lineSeparator()
-            + "1. Adding a Dish : 'add dish [dishName]'" + System.lineSeparator()
+            + "1. Adding a Dish : 'add dish [DISH_NAME]'" + System.lineSeparator()
             + "    Example: 'add dish chicken rice'" + System.lineSeparator()
-            + "2. Adding Dish Wastage : 'add dish waste [dishName]' followed by "
+            + "2. Adding Dish Wastage : 'add dish waste [DISH_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add dish waste chicken rice' ; '0.8'" + System.lineSeparator()
-            + "3. Adding Dish Limit : 'set dish limit [dishName]' followed by "
+            + "3. Adding Dish Limit : 'set dish limit [DISH_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'set dish limit chicken rice' ; '16.9'" + System.lineSeparator()
             + "4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
             + "    Example: 'find dish chicken rice'" + System.lineSeparator()
-            + "5. Deleting a Dish : 'del [dishName]" + System.lineSeparator()
+            + "5. Deleting a Dish : 'del [DISH_NAME]" + System.lineSeparator()
             + "    Example: 'del dish chicken rice'" + System.lineSeparator()
             + "6. Viewing all Dishes : 'list dish'" + System.lineSeparator()
             + "7. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
             + "8. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
             + "9. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
-            + "10. Adding a new Ingredient : 'add ingr [ingrName]' "
+            + "10. Adding a new Ingredient : 'add ingr [INGR_NAME]' "
             + "followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr chicken' ; '2'" + System.lineSeparator()
-            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'"
+            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME]'"
             + " followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr stored chicken' ; '1.5'" + System.lineSeparator()
-            + "12. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
+            + "12. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "13. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by "
+            + "13. Adding Ingredient Limit : 'set ingr limit [INGR_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'set ingr limit chicken' ; '42.7'" + System.lineSeparator()
-            + "14. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
+            + "14. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'" + System.lineSeparator()
             + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
             + "15. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
             + "    Example: 'find ingr chicken'" + System.lineSeparator()
-            + "16. Deleting an Ingredient : 'del [ingrName]'" + System.lineSeparator()
+            + "16. Deleting an Ingredient : 'del [INGR_NAME]'" + System.lineSeparator()
             + "    Example: 'del ingr chicken'" + System.lineSeparator()
             + "17. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
             + "18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
