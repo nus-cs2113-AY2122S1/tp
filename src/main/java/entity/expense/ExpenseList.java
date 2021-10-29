@@ -10,6 +10,10 @@ public class ExpenseList {
         return runningExpenseValue;
     }
 
+    public static void addRunningExpenseValue(double newExpenseValue) {
+        runningExpenseValue += newExpenseValue;
+    }
+
     public static void addExpense(Expense newExpense) {
         expenses.add(newExpense);
         runningExpenseValue += newExpense.getValue();

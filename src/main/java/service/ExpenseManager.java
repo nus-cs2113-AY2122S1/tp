@@ -80,6 +80,7 @@ public class ExpenseManager implements LoadableManager {
 
             Expense expense = new Expense(name, value, date, category);
             ExpenseList.addExpense(expense);
+            ExpenseList.addRunningExpenseValue(expense.getValue());
         }
     }
 
