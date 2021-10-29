@@ -45,10 +45,10 @@ its developers (😀 us!) at our [Main Page](README.md).
 1. Hype yourself up by dancing. Here begins your journey with _Ha(ppy)Bit_.
 2. Ensure you have Java `11` installed in your computer. If you do not have it installed,
    download it [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-3. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
+3. Download the latest `happybit.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v2.0).
 4. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
-5. Open your terminal of choice inside the folder containing `tp.jar` file.
-6. Run the file by typing the command `java -jar tp.jar`.
+5. Open your terminal of choice inside the folder containing `happybit.jar` file.
+6. Run the file by typing the command `java -jar happybit.jar`.
 7. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
 
    ```
