@@ -670,27 +670,29 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
-| `no.` | `Command` | `Description` |
-| --- | --- | --- |
-| 1 | add -b a/<AMOUNT> m/<MONTH> | add budget of $AMOUNT to MONTH of the year |
-| `2` | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
-| `3` | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` |
-| `4` | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` |
-| `5` | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
-| `6` | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
-| `7` | `year <year>` | `switch database to YEAR` |
-| `8` | `find <keyword>` | `find a particular KEYWORD in the database` |
-| `9` | `list m/all [c/<CATEGORY]` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
-| `10` | `list m/MONTH [c/<CATEGORY]` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
-| `11` | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` |
-| `12` | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` |
-| `13` | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
-| `14` | `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
-| `15` | `delete -l m/MONTH` | `delete all loan entries of MONTH` |
-| `16` | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
-| `17` | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` ` |
-| `18` | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
-| `19` | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` |
-| `20` | `help` | `shows a list of command guides` |
-| `21` | `bye` | `terminates the app` |
+
+ `no.` | `Command` | `Description` 
+ --- | -------- | -------------- 
+ 1. | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` 
+ 2. | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` 
+ 3. | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` 
+ 4. | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` 
+ 5. | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
+ 6. | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` 
+ 7. | `year <year>` | `switch database to YEAR` 
+ 8. | `find <keyword>` | `find a particular KEYWORD in the database` 
+ 9. | `list m/all [c/<CATEGORY]` | `list all budget, expenditure and loan entries of the year of CATEGORY` 
+ 10. | `list m/MONTH [c/<CATEGORY]` | `list MONTH budget, expenditure and loan entries of CATEGORY` 
+ 11. | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` 
+ 12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` 
+ 13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` 
+ 14. | `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` 
+ 15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` 
+ 16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` 
+ 17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` ` 
+ 18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` 
+ 19. | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` 
+ 20. | `help` | `shows a list of command guides` 
+ 21. | `bye` | `terminates the app` 
+
 

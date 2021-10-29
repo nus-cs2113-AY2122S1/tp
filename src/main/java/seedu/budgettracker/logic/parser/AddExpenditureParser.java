@@ -13,7 +13,7 @@ public class AddExpenditureParser implements ParserPrefix {
         PREFIX_DATE,
         PREFIX_CATEGORY };
 
-    public static AddExpenditureCommand parse(String args) throws NumberFormatException, EmptyDescriptionException {
+    public static AddExpenditureCommand parse(String args) throws EmptyDescriptionException, IllegalArgumentException {
         HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
         String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_COMPULSORY);
