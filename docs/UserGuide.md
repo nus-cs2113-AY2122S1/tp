@@ -196,6 +196,42 @@ Example of usage:
 
 <br/>
 
+### List recipes in Recipe List : `list recipes`
+Returns a list of recipes that are stored in the Recipe List.
+
+Format: `list recipes`
+
+<br/>
+
+### View/Find a recipe in Recipe List : `view recipes`
+Views a specific recipe whose names contain any of the given keywords, 
+with the corresponding ingredients and the quantity of each ingredient available in the storage.
+
+Format: `view recipe r/RECIPE`
+
+The search is case-insensitive. e.g “pasta” will match “Pasta”. 
+The order of the keywords matter. e.g. “Nasi Padang” will NOT match “Padang Nasi”. 
+The input should only contain the name of the recipe. 
+Only the full name will be matched. e.g. “Chicken” will NOT match “Curry Chicken”.
+
+Example of usage:
+- `view recipe r/Curry Chicken`
+
+<br/>
+
+### Update quantities of ingredients in a recipe : `update recipe`
+According to your own flavour, update a recipe by modifying the quantity of ingredients in that recipe.
+
+Format: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY`
+
+Without the information about the current quantity of that ingredients you want to update, you can directly update
+the quantity with the corresponding q/QUANTITY that you input.
+Ingredients with 0 quantity is not allowed, as 0 quantity is meaningless.
+
+Example of usage:
+- `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
+
+<br/>
 
 ### Create a shopping list of ingredients to buy for recipes user wants to make: `shopping list`
 
@@ -212,6 +248,11 @@ Example of usage:
 
 <br/>
 
+### View Help Message : `help`
+Shows a message explaining how to access the help page. i.e. the user guide
+Format: `help`
+
+<br/>
 
 ## FAQ
 
@@ -234,3 +275,16 @@ Example of usage:
 4. Remove ingredients when recipe is cooked
     - Command: `cooked r/RECIPE`
     - E.g.: `cooked r/Chicken Soup`
+5. List all recipes in Recipe List
+    - Command: `list recipes`
+    - E.g.: `list recipes`
+6. Find a recipe in Recipe List
+    - Command: `view recipe r/RECIPE`
+    - E.g.: `view recipe r/Curry Chicken`
+7. Update ingredients in a recipe
+    - Command: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY`
+    - E.g.: `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
+8. View Help
+    - Command: `help`
+    - E.g.: `help`
+    
