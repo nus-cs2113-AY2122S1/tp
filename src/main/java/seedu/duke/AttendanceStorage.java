@@ -1,3 +1,5 @@
+//@@xingyuan123
+
 package seedu.duke;
 
 import seedu.duke.attendance.Attendance;
@@ -146,12 +148,12 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                //if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
                 dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
                 dukeAttendanceWriter.write(',');
                 dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
                 dukeAttendanceWriter.write('\n');
-                //}
+                }
             }
         } catch (Exception e) {
             e.getStackTrace();
@@ -216,6 +218,7 @@ public class AttendanceStorage {
         }
     }
 }
+//@@xingyuan123
 
 
 
