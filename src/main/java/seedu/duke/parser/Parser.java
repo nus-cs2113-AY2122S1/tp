@@ -29,7 +29,7 @@ public class Parser {
     private static int indexOfLastSelectedEvent = -1;
 
     public static Command parseCommand(String response) throws DukeException {
-        String[] command = response.split(" ");
+        String[] command = response.split(" +");
         switch (command[0]) {
         case "list":
             return new ListCommand(command);
