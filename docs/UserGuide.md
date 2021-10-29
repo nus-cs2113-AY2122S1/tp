@@ -143,7 +143,7 @@ Adds your **event** task to your task list.
 ### 2.3 Listing all your tasks: `list`
 Lists tasks in your task list.
 
-**Format:** `list [--filter <argument>]`
+**Format 1:** `list [--filter <argument>]`
 - `[--flag <argument>]` specifies the filter to be applied to your task list.
   - Type of task: `[--type todo|deadline|event]`
   - Priority of the task: `[--priority high|medium|low]`
@@ -181,6 +181,29 @@ Lists tasks in your task list.
 ||  MY TASKLIST
 || -------------
 || 1. read book [low] (doOn: 20-10-2021 02:00:00)
+-------------------------------------------------------------------------
+```
+
+**Format 2:** `list [task id]`
+- `[task id]` specifies the id of the task to display the recurrence.
+
+**Example (with task id):** `list 1`
+- List the next 4 recurrences for task with task id `1`.
+
+**Expected Outcome:**
+
+```
+-------------------------------------------------------------------------
+[user]: list 1
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| Listing next 4 recurrences for:
+|| [T] read book <low> {daily} (doOn: 30-10-2021 02:00)
+|| -> 31-10-2021 02:00
+|| -> 01-11-2021 02:00
+|| -> 02-11-2021 02:00
+|| -> 03-11-2021 02:00
 -------------------------------------------------------------------------
 ```
 
