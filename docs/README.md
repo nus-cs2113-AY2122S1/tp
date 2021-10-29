@@ -1,4 +1,4 @@
-# Food-O-Rama
+# Food-O-Rama ![CICheck](https://github.com/AY2122S1-CS2113T-W11-4/tp/actions/workflows/gradle.yml/badge.svg)
 <p align="center">
   <img width="493" height="153" src="https://user-images.githubusercontent.com/69526313/138156694-3a7ccb62-2a06-4adc-b272-badde4bc6230.png">
 </p>
