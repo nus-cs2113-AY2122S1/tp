@@ -11,15 +11,15 @@ import java.util.logging.Logger;
 
 public class SearchMapCommandParser {
 
-    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
+    private final Logger logger = Logger.getLogger("SearchMapCommandLog");
 
     public SearchMapCommand parse(String arguments, UniversityList universityMasterList,
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException {
-        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
+//        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
         if (input.length() == 0) {
-            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+//            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
@@ -36,11 +36,11 @@ public class SearchMapCommandParser {
         }
 
         if (university == null) {
-            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+//            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
         assert university.getName() != null;
-        logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+//        logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
     }
 

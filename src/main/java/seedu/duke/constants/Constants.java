@@ -47,8 +47,7 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_NOMAPPING = "This university has no available mappings.";
     public static final String ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING = "Mapping with this index does not exist.";
 
-    // Logging
-    public static final String LOGGER_NAME = "SEPlanner Log";
+    // Logging messages
     public static final String LOGMSG_PARSESUCCESS = "Parse completed successfully";
     public static final String LOGMSG_PARSESTARTED = "Parse process started";
     public static final String LOGMSG_PARSEFAILED = "Parse failed";
