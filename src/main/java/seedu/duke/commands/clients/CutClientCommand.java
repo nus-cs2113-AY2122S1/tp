@@ -39,6 +39,7 @@ public class CutClientCommand extends Command {
         this.client = clients.getClientById(clientId);
         int newClientCount = clients.getClientCount() - 1;
         ui.showCut(client);
+        ui.showLine();
         clients.cut(client);
         assert newClientCount == clients.getClientCount();
         assert newClientCount >= 0;
@@ -47,6 +48,8 @@ public class CutClientCommand extends Command {
     private void cutClientPackage() {
         ArrayList<ClientPackage> clientPackagesWithClient = clientPackages.getClientPackageByClient(client);
         for (ClientPackage clientPackage: clientPackagesWithClient) {
+            System.out.println();
+            ui.showCut(clientPackage);
             clientPackages.cut(clientPackage);
         }
     }
