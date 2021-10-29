@@ -31,13 +31,13 @@ public class Ui {
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
-                + Storage.getOpenTrip().getForeignCurrencySymbol()
+                //+ Storage.getOpenTrip().getForeignCurrencySymbol()
                 + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
     }
 
     public static String stringRepaymentMoney(double val) {
         return Storage.getOpenTrip().getRepaymentCurrency() + " "
-                + Storage.getOpenTrip().getRepaymentCurrencySymbol()
+                //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
