@@ -137,7 +137,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setIngredients(name, newIngredients)</h2>
+     * <h2>void setIngredients(name, newIngredients).</h2>
      *
      * <p>This method replaces the Ingredients list in the recipe with the new user input</p>
      * @param name Recipe name being queried
@@ -156,7 +156,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2>void setSteps(name, newSteps)</h2>
+     * <h2>void setSteps(name, newSteps).</h2>
      *
      * <p>This method replaces the Steps list in the recipe with the new user input</p>
      * @param name Recipe name being queried
@@ -361,7 +361,7 @@ public class Cookbook {
     }
 
     /**
-     * <h2> String listCookbookTags()</h2>
+     * <h2> String listCookbookTags().</h2>
      *
      * <p>This method prints out all tags that are currently in the cookbook</p>
      * @return The list of all tags
