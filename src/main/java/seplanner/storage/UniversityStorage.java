@@ -1,5 +1,6 @@
 package seplanner.storage;
 
+import seplanner.constants.Constants;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.modules.ModuleMapping;
@@ -10,12 +11,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
 public class UniversityStorage {
-    private static final Logger logger = Logger.getLogger("UniversityStorageLog");
+    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     public ArrayList<University> readUniversityList(InputStream inputStream,
                                                     ModuleList moduleMasterList) throws IOException {
@@ -46,7 +48,7 @@ public class UniversityStorage {
         if (!curr.equals(" ")) {
             universityList.add(new University(curr, moduleMappingList, ++index));
         }
-//        logger.log(Level.INFO, "Completed loading of universities");
+        logger.log(Level.INFO, "Completed loading of universities");
         return universityList;
     }
 

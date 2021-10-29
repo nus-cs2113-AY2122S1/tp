@@ -13,13 +13,14 @@ import seplanner.universities.UniversityList;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RemoveCommandParser {
 
-    private final Logger logger = Logger.getLogger("RemoveCommandParserLog");
+    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private String flag;
     private int uniIndex;
     private int mapIndex;
@@ -30,20 +31,20 @@ public class RemoveCommandParser {
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws ParseException, IOException {
 
-//        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
+        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String flagArguments = identifyFlagAndSplitArgs(arguments);
         switch (flag) {
         case Constants.FLAG_UNIVERSITY:
             handleUniFlagArgs(flagArguments, universityMasterList, universitySelectedList);
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new RemoveUniCommand(university, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE:
             handleModFlagArgs(flagArguments, moduleMasterList, moduleSelectedList);
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new RemoveModCommand(module, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
             handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList, universityMasterList);
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         default:
@@ -55,7 +56,7 @@ public class RemoveCommandParser {
     private String identifyFlagAndSplitArgs(String arguments) throws ParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (argumentsSubstrings.length < 2) {
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         flag = argumentsSubstrings[0].trim();
@@ -70,7 +71,7 @@ public class RemoveCommandParser {
             uniName = arguments;
             // Check if university has been added
             if (!universitySelectedList.searchUniversity(uniName)) {
-//                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             university = new University(uniName, new ArrayList<>(), universityMasterList);
@@ -82,7 +83,7 @@ public class RemoveCommandParser {
             }
             // Check if university exists
             if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
-//                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
@@ -90,7 +91,7 @@ public class RemoveCommandParser {
         }
         // Check if university has been added already
         if (!universitySelectedList.searchUniversity(uniName)) {
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
     }
@@ -102,7 +103,7 @@ public class RemoveCommandParser {
             module = moduleSelectedList.getModule(arguments);
             // Check if module has been added already
             if (module == null) {
-//                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
         } else {
@@ -114,14 +115,14 @@ public class RemoveCommandParser {
             }
             // Check if module exists
             if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
-//                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             module = moduleMasterList.get(modIndex - 1);
         }
         // Check if module has been added already
         if (!moduleSelectedList.isModuleExist(module.getModuleCode())) {
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
         }
     }
@@ -134,7 +135,7 @@ public class RemoveCommandParser {
         University currentUni = new University();
         boolean validUni = false;
         if (argumentSubstrings.length < 2) {
-//            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         try {
