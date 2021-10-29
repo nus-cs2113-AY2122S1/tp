@@ -92,8 +92,8 @@ public class AddCommand extends Command {
             }
 
             if (isEndBeforeStart(startTime, endTime)) {
-                throw new AddException("Invalid Input, End Time is earlier than Start Time\n" +
-                        "All Events can only occur within a single day");
+                throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
+                        + "All Events can only occur within a single day");
             }
 
             String location = addUI.getReply(FIFTH_QN).trim();
@@ -114,8 +114,8 @@ public class AddCommand extends Command {
             ArrayList<Lesson> lecture) throws AddException {
         try {
             for (Lesson lesson : lessons) {
-                if (!lesson.getLessonType().equals(LECTURE) && !lesson.getLessonType().equals(TUTORIAL) &&
-                        !lesson.getLessonType().equals(LAB)) {
+                if (!lesson.getLessonType().equals(LECTURE) && !lesson.getLessonType().equals(TUTORIAL)
+                        && !lesson.getLessonType().equals(LAB)) {
                     lecture.add(lesson);
                 }
             }
