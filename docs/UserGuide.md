@@ -60,26 +60,26 @@ This document shows you the available features in **SLAM**, and provides you wit
 ### 2.1 Events
 The following two tables show the fields which **SLAM** works with in managing events in the overall catalog.
 
-| **Required Fields** | **Description**                      |
+| **Required Fields** | **Description**                  |
 | ------------------- | -------------------------------- |
 | Title | The title of the event                         |
 | Date & Time | The date and time the event is happening | 
 | Venue | The venue at which the event is happening      |
 | Budget | The amount of budget allocated to the event   |
 
-| **Optional Fields** | Description                      |
+| **Optional Fields** | **Description**                  |
 | ------------------- | -------------------------------- |
-| Description | A brief description of the event                         |
+| Description | A brief description of the event         |
 
 ### 2.2 Tasks
 The following two tables show the fields which **SLAM** works with in managing the tasks you can add and keep track of under each event created.
 
-| **Required Fields** | **Description**                       |
+| **Required Fields** | **Description**                   |
 | ------------------- | --------------------------------- |
 | Title | The title of the task                           |
 | Deadline | The deadline the task has to be completed by |
 
-| **Optional Fields** | **Description**                     |
+| **Optional Fields** | **Description**                 |
 | ------------------- | ------------------------------- |
 | Description         | A brief description of the task |
 
@@ -413,7 +413,7 @@ We can then update the details of the specifc task by following the list of comm
 ---
 
 ## 5. Task Commands
-This section contains the available commands for managing tasks for events in **SLAM**. Because all tasks belong to a specific event in your catalog, an event must first be selected ([see Section 5.2 on Selecting Events](#52-select-an-event)) before any of the below commands can be used.
+This section contains the available commands for managing tasks for events in **SLAM**. Because all tasks belong to a specific event in your catalog, an event must first be selected ([see Section 4.2 on Selecting Events](#42-select-an-event)) before any of the below commands can be used.
 
 ### 5.1 Add a task 
 Note: For this current version of **SLAM**, pre-selecting an `Event` is not required for this command.
@@ -473,14 +473,16 @@ This section contains the available commands for managing members in `SLAM`.
 ## 9. Command Summary
 
 ### General commands
-| Command                   | Format                                              |
+
+| **Command**               | **Format**                                          |
 |---------------------------|-----------------------------------------------------|
 | Display user manual       | `help`                                              |
 | List events/members/tasks | For events: `list`<br />For tasks: `list EVENT_INDEX -t`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
 | Exit program              | `bye`                                               |
 
 ### Event commands
-| Command               | Format                                              |
+
+| **Command**           | **Format**                                          |
 |-----------------------|-----------------------------------------------------|
 | Add an event          | `add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET` |
 | Delete an event       | `delete -e INDEX`                                   |
@@ -491,7 +493,8 @@ This section contains the available commands for managing members in `SLAM`.
 | Un-mark event as done | `undo -e INDEX`                                     |
 
 ### Task commands
-| Command               | Format                        |
+
+| **Command**           | **Format**                    |
 |-----------------------|-------------------------------|
 | Add a task            | `add -t n/TITLE d/dd-MM-yyyy` |
 | Delete a task         | `delete -t INDEX`             | 
@@ -500,7 +503,8 @@ This section contains the available commands for managing members in `SLAM`.
 | Un-mark a task as done| `undo -t INDEX`               |
 
 ### Member commands
-| Command         | Format                  |
+
+| **Command**     | **Format**              |
 |-----------------|-------------------------|
 | Add a member    | `add -m MEMBER_NAME`    | 
 | Delete a member | `delete -m MEMBER_NAME` |
