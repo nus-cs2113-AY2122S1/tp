@@ -47,7 +47,6 @@ public class WordLimitGame extends Game {
     @Override
     public void runGame() {
         game();
-        gameSummary();
     }
 
     public int getTotalSentence() {
