@@ -485,6 +485,6 @@ View a contact| `view <INDEX>` | `view 2`
 Edit a contact| `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `edit 1 -e john.doe@email.com` <br />`edit 0 -n Tan -g tanned -te tantan`<br />
 Delete contact fields| `<rm <INDEX> {-g} {-l} {-te} {-tw} {-e}>` | `<rm 3 -g -te -l -e>`
 Delete a contact | `rm <INDEX>` | `rm 1`
-Search for a contact| <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} <QUERY></code> | `search Ashraf` <br />`search -g revflash`<br/>
+Search for a contact| <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} &#60;QUERY&#62;</code> | `search Ashraf` <br />`search -g revflash`<br/>
 Import contacts from .txt file|`import` | `import`
 Exit ConTech | `exit` | `exit`
