@@ -26,6 +26,7 @@ public class Trip {
     private String repaymentCurrencySymbol = "$";
     private String location;
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final int ISO_LENGTH = 3;
 
     /**
      * Empty {@link Trip} constructor (included for legacy test support).
@@ -176,12 +177,6 @@ public class Trip {
         }
     }
 
-    /**
-     * Checks if the user-entered date can be parsed into a {@link LocalDate} object.
-     *
-     * @param inputDate user-entered date as a {@link String}.
-     * @return whether the user input can be parsed into a {@link LocalDate} object.
-     */
     private boolean isDateValid(String inputDate) {
         try {
             LocalDate.parse(inputDate, inputPattern);
@@ -198,7 +193,7 @@ public class Trip {
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
-        double totalRepaymentAmountSpent = 0;
+        double totalAmountSpentInLocalCurrency = 0;
         Trip currTrip = Storage.getOpenTrip();
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
@@ -217,22 +212,34 @@ public class Trip {
                 }
             }
         }
-        // To resolve rounding error
-        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
-            totalRepaymentAmountSpent += Storage.formatRepaymentMoneyDouble(
-                    set.getValue() / currTrip.getExchangeRate());
-        }
+        totalAmountSpentInLocalCurrency = roundToLocal(totalAmountSpentInLocalCurrency, currTrip, categoriesSplit);
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
                 + " (" + currTrip.getRepaymentCurrency() + " "
                 //+ currTrip.getRepaymentCurrencySymbol()
-                + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
+                + String.format(currTrip.getRepaymentCurrencyFormat(), totalAmountSpentInLocalCurrency) + ") on "
                 + expensesInvolved
                 + " expenses on the following categories:");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
                     + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");
         }
+    }
+
+    /**
+     * Helper method for getIndividualExpenseSummary() method.
+     * Returns the rounded and formatted total repayment amount spent.
+     * @param totalAmount the amount before rounding
+     * @param currTrip the Trip the user is in/computing
+     * @param categoriesSplit the HashMap containing the category and the amount spent on said category
+     * @return a rounded and formatted value for amount spent in local currency
+     */
+    private double roundToLocal(double totalAmount, Trip currTrip, HashMap<String, Double> categoriesSplit) {
+        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
+            totalAmount += Storage.formatRepaymentMoneyDouble(
+                    set.getValue() / currTrip.getExchangeRate());
+        }
+        return totalAmount;
     }
 
     /**
@@ -323,7 +330,7 @@ public class Trip {
     //@@author itsleeqian
     public void setForeignCurrency(String foreignCurrency) {
         try {
-            if (isNumeric(foreignCurrency) || foreignCurrency.length() != 3) {
+            if (isNumeric(foreignCurrency) || foreignCurrency.length() != ISO_LENGTH) {
                 throw new NumberFormatException();
             }
             this.foreignCurrency = foreignCurrency;

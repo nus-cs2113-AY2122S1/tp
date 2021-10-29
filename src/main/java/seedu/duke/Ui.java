@@ -223,7 +223,10 @@ public class Ui {
     }
 
     public static void invalidArgForAmount() {
-        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
+        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. "
+                + System.lineSeparator()
+                + "Please format as follows: "
+                + "amount [person].");
         System.out.println("These are the people involved in this trip:");
         Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
         System.out.println();
