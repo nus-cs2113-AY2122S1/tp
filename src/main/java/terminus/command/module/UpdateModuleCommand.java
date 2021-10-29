@@ -14,6 +14,8 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class UpdateModuleCommand extends Command {
 
@@ -60,7 +62,7 @@ public class UpdateModuleCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
@@ -71,10 +73,11 @@ public class UpdateModuleCommand extends Command {
         assert index > 0;
         String oldName = listOfModule[index - 1];
         NusModule current = moduleManager.getModule(listOfModule[index - 1]);
-        ModuleStorage.getInstance().updateModuleDirectory(oldName, newName);
         moduleManager.removeModule(listOfModule[index - 1]);
         moduleManager.setModule(newName, current);
-        return new CommandResult(
-            String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName));
+        String message = String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName);
+        CommandResult result = new CommandResult(newName, StorageActionEnum.UPDATE, StorageTypeEnum.FOLDER, message);
+        result.setDeletedItemName(listOfModule[index - 1]);
+        return result;
     }
 }

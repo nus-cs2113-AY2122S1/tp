@@ -11,6 +11,8 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class DeleteModuleCommand extends Command {
 
@@ -61,11 +63,10 @@ public class DeleteModuleCommand extends Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException when files to be deleted is inaccessible (e.g. file is locked by OS).
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(itemNumber, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
@@ -73,12 +74,11 @@ public class DeleteModuleCommand extends Command {
         assert itemNumber > 0;
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
 
-        // Delete all files and then its folder
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule(listOfModule[itemNumber - 1]);
-
         String message = String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE, listOfModule[itemNumber - 1]);
-        return new CommandResult(message);
+        CommandResult result = new CommandResult(null, StorageActionEnum.DELETE,
+                StorageTypeEnum.FOLDER, message);
+        result.setDeletedItemName(listOfModule[itemNumber - 1]);
+        return result;
     }
 
 }

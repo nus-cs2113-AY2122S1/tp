@@ -105,4 +105,19 @@ public class Storage {
             throw new InvalidFileException(String.format(Messages.ERROR_GET_FILE_CONTENT, file.getAbsolutePath()));
         }
     }
+
+    public void renameFolder(Path oldPath, Path newPath) throws InvalidFileException {
+        if (Files.notExists(newPath) && Files.notExists(oldPath)) {
+            createFolder(newPath);
+        } else if (Files.exists(oldPath) && Files.notExists(newPath)) {
+            File oldFile = new File(oldPath.toString());
+            File newFile = new File(newPath.toString());
+            if (oldFile == null || newFile == null) {
+                throw new InvalidFileException(Messages.ERROR_CHANGE_FILE_NAME);
+            }
+            if (!oldFile.renameTo(newFile)) {
+                throw new InvalidFileException(Messages.ERROR_CHANGE_FILE_NAME);
+            }
+        }
+    }
 }
