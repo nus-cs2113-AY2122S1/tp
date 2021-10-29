@@ -55,9 +55,9 @@ One data field is represented in the following format: ```/PREFIX INFO```
 
 Data fields can be viewed as supporting documents to the main command to be executed.
 
-These fields are mandatory. Let's say a client is added without his **name**, or **contact details**. Having these empty
-fields reduces the utility of the program, since certain meaningful operations cannot be performed. Case in point, one
-will not be able to query the client by name.
+These fields are *mandatory*. Let's say a client is added without his **name**, or **contact details**. Having these
+empty fields reduces the utility of the program, since certain meaningful operations cannot be performed. Case in point,
+one will not be able to query the client by name.
 
 These fields paint a complete picture of the different data types. Intuitively, clients have *key information fields*
 such as **name**, **contact number** and **email**.
@@ -69,8 +69,8 @@ Examples of data fields in commands:
     * ```/cn CONTACT_NUMBER```
     * ```/m EMAIL```
 * Sort tours:
-    * ```/p``` - sorts tours by budget
-    * ```/d``` - sorts tours by departure date and time
+    * ```/p``` - sorts tours by *price*
+    * ```/d``` - sorts tours by *departure date and time*
 
 ## Features
 
@@ -86,7 +86,9 @@ entry.
 
 Format: ```add [DATA_TYPE] [DATA_FIELDS]```
 
-### Adding clients into the database: ```add -c```
+<br>
+
+### Adding clients into database: ```add -c```
 
 Format: ```add [DATA_TYPE] CLIENT_ID [DATA_FIELDS]```
 
@@ -94,27 +96,107 @@ These are your existing or potential customers. In this industry of tour plannin
 
 Mandatory data fields:
 
-* Client's name - ```/n NAME```
-* Client's contact number - ```/cn CONTACT_NUMBER```
-* Client's email address - ```/m EMAIL```
+* Client ID - ```CLIENT_ID```
+* Client name - ```/n NAME```
+* Client contact number - ```/cn CONTACT_NUMBER```
+* Client email address - ```/m EMAIL```
 
 :exclamation: Note that the given contact number must contain only numbers from 0 to 9, or TourPlanner will reject the
 entry.
 
-### Adding flights into the database: ```add -f```
+Example:
+
+* `add -c c001 /n Bo Tuan /cn 91234567 /m bobotea@gmail.com`
+
+Adds *Bo Tuan*, contact number *91234567* and email
+*bobotea@gmail.com*, as client ID *c001*.
+
+* `add -c c002 /n Wayne /m winnie@gmail.com /cn 92468024`
+
+Adds *Wayne*, contact number *92468024* and email
+*winnie@gmail.com*, as client ID *c002*.
+
+<br>
+
+### Adding flights into database: ```add -f```
 
 Format: ```add [DATA_TYPE] FLIGHT_ID [DATA_FIELDS]```
 
 Mandatory data fields:
 
-* Flight's departure destination - ```/d DEPARTURE_DESTINATION```
-* Flight's return destination - ```/r RETURN_DESTINATION```
-* Flight's departure date and time - ```/dd DEPARTURE_TIME```
-* Flight's return date and time - ```/rd RETURN_TIME```
+* Flight ID - ```FLIGHT_ID```
+* Flight departure destination - ```/d DEPARTURE_DESTINATION```
+* Flight return destination - ```/r RETURN_DESTINATION```
+* Flight departure date and time - ```/dd DEPARTURE_TIME```
+* Flight return date and time - ```/rd RETURN_TIME```
 
 :exclamation: Note that the given date and times should be of the format: ```d/M/yy HH:mm```
 
-(Please refer to <u>Introduction to Data Fields</u> on the purpose and syntax of ```DATA_FIELDS```)
+Example:
+
+* `add -t t001 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
+
+Add flights from _Singapore_ to _Japan_
+and back, departing from Singapore at _1pm, 29 Oct 2021_ and returning to Singapore at _5 Nov 2021, 2am_. Stored in the
+database as ID: _SQ-JPN1_.
+
+* `add -f SQ-KOR1 /d Korea /dd 2/5/22 11:00 /r Singapore /rd 15/5/22 23:00`
+
+Add flights from _Singapore_ to _Korea_
+and back, departing from Korea at _11am, 2 May 2022_ and returning to Singapore at _15 May 2022, 11pm_. Stored in the
+database as ID: _SQ-KOR1_.
+
+<br>
+
+### Adding tours into database: ```add -t```
+
+Format: ```add [DATA_TYPE] TOUR_ID [DATA_FIELDS]```
+
+Mandatory data fields:
+
+* Tour ID - ```TOUR_ID```
+* Tour name - ```/n DEPARTURE_DESTINATION```
+* Tour price - ```/p RETURN_DESTINATION```
+
+:exclamation: Note that the given price should be a numerical value.
+
+Example:
+
+* `add -t t001 /n AustralianRomance /p 1500`
+
+Adds _AustralianRomance_, which costs _$1500_, as tour _t001_.
+
+* `add -t t002 /p 2300 /n KoreanWonderland`
+
+Adds _KoreanWonderland_, which costs _$2300_, as tour _t002_.
+
+<br>
+
+### Adding ClientPackage into database: ```add -p```
+
+ClientPackage acts as a master list of details for each client, to have an overview of the client upon querying. Each
+package represents one client, with his or her respective tour and flight details.
+
+Format: ```add [DATA_TYPE] PACKAGE_ID [DATA_FIELDS]```
+
+Mandatory data fields:
+
+* Package ID - ```PACKAGE_ID```
+* Client ID - ```/c CLIENT_ID```
+* FLIGHT_ID - ```/f FLIGHT_ID```
+* Tour ID - ```/t TOUR_ID```
+
+:exclamation: Note that the respective client, flight and tour must **exist** in order for package to be added.
+
+Example:
+
+* `add -p p001 /c c001 /f SQ-JPN1 /t t001`
+
+Adds Client _c001_, Flight _SQ-JPN1_, and Tour _t001_ into an overall package _p001_.
+
+* `add -p p002 /c c002 /t t002 /f SQ-KOR1 `
+
+Adds Client _c002_, Flight _SQ-KOR1_, and Tour _t002_ into an overall package _p002_.
 
 <br>
 
