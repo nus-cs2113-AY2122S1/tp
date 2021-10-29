@@ -16,7 +16,8 @@ public class ShoppingListCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "shopping list";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out ingredients needed to buy to make recipe.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Parameters: r/RECIPE...\n"
+            + "Example: " + COMMAND_WORD + " r/Chicken Soup r/Pork Soup";
 
     public static final String MESSAGE_SHOW_SHOPPING_LIST = "Here is your shopping list!\n";
     public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
