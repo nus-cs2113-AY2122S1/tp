@@ -468,17 +468,17 @@ public class Ui {
         System.out.println(CONFIRM_CLEAR_ALL);
     }
 
-//    public void printAskNewNameDish(String dishName) {
-//        System.out.println("What would you like to change the Dish Name '"
-//                + dishName
-//                + "' to?");
-//    }
-//
-//    public void printAskNewNameDish(String dishName) {
-//        System.out.println("What would you like to change the Ingredient Name '"
-//                + dishName
-//                + "' to?");
-//    }
+    //    public void printAskNewNameDish(String dishName) {
+    //        System.out.println("What would you like to change the Dish Name '"
+    //                + dishName
+    //                + "' to?");
+    //    }
+    //
+    //    public void printAskNewNameDish(String dishName) {
+    //        System.out.println("What would you like to change the Ingredient Name '"
+    //                + dishName
+    //                + "' to?");
+    //    }
 
     public void printDishNameChanged(String dishName) {
         System.out.println("Dish Name has been updated to '"
@@ -500,7 +500,7 @@ public class Ui {
     }
 
     public void printIngrNameChanged(String ingrName) {
-        System.out.println(LINE_DIVIDER+ System.lineSeparator()
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Ingredient Name has been updated to '" + ingrName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
