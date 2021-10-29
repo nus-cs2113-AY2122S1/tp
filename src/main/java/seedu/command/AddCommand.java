@@ -48,16 +48,21 @@ public class AddCommand extends Command {
             TextUi.printAddMessage(moduleCode);
 
             Semester semesterData = module.getSemester(semester);
-            ArrayList<Lesson> lecture;
-            lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
+            try {
+                ArrayList<Lesson> lecture;
+                lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
+                lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
 
-            ArrayList<Lesson> tutorial;
-            tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
+                ArrayList<Lesson> tutorial;
+                tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
 
-            ArrayList<Lesson> laboratory;
-            laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
+                ArrayList<Lesson> laboratory;
+                laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
 
-            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
+                addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
+            } catch (AddException e) {
+                e.printMessage();
+            }
         } else if (getFlag() == AddFlag.EVENT) {
             String description = addUI.getReply(FIRST_QN).trim();
             if (isValidDescription(description)) {
@@ -90,7 +95,8 @@ public class AddCommand extends Command {
             }
 
             if (isEndBeforeStart(startTime, endTime)) {
-                throw new AddException("Invalid Input, End Time is earlier than Start Time");
+                throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
+                        + "All Events can only occur within a single day");
             }
 
             String location = addUI.getReply(FIFTH_QN).trim();
@@ -107,16 +113,36 @@ public class AddCommand extends Command {
         }
     }
 
-    public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) {
-        ArrayList<Lesson> completeList = new ArrayList<>();
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(lessonType)) {
-                completeList.add(lesson);
-            } else if (lessonType == LECTURE) {
-                if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
-                    completeList.add(lesson);
+    public ArrayList<Lesson> addRemainingLessons(ArrayList<Lesson> lessons,
+            ArrayList<Lesson> lecture) throws AddException {
+        try {
+            for (Lesson lesson : lessons) {
+                if (!lesson.getLessonType().equals(LECTURE) && !lesson.getLessonType().equals(TUTORIAL)
+                        && !lesson.getLessonType().equals(LAB)) {
+                    lecture.add(lesson);
                 }
             }
+        } catch (NullPointerException e) {
+            throw new AddException("Module has been added into timetable, module has no lesson");
+        }
+        Collections.sort(lecture, new ClassNumComparator());
+        return lecture;
+    }
+
+    public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) throws AddException {
+        ArrayList<Lesson> completeList = new ArrayList<>();
+        try {
+            for (Lesson lesson : lessons) {
+                if (lesson.getLessonType().equals(lessonType)) {
+                    completeList.add(lesson);
+                } else if (lessonType == LECTURE) {
+                    if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
+                        completeList.add(lesson);
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            throw new AddException("Module has been added into timetable, module has no lesson");
         }
         Collections.sort(completeList, new ClassNumComparator());
         return completeList;

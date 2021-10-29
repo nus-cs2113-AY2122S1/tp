@@ -28,7 +28,7 @@ public class Timetable implements Comparable<Timetable> {
     private int earliestHour;
     private int latestHour;
 
-    private boolean isEmpty = true;
+    private boolean isEmpty = false;
 
     private final ArrayList<TimetableUserItem> events = new ArrayList<>();
     private final ArrayList<Module> modules;
