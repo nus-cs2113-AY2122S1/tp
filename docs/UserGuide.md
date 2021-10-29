@@ -134,7 +134,7 @@ Mandatory data fields:
 
 Example:
 
-* `add -t t001 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
+* `add -f SQ-JPN1 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
 
 Add flights from _Singapore_ to _Japan_
 and back, departing from Singapore at _1pm, 29 Oct 2021_ and returning to Singapore at _5 Nov 2021, 2am_. Stored in the
@@ -183,7 +183,7 @@ Mandatory data fields:
 
 * Package ID - ```PACKAGE_ID```
 * Client ID - ```/c CLIENT_ID```
-* FLIGHT_ID - ```/f FLIGHT_ID```
+* Flight ID - ```/f FLIGHT_ID```
 * Tour ID - ```/t TOUR_ID```
 
 :exclamation: Note that the respective client, flight and tour must **exist** in order for package to be added.
