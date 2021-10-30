@@ -45,6 +45,12 @@ rectangle "Command" {
     }
 
     rectangle "Set Commands" {
+        rectangle SetIngredientsCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetStepsCommand LOGIC_RED_2 {
+        }
+
         rectangle SetCaloriesCommand LOGIC_RED_2 {
         }
 

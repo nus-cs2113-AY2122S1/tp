@@ -21,6 +21,7 @@ deactivate ":Parser"
 ":Parser" -> ":Recipe": Recipe(String name)
 activate ":Recipe"
 
+
 ' Ingredients
 ":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
 activate ":Parser"
@@ -39,6 +40,7 @@ activate ":Parser"
 loop for all steps
 ":Parser" -> ":Recipe": addStep(String step)
 
+
 end
 
 ":Parser" --> ":Parser"
@@ -46,6 +48,7 @@ deactivate ":Parser"
 
 ":Recipe" --> ":Parser":
 destroy ":Recipe"
+
 
 destroy ":Parser"
 
