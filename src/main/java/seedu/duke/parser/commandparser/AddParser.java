@@ -2,7 +2,6 @@ package seedu.duke.parser.commandparser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
@@ -84,6 +83,14 @@ public abstract class AddParser extends Parser {
                     + attributeFlag + attributeType.toUpperCase());
         }
 
+        return null;
+    }
+
+    private static String[] parseAddTask(String commandDetails) {
+        return null;
+    }
+
+    private static String[] parsedAddMember(String commandDetails) {
         return null;
     }
 }
