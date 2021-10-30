@@ -45,8 +45,20 @@ public class Messages {
     // Remove
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
     // Edit
-    public static final String EDIT_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_AUDIO_MESSAGE = "  (+) Edited audio item details:";
+    public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
+    public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
+    public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
     public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
+    public static final String KEY_TITLE = "t";
+    public static final String KEY_ID = "i";
+    public static final String KEY_ARTIST = "a";
+    public static final String KEY_DURATION = "d";
+    public static final String KEY_PUBLISHER = "p";
+    public static final String KEY_AUTHOR = "a";
+    public static final String KEY_EDITION = "e";
+
+
     // Invalid Formats
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm ID";
