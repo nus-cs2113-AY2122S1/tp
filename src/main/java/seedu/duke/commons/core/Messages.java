@@ -28,17 +28,20 @@ public final class Messages {
     public static final String ERROR_INVALID_DAY =
             "Sorry, the input parameter is not a valid day of the week.";
 
-    public static final String ERROR_INVALID_PRIORITY =
-            "Sorry, the input parameter is not a valid priority.";
-
     public static final String ERROR_INVALID_FLAG_SEQUENCE =
             "Sorry, the input flag sequence is invalid.";
 
     public static final String ERROR_INVALID_INDEX =
             "Sorry, the index is invalid.";
 
+    public static final String ERROR_INVALID_LINK =
+            "Sorry, the link is invalid.";
+
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";
+
+    public static final String ERROR_INVALID_PRIORITY =
+            "Sorry, the input parameter is not a valid priority.";
 
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";

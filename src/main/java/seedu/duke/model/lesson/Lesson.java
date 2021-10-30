@@ -1,5 +1,6 @@
 package seedu.duke.model.lesson;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,10 +9,17 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.commons.util.exceptions.InvalidLinkException;
 import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.util.LinkUtil.formatLink;
 
 //@@author Roycius
 public class Lesson {
+    private static final String LINUX_LAUNCH_COMMAND = "xdg-open ";
+    private static final String MAC_LAUNCH_COMMAND = "open ";
+    private static final String WINDOWS_LAUNCH_COMMAND = "rundll32 url.dll,FileProtocolHandler ";
+
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
@@ -46,6 +54,26 @@ public class Lesson {
         return meetingUrl;
     }
 
+    //@@author richwill28
+    public void launchUrl() throws InvalidLinkException, IOException {
+        Runtime rt = Runtime.getRuntime();
+        String os = System.getProperty("os.name").toLowerCase();
+
+        boolean isLinux = os.contains("nix") || os.contains("nux");
+        boolean isMac = os.contains("mac");
+        boolean isWindows = os.contains("win");
+
+        String url = formatLink(meetingUrl);
+        if (isLinux) {
+            rt.exec(LINUX_LAUNCH_COMMAND + url);
+        } else if (isMac) {
+            rt.exec(MAC_LAUNCH_COMMAND + url);
+        } else if (isWindows) {
+            rt.exec(WINDOWS_LAUNCH_COMMAND + url);
+        }
+    }
+
+    //@@author Roycius
     /**
      * Serializes the lesson data into the correct format for storage file.
      *
