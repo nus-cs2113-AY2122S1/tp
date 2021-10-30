@@ -9,12 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LessonTest {
     @Test
     public void launchUrl_emptyUrl_exceptionThrown() {
-        assertThrows(DukeException.class, () -> {
-            LessonList lessonList = new LessonList();
-            lessonList.addLesson(new Lesson("CS3243 Lecture", "Monday", "10:00 PM", "12:00 PM", " "));
-            lessonList.addLesson(new Lesson("CS1101S Lecture", "Wednesday", "10:00 PM", "12:00 PM", "-"));
-            lessonList.getLesson(1).launchUrl();
-            lessonList.getLesson(2).launchUrl();
-        });
+        LessonList lessonList = new LessonList();
+        lessonList.addLesson(new Lesson("CS3243 Lecture", "Monday", "10:00 PM", "12:00 PM", " "));
+        lessonList.addLesson(new Lesson("CS1101S Lecture", "Wednesday", "10:00 PM", "12:00 PM", "-"));
+
+        assertThrows(DukeException.class, () -> lessonList.getLesson(1).launchUrl());
+        assertThrows(DukeException.class, () -> lessonList.getLesson(2).launchUrl());
     }
 }
