@@ -224,6 +224,8 @@ public class Parser {
                 return prepareAddExpense(matcherWithoutDate);
             } else if (matcherWithDate.matches()) {
                 return prepareAddExpenseWithDate(matcherWithDate);
+            } else {
+                return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
             }
         case DELETE_EXPENSE_KEYWORD:
             return prepareDeleteExpense(arguments);
@@ -247,6 +249,8 @@ public class Parser {
                 return prepareAddIncome(matcherWithoutDate);
             } else if (matcherWithDate.matches()) {
                 return prepareAddIncomeWithDate(matcherWithDate);
+            } else {
+                return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
             }
         case DELETE_INCOME_KEYWORD:
             return prepareDeleteIncome(arguments);
