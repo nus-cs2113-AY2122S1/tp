@@ -1,7 +1,6 @@
 package seedu.traveller.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.traveller.commands.NewCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

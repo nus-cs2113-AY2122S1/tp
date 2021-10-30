@@ -25,21 +25,21 @@ import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.InvalidNumberOfDaysException;
-import seedu.traveller.exceptions.InvalidSearchFormatException;
 import seedu.traveller.exceptions.InvalidEditMapFormatException;
-import seedu.traveller.exceptions.CountryNotFoundException;
 import seedu.traveller.exceptions.DistanceNonNegativeException;
 import seedu.traveller.exceptions.DistanceNonStringException;
 import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
 import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
 
 import seedu.traveller.worldmap.WorldMap;
 import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -146,18 +146,13 @@ public class Parser {
         String rawDayNumber;
 
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
+            int timeIdx = getTimeFlagIndex(userInput);
+            int nameIdx = getNameFlagIndex(userInput);
+
             tripName = userInput.substring(0, dayIdx);
-
-            String timeSeparator = " /time ";
-            int timeIdx = userInput.indexOf(timeSeparator);
             rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, timeIdx);
-
-            String nameSeparator = " /name ";
-            int nameIdx = userInput.indexOf(nameSeparator);
             itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
-
             itemName = userInput.substring(nameIdx + NAME_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
@@ -180,16 +175,15 @@ public class Parser {
         logger.log(Level.INFO, "New command input");
         Command command;
         try {
-            String fromSeparator = " /from ";
-            String toSeparator = " /to ";
-            int fromIdx = userInput.indexOf(fromSeparator);
-            int toIdx = userInput.indexOf(toSeparator);
+            int fromIdx = getFromFlagIndex(userInput);
+            int toIdx = getToFlagIndex(userInput);
+
             String tripName = userInput.substring(0, fromIdx);
-            if (tripName.equals("all") || tripName.equals("")) {
-                throw new IllegalTripNameException(tripName);
-            }
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+
+            parseValidTripName(tripName);
+
             command = new NewCommand(tripName, startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Invalid new command format: " + userInput);
@@ -208,13 +202,15 @@ public class Parser {
         logger.log(Level.INFO, "Edit command input");
         Command command;
         try {
-            String fromSeparator = " /from ";
-            String toSeparator = " /to ";
-            int fromIdx = userInput.indexOf(fromSeparator);
-            int toIdx = userInput.indexOf(toSeparator);
+            int fromIdx = getFromFlagIndex(userInput);
+            int toIdx = getToFlagIndex(userInput);
+
             String tripName = userInput.substring(0, fromIdx);
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+
+            parseValidTripName(tripName);
+
             command = new EditCommand(tripName, startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidEditFormatException();
@@ -244,8 +240,8 @@ public class Parser {
         String rawDayIndex;
 
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
+
             tripName = userInput.substring(0, dayIdx);
             rawDayIndex = userInput.substring(dayIdx + DAY_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
@@ -272,14 +268,11 @@ public class Parser {
         String rawDayNumber;
         String rawItemNumber;
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
+            int itemIdx = getItemFlagIndex(userInput);
+
             tripName = userInput.substring(0, dayIdx);
-
-            String itemSeparator = " /item ";
-            int itemIdx = userInput.indexOf(itemSeparator);
             rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, itemIdx);
-
             rawItemNumber = userInput.substring(itemIdx + ITEM_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidDeleteItemFormatCommand();
@@ -303,14 +296,11 @@ public class Parser {
         String keyword;
 
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
+            int keywordIdx = getKeyFlagIndex(userInput);
+
             tripName = userInput.substring(0, dayIdx);
-
-            String keywordSeparator = " /key ";
-            int keywordIdx = userInput.indexOf(keywordSeparator);
             rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, keywordIdx);
-
             keyword = userInput.substring(keywordIdx + KEY_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchItemFormatException();
@@ -318,7 +308,7 @@ public class Parser {
         int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new SearchItemCommand(tripName, Integer.valueOf(dayIndex), keyword);
+        command = new SearchItemCommand(tripName, dayIndex, keyword);
 
         return command;
     }
@@ -334,20 +324,16 @@ public class Parser {
         String rawDayNumber;
 
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
             tripName = userInput.substring(0, dayIdx);
 
-            String timeSeparator = " /time ";
-            int timeIdx = userInput.indexOf(timeSeparator);
+            int timeIdx = getTimeFlagIndex(userInput);
             rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, timeIdx);
 
-            String nameSeparator = " /name ";
-            int nameIdx = userInput.indexOf(nameSeparator);
+            int nameIdx = getNameFlagIndex(userInput);
             itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
 
-            String indexSeparator = " /index ";
-            int indexIdx = userInput.indexOf(indexSeparator);
+            int indexIdx = getIndexFlagIndex(userInput);
             itemName = userInput.substring(nameIdx + NAME_LENGTH, indexIdx);
 
             rawIndex = userInput.substring(indexIdx + INDEX_LENGTH);
@@ -374,9 +360,12 @@ public class Parser {
      * Parses user input to give a <code>ViewCommand</code>.
      * @return Command A <code>ViewCommand</code> object.
      */
-    private static Command parseViewCommand(String userInput) {
+    private static Command parseViewCommand(String userInput) throws  TravellerException {
         Command command;
         logger.log(Level.INFO, "View command input");
+        if (Objects.equals(userInput, "")) {
+            throw new InvalidViewCommandException();
+        }
         command = new ViewCommand(userInput);
         return command;
     }
@@ -391,8 +380,7 @@ public class Parser {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
-            String toSeparator = " /to ";
-            int toIdx = userInput.indexOf(toSeparator);
+            int toIdx = getToFlagIndex(userInput);
             String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
@@ -417,8 +405,7 @@ public class Parser {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
-            String toSeparator = " /to ";
-            int toIdx = userInput.indexOf(toSeparator);
+            int toIdx = getToFlagIndex(userInput);
             String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
@@ -437,10 +424,9 @@ public class Parser {
         logger.log(Level.INFO, "Edit-map command input");
         Command command;
         try {
-            String toSeparator = " /to ";
-            String distSeparator = " /dist ";
-            int toIdx = userInput.indexOf(toSeparator);
-            int distIdx = userInput.indexOf(distSeparator);
+            int toIdx = getToFlagIndex(userInput);
+            int distIdx = getDistFlagIndex(userInput);
+
             String rawDist = userInput.substring(distIdx + DIST_LENGTH);
 
             try {
@@ -478,8 +464,7 @@ public class Parser {
         String rawDaysIndex = "";
 
         try {
-            String daySeparator = " /day ";
-            int dayIdx = userInput.indexOf(daySeparator);
+            int dayIdx = getDayFlagIndex(userInput);
             tripName = userInput.substring(0, dayIdx);
             rawDaysIndex = userInput.substring(dayIdx + DAY_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
@@ -530,6 +515,107 @@ public class Parser {
             throw new InvalidNumberOfDaysException(index);
         }
         return index;
+    }
+
+    /**
+     * Used to check if a user input value for the tripName field is valid.
+     * @param tripName TripName that user has entered.
+     * @throws TravellerException If <code>TripName</code> is not a valid <code>TripName</code>.
+     */
+    private static void parseValidTripName(String tripName) throws TravellerException {
+        if (tripName.equals("all") || tripName.equals("")) {
+            throw new IllegalTripNameException(tripName);
+        }
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /from flag.
+     * @return Starting index of /from flag.
+     */
+    private static int getFromFlagIndex(String userInput) {
+        String fromSeparator = " /from ";
+        return userInput.indexOf(fromSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /to flag.
+     * @return Starting index of /to flag.
+     */
+    private static int getToFlagIndex(String userInput) {
+        String toSeparator = " /to ";
+        return userInput.indexOf(toSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /day flag.
+     * @return Starting index of /day flag.
+     */
+    private static int getDayFlagIndex(String userInput) {
+        String daySeparator = " /day ";
+        return userInput.indexOf(daySeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /time flag.
+     * @return Starting index of /time flag.
+     */
+    private static int getTimeFlagIndex(String userInput) {
+        String timeSeparator = " /time ";
+        return userInput.indexOf(timeSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /name flag.
+     * @return Starting index of /name flag.
+     */
+    private static int getNameFlagIndex(String userInput) {
+        String nameSeparator = " /name ";
+        return userInput.indexOf(nameSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /item flag.
+     * @return Starting index of /item flag.
+     */
+    private static int getItemFlagIndex(String userInput) {
+        String itemSeparator = " /item ";
+        return userInput.indexOf(itemSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /key flag.
+     * @return Starting index of /key flag.
+     */
+    private static int getKeyFlagIndex(String userInput) {
+        String keywordSeparator = " /key ";
+        return userInput.indexOf(keywordSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /index flag.
+     * @return Starting index of /index flag.
+     */
+    private static int getIndexFlagIndex(String userInput) {
+        String indexSeparator = " /index ";
+        return userInput.indexOf(indexSeparator);
+    }
+
+    /**
+     * Used to parse flags in raw user input.
+     * @param userInput Input string which contains /dist flag.
+     * @return Starting index of /dist flag.
+     */
+    private static int getDistFlagIndex(String userInput) {
+        String distSeparator = " /dist ";
+        return userInput.indexOf(distSeparator);
     }
 }
 

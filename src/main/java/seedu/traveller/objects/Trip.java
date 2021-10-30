@@ -8,7 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
+/**
+ * Each TripsList will store an ArrayList of this class.
+ * Represents 1 trip plan created by the user.
+ */
 public class Trip {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final String tripName;
@@ -43,11 +46,11 @@ public class Trip {
     }
 
     public String getTripName() {
-        return this.tripName;
+        return tripName;
     }
 
     public String getStartCountryCode() {
-        return this.startCountryCode;
+        return startCountryCode;
     }
 
     public void setStartCountryCode(String startCountryCode) {
@@ -55,7 +58,7 @@ public class Trip {
     }
 
     public String getEndCountryCode() {
-        return this.endCountryCode;
+        return endCountryCode;
     }
 
     public void setEndCountryCode(String endCountryCode) {
@@ -63,7 +66,7 @@ public class Trip {
     }
 
     public List<Country> getPath() {
-        return this.path;
+        return path;
     }
 
     public void setPath(List<Country> path) {
@@ -71,7 +74,7 @@ public class Trip {
     }
 
     public List<Double> getDistances() {
-        return this.distances;
+        return distances;
     }
 
     public void setDistances(List<Double> distances) {

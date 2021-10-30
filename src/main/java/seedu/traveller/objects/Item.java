@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
 /**
  * Class for all items in an ItemsList.
  */

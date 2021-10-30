@@ -1,16 +1,14 @@
-package seedu.traveller;
+package seedu.traveller.objects;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.traveller.objects.Item;
+import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.objects.ItemsList;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class ItemsListTest {
@@ -66,10 +64,30 @@ public class ItemsListTest {
         itemsList.addItem(item3);
         itemsList.addItem(item4);
 
-        List<Item> ans = new ArrayList<>();
+        ArrayList<Item> ans = new ArrayList<>();
         ans.add(item2);
         ans.add(item4);
 
         assertEquals(ans.toString(), itemsList.searchItem("Collins").toString());
+    }
+
+    @Test
+    public void getItem_exceptionThrown() {
+        assertThrows(ItemNotFoundException.class, () -> {
+            itemsList.getItem(10);
+        });
+        assertThrows(ItemNotFoundException.class, () -> {
+            itemsList.getItem(-1);
+        });
+    }
+
+    @Test
+    public void deleteItem_exceptionThrown() {
+        assertThrows(ItemNotFoundException.class, () -> {
+            itemsList.deleteItem(10);
+        });
+        assertThrows(ItemNotFoundException.class, () -> {
+            itemsList.deleteItem(-1);
+        });
     }
 }
