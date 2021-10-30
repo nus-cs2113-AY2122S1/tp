@@ -28,6 +28,9 @@ public class Parser {
         case FIND:
             simplifiedUserResponse = removeFirstParam(userResponse, "find");
             return FindCommandParser.parse(simplifiedUserResponse);
+        case LAUNCH:
+            simplifiedUserResponse = removeFirstParam(userResponse, "launch");
+            return LaunchCommandParser.parse(simplifiedUserResponse);
         case LIST:
             simplifiedUserResponse = removeFirstParam(userResponse, "list");
             return ListCommandParser.parse(simplifiedUserResponse);

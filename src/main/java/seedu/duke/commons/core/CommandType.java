@@ -11,6 +11,7 @@ public enum CommandType {
     GRADE,
     HELP,
     INVALID,
+    LAUNCH,
     LESSON,
     LIST,
     MODULE,

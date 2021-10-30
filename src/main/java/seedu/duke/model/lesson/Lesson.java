@@ -1,5 +1,6 @@
 package seedu.duke.model.lesson;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,7 +9,13 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.util.LinkUtil.formatLink;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
 
 //@@author Roycius
 public class Lesson {
@@ -46,6 +53,37 @@ public class Lesson {
         return meetingUrl;
     }
 
+    //@@author richwill28
+    /**
+     * Launches meeting URL on the default browser.
+     *
+     * @throws IOException if an I/O error occurs while executing runtime command
+     */
+    public void launchUrl() throws EmptyLinkException, IOException {
+        boolean isEmptyUrl = meetingUrl.isBlank() || meetingUrl.equals("-");
+        if (isEmptyUrl) {
+            throw new EmptyLinkException(Messages.ERROR_EMPTY_MEETING_LINK);
+        }
+
+        Runtime rt = Runtime.getRuntime();
+        String os = System.getProperty("os.name").toLowerCase();
+
+        boolean isLinux = os.contains("nix") || os.contains("nux");
+        boolean isMac = os.contains("mac");
+        boolean isWindows = os.contains("win");
+
+        // Linux and Mac requires HTTPS prefix
+        String url = formatLink(meetingUrl);
+        if (isLinux) {
+            launchUrlOnLinux(rt, url);
+        } else if (isMac) {
+            launchUrlOnMac(rt, url);
+        } else if (isWindows) {
+            launchUrlOnWindows(rt, url);
+        }
+    }
+
+    //@@author Roycius
     /**
      * Serializes the lesson data into the correct format for storage file.
      *

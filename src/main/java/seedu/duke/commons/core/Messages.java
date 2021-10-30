@@ -19,6 +19,9 @@ public final class Messages {
     public static final String ERROR_DESERIALIZING_TASK =
             "Saved task data is invalid format. Ignoring the line..";
 
+    public static final String ERROR_EMPTY_MEETING_LINK =
+            "Sorry, no meeting link was provided.";
+
     public static final String ERROR_FILE_LOGGER =
             "Something went wrong with the file logger.";
 
@@ -28,9 +31,6 @@ public final class Messages {
     public static final String ERROR_INVALID_DAY =
             "Sorry, the input parameter is not a valid day of the week.";
 
-    public static final String ERROR_INVALID_PRIORITY =
-            "Sorry, the input parameter is not a valid priority.";
-
     public static final String ERROR_INVALID_FLAG_SEQUENCE =
             "Sorry, the input flag sequence is invalid.";
 
@@ -39,6 +39,9 @@ public final class Messages {
 
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";
+
+    public static final String ERROR_INVALID_PRIORITY =
+            "Sorry, the input parameter is not a valid priority.";
 
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";
