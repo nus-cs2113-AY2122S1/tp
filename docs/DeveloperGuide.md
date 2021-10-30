@@ -427,7 +427,10 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+The main value proposition of MediVault is such that it provides the user with an interface for efficient stock taking
+purposes. It eradicates the need for manual tracking of medications which will greatly lessen the administrative 
+workload of a pharmacist. It automates stock taking process to a certain extent because it is a 3 in 1 integrated 
+solution that provides real-time tracking of stock, prescriptions and orders in a pharmacy,  
 
 ## User Stories
 
@@ -444,7 +447,32 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Accessibility Requirements: MediVault should be able to run locally without internet connection.
+* Capacity Requirements: MediVault should try to store only important details to minimize data file size as there may be
+many data records after long usage. Perhaps could save into multiple files or archive data.
+* Compliance with regulations requirements: MediVault should comply with regulations related to storing of sensitive
+customer information.
+* Documentation Requirements: MediVault user guide should be documented in a way that a pharmacist without CLI
+experience can understand and learn how to use the application.
+* Efficiency Requirements: MediVault should make use of efficient data structures and algorithms where appropriate to 
+optimise speed if possible. However, it is not really a top priority.
+* Extensibility Requirements: MediVault should minimally manage medications. In the future can probably expand inventory
+to handle medical supplies in general.
+* Fault Tolerance Requirements: MediVault should perform sufficient error handling and provide helpful error response
+messages to suggest correct input to user. 
+* Interoperability Requirements: MediVault should be able to run on minimally Windows and Linux.
+* Privacy Requirements: MediVault may contain sensitive information such as customer health records. Thus, we should not 
+publish our data to the internet and only store it on our local computer.
+* Portability Requirements: MediVault should be able to run on any computer that has Java 11 and MediVault.jar. Data
+should also be portable such that we can easily transfer data when changing computers.
+* Reliability Requirements: MediVault should not crash at any point in time. Even if it does, it must retain data.
+* Response Time Requirements: MediVault basic operations should respond within 3 seconds. For other processing heavy
+operations such as start up and loading of data, it should respond within maximum of 15 seconds.
+* Robustness Requirements: MediVault should have some had some testing done be it JUnit Tests or automated I/O 
+redirection tests.
+* Scalability Requirements: MediVault should be built to handle amount of data a small to medium enterprise would have.
+* Stability Requirements: MediVault should function as per normal regardless of how many error user has made.
+* User Requirements: MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
 
 ## Instructions for manual testing
 
