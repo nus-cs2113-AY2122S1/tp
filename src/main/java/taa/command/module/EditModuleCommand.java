@@ -21,6 +21,7 @@ public class EditModuleCommand extends Command {
     private static final String MESSAGE_FORMAT_EDIT_MODULE_USAGE = "%s %s/<MODULE_CODE> "
         + "[%s/<NEW_MODULE_CODE>] [%s/<NEW_MODULE_NAME>]";
     private static final String MESSAGE_FORMAT_MODULE_EDITED = "Module edited:\n  %s";
+    private static final String MESSAGE_FORMAT_MODULE_EXISTS = "Module with code %s already exists.";
 
     public EditModuleCommand(String argument) {
         super(argument, EDIT_MODULE_ARGUMENT_KEYS);
@@ -56,6 +57,10 @@ public class EditModuleCommand extends Command {
         assert (argumentMap.containsKey(KEY_NEW_MODULE_CODE) || argumentMap.containsKey(KEY_NEW_MODULE_NAME));
         String newModuleCode = argumentMap.getOrDefault(KEY_NEW_MODULE_CODE, null);
         if (newModuleCode != null) {
+            if (moduleList.getModuleWithCode(newModuleCode) != null) {
+                throw new TaaException(String.format(MESSAGE_FORMAT_MODULE_EXISTS, newModuleCode));
+            }
+
             module.setCode(newModuleCode);
         }
 
