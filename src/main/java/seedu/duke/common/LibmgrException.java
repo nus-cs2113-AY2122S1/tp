@@ -1,5 +1,6 @@
 package seedu.duke.common;
 
+//@@author avellinwong01
 /**
  * Class that encapsulates an exception in libmgr.
  */
@@ -14,3 +15,4 @@ public class LibmgrException extends Exception {
         super(message);
     }
 }
+//@@author avellinwong01
