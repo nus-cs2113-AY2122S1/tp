@@ -59,7 +59,7 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
-        allRecordList.get(month).addBudget(spendingLimit, isLoadingStorage);
+        allRecordList.get(month).addBudget(spendingLimit);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }

@@ -11,7 +11,11 @@ public class AddBudgetCommand extends AddCommand {
     private final int month;
 
     public AddBudgetCommand(double amount, int month) {
-        this.amount = amount;
+        if (amount < 0.00) {
+            this.amount = 0.00;
+        } else {
+            this.amount = amount;
+        }
         this.month = month;
     }
 

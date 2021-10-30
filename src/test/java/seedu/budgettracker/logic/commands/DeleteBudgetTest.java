@@ -14,7 +14,7 @@ public class DeleteBudgetTest {
         int thisMonth = LocalDate.now().getMonthValue();
 
         RecordList currentBudgetList = new RecordList(thisMonth);
-        currentBudgetList.addBudget(08.00, false);
+        currentBudgetList.addBudget(08.00);
         currentBudgetList.deleteBudget();
         assertEquals(0.00, currentBudgetList.getBudget().getAmount());
     }

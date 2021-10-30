@@ -27,7 +27,7 @@ public class RecordList {
         loanRecords = new ArrayList<>();
     }
 
-    public void addBudget(double spendingLimit, boolean isLoadingStorage) {
+    public void addBudget(double spendingLimit) {
         budget.clearAmount();
         budget.setAmount(spendingLimit);
         assert budget.getAmount() == spendingLimit;

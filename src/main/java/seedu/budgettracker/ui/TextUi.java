@@ -35,7 +35,7 @@ public class TextUi {
 
     private static final String buffer = "     ";
     public static final int percentageRepresentedByEachBar = 5;
-
+    private static final String WARNING = "************************************************";
     private final Scanner in;
 
     public TextUi() {
@@ -96,6 +96,13 @@ public class TextUi {
                     + "\nDate: " + addedExpenditure.getDate()
                     + "\nCategory: " + addedExpenditure.getCategory());
 
+            if (addedExpenditure.getAmount() <= 0.00) {
+                System.out.println(WARNING);
+                System.out.println("You may have entered a negative amount or entered $0.00!");
+                System.out.println("Please make the necessary edit before continuing!");
+                System.out.println(WARNING);
+            }
+
             int month = addedExpenditure.getMonth();
             double amount = recordList.getBudget(month).getAmount();
             double totalSpending = 0.0;
@@ -135,6 +142,13 @@ public class TextUi {
                     + " for this month is successfully added!"
                     + LS
                     + DIVIDER);
+
+            if (amount <= 0.00) {
+                System.out.println(WARNING);
+                System.out.println("You may have entered a negative budget or entered $0.00!");
+                System.out.println("Please make the necessary edit before continuing!");
+                System.out.println(WARNING);
+            }
         }
     }
 
@@ -147,6 +161,13 @@ public class TextUi {
                     + "Date of loan: " + newLoan.getDate()
                     + LS
                     + DIVIDER);
+
+            if (newLoan.getAmount() <= 0.00) {
+                System.out.println(WARNING);
+                System.out.println("You may have entered a negative amount or entered $0.00!");
+                System.out.println("Please make the necessary edit before continuing!");
+                System.out.println(WARNING);
+            }
         }
     }
 
