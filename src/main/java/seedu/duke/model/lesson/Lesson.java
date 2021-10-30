@@ -13,13 +13,12 @@ import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.util.LinkUtil.formatLink;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
+import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
 
 //@@author Roycius
 public class Lesson {
-    private static final String LINUX_LAUNCH_COMMAND = "xdg-open ";
-    private static final String MAC_LAUNCH_COMMAND = "open ";
-    private static final String WINDOWS_LAUNCH_COMMAND = "rundll32 url.dll,FileProtocolHandler ";
-
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
@@ -76,11 +75,11 @@ public class Lesson {
         // Linux and Mac requires HTTPS prefix
         String url = formatLink(meetingUrl);
         if (isLinux) {
-            rt.exec(LINUX_LAUNCH_COMMAND + url);
+            launchUrlOnLinux(rt, url);
         } else if (isMac) {
-            rt.exec(MAC_LAUNCH_COMMAND + url);
+            launchUrlOnMac(rt, url);
         } else if (isWindows) {
-            rt.exec(WINDOWS_LAUNCH_COMMAND + url);
+            launchUrlOnWindows(rt, url);
         }
     }
 
