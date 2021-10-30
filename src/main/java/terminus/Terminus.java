@@ -89,7 +89,9 @@ public class Terminus {
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(moduleManager);
-                if (result.hasChange() && !storageManager.isDisabled()) {
+
+                // Perform related storage changes
+                if (result.hasChange()) {
                     // Pass to Storage to handle the request
                     String affectedModule = result.getModule();
                     StorageActionEnum storageAction = result.getStorageAction();
@@ -97,6 +99,7 @@ public class Terminus {
                     String deletedItemName = result.getDeletedItemName();
                     storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
                 }
+
                 boolean isExitCommand = result.isExit();
                 boolean isWorkspaceCommand = result.getNewCommandParser() != null;
                 if (isExitCommand) {
@@ -110,10 +113,12 @@ public class Terminus {
                     ui.printSection(result.getMessage());
                 }
 
+                // Update JSON File
                 TerminusLogger.info("Saving data into file...");
                 this.storageManager.execute(moduleManager, null,
                         null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
                 TerminusLogger.info("Save completed.");
+
             } catch (InvalidCommandException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
                 ui.printSection(e.getMessage());

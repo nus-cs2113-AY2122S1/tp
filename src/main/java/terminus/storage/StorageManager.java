@@ -15,6 +15,7 @@ public class StorageManager {
     private NoteStorage noteStorage;
     private FolderStorage folderStorage;
     private JsonStorage jsonStorage;
+    private PdfStorage pdfStorage;
     private Storage storage;
 
     public StorageManager(Path baseDirectory, String mainJsonFileName) {
@@ -22,6 +23,7 @@ public class StorageManager {
         this.noteStorage = new NoteStorage(baseDirectory);
         this.folderStorage = new FolderStorage(baseDirectory);
         this.jsonStorage = new JsonStorage(baseDirectory, mainJsonFileName);
+        this.pdfStorage = new PdfStorage(baseDirectory);
         this.storage = new Storage();
         this.isDisabled = false;
     }
@@ -29,6 +31,9 @@ public class StorageManager {
     public void execute(ModuleManager moduleManager, String module, String deletedItem, StorageActionEnum action,
             StorageTypeEnum type)
             throws InvalidFileException {
+        if (isDisabled) {
+            return;
+        }
         if (moduleManager == null) {
             throw new InvalidFileException(Messages.ERROR_MISSING_MODULE_MANAGER);
         }
@@ -43,6 +48,7 @@ public class StorageManager {
             noteStorage.execute(moduleManager, module, deletedItem, action);
             break;
         case PDF:
+            pdfStorage.execute(moduleManager, module, action);
             break;
         default:
             throw new InvalidFileException(Messages.ERROR_STORAGE_INVALID_TYPE);
@@ -77,15 +83,14 @@ public class StorageManager {
     }
 
     public void save(ModuleManager moduleManager) throws InvalidFileException {
+        if (isDisabled) {
+            return;
+        }
         if (moduleManager == null) {
             throw new InvalidFileException(Messages.ERROR_MISSING_MODULE_MANAGER);
         }
         jsonStorage.execute(moduleManager, StorageActionEnum.UPDATE);
         noteStorage.saveAllNotes(moduleManager);
-    }
-
-    public boolean isDisabled() {
-        return isDisabled;
     }
 
     public void setDisabled(boolean disabled) {

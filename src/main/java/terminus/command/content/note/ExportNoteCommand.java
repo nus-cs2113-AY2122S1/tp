@@ -13,6 +13,8 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class ExportNoteCommand extends Command {
 
@@ -43,19 +45,14 @@ public class ExportNoteCommand extends Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         TerminusLogger.info("Executing Export Note Command");
         assert getModuleName() != null;
-        ContentManager<Note> noteManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
 
-        ArrayList<Note> notes = noteManager.getContents();
-        ModuleStorage storage = ModuleStorage.getInstance();
-        storage.exportModuleNotes(getModuleName(), notes);
-        TerminusLogger.info("Exported Notes Successfully");
-        return new CommandResult(Messages.SUCCESSFUL_EXPORT);
+        String message = Messages.RESPONSE_EXPORT;
+        return new CommandResult(getModuleName(), StorageActionEnum.EXPORT, StorageTypeEnum.PDF, message);
     }
 }

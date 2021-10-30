@@ -27,7 +27,7 @@ public class Messages {
 
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
     public static final String CONTENT_MESSAGE_FOOTER =
-        "\nRerun the same command with an index behind to view the content.";
+            "\nRerun the same command with an index behind to view the content.";
     public static final String MESSAGE_RESPONSE_DELETE = "Your %s on '%s' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";
     public static final String MESSAGE_RESPONSE_MODULE_ADD = "Module %s has been added";
@@ -54,7 +54,7 @@ public class Messages {
             + "Please set schedules on separate days.";
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
     public static final String ERROR_MESSAGE_NO_QUESTIONS =
-        "There are no questions to be tested on. Type 'questions add' to get started";
+            "There are no questions to be tested on. Type 'questions add' to get started";
     public static final String ERROR_MESSAGE_INVALID_DURATION_FORMAT = "Invalid duration format.";
 
 
@@ -81,13 +81,14 @@ public class Messages {
     public static final String ERROR_MISSING_MODULE_MANAGER = "Error: Module Manager cannot be null.";
     public static final String ERROR_FILE_FOLDER_MISMATCH = "Error file was detected as folder : %s";
     public static final String ERROR_MISSING_FOLDER = "Unable to find folder : %s";
+    public static final String ERROR_MISSING_FILE = "Unable to find file : %s";
     public static final String ERROR_GET_FILES = "Unable to get files from folder : %s";
     public static final String ERROR_GET_FILE_CONTENT = "Unable to get file content type : %s";
     public static final String ERROR_STORAGE_DISABLE_RESPONSE = "We have detect an issue with storage, we will be "
             + "disabling the storage temporary until the TermiNUS exit where we will attempt to save your data 1 last"
             + " time.";
     public static final String ERROR_FILE_BUFFERED_READER = "Unable to collect file contents : %s";
-
+    public static final String ERROR_EXPORT_MISSING_NOTE = "There are no notes to export.";
 
     /*
      * Banners
@@ -110,17 +111,17 @@ public class Messages {
      * Active Recall
      */
     public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE =
-        "When you are ready, press [Enter] to continue.";
+            "When you are ready, press [Enter] to continue.";
     public static final String[] ACTIVE_RECALL_SESSION_END_MESSAGE = {"This training session has ended.",
-        "Returning you back to main program."};
+            "Returning you back to main program."};
     public static final String[] ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE = {"",
-        "How did you find the question? (Compare against past attempts if any)",
-        "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
+            "How did you find the question? (Compare against past attempts if any)",
+            "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
 
     /*
      * Notes Export
      */
-    public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
+    public static final String RESPONSE_EXPORT = "Exporting notes... Check the data folder.";
     public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";
     public static final String UPDATE_MODULE_RESPONSE_MESSAGE = "Updated %s to %s successfully.";
     public static final String MESSAGE_COMMAND_GO = "Go to a specific module's workspace";
