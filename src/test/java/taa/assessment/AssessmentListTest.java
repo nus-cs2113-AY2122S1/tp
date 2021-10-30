@@ -109,7 +109,7 @@ class AssessmentListTest {
         command3.checkArgument();
         command3.execute(classList, ui, storage);
         Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
-            .getAssessment("midterms");
+            .getAssessment("finals");
         assertEquals("finals", assessment.getName());
 
         String editAssessment2 = "edit_assessment c/cs2113t-f12 n/finals m/100";
