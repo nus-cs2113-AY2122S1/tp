@@ -34,9 +34,12 @@ public abstract class Parser {
 
     public static Command parseCommand(String response) throws DukeException {
         // Trim and split response using first detected occurrence of whitespace(s) to get type of command requested
-        String[] command = response.trim().split(" +", 1);
+        String[] command = response.trim().split(" +");
+
+        // TODO: Once parser is restructured, replace above with following two lines
+        //String[] command = response.trim().split(" +");
+        //String commandDetails = command[1];
         String commandType = command[0];
-        String commandDetails = command[1];
 
         switch (commandType) {
         case "list":
