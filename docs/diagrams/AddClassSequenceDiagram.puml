@@ -32,6 +32,8 @@ deactivate storage
 
 addClassCommand --> taa
 deactivate addClassCommand
+taa -[hidden]-> addClassCommand
+destroy addClassCommand
 
 taa --> user
 deactivate taa
