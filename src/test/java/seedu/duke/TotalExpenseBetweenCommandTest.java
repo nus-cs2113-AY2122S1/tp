@@ -28,8 +28,8 @@ public class TotalExpenseBetweenCommandTest {
 
     @Test
     public void execute_twoValidDateInputs_TotalSumZero() {
-        LocalDate startDate = LocalDate.parse("28/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate startDate = LocalDate.parse("30/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate endDate = LocalDate.parse("31/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         Expense testExpense1 = new Expense("Salary", 400.00, ExpenseCategory.FOOD);
         Expense testExpense2 = new Expense("Allowance", 400.00, ExpenseCategory.MISC);

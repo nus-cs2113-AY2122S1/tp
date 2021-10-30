@@ -450,13 +450,17 @@ Your current balance is: $-87654891720.20
 
 ### Show total expense between 2 dates: `btw_ex`
 
-This shows the total expense you had accumulated during a given time period.
-This is great for checking weekly or monthly expenses!
+This shows the total expense you had accumulated between a given time period.
+This is great for checking your weekly or monthly expenses!
 
 Format: `btw_ex s/START_DATE e/END_DATE`
 
+- `START_DATE` & `END_DATE` must be in the DD-MM-YYYY format.
+- `START_DATE` & `END_DATE` have to be valid and non-empty
+
 Examples:
-- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.
+- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between and inclusive of 
+  the given dates.
 <details>
 <summary> Expected output in run window </summary>
 <br>
@@ -473,16 +477,17 @@ Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 
 ### Show total income between 2 dates: `btw_in`
 
-This shows the total income you had accumulated during a given time period.
-This is great for checking weekly or monthly income!
+This shows the total income you have accumulated between a given time period.
+This is great for checking your weekly or monthly income!
 
 Format: `btw_in s/START_DATE e/END_DATE`
 
-- `START_DATE` & `END_DATE` are of the form YYYY-MM-DD
+- `START_DATE` & `END_DATE` must be in the DD-MM-YYYY format.
 - `START_DATE` & `END_DATE` have to be valid and non-empty
 
 Examples: 
-<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.</li></ul>
+<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the sum of all income entries between and inclusive of
+the given dates.</li></ul>
 <details>
 <summary> Expected output in run window </summary>
 <br>
