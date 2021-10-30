@@ -43,14 +43,16 @@ public class ExportNoteCommand extends Command {
      *
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     @Override
-    public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException {
         TerminusLogger.info("Executing Export Note Command");
         assert getModuleName() != null;
+        ContentManager noteContentManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
+        if (noteContentManager.getTotalContents() < 1) {
+            throw new InvalidArgumentException(Messages.ERROR_EXPORT_MISSING_NOTE);
+        }
 
         String message = Messages.RESPONSE_EXPORT;
         return new CommandResult(getModuleName(), StorageActionEnum.EXPORT, StorageTypeEnum.PDF, message);

@@ -56,15 +56,6 @@ public class PdfStorage extends Storage {
                     .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
             Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
             tempDocument.open();
-            if (noteArrayList.isEmpty()) {
-                Paragraph title = new Paragraph(NO_DATA, header);
-                Paragraph content = new Paragraph(NO_DATA, text);
-                tempDocument.add(title);
-                tempDocument.add(content);
-                tempDocument.close();
-                writer.close();
-                return;
-            }
             for (Note note : noteArrayList) {
                 Paragraph title = new Paragraph(note.getName(), header);
                 Paragraph content = new Paragraph(note.getData(), text);
