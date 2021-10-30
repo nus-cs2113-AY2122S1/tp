@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
+import seedu.commands.expense.AddExpenseCommand;
 import seedu.commands.general.CurrencyType;
+import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.income.DeleteIncomeCommand;
 import seedu.commands.general.HelpCommand;
 import seedu.commands.InvalidCommand;
@@ -285,5 +287,21 @@ public class ParserTest {
         Parser parser = new Parser();
         CurrencyType currency = parser.convertDataToCurrencySetting(testData);
         assertEquals(currency.toString(), "SGD");
+    }
+    
+    @Test
+    public void addExpenseWithDate_validInput_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_ex d/asf a/10 c/food da/11/11/2021";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddExpenseCommand.class);
+    }
+
+    @Test
+    public void addIncomeWithDate_validInput_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_in d/asf a/10 c/salary da/11/11/2021";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddIncomeCommand.class);
     }
 }

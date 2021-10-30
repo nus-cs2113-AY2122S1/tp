@@ -389,6 +389,7 @@ public class Parser {
             String expenseDescription = extractExpenseDescription(matcher);
             ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
             Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
+            assert !expenseCategory.equals(ExpenseCategory.NULL);
             return new AddExpenseCommand(expense);
         } catch (InputException e) {
             return new InvalidCommand(e.getMessage());
@@ -402,6 +403,7 @@ public class Parser {
             ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
             LocalDate expenseDate = extractExpenseDate(matcher);
             Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
+            assert !expenseCategory.equals(ExpenseCategory.NULL);
             return new AddExpenseCommand(expense);
         } catch (InputException e) {
             return new InvalidCommand(e.getMessage());
@@ -456,6 +458,7 @@ public class Parser {
             String incomeDescription = extractIncomeDescription(matcher);
             IncomeCategory incomeCategory = extractIncomeCategory(matcher);
             Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
+            assert !incomeCategory.equals(IncomeCategory.NULL);
             return new AddIncomeCommand(income);
         } catch (InputException e) {
             return new InvalidCommand(e.getMessage());
@@ -469,6 +472,7 @@ public class Parser {
             IncomeCategory incomeCategory = extractIncomeCategory(matcher);
             LocalDate incomeDate = extractIncomeDate(matcher);
             Income income = new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
+            assert !incomeCategory.equals(IncomeCategory.NULL);
             return new AddIncomeCommand(income);
         } catch (InputException e) {
             return new InvalidCommand(e.getMessage());
