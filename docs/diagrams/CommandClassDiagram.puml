@@ -2,6 +2,7 @@
 'https://plantuml.com/class-diagram
 
 !include style.puml
+!define ABSTRACT &#123;abstract&#125;
 
 ' hide the circles in the diagram
 hide circle
@@ -42,7 +43,7 @@ package Inventory <<Rectangle>> COLOR_INVENTORY_BOX {
 
 class Command {
     #parameters: LinkedHashMap<String, String>
-    +execute(): void{abstract}
+    +execute(): void ABSTRACT
 }
 
 class AddPrescriptionCommand {
