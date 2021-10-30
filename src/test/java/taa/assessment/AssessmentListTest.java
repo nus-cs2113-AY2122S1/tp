@@ -27,15 +27,17 @@ class AssessmentListTest {
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t_f12 n/software engineering (class-f12)";
-        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
         Command command1 = Parser.parseUserInput(classInput);
         command1.parseArgument();
         command1.checkArgument();
         command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
+
         assertEquals("Midterms", classList.getClassWithId("cs2113t_f12")
                 .getAssessmentList().getAssessment("Midterms").getName());
         assertEquals(50, classList.getClassWithId("cs2113t_f12")
@@ -49,6 +51,7 @@ class AssessmentListTest {
         AssessmentList assessments = new AssessmentList();
         assessments.addAssessment(new Assessment("Midterms", 50, 20));
         Assessment assessment = assessments.deleteAssessment("Midterms");
+
         assertEquals("Midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());
@@ -60,20 +63,23 @@ class AssessmentListTest {
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t_f12 n/software engineering (F_12)";
-        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
-        String deleteAssessmentInput = "delete_assessment c/cs2113t_f12 n/Midterms";
         Command command1 = Parser.parseUserInput(classInput);
         command1.parseArgument();
         command1.checkArgument();
         command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
+
+        String deleteAssessmentInput = "delete_assessment c/cs2113t_f12 n/Midterms";
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
         command3.parseArgument();
         command3.checkArgument();
         command3.execute(classList, ui, storage);
+
         assertEquals(
                 new AssessmentList().getSize(),
                 classList.getClassWithId("cs2113t_f12").getAssessmentList().getSize()
@@ -86,40 +92,46 @@ class AssessmentListTest {
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
-        String assessmentInput = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
-        String editAssessment1 = "edit_assessment c/cs2113t-f12 n/midterms nn/finals";
         Command command1 = Parser.parseUserInput(classInput);
         command1.parseArgument();
         command1.checkArgument();
         command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
         Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
                 .getAssessment("midterms");
+
+        String editAssessment1 = "edit_assessment c/cs2113t-f12 n/midterms nn/finals";
         Command command3 = Parser.parseUserInput(editAssessment1);
         command3.parseArgument();
         command3.checkArgument();
         command3.execute(classList, ui, storage);
         assertEquals("finals", assessment.getName());
+
         String editAssessment2 = "edit_assessment c/cs2113t-f12 n/finals m/100";
         Command command4 = Parser.parseUserInput(editAssessment2);
         command4.parseArgument();
         command4.checkArgument();
         command4.execute(classList, ui, storage);
         assertEquals(100, assessment.getMaximumMarks());
+
         String editAssessment3 = "edit_assessment c/cs2113t-f12 n/finals w/50";
         Command command5 = Parser.parseUserInput(editAssessment3);
         command5.parseArgument();
         command5.checkArgument();
         command5.execute(classList, ui, storage);
         assertEquals(50, assessment.getWeightage());
+
         String editAssessment4 = "edit_assessment c/cs2113t-f12 n/finals nn/midterms m/50 w/20";
         Command command6 = Parser.parseUserInput(editAssessment4);
         command6.parseArgument();
         command6.checkArgument();
         command6.execute(classList, ui, storage);
+        
         assertEquals("midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());
