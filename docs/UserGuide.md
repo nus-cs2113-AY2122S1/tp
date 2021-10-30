@@ -186,7 +186,7 @@ Expected Output:
 ```
 
 ### Search item by status
-Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
+Search items by status (input keyword must be one of AVAILABLE, LOANED, RESERVED)
 
 Format: `search s/STATUS`
 

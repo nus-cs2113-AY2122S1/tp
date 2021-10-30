@@ -21,7 +21,27 @@ public class Messages {
     public static final String EXIT_MESSAGE = "See you soon!";
     public static final String INVALID_VALUES = "  (!) Invalid/missing values";
     // Help
-    public static final String HELP_MESSAGE = "";
+    public static final String HELP_MESSAGE
+            = "  ** Words in `UPPER_CASE` are parameters to be supplied by the user." + System.lineSeparator()
+            + "  ** Parameters can be in any order" + System.lineSeparator()
+            + "  ** Parameters must be separated with a space" + System.lineSeparator()
+            + "  Add a new audio item: add a t/TITLE i/ID a/ARTIST d/DURATION" + System.lineSeparator()
+            + "  Add a new book item: add b t/TITLE i/ID a/AUTHOR" + System.lineSeparator()
+            + "  Add a new magazine item: add m t/TITLE i/ID p/PUBLISHER e/EDITION" + System.lineSeparator()
+            + "  Add a new video item: add v t/TITLE i/ID p/PUBLISHER e/DURATION" + System.lineSeparator()
+            + "  List out all items: list" + System.lineSeparator()
+            + "  List out loaned items due today: deadline today" + System.lineSeparator()
+            + "  List out overdue items: deadline overdue" + System.lineSeparator()
+            + "  Search items by ID: search i/ID" + System.lineSeparator()
+            + "  Search items by title/part of title: search t/TITLE" + System.lineSeparator()
+            + "  Search items by status: search s/STATUS" + System.lineSeparator()
+            + "  Reserve an item: res i/ID u/USERNAME" + System.lineSeparator()
+            + "  Unreserve an item: unres ID" + System.lineSeparator()
+            + "  Loan out an item: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)" + System.lineSeparator()
+            + "  Return a loaned item: return ID" + System.lineSeparator()
+            + "  Edit details of an existing item: edit ID MARKER/new attribute" + System.lineSeparator()
+            + "  Remove an existing item: rm ID" + System.lineSeparator()
+            + "  Exits the program: exit";
 
     // Add Commands
 
