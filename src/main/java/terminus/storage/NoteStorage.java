@@ -11,6 +11,9 @@ import terminus.content.Note;
 import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 
+/**
+ * NoteStorage class to handle any note related file operations.
+ */
 public class NoteStorage extends Storage {
 
     private Path baseDirectory;
@@ -21,6 +24,15 @@ public class NoteStorage extends Storage {
         this.baseDirectory = baseDirectory;
     }
 
+    /**
+     * Executes the specified operation with the given arguments.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The related module name for the note.
+     * @param deletedNote The deleted note name.
+     * @param action The operation type to determine which operation to execute.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void execute(ModuleManager moduleManager, String module, String deletedNote, StorageActionEnum action)
             throws InvalidFileException {
         switch (action) {
@@ -38,6 +50,13 @@ public class NoteStorage extends Storage {
         }
     }
 
+    /**
+     * Creates a note file.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The folder name where the note file should be stored in.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void createNoteFile(ModuleManager moduleManager, String module) throws InvalidFileException {
         createFolder(baseDirectory);
         Path moduleFolder = getAppendPath(baseDirectory, module);
@@ -48,6 +67,13 @@ public class NoteStorage extends Storage {
         writeFile(noteFilePath, note.getData());
     }
 
+    /**
+     * Deletes the note file given by its name.
+     *
+     * @param module The folder name where the note file should be deleted from.
+     * @param deletedNoteName The name of the file to be deleted.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void removeNoteFile(String module, String deletedNoteName) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, module);
         Path noteFilePath = getAppendPath(moduleFolder, appendFileExtension(deletedNoteName));
@@ -57,6 +83,13 @@ public class NoteStorage extends Storage {
         delete(noteFilePath);
     }
 
+    /**
+     * Loads all note contents from the given module folder into ModuleManager.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The folder name where the all note files in it should be loaded from.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void loadNoteIntoModuleManager(ModuleManager moduleManager, String module) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, module);
         File[] listOfNoteFiles = getListOfFiles(moduleFolder);
@@ -79,6 +112,12 @@ public class NoteStorage extends Storage {
         }
     }
 
+    /**
+     * Saves all notes from the ModuleManager into their respective module folder.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void saveAllNotes(ModuleManager moduleManager) throws InvalidFileException {
         for (String module : moduleManager.getAllModules()) {
             Path moduleFolder = getAppendPath(baseDirectory, module);
@@ -92,10 +131,22 @@ public class NoteStorage extends Storage {
         }
     }
 
+    /**
+     * Appends the text file extension to the given string.
+     *
+     * @param name The filename without the extension.
+     * @return The complete filename with the extension of a text file.
+     */
     private String appendFileExtension(String name) {
         return name + FILE_EXTENSION;
     }
 
+    /**
+     * Checks if the file is a text file.
+     *
+     * @param file The given file to be tested on.
+     * @return True if the given file is a text file, false otherwise.
+     */
     private boolean isValidTextFile(File file) {
         try {
             String contentType = getFileType(file);

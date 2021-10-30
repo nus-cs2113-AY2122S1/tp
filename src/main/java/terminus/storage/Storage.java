@@ -12,8 +12,17 @@ import java.util.Comparator;
 import terminus.common.Messages;
 import terminus.exception.InvalidFileException;
 
+/**
+ * Storage class to handle any filo I/O operations.
+ */
 public class Storage {
 
+    /**
+     * Creates a folder given by its folder path.
+     *
+     * @param folderPath The full path of the folder to be created.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void createFolder(Path folderPath) throws InvalidFileException {
         try {
             if (Files.notExists(folderPath)) {
@@ -29,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file given by its file path.
+     *
+     * @param filePath The full path of the file to be created.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void createFile(Path filePath) throws InvalidFileException {
         try {
             if (Files.notExists(filePath)) {
@@ -44,6 +59,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the contents of the given file by its file path.
+     *
+     * @param filePath The full path of the file to be read.
+     * @return The string contents of the file to be read.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public String readFile(Path filePath) throws InvalidFileException {
         try {
             return Files.readString(filePath);
@@ -56,6 +78,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes content into the given file by its file path.
+     *
+     * @param filePath The full path of the file to be written.
+     * @param data The content to be written into the given file.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void writeFile(Path filePath, String data) throws InvalidFileException {
         if (data == null) {
             throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_WRITE_DATA_NULL, filePath));
@@ -69,6 +98,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Delete a file or folder given by their file path.
+     *
+     * @param filePath The full path of the file / folder to be deleted.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void delete(Path filePath) throws InvalidFileException {
         try {
             Files.deleteIfExists(filePath);
@@ -81,6 +116,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Cleans all files and folders within the given file path and deletes itself after.
+     *
+     * @param filePath The full path of the folder to be cleaned.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void cleanAllFilesInclusive(Path filePath) throws InvalidFileException {
         File file = new File(filePath.toString());
         try {
@@ -98,10 +139,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends the path of the folder the item is in to itself.
+     *
+     * @param corePath The base folder in which the item is in.
+     * @param path The file name of the item.
+     * @return The full path of the given path.
+     */
     public Path getAppendPath(Path corePath, String path) {
         return Paths.get(corePath.toString(), path);
     }
 
+    /**
+     * Gets a list of files within a folder by its folder path.
+     *
+     * @param folderPath The full path of the folder where all files within it is retrieved.
+     * @return A list of all files within the given folder.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public File[] getListOfFiles(Path folderPath) throws InvalidFileException {
         File folder = new File(folderPath.toString());
         if (folder == null) {
@@ -114,6 +169,13 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Gets the file type of the given file.
+     *
+     * @param file The given file to be checked on.
+     * @return The file type of the given file.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public String getFileType(File file) throws InvalidFileException {
         try {
             return Files.probeContentType(Paths.get(file.getAbsolutePath()));
@@ -122,6 +184,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Renames the a folder given by its old name and new name to be renamed to.
+     *
+     * @param oldPath The full path of the folder.
+     * @param newPath The full path of the newly renamed folder.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void renameFolder(Path oldPath, Path newPath) throws InvalidFileException {
         if (Files.notExists(newPath) && Files.notExists(oldPath)) {
             createFolder(newPath);
@@ -137,6 +206,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a buffer reader for a file.
+     *
+     * @param filePath The file name to be read on.
+     * @return The buffer reader for the given file.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public BufferedReader getBufferedReader(Path filePath) throws InvalidFileException {
         try {
             return Files.newBufferedReader(filePath);

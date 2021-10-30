@@ -18,6 +18,9 @@ import terminus.content.Note;
 import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 
+/**
+ * PdfStorage to handles any pdf related operations.
+ */
 public class PdfStorage extends Storage {
 
     private Path baseDirectory;
@@ -27,6 +30,14 @@ public class PdfStorage extends Storage {
         this.baseDirectory = baseDirectory;
     }
 
+    /**
+     * Executes the specified operation with the given arguments.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The related module name for the pdf.
+     * @param action The operation type to determine which operation to execute.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void execute(ModuleManager moduleManager, String module, StorageActionEnum action)
             throws InvalidFileException {
         switch (action) {
@@ -38,6 +49,13 @@ public class PdfStorage extends Storage {
         }
     }
 
+    /**
+     * Exports the notes in the module folder into a pdf file.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The folder name where all notes in it should be written into the pdf file.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void exportModuleNotes(ModuleManager moduleManager, String module) throws InvalidFileException {
         Document tempDocument = new Document();
         Path pdfFile = getAppendPath(baseDirectory, appendFileExtension(module));
@@ -46,6 +64,14 @@ public class PdfStorage extends Storage {
         writeToPdf(tempDocument, pdfFile, noteArrayList);
     }
 
+    /**
+     * Writes data into a newly created pdf file.
+     *
+     * @param tempDocument The document representing the pdf file.
+     * @param pdfFile The filepath of the pdf file.
+     * @param noteArrayList The listr of notes contents to be written into the pdf file.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private void writeToPdf(Document tempDocument, Path pdfFile, ArrayList<Note> noteArrayList)
             throws InvalidFileException {
         try {
@@ -71,6 +97,12 @@ public class PdfStorage extends Storage {
         }
     }
 
+    /**
+     * Appends the pdf file extension to the given string.
+     *
+     * @param name The filename without the extension.
+     * @return The complete filename with the extension of a pdf file.
+     */
     private String appendFileExtension(String name) {
         return name + FILE_EXTENSION;
     }

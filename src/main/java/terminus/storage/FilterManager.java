@@ -11,11 +11,16 @@ import terminus.content.Question;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
+/**
+ * FilterManager class handles the filtration of the ModuleManager from json file.
+ */
 public class FilterManager {
 
-    public FilterManager() {
-    }
-
+    /**
+     * Filters the data in ModuleManager.
+     *
+     * @param moduleManager The data from the main json used throughout TermiNUS.
+     */
     public void filter(ModuleManager moduleManager) {
         assert moduleManager != null;
         String[] listOfModules = moduleManager.getAllModules();
@@ -35,6 +40,11 @@ public class FilterManager {
         }
     }
 
+    /**
+     * Filters the link in link content manager.
+     *
+     * @param linkContentManager The link content manager storing the list of links from a module.
+     */
     private void filterLink(ContentManager<Link> linkContentManager) {
         if (linkContentManager == null) {
             return;
@@ -47,6 +57,11 @@ public class FilterManager {
         }
     }
 
+    /**
+     * Filters the question in question content manager.
+     *
+     * @param questionContentManager The question content manager storing the list of questions from a module.
+     */
     private void filterQuestion(ContentManager<Question> questionContentManager) {
         if (questionContentManager == null) {
             return;
@@ -59,6 +74,12 @@ public class FilterManager {
         }
     }
 
+    /**
+     * Checks if given Module name is valid for TermiNUS.
+     *
+     * @param module The module name to be tested on.
+     * @return True if given module name is valid, false otherwise.
+     */
     private boolean isModuleValid(String module) {
         boolean isValid = true;
         if (CommonUtils.isStringNullOrEmpty(module)) {
@@ -73,6 +94,12 @@ public class FilterManager {
         return isValid;
     }
 
+    /**
+     * Checks if given QUestion object is valid for TermiNUS.
+     *
+     * @param question The given question to be tested on.
+     * @return True if given question object is valid, false otherwise.
+     */
     private boolean isQuestionValid(Question question) {
         boolean isValid = true;
         if (question == null) {
@@ -88,6 +115,12 @@ public class FilterManager {
         return isValid;
     }
 
+    /**
+     * Checks if given Schedule object is valid for TermiNUS.
+     *
+     * @param link The given Schedule to be tested on.
+     * @return True if given schedule object is valid, false otherwise.
+     */
     private boolean isScheduleValid(Link link) {
         try {
             ArrayList<String> arguments = new ArrayList<>();
@@ -105,13 +138,19 @@ public class FilterManager {
         return true;
     }
 
+    /**
+     * Joins all elements in a given array list with double quotes.
+     *
+     * @param stringArrayList The given arraylist to be joined.
+     * @return A string joined from the given arraylist.
+     */
     private String concatStringArguments(ArrayList<String> stringArrayList) {
         String result = "";
         for (String string : stringArrayList) {
             if (string == null) {
                 return "";
             }
-            result += "\"" + string + "\"";
+            result += "\"" + string + "\" ";
         }
         return result;
     }

@@ -6,10 +6,16 @@ import terminus.common.TerminusLogger;
 import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 
+/**
+ * StorageManager class to handle all file I/O related operations in TermiNUS.
+ */
 public class StorageManager {
 
     private Path baseDirectory;
 
+    /**
+     * Determine if the file storage for TermiNUS is disabled or not.
+     */
     private boolean isDisabled;
 
     private NoteStorage noteStorage;
@@ -18,6 +24,12 @@ public class StorageManager {
     private PdfStorage pdfStorage;
     private Storage storage;
 
+    /**
+     * Initialises all related storage type that handles different file I/O operations.
+     *
+     * @param baseDirectory The base directory in which all data is stored in.
+     * @param mainJsonFileName The main json file where the main data for TermiNUS is stored in.
+     */
     public StorageManager(Path baseDirectory, String mainJsonFileName) {
         this.baseDirectory = baseDirectory;
         this.noteStorage = new NoteStorage(baseDirectory);
@@ -28,6 +40,16 @@ public class StorageManager {
         this.isDisabled = false;
     }
 
+    /**
+     * Executes the file operation with their respective storage type.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param module The related module name for the operation.
+     * @param deletedItem The related deleted item name fo the operation.
+     * @param action The action determining the next step to take for the operation.
+     * @param type The storage typeof the operation.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void execute(ModuleManager moduleManager, String module, String deletedItem, StorageActionEnum action,
             StorageTypeEnum type)
             throws InvalidFileException {
@@ -55,12 +77,24 @@ public class StorageManager {
         }
     }
 
+    /**
+     * Initializes the base directory and main json file and loads any data if any.
+     *
+     * @return The ModuleManager objects containing the contents from the json file and its respective note file data.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public ModuleManager initialize() throws InvalidFileException {
         storage.createFolder(baseDirectory);
         jsonStorage.execute(null, StorageActionEnum.CREATE);
         return load();
     }
 
+    /**
+     * Loads the data from the json file and all its respective note data for each module.
+     *
+     * @return The ModuleManager objects containing the contents from the json file and its respective note file data.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     private ModuleManager load() throws InvalidFileException {
         ModuleManager moduleManager = jsonStorage.loadJson();
         if (moduleManager == null) {
@@ -82,6 +116,12 @@ public class StorageManager {
         return moduleManager;
     }
 
+    /**
+     * Saves all data in the given ModuleManager.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
     public void save(ModuleManager moduleManager) throws InvalidFileException {
         if (isDisabled) {
             return;
@@ -93,6 +133,11 @@ public class StorageManager {
         noteStorage.saveAllNotes(moduleManager);
     }
 
+    /**
+     * Sets the disabled status of the storage manager.
+     *
+     * @param disabled The value for the disabled status. Either True or False.
+     */
     public void setDisabled(boolean disabled) {
         isDisabled = disabled;
     }

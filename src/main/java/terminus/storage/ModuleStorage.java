@@ -29,6 +29,7 @@ import terminus.module.ModuleManager;
 /**
  * ModuleStorage is a class that handles any file I/O operation within TermiNUS.
  */
+@Deprecated
 public class ModuleStorage {
 
     private Path filePath;
