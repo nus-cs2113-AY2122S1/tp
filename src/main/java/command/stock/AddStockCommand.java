@@ -37,12 +37,12 @@ public class AddStockCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-
-        boolean nameExist = false;
-        String nameToAdd = parameters.get(CommandParameters.NAME);
-        String[] optionalParameters = {};
         StockValidator stockValidator = new StockValidator();
         ArrayList<Stock> filteredStocks = new ArrayList<>();
+
+        String[] optionalParameters = {};
+        String nameToAdd = parameters.get(CommandParameters.NAME);
+        boolean nameExist = false;
 
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
@@ -76,7 +76,7 @@ public class AddStockCommand extends Command {
             int totalStock = StockManager.getTotalStockQuantity(medicines, nameToAdd);
             assert totalStock > 0 : "Total Stock should be more than 0";
 
-            if (StockManager.expiryExist(ui, stockValidator, filteredStocks, quantityToAdd, formatExpiry, totalStock)) {
+            if (isExpiryExist(ui, stockValidator, filteredStocks, quantityToAdd, formatExpiry, totalStock)) {
                 return;
             }
 
@@ -126,6 +126,41 @@ public class AddStockCommand extends Command {
         }
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
+    }
+
+    /**
+     * Check if same expiry for the same medication name exist.
+     *
+     * @param ui Reference to the UI object to print messages.
+     * @param stockValidator Reference to StockValidator object.
+     * @param filteredStocks List of medication with the same medication name as user input.
+     * @param quantityToAdd Quantity of medication to add.
+     * @param formatExpiry Formatted Expiry Date of medication to add.
+     * @param totalStock Total Quantity of the same stock.
+     * @return Boolean Value indicating if same medication exists.
+     */
+    private boolean isExpiryExist(Ui ui, StockValidator stockValidator, ArrayList<Stock> filteredStocks,
+                              String quantityToAdd, Date formatExpiry, int totalStock) {
+        for (Stock stock : filteredStocks) {
+            int quantity = Integer.parseInt(quantityToAdd);
+
+            boolean isValidQuantity =
+                    stockValidator.quantityValidityChecker(ui, totalStock + quantity,
+                            stock.getMaxQuantity());
+
+            if (!isValidQuantity) {
+                return true;
+            }
+
+            if (formatExpiry.equals(stock.getExpiry())) {
+                quantity += stock.getQuantity();
+                stock.setQuantity(quantity);
+                ui.print("Same Medication and Expiry Date exist. Update existing quantity.");
+                ui.printStock(stock);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -235,8 +270,6 @@ public class AddStockCommand extends Command {
         ui.print("Medication added: " + name);
         ui.printStock(stock);
         logger.log(Level.INFO, "Successful addition of stock");
-        return;
-
     }
 
 }
