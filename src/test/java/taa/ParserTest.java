@@ -57,18 +57,14 @@ class ParserTest {
     void getArgumentsFromString_duplicatedKeys_expectDuplicatedArgumentException() {
         String inputString = "c/ n/Software Engineering and Object-oriented Programming c/Test";
         String[] keys = {"c","n"};
-        assertThrows(DuplicatedArgumentException.class, ()->{
-            Parser.getArgumentsFromString(inputString, keys);
-        });
+        assertThrows(DuplicatedArgumentException.class, () -> Parser.getArgumentsFromString(inputString, keys));
     }
 
     @Test
     void getArgumentsFromString_illegalCharacters_expectTaaException() {
         String inputString = "c/hello&world n/Software Engineering and Object-oriented Programming";
         String[] keys = {"c","n"};
-        assertThrows(TaaException.class, ()->{
-            Parser.getArgumentsFromString(inputString, keys);
-        });
+        assertThrows(TaaException.class, () -> Parser.getArgumentsFromString(inputString, keys));
     }
 
     @Test
