@@ -125,6 +125,15 @@ public class Parser {
     }
 
     // used for JUnit purposes
+    /**.
+     * <h2>boolean parserHasNextLine().</h2>
+     *
+     * <p>This method checks whether the user's input has another line.</p>
+     *
+     * <p>It is used solely for JUnit testing.</p>
+     *
+     * @return boolean Whether the user's input has another line or not
+     */
     public boolean parserHasNextLine() {
         return in.hasNextLine();
     }
