@@ -9,7 +9,6 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
-import seedu.duke.commons.util.exceptions.InvalidLinkException;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.util.LinkUtil.formatLink;
@@ -55,7 +54,7 @@ public class Lesson {
     }
 
     //@@author richwill28
-    public void launchUrl() throws InvalidLinkException, IOException {
+    public void launchUrl() throws IOException {
         Runtime rt = Runtime.getRuntime();
         String os = System.getProperty("os.name").toLowerCase();
 
