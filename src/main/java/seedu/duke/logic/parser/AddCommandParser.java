@@ -6,8 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
-import seedu.duke.commons.core.exceptions.PriorityException;
-import seedu.duke.commons.core.Priority;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
@@ -20,12 +18,13 @@ import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
 import static seedu.duke.logic.parser.ParserUtil.parseMeetingUrl;
 import static seedu.duke.logic.parser.ParserUtil.parsePriorityAndInfo;
 import static seedu.duke.logic.parser.ParserUtil.parsePriorityOrInfo;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class AddCommandParser {
-    public static final String LESSON_FLAGS = " -d | -s | -e | -l ";
-    public static final String TASK_FLAGS = " -d | -p | -i ";
+    public static final String LESSON_FLAGS = "-d | -s | -e | -l ";
+    public static final String TASK_FLAGS = "-d | -p | -i ";
     public static final String DEFAULT_PRIORITY = LOW.toString();
     public static final String EMPTY_INFORMATION = "-";
 
@@ -55,7 +54,7 @@ public class AddCommandParser {
         String[] params = userResponse.split(LESSON_FLAGS);
         checkParamsLength(params, 4, 5);
 
-        String title = params[0].strip();
+        String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(userResponse, params[1]);
         String startTime;
         String endTime;
@@ -81,7 +80,7 @@ public class AddCommandParser {
         String[] params = userResponse.split(TASK_FLAGS);
         checkParamsLength(params, 2, 4);
 
-        String title = params[0].strip();
+        String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(userResponse, params[1]);
 
         switch (params.length) {
