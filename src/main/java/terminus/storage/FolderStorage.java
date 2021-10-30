@@ -30,8 +30,13 @@ public class FolderStorage extends Storage {
 
     private void createModuleFolder(String module) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, module);
-        delete(moduleFolder);
-        createFolder(moduleFolder);
+        try {
+            delete(moduleFolder);
+            createFolder(moduleFolder);
+        } catch (InvalidFileException e) {
+            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FOLDER, moduleFolder));
+        }
+
     }
 
     private void deleteModuleFolder(String deletedModule) throws InvalidFileException {

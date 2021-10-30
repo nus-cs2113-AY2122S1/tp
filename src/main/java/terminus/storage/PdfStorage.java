@@ -76,7 +76,7 @@ public class PdfStorage extends Storage {
         } catch (DocumentException e) {
             throw new InvalidFileException(Messages.FAIL_TO_EXPORT);
         } catch (FileNotFoundException e) {
-            throw new InvalidFileException(Messages.ERROR_MISSING_FILE);
+            throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FILE, pdfFile));
         } catch (Exception e) {
             throw new InvalidFileException(e.getMessage());
         }

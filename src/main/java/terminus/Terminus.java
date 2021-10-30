@@ -90,16 +90,6 @@ public class Terminus {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(moduleManager);
 
-                // Perform related storage changes
-                if (result.hasChange()) {
-                    // Pass to Storage to handle the request
-                    String affectedModule = result.getModule();
-                    StorageActionEnum storageAction = result.getStorageAction();
-                    StorageTypeEnum storageType = result.getStorageType();
-                    String deletedItemName = result.getDeletedItemName();
-                    storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
-                }
-
                 boolean isExitCommand = result.isExit();
                 boolean isWorkspaceCommand = result.getNewCommandParser() != null;
                 if (isExitCommand) {
@@ -111,6 +101,16 @@ public class Terminus {
                     ui.printParserBanner(parser, moduleManager);
                 } else {
                     ui.printSection(result.getMessage());
+                }
+
+                // Perform related storage changes
+                if (result.hasChange()) {
+                    // Pass to Storage to handle the request
+                    String affectedModule = result.getModule();
+                    StorageActionEnum storageAction = result.getStorageAction();
+                    StorageTypeEnum storageType = result.getStorageType();
+                    String deletedItemName = result.getDeletedItemName();
+                    storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
                 }
 
                 // Update JSON File
