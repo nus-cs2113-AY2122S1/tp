@@ -8,46 +8,48 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
-Gordon -> Parser: addRecipeParse
-activate Parser
+--> ":Parser": addRecipeParse()
+activate ":Parser"
 
 ' Name
-Parser -> Parser: parseName
-activate Parser
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
 
-Parser --> Parser
-deactivate Parser
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
-Parser -> Recipe**: <<create>>
-activate Recipe
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
+
 
 ' Ingredients
-Parser -> Parser: parseIngredients
-activate Parser
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
 
 loop for all ingredients
-Parser -> Recipe: addIngredient
+":Parser" -> ":Recipe": addIngredient(String ingredient)
 end
 
-Parser --> Parser
-deactivate Parser
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
-' Steps
-Parser -> Parser: parseSteps
-activate Parser
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
 
 loop for all steps
-Parser -> Recipe: addStep
+":Parser" -> ":Recipe": addStep(String step)
+
+
 end
 
-Parser --> Parser
-deactivate Parser
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
-Recipe --> Parser: r
-deactivate Recipe
-destroy Recipe
+":Recipe" --> ":Parser":
+destroy ":Recipe"
 
-Parser --> Gordon: addCommand
-deactivate Parser
+
+destroy ":Parser"
 
 @enduml

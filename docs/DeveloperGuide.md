@@ -15,7 +15,7 @@
 
 ### Setting up this project in your computer
 
-1. **On Github, fork this repo by clicking on the fork button**
+1. **On GitHub, fork this repo by clicking on the fork button**
 1. **In Sourcetree, clone the fork into your computer**
    1. Open a new tab
    1. Select the clone button at the top of the menu
@@ -55,7 +55,7 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](./RenderedUML/AddSequence.svg)
+![Add Sequence Diagram](./RenderedUML/AddSequence.svg)
 
 ### Kitchen component
 
@@ -165,6 +165,15 @@ Functions of the Storage class:
 
 
 ### UI Component
+
+The Diagram below is the class diagram for the UI Class
+
+![UI Diagram](./RenderedUML/UI.svg)
+
+Functions of the UI Class:
+* Prints launch message when Gordon is first launched
+* Prints exit message upon the command `exit`
+* Prints help message upon the command `help`
 
 ### Tag Component
 The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.

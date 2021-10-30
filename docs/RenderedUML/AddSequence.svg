@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="545px" preserveAspectRatio="none" style="width:326px;height:545px;background:#FFFFFF;" version="1.1" viewBox="0 0 326 545" width="326px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="425.6372" style="stroke:#000000;stroke-width:1.0;" width="10" x="150" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="214.0435"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="342.8896"/><rect fill="#FFDAB9" height="288.791" style="stroke:#000000;stroke-width:1.0;" width="10" x="276" y="174.9448"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="203" x="117" y="234.0435"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="203" x="117" y="362.8896"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="36" x2="36" y1="36.0986" y2="510.6846"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="155" x2="155" y1="36.0986" y2="510.6846"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="281" x2="281" y1="174.5454" y2="510.6846"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="12" y="25.1318">Gordon</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="5" y="509.6846"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="12" y="529.8164">Gordon</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="56" x="127" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="42" x="134" y="25.1318">Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="56" x="127" y="509.6846"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="42" x="134" y="529.8164">Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="58" x="252" y="509.6846"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="44" x="259" y="529.8164">Recipe</text><rect fill="#FFDAB9" height="425.6372" style="stroke:#000000;stroke-width:1.0;" width="10" x="150" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="214.0435"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="155" y="342.8896"/><rect fill="#FFDAB9" height="288.791" style="stroke:#000000;stroke-width:1.0;" width="10" x="276" y="174.9448"/><polygon fill="#000000" points="138,63.0474,148,67.0474,138,71.0474,142,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="36" x2="144" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="95" x="43" y="62.2925">addRecipeParse</text><line style="stroke:#000000;stroke-width:2.0;" x1="160" x2="207" y1="90.9961" y2="90.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="207" x2="207" y1="90.9961" y2="103.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="166" x2="207" y1="103.9961" y2="103.9961"/><polygon fill="#000000" points="176,99.9961,166,103.9961,176,107.9961,172,103.9961" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="66" x="172" y="86.2412">parseName</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="165" x2="207" y1="127.9961" y2="127.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="207" x2="207" y1="127.9961" y2="140.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="160" x2="207" y1="140.9961" y2="140.9961"/><polygon fill="#000000" points="170,136.9961,160,140.9961,170,144.9961,166,140.9961" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="240,160.9448,250,164.9448,240,168.9448,244,164.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="160" x2="246" y1="164.9448" y2="164.9448"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="68" x="167" y="160.1899">&lt;&lt;create&gt;&gt;</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="58" x="252" y="143.9961"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="44" x="259" y="164.1279">Recipe</text><line style="stroke:#000000;stroke-width:2.0;" x1="160" x2="207" y1="201.0435" y2="201.0435"/><line style="stroke:#000000;stroke-width:2.0;" x1="207" x2="207" y1="201.0435" y2="214.0435"/><line style="stroke:#000000;stroke-width:2.0;" x1="166" x2="207" y1="214.0435" y2="214.0435"/><polygon fill="#000000" points="176,210.0435,166,214.0435,176,218.0435,172,214.0435" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="95" x="172" y="196.2886">parseIngredients</text><path d="M117,234.0435 L190,234.0435 L190,240.0435 L180,250.0435 L117,250.0435 L117,234.0435 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="203" x="117" y="234.0435"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="132" y="247.2373">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="106" x="205" y="246.3613">[for all ingredients]</text><polygon fill="#000000" points="264,267.9409,274,271.9409,264,275.9409,268,271.9409" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="165" x2="270" y1="271.9409" y2="271.9409"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="77" x="172" y="267.186">addIngredient</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="165" x2="207" y1="297.9409" y2="297.9409"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="207" x2="207" y1="297.9409" y2="310.9409"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="160" x2="207" y1="310.9409" y2="310.9409"/><polygon fill="#000000" points="170,306.9409,160,310.9409,170,314.9409,166,310.9409" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="160" x2="207" y1="329.8896" y2="329.8896"/><line style="stroke:#000000;stroke-width:2.0;" x1="207" x2="207" y1="329.8896" y2="342.8896"/><line style="stroke:#000000;stroke-width:2.0;" x1="166" x2="207" y1="342.8896" y2="342.8896"/><polygon fill="#000000" points="176,338.8896,166,342.8896,176,346.8896,172,342.8896" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="66" x="172" y="325.1348">parseSteps</text><path d="M117,362.8896 L190,362.8896 L190,368.8896 L180,378.8896 L117,378.8896 L117,362.8896 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="203" x="117" y="362.8896"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="132" y="376.0835">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="74" x="205" y="375.2075">[for all steps]</text><polygon fill="#000000" points="264,396.7871,274,400.7871,264,404.7871,268,400.7871" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="165" x2="270" y1="400.7871" y2="400.7871"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="48" x="172" y="396.0322">addStep</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="165" x2="207" y1="426.7871" y2="426.7871"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="207" x2="207" y1="426.7871" y2="439.7871"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="160" x2="207" y1="439.7871" y2="439.7871"/><polygon fill="#000000" points="170,435.7871,160,439.7871,170,443.7871,166,439.7871" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="171,459.7358,161,463.7358,171,467.7358,167,463.7358" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="165" x2="280" y1="463.7358" y2="463.7358"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="4" x="177" y="458.981">r</text><line style="stroke:#000000;stroke-width:2.0;" x1="272" x2="290" y1="454.7358" y2="472.7358"/><line style="stroke:#000000;stroke-width:2.0;" x1="272" x2="290" y1="472.7358" y2="454.7358"/><polygon fill="#000000" points="47,488.6846,37,492.6846,47,496.6846,43,492.6846" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="41" x2="154" y1="492.6846" y2="492.6846"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="80" x="53" y="487.9297">addCommand</text><!--MD5=[fa8dd34d5300d4ec63ac164fc8e400f0]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="489px" preserveAspectRatio="none" style="width:416px;height:489px;background:#FFFFFF;" version="1.1" viewBox="0 0 416 489" width="416px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="369.5898" style="stroke:#000000;stroke-width:1.0;" width="10" x="122" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="201.8936"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="330.7397"/><rect fill="#FFDAB9" height="271.6924" style="stroke:#000000;stroke-width:1.0;" width="10" x="364" y="164.9448"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="323" x="87" y="221.8936"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="323" x="87" y="350.7397"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="127" x2="127" y1="36.0986" y2="454.6372"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="369" x2="369" y1="36.0986" y2="454.6372"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="97" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="104" y="25.1318">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="97" y="453.6372"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="104" y="473.769">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="338" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="345" y="25.1318">:Recipe</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="338" y="453.6372"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="345" y="473.769">:Recipe</text><rect fill="#FFDAB9" height="369.5898" style="stroke:#000000;stroke-width:1.0;" width="10" x="122" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="201.8936"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="127" y="330.7397"/><rect fill="#FFDAB9" height="271.6924" style="stroke:#000000;stroke-width:1.0;" width="10" x="364" y="164.9448"/><polygon fill="#000000" points="110,63.0474,120,67.0474,110,71.0474,114,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="0" x2="116" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="103" x="7" y="62.2925">addRecipeParse()</text><line style="stroke:#000000;stroke-width:2.0;" x1="132" x2="179" y1="90.9961" y2="90.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="179" x2="179" y1="90.9961" y2="103.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="138" x2="179" y1="103.9961" y2="103.9961"/><polygon fill="#000000" points="148,99.9961,138,103.9961,148,107.9961,144,103.9961" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="132" x="144" y="86.2412">parseName(String line)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="137" x2="179" y1="127.9961" y2="127.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="179" x2="179" y1="127.9961" y2="140.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="132" x2="179" y1="140.9961" y2="140.9961"/><polygon fill="#000000" points="142,136.9961,132,140.9961,142,144.9961,138,140.9961" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="352,160.9448,362,164.9448,352,168.9448,356,164.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="132" x2="358" y1="164.9448" y2="164.9448"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="118" x="139" y="160.1899">Recipe(String name)</text><line style="stroke:#000000;stroke-width:2.0;" x1="132" x2="179" y1="188.8936" y2="188.8936"/><line style="stroke:#000000;stroke-width:2.0;" x1="179" x2="179" y1="188.8936" y2="201.8936"/><line style="stroke:#000000;stroke-width:2.0;" x1="138" x2="179" y1="201.8936" y2="201.8936"/><polygon fill="#000000" points="148,197.8936,138,201.8936,148,205.8936,144,201.8936" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="218" x="144" y="184.1387">parseIngredients(String line, Recipe r)</text><path d="M87,221.8936 L160,221.8936 L160,227.8936 L150,237.8936 L87,237.8936 L87,221.8936 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="323" x="87" y="221.8936"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="102" y="235.0874">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="101" x="175" y="234.2114">[for all ingredients]</text><polygon fill="#000000" points="352,255.791,362,259.791,352,263.791,356,259.791" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="137" x2="358" y1="259.791" y2="259.791"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="180" x="144" y="255.0361">addIngredient(String ingredient)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="137" x2="179" y1="285.791" y2="285.791"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="179" x2="179" y1="285.791" y2="298.791"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="132" x2="179" y1="298.791" y2="298.791"/><polygon fill="#000000" points="142,294.791,132,298.791,142,302.791,138,298.791" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="132" x2="179" y1="317.7397" y2="317.7397"/><line style="stroke:#000000;stroke-width:2.0;" x1="179" x2="179" y1="317.7397" y2="330.7397"/><line style="stroke:#000000;stroke-width:2.0;" x1="138" x2="179" y1="330.7397" y2="330.7397"/><polygon fill="#000000" points="148,326.7397,138,330.7397,148,334.7397,144,330.7397" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="188" x="144" y="312.9849">parseSteps(String line, Recipe r)</text><path d="M87,350.7397 L160,350.7397 L160,356.7397 L150,366.7397 L87,366.7397 L87,350.7397 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="323" x="87" y="350.7397"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="102" y="363.9336">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="70" x="175" y="363.0576">[for all steps]</text><polygon fill="#000000" points="352,384.6372,362,388.6372,352,392.6372,356,388.6372" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="137" x2="358" y1="388.6372" y2="388.6372"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="119" x="144" y="383.8823">addStep(String step)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="137" x2="179" y1="414.6372" y2="414.6372"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="179" x2="179" y1="414.6372" y2="427.6372"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="132" x2="179" y1="427.6372" y2="427.6372"/><polygon fill="#000000" points="142,423.6372,132,427.6372,142,431.6372,138,427.6372" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="138,432.6372,128,436.6372,138,440.6372,134,436.6372" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="132" x2="368" y1="436.6372" y2="436.6372"/><line style="stroke:#000000;stroke-width:2.0;" x1="360" x2="378" y1="427.6372" y2="445.6372"/><line style="stroke:#000000;stroke-width:2.0;" x1="360" x2="378" y1="445.6372" y2="427.6372"/><line style="stroke:#000000;stroke-width:2.0;" x1="118" x2="136" y1="427.6372" y2="445.6372"/><line style="stroke:#000000;stroke-width:2.0;" x1="118" x2="136" y1="445.6372" y2="427.6372"/><!--MD5=[01c558a2b7c339ea29ffef44f0765f9c]
 @startuml
 !include Style.puml
 skinparam sequence {
@@ -9,47 +9,49 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
-Gordon -> Parser: addRecipeParse
-activate Parser
+- -> ":Parser": addRecipeParse()
+activate ":Parser"
 
 ' Name
-Parser -> Parser: parseName
-activate Parser
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-Parser -> Recipe**: <<create>>
-activate Recipe
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
+
 
 ' Ingredients
-Parser -> Parser: parseIngredients
-activate Parser
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
 
 loop for all ingredients
-Parser -> Recipe: addIngredient
+":Parser" -> ":Recipe": addIngredient(String ingredient)
 end
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-' Steps
-Parser -> Parser: parseSteps
-activate Parser
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
 
 loop for all steps
-Parser -> Recipe: addStep
+":Parser" -> ":Recipe": addStep(String step)
+
+
 end
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-Recipe - -> Parser: r
-deactivate Recipe
-destroy Recipe
+":Recipe" - -> ":Parser":
+destroy ":Recipe"
 
-Parser - -> Gordon: addCommand
-deactivate Parser
+
+destroy ":Parser"
 
 @enduml
 
@@ -74,44 +76,47 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
-Gordon -> Parser: addRecipeParse
-activate Parser
+- -> ":Parser": addRecipeParse()
+activate ":Parser"
 
-Parser -> Parser: parseName
-activate Parser
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-Parser -> Recipe**: <<create>>
-activate Recipe
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
 
-Parser -> Parser: parseIngredients
-activate Parser
+
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
 
 loop for all ingredients
-Parser -> Recipe: addIngredient
+":Parser" -> ":Recipe": addIngredient(String ingredient)
 end
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-Parser -> Parser: parseSteps
-activate Parser
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
 
 loop for all steps
-Parser -> Recipe: addStep
+":Parser" -> ":Recipe": addStep(String step)
+
+
 end
 
-Parser - -> Parser
-deactivate Parser
+":Parser" - -> ":Parser"
+deactivate ":Parser"
 
-Recipe - -> Parser: r
-deactivate Recipe
-destroy Recipe
+":Recipe" - -> ":Parser":
+destroy ":Recipe"
 
-Parser - -> Gordon: addCommand
-deactivate Parser
+
+destroy ":Parser"
 
 @enduml
 
@@ -119,7 +124,7 @@ PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: Cp1252
+Default Encoding: UTF-8
 Language: en
-Country: US
+Country: GB
 --></g></svg>
