@@ -45,6 +45,8 @@ public abstract class AddParser extends Parser {
                 return new HelpCommand();
             case MEMBER:
                 return new HelpCommand();
+            default:
+                return null;
             }
         } catch (InvalidItemTypeException e) {
             System.out.println("Having some trouble understanding what exactly you're trying to add!\n"
@@ -63,17 +65,17 @@ public abstract class AddParser extends Parser {
     private static String[] parseAddEvent(String commandDetails) {
         try {
             String commandAttributes = getCommandAttributes(commandDetails);
+            String[] parsedAttributes = new String[4];
 
             String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
-            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
-            String venue = retrieveItemAttribute(commandAttributes, ItemAttribute.VENUE);
-            String budget = retrieveItemAttribute(commandAttributes, ItemAttribute.BUDGET);
-
-            String[] parsedAttributes = new String[4];
             parsedAttributes[INDEX_OF_TITLE] = title;
+            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
             parsedAttributes[INDEX_OF_DATETIME] = dateTime;
+            String venue = retrieveItemAttribute(commandAttributes, ItemAttribute.VENUE);
             parsedAttributes[INDEX_OF_VENUE] = venue;
+            String budget = retrieveItemAttribute(commandAttributes, ItemAttribute.BUDGET);
             parsedAttributes[INDEX_OF_BUDGET] = budget;
+
             return parsedAttributes;
         } catch (NoCommandAttributesException e) {
             System.out.println("No details about the event you're trying to add is given!\n"

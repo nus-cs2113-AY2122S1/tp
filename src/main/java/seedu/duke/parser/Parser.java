@@ -68,10 +68,11 @@ public abstract class Parser {
     }
 
     /**
-     * Gets the item type (event, task or member) of the command given user input with the command type (add, delete etc)
-     * filtered off.
+     * Gets the item type (event, task or member) of the command given user input with the command
+     * type (add, delete etc) filtered off.
      *
-     * @param commandDetails Details of the command containing only the item flag and its attributes (e.g. "-e n/TITLE...")
+     * @param commandDetails Details of the command containing only the item flag and its
+     *                       attributes (e.g. "-e n/TITLE...")
      * @return The specified item type of the user command
      * @throws InvalidItemTypeException If there is no flag detected that is valid
      */
@@ -117,7 +118,7 @@ public abstract class Parser {
      * @return The parsed attribute (does not contain the attribute flag) that was found.
      * @throws AttributeNotFoundException If no such attribute is found within the provided string.
      */
-    protected static String retrieveItemAttribute (String response, ItemAttribute itemAttribute)
+    protected static String retrieveItemAttribute(String response, ItemAttribute itemAttribute)
             throws AttributeNotFoundException {
         int startOfItemAttribute = response.indexOf(ItemAttribute.getItemFlag(itemAttribute)) + 2;
         int endOfItemAttribute = response.indexOf("/", startOfItemAttribute) - 2;
