@@ -4,6 +4,7 @@ public enum CommandNames {
     ADD_DISH_WASTE("add dish waste", new AddDishWasteCommand()),
     ADD_INGR_WASTE("add ingr waste", new AddIngrWasteCommand()),
     ADD_INGR_STORED("add ingr stored", new AddIngrStoredCommand()),
+    SET_INGR_EXPIRY("set ingr expiry", new SetIngrExpiryCommand()),
     SET_DISH_LIMIT("set dish limit", new SetDishLimitCommand()),
     SET_INGR_LIMIT("set ingr limit", new SetIngrLimitCommand()),
     LINK("link", new LinkCommand()),
@@ -19,7 +20,9 @@ public enum CommandNames {
     CLEAR_ALL("clear all", new ClearAllCommand()),
     HELP("help", new HelpCommand()),
     SORT_DISH("sort dish", new SortDishCommand()),
-    SORT_INGR("sort ingr", new SortIngrCommand());
+    SORT_INGR("sort ingr", new SortIngrCommand()),
+    EDIT_DISH("edit dish", new EditDishCommand()),
+    EDIT_INGR("edit ingr", new EditIngrCommand());
 
 
     private String name;

@@ -48,6 +48,10 @@ public class Dish implements Comparable<Dish> {
         this.limit = limit;
     }
 
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
     public void setLimitValue() throws FoodoramaException {
         ui.printEnterLimitFor(dishName);
         Scanner in = new Scanner(System.in);

@@ -29,9 +29,9 @@ realise the target user profile that motivated us to build this application.
 
 ## 👍 Acknowledgements
 
-* [AddressBook Level-3](https://se-education.org/addressbook-level3/) for User Guide and Developer Guide reference
-* [PlantUML](https://plantuml.com/) for creation of UML diagrams
-* [Java-Clear-Console](https://www.delftstack.com/howto/java/java-clear-console/) for reference on clearing terminal
+* [AddressBook Level-3](https://se-education.org/addressbook-level3/) for User Guide and Developer Guide reference.
+* [PlantUML](https://plantuml.com/) for creation of UML diagrams.
+* [Java-Clear-Console](https://www.delftstack.com/howto/java/java-clear-console/) for reference on clearing terminal.
 
 ## ⭐ Setting Up & Getting Started
 1. Fork *Food-O-Rama*'s repository from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp).
@@ -50,12 +50,12 @@ Describes the step-by-step sequence from User Input to the Output.
 
 ![](images/main_sequence.png)
 
-* User is greeted by welcome screen
-* User begins typing inputs
-* Inputs get parsed by InputParser returning the appropriate Command
-* Command gets executed and respective output gets displayed
-* Once user is done using the application, he can send an exit message prompting a goodbye message
-* Application exits
+* User is greeted by welcome screen.
+* User begins typing inputs.
+* Inputs get parsed by InputParser returning the appropriate Command.
+* Command gets executed and respective output gets displayed.
+* Once user is done using the application, he can send an exit message prompting a goodbye message.
+* Application exits.
 
 ### Input Parsing
 
@@ -63,17 +63,17 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
 
 ![](images/input_parser_sequence.png)
 
-* Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
-* Throws an exception if no matching command is found
-* Takes rest of user input as parameterString
-* Based on command name splits the parameterString into respective parameters to respective command classes for execution
+* Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.).
+* Throws an exception if no matching command is found.
+* Takes rest of user input as parameterString.
+* Based on command name splits the parameterString into respective parameters to respective command classes for execution.
 
 ### Storage
 
 The `Storage` class is responsible for the reading and writing of *Food-O-Rama* data. Data is stored as .txt files under *'Data'* folder.
 
-* After every operation writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted, into a text file called ingredients.txt
-* After every operation writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are any, into a text file called dishes.txt
+* After every operation writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted, into a text file called `ingredients.txt`.
+* After every operation writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are any, into a text file called `dishes.txt`.
 
 #### Loading Data
 ![](images/storage_load_sequence.png)
@@ -92,19 +92,19 @@ ArrayList, `IngredientList.ingredientList`
 #### Saving Data
 ![](images/storage_write_sequence.png)
 
-* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`
+* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
   * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
-* `Storage.write()` will access the respective text file and save to its respective save format
+* `Storage.write()` will access the respective text file and save to its respective save format.
 
 
 * ❕ **Save Formats:**
   * Dishes
     * `DISH_NAME | DISH_WASTAGE | DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS | LIMIT | INGREDIENTS_LINKED`
-    * ❕ Limit is -1 if limit has not been defined
-    * ❕ DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS is DISH_WASTAGE if no ingredients have been linked
+    * ❕ Limit is -1 if limit has not been defined.
+    * ❕ DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS is DISH_WASTAGE if no ingredients have been linked.
   * Ingredients
     * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE | LIMIT`
-    * ❕ Limit is -1 if limit has not been defined
+    * ❕ Limit is -1 if limit has not been defined.
 
 ### Data Structures
 
@@ -115,11 +115,11 @@ manipulation of the *Food-O-Rama* data.
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
-wasted as well as the weight of Ingredient wasted from Dish wastage
+wasted as well as the weight of Ingredient wasted from Dish wastage.
 * The `DishList` class comprises an array of `Dish` along with Sort and Graph functions.
 * The `IngredientList` class comprises an array of `Ingredient` along with Sort and Graph functions.
-  * The Sort function arranges Dishes / Ingredients in descending order of their wastage
-  * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis 
+  * The Sort function arranges Dishes / Ingredients in descending order of their wastage.
+  * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis.
 
 ### User-Interface Component
 
@@ -132,8 +132,8 @@ The interface of the program utilizes the ClearScreen class to clear the termina
 
 The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
 The command it sends to the terminal is as follows:
-* `cls` for Windows CMD Terminals
-* `clear` for Linux/MacOS Terminals
+* `cls` for Windows CMD Terminals.
+* `clear` for Linux/MacOS Terminals.
 
 `ClearConsole()` Code Snippet:
 
@@ -166,14 +166,14 @@ The command it sends to the terminal is as follows:
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and 
 improper parameters. It does so by calling the `Ui` class to print error messages that prompt the User to 
-type in correct Commands/Parameters
+type in correct Commands/Parameters.
 
 ### Command Abstraction
 
 ![](images/command.png)
 
-* Different Command Classes that perform different tasks by calling various functions of the Object Classes  
-* All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input
+* Different Command Classes that perform different tasks by calling various functions of the Object Classes.  
+* All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
 
 ## 📂 Product Scope
 
@@ -215,26 +215,26 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
 ## 🚦 Non-Functional Requirements
 
-* *Work offline:* User should be able to use *Food-O-Rama* without the need for Internet Access
-* *Cross-platform:* *Food-O-Rama* should be able to run on Windows, macOS and Linux operating systems without crashing
+* *Work offline:* User should be able to use *Food-O-Rama* without the need for Internet Access.
+* *Cross-platform:* *Food-O-Rama* should be able to run on Windows, macOS and Linux operating systems without crashing.
 * *Exceptions handling:* *Food-O-Rama* should be able to handle exceptions caused by User keying in erroneous inputs 
-without crashing
-* *Accessibility:* Users with the .jar file should be able to use *Food-O-Rama* 
+without crashing.
+* *Accessibility:* Users with the .jar file should be able to use *Food-O-Rama* .
 
 ## 📒 Glossary
 
-* <i>Mainstream OS </i> - Windows, Linux, Unix, OS-X
-* <i>Ingredient </i> - The basic unit required to create any Dish
-* <i>Dish </i> - Food prepared using a combination of Ingredients
-* <i>Wastage </i> - Weight of Dish or Ingredient wasted
+* <i>Mainstream OS </i> - Windows, Linux, Unix, OS-X.
+* <i>Ingredient </i> - The basic unit required to create any Dish.
+* <i>Dish </i> - Food prepared using a combination of Ingredients.
+* <i>Wastage </i> - Weight of Dish or Ingredient wasted.
 
 ## 🧪 Instructions for Manual Testing
 
-* For Manual Testing, you can write sample data into data text files (dishes.txt & ingredients.txt)
+* For Manual Testing, you can write sample data into data text files (`dishes.txt` & `ingredients.txt`).
 * Write data in appropriate format
-  * Dishes: [dishName] | [dishWaste (kg)] | [dishWaste divided by number of constituents] | [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]
+  * Dishes: [DISH_NAME] | [WEIGHT_IN_KG (dishWaste)] | [dishWaste divided by number of constituents] | [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]
     * Example: chicken rice|2.0|1.0|17.7|chicken|rice
-  * Ingredients: [ingrName] | [ingrStored(kg)] | [ingrWasted(kg)] | [Wastage limit (if present else -1)]
+  * Ingredients: [INGR_NAME] | [WEIGHT_IN_KG (ingrStored)] | [WEIGHT_IN_KG (ingrWasted)] | [Wastage limit (if present else -1)]
     * Example:chicken|2.33|1.0|22.2
 * The appropriate formats are also present in a text file called formats.txt for your usage
 

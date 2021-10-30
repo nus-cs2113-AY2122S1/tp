@@ -194,9 +194,6 @@ public class Ui {
             + "Sorry, that is an invalid command." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INVALID_PARAMETERS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid parameter." + System.lineSeparator()
-            + LINE_DIVIDER;
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, please input a valid number" + System.lineSeparator()
@@ -258,9 +255,6 @@ public class Ui {
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INGR_EXISTS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, this ingredient already exists in your list." + System.lineSeparator()
-            + LINE_DIVIDER;
 
     private static final String INGR_SORT = LINE_DIVIDER + System.lineSeparator()
             + "List of Ingredients has been sorted." + System.lineSeparator();
@@ -481,10 +475,6 @@ public class Ui {
         return LINE_DIVIDER + System.lineSeparator()
                 + "Sorry, the ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
-    }
-
-    public void printInvalidParamMsg() {
-        System.out.println(INVALID_PARAMETERS);
     }
 
     public static String getHelpMsg() {
