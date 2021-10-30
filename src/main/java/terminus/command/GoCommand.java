@@ -54,7 +54,7 @@ public class GoCommand extends WorkspaceCommand {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException {
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_NOT_FOUND);

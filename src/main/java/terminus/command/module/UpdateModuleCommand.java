@@ -13,7 +13,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.storage.ModuleStorage;
 import terminus.storage.StorageActionEnum;
 import terminus.storage.StorageTypeEnum;
 

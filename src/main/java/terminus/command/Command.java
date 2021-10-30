@@ -44,7 +44,7 @@ public abstract class Command {
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     public abstract CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException;
+            throws InvalidCommandException, InvalidArgumentException;
 
     /**
      * Returns the module name.
