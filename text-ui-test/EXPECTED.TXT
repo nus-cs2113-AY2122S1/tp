@@ -24,7 +24,7 @@ Type any of the following to get started:
 > question
 > back
 
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: note add "<note name>" "<note content>"
 [test] >>> Your note on 'CS2113T' has been added!
 [test] >>> List of Content
@@ -39,7 +39,7 @@ Format: note view {item number}
 Content:
 Week 8 test
 
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: note delete <item number>
 [test] >>> Error: Invalid numerical value provided.
 Format: note delete <item number>
@@ -66,11 +66,11 @@ Format: question
 back : Returns to the parent workspace.
 Format: back
 
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
 [test] >>> Your schedule on 'CS2113T Tutorial' has been added!
 [test] >>> Your schedule on 'CS2113T Lecture' has been added!
@@ -83,7 +83,7 @@ Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duratio
 Rerun the same command with an index behind to view the content.
 [test] >>> Error: Content not found.
 [test] >>> CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
-[test] >>> Error: Missing arguments.
+[test] >>> Error: Missing arguments or Invalid arguments.
 Format: schedule delete <item number>
 [test] >>> Error: Content not found.
 [test] >>> Your link on 'CS2113T Tutorial' has been deleted!

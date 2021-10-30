@@ -1,12 +1,12 @@
 package terminus.command.content.link;
 
+import static terminus.common.CommonUtils.hasDurationOverflow;
 import static terminus.common.CommonUtils.isValidDay;
 import static terminus.common.CommonUtils.isValidDuration;
 import static terminus.common.CommonUtils.isValidUrl;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -19,8 +19,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.timetable.ConflictManager;
-
-import static terminus.common.CommonUtils.hasDurationOverflow;
 
 
 /**
@@ -47,8 +45,7 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Parses the arguments to the AddLinkCommand object.
-     * The arguments are attributes for a new Link object.
+     * Parses the arguments to the AddLinkCommand object. The arguments are attributes for a new Link object.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException when arguments are empty or missing.
@@ -82,26 +79,22 @@ public class AddLinkCommand extends Command {
         if (!isValidDay(this.day)) {
             TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
-        }
-        if (!isValidUrl(this.link)) {
+        } else if (!isValidUrl(this.link)) {
             TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
-        }
-        if (!isValidDuration(this.duration)) {
+        } else if (!isValidDuration(this.duration)) {
             TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.duration));
-        }
-        if (hasDurationOverflow(startTime, this.duration)) {
+        } else if (hasDurationOverflow(startTime, this.duration)) {
             TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
         }
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
-                + " to Add Link Command", description, day, startTime, link));
+            + " to Add Link Command", description, day, startTime, link));
     }
 
     /**
-     * Executes the add link command.
-     * Prints the relevant response to the Ui.
+     * Executes the add link command. Prints the relevant response to the Ui.
      *
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
@@ -138,7 +131,7 @@ public class AddLinkCommand extends Command {
         boolean isValid = true;
         if (argArray.size() != ADD_SCHEDULE_ARGUMENTS) {
             TerminusLogger.warning(String.format("Failed to find %d arguments, %d arguments found",
-                    ADD_SCHEDULE_ARGUMENTS, argArray.size()));
+                ADD_SCHEDULE_ARGUMENTS, argArray.size()));
             isValid = false;
         } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments, some arguments found is empty");

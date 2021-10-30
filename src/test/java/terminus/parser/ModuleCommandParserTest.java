@@ -65,7 +65,6 @@ public class ModuleCommandParserTest {
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("add \"test\" ") instanceof AddModuleCommand);
         assertTrue(commandParser.parseCommand("add \"username\"") instanceof AddModuleCommand);
-        assertTrue(commandParser.parseCommand("add \"test1\"test2\"") instanceof AddModuleCommand);
     }
 
     @Test
@@ -73,6 +72,8 @@ public class ModuleCommandParserTest {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete abcd"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete -5"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\"test2\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\" \"test2\""));
     }
 
     @Test
