@@ -60,21 +60,21 @@ public class Cookbook {
      *
      * <p>This methods  adds the recipe to the cookbook if it does not already exist.</p>
      *
-     * @param r  Recipe to be added to the cookbook
+     * @param newRecipe  Recipe to be added to the cookbook
      * @throws GordonException  if the recipe already exists in the cookbook
      */
-    public void addRecipe(Recipe r) throws GordonException {
+    public void addRecipe(Recipe newRecipe) throws GordonException {
         boolean contains = recipes.stream()
                 .map(Recipe::getName)
                 .map(String::toLowerCase)
                 .collect(Collectors.toCollection(ArrayList::new))
-                .contains(r.name.toLowerCase());
+                .contains(newRecipe.name.toLowerCase());
 
         if (contains) {
             throw new GordonException(GordonException.DUPLICATE_RECIPE_NAME);
         }
 
-        recipes.add(r);
+        recipes.add(newRecipe);
     }
 
     /**

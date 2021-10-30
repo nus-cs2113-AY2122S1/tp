@@ -3,9 +3,20 @@
 skinparam ArrowColor black
 skinparam classBorderColor black
 
+hide empty fields
+hide empty methods
+
 rectangle Util {
     class Storage {
-    saveCookbook(cookbook : Cookbook)
+    + Scanner loadScanner
+    - loadDifficulty(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadCalories(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTimes(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadPrice(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadIngredients(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadSteps(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTags(Recipe recipe, String buffer, Scanner loadScanner, Cookbook cookbook)
+    + saveCookbook(cookbook Cookbook)
     }
 }
 
@@ -18,6 +29,6 @@ rectangle Kitchen {
     class Cookbook LOGIC_BLUE_1
 }
 
-Storage --> GordonException : creates >
-Storage --> Cookbook : saves and loads >
+Storage "1"--> "*" GordonException : creates >
+Storage "1"--> "1" Cookbook : saves and loads >
 @enduml

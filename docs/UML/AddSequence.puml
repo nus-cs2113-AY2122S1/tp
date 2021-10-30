@@ -1,4 +1,7 @@
 @startuml
+
+hide footbox
+
 !include Style.puml
 skinparam sequence {
 ParticipantBorderColor black
@@ -39,15 +42,16 @@ activate ":Parser"
 
 loop for all steps
 ":Parser" -> ":Recipe": addStep(String step)
-
-
 end
 
 ":Parser" --> ":Parser"
 deactivate ":Parser"
 
+
+
 ":Recipe" --> ":Parser":
 destroy ":Recipe"
+
 
 
 destroy ":Parser"

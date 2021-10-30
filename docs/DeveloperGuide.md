@@ -180,12 +180,12 @@ The `Tag` class contains the basic functionalities related to a _Tag_, and encap
 1. `getTagName` returns the _Tag Name_.
 2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
 3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
-4. 'removeAssociatedRecipeName' removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
+4. `removeAssociatedRecipeName` removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
 
 ## Product scope
 ### Target user profile
 
-* Nus Students who stay in a Hall
+* NUS Students who stay in a Hall
 * Cooks on a regular basis  
 * Has Ingredients for cooking readily available
 * Is familiar with a command line interface  
