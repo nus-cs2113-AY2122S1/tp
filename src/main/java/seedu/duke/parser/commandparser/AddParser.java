@@ -1,5 +1,6 @@
 package seedu.duke.parser.commandparser;
 
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
@@ -34,6 +35,7 @@ public abstract class AddParser extends Parser {
                 String dateTime = parsedAttributes[INDEX_OF_DATETIME];
                 String venue = parsedAttributes[INDEX_OF_VENUE];
                 String budget = parsedAttributes[INDEX_OF_BUDGET];
+                String description = Ui.readInput().trim();
                 // TODO: Create relevant constructor for AddEventCommand and return it.
                 // return new AddEventCommand(title, dateTime, venue, budget);
 
