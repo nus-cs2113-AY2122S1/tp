@@ -2,10 +2,12 @@ package taa;
 
 //@@author leyondlee
 import org.junit.jupiter.api.Test;
+import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
@@ -47,6 +49,31 @@ class ParserTest {
     @Test
     void getArgumentsFromString_TwoKeyAndOneEmptyValue_expectOneItem() throws TaaException {
         String inputString = "c/ n/Software Engineering and Object-oriented Programming";
+        String[] keys = {"c","n"};
+        assertEquals(Parser.getArgumentsFromString(inputString, keys).size(), 2);
+    }
+
+    @Test
+    void getArgumentsFromString_duplicatedKeys_expectDuplicatedArgumentException() {
+        String inputString = "c/ n/Software Engineering and Object-oriented Programming c/Test";
+        String[] keys = {"c","n"};
+        assertThrows(DuplicatedArgumentException.class, ()->{
+            Parser.getArgumentsFromString(inputString, keys);
+        });
+    }
+
+    @Test
+    void getArgumentsFromString_illegalCharacters_expectTaaException() {
+        String inputString = "c/hello&world n/Software Engineering and Object-oriented Programming";
+        String[] keys = {"c","n"};
+        assertThrows(TaaException.class, ()->{
+            Parser.getArgumentsFromString(inputString, keys);
+        });
+    }
+
+    @Test
+    void getArgumentsFromString_legalCharacters_expectTwoItems() throws TaaException {
+        String inputString = "c/3654964apfaAFDao_()- n/65496494 649684aofaoAFAOFH9af_-(f0ew7r0FA_)f";
         String[] keys = {"c","n"};
         assertEquals(Parser.getArgumentsFromString(inputString, keys).size(), 2);
     }
