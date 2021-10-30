@@ -9,7 +9,7 @@ import seedu.traveller.exceptions.TripNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//@@author Cuiminjing
 
 public class DeleteItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteDayCommand.class.getName());
