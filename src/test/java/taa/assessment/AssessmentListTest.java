@@ -102,14 +102,14 @@ class AssessmentListTest {
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
-        Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
-                .getAssessment("midterms");
 
         String editAssessment1 = "edit_assessment c/cs2113t-f12 n/midterms nn/finals";
         Command command3 = Parser.parseUserInput(editAssessment1);
         command3.parseArgument();
         command3.checkArgument();
         command3.execute(classList, ui, storage);
+        Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
+            .getAssessment("midterms");
         assertEquals("finals", assessment.getName());
 
         String editAssessment2 = "edit_assessment c/cs2113t-f12 n/finals m/100";
@@ -131,7 +131,7 @@ class AssessmentListTest {
         command6.parseArgument();
         command6.checkArgument();
         command6.execute(classList, ui, storage);
-        
+
         assertEquals("midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());
