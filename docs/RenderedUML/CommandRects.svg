@@ -1,35 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="806px" preserveAspectRatio="none" style="width:798px;height:806px;background:#FFFFFF;" version="1.1" viewBox="0 0 798 806" width="798px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
-cluster Command--><rect fill="#FFFFFF" height="793" style="stroke:#000000;stroke-width:1.5;" width="785" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="365" y="22.1318">Command</text><!--MD5=[1b07b997d5c762603c89609a43912d16]
-cluster Basic Commands--><rect fill="#FFFFFF" height="477" style="stroke:#000000;stroke-width:1.5;" width="205" x="555" y="174"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="119" x="598" y="189.1318">Basic Commands</text><!--MD5=[6fca3368c595f27a4448d10066ee04a5]
-cluster Find Commands--><rect fill="#FFFFFF" height="406" style="stroke:#000000;stroke-width:1.5;" width="230" x="39" y="58"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="112" x="98" y="73.1318">Find Commands</text><!--MD5=[0d14904dee78962aad6049756b61630f]
-cluster Set Commands--><rect fill="#FFFFFF" height="264" style="stroke:#000000;stroke-width:1.5;" width="206" x="309" y="326"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="104" x="360" y="341.1318">Set Commands</text><!--MD5=[090b486479b03422826726a0bc957c6a]
-cluster Tag Commands--><rect fill="#FFFFFF" height="264" style="stroke:#000000;stroke-width:1.5;" width="198" x="55" y="504"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="106" x="101" y="519.1318">Tag Commands</text><!--MD5=[ee234901cc14ce4ccf9222c6e4f6e77d]
-entity {abstract}\nCommand--><rect fill="#F4C7F8" height="52.1973" style="stroke:#000000;stroke-width:1.5;" width="84" x="370" y="617"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="61" x="380" y="640.1318">{abstract}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64" x="380" y="656.2305">Command</text><!--MD5=[8de6e499e49f97ea3e42f8539c029b5a]
-entity AddCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="109" x="603" y="217"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="89" x="613" y="240.1318">AddCommand</text><!--MD5=[5b037da89b657f1acf0babb5f3016ea1]
-entity DeleteCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="125" x="595" y="288"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="105" x="605" y="311.1318">DeleteCommand</text><!--MD5=[a5c0212f6afaa6e3607a798eeadca312]
-entity CheckCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="124" x="595.5" y="359"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="104" x="605.5" y="382.1318">CheckCommand</text><!--MD5=[07ff9f18cf12a916a165d965513cc662]
-entity ListRecipesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="579" y="430"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="589" y="453.1318">ListRecipesCommand</text><!--MD5=[78ee5539c100dd89d3e39af7f9352b77]
-entity HelpCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="112" x="601.5" y="501"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="92" x="611.5" y="524.1318">HelpCommand</text><!--MD5=[7a41efbc9d6b58d31babbb88d6dbd69b]
-entity NullCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="107" x="604" y="572"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="87" x="614" y="595.1318">NullCommand</text><!--MD5=[f70cc934ac79ee250998534058ed291b]
-entity FindCaloriesCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="164" x="72" y="101"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="144" x="82" y="124.1318">FindCaloriesCommand</text><!--MD5=[f9df87af8e792586e70cf6a432ff58aa]
-entity FindDifficultyCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="165" x="71.5" y="172"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="145" x="81.5" y="195.1318">FindDifficultyCommand</text><!--MD5=[5cc512b67834fbfcef6773565ac71326]
-entity FindIngredientsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="182" x="63" y="243"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="162" x="73" y="266.1318">FindIngredientsCommand</text><!--MD5=[cf04f692de35c8535e4f005419abe9a6]
-entity FindPriceCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="82" y="314"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="92" y="337.1318">FindPriceCommand</text><!--MD5=[366f58ef1c1e5a57991e1fc8c696358e]
-entity FindTagsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="82" y="385"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="92" y="408.1318">FindTagsCommand</text><!--MD5=[8e61c98bd0fc9999a186ed5ca153b7d8]
-entity SetCaloriesCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="333.5" y="369"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="343.5" y="392.1318">SetCaloriesCommand</text><!--MD5=[0b236d1536c57880937deeae8ff2742a]
-entity SetDifficultyCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="158" x="333" y="440"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="138" x="343" y="463.1318">SetDifficultyCommand</text><!--MD5=[1940e8542e7194e5a2ba70212ea1b21b]
-entity SetPriceCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="137" x="343.5" y="511"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="117" x="353.5" y="534.1318">SetPriceCommand</text><!--MD5=[f11a73173003528be171953985c57e74]
-entity TagAddCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="134" x="87" y="547"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="114" x="97" y="570.1318">TagAddCommand</text><!--MD5=[e76a050bc3eb791f621319ec0bb703ba]
-entity TagDeleteCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="150" x="79" y="618"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="130" x="89" y="641.1318">TagDeleteCommand</text><!--MD5=[2a4a08cc86a26429ea88be4dc682d381]
-entity TagUntagCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="146" x="81" y="689"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="126" x="91" y="712.1318">TagUntagCommand</text><!--MD5=[c07313676d19d325c6834c65a019c3ea]
-reverse link {abstract}\nCommand to Basic Commands--><path d="M474.26,643 C491.9825,643 511.9981,643 532.11,643 C537.138,643 542.172,643 547.1776,643 C549.6805,643 552.1762,643 554.6606,643 " fill="none" id="{abstract}\nCommand-backto-Basic Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="474.03,650,454.03,643,474.03,636,474.03,650" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[9315aecf2f8cb5721e6fdf24197292ab]
-link Tag Commands to {abstract}\nCommand--><path d="M253.5746,751.1374 C257.1846,750.2725 260.7782,749.3277 264.3323,748.2956 C271.4406,746.2316 278.3913,743.8188 285,741 C316.9,727.4 347.71,703.68 370.89,682.99 " fill="none" id="Tag Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="366.21,677.78,385.63,669.3,375.73,688.04,366.21,677.78" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[377a86b21c869f6d5d91d9401992d597]
-link Find Commands to {abstract}\nCommand--><path d="M183.4187,464.0171 C184.8725,464.5036 186.3644,465.0141 187.8899,465.5491 C193.9923,467.6891 200.6341,470.2209 207.5363,473.1763 C235.145,484.9975 266.92,503.595 285,531 C301.51,556.03 274.55,574.36 293,598 C307.02,615.97 329.12,626.77 350.42,633.25 " fill="none" id="Find Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="352.22,626.49,369.9,638.16,348.8,640.06,352.22,626.49" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[8c7667364076495cbd17e51a4a7f0ea7]
-reverse link {abstract}\nCommand to Set Commands--><path d="M412,596.72 C412,595.54 412,594.3594 412,593.1783 C412,592.5877 412,591.9971 412,591.4063 C412,591.1109 412,590.8155 412,590.5201 C412,590.3724 412,590.2247 412,590.0769 C412,590.0585 412,590.04 412,590.0215 " fill="none" id="{abstract}\nCommand-backto-Set Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="419,596.79,412,616.79,405,596.79,419,596.79" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[1c0fd487afe3d50eda54ee193dd271a6]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="806px" preserveAspectRatio="none" style="width:823px;height:806px;background:#FFFFFF;" version="1.1" viewBox="0 0 823 806" width="823px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
+cluster Command--><rect fill="#FFFFFF" height="793" style="stroke:#000000;stroke-width:1.5;" width="810" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="377.5" y="22.1318">Command</text><!--MD5=[1b07b997d5c762603c89609a43912d16]
+cluster Basic Commands--><rect fill="#FFFFFF" height="477" style="stroke:#000000;stroke-width:1.5;" width="207" x="578" y="174"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="119" x="622" y="189.1318">Basic Commands</text><!--MD5=[6fca3368c595f27a4448d10066ee04a5]
+cluster Find Commands--><rect fill="#FFFFFF" height="406" style="stroke:#000000;stroke-width:1.5;" width="233" x="39" y="58"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="112" x="99.5" y="73.1318">Find Commands</text><!--MD5=[0d14904dee78962aad6049756b61630f]
+cluster Set Commands--><rect fill="#FFFFFF" height="406" style="stroke:#000000;stroke-width:1.5;" width="226" x="312" y="184"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="103" x="373.5" y="199.1318">Set Commands</text><!--MD5=[090b486479b03422826726a0bc957c6a]
+cluster Tag Commands--><rect fill="#FFFFFF" height="264" style="stroke:#000000;stroke-width:1.5;" width="200" x="55.5" y="504"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="107" x="102" y="519.1318">Tag Commands</text><!--MD5=[ee234901cc14ce4ccf9222c6e4f6e77d]
+entity {abstract}\nCommand--><rect fill="#F4C7F8" height="52.1973" style="stroke:#000000;stroke-width:1.5;" width="86" x="382" y="617"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="61" x="392" y="640.1318">{abstract}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="66" x="392" y="656.2305">Command</text><!--MD5=[8de6e499e49f97ea3e42f8539c029b5a]
+entity AddCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="111" x="626" y="217"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="91" x="636" y="240.1318">AddCommand</text><!--MD5=[5b037da89b657f1acf0babb5f3016ea1]
+entity DeleteCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="127" x="618" y="288"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="107" x="628" y="311.1318">DeleteCommand</text><!--MD5=[a5c0212f6afaa6e3607a798eeadca312]
+entity CheckCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="126" x="618.5" y="359"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="106" x="628.5" y="382.1318">CheckCommand</text><!--MD5=[07ff9f18cf12a916a165d965513cc662]
+entity ListRecipesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="159" x="602" y="430"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="139" x="612" y="453.1318">ListRecipesCommand</text><!--MD5=[78ee5539c100dd89d3e39af7f9352b77]
+entity HelpCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="115" x="624" y="501"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="95" x="634" y="524.1318">HelpCommand</text><!--MD5=[7a41efbc9d6b58d31babbb88d6dbd69b]
+entity NullCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="110" x="626.5" y="572"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="90" x="636.5" y="595.1318">NullCommand</text><!--MD5=[f70cc934ac79ee250998534058ed291b]
+entity FindCaloriesCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="166" x="72.5" y="101"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="146" x="82.5" y="124.1318">FindCaloriesCommand</text><!--MD5=[f9df87af8e792586e70cf6a432ff58aa]
+entity FindDifficultyCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="167" x="72" y="172"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="147" x="82" y="195.1318">FindDifficultyCommand</text><!--MD5=[5cc512b67834fbfcef6773565ac71326]
+entity FindIngredientsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="185" x="63" y="243"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="165" x="73" y="266.1318">FindIngredientsCommand</text><!--MD5=[cf04f692de35c8535e4f005419abe9a6]
+entity FindPriceCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="146" x="82.5" y="314"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="126" x="92.5" y="337.1318">FindPriceCommand</text><!--MD5=[366f58ef1c1e5a57991e1fc8c696358e]
+entity FindTagsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="146" x="82.5" y="385"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="126" x="92.5" y="408.1318">FindTagsCommand</text><!--MD5=[cec794587d5a9f45db42ce84b5c18f9f]
+entity SetIngredientsCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="178" x="336" y="227"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="158" x="346" y="250.1318">SetIngredientsCommand</text><!--MD5=[40a3f7e8c6568bcf1e2bb5db25c08855]
+entity SetStepsCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="143" x="353.5" y="298"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="123" x="363.5" y="321.1318">SetStepsCommand</text><!--MD5=[8e61c98bd0fc9999a186ed5ca153b7d8]
+entity SetCaloriesCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="159" x="345.5" y="369"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="139" x="355.5" y="392.1318">SetCaloriesCommand</text><!--MD5=[0b236d1536c57880937deeae8ff2742a]
+entity SetDifficultyCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="160" x="345" y="440"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="140" x="355" y="463.1318">SetDifficultyCommand</text><!--MD5=[1940e8542e7194e5a2ba70212ea1b21b]
+entity SetPriceCommand--><rect fill="#FF5151" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="139" x="355.5" y="511"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="119" x="365.5" y="534.1318">SetPriceCommand</text><!--MD5=[f11a73173003528be171953985c57e74]
+entity TagAddCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="136" x="87.5" y="547"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="116" x="97.5" y="570.1318">TagAddCommand</text><!--MD5=[e76a050bc3eb791f621319ec0bb703ba]
+entity TagDeleteCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="152" x="79.5" y="618"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="132" x="89.5" y="641.1318">TagDeleteCommand</text><!--MD5=[2a4a08cc86a26429ea88be4dc682d381]
+entity TagUntagCommand--><rect fill="#FDFCBE" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="149" x="81" y="689"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="129" x="91" y="712.1318">TagUntagCommand</text><!--MD5=[c07313676d19d325c6834c65a019c3ea]
+reverse link {abstract}\nCommand to Basic Commands--><path d="M488.18,643 C506.6925,643 527.7194,643 548.9072,643 C554.2041,643 559.5112,643 564.7915,643 C567.4316,643 570.0651,643 572.6873,643 C573.9984,643 575.3066,643 576.6115,643 C576.9377,643 577.2638,643 577.5895,643 " fill="none" id="{abstract}\nCommand-backto-Basic Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="488.03,650,468.03,643,488.03,636,488.03,650" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[9315aecf2f8cb5721e6fdf24197292ab]
+link Tag Commands to {abstract}\nCommand--><path d="M256.0546,750.8452 C259.7158,749.9982 263.3628,749.0755 266.9726,748.0705 C274.192,746.0605 281.2625,743.7213 288,741 C322.2,727.18 355.87,703.03 381.15,682.16 " fill="none" id="Tag Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="376.73,676.73,396.48,669.06,385.82,687.37,376.73,676.73" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[377a86b21c869f6d5d91d9401992d597]
+link Find Commands to {abstract}\nCommand--><path d="M185.7904,464.1063 C185.9753,464.1674 186.1609,464.2288 186.3471,464.2907 C186.7194,464.4143 187.094,464.5395 187.4709,464.6662 C188.2247,464.9195 188.9876,465.179 189.7591,465.4445 C195.9305,467.5691 202.6478,470.0862 209.6288,473.03 C237.5525,484.805 269.695,503.405 288,531 C304.58,555.99 277.24,574.6 296,598 C312.17,618.17 338.01,629.32 362.25,635.47 " fill="none" id="Find Commands-to-{abstract}\nCommand" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="363.82,628.65,381.99,639.55,360.98,642.36,363.82,628.65" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[8c7667364076495cbd17e51a4a7f0ea7]
+reverse link {abstract}\nCommand to Set Commands--><path d="M425,596.72 C425,595.54 425,594.3594 425,593.1783 C425,592.5877 425,591.9971 425,591.4063 C425,591.1109 425,590.8155 425,590.5201 C425,590.3724 425,590.2247 425,590.0769 C425,590.0585 425,590.04 425,590.0215 " fill="none" id="{abstract}\nCommand-backto-Set Commands" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="none" points="432,596.79,425,616.79,418,596.79,432,596.79" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[19d75a5a785fc3bfcd76a14b80f23b0e]
 @startuml
 !include Style.puml
 skinparam ArrowColor black
 left to right direction
+
+hide empty fields
+hide empty methods
 
 rectangle "Command" {
     rectangle "{abstract}\nCommand" LOGIC_PINK_1 {
@@ -73,6 +78,12 @@ rectangle "Command" {
     }
 
     rectangle "Set Commands" {
+        rectangle SetIngredientsCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetStepsCommand LOGIC_RED_2 {
+        }
+
         rectangle SetCaloriesCommand LOGIC_RED_2 {
         }
 
@@ -118,6 +129,9 @@ skinparam classAttributeIconSize 0
 skinparam ArrowColor black
 left to right direction
 
+hide empty fields
+hide empty methods
+
 rectangle "Command" {
     rectangle "{abstract}\nCommand" #f4c7f8 {
     }
@@ -160,6 +174,12 @@ rectangle "Command" {
     }
 
     rectangle "Set Commands" {
+        rectangle SetIngredientsCommand #FF5151 {
+        }
+
+        rectangle SetStepsCommand #FF5151 {
+        }
+
         rectangle SetCaloriesCommand #FF5151 {
         }
 
@@ -193,7 +213,7 @@ PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: Cp1252
+Default Encoding: UTF-8
 Language: en
-Country: US
+Country: GB
 --></g></svg>

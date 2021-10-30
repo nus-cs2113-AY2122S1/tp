@@ -1,28 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="243px" preserveAspectRatio="none" style="width:251px;height:243px;background:#FFFFFF;" version="1.1" viewBox="0 0 251 243" width="251px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
-cluster Command--><rect fill="#FFFFFF" height="91" style="stroke:#000000;stroke-width:1.5;" width="98" x="57" y="146"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="71.5" y="161.1318">Command</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
-cluster Kitchen--><rect fill="#FFFFFF" height="91" style="stroke:#000000;stroke-width:1.5;" width="238" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="54" x="99" y="22.1318">Kitchen</text><!--MD5=[521817ab83e81da341a3f4b5e91bae41]
-class Command--><rect codeLine="6" fill="#FEFECE" height="39.7988" id="Command" style="stroke:#000000;stroke-width:1.5;" width="65" x="73.5" y="181"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="59" x="76.5" y="197.2559">Command</text><line style="stroke:#000000;stroke-width:1.5;" x1="74.5" x2="137.5" y1="204.7988" y2="204.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="74.5" x2="137.5" y1="212.7988" y2="212.7988"/><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
-class Cookbook--><rect codeLine="10" fill="#B3DFF3" height="39.7988" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="62" x="23" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="26" y="58.2559">Cookbook</text><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="84" y1="65.7988" y2="65.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="84" y1="73.7988" y2="73.7988"/><!--MD5=[20418cb98520644da1e87dc0310aa74a]
-class Recipe--><rect codeLine="11" fill="#B3DFF3" height="39.7988" id="Recipe" style="stroke:#000000;stroke-width:1.5;" width="45" x="183.5" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="39" x="186.5" y="58.2559">Recipe</text><line style="stroke:#000000;stroke-width:1.5;" x1="184.5" x2="227.5" y1="65.7988" y2="65.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="184.5" x2="227.5" y1="73.7988" y2="73.7988"/><!--MD5=[df31911991ebb9868099db0e89c6fb7a]
-reverse link Recipe to Command--><path codeLine="13" d="M189.09,86.17 C169.69,112.74 138.24,155.83 120.11,180.67 " fill="none" id="Recipe-backto-Command" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="192.1,82.05,183.5694,86.9724,189.1574,86.0924,190.0374,91.6804,192.1,82.05" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="174.9479,118.4358,167.2413,124.0089,171.9889,127.4744,174.9479,118.4358" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="48" x="181" y="127.1938">modifies</text><!--MD5=[df00e6f8728fb03896f506b5d5b0adbe]
-reverse link Cookbook to Command--><path codeLine="14" d="M63.04,86.83 C73.15,113.45 89.31,156.03 98.66,180.67 " fill="none" id="Cookbook-backto-Command" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="61.23,82.05,60.681,91.8835,63.0028,86.7252,68.1612,89.047,61.23,82.05" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="81.2256,117.7998,81.6879,127.2991,87.1831,125.2132,81.2256,117.7998" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="48" x="92" y="127.1938">modifies</text><!--MD5=[12aa1a5e13c2f3a9b3bc9488321658f3]
-reverse link Cookbook to Recipe--><path codeLine="15" d="M98.17,62 C126.05,62 160.91,62 183.32,62 " fill="none" id="Cookbook-backto-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="85.13,62,91.13,66,97.13,62,91.13,58,85.13,62" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="112.25,51.4744,103.2049,48.5354,103.2049,54.4133,112.25,51.4744" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="116.25" y="56.1938">contains</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="93.1382" y="58.7081">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="170.6086" y="58.2262">*</text><!--MD5=[0dad67326a19c510fc0b16d2e4671ced]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="407px" preserveAspectRatio="none" style="width:369px;height:407px;background:#FFFFFF;" version="1.1" viewBox="0 0 369 407" width="369px" zoomAndPan="magnify"><defs/><g><!--MD5=[a55135535b5c544b99c33b17428c3b14]
+cluster Util--><rect fill="#FFFFFF" height="75" style="stroke:#000000;stroke-width:1.5;" width="96" x="73" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="23" x="109.5" y="22.1318">Util</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
+cluster Kitchen--><rect fill="#FFFFFF" height="209" style="stroke:#000000;stroke-width:1.5;" width="356" x="7" y="192"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="53" x="158.5" y="207.1318">Kitchen</text><!--MD5=[521817ab83e81da341a3f4b5e91bae41]
+class Command--><rect codeLine="9" fill="#FEFECE" height="23.7988" id="Command" style="stroke:#000000;stroke-width:1.5;" width="63" x="89.5" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="57" x="92.5" y="58.2559">Command</text><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
+class Cookbook--><rect codeLine="13" fill="#B3DFF3" height="23.7988" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="62" x="23" y="294"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="26" y="310.2559">Cookbook</text><!--MD5=[20418cb98520644da1e87dc0310aa74a]
+class Recipe--><rect codeLine="14" fill="#B3DFF3" height="158.2881" id="Recipe" style="stroke:#000000;stroke-width:1.5;" width="163" x="183.5" y="227"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="39" x="245.5" y="243.2559">Recipe</text><line style="stroke:#000000;stroke-width:1.5;" x1="184.5" x2="345.5" y1="250.7988" y2="250.7988"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="64" x="189.5" y="265.1167">#String name</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="89" x="189.5" y="277.7656">#Difficulty difficulty</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="99" x="189.5" y="290.4146">#int preparationTime</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="82" x="189.5" y="303.0635">#int cookingTime</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="64" x="189.5" y="315.7124">#int totalTime</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="146" x="189.5" y="328.3613">#ArrayList&lt;String&gt; ingredients</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="120" x="189.5" y="341.0103">#ArrayList&lt;String&gt; steps</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="74" x="189.5" y="353.6592">#float totalPrice</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="58" x="189.5" y="366.3081">#int calories</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="151" x="189.5" y="378.957">#ArrayList&lt;String&gt; recipeTags;</text><!--MD5=[a2ecffcfda22d9b85273b1db134bbcd7]
+link Command to Recipe--><path codeLine="27" d="M129.38,66.26 C139.85,80.53 158.09,106.05 172,129 C190.02,158.74 208.24,192.29 223.72,222.06 " fill="none" id="Command-to-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="226.18,226.8,225.5817,216.9693,223.8755,222.3627,218.4821,220.6565,226.18,226.8" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="188.5898,141.7514,186.4188,132.4919,181.3908,135.5364,188.5898,141.7514" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="195" y="142.1938">modifies</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="124.2405" y="86.0159">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="214.8158" y="216.1385">1</text><!--MD5=[12aa1a5e13c2f3a9b3bc9488321658f3]
+reverse link Cookbook to Recipe--><path codeLine="28" d="M98.39,306 C122.96,306 154.29,306 183.12,306 " fill="none" id="Cookbook-backto-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="85.13,306,91.13,310,97.13,306,91.13,302,85.13,306" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="112.25,295.4744,103.2049,292.5354,103.2049,298.4133,112.25,295.4744" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="116.25" y="300.1938">contains</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="93.1382" y="302.7081">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="170.6049" y="303.5998">*</text><!--MD5=[6e3b6bec11bd797682f478c5c869c026]
+link Command to Cookbook--><path codeLine="29" d="M118.03,66.06 C107.38,105.83 70.99,241.62 58.36,288.74 " fill="none" id="Command-to-Cookbook" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="57.01,293.78,63.1911,286.1123,58.2965,288.9484,55.4604,284.0538,57.01,293.78" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="103.7058,142.304,108.8858,134.3278,103.2082,132.8064,103.7058,142.304" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="114" y="142.1938">modifies</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="108.4824" y="85.9851">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="49.7834" y="283.3505">1</text><!--MD5=[60bbe1af1e967703f3b0d03aa79a55cd]
 @startuml
 !include Style.puml
 skinparam ArrowColor black
 skinparam classBorderColor black
 
-rectangle "Command" {
+hide empty fields
+hide empty methods
+
+rectangle "Util" {
     class Command
 }
 
 rectangle "Kitchen" {
     class Cookbook LOGIC_BLUE_1
-    class Recipe LOGIC_BLUE_1
+    class Recipe LOGIC_BLUE_1 {
+    # String name
+    # Difficulty difficulty
+    # int preparationTime
+    # int cookingTime
+    # int totalTime
+    # ArrayList<String> ingredients
+    # ArrayList<String> steps
+    # float totalPrice
+    # int calories
+    # ArrayList<String> recipeTags;
+    }
 
-    Recipe <- - Command : modifies <
-    Cookbook <- - Command : modifies <
+    Command "1" -down- -> "1" Recipe : modifies >
     Cookbook "1" *- "*" Recipe : contains >
+    Command "1" -down- -> "1" Cookbook : modifies >
 @enduml
 
 @startuml
@@ -41,24 +55,38 @@ skinparam classAttributeIconSize 0
 skinparam ArrowColor black
 skinparam classBorderColor black
 
-rectangle "Command" {
+hide empty fields
+hide empty methods
+
+rectangle "Util" {
     class Command
 }
 
 rectangle "Kitchen" {
     class Cookbook #b3dff3
-    class Recipe #b3dff3
+    class Recipe #b3dff3 {
+    # String name
+    # Difficulty difficulty
+    # int preparationTime
+    # int cookingTime
+    # int totalTime
+    # ArrayList<String> ingredients
+    # ArrayList<String> steps
+    # float totalPrice
+    # int calories
+    # ArrayList<String> recipeTags;
+    }
 
-    Recipe <- - Command : modifies <
-    Cookbook <- - Command : modifies <
+    Command "1" -down- -> "1" Recipe : modifies >
     Cookbook "1" *- "*" Recipe : contains >
+    Command "1" -down- -> "1" Cookbook : modifies >
 @enduml
 
 PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: Cp1252
+Default Encoding: UTF-8
 Language: en
-Country: US
+Country: GB
 --></g></svg>

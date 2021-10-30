@@ -3,15 +3,29 @@
 skinparam ArrowColor black
 skinparam classBorderColor black
 
+hide empty fields
+hide empty methods
+
 rectangle "Util" {
     class Command
 }
 
 rectangle "Kitchen" {
     class Cookbook LOGIC_BLUE_1
-    class Recipe LOGIC_BLUE_1
+    class Recipe LOGIC_BLUE_1 {
+    # String name
+    # Difficulty difficulty
+    # int preparationTime
+    # int cookingTime
+    # int totalTime
+    # ArrayList<String> ingredients
+    # ArrayList<String> steps
+    # float totalPrice
+    # int calories
+    # ArrayList<String> recipeTags;
+    }
 
-    Recipe <-- Command : modifies <
-    Cookbook <-- Command : modifies <
+    Command "1" -down--> "1" Recipe : modifies >
     Cookbook "1" *- "*" Recipe : contains >
+    Command "1" -down--> "1" Cookbook : modifies >
 @enduml

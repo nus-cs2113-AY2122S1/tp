@@ -1,6 +1,8 @@
 @startuml
 !include Style.puml
 skinparam ArrowColor black
+hide empty fields
+hide empty methods
 
 actor User
 database Computer
