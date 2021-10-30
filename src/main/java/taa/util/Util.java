@@ -83,7 +83,12 @@ public class Util {
         try {
             boolean hasCreatedDir = true;
             if (parentFile != null && (!parentFile.exists() || !parentFile.isDirectory())) {
-                hasCreatedDir = parentFile.mkdirs();
+                boolean parentFileExists = parentFile.exists();
+                boolean parentFileIsDir = parentFile.isDirectory();
+                boolean needCreateParent = !parentFileExists || !parentFileIsDir;
+                if (needCreateParent) {
+                    hasCreatedDir = parentFile.mkdirs();
+                }
             }
 
             if (hasCreatedDir) {
