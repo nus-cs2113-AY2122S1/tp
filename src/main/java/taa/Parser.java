@@ -33,14 +33,21 @@ import taa.command.student.SortByScoresCommand;
 import taa.command.student.SetCommentCommand;
 import taa.command.student.DeleteCommentCommand;
 import taa.command.student.ListCommentCommand;
+import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
+    private static final String ARGUMENT_VALID_REGEX = "^[0-9a-zA-Z\\-_()\\s]+$";
+
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
+    private static final String MESSAGE_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric characters, "
+        + "spaces, and some special characters are allowed.\nAllowed special characters: - _ ( )";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -201,8 +208,10 @@ public class Parser {
      * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.
      * @return HashMap - argumentKey:argumentValue pair.
+     * @throws TaaException if there are any duplicated keys found within string or value is invalid.
      */
-    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys) {
+    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys)
+        throws TaaException {
         if (argumentKeys == null || argumentKeys.length == 0) {
             return new HashMap<>();
         }
@@ -210,14 +219,25 @@ public class Parser {
         String argumentString = " " + string;
         HashMap<String, Integer> argumentIndexMap = new HashMap<>();
         ArrayList<Integer> argumentIndexes = new ArrayList<>();
+        ArrayList<String> duplicatedKeys = new ArrayList<>();
         for (String key : argumentKeys) {
             String searchString = String.format(" %s/", key);
             int index = argumentString.indexOf(searchString);
             if (index != -1) {
                 argumentIndexMap.put(key, index);
                 argumentIndexes.add(index);
+
+                String trailingString = argumentString.substring(index + 3);
+                if (trailingString.contains(searchString)) {
+                    duplicatedKeys.add(key);
+                }
             }
         }
+
+        if (!duplicatedKeys.isEmpty()) {
+            throw new DuplicatedArgumentException(duplicatedKeys);
+        }
+
         Collections.sort(argumentIndexes);
 
         HashMap<String, String> result = new HashMap<>();
@@ -236,11 +256,23 @@ public class Parser {
             }
             value = value.trim();
 
-            if (!value.isEmpty()) {
-                result.put(key, value);
+            if (!isValueValid(value)) {
+                throw new TaaException(MESSAGE_INVALID_VALUE);
             }
+
+            result.put(key, value);
         }
 
         return result;
+    }
+
+    private static boolean isValueValid(String value) {
+        if (value.isEmpty()) {
+            return true;
+        }
+
+        Pattern pattern = Pattern.compile(ARGUMENT_VALID_REGEX);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.find();
     }
 }
