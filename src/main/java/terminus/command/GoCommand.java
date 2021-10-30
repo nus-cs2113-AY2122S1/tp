@@ -57,7 +57,7 @@ public class GoCommand extends WorkspaceCommand {
         throws InvalidCommandException, InvalidArgumentException, IOException {
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
-            throw new InvalidArgumentException("Module not found! Type 'module view' for the list of modules.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_NOT_FOUND);
         }
         commandMap.setWorkspace(moduleName);
         return super.execute(moduleManager);

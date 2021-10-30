@@ -52,5 +52,7 @@ public class AddModuleCommandTest {
             () -> commandParser.parseCommand("add \"test\" \"test2\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add   ").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add   \"??**??** \"").execute(moduleManager));
     }
 }

@@ -47,13 +47,12 @@ public class AddModuleCommand extends Command {
         ArrayList<String> argArray = CommonUtils.findArguments(arguments);
         if (!isValidModuleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
-        }
-
-        moduleName = argArray.get(0);
-        if (!moduleName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
+        } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_MODULE_NAME);
+        } else if (!argArray.get(0).matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         }
-        moduleName = moduleName.toUpperCase();
+        moduleName = argArray.get(0).toUpperCase();
     }
 
     /**
@@ -61,13 +60,13 @@ public class AddModuleCommand extends Command {
      *
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException when the command could not be found.
+     * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException when the module directory is not empty.
+     * @throws IOException              when the module directory is not empty.
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException, IOException {
         if (moduleManager.getModule(moduleName) != null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
@@ -77,7 +76,7 @@ public class AddModuleCommand extends Command {
         if (moduleStorage.createModuleDirectory(moduleName)) {
             moduleManager.addModule(moduleName);
         }
-        
+
         String message = String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName);
         return new CommandResult(message);
     }
@@ -85,10 +84,8 @@ public class AddModuleCommand extends Command {
     private boolean isValidModuleArguments(ArrayList<String> argArray) {
         if (argArray.size() != MODULE_ARGS_COUNT) {
             return false;
-        } else if (CommonUtils.hasEmptyString(argArray)) {
-            return false;
         } else {
-            return CommonUtils.isValidFileName(argArray.get(0));
+            return !CommonUtils.hasEmptyString(argArray);
         }
     }
 }

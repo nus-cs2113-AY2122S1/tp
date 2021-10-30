@@ -21,7 +21,7 @@ import terminus.module.NusModule;
 public class DeleteCommand<T extends Content> extends Command {
 
     private final Class<T> type;
-    private int itemNumber;
+    protected int itemNumber;
 
     protected String deletedContentName;
 
