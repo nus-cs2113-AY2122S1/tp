@@ -61,7 +61,8 @@ Location : `seedu.duke.data`
 
 __Note:__
 * `WorkoutList` : List of all Workout Routines.
-* `Workout` : A specific Workout Routine eg. "Leg day" could be a routine created for exercises that focus on legs.
+* `Workout` : A specific Workout Routine e.g. "Leg day" could be a routine created for exercises that focus on legs.
+* `DeadlineWorkout` : Workout with a deadline attached to it.
 * `Exercise` : A specific exercise eg. "Squats" could be an exercise added to "Leg day." 
 
 The `data` component defines the format in which data is temporarily stored while the application is running.
@@ -149,7 +150,7 @@ Most commands require the use of `workoutIndex` and `exerciseIndex` to execute c
 workout/exercise. However, there are other commands which do not need them such as `HelpCommand`, `ListWorkoutsCommand` 
 and a few more.
 
-### CommandManager Component
+### Parser / CommandManager Component
 Location: `seedu.duke.parser`
 
 ![img.png](umldg/CommandManager.png)
@@ -186,14 +187,19 @@ Location: `seedu.duke.ui`
 __Note:__
 * `CommandResult` : Contains all the information we want to display to the user.
 * `Command` : Abstract class that tells us whether we are in the main level or in a workout.
+* 
 * `Ui` : Handles the display of information to the user.
 
 In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
 
+##Logging
+
+* [Logger Guide](Logging.md)
+
 ## Product scope
 ### Target user profile
 
-- has a need to plan and remember their workouts quickly
+- Has a need to plan and remember their workouts quickly
 - Prefer desktop apps over other types
 - Can type fast
 - Comfortable using CLI apps
@@ -219,6 +225,8 @@ Manage fitness routines quickly
 
 ## Non-Functional Requirements
 
+* Should work on any mainstream OS as long as it has java `11` or above installed.
+* A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using GetJackD than using another equivalent GUI application.
 * Able to store data in a file so that user data can be saved.
 
 ## Glossary

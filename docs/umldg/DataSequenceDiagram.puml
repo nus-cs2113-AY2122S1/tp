@@ -16,12 +16,12 @@ participant WorkoutListModel<<class>> #LightGreen
 
 
 -> WorkoutList ++ #Pink : convertAll..()
-loop for all workouts
+loop all workouts
     WorkoutList -> Workout ++ #Pink : convertToWorkoutStorageModel()
     Workout -> WorkoutModel ** 
     activate WorkoutModel #LightGreen
     return 
-    loop for all exercises
+    loop all exercises
         Workout -> Exercise ++ #Pink : convertToExerciseStorageModel(WorkoutModel)
         Exercise -> ExerciseModel ** 
         activate ExerciseModel #LightGreen
