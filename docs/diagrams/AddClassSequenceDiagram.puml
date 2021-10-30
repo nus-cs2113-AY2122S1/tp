@@ -8,7 +8,7 @@ Participant ":ClassList" as classList
 Participant ":ClassObject" as classObject
 Participant ":Storage" as storage
 
-user -> taa : "add_class c/CS2113T-F12\nn/Tutorial Group F12"
+user -> taa : "add_class i/CS2113T-F12\nn/Tutorial Group F12"
 activate taa
 
 taa -> addClassCommand : execute(classList:ClassList,\nui:Ui, storage:Storage)
