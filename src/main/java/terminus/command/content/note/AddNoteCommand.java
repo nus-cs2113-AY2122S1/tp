@@ -53,6 +53,8 @@ public class AddNoteCommand extends Command {
         ArrayList<String> argArray = CommonUtils.findArguments(arguments);
         if (!isValidNoteArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+        } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NOTE_NAME);
         }
         this.name = argArray.get(0);
         this.data = argArray.get(1);
@@ -103,10 +105,7 @@ public class AddNoteCommand extends Command {
         } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
-        } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
-            TerminusLogger.warning("Failed to parse arguments: given note name is invalid");
-            isValid = false;
-        } else if (argArray.get(1).length() > CommonFormat.MAX_FILE_SIZE) {
+        }  else if (argArray.get(1).length() > CommonFormat.MAX_FILE_SIZE) {
             TerminusLogger.warning("Failed to parse arguments: given note data is too long");
             isValid = false;
         }

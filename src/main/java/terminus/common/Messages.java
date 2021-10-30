@@ -109,4 +109,7 @@ public class Messages {
         + "name cannot contain "
         + "special characters and must be within 30 characters";
     public static final String MESSAGE_QUESTION_PROMPT = "[1/2/3/E] >> ";
+    public static final String ERROR_MESSAGE_INVALID_NOTE_NAME = ERROR_MESSAGE_TAG + "Invalid Note name. Note name "
+        + "cannot contain special"
+        + " characters and be longer than 30 characters";
 }
