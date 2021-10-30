@@ -64,7 +64,7 @@ public class StorageManager {
     private ModuleManager load() throws InvalidFileException {
         ModuleManager moduleManager = jsonStorage.loadJson();
         if (moduleManager == null) {
-            throw new InvalidFileException(Messages.ERROR_MISSING_MODULE_MANAGER);
+            return new ModuleManager();
         }
 
         // Filter

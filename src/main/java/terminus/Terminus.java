@@ -136,7 +136,7 @@ public class Terminus {
             } catch (InvalidFileException e) {
                 ui.printSection(e.getMessage());
                 ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
-                storageManager.setDisabled(true);
+                //storageManager.setDisabled(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
