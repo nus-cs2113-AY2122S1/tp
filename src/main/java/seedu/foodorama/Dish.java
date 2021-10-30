@@ -55,7 +55,10 @@ public class Dish implements Comparable<Dish> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-        } catch (NumberFormatException e) {
+            if(userLimit < 0) {
+                throw new FoodoramaException("");
+            }
+        } catch (NumberFormatException | FoodoramaException e) {
             throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         limit = userLimit;
@@ -100,7 +103,10 @@ public class Dish implements Comparable<Dish> {
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
-        } catch (NumberFormatException e) {
+            if(inputWastage < 0) {
+                throw new FoodoramaException("");
+            }
+        } catch (NumberFormatException | FoodoramaException e) {
             throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         assert inputWastage > 0 : "Adding negative waste is impossible";

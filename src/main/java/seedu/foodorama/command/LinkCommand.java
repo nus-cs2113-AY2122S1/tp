@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AddDishIngrCommand extends Command {
+public class LinkCommand extends Command {
     private static final Logger logger = Logger.getLogger("AddingDishIngrCommand.execute()");
     private static final Ui ui = new Ui();
 
-    AddDishIngrCommand() {
+    LinkCommand() {
         LoggerManager.setupLogger(logger);
     }
 

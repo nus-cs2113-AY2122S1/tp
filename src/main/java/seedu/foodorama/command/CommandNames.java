@@ -6,7 +6,7 @@ public enum CommandNames {
     ADD_INGR_STORED("add ingr stored", new AddIngrStoredCommand()),
     SET_DISH_LIMIT("set dish limit", new SetDishLimitCommand()),
     SET_INGR_LIMIT("set ingr limit", new SetIngrLimitCommand()),
-    LINK("link", new AddDishIngrCommand()),
+    LINK("link", new LinkCommand()),
     ADD_DISH("add dish", new AddDishCommand()),
     ADD_INGR("add ingr", new AddIngrCommand()),
     DELETE_DISH("del dish", new DeleteDishCommand()),

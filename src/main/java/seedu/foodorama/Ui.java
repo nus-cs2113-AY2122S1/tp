@@ -1,9 +1,14 @@
 package seedu.foodorama;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ui {
     private static final String LINE_DIVIDER = "____________________________________________________________";
+    public static final String LINK_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+            + "Your command is missing parameters, pls try again" + System.lineSeparator()
+            + LINE_DIVIDER;
     private static final String START_LOGO =
             "######################################################"
                     + "##########################################################" + System.lineSeparator()
@@ -132,39 +137,39 @@ public class Ui {
 
     protected static final String HELP_ME = LINE_DIVIDER + System.lineSeparator()
             + "Here are the commands you can use:" + System.lineSeparator()
-            + "1. Adding a Dish : 'add dish [dishName]'" + System.lineSeparator()
+            + "1. Adding a Dish : 'add dish [DISH_NAME]'" + System.lineSeparator()
             + "    Example: 'add dish chicken rice'" + System.lineSeparator()
-            + "2. Adding Dish Wastage : 'add dish waste [dishName]' followed by "
+            + "2. Adding Dish Wastage : 'add dish waste [DISH_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add dish waste chicken rice' ; '0.8'" + System.lineSeparator()
-            + "3. Adding Dish Limit : 'set dish limit [dishName]' followed by "
+            + "3. Adding Dish Limit : 'set dish limit [DISH_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'set dish limit chicken rice' ; '16.9'" + System.lineSeparator()
             + "4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
             + "    Example: 'find dish chicken rice'" + System.lineSeparator()
-            + "5. Deleting a Dish : 'del [dishName]" + System.lineSeparator()
+            + "5. Deleting a Dish : 'del [DISH_NAME]" + System.lineSeparator()
             + "    Example: 'del dish chicken rice'" + System.lineSeparator()
             + "6. Viewing all Dishes : 'list dish'" + System.lineSeparator()
             + "7. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
             + "8. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
             + "9. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
-            + "10. Adding a new Ingredient : 'add ingr [ingrName]' "
+            + "10. Adding a new Ingredient : 'add ingr [INGR_NAME]' "
             + "followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr chicken' ; '2'" + System.lineSeparator()
-            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'"
+            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME]'"
             + " followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr stored chicken' ; '1.5'" + System.lineSeparator()
-            + "12. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
+            + "12. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "13. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by "
+            + "13. Adding Ingredient Limit : 'set ingr limit [INGR_NAME]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'set ingr limit chicken' ; '42.7'" + System.lineSeparator()
-            + "14. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
+            + "14. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'" + System.lineSeparator()
             + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
             + "15. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
             + "    Example: 'find ingr chicken'" + System.lineSeparator()
-            + "16. Deleting an Ingredient : 'del [ingrName]'" + System.lineSeparator()
+            + "16. Deleting an Ingredient : 'del [INGR_NAME]'" + System.lineSeparator()
             + "    Example: 'del ingr chicken'" + System.lineSeparator()
             + "17. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
             + "18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
@@ -181,6 +186,9 @@ public class Ui {
             + "#                         Have a nice day!                                #" + System.lineSeparator()
             + "#                   Love, the Food-O-Rama Team <3                         #" + System.lineSeparator()
             + "###########################################################################";
+
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     private static final String INVALID_COMMAND = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, that is an invalid command." + System.lineSeparator()
@@ -220,6 +228,30 @@ public class Ui {
 
     private static final String INGRNAME_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, the ingredient name cannot be blank." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+            + "Missing Parameter!\n"
+            + "Please type the INDEX or NAME of the Ingredient.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String DISHINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+            + "Missing Parameter!\n"
+            + "Please type the Index OR Name of the Dish you would like to edit.\n"
+            + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGR_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient does not exist!\n"
+            + "Please type the correct Index OR Name of the Ingredient you would like to edit.\n"
+            + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String DISH_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
+            + "Dish does not exist!\n"
+            + "Please type the correct Index OR Name of the Dish you would like to edit.\n"
+            + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
@@ -284,6 +316,30 @@ public class Ui {
             + "Are you sure you want to remove all Ingredients? Type y to confirm or n to disregard"
             + System.lineSeparator()
             + LINE_DIVIDER;
+
+    public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient Index exceeds size of Ingredient List. \nType 'list ingr' to view the correct"
+            + " Ingredient Index of the Ingredient you want to edit."
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String DISH_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
+            + "Dish Index exceeds size of Dish List. \nType 'list dish' to view the correct"
+            + " Dish Index of the Dish you want to edit."
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String EXPIRY_INCORRECT_FORMAT = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date of is in the incorrect format." + System.lineSeparator()
+            + "Please use the format 'dd/MM/yyyy'. " + System.lineSeparator() + LINE_DIVIDER;
+
+    public static final String EXPIRY_LONG_DATE = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date is unusually longer than 10 years." + System.lineSeparator()
+            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
+
+    public static final String EXPIRY_PASSED_DATE = LINE_DIVIDER + System.lineSeparator()
+            + "The expiry date cannot be set to a date before today." + System.lineSeparator()
+            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
 
     public void printLogo() {
         System.out.println(START_LOGO);
@@ -388,8 +444,32 @@ public class Ui {
         return INGRNAME_MISSING;
     }
 
+    public String getIngrIndexMissingMsg() {
+        return INGRINDEX_MISSING;
+    }
+
+    public String getDishIndexMissingMsg() {
+        return DISHINDEX_MISSING;
+    }
+
+    public String getIngrNotExistEdit() {
+        return INGR_NOT_EXIST_EDIT;
+    }
+
+    public String getDishNotExistEdit() {
+        return DISH_NOT_EXIST_EDIT;
+    }
+
     public String getIngrNotExistMsg() {
         return INGR_NOTEXIST;
+    }
+
+    public String getIngrIndexExceedSizeMsg() {
+        return INGR_INDEX_EXCEED_SIZE;
+    }
+
+    public String getDishIndexExceedSizeMsg() {
+        return DISH_INDEX_EXCEED_SIZE;
     }
 
     public void printIngrNotExistMsg() {
@@ -399,7 +479,7 @@ public class Ui {
     public String getIngrExistsMsg(String ingrName) {
         assert ingrName != null : "ingrName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the ingredient" + ingrName + "already exists in your list." + System.lineSeparator()
+                + "Sorry, the ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
@@ -455,6 +535,68 @@ public class Ui {
         System.out.println(CONFIRM_CLEAR_ALL);
     }
 
+    public void printAskNewNameDish(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the Dish Name '" + dishName + "' to?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printConfirmDishEditMsg(String dishName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change Dish Name from '" + dishName + "' to '"
+                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printDishNameChanged(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Dish Name has been updated to '" + dishName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printAskNewNameIngr(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the Ingredient Name '" + ingrName
+                + "' to?" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printConfirmIngrEditMsg(String ingrName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change ingredient name from '" + ingrName + "' to '"
+                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printIngrNameChanged(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Ingredient Name has been updated to '" + ingrName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printAskIngrExpiryDate(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What is the expiry date of '" + ingrName + "'?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printSetIngrExpiryDate(String ingrName, LocalDate date, long daysAway) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The expiry date of '" + ingrName + "' has been set to " + date.format(dtf)
+                + " (" + daysAway + " day(s) from today)"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public String getIncorrectExpiryDateFormatMsg() {
+        return EXPIRY_INCORRECT_FORMAT;
+    }
+
+    public String getLongExpiryDateMsg() {
+        return EXPIRY_LONG_DATE;
+    }
+
+    public String getPassedExpiryDateMsg() {
+        return EXPIRY_PASSED_DATE;
+    }
+
     public void printDisregardMsg() {
         System.out.println(DISREGARD_MSG);
     }
@@ -469,7 +611,7 @@ public class Ui {
         if (!dishList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the dishes
-            ArrayList<Integer> lengths = new ArrayList();
+            ArrayList<Integer> lengths = new ArrayList<>();
             double max = DishList.getGreatestWaste();
             for (int i = 0; i < dishList.size(); i++) {
                 lengths.add(dishList.get(i).getGraphHeight(max, graphPortions));
@@ -519,7 +661,7 @@ public class Ui {
         if (!ingredientList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the ingredients
-            ArrayList<Integer> lengths = new ArrayList();
+            ArrayList<Integer> lengths = new ArrayList<>();
             double max = IngredientList.getGreatestWaste();
             for (int i = 0; i < ingredientList.size(); i++) {
                 lengths.add(ingredientList.get(i).getGraphHeight(max, graphPortions));
@@ -621,6 +763,10 @@ public class Ui {
                 + LINE_DIVIDER);
     }
 
+    public String getMissingParameters() {
+        return LINK_MISSING_PARAM;
+    }
+
     public String getFindMissingParamMsg() {
         return FIND_MISSING_PARAM;
     }
@@ -680,9 +826,9 @@ public class Ui {
                 + "Example (2 constituents, no limit): prata|2.0|1.0|-1|flour|egg" + System.lineSeparator()
                 + "Example (2 constituents, limit of 3): prata|2.0|1.0|3|flour|egg";
         String ingrFormat = "Ingredients: [Name] | [Amount stored (kg)] | [Amount wasted (kg)] | "
-                + "[Wastage limit (if present else -1)]";
-        String ingrExample = "Example (no limit): chicken|2.33|1.0|-1" + System.lineSeparator()
-                + "Example (limit of 2.5): chicken|2.33|1.0|2.5";
+                + "[Wastage limit (if present else -1)] | [Expiry Date in format dd/MM/yyyy (if set)]";
+        String ingrExample = "Example (no limit, expiry not set): chicken|2.33|1.0|-1|null" + System.lineSeparator()
+                + "Example (limit of 2.5, expiry set): chicken|2.33|1.0|2.5|30/10/2021";
         return dishFormat + System.lineSeparator()
                 + dishExample + System.lineSeparator()
                 + ingrFormat + System.lineSeparator()

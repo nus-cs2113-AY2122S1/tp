@@ -16,7 +16,10 @@ public class IngredientList {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-        } catch (NumberFormatException e) {
+            if(ingredientWeightValue < 0) {
+                throw new FoodoramaException("");
+            }
+        } catch (NumberFormatException | FoodoramaException e) {
             throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
@@ -56,8 +59,6 @@ public class IngredientList {
 
     public static void delete(String ingredientName) {
         Scanner input = new Scanner(System.in);
-
-
         int listSize = ingredientList.size(); //listSize = N
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
