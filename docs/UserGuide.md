@@ -44,7 +44,7 @@ commands that you can execute.
 
 You should see the following output when you start NUSBuddy for the first time.
 
-```shell
+```
     _______________________________________________________________________________
      I can't retrieve the saved task data. Creating new file..
     _______________________________________________________________________________
@@ -90,7 +90,7 @@ Format: `help`
 
 Example usage:
 
-```shell
+```
 $ help
       ______________________________________________________________________________________
        Here are the list of commands that you can try.
@@ -137,7 +137,7 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 
 Example:
 
-```shell
+```
 $ add task Do CS2113T tP -d sat -p H
       ______________________________________________________________________________________
        Noted. I've added this task:
@@ -176,7 +176,7 @@ Format: `add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -
 
 Example:
 
-```shell
+```
 $ add lesson CS2113T Lecture -d fri -s 16:00 -e 18:00 
       ______________________________________________________________________________________
        Noted. I've added this lesson:
@@ -208,7 +208,7 @@ Format: `add module [MODULE_CODE]`
 
 Example:
 
-```shell
+```
 $ add module CS2113T
       ______________________________________________________________________________________
        Noted. I've added this module:
@@ -234,7 +234,7 @@ Format: `list task {PERIOD/PRIORITY}`
 
 Example:
 
-```shell
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -249,7 +249,7 @@ $ list task
 
 > 💡 By default, the list of tasks is sorted by the day the of the week.
 
-```shell
+```
 $ list task today
       ______________________________________________________________________________________
        Here are the tasks on THU:
@@ -276,7 +276,7 @@ Format: `list lesson {PERIOD/PRIORITY}`
 
 * `PERIOD` can be either day of the week, and `today` or `tomorrow`.
 
-```shell
+```
 $ list lesson
       ______________________________________________________________________________________
        Here are the lessons in your list:
@@ -303,7 +303,7 @@ Format: `list module {verbose}`
 
 * `verbose` provides more detailed information.
 
-```shell
+```
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
@@ -346,7 +346,7 @@ Format: `done task [INDEX]`
 
 Example:
 
-```shell
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -391,7 +391,7 @@ Format: `delete task [INDEX]`
 
 Example:
 
-```shell
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -427,7 +427,7 @@ Format: `delete lesson [INDEX]`
 
 Example:
 
-```shell
+```
 $ list lesson
       ______________________________________________________________________________________
        Here are the lessons in your list:
@@ -463,7 +463,7 @@ Format: `delete module [MODULE_CODE]`
 
 Example:
 
-```shell
+```
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
@@ -504,7 +504,7 @@ Format: `find task [KEYWORD]`
 
 Example:
 
-```shell
+```
 $ find task CS2113T
       ______________________________________________________________________________________
        Here are the matching tasks in your list:
@@ -522,7 +522,7 @@ Format: `find lesson [KEYWORD]`
 
 Example:
 
-```shell
+```
 $ find lesson CS2113T
       ______________________________________________________________________________________
        Here are the matching lessons in your list:
@@ -543,7 +543,7 @@ Format: `moduleinfo [MODULE_CODE]`
 
 Example:
 
-```shell
+```
 $ moduleinfo CS3219
       ______________________________________________________________________________________
        CS3219 Software Engineering Principles and Patterns (4MCs) 
@@ -561,7 +561,7 @@ Format: `set grade [MODULE_CODE] [GRADE]`
 
 Example:
 
-```shell
+```
 $ set grade CS2113T A
       ______________________________________________________________________________________
        You have changed your grade for this module: 
@@ -583,7 +583,7 @@ Format: `exit`
 
 Example:
 
-```shell
+```
 $ exit
       _______________________________________________________________________________
        Bye!
