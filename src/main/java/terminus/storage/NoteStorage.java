@@ -78,6 +78,19 @@ public class NoteStorage extends Storage {
         }
     }
 
+    public void saveAllNotes(ModuleManager moduleManager) throws InvalidFileException {
+        for (String module : moduleManager.getAllModules()) {
+            Path moduleFolder = getAppendPath(baseDirectory, module);
+            createFolder(moduleFolder);
+            ContentManager<Note> contentManager = moduleManager.getModule(module).getContentManager(Note.class);
+            ArrayList<Note> noteArrayList = contentManager.getContents();
+            for (Note note : noteArrayList) {
+                String noteFileName = appendFileExtension(note.getName());
+                writeFile(getAppendPath(moduleFolder, noteFileName), note.getData());
+            }
+        }
+    }
+
     private String appendFileExtension(String name) {
         return name + FILE_EXTENSION;
     }

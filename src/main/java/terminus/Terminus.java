@@ -1,7 +1,5 @@
 package terminus;
 
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.nio.file.Path;
 import terminus.command.Command;
@@ -14,7 +12,6 @@ import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
-import terminus.storage.ModuleStorage;
 import terminus.storage.StorageActionEnum;
 import terminus.storage.StorageManager;
 import terminus.storage.StorageTypeEnum;
@@ -23,18 +20,16 @@ import terminus.ui.Ui;
 public class Terminus {
 
     public static final String[] INVALID_JSON_MESSAGE = {
-        "Invalid file data detected.",
-        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-        "To save your current file, close your terminal (do not run exit).",
-        "Otherwise, you can continue using the program :)"
+            "Invalid file data detected.",
+            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+            "To save your current file, close your terminal (do not run exit).",
+            "Otherwise, you can continue using the program :)"
     };
     private Ui ui;
     private CommandParser parser;
     private String workspace;
 
-    private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
-
     private StorageManager storageManager;
 
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
@@ -63,17 +58,13 @@ public class Terminus {
             this.ui = Ui.getInstance();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
-            this.storageManager = new StorageManager(DATA_DIRECTORY);
-            this.moduleStorage = ModuleStorage.getInstance();
-            this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
-            TerminusLogger.info("Loading file...");
-            this.moduleManager = moduleStorage.loadFile();
+            this.storageManager = new StorageManager(DATA_DIRECTORY, MAIN_JSON);
+            this.moduleManager = this.storageManager.initialize();
         } catch (IOException e) {
-            TerminusLogger.warning("File loading has failed.", e.fillInStackTrace());
+            TerminusLogger.warning("Log file loading has failed.", e.fillInStackTrace());
             handleIoException(e);
-        } catch (JsonSyntaxException | JsonIOException e) {
-            TerminusLogger.severe("Invalid file data detected!", e.fillInStackTrace());
-            ui.printSection(INVALID_JSON_MESSAGE);
+        } catch (InvalidFileException e) {
+            ui.printSection(e.getMessage());
         } finally {
             if (this.moduleManager == null) {
                 TerminusLogger.warning("File not found.");
@@ -98,13 +89,13 @@ public class Terminus {
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(moduleManager);
-                if (result.hasChange()) {
+                if (result.hasChange() && !storageManager.isDisabled()) {
                     // Pass to Storage to handle the request
                     String affectedModule = result.getModule();
                     StorageActionEnum storageAction = result.getStorageAction();
                     StorageTypeEnum storageType = result.getStorageType();
                     String deletedItemName = result.getDeletedItemName();
-                    storageManager.execute(moduleManager, affectedModule, deletedItemName ,storageAction, storageType);
+                    storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
                 }
                 boolean isExitCommand = result.isExit();
                 boolean isWorkspaceCommand = result.getNewCommandParser() != null;
@@ -118,9 +109,10 @@ public class Terminus {
                 } else {
                     ui.printSection(result.getMessage());
                 }
-                
+
                 TerminusLogger.info("Saving data into file...");
-                this.moduleStorage.saveFile(moduleManager);
+                this.storageManager.execute(moduleManager, null,
+                        null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
                 TerminusLogger.info("Save completed.");
             } catch (InvalidCommandException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
@@ -136,11 +128,12 @@ public class Terminus {
                 } else {
                     ui.printSection(e.getMessage());
                 }
-            } catch (IOException e) {
-                TerminusLogger.warning("File saving has failed.");
-                handleIoException(e);
-            } catch (InvalidFileException e){
+            } catch (InvalidFileException e) {
                 ui.printSection(e.getMessage());
+                ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
+                storageManager.setDisabled(true);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -158,12 +151,12 @@ public class Terminus {
     private void exit() {
         TerminusLogger.info("Saving data into file...");
         try {
-            this.moduleStorage.saveFile(moduleManager);
-            this.moduleStorage.saveAllNotes(moduleManager);
+            storageManager.setDisabled(false);
+            this.storageManager.save(moduleManager);
             TerminusLogger.info("Save completed.");
-        } catch (IOException e) {
+        } catch (InvalidFileException e) {
             TerminusLogger.warning("File saving has failed.");
-            handleIoException(e);
+            ui.printSection(e.getMessage());
         }
         this.ui.printExitMessage();
     }

@@ -1,5 +1,6 @@
 package terminus.storage;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
@@ -23,6 +24,21 @@ public class Storage {
             throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_FILE_EXIST, folderPath));
         } catch (IOException e) {
             throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FOLDER, folderPath));
+        } catch (Exception e) {
+            throw new InvalidFileException(e.getMessage());
+        }
+    }
+
+    public void createFile(Path filePath) throws InvalidFileException {
+        try {
+            if (Files.notExists(filePath)) {
+                Files.createFile(filePath);
+            }
+        } catch (FileAlreadyExistsException e) {
+            // Should not reach here
+            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_FILE_EXIST, filePath));
+        } catch (IOException e) {
+            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FILE, filePath));
         } catch (Exception e) {
             throw new InvalidFileException(e.getMessage());
         }
@@ -118,6 +134,16 @@ public class Storage {
             if (!oldFile.renameTo(newFile)) {
                 throw new InvalidFileException(Messages.ERROR_CHANGE_FILE_NAME);
             }
+        }
+    }
+
+    public BufferedReader getBufferedReader(Path filePath) throws InvalidFileException {
+        try {
+            return Files.newBufferedReader(filePath);
+        } catch (IOException e) {
+            throw new InvalidFileException(String.format(Messages.ERROR_FILE_BUFFERED_READER, filePath));
+        } catch (Exception e) {
+            throw new InvalidFileException(e.getMessage());
         }
     }
 }

@@ -70,6 +70,7 @@ public class Messages {
     public static final String ERROR_STORAGE_INVALID_ACTION = "Invalid storage operation detected : %s";
     public static final String ERROR_STORAGE_INVALID_TYPE = "Invalid storage type detected : %s";
     public static final String ERROR_STORAGE_CREATE_FOLDER = "Unable to create folder : %s";
+    public static final String ERROR_STORAGE_CREATE_FILE = "Unable to create file : %s";
     public static final String ERROR_STORAGE_READ_FILE = "Unable to read file : %s";
     public static final String ERROR_STORAGE_FILE_TOO_LARGE = "File too large detected : %s";
     public static final String ERROR_STORAGE_FILE_EXIST = "Unable to create file/folder, name already exists : %s";
@@ -82,6 +83,10 @@ public class Messages {
     public static final String ERROR_MISSING_FOLDER = "Unable to find folder : %s";
     public static final String ERROR_GET_FILES = "Unable to get files from folder : %s";
     public static final String ERROR_GET_FILE_CONTENT = "Unable to get file content type : %s";
+    public static final String ERROR_STORAGE_DISABLE_RESPONSE = "We have detect an issue with storage, we will be "
+            + "disabling the storage temporary until the TermiNUS exit where we will attempt to save your data 1 last"
+            + " time.";
+    public static final String ERROR_FILE_BUFFERED_READER = "Unable to collect file contents : %s";
 
 
     /*

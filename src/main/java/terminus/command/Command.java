@@ -42,7 +42,6 @@ public abstract class Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException              when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     public abstract CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException;
