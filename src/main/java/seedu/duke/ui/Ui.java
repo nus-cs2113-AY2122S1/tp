@@ -101,7 +101,7 @@ public class Ui {
         System.out.println(PADDING + "add        "
                 + "task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}");
         System.out.println(PADDING + "add        "
-                + "lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}");
+                + "lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}");
         System.out.println(PADDING + "add        "
                 + "module [MODULE_CODE]");
 
