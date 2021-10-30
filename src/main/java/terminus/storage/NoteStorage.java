@@ -63,7 +63,8 @@ public class NoteStorage extends Storage {
         ContentManager<Note> contentManager = moduleManager.getModule(module).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfNoteFiles) {
-            if (isValidTextFile(file)) {
+            String fileName = CommonUtils.getFileNameOnly(file.getName());
+            if (isValidTextFile(file) && CommonUtils.isValidFileName(fileName)) {
                 try {
                     String data = readFile(file.toPath());
                     if (data != null) {
