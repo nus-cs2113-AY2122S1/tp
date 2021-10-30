@@ -27,7 +27,7 @@ public class AddRecipeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a recipe with its constituent ingredients"
             + " to the recipe list.\n"
             + "You can add any number of ingredients with its required quantities.\n"
-            + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
+            + "Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...\n"
             + "Example: " + COMMAND_WORD
             + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
     public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";

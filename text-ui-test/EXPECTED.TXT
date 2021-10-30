@@ -266,7 +266,7 @@
      Invalid command format!
      add recipe: Adds a recipe with its constituent ingredients to the recipe list.
      You can add any number of ingredients with its required quantities.
-     Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
+     Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...
      Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ____________________________________________________________________________________________________
 
@@ -274,7 +274,7 @@
      Invalid command format!
      add recipe: Adds a recipe with its constituent ingredients to the recipe list.
      You can add any number of ingredients with its required quantities.
-     Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
+     Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...
      Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ____________________________________________________________________________________________________
 
