@@ -1,15 +1,15 @@
-package seedu.traveller;
+package seedu.traveller.objects;
 
 import org.junit.jupiter.api.Test;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.objects.Trip;
-import seedu.traveller.objects.TripsList;
+import seedu.traveller.exceptions.TripNotFoundException;
 import seedu.traveller.worldmap.Country;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 //@@author Uxinnn
@@ -18,7 +18,7 @@ public class TripsListTest {
     private final Trip tripSinMly;
     private final Trip tripSkrJpn;
 
-    public TripsListTest() {
+    public TripsListTest() throws TravellerException {
         List<Country> pathSinMly = new ArrayList<>();
         List<Double> distancesSinMly = new ArrayList<>();
         pathSinMly.add(new Country("SIN", 0));
@@ -52,5 +52,29 @@ public class TripsListTest {
     @Test
     public void getSize_success() {
         assertEquals(2, this.tripsList.getSize());
+    }
+
+    @Test
+    public void addTrip_exceptionThrown() {
+        assertThrows(AssertionError.class, () -> {
+            tripsList.addTrip(this.tripSinMly);
+        });
+    }
+
+    @Test
+    public void getTrip_exceptionThrown() {
+        assertThrows(TripNotFoundException.class, () -> {
+            tripsList.getTrip("abc");
+        });
+    }
+
+    @Test
+    public void deleteTrip_exceptionThrown() {
+        assertThrows(AssertionError.class, () -> {
+            tripsList.deleteTrip(10);
+        });
+        assertThrows(AssertionError.class, () -> {
+            tripsList.deleteTrip(-1);
+        });
     }
 }

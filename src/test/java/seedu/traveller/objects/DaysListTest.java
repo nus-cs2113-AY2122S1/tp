@@ -1,10 +1,11 @@
-package seedu.traveller;
+package seedu.traveller.objects;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.exceptions.DayNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.objects.DaysList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 //@@author Uxinnn
@@ -33,4 +34,25 @@ public class DaysListTest {
         }
         assertEquals(1, daysList.getSize());
     }
+
+    @Test
+    public void deleteDay_exceptionThrown() {
+        assertThrows(DayNotFoundException.class, () -> {
+            daysList.deleteDay(10);
+        });
+        assertThrows(DayNotFoundException.class, () -> {
+            daysList.deleteDay(-1);
+        });
+    }
+
+    @Test
+    public void getDay_exceptionThrown() {
+        assertThrows(DayNotFoundException.class, () -> {
+            daysList.getDay(10);
+        });
+        assertThrows(DayNotFoundException.class, () -> {
+            daysList.getDay(-1);
+        });
+    }
+
 }

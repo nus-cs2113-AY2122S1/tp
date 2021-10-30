@@ -32,12 +32,14 @@ import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
 import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
 
 import seedu.traveller.worldmap.WorldMap;
 import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -323,14 +325,17 @@ public class Parser {
 
         try {
             int dayIdx = getDayFlagIndex(userInput);
-            int timeIdx = getTimeFlagIndex(userInput);
-            int nameIdx = getNameFlagIndex(userInput);
-            int indexIdx = getIndexFlagIndex(userInput);
-
             tripName = userInput.substring(0, dayIdx);
+
+            int timeIdx = getTimeFlagIndex(userInput);
             rawDayNumber = userInput.substring(dayIdx + DAY_LENGTH, timeIdx);
+
+            int nameIdx = getNameFlagIndex(userInput);
             itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
+
+            int indexIdx = getIndexFlagIndex(userInput);
             itemName = userInput.substring(nameIdx + NAME_LENGTH, indexIdx);
+
             rawIndex = userInput.substring(indexIdx + INDEX_LENGTH);
 
             try {
@@ -355,9 +360,12 @@ public class Parser {
      * Parses user input to give a <code>ViewCommand</code>.
      * @return Command A <code>ViewCommand</code> object.
      */
-    private static Command parseViewCommand(String userInput) {
+    private static Command parseViewCommand(String userInput) throws  TravellerException {
         Command command;
         logger.log(Level.INFO, "View command input");
+        if (Objects.equals(userInput, "")) {
+            throw new InvalidViewCommandException();
+        }
         command = new ViewCommand(userInput);
         return command;
     }

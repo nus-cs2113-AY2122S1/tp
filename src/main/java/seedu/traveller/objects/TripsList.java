@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
 public class TripsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Trip> trips;
@@ -19,15 +18,20 @@ public class TripsList {
         this.trips = new ArrayList<>();
     }
 
-    public void addTrip(Trip trip) {
+    public void addTrip(Trip trip) throws TravellerException {
+        String tripName = trip.getTripName();
+        for (int i = 0; i < getSize(); i++) {
+            Trip existingTrip = getTrip(i);
+            assert !tripName.equals(existingTrip.getTripName()) : "TripName is already in use.";
+        }
         this.trips.add(trip);
     }
 
     public Trip getTrip(int tripNumber) throws TravellerException {
-        if (tripNumber < 0) {
+        if (tripNumber < 0 || tripNumber >= getSize()) {
             throw new TripNotFoundException();
         }
-        return this.trips.get(tripNumber);
+        return trips.get(tripNumber);
     }
 
     public Trip getTrip(String tripName) throws TravellerException {
@@ -38,9 +42,9 @@ public class TripsList {
     }
 
     public int getTripIndex(String tripName) throws TravellerException {
-        int tripIndex = -1;
-        for (int i = 0; i < this.getSize(); i++) {
-            Trip trip = this.getTrip(i);
+        int tripIndex = -1;  // If trip is not found, return -1 to indicate so.
+        for (int i = 0; i < getSize(); i++) {
+            Trip trip = getTrip(i);
             if (tripName.equals(trip.getTripName())) {
                 tripIndex = i;
                 break;
@@ -50,6 +54,8 @@ public class TripsList {
     }
 
     public void deleteTrip(int tripNumber) {
+        assert tripNumber < getSize() : "tripNumber is larger than size of trips array.";
+        assert tripNumber >= 0 : "tripNumber is negative.";
         trips.remove(tripNumber);
     }
 

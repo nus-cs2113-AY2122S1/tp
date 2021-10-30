@@ -1,6 +1,5 @@
 package seedu.traveller.objects;
 
-import seedu.traveller.exceptions.DayNotFoundException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -10,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
 /**
  * Represents a list of items that will be done in a particular day of a trip.
  * Each <code>Day</code> will have 1 <code>ItemsList</code>.
@@ -81,7 +79,8 @@ public class ItemsList {
         for (int i = 0; i < getSize(); i++) {
             String itemEntry = "\n\t\t\t\t\t" + i + ":\t";
             itemsListString.append(itemEntry);
-            itemsListString.append(items.get(i).toString());
+            Item item = items.get(i);
+            itemsListString.append(item.toString());
         }
         return itemsListString.toString();
     }
