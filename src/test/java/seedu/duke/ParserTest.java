@@ -300,7 +300,7 @@ public class ParserTest {
     @Test
     public void addIncomeWithDate_validInput_validCommand() {
         Parser testParser = new Parser();
-        String userInput = "add_in d/asf a/10 c/salary da/11/11/2021";
+        String userInput = "add_in d/asf a/10 c/salary da/11/11/2100";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddIncomeCommand.class);
     }
