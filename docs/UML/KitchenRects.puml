@@ -2,9 +2,16 @@
 !include Style.puml
 skinparam ArrowColor LOGIC_BLUE_5
 
+hide empty fields
+hide empty methods
+
 rectangle "Util" {
-    rectangle "<<Enumeration>> \n Difficulty" LOGIC_PINK_1 {
-    }
+    enum "<<enumeration>> \n Difficulty" LOGIC_PINK_1  {
+            NONE
+            EASY
+            MEDIUM
+            HARD
+        }
 
     rectangle Tag LOGIC_PINK_1 {
     }
@@ -16,7 +23,7 @@ rectangle "Kitchen" {
     rectangle Recipe LOGIC_BLUE_3 {
     }
 
-    Cookbook --> "<<Enumeration>> \n Difficulty"
+    Cookbook --> "<<enumeration>> \n Difficulty"
     Cookbook *- Recipe
     Cookbook *--- Tag
 }

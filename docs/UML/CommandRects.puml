@@ -3,6 +3,9 @@
 skinparam ArrowColor black
 left to right direction
 
+hide empty fields
+hide empty methods
+
 rectangle "Command" {
     rectangle "{abstract}\nCommand" LOGIC_PINK_1 {
     }

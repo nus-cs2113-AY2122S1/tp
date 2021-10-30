@@ -3,6 +3,9 @@
 skinparam ArrowColor black
 skinparam classBorderColor black
 
+hide empty fields
+hide empty methods
+
 class Gordon #white {
 Gordon()
 Run()
@@ -26,6 +29,6 @@ rectangle Util {
 
 
 Gordon "1" -> "1" Parser : creates >
-Parser --> UI : uses >
+Parser "1"--> "*" UI : uses >
 
 @enduml

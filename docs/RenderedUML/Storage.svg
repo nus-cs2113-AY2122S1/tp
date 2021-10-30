@@ -1,20 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="255px" preserveAspectRatio="none" style="width:285px;height:255px;background:#FFFFFF;" version="1.1" viewBox="0 0 285 255" width="285px" zoomAndPan="magnify"><defs/><g><!--MD5=[a55135535b5c544b99c33b17428c3b14]
-cluster Util--><rect fill="#FFFFFF" height="103" style="stroke:#000000;stroke-width:1.5;" width="226" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="23" x="108.5" y="22.1318">Util</text><!--MD5=[53a25ea2ba8a4a41e52527f6e62fce47]
-cluster Exception--><rect fill="#FFFFFF" height="91" style="stroke:#000000;stroke-width:1.5;" width="132" x="7" y="158"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70" x="38" y="173.1318">Exception</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
-cluster Kitchen--><rect fill="#FFFFFF" height="91" style="stroke:#000000;stroke-width:1.5;" width="94" x="163" y="158"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="54" x="183" y="173.1318">Kitchen</text><!--MD5=[11b747870319a085bc745183e08c5f76]
-class Storage--><rect codeLine="6" fill="#FEFECE" height="52.4478" id="Storage" style="stroke:#000000;stroke-width:1.5;" width="193" x="23.5" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="43" x="98.5" y="58.2559">Storage</text><line style="stroke:#000000;stroke-width:1.5;" x1="24.5" x2="215.5" y1="65.7988" y2="65.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="24.5" x2="215.5" y1="73.7988" y2="73.7988"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="181" x="29.5" y="88.1167">saveCookbook(cookbook : Cookbook)</text><!--MD5=[f11a376debd67c58f7ced6b4e6a2435d]
-class GordonException--><rect codeLine="12" fill="#F4C7F8" height="39.7988" id="GordonException" style="stroke:#000000;stroke-width:1.5;" width="100" x="23" y="193"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="94" x="26" y="209.2559">GordonException</text><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="122" y1="216.7988" y2="216.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="122" y1="224.7988" y2="224.7988"/><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
-class Cookbook--><rect codeLine="17" fill="#B3DFF3" height="39.7988" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="62" x="179" y="193"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="182" y="209.2559">Cookbook</text><line style="stroke:#000000;stroke-width:1.5;" x1="180" x2="240" y1="216.7988" y2="216.7988"/><line style="stroke:#000000;stroke-width:1.5;" x1="180" x2="240" y1="224.7988" y2="224.7988"/><!--MD5=[4a76753227170e6ccf86bb02cd18ea23]
-link Storage to GordonException--><path codeLine="20" d="M110.37,94.14 C106.68,104.02 102.52,115.5 99,126 C92.08,146.64 84.98,170.34 79.95,187.62 " fill="none" id="Storage-to-GordonException" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="78.46,192.77,84.7993,185.2326,79.8468,187.9662,77.1132,183.0137,78.46,192.77" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="102.4528,139.229,108.0464,131.5373,102.4571,129.7184,102.4528,139.229" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="43" x="113" y="139.1938">creates</text><!--MD5=[304c2a0fff84287662f340ee1039b41a]
-link Storage to Cookbook--><path codeLine="21" d="M138.95,94.14 C146.1,103.92 154.15,115.33 161,126 C174.15,146.49 187.76,170.64 197.28,188.12 " fill="none" id="Storage-to-Cookbook" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="199.86,192.87,199.0865,183.0516,197.4767,188.4745,192.0538,186.8648,199.86,192.87" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="177.6367,138.7226,175.3639,129.4876,170.3698,132.5873,177.6367,138.7226" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="93" x="184" y="139.1938">saves and loads</text><!--MD5=[129531bb91cd09468a8e3d3142037a97]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="341px" preserveAspectRatio="none" style="width:465px;height:341px;background:#FFFFFF;" version="1.1" viewBox="0 0 465 341" width="465px" zoomAndPan="magnify"><defs/><g><!--MD5=[a55135535b5c544b99c33b17428c3b14]
+cluster Util--><rect fill="#FFFFFF" height="205" style="stroke:#000000;stroke-width:1.5;" width="452" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="23" x="221.5" y="22.1318">Util</text><!--MD5=[53a25ea2ba8a4a41e52527f6e62fce47]
+cluster Exception--><rect fill="#FFFFFF" height="75" style="stroke:#000000;stroke-width:1.5;" width="134" x="92" y="260"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="124.5" y="275.1318">Exception</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
+cluster Kitchen--><rect fill="#FFFFFF" height="75" style="stroke:#000000;stroke-width:1.5;" width="94" x="250" y="260"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="53" x="270.5" y="275.1318">Kitchen</text><!--MD5=[11b747870319a085bc745183e08c5f76]
+class Storage--><rect codeLine="9" fill="#FEFECE" height="153.6392" id="Storage" style="stroke:#000000;stroke-width:1.5;" width="419" x="23.5" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="43" x="211.5" y="58.2559">Storage</text><line style="stroke:#000000;stroke-width:1.5;" x1="24.5" x2="441.5" y1="65.7988" y2="65.7988"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="111" x="29.5" y="80.1167">+Scanner loadScanner</text><line style="stroke:#000000;stroke-width:1.5;" x1="24.5" x2="441.5" y1="86.4478" y2="86.4478"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="316" x="29.5" y="100.7656">-loadDifficulty(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="315" x="29.5" y="113.4146">-loadCalories(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="305" x="29.5" y="126.0635">-loadTimes(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="300" x="29.5" y="138.7124">-loadPrice(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="329" x="29.5" y="151.3613">-loadIngredients(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="303" x="29.5" y="164.0103">-loadSteps(Recipe recipe, String buffer, Scanner loadScanner)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="407" x="29.5" y="176.6592">-loadTags(Recipe recipe, String buffer, Scanner loadScanner, Cookbook cookbook)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="189" x="29.5" y="189.3081">+saveCookbook(cookbook Cookbook)</text><!--MD5=[f11a376debd67c58f7ced6b4e6a2435d]
+class GordonException--><rect codeLine="23" fill="#F4C7F8" height="23.7988" id="GordonException" style="stroke:#000000;stroke-width:1.5;" width="101" x="108.5" y="295"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="95" x="111.5" y="311.2559">GordonException</text><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
+class Cookbook--><rect codeLine="28" fill="#B3DFF3" height="23.7988" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="62" x="266" y="295"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="269" y="311.2559">Cookbook</text><!--MD5=[4a76753227170e6ccf86bb02cd18ea23]
+link Storage to GordonException--><path codeLine="31" d="M202.69,196.19 C188.79,231.11 173.6,269.31 165.29,290.18 " fill="none" id="Storage-to-GordonException" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="163.43,294.86,170.4864,287.9893,165.287,290.2176,163.0586,285.0181,163.43,294.86" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="192.1514,241.1201,198.2262,233.8025,192.7649,231.6293,192.1514,241.1201" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="43" x="203" y="241.1938">creates</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="192.6788" y="215.9403">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="159.3226" y="284.4675">*</text><!--MD5=[304c2a0fff84287662f340ee1039b41a]
+link Storage to Cookbook--><path codeLine="32" d="M259.22,196.19 C271.18,230.97 284.26,268.98 291.47,289.92 " fill="none" id="Storage-to-Cookbook" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="293.17,294.86,294.0212,285.048,291.5418,290.1325,286.4573,287.6531,293.17,294.86" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="280.6268,241.2023,280.4629,231.6932,274.9049,233.6056,280.6268,241.2023" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="95" x="288" y="241.1938">saves and loads</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="254.2435" y="215.9403">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="282.7799" y="284.4675">1</text><!--MD5=[a19ad6e5cdccd8460c43825f275f45dc]
 @startuml
 !include Style.puml
 skinparam ArrowColor black
 skinparam classBorderColor black
 
+hide empty fields
+hide empty methods
+
 rectangle Util {
     class Storage {
-    saveCookbook(cookbook : Cookbook)
+    + Scanner loadScanner
+    - loadDifficulty(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadCalories(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTimes(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadPrice(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadIngredients(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadSteps(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTags(Recipe recipe, String buffer, Scanner loadScanner, Cookbook cookbook)
+    + saveCookbook(cookbook Cookbook)
     }
 }
 
@@ -27,8 +38,8 @@ rectangle Kitchen {
     class Cookbook LOGIC_BLUE_1
 }
 
-Storage - -> GordonException : creates >
-Storage - -> Cookbook : saves and loads >
+Storage "1"- -> "*" GordonException : creates >
+Storage "1"- -> "1" Cookbook : saves and loads >
 @enduml
 
 @startuml
@@ -47,9 +58,20 @@ skinparam classAttributeIconSize 0
 skinparam ArrowColor black
 skinparam classBorderColor black
 
+hide empty fields
+hide empty methods
+
 rectangle Util {
     class Storage {
-    saveCookbook(cookbook : Cookbook)
+    + Scanner loadScanner
+    - loadDifficulty(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadCalories(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTimes(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadPrice(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadIngredients(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadSteps(Recipe recipe, String buffer, Scanner loadScanner)
+    - loadTags(Recipe recipe, String buffer, Scanner loadScanner, Cookbook cookbook)
+    + saveCookbook(cookbook Cookbook)
     }
 }
 
@@ -62,15 +84,15 @@ rectangle Kitchen {
     class Cookbook #b3dff3
 }
 
-Storage - -> GordonException : creates >
-Storage - -> Cookbook : saves and loads >
+Storage "1"- -> "*" GordonException : creates >
+Storage "1"- -> "1" Cookbook : saves and loads >
 @enduml
 
 PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: Cp1252
+Default Encoding: UTF-8
 Language: en
-Country: US
+Country: GB
 --></g></svg>
