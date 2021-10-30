@@ -4,8 +4,8 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.HELP_MESSAGE;
-import static seedu.duke.common.Messages.UNKNOWN_MESSAGE;
 
+//@@author avellinwong01
 /**
  * Class encapsulating a Help Command
  */
@@ -29,3 +29,4 @@ public class HelpCommand extends Command {
     }
 
 }
+//@@author avellinwong01
