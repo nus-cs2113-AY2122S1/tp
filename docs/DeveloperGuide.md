@@ -474,4 +474,33 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Starting up and Shutting Down
+
+1. Download the latest release [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases).
+2. Run MediVault using `java -jar MediVault.jar`
+3. To end program, enter the command `exit`.
+
+### Running commands
+
+1. You can refer to the list of commands and expected
+   outputs [here](https://ay2122s1-cs2113t-t10-1.github.io/tp/UserGuide.html).
+
+### Data Storage
+
+1. Data is saved in stock.txt, prescription.txt, order.txt.
+    * Test Case:
+        1. Run the application.
+        2. Add an entry to stock, prescription and order into MediVault.
+        3. Exit MediVault. The stock.txt, prescription.txt and order.txt will have one entry.
+        4. Run the application.
+        5. Delete entry to stock, prescription and order into MediVault.
+        6. Exit MediVault.
+    * Expected: stock.txt, prescription.txt and order.txt will be empty.
+2. Archive data is saved in archiveorder.txt and archiveprescription.txt.
+    * Test Case:
+        1. Run the application.
+        2. Add entries to prescription and order into MediVault.
+        3. Run the `archiveorder` and `archiveprescription` command with date specified.
+        4. Exit MediVault.
+    * Expected: archiveorder.txt and archiveprescription.txt will have entries.
+   
