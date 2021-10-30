@@ -61,7 +61,8 @@ public class Lesson {
      * @throws IOException if an I/O error occurs while executing runtime command
      */
     public void launchUrl() throws EmptyLinkException, IOException {
-        if (meetingUrl.equals("-")) {
+        boolean isEmptyUrl = meetingUrl.isBlank() || meetingUrl.equals("-");
+        if (isEmptyUrl) {
             throw new EmptyLinkException(Messages.ERROR_EMPTY_MEETING_LINK);
         }
 
