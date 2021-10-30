@@ -32,7 +32,7 @@ class EditDishCommandTest {
         System.setIn(newDishName);
 
         String updatedDishName = "" + DishList.dishList.get(0).getDishName();
-        assert(updatedDishName.equals("naan"));
+        assert (updatedDishName.equals("naan"));
 
         //inputParam as integer
         inputParams.set(0, "1");
@@ -45,7 +45,7 @@ class EditDishCommandTest {
         System.setIn(newDishName);
 
         updatedDishName = "" + DishList.dishList.get(0).getDishName();
-        assert(updatedDishName.equals("prata"));
+        assert (updatedDishName.equals("prata"));
 
         DishList.dishList.clear();
 

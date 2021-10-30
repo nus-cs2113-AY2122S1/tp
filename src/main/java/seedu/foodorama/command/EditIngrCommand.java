@@ -31,7 +31,7 @@ public class EditIngrCommand extends Command {
                 throw new FoodoramaException(ui.getIngrIndexMissingMsg());
             } else {
                 ingredientIndex = IngredientList.find(ingredientName);
-                LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'" );
+                LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");
             }
         }
         IngredientList.editName(ingredientIndex);

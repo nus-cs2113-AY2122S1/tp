@@ -31,7 +31,7 @@ public class EditDishCommand extends Command {
                 throw new FoodoramaException(ui.getDishIndexMissingMsg());
             } else {
                 dishIndex = DishList.find(dishName);
-                LOGGER.log(Level.INFO, "Parameter is String '" + dishName + "'" );
+                LOGGER.log(Level.INFO, "Parameter is String '" + dishName + "'");
             }
         }
         DishList.editName(dishIndex);

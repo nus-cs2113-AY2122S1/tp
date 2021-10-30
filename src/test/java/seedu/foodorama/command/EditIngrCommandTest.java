@@ -37,7 +37,7 @@ class EditIngrCommandTest {
         System.setIn(newIngrName);
 
         String updatedIngrName = "" + IngredientList.ingredientList.get(0).getIngredientName();
-        assert(updatedIngrName.equals("fish"));
+        assert (updatedIngrName.equals("fish"));
 
         //inputParam as integer
         inputParams.set(0, "1");
@@ -50,7 +50,7 @@ class EditIngrCommandTest {
         System.setIn(newIngrName);
 
         updatedIngrName = "" + IngredientList.ingredientList.get(0).getIngredientName();
-        assert(updatedIngrName.equals("chicken"));
+        assert (updatedIngrName.equals("chicken"));
 
         IngredientList.ingredientList.clear();
 
