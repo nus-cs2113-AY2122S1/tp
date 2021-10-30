@@ -21,6 +21,6 @@ public class AddExpenditureParser implements ParserPrefix {
         LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
         Category category = ParserUtil.parseCategory(argumentMap.get(PREFIX_CATEGORY));
 
-        return new AddExpenditureCommand(description,amount,date,category);
+        return new AddExpenditureCommand(description, amount, date, category);
     }
 }

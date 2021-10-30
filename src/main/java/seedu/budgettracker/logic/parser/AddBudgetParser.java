@@ -13,6 +13,6 @@ public class AddBudgetParser implements ParserPrefix {
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH), IS_NOT_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_COMPULSORY);
 
-        return new AddBudgetCommand(amount,month);
+        return new AddBudgetCommand(amount, month);
     }
 }
