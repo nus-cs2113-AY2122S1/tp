@@ -2,7 +2,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
 * [Implementation](#implementation)
-  * [Add Module](#add-module)
+  * [Add Class](#add-class)
   * [Add Student](#add-student)
   * [Add Assessment](#add-assessment)
   * [Set Marks](#set-marks)
