@@ -9,7 +9,7 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
 /**
@@ -80,7 +80,7 @@ public class AddBookCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         try {
             Book newBook = new Book(title, id, status, author);

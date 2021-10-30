@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.common.LibmgrException;
-import seedu.duke.common.Status;
+import seedu.duke.common.Messages;
 import seedu.duke.data.Audio;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
@@ -10,82 +9,92 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.*;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 public class EditAudioCommand extends Command {
-    private Item toEdit;
+    private Audio toEdit;
     private HashMap<String, String> args;
     private String title;
     private String id;
     private String artist;
     private String duration;
 
-
     public EditAudioCommand(HashMap<String,String> args, Item toEdit) {
-        this.toEdit = toEdit;
+        this.toEdit = (Audio) toEdit;
         this.args = args;
     }
 
-    public boolean checkInvalidArgs() {
-        for (String s: args.keySet()) {
-            if (s.equals(KEY_TITLE)) {
-                this.title = args.get(s);
-            } else if (s.equals(KEY_ID)) {
-                this.id = args.get(s);
-            } else if (s.equals(KEY_ARTIST)) {
-                this.artist = args.get(s);
-            } else if (s.equals(KEY_DURATION)) {
-                this.duration = args.get(s);
-            }
+    public void processArgs() {
+        if (args.containsKey(KEY_TITLE)) {
+            this.title = args.get(KEY_TITLE);
+        } else if (args.containsKey(KEY_ID)) {
+            this.id = args.get(KEY_ID);
+        } else if (args.containsKey(KEY_ARTIST)) {
+            this.artist = args.get(KEY_ARTIST);
+        } else if (args.containsKey(KEY_DURATION)) {
+            this.duration = args.get(KEY_DURATION);
+        }
     }
 
     /**
-     * Checks for whether user has supplied any empty values any of the attributes.
-     * @return Boolean True if any attributes are missing
+     * Checks for whether user supplied invalid arguments, program will not record these
+     * arguments.
+     *
+     * @return boolean True if any invalid arguments detected
+     */
+    public boolean checkInvalidArgs() {
+        HashMap<String, String> tempArgs = args;
+        tempArgs.remove(null);
+        if (args.containsKey(KEY_TITLE)) {
+            tempArgs.remove(KEY_TITLE);
+        } else if (args.containsKey(KEY_ID)) {
+            tempArgs.remove(KEY_ID);
+        } else if (args.containsKey(KEY_ARTIST)) {
+            tempArgs.remove(KEY_ARTIST);
+        } else if (args.containsKey(KEY_DURATION)) {
+            tempArgs.remove(KEY_DURATION);
+        }
+        return tempArgs.size() > 0;
+    }
+
+    /**
+     * Checks for whether user has supplied any empty values any of the attributes to be edited.
+     *
+     * @return boolean True if any attributes are missing
      */
     private boolean checkMissingArgs() {
-        boolean isMissingTitle = title == null || title.equals("");
-        boolean isMissingId = id == null || id.equals("");
-        boolean isMissingArtist = artist == null || artist.equals("");
-        boolean isMissingDuration = duration == null || duration.equals("");
+        boolean isMissingTitle = args.containsKey(KEY_TITLE) && (title == null || title.equals(""));
+        boolean isMissingId = args.containsKey(KEY_ID) && (id == null || id.equals(""));
+        boolean isMissingArtist = args.containsKey(KEY_ARTIST) && (artist == null || artist.equals(""));
+        boolean isMissingDuration = args.containsKey(KEY_DURATION) && (duration == null || duration.equals(""));
         return isMissingTitle || isMissingId || isMissingArtist || isMissingDuration;
     }
 
-    /**
-     * Checks for whether user supplied extra arguments, program will not record these
-     * additional arguments.
-     * @return boolean True if any additional arguments detected
-     */
-    private boolean checkAdditionalArgs() {
-        HashMap<String, String> tempArgs = args;
-        tempArgs.remove(null);
-        tempArgs.remove(KEY_TITLE);
-        tempArgs.remove(KEY_ID);
-        tempArgs.remove(KEY_ARTIST);
-        tempArgs.remove(KEY_DURATION);
-        return tempArgs.size() > 0;
+    public boolean checkEmptyArgs() {
+        return !args.containsKey(KEY_TITLE) && !args.containsKey(KEY_ID)
+                && !args.containsKey(KEY_ARTIST) && !args.containsKey(KEY_DURATION);
     }
 
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
-        if (checkMissingArgs()) {
-            ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
+        processArgs();
+        if (checkMissingArgs() || checkEmptyArgs()) {
+            ui.print(EDIT_INVALID_FORMAT);
             return;
         }
-        if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+        if (checkInvalidArgs()) {
+            ui.print(WARN_INVALID_ARGS);
         }
-        try {
-            Audio newAudio = new Audio(title, id, status, artist, duration);
-            catalogue.add(newAudio);
-            ui.print(ADD_MESSAGE, newAudio);
-        } catch (LibmgrException e) {
-            ui.print(e.getMessage());
+        if (args.containsKey(KEY_TITLE)) {
+            toEdit.setTitle(title);
+        } else if (args.containsKey(KEY_ID)) {
+            toEdit.setID(id);
+        } else if (args.containsKey(KEY_ARTIST)) {
+            toEdit.setArtist(artist);
+        } else if (args.containsKey(KEY_DURATION)) {
+            toEdit.setDuration(duration);
         }
+        ui.print(EDIT_AUDIO_MESSAGE, toEdit);
     }
-
-
-
-
 
 }

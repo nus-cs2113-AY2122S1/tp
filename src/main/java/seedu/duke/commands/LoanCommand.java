@@ -12,7 +12,7 @@ import static seedu.duke.common.Messages.INVALID_DATE;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.LOANED;
 import static seedu.duke.common.Status.RESERVED;
@@ -82,7 +82,7 @@ public class LoanCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
 
         // Get item to be updated

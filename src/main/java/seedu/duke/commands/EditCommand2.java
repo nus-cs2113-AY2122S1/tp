@@ -34,16 +34,12 @@ public class EditCommand2 extends Command {
         }
         if (toEdit instanceof Book) {
             new EditBookCommand(args, toEdit).execute(ui, catalogue);
-            ui.print(EDIT_BOOK_MESSAGE, toEdit);
         } else if (toEdit instanceof Audio) {
             new EditAudioCommand(args, toEdit).execute(ui, catalogue);
-            ui.print(EDIT_AUDIO_MESSAGE, toEdit);
         } else if (toEdit instanceof Magazine) {
             new EditMagazineCommand(args, toEdit).execute(ui, catalogue);
-            ui.print(EDIT_MAGAZINE_MESSAGE, toEdit);
         } else if (toEdit instanceof Video) {
             new EditVideoCommand(args, toEdit).execute(ui, catalogue);
-            ui.print(EDIT_VIDEO_MESSAGE, toEdit);
         }
 
     }
