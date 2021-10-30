@@ -29,7 +29,7 @@ public class CommonUtilsTest {
 
     @Test
     void findArguments_success() {
-        String input = "add \"test1\" \"test2\"";
+        String input = "\"test1\" \"test2\"";
         resultExpected.add("test1");
         resultExpected.add("test2");
         ArrayList<String> result = CommonUtils.findArguments(input);
@@ -39,20 +39,19 @@ public class CommonUtilsTest {
 
     @Test
     void findArguments_missingDoubleQuotes() {
-        String input = "add \"test1\" \"test2";
+        String input = "\"test1\" \"test2";
         ArrayList<String> result = CommonUtils.findArguments(input);
-        resultExpected.add("test1");
-        assertEquals(1, result.size());
+        assertEquals(0, result.size());
         assertEquals(resultExpected, result);
 
         reset();
-        input = "add \"test1 test2";
+        input = "\"test1 test2";
         result = CommonUtils.findArguments(input);
         assertEquals(0, result.size());
         assertEquals(resultExpected, result);
 
         reset();
-        input = "add test1 test2";
+        input = "test1 test2";
         result = CommonUtils.findArguments(input);
         assertEquals(0, result.size());
         assertEquals(resultExpected, result);
@@ -60,27 +59,22 @@ public class CommonUtilsTest {
 
     @Test
     void findArguments_extraDoubleQuotes() {
-        String input = "add \"test1\"\"\"test2\"";
+        String input = "\"test1\" \"\"test2\"";
         ArrayList<String> result = CommonUtils.findArguments(input);
-        resultExpected.add("test1");
-        resultExpected.add("");
-        assertEquals(2, result.size());
-        assertEquals(resultExpected, result);
+        assertEquals(0, result.size());
 
         reset();
-        input = "add \"test1\" \"test2\"\"";
-        resultExpected.add("test1");
-        resultExpected.add("test2");
+        input = "\"test1\" \"test2\"\"";
         result = CommonUtils.findArguments(input);
-        assertEquals(2, result.size());
-        assertEquals(resultExpected, result);
+        assertEquals(0, result.size());
 
         reset();
-        input = "add \"test1\" \"\"\"test2";
+        input = "\"test1\" \" \" \" \"";
         result = CommonUtils.findArguments(input);
         resultExpected.add("test1");
-        resultExpected.add("");
-        assertEquals(2, result.size());
+        resultExpected.add(" ");
+        resultExpected.add(" ");
+        assertEquals(3, result.size());
         assertEquals(resultExpected, result);
     }
 

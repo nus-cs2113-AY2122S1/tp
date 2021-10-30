@@ -41,7 +41,7 @@ public class AddLinkCommandTest {
 
     @Test
     void parseArguments_addLinkCommand_success() {
-        String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"2\"\"https://zoom.us/test\"";
+        String addLinkInput = "\"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"";
         ArrayList<String> parsedArguments = CommonUtils.findArguments(addLinkInput);
         assertEquals("test", parsedArguments.get(0));
         assertEquals("Thursday", parsedArguments.get(1));

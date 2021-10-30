@@ -74,4 +74,5 @@ public class CommonFormat {
     public static final String COMMAND_GO_FORMAT = "go <module name>";
     public static final String QUESTION_FORMAT_CHECK = "^[123e]$";
     public static final String QUOTE_REGEX_DELIMITER = "\"(.*?)\"";
+    public static final String STRICT_WHITE_REGEX = "^(?:(?:\"([^\"]+?)\")\\s+?)*?(?:\"([^\"]+?)\")$";
 }

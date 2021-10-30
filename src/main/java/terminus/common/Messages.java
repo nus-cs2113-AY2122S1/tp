@@ -43,7 +43,8 @@ public class Messages {
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION = "%s %s";
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
     public static final String ERROR_MESSAGE_INVALID_INPUT = ERROR_MESSAGE_TAG + "Invalid input provided.";
-    public static final String ERROR_MESSAGE_MISSING_ARGUMENTS = ERROR_MESSAGE_TAG + "Missing arguments.";
+    public static final String ERROR_MESSAGE_MISSING_ARGUMENTS = ERROR_MESSAGE_TAG + "Missing arguments or Invalid "
+        + "arguments.";
     public static final String ERROR_MESSAGE_EMPTY_CONTENTS = ERROR_MESSAGE_TAG + "Content not found.";
     public static final String ERROR_MESSAGE_INVALID_NUMBER = ERROR_MESSAGE_TAG + "Invalid numerical value provided.";
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
