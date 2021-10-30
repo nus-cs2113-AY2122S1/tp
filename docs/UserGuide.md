@@ -59,6 +59,8 @@ It's absolutely bonkers. Now let's get down to business.
       1. If you don't have Java 11, you can install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 1. Run the Gordon program 
    1. In your terminal, type `java -jar` then paste the location of the file to run Gordon
+   1. If everything works, you should be able to see this:
+   ![](images/Gordon%20welcome%20message.jpg)
 
 ## What can Gordon do?
 
@@ -108,7 +110,7 @@ Removes an existing recipe from my database of recipes.
 
 #### Example of usage:
 
-`delete 1`
+`deleteRecipe 1`
 
 #### Expected outcome:
 
@@ -118,7 +120,7 @@ OK! The recipe has been deleted from your cookbook.
 
 #### Description of the outcome:
 - I'll let you know that the recipe has been removed
-- You can type `list` to confirm if the correct recipe has been removed
+- You can type `listRecipes` to confirm if the correct recipe has been removed
 
 ---
 
@@ -155,15 +157,15 @@ Method:
 
 ---
 
-### 4. Display all recipes: `listRecipe`
+### 4. Display all recipes: `listRecipes`
 
 Shows all recipes saved in the database
 
-#### Format: `list`
+#### Format: `listRecipes`
 
 #### Example of usage:
 
-`listRecipe`
+`listRecipes`
 
 #### Expected outcome:
 
@@ -191,7 +193,7 @@ Leaves the program
 #### Expected outcome:
 
 ```
-Bye bye!
+Pack your bags, you're off the show
 ```
 
 #### Description of the outcome:
@@ -213,20 +215,26 @@ Shows you the proper format of commands.
 #### Expected outcome:
 
 ```
-1. Add a recipe: addRecipe \"recipe name\" \"/ingredients\" 1+2 \"/steps\" 1+2"
-2. Delete a recipe: deleteRecipe \"Index of recipe\""
-3. List all your recipes: listRecipes"
-4. Find a recipe: find \"Keyword\""
-5. Check a specific recipe: check \"Name of Recipe\""
-6. Tag a recipe: tag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
-7. Untag a recipe: untag \"/ recipeName\" \"/ tagName1 + tagName2 + ...\""
-8. List all tags: listTags"
-9. Help me: help
+1. Add a recipe: addRecipe "recipe name" "/ingredients" 1+2 "/steps" 1+2
+2. Delete a recipe: deleteRecipe "Index of recipe"
+3. List all your recipes: listRecipes
+4. Find a recipe: find "keyword" "number/item name",where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time
+5. Check a specific recipe: check "Name of Recipe"
+6. Add calories to recipe: set "recipe name" "/calories" numberOfCalories
+7. Add difficulty levels to recipe: set "recipe name" "/difficulty" difficultyLevel
+8. Add cooking and preparation time to recipe: set "recipe name" "/time" cookingTime "," preparationTime
+9. Add price to recipe: set "recipe name" "/price" recipePrice
+10. Tag a recipe: tag "/ recipe name" "/ tagName1 + tagName2 + ..."
+11. Untag a recipe: untag "/ recipe name" "/ tagName1 + tagName2 + ..."
+12. Delete tags from Cookbook: deleteTag "/ tagName1 + tagName2 + ..."
+13. List all tags: listTags
+14. Help me: help
 ```
 
 #### Description of the outcome.
 
-- I'll show you the proper format for using the `add` command, you ******!
+- I'll show you the proper format for using every command
+- Just type `help` anywhere in the terminal for a quick guide if you forget any command
 
 ---
 
@@ -242,6 +250,8 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
   * Difficulty (`VALUE` must be among None, Easy, Medium and Hard)
   * Price (`VALUE` must be a decimal)
   * Time (`VALUE` must be two integers, separated by a comma)
+    * The first integer represents the preparation time required for the dish
+    * The next integer then represents the cooking time
 * For calories, price and time, changing the `VALUE` to -1 will hide it from the recipe 
 * Any values below -1 are not accepted.
 * `ATTRIBUTE` is not case-sensitive.
