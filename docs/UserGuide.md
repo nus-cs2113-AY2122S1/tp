@@ -13,12 +13,17 @@ done in an efficient manner.
         - [Adding a book item: `add b`](#Adding-a-book-item)
         - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
         - [Adding a video item: `add v`](#Adding-a-video-item)
-    - [List items: `list`]()
-    - [Search items: `search`]()
-    - [Reserve items: `res`]()
-    - [(NOT IMPLEMENTED YET) Un-reserve items: `unres`]()
-    - [Loan items: `loan`]()
-    - [Return items: `return`]()
+    - [List items: `list`](#List-items)
+    - [Listing items that are due today: `deadline today`](#Listing-items-that-are-due-today)
+    - [Listing items that are overdue: `deadline overdue`](#Listing-items-that-are-overdue)
+    - [Search items: `search`](#Search-item-by-ID)
+      - [Search item by ID: `search i/`](#Search-item-by-ID)
+      - [Search item by title: `search t/`](#Search-item-by-title)
+      - [Search item by status: `search s/`](#Search-item-by-status)
+    - [Reserve items: `res`](#Reserve-items)
+    - [Un-reserve items: `unres`](#Unreserve-items)
+    - [Loan items: `loan`](#Loan-items)
+    - [Return items: `return`](#Return-items)
     - [Removing an item: `rm`](#Removing-an-item)
     - [Editing an item: `edit`](#Editing-an-item)
     - [Exiting the program: `exit`](#Exiting-the-program)
@@ -28,9 +33,9 @@ done in an efficient manner.
 ## Quick Start
 
 1. Ensure that you have Java `11` or above installed.
-2. Down the latest version of `Libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
+2. Down the latest version of `libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
-4. Open a terminal/command prompt and run `java -jar Libmgr.jar` to start the application.
+4. Open a terminal/command prompt and run `java -jar libmgr.jar` to start the application.
 
 ## Features
 
@@ -95,7 +100,7 @@ Add a new video item to the catalogue
 
 Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
 
-Example: `add v t/Casino Royale i/095680 p/Sony Pictures e/144 minutes`
+Example: `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`
 
 Expected Output:
 ```
@@ -117,6 +122,36 @@ Expected Output:
   ========================================
   [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Listing items that are due today
+List the loaned items that need to be returned today
+
+Format: `deadline today`
+
+Example: `deadline today`
+
+Expected Output:
+```
+  (+) Listing out loaned items that have to be returned today
+  ========================================
+  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+### Listing items that are overdue
+List the loaned items that already overdue but haven't been returned yet
+
+Format: `deadline overdue`
+
+Example: `deadline overdue`
+
+Expected Output:
+```
+  (+) Listing out loaned items that are overdue
+  ========================================
+  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
   ========================================
 ```
 
@@ -155,7 +190,7 @@ Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
 
 Format: `search s/STATUS`
 
-Example: `search t/AVAILABLE`
+Example: `search s/AVAILABLE`
 
 Expected Output:
 ```
@@ -167,47 +202,63 @@ Expected Output:
 ```
 
 ### Reserve items
-{DESCRIPTION}
+Reserves an item for a specific person.
 
-Format: ``
+Format: `res i/ID u/USERNAME`
 
-Example: ``
-
-Expected Output:
-```
-```
-
-### Un-reserve items
-{DESCRIPTION}
-
-Format: ``
-
-Example: ``
+Example: `res i/2551 u/johnsmith`
 
 Expected Output:
 ```
+> res i/2551 u/johnsmith
+  (+) You have successfully reserved an item:
+  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+```
+
+### Unreserve items
+Make a previously reserved item available again.
+
+Format: `unres ID`
+
+Example: `unres 2551`
+
+Expected Output:
+```
+> unres 2551
+  (+) Item unreserved:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Loan items
-{DESCRIPTION}
+Loan out an item to an individual until a specific due date.
 
-Format: ``
+> ℹ️ Items that have been previously reserved by an individual can only be loaned out to the same individual
 
-Example: ``
+> ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
+
+Format: `loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)`
+
+Example: `loan i/2551 d/12-11-2021 u/johnsmith`
 
 Expected Output:
 ```
+> loan i/2551 d/12-11-2021 u/johnsmith
+  (+) Item has been loaned out:
+  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Return items
-{DESCRIPTION}
+Mark a previously loaned item as returned, making it available again.
 
-Format: ``
+Format: `return ID`
 
-Example: ``
+Example: `return 2551`
 
 Expected Output:
 ```
+> return 2551
+  (+) Item has been returned:
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Editing an item

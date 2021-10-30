@@ -39,7 +39,7 @@ public class DeadlineCommand extends Command {
             ui.print(LIST_DEADLINE_TODAY);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
-                if (temp.getDueDate().equals(today)) {
+                if (temp.getDueDate() != null && temp.getDueDate().equals(today)) {
                     ui.print(temp);
                 }
             }
@@ -47,7 +47,7 @@ public class DeadlineCommand extends Command {
             ui.print(LIST_DEADLINE_OVERDUE);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
-                if (temp.getDueDate().isBefore(today)) {
+                if (temp.getDueDate() != null && temp.getDueDate().isBefore(today)) {
                     ui.print(temp);
                 }
             }

@@ -8,10 +8,11 @@ import seedu.duke.ui.TextUI;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 import static seedu.duke.common.Messages.INVALID_DATE;
+import static seedu.duke.common.Messages.INVALID_ID;
+import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
+import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.LOANED;
 import static seedu.duke.common.Status.RESERVED;
@@ -121,6 +122,8 @@ public class LoanCommand extends Command {
             ui.print(e.getMessage());
         } catch (DateTimeParseException e) {
             ui.print(INVALID_DATE);
+        } catch (NullPointerException e) {
+            ui.print(INVALID_ID);
         }
     }
 }
