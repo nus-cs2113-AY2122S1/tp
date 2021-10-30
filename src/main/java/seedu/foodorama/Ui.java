@@ -531,7 +531,8 @@ public class Ui {
     public void printConfirmDishEditMsg(String dishName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Are you sure you want to change Dish Name from '" + dishName + "' to '"
-                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+                + newName + "'? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printDishNameChanged(String dishName) {
@@ -550,7 +551,8 @@ public class Ui {
     public void printConfirmIngrEditMsg(String ingrName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Are you sure you want to change ingredient name from '" + ingrName + "' to '"
-                + newName + "'?" + System.lineSeparator() + LINE_DIVIDER);
+                + newName + "'? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printIngrNameChanged(String ingrName) {
