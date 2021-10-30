@@ -19,6 +19,9 @@ public final class Messages {
     public static final String ERROR_DESERIALIZING_TASK =
             "Saved task data is invalid format. Ignoring the line..";
 
+    public static final String ERROR_EMPTY_MEETING_LINK =
+            "Sorry, no meeting link was provided.";
+
     public static final String ERROR_FILE_LOGGER =
             "Something went wrong with the file logger.";
 
@@ -33,9 +36,6 @@ public final class Messages {
 
     public static final String ERROR_INVALID_INDEX =
             "Sorry, the index is invalid.";
-
-    public static final String ERROR_INVALID_LINK =
-            "Sorry, the link is invalid.";
 
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";

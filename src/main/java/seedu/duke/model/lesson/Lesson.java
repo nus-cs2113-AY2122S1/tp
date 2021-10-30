@@ -9,6 +9,7 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.util.LinkUtil.formatLink;
@@ -54,7 +55,16 @@ public class Lesson {
     }
 
     //@@author richwill28
-    public void launchUrl() throws IOException {
+    /**
+     * Launches meeting URL on the default browser.
+     *
+     * @throws IOException if an I/O error occurs while executing runtime command
+     */
+    public void launchUrl() throws EmptyLinkException, IOException {
+        if (meetingUrl.equals("-")) {
+            throw new EmptyLinkException(Messages.ERROR_EMPTY_MEETING_LINK);
+        }
+
         Runtime rt = Runtime.getRuntime();
         String os = System.getProperty("os.name").toLowerCase();
 
@@ -62,6 +72,7 @@ public class Lesson {
         boolean isMac = os.contains("mac");
         boolean isWindows = os.contains("win");
 
+        // Linux and Mac requires HTTPS prefix
         String url = formatLink(meetingUrl);
         if (isLinux) {
             rt.exec(LINUX_LAUNCH_COMMAND + url);
