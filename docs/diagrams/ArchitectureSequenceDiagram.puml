@@ -7,24 +7,24 @@ Participant ":Taa" as taa
 Participant "<<class>>\nParser" as parser
 Participant ":Command" as command
 Participant "<<class>>\nUtil" as util
-Participant ":ModuleList" as moduleList
+Participant ":ClassList" as classList
 Participant ":Storage" as storage
 
 activate taa
 
-taa -> taa : loadModuleListFromStorage()
+taa -> taa : loadClassListFromStorage()
 activate taa
 
 taa -> storage : load()
 activate storage
 
-create moduleList
-storage -> moduleList
-activate moduleList
-moduleList --> storage
-deactivate moduleList
+create classList
+storage -> classList
+activate classList
+classList --> storage
+deactivate classList
 
-storage --> taa : moduleList:ModuleList
+storage --> taa : classList:ClassList
 deactivate storage
 
 taa --> taa
@@ -61,7 +61,7 @@ deactivate util
 command --> taa
 deactivate command
 
-taa -> command : execute(moduleList:ModuleList, ui:Ui,\n\tstorage:Storage)
+taa -> command : execute(classList:ClassList,\n\tui:Ui, storage:Storage)
 activate command
 
 command -> util
@@ -69,12 +69,12 @@ activate util
 util --> command
 deactivate util
 
-command -> moduleList
-activate moduleList
-moduleList --> command
-deactivate moduleList
+command -> classList
+activate classList
+classList --> command
+deactivate classList
 
-command -> storage : save(moduleList:ModuleList)
+command -> storage : save(classList)
 activate storage
 storage --> command
 deactivate storage
