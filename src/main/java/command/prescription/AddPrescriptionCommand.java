@@ -71,7 +71,8 @@ public class AddPrescriptionCommand extends Command {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
-            if ((medicine instanceof Stock) && (medicine.getMedicineName().equalsIgnoreCase(medicationName))) {
+            if ((medicine instanceof Stock) && (medicine.getMedicineName().equalsIgnoreCase(medicationName))
+                    && !((Stock) medicine).isDeleted()) {
                 filteredStocks.add((Stock) medicine);
             }
         }
