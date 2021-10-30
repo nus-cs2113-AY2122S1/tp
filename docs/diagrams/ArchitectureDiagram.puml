@@ -23,7 +23,7 @@ MediVault -[COLOR_MEDIVAULT]> Utilities
 Errors --[COLOR_ERRORS]up> Utilities
 Utilities .[COLOR_UTILITIES]right>Files
 Utilities --[COLOR_UTILITIES]> Command
-Command --[COLOR_COMMAND]> MediVault
+MediVault --[COLOR_COMMAND]> Command
 Command --[COLOR_COMMAND]> Inventory
 Inventory --[COLOR_INVENTORY]> Utilities
 
