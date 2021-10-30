@@ -17,12 +17,13 @@ public class Messages {
             + "       `--\""
             + "";
     public static final String DIVIDER = "  ========================================";
-    public static final String WELCOME_MESSAGE = "Welcome to libmgr";
+    public static final String WELCOME_MESSAGE = "Welcome to libmgr" + System.lineSeparator()
+            + "Type 'help' to view available commands";
     public static final String EXIT_MESSAGE = "See you soon!";
     public static final String INVALID_VALUES = "  (!) Invalid/missing values";
     // Help
     public static final String HELP_MESSAGE
-            = "  ** Words in `UPPER_CASE` are parameters to be supplied by the user." + System.lineSeparator()
+            = "  ** Words in `UPPER_CASE` are parameters to be supplied by you" + System.lineSeparator()
             + "  ** Parameters can be in any order" + System.lineSeparator()
             + "  ** Parameters must be separated with a space" + System.lineSeparator()
             + "  Add a new audio item: add a t/TITLE i/ID a/ARTIST d/DURATION" + System.lineSeparator()
@@ -48,7 +49,8 @@ public class Messages {
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
 
     // Unknown
-    public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean";
+    public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean" + System.lineSeparator()
+            + "Type 'help' to view available commands";
 
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
