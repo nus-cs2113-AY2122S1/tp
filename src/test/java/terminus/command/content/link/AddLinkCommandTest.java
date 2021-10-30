@@ -41,7 +41,7 @@ public class AddLinkCommandTest {
 
     @Test
     void parseArguments_addLinkCommand_success() {
-        String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"2\"\"https://zoom.us/test\"";
+        String addLinkInput = "\"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"";
         ArrayList<String> parsedArguments = CommonUtils.findArguments(addLinkInput);
         assertEquals("test", parsedArguments.get(0));
         assertEquals("Thursday", parsedArguments.get(1));
@@ -89,5 +89,7 @@ public class AddLinkCommandTest {
             () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"00:00\" \"2.5\" \"https://zoom.us/test\""));
         assertThrows(InvalidArgumentException.class,
             () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"00:00\" \"a\" \"https://zoom.us/test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \" \" \" \" \" \" \" \" \" \""));
     }
 }

@@ -103,6 +103,8 @@ public class AddNoteCommandTest {
             () -> commandParser.parseCommand("add \"\" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \"test\" \"test\"\"\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \" \" \" \"").execute(moduleManager));
     }
 
     @Test
