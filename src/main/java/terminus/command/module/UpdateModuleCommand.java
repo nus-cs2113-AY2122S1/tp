@@ -53,7 +53,7 @@ public class UpdateModuleCommand extends Command {
         if (!newName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         } else if (!CommonUtils.isValidFileName(newName)) {
-            throw new InvalidArgumentException(Messages.ERROR_INVALID_FILE_NAME);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_MODULE_NAME);
         }
         newName = newName.toUpperCase();
     }
@@ -70,9 +70,9 @@ public class UpdateModuleCommand extends Command {
         }
         assert index > 0;
         String oldName = listOfModule[index - 1];
-        NusModule current = moduleManager.getModule(listOfModule[index - 1]);
+        NusModule current = moduleManager.getModule(oldName);
         ModuleStorage.getInstance().updateModuleDirectory(oldName, newName);
-        moduleManager.removeModule(listOfModule[index - 1]);
+        moduleManager.removeModule(oldName);
         moduleManager.setModule(newName, current);
         return new CommandResult(
             String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName));

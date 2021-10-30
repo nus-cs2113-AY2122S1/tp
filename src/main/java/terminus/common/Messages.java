@@ -51,7 +51,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
     public static final String ERROR_MESSAGE_INVALID_DURATION = ERROR_MESSAGE_TAG + "Invalid duration %d.";
     public static final String ERROR_MESSAGE_SCHEDULE_OVERFLOW = ERROR_MESSAGE_TAG
-            + "Please set schedules on separate days.";
+        + "Please set schedules on separate days.";
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
     public static final String ERROR_MESSAGE_NO_QUESTIONS =
         "There are no questions to be tested on. Type 'questions add' to get started";
@@ -65,7 +65,6 @@ public class Messages {
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String ERROR_MESSAGE_MODULE_WHITESPACE = "Module name cannot contain any whitespaces!";
     public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
-    public static final String ERROR_INVALID_FILE_NAME = "Name provided is invalid.";
     public static final String ERROR_CHANGE_FILE_NAME = "Unable to change file name";
 
     /*
@@ -100,7 +99,13 @@ public class Messages {
      * Notes Export
      */
     public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
-    public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";
+    public static final String FAIL_TO_EXPORT = ERROR_MESSAGE_TAG + "Unable to export file to pdf.";
     public static final String UPDATE_MODULE_RESPONSE_MESSAGE = "Updated %s to %s successfully.";
     public static final String MESSAGE_COMMAND_GO = "Go to a specific module's workspace";
+    public static final String ERROR_MESSAGE_MODULE_NOT_FOUND = ERROR_MESSAGE_TAG + "Module not found! Type 'module "
+        + "view' for the list of modules.";
+    public static final String ERROR_MESSAGE_INVALID_MODULE_NAME = ERROR_MESSAGE_TAG + "Invalid module name. Module "
+        + "name cannot contain "
+        + "special characters and must be within 30 characters";
+    public static final String MESSAGE_QUESTION_PROMPT = "[1/2/3/E] >> ";
 }

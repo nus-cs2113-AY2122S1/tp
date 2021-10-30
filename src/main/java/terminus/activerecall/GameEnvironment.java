@@ -5,17 +5,19 @@ import java.time.Instant;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Question;
 import terminus.ui.Ui;
 
 public class GameEnvironment {
 
-    private static final int INVALID_DIFFICULTY = 0; 
+    private static final int INVALID_DIFFICULTY = 0;
     public static final int EASY_DIFFICULTY = 1;
     public static final int NORMAL_DIFFICULTY = 2;
     public static final int HARD_DIFFICULTY = 3;
     public static final int EXIT_CODE = -1;
+    public static final String EXIT_STRING = "e";
     private final Ui ui;
     private final QuestionGenerator questionGenerator;
 
@@ -79,13 +81,13 @@ public class GameEnvironment {
         int difficulty = INVALID_DIFFICULTY;
         do {
             ui.printSection(Messages.ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE);
-            String input = ui.getUserInput("[1/2/3/E] >> ").trim().toLowerCase();
-            Pattern inputPattern = Pattern.compile("^[123e]$");
+            String input = ui.getUserInput(Messages.MESSAGE_QUESTION_PROMPT).trim().toLowerCase();
+            Pattern inputPattern = Pattern.compile(CommonFormat.QUESTION_FORMAT_CHECK);
             Matcher matcher = inputPattern.matcher(input);
             if (!matcher.matches()) {
                 ui.printSection(Messages.ERROR_MESSAGE_INVALID_INPUT);
                 continue;
-            } else if (input.equalsIgnoreCase("e")) {
+            } else if (input.equalsIgnoreCase(EXIT_STRING)) {
                 difficulty = EXIT_CODE;
                 break;
             }
