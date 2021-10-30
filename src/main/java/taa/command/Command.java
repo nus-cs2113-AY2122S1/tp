@@ -76,7 +76,7 @@ public abstract class Command {
         this.argument = argument;
         this.isExit = false;
         this.argumentKeys = argumentKeys;
-        this.argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
+        this.argumentMap = null;
     }
 
     protected abstract String getUsage();
@@ -84,6 +84,10 @@ public abstract class Command {
     public abstract void checkArgument() throws TaaException;
 
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
+
+    public void parseArgument() throws TaaException {
+        argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
+    }
 
     public boolean isExit() {
         return isExit;
