@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 
 public class Parser {
+public abstract class Parser {
     protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
