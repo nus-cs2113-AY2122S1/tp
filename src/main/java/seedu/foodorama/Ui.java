@@ -439,7 +439,7 @@ public class Ui {
         return INGRINDEX_MISSING;
     }
 
-    public String getDishIndexMissingMsg() {
+    public static String getDishIndexMissingMsg() {
         return DISHINDEX_MISSING;
     }
 
