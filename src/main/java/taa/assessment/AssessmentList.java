@@ -25,7 +25,7 @@ public class AssessmentList implements ClassChecker {
     }
 
     /**
-     * Adds an assessment to the list of assessments in a particular module.
+     * Adds an assessment to the list of assessments in a particular class.
      * Does not add if assessment name already exists
      * or total weightage exceed the maximum weightage after adding.
      *

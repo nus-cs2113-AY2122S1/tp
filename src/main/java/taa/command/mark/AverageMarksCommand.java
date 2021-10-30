@@ -1,13 +1,13 @@
 package taa.command.mark;
 
+import taa.classmodel.ClassObject;
+import taa.classmodel.ClassList;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.assessment.Assessment;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.assessment.AssessmentList;
-import taa.module.Module;
-import taa.module.ModuleList;
 import taa.student.Student;
 import taa.student.StudentList;
 
@@ -15,11 +15,11 @@ import taa.student.StudentList;
  * Class that deals with the outputting of the average marks.
  */
 public class AverageMarksCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
-    private static final String[] AVERAGE_MARKS_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
+    private static final String[] AVERAGE_MARKS_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_ASSESSMENT_NAME};
 
-    private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
+    private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "%s %s/<CLASS_ID> %s/<ASSESSMENT_NAME>";
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS = "Average marks for %s is %,.2f";
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED = "Average marks for %s is %,.2f\n"
         + "Note that %d student(s) have yet to be marked!";
@@ -42,41 +42,41 @@ public class AverageMarksCommand extends Command {
     /**
      * Executes the average_marks command and displays the average mark of an assessment to the user.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        ClassObject classObject = classList.getClassWithId(classId);
+        if (classObject == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        StudentList studentList = module.getStudentList();
+        StudentList studentList = classObject.getStudentList();
         if (studentList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_STUDENTS);
         }
 
-        AssessmentList assessmentList = module.getAssessmentList();
+        AssessmentList assessmentList = classObject.getAssessmentList();
         Assessment assessment = assessmentList.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        printAverageMarks(ui, module, assessment);
+        printAverageMarks(ui, classObject, assessment);
     }
 
     /**
-     * Outputs the average marks of an assessment in a module.
+     * Outputs the average marks of an assessment in a class.
      *
      * @param ui     The ui instance to handle interactions with the user.
-     * @param module The module the assessment belongs to.
+     * @param classObject The class the assessment belongs to.
      */
-    private void printAverageMarks(Ui ui, Module module, Assessment assessment) {
-        StudentList studentList = module.getStudentList();
+    private void printAverageMarks(Ui ui, ClassObject classObject, Assessment assessment) {
+        StudentList studentList = classObject.getStudentList();
         String assessmentName = assessment.getName();
 
         double classSize = studentList.getSize();
@@ -109,7 +109,7 @@ public class AverageMarksCommand extends Command {
         return String.format(
             MESSAGE_FORMAT_AVERAGE_MARKS_USAGE,
             COMMAND_AVERAGE_MARKS,
-            KEY_MODULE_CODE,
+            KEY_CLASS_ID,
             KEY_ASSESSMENT_NAME
         );
     }

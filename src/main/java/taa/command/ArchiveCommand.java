@@ -4,7 +4,7 @@ package taa.command;
 import taa.Taa;
 import taa.Ui;
 import taa.exception.TaaException;
-import taa.module.ModuleList;
+import taa.classmodel.ClassList;
 import taa.storage.Storage;
 import taa.util.Util;
 
@@ -43,8 +43,8 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (moduleList.getSize() <= 0) {
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        if (classList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_DATA);
         }
 
@@ -62,7 +62,7 @@ public class ArchiveCommand extends Command {
         }
 
         Storage archiveStorage = new Storage(filename);
-        archiveStorage.save(moduleList);
+        archiveStorage.save(classList);
 
         ui.printBorder();
 
@@ -75,8 +75,8 @@ public class ArchiveCommand extends Command {
         String userInput = ui.getUserInput(PROMPT_WITHIN_COMMAND, true);
         String message;
         if (userInput.equals(CONFIRM_VALUE)) {
-            moduleList.deleteAllModules();
-            storage.save(moduleList);
+            classList.deleteAllClasses();
+            storage.save(classList);
 
             message = MESSAGE_DATA_REMOVED;
         } else {

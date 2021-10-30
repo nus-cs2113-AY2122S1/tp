@@ -5,18 +5,18 @@ import taa.command.ArchiveCommand;
 import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.attendance.ListLessonAttendanceCommand;
-import taa.command.module.AddModuleCommand;
+import taa.command.classcategory.AddClassCommand;
 import taa.command.student.AddStudentCommand;
 import taa.command.mark.AverageMarksCommand;
 import taa.command.Command;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
 import taa.command.mark.DeleteMarkCommand;
-import taa.command.module.DeleteModuleCommand;
+import taa.command.classcategory.DeleteClassCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.assessment.EditAssessmentCommand;
 import taa.command.mark.EditMarkCommand;
-import taa.command.module.EditModuleCommand;
+import taa.command.classcategory.EditClassCommand;
 import taa.command.student.EditStudentCommand;
 import taa.command.ExitCommand;
 import taa.command.student.FindStudentCommand;
@@ -24,7 +24,7 @@ import taa.command.HelpCommand;
 import taa.command.assessment.ListAssessmentsCommand;
 import taa.command.attendance.ListAttendanceCommand;
 import taa.command.mark.ListMarksCommand;
-import taa.command.module.ListModulesCommand;
+import taa.command.classcategory.ListClassesCommand;
 import taa.command.student.ListStudentsCommand;
 import taa.command.mark.MedianMarkCommand;
 import taa.command.attendance.SetAttendanceCommand;
@@ -64,20 +64,20 @@ public class Parser {
             command = new ExitCommand(argument);
             break;
 
-        case Command.COMMAND_LIST_MODULES:
-            command = new ListModulesCommand(argument);
+        case Command.COMMAND_LIST_CLASSES:
+            command = new ListClassesCommand(argument);
             break;
 
-        case Command.COMMAND_ADD_MODULE:
-            command = new AddModuleCommand(argument);
+        case Command.COMMAND_ADD_CLASS:
+            command = new AddClassCommand(argument);
             break;
 
-        case Command.COMMAND_EDIT_MODULE:
-            command = new EditModuleCommand(argument);
+        case Command.COMMAND_EDIT_CLASS:
+            command = new EditClassCommand(argument);
             break;
 
-        case Command.COMMAND_DELETE_MODULE:
-            command = new DeleteModuleCommand(argument);
+        case Command.COMMAND_DELETE_CLASS:
+            command = new DeleteClassCommand(argument);
             break;
 
         case Command.COMMAND_ADD_STUDENT:
@@ -199,10 +199,10 @@ public class Parser {
     /**
      * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
      * e.g.
-     * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
+     * string: "add_class c/CS2113T-F12 n/Class F12", argumentKeys: {"c","n"}
      * Result: HashMap(
-     *             "c":"CS2113T",
-     *             "n":"Software Engineering and Object-oriented Programming"
+     *             "c":"CS2113T-F12",
+     *             "n":"Class F12"
      *         )
      *
      * @param string       The string to parse.

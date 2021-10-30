@@ -2,6 +2,7 @@ package taa.command;
 
 //@@author leyondlee
 import taa.Ui;
+import taa.classmodel.ClassList;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.assessment.EditAssessmentCommand;
@@ -15,10 +16,10 @@ import taa.command.mark.EditMarkCommand;
 import taa.command.mark.ListMarksCommand;
 import taa.command.mark.MedianMarkCommand;
 import taa.command.mark.SetMarkCommand;
-import taa.command.module.AddModuleCommand;
-import taa.command.module.DeleteModuleCommand;
-import taa.command.module.EditModuleCommand;
-import taa.command.module.ListModulesCommand;
+import taa.command.classcategory.AddClassCommand;
+import taa.command.classcategory.DeleteClassCommand;
+import taa.command.classcategory.EditClassCommand;
+import taa.command.classcategory.ListClassesCommand;
 import taa.command.student.AddStudentCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.student.EditStudentCommand;
@@ -28,17 +29,16 @@ import taa.command.student.ListStudentsCommand;
 import taa.command.student.SetCommentCommand;
 import taa.command.student.SortByScoresCommand;
 import taa.exception.TaaException;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 
 public class HelpCommand extends Command {
     private static final String MESSAGE_FORMAT_OUTPUT = "Available commands:\n%s";
 
     private static final Command[] commands = {
-        new ListModulesCommand(""),
-        new AddModuleCommand(""),
-        new EditModuleCommand(""),
-        new DeleteModuleCommand(""),
+        new ListClassesCommand(""),
+        new AddClassCommand(""),
+        new EditClassCommand(""),
+        new DeleteClassCommand(""),
         new ListStudentsCommand(""),
         new AddStudentCommand(""),
         new EditStudentCommand(""),
@@ -79,7 +79,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commands.length; i += 1) {
             Command command = commands[i];

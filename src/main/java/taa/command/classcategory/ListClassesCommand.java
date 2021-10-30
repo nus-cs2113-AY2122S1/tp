@@ -1,18 +1,18 @@
-package taa.command.module;
+package taa.command.classcategory;
 
 //@@author leyondlee
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
-import taa.module.ModuleList;
+import taa.classmodel.ClassList;
 
-public class ListModulesCommand extends Command {
-    private static final String MESSAGE_LIST_EMPTY = "There are no modules in the list.";
+public class ListClassesCommand extends Command {
+    private static final String MESSAGE_LIST_EMPTY = "There are no classes in the list.";
 
-    private static final String MESSAGE_FORMAT_OUTPUT = "Module list:\n%s";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Class list:\n%s";
 
-    public ListModulesCommand(String argument) {
+    public ListClassesCommand(String argument) {
         super(argument);
     }
 
@@ -24,20 +24,20 @@ public class ListModulesCommand extends Command {
     }
 
     /**
-     * Executes the list_modules command and lists all the modules.
+     * Executes the list_classes command and lists all the classes.
      *
-     * @param moduleList The list of modules.
+     * @param classList The ClassGroupList instance.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String message;
-        if (moduleList.getSize() == 0) {
+        if (classList.getSize() == 0) {
             message = MESSAGE_LIST_EMPTY;
         } else {
-            message = String.format(MESSAGE_FORMAT_OUTPUT, moduleList);
+            message = String.format(MESSAGE_FORMAT_OUTPUT, classList);
         }
 
         ui.printMessage(message);
@@ -47,7 +47,7 @@ public class ListModulesCommand extends Command {
     protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_GENERIC_USAGE,
-            COMMAND_LIST_MODULES
+            COMMAND_LIST_CLASSES
         );
     }
 }

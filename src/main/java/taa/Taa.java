@@ -1,10 +1,10 @@
 package taa;
 
 //@@author leyondlee
+import taa.classmodel.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.logger.TaaLogger;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 
 import java.nio.file.Path;
@@ -14,7 +14,7 @@ public class Taa {
     public static final String DATA_FOLDER = "./data";
     public static final String DATA_FILENAME = "taa_data.json";
 
-    private ModuleList moduleList;
+    private ClassList classList;
     private final Ui ui;
     private final Storage storage;
 
@@ -31,8 +31,8 @@ public class Taa {
     }
 
     public void run() {
-        loadModuleListFromStorage();
-        assert moduleList != null;
+        loadClassListFromStorage();
+        assert classList != null;
 
         ui.printWelcomeMessage();
 
@@ -44,7 +44,7 @@ public class Taa {
                 Command command = Parser.parseUserInput(userInput);
                 command.parseArgument();
                 command.checkArgument();
-                command.execute(moduleList, ui, storage);
+                command.execute(classList, ui, storage);
                 isExit = command.isExit();
             } catch (TaaException e) {
                 ui.printException(e.getMessage());
@@ -52,18 +52,18 @@ public class Taa {
         } while (!isExit);
     }
 
-    private void loadModuleListFromStorage() {
-        ModuleList savedModuleList = null;
+    private void loadClassListFromStorage() {
+        ClassList savedClassList = null;
         try {
-            savedModuleList = storage.load();
+            savedClassList = storage.load();
         } catch (TaaException e) {
             ui.printException(e.getMessage());
         }
 
-        if (savedModuleList == null) {
-            moduleList = new ModuleList();
+        if (savedClassList == null) {
+            classList = new ClassList();
         } else {
-            moduleList = savedModuleList;
+            classList = savedClassList;
         }
     }
 

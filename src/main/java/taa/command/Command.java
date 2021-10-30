@@ -1,24 +1,24 @@
 package taa.command;
 
 //@@author leyondlee
+import taa.classmodel.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Parser;
 import taa.Ui;
-import taa.module.ModuleList;
 
 import java.util.HashMap;
 
 public abstract class Command {
     public static final String COMMAND_EXIT = "exit";
-    public static final String COMMAND_LIST_MODULES = "list_modules";
+    public static final String COMMAND_LIST_CLASSES = "list_classes";
     public static final String COMMAND_LIST_STUDENTS = "list_students";
     public static final String COMMAND_LIST_ASSESSMENTS = "list_assessments";
     public static final String COMMAND_LIST_ATTENDANCE = "list_attendance";
     public static final String COMMAND_LIST_LESSON_ATTENDANCE = "list_lesson_attendance";
-    public static final String COMMAND_ADD_MODULE = "add_module";
-    public static final String COMMAND_EDIT_MODULE = "edit_module";
-    public static final String COMMAND_DELETE_MODULE = "delete_module";
+    public static final String COMMAND_ADD_CLASS = "add_class";
+    public static final String COMMAND_EDIT_CLASS = "edit_class";
+    public static final String COMMAND_DELETE_CLASS = "delete_class";
     public static final String COMMAND_FIND_STUDENT = "find_student";
     public static final String COMMAND_ADD_STUDENT = "add_student";
     public static final String COMMAND_EDIT_STUDENT = "edit_student";
@@ -46,12 +46,12 @@ public abstract class Command {
 
     // Common messages
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
-    protected static final String MESSAGE_MODULE_NOT_FOUND = "Module not found.";
+    protected static final String MESSAGE_CLASS_NOT_FOUND = "Class not found.";
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
     protected static final String MESSAGE_INVALID_MARKS = "Invalid marks.";
-    protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
+    protected static final String MESSAGE_NO_STUDENTS = "There are no students in this class";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
     protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set";
@@ -83,7 +83,7 @@ public abstract class Command {
 
     public abstract void checkArgument() throws TaaException;
 
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
+    public abstract void execute(ClassList classList, Ui ui, Storage storage) throws TaaException;
 
     public void parseArgument() throws TaaException {
         argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);

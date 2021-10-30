@@ -1,4 +1,4 @@
-package taa.module;
+package taa.classmodel;
 
 //@@author leyondlee
 import taa.ClassChecker;
@@ -10,29 +10,29 @@ import taa.student.StudentList;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Module implements ClassChecker {
-    private String code;
+public class ClassObject implements ClassChecker {
+    private String id;
     private String name;
     private final StudentList studentList;
     private final AssessmentList assessmentList;
 
-    public Module(String code, String name) {
-        this.code = code;
+    public ClassObject(String id, String name) {
+        this.id = id;
         this.name = name;
         this.studentList = new StudentList();
         this.assessmentList = new AssessmentList();
     }
 
-    public String getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -40,7 +40,7 @@ public class Module implements ClassChecker {
     }
 
     /**
-     * Gets the StudentList object associated to the module.
+     * Gets the StudentList object.
      *
      * @return A StudentList object.
      */
@@ -49,7 +49,7 @@ public class Module implements ClassChecker {
     }
 
     /**
-     * Gets the AssessmentList object associated to the module.
+     * Gets the AssessmentList object.
      *
      * @return A AssessmentList object.
      */
@@ -60,10 +60,10 @@ public class Module implements ClassChecker {
     @Override
     public String toString() {
         if (name.isEmpty()) {
-            return code;
+            return id;
         }
 
-        return String.format("%s - %s", code, name);
+        return String.format("%s - %s", id, name);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Module implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (code.isEmpty()) {
+        if (id.isEmpty()) {
             return false;
         }
 

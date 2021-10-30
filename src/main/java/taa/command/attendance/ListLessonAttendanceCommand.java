@@ -3,20 +3,20 @@ package taa.command.attendance;
 import taa.Ui;
 import taa.attendance.Attendance;
 import taa.attendance.LessonAttendanceList;
+import taa.classmodel.ClassList;
+import taa.classmodel.ClassObject;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.module.Module;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 import taa.student.StudentList;
 import taa.util.Util;
 
 public class ListLessonAttendanceCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_LESSON_NUMBER = "l";
-    private static final String[] LIST_LESSON_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_LESSON_NUMBER};
+    private static final String[] LIST_LESSON_ATTENDANCE_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_LESSON_NUMBER};
 
-    private static final String MESSAGE_FORMAT_LIST_LESSON_ATTENDANCE_USAGE = "%s %s/<MODULE_CODE> %s/<LESSON_NUMBER>";
+    private static final String MESSAGE_FORMAT_LIST_LESSON_ATTENDANCE_USAGE = "%s %s/<CLASS_ID> %s/<LESSON_NUMBER>";
     protected static final String MESSAGE_FORMAT_NO_ATTENDANCE = "There is no recorded attendance for Lesson %s.";
     private static final String MESSAGE_FORMAT_OUTPUT = "Class attendance for Lesson %s:\n%s";
 
@@ -43,17 +43,17 @@ public class ListLessonAttendanceCommand extends Command {
     /**
      * Executes the list_lesson_attendance command and list all the attendance records of a lesson.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        ClassObject classObject = classList.getClassWithId(classId);
+        if (classObject == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
@@ -63,7 +63,7 @@ public class ListLessonAttendanceCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
         }
 
-        StudentList studentList = module.getStudentList();
+        StudentList studentList = classObject.getStudentList();
         LessonAttendanceList lessonAttendances = new LessonAttendanceList();
         lessonAttendances.setLessonAttendances(studentList, lessonNumber);
 
@@ -82,7 +82,7 @@ public class ListLessonAttendanceCommand extends Command {
         return String.format(
                 MESSAGE_FORMAT_LIST_LESSON_ATTENDANCE_USAGE,
                 COMMAND_LIST_LESSON_ATTENDANCE,
-                KEY_MODULE_CODE,
+            KEY_CLASS_ID,
                 KEY_LESSON_NUMBER
         );
     }
