@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TourList {
-    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour code cannot be found. Please try another Tour code.";
+    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
 
-    private static ArrayList<Tour> tours;
-    private static ArrayList<String> tourCodes;
-    private static ArrayList<Float> tourPrices;
-    private static ArrayList<String> iteratedTourCodes;
-    private static int tourCount;
+    private final ArrayList<Tour> tours;
+    private final ArrayList<String> tourCodes;
+    private final ArrayList<Float> tourPrices;
+    private ArrayList<String> iteratedTourCodes;
+    private int tourCount;
 
     public TourList() {
         tours = new ArrayList<>();

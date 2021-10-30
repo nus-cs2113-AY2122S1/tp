@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class FlightList {
-    private static final String FLIGHT_NOT_FOUND_MESSAGE = "Flight ID cannot be found. Please try another Flight ID.";
+    private static final String FLIGHT_NOT_FOUND_MESSAGE = "Flight cannot be found. Please try another flight ID";
 
-    private static ArrayList<Flight> flights;
-    private static ArrayList<String> flightIds;
-    private static ArrayList<String> flightReturnDates;
-    private static ArrayList<String> flightDepartureDates;
-    private static ArrayList<String> iteratedFlightIds;
-    private static int flightCount = 0;
+    private final ArrayList<Flight> flights;
+    private final ArrayList<String> flightIds;
+    private final ArrayList<String> flightReturnDates;
+    private final ArrayList<String> flightDepartureDates;
+    private ArrayList<String> iteratedFlightIds;
+    private int flightCount = 0;
 
     private static final Comparator<String> dateTimeStringComparator = new Comparator<String>() {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
@@ -60,7 +60,7 @@ public class FlightList {
         return flightCount;
     }
 
-    public Flight getFlightById(int index) {
+    public Flight getFlightByIndex(int index) {
         return flights.get(index);
     }
 

@@ -13,11 +13,11 @@ import java.util.Collections;
 public class ClientList {
     private static final String CLIENT_NOT_FOUND_MESSAGE = "Client cannot be found. Please try another client ID";
 
-    private static ArrayList<Client> clients;
-    private static ArrayList<String> clientIds;
-    private static ArrayList<String> clientNames;
-    private static ArrayList<String> iteratedClientIds;
-    private static int clientCount = 0;
+    private final ArrayList<Client> clients;
+    private final ArrayList<String> clientIds;
+    private final ArrayList<String> clientNames;
+    private ArrayList<String> iteratedClientIds;
+    private int clientCount = 0;
 
     /**
      * Class constructor for ClientList.
@@ -56,7 +56,7 @@ public class ClientList {
      * @param index the index of the specific client in the client list
      * @return the client object corresponding to the index
      */
-    public Client getClient(int index) {
+    public Client getClientByIndex(int index) {
         return clients.get(index);
     }
 

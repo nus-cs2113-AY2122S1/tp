@@ -11,7 +11,6 @@ import seedu.duke.data.ClientPackageList;
 
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -139,7 +138,7 @@ public class Ui {
         }
         show(LIST_MESSAGE + "clients:");
         for (int i = 1; i <= count; i++) {
-            Client currClient = clients.getClient(i - 1);
+            Client currClient = clients.getClientByIndex(i - 1);
             show(i + ". " + currClient + "\n");
         }
         show("Total Clients: " + count);
@@ -150,7 +149,7 @@ public class Ui {
         int foundClients = 0;
         int count = clients.getClientCount();
         for (int i = 0; i < count; i++) {
-            Client currClient = clients.getClient(i);
+            Client currClient = clients.getClientByIndex(i);
             if (currClient.getName().toLowerCase().contains(lowercaseName)) {
                 if (foundClients == 0) {
                     show(FIND_SUCCESS_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
@@ -347,7 +346,7 @@ public class Ui {
         }
         show(LIST_MESSAGE + "flights:");
         for (int i = 1; i <= count; i++) {
-            Flight currFlight = flights.getFlightById(i - 1);
+            Flight currFlight = flights.getFlightByIndex(i - 1);
             show(i + ". " + currFlight + "\n");
         }
         show("Total Flights: " + count);
