@@ -3,6 +3,7 @@ package taa;
 //@@author leyondlee
 import taa.command.Command;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -41,7 +42,12 @@ public class Ui {
         String input;
         do {
             System.out.print(inputPrompt);
-            input = scanner.nextLine();
+
+            try {
+                input = scanner.nextLine();
+            } catch (NoSuchElementException e) {
+                input = Command.COMMAND_EXIT;
+            }
         } while (input.trim().isEmpty() && !allowEmpty);
 
         return input;
