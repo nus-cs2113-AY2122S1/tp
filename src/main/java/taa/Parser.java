@@ -266,7 +266,7 @@ public class Parser {
         return result;
     }
 
-    private static boolean isValueValid(String value) {
+    public static boolean isValueValid(String value) {
         if (value.isEmpty()) {
             return true;
         }

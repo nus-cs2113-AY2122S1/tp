@@ -2,6 +2,7 @@ package taa.classmodel;
 
 //@@author leyondlee
 import taa.ClassChecker;
+import taa.Parser;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.student.Student;
@@ -74,6 +75,10 @@ public class ClassObject implements ClassChecker {
     @Override
     public boolean verify() {
         if (id.isEmpty()) {
+            return false;
+        }
+
+        if (!Parser.isValueValid(id) || !Parser.isValueValid(id)) {
             return false;
         }
 
