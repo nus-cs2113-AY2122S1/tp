@@ -9,7 +9,8 @@ ArrowColor Red
 }
 together {
 package "command" {
-abstract Command {
+abstract "{abstract} \n Command" as Command {
++{static} workoutMode:int
 +executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage) {abstract}
 }
 package "exercise" {

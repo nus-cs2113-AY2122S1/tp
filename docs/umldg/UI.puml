@@ -1,21 +1,24 @@
 @startuml
-'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+hide circle
+hide empty members
 
 together {
 package "Command" {
-class CommandResult #pink ##red {
+class CommandResult #Orange {
 feedbackToUser: String
 itemList: ArrayList
 map: Map<String, ArrayList>
 }
-abstract class Command #pink ##red {
+abstract class "{abstract} \n Command" as Command #Orange {
 workoutMode: int {static}
 }
 }
 }
 
 package "Ui" {
-class Ui {
+class Ui #White ##Black {
 withIndent: boolean
 showResultToUser(result: CommandResult):void()
 printErrorMessage(e: GetJackDException):void()
@@ -23,7 +26,6 @@ printWelcomeMessage():void() {static}
 }
 }
 
-CommandResult   ---|>    Ui: result
-Command ---|> Ui
-
+Ui ..> CommandResult
+Ui ..> Command
 @enduml
