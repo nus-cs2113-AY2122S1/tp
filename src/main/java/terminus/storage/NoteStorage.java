@@ -14,8 +14,8 @@ import terminus.module.ModuleManager;
 public class NoteStorage extends Storage {
 
     private Path baseDirectory;
-    private final String FILE_EXTENSION = ".txt";
-    public final String CONTENT_TYPE = "text/plain";
+    private static final String FILE_EXTENSION = ".txt";
+    public static final String CONTENT_TYPE = "text/plain";
 
     public NoteStorage(Path baseDirectory) {
         this.baseDirectory = baseDirectory;

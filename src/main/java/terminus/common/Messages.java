@@ -111,12 +111,12 @@ public class Messages {
      * Active Recall
      */
     public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE =
-            "When you are ready, press [Enter] to continue.";
+        "When you are ready, press [Enter] to continue.";
     public static final String[] ACTIVE_RECALL_SESSION_END_MESSAGE = {"This training session has ended.",
-            "Returning you back to main program."};
+        "Returning you back to main program."};
     public static final String[] ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE = {"",
-            "How did you find the question? (Compare against past attempts if any)",
-            "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
+        "How did you find the question? (Compare against past attempts if any)",
+        "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
 
     /*
      * Notes Export

@@ -16,15 +16,15 @@ public class CommandResult {
     protected String module;
 
     protected String deletedItemName;
-    
+
     public CommandResult(String... message) {
         this(false, null, message);
     }
-    
+
     public CommandResult(CommandParser parser) {
         this(false, parser);
     }
-    
+
     public CommandResult(boolean isExit) {
         this(isExit, null);
     }
@@ -56,7 +56,7 @@ public class CommandResult {
 
     /**
      * Returns the message that the command wishes to output.
-     * 
+     *
      * @return The message that the command wishes to output.
      */
     public String[] getMessage() {
@@ -87,7 +87,7 @@ public class CommandResult {
      *
      * @return True if it requires file storage or else false.
      */
-    public boolean hasChange(){
+    public boolean hasChange() {
         return hasChange;
     }
 

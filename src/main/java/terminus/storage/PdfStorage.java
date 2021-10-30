@@ -21,9 +21,7 @@ import terminus.module.ModuleManager;
 public class PdfStorage extends Storage {
 
     private Path baseDirectory;
-    private final String FILE_EXTENSION = ".pdf";
-
-    private final String NO_DATA = "No note exists.";
+    private static final String FILE_EXTENSION = ".pdf";
 
     public PdfStorage(Path baseDirectory) {
         this.baseDirectory = baseDirectory;
@@ -51,7 +49,7 @@ public class PdfStorage extends Storage {
     private void writeToPdf(Document tempDocument, Path pdfFile, ArrayList<Note> noteArrayList)
             throws InvalidFileException {
         try {
-            PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(pdfFile.toString()));
+            final PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(pdfFile.toString()));
             Font header = FontFactory
                     .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
             Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
