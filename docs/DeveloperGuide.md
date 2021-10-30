@@ -420,7 +420,7 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ### Target user profile
 
-* Pharmacist handling storing, ordering and dispensing of medication
+* Pharmacist handling storing, ordering and prescribing of medication
 * Has a need to manage large number of stocks in the pharmacy
 * May forget how much medicine stock is left in the pharmacy
 * Is a fast typist
@@ -437,13 +437,37 @@ solution that provides real-time tracking of stock, prescriptions and orders in 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|pharmacist|list out all of the medicines currently on shelf| know the current quantity of the medicines on shelf
-|v1.0|manager|be able to purge all data|start afresh
-|v1.0|user|be able to exit the program|shutdown my computer
-|v1.0|pharmacist|list the price of each medication| am aware of the price of each medication
-|v1.0|pharmacist| be able to sort medication by price|recommend the customer the cheapest one if he asks
-|v2.0|manager|see the pending orders to reflect in my current stocks|I won't double order on the same medication
-|v2.0|pharmacist|search for records by a specific customer|I can see all his prescriptions
-|v2.0|manager|be able to check who dispense what medication|know who is responsible for the prescription
+|v1.0|manager| purge all data|start afresh
+|v1.0|user| exit the program|shutdown my computer
+|v1.0|pharmacist|list the price of each medication|know the price of each medication
+|v1.0|pharmacist|sort medication by price|recommend the customer the cheapest one if he asks
+|v1.0|pharmacist| update medication information| modify information using a single command instead of deleting and adding the updated medication information
+|v1.0|pharmacist|update the limit of a medication|have enough stocks in the event that I foresee a surge in demand
+|v1.0|pharmacist|add new types of medicines| keep track of all the medication supplies on 1 platform
+|v1.0|pharmacist|delete a medicine|remove it from the system in the event of a product recall or end of production
+|v1.0|pharmacist|search for medication for specific symptoms|give the right medication
+|v1.0|pharmacist|set a limit on the number of medications to be added to the stocks|prevent an oversupply of medication
+|v1.0|user|search for a specific medication|look for a medication without looking through the full list
+|v2.0|pharmacist|check which medication is expiring soon|order a new batch of supplies in time for my patients
+|v2.0|pharmacist| check which medication is low in quantity| order a new batch of supplies in time for my patients
+|v2.0|pharmacist|confirm a received order|know if an order is successfully received
+|v2.0|manager|create orders|order medication.
+|v2.0|pharmacist|archive past prescription records|prevent records from being cluttered
+|v2.0|pharmacist| archive past order records|prevent records from being cluttered
+|v2.0|pharmacist| list all orders|keep track of them
+|v2.0|pharmacist|know the status of order| know whether the supply is ordered or received.
+|v2.0|pharmacist|saved record of the current medicine stock| have a saved file record to refer to
+|v2.0|pharmacist|saved record of the current medicine orders| have a saved file record to refer to
+|v2.0|manager|saved record of the current medicine prescription| have a saved file record to refer to
+|v2.0|pharmacist|prescribe medication|tally the number of medications when I prescribed some to my patients
+|v2.0|pharmacist|delete prescription| delete a prescription record
+|v2.0|manager|delete orders|cancel orders
+|v2.0|pharmacist| update prescription information| modify information using a single command instead of deleting and adding the updated prescription information
+|v2.0|pharmacist|delete ALL expired medications|expired medications will not be sold to customers or patients
+|v2.0|manager|edit orders| update any wrong information
+|v2.0|manager|see the pending orders to reflect in my current stocks|ensure that I won't double order on the same medication
+|v2.0|pharmacist|search for records by a specific customer|see all his prescriptions
+|v2.0|manager|check who prescribe what medication|know who is responsible for the prescription
 
 ## Non-Functional Requirements
 
@@ -460,7 +484,7 @@ optimise speed if possible. However, it is not really a top priority.
 to handle medical supplies in general.
 * Fault Tolerance Requirements: MediVault should perform sufficient error handling and provide helpful error response
 messages to suggest correct input to user. 
-* Interoperability Requirements: MediVault should be able to run on minimally Windows and Linux.
+* Interoperability Requirements: MediVault should be able to run on minimally Windows, Linux and macOS.
 * Privacy Requirements: MediVault may contain sensitive information such as customer health records. Thus, we should not 
 publish our data to the internet and only store it on our local computer.
 * Portability Requirements: MediVault should be able to run on any computer that has Java 11 and MediVault.jar. Data
@@ -474,6 +498,36 @@ redirection tests.
 * Stability Requirements: MediVault should function as per normal regardless of how many error user has made.
 * User Requirements: MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
 
+
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Starting up and Shutting Down
+
+1. Download the latest release [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases).
+2. Run MediVault using `java -jar MediVault.jar`
+3. To end program, enter the command `exit`.
+
+### Running commands
+
+1. You can refer to the list of commands and expected
+   outputs [here](https://ay2122s1-cs2113t-t10-1.github.io/tp/UserGuide.html).
+
+### Data Storage
+
+1. Data is saved in stock.txt, prescription.txt, order.txt.
+    * Test Case:
+        1. Run the application.
+        2. Add an entry to stock, prescription and order into MediVault.
+        3. Exit MediVault. The stock.txt, prescription.txt and order.txt will have one entry.
+        4. Run the application.
+        5. Delete entry to stock, prescription and order into MediVault.
+        6. Exit MediVault.
+    * Expected: stock.txt, prescription.txt and order.txt will be empty.
+2. Archive data is saved in archiveorder.txt and archiveprescription.txt.
+    * Test Case:
+        1. Run the application.
+        2. Add entries to prescription and order into MediVault.
+        3. Run the `archiveorder` and `archiveprescription` command with date specified.
+        4. Exit MediVault.
+    * Expected: archiveorder.txt and archiveprescription.txt will have entries.
+   

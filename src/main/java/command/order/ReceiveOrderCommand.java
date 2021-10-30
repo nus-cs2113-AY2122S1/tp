@@ -7,11 +7,14 @@ import command.stock.AddStockCommand;
 import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
+import utilities.parser.DateParser;
 import utilities.parser.OrderValidator;
 import utilities.parser.StockValidator;
 import utilities.ui.Ui;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,14 +60,47 @@ public class ReceiveOrderCommand extends Command {
             return;
         }
 
-        int currentStockCount = Stock.getStockCount();
         new AddStockCommand(parameters).execute(); // Add to stock
 
         assert (existingOrder != null) : "Order object is not initialised!";
+        boolean expiryExist = isExpiryExist(medicines, name);
+
+        if (expiryExist) {
+            existingOrder.setDelivered();
+            return;
+        }
+
+        int currentStockCount = Stock.getStockCount();
 
         if (Stock.getStockCount() == currentStockCount + 1) { // The stock was added
             existingOrder.setDelivered(); // Set order as completed
         }
+    }
+
+    /**
+     * Check if same medication name and expiry date exist.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param name Medication name to be searched.
+     * @return Boolean value indicating if the same medication name and same expiry date exists.
+     */
+    private boolean isExpiryExist(ArrayList<Medicine> medicines, String name) {
+        boolean expiryExist = false;
+        String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
+        Date formatExpiry = null;
+        try {
+            formatExpiry = DateParser.stringToDate(expiryToAdd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(name)
+                    && !((Stock) medicine).isDeleted() && ((Stock) medicine).getExpiry().equals(formatExpiry)) {
+                expiryExist = true;
+                break;
+            }
+        }
+        return expiryExist;
     }
 
     /**
