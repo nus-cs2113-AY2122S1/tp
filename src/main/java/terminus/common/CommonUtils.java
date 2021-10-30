@@ -28,7 +28,7 @@ public class CommonUtils {
     public static ArrayList<String> findArguments(String arg) {
         assert arg != null;
         ArrayList<String> argsArray = new ArrayList<>();
-        Pattern p = Pattern.compile("\"(.*?)\"");
+        Pattern p = Pattern.compile(CommonFormat.QUOTE_REGEX_DELIMITER);
         Matcher m = p.matcher(arg);
         while (m.find()) {
             argsArray.add(m.group(1));
