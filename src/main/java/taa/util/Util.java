@@ -14,6 +14,10 @@ public class Util {
      * @return true if string can convert to integer, else false.
      */
     public static boolean isStringInteger(String string) {
+        if (string.isEmpty()) {
+            return false;
+        }
+
         boolean isInt;
         try {
             int value = Integer.parseInt(string);
@@ -32,6 +36,10 @@ public class Util {
      * @return true if string can convert to double, else false.
      */
     public static boolean isStringDouble(String string) {
+        if (string.isEmpty()) {
+            return false;
+        }
+
         boolean isDouble;
         try {
             double value = Double.parseDouble(string);
@@ -50,6 +58,10 @@ public class Util {
      * @return true if string can convert to boolean, else false.
      */
     public static boolean isStringBoolean(String string) {
+        if (string.isEmpty()) {
+            return false;
+        }
+
         return string.equals("true") || string.equals("false");
     }
 
