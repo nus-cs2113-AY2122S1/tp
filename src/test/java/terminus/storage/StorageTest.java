@@ -47,6 +47,12 @@ public class StorageTest {
         this.storage = new Storage();
     }
 
+    @AfterEach
+    void reset() throws InvalidFileException {
+        Path folderPath = storage.getAppendPath(RESOURCE_FOLDER, tempModule);
+        storage.delete(folderPath);
+    }
+
     @Test
     void createFolder_success() throws InvalidFileException {
         Path folderPath = storage.getAppendPath(RESOURCE_FOLDER, tempModule);
