@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
     private static final Command[] COMMANDS_TO_LIST =
         {new ByeCommand(), new DeleteCommand(null, null), new ListCommand(null, null), new SortCommand(null, null),
             new DeadlineCommand(null, null), new EventCommand(null, null), new TodoCommand(null, null),
-        new EditCommand(null, null)};
+        new EditCommand(null, null), new ReminderCommand(null, null)};
 
     @Override
     public CommandResult executeCommand() throws Exception {
