@@ -306,7 +306,7 @@ public class Parser {
         case SET_FIND_PRICE_PROMPT:
             try {
                 float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
-                if (price < -1) {
+                if (price < -1 || (price > -1 && price < 0)) {
                     throw new GordonException(GordonException.INDEX_OOB);
                 }
                 return new SetPriceCommand(recipeName, price);
