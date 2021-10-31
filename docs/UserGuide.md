@@ -72,8 +72,8 @@ If you have reached this step without any issues, congratulations! You have succ
 <div markdown="block" class="alert alert-info">
 :information_source: You are advised to go through the following two sections.
 
-Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common notations 
-that will be used throughout this guide.
+Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common 
+[notations](#notations) that will be used throughout this guide.
 
 However, if you would like to, you can refer to the [Features](#features) below for details of each feature and 
 its respective command.
