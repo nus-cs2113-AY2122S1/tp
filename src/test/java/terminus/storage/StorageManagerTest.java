@@ -116,6 +116,7 @@ public class StorageManagerTest {
         JsonStorage jsonStorage = new JsonStorage(folderPath,"test.json");
         jsonStorage.saveJson(moduleManager);
         storageManager.initialize();
+        storage.delete(filepath);
         storage.delete(folderPath);
     }
 
