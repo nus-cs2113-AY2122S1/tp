@@ -63,13 +63,6 @@ public class ParserUtil {
         }
     }
 
-    public static String parseTitle(String title) throws ParseException {
-        if (title.isEmpty()) {
-            throw new ParseException("title cannot be empty");
-        }
-        return title.strip();
-    }
-
     public static String parseDayOfTheWeek(String userResponse, String param) throws ParseException {
         String dayOfTheWeek;
         if (!userResponse.contains("-d")) {
