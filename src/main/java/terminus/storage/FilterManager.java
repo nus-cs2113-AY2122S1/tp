@@ -1,5 +1,7 @@
 package terminus.storage;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import terminus.activerecall.DifficultyModifier;
 import terminus.command.content.link.AddLinkCommand;
@@ -8,6 +10,7 @@ import terminus.common.CommonUtils;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Question;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
@@ -121,7 +124,23 @@ public class FilterManager {
      * @return True if given schedule object is valid, false otherwise.
      */
     protected boolean isScheduleValid(Link link) {
-        return true;
+        boolean isValid = true;
+        if(!CommonUtils.isValidDay(link.getDay())){
+            isValid = false;
+        }else if(!CommonUtils.isValidDuration(link.getDuration())){
+            isValid = false;
+        }else if(!CommonUtils.isStringNullOrEmpty(link.getName())){
+            isValid = false;
+        }
+        try{
+            if(!CommonUtils.isValidUrl(link.getLink())){
+                isValid = false;
+            }
+            CommonUtils.convertToLocalTime(link.getStartTime().toString());
+        }catch(InvalidArgumentException e){
+            isValid = false;
+        }
+        return isValid;
     }
 
 

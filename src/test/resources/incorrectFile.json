@@ -36,6 +36,66 @@
       "linkManager": {
         "contents": [
           {
+            "day": "tuday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 1121,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "//zoom/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": -2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": ""
+          },
+          {
             "day": "tuesday",
             "startTime": {
               "hour": 11,
