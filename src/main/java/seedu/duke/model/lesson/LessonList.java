@@ -1,5 +1,6 @@
 package seedu.duke.model.lesson;
 
+import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.lesson.exceptions.LessonIndexException;
 import seedu.duke.ui.Ui;
@@ -38,7 +39,13 @@ public class LessonList {
         return lessonList.isEmpty();
     }
 
-    public void addLesson(Lesson newLesson) {
+    public void addLesson(Lesson newLesson) throws DukeException {
+        for (Lesson lesson : lessonList) {
+            if (lesson.getTitle().equals(newLesson.getTitle()) &&
+                    (lesson.getDayOfTheWeek().equals(newLesson.getDayOfTheWeek()))) {
+                throw new DukeException("You have already added that lesson.");
+            }
+        }
         lessonList.add(newLesson);
     }
 
