@@ -1,0 +1,49 @@
+@startuml ContainValidParametersAndValuesSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":*Command" as command COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant ":*Validator" as xvalidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
+-> command: execute
+    command -> ui: getInstance()
+    command <-- ui
+    create xvalidator
+    command -> xvalidator: new *Validator()
+    command <-- xvalidator
+
+    command -> xvalidator: containsInvalidParameters()
+    command <-- xvalidator: isInvalidParameter
+
+    opt !isInvalidParameter
+        command -> medicine: getInstance()
+        command <-- medicine
+        command -> xvalidator: containsInvalidParameterValues()
+        command <-- xvalidator: isInvalidParameterValues
+
+        opt !isInvalidParameterValues
+            ref over command, medicine
+                Logic for *Command
+            end ref
+            command -> storage: getInstance()
+            command <-- storage
+            command -> storage: saveData()
+            command <-- storage
+        end
+    end
+
+@enduml
