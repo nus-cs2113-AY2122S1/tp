@@ -37,7 +37,7 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 3. Copy the file to the folder you want to use as the home folder for your SEPlanner.
 4. In your preferred command line interface, navigate to that directory.
 5. Enter the command `java -jar tp.jar`.
-6. If you can see the graphic below, congrats! You are ready to start using SEPlanner
+6. If you can see the graphic below, congrats! You are ready to start using SEPlanner.
 ```
                                                        /(#######################(*
                                                  /(#(((((((((((###############(((((((.
@@ -76,6 +76,10 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
  `8b.  ;8.`8888 8 8888         8 8888         8 8888          .888888888. `88888.  8         `Y8o.` 8         `Y8o.` 8 8888         8 8888   `8b.
   `Y8888P ,88P' 8 888888888888 8 8888         8 888888888888 .8'       `8. `88888. 8            `Yo 8            `Yo 8 888888888888 8 8888     `88.
 ```
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
+If the visual that appears does not look like this, you might want maximize your console window.
+Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
+</div>
 
 ## Program run through
 
@@ -126,22 +130,6 @@ Here are the universities and module mappings in the list:
 [80] - Western University  
 ```
 
-### Viewing all selected universities:
-
-Displays all universities added, as well as all module mappings added to the university by the user.  
-
-#### Format: `list /suni`  
-
-* Example 1   
-Input: `list /suni`  
-Expected output:
-```
-Here are the universities and module mappings in your list:
-[40] - Technical University of Munich
-    1 | IE4056 - WI001098 : Introduction to Production Scheduling Theory
-[80] - Western University
-```
-
 ### Viewing all available modules: 
 
 Displays all modules from the master list of modules that the user can choose from.  
@@ -160,25 +148,6 @@ Here are the modules in the list:
 [803] TR3008 : Technological Innovation  
 [804] UD5221 : Urban Design Theory and Disco  
 [805] UD5628 : Critique of Contemporary Urban Design  
-```
-
-### Viewing all selected modules
-
-Displays all modules from the master list of modules that the user can choose from.  
-
-#### Format: `list /smod`  
-
-* Example 1  
-Input: `list /smod`  
-Expected output:
-```
-Here are the modules in the list:
-[102] CS3220   : Computer Architecture
-[319] IE4044   : Exchange Elective
-[801] ST4991   : Exchange Enrichment Module
-[77] CS1010   : Programming Methodology
-[72] CM4271   : MEDICINAL CHEMISTRY
-[47] CM1417   : Fundamentals of Chemistry
 ```
 
 ### Adding a partner university
@@ -213,7 +182,7 @@ Add a NUS module that the user wants to complete during SEP into the user select
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
 This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
 The `<MODULE_INDEX>` can be found via `list /mmod` command.
 </div>
@@ -233,14 +202,67 @@ New module added:
 [77] CS1010   : Programming Methodology
 ```
 
+### Viewing all selected universities:
+
+Displays all universities added, as well as all module mappings added to the university by the user.
+
+#### Format: `list /suni`
+
+* Example 1   
+  Input: `list /suni`  
+  Expected output:
+```
+Here are the universities and module mappings in your list:
+[40] - Technical University of Munich
+    1 | IE4056 - WI001098 : Introduction to Production Scheduling Theory
+[80] - Western University
+```
+
+### Viewing all selected modules
+
+Displays all modules from the master list of modules that the user can choose from.
+
+#### Format: `list /smod`
+
+* Example 1  
+  Input: `list /smod`  
+  Expected output:
+```
+Here are the modules in the list:
+[102] CS3220   : Computer Architecture
+[319] IE4044   : Exchange Elective
+[801] ST4991   : Exchange Enrichment Module
+[77] CS1010   : Programming Methodology
+[72] CM4271   : MEDICINAL CHEMISTRY
+[47] CM1417   : Fundamentals of Chemistry
+```
+
+### Searching for available module mappings:
+
+Displays all available module mappings for a specific university that matches the list of selected modules.
+
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
+Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
+</div>
+
+#### Format: `searchmap <UNIVERSITY_INDEX>`
+
+* Example 1  
+  Input: `searchmap 4`  
+  Expected Output:
+```
+Potential mappings for Boston University:
+[1] CS1231 - MET CS 248 : Discrete Mathematics
+[2] CS1231 - CAS CS131 : Combinatoric Structures
+```
+
 ### Adding a module mapping
 
 Adds a specific pair of module mapping under a selected university.
 
 #### Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 The `<UNIVERSITY_INDEX>` can be found via `list /suni`command and the `<MODULE_MAPPING_INDEX>` can be 
 found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
 </div>
@@ -280,7 +302,7 @@ Expected output:
 * Example 2   
 Input: `find /uni  e`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
 Note the space before the character 'e' in the keyword " e".
 The find command takes into account spaces as part of the keyword when searching. 
 </div>
@@ -308,25 +330,6 @@ Expected output:
 [78] CS1010E  : Programming Methodology
 [79] CS1010J  : Programming Methodology
 [80] CS1010S  : Programming Methodology
-```
-
-### Searching for available module mappings:
-
-Displays all available module mappings for a specific university that matches the list of selected modules.
-
-<div markdown="block" class="alert alert-info">
-Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
-</div>
-
-#### Format: `searchmap <UNIVERSITY_INDEX>`
-
-* Example 1  
-Input: `searchmap 4`  
-Expected Output:
-```
-Potential mappings for Boston University:
-[1] CS1231 - MET CS 248 : Discrete Mathematics
-[2] CS1231 - CAS CS131 : Combinatoric Structures
 ```
 
 ### Removing a selected university
@@ -386,8 +389,8 @@ The following module mapping has been removed:
 [4] Boston University
 CS1231 - CAS CS131 : Combinatoric Structures
 ```
-
-<div markdown="block" class="alert alert-info">
+ 
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
 Removing a module does not automatically remove all module mappings associated with it.
 </div>
 
