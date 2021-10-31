@@ -157,6 +157,6 @@ public class Module {
      */
     @Override
     public String toString() {
-        return moduleCode + " " + title + " (" + moduleCredit + "MCs) " + "Grade: " + grade;
+        return moduleCode + " " + title + " (" + moduleCredit + "MCs) | Grade: " + grade;
     }
 }
