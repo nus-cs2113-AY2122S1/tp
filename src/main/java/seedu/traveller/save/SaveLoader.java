@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author gavienwz
 /**
@@ -21,10 +23,9 @@ import java.util.Scanner;
  * It saves all existing trip objects and their corresponding days/items.
  */
 public class SaveLoader {
-    //private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
+    private static final Logger logger = Logger.getLogger(SaveLoader.class.getName());
     private final String filePath = "./save/save.txt";
     private final String directoryPath = "./save";
-    private final String separator = " ";
     private final Ui ui;
     private final TripsList tripsList;
 
@@ -44,7 +45,6 @@ public class SaveLoader {
             } catch (SaveDataNotFoundException e) {
                 ui.printError(e.getMessage());
             }
-            //deleteSave();
         }
         ui.printLine();
     }
@@ -58,7 +58,6 @@ public class SaveLoader {
             if (!hasDirectory()) {
                 createDir();
             }
-            //createSave();
             writeToSave();
         } catch (IOException | TravellerException e) {
             ui.printError(e.getMessage());
@@ -92,34 +91,38 @@ public class SaveLoader {
      * @throws SaveDataNotFoundException The save file doesn't exist.
      */
     private void readFromSave() throws SaveDataNotFoundException {
-        /*logger.setLevel(Level.INFO);
-        logger.log(Level.INFO, "Reading data from " + FILE_PATH);*/
+        logger.setLevel(Level.INFO);
+        logger.log(Level.INFO, "Reading data from " + filePath);
         File data = new File(filePath);
         Scanner scanner;
         try {
             scanner = new Scanner(data);
         } catch (FileNotFoundException e) {
-            //logger.log(Level.WARNING, "Save data cannot be found.");
+            logger.log(Level.WARNING, "Save data cannot be found.");
             throw new SaveDataNotFoundException();
         }
-        String input;
         ui.printReadSave();
         int lineNumber = 1;
         while (scanner.hasNext()) {
-            try {
-                input = scanner.nextLine();
-                Command c = Parser.parse(input);
-                c.execute(tripsList, ui);
-            } catch (TravellerException e) {
-                ui.printReadSaveError(lineNumber);
-            }
+            executeSaveData(scanner, lineNumber);
             lineNumber++;
         }
     }
 
-    private void deleteSave() {
-        File save = new File(filePath);
-        save.delete();
+    /**
+     * This function is similar to the run function in traveller, handling the executing of the save commands.
+     * @param scanner Scanner object to read from the save text file.
+     * @param lineNumber Line number to indicate where an error occurs.
+     */
+    private void executeSaveData(Scanner scanner, int lineNumber) {
+        String input;
+        try {
+            input = scanner.nextLine();
+            Command c = Parser.parse(input);
+            c.execute(tripsList, ui);
+        } catch (TravellerException e) {
+            ui.printReadSaveError(lineNumber);
+        }
     }
 
     /**
@@ -130,8 +133,8 @@ public class SaveLoader {
      * @throws TravellerException If an error occurs in referencing the current trip.
      */
     private void writeToSave() throws IOException, TravellerException {
-        /*logger.setLevel(Level.INFO);
-        logger.log(Level.INFO, "Writing data to " + FILE_PATH);*/
+        logger.setLevel(Level.INFO);
+        logger.log(Level.INFO, "Writing data to " + filePath);
         FileWriter fw = new FileWriter(filePath);
         ui.printWriteSave();
         for (int i = 0; i < tripsList.getSize(); i++) {
@@ -141,16 +144,6 @@ public class SaveLoader {
             fw.write(current.getSaveItem());
         }
         fw.close();
-    }
-
-    /**
-     * Creates save.txt. Is called if the save text file doesn't exist.
-     * @throws IOException If an I/O error occurs due to file class.
-     */
-    private void createSave() throws IOException {
-        File save = new File(filePath);
-        save.getParentFile().mkdirs();
-        save.createNewFile();
     }
 
     /**
