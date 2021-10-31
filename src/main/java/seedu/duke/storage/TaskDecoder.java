@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.MemberParser;
 import seedu.duke.parser.Parser;
@@ -17,7 +18,7 @@ public class TaskDecoder {
     private static final int INDEX_OF_DEADLINE = 4;
     private static final int INDEX_OF_MEMBERS = 5;
 
-    protected static Task decodeTaskFromString(String encodedTask) {
+    protected static Task decodeTaskFromString(String encodedTask) throws DukeException {
         String[] taskDetails = encodedTask.trim().split(Task.TASK_DATA_ARGS_DELIMITER);
         String taskTitle = taskDetails[INDEX_OF_TILE];
         String taskStatus = taskDetails[INDEX_OF_STATUS];

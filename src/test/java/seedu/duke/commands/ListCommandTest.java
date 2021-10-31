@@ -21,7 +21,7 @@ public class ListCommandTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    public void setUpStream() {
+    public void setUpStream() throws DukeException {
         System.setOut(new PrintStream(outContent));
         setUp();
     }
@@ -84,7 +84,7 @@ public class ListCommandTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
-    void setUp() {
+    void setUp() throws DukeException {
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event1 = new Event("Peppa Pig's Concert",
                 "Asia world tour", event1DateTime,
