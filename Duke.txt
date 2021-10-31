@@ -1,3 +1,0 @@
-add-employee|asdas|112
-add-dish|Pizza|10.0|30.0
-add-dish|asdv|12433.0|100.0
