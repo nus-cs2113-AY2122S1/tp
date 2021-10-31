@@ -1,0 +1,58 @@
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+--> ":Parser": addTagParse()
+activate ":Parser"
+
+' Name
+
+":Parser" -> ":AddTagCommand": AddTagCommand(String recipeName, String[] splitTagNames)
+activate ":AddTagCommand"
+
+":AddTagCommand" -> ":Cookbook" : isRecipeExist(String recipeName)
+activate ":Cookbook"
+
+":Cookbook" --> ":AddTagCommand": //returns boolean value of whether recipe exists//
+
+":AddTagCommand" -> ":Cookbook" : addCookbookTag(Tag createdTag)
+
+":Cookbook" --> ":AddTagCommand": //cookbookTags array updated//
+
+":AddTagCommand" -> ":Cookbook" : appendRecipeToCookbookTag(String tagName, String recipeName)
+
+":Cookbook" -> ":Tag" : addAssociatedRecipeName(String recipeName)
+activate ":Tag"
+
+":Tag" --> ":Cookbook"
+destroy ":Tag"
+
+":AddTagCommand" -> ":Cookbook" : addTagToRecipes(Tag createdTag)
+activate ":Recipe"
+":Cookbook" -> ":Recipe": addTagToRecipe(Tag tag, String recipeName)
+
+":Recipe" --> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" --> ":AddTagCommand"
+destroy ":Cookbook"
+
+":AddTagCommand" --> ":Parser"
+destroy ":AddTagCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml

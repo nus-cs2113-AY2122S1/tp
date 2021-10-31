@@ -3,6 +3,7 @@ package gordon.util;
 import gordon.command.Command;
 import gordon.command.basic.AddCommand;
 import gordon.command.basic.CheckCommand;
+import gordon.command.basic.HelpCommand;
 import gordon.command.basic.DeleteRecipeCommand;
 import gordon.command.basic.ListRecipesCommand;
 import gordon.command.basic.NullCommand;
@@ -72,8 +73,6 @@ public class Parser {
     public static final String SET_FIND_PRICE_PROMPT = "price";
     public static final String SET_FIND_TIME_PROMPT = "time";
 
-    UI message = new UI();
-
     public Parser() {
         in = new Scanner(System.in);
     }
@@ -109,7 +108,7 @@ public class Parser {
             } else if (parsedCommand.equalsIgnoreCase(FIND_PROMPT)) {
                 return findParse();
             } else if (parsedCommand.equalsIgnoreCase(HELP_PROMPT)) {
-                message.printHelp();
+                return new HelpCommand();
             } else if (parsedCommand.equalsIgnoreCase(TAG_PROMPT)) {
                 return addTagParse();
             } else if (parsedCommand.equalsIgnoreCase(UNTAG_PROMPT)) {

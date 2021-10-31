@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="408px" preserveAspectRatio="none" style="width:1325px;height:408px;background:#FFFFFF;" version="1.1" viewBox="0 0 1325 408" width="1325px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="316.5386" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="67.0474"/><rect fill="#FFDAB9" height="287.5898" style="stroke:#000000;stroke-width:1.0;" width="10" x="493" y="95.9961"/><rect fill="#FFDAB9" height="244.6411" style="stroke:#000000;stroke-width:1.0;" width="10" x="917" y="124.9448"/><rect fill="#FFDAB9" height="14" style="stroke:#000000;stroke-width:1.0;" width="10" x="1221" y="269.6885"/><rect fill="#FFDAB9" height="42.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="1283.5" y="312.6372"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="109" x2="109" y1="36.0986" y2="401.5859"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="498" x2="498" y1="36.0986" y2="401.5859"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="922" x2="922" y1="36.0986" y2="401.5859"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1225.5" x2="1225.5" y1="36.0986" y2="401.5859"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1288.5" x2="1288.5" y1="36.0986" y2="401.5859"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="79" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="86" y="25.1318">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="134" x="431" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="120" x="438" y="25.1318">:AddTagCommand</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="82" x="881" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="68" x="888" y="25.1318">:Cookbook</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="43" x="1204.5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="29" x="1211.5" y="25.1318">:Tag</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="1257.5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="1264.5" y="25.1318">:Recipe</text><rect fill="#FFDAB9" height="316.5386" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="67.0474"/><rect fill="#FFDAB9" height="287.5898" style="stroke:#000000;stroke-width:1.0;" width="10" x="493" y="95.9961"/><rect fill="#FFDAB9" height="244.6411" style="stroke:#000000;stroke-width:1.0;" width="10" x="917" y="124.9448"/><rect fill="#FFDAB9" height="14" style="stroke:#000000;stroke-width:1.0;" width="10" x="1221" y="269.6885"/><rect fill="#FFDAB9" height="42.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="1283.5" y="312.6372"/><polygon fill="#000000" points="92,63.0474,102,67.0474,92,71.0474,96,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="0" x2="98" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="85" x="7" y="62.2925">addTagParse()</text><polygon fill="#000000" points="481,91.9961,491,95.9961,481,99.9961,485,95.9961" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="114" x2="487" y1="95.9961" y2="95.9961"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="360" x="121" y="91.2412">AddTagCommand(String recipeName, String[] splitTagNames)</text><polygon fill="#000000" points="905,120.9448,915,124.9448,905,128.9448,909,124.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="503" x2="911" y1="124.9448" y2="124.9448"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="195" x="510" y="120.1899">isRecipeExist(String recipeName)</text><polygon fill="#000000" points="514,149.8936,504,153.8936,514,157.8936,510,153.8936" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="508" x2="916" y1="153.8936" y2="153.8936"/><text fill="#000000" font-family="Arial" font-size="13" font-style="italic" lengthAdjust="spacing" textLength="266" x="520" y="149.1387">returns boolean value of whether recipe exists</text><polygon fill="#000000" points="905,178.8423,915,182.8423,905,186.8423,909,182.8423" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="503" x2="911" y1="182.8423" y2="182.8423"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="200" x="510" y="178.0874">addCookbookTag(Tag createdTag)</text><polygon fill="#000000" points="514,207.791,504,211.791,514,215.791,510,211.791" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="508" x2="916" y1="211.791" y2="211.791"/><text fill="#000000" font-family="Arial" font-size="13" font-style="italic" lengthAdjust="spacing" textLength="168" x="520" y="207.0361">cookbookTags array updated</text><polygon fill="#000000" points="905,236.7397,915,240.7397,905,244.7397,909,240.7397" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="503" x2="911" y1="240.7397" y2="240.7397"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="390" x="510" y="235.9849">appendRecipeToCookbookTag(String tagName, String recipeName)</text><polygon fill="#000000" points="1209,265.6885,1219,269.6885,1209,273.6885,1213,269.6885" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="927" x2="1215" y1="269.6885" y2="269.6885"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="275" x="934" y="264.9336">addAssociatedRecipeName(String recipeName)</text><polygon fill="#000000" points="938,279.6885,928,283.6885,938,287.6885,934,283.6885" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="932" x2="1225" y1="283.6885" y2="283.6885"/><line style="stroke:#000000;stroke-width:2.0;" x1="1217" x2="1235" y1="274.6885" y2="292.6885"/><line style="stroke:#000000;stroke-width:2.0;" x1="1217" x2="1235" y1="292.6885" y2="274.6885"/><polygon fill="#000000" points="905,308.6372,915,312.6372,905,316.6372,909,312.6372" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="503" x2="911" y1="312.6372" y2="312.6372"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="204" x="510" y="307.8823">addTagToRecipes(Tag createdTag)</text><polygon fill="#000000" points="1271.5,337.5859,1281.5,341.5859,1271.5,345.5859,1275.5,341.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="927" x2="1277.5" y1="341.5859" y2="341.5859"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="265" x="934" y="336.8311">addTagToRecipe(Tag tag, String recipeName)</text><polygon fill="#000000" points="938,351.5859,928,355.5859,938,359.5859,934,355.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="932" x2="1287.5" y1="355.5859" y2="355.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="1279.5" x2="1297.5" y1="346.5859" y2="364.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="1279.5" x2="1297.5" y1="364.5859" y2="346.5859"/><polygon fill="#000000" points="514,365.5859,504,369.5859,514,373.5859,510,369.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="508" x2="921" y1="369.5859" y2="369.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="913" x2="931" y1="360.5859" y2="378.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="913" x2="931" y1="378.5859" y2="360.5859"/><polygon fill="#000000" points="120,379.5859,110,383.5859,120,387.5859,116,383.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="114" x2="497" y1="383.5859" y2="383.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="489" x2="507" y1="374.5859" y2="392.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="489" x2="507" y1="392.5859" y2="374.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="100" x2="118" y1="374.5859" y2="392.5859"/><line style="stroke:#000000;stroke-width:2.0;" x1="100" x2="118" y1="392.5859" y2="374.5859"/><!--MD5=[1d5284b7cdba7906875a32399ade556d]
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": addTagParse()
+activate ":Parser"
+
+' Name
+
+":Parser" -> ":AddTagCommand": AddTagCommand(String recipeName, String[] splitTagNames)
+activate ":AddTagCommand"
+
+":AddTagCommand" -> ":Cookbook" : isRecipeExist(String recipeName)
+activate ":Cookbook"
+
+":Cookbook" - -> ":AddTagCommand": //returns boolean value of whether recipe exists//
+
+":AddTagCommand" -> ":Cookbook" : addCookbookTag(Tag createdTag)
+
+":Cookbook" - -> ":AddTagCommand": //cookbookTags array updated//
+
+":AddTagCommand" -> ":Cookbook" : appendRecipeToCookbookTag(String tagName, String recipeName)
+
+":Cookbook" -> ":Tag" : addAssociatedRecipeName(String recipeName)
+activate ":Tag"
+
+":Tag" - -> ":Cookbook"
+destroy ":Tag"
+
+":AddTagCommand" -> ":Cookbook" : addTagToRecipes(Tag createdTag)
+activate ":Recipe"
+":Cookbook" -> ":Recipe": addTagToRecipe(Tag tag, String recipeName)
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" - -> ":AddTagCommand"
+destroy ":Cookbook"
+
+":AddTagCommand" - -> ":Parser"
+destroy ":AddTagCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+@startuml
+
+hide footbox
+
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": addTagParse()
+activate ":Parser"
+
+
+":Parser" -> ":AddTagCommand": AddTagCommand(String recipeName, String[] splitTagNames)
+activate ":AddTagCommand"
+
+":AddTagCommand" -> ":Cookbook" : isRecipeExist(String recipeName)
+activate ":Cookbook"
+
+":Cookbook" - -> ":AddTagCommand": //returns boolean value of whether recipe exists//
+
+":AddTagCommand" -> ":Cookbook" : addCookbookTag(Tag createdTag)
+
+":Cookbook" - -> ":AddTagCommand": //cookbookTags array updated//
+
+":AddTagCommand" -> ":Cookbook" : appendRecipeToCookbookTag(String tagName, String recipeName)
+
+":Cookbook" -> ":Tag" : addAssociatedRecipeName(String recipeName)
+activate ":Tag"
+
+":Tag" - -> ":Cookbook"
+destroy ":Tag"
+
+":AddTagCommand" -> ":Cookbook" : addTagToRecipes(Tag createdTag)
+activate ":Recipe"
+":Cookbook" -> ":Recipe": addTagToRecipe(Tag tag, String recipeName)
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" - -> ":AddTagCommand"
+destroy ":Cookbook"
+
+":AddTagCommand" - -> ":Parser"
+destroy ":AddTagCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

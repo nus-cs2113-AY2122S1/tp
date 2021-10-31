@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="289px" preserveAspectRatio="none" style="width:934px;height:289px;background:#FFFFFF;" version="1.1" viewBox="0 0 934 289" width="934px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="197.7949" style="stroke:#000000;stroke-width:1.0;" width="10" x="79" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="84" y="103.9961"/><rect fill="#FFDAB9" height="99.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="392" y="164.9448"/><rect fill="#FFDAB9" height="56.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="697" y="193.8936"/><rect fill="#FFDAB9" height="42.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="892" y="193.8936"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="84" x2="84" y1="36.0986" y2="282.8423"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="396.5" x2="396.5" y1="36.0986" y2="282.8423"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="702" x2="702" y1="36.0986" y2="282.8423"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="897" x2="897" y1="36.0986" y2="282.8423"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="54" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="61" y="25.1318">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="318.5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="143" x="325.5" y="25.1318">:SetCaloriesCommand</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="82" x="661" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="68" x="668" y="25.1318">:Cookbook</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="866" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="873" y="25.1318">:Recipe</text><rect fill="#FFDAB9" height="197.7949" style="stroke:#000000;stroke-width:1.0;" width="10" x="79" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="84" y="103.9961"/><rect fill="#FFDAB9" height="99.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="392" y="164.9448"/><rect fill="#FFDAB9" height="56.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="697" y="193.8936"/><rect fill="#FFDAB9" height="42.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="892" y="193.8936"/><polygon fill="#000000" points="67,63.0474,77,67.0474,67,71.0474,71,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="0" x2="73" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="60" x="7" y="62.2925">setParse()</text><line style="stroke:#000000;stroke-width:2.0;" x1="89" x2="136" y1="90.9961" y2="90.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="136" x2="136" y1="90.9961" y2="103.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="95" x2="136" y1="103.9961" y2="103.9961"/><polygon fill="#000000" points="105,99.9961,95,103.9961,105,107.9961,101,103.9961" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="132" x="101" y="86.2412">parseName(String line)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="94" x2="136" y1="127.9961" y2="127.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="136" x2="136" y1="127.9961" y2="140.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="89" x2="136" y1="140.9961" y2="140.9961"/><polygon fill="#000000" points="99,136.9961,89,140.9961,99,144.9961,95,140.9961" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="380,160.9448,390,164.9448,380,168.9448,384,164.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="89" x2="386" y1="164.9448" y2="164.9448"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="284" x="96" y="160.1899">SetCaloriesCommand(String recipeName, int cal)</text><polygon fill="#000000" points="685,189.8936,695,193.8936,685,197.8936,689,193.8936" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="402" x2="691" y1="193.8936" y2="193.8936"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="276" x="409" y="189.1387">setCalories(String recipeName, int newCalories)</text><polygon fill="#000000" points="880,218.8423,890,222.8423,880,226.8423,884,222.8423" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="707" x2="886" y1="222.8423" y2="222.8423"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="161" x="714" y="218.0874">setCalories(int newCalories)</text><polygon fill="#000000" points="718,232.8423,708,236.8423,718,240.8423,714,236.8423" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="712" x2="896" y1="236.8423" y2="236.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="888" x2="906" y1="227.8423" y2="245.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="888" x2="906" y1="245.8423" y2="227.8423"/><polygon fill="#000000" points="413,246.8423,403,250.8423,413,254.8423,409,250.8423" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="407" x2="701" y1="250.8423" y2="250.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="693" x2="711" y1="241.8423" y2="259.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="693" x2="711" y1="259.8423" y2="241.8423"/><polygon fill="#000000" points="95,260.8423,85,264.8423,95,268.8423,91,264.8423" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="89" x2="396" y1="264.8423" y2="264.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="388" x2="406" y1="255.8423" y2="273.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="388" x2="406" y1="273.8423" y2="255.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="75" x2="93" y1="255.8423" y2="273.8423"/><line style="stroke:#000000;stroke-width:2.0;" x1="75" x2="93" y1="273.8423" y2="255.8423"/><!--MD5=[b096158ca6f3746d4fe3610a661fc252]
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": setParse()
+activate ":Parser"
+
+' Name
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+":Parser" -> ":SetCaloriesCommand": SetCaloriesCommand(String recipeName, int cal)
+activate ":SetCaloriesCommand"
+
+":SetCaloriesCommand" -> ":Cookbook" : setCalories(String recipeName, int newCalories)
+activate ":Cookbook"
+
+activate ":Recipe"
+":Cookbook" -> ":Recipe": setCalories(int newCalories)
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" - -> ":SetCaloriesCommand"
+destroy ":Cookbook"
+
+":SetCaloriesCommand" - -> ":Parser"
+destroy ":SetCaloriesCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+@startuml
+
+hide footbox
+
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": setParse()
+activate ":Parser"
+
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+":Parser" -> ":SetCaloriesCommand": SetCaloriesCommand(String recipeName, int cal)
+activate ":SetCaloriesCommand"
+
+":SetCaloriesCommand" -> ":Cookbook" : setCalories(String recipeName, int newCalories)
+activate ":Cookbook"
+
+activate ":Recipe"
+":Cookbook" -> ":Recipe": setCalories(int newCalories)
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" - -> ":SetCaloriesCommand"
+destroy ":Cookbook"
+
+":SetCaloriesCommand" - -> ":Parser"
+destroy ":SetCaloriesCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>
