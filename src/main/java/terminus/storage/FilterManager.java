@@ -133,6 +133,9 @@ public class FilterManager {
                 isValid = false;
             }
             CommonUtils.convertToLocalTime(link.getStartTime().toString());
+            if (CommonUtils.hasDurationOverflow(link.getStartTime(), link.getDuration())) {
+                isValid = false;
+            }
         } catch (InvalidArgumentException e) {
             isValid = false;
         }

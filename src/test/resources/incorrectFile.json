@@ -98,6 +98,18 @@
           {
             "day": "tuesday",
             "startTime": {
+              "hour": 23,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 10,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
               "hour": 11,
               "minute": 11,
               "second": 0,
