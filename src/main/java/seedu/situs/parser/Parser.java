@@ -101,13 +101,13 @@ public class Parser {
         case COMMAND_HELP:
             return parseHelpCommand();
         case COMMAND_EXPIRE:
-            return parseExpireCommand(command);
+            return parseExpireCommand(words[1]);
         case COMMAND_FIND:
             return parseFindCommand(command);
         case COMMAND_ALERTS:
-            return parseAlertsCommand(command);
+            return parseAlertsCommand(words[1]);
         case COMMAND_SET_THRESHOLD:
-            return parseSetCommand(command);
+            return parseSetCommand(words[1]);
         case COMMAND_EXIT:
             return "";
         default:
@@ -354,14 +354,13 @@ public class Parser {
     /**
      * Parses and executes the {@code expire} command.
      *
-     * @param command The user's input string
+     * @param parameter The user's input parameter
      * @return List of ingredients expiring by the specified date
      * @throws SitusException if the date format is incorrect
      */
-    private static String parseExpireCommand(String command) throws SitusException {
-        String detail = command.substring(COMMAND_EXPIRE.length()).trim();
+    private static String parseExpireCommand(String parameter) throws SitusException {
         try {
-            LocalDate expireBeforeDate = Ingredient.stringToDate(detail);
+            LocalDate expireBeforeDate = Ingredient.stringToDate(parameter.trim());
             return new ExpireCommand(expireBeforeDate).run();
         } catch (DateTimeParseException e) {
             throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
@@ -371,13 +370,12 @@ public class Parser {
     /**
      * Parses and executes the {@code alerts} command.
      *
-     * @param command The user's input string
+     * @param parameter The user's input parameter
      * @return The list of ingredients for each alert type
      * @throws SitusException if alert type, date format or amount format is incorrect
      */
-    private static String parseAlertsCommand(String command) throws SitusException {
-        String detail = command.substring(COMMAND_ALERTS.length()).trim();
-        switch (detail) {
+    private static String parseAlertsCommand(String parameter) throws SitusException {
+        switch (parameter.trim()) {
         case "all":
             return new AlertCommand().run();
         case "expiry":
@@ -392,29 +390,29 @@ public class Parser {
     /**
      * Parses and executes the {@code set} command.
      *
-     * @param command The user's input string
+     * @param parameter The user's input parameters
      * @return threshold successfully set message
      * @throws SitusException if threshold type, date format or amount format is incorrect
      */
-    private static String parseSetCommand(String command) throws SitusException {
-        String[] details = command.split(" ", 3);
-        if (details.length < 3) {
+    private static String parseSetCommand(String parameter) throws SitusException {
+        String[] details = parameter.split(" ", 2);
+        if (details.length < 2) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 3);
+        assert (details.length == 2);
 
         try {
-            switch (details[1].trim()) {
+            switch (details[0].trim()) {
             case "expiry":
-                long newExpiryThreshold = Long.parseLong(details[2].trim());
+                long newExpiryThreshold = Long.parseLong(details[1].trim());
                 if (newExpiryThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
                 AlertExpiringSoonCommand.setExpiryThreshold(newExpiryThreshold);
                 return "Successfully set expiry threshold to " + newExpiryThreshold + " days";
             case "stock":
-                double newStockThreshold = Double.parseDouble(details[2].trim());
+                double newStockThreshold = Double.parseDouble(details[1].trim());
                 if (newStockThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
