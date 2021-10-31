@@ -313,7 +313,7 @@ public class ParserTest {
                 + "2. Cook sauce" + System.lineSeparator()
                 + "3. Mix" + System.lineSeparator()
                 + "4. Grate cheese on top and serve" + System.lineSeparator()
-                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator()
+                + "GordonException: Please use the format \"set RECIPE_NAME /ATTRIBUTE VALUE\"" + System.lineSeparator()
                 + "Setting calories..." + System.lineSeparator()
                 + "GordonException: Search returns no result." + System.lineSeparator()
                 + "GordonException: Index is not a valid integer." + System.lineSeparator()
@@ -443,10 +443,12 @@ public class ParserTest {
                 + "1. Cook bee hoon" + System.lineSeparator()
                 + "2. stir fry" + System.lineSeparator()
                 + "3. serve" + System.lineSeparator()
-                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator()
+                + "GordonException: Please use the format \"set RECIPE_NAME /time PREP_TIME, COOK_TIME\""
+                + System.lineSeparator()
                 + "Setting times..." + System.lineSeparator()
                 + "Times set successfully." + System.lineSeparator()
-                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator()
+                + "GordonException: Please use the format \"set RECIPE_NAME /time PREP_TIME, COOK_TIME\""
+                + System.lineSeparator()
                 + "Setting times..." + System.lineSeparator()
                 + "Times set successfully." + System.lineSeparator()
                 + "Finding recipes called Bee Hoon....." + System.lineSeparator()
