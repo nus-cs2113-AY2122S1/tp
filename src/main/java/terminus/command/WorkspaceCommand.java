@@ -1,6 +1,5 @@
 package terminus.command;
 
-import java.io.IOException;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;

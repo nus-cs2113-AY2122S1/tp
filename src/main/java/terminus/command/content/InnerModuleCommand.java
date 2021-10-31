@@ -1,6 +1,5 @@
 package terminus.command.content;
 
-import java.io.IOException;
 import terminus.command.CommandResult;
 import terminus.command.WorkspaceCommand;
 import terminus.common.Messages;

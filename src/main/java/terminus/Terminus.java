@@ -12,9 +12,7 @@ import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
-import terminus.storage.StorageActionEnum;
 import terminus.storage.StorageManager;
-import terminus.storage.StorageTypeEnum;
 import terminus.ui.Ui;
 
 public class Terminus {

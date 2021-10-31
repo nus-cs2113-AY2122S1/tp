@@ -1,10 +1,6 @@
 package terminus.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,7 +16,6 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Question;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 

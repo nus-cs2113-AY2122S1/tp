@@ -1,6 +1,5 @@
 package terminus.command.content;
 
-import java.io.IOException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;

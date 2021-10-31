@@ -1,6 +1,5 @@
 package terminus.command.module;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;

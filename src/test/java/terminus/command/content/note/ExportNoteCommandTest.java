@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +18,7 @@ import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.parser.NoteCommandParser;
-import terminus.storage.StorageActionEnum;
 import terminus.storage.StorageManager;
-import terminus.storage.StorageTypeEnum;
 import terminus.ui.Ui;
 
 public class ExportNoteCommandTest {

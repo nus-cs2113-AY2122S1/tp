@@ -1,6 +1,5 @@
 package terminus.command.module;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import terminus.command.Command;

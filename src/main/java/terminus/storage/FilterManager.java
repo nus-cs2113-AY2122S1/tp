@@ -1,10 +1,6 @@
 package terminus.storage;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import terminus.activerecall.DifficultyModifier;
-import terminus.command.content.link.AddLinkCommand;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.content.ContentManager;
@@ -125,24 +121,23 @@ public class FilterManager {
      */
     protected boolean isScheduleValid(Link link) {
         boolean isValid = true;
-        if(!CommonUtils.isValidDay(link.getDay())){
+        if (!CommonUtils.isValidDay(link.getDay())) {
             isValid = false;
-        }else if(!CommonUtils.isValidDuration(link.getDuration())){
+        } else if (!CommonUtils.isValidDuration(link.getDuration())) {
             isValid = false;
-        }else if(!CommonUtils.isStringNullOrEmpty(link.getName())){
+        } else if (!CommonUtils.isStringNullOrEmpty(link.getName())) {
             isValid = false;
         }
-        try{
-            if(!CommonUtils.isValidUrl(link.getLink())){
+        try {
+            if (!CommonUtils.isValidUrl(link.getLink())) {
                 isValid = false;
             }
             CommonUtils.convertToLocalTime(link.getStartTime().toString());
-        }catch(InvalidArgumentException e){
+        } catch (InvalidArgumentException e) {
             isValid = false;
         }
         return isValid;
     }
-
 
 
 }

@@ -1,8 +1,6 @@
 package terminus.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,11 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
-import terminus.content.ContentManager;
-import terminus.content.Note;
 import terminus.exception.InvalidFileException;
-import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 public class FolderStorageTest {
 
