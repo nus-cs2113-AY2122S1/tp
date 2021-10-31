@@ -14,6 +14,7 @@ end box
 
 autoactivate on
 mainFrame sd Logic for AddOrderCommand
+activate addorder
 alt orderQuantity != 0
     alt nameExistsInorder
         alt !nameExistsInStock
@@ -30,20 +31,17 @@ alt orderQuantity != 0
                addorder <-- stockmanager : TotalStockQuantity
                addorder -> stockmanager : getMaxStockQuantity()
                addorder <-- stockmanager : MaxStockQuantity
-               alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
+               alt orderQuantity + totalExistingQuantity <= maxQuantity
                    addorder -> addorder : addDate()
                    addorder --> addorder : orderDate
                    addorder -> addorder : addOrder()
                    addorder --> addorder
-               else !orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
-                   addorder --> addorder
-               end
-       else !nameExistsInorder
-           addorder -> addorder : addDate()
-           addorder --> addorder : orderDate
-           addorder -> addorder : addOrder()
-           addorder --> addorder
-       end
+           end
+    else !nameExistsInorder
+        addorder -> addorder : addDate()
+        addorder --> addorder : orderDate
+        addorder -> addorder : addOrder()
+        addorder --> addorder
     end
 end
 deactivate addorder

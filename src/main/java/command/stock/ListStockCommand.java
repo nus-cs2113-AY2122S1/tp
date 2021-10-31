@@ -7,6 +7,7 @@ import inventory.Medicine;
 import inventory.Stock;
 import utilities.comparators.StockComparator;
 import utilities.parser.DateParser;
+import utilities.parser.OrderValidator;
 import utilities.parser.StockValidator;
 import utilities.ui.Ui;
 
@@ -43,20 +44,10 @@ public class ListStockCommand extends Command {
                 CommandParameters.EXPIRING, CommandParameters.LOW};
 
         StockValidator stockValidator = new StockValidator();
-        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters,
-                requiredParameter, optionalParameters, CommandSyntax.LIST_STOCK_COMMAND, false);
-
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return;
-        }
-
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.LIST_STOCK_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        if (checkValidParameterValues(ui,parameters, medicines, requiredParameter, optionalParameters,
+                stockValidator)) {
             return;
         }
 
@@ -149,5 +140,36 @@ public class ListStockCommand extends Command {
             }
         }
         return filteredStocks;
+    }
+
+    /**
+     * Checks if user input are valid.
+     *
+     * @param ui                    Reference to the UI object to print messages.
+     * @param parameters            The parameter that is not found.
+     * @param medicines             List of all medicines.
+     * @param requiredParameter     The required parameters to check.
+     * @param optionalParameters    The optional parameters to check.
+     * @param stockValidator        Reference to StockValidator object.
+     * @return Boolean value indicating if parameter and parameter values are valid.
+     */
+    private boolean checkValidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
+                                              ArrayList<Medicine> medicines, String[] requiredParameter,
+                                              String[] optionalParameters, StockValidator stockValidator) {
+        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters,
+                requiredParameter, optionalParameters, CommandSyntax.LIST_STOCK_COMMAND, false);
+
+        if (isInvalidParameter) {
+            logger.log(Level.WARNING, "Invalid parameters given by user");
+            return true;
+        }
+
+        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters,
+                medicines, CommandSyntax.LIST_STOCK_COMMAND);
+        if (isInvalidParameterValues) {
+            logger.log(Level.WARNING, "Invalid parameters values given by user");
+            return true;
+        }
+        return false;
     }
 }
