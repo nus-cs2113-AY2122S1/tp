@@ -52,7 +52,7 @@ when learning how to use **ConTech**.
 This section aims to get you started with using **ConTech**. 
 
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest version of `contech.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases).
+2. Download the latest version of `contech.jar` from **[here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases)**.
 3. Copy the `contech.jar` file to the folder you want to use as the _home folder_ for **ConTech**.
 4. Open your desired _Command Line Interface_ from the folder with `contech.jar` and enter the following code: 
 `java -jar contech.jar`.
@@ -73,9 +73,10 @@ If you have reached this step without any issues, congratulations! You have succ
 :information_source: You are advised to go through the following two sections.
 
 Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common 
-[notations](#notations) that will be used throughout this guide.
+**[notations](#notations)** that will be used throughout this guide. You are strongly recommended to familiarise yourself 
+with the notations used.
 
-However, if you would like to, you can refer to the [Features](#features) below for details of each feature and 
+You may also refer to the **[features](#features)** below for details of each feature and 
 its respective command.
 </div>
 
