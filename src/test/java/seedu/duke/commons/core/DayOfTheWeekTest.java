@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author richwill28
 public class DayOfTheWeekTest {
     @Test
     public void isDayOfTheWeek_validMonday_true() {
