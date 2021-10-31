@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.exception.InvalidFileException;
 
 /**
@@ -147,7 +149,12 @@ public class Storage {
      * @return The full path of the given path.
      */
     public Path getAppendPath(Path corePath, String path) {
-        return Paths.get(corePath.toString(), path);
+        try {
+            return Paths.get(corePath.toString(), path);
+        } catch (InvalidPathException e) {
+            TerminusLogger.severe(String.format(Messages.ERROR_INVALID_FILE_PATH, corePath + path));
+            return null;
+        }
     }
 
     /**

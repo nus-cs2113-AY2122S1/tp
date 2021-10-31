@@ -57,6 +57,7 @@ public class JsonStorage extends Storage {
      * @throws InvalidFileException when any file I/O operations has error.
      */
     private void createJson() throws InvalidFileException {
+        createFolder(baseDirectory);
         createFile(jsonFilePath);
     }
 
