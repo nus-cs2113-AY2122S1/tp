@@ -307,8 +307,8 @@ Format: `list module {verbose}`
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
-       2. CG2028 Computer Organization (2MCs) Grade: B
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
+       2. CG2028 Computer Organization (2MCs) | Grade: B
        ------------------------------------------------------------------------------------
        You have a total of 6 MCs
        Your current CAP is: 4.50
@@ -318,7 +318,7 @@ $ list module verbose
       ______________________________________________________________________________________
        Here are the detailed information of your modules:
        ------------------------------------------------------------------------------------
-       CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
        Department: Computer Science
        Faculty: Computing
        Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
@@ -326,7 +326,7 @@ $ list module verbose
        Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
        ------------------------------------------------------------------------------------
        ------------------------------------------------------------------------------------
-       CG2028 Computer Organization (2MCs) Grade: B
+       CG2028 Computer Organization (2MCs) | Grade: B
        Department: Computing and Engineering Programme
        Faculty: Multi Disciplinary Programme
        Preclusion: EE2024 Programming for Computer Interfaces
