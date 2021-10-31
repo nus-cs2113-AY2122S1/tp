@@ -53,6 +53,13 @@ purpose of this guide is to help developers set up and continue with the develop
 
 ## Glossary
 
+Terminology | Meaning
+------ | ------
+Stock | Refers to a medication.
+Prescription | Refers to a prescription.
+Order | Refers to ordering new medications to replenish the stocks.
+Parameters | Prefixes for MediVault to understand the type of information you provide.
+
 ## Setting up environment
 
 ### Setting up
@@ -172,6 +179,31 @@ Given below is the sequence diagram after `run()` is called for the interactions
 
 ![MainLogicSequenceDiagram](diagrams/diagram_images/MainLogicSequenceDiagram.png)
 
+After the `.execute()` command is called, MediVault does the following validator checks as shown below.
+
+![ContainValidParametersAndValuesSequenceDiagram](diagrams/diagram_images/ContainValidParametersAndValuesSequenceDiagram.png)
+
+> :information_source: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
+
+1. MediVault attempts to get the instance of the `Ui` class which is a singleton if it exists. Otherwise, it creates
+a new instance of the `Ui` class.
+2. MediVault creates a new `*Validator` instance which contains the methods to validate the user's input for the
+respective `*`.
+3. MediVault runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
+4. Medivault attempts to get the instance of the `Medicine` class which is also a single if it exists. Otherwise, it 
+creates a new instance of the `Medicine` class. 
+5. MediVault runs `containsInvalidParameterValues()` to check if **parameter values** input by the user is valid.
+6. If **Step 3** and **Step 5** are able to run without throwing any exception or error, user inputs are considered 
+valid.
+7. After running the logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
+`Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
+
+The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 
+if user input provided by the user are valid. This **guarantees** that the parameters and parameter values provided by 
+the user are valid after it passes the validity checks.
+
+The logic for all the `*Command` are further elaborated below.
+
 ### List Command
 
 There are three variations of the list command.
@@ -250,16 +282,17 @@ The sequence diagram for delete by expiry date is shown below.
 MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or
 the `update` keyword in `stock` mode.
 
-> :information_source: Note:
-> * MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
-> * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
-against the stored medicine stock information.
-
 The sequence diagram for `UpdateStockCommand` is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
-MediVault adds a new stock record when a user updates contains the `n/NAME` parameter. The old stock record still
+MediVault retrieves the stock object using the `i/ID` parameter specified by the user using the `extractStockObject()` 
+method. MediVault conducts another validation check on the provided `q/QUANTITY`,`m/MAX_QUANTITY` and `e/EXPIRY_DATE`
+against the stock object retrieved earlier. This validation check is separated from the initial validation checker
+as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` can only be done **after** MediVault confirms what user input is
+provided. This is because the backend processing for either one or both parameters provided by the user are different.
+
+MediVault adds a new stock record when a user update contains the `n/NAME` parameter. The old stock record still
 exists in MediVault, but it will not be visible to user when listed. This approach solves the issue when a user is
 unable to delete a prescription record when the medicine stock name gets updated.
 
@@ -304,17 +337,36 @@ The sequence diagram for `DeletePrescriptionCommand` is shown below.
 MediVault initialises an `UpdatePrescriptionCommand` class when CommandParser identifies
 `updateprescription` or the `update` keyword in `prescription` mode.
 
-> :information_source: Note
-> * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
-> * When a user updates prescription information containing either `n/NAME`, `q/QUANTITY` or both, MediVault restores the 
-prescribed stocks or prescribes more stocks depending on the user input.
-
 The sequence diagram for `UpdatePrescriptionCommand` is shown below.
 
 ![UpdatePrescriptionSequenceDiagram](diagrams/diagram_images/UpdatePrescriptionSequenceDiagram.png)
 
+MediVault retrieves the prescription object using the `i/ID` parameter specified by the user using the
+`extractPrescriptionObject()` method.
+
+The main update logic is split into four sections.
+1. User provided both `n/NAME` and `q/QUANTITY` parameters.
+   1. MediVault restores the stock quantity for the **original** `n/NAME` with the **original** `q/QUANTITY`.
+   2. MediVault decrements the stock quantity for the **updated** `n/NAME` with the **updated** `q/QUANTITY`. 
+2. User provided `n/NAME` parameter but not `q/QUANTITY`.
+   1. MediVault restores the stock quantity for the **original** `n/NAME` with the `q/QUANTITY` present in the 
+   prescription object.
+   2. MediVault decrements the stock quantity for the **updated** `n/NAME` with the `q/QUANTITY` present in the
+   prescription object.
+3. User provided `q/QUANTITY` parameter but not `n/NAME`
+   1. If the **updated** `q/QUANTITY` is more than the **original** `q/QUANTITY` MediVault decrements the stock quantity 
+   for `n/NAME` present in the prescription object with the additional `q/QUANTITY` which is the difference between the
+   **updated** and **original** `q/QUANTITY.
+   2. Otherwise, MediVault restores the stock quantity for `n/NAME` present in the prescription object with the
+   difference between the **updated** and **original** `q/QUANTITY.
+4. User did not provide both `q/QUANTITY` and `n/NAME` parameter.
+   1. Restoring or decrement is needed.
+
+Other parameters like `d/DATE`, `c/CUSTOMER_ID` and `s/STAFF` are not affected because they share the same
+update logic for sections 1 to 4 mentioned above.
+
 MediVault adds a new prescription record when a user updates contains either the `n/NAME`, `q/QUANTITY`
-parameter or both. The old prescription record is **permanently removed** from MediVault. 
+parameter or both. The old prescription record is **permanently removed** from MediVault.
 
 This approach solves the issue when a medication is prescribed to a user with an amount that is 
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
@@ -355,13 +407,19 @@ The sequence diagram for `DeleteOrderCommand` is shown below.
 MediVault creates an `UpdateOrderCommand` object when CommandParser identifies
 `updateorder` or the `update` keyword in `order` mode.
 
-> :information_source: Note:
-> * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
-> * MediVault restricts updating of order information that are already **delivered**.
-
 The sequence diagram for `UpdateOrderCommand` is shown below.
 
 ![UpdateOrderSequenceDiagram](diagrams/diagram_images/UpdateOrderSequenceDiagram.png)
+
+MediVault retrieves the order object using the `i/ID` parameter specified by the user using the
+`extractOrderObject()` method.
+
+> :warning: Warning
+> * MediVault disables updating an order that has been delivered. Users can only update information for pending orders.
+
+MediVault conducts a check if an order quantity is valid with the provided `q/QUANTITY`.
+This validation check is separated from the initial validation checker as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` in 
+stocks can only be done **after** MediVault confirms that the user provides a `q/QUANTITY` is an integer.
 
 ### ReceiveOrderCommand
 

@@ -8,61 +8,34 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
     participant ":StockValidator" as stockvalidator COLOR_UTILITIES
     participant "<<class>>\n:OrderManager" as ordermanager COLOR_UTILITIES
     participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
-    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
     participant ":Order" as order COLOR_INVENTORY
 end box
 
 autoactivate on
 
--> updateorder: execute
-    updateorder -> ui: getInstance()
-    updateorder <-- ui
-    create ordervalidator
-    updateorder -> ordervalidator: new OrderValidator()
-    updateorder <-- ordervalidator
-
-    updateorder -> ordervalidator: containsInvalidParameters()
-    updateorder <-- ordervalidator: isInvalidParameter
-
-    opt !isInvalidParameter
-        updateorder -> medicine: getInstance()
-        updateorder <-- medicine
-        updateorder -> ordervalidator: containsInvalidParameterValues()
-        updateorder <-- ordervalidator: isInvalidParameterValues
-
-        opt !isInvalidParameterValues
-
-            updateorder -> ordermanager: extractOrderObject()
-            updateorder <-- ordermanager: order
-            updateorder -> order: isDelivered()
-            updateorder <-- order
-            opt !isDelivered
-                updateorder -> stockmanager: getMaxStockQuantity()
-                updateorder <-- stockmanager
-                opt existName && existQuantityParam
-                    create stockvalidator
-                    updateorder -> stockvalidator: new StockValidator()
-                    updateorder <-- stockvalidator
-                    updateorder -> stockvalidator: quantityValidityChecker()
-                    updateorder <-- stockvalidator: isValidQuantity
-                    opt isValidQuantity
-                        updateorder -> updateorder: setUpdatesByOrderId()
-                        updateorder --> updateorder
-                        updateorder -> storage: getInstance()
-                        updateorder <-- storage
-                        updateorder -> storage: saveData()
-                        updateorder <-- storage
-                    end
-                end
+-> updateorder: executes
+    updateorder -> ordermanager: extractOrderObject()
+    updateorder <-- ordermanager: order
+    updateorder -> order: isDelivered()
+    updateorder <-- order
+    opt !isDelivered
+        updateorder -> stockmanager: getMaxStockQuantity()
+        updateorder <-- stockmanager
+        opt existName && existQuantityParam
+            create stockvalidator
+            updateorder -> stockvalidator: new StockValidator()
+            updateorder <-- stockvalidator
+            updateorder -> stockvalidator: quantityValidityChecker()
+            updateorder <-- stockvalidator: isValidQuantity
+            opt isValidQuantity
+                updateorder -> updateorder: setUpdatesByOrderId()
+                updateorder --> updateorder
             end
         end
     end
