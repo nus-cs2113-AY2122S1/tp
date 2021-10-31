@@ -144,11 +144,7 @@ public class AddStockCommand extends Command {
         for (Stock stock : filteredStocks) {
             int quantity = Integer.parseInt(quantityToAdd);
 
-            boolean isValidQuantity =
-                    stockValidator.quantityValidityChecker(ui, totalStock + quantity,
-                            stock.getMaxQuantity());
-
-            if (!isValidQuantity) {
+            if (isValidQuantity(ui, stockValidator, stock.getMaxQuantity(), totalStock + quantity)) {
                 return true;
             }
 
@@ -181,11 +177,14 @@ public class AddStockCommand extends Command {
                                     ArrayList<Stock> filteredStocks, String quantityToAdd, Date formatExpiry,
                                     int totalStock) {
         for (Stock stock : filteredStocks) {
+
             int quantity = Integer.parseInt(quantityToAdd);
             int existingMaxQuantity = stock.getMaxQuantity();
+
             if (isValidQuantity(ui, stockValidator, existingMaxQuantity, totalStock + quantity)) {
                 return true;
             }
+
             String existingDescription = stock.getDescription();
             String priceToAdd = parameters.get(CommandParameters.PRICE);
             double price = Double.parseDouble(priceToAdd);

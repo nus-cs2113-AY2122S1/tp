@@ -91,6 +91,7 @@ Parameters | Prefixes for MediVault to understand the type of information you pr
     * This project comes with a GitHub Actions config files (in `.github/workflows folder`). When GitHub detects those
       files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set
       up required.
+
 ## Design
 
 ### Architecture
@@ -244,6 +245,12 @@ The sequence diagram for `AddStockCommand` is shown below.
 
 ![AddStockSequenceDiagram](diagrams/diagram_images/AddStockSequenceDiagram.png)
 
+MediVault will determine if there exist the medication with the same name.
+* If there exist medication with the same name, MediVault will check if there exist the same expiry date using the isExpiryExist() method.
+  * MediVault will then check if the quantity is valid using the isValidQuantity() method.
+  * If the same name and expiry date exist, Medivault will update the quantity of the existing stock.
+  * If it does not exist the same expiry date, MediVault will add the medication using the existing description and maximum quantity.
+* If it does not exist the same medication in MediVault, MediVault will then check if the quantity is valid using the isValidQuantity() method and a new medication will be added.
 
 #### DeleteStockCommand
 
@@ -313,7 +320,10 @@ MediVault creates an `AddPrescriptionCommand` object when CommandParser identifi
 
 The sequence diagram for `AddPrescriptionCommand` is shown below.
 
-![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
+
+![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddPrescriptionSequenceDiagram.png)
+
+prescribe() method will change the stock quantity based on prescription quantity and add prescribed medication to prescription list.
 
 #### DeletePrescriptionCommand
 
@@ -329,9 +339,11 @@ MediVault creates a `DeletePrescriptionCommand` object when CommandParser identi
 
 The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
-![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
+![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeletePrescriptionSequenceDiagram.png)
 
 > :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
+
+setStockQuantity() method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
 
 #### UpdatePrescriptionCommand
 
@@ -571,7 +583,7 @@ redirection tests.
 1. You can refer to the list of commands and expected
    outputs [here](https://ay2122s1-cs2113t-t10-1.github.io/tp/UserGuide.html).
 
-### Data Storage
+### Saving Data
 
 All data files are located in the data folder.
 

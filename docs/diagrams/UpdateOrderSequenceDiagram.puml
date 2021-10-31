@@ -18,8 +18,8 @@ box Inventory COLOR_INVENTORY_BOX
 end box
 
 autoactivate on
-
--> updateorder: executes
+mainFrame sd Logic for UpdateOrderCommand
+activate updateorder
     updateorder -> ordermanager: extractOrderObject()
     updateorder <-- ordermanager: order
     updateorder -> order: isDelivered()
