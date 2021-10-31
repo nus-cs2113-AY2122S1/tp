@@ -4,7 +4,13 @@ import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 
 //@@author richwill28
 public enum DayOfTheWeek {
-    MON, TUE, WED, THU, FRI, SAT, SUN;
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY;
 
     /**
      * Determines if the input parameter is a valid day of the week.
@@ -18,7 +24,14 @@ public enum DayOfTheWeek {
         }
 
         for (DayOfTheWeek day : DayOfTheWeek.values()) {
-            if (param.substring(0, 3).equalsIgnoreCase(day.toString())) {
+            String substring;
+            try {
+                substring = day.toString().substring(0, param.length());
+            } catch (IndexOutOfBoundsException e) {
+                continue;   // Ignore and check next value
+            }
+
+            if (param.equalsIgnoreCase(substring)) {
                 return true;
             }
         }
