@@ -2,12 +2,12 @@ package gordon.command.basic;
 
 import gordon.command.Command;
 import gordon.kitchen.Cookbook;
+import gordon.util.UI;
 
 public class HelpCommand extends Command {
-    static final String helpString = "To add a recipe: add \"recipe name\" \"/ingredients\" 1+2+3 \"/steps\" 1+2+3";
-
+    UI message = new UI();
     @Override
     public void execute(Cookbook cookbook) {
-        System.out.println(helpString);
+        message.printHelp();
     }
 }

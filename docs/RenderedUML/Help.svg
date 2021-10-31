@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="163px" preserveAspectRatio="none" style="width:339px;height:163px;background:#FFFFFF;" version="1.1" viewBox="0 0 339 163" width="339px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="92.8462" style="stroke:#000000;stroke-width:1.0;" width="10" x="30" y="46.0986"/><rect fill="#FFDAB9" height="71.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="152" y="67.0474"/><rect fill="#FFDAB9" height="28.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="312" y="95.9961"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="35" x2="35" y1="36.0986" y2="156.9448"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="156.5" x2="156.5" y1="36.0986" y2="156.9448"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="317" x2="317" y1="36.0986" y2="156.9448"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="12" y="25.1318">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="113" x="100.5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="99" x="107.5" y="25.1318">:HelpCommand</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="32" x="301" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="18" x="308" y="25.1318">:UI</text><rect fill="#FFDAB9" height="92.8462" style="stroke:#000000;stroke-width:1.0;" width="10" x="30" y="46.0986"/><rect fill="#FFDAB9" height="71.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="152" y="67.0474"/><rect fill="#FFDAB9" height="28.9487" style="stroke:#000000;stroke-width:1.0;" width="10" x="312" y="95.9961"/><polygon fill="#000000" points="140,63.0474,150,67.0474,140,71.0474,144,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="40" x2="146" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="93" x="47" y="62.2925">HelpCommand()</text><polygon fill="#000000" points="300,91.9961,310,95.9961,300,99.9961,304,95.9961" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="162" x2="306" y1="95.9961" y2="95.9961"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="59" x="169" y="91.2412">printHelp()</text><polygon fill="#000000" points="173,120.9448,163,124.9448,173,128.9448,169,124.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="167" x2="316" y1="124.9448" y2="124.9448"/><text fill="#000000" font-family="Arial" font-size="13" font-style="italic" lengthAdjust="spacing" textLength="126" x="179" y="120.1899">Help message printed</text><line style="stroke:#000000;stroke-width:2.0;" x1="308" x2="326" y1="115.9448" y2="133.9448"/><line style="stroke:#000000;stroke-width:2.0;" x1="308" x2="326" y1="133.9448" y2="115.9448"/><polygon fill="#000000" points="46,134.9448,36,138.9448,46,142.9448,42,138.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="40" x2="156" y1="138.9448" y2="138.9448"/><line style="stroke:#000000;stroke-width:2.0;" x1="148" x2="166" y1="129.9448" y2="147.9448"/><line style="stroke:#000000;stroke-width:2.0;" x1="148" x2="166" y1="147.9448" y2="129.9448"/><line style="stroke:#000000;stroke-width:2.0;" x1="26" x2="44" y1="129.9448" y2="147.9448"/><line style="stroke:#000000;stroke-width:2.0;" x1="26" x2="44" y1="147.9448" y2="129.9448"/><!--MD5=[b78dd413a10e77722a9acdde5a7faaa4]
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+
+activate ":Parser"
+
+":Parser" -> ":HelpCommand": HelpCommand()
+activate ":HelpCommand"
+
+":HelpCommand" -> ":UI" : printHelp()
+activate ":UI"
+
+":UI" - -> ":HelpCommand" : //Help message printed//
+destroy ":UI"
+
+":HelpCommand" - -> ":Parser"
+destroy ":HelpCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+@startuml
+
+hide footbox
+
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+
+activate ":Parser"
+
+":Parser" -> ":HelpCommand": HelpCommand()
+activate ":HelpCommand"
+
+":HelpCommand" -> ":UI" : printHelp()
+activate ":UI"
+
+":UI" - -> ":HelpCommand" : //Help message printed//
+destroy ":UI"
+
+":HelpCommand" - -> ":Parser"
+destroy ":HelpCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

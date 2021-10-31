@@ -317,8 +317,10 @@ public class Cookbook {
     public void addTagToRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
-            if (tag.containsAssociatedRecipeNames(recipe.getName())) {
-                recipe.addTagToRecipe(tag, recipe.getName(), false);
+
+            String recipeName = recipe.getName();
+            if (tag.containsAssociatedRecipeNames(recipeName)) {
+                recipe.addTagToRecipe(tag, recipeName, false);
             }
         }
     }
@@ -404,26 +406,26 @@ public class Cookbook {
     /////////////////////////// FILTER FUNCTIONALITIES ///////////////////////////
     public ArrayList<Recipe> filterByIngredients(ArrayList<String> ingredients) {
         return recipes.stream()
-                .filter(r -> r.containsIngredients(ingredients))
+                .filter(recipe -> recipe.containsIngredients(ingredients))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Recipe> filterByTags(ArrayList<String> tags) {
         return recipes.stream()
-                .filter(r -> r.containsTags(tags))
+                .filter(recipe -> recipe.containsTags(tags))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Recipe> filterByDifficulty(Difficulty difficulty) {
         return recipes.stream()
-                .filter(r -> r.difficulty == difficulty)
+                .filter(recipe -> recipe.difficulty == difficulty)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Recipe> filterByPrice(float price) {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
         return recipes.stream()
-                .filter(r -> r.totalPrice <= price)
+                .filter(recipe -> recipe.totalPrice <= price)
                 .sorted(compareByPrice.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -431,7 +433,7 @@ public class Cookbook {
     public ArrayList<Recipe> filterByCalories(int cal) {
         Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories);
         return recipes.stream()
-                .filter(r -> r.calories <= cal)
+                .filter(recipe -> recipe.calories <= cal)
                 .sorted(compareByCalories.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -439,7 +441,7 @@ public class Cookbook {
     public ArrayList<Recipe> filterByTime(int time) {
         Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalTime);
         return recipes.stream()
-                .filter(r -> r.getTotalTime() <= time)
+                .filter(recipe -> recipe.getTotalTime() <= time)
                 .sorted(compareByTime.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
