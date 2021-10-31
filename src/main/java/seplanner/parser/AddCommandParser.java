@@ -13,6 +13,7 @@ import seplanner.universities.UniversityList;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,7 +92,7 @@ public class AddCommandParser {
                                    ModuleList moduleSelectedList) throws ParseException {
         boolean textMatches = isTextMatches(arguments);
         if (textMatches) {
-            module = moduleMasterList.getModule(arguments);
+            module = moduleMasterList.getModule(arguments.toUpperCase());
             // Check if module exists
             if (module == null) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
