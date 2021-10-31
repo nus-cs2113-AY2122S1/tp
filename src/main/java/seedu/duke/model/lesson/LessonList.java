@@ -41,8 +41,8 @@ public class LessonList {
 
     public void addLesson(Lesson newLesson) throws DukeException {
         for (Lesson lesson : lessonList) {
-            if (lesson.getTitle().equals(newLesson.getTitle()) &&
-                    (lesson.getDayOfTheWeek().equals(newLesson.getDayOfTheWeek()))) {
+            if (lesson.getTitle().equals(newLesson.getTitle())
+                    && (lesson.getDayOfTheWeek().equals(newLesson.getDayOfTheWeek()))) {
                 throw new DukeException("You have already added that lesson.");
             }
         }
