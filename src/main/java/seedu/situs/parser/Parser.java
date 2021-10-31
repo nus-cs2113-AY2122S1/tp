@@ -45,6 +45,7 @@ public class Parser {
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
     private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
+    private static final String INVALID_THRESHOLD_MESSAGE = "Thresholds cannot be less than or equal to 0";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -347,11 +348,19 @@ public class Parser {
         try {
             switch (details[1].trim()) {
             case "expiry":
-                AlertExpiringSoonCommand.setExpiryThreshold(Long.parseLong(details[2].trim()));
-                return "Successfully set expiry threshold to " + details[2].trim() + " days";
+                long newExpiryThreshold = Long.parseLong(details[2].trim());
+                if (newExpiryThreshold <= 0) {
+                    throw new SitusException(INVALID_THRESHOLD_MESSAGE);
+                }
+                AlertExpiringSoonCommand.setExpiryThreshold(newExpiryThreshold);
+                return "Successfully set expiry threshold to " + newExpiryThreshold + " days";
             case "stock":
-                AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
-                return "Successfully set low stock threshold to " + details[2].trim() + " kg";
+                double newStockThreshold = Double.parseDouble(details[2].trim());
+                if (newStockThreshold <= 0) {
+                    throw new SitusException(INVALID_THRESHOLD_MESSAGE);
+                }
+                AlertLowStockCommand.setLowStockThreshold(newStockThreshold);
+                return "Successfully set low stock threshold to " + newStockThreshold + " kg";
             default:
                 throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
             }
