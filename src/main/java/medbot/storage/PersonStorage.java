@@ -41,10 +41,6 @@ public abstract class PersonStorage extends Storage {
         if (personDetails == null) {
             return null;
         }
-        int personId = personDetails.first;
-        boolean isArchived = personDetails.second;
-        ArrayList<String> prefixPlusPersonParameters = personDetails.third;
-
         Person person;
         switch (listItemType) {
         case PATIENT:
@@ -56,6 +52,10 @@ public abstract class PersonStorage extends Storage {
         default:
             throw new MedBotException("Invalid listItemType");
         }
+
+        int personId = personDetails.first;
+        boolean isArchived = personDetails.second;
+        ArrayList<String> prefixPlusPersonParameters = personDetails.third;
 
         person.setId(personId);
         if (isArchived) {
@@ -95,7 +95,6 @@ public abstract class PersonStorage extends Storage {
             String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
             prefixPlusListItemParameters.add(prefixPlusListItemParameter);
         }
-        assert listItemParameters.length == parameterPrefixes.length + 2;
 
         int listItemParametersLastIndex = listItemParameters.length - 1;
         String isArchivedParameter = listItemParameters[listItemParametersLastIndex];

@@ -285,7 +285,7 @@ public abstract class Person implements ListItem {
     }
 
     /**
-     * Return "A" if person is archived, "U" otherwise"
+     * Return "A" if person is archived, "U" otherwise.
      *
      * @param isArchived whether person is archived or not
      * @return "A" is person is archived, "U" otherwise
