@@ -20,6 +20,8 @@ import seedu.situs.localtime.CurrentDate;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Parser {
@@ -135,12 +137,13 @@ public class Parser {
     /**
      * Parses and executes the {@code find} command.
      *
-     * @param command The user input String
+     * @param parameters The user input parameters
      * @return Search results for entered keywords
      * @throws SitusException If no keywords are entered
      */
-    private static String parseFindCommand(String command) throws SitusException {
-        String[] keywords = command.replace(COMMAND_FIND, "").trim().split(SPACE_SEPARATOR);
+    private static String parseFindCommand(String parameters) throws SitusException {
+        String[] keywords = parameters.trim().split(SPACE_SEPARATOR);
+        Set<String> keywordsUnique = new HashSet<>();
 
         assert (keywords != null);
 
@@ -152,12 +155,12 @@ public class Parser {
             if (isContainsInvalidCharacters(keywords[i])) {
                 throw new SitusException(INVALID_CHARACTERS_FIND_MESSAGE);
             }
+            keywordsUnique.add(keywords[i]);
         }
 
         String resultMsg = "";
-        for (int i = 0; i < keywords.length; i++) {
-            String keyword = keywords[i];
-            if (i > 0) {
+        for (String keyword : keywordsUnique) {
+            if (resultMsg != "") {
                 resultMsg += "\n";
             }
             resultMsg += new FindCommand(keyword).run();
