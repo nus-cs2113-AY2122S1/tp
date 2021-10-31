@@ -102,17 +102,27 @@ public class NoteStorage extends Storage {
         for (File file : listOfNoteFiles) {
             String fileName = CommonUtils.getFileNameOnly(file.getName());
             if (isValidTextFile(file) && CommonUtils.isValidFileName(fileName)) {
-                try {
-                    String data = readFile(file.toPath());
-                    if (data != null) {
-                        String noteName = CommonUtils.getFileNameOnly(file.getName());
-                        Note newNote = new Note(noteName, data);
-                        contentManager.add(newNote);
-                    }
-                } catch (Exception e) {
-                    // Ignore all exception and skip the file
-                }
+                addAndFilterNote(file, contentManager);
             }
+        }
+    }
+
+    /**
+     * Filters the given file before adding to ContentManager.
+     *
+     * @param file The given file to be checked and added to ContentManager.
+     * @param contentManager The content manager of Note.
+     */
+    private void addAndFilterNote(File file, ContentManager<Note> contentManager) {
+        try {
+            String data = readFile(file.toPath());
+            if (data != null) {
+                String noteName = CommonUtils.getFileNameOnly(file.getName());
+                Note newNote = new Note(noteName, data);
+                contentManager.add(newNote);
+            }
+        } catch (Exception e) {
+            // Ignore all exception and skip the file
         }
     }
 
