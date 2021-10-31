@@ -38,16 +38,15 @@ import seedu.duke.task.type.Todo;
 
 public class TaskManager implements Subject {
 
-    static final int STARTING_SIZE = 128;
-
     private static final String LIST_HEADER = "-------------\n"
-        + " MY TASKLIST\n"
-        + "-------------\n";
+            + " MY TASKLIST\n"
+            + "-------------\n";
 
     private static final String DIGIT_REGEX = "^[+-]?[0-9]*$";
 
     private List<Task> taskList;
     private List<Task> latestFilteredList;
+    static final int STARTING_SIZE = 128;
 
     public TaskManager(DataManager dataManager) {
         taskList = dataManager.loadTaskList(STARTING_SIZE);
@@ -61,34 +60,45 @@ public class TaskManager implements Subject {
         taskList = new ArrayList<>(STARTING_SIZE);
 
         latestFilteredList = new ArrayList<>(STARTING_SIZE);
-
     }
 
     //@@author APZH
-    public String listTasklistWithFilter(Map<String, String> filter) throws EmptyTasklistException,
-        ListFormatException, MissingFilterArgumentException, InvalidTaskTypeException,
-        InvalidPriorityException, InvalidRecurrenceException {
+    /**
+     * Returns a filtered tasklist as a {@code String}.
+     * If no filter is specified, returns the entire tasklist without any filter instead.
+     *
+     * @param filter Contains the filters to be applied to the tasklist
+     * @return Filtered tasklist as a {@code String}
+     * @throws EmptyTasklistException         If tasklist is empty
+     * @throws ListFormatException            If the parameter 'filters' contains invalid filter flags
+     * @throws MissingFilterArgumentException If filter flag does not contain any argument
+     * @throws InvalidTaskTypeException       If task type filter argument is not valid
+     * @throws InvalidPriorityException       If priority filter argument is not valid
+     * @throws InvalidRecurrenceException     If recurrence filter argument is not valid
+     */
+    public String listTasklistWithFilter(Map<String, String> filters) throws EmptyTasklistException,
+            ListFormatException, MissingFilterArgumentException, InvalidTaskTypeException,
+            InvalidPriorityException, InvalidRecurrenceException {
         assert taskList.size() >= 0 : "Tasklist cannot be negative";
         if (taskList.size() == 0) {
-            Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
         List<Task> filteredTasks = new ArrayList<>(taskList);
-        for (HashMap.Entry<String, String> entry : filter.entrySet()) {
-            String flag = entry.getKey();
-            String argument = entry.getValue();
-            if (flag.equals(Command.MAIN_ARGUMENT)) {
+        for (HashMap.Entry<String, String> entry : filters.entrySet()) {
+            String filter = entry.getKey();
+            String filterArgument = entry.getValue();
+            if (filter.equals(Command.MAIN_ARGUMENT)) {
                 continue;
             }
-            switch (flag) {
+            switch (filter) {
             case ListFlag.TASK_TYPE:
-                filteredTasks = filterListByTaskType(filteredTasks, argument);
+                filteredTasks = filterListByTaskType(filteredTasks, filterArgument);
                 break;
             case ListFlag.PRIORITY:
-                filteredTasks = filterListByPriority(filteredTasks, argument);
+                filteredTasks = filterListByPriority(filteredTasks, filterArgument);
                 break;
             case ListFlag.RECURRENCE:
-                filteredTasks = filterListByRecurrence(filteredTasks, argument);
+                filteredTasks = filterListByRecurrence(filteredTasks, filterArgument);
                 break;
             default:
                 throw new ListFormatException();
@@ -117,7 +127,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     public String listTaskRecurrence(Map<String, String> parameters) throws EmptyTasklistException,
-        InvalidTaskIndexException, ListFormatException, TaskIsNonRecurringException {
+            InvalidTaskIndexException, ListFormatException, TaskIsNonRecurringException {
         if (taskList.size() == 0) {
             throw new EmptyTasklistException();
         }
@@ -155,7 +165,7 @@ public class TaskManager implements Subject {
             recurredDatesList = task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
         }
         return getListTaskRecurrenceMessage(taskList.get(taskIndex).getTaskEntryDescription(), recurredDatesList,
-            numOfRecurredDates);
+                numOfRecurredDates);
     }
 
     //@@author APZH
@@ -169,7 +179,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     private List<Task> filterListByTaskType(List<Task> taskList, String taskTypeFilter)
-        throws MissingFilterArgumentException, InvalidTaskTypeException {
+            throws MissingFilterArgumentException, InvalidTaskTypeException {
         if (taskTypeFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
@@ -188,7 +198,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     private List<Task> filterListByPriority(List<Task> taskList, String priorityFilter)
-        throws MissingFilterArgumentException, InvalidPriorityException {
+            throws MissingFilterArgumentException, InvalidPriorityException {
         if (priorityFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
@@ -207,7 +217,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     private List<Task> filterListByRecurrence(List<Task> taskList, String recurrenceFilter)
-        throws MissingFilterArgumentException, InvalidRecurrenceException {
+            throws MissingFilterArgumentException, InvalidRecurrenceException {
         if (recurrenceFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
@@ -226,7 +236,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
-        SortFormatException, EmptySortCriteriaException {
+            SortFormatException, EmptySortCriteriaException {
         Log.info("sortTasklist method called");
         String sortCriteria = "";
 
@@ -289,7 +299,7 @@ public class TaskManager implements Subject {
         public int compare(Task o1, Task o2) {
 
             if (o1.getPriority().equals(PriorityEnum.LOW) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
-                || o2.getPriority().equals(PriorityEnum.HIGH))) {
+                    || o2.getPriority().equals(PriorityEnum.HIGH))) {
                 return -1;
             }
 
@@ -298,7 +308,7 @@ public class TaskManager implements Subject {
             }
 
             if (o1.getPriority().equals(PriorityEnum.HIGH) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
-                || o2.getPriority().equals(PriorityEnum.LOW))) {
+                    || o2.getPriority().equals(PriorityEnum.LOW))) {
                 return 1;
             }
 
@@ -362,8 +372,8 @@ public class TaskManager implements Subject {
 
     //@@author SeanRobertDH
     public Task editFilteredTask(int index, Map<String, String> arguments)
-        throws InvalidTaskIndexException, InvalidPriorityException,
-        InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
+            throws InvalidTaskIndexException, InvalidPriorityException,
+            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
         checkFilteredListIndexValid(index);
         latestFilteredList.get(index).edit(arguments);
         updateObservers();
