@@ -67,14 +67,14 @@ public class TaskManager implements Subject {
      * Returns a filtered tasklist as a {@code String}.
      * If no filter is specified, returns the entire tasklist without any filter instead.
      *
-     * @param filter Contains the filters to be applied to the tasklist
-     * @return Filtered tasklist as a {@code String}
-     * @throws EmptyTasklistException         If tasklist is empty
-     * @throws ListFormatException            If the parameter 'filters' contains invalid filter flags
-     * @throws MissingFilterArgumentException If filter flag does not contain any argument
-     * @throws InvalidTaskTypeException       If task type filter argument is not valid
-     * @throws InvalidPriorityException       If priority filter argument is not valid
-     * @throws InvalidRecurrenceException     If recurrence filter argument is not valid
+     * @param filters Contains the filters to be applied to the tasklist.
+     * @return Filtered tasklist as a {@code String}.
+     * @throws EmptyTasklistException         If tasklist is empty.
+     * @throws ListFormatException            If the parameter 'filters' contains invalid filter flags.
+     * @throws MissingFilterArgumentException If filter flag does not contain any argument.
+     * @throws InvalidTaskTypeException       If task type filter argument is not valid.
+     * @throws InvalidPriorityException       If priority filter argument is not valid.
+     * @throws InvalidRecurrenceException     If recurrence filter argument is not valid.
      */
     public String listTasklistWithFilter(Map<String, String> filters) throws EmptyTasklistException,
             ListFormatException, MissingFilterArgumentException, InvalidTaskTypeException,
@@ -110,7 +110,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     /**
-     * Returns a formatted list of tasks as a {@code String}
+     * Returns a formatted list of tasks as a {@code String}.
      */
     private String getListTasklistWithFilterMessage(List<Task> filteredTasks) {
         String taskEntries = "";
@@ -127,6 +127,90 @@ public class TaskManager implements Subject {
             }
         }
         updateObservers();
+    }
+
+    //@@author APZH
+    /**
+     * Returns a {@code List} of tasks that matches the {@code taskTypeFilter}.
+     *
+     * @param taskList Contains the tasklist to apply the {@code taskTypeFilter}.
+     * @param taskTypeFilter Contains the task type to be filtered for.
+     * @return Filtered {@code List} of tasks based on task type.
+     * @throws MissingFilterArgumentException If {@code taskTypeFilter} is empty.
+     * @throws InvalidTaskTypeException If {@code taskTypeFilter} is not valid.
+     */
+    private List<Task> filterListByTaskType(List<Task> taskList, String taskTypeFilter)
+            throws MissingFilterArgumentException, InvalidTaskTypeException {
+        if (taskTypeFilter.isEmpty()) {
+            throw new MissingFilterArgumentException();
+        }
+        if (!EnumUtils.isValidEnum(TypeEnum.class, taskTypeFilter.toUpperCase())) {
+            throw new InvalidTaskTypeException(taskTypeFilter);
+        }
+        List<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentTaskType = taskList.get(i).getTaskType().name();
+            if (currentTaskType.equalsIgnoreCase(taskTypeFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
+    }
+
+    //@@author APZH
+    /**
+     * Returns a {@code List} of tasks that matches the {@code priorityFilter}.
+     *
+     * @param taskList Contains the tasklist to apply the {@code priorityFilter}.
+     * @param priorityFilter Contains the priority to be filtered for.
+     * @return Filtered {@code List} of tasks based on priority.
+     * @throws MissingFilterArgumentException If {@code priorityFilter} is empty.
+     * @throws InvalidPriorityException If {@code priorityFilter} is not valid.
+     */
+    private List<Task> filterListByPriority(List<Task> taskList, String priorityFilter)
+            throws MissingFilterArgumentException, InvalidPriorityException {
+        if (priorityFilter.isEmpty()) {
+            throw new MissingFilterArgumentException();
+        }
+        if (!EnumUtils.isValidEnum(PriorityEnum.class, priorityFilter.toUpperCase())) {
+            throw new InvalidPriorityException(priorityFilter);
+        }
+        List<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentPriority = taskList.get(i).getPriority().name();
+            if (currentPriority.equalsIgnoreCase(priorityFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
+    }
+
+    //@@author APZH
+    /**
+     * Returns a {@code List} of tasks that matches the {@code recurrenceFilter}.
+     *
+     * @param taskList Contains the tasklist to apply the {@code recurrenceFilter}.
+     * @param recurrenceFilter Contains the type of recurrence to be filtered for.
+     * @return Filtered {@code List} of tasks based on recurrence.
+     * @throws MissingFilterArgumentException If {@code recurrenceFilter} is empty.
+     * @throws InvalidRecurrenceException If {@code recurrenceFilter} is not valid.
+     */
+    private List<Task> filterListByRecurrence(List<Task> taskList, String recurrenceFilter)
+            throws MissingFilterArgumentException, InvalidRecurrenceException {
+        if (recurrenceFilter.isEmpty()) {
+            throw new MissingFilterArgumentException();
+        }
+        if (!EnumUtils.isValidEnum(RecurrenceEnum.class, recurrenceFilter.toUpperCase())) {
+            throw new InvalidRecurrenceException(recurrenceFilter);
+        }
+        List<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentRecurrence = taskList.get(i).getRecurrence().name();
+            if (currentRecurrence.equalsIgnoreCase(recurrenceFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
     }
 
     //@@author APZH
@@ -179,63 +263,6 @@ public class TaskManager implements Subject {
             dates += "-> " + DateParser.dateToString(recurredDatesList.get(i)) + "\n";
         }
         return LIST_HEADER + dates;
-    }
-
-    //@@author APZH
-    private List<Task> filterListByTaskType(List<Task> taskList, String taskTypeFilter)
-            throws MissingFilterArgumentException, InvalidTaskTypeException {
-        if (taskTypeFilter.isEmpty()) {
-            throw new MissingFilterArgumentException();
-        }
-        if (!EnumUtils.isValidEnum(TypeEnum.class, taskTypeFilter.toUpperCase())) {
-            throw new InvalidTaskTypeException(taskTypeFilter);
-        }
-        List<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            String currentTaskType = taskList.get(i).getTaskType().name();
-            if (currentTaskType.equalsIgnoreCase(taskTypeFilter)) {
-                filteredTasks.add(taskList.get(i));
-            }
-        }
-        return filteredTasks;
-    }
-
-    //@@author APZH
-    private List<Task> filterListByPriority(List<Task> taskList, String priorityFilter)
-            throws MissingFilterArgumentException, InvalidPriorityException {
-        if (priorityFilter.isEmpty()) {
-            throw new MissingFilterArgumentException();
-        }
-        if (!EnumUtils.isValidEnum(PriorityEnum.class, priorityFilter.toUpperCase())) {
-            throw new InvalidPriorityException(priorityFilter);
-        }
-        List<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            String currentPriority = taskList.get(i).getPriority().name();
-            if (currentPriority.equalsIgnoreCase(priorityFilter)) {
-                filteredTasks.add(taskList.get(i));
-            }
-        }
-        return filteredTasks;
-    }
-
-    //@@author APZH
-    private List<Task> filterListByRecurrence(List<Task> taskList, String recurrenceFilter)
-            throws MissingFilterArgumentException, InvalidRecurrenceException {
-        if (recurrenceFilter.isEmpty()) {
-            throw new MissingFilterArgumentException();
-        }
-        if (!EnumUtils.isValidEnum(RecurrenceEnum.class, recurrenceFilter.toUpperCase())) {
-            throw new InvalidRecurrenceException(recurrenceFilter);
-        }
-        List<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            String currentRecurrence = taskList.get(i).getRecurrence().name();
-            if (currentRecurrence.equalsIgnoreCase(recurrenceFilter)) {
-                filteredTasks.add(taskList.get(i));
-            }
-        }
-        return filteredTasks;
     }
 
     //@@author APZH
