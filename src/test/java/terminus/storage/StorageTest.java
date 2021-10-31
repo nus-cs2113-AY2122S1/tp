@@ -113,6 +113,7 @@ public class StorageTest {
     @Test
     void createFile_missingFolder_exceptionThrown() {
         Path folderPath = storage.getAppendPath(RESOURCE_FOLDER, tempModule);
+        assertFalse(Files.exists(folderPath));
         Path filePath = storage.getAppendPath(folderPath, "test1.txt");
         assertThrows(InvalidFileException.class, () -> storage.createFile(filePath));
     }
