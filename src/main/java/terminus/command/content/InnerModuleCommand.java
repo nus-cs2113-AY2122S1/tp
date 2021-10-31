@@ -1,6 +1,5 @@
 package terminus.command.content;
 
-import java.io.IOException;
 import terminus.command.CommandResult;
 import terminus.command.WorkspaceCommand;
 import terminus.common.Messages;
@@ -21,7 +20,7 @@ public abstract class InnerModuleCommand extends WorkspaceCommand {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException {
         commandMap.setModuleName(getModuleName().toUpperCase());
         try {
             return super.execute(moduleManager);

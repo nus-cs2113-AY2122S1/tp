@@ -1,6 +1,5 @@
 package terminus.command;
 
-import java.io.IOException;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -27,11 +26,10 @@ public abstract class WorkspaceCommand extends Command {
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return The CommandResult containing success or failure of command and CommandParser Object.
      * @throws InvalidCommandException when the command could not be found.
-     * @throws IOException             when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
