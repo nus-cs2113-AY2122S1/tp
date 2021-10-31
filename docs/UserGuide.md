@@ -132,6 +132,7 @@ Prints the details of the specified recipe
 #### Format: `check RECIPE_NAME`
 
 * The `RECIPE_NAME` must be part of a valid existing recipe.
+* `RECIPE_NAME` cannot be blank.
 * `RECIPE_NAME` is case-insensitive.
 * This command looks for substrings, for example if you look for "rice" the recipes shown can be "Chicken Rice" and "Duck Rice".
 
