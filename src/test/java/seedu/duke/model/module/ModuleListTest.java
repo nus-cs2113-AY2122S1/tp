@@ -77,7 +77,7 @@ class ModuleListTest {
     @Test
     public void calculateTotalMcs_emptyList_zeroTotalMcs() {
         ModuleList moduleList = new ModuleList();
-        assertEquals(0, moduleList.getTotalMcs());
+        assertEquals(0, moduleList.getTotalMC());
     }
 
     @Test
@@ -88,7 +88,7 @@ class ModuleListTest {
             Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
             moduleList.addModule(module1);
             moduleList.addModule(module2);
-            assertEquals(8, moduleList.getTotalMcs());
+            assertEquals(8, moduleList.getTotalMC());
         } catch (DukeException e) {
             fail();
         }
