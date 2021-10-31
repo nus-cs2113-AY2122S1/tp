@@ -49,7 +49,7 @@ public class TaskManager implements Subject {
     private static final int numOfRecurredDates = 4;
     private static final String DIGIT_REGEX = "^[+-]?[0-9]*$";
 
-    private static final String INVALID_SORT_ARGUMENT_MSG = "The sort criteria entered is not valid";
+    private static final String INVALID_SORT_ARGUMENT_MSG = "[!] The sort criteria entered is not valid";
     private static final String SORT_TASKLIST_COMPLETE_MSG = "[!] Tasklist has been sorted by: ";
 
     public TaskManager(DataManager dataManager) {
@@ -301,7 +301,7 @@ public class TaskManager implements Subject {
 
     //@@author APZH
     /**
-     * Returns a {@code List} of the next 4 recurrences of a event task.
+     * Returns a {@code List} of the next 4 recurrences of an event task.
      *
      * @param task Event task to get the recurrences for.
      * @return Next 4 recurrences of the event task as a {@code List}.
@@ -312,23 +312,30 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Returns a sorted tasklist as a formatted {@code String}.
+     *
+     * @param criteria Contains the sort criteria to sort the tasklist by.
+     * @return Sorted tasklist as a {@code String}.
+     * @throws EmptyTasklistException If tasklist is empty.
+     * @throws SortFormatException If the sort command syntax is incorrect.
+     * @throws EmptySortCriteriaException If the sort criteria specified is empty.
+     */
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
             SortFormatException, EmptySortCriteriaException {
-        String sortCriteria = "";
         if (getTaskListSize() == 0) {
             Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
-        if (!criteria.containsKey(SortFlag.SORT_BY)) {
+        if (!criteria.containsKey(SortFlag.SORT_BY) || !criteria.get(Command.MAIN_ARGUMENT).isEmpty()) {
             Log.warning("user did not indicate 'by' flag, throwing SortFormatException");
             throw new SortFormatException();
         }
-        sortCriteria = criteria.get(SortFlag.SORT_BY);
+        String sortCriteria = criteria.get(SortFlag.SORT_BY);
         if (sortCriteria.isEmpty()) {
             Log.warning("user did not indicate any sort criteria, throwing EmptySortCriteriaException");
             throw new EmptySortCriteriaException();
         }
-
         switch (sortCriteria) {
         case SortFlag.SORT_BY_TYPE_ARGUMENT:
             Collections.sort(taskList, new SortByTaskType());
