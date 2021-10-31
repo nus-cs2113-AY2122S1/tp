@@ -269,6 +269,10 @@ public class Parser {
         try {
             int groupNumber = Integer.parseInt(details[0]);
             double subtractAmount = Double.parseDouble(details[1]);
+
+            if (subtractAmount < 0) {
+                throw new SitusException(INVALID_AMOUNT_SUBTRACT_MESSAGE);
+            }
             return new SubtractCommand(groupNumber, subtractAmount).run();
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
