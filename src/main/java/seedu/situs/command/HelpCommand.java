@@ -1,6 +1,7 @@
 
 package seedu.situs.command;
 
+//@@author nishantrai-nus
 public class HelpCommand extends Command {
 
     private static final String HELP_MESSAGE = "These are the commands I can currently carry out:\n"

@@ -7,6 +7,7 @@ import seedu.situs.storage.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+//@@author mudkip8
 
 public class AlertLowStockCommand extends Command {
 

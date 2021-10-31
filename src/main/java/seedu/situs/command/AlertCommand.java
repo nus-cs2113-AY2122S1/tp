@@ -1,6 +1,7 @@
 package seedu.situs.command;
 
 import seedu.situs.exceptions.SitusException;
+//@@author mudkip8
 
 public class AlertCommand extends Command {
 

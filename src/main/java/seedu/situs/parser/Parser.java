@@ -117,6 +117,8 @@ public class Parser {
         }
     }
 
+    //@@author mudkip8
+
     /**
      * Checks if a string contains valid characters(alphanumeric).
      *
@@ -133,6 +135,8 @@ public class Parser {
         }
         return false;
     }
+
+    //@@author nishantrai-nus
 
     /**
      * Parses and executes the {@code find} command.
@@ -177,6 +181,8 @@ public class Parser {
         return new HelpCommand().run();
     }
 
+    //@@author AayushMathur7
+
     /**
      * Parses and executes the {@code update} command.
      *
@@ -216,6 +222,8 @@ public class Parser {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
+
+    //@@author ngoivanessa
 
     /**
      * Parses and executes the {@code add} command.
@@ -271,6 +279,8 @@ public class Parser {
         }
     }
 
+    //@@author AayushMathur7
+
     /**
      * Parses and executes the {@code subtract} command.
      *
@@ -305,6 +315,8 @@ public class Parser {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
+
+    //@@author datn02
 
     /**
      * Calls and executes the {@code list} command.
@@ -364,6 +376,8 @@ public class Parser {
 
         return new DateCommand(detail).run();
     }
+
+    //@@author mudkip8
 
     /**
      * Parses and executes the {@code expire} command.

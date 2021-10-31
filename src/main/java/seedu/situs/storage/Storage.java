@@ -24,6 +24,7 @@ public class Storage {
     private static final String DATA_FILE_PATH = "./data/ingredients.txt";
     private File dataFile;
 
+    //@@author datn02
     public Storage() throws IOException {
         File dataFile = new File(DATA_FILE_PATH);
         File dataDir = new File(dataFile.getParent());
@@ -103,6 +104,8 @@ public class Storage {
         }
     }
 
+    //@@author mudkip8
+
     /**
      * Gets the threshold data from the storage file.
      *
@@ -170,6 +173,7 @@ public class Storage {
         return expiryThreshold + "|" + stockThreshold;
     }
 
+    //@@author datn02
     /**
      * Writes the contents of the ingredient list to memory.
      *
