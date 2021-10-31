@@ -18,26 +18,22 @@ public class TotalExpenseBetweenCommandTest {
     public void execute_twoValidDateInputs_validTotalSum() throws DuplicateExpenseException {
         LocalDate startDate = LocalDate.parse("20/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        
-        Expense testExpense1 = new Expense("Salary", 400.00, ExpenseCategory.FOOD);
-        Expense testExpense2 = new Expense("Allowance", 400.00, ExpenseCategory.MISC);
+        Expense testExpense1 = new Expense("Salary", 400.00, ExpenseCategory.FOOD, startDate);
+        Expense testExpense2 = new Expense("Allowance", 400.00, ExpenseCategory.MISC, endDate);
         testTracker.addExpense(testExpense1);
         testTracker.addExpense(testExpense2);
         assertEquals(800.00, testTracker.getExpenseBetween(startDate,endDate));
-        assertEquals(800.00, testTracker.getExpenseBetween(endDate,startDate));
     }
 
     @Test
     public void execute_twoValidDateInputs_TotalSumZero() throws DuplicateExpenseException {
-        LocalDate startDate = LocalDate.parse("30/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate endDate = LocalDate.parse("31/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
+        LocalDate startDate = LocalDate.parse("28/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Expense testExpense1 = new Expense("Salary", 400.00, ExpenseCategory.FOOD);
         Expense testExpense2 = new Expense("Allowance", 400.00, ExpenseCategory.MISC);
         testTracker.addExpense(testExpense1);
         testTracker.addExpense(testExpense2);
         assertEquals(0.00, testTracker.getExpenseBetween(startDate,endDate));
-        assertEquals(0.00, testTracker.getExpenseBetween(endDate,startDate));
     }
 
 }

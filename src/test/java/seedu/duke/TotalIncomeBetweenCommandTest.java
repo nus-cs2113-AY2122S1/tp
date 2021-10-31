@@ -23,24 +23,21 @@ public class TotalIncomeBetweenCommandTest {
         LocalDate startDate = LocalDate.parse("20/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Income testIncome1 = new Income("Salary", 400.00, IncomeCategory.ALLOWANCE);
-        Income testIncome2 = new Income("Allowance", 400.00, IncomeCategory.ALLOWANCE);
+        Income testIncome1 = new Income("Salary", 400.00, IncomeCategory.ALLOWANCE, startDate);
+        Income testIncome2 = new Income("Allowance", 400.00, IncomeCategory.ALLOWANCE, endDate);
         testTracker.addIncome(testIncome1);
         testTracker.addIncome(testIncome2);
         assertEquals(800.00, testTracker.getIncomeBetween(startDate,endDate));
-        assertEquals(800.00, testTracker.getIncomeBetween(endDate,startDate));
     }
 
     @Test
     public void execute_twoValidDateInputs_TotalSumZero() throws DuplicateIncomeException {
-        LocalDate startDate = LocalDate.parse("30/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate endDate = LocalDate.parse("31/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
+        LocalDate startDate = LocalDate.parse("28/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Income testIncome1 = new Income("Salary", 400.00, IncomeCategory.ALLOWANCE);
         Income testIncome2 = new Income("Allowance", 400.00, IncomeCategory.ALLOWANCE);
         testTracker.addIncome(testIncome1);
         testTracker.addIncome(testIncome2);
         assertEquals(0.00, testTracker.getIncomeBetween(startDate,endDate));
-        assertEquals(0.00, testTracker.getIncomeBetween(endDate,startDate));
     }
 }

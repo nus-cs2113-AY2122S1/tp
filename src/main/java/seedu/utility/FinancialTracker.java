@@ -4,7 +4,10 @@ import seedu.commands.general.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.exceptions.*;
+import seedu.exceptions.DuplicateExpenseException;
+import seedu.exceptions.DuplicateIncomeException;
+import seedu.exceptions.ExpenseEntryNotFoundException;
+import seedu.exceptions.IncomeEntryNotFoundException;
 import seedu.utility.datetools.DateOperator;
 
 import java.time.LocalDate;
@@ -55,9 +58,16 @@ public class FinancialTracker {
         }
         return balance;
     }
-    
-    // prevents user from making duplicate entries in the same day
-    public void addExpense(Expense expense) throws DuplicateExpenseException{
+
+    /**
+     * Adds a expense object into the expenses ArrayList of the FinancialTracker class.
+     * 
+     * @param expense It is an object containing information about the expense
+     *                , including amount spent, date, description and category.
+     *                
+     * @throws DuplicateExpenseException Thrown if the expense object added is a duplicate.
+     */
+    public void addExpense(Expense expense) throws DuplicateExpenseException {
         int expenseSize = 0;
         assert (expenseSize = expenses.size()) >= 0;
         if (expenses.stream().anyMatch(entry -> entry.getDescription().equals(expense.getDescription())
@@ -72,7 +82,15 @@ public class FinancialTracker {
         balance -= expense.getValue();
     }
 
-    public void addIncome(Income income) throws DuplicateIncomeException{
+    /**
+     * Adds an income object into the incomes ArrayList of the FinancialTracker class.
+     *
+     * @param income It is an object containing information about the income
+     *                , including amount received, date, description and category.
+     *
+     * @throws DuplicateIncomeException Thrown if the income object added is a duplicate.
+     */
+    public void addIncome(Income income) throws DuplicateIncomeException {
         int incomeSize = 0;
         assert (incomeSize = incomes.size()) >= 0;
         if (incomes.stream().anyMatch(entry -> entry.getDescription().equals(income.getDescription())

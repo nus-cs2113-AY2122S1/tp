@@ -67,4 +67,5 @@ public class Messages {
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
     public static final String DUPLICATE_EXPENSE_MESSAGE = "You have already made this expense entry!";
     public static final String DUPLICATE_INCOME_MESSAGE = "You have already made this income entry!";
+    public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
 }
