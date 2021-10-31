@@ -97,7 +97,7 @@ Method:
 
 - I'll let you know that the recipe has been added
 - I'll list down the ingredients and steps required for said recipe
-- Finally some good ******** food...
+- Finally, some good ******** food...
     
 ---
 
@@ -108,6 +108,8 @@ Removes an existing recipe from my database of recipes.
 #### Format: `deleteRecipe RECIPE_INDEX`
 
 * The `RECIPE_INDEX` must be a positive integer representing the index of the recipe you want to remove.
+* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.
+  * **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
 
 #### Example of usage:
 
@@ -256,7 +258,7 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
   * Time (`VALUE` must be two integers, separated by a comma)
     * The first integer represents the preparation time required for the dish
     * The next integer then represents the cooking time
-* For calories, price and time, changing the `VALUE` to -1 will hide it from the recipe 
+* For calories, price and time, changing the `VALUE` to -1 in a recipe will prevent that attribute from showing up in that recipe.
 * Any values below -1 are not accepted.
 * `ATTRIBUTE` is not case-sensitive.
 
@@ -289,6 +291,7 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 * The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
 * If the `ATTRIBUTE` of any recipe is not set, Gordon will send you an error.
 * The find command returns the Recipes with less than or equal to the attribute value given.
+* **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
 #### Example of usage:
 
