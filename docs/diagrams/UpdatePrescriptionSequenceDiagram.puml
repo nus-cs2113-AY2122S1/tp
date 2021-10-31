@@ -4,7 +4,7 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":UpdatePrescription" as updateprescription COLOR_COMMAND
+    participant ":UpdatePrescriptionCommand" as updateprescription COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX

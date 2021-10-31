@@ -18,8 +18,8 @@ box Inventory COLOR_INVENTORY_BOX
 end box
 
 autoactivate on
-
--> command: execute
+mainFrame sd Execution of *Command
+activate command
     command -> ui: getInstance()
     command <-- ui
     create xvalidator
