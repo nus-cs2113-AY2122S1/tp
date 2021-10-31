@@ -94,18 +94,22 @@ public class DateParser {
         if (Day.isDay(dateTime)) {
             return Day.getDate(dateTime);
         } else {
-            String formattedDate = formatDateString(dateTime);
-            Log.info(LOG_FORMATTED_DATE_MESSAGE + formattedDate);
-            for (String dateFormatString : ACCEPTED_DATE_FORMATS) {
-                try {
-                    DateTimeFormatter dateFormat = getDateTimeFormatter(dateFormatString);
-                    return LocalDateTime.parse(formattedDate, dateFormat);
-                } catch (DateTimeParseException dtpe) {
-                    continue;
-                }
-            }
-            throw new ParseDateFailedException(getDefaultDateFormat());
+            return getDateFromDateTimeString(dateTime);
         }
+    }
+
+    private static LocalDateTime getDateFromDateTimeString(String dateTime) throws ParseDateFailedException {
+        String formattedDate = formatDateString(dateTime);
+        Log.info(LOG_FORMATTED_DATE_MESSAGE + formattedDate);
+        for (String dateFormatString : ACCEPTED_DATE_FORMATS) {
+            try {
+                DateTimeFormatter dateFormat = getDateTimeFormatter(dateFormatString);
+                return LocalDateTime.parse(formattedDate, dateFormat);
+            } catch (DateTimeParseException dtpe) {
+                continue;
+            }
+        }
+        throw new ParseDateFailedException(getDefaultDateFormat());
     }
 
     private static String formatDateString(String dateTime) {
