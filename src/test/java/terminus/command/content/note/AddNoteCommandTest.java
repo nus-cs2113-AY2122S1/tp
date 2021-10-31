@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.itextpdf.text.DocumentException;
 import java.io.IOException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.TestFilePath;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.TerminusLogger;
@@ -18,27 +16,16 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.NoteCommandParser;
-import terminus.storage.ModuleStorage;
 
 public class AddNoteCommandTest {
 
     Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
-    private ModuleStorage moduleStorage;
     private String tempModule = "test";
 
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
-
     @BeforeEach
-    void setUp() throws IOException {
-        this.moduleStorage = ModuleStorage.getInstance();
-        this.moduleStorage.init(TestFilePath.SAVE_FILE);
-        this.moduleStorage.createModuleDirectory(tempModule);
+    void setUp() {
         this.moduleManager = new ModuleManager();
         moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
@@ -49,7 +36,7 @@ public class AddNoteCommandTest {
     void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(moduleManager);
-        assertTrue(addResult.isOk());
+        assertTrue(addResult.hasChange());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1)
             .contains("test"));
@@ -103,6 +90,8 @@ public class AddNoteCommandTest {
             () -> commandParser.parseCommand("add \"\" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \"test\" \"test\"\"\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \" \" \" \"").execute(moduleManager));
     }
 
     @Test

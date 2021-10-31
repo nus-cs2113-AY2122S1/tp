@@ -1,7 +1,5 @@
 package terminus;
 
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.nio.file.Path;
 import terminus.command.Command;
@@ -10,10 +8,11 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
-import terminus.storage.ModuleStorage;
+import terminus.storage.StorageManager;
 import terminus.ui.Ui;
 
 public class Terminus {
@@ -28,8 +27,8 @@ public class Terminus {
     private CommandParser parser;
     private String workspace;
 
-    private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
+    private StorageManager storageManager;
 
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
     private static final String MAIN_JSON = "main.json";
@@ -57,16 +56,13 @@ public class Terminus {
             this.ui = Ui.getInstance();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
-            this.moduleStorage = ModuleStorage.getInstance();
-            this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
-            TerminusLogger.info("Loading file...");
-            this.moduleManager = moduleStorage.loadFile();
+            this.storageManager = new StorageManager(DATA_DIRECTORY, MAIN_JSON);
+            this.moduleManager = this.storageManager.initialize();
         } catch (IOException e) {
-            TerminusLogger.warning("File loading has failed.", e.fillInStackTrace());
+            TerminusLogger.warning("Log file loading has failed.", e.fillInStackTrace());
             handleIoException(e);
-        } catch (JsonSyntaxException | JsonIOException e) {
-            TerminusLogger.severe("Invalid file data detected!", e.fillInStackTrace());
-            ui.printSection(INVALID_JSON_MESSAGE);
+        } catch (InvalidFileException e) {
+            ui.printSection(e.getMessage());
         } finally {
             if (this.moduleManager == null) {
                 TerminusLogger.warning("File not found.");
@@ -104,10 +100,18 @@ public class Terminus {
                 } else {
                     ui.printSection(result.getMessage());
                 }
-                
+
+                // Perform related storage changes
+                if (result.hasChange()) {
+                    // Pass to Storage to handle the request
+                    storageManager.executeCommandResult(moduleManager, result);
+                }
+
+                // Update JSON File
                 TerminusLogger.info("Saving data into file...");
-                this.moduleStorage.saveFile(moduleManager);
+                this.storageManager.updateMainJsonFile(moduleManager);
                 TerminusLogger.info("Save completed.");
+
             } catch (InvalidCommandException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
                 ui.printSection(e.getMessage());
@@ -122,9 +126,10 @@ public class Terminus {
                 } else {
                     ui.printSection(e.getMessage());
                 }
-            } catch (IOException e) {
-                TerminusLogger.warning("File saving has failed.");
-                handleIoException(e);
+            } catch (InvalidFileException e) {
+                ui.printSection(e.getMessage());
+                ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
+                //storageManager.setDisabled(true);
             }
         }
     }
@@ -142,12 +147,12 @@ public class Terminus {
     private void exit() {
         TerminusLogger.info("Saving data into file...");
         try {
-            this.moduleStorage.saveFile(moduleManager);
-            this.moduleStorage.saveAllNotes(moduleManager);
+            storageManager.setDisabled(false);
+            this.storageManager.save(moduleManager);
             TerminusLogger.info("Save completed.");
-        } catch (IOException e) {
+        } catch (InvalidFileException e) {
             TerminusLogger.warning("File saving has failed.");
-            handleIoException(e);
+            ui.printSection(e.getMessage());
         }
         this.ui.printExitMessage();
     }

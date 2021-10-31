@@ -1,6 +1,5 @@
 package terminus.command.module;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import terminus.command.Command;
@@ -13,7 +12,8 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class UpdateModuleCommand extends Command {
 
@@ -53,14 +53,14 @@ public class UpdateModuleCommand extends Command {
         if (!newName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         } else if (!CommonUtils.isValidFileName(newName)) {
-            throw new InvalidArgumentException(Messages.ERROR_INVALID_FILE_NAME);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_MODULE_NAME);
         }
         newName = newName.toUpperCase();
     }
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
@@ -69,12 +69,14 @@ public class UpdateModuleCommand extends Command {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
         assert index > 0;
-        String oldName = listOfModule[index - 1];
+
         NusModule current = moduleManager.getModule(listOfModule[index - 1]);
-        ModuleStorage.getInstance().updateModuleDirectory(oldName, newName);
         moduleManager.removeModule(listOfModule[index - 1]);
+
         moduleManager.setModule(newName, current);
-        return new CommandResult(
-            String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName));
+        String message = String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName);
+        CommandResult result = new CommandResult(newName, StorageActionEnum.UPDATE, StorageTypeEnum.FOLDER, message);
+        result.setDeletedItemName(listOfModule[index - 1]);
+        return result;
     }
 }
