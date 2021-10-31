@@ -305,6 +305,12 @@ Exits the program.
 
 Format: `exit`
 
+Expected Output:
+```
+> exit
+See you soon!
+```
+
 ## FAQ
 
 **Q**: What happens if I mistype a command not recognised by the program?
