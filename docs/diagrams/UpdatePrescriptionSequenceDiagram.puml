@@ -13,8 +13,8 @@ box Utilities COLOR_UTILITIES_BOX
 end box
 
 autoactivate on
-
--> updateprescription: execute()
+mainFrame sd Logic for UpdatePrescriptionCommand
+activate updateprescription
     updateprescription -> prescriptionmanager: extractDispenseObject()
     updateprescription <-- prescriptionmanager
     create stockvalidator

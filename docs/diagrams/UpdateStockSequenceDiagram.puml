@@ -12,8 +12,8 @@ box Utilities COLOR_UTILITIES_BOX
 end box
 
 autoactivate on
-
--> updatestock: execute()
+mainFrame sd Logic for UpdateStockCommand
+activate updatestock
     updatestock -> stockmanager: extractStockObject()
     updatestock <-- stockmanager: stock
 
