@@ -155,10 +155,16 @@ Expected Output:
   ========================================
 ```
 
-### Search item by ID 
-Search items by ID (input keyword must be exactly the same)
+### Search item by ID, Title, Status, Category
+Search items by ID, Title, Status, and Category.
 
-Format: `search i/ID` 
+Status must be one of "AVAILABLE", "LOANED" or "RESERVED".
+
+Category must be one of "Audio", "Video", "Book", "Magazine".
+
+Any items matching more than one keyword will be listed, those items matching the search criteria more closely will be listed first.
+
+Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
 Example: `search i/095680`
 
@@ -170,37 +176,16 @@ Expected Output:
   ========================================
 ```
 
-### Search item by title
-Search items by title (input keyword can be part of the actual title)
-
-Format: `search t/TITLE`
-
-Example: `search t/Time`
+Example: `search s/LOANED c/Magazine`
 
 Expected Output:
 ```
   (+) Here are the searching results in library
   ========================================
   [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [B] 2551 | LOANED (Silin TILL 20-06-2022) | To Kill a Mockingbird | Harper Lee
   ========================================
 ```
-
-### Search item by status
-Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
-
-Format: `search s/STATUS`
-
-Example: `search s/AVAILABLE`
-
-Expected Output:
-```
-  (+) Here are the searching results in library
-  ========================================
-  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
-  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
-  ========================================
-```
-
 ### Reserve items
 Reserves an item for a specific person.
 
