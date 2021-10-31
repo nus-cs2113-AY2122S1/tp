@@ -116,8 +116,8 @@ public class Messages {
     public static final String[] ACTIVE_RECALL_SESSION_END_MESSAGE = {"This training session has ended.",
         "Returning you back to main program."};
     public static final String[] ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE = {"",
-        "How did you find the question? (Compare against past attempts if any)",
-        "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
+        "How did you find the question?",
+        "[1] Easy; [2] Normal; [3] Hard; [E] Exit"};
 
     /*
      * Notes Export
