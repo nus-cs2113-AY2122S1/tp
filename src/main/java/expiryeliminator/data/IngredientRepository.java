@@ -157,6 +157,8 @@ public class IngredientRepository {
         return ingredients.get(ingredientName);
     }
 
+//@@ JoshHDs
+
     /**
      * Looks for the ingredients that are expiring within the week.
      *
@@ -232,7 +234,18 @@ public class IngredientRepository {
         return haveExpired;
     }
 
-
+    /**
+     * Adds an ingredient and its required quantity determined by the recipe it is part of to a Treemap storing
+     * the total types and quantity of ingredients in all the recipes that the user wants to generate a shopping
+     * list for.
+     *
+     * @param ingredientName The name of the ingredient to be added to totalIngredient Treemap.
+     * @param recipe The recipe that the ingredient belongs to.
+     * @param totalIngredients The treemap that keeps track of the total types and quantity of each ingredient
+     * needed to make all the recipes that the user input.
+     *
+     * @return the string representing the list ingredients and its quantities to be bought.
+     */
     public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
             IngredientQuantity> totalIngredients) throws IllegalValueException {
         int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
