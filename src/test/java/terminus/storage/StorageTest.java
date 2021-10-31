@@ -227,7 +227,7 @@ public class StorageTest {
         storage.delete(thirdFolderPath);
     }
 
-    
+
     @Test
     @EnabledOnOs({OS.WINDOWS})
     void delete_fileInUsed_exceptionThrown() throws IOException, InvalidFileException {
@@ -395,5 +395,7 @@ public class StorageTest {
         Path filePath = storage.getAppendPath(folderPath, "test1.txt");
         assertThrows(InvalidFileException.class, () -> storage.cleanAllFilesInclusive(filePath));
     }
+
+
 
 }

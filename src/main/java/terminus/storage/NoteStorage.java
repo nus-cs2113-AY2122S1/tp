@@ -57,7 +57,7 @@ public class NoteStorage extends Storage {
      * @param module The folder name where the note file should be stored in.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void createNoteFile(ModuleManager moduleManager, String module) throws InvalidFileException {
+    protected void createNoteFile(ModuleManager moduleManager, String module) throws InvalidFileException {
         createFolder(baseDirectory);
         Path moduleFolder = getAppendPath(baseDirectory, module);
         createFolder(moduleFolder);
@@ -74,7 +74,7 @@ public class NoteStorage extends Storage {
      * @param deletedNoteName The name of the file to be deleted.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void removeNoteFile(String module, String deletedNoteName) throws InvalidFileException {
+    protected void removeNoteFile(String module, String deletedNoteName) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, module);
         Path noteFilePath = getAppendPath(moduleFolder, appendFileExtension(deletedNoteName));
         if (Files.isDirectory(noteFilePath)) {
@@ -90,7 +90,7 @@ public class NoteStorage extends Storage {
      * @param module The folder name where the all note files in it should be loaded from.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void loadNoteIntoModuleManager(ModuleManager moduleManager, String module) throws InvalidFileException {
+    protected void loadNoteIntoModuleManager(ModuleManager moduleManager, String module) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, module);
         File[] listOfNoteFiles = getListOfFiles(moduleFolder);
         ContentManager<Note> contentManager = moduleManager.getModule(module).getContentManager(Note.class);
@@ -118,7 +118,7 @@ public class NoteStorage extends Storage {
      * @param moduleManager The Module Manager containing all item information used in TermiNUS.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    public void saveAllNotes(ModuleManager moduleManager) throws InvalidFileException {
+    protected void saveAllNotes(ModuleManager moduleManager) throws InvalidFileException {
         for (String module : moduleManager.getAllModules()) {
             Path moduleFolder = getAppendPath(baseDirectory, module);
             createFolder(moduleFolder);
@@ -147,13 +147,11 @@ public class NoteStorage extends Storage {
      * @param file The given file to be tested on.
      * @return True if the given file is a text file, false otherwise.
      */
-    private boolean isValidTextFile(File file) {
+    protected boolean isValidTextFile(File file) {
         try {
             String contentType = getFileType(file);
             return CONTENT_TYPE.equals(contentType);
         } catch (InvalidFileException e) {
-            return false;
-        } catch (NullPointerException e) {
             return false;
         }
     }
