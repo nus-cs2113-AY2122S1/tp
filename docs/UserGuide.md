@@ -130,7 +130,9 @@ Prints the details of the specified recipe
 
 #### Format: `check RECIPE_NAME`
 
-* The `RECIPE_NAME` must be a valid existing recipe.
+* The `RECIPE_NAME` must be part of a valid existing recipe.
+* `RECIPE_NAME` is case-insensitive.
+* This command looks for substrings, for example if you look for "rice" the recipes shown can be "Chicken Rice" and "Duck Rice".
 
 #### Example of usage:
 
@@ -288,7 +290,7 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 #### Example of usage:
 
 `find /calories 400`  
-`find /difficulty normal`  
+`find /difficulty medium`  
 `find /price $5.00`  
 `find /time 30`
 
@@ -299,7 +301,7 @@ Searching by calories...
 1. Chicken Rice (Calories (kcal): 350)
 2. Caprese Salad (Calories (kcal): 150)
 Searching by difficulty...
-1. Cookies (Difficulty: Normal)
+1. Cookies (Difficulty: Medium)
 Searching by price...
 1. Chicken Rice (Price: $3.00)
 2. Cookies (Price: $1.50)
