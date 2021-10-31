@@ -302,7 +302,8 @@ public class Cookbook {
             extractedTag.removeAssociatedRecipeName(recipeName);
 
             if (extractedTag.numberOfAssociatedRecipes() == 0) {
-                System.out.println(tagName + " tag will no longer have any recipes under it. Delete this tag!");
+                System.out.println(tagName
+                        + " tag will no longer have any recipes under it. You might want to delete it!");
             }
 
         } catch (GordonException e) {
