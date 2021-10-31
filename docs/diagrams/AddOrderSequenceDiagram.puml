@@ -8,57 +8,43 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
-    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
-    participant ":Ui" as ui COLOR_UTILITIES
-    participant ":Storage" as storage COLOR_UTILITIES
-end box
-
-box Inventory COLOR_INVENTORY_BOX
-    participant ":Medicine" as medicine COLOR_INVENTORY
+    participant ":OrderManager" as ordermanager COLOR_UTILITIES
+    participant ":StockManager" as stockmanager COLOR_UTILITIES
 end box
 
 autoactivate on
-
--> addorder: execute()
-    addorder -> ui: getInstance()
-    addorder <-- ui
-    addorder -> commandsyntax: containsInvalidParameters()
-    addorder <-- commandsyntax: isInvalidParameter
-
-    opt !isInvalidParameter
-        addorder -> medicine : getInstance()
-        addorder <-- medicine
-
-        addorder -> ordervalidator: containsInvalidParametersValues()
-        addorder <-- ordervalidator: isInvalidParameterValues
-
-        opt !isInvalidParameterValues
-            alt nameExistsInorder
-                alt !nameExistsInStock
-                    alt orderQuantity < maxQuantity
-                        addorder -> addorder : addDate()
-                        addorder --> addorder : orderDate
-                        addorder -> addorder : addOrder()
-                        addorder --> addorder
-                    end
-                else nameExistsInStock
-                    alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
-                        addorder -> addorder : addDate()
-                        addorder --> addorder : orderDate
-                        addorder -> addorder : addOrder()
-                        addorder --> addorder
-                    else ui.print()
-                    end
-            else !nameExistsInorder
-                addorder -> addorder : addDate()
-                addorder --> addorder : orderDate
-                addorder -> addorder : addOrder()
-                addorder --> addorder
-            end
-        addorder -> storage: getInstance()
-        addorder <-- storage
-        addorder -> storage: saveData()
-    deactivate addorder
-    deactivate storage
+mainFrame sd Logic for AddOrderCommand
+alt orderQuantity != 0
+    alt nameExistsInorder
+        alt !nameExistsInStock
+               alt orderQuantity < maxQuantity
+                   addorder -> addorder : addDate()
+                   addorder --> addorder : orderDate
+                   addorder -> addorder : addOrder()
+                   addorder --> addorder
+               end
+           else nameExistsInStock
+               addorder -> ordermanager : getTotalOrderQuantity()
+               addorder <-- ordermanager : TotalOrderQuantity
+               addorder -> stockmanager : getTotalStockQuantity()
+               addorder <-- stockmanager : TotalStockQuantity
+               addorder -> stockmanager : getMaxStockQuantity()
+               addorder <-- stockmanager : MaxStockQuantity
+               alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
+                   addorder -> addorder : addDate()
+                   addorder --> addorder : orderDate
+                   addorder -> addorder : addOrder()
+                   addorder --> addorder
+               else !orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
+                   addorder --> addorder
+               end
+       else !nameExistsInorder
+           addorder -> addorder : addDate()
+           addorder --> addorder : orderDate
+           addorder -> addorder : addOrder()
+           addorder --> addorder
+       end
+    end
+end
+deactivate addorder
 @enduml
