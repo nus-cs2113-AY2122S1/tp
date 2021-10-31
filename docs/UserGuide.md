@@ -74,6 +74,7 @@ Adds a new recipe to my database of recipes.
 * Each individual ingredient in `INGREDIENTS` can be separated by a '+' sign.
 * Each individual step in `STEPS` can be separated by a '+' sign.
 * You cannot add two recipes with the same name.
+* You cannot use "/" in the recipe name or steps.
 
 #### Example of usage: 
 
@@ -286,6 +287,7 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 
 * The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
 * If the `ATTRIBUTE` of any recipe is not set, Gordon will send you an error.
+* The find command returns the Recipes with less than or equal to the attribute value given.
 
 #### Example of usage:
 
