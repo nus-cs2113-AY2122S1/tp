@@ -466,8 +466,16 @@ ____________________________________________________________
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: 
+**A**: Transfer the files inside `data/` to a new directory `data/` in the same location as the jar file on the target
+computer. The files are `data/contacts.txt` and `data/me.txt`.
 
+**Q**: Can I edit the files in `data/` manually?
+
+**A**: Yes, ConTech supports manual editing of `contacts.txt` and `me.txt` in the `data/` directory, although this is 
+not recommended. When doing so, remember to follow the correct syntax for contact details. Any incomplete/incorrect/
+corrupt data will be discarded by ConTech upon launch. Users are recommended to use the `add` and `edit` commands in the
+app instead of manually editing the save data files. For adding a large number of contacts at once, the `import` function
+can be used.
 
 
 ## <a name="summary"></a>Command Summary
