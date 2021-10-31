@@ -271,7 +271,7 @@ The diagram below is the class diagram for the Tag Class
 
 ![Tag Diagram](./RenderedUML/TagClassDiagram.svg)
 
->#### Functions of the Tag Class:
+#### Functions of the Tag Class:
 > 
 >The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
 >1. `getTagName` returns the _Tag Name_.
@@ -318,7 +318,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 
 ## Use Cases
 
-> **Use case: `help`**
+ **Use case: `help`**
 >
 >**MSS:**
 >1. User opens Application
@@ -328,7 +328,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 > 
 >Use case ends.
 
->**Use case: `exit`**
+**Use case: `exit`**
 >
 >**MSS:**
 >1. User requests to exit program
@@ -336,7 +336,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends
 
->**Use case: `add`**
+**Use case: `add`**
 >
 >**MSS:**
 >1. User requests to add a recipe to Gordon
@@ -350,7 +350,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >  * Gordon shows an error message
 >  * Use case resumes on step 1
 
->**Use case: `deleteRecipe`**
+**Use case: `deleteRecipe`**
 >
 >**MSS:**
 >1. User requests a list of all recipes
@@ -367,7 +367,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >  * Gordon shows an error message
 >  * Use case resumes from step 2
 
->**Use case: `listRecipes`**
+**Use case: `listRecipes`**
 >
 >**MSS:**
 >1. User requests to see all their recipes
@@ -380,7 +380,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >    * Use case ends.
 >
  
->**Use case: `check`**
+**Use case: `check`**
 >
 >**MSS:**
 >1. User requests to check a specific recipe
@@ -394,7 +394,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >* Input was entered incorrectly
 >  * Use case resumes from step 1
 
->**Use case: `find`**
+**Use case: `find`**
 >
 >**MSS:**
 >1. User has a large cookbook
@@ -411,7 +411,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >  * Gordon shows an error message
 >  * Use case resumes from step 2
 
->**Use case: `tag`**
+**Use case: `tag`**
 >
 >**MSS:** 
 >1. User wants to sort the recipes with their own metric
@@ -436,7 +436,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >   * Gordon shows an error message, notifies User that duplicate tags are not allowed
 >   * Use case resumes from step 2
 
->**Use case: `untag`**
+**Use case: `untag`**
 >
 >**MSS:**
 >1. User wants to remove a tag from a specific recipe
@@ -458,7 +458,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
    >    * Gordon shows an error message, prompts User to enter recipeName or tagName
 >    * Use case resumes from step 1
 
->**Use case: `deleteTag`**
+**Use case: `deleteTag`**
 >
 >**MSS:**
 >1. User wants to delete a master tag from the database
