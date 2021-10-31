@@ -69,7 +69,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
-            if(ingredientWeightValue < 0) {
+            if (ingredientWeightValue < 0) {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
@@ -86,7 +86,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-            if(userLimit < 0) {
+            if (userLimit < 0) {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
@@ -103,7 +103,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if(ingredientWeightValue < 0) {
+            if (ingredientWeightValue < 0) {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {

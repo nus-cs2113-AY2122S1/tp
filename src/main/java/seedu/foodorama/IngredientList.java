@@ -26,7 +26,7 @@ public class IngredientList {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if(ingredientWeightValue < 0) {
+            if (ingredientWeightValue < 0) {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
