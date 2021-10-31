@@ -220,12 +220,15 @@ public class Parser {
     /**
      * Parses and executes the {@code add} command.
      *
-     * @param command The user input String
+     * @param parameters The user input String
      * @return Ingredient added message
      */
-    private static String parseAddCommand(String command) throws SitusException {
-        String[] details = command.split(DELIMITER);
+    private static String parseAddCommand(String parameters) throws SitusException {
+        String[] details = parameters.split(DELIMITER);
 
+        if (details[0] != "") {
+            throw new SitusException(INVALID_COMMAND_MESSAGE);
+        }
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
