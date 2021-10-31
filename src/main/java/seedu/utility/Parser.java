@@ -626,6 +626,8 @@ public class Parser {
         }
         if (expenseAmount <= 0.001) {
             throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isNaN(expenseAmount) || Double.isInfinite(expenseAmount)) {
+            throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
         assert expenseAmount > 0;
         return expenseAmount;
@@ -640,6 +642,8 @@ public class Parser {
         }
         if (incomeAmount <= 0.001) {
             throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isNaN(incomeAmount) || Double.isInfinite(incomeAmount)) {
+            throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
         assert incomeAmount > 0;
         return incomeAmount;
@@ -743,6 +747,8 @@ public class Parser {
         }
         if (budgetAmount < 0) {
             return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
 
         String expenseCategory = matcher.group("category").trim().toUpperCase();
@@ -812,6 +818,8 @@ public class Parser {
         }
         if ((thresholdValue < 0) | (thresholdValue > 1)) {
             return new InvalidCommand(Messages.INVALID_THRESHOLD_MESSAGE);
+        } else if (Double.isNaN(thresholdValue) || Double.isInfinite(thresholdValue)) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
 
         return new SetThresholdCommand(thresholdValue);
