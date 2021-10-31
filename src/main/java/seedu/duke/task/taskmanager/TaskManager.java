@@ -49,6 +49,9 @@ public class TaskManager implements Subject {
     private static final int numOfRecurredDates = 4;
     private static final String DIGIT_REGEX = "^[+-]?[0-9]*$";
 
+    private static final String INVALID_SORT_ARGUMENT_MSG = "The sort criteria entered is not valid";
+    private static final String SORT_TASKLIST_COMPLETE_MSG = "[!] Tasklist has been sorted by: ";
+
     public TaskManager(DataManager dataManager) {
         taskList = dataManager.loadTaskList(STARTING_SIZE);
         addObserver(dataManager);
@@ -307,48 +310,40 @@ public class TaskManager implements Subject {
         LocalDateTime initialDate = task.getStartDate();
         return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
     }
-    
+
     //@@author APZH
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
             SortFormatException, EmptySortCriteriaException {
-        Log.info("sortTasklist method called");
         String sortCriteria = "";
-
         if (getTaskListSize() == 0) {
             Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
-        if (criteria.containsKey(SortFlag.SORT_BY)) {
-            sortCriteria = criteria.get(SortFlag.SORT_BY);
-        } else {
+        if (!criteria.containsKey(SortFlag.SORT_BY)) {
             Log.warning("user did not indicate 'by' flag, throwing SortFormatException");
             throw new SortFormatException();
         }
+        sortCriteria = criteria.get(SortFlag.SORT_BY);
         if (sortCriteria.isEmpty()) {
             Log.warning("user did not indicate any sort criteria, throwing EmptySortCriteriaException");
             throw new EmptySortCriteriaException();
         }
 
         switch (sortCriteria) {
-        case "type":
-            SortByTaskType sortByTaskType = new SortByTaskType();
-            Collections.sort(taskList, sortByTaskType);
+        case SortFlag.SORT_BY_TYPE_ARGUMENT:
+            Collections.sort(taskList, new SortByTaskType());
             break;
-        case "description":
-            SortByDescription sortByDescription = new SortByDescription();
-            Collections.sort(taskList, sortByDescription);
+        case SortFlag.SORT_BY_DESCRIPTION_ARGUMENT:
+            Collections.sort(taskList, new SortByDescription());
             break;
-        case "priority":
-            SortByPriority sortByPriority = new SortByPriority();
-            Collections.sort(taskList, sortByPriority);
+        case SortFlag.SORT_BY_PRIORITY_ARGUMENT:
+            Collections.sort(taskList, new SortByPriority());
             break;
         default:
-            return "The sort criteria entered is not valid";
+            return INVALID_SORT_ARGUMENT_MSG;
         }
-
-        Log.info("end of sortTasklist - no issues detected");
         updateObservers();
-        return "[!] Tasklist has been sorted by " + sortCriteria;
+        return SORT_TASKLIST_COMPLETE_MSG + sortCriteria;
     }
 
     //@@author APZH
