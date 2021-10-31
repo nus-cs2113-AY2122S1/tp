@@ -1,52 +1,111 @@
 package seedu.utility;
 
-import seedu.budget.OverallBudget;
-import seedu.budget.FoodBudget;
-import seedu.budget.TransportBudget;
+import seedu.commands.general.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.DuplicateExpenseException;
+import seedu.exceptions.DuplicateIncomeException;
 import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.IncomeEntryNotFoundException;
+import seedu.utility.datetools.DateOperator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
+ */
 public class FinancialTracker {
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
     private double balance;
-    
+    private CurrencyType currency = CurrencyType.SGD;
+
+    /**
+     * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
+     */
     public FinancialTracker() {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
     }
-    
+
+    /**
+     * Returns balance of the financial tracker.
+     *
+     * @return Balance of the financial tracker.
+     */
     public double getBalance() {
         return balance;
     }
-    
-    public void addExpense(Expense expense) {
+
+    /**
+     * Returns balance of the financial tracker. This is different from getBalance() as it ensures balance will always
+     * be correct, especially when converting to different currencies.
+     *
+     * @return Balance of the financial tracker.
+     */
+    public double calculateBalance() {
+        double balance = 0;
+        for (Income income : incomes) {
+            balance += income.getValue();
+        }
+        for (Expense expense : expenses) {
+            balance -= expense.getValue();
+        }
+        return balance;
+    }
+
+    /**
+     * Adds a expense object into the expenses ArrayList of the FinancialTracker class.
+     * 
+     * @param expense It is an object containing information about the expense
+     *                , including amount spent, date, description and category.
+     *                
+     * @throws DuplicateExpenseException Thrown if the expense object added is a duplicate.
+     */
+    public void addExpense(Expense expense) throws DuplicateExpenseException {
         int expenseSize = 0;
         assert (expenseSize = expenses.size()) >= 0;
+        if (expenses.stream().anyMatch(entry -> entry.getDescription().equals(expense.getDescription())
+                && entry.getValue() == expense.getValue()
+                && entry.getDate().isEqual(expense.getDate()) 
+                && entry.getCategory().equals(expense.getCategory()))) {
+            throw new DuplicateExpenseException(Messages.DUPLICATE_EXPENSE_MESSAGE);
+        }
         expenses.add(expense);
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
         balance -= expense.getValue();
     }
 
-    public void addIncome(Income income) {
+    /**
+     * Adds an income object into the incomes ArrayList of the FinancialTracker class.
+     *
+     * @param income It is an object containing information about the income
+     *                , including amount received, date, description and category.
+     *
+     * @throws DuplicateIncomeException Thrown if the income object added is a duplicate.
+     */
+    public void addIncome(Income income) throws DuplicateIncomeException {
         int incomeSize = 0;
         assert (incomeSize = incomes.size()) >= 0;
+        if (incomes.stream().anyMatch(entry -> entry.getDescription().equals(income.getDescription())
+                && entry.getValue() == income.getValue()
+                && entry.getDate().isEqual(income.getDate()) 
+                && entry.getCategory().equals(income.getCategory()))) {
+            throw new DuplicateIncomeException(Messages.DUPLICATE_INCOME_MESSAGE);
+        }
         incomes.add(income);
         assert !incomes.isEmpty();
         assert incomes.size() > incomeSize;
         balance += income.getValue();
     }
 
-    public int indexOffset(int index) {
+    private int indexOffset(int index) {
         return index - 1;
     }
 
@@ -80,19 +139,40 @@ public class FinancialTracker {
         return incomes;
     }
 
+    /**
+     * Returns an ArrayList of Entry elements, which include all incomes and expenses entries in the financial tracker.
+     *
+     * @return ArrayList of Entry elements.
+     */
     public ArrayList<Entry> getEntries() {
         ArrayList<Entry> entries = new ArrayList<>();
         entries.addAll(getExpenses());
         entries.addAll(getIncomes());
         return entries;
     }
-    
-    
+
+    public CurrencyType getCurrency() {
+        assert currency != null;
+        return currency;
+    }
+
+    public void setCurrency(CurrencyType currency) {
+        this.currency = currency;
+    }
+
+    /**
+     * Returns the total expense of all expenses in the financial tracker.
+     *
+     * @return Total expense of all expenses in the financial tracker.
+     */
     public double getTotalExpense() {
         double totalExpense = 0;
         for (Expense expense : expenses) {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
+            if (totalExpense >= Double.MAX_VALUE) {
+                return 0;
+            }
         }
         assert totalExpense >= 0;
         return totalExpense;
@@ -106,6 +186,11 @@ public class FinancialTracker {
         return totalExpense;
     }
 
+    /**
+     * Returns the total income of all incomes in the financial tracker.
+     *
+     * @return Total income of all incomes in the financial tracker.
+     */
     public double getTotalIncome() {
         double totalIncome = 0;
         for (Income income : incomes) {
@@ -123,32 +208,35 @@ public class FinancialTracker {
         }
         return totalIncome;
     }
-    
-    //returns the total expense between a specific rage
-    public double getExpenseBetween(LocalDate start, LocalDate end) {
+
+    /**
+     * Returns total expense between two given dates.
+     *
+     * @param startDate Starting date (Left boundary).
+     * @param endDate End Date (Right boundary).
+     * @return Total expense between two given dates.
+     */
+    public double getExpenseBetween(LocalDate startDate, LocalDate endDate) {
         List<Expense> accumulatedExpense = expenses.stream()
-                .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
+                .filter(DateOperator.entryDateInRange(startDate, endDate))
                 .collect(Collectors.toList());
         return getTotalExpense(accumulatedExpense);
     }
 
-    private boolean isBetweenStartAndEndDates(LocalDate start, LocalDate end, LocalDate date) {
-        return (date.isAfter(start) || date.isEqual(start))
-                && (date.isBefore(end) || date.isEqual(end));
-    }
 
     //returns the total expense in the month. Used for data visualisation
     private double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
         List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
-                .filter(item -> (item.getDate().getMonthValue() == inputMonth))
+                .filter(DateOperator.sameEntryMonth(inputMonth))
                 .collect(Collectors.toList());
         return getTotalExpense(monthlyAccumulatedExpense);
     }
 
     //returns a list of total expense each month for the entire year. Used to plot on graph
+
     public ArrayList<Double> getMonthlyExpenseBreakdown(int inputYear) {
         List<Expense> yearlyAccumulatedExpense = expenses.stream()
-                .filter(item -> (item.getDate().getYear() == inputYear))
+                .filter(DateOperator.sameEntryYear(inputYear))
                 .collect(Collectors.toList());
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
@@ -157,10 +245,16 @@ public class FinancialTracker {
         return monthlyBreakdown;
     }
 
-    //returns the total expense between a specific rage
-    public double getIncomeBetween(LocalDate start, LocalDate end) {
+    /**
+     * Returns total income between two given dates.
+     *
+     * @param startDate Starting date (Left boundary).
+     * @param endDate End Date (Right boundary).
+     * @return Total income between two given dates.
+     */
+    public double getIncomeBetween(LocalDate startDate, LocalDate endDate) {
         List<Income> accumulatedIncome = incomes.stream()
-                .filter(item -> isBetweenStartAndEndDates(start, end, item.getDate()))
+                .filter(DateOperator.entryDateInRange(startDate, endDate))
                 .collect(Collectors.toList());
         return getTotalIncome(accumulatedIncome);
     }
@@ -168,7 +262,7 @@ public class FinancialTracker {
     //returns the total expense in the month. Used for data visualisation
     private double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
         List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
-                .filter(item -> (item.getDate().getMonthValue() == inputMonth))
+                .filter(DateOperator.sameEntryMonth(inputMonth))
                 .collect(Collectors.toList());
         return getTotalIncome(monthlyAccumulatedIncome);
     }
@@ -176,7 +270,7 @@ public class FinancialTracker {
     //returns a list of total expense each month for the entire year. Used to plot on graph
     public ArrayList<Double> getMonthlyIncomeBreakdown(int inputYear) {
         List<Income> yearlyAccumulatedIncome = incomes.stream()
-                .filter(item -> (item.getDate().getYear() == inputYear))
+                .filter(DateOperator.sameEntryYear(inputYear))
                 .collect(Collectors.toList());
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
@@ -184,37 +278,49 @@ public class FinancialTracker {
         }
         return monthlyBreakdown;
     }
-    
-    //method used for testing
+
+    /**
+     * Returns the size of the expenses ArrayList.
+     *
+     * @return Size of the expenses array list.
+     */
     public int getExpenseSize() {
         return expenses.size();
     }
 
-    //method used for testing
+    /**
+     * Returns the size of the incomes ArrayList.
+     *
+     * @return Size of the incomes array list.
+     */
     public int getIncomeSize() {
         return incomes.size();
     }
 
+    /**
+     * Returns true if expenses list of financial tracker is empty.
+     *
+     * @return Whether the expense list is empty.
+     */
     public boolean isExpensesEmpty() {
         return expenses.isEmpty();
     }
 
+    /**
+     * Returns true if incomes list of financial tracker is empty.
+     *
+     * @return Whether the income list is empty.
+     */
     public boolean isIncomesEmpty() {
         return incomes.isEmpty();
     }
 
-    //method used for testing
-    public Expense getExpense(int expenseIndex) {
-        return expenses.get(expenseIndex);
-    }
-
-    //method used for testing
-    public Income getIncome(int incomeIndex) {
-        return incomes.get(incomeIndex);
-    }
-    
+    /**
+     * Delete all entries from both expenses and income list in financial tracker and set balance to zero.
+     */
     public void clearAllEntries() {
         expenses.clear();
         incomes.clear();
+        balance = 0;
     }
 }
