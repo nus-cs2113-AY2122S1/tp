@@ -22,7 +22,7 @@ help [COMMAND]
 *Note that all commands will remove any '|' inputs for format parsing purposes. For 
 examples of the expected output, please refer to the actual user guide.
 
-Add a patient to the patient’s list.
+Adds a patient to the patient list.
 Format:
 add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
 
