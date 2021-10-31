@@ -34,8 +34,8 @@ public class FullModuleList {
 
     private void setModuleMap() {
         moduleMap = new HashMap<>();
-        for (int i = 0; i < fullModuleList.size(); i++) {
-            moduleMap.put(fullModuleList.get(i).getModuleCode(), fullModuleList.get(i));
+        for (Module module : fullModuleList) {
+            moduleMap.put(module.getModuleCode(), module);
         }
     }
 
@@ -56,24 +56,5 @@ public class FullModuleList {
             throw new ModuleNotFoundException(Messages.ERROR_MODULE_NOT_FOUND);
         }
         return moduleMap.get(moduleCode);
-    }
-
-    /**
-     * Returns a ready-to-print string with the full module information of all the modules in the module list.
-     *
-     * @param moduleList the module list
-     * @return the ready-to-print string of full module information
-     * @throws DukeException when there is an error in getting the full module information of a module in the list
-     */
-    public String getModulesFull(ModuleList moduleList) throws DukeException {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < moduleList.getSize(); i++) {
-            Module module = moduleList.getModule(i);
-            String grade = module.getGrade();
-            module = findModule(module.getModuleCode());
-            module.setGrade(grade);
-            s.append(module.getFullInfo(true));
-        }
-        return s.toString();
     }
 }
