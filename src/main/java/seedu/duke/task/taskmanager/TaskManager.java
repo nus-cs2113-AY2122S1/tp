@@ -108,6 +108,10 @@ public class TaskManager implements Subject {
         return getListTasklistWithFilterMessage(filteredTasks);
     }
 
+    //@@author APZH
+    /**
+     * Returns a formatted list of tasks as a {@code String}
+     */
     private String getListTasklistWithFilterMessage(List<Task> filteredTasks) {
         String taskEntries = "";
         for (int i = 0; i < filteredTasks.size(); i++) {
