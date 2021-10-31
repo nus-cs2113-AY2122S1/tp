@@ -225,7 +225,37 @@ public class Ui {
         for (Task t : event.getTaskList()) {
             printTask(t);
         }
-        //printList(event.getTaskList());
     }
 
+    public static void printUpdateEventDetails(Event eventToBeUpdated) {
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================");
+        printEvent(eventToBeUpdated);
+        printLineBreak();
+    }
+
+    public static void postUpdateMessage(Event eventToBeUpdated) {
+        System.out.println("Here is the Event"
+                + System.lineSeparator()
+                + "---------------------------");
+        printUpdatedEvent(eventToBeUpdated);
+    }
+
+    public static String updateExitMessage() {
+        return getLineBreak() + System.lineSeparator() + "returning to main page...";
+    }
+
+    public static void updateTaskIntroMessage() {
+        Ui.printLineBreak();
+        System.out.println("Please type the item for task you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------"
+                + System.lineSeparator() + "title/[NEW NAME]   "
+                + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "member/[MEMBER INDEX]"
+                + System.lineSeparator() + "remove/[MEMBER INDEX]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator() + Ui.getLineBreak());
+    }
 }

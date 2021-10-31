@@ -17,13 +17,17 @@ import seedu.duke.commands.NextCommand;
 import seedu.duke.commands.UpdateCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Item;
 import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.UpdateParser;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 
@@ -32,13 +36,13 @@ public abstract class Parser {
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
-    public static Command parseCommand(String response) throws DukeException {
+    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException {
         // Trim and split response using first detected occurrence of whitespace(s) to get type of command requested
-        String[] command = response.trim().split(" +");
+        //String[] command = response.trim().split(" +");
 
         // TODO: Once parser is restructured, replace above with following two lines
-        //String[] command = response.trim().split(" +");
-        //String commandDetails = command[1];
+        String[] command = response.trim().split(" +");
+        String commandDetails = command[1];
         String commandType = command[0];
 
         switch (commandType) {
@@ -62,7 +66,8 @@ public abstract class Parser {
         case "select":
             return new SelectCommand(command);
         case "update":
-            return new UpdateCommand(command);
+            //return new UpdateCommand(command);
+            return UpdateParser.getUpdateCommand(commandDetails);
         case "next":
             return new NextCommand(command);
         default:
@@ -146,12 +151,18 @@ public abstract class Parser {
     }
 
     public static LocalDateTime convertDateTime(String dateTime) throws DukeException {
-        LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
-        if (result.isBefore(LocalDateTime.now())) {
-            throw new DukeException("Unfortunately, we cannot travel back in time. Please "
-                    + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+        try {
+            LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
+            if (result.isBefore(LocalDateTime.now())) {
+                throw new DukeException("Unfortunately, we cannot travel back in time. Please "
+                        + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+            }
+            return result;
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter a valid date and time in the format 'dd-MM-yyyy HHmm'.");
+
         }
-        return result;
+        return null;
     }
 
     public static String convertDateTimeForSaving(LocalDateTime dateTime) {
@@ -163,6 +174,36 @@ public abstract class Parser {
         sortedList.addAll(Duke.eventCatalog);
         sortedList.addAll(Duke.taskList);
         return sortedList;
+    }
+
+    /**
+     * Converts a budget as a string and formats it into a double.
+     *
+     * @param budget The budget provided as a String
+     * @return The converted budget as a double
+     * @throws InvalidBudgetException If the provided budget converts into a negative number of has more than 2 decimals
+     */
+    public static double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
+        Double result = null;
+        try {
+            result = Double.parseDouble(budget);
+            if (result < 0) {
+                throw new InvalidBudgetException("Event budget needs to be a positive number.");
+            }
+
+            if (BigDecimal.valueOf(result).scale() > 2) {
+                throw new InvalidBudgetException("Event budget cannot have more than 2 decimal places.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Event budget needs to be a number.");
+        }
+
+        // If conditional checks above fail internally, result will remain null. Throw exception
+        if (result == null) {
+            throw new InvalidBudgetException("Event budget is null!");
+        }
+
+        return result;
     }
 
     public static void updateIndexOfLastSelectedEvent(int index) {

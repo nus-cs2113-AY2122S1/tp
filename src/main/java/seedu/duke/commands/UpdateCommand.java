@@ -67,7 +67,7 @@ public class UpdateCommand extends Command {
                 if (userInput.equalsIgnoreCase("exit")) {
                     return new CommandResult(executeResult);
                 }
-                String[] userUpdates = userInput.trim().split(">");
+                String[] userUpdates = userInput.trim().split(">+");
                 CommandResult result = implementUpdates(userUpdates);
                 if (result != null) {
                     return result;
@@ -259,7 +259,6 @@ public class UpdateCommand extends Command {
         } catch (DateTimeParseException e) {
             System.out.println("incorrect format please ensure format for date is of [d/dd-MM-yyyy HHmm]");
         }
-
     }
 
     protected void updateBudget(String attribute) {
