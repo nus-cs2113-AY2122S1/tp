@@ -191,6 +191,11 @@ public class Parser {
             int ingredientNumber = Integer.parseInt(details[1]);
             double newAmount = Double.parseDouble(details[2]);
 
+            if (newAmount < 0) {
+                throw new SitusException(INVALID_AMOUNT_MESSAGE);
+            } else if (newAmount == 0) {
+                throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
+            }
             String resultMsg = new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
 
             return resultMsg;
