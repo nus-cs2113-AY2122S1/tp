@@ -15,8 +15,30 @@ import static org.junit.jupiter.api.Assertions.fail;
 //@@author Roycius
 public class ParserTest {
     @Test
-    public void parseAddTask_dayAndInfo_valid() {
+    public void parseAddTask_noPriority_valid() {
         String userResponse = "add task CS2113T tP -d MON -i before tutorial";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof AddTaskCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseAddTask_noInfo_valid() {
+        String userResponse = "add task CS2113T tP -d MON -p HIGH";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof AddTaskCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseAddTask_hasAllParameters_valid() {
+        String userResponse = "add task CS2113T tP -d MON -p HIGH -i before tutorial";
         try {
             Command command = Parser.parse(userResponse);
             assertTrue(command instanceof AddTaskCommand);
@@ -38,7 +60,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseAddLesson() {
+    public void parseAddLesson_noLink_valid() {
         String userResponse = "add lesson CS2113T Lecture -d FRI -s 16:00 -e 18:00";
         try {
             Command command = Parser.parse(userResponse);
@@ -49,19 +71,30 @@ public class ParserTest {
     }
 
     @Test
+    public void parseAddLesson_hasAllParameters_valid() {
+        String userResponse = "add lesson CS2113T Lecture -d FRI -s 16:00 -e 18:00 -l www.link.com";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof AddLessonCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parseAddLesson_wrongFlag_exceptionThrown() {
-        String userResponse = "add lesson CS2113T Lecture -d MON -e 18:00 -s 16:00";
+        String userResponse = "add lesson CS2113T Lecture -d MON -e 18:00 -s 16:00 -l www.link.com";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
     @Test
     public void parseAddLesson_invalidDayOfTheWeek_exceptionThrown() {
-        String userResponse = "add lesson CS2113T Lecture -d LOL -s 16:00 -e 18:00";
+        String userResponse = "add lesson CS2113T Lecture -d LOL -s 16:00 -e 18:00 -l www.link.com";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
     @Test
-    public void testMarkTaskAsDone() {
+    public void testMarkTaskAsDone_indexIsNumber_valid() {
         String userResponse = "done task 1";
         try {
             Command command = Parser.parse(userResponse);
@@ -72,7 +105,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseMarkTaskDone_indexNotANumber_exceptionThrown() {
+    public void parseMarkTaskAsDone_indexNotANumber_exceptionThrown() {
         String userResponse = "done task m";
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }

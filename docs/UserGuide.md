@@ -44,7 +44,7 @@ commands that you can execute.
 
 You should see the following output when you start NUSBuddy for the first time.
 
-```text
+```
     _______________________________________________________________________________
      I can't retrieve the saved task data. Creating new file..
     _______________________________________________________________________________
@@ -66,7 +66,6 @@ You should see the following output when you start NUSBuddy for the first time.
       ||   \\,-.(__) )(    )(  (__)     _|| \\_ (__) )(    |||_     |||_ .-,//|(_  
       (_")  (_/     (__)  (__)         (__) (__)    (__)  (__)_)   (__)_) \_) (__) 
     _______________________________________________________________________________
-
 ```
 
 > ❗ The new files created are used to store the data of your tasks/lessons/modules. 
@@ -90,7 +89,7 @@ Format: `help`
 
 Example usage:
 
-```text
+```
 $ help
       ______________________________________________________________________________________
        Here are the list of commands that you can try.
@@ -137,7 +136,7 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 
 Example:
 
-```text
+```
 $ add task Do CS2113T tP -d sat -p H
       ______________________________________________________________________________________
        Noted. I've added this task:
@@ -146,7 +145,6 @@ $ add task Do CS2113T tP -d sat -p H
               Info: -
        Now you have 1 tasks in the list.
       ______________________________________________________________________________________
-
 $ add task Update CS2113T docs -d thu -i User Guide
       ______________________________________________________________________________________
        Noted. I've added this task:
@@ -176,7 +174,7 @@ Format: `add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -
 
 Example:
 
-```text
+```
 $ add lesson CS2113T Lecture -d fri -s 16:00 -e 18:00 
       ______________________________________________________________________________________
        Noted. I've added this lesson:
@@ -208,7 +206,7 @@ Format: `add module [MODULE_CODE]`
 
 Example:
 
-```text
+```
 $ add module CS2113T
       ______________________________________________________________________________________
        Noted. I've added this module:
@@ -234,7 +232,7 @@ Format: `list task {PERIOD/PRIORITY}`
 
 Example:
 
-```text
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -249,7 +247,7 @@ $ list task
 
 > 💡 By default, the list of tasks is sorted by the day the of the week.
 
-```text
+```
 $ list task today
       ______________________________________________________________________________________
        Here are the tasks on THU:
@@ -276,7 +274,7 @@ Format: `list lesson {PERIOD/PRIORITY}`
 
 * `PERIOD` can be either day of the week, and `today` or `tomorrow`.
 
-```text
+```
 $ list lesson
       ______________________________________________________________________________________
        Here are the lessons in your list:
@@ -303,7 +301,7 @@ Format: `list module {verbose}`
 
 * `verbose` provides more detailed information.
 
-```text
+```
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
@@ -346,7 +344,7 @@ Format: `done task [INDEX]`
 
 Example:
 
-```text
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -391,7 +389,7 @@ Format: `delete task [INDEX]`
 
 Example:
 
-```text
+```
 $ list task
       ______________________________________________________________________________________
        Here are the tasks in your list:
@@ -427,7 +425,7 @@ Format: `delete lesson [INDEX]`
 
 Example:
 
-```text
+```
 $ list lesson
       ______________________________________________________________________________________
        Here are the lessons in your list:
@@ -463,7 +461,7 @@ Format: `delete module [MODULE_CODE]`
 
 Example:
 
-```text
+```
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
@@ -504,7 +502,7 @@ Format: `find task [KEYWORD]`
 
 Example:
 
-```text
+```
 $ find task CS2113T
       ______________________________________________________________________________________
        Here are the matching tasks in your list:
@@ -522,7 +520,7 @@ Format: `find lesson [KEYWORD]`
 
 Example:
 
-```text
+```
 $ find lesson CS2113T
       ______________________________________________________________________________________
        Here are the matching lessons in your list:
@@ -543,7 +541,7 @@ Format: `moduleinfo [MODULE_CODE]`
 
 Example:
 
-```text
+```
 $ moduleinfo CS3219
       ______________________________________________________________________________________
        CS3219 Software Engineering Principles and Patterns (4MCs) 
@@ -561,7 +559,7 @@ Format: `set grade [MODULE_CODE] [GRADE]`
 
 Example:
 
-```text
+```
 $ set grade CS2113T A
       ______________________________________________________________________________________
        You have changed your grade for this module: 
@@ -583,7 +581,7 @@ Format: `exit`
 
 Example:
 
-```text
+```
 $ exit
       _______________________________________________________________________________
        Bye!
