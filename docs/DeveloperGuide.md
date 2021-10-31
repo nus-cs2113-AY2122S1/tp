@@ -179,6 +179,10 @@ logic:
 Given below is the sequence diagram after `run()` is called for the interactions within the main application logic.
 
 ![MainLogicSequenceDiagram](diagrams/diagram_images/MainLogicSequenceDiagram.png)
+- `changeMode()` will be called when the user entered `stock`, `prescription` or `order` to help change modes.
+- `processCommand()` helps to parse the user's command to a `Command` object.
+- `parseParameters()` will return all the parameters entered as a `LinkedHashmap<String, String>`. This helps to make the
+parameters entered by the user easily accessible by the `Command` objects. 
 
 After the `.execute()` command is called, MediVault does the following validator checks as shown below.
 
@@ -246,11 +250,11 @@ The sequence diagram for `AddStockCommand` is shown below.
 ![AddStockSequenceDiagram](diagrams/diagram_images/AddStockSequenceDiagram.png)
 
 MediVault will determine if there exist the medication with the same name.
-* If there exist medication with the same name, MediVault will check if there exist the same expiry date using the isExpiryExist() method.
-  * MediVault will then check if the quantity is valid using the isValidQuantity() method.
+* If there exist medication with the same name, MediVault will check if there exist the same expiry date using the `isExpiryExist()` method.
+  * MediVault will then check if the quantity is valid using the `isValidQuantity()` method.
   * If the same name and expiry date exist, Medivault will update the quantity of the existing stock.
   * If it does not exist the same expiry date, MediVault will add the medication using the existing description and maximum quantity.
-* If it does not exist the same medication in MediVault, MediVault will then check if the quantity is valid using the isValidQuantity() method and a new medication will be added.
+* If it does not exist the same medication in MediVault, MediVault will then check if the quantity is valid using the `isValidQuantity()` method and a new medication will be added.
 
 #### DeleteStockCommand
 
@@ -323,7 +327,7 @@ The sequence diagram for `AddPrescriptionCommand` is shown below.
 
 ![AddPrescriptionCommandDiagram](diagrams/diagram_images/AddPrescriptionSequenceDiagram.png)
 
-prescribe() method will change the stock quantity based on prescription quantity and add prescribed medication to prescription list.
+- `prescribe()` method will change the stock quantity based on prescription quantity and add prescribed medication to prescription list.
 
 #### DeletePrescriptionCommand
 
@@ -343,7 +347,7 @@ The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
 > :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
 
-setStockQuantity() method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
+- `setStockQuantity()` method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
 
 #### UpdatePrescriptionCommand
 
@@ -437,7 +441,7 @@ stocks can only be done **after** MediVault confirms that the user provides a `q
 
 ### ReceiveOrderCommand
 
-MediVault creates an `ReceiveOrderCommand` object when CommandParser identifies
+MediVault creates an `ReceiveOrderCommand` object when `CommandParser` identifies
 `receiveorder` or the `receive` keyword in `order` mode.
 
 > :information_source: Note:
@@ -449,6 +453,12 @@ MediVault creates an `ReceiveOrderCommand` object when CommandParser identifies
 The sequence diagram for `ReceiveOrderCommand` is shown below.
 
 ![ReceiveOrderSequenceDiagram](diagrams/diagram_images/ReceiveOrderSequenceDiagram.png)
+
+- `isStockParametersValid()` helps to ensure that the parameters for the stock to be added are valid.
+- `checkStockExist()` helps to check if a medication exists in stock.
+
+MediVault will then check if the quantity increased before setting the order as completed. This helps to ensure that
+only after the stock is successfully added, then the order would be complete.
 
 ### Archive Commands
 
