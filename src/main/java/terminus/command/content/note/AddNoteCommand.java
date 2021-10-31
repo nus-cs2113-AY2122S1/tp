@@ -1,6 +1,5 @@
 package terminus.command.content.note;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
@@ -13,7 +12,8 @@ import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 /**
  * AddNoteCommand class which will manage the adding of new Notes from user command.
@@ -67,9 +67,8 @@ public class AddNoteCommand extends Command {
      *
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
-    public CommandResult execute(ModuleManager moduleManager) throws IOException, InvalidArgumentException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException {
         assert getModuleName() != null;
         TerminusLogger.info("Executing Add Note Command");
         NusModule module = moduleManager.getModule(getModuleName());
@@ -81,13 +80,10 @@ public class AddNoteCommand extends Command {
         Note newNote = new Note(name, data);
         contentManager.add(newNote);
 
-        // Save to file
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.addNoteFromModule(getModuleName(), newNote);
-
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         String message = String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name);
-        return new CommandResult(message);
+
+        return new CommandResult(getModuleName(), StorageActionEnum.CREATE, StorageTypeEnum.TEXT, message);
     }
 
     /**

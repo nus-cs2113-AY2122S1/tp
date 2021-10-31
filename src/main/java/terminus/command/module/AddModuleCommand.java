@@ -1,6 +1,5 @@
 package terminus.command.module;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
@@ -11,7 +10,8 @@ import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class AddModuleCommand extends Command {
 
@@ -62,23 +62,18 @@ public class AddModuleCommand extends Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException              when the module directory is not empty.
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException {
         if (moduleManager.getModule(moduleName) != null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
 
-        // Create its directory
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        if (moduleStorage.createModuleDirectory(moduleName)) {
-            moduleManager.addModule(moduleName);
-        }
+        moduleManager.addModule(moduleName);
 
         String message = String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName);
-        return new CommandResult(message);
+        return new CommandResult(moduleName, StorageActionEnum.CREATE, StorageTypeEnum.FOLDER, message);
     }
 
     private boolean isValidModuleArguments(ArrayList<String> argArray) {

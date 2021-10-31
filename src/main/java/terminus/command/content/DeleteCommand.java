@@ -1,6 +1,5 @@
 package terminus.command.content;
 
-import java.io.IOException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -76,21 +75,20 @@ public class DeleteCommand<T extends Content> extends Command {
      * @param moduleManager The ModuleManager that contains the NusModules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
-     * @throws IOException when file is inaccessible.
      */
     @Override
-    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException, IOException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;
-        
+
         TerminusLogger.info("Executing Delete Command");
         this.deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
         TerminusLogger.info(
                 String.format("%s(%s) has been deleted", CommonUtils.getClassName(type), deletedContentName));
-        
+
         String message = (String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonUtils.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(message);
