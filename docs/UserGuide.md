@@ -121,9 +121,9 @@ Displays all modules from the master list of universities that the user can choo
 Expected output:
 ```
 Here are the universities and module mappings in the list:  
-[1] - Aarhus School of Business  
-[2] - Aarhus University  
-[3] - Arizona State University  
+[1]  - Aarhus School of Business  
+[2]  - Aarhus University  
+[3]  - Arizona State University  
 ...  
 [78] - Uppsala University  
 [79] - Waseda University  
@@ -132,7 +132,11 @@ Here are the universities and module mappings in the list:
 
 ### Viewing all available modules: 
 
-Displays all modules from the master list of modules that the user can choose from.  
+Displays all modules from the master list of modules that the user can choose from.
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
+The master list of modules also displays each modules module credits on the right. 
+</div> 
 
 #### Format: `list /mmod`  
 
@@ -141,13 +145,13 @@ Input: `list /mmod`
 Expected output:  
 ```
 Here are the modules in the list:  
-[1] ACC1701X : Accounting for Decision Makers  
-[2] ACC2706 : Managerial Accounting  
-[3] AR2102 : Design 4  
+[1]   ACC1701X : Accounting for Decision Makers          4.0
+[2]   ACC2706  : Managerial Accounting                   4.0
+[3]   AR2102   : Design 4                                8.0
 ...  
-[803] TR3008 : Technological Innovation  
-[804] UD5221 : Urban Design Theory and Disco  
-[805] UD5628 : Critique of Contemporary Urban Design  
+[803] TR3008   : Technological Innovation                4.0
+[804] UD5221   : Urban Design Theory and Disco           4.0
+[805] UD5628   : Critique of Contemporary Urban Design   4.0
 ```
 
 ### Adding a partner university
@@ -166,14 +170,14 @@ Input: `add /uni 24`
 Expected output:
 ```
 New university added: 
-[24] - Korea Advanced Inst of Sci & Tech
+[24] Korea Advanced Inst of Sci & Tech
 ```
 * Example 2  
 Input: `add /uni University of California`  
 Expected output:
 ```
 New university added: 
-[59] - University of California
+[59] University of California
 ```
 
 ### Adding a NUS module
@@ -192,14 +196,14 @@ Input: `add /mod 77`
 Expected output:
 ```
 New module added: 
-[77] CS1010   : Programming Methodology
+[77]  CS1010   : Programming Methodology                 4.0
 ```
 * Example 2: using module code  
 Input: `add /mod CS1010`  
 Expected output:
 ```
 New module added: 
-[77] CS1010   : Programming Methodology
+[77]  CS1010   : Programming Methodology                 4.0
 ```
 
 ### Viewing all selected universities:
@@ -213,8 +217,8 @@ Displays all universities added, as well as all module mappings added to the uni
   Expected output:
 ```
 Here are the universities and module mappings in your list:
-[40] - Technical University of Munich
-    1 | IE4056 - WI001098 : Introduction to Production Scheduling Theory
+[40] Technical University of Munich -------------------- 4.0
+      1 | IE4056 - WI001098 : Introduction to Production Scheduling Theory
 [80] - Western University
 ```
 
@@ -229,12 +233,12 @@ Displays all modules from the master list of modules that the user can choose fr
   Expected output:
 ```
 Here are the modules in the list:
-[102] CS3220   : Computer Architecture
-[319] IE4044   : Exchange Elective
-[801] ST4991   : Exchange Enrichment Module
-[77] CS1010   : Programming Methodology
-[72] CM4271   : MEDICINAL CHEMISTRY
-[47] CM1417   : Fundamentals of Chemistry
+[1]   ACC1701X : Accounting for Decision Makers          4.0
+[2]   ACC2706  : Managerial Accounting                   4.0
+[10]  AR3421   : Introduction to Architectural           4.0
+[28]  BSP2701  : Global Economy                          2.0
+[48]  CM1991   : Exchange Enrichment Level 1000          4.0
+[77]  CS1010   : Programming Methodology                 4.0   
 ```
 
 ### Searching for available module mappings:
@@ -251,9 +255,11 @@ Mappings here are labeled with a mapping index, which will be used for `add /map
   Input: `searchmap 4`  
   Expected Output:
 ```
-Potential mappings for Boston University:
-[1] CS1231 - MET CS 248 : Discrete Mathematics
-[2] CS1231 - CAS CS131 : Combinatoric Structures
+Potential mappings for Boston University [4]  :
+1 | CS2030 - MET CS 232 : Programming with Java
+2 | BT4222 - MET CS688 : Web Analytics and Mining
+3 | BT3102 - CAS MA 589 : Computational Statistics
+4 | CS2040 - Cs112 : Introduction to Computer Science 2
 ```
 
 ### Adding a module mapping
@@ -271,16 +277,15 @@ found via `searchmap <UNIVERSITY_INDEX>` command for the specific university.
 Input: `add /map 4 2`  
 Expected output:
 ```
-The following module mapping has been added under:
-[4] Boston University
-CS1231 - MET CS 248 : Discrete Mathematics
-CS1231 - CAS CS131 : Combinatoric Structures
+New module mapping added: 
+[2]   BT4222 - MET CS688 : Web Analytics and Mining
 ```
 
 ### Finding a specific university
 
 Look for universities that matches the user entered keyword.
-* The output also consists of the index of the university, which is needed for subsequent commands.  
+The output also consists of the index of the university, which is needed for subsequent commands.  
+
 
 #### Format: `find /uni <KEYWORD>`
 
@@ -288,16 +293,16 @@ Look for universities that matches the user entered keyword.
 Input: `find /uni California`  
 Expected output:
 ```
-[59] - University of California
-[60] - University of California, Berkeley
-[61] - University of California, Davis
-[62] - University of California, Irvine
-[63] - University of California, Los Angeles
-[64] - University of California, Merced
-[65] - University of California, Riverside
-[66] - University of California, San Diego
-[67] - University of California, Santa Barbara
-[68] - University of California, Santa Cruz
+[59] University of California
+[60] University of California, Berkeley
+[61] University of California, Davis
+[62] University of California, Irvine
+[63] University of California, Los Angeles
+[64] University of California, Merced
+[65] University of California, Riverside
+[66] University of California, San Diego
+[67] University of California, Santa Barbara
+[68] University of California, Santa Cruz
 ```
 * Example 2   
 Input: `find /uni  e`
@@ -312,7 +317,6 @@ Expected output:
 [5]  CentraleSupelec - Ecole Centrale Paris
 [13] Ecole Centrale Des Arts Et Manufactures, Paris
 [46] The University of Edinburgh
-
 ```
 
 ### Finding a specific module
@@ -343,14 +347,14 @@ Input: `remove /uni 4`
 Expected output:
 ```
 This university is removed: 
-[4] - Boston University
+[4]  Boston University --------------------------------- 0.0
 ```
 * Example 2: using university name  
 Input: `remove /uni Boston University`  
 Expected output:
 ```
 This university is removed: 
-[4] - Boston University
+[4]  Boston University --------------------------------- 0.0
 ```
 
 ### Removing a selected NUS module
@@ -364,14 +368,14 @@ Input: `remove /mod 81`
 Expected output:
 ```
 The following module has been removed: 
-[81] CS1231 : Discrete Structures
+[81]  CS1231   : Discrete Structures
 ```
 * Example 2: using module code  
 Input: `remove /mod CS1231`  
 Expected output:
 ```
 The following module has been removed: 
-[81] CS1231 : Discrete Structures
+[81]  CS1231   : Discrete Structures
 ```
 
 
@@ -386,8 +390,8 @@ Input: `remove /map 4 2`
 Expected output:  
 ```
 The following module mapping has been removed:
-[4] Boston University
-CS1231 - CAS CS131 : Combinatoric Structures
+This module mapping is removed: 
+[2]   CS1231 - CAS CS131 : Combinatoric Structures
 ```
  
 <div markdown="block" class="alert alert-info"> :information_source: **Note:**
