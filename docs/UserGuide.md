@@ -326,12 +326,13 @@ You can then key in a command again.
 |Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
 |Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
 |Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
-|Deadline|View items due to be returned|`deadline overdue|today` <br> E.g. `deadline today`|
-|Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute`|
+|Deadline|View items due to be returned|`deadline overdue\|today` <br> E.g. `deadline today`|
+|Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute` <br> E.g. `edit 123 t/Harry Potter`|
 |Exit|Quit the program|`exit`|
 |List (all items)|Lists all items within the catalogue|`list`|
-||||
-||||
-||||
-
-
+|Loan|Loan out an item to someone|`loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)` <br> E.g. `loan i/2551 d/12-11-2021 u/johnsmith`|
+|Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
+|Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
+|Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
+|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search t/Time`|
+|Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|
