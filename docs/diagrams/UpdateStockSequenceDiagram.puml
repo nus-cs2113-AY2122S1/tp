@@ -8,70 +8,34 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
     participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
-    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
-end box
-
-box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
 end box
 
 autoactivate on
 
 -> updatestock: execute()
-    updatestock -> ui: getInstance()
-    updatestock <-- ui
-    create stockvalidator
-    updatestock -> stockvalidator: new StockValidator()
-    updatestock <-- stockvalidator
+    updatestock -> stockmanager: extractStockObject()
+    updatestock <-- stockmanager: stock
 
-    updatestock -> stockvalidator: containsInvalidParameters()
-    updatestock <-- stockvalidator: isInvalidParameter
+    updatestock -> updatestock: processQuantityValues()
+    updatestock --> updatestock: isValidQuantityValues
 
-    opt !isInvalidParameter
-        updatestock -> medicine: getInstance()
-        updatestock <-- medicine
-        updatestock -> stockvalidator: containsInvalidParameterValues()
-        updatestock <-- stockvalidator: isInvalidParameterValues
+    updatestock -> updatestock: processDateInput()
+    updatestock --> updatestock: isValidExpDate
 
-        opt !isInvalidParameterValues
-            updatestock -> stockmanager: extractStockObject()
-            updatestock <-- stockmanager: stock
-
-            updatestock -> updatestock: processQuantityValues()
-            updatestock --> updatestock: isValidQuantityValues
-
-            updatestock -> updatestock: processDateInput()
-            updatestock --> updatestock: isValidExpDate
-
-            note over updatestock
-            MediVault does additional validity
-            check for quantity and expiry date
-            besides being parsable.
-            end note
-
-            opt isValidQuantityValues && isValidExpDate
-                updatestock -> stockmanager: getFilteredStocksByName()
-                updatestock <-- stockmanager: oldFilteredStocks
-                opt parameters contains name
-                    updatestock -> updatestock: addNewRowForUpdate()
-                    deactivate updatestock
-                    updatestock -> updatestock: getNewStock()
-                    deactivate updatestock
-                end
-                updatestock -> stockmanager: getFilteredStocksByName()
-                updatestock <-- stockmanager: filteredStocks
-                updatestock -> updatestock: setUpdatesByStockId(stock)
-                deactivate updatestock
-                updatestock -> storage: getInstance()
-                updatestock <-- storage
-                updatestock -> storage: saveData()
-                updatestock <-- storage
-                deactivate storage
-            end
+    opt isValidQuantityValues && isValidExpDate
+        updatestock -> stockmanager: getFilteredStocksByName()
+        updatestock <-- stockmanager: oldFilteredStocks
+        opt parameters contains name
+            updatestock -> updatestock: addNewRowForUpdate()
+            deactivate updatestock
+            updatestock -> updatestock: getNewStock()
+            deactivate updatestock
         end
+        updatestock -> stockmanager: getFilteredStocksByName()
+        updatestock <-- stockmanager: filteredStocks
+        updatestock -> updatestock: setUpdatesByStockId(stock)
+        deactivate updatestock
     end
 
 @enduml

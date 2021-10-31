@@ -8,63 +8,30 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant ":PrescriptionValidator" as prescriptionvalidator COLOR_UTILITIES
     participant ":StockValidator" as stockvalidator COLOR_UTILITIES
     participant "<<class>>\n:PrescriptionManager" as prescriptionmanager COLOR_UTILITIES
-    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
-end box
-
-box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
 end box
 
 autoactivate on
 
 -> updateprescription: execute()
-    updateprescription -> ui: getInstance()
-    updateprescription <-- ui
-    create prescriptionvalidator
-    updateprescription -> prescriptionvalidator: new PrescriptionValidator()
-    updateprescription <-- prescriptionvalidator
-
-    updateprescription -> prescriptionvalidator: containsInvalidParameters()
-    updateprescription <-- prescriptionvalidator: isInvalidParameter
-
-    opt !isInvalidParameter
-        updateprescription -> medicine: getInstance()
-        updateprescription <-- medicine
-
-        updateprescription -> prescriptionvalidator: containsInvalidParameterValues()
-        updateprescription <-- prescriptionvalidator: isInvalidParameterValues
-
-        opt !isInvalidParameterValues
-            updateprescription -> prescriptionmanager: extractDispenseObject()
-            updateprescription <-- prescriptionmanager
-            create stockvalidator
-            updateprescription -> stockvalidator: new StockValidator()
-            updateprescription <-- stockvalidator
-            alt hasNameParam && hasQuantityParam
-                updateprescription -> updateprescription: processGivenNameAndQuantity()
-                updateprescription --> updateprescription: isSuccessfulUpdate
-            else hasNameParam && !hasQuantityParam
-                updateprescription -> updateprescription: processGivenName()
-                updateprescription --> updateprescription: isSuccessfulUpdate
-            else !hasNameParam && hasQuantityParam
-                updateprescription -> updateprescription: processGivenQuantity()
-                updateprescription --> updateprescription: isSuccessfulUpdate
-            else containsParamOtherThanNameAndQuantity
-                updateprescription -> updateprescription: processOtherFields()
-                updateprescription --> updateprescription: isSuccessfulUpdate
-            end
-
-            opt isSuccessfulUpdate
-                updateprescription -> storage: getInstance()
-                updateprescription <-- storage
-                updateprescription -> storage: saveData()
-                updateprescription <-- storage
-            end
-        end
+    updateprescription -> prescriptionmanager: extractDispenseObject()
+    updateprescription <-- prescriptionmanager
+    create stockvalidator
+    updateprescription -> stockvalidator: new StockValidator()
+    updateprescription <-- stockvalidator
+    alt hasNameParam && hasQuantityParam
+        updateprescription -> updateprescription: processGivenNameAndQuantity()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else hasNameParam && !hasQuantityParam
+        updateprescription -> updateprescription: processGivenName()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else !hasNameParam && hasQuantityParam
+        updateprescription -> updateprescription: processGivenQuantity()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else containsParamOtherThanNameAndQuantity
+        updateprescription -> updateprescription: processOtherFields()
+        updateprescription --> updateprescription: isSuccessfulUpdate
     end
 
 @enduml
