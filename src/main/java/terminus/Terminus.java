@@ -1,5 +1,6 @@
 package terminus;
 
+import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.NoSuchElementException;
@@ -18,7 +19,7 @@ import terminus.ui.Ui;
 
 public class Terminus {
 
-    private Ui ui;
+    private final Ui ui;
     private CommandParser parser;
     private String workspace;
 
@@ -34,29 +35,29 @@ public class Terminus {
     public static void main(String[] args) {
         new Terminus().run();
     }
+    
+    Terminus() {
+        this(Ui.getInstance(), MainCommandParser.getInstance());
+    }
+    
+    Terminus(Ui ui, CommandParser parser) {
+        this.ui = ui;
+        this.parser = parser;
+    }
 
     /**
      * Starts the program.
      */
     public void run() {
-        try {
-            initialize();
-            runCommandsUntilExit();
-            exit();   
-        } catch (Exception e) {
-            if (this.ui != null) {
-                ui.printSection("An unexpected error has occurred: ", e.getMessage());
-                TerminusLogger.severe(e.getMessage(), e.fillInStackTrace());
-            }
-        }
+        initialize();
+        runCommandsUntilExit();
+        exit();
     }
 
     void initialize() {
         try {
             TerminusLogger.initializeLogger();
             TerminusLogger.info("Starting Terminus...");
-            this.ui = Ui.getInstance();
-            this.parser = MainCommandParser.getInstance();
             this.workspace = "";
             this.storageManager = new StorageManager(DATA_DIRECTORY, MAIN_JSON);
             this.moduleManager = this.storageManager.initialize();
@@ -155,8 +156,6 @@ public class Terminus {
                     ui.printSection("", "Force-quitting detected.", "TermiNUS will attempt to quit.");
                     return;
                 }
-                ui.printSection("An unexpected error has occurred: ", e.getMessage());
-                TerminusLogger.severe(e.getMessage(), e.fillInStackTrace());
             } catch (Exception e) {
                 ui.printSection("An unexpected error has occurred: ", e.getMessage());
                 TerminusLogger.severe(e.getMessage(), e.fillInStackTrace());

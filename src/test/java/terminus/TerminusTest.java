@@ -8,8 +8,8 @@ import java.io.InputStream;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import terminus.command.CommandResult;
-import terminus.storage.StorageActionEnum;
+import terminus.parser.MainCommandParser;
+import terminus.ui.Ui;
 
 class TerminusTest {
 
@@ -36,10 +36,9 @@ class TerminusTest {
     
     @Test
     void run_invalidCommand_exit_success() {
-        String input = String.format("exita%sexit%s", LS, LS);
+        String input = String.format("exita%shelp%sexit%s", LS, LS, LS);
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        Terminus terminus = new Terminus();
+        Terminus terminus = new Terminus(new Ui(in), MainCommandParser.getInstance());
         terminus.run();
     }
     
@@ -72,6 +71,12 @@ class TerminusTest {
         terminus.initialize();
         terminus.handleCommandResult(terminus.handleUserInput("module add \"test\""));
         terminus.handleCommandResult(terminus.handleUserInput("go test"));
+        terminus.handleCommandResult(terminus.handleUserInput("note"));
+        terminus.handleCommandResult(terminus.handleUserInput("back"));
+        terminus.handleCommandResult(terminus.handleUserInput("schedule"));
+        terminus.handleCommandResult(terminus.handleUserInput("back"));
+        terminus.handleCommandResult(terminus.handleUserInput("question"));
+        terminus.handleCommandResult(terminus.handleUserInput("back"));
         terminus.handleCommandResult(terminus.handleUserInput("back"));
         terminus.handleCommandResult(terminus.handleUserInput("module delete 1"));
     }
