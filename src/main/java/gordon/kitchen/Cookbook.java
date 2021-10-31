@@ -26,6 +26,11 @@ public class Cookbook {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
+
+        if (recipes.size() == 0) {
+            return ("You have no recipes in your Cookbook.\n");
+        }
+
         for (int i = 0; i < recipes.size(); i++) {
             output.append(i + 1).append(". ");
             output.append(recipes.get(i).getName());
@@ -146,7 +151,7 @@ public class Cookbook {
      */
     public void setIngredients(String name, ArrayList<String> newIngredients) throws GordonException {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.replaceIngredients(newIngredients);
                 return;
             }
@@ -165,7 +170,7 @@ public class Cookbook {
      */
     public void setSteps(String name, ArrayList<String> newSteps) throws GordonException {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.replaceSteps(newSteps);
                 return;
             }
@@ -185,7 +190,7 @@ public class Cookbook {
      */
     public void setCalories(String name, int newCalories) throws GordonException {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.setCalories(newCalories);
                 return;
             }
@@ -207,9 +212,7 @@ public class Cookbook {
      */
     public void setTimes(String name, int prepTime, int cookTime) throws GordonException {
         for (Recipe recipe : recipes) {
-            // (?i) enables case insensitivity
-            // .* uses all characters except line break
-            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.setTimes(prepTime, cookTime);
                 return;
             }
@@ -229,7 +232,7 @@ public class Cookbook {
      */
     public void setPrice(String name, float newPrice) throws GordonException {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.setTotalPrice(newPrice);
                 return;
             }
@@ -249,9 +252,7 @@ public class Cookbook {
      */
     public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
         for (Recipe recipe : recipes) {
-            // (?i) enables case insensitivity
-            // .* uses all characters except line break
-            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+            if (recipe.getName().equalsIgnoreCase(name)) {
                 recipe.setDifficulty(newDifficulty);
                 return;
             }
@@ -262,7 +263,6 @@ public class Cookbook {
   
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
-
     /**
      * <h2>void addCookbookTag(tag).</h2>
      *
@@ -271,7 +271,6 @@ public class Cookbook {
      * @param tag  The tag to be added to cookbook
      */
     public void addCookbookTag(Tag tag) {
-        // Prevent duplicate master-Tags at Cookbook level
         if (!doesCookbookTagExists(tag.getTagName())) {
             cookbookTags.add(tag);
         }
@@ -289,7 +288,6 @@ public class Cookbook {
     }
 
     public void appendRecipeToCookbookTag(String tagName, String recipeName) {
-        // only if tag already exists in Cookbook
         try {
             Tag extractedTag = extractCookbookTag(tagName);
             extractedTag.addAssociatedRecipeName(recipeName);
@@ -299,10 +297,14 @@ public class Cookbook {
     }
 
     public void deleteRecipeFromCookbookTag(String tagName, String recipeName) {
-        // only if tag already exists in Cookbook
         try {
             Tag extractedTag = extractCookbookTag(tagName);
             extractedTag.removeAssociatedRecipeName(recipeName);
+
+            if (extractedTag.numberOfAssociatedRecipes() == 0) {
+                System.out.println(tagName + " tag will no longer have any recipes under it. Delete this tag!");
+            }
+
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }
@@ -316,7 +318,6 @@ public class Cookbook {
      */
     public void addTagToRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
-            // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
                 recipe.addTagToRecipe(tag, recipe.getName(), false);
             }
@@ -333,14 +334,15 @@ public class Cookbook {
      */
     public void untagTagFromRecipe(Tag tag, String recipeName) {
         for (Recipe recipe : recipes) {
-            // ensure that we fetch the correct Recipe
-            // ensure that Tag corresponds to correct recipe
             if (recipe.getName().equalsIgnoreCase(recipeName) && tag.containsAssociatedRecipeNames(recipe.getName())) {
                 recipe.deleteTagFromRecipe(tag);
                 tag.removeAssociatedRecipeName(recipe.getName());
+                System.out.println("Successfully untagged " + recipeName + " from " + tag.getTagName().trim());
                 return;
             }
         }
+
+        System.out.println(recipeName + " does not have " + tag.getTagName() + " as a Tag");
     }
 
     /**.
@@ -352,7 +354,6 @@ public class Cookbook {
      */
     public void deleteTagFromRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
-            // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
                 recipe.deleteTagFromRecipe(tag);
                 tag.removeAssociatedRecipeName(recipe.getName());

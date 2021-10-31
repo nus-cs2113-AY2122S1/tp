@@ -15,7 +15,10 @@ public class GordonException extends Exception {
     public static final String STEPS_FORMAT = "Please use the word '/steps' to kickstart the adding of steps.";
     public static final String CALORIES_FORMAT = "Please input a number for calories.";
     public static final String DUPLICATE_RECIPE_NAME = "No duplicate recipe names allowed.";
+    public static final String DUPLICATE_INGREDIENT_NAME = "No duplicate ingredient names allowed.";
     public static final String EMPTY_RECIPE_NAME = "Please input the name of the recipe.";
+    public static final String EMPTY_INGREDIENT = "Please ensure that EACH ingredient field is not empty.";
+    public static final String EMPTY_STEP = "Please ensure that EACH step field is not empty.";
     public static final String EMPTY_CALORIES = "Please input calories for the recipe.";
     public static final String INVALID_DIFFICULTY = "Please input a valid difficulty.";
 
