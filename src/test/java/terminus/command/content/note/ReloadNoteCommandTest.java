@@ -49,26 +49,22 @@ public class ReloadNoteCommandTest {
             String data = "test" + String.valueOf(i);
             Command addCommand = commandParser.parseCommand("add \"" + fileName + "\" \"" + data + "\"");
             CommandResult result = addCommand.execute(moduleManager);
-            String affectedModule = result.getModule();
-            StorageActionEnum storageAction = result.getStorageAction();
-            StorageTypeEnum storageType = result.getStorageType();
-            String deletedItemName = result.getDeletedItemName();
-            storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
+            storageManager.executeCommandResult(moduleManager, result);
         }
         assertEquals(3, noteContentManager.getTotalContents());
-        storageManager.execute(moduleManager, tempModule, "test1",
-                StorageActionEnum.DELETE, StorageTypeEnum.TEXT);
+        CommandResult deleteResult = new CommandResult(tempModule, StorageActionEnum.DELETE,
+                StorageTypeEnum.TEXT, "");
+        deleteResult.setDeletedItemName("test1");
+        storageManager.executeCommandResult(moduleManager, deleteResult);
         assertEquals(3, noteContentManager.getTotalContents());
         Command reloadCommand = commandParser.parseCommand("reload");
         CommandResult result = reloadCommand.execute(moduleManager);
-        String affectedModule = result.getModule();
-        StorageActionEnum storageAction = result.getStorageAction();
-        StorageTypeEnum storageType = result.getStorageType();
-        String deletedItemName = result.getDeletedItemName();
-        storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
+        storageManager.executeCommandResult(moduleManager, result);
         assertEquals(2, noteContentManager.getTotalContents());
-        storageManager.execute(moduleManager, null, tempModule,
-                StorageActionEnum.DELETE, StorageTypeEnum.FOLDER);
+        CommandResult deleteModuleResult = new CommandResult(tempModule, StorageActionEnum.DELETE,
+                StorageTypeEnum.FOLDER, "");
+        deleteModuleResult.setDeletedItemName(tempModule);
+        storageManager.executeCommandResult(moduleManager, deleteModuleResult);
     }
 
 

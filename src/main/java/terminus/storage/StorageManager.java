@@ -1,6 +1,7 @@
 package terminus.storage;
 
 import java.nio.file.Path;
+import terminus.command.CommandResult;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidFileException;
@@ -41,6 +42,31 @@ public class StorageManager {
     }
 
     /**
+     * Executes the file I/O operations in the given CommandResult.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @param result The command result from a successful command execution.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
+    public void executeCommandResult(ModuleManager moduleManager, CommandResult result) throws InvalidFileException {
+        String affectedModule = result.getModule();
+        StorageActionEnum storageAction = result.getStorageAction();
+        StorageTypeEnum storageType = result.getStorageType();
+        String deletedItemName = result.getDeletedItemName();
+        execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
+    }
+
+    /**
+     * Updates the main json file with the current ModuleManager contents.
+     *
+     * @param moduleManager The Module Manager containing all item information used in TermiNUS.
+     * @throws InvalidFileException when any file I/O operations has error.
+     */
+    public void updateMainJsonFile(ModuleManager moduleManager) throws InvalidFileException {
+        execute(moduleManager, null, null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
+    }
+
+    /**
      * Executes the file operation with their respective storage type.
      *
      * @param moduleManager The Module Manager containing all item information used in TermiNUS.
@@ -50,7 +76,7 @@ public class StorageManager {
      * @param type The storage typeof the operation.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    public void execute(ModuleManager moduleManager, String module, String deletedItem, StorageActionEnum action,
+    private void execute(ModuleManager moduleManager, String module, String deletedItem, StorageActionEnum action,
             StorageTypeEnum type)
             throws InvalidFileException {
         if (isDisabled) {

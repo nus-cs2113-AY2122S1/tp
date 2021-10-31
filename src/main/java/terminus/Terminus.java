@@ -20,10 +20,10 @@ import terminus.ui.Ui;
 public class Terminus {
 
     public static final String[] INVALID_JSON_MESSAGE = {
-        "Invalid file data detected.",
-        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-        "To save your current file, close your terminal (do not run exit).",
-        "Otherwise, you can continue using the program :)"
+            "Invalid file data detected.",
+            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+            "To save your current file, close your terminal (do not run exit).",
+            "Otherwise, you can continue using the program :)"
     };
     private Ui ui;
     private CommandParser parser;
@@ -106,17 +106,12 @@ public class Terminus {
                 // Perform related storage changes
                 if (result.hasChange()) {
                     // Pass to Storage to handle the request
-                    String affectedModule = result.getModule();
-                    StorageActionEnum storageAction = result.getStorageAction();
-                    StorageTypeEnum storageType = result.getStorageType();
-                    String deletedItemName = result.getDeletedItemName();
-                    storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
+                    storageManager.executeCommandResult(moduleManager, result);
                 }
 
                 // Update JSON File
                 TerminusLogger.info("Saving data into file...");
-                this.storageManager.execute(moduleManager, null,
-                        null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
+                this.storageManager.updateMainJsonFile(moduleManager);
                 TerminusLogger.info("Save completed.");
 
             } catch (InvalidCommandException e) {

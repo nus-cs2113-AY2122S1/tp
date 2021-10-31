@@ -1,6 +1,7 @@
 package terminus.command.content.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -29,7 +30,7 @@ public class ExportNoteCommandTest {
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-    private String tempModule = "test1";
+    private String tempModule = "test";
 
     private StorageManager storageManager;
 
@@ -47,19 +48,17 @@ public class ExportNoteCommandTest {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test" + i + "\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(moduleManager);
-            assertTrue(addResult.isOk());
+            assertTrue(addResult.hasChange());
+            assertFalse(addResult.isExit());
         }
 
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
         Command exportCommand = commandParser.parseCommand("export");
         CommandResult exportResult = exportCommand.execute(moduleManager);
-        String affectedModule = exportResult.getModule();
-        StorageActionEnum storageAction = exportResult.getStorageAction();
-        StorageTypeEnum storageType = exportResult.getStorageType();
-        String deletedItemName = exportResult.getDeletedItemName();
-        storageManager.execute(moduleManager, affectedModule, deletedItemName, storageAction, storageType);
-        assertTrue(exportResult.isOk());
+        storageManager.executeCommandResult(moduleManager,exportResult);
+        assertTrue(exportResult.hasChange());
+        assertFalse(exportResult.isExit());
         File pdf = new File(Paths.get(TestFilePath.RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
                 .toString());
         assertTrue(pdf.exists());
