@@ -334,9 +334,9 @@ ____________________________________________________________
 
 Search the ConTech Book for a contact whose details contain the specified query.
 
-Command format: `search {-n | -g | -l | -te | -tw | -e} <QUERY>`
+Command format: `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`
 
-- Up to one `flag` can be specified for queries relating to that `flag`.
+- Up to one `flag` can be specified for queries relating to that search detail.
 - If no flag is specified, the default search detail is contact name.
 - The search query is **not** case-sensitive.
 - All contacts with the specified field containing the search query will be displayed in [`view`](#view) format.
