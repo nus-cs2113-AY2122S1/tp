@@ -369,26 +369,4 @@ public class TaskManager implements Subject {
         updateObservers();
         return latestFilteredList.get(index);
     }
-
-    /*
-    //@@author SeanRobertDH
-    public void checkIndexValid(int index) throws InvalidTaskIndexException {
-        if (index < 0 || index > getTaskListSize() - 1) {
-            throw new InvalidTaskIndexException(++index);
-        }
-    }
-
-    //@@author SeanRobertDH
-    public Task deleteTask(int index) throws InvalidTaskIndexException {
-        checkIndexValid(index);
-        Task deletedTask = taskList.remove(index);
-        updateObservers(this);
-        return deletedTask;
-    }
-    */
-
-    //@@author SeanRobertDH
-    public void clear() {
-        taskList.clear();
-    }
 }
