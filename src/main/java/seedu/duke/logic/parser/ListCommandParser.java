@@ -11,7 +11,6 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
-import static seedu.duke.logic.parser.ParserUtil.isVerbose;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
@@ -67,12 +66,7 @@ public class ListCommandParser {
         return new ListTaskCommand(userResponse.toLowerCase());
     }
 
-    //@@author Roycius
     private static Command parseListModuleCommand(String userResponse) throws ParseException {
-        if (!userResponse.isBlank() && !isVerbose(userResponse)) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
-        }
-
         return new ListModuleCommand(userResponse.toLowerCase());
     }
 }
