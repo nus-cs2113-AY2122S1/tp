@@ -33,7 +33,7 @@ class DeleteCommandTest {
     }
 
 
-    void setUp() {
+    void setUp() throws DukeException {
         // Setting up
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event1 = new Event("Peppa Pig's Concert",
