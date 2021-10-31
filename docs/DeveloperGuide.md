@@ -23,6 +23,8 @@ purpose of this guide is to help developers set up and continue with the develop
     * [Architecture](#architecture)
     * [Command](#command)
     * [Utilities](#utilities)
+      * [Validator](#validator)
+      * [Storage](#storage)
     * [Inventory](#inventory)
     * [Errors](#errors)
 * [Implementation](#implementation)
@@ -138,11 +140,34 @@ Let `*` be either of the three class: `Stock`, `Prescription` or `Order`.
 
 ### Utilities
 
+#### Validator
+
 The class diagram below shows how the validator classes is implemented to help ensure that the user input is
 valid. `StockValidator`, `PrescriptionValidator` and `OrderValidator` inherits from `MedicineValidator`. The class
 methods are also shown in the diagram.
 
 ![ValidatorClassDiagram](diagrams/diagram_images/ValidatorClassDiagram.png)
+
+#### Storage
+
+The `Storage` component of MediVault is implemented for purpose of loading, storing and archiving of data. Basically, it 
+handles all file related processes necessary for MediVault to function. After every operation that modifies the stock, 
+prescription or order, data will be automatically and dynamically saved into the corresponding data files.
+
+`Storage` class is associated with `FileParser` class because during startup of MediVault, data will be loaded, 
+and validation will be done in methods in FileParser.
+
+`FileParser` class handles validation of data of the files `data/stock.txt`, `data/prescription.txt` and 
+`data/order.txt`. If it detects anything invalid, it will throw an exception with specific information about which row
+and which file the invalid data is. 
+
+> :information_source: Note:
+> * MediVault will not be able to start up until data in data files are deemed valid.
+> * This is to prevent invalid data from entering the system caused by direct tampering of data files. 
+
+The class diagram below shows the Storage component of MediVault.
+
+![StorageClassDiagram](diagrams/diagram_images/StorageClassDiagram.png)
 
 ### Inventory
 
