@@ -136,7 +136,7 @@ Expected Output:
 ```
   (+) Listing out loaned items that have to be returned today
   ========================================
-  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  [M] 58720a | LOANED (martin TILL 31-10-2021) | Time Magazine | Time USA | oct252021
   ========================================
 ```
 
@@ -151,7 +151,7 @@ Expected Output:
 ```
   (+) Listing out loaned items that are overdue
   ========================================
-  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  [B] 2551 | LOANED (johnsmith TILL 01-01-2021) | To Kill a Mockingbird | Harper Lee
   ========================================
 ```
 
@@ -212,7 +212,7 @@ Expected Output:
 ```
 > res i/2551 u/johnsmith
   (+) You have successfully reserved an item:
-  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | RESERVED (johnsmith) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Unreserve items
@@ -244,7 +244,7 @@ Expected Output:
 ```
 > loan i/2551 d/12-11-2021 u/johnsmith
   (+) Item has been loaned out:
-  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | LOANED (johnsmith TILL 12-11-2021) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Return items
