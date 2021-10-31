@@ -16,7 +16,7 @@ public class TagDeleteCommand extends Command {
     public void execute(Cookbook cookbook) {
         try {
             for (String tagName : tagNames) {
-                if (!tagName.equals(" ")) {
+                if (!tagName.trim().isEmpty()) {
                     Tag extractedTag = cookbook.extractCookbookTag(tagName.trim());
                     cookbook.deleteTagFromRecipes(extractedTag);
                     cookbook.deleteCookbookTag(extractedTag);
