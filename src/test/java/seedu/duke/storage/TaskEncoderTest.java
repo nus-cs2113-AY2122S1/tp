@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TaskEncoderTest {
 
     @Test
-    void encodeTasksList_listOfTwoTasks_expectListOfTwoStrings() {
+    void encodeTasksList_listOfTwoTasks_expectListOfTwoStrings() throws DukeException {
         // Setting up
         ArrayList<Task> tasksList = createTasksList();
         List<String> encodedTasksList = TaskEncoder.encodeTasksList(tasksList);
@@ -32,7 +33,7 @@ class TaskEncoderTest {
         assertEquals(expectedResult2, encodedTasksList.get(1));
     }
 
-    private ArrayList<Task> createTasksList() {
+    private ArrayList<Task> createTasksList() throws DukeException {
         LocalDateTime task1Deadline = Parser.convertDateTime("19-02-2022 2359");
         ArrayList<Member> memberList = new ArrayList<>();
         Task task1 = new Task("Do homework", "CS2113T tp V1.0", task1Deadline);

@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 
@@ -15,7 +16,7 @@ public class EventDecoder {
     private static final int INDEX_OF_VENUE = 5;
     private static final int INDEX_OF_BUDGET = 6;
 
-    protected static Event decodeEventFromString(String encodedEvent) {
+    protected static Event decodeEventFromString(String encodedEvent) throws DukeException {
         String[] eventDetails = encodedEvent.trim().split(Event.EVENT_DATA_ARGS_DELIMITER);
         String eventTitle = eventDetails[INDEX_OF_TITLE];
         String eventStatus = eventDetails[INDEX_OF_STATUS];

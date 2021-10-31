@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EventEncoderTest {
 
     @Test
-    void encodeEventsList_listOfTwoEvents_expectListOfTwoStrings() {
+    void encodeEventsList_listOfTwoEvents_expectListOfTwoStrings() throws DukeException {
         // Setting up
         ArrayList<Event> eventsList = createEventsList();
         List<String> encodedEventsList = EventEncoder.encodeEventsList(eventsList);
@@ -43,7 +44,7 @@ class EventEncoderTest {
      *
      * @return The generated list of events for testing with 2 events and 2 tasks in total.
      */
-    private ArrayList<Event> createEventsList() {
+    private ArrayList<Event> createEventsList() throws DukeException {
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event1 = new Event("Peppa Pig's Concert",
                 "Asia world tour", event1DateTime,
