@@ -226,7 +226,7 @@ public class Parser {
     private static String parseAddCommand(String parameters) throws SitusException {
         String[] details = parameters.split(DELIMITER);
 
-        if (details[0] != "") {
+        if (!details[0].isEmpty()) {
             throw new SitusException(INVALID_COMMAND_MESSAGE);
         }
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
