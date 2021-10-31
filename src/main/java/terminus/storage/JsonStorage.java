@@ -56,7 +56,7 @@ public class JsonStorage extends Storage {
      *
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void createJson() throws InvalidFileException {
+    protected void createJson() throws InvalidFileException {
         createFolder(baseDirectory);
         createFile(jsonFilePath);
     }
@@ -82,8 +82,19 @@ public class JsonStorage extends Storage {
      * @param moduleManager The Module Manager containing all item information used in TermiNUS.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void saveJson(ModuleManager moduleManager) throws InvalidFileException {
+    protected void saveJson(ModuleManager moduleManager) throws InvalidFileException {
+        assert moduleManager != null;
         String jsonString = gson.toJson(moduleManager);
         writeFile(jsonFilePath, jsonString);
+    }
+
+    /**
+     * Sets a new filename for the json file.
+     *
+     * @param newName The new name of the json file.
+     */
+    protected void setJsonFileName(String newName) {
+        this.jsonFileName = newName;
+        this.jsonFilePath = getAppendPath(baseDirectory, jsonFileName);
     }
 }
