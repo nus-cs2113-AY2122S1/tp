@@ -255,6 +255,24 @@ public class TagTest {
     }
 
     @Test
+    public void testUnTag_PrintMessage() {
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
+                + System.lineSeparator()
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
+                + System.lineSeparator()
+                + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
+                + System.lineSeparator()
+                + "tag / Duck Rice / Hawker Food + Poultry"
+                + System.lineSeparator()
+                + "untag / Duck Rice / Favorite"
+                + System.lineSeparator();
+
+        String expected = "Duck Rice does not have Favorite as a Tag" + System.lineSeparator();
+
+        inputOutputTest(input, expected);
+    }
+
+    @Test
     public void testDeleteTag_WrongFormat1() {
         String input = "deleteTag /";
         String expected = formatException(GordonException.DELETETAG_FORMAT_TOOSHORT);
@@ -309,4 +327,5 @@ public class TagTest {
                 + System.lineSeparator();
         inputOutputTest(input,expected);
     }
+
 }

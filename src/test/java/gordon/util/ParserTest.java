@@ -109,6 +109,55 @@ public class ParserTest {
         inputOutputTest(input, expected);
     }
 
+    @Test
+    public void testAdd_noRecipeName() {
+        String input = "addRecipe "
+                + "/ingredients Duck+Rice+Oil "
+                + "/steps Cook duck+Cook rice+Serve\n";
+
+        String expected = formatException(GordonException.EMPTY_RECIPE_NAME);
+        inputOutputTestException(input, expected);
+    }
+
+    @Test
+    public void testAdd_noIngredientEntered() {
+        String input = "addRecipe Duck Rice"
+                + "/ingredients"
+                + "/steps Cook duck+Cook rice+Serve\n";
+
+        String expected = formatException(GordonException.EMPTY_INGREDIENT);
+        inputOutputTestException(input, expected);
+    }
+
+    @Test
+    public void testAdd_IngredientFieldEmpty() {
+        String input = "addRecipe Duck Rice"
+                + "/ingredients Duck+ "
+                + "/steps Cook duck+Cook rice+Serve\n";
+
+        String expected = formatException(GordonException.EMPTY_INGREDIENT);
+        inputOutputTestException(input, expected);
+    }
+
+    @Test
+    public void testAdd_noStepsEntered() {
+        String input = "addRecipe Duck Rice"
+                + "/ingredients Duck+Rice"
+                + "/steps\n";
+
+        String expected = formatException(GordonException.EMPTY_STEP);
+        inputOutputTestException(input, expected);
+    }
+
+    @Test
+    public void testAdd_StepFieldEmpty() {
+        String input = "addRecipe Duck Rice"
+                + "/ingredients Duck+Rice"
+                + "/steps Roast Duck+ \n";
+
+        String expected = formatException(GordonException.EMPTY_STEP);
+        inputOutputTestException(input, expected);
+    }
 
     @Test
     public void testDelete() {
@@ -467,6 +516,42 @@ public class ParserTest {
                 + "2. stir fry" + System.lineSeparator()
                 + "3. serve" + System.lineSeparator()
                 + "====================" + System.lineSeparator();
+        inputOutputTest(input, expected);
+    }
+
+    @Test
+    public void testSetGranularity() {
+        String input = "addRecipe Peanut Butter Sandwich"
+                + "/ingredients Peanut+Butter+Bread"
+                + "/steps Mix them\n"
+                + "addRecipe Peanut Butter"
+                + "/ingredients Peanut+Butter"
+                + "/steps Mix them\n"
+                + "set Peanut Butter/calories 400\n"
+                + "find /calories 400\n"
+                + "exit\n";
+
+        String expected = "Added Peanut Butter Sandwich recipe! Yum!" + System.lineSeparator()
+                + "Peanut Butter Sandwich" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Peanut" + System.lineSeparator()
+                + "2. Butter" + System.lineSeparator()
+                + "3. Bread" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Mix them" + System.lineSeparator()
+                + "Added Peanut Butter recipe! Yum!" + System.lineSeparator()
+                + "Peanut Butter" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Peanut" + System.lineSeparator()
+                + "2. Butter" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Mix them" + System.lineSeparator()
+                + "Setting calories..." + System.lineSeparator()
+                + "Calories set successfully." + System.lineSeparator()
+                + "Searching by calories..." + System.lineSeparator()
+                + "1. Peanut Butter (Calories (kcal): 400)" + System.lineSeparator()
+                + "2. Peanut Butter Sandwich (Calories (kcal): Not set)" + System.lineSeparator();
+
         inputOutputTest(input, expected);
     }
 
