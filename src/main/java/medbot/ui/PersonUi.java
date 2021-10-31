@@ -24,13 +24,13 @@ public abstract class PersonUi {
 
     protected static String getViewHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "View a " + person + "’s personal information." + END_LINE
+        return "View a " + person + "'s personal information." + END_LINE
                 + "Format: view " + uppercasePerson + "_ID" + END_LINE;
     }
 
     protected static String getAddHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Add a " + person + " to the " + person + "’s list." + END_LINE
+        return "Adds a " + person + " to the " + person + " list." + END_LINE
                 + "Format:" + END_LINE
                 + "add i/" + uppercasePerson + "_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]"
                 + END_LINE;
@@ -40,7 +40,7 @@ public abstract class PersonUi {
         String uppercasePerson = capitalize(person);
         return "Edit the personal and medical information of a " + person + " in the list." + END_LINE
                 + "Format:" + END_LINE
-                + "edit " + uppercasePerson + " ID [i/" + uppercasePerson + "_IC] [n/NAME] [p/PHONE_NUMBER]"
+                + "edit " + uppercasePerson + "_ID [i/" + uppercasePerson + "_IC] [n/NAME] [p/PHONE_NUMBER]"
                 + " [e/EMAIL] [a/ADDRESS]" + END_LINE;
     }
 
@@ -55,7 +55,7 @@ public abstract class PersonUi {
 
     public static String getDeleteHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Delete a " + person + " from the list." + END_LINE
+        return "Deletes a " + person + " from the list." + END_LINE
                 + "Format:" + END_LINE
                 + "delete " + uppercasePerson + "_ID" + END_LINE;
     }
@@ -63,7 +63,7 @@ public abstract class PersonUi {
     //@@author EricBryann
     public static String getArchiveHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Archive a " + person + " from the list." + END_LINE
+        return "Archives a " + person + " from the list." + END_LINE
                 + "Format:" + END_LINE
                 + "archive " + uppercasePerson + "_ID" + END_LINE;
     }

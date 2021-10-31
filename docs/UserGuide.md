@@ -19,7 +19,7 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 ### Using MedBot
 
 1. Type in commands into the terminal and press **Enter** to execute it.
-2. Refer to the [Commands](#Commands) below for details on each command.
+2. Refer to the [Commands](#commands) below for details on each command.
 
 ## Features
 
@@ -92,25 +92,28 @@ See you again!
 
 ### Get the current view: `get view`
 
-Gets the current viewType of the program.
+Gets the current view type of the program.
 
 Format: `get view`
 
 Expected Output (when the program is in Patient's View):
 
 ```
-"You are currently in the Patient's View."
+You are currently in the Patient's View.
 ```
 
 ### Accessing user guide: `help`
 
-Provides an internal user guide that is accessible via the command line.
+Provides an internal user guide that is accessible via the command line. 
 
 Format: `help [COMMAND]`
 
+Simply typing help without parameters will display a list of commands that
+can be used in the current view.
+
 Expected Output:
 
-Inputting `help` without parameters:
+Inputting `help` without parameters in Patient's View:
 
 ```
 Here are the list of commands:
@@ -141,11 +144,11 @@ be using
 `PATIENT_INFO_VIEW`-specific examples, but these commands would apply exactly the same for the `STAFF_INFO_VIEW` as
 well.
 
-### Adding a patient/medical staff: `add`
+### Adding a patient: `add`
 
-Adds a patient/medical staff to the patient/medical staff list.
+Adds a patient to the patient list.
 
-Format: `add [i/PATIENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `add [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 At least one parameter must be provided, they can be entered in any order.
 
@@ -203,11 +206,12 @@ Address: ADDRESS
 
 ### List information of all current patients: `list`
 
-`list` will show all unarchived patients.
+List all patients in the patient list.
 
-To show archived patients, use `list -ar`
+Format: `list [-ar]`
 
-Format: list
+`list` will only show all unarchived patients. 
+To show archived patients, use `list -ar` instead.
 
 Example Output:
 
@@ -228,7 +232,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
 
 Edit the personal and medical information of a patient in the list.
 
-Format: `edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `edit PATIENT_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 Expected output:
 
@@ -273,7 +277,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
 
 ### Archive a patient: `archive`
 
-Archive a patient in the list. Archived patients are not shown with `list` command. To show all archived patients,
+Archives a patient in the list. Archived patients are not shown with `list` command. To show all archived patients,
 use `list -ar`.
 
 This command only works for currently unarchived patients.
