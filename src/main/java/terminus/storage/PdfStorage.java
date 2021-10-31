@@ -56,7 +56,8 @@ public class PdfStorage extends Storage {
      * @param module The folder name where all notes in it should be written into the pdf file.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void exportModuleNotes(ModuleManager moduleManager, String module) throws InvalidFileException {
+    protected void exportModuleNotes(ModuleManager moduleManager, String module) throws InvalidFileException {
+        assert moduleManager.getModule(module) != null;
         Document tempDocument = new Document();
         Path pdfFile = getAppendPath(baseDirectory, appendFileExtension(module));
         ContentManager<Note> contentManager = moduleManager.getModule(module).getContentManager(Note.class);
@@ -88,12 +89,8 @@ public class PdfStorage extends Storage {
             }
             tempDocument.close();
             writer.close();
-        } catch (DocumentException e) {
-            throw new InvalidFileException(Messages.FAIL_TO_EXPORT);
-        } catch (FileNotFoundException e) {
-            throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FILE, pdfFile));
         } catch (Exception e) {
-            throw new InvalidFileException(e.getMessage());
+            throw new InvalidFileException(Messages.FAIL_TO_EXPORT);
         }
     }
 
