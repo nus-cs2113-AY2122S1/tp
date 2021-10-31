@@ -8,10 +8,7 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:CommandSyntax" as commandsyntax COLOR_UTILITIES
     participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
-    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
@@ -20,21 +17,14 @@ box Inventory COLOR_INVENTORY_BOX
 end box
 autoactivate on
 
--> deleteorder: execute()
-   deleteorder -> ui: getInstance()
-   deleteorder <-- ui
-   deleteorder -> medicine : getInstance()
-   deleteorder <-- medicine
-
-opt !isInvalidParameter
-deleteorder -> commandsyntax : containsInvalidParameters()
-deleteorder <-- commandsyntax : isInvalidParameter
+mainframe sd DeleteOrderCommand
     opt isValidOrderId
     deleteorder -> ordervalidator : isValidOrderId()
     deleteorder <-- ordervalidator : isValidOrderId
-    loop medicines
-        deleteorder -> deleteorder : medicine
-        opt medicine instanceof Order
+    loop medicine : medicines
+    opt medicine instanceof Order
+
+
             deleteorder -> order : getOrderId()
             deleteorder <-- order
             opt order.getOrderId() == order.orderId
@@ -42,15 +32,10 @@ deleteorder <-- commandsyntax : isInvalidParameter
                 deleteorder <-- medicine :
             end
         end
-
     end
     end
-end
 
-    deleteorder -> storage: getInstance()
-    deleteorder <-- storage
-    deleteorder -> storage: saveData()
-    deactivate storage
+
     deactivate deleteorder
 
 @enduml
