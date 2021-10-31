@@ -64,7 +64,6 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
-
     /**
      * Returns a filtered tasklist as a {@code String}.
      * If no filter is specified, returns the entire tasklist without any filter instead.
@@ -111,9 +110,8 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
-
     /**
-     * Returns a formatted list of tasks as a {@code String}.
+     * Returns a formatted message of the list of tasks as a {@code String}.
      */
     private String getListTasklistWithFilterMessage(List<Task> filteredTasks) {
         String taskEntries = "";
@@ -263,6 +261,9 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Returns a formatted message of the next 4 recurrences of a task as a {@code String}.
+     */
     private String getListTaskRecurrenceMessage(String task, List<LocalDateTime> recurredDatesList, int numRecurrence) {
         String dates = "Listing next " + numRecurrence + " recurrences for:\n" + task + "\n";
         for (int i = 0; i < numRecurrence; i++) {
@@ -272,24 +273,41 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Returns a {@code List} of the next 4 recurrences of a to-do task.
+     *
+     * @param task To-do task to get the recurrences for.
+     * @return Next 4 recurrences of the to-do task as a {@code List}.
+     */
     private List<LocalDateTime> getToDoListOfRecurrence(Todo task) {
         LocalDateTime initialDate = task.getDoOnDate();
         return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
     }
 
     //@@author APZH
+    /**
+     * Returns a {@code List} of the next 4 recurrences of a deadline task.
+     *
+     * @param task Deadline task to get the recurrences for.
+     * @return Next 4 recurrences of the deadline task as a {@code List}.
+     */
     private List<LocalDateTime> getDeadlineListOfRecurrence(Deadline task) {
         LocalDateTime initialDate = task.getDueDate();
         return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
     }
 
     //@@author APZH
+    /**
+     * Returns a {@code List} of the next 4 recurrences of a event task.
+     *
+     * @param task Event task to get the recurrences for.
+     * @return Next 4 recurrences of the event task as a {@code List}.
+     */
     private List<LocalDateTime> getEventListOfRecurrence(Event task) {
         LocalDateTime initialDate = task.getStartDate();
         return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
     }
-
-
+    
     //@@author APZH
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
             SortFormatException, EmptySortCriteriaException {
