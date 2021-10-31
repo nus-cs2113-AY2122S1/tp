@@ -83,7 +83,7 @@ public class FilterManager {
      * @param module The module name to be tested on.
      * @return True if given module name is valid, false otherwise.
      */
-    protected boolean isModuleValid(String module) {
+    public static boolean isModuleValid(String module) {
         boolean isValid = true;
         if (CommonUtils.isStringNullOrEmpty(module)) {
             isValid = false;
@@ -98,12 +98,12 @@ public class FilterManager {
     }
 
     /**
-     * Checks if given QUestion object is valid for TermiNUS.
+     * Checks if given Question object is valid for TermiNUS.
      *
      * @param question The given question to be tested on.
      * @return True if given question object is valid, false otherwise.
      */
-    protected boolean isQuestionValid(Question question) {
+    public static boolean isQuestionValid(Question question) {
         boolean isValid = true;
         if (CommonUtils.isStringNullOrEmpty(question.getAnswer())) {
             isValid = false;
@@ -119,7 +119,7 @@ public class FilterManager {
      * @param link The given Schedule to be tested on.
      * @return True if given schedule object is valid, false otherwise.
      */
-    protected boolean isScheduleValid(Link link) {
+    public static boolean isScheduleValid(Link link) {
         boolean isValid = true;
         if (!CommonUtils.isValidDay(link.getDay())) {
             isValid = false;
