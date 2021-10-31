@@ -136,7 +136,7 @@ Expected Output:
 ```
   (+) Listing out loaned items that have to be returned today
   ========================================
-  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  [M] 58720a | LOANED (martin TILL 31-10-2021) | Time Magazine | Time USA | oct252021
   ========================================
 ```
 
@@ -151,7 +151,7 @@ Expected Output:
 ```
   (+) Listing out loaned items that are overdue
   ========================================
-  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  [B] 2551 | LOANED (johnsmith TILL 01-01-2021) | To Kill a Mockingbird | Harper Lee
   ========================================
 ```
 
@@ -197,7 +197,7 @@ Expected Output:
 ```
 > res i/2551 u/johnsmith
   (+) You have successfully reserved an item:
-  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | RESERVED (johnsmith) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Unreserve items
@@ -229,7 +229,7 @@ Expected Output:
 ```
 > loan i/2551 d/12-11-2021 u/johnsmith
   (+) Item has been loaned out:
-  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | LOANED (johnsmith TILL 12-11-2021) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Return items
@@ -305,6 +305,19 @@ You can then key in a command again.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+|Action|Purpose|Format and Examples|
+|---|---|---|
+|Add (Audio)|Add an audio item to the catalogue|`add a t/TITLE i/ID a/ARTIST d/DURATION`<br>E.g. `add a t/Thriller i/5920 a/Michael Jackson d/42:16`|
+|Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
+|Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
+|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
+|Deadline|View items due to be returned|`deadline [overdue\|today]` <br> E.g. `deadline today`|
+|Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute` <br> E.g. `edit 123 t/Harry Potter`|
+|Exit|Quit the program|`exit`|
+|List (all items)|Lists all items within the catalogue|`list`|
+|Loan|Loan out an item to someone|`loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)` <br> E.g. `loan i/2551 d/12-11-2021 u/johnsmith`|
+|Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
+|Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
+|Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
+|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search t/Time`|
+|Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|
