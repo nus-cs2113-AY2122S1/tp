@@ -2,7 +2,6 @@ package seedu.duke.model.module;
 
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
-import seedu.duke.model.module.exceptions.ModuleIndexException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -94,7 +93,7 @@ public class ModuleList {
         return moduleList;
     }
 
-    public int getTotalMcs() {
+    public int getTotalMC() {
         int totalMcs = 0;
         for (Module module : moduleList) {
             totalMcs += module.getModuleCredit();
