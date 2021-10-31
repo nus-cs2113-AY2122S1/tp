@@ -45,8 +45,7 @@ public class StonksXD {
             }
             dataManager.saveAll();
         }
-        // Commented this part to pass Github test 
-        // ui.printBye(advice);
+        //ui.printBye(advice);
     }
 
     

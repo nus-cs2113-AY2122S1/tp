@@ -304,4 +304,20 @@ public class ParserTest {
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddIncomeCommand.class);
     }
+
+    @Test
+    public void betweenIncome_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_in s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void betweenExpense_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_ex s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
 }

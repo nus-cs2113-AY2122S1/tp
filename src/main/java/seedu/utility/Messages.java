@@ -65,4 +65,7 @@ public class Messages {
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
+    public static final String DUPLICATE_EXPENSE_MESSAGE = "You have already made this expense entry!";
+    public static final String DUPLICATE_INCOME_MESSAGE = "You have already made this income entry!";
+    public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
 }
