@@ -89,11 +89,14 @@ Format: `update units i/INGREDIENT u/UNIT`
 
 - The units will be updated in both the ingredient repository and recipes.
 - If units is left blank, the units will be deleted (back to default value).
-
+- There cannot be a space between / and your input units 
 
 Example of usage:
 - `update units i/salt u/kilograms`
 - `update units i/salt u/`
+
+Example incorrect usage:
+- `update units i/salt u/ kilograms`
 
 <br/>
 
@@ -170,7 +173,7 @@ Example:
 
 ### Deleting all expired ingredients: `delete expired`
 
-Removes all expired batches of ingredients from the ingredient repository.
+Removes all expired batches (not Ingredients) of ingredients from the ingredient repository.
 
 Format: `delete expired`
 

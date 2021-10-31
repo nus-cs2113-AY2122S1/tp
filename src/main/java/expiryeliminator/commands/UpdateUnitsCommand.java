@@ -24,6 +24,7 @@ public class UpdateUnitsCommand extends Command {
             + "ingredient has been updated to %1$s.\n";
     private static final String MESSAGE_INGREDIENT_UNIT_DELETED = "The units for this "
             + "ingredient has been deleted";
+    private static final String MESSAGE_UNITS_CANNOT_BE_NUMBER = "Sorry. The units cannot be a number";
 
     private final String ingredientName;
     private final String newUnit;
@@ -45,22 +46,29 @@ public class UpdateUnitsCommand extends Command {
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         assert ingredients != null : "Ingredient repository cannot be null";
         final IngredientStorage ingredientStorage;
-        //find ingredient in ingredient repo
+        //make sure units is not an integer
         try {
-            ingredientStorage = ingredients.find(ingredientName);
-        } catch (NotFoundException e) {
-            return MESSAGE_INGREDIENT_NOT_FOUND;
-        }
-        //update units of ingredient in ingredient repo
-        ingredientStorage.updateUnits(newUnit);
-        //update units of ingredient in recipe list
-        recipes.updateUnits(ingredientName, newUnit);
+            int number = Integer.parseInt(newUnit);
+            return MESSAGE_UNITS_CANNOT_BE_NUMBER;
+        } catch (NumberFormatException e) {
+            //find ingredient in ingredient repo
+            try {
+                ingredientStorage = ingredients.find(ingredientName);
+            } catch (NotFoundException error) {
+                return MESSAGE_INGREDIENT_NOT_FOUND;
+            }
+            //update units of ingredient in ingredient repo
+            ingredientStorage.updateUnits(newUnit);
+            //update units of ingredient in recipe list
+            recipes.updateUnits(ingredientName, newUnit);
 
-        if (newUnit == null) {
-            return MESSAGE_INGREDIENT_UNIT_DELETED;
-        } else {
-            return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
+            if (newUnit == null) {
+                return MESSAGE_INGREDIENT_UNIT_DELETED;
+            } else {
+                return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
+            }
         }
+
 
 
     }

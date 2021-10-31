@@ -167,19 +167,24 @@ public class IngredientRepository {
     public String findExpiringIngredients() {
         LocalDate currentDate = LocalDate.now();
         LocalDate currentDatePlusAWeek = currentDate.plus(1, ChronoUnit.WEEKS);
-
         StringBuilder expiringIngredientsList = new StringBuilder();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
+            //create a storage to store expiring batches
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
+            boolean hasExpiringIngredients = false;
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    hasExpiringIngredients = true;
                 }
             }
-            expiringIngredientsList.append(expiredIngredientStorage);
-            expiringIngredientsList.append("\n");
+
+            if (hasExpiringIngredients) {
+                expiringIngredientsList.append(expiredIngredientStorage);
+                expiringIngredientsList.append("\n");
+            }
 
         }
         return expiringIngredientsList.toString();
@@ -192,20 +197,24 @@ public class IngredientRepository {
      */
     public String findExpiredIngredients() {
         LocalDate currentDate = LocalDate.now();
-
         StringBuilder expiredIngredientsList = new StringBuilder();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
+            //create a storage to store expired batches
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
+            boolean hasExpiredIngredients = false;
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isBefore(currentDate)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    hasExpiredIngredients = true;
                 }
             }
-            expiredIngredientsList.append(expiredIngredientStorage);
-            expiredIngredientsList.append("\n");
 
+            if (hasExpiredIngredients) {
+                expiredIngredientsList.append(expiredIngredientStorage);
+                expiredIngredientsList.append("\n");
+            }
         }
         return expiredIngredientsList.toString();
     }
