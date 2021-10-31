@@ -38,15 +38,16 @@ import seedu.duke.task.type.Todo;
 
 public class TaskManager implements Subject {
 
+    private List<Task> taskList;
+    private List<Task> latestFilteredList;
+    static final int STARTING_SIZE = 128;
+
     private static final String LIST_HEADER = "-------------\n"
             + " MY TASKLIST\n"
             + "-------------\n";
 
+    private static final int numOfRecurredDates = 4;
     private static final String DIGIT_REGEX = "^[+-]?[0-9]*$";
-
-    private List<Task> taskList;
-    private List<Task> latestFilteredList;
-    static final int STARTING_SIZE = 128;
 
     public TaskManager(DataManager dataManager) {
         taskList = dataManager.loadTaskList(STARTING_SIZE);
@@ -63,6 +64,7 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+
     /**
      * Returns a filtered tasklist as a {@code String}.
      * If no filter is specified, returns the entire tasklist without any filter instead.
@@ -109,6 +111,7 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+
     /**
      * Returns a formatted list of tasks as a {@code String}.
      */
@@ -130,14 +133,15 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+
     /**
      * Returns a {@code List} of tasks that matches the {@code taskTypeFilter}.
      *
-     * @param taskList Contains the tasklist to apply the {@code taskTypeFilter}.
+     * @param taskList       Contains the tasklist to apply the {@code taskTypeFilter}.
      * @param taskTypeFilter Contains the task type to be filtered for.
      * @return Filtered {@code List} of tasks based on task type.
      * @throws MissingFilterArgumentException If {@code taskTypeFilter} is empty.
-     * @throws InvalidTaskTypeException If {@code taskTypeFilter} is not valid.
+     * @throws InvalidTaskTypeException       If {@code taskTypeFilter} is not valid.
      */
     private List<Task> filterListByTaskType(List<Task> taskList, String taskTypeFilter)
             throws MissingFilterArgumentException, InvalidTaskTypeException {
@@ -158,14 +162,15 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+
     /**
      * Returns a {@code List} of tasks that matches the {@code priorityFilter}.
      *
-     * @param taskList Contains the tasklist to apply the {@code priorityFilter}.
+     * @param taskList       Contains the tasklist to apply the {@code priorityFilter}.
      * @param priorityFilter Contains the priority to be filtered for.
      * @return Filtered {@code List} of tasks based on priority.
      * @throws MissingFilterArgumentException If {@code priorityFilter} is empty.
-     * @throws InvalidPriorityException If {@code priorityFilter} is not valid.
+     * @throws InvalidPriorityException       If {@code priorityFilter} is not valid.
      */
     private List<Task> filterListByPriority(List<Task> taskList, String priorityFilter)
             throws MissingFilterArgumentException, InvalidPriorityException {
@@ -186,14 +191,15 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+
     /**
      * Returns a {@code List} of tasks that matches the {@code recurrenceFilter}.
      *
-     * @param taskList Contains the tasklist to apply the {@code recurrenceFilter}.
+     * @param taskList         Contains the tasklist to apply the {@code recurrenceFilter}.
      * @param recurrenceFilter Contains the type of recurrence to be filtered for.
      * @return Filtered {@code List} of tasks based on recurrence.
      * @throws MissingFilterArgumentException If {@code recurrenceFilter} is empty.
-     * @throws InvalidRecurrenceException If {@code recurrenceFilter} is not valid.
+     * @throws InvalidRecurrenceException     If {@code recurrenceFilter} is not valid.
      */
     private List<Task> filterListByRecurrence(List<Task> taskList, String recurrenceFilter)
             throws MissingFilterArgumentException, InvalidRecurrenceException {
@@ -214,20 +220,28 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Returns the next 4 recurrence of a task as a formatted {@code String}.
+     *
+     * @param parameters Contains the task ID of the task to list the recurrence.
+     * @return Returns {@code String} containing next 4 recurrences of a task.
+     * @throws EmptyTasklistException      If tasklist is empty.
+     * @throws InvalidTaskIndexException   If task ID is lesser than 0 or greater than the tasklist size.
+     * @throws ListFormatException         If the parameter 'filters' contains invalid filter flags.
+     * @throws TaskIsNonRecurringException If the task is a non-recurring task.
+     */
     public String listTaskRecurrence(Map<String, String> parameters) throws EmptyTasklistException,
             InvalidTaskIndexException, ListFormatException, TaskIsNonRecurringException {
         if (taskList.size() == 0) {
             throw new EmptyTasklistException();
         }
+
         String taskIdAsString = parameters.get(Command.MAIN_ARGUMENT);
-        int taskIndex;
-        int taskId;
-        if (taskIdAsString.matches(DIGIT_REGEX)) {
-            taskId = Integer.parseInt(taskIdAsString);
-            taskIndex = taskId - 1;
-        } else {
+        if (!taskIdAsString.matches(DIGIT_REGEX)) {
             throw new ListFormatException();
         }
+        int taskId = Integer.parseInt(taskIdAsString);
+        int taskIndex = taskId - 1;
         if (taskIndex < 0 || taskIndex > taskList.size() - 1) {
             throw new InvalidTaskIndexException(taskId);
         }
@@ -235,22 +249,14 @@ public class TaskManager implements Subject {
         if (recurValue.equals(RecurrenceEnum.NONE)) {
             throw new TaskIsNonRecurringException();
         }
-        int numOfRecurredDates = 4;
-        LocalDateTime initialDate;
-        List<LocalDateTime> recurredDatesList = new ArrayList<>();
 
+        List<LocalDateTime> recurredDatesList = new ArrayList<>();
         if (taskList.get(taskIndex) instanceof Todo) {
-            Todo task = (Todo) taskList.get(taskIndex);
-            initialDate = task.getDoOnDate();
-            recurredDatesList = task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+            recurredDatesList = getToDoListOfRecurrence((Todo) taskList.get(taskIndex));
         } else if (taskList.get(taskIndex) instanceof Deadline) {
-            Deadline task = (Deadline) taskList.get(taskIndex);
-            initialDate = task.getDueDate();
-            recurredDatesList = task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+            recurredDatesList = getDeadlineListOfRecurrence((Deadline) taskList.get(taskIndex));
         } else if (taskList.get(taskIndex) instanceof Event) {
-            Event task = (Event) taskList.get(taskIndex);
-            initialDate = task.getStartDate();
-            recurredDatesList = task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+            recurredDatesList = getEventListOfRecurrence((Event) taskList.get(taskIndex));
         }
         return getListTaskRecurrenceMessage(taskList.get(taskIndex).getTaskEntryDescription(), recurredDatesList,
                 numOfRecurredDates);
@@ -264,6 +270,25 @@ public class TaskManager implements Subject {
         }
         return LIST_HEADER + dates;
     }
+
+    //@@author APZH
+    private List<LocalDateTime> getToDoListOfRecurrence(Todo task) {
+        LocalDateTime initialDate = task.getDoOnDate();
+        return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+    }
+
+    //@@author APZH
+    private List<LocalDateTime> getDeadlineListOfRecurrence(Deadline task) {
+        LocalDateTime initialDate = task.getDueDate();
+        return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+    }
+
+    //@@author APZH
+    private List<LocalDateTime> getEventListOfRecurrence(Event task) {
+        LocalDateTime initialDate = task.getStartDate();
+        return task.getRecurrence().getNextNRecurredDates(initialDate, numOfRecurredDates);
+    }
+
 
     //@@author APZH
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
