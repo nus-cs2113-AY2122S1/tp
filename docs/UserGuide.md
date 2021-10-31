@@ -318,7 +318,7 @@ Searching by total time...
 ### 9. Tagging Functionalities
 A variety of tagging-related functions, for greater organization.
 
->#### 9.1 Adding Tags to Recipes: `tag`
+#### 9.1 Adding Tags to Recipes: `tag`
 > Tag recipes in your cookbook.
 > 
 > #### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
@@ -340,7 +340,7 @@ A variety of tagging-related functions, for greater organization.
 > Successfully tagged Duck Rice under Favorites
 > ```
  
->#### 9.2 Untagging Tags from Recipes: `untag`
+#### 9.2 Untagging Tags from Recipes: `untag`
 > Untag recipes in your cookbook.
 >
 > #### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
@@ -365,7 +365,7 @@ A variety of tagging-related functions, for greater organization.
 > Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
 > ```
 
->#### 9.3 Deleting Tags from Cookbook: `deleteTag`
+#### 9.3 Deleting Tags from Cookbook: `deleteTag`
 > Delete tags from your cookbook.
 >
 > #### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
