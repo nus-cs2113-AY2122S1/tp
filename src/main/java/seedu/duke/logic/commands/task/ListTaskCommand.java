@@ -18,7 +18,7 @@ public class ListTaskCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList) {
         if (taskList.isEmpty()) {
-            ui.printEmptyTaskList();
+            ui.printMessage("There are no tasks in the list.");
         } else if (period.isBlank()) {
             ui.printTaskList(taskList);
         } else if (period.equalsIgnoreCase("priority")) {

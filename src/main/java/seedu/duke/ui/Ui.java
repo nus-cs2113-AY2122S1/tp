@@ -200,15 +200,6 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    /**
-     * Displays a message indicating that there are no tasks in the list.
-     */
-    public void printEmptyTaskList() {
-        System.out.print(LINE);
-        System.out.println(PADDING + "There are no tasks in the list.");
-        System.out.println(LINE);
-    }
-
     public void printTasksByPriority(TaskList taskList) {
         TaskList sortedTaskList = taskList.sortTasksByPriority();
         System.out.print(LINE);
@@ -325,15 +316,6 @@ public class Ui {
             System.out.println(PADDING + "Here are the matching lessons in your list:");
             System.out.print(filteredLessonList);
         }
-        System.out.println(LINE);
-    }
-
-    /**
-     * Displays a message indicating that there are no lessons in the list.
-     */
-    public void printEmptyLessonList() {
-        System.out.print(LINE);
-        System.out.println(PADDING + "There are no lessons in the list.");
         System.out.println(LINE);
     }
 
