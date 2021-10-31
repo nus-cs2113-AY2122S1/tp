@@ -24,6 +24,7 @@ public class UpdateCommand extends Command {
     protected static final String TASK_FLAG = "task/";
     protected static final String MEMBER_FLAG = "member/";
     protected static final String REMOVE_FLAG = "remove/";
+    protected static final String ADD_FLAG = "add/";
 
     public UpdateCommand(String[] command) {
         try {
@@ -128,11 +129,32 @@ public class UpdateCommand extends Command {
             } else if (update.contains(REMOVE_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                 removeMember(attribute[1], taskToBeUpdated);
+            } else if (update.contains(ADD_FLAG)) {
+                addMember(taskToBeUpdated);
             } else {
                 System.out.println("invalid Command!");
             }
         }
         Ui.printLineBreak();
+    }
+
+    private void addMember(Task taskToBeUpdated) throws DukeException {
+        Ui.printLineBreak();
+        Ui.promptForMemberIndex();
+        boolean isCorrectMember = false;
+        while (!isCorrectMember) {
+            try {
+                isCorrectMember = isMemberUpdated(taskToBeUpdated);
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
+                throw new DukeException("This member does not exist. Please enter the index corresponding to "
+                        + "the correct member. ");
+            } catch (NumberFormatException e) {
+                Ui.printLineBreak();
+                System.out.println("Please enter the number corresponding to the member "
+                        + "you want to assign this task to. ");
+            }
+        }
     }
 
     private void removeMember(String index, Task taskToBeUpdated) {
