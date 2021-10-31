@@ -147,32 +147,44 @@ public class Module extends BaseModule {
      * @return true if all secondary conditions are matched, false otherwise.
      */
     public boolean meetsSecondaryConditions(SearchFlags searchFlags) {
-        if (searchFlags.getHasMcFlag()) {
-            if (moduleCredit != searchFlags.getMcs()) {
-                return false;
-            }
+        if (noMcMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasFacultyFlag()) {
-            if (!faculty.toLowerCase().contains((searchFlags.getFaculty().toLowerCase()))) {
-                return false;
-            }
+        if (noFacultyMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasDepartmentFlag()) {
-            if (!department.toLowerCase().contains((searchFlags.getDepartment().toLowerCase()))) {
-                return false;
-            }
+        if (noDepartmentMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasExamFlag()) {
-            if (!checkExams(searchFlags.getHasExam())) {
-                return false;
-            }
+        if (noExamMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasSemesterFlag()) {
-            if (!hasSemester(searchFlags.getSemester())) {
-                return false;
-            }
+        if (noSemesterMatch(searchFlags)) {
+            return false;
         }
         return true;
+    }
+
+    private boolean noMcMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasMcFlag() && moduleCredit != searchFlags.getMcs());
+    }
+
+    private boolean noFacultyMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasFacultyFlag()
+                && !faculty.toLowerCase().contains((searchFlags.getFaculty().toLowerCase())));
+    }
+
+    private boolean noDepartmentMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasDepartmentFlag()
+                && !department.toLowerCase().contains((searchFlags.getDepartment().toLowerCase())));
+    }
+
+    private boolean noExamMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasExamFlag() && !checkExams(searchFlags.getHasExam()));
+    }
+
+    private boolean noSemesterMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasSemesterFlag() && !hasSemester(searchFlags.getSemester()));
     }
 
     /**
