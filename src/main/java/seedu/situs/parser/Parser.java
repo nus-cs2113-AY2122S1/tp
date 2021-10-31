@@ -91,25 +91,25 @@ public class Parser {
         case COMMAND_LIST:
             return parseListCommand();
         case COMMAND_ADD:
-            return parseAddCommand(words[1]);
+            return parseAddCommand(command);
         case COMMAND_SUBTRACT:
-            return parseSubtractCommand(words[1]);
+            return parseSubtractCommand(command);
         case COMMAND_DELETE:
-            return parseDeleteCommand(words[1]);
+            return parseDeleteCommand(command);
         case COMMAND_UPDATE:
-            return parseUpdateCommand(words[1]);
+            return parseUpdateCommand(command);
         case COMMAND_DATE:
-            return parseDateCommand(words[1]);
+            return parseDateCommand(command);
         case COMMAND_HELP:
             return parseHelpCommand();
         case COMMAND_EXPIRE:
-            return parseExpireCommand(words[1]);
+            return parseExpireCommand(command);
         case COMMAND_FIND:
-            return parseFindCommand(words[1]);
+            return parseFindCommand(command);
         case COMMAND_ALERTS:
-            return parseAlertsCommand(words[1]);
+            return parseAlertsCommand(command);
         case COMMAND_SET_THRESHOLD:
-            return parseSetCommand(words[1]);
+            return parseSetCommand(command);
         case COMMAND_EXIT:
             return "";
         default:
@@ -137,17 +137,17 @@ public class Parser {
     /**
      * Parses and executes the {@code find} command.
      *
-     * @param parameters The user input parameters
+     * @param command The user input parameters
      * @return Search results for entered keywords
      * @throws SitusException If no keywords are entered
      */
-    private static String parseFindCommand(String parameters) throws SitusException {
-        String[] keywords = parameters.trim().split(SPACE_SEPARATOR);
+    private static String parseFindCommand(String command) throws SitusException {
+        String[] keywords = command.trim().substring(COMMAND_FIND.length()).split(SPACE_SEPARATOR);
         Set<String> keywordsUnique = new HashSet<>();
 
         assert (keywords != null);
 
-        for (int i = 0; i < keywords.length; i++) {
+        for (int i = 1; i < keywords.length; i++) {
             if (keywords[i].isEmpty()) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
@@ -180,11 +180,11 @@ public class Parser {
     /**
      * Parses and executes the {@code update} command.
      *
-     * @param parameters 1 line of user input
+     * @param command the user input string
      * @return Ingredient updated message
      */
-    private static String parseUpdateCommand(String parameters) throws SitusException {
-        String[] details = parameters.trim().split(UPDATE_DELIM);
+    private static String parseUpdateCommand(String command) throws SitusException {
+        String[] details = command.substring(COMMAND_UPDATE.length()).trim().split(UPDATE_DELIM);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -194,7 +194,7 @@ public class Parser {
 
         for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
-            if (details[i].equals(EMPTY_STRING)) {
+            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ")) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
@@ -220,18 +220,19 @@ public class Parser {
     /**
      * Parses and executes the {@code add} command.
      *
-     * @param parameters The user input String
+     * @param command The user input String
      * @return Ingredient added message
      */
-    private static String parseAddCommand(String parameters) throws SitusException {
-        String[] details = parameters.split(DELIMITER);
+    private static String parseAddCommand(String command) throws SitusException {
+        String[] details = command.substring(COMMAND_ADD.length()).trim().split(DELIMITER);
 
-        if (!details[0].isEmpty()) {
-            throw new SitusException(INVALID_COMMAND_MESSAGE);
-        }
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
+        if (!details[0].isEmpty()) {
+            throw new SitusException(INVALID_COMMAND_MESSAGE);
+        }
+
 
         assert (details.length == ADD_COMMAND_ARGUMENT_COUNT);
 
@@ -273,12 +274,12 @@ public class Parser {
     /**
      * Parses and executes the {@code subtract} command.
      *
-     * @param parameters the user input parameters
+     * @param command the user input string
      * @return subtracted message
      * @throws SitusException when error in subtracting
      */
-    private static String parseSubtractCommand(String parameters) throws SitusException {
-        String[] details = parameters.trim().split(SUBTRACT_DELIM);
+    private static String parseSubtractCommand(String command) throws SitusException {
+        String[] details = command.substring(COMMAND_SUBTRACT.length()).split(SUBTRACT_DELIM);
 
         if (details.length != SUBTRACT_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -288,7 +289,7 @@ public class Parser {
 
         for (int i = 0; i < SUBTRACT_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
-            if (details[i].equals(EMPTY_STRING)) {
+            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ")) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
@@ -318,16 +319,20 @@ public class Parser {
     /**
      * Calls and executes the {@code delete} command.
      *
-     * @param parameters The user input parameters
+     * @param command The user input string
      * @return Ingredient Deleted Message
      * @throws SitusException if trying to access non-existing ingredients
      */
-    private static String parseDeleteCommand(String parameters) throws SitusException {
-        String[] details = parameters.trim().split(DELETE_DELIM);
+    private static String parseDeleteCommand(String command) throws SitusException {
+        String[] details = command.substring(COMMAND_DELETE.length()).trim().split(DELETE_DELIM);
 
         if (details.length != DELETE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETER_FORMAT_MESSAGE);
         }
+        if (details[0].isEmpty()) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        }
+
 
         int[] detailsToInt = new int[2];
         try {
@@ -336,6 +341,9 @@ public class Parser {
                     throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
                 }
                 details[i] = details[i].trim();
+                if (details[i].contains(" ")) {
+                    throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+                }
                 detailsToInt[i] = Integer.parseInt(details[i]);
             }
             return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
@@ -347,76 +355,87 @@ public class Parser {
     /**
      * Parses and executes the {@code date} command.
      *
-     * @param parameter The user's input parameter
+     * @param command The user's input string
      * @return Date changed success message
      * @throws SitusException if the date format is incorrect
      */
-    private static String parseDateCommand(String parameter) throws SitusException {
-        return new DateCommand(parameter.trim()).run();
+    private static String parseDateCommand(String command) throws SitusException {
+        String detail = command.substring(COMMAND_DATE.length()).trim();
+
+        return new DateCommand(detail).run();
     }
 
     /**
      * Parses and executes the {@code expire} command.
      *
-     * @param parameter The user's input parameter
+     * @param command The user's input string
      * @return List of ingredients expiring by the specified date
      * @throws SitusException if the date format is incorrect
      */
-    private static String parseExpireCommand(String parameter) throws SitusException {
+    private static String parseExpireCommand(String command) throws SitusException {
+        String[] details = command.trim().split(SPACE_SEPARATOR);
+
         try {
-            LocalDate expireBeforeDate = Ingredient.stringToDate(parameter.trim());
+            LocalDate expireBeforeDate = Ingredient.stringToDate(details[1]);
             return new ExpireCommand(expireBeforeDate).run();
         } catch (DateTimeParseException e) {
             throw new SitusException(EXPIRY_FORMAT_ERROR_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
     }
 
     /**
      * Parses and executes the {@code alerts} command.
      *
-     * @param parameter The user's input parameter
+     * @param command The user's input parameter
      * @return The list of ingredients for each alert type
      * @throws SitusException if alert type, date format or amount format is incorrect
      */
-    private static String parseAlertsCommand(String parameter) throws SitusException {
-        switch (parameter.trim()) {
-        case "all":
-            return new AlertCommand().run();
-        case "expiry":
-            return new AlertExpiringSoonCommand().run();
-        case "stock":
-            return new AlertLowStockCommand().run();
-        default:
-            throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
+    private static String parseAlertsCommand(String command) throws SitusException {
+        String[] details = command.trim().split(SPACE_SEPARATOR);
+        try {
+            switch (details[1]) {
+            case "all":
+                return new AlertCommand().run();
+            case "expiry":
+                return new AlertExpiringSoonCommand().run();
+            case "stock":
+                return new AlertLowStockCommand().run();
+            default:
+                throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
     }
 
     /**
      * Parses and executes the {@code set} command.
      *
-     * @param parameter The user's input parameters
+     * @param command The user's input parameters
      * @return threshold successfully set message
      * @throws SitusException if threshold type, date format or amount format is incorrect
      */
-    private static String parseSetCommand(String parameter) throws SitusException {
-        String[] details = parameter.split(" ", 2);
-        if (details.length < 2) {
+    private static String parseSetCommand(String command) throws SitusException {
+        String[] details = command.trim().split(SPACE_SEPARATOR, 3);
+        if (details.length < 3) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == 2);
 
         try {
-            switch (details[0].trim()) {
+            switch (details[1].trim()) {
             case "expiry":
-                long newExpiryThreshold = Long.parseLong(details[1].trim());
+                long newExpiryThreshold = Long.parseLong(details[2].trim());
                 if (newExpiryThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
                 AlertExpiringSoonCommand.setExpiryThreshold(newExpiryThreshold);
                 return "Successfully set expiry threshold to " + newExpiryThreshold + " days";
             case "stock":
-                double newStockThreshold = Double.parseDouble(details[1].trim());
+                double newStockThreshold = Double.parseDouble(details[2].trim());
                 if (newStockThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
