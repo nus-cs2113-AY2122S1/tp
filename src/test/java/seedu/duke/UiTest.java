@@ -140,7 +140,7 @@ public class UiTest {
                 + "Your current balance is: $2018.27" + newLine
                 + SEPARATOR_LINE;
         
-        testUI.printBalance(financialTracker.getBalance());
+        testUI.printBalance(financialTracker.calculateBalance());
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -282,8 +282,8 @@ public class UiTest {
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
-                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
-                + "x   Current month ( MONTH ) total income:  $0.00                                 o is Income       x"
+                + "x   Current month ( MONTH ) total expense: $0.00                                # is Expense      x"
+                + "x   Current month ( MONTH ) total income: $0.00                                 o is Income       x"
                 + "x   Your Yearly Report                                                                             x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
