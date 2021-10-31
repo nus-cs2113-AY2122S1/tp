@@ -68,4 +68,9 @@ public class TodoFactory extends TaskFactory {
             }
         }
     }
+
+    @Override
+    public Todo getTask() throws GetTaskFailedException {
+        return (Todo) super.getTask();
+    }
 }
