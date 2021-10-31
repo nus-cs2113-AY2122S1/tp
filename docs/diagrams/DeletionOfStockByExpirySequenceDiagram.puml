@@ -30,11 +30,11 @@ loop medicine : medicines
         opt stockExpiryDate.before(date) || stockExpiryDate.equals(date)
             deleteStock -> stock : setDeleted()
             deleteStock <-- stock : setAsDeleted
-            deleteStock --> deleteStock
         end
     end
+    deleteStock --> deleteStock
+end
 deleteStock --> deleteStock
 deleteStock -> ui : print()
 deleteStock <-- ui
-end
 @enduml

@@ -86,13 +86,6 @@ public class DeleteStockCommand extends Command {
     private static void deleteStockById(Ui ui, LinkedHashMap<String, String> parameters,
                                         ArrayList<Medicine> medicines, StockValidator stockValidator) {
         String stockIdToDelete = parameters.get(CommandParameters.ID);
-        boolean isAValidStockId = stockValidator.isValidStockId(ui, stockIdToDelete, medicines);
-        if (!isAValidStockId) {
-            logger.log(Level.WARNING, "Invalid stock id is specified by user");
-            logger.log(Level.INFO, "Unsuccessful deletion of stock");
-            return;
-        }
-
         int stockId = Integer.parseInt(stockIdToDelete);
 
         assert stockId > 0 : "Stock Id should be more than 0";
