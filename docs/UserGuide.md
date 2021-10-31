@@ -284,6 +284,7 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 
 * The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
 * If the `ATTRIBUTE` of any recipe is not set, Gordon will send you an error.
+* The find command returns the Recipes with less than or equal to the attribute value given.
 
 #### Example of usage:
 
