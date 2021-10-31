@@ -1,5 +1,6 @@
 package seedu.duke.model.module;
 
+import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.module.exceptions.DeserializeModuleException;
 import seedu.duke.ui.Ui;
@@ -126,7 +127,7 @@ public class Module {
             return new Module(moduleCode, title, moduleCredit, grade);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            ui.printMessage(Messages.ERROR_DESERIALIZING_MODULE);
             return null;
         }
     }
