@@ -142,7 +142,7 @@ You now have 1 contact(s).
 ____________________________________________________________
 ```
 
-<a name="ls"></a>
+<a name="list"></a>
 ### Listing all contacts: `ls`
 
 Lists all the contacts in the ConTech Book with their indexes and names.
