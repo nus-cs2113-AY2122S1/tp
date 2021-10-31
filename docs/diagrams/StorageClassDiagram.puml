@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+' hide the circles in the diagram
+hide circle
+' hide the icons for access modifiers
+skinparam classAttributeIconSize 0
+
+Storage -> FileParser
+
+class Storage {
+    -stockFile : File
+    -prescriptionFile : File
+    -orderFile : File
+    -prescriptionArchiveFile : File
+    -orderArchiveFile : File
+
+    +saveData() : void
+    +archiveData() : void
+    +loadData() : ArrayList<Medicine>
+    -writeToFile() : void
+    -appendToFile() : void
+    -readFromFile() : ArrayList<Medicine>
+    -parseStockData() : Medicine
+    -parseOrderData() : Medicine
+    -parsePrescriptionData() : Medicine
+}
+
+class "FileParser"{
+    -stockIds : HashSet<Integer>
+    -orderIds : HashSet<Integer>
+    -prescriptionIds : Hashset<Integer>
+
+    +parseStockId() : int
+    +parseStockName() : String
+    +parseStockPrice() : Double
+    +parseStockQuantity() : int
+    +parseStockExpiry() : Date
+    +parseStockDescription() : String
+    +parseStockMaxQuantity() : int
+    +parseStockIsDeleted() : boolean
+    +parseOrderId() : int
+    +parseOrderName() : String
+    +parseOrderQuantity() : int
+    +parseOrderDate() : Date
+    +parseOrderStatus() : boolean
+    +parsePrescriptionId() : int
+    +parsePrescriptionName() : String
+    +parsePrescriptionQuantity() : int
+    +parsePrescriptionCustomerId() : String
+    +parsePrescriptionDate() : Date
+    +parsePrescriptionStaff() : String
+    +parsePrescriptionStockId() : int
+}
+
+note "The input parameters for all functions\nhas been left out to make this\ndiagram more compact." as n1
+@enduml

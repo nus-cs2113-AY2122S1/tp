@@ -11,9 +11,9 @@ import java.util.HashSet;
  * FileParser class handles all validation of input from data/stock.txt, data/order.txt, data/prescription.txt
  */
 public class FileParser {
-    public static HashSet<Integer> stockIds = new HashSet<>();
-    public static HashSet<Integer> orderIds = new HashSet<>();
-    public static HashSet<Integer> prescriptionIds = new HashSet<>();
+    private static HashSet<Integer> stockIds = new HashSet<>();
+    private static HashSet<Integer> orderIds = new HashSet<>();
+    private static HashSet<Integer> prescriptionIds = new HashSet<>();
 
     /**
      * Perform validation of Stock Id during parsing from file.
