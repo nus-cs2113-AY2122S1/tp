@@ -58,6 +58,9 @@ public class InputParser {
         //Multi param is same as one but will need to split further
         case LINK:
             String[] splitString = parameterString.split("/", 2);
+            if(splitString.length != 2) {
+                throw new FoodoramaException(ui.getMissingParameters());
+            }
             for (String param : splitString) {
                 String trimmedParam = param.trim();
                 if(trimmedParam.isBlank()) {
