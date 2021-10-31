@@ -93,11 +93,11 @@ public class Parser {
         case COMMAND_ADD:
             return parseAddCommand(words[1]);
         case COMMAND_SUBTRACT:
-            return parseSubtractCommand(command);
+            return parseSubtractCommand(words[1]);
         case COMMAND_DELETE:
             return parseDeleteCommand(words[1]);
         case COMMAND_UPDATE:
-            return parseUpdateCommand(command);
+            return parseUpdateCommand(words[1]);
         case COMMAND_DATE:
             return parseDateCommand(words[1]);
         case COMMAND_HELP:
@@ -180,11 +180,11 @@ public class Parser {
     /**
      * Parses and executes the {@code update} command.
      *
-     * @param command 1 line of user input
+     * @param parameters 1 line of user input
      * @return Ingredient updated message
      */
-    private static String parseUpdateCommand(String command) throws SitusException {
-        String[] details = command.replace(COMMAND_UPDATE, "").split(UPDATE_DELIM, 3);
+    private static String parseUpdateCommand(String parameters) throws SitusException {
+        String[] details = parameters.trim().split(UPDATE_DELIM);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -273,12 +273,12 @@ public class Parser {
     /**
      * Parses and executes the {@code subtract} command.
      *
-     * @param command the user input string
+     * @param parameters the user input parameters
      * @return subtracted message
      * @throws SitusException when error in subtracting
      */
-    private static String parseSubtractCommand(String command) throws SitusException {
-        String[] details = command.replace(COMMAND_SUBTRACT, "").split(SUBTRACT_DELIM);
+    private static String parseSubtractCommand(String parameters) throws SitusException {
+        String[] details = parameters.trim().split(SUBTRACT_DELIM);
 
         if (details.length != SUBTRACT_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
