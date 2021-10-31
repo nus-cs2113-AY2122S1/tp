@@ -147,10 +147,10 @@ public class CommandParser {
     }
 
     /**
-     * Returns all the parameters passed entered as a hashmap.
+     * Returns all the parameters entered as a LinkedHashMap.
      *
      * @param parameterString String of parameters.
-     * @return HashMap with parameter as key and parameter contents as value.
+     * @return LinkedHashMap with parameter as key and parameter contents as value.
      */
     public LinkedHashMap<String, String> parseParameters(String parameterString) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();

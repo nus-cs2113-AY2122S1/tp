@@ -9,56 +9,32 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\nUi" as ui COLOR_UTILITIES
-    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
     participant ":StockValidator" as stockvalidator COLOR_UTILITIES
-end box
-
-box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\nMedicine" as medicine COLOR_INVENTORY
 end box
 
 autoactivate on
 
--> receiveordercommand: execute()
-receiveordercommand -> ui : getInstance()
-receiveordercommand <-- ui
+mainFrame sd Logic for ReceiveOrderCommand
 
-receiveordercommand -> medicine : getInstance()
-receiveordercommand <-- medicine
+activate receiveordercommand
+receiveordercommand -> receiveordercommand : isStockParametersValid()
+receiveordercommand -> stockvalidator : new StockValidator()
+receiveordercommand <-- stockvalidator
 
-receiveordercommand -> receiveordercommand : checkOrderIdExist()
-receiveordercommand -> ordervalidator : new OrderValidator()
-receiveordercommand <-- ordervalidator
-receiveordercommand -> ordervalidator : containsInvalidParameters()
-receiveordercommand <-- ordervalidator : orderIdNotProvided
+receiveordercommand -> receiveordercommand : checkStockExist
+receiveordercommand --> receiveordercommand
+receiveordercommand -> stockvalidator : containsInvalidParameters()
+receiveordercommand <-- stockvalidator : isInvalidParameter
 
-opt !orderIdNotProvided
-    receiveordercommand -> ordervalidator : containsInvalidParameterValues()
-    receiveordercommand <-- ordervalidator
-
-    receiveordercommand --> receiveordercommand : orderIdExist
-
-    opt orderIdExist
-        receiveordercommand -> receiveordercommand : isStockParametersValid()
-        receiveordercommand -> stockvalidator : new StockValidator()
-        receiveordercommand <-- stockvalidator
-
-        receiveordercommand -> receiveordercommand : checkStockExist
-        receiveordercommand --> receiveordercommand
-        receiveordercommand -> stockvalidator : containsInvalidParameters()
-        receiveordercommand <-- stockvalidator : isInvalidParameter
-
-        opt !isInvalidParameter
-            receiveordercommand -> stockvalidator : containsInvalidParameterValues()
-            receiveordercommand <-- stockvalidator : isInvalidParameterValues
-            receiveordercommand --> receiveordercommand
-            receiveordercommand -> addstockcommand : execute()
-            deactivate addstockcommand
-        end
-
-    end
+opt !isInvalidParameter
+    receiveordercommand -> stockvalidator : containsInvalidParameterValues()
+    receiveordercommand <-- stockvalidator : isInvalidParameterValues
+    receiveordercommand --> receiveordercommand
+    receiveordercommand -> addstockcommand : execute()
+    deactivate addstockcommand
 end
+
+
 
 
 @enduml

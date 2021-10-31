@@ -9,7 +9,6 @@ end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\nUi" as ui COLOR_UTILITIES
-    participant ":*Validator" as validator COLOR_UTILITIES
     participant ":*Comparator" as comparator COLOR_UTILITIES
 end box
 
@@ -20,54 +19,40 @@ end box
 
 autoactivate on
 
--> list: execute()
-list -> ui : getInstance()
-list <-- ui
+mainFrame sd Logic for List*
 
-create validator
-list -> validator : new *Validator()
-list <-- validator
-list -> validator : containsInvalidParameters()
-list <-- validator : isInvalidParameter
+activate list
+list -> list : filter*()
 
-opt !isInvalidParameter
-    list -> medicine : getInstance()
-    list <-- medicine
-    list -> validator : containsInvalidParameterValues()
-    list <-- validator : isInvalidParameterValues
+loop parameter : parameters.keySet()
 
-    opt !isInvalidParameterValues
-        list -> list : filter*()
-
-        loop parameter : parameters.keySet()
-
-            alt parameters.equals(SORT)
-                create comparator
-                list -> comparator : new *Comparator()
-                list <-- comparator : sorted*
-                deactivate comparator
-            else parameters.equals(REVERSED_SORT)
-                create comparator
-                list -> comparator : new *Comparator()
-                list <-- comparator : reverseSorted*
-                deactivate comparator
-            else default
-                loop until end of all * objects
-                    list -> object : getAttributeValue()
-                    list <-- object
-                end
-
-            end
-
+    alt parameters.equals(SORT)
+        create comparator
+        list -> comparator : new *Comparator()
+        list <-- comparator : sorted*
+        deactivate comparator
+    else parameters.equals(REVERSED_SORT)
+        create comparator
+        list -> comparator : new *Comparator()
+        list <-- comparator : reverseSorted*
+        deactivate comparator
+    else default
+        loop until end of all * objects
+            list -> object : getAttributeValue()
+            list <-- object
         end
 
-        list --> list : filtered*
-
-        list -> ui : print*()
-        deactivate ui
     end
 
 end
+
+list --> list : filtered*
+
+list -> ui : print*()
+deactivate ui
+
+
+
 
 
 @enduml
