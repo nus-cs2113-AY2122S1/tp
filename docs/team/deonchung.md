@@ -1,0 +1,85 @@
+# Deon Chung Hui - Project Portfolio Page
+
+This is a student project for a university software development course and I am one of the contributors to `MediVault`.
+
+## Summary of Contributions
+
+Given below are my contributions to the project.
+
+Code contributed: more than 1500 lines of
+code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deonchung&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25)
+### Features
+
+#### v1.0:
+
+* Implemented `addstock` command.
+    * Functionality: Users are able to add stock information with one command.
+    * Justification: User will be able to add medication's price, quantity, maximum quantity, description and expiry date using a single command.
+    * Pull request: [[#23](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/23)]
+
+#### v2.0:
+
+* Implemented `addprescription` command.
+    * Functionality: Users are able to add prescription information with one command.
+    * Justification: Users will be able to track prescription of customers and also deducting the stock when prescribing medication.
+    * Pull request: [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)]
+
+* Implemented `deleteprescription` command.
+    * Functionality: Users are able to delete prescription information with one command.
+    * Justification: Users will be able to delete prescription from prescription list and also deducting the adding the stock quantity back to stock with a single command.
+    * Pull request: [[#147](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/147)]
+
+* Implemented `deleteorder` command.
+    * Functionality: Users are able to delete order information with one command.
+    * Justification: Users will be able to delete order from the order list.
+    * Pull request: [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
+
+### Enhancements to Existing Features
+
+* Implemented `Prescription Validator` method.
+    * Functionality: Checks if prescription ID,customer ID, Staff Name,prescription date and prescription column/alias is valid.
+    * Justification: This method can be called for any of the prescription command that need to check for any of the inputs as stated above.
+    * Pull request: [[#86](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/86)]
+
+* Implemented `Order Validator` method.
+    * Functionality: Checks if order ID, order status,order date and order column/alias is valid.
+    * Justification: This method can be called for any of the order command that need to check for any of the inputs as stated above.
+    * Pull request: [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
+
+* Included JUnit tests for:
+    * `Prescription Validator` class
+        * Pull request: [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
+    * `Order Validator` class
+        * Pull request: [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
+        
+* Added functionality for `addstock` command to limit number of medication for stock.
+    * Functionality: User will not be able to input quantity above the maximum quantity. 
+    * Justification: Prevents user from adding too much medication to the stock.
+    * Pull request: [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
+
+### Documentation
+
+* [User Guide](../UserGuide.md)
+    * Added documentation for `addstock` commands
+      . [[#96](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/96)]
+    * Added documentation for `addprescription`, `deleteprescription` and `deleteorder` commands
+      . [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+
+* [Developer Guide](../DeveloperGuide.md) 
+  * Setting up environment
+    * Added explanation on how to set up and start the program.
+     [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+  * Implementation
+      * `addstock`, `addprescription` ,`deleteprescription` and `UpdateOrderCommand` sequence diagrams and detailed explanation.
+      [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+  * User stories
+      * Added all the user stories.
+       [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
+  * Instruction for manual testing
+      * Added details and explanation for manual testing.
+       [[#258](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/258)]
+
+### Community
+
+* Pull Requests reviewed with non-trivial review comments
+  [To be continued...]
