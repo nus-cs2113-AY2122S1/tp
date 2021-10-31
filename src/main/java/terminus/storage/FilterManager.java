@@ -45,16 +45,18 @@ public class FilterManager {
      *
      * @param linkContentManager The link content manager storing the list of links from a module.
      */
-    private void filterLink(ContentManager<Link> linkContentManager) {
+    protected void filterLink(ContentManager<Link> linkContentManager) {
         if (linkContentManager == null) {
             return;
         }
         ArrayList<Link> linkArrayList = linkContentManager.getContents();
+        ArrayList<Link> validArrayList = new ArrayList<>();
         for (Link link : linkArrayList) {
-            if (!isScheduleValid(link)) {
-                linkArrayList.remove(link);
+            if (isScheduleValid(link)) {
+                validArrayList.add(link);
             }
         }
+        linkContentManager.setContent(validArrayList);
     }
 
     /**
@@ -62,16 +64,18 @@ public class FilterManager {
      *
      * @param questionContentManager The question content manager storing the list of questions from a module.
      */
-    private void filterQuestion(ContentManager<Question> questionContentManager) {
+    protected void filterQuestion(ContentManager<Question> questionContentManager) {
         if (questionContentManager == null) {
             return;
         }
         ArrayList<Question> questionArrayList = questionContentManager.getContents();
+        ArrayList<Question> validQuestionArrayList = new ArrayList<>();
         for (Question question : questionArrayList) {
-            if (!isQuestionValid(question)) {
-                questionArrayList.remove(question);
+            if (isQuestionValid(question)) {
+                validQuestionArrayList.add(question);
             }
         }
+        questionContentManager.setContent(validQuestionArrayList);
     }
 
     /**
@@ -80,7 +84,7 @@ public class FilterManager {
      * @param module The module name to be tested on.
      * @return True if given module name is valid, false otherwise.
      */
-    private boolean isModuleValid(String module) {
+    protected boolean isModuleValid(String module) {
         boolean isValid = true;
         if (CommonUtils.isStringNullOrEmpty(module)) {
             isValid = false;
@@ -100,16 +104,11 @@ public class FilterManager {
      * @param question The given question to be tested on.
      * @return True if given question object is valid, false otherwise.
      */
-    private boolean isQuestionValid(Question question) {
+    protected boolean isQuestionValid(Question question) {
         boolean isValid = true;
-        if (question == null) {
-            isValid = false;
-        } else if (CommonUtils.isStringNullOrEmpty(question.getAnswer())) {
+        if (CommonUtils.isStringNullOrEmpty(question.getAnswer())) {
             isValid = false;
         } else if (CommonUtils.isStringNullOrEmpty(question.getQuestion())) {
-            isValid = false;
-        } else if (question.getWeight() < DifficultyModifier.MIN_VALUE
-                || question.getWeight() > DifficultyModifier.MAX_VALUE) {
             isValid = false;
         }
         return isValid;
@@ -121,39 +120,10 @@ public class FilterManager {
      * @param link The given Schedule to be tested on.
      * @return True if given schedule object is valid, false otherwise.
      */
-    private boolean isScheduleValid(Link link) {
-        try {
-            ArrayList<String> arguments = new ArrayList<>();
-            arguments.add(link.getName());
-            arguments.add(link.getDay());
-            arguments.add(link.getStartTime().toString());
-            arguments.add(String.valueOf(link.getDuration()));
-            arguments.add(link.getLink());
-
-            AddLinkCommand addLinkCommand = new AddLinkCommand();
-            addLinkCommand.parseArguments(concatStringArguments(arguments));
-        } catch (Exception e) {
-            return false;
-        }
+    protected boolean isScheduleValid(Link link) {
         return true;
     }
 
-    /**
-     * Joins all elements in a given array list with double quotes.
-     *
-     * @param stringArrayList The given arraylist to be joined.
-     * @return A string joined from the given arraylist.
-     */
-    private String concatStringArguments(ArrayList<String> stringArrayList) {
-        String result = "";
-        for (String string : stringArrayList) {
-            if (string == null) {
-                return "";
-            }
-            result += "\"" + string + "\" ";
-        }
-        return result;
-    }
 
 
 }

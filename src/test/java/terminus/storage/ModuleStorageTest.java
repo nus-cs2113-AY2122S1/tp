@@ -30,6 +30,7 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
+@Deprecated
 public class ModuleStorageTest {
 
     private static final Path RESOURCE_FOLDER = Path.of("src", "test", "resources");
