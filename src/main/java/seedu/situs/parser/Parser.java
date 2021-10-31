@@ -344,14 +344,12 @@ public class Parser {
     /**
      * Parses and executes the {@code date} command.
      *
-     * @param command The user's input string
+     * @param parameter The user's input parameter
      * @return Date changed success message
      * @throws SitusException if the date format is incorrect
      */
-    private static String parseDateCommand(String command) throws SitusException {
-        String detail = command.substring(COMMAND_DATE.length()).trim();
-
-        return new DateCommand(detail).run();
+    private static String parseDateCommand(String parameter) throws SitusException {
+        return new DateCommand(parameter.trim()).run();
     }
 
     /**
