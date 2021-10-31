@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class LinkCommand extends Command {
     private static final Logger logger = Logger.getLogger("AddingDishIngrCommand.execute()");
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
 
     LinkCommand() {
         LoggerManager.setupLogger(logger);
@@ -24,7 +24,7 @@ public class LinkCommand extends Command {
 
         if (dishIndex == -1) {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
-            throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else {
             DishList.dishList.get(dishIndex).addPart(parameters.get(1));
             logger.log(Level.INFO, "Successfully added dish ingredient");

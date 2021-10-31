@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class EditDishCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditDishCommand");
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
 
     EditDishCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -28,7 +28,7 @@ public class EditDishCommand extends Command {
             String dishName = String.join(" ", parameters);
             if (dishName.isBlank()) {
                 LOGGER.log(Level.INFO, "Parameter is Empty");
-                throw new FoodoramaException(ui.getDishIndexMissingMsg());
+                throw new FoodoramaException(UI.getDishIndexMissingMsg());
             } else {
                 dishIndex = DishList.find(dishName);
                 LOGGER.log(Level.INFO, "Parameter is String '" + dishName + "'");

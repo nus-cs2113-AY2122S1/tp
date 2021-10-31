@@ -8,7 +8,7 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class SetDishLimitCommand extends Command {
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
@@ -16,7 +16,7 @@ public class SetDishLimitCommand extends Command {
         int dishIndex = DishList.find(dish);
 
         if (dishIndex == -1) {
-            throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else {
             try {
                 Dish currentDish = DishList.dishList.get(dishIndex);

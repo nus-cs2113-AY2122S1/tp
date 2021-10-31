@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class AddDishWasteCommand extends Command {
     private static Logger logger = Logger.getLogger("AddDishWasteCommand.execute()");
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
 
     AddDishWasteCommand() {
         LoggerManager.setupLogger(logger);
@@ -26,7 +26,7 @@ public class AddDishWasteCommand extends Command {
         int dishIndex = DishList.find(dish);
         if (dishIndex == -1) {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
-            throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
             try {

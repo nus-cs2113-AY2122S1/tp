@@ -8,31 +8,33 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class GraphCommand extends Command {
-    private static final Ui ui = new Ui();
+    private static final String DISH = "dish";
+    private static final String INGR = "ingr";
+    private static final Ui UI = new Ui();
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
-        case "dish":
+        case DISH:
             if (DishList.dishList.isEmpty()) {
-                throw new FoodoramaException(ui.getLineDivider() + System.lineSeparator()
+                throw new FoodoramaException(UI.getLineDivider() + System.lineSeparator()
                         + "List is empty, nothing to show" + System.lineSeparator()
-                        + ui.getLineDivider());
+                        + UI.getLineDivider());
             }
             DishList.graph();
             break;
 
-        case "ingr":
+        case INGR:
             if (IngredientList.ingredientList.isEmpty()) {
-                throw new FoodoramaException(ui.getLineDivider() + System.lineSeparator()
+                throw new FoodoramaException(UI.getLineDivider() + System.lineSeparator()
                         + "List is empty, nothing to show" + System.lineSeparator()
-                        + ui.getLineDivider());
+                        + UI.getLineDivider());
             }
             IngredientList.graph();
             break;
 
         default:
-            throw new FoodoramaException(ui.getGraphInvalidParamMsg());
+            throw new FoodoramaException(UI.getGraphInvalidParamMsg());
 
         }
     }
