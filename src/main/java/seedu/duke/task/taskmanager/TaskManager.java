@@ -353,6 +353,11 @@ public class TaskManager implements Subject {
         return latestFilteredList.get(index);
     }
 
+    public Task getFilteredTask(int index) throws InvalidTaskIndexException {
+        checkFilteredListIndexValid(index);
+        return latestFilteredList.get(index);
+    }
+
     /*
     //@@author SeanRobertDH
     public void checkIndexValid(int index) throws InvalidTaskIndexException {

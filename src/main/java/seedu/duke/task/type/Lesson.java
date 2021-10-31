@@ -7,6 +7,7 @@ import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.nusmods.Semester;
 import seedu.duke.task.RecurrenceEnum;
 
+import java.net.URI;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -17,6 +18,16 @@ import java.util.Arrays;
 public class Lesson extends Event {
 
     private int[] occurrences;
+
+    public URI getLink() {
+        return link;
+    }
+
+    public void setLink(URI link) {
+        this.link = link;
+    }
+
+    private URI link;
 
     public String getModuleCode() {
         return moduleCode;

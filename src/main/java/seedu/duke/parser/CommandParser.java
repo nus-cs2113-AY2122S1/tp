@@ -1,14 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.ByeCommand;
-import seedu.duke.command.CommandEnum;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.EditCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.SortCommand;
+import seedu.duke.command.*;
 import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
 import seedu.duke.command.addtask.ModuleCommand;
@@ -88,6 +80,8 @@ public class CommandParser {
             return new ModuleCommand(taskManager, commandOptions);
         case EDIT:
             return new EditCommand(taskManager, commandOptions);
+        case BROWSE:
+            return new BrowseCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }
