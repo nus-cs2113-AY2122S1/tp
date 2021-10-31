@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
-import seedu.duke.local.DataManager;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.taskmanager.TaskManager;

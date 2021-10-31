@@ -1,10 +1,9 @@
 package seedu.duke;
 
-import java.io.IOException;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
-import seedu.duke.local.DataManager;
+import seedu.duke.storage.DataManager;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.storage.FileCreator;
 import seedu.duke.task.reminder.ReminderManager;

@@ -1,20 +1,11 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.flags.ReminderFlag;
-import seedu.duke.local.DataManager;
-import seedu.duke.task.PriorityEnum;
-import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 import seedu.duke.task.taskmanager.TaskManager;
-import seedu.duke.task.type.Deadline;
-import seedu.duke.task.type.Event;
-import seedu.duke.task.type.Todo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

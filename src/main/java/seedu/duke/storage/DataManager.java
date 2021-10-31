@@ -1,4 +1,4 @@
-package seedu.duke.local;
+package seedu.duke.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,7 +26,7 @@ import seedu.duke.task.type.Todo;
 public class DataManager implements Observer {
 
     private static final String ERROR_MESSAGE = "Error occurred while loading task list."
-        + "Data will be overwritten when you add a task";
+        + "Data will be overwritten when you add a task.";
 
     private static final boolean DO_APPEND_TO_FILE = false;
 
