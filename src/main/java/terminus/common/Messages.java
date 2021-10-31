@@ -67,7 +67,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
     public static final String ERROR_CHANGE_FILE_NAME = "Unable to change file name";
 
-    public static final String ERROR_STORAGE_INVALID_ACTION = "Invalid storage operation detected : %s";
+    public static final String ERROR_STORAGE_INVALID_ACTION = "Invalid storage operation detected";
     public static final String ERROR_STORAGE_INVALID_TYPE = "Invalid storage type detected";
     public static final String ERROR_STORAGE_CREATE_FOLDER = "Unable to create folder : %s";
     public static final String ERROR_STORAGE_CREATE_FILE = "Unable to create file : %s";

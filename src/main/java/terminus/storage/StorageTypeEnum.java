@@ -4,5 +4,6 @@ public enum StorageTypeEnum {
     JSON,
     TEXT,
     FOLDER,
-    PDF
+    PDF,
+    TEST
 }
