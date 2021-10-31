@@ -42,7 +42,7 @@ public class EditMagazineCommand extends Command {
      * @return boolean True if any invalid arguments detected
      */
     public boolean checkInvalidArgs() {
-        HashMap<String, String> tempArgs = args;
+        HashMap<String, String> tempArgs = new HashMap<>(args);
         tempArgs.remove(null);
         if (args.containsKey(KEY_TITLE)) {
             tempArgs.remove(KEY_TITLE);

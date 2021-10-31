@@ -25,9 +25,11 @@ public class EditBookCommand extends Command {
     public void processArgs() {
         if (args.containsKey(KEY_TITLE)) {
             this.title = args.get(KEY_TITLE);
-        } else if (args.containsKey(KEY_ID)) {
+        }
+        if (args.containsKey(KEY_ID)) {
             this.id = args.get(KEY_ID);
-        } else if (args.containsKey(KEY_AUTHOR)) {
+        }
+        if (args.containsKey(KEY_AUTHOR)) {
             this.author = args.get(KEY_AUTHOR);
         }
     }
@@ -39,13 +41,15 @@ public class EditBookCommand extends Command {
      * @return boolean True if any invalid arguments detected
      */
     public boolean checkInvalidArgs() {
-        HashMap<String, String> tempArgs = args;
+        HashMap<String, String> tempArgs = new HashMap<>(args);
         tempArgs.remove(null);
         if (args.containsKey(KEY_TITLE)) {
             tempArgs.remove(KEY_TITLE);
-        } else if (args.containsKey(KEY_ID)) {
+        }
+        if (args.containsKey(KEY_ID)) {
             tempArgs.remove(KEY_ID);
-        } else if (args.containsKey(KEY_AUTHOR)) {
+        }
+        if (args.containsKey(KEY_AUTHOR)) {
             tempArgs.remove(KEY_AUTHOR);
         }
         return tempArgs.size() > 0;
@@ -79,9 +83,11 @@ public class EditBookCommand extends Command {
         }
         if (args.containsKey(KEY_TITLE)) {
             toEdit.setTitle(title);
-        } else if (args.containsKey(KEY_ID)) {
+        }
+        if (args.containsKey(KEY_ID)) {
             toEdit.setID(id);
-        } else if (args.containsKey(KEY_AUTHOR)) {
+        }
+        if (args.containsKey(KEY_AUTHOR)) {
             toEdit.setAuthor(author);
         }
         ui.print(EDIT_BOOK_MESSAGE, toEdit);
