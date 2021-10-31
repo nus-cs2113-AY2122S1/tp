@@ -98,9 +98,14 @@ public class Storage {
                     for (int i = 0; i < params.length; i++) {
                         params[i] = params[i].trim();
                     }
-                    Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
-                            Double.parseDouble(params[2]), params[4]);
-                    ingredientToAdd.setLimit(Double.parseDouble(params[3]));
+                    String ingredientName = params[0];
+                    double ingredientWeight = Double.parseDouble(params[1]);
+                    double ingredientWaste = Double.parseDouble(params[2]);
+                    double limit = Double.parseDouble(params[3]);
+                    String expiryDate = params[4];
+                    Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeight,
+                            ingredientWaste, expiryDate);
+                    ingredientToAdd.setLimit(limit);
                     IngredientList.ingredientList.add(ingredientToAdd);
                 } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeParseException ignored) {
                     System.out.println("Invalid data entry, disregarding.");
@@ -129,8 +134,12 @@ public class Storage {
                     for (int i = 0; i < params.length; i++) {
                         params[i] = params[i].trim();
                     }
-                    Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
-                    dishToAdd.setLimit(Double.parseDouble(params[3]));
+                    String dishName = params[0];
+                    double wastage = Double.parseDouble(params[1]);
+                    double ingredientContribution = Double.parseDouble(params[2]);
+                    double limit = Double.parseDouble(params[3]);
+                    Dish dishToAdd = new Dish(dishName, wastage, ingredientContribution);
+                    dishToAdd.setLimit(limit);
                     if (params.length > 4) {
                         //System.out.println("Contains constituents");
                         for (int i = 4; i < params.length; i++) {

@@ -1,8 +1,5 @@
 package seedu.foodorama.command;
 
-import seedu.foodorama.exceptions.FoodoramaException;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,7 +7,7 @@ public class RandomDishCommand extends Command {
 
     String randomDishName;
 
-    ArrayList<String> Carbohydrates = new ArrayList<>() {
+    ArrayList<String> carbohydrates = new ArrayList<>() {
         {
             add("rice");
             add("noodles");
@@ -22,7 +19,7 @@ public class RandomDishCommand extends Command {
         }
     };
 
-    ArrayList<String> Proteins = new ArrayList<>() {
+    ArrayList<String> proteins = new ArrayList<>() {
         {
             add("chicken");
             add("turkey");
@@ -35,7 +32,7 @@ public class RandomDishCommand extends Command {
         }
     };
 
-    ArrayList<String> Sauces = new ArrayList<>() {
+    ArrayList<String> sauces = new ArrayList<>() {
         {
             add("chili");
             add("tomato");
@@ -47,7 +44,7 @@ public class RandomDishCommand extends Command {
         }
     };
 
-    ArrayList<String> CookingMethods = new ArrayList<>() {
+    ArrayList<String> cookingMethods = new ArrayList<>() {
         {
             add("steamed");
             add("grilled");
@@ -62,17 +59,17 @@ public class RandomDishCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
 
-        Random random_method = new Random();
+        Random randomMethod = new Random();
 
-        int carbohydratesIndex = random_method.nextInt(Carbohydrates.size());
-        int proteinsIndex = random_method.nextInt(Proteins.size());
-        int saucesIndex = random_method.nextInt(Sauces.size());
-        int cookingMethodsIndex = random_method.nextInt(CookingMethods.size());
+        int carbohydratesIndex = randomMethod.nextInt(carbohydrates.size());
+        int proteinsIndex = randomMethod.nextInt(proteins.size());
+        int saucesIndex = randomMethod.nextInt(sauces.size());
+        int cookingMethodsIndex = randomMethod.nextInt(cookingMethods.size());
 
-        String generatedDishName = CookingMethods.get(cookingMethodsIndex) + " "
-                + Sauces.get(saucesIndex) + " "
-                + Proteins.get(proteinsIndex) + " "
-                + Carbohydrates.get(carbohydratesIndex) + " ";
+        String generatedDishName = cookingMethods.get(cookingMethodsIndex) + " "
+                + sauces.get(saucesIndex) + " "
+                + proteins.get(proteinsIndex) + " "
+                + carbohydrates.get(carbohydratesIndex) + " ";
 
         this.randomDishName = generatedDishName;
 

@@ -19,7 +19,7 @@ class AddDishIngrCommandTest {
         ArrayList<String> inputs = new ArrayList<>();
         inputs.add("chicken rice");
         inputs.add("rice");
-        AddDishIngrCommand commandToTest = new AddDishIngrCommand();
+        LinkCommand commandToTest = new LinkCommand();
         //Add the dish and ingr to link
         DishList.add("chicken rice");
         IngredientList.ingredientList.add(new Ingredient("rice", 2.34));

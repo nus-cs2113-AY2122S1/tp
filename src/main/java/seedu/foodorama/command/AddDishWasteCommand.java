@@ -24,7 +24,6 @@ public class AddDishWasteCommand extends Command {
         logger.log(Level.INFO, "Start of process");
         String dish = String.join(" ", parameters);
         int dishIndex = DishList.find(dish);
-
         if (dishIndex == -1) {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
             throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));

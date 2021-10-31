@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final String LINE_DIVIDER = "____________________________________________________________";
+    public static final String LINK_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+            + "Your command is missing parameters, pls try again" + System.lineSeparator()
+            + LINE_DIVIDER;
     private static final String START_LOGO =
             "######################################################"
                     + "##########################################################" + System.lineSeparator()
@@ -470,7 +473,7 @@ public class Ui {
     public String getIngrExistsMsg(String ingrName) {
         assert ingrName != null : "ingrName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the ingredient" + ingrName + "already exists in your list." + System.lineSeparator()
+                + "Sorry, the ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
@@ -750,6 +753,10 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Enter the limit for " + name + " in kg:" + System.lineSeparator()
                 + LINE_DIVIDER);
+    }
+
+    public String getMissingParameters() {
+        return LINK_MISSING_PARAM;
     }
 
     public String getFindMissingParamMsg() {
