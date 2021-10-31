@@ -40,22 +40,11 @@ public class AddOrderCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
         OrderValidator orderValidator = new OrderValidator();
-        boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters, optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
-        if (isInvalidParameters) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return;
-        }
-
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ADD_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        if (checkValidParameterValues(ui,parameters, medicines, requiredParameters, optionalParameter, orderValidator)) {
             return;
         }
 
@@ -101,7 +90,6 @@ public class AddOrderCommand extends Command {
                 int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
                 int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
                 int totalQuantity = existingStockQuantity + existingOrdersQuantity;
-
                 maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
 
                 if (orderQuantity + totalQuantity <= maxQuantity) {
@@ -131,11 +119,18 @@ public class AddOrderCommand extends Command {
         medicines.add(order);
         ui.print("Order added: " + name);
         ui.printOrder(order);
+
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "Successful addition of order");
     }
 
+    /**
+     *
+     * @param ui        Reference to the UI object to print messages.
+     * @param dateToAdd Order date input by user (check if it is in correct date format).
+     * @return Default date or order date.
+     */
     private Date addDate(Ui ui, String dateToAdd) {
         if (dateToAdd == null) {
             Date defaultDate = null;
@@ -151,5 +146,34 @@ public class AddOrderCommand extends Command {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     *
+     * @param ui                    Reference to the UI object to print messages.
+     * @param parameters            The parameter that is not found.
+     * @param medicines             List of all medicines.
+     * @param requiredParameters    The required parameters to check.
+     * @param optionalParameters    The optional parameters to check.
+     * @param orderValidator        Reference to OrderValidator object.
+     * @return Boolean value indicating if parameter and parameter values are valid.
+     */
+    private boolean checkValidParameterValues (Ui ui, LinkedHashMap<String, String> parameters,
+                                            ArrayList<Medicine> medicines, String[] requiredParameters,
+                                            String[] optionalParameters, OrderValidator orderValidator) {
+        boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false);
+        if (isInvalidParameters) {
+            logger.log(Level.WARNING, "Invalid parameters given by user");
+            return true;
+        }
+
+        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
+                medicines, CommandSyntax.ADD_ORDER_COMMAND);
+        if (isInvalidParameterValues) {
+            logger.log(Level.WARNING, "Invalid parameters values given by user");
+            return true;
+        }
+        return false;
     }
 }
