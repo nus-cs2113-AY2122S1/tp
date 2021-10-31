@@ -312,6 +312,21 @@ Searching by total time...
 
 ---
 
+### 9. Saving and Loading
+
+Gordon automatically saves all of your recipes to a .txt file, "saveFile.txt",
+in the same directory where you ran the app. It loads the recipes when you start up Gordon.
+
+<div markdown="span" class="alert alert-danger">
+
+:exclamation: **Warning:** It is not advised to edit the save file directly unless you are very 
+familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
+altogether, or cause errors in the main software. If the program fails to start, close the application
+and delete the save file.
+</div>
+
+---
+
 ## Cheat sheet
 
 Instruction | Command format
