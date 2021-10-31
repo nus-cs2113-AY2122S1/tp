@@ -45,6 +45,7 @@ public class StockValidator extends MedicineValidator {
                 isValid = isValidQuantity(ui, parameterValue);
                 break;
             case CommandParameters.EXPIRING:
+                // Fallthrough
             case CommandParameters.EXPIRY_DATE:
                 isValid = isValidExpiry(ui, parameterValue);
                 break;
@@ -55,6 +56,7 @@ public class StockValidator extends MedicineValidator {
                 isValid = isValidMaxQuantity(ui, parameterValue);
                 break;
             case CommandParameters.SORT:
+                // Fallthrough
             case CommandParameters.REVERSED_SORT:
                 isValid = isValidColumn(ui, parameterValue);
                 break;

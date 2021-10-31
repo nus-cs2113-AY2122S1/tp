@@ -60,47 +60,43 @@ public class ReceiveOrderCommand extends Command {
             return;
         }
 
+        assert (existingOrder != null) : "Order object is not initialised!";
+        int currentQuantity = getCurrentQuantity(medicines, name);
+
         new AddStockCommand(parameters).execute(); // Add to stock
 
-        assert (existingOrder != null) : "Order object is not initialised!";
-        boolean expiryExist = isExpiryExist(medicines, name);
+        int afterAddedQuantity = getCurrentQuantity(medicines, name);
 
-        if (expiryExist) {
+        // Check if quantity increased
+        if (afterAddedQuantity > currentQuantity) {
             existingOrder.setDelivered();
-            return;
-        }
-
-        int currentStockCount = Stock.getStockCount();
-
-        if (Stock.getStockCount() == currentStockCount + 1) { // The stock was added
-            existingOrder.setDelivered(); // Set order as completed
         }
     }
 
     /**
-     * Check if same medication name and expiry date exist.
+     * Check if same medication name and expiry date exist and returns the current quantity.
      *
      * @param medicines Arraylist of all medicines.
      * @param name Medication name to be searched.
-     * @return Boolean value indicating if the same medication name and same expiry date exists.
+     * @return Integer value indicating the current quantity.
      */
-    private boolean isExpiryExist(ArrayList<Medicine> medicines, String name) {
-        boolean expiryExist = false;
+    private int getCurrentQuantity(ArrayList<Medicine> medicines, String name) {
+        int currentQuantity = 0;
         String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
-        Date formatExpiry = null;
+        Date expiryDate = null;
         try {
-            formatExpiry = DateParser.stringToDate(expiryToAdd);
+            expiryDate = DateParser.stringToDate(expiryToAdd);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(name)
-                    && !((Stock) medicine).isDeleted() && ((Stock) medicine).getExpiry().equals(formatExpiry)) {
-                expiryExist = true;
+                    && !((Stock) medicine).isDeleted() && ((Stock) medicine).getExpiry().equals(expiryDate)) {
+                currentQuantity = medicine.getQuantity();
                 break;
             }
         }
-        return expiryExist;
+        return currentQuantity;
     }
 
     /**

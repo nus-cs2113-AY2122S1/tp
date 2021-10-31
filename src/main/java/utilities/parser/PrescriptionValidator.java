@@ -56,6 +56,7 @@ public class PrescriptionValidator extends MedicineValidator {
                 isValid = stockValidator.isValidStockId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.SORT:
+                // Fallthrough
             case CommandParameters.REVERSED_SORT:
                 isValid = isValidColumn(ui, parameterValue);
                 break;

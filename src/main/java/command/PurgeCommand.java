@@ -1,6 +1,9 @@
 package command;
 
 import inventory.Medicine;
+import inventory.Order;
+import inventory.Prescription;
+import inventory.Stock;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
 
@@ -23,6 +26,10 @@ public class PurgeCommand extends Command {
         Scanner in = new Scanner(System.in);
         if ("Y".equals(in.nextLine())) {
             medicines.clear();
+            // Reset the IDs for Stock, Prescription and Orders
+            Stock.setStockCount(0);
+            Prescription.setPrescriptionCount(0);
+            Order.setOrderCount(0);
             ui.print("All data has been cleared!");
             storage.saveData(medicines);
         } else {

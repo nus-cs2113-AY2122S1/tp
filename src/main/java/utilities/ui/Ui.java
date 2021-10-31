@@ -278,7 +278,8 @@ public class Ui {
      * @return The centralised string.
      */
     private String centerString(int width, String s) {
-        return String.format("%-" + width + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
+        int middleIndex = (s.length() + (width - s.length()) / 2);
+        return String.format("%-" + width + "s", String.format("%" + middleIndex + "s", s));
     }
 
     /**

@@ -63,6 +63,7 @@ public class CommandParser {
     }
 
     private static final String DELIMITER = "/";
+    private static final String SPACE_DELIMITER = "\\s+";
 
     /**
      * Processes the user input into a Command Object.
@@ -133,7 +134,7 @@ public class CommandParser {
      */
     public String[] parseCommand(String userInput) {
         // Splits user input by spaces
-        String[] userInputSplit = userInput.split("\\s+", 2);
+        String[] userInputSplit = userInput.trim().split(SPACE_DELIMITER, 2);
 
         assert (userInputSplit.length <= 2) : "Command extraction failed! More than 2 values were returned!";
 
@@ -146,10 +147,10 @@ public class CommandParser {
     }
 
     /**
-     * Returns all the parameters passed entered as a hashmap.
+     * Returns all the parameters entered as a LinkedHashMap.
      *
      * @param parameterString String of parameters.
-     * @return HashMap with parameter as key and parameter contents as value.
+     * @return LinkedHashMap with parameter as key and parameter contents as value.
      */
     public LinkedHashMap<String, String> parseParameters(String parameterString) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
@@ -158,7 +159,7 @@ public class CommandParser {
             return parameters;
         }
 
-        String[] parameterSplit = parameterString.split("\\s+"); // Split by space
+        String[] parameterSplit = parameterString.split(SPACE_DELIMITER); // Split by space
 
         String commandParameter = "";
         StringBuilder parameterContents = new StringBuilder();
@@ -213,4 +214,5 @@ public class CommandParser {
         }
         return newMode;
     }
+
 }
