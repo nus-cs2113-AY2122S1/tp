@@ -19,7 +19,6 @@ end box
 
 autoactivate on
 
-mainFrame sd Logic for MediVault
 -> medivault: run()
     medivault -> uiclass : getInstance()
     medivault <-- uiclass
