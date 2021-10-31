@@ -35,8 +35,7 @@ public class DataManager implements Observer {
     private Gson gson;
     private List<Task> taskList;
 
-    public DataManager() {
-        FileCreator fileCreator = new FileCreator();
+    public DataManager(FileCreator fileCreator) {
         taskFile = fileCreator.getTaskFile();
         diaryFile = fileCreator.getDiaryFile();
 
