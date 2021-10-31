@@ -91,7 +91,7 @@ public class Parser {
         case COMMAND_LIST:
             return parseListCommand();
         case COMMAND_ADD:
-            return parseAddCommand(command);
+            return parseAddCommand(words[1]);
         case COMMAND_SUBTRACT:
             return parseSubtractCommand(command);
         case COMMAND_DELETE:
@@ -99,13 +99,13 @@ public class Parser {
         case COMMAND_UPDATE:
             return parseUpdateCommand(command);
         case COMMAND_DATE:
-            return parseDateCommand(command);
+            return parseDateCommand(words[1]);
         case COMMAND_HELP:
             return parseHelpCommand();
         case COMMAND_EXPIRE:
             return parseExpireCommand(words[1]);
         case COMMAND_FIND:
-            return parseFindCommand(command);
+            return parseFindCommand(words[1]);
         case COMMAND_ALERTS:
             return parseAlertsCommand(words[1]);
         case COMMAND_SET_THRESHOLD:
