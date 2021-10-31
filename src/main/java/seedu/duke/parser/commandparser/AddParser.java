@@ -3,12 +3,17 @@ package seedu.duke.parser.commandparser;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.ItemAttribute;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public abstract class AddParser extends Parser {
 
@@ -32,9 +37,9 @@ public abstract class AddParser extends Parser {
                 String[] parsedAttributes = parseAddEvent(commandDetails);
                 assert parsedAttributes != null : "parseAddEvent failed";
                 String title = parsedAttributes[INDEX_OF_TITLE];
-                String dateTime = parsedAttributes[INDEX_OF_DATETIME];
+                LocalDateTime dateTime = convertDateTime(parsedAttributes[INDEX_OF_DATETIME]);
                 String venue = parsedAttributes[INDEX_OF_VENUE];
-                String budget = parsedAttributes[INDEX_OF_BUDGET];
+                Double budget = convertEventBudgetToDouble(parsedAttributes[INDEX_OF_BUDGET]);
                 String description = Ui.readInput().trim();
                 // TODO: Create relevant constructor for AddEventCommand and return it.
                 // return new AddEventCommand(title, dateTime, venue, budget);
@@ -51,6 +56,8 @@ public abstract class AddParser extends Parser {
         } catch (InvalidItemTypeException e) {
             System.out.println("Having some trouble understanding what exactly you're trying to add!\n"
                     + "TIP: Specify event '-e', task '-t', or member '-m' after the 'add' command.");
+        } catch (InvalidBudgetException | DukeException e) {
+            System.out.println(e.getMessage());
         }
 
         return null;
@@ -96,5 +103,35 @@ public abstract class AddParser extends Parser {
 
     private static String[] parsedAddMember(String commandDetails) {
         return null;
+    }
+
+    /**
+     * Converts a budget as a string and formats it into a double.
+     *
+     * @param budget The budget provided as a String
+     * @return The converted budget as a double
+     * @throws InvalidBudgetException If the provided budget converts into a negative number of has more than 2 decimals
+     */
+    private double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
+        Double result = null;
+        try {
+            result = Double.parseDouble(budget);
+            if (result < 0) {
+                throw new InvalidBudgetException("Event budget needs to be a positive number.");
+            }
+
+            if (BigDecimal.valueOf(result).scale() > 2) {
+                throw new InvalidBudgetException("Event budget cannot have more than 2 decimal places.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Event budget needs to be a number.");
+        }
+
+        // If conditional checks above fail internally, result will remain null. Throw exception
+        if (result == null) {
+            throw new InvalidBudgetException("Event budget is null!");
+        }
+
+        return result;
     }
 }

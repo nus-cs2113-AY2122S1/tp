@@ -145,8 +145,13 @@ public abstract class Parser {
         return dateTime.format(formatter2);
     }
 
-    public static LocalDateTime convertDateTime(String dateTime) {
-        return LocalDateTime.parse(dateTime, formatter1);
+    public static LocalDateTime convertDateTime(String dateTime) throws DukeException {
+        LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
+        if (result.isBefore(LocalDateTime.now())) {
+            throw new DukeException("Unfortunately, we cannot travel back in time. Please "
+                    + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+        }
+        return result;
     }
 
     public static String convertDateTimeForSaving(LocalDateTime dateTime) {
