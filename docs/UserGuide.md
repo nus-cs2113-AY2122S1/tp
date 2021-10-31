@@ -405,7 +405,7 @@ __________________________________________________________________________
 
 ## View Unofficial Transcript : `transcript`
 
-You can view your Unofficial Transcript to get an idea of your degree progress.This will disaply the modules you have
+You can view your Unofficial Transcript to get an idea of your degree progress.This will display the modules you have
 completed and their corresponding grades. The total number of credits completed and the CAP will also be displayed.
 
 You can type `transcript` to view your Unofficial Transcript.
@@ -446,10 +446,12 @@ __________________________________________________________________________
 
 # FAQ
 
-**Q**: How do I save my timetable so I don’t have to add all my modules again?</br>
+**Q**: How do I save my timetable so I don’t have to add all my modules again?
+<br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
-**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?</br>
+**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?
+<br>
 **A**: Stay tuned for v2.0!
 
 <br>
@@ -460,13 +462,13 @@ __________________________________________________________________________
 
 | Command                   | Meaning                                                                                           |
 | --------------            | ----------                                                                                        |
-| `help`                    | Shows available commands and flags. </br> Example: `help`                                         |
+| `help`                    | Shows available commands and flags. <br> Example: `help`                                         |
 | `search <KEYWORDd> [-l]`  | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
-| `show <MODULE_CODE>`      | Display relevant module information. </br> Example: `show CS2113T`                                |
-| `add <MODULE_CODE>`       | Adds the module to the timetable. </br> Example: `add CS2113T`                                    |
-| `delete <MODULE_CODE>`    | Deletes the module from the timetable. </br> Example: `delete CS2113T`                            |
-| `clear`                   | Deletes all modules from the timetable. </br> Example: `clear`                                    |
-| `timetable`               | Displays timetable with total MCs taken. </br> Example: `timetable`                               |
-| `exit`                    | Exit the application. </br> Example:`exit`                                                        |
+| `show <MODULE_CODE>`      | Display relevant module information. <br> Example: `show CS2113T`                                |
+| `add <MODULE_CODE>`       | Adds the module to the timetable. <br> Example: `add CS2113T`                                    |
+| `delete <MODULE_CODE>`    | Deletes the module from the timetable. <br> Example: `delete CS2113T`                            |
+| `clear`                   | Deletes all modules from the timetable. <br> Example: `clear`                                    |
+| `timetable`               | Displays timetable with total MCs taken. <br> Example: `timetable`                               |
+| `exit`                    | Exit the application. <br> Example:`exit`                                                        |
 
 ---
