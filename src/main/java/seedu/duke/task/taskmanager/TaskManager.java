@@ -354,6 +354,9 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Custom comparator used by sortTasklist() to sort the tasklist by task type.
+     */
     private class SortByTaskType implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -362,6 +365,9 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Custom comparator used by sortTasklist() to sort the tasklist lexicographically.
+     */
     private class SortByDescription implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -370,6 +376,9 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
+    /**
+     * Custom comparator used by sortTasklist() to sort the tasklist by task priority.
+     */
     private class SortByPriority implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
