@@ -26,6 +26,8 @@ public class Constants {
     // Flags
     public static final String FLAG_UNIVERSITY = "/uni";
     public static final String FLAG_MODULE = "/mod";
+    public static final String FLAG_MODULE_CODE = "/modc";
+    public static final String FLAG_MODULE_NAME = "/modn";
     public static final String FLAG_MAP = "/map";
     public static final String FLAG_MASTER_UNIVERSITYLIST = "/muni";
     public static final String FLAG_SELECTED_UNIVERSITYLIST = "/suni";

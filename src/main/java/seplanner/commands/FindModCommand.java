@@ -1,5 +1,6 @@
 package seplanner.commands;
 
+import seplanner.enumerations.FindModInputType;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.ui.UiInvalid;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 
 public class FindModCommand extends Command {
 
-    public FindModCommand(String userInput, ModuleList moduleMasterList) {
+    public FindModCommand(String userInput, ModuleList moduleMasterList, FindModInputType type) {
         ArrayList<Module> result = (ArrayList<Module>) moduleMasterList.getList().stream()
-                .filter((module) -> module.getModuleCode().toLowerCase().contains(userInput.toLowerCase()))
+                .filter((module) ->
+                (((type == FindModInputType.MODULECODE) ? module.getModuleCode() : module.getModuleName())
+                .toLowerCase().contains(userInput.toLowerCase())))
                 .collect(Collectors.toList());
         if (result.size() == 0) {
             UiInvalid.printFindModNull();
@@ -22,4 +25,6 @@ public class FindModCommand extends Command {
             }
         }
     }
+
 }
+
