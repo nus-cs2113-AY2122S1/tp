@@ -33,4 +33,8 @@ public class Tag {
     public void removeAssociatedRecipeName(String recipeName) {
         associatedRecipeNames.remove(recipeName);
     }
+
+    public int numberOfAssociatedRecipes() {
+        return this.associatedRecipeNames.size();
+    }
 }

@@ -1,6 +1,7 @@
 package gordon.util;
 
 import gordon.command.Command;
+import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,31 @@ public class ParserTest {
         }
 
         assertEquals(expected, actual.toString());
+    }
+
+    public void inputOutputTestException(String input, String expected) {
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        ByteArrayOutputStream actual = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actual));
+
+        Parser parser = new Parser();
+        Cookbook cookbook = new Cookbook();
+
+        while (parser.parserHasNextLine()) {
+            actual.reset();
+            parser.parseNextLine();
+            Command command = parser.parseMaster();
+            command.execute(cookbook);
+        }
+
+        assertEquals(expected, actual.toString());
+    }
+
+    public String formatException(String exceptionMessage) {
+        return ("GordonException: "
+                + exceptionMessage
+                + System.lineSeparator());
     }
 
     @Test
@@ -320,8 +346,8 @@ public class ParserTest {
                 + "/steps Cook pasta + Stir fry "
                 + "/calories 666\n"
                 + "set bolognese /difficulty easy\n"
-                + "set Aglio /difficulty gordon\n"
-                + "set Aglio /difficulty medium\n"
+                + "set Aglio Olio /difficulty gordon\n"
+                + "set Aglio Olio /difficulty medium\n"
                 + "check Aglio\n"
                 + "exit\n";
         String expected = "Added Aglio Olio recipe! Yum!" + System.lineSeparator()
@@ -359,8 +385,8 @@ public class ParserTest {
                 + "/ingredients Hot water + Noodles + Seasoning "
                 + "/steps Boil water + Add noodles + Add seasoning and serve\n"
                 + "set salami /price 69.69\n"
-                + "set Myojo /price dirt cheap\n"
-                + "set Myojo /price 0.99999999\n"
+                + "set Myojo Noodles/price dirt cheap\n"
+                + "set Myojo Noodles/price 0.99999999\n"
                 + "check Myojo\n"
                 + "exit\n";
         String expected = "Added Myojo Noodles recipe! Yum!" + System.lineSeparator()
@@ -402,9 +428,9 @@ public class ParserTest {
                 + "/ingredients Bee hoon + Eggs + Sauce "
                 + "/steps Cook bee hoon + stir fry + serve\n"
                 + "set salami /time 05 55\n"
-                + "set Bee Hoon /time 10, 20, 30, 40, 50, 60, 70\n"
-                + "set Bee Hoon /time too long\n"
-                + "set Bee Hoon /time 69, 420\n"
+                + "set Bee Hoon Goreng /time 10, 20, 30, 40, 50, 60, 70\n"
+                + "set Bee Hoon Goreng /time too long\n"
+                + "set Bee Hoon Goreng /time 69, 420\n"
                 + "check Bee Hoon\n"
                 + "exit\n";
         String expected = "Added Bee Hoon Goreng recipe! Yum!" + System.lineSeparator()
@@ -720,5 +746,14 @@ public class ParserTest {
                 + "1. recipeB (Total Time: 55)" + System.lineSeparator()
                 + "2. recipeC (Total Time: Not set)" + System.lineSeparator();
         inputOutputTest(input, expected);
+    }
+
+    @Test
+    public void testNoDuplicateIngredients() {
+        String input = "addRecipe recipeA "
+                + "/ingredients a+b+a "
+                + "/steps a+b+c\n";
+        String expected = formatException(GordonException.DUPLICATE_INGREDIENT_NAME);
+        inputOutputTestException(input, expected);
     }
 }
