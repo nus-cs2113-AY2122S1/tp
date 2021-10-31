@@ -4,7 +4,7 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":AddOrder" as addorder COLOR_COMMAND
+    participant ":AddOrderCommand" as addorder COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
