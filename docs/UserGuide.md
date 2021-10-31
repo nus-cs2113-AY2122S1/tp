@@ -594,6 +594,32 @@ $ exit
 
 Data from NUS Buddy is automatically saved on your local machine.
 
+Tasks are stored in `tasks.txt`, lessons are stored in `lessons.txt`, and modules are stored in `modules.txt`.
+
+All save files use one line for each task, lesson or module.
+
+The format of the save files is as follows:
+
+Tasks:
+
+```text
+[Completion status] | [Task title] | [Day of the week] | [Priority] | [Information]
+```
+
+Lessons:
+
+```text
+[Lesson title] | [Day of the week] | [Start time] | [End time] | [Lesson URL]
+```
+
+Modules:
+
+```text
+[Module code] | [Module title] | [Number of MCs] | [Grade]
+```
+
+> ❗ You can edit the save files using a text editor, if you wish to do so. However, do note that if the save files are edited in a way that causes the data to be invalid, NUS Buddy will discard the invalid data, which may cause data loss. 
+
 ## FAQ
 
 **Q:** How do I transfer my data to another Computer?<br>
