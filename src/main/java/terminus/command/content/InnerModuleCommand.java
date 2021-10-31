@@ -22,7 +22,7 @@ public abstract class InnerModuleCommand extends WorkspaceCommand {
     @Override
     public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
-        commandMap.setModuleName(getModuleName());
+        commandMap.setModuleName(getModuleName().toUpperCase());
         try {
             return super.execute(moduleManager);
         } catch (InvalidArgumentException e) {
