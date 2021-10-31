@@ -179,6 +179,7 @@ public abstract class Person implements ListItem {
     }
 
     //@@author
+
     /**
      * Text to be written to storage file of a person.
      *
@@ -190,7 +191,8 @@ public abstract class Person implements ListItem {
                 + setAsStorageParameterOrNull(name) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
-                + setAsStorageParameterOrNull(residentialAddress);
+                + setAsStorageParameterOrNull(residentialAddress) + VERTICAL_LINE_SPACED
+                + getArchiveStatusStorageString(isArchived);
     }
 
     /**
@@ -280,5 +282,15 @@ public abstract class Person implements ListItem {
      */
     protected String setAsStorageParameterOrNull(String parameter) {
         return (parameter == null || parameter.isBlank()) ? "X" : parameter;
+    }
+
+    /**
+     * Return "A" if person is archived, "U" otherwise.
+     *
+     * @param isArchived whether person is archived or not
+     * @return "A" is person is archived, "U" otherwise
+     */
+    protected String getArchiveStatusStorageString(boolean isArchived) {
+        return (isArchived) ? "A" : "U";
     }
 }

@@ -7,13 +7,11 @@ import medbot.list.ListItem;
 import medbot.list.ListItemType;
 import medbot.person.Patient;
 import medbot.person.Staff;
-import medbot.utilities.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Math.max;
@@ -125,35 +123,6 @@ public abstract class Storage {
 
 
     /**
-     * Parse a line from the storage file by splitting its constituent parts.
-     *
-     * @param storageLine a line from the storage file
-     * @return listItem details, consisting of person ID and other parameters
-     */
-    protected Pair<Integer, ArrayList<String>> parseStorageLine(String storageLine, String[] parameterPrefixes) {
-        if (storageLine.isBlank()) {
-            return null;
-        }
-
-        String[] listItemParameters = splitStorageLine(storageLine);
-        ArrayList<String> prefixPlusListItemParameters = new ArrayList<>();
-        Integer listItemId = Integer.parseInt(listItemParameters[0]);
-
-        for (int i = 0; i < parameterPrefixes.length; i++) {
-            // i + 1, since listItemParameters[0] is the listItemId
-            if (isStorageParameterNull(listItemParameters[i + 1])) {
-                continue;
-            }
-            // i + 1, since listItemParameters[0] is the listItemId
-            String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
-            prefixPlusListItemParameters.add(prefixPlusListItemParameter);
-        }
-        assert listItemParameters.length == parameterPrefixes.length + 1;
-
-        return new Pair<>(listItemId, prefixPlusListItemParameters);
-    }
-
-    /**
      * String split a line with " | " as the delimiters.
      *
      * @param storageLine a line in storage file
@@ -192,6 +161,7 @@ public abstract class Storage {
      * @return a ListItem interfaced object
      * @throws MedBotException if a ListItem object fails to be created
      */
-    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException;
+    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws
+            MedBotException;
 }
 

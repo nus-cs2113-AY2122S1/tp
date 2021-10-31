@@ -1,4 +1,4 @@
-1 | S5123123A | Doctor One | 81818181 | doctor1@mail.com | American Gardens Building
-2 | X | Doctor Two | 91919191 | herrdoktor@mail.com | Gotham Street
-6 | F6123123C | Nurse One | X | X | Little Root County
-7 | F2123123D | Nurse Two | X | nurse2@mail.com | Petalburg City
+1 | S5123123A | Doctor One | 81818181 | doctor1@mail.com | American Gardens Building | U
+2 | X | Doctor Two | 91919191 | herrdoktor@mail.com | Gotham Street | U
+6 | F6123123C | Nurse One | X | X | Little Root County | U
+7 | F2123123D | Nurse Two | X | nurse2@mail.com | Petalburg City | U
