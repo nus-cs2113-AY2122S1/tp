@@ -281,42 +281,42 @@ public class UiTest {
         testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
+    /*
+    @Test
+    public void printGraph_validStonksGraph_printCorrectGraph() {
+        //empty financialtracker
+        StonksGraph stonksGraph = new StonksGraph(financialTracker);
+        String expectedOutput = SEPARATOR_LINE
+                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                + "x                                                                                                  x"
+                + "x   Account Balance: $0.00                                                 Legend:                 x"
+                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
+                + "x   Current month ( MONTH ) total income:  $0.00                                 o is Income       x"
+                + "x   Your Yearly Report                                                                             x"
+                + "x ------------------------------------------------------------------------------------------------ x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x"
+                + "x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x"
+                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                + SEPARATOR_LINE;
+        testUI.printGraph(stonksGraph);
 
-//    @Test
-//    public void printGraph_validStonksGraph_printCorrectGraph() {
-//        //empty financialtracker
-//        StonksGraph stonksGraph = new StonksGraph(financialTracker);
-//        String expectedOutput = SEPARATOR_LINE
-//                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-//                + "x                                                                                                  x"
-//                + "x   Account Balance: $0.00                                                 Legend:                 x"
-//                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
-//                + "x   Current month ( MONTH ) total income:  $0.00                                 o is Income       x"
-//                + "x   Your Yearly Report                                                                             x"
-//                + "x ------------------------------------------------------------------------------------------------ x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x                                                                                                  x"
-//                + "x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x"
-//                + "x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x"
-//                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-//                + SEPARATOR_LINE;
-//        testUI.printGraph(stonksGraph);
-//
-//        String fullOutput = outputStreamCaptor.toString().trim();
-//        String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
-//        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("\\(.*?\\)","( MONTH )");
-//
-//        assertEquals(expectedOutput, outputToBeTested);
-//    }
+        String fullOutput = outputStreamCaptor.toString().trim();
+        String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
+        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("\\(.*?\\)","( MONTH )");
 
+        assertEquals(expectedOutput, outputToBeTested);
+    }
+    */
     @Test
     public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
         String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine

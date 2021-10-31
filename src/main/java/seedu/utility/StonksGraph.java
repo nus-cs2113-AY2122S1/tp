@@ -150,7 +150,7 @@ public class StonksGraph {
         String currentExpenseString = "Current month (" + currentMonth + ") total expense: ";
         String currentIncomeString = "Current month (" + currentMonth + ") total income: ";
         writeToGraph(3,4, currentExpenseString);
-        writeToGraph(3, 43, stringCurrentMonthExpense);
+        writeToGraph(3, 44, stringCurrentMonthExpense);
         writeToGraph(4,4, currentIncomeString);
         writeToGraph(4, 43, stringCurrentMonthIncome);
 
