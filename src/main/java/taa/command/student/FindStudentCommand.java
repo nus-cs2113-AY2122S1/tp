@@ -5,8 +5,8 @@ import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.student.Student;
 import taa.student.StudentList;
 
@@ -48,13 +48,13 @@ public class FindStudentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String keyword = argumentMap.get(KEY_KEYWORD);
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         ArrayList<Student> studentsFound = studentList.findStudents(keyword);
         if (studentsFound.isEmpty()) {
             throw new TaaException(MESSAGE_NO_STUDENTS_FOUND);

@@ -1,12 +1,12 @@
 package taa.command.student;
 
 //@@author hozhenhong99
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.TeachingClass;
 import taa.student.StudentList;
 
 public class ListStudentsCommand extends Command {
@@ -44,17 +44,17 @@ public class ListStudentsCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String message;
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         if (studentList.getSize() == 0) {
             message = MESSAGE_NO_STUDENTS;
         } else {
-            message = String.format(MESSAGE_FORMAT_OUTPUT, classObject, studentList);
+            message = String.format(MESSAGE_FORMAT_OUTPUT, teachingClass, studentList);
         }
 
         ui.printMessage(message);

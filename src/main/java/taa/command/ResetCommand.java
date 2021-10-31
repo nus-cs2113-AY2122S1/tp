@@ -2,7 +2,7 @@ package taa.command;
 
 //@@author leyondlee
 import taa.Ui;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.exception.TaaException;
 import taa.storage.Storage;
 

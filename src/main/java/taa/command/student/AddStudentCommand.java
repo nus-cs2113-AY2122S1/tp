@@ -1,8 +1,8 @@
 package taa.command.student;
 
 //@@author hozhenhong99
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -46,8 +46,8 @@ public class AddStudentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -55,7 +55,7 @@ public class AddStudentCommand extends Command {
         String studentName = argumentMap.get(KEY_STUDENT_NAME);
         Student student = new Student(studentID, studentName);
 
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         studentList.addStudent(student);
 
         storage.save(classList);

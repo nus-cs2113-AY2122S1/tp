@@ -1,7 +1,7 @@
 package taa.command.mark;
 
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.assessment.Assessment;
@@ -50,33 +50,33 @@ public class AverageMarksCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         if (studentList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_STUDENTS);
         }
 
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         Assessment assessment = assessmentList.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        printAverageMarks(ui, classObject, assessment);
+        printAverageMarks(ui, teachingClass, assessment);
     }
 
     /**
      * Outputs the average marks of an assessment in a class.
      *
      * @param ui     The ui instance to handle interactions with the user.
-     * @param classObject The class the assessment belongs to.
+     * @param teachingClass The class the assessment belongs to.
      */
-    private void printAverageMarks(Ui ui, ClassObject classObject, Assessment assessment) {
-        StudentList studentList = classObject.getStudentList();
+    private void printAverageMarks(Ui ui, TeachingClass teachingClass, Assessment assessment) {
+        StudentList studentList = teachingClass.getStudentList();
         String assessmentName = assessment.getName();
 
         double classSize = studentList.getSize();

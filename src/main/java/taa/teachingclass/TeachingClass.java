@@ -1,4 +1,4 @@
-package taa.classmodel;
+package taa.teachingclass;
 
 //@@author leyondlee
 import taa.ClassChecker;
@@ -11,13 +11,13 @@ import taa.student.StudentList;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ClassObject implements ClassChecker {
+public class TeachingClass implements ClassChecker {
     private String id;
     private String name;
     private final StudentList studentList;
     private final AssessmentList assessmentList;
 
-    public ClassObject(String id, String name) {
+    public TeachingClass(String id, String name) {
         this.id = id;
         this.name = name;
         this.studentList = new StudentList();

@@ -5,8 +5,8 @@ import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 
 public class ListAssessmentsCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
@@ -43,17 +43,17 @@ public class ListAssessmentsCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String message;
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         if (assessmentList.getSize() == 0) {
             message = MESSAGE_LIST_EMPTY;
         } else {
-            message = String.format(MESSAGE_FORMAT_OUTPUT, classObject, assessmentList);
+            message = String.format(MESSAGE_FORMAT_OUTPUT, teachingClass, assessmentList);
         }
 
         ui.printMessage(message);

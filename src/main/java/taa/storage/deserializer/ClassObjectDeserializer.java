@@ -10,13 +10,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.TeachingClass;
 import taa.student.Student;
 import taa.student.StudentList;
 
 import java.lang.reflect.Type;
 
-public class ClassObjectDeserializer extends StorageDeserializer implements JsonDeserializer<ClassObject> {
+public class ClassObjectDeserializer extends StorageDeserializer implements JsonDeserializer<TeachingClass> {
     private static final String MEMBER_ID = "id";
     private static final String MEMBER_NAME = "name";
     private static final String MEMBER_STUDENTLIST = "studentList";
@@ -24,7 +24,7 @@ public class ClassObjectDeserializer extends StorageDeserializer implements Json
     private static final String[] COMPULSORY_MEMBERS = {MEMBER_ID, MEMBER_NAME};
 
     @Override
-    public ClassObject deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public TeachingClass deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
@@ -37,7 +37,7 @@ public class ClassObjectDeserializer extends StorageDeserializer implements Json
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
 
-        ClassObject classObject = new ClassObject(id, name);
+        TeachingClass teachingClass = new TeachingClass(id, name);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(StudentList.class, new StudentListDeserializer());
@@ -49,7 +49,7 @@ public class ClassObjectDeserializer extends StorageDeserializer implements Json
             StudentList studentList = gson.fromJson(studentListJson, StudentList.class);
             if (studentList != null) {
                 for (Student student : studentList.getStudents()) {
-                    classObject.getStudentList().addStudent(student);
+                    teachingClass.getStudentList().addStudent(student);
                 }
             }
         }
@@ -59,15 +59,15 @@ public class ClassObjectDeserializer extends StorageDeserializer implements Json
             AssessmentList assessmentList = gson.fromJson(assessmentListJson, AssessmentList.class);
             if (assessmentList != null) {
                 for (Assessment assessment : assessmentList.getAssessments()) {
-                    classObject.getAssessmentList().addAssessment(assessment);
+                    teachingClass.getAssessmentList().addAssessment(assessment);
                 }
             }
         }
 
-        if (!classObject.verify()) {
+        if (!teachingClass.verify()) {
             return null;
         }
 
-        return classObject;
+        return teachingClass;
     }
 }

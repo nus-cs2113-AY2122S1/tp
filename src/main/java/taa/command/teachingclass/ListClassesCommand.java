@@ -1,11 +1,11 @@
-package taa.command.classcategory;
+package taa.command.teachingclass;
 
 //@@author leyondlee
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 
 public class ListClassesCommand extends Command {
     private static final String MESSAGE_LIST_EMPTY = "There are no classes in the list.";

@@ -2,8 +2,8 @@ package taa.command.student;
 
 //@@author hozhenhong99
 import taa.Ui;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -44,12 +44,12 @@ public class ListCommentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        ArrayList<Student> students = classObject.getStudentList().getStudents();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_LIST_COMMENT_HEADER);
         int studentIndex = 1;
         for (Student student : students) {

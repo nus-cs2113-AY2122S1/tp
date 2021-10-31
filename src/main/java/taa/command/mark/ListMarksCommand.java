@@ -1,13 +1,13 @@
 package taa.command.mark;
 
-import taa.classmodel.ClassObject;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.student.Student;
 import taa.student.StudentList;
 
@@ -50,23 +50,23 @@ public class ListMarksCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         if (studentList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_STUDENTS);
         }
 
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         Assessment assessment = assessmentList.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        listMarks(ui, classObject, assessment);
+        listMarks(ui, teachingClass, assessment);
     }
 
     /**
@@ -84,10 +84,10 @@ public class ListMarksCommand extends Command {
      * Lists the student and the marks they attained for an assessment.
      *
      * @param ui     The ui instance to handle interactions with the user.
-     * @param classObject The class that the student and assessment belong to.
+     * @param teachingClass The class that the student and assessment belong to.
      */
-    private void listMarks(Ui ui, ClassObject classObject, Assessment assessment) {
-        StudentList studentList = classObject.getStudentList();
+    private void listMarks(Ui ui, TeachingClass teachingClass, Assessment assessment) {
+        StudentList studentList = teachingClass.getStudentList();
         String assessmentName = assessment.getName();
 
         StringBuilder stringBuilder = new StringBuilder(String.format(MESSAGE_LIST_MARKS_HEADER, assessmentName));

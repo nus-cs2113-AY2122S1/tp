@@ -2,7 +2,7 @@ package taa.command;
 
 //@@author leyondlee
 import taa.Ui;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.assessment.EditAssessmentCommand;
@@ -16,10 +16,10 @@ import taa.command.mark.EditMarkCommand;
 import taa.command.mark.ListMarksCommand;
 import taa.command.mark.MedianMarkCommand;
 import taa.command.mark.SetMarkCommand;
-import taa.command.classcategory.AddClassCommand;
-import taa.command.classcategory.DeleteClassCommand;
-import taa.command.classcategory.EditClassCommand;
-import taa.command.classcategory.ListClassesCommand;
+import taa.command.teachingclass.AddClassCommand;
+import taa.command.teachingclass.DeleteClassCommand;
+import taa.command.teachingclass.EditClassCommand;
+import taa.command.teachingclass.ListClassesCommand;
 import taa.command.student.AddStudentCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.student.EditStudentCommand;

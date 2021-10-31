@@ -3,8 +3,8 @@ package taa.command.assessment;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -46,20 +46,20 @@ public class DeleteAssessmentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         assert assessmentList != null : "assessment list should exist.";
         Assessment assessment = assessmentList.deleteAssessment(name);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        ArrayList<Student> students = classObject.getStudentList().getStudents();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         for (Student s : students) {
             if (s.marksExist(name)) {
                 double marks = s.getMarks(name);

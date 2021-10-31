@@ -3,8 +3,8 @@ package taa.command.mark;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -66,21 +66,21 @@ public class EditMarkCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = assessmentList.getAssessment(assessmentName);
         if (assessment == null) {

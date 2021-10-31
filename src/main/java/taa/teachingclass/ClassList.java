@@ -1,4 +1,4 @@
-package taa.classmodel;
+package taa.teachingclass;
 
 //@@author leyondlee
 import taa.ClassChecker;
@@ -6,7 +6,7 @@ import taa.ClassChecker;
 import java.util.ArrayList;
 
 public class ClassList implements ClassChecker {
-    private final ArrayList<ClassObject> classes;
+    private final ArrayList<TeachingClass> classes;
 
     public ClassList() {
         this.classes = new ArrayList<>();
@@ -21,7 +21,7 @@ public class ClassList implements ClassChecker {
      *
      * @return A new ArrayList containing all the classes.
      */
-    public ArrayList<ClassObject> getClasses() {
+    public ArrayList<TeachingClass> getClasses() {
         return new ArrayList<>(classes);
     }
 
@@ -38,10 +38,10 @@ public class ClassList implements ClassChecker {
     /**
      * Adds a ClassObject object to the list of classes.
      *
-     * @param classObject The ClassObject object to add.
+     * @param teachingClass The ClassObject object to add.
      */
-    public void addClass(ClassObject classObject) {
-        classes.add(classObject);
+    public void addClass(TeachingClass teachingClass) {
+        classes.add(teachingClass);
     }
 
     /**
@@ -50,7 +50,7 @@ public class ClassList implements ClassChecker {
      * @param index The index of the class.
      * @return A ClassObject object if index is valid, else null.
      */
-    public ClassObject getClassAt(int index) {
+    public TeachingClass getClassAt(int index) {
         if (isValidIndex(index)) {
             return classes.get(index);
         }
@@ -64,10 +64,10 @@ public class ClassList implements ClassChecker {
      * @param id The class id to search for.
      * @return A Class object if found, else null.
      */
-    public ClassObject getClassWithId(String id) {
-        for (ClassObject classObject : classes) {
-            if (classObject.getId().equals(id)) {
-                return classObject;
+    public TeachingClass getClassWithId(String id) {
+        for (TeachingClass teachingClass : classes) {
+            if (teachingClass.getId().equals(id)) {
+                return teachingClass;
             }
         }
 
@@ -77,13 +77,13 @@ public class ClassList implements ClassChecker {
     /**
      * Deletes a particular class from the list.
      *
-     * @param classObject The class object to delete.
+     * @param teachingClass The class object to delete.
      * @return true if successfully removed, else false.
      */
-    public boolean deleteClass(ClassObject classObject) {
-        assert classObject != null;
+    public boolean deleteClass(TeachingClass teachingClass) {
+        assert teachingClass != null;
 
-        return classes.remove(classObject);
+        return classes.remove(teachingClass);
     }
 
     public void deleteAllClasses() {
@@ -114,17 +114,17 @@ public class ClassList implements ClassChecker {
     @Override
     public boolean verify() {
         ArrayList<String> classIds = new ArrayList<>();
-        ArrayList<ClassObject> duplicatedClassObjects = new ArrayList<>();
-        for (ClassObject classObject : classes) {
-            if (classIds.contains(classObject.getId())) {
-                duplicatedClassObjects.add(classObject);
+        ArrayList<TeachingClass> duplicatedTeachingClasses = new ArrayList<>();
+        for (TeachingClass teachingClass : classes) {
+            if (classIds.contains(teachingClass.getId())) {
+                duplicatedTeachingClasses.add(teachingClass);
             } else {
-                classIds.add(classObject.getId());
+                classIds.add(teachingClass.getId());
             }
         }
 
-        for (ClassObject classObject : duplicatedClassObjects) {
-            classes.remove(classObject);
+        for (TeachingClass teachingClass : duplicatedTeachingClasses) {
+            classes.remove(teachingClass);
         }
 
         return true;

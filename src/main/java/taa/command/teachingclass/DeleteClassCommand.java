@@ -1,9 +1,9 @@
-package taa.command.classcategory;
+package taa.command.teachingclass;
 
 //@@author leyondlee
 import taa.Ui;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -35,17 +35,17 @@ public class DeleteClassCommand extends Command {
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String message;
-        boolean isSuccessful = classList.deleteClass(classObject);
+        boolean isSuccessful = classList.deleteClass(teachingClass);
         if (isSuccessful) {
-            message = String.format(MESSAGE_FORMAT_CLASS_DELETED, classObject);
+            message = String.format(MESSAGE_FORMAT_CLASS_DELETED, teachingClass);
         } else {
-            message = String.format(MESSAGE_FORMAT_DELETE_FAILED, classObject);
+            message = String.format(MESSAGE_FORMAT_DELETE_FAILED, teachingClass);
         }
 
         storage.save(classList);

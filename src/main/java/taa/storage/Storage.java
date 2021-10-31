@@ -7,7 +7,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.exception.TaaException;
 import taa.storage.deserializer.ClassListDeserializer;
 import taa.util.Util;

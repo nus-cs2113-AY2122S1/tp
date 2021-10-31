@@ -1,9 +1,9 @@
-package taa.command.classcategory;
+package taa.command.teachingclass;
 
 //@@author leyondlee
 import taa.Ui;
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -50,8 +50,8 @@ public class EditClassCommand extends Command {
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -62,17 +62,17 @@ public class EditClassCommand extends Command {
                 throw new TaaException(String.format(MESSAGE_FORMAT_CLASS_EXISTS, newClassId));
             }
 
-            classObject.setId(newClassId);
+            teachingClass.setId(newClassId);
         }
 
         String newClassName = argumentMap.getOrDefault(KEY_NEW_CLASS_NAME, null);
         if (newClassName != null) {
-            classObject.setName(newClassName);
+            teachingClass.setName(newClassName);
         }
 
         storage.save(classList);
 
-        ui.printMessage(String.format(MESSAGE_FORMAT_CLASS_EDITED, classObject));
+        ui.printMessage(String.format(MESSAGE_FORMAT_CLASS_EDITED, teachingClass));
     }
 
     @Override

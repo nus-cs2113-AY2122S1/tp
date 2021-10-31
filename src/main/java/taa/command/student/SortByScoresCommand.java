@@ -6,8 +6,8 @@ import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.student.Student;
 
@@ -44,8 +44,8 @@ public class SortByScoresCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -53,8 +53,8 @@ public class SortByScoresCommand extends Command {
         if (!order.equalsIgnoreCase("asc") && !order.equalsIgnoreCase("desc")) {
             throw new TaaException(MESSAGE_INVALID_SORT_ORDER);
         }
-        ArrayList<Student> students = classObject.getStudentList().getStudents();
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         HashMap<Student, Double> unsortedScores = new HashMap<>();
         ArrayList<Student> sortedStudents = new ArrayList<>();
         for (Student student : students) {

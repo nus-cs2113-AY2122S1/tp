@@ -4,7 +4,7 @@ package taa.command;
 import taa.Taa;
 import taa.Ui;
 import taa.exception.TaaException;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.util.Util;
 

@@ -1,7 +1,7 @@
 package taa.command.assessment;
 
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.Ui;
@@ -93,8 +93,8 @@ public class AddAssessmentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -111,7 +111,7 @@ public class AddAssessmentCommand extends Command {
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
 
-        AssessmentList assessmentList = classObject.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         assert assessmentList != null : "assessment list should exist.";
         boolean isSuccessful = assessmentList.addAssessment(assessment);
         if (!isSuccessful) {
@@ -123,7 +123,7 @@ public class AddAssessmentCommand extends Command {
 
         assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED, classId,
-            assessment, assessmentList.getSize(), classObject));
+            assessment, assessmentList.getSize(), teachingClass));
     }
 
     @Override

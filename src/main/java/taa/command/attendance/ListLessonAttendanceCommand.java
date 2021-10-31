@@ -3,8 +3,8 @@ package taa.command.attendance;
 import taa.Ui;
 import taa.attendance.Attendance;
 import taa.attendance.LessonAttendanceList;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -51,8 +51,8 @@ public class ListLessonAttendanceCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -63,7 +63,7 @@ public class ListLessonAttendanceCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
         }
 
-        StudentList studentList = classObject.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         LessonAttendanceList lessonAttendances = new LessonAttendanceList();
         lessonAttendances.setLessonAttendances(studentList, lessonNumber);
 

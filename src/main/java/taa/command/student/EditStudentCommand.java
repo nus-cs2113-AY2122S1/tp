@@ -1,8 +1,8 @@
 package taa.command.student;
 
 //@@author hozhenhong99
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -58,8 +58,8 @@ public class EditStudentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
@@ -67,8 +67,8 @@ public class EditStudentCommand extends Command {
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
-        StudentList studentList = classObject.getStudentList();
-        assert studentIndex >= 0 && studentIndex < classObject.getStudentList().getSize();
+        StudentList studentList = teachingClass.getStudentList();
+        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);

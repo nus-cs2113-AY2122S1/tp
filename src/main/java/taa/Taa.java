@@ -1,7 +1,7 @@
 package taa;
 
 //@@author leyondlee
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.logger.TaaLogger;

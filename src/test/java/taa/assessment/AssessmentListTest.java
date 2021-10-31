@@ -3,7 +3,7 @@ package taa.assessment;
 import org.junit.jupiter.api.Test;
 import taa.Parser;
 import taa.Ui;
-import taa.classmodel.ClassList;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;

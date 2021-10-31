@@ -1,8 +1,8 @@
-package taa.command.classcategory;
+package taa.command.teachingclass;
 
 //@@author leyondlee
-import taa.classmodel.ClassObject;
-import taa.classmodel.ClassList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.logger.TaaLogger;
 import taa.storage.Storage;
@@ -53,19 +53,19 @@ public class AddClassCommand extends Command {
         assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
 
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject != null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass != null) {
             throw new TaaException(MESSAGE_CLASS_EXISTS);
         }
 
         String name = argumentMap.getOrDefault(KEY_CLASS_NAME, "");
-        classObject = new ClassObject(classId, name);
-        classList.addClass(classObject);
+        teachingClass = new TeachingClass(classId, name);
+        classList.addClass(teachingClass);
 
-        TaaLogger.LOGGER.logInfo(String.format("Added class: %s", classObject));
+        TaaLogger.LOGGER.logInfo(String.format("Added class: %s", teachingClass));
 
         storage.save(classList);
-        ui.printMessage(String.format(MESSAGE_FORMAT_CLASS_ADDED, classObject, classList.getSize()));
+        ui.printMessage(String.format(MESSAGE_FORMAT_CLASS_ADDED, teachingClass, classList.getSize()));
     }
 
     @Override

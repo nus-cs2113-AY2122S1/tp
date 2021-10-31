@@ -2,8 +2,8 @@ package taa.command.assessment;
 
 import taa.Ui;
 import taa.assessment.Assessment;
-import taa.classmodel.ClassList;
-import taa.classmodel.ClassObject;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -89,13 +89,13 @@ public class EditAssessmentCommand extends Command {
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         String classId = argumentMap.get(KEY_CLASS_ID);
-        ClassObject classObject = classList.getClassWithId(classId);
-        if (classObject == null) {
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-        Assessment assessment = classObject.getAssessmentList().getAssessment(name);
+        Assessment assessment = teachingClass.getAssessmentList().getAssessment(name);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
@@ -114,7 +114,7 @@ public class EditAssessmentCommand extends Command {
                 );
             }
             double totalNewWeightage = 0;
-            ArrayList<Assessment> assessments = classObject.getAssessmentList().getAssessments();
+            ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
             for (Assessment a : assessments) {
                 if (a.getName() != name) {
                     totalNewWeightage += a.getWeightage();
