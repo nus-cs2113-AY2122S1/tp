@@ -41,6 +41,7 @@ public class Parser {
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
+    private static final String INCORRECT_PARAMETER_FORMAT_MESSAGE = "The parameter format is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
@@ -59,14 +60,14 @@ public class Parser {
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
-    private static final String DELETE_DELIM = "[ .]";
+    private static final String DELETE_DELIM = "\\.";
     private static final String UPDATE_DELIM = " \\s|\\.|a/";
     private static final String SUBTRACT_DELIM = " \\s|a/";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
     private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 2;
     private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 3;
-    private static final int DELETE_COMMAND_ARGUMENT_COUNT = 3;
+    private static final int DELETE_COMMAND_ARGUMENT_COUNT = 2;
 
 
     public static boolean isExit(String command) {
@@ -92,7 +93,7 @@ public class Parser {
         case COMMAND_SUBTRACT:
             return parseSubtractCommand(command);
         case COMMAND_DELETE:
-            return parseDeleteCommand(command);
+            return parseDeleteCommand(words[1]);
         case COMMAND_UPDATE:
             return parseUpdateCommand(command);
         case COMMAND_DATE:
@@ -263,6 +264,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and executes the {@code subtract} command.
+     *
+     * @param command the user input string
+     * @return subtracted message
+     * @throws SitusException when error in subtracting
+     */
     private static String parseSubtractCommand(String command) throws SitusException {
         String[] details = command.replace(COMMAND_SUBTRACT, "").split(SUBTRACT_DELIM);
 
@@ -304,25 +312,25 @@ public class Parser {
     /**
      * Calls and executes the {@code delete} command.
      *
-     * @param command The user input String
+     * @param parameters The user input parameters
      * @return Ingredient Deleted Message
      * @throws SitusException if trying to access non-existing ingredients
      */
-    private static String parseDeleteCommand(String command) throws SitusException {
-        String[] details = command.split(DELETE_DELIM);
+    private static String parseDeleteCommand(String parameters) throws SitusException {
+        String[] details = parameters.trim().split(DELETE_DELIM);
 
         if (details.length != DELETE_COMMAND_ARGUMENT_COUNT) {
-            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+            throw new SitusException(INCORRECT_PARAMETER_FORMAT_MESSAGE);
         }
 
         int[] detailsToInt = new int[2];
         try {
-            for (int i = 1; i < details.length; i++) {
+            for (int i = 0; i < details.length; i++) {
                 if (details[i].equals(EMPTY_STRING)) {
                     throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
                 }
                 details[i] = details[i].trim();
-                detailsToInt[i - 1] = Integer.parseInt(details[i]);
+                detailsToInt[i] = Integer.parseInt(details[i]);
             }
             return new DeleteCommand(detailsToInt[0], detailsToInt[1]).run();
         } catch (NumberFormatException e) {
