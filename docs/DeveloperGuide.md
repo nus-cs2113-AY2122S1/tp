@@ -78,7 +78,18 @@ them.
 
 * `DishParser` contains methods that decode user inputs into meaningful parameters and modify the menu accordingly.  
 
-* `DishUI` contains methods that display messages to interact with the user.  
+* `DishUI` contains methods that display messages to interact with the user. 
+
+### Finance Component
+The Finance component consists of the `Finance`, `FinanceList`, `FinanceParser`, `FinanceUI` classes. 
+
+* `Finance` stores the date, account of a certain days earn and methods to retrieve them.
+
+* `FinanceList` is the arrayList of Finance.
+
+* `FinanceParser` contains methods that decode user inputs to meaningful parameters and modify the finance accordingly.
+
+* `FinanceUI` contains methods that display messages to interact with the user.
 
 ### Storage Component
 The storage component has a `Storage` class which can load data from the file and save data into the file with the 
@@ -139,22 +150,66 @@ The mechanism of removing a dish from the menu is facilitated by `DishParser`. I
 dish to be removed from the existing instance of `Menu` and removes that instance of the dish from the menu. 
 It then calls a method from `DishUI` which displays to the user that the deletion was successful.
 
+### Add Finance Feature
+The mechanism of adding an account into the financeList is facilitated by `FinanceParser`. It is firstly identified 
+by mainParser to handle add finance command. Then, it creates new `Finance` object with user command. Next, it will add
+the Finance object to the FinanceList and add the account number to the totalAccount. Lastly, it will call 
+printAddFinanceMessage() of FinanceUI to show the result.
+
+Picture
+
+### Remove Finance Feature
+The mechanism of removing an account from the financeList is facilitated by `FinanceParser`. It is firstly identified 
+by mainParser to handle remove finance command. Then, it generates the deletedFinanceIndex with user command. Next, it 
+will get the deletedAccount using get method from the financeList. Besides, it will remove the deletedAccount from the 
+financeList and the totalAccount will minus the account number of deletedAccount. Lastly, it will call
+printRemoveFinanceMessage() of FinanceUI to show the result.
+
+Picture
+
+### Edit Finance Feature
+The mechanism of editing an account form the financeList is facilitated by `FinanceParser`. It is firstly identified 
+by mainParser to handle edit finance command. Then, it generates the editedFinanceIndex with user command. Next, it
+will get the editedAccount using get method from the financeList. Besides,it will edit the editedAccount using setAccount
+method and change the totalAccount number. Lastly, it will call printEditFinanceMessage() of FinanceUI to 
+show the result.
+
+Picture
+
+
+### List Finance Feature
+
+The mechanism of listing the accounts from the financeList is facilitated by `FinanceParser`. It is firstly 
+identified by MainParser to handle list finance command. Then, it will check the list size. If the size is 0, then
+it will call printEmptyListMessage() of FinanceUI. If the size is larger than 0, it will call printFinanceListMessage()
+of FinanceUI and print all the accounts in financeList to the user.
+
+### Show Finance Feature
+
+The mechanism of showing total account from the financeList is facilitated by `FinanceParser`. It is firstly
+identified by MainParser to handle show finance command. Then, it will call printTotalAccount() of FinanceUI to
+show the total account to the user.
+
 ### Save Storage Feature
 The mechanism of saving all the data is facilitated by `Storage`. After executing the bye command, the 
-program goes into saving data stage automatically. It opens the storage file with a file writer, and for every list the 
-program has, it gets the item from them. Then, it encodes the string representation of the item, and writes it into the 
-file.
+program goes into saving data stage automatically. It will call saveStorage() method whose parameters are the lists need
+to save to file in the `Storage` and open a default file with fileWriter. Next, it goes in a loop to get each target object
+in the list. In `Storage`, it will encode the target object based its toString format and then write into the file.
+Lastly, it will have four loops for the four different lists. Given below is the sequence diagram when storing
+employeeList and ingredientList.
 
-The three lists are stored in sequence as shown below,
+Picture
+
 
 ### Load Storage Feature
-The mechanism of loading all the data from the storage file is facilitated by `Storage`. It opens the file with a file 
-reader and if there are no files to open, it will automatically create a new file of default address. Every line read 
-from the file would be decoded with methods to create a new `Employee`/`Dish`/`Ingredient` item, and add it into the 
-list which is generated.
+The mechanism of loading all the data from the storage file is facilitated by `Storage`. It will firstly create a file 
+object with the default path. Secondly, it will check whether the save file exists. If the file does not exist, it will print 
+the file not found Message. If exists, it will create a scanner to read the file and generate four different parsers. 
+It goes in a loop until there are no more lines to read. Then, it will create new object according to the lines start with. 
+Lastly, it will use `loadEmployeeFromStorage` method to different object to add them into target lists. Given below
+is the sequence diagram of loading `Employee` from the Storage.
 
-The three types of new item are identified before decoding it, and the decoding methods are worked on at the 
-same time.
+Picture
 
 ## Appendix
 

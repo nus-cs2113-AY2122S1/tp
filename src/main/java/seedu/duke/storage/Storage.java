@@ -71,7 +71,7 @@ public class Storage {
     private static String encodeFinance(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-finance" + "|" + description[0] + "|" + description[1];
+        encodedItem = "add-finance" + "|" + description[0] + "|" + description[1].substring(1);
         return encodedItem;
     }
 
