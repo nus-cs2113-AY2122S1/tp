@@ -233,13 +233,15 @@ public class Parser {
             if (details[i].equals(EMPTY_STRING)) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
-            if (isContainsInvalidCharacters(details[i])) {
-                throw new SitusException(INVALID_CHARACTERS_ADD_MESSAGE);
-            }
         }
 
         try {
             String ingredientName = details[1];
+
+            if (isContainsInvalidCharacters(ingredientName)) {
+                throw new SitusException(INVALID_CHARACTERS_ADD_MESSAGE);
+            }
+
             double ingredientAmount = Double.parseDouble(details[2]);
 
             if (ingredientAmount <= 0) {
@@ -250,6 +252,7 @@ public class Parser {
             if (ingredientExpiry.isBefore(CurrentDate.getCurrentDate())) {
                 throw new SitusException(INVALID_EXPIRY_MESSAGE);
             }
+
             Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
                     ingredientExpiry);
             return new AddCommand(newIngredient).run();
