@@ -21,7 +21,7 @@ public class ViewContactCommand extends Command {
     public void execute() {
         try {
             Contact viewingContact = IndexParser.getContactFromIndex(contactIndex, contactList);
-            assert contactIndex >= 0 && contactIndex < contactList.getListSize();
+            assert contactIndex >= -1 && contactIndex < contactList.getListSize();
             TextUi.viewContactMessage(viewingContact, contactIndex);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
