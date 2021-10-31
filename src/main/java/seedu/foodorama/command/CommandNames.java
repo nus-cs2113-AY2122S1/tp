@@ -15,6 +15,7 @@ public enum CommandNames {
     LIST("list", new ListCommand()),
     FIND("find", new FindCommand()),
     GRAPH("graph", new GraphCommand()),
+    RAND_RISH_NAME("rdish", new RandomDishCommand()),
     CLEAR_DISH("clear dish", new ClearDishCommand()),
     CLEAR_INGR("clear ingr", new ClearIngrCommand()),
     CLEAR_ALL("clear all", new ClearAllCommand()),
