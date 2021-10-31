@@ -9,6 +9,8 @@ import seedu.situs.ingredients.IngredientList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@@author nishantrai-nus
+
 public class FindCommand extends Command {
 
     private static final String FIND_MESSAGE_START = "I found these ingredients for \"";

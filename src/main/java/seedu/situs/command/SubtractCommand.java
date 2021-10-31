@@ -5,6 +5,7 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.io.IOException;
 
+//@@author AayushMathur7
 /**
  * Represents a command to subtract given amount from an ingredient.
  */

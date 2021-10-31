@@ -1,6 +1,7 @@
 package seedu.situs.ui;
 
 import java.util.Scanner;
+//@@author nishantrai-nus
 
 public class UI {
 
