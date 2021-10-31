@@ -45,15 +45,14 @@ public class FolderStorage extends Storage {
      * @param module The name of the folder to be created.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void createModuleFolder(String module) throws InvalidFileException {
-        Path moduleFolder = getAppendPath(baseDirectory, module);
+    protected void createModuleFolder(String module) throws InvalidFileException {
         try {
+            Path moduleFolder = getAppendPath(baseDirectory, module);
             delete(moduleFolder);
             createFolder(moduleFolder);
         } catch (InvalidFileException e) {
-            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FOLDER, moduleFolder));
+            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FOLDER, module));
         }
-
     }
 
     /**
@@ -62,7 +61,7 @@ public class FolderStorage extends Storage {
      * @param deletedModule The name of the folder to be deleted.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void deleteModuleFolder(String deletedModule) throws InvalidFileException {
+    protected void deleteModuleFolder(String deletedModule) throws InvalidFileException {
         Path moduleFolder = getAppendPath(baseDirectory, deletedModule);
         delete(moduleFolder);
     }
@@ -74,7 +73,7 @@ public class FolderStorage extends Storage {
      * @param deletedModule The name of the folder to be renamed.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void renameModuleFolder(String module, String deletedModule) throws InvalidFileException {
+    protected void renameModuleFolder(String module, String deletedModule) throws InvalidFileException {
         Path newModuleFolder = getAppendPath(baseDirectory, module);
         Path moduleFolder = getAppendPath(baseDirectory, deletedModule);
         renameFolder(moduleFolder, newModuleFolder);
