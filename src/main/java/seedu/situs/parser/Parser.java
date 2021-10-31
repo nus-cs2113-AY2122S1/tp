@@ -139,6 +139,9 @@ public class Parser {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
             keywords[i] = keywords[i].trim();
+            if (isContainsInvalidCharacters(keywords[i])) {
+                throw new SitusException(INVALID_CHARACTERS_FIND_MESSAGE);
+            }
         }
 
         String resultMsg = "";
