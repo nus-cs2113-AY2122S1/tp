@@ -32,8 +32,8 @@ public class TotalIncomeBetweenCommandTest {
 
     @Test
     public void execute_twoValidDateInputs_TotalSumZero() {
-        LocalDate startDate = LocalDate.parse("28/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate startDate = LocalDate.parse("30/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate endDate = LocalDate.parse("31/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         Income testIncome1 = new Income("Salary", 400.00, IncomeCategory.ALLOWANCE);
         Income testIncome2 = new Income("Allowance", 400.00, IncomeCategory.ALLOWANCE);
