@@ -44,7 +44,8 @@ public class AddOrderCommand extends Command {
         String[] optionalParameter = {CommandParameters.DATE};
 
         OrderValidator orderValidator = new OrderValidator();
-        if (checkValidParameterValues(ui,parameters, medicines, requiredParameters, optionalParameter, orderValidator)) {
+        if (checkValidParameterValues(ui,parameters, medicines, requiredParameters, optionalParameter,
+                orderValidator)) {
             return;
         }
 
@@ -126,6 +127,7 @@ public class AddOrderCommand extends Command {
     }
 
     /**
+     * Add date based on user input.
      *
      * @param ui        Reference to the UI object to print messages.
      * @param dateToAdd Order date input by user (check if it is in correct date format).
@@ -149,6 +151,7 @@ public class AddOrderCommand extends Command {
     }
 
     /**
+     * Checks if user inputs are valid.
      *
      * @param ui                    Reference to the UI object to print messages.
      * @param parameters            The parameter that is not found.
@@ -158,7 +161,7 @@ public class AddOrderCommand extends Command {
      * @param orderValidator        Reference to OrderValidator object.
      * @return Boolean value indicating if parameter and parameter values are valid.
      */
-    private boolean checkValidParameterValues (Ui ui, LinkedHashMap<String, String> parameters,
+    private boolean checkValidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                             ArrayList<Medicine> medicines, String[] requiredParameters,
                                             String[] optionalParameters, OrderValidator orderValidator) {
         boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
