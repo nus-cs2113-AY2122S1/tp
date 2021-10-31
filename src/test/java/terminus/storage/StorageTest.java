@@ -25,6 +25,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import terminus.TestFilePath;
 import terminus.common.CommonFormat;
 import terminus.content.ContentManager;
@@ -250,12 +252,19 @@ public class StorageTest {
     }
 
     @Test
-    void getAppendPath_invalidPath() {
+    void getAppendPath_nullInput() {
         Path resultPath = storage.getAppendPath(RESOURCE_FOLDER, null);
         assertEquals(null, resultPath);
-        resultPath = storage.getAppendPath(RESOURCE_FOLDER, "*");
+
+    }
+
+    @Test
+    @EnabledOnOs({OS.WINDOWS})
+    void getAppendPath_invalidPath() {
+        Path resultPath = storage.getAppendPath(RESOURCE_FOLDER, "*");
         assertEquals(null, resultPath);
     }
+
 
     @Test
     void getListOfFiles_success() throws InvalidFileException {
