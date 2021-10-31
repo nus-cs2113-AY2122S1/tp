@@ -9,6 +9,8 @@ import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Expense;
+import seedu.exceptions.DuplicateExpenseException;
+import seedu.exceptions.DuplicateIncomeException;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
 import seedu.utility.StonksGraph;
@@ -53,7 +55,7 @@ public class UiTest {
     private BudgetManager budgetManager = new BudgetManager();
 
 
-    public void initialiseFinancialTracker() {
+    public void initialiseFinancialTracker() throws DuplicateIncomeException, DuplicateExpenseException {
         financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
         financialTracker.addExpense(new Expense("Bought a game", 19.73, ExpenseCategory.FOOD));
         financialTracker.addExpense(new Expense("Bought cookies", 5.0, ExpenseCategory.FOOD));
@@ -63,7 +65,8 @@ public class UiTest {
     }
     
     @Test
-    public void listExpense_validFinancialTracker_filteredExpenses() {
+    public void listExpense_validFinancialTracker_filteredExpenses() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all of your recent spending!" + newLine 
@@ -79,7 +82,8 @@ public class UiTest {
     }
 
     @Test
-    public void listIncome_validFinancialTracker_filteredIncomes() {
+    public void listIncome_validFinancialTracker_filteredIncomes() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine 
                 + "Below is a list of all of your recent earnings!" + newLine
@@ -95,7 +99,8 @@ public class UiTest {
     }
 
     @Test
-    public void listFind_givenFilteredList_printFilteredList() {
+    public void listFind_givenFilteredList_printFilteredList() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + Messages.FOUND_LIST_MESSAGE + newLine
@@ -134,7 +139,8 @@ public class UiTest {
     }
 
     @Test
-    public void printBalance_oneExpenseOneIncome_printNetBalance() {
+    public void printBalance_oneExpenseOneIncome_printNetBalance() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine
                 + "Your current balance is: $2018.27" + newLine
@@ -199,7 +205,8 @@ public class UiTest {
     }
 
     @Test
-    public void expenseDeleted_oneExpenseDeleted_deletedExpenseMessage() {
+    public void expenseDeleted_oneExpenseDeleted_deletedExpenseMessage() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "You removed this: " + newLine
@@ -211,7 +218,8 @@ public class UiTest {
     }
 
     @Test
-    public void incomeDeleted_oneIncomeDeleted_deletedIncomeMessage() {
+    public void incomeDeleted_oneIncomeDeleted_deletedIncomeMessage() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "You removed this: " + newLine
@@ -419,7 +427,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByKeyword_testFood_printOnlyFoodEntries() {
+    public void filterByKeyword_testFood_printOnlyFoodEntries() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         FindCommand testFindCommand = new FindCommand("food");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -434,7 +443,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByKeyword_testWordCasing_printFoodEntries() {
+    public void filterByKeyword_testWordCasing_printFoodEntries() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         FindCommand testFindCommand = new FindCommand("FOod");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -449,7 +459,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() {
+    public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         String currDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         FindCommand testFindCommand = new FindCommand(currDate);
         initialiseFinancialTracker();
@@ -471,7 +482,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByDate_dateNoMatch_printNoEntryFound() {
+    public void filterByDate_dateNoMatch_printNoEntryFound() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         FindCommand testFindCommand = new FindCommand("25/10/2099");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -482,7 +494,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByKeyword_matchInDescription_printEntriesFound() {
+    public void filterByKeyword_matchInDescription_printEntriesFound() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         FindCommand testFindCommand = new FindCommand("game");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -495,7 +508,8 @@ public class UiTest {
     }
 
     @Test
-    public void filterByKeyword_matchInAmount_printEntriesFound() {
+    public void filterByKeyword_matchInAmount_printEntriesFound() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         FindCommand testFindCommand = new FindCommand("19.73");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);

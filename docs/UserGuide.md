@@ -117,6 +117,11 @@ Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 - `AMOUNT` has to be a positive amount.
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 
+Note:
+
+- The default date of the added expense will be the date in which the expense is added.
+- Expense entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day.
+
 Examples:
 
 - `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
@@ -251,6 +256,11 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
 - `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
+
+Note:
+
+- The default date of the added income will be the date in which the income is added.
+- Income entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day. 
 
 Examples:
 
@@ -734,7 +744,7 @@ is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a diff
 corrupted and not be loaded into Stonks XD.
 2. Changing the currency setting in `StonksXD_Settings.csv` is almost never recommended. This is because this will 
 cause all your entries and budgets to be recognised as a different currency. 
-
+3. `.csv` files should not be open concurrently while Stonks XD is running. This would cause the data to not be accurately saved. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

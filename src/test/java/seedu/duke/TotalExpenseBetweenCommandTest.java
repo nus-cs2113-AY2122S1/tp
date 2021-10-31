@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
+import seedu.exceptions.DuplicateExpenseException;
 import seedu.utility.FinancialTracker;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ public class TotalExpenseBetweenCommandTest {
     private FinancialTracker testTracker = new FinancialTracker();
     
     @Test
-    public void execute_twoValidDateInputs_validTotalSum() {
+    public void execute_twoValidDateInputs_validTotalSum() throws DuplicateExpenseException {
         LocalDate startDate = LocalDate.parse("20/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         LocalDate endDate = LocalDate.parse("29/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         
@@ -27,7 +28,7 @@ public class TotalExpenseBetweenCommandTest {
     }
 
     @Test
-    public void execute_twoValidDateInputs_TotalSumZero() {
+    public void execute_twoValidDateInputs_TotalSumZero() throws DuplicateExpenseException {
         LocalDate startDate = LocalDate.parse("30/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         LocalDate endDate = LocalDate.parse("31/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
