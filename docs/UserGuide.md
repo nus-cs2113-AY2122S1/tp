@@ -9,19 +9,20 @@ SEPlanner is a lightweight desktop application for Computer Engineering undergra
 Exchange Programme, optimised for use via Command Line Interface (CLI).  
 
 ## Content Page
+
 * [Quick Start](#quick-start)  
 * [Program run through](#program-run-through)  
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
-  * [Viewing all selected universities](#viewing-all-selected-universities)
   * [Viewing all available modules](#viewing-all-available-modules)
-  * [Viewing all selected modules](#viewing-all-selected-modules)
   * [Adding a partner university](#adding-a-partner-university)
   * [Adding a NUS module](#adding-a-nus-module)
+  * [Viewing all selected universities](#viewing-all-selected-universities)
+  * [Viewing all selected modules](#viewing-all-selected-modules)
+  * [Searching for available module mappings](#searching-for-available-module-mappings)
   * [Adding a module mapping](#adding-a-module-mapping)
   * [Finding a specific university](#finding-a-specific-university)
   * [Finding a specific module](#finding-a-specific-module)
-  * [Searching for available module mappings](#searching-for-available-module-mappings)
   * [Removing a selected university](#removing-a-selected-university)
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
@@ -32,7 +33,7 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `SEPlanner` from [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/releases/tag/v1.0).
+2. Download the latest version of `SEPlanner` from [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for your SEPlanner.
 4. In your preferred command line interface, navigate to that directory.
 5. Enter the command `java -jar tp.jar`.
@@ -100,19 +101,18 @@ Warnings caution you about certain actions that might be dangerous.
 Notes are important pieces of information. 
 </div>
 
-
 </div>
-
 
 ## Features
 
-
-
-
 ### Viewing all available universities: 
+
 Displays all modules from the master list of universities that the user can choose from.  
+
 #### Format: `list /muni`  
+
 #### Example of usage:
+
 * Input: `list /muni`  
 Expected output:
 ```
@@ -127,8 +127,11 @@ Here are the universities and module mappings in the list:
 ```
 
 ### Viewing all selected universities:
+
 Displays all universities added, as well as all module mappings added to the university by the user.  
+
 #### Format: `list /suni`  
+
 * Example 1   
 Input: `list /suni`  
 Expected output:
@@ -140,8 +143,11 @@ Here are the universities and module mappings in your list:
 ```
 
 ### Viewing all available modules: 
+
 Displays all modules from the master list of modules that the user can choose from.  
+
 #### Format: `list /mmod`  
+
 * Example 1  
 Input: `list /mmod`  
 Expected output:  
@@ -157,8 +163,11 @@ Here are the modules in the list:
 ```
 
 ### Viewing all selected modules
+
 Displays all modules from the master list of modules that the user can choose from.  
+
 #### Format: `list /smod`  
+
 * Example 1  
 Input: `list /smod`  
 Expected output:
@@ -206,7 +215,7 @@ Add a NUS module that the user wants to complete during SEP into the user select
 
 <div markdown="block" class="alert alert-info">
 This command accepts either the `<MODULE_INDEX>` or `<MODULE_CODE>` as arguments.
-The `<MODULE_INDEX>` can be found via `list /mmod` command.  
+The `<MODULE_INDEX>` can be found via `list /mmod` command.
 </div>
 
 * Example 1: using index  
@@ -225,9 +234,10 @@ New module added:
 ```
 
 ### Adding a module mapping
+
 Adds a specific pair of module mapping under a selected university.
 
-####Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
+#### Format: `add /map <UNIVERSITY_INDEX> <MODULE_MAPPING_INDEX>`
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -246,9 +256,12 @@ CS1231 - CAS CS131 : Combinatoric Structures
 ```
 
 ### Finding a specific university
+
 Look for universities that matches the user entered keyword.
 * The output also consists of the index of the university, which is needed for subsequent commands.  
-####Format: `find /uni <KEYWORD>`
+
+#### Format: `find /uni <KEYWORD>`
+
 * Example 1   
 Input: `find /uni California`  
 Expected output:
@@ -264,11 +277,29 @@ Expected output:
 [67] - University of California, Santa Barbara
 [68] - University of California, Santa Cruz
 ```
+* Example 2   
+Input: `find /uni  e`
+
+<div markdown="block" class="alert alert-info">
+Note the space before the character 'e' in the keyword " e".
+The find command takes into account spaces as part of the keyword when searching. 
+</div>
+
+Expected output:
+```
+[5]  CentraleSupelec - Ecole Centrale Paris
+[13] Ecole Centrale Des Arts Et Manufactures, Paris
+[46] The University of Edinburgh
+
+```
 
 ### Finding a specific module
+
 Look for modules that matches the user entered keyword.
-* The output also consists of the index of the module, which is needed for subsequent commands.  
+* The output also consists of the index of the module, which is needed for subsequent commands.
+
 #### Format: `find /mod <KEYWORD>`
+
 * Example 1   
 Input: `find /mod CS1010`  
 Expected output:
@@ -280,6 +311,7 @@ Expected output:
 ```
 
 ### Searching for available module mappings:
+
 Displays all available module mappings for a specific university that matches the list of selected modules.
 
 <div markdown="block" class="alert alert-info">
@@ -287,6 +319,7 @@ Mappings here are labeled with a mapping index, which will be used for `add /map
 </div>
 
 #### Format: `searchmap <UNIVERSITY_INDEX>`
+
 * Example 1  
 Input: `searchmap 4`  
 Expected Output:
@@ -297,8 +330,11 @@ Potential mappings for Boston University:
 ```
 
 ### Removing a selected university
+
 Remove a partner university from the user selected university list.
+
 #### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
+
 * Example 1: using index   
 Input: `remove /uni 4`   
 Expected output:
@@ -315,8 +351,11 @@ This university is removed:
 ```
 
 ### Removing a selected NUS module
+
 Removes a module from the user selected module list.
+
 #### Format: `remove /mod <MODULE_CODE>` `remove /mod <MODULE_INDEX>`
+
 * Example 1: using module index  
 Input: `remove /mod 81`  
 Expected output:
@@ -334,8 +373,11 @@ The following module has been removed:
 
 
 ### Removing a selected module mapping
+
 Removes a module mapping under a selected university.
+
 #### Format: `remove /map <UNIVERSITY_INDEX> <MAPPING_INDEX>`  
+
 * Example 1  
 Input: `remove /map 4 2`  
 Expected output:  
@@ -345,11 +387,15 @@ The following module mapping has been removed:
 CS1231 - CAS CS131 : Combinatoric Structures
 ```
 
+<div markdown="block" class="alert alert-info">
+Removing a module does not automatically remove all module mappings associated with it.
+</div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
-contains the data of your previous AddressBook home folder.
+contains the data of your previous SEPlanner home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Do not delete the `/data` directory or any of its files as this will cause you to lose your saved information!
@@ -363,14 +409,15 @@ each command and will be auto-loaded on program start.
 
 Command | Format | Purpose
 --------|---------|-----------
-`add` | `add /uni <UNI_INDEX>` `add /mod <MOD_INDEX>` `add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
-`remove` | `remove /uni <UNI_INDEX>` `remove /mod <MOD_INDEX>` `remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
-`list` | `list /muni` `list /mmod` `list /suni` `list /smod` | List master/selected university list or module list
+`add` | `add /uni <UNI_INDEX>`<br />`add /mod <MOD_INDEX>`<br />`add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
+`remove` | `remove /uni <UNI_INDEX>`<br />`remove /mod <MOD_INDEX>`<br />`remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
+`list` | `list /muni`<br />`list /mmod`<br />`list /suni`<br />`list /smod` | List master/selected university list or module list
 `searchmap` | `searchmap <UNI_INDEX>`| Search for potential mappings for the selected university
-`find` | `find /uni <KEYWORD>` `find /mod <KEYWORD>` | Find the possible university or module
+`find` | `find /uni <KEYWORD>`<br />`find /mod <KEYWORD>` | Find the possible university or module
 `exit` | `exit` | Exit the application
 
 ## Glossary
+
 1. `UNI_INDEX` - The unique identifier corresponding to a particular university.
 2. `MOD_INDEX` - The unique identifier corresponding to a particular module.
 3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the module selected list.
