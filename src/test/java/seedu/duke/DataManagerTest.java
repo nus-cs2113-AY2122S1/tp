@@ -5,6 +5,8 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.DuplicateExpenseException;
+import seedu.exceptions.DuplicateIncomeException;
 import seedu.utility.BudgetManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
@@ -21,12 +23,13 @@ public class DataManagerTest {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     @Test
-    public void saveEntries_validEntries_correctDataFileContent() {
+    public void saveEntries_validEntries_correctDataFileContent() 
+            throws DuplicateExpenseException, DuplicateIncomeException {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
         financialTracker.addExpense(new Expense("qwe", .5, ExpenseCategory.FOOD, date));
-        financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.ALLOWANCE, date));
+        financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.SALARY, date));
         financialTracker.addIncome(new Income("qwe", 12.5, IncomeCategory.ALLOWANCE, date));
         Parser parser = new Parser();
         Ui ui = new Ui();
@@ -36,7 +39,8 @@ public class DataManagerTest {
     }
 
     @Test
-    public void loadEntries_validDataFileContent_correctEntries() {
+    public void loadEntries_validDataFileContent_correctEntries() 
+            throws DuplicateIncomeException, DuplicateExpenseException {
         saveEntries_validEntries_correctDataFileContent();
         Parser parser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
@@ -59,7 +63,8 @@ public class DataManagerTest {
     }
 
     @Test
-    public void loadEntries_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
+    public void loadEntries_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() 
+            throws DuplicateExpenseException, DuplicateIncomeException {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));

@@ -56,6 +56,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.utility.datetools.DateOperator.isValidDateRange;
+
 public class Parser {
 
     /**
@@ -311,7 +313,10 @@ public class Parser {
             LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
             LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return new TotalIncomeBetweenCommand(startDate, endDate);
+            if (isValidDateRange(startDate,endDate)) {
+                return new TotalIncomeBetweenCommand(startDate, endDate);
+            }
+            return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
         }
@@ -327,7 +332,10 @@ public class Parser {
             LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
             LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return new TotalExpenseBetweenCommand(startDate, endDate);
+            if (isValidDateRange(startDate,endDate)) {
+                return new TotalExpenseBetweenCommand(startDate, endDate);
+            } 
+            return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
         }
