@@ -49,6 +49,7 @@ public class OrderValidator extends MedicineValidator {
                 isValid = isValidStatus(ui, parameterValue);
                 break;
             case CommandParameters.SORT:
+                // Fallthrough
             case CommandParameters.REVERSED_SORT:
                 isValid = isValidColumn(ui, parameterValue);
                 break;
