@@ -16,7 +16,6 @@ import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 
 
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -44,6 +43,7 @@ public class Parser {
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
+    private static final String INVALID_THRESHOLD_TYPE_MESSAGE = "Not a threshold type!";
     private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
     private static final String INVALID_THRESHOLD_MESSAGE = "Thresholds cannot be less than or equal to 0";
 
@@ -362,7 +362,7 @@ public class Parser {
                 AlertLowStockCommand.setLowStockThreshold(newStockThreshold);
                 return "Successfully set low stock threshold to " + newStockThreshold + " kg";
             default:
-                throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
+                throw new SitusException(INVALID_THRESHOLD_TYPE_MESSAGE);
             }
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
