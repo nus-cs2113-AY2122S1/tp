@@ -14,6 +14,7 @@ import seedu.situs.command.FindCommand;
 import seedu.situs.command.SubtractCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.localtime.CurrentDate;
 
 
 import java.io.IOException;
@@ -46,6 +47,14 @@ public class Parser {
     private static final String INVALID_THRESHOLD_TYPE_MESSAGE = "Not a threshold type!";
     private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
     private static final String INVALID_THRESHOLD_MESSAGE = "Thresholds cannot be less than or equal to 0";
+    private static final String INVALID_AMOUNT_MESSAGE = "The amount of an ingredient cannot be negative";
+    private static final String INVALID_AMOUNT_SUBTRACT_MESSAGE = "The amount to subtract cannot be negative";
+    private static final String INVALID_EXPIRY_MESSAGE = "Your ingredient is already expired. Please throw it away.";
+    private static final String USE_DELETE_INSTEAD_MESSAGE = "You are updating an ingredient's amount to 0. "
+            + "Use delete to remove it instead.";
+    private static final String INVALID_CHARACTERS_FIND_MESSAGE = "Only alphanumeric characters allowed in keyword";
+    private static final String INVALID_CHARACTERS_ADD_MESSAGE = "Only alphanumeric characters allowed in name";
+
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
