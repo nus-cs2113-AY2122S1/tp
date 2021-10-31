@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 
@@ -42,9 +43,11 @@ public class JsonStorage extends Storage {
     public void execute(ModuleManager moduleManager, StorageActionEnum action) throws InvalidFileException {
         switch (action) {
         case UPDATE:
+            TerminusLogger.info(String.format("Updating JSON file : %s", jsonFileName));
             saveJson(moduleManager);
             break;
         case CREATE:
+            TerminusLogger.info(String.format("Creating the main JSON file : %s", jsonFileName));
             createJson();
             break;
         default:

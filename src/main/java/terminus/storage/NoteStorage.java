@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidFileException;
@@ -37,12 +38,15 @@ public class NoteStorage extends Storage {
             throws InvalidFileException {
         switch (action) {
         case CREATE:
+            TerminusLogger.info(String.format("Adding note file into module folder : %s", module));
             createNoteFile(moduleManager, module);
             break;
         case RELOAD:
+            TerminusLogger.info(String.format("Refreshing content of notes in module folder : %s", module));
             loadNoteIntoModuleManager(moduleManager, module);
             break;
         case DELETE:
+            TerminusLogger.info(String.format("Removing note with the name : %s", deletedNote));
             removeNoteFile(module, deletedNote);
             break;
         default:

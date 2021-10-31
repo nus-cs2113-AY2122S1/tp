@@ -2,6 +2,7 @@ package terminus.storage;
 
 import java.nio.file.Path;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.exception.InvalidFileException;
 
 /**
@@ -26,12 +27,15 @@ public class FolderStorage extends Storage {
     public void execute(String module, String deletedModule, StorageActionEnum action) throws InvalidFileException {
         switch (action) {
         case CREATE:
+            TerminusLogger.info(String.format("Creating a folder for module %s", module));
             createModuleFolder(module);
             break;
         case DELETE:
+            TerminusLogger.info(String.format("Deleting the folder : %s", deletedModule));
             deleteModuleFolder(deletedModule);
             break;
         case UPDATE:
+            TerminusLogger.info(String.format("Renaming the folder %s to %s", deletedModule, module));
             renameModuleFolder(module, deletedModule);
             break;
         default:

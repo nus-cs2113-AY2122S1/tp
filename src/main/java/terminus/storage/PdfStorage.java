@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidFileException;
@@ -42,6 +43,7 @@ public class PdfStorage extends Storage {
             throws InvalidFileException {
         switch (action) {
         case EXPORT:
+            TerminusLogger.info(String.format("Exporting notes into a pdf file from module folder : %s", module));
             exportModuleNotes(moduleManager, module);
             break;
         default:
