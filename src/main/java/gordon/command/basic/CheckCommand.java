@@ -14,6 +14,9 @@ public class CheckCommand extends Command {
     @Override
     public void execute(Cookbook cookbook) {
         try {
+            if (recipeName.isBlank()) {
+                throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
+            }
             cookbook.checkRecipe(recipeName);
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());

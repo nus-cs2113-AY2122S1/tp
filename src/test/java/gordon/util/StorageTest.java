@@ -6,9 +6,6 @@ import gordon.kitchen.Recipe;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class StorageTest {

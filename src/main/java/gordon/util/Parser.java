@@ -86,7 +86,6 @@ public class Parser {
      * <p>If the user's input is invalid, the {@code GordonException} will be thrown.</p>
      *
      * @return Command The corresponding command to be executed
-     * @exception GordonException On invalid input
      * @see GordonException
      */
     public Command parseMaster() {
@@ -123,7 +122,6 @@ public class Parser {
         return new NullCommand();
     }
 
-    // used for JUnit purposes
     /**.
      * <h2>boolean parserHasNextLine().</h2>
      *
@@ -158,18 +156,51 @@ public class Parser {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
 
-        return line.substring(spaceIndex).trim();
+        String recipeName = line.substring(spaceIndex).trim();
+        if (recipeName.isEmpty()) {
+            throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
+        }
+        return recipeName;
+    }
+
+    private boolean isDuplicateIngredient(String[] ingredientsList) {
+        String ingredientA;
+        String ingredientB;
+
+        for (int i = 0; i < ingredientsList.length; i++) {
+            ingredientA = ingredientsList[i].trim();
+            for (int j = i + 1; j < ingredientsList.length; j++) {
+                ingredientB = ingredientsList[j].trim();
+                if (ingredientA.equalsIgnoreCase(ingredientB)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void parseIngredients(String line, Recipe r) throws GordonException {
         int ingredientsIndex = line.indexOf(SET_FIND_INGREDIENTS_PROMPT);
         if (ingredientsIndex == -1) {
             throw new GordonException(GordonException.INGREDIENTS_FORMAT);
+        } else if (line.trim().equalsIgnoreCase("ingredients")) {
+            throw new GordonException(GordonException.EMPTY_INGREDIENT);
         }
+
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
+
+        if (isDuplicateIngredient(ingredientsList)) {
+            throw new GordonException(GordonException.DUPLICATE_INGREDIENT_NAME);
+        }
+
         for (String s : ingredientsList) {
-            r.addIngredient(s.trim());
+            String ingredient = s.trim();
+
+            if (ingredient.isEmpty()) {
+                throw new GordonException(GordonException.EMPTY_INGREDIENT);
+            }
+            r.addIngredient(ingredient);
         }
     }
 
@@ -177,18 +208,26 @@ public class Parser {
         int stepsIndex = line.indexOf(SET_FIND_STEPS_PROMPT);
         if (stepsIndex == -1) {
             throw new GordonException(GordonException.STEPS_FORMAT);
+        } else if (line.trim().equalsIgnoreCase("steps")) {
+            throw new GordonException(GordonException.EMPTY_STEP);
         }
+
         String newLine = line.substring(stepsIndex + STEPS_WORD_LENGTH);
         String[] stepsList = newLine.split("\\+");
         for (String s : stepsList) {
-            r.addStep(s.trim());
+            String step = s.trim();
+
+            if (step.isEmpty()) {
+                throw new GordonException(GordonException.EMPTY_STEP);
+            }
+            r.addStep(step);
         }
     }
 
     public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
         if (splitContent.length < 3) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.ADD_COMMAND_INVALID);
         }
 
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
@@ -201,7 +240,7 @@ public class Parser {
         nameRecipe = parseName(line);
         String inputIndex = line.contains(" ") ? line.substring(line.indexOf(" ") + 1) : " ";
         if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.DELETE_COMMAND_INVALID);
         }
         try {
             int index = Integer.parseInt(inputIndex);
@@ -215,12 +254,12 @@ public class Parser {
     public Command setParse() throws GordonException {
         String[] splitContent = line.split("/");
         if (splitContent.length < 2) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.SET_COMMAND_INVALID);
         }
         String recipeName = parseName(splitContent[0]);
         int spaceIndex = splitContent[1].indexOf(' ');
         if (spaceIndex < 0) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.SET_COMMAND_INVALID);
         }
         String target = splitContent[1].substring(0, spaceIndex);
         switch (target.toLowerCase()) {
@@ -266,7 +305,7 @@ public class Parser {
         case SET_FIND_PRICE_PROMPT:
             try {
                 float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
-                if (price < -1) {
+                if (price < -1 || (price > -1 && price < 0)) {
                     throw new GordonException(GordonException.INDEX_OOB);
                 }
                 return new SetPriceCommand(recipeName, price);
@@ -276,8 +315,8 @@ public class Parser {
         case SET_FIND_TIME_PROMPT:
             try {
                 String[] splitTime = splitContent[1].substring(spaceIndex + 1).split(",");
-                if (splitTime.length < 2) {
-                    throw new GordonException(GordonException.COMMAND_INVALID);
+                if (splitTime.length != 2) {
+                    throw new GordonException(GordonException.SET_TIME_COMMAND_INVALID);
                 }
                 int prepTime = Integer.parseInt(splitTime[0].trim());
                 int cookTime = Integer.parseInt(splitTime[1].trim());
@@ -297,7 +336,7 @@ public class Parser {
         String[] splitContent = line.split("/");
         assert (splitContent.length != 0);
         if (splitContent.length < 2) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.FIND_COMMAND_INVALID);
         }
         int spaceIndex = splitContent[1].indexOf(' ');
         if (spaceIndex < 0) {
@@ -364,11 +403,11 @@ public class Parser {
         String[] splitTagNames = tagNames.split("\\+");
 
         try {
-            if (splitTagNames[0].trim().equals("")) {
+            if (splitTagNames[0].trim().isEmpty()) {
                 throw new GordonException(GordonException.TAG_FORMAT_NOTAGS);
             }
 
-            if (recipeName.equals("")) {
+            if (recipeName.isEmpty()) {
                 throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
             }
 
@@ -390,7 +429,7 @@ public class Parser {
         String[] splitTagNames = tagNames.split("\\+");
 
         try {
-            if (splitTagNames[0].trim().equals("")) {
+            if (splitTagNames[0].trim().isEmpty()) {
                 throw new GordonException(GordonException.DELETETAG_FORMAT_NOTAGS);
             }
 
@@ -413,11 +452,11 @@ public class Parser {
         String[] splitTagNames = tagNames.split("\\+");
 
         try {
-            if (splitTagNames[0].trim().equals("")) {
+            if (splitTagNames[0].trim().isEmpty()) {
                 throw new GordonException(GordonException.UNTAG_FORMAT_NOTAGS);
             }
 
-            if (recipeName.equals("")) {
+            if (recipeName.isEmpty()) {
                 throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
             }
 
