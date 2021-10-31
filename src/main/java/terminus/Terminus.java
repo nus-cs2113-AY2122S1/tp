@@ -40,7 +40,7 @@ public class Terminus {
      */
     public void run() {
         try {
-            start();
+            initialize();
             runCommandsUntilExit();
             exit();   
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class Terminus {
         }
     }
 
-    private void start() {
+    void initialize() {
         try {
             TerminusLogger.initializeLogger();
             TerminusLogger.info("Starting Terminus...");
@@ -83,7 +83,7 @@ public class Terminus {
         TerminusLogger.info("Terminus has started.");
     }
     
-    private CommandResult handleUserInput(String input) {
+    CommandResult handleUserInput(String input) {
         try {
             Command command = parser.parseCommand(input);
             return command.execute(moduleManager);
@@ -102,7 +102,7 @@ public class Terminus {
         return null;
     }
     
-    private void handleCommandResult(CommandResult commandResult) {
+    void handleCommandResult(CommandResult commandResult) {
         boolean isWorkspaceCommand = commandResult.getNewCommandParser() != null;
         if (isWorkspaceCommand) {
             parser = commandResult.getNewCommandParser();
@@ -114,7 +114,7 @@ public class Terminus {
         }
     }
 
-    private void handleStorage(CommandResult commandResult) {
+    void handleStorage(CommandResult commandResult) {
         try {
             // Pass to Storage to handle the request if there are any changes to file.
             if (commandResult.hasChange()) {
@@ -131,7 +131,7 @@ public class Terminus {
         }
     }
 
-    private void runCommandsUntilExit() {
+    void runCommandsUntilExit() {
         while (true) {
             try {
                 assert workspace != null : "Workspace should always have a value";
@@ -164,7 +164,7 @@ public class Terminus {
         }
     }
 
-    private void exit() {
+    void exit() {
         TerminusLogger.info("Saving data into file...");
         try {
             storageManager.setDisabled(false);
