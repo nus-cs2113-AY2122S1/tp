@@ -30,7 +30,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Delete income entry: `del_in`](#delete-income-entry-del_in)
     - [List all income entries: `list_in`](#list-all-income-entries-list_in)
     - [View total income: `total_in`](#view-total-income-total_in)
-    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find-ddmmyyyy)
+    - [Find entry using date: `find DD/MM/YYYY`](#find-entry-using-date-find-ddmmyyyy)
     - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
     - [View total balance: `balance`](#view-total-balance-balance)
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
