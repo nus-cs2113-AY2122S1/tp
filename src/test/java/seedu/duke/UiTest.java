@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
@@ -30,7 +31,7 @@ class UiTest {
     }
 
     @Test
-    void printList_listOfEvents_success() {
+    void printList_listOfEvents_success() throws DukeException {
         // Setting up
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event1 = new Event("Peppa Pig's Concert",
@@ -54,7 +55,7 @@ class UiTest {
     }
 
     @Test
-    void printList_listOfTasks_success() {
+    void printList_listOfTasks_success() throws DukeException {
         // Setting up
         LocalDateTime task1Deadline = Parser.convertDateTime("19-02-2022 2359");
         Task task1 = new Task("Do homework", "CS2113T tp V1.0", task1Deadline);
@@ -74,7 +75,7 @@ class UiTest {
     }
 
     @Test
-    void printList_listOfEventsAndTasks_success() {
+    void printList_listOfEventsAndTasks_success() throws DukeException {
         // Setting up
         LocalDateTime eventDateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event = new Event("Peppa Pig's Concert",
@@ -97,7 +98,7 @@ class UiTest {
     }
 
     @Test
-    void printEvent_oneEvent_success() {
+    void printEvent_oneEvent_success() throws DukeException {
         // Setting up
         LocalDateTime event1DateTime = Parser.convertDateTime("19-02-2022 2000");
         Event event = new Event("Peppa Pig's Concert",
@@ -122,7 +123,7 @@ class UiTest {
     }
 
     @Test
-    void printTask_oneTask_success() {
+    void printTask_oneTask_success() throws DukeException {
         // Setting up
         LocalDateTime taskDeadline = Parser.convertDateTime("19-02-2022 2359");
         Task task = new Task("Do homework", "CS2113T tp V1.0", taskDeadline);
