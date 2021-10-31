@@ -74,6 +74,7 @@ Adds a new recipe to my database of recipes.
 * Each individual ingredient in `INGREDIENTS` can be separated by a '+' sign.
 * Each individual step in `STEPS` can be separated by a '+' sign.
 * You cannot add two recipes with the same name.
+* You cannot use "/" in the recipe name or steps.
 
 #### Example of usage: 
 
