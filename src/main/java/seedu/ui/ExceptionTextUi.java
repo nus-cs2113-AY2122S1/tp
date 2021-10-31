@@ -255,6 +255,12 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void duplicateDetailMessage() {
+        String message = "There appears to be duplicated flags in your command.\n"
+                + "Please kindly remove them to prevent any ambiguous action performed.";
+        printDoubleLineMessage(message);
+    }
+
     public static void invalidLoadedLineMessage(int lineIndex, String contactFilePath) {
         System.out.println(contactFilePath + ":" + lineIndex + " - There is an invalid field.");
     }

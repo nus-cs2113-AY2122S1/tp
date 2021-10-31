@@ -2,17 +2,17 @@ package seedu.ui;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
+
 import java.util.ArrayList;
 
 public abstract class TextUi {
+    public static final int GITHUB_INDEX = 1;
+    public static final int EMAIL_INDEX = 5;
     private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
-
     private static final String LINE = "____________________________________________________________\n";
-    public static final int GITHUB_INDEX = 1;
-    public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -212,7 +212,7 @@ public abstract class TextUi {
         StringBuilder output = new StringBuilder();
         assert hasDeletedDetail.length == 7;
         String[] contactDetails = contact.getContactStringArray();
-        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+        for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) { //from GitHub to Email
             if (contactDetails[i] != null && hasDeletedDetail[i]) {
                 output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
             }

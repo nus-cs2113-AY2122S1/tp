@@ -11,7 +11,6 @@ public class ViewMessageFormatterUi {
     public static final int TELEGRAM_INDEX = 3;
     public static final int TWITTER_INDEX = 4;
     public static final int EMAIL_INDEX = 5;
-    public static final int NUMBER_OF_FIELDS = 6;
 
     public static String viewNameFormatter(Contact contact) {
         if (contact.getName() == null) {

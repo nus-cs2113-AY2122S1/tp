@@ -22,7 +22,7 @@ public class ContactsEncoder {
         }
     }
 
-    //@@author
+    //@@author marcusbory
     public void saveContacts(String contactFilePath, ContactList contactList) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);

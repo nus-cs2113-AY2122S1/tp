@@ -1,5 +1,8 @@
+//@@author marcusbory
+
 package seedu.parser;
 
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -11,8 +14,6 @@ import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgAddException;
 import seedu.exception.MissingArgEditException;
 import seedu.exception.MissingDetailException;
-
-import java.util.logging.Logger;
 
 public abstract class ContactParser extends RegexParser implements ContactDetails {
     public static final int CONTACT_PARAMS_START_INDEX = 1;
@@ -26,13 +27,11 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public static final int DETAIL_INDEX_IN_DETAILS = 1;
     public static final int USER_INFO_INDEX = 2;
 
-    private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
-
     public abstract String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException,
-            MissingArgEditException, MissingArgAddException;
+            MissingArgEditException, MissingArgAddException, DuplicateDetailException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact
@@ -46,7 +45,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public void parseDetail(String[] contactDetails, String detail)
             throws InvalidFlagException, MissingDetailException, ForbiddenDetailException, InvalidNameException,
             InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
         // for commands that specify a flag, but do not specify any argument for that
         // flag
@@ -63,6 +62,9 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
         }
         checkRegex(flag, detailToStore);
         int indexToStore = getIndexToStore(flag);
+        if (contactDetails[indexToStore] != null) {
+            throw new DuplicateDetailException();
+        }
         contactDetails[indexToStore] = detailToStore;
     }
 }

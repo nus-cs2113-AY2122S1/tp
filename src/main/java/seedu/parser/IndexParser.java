@@ -2,10 +2,7 @@
 
 package seedu.parser;
 
-import seedu.contact.Contact;
-import seedu.contact.ContactList;
 import seedu.exception.MissingIndexException;
-
 
 public class IndexParser {
     private static final int COMD_WORD_LENGTH = 1;
@@ -18,6 +15,7 @@ public class IndexParser {
     private static final int REMOVE_ALL_ID = -2;
     private static final String numbers = "[0-9]+";
 
+    //@@author ng-andre
     public static int getIndexFromInput(String userInput)
             throws NumberFormatException, MissingIndexException {
         //split user input into 2 strings: command word string and index string
@@ -47,9 +45,5 @@ public class IndexParser {
             throw new NumberFormatException();
         }
         return index;
-    }
-
-    public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
-        return contactList.getContactAtIndex(index);
     }
 }
