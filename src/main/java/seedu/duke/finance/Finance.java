@@ -11,7 +11,7 @@ public class Finance {
 
     @Override
     public String toString() {
-        return date + " " + account;
+        return date + " $" + account;
     }
 
     public String getDate() {
