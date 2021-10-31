@@ -306,7 +306,7 @@ public class Parser {
         case SET_FIND_PRICE_PROMPT:
             try {
                 float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
-                if (price < -1) {
+                if (price < -1 || (price > -1 && price < 0)) {
                     throw new GordonException(GordonException.INDEX_OOB);
                 }
                 return new SetPriceCommand(recipeName, price);
@@ -316,7 +316,7 @@ public class Parser {
         case SET_FIND_TIME_PROMPT:
             try {
                 String[] splitTime = splitContent[1].substring(spaceIndex + 1).split(",");
-                if (splitTime.length < 2) {
+                if (splitTime.length != 2) {
                     throw new GordonException(GordonException.SET_TIME_COMMAND_INVALID);
                 }
                 int prepTime = Integer.parseInt(splitTime[0].trim());

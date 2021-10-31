@@ -445,8 +445,8 @@ public class ParserTest {
                 + "3. serve" + System.lineSeparator()
                 + "GordonException: Please use the format \"set RECIPE_NAME /time PREP_TIME, COOK_TIME\""
                 + System.lineSeparator()
-                + "Setting times..." + System.lineSeparator()
-                + "Times set successfully." + System.lineSeparator()
+                + "GordonException: Please use the format \"set RECIPE_NAME /time PREP_TIME, COOK_TIME\""
+                + System.lineSeparator()
                 + "GordonException: Please use the format \"set RECIPE_NAME /time PREP_TIME, COOK_TIME\""
                 + System.lineSeparator()
                 + "Setting times..." + System.lineSeparator()
