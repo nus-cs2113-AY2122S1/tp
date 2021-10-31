@@ -9,7 +9,6 @@ end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant ":StockValidator" as stockValidator COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
@@ -20,22 +19,20 @@ autoactivate on
 mainFrame sd Deletion of stock by id
 activate deleteStock
 deleteStock -> deleteStock: deleteStockById()
-deleteStock -> stockValidator : isValidStockId()
-deleteStock <-- stockValidator : isAValidStockId
-opt isAValidStockId
-    loop medicine : medicines
-        deleteStock -> deleteStock : medicine
-        opt medicine instanceof Stock
-            deleteStock -> stock : getStockId()
-            deleteStock <-- stock : stockId
-            opt stock.getStockId() == stockId
-                deleteStock -> stock : setDeleted()
-                deleteStock <-- stock : setAsDeleted
-            end
+loop medicine : medicines
+    deleteStock -> deleteStock : medicine
+    opt medicine instanceof Stock
+        deleteStock -> stock : getStockId()
+        deleteStock <-- stock : stockId
+        opt stock.getStockId() == stockId
+            deleteStock -> stock : setDeleted()
+            deleteStock <-- stock : setAsDeleted
         end
-        deleteStock --> deleteStock
     end
+    deleteStock --> deleteStock
+end
+deleteStock --> deleteStock
 deleteStock -> ui : print()
 deleteStock <-- ui
-end
+
 @enduml

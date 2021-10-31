@@ -250,13 +250,14 @@ The sequence diagram for `AddStockCommand` is shown below.
 MediVault creates an `DeleteStockCommand` object when CommandParser identifies `deletestock` or the `delete` keyword
 in `stock` mode.
 
-* MediVault allows deletion of a stock by specifying stock id.
-* MediVault allows deletion of expiring stocks by specifying an expiry date.
+* MediVault allows deletion of a stock by specifying stock id through `i/ID`.
+* MediVault allows deletion of expiring stocks by specifying an expiry date through `expiring/EXPIRY_DATE`.
 
 > :information_source: Note:
 > * MediVault deletes medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
 > * MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry then executes
   accordingly.
+> * MediVault will not execute if both id and expiry date are specified. 
 
 The sequence diagram for `DeleteStockCommand` is shown below.
 
@@ -356,9 +357,9 @@ The main update logic is split into four sections.
 3. User provided `q/QUANTITY` parameter but not `n/NAME`
    1. If the **updated** `q/QUANTITY` is more than the **original** `q/QUANTITY` MediVault decrements the stock quantity 
    for `n/NAME` present in the prescription object with the additional `q/QUANTITY` which is the difference between the
-   **updated** and **original** `q/QUANTITY.
+   **updated** and **original** `q/QUANTITY`.
    2. Otherwise, MediVault restores the stock quantity for `n/NAME` present in the prescription object with the
-   difference between the **updated** and **original** `q/QUANTITY.
+   difference between the **updated** and **original** `q/QUANTITY`.
 4. User did not provide both `q/QUANTITY` and `n/NAME` parameter.
    1. Restoring or decrement is needed.
 
@@ -443,7 +444,7 @@ The sequence diagram for `ReceiveOrderCommand` is shown below.
 MediVault creates an `ArchivePrescriptionCommand` object when CommandParser identifies `archiveprescription` or the 
 `archive` keyword in `prescription` mode.
 
-* MediVault archives prescription records by specifying a date.
+* MediVault archives prescription records by specifying a date through `d/DATE`.
 * MediVault will remove prescription records that have date <= specified date and output it into the file named 
 `data/prescription_archive.txt`
 
@@ -461,7 +462,7 @@ The sequence diagram for ArchivePrescriptionCommand is shown below.
 MediVault creates an `ArchiveOrderCommand` object when CommandParser identifies `archiveorder` or the
 `archive` keyword in `order` mode.
 
-* MediVault archives order records by specifying a date.
+* MediVault archives order records by specifying a date through `d/DATE`.
 * MediVault will remove only DELIVERED order records that have date <= specified date and output it into the file named
 `data/order_archive.txt`
 
@@ -529,32 +530,32 @@ solution that provides real-time tracking of stock, prescriptions and orders in 
 
 ## Non-Functional Requirements
 
-* Accessibility Requirements: MediVault should be able to run locally without internet connection.
-* Capacity Requirements: MediVault should try to store only important details to minimize data file size as there may be
+* **Accessibility Requirements:** MediVault should be able to run locally without internet connection.
+* **Capacity Requirements:** MediVault should try to store only important details to minimize data file size as there may be
 many data records after long usage. Perhaps could save into multiple files or archive data.
-* Compliance with regulations requirements: MediVault should comply with regulations related to storing of sensitive
+* **Compliance with regulations requirements:** MediVault should comply with regulations related to storing of sensitive
 customer information.
-* Documentation Requirements: MediVault user guide should be documented in a way that a pharmacist without CLI
+* **Documentation Requirements:** MediVault user guide should be documented in a way that a pharmacist without CLI
 experience can understand and learn how to use the application.
-* Efficiency Requirements: MediVault should make use of efficient data structures and algorithms where appropriate to 
+* **Efficiency Requirements:** MediVault should make use of efficient data structures and algorithms where appropriate to 
 optimise speed if possible. However, it is not really a top priority.
-* Extensibility Requirements: MediVault should minimally manage medications. In the future can probably expand inventory
+* **Extensibility Requirements:** MediVault should minimally manage medications. In the future can probably expand inventory
 to handle medical supplies in general.
-* Fault Tolerance Requirements: MediVault should perform sufficient error handling and provide helpful error response
+* **Fault Tolerance Requirements:** MediVault should perform sufficient error handling and provide helpful error response
 messages to suggest correct input to user. 
-* Interoperability Requirements: MediVault should be able to run on minimally Windows, Linux and macOS.
-* Privacy Requirements: MediVault may contain sensitive information such as customer health records. Thus, we should not 
+* **Interoperability Requirements:** MediVault should be able to run on minimally Windows, Linux and macOS.
+* **Privacy Requirements:** MediVault may contain sensitive information such as customer health records. Thus, we should not 
 publish our data to the internet and only store it on our local computer.
-* Portability Requirements: MediVault should be able to run on any computer that has Java 11 and MediVault.jar. Data
+* **Portability Requirements:** MediVault should be able to run on any computer that has Java 11 and MediVault.jar. Data
 should also be portable such that we can easily transfer data when changing computers.
-* Reliability Requirements: MediVault should not crash at any point in time. Even if it does, it must retain data.
-* Response Time Requirements: MediVault basic operations should respond within 3 seconds. For other processing heavy
+* **Reliability Requirements:** MediVault should not crash at any point in time. Even if it does, it must retain data.
+* **Response Time Requirements:** MediVault basic operations should respond within 3 seconds. For other processing heavy
 operations such as start up and loading of data, it should respond within maximum of 15 seconds.
-* Robustness Requirements: MediVault should have some had some testing done be it JUnit Tests or automated I/O 
+* **Robustness Requirements:** MediVault should have some had some testing done be it JUnit Tests or automated I/O 
 redirection tests.
-* Scalability Requirements: MediVault should be built to handle amount of data a small to medium enterprise would have.
-* Stability Requirements: MediVault should function as per normal regardless of how many error user has made.
-* User Requirements: MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
+* **Scalability Requirements:** MediVault should be built to handle amount of data a small to medium enterprise would have.
+* **Stability Requirements:** MediVault should function as per normal regardless of how many error user has made.
+* **User Requirements:** MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
 
 
 ## Instructions for manual testing
@@ -571,6 +572,8 @@ redirection tests.
    outputs [here](https://ay2122s1-cs2113t-t10-1.github.io/tp/UserGuide.html).
 
 ### Data Storage
+
+All data files are located in the data folder.
 
 1. Data is saved in stock.txt, prescription.txt, order.txt.
     * Test Case:

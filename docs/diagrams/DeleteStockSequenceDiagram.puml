@@ -18,37 +18,17 @@ box Inventory COLOR_INVENTORY_BOX
 end box
 
 autoactivate on
-
--> deleteStock: execute()
-deleteStock -> ui : getInstance()
-deleteStock <-- ui
-deleteStock -> medicine : getInstance()
-deleteStock <-- medicine
-create stockValidator
-deleteStock -> stockValidator: new StockValidator()
-deleteStock <-- stockValidator
-deleteStock -> stockValidator : containsInvalidParameters()
-deleteStock <-- stockValidator : isInvalidParameter
-
-opt !isInvalidParameter
-    deleteStock -> stockValidator : containsInvalidParameterValues()
-    deleteStock <-- stockValidator : isInvalidParameterValues
-    opt !isInvalidParameterValues
-        opt !(hasStockId && hasExpiryDate)
-            alt hasStockId && !hasExpiryDate
-                ref over deleteStock, medicine
-                    Deletion of stock by id
-                end ref
-            else !hasStockId && hasExpiryDate
-                ref over deleteStock, medicine
-                    Deletion of stock by expiry
-                end ref
-            end
-        end
+mainFrame sd Logic for DeleteStockCommand
+activate deleteStock
+opt !(hasStockId && hasExpiryDate)
+    alt hasStockId && !hasExpiryDate
+        ref over deleteStock, medicine
+            Deletion of stock by id
+        end ref
+    else !hasStockId && hasExpiryDate
+        ref over deleteStock, medicine
+            Deletion of stock by expiry
+        end ref
     end
 end
-deleteStock -> storage : getInstance()
-deleteStock <-- storage
-deleteStock -> storage: saveData()
-deleteStock <-- storage
 @enduml
