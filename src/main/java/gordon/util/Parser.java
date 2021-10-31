@@ -155,8 +155,6 @@ public class Parser {
 
         if (spaceIndex == -1) {
             throw new GordonException(GordonException.COMMAND_INVALID);
-        } else if (spaceIndex == 0) {
-            throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
         }
 
         String recipeName = line.substring(spaceIndex).trim();
