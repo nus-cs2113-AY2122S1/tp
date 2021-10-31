@@ -30,9 +30,6 @@ public class Storage {
             if (Files.notExists(folderPath)) {
                 Files.createDirectories(folderPath);
             }
-        } catch (FileAlreadyExistsException e) {
-            // Should not reach here
-            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_FILE_EXIST, folderPath));
         } catch (IOException e) {
             throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FOLDER, folderPath));
         } catch (Exception e) {
@@ -124,7 +121,8 @@ public class Storage {
      * @param filePath The full path of the folder to be cleaned.
      * @throws InvalidFileException when any file I/O operations has error.
      */
-    private void cleanAllFilesInclusive(Path filePath) throws InvalidFileException {
+    protected void cleanAllFilesInclusive(Path filePath) throws InvalidFileException {
+        assert filePath != null;
         File file = new File(filePath.toString());
         try {
             Files.walk(Paths.get(file.getAbsolutePath()))
@@ -153,8 +151,10 @@ public class Storage {
             return Paths.get(corePath.toString(), path);
         } catch (InvalidPathException e) {
             TerminusLogger.severe(String.format(Messages.ERROR_INVALID_FILE_PATH, corePath + path));
-            return null;
+        } catch (NullPointerException e) {
+            TerminusLogger.severe(String.format(Messages.ERROR_INVALID_FILE_PATH, "null"));
         }
+        return null;
     }
 
     /**
@@ -165,6 +165,9 @@ public class Storage {
      * @throws InvalidFileException when any file I/O operations has error.
      */
     public File[] getListOfFiles(Path folderPath) throws InvalidFileException {
+        if (folderPath == null) {
+            throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FOLDER, "null"));
+        }
         File folder = new File(folderPath.toString());
         if (folder == null) {
             throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FOLDER, folderPath));
@@ -188,6 +191,8 @@ public class Storage {
             return Files.probeContentType(Paths.get(file.getAbsolutePath()));
         } catch (IOException e) {
             throw new InvalidFileException(String.format(Messages.ERROR_GET_FILE_CONTENT, file.getAbsolutePath()));
+        } catch (NullPointerException e) {
+            throw new InvalidFileException(String.format(Messages.ERROR_GET_FILE_CONTENT, "null"));
         }
     }
 
@@ -199,6 +204,8 @@ public class Storage {
      * @throws InvalidFileException when any file I/O operations has error.
      */
     public void renameFolder(Path oldPath, Path newPath) throws InvalidFileException {
+        assert oldPath != null;
+        assert newPath != null;
         if (Files.notExists(newPath) && Files.notExists(oldPath)) {
             createFolder(newPath);
         } else if (Files.exists(oldPath) && Files.notExists(newPath)) {
