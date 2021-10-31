@@ -85,7 +85,8 @@ public class MedianMarkCommand extends Command {
      * @param ui     The ui instance to handle interactions with the user.
      * @param teachingClass The class the assessment belongs to.
      */
-    private void printMedianMarks(Ui ui, TeachingClass teachingClass, Assessment assessment, ArrayList<Student> students) {
+    private void printMedianMarks(Ui ui, TeachingClass teachingClass, Assessment assessment,
+                                  ArrayList<Student> students) {
         StudentList studentList = teachingClass.getStudentList();
         String assessmentName = assessment.getName();
         double classSize = studentList.getSize();
