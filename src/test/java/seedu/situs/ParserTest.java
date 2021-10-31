@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
-    public void parseDeleteCommand_invalidNumberFormatInput_expectException() {
+    public void parseDeleteCommand_invalidParameterFormatInput_expectException() {
         try {
             String inputString = "delete abc";
             String resultMsg = Parser.parse(inputString);
             fail();
         } catch (SitusException e) {
-            assertEquals("The number of parameters is wrong!", e.getMessage());
+            assertEquals("The parameter format is wrong!", e.getMessage());
         }
     }
 
