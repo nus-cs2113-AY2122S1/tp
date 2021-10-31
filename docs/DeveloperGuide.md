@@ -195,8 +195,8 @@ creates a new instance of the `Medicine` class.
 5. MediVault runs `containsInvalidParameterValues()` to check if **parameter values** input by the user is valid.
 6. If **Step 3** and **Step 5** are able to run without throwing any exception or error, user inputs are considered 
 valid.
-7. After running the logic for `*Command`, commands that modifies `*` attempts to get the instance of `Storage`
-class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
+7. After running the logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
+`Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
 
 The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 
 if user input provided by the user are valid. This **guarantees** that the parameters and parameter values provided by 
