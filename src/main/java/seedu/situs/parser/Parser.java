@@ -14,6 +14,7 @@ import seedu.situs.command.FindCommand;
 import seedu.situs.command.SubtractCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.localtime.CurrentDate;
 
 
 import java.io.IOException;
@@ -46,6 +47,14 @@ public class Parser {
     private static final String INVALID_THRESHOLD_TYPE_MESSAGE = "Not a threshold type!";
     private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
     private static final String INVALID_THRESHOLD_MESSAGE = "Thresholds cannot be less than or equal to 0";
+    private static final String INVALID_AMOUNT_MESSAGE = "The amount of an ingredient cannot be negative";
+    private static final String INVALID_AMOUNT_SUBTRACT_MESSAGE = "The amount to subtract cannot be negative";
+    private static final String INVALID_EXPIRY_MESSAGE = "Your ingredient is already expired. Please throw it away.";
+    private static final String USE_DELETE_INSTEAD_MESSAGE = "You are updating an ingredient's amount to 0. "
+            + "Use delete to remove it instead.";
+    private static final String INVALID_CHARACTERS_FIND_MESSAGE = "Only alphanumeric characters allowed in keyword";
+    private static final String INVALID_CHARACTERS_ADD_MESSAGE = "Only alphanumeric characters allowed in name";
+
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -106,6 +115,23 @@ public class Parser {
     }
 
     /**
+     * Checks if a string contains valid characters(alphanumeric).
+     *
+     * @param stringToCheck The string to check
+     * @return true if all valid, false otherwise
+     */
+    private static boolean isContainsInvalidCharacters(String stringToCheck) {
+        String validCharacters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789";
+        for (int i = 0; i < stringToCheck.length(); i++) {
+            char characterToCheck = stringToCheck.charAt(i);
+            if (!validCharacters.contains(Character.toString(characterToCheck))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Parses and executes the {@code find} command.
      *
      * @param command The user input String
@@ -122,6 +148,9 @@ public class Parser {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
             keywords[i] = keywords[i].trim();
+            if (isContainsInvalidCharacters(keywords[i])) {
+                throw new SitusException(INVALID_CHARACTERS_FIND_MESSAGE);
+            }
         }
 
         String resultMsg = "";
@@ -171,6 +200,11 @@ public class Parser {
             int ingredientNumber = Integer.parseInt(details[1]);
             double newAmount = Double.parseDouble(details[2]);
 
+            if (newAmount < 0) {
+                throw new SitusException(INVALID_AMOUNT_MESSAGE);
+            } else if (newAmount == 0) {
+                throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
+            }
             String resultMsg = new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
 
             return resultMsg;
@@ -203,8 +237,21 @@ public class Parser {
 
         try {
             String ingredientName = details[1];
+
+            if (isContainsInvalidCharacters(ingredientName)) {
+                throw new SitusException(INVALID_CHARACTERS_ADD_MESSAGE);
+            }
+
             double ingredientAmount = Double.parseDouble(details[2]);
+
+            if (ingredientAmount <= 0) {
+                throw new SitusException(INVALID_AMOUNT_MESSAGE);
+            }
             LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
+
+            if (ingredientExpiry.isBefore(CurrentDate.getCurrentDate())) {
+                throw new SitusException(INVALID_EXPIRY_MESSAGE);
+            }
 
             Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
                     ingredientExpiry);
@@ -234,6 +281,10 @@ public class Parser {
         try {
             int groupNumber = Integer.parseInt(details[0]);
             double subtractAmount = Double.parseDouble(details[1]);
+
+            if (subtractAmount < 0) {
+                throw new SitusException(INVALID_AMOUNT_SUBTRACT_MESSAGE);
+            }
             return new SubtractCommand(groupNumber, subtractAmount).run();
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
