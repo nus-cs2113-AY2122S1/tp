@@ -106,6 +106,23 @@ public class Parser {
     }
 
     /**
+     * Checks if a string contains valid characters(alphanumeric).
+     *
+     * @param stringToCheck The string to check
+     * @return true if all valid, false otherwise
+     */
+    private static boolean isContainsInvalidCharacters(String stringToCheck) {
+        String validCharacters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789";
+        for (int i = 0; i < stringToCheck.length(); i++) {
+            char characterToCheck = stringToCheck.charAt(i);
+            if (!validCharacters.contains(Character.toString(characterToCheck))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Parses and executes the {@code find} command.
      *
      * @param command The user input String
