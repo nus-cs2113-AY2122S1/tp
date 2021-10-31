@@ -13,7 +13,7 @@ public class IndexParser {
     private static final int PERSONAL_CONTACT_ID = -1;
     private static final String REMOVE_ALL_INDEX = "all";
     private static final int REMOVE_ALL_ID = -2;
-    private static final String numbers = "[0-9]+";
+    private static final String numbers = "^-?\\d+$";
 
     //@@author ng-andre
     public static int getIndexFromInput(String userInput)
