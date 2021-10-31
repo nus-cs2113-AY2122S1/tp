@@ -35,7 +35,7 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 * `Command`
   * Defines how a command is to be executed.
 * `ClassList`
-  * Contains a list of `ClassObject` objects currently being managed by the app.
+  * Contains a list of `TeachingClass` objects currently being managed by the app.
 * `Util`
   * Contains useful methods (e.g. Check if a string is integer/double, convert string to integer/double).
 * `Storage`
@@ -55,9 +55,9 @@ The sequence diagram shown below illustrates how the `add_class` command works:
 
 Steps:
 1. The `Taa` instance reads in a user input and calls `AddClassCommand.execute(classList:ClassList, ui:Ui, storage:Storage)`.
-4. A new `ClassObject` object is created and the `ClassList.addClass(classObject:ClassObject)` method is invoked to add the `ClassObject`
-object into the list of classes.
-5. Lastly, a message indicating that the class has been added will be printed out.
+2. A new `TeachingClass` object is created and the `ClassList.addClass(teachingClass:TeachingClass)` method is invoked
+to add the `TeachingClass` object into the list of classes.
+3. Lastly, a message indicating that the class has been added will be printed out.
 
 <br>
 
