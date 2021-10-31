@@ -1,4 +1,4 @@
-# Duke
+# NUS Buddy
 
 {Give product intro here}
 
