@@ -91,6 +91,7 @@ Parameters | Prefixes for MediVault to understand the type of information you pr
     * This project comes with a GitHub Actions config files (in `.github/workflows folder`). When GitHub detects those
       files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set
       up required.
+
 ## Design
 
 ### Architecture
