@@ -159,8 +159,8 @@ public class Ui {
     public boolean printOpenNoteMessage(NoteList notes) {
         boolean checkExistance = printNoteTitle(notes);
         if (checkExistance) {
-            System.out.println("Do you want to search a note (type in 'search') or "
-                    + "directly open a note (type in 'open')?");
+            System.out.println("Do you want to search a note (type in '1') or "
+                    + "directly open a note (type in '2')?");
         }
         return checkExistance;
     }
@@ -298,7 +298,7 @@ public class Ui {
     }
 
     public void printNoteSearchInstructions() {
-        System.out.println("Do you want to search by keyword (type 'keyword') or scene index (type 'index')?");
+        System.out.println("Do you want to search by keyword (type '1') or scene index (type '2')?");
     }
 
     public void printNoteSearchKeyWordInstructions() {
