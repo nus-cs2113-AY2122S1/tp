@@ -32,6 +32,9 @@ The main commands are separated according to their features. Subcommands are use
 ### Help - `help`
 The command `help` will show a list of all the available commands to the user.
 
+### Exit - `exit`
+The command `exit` will exit the application.
+
 ### Expense - `expense`
 
 #### Adding an expense - `add`
