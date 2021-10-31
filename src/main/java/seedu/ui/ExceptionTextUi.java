@@ -89,6 +89,7 @@ public class ExceptionTextUi {
                 + "Rules for Linkedin username :\n"
                 + "    * Lowercase letters only\n"
                 + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Other special characters and spaces not allowed\n"
                 + "    * Length between 3 to 100 characters\n\n"
                 + "Please enter your linkedin username again\n"
                 + "or press ENTER to skip.";
