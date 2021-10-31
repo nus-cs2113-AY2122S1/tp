@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
 /**
  * Represents a list of days in a trip.
  * Each <code>Trip</code> will have 1 <code>DaysList</code>.

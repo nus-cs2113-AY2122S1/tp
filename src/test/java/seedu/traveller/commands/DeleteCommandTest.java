@@ -1,30 +1,28 @@
 package seedu.traveller.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.traveller.objects.TripsList;
 import seedu.traveller.Ui;
-import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.objects.TripsList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 //@@author Uxinnn
 public class DeleteCommandTest {
-    private DeleteCommand deleteCommand;
+    private final DeleteCommand deleteCommand;
 
     public DeleteCommandTest() {
         this.deleteCommand = new DeleteCommand("testTrip");
     }
 
     @Test
-    public void deleteCommand_tripNotFound_exceptionThrown() {
-        final String expectedOutput = "\tThe trip specified does not exist.";
+    public void deleteCommand_execute_exceptionThrown() {
         TripsList tripsList = new TripsList();
         Ui ui = new Ui();
-        try {
+
+        assertThrows(TripNotFoundException.class, () -> {
             this.deleteCommand.execute(tripsList, ui);
-        } catch (TravellerException e) {
-            assertEquals(expectedOutput, e.getMessage());
-        }
+        });
     }
 }

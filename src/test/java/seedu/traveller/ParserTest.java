@@ -11,42 +11,37 @@ import seedu.traveller.commands.SearchItemCommand;
 import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
+import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTripNameException;
+import seedu.traveller.exceptions.InvalidAddDayFormatException;
+import seedu.traveller.exceptions.InvalidAddItemFormatException;
+import seedu.traveller.exceptions.InvalidNewFormatException;
+import seedu.traveller.exceptions.InvalidNumberOfDaysException;
+import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 //@@author Uxinnn
 public class ParserTest {
-    private final NewCommand newCommand;
-    private final EditCommand editCommand;
-    private final DeleteCommand deleteCommand;
-    private final ViewCommand viewCommand;
-    private final ShortestCommand shortestCommand;
-    private final AddDayCommand addDayCommand;
-    private final AddItemCommand addItemCommand;
-    private final SearchItemCommand searchItemCommand;
-    private final EditItemCommand editItemCommand;
-    private final ExitCommand exitCommand;
-
-    public ParserTest() {
-        newCommand = new NewCommand("trip0", "CHN", "JPN");
-        editCommand = new EditCommand("trip1", "SIN", "MLY");
-        deleteCommand = new DeleteCommand("trip2");
-        viewCommand = new ViewCommand("all");
-        shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
-        addDayCommand = new AddDayCommand("trip3", 1);
-
-        addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
-        searchItemCommand = new SearchItemCommand("trip4", 0, "sleep at home");
-        editItemCommand = new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
-        //deleteItemCommand = new DeleteItemCommand("trip4", "wake up from bed");
-
-        exitCommand = new ExitCommand();
-    }
-
     @Test
     public void parse_success() {
+        NewCommand newCommand = new NewCommand("trip0", "CHN", "JPN");
+        EditCommand editCommand = new EditCommand("trip1", "SIN", "MLY");
+        DeleteCommand deleteCommand = new DeleteCommand("trip2");
+        ViewCommand viewCommand = new ViewCommand("all");
+        ShortestCommand shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
+        AddDayCommand addDayCommand = new AddDayCommand("trip3", 1);
+        AddItemCommand addItemCommand =
+                new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
+        SearchItemCommand searchItemCommand =
+                new SearchItemCommand("trip4", 0, "sleep at home");
+        EditItemCommand editItemCommand =
+                new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
+        ExitCommand exitCommand = new ExitCommand();
+
         try {
             assertEquals(newCommand.toString(), Parser.parse("new trip0 /from CHN /to JPN").toString());
             assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY").toString());
@@ -67,30 +62,99 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_newCommand1Country_exceptionThrown() {
-        try {
-            assertEquals(newCommand, Parser.parse("new trip0 CHN-JPN"));
-        } catch (TravellerException e) {
-            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME /from START /to END",
-                    e.getMessage());
-        }
-    }
-
-    @Test
-    public void parse_newCommandMissingSpace_exceptionThrown() {
-        try {
-            Parser.parse("newtestTrip1 SIN MLY");
-        } catch (TravellerException e) {
-            assertEquals("\tThe command 'newtestTrip1 SIN MLY' is not recognised.", e.getMessage());
-        }
-    }
-
-    @Test
     public void parse_invalidCommand_exceptionThrown() {
-        try {
+        assertThrows(CommandNotFoundException.class, () -> {
             Parser.parse("bad command");
-        } catch (TravellerException e) {
-            assertEquals("\tThe command 'bad command' is not recognised.", e.getMessage());
-        }
+        });
+    }
+
+    @Test
+    public void parse_newCommand_exceptionThrown() {
+        // Invalid trip name, all
+        assertThrows(IllegalTripNameException.class, () -> {
+            Parser.parse("new all /from CHN /to JPN");
+        });
+        // Missing trip name
+        assertThrows(IllegalTripNameException.class, () -> {
+            Parser.parse("new  /from CHN /to JPN");
+        });
+        // Missing /to flag
+        assertThrows(InvalidNewFormatException.class, () -> {
+            Parser.parse("new trip /from CHN JPN");
+        });
+        // Missing /from flag
+        assertThrows(InvalidNewFormatException.class, () -> {
+            Parser.parse("new trip CHN /to JPN");
+        });
+        // Missing flags and values
+        assertThrows(InvalidNewFormatException.class, () -> {
+            Parser.parse("new trip");
+        });
+    }
+
+    @Test
+    public void parse_addDayCommand_exceptionThrown() {
+        // Invalid /day flag input, character
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-day trip /day a");
+        });
+        // Invalid /day flag input, negative integer
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-day trip /day -1");
+        });
+        // Missing /day flag input
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-day trip /day ");
+        });
+        // Missing /day flag
+        assertThrows(InvalidAddDayFormatException.class, () -> {
+            Parser.parse("add-day trip 3");
+        });
+        // Missing whitespace between /day flag and value
+        assertThrows(InvalidAddDayFormatException.class, () -> {
+            Parser.parse("add-day trip /day3");
+        });
+    }
+
+    @Test
+    public void parse_addItemCommand_exceptionThrown() {
+        // Invalid /day flag input, character
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-item trip /day a /time 7pm /name Eat dinner");
+        });
+        // Invalid /day flag input, negative integer
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-item trip /day -1 /time 7pm /name Eat dinner");
+        });
+        // Missing /day flag value
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-item trip /day  /time 7pm /name Eat dinner");
+        });
+        // Missing /day flag
+        assertThrows(InvalidAddItemFormatException.class, () -> {
+            Parser.parse("add-item trip /time 7pm /name Eat dinner");
+        });
+        // Missing /time flag
+        assertThrows(InvalidAddItemFormatException.class, () -> {
+            Parser.parse("add-item trip /day 0 /name Eat dinner");
+        });
+        // Missing /name flag
+        assertThrows(InvalidAddItemFormatException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time 7pm");
+        });
+        // Wrong order of flags in add-item command
+        assertThrows(InvalidAddItemFormatException.class, () -> {
+            Parser.parse("add-item trip /time 7pm /name Eat dinner /day 0");
+        });
+        assertThrows(InvalidAddItemFormatException.class, () -> {
+            Parser.parse("add-item trip /day /time /name ");
+        });
+    }
+
+    @Test
+    public void parse_viewCommand_exceptionThrown() {
+        assertThrows(InvalidViewCommandException.class, () -> {
+            Parser.parse("view ");
+        });
     }
 }

@@ -71,13 +71,41 @@ These 4 sub-components are implemented to maintain an internal graph of countrie
 is then performed on this graph to obtain the shortest travel path from 1 country to another.
 
 #### 1.1.1. WorldMap class
-{TODO: Add details}
+The `WorldMap` class is the main overarching class for the World Map component of the project. 
+It instantiates all its subsequent classes, `GraphList`, `DataLoader`, and `Logic`. 
+
+Its main functionalities are is the `calcMinDistance` function which calculates the least distance o get from a given source 
+to destination country. Similarly, the `calcMinCost` function calculates the least cost. Then, the function then reads either *dist.txt* or *cost.txt* 
+and runs `computeSource` and `getToGoal`, both from the `Logic` class. Also, another key functionality is the `editMap` which is linked to the `Parser` class, which enables the user to edit a distance from
+a given source to destination country.
+
+As a side note, `initWorldMap` initialises the main World Map which is based on distances, 
+while `altWorldMap` boots up a side, read-only World Map based on the flight cost paths.     
+
+`WorldMap` also throws various exceptions to ensure the distances and costs are updated in the correct format. For example,
+`distanceNonZero` and `distanceNonString` ensure the user's input is non-zero and is a number-type.
+
+{TODO: Add diagram}
 
 #### 1.1.2. GraphList class
-{TODO: Add details}
+The `GraphList` class is based off the `WorldMap` overarching class and translate it into a more simplistic graph format, namely
+referring to its components as vertices and edges.
+It instantiates subsequent classes like `vertexArray` of Country type and `nameArray` of String type.
+
+Its main functionalities are `addVertex` and `findVertex` which are then accessed by classes like `DataLoader` and `WorldMap`. 
+
+Also, functions like `createEdge` link it to the Country class and calls the subsequent function `addNeighbour`, creating a bidirectional edge for both countries of interest. 
+Similarly, the `modifyEdge` function calls the subsequent function `updateNeighbour` from the Country class. The list of distances are all stored in a matrix which is
+called by `getEdgeMatrix` by the `WorldMap` class.
+
+{TODO: Add diagram}
 
 #### 1.1.3. Logic class
-{TODO: Add details}
+The `Logic` class is the main class driving the logic from the overarching `WorldMap` class. Namely, it runs Dijkstra's algorithm on the given WorldMap.
+
+This is done through both of its functionalities which need to be called together. `computeSource` runs Dijkstra's algorithm from the given starting country and 
+expands outwards to all other countries, yielding the least distances to all other countries as well. Then, `getToGoal` backtracks from the target country to 
+trace the shortest path to the source country, in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/dist.txt* or *flightData/cost.txt* to create the vertexes and edges in `GraphList`.
@@ -149,10 +177,20 @@ viewing trips, or deleting trips.
 thrown.
 
 #### 1.2.3. TripsList class
+The `TripsList` class is the main class to store the data for `Trip`, `Item`, and `Day`. 
+
+Its main functionalities are `add` and `delete`, which will control and edit the storage data. Also the `get` and `getSize` functions help get access to the data.
+
 {TODO: Add details}
 
 #### 1.2.4. Ui class
-{TODO: Add details}
+The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then print messages in the interface.
+
+{TODO: Add graft}
+The steps illustated by Figure 6 is summarised now.
+1. Run the `printWelcome` to greet the users.
+2. Read user input and pass it to the `Parser`
+3. Functions in `Ui` will be repeatedly called by `Command` class.
 
 #### 1.2.5. SaveLoader class
 The `SaveLoader` class handles the reading and writing of the save file which stores the existing trips when Traveller is exited.
@@ -180,8 +218,11 @@ The return strings of each trip, day and item will correspond to the command tha
 
 ## 2. Product Scope
 ### 2.1. Target User Profile
-* has a need to plan and manage trips and itineraries
+* has a need to plan a trip
+* want to optimise a flight
+* would like to design detailed travel plans
 * prefers desktop and CLI over apps and GUI
+* is familiar with command line interface
 * can type fast
 
 ### 2.2. Value Proposition

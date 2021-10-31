@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * Contains all functions that is used to print output to the user's console.
+ */
 public class Ui {
     private static final Logger logger = Logger.getLogger(Ui.class.getName());
     private final Scanner scanner = new Scanner(System.in);
@@ -53,7 +56,8 @@ public class Ui {
         assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
         System.out.println("\tHere are all your trips: ");
         for (int i = 0; i < tripsList.getSize(); i++) {
-            printTrip(tripsList.getTrip(i));
+            Trip trip = tripsList.getTrip(i);
+            printTrip(trip);
         }
     }
 
