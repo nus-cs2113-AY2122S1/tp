@@ -8,75 +8,62 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:CommandSyntax" as commandsyntax COLOR_UTILITIES
     participant ":StockValidator" as stockvalidator COLOR_UTILITIES
     participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
-    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
-    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+    participant "<<class>>\n:Stock" as stock COLOR_INVENTORY
 end box
 
 autoactivate on
+mainFrame sd Logic for AddStockCommand
 
--> addstock: execute()
-    addstock -> ui: getInstance()
-    addstock <-- ui
-    addstock -> medicine : getInstance()
-    addstock <-- medicine
-
-
-
-        addstock -> addstock : checkValidParametersAndValues()
-        opt !isInvalidParameter
-            addstock -> commandsyntax : containsInvalidParameters()
-            addstock <-- commandsyntax : isInvalidParameter
-            opt !isInvalidParameterValues
-                addstock -> stockvalidator : containsInvalidParameterValues()
-                addstock <-- stockvalidator : isInvalidParameterValues
-
-                end
-            end
-            addstock --> addstock : isCheckValidParametersAndValues
-            alt nameExist
-                addstock -> stockmanager: getTotalStockQuantity()
-                addstock <-- stockmanager: totalStock
-
-
-                addstock -> addstock : checkDateAndQuantity()
-                    opt isValidDate
-                        addstock -> stockvalidator : dateValidityChecker()
-                        addstock <-- stockvalidator : isValidDate
-                        opt isValidQuantity
-                            addstock -> stockvalidator : quantityValidityChecker()
-                            addstock <-- stockvalidator : isValidQuantity
-
-                        end
-                    end
-                    addstock --> addstock : isCheckDateAndQuantity
-
-
-
-    else !nameExist
-        addstock -> addstock : checkValidParametersAndValues()
-        opt !isInvalidParameter
-            addstock -> commandsyntax : containsInvalidParameters()
-            addstock <-- commandsyntax : isInvalidParameter
-            opt !isInvalidParameterValues
-            addstock -> stockvalidator : containsInvalidParameterValues()
-            addstock <-- stockvalidator : isInvalidParameterValues
+alt nameExist
+    addstock -> stockmanager: getTotalStockQuantity()
+    addstock <-- stockmanager: totalStock
+    addstock -> addstock : isExpiryExist()
+    loop stock : filteredStocks
+        opt isValidQuantity
+            addstock -> addstock : isValidQuantity()
+            addstock -> stockvalidator : quantityValidityChecker()
+            addstock <-- stockvalidator : isValidQuantity
+            addstock --> addstock : isValidQuantity
+            opt formatExpiry.equals(stock.getExpiry())
+                addstock -> stock : getQuantity()
+                addstock <-- stock : getQuantity
+                addstock -> stock : setQuantity()
+                addstock <-- stock :
             end
         end
-        addstock --> addstock : isCheckValidParametersAndValues
-
     end
-    addstock -> storage: getInstance()
-    addstock <-- storage
-    addstock -> storage: saveData()
-    deactivate storage
-    deactivate addstock
+    addstock --> addstock : isExpiryExist
+    addstock -> addstock : addSameMedicine()
+    loop stock : filteredStocks
+        opt isValidQuantity
+        addstock -> addstock : isValidQuantity()
+        addstock -> stockvalidator : quantityValidityChecker()
+        addstock <-- stockvalidator : isValidQuantity
+        addstock --> addstock : isValidQuantity
+        addstock -> addstock : addMedicine()
+        addstock --> addstock : addMedicine
+        end
+        addstock --> addstock : addSameMedicine
+    end
+
+else !nameExist
+    addstock -> addstock : isValidQuantity()
+    addstock -> stockvalidator : quantityValidityChecker()
+    addstock <-- stockvalidator : isValidQuantity
+    addstock --> addstock : isValidQuantity
+    opt isValidQuantity
+        addstock -> addstock : addMedicine()
+        addstock --> addstock : addMedicine
+    end
+end
+
+
+deactivate addstock
 
 
 

@@ -1,0 +1,54 @@
+@startuml AddPrescriptionSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":AddPrescription" as addprescription COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
+    participant ":StockComparator" as stockcomparator COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Stock" as stock COLOR_INVENTORY
+end box
+
+autoactivate on
+mainframe sd AddPrescriptionCommand
+    addprescription -> stockmanager: getTotalStockQuantity()
+    addprescription <-- stockmanager: totalStock
+
+    create stockcomparator
+    addprescription -> stockcomparator : new StockComparator()
+    addprescription <-- stockcomparator : filteredStocks
+    deactivate stockcomparator
+    loop stock : filteredStocks
+        opt existingExpiry.after(prescribeDate) || prescribeDateString.equals(expiryString)
+            opt existingQuantity == quantityToPrescribe
+                addprescription -> addprescription : prescribe()
+                addprescription -> stock : setQuantity()
+                addprescription <-- stock
+                addprescription --> addprescription
+            end
+
+            opt existingQuantity > quantityToPrescribe
+                addprescription -> addprescription : prescribe()
+                addprescription -> stock : setQuantity()
+                addprescription <-- stock
+                addprescription --> addprescription
+            end
+            opt existingQuantity < quantityToPrescribe
+                addprescription -> addprescription : prescribe()
+                addprescription -> stock : setQuantity()
+                addprescription <-- stock
+                addprescription --> addprescription
+            end
+        end
+    end
+
+deactivate addprescription
+
+@enduml

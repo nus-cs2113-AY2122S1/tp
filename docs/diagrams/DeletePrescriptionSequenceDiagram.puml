@@ -1,0 +1,51 @@
+@startuml DeletePrescriptionSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":deleteprescription" as deleteprescription COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":PrescriptionValidator" as prescriptionValidator COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Stock" as stock COLOR_INVENTORY
+end box
+
+autoactivate on
+mainframe sd DeletePrescriptionCommand
+    opt isValidPrescriptionId
+    deleteprescription -> prescriptionValidator : isValidPrescriptionId()
+    deleteprescription <-- prescriptionValidator : isValidPrescriptionId
+    deleteprescription -> deleteprescription : setStockQuantity()
+        loop medicine : medicines
+
+            opt medicine intanceof Stock
+                deleteprescription -> stock : isDeleted()
+                deleteprescription <-- stock :
+                opt prescription.getPrescriptionId() == prescriptionId
+                deleteprescription -> deleteprescription : setStockQuantity()
+                opt stock.isDeleted
+                    deleteprescription -> stock : setDeleted()
+                    deleteprescription <-- stock : setAsDeleted
+
+                    deleteprescription -> stock : getStockID()
+                    deleteprescription <-- stock :
+                    opt stock.getStockID() == stockIdToDispense
+                    deleteprescription -> stock : setQuantity()
+                    deleteprescription <-- stock :
+                    end
+                    deleteprescription -->deleteprescription
+                end
+
+            end
+        end
+    end
+    end
+
+
+
+@enduml
