@@ -9,6 +9,7 @@ import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
 import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_FORMAT_INCORRECT;
 
+//@@author silinche
 /**
  * Command that lists out all items, or only available or loaned items,
  * based on the exact command.

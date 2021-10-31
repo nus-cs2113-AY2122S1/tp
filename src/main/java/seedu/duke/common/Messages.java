@@ -43,7 +43,11 @@ public class Messages {
     // Search
     public static final String SEARCH_MESSAGE = "  (+) Here are the searching results in library";
     public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()
-            + " (!) Format: 'search i/ID' OR 'search t/TITLE' OR 'search s/STATUS'";
+            + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
+            + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset";
+    public static final String NO_SEARCH_RESULT = " (!) No search result! "
+            + "Please check again whether your search format is correct." + System.lineSeparator()
+            + " (!) Format: 'search i/ID t/TITLE s/STATUS c/CATEGORY' or its subset";
     // Loan and Return
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
