@@ -127,6 +127,7 @@ Command format: `add <-n> <NAME> {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
 - The `-n` name field is the only compulsory field required to add a contact. The rest are optional.
 - Up to five other `flags` and `details` can be specified.
 - ConTech also has built-in duplicate checkers, in case you accidentally add the same contact twice.
+- Additional input between the `add` command and the first detail flag will be treated as erroneous input and discarded.
 
 Expected outcome of usage:
 
@@ -149,7 +150,8 @@ ____________________________________________________________
 Lists all the contacts in the ConTech Book with their indexes and names.
 
 Command format: `ls`
-* Do note that the indexes start from 0, similar to array indexes, which you may be familiar with.
+- Do note that the indexes start from 0, similar to array indexes, which you may be familiar with.
+- Additional input after the `ls` command will be treated as erroneous input and discarded.
  
 Expected outcome of usage:
 
@@ -178,6 +180,8 @@ Command format: `view <INDEX>`
 * Displays all the details of the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index must be within the range of indexes displayed in the contact list _(zero-based)_.
+* Additional input after the `<INDEX>` in the command will be treated as erroneous input and discarded.
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -206,6 +210,8 @@ This refers to the details which you filled in while setting up **ConTech**.
 
 Command format: `me`
 * Displays all the details of the personal contact.
+* Additional input after the `me` command will be treated as erroneous input and discarded.
+
 
 Expected outcome of usage:
 ```
@@ -224,7 +230,8 @@ Removes the contact with a specified index from the ConTech Book. The `rm` comma
 **all** your contacts at one go, or to remove specific fields for each of your contacts.
 
 To improve user experience, before any deletion, ConTech Book will display the details of the contact you specified to 
-be deleted, and prompt you to confirm deletion.
+be deleted, and prompt you to confirm deletion. Any additional input not specified in the required command format will 
+be treated as erroneous input and discarded.
 
 Command formats:
 
@@ -309,7 +316,7 @@ Command format: `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TE
 - The index must be within the range of indexes displayed in the contact list (zero-based).
 - ConTech also has built-in duplicate checkers and will alert you if there is already a contact with the same details when editing.
 - While all six `details` are optional, minimally **one** must be specified for any effect to take place.
-
+- Additional input between the `edit` command and the first detail flag will be treated as erroneous input and discarded.
 
 Expected outcome of usage: 
 ```
@@ -370,6 +377,8 @@ marcus,null,null,null,null,null
   `import.txt` will be specified for convenience in identifying problems.
 - However, there is a limitation that duplicates will not be checked for when performing contact imports. Do import 
   with caution.
+- Additional input after the `import` command will be treated as erroneous input and discarded.
+
 
 Expected outcome of usage:
 ```
