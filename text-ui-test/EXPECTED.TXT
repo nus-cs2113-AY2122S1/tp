@@ -13,7 +13,7 @@ Here's what we can get started with.
 1. Add a recipe: addRecipe "recipe name" "/ingredients" 1+2 "/steps" 1+2
 2. Delete a recipe: deleteRecipe "Index of recipe"
 3. List all your recipes: listRecipes
-4. Find a recipe: find "keyword" "number/item name",where keyword is either /calories, /difficulty, /ingredients, /price, /tags or /time
+4. Find a recipe: find "keyword" "number/item name",where keyword is either /calories, /difficulty, /ingredients, /price, /tag or /time
 5. Check a specific recipe: check "Name of Recipe"
 6. Add calories to recipe: set "recipe name" "/calories" numberOfCalories
 7. Add difficulty levels to recipe: set "recipe name" "/difficulty" difficultyLevel

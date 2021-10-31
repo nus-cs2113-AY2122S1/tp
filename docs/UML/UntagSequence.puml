@@ -1,0 +1,27 @@
+@startuml
+activate Parser
+Parser -> TagUntagCommand: parsedCommand
+deactivate Parser
+activate TagUntagCommand
+
+TagUntagCommand -> Cookbook: isRecipeExist
+activate Cookbook
+
+alt Recipe exists
+TagUntagCommand <--- Cookbook: return void
+
+loop for all Tags in parsedCommand
+TagUntagCommand -> Cookbook: extractCookbookTag
+TagUntagCommand <-- Cookbook: extractedTag
+TagUntagCommand -> Cookbook: untagTagFromRecipe(extractedTag, recipeName)
+TagUntagCommand -> Cookbook: deleteRecipeFromCookbookTag(tagName, recipeName)
+end
+
+
+else Recipe does not ezist
+Cookbook -> GordonException: throws(NO_RECIPE_FOUND)
+activate GordonException
+deactivate GordonException
+
+end
+@enduml
