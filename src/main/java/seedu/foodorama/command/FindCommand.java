@@ -11,7 +11,9 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private static final Ui ui = new Ui();
+    private static final String DISH = "dish";
+    private static final String INGR = "ingr";
+    private static final Ui UI = new Ui();
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
@@ -19,31 +21,31 @@ public class FindCommand extends Command {
         parameters.remove(0);
         String itemToFind = String.join(" ", parameters);
         if (itemToFind.isBlank()) {
-            throw new FoodoramaException(ui.getFindMissingParamMsg());
+            throw new FoodoramaException(UI.getFindMissingParamMsg());
         } else {
             switch (commandToExecute) {
-            case "dish":
+            case DISH:
                 ArrayList<Dish> matchedDishList = new ArrayList<>();
                 for (Dish matchingDishes : DishList.dishList) {
                     if (matchingDishes.getDishName().contains(itemToFind)) {
                         matchedDishList.add(matchingDishes);
                     }
                 }
-                ui.printMatchedDishes(matchedDishList);
+                UI.printMatchedDishes(matchedDishList);
                 break;
 
-            case "ingr":
+            case INGR:
                 ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
                 for (Ingredient matchingIngr : IngredientList.ingredientList) {
                     if (matchingIngr.getIngredientName().contains(itemToFind)) {
                         matchedIngrList.add(matchingIngr);
                     }
                 }
-                ui.printMatchedIngredients(matchedIngrList);
+                UI.printMatchedIngredients(matchedIngrList);
                 break;
 
             default:
-                throw new FoodoramaException(ui.getFindInvalidParamMsg());
+                throw new FoodoramaException(UI.getFindInvalidParamMsg());
             }
         }
     }

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Dish implements Comparable<Dish> {
     private static final Logger logger = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
     private String dishName;
     private double wastage;
     private double limit;
@@ -53,7 +53,7 @@ public class Dish implements Comparable<Dish> {
     }
 
     public void setLimitValue() throws FoodoramaException {
-        ui.printEnterLimitFor(dishName);
+        UI.printEnterLimitFor(dishName);
         Scanner in = new Scanner(System.in);
         String inputLimit = in.nextLine();
         double userLimit;
@@ -63,10 +63,10 @@ public class Dish implements Comparable<Dish> {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
-            throw new FoodoramaException(ui.getInvalidNumberMsg());
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         limit = userLimit;
-        ui.printLimitSet(dishName, limit);
+        UI.printLimitSet(dishName, limit);
     }
 
     public double getIngredientContribution() {
@@ -80,7 +80,7 @@ public class Dish implements Comparable<Dish> {
     public void addPart(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
-            ui.printIngrNotExistMsg();
+            UI.printIngrNotExistMsg();
         } else {
             //Subtract the old contribution if it exists
             for (Ingredient ingredient : parts) {
@@ -88,7 +88,7 @@ public class Dish implements Comparable<Dish> {
             }
             parts.add(IngredientList.ingredientList.get(ingredientIndex));
 
-            ui.printAddedPartOf(ingredientName, dishName);
+            UI.printAddedPartOf(ingredientName, dishName);
 
             //Modify the ingredient contribution to reflect the change
             ingredientContribution = wastage / parts.size();
@@ -101,7 +101,7 @@ public class Dish implements Comparable<Dish> {
     }
 
     public void addWaste() throws FoodoramaException {
-        ui.printEnterWeightOf(dishName);
+        UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
         double inputWastage;
@@ -111,13 +111,13 @@ public class Dish implements Comparable<Dish> {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException e) {
-            throw new FoodoramaException(ui.getInvalidNumberMsg());
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
-        ui.printWastage(dishName, wastage);
+        UI.printWastage(dishName, wastage);
         if (wastage >= limit && limit != -1) {
-            ui.printLimitExceeded(dishName);
+            UI.printLimitExceeded(dishName);
         }
         if (!parts.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop

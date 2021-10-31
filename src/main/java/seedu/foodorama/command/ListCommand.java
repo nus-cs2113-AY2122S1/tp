@@ -8,21 +8,23 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    private static final Ui ui = new Ui();
+    private static final String DISH = "dish";
+    private static final String INGR = "ingr";
+    private static final Ui UI = new Ui();
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
-        case "dish":
+        case DISH:
             DishList.list();
             break;
 
-        case "ingr":
+        case INGR:
             IngredientList.list();
             break;
 
         default:
-            throw new FoodoramaException(ui.getListMissingParamMsg());
+            throw new FoodoramaException(UI.getListMissingParamMsg());
         }
     }
 }

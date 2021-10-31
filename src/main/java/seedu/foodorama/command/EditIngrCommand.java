@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class EditIngrCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditIngrCommand");
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
 
     EditIngrCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -28,7 +28,7 @@ public class EditIngrCommand extends Command {
             String ingredientName = String.join(" ", parameters);
             if (ingredientName.isBlank()) {
                 LOGGER.log(Level.INFO, "Parameter is Empty");
-                throw new FoodoramaException(ui.getIngrIndexMissingMsg());
+                throw new FoodoramaException(UI.getIngrIndexMissingMsg());
             } else {
                 ingredientIndex = IngredientList.find(ingredientName);
                 LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");

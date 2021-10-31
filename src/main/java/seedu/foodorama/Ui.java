@@ -81,7 +81,7 @@ public class Ui {
                     + "####################################"
                     + "#######################################";
 
-    private static final String WELCOME_MESSSAGE = START_LOGO + System.lineSeparator()
+    private static final String WELCOME_MESSAGE = START_LOGO + System.lineSeparator()
             + "#             Hello, welcome to FOOD-O-RAMA! "
             + "The number one solution for food waste management.                #" + System.lineSeparator()
             + "#                  Type a command to get us sta"
@@ -89,7 +89,7 @@ public class Ui {
             + "###########################################"
             + "#####################################################################";
 
-    private static final String NEWPAGE_MESSSAGE = START_LOGO + System.lineSeparator()
+    private static final String NEWPAGE_MESSAGE = START_LOGO + System.lineSeparator()
             + "#                                            SUMMARY OF COMMANDS:                                  "
             + "            #" + System.lineSeparator()
             + "# 1. Adding a Dish : 'add dish [dishName]'                                                         "
@@ -208,11 +208,11 @@ public class Ui {
             + "Sorry, this dish already exists in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String DISH_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
+    private static final String DISH_NOT_EXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this dish does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String DISHNAME_MISSING = LINE_DIVIDER + System.lineSeparator()
+    private static final String DISH_NAME_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, the dish name cannot be blank." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -223,17 +223,17 @@ public class Ui {
             + "Dish list has been cleared." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INGRNAME_MISSING = LINE_DIVIDER + System.lineSeparator()
+    private static final String INGR_NAME_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, the ingredient name cannot be blank." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INGRINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+    private static final String INGR_INDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Missing Parameter!\n"
             + "Please type the INDEX or NAME of the Ingredient.\n"
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String DISHINDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
+    private static final String DISH_INDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Missing Parameter!\n"
             + "Please type the Index OR Name of the Dish you would like to edit.\n"
             + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
@@ -251,7 +251,7 @@ public class Ui {
             + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
+    private static final String INGR_NOT_EXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -340,7 +340,7 @@ public class Ui {
     }
 
     public void printWelcomeMsg() {
-        System.out.println(WELCOME_MESSSAGE);
+        System.out.println(WELCOME_MESSAGE);
     }
 
     public void printExitMsg() {
@@ -364,7 +364,7 @@ public class Ui {
     }
 
     public String getDishNameMissingMsg() {
-        return DISHNAME_MISSING;
+        return DISH_NAME_MISSING;
     }
 
     public String getDishNotExistMsg(String dishName) {
@@ -375,7 +375,7 @@ public class Ui {
     }
 
     public void printDishNotExistMsg() {
-        System.out.println(DISH_NOTEXIST);
+        System.out.println(DISH_NOT_EXIST);
     }
 
     public void printDishExistsMsg() {
@@ -435,15 +435,15 @@ public class Ui {
     }
 
     public String getIngrNameMissingMsg() {
-        return INGRNAME_MISSING;
+        return INGR_NAME_MISSING;
     }
 
     public String getIngrIndexMissingMsg() {
-        return INGRINDEX_MISSING;
+        return INGR_INDEX_MISSING;
     }
 
     public static String getDishIndexMissingMsg() {
-        return DISHINDEX_MISSING;
+        return DISH_INDEX_MISSING;
     }
 
     public String getIngrNotExistEdit() {
@@ -455,7 +455,7 @@ public class Ui {
     }
 
     public String getIngrNotExistMsg() {
-        return INGR_NOTEXIST;
+        return INGR_NOT_EXIST;
     }
 
     public String getIngrIndexExceedSizeMsg() {
@@ -467,7 +467,7 @@ public class Ui {
     }
 
     public void printIngrNotExistMsg() {
-        System.out.println(INGR_NOTEXIST);
+        System.out.println(INGR_NOT_EXIST);
     }
 
     public String getIngrExistsMsg(String ingrName) {
@@ -789,7 +789,7 @@ public class Ui {
 
     public void clearTerminalAndPrintNewPage() {
         ClearScreen.clearConsole();
-        System.out.println(NEWPAGE_MESSSAGE);
+        System.out.println(NEWPAGE_MESSAGE);
     }
 
     public void printLimitExceeded(String input) {

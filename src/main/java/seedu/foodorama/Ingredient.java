@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Ingredient implements  Comparable<Ingredient> {
 
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
     private String ingredientName;
     private double ingredientWeight;
     private double ingredientWasteIngr;
@@ -63,7 +63,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     }
 
     public void updateIngredientWeight() throws FoodoramaException {
-        ui.printEnterWeightOf(ingredientName);
+        UI.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputIngredientWeight = in.nextLine();
         double ingredientWeightValue;
@@ -73,14 +73,14 @@ public class Ingredient implements  Comparable<Ingredient> {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
-            throw new FoodoramaException(ui.getInvalidNumberMsg());
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         ingredientWeight += ingredientWeightValue;
-        ui.printStorage(ingredientName, ingredientWeight);
+        UI.printStorage(ingredientName, ingredientWeight);
     }
 
     public void setLimitValue() throws FoodoramaException {
-        ui.printEnterLimitFor(ingredientName);
+        UI.printEnterLimitFor(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputLimit = in.nextLine();
         double userLimit;
@@ -90,14 +90,14 @@ public class Ingredient implements  Comparable<Ingredient> {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
-            throw new FoodoramaException(ui.getInvalidNumberMsg());
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         limit = userLimit;
-        ui.printLimitSet(ingredientName, limit);
+        UI.printLimitSet(ingredientName, limit);
     }
 
     public void addWaste() throws FoodoramaException {
-        ui.printEnterWeightOf(ingredientName);
+        UI.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
@@ -107,13 +107,13 @@ public class Ingredient implements  Comparable<Ingredient> {
                 throw new FoodoramaException("");
             }
         } catch (NumberFormatException | FoodoramaException e) {
-            throw new FoodoramaException(ui.getInvalidNumberMsg());
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
-        ui.printWastage(ingredientName, totalWaste);
+        UI.printWastage(ingredientName, totalWaste);
         if (totalWaste >= limit && limit != -1) {
-            ui.printLimitExceeded(ingredientName);
+            UI.printLimitExceeded(ingredientName);
         }
     }
 

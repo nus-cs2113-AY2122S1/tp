@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class SortDishCommand extends Command {
-    private static final Ui ui = new Ui();
+    private static final Ui UI = new Ui();
     Comparator<Dish> dishComparator;
 
     @Override
     public void execute(ArrayList<String> parameters) {
         DishList.dishList.sort(dishComparator);
-        ui.printSortDishMsg();
+        UI.printSortDishMsg();
         DishList.list();
     }
 }
