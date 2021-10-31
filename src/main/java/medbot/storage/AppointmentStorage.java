@@ -33,7 +33,7 @@ public class AppointmentStorage extends Storage {
      */
     @Override
     protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
-        Pair<Integer, ArrayList<String>> appointmentDetails = parseStorageLine(storageLine, parameterPrefixes);
+        Pair<Integer, ArrayList<String>> appointmentDetails = parseStorageLine(storageLine);
         if (appointmentDetails == null) {
             return null;
         }
@@ -50,4 +50,32 @@ public class AppointmentStorage extends Storage {
         return appointment;
     }
 
+    /**
+     * Parse a line from the storage file by splitting its constituent parts.
+     *
+     * @param storageLine a line from the storage file
+     * @return listItem details, consisting of person ID and other parameters
+     */
+    protected Pair<Integer, ArrayList<String>> parseStorageLine(String storageLine) {
+        if (storageLine.isBlank()) {
+            return null;
+        }
+
+        String[] listItemParameters = splitStorageLine(storageLine);
+        ArrayList<String> prefixPlusListItemParameters = new ArrayList<>();
+        Integer listItemId = Integer.parseInt(listItemParameters[0]);
+
+        for (int i = 0; i < parameterPrefixes.length; i++) {
+            // i + 1, since listItemParameters[0] is the listItemId
+            if (isStorageParameterNull(listItemParameters[i + 1])) {
+                continue;
+            }
+            // i + 1, since listItemParameters[0] is the listItemId
+            String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
+            prefixPlusListItemParameters.add(prefixPlusListItemParameter);
+        }
+        assert listItemParameters.length == parameterPrefixes.length + 1;
+
+        return new Pair<>(listItemId, prefixPlusListItemParameters);
+    }
 }

@@ -6,7 +6,7 @@ import medbot.list.ListItemType;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.person.Staff;
-import medbot.utilities.Pair;
+import medbot.utilities.Trio;
 
 import java.util.ArrayList;
 
@@ -37,12 +37,13 @@ public abstract class PersonStorage extends Storage {
     @Override
     protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
 
-        Pair<Integer, ArrayList<String>> personDetails = parseStorageLine(storageLine, parameterPrefixes);
+        Trio<Integer, Boolean, ArrayList<String>> personDetails = parseStorageLine(storageLine);
         if (personDetails == null) {
             return null;
         }
         int personId = personDetails.first;
-        ArrayList<String> prefixPlusPersonParameters = personDetails.second;
+        boolean isArchived = personDetails.second;
+        ArrayList<String> prefixPlusPersonParameters = personDetails.third;
 
         Person person;
         switch (listItemType) {
@@ -57,6 +58,10 @@ public abstract class PersonStorage extends Storage {
         }
 
         person.setId(personId);
+        if (isArchived) {
+            person.archive();
+        }
+
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
             //updatePersonalInformation does error-checking of person details and updates patient info
             updatePersonalInformation(person, prefixPlusPersonParameter);
@@ -65,5 +70,49 @@ public abstract class PersonStorage extends Storage {
         return person;
     }
 
+    /**
+     * Parse a line from the storage file by splitting its constituent parts.
+     *
+     * @param storageLine a line from the storage file
+     * @return listItem details, consisting of person ID and other parameters
+     */
+    protected Trio<Integer, Boolean, ArrayList<String>> parseStorageLine(String storageLine)
+            throws MedBotException {
+        if (storageLine.isBlank()) {
+            return null;
+        }
 
+        String[] listItemParameters = splitStorageLine(storageLine);
+        ArrayList<String> prefixPlusListItemParameters = new ArrayList<>();
+        Integer listItemId = Integer.parseInt(listItemParameters[0]);
+
+        for (int i = 0; i < parameterPrefixes.length; i++) {
+            // i + 1, since listItemParameters[0] is the listItemId
+            if (isStorageParameterNull(listItemParameters[i + 1])) {
+                continue;
+            }
+            // i + 1, since listItemParameters[0] is the listItemId
+            String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
+            prefixPlusListItemParameters.add(prefixPlusListItemParameter);
+        }
+        assert listItemParameters.length == parameterPrefixes.length + 2;
+
+        int listItemParametersLastIndex = listItemParameters.length - 1;
+        String isArchivedParameter = listItemParameters[listItemParametersLastIndex];
+        boolean isArchived = convertStorageArchiveParameterToBoolean(isArchivedParameter);
+
+        return new Trio<>(listItemId, isArchived, prefixPlusListItemParameters);
+    }
+
+
+    protected static boolean convertStorageArchiveParameterToBoolean(String storageArchiveParameter)
+            throws MedBotException {
+        if (storageArchiveParameter.equals("U")) {
+            return false;
+        } else if (storageArchiveParameter.equals("A")) {
+            return true;
+        } else {
+            throw new MedBotException("Invalid storage archive parameter");
+        }
+    }
 }
