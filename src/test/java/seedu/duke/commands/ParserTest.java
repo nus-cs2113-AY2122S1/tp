@@ -47,7 +47,8 @@ class ParserTest {
         expected.put("i", "5920");
         expected.put("a", "Michael Jackson");
         expected.put("d", "42:16/4:50");
-        HashMap<String, String> result = parser.extractArgs("add a t/Thriller/Beat It i/5920 a/Michael Jackson d/42:16/4:50");
+        HashMap<String, String> result = parser.extractArgs("add a t/Thriller/Beat It "
+                + "i/5920 a/Michael Jackson d/42:16/4:50");
         assertEquals(expected, result);
     }
 
