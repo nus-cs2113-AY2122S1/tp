@@ -7,6 +7,7 @@ import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -145,13 +146,17 @@ public class TextUi {
         System.out.println("Error occurred.");
     }
 
+    public static void printMcErrorMessage() {
+        System.out.println("Invalid input for MC flag. MC flag is ignored.");
+    }
+
     public static void printUpdateStartMessage() {
-        System.out.println("Updating, standby...");
+        System.out.println("Updating, standby... This may take up to 10 minutes.");
         System.out.println("Press ENTER to cancel the update.");
     }
 
     public static void printUpdateInterruptMessage() {
-        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
+        System.out.println("\n" + LINE + "UPDATE CANCELLED.\n" + LINE);
     }
 
     public static void printUpdateSuccessMessage() {
@@ -171,7 +176,8 @@ public class TextUi {
     }
 
     public static void printNoConnectionMessage() {
-        System.out.println(LINE + "Failed to connect to NUSMods API. Loading saved information.");
+        System.out.println(LINE + "Failed to connect to NUSMods API. This could either be because the mod does not "
+                + "exist, or due to a connection error. \nChecking local saved information.");
         System.out.println(LINE);
     }
 
@@ -303,5 +309,25 @@ public class TextUi {
 
     public static void printEditMessage() {
         System.out.println("Noted, event name has been changed");
+    }
+
+    public static void printUpdateProgressMessage(int count) {
+        System.out.print("\rApproximately ");
+        System.out.printf("%.2f", (double)count / 130);
+        System.out.print("% done.");
+    }
+
+    public static void printSearchStartMessage() {
+        System.out.println("Searching, standby...");
+        System.out.println("If nothing is appearing even after a while, press ENTER to cancel the search "
+                + "and narrow down your search terms.");
+    }
+
+    public static void printInvalidMcMessage() {
+        System.out.println("Your MC flag has an invalid input, please check your MC flag.");
+    }
+
+    public static void printInvalidFlagMessage() {
+        System.out.println("You have inputted some invalid flags, please check your flags.");
     }
 }

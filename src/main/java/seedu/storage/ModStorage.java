@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 
 public class ModStorage {
 
@@ -124,9 +125,13 @@ public class ModStorage {
      */
     public static Module loadModInfo(String moduleCode) throws IOException {
         File file = new File("./data/Modules/" + moduleCode + ".json");
-        InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        return new Gson().fromJson(reader, Module.class);
+        try {
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            return new Gson().fromJson(reader, Module.class);
+        } catch (InvalidPathException e) {
+            throw new IOException();
+        }
     }
 
     public static class FileErrorException extends Exception {

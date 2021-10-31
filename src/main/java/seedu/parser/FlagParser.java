@@ -3,6 +3,8 @@ package seedu.parser;
 import seedu.command.flags.SearchFlags;
 import seedu.ui.TextUi;
 
+import static seedu.command.flags.SearchFlags.*;
+
 public class FlagParser {
 
     private static final String QUICK_FLAG = "q";
@@ -12,7 +14,6 @@ public class FlagParser {
     private static final String EXAM_FLAG = "e";
     private static final String DEPARTMENT_FLAG = "d";
     private static final String SEMESTER_FLAG = "s";
-    private static final int MC_LENGTH = 2;
 
     /**
      * Converts a String array of flags and regexes into a SearchFlags object.
@@ -70,7 +71,9 @@ public class FlagParser {
         if (flag.startsWith(MC_FLAG)) {
             flag = flag.substring(MC_LENGTH).trim();
             int mcs = tryParseInt(flag);
-            System.out.println(mcs);
+            if (mcs == -1) {
+                searchFlags.setErrorFlag(INVALID_MC);
+            }
             searchFlags.setHasMcFlag(true);
             searchFlags.setMcs(mcs);
             return true;
@@ -87,9 +90,8 @@ public class FlagParser {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            TextUi.printErrorMessage();
+            return -1;
         }
-        return -1;
     }
 
     /**
@@ -124,6 +126,7 @@ public class FlagParser {
             searchFlags.setSemester(tryParseInt(flagTerm));
             break;
         default:
+            searchFlags.setErrorFlag(INVALID_FLAGS);
             break;
         }
     }

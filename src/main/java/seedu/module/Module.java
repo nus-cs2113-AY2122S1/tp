@@ -13,6 +13,7 @@ import static org.apache.commons.text.WordUtils.wrap;
 
 public class Module extends BaseModule {
     private static final int FINALISE_INDEX = 1;
+    private static final String EXAM_SPACING = "              ";
 
     private String department;
     private String faculty;
@@ -152,12 +153,12 @@ public class Module extends BaseModule {
             }
         }
         if (searchFlags.getHasFacultyFlag()) {
-            if (!faculty.equalsIgnoreCase(searchFlags.getFaculty())) {
+            if (!faculty.toLowerCase().contains((searchFlags.getFaculty().toLowerCase()))) {
                 return false;
             }
         }
         if (searchFlags.getHasDepartmentFlag()) {
-            if (!department.equalsIgnoreCase(searchFlags.getDepartment())) {
+            if (!department.toLowerCase().contains((searchFlags.getDepartment().toLowerCase()))) {
                 return false;
             }
         }
@@ -204,7 +205,7 @@ public class Module extends BaseModule {
         for (Semester semester : semesterData) {
             if (semester.getExamDate() != null) {
                 examdates += "Sem " + semester.getSemester() + ": " + semester.getExamInfo()
-                        + "\n" + "              "; //placeholder
+                        + "\n" + EXAM_SPACING;
                 hasExam = true;
             }
         }
