@@ -3,6 +3,7 @@ package terminus.storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import terminus.common.Messages;
 import terminus.exception.InvalidFileException;
@@ -70,8 +71,15 @@ public class JsonStorage extends Storage {
     public ModuleManager loadJson() throws InvalidFileException {
         BufferedReader reader = getBufferedReader(jsonFilePath);
         try {
-            return gson.fromJson(reader, ModuleManager.class);
+            ModuleManager moduleManager = gson.fromJson(reader, ModuleManager.class);
+            reader.close();
+            return moduleManager;
         } catch (Exception e) {
+            try {
+                reader.close();
+            } catch (IOException ex) {
+                throw new InvalidFileException(e.getMessage());
+            }
             throw new InvalidFileException(String.format(Messages.ERROR_FILE_BUFFERED_READER, jsonFilePath));
         }
     }
