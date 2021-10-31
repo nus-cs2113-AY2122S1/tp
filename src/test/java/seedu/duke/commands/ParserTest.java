@@ -10,6 +10,8 @@ import seedu.duke.data.Magazine;
 import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -18,34 +20,72 @@ class ParserTest {
     Parser parser = new Parser();
 
     @Test
+    public void extractArgs_singleCommandNoArgs_Hashmap() {
+        HashMap<String, String> expected = new HashMap<>();
+        expected.put(null, "add");
+        HashMap<String, String> result = parser.extractArgs("add");
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void extractArgs_singleCommandMultipleArg_Hashmap() {
+        HashMap<String, String> expected = new HashMap<>();
+        expected.put(null, "add a");
+        expected.put("t", "Thriller");
+        expected.put("i", "5920");
+        expected.put("a", "Michael Jackson");
+        expected.put("d", "42:16");
+        HashMap<String, String> result = parser.extractArgs("add a t/Thriller  i/5920 a/Michael Jackson d/42:16");
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void extractArgs_singleCommandMultipleArgWithDelimiter_Hashmap() {
+        HashMap<String, String> expected = new HashMap<>();
+        expected.put(null, "add a");
+        expected.put("t", "Thriller/Beat It");
+        expected.put("i", "5920");
+        expected.put("a", "Michael Jackson");
+        expected.put("d", "42:16/4:50");
+        HashMap<String, String> result = parser.extractArgs("add a t/Thriller/Beat It i/5920 a/Michael Jackson d/42:16/4:50");
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void parse_exit_ExitCommandObject() {
-        boolean type = parser.parse("exit") instanceof ExitCommand;
-        assertTrue(type);
+        Boolean isSameObject = parser.parse("exit") instanceof ExitCommand;
+        assertTrue(isSameObject);
     }
 
     @Test
     public void parse_unknown_UnknownCommandObject() {
-        boolean type = parser.parse("foo 2") instanceof UnknownCommand;
-        assertTrue(type);
+        Boolean isSameObject = parser.parse("foo 2") instanceof UnknownCommand;
+        assertTrue(isSameObject);
     }
 
     @Test
     public void parse_add_AddCommandObject() {
-        boolean type = parser.parse("add t/The Hunger Games i/123") instanceof AddCommand;
-        assertTrue(type);
+        Boolean isSameObject = parser.parse("add a t/Thriller i/5920 a/Michael Jackson d/42:16") instanceof AddCommand;
+        assertTrue(isSameObject);
     }
 
 
     @Test
     public void parse_loan_LoanCommandObject() {
-        boolean type = parser.parse("loan 123") instanceof LoanCommand;
-        assertTrue(type);
+        boolean isSameObject = parser.parse("loan 123") instanceof LoanCommand;
+        assertTrue(isSameObject);
     }
 
     @Test
     public void parse_return_ReturnCommandObject() {
-        boolean type = parser.parse("return 123") instanceof ReturnCommand;
-        assertTrue(type);
+        boolean isSameObject = parser.parse("return 123") instanceof ReturnCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
+    public void parse_unres_UnreserveCommandObject() {
+        Boolean isSameObject = parser.parse("unres 5555") instanceof UnreserveCommand;
+        assertTrue(isSameObject);
     }
 
     @Test
