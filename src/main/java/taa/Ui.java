@@ -45,7 +45,7 @@ public class Ui {
 
             try {
                 input = scanner.nextLine();
-            } catch (NoSuchElementException e) {
+            } catch (NoSuchElementException | IllegalStateException e) {
                 input = Command.COMMAND_EXIT;
             }
         } while (input.trim().isEmpty() && !allowEmpty);
