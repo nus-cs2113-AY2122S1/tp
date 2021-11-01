@@ -198,4 +198,84 @@ public class IngredientList {
             }
         }
     }
+
+    public static void editWastage(int ingrIndex) throws FoodoramaException {
+        if (ingrIndex == -1) {
+            throw new FoodoramaException(UI.getIngrNotExistEdit());
+        } else if (ingrIndex >= ingredientList.size()) {
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            String ingrName = ingredientList.get(ingrIndex).getIngredientName();
+            UI.printAskNewWastageDish(ingrName);
+
+            Scanner input = new Scanner(System.in);
+            double newWeight;
+
+            try {
+                newWeight = Double.parseDouble(input.nextLine());
+                if (newWeight < 0) {
+                    throw new FoodoramaException("");
+                }
+            } catch (NumberFormatException | FoodoramaException e) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+            Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
+
+            UI.clearTerminalAndPrintNewPage();
+            UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
+            String confirmChange = input.nextLine().toLowerCase();
+            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
+                confirmChange = input.nextLine().toLowerCase();
+            }
+            UI.clearTerminalAndPrintNewPage();
+            if (confirmChange.equals(YES)) {
+                ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
+                UI.printDishWastageChanged(ingrName, newWeight);
+            } else {
+                UI.printDisregardMsg();
+            }
+        }
+    }
+
+    public static void editStorage(int ingrIndex) throws FoodoramaException {
+        if (ingrIndex == -1) {
+            throw new FoodoramaException(UI.getIngrNotExistEdit());
+        } else if (ingrIndex >= ingredientList.size()) {
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            String ingrName = ingredientList.get(ingrIndex).getIngredientName();
+            UI.printAskNewStorageIngr(ingrName);
+
+            Scanner input = new Scanner(System.in);
+            double newWeight;
+
+            try {
+                newWeight = Double.parseDouble(input.nextLine());
+                if (newWeight < 0) {
+                    throw new FoodoramaException("");
+                }
+            } catch (NumberFormatException | FoodoramaException e) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+            Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();
+
+            UI.clearTerminalAndPrintNewPage();
+            UI.printConfirmIngrStorageEditMsg(ingrWeight, newWeight);
+            String confirmChange = input.nextLine().toLowerCase();
+            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
+                confirmChange = input.nextLine().toLowerCase();
+            }
+            UI.clearTerminalAndPrintNewPage();
+            if (confirmChange.equals(YES)) {
+                ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
+                UI.printIngrStorageChanged(ingrName, newWeight);
+            } else {
+                UI.printDisregardMsg();
+            }
+        }
+    }
 }

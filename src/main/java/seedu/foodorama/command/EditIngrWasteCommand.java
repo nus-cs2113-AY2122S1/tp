@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EditIngrCommand extends Command {
+public class EditIngrWasteCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditIngrCommand");
     private static final Ui UI = new Ui();
 
-    EditIngrCommand() {
+    EditIngrWasteCommand() {
         LoggerManager.setupLogger(LOGGER);
     }
 
@@ -34,7 +34,7 @@ public class EditIngrCommand extends Command {
                 LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");
             }
         }
-        IngredientList.editName(ingredientIndex);
+        IngredientList.editWastage(ingredientIndex);
         LOGGER.log(Level.INFO, "Ingredient Name edited.");
         LOGGER.log(Level.INFO, "End of process.");
     }

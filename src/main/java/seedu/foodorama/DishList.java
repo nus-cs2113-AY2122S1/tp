@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class DishList {
     public static ArrayList<Dish> dishList = new ArrayList<>();
-    public static Ui ui = new Ui();
+    public static Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
 
@@ -16,10 +16,10 @@ public class DishList {
             assert DishList.find(dishName) < 0;
             Dish dishToAdd = new Dish(dishName);
             dishList.add(dishToAdd);
-            ui.printAddedDish(dishToAdd.getDishName());
+            UI.printAddedDish(dishToAdd.getDishName());
         } else {
             assert DishList.find(dishName) >= 0;
-            ui.printDishExistsMsg();
+            UI.printDishExistsMsg();
         }
     }
 
@@ -46,11 +46,11 @@ public class DishList {
     }
 
     public static void list() {
-        ui.printDishList(dishList);
+        UI.printDishList(dishList);
     }
 
     public static void graph() {
-        ui.printDishListGraph(dishList);
+        UI.printDishListGraph(dishList);
     }
 
     public static void delete(String dishName) {
@@ -59,75 +59,114 @@ public class DishList {
         int listSize = dishList.size(); //listSize = N
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
-            ui.printDishNotExistMsg();
+            UI.printDishNotExistMsg();
             assert dishList.size() == listSize : "dishList should be of size N";
         } else {
-            ui.printConfirmDelDish();
+            UI.printConfirmDelDish();
             String confirmDel = input.nextLine().toLowerCase();
             while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
-                ui.clearTerminalAndPrintNewPage();
-                ui.printInvalidConfirmation();
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
                 confirmDel = input.nextLine().toLowerCase();
             }
-            ui.clearTerminalAndPrintNewPage();
+            UI.clearTerminalAndPrintNewPage();
             if (confirmDel.equals(YES)) {
                 dishList.remove(dishIndex);
-                ui.printDishNameRemoved(dishName);
+                UI.printDishNameRemoved(dishName);
                 assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
             } else {
-                ui.printDisregardMsg();
+                UI.printDisregardMsg();
             }
         }
     }
 
-
-
     public static void clearList() {
         Scanner input = new Scanner(System.in);
-        ui.printConfirmClearDish();
+        UI.printConfirmClearDish();
         String confirmClear = input.nextLine().toLowerCase();
 
         while (!(confirmClear.equals(YES) | confirmClear.equals(NO))) {
-            ui.clearTerminalAndPrintNewPage();
-            ui.printInvalidConfirmation();
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
-        ui.clearTerminalAndPrintNewPage();
+        UI.clearTerminalAndPrintNewPage();
         if (confirmClear.equals(YES)) {
             dishList.clear();
             assert dishList.size() == 0 : "dishList should be of size 0";
-            ui.printDishListCleared();
+            UI.printDishListCleared();
         } else {
-            ui.printDisregardMsg();
+            UI.printDisregardMsg();
         }
     }
 
     public static void editName(int dishIndex) throws FoodoramaException {
         if (dishIndex == -1) {
-            throw new FoodoramaException(ui.getDishNotExistEdit());
+            throw new FoodoramaException(UI.getDishNotExistEdit());
         } else if (dishIndex >= dishList.size()) {
-            throw new FoodoramaException(ui.getDishIndexExceedSizeMsg());
+            throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
             String dishName = dishList.get(dishIndex).getDishName();
-            ui.printAskNewNameDish(dishName);
+            UI.printAskNewNameDish(dishName);
 
             Scanner input = new Scanner(System.in);
             String newName = input.nextLine();
 
-            ui.clearTerminalAndPrintNewPage();
-            ui.printConfirmDishEditMsg(dishName, newName);
+            UI.clearTerminalAndPrintNewPage();
+            UI.printConfirmDishNameEditMsg(dishName, newName);
             String confirmChange = input.nextLine().toLowerCase();
             while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
-                ui.clearTerminalAndPrintNewPage();
-                ui.printInvalidConfirmation();
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
                 confirmChange = input.nextLine().toLowerCase();
             }
-            ui.clearTerminalAndPrintNewPage();
+            UI.clearTerminalAndPrintNewPage();
             if (confirmChange.equals(YES)) {
                 dishList.get(dishIndex).setDishName(newName);
-                ui.printDishNameChanged(newName);
+                UI.printDishNameChanged(dishName, newName);
             } else {
-                ui.printDisregardMsg();
+                UI.printDisregardMsg();
+            }
+        }
+    }
+
+    public static void editWastage(int dishIndex) throws FoodoramaException {
+        if (dishIndex == -1) {
+            throw new FoodoramaException(UI.getDishNotExistEdit());
+        } else if (dishIndex >= dishList.size()) {
+            throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
+        } else {
+            String dishName = dishList.get(dishIndex).getDishName();
+            UI.printAskNewWastageDish(dishName);
+
+            Scanner input = new Scanner(System.in);
+            double newWeight;
+
+            try {
+                newWeight = Double.parseDouble(input.nextLine());
+                if (newWeight < 0) {
+                    throw new FoodoramaException("");
+                }
+            } catch (NumberFormatException | FoodoramaException e) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+            Double dishWeight = dishList.get(dishIndex).getWastage();
+
+            UI.clearTerminalAndPrintNewPage();
+            UI.printConfirmDishWastageEditMsg(dishWeight, newWeight);
+            String confirmChange = input.nextLine().toLowerCase();
+            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
+                confirmChange = input.nextLine().toLowerCase();
+            }
+            UI.clearTerminalAndPrintNewPage();
+            if (confirmChange.equals(YES)) {
+
+                dishList.get(dishIndex).setDishWastage(newWeight);
+                UI.printDishWastageChanged(dishName, newWeight);
+            } else {
+                UI.printDisregardMsg();
             }
         }
     }
