@@ -62,6 +62,7 @@ public class PatientUi extends PersonUi {
     public static String getCurrentViewPatientMessage() {
         return getCurrentViewPersonMessage(PATIENT);
     }
+
     /**
      * Returns the profile of a patient.
      *

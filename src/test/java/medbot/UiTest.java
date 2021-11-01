@@ -125,13 +125,13 @@ class UiTest {
 
     @Test
     public void testEditStaffMessage() {
-        MedicalStaffList staffList = new MedicalStaffList();
         Staff staff = new Staff();
         staff.setName("Dr Tan");
         staff.setIcNumber("S1459203K");
         staff.setEmailAddress("tan@gmail.com");
         staff.setPhoneNumber("91238456");
         staff.setResidentialAddress("25 Dover Road");
+        MedicalStaffList staffList = new MedicalStaffList();
         staffList.addPerson(staff);
         String staffInfo = staff.toString();
         String expectedOutput =
@@ -231,17 +231,23 @@ class UiTest {
         String expectedOutput =
                 "Here is a list of all staffs:" + END_LINE
                         + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " -------------------------------------------------------------"
+                        + "---------------------------------------- "
                         + END_LINE
-                        + " |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | "
+                        + " |  ID  | IC Number |         Name         | Phone No. |    "
+                        + "    Email         |       Address        | "
                         + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " --------------------------------------------------------------"
+                        + "--------------------------------------- "
                         + END_LINE
-                        + " | 1    |           | John Doe             |           | John@gmail.com       |                      | "
+                        + " | 1    |           | John Doe             |           | "
+                        + "John@gmail.com       |                      | "
                         + END_LINE
-                        + " | 2    |           | Bob                  | 88889999  |                      |                      | "
+                        + " | 2    |           | Bob                  | 88889999  |      "
+                        + "                |                      | "
                         + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " ------------------------------------------------------"
+                        + "----------------------------------------------- "
                         + END_LINE;
 
         assertEquals(StaffUi.getAllStaffsString(staffList.listPersons(false)), expectedOutput);

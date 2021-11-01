@@ -62,6 +62,7 @@ public class StaffUi extends PersonUi {
     public static String getCurrentViewStaffMessage() {
         return getCurrentViewPersonMessage(STAFF);
     }
+
     /**
      * Returns the profile of a staff.
      *
