@@ -48,8 +48,8 @@ S/U able: No
 
 Semester Availability: [1, 2]
 
-Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 09:00 AM
-              Sem 2: Thu May 05 01:00 PM - 01:00 PM
+Exam Date(s): Sem 1: Tue Nov 30 01:00 AM - 03:00 AM
+              Sem 2: Thu May 05 05:00 AM - 07:00 AM
 
 
 
