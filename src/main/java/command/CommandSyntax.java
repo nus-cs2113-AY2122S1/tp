@@ -26,12 +26,12 @@ public class CommandSyntax {
     public static final String EXIT_COMMAND = "exit";
     public static final String HELP_COMMAND = "help";
     public static final String LIST_PRESCRIPTION_COMMAND = "listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
-            + "s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}";
+            + "s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}";
     public static final String LIST_ORDER_COMMAND = "listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS "
-            + "sort/COLUMN_NAME rsort/COLUMN NAME}";
+            + "sort/COLUMN_NAME rsort/COLUMN_NAME}";
     public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY"
             + " e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME"
-            + " rsort/COLUMN NAME}";
+            + " rsort/COLUMN_NAME}";
     public static final String PURGE_COMMAND = "purge";
     public static final String RECEIVE_ORDER_COMMAND = "receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION "
             + "m/MAX_QUANTITY}";

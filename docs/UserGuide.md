@@ -819,7 +819,7 @@ provided.
 |                     | low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE      | 
 |                     | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE            | 
 |                     | d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
-|                     | rsort/COLUMN NAME}                                 | 
+|                     | rsort/COLUMN_NAME}                                 | 
 +---------------------+----------------------------------------------------+
 |   addprescription   | addprescription n/NAME q/QUANTITY c/CUSTOMER_ID    | 
 |                     | s/STAFF_NAME                                       | 
@@ -831,7 +831,7 @@ provided.
 +---------------------+----------------------------------------------------+
 |  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID    | 
 |                     | d/DATE s/STAFF_NAME sid/STOCK_ID                   | 
-|                     | sort/COLUMN_NAME rsort/COLUMN NAME}                | 
+|                     | sort/COLUMN_NAME rsort/COLUMN_NAME}                | 
 +---------------------+----------------------------------------------------+
 | archiveprescription | archiveprescription d/DATE                         | 
 +---------------------+----------------------------------------------------+
@@ -842,7 +842,7 @@ provided.
 |     updateorder     | updateorder i/ID [n/NAME q/QUANTITY d/DATE]        | 
 +---------------------+----------------------------------------------------+
 |      listorder      | listorder {i/ID n/NAME q/QUANTITY d/DATE           | 
-|                     | s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}       | 
+|                     | s/STATUS sort/COLUMN_NAME rsort/COLUMN_NAME}       | 
 +---------------------+----------------------------------------------------+
 |    archiveorder     | archiveorder d/DATE                                | 
 +---------------------+----------------------------------------------------+
@@ -912,16 +912,16 @@ Command | Command Syntax
 addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 deletestock | `deletestock [i/ID expiring/DATE]`
 updatestock | `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
-liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
+liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
 updateprescription | `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
-listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}`
+listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}`
 archiveprescription | `archiveprescription d/DATE`
 addorder | `addorder n/NAME q/QUANTITY {d/DATE}`
 deleteorder | `deleteorder i/ID`
 updateorder | `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
-listorder | `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}`
+listorder | `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN_NAME}`
 archiveorder | `archiveorder d/DATE`
 receiveorder | `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 purge | `no parameters`
