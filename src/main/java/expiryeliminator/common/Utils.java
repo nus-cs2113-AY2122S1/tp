@@ -23,4 +23,24 @@ public class Utils {
                 .collect(Collectors.joining(" "));
         //@@author
     }
+
+    //@@author JoshHDs
+
+    /**
+     * Checks whether a string is alphabetic (i.e. only contains letters).
+     *
+     * @param string String to be checked.
+     * @return True if the string only contains letters; false otherwise.
+     */
+    public static Boolean isAlphabetic(String string) {
+        assert string != null;
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (!Character.isLetter(c) && !Character.isSpaceChar(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    //@@author
 }
