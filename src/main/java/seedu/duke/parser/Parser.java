@@ -21,6 +21,7 @@ import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Item;
 import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.ListParser;
 import seedu.duke.parser.commandparser.UpdateParser;
 
 import java.math.BigDecimal;
@@ -35,7 +36,7 @@ public abstract class Parser {
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
-    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException {
+    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
         // Trim and split response using first detected occurrence of whitespace(s) to get type of command requested
         //String[] command = response.trim().split(" +");
 
@@ -52,10 +53,11 @@ public abstract class Parser {
     }
 
     private static Command multiWordCommandProtocol(String response, String[] command, String commandDetails,
-                                                    String commandType) throws DukeException {
+                                                    String commandType) throws DukeException, InvalidItemTypeException {
         switch (commandType) {
         case "list":
-            return new ListCommand(command);
+            //return new ListCommand(command);
+            return ListParser.getListCommand(commandDetails,response);
         case "done":
         case "undo":
             return new DoneUndoCommand(command, response);
@@ -85,8 +87,6 @@ public abstract class Parser {
 
     private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
         switch (commandType) {
-        case "list":
-            return new ListCommand(command);
         case "delete":
             return new DeleteCommand(command);
         case "bye":

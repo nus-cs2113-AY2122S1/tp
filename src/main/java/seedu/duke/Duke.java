@@ -5,6 +5,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Task;
@@ -52,7 +53,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
-            } catch (InvalidBudgetException | NoCommandAttributesException e) {
+            } catch (InvalidBudgetException | NoCommandAttributesException | InvalidItemTypeException e) {
                 System.out.println(e.getMessage());
             }
         } while (ByeCommand.isRunning);

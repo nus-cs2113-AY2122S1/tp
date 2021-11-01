@@ -195,10 +195,16 @@ public class Ui {
 
     public static void listUsageCommands() {
         System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
-                + System.lineSeparator() + "-----------------------"
-                + System.lineSeparator() + "To list Task: list [Event Index] -t"
-                + System.lineSeparator() + "To list Members of a Task: "
-                + "list [Event Index] t/[Task Index]");
+                + System.lineSeparator()
+                + "-----------------------"
+                + System.lineSeparator()
+                + "[list -e: to see overall events"
+                + System.lineSeparator()
+                + "list -t [EVENT_NUM]: to see tasks in an Event"
+                + System.lineSeparator()
+                + "list -m,e/[Event Index] t/[Task Index] : to see members in a Task"
+                + System.lineSeparator()
+                + "[list -m: to see overall member roster");
     }
 
     public static void updateIntroMessage() {

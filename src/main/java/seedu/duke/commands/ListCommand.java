@@ -5,37 +5,26 @@ import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
+import seedu.duke.parser.ItemType;
 
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
     protected String listType;
-    protected String[] userCommand;
-    protected ArrayList<String> checkCommand = new ArrayList<>();
+    private int eventIndex;
+    private int taskIndex;
     protected String feedback = "--------END OF LIST-----------";
 
-    public ListCommand(String[] command) {
-        checkForEmptyCells(command);
-        userCommand = command;
-        if (checkCommand.size() == 1) {
-            this.listType = "list";
-        } else if (userCommand.length > 2 && command[2].equalsIgnoreCase("-t")) {
-            this.listType = "task";
-        } else if (userCommand.length > 2 && command[2].contains("t/")) {
-            this.listType = "member";
-        } else if (userCommand.length > 1 && command[1].contains("-m")) {
-            this.listType = "memberRoster";
-        } else if (userCommand.length >= 2 && command[1].equalsIgnoreCase("-t")) {
-            this.listType = "EventError";
-        } else {
-            this.listType = "others";
-        }
+    public ListCommand(String listType, int eventIndex, int taskIndex) {
+        this.listType = listType;
+        this.eventIndex = eventIndex;
+        this.taskIndex = taskIndex;
     }
 
     public CommandResult execute() {
         try {
             switch (listType) {
-            case "list":
+            case "event":
                 listingOverallSchedule();
                 break;
             case "task":
@@ -84,7 +73,7 @@ public class ListCommand extends Command {
     private void listingTaskDetails() throws DukeException {
         Event event1;
         try {
-            event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+            event1 = Duke.eventCatalog.get(eventIndex);
             System.out.println("Event: " + event1.getTitle()
                     + System.lineSeparator() + "=======================");
             Ui.printList(event1.getTaskList());
@@ -95,10 +84,8 @@ public class ListCommand extends Command {
 
     private void listingMemberDetails() throws DukeException {
         try {
-            Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
-            String[] memberCommand = userCommand[2].split("/");
-            int taskNum = Integer.parseInt(memberCommand[1]) - 1;
-            Task task = event2.getFromTaskList(taskNum);
+            Event event2 = Duke.eventCatalog.get(eventIndex);
+            Task task = event2.getFromTaskList(taskIndex);
             System.out.println("Event: " + event2.getTitle()
                     + System.lineSeparator() + "Task: " + task.getTitle()
                     + System.lineSeparator() + "=======================");
@@ -111,7 +98,7 @@ public class ListCommand extends Command {
     private void checkForEmptyCells(String[] command) {
         for (String check : command) {
             if (!check.equalsIgnoreCase("")) {
-                checkCommand.add(check);
+               // checkCommand.add(check);
             }
         }
     }
