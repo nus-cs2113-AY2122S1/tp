@@ -68,9 +68,14 @@ public class HistoryCommand implements Command {
             try {
                 totalNumberOfRecords = gameRecordsManager.getNumberOfGameRecords(gameMode);
                 numberOfRecords = Integer.parseInt(args.get(indexNumberOfRecords + 1));
+                if (numberOfRecords <= 0) {
+                    throw new InvalidCommandException("Invalid argument for number of records option.\n"
+                            + "Option only accepts positive integer values."
+                            + "Input \"history -h\" for help\n");
+                }
             } catch (NumberFormatException e) {
                 throw new InvalidCommandException("Invalid argument for number of records option.\n"
-                        + "Option only accepts integer values."
+                        + "Option only accepts positive integer values."
                         + "Input \"history -h\" for help\n");
             }
         }
