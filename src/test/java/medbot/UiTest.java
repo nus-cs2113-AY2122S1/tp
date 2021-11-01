@@ -432,7 +432,7 @@ class UiTest {
         String expectedOutput = "The staff with ID: " + staffId + " is unarchived successfully." + END_LINE;
 
         try {
-            assertEquals(expectedOutput, Ui.getArchivePersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));
+            assertEquals(expectedOutput, Ui.getUnarchivePersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
         }
