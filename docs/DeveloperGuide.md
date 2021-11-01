@@ -142,11 +142,16 @@ The `Command` class can be classified into 4 main functionalities:
    * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
    * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
    * `FindPriceCommand` is where the `find` /price feature of gordon is executed
+   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
+   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
 3. Set Commands:
    * The Commands that are required for the `set` feature of Gordon are contained here
    * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
    * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
    * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
+   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
+   * `SetTimeCommand` is where the `set` /time feature of gordon is executed
 4. Tag Commands:
    * The Commands that are required for the  `tag` feature of Gordon are contained here
    * `TagAddCommand` is where the `tag` feature of gordon is executed
@@ -216,6 +221,50 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 
 ## Use Cases
 
+**Use case: `addRecipe`**
+
+**MSS:**
+1. User requests to add a recipe to Gordon
+2. User inputs the necessary commands
+3. Gordon adds the recipe to the cookbook
+
+Use case ends.
+
+**Extensions**
+* The command given was invalid
+    * Gordon shows an error message
+    * Use case resumes on step 1
+
+**Use case: `deleteRecipe`**
+
+**MSS:**
+1. User requests a list of all recipes
+2. Gordon shows a list of all recipes
+3. User requests to delete a specific recipe
+4. Gordon deletes that recipe.
+
+Use case ends.
+
+**Extensions**
+* The list is empty
+    * Use case ends
+* The given index is invalid
+    * Gordon shows an error message
+    * Use case resumes from step 2
+
+**Use case: `listRecipes`**
+
+**MSS:**
+1. User requests to see all their recipes
+2. Gordon shows a list of all currently stored recipes
+
+Use case ends.
+
+**Extensions**
+* The list is empty.
+    * Use case ends.
+
+
 **Use case: `help`**
 
 **MSS:**
@@ -234,48 +283,6 @@ Use case ends.
 
 Use case ends
 
-**Use case: `add`**
-
-**MSS:**
-1. User requests to add a recipe to Gordon
-2. User inputs the necessary commands
-3. Gordon adds the recipe to the cookbook
-
-Use case ends.
-
-**Extensions**
-* The command given was invalid
-  * Gordon shows an error message
-  * Use case resumes on step 1
-
-**Use case: `deleteRecipe`**
-
-**MSS:**
-1. User requests a list of all recipes
-2. Gordon shows a list of all recipes
-3. User requests to delete a specific recipe
-4. Gordon deletes that recipe.
-
-Use case ends.
-
-**Extensions**
-* The list is empty
-  * Use case ends
-* The given index is invalid
-  * Gordon shows an error message
-  * Use case resumes from step 2
-
-**Use case: `listRecipes`**
-
-**MSS:**
-1. User requests to see all their recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions**
-* The list is empty.
-    * Use case ends.
 
 **Use case: `check`**
 
@@ -289,24 +296,40 @@ Use case ends.
 * The recipe does not exist.
     * Use case ends.
 * Input was entered incorrectly
-  * Use case resumes from step 1
+    * Use case resumes from step 1
+
+**Use case: `set`**
+
+**MSS:**
+1. User wants to add specific parameters or edit details about their recipe
+2. User requests to add these parameters
+3. Gordon adds the parameters to the recipe
+4. When the User checks the recipe again, they will see these new parameters
+
+Use case ends.
+
+**Extensions**
+* The recipe does not exist.
+    * Use case ends.
+* Input was entered incorrectly
+    * Use case resumes from step 1
 
 **Use case: `find`**
 
 **MSS:**
 1. User has a large cookbook
 2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
-3. Gordon returns a list of all the recipes which contain what the user is looking for
-4. User checks the recipe for cooking
+3. Gordon returns a list of all the recipes which contain what the user has searched for.
+4. User can now check the recipe for cooking
 
 Use case ends.
 
-**Extensions** 
+**Extensions**
 * The list is empty
-  * Use case ends
+    * Use case ends
 * No recipe contains the keyword
-  * Gordon shows an error message
-  * Use case resumes from step 2
+    * Gordon shows an error message
+    * Use case resumes from step 2
 
 **Use case: `tag`**
 

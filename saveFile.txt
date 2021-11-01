@@ -1,6 +1,10 @@
 Coffee
 Calories (kcal): 
 10
+Preparation time: 
+1 minute(s)
+Cooking time: 
+2 minute(s)
 Ingredients needed: 
 1. Coffee beans
 2. Water
@@ -9,10 +13,4 @@ Method:
 1. Boil water
 2. Grind beans
 3. Pour water over grounds
-
-aa  s
-Ingredients needed: 
-1. h
-Method: 
-1. g
 
