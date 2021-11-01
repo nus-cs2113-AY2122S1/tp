@@ -3,6 +3,7 @@ package gordon.util;
 import gordon.command.Command;
 import gordon.command.basic.AddCommand;
 import gordon.command.basic.CheckCommand;
+import gordon.command.basic.HelpCommand;
 import gordon.command.basic.DeleteRecipeCommand;
 import gordon.command.basic.ListRecipesCommand;
 import gordon.command.basic.NullCommand;
@@ -72,8 +73,6 @@ public class Parser {
     public static final String SET_FIND_PRICE_PROMPT = "price";
     public static final String SET_FIND_TIME_PROMPT = "time";
 
-    UI message = new UI();
-
     public Parser() {
         in = new Scanner(System.in);
     }
@@ -109,7 +108,7 @@ public class Parser {
             } else if (parsedCommand.equalsIgnoreCase(FIND_PROMPT)) {
                 return findParse();
             } else if (parsedCommand.equalsIgnoreCase(HELP_PROMPT)) {
-                message.printHelp();
+                return new HelpCommand();
             } else if (parsedCommand.equalsIgnoreCase(TAG_PROMPT)) {
                 return addTagParse();
             } else if (parsedCommand.equalsIgnoreCase(UNTAG_PROMPT)) {
@@ -228,7 +227,7 @@ public class Parser {
     public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
         if (splitContent.length < 3) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.ADD_COMMAND_INVALID);
         }
 
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
@@ -241,7 +240,7 @@ public class Parser {
         nameRecipe = parseName(line);
         String inputIndex = line.contains(" ") ? line.substring(line.indexOf(" ") + 1) : " ";
         if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.DELETE_COMMAND_INVALID);
         }
         try {
             int index = Integer.parseInt(inputIndex);
@@ -255,12 +254,12 @@ public class Parser {
     public Command setParse() throws GordonException {
         String[] splitContent = line.split("/");
         if (splitContent.length < 2) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.SET_COMMAND_INVALID);
         }
         String recipeName = parseName(splitContent[0]);
         int spaceIndex = splitContent[1].indexOf(' ');
         if (spaceIndex < 0) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.SET_COMMAND_INVALID);
         }
         String target = splitContent[1].substring(0, spaceIndex);
         switch (target.toLowerCase()) {
@@ -317,7 +316,7 @@ public class Parser {
             try {
                 String[] splitTime = splitContent[1].substring(spaceIndex + 1).split(",");
                 if (splitTime.length != 2) {
-                    throw new GordonException(GordonException.COMMAND_INVALID);
+                    throw new GordonException(GordonException.SET_TIME_COMMAND_INVALID);
                 }
                 int prepTime = Integer.parseInt(splitTime[0].trim());
                 int cookTime = Integer.parseInt(splitTime[1].trim());
@@ -337,7 +336,7 @@ public class Parser {
         String[] splitContent = line.split("/");
         assert (splitContent.length != 0);
         if (splitContent.length < 2) {
-            throw new GordonException(GordonException.COMMAND_INVALID);
+            throw new GordonException(GordonException.FIND_COMMAND_INVALID);
         }
         int spaceIndex = splitContent[1].indexOf(' ');
         if (spaceIndex < 0) {

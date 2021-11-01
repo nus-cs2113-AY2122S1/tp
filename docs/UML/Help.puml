@@ -1,0 +1,35 @@
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+
+activate ":Parser"
+
+":Parser" -> ":HelpCommand": HelpCommand()
+activate ":HelpCommand"
+
+":HelpCommand" -> ":UI" : printHelp()
+activate ":UI"
+
+":UI" --> ":HelpCommand" : //Help message printed//
+destroy ":UI"
+
+":HelpCommand" --> ":Parser"
+destroy ":HelpCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml

@@ -97,7 +97,7 @@ Method:
 
 - I'll let you know that the recipe has been added
 - I'll list down the ingredients and steps required for said recipe
-- Finally some good ******** food...
+- Finally, some good ******** food...
     
 ---
 
@@ -108,6 +108,8 @@ Removes an existing recipe from my database of recipes.
 #### Format: `deleteRecipe RECIPE_INDEX`
 
 * The `RECIPE_INDEX` must be a positive integer representing the index of the recipe you want to remove.
+* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.
+  * **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
 
 #### Example of usage:
 
@@ -132,6 +134,7 @@ Prints the details of the specified recipe
 #### Format: `check RECIPE_NAME`
 
 * The `RECIPE_NAME` must be part of a valid existing recipe.
+* `RECIPE_NAME` cannot be blank.
 * `RECIPE_NAME` is case-insensitive.
 * This command looks for substrings, for example if you look for "rice" the recipes shown can be "Chicken Rice" and "Duck Rice".
 
@@ -245,7 +248,7 @@ Shows you the proper format of commands.
 
 Sets the attributes of recipes, e.g. time needed, calories etc.
 
-**Format:** `set RECIPE_NAME /ATTRIBUTE VALUE`
+**Format:** `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
 
 * The program first looks for the recipe using `RECIPE_NAME`, similar to find.
 * `ATTRIBUTE` can be any one of the following:
@@ -255,7 +258,7 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
   * Time (`VALUE` must be two integers, separated by a comma)
     * The first integer represents the preparation time required for the dish
     * The next integer then represents the cooking time
-* For calories, price and time, changing the `VALUE` to -1 will hide it from the recipe 
+* For calories, price and time, changing the `VALUE` to -1 in a recipe will prevent that attribute from showing up in that recipe.
 * Any values below -1 are not accepted.
 * `ATTRIBUTE` is not case-sensitive.
 
@@ -283,11 +286,12 @@ Times set successfully.
 
 Finds recipes by their attributes, e.g. time needed, calories etc.
 
-#### Format: `find /ATTRIBUTE VALUE ` 
+#### Format: `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE ` 
 
 * The program automatically sorts the results from greatest to smallest `VALUE` if applicable.
 * If the `ATTRIBUTE` of any recipe is not set, Gordon will send you an error.
 * The find command returns the Recipes with less than or equal to the attribute value given.
+* **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
 #### Example of usage:
 
@@ -314,6 +318,131 @@ Searching by total time...
 
 ---
 
+### 9. Tagging Functionalities
+A variety of tagging-related functions, for greater organization.
+
+#### 9.1 Adding Tags to Recipes: `tag`
+> Tag recipes in your cookbook.
+> 
+> #### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+> * Gordon will name your tag as defined in `TAG_NAME`
+> * Within a recipe, you are not allowed to have duplicate tag names
+> * You can associate multiple tags to a single recipe in one command
+> 
+> #### Example of usage:
+> `tag / Mee Pok / Hawker Food + Noodles`
+> </br>
+ `tag / Duck Rice / Hawker Food + Favorites`
+> 
+> #### Expected outcome
+> 
+> ```
+> Successfully tagged Mee Pok under Hawker Food
+> Successfully tagged Mee Pok under Noodles
+> Successfully tagged Duck Rice under Hawker Food
+> Successfully tagged Duck Rice under Favorites
+> ```
+ 
+#### 9.2 Untagging Tags from Recipes: `untag`
+> Untag recipes in your cookbook.
+>
+> #### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+> * Gordon will untag all tags as defined in `TAG_NAME`, from your Recipe
+> * You can untag multiple tags from a single recipe in one command
+> * If untagging causes the Tag to have no associated recipes, a prompt will be shown
+>
+> #### Example of usage:
+>
+> assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it
+> ```
+> untag / Mee Pok / Hawker Food + Noodles
+> untag / Chocolate Milkshake / Fatty Foods
+> ```
+> 
+> #### Expected outcome
+>
+> ```
+> Successfully untagged Mee Pok from Hawker Food
+> Successfully untagged Mee Pok from Noodles
+> Successfully untagged Chocolate Milkshake from Fatty Foods
+> Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
+> ```
+
+#### 9.3 Deleting Tags from Cookbook: `deleteTag`
+> Delete tags from your cookbook.
+>
+> #### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
+> * Gordon will delete all tags as defined in `TAG_NAME` from your Cookbook
+> * Note that deleting a tag will remove **ALL** instances of that tag from **ALL** recipes!
+> * You can delete multiple tags from your Cookbook in one command
+>
+> #### Example of usage:
+> `deleteTag / Hawker Food + Noodles`
+> <br>
+> 
+> #### Expected outcome
+> ```
+> Successfully deleted Hawker Food tag
+> Successfully deleted Noodles tag
+> ```
+
+#### 9.4 Find a Recipe by their tag(s): `find`
+> Finds recipes by their tag(s)
+>
+> #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
+> * Gordon will search for recipes that have **ALL** tags as defined in `TAG_NAME`
+>
+> #### Example of usage:
+> Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
+> <br>
+> Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
+> ```
+> find /tag Hawker Food
+> find /tag Hawker Food + Noodles
+> ```
+>
+> #### Expected outcome
+> ```
+> Searching by tags...
+> 1. Mee Pok
+> 2. Duck Rice
+> 
+> Searching by tags...
+> 1. Mee Pok
+> ```
+
+#### 9.5 List all your Tags: `listTags`
+> List all the tags in your Cookbook.
+>
+> #### Format: `listTags`
+>
+> #### Example of usage:
+> ```
+> listTags
+> ```
+>
+> #### Expected outcome
+> ```
+> 1. Hawker Food
+> 2. Noodles
+> 3. Favorites
+> ```
+
+### 10. Saving and Loading
+
+Gordon automatically saves all of your recipes to a .txt file, "saveFile.txt",
+in the same directory where you ran the app. It loads the recipes when you start up Gordon.
+
+<div markdown="span" class="alert alert-danger">
+
+:exclamation: **Warning:** It is not advised to edit the save file directly unless you are very 
+familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
+altogether, or cause errors in the main software. If the program fails to start, close the application
+and delete the save file before trying again.
+</div>
+
+---
+
 ## Cheat sheet
 
 Instruction | Command format
@@ -324,9 +453,9 @@ Look up a recipe | `check RECIPE_NAME`
 Display all recipes | `listRecipes`
 Exit Gordon | `exit`
 Get some help | `help`
-Set recipe attributes | `set RECIPE_NAME /ATTRIBUTE VALUE`
-Find a recipe | `find /ATTRIBUTE VALUE`
-Tag a recipe | `tag`
-Untag a recipe | `untag`
+Set recipe attributes | `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
+Find a recipe | `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
+Tag a recipe | `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+Untag a recipe | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+Delete a tag | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
 List all tags | `listTags`
-Delete a tag | `deleteTag`

@@ -1,9 +1,35 @@
 # Developer Guide
 
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Getting Started](#getting-started)
+  - [Recommended software (for optimal compatibility)](#recommended-software-for-optimal-compatibility)
+  - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
+- [Design & Implementation](#design--implementation)
+  - [Architecture](#architecture)
+  - [Kitchen Component](#kitchen-component)
+  - [Parser Component](#parser-component)
+  - [Command Component](#command-component)
+  - [Storage Component](#storage-component)
+  - [UI Component](#ui-component)
+  - [Tag Component](#tag-component)
+- [Product Scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+- [User Stories](#user-stories)
+- [Use Cases](#use-cases)
+- [Non-Functional requirements](#non-functional-requirements)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
+  - [I/O Tests](#io-tests)
+  - [JUnit Tests](#junit-tests)
+
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+UML Diagrams were generated with the help of [PlantUML](https://plantuml.com/).
 
+Developer Guide was adapted from [se-education.org/addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 ## Getting started
 
 ### Recommended software (for optimal compatibility)
@@ -78,34 +104,42 @@ The `Cookbook` class consists of 2 main attributes
 
 The `Kichen` package can be classified into 3 main functionalities:
 
-1. Recipe Management : 
-  - Add recipes using the `addRecipe` method in `Cookbook`.
-  - Remove recipes using the `removeRecipe` method in `Cookbook`.
-  - Check whether a recipe exist using the `checkRecipe` method in `Cookbook`.
-  - Replace ingredients in a recipe using the `setIngredients` method in `Cookbook` that calls the `replaceIngredients` method in `Recipe`.
-  - Replace steps in a recipe using the `setSteps` method in `Cookbook` that calls the `replaceSteps` method in `Recipe`.
-  - Add calories to a recipe using the `setCalories` method in `Cookbook` that calls the `setCalories` method in `Recipe`.
-  - Add price to a recipe using the `setPrice` method in `Cookbook` that calls the `setPrice` method in `Recipe`.
-  - Add preparation time to a recipe using the `setTimes` method in `Cookbook` that calls the `setTimes` method in `Recipe`.
-  - Add difficulty level to a recipe using the `setDifficulty` method in `Cookbook` that calls the `setDifficulty` method in `Recipe`.
+1. Recipe Management in `Cookbook` : 
+  - `addRecipe` : Adds recipe to Cookbook
+  - `removeRecipe` : Remove recipe from Cookbook
+  - `checkRecipe` : Checks whether recipe exists in Cookbook
+  - `setIngredients` : Updates the ***ingredients*** of a recipe in the Cookbook
+  - `setSteps` : Updates the ***steps*** of a recipe in the Cookbook
+  - `setCalories` : Adds ***calories*** to a recipe in the Cookbook
+  - `setPrice` : Adds ***price*** to a recipe in the Cookbook
+  - `setTime` : Adds ***cooking time*** and ***preparation time*** to a recipe in the Cookbook
+  - `setDifficulty` : Adds ***difficulty*** to a recipe in the Cookbook
 
-2. Tag Management :
-  - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method in `Cookbook`.
-  - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method in `Cookbook`.
-  - Add a recipe to the list of recipes associated with a particular tag using the `appendRecipeToCookbookTag` method
-  - Remove a recipe from the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
-  - Add a tag to a recipe using the `addTagToRecipes` method in `Cookbook` that calls the `addTagToRecipe` method in `Recipe`.
-  - Delete a tag from a recipe using the `deleteTagFromRecipes` method that calls the `deleteTagFromRecipe` method in `Recipe`.
-  - List all tags in the `cookbookTags` array using the `listCookBookTags` method in `Cookbook`.
-  - Check whether a particular tag exists using the `doesCookBookTagExist` method in `Cookbook`.
+For example, the diagram below shows the sequence diagram when user wants to add ***calories*** to a recipe
 
-3. Filter Recipes : 
-  - Filter recipes in the `recipes` array by ingredients using the `filterByIngredients` method in `Cookbook`.
-  - Filter recipes in the `recipes` array by tags using the `filterByTags` method in `Cookbook`.
-  - Filter recipes in the `recipes` array by difficulty using the `filterByDifficulty` method in `Cookbook`.
-  - Filter recipes in the `recipes` array by price using the `filterByPrice` method in `Cookbook`.
-  - Filter recipes in the `recipes` array by calories using the `filterByCalories` method in `Cookbook`.
-  - Filter recipes in the `recipes` array by time using the `filterByTime` method in `Cookbook`.
+![AddCalories Sequence Diagram](./RenderedUML/SetCalories.svg)
+
+2. Tag Management in `Cookbook` :
+  - `addCookbookTag` : Add a new tag to the ***cookbookTags*** array
+  - `deleteCookbookTag` : Deletes a tag from the ***cookbookTags*** array
+  - `appendRecipeToCookbookTag` : Associates a recipe with a tag
+  - `deleteRecipeToCookBookTag` : Removes a recipe's association with a tag
+  - `addTagToRecipes` : Adds a tag to a recipe
+  - `deleteTagFromRecipes` : Deletes a tag from a recipe
+  - `listCookBookTags` : List all tags in the Cookbook
+  - `doesCookBookTagExist` : Check whether a tag exists 
+
+For example, the diagram below shows the sequence diagram for when user wants to add ***tag*** to a recipe
+
+![AddTags Sequence Diagram](./RenderedUML/AddTag.svg)
+
+3. Filter Recipes in `Cookbook` by different traits (such as *ingredients*, *tags*, *calories* etc.): 
+  - `filterByIngredients` : Filter by ***ingredients***
+  - `filterByTags` : Filter by ***tags***
+  - `filterByDifficulty` : Filter by ***difficulty***
+  - `filterByPrice` : Filter by ***price***
+  - `filterByCalories` : Filter by ***calories***
+  - `filterByTime` : Filter by ***cooking time*** and ***preparation time***
 
 ### Parser component
 
@@ -136,28 +170,74 @@ The `Command` class can be classified into 4 main functionalities:
    * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
    * `ListRecipesCommand` is where the `listRecipes` feature is executed
    * `HelpCommand` is where the `help` feature is executed
-2. Find Commands:
+
+    #### Example : `AddCommand`
+    
+    `addRecipe Curry /ingredients Curry Sauce + Rice /steps Simmer + Cook`
+
+    #### Expected outcome:
+    
+    ```
+    Added Curry recipe! Yum!
+    Curry
+    Ingredients needed: 
+    1. Curry Sauce
+    2. Rice 
+    Method: 
+    1. Simmer
+    2. Cook
+    ```
+
+2. Set Commands:
+    * The Commands that are required for the `set` feature of Gordon are contained here
+    * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
+    * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
+    * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+
+   #### Example : `SetDifficultyCommand`
+
+   `set Curry Rice /difficulty hard`
+
+   #### Expected outcome:
+
+    ```
+    Setting difficulty...
+    Difficulty set successfully.
+    ```
+
+3. Find Commands:
    * The Commands that are required for the `find` feature of Gordon are contained here
    * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
    * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
    * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
    * `FindPriceCommand` is where the `find` /price feature of gordon is executed
-   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
-   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
-3. Set Commands:
-   * The Commands that are required for the `set` feature of Gordon are contained here
-   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
-   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
-   * `SetPriceCommand` is where the `set` /price feature of gordon is executed
-   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
-   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
-   * `SetTimeCommand` is where the `set` /time feature of gordon is executed
+
+    #### Example : `FindDifficultyCommand`
+
+    `find /difficulty Hard`
+
+    #### Expected outcome:
+    
+    ```
+    Searching by difficulty...
+    1. Curry Rice (Difficulty: Hard)
+    ```
+
 4. Tag Commands:
    * The Commands that are required for the  `tag` feature of Gordon are contained here
    * `TagAddCommand` is where the `tag` feature of gordon is executed
    * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
    * `TagUntagCommand` is where the `untag` feature of gordon is executed
 
+    #### Example : `TagAddCommand`
+
+    `tag / Curry Rice / Yummy`
+
+    #### Expected outcome:
+    
+    ```
+    Successfully tagged Curry Rice under Yummy
+    ```
 ### Storage component
 
 The Diagram below is the class diagram for the Storage Class
@@ -180,12 +260,29 @@ Functions of the UI Class:
 * Prints exit message upon the command `exit`
 * Prints help message upon the command `help`
 
+The Diagram below is the sequence diagram for when the user needs ***help*** with the commands.
+
+![Help Diagram](./RenderedUML/Help.svg)
+
+
 ### Tag Component
-The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
-1. `getTagName` returns the _Tag Name_.
-2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
-3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
-4. `removeAssociatedRecipeName` removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
+
+The diagram below is the class diagram for the Tag Class
+
+![Tag Diagram](./RenderedUML/TagClassDiagram.svg)
+
+#### Functions of the Tag Class:
+> 
+>The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
+>1. `getTagName` returns the _Tag Name_.
+>2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
+>3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
+>4. `removeAssociatedRecipeName` removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
+> 5. `numberofAssociatedRecipes` returns the number of _Recipes_ that each _Tag_ has under it.
+
+>The diagram below is the sequence diagram, for when the User wishes to `untag` _Tags_ from a _Recipe_.
+> 
+>![Untag Sequence Diagram](./RenderedUML/UntagSequence.svg)
 
 ## Product scope
 ### Target user profile
@@ -221,155 +318,158 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 
 ## Use Cases
 
-**Use case: `addRecipe`**
-
-**MSS:**
-1. User requests to add a recipe to Gordon
-2. User inputs the necessary commands
-3. Gordon adds the recipe to the cookbook
-
-Use case ends.
-
-**Extensions**
-* The command given was invalid
-    * Gordon shows an error message
-    * Use case resumes on step 1
-
-**Use case: `deleteRecipe`**
-
-**MSS:**
-1. User requests a list of all recipes
-2. Gordon shows a list of all recipes
-3. User requests to delete a specific recipe
-4. Gordon deletes that recipe.
-
-Use case ends.
-
-**Extensions**
-* The list is empty
-    * Use case ends
-* The given index is invalid
-    * Gordon shows an error message
-    * Use case resumes from step 2
-
-**Use case: `listRecipes`**
-
-**MSS:**
-1. User requests to see all their recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions**
-* The list is empty.
-    * Use case ends.
-
-
-**Use case: `help`**
-
-**MSS:**
-1. User opens Application
-2. User does not know the commands
-3. Gordon provides a list of commands
-4. User can now use the App
-
-Use case ends.
+ **Use case: `help`**
+>
+>**MSS:**
+>1. User opens Application
+>2. User does not know the commands
+>3. Gordon provides a list of commands
+>4. User can now use the App
+> 
+>Use case ends.
 
 **Use case: `exit`**
+>
+>**MSS:**
+>1. User requests to exit program
+>2. Program exits.
+>
+>Use case ends
 
-**MSS:**
-1. User requests to exit program
-2. Program exits.
+**Use case: `add`**
+>
+>**MSS:**
+>1. User requests to add a recipe to Gordon
+>2. User inputs the necessary commands
+>3. Gordon adds the recipe to the cookbook
+>
+>Use case ends.
+>
+>**Extensions**
+>* The command given was invalid
+>  * Gordon shows an error message
+>  * Use case resumes on step 1
 
-Use case ends
+**Use case: `deleteRecipe`**
+>
+>**MSS:**
+>1. User requests a list of all recipes
+>2. Gordon shows a list of all recipes
+>3. User requests to delete a specific recipe
+>4. Gordon deletes that recipe.
+>
+>Use case ends.
+>
+>**Extensions**
+>* The list is empty
+>  * Use case ends
+>* The given index is invalid
+>  * Gordon shows an error message
+>  * Use case resumes from step 2
 
-
+**Use case: `listRecipes`**
+>
+>**MSS:**
+>1. User requests to see all their recipes
+>2. Gordon shows a list of all currently stored recipes
+>
+>Use case ends.
+>
+>**Extensions**
+>* The list is empty.
+>    * Use case ends.
+>
+ 
 **Use case: `check`**
-
-**MSS:**
-1. User requests to check a specific recipe
-2. Gordon brings up the specified recipe for the user to peruse
-
-Use case ends.
-
-**Extensions**
-* The recipe does not exist.
-    * Use case ends.
-* Input was entered incorrectly
-    * Use case resumes from step 1
-
-**Use case: `set`**
-
-**MSS:**
-1. User wants to add specific parameters or edit details about their recipe
-2. User requests to add these parameters
-3. Gordon adds the parameters to the recipe
-4. When the User checks the recipe again, they will see these new parameters
-
-Use case ends.
-
-**Extensions**
-* The recipe does not exist.
-    * Use case ends.
-* Input was entered incorrectly
-    * Use case resumes from step 1
+>
+>**MSS:**
+>1. User requests to check a specific recipe
+>2. Gordon brings up the specified recipe for the user to peruse
+>
+>Use case ends.
+>
+>**Extensions**
+>* The recipe does not exist.
+>    * Use case ends.
+>* Input was entered incorrectly
+>  * Use case resumes from step 1
 
 **Use case: `find`**
-
-**MSS:**
-1. User has a large cookbook
-2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
-3. Gordon returns a list of all the recipes which contain what the user has searched for.
-4. User can now check the recipe for cooking
-
-Use case ends.
-
-**Extensions**
-* The list is empty
-    * Use case ends
-* No recipe contains the keyword
-    * Gordon shows an error message
-    * Use case resumes from step 2
+>
+>**MSS:**
+>1. User has a large cookbook
+>2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
+>3. Gordon returns a list of all the recipes which contain what the user is looking for
+>4. User checks the recipe for cooking
+>
+>Use case ends.
+>
+>**Extensions** 
+>* The list is empty
+>  * Use case ends
+>* No recipe contains the keyword
+>  * Gordon shows an error message
+>  * Use case resumes from step 2
 
 **Use case: `tag`**
-
-**MSS:** 
-1. User wants to sort the recipes with their own metric
-2. User requests to add a tag to a specific recipe
-3. Gordon tags the recipe
-4. User can now find the recipe by tag
-
-Use case ends.
-
-**Extensions**
-* The given recipe does not exist
-  * Gordon shows an error message
-  * Use case resumes from step 2
+>
+>**MSS:** 
+>1. User wants to sort the recipes with their own metric
+>2. User requests to add tag(s) to a specific recipe
+>3. Gordon tags the recipe
+>4. User can now find the recipe by tag
+>
+>Use case ends.
+>
+>**Extensions**
+>* The given recipe does not exist
+>  * Gordon shows an error message, notifies User that recipe does not exist
+>  * Use case resumes from step 2
+> 
+> 
+>* Input fields for tagName or recipeName is left blank
+>    * Gordon shows an error message, prompts User to enter recipeName or tagName
+>    * Use case resumes from step 2
+> 
+> 
+> * There is a duplicate tag within the same recipe
+>   * Gordon shows an error message, notifies User that duplicate tags are not allowed
+>   * Use case resumes from step 2
 
 **Use case: `untag`**
-
-**MSS:**
-1. User wants to remove a tag from a specific recipe
-2. Gordon removes the tag from the recipe
-3. User can now add a different tag to that recipe
-
-Use case ends.
-
-**Extensions**
-* The tag does not exist
-    * Use case ends.
+>
+>**MSS:**
+>1. User wants to remove a tag from a specific recipe
+>2. Gordon removes the tag from the recipe
+>3. User can now add a different tag to that recipe
+>
+>Use case ends.
+>
+>**Extensions**
+>* The tag does not exist
+>    * Gordon shows an error message.
+>    * Use case ends
+>
+>* The recipe being untagged is the last recipe under the Tag
+>    * Gordon will print a message to the User, prompting them to delete the Tag if they want to
+>    * Use case ends
+>
+>* Input fields for tagName or recipeName is left blank
+   >    * Gordon shows an error message, prompts User to enter recipeName or tagName
+>    * Use case resumes from step 1
 
 **Use case: `deleteTag`**
-
-**MSS:**
-1. User wants to delete a master tag from the database
-2. Gordon deletes the master tag from the cookbook
-
-Use case ends.
-
-**Extensions**
-* The tag does not exist
-    * Use case ends.
+>
+>**MSS:**
+>1. User wants to delete a master tag from the database
+>2. Gordon deletes the master tag from the cookbook
+>3. All recipes will have references to this master tag removed
+>
+>Use case ends.
+>
+>**Extensions**
+>* The tag does not exist
+>    * Use case ends.
 
 ## Non-Functional Requirements
 
@@ -382,5 +482,45 @@ Use case ends.
 * *Mainstream OS* - Windows, MacOS, Linux, Unix
 
 ## Instructions for manual testing
+- [I/O Tests](#io-tests)
+- [JUnit Tests](#junit-tests)
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### I/O Tests
+#### Windows
+
+1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
+
+2. Run the `runtests.bat` script
+
+3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed.
+
+#### Mac/Unix/Linux
+
+1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
+
+2. Run the `runtests.sh` script
+
+3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed
+
+### JUnit tests
+
+#### Pre-requisites before running any tests
+1. Open the project in **IntelliJ IDEA** IDE
+2. Click on the `Project` icon in the left sidebar to open the Project window.
+
+#### Run all tests
+1. Right-click on the `test` folder, and in the options window that pops up, click `Run` to run all tests.
+2. You will be redirected to a view of the console, to await to result of the test.
+
+#### Run individual tests
+1. In the Project window, click the dropdown beside the `test` folder, then the `java` folder, until you find `gordon`.
+2. `gordon` has 2 sub-packages, the `kitchen` package and the `util` package.
+3. To run individual JUnit Tests, first select the desired `.java` file located in these packages.
+4. Right-click on the `.java` file, and in the options window that pops up, click `Run` to run the test.
+5. You will be redirected to a view of the console, to await to result of the test.
+
+#### Interpreting test results
+1. Depending on the number of tests ran, see the number of green ticks in the `test results` dropdown.
+2. If number of green ticks equals number of tests run, then all tests have passed.
+3. If there are red crosses, then there are tests that have failed.
+
