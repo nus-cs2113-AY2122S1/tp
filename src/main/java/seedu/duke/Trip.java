@@ -294,8 +294,9 @@ public class Trip {
             if (date.isBefore(LocalDate.EPOCH)) {
                 Ui.dateInvalidError();
                 userInputDateError();
+            } else {
+                this.dateOfTrip = date;
             }
-            this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
             Ui.printDateTimeFormatError();
             userInputDateError();
