@@ -58,13 +58,13 @@ public class AddLinkCommand extends Command {
         }
 
         ArrayList<String> argArray = CommonUtils.findArguments(arguments);
-        if (!isValidScheduleArguments(argArray)) {
+        if (hasMissingScheduleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        String userStartTime = argArray.get(2).trim();
 
         this.description = argArray.get(0).trim();
         this.day = argArray.get(1).trim();
+        String userStartTime = argArray.get(2).trim();
         this.startTime = CommonUtils.convertToLocalTime(userStartTime);
 
         try {
@@ -75,20 +75,7 @@ public class AddLinkCommand extends Command {
         }
 
         this.link = argArray.get(4).trim();
-
-        if (!isValidDay(this.day)) {
-            TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
-            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
-        } else if (!isValidUrl(this.link)) {
-            TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
-            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
-        } else if (!isValidDuration(this.duration)) {
-            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
-            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.duration));
-        } else if (hasDurationOverflow(startTime, this.duration)) {
-            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
-        }
+        checkValidArguments();
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
             + " to Add Link Command", description, day, startTime, link));
     }
@@ -122,21 +109,42 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Checks if arguments are non-empty and valid.
+     * Checks if the proper amount of arguments exists and each are non-empty.
      *
      * @param argArray The command arguments in an array list.
      * @return True if the appropriate number of arguments are present, false otherwise.
      */
-    private boolean isValidScheduleArguments(ArrayList<String> argArray) {
-        boolean isValid = true;
+    private boolean hasMissingScheduleArguments(ArrayList<String> argArray) {
+        boolean hasMissing = false;
         if (argArray.size() != ADD_SCHEDULE_ARGUMENTS) {
             TerminusLogger.warning(String.format("Failed to find %d arguments, %d arguments found",
                 ADD_SCHEDULE_ARGUMENTS, argArray.size()));
-            isValid = false;
+            hasMissing = true;
         } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments, some arguments found is empty");
-            isValid = false;
+            hasMissing = true;
         }
-        return isValid;
+        return hasMissing;
+    }
+
+    /**
+     * Checks the validity of the arguments for a new Link object.
+     *
+     * @throws InvalidArgumentException when arguments are invalid
+     */
+    private void checkValidArguments() throws InvalidArgumentException {
+        if (!isValidDay(this.day)) {
+            TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
+        } else if (!isValidDuration(this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.duration));
+        } else if (hasDurationOverflow(startTime, this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
+        } else if (!isValidUrl(this.link)) {
+            TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
+        }
     }
 }
