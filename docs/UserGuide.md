@@ -126,10 +126,12 @@ For example, try typing `show CS2113T` and see the magic happen!
 :information_source: Both command and module code is case-insensitive.
 
 ```shell
-~$ show CS2113T
 Title: Software Engineering & Object-Oriented Programming
+
 MCs: 4
+
 Department: Computer Science
+
 This module introduces the necessary skills for systematic and
 rigorous development of software systems. It covers requirements,
 design, implementation, quality assurance, and project management
@@ -138,9 +140,15 @@ module uses the Object Oriented Programming paradigm. Students of this
 module will receive hands-on practice of tools commonly used in the
 industry, such as test automation tools, build automation tools, and
 code revisioning tools will be covered.
+
 Prerequisites: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+
 S/U able: No
+
 Semester Availability: [1, 2]
+
+Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
+              Sem 2: Thu May 05 01:00 PM - 03:00 PM
 
 ```
 
@@ -150,7 +158,7 @@ Semester Availability: [1, 2]
 
 Maybe you don't know what modules are out there, and want to know what GEH modules are available.
 
-You can type `search GEH` to display all CG modules available:
+You can type `search GEH` to display all GEH modules available:
 
 ```shell
 ~$ search GEH
@@ -175,9 +183,9 @@ You can also apply the following flags to refine the search:
 - **-l (small L) :** search for mods matching the level specified e.g `-l 3000` 
 - **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
 - **-s :** search for mods offered in the semester e.g. `-s 2`
-  (:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
-- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`. Defaults to false if 
-input is invalid.
+  <br>:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.
+- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`.
+  <br>:information_source: Defaults to false if input is invalid.
 - **-f :** search for mods from a faculty e.g `-f Computing`. Checks if faculty contains keyword.
 - **-d :** search for mods from a department `-d Computer Science`. Checks if faculty contains keyword.
 - **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
