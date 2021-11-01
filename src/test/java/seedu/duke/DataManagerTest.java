@@ -5,8 +5,6 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.DuplicateExpenseException;
-import seedu.exceptions.DuplicateIncomeException;
 import seedu.utility.BudgetManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
@@ -23,8 +21,7 @@ public class DataManagerTest {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     @Test
-    public void saveEntries_validEntries_correctDataFileContent() 
-            throws DuplicateExpenseException, DuplicateIncomeException {
+    public void saveEntries_validEntries_correctDataFileContent() {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));
@@ -39,8 +36,7 @@ public class DataManagerTest {
     }
 
     @Test
-    public void loadEntries_validDataFileContent_correctEntries() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+    public void loadEntries_validDataFileContent_correctEntries() {
         saveEntries_validEntries_correctDataFileContent();
         Parser parser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
@@ -63,8 +59,7 @@ public class DataManagerTest {
     }
 
     @Test
-    public void loadEntries_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() 
-            throws DuplicateExpenseException, DuplicateIncomeException {
+    public void loadEntries_invalidDataFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
         FinancialTracker financialTracker = new FinancialTracker();
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         financialTracker.addExpense(new Expense("qwe", 12.5, ExpenseCategory.FOOD, date));

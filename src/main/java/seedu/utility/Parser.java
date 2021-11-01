@@ -32,22 +32,7 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
-import seedu.exceptions.InputException;
-import seedu.exceptions.InvalidCurrencyTypeException;
-import seedu.exceptions.InvalidExpenseAmountException;
-import seedu.exceptions.InvalidExpenseCategoryException;
-import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidExpenseDescriptionException;
-import seedu.exceptions.InvalidExpenseIndexException;
-import seedu.exceptions.InvalidIncomeAmountException;
-import seedu.exceptions.InvalidIncomeCategoryException;
-import seedu.exceptions.InvalidIncomeDataFormatException;
-import seedu.exceptions.InvalidIncomeDescriptionException;
-import seedu.exceptions.InvalidIncomeIndexException;
-import seedu.exceptions.InvalidSettingsDataException;
+import seedu.exceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -162,6 +147,7 @@ public class Parser {
             + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final double INPUT_AMOUNT_LIMIT = 10000000;
 
     /**
      * Parses user input into command for execution.
@@ -459,9 +445,14 @@ public class Parser {
         return expenseDescription;
     }
 
-    private double extractExpenseAmount(Matcher matcher) throws InvalidExpenseAmountException {
+    private double extractExpenseAmount(Matcher matcher) 
+            throws InvalidExpenseAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseExpenseAmount(userGivenAmount);
+        double expenseAmount = parseExpenseAmount(userGivenAmount);
+        if (expenseAmount > INPUT_AMOUNT_LIMIT) { 
+            throw new InvalidInputAmountValueException(Messages.INVALID_EXPENSE_VALUE);
+        }
+        return expenseAmount;
     }
 
     private Command prepareAddIncome(Matcher matcher) {
@@ -520,9 +511,14 @@ public class Parser {
         return incomeDescription;
     }
 
-    private double extractIncomeAmount(Matcher matcher) throws InvalidIncomeAmountException {
+    private double extractIncomeAmount(Matcher matcher) 
+            throws InvalidIncomeAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseIncomeAmount(userGivenAmount);
+        double incomeAmount = parseIncomeAmount(userGivenAmount);
+        if (incomeAmount > INPUT_AMOUNT_LIMIT) {
+            throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
+        }
+        return incomeAmount;
     }
 
     /**
