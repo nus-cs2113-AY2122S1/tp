@@ -249,7 +249,7 @@ public class FinancialTracker {
                 .collect(Collectors.toList());
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
-            monthlyBreakdown.add(getMonthlyIncome(i,yearlyAccumulatedIncome));
+            monthlyBreakdown.add(getMonthlyIncome(i, yearlyAccumulatedIncome));
         }
         return monthlyBreakdown;
     }
