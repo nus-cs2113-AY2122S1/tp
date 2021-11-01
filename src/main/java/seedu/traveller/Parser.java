@@ -300,7 +300,6 @@ public class Parser {
 
     private static Command parseSearchItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
-        Command command;
         String tripName;
         String rawDayNumber;
         String keyword;
@@ -319,7 +318,7 @@ public class Parser {
         int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new SearchItemCommand(tripName, dayIndex, keyword);
+        Command command = new SearchItemCommand(tripName, dayIndex, keyword);
 
         return command;
     }
@@ -444,10 +443,11 @@ public class Parser {
         String rawDist;
 
         try {
-            int toIdx = getToFlagIndex(userInput);
             int distIdx = getDistFlagIndex(userInput);
 
             rawDist = userInput.substring(distIdx + DIST_LENGTH);
+
+            int toIdx = getToFlagIndex(userInput);
 
             try {
                 WorldMap.distanceNonString(rawDist);

@@ -1,5 +1,6 @@
 package seedu.traveller.objects;
 
+import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -23,7 +24,13 @@ public class ItemsList {
         this.items = new ArrayList<>();
     }
 
-    public void addItem(Item item) {
+    public void addItem(Item item) throws TravellerException {
+        String itemTime = item.getItemTime();
+        String itemName = item.getItemName();
+        if (isInList(itemTime, itemName)) {
+            logger.log(Level.WARNING, "A duplicate item cannot be added.");
+            throw new DuplicateItemException(itemTime, itemName);
+        }
         logger.log(Level.INFO, "Added an item to itemsList");
         items.add(item);
     }
@@ -44,6 +51,16 @@ public class ItemsList {
             }
         }
         return keywordString;
+    }
+
+    public boolean isInList(String itemTime, String itemName) throws TravellerException {
+        for (int i = 0; i < getSize(); i++) {
+            Item item = getItem(i);
+            if (item.getItemTime().equals(itemTime) && item.getItemName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Item getItem(int itemNumber) throws TravellerException {

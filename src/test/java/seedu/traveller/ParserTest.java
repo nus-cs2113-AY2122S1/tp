@@ -32,31 +32,39 @@ public class ParserTest {
     @Test
     public void parse_success() throws TravellerException {
         NewCommand newCommand = new NewCommand("trip0", "CHN", "JPN");
+        assertEquals(newCommand.toString(), Parser.parse("new trip0 /from CHN /to JPN").toString());
+
         EditCommand editCommand = new EditCommand("trip1", "SIN", "MLY");
+        assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY").toString());
+
         DeleteCommand deleteCommand = new DeleteCommand("trip2");
+        assertEquals(deleteCommand.toString(), Parser.parse("delete trip2").toString());
+
         ViewCommand viewCommand = new ViewCommand("all");
+        assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
+
         ShortestCommand shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
+        assertEquals(shortestCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+
         AddDayCommand addDayCommand = new AddDayCommand("trip3", 3);
+        assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3 /day 3").toString());
+
         AddItemCommand addItemCommand =
                 new AddItemCommand("trip4", 0, "1300", "sleep at home");
-        SearchItemCommand searchItemCommand =
-                new SearchItemCommand("trip4", 0, "dinner");
-        EditItemCommand editItemCommand =
-                new EditItemCommand("trip4", 0, "1900", "wake up from bed", 1);
-        ExitCommand exitCommand = new ExitCommand();
-
-        assertEquals(newCommand.toString(), Parser.parse("new trip0 /from CHN /to JPN").toString());
-        assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY").toString());
-        assertEquals(deleteCommand.toString(), Parser.parse("delete trip2").toString());
-        assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
-        assertEquals(shortestCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
-        assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3 /day 3").toString());
         assertEquals(addItemCommand.toString(),
                 Parser.parse("add-item trip4 /day 0 /time 1300 /name sleep at home").toString());
+
+        SearchItemCommand searchItemCommand =
+                new SearchItemCommand("trip4", 0, "dinner");
         assertEquals(searchItemCommand.toString(),
                 Parser.parse("search-item trip4 /day 0 /key dinner").toString());
+
+        EditItemCommand editItemCommand =
+                new EditItemCommand("trip4", 0, "1900", "wake up from bed", 1);
         assertEquals(editItemCommand.toString(),
                 Parser.parse("edit-item trip4 /day 0 /time 1900 /name wake up from bed /index 1").toString());
+
+        ExitCommand exitCommand = new ExitCommand();
         assertEquals(exitCommand.toString(), Parser.parse("exit").toString());
     }
 

@@ -2,6 +2,7 @@ package seedu.traveller.objects;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -54,7 +55,7 @@ public class ItemsListTest {
     }
 
     @Test
-    public void searchItem_success() {
+    public void searchItem_success() throws TravellerException {
         Item item1 = new Item("1900", "Check-in HolidayInn");
         Item item2 = new Item("2000", "Dinner at Collins");
         Item item3 = new Item("1400", "Check-in HotelCalifornia");
@@ -69,6 +70,14 @@ public class ItemsListTest {
         ans.add(item4);
 
         assertEquals(ans.toString(), itemsList.searchItem("Collins").toString());
+    }
+
+    @Test
+    public void addItem_exceptionThrown() throws TravellerException {
+        itemsList.addItem(new Item("0900", "Dinner"));
+        assertThrows(DuplicateItemException.class, () -> {
+            itemsList.addItem(new Item("0900", "Dinner"));
+        });
     }
 
     @Test
