@@ -510,7 +510,7 @@ Adds a schedule when in the schedule workspace.
 
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
-> ⚠️The `<duration>` must be a **positive** number. For example, `2` is a valid duration but `-1` is not.
+> ⚠️The `<duration>` must be a **positive** integer. For example, `2` is a valid duration but `-1.5` is not.
 
 Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"`
 
