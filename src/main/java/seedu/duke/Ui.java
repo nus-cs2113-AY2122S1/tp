@@ -135,6 +135,10 @@ public class Ui {
                 + "Please enter the date again: ");
     }
 
+    public static void dateInvalidError() {
+        System.out.println("Sorry, the date you entered is invalid. Only dates after 01-01-1970 are accepted.");
+    }
+
     public static void printIsoFormatError() {
         System.out.print("Please re-enter your currency ISO (e.g. JPY, USD): ");
     }

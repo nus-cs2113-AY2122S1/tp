@@ -290,12 +290,21 @@ public class Trip {
     public void setDateOfTrip(String dateOfTrip) throws ForceCancelException {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
+            LocalDate date = LocalDate.parse(dateOfTrip, pattern);
+            if (date.isBefore(LocalDate.EPOCH)) {
+                Ui.dateInvalidError();
+                userInputDateError();
+            }
             this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
             Ui.printDateTimeFormatError();
-            String newInput = Ui.receiveUserInput();
-            setDateOfTrip(newInput);
+            userInputDateError();
         }
+    }
+
+    public void userInputDateError() throws ForceCancelException {
+        String newInput = Ui.receiveUserInput();
+        setDateOfTrip(newInput);
     }
 
 
