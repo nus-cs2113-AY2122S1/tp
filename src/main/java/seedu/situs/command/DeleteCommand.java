@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
+    private static final String INVALID_NUMBER = "Ingredient number does not exist!";
 
     private int groupNumber;
     private int ingredientNumber;
@@ -40,6 +41,8 @@ public class DeleteCommand extends Command {
             return resultMsg;
         } catch (IOException e) {
             throw new SitusException(STORAGE_ERROR_MESSAGE);
+        } catch (IndexOutOfBoundsException e) {
+            throw new SitusException(INVALID_NUMBER);
         }
     }
 }
