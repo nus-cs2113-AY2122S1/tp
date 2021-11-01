@@ -46,6 +46,8 @@ public class Parser {
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
+    private static final String INVALID_INDEX_MESSAGE = "The index given is in an incorrect format!"
+            + "The index MUST be of the form: X.Y (e.g. 1.1, 2.3, etc.)";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String INCORRECT_PARAMETER_FORMAT_MESSAGE = "The parameter format is wrong!";
@@ -207,8 +209,11 @@ public class Parser {
 
         for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
-            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ") || !details[i].contains(".")) {
+            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ")) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+            }
+            if (!details[i].contains(".")) {
+                throw new SitusException(INVALID_INDEX_MESSAGE);
             }
         }
 
