@@ -177,4 +177,32 @@ public class PrescriptionValidator extends MedicineValidator {
         return false;
     }
 
+    /**
+     * Retrieves the total stock quantity for medicine with same name that has not expired.
+     *
+     * @param medicines     Arraylist of medicines.
+     * @param name          Medicine name.
+     * @param prescribeDate Date of Prescription.
+     * @return Total stock quantity for the medicine that has not expired.
+     */
+    public static int getNotExpiredStockQuantity(ArrayList<Medicine> medicines, String name, Date prescribeDate) {
+        int existingQuantity = 0;
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            Date existingExpiry = ((Stock) medicine).getExpiry();
+            String expiryString = DateParser.dateToString(existingExpiry);
+            String prescribeDateString = DateParser.dateToString(prescribeDate);
+            boolean isNotExpired = (existingExpiry.after(prescribeDate) || prescribeDateString.equals(expiryString));
+
+            if (isSameMedicineName && !isDeleted && isNotExpired) {
+                existingQuantity += medicine.getQuantity();
+            }
+        }
+        return existingQuantity;
+    }
+
 }

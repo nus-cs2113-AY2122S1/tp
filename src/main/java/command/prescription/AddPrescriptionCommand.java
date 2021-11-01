@@ -85,7 +85,7 @@ public class AddPrescriptionCommand extends Command {
         String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
-        int totalStock = PrescriptionManager.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
+        int totalStock = PrescriptionValidator.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
 
         if (prescriptionQuantity > totalStock) {
             ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
