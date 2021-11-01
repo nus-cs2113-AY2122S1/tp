@@ -86,7 +86,7 @@ Step 4. The user executes `list /suni` to see his selected university list. The 
 
 Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `remove /uni 4` command to delete unwanted university see his selected university list.
 
-Step 6. The user executes `find /mod CS1231` to find the master index of the module. The user executes `find /mod Boston University` to find the master index of the university.
+Step 6. The user executes `find /code CS1231` to find the master index of the module. The user executes `find /uni Boston University` to find the master index of the university.
 
 Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
 
@@ -230,7 +230,7 @@ The `Module` object representing the particular module from Selected Module List
 
 #### FindCommandParser
 
-* This object when invoked, will first identify the flag `/uni` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
+* This object when invoked, will first identify the flag `/uni`, `/code` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
 
 #### SearchMapCommandParser
 

@@ -22,7 +22,8 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
   * [Searching for available module mappings](#searching-for-available-module-mappings)
   * [Adding a module mapping](#adding-a-module-mapping)
   * [Finding a specific university](#finding-a-specific-university)
-  * [Finding a specific module](#finding-a-specific-module)
+  * [Finding a specific module by module name](#finding-a-specific-module-by-module-name)
+  * [Finding a specific module by module code](#finding-a-specific-module-by-module-code)
   * [Removing a selected university](#removing-a-selected-university)
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
@@ -261,6 +262,10 @@ Potential mappings for Boston University [4]  :
 3 | BT3102 - CAS MA 589 : Computational Statistics
 4 | CS2040 - Cs112 : Introduction to Computer Science 2
 ```
+<div markdown="span" class="alert alert-primary"> :information_source: **Note:**
+The output of this command might differ from the example given, based on the modules added into the selected module 
+list. For instance, the above output is executed with the following modules in the selected module list: CS2030, CS2040,
+ BT3102, BT4222. 
 
 ### Adding a module mapping
 
@@ -319,21 +324,55 @@ Expected output:
 [46] The University of Edinburgh
 ```
 
-### Finding a specific module
+### Finding a specific module by module name
 
-Look for modules that matches the user entered keyword.
+Look for modules with module names that matches the user entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /mod <KEYWORD>`
 
 * Example 1   
-Input: `find /mod CS1010`  
+Input: `find /mod programming`  
 Expected output:
 ```
-[77] CS1010   : Programming Methodology
-[78] CS1010E  : Programming Methodology
-[79] CS1010J  : Programming Methodology
-[80] CS1010S  : Programming Methodology
+[77]  CS1010   : Programming Methodology
+[78]  CS1010E  : Programming Methodology
+[79]  CS1010J  : Programming Methodology
+[80]  CS1010S  : Programming Methodology
+[82]  CS2030   : Programming Methodology II
+[88]  CS2104   : Programming Language Concepts
+[93]  CS2113   : Software Engineering & Object Oriented Programming
+[105] CS3226   : Web Programming and Applicatio
+[108] CS3233   : Competitive Programming
+[123] CS4215   : Programming Language Implement
+[167] DAO2702  : Programming for Biz Analytics
+[547] MA3236   : Non-Linear Programming
+```
+
+### Finding a specific module by module code
+
+Look for modules with module codes that matches the user entered keyword.
+* The output also consists of the index of the module, which is needed for subsequent commands.
+
+#### Format: `find /code <KEYWORD>`
+
+* Example 1   
+  Input: `find /code cs1010`  
+  Expected output:
+```
+[77]  CS1010   : Programming Methodology
+[78]  CS1010E  : Programming Methodology
+[79]  CS1010J  : Programming Methodology
+[80]  CS1010S  : Programming Methodology
+```
+
+* Example 2  
+  Input: `find /code cs20`  
+  Expected output:  
+```
+[82]  CS2030   : Programming Methodology II
+[83]  CS2040   : Data Structures and Algorithms
+[84]  CS2040C  : Data Structures and Algorithms
 ```
 
 ### Removing a selected university
@@ -420,7 +459,7 @@ Command | Format | Purpose
 `remove` | `remove /uni <UNI_INDEX>`<br />`remove /mod <MOD_INDEX>`<br />`remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
 `list` | `list /muni`<br />`list /mmod`<br />`list /suni`<br />`list /smod` | List master/selected university list or module list
 `searchmap` | `searchmap <UNI_INDEX>`| Search for potential mappings for the selected university
-`find` | `find /uni <KEYWORD>`<br />`find /mod <KEYWORD>` | Find the possible university or module
+`find` | `find /uni <KEYWORD>`<br />`find /mod <KEYWORD>`<br />`find /code <KEYWORD>` | Find the possible university or module
 `exit` | `exit` | Exit the application
 
 ## Glossary
