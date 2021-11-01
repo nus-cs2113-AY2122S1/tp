@@ -1,10 +1,6 @@
 package seedu.duke.storage;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import seedu.duke.data.*;
@@ -24,12 +20,8 @@ public class Storage {
     private static final String INFO_NO_EXISTING_FILE = "(*) No existing data found, creating new one: %s ...";
     private static final String SUCCESS_DATA_FOUND = "(+) Data file found %s, loading ...";
     private static final String SUCCESS_DATA_LOADED = "(+) Loaded %d records";
-
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    static {
-
-    }
 
     public Storage(String dataPath) {
         this.dataDir = dataPath.split("/")[0];
@@ -65,19 +57,16 @@ public class Storage {
     public void write(Catalogue catalogue) {
         try {
             ObjectNode allItems = mapper.createObjectNode();
-            ArrayNode audioArray = mapper.createArrayNode();
-            List<Audio> audioObjects = catalogue.getAllItems().stream()
-                    .filter(p -> p instanceof Audio).map(p -> (Audio) p)
-                    .collect(Collectors.toList());
-            for (Audio a : audioObjects) {
-                audioArray.add(mapper.convertValue(a, ObjectNode.class));
-            }
-            allItems.set("audio", audioArray);
-            String jsonOutput = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allItems);
+
+            // Process all audio items
+            allItems.set("audio", audioToJson(catalogue));
+            allItems.set("book", bookToJson(catalogue));
+            allItems.set("magazine", magazineToJson(catalogue));
+            allItems.set("video", videoToJson(catalogue));
+
             FileWriter fw = new FileWriter(data);
-            fw.write(jsonOutput);
+            fw.write(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allItems));
             fw.close();
-            System.out.println(jsonOutput);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -85,6 +74,58 @@ public class Storage {
     }
 
     public void read(Catalogue catalogue) {
+        try {
+            ObjectNode allItems = mapper.readValue(data, ObjectNode.class);
 
+            ArrayNode audioArray = (ArrayNode) allItems.get("audio");
+            System.out.println(audioArray.get(0));
+            System.out.println(audioArray.get(1));
+            //List<Audio> audioList = allItems.get("audio");
+            //List<Audio> audioList = Arrays.asList(mapper.convertValue(allItems.get("audio"), Audio[].class));
+            //System.out.println(allItems.get("audio"));
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private ArrayNode audioToJson(Catalogue catalogue) {
+        ArrayNode audioArray = mapper.createArrayNode();
+        List<Audio> audioObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Audio)
+                .map(p -> (Audio) p).collect(Collectors.toList());
+        for (Audio a : audioObjects) {
+            audioArray.add(mapper.convertValue(a, ObjectNode.class));
+        }
+        return audioArray;
+    }
+
+    private ArrayNode bookToJson(Catalogue catalogue) {
+        ArrayNode bookArray = mapper.createArrayNode();
+        List<Book> bookObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Book)
+                .map(p -> (Book) p).collect(Collectors.toList());
+        for (Book a : bookObjects) {
+            bookArray.add(mapper.convertValue(a, ObjectNode.class));
+        }
+        return bookArray;
+    }
+
+    private ArrayNode magazineToJson(Catalogue catalogue) {
+        ArrayNode magazineArray = mapper.createArrayNode();
+        List<Magazine> magazineObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Magazine)
+                .map(p -> (Magazine) p).collect(Collectors.toList());
+        for (Magazine a : magazineObjects) {
+            magazineArray.add(mapper.convertValue(a, ObjectNode.class));
+        }
+        return magazineArray;
+    }
+
+    private ArrayNode videoToJson(Catalogue catalogue) {
+        ArrayNode videoArray = mapper.createArrayNode();
+        List<Video> videoObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Video)
+                .map(p -> (Video) p).collect(Collectors.toList());
+        for (Video a : videoObjects) {
+            videoArray.add(mapper.convertValue(a, ObjectNode.class));
+        }
+        return videoArray;
     }
 }
