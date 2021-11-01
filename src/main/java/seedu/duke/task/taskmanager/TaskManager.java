@@ -36,6 +36,11 @@ import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
+/**
+ * Represents the {@code TaskManager} that manages the user's tasklist.
+ * The {@code TaskManager} can add, delete to the user's tasklist in this class.
+ * Other additional features includes displaying, filtering and sorting the user's tasklist.
+ */
 public class TaskManager implements Subject {
 
     private List<Task> taskList;
