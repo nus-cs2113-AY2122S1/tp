@@ -59,7 +59,7 @@ reference. We hope you enjoy using *Food-O-Rama*!
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Food-O-Rama`
-   from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases/tag/Release_v1.0).
+   from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases).
 3. Copy 'Food-O-Rama.jar' into an empty folder.
 4. Open command prompt, nagivate to where 'Food-O-Rama.jar' is located. e.g. 'cd [FILE_PATH]'
 5. Launch 'Food-O-Rama' using 'java -jar Food-O-Rama.jar'.
@@ -576,7 +576,7 @@ Link an existing Ingredient to an existing Dish.
 
 Format: `link [DISH_NAME] / [INGR_NAME]`
 
-*`[DISH_NAME]` space `/` space `[DISH_NAME]`.
+*`[DISH_NAME]` space `/` space `[INGR_NAME]`
 
 Example of usage:
 
