@@ -517,7 +517,7 @@ Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"
 Expected Output:
 
 ```
-[CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"
+[CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"
 Your schedule on 'CS2113T Tutorial 1' has been added!
 [CS2113T > schedule] >>> 
 ```
