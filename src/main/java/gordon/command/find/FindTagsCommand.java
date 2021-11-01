@@ -20,6 +20,7 @@ public class FindTagsCommand extends Command {
     public void execute(Cookbook cookbook) {
         ArrayList<Recipe> result = cookbook.filterByTags(tags);
         ArrayList<String> namesInOrder = new ArrayList<String>();
+        
         for (int i = 0; i < result.size(); i++) {
             namesInOrder.add(result.get(i).getName());
         }
