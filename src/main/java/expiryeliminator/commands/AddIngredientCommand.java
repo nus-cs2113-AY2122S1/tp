@@ -22,7 +22,8 @@ public class AddIngredientCommand extends Command {
     private static final String MESSAGE_INGREDIENT_ADDED = "I've added this ingredient:\n" + "\n%1$s\n"
             + "Now you have %2$s ingredient(s)";
     private static final String MESSAGE_INGREDIENT_ALREADY_EXISTS = "Unable to add ingredient: %1$s\n"
-            + "You already have it in your list";
+            + "You already have it in your list\n"
+            + "If you are trying to add quantities for an ingredient, please use the `increment` command instead";
 
     private final String name;
     private final String unit;
