@@ -6,7 +6,7 @@
 
 Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
-- sets/adjust your spending limits
+- set/adjust your spending limits
 - provide you with helpful financial tips and insights
 
 It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
