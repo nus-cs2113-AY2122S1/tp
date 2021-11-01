@@ -54,6 +54,7 @@ class DukeTest {
         assertEquals("23 Sep 2021", trip.getDateOfTripString());
     }
 
+
     @Test
     public void sampleTest() {
         assertTrue(true);

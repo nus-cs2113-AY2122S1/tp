@@ -163,8 +163,8 @@ public class Parser {
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
-        } catch (CancelExpenseException e) {
-            Ui.printCancelExpenseCreation();
+        } catch (InvalidAmountException e) {
+            Ui.printInvalidAmountError();
         }
     }
 
@@ -459,7 +459,7 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) throws CancelExpenseException {
+    private static void executeCreateExpense(String inputDescription) throws InvalidAmountException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);

@@ -130,6 +130,10 @@ public class Ui {
         System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
     }
 
+    public static void printInvalidAmountError() {
+        System.out.print("Please re-enter your expense amount as a positive number (i.e > 0): ");
+    }
+
     public static void printDateTimeFormatError() {
         System.out.print("Please check that your date-time format is dd-MM-yyyy. "
                 + "Please enter the date again: ");

@@ -46,11 +46,10 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws CancelExpenseException {
+    public Expense(String inputDescription) throws  InvalidAmountException {
         String[] expenseInfo = inputDescription.split(" ", 3);
-        this.amountSpent = Double.parseDouble(expenseInfo[0]);
-        this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
-        this.category = expenseInfo[1].toLowerCase();
+        setAmountSpent(expenseInfo[0]);
+        setCategory(expenseInfo[1].toLowerCase());
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
@@ -73,7 +72,7 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) throws CancelExpenseException {
+    private static ArrayList<Person> checkValidPersons(String userInput) {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
@@ -97,11 +96,7 @@ public class Expense extends ExpenseSplittingFunctions {
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);
             String newUserInput = Storage.getScanner().nextLine();
-            if (newUserInput.equalsIgnoreCase("-cancel")) {
-                throw new CancelExpenseException();
-            } else {
-                return checkValidPersons(newUserInput);
-            }
+            return checkValidPersons(newUserInput);
         }
         return validListOfPeople;
     }
@@ -218,12 +213,29 @@ public class Expense extends ExpenseSplittingFunctions {
         return amountSpent;
     }
 
-    public void setAmountSpent(double amountSpent) {
-        this.amountSpent = amountSpent;
+    //@@author itsleeqian
+    public void setAmountSpent(String amount) throws InvalidAmountException {
+        try {
+            this.amountSpent = Double.parseDouble(amount);
+            if (this.amountSpent <= 0) {
+                throw new InvalidAmountException();
+            }
+            this.amountSpent = Double.parseDouble(amount);
+            this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
+        } catch (InvalidAmountException e) {
+            Ui.printInvalidAmountError();
+            Scanner scanner = Storage.getScanner();
+            setAmountSpent(scanner.nextLine().strip());
+        }
     }
+    //@@author
 
     public String getDescription() {
         return description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setDescription(String description) {
