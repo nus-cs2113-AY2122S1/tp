@@ -61,20 +61,20 @@ public class AddLinkCommand extends Command {
         if (!isValidScheduleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        String userStartTime = argArray.get(2);
+        String userStartTime = argArray.get(2).trim();
 
-        this.description = argArray.get(0);
-        this.day = argArray.get(1);
+        this.description = argArray.get(0).trim();
+        this.day = argArray.get(1).trim();
         this.startTime = CommonUtils.convertToLocalTime(userStartTime);
 
         try {
-            this.duration = Integer.parseInt(argArray.get(3));
+            this.duration = Integer.parseInt(argArray.get(3).trim());
         } catch (NumberFormatException e) {
             TerminusLogger.warning(String.format("Invalid Duration"));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION_FORMAT));
         }
 
-        this.link = argArray.get(4);
+        this.link = argArray.get(4).trim();
 
         if (!isValidDay(this.day)) {
             TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
