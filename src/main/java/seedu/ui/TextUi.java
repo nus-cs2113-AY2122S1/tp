@@ -4,7 +4,7 @@ import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import java.util.ArrayList;
 
-public abstract class TextUi {
+public class TextUi {
     private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"

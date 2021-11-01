@@ -30,7 +30,7 @@ public class IndexParser {
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
         // Since inputs like "rm 1 2 3" are allowed
         // 1 is the significant index that is important and chosen as the index for command
-        // index can be "me" or "-rf" or an integer
+        // index can be "me" or "all" or an integer
         String significantIndex = indexSplit[SIGNIFICANT_INDEX_POSITION].trim();
         if (significantIndex.equalsIgnoreCase(PERSONAL_CONTACT_INDEX)) {
             return PERSONAL_CONTACT_ID;
