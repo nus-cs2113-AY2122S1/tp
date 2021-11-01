@@ -173,46 +173,6 @@ public class TestUtil {
         }
     }
 
-    public static IngredientRepository generateIngredientRepositoryWithSomeExpiredIngredients() {
-        final LocalDate pastDate = LocalDate.of(2021, 10, 8);
-        final LocalDate currentDate = LocalDate.now();
-        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
-        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
-
-        final IngredientRepository ingredientRepository = new IngredientRepository();
-
-        try {
-            //expired
-            ingredientRepository.add("Red Apple", null, 1, pastDate);
-            //expiring
-            ingredientRepository.add("Blue Apple", null, 2, currentDatePlusThreeDays);
-            //fresh
-            ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
-            return ingredientRepository;
-        } catch (DuplicateDataException e) {
-            fail("Ingredient repository should be valid by definition");
-            return null;
-        }
-    }
-
-    public static IngredientRepository generateIngredientRepositoryWithoutExpiredIngredients() {
-        final LocalDate currentDate = LocalDate.now();
-        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
-        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
-
-        final IngredientRepository ingredientRepository = new IngredientRepository();
-
-        try {
-            //expiring
-            ingredientRepository.add("Blue Apple", null, 2, currentDatePlusThreeDays);
-            //fresh
-            ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
-            return ingredientRepository;
-        } catch (DuplicateDataException e) {
-            fail("Ingredient repository should be valid by definition");
-            return null;
-        }
-    }
 
     public static IngredientRepository generateIngredientRepositoryForExampleRecipe(int quantity1, int quantity2) {
         final LocalDate currentDate = LocalDate.now();
@@ -285,10 +245,70 @@ public class TestUtil {
         }
     }
 
+    //@@author JoshHDs
+
     public static IngredientRepository generateEmptyIngredientRepository() {
         return new IngredientRepository();
     }
 
+
+    /**
+     * Creates an ingredient repository with 3 ingredients, one which is expired, one which is expiring, and one that
+     * is not expiring any time soon.
+     *
+     * @return the ingredient repository consisting of the three type of ingredients.
+     */
+    public static IngredientRepository generateIngredientRepositoryWithSomeExpiredIngredients() {
+        final LocalDate pastDate = LocalDate.of(2021, 10, 8);
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+
+        try {
+            //expired
+            ingredientRepository.add("Red Apple", null, 1, pastDate);
+            //expiring
+            ingredientRepository.add("Blue Apple", null, 2, currentDatePlusThreeDays);
+            //fresh
+            ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    /**
+     * Creates an ingredient repository with 2 ingredients, both of which have not expired.
+     *
+     * @return the ingredient repository consisting of the three type of ingredients.
+     */
+    public static IngredientRepository generateIngredientRepositoryWithoutExpiredIngredients() {
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+
+        try {
+            //expiring
+            ingredientRepository.add("Blue Apple", null, 2, currentDatePlusThreeDays);
+            //fresh
+            ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    /**
+     * Gets the units of the salt ingredient in the ingredient repository.
+     *
+     * @return the units of the salt ingredient in the ingredient repository.
+     */
     public static String getUpdatedUnitsForIngredientRepo(IngredientRepository ingredientRepository) {
         try {
             IngredientStorage ingredientStorage = ingredientRepository.find("Salt");
@@ -299,6 +319,11 @@ public class TestUtil {
         return null;
     }
 
+    /**
+     * Gets the units of the salt ingredient in the recipe list.
+     *
+     * @return the units of the salt ingredient in the recipe list.
+     */
     public static String getUpdatedUnitsForRecipeList(RecipeList recipes) {
         try {
             Recipe chickenSoupRecipe = recipes.findRecipe("Chicken Soup");

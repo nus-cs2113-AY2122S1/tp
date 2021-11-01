@@ -22,6 +22,7 @@ Expiry Eliminator is a desktop app for managing the freshness of ingredients in 
 > - Parameters in square brackets are optional (e.g. `[u/UNIT]`).
 > - Parameters with `...` after them can be used multiple times, but must appear at least once (e.g. `q/QUANTITY...`).
 > - Parameters can be in any order.
+> - There must be no spaces between / and the parameters. (e.g. `u/ UNITS`).
 
 ### Adding an ingredient: `add`
 
@@ -89,11 +90,16 @@ Format: `update units i/INGREDIENT u/UNIT`
 
 - The units will be updated in both the ingredient repository and recipes.
 - If units is left blank, the units will be deleted (back to default value).
-
+- There cannot be a space between / and your input units 
 
 Example of usage:
-- `update units i/salt u/kilograms`
+- `update units i/salt u/grams`
+- `update units i/chicken u/kilograms`
 - `update units i/salt u/`
+
+Example incorrect usage:
+- `update units i/salt u/ kilograms`
+- `update units i/salt u/6`
 
 <br/>
 
@@ -127,7 +133,8 @@ Shows a list of all ingredients, its quantity and expiry dates, that have expire
 
 Format: `list expired`
 
-- Ingredient is considered to have expired if its expiry date is before the current date.
+- Ingredient is considered to have expired if its expiry date is before the current date. 
+  - E.g.: Ingredient with expiry date of 2021-01-01 is considered as expired.
 - Hence, an ingredient expiring on the current day is not yet counted as expired.
 
 Example of usage:
@@ -147,8 +154,9 @@ Format: `view i/INGREDIENT`
 - If the ingredient name is not found, an error message will be shown.
 
 Example of usage:
-- `view i/salt`
-
+- `view i/Salt`
+- `view i/Red apple`
+- `view i/Chicken`
 
 <br/>
 
@@ -170,12 +178,13 @@ Example:
 
 ### Deleting all expired ingredients: `delete expired`
 
-Removes all expired batches of ingredients from the ingredient repository.
+Removes all expired batches (not Ingredients) of ingredients from the ingredient repository.
 
 Format: `delete expired`
 
 - Even if all batches of an ingredient are expired, this command will not delete the ingredient entry in the repository (i.e. the ingredient will continue to exist but with zero quantity.
 - Ingredient is considered to have expired if its expiry date is before the current date.
+  - E.g.: Ingredient with expiry date of 2021-01-01 is considered as expired.
 - Hence, an ingredient expiring on the current day is not yet counted as expired.
 
 Example of usage:

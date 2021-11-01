@@ -157,6 +157,8 @@ public class IngredientRepository {
         return ingredients.get(ingredientName);
     }
 
+    //@@author JoshHDs
+
     /**
      * Looks for the ingredients that are expiring within the week.
      *
@@ -165,19 +167,24 @@ public class IngredientRepository {
     public String findExpiringIngredients() {
         LocalDate currentDate = LocalDate.now();
         LocalDate currentDatePlusAWeek = currentDate.plus(1, ChronoUnit.WEEKS);
-
         StringBuilder expiringIngredientsList = new StringBuilder();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
+            //create a storage to store expiring batches
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
+            boolean hasExpiringIngredients = false;
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    hasExpiringIngredients = true;
                 }
             }
-            expiringIngredientsList.append(expiredIngredientStorage);
-            expiringIngredientsList.append("\n");
+
+            if (hasExpiringIngredients) {
+                expiringIngredientsList.append(expiredIngredientStorage);
+                expiringIngredientsList.append("\n");
+            }
 
         }
         return expiringIngredientsList.toString();
@@ -190,20 +197,24 @@ public class IngredientRepository {
      */
     public String findExpiredIngredients() {
         LocalDate currentDate = LocalDate.now();
-
         StringBuilder expiredIngredientsList = new StringBuilder();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
+            //create a storage to store expired batches
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
+            boolean hasExpiredIngredients = false;
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isBefore(currentDate)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    hasExpiredIngredients = true;
                 }
             }
-            expiredIngredientsList.append(expiredIngredientStorage);
-            expiredIngredientsList.append("\n");
 
+            if (hasExpiredIngredients) {
+                expiredIngredientsList.append(expiredIngredientStorage);
+                expiredIngredientsList.append("\n");
+            }
         }
         return expiredIngredientsList.toString();
     }
@@ -232,7 +243,17 @@ public class IngredientRepository {
         return haveExpired;
     }
 
-
+    /**
+     * Adds an ingredient and its required quantity determined by the recipe it is part of to a Treemap storing
+     * the total types and quantity of ingredients in all the recipes that the user wants to generate a shopping
+     * list for.
+     *
+     * @param ingredientName The name of the ingredient to be added to totalIngredient Treemap.
+     * @param recipe The recipe that the ingredient belongs to.
+     * @param totalIngredients The treemap that keeps track of the total types and quantity of each ingredient
+     *                         needed to make all the recipes that the user input.
+     *
+     */
     public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
             IngredientQuantity> totalIngredients) throws IllegalValueException {
         int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();

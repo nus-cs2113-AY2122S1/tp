@@ -1,5 +1,7 @@
 package expiryeliminator.commands;
 
+//@@author JoshHDs
+
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
@@ -43,10 +45,11 @@ public class UpdateUnitsCommand extends Command {
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         assert ingredients != null : "Ingredient repository cannot be null";
         final IngredientStorage ingredientStorage;
+
         //find ingredient in ingredient repo
         try {
             ingredientStorage = ingredients.find(ingredientName);
-        } catch (NotFoundException e) {
+        } catch (NotFoundException error) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         //update units of ingredient in ingredient repo
@@ -59,7 +62,5 @@ public class UpdateUnitsCommand extends Command {
         } else {
             return String.format(MESSAGE_INGREDIENT_UNIT_UPDATED, newUnit);
         }
-
-
     }
 }
