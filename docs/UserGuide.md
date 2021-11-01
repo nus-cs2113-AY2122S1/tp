@@ -60,26 +60,26 @@ This document shows you the available features in **SLAM**, and provides you wit
 ### 2.1 Events
 The following two tables show the fields which **SLAM** works with in managing events in the overall catalog.
 
-| **Required Fields** | **Description**                      |
+| **Required Fields** | **Description**                  |
 | ------------------- | -------------------------------- |
 | Title | The title of the event                         |
 | Date & Time | The date and time the event is happening | 
 | Venue | The venue at which the event is happening      |
 | Budget | The amount of budget allocated to the event   |
 
-| **Optional Fields** | Description                      |
+| **Optional Fields** | **Description**                  |
 | ------------------- | -------------------------------- |
-| Description | A brief description of the event                         |
+| Description | A brief description of the event         |
 
 ### 2.2 Tasks
 The following two tables show the fields which **SLAM** works with in managing the tasks you can add and keep track of under each event created.
 
-| **Required Fields** | **Description**                       |
+| **Required Fields** | **Description**                   |
 | ------------------- | --------------------------------- |
 | Title | The title of the task                           |
 | Deadline | The deadline the task has to be completed by |
 
-| **Optional Fields** | **Description**                     |
+| **Optional Fields** | **Description**                 |
 | ------------------- | ------------------------------- |
 | Description         | A brief description of the task |
 
@@ -184,6 +184,26 @@ This allows you to safely terminate the program.
 This section contains the available commands to manage events in **SLAM**.
 
 ### 4.1 Add an Event
+Adds an event to your current catalog of events.
+
+To add an event, first describe the event using the following command:
+
+**Format:** `add -e n/TITLE d/DATE_&_TIME v/VENUE b/BUDGET`
+
+**Example:** `add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500`
+
+Following which, **SLAM** will prompt you for an optional description for your event which should look like this:
+
+```
+> add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500
+```
+```
+Please add an optional description for your item and press enter.
+```
+```
+>
+```
+Key in your description and press `enter`, or just press `enter` if you have none. You have successfully added an event into **SLAM**!
 
 ### 4.2 Select an Event
 This allows you to select an event from your list using the event’s numerical position in the list (i.e. the event’s ID). Upon selection, more details about that event will be displayed, and you may perform additional commands with the selected event (e.g. adding tasks to complete).
@@ -209,8 +229,35 @@ Tasks:
 ```
 
 ### 4.3 Mark an Event as `done`
+This will allow you to mark an event as done after the event is over. 
+
+**Format:** `done -e EVENT_ID`
+
+**Example:** `done -e 1`
+
+**Expected Output:**
+```
+> done -e 1
+```
+```
+Nice! I have marked these items as done!
+[E][X] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+--------LIST UPDATED--------
+```
 
 ### 4.4 Mark an Event as `undone`
+This will allow you to undo an event that was marked done if the event is not over yet.
+
+**Format:** `undo -e EVENT_ID`
+
+**Example:** `undo -e 1`
+
+**Expected Output:**
+```
+Ok, I have unmarked these items:
+[E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+--------LIST UPDATED--------
+```
 
 ### 4.5 Delete an Event
 Deletes an event from the list.
@@ -252,17 +299,134 @@ I have deleted everything!
 ### 4.7 Find Event(s) based on keyword(s)
 
 ### 4.8 Display next upcoming Event
+The next command displays to you the next upcoming event or task of an event on the calendar
 
+To display the next upcoming event we key in `next event`
+
+**Format:** `next event`
+
+**Expected Output:**
+```
+> next event
+```
+```
+Title: Tembusu Concert
+Date: 19 Feb 2022 - 20:00
+Description: Semesterly Arts Week Fundraiser
+Venue: MPH
+Budget: $1000.0
+Tasks:
+1. Make props
+```
+
+To display the next upcoming task we key in `next task`
+
+**Format:** `next task EVENT_ID`
+
+**Expected Output:**
+```
+> next task 1
+```
+```
+Title: Make props
+Date: 18 Feb 2022 - 20:00
+Description: Semesterly Arts Week Fundraiser
+Members:
+1. John Doe
+```
 ### 4.9 Update an Event
+The Update command can be used to update details of events and tasks
 
+> 🚨 Any updates made is irreversible! So make updates with caution.
 
+To begin the update process we first key in `update EVENT_ID`
+
+**Format:** `update EVENT_ID`
+
+**Expected Output:**
+```
+> update 3
+```
+```
+Here are the details of the event:
+======================================
+Title: Peppa Pig's Concert
+Date: 19 Feb 2022 - 20:00
+Description: Asia world tour
+Venue: Indoor Stadium
+Budget: $1000.9
+Tasks: 
+1. [T][X] Hype myself up (by: 19 Feb 2022 - 19:50)
+2. [T][ ] Enter venue (by: 19 Feb 2022 - 19:55)
+_________________________________________________________________________________
+Please type the item you would like to update in the following manner 
+-----------------------------------------------------------------------   
+title/[NEW NAME]   
+date/[NEW DATE[d/dd-MM-yyyy HHmm]]
+description/[NEW DESCRIPTION]
+venue/[NEW VENUE]
+budget/[NEW BUDGET]
+task/[TASK NUM YOU WANT TO UPDATE]
+You may type more then one update at a given time but separate them with a [>]
+_________________________________________________________________________________
+```
+We can then update the detail of the specifc event by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
+
+1. `title/NEW_NAME` to update the title of the event
+2. `date/[dd-MM-yyyy HHmm]` to update the date of the event
+3. `description/[NEW DESCRIPTION]` to update the description of the event
+4. `venue/[NEW VENUE]` to update the venue of the event
+5. `budget/[NEW BUDGET]`to update the budget of the event
+6. `task/[TASK NUM YOU WANT TO UPDATE]` to update information on the taak attached to thes events
+
+We can then update the detail of the specifc task by keying in `task/[TASK NUM YOU WANT TO UPDATE]` in this segment.
+
+**Expected Output:**
+```
+> task/1
+```
+```
+Title: Hype myself up
+Deadline: 19 Feb 2022 - 19:50
+Description: Drink lots of sugar
+Members: 
+1. John Doe
+2. Jane Doe
+____________________________________________________________________________________
+Please type the item for task you would like to update in the following manner 
+-----------------------------------------------------------------------
+title/[NEW NAME]   
+deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]
+description/[NEW DESCRIPTION]
+member/[MEMBER INDEX]
+remove/[MEMBER INDEX]
+You may type more then one update at a given time but separate them with a [>]
+____________________________________________________________________________________
+```
+We can then update the details of the specifc task by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
+
+1. `title/NEW_NAME` to update the title of the event
+2. `date/[dd-MM-yyyy HHmm]` to update the date of the event
+3. `description/[NEW DESCRIPTION]` to update the description of the event
+4. `member/[MEMBER INDEX]` to change a member assigned to this task
+5. `remove/[MEMBER INDEX]` to remove a member assigned to this task
 ---
 
 ## 5. Task Commands
-This section contains the available commands for managing tasks for events in **SLAM**. Because all tasks belong to a specific event in your catalog, an event must first be selected ([see Section 5.2 on Selecting Events](#52-select-an-event)) before any of the below commands can be used.
+This section contains the available commands for managing tasks for events in **SLAM**. Because all tasks belong to a specific event in your catalog, an event must first be selected ([see Section 4.2 on Selecting Events](#42-select-an-event)) before any of the below commands can be used.
 
 ### 5.1 Add a task 
 Note: For this current version of **SLAM**, pre-selecting an `Event` is not required for this command.
+
+**Prerequisite:** You must have added at least one event and one member before adding a task.
+
+Adds a task to an existing event in your current catalog of events.
+
+To add a task, first describe the task using the following command:
+
+**Format:** `add -t n/TITLE d/DATE_&_TIME`
+
+**Example:** `add -t n/Buy stage lights d/10-11-2021 1600`
 
 ### 5.2 Mark a Task as `done`
 
@@ -309,14 +473,16 @@ This section contains the available commands for managing members in `SLAM`.
 ## 9. Command Summary
 
 ### General commands
-| Command                   | Format                                              |
+
+| **Command**               | **Format**                                          |
 |---------------------------|-----------------------------------------------------|
 | Display user manual       | `help`                                              |
 | List events/members/tasks | For events: `list`<br />For tasks: `list EVENT_INDEX -t`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
 | Exit program              | `bye`                                               |
 
 ### Event commands
-| Command               | Format                                              |
+
+| **Command**           | **Format**                                          |
 |-----------------------|-----------------------------------------------------|
 | Add an event          | `add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET` |
 | Delete an event       | `delete -e INDEX`                                   |
@@ -327,7 +493,8 @@ This section contains the available commands for managing members in `SLAM`.
 | Un-mark event as done | `undo -e INDEX`                                     |
 
 ### Task commands
-| Command               | Format                        |
+
+| **Command**           | **Format**                    |
 |-----------------------|-------------------------------|
 | Add a task            | `add -t n/TITLE d/dd-MM-yyyy` |
 | Delete a task         | `delete -t INDEX`             | 
@@ -336,7 +503,8 @@ This section contains the available commands for managing members in `SLAM`.
 | Un-mark a task as done| `undo -t INDEX`               |
 
 ### Member commands
-| Command         | Format                  |
+
+| **Command**     | **Format**              |
 |-----------------|-------------------------|
 | Add a member    | `add -m MEMBER_NAME`    | 
 | Delete a member | `delete -m MEMBER_NAME` |

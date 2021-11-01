@@ -30,11 +30,15 @@ public class NextCommand extends Command {
     }
 
     public CommandResult execute() {
-
+        String errorMessage = "This Event has no tasks!";
         try {
             if (nextItem.equalsIgnoreCase("task")) {
                 if (userCommand.length != 3) {
                     nextCommandErrorMessage();
+                }
+                if (Integer.parseInt(userCommand[2]) - 1 > Duke.eventCatalog.size()
+                        || Integer.parseInt(userCommand[2]) - 1 < 0) {
+                    errorMessage = "This Event does not exist";
                 }
                 Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2]) - 1).getFromTaskList(0));
             } else if (nextItem.equalsIgnoreCase("event")) {
@@ -45,7 +49,7 @@ public class NextCommand extends Command {
         } catch (NumberFormatException e) {
             nextCommandErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult("This Event has no tasks!");
+            return new CommandResult(errorMessage);
         }
         return new CommandResult("Hope you have prepared everything!");
     }
