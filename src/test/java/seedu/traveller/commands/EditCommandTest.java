@@ -58,6 +58,6 @@ class EditCommandTest {
     }
 
     @Test public void editCommand_execute_exceptionThrown() {
-        assertThrows(TravellerException.class, ()->this.edit.execute(tripsList, ui));
+        assertThrows(TravellerException.class, () -> this.edit.execute(tripsList, ui));
     }
 }
