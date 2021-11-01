@@ -3,7 +3,6 @@ package seedu.duke.logic.parser;
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.module.ModuleInfoCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
@@ -38,9 +37,6 @@ public class Parser {
         case LIST:
             simplifiedUserResponse = removeFirstParam(userResponse, "list");
             return ListCommandParser.parse(simplifiedUserResponse);
-        case MODULEINFO:
-            simplifiedUserResponse = removeFirstParam(userResponse, "moduleinfo");
-            return ModuleInfoCommandParser.parse(simplifiedUserResponse);
         case SET:
             simplifiedUserResponse = removeFirstParam(userResponse, "set");
             return SetCommandParser.parse(simplifiedUserResponse);

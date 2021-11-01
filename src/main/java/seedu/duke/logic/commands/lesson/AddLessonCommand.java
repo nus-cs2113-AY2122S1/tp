@@ -2,6 +2,7 @@ package seedu.duke.logic.commands.lesson;
 
 import java.io.IOException;
 
+import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
@@ -28,7 +29,7 @@ public class AddLessonCommand extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
-            throws IOException {
+            throws DukeException, IOException {
         Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
         lessonList.addLesson(newLesson);
         storage.saveData(lessonList);

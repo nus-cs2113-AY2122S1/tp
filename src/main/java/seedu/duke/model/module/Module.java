@@ -1,8 +1,10 @@
 package seedu.duke.model.module;
 
 import seedu.duke.commons.core.Messages;
-import seedu.duke.model.module.exceptions.DeserializeModuleException;
 import seedu.duke.ui.Ui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //@@author ptejasv
 public class Module {
@@ -13,10 +15,8 @@ public class Module {
     private String department;
     private String faculty;
     private String preclusion;
-    // todo add semester information
     private String prerequisite;
     private String corequisite;
-    // todo add additional information
     private String grade;
 
     public Module(String moduleCode, String title, String moduleCredit) {
@@ -126,7 +126,7 @@ public class Module {
             return new Module(moduleCode, title, moduleCredit, grade);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            ui.printMessage(Messages.ERROR_DESERIALIZING_MODULE);
             return null;
         }
     }
@@ -137,17 +137,20 @@ public class Module {
      *
      * @return a string of the full module information
      */
-    public String getFullInfo(boolean hasGrade) {
-        StringBuilder s = new StringBuilder();
-        s.append(Ui.SHORT_LINE).append(Ui.PADDING).append(moduleCode + " " + title + " (" + moduleCredit + "MCs) ");
-        s.append(hasGrade ? "Grade: " + grade : "").append(System.lineSeparator());
-        s.append(Ui.PADDING).append("Department: ").append(department).append(System.lineSeparator());
-        s.append(Ui.PADDING).append("Faculty: ").append(faculty).append(System.lineSeparator());
-        s.append(Ui.PADDING).append("Preclusion: ").append(preclusion).append(System.lineSeparator());
-        s.append(Ui.PADDING).append("Pre-requisite: ").append(prerequisite).append(System.lineSeparator());
-        s.append(Ui.PADDING).append("Core Requisites: ").append(corequisite).append(System.lineSeparator())
-                .append(Ui.SHORT_LINE);
-        return s.toString();
+    public String[] getInfo(boolean isVerbose) {
+        List<String> fullInfo = new ArrayList<>();
+
+        fullInfo.add(moduleCode + " " + title + " (" + moduleCredit + "MCs) ");
+        if (isVerbose) {
+            fullInfo.add(description);
+        }
+        fullInfo.add("Department: " + department);
+        fullInfo.add("Faculty: " + faculty);
+        fullInfo.add("Preclusion: " + preclusion);
+        fullInfo.add("Prerequisite: " + prerequisite);
+        fullInfo.add("Corequisite: " + corequisite);
+
+        return fullInfo.toArray(isVerbose ? new String[7] : new String[6]);
     }
 
     /**

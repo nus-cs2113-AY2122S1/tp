@@ -45,7 +45,8 @@ public class ParserUtil {
     }
 
     public static boolean isVerbose(String userResponse) {
-        return userResponse.equalsIgnoreCase("verbose");
+        return userResponse.equalsIgnoreCase("verbose")
+                || userResponse.equalsIgnoreCase("-v");
     }
 
     //@@author Roycius
@@ -77,8 +78,7 @@ public class ParserUtil {
     }
 
     public static Command parseMeetingUrl(String userResponse, String title, String dayOfTheWeek,
-                                           String startTime, String endTime, String meetingUrl, boolean hasMeetingUrl)
-            throws ParseException {
+            String startTime, String endTime, String meetingUrl, boolean hasMeetingUrl) throws ParseException {
         if ((hasMeetingUrl && !hasCorrectFlagSequence(userResponse, "-d", "-s", "-e", "-l"))
                 || (!hasMeetingUrl && !hasCorrectFlagSequence(userResponse, "-d", "-s", "-e"))) {
             throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
@@ -86,8 +86,8 @@ public class ParserUtil {
         return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
     }
 
-    public static AddTaskCommand parsePriorityAndInfo(String userResponse, String[] params, String title,
-                                                       String dayOfTheWeek) throws ParseException {
+    public static AddTaskCommand parsePriorityAndInfo(
+            String userResponse, String[] params, String title, String dayOfTheWeek) throws ParseException {
         String information;
         String priority;
         if (!hasCorrectFlagSequence(userResponse, "-d", "-p", "-i")) {
@@ -104,8 +104,8 @@ public class ParserUtil {
         return new AddTaskCommand(title, dayOfTheWeek, priority, information);
     }
 
-    public static AddTaskCommand parsePriorityOrInfo(String userResponse, String[] params, String title,
-                                                      String dayOfTheWeek) throws ParseException {
+    public static AddTaskCommand parsePriorityOrInfo(
+            String userResponse, String[] params, String title, String dayOfTheWeek) throws ParseException {
         String priority = DEFAULT_PRIORITY;
         String information = EMPTY_INFORMATION;
 

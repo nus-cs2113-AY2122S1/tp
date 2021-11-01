@@ -12,6 +12,6 @@ public class UiTest {
     public void moduleInfo_invalidModuleCode_exceptionThrown() {
         Duke duke = new Duke();
         Ui ui = new Ui();
-        assertThrows(DukeException.class, () -> ui.printModuleInfo("hello"));
+        assertThrows(DukeException.class, () -> ui.printModuleInfo("hello", false));
     }
 }

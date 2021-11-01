@@ -17,7 +17,9 @@ public class ListLessonCommand extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList) {
-        if (period.isBlank()) {
+        if (lessonList.isEmpty()) {
+            ui.printMessage("There are no lessons in the list.");
+        } else if (period.isBlank()) {
             ui.printLessonList(lessonList);
         } else {
             ui.printLessonsWithPeriod(lessonList, period);

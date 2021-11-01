@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import seedu.duke.Duke;
-import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.Module;
@@ -17,6 +16,7 @@ import static seedu.duke.commons.util.DayUtil.getToday;
 import static seedu.duke.commons.util.DayUtil.getTomorrow;
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
+import static seedu.duke.commons.util.StringUtil.splitToLength;
 
 //@@author richwill28
 public class Ui {
@@ -29,6 +29,8 @@ public class Ui {
     public static final String SHORT_LINE = PADDING
             + "------------------------------------------------------------------------------------"
             + System.lineSeparator();
+
+    public static final int MAX_DESCRIPTION_LENGTH = 84;
 
     /**
      * Temporary logo.
@@ -363,7 +365,6 @@ public class Ui {
     }
 
     //@@author Roycius
-
     /**
      * Displays a message to inform user that the specified module
      * has been successfully deleted.
@@ -389,28 +390,13 @@ public class Ui {
         System.out.println(PADDING + "Here are the modules in your list:");
         System.out.print(moduleList);
         System.out.print(SHORT_LINE);
-        printTotalMcs(moduleList);
+        printTotalMC(moduleList);
         printCap(moduleList);
         System.out.println(LINE);
     }
 
-    /**
-     * Displays the list of modules with the full module information.
-     *
-     * @param moduleList the list of modules
-     * @throws DukeException when there is an error in retrieving the full module information of a module in the list
-     */
-    public void printModulesWithDetails(ModuleList moduleList) throws DukeException {
-        System.out.print(LINE);
-        System.out.println(PADDING + "Here are the detailed information of your modules:");
-        System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
-        printTotalMcs(moduleList);
-        printCap(moduleList);
-        System.out.println(LINE);
-    }
-
-    private void printTotalMcs(ModuleList moduleList) {
-        System.out.println(PADDING + "You have a total of " + moduleList.getTotalMcs() + " MCs");
+    private void printTotalMC(ModuleList moduleList) {
+        System.out.println(PADDING + "You have a total of " + moduleList.getTotalMC() + " MCs");
     }
 
     //@@author rebchua39
@@ -441,14 +427,42 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    //@@author richwill28
     /**
      * Displays the full module information of the specified module code.
      *
      * @param moduleCode the module code
      * @throws ModuleNotFoundException when there is no module in FullModuleList with a matching module code
      */
-    public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
+    public void printModuleInfo(String moduleCode, boolean isVerbose) throws ModuleNotFoundException {
         Module module = Duke.fullModuleList.findModule(moduleCode);
-        System.out.print(module.getFullInfo(false));
+        String[] moduleInfo = module.getInfo(isVerbose);
+        if (isVerbose) {
+            printModuleWithDescription(moduleInfo);
+        } else {
+            printModuleWithoutDescription(moduleInfo);
+        }
+    }
+
+    public void printModuleWithDescription(String[] moduleInfo) {
+        System.out.print(LINE);
+        System.out.println(PADDING + moduleInfo[0]);
+        String[] descriptions = splitToLength(moduleInfo[1], MAX_DESCRIPTION_LENGTH);
+        for (String description : descriptions) {
+            System.out.println(PADDING + description.strip());
+        }
+
+        for (int i = 2; i < moduleInfo.length; i++) {
+            System.out.println(PADDING + moduleInfo[i]);
+        }
+        System.out.println(LINE);
+    }
+
+    public void printModuleWithoutDescription(String[] moduleInfo) {
+        System.out.print(LINE);
+        for (String info : moduleInfo) {
+            System.out.println(PADDING + info);
+        }
+        System.out.println(LINE);
     }
 }
