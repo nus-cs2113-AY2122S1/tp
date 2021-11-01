@@ -1,11 +1,105 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
-autonumber
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":SetAttendanceCommand" as setAttendanceCommand
+Participant ":ModuleList" as moduleList
+Participant ":Module" as module
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+Participant ":AttendanceList" as attendanceList
+Participant ":Attendance" as attendance
+Participant ":Storage" as storage
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+activate taa
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : "set_attendance c/CS2113T\ns/1 l/1 p/1"
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput)
+activate parser
+
+create setAttendanceCommand
+parser -> setAttendanceCommand
+activate setAttendanceCommand
+setAttendanceCommand -> parser
+deactivate setAttendanceCommand
+
+parser --> taa : setAttendanceCommand:command
+deactivate parser
+
+taa -> setAttendanceCommand : checkArgument()
+activate setAttendanceCommand
+
+setAttendanceCommand --> taa
+deactivate setAttendanceCommand
+
+taa -> setAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
+activate setAttendanceCommand
+
+setAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
+activate moduleList
+moduleList --> setAttendanceCommand : module:Module
+deactivate moduleList
+
+
+setAttendanceCommand -> module : getStudentList()
+activate module
+module --> setAttendanceCommand : studentList:StudentList
+deactivate module
+
+setAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
+activate studentList
+studentList --> setAttendanceCommand : student:StudentList
+deactivate studentList
+
+setAttendanceCommand -> student : getAttendanceList()
+activate student
+student --> setAttendanceCommand : attendanceList:AttendanceList
+deactivate student
+
+setAttendanceCommand -> attendanceList : getAttendance(lessonNumber:int)
+activate attendanceList
+attendanceList --> setAttendanceCommand : attendance:Attendance
+deactivate attendanceList
+
+alt#Gold #LightGreen attendance==null
+    create attendance
+    setAttendanceCommand -> attendance : new Attendance(lessonNumber:int, isPresent:boolean)
+    activate attendance
+    attendance --> setAttendanceCommand : attendance:Attendance
+    deactivate attendance
+
+    setAttendanceCommand -> attendanceList : addAttendance(attendance:Attendance)
+    activate attendanceList
+    attendanceList --> setAttendanceCommand
+    deactivate attendanceList
+
+else #LightBlue else
+    setAttendanceCommand -> attendance : setPresent(isPresent:boolean)
+    activate attendance
+    attendance --> setAttendanceCommand :
+    deactivate attendance
+end
+
+setAttendanceCommand -> storage : save(moduleList:ModuleList)
+activate storage
+storage --> setAttendanceCommand
+deactivate storage
+
+setAttendanceCommand -> ui : printMessage("Attendance set for ...")
+activate ui
+ui -> user : Display message:\n"Attendance set for ..."
+ui --> setAttendanceCommand
+deactivate ui
+
+deactivate setAttendanceCommand
+
 @enduml

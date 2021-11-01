@@ -175,6 +175,9 @@ ArrayList.
 * `AttendanceList#sortAttendances` - Sorts the attendance in the `attendances` ArrayList in ascending order based on 
 lesson number.
 
+The sequence diagram shown below illustrates how the `set_attendance` command works:
+![SetAttendanceSequenceDiagram](diagrams/SetAttendanceSequenceDiagram.png)
+
 Below is an example scenario of how the set attendance feature behaves at each step:
 * Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
 index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
