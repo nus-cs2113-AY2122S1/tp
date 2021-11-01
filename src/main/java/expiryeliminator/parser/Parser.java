@@ -80,7 +80,7 @@ public class Parser {
         assert userInput != null : "User input string cannot be null";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
-            throw new RuntimeException(MESSAGE_INVALID_COMMAND_FORMAT);
+            return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
         final String command = matcher.group("command");
         String args = matcher.group("args");
