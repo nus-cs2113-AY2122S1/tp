@@ -385,22 +385,23 @@ public class TaskManager implements Subject {
 
             if (o1.getPriority().equals(PriorityEnum.LOW) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
                     || o2.getPriority().equals(PriorityEnum.HIGH))) {
-                return -1;
+                return 1;
             }
 
             if (o1.getPriority().equals(PriorityEnum.MEDIUM) && o2.getPriority().equals(PriorityEnum.HIGH)) {
-                return -1;
+                return 1;
             }
 
             if (o1.getPriority().equals(PriorityEnum.HIGH) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
                     || o2.getPriority().equals(PriorityEnum.LOW))) {
-                return 1;
+                return -1;
             }
 
             if (o1.getPriority().equals(PriorityEnum.MEDIUM) && o2.getPriority().equals(PriorityEnum.LOW)) {
-                return 1;
+                return -1;
             }
-            // Returns 0 if both priorities are equal
+
+            // Returns 0 if both priority are the same
             return 0;
         }
     }
@@ -464,23 +465,6 @@ public class TaskManager implements Subject {
         updateObservers();
         return latestFilteredList.get(index);
     }
-
-    /*
-    //@@author SeanRobertDH
-    public void checkIndexValid(int index) throws InvalidTaskIndexException {
-        if (index < 0 || index > getTaskListSize() - 1) {
-            throw new InvalidTaskIndexException(++index);
-        }
-    }
-
-    //@@author SeanRobertDH
-    public Task deleteTask(int index) throws InvalidTaskIndexException {
-        checkIndexValid(index);
-        Task deletedTask = taskList.remove(index);
-        updateObservers(this);
-        return deletedTask;
-    }
-    */
 
     //@@author SeanRobertDH
     public void clear() {
