@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.logging.Logger;
 
 //@@author a-tph
+
 /**
  * Update prescription information based on user input given prescription id.
  */
@@ -129,8 +130,8 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if update is successful.
      */
     private boolean processGivenNameAndQuantity(ArrayList<Medicine> medicines, Prescription prescription,
-                                                String customerId,
-                                                Date date, String staffName, StockValidator stockValidator) {
+                                                String customerId, Date date, String staffName,
+                                                StockValidator stockValidator) {
         Ui ui = Ui.getInstance();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -151,7 +152,8 @@ public class UpdatePrescriptionCommand extends Command {
             return false;
         }
 
-        ArrayList<Stock> targetPrescriptionStocks = StockManager.getFilteredStocksByName(medicines, updatedName);
+        ArrayList<Stock> targetPrescriptionStocks = StockManager.getUnexpiredFilteredStocksByName(medicines,
+                updatedName);
         if (targetPrescriptionStocks.isEmpty()) {
             ui.print("Medicine name does not exist in stock!");
             return false;
@@ -165,7 +167,7 @@ public class UpdatePrescriptionCommand extends Command {
             ui.print("Prescription of medication aborted!");
             return false;
         }
-        // Guarantee is be able to restore & prescription
+        // Guarantee is be able to restore & prescribe
         PrescriptionManager.restoreStock(targetRestoreStock, totalQuantity);
         ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
                 targetPrescriptionStocks, prescriptionQuantity, customerId, date, staffName);
@@ -193,8 +195,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if update is successful.
      */
     private boolean processGivenName(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
-                                     Date date,
-                                     String staffName, StockValidator stockValidator) {
+                                     Date date, String staffName, StockValidator stockValidator) {
         Ui ui = Ui.getInstance();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -214,7 +215,8 @@ public class UpdatePrescriptionCommand extends Command {
             return false;
         }
 
-        ArrayList<Stock> targetPrescriptionStocks = StockManager.getFilteredStocksByName(medicines, updatedName);
+        ArrayList<Stock> targetPrescriptionStocks = StockManager.getUnexpiredFilteredStocksByName(medicines,
+                updatedName);
         if (targetPrescriptionStocks.isEmpty()) {
             ui.print("Medicine name does not exist in stock!");
             return false;
@@ -226,7 +228,7 @@ public class UpdatePrescriptionCommand extends Command {
             return false;
         }
 
-        // Guarantee to be able to restore & prescription
+        // Guarantee to be able to restore & prescribe
         PrescriptionManager.restoreStock(targetRestoreStock, totalQuantity);
         ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
                 targetPrescriptionStocks, restoredQuantity, customerId, date, staffName);
@@ -289,7 +291,8 @@ public class UpdatePrescriptionCommand extends Command {
             ui.printPrescriptions(updatedPrescriptions);
 
         } else if (updatedQuantity > currentQuantity) {
-            ArrayList<Stock> targetPrescriptionStocks = StockManager.getFilteredStocksByName(medicines, currentName);
+            ArrayList<Stock> targetPrescriptionStocks = StockManager.getUnexpiredFilteredStocksByName(medicines,
+                    currentName);
             if (targetPrescriptionStocks.isEmpty()) {
                 ui.print("Medicine name does not exist in stock!");
                 return false;
@@ -301,7 +304,7 @@ public class UpdatePrescriptionCommand extends Command {
                 ui.print("Prescription of medication aborted!");
                 return false;
             }
-            // guarantee can prescription
+            // guarantee can prescribe
             ArrayList<Prescription> updatedPrescriptions = PrescriptionManager.prescribeStock(medicines,
                     targetPrescriptionStocks, prescribedQuantity, customerId, date, staffName);
 
@@ -337,8 +340,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if update is successful.
      */
     private boolean processOtherFields(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
-                                       Date date,
-                                       String staffName) {
+                                       Date date, String staffName) {
         if (prescription == null) {
             return false;
         }
