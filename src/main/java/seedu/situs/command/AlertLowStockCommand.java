@@ -38,11 +38,15 @@ public class AlertLowStockCommand extends Command {
         ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();
 
         for (IngredientGroup ingredientGroup : ingredientList) {
-            if (ingredientGroup.getTotalAmount() <= lowStockThreshold) {
-                resultMsg += ingredientGroup.getIngredientGroupName() + " | Total Amount: "
-                        + String.format("%.1f", ingredientGroup.getTotalAmount()) + " kg" + LIST_NEWLINE_INDENT;
-                lowStockCount += 1;
+            if (ingredientGroup.getTotalAmount() > lowStockThreshold) {
+                continue;
             }
+            String groupName = ingredientGroup.getIngredientGroupName();
+            String totalAmountMessage = " | Total Amount: "
+                    + String.format("%.3f", ingredientGroup.getTotalAmount()) + " kg";
+            resultMsg +=  groupName + totalAmountMessage  + LIST_NEWLINE_INDENT;
+            lowStockCount += 1;
+
         }
 
         if (lowStockCount == 0) {
