@@ -169,7 +169,7 @@ public class IngredientList {
         }
 
         i = 0;
-            // remove ingredients in group where amount is approx. 0
+        // remove ingredients in group where amount is approx. 0
         while (i < currentGroup.getIngredientGroupSize()) {
             if (currentGroup.get(i + 1).getAmount() < 0.01) {
                 currentGroup.remove(i + 1);
