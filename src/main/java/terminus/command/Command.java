@@ -1,5 +1,7 @@
 package terminus.command;
 
+import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
@@ -30,8 +32,10 @@ public abstract class Command {
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     public void parseArguments(String arguments)
-            throws InvalidArgumentException {
-        this.arguments = arguments;
+        throws InvalidArgumentException {
+        if (!CommonUtils.isStringNullOrEmpty(arguments)) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     /**

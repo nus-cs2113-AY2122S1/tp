@@ -15,6 +15,10 @@ public abstract class WorkspaceCommand extends Command {
         this.commandMap = commandMap;
     }
 
+    @Override
+    public void parseArguments(String arguments) throws InvalidArgumentException {
+        this.arguments = arguments;
+    }
 
     /**
      * Returns the Command Result after execution. If no other arguments, returns the workspace.
