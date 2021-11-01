@@ -83,7 +83,7 @@ Don't worry, the features of SEPlanner still work regardless of window size, but
 
 ## Program run through
 
-This SEPlanner allows the user to search for mapping through our platform. To do so, users can follow the following steps:
+This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
   1. Add partner universities the user is interested in.
   2. Add potential NUS modules that the user wants to add.
   3. Search for potential mapping for a particular selected university.

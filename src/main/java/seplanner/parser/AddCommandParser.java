@@ -37,7 +37,7 @@ public class AddCommandParser {
             handleUniFlagArgs(flagArguments, universityMasterList, universitySelectedList);
             return new AddUniCommand(university, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE_CODE:
-        case Constants.FLAG_MODULE_NAME:
+        case Constants.FLAG_MODULE:
             handleModFlagArgs(flagArguments, moduleMasterList, moduleSelectedList);
             return new AddModCommand(module, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
