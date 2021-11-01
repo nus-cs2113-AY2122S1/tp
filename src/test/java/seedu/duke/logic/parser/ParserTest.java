@@ -110,12 +110,6 @@ public class ParserTest {
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 
-    @Test
-    public void parseListModule_invalidArgument_exceptionThrown() {
-        String userResponse = "list module lol";
-        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
-    }
-
     //@@author rebchua39
     @Test
     public void testSetGrade() {

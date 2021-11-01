@@ -45,7 +45,8 @@ public class ParserUtil {
     }
 
     public static boolean isVerbose(String userResponse) {
-        return userResponse.equalsIgnoreCase("verbose");
+        return userResponse.equalsIgnoreCase("verbose")
+                || userResponse.equalsIgnoreCase("-v");
     }
 
     //@@author Roycius

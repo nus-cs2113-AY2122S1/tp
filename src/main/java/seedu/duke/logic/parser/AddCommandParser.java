@@ -6,15 +6,13 @@ import java.time.format.DateTimeParseException;
 
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
-import seedu.duke.commons.core.exceptions.PriorityException;
-import seedu.duke.commons.core.Priority;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
 import static seedu.duke.commons.core.Priority.LOW;
+import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
 import static seedu.duke.logic.parser.ParserUtil.parseMeetingUrl;
