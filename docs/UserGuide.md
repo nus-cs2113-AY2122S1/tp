@@ -140,7 +140,7 @@ Mode has changed to ORDER.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
 >  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
 > * MediVault also ignores all extra values that are not provided in parameters.
->  * E.g. `list abc123 i/1 xyz789`, MediVault interprets the command as `list i/1`.
+>  * E.g. `list abc123 i/1`, MediVault interprets the command as `list i/1`.
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
