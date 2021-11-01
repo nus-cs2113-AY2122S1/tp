@@ -268,5 +268,5 @@ public class Storage {
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
         Storage.listOfTrips = listOfTrips;
     }
-    
+
 }

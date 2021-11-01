@@ -88,8 +88,7 @@ public class Trip {
         }  catch (ForceCancelException e) {
             Ui.printForceCancelled();
         }
-    }
-
+        
     }
     //@@author
 
