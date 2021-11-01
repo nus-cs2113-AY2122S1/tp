@@ -4,7 +4,7 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":DeleteOrder" as deleteorder COLOR_COMMAND
+    participant ":DeleteOrderCommand" as deleteorder COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
@@ -18,6 +18,10 @@ end box
 autoactivate on
 
 mainframe sd DeleteOrderCommand
+activate deleteorder
+
+deleteorder -> deleteorder : isValidOrderParameters()
+
     opt isValidOrderId
     deleteorder -> ordervalidator : isValidOrderId()
     deleteorder <-- ordervalidator : isValidOrderId
@@ -33,9 +37,9 @@ mainframe sd DeleteOrderCommand
             end
         end
     end
-    end
+   end
 
+deleteorder --> deleteorder :
 
-    deactivate deleteorder
 
 @enduml

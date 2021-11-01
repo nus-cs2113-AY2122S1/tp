@@ -4,22 +4,23 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":AddPrescription" as addprescription COLOR_COMMAND
+    participant ":AddPrescriptionCommand" as addprescription COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
+    participant "<<class>>\n:PrescriptionManager" as prescriptionManager COLOR_UTILITIES
     participant ":StockComparator" as stockcomparator COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Stock" as stock COLOR_INVENTORY
+    participant ":Stock" as stock COLOR_INVENTORY
 end box
 
 autoactivate on
 mainframe sd AddPrescriptionCommand
-    addprescription -> stockmanager: getTotalStockQuantity()
-    addprescription <-- stockmanager: totalStock
+activate addprescription
+    addprescription -> prescriptionManager: getNotExpiredStockQuantity()
+    addprescription <-- prescriptionManager: totalStock
 
     create stockcomparator
     addprescription -> stockcomparator : new StockComparator()
