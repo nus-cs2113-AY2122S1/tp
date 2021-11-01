@@ -45,7 +45,7 @@ public class ListStockCommand extends Command {
         StockValidator stockValidator = new StockValidator();
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        if (checkValidParameterValues(ui,parameters, medicines, requiredParameter, optionalParameters,
+        if (checkValidParameterValues(ui, parameters, medicines, requiredParameter, optionalParameters,
                 stockValidator)) {
             return;
         }
