@@ -337,6 +337,7 @@ public class Trip {
         for (Expense currentExpense : listOfExpenses) {
             totalExpense += currentExpense.getAmountSpent();
         }
+        return totalExpense;
     }
 
 
