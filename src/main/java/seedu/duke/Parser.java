@@ -6,8 +6,6 @@ import java.util.logging.Level;
 
 public class Parser {
 
-    private static final double EPSILON = 0.001;
-
     private static final int SPLIT_COMMAND_FROM_INFO_LENGTH = 2;
     private static final int INPUT_COMMAND = 0;
     private static final int INPUT_INFO = 1;
@@ -145,6 +143,8 @@ public class Parser {
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
+        } catch (CancelException e) {
+            Ui.printCancelExpenseCreation();
         }
     }
 
@@ -436,11 +436,10 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) {
+    private static void executeCreateExpense(String inputDescription) throws CancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
-        newExpense.prompDate().assignAmounts();
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
@@ -450,127 +449,8 @@ public class Parser {
         //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
+
     //@@author joshualeeky
-    protected static void updateOnePersonSpending(Expense expense, Person person) {
-        person.setMoneyOwed(person, expense.getAmountSpent());
-        expense.setPayer(person);
-        expense.setAmountSplit(person, expense.getAmountSpent());
-    }
-
-    protected static void updateIndividualSpending(Expense expense) {
-        boolean hasLogged = false;
-        boolean shouldContinue = true;
-        Ui.printGetPersonPaid();
-        String input = Storage.getScanner().nextLine().strip();
-        Person payer = getValidPersonInExpenseFromString(input, expense);
-        if (payer != null) {
-            expense.setPayer(payer);
-            HashMap<Person, Double> amountBeingPaid = new HashMap<>();
-            Ui.equalSplitPrompt();
-            double total = 0.0;
-            for (Person person : expense.getPersonsList()) {
-                double amountRemaining = expense.getAmountSpent() - total;
-                if (amountRemaining < EPSILON) {
-                    if (!hasLogged) {
-                        Ui.askUserToConfirm();
-                        shouldContinue = getUserToConfirm();
-                    }
-                    if (shouldContinue) {
-                        amountBeingPaid.put(person, 0d);
-                        hasLogged = manageLog(hasLogged);
-                        continue;
-                    } else {
-                        updateIndividualSpending(expense);
-                        return;
-                    }
-                } else if (expense.getPersonsList().indexOf(person) == expense.getPersonsList().size() - 1) {
-                    Ui.askAutoAssignRemainder(person, amountRemaining);
-                    shouldContinue = getUserToConfirm();
-                    if (shouldContinue) {
-                        total += amountRemaining;
-                        amountBeingPaid.put(person, Storage.formatForeignMoneyDouble(amountRemaining));
-                        break;
-                    } else {
-                        Ui.printIncorrectAmount(expense.getAmountSpent());
-                        updateIndividualSpending(expense);
-                        return;
-                    }
-                }
-                Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
-                String amountString = Storage.getScanner().nextLine().strip();
-                if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
-                    assignEqualAmounts(payer, expense, amountBeingPaid);
-                    return;
-                } else {
-                    try {
-                        double amount = Double.parseDouble(amountString);
-                        amount = Storage.formatForeignMoneyDouble(amount);
-                        total += amount;
-                        if (total > expense.getAmountSpent()) {
-                            Ui.printIncorrectAmount(expense.getAmountSpent());
-                            updateIndividualSpending(expense);
-                            return;
-                        } else {
-                            amountBeingPaid.put(person, amount);
-                        }
-                    } catch (NumberFormatException e) {
-                        Ui.argNotNumber();
-                        updateIndividualSpending(expense);
-                        return;
-                    }
-                }
-            }
-            if (total < expense.getAmountSpent()) {
-                Ui.printIncorrectAmount(expense.getAmountSpent());
-                updateIndividualSpending(expense);
-            } else {
-                assignAmounts(payer, expense, amountBeingPaid);
-            }
-        } else {
-            Ui.printPersonNotInExpense();
-            Ui.printPeopleInvolved(expense.getPersonsList());
-            updateIndividualSpending(expense);
-        }
-    }
-
-    private static Person getValidPersonInExpenseFromString(String name, Expense expense) {
-        for (Person person : expense.getPersonsList()) {
-            if (name.equalsIgnoreCase(person.getName())) {
-                return person;
-            }
-        }
-        return null;
-    }
-
-    private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
-        double total = 0.0;
-        double amount = Storage.formatForeignMoneyDouble(expense.getAmountSpent() / expense.getPersonsList().size());
-        for (Person people : expense.getPersonsList()) {
-            amountBeingPaid.put(people, amount);
-            total += amount;
-        }
-        //This will cause payer to bear the deficit or surplus
-        if (total != expense.getAmountSpent()) {
-            double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
-            amountBeingPaid.put(payer, payerAmount);
-        }
-        assignAmounts(payer, expense, amountBeingPaid);
-    }
-
-    private static void assignAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
-        for (Person person : expense.getPersonsList()) {
-            if (person == payer) {
-                person.setMoneyOwed(person, amountBeingPaid.get(person));
-                expense.setAmountSplit(person, amountBeingPaid.get(person));
-                continue;
-            }
-            payer.setMoneyOwed(person, amountBeingPaid.get(person));
-            person.setMoneyOwed(payer, -amountBeingPaid.get(person));
-            person.setMoneyOwed(person, amountBeingPaid.get(person));
-            expense.setAmountSplit(person, amountBeingPaid.get(person));
-        }
-    }
-
     private static void executeAmount(String inputParams) {
         Trip trip = Storage.getOpenTrip();
         Person toBeChecked = getValidPersonInTripFromString(inputParams, trip);
@@ -600,7 +480,7 @@ public class Parser {
         return isLogDisplayed;
     }
 
-    private static boolean getUserToConfirm() {
+    public static boolean getUserToConfirm() {
         boolean isValidInput = false;
         boolean doesUserAgree = false;
         while (!isValidInput) {

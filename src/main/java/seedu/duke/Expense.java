@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class Expense {
+public class Expense extends ExpenseFunctions {
     private double amountSpent;
     private String description;
     private ArrayList<Person> personsList;
@@ -45,8 +45,8 @@ public class Expense {
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
-    //@@author yeezao
-    public Expense(String inputDescription) {
+
+    public Expense(String inputDescription) throws CancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
         this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
@@ -54,6 +54,12 @@ public class Expense {
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
+        this.date = prompDate();
+        if (personsList.size() == 1) {
+            updateOnePersonSpending(this, personsList.get(0));
+        } else {
+            updateIndividualSpending(this);
+        }
     }
     //@@author
 
@@ -61,7 +67,8 @@ public class Expense {
         return userInput.split("/")[1].trim();
     }
 
-    //@@author joshualeeky
+
+
     /**
      * Obtains a list of Person objects from array of names of people.
      *
@@ -95,11 +102,11 @@ public class Expense {
 
     //@@author
 
-    public void assignAmounts() {
+    public void assignAmounts() throws CancelException {
         if (personsList.size() == 1) {
-            Parser.updateOnePersonSpending(this, personsList.get(0));
+            updateOnePersonSpending(this, personsList.get(0));
         } else {
-            Parser.updateIndividualSpending(this);
+            updateIndividualSpending(this);
         }
     }
 
@@ -126,7 +133,7 @@ public class Expense {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public Expense prompDate() {
+    public LocalDate prompDate() {
         Scanner sc = Storage.getScanner();
         Ui.expensePromptDate();
         String inputDate = sc.nextLine();
@@ -134,11 +141,10 @@ public class Expense {
             inputDate = sc.nextLine();
         }
         if (inputDate.isEmpty()) {
-            this.date = LocalDate.now();
+            return LocalDate.now();
         } else {
-            this.date = LocalDate.parse(inputDate, inputPattern);
+            return LocalDate.parse(inputDate, inputPattern);
         }
-        return this;
     }
 
     private Boolean isDateValid(String date) {
