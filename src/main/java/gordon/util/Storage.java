@@ -12,6 +12,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/** <h1>Storage class.</h1>
+ *
+ * <p> Handles the saving and loading of the cookbook to and from saveFile.txt respectively.</p>
+ */
 public class Storage {
     public static final String FILENAME = "saveFile.txt";
     public static final String DIFF_PRIMER = "Difficulty:";
@@ -32,16 +36,16 @@ public class Storage {
             Scanner loadScanner = new Scanner(load);
 
             while (loadScanner.hasNext()) {
-                Recipe r = new Recipe(loadScanner.nextLine());
+                Recipe recipe = new Recipe(loadScanner.nextLine());
                 String buffer = loadScanner.nextLine();
-                buffer = loadDifficulty(r, buffer, loadScanner);
-                buffer = loadCalories(r, buffer, loadScanner);
-                buffer = loadTimes(r, buffer, loadScanner);
-                buffer = loadPrice(r, buffer, loadScanner);
-                buffer = loadIngredients(r, buffer, loadScanner);
-                buffer = loadSteps(r, buffer, loadScanner);
-                loadTags(r, buffer, loadScanner, cookbook);
-                cookbook.addRecipe(r);
+                buffer = loadDifficulty(recipe, buffer, loadScanner);
+                buffer = loadCalories(recipe, buffer, loadScanner);
+                buffer = loadTimes(recipe, buffer, loadScanner);
+                buffer = loadPrice(recipe, buffer, loadScanner);
+                buffer = loadIngredients(recipe, buffer, loadScanner);
+                buffer = loadSteps(recipe, buffer, loadScanner);
+                loadTags(recipe, buffer, loadScanner, cookbook);
+                cookbook.addRecipe(recipe);
             }
 
             logger.log(Level.INFO, "Previous session restored.");
@@ -58,6 +62,17 @@ public class Storage {
         }
     }
 
+
+    /**
+     * <h2> String loadDifficulty(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the difficulty stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where difficulty is being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return the buffer string
+     */
     private String loadDifficulty(Recipe recipe, String buffer, Scanner loadScanner) {
         if (buffer.trim().equals(DIFF_PRIMER)) {
             String line = loadScanner.nextLine().trim();
@@ -72,6 +87,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadCalories(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the calories stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where calories are being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return the buffer string
+     */
     private String loadCalories(Recipe recipe, String buffer, Scanner loadScanner) {
         if (buffer.trim().equals(CALORIES_PRIMER)) {
             String line = loadScanner.nextLine().trim();
@@ -82,6 +107,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadTimes(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the preparation and cooking times stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where the preparation and cooking times are being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return
+     */
     private String loadTimes(Recipe recipe, String buffer, Scanner loadScanner) {
         String line = buffer;
         int prep = -1;
@@ -106,6 +141,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadPrice(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the price stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where price is being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return
+     */
     private String loadPrice(Recipe recipe, String buffer, Scanner loadScanner) {
         if (buffer.trim().equals(PRICE_PRIMER)) {
             String line = loadScanner.nextLine().trim();
@@ -116,6 +161,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadIngredients(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the ingredients stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where ingredients are being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return
+     */
     private String loadIngredients(Recipe recipe, String buffer, Scanner loadScanner) {
         String line = buffer;
         if (line.trim().equals(INGREDIENTS_PRIMER)) {
@@ -136,6 +191,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadSteps(recipe, buffer, loadScanner).</h2>
+     *
+     * <p> This method loads the steps stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where steps are being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @return the buffer string
+     */
     private String loadSteps(Recipe recipe, String buffer, Scanner loadScanner) {
         String line = buffer;
         if (line.trim().equals(STEPS_PRIMER)) {
@@ -156,6 +221,16 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> String loadTags(recipe, buffer, loadScanner, cookbook).</h2>
+     *
+     * <p> This method loads the tags stored in saveFile.txt to a recipe.</p>
+     *
+     * @param recipe The recipe where tags are being loaded into
+     * @param buffer The String that corresponds to the contents of a line in saveFile.txt
+     * @param loadScanner The scanner used to load lines of text from saveFile.txt
+     * @param cookbook The cookbook where the recipe is being stored
+     */
     private void loadTags(Recipe recipe, String buffer, Scanner loadScanner, Cookbook cookbook) {
         String line = buffer;
 
@@ -181,6 +256,13 @@ public class Storage {
         }
     }
 
+    /**
+     * <h2> void saveCookbook(cookbook).</h2>
+     *
+     * <p> This method saves the current cookbook to saveFile.txt.</p>
+     *
+     * @param cookbook The cookbook to be saved in saveFile.txt
+     */
     public void saveCookbook(Cookbook cookbook) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < cookbook.numRecipes(); i++) {
