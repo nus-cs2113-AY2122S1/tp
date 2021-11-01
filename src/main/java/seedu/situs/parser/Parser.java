@@ -1,7 +1,6 @@
 package seedu.situs.parser;
 
 import seedu.situs.command.AddCommand;
-import seedu.situs.command.AlertCommand;
 import seedu.situs.command.AlertExpiringSoonCommand;
 import seedu.situs.command.AlertLowStockCommand;
 import seedu.situs.command.DateCommand;
@@ -43,6 +42,7 @@ public class Parser {
     private static final String TYPE_EXPIRY = "expiry";
     private static final String TYPE_STOCK = "stock";
 
+    public static final String DIVIDER = "____________________________________________________\n";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
@@ -434,7 +434,9 @@ public class Parser {
         try {
             switch (details[1]) {
             case "all":
-                return new AlertCommand().run();
+                String expiryAlerts = new AlertExpiringSoonCommand().run();
+                String stockAlerts = new AlertLowStockCommand().run();
+                return expiryAlerts + "\n" + DIVIDER + stockAlerts;
             case TYPE_EXPIRY:
                 return new AlertExpiringSoonCommand().run();
             case TYPE_STOCK:
