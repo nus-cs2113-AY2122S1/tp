@@ -12,8 +12,6 @@ import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.NextCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
@@ -37,7 +35,8 @@ public abstract class Parser {
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
-    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
+    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         // Trim and split response using first detected occurrence of whitespace(s) to get type of command requested
         //String[] command = response.trim().split(" +");
 
@@ -54,7 +53,7 @@ public abstract class Parser {
     }
 
     private static Command multiWordCommandProtocol(String response, String[] command, String commandDetails,
-                                                    String commandType) throws DukeException, InvalidItemTypeException {
+                                                    String commandType) throws DukeException {
         switch (commandType) {
         case "list":
             //return new ListCommand(command);

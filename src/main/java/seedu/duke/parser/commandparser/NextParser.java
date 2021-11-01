@@ -21,14 +21,15 @@ public class NextParser extends Parser {
             default:
                 Ui.printNextCommandErrorMessage();
             }
-        } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException | NoCommandAttributesException e) {
+        } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException
+                | NoCommandAttributesException e) {
             System.out.println("Please key in a valid Event Index!");
         } catch (InvalidItemTypeException e) {
             System.out.println("Please key in the correct next type value (-e, -t)");
-            ;
         }
         return null;
     }
+
     private static Command parseListTask(String response)
             throws NoCommandAttributesException, NumberFormatException {
         String[] index = response.trim().split(" +");

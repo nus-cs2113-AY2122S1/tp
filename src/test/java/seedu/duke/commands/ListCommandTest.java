@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
@@ -36,8 +37,8 @@ public class ListCommandTest {
 
     @Test
     public void listCommand_overallScheduleTest() throws DukeException, NoCommandAttributesException,
-            InvalidBudgetException {
-        Command command1 = Parser.parseCommand("list");
+            InvalidBudgetException, InvalidItemTypeException {
+        Command command1 = Parser.parseCommand("list -e");
         command1.execute();
         String expectedOutput = "OVERALL SCHEDULE"
                 + System.lineSeparator()
@@ -52,16 +53,21 @@ public class ListCommandTest {
                 + System.lineSeparator()
                 + "-----------------------"
                 + System.lineSeparator()
-                + "To list Task: list [Event Index] -t"
+                + "list -e: to see overall events"
                 + System.lineSeparator()
-                + "To list Members of a Task: list [Event Index] t/[Task Index]"
+                + "list -t [EVENT_NUM]: to see tasks in an Event"
+                + System.lineSeparator()
+                + "list -m e/[Event Index] t/[Task Index] : to see members in a Task"
+                + System.lineSeparator()
+                + "list -m: to see overall member roster"
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
-    public void listCommand_taskListTest() throws DukeException, NoCommandAttributesException, InvalidBudgetException {
-        Command command1 = Parser.parseCommand("list 1 -t");
+    public void listCommand_taskListTest() throws DukeException, NoCommandAttributesException, InvalidBudgetException,
+            InvalidItemTypeException {
+        Command command1 = Parser.parseCommand("list -t 1");
         command1.execute();
         String expectedOutput = "Event: Peppa Pig's Concert"
                 + System.lineSeparator()
@@ -76,8 +82,8 @@ public class ListCommandTest {
 
     @Test
     public void listCommand_memberListTest() throws DukeException, NoCommandAttributesException,
-            InvalidBudgetException {
-        Command command1 = Parser.parseCommand("list 1 t/1");
+            InvalidBudgetException, InvalidItemTypeException {
+        Command command1 = Parser.parseCommand("list -m e/1 t/1");
         command1.execute();
         String expectedOutput = "Event: Peppa Pig's Concert"
                 + System.lineSeparator()

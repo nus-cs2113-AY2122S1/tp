@@ -27,13 +27,13 @@ public abstract class ListParser extends Parser {
             default:
                 System.out.println("please specify type for list "
                         + System.lineSeparator()
-                        + "[list -e: to see overall events"
+                        + "list -e: to see overall events"
                         + System.lineSeparator()
                         + "list -t [EVENT_NUM]: to see tasks in an Event"
                         + System.lineSeparator()
                         + "list -m e/[Event Index] t/[Task Index] : to see members in a Task"
                         + System.lineSeparator()
-                        + "[list -m: to see overall member roster");
+                        + "list -m: to see overall member roster");
             }
         } catch (NullPointerException | IndexOutOfBoundsException | NoCommandAttributesException e) {
             System.out.println("Please check through the format carefully");
@@ -46,8 +46,8 @@ public abstract class ListParser extends Parser {
         return null;
     }
 
-    private static Command parseListMember(String response) throws NoCommandAttributesException
-            , NumberFormatException {
+    private static Command parseListMember(String response) throws NoCommandAttributesException,
+            NumberFormatException {
         if ((response.trim().split(" +")).length == 2) {
             return new ListCommand("memberRoster", -1, -1);
         }

@@ -198,13 +198,13 @@ public class Ui {
                 + System.lineSeparator()
                 + "-----------------------"
                 + System.lineSeparator()
-                + "[list -e: to see overall events"
+                + "list -e: to see overall events"
                 + System.lineSeparator()
                 + "list -t [EVENT_NUM]: to see tasks in an Event"
                 + System.lineSeparator()
-                + "list -m,e/[Event Index] t/[Task Index] : to see members in a Task"
+                + "list -m e/[Event Index] t/[Task Index] : to see members in a Task"
                 + System.lineSeparator()
-                + "[list -m: to see overall member roster");
+                + "list -m: to see overall member roster");
     }
 
     public static void updateIntroMessage() {
@@ -275,4 +275,5 @@ public class Ui {
                 + System.lineSeparator()
                 + Ui.getLineBreak());
     }
+
 }

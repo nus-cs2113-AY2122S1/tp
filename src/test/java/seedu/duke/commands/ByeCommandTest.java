@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.Parser;
 
@@ -27,7 +28,8 @@ public class ByeCommandTest {
     }
 
     @Test
-    public void byeCommand_success() throws DukeException, NoCommandAttributesException, InvalidBudgetException {
+    public void byeCommand_success() throws DukeException, NoCommandAttributesException, InvalidBudgetException,
+            InvalidItemTypeException {
         Command command1 = Parser.parseCommand("bye");
         command1.execute();
         assertEquals("", outContent.toString());
