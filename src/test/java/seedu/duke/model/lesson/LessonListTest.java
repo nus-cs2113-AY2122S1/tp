@@ -19,8 +19,12 @@ public class LessonListTest {
     @Test
     public void isEmpty_nonEmptyList_false() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", "-"));
-        assertFalse(lessonList.isEmpty());
+        try {
+            lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", "-"));
+            assertFalse(lessonList.isEmpty());
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test

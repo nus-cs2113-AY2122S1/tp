@@ -49,6 +49,9 @@ public final class Messages {
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";
 
+    public static final String ERROR_INVALID_LIST_ARGUMENT =
+            "Sorry, list module command currently only accepts either \"verbose\" or no argument.";
+
     public static final String ERROR_MODULE_LOAD_FAILED =
             "Sorry, there was an issue loading NUSMods module information.";
 

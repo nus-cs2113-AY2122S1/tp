@@ -20,7 +20,7 @@ public class CommandFormat {
             "list lesson {PERIOD}";
 
     public static final String LIST_MODULE_FORMAT =
-            "list module {VERBOSE}";
+            "list module";
 
     public static final String DELETE_TASK_FORMAT =
             "delete task [INDEX]";
@@ -40,8 +40,8 @@ public class CommandFormat {
     public static final String FIND_LESSON_FORMAT =
             "find lesson [KEYWORD]";
 
-    public static final String MODULEINFO_FORMAT =
-            "moduleinfo [MODULE_CODE]";
+    public static final String FIND_MODULE_FORMAT =
+            "find module [MODULE_CODE] {verbose}";
 
     public static final String SET_GRADE_FORMAT =
             "set grade [MODULE_CODE] [GRADE]";
