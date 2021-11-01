@@ -6,7 +6,7 @@ skinparam groupInheritance 1
 
 package "ui" <<Frame>> #DDDDDD {
     abstract class Ui {
-    + printIndex(int index, boolean printLn)
+    + printIndex(int index, boolean println)
     # stringPadder(String input, PaddingType type) : StringBuilder
     }
 
