@@ -264,16 +264,17 @@ public class ParserTest {
             }
             testBudgetManager.setBudget(12, category);
         }
+        testBudgetManager.setThreshold(0.2);
         Parser testParser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
         String testData = testParser.convertSettingsToData(financialTracker, testBudgetManager);
-        assertEquals(testData, "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12.0");
+        assertEquals("SGD,0.2,12.0,12.0,12.0,12.0,12.0,12.0,12.0", testData);
         
     }
     
     @Test
-    public void convertDataToBudgetSettings() throws InvalidSettingsDataException {
-        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
+    public void convertDataToBudgetSettings_validData_validBudgets() throws InvalidSettingsDataException {
+        String testData = "SGD,0.1,12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
         for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
@@ -282,9 +283,9 @@ public class ParserTest {
     }
     
     @Test 
-    public void convertDataToCurrencySetting() throws InvalidCurrencyTypeException, InvalidSettingsDataException, 
-            BlankCurrencyTypeException {
-        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
+    public void convertDataToCurrencySetting_validData_validCurrency() throws InvalidCurrencyTypeException, 
+            InvalidSettingsDataException, BlankCurrencyTypeException {
+        String testData = "SGD,0.0,12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         CurrencyType currency = parser.convertDataToCurrencySetting(testData);
         assertEquals(currency.toString(), "SGD");

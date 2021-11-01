@@ -93,14 +93,15 @@ public class DataManagerTest {
             budgetManager.setBudget(i, category);
             i += 1;
         }
+        budgetManager.setThreshold(0.5);
         dataManager.saveAll();
         String testData = parser.convertSettingsToData(financialTracker, budgetManager);
-        String expectedData = "SGD,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
+        String expectedData = "SGD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
 
     @Test
-    public void loadBudget_validBudgetData_validBudgets() {
+    public void loadAll_validBudgetData_validBudgets() {
         saveSettings_validSettings_validSettingData();
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
