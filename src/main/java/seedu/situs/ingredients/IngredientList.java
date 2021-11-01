@@ -175,6 +175,16 @@ public class IngredientList {
             i++;
         }
 
+        i = 0;
+        // remove ingredients in group where amount is approx. 0
+        while (i < currentGroup.getIngredientGroupSize()) {
+            if (BigDecimal.valueOf(currentGroup.get(i + 1).getAmount()).compareTo(new BigDecimal("0.001")) < 0) {
+                currentGroup.remove(i + 1);
+            } else {
+                i++;
+            }
+        }
+
         storage.writeIngredientsToMemory(ingredientList);
         return subtractedIngredientName;
     }
