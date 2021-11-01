@@ -182,7 +182,7 @@ public class Ui {
                 + "\tsearch-item trip1 /name sleep at home : "
                 + "Searches item keyword sleep at home in trip called trip1.\n"
 
-                + "\tshortest /from SKR /to JPN : "
+                + "\tshortest-dist /from SKR /to JPN : "
                 + "Returns the shortest distance from SKR to JPN.\n"
 
                 + "\texit : Exits the program.");
