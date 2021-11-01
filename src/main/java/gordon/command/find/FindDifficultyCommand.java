@@ -30,7 +30,7 @@ public class FindDifficultyCommand extends Command {
         if (diffFilter.size() == 0) {
             System.out.println("GordonException: " + GordonException.NO_RESULT_FOUND);
         } else {
-            System.out.println("Searching by tags...");
+            System.out.println("Searching by difficulty...");
             for (int i = 0; i < diffFilter.size(); i++) {
                 System.out.println((i + 1) + ". " + namesInOrder.get(i)
                         + " (Difficulty: " + diffFilter.get(i).getDifficulty().name() + ")");
