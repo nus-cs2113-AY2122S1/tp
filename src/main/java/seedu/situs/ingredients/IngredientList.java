@@ -148,11 +148,15 @@ public class IngredientList {
         String subtractedIngredientName = currentGroup.getIngredientGroupName();
 
 
-        if (currentGroup.getTotalAmount() < subtractAmount) {
+        if (BigDecimal.valueOf(currentGroup.getTotalAmount()).compareTo(BigDecimal.valueOf(subtractAmount)) < 0) {
             throw new SitusException(INVALID_SUBTRACT);
         }
 
-        if (currentGroup.getTotalAmount() == subtractAmount) {
+        BigDecimal difference = BigDecimal.valueOf(currentGroup.getTotalAmount())
+                .subtract(BigDecimal.valueOf(subtractAmount));
+
+        // amounts less than 0.001 kg are taken to be 0
+        if (difference.compareTo(new BigDecimal("0.001")) < 0) {
             ingredientList.remove(groupNumber - 1);
             storage.writeIngredientsToMemory(ingredientList);
             return subtractedIngredientName;
@@ -169,16 +173,6 @@ public class IngredientList {
                 currentGroup.get(i + 1).setAmount(0.0);
             }
             i++;
-        }
-
-        i = 0;
-        // remove ingredients in group where amount is approx. 0
-        while (i < currentGroup.getIngredientGroupSize()) {
-            if (currentGroup.get(i + 1).getAmount() < 0.01) {
-                currentGroup.remove(i + 1);
-            } else {
-                i++;
-            }
         }
 
         storage.writeIngredientsToMemory(ingredientList);
@@ -202,7 +196,7 @@ public class IngredientList {
         removedIngredient = getIngredientGroup(groupNumber)
                 .remove(ingredientNumber);
 
-        if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
+        if (getIngredientGroup(groupNumber).getIngredientGroupSize() < 0.001) {
             ingredientList.remove(groupNumber - 1);
         }
 
