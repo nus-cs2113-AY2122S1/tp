@@ -16,8 +16,8 @@ public class ViewExpenditureTest {
         Category category = Category.GENERAL;
 
         RecordList currentExpenditureList = new RecordList(month);
-        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, category, false);
-        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date, category, false);
+        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, category);
+        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date, category);
         //currentExpenditureList.getExpenditureList(1, 2);
         assertEquals(2, currentExpenditureList.getExpenditureListSize());
     }

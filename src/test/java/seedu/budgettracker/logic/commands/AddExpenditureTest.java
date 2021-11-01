@@ -7,6 +7,7 @@ import seedu.budgettracker.data.records.Category;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddExpenditureTest {
 
@@ -19,7 +20,7 @@ public class AddExpenditureTest {
         Category category = Category.GENERAL;
 
         RecordList currentExpenditureList = new RecordList(month);
-        currentExpenditureList.addExpenditure(description, spending, date, category, false);
+        currentExpenditureList.addExpenditure(description, spending, date, category);
         assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }

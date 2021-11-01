@@ -229,7 +229,7 @@ public class TextUi {
     private static void printRecordList(AllRecordList records, int i, Category category) {
         String monthString = getMonth(i);
         double totalSpending = 0.0;
-        double currentMonthBudget = records.getBudget(i).getRawValue();
+        double currentMonthBudget = records.getBudget(i).getAmount();
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
@@ -268,7 +268,7 @@ public class TextUi {
                                          String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
-        if (list.getMonthListSize(month) > 0) {
+        if (list.getMonthNumberOfExpenditures(month) > 0) {
             System.out.printf("%-30.30s %-20.20s %-20.20s %-20.20s%n", "  Description", "| Amount",
                     "| Date ", "| Category");
             printEnumeratedExpenditureList(list.getExpenditureRecords(month), category);

@@ -17,8 +17,8 @@ public class DeleteExpenditureTest {
         Category category = Category.GENERAL;
 
         RecordList currentExpenditureList = new RecordList(month);
-        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, category, false);
-        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date, category,false);
+        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, category);
+        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date, category);
         currentExpenditureList.deleteExpenditure(1);
         assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }

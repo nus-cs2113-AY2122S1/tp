@@ -16,9 +16,6 @@ import java.util.Hashtable;
  * where month ranges from 1 to 12.
  */
 public class AllRecordList {
-    public static final String LS = System.lineSeparator();
-    private static final String DIVIDER = "========================================================";
-
     public static String storageDirectory;
     private final Hashtable<Integer, RecordList> allRecordList;
     protected int year;
@@ -77,7 +74,7 @@ public class AllRecordList {
                                       boolean isLoadingStorage) {
         int month = date.getMonthValue();
         Expenditure addedExpenditure = allRecordList.get(month)
-                .addExpenditure(description, amount, date, category, isLoadingStorage);
+                .addExpenditure(description, amount, date, category);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }
@@ -202,18 +199,18 @@ public class AllRecordList {
         return allRecordList.get(month).checkOverspending();
     }
 
-    public int getMonthListSize(int month) {
-        return allRecordList.get(month).getSize();
+    public int getMonthNumberOfExpenditures(int month) {
+        return allRecordList.get(month).getNumberOfExpenditures();
     }
 
     /**
-     * Get the total amount spent from expenditures of a month.
+     * Gets the total amount spent from expenditures of a month.
      *
      * @param month month to get the total amount spent
      * @return double amount spent during the specified month
      */
     public double getTotalAmountSpent(int month) {
-        return allRecordList.get(month).getTotalAmountSpent();
+        return allRecordList.get(month).getTotalAmountSpentOnExpenditures();
     }
 
     /**
@@ -221,7 +218,7 @@ public class AllRecordList {
      *
      * @param month month to get the amount spent
      * @param categoryString name of the category specified
-     * @return
+     * @return double Amount spent on the specified category in the specified month
      */
     public double getCategorySpending(int month, String categoryString) {
         return allRecordList.get(month).getCategorySpending(categoryString);
