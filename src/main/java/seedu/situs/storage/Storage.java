@@ -32,6 +32,9 @@ public class Storage {
     private static final String STOCK_THRESHOLD_CORRUPTED_MESSAGE = "Stock threshold data corrupted. "
             + "Setting to 1.0kg";
 
+    private static final String INGREDIENT_DATA_CORRUPTED_MESSAGE = "Exit to fix the ingredients.txt file, or continue"
+            + " by modifying the ingredient list,\n which will overwrite every content in the memory file.";
+
     private File dataFile;
     private File thresholdFile;
 
@@ -103,6 +106,11 @@ public class Storage {
 
             for (int i = 1; i < ingredientDetails.length; i++) {
                 String[] amountAndExpiry = ingredientDetails[i].split("%");
+
+                if (amountAndExpiry.length < 2) {
+                    throw new SitusException("Wrong ingredient format found!\n" + INGREDIENT_DATA_CORRUPTED_MESSAGE);
+                }
+
                 double ingredientAmount = Double.parseDouble(amountAndExpiry[0]);
                 LocalDate ingredientExpiry = Ingredient.stringToDate(amountAndExpiry[1]);
 
@@ -111,9 +119,9 @@ public class Storage {
 
             return ingredientGroup;
         } catch (NumberFormatException e) {
-            throw new SitusException("Wrong ingredient amount format!");
+            throw new SitusException("Wrong ingredient amount format!\n" + INGREDIENT_DATA_CORRUPTED_MESSAGE);
         } catch (DateTimeParseException e) {
-            throw new SitusException("Wrong expiry date format!");
+            throw new SitusException("Wrong expiry date format!\n" + INGREDIENT_DATA_CORRUPTED_MESSAGE);
         }
     }
 
