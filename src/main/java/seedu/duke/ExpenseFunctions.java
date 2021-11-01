@@ -29,7 +29,7 @@ public abstract class ExpenseFunctions {
             }
             Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
             String amountString = Storage.getScanner().nextLine().strip();
-            if (amountString.equalsIgnoreCase("-cancel")){
+            if (amountString.equalsIgnoreCase("-cancel")) {
                 throw new CancelException();
             } else if (checkAssignEqual(amountBeingPaid, amountString)) {
                 assignEqualAmounts(payer, expense, amountBeingPaid);
