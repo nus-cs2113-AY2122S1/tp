@@ -3,7 +3,7 @@ package seedu.duke.commons.core;
 import static seedu.duke.ui.Ui.PADDING;
 
 //@@author Roycius
-public class CommandFormats {
+public class CommandFormat {
     public static final String ADD_TASK_FORMAT =
             "add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}";
 
@@ -52,6 +52,12 @@ public class CommandFormats {
     public static final String EXIT_FORMAT =
             "exit";
 
+    /**
+     * Prompts the user regarding wrong formatting and suggests related commands.
+     *
+     * @param commandFormats the command formats to be suggested
+     * @return a string of the message to be printed
+     */
     public static String promptFormat(String... commandFormats) {
         StringBuilder s = new StringBuilder();
         s.append("Wrong format! Here are some possible related commands:");

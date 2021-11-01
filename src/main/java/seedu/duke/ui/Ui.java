@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import seedu.duke.Duke;
 import seedu.duke.DukeException;
-import seedu.duke.commons.core.CommandFormats;
+import seedu.duke.commons.core.CommandFormat;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.Module;
@@ -99,30 +99,30 @@ public class Ui {
                 + "Here are the list of commands that you can try.");
         System.out.print(SHORT_LINE);
 
-        System.out.println(PADDING + CommandFormats.ADD_TASK_FORMAT);
-        System.out.println(PADDING + CommandFormats.ADD_LESSON_FORMAT);
-        System.out.println(PADDING + CommandFormats.ADD_MODULE_FORMAT);
+        System.out.println(PADDING + CommandFormat.ADD_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.ADD_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.ADD_MODULE_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.LIST_TASK_FORMAT);
-        System.out.println(PADDING + CommandFormats.LIST_LESSON_FORMAT);
-        System.out.println(PADDING + CommandFormats.LIST_MODULE_FORMAT);
+        System.out.println(PADDING + CommandFormat.LIST_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.LIST_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.LIST_MODULE_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.DELETE_TASK_FORMAT);
-        System.out.println(PADDING + CommandFormats.DELETE_LESSON_FORMAT);
-        System.out.println(PADDING + CommandFormats.DELETE_MODULE_FORMAT);
+        System.out.println(PADDING + CommandFormat.DELETE_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.DELETE_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.DELETE_MODULE_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.DONE_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.DONE_TASK_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.FIND_TASK_FORMAT);
-        System.out.println(PADDING + CommandFormats.FIND_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.FIND_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.FIND_LESSON_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.MODULEINFO_FORMAT);
+        System.out.println(PADDING + CommandFormat.MODULEINFO_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.SET_GRADE_FORMAT);
+        System.out.println(PADDING + CommandFormat.SET_GRADE_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.LAUNCH_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.LAUNCH_LESSON_FORMAT);
 
-        System.out.println(PADDING + CommandFormats.EXIT_FORMAT);
+        System.out.println(PADDING + CommandFormat.EXIT_FORMAT);
 
         System.out.println();
         System.out.println(PADDING + "Notes: Square brackets -> [COMPULSORY_PARAMETER]");

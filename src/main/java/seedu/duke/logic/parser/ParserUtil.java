@@ -11,8 +11,8 @@ import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormats.ADD_TASK_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.promptFormat;
+import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.AddCommandParser.DEFAULT_PRIORITY;
 import static seedu.duke.logic.parser.AddCommandParser.EMPTY_INFORMATION;
 

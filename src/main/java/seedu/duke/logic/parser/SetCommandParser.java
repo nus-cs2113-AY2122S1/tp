@@ -6,8 +6,8 @@ import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.SetGradeCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormats.promptFormat;
-import static seedu.duke.commons.core.CommandFormats.SET_GRADE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
+import static seedu.duke.commons.core.CommandFormat.SET_GRADE_FORMAT;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 

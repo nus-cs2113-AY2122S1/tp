@@ -6,8 +6,8 @@ import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.LaunchLessonCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormats.LAUNCH_LESSON_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.promptFormat;
+import static seedu.duke.commons.core.CommandFormat.LAUNCH_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;

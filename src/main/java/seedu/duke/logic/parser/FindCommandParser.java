@@ -7,9 +7,9 @@ import seedu.duke.logic.commands.lesson.FindLessonCommand;
 import seedu.duke.logic.commands.task.FindTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormats.FIND_TASK_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.FIND_LESSON_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.promptFormat;
+import static seedu.duke.commons.core.CommandFormat.FIND_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.FIND_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 

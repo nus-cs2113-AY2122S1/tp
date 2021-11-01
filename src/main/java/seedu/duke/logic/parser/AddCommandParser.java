@@ -13,10 +13,10 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
 import static seedu.duke.commons.core.Priority.LOW;
-import static seedu.duke.commons.core.CommandFormats.ADD_TASK_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.ADD_LESSON_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.ADD_MODULE_FORMAT;
-import static seedu.duke.commons.core.CommandFormats.promptFormat;
+import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
 import static seedu.duke.logic.parser.ParserUtil.parseMeetingUrl;
