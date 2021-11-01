@@ -74,7 +74,7 @@ public class ArchiveCommand extends Command {
 
         String userInput = ui.getUserInput(PROMPT_WITHIN_COMMAND, true);
         String message;
-        if (userInput.equals(CONFIRM_VALUE)) {
+        if (userInput != null && userInput.equals(CONFIRM_VALUE)) {
             classList.deleteAllClasses();
             storage.save(classList);
 

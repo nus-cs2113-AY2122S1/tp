@@ -39,6 +39,9 @@ public class Taa {
         boolean isExit = false;
         do {
             String userInput = ui.getUserInput();
+            if (userInput == null) {
+                userInput = Command.COMMAND_EXIT;
+            }
 
             try {
                 Command command = Parser.parseUserInput(userInput);
