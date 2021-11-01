@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Parser {
@@ -134,14 +136,10 @@ public class Parser {
      * @return true if all valid, false otherwise
      */
     private static boolean isContainsInvalidCharacters(String stringToCheck) {
-        String validCharacters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789";
-        for (int i = 0; i < stringToCheck.length(); i++) {
-            char characterToCheck = stringToCheck.charAt(i);
-            if (!validCharacters.contains(Character.toString(characterToCheck))) {
-                return true;
-            }
-        }
-        return false;
+        String validCharacters = "^[0-9a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(validCharacters);
+        Matcher matcher = pattern.matcher(stringToCheck);
+        return !matcher.matches();
     }
 
     //@@author nishantrai-nus
