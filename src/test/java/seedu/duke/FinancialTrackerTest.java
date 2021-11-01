@@ -90,4 +90,22 @@ public class FinancialTrackerTest {
             testTracker.addExpense(new Expense("food", 50000000001.0, ExpenseCategory.FOOD));
         });
     }
+
+    @Test
+    public void addExpense_LargeExpenseValue_validTotalExpense() throws ExpenseOverflowException {
+        FinancialTracker testTracker = new FinancialTracker();
+        testTracker.addExpense(new Expense("food", 50000000000.0, ExpenseCategory.FOOD));
+        testTracker.addExpense(new Expense("food", 10.0, ExpenseCategory.FOOD));
+        testTracker.addExpense(new Expense("food", 5.0, ExpenseCategory.FOOD));        
+        assertEquals(50000000015.00, testTracker.getTotalExpense());
+    }
+
+    @Test
+    public void addIncome_LargeIncomeValue_validTotalIncome() throws IncomeOverflowException {
+        FinancialTracker testTracker = new FinancialTracker();
+        testTracker.addIncome(new Income("Income", 90000000000.0, IncomeCategory.SALARY));
+        testTracker.addIncome(new Income("Income", 9999999998.0, IncomeCategory.SALARY));
+        testTracker.addIncome(new Income("Income", 1, IncomeCategory.SALARY));
+        assertEquals(99999999999.00, testTracker.getTotalIncome());
+    }
 }

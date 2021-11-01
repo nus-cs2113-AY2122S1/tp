@@ -153,14 +153,11 @@ public class FinancialTracker {
      *
      * @return Total expense of all expenses in the financial tracker.
      */
-    public double getTotalExpense() throws ExpenseOverflowException {
+    public double getTotalExpense() {
         double totalExpense = 0;
         for (Expense expense : expenses) {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
-            if (totalExpense > TOTAL_EXPENSE_LIMIT) {
-                throw new ExpenseOverflowException(Messages.EXPENSE_OVERFLOW_ERROR);
-            }
         }
         assert totalExpense >= 0;
         return totalExpense;
@@ -179,14 +176,11 @@ public class FinancialTracker {
      *
      * @return Total income of all incomes in the financial tracker.
      */
-    public double getTotalIncome() throws IncomeOverflowException {
+    public double getTotalIncome() {
         double totalIncome = 0;
         for (Income income : incomes) {
             assert income.getValue() >= 0;
             totalIncome += income.getValue();
-            if (totalIncome > TOTAL_INCOME_LIMIT) {
-                throw new IncomeOverflowException(Messages.INCOME_OVERFLOW_ERROR);
-            }
         }
         assert totalIncome >= 0;
         return totalIncome;

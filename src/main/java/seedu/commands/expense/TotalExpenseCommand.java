@@ -9,13 +9,8 @@ import seedu.utility.Ui;
 public class TotalExpenseCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
-        try {
-            double totalExpense;
-            totalExpense = finances.getTotalExpense();
-            ui.printTotalExpense(totalExpense);
-        } catch (ExpenseOverflowException e) {
-            ui.printError(e.getMessage());
-        }
+        double totalExpense = finances.getTotalExpense();
+        ui.printTotalExpense(totalExpense);
         
     }
 }
