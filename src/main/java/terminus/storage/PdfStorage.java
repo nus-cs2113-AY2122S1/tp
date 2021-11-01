@@ -73,6 +73,9 @@ public class PdfStorage extends Storage {
     private void writeToPdf(Path pdfFile, ArrayList<Note> noteArrayList)
         throws InvalidFileException {
         try {
+            if (noteArrayList.isEmpty()) {
+                throw new Exception();
+            }
             Document tempDocument = new Document(new PdfDocument(new PdfWriter(pdfFile.toFile())));
             PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             for (Note note : noteArrayList) {
