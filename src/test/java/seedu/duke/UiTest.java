@@ -281,7 +281,7 @@ public class UiTest {
         testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
-
+    /*
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
         //empty financialtracker
@@ -316,7 +316,7 @@ public class UiTest {
 
         assertEquals(expectedOutput, outputToBeTested);
     }
-
+    */
     @Test
     public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
         String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
