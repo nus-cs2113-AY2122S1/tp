@@ -20,11 +20,11 @@ public class RemoveUniCommand extends Command {
         } else {
             assert universityToRemove.getName() != null;
             assert universitySelectedList.getSize() != 0;
+            System.out.println("This university is removed: ");
+            UiUniversity.printUniversity(universityToRemove, true);
             universitySelectedList.removeUniversity(universityToRemove.getName());
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
             storage.updateSelectedUniversityList(universitySelectedList);
-            System.out.println("This university is removed: ");
-            UiUniversity.printUniversity(universityToRemove, true);
         }
     }
 }

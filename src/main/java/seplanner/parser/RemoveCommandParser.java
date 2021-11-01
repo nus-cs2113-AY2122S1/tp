@@ -74,7 +74,7 @@ public class RemoveCommandParser {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
-            university = new University(uniName, new ArrayList<>(), universityMasterList);
+            university = universitySelectedList.getUniversity(uniName);
         } else {
             try {
                 uniIndex = Integer.parseInt(arguments);
@@ -87,7 +87,8 @@ public class RemoveCommandParser {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
-            university = new University(uniName, new ArrayList<>(), uniIndex);
+            university = universitySelectedList.getUniversity(uniName);
+
         }
         // Check if university has been added already
         if (!universitySelectedList.searchUniversity(uniName)) {
