@@ -31,7 +31,7 @@ public class IngredientGroup {
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
-        this.totalAmount = 0.0;
+        this.totalAmount = 0.000;
     }
 
     /**
@@ -124,7 +124,7 @@ public class IngredientGroup {
             }
         }
 
-        return groupName + " | Total Amount: " + String.format("%.1f", totalAmount) + " kg"
+        return groupName + " | Total Amount: " + String.format("%.3f", totalAmount) + " kg"
                 + '\n' + printedGroup;
     }
 

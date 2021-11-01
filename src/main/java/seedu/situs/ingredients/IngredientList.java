@@ -1,10 +1,12 @@
 package seedu.situs.ingredients;
 
 import seedu.situs.Situs;
+import seedu.situs.command.DeleteCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -151,7 +153,9 @@ public class IngredientList {
                 throw new SitusException(INVALID_SUBTRACT);
             }
 
-            if (currentGroup.getTotalAmount() == subtractAmount) {
+            BigDecimal difference = BigDecimal.valueOf(currentGroup.getTotalAmount())
+                    .subtract(BigDecimal.valueOf(subtractAmount));
+            if (difference.compareTo(new BigDecimal("0.001")) < 0) {
                 ingredientList.remove(ingredientIndex);
                 storage.writeIngredientsToMemory(ingredientList);
                 return;
@@ -159,26 +163,26 @@ public class IngredientList {
 
             currentGroup.subtractFromTotalAmount(subtractAmount);
 
-            while (subtractAmount != 0.0) {
+            while (subtractAmount > 0.000) {
                 if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
                     currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
-                    subtractAmount = 0.0;
+                    subtractAmount = 0.000;
                 } else {
                     subtractAmount -= currentGroup.get(i + 1).getAmount();
-                    currentGroup.get(i + 1).setAmount(0.0);
+                    currentGroup.get(i + 1).setAmount(0.000);
                 }
                 i++;
             }
 
             i = 0;
             // remove ingredients in group where amount is approx. 0
-            while (i < currentGroup.getIngredientGroupSize()) {
-                if (currentGroup.get(i + 1).getAmount() < 0.01) {
-                    currentGroup.remove(i + 1);
-                } else {
-                    i++;
-                }
-            }
+//            while (i < currentGroup.getIngredientGroupSize()) {
+//                if (BigDecimal.valueOf(currentGroup.get(i + 1).getAmount()).compareTo(new BigDecimal("0.001")) < 0) {
+//                    currentGroup.remove(i + 1);
+//                } else {
+//                    i++;
+//                }
+//            }
 
             storage.writeIngredientsToMemory(ingredientList);
 
@@ -204,7 +208,7 @@ public class IngredientList {
         removedIngredient = getIngredientGroup(groupNumber)
                 .remove(ingredientNumber);
 
-        if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
+        if (getIngredientGroup(groupNumber).getIngredientGroupSize() < 0.001) {
             ingredientList.remove(groupNumber - 1);
         }
 
