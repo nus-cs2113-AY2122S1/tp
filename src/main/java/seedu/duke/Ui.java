@@ -31,13 +31,13 @@ public class Ui {
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
         return Storage.getOpenTrip().getForeignCurrency() + " "
-                + Storage.getOpenTrip().getForeignCurrencySymbol()
+                //+ Storage.getOpenTrip().getForeignCurrencySymbol()
                 + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
     }
 
     public static String stringRepaymentMoney(double val) {
         return Storage.getOpenTrip().getRepaymentCurrency() + " "
-                + Storage.getOpenTrip().getRepaymentCurrencySymbol()
+                //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
                 + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                 val / Storage.getOpenTrip().getExchangeRate());
     }
@@ -127,6 +127,10 @@ public class Ui {
                 + "Please enter the date again: ");
     }
 
+    public static void printIsoFormatError() {
+        System.out.print("Please re-enter your currency ISO (e.g. JPY, USD): ");
+    }
+
     public static void printUnknownCommandError() {
         System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter help "
                 + "to learn more.");
@@ -180,9 +184,8 @@ public class Ui {
     }
 
     public static void printNoOpenTripError() {
-        System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        System.out.println("You have not opened any trip yet. Please open a trip to proceed further.");
         printAllTrips();
-        System.out.print("Please enter the trip you would like to open: ");
     }
 
     public static void printAllTrips() {
@@ -224,7 +227,10 @@ public class Ui {
     }
 
     public static void invalidArgForAmount() {
-        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. Please try again.");
+        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. "
+                + System.lineSeparator()
+                + "Please format as follows: "
+                + "amount [person].");
         System.out.println("These are the people involved in this trip:");
         Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
         System.out.println();
@@ -414,6 +420,17 @@ public class Ui {
     public static void changeLocationSuccessful(Trip tripToEdit, String original) {
         System.out.println("The location of your trip has been changed from "
                 + original + " to " + tripToEdit.getLocation());
+    }
+
+    public static void printCouldNotSaveMessage() {
+        System.out.println("Sorry, there was an error saving your data. We'll try to save your data again"
+                + "the next time you enter a command.");
+    }
+
+    public static void printFileLoadedSuccessfully() {
+        System.out.println();
+        System.out.println("Your saved data was successfully loaded!");
+        System.out.println();
     }
 
 }

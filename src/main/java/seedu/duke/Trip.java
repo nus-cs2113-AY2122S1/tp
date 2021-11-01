@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 
+import static seedu.duke.Parser.isNumeric;
+
 public class Trip {
 
     private LocalDate dateOfTrip;
@@ -24,6 +26,12 @@ public class Trip {
     private String repaymentCurrencySymbol = "$";
     private String location;
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final int ISO_LENGTH = 3;
+    private static final String CATEGORY = "category";
+    private static final String DESCRIPTION = "description";
+    private static final String PAYER = "payer";
+    private static final String PERSON = "person";
+    private static final String DATE = "date";
 
     /**
      * Empty {@link Trip} constructor (included for legacy test support).
@@ -55,19 +63,19 @@ public class Trip {
         }
         try {
             switch (expenseCategory) {
-            case "category":
+            case CATEGORY:
                 findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "description":
+            case DESCRIPTION:
                 findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "payer":
+            case PAYER:
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "person":
+            case PERSON:
                 findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "date":
+            case DATE:
                 findMatchingDateExpenses(listOfExpenses, expenseAttribute);
                 break;
             default:
@@ -80,6 +88,7 @@ public class Trip {
         }
 
     }
+    //@@author
 
     //@@author lixiyuan416
     private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
@@ -102,6 +111,7 @@ public class Trip {
     }
     //@@author
 
+    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
@@ -190,7 +200,7 @@ public class Trip {
     public void getIndividualExpenseSummary(Person person) {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
-        double totalRepaymentAmountSpent = 0;
+        double totalAmountSpentInLocalCurrency = 0;
         Trip currTrip = Storage.getOpenTrip();
         int expensesInvolved = 0; //num of expenses involved
         HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
@@ -209,17 +219,14 @@ public class Trip {
                 }
             }
         }
-        // To resolve rounding error
-        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
-            totalRepaymentAmountSpent += Storage.formatRepaymentMoneyDouble(
-                    set.getValue() / currTrip.getExchangeRate());
-        }
+        totalAmountSpentInLocalCurrency = roundToLocal(totalAmountSpentInLocalCurrency, currTrip, categoriesSplit);
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
-                + " (" + currTrip.getRepaymentCurrency() + " " + currTrip.getRepaymentCurrencySymbol()
-                + String.format(currTrip.getRepaymentCurrencyFormat(), totalRepaymentAmountSpent) + ") on "
+                + " (" + currTrip.getRepaymentCurrency() + " "
+                //+ currTrip.getRepaymentCurrencySymbol()
+                + String.format(currTrip.getRepaymentCurrencyFormat(), totalAmountSpentInLocalCurrency) + ") on "
                 + expensesInvolved
-                + " expenses on the following categories: ");
+                + " expenses on the following categories:");
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
                     + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");
@@ -227,8 +234,25 @@ public class Trip {
     }
 
     /**
-     * Returns true if personsList contains a person with a specific name
-     * This is to replace the list.contains() method due to bugs with json deserialization
+     * Helper method for getIndividualExpenseSummary() method.
+     * Returns the rounded and formatted total repayment amount spent.
+     * @param totalAmount the amount before rounding
+     * @param currTrip the Trip the user is in/computing
+     * @param categoriesSplit the HashMap containing the category and the amount spent on said category
+     * @return a rounded and formatted value for amount spent in local currency
+     */
+    private double roundToLocal(double totalAmount, Trip currTrip, HashMap<String, Double> categoriesSplit) {
+        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
+            totalAmount += Storage.formatRepaymentMoneyDouble(
+                    set.getValue() / currTrip.getExchangeRate());
+        }
+        return totalAmount;
+    }
+
+    /**
+     * Returns true if personsList contains a person with a specific name.
+     * This is to replace the list.contains() method due to bugs with json deserialization.
+     *
      * @param personsList list of persons to check
      * @param name the name to check for
      * @return true if personsList contains a person with a specific name
@@ -248,6 +272,11 @@ public class Trip {
         return dateOfTrip;
     }
 
+    /**
+     * Returns the {@link LocalDate} object as a formatted string (with the format dd MMMM yy).
+     *
+     * @return the formatted date as a {@link String}.
+     */
     public String getDateOfTripString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return getDateOfTrip().format(pattern);
@@ -303,13 +332,26 @@ public class Trip {
     public String getForeignCurrency() {
         return foreignCurrency;
     }
+    //@@author
 
+    //@@author itsleeqian
     public void setForeignCurrency(String foreignCurrency) {
-        this.foreignCurrency = foreignCurrency;
-        setForeignCurrencyFormat(this.foreignCurrency);
-        setForeignCurrencySymbol(this.foreignCurrency);
+        try {
+            if (isNumeric(foreignCurrency) || foreignCurrency.length() != ISO_LENGTH) {
+                throw new NumberFormatException();
+            }
+            this.foreignCurrency = foreignCurrency;
+            setForeignCurrencyFormat(this.foreignCurrency);
+            setForeignCurrencySymbol(this.foreignCurrency);
+        } catch (NumberFormatException e) {
+            Ui.printIsoFormatError();
+            Scanner scanner = Storage.getScanner();
+            setForeignCurrency(scanner.nextLine().strip());
+        }
     }
+    //@@author
 
+    //@@author joshualeeky
     private void setForeignCurrencyFormat(String input) {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
@@ -322,7 +364,7 @@ public class Trip {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
-            this.foreignCurrencySymbol = "";
+            this.foreignCurrencySymbol = "$";
         }
     }
 
@@ -368,8 +410,8 @@ public class Trip {
             this.repaymentCurrencySymbol = "";
         }
     }
-
     //@@author
+
     public String getLocation() {
         return this.location;
     }

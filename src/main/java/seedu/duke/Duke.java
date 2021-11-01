@@ -9,6 +9,10 @@ public class Duke {
 
     private static boolean isProgramRunning = true;
 
+    /**
+     * Prints the welcome message and initializes {@link Scanner}, {@link Logger}, and {@link com.google.gson.Gson},
+     * and reads the user's save file.
+     */
     private static void beginWelcome() {
 
         Ui.printWelcome();
@@ -21,7 +25,7 @@ public class Duke {
         Storage.setLogger(logger);
 
         FileStorage.initializeGson();
-        Storage.readFromFile();
+        Storage.readFromFile(Storage.FILE_PATH);
 
     }
 
@@ -46,9 +50,10 @@ public class Duke {
         while (isProgramRunning) {
             isProgramRunning = Parser.parseUserInput(readUserInput(Storage.getScanner()));
             try {
-                Storage.writeToFile();
+                Storage.writeToFile(Storage.FILE_PATH);
             } catch (IOException e) {
-                e.printStackTrace();
+                Ui.printCouldNotSaveMessage();
+                //e.printStackTrace();
             }
         }
 

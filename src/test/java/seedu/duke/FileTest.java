@@ -30,12 +30,12 @@ class FileTest {
         Storage.setListOfTrips(listOfTrips);
         FileStorage.initializeGson();
         Storage.setLogger(Logger.getLogger("logger"));
-        Storage.createNewFile();
-        Storage.writeToFile();
+        Storage.createNewFile(Storage.FILE_PATH);
+        Storage.writeToFile(Storage.FILE_PATH);
     }
 
     @Test
-    void testRegularFile() throws FileNotFoundException {
+    void testRegularFileReadDirect() throws FileNotFoundException {
         File file = new File("trips.json");
         assertTrue(file.canRead());
         String jsonString = FileStorage.readFromFile("trips.json");
@@ -49,13 +49,20 @@ class FileTest {
     }
 
     @Test
-    void testNoFile() {
+    void testRegularFileRead() {
+        Storage.readFromFile("trips.json");
+        assertNotNull(Storage.getListOfTrips());
+        assertFalse(Storage.getListOfTrips().isEmpty());
+    }
+
+    @Test
+    void testNoFileDuringReadDirect() {
         assertThrows(FileNotFoundException.class, () ->
                 FileStorage.readFromFile("randomfile.json"));
     }
 
     @Test
-    void testEmptyFile() {
+    void testReadEmptyFileDirect() {
         try {
             FileStorage.newBlankFile("tripsempty.json");
         } catch (IOException e) {
@@ -65,9 +72,21 @@ class FileTest {
                 FileStorage.readFromFile("tripsempty.json"));
     }
 
-    //@Test
-    //void testCorruptedFile() {
-    //    assertThrows(JsonParseException.class, () ->
-    //            FileStorage.readFromFile("tripscorrupted.json"));
-    //}
+    @Test
+    void testReadCorruptedFile() {
+        assertThrows(JsonParseException.class, () -> {
+            String jsonString = FileStorage.readFromFile("tripscorrupted.json");
+            Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
+            FileStorage.getGson().fromJson(jsonString, tripType);
+        });
+    }
+
+    @Test
+    void testWriteFile() throws IOException {
+        Storage.readFromFile("tripsextra.json");
+        Storage.writeToFile("trips.json");
+        String jsonString = FileStorage.readFromFile("trips.json");
+        assertFalse(jsonString.isBlank());
+    }
+
 }
