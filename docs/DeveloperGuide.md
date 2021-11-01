@@ -6,6 +6,7 @@
   - [Storage Component](#storage-component)
   - [Command Component](#command-component)
   - [Command Manager Component](#commandmanager-component)
+- [Logging](#logging)
 - [Product Scope](#product-scope)
   - [Target User Profile](#target-user-profile)
   - [Value Proposition](#value-proposition)
@@ -192,7 +193,7 @@ __Note:__
 
 In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
 
-##Logging
+## Logging
 
 * [Logger Guide](Logging.md)
 
