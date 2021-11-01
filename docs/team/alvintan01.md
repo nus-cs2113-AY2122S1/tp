@@ -106,11 +106,19 @@ v2.1 tasks:
 
 - [Developer Guide](../DeveloperGuide.md)
   - Design
-    - Main application logic and explanation [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)]
-    - Validator class diagram and explanation [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
-    - Inventory class diagram and explanation [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
+    - Main application logic and explanation. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)]
+    - Validator class diagram and explanation. [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
+    - Inventory class diagram and explanation. [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
   - Sections on `list` and `receiveorder` and their respective sequence diagrams. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)], [[#223](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/223)]
+
+### Contributions to team-based tasks
+- Setting up the GitHub team org/repo.
+- Assigning user stories to team members.
+- Maintaining [Trello](https://trello.com/b/nMVm0vgz/cs2113t-user-stories) dashboard.
+- Hosting weekly team meetings.
+- Release management.
+- Ensured UG and DG has a consistent format.
 
 ### Community
 
-- Pull Requests reviewed with non-trivial review comments [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)], [[#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143)], [[#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
+- Pull Requests reviewed with non-trivial review comments. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)], [[#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143)], [[#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
