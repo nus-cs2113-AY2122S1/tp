@@ -54,6 +54,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -150,6 +152,10 @@ public class Parser {
     private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
     private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
 
+    public static final List<String> multiplePartCommands = Arrays.asList(ADD_EXPENSE_KEYWORD, ADD_INCOME_KEYWORD,
+            DELETE_EXPENSE_KEYWORD, DELETE_INCOME_KEYWORD, FIND_KEYWORD, EXPENSE_RANGE_KEYWORD, INCOME_RANGE_KEYWORD,
+            SET_BUDGET_KEYWORD, SET_THRESHOLD_KEYWORD, CONVERT_CURRENCY_KEYWORD, CHECK_BUDGET_KEYWORD);
+    
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
@@ -182,6 +188,11 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
+        if (multiplePartCommands.contains(commandWord) && arguments.isEmpty()) {
+            return new InvalidCommand(Messages.MISSING_PARAMETERS_MESSAGE);
+        }
+        
+        
         if (isExpenseRelatedCommand(commandWord)) {
             return prepareExpenseRelatedCommand(commandWord, arguments);
         } else if (isIncomeRelatedCommand(commandWord)) {

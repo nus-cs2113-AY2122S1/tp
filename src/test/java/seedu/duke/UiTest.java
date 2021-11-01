@@ -146,7 +146,7 @@ public class UiTest {
                 + "Your current balance is: $2018.27" + newLine
                 + SEPARATOR_LINE;
         
-        testUI.printBalance(financialTracker.getBalance());
+        testUI.printBalance(financialTracker.calculateBalance());
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -281,7 +281,7 @@ public class UiTest {
         testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
-    /*
+    
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
         //empty financialtracker
@@ -290,8 +290,8 @@ public class UiTest {
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
-                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
-                + "x   Current month ( MONTH ) total income:  $0.00                                 o is Income       x"
+                + "x   Current month total expense: $0.00                                # is Expense      x"
+                + "x   Current month total income: $0.00                                 o is Income       x"
                 + "x   Your Yearly Report                                                                             x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
@@ -312,11 +312,11 @@ public class UiTest {
 
         String fullOutput = outputStreamCaptor.toString().trim();
         String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
-        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("\\(.*?\\)","( MONTH )");
+        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("h.*?t","h t");
 
         assertEquals(expectedOutput, outputToBeTested);
     }
-    */
+    
     @Test
     public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
         String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine

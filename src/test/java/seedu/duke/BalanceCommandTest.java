@@ -20,6 +20,6 @@ public class BalanceCommandTest {
         Expense testExpense = new Expense("Burger", 500.00, ExpenseCategory.FOOD);
         testTracker.addIncome(testIncome);
         testTracker.addExpense(testExpense);
-        assertEquals(-100.00, testTracker.getBalance());
+        assertEquals(-100.00, testTracker.calculateBalance());
     }
 }

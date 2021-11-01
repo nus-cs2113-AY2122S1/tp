@@ -6,7 +6,7 @@
 
 Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
-- sets/adjusts your spending limits
+- set/adjust your spending limits
 - provide you with helpful financial tips and insights
 
 It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
@@ -179,7 +179,7 @@ Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command `del_ex i/1` is given, you get the following message:
+When command <code>del_ex i/1</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
@@ -441,6 +441,17 @@ Below is a list of all your findings!
 4: [E] bought condo - $87654888878.00 (18/05/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
+If you wish to search based on value, for e.g. all entries that contain the value <code>5</code>:
+<ul><li>Give the command <code>find 5</code> and it will return the following:</li></ul>
+<pre>
+-----------------------------------------------------------------------------------------------------
+Below is a list of all your findings!
+-----------------------------------------------------------------------------------------------------
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought condo - $87654888878.00 (18/05/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
 </details>
 <br>
 
@@ -601,7 +612,7 @@ Format: `set_threshold t/THRESHOLD`
 
 Examples:
 
-- `set_budget t/0.2` sets the threshold value of all budget categories to 80%.
+- `set_threshold t/0.2` sets the threshold value of all budget categories to 80%.
 
 <details>
 <summary> Expected output in run window </summary>

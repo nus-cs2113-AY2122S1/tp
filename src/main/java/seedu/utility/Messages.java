@@ -66,6 +66,8 @@ public class Messages {
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
     public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
+    public static final String MISSING_PARAMETERS_MESSAGE = "Missing parameters! Use help to view commands again!";
+    
     public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money."
             + "Are you sure you have spent that much?";
     public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
