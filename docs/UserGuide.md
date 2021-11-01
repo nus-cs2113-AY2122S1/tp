@@ -41,11 +41,9 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run
-   `java -jar unimods.jar`.
-
-3. Copy the file to the folder you want to use as the home folder for your Unimods.
-4. Double-click the file to start the app.
+2. Download the latest **unimods.jar** and local data from here.
+3. Copy the files to the folder you want to use as the home folder for your Unimods.
+4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
 
    Some example commands you can try:
@@ -170,26 +168,38 @@ GEH1011 Film and History 4MC
 :
 ```
 
+If you wish to cancel your search, hit `ENTER`.
+
 You can also apply the following flags to refine the search:
 
-- **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
+- **-l (small L) :** search for mods matching the level specified e.g `-l 3000` 
 - **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
 - **-s :** search for mods offered in the semester e.g. `-s 2`
   (:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
-- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`
-- **-f :** search for mods from a faculty e.g `-f Computing`
-- **-d :** search for mods from a department `-d Computer Science`
+- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`. Defaults to false if 
+input is invalid.
+- **-f :** search for mods from a faculty e.g `-f Computing`. Checks if faculty contains keyword.
+- **-d :** search for mods from a department `-d Computer Science`. Checks if faculty contains keyword.
 - **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
-  very quick e.g. `-q`
+very quick e.g. `-q`. Note that local search cannot be cancelled.
 
 :information_source: Command, search term and flag regex are case insensitive.
 
-:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be
-ignored.
+:information_source: Search keyword is only for the module code. Searching for the title of a module is currently 
+unsupported.
+
+:information_source: If text is not displaying correctly (Mojibake), running `chcp 65001` or `chcp.com 65001` from your 
+CLI should resolve some issues.
+
+:warning: Flags are **NOT** case insensitive. Inputting an invalid flag will print an error message.
 
 :warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every
 single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform
 them with the -q flag, which will execute in a matter of seconds.
+
+:warning: Local search is dependent on local data. If certain modules cannot be found offline, it is likely that you do
+not have the local data, or your local data is outdated. Please do run `update`, or `search` for that
+module online.
 
 <br>
 
@@ -197,7 +207,10 @@ them with the -q flag, which will execute in a matter of seconds.
 
 Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a good
 WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
-waiting!
+waiting! 
+
+Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit 
+`ENTER` to cancel it!
 
 :information_source: Command is case insensitive.
 
@@ -392,7 +405,7 @@ __________________________________________________________________________
 
 ## View Unofficial Transcript : `transcript`
 
-You can view your Unofficial Transcript to get an idea of your degree progress.This will disaply the modules you have
+You can view your Unofficial Transcript to get an idea of your degree progress.This will display the modules you have
 completed and their corresponding grades. The total number of credits completed and the CAP will also be displayed.
 
 You can type `transcript` to view your Unofficial Transcript.
@@ -433,10 +446,12 @@ __________________________________________________________________________
 
 # FAQ
 
-**Q**: How do I save my timetable so I don’t have to add all my modules again?</br>
+**Q**: How do I save my timetable so I don’t have to add all my modules again?
+<br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
-**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?</br>
+**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?
+<br>
 **A**: Stay tuned for v2.0!
 
 <br>
@@ -447,13 +462,13 @@ __________________________________________________________________________
 
 | Command                   | Meaning                                                                                           |
 | --------------            | ----------                                                                                        |
-| `help`                    | Shows available commands and flags. </br> Example: `help`                                         |
+| `help`                    | Shows available commands and flags. <br> Example: `help`                                         |
 | `search <KEYWORDd> [-l]`  | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
-| `show <MODULE_CODE>`      | Display relevant module information. </br> Example: `show CS2113T`                                |
-| `add <MODULE_CODE>`       | Adds the module to the timetable. </br> Example: `add CS2113T`                                    |
-| `delete <MODULE_CODE>`    | Deletes the module from the timetable. </br> Example: `delete CS2113T`                            |
-| `clear`                   | Deletes all modules from the timetable. </br> Example: `clear`                                    |
-| `timetable`               | Displays timetable with total MCs taken. </br> Example: `timetable`                               |
-| `exit`                    | Exit the application. </br> Example:`exit`                                                        |
+| `show <MODULE_CODE>`      | Display relevant module information. <br> Example: `show CS2113T`                                |
+| `add <MODULE_CODE>`       | Adds the module to the timetable. <br> Example: `add CS2113T`                                    |
+| `delete <MODULE_CODE>`    | Deletes the module from the timetable. <br> Example: `delete CS2113T`                            |
+| `clear`                   | Deletes all modules from the timetable. <br> Example: `clear`                                    |
+| `timetable`               | Displays timetable with total MCs taken. <br> Example: `timetable`                               |
+| `exit`                    | Exit the application. <br> Example:`exit`                                                        |
 
 ---

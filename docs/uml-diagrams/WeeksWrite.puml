@@ -6,8 +6,6 @@ activate WeeksAdapterFactory
 WeeksAdapterFactory -> WeeksAdapter** : create()
 activate WeeksAdapter
 
-<-- WeeksAdapterFactory
-deactivate WeeksAdapterFactory
 
 alt weeks != null
     WeeksAdapter -> WeeksAdapter : writeAsIntArray()
@@ -21,7 +19,11 @@ else else
     deactivate WeeksAdapter
 end
 
-<-- WeeksAdapter
+WeeksAdapter --> WeeksAdapterFactory
 deactivate WeeksAdapter
+destroy WeeksAdapter
+
+<-- WeeksAdapterFactory
+deactivate WeeksAdapterFactory
 
 @enduml
