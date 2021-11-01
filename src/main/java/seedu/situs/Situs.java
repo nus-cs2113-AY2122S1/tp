@@ -1,6 +1,7 @@
 package seedu.situs;
 
-import seedu.situs.command.AlertCommand;
+import seedu.situs.command.AlertExpiringSoonCommand;
+import seedu.situs.command.AlertLowStockCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.localtime.CurrentDate;
 import seedu.situs.parser.Parser;
@@ -25,9 +26,14 @@ public class Situs {
         ui = new UI();
 
         try {
-            ui.printCommandOutput(new AlertCommand().run());
+            UI.printCommandOutput(new AlertExpiringSoonCommand().run());
         } catch (SitusException e) {
-            ui.printCommandOutput(e.getMessage());
+            UI.printCommandOutput(e.getMessage());
+        }
+        try {
+            UI.printCommandOutputWithoutTopDivider(new AlertLowStockCommand().run());
+        } catch (SitusException e) {
+            UI.printCommandOutputWithoutTopDivider(e.getMessage());
         }
 
         LogManager.getLogManager().reset();
@@ -42,7 +48,7 @@ public class Situs {
      * Prints the exit message, then closes the program.
      */
     public static void exit() {
-        ui.printGoodbye();
+        UI.printGoodbye();
         LOGGER.log(Level.INFO, "Program exited");
         System.exit(0);
     }
@@ -79,7 +85,7 @@ public class Situs {
             isExit = Parser.isExit(command);
 
             if (!isExit) {
-                ui.printCommandOutput(resultMsg);
+                UI.printCommandOutput(resultMsg);
             }
         }
     }
