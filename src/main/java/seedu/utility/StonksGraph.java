@@ -4,13 +4,13 @@ package seedu.utility;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StonksGraph {
     private static final int ROWS = 20;
     private static final int COLS = 100;
     private static final int ROWS_OFFSET = ROWS - 1;
     private static final int COLS_OFFSET = COLS - 1;
-    private static final int BAR_VALUE = 200;
     private static final char INCOME_BAR = 'o';
     private static final char EXPENSE_BAR = '#';
     private static final char X_AXIS_CHAR = '~';
@@ -266,12 +266,20 @@ public class StonksGraph {
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(currentYear());
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(currentYear());
+        
+        ArrayList<Double> values = new ArrayList<>();
+        values.addAll(monthlyExpenseBreakdowns);
+        values.addAll(monthlyIncomeBreakdowns);
+        double max = Collections.max(values);
+        int barValue = (int)max/10;
+
+
         drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
                 int monthIndex = getMonth(y) - 1;
-                int noOfIncomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
-                int noOfExpenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
+                int noOfIncomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / barValue);
+                int noOfExpenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / barValue);
                 drawBar(x, y, noOfIncomeBar, noOfExpenseBar);
             }
         }
