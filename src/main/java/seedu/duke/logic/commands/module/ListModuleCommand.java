@@ -23,14 +23,10 @@ public class ListModuleCommand extends Command {
             throws DukeException, IOException {
         if (moduleList.isEmpty()) {
             ui.printMessage("There are no modules in the list.");
-        } else {
-            assert (argument.equalsIgnoreCase("verbose") | argument.isEmpty())
-                    : "list module command currently only accepts empty, \"verbose\"";
-            if (argument.equalsIgnoreCase("verbose")) {
-                ui.printModulesWithDetails(moduleList);
-            } else {
-                ui.printModuleList(moduleList);
-            }
+        } else if (argument.equalsIgnoreCase("verbose")) {
+            ui.printModulesWithDetails(moduleList);
+        } else if (argument.isEmpty()) {
+            ui.printModuleList(moduleList);
         }
     }
 }

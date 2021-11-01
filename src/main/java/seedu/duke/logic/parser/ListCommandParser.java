@@ -70,7 +70,7 @@ public class ListCommandParser {
     //@@author Roycius
     private static Command parseListModuleCommand(String userResponse) throws ParseException {
         if (!userResponse.isBlank() && !isVerbose(userResponse)) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(Messages.ERROR_INVALID_LIST_ARGUMENT);
         }
 
         return new ListModuleCommand(userResponse.toLowerCase());
