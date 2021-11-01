@@ -11,8 +11,7 @@ public class UI {
     private static final String WELCOME_MESSAGE = DIVIDER
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
-            + "To see what I can do, use \"help\"\n"
-            + DIVIDER;
+            + "To see what I can do, use \"help\"\n";
     private static final String GOODBYE_MESSAGE = DIVIDER + "Okay, see you soon! Goodbye.\n" + DIVIDER;
 
 

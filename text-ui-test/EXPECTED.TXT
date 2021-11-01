@@ -3,8 +3,9 @@ Welcome to SITUS!
 What would you like to do first?
 To see what I can do, use "help"
 ____________________________________________________
-____________________________________________________
-No expiring ingredients in 5 days time
+No ingredients expiring by 06/11/2021
+
+No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ____________________________________________________
 Okay, see you soon! Goodbye.

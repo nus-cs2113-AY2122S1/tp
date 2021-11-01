@@ -1,10 +1,12 @@
 package seedu.situs.ingredients;
 
 import seedu.situs.Situs;
+import seedu.situs.command.DeleteCommand;
 import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -144,6 +146,7 @@ public class IngredientList {
         int i = 0;
         IngredientGroup currentGroup = getIngredientGroup(groupNumber);
         String subtractedIngredientName = currentGroup.getIngredientGroupName();
+
 
         if (currentGroup.getTotalAmount() < subtractAmount) {
             throw new SitusException(INVALID_SUBTRACT);

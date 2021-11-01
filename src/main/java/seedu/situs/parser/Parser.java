@@ -46,6 +46,8 @@ public class Parser {
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
+    private static final String INVALID_INDEX_MESSAGE = "The index given is in an incorrect format!\n"
+            + "The index MUST be of the form: X.Y (e.g. 1.1, 2.3, etc.)";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String INCORRECT_PARAMETER_FORMAT_MESSAGE = "The parameter format is wrong!";
@@ -115,7 +117,7 @@ public class Parser {
         case COMMAND_EXPIRE:
             return parseExpireCommand(command);
         case COMMAND_FIND:
-            return parseFindCommand(command);
+            return parseAndRunFindCommand(command);
         case COMMAND_ALERTS:
             return parseAlertsCommand(command);
         case COMMAND_SET_THRESHOLD:
@@ -135,7 +137,7 @@ public class Parser {
      * @param stringToCheck The string to check
      * @return true if all valid, false otherwise
      */
-    private static boolean isContainsInvalidCharacters(String stringToCheck) {
+    private static boolean containsInvalidCharacters(String stringToCheck) {
         String validCharacters = "^[0-9a-zA-Z]+$";
         Pattern pattern = Pattern.compile(validCharacters);
         Matcher matcher = pattern.matcher(stringToCheck);
@@ -151,18 +153,19 @@ public class Parser {
      * @return Search results for entered keywords
      * @throws SitusException If no keywords are entered
      */
-    private static String parseFindCommand(String command) throws SitusException {
-        String[] keywords = command.trim().substring(COMMAND_FIND.length()).split(SPACE_SEPARATOR);
+    private static String parseAndRunFindCommand(String command) throws SitusException {
+        String parsedCommand = command.substring(COMMAND_FIND.length()).trim();
+        String[] keywords = parsedCommand.split(SPACE_SEPARATOR);
         Set<String> keywordsUnique = new HashSet<>();
 
         assert (keywords != null);
 
-        for (int i = 1; i < keywords.length; i++) {
+        for (int i = 0; i < keywords.length; i++) {
             if (keywords[i].isEmpty()) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
             keywords[i] = keywords[i].trim();
-            if (isContainsInvalidCharacters(keywords[i])) {
+            if (containsInvalidCharacters(keywords[i])) {
                 throw new SitusException(INVALID_CHARACTERS_FIND_MESSAGE);
             }
             keywordsUnique.add(keywords[i]);
@@ -170,7 +173,7 @@ public class Parser {
 
         String resultMsg = "";
         for (String keyword : keywordsUnique) {
-            if (resultMsg != "") {
+            if (!resultMsg.isEmpty()) {
                 resultMsg += "\n";
             }
             resultMsg += new FindCommand(keyword).run();
@@ -196,13 +199,17 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws SitusException {
-        String[] details = command.substring(COMMAND_UPDATE.length()).trim().split(UPDATE_DELIM);
-
+        String parsedCommand = command.substring(COMMAND_UPDATE.length()).trim();
+        String[] details = parsedCommand.split(UPDATE_DELIM);
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
+
+        if (!details[0].contains(".")) {
+            throw new SitusException(INVALID_INDEX_MESSAGE);
+        }
 
         for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
@@ -227,9 +234,8 @@ public class Parser {
             } else if (newAmount == 0) {
                 throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
             }
-            String resultMsg = new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
 
-            return resultMsg;
+            return new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
         } catch (NumberFormatException e) {
             throw new SitusException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
@@ -248,7 +254,8 @@ public class Parser {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-        String[] details = command.substring(COMMAND_ADD.length()).trim().split(DELIMITER);
+        String parsedCommand = command.substring(COMMAND_ADD.length()).trim();
+        String[] details = parsedCommand.split(DELIMITER);
 
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -270,7 +277,7 @@ public class Parser {
         try {
             String ingredientName = details[1];
 
-            if (isContainsInvalidCharacters(ingredientName)) {
+            if (containsInvalidCharacters(ingredientName)) {
                 throw new SitusException(INVALID_CHARACTERS_ADD_MESSAGE);
             }
 
@@ -305,7 +312,8 @@ public class Parser {
      * @throws SitusException when error in subtracting
      */
     private static String parseSubtractCommand(String command) throws SitusException {
-        String[] details = command.substring(COMMAND_SUBTRACT.length()).split(SUBTRACT_DELIM);
+        String parsedCommand = command.substring(COMMAND_SUBTRACT.length());
+        String[] details = parsedCommand.split(SUBTRACT_DELIM);
 
         if (details.length != SUBTRACT_COMMAND_ARGUMENT_COUNT) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
@@ -360,7 +368,6 @@ public class Parser {
         if (details[0].isEmpty()) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
-
 
         int[] detailsToInt = new int[2];
         try {
