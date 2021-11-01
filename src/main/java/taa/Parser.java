@@ -43,11 +43,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final String ARGUMENT_VALID_REGEX = "^[0-9a-zA-Z\\-_()\\s.]+$";
+    private static final String ARGUMENT_VALID_REGEX = "0-9a-zA-Z\\s";
+    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.'};
 
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
-    private static final String MESSAGE_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric characters, "
-        + "spaces, and some special characters are allowed.\nAllowed special characters: - _ ( ) .";
+
+    private static final String MESSAGE_FORMAT_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric "
+        + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -257,7 +259,7 @@ public class Parser {
             value = value.trim();
 
             if (!isValueValid(value)) {
-                throw new TaaException(MESSAGE_INVALID_VALUE);
+                throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_VALUE, getSpecialCharactersAsString()));
             }
 
             result.put(key, value);
@@ -271,8 +273,55 @@ public class Parser {
             return true;
         }
 
-        Pattern pattern = Pattern.compile(ARGUMENT_VALID_REGEX);
+        StringBuilder stringBuilder = new StringBuilder("^[");
+        stringBuilder.append(ARGUMENT_VALID_REGEX);
+        for (char c : VALID_SPECIAL_CHARACTERS) {
+            stringBuilder.append(convertToRegexPattern(c));
+        }
+        stringBuilder.append("]+$");
+        String regexStr = stringBuilder.toString();
+
+        Pattern pattern = Pattern.compile(regexStr);
         Matcher matcher = pattern.matcher(value);
         return matcher.find();
+    }
+
+    private static String convertToRegexPattern(char c) {
+        boolean needEscape;
+        switch (c) {
+        case '^':
+        case '-':
+        case '[':
+        case ']':
+        case '.':
+            needEscape = true;
+            break;
+
+        default:
+            needEscape = false;
+        }
+
+        String patternStr;
+        if (needEscape) {
+            patternStr = String.format("\\%c", c);
+        } else {
+            patternStr = String.format("%c", c);
+        }
+
+        return patternStr;
+    }
+
+    private static String getSpecialCharactersAsString() {
+        char[] validSpecialCharacters = VALID_SPECIAL_CHARACTERS;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < validSpecialCharacters.length; i += 1) {
+            if (i > 0) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(validSpecialCharacters[i]);
+        }
+
+        return stringBuilder.toString();
     }
 }
