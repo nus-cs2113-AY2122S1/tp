@@ -5,7 +5,9 @@ import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 import seedu.exceptions.ExpenseEntryNotFoundException;
+import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeEntryNotFoundException;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.datetools.DateOperator;
 
 import java.time.LocalDate;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
  * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
  */
 public class FinancialTracker {
+    private static final double TOTAL_EXPENSE_LIMIT = 100000000000.00;
+    private static final double TOTAL_INCOME_LIMIT = 100000000000.00;
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
     private double balance;
@@ -57,22 +61,36 @@ public class FinancialTracker {
         return balance;
     }
     
-    public void addExpense(Expense expense) {
+    public void addExpense(Expense expense) throws ExpenseOverflowException {
         int expenseSize = 0;
         assert (expenseSize = expenses.size()) >= 0;
+        if (isOverflowedExpense(expense)) {
+            throw new ExpenseOverflowException(Messages.EXPENSE_OVERFLOW_ERROR);
+        }
         expenses.add(expense);
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
         balance -= expense.getValue();
     }
-    
-    public void addIncome(Income income) {
+
+    private boolean isOverflowedExpense(Expense expense) throws ExpenseOverflowException {
+        return expense.getValue() + getTotalExpense() > TOTAL_EXPENSE_LIMIT;
+    }
+
+    public void addIncome(Income income) throws IncomeOverflowException {
         int incomeSize = 0;
         assert (incomeSize = incomes.size()) >= 0;
+        if (isOverflowedIncome(income)) {
+            throw new IncomeOverflowException(Messages.INCOME_OVERFLOW_ERROR);
+        }
         incomes.add(income);
         assert !incomes.isEmpty();
         assert incomes.size() > incomeSize;
         balance += income.getValue();
+    }
+
+    private boolean isOverflowedIncome(Income income) throws IncomeOverflowException {
+        return income.getValue() + getTotalIncome() > TOTAL_INCOME_LIMIT;
     }
 
     private int indexOffset(int index) {
@@ -140,9 +158,6 @@ public class FinancialTracker {
         for (Expense expense : expenses) {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
-            if (totalExpense >= Double.MAX_VALUE) {
-                return 0;
-            }
         }
         assert totalExpense >= 0;
         return totalExpense;

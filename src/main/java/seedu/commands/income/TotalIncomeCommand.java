@@ -1,6 +1,7 @@
 package seedu.commands.income;
 
 import seedu.commands.Command;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;

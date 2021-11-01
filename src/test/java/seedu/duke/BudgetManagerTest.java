@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
+import seedu.exceptions.ExpenseOverflowException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -54,7 +55,8 @@ public class BudgetManagerTest {
 
 
     @Test
-        public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() {
+        public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() 
+            throws ExpenseOverflowException {
         budgetManager.setBudget(20, ExpenseCategory.OVERALL);
         budgetManager.setBudget(12, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -71,7 +73,8 @@ public class BudgetManagerTest {
     }
 
     @Test
-    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() {
+    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() 
+            throws ExpenseOverflowException {
         budgetManager.setBudget(12, ExpenseCategory.OVERALL);
         budgetManager.setBudget(4, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);

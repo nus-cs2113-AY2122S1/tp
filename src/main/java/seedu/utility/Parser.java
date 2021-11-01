@@ -163,7 +163,7 @@ public class Parser {
             + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private static final double INPUT_AMOUNT_LIMIT = 10000000;
+    private static final double INPUT_AMOUNT_LIMIT = 1000000000;
 
     /**
      * Parses user input into command for execution.
@@ -533,7 +533,7 @@ public class Parser {
         double incomeAmount = parseIncomeAmount(userGivenAmount);
         if (incomeAmount > INPUT_AMOUNT_LIMIT) {
             throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
-        }
+        } 
         return incomeAmount;
     }
 
@@ -644,7 +644,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (expenseAmount <= 0.001) {
+        if (expenseAmount < 0.01) {
             throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isNaN(expenseAmount) || Double.isInfinite(expenseAmount)) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
@@ -660,7 +660,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (incomeAmount <= 0.001) {
+        if (incomeAmount < 0.01) {
             throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isNaN(incomeAmount) || Double.isInfinite(incomeAmount)) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);

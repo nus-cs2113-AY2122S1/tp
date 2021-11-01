@@ -76,4 +76,8 @@ public class Messages {
     public static final String INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Settings.csv "
             + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
             + "replaced the CSV header with the settings, those settings will not be loaded.";
+    public static final String EXPENSE_OVERFLOW_ERROR = "Your total expense will exceed $100000000000. " 
+            + "Are you sure you have spent this much?";
+    public static final String INCOME_OVERFLOW_ERROR = "Your total income will exceed $100000000000. "
+            + "Are you sure you have gotten this much?";
 }

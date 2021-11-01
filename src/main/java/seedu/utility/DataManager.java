@@ -5,6 +5,8 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.ExpenseOverflowException;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
@@ -123,11 +125,13 @@ public class DataManager {
             try {
                 Expense expense = parser.convertDataToExpense(data);
                 financialTracker.addExpense(expense);
-            } catch (InputException | InvalidExpenseDataFormatException | DateTimeParseException e) {
+            } catch (InputException | InvalidExpenseDataFormatException 
+                    | DateTimeParseException | ExpenseOverflowException e) {
                 try {
                     Income income = parser.convertDataToIncome(data);
                     financialTracker.addIncome(income);
-                } catch (InputException | InvalidIncomeDataFormatException | DateTimeParseException ie) {
+                } catch (InputException | InvalidIncomeDataFormatException 
+                        | DateTimeParseException | IncomeOverflowException ie) {
                     hasCorruptedLines = true;
                 }
             }
