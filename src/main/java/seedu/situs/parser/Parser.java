@@ -441,7 +441,7 @@ public class Parser {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 2);
+        assert (details.length == 3);
 
         try {
             switch (details[1].trim()) {
