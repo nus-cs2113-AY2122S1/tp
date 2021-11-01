@@ -4,16 +4,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.items.Event;
-import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.time.LocalDateTime;
-
-import static seedu.duke.Duke.eventCatalog;
 
 public class ByeCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
