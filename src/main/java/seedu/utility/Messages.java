@@ -65,11 +65,13 @@ public class Messages {
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
-    public static final String DUPLICATE_EXPENSE_MESSAGE = "You have already made this expense entry!";
-    public static final String DUPLICATE_INCOME_MESSAGE = "You have already made this income entry!";
     public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
     public static final String MISSING_PARAMETERS_MESSAGE = "Missing parameters! Use help to view commands again!";
     
+    public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money."
+            + "Are you sure you have spent that much?";
+    public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
+            + "I don't think we can handle that much money";
     public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 
             + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
             + "replaced the CSV header with an entry, that entry will not be loaded.";
