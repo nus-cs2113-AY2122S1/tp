@@ -12,7 +12,7 @@ public abstract class ExpenseSplittingFunctions {
         expense.setAmountSplit(person, expense.getAmountSpent());
     }
 
-    protected static void updateIndividualSpending(Expense expense) {
+    protected static void updateIndividualSpending(Expense expense) throws ForceCancelException {
         Person payer = getValidPersonInExpenseFromString(expense);
         expense.setPayer(payer);
         HashMap<Person, Double> amountBeingPaid = new HashMap<>();
@@ -28,7 +28,7 @@ public abstract class ExpenseSplittingFunctions {
                 return;
             }
             Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
-            String amountString = Storage.getScanner().nextLine().strip();
+            String amountString = Ui.receiveUserInput();
             if (checkAssignEqual(amountBeingPaid, amountString)) {
                 assignEqualAmounts(payer, expense, amountBeingPaid);
                 return;
@@ -67,7 +67,8 @@ public abstract class ExpenseSplittingFunctions {
         return expense.getPersonsList().indexOf(person) == expense.getPersonsList().size() - 1;
     }
 
-    private static void assignZeroToRemaining(Expense expense, HashMap<Person, Double> amountBeingPaid, Person payer) {
+    private static void assignZeroToRemaining(Expense expense, HashMap<Person, Double> amountBeingPaid, Person payer)
+            throws ForceCancelException {
         Ui.askUserToConfirm();
         if (Parser.getUserToConfirm()) {
             for (Person person : expense.getPersonsList()) {
@@ -83,7 +84,7 @@ public abstract class ExpenseSplittingFunctions {
     }
 
     private static void assignRemainder(Person person, Person payer, double amountRemaining, Expense expense,
-                                        HashMap<Person, Double> amountBeingPaid) {
+                                        HashMap<Person, Double> amountBeingPaid) throws ForceCancelException {
         Ui.askAutoAssignRemainder(person, amountRemaining);
         if (Parser.getUserToConfirm()) {
             amountBeingPaid.put(person, Storage.formatForeignMoneyDouble(amountRemaining));
@@ -94,9 +95,9 @@ public abstract class ExpenseSplittingFunctions {
         }
     }
 
-    private static Person getValidPersonInExpenseFromString(Expense expense) {
+    private static Person getValidPersonInExpenseFromString(Expense expense) throws ForceCancelException {
         Ui.printGetPersonPaid();
-        String name = Storage.getScanner().nextLine().strip();
+        String name = Ui.receiveUserInput();
         for (Person person : expense.getPersonsList()) {
             if (name.equalsIgnoreCase(person.getName())) {
                 return person;

@@ -157,7 +157,7 @@ public class Parser {
      *
      * @param inputParams attributes of expense to be created.
      */
-    private static void handleCreateExpense(String inputParams) {
+    private static void handleCreateExpense(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeCreateExpense(inputParams);
@@ -165,6 +165,8 @@ public class Parser {
             Ui.printExpenseFormatError();
         } catch (InvalidAmountException e) {
             Ui.printInvalidAmountError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -459,7 +461,7 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) throws InvalidAmountException {
+    private static void executeCreateExpense(String inputDescription) throws InvalidAmountException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);

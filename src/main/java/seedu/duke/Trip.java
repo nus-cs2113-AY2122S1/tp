@@ -337,7 +337,7 @@ public class Trip {
     //@@author
 
     //@@author itsleeqian
-    public void setForeignCurrency(String foreignCurrency) {
+    public void setForeignCurrency(String foreignCurrency) throws ForceCancelException {
         try {
             if (isNumeric(foreignCurrency) || foreignCurrency.length() != ISO_LENGTH) {
                 throw new NumberFormatException();
@@ -347,8 +347,8 @@ public class Trip {
             setForeignCurrencySymbol(this.foreignCurrency);
         } catch (NumberFormatException e) {
             Ui.printIsoFormatError();
-            Scanner scanner = Storage.getScanner();
-            setForeignCurrency(scanner.nextLine().strip());
+            String newInput = Ui.receiveUserInput();
+            setForeignCurrency(newInput);
         }
     }
     //@@author

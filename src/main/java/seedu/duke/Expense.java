@@ -46,7 +46,7 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws  InvalidAmountException {
+    public Expense(String inputDescription) throws  InvalidAmountException, ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
@@ -72,7 +72,7 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) {
+    private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
@@ -95,7 +95,7 @@ public class Expense extends ExpenseSplittingFunctions {
         }
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);
-            String newUserInput = Storage.getScanner().nextLine();
+            String newUserInput = Ui.receiveUserInput();
             return checkValidPersons(newUserInput);
         }
         return validListOfPeople;
@@ -126,12 +126,11 @@ public class Expense extends ExpenseSplittingFunctions {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public LocalDate promptDate() {
-        Scanner sc = Storage.getScanner();
+    public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
-        String inputDate = sc.nextLine();
+        String inputDate = Ui.receiveUserInput();
         while (!isDateValid(inputDate)) {
-            inputDate = sc.nextLine();
+            inputDate = Ui.receiveUserInput();
         }
         if (inputDate.isEmpty()) {
             return LocalDate.now();
@@ -214,7 +213,7 @@ public class Expense extends ExpenseSplittingFunctions {
     }
 
     //@@author itsleeqian
-    public void setAmountSpent(String amount) throws InvalidAmountException {
+    public void setAmountSpent(String amount) throws InvalidAmountException, ForceCancelException {
         try {
             this.amountSpent = Double.parseDouble(amount);
             if (this.amountSpent <= 0) {
@@ -224,8 +223,8 @@ public class Expense extends ExpenseSplittingFunctions {
             this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
         } catch (InvalidAmountException e) {
             Ui.printInvalidAmountError();
-            Scanner scanner = Storage.getScanner();
-            setAmountSpent(scanner.nextLine().strip());
+            String newInput = Ui.receiveUserInput();
+            setAmountSpent(newInput);
         }
     }
     //@@author
