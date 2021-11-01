@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam sequenceMessageAlign center
+
+mainframe sd getUserFeedback
+
+box "Commands" #thistle
+endbox
+box "Main" #bisque
+participant ":Ui" as Ui
+endbox
+box "Active Recall" #lightblue
+participant ":GameEnvironment" as GameEnvironment #lightskyblue
+endbox
+
+activate GameEnvironment
+GameEnvironment -> GameEnvironment : getUserFeedback()
+activate GameEnvironment
+  loop difficulty == INVALID_DIFFICULTY
+  GameEnvironment -> Ui : getUserInput()
+  activate Ui
+  return input
+  end
+return difficulty
+@enduml
