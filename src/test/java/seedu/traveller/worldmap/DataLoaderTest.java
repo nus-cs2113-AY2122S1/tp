@@ -25,16 +25,16 @@ class DataLoaderTest {
     @Test
     public void loadCountries_exceptionThrown() {
         assertThrows(IllegalFlightFileException.class,
-                () -> dataLoader.loadCountries(parseInput(missingCountryInput, 5), graphList));
+            () -> dataLoader.loadCountries(parseInput(missingCountryInput, 5), graphList));
         assertThrows(IllegalFlightFileException.class,
-                () -> dataLoader.loadCountries(parseInput(missingSeparatorInput, 5), graphList));
+            () -> dataLoader.loadCountries(parseInput(missingSeparatorInput, 5), graphList));
     }
 
     @Test
     public void loadDistances_exceptionThrown() {
         assertThrows(IllegalFlightFileException.class,
-                () -> dataLoader.loadDistances(parseInput(nonNumberDistance, 5), graphList));
+            () -> dataLoader.loadDistances(parseInput(nonNumberDistance, 5), graphList));
         assertThrows(IllegalFlightFileException.class,
-                () -> dataLoader.loadDistances(parseInput(negativeNumberDistance, 5), graphList));
+            () -> dataLoader.loadDistances(parseInput(negativeNumberDistance, 5), graphList));
     }
 }
