@@ -52,7 +52,8 @@ public class Duke {
             try {
                 Storage.writeToFile(Storage.FILE_PATH);
             } catch (IOException e) {
-                e.printStackTrace();
+                Ui.printCouldNotSaveMessage();
+                //e.printStackTrace();
             }
         }
 

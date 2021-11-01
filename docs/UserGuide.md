@@ -4,20 +4,34 @@
 
 PayMeBack is a CLI-based expense tracker for a group of friends travelling overseas together.
 
-In such a group, it is easier for an individual to pay for expenses on behalf of the group rather than each
-individual paying for their share for every activity. At the end of the day, it is quite troublesome to
+In such a group, it is easier for an individual to pay for expenses on behalf of the group rather than having each
+individual pay for their share for every activity. At the end of the day, it is quite troublesome to
 manually calculate how much money each individual owes to another. PayMeBack is designed to make this process
-easy and fuss-free.
+easy and fuss-free, by helping you calculate how much each person owes every other person.
+
+<br />
+
+__(Table of Contents here)__
+
+## Using this guide
+
+- Text bounded by `this formatting` refers to elements displayed in your window as the program is running.
+It can either be an input entered by the user, or an output displayed by the program.
+- All entries enclosed in square brackets, "[" and "]" refer to user-defined inputs.
+For example, input values displayed as `[something]` can be determined by the user, where `something` is the data
+entered by the user.
+
+<br />
+
 
 ## Quick Start
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `PayMeBack` from [here](https://github.com/AY2122S1-CS2113T-T12-2/tp/releases), 
 and move the downloaded file to your preferred folder.
-3. Open any command-line application (such as Terminal, Command Prompt, Powershell) and navigate to the folder
+3. Open any command-line application (such as Terminal, Command Prompt, or Powershell) and navigate to the folder
    containing your downloaded copy of `PayMeBack`.
-4. In the command-line interface, and type `java -jar PayMeBack.jar`.
-5. Note that for this user guide, all entries enclosed in square brackets, "[" and "]" refer to user inputs.
-6. If the program starts successfully, you should see the following on your screen:
+4. In the command-line interface, type `java -jar PayMeBack.jar`.
+5. If the program starts successfully, you should see the following on your screen:
 ```
 Welcome to
     ____              __  ___     ____             __  
@@ -35,16 +49,31 @@ Enter your command:
 
 ### Saving your data
 
-By default, the program attempts to save your data each time after you run a command. This includes
-the `quit` command.
+By default, the program attempts to save your data to a file named `trips.json` located in the same directory
+as the app each time after you run a command. This includes the `quit` command.
 
 If the save attempt is unsuccessful, you will see this error message:
 
 ```
-//error message not yet determined
+Sorry, there was an error saving your data. We'll try to save your data again the next time you enter a command."
 ```
 
 The program will then attempt to save again the next time you run a command.
+
+<br />
+
+### Loading your saved data
+
+The first time you open the program, or if the save file was deleted or moved, the program will create a save file 
+named `trips.json` for you.
+
+The next time open the program, it will attempt to load your saved data from the save file. If the data is successfully 
+loaded, you will see the following message:
+```
+Your saved data was successfully loaded!
+```
+
+If there is an error loading your save file, please go to () for more information.
 
 <br />
 
@@ -373,6 +402,7 @@ Output:
 <br />
 
 ### Summary
+
 #### - View Summary of expenses
 Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
 The input syntax is as follows:
