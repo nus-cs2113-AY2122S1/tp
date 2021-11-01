@@ -27,6 +27,10 @@ public class UI {
         System.out.print(DIVIDER + commandOutput + "\n" + DIVIDER);
     }
 
+    public static void printCommandOutputWithoutTopDivider(String commandOutput) {
+        System.out.print(commandOutput + "\n" + DIVIDER);
+    }
+
     public String getUserCommand() {
         return line.nextLine().trim().toLowerCase();
     }
