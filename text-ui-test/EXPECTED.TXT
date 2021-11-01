@@ -45,7 +45,7 @@ Format: note delete <item number>
 Format: note delete <item number>
 [TEST] >>> Error: Content not found.
 [TEST] >>> Your note on 'CS2113T' has been deleted!
-[TEST] >>>
+[TEST] >>> 
 Help Menu
 ---------
 exit : Exits the program.
