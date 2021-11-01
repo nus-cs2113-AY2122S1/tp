@@ -14,7 +14,6 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
-import seedu.duke.commands.UpdateCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;

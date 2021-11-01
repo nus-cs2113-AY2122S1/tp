@@ -1,4 +1,4 @@
-package seedu.duke.commands.UpdateCommands;
+package seedu.duke.commands.updates;
 
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
