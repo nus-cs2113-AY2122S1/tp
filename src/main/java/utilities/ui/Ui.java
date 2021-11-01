@@ -98,9 +98,9 @@ public class Ui {
      * @param commandSyntax The command syntax of the command.
      */
     public void printRequiredParameters(ArrayList<String> parameters, String commandSyntax) {
-        if (parameters.size() == 1){
+        if (parameters.size() == 1) {
             print("Required parameter " + parameters.toString() + " is missing!");
-        } else{
+        } else {
             print("Required parameters " + parameters.toString() + " are missing!");
         }
         printCommandSyntax(commandSyntax);

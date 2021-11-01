@@ -30,8 +30,6 @@ public abstract class MedicineValidator {
     public boolean containsInvalidParameters(Ui ui, LinkedHashMap<String, String> parameters,
                                              String[] requiredParameters, String[] optionalParameters,
                                              String commandSyntax, boolean requiresOptionalParameters) {
-        int requiredParametersLength = requiredParameters.length;
-        int optionalParametersLength = optionalParameters.length;
 
         // User did not provide parameters all the parameters
         /*if (parameters.keySet().size() < requiredParametersLength) {
@@ -47,10 +45,13 @@ public abstract class MedicineValidator {
             }
         }
 
-        if (!providedRequiredParameter){
+        if (!providedRequiredParameter) {
             ui.printRequiredParameters(missingParametersList, commandSyntax);
             return true;
         }
+
+        int requiredParametersLength = requiredParameters.length;
+        int optionalParametersLength = optionalParameters.length;
 
         // Optional parameters not provided considered valid
         if (optionalParameters == null || optionalParametersLength == 0) {
