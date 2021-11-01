@@ -43,11 +43,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final String ARGUMENT_VALID_REGEX = "^[0-9a-zA-Z\\-_()\\s]+$";
+    private static final String ARGUMENT_VALID_REGEX = "^[0-9a-zA-Z\\-_()\\s.]+$";
 
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
     private static final String MESSAGE_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric characters, "
-        + "spaces, and some special characters are allowed.\nAllowed special characters: - _ ( )";
+        + "spaces, and some special characters are allowed.\nAllowed special characters: - _ ( ) .";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
