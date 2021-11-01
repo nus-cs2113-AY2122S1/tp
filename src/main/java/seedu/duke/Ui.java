@@ -49,6 +49,10 @@ public class Ui {
 
     //@@author
 
+    public static void printCancelExpenseCreation() {
+        System.out.println("Your expense creation has been cancelled.");
+    }
+
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
             System.out.println("\t" + person.getName());

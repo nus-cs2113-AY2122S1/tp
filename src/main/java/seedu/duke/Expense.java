@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class Expense {
+public class Expense extends ExpenseFunctions {
     private double amountSpent;
     private String description;
     private ArrayList<Person> personsList;
@@ -45,7 +45,7 @@ public class Expense {
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
-    public Expense(String inputDescription) {
+    public Expense(String inputDescription) throws CancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
         this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
@@ -55,9 +55,9 @@ public class Expense {
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
         this.date = prompDate();
         if (personsList.size() == 1) {
-            Parser.updateOnePersonSpending(this, personsList.get(0));
+            updateOnePersonSpending(this, personsList.get(0));
         } else {
-            Parser.updateIndividualSpending(this);
+            updateIndividualSpending(this);
         }
     }
 
@@ -65,7 +65,8 @@ public class Expense {
         return userInput.split("/")[1].trim();
     }
 
-    //@@author joshualeeky
+
+
     /**
      * Obtains a list of Person objects from array of names of people.
      *
