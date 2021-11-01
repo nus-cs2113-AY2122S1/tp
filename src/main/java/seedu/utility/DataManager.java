@@ -91,8 +91,8 @@ public class DataManager {
             
             buffer.write(ENTRIES_CSV_HEADER);
             buffer.write(NEWLINE);
-            saveExpenses(buffer);
-            saveIncomes(buffer);
+            writeExpenses(buffer);
+            writeIncomes(buffer);
             buffer.close();
         } catch (IOException e) {
             ui.printError(createErrorSavingEntriesMessage(filename));
@@ -103,7 +103,7 @@ public class DataManager {
         return "There is trouble saving entries into " + filename + ", some or all entries maybe lost.";
     }
 
-    private void saveIncomes(BufferedWriter buffer) throws IOException {
+    private void writeIncomes(BufferedWriter buffer) throws IOException {
         String data;
         ArrayList<Income> incomes = financialTracker.getIncomes();
         for (Income income : incomes) {
@@ -113,7 +113,7 @@ public class DataManager {
         }
     }
 
-    private void saveExpenses(BufferedWriter buffer) throws IOException {
+    private void writeExpenses(BufferedWriter buffer) throws IOException {
         String data;
         ArrayList<Expense> expenses = financialTracker.getExpenses();
         for (Expense expense : expenses) {
@@ -211,7 +211,7 @@ public class DataManager {
             
             buffer.write(SETTINGS_CSV_HEADER);
             buffer.write(NEWLINE);
-            saveSettings(buffer);
+            writeSettings(buffer);
             buffer.write(NEWLINE);
             buffer.close();
         } catch (IOException e) {
@@ -223,7 +223,7 @@ public class DataManager {
         return "There is trouble saving settings into " + filename + ", some or all settings maybe lost.";
     }
 
-    private void saveSettings(BufferedWriter buffer) throws IOException {
+    private void writeSettings(BufferedWriter buffer) throws IOException {
         String data;
         data = parser.convertSettingsToData(financialTracker, budgetManager);
         buffer.write(data);
