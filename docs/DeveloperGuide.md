@@ -193,6 +193,9 @@ The `Command` class can be classified into 4 main functionalities:
     * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
     * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
     * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+    * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
+    * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
+    * `SetTimeCommand` is where the `set` /time feature of gordon is executed
 
    #### Example : `SetDifficultyCommand`
 
@@ -207,10 +210,12 @@ The `Command` class can be classified into 4 main functionalities:
 
 3. Find Commands:
    * The Commands that are required for the `find` feature of Gordon are contained here
+   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
    * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
    * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
    * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
    * `FindPriceCommand` is where the `find` /price feature of gordon is executed
+   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
 
     #### Example : `FindDifficultyCommand`
 
@@ -318,7 +323,51 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 
 ## Use Cases
 
- **Use case: `help`**
+**Use case: `addRecipe`**
+>
+>**MSS:**
+>1. User requests to add a recipe to Gordon
+>2. User inputs the necessary commands
+>3. Gordon adds the recipe to the cookbook
+>
+>Use case ends.
+>
+>**Extensions**
+>* The command given was invalid
+   >  * Gordon shows an error message
+>  * Use case resumes on step 1
+
+**Use case: `deleteRecipe`**
+>
+>**MSS:**
+>1. User requests a list of all recipes
+>2. Gordon shows a list of all recipes
+>3. User requests to delete a specific recipe
+>4. Gordon deletes that recipe.
+>
+>Use case ends.
+>
+>**Extensions**
+>* The list is empty
+   >  * Use case ends
+>* The given index is invalid
+   >  * Gordon shows an error message
+>  * Use case resumes from step 2
+
+**Use case: `listRecipes`**
+>
+>**MSS:**
+>1. User requests to see all their recipes
+>2. Gordon shows a list of all currently stored recipes
+>
+>Use case ends.
+>
+>**Extensions**
+>* The list is empty.
+   >    * Use case ends.
+>
+
+**Use case: `help`**
 >
 >**MSS:**
 >1. User opens Application
@@ -335,50 +384,6 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >2. Program exits.
 >
 >Use case ends
-
-**Use case: `add`**
->
->**MSS:**
->1. User requests to add a recipe to Gordon
->2. User inputs the necessary commands
->3. Gordon adds the recipe to the cookbook
->
->Use case ends.
->
->**Extensions**
->* The command given was invalid
->  * Gordon shows an error message
->  * Use case resumes on step 1
-
-**Use case: `deleteRecipe`**
->
->**MSS:**
->1. User requests a list of all recipes
->2. Gordon shows a list of all recipes
->3. User requests to delete a specific recipe
->4. Gordon deletes that recipe.
->
->Use case ends.
->
->**Extensions**
->* The list is empty
->  * Use case ends
->* The given index is invalid
->  * Gordon shows an error message
->  * Use case resumes from step 2
-
-**Use case: `listRecipes`**
->
->**MSS:**
->1. User requests to see all their recipes
->2. Gordon shows a list of all currently stored recipes
->
->Use case ends.
->
->**Extensions**
->* The list is empty.
->    * Use case ends.
->
  
 **Use case: `check`**
 >
@@ -393,6 +398,22 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >    * Use case ends.
 >* Input was entered incorrectly
 >  * Use case resumes from step 1
+
+**Use case: `set`**
+>
+>**MSS:**
+>1. User wants to add or edit certain parameters to their recipes
+>2. User inputs commands to add or edit these parameters
+>3. Gordon adds or edits these parameters
+>4. The next time the User checks the recipe, they will have these new parameters to refer to.
+>
+>Use case ends.
+>
+>**Extensions**
+>* The recipe does not exist.
+   >    * Use case ends.
+>* Input was entered incorrectly
+   >  * Use case resumes from step 1
 
 **Use case: `find`**
 >
