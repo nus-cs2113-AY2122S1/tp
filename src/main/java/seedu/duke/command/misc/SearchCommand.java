@@ -2,6 +2,7 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
+import seedu.duke.data.DeadlineWorkout;
 import seedu.duke.data.Exercise;
 import seedu.duke.data.Workout;
 import seedu.duke.data.WorkoutList;
@@ -29,7 +30,7 @@ public class SearchCommand extends Command {
 
     public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";
     public static final String MESSAGE_NO_MATCHES_FOUND = "No matches found. ";
-    public static final String MESSAGE_MATCHING_EXERCISES_IN_WORKOUT = "Matching exercises in %d) %s";
+    public static final String MESSAGE_MATCHING_EXERCISES_IN_WORKOUT = "Matching exercises in (%d) %s";
 
     private final String filterString;
 
@@ -71,7 +72,10 @@ public class SearchCommand extends Command {
     private static ArrayList<Workout> filterWorkoutsByString(ArrayList<Workout> workoutList, String filterString) {
         ArrayList<Workout> filteredList = new ArrayList<>();
         for (Workout w : workoutList) {
-            if (w.toString().toLowerCase(Locale.ROOT).contains(filterString)) {
+            if (w.getWorkoutName().toLowerCase(Locale.ROOT).contains(filterString)) {
+                filteredList.add(w);
+            } else if (w instanceof DeadlineWorkout
+                    && ((DeadlineWorkout) w).getDeadlineString().toLowerCase(Locale.ROOT).contains(filterString)) {
                 filteredList.add(w);
             } else {
                 filteredList.add(null);
@@ -138,7 +142,7 @@ public class SearchCommand extends Command {
             if (!filteredExercises.isEmpty()) {
                 matchesFound = true;
                 String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
-                        displayIndex, w.getWorkoutName());
+                        displayIndex, w);
                 map.put(matchingExerciseMessage, filteredExercises);
             }
         }
