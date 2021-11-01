@@ -16,7 +16,7 @@ public class CommandSyntax {
     public static final String ADD_PRESCRIPTION_COMMAND = "addprescription n/NAME q/QUANTITY c/CUSTOMER_ID "
             + "s/STAFF_NAME";
     public static final String ADD_STOCK_COMMAND = "addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
-            + "{d/DESCRIPTION m/MAX_QUANTITY}";
+            + "(d/DESCRIPTION m/MAX_QUANTITY)";
     public static final String ADD_ORDER_COMMAND = "addorder n/NAME q/QUANTITY {d/DATE}";
     public static final String ARCHIVE_PRESCRIPTION_COMMAND = "archiveprescription d/DATE";
     public static final String ARCHIVE_ORDER_COMMAND = "archiveorder d/DATE";
@@ -33,8 +33,8 @@ public class CommandSyntax {
             + " e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME"
             + " rsort/COLUMN_NAME}";
     public static final String PURGE_COMMAND = "purge";
-    public static final String RECEIVE_ORDER_COMMAND = "receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION "
-            + "m/MAX_QUANTITY}";
+    public static final String RECEIVE_ORDER_COMMAND = "receiveorder i/ID p/PRICE e/EXPIRY_DATE (d/DESCRIPTION "
+            + "m/MAX_QUANTITY)";
     public static final String UPDATE_PRESCRIPTION_COMMAND = "updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID "
             + "d/DATE s/STAFF_NAME]";
     public static final String UPDATE_ORDER_COMMAND = "updateorder i/ID [n/NAME q/QUANTITY d/DATE]";
