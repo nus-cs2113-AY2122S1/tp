@@ -22,7 +22,7 @@ public abstract class ExpenseSplittingFunctions {
     /**
      * Updates the spending of each individual who is entered into the expense.
      * @param expense Expense that is being added.
-     * @throws CancelExpenseException Cancel the creation of the expense anytime an input is required by the user.
+     * @throws ForceCancelException Cancel the creation of the expense anytime an input is required by the user.
      */
     protected static void updateIndividualSpending(Expense expense) throws ForceCancelException {
         Person payer = getValidPersonInExpenseFromString(expense);
@@ -101,7 +101,7 @@ public abstract class ExpenseSplittingFunctions {
      * @param expense Expense that is being added to the current trip.
      * @param amountBeingPaid HashMap containing the people who the user has assigned values to.
      * @param payer Person who is paying for the expense.
-     * @throws CancelExpenseException Cancels the creation of the expense in the event the user wishes to
+     * @throws ForceCancelException Cancels the creation of the expense in the event the user wishes to
      * stop creating the expense.
      */
     private static void assignZeroToRemaining(Expense expense, HashMap<Person, Double> amountBeingPaid, Person payer)
@@ -138,7 +138,7 @@ public abstract class ExpenseSplittingFunctions {
      * @param expense Expense that is being checked.
      * @return Person who is associated to the String that was input by the user, if the user input is invalid and the
      * String is not of a name of a Person in the Expense, the function will ask the user for an input again.
-     * @throws CancelExpenseException Allows the user to cancel anytime there is an input required by the user.
+     * @throws ForceCancelException Allows the user to cancel anytime there is an input required by the user.
      */
     private static Person getValidPersonInExpenseFromString(Expense expense) throws ForceCancelException {
         Ui.printGetPersonPaid();
