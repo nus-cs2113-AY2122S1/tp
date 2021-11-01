@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,7 +73,13 @@ public class Storage {
             Scanner scanner = new Scanner(this.dataFile);
 
             while (scanner.hasNextLine()) {
-                IngredientGroup ingredientGroup = readStoredIngredients(scanner.nextLine());
+                String memoryContent = scanner.nextLine();
+
+                if (!isValidIngredientLine(memoryContent)) {
+                    continue;
+                }
+
+                IngredientGroup ingredientGroup = readStoredIngredients(memoryContent);
                 extractedIngredients.add(ingredientGroup);
             }
         } catch (FileNotFoundException e) {
@@ -123,6 +130,41 @@ public class Storage {
         } catch (DateTimeParseException e) {
             throw new SitusException("Wrong expiry date format!\n" + INGREDIENT_DATA_CORRUPTED_MESSAGE);
         }
+    }
+
+    /**
+     * Checks to see the current line of memory file is a correct ingredient format or not.
+     *
+     * @param savedIngredientString the current string line of the memory file
+     * @return true if it is a correct format, false otherwise
+     */
+    private boolean isValidIngredientLine(String savedIngredientString) {
+        try {
+            String[] ingredientDetails = savedIngredientString.split("\\|");
+            String ingredientGroupName = ingredientDetails[0].trim();
+
+            if (ingredientDetails.length <= 1) {
+                return false;
+            }
+
+            for (int i = 1; i < ingredientDetails.length; i++) {
+                String[] amountAndExpiry = ingredientDetails[i].split("%");
+
+                if (amountAndExpiry.length < 2) {
+                    return false;
+                }
+
+                double ingredientAmount = Double.parseDouble(amountAndExpiry[0]);
+                LocalDate ingredientExpiry = Ingredient.stringToDate(amountAndExpiry[1]);
+
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return true;
     }
 
     //@@author mudkip8
