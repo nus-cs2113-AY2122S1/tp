@@ -473,6 +473,8 @@ MediVault conducts a check if an order quantity is valid with the provided `q/QU
 This validation check is separated from the initial validation checker as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` in 
 stocks can only be done **after** MediVault confirms that the user provides a `q/QUANTITY` is an integer.
 
+MediVault updates the order information only when all of the validation checks stated above are successful.
+
 ### ReceiveOrderCommand
 
 MediVault creates an `ReceiveOrderCommand` object when `CommandParser` identifies
