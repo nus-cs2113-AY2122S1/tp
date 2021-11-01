@@ -111,7 +111,7 @@ v2.1 tasks:
     - Inventory class diagram and explanation. [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
   - Sections on `list` and `receiveorder` and their respective sequence diagrams. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)], [[#223](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/223)]
 
-### Contributions to team-based tasks
+### Team-Based
 - Setting up the GitHub team org/repo.
 - Assigning user stories to team members.
 - Maintaining [Trello](https://trello.com/b/nMVm0vgz/cs2113t-user-stories) dashboard.
