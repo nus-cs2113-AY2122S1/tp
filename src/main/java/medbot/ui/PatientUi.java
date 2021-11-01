@@ -39,7 +39,29 @@ public class PatientUi extends PersonUi {
         return getUnarchiveHelpMessage(PATIENT);
     }
 
+    public static String getAddPatientMessage(int id) {
+        return getAddPersonMessage(PATIENT, id);
+    }
 
+    public static String getDeletePatientMessage(int id) {
+        return getDeletePersonMessage(PATIENT, id);
+    }
+
+    public static String getEditPatientMessage(int id, String info) {
+        return getEditPersonMessage(PATIENT, id, info);
+    }
+
+    public static String getArchivePatientMessage(int id) {
+        return getArchivePersonMessage(PATIENT, id);
+    }
+
+    public static String getUnarchivePatientMessage(int id) {
+        return getUnarchivePersonMessage(PATIENT, id);
+    }
+
+    public static String getCurrentViewPatientMessage() {
+        return getCurrentViewPersonMessage(PATIENT);
+    }
     /**
      * Returns the profile of a patient.
      *
