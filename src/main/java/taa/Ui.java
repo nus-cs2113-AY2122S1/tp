@@ -32,12 +32,19 @@ public class Ui {
     /**
      * Gets a non-empty user input.
      *
-     * @return Non-empty user input.
+     * @return A non-empty string if successful, else null.
      */
     public String getUserInput() {
         return getUserInput(INPUT_PROMPT, false);
     }
 
+    /**
+     * Gets a user input.
+     *
+     * @param inputPrompt The prompt to display before asking for user input.
+     * @param allowEmpty true to allow empty user input, else false.
+     * @return A string if successful, else null.
+     */
     public String getUserInput(String inputPrompt, boolean allowEmpty) {
         String input;
         do {
@@ -46,7 +53,7 @@ public class Ui {
             try {
                 input = scanner.nextLine();
             } catch (NoSuchElementException | IllegalStateException e) {
-                input = Command.COMMAND_EXIT;
+                return null;
             }
         } while (input.trim().isEmpty() && !allowEmpty);
 
