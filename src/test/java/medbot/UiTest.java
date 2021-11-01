@@ -179,7 +179,7 @@ class UiTest {
             String actualOutput = Ui.getEditMessage(1, appointment.toString(),ViewType.SCHEDULER);
             assertEquals(expectedOutput, actualOutput);
         } catch (MedBotException e) {
-            assertEquals( "Incomplete appointment.", e.getMessage());
+            assertEquals("Incomplete appointment.", e.getMessage());
         }
     }
 
@@ -264,7 +264,7 @@ class UiTest {
             "Here is a list of all staffs:" + END_LINE
                     + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
                     + " -------------------------------------------------------------"
-                    +"---------------------------------------- "
+                    + "---------------------------------------- "
                     + END_LINE
                     + " |  ID  | IC Number |         Name         | Phone No. |    "
                     + "    Email         |       Address        | "
@@ -369,8 +369,7 @@ class UiTest {
         String[] parameters = {"n/Bob"};
         List<String> params = patientList.findPersons(parameters);
         try {
-            assertEquals(Ui.getFindPersonsMessage(params ,ViewType.PATIENT_INFO)
-                    , expectedOutput);
+            assertEquals(Ui.getFindPersonsMessage(params, ViewType.PATIENT_INFO), expectedOutput);
         } catch (MedBotException e) {
             assertEquals("There is no person with such attributes in this list.", e.getMessage());
         }
@@ -390,22 +389,26 @@ class UiTest {
         String expectedOutput =
                 "Here is a list of all staffs:" + END_LINE
                         + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " -----------------------------------------"
+                        + "------------------------------------------------------------ "
                         + END_LINE
-                        + " |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | "
+                        + " |  ID  | IC Number |         Name         "
+                        + "| Phone No. |        Email         |       Address        | "
                         + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " --------------------------------------------------"
+                        + "--------------------------------------------------- "
                         + END_LINE
-                        + " | 2    |           | Bob                  | 88889999  |                      |                      | "
+                        + " | 2    |           | Bob                  | 88889999  "
+                        + "|                      |                      | "
                         + END_LINE
-                        + " ----------------------------------------------------------------------------------------------------- "
+                        + " -----------------------------------------------"
+                        + "------------------------------------------------------ "
                         + END_LINE;
 
         String[] parameters = {"n/Bob"};
         List<String> params = staffList.findPersons(parameters);
         try {
-            assertEquals(Ui.getFindPersonsMessage(params ,ViewType.MEDICAL_STAFF_INFO)
-                    , expectedOutput);
+            assertEquals(Ui.getFindPersonsMessage(params, ViewType.MEDICAL_STAFF_INFO), expectedOutput);
         } catch (MedBotException e) {
             assertEquals("There is no person with such attributes in this list.", e.getMessage());
         }
