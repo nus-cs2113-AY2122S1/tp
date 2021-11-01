@@ -44,7 +44,13 @@ It is an integrated solution that provides real-time tracking of stocks, prescri
 
 # Purpose
 
+The purpose of this user guide is for users to have a more detailed understanding and reference to usage of commands in
+MediVault. In this user guide, you can expect to find examples and expected outputs of each command. MediVault caters
+for normal users and advanced users so you can expect to find information about how to efficiently use the commands or
+make use of the mode switching capabilities for convenience.
 
+As a pharmacist, you would probably focus more on the sections related to stock and prescriptions. As a manager of the
+pharmacy, you may be more interested in the order and data management sections of the user guide.
 
 # Glossary
 
