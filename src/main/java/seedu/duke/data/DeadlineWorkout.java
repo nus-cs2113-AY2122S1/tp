@@ -14,6 +14,7 @@ import static seedu.duke.data.WorkoutList.LOGGER;
  * A deadline workout is a workout with a deadline set by the user.
  */
 public class DeadlineWorkout extends Workout {
+
     private final String deadline;
     private final LocalDate deadlineDate;
 
@@ -32,6 +33,10 @@ public class DeadlineWorkout extends Workout {
 
     public LocalDate getDeadlineDate() {
         return deadlineDate;
+    }
+
+    public String getDeadlineString() {
+        return deadline;
     }
 
     /**
