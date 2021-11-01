@@ -4,11 +4,11 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":deleteprescription" as deleteprescription COLOR_COMMAND
+    participant ":DeletePrescriptionCommand" as deleteprescription COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":PrescriptionValidator" as prescriptionValidator COLOR_UTILITIES
+    participant "<<class>>\n:PrescriptionManager" as prescriptionManager COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
@@ -17,9 +17,12 @@ end box
 
 autoactivate on
 mainframe sd DeletePrescriptionCommand
+activate deleteprescription
+
+deleteprescription -> deleteprescription : isValidPrescriptionParameters()
     opt isValidPrescriptionId
-    deleteprescription -> prescriptionValidator : isValidPrescriptionId()
-    deleteprescription <-- prescriptionValidator : isValidPrescriptionId
+    deleteprescription -> prescriptionManager : isValidPrescriptionId()
+    deleteprescription <-- prescriptionManager : isValidPrescriptionId
     deleteprescription -> deleteprescription : setStockQuantity()
         loop medicine : medicines
 
@@ -45,7 +48,7 @@ mainframe sd DeletePrescriptionCommand
         end
     end
     end
-
-
+deactivate deleteprescription
+deleteprescription --> deleteprescription :
 
 @enduml

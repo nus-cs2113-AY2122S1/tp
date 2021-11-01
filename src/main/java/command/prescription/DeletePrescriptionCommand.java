@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author deonchung
+
 /**
  * Delete prescription based on user input given prescription id.
  */
@@ -33,25 +34,9 @@ public class DeletePrescriptionCommand extends Command {
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        String[] requiredParameters = {CommandParameters.ID};
-        String[] optionalParameters = {};
-
-        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
-        boolean isInvalidParameter = prescriptionValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.DELETE_PRESCRIPTION_COMMAND, true);
-
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful deletion of prescription");
-            return;
-        }
         String prescriptionIdToDelete = parameters.get(CommandParameters.ID);
 
-        boolean isValidPrescriptionId = prescriptionValidator.isValidPrescriptionId(ui, prescriptionIdToDelete,
-                medicines);
-        if (!isValidPrescriptionId) {
-            logger.log(Level.WARNING, "Invalid prescription id is specified by user");
-            logger.log(Level.INFO, "Unsuccessful deletion of prescription");
+        if (isValidPrescriptionParameters(ui, medicines, prescriptionIdToDelete)) {
             return;
         }
 
@@ -62,25 +47,65 @@ public class DeletePrescriptionCommand extends Command {
 
         int stockIdToPrescribe;
         int prescribeQuantity;
+
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Prescription)) {
                 continue;
             }
+
             Prescription prescription = (Prescription) medicine;
+
             if (prescription.getPrescriptionId() == prescriptionId) {
                 stockIdToPrescribe = prescription.getStockId();
                 prescribeQuantity = prescription.getQuantity();
+
                 if (setStockQuantity(ui, medicines, stockIdToPrescribe, prescribeQuantity)) {
                     return;
                 }
+
                 medicines.remove(prescription);
                 ui.print("Prescription deleted for Prescription Id " + prescriptionId);
                 Storage storage = Storage.getInstance();
                 storage.saveData(medicines);
                 logger.log(Level.INFO, "Successful deletion of Prescription");
                 return;
+
             }
         }
+    }
+
+    /**
+     * Check if parameters values for Prescription are valid and if Prescription ID exist.
+     *
+     * @param ui                     Reference to the UI object to print messages.
+     * @param medicines              Arraylist of medicines.
+     * @param prescriptionIdToDelete Prescription ID to delete.
+     * @return Boolean Value indicating if parameters values for Prescription are valid and Prescription ID exist.
+     */
+    private boolean isValidPrescriptionParameters(Ui ui, ArrayList<Medicine> medicines, String prescriptionIdToDelete) {
+
+        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
+        String[] requiredParameters = {CommandParameters.ID};
+        String[] optionalParameters = {};
+
+        boolean isInvalidParameter = prescriptionValidator.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters, CommandSyntax.DELETE_PRESCRIPTION_COMMAND, true);
+
+        if (isInvalidParameter) {
+            logger.log(Level.WARNING, "Invalid parameter is specified by user");
+            logger.log(Level.INFO, "Unsuccessful deletion of prescription");
+            return true;
+        }
+
+        boolean isValidPrescriptionId = prescriptionValidator.isValidPrescriptionId(ui, prescriptionIdToDelete,
+                medicines);
+
+        if (!isValidPrescriptionId) {
+            logger.log(Level.WARNING, "Invalid prescription id is specified by user");
+            logger.log(Level.INFO, "Unsuccessful deletion of prescription");
+            return true;
+        }
+        return false;
     }
 
     /**

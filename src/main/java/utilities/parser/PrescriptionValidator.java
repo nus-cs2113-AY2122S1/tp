@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 //@@author deonchung
+
 /**
  * Contains all the methods to validate if a Prescription input parameters are valid.
  */
@@ -173,4 +174,5 @@ public class PrescriptionValidator extends MedicineValidator {
         }
         return false;
     }
+
 }

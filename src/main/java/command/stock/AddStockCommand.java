@@ -42,6 +42,13 @@ public class AddStockCommand extends Command {
 
         String[] optionalParameters = {};
         String nameToAdd = parameters.get(CommandParameters.NAME);
+        String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
+
+        Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
+        if (formatExpiryDate == null) { //if medication has expired
+            return;
+        }
+
         boolean nameExist = false;
 
         if (parameters.containsKey(CommandParameters.NAME)) {
@@ -65,18 +72,11 @@ public class AddStockCommand extends Command {
             }
 
             String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-            String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
 
-            Date formatExpiry = null;
-            try {
-                formatExpiry = DateParser.stringToDate(expiryToAdd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             int totalStock = StockManager.getTotalStockQuantity(medicines, nameToAdd);
             assert totalStock > 0 : "Total Stock should be more than 0";
 
-            if (isExpiryExist(ui, stockValidator, filteredStocks, quantityToAdd, formatExpiry, totalStock)) {
+            if (isExpiryExist(ui, stockValidator, filteredStocks, quantityToAdd, formatExpiryDate, totalStock)) {
                 return;
             }
 
@@ -89,7 +89,7 @@ public class AddStockCommand extends Command {
             }
 
             if (addSameMedicine(ui, medicines, nameToAdd, stockValidator, filteredStocks, quantityToAdd,
-                    formatExpiry, totalStock)) {
+                    formatExpiryDate, totalStock)) {
                 return;
             }
         } else {
@@ -104,43 +104,68 @@ public class AddStockCommand extends Command {
 
             String priceToAdd = parameters.get(CommandParameters.PRICE);
             String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-            String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
             String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
             String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
-
-            Date formatExpiry = null;
-            try {
-                formatExpiry = DateParser.stringToDate(expiryToAdd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
 
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
             int quantity = Integer.parseInt(quantityToAdd);
             double price = Double.parseDouble(priceToAdd);
+
             if (isValidQuantity(ui, stockValidator, maxQuantity, quantity)) {
                 return;
             }
 
-            addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
+            addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiryDate, maxQuantity);
         }
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
     }
 
     /**
+     * Check if medication had expired.
+     *
+     * @param ui         Reference to the UI object to print messages.
+     * @param expiryDate Expiry Date of medication to add.
+     * @return Expiry Date of medication if medication has not expired. Null if medication has expired.
+     */
+    private Date checkExpiryDate(Ui ui, String expiryDate) {
+        Date formatExpiryDate = null;
+        try {
+            formatExpiryDate = DateParser.stringToDate(expiryDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date todayDate = new Date();
+        String todayDateString = DateParser.dateToString(todayDate);
+
+        Date formatTodayDate = null;
+        try {
+            formatTodayDate = DateParser.stringToDate(todayDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (formatExpiryDate.before(formatTodayDate)) {
+            ui.print("Unable to add medicine. Medicine is expired.");
+            return null;
+        }
+        return formatExpiryDate;
+    }
+
+    /**
      * Check if same expiry for the same medication name exist.
      *
-     * @param ui Reference to the UI object to print messages.
+     * @param ui             Reference to the UI object to print messages.
      * @param stockValidator Reference to StockValidator object.
      * @param filteredStocks List of medication with the same medication name as user input.
-     * @param quantityToAdd Quantity of medication to add.
-     * @param formatExpiry Formatted Expiry Date of medication to add.
-     * @param totalStock Total Quantity of the same stock.
+     * @param quantityToAdd  Quantity of medication to add.
+     * @param formatExpiry   Formatted Expiry Date of medication to add.
+     * @param totalStock     Total Quantity of the same stock.
      * @return Boolean Value indicating if same medication exists.
      */
     private boolean isExpiryExist(Ui ui, StockValidator stockValidator, ArrayList<Stock> filteredStocks,
-                              String quantityToAdd, Date formatExpiry, int totalStock) {
+                                  String quantityToAdd, Date formatExpiry, int totalStock) {
         for (Stock stock : filteredStocks) {
             int quantity = Integer.parseInt(quantityToAdd);
 
