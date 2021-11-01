@@ -58,6 +58,10 @@ public class Parser {
     private static final String INVALID_CHARACTERS_FIND_MESSAGE = "Only alphanumeric characters allowed in keyword";
     private static final String INVALID_CHARACTERS_ADD_MESSAGE = "Only alphanumeric characters allowed in name";
 
+    private static final long MAX_EXPIRY_THRESHOLD = 1096; //3 years plus leap year
+    private static final String MAX_EXPIRY_THRESHOLD_MESSAGE = "The max expiry threshold is 1096 days";
+    private static final long MAX_STOCK_THRESHOLD = 1000;
+    private static final String MAX_STOCK_THRESHOLD_MESSAGE = "The max stock threshold is 1000kg";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -446,12 +450,18 @@ public class Parser {
                 if (newExpiryThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
+                if (newExpiryThreshold > MAX_EXPIRY_THRESHOLD) {
+                    throw new SitusException(MAX_EXPIRY_THRESHOLD_MESSAGE);
+                }
                 AlertExpiringSoonCommand.setExpiryThreshold(newExpiryThreshold);
                 return "Successfully set expiry threshold to " + newExpiryThreshold + " days";
             case "stock":
                 double newStockThreshold = Double.parseDouble(details[2].trim());
                 if (newStockThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
+                }
+                if (newStockThreshold > MAX_STOCK_THRESHOLD) {
+                    throw new SitusException(MAX_STOCK_THRESHOLD_MESSAGE);
                 }
                 AlertLowStockCommand.setLowStockThreshold(newStockThreshold);
                 return "Successfully set low stock threshold to " + newStockThreshold + " kg";
