@@ -139,7 +139,6 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
-
     /**
      * Returns a {@code List} of tasks that matches the {@code taskTypeFilter}.
      *
@@ -168,7 +167,6 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
-
     /**
      * Returns a {@code List} of tasks that matches the {@code priorityFilter}.
      *
@@ -197,7 +195,6 @@ public class TaskManager implements Subject {
     }
 
     //@@author APZH
-
     /**
      * Returns a {@code List} of tasks that matches the {@code recurrenceFilter}.
      *
@@ -322,8 +319,8 @@ public class TaskManager implements Subject {
      *
      * @param criteria Contains the sort criteria to sort the tasklist by.
      * @return Sorted tasklist as a {@code String}.
-     * @throws EmptyTasklistException If tasklist is empty.
-     * @throws SortFormatException If the sort command syntax is incorrect.
+     * @throws EmptyTasklistException     If tasklist is empty.
+     * @throws SortFormatException        If the sort command syntax is incorrect.
      * @throws EmptySortCriteriaException If the sort criteria specified is empty.
      */
     public String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
