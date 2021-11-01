@@ -114,11 +114,11 @@ public class Parser {
 
     private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
             Pattern.compile("s/(?<start>.+)"
-                    + "e/(?<end>.+)");
+                    + " e/(?<end>.+)");
 
     private static final Pattern SET_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("c/(?<category>[^/]+)"
-                    + "a/(?<amount>[^/]+)");
+                    + " a/(?<amount>[^/]+)");
 
     private static final Pattern CHECK_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("c/(?<category>[^/]+)");
