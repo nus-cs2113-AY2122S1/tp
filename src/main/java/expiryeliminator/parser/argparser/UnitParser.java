@@ -21,7 +21,7 @@ public class UnitParser extends SingleArgParser<String> {
     public String parse(String unitString) throws InvalidArgFormatException {
 
         if (unitString != null) {
-            for (int i = 0; i < unitString.length() ; i++) {
+            for (int i = 0; i < unitString.length(); i++) {
                 char c = unitString.charAt(i);
 
                 if (!Character.isLetter(c)) {
