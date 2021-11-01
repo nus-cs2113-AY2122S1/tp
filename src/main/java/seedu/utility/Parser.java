@@ -47,12 +47,15 @@ import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeDescriptionException;
 import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.InvalidInputAmountValueException;
 import seedu.exceptions.InvalidSettingsDataException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -149,6 +152,10 @@ public class Parser {
     private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
     private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
 
+    public static final List<String> multiplePartCommands = Arrays.asList(ADD_EXPENSE_KEYWORD, ADD_INCOME_KEYWORD,
+            DELETE_EXPENSE_KEYWORD, DELETE_INCOME_KEYWORD, FIND_KEYWORD, EXPENSE_RANGE_KEYWORD, INCOME_RANGE_KEYWORD,
+            SET_BUDGET_KEYWORD, SET_THRESHOLD_KEYWORD, CONVERT_CURRENCY_KEYWORD, CHECK_BUDGET_KEYWORD);
+    
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
@@ -162,6 +169,7 @@ public class Parser {
             + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final double INPUT_AMOUNT_LIMIT = 1000000000;
 
     /**
      * Parses user input into command for execution.
@@ -180,6 +188,11 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
+        if (multiplePartCommands.contains(commandWord) && arguments.isEmpty()) {
+            return new InvalidCommand(Messages.MISSING_PARAMETERS_MESSAGE);
+        }
+        
+        
         if (isExpenseRelatedCommand(commandWord)) {
             return prepareExpenseRelatedCommand(commandWord, arguments);
         } else if (isIncomeRelatedCommand(commandWord)) {
@@ -459,9 +472,14 @@ public class Parser {
         return expenseDescription;
     }
 
-    private double extractExpenseAmount(Matcher matcher) throws InvalidExpenseAmountException {
+    private double extractExpenseAmount(Matcher matcher) 
+            throws InvalidExpenseAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseExpenseAmount(userGivenAmount);
+        double expenseAmount = parseExpenseAmount(userGivenAmount);
+        if (expenseAmount > INPUT_AMOUNT_LIMIT) { 
+            throw new InvalidInputAmountValueException(Messages.INVALID_EXPENSE_VALUE);
+        }
+        return expenseAmount;
     }
 
     private Command prepareAddIncome(Matcher matcher) {
@@ -520,9 +538,14 @@ public class Parser {
         return incomeDescription;
     }
 
-    private double extractIncomeAmount(Matcher matcher) throws InvalidIncomeAmountException {
+    private double extractIncomeAmount(Matcher matcher) 
+            throws InvalidIncomeAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseIncomeAmount(userGivenAmount);
+        double incomeAmount = parseIncomeAmount(userGivenAmount);
+        if (incomeAmount > INPUT_AMOUNT_LIMIT) {
+            throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
+        } 
+        return incomeAmount;
     }
 
     /**
@@ -632,7 +655,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (expenseAmount <= 0.001) {
+        if (expenseAmount < 0.01) {
             throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isNaN(expenseAmount) || Double.isInfinite(expenseAmount)) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
@@ -648,7 +671,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (incomeAmount <= 0.001) {
+        if (incomeAmount < 0.01) {
             throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isNaN(incomeAmount) || Double.isInfinite(incomeAmount)) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);

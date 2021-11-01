@@ -2,7 +2,7 @@ package seedu.commands.expense;
 
 import seedu.commands.Command;
 import seedu.entry.Expense;
-import seedu.exceptions.DuplicateExpenseException;
+import seedu.exceptions.ExpenseOverflowException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -20,7 +20,7 @@ public class AddExpenseCommand extends Command {
             finances.addExpense(expense);
             ui.printExpenseAdded(expense);
             budgetManager.handleBudget(expense, finances.getExpenses(), ui);
-        } catch (DuplicateExpenseException e) {
+        } catch (ExpenseOverflowException e) {
             ui.printError(e.getMessage());
         }
         

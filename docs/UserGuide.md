@@ -6,7 +6,7 @@
 
 Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
-- sets/adjusts your spending limits
+- set/adjust your spending limits
 - provide you with helpful financial tips and insights
 
 It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
@@ -30,7 +30,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Delete income entry: `del_in`](#delete-income-entry-del_in)
     - [List all income entries: `list_in`](#list-all-income-entries-list_in)
     - [View total income: `total_in`](#view-total-income-total_in)
-    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find-ddmmyyyy)
+    - [Find entry using date: `find DD/MM/YYYY`](#find-entry-using-date-find-ddmmyyyy)
     - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
     - [View total balance: `balance`](#view-total-balance-balance)
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
@@ -120,7 +120,8 @@ Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 Note:
 
 - The default date of the added expense will be the date in which the expense is added.
-- Expense entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day.
+- Each expense entry can only have a maximum value of 1000000000.
+- The sum of all your entries cannot be more than 100000000000.
 
 Examples:
 
@@ -178,7 +179,7 @@ Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command `del_ex i/1` is given, you get the following message:
+When command <code>del_ex i/1</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
@@ -259,8 +260,9 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 Note:
 
-- The default date of the added income will be the date in which the income is added.
-- Income entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day. 
+- The default date of the added income will be the date in which the income is added. 
+- Each income entry can only have a maximum value of 1000000000.
+- The sum of all your entries cannot be more than 100000000000.
 
 Examples:
 
@@ -439,6 +441,17 @@ Below is a list of all your findings!
 4: [E] bought condo - $87654888878.00 (18/05/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
+If you wish to search based on value, for e.g. all entries that contain the value <code>5</code>:
+<ul><li>Give the command <code>find 5</code> and it will return the following:</li></ul>
+<pre>
+-----------------------------------------------------------------------------------------------------
+Below is a list of all your findings!
+-----------------------------------------------------------------------------------------------------
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought condo - $87654888878.00 (18/05/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
 </details>
 <br>
 
@@ -599,7 +612,7 @@ Format: `set_threshold t/THRESHOLD`
 
 Examples:
 
-- `set_budget t/0.2` sets the threshold value of all budget categories to 80%.
+- `set_threshold t/0.2` sets the threshold value of all budget categories to 80%.
 
 <details>
 <summary> Expected output in run window </summary>
