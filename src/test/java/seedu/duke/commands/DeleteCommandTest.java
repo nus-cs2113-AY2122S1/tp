@@ -3,6 +3,8 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 
@@ -17,7 +19,8 @@ import java.time.LocalDateTime;
 class DeleteCommandTest {
 
     @Test
-    void deleteOneEvent_listOfTwoEvents_oneEventRemaining() throws DukeException {
+    void deleteOneEvent_listOfTwoEvents_oneEventRemaining() throws DukeException, NoCommandAttributesException,
+            InvalidBudgetException {
         setUp();
         Command command1 = Parser.parseCommand("delete -e 2");
         command1.execute();

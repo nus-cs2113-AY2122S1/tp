@@ -42,9 +42,18 @@ public abstract class Parser {
 
         // TODO: Once parser is restructured, replace above with following two lines
         String[] command = response.trim().split(" +");
-        String commandDetails = command[1];
-        String commandType = command[0];
+        if (command.length == 1) {
+            String commandType = command[0];
+            return singleWordCommandProtocol(command, commandType);
+        } else {
+            String commandDetails = command[1];
+            String commandType = command[0];
+            return multiWordCommandProtocol(response, command, commandDetails, commandType);
+        }
+    }
 
+    private static Command multiWordCommandProtocol(String response, String[] command, String commandDetails,
+                                                    String commandType) throws DukeException {
         switch (commandType) {
         case "list":
             return new ListCommand(command);
@@ -55,8 +64,8 @@ public abstract class Parser {
             return new DeleteCommand(command);
         case "add":
             return new AddCommand(command, response);
-            // TODO: Replace with the following commented out code
-            // return AddParser.getAddCommand(commandDetails);
+        // TODO: Replace with the following commented out code
+        // return AddParser.getAddCommand(commandDetails);
         case "bye":
             return new ByeCommand();
         case "help":
@@ -70,6 +79,21 @@ public abstract class Parser {
             return UpdateParser.getUpdateCommand(commandDetails);
         case "next":
             return new NextCommand(command);
+        default:
+            throw new DukeException(Ui.getInvalidCommandMessage());
+        }
+    }
+
+    private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
+        switch (commandType) {
+        case "list":
+            return new ListCommand(command);
+        case "delete":
+            return new DeleteCommand(command);
+        case "bye":
+            return new ByeCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException(Ui.getInvalidCommandMessage());
         }

@@ -2,6 +2,8 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
@@ -14,7 +16,8 @@ class SelectCommandTest {
 
 
     @Test
-    void selectTaskUnderFirstEvent_TwoEventsWithOneTaskEach_correctTaskOutput() throws DukeException {
+    void selectTaskUnderFirstEvent_TwoEventsWithOneTaskEach_correctTaskOutput() throws DukeException,
+            NoCommandAttributesException, InvalidBudgetException {
         createEventsList();
         Command command1 = Parser.parseCommand("select -e 1");
         CommandResult feedback1 = command1.execute();

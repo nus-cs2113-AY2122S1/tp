@@ -2,7 +2,10 @@ package seedu.duke.parser.commandparser;
 
 import seedu.duke.Duke;
 import seedu.duke.Ui;
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.UpdateEventCommand;
+import seedu.duke.commands.UpdateMemberCommand;
+import seedu.duke.commands.UpdateTaskCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.items.Event;
@@ -53,7 +56,8 @@ public abstract class UpdateParser extends Parser {
         return null;
     }
 
-    private static Command parseUpdateEvent(String[] userUpdates, Event event) throws DukeException, InvalidBudgetException {
+    private static Command parseUpdateEvent(String[] userUpdates, Event event)
+            throws DukeException, InvalidBudgetException {
         String[] parsedAttributes = new String[3];
         LocalDateTime dateTime = null;
         double budget = 0;
@@ -64,7 +68,7 @@ public abstract class UpdateParser extends Parser {
             if (update.contains(TITLE_FLAG)) {
                 isFlag = true;
                 parsedAttributes[INDEX_OF_TITLE] = attribute[1];
-            } 
+            }
             if (update.contains(DATE_FLAG)) {
                 isFlag = true;
                 dateTime = Parser.convertDateTime(attribute[1]);
@@ -83,7 +87,7 @@ public abstract class UpdateParser extends Parser {
             }
             if (update.contains(TASK_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
-               return parseUpdateTask(event, attribute[1]);
+                return parseUpdateTask(event, attribute[1]);
             }
             if (!isFlag) {
                 System.out.println("Invalid update, you have returned to the main page!");
@@ -92,14 +96,14 @@ public abstract class UpdateParser extends Parser {
         return new UpdateEventCommand(event, parsedAttributes, dateTime, budget);
     }
 
-    protected static Command parseUpdateTask(Event eventToBeUpdated, String index) throws DukeException, InvalidBudgetException {
+    protected static Command parseUpdateTask(Event eventToBeUpdated, String index)
+            throws DukeException {
         int taskNum = Integer.parseInt(index) - 1;
         Task taskToBeUpdated = eventToBeUpdated.getFromTaskList(taskNum);
         String[] userUpdates = prepareTaskUpdates(taskToBeUpdated);
 
         String[] parsedAttributes = new String[3];
         LocalDateTime dateTime = null;
-        double budget = 0;
 
         for (String update : userUpdates) {
             String[] attribute = update.trim().split("/+");
@@ -121,7 +125,7 @@ public abstract class UpdateParser extends Parser {
                 System.out.println("Invalid update");
             }
         }
-        return new UpdateTaskCommand(parsedAttributes, taskToBeUpdated,  dateTime);
+        return new UpdateTaskCommand(parsedAttributes, taskToBeUpdated, dateTime);
     }
 
     private static Command changeMember(String index, Task taskToBeUpdated) throws DukeException {
@@ -156,11 +160,13 @@ public abstract class UpdateParser extends Parser {
         }
         return memberIndex;
     }
+
     private static void checkValidMember(int memberIndex, Task task) {
         if (memberIndex > task.memberList.size() || memberIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
     }
+
     private static int getMemberIndex() {
         Ui.printLineBreak();
         Ui.promptForMemberIndex();
@@ -196,7 +202,7 @@ public abstract class UpdateParser extends Parser {
                 Ui.printLineBreak();
             }
         }
-        return new UpdateMemberCommand("remove", -1 , taskToBeUpdated, memberIndex);
+        return new UpdateMemberCommand("remove", -1, taskToBeUpdated, memberIndex);
     }
 
     private static String[] prepareTaskUpdates(Task taskToBeUpdated) {
@@ -204,6 +210,6 @@ public abstract class UpdateParser extends Parser {
         Ui.printTask(taskToBeUpdated);
         Ui.updateTaskIntroMessage();
         String userInput = Ui.readInput();
-        return  userInput.trim().split(">");
+        return userInput.trim().split(">");
     }
 }

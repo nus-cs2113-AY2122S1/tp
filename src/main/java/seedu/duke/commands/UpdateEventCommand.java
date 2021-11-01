@@ -8,7 +8,7 @@ import seedu.duke.items.Event;
 import java.time.LocalDateTime;
 
 
-public class UpdateEventCommand extends Command{
+public class UpdateEventCommand extends Command {
 
     private static final int INDEX_OF_TITLE = 0;
     private static final int INDEX_OF_VENUE = 2;

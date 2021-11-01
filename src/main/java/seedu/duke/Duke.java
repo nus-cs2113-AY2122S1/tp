@@ -50,7 +50,6 @@ public class Duke {
                 System.out.println("Returning to Main Page...");
                 Ui.printLineBreak();
             } catch (DukeException e) {
-                Ui.printLineBreak();
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
             } catch (InvalidBudgetException | NoCommandAttributesException e) {
