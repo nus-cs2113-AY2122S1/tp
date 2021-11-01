@@ -84,7 +84,7 @@ public class ParserTest {
     public void parseUpdateCommand_ingredientNotFound_success() throws SitusException {
         try {
             String inputString1 = "add n/ apple a/ 300 e/ 12/10/2999";
-            String inputString2 = "update 999 a/ 12.3";
+            String inputString2 = "update 99.9 a/ 12.3";
             Parser.parse(inputString1);
             String resultMsg = Parser.parse(inputString2);
             fail();
