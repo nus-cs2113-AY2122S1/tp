@@ -1,6 +1,6 @@
 //@@author marcusbory
 
-package seedu.duke;
+package seedu.contech;
 
 import seedu.command.Command;
 import seedu.contact.Contact;
