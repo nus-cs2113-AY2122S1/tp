@@ -3,7 +3,6 @@ package medbot.ui;
 import medbot.exceptions.MedBotException;
 import medbot.utilities.ViewType;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,6 +15,7 @@ public class Ui {
     public static final String VERTICAL_LINE_SPACED = " | ";
     public static final String END_LINE = System.lineSeparator();
     private static final String ERROR_VIEW_CONTEXT_NOT_FOUND = "Cannot identify the current view type" + END_LINE;
+    private static final String NO_PERSON_MESSAGE = "There is no person with such attributes in this list." + END_LINE;
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
             + "----------------------------------------------------- " + END_LINE;
 
@@ -66,11 +66,11 @@ public class Ui {
         assert id > 0;
         switch (viewType) {
         case PATIENT_INFO:
-            return "Added patient with patient ID: " + id + END_LINE;
+            return PatientUi.getAddPatientMessage(id);
         case SCHEDULER:
-            return "Added schedule with schedule ID: " + id + END_LINE;
+            return SchedulerUi.getAddScheduleMessage(id);
         case MEDICAL_STAFF_INFO:
-            return "Added staff with staff ID: " + id + END_LINE;
+            return StaffUi.getAddStaffMessage(id);
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -88,11 +88,11 @@ public class Ui {
         assert id > 0;
         switch (viewType) {
         case PATIENT_INFO:
-            return "Patient with id " + id + " deleted from system." + END_LINE;
+            return PatientUi.getDeletePatientMessage(id);
         case SCHEDULER:
-            return "Schedule with id " + id + " deleted from system." + END_LINE;
+            return SchedulerUi.getDeleteScheduleMessage(id);
         case MEDICAL_STAFF_INFO:
-            return "Staff with id " + id + " deleted from system." + END_LINE;
+            return StaffUi.getDeleteStaffMessage(id);
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -111,14 +111,11 @@ public class Ui {
         assert id > 0;
         switch (viewType) {
         case PATIENT_INFO:
-            return "The information of patient with ID " + id + " has been edited to:" + END_LINE + END_LINE
-                    + info + END_LINE;
+            return PatientUi.getEditPatientMessage(id, info);
         case SCHEDULER:
-            return "The information of schedule with ID " + id + " has been edited to:" + END_LINE + END_LINE
-                    + info + END_LINE;
+            return SchedulerUi.getEditScheduleMessage(id, info);
         case MEDICAL_STAFF_INFO:
-            return "The information of staff with ID " + id + " has been edited to:" + END_LINE + END_LINE
-                    + info + END_LINE;
+            return StaffUi.getEditStaffMessage(id, info);
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -134,7 +131,7 @@ public class Ui {
      */
     public static String getFindPersonsMessage(List<String> persons, ViewType viewType) throws MedBotException {
         if (persons.size() == 0) {
-            return "There is no person with such attributes in this list." + END_LINE;
+            return NO_PERSON_MESSAGE;
         }
         String output;
         switch (viewType) {
@@ -167,10 +164,10 @@ public class Ui {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = "The patient with ID: " + personId + " is archived successfully.";
+            output = PatientUi.getArchivePatientMessage(personId);
             break;
         case MEDICAL_STAFF_INFO:
-            output = "The staff with ID: " + personId + " is archived successfully.";
+            output = StaffUi.getArchiveStaffMessage(personId);
             break;
         default:
             assert false;
@@ -191,10 +188,10 @@ public class Ui {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = "The patient with ID: " + personId + " is unarchived successfully.";
+            output = PatientUi.getUnarchivePatientMessage(personId);
             break;
         case MEDICAL_STAFF_INFO:
-            output = "The staff with ID: " + personId + " is unarchived successfully.";
+            output = StaffUi.getUnarchiveStaffMessage(personId);
             break;
         default:
             assert false;
@@ -215,13 +212,13 @@ public class Ui {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = "You are currently in the Patient's View.";
+            output = PatientUi.getCurrentViewPatientMessage();
             break;
         case MEDICAL_STAFF_INFO:
-            output = "You are currently in the Staff's View.";
+            output = StaffUi.getCurrentViewStaffMessage();
             break;
         case SCHEDULER:
-            output = "You are currently in the Scheduler's View.";
+            output = SchedulerUi.getCurrentViewMessage();
             break;
         default:
             assert false;

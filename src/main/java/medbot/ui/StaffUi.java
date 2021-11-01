@@ -39,6 +39,30 @@ public class StaffUi extends PersonUi {
         return getUnarchiveHelpMessage(STAFF);
     }
 
+    public static String getAddStaffMessage(int id) {
+        return getAddPersonMessage(STAFF, id);
+    }
+
+    public static String getDeleteStaffMessage(int id) {
+        return getDeletePersonMessage(STAFF, id);
+    }
+
+    public static String getEditStaffMessage(int id, String info) {
+        return getEditPersonMessage(STAFF, id, info);
+    }
+
+    public static String getArchiveStaffMessage(int id) {
+        return getArchivePersonMessage(STAFF, id);
+    }
+
+    public static String getUnarchiveStaffMessage(int id) {
+        return getUnarchivePersonMessage(STAFF, id);
+    }
+
+    public static String getCurrentViewStaffMessage() {
+        return getCurrentViewPersonMessage(STAFF);
+    }
+
     /**
      * Returns the profile of a staff.
      *
