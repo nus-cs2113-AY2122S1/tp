@@ -25,9 +25,16 @@ public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
+    private static final String WHITESPACE = " ";
     private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     //@@author APZH
+    /**
+     * Returns a {@code Map} mapping command flags to the arguments entered by the user.
+     *
+     * @param commandArguments The command entered by the user.
+     * @return {@code Map} mapping command flags to the arguments.
+     */
     public static Map<String, String> getCommandOptions(String commandArguments) {
 
         Map<String, String> flagsToArguments = new HashMap<>();
@@ -40,7 +47,7 @@ public class CommandParser {
                 String flagArguments = "";
                 try {
                     while (tokens[i + 1].matches(FLAG_REGEX) == false) {
-                        flagArguments += tokens[i + 1] + " ";
+                        flagArguments += tokens[i + 1] + WHITESPACE;
                         i++;
                     }
                 } catch (IndexOutOfBoundsException e) {
@@ -48,7 +55,7 @@ public class CommandParser {
                 }
                 flagsToArguments.put(flag.substring(2), flagArguments.trim());
             } else {
-                mainArgument += tokens[i] + " ";
+                mainArgument += tokens[i] + WHITESPACE;
             }
         }
 
