@@ -12,6 +12,7 @@ import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.EmptyFieldValueException;
 import seedu.traveller.exceptions.IllegalTimeFormatException;
 import seedu.traveller.exceptions.IllegalTimeValueException;
 import seedu.traveller.exceptions.IllegalTripNameException;
@@ -73,7 +74,7 @@ public class ParserTest {
             Parser.parse("new all /from CHN /to JPN");
         });
         // Missing trip name
-        assertThrows(IllegalTripNameException.class, () -> {
+        assertThrows(EmptyFieldValueException.class, () -> {
             Parser.parse("new  /from CHN /to JPN");
         });
         // Missing /to flag
@@ -105,7 +106,7 @@ public class ParserTest {
             Parser.parse("add-day trip /day -1");
         });
         // Missing /day flag input
-        assertThrows(InvalidNumberOfDaysException.class, () -> {
+        assertThrows(EmptyFieldValueException.class, () -> {
             Parser.parse("add-day trip /day ");
         });
         // Missing /day flag
@@ -175,7 +176,7 @@ public class ParserTest {
 
     @Test
     public void parse_viewCommand_exceptionThrown() {
-        assertThrows(InvalidViewCommandException.class, () -> {
+        assertThrows(EmptyFieldValueException.class, () -> {
             Parser.parse("view ");
         });
     }

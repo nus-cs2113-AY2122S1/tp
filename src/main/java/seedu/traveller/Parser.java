@@ -16,6 +16,7 @@ import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.EmptyFieldValueException;
 import seedu.traveller.exceptions.IllegalTimeFormatException;
 import seedu.traveller.exceptions.IllegalTimeValueException;
 import seedu.traveller.exceptions.IllegalTripNameException;
@@ -159,6 +160,7 @@ public class Parser {
             throw new InvalidAddItemFormatException();
         }
         int dayIndex = parseValidIndex(rawDayNumber);
+        parseValidFieldValue(new String[] {tripName, rawDayNumber, itemTime, itemName});
         parseValidTime(itemTime);
         assert dayIndex >= 0 : "Day index is negative.";
 
@@ -184,6 +186,7 @@ public class Parser {
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
+            parseValidFieldValue(new String[] {tripName, startCountryCode, endCountryCode});
             parseValidTripName(tripName);
 
             command = new NewCommand(tripName, startCountryCode, endCountryCode);
@@ -211,6 +214,7 @@ public class Parser {
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
+            parseValidFieldValue(new String[] {tripName, startCountryCode, endCountryCode});
             parseValidTripName(tripName);
 
             command = new EditCommand(tripName, startCountryCode, endCountryCode);
@@ -225,9 +229,10 @@ public class Parser {
      * @param userInput Raw user input, with the first command option (delete) removed.
      * @return Command A <code>DeleteCommand</code> object.
      */
-    private static Command parseDeleteCommand(String userInput) {
+    private static Command parseDeleteCommand(String userInput) throws TravellerException {
         Command command;
         logger.log(Level.INFO, "Delete command input");
+        parseValidFieldValue(new String[] {userInput});
         command = new DeleteCommand(userInput);
         return command;
     }
@@ -250,6 +255,7 @@ public class Parser {
             logger.log(Level.WARNING, "Invalid delete-day command format: " + userInput);
             throw new InvalidDeleteDayFormatException();
         }
+        parseValidFieldValue(new String[] {tripName, rawDayIndex});
         int dayIndex = parseValidIndex(rawDayIndex);
         assert dayIndex >= 0 : "Day index is negative.";
 
@@ -279,6 +285,8 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidDeleteItemFormatCommand();
         }
+        parseValidFieldValue(new String[] {tripName, rawDayNumber, rawItemNumber});
+
         int dayNumber = parseValidIndex(rawDayNumber);
         assert dayNumber >= 0 : "Day number is negative.";
 
@@ -307,6 +315,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchItemFormatException();
         }
+        parseValidFieldValue(new String[] {tripName, rawDayNumber, keyword});
         int dayIndex = parseValidIndex(rawDayNumber);
         assert dayIndex >= 0 : "Day index is negative.";
 
@@ -348,6 +357,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidEditItemFormatException();
         }
+        parseValidFieldValue(new String[] {tripName, rawDayNumber, itemTime, itemName, rawIndex});
         int dayIndex = parseValidIndex(rawDayNumber);
         parseValidTime(itemTime);
         assert dayIndex >= 0 : "Day index is negative.";
@@ -365,9 +375,7 @@ public class Parser {
     private static Command parseViewCommand(String userInput) throws  TravellerException {
         Command command;
         logger.log(Level.INFO, "View command input");
-        if (Objects.equals(userInput, "")) {
-            throw new InvalidViewCommandException();
-        }
+        parseValidFieldValue(new String[] {userInput});
         command = new ViewCommand(userInput);
         return command;
     }
@@ -381,10 +389,12 @@ public class Parser {
     private static Command parseShortestDistCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
+        String startCountryCode;
+        String endCountryCode;
         try {
             int toIdx = getToFlagIndex(userInput);
-            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
-            String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+            startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
@@ -393,6 +403,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidShortestFormatException();
         }
+        parseValidFieldValue(new String[] {startCountryCode, endCountryCode});
 
         return command;
     }
@@ -406,10 +417,12 @@ public class Parser {
     private static Command parseShortestCostCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
+        String startCountryCode;
+        String endCountryCode;
         try {
             int toIdx = getToFlagIndex(userInput);
-            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
-            String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
+            startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
@@ -418,6 +431,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidShortestFormatException();
         }
+        parseValidFieldValue(new String[] {startCountryCode, endCountryCode});
 
         return command;
     }
@@ -425,11 +439,15 @@ public class Parser {
     private static Command parseEditMapCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit-map command input");
         Command command;
+        String startCountryCode;
+        String endCountryCode;
+        String rawDist;
+
         try {
             int toIdx = getToFlagIndex(userInput);
             int distIdx = getDistFlagIndex(userInput);
 
-            String rawDist = userInput.substring(distIdx + DIST_LENGTH);
+            rawDist = userInput.substring(distIdx + DIST_LENGTH);
 
             try {
                 WorldMap.distanceNonString(rawDist);
@@ -440,8 +458,8 @@ public class Parser {
             double dist = Double.parseDouble(rawDist);
             WorldMap.distanceNonZero(dist);
 
-            String startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
-            String endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
+            startCountryCode = userInput.substring(FROM_LENGTH - 1, toIdx).toUpperCase();
+            endCountryCode = userInput.substring(toIdx + TO_LENGTH, distIdx).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
             assert !(dist < 0.1) : "distance should be more than 0.1.";
@@ -452,6 +470,8 @@ public class Parser {
         } catch (NonZeroDistanceException e) {
             throw new DistanceNonNegativeException();
         }
+        parseValidFieldValue(new String[] {startCountryCode, endCountryCode, rawDist});
+
         return command;
     }
 
@@ -463,7 +483,7 @@ public class Parser {
     private static Command parseAddDayCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Add-day command input");
         String tripName;
-        String rawDaysIndex = "";
+        String rawDaysIndex;
 
         try {
             int dayIdx = getDayFlagIndex(userInput);
@@ -473,6 +493,8 @@ public class Parser {
             logger.log(Level.WARNING, "Invalid add-day command format: " + userInput);
             throw new InvalidAddDayFormatException();
         }
+        parseValidFieldValue(new String[] {tripName, rawDaysIndex});
+
         int daysIndex = parseValidIndex(rawDaysIndex);
         if (daysIndex == 0) {
             throw new InvalidNumberOfDaysException(daysIndex);
@@ -500,6 +522,14 @@ public class Parser {
     private static Command parseHelpCommand() {
         logger.log(Level.INFO, "Help command input");
         return new HelpCommand();
+    }
+
+    private static void parseValidFieldValue(String[] arrayOfValues) throws TravellerException {
+        for (String value : arrayOfValues) {
+            if (Objects.equals(value, "")) {
+                throw new EmptyFieldValueException();
+            }
+        }
     }
 
     /**
@@ -548,7 +578,7 @@ public class Parser {
      * @throws TravellerException If <code>TripName</code> is not a valid <code>TripName</code>.
      */
     private static void parseValidTripName(String tripName) throws TravellerException {
-        if (tripName.equals("all") || tripName.equals("")) {
+        if (tripName.equals("all")) {
             throw new IllegalTripNameException(tripName);
         }
     }
