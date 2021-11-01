@@ -1,5 +1,7 @@
 package seedu.duke.logic.commands.module;
 
+import java.io.IOException;
+
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
@@ -8,14 +10,14 @@ import seedu.duke.model.task.TaskList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-import java.io.IOException;
+import static seedu.duke.logic.parser.ParserUtil.isVerbose;
 
 //@@author Roycius
 public class ListModuleCommand extends Command {
-    private final String argument;
+    private final String parameter;
 
-    public ListModuleCommand(String argument) {
-        this.argument = argument;
+    public ListModuleCommand(String parameter) {
+        this.parameter = parameter;
     }
 
     @Override
@@ -23,10 +25,9 @@ public class ListModuleCommand extends Command {
             throws DukeException, IOException {
         if (moduleList.isEmpty()) {
             ui.printMessage("There are no modules in the list.");
-        } else if (argument.equalsIgnoreCase("verbose")) {
-            ui.printModulesWithDetails(moduleList);
-        } else if (argument.isEmpty()) {
+        } else {
             ui.printModuleList(moduleList);
         }
+
     }
 }
