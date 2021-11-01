@@ -40,6 +40,10 @@ public class Dish implements Comparable<Dish> {
         return dishName;
     }
 
+    public double getLimit() {
+        return limit;
+    }
+
     public double getWastage() {
         return wastage;
     }
