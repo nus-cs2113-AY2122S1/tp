@@ -15,11 +15,12 @@ This user guide serves to help you manoeuvre around **Food-O-Rama**, which the *
 and includes a **List of Commands** for your quick
 reference. We hope you enjoy using *Food-O-Rama*!
 
+| Legend | Description |
+| --- | --- |
+| *Note* 💡 | Lightbulb requires your attention. |
+| *Tip* ❕ | Exclamation mark gives additional information to use Food-O-Rama more effectively. | 
+
 ## 🧾 Table of Contents
-
-*Note* 💡 Lightbulb requires your attention.
-
-*Tip* ❕  Exclamation mark gives additional information to use Food-O-Rama more effectively.
 
 * [Quick Start](#-quick-start)
 * [List of Commands](#-list-of-commands)
@@ -380,7 +381,8 @@ ____________________________________________________________
 Here are the dishes you have:
 1. chicken rice
    Wastage: 0.0 kg
-   Parts: None
+   Ingredients Linked: None
+   Limit: No limit has been set
 You can use command 'add' to add new dishes!
 ____________________________________________________________
 ```
@@ -665,8 +667,10 @@ Expected Outcome:
 ____________________________________________________________
 Here are the ingredients you have: 
 1. chicken
-   Storage: 7.0 kg
+   Storage: 2.2 kg
    Wastage: 0.0 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
@@ -764,10 +768,12 @@ ____________________________________________________________
 As requested, here are the matching dishes in your list:
 1. pasta
    Wastage: 1.0 kg
-   Constituents: None
+   Ingredients Linked: None
+   Limit: No limit has been set
 2. krabby patty
    Wastage: 0.0 kg
-   Constituents: None
+   Ingredients Linked: None
+   Limit: No limit has been set
 ____________________________________________________________
 
 ```
@@ -796,12 +802,15 @@ ____________________________________________________________
 As requested, here are the matching ingredients in your list:
 1. chicken
    Storage: 7.0 kg
-   Wastage: 1.5 kg
+   Wastage: 0.0 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 2. chickpea
    Storage: 3.5 kg
-   Wastage: 2.0 kg
+   Wastage: 0.0 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 ____________________________________________________________
-
 ```
 
 <br/>
@@ -1099,7 +1108,42 @@ file.
 ### Manipulating the data
 
 Food-O-Rama data can be written manually by editing the text files in *'Data'*.
-Refer to *Instructions for Manual Testing* for the appropriate data format.
+Refer to *Instructions for Manual Testing* in the Developer Guide for the appropriate data format.
+
+Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
+
+* *Note* 💡 `[WASTAGE_LIMIT]` is `-1` when no limit is set.
+
+Dish example of usage:
+
+```
+No Linked Ingredients, No Limit, Wastage of 2kg:
+prata|2.0|2.0|-1
+
+2 Linked Ingredients (flour and egg), No Limit, Wastage of 2kg:
+prata|2.0|1.0|-1|flour|egg
+
+2 Linked Ingredients (flour and egg), Wastage of 2kg, Limit of 3kg:
+prata|2.0|1.0|3|flour|egg
+```
+
+Ingredient Format: `[INGR_NAME] | [AMOUNT_STORED_IN_KG] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_LIMIT] | [EXPIRY_DATE]`
+
+* *Note* 💡:
+  
+    * `[WASTAGE_LIMIT]` is `-1` when no limit is set.
+    * `[EXPIRY_DATE]` follows the fomat `dd/MM/yyyy`.
+    * `[EXPIRY_DATE]` is `null` when no expiry date is set. 
+    
+Ingredient example of usage:
+
+```
+No Limit, No Expiry, Storage of 2kg, Wastage of 1kg:
+chicken|2.0|1.0|-1|null
+
+Limit of 2.5kg, Expiry Set, Storage of 2kg, Wastage of 1kg:
+chicken|2.0|1.0|2.5|30/10/2021
+```
 
 ## 😯 FAQ
 
