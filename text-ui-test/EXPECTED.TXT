@@ -10,7 +10,9 @@ Hello from
 ________________________________________________________________________________________________________________________
 
 What would you like to do?
-==>CG1111 Engineering Principles and Practice I 6MC
+==>Searching, standby...
+If nothing is appearing even after a while, press ENTER to cancel the search and narrow down your search terms.
+CG1111 Engineering Principles and Practice I 6MC
 CG1111A Engineering Principles and Practice I 4MC
 CG1112 Engineering Principles and Practice II 6MC
 CG2023 Signals and Systems 4MC
