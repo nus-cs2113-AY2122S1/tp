@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 
 /** <h1>Cookbook class.</h1>
  *
- * <p>Handles the commands given in the {@code Command} class that relates to the cookbook and
- * updates the cookbook accordingly</p>
+ * <p>
+ *     Handles the commands given in  {@code Command} class that relates to the cookbook and
+ *     updates the cookbook accordingly
+ * </p>
+ *
  */
 public class Cookbook {
     protected ArrayList<Recipe> recipes;
@@ -61,9 +64,9 @@ public class Cookbook {
     }
 
     /**
-     *<h2>void addRecipe(Recipe).</h2>
+     * <h2>void addRecipe(Recipe).</h2>
      *
-     * <p>This methods  adds the recipe to the cookbook if it does not already exist.</p>
+     * <p>This methods adds the recipe to the cookbook if it does not already exist.</p>
      *
      * @param newRecipe  Recipe to be added to the cookbook
      * @throws GordonException  if the recipe already exists in the cookbook
@@ -369,6 +372,7 @@ public class Cookbook {
      * <h2> String listCookbookTags().</h2>
      *
      * <p>This method prints out all tags that are currently in the cookbook</p>
+     *
      * @return The list of all tags
      */
     public String listCookbookTags() {
@@ -383,6 +387,8 @@ public class Cookbook {
 
     /**
      * <h2>Tag extractCookbookTag(tagName).</h2>
+     *
+     * <p> This method returns the tag matching the tag name, if found.</p>
      * 
      * @param tagName  The name of the tag to be extracted
      * @return  The extracted tag
@@ -407,24 +413,57 @@ public class Cookbook {
     }
 
     /////////////////////////// FILTER FUNCTIONALITIES ///////////////////////////
+
+    /**
+     * <h2> ArrayList<> filterByIngredients(ingredients).</h2>
+     *
+     * <p> This method finds which recipes has the specified ingredients.</p>
+     *
+     * @param ingredients The list of ingredients being queried
+     * @return the list of recipes containing the specified ingredients
+     */
     public ArrayList<Recipe> filterByIngredients(ArrayList<String> ingredients) {
         return recipes.stream()
                 .filter(recipe -> recipe.containsIngredients(ingredients))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * <h2> ArrayList<> filterByTags(tags).</h2>
+     *
+     * <p> This method finds which recipes has the specified tags.</p>
+     *
+     * @param tags Ths list of tags being queried
+     * @return the list of recipes containing the specified tag
+     */
     public ArrayList<Recipe> filterByTags(ArrayList<String> tags) {
         return recipes.stream()
                 .filter(recipe -> recipe.containsTags(tags))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * <h2> ArrayList<> filterByDifficulty(difficulty).</h2>
+     *
+     * <p> This method finds which recipes are labelled with the specified difficulty.</p>
+     *
+     * @param difficulty The difficulty being queried
+     * @return the list of recipes labelled with the specified query
+     */
     public ArrayList<Recipe> filterByDifficulty(Difficulty difficulty) {
         return recipes.stream()
                 .filter(recipe -> recipe.difficulty == difficulty)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * <h2> ArrayList<> filterByPrice(price).</h2>
+     *
+     * <p> This method finds which recipes cost less than the specified price.</p>
+     *
+     * @param price The price being queried
+     * @return the list of recipes that cost less than the price being queried.
+     */
     public ArrayList<Recipe> filterByPrice(float price) {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
         return recipes.stream()
@@ -433,6 +472,14 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * <h2> ArrayList<> filterByCalories(cal).</h2>
+     *
+     * <p> This method finds which recipes has fewer calories than the specified calories.</p>
+     *
+     * @param cal The calories being queried
+     * @return the list of recipes that has fewer calories than the calories being queried
+     */
     public ArrayList<Recipe> filterByCalories(int cal) {
         Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories);
         return recipes.stream()
@@ -441,6 +488,14 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * <h2> ArrayList<> filterByTime(time).</h2>
+     *
+     * <p> This method finds which recipes has few total time than the specified time.</p>
+     *
+     * @param time The total time being queried
+     * @return the list of recipes whose total time taken is less than the time being queried
+     */
     public ArrayList<Recipe> filterByTime(int time) {
         Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalTime);
         return recipes.stream()

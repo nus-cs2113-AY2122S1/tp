@@ -1,5 +1,9 @@
 package gordon.util;
 
+/** <h1>UI class.</h1>
+ *
+ * <p> Handles the printing of messages to the command line.</p>
+ */
 public class UI {
     public void printIntro() {
         System.out.println("\n"
