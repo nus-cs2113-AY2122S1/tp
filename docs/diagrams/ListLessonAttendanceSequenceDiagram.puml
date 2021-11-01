@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":ListLessonAttendanceCommand" as listLessonAttendanceCommand
+Participant ":ModuleList" as moduleList
+Participant ":Module" as module
+Participant ":LessonAttendanceList" as lessonAttendanceList
+Participant ":AttendanceList" as attendanceList
+
+activate taa
+
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : "list_lesson_attendance c/CS2113T\nl/1"
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput)
+activate parser
+
+create listLessonAttendanceCommand
+parser -> listLessonAttendanceCommand
+activate listLessonAttendanceCommand
+listLessonAttendanceCommand -> parser
+deactivate listLessonAttendanceCommand
+
+parser --> taa : listLessonAttendanceCommand:command
+deactivate parser
+
+taa -> listLessonAttendanceCommand : checkArgument()
+activate listLessonAttendanceCommand
+
+listLessonAttendanceCommand --> taa
+deactivate listLessonAttendanceCommand
+
+taa -> listLessonAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
+activate listLessonAttendanceCommand
+
+listLessonAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
+activate moduleList
+moduleList --> listLessonAttendanceCommand : module:Module
+deactivate moduleList
+
+
+listLessonAttendanceCommand -> module : getStudentList()
+activate module
+module --> listLessonAttendanceCommand : studentList:StudentList
+deactivate module
+
+create lessonAttendanceList
+listLessonAttendanceCommand -> lessonAttendanceList : new LessonAttendanceList()
+activate lessonAttendanceList
+lessonAttendanceList --> listLessonAttendanceCommand : lessonAttendances:lessonAttendanceList
+deactivate lessonAttendanceList
+
+listLessonAttendanceCommand -> lessonAttendanceList : setLessonAttendances(studentList:StudentList, lessonNumber:int)
+activate lessonAttendanceList
+lessonAttendanceList --> listLessonAttendanceCommand :
+deactivate lessonAttendanceList
+
+listLessonAttendanceCommand -> attendanceList : getSize()
+activate attendanceList
+attendanceList --> listLessonAttendanceCommand : size:int
+deactivate attendanceList
+
+alt#Gold #Pink size==0
+    listLessonAttendanceCommand -> ui : printMessage("There is no recorded attendance ...")
+    activate ui
+    ui -> user : Display message:\n"There is no recorded ..."
+    ui --> listLessonAttendanceCommand
+    deactivate ui
+
+
+
+else #LightGreen else
+    listLessonAttendanceCommand -> ui : printMessage("Class attendance for Lesson ...")
+    activate ui
+    ui -> user : Display message:\n("Class attendance for Lesson ...")
+    ui --> listLessonAttendanceCommand
+    deactivate ui
+end
+
+deactivate listLessonAttendanceCommand
+
+
+@enduml
