@@ -269,13 +269,4 @@ public class Storage {
         Storage.listOfTrips = listOfTrips;
     }
 
-    public static boolean isIsProcessing() {
-        return isProcessing;
-    }
-
-    public static void setIsProcessing(boolean isProcessing) {
-        Storage.isProcessing = isProcessing;
-    }
-
-
 }
