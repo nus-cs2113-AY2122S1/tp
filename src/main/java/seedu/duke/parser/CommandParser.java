@@ -22,6 +22,9 @@ import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.utility.Utility;
 
 //@@author APZH
+/**
+ * Parses user input.
+ */
 public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
