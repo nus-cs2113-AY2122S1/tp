@@ -271,7 +271,7 @@ public class StonksGraph {
         values.addAll(monthlyExpenseBreakdowns);
         values.addAll(monthlyIncomeBreakdowns);
         double max = Collections.max(values);
-        int barValue = (int)max/10;
+        int barValue = (int)(max / 10);
 
 
         drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);

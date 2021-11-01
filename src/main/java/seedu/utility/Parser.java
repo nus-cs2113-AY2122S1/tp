@@ -186,7 +186,7 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
-        if(multiplePartCommands.contains(commandWord) && arguments.isEmpty()) {
+        if (multiplePartCommands.contains(commandWord) && arguments.isEmpty()) {
             return new InvalidCommand(Messages.MISSING_PARAMETERS_MESSAGE);
         }
         
