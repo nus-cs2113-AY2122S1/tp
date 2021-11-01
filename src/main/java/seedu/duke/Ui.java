@@ -356,11 +356,21 @@ public class Ui {
         System.out.println("Otherwise, you may continue to use the program.");
     }
 
-    public static void printInvalidPerson(String name) {
-        System.out.println(name + " is not part of the trip. "
-                + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
+    public static void printInvalidPeople(ArrayList<String> names) {
+        for (String name : names) {
+            if (names.indexOf(name) == names.size() - 1) {
+                System.out.print(name + " ");
+            } else if (names.indexOf(name) == names.size() - 2) {
+                System.out.print(name + " and");
+            } else if (names.indexOf(name) < names.size() - 2) {
+                System.out.print(name + ", ");
+            }
+        }
+        System.out.println("is not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
         printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        System.out.println("Please enter the names of the people who are involved in this expense again, "
+                + "separated by a comma:");
     }
 
     public static void printTripClosed(Trip trip) {
