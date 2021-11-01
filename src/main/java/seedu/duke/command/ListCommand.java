@@ -15,7 +15,7 @@ import seedu.duke.task.taskmanager.TaskManager;
 //@@author APZH
 /**
  * Represents a command to list the tasks in a tasklist.
- * This command can filter and sort the tasklist, and display the recurrences of a task.
+ * This command can filter the tasklist and display the recurrences of a task.
  */
 public class ListCommand extends Command {
 
