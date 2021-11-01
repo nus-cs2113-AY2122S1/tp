@@ -204,8 +204,11 @@ Lists all existing medications in the inventory.
 * All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
 * You are able to `liststock` by any column and sort or reverse sort them.
 * When you update an order information, MediVault reflects the pending stocks shown here.
+* The total pending quantity will be shown if there are orders for a medication.
+* `low/LESS_THAN_OR_EQUAL_QUANTITY` and `expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE` parameters can be used to search for
+stocks with low quantity and expiring stocks. 
 
-Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
+Format: `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
 
 Example 1 (Listing all medications): `liststock`
 
@@ -671,6 +674,7 @@ Adds the received medication into the current stocks.
 
 > :warning: Warning
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
+> * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used. 
 
 Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
 
@@ -906,9 +910,9 @@ see `stock.txt, order.txt, prescription.txt` in that folder.
 Command | Command Syntax
 ------ | ------
 addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
-deletestock | `deletestock [i/STOCK_ID expiring/DATE]`
-updatestock | `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
-liststock | `liststock {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
+deletestock | `deletestock [i/ID expiring/DATE]`
+updatestock | `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
+liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
 addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
 updateprescription | `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
@@ -916,7 +920,7 @@ listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STA
 archiveprescription | `archiveprescription d/DATE`
 addorder | `addorder n/NAME q/QUANTITY {d/DATE}`
 deleteorder | `deleteorder i/ID`
-updateorder | `updateorder i/ID [n/NAME q/QUANTITY d/DATE]  `
+updateorder | `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
 listorder | `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}`
 archiveorder | `archiveorder d/DATE`
 receiveorder | `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
