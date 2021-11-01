@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /** <h1>Cookbook class.</h1>
  *
  * <p>
- *     Handles the commands given in the {@code Command} class that relates to the cookbook and
+ *     Handles the commands given in  {@code Command} class that relates to the cookbook and
  *     updates the cookbook accordingly
  * </p>
  *
