@@ -14,9 +14,9 @@ public class Ui {
             + "help\n"
             + "\t - Show a summary of the commands and options that I can handle\n\n"
             + "list\n"
-            + "\t - Lists all the events in your schedule in chronological order\n"
-            + "\t - To list Tasks: list [Event Index] -t\n"
-            + "\t - To list Members of a Task: list [Event Index] t/[Task Index]\n\n"
+            + "\t - Lists all the events in your schedule in chronological order: list -e\n"
+            + "\t - To list Tasks: list -t [Event Index]\n"
+            + "\t - To list Members of a Task: list -m e/[Event Index] t/[Task Index]\n\n"
             + "add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET\n"
             + "\t - Add an event to the schedule\n\n"
             + "delete -e INDEX\n"
@@ -47,6 +47,9 @@ public class Ui {
             + "\t - Delete a member from your roster given his/her name\n\n"
             + "update EVENT_INDEX\n"
             + "\t - Choose an event to update. You can update tasks/members under that event from there.\n\n"
+            + "next\n"
+            + "\t - To show the next upcoming Event: next -e\n"
+            + "\t - To show the next upcoming Task of a specific Event: next -t\n\n"
             + "bye\n"
             + "\t - Exit the program. Bye!";
 
