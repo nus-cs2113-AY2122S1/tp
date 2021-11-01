@@ -2,27 +2,28 @@ James Gosling
 
 list
 
-add i/Red Apple q/5
-add i/Red Apple e/2021-12-25
-add q/5 e/2021-12-25
-add i/Red Apple q/not a number e/2021-12-25
+add
 
-add i/Red Apple q/5 e/2021-12-25
+add i/Red Apple
 list
-add i/Red Apple q/5 e/2021-12-25
+add i/Red Apple
 list
-add i/Green Apple q/3 e/2021-12-14
+add i/Green Apple
 list
 add i/Flour u/grams
 list
 
 
 increment i/Red Apple
-increment q/3
+increment q/6
 increment i/Red Apple q/three
 increment i/James Gosling
 
-increment i/Red Apple q/3 e/2021-12-01
+increment i/Red Apple q/6 e/2021-12-01
+list
+increment i/Green Apple q/3 e/2021-01-01
+list
+increment i/Flour q/200 e/2021-02-02
 list
 
 
