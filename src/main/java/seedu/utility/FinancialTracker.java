@@ -44,10 +44,10 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Expense object into the expenses ArrayList of FinancialTracker
+     * Add an Expense object into the expenses ArrayList of FinancialTracker.
      *
-     * @param expense Expense object we want to add into the ArrayList
-     * @throws ExpenseOverflowException Thrown if the sum of expense exceeds a fixed limit 
+     * @param expense Expense object we want to add into the ArrayList.
+     * @throws ExpenseOverflowException Thrown if the sum of expense exceeds a fixed limit. 
      */
     public void addExpense(Expense expense) throws ExpenseOverflowException {
         int expenseSize = 0;
@@ -65,10 +65,10 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Income object into the income ArrayList of FinancialTracker
+     * Add an Income object into the income ArrayList of FinancialTracker.
      * 
-     * @param income Income object we want to add into the ArrayList
-     * @throws IncomeOverflowException Thrown if the sum of income exceeds a fixed limit
+     * @param income Income object we want to add into the ArrayList.
+     * @throws IncomeOverflowException Thrown if the sum of income exceeds a fixed limit.
      */
     public void addIncome(Income income) throws IncomeOverflowException {
         int incomeSize = 0;
@@ -90,11 +90,11 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an expense entry based on its index
+     * Remove an expense entry based on its index.
      *
-     * @param expenseIndex Index of deleted expense entry
-     * @return Deleted expense object
-     * @throws ExpenseEntryNotFoundException Thrown if no entry can be found in the given index
+     * @param expenseIndex Index of deleted expense entry.
+     * @return Deleted expense object.
+     * @throws ExpenseEntryNotFoundException Thrown if no entry can be found in the given index.
      */
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
@@ -106,11 +106,11 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an income entry based on its index
+     * Remove an income entry based on its index.
      * 
-     * @param incomeIndex Index of deleted income entry
-     * @return Deleted income object
-     * @throws IncomeEntryNotFoundException Thrown if no entry can be found in the given index
+     * @param incomeIndex Index of deleted income entry.
+     * @return Deleted income object.
+     * @throws IncomeEntryNotFoundException Thrown if no entry can be found in the given index.
      */
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
         try {
@@ -122,9 +122,9 @@ public class FinancialTracker {
     }
 
     /**
-     * Return an ArrayList called expenses from FinancialTracker.java
+     * Return an ArrayList called expenses from FinancialTracker.
      * 
-     * @return Return ArrayList with only expense entries inside
+     * @return Return ArrayList with only expense entries inside.
      */
     public ArrayList<Expense> getExpenses() {
         assert expenses != null;
@@ -132,9 +132,9 @@ public class FinancialTracker {
     }
 
     /**
-     * Return an ArrayList called incomes from FinancialTracker.java
+     * Return an ArrayList called incomes from FinancialTracker.
      *
-     * @return Return ArrayList with only income entries inside
+     * @return Return ArrayList with only income entries inside.
      */
     public ArrayList<Income> getIncomes() {
         assert incomes != null;
@@ -231,10 +231,10 @@ public class FinancialTracker {
     }
 
     /**
-     * Returns an ArrayList of size 12, where each element stores the total expense of that month in the given year
+     * Returns an ArrayList of size 12, where each element stores the total expense of that month in the given year.
      *
-     * @param inputYear Year which the monthly breakdown is based on
-     * @return ArrayList of elements representing total expense in each month
+     * @param inputYear Year which the monthly breakdown is based on.
+     * @return ArrayList of elements representing total expense in each month.
      */
     public ArrayList<Double> getMonthlyExpenseBreakdown(int inputYear) {
         List<Expense> yearlyAccumulatedExpense = expenses.stream()
@@ -269,10 +269,10 @@ public class FinancialTracker {
     }
 
     /**
-     * Returns an ArrayList of size 12, where each element stores the total income of that month in the given year
+     * Returns an ArrayList of size 12, where each element stores the total income of that month in the given year.
      *
-     * @param inputYear Year which the monthly breakdown is based on
-     * @return ArrayList of elements representing total income in each month
+     * @param inputYear Year which the monthly breakdown is based on.
+     * @return ArrayList of elements representing total income in each month.
      */
     public ArrayList<Double> getMonthlyIncomeBreakdown(int inputYear) {
         List<Income> yearlyAccumulatedIncome = incomes.stream()
