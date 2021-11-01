@@ -23,7 +23,7 @@ public class FindCommandParser {
             return new FindUniCommand(searchString, universityMasterList);
         case Constants.FLAG_MODULE_CODE:
             return new FindModCommand(searchString, moduleMasterList, FindModInputType.MODULECODE);
-        case Constants.FLAG_MODULE_NAME:
+        case Constants.FLAG_MODULE:
             return new FindModCommand(searchString, moduleMasterList, FindModInputType.MODULENAME);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
