@@ -329,7 +329,7 @@ public class Ui {
         System.out.println("If you would like to overwrite your current save file and"
                 + "start with a new save file, please enter 'y'. "
                 + "Otherwise, please enter 'n' to exit the program.");
-        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file"
+        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file "
                 + "will no longer be recoverable. This operation is irreversible.");
     }
 
