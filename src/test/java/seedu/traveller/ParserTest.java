@@ -12,6 +12,8 @@ import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTimeFormatException;
+import seedu.traveller.exceptions.IllegalTimeValueException;
 import seedu.traveller.exceptions.IllegalTripNameException;
 import seedu.traveller.exceptions.InvalidAddDayFormatException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
@@ -27,38 +29,34 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //@@author Uxinnn
 public class ParserTest {
     @Test
-    public void parse_success() {
+    public void parse_success() throws TravellerException {
         NewCommand newCommand = new NewCommand("trip0", "CHN", "JPN");
         EditCommand editCommand = new EditCommand("trip1", "SIN", "MLY");
         DeleteCommand deleteCommand = new DeleteCommand("trip2");
         ViewCommand viewCommand = new ViewCommand("all");
         ShortestCommand shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
-        AddDayCommand addDayCommand = new AddDayCommand("trip3", 1);
+        AddDayCommand addDayCommand = new AddDayCommand("trip3", 3);
         AddItemCommand addItemCommand =
-                new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
+                new AddItemCommand("trip4", 0, "1300", "sleep at home");
         SearchItemCommand searchItemCommand =
-                new SearchItemCommand("trip4", 0, "sleep at home");
+                new SearchItemCommand("trip4", 0, "dinner");
         EditItemCommand editItemCommand =
-                new EditItemCommand("trip4", 0, "7am", "wake up from bed", 1);
+                new EditItemCommand("trip4", 0, "1900", "wake up from bed", 1);
         ExitCommand exitCommand = new ExitCommand();
 
-        try {
-            assertEquals(newCommand.toString(), Parser.parse("new trip0 /from CHN /to JPN").toString());
-            assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY").toString());
-            assertEquals(deleteCommand.toString(), Parser.parse("delete trip2").toString());
-            assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
-            assertEquals(shortestCommand.toString(), Parser.parse("shortest /from SKR /to JPN").toString());
-            assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3").toString());
-            assertEquals(addItemCommand.toString(),
-                    Parser.parse("add-item trip4 /day 0 /time 1-2am /name sleep at home").toString());
-            assertEquals(searchItemCommand.toString(),
-                    Parser.parse("search-item trip4 /name sleep at home").toString());
-            assertEquals(editItemCommand.toString(),
-                    Parser.parse("edit-item 1 trip4 /time 7am /name wake up from bed").toString());
-            assertEquals(exitCommand.toString(), Parser.parse("exit").toString());
-        } catch (TravellerException e) {
-            System.out.println(e.getMessage());
-        }
+        assertEquals(newCommand.toString(), Parser.parse("new trip0 /from CHN /to JPN").toString());
+        assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY").toString());
+        assertEquals(deleteCommand.toString(), Parser.parse("delete trip2").toString());
+        assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
+        assertEquals(shortestCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+        assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3 /day 3").toString());
+        assertEquals(addItemCommand.toString(),
+                Parser.parse("add-item trip4 /day 0 /time 1300 /name sleep at home").toString());
+        assertEquals(searchItemCommand.toString(),
+                Parser.parse("search-item trip4 /day 0 /key dinner").toString());
+        assertEquals(editItemCommand.toString(),
+                Parser.parse("edit-item trip4 /day 0 /time 1900 /name wake up from bed /index 1").toString());
+        assertEquals(exitCommand.toString(), Parser.parse("exit").toString());
     }
 
     @Test
@@ -120,19 +118,39 @@ public class ParserTest {
     public void parse_addItemCommand_exceptionThrown() {
         // Invalid /day flag input, character
         assertThrows(InvalidNumberOfDaysException.class, () -> {
-            Parser.parse("add-item trip /day a /time 7pm /name Eat dinner");
+            Parser.parse("add-item trip /day a /time 1900 /name Eat dinner");
         });
         // Invalid /day flag input, negative integer
         assertThrows(InvalidNumberOfDaysException.class, () -> {
-            Parser.parse("add-item trip /day -1 /time 7pm /name Eat dinner");
+            Parser.parse("add-item trip /day -1 /time 1900 /name Eat dinner");
+        });
+        // Invalid /time flag input, negative integer 3 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time -100 /name Eat dinner");
+        });
+        // Invalid /time flag input, negative integer 4 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time -1000 /name Eat dinner");
+        });
+        // Invalid /time flag input, integer 1 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time 2 /name Eat dinner");
+        });
+        // Invalid /time flag input, integer exceed 2359
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time 2400 /name Eat dinner");
+        });
+        // Invalid /time flag input, wrong format
+        assertThrows(IllegalTimeFormatException.class, () -> {
+            Parser.parse("add-item trip /day 0 /time 7pm /name Eat dinner");
         });
         // Missing /day flag value
         assertThrows(InvalidNumberOfDaysException.class, () -> {
-            Parser.parse("add-item trip /day  /time 7pm /name Eat dinner");
+            Parser.parse("add-item trip /day  /time 1900 /name Eat dinner");
         });
         // Missing /day flag
         assertThrows(InvalidAddItemFormatException.class, () -> {
-            Parser.parse("add-item trip /time 7pm /name Eat dinner");
+            Parser.parse("add-item trip /time 1900 /name Eat dinner");
         });
         // Missing /time flag
         assertThrows(InvalidAddItemFormatException.class, () -> {
@@ -140,11 +158,11 @@ public class ParserTest {
         });
         // Missing /name flag
         assertThrows(InvalidAddItemFormatException.class, () -> {
-            Parser.parse("add-item trip /day 0 /time 7pm");
+            Parser.parse("add-item trip /day 0 /time 1900");
         });
         // Wrong order of flags in add-item command
         assertThrows(InvalidAddItemFormatException.class, () -> {
-            Parser.parse("add-item trip /time 7pm /name Eat dinner /day 0");
+            Parser.parse("add-item trip /time 1900 /name Eat dinner /day 0");
         });
         assertThrows(InvalidAddItemFormatException.class, () -> {
             Parser.parse("add-item trip /day /time /name ");

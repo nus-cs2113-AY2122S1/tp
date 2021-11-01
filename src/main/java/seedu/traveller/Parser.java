@@ -16,6 +16,8 @@ import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTimeFormatException;
+import seedu.traveller.exceptions.IllegalTimeValueException;
 import seedu.traveller.exceptions.IllegalTripNameException;
 import seedu.traveller.exceptions.InvalidAddDayFormatException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
@@ -139,7 +141,6 @@ public class Parser {
      */
     private static Command parseAddItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Add-item command input");
-        Command command;
         String tripName;
         String itemName;
         String itemTime;
@@ -158,9 +159,10 @@ public class Parser {
             throw new InvalidAddItemFormatException();
         }
         int dayIndex = parseValidIndex(rawDayNumber);
+        parseValidTime(itemTime);
         assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new AddItemCommand(tripName, dayIndex, itemTime, itemName);
+        Command command = new AddItemCommand(tripName, dayIndex, itemTime, itemName);
 
         return command;
     }
@@ -315,7 +317,6 @@ public class Parser {
 
     private static Command parseEditItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit-item command input");
-        Command command;
         String tripName;
         String itemName;
         String itemTime;
@@ -348,9 +349,10 @@ public class Parser {
             throw new InvalidEditItemFormatException();
         }
         int dayIndex = parseValidIndex(rawDayNumber);
+        parseValidTime(itemTime);
         assert dayIndex >= 0 : "Day index is negative.";
 
-        command = new EditItemCommand(tripName, dayIndex,
+        Command command = new EditItemCommand(tripName, dayIndex,
                 itemTime, itemName, itemIndex);
 
         return command;
@@ -515,6 +517,21 @@ public class Parser {
             throw new InvalidNumberOfDaysException(index);
         }
         return index;
+    }
+
+    private static void parseValidTime(String rawTime) throws TravellerException {
+        int timeInteger;
+        try {
+            timeInteger = Integer.parseInt(rawTime);
+        } catch (NumberFormatException e) {
+            throw new IllegalTimeFormatException(rawTime);
+        }
+        if (rawTime.length() != 4) {
+            throw new IllegalTimeValueException(rawTime);
+        }
+        if (timeInteger < 0 || timeInteger > 2359) {
+            throw new IllegalTimeValueException(rawTime);
+        }
     }
 
     /**
