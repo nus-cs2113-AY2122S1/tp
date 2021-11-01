@@ -31,11 +31,11 @@ public class SubtractCommand extends Command {
     public String run() throws SitusException {
         try {
             String resultMsg;
-            IngredientList.getInstance()
+            String subtractedIngredient = IngredientList.getInstance()
                     .subtractIngredientFromGroup(groupNumber, subtractAmount);
             resultMsg = "Got it. " + subtractAmount
                     + " kg has been subtracted from "
-                    + IngredientList.getInstance().getIngredientGroup(groupNumber).getIngredientGroupName();
+                    + subtractedIngredient;
             return resultMsg;
         } catch (IndexOutOfBoundsException e) {
             throw new SitusException(INVALID_NUMBER);

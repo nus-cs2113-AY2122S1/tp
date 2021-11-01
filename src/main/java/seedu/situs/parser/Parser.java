@@ -206,20 +206,20 @@ public class Parser {
 
         for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
-            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ") || !details[i].contains(".")) {
+            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ")) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
         try {
-            String[] splittedGroupAndIngredient = details[0].split("\\.");
+            String[] splitGroupAndIngredient = details[0].split("\\.");
 
-            if (splittedGroupAndIngredient.length != 2) {
+            if (splitGroupAndIngredient.length != 2) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
 
-            int groupNumber = Integer.parseInt(splittedGroupAndIngredient[0]);
-            int ingredientNumber = Integer.parseInt(splittedGroupAndIngredient[1]);
+            int groupNumber = Integer.parseInt(splitGroupAndIngredient[0]);
+            int ingredientNumber = Integer.parseInt(splitGroupAndIngredient[1]);
             double newAmount = Double.parseDouble(details[1]);
 
             if (newAmount < 0) {

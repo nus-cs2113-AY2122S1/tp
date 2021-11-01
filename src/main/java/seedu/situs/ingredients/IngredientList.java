@@ -134,57 +134,52 @@ public class IngredientList {
      * Subtracts amount from total ingredient amount.
      * @param groupNumber group number of ingredient
      * @param subtractAmount amount to be subtracted from total amount
+     * @return name of the subtracted ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public void subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
-            SitusException, IOException {
-        try {
-            int i = 0;
-            IngredientGroup currentGroup = getIngredientGroup(groupNumber);
-            int ingredientIndex = findIngredientIndexInList(currentGroup.getIngredientGroupName());
-            if (ingredientIndex < 0) {
-                throw new SitusException("Ingredient not found!");
+    public String subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
+            SitusException, IOException, IndexOutOfBoundsException {
+
+        int i = 0;
+        IngredientGroup currentGroup = getIngredientGroup(groupNumber);
+        String subtractedIngredientName = currentGroup.getIngredientGroupName();
+
+        if (currentGroup.getTotalAmount() < subtractAmount) {
+            throw new SitusException(INVALID_SUBTRACT);
+        }
+
+        if (currentGroup.getTotalAmount() == subtractAmount) {
+            ingredientList.remove(groupNumber - 1);
+            storage.writeIngredientsToMemory(ingredientList);
+            return subtractedIngredientName;
+        }
+
+        currentGroup.subtractFromTotalAmount(subtractAmount);
+
+        while (subtractAmount != 0.0) {
+            if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
+                currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
+                subtractAmount = 0.0;
+            } else {
+                subtractAmount -= currentGroup.get(i + 1).getAmount();
+                currentGroup.get(i + 1).setAmount(0.0);
             }
+            i++;
+        }
 
-            if (currentGroup.getTotalAmount() < subtractAmount) {
-                throw new SitusException(INVALID_SUBTRACT);
-            }
-
-            if (currentGroup.getTotalAmount() == subtractAmount) {
-                ingredientList.remove(ingredientIndex);
-                storage.writeIngredientsToMemory(ingredientList);
-                return;
-            }
-
-            currentGroup.subtractFromTotalAmount(subtractAmount);
-
-            while (subtractAmount != 0.0) {
-                if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
-                    currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
-                    subtractAmount = 0.0;
-                } else {
-                    subtractAmount -= currentGroup.get(i + 1).getAmount();
-                    currentGroup.get(i + 1).setAmount(0.0);
-                }
+        i = 0;
+        // remove ingredients in group where amount is approx. 0
+        while (i < currentGroup.getIngredientGroupSize()) {
+            if (currentGroup.get(i + 1).getAmount() < 0.01) {
+                currentGroup.remove(i + 1);
+            } else {
                 i++;
             }
-
-            i = 0;
-            // remove ingredients in group where amount is approx. 0
-            while (i < currentGroup.getIngredientGroupSize()) {
-                if (currentGroup.get(i + 1).getAmount() < 0.01) {
-                    currentGroup.remove(i + 1);
-                } else {
-                    i++;
-                }
-            }
-
-            storage.writeIngredientsToMemory(ingredientList);
-
-        } catch (IndexOutOfBoundsException e) {
-            throw new SitusException(INVALID_NUMBER);
         }
+
+        storage.writeIngredientsToMemory(ingredientList);
+        return subtractedIngredientName;
     }
 
     //@@author datn02
@@ -198,7 +193,7 @@ public class IngredientList {
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
     public Ingredient removeIngredientFromGroup(int groupNumber, int ingredientNumber)
-            throws SitusException, IOException {
+            throws IndexOutOfBoundsException, SitusException, IOException {
         Ingredient removedIngredient;
 
         removedIngredient = getIngredientGroup(groupNumber)
@@ -220,12 +215,8 @@ public class IngredientList {
      * @return ingredient group
      * @throws SitusException index out of bounds, cannot access
      */
-    public IngredientGroup getIngredientGroup(int ingredientNumber) throws SitusException {
-        try {
-            return ingredientList.get(ingredientNumber - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new SitusException(INVALID_NUMBER);
-        }
+    public IngredientGroup getIngredientGroup(int ingredientNumber) throws IndexOutOfBoundsException {
+        return ingredientList.get(ingredientNumber - 1);
     }
 
     //@@author AayushMathur7
@@ -240,7 +231,7 @@ public class IngredientList {
      * @throws IOException if the ingredient list could not be saved to memory
      */
     public Ingredient update(int groupNumber, int ingredientNumber, double newAmount)
-            throws SitusException, IOException {
+            throws IndexOutOfBoundsException, IOException {
         int i;
 
         IngredientGroup updatedGroup = getIngredientGroup(groupNumber);
