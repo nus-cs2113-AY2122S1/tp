@@ -7,7 +7,7 @@
 It’s August 5th, and the Academic Year is right around the corner!
 ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS
+Introducing **UNI Mods**, an easy-to-use application for NUS students that provides information on all available NUS
 modules and lets you pick and choose the modules and classes you want to take for that semester!
 Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
 total workload:
@@ -183,7 +183,7 @@ input is invalid.
 - **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
 very quick e.g. `-q`. Note that local search cannot be cancelled.
 
-:information_source: Command, search term and flag regex are case insensitive.
+:information_source: Command, search term and flag regex are case-insensitive.
 
 :information_source: Search keyword is only for the module code. Searching for the title of a module is currently 
 unsupported.
@@ -191,7 +191,7 @@ unsupported.
 :information_source: If text is not displaying correctly (Mojibake), running `chcp 65001` or `chcp.com 65001` from your 
 CLI should resolve some issues.
 
-:warning: Flags are **NOT** case insensitive. Inputting an invalid flag will print an error message.
+:warning: Flags are **NOT** case-insensitive. Inputting an invalid flag will print an error message.
 
 :warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every
 single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform
@@ -212,7 +212,7 @@ waiting!
 Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit 
 `ENTER` to cancel it!
 
-:information_source: Command is case insensitive.
+:information_source: Command is case-insensitive.
 
 :information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from
 NUSMods, it will update that mod in the local database. You should only realistically only need to do this before the
@@ -463,7 +463,7 @@ __________________________________________________________________________
 | Command                   | Meaning                                                                                           |
 | --------------            | ----------                                                                                        |
 | `help`                    | Shows available commands and flags. <br> Example: `help`                                         |
-| `search <KEYWORDd> [-l]`  | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
+| `search <KEYWORD> [-l]`  | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l`   |
 | `show <MODULE_CODE>`      | Display relevant module information. <br> Example: `show CS2113T`                                |
 | `add <MODULE_CODE>`       | Adds the module to the timetable. <br> Example: `add CS2113T`                                    |
 | `delete <MODULE_CODE>`    | Deletes the module from the timetable. <br> Example: `delete CS2113T`                            |
