@@ -308,7 +308,7 @@ The sequence diagram for deletion by stock id is shown below.
 
 * `deleteStockById()` deletion of stock given an id.
   * Loops through all medicines to `getStockId()` to compare and get the specified stock.
-  * Then call` setDeleted()` to delete the stock.
+  * Then call `setDeleted()` to delete the stock.
 
 If MediVault determines that it is executing deletion by expiry date, it will execute accordingly. The behaviour of
 this command is to delete all stock that have <= specified date. This is because we would want to delete all expired
@@ -321,7 +321,7 @@ The sequence diagram for delete by expiry date is shown below.
 * `deleteStockByExpiry()` deletion of stock given an id.
   * `stringToDate()` helps to parse a string to a Date object.
   * Loops through all medicines to `getExpiry()` to compare and get the all expired stock.
-  * Then call` setDeleted()` to delete the stock.
+  * Then call `setDeleted()` to delete the stock.
 
 #### UpdateStockCommand
 
