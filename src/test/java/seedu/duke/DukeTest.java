@@ -37,7 +37,7 @@ class DukeTest {
     }
 
     @Test
-    public void testSetCurrencyInfo() {
+    public void testSetCurrencyInfo() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setForeignCurrency("USD");
         trip.setRepaymentCurrency("SGD");
