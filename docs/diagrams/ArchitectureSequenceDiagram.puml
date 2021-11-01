@@ -9,10 +9,10 @@ Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Data" as data DATA_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
-user -> ui : "add -b a/500 m/1"
+user -> ui : "add -b m/1 a/500"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("delete 1")
+ui -[UI_COLOR]> logic : parseCommand("add -b m/1 a/500")
 activate logic LOGIC_COLOR
 
 Alice -> Bob: Authentication Request
