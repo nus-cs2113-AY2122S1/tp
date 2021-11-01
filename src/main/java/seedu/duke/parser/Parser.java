@@ -22,6 +22,7 @@ import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Item;
 import seedu.duke.parser.commandparser.AddParser;
 import seedu.duke.parser.commandparser.ListParser;
+import seedu.duke.parser.commandparser.NextParser;
 import seedu.duke.parser.commandparser.UpdateParser;
 
 import java.math.BigDecimal;
@@ -79,7 +80,7 @@ public abstract class Parser {
             //return new UpdateCommand(command);
             return UpdateParser.getUpdateCommand(commandDetails);
         case "next":
-            return new NextCommand(command);
+            return NextParser.getNextCommand(commandDetails, response);
         default:
             throw new DukeException(Ui.getInvalidCommandMessage());
         }
@@ -87,6 +88,7 @@ public abstract class Parser {
 
     private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
         switch (commandType) {
+
         case "delete":
             return new DeleteCommand(command);
         case "bye":

@@ -264,4 +264,15 @@ public class Ui {
                 + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
+
+    public static void printNextCommandErrorMessage() {
+        System.out.println("please follow the correct format"
+                + System.lineSeparator()
+                + "next event : View details of the upcoming events"
+                + System.lineSeparator()
+                + "next task [Event index]: View details of the task with the closest deadline in a particular "
+                + "event"
+                + System.lineSeparator()
+                + Ui.getLineBreak());
+    }
 }

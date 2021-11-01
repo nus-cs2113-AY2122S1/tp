@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     public CommandResult execute() {
-        try {
+        //try {
             switch (listType) {
             case "event":
                 listingOverallSchedule();
@@ -47,13 +47,13 @@ public class ListCommand extends Command {
                         + System.lineSeparator()
                         + "list [Event Index] t/[Task Index] : to see members in a Task");
             }
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            System.out.println("Please check through the format carefully");
-            Ui.listUsageCommands();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            Ui.listUsageCommands();
-        }
+        //} catch (NullPointerException | IndexOutOfBoundsException e) {
+//            System.out.println("Please check through the format carefully");
+//            Ui.listUsageCommands();
+//        } catch (DukeException e) {
+//            System.out.println(e.getMessage());
+//            Ui.listUsageCommands();
+//        }
         return new CommandResult(feedback);
 
     }
@@ -70,36 +70,28 @@ public class ListCommand extends Command {
         Ui.listUsageCommands();
     }
 
-    private void listingTaskDetails() throws DukeException {
+    private void listingTaskDetails() {
         Event event1;
-        try {
+//        try {
             event1 = Duke.eventCatalog.get(eventIndex);
             System.out.println("Event: " + event1.getTitle()
                     + System.lineSeparator() + "=======================");
             Ui.printList(event1.getTaskList());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("That Event does not exist!");
-        }
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new DukeException("That Event does not exist!");
+//        }
     }
 
-    private void listingMemberDetails() throws DukeException {
-        try {
+    private void listingMemberDetails()  {
+//        try {
             Event event2 = Duke.eventCatalog.get(eventIndex);
             Task task = event2.getFromTaskList(taskIndex);
             System.out.println("Event: " + event2.getTitle()
                     + System.lineSeparator() + "Task: " + task.getTitle()
                     + System.lineSeparator() + "=======================");
             Ui.printMemberList(task.getMemberList());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("That Task does not exist!");
-        }
-    }
-
-    private void checkForEmptyCells(String[] command) {
-        for (String check : command) {
-            if (!check.equalsIgnoreCase("")) {
-               // checkCommand.add(check);
-            }
-        }
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new DukeException("That Task does not exist!");
+//        }
     }
 }
