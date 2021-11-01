@@ -28,6 +28,7 @@ public class Storage {
     private static final String PRESCRIPTION_FILE_PATH = "data/prescription.txt";
     private static final String ORDER_ARCHIVE_FILE_PATH = "data/order_archive.txt";
     private static final String PRESCRIPTION_ARCHIVE_FILE_PATH = "data/prescription_archive.txt";
+    private static final String DELIMITER = "\\|";
     private static final int NUMBER_OF_STOCK_DATA_FIELDS = 8;
     private static final int NUMBER_OF_ORDER_DATA_FIELDS = 5;
     private static final int NUMBER_OF_PRESCRIPTION_DATA_FIELDS = 7;
@@ -237,8 +238,8 @@ public class Storage {
      * @return Stock object for adding into medicines.
      */
     private Medicine parseStockData(String stockDetails, int stockRow) throws InvalidDataException {
-        String[] splitStockDetails = stockDetails.split("\\|");
-        if (splitStockDetails.length != NUMBER_OF_STOCK_DATA_FIELDS) { // If not all fields present.
+        String[] splitStockDetails = stockDetails.split(DELIMITER);
+        if (splitStockDetails.length != NUMBER_OF_STOCK_DATA_FIELDS) {
             throw new InvalidDataException("[ROW: " + stockRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
                     + " [data/stock.txt]");
         }
@@ -271,8 +272,8 @@ public class Storage {
      * @return Order object for adding into medicines.
      */
     private Medicine parseOrderData(String orderDetails, int orderRow) throws InvalidDataException {
-        String[] orderStockDetails = orderDetails.split("\\|"); //what if call split when no delimiter
-        if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) { // If not all fields present.
+        String[] orderStockDetails = orderDetails.split(DELIMITER);
+        if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) {
             throw new InvalidDataException("[ROW: " + orderRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
                     + " [data/order.txt]");
         }
@@ -306,16 +307,16 @@ public class Storage {
      */
     private Medicine parsePrescriptionData(String prescriptionDetails, int prescriptionRow)
             throws InvalidDataException {
-        String[] splitPrescriptionDetails = prescriptionDetails.split("\\|");
-        if (splitPrescriptionDetails.length != NUMBER_OF_PRESCRIPTION_DATA_FIELDS) { // If not all fields present.
+        String[] splitPrescriptionDetails = prescriptionDetails.split(DELIMITER);
+        if (splitPrescriptionDetails.length != NUMBER_OF_PRESCRIPTION_DATA_FIELDS) {
             throw new InvalidDataException("[ROW: " + prescriptionRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
                     + " [data/prescription.txt]");
         }
         int prescriptionId = FileParser.parsePrescriptionId(splitPrescriptionDetails, prescriptionRow);
         String prescriptionName = FileParser.parsePrescriptionName(splitPrescriptionDetails, prescriptionRow);
         int prescriptionQuantity = FileParser.parsePrescriptionQuantity(splitPrescriptionDetails, prescriptionRow);
-        String prescriptionCustomerId =
-                FileParser.parsePrescriptionCustomerId(splitPrescriptionDetails, prescriptionRow);
+        String prescriptionCustomerId = FileParser.parsePrescriptionCustomerId(splitPrescriptionDetails,
+                prescriptionRow);
         Date prescriptionDate = FileParser.parsePrescriptionDate(splitPrescriptionDetails, prescriptionRow);
         String prescriptionStaff = FileParser.parsePrescriptionStaff(splitPrescriptionDetails, prescriptionRow);
         int prescriptionStockId = FileParser.parsePrescriptionStockId(splitPrescriptionDetails, prescriptionRow);
