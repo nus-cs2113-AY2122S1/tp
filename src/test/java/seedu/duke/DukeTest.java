@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DukeTest {
 
     @Test
-    public void testNewTrip() {
+    public void testNewTrip() throws ForceCancelException {
         String[] stringArray = {"Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         Trip trip = new Trip(stringArray);
         assertEquals("Canada", trip.getLocation());
@@ -48,7 +48,7 @@ class DukeTest {
     }
 
     @Test
-    public void testSetDate() {
+    public void testSetDate() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setDateOfTrip("23-09-2021");
         assertEquals("23 Sep 2021", trip.getDateOfTripString());

@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    public static String receiveUserInput() throws ForceCancelException {
+        String userInput = Storage.getScanner().nextLine().strip();
+        if (Parser.doesUserWantToForceCancel(userInput)) {
+            throw new ForceCancelException();
+        }
+        return userInput;
+    }
+
     public static void printPendingCommand() {
         System.out.print("Enter your command: ");
     }
@@ -125,6 +133,10 @@ public class Ui {
     public static void printDateTimeFormatError() {
         System.out.print("Please check that your date-time format is dd-MM-yyyy. "
                 + "Please enter the date again: ");
+    }
+
+    public static void dateInvalidError() {
+        System.out.println("Sorry, the date you entered is invalid. Only dates after 01-01-1970 are accepted.");
     }
 
     public static void printIsoFormatError() {
@@ -329,7 +341,7 @@ public class Ui {
         System.out.println("If you would like to overwrite your current save file and"
                 + "start with a new save file, please enter 'y'. "
                 + "Otherwise, please enter 'n' to exit the program.");
-        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file"
+        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file "
                 + "will no longer be recoverable. This operation is irreversible.");
     }
 
@@ -441,6 +453,10 @@ public class Ui {
         System.out.println();
         System.out.println("Your saved data was successfully loaded!");
         System.out.println();
+    }
+
+    public static void printForceCancelled() {
+        System.out.println("You have chosen to force cancel this operation.");
     }
 
 }
