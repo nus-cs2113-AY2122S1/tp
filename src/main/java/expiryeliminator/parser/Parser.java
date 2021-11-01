@@ -59,8 +59,6 @@ public class Parser {
     private static final SingleArgPrefix PREFIX_QUANTITY = new SingleArgPrefix("q");
     private static final SingleArgPrefix PREFIX_EXPIRY = new SingleArgPrefix("e");
     private static final OptionalArgPrefix PREFIX_OPTIONAL_UNIT = new OptionalArgPrefix("u");
-    private static final OptionalArgPrefix PREFIX_OPTIONAL_QUANTITY = new OptionalArgPrefix(PREFIX_QUANTITY);
-    private static final OptionalArgPrefix PREFIX_OPTIONAL_EXPIRY = new OptionalArgPrefix(PREFIX_EXPIRY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_RECIPE = new MultipleArgPrefix(PREFIX_RECIPE);
@@ -138,30 +136,17 @@ public class Parser {
     //@@author
 
     private static Command prepareAddIngredient(String args) throws InvalidArgFormatException {
-        final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT, PREFIX_OPTIONAL_QUANTITY,
-                PREFIX_OPTIONAL_EXPIRY);
+        final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT);
         try {
             argsParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
         }
-        final String unitString = argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
-        final String quantityString = argsParser.getSingleArg(PREFIX_OPTIONAL_QUANTITY);
-        final String expiryString = argsParser.getSingleArg(PREFIX_OPTIONAL_EXPIRY);
-
         final String ingredient = new IngredientParser().parse(argsParser.getSingleArg(PREFIX_INGREDIENT));
-        final String unit = unitString == null ? null : new UnitParser().parse(unitString);
+        final String unitString = new UnitParser().parse(argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT));
 
-        if (quantityString != null && expiryString != null) {
-            final int quantity = new QuantityParser().parse(quantityString);
-            final LocalDate expiry = new ExpiryDateParser().parse(expiryString);
-            return new AddIngredientCommand(ingredient, unit, quantity, expiry);
-        } else if (quantityString != null || expiryString != null) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
-        }
-        return new AddIngredientCommand(ingredient, unit);
+        return new AddIngredientCommand(ingredient, unitString);
     }
 
     private static Command prepareDecrementIngredient(String args) throws InvalidArgFormatException {

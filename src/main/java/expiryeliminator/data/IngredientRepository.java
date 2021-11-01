@@ -35,7 +35,7 @@ public class IngredientRepository {
      * Adds an ingredient to the repository with an associated unit, but without any associated quantity.
      *
      * @param ingredientName Name of ingredient to be added.
-     * @param unit Unit for ingredient.
+     * @param unit Unit for ingredient. Can be null.
      * @return Ingredient storage object corresponding to the added ingredient.
      * @throws DuplicateDataException If ingredient already exists in the repository.
      */
@@ -251,8 +251,7 @@ public class IngredientRepository {
      * @param ingredientName The name of the ingredient to be added to totalIngredient Treemap.
      * @param recipe The recipe that the ingredient belongs to.
      * @param totalIngredients The treemap that keeps track of the total types and quantity of each ingredient
-     *                         needed to make all the recipes that the user input.
-     *
+     *         needed to make all the recipes that the user input.
      */
     public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
             IngredientQuantity> totalIngredients) throws IllegalValueException {
@@ -276,7 +275,6 @@ public class IngredientRepository {
      * Generates a list of ingredients and quantity to buy depending on what recipe/recipes the user wants to make.
      *
      * @param recipes The list of recipes the user wants to make.
-     *
      * @return the string representing the list ingredients and its quantities to be bought.
      */
     public String generateShoppingList(ArrayList<Recipe> recipes) throws IllegalValueException {
@@ -313,7 +311,7 @@ public class IngredientRepository {
                 shoppingList.append("\n").append(ingredientAndQuantityItem);
             }
         }
-        return  shoppingList.toString();
+        return shoppingList.toString();
     }
 
 }
