@@ -7,7 +7,9 @@ import seedu.traveller.objects.Trip;
 import seedu.traveller.objects.TripsList;
 import seedu.traveller.worldmap.WorldMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@@author gavienwz
 class EditCommandTest {
@@ -17,6 +19,7 @@ class EditCommandTest {
     private final NewCommand beforeEditCommand = new NewCommand("Trip1", "MLY", "CHN");
     private final NewCommand afterEditCommand = new NewCommand("Trip2", "SIN", "JPN");
     private final EditCommand edit = new EditCommand("Trip1", "SIN", "JPN");
+
     public EditCommandTest() {
         WorldMap.initWorldMap();
         this.ui = new Ui();
