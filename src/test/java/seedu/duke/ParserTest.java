@@ -325,16 +325,15 @@ public class ParserTest {
     @Test
     public void parseAddExpenseCommand_invalidExpenseValue_invalidCommand() {
         Parser testParser = new Parser();
-        Command underTest = testParser.parseCommand("add_ex d/food a/10000000.001 c/food");
-        InvalidCommand test = (InvalidCommand) underTest; 
-        assertSame(Messages.INVALID_EXPENSE_VALUE, test.getMessage());
+        Command underTest = testParser.parseCommand("add_ex d/food a/1000000000.001 c/food");
+        assertSame(InvalidCommand.class, underTest.getClass());
     }
 
     @Test
     public void parseAddIncomeCommand_invalidIncomeValue_invalidCommand() {
         Parser testParser = new Parser();
-        Command underTest = testParser.parseCommand("add_in d/salary a/10000000.0011 c/salary");
-        InvalidCommand test = (InvalidCommand) underTest;
-        assertSame(Messages.INVALID_INCOME_VALUE, test.getMessage());
+        Command underTest = testParser.parseCommand("add_in d/salary a/1000000000.0011 c/salary");
+        assertSame(InvalidCommand.class, underTest.getClass());
     }
+    
 }
