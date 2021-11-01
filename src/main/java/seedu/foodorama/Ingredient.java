@@ -46,6 +46,10 @@ public class Ingredient implements  Comparable<Ingredient> {
         return ingredientWeight;
     }
 
+    public void setIngredientWaste(double newWeight) {
+        this.ingredientWasteIngr = newWeight;
+    }
+
     public void setLimit(double limit) {
         this.limit = limit;
     }

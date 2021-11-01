@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EditDishCommandTest {
+class EditDishNameCommandTest {
 
     @Test
     void execute() throws FoodoramaException {
@@ -27,7 +27,7 @@ class EditDishCommandTest {
         InputStream fakeInput  = new ByteArrayInputStream("naan\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditDishCommandParamString = new EditDishCommand();
+        Command testEditDishCommandParamString = new EditDishNameCommand();
         testEditDishCommandParamString.execute(inputParams);
         System.setIn(newDishName);
 
@@ -40,7 +40,7 @@ class EditDishCommandTest {
         fakeInput  = new ByteArrayInputStream("prata\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditDishCommandParamInteger = new EditDishCommand();
+        Command testEditDishCommandParamInteger = new EditDishNameCommand();
         testEditDishCommandParamInteger.execute(inputParams);
         System.setIn(newDishName);
 
