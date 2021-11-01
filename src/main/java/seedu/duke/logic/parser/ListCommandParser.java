@@ -9,6 +9,10 @@ import seedu.duke.logic.commands.module.ListModuleCommand;
 import seedu.duke.logic.commands.task.ListTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.core.CommandFormats.LIST_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormats.LIST_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormats.LIST_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormats.promptFormat;
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
 import static seedu.duke.logic.parser.ParserUtil.isVerbose;
@@ -34,7 +38,7 @@ public class ListCommandParser {
         case INVALID:
             // Fallthrough
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(LIST_TASK_FORMAT, LIST_LESSON_FORMAT, LIST_MODULE_FORMAT));
         }
     }
 
@@ -46,7 +50,7 @@ public class ListCommandParser {
         boolean isValid = isBlank || isDayOfTheWeek || isToday || isTomorrow;
 
         if (!isValid) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(LIST_LESSON_FORMAT));
         }
 
         return new ListLessonCommand(userResponse.toLowerCase());
@@ -61,7 +65,7 @@ public class ListCommandParser {
         boolean isValid = isBlank || isDayOfTheWeek || isToday || isTomorrow || isPriority;
 
         if (!isValid) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(LIST_TASK_FORMAT));
         }
 
         return new ListTaskCommand(userResponse.toLowerCase());
@@ -70,7 +74,7 @@ public class ListCommandParser {
     //@@author Roycius
     private static Command parseListModuleCommand(String userResponse) throws ParseException {
         if (!userResponse.isBlank() && !isVerbose(userResponse)) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(LIST_MODULE_FORMAT));
         }
 
         return new ListModuleCommand(userResponse.toLowerCase());

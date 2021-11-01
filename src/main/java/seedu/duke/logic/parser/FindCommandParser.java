@@ -7,6 +7,9 @@ import seedu.duke.logic.commands.lesson.FindLessonCommand;
 import seedu.duke.logic.commands.task.FindTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.core.CommandFormats.FIND_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormats.FIND_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormats.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
@@ -26,13 +29,13 @@ public class FindCommandParser {
         case INVALID:
             // Fallthrough
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(FIND_TASK_FORMAT, FIND_LESSON_FORMAT));
         }
     }
 
     private static Command parseFindLessonCommand(String userResponse) throws ParseException {
         if (userResponse.isBlank()) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(FIND_LESSON_FORMAT));
         }
 
         return new FindLessonCommand(userResponse.toLowerCase());
@@ -43,6 +46,6 @@ public class FindCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
-        return new FindTaskCommand(userResponse.toLowerCase());
+        return new FindTaskCommand(promptFormat(FIND_TASK_FORMAT));
     }
 }

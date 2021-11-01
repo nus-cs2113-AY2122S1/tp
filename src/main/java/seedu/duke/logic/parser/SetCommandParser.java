@@ -5,10 +5,10 @@ import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.SetGradeCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
-import seedu.duke.model.module.ModuleList;
 
+import static seedu.duke.commons.core.CommandFormats.promptFormat;
+import static seedu.duke.commons.core.CommandFormats.SET_GRADE_FORMAT;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author rebchua39
@@ -23,7 +23,7 @@ public class SetCommandParser {
             simplifiedUserResponse = removeFirstParam(userResponse, "grade");
             return parseSetGradeCommand(simplifiedUserResponse);
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(SET_GRADE_FORMAT));
         }
     }
 

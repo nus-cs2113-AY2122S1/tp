@@ -26,7 +26,7 @@ public final class Messages {
             "Something went wrong with the file logger.";
 
     public static final String ERROR_INVALID_COMMAND =
-            "Sorry, I don't understand your command.";
+            "Sorry, I don't understand your command. Enter \"help\" to see possible commands.";
 
     public static final String ERROR_INVALID_DAY =
             "Sorry, the input parameter is not a valid day of the week.";
@@ -39,6 +39,9 @@ public final class Messages {
 
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";
+
+    public static final String ERROR_INVALID_NUMBER_OF_PARAMS =
+            "Sorry, the number of input parameters is invalid.";
 
     public static final String ERROR_INVALID_PRIORITY =
             "Sorry, the input parameter is not a valid priority.";
