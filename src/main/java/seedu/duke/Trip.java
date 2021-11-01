@@ -85,10 +85,10 @@ public class Trip {
 
         } catch (IndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
-        }  catch (ForceCancelException e) {
+        } catch (ForceCancelException e) {
             Ui.printForceCancelled();
         }
-        
+
     }
     //@@author
 
@@ -329,6 +329,13 @@ public class Trip {
             Ui.printExchangeRateFormatError();
             String userInput = Ui.receiveUserInput();
             setExchangeRate(userInput);
+        }
+    }
+
+    public double getTotalExpenses() {
+        double totalExpense = 0;
+        for (Expense currentExpense : listOfExpenses) {
+            totalExpense += currentExpense.getAmountSpent();
         }
     }
 
