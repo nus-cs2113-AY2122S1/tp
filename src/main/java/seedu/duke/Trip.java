@@ -85,17 +85,20 @@ public class Trip {
 
         } catch (IndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
 
     }
     //@@author
 
     //@@author lixiyuan416
-    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute)
+            throws ForceCancelException {
         boolean areThereExpenses = false;
         String inputDate = expenseAttribute;
         while (!isDateValid(inputDate)) {
-            inputDate = Storage.getScanner().nextLine();
+            inputDate = Ui.receiveUserInput();
         }
         LocalDate dateToFind = LocalDate.parse(inputDate, inputPattern);
         for (Expense e : listOfCurrentExpenses) {
@@ -319,13 +322,13 @@ public class Trip {
      *
      * @param exchangeRateString user-entered exchange rate (as a String)
      */
-    public void setExchangeRate(String exchangeRateString) {
+    public void setExchangeRate(String exchangeRateString) throws ForceCancelException {
         try {
             this.exchangeRate = Double.parseDouble(exchangeRateString);
         } catch (NumberFormatException e) {
             Ui.printExchangeRateFormatError();
-            Scanner scanner = Storage.getScanner();
-            setExchangeRate(scanner.nextLine().strip());
+            String userInput = Ui.receiveUserInput();
+            setExchangeRate(userInput);
         }
     }
 
@@ -345,7 +348,7 @@ public class Trip {
     //@@author
 
     //@@author itsleeqian
-    public void setForeignCurrency(String foreignCurrency) {
+    public void setForeignCurrency(String foreignCurrency) throws ForceCancelException {
         try {
             if (isNumeric(foreignCurrency) || foreignCurrency.length() != ISO_LENGTH) {
                 throw new NumberFormatException();
@@ -355,8 +358,8 @@ public class Trip {
             setForeignCurrencySymbol(this.foreignCurrency);
         } catch (NumberFormatException e) {
             Ui.printIsoFormatError();
-            Scanner scanner = Storage.getScanner();
-            setForeignCurrency(scanner.nextLine().strip());
+            String userInput = Ui.receiveUserInput();
+            setForeignCurrency(userInput);
         }
     }
     //@@author
