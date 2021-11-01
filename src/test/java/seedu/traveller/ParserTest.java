@@ -96,6 +96,10 @@ public class ParserTest {
         assertThrows(InvalidNumberOfDaysException.class, () -> {
             Parser.parse("add-day trip /day a");
         });
+        // Invalid /day flag input, 0
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("add-day trip /day 0");
+        });
         // Invalid /day flag input, negative integer
         assertThrows(InvalidNumberOfDaysException.class, () -> {
             Parser.parse("add-day trip /day -1");

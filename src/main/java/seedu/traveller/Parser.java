@@ -474,7 +474,10 @@ public class Parser {
             throw new InvalidAddDayFormatException();
         }
         int daysIndex = parseValidIndex(rawDaysIndex);
-        assert daysIndex >= 0 : "Number of days is negative.";
+        if (daysIndex == 0) {
+            throw new InvalidNumberOfDaysException(daysIndex);
+        }
+        assert daysIndex > 0 : "Number of days is negative or 0.";
 
         Command command;
         command = new AddDayCommand(tripName, daysIndex);
@@ -501,8 +504,8 @@ public class Parser {
 
     /**
      * Used to check if a user input value for the day/item field is valid.
-     * @param rawIndex Raw day or item index as inputted by user.
-     * @return Day or item index as an integer.
+     * @param rawIndex Raw day/item index as inputted by user.
+     * @return Day/Item index as an integer.
      * @throws TravellerException If <code>rawIndex</code> is not an integer or is negative.
      */
     private static int parseValidIndex(String rawIndex) throws TravellerException {
@@ -519,6 +522,11 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Used to check if a user input value for the time field is valid.
+     * @param rawTime Raw time as inputted by user.
+     * @throws TravellerException If <code>rawTime</code> is not a 4 digit integer between 0000 and 2359 inclusive.
+     */
     private static void parseValidTime(String rawTime) throws TravellerException {
         int timeInteger;
         try {

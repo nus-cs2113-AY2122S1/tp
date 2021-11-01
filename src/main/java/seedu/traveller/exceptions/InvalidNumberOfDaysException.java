@@ -4,7 +4,11 @@ package seedu.traveller.exceptions;
 //@@author Uxinnn
 public class InvalidNumberOfDaysException extends TravellerException {
     public InvalidNumberOfDaysException(int daysNumber) {
-        message = "\tThe number of days specified '" + daysNumber + "' should not be negative.";
+        if (daysNumber == 0) {
+            message = "\tThe number of days specified '" + daysNumber + "' should not be 0.";
+        } else {
+            message = "\tThe number of days specified '" + daysNumber + "' should not be negative.";
+        }
     }
 
     public InvalidNumberOfDaysException(String rawDaysNumber) {
