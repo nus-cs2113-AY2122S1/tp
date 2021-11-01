@@ -268,14 +268,5 @@ public class Storage {
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
         Storage.listOfTrips = listOfTrips;
     }
-
-    public static boolean isIsProcessing() {
-        return isProcessing;
-    }
-
-    public static void setIsProcessing(boolean isProcessing) {
-        Storage.isProcessing = isProcessing;
-    }
-
-
+    
 }
