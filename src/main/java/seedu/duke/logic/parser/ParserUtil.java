@@ -11,6 +11,8 @@ import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.AddCommandParser.DEFAULT_PRIORITY;
 import static seedu.duke.logic.parser.AddCommandParser.EMPTY_INFORMATION;
 
@@ -60,7 +62,7 @@ public class ParserUtil {
      */
     public static void checkParamsLength(String[] params, int min, int max) throws ParseException {
         if (params.length < min || params.length > max) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(Messages.ERROR_INVALID_NUMBER_OF_PARAMS);
         }
     }
 
@@ -126,7 +128,7 @@ public class ParserUtil {
 
             information = params[2].strip();
         } else {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(ADD_TASK_FORMAT));
         }
 
         return new AddTaskCommand(title, dayOfTheWeek, priority, information);
