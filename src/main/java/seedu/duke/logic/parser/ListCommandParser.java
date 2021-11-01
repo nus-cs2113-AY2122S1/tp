@@ -66,7 +66,7 @@ public class ListCommandParser {
         return new ListTaskCommand(userResponse.toLowerCase());
     }
 
-    private static Command parseListModuleCommand(String userResponse) throws ParseException {
+    private static Command parseListModuleCommand(String userResponse) {
         return new ListModuleCommand(userResponse.toLowerCase());
     }
 }

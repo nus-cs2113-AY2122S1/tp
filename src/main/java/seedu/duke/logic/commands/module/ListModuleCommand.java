@@ -23,6 +23,11 @@ public class ListModuleCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        ui.printModuleList(moduleList);
+        if (moduleList.isEmpty()) {
+            ui.printMessage("There are no modules in the list.");
+        } else {
+            ui.printModuleList(moduleList);
+        }
+
     }
 }
