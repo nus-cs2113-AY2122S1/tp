@@ -97,6 +97,7 @@ kinds of entries you may want to list out, which are your member, training and a
     ```
    [1] Name: Mark | Training Name: Monday Training | Present: [1]
     ```
+ 
 ### Delete
 **CCA Manager** has a delete function which allows you to remove any members who have left the CCA, trainings which have been
 cancelled, or remove any incorrect entries to your attendance list. This means that wrong data can be easily cleared, 
