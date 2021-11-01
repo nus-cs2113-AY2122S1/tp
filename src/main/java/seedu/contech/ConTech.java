@@ -13,7 +13,7 @@ import seedu.storage.Storage;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
-public class Duke {
+public class ConTech {
     private final ContactsDecoder contactsDecoder;
     private final ContactsEncoder contactsEncoder;
     private String contactFilePath;
@@ -23,7 +23,7 @@ public class Duke {
     private String personalContactFilePath;
     private Contact personalContact;
 
-    public Duke(String contactFilePath, String personalContactFilePath) {
+    public ConTech(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
         this.personalContactFilePath = personalContactFilePath;
         this.parser = new MainParser();
@@ -43,7 +43,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Duke("data/contacts.txt",
+        new ConTech("data/contacts.txt",
                 "data/me.txt").runConTech();
     }
 
