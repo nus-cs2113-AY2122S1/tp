@@ -3,12 +3,10 @@ package utilities.parser;
 import command.CommandParameters;
 import inventory.Prescription;
 import inventory.Medicine;
-import inventory.Stock;
 import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author deonchung

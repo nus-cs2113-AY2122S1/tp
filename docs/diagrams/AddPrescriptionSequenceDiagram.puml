@@ -8,7 +8,7 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":PrescriptionValidator" as prescriptionvalidator COLOR_UTILITIES
+    participant "<<class>>\n:PrescriptionManager" as prescriptionManager COLOR_UTILITIES
     participant ":StockComparator" as stockcomparator COLOR_UTILITIES
 end box
 
@@ -19,8 +19,8 @@ end box
 autoactivate on
 mainframe sd AddPrescriptionCommand
 activate addprescription
-    addprescription -> prescriptionvalidator: getNotExpiredStockQuantity()
-    addprescription <-- prescriptionvalidator: totalStock
+    addprescription -> prescriptionManager: getNotExpiredStockQuantity()
+    addprescription <-- prescriptionManager: totalStock
 
     create stockcomparator
     addprescription -> stockcomparator : new StockComparator()

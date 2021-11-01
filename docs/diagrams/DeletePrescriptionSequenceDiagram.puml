@@ -8,7 +8,7 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":PrescriptionValidator" as prescriptionValidator COLOR_UTILITIES
+    participant "<<class>>\n:PrescriptionManager" as prescriptionManager COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
@@ -21,8 +21,8 @@ activate deleteprescription
 
 deleteprescription -> deleteprescription : isValidPrescriptionParameters()
     opt isValidPrescriptionId
-    deleteprescription -> prescriptionValidator : isValidPrescriptionId()
-    deleteprescription <-- prescriptionValidator : isValidPrescriptionId
+    deleteprescription -> prescriptionManager : isValidPrescriptionId()
+    deleteprescription <-- prescriptionManager : isValidPrescriptionId
     deleteprescription -> deleteprescription : setStockQuantity()
         loop medicine : medicines
 
