@@ -447,6 +447,7 @@ Updates an existing prescription information.
 > * The allocation of Prescription ID is determined by MediVault.
 > * Your provided `n/NAME` parameter **must** exist in stocks.
 > * When you update a prescription record, the stock information may be affected as well
+> * MediVault does not combine prescription information even if the column information are the same.
 
 > :information_source: Note:
 > * MediVault allocates a **new** Prescription ID when you update prescription records containing the `n/NAME` and 
@@ -645,6 +646,7 @@ Updates an existing order information.
 > * You cannot update the Order ID or the status of the order.
 > * The allocation of Order ID is determined by MediVault.
 > * The status of the order will only be changed when you run the `receiveorder` command.
+> * MediVault does not combine orders even if the column information are the same.
 
 Format: `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
 
