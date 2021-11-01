@@ -30,6 +30,7 @@ import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
+import seedu.utility.Messages;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
@@ -319,5 +320,21 @@ public class ParserTest {
         String userInput = "btw_ex s/11/12/2100 e/11/11/2100";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void parseAddExpenseCommand_invalidExpenseValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d/food a/10000000.001 c/food");
+        InvalidCommand test = (InvalidCommand) underTest; 
+        assertSame(Messages.INVALID_EXPENSE_VALUE, test.getMessage());
+    }
+
+    @Test
+    public void parseAddIncomeCommand_invalidIncomeValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_in d/salary a/10000000.0011 c/salary");
+        InvalidCommand test = (InvalidCommand) underTest;
+        assertSame(Messages.INVALID_INCOME_VALUE, test.getMessage());
     }
 }

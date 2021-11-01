@@ -120,7 +120,7 @@ Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 Note:
 
 - The default date of the added expense will be the date in which the expense is added.
-- Expense entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day.
+- Each expense entry can only have a maximum value of 10000000.
 
 Examples:
 
@@ -259,8 +259,8 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 Note:
 
-- The default date of the added income will be the date in which the income is added.
-- Income entries made with the same `DESCRIPTION`, `AMOUNT`, `CATEGORY` cannot be made on the same day. 
+- The default date of the added income will be the date in which the income is added. 
+- Each income entry can only have a maximum value of 10000000.
 
 Examples:
 

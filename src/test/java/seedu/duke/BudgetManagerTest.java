@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
-import seedu.exceptions.DuplicateExpenseException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -13,7 +12,6 @@ import seedu.utility.Ui;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -56,8 +54,7 @@ public class BudgetManagerTest {
 
 
     @Test
-    public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() 
-            throws DuplicateExpenseException {
+        public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() {
         budgetManager.setBudget(20, ExpenseCategory.OVERALL);
         budgetManager.setBudget(12, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -74,8 +71,7 @@ public class BudgetManagerTest {
     }
 
     @Test
-    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() 
-            throws DuplicateExpenseException {
+    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() {
         budgetManager.setBudget(12, ExpenseCategory.OVERALL);
         budgetManager.setBudget(4, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
