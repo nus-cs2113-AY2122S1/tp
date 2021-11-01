@@ -104,7 +104,7 @@ public class RecordList {
     }
 
     /**
-     * Returns the total amount spent on expenditures in this month
+     * Returns the total amount spent on expenditures in this month.
      *
      * @return double Amount spent in this month
      */

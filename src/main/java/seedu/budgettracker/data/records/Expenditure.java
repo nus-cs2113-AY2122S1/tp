@@ -25,7 +25,7 @@ public class Expenditure extends Record {
     /**
      * Gets the date on which the expenditure was made.
      *
-     * @return String date on which expenditure was made.
+     * @return String date on which expenditure was made
      */
     public String getDate() {
         return date.toString();
@@ -53,7 +53,7 @@ public class Expenditure extends Record {
     }
 
     /**
-     * Prints the details of the Expenditure in column format
+     * Prints the details of the Expenditure in column format.
      *
      * @param indexOfExpenditure The current index of the Expenditure
      * @return String details of the expenditure
