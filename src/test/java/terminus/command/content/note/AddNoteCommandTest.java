@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,8 +44,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    void execute_success_multipleNotes() throws InvalidArgumentException, InvalidCommandException, IOException,
-            DocumentException {
+    void execute_success_multipleNotes() throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test" + i + "\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(moduleManager);
@@ -57,7 +55,7 @@ public class AddNoteCommandTest {
 
     @Test
     void execute_duplicateNoteName_exceptionThrown() throws InvalidArgumentException, InvalidCommandException,
-            IOException {
+        IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test\"");
         CommandResult addResult = addCommand.execute(moduleManager);
         for (int i = 1; i < 5; i++) {

@@ -65,7 +65,7 @@ public class PdfStorageTest {
     void exportModuleNotes_invalidInputs_exceptionThrown() throws InvalidFileException {
         Path filepath = pdfStorage.getAppendPath(TestFilePath.RESOURCE_FOLDER, "TEST.pdf");
         assertFalse(Files.exists(filepath));
-        assertThrows(InvalidFileException.class, () -> pdfStorage.exportModuleNotes(moduleManager, tempModule));
+        assertThrows(InvalidFileException.class, () -> pdfStorage.writeFile(Path.of(""), null));
         assertThrows(AssertionError.class, () -> pdfStorage.exportModuleNotes(moduleManager, "a"));
     }
 }
