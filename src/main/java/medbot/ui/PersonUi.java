@@ -128,7 +128,7 @@ public abstract class PersonUi {
     }
 
     public static String getDeletePersonMessage(String person, int id) {
-        String uppercasePerson = capitalize(person);
+        String uppercasePerson = capitalizeFirstLetter(person);
 
         String output = uppercasePerson + " with id " + id + " deleted from system." + END_LINE;
 
