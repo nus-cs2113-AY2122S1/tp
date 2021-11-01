@@ -1,9 +1,10 @@
 package seedu.parser;
 
 import seedu.command.flags.SearchFlags;
-import seedu.ui.TextUi;
 
-import static seedu.command.flags.SearchFlags.*;
+import static seedu.command.flags.SearchFlags.INVALID_FLAGS;
+import static seedu.command.flags.SearchFlags.INVALID_MC;
+import static seedu.command.flags.SearchFlags.MC_LENGTH;
 
 public class FlagParser {
 
