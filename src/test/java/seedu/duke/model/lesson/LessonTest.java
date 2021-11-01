@@ -14,11 +14,10 @@ public class LessonTest {
         try {
             lessonList.addLesson(new Lesson("CS3243 Lecture", "Monday", "10:00 PM", "12:00 PM", " "));
             lessonList.addLesson(new Lesson("CS1101S Lecture", "Wednesday", "10:00 PM", "12:00 PM", "-"));
+            assertThrows(DukeException.class, () -> lessonList.getLesson(1).launchUrl());
+            assertThrows(DukeException.class, () -> lessonList.getLesson(2).launchUrl());
         } catch (DukeException e) {
             fail();
         }
-
-        assertThrows(DukeException.class, () -> lessonList.getLesson(1).launchUrl());
-        assertThrows(DukeException.class, () -> lessonList.getLesson(2).launchUrl());
     }
 }

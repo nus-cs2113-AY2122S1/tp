@@ -21,10 +21,10 @@ public class LessonListTest {
         LessonList lessonList = new LessonList();
         try {
             lessonList.addLesson(new Lesson("CS2113T Lecture", "Monday", "02:00 PM", "04:00 PM", "-"));
+            assertFalse(lessonList.isEmpty());
         } catch (DukeException e) {
             fail();
         }
-        assertFalse(lessonList.isEmpty());
     }
 
     @Test
