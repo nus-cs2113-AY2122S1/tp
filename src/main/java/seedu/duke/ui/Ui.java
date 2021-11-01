@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import seedu.duke.Duke;
+import seedu.duke.commons.core.CommandFormat;
+
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.Module;
@@ -100,40 +102,29 @@ public class Ui {
                 + "Here are the list of commands that you can try.");
         System.out.print(SHORT_LINE);
 
-        System.out.println(PADDING + "add        "
-                + "task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}");
-        System.out.println(PADDING + "add        "
-                + "lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}");
-        System.out.println(PADDING + "add        "
-                + "module [MODULE_CODE]");
+        System.out.println(PADDING + CommandFormat.ADD_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.ADD_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.ADD_MODULE_FORMAT);
 
-        System.out.println(PADDING + "list       "
-                + "task {PERIOD/PRIORITY}");
-        System.out.println(PADDING + "list       "
-                + "lesson {PERIOD}");
-        System.out.println(PADDING + "list       "
-                + "module {VERBOSE}");
+        System.out.println(PADDING + CommandFormat.LIST_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.LIST_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.LIST_MODULE_FORMAT);
 
-        System.out.println(PADDING + "delete     "
-                + "task [INDEX]");
-        System.out.println(PADDING + "delete     "
-                + "lesson [INDEX]");
-        System.out.println(PADDING + "delete     "
-                + "module [MODULE_CODE]");
+        System.out.println(PADDING + CommandFormat.DELETE_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.DELETE_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.DELETE_MODULE_FORMAT);
 
-        System.out.println(PADDING + "done       "
-                + "task [INDEX]");
+        System.out.println(PADDING + CommandFormat.DONE_TASK_FORMAT);
 
-        System.out.println(PADDING + "find       "
-                + "[task/lesson] [KEYWORD]");
+        System.out.println(PADDING + CommandFormat.FIND_TASK_FORMAT);
+        System.out.println(PADDING + CommandFormat.FIND_LESSON_FORMAT);
+        System.out.println(PADDING + CommandFormat.FIND_MODULE_FORMAT);
 
-        System.out.println(PADDING + "moduleinfo "
-                + "[MODULE_CODE]");
+        System.out.println(PADDING + CommandFormat.SET_GRADE_FORMAT);
 
-        System.out.println(PADDING + "set        "
-                + "grade [MODULE_CODE] [GRADE]");
+        System.out.println(PADDING + CommandFormat.LAUNCH_LESSON_FORMAT);
 
-        System.out.println(PADDING + "exit       ");
+        System.out.println(PADDING + CommandFormat.EXIT_FORMAT);
 
         System.out.println();
         System.out.println(PADDING + "Notes: Square brackets -> [COMPULSORY_PARAMETER]");
@@ -365,6 +356,7 @@ public class Ui {
     }
 
     //@@author Roycius
+
     /**
      * Displays a message to inform user that the specified module
      * has been successfully deleted.
@@ -400,8 +392,10 @@ public class Ui {
     }
 
     //@@author rebchua39
+
     /**
      * Displays the user's cumulative average point (CAP) or a message if there is no valid CAP.
+     *
      * @param moduleList the list of modules
      */
     private void printCap(ModuleList moduleList) {
@@ -418,6 +412,7 @@ public class Ui {
 
     /**
      * Displays a message to inform the user that the grade for the specified module has been successfully changed.
+     *
      * @param module the module object whose grade has been changed
      */
     public void printModuleWithGradeChanged(Module module) {
@@ -429,6 +424,7 @@ public class Ui {
     }
 
     //@@author richwill28
+
     /**
      * Displays the full module information of the specified module code.
      *

@@ -11,7 +11,11 @@ import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
 import static seedu.duke.commons.core.Priority.LOW;
+import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
@@ -19,6 +23,7 @@ import static seedu.duke.logic.parser.ParserUtil.parseMeetingUrl;
 import static seedu.duke.logic.parser.ParserUtil.parsePriorityAndInfo;
 import static seedu.duke.logic.parser.ParserUtil.parsePriorityOrInfo;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
+
 
 //@@author richwill28
 public class AddCommandParser {
@@ -44,7 +49,7 @@ public class AddCommandParser {
         case INVALID:
             // Fallthrough
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(ADD_TASK_FORMAT, ADD_LESSON_FORMAT, ADD_MODULE_FORMAT));
         }
     }
 
@@ -71,7 +76,7 @@ public class AddCommandParser {
             String url = params[4];
             return parseMeetingUrl(userResponse, title, dayOfTheWeek, startTime, endTime, url, true);
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(ADD_LESSON_FORMAT));
         }
     }
 
@@ -90,7 +95,7 @@ public class AddCommandParser {
         case 4:
             return parsePriorityAndInfo(userResponse, params, title, dayOfTheWeek);
         default:
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(ADD_TASK_FORMAT));
         }
     }
 
