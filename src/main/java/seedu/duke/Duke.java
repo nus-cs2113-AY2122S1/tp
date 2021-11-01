@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.TextUI;
@@ -18,7 +19,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LibmgrException {
         ui = new TextUI();
         catalogue = new Catalogue();
         parser = new Parser();

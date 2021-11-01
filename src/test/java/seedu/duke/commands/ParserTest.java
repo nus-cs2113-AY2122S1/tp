@@ -12,19 +12,45 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
+    TextUI ui = new TextUI();
     Parser parser = new Parser();
+
+    @Test
+    public void extractArgs_multipleEmptyArgs_LibmgrException() {
+        String command = "add a t/ i/ a/Michael Jackson d/42:16";
+        String expectedError = "  (!) Attributes cannot be empty!";
+        Exception exception = assertThrows(LibmgrException.class, () -> {
+            HashMap<String, String> result = parser.extractArgs(command);
+        });
+        assertTrue(exception.getMessage().contains(expectedError));
+    }
+
+    @Test
+    public void extractArgs_repeatedArgs_LibmgrException() {
+        String command = "add a t/Thriller i/9999 i/5920 a/Michael Jackson d/42:16";
+        String expectedError = "  (!) Do not specify an attribute more than once!";
+        Exception exception = assertThrows(LibmgrException.class, () -> {
+            HashMap<String, String> result = parser.extractArgs(command);
+        });
+        assertTrue(exception.getMessage().contains(expectedError));
+    }
 
     @Test
     public void extractArgs_singleCommandNoArgs_Hashmap() {
         HashMap<String, String> expected = new HashMap<>();
         expected.put(null, "add");
-        HashMap<String, String> result = parser.extractArgs("add");
-        assertEquals(expected, result);
+        try {
+            HashMap<String, String> result = parser.extractArgs("add");
+            assertEquals(expected, result);
+        } catch (LibmgrException e) {
+            e.getMessage();
+        }
     }
 
     @Test
@@ -35,8 +61,13 @@ class ParserTest {
         expected.put("i", "5920");
         expected.put("a", "Michael Jackson");
         expected.put("d", "42:16");
-        HashMap<String, String> result = parser.extractArgs("add a t/Thriller  i/5920 a/Michael Jackson d/42:16");
-        assertEquals(expected, result);
+        try {
+            HashMap<String, String> result = parser.extractArgs("add a t/Thriller i/5920 a/Michael Jackson d/42:16");
+            assertEquals(expected, result);
+        } catch (LibmgrException e) {
+            e.getMessage();
+        }
+
     }
 
     @Test
@@ -47,8 +78,13 @@ class ParserTest {
         expected.put("i", "5920");
         expected.put("a", "Michael Jackson");
         expected.put("d", "42:16/4:50");
-        HashMap<String, String> result = parser.extractArgs("add a t/Thriller/Beat It i/5920 a/Michael Jackson d/42:16/4:50");
-        assertEquals(expected, result);
+        try {
+            HashMap<String, String> result = parser.extractArgs("add a t/Thriller/Beat It "
+                    + "i/5920 a/Michael Jackson d/42:16/4:50");
+            assertEquals(expected, result);
+        } catch (LibmgrException e) {
+            e.getMessage();
+        }
     }
 
     @Test
@@ -65,7 +101,8 @@ class ParserTest {
 
     @Test
     public void parse_add_AddCommandObject() {
-        Boolean isSameObject = parser.parse("add a t/Thriller i/5920 a/Michael Jackson d/42:16") instanceof AddCommand;
+        Boolean isSameObject = parser.parse("add a t/Thriller i/5920 "
+                + "a/Michael Jackson d/42:16") instanceof AddCommand;
         assertTrue(isSameObject);
     }
 

@@ -6,27 +6,29 @@ Libmgr is a desktop app for managing the inventory of libraries, optimised for u
 Designed for fast typists, it can help to augment the day-to-day tasks of a librarian and can help them to get tasks
 done in an efficient manner.
 
-- [Quick Start](#Quick-Start)
-- [Features](#Features)
-    - [Adding an item: `add`](#Adding-an-item)
-        - [Adding an audio item: `add a`](#Adding-an-audio-item)
-        - [Adding a book item: `add b`](#Adding-a-book-item)
-        - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
-        - [Adding a video item: `add v`](#Adding-a-video-item)
-    - [List items: `list`](#List-items)
-    - [Search items: `search`](#Search-item-by-ID)
-      - [Search item by ID: `search i/`](#Search-item-by-ID)
-      - [Search item by title: `search t/`](#Search-item-by-title)
-      - [Search item by status: `search s/`](#Search-item-by-status)
-    - [Reserve items: `res`](#Reserve-items)
-    - [Un-reserve items: `unres`](#Unreserve-items)
-    - [Loan items: `loan`](#Loan-items)
-    - [Return items: `return`](#Return-items)
-    - [Removing an item: `rm`](#Removing-an-item)
-    - [Editing an item: `edit`](#Editing-an-item)
-    - [Exiting the program: `exit`](#Exiting-the-program)
-- [FAQ](#FAQ)
-- [Command Summary](#Command-Summary)
+- [Quick Start](#quick-Start)
+- [Features](#features)
+    - [Adding an item: `add`](#adding-an-item)
+        - [Adding an audio item: `add a`](#adding-an-audio-item)
+        - [Adding a book item: `add b`](#adding-a-book-item)
+        - [Adding a magazine item: `add m`](#adding-a-magazine-item)
+        - [Adding a video item: `add v`](#adding-a-video-item)
+    - [List items: `list`](#list-items)
+    - [Listing items that are due today: `deadline today`](#listing-items-that-are-due-today)
+    - [Listing items that are overdue: `deadline overdue`](#listing-items-that-are-overdue)
+    - [Search items: `search`](#search-item-by-ID)
+      - [Search item by ID: `search i/`](#search-item-by-ID)
+      - [Search item by title: `search t/`](#search-item-by-title)
+      - [Search item by status: `search s/`](#search-item-by-status)
+    - [Reserve items: `res`](#reserve-items)
+    - [Un-reserve items: `unres`](#unreserve-items)
+    - [Loan items: `loan`](#loan-items)
+    - [Return items: `return`](#return-items)
+    - [Removing an item: `rm`](#removing-an-item)
+    - [Editing an item: `edit`](#editing-an-item)
+    - [Exiting the program: `exit`](#exiting-the-program)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 ## Quick Start
 
@@ -123,10 +125,46 @@ Expected Output:
   ========================================
 ```
 
-### Search item by ID 
-Search items by ID (input keyword must be exactly the same)
+### Listing items that are due today
+List the loaned items that need to be returned today
 
-Format: `search i/ID` 
+Format: `deadline today`
+
+Example: `deadline today`
+
+Expected Output:
+```
+  (+) Listing out loaned items that have to be returned today
+  ========================================
+  [M] 58720a | LOANED (martin TILL 31-10-2021) | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+### Listing items that are overdue
+List the loaned items that already overdue but haven't been returned yet
+
+Format: `deadline overdue`
+
+Example: `deadline overdue`
+
+Expected Output:
+```
+  (+) Listing out loaned items that are overdue
+  ========================================
+  [B] 2551 | LOANED (johnsmith TILL 01-01-2021) | To Kill a Mockingbird | Harper Lee
+  ========================================
+```
+
+### Search item by ID, Title, Status, Category
+Search items by ID, Title, Status, and Category.
+
+Status must be one of "AVAILABLE", "LOANED" or "RESERVED".
+
+Category must be one of "Audio", "Video", "Book", "Magazine".
+
+Any items matching more than one keyword will be listed, those items matching the search criteria more closely will be listed first.
+
+Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
 Example: `search i/095680`
 
@@ -138,37 +176,16 @@ Expected Output:
   ========================================
 ```
 
-### Search item by title
-Search items by title (input keyword can be part of the actual title)
-
-Format: `search t/TITLE`
-
-Example: `search t/Time`
+Example: `search s/LOANED c/Magazine`
 
 Expected Output:
 ```
   (+) Here are the searching results in library
   ========================================
   [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
+  [B] 2551 | LOANED (Silin TILL 20-06-2022) | To Kill a Mockingbird | Harper Lee
   ========================================
 ```
-
-### Search item by status
-Search items by title (input keyword must be one of AVAILABLE, LOANED, RESERVED)
-
-Format: `search s/STATUS`
-
-Example: `search s/AVAILABLE`
-
-Expected Output:
-```
-  (+) Here are the searching results in library
-  ========================================
-  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
-  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
-  ========================================
-```
-
 ### Reserve items
 Reserves an item for a specific person.
 
@@ -180,7 +197,7 @@ Expected Output:
 ```
 > res i/2551 u/johnsmith
   (+) You have successfully reserved an item:
-  [B] 2551 | RESERVED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | RESERVED (johnsmith) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Unreserve items
@@ -212,7 +229,7 @@ Expected Output:
 ```
 > loan i/2551 d/12-11-2021 u/johnsmith
   (+) Item has been loaned out:
-  [B] 2551 | LOANED | To Kill a Mockingbird | Harper Lee
+  [B] 2551 | LOANED (johnsmith TILL 12-11-2021) | To Kill a Mockingbird | Harper Lee
 ```
 
 ### Return items
@@ -273,6 +290,12 @@ Exits the program.
 
 Format: `exit`
 
+Expected Output:
+```
+> exit
+See you soon!
+```
+
 ## FAQ
 
 **Q**: What happens if I mistype a command not recognised by the program?
@@ -282,6 +305,19 @@ You can then key in a command again.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+|Action|Purpose|Format and Examples|
+|---|---|---|
+|Add (Audio)|Add an audio item to the catalogue|`add a t/TITLE i/ID a/ARTIST d/DURATION`<br>E.g. `add a t/Thriller i/5920 a/Michael Jackson d/42:16`|
+|Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
+|Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
+|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
+|Deadline|View items due to be returned|`deadline [overdue\|today]` <br> E.g. `deadline today`|
+|Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute` <br> E.g. `edit 123 t/Harry Potter`|
+|Exit|Quit the program|`exit`|
+|List (all items)|Lists all items within the catalogue|`list`|
+|Loan|Loan out an item to someone|`loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)` <br> E.g. `loan i/2551 d/12-11-2021 u/johnsmith`|
+|Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
+|Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
+|Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
+|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search t/Time`|
+|Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|
