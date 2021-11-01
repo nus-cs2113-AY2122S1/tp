@@ -153,14 +153,14 @@ public class Ui {
     public void printHelp() {
         System.out.println("\tSome of our basic commands are:\n"
                 + "\tnew FamilyTrip2021 /from SIN /to MLY : "
-                + "Adds a new trip called FamilyTrip2021 from Singapore "
+                + "\n\tAdds a new trip called FamilyTrip2021 from Singapore "
                 + "(SIN) to Malaysia (MLY).\n"
 
                 + "\tadd-day myTrip 3 : "
                 + "Adds 3 days to trip myTrip.\n"
 
                 + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
-                + "Adds item Check-in to HolidayInn to day 0 of trip1.\n"
+                + "\n\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
                 + "\tview : Views all your existing trips and their details.\n"
 
@@ -173,14 +173,14 @@ public class Ui {
                 + "Deletes item 0 of myTrip on day 0.\n"
 
                 + "\tedit FamilyTrip2021 /from SKR /to JPN : "
-                + "Edits an existing trip called FamilyTrip2021"
+                + "\n\tEdits an existing trip called FamilyTrip2021"
                 + "to have new START and END destinations.\n"
 
                 + "\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
-                + "Edits item1 of trip 1 to wake up from bed at 7am.\n"
+                + "\n\tEdits item1 of trip 1 to wake up from bed at 7am.\n"
 
                 + "\tsearch-item trip1 /name sleep at home : "
-                + "Searches item keyword sleep at home in trip called trip1.\n"
+                + "\n\tSearches item keyword sleep at home in trip called trip1.\n"
 
                 + "\tshortest-dist /from SKR /to JPN : "
                 + "Returns the shortest distance from SKR to JPN.\n"
