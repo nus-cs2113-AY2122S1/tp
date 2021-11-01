@@ -18,7 +18,7 @@ public class TrainingList {
         return trainingList;
     }
 
-    public int getTrainingListSize() { //added by xy
+    public int getTrainingListSize() {
         return trainingList.size();
     }
 

@@ -41,6 +41,10 @@ public class AttendanceList {
         try {
             int index = attendanceNumber - 1;
             Attendance entry = attendanceList.get(index);
+            for (int i = attendanceNumber; i < this.getAttendanceListSize(); i++) {
+                Attendance attendanceToChangeIndex = attendanceList.get(i);
+                attendanceToChangeIndex.setIndex(i);
+            }
             attendanceList.remove(index);
             return entry;
         } catch (IndexOutOfBoundsException e) {

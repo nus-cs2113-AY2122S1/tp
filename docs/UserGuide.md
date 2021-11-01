@@ -80,7 +80,7 @@ kinds of entries you may want to list out, which are your member, training and a
    * The `list` keyword takes in few different arguments:
       * `/m` lists members and member related information.
       * `/t` lists trainings and training related information.
-      * `/att [/t <TRAINING_NAME> </d 1_OR_0>]` lists attendance entries, each consisting of a member and whether they attended a particular training.
+      * `/att </t TRAINING_NAME>` lists attendance entries, each consisting of a member and whether they attended a particular training.
    * Format: list [/m] [/t] [/att]
    * **Examples:**
       - `list /m`
@@ -166,4 +166,4 @@ Action| Syntax |Remarks|
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>] OR <MEMBER_NAME> OR <TRAINING_NAME>| Get the index by calling `list /att`
 |edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
 |edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
-|list| list [/m] [/t] [/att /t <TRAINING_NAME> </d 1_OR_0>]| `/m` for Member, `/t` for Training, `/att` for Attendance where `<1_or_0>` is an optional field
+|list| list [/m] [/t] [/att /t <TRAINING_NAME>]| `/m` for Member, `/t` for Training, `/att` for Attendance
