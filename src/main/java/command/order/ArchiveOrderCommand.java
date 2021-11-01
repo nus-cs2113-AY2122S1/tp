@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * Archive orders based on user input given date.
  */
 public class ArchiveOrderCommand extends Command {
-    private static Logger logger = Logger.getLogger("Delete Order");
+    private static Logger logger = Logger.getLogger("ArchiveOrder");
 
     public ArchiveOrderCommand(LinkedHashMap<String, String> parameters) {
         this.parameters = parameters;
@@ -74,6 +74,13 @@ public class ArchiveOrderCommand extends Command {
         logger.log(Level.INFO, "Successful archive of order");
     }
 
+    /**
+     * Checks through all orders and look for records that are DELIVERED and have order date <= specified date.
+     *
+     * @param medicines        Arraylist of all medicines.
+     * @param orderArchiveDate Date that user specified to archive.
+     * @return Arraylist of orders that meet the archive requirements.
+     */
     private ArrayList<Medicine> ordersToArchive(ArrayList<Medicine> medicines, Date orderArchiveDate) {
         ArrayList<Medicine> filteredOrders = new ArrayList<>();
         for (Medicine medicine : medicines) {
@@ -91,6 +98,12 @@ public class ArchiveOrderCommand extends Command {
         return filteredOrders;
     }
 
+    /**
+     * Removal of orders from order list after archive.
+     *
+     * @param medicines      Arraylist of all medicines.
+     * @param filteredOrders Arraylist of orders that meet the archive requirements.
+     */
     private void removeFromOrders(ArrayList<Medicine> medicines, ArrayList<Medicine> filteredOrders) {
         for (Medicine medicine : filteredOrders) {
             medicines.remove(medicine);
