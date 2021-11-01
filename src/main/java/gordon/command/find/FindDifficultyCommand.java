@@ -6,6 +6,7 @@ import gordon.kitchen.Recipe;
 import gordon.util.Difficulty;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FindDifficultyCommand extends Command {
     Difficulty difficulty;
@@ -18,8 +19,16 @@ public class FindDifficultyCommand extends Command {
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by difficulty...");
         ArrayList<Recipe> diffFilter = cookbook.filterByDifficulty(difficulty);
+        ArrayList<String> namesInOrder = new ArrayList<String>();
         for (int i = 0; i < diffFilter.size(); i++) {
-            System.out.println((i + 1) + ". " + diffFilter.get(i).getName()
+            namesInOrder.add(diffFilter.get(i).getName());
+        }
+
+        // Sort
+        Collections.sort(namesInOrder, String.CASE_INSENSITIVE_ORDER);
+
+        for (int i = 0; i < diffFilter.size(); i++) {
+            System.out.println((i + 1) + ". " + namesInOrder.get(i)
                     + " (Difficulty: " + diffFilter.get(i).getDifficulty().name() + ")");
         }
     }
