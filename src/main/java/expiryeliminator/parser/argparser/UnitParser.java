@@ -2,6 +2,7 @@ package expiryeliminator.parser.argparser;
 
 //@@author JoshHDs
 
+import expiryeliminator.common.Utils;
 import expiryeliminator.parser.exception.InvalidArgFormatException;
 
 /**
@@ -9,7 +10,8 @@ import expiryeliminator.parser.exception.InvalidArgFormatException;
  */
 public class UnitParser extends SingleArgParser<String> {
 
-    private static final String MESSAGE_INVALID_UNIT = "Units must only consist of words, not numbers.";
+    private static final String MESSAGE_INVALID_UNIT = "Units must only consist of letters, "
+            + "not numbers or other special digits.";
 
     /**
      * Parses unit.
@@ -19,17 +21,9 @@ public class UnitParser extends SingleArgParser<String> {
      */
     @Override
     public String parse(String unitString) throws InvalidArgFormatException {
-
-        if (unitString != null) {
-            for (int i = 0; i < unitString.length(); i++) {
-                char c = unitString.charAt(i);
-
-                if (!Character.isLetter(c)) {
-                    throw new InvalidArgFormatException(MESSAGE_INVALID_UNIT);
-                }
-            }
+        if (unitString != null && !Utils.isAlphabetic(unitString)) {
+            throw new InvalidArgFormatException(MESSAGE_INVALID_UNIT);
         }
-
         return unitString;
     }
 }

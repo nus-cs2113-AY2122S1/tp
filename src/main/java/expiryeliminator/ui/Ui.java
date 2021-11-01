@@ -30,7 +30,7 @@ public class Ui {
         while (line.trim().isEmpty()) {
             line = SCANNER.nextLine();
         }
-        return line.trim();
+        return line.trim().toLowerCase();
     }
 
     /**
