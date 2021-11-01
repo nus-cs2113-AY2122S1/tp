@@ -20,6 +20,7 @@ public class FindDifficultyCommand extends Command {
     public void execute(Cookbook cookbook) {
         ArrayList<Recipe> diffFilter = cookbook.filterByDifficulty(difficulty);
         ArrayList<String> namesInOrder = new ArrayList<String>();
+        
         for (int i = 0; i < diffFilter.size(); i++) {
             namesInOrder.add(diffFilter.get(i).getName());
         }
