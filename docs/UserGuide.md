@@ -477,7 +477,7 @@ Initial prescription records:
 > :information_source: Note:
 > * Examples stated below are **independent** from each other.
 
-Example 1 (Update prescription containing `n/NAME` or `q/QUANTITY`: 
+Example 1 (Update prescription for `q/QUANTITY`): 
 `updateprescription i/1 q/5`
 
 Expected Output 1:
@@ -506,7 +506,7 @@ Updated stock record for Example 1:
 +----+---------+--------+----------+-------------+-------------+--------------+
 ```
 
-Example 2 (Update prescription without both `n/NAME` and `q/QUANTITY` parameter:
+Example 2 (Update prescription for `s/STAFF`):
 `updateprescription i/1 s/jack`
 
 Expected Output 2:
