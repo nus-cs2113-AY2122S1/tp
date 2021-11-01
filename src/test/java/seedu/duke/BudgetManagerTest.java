@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
+import seedu.exceptions.ExpenseOverflowException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -12,7 +13,6 @@ import seedu.utility.Ui;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,7 +55,8 @@ public class BudgetManagerTest {
 
 
     @Test
-    public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() {
+        public void handleBudget_overallNotExceededBudgetNotExceeded_directlyAdjustBudgetReminder() 
+            throws ExpenseOverflowException {
         budgetManager.setBudget(20, ExpenseCategory.OVERALL);
         budgetManager.setBudget(12, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -64,8 +65,7 @@ public class BudgetManagerTest {
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
 
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
+        String expectedOutput = "You are almost reaching the " + currentMonth + " FOOD budget: $11.00/$12.00" + newLine
                 + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $11.00/$20.00" + newLine
                 + "You can directly increase your " + currentMonth + " FOOD budget up to $21.00!" + newLine
                 + SEPARATOR_LINE;
@@ -73,7 +73,8 @@ public class BudgetManagerTest {
     }
 
     @Test
-    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() {
+    public void handleBudget_overallNotExceededBudgetExceeded_directlyAdjustBudgetReminder() 
+            throws ExpenseOverflowException {
         budgetManager.setBudget(12, ExpenseCategory.OVERALL);
         budgetManager.setBudget(4, ExpenseCategory.FOOD);
         budgetManager.setThreshold(0.1);
@@ -81,8 +82,7 @@ public class BudgetManagerTest {
         finances.addExpense(testExpense);
         budgetManager.handleBudget(testExpense, finances.getExpenses(), testUi);
 
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
+        String expectedOutput = "You have exceeded the " + currentMonth + " FOOD budget: $10.00/$4.00" + newLine
                 + "Since you have not yet exceeded your " + currentMonth + " OVERALL budget: $10.00/$12.00" + newLine
                 + "You can directly increase your " + currentMonth + " FOOD budget up to $12.00!"
                 + newLine + SEPARATOR_LINE;

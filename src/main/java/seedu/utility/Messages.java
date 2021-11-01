@@ -14,9 +14,9 @@ public class Messages {
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
     public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Entries.csv has corrupted entries, " 
-            + "some or all data maybe lost.";
+            + "those corrupted entries will be discarded and not be loaded.";
     public static final String HAS_CORRUPTED_SETTINGS = "StonksXD_Settings.csv has corrupted settings, "
-            + "some or all settings maybe lost.";
+            + "all settings will be reset.";
     public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Entries.csv, a new one " 
             + "has been made.";
     public static final String UNABLE_TO_FIND_SETTINGS_FILE = "Unable to find StonksXD_Settings.csv, a new one " 
@@ -47,7 +47,6 @@ public class Messages {
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
     public static final String SAME_CURRENCY_TYPE_MESSAGE = "Your lists are already in the requested currency type!";
 
-
     public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
             + "-------------------------------------";
 
@@ -66,4 +65,21 @@ public class Messages {
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
+    public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
+    public static final String MISSING_PARAMETERS_MESSAGE = "Missing parameters! Use help to view commands again!";
+    
+    public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money."
+            + "Are you sure you have spent that much?";
+    public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
+            + "I don't think we can handle that much money";
+    public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 
+            + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
+            + "replaced the CSV header with an entry, that entry will not be loaded.";
+    public static final String INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Settings.csv "
+            + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
+            + "replaced the CSV header with the settings, those settings will not be loaded.";
+    public static final String EXPENSE_OVERFLOW_ERROR = "Your total expense will exceed $100000000000. " 
+            + "Are you sure you have spent this much?";
+    public static final String INCOME_OVERFLOW_ERROR = "Your total income will exceed $100000000000. "
+            + "Are you sure you have gotten this much?";
 }

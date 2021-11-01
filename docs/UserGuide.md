@@ -1,12 +1,12 @@
-# StonksXD User Guide
+# Stonks XD User Guide
 
 ![](https://melmagazine.com/wp-content/uploads/2019/07/Stonks_Meme.jpg)
 
 ## Introduction
 
-StonksXD is your go-to smart money management application that is able to: 
+Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
-- sets/adjusts your spending limits
+- set/adjust your spending limits
 - provide you with helpful financial tips and insights
 
 It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
@@ -30,7 +30,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Delete income entry: `del_in`](#delete-income-entry-del_in)
     - [List all income entries: `list_in`](#list-all-income-entries-list_in)
     - [View total income: `total_in`](#view-total-income-total_in)
-    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find-yyyy-mm-dd)
+    - [Find entry using date: `find DD/MM/YYYY`](#find-entry-using-date-find-ddmmyyyy)
     - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
     - [View total balance: `balance`](#view-total-balance-balance)
     - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
@@ -40,6 +40,8 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
     - [Check budget: `check_budget`](#check-budget-check_budget)
     - [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
     - [View yearly report: `show_graph`](#view-yearly-report-show_graph)
+    - [Set currency: `set_curr`](#set-currency-set_curr)
+    - [Check current currency: `check_curr`](#check-current-currency-check_curr)
     - [Terminate program: `end`](#terminate-program-end)
     - [Saving of data](#saving-of-data)
 - [FAQ](#faq)
@@ -49,11 +51,13 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
-4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-5. In `StonksXD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` to show all available commands and their format)
-6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
-7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
+3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
+`java -jar StonksXD.jar` in the command line. `Stonks XD` will start up.
+5. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
+to show all available commands and their format.)
+6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
+7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
 8. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
 9. Refer to the [Features](#features) below for details of each command.
 
@@ -82,19 +86,22 @@ Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Expense: del_ex i/INDEX
 Listing Expense: list_ex
 Show Total Expense: total_ex
-Show Total Expense between 2 dates: btw_ex s/START_DATE e/END_DATE
+Show Total Expense between 2 dates (Date Format: DD/MM/YYYY): btw_ex s/START_DATE e/END_DATE
 Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
 Deleting Income: del_in i/INDEX
 Listing Income: list_in
 Show Total Income: total_in
-To Find Using Date: find YYYY-MM-DD
+To Find Using Date: find DD/MM/YYYY
 To Find Based On Keyword: find KEYWORD
 To Display Total Balance: balance
-Show Total Income between 2 dates: btw_in s/START_DATE e/END_DATE
+Show Total Income between 2 dates (Date Format: DD/MM/YYYY): btw_in s/START_DATE e/END_DATE
 To Set Budgets: set_budget c/CATEGORY a/AMOUNT
 To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
+To Clear All Expense and Income Entries: clear_all_entries
 To View Your Yearly Report: show_graph
+To change entries into a different currency: set_curr c/CURRENCY
+To check the currency that entries are currently in: check_curr
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
 </pre>
@@ -109,6 +116,12 @@ Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
+
+Note:
+
+- The default date of the added expense will be the date in which the expense is added.
+- Each expense entry can only have a maximum value of 1000000000.
+- The sum of all your entries cannot be more than 100000000000.
 
 Examples:
 
@@ -129,7 +142,6 @@ They might look something like this.
 <pre>-----------------------------------------------------------------------------------------------------
 You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
 Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
 You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
 Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
@@ -167,7 +179,7 @@ Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command `del_ex i/1` is given, you get the following message:
+When command <code>del_ex i/1</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
@@ -245,6 +257,12 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
 - `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
+
+Note:
+
+- The default date of the added income will be the date in which the income is added. 
+- Each income entry can only have a maximum value of 1000000000.
+- The sum of all your entries cannot be more than 100000000000.
 
 Examples:
 
@@ -423,6 +441,17 @@ Below is a list of all your findings!
 4: [E] bought condo - $87654888878.00 (18/05/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
+If you wish to search based on value, for e.g. all entries that contain the value <code>5</code>:
+<ul><li>Give the command <code>find 5</code> and it will return the following:</li></ul>
+<pre>
+-----------------------------------------------------------------------------------------------------
+Below is a list of all your findings!
+-----------------------------------------------------------------------------------------------------
+1: [E] bought cookies - $500.00 (18/01/2021)
+2: [E] bought home - $555.00 (18/07/2021)
+3: [E] bought condo - $87654888878.00 (18/05/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
 </details>
 <br>
 
@@ -444,13 +473,18 @@ Your current balance is: $-87654891720.20
 
 ### Show total expense between 2 dates: `btw_ex`
 
-This shows the total expense you had accumulated during a given time period.
-This is great for checking weekly or monthly expenses!
+This shows the total expense you had accumulated between a given time period.
+This is great for checking your weekly or monthly expenses!
 
 Format: `btw_ex s/START_DATE e/END_DATE`
 
+- `START_DATE` & `END_DATE` must be in the DD-MM-YYYY format.
+- `START_DATE` & `END_DATE` have to be valid and non-empty
+- `START_DATE` must be before or the same as `END_DATE`
+
 Examples:
-- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.
+- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between and inclusive of 
+  the given dates.
 <details>
 <summary> Expected output in run window </summary>
 <br>
@@ -467,16 +501,18 @@ Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 
 ### Show total income between 2 dates: `btw_in`
 
-This shows the total income you had accumulated during a given time period.
-This is great for checking weekly or monthly income!
+This shows the total income you have accumulated between a given time period.
+This is great for checking your weekly or monthly income!
 
 Format: `btw_in s/START_DATE e/END_DATE`
 
-- `START_DATE` & `END_DATE` are of the form YYYY-MM-DD
+- `START_DATE` & `END_DATE` must be in the DD-MM-YYYY format.
 - `START_DATE` & `END_DATE` have to be valid and non-empty
+- `START_DATE` must be before or the same as `END_DATE`
 
 Examples: 
-<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the total income of all entries between the given dates.</li></ul>
+<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the sum of all income entries between and inclusive of
+the given dates.</li></ul>
 <details>
 <summary> Expected output in run window </summary>
 <br>
@@ -492,8 +528,8 @@ Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
 
 ### Clear all entries: `clear_all_entries`
 
-Clears all the income and expense entries StonksXD is currently keeping track of.
-Use this when you want to start StonksXD afresh. Be careful when you use it though! 
+Clears all the income and expense entries Stonks XD is currently keeping track of.
+Use this when you want to start Stonks XD afresh. Be careful when you use it though! 
 This cannot be undone!
 
 Format: `clear_all_entries`
@@ -576,7 +612,7 @@ Format: `set_threshold t/THRESHOLD`
 
 Examples:
 
-- `set_budget t/0.2` sets the threshold value of all budget categories to 80%.
+- `set_threshold t/0.2` sets the threshold value of all budget categories to 80%.
 
 <details>
 <summary> Expected output in run window </summary>
@@ -629,6 +665,62 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 <br>
 
 
+### Set currency: `set_curr`
+
+This allows you to see everything money-related in a different currency. Any money-related amount you key in from now 
+onwards will be treated as the new currency set.
+
+Format: `set_curr c/CURRENCY`
+
+- As of v2.0, Stonks XD supports 2 different currencies: SGD and USD.
+- If you try to set currency to currency you're already using, a warning will be shown.
+
+<details>
+<summary> Expected output in run window </summary>
+<br>
+Let's take the following budget limit for <code>FOOD</code> expenses as an example:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $10.00
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If you wish to convert the above (and all entries) to USD, simply enter <code>set_curr c/USD</code>. You will receive the following confirmation message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+All entries have been converted to USD!
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in USD!
+<pre>
+-----------------------------------------------------------------------------------------------------
+Current FOOD limit is $7.40
+-----------------------------------------------------------------------------------------------------
+</pre>
+<br>
+To convert back to SGD, just enter <code>set_curr c/SGD</code> and all entries will revert back to their original denominations.
+</details>
+<br>
+
+### Check current currency: `check_curr`
+
+This shows you what currency setting you are currently on.
+
+Format: `check_curr`
+
+<details>
+<summary> Expected output in run window </summary>
+<br>
+If you are unsure what currency your values are in, just enter <code>check_curr</code> and it will show the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+You currency setting currently: SGD
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
+
 ### Terminate program: `end`
 
 This exits the program when you are done using it.
@@ -651,21 +743,23 @@ Format: `end`
 
 ### Saving of Data
 
-StonksXD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. 
+Stonks XD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
 
 - `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
-- `StonksXD_Budget.csv` will store all the budget values.
+- `StonksXD_Settings.csv` will store all the budget values as well as the currency setting.
 
 The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
 when not using the program.
 
 #### Note
 
-StonksXD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
+1. Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
 When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
 is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
-corrupted and not be loaded into StonksXD. 
-
+corrupted and not be loaded into Stonks XD.
+2. Changing the currency setting in `StonksXD_Settings.csv` is almost never recommended. This is because this will 
+cause all your entries and budgets to be recognised as a different currency. 
+3. `.csv` files should not be open concurrently while Stonks XD is running. This would cause the data to not be accurately saved. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -696,6 +790,8 @@ corrupted and not be loaded into StonksXD.
 | Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
 | Clear all entries | `clear_all_entries` | - |
 | View Yearly Report | `show_graph` | - |
+| Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
+| Check current currency | `check_curr` | `-` |
 | To terminate program | `end` | - |
 
 
