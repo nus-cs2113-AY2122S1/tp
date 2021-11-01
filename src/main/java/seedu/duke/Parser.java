@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 
 public class Parser {
@@ -143,7 +142,7 @@ public class Parser {
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
-        } catch (CancelException e) {
+        } catch (CancelExpenseException e) {
             Ui.printCancelExpenseCreation();
         }
     }
@@ -436,7 +435,7 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) throws CancelException {
+    private static void executeCreateExpense(String inputDescription) throws CancelExpenseException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class Expense extends ExpenseFunctions {
+public class Expense extends ExpenseSplittingFunctions {
     private double amountSpent;
     private String description;
     private ArrayList<Person> personsList;
@@ -46,7 +46,7 @@ public class Expense extends ExpenseFunctions {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws CancelException {
+    public Expense(String inputDescription) throws CancelExpenseException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
         this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
@@ -54,7 +54,7 @@ public class Expense extends ExpenseFunctions {
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
-        this.date = prompDate();
+        this.date = promptDate();
         if (personsList.size() == 1) {
             updateOnePersonSpending(this, personsList.get(0));
         } else {
@@ -67,17 +67,16 @@ public class Expense extends ExpenseFunctions {
         return userInput.split("/")[1].trim();
     }
 
-
-
     /**
      * Obtains a list of Person objects from array of names of people.
      *
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) {
+    private static ArrayList<Person> checkValidPersons(String userInput) throws CancelExpenseException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
+        ArrayList<String> invalidListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         if (listOfPeople.length == 1 && listOfPeople[0].trim().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
@@ -92,23 +91,22 @@ public class Expense extends ExpenseFunctions {
                 }
             }
             if (!isValidPerson) {
-                Ui.printInvalidPerson(name);
-                Scanner newUserInput = Storage.getScanner();
-                return checkValidPersons(newUserInput.nextLine());
+                invalidListOfPeople.add(name);
+            }
+        }
+        if (!invalidListOfPeople.isEmpty()) {
+            Ui.printInvalidPeople(invalidListOfPeople);
+            String newUserInput = Storage.getScanner().nextLine();
+            if (newUserInput.equalsIgnoreCase("-cancel")) {
+                throw new CancelExpenseException();
+            } else {
+                return checkValidPersons(newUserInput);
             }
         }
         return validListOfPeople;
     }
 
     //@@author
-
-    public void assignAmounts() throws CancelException {
-        if (personsList.size() == 1) {
-            updateOnePersonSpending(this, personsList.get(0));
-        } else {
-            updateIndividualSpending(this);
-        }
-    }
 
     public void setPayer(Person person) {
         this.payer = person;
@@ -133,7 +131,7 @@ public class Expense extends ExpenseFunctions {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public LocalDate prompDate() {
+    public LocalDate promptDate() {
         Scanner sc = Storage.getScanner();
         Ui.expensePromptDate();
         String inputDate = sc.nextLine();

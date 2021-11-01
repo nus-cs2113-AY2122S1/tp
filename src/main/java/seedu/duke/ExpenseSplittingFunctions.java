@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.HashMap;
 
-public abstract class ExpenseFunctions {
+public abstract class ExpenseSplittingFunctions {
     private static final double EPSILON = 0.001;
 
     //@@author joshualeeky
@@ -12,7 +12,7 @@ public abstract class ExpenseFunctions {
         expense.setAmountSplit(person, expense.getAmountSpent());
     }
 
-    protected static void updateIndividualSpending(Expense expense) throws CancelException {
+    protected static void updateIndividualSpending(Expense expense) throws CancelExpenseException {
         Person payer = getValidPersonInExpenseFromString(expense);
         expense.setPayer(payer);
         HashMap<Person, Double> amountBeingPaid = new HashMap<>();
@@ -30,7 +30,7 @@ public abstract class ExpenseFunctions {
             Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
             String amountString = Storage.getScanner().nextLine().strip();
             if (amountString.equalsIgnoreCase("-cancel")) {
-                throw new CancelException();
+                throw new CancelExpenseException();
             } else if (checkAssignEqual(amountBeingPaid, amountString)) {
                 assignEqualAmounts(payer, expense, amountBeingPaid);
                 return;
@@ -70,7 +70,7 @@ public abstract class ExpenseFunctions {
     }
 
     private static void assignZeroToRemaining(Expense expense, HashMap<Person, Double> amountBeingPaid, Person payer)
-            throws CancelException {
+            throws CancelExpenseException {
         Ui.askUserToConfirm();
         if (Parser.getUserToConfirm()) {
             for (Person person : expense.getPersonsList()) {
@@ -86,7 +86,7 @@ public abstract class ExpenseFunctions {
     }
 
     private static void assignRemainder(Person person, Person payer, double amountRemaining, Expense expense,
-                                        HashMap<Person, Double> amountBeingPaid) throws CancelException {
+                                        HashMap<Person, Double> amountBeingPaid) throws CancelExpenseException {
         Ui.askAutoAssignRemainder(person, amountRemaining);
         if (Parser.getUserToConfirm()) {
             amountBeingPaid.put(person, Storage.formatForeignMoneyDouble(amountRemaining));
@@ -97,11 +97,11 @@ public abstract class ExpenseFunctions {
         }
     }
 
-    private static Person getValidPersonInExpenseFromString(Expense expense) throws CancelException {
+    private static Person getValidPersonInExpenseFromString(Expense expense) throws CancelExpenseException {
         Ui.printGetPersonPaid();
         String name = Storage.getScanner().nextLine().strip();
         if (name.equalsIgnoreCase("-cancel")) {
-            throw new CancelException();
+            throw new CancelExpenseException();
         }
         for (Person person : expense.getPersonsList()) {
             if (name.equalsIgnoreCase(person.getName())) {
