@@ -22,11 +22,26 @@ class CommandParserTest {
             + "priority = 2\n"
             + "mainArgument = cs2113 tp project\n";
 
+    //@@author APZH
+    // Used to debug and check the whether the user command mapping of flag->value works
+    public static String printCommandOptions(Map<String, String> commandOptions) {
+
+        String flagsToArguments = "";
+
+        for (String flag : commandOptions.keySet()) {
+            flagsToArguments += flag + " = " + commandOptions.get(flag) + "\n";
+        }
+
+        System.out.println(flagsToArguments);
+
+        return flagsToArguments;
+    }
+
     @Test
     @DisplayName("When we check the command is able to split all fields properly")
     void parse_commandArguments_checkIfSplitCorrectly() {
         commandOptions = CommandParser.getCommandOptions(commandArguments);
 
-        assertEquals(expectedSplit, CommandParser.printCommandOptions(commandOptions));
+        assertEquals(expectedSplit, printCommandOptions(commandOptions));
     }
 }
