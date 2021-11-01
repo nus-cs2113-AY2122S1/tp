@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
+import seedu.commands.budget.SetThresholdCommand;
 import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
 import seedu.commands.general.CurrencyType;
+import seedu.commands.general.ShowGraphCommand;
 import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.income.DeleteIncomeCommand;
 import seedu.commands.general.HelpCommand;
@@ -335,6 +338,27 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_in d/salary a/1000000000.0011 c/salary");
         assertSame(InvalidCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validThresholdInput_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("set_threshold t/0.5");
+        assertSame(SetThresholdCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validClearAllCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("clear_all_entries");
+        assertSame(ClearAllEntriesCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph");
+        assertSame(ShowGraphCommand.class, underTest.getClass());
     }
     
 }
