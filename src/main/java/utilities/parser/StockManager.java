@@ -4,7 +4,9 @@ import command.CommandParameters;
 import inventory.Medicine;
 import inventory.Stock;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 //@@author a-tph
@@ -119,6 +121,38 @@ public class StockManager {
             boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stockName);
             boolean isDeleted = ((Stock) medicine).isDeleted();
             if (isSameName && !isDeleted) {
+                filteredStocks.add((Stock) medicine);
+            }
+        }
+        return filteredStocks;
+    }
+
+    /**
+     * Extracts the unexpired filtered stock for stocks with same name.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param stockName Stock name for a given stock.
+     * @return ArrayList of filteredStocks of the same stock name.
+     */
+    public static ArrayList<Stock> getUnexpiredFilteredStocksByName(ArrayList<Medicine> medicines, String stockName) {
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            Date currentDate = new Date();
+            String currentDateString = DateParser.dateToString(currentDate);
+
+            try {
+                currentDate = DateParser.stringToDate(currentDateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stockName);
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            boolean isExpired = ((Stock) medicine).getExpiry().before(currentDate);
+            if (isSameName && !isDeleted && !isExpired) {
                 filteredStocks.add((Stock) medicine);
             }
         }
