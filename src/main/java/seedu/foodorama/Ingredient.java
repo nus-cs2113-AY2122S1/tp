@@ -13,7 +13,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     private String ingredientName;
     private double ingredientWeight;
     private double ingredientWasteIngr;
-    public double ingredientWasteDish;
+    private double ingredientWasteDish;
     private double limit;
     private LocalDate expiryDate;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -53,6 +53,11 @@ public class Ingredient implements  Comparable<Ingredient> {
     public void setLimit(double limit) {
         this.limit = limit;
     }
+
+    public double getLimit() {
+        return limit;
+    }
+
 
     public LocalDate getExpiryDate() {
         return this.expiryDate;

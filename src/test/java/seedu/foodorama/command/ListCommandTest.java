@@ -58,7 +58,7 @@ class ListCommandTest {
             inputArrayList.set(0,"ingr");
             Ingredient ingredientToAdd = new Ingredient("chocolate", 3.33);
             IngredientList.ingredientList.add(ingredientToAdd);
-            Ingredient ingredientToAdd2 = new Ingredient("chocolate", 3.33);
+            Ingredient ingredientToAdd2 = new Ingredient("rice", 3.42);
             IngredientList.ingredientList.add(ingredientToAdd2);
             list.execute(inputArrayList);
             assertTrue(newOutputStream.toString().trim().contains(ingredientToAdd.toString()));
