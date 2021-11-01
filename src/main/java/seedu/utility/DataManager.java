@@ -12,6 +12,7 @@ import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidSettingsDataException;
+import seedu.exceptions.InvalidThresholdValueException;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -250,8 +251,11 @@ public class DataManager {
             loadBudgetSettings(budgetSettings);
             CurrencyType currency = parser.convertDataToCurrencySetting(data);
             loadCurrencySetting(currency);
+            double thresholdValue = parser.convertDataToThresholdSetting(data);
+            loadThresholdSettings(thresholdValue);
         } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException 
-                | InvalidCurrencyTypeException | BlankCurrencyTypeException | NoSuchElementException e) {
+                | InvalidCurrencyTypeException | BlankCurrencyTypeException | NoSuchElementException 
+                | InvalidThresholdValueException e) {
             ui.printLoadingError(Messages.HAS_CORRUPTED_SETTINGS);
         }
     }
@@ -270,5 +274,9 @@ public class DataManager {
             budgetManager.setBudget(budgetSettings.get(budgetIndex), category);
             budgetIndex += 1;
         }
+    }
+    
+    private void loadThresholdSettings(double thresholdValue) {
+        budgetManager.setThreshold(thresholdValue);
     }
 }
