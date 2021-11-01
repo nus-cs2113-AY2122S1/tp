@@ -108,6 +108,7 @@ public class SearchCommand extends Command {
 
     /**
      * Adds matching workouts to the map and returns true if matching workouts are found.
+     * Matching workouts are only added to the map if workoutMode == 0.
      *
      * @param map         Map whose key is the workout name and value is the workout list
      * @param workoutList list of all workouts that we want to search through
@@ -116,7 +117,7 @@ public class SearchCommand extends Command {
     private boolean addMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchesFound = false;
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
-        if (!filteredWorkouts.isEmpty()) {
+        if (Command.workoutMode == 0 && !filteredWorkouts.isEmpty()) {
             matchesFound = true;
             map.put(MESSAGE_MATCHING_WORKOUTS, filteredWorkouts);
         }
@@ -125,6 +126,8 @@ public class SearchCommand extends Command {
 
     /**
      * Adds matching exercises to the map and returns true if matching exercises are found.
+     * If workoutMode == 0, all matching exercises are added.
+     * If workoutMode == x, and x != 0, then only matching exercises in workout x are added.
      *
      * @param map         Map whose key is the workout name and value is the list of exercises that contain the
      *                    particular keyword in that specific workout
@@ -134,16 +137,17 @@ public class SearchCommand extends Command {
     private boolean addMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchesFound = false;
 
-        for (int i = 0; i < workoutList.size(); i++) {
-            int displayIndex = i + 1;
-            Workout w = workoutList.get(i);
-            ArrayList<Exercise> exercises = w.getAllExercises();
-            ArrayList<Exercise> filteredExercises = getFilteredExercisesWithExerciseIndex(exercises);
-            if (!filteredExercises.isEmpty()) {
-                matchesFound = true;
-                String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
-                        displayIndex, w);
-                map.put(matchingExerciseMessage, filteredExercises);
+        for (int displayIndex = 1; displayIndex <= workoutList.size(); displayIndex++) {
+            if (Command.workoutMode == 0 || Command.workoutMode == displayIndex) {
+                Workout w = workoutList.get(displayIndex - 1);
+                ArrayList<Exercise> exercises = w.getAllExercises();
+                ArrayList<Exercise> filteredExercises = getFilteredExercisesWithExerciseIndex(exercises);
+                if (!filteredExercises.isEmpty()) {
+                    matchesFound = true;
+                    String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
+                            displayIndex, w);
+                    map.put(matchingExerciseMessage, filteredExercises);
+                }
             }
         }
         return matchesFound;
