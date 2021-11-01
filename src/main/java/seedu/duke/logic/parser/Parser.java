@@ -12,6 +12,10 @@ import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 //@@author richwill28
 public class Parser {
     public static Command parse(String userResponse) throws ParseException {
+        if (userResponse.contains("|")) {
+            throw new ParseException("'|' symbol is not allowed: it may result in incorrect data saving.");
+        }
+
         CommandType commandType = parseCommandType(userResponse);
 
         String simplifiedUserResponse;
