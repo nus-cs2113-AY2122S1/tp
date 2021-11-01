@@ -26,7 +26,7 @@ public abstract class UpdateParser extends Parser {
     protected static final String TASK_FLAG = "task/";
     protected static final String MEMBER_FLAG = "member/";
     protected static final String REMOVE_FLAG = "remove/";
-    protected static final String ADD_FLAG = "add/";
+    protected static final String ADD_FLAG = "add";
 
     public static Command getUpdateCommand(String commandDetails) {
         try {
@@ -44,6 +44,11 @@ public abstract class UpdateParser extends Parser {
             System.out.println("Invalid index of event, please type an integer!");
         } catch (InvalidBudgetException | DukeException e) {
             System.out.println(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please key in your updates!");
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printLineBreak();
+            System.out.println("That selection does not exist!");
         }
         return null;
     }
@@ -52,22 +57,35 @@ public abstract class UpdateParser extends Parser {
         String[] parsedAttributes = new String[3];
         LocalDateTime dateTime = null;
         double budget = 0;
+        boolean isFlag;
         for (String update : userUpdates) {
+            isFlag = false;
             String[] attribute = update.trim().split("/+");
             if (update.contains(TITLE_FLAG)) {
+                isFlag = true;
                 parsedAttributes[INDEX_OF_TITLE] = attribute[1];
-            } else if (update.contains(DATE_FLAG)) {
+            } 
+            if (update.contains(DATE_FLAG)) {
+                isFlag = true;
                 dateTime = Parser.convertDateTime(attribute[1]);
-            } else if (update.contains(VENUE_FLAG)) {
+            }
+            if (update.contains(VENUE_FLAG)) {
+                isFlag = true;
                 parsedAttributes[INDEX_OF_VENUE] = attribute[1];
-            } else if (update.contains(BUDGET_FLAG)) {
+            }
+            if (update.contains(BUDGET_FLAG)) {
+                isFlag = true;
                 budget = convertEventBudgetToDouble(attribute[1]);
-            } else if (update.contains(DESCRIPTION_FLAG)) {
+            }
+            if (update.contains(DESCRIPTION_FLAG)) {
+                isFlag = true;
                 parsedAttributes[INDEX_OF_DESCRIPTION] = attribute[1];
-            } else if (update.contains(TASK_FLAG)) {
+            }
+            if (update.contains(TASK_FLAG)) {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                return parseUpdateTask(event, attribute[1]);
-            } else {
+            }
+            if (!isFlag) {
                 System.out.println("Invalid update, you have returned to the main page!");
             }
         }
@@ -98,10 +116,9 @@ public abstract class UpdateParser extends Parser {
                 attribute[1] = attribute[1].replaceAll("\\s", "");
                 return removeMember(attribute[1], taskToBeUpdated);
             } else if (update.contains(ADD_FLAG)) {
-                attribute[1] = attribute[1].replaceAll("\\s", "");
                 return addMember(taskToBeUpdated);
             } else {
-                System.out.println("Invalid update, you have returned to the main page!");
+                System.out.println("Invalid update");
             }
         }
         return new UpdateTaskCommand(parsedAttributes, taskToBeUpdated,  dateTime);
@@ -110,11 +127,13 @@ public abstract class UpdateParser extends Parser {
     private static Command changeMember(String index, Task taskToBeUpdated) throws DukeException {
         int memberToBeReplaced = Integer.parseInt(index);
         int memberIndex = prepareMemberDetails();
+        checkValidMember(memberIndex, taskToBeUpdated);
         return new UpdateMemberCommand("change", memberIndex, taskToBeUpdated, memberToBeReplaced);
     }
 
     private static Command addMember(Task taskToBeUpdated) throws DukeException {
         int memberIndex = prepareMemberDetails();
+        checkValidMember(memberIndex, taskToBeUpdated);
         return new UpdateMemberCommand("add", memberIndex, taskToBeUpdated, -1);
     }
 
@@ -137,7 +156,11 @@ public abstract class UpdateParser extends Parser {
         }
         return memberIndex;
     }
-
+    private static void checkValidMember(int memberIndex, Task task) {
+        if (memberIndex > task.memberList.size() || memberIndex < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
     private static int getMemberIndex() {
         Ui.printLineBreak();
         Ui.promptForMemberIndex();
@@ -177,6 +200,7 @@ public abstract class UpdateParser extends Parser {
     }
 
     private static String[] prepareTaskUpdates(Task taskToBeUpdated) {
+        Ui.printLineBreak();
         Ui.printTask(taskToBeUpdated);
         Ui.updateTaskIntroMessage();
         String userInput = Ui.readInput();

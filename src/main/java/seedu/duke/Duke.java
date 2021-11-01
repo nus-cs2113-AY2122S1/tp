@@ -46,9 +46,11 @@ public class Duke {
                 System.out.println(feedback.feedbackToUser);
                 Ui.printLineBreak();
             } catch (NullPointerException | NumberFormatException | StringIndexOutOfBoundsException e) {
-                System.out.println("Please key in the commands accurately, use help to view the guide");
+                Ui.printLineBreak();
+                System.out.println("Returning to Main Page...");
                 Ui.printLineBreak();
             } catch (DukeException e) {
+                Ui.printLineBreak();
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
             } catch (InvalidBudgetException | NoCommandAttributesException e) {
