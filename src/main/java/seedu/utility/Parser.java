@@ -82,7 +82,7 @@ public class Parser {
             Pattern.compile("d/(?<description>[^/]+)"
                     + " a/(?<amount>[^/]+)"
                     + " c/(?<category>[^/]+)"
-                    + " da/(?<date>.+)");
+                    + " D/(?<date>.+)");
 
     /**
      * This was adapted from addressbook-level2 source code here:
@@ -97,7 +97,7 @@ public class Parser {
             Pattern.compile("d/(?<description>[^/]+)"
                     + " a/(?<amount>[^/]+)"
                     + " c/(?<category>[^/]+)"
-                    + " da/(?<date>.+)");
+                    + " D/(?<date>.+)");
     /**
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
