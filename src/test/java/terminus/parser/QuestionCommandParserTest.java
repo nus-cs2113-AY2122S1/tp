@@ -98,6 +98,9 @@ public class QuestionCommandParserTest {
     @Test
     void parseCommand_resolveTestCommand_exceptionThrown() {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("test abcd"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("test -1"));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("test " + ((long) Integer.MAX_VALUE) + 1));
     }
 
     @Test
