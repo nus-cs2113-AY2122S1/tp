@@ -69,6 +69,7 @@ public class Parser {
     private static final String EDIT_EXP_COMMAND = "edit-exp";
     private static final String AMOUNT_COMMAND = "amount";
     private static final String HELP_COMMAND = "help";
+    private static final String PEOPLE_COMMAND = "people";
 
 
     /**
@@ -124,6 +125,10 @@ public class Parser {
             handleAmount(inputParams);
             break;
 
+        case PEOPLE_COMMAND:
+            handlePeople();
+            break;
+
         case HELP_COMMAND:
             Ui.displayHelp();
             break;
@@ -134,19 +139,34 @@ public class Parser {
     }
 
     /**
+     * Prints out the list of people in the trip if trip is open.
+     * Otherwise, informs the user no trip open.
+     */
+    private static void handlePeople() {
+        if (Storage.checkOpenTrip()) {
+            System.out.println("These are the people involved in this trip:");
+            Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        } else {
+            Ui.printNoOpenTripError();
+        }
+    }
+
+    /**
      * Confirms that the user had entered parameters for creating a new expense, and redirects to
      * {@link Parser#executeCreateExpense(String)} to create the expense.
      *
      * @param inputParams attributes of expense to be created.
      */
-    private static void handleCreateExpense(String inputParams) {
+    private static void handleCreateExpense(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
-        } catch (CancelExpenseException e) {
-            Ui.printCancelExpenseCreation();
+        } catch (InvalidAmountException e) {
+            Ui.printInvalidAmountError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -441,7 +461,8 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) throws CancelExpenseException {
+    private static void executeCreateExpense(String inputDescription)
+            throws InvalidAmountException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
@@ -532,9 +553,9 @@ public class Parser {
             tripToEdit.setBudget(data);
             break;*/
         case EDIT_LOCATION:
-            String originalLoocation = tripToEdit.getLocation();
+            String originalLocation = tripToEdit.getLocation();
             tripToEdit.setLocation(data);
-            Ui.changeLocationSuccessful(tripToEdit, originalLoocation);
+            Ui.changeLocationSuccessful(tripToEdit, originalLocation);
             break;
         case EDIT_DATE:
             String originalDate = tripToEdit.getDateOfTripString();

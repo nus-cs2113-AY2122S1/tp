@@ -46,11 +46,10 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws CancelExpenseException {
+    public Expense(String inputDescription) throws  InvalidAmountException, ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
-        this.amountSpent = Double.parseDouble(expenseInfo[0]);
-        this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
-        this.category = expenseInfo[1].toLowerCase();
+        setAmountSpent(expenseInfo[0]);
+        setCategory(expenseInfo[1].toLowerCase());
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
@@ -73,7 +72,7 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) throws CancelExpenseException {
+    private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
@@ -96,12 +95,8 @@ public class Expense extends ExpenseSplittingFunctions {
         }
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);
-            String newUserInput = Storage.getScanner().nextLine();
-            if (newUserInput.equalsIgnoreCase("-cancel")) {
-                throw new CancelExpenseException();
-            } else {
-                return checkValidPersons(newUserInput);
-            }
+            String newUserInput = Ui.receiveUserInput();
+            return checkValidPersons(newUserInput);
         }
         return validListOfPeople;
     }
@@ -131,12 +126,11 @@ public class Expense extends ExpenseSplittingFunctions {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public LocalDate promptDate() {
-        Scanner sc = Storage.getScanner();
+    public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
-        String inputDate = sc.nextLine();
+        String inputDate = Ui.receiveUserInput();
         while (!isDateValid(inputDate)) {
-            inputDate = sc.nextLine();
+            inputDate = Ui.receiveUserInput();
         }
         if (inputDate.isEmpty()) {
             return LocalDate.now();
@@ -218,12 +212,29 @@ public class Expense extends ExpenseSplittingFunctions {
         return amountSpent;
     }
 
-    public void setAmountSpent(double amountSpent) {
-        this.amountSpent = amountSpent;
+    //@@author itsleeqian
+    public void setAmountSpent(String amount) throws InvalidAmountException, ForceCancelException {
+        try {
+            this.amountSpent = Double.parseDouble(amount);
+            if (this.amountSpent <= 0) {
+                throw new InvalidAmountException();
+            }
+            this.amountSpent = Double.parseDouble(amount);
+            this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
+        } catch (InvalidAmountException e) {
+            Ui.printInvalidAmountError();
+            String newInput = Ui.receiveUserInput();
+            setAmountSpent(newInput);
+        }
     }
+    //@@author
 
     public String getDescription() {
         return description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setDescription(String description) {
