@@ -108,6 +108,7 @@ public class SearchCommand extends Command {
 
     /**
      * Adds matching workouts to the map and returns true if matching workouts are found.
+     * Matching workouts are only added to the map if workoutMode == 0.
      *
      * @param map         Map whose key is the workout name and value is the workout list
      * @param workoutList list of all workouts that we want to search through
