@@ -549,8 +549,7 @@ public class ParserTest {
                 + "Setting calories..." + System.lineSeparator()
                 + "Calories set successfully." + System.lineSeparator()
                 + "Searching by calories..." + System.lineSeparator()
-                + "1. Peanut Butter (Calories (kcal): 400)" + System.lineSeparator()
-                + "2. Peanut Butter Sandwich (Calories (kcal): Not set)" + System.lineSeparator();
+                + "1. Peanut Butter (Calories (kcal): 400)" + System.lineSeparator();
 
         inputOutputTest(input, expected);
     }
@@ -570,6 +569,7 @@ public class ParserTest {
                 + "/steps a+b+c\n"
                 + "find // // // //\n"
                 + "find /calories xyz\n"
+                + "find /calories 0\n"
                 + "find /calories 50\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
@@ -609,8 +609,9 @@ public class ParserTest {
                 + "GordonException: You donkey! What are you talking about?" + System.lineSeparator()
                 + "GordonException: Index is not a valid integer." + System.lineSeparator()
                 + "Searching by calories..." + System.lineSeparator()
-                + "1. recipeB (Calories (kcal): 40)" + System.lineSeparator()
-                + "2. recipeC (Calories (kcal): Not set)" + System.lineSeparator();
+                + "GordonException: Search returns no result." + System.lineSeparator()
+                + "Searching by calories..." + System.lineSeparator()
+                + "1. recipeB (Calories (kcal): 40)" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 
@@ -736,6 +737,7 @@ public class ParserTest {
                 + "/steps a+b+c\n"
                 + "set recipeC /price 6.99\n"
                 + "find /price xyz\n"
+                + "find /price 0\n"
                 + "find /price 5\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
@@ -774,8 +776,9 @@ public class ParserTest {
                 + "Price set successfully." + System.lineSeparator()
                 + "GordonException: Index is not a valid float." + System.lineSeparator()
                 + "Searching by price..." + System.lineSeparator()
-                + "1. recipeB (Price: $4.56)" + System.lineSeparator()
-                + "2. recipeA (Price: Not set)" + System.lineSeparator();
+                + "GordonException: Search returns no result." + System.lineSeparator()
+                + "Searching by price..." + System.lineSeparator()
+                + "1. recipeB (Price: $4.56)" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 
@@ -793,6 +796,7 @@ public class ParserTest {
                 + "/ingredients a+b+c "
                 + "/steps a+b+c\n"
                 + "find /time xyz\n"
+                + "find /time 0\n"
                 + "find /time 59\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
@@ -831,8 +835,9 @@ public class ParserTest {
                 + "3. c" + System.lineSeparator()
                 + "GordonException: Index is not a valid integer." + System.lineSeparator()
                 + "Searching by total time..." + System.lineSeparator()
-                + "1. recipeB (Total Time: 55)" + System.lineSeparator()
-                + "2. recipeC (Total Time: Not set)" + System.lineSeparator();
+                + "GordonException: Search returns no result." + System.lineSeparator()
+                + "Searching by total time..." + System.lineSeparator()
+                + "1. recipeB (Total Time: 55)" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 
