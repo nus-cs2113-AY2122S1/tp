@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    public static String receiveUserInput() throws ForceCancelException {
+        String userInput = Storage.getScanner().nextLine().strip();
+        if (Parser.doesUserWantToForceCancel(userInput)) {
+            throw new ForceCancelException();
+        }
+        return userInput;
+    }
+
     public static void printPendingCommand() {
         System.out.print("Enter your command: ");
     }
@@ -441,6 +449,10 @@ public class Ui {
         System.out.println();
         System.out.println("Your saved data was successfully loaded!");
         System.out.println();
+    }
+
+    public static void printForceCancelled() {
+        System.out.println("You have chosen to force cancel this operation.");
     }
 
 }

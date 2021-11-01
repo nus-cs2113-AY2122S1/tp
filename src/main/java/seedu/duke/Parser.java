@@ -50,8 +50,11 @@ public class Parser {
             Ui.printNoTripError();
             return true;
         }
-
-        handleValidCommands(inputCommand, inputParams);
+        try {
+            handleValidCommands(inputCommand, inputParams);
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
+        }
         return true;
     }
 
@@ -78,7 +81,7 @@ public class Parser {
      *
      * @see Parser#parseUserInput(String)
      */
-    private static void handleValidCommands(String inputCommand, String inputParams) {
+    private static void handleValidCommands(String inputCommand, String inputParams) throws ForceCancelException {
 
         switch (inputCommand) {
         case CREATE_COMMAND:
@@ -204,7 +207,7 @@ public class Parser {
         }
     }
 
-    private static void handleEditTrip(String inputParams) {
+    private static void handleEditTrip(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeEditTrip(inputParams);
@@ -218,7 +221,7 @@ public class Parser {
      *
      * @param inputParams attributes of the trip to be created.
      */
-    private static void handleCreateTrip(String inputParams) {
+    private static void handleCreateTrip(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeCreateTrip(inputParams);
@@ -232,7 +235,7 @@ public class Parser {
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
-    private static void executeCreateTrip(String attributesInString) {
+    private static void executeCreateTrip(String attributesInString) throws ForceCancelException {
         String[] newTripInfo = attributesInString.split(" ", 5);
         if (newTripInfo.length < 5) {
             throw new IndexOutOfBoundsException();
@@ -251,7 +254,7 @@ public class Parser {
      * @see Parser#editTripWithIndex(String)
      * @see Parser#editTripPerAttribute(Trip, String)
      */
-    private static void executeEditTrip(String inputDescription) {
+    private static void executeEditTrip(String inputDescription) throws ForceCancelException {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
@@ -521,7 +524,7 @@ public class Parser {
      * @param tripToEdit user-specified trip to be edited
      * @param attributeToEdit String of all attributes to be added and their new values
      */
-    private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) {
+    private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
         String[] splitCommandAndData = attributeToEdit.split(" ");
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
@@ -561,4 +564,9 @@ public class Parser {
         }
 
     }
+
+    public static boolean doesUserWantToForceCancel(String userInput) {
+        return userInput.equals("-cancel");
+    }
+
 }

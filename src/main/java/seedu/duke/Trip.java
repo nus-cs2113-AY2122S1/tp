@@ -45,7 +45,7 @@ public class Trip {
      *
      * @param newTripInfo array containing one attribute in each element
      */
-    public Trip(String[] newTripInfo) {
+    public Trip(String[] newTripInfo) throws ForceCancelException {
         assert newTripInfo.length == 5;
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
@@ -287,14 +287,14 @@ public class Trip {
      *
      * @param dateOfTrip user-entered date of trip as a String
      */
-    public void setDateOfTrip(String dateOfTrip) {
+    public void setDateOfTrip(String dateOfTrip) throws ForceCancelException {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
             Ui.printDateTimeFormatError();
-            Scanner scanner = Storage.getScanner();
-            setDateOfTrip(scanner.nextLine().strip());
+            String newInput = Ui.receiveUserInput();
+            setDateOfTrip(newInput);
         }
     }
 

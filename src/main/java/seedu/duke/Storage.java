@@ -26,6 +26,8 @@ public class Storage {
     private static Scanner scanner;
     private static Logger logger;
 
+    private static boolean isProcessing = false;
+
     //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
@@ -266,5 +268,14 @@ public class Storage {
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {
         Storage.listOfTrips = listOfTrips;
     }
+
+    public static boolean isIsProcessing() {
+        return isProcessing;
+    }
+
+    public static void setIsProcessing(boolean isProcessing) {
+        Storage.isProcessing = isProcessing;
+    }
+
 
 }
