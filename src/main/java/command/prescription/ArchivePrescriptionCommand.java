@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * Archive prescription based on user input given date.
  */
 public class ArchivePrescriptionCommand extends Command {
-    private static Logger logger = Logger.getLogger("Delete Order");
+    private static Logger logger = Logger.getLogger("ArchivePrescription");
 
     public ArchivePrescriptionCommand(LinkedHashMap<String, String> parameters) {
         this.parameters = parameters;
@@ -74,6 +74,13 @@ public class ArchivePrescriptionCommand extends Command {
         logger.log(Level.INFO, "Successful archive of prescriptions");
     }
 
+    /**
+     * Checks through all prescriptions and look for records that have prescription date <= specified date.
+     *
+     * @param medicines               Arraylist of all medicines.
+     * @param prescriptionArchiveDate Date that user specified to archive.
+     * @return Arraylist of prescriptions that meet the archive requirements.
+     */
     private ArrayList<Medicine> prescriptionsToArchive(ArrayList<Medicine> medicines, Date prescriptionArchiveDate) {
         ArrayList<Medicine> filteredPrescriptions = new ArrayList<>();
         for (Medicine medicine : medicines) {
@@ -90,6 +97,12 @@ public class ArchivePrescriptionCommand extends Command {
         return filteredPrescriptions;
     }
 
+    /**
+     * Removal of prescriptions from prescription list after archive.
+     *
+     * @param medicines             Arraylist of all medicines.
+     * @param filteredPrescriptions Arraylist of prescriptions that meet the archive requirements.
+     */
     private void removeFromPrescriptions(ArrayList<Medicine> medicines, ArrayList<Medicine> filteredPrescriptions) {
         for (Medicine medicine : filteredPrescriptions) {
             medicines.remove(medicine);
