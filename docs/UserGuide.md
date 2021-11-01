@@ -9,7 +9,7 @@ This application uses a Command Line Interface (CLI) for quick and easy task man
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Accouminate` [here](http://link.to/duke).
+2. Down the latest version of `Accouminate` [here](https://github.com/AY2122S1-CS2113-T16-4/tp/releases/download/v1.9/accouminate_1.9.jar).
 3. Open your terminal (Mac/Linux) or your command prompt (Windows).
 4. Navigate to the folder where you have placed your `accouminate.jar` and run `java -jar accouminate.jar`. The standard greeting message will be shown if there is no error.
 
@@ -32,10 +32,13 @@ The main commands are separated according to their features. Subcommands are use
 ### Help - `help`
 The command `help` will show a list of all the available commands to the user.
 
+### Exit - `exit`
+The command `exit` will exit the application.
+
 ### Expense - `expense`
 
 #### Adding an expense - `add`
-Adds an expense in the current month to the database. The current date will be tagged to the expense added.
+Adds an expense to the database. The current date will be tagged to the expense added.
 
 Format: `expense add [NAME] -v [VALUE] -c [CATEGORY]`
 
@@ -51,14 +54,17 @@ Arguments:
   - The name of the category is case-sensitive, and shall contain any characters except for "-".
   - The category is **not** a mandatory field.
 
-Example of usage: 
-
+Example of usage with category: 
 - `expense add Eat Lunch -v 10.99 -c Meals`
+
+Example of usage without category: 
+- `expense add Eat Lunch -v 10.99`
+
 
 <br />
 
 #### Listing expenses - `list`
-Shows a list of all expenses, or a list of expenses grouped by their categories. Only expenses in the current month are listed.
+Shows a list of all expenses, or a list of expenses grouped by their categories.
 
 Format: `expense list [-c]`
 
@@ -166,7 +172,7 @@ Example of usage:
 <br />
 
 #### Listing all income sources - `list`
-Shows a list of all income sources for the current month.
+Shows a list of all income sources.
 
 Format: `income list`
 
@@ -214,7 +220,7 @@ Example of usage:
 
 #### Adding a budget - `add`
 
-Adds a budget plan for the current month.
+Adds a budget plan.
 
 Format: `budget add -v [VALUE]`
 
@@ -239,7 +245,7 @@ Format: `budget list`
 
 #### Deleting the budget - `delete`
 
-Deletes the budget for current month, or effectively setting it to 0.
+Deletes the budget set effectively setting it to 0.
 
 Format: `budget delete`
 
