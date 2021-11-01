@@ -1,5 +1,6 @@
 package seedu.situs.storage;
 
+import seedu.situs.Situs;
 import seedu.situs.command.AlertExpiringSoonCommand;
 import seedu.situs.command.AlertLowStockCommand;
 import seedu.situs.exceptions.SitusException;
@@ -22,11 +23,22 @@ import java.util.Scanner;
 public class Storage {
 
     private static final String DATA_FILE_PATH = "./data/ingredients.txt";
+    private static final String THRESHOLDS_FILE_PATH = "./data/thresholds.txt";
+
+    private static final String THRESHOLD_DATA_CORRUPTED_MESSAGE = "Threshold data is corrupted. "
+            + "Setting to 5 days for expiry and 1.0 kg for stock";
+    private static final String EXPIRY_THRESHOLD_CORRUPTED_MESSAGE = "Expiry threshold data corrupted. "
+            + "Setting to 5 days";
+    private static final String STOCK_THRESHOLD_CORRUPTED_MESSAGE = "Stock threshold data corrupted. "
+            + "Setting to 1.0kg";
+
     private File dataFile;
+    private File thresholdFile;
 
     //@@author datn02
     public Storage() throws IOException {
         File dataFile = new File(DATA_FILE_PATH);
+        File thresholdFile = new File(THRESHOLDS_FILE_PATH);
         File dataDir = new File(dataFile.getParent());
 
         if (!dataDir.exists()) {
@@ -37,7 +49,12 @@ public class Storage {
             dataFile.createNewFile();
         }
 
+        if (!thresholdFile.exists()) {
+            thresholdFile.createNewFile();
+        }
+
         this.dataFile = dataFile;
+        this.thresholdFile = thresholdFile;
     }
 
     /**
@@ -50,10 +67,6 @@ public class Storage {
 
         try {
             Scanner scanner = new Scanner(this.dataFile);
-
-            if (scanner.hasNextLine()) { //to skip the first line, which is used for thresholds
-                scanner.nextLine();
-            }
 
             while (scanner.hasNextLine()) {
                 IngredientGroup ingredientGroup = readStoredIngredients(scanner.nextLine());
@@ -114,7 +127,7 @@ public class Storage {
     public String getThresholdData() {
         String thresholdData = "5|1.0";
         try {
-            Scanner scanner = new Scanner(this.dataFile);
+            Scanner scanner = new Scanner(this.thresholdFile);
             if (scanner.hasNextLine()) {
                 thresholdData = scanner.nextLine();
             }
@@ -130,9 +143,20 @@ public class Storage {
      *
      * @return the expiry threshold
      */
-    public long loadExpiryThreshold() {
+    public long loadExpiryThreshold() throws SitusException, IOException {
         String[] thresholdData = getThresholdData().split("\\|");
-        return Long.parseLong(thresholdData[0]);
+        if (thresholdData.length != 2) {
+            writeThresholdData();
+            throw new SitusException(THRESHOLD_DATA_CORRUPTED_MESSAGE);
+        }
+        long expiryThreshold;
+        try {
+            expiryThreshold = Long.parseLong(thresholdData[0]);
+        } catch (NumberFormatException e) {
+            writeThresholdData();
+            throw new SitusException(EXPIRY_THRESHOLD_CORRUPTED_MESSAGE);
+        }
+        return expiryThreshold;
     }
 
     /**
@@ -140,26 +164,34 @@ public class Storage {
      *
      * @return the stock threshold
      */
-    public double loadStockThreshold() {
+    public double loadStockThreshold() throws SitusException, IOException {
         String[] thresholdData = getThresholdData().split("\\|");
-
-        return Double.parseDouble(thresholdData[1]);
+        if (thresholdData.length != 2) {
+            writeThresholdData();
+            throw new SitusException(THRESHOLD_DATA_CORRUPTED_MESSAGE);
+        }
+        double stockThreshold;
+        try {
+            stockThreshold = Double.parseDouble(thresholdData[1]);
+        } catch (NumberFormatException e) {
+            writeThresholdData();
+            throw new SitusException(STOCK_THRESHOLD_CORRUPTED_MESSAGE);
+        }
+        return stockThreshold;
     }
 
     /**
      * Writes the threshold data to memory. Code adapted from
      * <a href="https://coderedirect.com/questions/564153/how-to-replace-a-specific-line-in-a-file-using-java">
-     *     Code Redirect</a>
-     *
+     * Code Redirect</a>
      *
      * @throws IOException when error with file
      */
     public void writeThresholdData() throws IOException {
-        Path path = Paths.get(DATA_FILE_PATH);
-        List<String> fileContents = Files.readAllLines(path);
+        FileWriter fw = new FileWriter(THRESHOLDS_FILE_PATH);
         String thresholdData = convertThresholdDataForStorage();
-        fileContents.set(0, thresholdData);
-        Files.write(path, fileContents);
+        fw.write(thresholdData + System.lineSeparator());
+        fw.close();
     }
 
     /**
@@ -174,18 +206,17 @@ public class Storage {
     }
 
     //@@author datn02
+
     /**
      * Writes the contents of the ingredient list to memory.
      *
      * @param ingredientGroups List of the ingredient groups
-     * @throws IOException when error with file
+     * @throws IOException               when error with file
      * @throws IndexOutOfBoundsException if reading from non-existent ingredient group
      */
     public void writeIngredientsToMemory(ArrayList<IngredientGroup> ingredientGroups) throws IOException,
             IndexOutOfBoundsException {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
-
-        fw.write(convertThresholdDataForStorage() + System.lineSeparator());
 
         for (IngredientGroup ig : ingredientGroups) {
             String dataToWrite = ig.getIngredientGroupName() + "|";
