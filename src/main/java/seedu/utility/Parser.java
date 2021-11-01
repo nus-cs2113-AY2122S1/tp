@@ -32,7 +32,23 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.*;
+import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.BlankExpenseCategoryException;
+import seedu.exceptions.BlankIncomeCategoryException;
+import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
+import seedu.exceptions.InvalidExpenseAmountException;
+import seedu.exceptions.InvalidExpenseCategoryException;
+import seedu.exceptions.InvalidExpenseDataFormatException;
+import seedu.exceptions.InvalidExpenseDescriptionException;
+import seedu.exceptions.InvalidExpenseIndexException;
+import seedu.exceptions.InvalidIncomeAmountException;
+import seedu.exceptions.InvalidIncomeCategoryException;
+import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidIncomeDescriptionException;
+import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.InvalidInputAmountValueException;
+import seedu.exceptions.InvalidSettingsDataException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
