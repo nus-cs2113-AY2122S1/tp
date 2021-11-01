@@ -32,7 +32,7 @@ public class DataManagerTest {
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
-        dataManager.saveEntries();
+        dataManager.saveAll();
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DataManagerTest {
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
-        dataManager.loadEntries();
+        dataManager.loadAll();
         assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
         assertEquals(ExpenseCategory.FOOD, financialTracker.getExpenses().get(0).getCategory());
@@ -69,8 +69,8 @@ public class DataManagerTest {
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
-        dataManager.saveEntries();
-        dataManager.loadEntries();
+        dataManager.saveAll();
+        dataManager.loadAll();
     }
 
     @Test
@@ -88,7 +88,7 @@ public class DataManagerTest {
             budgetManager.setBudget(i, category);
             i += 1;
         }
-        dataManager.saveSettings();
+        dataManager.saveAll();
         String testData = parser.convertSettingsToData(financialTracker, budgetManager);
         String expectedData = "SGD,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
@@ -102,7 +102,7 @@ public class DataManagerTest {
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
         DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
-        dataManager.loadSettings();
+        dataManager.loadAll();
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
             if (category == ExpenseCategory.NULL) {

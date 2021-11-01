@@ -18,12 +18,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Saves entries that StonksXD is currently tracking into a csv file so that entries can be saved and be easily
- * manipulated by user.
- * Also loads all saved entries when a new instance of StonksXD starts.
+ * Saves entries (expenses and incomes) Stonks XD is tracking into a csv file.
+ * Also saves Stonks XD settings into another csv file. Settings include: currency state, amount for each budget 
+ * category and the reminder threshold value.
  */
 public class DataManager {
 
@@ -33,6 +34,8 @@ public class DataManager {
     private static final String SETTINGS_FILE_NAME = "./StonksXD_Settings.csv";
     private static final String SETTINGS_CSV_HEADER = "currency,food,transport,medical,bills,entertainment," 
             + "misc,overall";
+    private static final String BACKUP_ENTRIES_FILE_NAME = "./StonksXD_EntriesBackup.csv";
+    private static final String BACKUP_SETTINGS_FILE_NAME = "./StonksXD_SettingsBackup.csv";
     private final Parser parser;
     private final FinancialTracker financialTracker;
     private final Ui ui;
@@ -46,17 +49,19 @@ public class DataManager {
     }
 
     /**
-     * Saves all entries and budget settings.
-     * This method will be used more frequently as we typically want to save both entries and budget settings together.
+     * Saves all entries and settings. 
+     * This method will be used more frequently as we typically want to save both entries and settings together.
      */
     public void saveAll() {
-        saveEntries();
-        saveSettings();
+        saveEntries(ENTRIES_FILE_NAME);
+        saveEntries(BACKUP_ENTRIES_FILE_NAME);
+        saveSettings(SETTINGS_FILE_NAME);
+        saveSettings(BACKUP_SETTINGS_FILE_NAME);
     }
 
     /**
-     * Loads all entries and budget settings.
-     * This method will be used more frequently as we typically want to load both entries and budget settings together.
+     * Loads all entries and settings.
+     * This method will be used more frequently as we typically want to load both entries and settings together.
      */
     public void loadAll() {
         loadEntries();
@@ -64,12 +69,12 @@ public class DataManager {
     }
 
     /**
-     * Saves all entries StonksXD is currently tracking into a csv file StonksXD_Data.csv.
+     * Saves all entries StonksXD is currently tracking into a csv file.
      * This allows users to not lose all their entries when program closes.
      */
-    public void saveEntries() {
+    private void saveEntries(String filename) {
         try {
-            FileWriter writer = new FileWriter(ENTRIES_FILE_NAME);
+            FileWriter writer = new FileWriter(filename);
             BufferedWriter buffer = new BufferedWriter(writer);
             String data;
 
@@ -99,7 +104,7 @@ public class DataManager {
      * Loads all entries from StonksXD_Data.csv into StonksXD.
      * This allows users to not lose all their entries when the previous instance of StonksXD closed.
      */
-    public void loadEntries() {
+    private void loadEntries() {
         boolean hasCorruptedLines = false;
         FileInputStream fis;
         try {
@@ -109,10 +114,12 @@ public class DataManager {
             return;
         }
         Scanner sc = new Scanner(fis);
-        sc.nextLine();
-
+        checkForEntriesFileHeader(sc);
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
+            if (data.isBlank()) {
+                continue;
+            }
             try {
                 Expense expense = parser.convertDataToExpense(data);
                 financialTracker.addExpense(expense);
@@ -125,23 +132,49 @@ public class DataManager {
                 }
             }
         }
-
         if (hasCorruptedLines) {
             ui.printLoadingError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
         }
     }
 
-    /**
-     * Saves all budget and currency settings into a csv file StonksXD_Budget.csv.
-     * This allows users to not lose all their budget and currency settings when program closes.
-     */
-    public void saveSettings() {
+    private void checkForEntriesFileHeader(Scanner sc) {
+        String data;
         try {
-            FileWriter writer = new FileWriter(SETTINGS_FILE_NAME);
+            data = sc.nextLine();
+        } catch (NoSuchElementException e) {
+            ui.printLoadingError(Messages.INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE);
+            return;
+        }
+        
+        if (!data.equals(ENTRIES_CSV_HEADER)) {
+            ui.printLoadingError(Messages.INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE);
+        }
+    }
+
+    private void checkForSettingsFileHeader(Scanner sc) {
+        String data;
+        try {
+            data = sc.nextLine();
+        } catch (NoSuchElementException e) {
+            ui.printLoadingError(Messages.INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE);
+            return;
+        }
+
+        if (!data.equals(SETTINGS_CSV_HEADER)) {
+            ui.printLoadingError(Messages.INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE);
+        }
+    }
+
+    /**
+     * Saves all settings into a csv file.
+     * This allows users to not lose all their settings when program closes.
+     */
+    private void saveSettings(String filename) {
+        try {
+            FileWriter writer = new FileWriter(filename);
             BufferedWriter buffer = new BufferedWriter(writer);
             String data;
             
-            // Categories header for the CSV file
             buffer.write(SETTINGS_CSV_HEADER);
             buffer.write(NEWLINE);
             data = parser.convertSettingsToData(financialTracker, budgetManager);
@@ -154,11 +187,11 @@ public class DataManager {
     }
     
     /**
-     * Loads all budget and currency settings from StonksXD_Budget.csv into StonksXD.
-     * This allows users to not lose all their budget and currency settings when the previous instance of 
+     * Loads all settings from StonksXD_Settings.csv into StonksXD.
+     * This allows users to not lose all their settings when the previous instance of 
      * StonksXD closed.
      */
-    public void loadSettings() {
+    private void loadSettings() {
         FileInputStream fis;
         try {
             fis = new FileInputStream(SETTINGS_FILE_NAME);
@@ -168,9 +201,9 @@ public class DataManager {
         }
 
         Scanner sc = new Scanner(fis);
-        sc.nextLine();
-        String data = sc.nextLine();
         try {
+            checkForSettingsFileHeader(sc);
+            String data = sc.nextLine();
             ArrayList<Double> budgetSettings = parser.convertDataToBudgetSettings(data);
             int budgetIndex = 0;
             for (ExpenseCategory category : ExpenseCategory.values()) {
@@ -184,7 +217,7 @@ public class DataManager {
             CurrencyType currency = parser.convertDataToCurrencySetting(data);
             financialTracker.setCurrency(currency);
         } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException 
-                | InvalidCurrencyTypeException | BlankCurrencyTypeException e) {
+                | InvalidCurrencyTypeException | BlankCurrencyTypeException | NoSuchElementException e) {
             ui.printLoadingError(Messages.HAS_CORRUPTED_SETTINGS);
         }
     }

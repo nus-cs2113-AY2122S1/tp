@@ -14,9 +14,9 @@ public class Messages {
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
     public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Entries.csv has corrupted entries, " 
-            + "some or all data maybe lost.";
+            + "those corrupted entries will be discarded and not be loaded.";
     public static final String HAS_CORRUPTED_SETTINGS = "StonksXD_Settings.csv has corrupted settings, "
-            + "some or all settings maybe lost.";
+            + "all settings will be reset.";
     public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Entries.csv, a new one " 
             + "has been made.";
     public static final String UNABLE_TO_FIND_SETTINGS_FILE = "Unable to find StonksXD_Settings.csv, a new one " 
@@ -70,4 +70,10 @@ public class Messages {
             + "Are you sure you have spent that much?";
     public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
             + "I don't think we can handle that much money";
+    public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 
+            + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
+            + "replaced the CSV header with an entry, that entry will not be loaded.";
+    public static final String INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Settings.csv "
+            + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
+            + "replaced the CSV header with the settings, those settings will not be loaded.";
 }
