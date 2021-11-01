@@ -307,7 +307,7 @@ There are 3 possible `[ALERT_TYPE]`:
 2. `stock`: displays all ingredients with stock lower than the threshold value
 3. `all`: displays both of the above
 
-Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry):
+Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry)):
 ```
 alerts expiry
 ____________________________________________________
