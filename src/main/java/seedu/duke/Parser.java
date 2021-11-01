@@ -293,7 +293,7 @@ public class Parser {
     private static void executeOpen(String indexAsString) {
         //assumes that listOfTrips have at least 1 trip
         int indexToGet = Integer.parseInt(indexAsString) - 1;
-        if (Storage.getOpenTrip() != null) {
+        if (Storage.checkOpenTrip()) {
             Ui.printTripClosed(Storage.getOpenTrip());
         }
         Storage.setOpenTrip(indexToGet);
