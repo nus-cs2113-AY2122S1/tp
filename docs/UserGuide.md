@@ -508,6 +508,8 @@ Adds a schedule when in the schedule workspace.
 
 > ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
 
+> 💡The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
+ 
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
 > ⚠️The `<duration>` must be a **positive** integer. For example, `2` is a valid duration but `-1.5` is not.
