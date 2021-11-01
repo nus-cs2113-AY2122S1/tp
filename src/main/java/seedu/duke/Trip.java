@@ -329,14 +329,6 @@ public class Trip {
         }
     }
 
-    public double getTotalExpenses() {
-        double totalExpense = 0;
-        for (Expense currentExpense : listOfExpenses) {
-            totalExpense += currentExpense.getAmountSpent();
-        }
-        return totalExpense;
-    }
-
 
     //@@author joshualeeky
     public String getForeignCurrency() {

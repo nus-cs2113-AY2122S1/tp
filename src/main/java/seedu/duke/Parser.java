@@ -69,6 +69,7 @@ public class Parser {
     private static final String EDIT_EXP_COMMAND = "edit-exp";
     private static final String AMOUNT_COMMAND = "amount";
     private static final String HELP_COMMAND = "help";
+    private static final String PEOPLE_COMMAND = "people";
 
 
     /**
@@ -124,12 +125,29 @@ public class Parser {
             handleAmount(inputParams);
             break;
 
+        case PEOPLE_COMMAND:
+            handlePeople();
+            break;
+
         case HELP_COMMAND:
             Ui.displayHelp();
             break;
 
         default:
             Ui.printUnknownCommandError();
+        }
+    }
+
+    /**
+     * Prints out the list of people in the trip if trip is open.
+     * Otherwise, informs the user no trip open.
+     */
+    private static void handlePeople() {
+        if (Storage.checkOpenTrip()) {
+            System.out.println("These are the people involved in this trip:");
+            Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        } else {
+            Ui.printNoOpenTripError();
         }
     }
 
@@ -532,9 +550,9 @@ public class Parser {
             tripToEdit.setBudget(data);
             break;*/
         case EDIT_LOCATION:
-            String originalLoocation = tripToEdit.getLocation();
+            String originalLocation = tripToEdit.getLocation();
             tripToEdit.setLocation(data);
-            Ui.changeLocationSuccessful(tripToEdit, originalLoocation);
+            Ui.changeLocationSuccessful(tripToEdit, originalLocation);
             break;
         case EDIT_DATE:
             String originalDate = tripToEdit.getDateOfTripString();
