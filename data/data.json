@@ -1,0 +1,11 @@
+{
+  "audio" : [ {
+    "title" : "Thriller",
+    "id" : "5920",
+    "status" : "AVAILABLE",
+    "loanee" : null,
+    "dueDate" : null,
+    "artist" : "Michael Jackson",
+    "duration" : "42:16"
+  } ]
+}

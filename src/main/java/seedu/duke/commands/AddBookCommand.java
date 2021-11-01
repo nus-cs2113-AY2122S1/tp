@@ -83,7 +83,7 @@ public class AddBookCommand extends Command {
             ui.print(WARN_ADDITIONAL_ARGS);
         }
         try {
-            Book newBook = new Book(title, id, status, author);
+            Book newBook = new Book(title, id, status, null, null, author);
             catalogue.add(newBook);
             ui.print(ADD_MESSAGE, newBook);
         } catch (LibmgrException e) {

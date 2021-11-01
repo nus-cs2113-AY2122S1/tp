@@ -2,6 +2,8 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Audio extends Item {
     private String artist;
@@ -16,8 +18,9 @@ public class Audio extends Item {
      * @param artist The artist of the video.
      * @param duration The duration of the video.
      */
-    public Audio(String title, String id, Status status, String artist, String duration) {
-        super(title, id, status);
+    public Audio(String title, String id, Status status, String loanee, LocalDate dueDate,
+                 String artist, String duration) {
+        super(title, id, status, loanee, dueDate);
         this.artist = artist;
         this.duration = duration;
     }

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Item class is a class representing a item in the library.
+ * The Item class is a class representing an item in the library.
  */
 public class Item {
     private String title;
@@ -26,14 +26,16 @@ public class Item {
      * Constructor for class item.
      * @param title The title of the item.
      * @param id The unique attribute of the item.
-     * @param status The status of the item, can be either "Loaned" or "Available".
+     * @param status The status of the item, can be either "Loaned", "Available" or "Reserved".
+     * @param loanee The username of the person loaning or reserving the item.
+     * @param dueDate The date when the item should be returned.
      */
-    public Item(String title, String id, Status status) {
+    public Item(String title, String id, Status status, String loanee, LocalDate dueDate) {
         this.title = title;
         this.id = id;
         this.status = status;
-        this.loanee = null;
-        this.dueDate = null;
+        this.loanee = loanee;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -112,8 +114,14 @@ public class Item {
      * Getter method that returns dueDate attribute as a string.
      * @return String date representing due date.
      */
-    public String getDueDateString() {
-        return dueDate.format(dtFormatter);
+    public String dueDateToString() {
+        String output;
+        try {
+            output = dueDate.format(dtFormatter);
+        } catch (NullPointerException e) {
+            output = null;
+        }
+        return output;
     }
 
     /**
@@ -149,7 +157,7 @@ public class Item {
         if (status.equals(Status.RESERVED)) {
             output = getID() + separator + getStatus() + " (" + getLoanee() + ")" + separator + getTitle();
         } else if (status.equals(Status.LOANED)) {
-            output = getID() + separator + getStatus() + " (" + getLoanee() + " TILL " + getDueDateString() + ")"
+            output = getID() + separator + getStatus() + " (" + getLoanee() + " TILL " + dueDateToString() + ")"
                     + separator + getTitle();
         } else {
             output = getID() + separator + getStatus() + separator + getTitle();

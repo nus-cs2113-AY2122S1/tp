@@ -2,6 +2,8 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Magazine extends Item {
     private String publisher;
@@ -17,8 +19,9 @@ public class Magazine extends Item {
      * @param publisher The publisher of the magazine.
      * @param edition The edition of the magazine.
      */
-    public Magazine(String title, String id, Status status, String publisher, String edition) {
-        super(title, id, status);
+    public Magazine(String title, String id, Status status, String loanee, LocalDate dueDate,
+                    String publisher, String edition) {
+        super(title, id, status, loanee, dueDate);
         this.publisher = publisher;
         this.edition = edition;
     }

@@ -2,6 +2,8 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Video extends Item {
     private String publisher;
@@ -16,8 +18,9 @@ public class Video extends Item {
      * @param publisher The publisher of the video.
      * @param duration The duration of the video.
      */
-    public Video(String title, String id, Status status, String publisher, String duration) {
-        super(title, id, status);
+    public Video(String title, String id, Status status, String loanee, LocalDate dueDate,
+                 String publisher, String duration) {
+        super(title, id, status, loanee, dueDate);
         this.publisher = publisher;
         this.duration = duration;
     }

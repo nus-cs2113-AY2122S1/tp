@@ -2,6 +2,8 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Book extends Item {
     private String author;
@@ -14,8 +16,8 @@ public class Book extends Item {
      * @param status The status of the book, can be either "Loaned" or "Available".
      * @param author The author of the book.
      */
-    public Book(String title, String id, Status status, String author) {
-        super(title, id, status);
+    public Book(String title, String id, Status status, String loanee, LocalDate dueDate, String author) {
+        super(title, id, status, loanee, dueDate);
         this.author = author;
     }
 
