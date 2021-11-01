@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.ExceptionTextUi;
 
+//@@author ng-andre
 public class SearchContactCommand extends Command {
     String query;
     int detailIndex;

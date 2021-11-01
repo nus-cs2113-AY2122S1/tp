@@ -9,6 +9,7 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,9 +57,12 @@ public abstract class RegexParser {
 
     protected void checkEmailRegex(String detailToParse) throws InvalidEmailException {
         //allow lowercase email ids
-        String emailRegex = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+        String emailRegex1 = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+        String emailRegex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|"
+                + "(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|"
+                + "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         if (!detailToParse.matches(emailRegex)) {
-            //LOGGER.log(Level.INFO, "Regex check for Email id failed");
+            LOGGER.log(Level.INFO, "Regex check for Email id failed");
             throw new InvalidEmailException();
         }
     }
@@ -82,7 +86,7 @@ public abstract class RegexParser {
     }
 
     protected void checkTelegramUsernameRegex(String detailToParse) throws InvalidTelegramUsernameException {
-        //allows uppercase, lowercase, numbers and underscore. Length must be atleast 5 characters
+        //allows uppercase, lowercase, numbers and underscore. Length must be at least 5 characters
         String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
         if (!detailToParse.matches(telegramRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Telegram username failed");
@@ -91,11 +95,11 @@ public abstract class RegexParser {
     }
 
     protected void checkGithubUsernameRegex(String detailToParse) throws InvalidGithubUsernameException {
-        //Github username may only contain alphanumeric characters or hyphens.
-        //Github username cannot have multiple consecutive hyphens.
-        //Github username cannot begin or end with a hyphen.
+        //GitHub username may only contain alphanumeric characters or hyphens.
+        //GitHub username cannot have multiple consecutive hyphens.
+        //GitHub username cannot begin or end with a hyphen.
         //Maximum is 39 characters.
-        String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,39}$";
+        String githubUsernameRegex = "^[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Github username failed");
             throw new InvalidGithubUsernameException();
@@ -104,7 +108,7 @@ public abstract class RegexParser {
 
     protected void checkNameRegex(String detailToParse) throws InvalidNameException {
         //only letters and spaces allowed
-        String nameRegex = "^[ A-Za-z]+$";
+        String nameRegex = "^([a-zA-Z]+\\s)*[a-zA-Z]+$";
         if (!detailToParse.matches(nameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for name failed");
             throw new InvalidNameException();

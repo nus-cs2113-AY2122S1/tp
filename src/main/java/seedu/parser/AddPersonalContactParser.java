@@ -3,12 +3,12 @@
 package seedu.parser;
 
 import seedu.contact.Contact;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
-import seedu.exception.InvalidLinkedinUsernameException;
-import seedu.exception.InvalidEmailException;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
@@ -17,7 +17,7 @@ public class AddPersonalContactParser extends RegexParser {
     private Contact personalContact;
 
     public AddPersonalContactParser() {
-        personalContact = new Contact(null, null,null,null, null,null);
+        personalContact = new Contact(null, null, null, null, null, null);
     }
 
     public void collectPersonalDetails() {

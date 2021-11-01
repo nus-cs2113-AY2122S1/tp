@@ -3,9 +3,8 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.parser.IndexParser;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.TextUi;
 
 public class ViewContactCommand extends Command {
     private final int contactIndex;
@@ -20,7 +19,7 @@ public class ViewContactCommand extends Command {
 
     public void execute() {
         try {
-            Contact viewingContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+            Contact viewingContact = contactList.getContactAtIndex(contactIndex);
             assert contactIndex >= 0 && contactIndex < contactList.getListSize();
             TextUi.viewContactMessage(viewingContact, contactIndex);
         } catch (IndexOutOfBoundsException e) {

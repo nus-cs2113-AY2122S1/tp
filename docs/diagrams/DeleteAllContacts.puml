@@ -1,0 +1,49 @@
+@startuml
+hide footbox
+mainframe sd delete all contacts
+
+":DeleteContactCommand" -> ":DeleteContactCommand" : deleteAllContacts()
+activate ":DeleteContactCommand"
+
+'confirm delete message
+":DeleteContactCommand" -> ":TextUi" :confirmDeleteAllMessage()
+activate ":TextUi"
+":TextUi" --> ":DeleteContactCommand"
+deactivate ":TextUi"
+
+'get confirmation from user to delete
+":DeleteContactCommand" -> ":UserInputTextUi" :getUserConfirmation()
+activate ":UserInputTextUi"
+":UserInputTextUi" --> ":DeleteContactCommand" : userConfirmation: String
+deactivate ":UserInputTextUi"
+
+alt#gold #lightgreen delete confirmed
+    'get size of list for delete message
+    ":DeleteContactCommand" -> ":ContactList": getListSize()
+    activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand": contactListSize: int
+    deactivate ":ContactList"
+
+    'execute delete for all contacts
+    ":DeleteContactCommand" -> ":ContactList":deleteAllContacts()
+    activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand"
+    deactivate ":ContactList"
+
+    'Print message to show delete executed
+    ":DeleteContactCommand" -> ":TextUi": deleteAllContactsMessage(contactListSize: int)
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue delete cancelled
+    'Print message to show delete cancelled
+    ":DeleteContactCommand" -> ":TextUi":cancelDeleteContactMessage()
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+end
+
+deactivate ":DeleteContactCommand"
+
+@enduml

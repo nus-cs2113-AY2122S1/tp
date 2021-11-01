@@ -89,6 +89,7 @@ public class ExceptionTextUi {
                 + "Rules for Linkedin username :\n"
                 + "    * Lowercase letters only\n"
                 + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Other special characters and spaces not allowed\n"
                 + "    * Length between 3 to 100 characters\n\n"
                 + "Please enter your linkedin username again\n"
                 + "or press ENTER to skip.";
@@ -252,6 +253,12 @@ public class ExceptionTextUi {
     public static void forbiddenDetailMessage() {
         String message = "As one of the details to be stored is \"null\",\n"
                 + "ConTech is unable to process it";
+        printDoubleLineMessage(message);
+    }
+
+    public static void duplicateDetailMessage() {
+        String message = "There appears to be duplicated flags in your command.\n"
+                + "Please kindly remove them to prevent any ambiguous action performed.";
         printDoubleLineMessage(message);
     }
 

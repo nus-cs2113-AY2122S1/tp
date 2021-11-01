@@ -144,13 +144,28 @@ executed in `Duke`. The sequence diagram below shows how the whole process is ca
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
 
-### <a name="Delete"></a>Deleting a contact: `rm`
-This feature is processed using the `DeleteContactCommand`. Whenever the user wants to remove a contact from the contact
-list using the `rm` command, `DeleteContactCommand` is created in the `MainParser` and executed in`Duke`. The sequence 
-diagram below shows how the `execute()` function of `DeleteContactCommand` works. 
-
+### <a name="Delete"></a>Deleting contacts: `rm`
+This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
+in the `MainParser`and executed in`Duke`. Users can either delete a specified contact
+or delete all contacts at once.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
+
+To delete all contacts, a user must enter the command `rm all`. The sequence diagram below
+shows how the removal of all contacts works. Before any deletion, the user will be
+prompted with a message to confirm deletion. If the user confirms deletion for all contacts,
+deletion will be executed, along with a message to show that deletion has been executed.
+If user cancels deletion, a message is printed to show that the deletion has been cancelled.
+
+![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
+
+To delete a selected contact, a user must enter a command in the form `rm [INDEX]`. The sequence diagram below
+shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
+will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
+deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
+If user cancels deletion, a message is printed to show that the deletion has been cancelled.
+
+![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
 
 ### <a name="Search"></a>Searching a contact: `search`
