@@ -70,12 +70,12 @@ public class Parser {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
     private static final String DELETE_DELIM = "\\.";
-    private static final String UPDATE_DELIM = " \\s|\\.|a/";
+    private static final String UPDATE_DELIM = "a/";
     private static final String SUBTRACT_DELIM = " \\s|a/";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
     private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 2;
-    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 3;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 2;
     private static final int DELETE_COMMAND_ARGUMENT_COUNT = 2;
     private static final int SET_COMMAND_ARGUMENT_COUNT = 3;
 
@@ -246,6 +246,10 @@ public class Parser {
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws SitusException {
+        if (!command.contains("n/") || !command.contains("a/") || !command.contains("e/")) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        }
+
         String[] details = command.substring(COMMAND_ADD.length()).trim().split(DELIMITER);
 
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
