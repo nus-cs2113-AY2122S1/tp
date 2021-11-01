@@ -151,7 +151,6 @@ Mode has changed to ORDER.
 > can identify each stock, order and prescription entry uniquely.
 > * `/` is not allowed to be entered for all input parameters, as MediVault uses them to identity the parameters.
 
-
 ## Managing Stocks
 
 ### Adding stocks: `addstock`
