@@ -88,6 +88,7 @@ public class Trip {
         }
 
     }
+    //@@author
 
     //@@author lixiyuan416
     private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
@@ -110,6 +111,7 @@ public class Trip {
     }
     //@@author
 
+    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
