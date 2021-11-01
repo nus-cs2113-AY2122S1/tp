@@ -77,7 +77,7 @@ public class ItemsList {
     public String toString() {
         StringBuilder itemsListString = new StringBuilder();
         for (int i = 0; i < getSize(); i++) {
-            String itemEntry = "\n\t\t\t\t\t" + i + ":\t";
+            String itemEntry = "\n\t\t\t\t\t" + i + ":  ";
             itemsListString.append(itemEntry);
             Item item = items.get(i);
             itemsListString.append(item.toString());
