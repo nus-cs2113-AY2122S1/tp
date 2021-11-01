@@ -136,6 +136,8 @@ Mode has changed to ORDER.
 >  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
 > sort in descending order.
+>* For the `delete` commands, ID will not reset after deletion as stock ID, order ID and prescription ID are unique so that MediVault 
+>can identify each stock, order and prescription entry uniquely.
 
 ## Managing Stocks
 
@@ -351,7 +353,13 @@ Deleted expired medications! Rows deleted: 4
 
 Adds a prescription record and subtracts the medication quantity from stocks.
 
-> :information_source: MediVault will prescribe the medication with the shortest expiry date first. If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
+> :information_source:
+> * MediVault will prescribe the medication with the shortest expiry date first. 
+If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
+> * MediVault will add another entry to prescription even if the medication name, customer's ID, date and staff name is exactly the same. 
+This is so that MediVault can track all entries.
+>  * If users want to increase the quantity of medication prescribed, users can use `updateprescription` command instead.
+
 
 Format: `addprescription n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
 
@@ -512,6 +520,9 @@ Updated prescription information!
 
 If you made a mistake and want to delete a prescription record you may do so by using this command along with a specific 
 Prescription ID.
+
+> :information_source: Note:
+> * Users will not be able to delete a prescription if deleting the prescription will lead to stock quantity exceeding the maximum quantity.
 
 Format: `deleteprescription i/PRESCRIPTION_ID`
 

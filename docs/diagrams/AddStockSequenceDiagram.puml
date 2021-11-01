@@ -4,7 +4,7 @@
 !include style.puml
 
 box Command COLOR_COMMAND_BOX
-    participant ":AddStock" as addstock COLOR_COMMAND
+    participant ":AddStockCommand" as addstock COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
@@ -13,12 +13,14 @@ box Utilities COLOR_UTILITIES_BOX
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\n:Stock" as stock COLOR_INVENTORY
+    participant ":Stock" as stock COLOR_INVENTORY
 end box
 
 autoactivate on
 mainFrame sd Logic for AddStockCommand
-
+activate addstock
+addstock -> addstock : checkExpiryDate()
+addstock --> addstock : formatExpiryDate
 alt nameExist
     addstock -> stockmanager: getTotalStockQuantity()
     addstock <-- stockmanager: totalStock

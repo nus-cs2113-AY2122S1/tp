@@ -81,17 +81,17 @@ public class AddPrescriptionCommand extends Command {
             ui.print("Medicine not available!");
             return;
         }
+        Date prescribeDate = new Date(); //prescribe date will be today's date
+        String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
-        int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
+        int totalStock = prescriptionValidator.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
 
         if (prescriptionQuantity > totalStock) {
             ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
             ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: " + totalStock);
             return;
         }
-        Date prescribeDate = new Date(); //prescribe date will be today's date
-        String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         for (Stock stock : filteredStocks) {
             int existingQuantity = stock.getQuantity();
