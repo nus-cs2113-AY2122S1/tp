@@ -14,7 +14,7 @@ public class AlertLowStockCommand extends Command {
     private static double lowStockThreshold = 1.0;
     private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
-    public AlertLowStockCommand() throws SitusException{
+    public AlertLowStockCommand() throws SitusException {
         try {
             lowStockThreshold = new Storage().loadStockThreshold();
         } catch (IOException | SitusException e) {
@@ -44,7 +44,7 @@ public class AlertLowStockCommand extends Command {
             String groupName = ingredientGroup.getIngredientGroupName();
             String totalAmountMessage = " | Total Amount: "
                     + String.format("%.3f", ingredientGroup.getTotalAmount()) + " kg";
-            resultMsg +=  groupName + totalAmountMessage  + LIST_NEWLINE_INDENT;
+            resultMsg += groupName + totalAmountMessage + LIST_NEWLINE_INDENT;
             lowStockCount += 1;
 
         }
