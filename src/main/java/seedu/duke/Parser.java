@@ -461,7 +461,8 @@ public class Parser {
         }
     }
 
-    private static void executeCreateExpense(String inputDescription) throws InvalidAmountException, ForceCancelException {
+    private static void executeCreateExpense(String inputDescription)
+            throws InvalidAmountException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
