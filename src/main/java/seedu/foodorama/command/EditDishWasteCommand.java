@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EditDishCommand extends Command {
+public class EditDishWasteCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditDishCommand");
     private static final Ui UI = new Ui();
 
-    EditDishCommand() {
+    EditDishWasteCommand() {
         LoggerManager.setupLogger(LOGGER);
     }
 
@@ -34,7 +34,7 @@ public class EditDishCommand extends Command {
                 LOGGER.log(Level.INFO, "Parameter is String '" + dishName + "'");
             }
         }
-        DishList.editName(dishIndex);
+        DishList.editWastage(dishIndex);
         LOGGER.log(Level.INFO, "Dish Name edited.");
         LOGGER.log(Level.INFO, "End of process.");
     }

@@ -27,7 +27,7 @@ class EditDishNameCommandTest {
         InputStream fakeInput  = new ByteArrayInputStream("naan\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditDishCommandParamString = new EditDishCommand();
+        Command testEditDishCommandParamString = new EditDishNameCommand();
         testEditDishCommandParamString.execute(inputParams);
         System.setIn(newDishName);
 
@@ -40,7 +40,7 @@ class EditDishNameCommandTest {
         fakeInput  = new ByteArrayInputStream("prata\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditDishCommandParamInteger = new EditDishCommand();
+        Command testEditDishCommandParamInteger = new EditDishNameCommand();
         testEditDishCommandParamInteger.execute(inputParams);
         System.setIn(newDishName);
 

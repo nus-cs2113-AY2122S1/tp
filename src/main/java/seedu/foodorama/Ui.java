@@ -531,16 +531,54 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
-    public void printConfirmDishEditMsg(String dishName, String newName) {
+    public void printAskNewWastageDish(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the wastage weight (in kg) of '" + dishName + "' to?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printAskNewStorageIngr(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "What would you like to change the storage weight (in kg) of '" + ingrName + "' to?"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printConfirmDishNameEditMsg(String dishName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Are you sure you want to change Dish Name from '" + dishName + "' to '"
                 + newName + "'? Type y for Yes and n for No."
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
-    public void printDishNameChanged(String dishName) {
+    public void printConfirmDishWastageEditMsg(Double currWastage, Double newWastage) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Dish Name has been updated to '" + dishName + "'!"
+                + "Are you sure you want to change the wastage weight (in kg) from '" + currWastage + "' to '"
+                + newWastage + "'? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printConfirmIngrStorageEditMsg(Double currStorage, Double newStorage) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to change the storage weight (in kg) from '" + currStorage + "' to '"
+                + newStorage + "'? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printDishNameChanged(String dishName, String newName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + dishName + "Dish Name has been updated to '" + newName + "'!"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printDishWastageChanged(String dishName, Double newWastage) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Wastage of " + dishName + " has been updated to '" + newWastage + "' kg!"
+                + System.lineSeparator() + LINE_DIVIDER);
+    }
+
+    public void printIngrStorageChanged(String dishName, Double newStorage) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Storage of " + dishName + " has been updated to '" + newStorage + "' kg!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 

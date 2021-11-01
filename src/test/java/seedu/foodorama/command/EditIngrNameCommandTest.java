@@ -32,7 +32,7 @@ class EditIngrNameCommandTest {
         InputStream fakeInput  = new ByteArrayInputStream("fish\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditIngrCommandParamString = new EditIngrCommand();
+        Command testEditIngrCommandParamString = new EditIngrNameCommand();
         testEditIngrCommandParamString.execute(inputParams);
         System.setIn(newIngrName);
 
@@ -45,7 +45,7 @@ class EditIngrNameCommandTest {
         fakeInput  = new ByteArrayInputStream("chicken\ny".getBytes());
         System.setIn(fakeInput);
 
-        Command testEditIngrCommandParamInteger = new EditIngrCommand();
+        Command testEditIngrCommandParamInteger = new EditIngrNameCommand();
         testEditIngrCommandParamInteger.execute(inputParams);
         System.setIn(newIngrName);
 
