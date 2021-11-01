@@ -121,7 +121,7 @@ Note:
 
 - The default date of the added expense will be the date in which the expense is added.
 - Each expense entry can only have a maximum value of 1000000000.
-- The sum of all your entries cannot be more than 100000000000.
+- The sum of all your expense entries cannot be more than 100000000000.
 
 Examples:
 
@@ -262,7 +262,7 @@ Note:
 
 - The default date of the added income will be the date in which the income is added. 
 - Each income entry can only have a maximum value of 1000000000.
-- The sum of all your entries cannot be more than 100000000000.
+- The sum of all your income entries cannot be more than 100000000000.
 
 Examples:
 
