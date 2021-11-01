@@ -440,7 +440,6 @@ public class Parser {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
-        newExpense.prompDate().assignAmounts();
         currTrip.addExpense(newExpense);
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();

@@ -102,11 +102,11 @@ public class Expense extends ExpenseFunctions {
 
     //@@author
 
-    public void assignAmounts() {
+    public void assignAmounts() throws CancelException {
         if (personsList.size() == 1) {
-            Parser.updateOnePersonSpending(this, personsList.get(0));
+            updateOnePersonSpending(this, personsList.get(0));
         } else {
-            Parser.updateIndividualSpending(this);
+            updateIndividualSpending(this);
         }
     }
 
@@ -133,7 +133,7 @@ public class Expense extends ExpenseFunctions {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public Expense prompDate() {
+    public LocalDate prompDate() {
         Scanner sc = Storage.getScanner();
         Ui.expensePromptDate();
         String inputDate = sc.nextLine();
@@ -141,11 +141,10 @@ public class Expense extends ExpenseFunctions {
             inputDate = sc.nextLine();
         }
         if (inputDate.isEmpty()) {
-            this.date = LocalDate.now();
+            return LocalDate.now();
         } else {
-            this.date = LocalDate.parse(inputDate, inputPattern);
+            return LocalDate.parse(inputDate, inputPattern);
         }
-        return this;
     }
 
     private Boolean isDateValid(String date) {
