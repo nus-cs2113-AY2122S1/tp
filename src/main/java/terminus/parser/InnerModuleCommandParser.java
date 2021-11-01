@@ -38,7 +38,7 @@ public abstract class InnerModuleCommandParser extends CommandParser {
     @Override
     public Command parseCommand(String command) throws InvalidCommandException, InvalidArgumentException {
         Command cmd = super.parseCommand(command);
-        cmd.setModuleName(moduleName.toUpperCase());
+        cmd.setModuleName(moduleName);
         return cmd;
     }
 

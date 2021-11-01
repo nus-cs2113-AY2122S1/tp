@@ -36,7 +36,7 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
     public Command parseCommand(String command) throws InvalidCommandException, InvalidArgumentException {
         Command cmd = super.parseCommand(command);
         if (!(cmd instanceof BackCommand)) {
-            cmd.setModuleName(getWorkspace().toUpperCase());
+            cmd.setModuleName(getWorkspace());
         }
         return cmd;
     }
