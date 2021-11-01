@@ -92,13 +92,17 @@ public class Ui {
     }
 
     /**
-     * Prints the missing parameter message.
+     * Prints the missing parameters message.
      *
-     * @param parameter     The parameter that is not found.
+     * @param parameters    The parameters that are not found.
      * @param commandSyntax The command syntax of the command.
      */
-    public void printRequiredParameter(String parameter, String commandSyntax) {
-        print("Required parameter " + parameter + " is missing!");
+    public void printRequiredParameters(ArrayList<String> parameters, String commandSyntax) {
+        if (parameters.size() == 1){
+            print("Required parameter " + parameters.toString() + " is missing!");
+        } else{
+            print("Required parameters " + parameters.toString() + " are missing!");
+        }
         printCommandSyntax(commandSyntax);
     }
 

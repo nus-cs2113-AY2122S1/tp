@@ -38,12 +38,18 @@ public abstract class MedicineValidator {
             ui.printInvalidParameter("", commandSyntax);
             return true;
         }*/
-
+        boolean providedRequiredParameter = true;
+        ArrayList<String> missingParametersList = new ArrayList<>();
         for (String requiredParameter : requiredParameters) {
             if (!parameters.containsKey(requiredParameter)) { // Checks if required parameters are found
-                ui.printRequiredParameter(requiredParameter, commandSyntax);
-                return true;
+                missingParametersList.add(requiredParameter);
+                providedRequiredParameter = false;
             }
+        }
+
+        if (!providedRequiredParameter){
+            ui.printRequiredParameters(missingParametersList, commandSyntax);
+            return true;
         }
 
         // Optional parameters not provided considered valid
