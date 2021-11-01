@@ -116,7 +116,7 @@ public class Storage {
 
     }
 
-    private static void setUpLog() {
+    public static void setUpLog() {
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
 
