@@ -27,6 +27,11 @@ public class Trip {
     private String location;
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final int ISO_LENGTH = 3;
+    private static final String CATEGORY = "category";
+    private static final String DESCRIPTION = "description";
+    private static final String PAYER = "payer";
+    private static final String PERSON = "person";
+    private static final String DATE = "date";
 
     /**
      * Empty {@link Trip} constructor (included for legacy test support).
@@ -58,19 +63,19 @@ public class Trip {
         }
         try {
             switch (expenseCategory) {
-            case "category":
+            case CATEGORY:
                 findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "description":
+            case DESCRIPTION:
                 findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "payer":
+            case PAYER:
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "person":
+            case PERSON:
                 findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "date":
+            case DATE:
                 findMatchingDateExpenses(listOfExpenses, expenseAttribute);
                 break;
             default:
@@ -83,6 +88,7 @@ public class Trip {
         }
 
     }
+    //@@author
 
     //@@author lixiyuan416
     private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
@@ -105,6 +111,7 @@ public class Trip {
     }
     //@@author
 
+    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {

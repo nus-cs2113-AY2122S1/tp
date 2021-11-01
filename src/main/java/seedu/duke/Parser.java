@@ -381,6 +381,7 @@ public class Parser {
         }
     }
 
+    //@@author leeyikai
     private static void executeDeleteExpense(int expenseIndex) {
         try {
             Trip currentTrip = Storage.getOpenTrip();
@@ -394,6 +395,7 @@ public class Parser {
         }
         Storage.setLastExpense(null);
     }
+    //@@author
 
     private static void correctBalances(Expense expense) {
         Person payer = expense.getPayer();
