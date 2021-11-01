@@ -61,6 +61,11 @@ Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
 Parameters | Prefixes for MediVault to understand the type of information you provide.
 
+Meaning of Icons:
+- :information_source: Additional information
+- :warning: Warning
+- :bulb: Note
+
 # Quick Start
 
 ### Setting up
@@ -81,6 +86,8 @@ Parameters | Prefixes for MediVault to understand the type of information you pr
 Welcome to MediVault!
 [STOCK] > 
 ```
+> :bulb: Note: MediVault is best used when the window is maximised to ensure that all tables are rendered correctly.
+
 
 ### Changing Modes
 
@@ -125,19 +132,24 @@ Mode has changed to ORDER.
 > You can refer to [Glossary](#glossary) to understand technical terms mentioned below.
 > * Parameters enclosed in `[]` should contain **one or more** optional parameters.
 > * Parameters enclosed in `{}` are **totally** optional parameters.
+> * Parameters enclosed in `()` are **conditional** optional parameters. For `addstock` and `receiveorder`, parameters 
+> `d/DESCRIPTION` and `m/MAX_QUANTITY` will be optional only if the stock exists.
 > * Parameters you specify can be in any order. 
 >  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
 > * MediVault ignores additional parameters provided when commands do not require one.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
 >  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
+> * MediVault also ignores all extra values that are not provided in parameters.
+>  * E.g. `list abc123 i/1`, MediVault interprets the command as `list i/1`.
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
 >  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
 > sort in descending order.
->* For the `delete` commands, ID will not reset after deletion as stock ID, order ID and prescription ID are unique so that MediVault 
->can identify each stock, order and prescription entry uniquely.
+> * For the `delete` commands, ID will not reset after deletion as stock ID, order ID and prescription ID are unique so that MediVault 
+> can identify each stock, order and prescription entry uniquely.
+> * `/` is not allowed to be entered for all input parameters, as MediVault uses them to identity the parameters.
 
 ## Managing Stocks
 
@@ -157,7 +169,7 @@ Adds medication into the inventory.
 > * Medication with same name but different expiry date will be added into MediVault in different rows. This will allow users to have different prices for different expiry dates.
 >   * Users might want to set a discount price for expiring medication.
   
-Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
+Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 
 Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2025`
 
@@ -687,7 +699,7 @@ Adds the received medication into the current stocks.
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 > * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used. 
 
-Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
+Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 
 Example 1 (If medication does not exist) : `receiveorder i/1 p/10 e/20-10-2021 d/severe pain m/500`
 
@@ -819,7 +831,7 @@ provided.
 |       COMMAND       |                   COMMAND SYNTAX                   | 
 +=====================+====================================================+
 |      addstock       | addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE   | 
-|                     | {d/DESCRIPTION m/MAX_QUANTITY}                     | 
+|                     | (d/DESCRIPTION m/MAX_QUANTITY)                     | 
 +---------------------+----------------------------------------------------+
 |     deletestock     | deletestock [i/ID expiring/EXPIRY_DATE]            | 
 +---------------------+----------------------------------------------------+
@@ -858,7 +870,7 @@ provided.
 |    archiveorder     | archiveorder d/DATE                                | 
 +---------------------+----------------------------------------------------+
 |    receiveorder     | receiveorder i/ID p/PRICE e/EXPIRY_DATE            | 
-|                     | {d/DESCRIPTION m/MAX_QUANTITY}                     | 
+|                     | (d/DESCRIPTION m/MAX_QUANTITY)                     | 
 +---------------------+----------------------------------------------------+
 |        purge        | purge                                              | 
 +---------------------+----------------------------------------------------+
@@ -920,7 +932,7 @@ see `stock.txt, order.txt, prescription.txt` in that folder.
 
 Command | Command Syntax
 ------ | ------
-addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
+addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 deletestock | `deletestock [i/ID expiring/DATE]`
 updatestock | `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
@@ -934,7 +946,7 @@ deleteorder | `deleteorder i/ID`
 updateorder | `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
 listorder | `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN_NAME}`
 archiveorder | `archiveorder d/DATE`
-receiveorder | `receiveorder i/ID p/PRICE e/EXPIRY_DATE {d/DESCRIPTION m/MAX_QUANTITY}`
+receiveorder | `receiveorder i/ID p/PRICE e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 purge | `no parameters`
 help | `no parameters`
 exit | `no parameters`
