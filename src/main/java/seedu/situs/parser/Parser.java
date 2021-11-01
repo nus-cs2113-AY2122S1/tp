@@ -38,6 +38,9 @@ public class Parser {
     private static final String COMMAND_ALERTS = "alerts";
     private static final String COMMAND_SET_THRESHOLD = "set";
 
+    private static final String TYPE_EXPIRY = "expiry";
+    private static final String TYPE_STOCK = "stock";
+
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
@@ -74,6 +77,7 @@ public class Parser {
     private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 2;
     private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 3;
     private static final int DELETE_COMMAND_ARGUMENT_COUNT = 2;
+    private static final int SET_COMMAND_ARGUMENT_COUNT = 3;
 
 
     public static boolean isExit(String command) {
@@ -145,7 +149,7 @@ public class Parser {
     /**
      * Parses and executes the {@code find} command.
      *
-     * @param command The user input parameters
+     * @param command The user input string
      * @return Search results for entered keywords
      * @throws SitusException If no keywords are entered
      */
@@ -232,7 +236,7 @@ public class Parser {
     /**
      * Parses and executes the {@code add} command.
      *
-     * @param command The user input String
+     * @param command The user input string
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws SitusException {
@@ -406,7 +410,7 @@ public class Parser {
     /**
      * Parses and executes the {@code alerts} command.
      *
-     * @param command The user's input parameter
+     * @param command The user's input string
      * @return The list of ingredients for each alert type
      * @throws SitusException if alert type, date format or amount format is incorrect
      */
@@ -416,9 +420,9 @@ public class Parser {
             switch (details[1]) {
             case "all":
                 return new AlertCommand().run();
-            case "expiry":
+            case TYPE_EXPIRY:
                 return new AlertExpiringSoonCommand().run();
-            case "stock":
+            case TYPE_STOCK:
                 return new AlertLowStockCommand().run();
             default:
                 throw new SitusException(INVALID_ALERT_TYPE_MESSAGE);
@@ -431,7 +435,7 @@ public class Parser {
     /**
      * Parses and executes the {@code set} command.
      *
-     * @param command The user's input parameters
+     * @param command The user's input string
      * @return threshold successfully set message
      * @throws SitusException if threshold type, date format or amount format is incorrect
      */
@@ -441,12 +445,13 @@ public class Parser {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 3);
+        assert (details.length == SET_COMMAND_ARGUMENT_COUNT);
 
         try {
+            String newThreshold = details[2].trim();
             switch (details[1].trim()) {
-            case "expiry":
-                long newExpiryThreshold = Long.parseLong(details[2].trim());
+            case TYPE_EXPIRY:
+                long newExpiryThreshold = Long.parseLong(newThreshold);
                 if (newExpiryThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
@@ -455,8 +460,8 @@ public class Parser {
                 }
                 AlertExpiringSoonCommand.setExpiryThreshold(newExpiryThreshold);
                 return "Successfully set expiry threshold to " + newExpiryThreshold + " days";
-            case "stock":
-                double newStockThreshold = Double.parseDouble(details[2].trim());
+            case TYPE_STOCK:
+                double newStockThreshold = Double.parseDouble(newThreshold);
                 if (newStockThreshold <= 0) {
                     throw new SitusException(INVALID_THRESHOLD_MESSAGE);
                 }
