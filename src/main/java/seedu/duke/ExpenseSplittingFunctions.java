@@ -102,7 +102,7 @@ public abstract class ExpenseSplittingFunctions {
      * @param amountBeingPaid HashMap containing the people who the user has assigned values to.
      * @param payer Person who is paying for the expense.
      * @throws ForceCancelException Cancels the creation of the expense in the event the user wishes to
-     * stop creating the expense.
+     *     stop creating the expense.
      */
     private static void assignZeroToRemaining(Expense expense, HashMap<Person, Double> amountBeingPaid, Person payer)
             throws ForceCancelException {
@@ -137,7 +137,7 @@ public abstract class ExpenseSplittingFunctions {
      * entered is of a person who is part of the Expense.
      * @param expense Expense that is being checked.
      * @return Person who is associated to the String that was input by the user, if the user input is invalid and the
-     * String is not of a name of a Person in the Expense, the function will ask the user for an input again.
+     *     String is not of a name of a Person in the Expense, the function will ask the user for an input again.
      * @throws ForceCancelException Allows the user to cancel anytime there is an input required by the user.
      */
     private static Person getValidPersonInExpenseFromString(Expense expense) throws ForceCancelException {
