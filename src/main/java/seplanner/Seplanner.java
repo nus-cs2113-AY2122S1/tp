@@ -20,7 +20,7 @@ public class Seplanner {
         Storage storage = new Storage();
         try {
             Log.setupLogger();
-            UiGeneral.welcome();
+            UiGeneral.printWelcome();
             ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
             UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
             UniversityList universitySelectedList = new UniversityList(

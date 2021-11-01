@@ -5,7 +5,7 @@ import seplanner.constants.Constants;
 import static java.lang.System.out;
 
 public class UiGeneral extends Ui {
-    public static void welcome() {
+    public static void printWelcome() {
         printGlobe();
         printLogo();
     }
