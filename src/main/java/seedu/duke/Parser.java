@@ -290,7 +290,10 @@ public class Parser {
     private static void executeOpen(String indexAsString) {
         //assumes that listOfTrips have at least 1 trip
         int indexToGet = Integer.parseInt(indexAsString) - 1;
-        Storage.setOpenTrip(Storage.getListOfTrips().get(indexToGet));
+        if (Storage.getOpenTrip() != null) {
+            Ui.printTripClosed(Storage.getOpenTrip());
+        }
+        Storage.setOpenTrip(indexToGet);
         Ui.printOpenTripMessage(Storage.getOpenTrip());
     }
 

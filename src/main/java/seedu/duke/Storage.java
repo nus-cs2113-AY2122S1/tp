@@ -198,7 +198,7 @@ public class Storage {
         try {
             System.out.print("Please enter the trip you would like to open: ");
             int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
-            setOpenTrip(listOfTrips.get(tripIndex));
+            setOpenTrip(tripIndex);
         } catch (NumberFormatException e) {
             Ui.argNotNumber();
             Ui.promptForTripIndex();
@@ -215,8 +215,13 @@ public class Storage {
         return openTrip != null;
     }
 
-    public static void setOpenTrip(Trip openTrip) {
-        Storage.openTrip = openTrip;
+    /**
+     * Opens the trip at the specified <code>tripIndex</code>, and sets that trip as the last modified trip.
+     *
+     * @param tripIndex index of the trip inside {@link Storage#listOfTrips} to be opened
+     */
+    public static void setOpenTrip(int tripIndex) {
+        openTrip = listOfTrips.get(tripIndex);
         lastTrip = openTrip;
     }
 
