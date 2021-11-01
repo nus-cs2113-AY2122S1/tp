@@ -70,12 +70,12 @@ public class Parser {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
     private static final String DELETE_DELIM = "\\.";
-    private static final String UPDATE_DELIM = " \\s|\\.|a/";
+    private static final String UPDATE_DELIM = "a/";
     private static final String SUBTRACT_DELIM = " \\s|a/";
 
     private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
     private static final int SUBTRACT_COMMAND_ARGUMENT_COUNT = 2;
-    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 3;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 2;
     private static final int DELETE_COMMAND_ARGUMENT_COUNT = 2;
     private static final int SET_COMMAND_ARGUMENT_COUNT = 3;
 
@@ -208,15 +208,21 @@ public class Parser {
 
         for (int i = 0; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
-            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ")) {
+            if (details[i].equals(EMPTY_STRING) || details[i].contains(" ") || !details[i].contains(".")) {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
         try {
-            int groupNumber = Integer.parseInt(details[0]);
-            int ingredientNumber = Integer.parseInt(details[1]);
-            double newAmount = Double.parseDouble(details[2]);
+            String[] splittedGroupAndIngredient = details[0].split("\\.");
+
+            if (splittedGroupAndIngredient.length != 2) {
+                throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+            }
+
+            int groupNumber = Integer.parseInt(splittedGroupAndIngredient[0]);
+            int ingredientNumber = Integer.parseInt(splittedGroupAndIngredient[1]);
+            double newAmount = Double.parseDouble(details[1]);
 
             if (newAmount < 0) {
                 throw new SitusException(INVALID_AMOUNT_MESSAGE);
@@ -240,6 +246,10 @@ public class Parser {
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws SitusException {
+        if (!command.contains("n/") || !command.contains("a/") || !command.contains("e/")) {
+            throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
+        }
+
         String[] details = command.substring(COMMAND_ADD.length()).trim().split(DELIMITER);
 
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {

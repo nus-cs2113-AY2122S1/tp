@@ -14,8 +14,8 @@ public class FindCommandTest {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final String EXPECTED_MESSAGE_START = "I found these ingredients for \"xyz\":\n\t";
-    private static final String EXPECTED_MESSAGE_END = ". Testxyz | Total Amount: 3.0 kg\n\t\t"
-            + "1.1. Amount Left: 3.0 kg | Expiry Date: 21/10/2021";
+    private static final String EXPECTED_MESSAGE_MID = ". Testxyz | Total Amount: 3.0 kg\n\t\t";
+    private static final String EXPECTED_MESSAGE_END  =  ".1. Amount Left: 3.0 kg | Expiry Date: 21/10/2021";
 
     @Test
     public void findCommandTest_ingredientNotFound_success() throws SitusException {
@@ -30,6 +30,7 @@ public class FindCommandTest {
         IngredientList.getInstance().add(ingredient1);
         int expectedIndex = IngredientList.getInstance().findIngredientIndexInList(ingredient1.getName());
         String resultMsg = new FindCommand("xyz").run();
-        assertEquals(EXPECTED_MESSAGE_START + (expectedIndex + 1) + EXPECTED_MESSAGE_END, resultMsg);
+        assertEquals(EXPECTED_MESSAGE_START + (expectedIndex + 1) + EXPECTED_MESSAGE_MID
+                + (expectedIndex + 1) + EXPECTED_MESSAGE_END, resultMsg);
     }
 }
