@@ -334,7 +334,10 @@ public class Parser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateUnitsCommand.MESSAGE_USAGE));
         }
-        final String unitString = argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
+
+       //final String unitString = argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
+
+        final String unitString = new UnitParser().parse(argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT));
         final String ingredient = new IngredientParser().parse(argsParser.getSingleArg(PREFIX_INGREDIENT));
 
         return new UpdateUnitsCommand(ingredient, unitString);
