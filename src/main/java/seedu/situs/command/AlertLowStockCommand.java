@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 public class AlertLowStockCommand extends Command {
 
-    private static double lowStockThreshold;
+    private static double lowStockThreshold = 1.0;
     private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
-    public AlertLowStockCommand() {
+    public AlertLowStockCommand() throws SitusException{
         try {
             lowStockThreshold = new Storage().loadStockThreshold();
-        } catch (IOException | NumberFormatException e) {
-            lowStockThreshold = 1.0;
+        } catch (IOException | SitusException e) {
+            throw new SitusException(e.getMessage());
         }
     }
 

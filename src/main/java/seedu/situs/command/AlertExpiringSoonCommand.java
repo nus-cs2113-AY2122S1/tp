@@ -1,5 +1,6 @@
 package seedu.situs.command;
 
+import seedu.situs.Situs;
 import seedu.situs.exceptions.SitusException;
 
 import seedu.situs.localtime.CurrentDate;
@@ -12,13 +13,13 @@ import java.time.LocalDate;
 
 public class AlertExpiringSoonCommand extends Command {
 
-    private static long expiryThreshold;
+    private static long expiryThreshold = 5;
 
-    public AlertExpiringSoonCommand() {
+    public AlertExpiringSoonCommand() throws SitusException {
         try {
             expiryThreshold = new Storage().loadExpiryThreshold();
-        } catch (IOException | NumberFormatException e) {
-            expiryThreshold = 5;
+        } catch (IOException | SitusException e) {
+            throw new SitusException(e.getMessage());
         }
     }
 
