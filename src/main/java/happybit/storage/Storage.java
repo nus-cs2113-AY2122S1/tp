@@ -4,6 +4,7 @@ import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
+import happybit.interval.Interval;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +77,7 @@ public class Storage {
     /**
      * To export a goal to storage file.
      *
-     * @param goal a goal object
+     * @param goal a Goal object
      * @param index the index of goal in goal list
      * @throws HaBitStorageException IOException
      */
@@ -84,7 +85,18 @@ public class Storage {
         export.exportGoal(goal, index);
     }
 
+    /**
+     * To export a habit to storage file.
+     *
+     * @param habit a Habit object
+     * @param index the index of the goal the habit is under
+     * @throws HaBitStorageException IOException
+     */
     public void export(Habit habit, int index) throws HaBitStorageException {
         export.exportHabit(habit, index);
+    }
+
+    public void export(Interval interval, int goalIndex, int habitIndex) throws HaBitStorageException {
+        export.exportInterval(interval, goalIndex, habitIndex);
     }
 }
