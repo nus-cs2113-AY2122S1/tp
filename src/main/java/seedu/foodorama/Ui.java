@@ -566,7 +566,7 @@ public class Ui {
 
     public void printDishNameChanged(String dishName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + dishName + "Dish Name has been updated to '" + newName + "'!"
+                + dishName + " has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -596,9 +596,9 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
-    public void printIngrNameChanged(String ingrName) {
+    public void printIngrNameChanged(String ingrName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Ingredient Name has been updated to '" + ingrName + "'!"
+                + ingrName + " has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
