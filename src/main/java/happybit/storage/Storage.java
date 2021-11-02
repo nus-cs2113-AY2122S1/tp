@@ -4,7 +4,6 @@ import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
-import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
 import java.io.File;
@@ -17,6 +16,13 @@ import java.util.ArrayList;
 public class Storage {
     private static final String DEFAULT_DIR = "data";
     private static final String DEFAULT_FILEPATH = "data/habits.txt";
+    private static final String DIR_NOT_EXIST = "Directory '" + DEFAULT_DIR + "' does not exist.";
+    private static final String DIR_CREATED = "Directory created.";
+    private static final String DIR_NOT_CREATED = "Failed to create directory.";
+    private static final String FILE_CREATED = "Storage file created at " + DEFAULT_FILEPATH + ".";
+    private static final String FILE_FOUND = "Storage file found at " + DEFAULT_FILEPATH + ".";
+    private static final String READ_ONLY = "Storage file is set to read only.";
+    private static final String SET_READ_ONLY_FAILED = "Failed to set storage file as read only.";
 
     protected String filePath;
     protected String fileDir;
@@ -41,51 +47,61 @@ public class Storage {
      * @throws HaBitStorageException when errors occurred with the importing of data
      */
     public GoalList load() throws HaBitStorageException {
-        this.createFile(this.filePath, this.fileDir);
+        this.createStorageFile(this.filePath, this.fileDir);
 
         return Import.importStorage(this.filePath);
     }
 
     /**
      * Checks if the storage file exists. If it does not, it will create one for the user.
+     * The storage file created will be read only.
      * @param filePath the file path where the storage file is to be found
      * @param fileDir the folder where the storage file is supposed to be stored at
      */
-    protected void createFile(String filePath, String fileDir) {
+    protected void createStorageFile(String filePath, String fileDir) {
         File storageDir = new File(fileDir);
         File storageFile = new File(filePath);
 
         if (!storageDir.exists()) {
-            boolean isDirCreated = storageDir.mkdirs();
-            System.out.printf("Directory %s does not exist." + System.lineSeparator(), fileDir);
-
-            if (isDirCreated) {
-                System.out.println("Directory created.");
-                assert storageDir.exists() : "directory should have been created";
-            } else {
-                System.out.println("Directory not created.");
-            }
+            this.printManager.printStorageMessage(DIR_NOT_EXIST);
+            this.makeDirectory(storageDir);
         }
 
+        this.createFile(storageFile);
+        this.setReadOnly(storageFile);
+    }
+
+    protected void makeDirectory(File storageDir) {
+        boolean isDirCreated = storageDir.mkdirs();
+
+        if (isDirCreated) {
+            this.printManager.printStorageMessage(DIR_CREATED);
+        } else {
+            this.printManager.printStorageMessage(DIR_NOT_CREATED);
+        }
+    }
+
+    protected void createFile(File storageFile) {
         try {
             boolean isFileCreated = storageFile.createNewFile();
 
             if (isFileCreated) {
-                System.out.println("File created at: " + filePath);
-                assert storageFile.exists() : "file should have been created";
+                this.printManager.printStorageMessage(FILE_CREATED);
             } else {
-                System.out.printf("Storage file found at %s." + System.lineSeparator(), filePath);
+                this.printManager.printStorageMessage(FILE_FOUND);
             }
         } catch (IOException e) {
-            System.out.println("Error occurred while creating file: " + e);
+            this.printManager.printError(e.getMessage());
         }
+    }
 
+    protected void setReadOnly(File storageFile) {
         boolean isReadOnly = storageFile.setReadOnly();
 
         if (isReadOnly) {
-            System.out.println("Storage file is read only.");
+            this.printManager.printStorageMessage(READ_ONLY);
         } else {
-            System.out.println("Failed to set storage file as read only.");
+            this.printManager.printStorageMessage(SET_READ_ONLY_FAILED);
         }
     }
 
