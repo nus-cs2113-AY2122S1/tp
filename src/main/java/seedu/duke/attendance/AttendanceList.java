@@ -44,7 +44,7 @@ public class AttendanceList {
         }
     }
 
-    public int getAttendanceListSize() { //added by xy
+    public int getAttendanceListSize() {
         return attendanceList.size();
     }
 
@@ -59,4 +59,5 @@ public class AttendanceList {
     public String getAttendancePresentOrLate(int index) { //added by xy
         return attendanceList.get(index - 1).attended;
     }
+
 }

@@ -72,10 +72,15 @@ as any training-related information regarding your CCA's venue bookings and timi
    ```
    Added a Member: 
    Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
-   
+   ```
+   ```
    Added a Training entry:
+
    Training Name: WEEKLY DECEMBER TRAINING 2 | Venue: MPSH2 | Time: 12 DEC 2022
-   
+
+   ```
+   ```
+
    Added an Attendance entry:
    Name: Mark | Training Name: Monday Training | Present: [1]
    ```
@@ -116,12 +121,12 @@ allowing for a simple way to tidy up your file entries.
     * The `delete` keyword removes entries based on their index/name:
       * `/m <INDEX> or <MEMBER_NAME>` is used to delete a member from the members list 
       * `/t <INDEX>` is used to delete a training schedule from the trainings list
-      * `/att <INDEX> or <MEMBER_NAME> or <TRAINING_NAME>` is used to delete an attendance entry from the attendance list
+      * `/att [/t <TRAINING_NAME> /i <ATTENDANCE_INDEX_TO_DELETE>]` is used to delete an attendance entry from the attendance list
       * You can get the index of a member or training by calling `list /m`, `list /t` or `list /att` respectively
     * **Examples:**
       - `delete /m 1` or `delete /m JOHN HWEE`
       - `delete /t 2`
-      - `delete /att 3` or `delete /m Mark` or `delete /t Monday Training` 
+      - `delete /att /t Monday Training /i 3` or `delete /m Mark` or `delete /t Monday Training` 
     
     * **Expected Output:**
     ```
