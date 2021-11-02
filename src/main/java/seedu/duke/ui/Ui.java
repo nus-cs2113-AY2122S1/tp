@@ -46,6 +46,11 @@ public class Ui {
         System.out.print(CURSOR);
     }
 
+    //@@author APZH
+    /**
+     * Reads and returns the user input into the command-line as a {@code String}.
+     * @return The user input.
+     */
     public String readInput() {
         printCursor();
         if (!IN.hasNextLine()) {
