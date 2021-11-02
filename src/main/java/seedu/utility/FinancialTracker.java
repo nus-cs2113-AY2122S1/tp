@@ -106,7 +106,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an income entry based on its index.
+     * Removes an income entry based on its index.
      * 
      * @param incomeIndex Index of deleted income entry.
      * @return Deleted income object.
