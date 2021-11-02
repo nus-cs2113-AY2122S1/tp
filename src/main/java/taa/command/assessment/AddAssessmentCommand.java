@@ -10,6 +10,8 @@ import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
 import taa.util.Util;
 
+import java.util.ArrayList;
+
 public class AddAssessmentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
     private static final String KEY_ASSESSMENT_NAME = "n";
@@ -26,8 +28,12 @@ public class AddAssessmentCommand extends Command {
 
     private static final String MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> %s/<ASSESSMENT_NAME> "
         + "%s/<MAXIMUM_MARKS> %s/<WEIGHTAGE>";
+    private static final String MESSAGE_FORMAT_INVALID_NAME = "Invalid assessment name. "
+            + "Assessment already exists.";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
         + "Weightage must be between %,.2f and %,.2f (inclusive)";
+    private static final String MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE = "Invalid new weightage. "
+            + "Total new weightage exceeds 100%.";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
         + "Maximum marks must be larger than %d (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
@@ -103,12 +109,26 @@ public class AddAssessmentCommand extends Command {
         int maximumMarks = Integer.parseInt(maximumMarksString);
         assert maximumMarks >= Assessment.MINIMUM_MARKS;
 
+        String name = argumentMap.get(KEY_ASSESSMENT_NAME);
+
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         assert Util.isStringDouble(weightageString);
         double weightage = Double.parseDouble(weightageString);
         assert Assessment.isWeightageWithinRange(weightage);
+        ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
+        double totalWeightage = 0;
+        for (Assessment a : assessments) {
+            if (a.getName().equalsIgnoreCase(name)) {
+                throw new TaaException(MESSAGE_FORMAT_INVALID_NAME);
+            }
 
-        String name = argumentMap.get(KEY_ASSESSMENT_NAME);
+            totalWeightage += a.getWeightage();
+        }
+        double newTotalWeightage = totalWeightage + weightage;
+        if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
+            throw new TaaException(MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE);
+        }
+
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
 
         AssessmentList assessmentList = teachingClass.getAssessmentList();
