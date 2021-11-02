@@ -23,10 +23,10 @@ public class TrainingListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        training1 = new TrainingSchedule("October Friday Weekly Training 1", "MPSH1", "1 Oct 2021");
-        training2 = new TrainingSchedule("October Friday Weekly Training 2", "MPSH1", "8 Oct 2021");
-        training3 = new TrainingSchedule("October Friday Weekly Training 3", "MPSH1", "15 Oct 2021");
-        training4 = new TrainingSchedule("October Friday Weekly Training 4", "MPSH1", "22 Oct 2021");
+        training1 = new TrainingSchedule("FRIDAY WEEKLY TRAINING 1", "MPSH1", "1 OCT 2021", 1);
+        training2 = new TrainingSchedule("FRIDAY WEEKLY TRAINING 2", "MPSH1", "8 OCT 2021", 2);
+        training3 = new TrainingSchedule("FRIDAY WEEKLY TRAINING 3", "MPSH1", "15 OCT 2021", 3);
+        training4 = new TrainingSchedule("FRIDAY WEEKLY TRAINING 4", "MPSH1", "22 OCT 2021", 4);
 
         ArrayList<TrainingSchedule> inputTrainingList = new ArrayList<TrainingSchedule>();
         inputTrainingList.add(training1);
@@ -48,8 +48,8 @@ public class TrainingListTest {
     @Test
     void getTrainingDetails() {
         final String input = "add /t /n October Friday Weekly Training 1 /a 1 Oct 2021 /v MPSH 1";
-        final String expectedOutput = "[0] Training Name: October Friday Weekly Training 1 | Venue: MPSH 1 | Time: 1 "
-                + "Oct 2021";
+        final String expectedOutput = "[0] Training Name: OCTOBER FRIDAY WEEKLY TRAINING 1 | Venue: MPSH 1 | Time: 1 "
+                + "OCT 2021";
         TrainingSchedule training = Parser.getTrainingDescription(input);
         assertEquals(expectedOutput, training.toString());
     }
@@ -64,8 +64,8 @@ public class TrainingListTest {
     void addTrainingSchedule() {
         final String input = "add /t /n October Friday Weekly Training 5 /a 29 Oct 2021 /v MPSH1";
         trainingList.addTrainingSchedule(Parser.getTrainingDescription(input));
-        assertEquals(trainingList.getTrainingName(5), "October Friday Weekly Training 5");
-        assertEquals(trainingList.getTrainingTime(5), "29 Oct 2021");
+        assertEquals(trainingList.getTrainingName(5), "OCTOBER FRIDAY WEEKLY TRAINING 5");
+        assertEquals(trainingList.getTrainingTime(5), "29 OCT 2021");
         assertEquals(trainingList.getTrainingVenue(5), "MPSH1");
     }
 
@@ -75,8 +75,7 @@ public class TrainingListTest {
         int index = Parser.getIndex(input);
         TrainingSchedule editedTraining = Parser.getTrainingDescription(input);
         new EditTraining(trainingList, index, editedTraining);
-        //Parser.editTraining(trainingList, input);
-        assertEquals(trainingList.getTrainingTime(1), "30 Oct 2021");
+        assertEquals(trainingList.getTrainingTime(1), "30 OCT 2021");
         assertEquals(trainingList.getTrainingVenue(1), "MPSH 3");
     }
 
