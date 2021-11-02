@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -178,12 +179,12 @@ class StorageTest {
         String expectedStaffStorageString = getTestStaffListStorageString();
         String expectedTestAppointmentString = getTestAppointmentListStorageString();
 
-        //SAVE all storage data
-        patientStorage.saveData(expectedPatientStorageString);
-        staffStorage.saveData(expectedStaffStorageString);
-        appointmentStorage.saveData(expectedTestAppointmentString);
-
         try {
+            //SAVE all storage data
+            patientStorage.saveData(expectedPatientStorageString);
+            staffStorage.saveData(expectedStaffStorageString);
+            appointmentStorage.saveData(expectedTestAppointmentString);
+
             String actualPatientFileString = scanFileToString(PATIENT_DATA_SAVED);
             String actualStaffFileString = scanFileToString(STAFF_DATA_SAVED);
             String actualAppointmentFileString = scanFileToString(APPOINTMENT_DATA_SAVED);
@@ -197,7 +198,7 @@ class StorageTest {
 
             deleteSavedData();
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new MedBotException("FILE ERROR");
         }
     }

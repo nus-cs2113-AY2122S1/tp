@@ -18,8 +18,11 @@ import static java.lang.Math.max;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 public abstract class Storage {
-    protected static final String ERROR_LOAD_STORAGE = "Error: Unable to load data file.";
-    protected static final String ERROR_SAVE_STORAGE = "Error: Unable to save data.";
+    protected static final String ERROR_LOAD_STORAGE = "\nERROR: MedBot is unable to create/load its storage files.\n";
+    public static final String ERROR_SAVE_STORAGE = "\nERROR: MedBot is unable to save data into its storage files.\n";
+    public static final String ERROR_MOVE_STORAGE_FILES = "\nPlease manually move medbot.jar to "
+            + "a location where it has read and write privileges before running it again.\n\n"
+            + "Exiting MedBot...\n";
 
     protected File dataFile;
     protected String dataPath;
@@ -38,7 +41,7 @@ public abstract class Storage {
             dataFile.createNewFile();
 
         } catch (IOException e) {
-            throw new MedBotException(ERROR_LOAD_STORAGE);
+            throw new MedBotException(ERROR_LOAD_STORAGE + ERROR_MOVE_STORAGE_FILES);
         }
     }
 
@@ -109,16 +112,12 @@ public abstract class Storage {
      * Writes the storageString to storage file.
      *
      * @param storageString String containing the data of the list.
-     * @throws MedBotException if unable to write to storage text file.
+     * @throws IOException if unable to write to storage text file.
      */
-    public void saveData(String storageString) throws MedBotException {
-        try {
-            FileWriter fw = new FileWriter(dataPath);
-            fw.write(storageString);
-            fw.close();
-        } catch (IOException e) {
-            throw new MedBotException(ERROR_SAVE_STORAGE);
-        }
+    public void saveData(String storageString) throws IOException {
+        FileWriter fw = new FileWriter(dataPath);
+        fw.write(storageString);
+        fw.close();
     }
 
 

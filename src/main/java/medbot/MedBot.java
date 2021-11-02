@@ -3,10 +3,11 @@ package medbot;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
 import medbot.parser.Parser;
+import medbot.storage.Storage;
 import medbot.storage.StorageManager;
 import medbot.ui.Ui;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MedBot {
     public static void main(String[] args) {
@@ -20,25 +21,34 @@ public class MedBot {
     public static void interactWithUser() {
         Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
-        StorageManager storageManager = null;
+        StorageManager storageManager = new StorageManager();
+        boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
         try {
-            storageManager = new StorageManager(scheduler, ui);
-        } catch (FileNotFoundException | MedBotException e) {
+            storageManager.initializeStorages(scheduler, ui);
+
+        } catch (MedBotException e) {
             ui.printOutput(e.getMessage());
+            isInteracting = false;
         }
-        ui.printWelcomeMessageTwo();
-        boolean isInteracting = true;
+        if (isInteracting) {
+            ui.printWelcomeMessageTwo();
+        }
+
         while (isInteracting) {
             String userInput = ui.readInput();
             try {
                 Command command = Parser.parseCommand(userInput);
                 command.execute(scheduler, ui);
 
-                assert storageManager != null;
                 storageManager.saveToStorage(scheduler);
                 isInteracting = !command.isExit();
+
+            } catch (IOException e) {
+                ui.printOutput(Storage.ERROR_SAVE_STORAGE + Storage.ERROR_MOVE_STORAGE_FILES
+                        + System.lineSeparator());
+                isInteracting = false;
 
             } catch (MedBotException mbe) {
                 ui.printOutput(mbe.getMessage() + System.lineSeparator());
