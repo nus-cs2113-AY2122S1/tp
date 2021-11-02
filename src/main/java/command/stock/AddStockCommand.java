@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.StockManager;
 import utilities.parser.StockValidator;
 import utilities.storage.Storage;
@@ -66,8 +67,8 @@ public class AddStockCommand extends Command {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
                     CommandParameters.EXPIRY_DATE};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters,
-                    optionalParameters, stockValidator)) {
+            if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParameters,
+                    optionalParameters)) {
                 return;
             }
 
@@ -83,8 +84,8 @@ public class AddStockCommand extends Command {
             String[] requiredParams = {CommandParameters.NAME, CommandParameters.PRICE,
                     CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParams,
-                    optionalParameters, stockValidator)) {
+            if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParams,
+                    optionalParameters)) {
                 return;
             }
 
@@ -97,8 +98,8 @@ public class AddStockCommand extends Command {
                     CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
                     CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters,
-                    optionalParameters, stockValidator)) {
+            if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParameters,
+                    optionalParameters)) {
                 return;
             }
 
@@ -176,7 +177,7 @@ public class AddStockCommand extends Command {
             if (formatExpiry.equals(stock.getExpiry())) {
                 quantity += stock.getQuantity();
                 stock.setQuantity(quantity);
-                ui.print("Same Medication and Expiry Date exist. Update existing quantity.");
+                ui.print("Same Medication and Expiry Date exist. Updating existing quantity.");
                 ui.printStock(stock);
                 return true;
             }
@@ -251,27 +252,19 @@ public class AddStockCommand extends Command {
      * @param medicines          List of all medicines.
      * @param requiredParameters The required parameters to check.
      * @param optionalParameters The optional parameters to check.
-     * @param stockValidator     Reference to StockValidator object.
      * @return Boolean value indicating if parameter and parameter values are valid.
      */
     private boolean checkValidParametersAndValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String[] requiredParameters,
-                                                  String[] optionalParameters, StockValidator stockValidator) {
-        boolean isInvalidParameters = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.ADD_STOCK_COMMAND, false);
-        if (isInvalidParameters) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
+                                                  String[] optionalParameters) {
+        MedicineValidator validator = new StockValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_STOCK_COMMAND, false, validator);
+        if (isInvalidInput) {
             logger.log(Level.INFO, "Unsuccessful addition of stock");
-            return true;
+            return false;
         }
-        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ADD_STOCK_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful addition of stock");
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
