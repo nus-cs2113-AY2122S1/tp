@@ -1,10 +1,10 @@
 # Gordon's User Guide
 
 ## Contents
-* [How do you use this guide?](#how-do-you-use-this-guide)
-* [Who is Gordon?](#who-is-gordon)
-* [How do you start Gordon?](#how-do-you-start-gordon)
-* [What can Gordon do?](#what-can-gordon-do)
+* [**How do you use this guide?**](#how-do-you-use-this-guide)
+* [**Who is Gordon?**](#who-is-gordon)
+* [**How do you start Gordon?**](#how-do-you-start-gordon)
+* [**What can Gordon do?**](#what-can-gordon-do)
   1. [Add a recipe](#1-add-a-recipe-addrecipe)
   1. [Delete a recipe](#2-delete-a-recipe-deleterecipe)
   1. [Look up a recipe](#3-look-up-a-recipe-check)
@@ -13,7 +13,14 @@
   1. [Lend a hand](#6-lend-a-hand-help)
   1. [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set)
   1. [Find a recipe by attribute](#8-find-a-recipe-by-attribute-find)
-* [Cheat sheet](#cheat-sheet)  
+  1. [Do cool stuff with tags](#9-do-cool-stuff-with-tags)
+      1. [Tag a recipe](#91-adding-tags-to-recipes-tag)
+      1. [Untag a recipe](#92-untagging-tags-from-recipes-untag)
+      1. [Delete a tag](#93-deleting-tags-from-cookbook-deletetag)
+      1. [List all tags](#94-find-a-recipe-by-their-tags-find)
+      1. [Find recipes by tag](#95-list-all-your-tags-listtags)
+  1. [Save and load your recipes](#10-saving-and-loading)
+* [**Cheat sheet**](#cheat-sheet)  
 
 ## How do you use this guide?
 * Use the [Contents](#contents) section to navigate to anywhere in this user guide
@@ -318,7 +325,7 @@ Searching by total time...
 
 ---
 
-### 9. Tagging Functionalities
+### 9. Do cool stuff with tags
 A variety of tagging-related functions, for greater organization.
 
 #### 9.1 Adding Tags to Recipes: `tag`
