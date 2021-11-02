@@ -258,7 +258,9 @@ public class TextUi {
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
 
-    private static void recordListPrinter(AllRecordList records, int i, Category category, String monthString, double totalSpending, double currentMonthBudget, String budget, boolean printInfo) {
+    private static void recordListPrinter(AllRecordList records, int i, Category category,
+                                          String monthString, double totalSpending, double currentMonthBudget,
+                                          String budget, boolean printInfo) {
         if (totalSpending > currentMonthBudget && currentMonthBudget > 0 && printInfo) {
             System.out.println("You are spending too much for " + monthString + "!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
@@ -298,7 +300,8 @@ public class TextUi {
         }
     }
 
-    private static void budgetExpenditurePrinter(AllRecordList list, int month, String monthString, String budget, Category category) {
+    private static void budgetExpenditurePrinter(AllRecordList list, int month,
+                                                 String monthString, String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
 
@@ -464,7 +467,10 @@ public class TextUi {
         Delay.loadingBar(40);
     }
 
-    public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList, ArrayList<Loan> matchedLoanList, int sizeOfMatchedExpenditureList, int sizeOfMatchedLoanList) {
+    public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList,
+                                                        ArrayList<Loan> matchedLoanList,
+                                                        int sizeOfMatchedExpenditureList,
+                                                        int sizeOfMatchedLoanList) {
         if (sizeOfMatchedExpenditureList == 0) {
             System.out.println("No Expenditures found for this month");
         } else {

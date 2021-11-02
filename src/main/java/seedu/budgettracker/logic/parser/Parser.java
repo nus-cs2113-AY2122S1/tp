@@ -194,7 +194,8 @@ public class Parser {
             boolean isYear = commandParams.matches("^[0-9]{4}$");
 
             if (!(isYear)) {
-                return new InvalidCommand(String.format(MESSAGE_WARNING_INCORRECT_YEAR_FORMAT, AddCommand.MESSAGE_USAGE));
+                return new InvalidCommand(String.format(MESSAGE_WARNING_INCORRECT_YEAR_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
             }
 
             String directoryOfRecordList = "./data/" + commandParams + ".txt";
