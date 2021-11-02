@@ -582,7 +582,9 @@ public class Parser {
      */
     public static boolean doesDateReallyExist(String dateInString) {
         String[] dateSplitUp = dateInString.split("-");
-        int day, month, year;
+        int day;
+        int month;
+        int year;
         try {
             day = Integer.parseInt(dateSplitUp[DAYDD]);
             month = Integer.parseInt(dateSplitUp[MONTHMM]);
@@ -606,7 +608,9 @@ public class Parser {
             LocalDate leapYearCheck = LocalDate.of(year, 1, 1);
             if (!leapYearCheck.isLeapYear() && day > 28) {
                 return false;
-            } else return (!leapYearCheck.isLeapYear() || day <= 29);
+            } else {
+                return (!leapYearCheck.isLeapYear() || day <= 29);
+            }
         }
 
         return true;
