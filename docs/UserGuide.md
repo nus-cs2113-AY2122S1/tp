@@ -139,6 +139,8 @@ Hope you enjoy your experience with TermiNUS!
 
 ## Command Syntax
 
+> 💡 Commands are **case-insensitive**, and may **ignore additional data** appended behind commands.
+
 As you use this guide, you will notice commands with specific brackets around some values such as `{}` and `<>`.
 
 The below table represents what each means.
