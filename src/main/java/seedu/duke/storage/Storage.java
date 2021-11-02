@@ -1,7 +1,8 @@
 package seedu.duke.storage;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import seedu.duke.data.*;
+import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
 import java.io.File;
@@ -72,7 +73,7 @@ public class Storage {
             catalogue.setItemsArrayList(itemsArrayList);
             ui.print(String.format(SUCCESS_DATA_LOADED, itemsArrayList.size()));
         } catch (JsonProcessingException e) {
-            //catalogue.setItemsArrayList(new ArrayList<Item>());
+            catalogue.setItemsArrayList(new ArrayList<Item>());
             ui.print(ERR_JSON_FORMAT);
             System.out.println(e);
         } catch (IOException e) {

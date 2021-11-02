@@ -8,15 +8,16 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import seedu.duke.data.*;
+import seedu.duke.data.Audio;
+import seedu.duke.data.Book;
+import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
+import seedu.duke.data.Magazine;
+import seedu.duke.data.Video;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,6 @@ public class JsonFactory {
     private static final String KEY_VIDEO = "video";
     private static final ObjectMapper mapper = new ObjectMapper();
     private final ObjectNode allItems;
-    //private DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(Item.dateFormat);
 
     public JsonFactory() {
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
