@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ClientPackageList {
     private static final String CLIENTPACKAGE_NOT_FOUND_MESSAGE
-            = "Client Package ID cannot be found. Please try another Client Package ID";
+            = "Client Package cannot be found. Please try another client package ID";
 
     private static ArrayList<ClientPackage> clientPackages;
     private static int clientPackageCount = 0;
