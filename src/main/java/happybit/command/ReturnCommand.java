@@ -1,5 +1,6 @@
 package happybit.command;
 
+import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
@@ -15,7 +16,11 @@ public class ReturnCommand extends Command {
      */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) {
-        // do nothing
+        try {
+            storage.export(goalList.getGoalList());
+        } catch (HaBitStorageException e) {
+            printManager.printError(e.getMessage());
+        }
     }
 
     /**
