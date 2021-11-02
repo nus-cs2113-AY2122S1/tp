@@ -65,7 +65,8 @@ public class AddStudentCommand extends Command {
         studentList.addStudent(student);
 
         storage.save(classList);
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, classId, student));
+        String message = String.format(MESSAGE_STUDENT_ADDED_FORMAT, classId, student);
+        ui.printMessage(message);
     }
 
     @Override
