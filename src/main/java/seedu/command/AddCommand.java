@@ -49,28 +49,37 @@ public class AddCommand extends Command {
             Semester semesterData = module.getSemester(semester);
             addLesson(semesterData, module);
         } else if (getFlag() == AddFlag.EVENT) {
-            TimetableUserItem event = getEvent();
-            timetable.addEvent(event.getDayOfWeek(), event);
-            timetable.addToEvents(event);
-            addUI.printEventMessage(event);
+            try {
+                TimetableUserItem event = getEvent();
+                timetable.addEvent(event.getDayOfWeek(), event);
+                timetable.addToEvents(event);
+                addUI.printEventMessage(event);
+            } catch (AddException e) {
+                throw e;
+            }
         }
     }
 
-    public TimetableUserItem getEvent() {
-        TimetableUserItem event = null;
+    public TimetableUserItem getEvent() throws AddException {
+        String description;
+        String date;
+        String startTime;
+        String endTime;
+        String location;
+        TimetableUserItem event;
         try {
-            String description = getDescription();
-            String date = getDate();
-            String startTime = getStartTime();
-            String endTime = getEndTime();
+            description = getDescription();
+            date = getDate();
+            startTime = getStartTime();
+            endTime = getEndTime();
             verifyCorrectTime(startTime, endTime);
-            String location = getLocation();
+            location = getLocation();
             event = new TimetableUserItem(description, date, startTime, endTime, location);
             verifyNoConflict(event);
+            return event;
         } catch (AddException e) {
-            e.printMessage();
+            throw e;
         }
-        return event;
     }
 
     public void verifyNoConflict(TimetableUserItem event) throws AddException {
@@ -78,6 +87,7 @@ public class AddCommand extends Command {
             throw new AddException("Selected timeslot is occupied, please delete before proceeding");
         }
     }
+
     public String getLocation() {
         return addUI.getReply(FIFTH_QN).trim();
     }

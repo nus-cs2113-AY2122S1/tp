@@ -248,10 +248,11 @@ public class AddUI {
     public String getReply(String question) {
         System.out.print(question);
         String input = in.nextLine();
-        while (input.isEmpty()) {
-            input = in.next();
+        if (input.equals("")) {
+            return "";
+        } else {
+            return input;
         }
-        return input;
     }
 
     public void printEventMessage(TimetableUserItem event) {
