@@ -20,7 +20,7 @@ public class Parser {
     }
 
     public static boolean hasListTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("list /t");
+        return arg.trim().equalsIgnoreCase("list /t");
     }
 
     public static boolean hasListAttendanceKeyword(String arg) {
@@ -185,10 +185,10 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim();
+                name = words[wordIndex].trim().toUpperCase();
                 break;
             case "/a":
-                time = words[wordIndex].trim();
+                time = words[wordIndex].trim().toUpperCase();
                 break;
             case "/v":
                 venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);

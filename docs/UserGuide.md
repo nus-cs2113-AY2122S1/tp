@@ -8,9 +8,14 @@ you may have in order to help you organise your CCA's timetable.
 
 **CCA Manager** is designed for users who are familiar with Command Line Interface (CLI) operations.
 
-- [Pre-requisites](#pre-requisites)
-- [Commands](#commands)
-- [Command Summary](#command-summary)
+* [Pre-requisites](#pre-requisites)
+* [Commands](#commands)
+  * [add](#add)
+  * [list](#list)
+  * [delete](#delete)
+  * [edit](#edit)
+  * [find](#find)
+* [Command Summary](#command-summary)
 
 ## Pre-requisites - _Things to prepare before you start using CCA Manager_
 1. CCA Manager runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
@@ -30,7 +35,7 @@ you may have in order to help you organise your CCA's timetable.
    ```
 
 ## Commands 
-### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) |
+### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) | [find](#find)
 
 ### Add
 **CCA Manager** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
@@ -41,11 +46,14 @@ as any training-related information regarding your CCA's venue bookings and timi
       * `/m` adds member-related information.
         * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
+          * Please note that the student number of each entry must be _unique_. Different member entries with the same student number is not allowed.
         * use `/g` to input _gender_ of your member. Either _M_ for male and _F_ for female.
         * use `/p` to input _phone number_ of your member.
       * `/t` adds training-related information.
         * use `/n` to input _name_ of the training entry.
+          * Please note that the training name of each entry must be _unique_. Different training entries with the same training name is not allowed.
         * use `/a` to input _timing_ of the training entry.
+          * CCA Manager stores timing as a _String_ to allow for relative timing (E.g. _next monday_, _after next CCA meeting_, etc.)
         * use `/v` to input _venue_ of the training entry.
       * `/att` adds attendance-related information.
         * use `/m` to input _name_ of your member.
@@ -53,7 +61,7 @@ as any training-related information regarding your CCA's venue bookings and timi
         * use `/d` to input _attendance status_ of your member for the particular training, 1 for present and 0 for absent.
     * **Format:**
       * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE_NUMBER>]
-      * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
+      * add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
       * add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]
     * **Examples:**
       - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
@@ -66,7 +74,7 @@ as any training-related information regarding your CCA's venue bookings and timi
    Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
    
    Added a Training entry:
-   Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
+   Training Name: WEEKLY DECEMBER TRAINING 2 | Venue: MPSH2 | Time: 12 DEC 2022
    
    Added an Attendance entry:
    Name: Mark | Training Name: Monday Training | Present: [1]
@@ -81,22 +89,23 @@ kinds of entries you may want to list out, which are your member, training and a
       * `/m` lists members and member related information.
       * `/t` lists trainings and training related information.
       * `/att </t TRAINING_NAME>` lists attendance entries, each consisting of a member and whether they attended a particular training.
+      * Please note that the command to type must strictly follow the above format. E.g. `list /t example` will not be accepted.
    * Format: list [/m] [/t] [/att]
-   * **Examples:**
-      - `list /m`
-      - `list /t`
-      - `list /att /t Monday Training`
+      * **Examples:**
+       - `list /m`
+       - `list /t`
+       - `list /att /t Monday Training`
    
-   * **Expected Output:**
-   ```
-   [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
-    ```
-    ```
-   [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
-    ```
-    ```
-   [1] Name: Mark | Training Name: Monday Training | Present: [1]
-    ```
+      * **Expected Output:**
+      ```
+      [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
+     ```
+     ```
+      [1] Training Name: WEEKLY DECEMBER TRAINING 2 | Venue: MPSH 2 | Time: 12 DEC 2022
+     ```
+     ```
+      [1] Name: Mark | Training Name: Monday Training | Present: [1]
+     ```
  
 ### Delete
 **CCA Manager** has a delete function which allows you to remove any members who have left the CCA, trainings which have been
@@ -121,7 +130,7 @@ allowing for a simple way to tidy up your file entries.
    ```
    ```
     You have removed training entry:
-    Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
+    Training Name: WEEKLY DECEMBER TRAINING 2 | Venue: MPSH 2 | Time: 12 DEC 2022
    ```
    ```
     You have removed attendance entry:
@@ -151,6 +160,18 @@ This means that you will not have to delete the entry and then add a new one lat
     [1] Training Name: Weekly December Training 3 | Venue: MPSH 3 | Time: 13 Dec 2022
    ```
 
+### Find
+**CCA Manager** allows you to search for a specific entry by typing in a _keyword_ with the find function.
+
+5. `find` Searches for entries based on the keyword given.
+   * The keyword should be related to the name of the member / training
+   * `/m <MEMBER_NAME_KEYWORD>` finds ALL entries with the MEMBER_NAME_KEYWORD in it.
+     * For example, if you type `find /m jon`, `JON TAN` and `JON BOVI` will be found, but `JOHN LIM` will not be matched
+   * `/t <TRAINING_NAME_KEYWORD>` finds ALL entries with the TRAINING_NAME_KEYWORD in it.
+   * The keyword is not case-sensitive
+   * **Examples:**
+     * `find /m juan`
+     * `find /t SuNdAy`
 
 ## Command Summary
 
@@ -166,4 +187,6 @@ Action| Syntax |Remarks|
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>] OR <MEMBER_NAME> OR <TRAINING_NAME>| Get the index by calling `list /att`
 |edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
 |edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
+| find member| find [/m <MEMBER_NAME>] | Searches for valid entries based on member name
+| find training| find [/t <TRAINING_NAME>] | Searches for valid entries based on training name
 |list| list [/m] [/t] [/att /t <TRAINING_NAME>]| `/m` for Member, `/t` for Training, `/att` for Attendance
