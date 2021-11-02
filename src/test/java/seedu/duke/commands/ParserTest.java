@@ -12,7 +12,11 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
     TextUI ui = new TextUI();
@@ -184,6 +188,7 @@ class ParserTest {
             assertEquals("  (!) Item is not on loan!", e.getMessage());
         }
     }
+
     @Test
     public void parse_unres_UnreserveCommandObject() {
         Boolean isSameObject = parser.parse("unres 5555") instanceof UnreserveCommand;
