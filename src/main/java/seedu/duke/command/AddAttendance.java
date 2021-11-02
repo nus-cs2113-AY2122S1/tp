@@ -32,7 +32,7 @@ public class AddAttendance {
      * @param attendanceList Contains all attendance objects added.
      * @param attendance Attendance object to be added.
      */
-    public AddAttendance(AttendanceList attendanceList, Attendance attendance, MemberList members,
+    public AddAttendance(AttendanceList attendanceList, Attendance attendance, MemberList members, 
                          TrainingList trainings) {
         try {
             boolean validAttendance = verifyAttendanceDetails(attendance, members, trainings, attendanceList);
@@ -44,8 +44,6 @@ public class AddAttendance {
         } catch (InvalidAddAttendanceException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
     /**
