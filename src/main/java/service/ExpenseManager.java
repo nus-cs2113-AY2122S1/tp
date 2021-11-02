@@ -13,6 +13,7 @@ import java.util.Date;
 import static constants.WarningMessage.expenseNearingBudgetWarning;
 import static constants.WarningMessage.budgetNowZeroWarning;
 import static constants.WarningMessage.expenseExceedBudgetWarning;
+import static constants.ErrorMessage.cannotFindSuchItemErrorMsg;
 
 public class ExpenseManager implements LoadableManager {
 
@@ -20,7 +21,7 @@ public class ExpenseManager implements LoadableManager {
     private double warningAmt = 100.0;
     private static ExpenseManager expenseMgr;
     private final String fileLabel;
-    private final String expenseListHeader = String.format("%s | %-25s | %-10s | %-8s | %-10s",
+    private final String expenseListHeader = String.format("%-5s | %-25s | %-10s | %-8s | %-10s",
             "Id.", "Name", "Value", "Date", "Category");
 
     private ExpenseManager() {
@@ -71,7 +72,11 @@ public class ExpenseManager implements LoadableManager {
     }
 
     public void deleteExpense(String expenseName) {
-        ExpenseList.deleteExpense(expenseName);
+        boolean isSuccess = ExpenseList.deleteExpense(expenseName);
+        if (!isSuccess) {
+            Ui ui = Ui.getUi();
+            ui.printMessage(cannotFindSuchItemErrorMsg);
+        }
     }
 
     public void deleteExpense(int expenseNumber) {
@@ -93,11 +98,12 @@ public class ExpenseManager implements LoadableManager {
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
         for (int i = 0; i < expenses.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + expenses.get(i));
+            String expenseItem = String.format("%-5s %5s", (i + 1) + ".", "| " + expenses.get(i));
+            ui.printMessage(expenseItem);
         }
 
         String totalExpenseValue = Double.toString(ExpenseList.getRunningExpenseValue());
-        String totalExpenseValuePrintInfo = String.format("%s %32s", "Total:", totalExpenseValue);
+        String totalExpenseValuePrintInfo = String.format("%-5s %34s", "Total:", totalExpenseValue);
         ui.printMessage(totalExpenseValuePrintInfo);
     }
 
@@ -113,7 +119,9 @@ public class ExpenseManager implements LoadableManager {
         }
 
         for (int i = 0; i < expenseInCategory.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + expenseInCategory.get(i));
+            String expenseItemInCategory = String.format("%-5s %5s", (i + 1) + ".", "| "
+                    + expenseInCategory.get(i));
+            ui.printMessage(expenseItemInCategory);
         }
     }
 
