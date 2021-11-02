@@ -136,7 +136,7 @@ The **Sequence Diagram** below shows how the components interact with each other
 scenario where the **user inputs any valid command** in to the application.
 
 <p align="center">
-    <img src="images/AmosUMLDiagrams/SD_InputValidCommand.png">
+    <img src="images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
 
 ## 3.2 UI Component
