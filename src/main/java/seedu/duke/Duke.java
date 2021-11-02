@@ -4,6 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
 import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.TextUI;
 
 /**
@@ -13,6 +14,7 @@ public class Duke {
     private static TextUI ui;
     private static Catalogue catalogue;
     private static Parser parser;
+    private static Storage storage;
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -21,7 +23,9 @@ public class Duke {
         ui = new TextUI();
         catalogue = new Catalogue();
         parser = new Parser();
-
+        storage = new Storage(ui);
+        // Restore previous state of catalogue
+        storage.read(catalogue);
 
         // Continue to read, parse and execute commands until exit command is issued by user
         while (true) {
@@ -32,6 +36,9 @@ public class Duke {
             assert userCommand != null : "Parsed command returns null";
             // Executes logic of command
             userCommand.execute(ui, catalogue);
+            // Write current state of catalogue to data.json
+            storage.write(catalogue);
+
             // Check whether to exit program
             if (userCommand.isExit()) {
                 break;

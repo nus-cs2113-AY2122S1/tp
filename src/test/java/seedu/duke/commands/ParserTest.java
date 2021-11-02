@@ -151,7 +151,7 @@ class ParserTest {
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
         // add.execute(ui, catalogue);
-        Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins");
+        Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -170,7 +170,7 @@ class ParserTest {
     public void parse_edit_InvalidBookMarkerExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins");
+        Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -190,7 +190,8 @@ class ParserTest {
     public void parse_edit_InvalidAudioMarkerExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        Audio b = new Audio("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins", "5h");
+        Audio b = new Audio("The Hunger Games", "123", Status.AVAILABLE, null, null,
+                "Suzanne Collins", "5h");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -210,7 +211,7 @@ class ParserTest {
     public void parse_edit_InvalidVideoMarkerExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        Video b = new Video("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins", "5h");
+        Video b = new Video("The Hunger Games", "123", Status.AVAILABLE, null, null, "Suzanne Collins", "5h");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -230,7 +231,7 @@ class ParserTest {
     public void parse_edit_InvalidMagazineMarkerExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        Magazine b = new Magazine("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins", "2nd");
+        Magazine b = new Magazine("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins", "2nd");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {

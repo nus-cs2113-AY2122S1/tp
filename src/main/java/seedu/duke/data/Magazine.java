@@ -2,6 +2,8 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Magazine extends Item {
     private String publisher;
@@ -14,17 +16,26 @@ public class Magazine extends Item {
      * @param title  The title of the magazine.
      * @param id     The unique attribute of the magazine.
      * @param status The status of the magazine, can be either "Loaned" or "Available".
+     * @param loanee Person who has loaned or reserved the item
+     * @param dueDate Date when item should be returned.
      * @param publisher The publisher of the magazine.
      * @param edition The edition of the magazine.
      */
-    public Magazine(String title, String id, Status status, String publisher, String edition) {
-        super(title, id, status);
+    public Magazine(String title, String id, Status status, String loanee, LocalDate dueDate,
+                    String publisher, String edition) {
+        super(title, id, status, loanee, dueDate);
         this.publisher = publisher;
         this.edition = edition;
     }
 
     /**
-     * Getter method that returns publisher attribute.
+     * Default constructor for Magazine class.
+     */
+    public Magazine() {
+    }
+
+    /**
+     * Gets publisher attribute.
      * @return String Publisher of the magazine.
      */
     public String getPublisher() {
@@ -32,7 +43,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Getter method that returns edition attribute.
+     * Gets edition attribute.
      * @return String Edition of the magazine.
      */
     public String getEdition() {
@@ -40,7 +51,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Setter method that sets publisher attribute.
+     * Sets publisher attribute.
      * @param publisher The publisher of the magazine.
      */
     public void setPublisher(String publisher) {
@@ -48,7 +59,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Setter method that sets edition attribute.
+     * Sets edition attribute.
      * @param edition The edition of the magazine.
      */
     public void setEdition(String edition) {
@@ -56,7 +67,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Convert the magazine object to string type.
+     * Converts the magazine object to string type.
      * @return A string that represents a magazine object.
      */
     @Override

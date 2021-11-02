@@ -1,0 +1,40 @@
+{
+  "audio" : [ {
+    "title" : "Thriller",
+    "id" : "5920",
+    "status" : "AVAILABLE",
+    "artist" : "Michael Jackson",
+    "duration" : "42:16"
+  }, {
+    "title" : "title 1",
+    "id" : "12039",
+    "status" : "AVAILABLE",
+    "artist" : "artist1",
+    "duration" : "11:11"
+  } ],
+  "book" : [ {
+    "title" : "To Kill a Mockingbird",
+    "id" : "2551",
+    "status" : "AVAILABLE",
+    "author" : "Harper Lee"
+  } ],
+  "item" : [ {
+    "title" : "something general",
+    "id" : "9999",
+    "status" : "AVAILABLE"
+  } ],
+  "magazine" : [ {
+    "title" : "Time Magazine",
+    "id" : "58720a",
+    "status" : "AVAILABLE",
+    "publisher" : "Time USA",
+    "edition" : "oct252021"
+  } ],
+  "video" : [ {
+    "title" : "Casino Royale",
+    "id" : "095680",
+    "status" : "AVAILABLE",
+    "publisher" : "Sony Pictures",
+    "duration" : "144 minutes"
+  } ]
+}
