@@ -7,14 +7,16 @@ public class CommandFactory {
 
     public Command getCommand(String commandType) {
         switch (commandType) {
-        case "time":
-            return new TimeGameCommand();
-        case "word":
-            return new WordGameCommand();
+        case "game":
+            return new GameCommand();
         case "content":
             return new ContentCommand();
         case "error":
             return new ErrorCommand();
+        case "history":
+            return new HistoryCommand();
+        case "clear":
+            return new ClearCommand();
         case "bye":
             return new ExitCommand();
         default:

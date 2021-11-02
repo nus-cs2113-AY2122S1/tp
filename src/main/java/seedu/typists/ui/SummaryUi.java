@@ -1,5 +1,7 @@
 package seedu.typists.ui;
 
+import seedu.typists.game.GameRecord;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ import java.util.logging.ConsoleHandler;
 
 import static seedu.typists.common.Messages.SUMMARY;
 
-public class SummaryUi {
+public class SummaryUi extends TextUi {
 
     private static final Logger LOGGER = Logger.getLogger(TextUi.class.getName());
 
@@ -32,6 +34,7 @@ public class SummaryUi {
         assert summary.get("timeElapsed") instanceof Double;
         assert summary.get("gameMode") instanceof String;
         assert summary.get("wordsPerMinute") instanceof Double;
+        printHeader();
         printOverview(
                 (Double) summary.get("timeElapsed"),
                 (String) summary.get("gameMode"),
@@ -50,6 +53,19 @@ public class SummaryUi {
                 (Integer) summary.get("totalWordCount"));
         assert summary.get("errorWords") instanceof List;
         printErrorWords((ArrayList<String>) summary.get("errorWords"));
+    }
+
+    public static void displaySummary(GameRecord gameRecord) {
+        printOverview(gameRecord.getTimeElapsed(),
+                gameRecord.getGameMode(),
+                gameRecord.getWpm());
+        printErrorStatistics(gameRecord.getErrorWordCount(),
+                gameRecord.getErrorWordPercentage(),
+                gameRecord.getTotalWordCount());
+        printSuccessStatistics(gameRecord.getCorrectWordCount(),
+                gameRecord.getCorrectWordPercentage(),
+                gameRecord.getTotalWordCount());
+        printErrorWords(gameRecord.getErrorWords());
     }
 
     private static void printErrorStatistics(int errorWordCount, double errorWordPercentage, int totalWordCount) {
@@ -75,7 +91,6 @@ public class SummaryUi {
         System.out.print("Mistakes: ");
         if (errorWords.size() == 0) {
             System.out.print("No words typed wrongly.\n");
-
             return;
         }
         for (int i = 0; i < errorWords.size(); i++) {
@@ -83,21 +98,22 @@ public class SummaryUi {
             if (i % 8 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(errorWords.get(i));
+            System.out.print(errorWords.get(i).trim());
             if (i != (errorWords.size() - 1)) {
                 System.out.print("|");
             }
         }
-        if ((errorWords.size() - 1) % 8 != 0) {
-            System.out.print("\n");
-        }
+        System.out.print("\n");
     }
 
     private static void printOverview(double timeElapsed, String gameMode, double wpm) {
-        System.out.print(SUMMARY + '\n');
         System.out.print("Game Mode: " + gameMode + '\n');
         System.out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         System.out.print("Total Time taken for the game: " + String.format("%.2f", timeElapsed) + " seconds\n");
+    }
+
+    private static void printHeader() {
+        System.out.print(SUMMARY + '\n');
     }
 
     public static void setUpLog() {

@@ -16,7 +16,7 @@ public class Main {
     /**
      * Version info of the program.
      */
-    public static final String VERSION = "Typist - Version 1.0";
+    public static final String VERSION = "Typist - Version 2.0";
     public static final int LINE_LENGTH = 10;
     public static Content content;
     public static TextUi uiBot;
@@ -41,11 +41,10 @@ public class Main {
     public void runCommandLoop() {
         CommandFactory cmdFactory = new CommandFactory();
         String command;
-        ArrayList<String> args;
         do {
             String[] input = read().split(" ");
             command = input[0];
-            args = new ArrayList<String>(Arrays.asList(Arrays.copyOfRange(input,1,input.length)));
+            ArrayList<String> args = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(input, 1, input.length)));
             Command c = cmdFactory.getCommand(input[0]);
             if (c != null) {
                 c.run(args);
@@ -53,8 +52,6 @@ public class Main {
         } while (!command.equals("bye"));
     }
 
-    public void exit() {
-    }
 
     /**
      * Runs the program until termination.

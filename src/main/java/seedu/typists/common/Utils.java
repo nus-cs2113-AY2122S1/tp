@@ -1,8 +1,13 @@
 package seedu.typists.common;
 
+import seedu.typists.exception.ExceedRangeException;
+import seedu.typists.exception.FaultyInputException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility methods.
@@ -31,6 +36,54 @@ public class Utils {
             }
         }
         return wordLines;
+    }
+
+    /**
+     * get one line that is supposed to be displayed at one time of game.
+     *
+     * @param wordLists content in the form of arraylist of words
+     * @param wordsPerLine number of words to be displayed
+     * @param row current row in the content
+     **/
+    public static String[] getDisplayLines(ArrayList<String> wordLists, int wordsPerLine, int row)
+            throws ExceedRangeException {
+        int startIndex = (row - 1) * wordsPerLine;
+        assert startIndex >= 0 : "word index should be non-negative";
+        String[] line = new String[wordsPerLine];
+
+        try {
+            for (int i = 0; i < wordsPerLine; i++) {
+                line[i] = wordLists.get(startIndex + i);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new ExceedRangeException();
+        }
+        return line;
+    }
+
+    /** same as getDisplayLines but added remove null feature. **/
+    public static String[] getDisplayLinesWithoutNull(ArrayList<String> wordLists, int wordsPerLine, int row)
+            throws ExceedRangeException {
+        int startIndex = (row - 1) * wordsPerLine;
+        assert startIndex >= 0 : "word index should be non-negative";
+        String[] line = new String[wordsPerLine];
+
+        try {
+            for (int i = 0; i < wordsPerLine; i++) {
+                if (startIndex + i > wordLists.size() - 1) {
+                    break;
+                }
+                line[i] = wordLists.get(startIndex + i);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new ExceedRangeException();
+        }
+
+        //remove null elements
+        line = Arrays.stream(line)
+                .filter(s -> (s != null && s.length() > 0))
+                .toArray(String[]::new);
+        return line;
     }
 
     /** same function as getWordLines, but the param is ArrayList not string. */
