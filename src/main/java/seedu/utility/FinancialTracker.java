@@ -5,7 +5,9 @@ import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 import seedu.exceptions.ExpenseEntryNotFoundException;
+import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeEntryNotFoundException;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.datetools.DateOperator;
 
 import java.time.LocalDate;
@@ -18,9 +20,10 @@ import java.util.stream.Collectors;
  * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
  */
 public class FinancialTracker {
+    private static final double TOTAL_EXPENSE_LIMIT = 100000000000.00;
+    private static final double TOTAL_INCOME_LIMIT = 100000000000.00;
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
-    private double balance;
     private CurrencyType currency = CurrencyType.SGD;
 
     /**
@@ -32,30 +35,42 @@ public class FinancialTracker {
     }
 
     /**
-     * Returns balance of the financial tracker.
+     * Returns balance of the financial tracker which is totalincome - totalexpense.
      *
      * @return Balance of the financial tracker.
      */
-    public double getBalance() {
-        return balance;
+    public double calculateBalance() {
+        return getTotalIncome() - getTotalExpense();
     }
     
-    public void addExpense(Expense expense) {
+    public void addExpense(Expense expense) throws ExpenseOverflowException {
         int expenseSize = 0;
         assert (expenseSize = expenses.size()) >= 0;
+        if (isOverflowedExpense(expense)) {
+            throw new ExpenseOverflowException(Messages.EXPENSE_OVERFLOW_ERROR);
+        }
         expenses.add(expense);
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
-        balance -= expense.getValue();
     }
 
-    public void addIncome(Income income) {
+    private boolean isOverflowedExpense(Expense expense) throws ExpenseOverflowException {
+        return expense.getValue() + getTotalExpense() > TOTAL_EXPENSE_LIMIT;
+    }
+
+    public void addIncome(Income income) throws IncomeOverflowException {
         int incomeSize = 0;
         assert (incomeSize = incomes.size()) >= 0;
+        if (isOverflowedIncome(income)) {
+            throw new IncomeOverflowException(Messages.INCOME_OVERFLOW_ERROR);
+        }
         incomes.add(income);
         assert !incomes.isEmpty();
         assert incomes.size() > incomeSize;
-        balance += income.getValue();
+    }
+
+    private boolean isOverflowedIncome(Income income) throws IncomeOverflowException {
+        return income.getValue() + getTotalIncome() > TOTAL_INCOME_LIMIT;
     }
 
     private int indexOffset(int index) {
@@ -65,7 +80,6 @@ public class FinancialTracker {
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
             Expense removedExpense =  expenses.remove(indexOffset(expenseIndex));
-            balance += removedExpense.getValue();
             return removedExpense;
         } catch (IndexOutOfBoundsException e) {
             throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
@@ -75,7 +89,6 @@ public class FinancialTracker {
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
         try {
             Income removedIncome = incomes.remove(indexOffset(incomeIndex));
-            balance -= removedIncome.getValue();
             return removedIncome;
         } catch (IndexOutOfBoundsException e) {
             throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
@@ -224,7 +237,7 @@ public class FinancialTracker {
                 .collect(Collectors.toList());
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
-            monthlyBreakdown.add(getMonthlyIncome(i,yearlyAccumulatedIncome));
+            monthlyBreakdown.add(getMonthlyIncome(i, yearlyAccumulatedIncome));
         }
         return monthlyBreakdown;
     }
@@ -271,6 +284,5 @@ public class FinancialTracker {
     public void clearAllEntries() {
         expenses.clear();
         incomes.clear();
-        balance = 0;
     }
 }

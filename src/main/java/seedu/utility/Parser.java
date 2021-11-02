@@ -47,14 +47,20 @@ import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeDescriptionException;
 import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.InvalidInputAmountValueException;
 import seedu.exceptions.InvalidSettingsDataException;
+import seedu.exceptions.InvalidThresholdValueException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static seedu.utility.datetools.DateOperator.isValidDateRange;
 
 public class Parser {
 
@@ -74,6 +80,12 @@ public class Parser {
                     + " a/(?<amount>[^/]+)"
                     + " c/(?<category>[^/]+)");
 
+    private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE =
+            Pattern.compile("d/(?<description>[^/]+)"
+                    + " a/(?<amount>[^/]+)"
+                    + " c/(?<category>[^/]+)"
+                    + " da/(?<date>.+)");
+
     /**
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
@@ -83,6 +95,11 @@ public class Parser {
                     + " a/(?<amount>[^/]+)"
                     + " c/(?<category>[^/]+)");
 
+    private static final Pattern ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE =
+            Pattern.compile("d/(?<description>[^/]+)"
+                    + " a/(?<amount>[^/]+)"
+                    + " c/(?<category>[^/]+)"
+                    + " da/(?<date>.+)");
     /**
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
@@ -136,6 +153,10 @@ public class Parser {
     private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
     private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
 
+    public static final List<String> multiplePartCommands = Arrays.asList(ADD_EXPENSE_KEYWORD, ADD_INCOME_KEYWORD,
+            DELETE_EXPENSE_KEYWORD, DELETE_INCOME_KEYWORD, FIND_KEYWORD, EXPENSE_RANGE_KEYWORD, INCOME_RANGE_KEYWORD,
+            SET_BUDGET_KEYWORD, SET_THRESHOLD_KEYWORD, CONVERT_CURRENCY_KEYWORD, CHECK_BUDGET_KEYWORD);
+    
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
@@ -143,15 +164,13 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
+    private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR
+            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" 
+            + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
+            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
-    //    private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR 
-    //            + "(?<budget>.+)");
-    private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR 
-            + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)" 
-            + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)" + DATA_SEPARATOR 
-            + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
-    
     private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final double INPUT_AMOUNT_LIMIT = 1000000000;
 
     /**
      * Parses user input into command for execution.
@@ -170,6 +189,10 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
+        if (multiplePartCommands.contains(commandWord) && arguments.isEmpty()) {
+            return new InvalidCommand(Messages.MISSING_PARAMETERS_MESSAGE);
+        }
+        
         if (isExpenseRelatedCommand(commandWord)) {
             return prepareExpenseRelatedCommand(commandWord, arguments);
         } else if (isIncomeRelatedCommand(commandWord)) {
@@ -210,7 +233,15 @@ public class Parser {
     private Command prepareExpenseRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case ADD_EXPENSE_KEYWORD:
-            return prepareAddExpense(arguments);
+            final Matcher matcherWithoutDate = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
+            final Matcher matcherWithDate = ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE.matcher(arguments);
+            if (matcherWithoutDate.matches()) {
+                return prepareAddExpense(matcherWithoutDate);
+            } else if (matcherWithDate.matches()) {
+                return prepareAddExpenseWithDate(matcherWithDate);
+            } else {
+                return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+            }
         case DELETE_EXPENSE_KEYWORD:
             return prepareDeleteExpense(arguments);
         case LIST_EXPENSE_KEYWORD:
@@ -227,7 +258,15 @@ public class Parser {
     private Command prepareIncomeRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case ADD_INCOME_KEYWORD:
-            return prepareAddIncome(arguments);
+            final Matcher matcherWithoutDate = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
+            final Matcher matcherWithDate = ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE.matcher(arguments);
+            if (matcherWithoutDate.matches()) {
+                return prepareAddIncome(matcherWithoutDate);
+            } else if (matcherWithDate.matches()) {
+                return prepareAddIncomeWithDate(matcherWithDate);
+            } else {
+                return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+            }
         case DELETE_INCOME_KEYWORD:
             return prepareDeleteIncome(arguments);
         case LIST_INCOME_KEYWORD:
@@ -287,7 +326,10 @@ public class Parser {
             LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
             LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return new TotalIncomeBetweenCommand(startDate, endDate);
+            if (isValidDateRange(startDate,endDate)) {
+                return new TotalIncomeBetweenCommand(startDate, endDate);
+            }
+            return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
         }
@@ -303,7 +345,10 @@ public class Parser {
             LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
             LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return new TotalExpenseBetweenCommand(startDate, endDate);
+            if (isValidDateRange(startDate,endDate)) {
+                return new TotalExpenseBetweenCommand(startDate, endDate);
+            } 
+            return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
         }
@@ -363,20 +408,31 @@ public class Parser {
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
-    private Command prepareAddExpense(String arguments) {
-        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
-        if (isMatch(matcher)) {
-            try {
-                double expenseAmount = extractExpenseAmount(matcher);
-                String expenseDescription = extractExpenseDescription(matcher);
-                ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-                Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
-                return new AddExpenseCommand(expense);
-            } catch (InputException e) {
-                return new InvalidCommand(e.getMessage());
-            }
+    private Command prepareAddExpense(Matcher matcher) {
+        try {
+            double expenseAmount = extractExpenseAmount(matcher);
+            String expenseDescription = extractExpenseDescription(matcher);
+            ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
+            Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
+            assert !expenseCategory.equals(ExpenseCategory.NULL);
+            return new AddExpenseCommand(expense);
+        } catch (InputException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareAddExpenseWithDate(Matcher matcher) {
+        try {
+            double expenseAmount = extractExpenseAmount(matcher);
+            String expenseDescription = extractExpenseDescription(matcher);
+            ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
+            LocalDate expenseDate = extractExpenseDate(matcher);
+            Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
+            assert !expenseCategory.equals(ExpenseCategory.NULL);
+            return new AddExpenseCommand(expense);
+        } catch (InputException e) {
+            return new InvalidCommand(e.getMessage());
+        }
     }
 
     private boolean isMatch(Matcher matcher) {
@@ -416,25 +472,41 @@ public class Parser {
         return expenseDescription;
     }
 
-    private double extractExpenseAmount(Matcher matcher) throws InvalidExpenseAmountException {
+    private double extractExpenseAmount(Matcher matcher) 
+            throws InvalidExpenseAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseExpenseAmount(userGivenAmount);
+        double expenseAmount = parseExpenseAmount(userGivenAmount);
+        if (expenseAmount > INPUT_AMOUNT_LIMIT) { 
+            throw new InvalidInputAmountValueException(Messages.INVALID_EXPENSE_VALUE);
+        }
+        return expenseAmount;
     }
 
-    private Command prepareAddIncome(String arguments) {
-        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
-        if (isMatch(matcher)) {
-            try {
-                double incomeAmount = extractIncomeAmount(matcher);
-                String incomeDescription = extractIncomeDescription(matcher);
-                IncomeCategory incomeCategory = extractIncomeCategory(matcher);
-                Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
-                return new AddIncomeCommand(income);
-            } catch (InputException e) {
-                return new InvalidCommand(e.getMessage());
-            }
+    private Command prepareAddIncome(Matcher matcher) {
+        try {
+            double incomeAmount = extractIncomeAmount(matcher);
+            String incomeDescription = extractIncomeDescription(matcher);
+            IncomeCategory incomeCategory = extractIncomeCategory(matcher);
+            Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
+            assert !incomeCategory.equals(IncomeCategory.NULL);
+            return new AddIncomeCommand(income);
+        } catch (InputException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareAddIncomeWithDate(Matcher matcher) {
+        try {
+            double incomeAmount = extractIncomeAmount(matcher);
+            String incomeDescription = extractIncomeDescription(matcher);
+            IncomeCategory incomeCategory = extractIncomeCategory(matcher);
+            LocalDate incomeDate = extractIncomeDate(matcher);
+            Income income = new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
+            assert !incomeCategory.equals(IncomeCategory.NULL);
+            return new AddIncomeCommand(income);
+        } catch (InputException e) {
+            return new InvalidCommand(e.getMessage());
+        }
     }
 
     private IncomeCategory extractIncomeCategory(Matcher matcher) throws
@@ -466,9 +538,14 @@ public class Parser {
         return incomeDescription;
     }
 
-    private double extractIncomeAmount(Matcher matcher) throws InvalidIncomeAmountException {
+    private double extractIncomeAmount(Matcher matcher) 
+            throws InvalidIncomeAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
-        return parseIncomeAmount(userGivenAmount);
+        double incomeAmount = parseIncomeAmount(userGivenAmount);
+        if (incomeAmount > INPUT_AMOUNT_LIMIT) {
+            throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
+        } 
+        return incomeAmount;
     }
 
     /**
@@ -578,8 +655,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (expenseAmount <= 0) {
+        if (expenseAmount < 0.01) {
             throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isNaN(expenseAmount) || Double.isInfinite(expenseAmount)) {
+            throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
         assert expenseAmount > 0;
         return expenseAmount;
@@ -592,8 +671,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
-        if (incomeAmount <= 0) {
+        if (incomeAmount < 0.01) {
             throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isNaN(incomeAmount) || Double.isInfinite(incomeAmount)) {
+            throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
         assert incomeAmount > 0;
         return incomeAmount;
@@ -604,10 +685,10 @@ public class Parser {
         try {
             deleteExpenseIndex = Integer.parseInt(userGivenIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidExpenseIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+            throw new InvalidExpenseIndexException(Messages.N0N_INTEGER_INDEX_MESSAGE);
         }
         if (deleteExpenseIndex <= 0) {
-            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
         }
         return deleteExpenseIndex;
     }
@@ -617,12 +698,32 @@ public class Parser {
         try {
             deleteIncomeIndex = Integer.parseInt(userGivenIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidIncomeIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+            throw new InvalidIncomeIndexException(Messages.N0N_INTEGER_INDEX_MESSAGE);
         }
         if (deleteIncomeIndex <= 0) {
-            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
         }
         return deleteIncomeIndex;
+    }
+    
+    private double parseThresholdValue(String userGivenThreshold) throws InvalidThresholdValueException {
+        double thresholdValue;
+        try {
+            thresholdValue = Double.parseDouble(userGivenThreshold);
+        } catch (NumberFormatException e) {
+            throw new InvalidThresholdValueException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if ((thresholdValue < 0) | (thresholdValue > 1)) {
+            throw new InvalidThresholdValueException(Messages.INVALID_THRESHOLD_MESSAGE);
+        } else if (Double.isNaN(thresholdValue) || Double.isInfinite(thresholdValue)) {
+            throw new InvalidThresholdValueException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        return thresholdValue;
+    }
+    
+    private double extractThresholdValue(Matcher matcher) throws InvalidThresholdValueException {
+        String userGivenThreshold = matcher.group("threshold").trim();
+        return parseThresholdValue(userGivenThreshold);
     }
 
     public String convertExpenseToData(Expense expense) {
@@ -697,6 +798,8 @@ public class Parser {
         }
         if (budgetAmount < 0) {
             return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
 
         String expenseCategory = matcher.group("category").trim().toUpperCase();
@@ -757,24 +860,20 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
-        String thresholdString = matcher.group("threshold").trim();
         double thresholdValue;
         try {
-            thresholdValue = Double.parseDouble(thresholdString);
-        } catch (NumberFormatException e) {
-            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+            thresholdValue = extractThresholdValue(matcher);
+        } catch (InvalidThresholdValueException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        if ((thresholdValue < 0) | (thresholdValue > 1)) {
-            return new InvalidCommand(Messages.INVALID_THRESHOLD_MESSAGE);
-        }
-
+        
         return new SetThresholdCommand(thresholdValue);
     }
     
     public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager) {
         CurrencyType currency = financialTracker.getCurrency();
         StringBuilder data = new StringBuilder(currency.toString() + ",");
-        
+        data.append(budgetManager.getThreshold()).append(",");
         for (ExpenseCategory category : ExpenseCategory.values()) {
             // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
             if (category == ExpenseCategory.OVERALL) {
@@ -786,7 +885,7 @@ public class Parser {
         }
         return data.toString();
     }
-    
+
     public ArrayList<Double> convertDataToBudgetSettings(String data) throws NumberFormatException,
             NullPointerException, InvalidSettingsDataException {
         ArrayList<Double> budgetSettings = new ArrayList<>();
@@ -803,7 +902,7 @@ public class Parser {
         }
         throw new InvalidSettingsDataException();
     }
-    
+
     public CurrencyType convertDataToCurrencySetting(String data) throws InvalidCurrencyTypeException,
             BlankCurrencyTypeException, InvalidSettingsDataException {
         final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
@@ -811,6 +910,15 @@ public class Parser {
             return extractCurrencyType(matcher);
         }
         throw new InvalidSettingsDataException();
-        
+
+    }
+    
+    public double convertDataToThresholdSetting(String data) throws InvalidThresholdValueException, 
+            InvalidSettingsDataException {
+        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            return extractThresholdValue(matcher);
+        }
+        throw new InvalidSettingsDataException();
     }
 }

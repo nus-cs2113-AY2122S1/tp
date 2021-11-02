@@ -4,17 +4,18 @@ package seedu.utility;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StonksGraph {
     private static final int ROWS = 20;
     private static final int COLS = 100;
     private static final int ROWS_OFFSET = ROWS - 1;
     private static final int COLS_OFFSET = COLS - 1;
-    private static final int BAR_VALUE = 200;
     private static final char INCOME_BAR = 'o';
     private static final char EXPENSE_BAR = '#';
     private static final char X_AXIS_CHAR = '~';
     private static final char SEPARATOR_CHAR = '-';
+    private static final int MAX_NUMBER_OF_DIGITS = 30;
     private final char[][] grid = new char [ROWS][COLS];
     private static final char BORDER_CHAR = 'x';
     private static final char NON_BORDER_CHAR = ' ';
@@ -24,7 +25,7 @@ public class StonksGraph {
      */
     public StonksGraph(FinancialTracker finances) {
         setBorder();
-        setBalance(finances.getBalance());
+        setBalance(finances.calculateBalance());
         drawReport(finances);
     }
     
@@ -45,14 +46,19 @@ public class StonksGraph {
     }
 
     private void setBalance(double amount) {
-        String stringAmount = String.format("%.2f", amount);
-        writeToGraph(2,4,"Account Balance: $");
-        writeToGraph(2,22, stringAmount);
+        String stringAmount = String.format("$%.2f", amount);
+        if (stringAmount.length() > MAX_NUMBER_OF_DIGITS) {
+            stringAmount = "Too Large!";
+        }
+        writeToGraph(2,4,"Account Balance: ");
+        writeToGraph(2,21,  stringAmount);
     }
+
 
 
     private void writeToGraph(int rowCount, int colCount, String toAdd) {
         int stringLength = toAdd.length();
+
         int i = 0;
         while (i < stringLength) {
             grid[rowCount][colCount] = toAdd.charAt(i);
@@ -128,12 +134,26 @@ public class StonksGraph {
         int currentMonthInIndex = currentMonthInIndex();
         double currentMonthExpense = monthExpenseBreakdowns.get(currentMonthInIndex);
         double currentMonthIncome = monthIncomeBreakdowns.get(currentMonthInIndex);
-        String currentMonthExpenseAsString =
-                String.format("Current month (" + currentMonth + ") total expense: " + "$%.2f", currentMonthExpense);
-        String currentMonthIncomeAsString =
-                String.format("Current month (" + currentMonth + ") total income: " + "$%.2f", currentMonthIncome);
-        writeToGraph(3,4, currentMonthExpenseAsString);
-        writeToGraph(4,4, currentMonthIncomeAsString);
+
+        String stringCurrentMonthExpense = String.format("$%.2f", currentMonthExpense);
+        String stringCurrentMonthIncome = String.format("$%.2f", currentMonthIncome);
+
+        if (stringCurrentMonthExpense.length() > MAX_NUMBER_OF_DIGITS) {
+            stringCurrentMonthExpense = "Too Large!";
+        }
+
+        if (stringCurrentMonthIncome.length() > MAX_NUMBER_OF_DIGITS) {
+            stringCurrentMonthIncome = "Too Large!";
+        }
+
+
+        String currentExpenseString = "Current month (" + currentMonth + ") total expense: ";
+        String currentIncomeString = "Current month (" + currentMonth + ") total income: ";
+        writeToGraph(3,4, currentExpenseString);
+        writeToGraph(3, 44, stringCurrentMonthExpense);
+        writeToGraph(4,4, currentIncomeString);
+        writeToGraph(4, 43, stringCurrentMonthIncome);
+
     }
 
     /**
@@ -246,12 +266,20 @@ public class StonksGraph {
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(currentYear());
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(currentYear());
+        
+        ArrayList<Double> values = new ArrayList<>();
+        values.addAll(monthlyExpenseBreakdowns);
+        values.addAll(monthlyIncomeBreakdowns);
+        double max = Collections.max(values);
+        int barValue = (int)(max / 10);
+
+
         drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
                 int monthIndex = getMonth(y) - 1;
-                int noOfIncomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
-                int noOfExpenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
+                int noOfIncomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / barValue);
+                int noOfExpenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / barValue);
                 drawBar(x, y, noOfIncomeBar, noOfExpenseBar);
             }
         }
