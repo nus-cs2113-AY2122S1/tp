@@ -134,7 +134,7 @@ public class FinancialTracker {
     /**
      * Returns an ArrayList called incomes from FinancialTracker.
      *
-     * @return Return ArrayList with only income entries inside.
+     * @return Returns ArrayList with only income entries inside.
      */
     public ArrayList<Income> getIncomes() {
         assert incomes != null;
