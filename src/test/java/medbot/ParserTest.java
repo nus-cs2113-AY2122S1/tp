@@ -277,9 +277,11 @@ class ParserTest {
     }
 
 
+    /**
+     * Check if the parser for patient return the correct type of command.
+     */
     @Test
     void testParseCommandForPatient() {
-        //This test only check the type, not the value of the command
         Parser.setViewType(ViewType.PATIENT_INFO);
         assertSame(Parser.getViewType(), ViewType.PATIENT_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
@@ -306,9 +308,11 @@ class ParserTest {
         }
     }
 
+    /**
+     * Check if the parser for staff return the correct type of command.
+     */
     @Test
     void testParseCommandForStaff() {
-        //This test only check the type, not the value of the command
         Parser.setViewType(ViewType.MEDICAL_STAFF_INFO);
         assertSame(Parser.getViewType(), ViewType.MEDICAL_STAFF_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
@@ -333,13 +337,14 @@ class ParserTest {
                 assertEquals("Unable to parse command." + END_LINE, e.getMessage());
             }
         }
-        //Change View type back to Patient
         Parser.setViewType(ViewType.PATIENT_INFO);
     }
 
+    /**
+     * Check if the parser for appointment return the correct type of command.
+     */
     @Test
     void testParseCommandForAppointment() {
-        //This test only check the type, not the value of the command
         Parser.setViewType(ViewType.SCHEDULER);
         assertSame(Parser.getViewType(), ViewType.SCHEDULER);
         HashMap<String, Command> testCases = new HashMap<>();
@@ -361,7 +366,6 @@ class ParserTest {
                 assertEquals("Unable to parse command." + END_LINE, e.getMessage());
             }
         }
-        //Change View type back to Patient
         Parser.setViewType(ViewType.PATIENT_INFO);
     }
 
