@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
+
+package "ui" <<Frame>> #DDDDDD {
+    abstract class Ui {
+    + printIndex(int index, boolean println)
+    # stringPadder(String input, PaddingType type) : StringBuilder
+    }
+
+    class UiModule extends Ui{
+    + printModule(Module mod, int index, boolean printMC)
+    }
+
+    class UiMapping extends Ui {
+    + printMappingForList(ModuleMapping mm, int index)
+    + printMapping(ModuleMapping mm, int index)
+    }
+
+    class UiUniversity extends Ui {
+    + printUniversity(University uni, boolean printMC)
+    }
+
+    class UiInvalid extends Ui {
+    + printFindModNull()
+    + printFindUniNull()
+    }
+
+    class UiGeneral extends Ui {
+    + welcome
+    + printExit()
+    }
+}
+enum PaddingType <<enumeration>> {
+    INDEX,
+    MODULECODE,
+    MODULENAME,
+    UNIVERSITYNAME
+}
+
+@enduml

@@ -9,6 +9,7 @@ import seplanner.storage.Storage;
 import seplanner.ui.UiGeneral;
 import seplanner.universities.UniversityList;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Seplanner {
@@ -20,34 +21,39 @@ public class Seplanner {
         Storage storage = new Storage();
         try {
             Log.setupLogger();
-            UiGeneral.welcome();
-            ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
-            UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
-            UniversityList universitySelectedList = storage.readSelectedUniversityList(
-                    universityMasterList, moduleMasterList);
-            ModuleList moduleSelectedList = storage.readSelectedModuleList(
-                    moduleMasterList);
-            Parser mainParser = new Parser(universityMasterList, moduleMasterList,
-                    universitySelectedList, moduleSelectedList);
+            UiGeneral.printWelcome();
+            Parser mainParser = setupData(storage);
             Command cmd = null;
             do {
-                try {
-                    UiGeneral.printLineSeparator();
-                    System.out.println();
-                    UiGeneral.promptInput();
-                    String userInput = in.nextLine();
-                    cmd = mainParser.parseCommand(userInput);
-                    System.out.println();
-
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    System.out.println();
-
-                }
+                cmd = readInput(in, mainParser, cmd);
             } while (!(cmd instanceof ExitCommand));
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static Command readInput(Scanner in, Parser mainParser, Command cmd) {
+        try {
+            UiGeneral.printLineSeparator();
+            System.out.println();
+            UiGeneral.promptInput();
+            String userInput = in.nextLine();
+            cmd = mainParser.parseCommand(userInput);
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println();
+        }
+        return cmd;
+    }
+
+    private static Parser setupData(Storage storage) throws IOException {
+        ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
+        UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
+        UniversityList universitySelectedList = storage.readSelectedUniversityList(
+                universityMasterList, moduleMasterList);
+        ModuleList moduleSelectedList = storage.readSelectedModuleList(
+                moduleMasterList);
+        return new Parser(universityMasterList, moduleMasterList, universitySelectedList, moduleSelectedList);
     }
 }

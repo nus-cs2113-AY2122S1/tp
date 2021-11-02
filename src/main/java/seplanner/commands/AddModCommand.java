@@ -7,14 +7,11 @@ import seplanner.ui.UiModule;
 import java.io.IOException;
 
 public class AddModCommand extends Command {
-    private final Module moduleToAdd;
-    private final int moduleIndexToAdd;
 
     public AddModCommand(Module moduleToAdd, ModuleList moduleMasterList,
                          ModuleList moduleSelectedList) throws IOException {
 
-        this.moduleToAdd = moduleToAdd;
-        this.moduleIndexToAdd = moduleToAdd.getMasterListIndex(moduleMasterList);
+        int moduleIndexToAdd = moduleToAdd.getMasterListIndex(moduleMasterList);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;
