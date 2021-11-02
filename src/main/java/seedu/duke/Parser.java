@@ -379,17 +379,6 @@ public class Parser {
     }
 
     /**
-     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
-     * words are found, the user will be notified.
-     *
-     * @param attendanceList full list of attendance sheet.
-     * @param entry          user input
-     */
-    public static void findInAttendanceEntries(AttendanceList attendanceList, String entry) {
-        //Leave for v2.0, implement as class in commands package
-    }
-
-    /**
      * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
      * Otherwise, the full list will not be shown.
      *
@@ -425,7 +414,4 @@ public class Parser {
             Entry.addEntry(entry);
         }
     }
-
-
 }
-
