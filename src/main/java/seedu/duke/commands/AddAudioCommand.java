@@ -88,7 +88,7 @@ public class AddAudioCommand extends Command {
             ui.print(WARN_INVALID_ARGS);
         }
         try {
-            Audio newAudio = new Audio(title, id, status, artist, duration);
+            Audio newAudio = new Audio(title, id, status, null, null, artist, duration);
             catalogue.add(newAudio);
             ui.print(ADD_MESSAGE, newAudio);
         } catch (LibmgrException e) {

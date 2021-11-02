@@ -87,7 +87,7 @@ public class AddVideoCommand extends Command {
             ui.print(WARN_INVALID_ARGS);
         }
         try {
-            Video newVideo = new Video(title, id, status, publisher, duration);
+            Video newVideo = new Video(title, id, status, null, null, publisher, duration);
             catalogue.add(newVideo);
             ui.print(ADD_MESSAGE, newVideo);
         } catch (LibmgrException e) {

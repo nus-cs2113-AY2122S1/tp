@@ -16,7 +16,7 @@ public class Messages {
             + "      \\(   _.-\"  libmgr\n"
             + "       `--\""
             + "";
-    public static final String DIVIDER = "  ========================================";
+    public static final String DIVIDER = "  ===================================================================";
     public static final String WELCOME_MESSAGE = "Welcome to libmgr";
     public static final String EXIT_MESSAGE = "See you soon!";
     public static final String INVALID_VALUES = "  (!) Invalid/missing values";
@@ -85,7 +85,6 @@ public class Messages {
     // Invalid Formats
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm ID";
-
     public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
@@ -103,7 +102,6 @@ public class Messages {
             + "  (!) Format: edit ID [t|i|p|e]/ATTRIBUTE";
     public static final String EDIT_VIDEO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: edit ID [t|i|p|d]/ATTRIBUTE";
-
 
     // Generic Errors
     public static final String WARN_INVALID_ARGS = "  (*) Invalid arguments detected, ignoring them";
