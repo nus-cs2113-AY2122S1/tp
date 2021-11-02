@@ -399,6 +399,13 @@ public class Parser {
         Ui.printListAllMessage();
         Scanner userInput = new Scanner(System.in);
         String entry = userInput.nextLine();
+        while (!(entry.equals("y") || entry.equals("n"))) {
+            System.out.println("Please enter only a 'y' or 'n'.");
+            System.out.print("=> ");
+            if (userInput.hasNextLine()) {
+                entry = userInput.nextLine();
+            }
+        }
         if (entry.equals("y")) {
             Ui.printList(attendanceList);
         }
