@@ -24,7 +24,7 @@ public class Assessment implements ClassChecker {
      * @return true if valid, else false.
      */
     public static boolean isWeightageWithinRange(double weightage) {
-        return (weightage >= WEIGHTAGE_RANGE[0] && weightage <= WEIGHTAGE_RANGE[1]);
+        return (weightage > WEIGHTAGE_RANGE[0] && weightage <= WEIGHTAGE_RANGE[1]);
     }
 
     public String getName() {
