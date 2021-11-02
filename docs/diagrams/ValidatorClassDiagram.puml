@@ -7,6 +7,9 @@ skinparam classAttributeIconSize 0
 ' to join all the arrows
 skinparam groupInheritance 3
 
+!include style.puml
+
+skinparam classBackgroundColor COLOR_UTILITIES_BOX
 
 class "{abstract}\n MedicineValidator"{
     +containsInvalidParameterValues(): boolean &#123;abstract&#125;
