@@ -10,35 +10,34 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
-import taa.module.Module;
+import taa.teachingclass.TeachingClass;
 import taa.student.Student;
 import taa.student.StudentList;
-import taa.util.Util;
 
 import java.lang.reflect.Type;
 
-public class ModuleDeserializer extends StorageDeserializer implements JsonDeserializer<Module> {
-    private static final String MEMBER_CODE = "code";
+public class ClassObjectDeserializer extends StorageDeserializer implements JsonDeserializer<TeachingClass> {
+    private static final String MEMBER_ID = "id";
     private static final String MEMBER_NAME = "name";
     private static final String MEMBER_STUDENTLIST = "studentList";
     private static final String MEMBER_ASSESSMENTLIST = "assessmentList";
-    private static final String[] COMPULSORY_MEMBERS = {MEMBER_CODE, MEMBER_NAME};
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_ID, MEMBER_NAME};
 
     @Override
-    public Module deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public TeachingClass deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 
-        JsonElement codeJson = jsonObject.get(MEMBER_CODE);
-        String code = codeJson.getAsString();
+        JsonElement idJson = jsonObject.get(MEMBER_ID);
+        String id = idJson.getAsString();
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
 
-        Module module = new Module(code, name);
+        TeachingClass teachingClass = new TeachingClass(id, name);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(StudentList.class, new StudentListDeserializer());
@@ -50,7 +49,7 @@ public class ModuleDeserializer extends StorageDeserializer implements JsonDeser
             StudentList studentList = gson.fromJson(studentListJson, StudentList.class);
             if (studentList != null) {
                 for (Student student : studentList.getStudents()) {
-                    module.getStudentList().addStudent(student);
+                    teachingClass.getStudentList().addStudent(student);
                 }
             }
         }
@@ -60,15 +59,15 @@ public class ModuleDeserializer extends StorageDeserializer implements JsonDeser
             AssessmentList assessmentList = gson.fromJson(assessmentListJson, AssessmentList.class);
             if (assessmentList != null) {
                 for (Assessment assessment : assessmentList.getAssessments()) {
-                    module.getAssessmentList().addAssessment(assessment);
+                    teachingClass.getAssessmentList().addAssessment(assessment);
                 }
             }
         }
 
-        if (!module.verify()) {
+        if (!teachingClass.verify()) {
             return null;
         }
 
-        return module;
+        return teachingClass;
     }
 }

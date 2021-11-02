@@ -9,45 +9,45 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import taa.module.ModuleList;
-import taa.module.Module;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 
 import java.lang.reflect.Type;
 
-public class ModuleListDeserializer extends StorageDeserializer implements JsonDeserializer<ModuleList> {
-    private static final String MEMBER_MODULES = "modules";
-    private static final String[] COMPULSORY_MEMBERS = {MEMBER_MODULES};
+public class ClassListDeserializer extends StorageDeserializer implements JsonDeserializer<ClassList> {
+    private static final String MEMBER_CLASSES = "classes";
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_CLASSES};
 
     @Override
-    public ModuleList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public ClassList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         if (!hasMembers(jsonObject, COMPULSORY_MEMBERS)) {
             return null;
         }
 
-        JsonElement modulesJson = jsonObject.get(MEMBER_MODULES);
+        JsonElement modulesJson = jsonObject.get(MEMBER_CLASSES);
         if (!modulesJson.isJsonArray()) {
             return null;
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Module.class, new ModuleDeserializer());
+        gsonBuilder.registerTypeAdapter(TeachingClass.class, new ClassObjectDeserializer());
         Gson gson = gsonBuilder.create();
 
-        ModuleList moduleList = new ModuleList();
+        ClassList classList = new ClassList();
         JsonArray modulesJsonArray = modulesJson.getAsJsonArray();
         for (JsonElement moduleJson : modulesJsonArray) {
-            Module module = gson.fromJson(moduleJson, Module.class);
-            if (module != null) {
-                moduleList.addModule(module);
+            TeachingClass teachingClass = gson.fromJson(moduleJson, TeachingClass.class);
+            if (teachingClass != null) {
+                classList.addClass(teachingClass);
             }
         }
 
-        if (!moduleList.verify()) {
+        if (!classList.verify()) {
             return null;
         }
 
-        return moduleList;
+        return classList;
     }
 }

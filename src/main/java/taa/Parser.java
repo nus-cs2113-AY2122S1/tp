@@ -5,18 +5,18 @@ import taa.command.ArchiveCommand;
 import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.attendance.ListLessonAttendanceCommand;
-import taa.command.module.AddModuleCommand;
+import taa.command.teachingclass.AddClassCommand;
 import taa.command.student.AddStudentCommand;
 import taa.command.mark.AverageMarksCommand;
 import taa.command.Command;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
 import taa.command.mark.DeleteMarkCommand;
-import taa.command.module.DeleteModuleCommand;
+import taa.command.teachingclass.DeleteClassCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.assessment.EditAssessmentCommand;
 import taa.command.mark.EditMarkCommand;
-import taa.command.module.EditModuleCommand;
+import taa.command.teachingclass.EditClassCommand;
 import taa.command.student.EditStudentCommand;
 import taa.command.ExitCommand;
 import taa.command.student.FindStudentCommand;
@@ -24,7 +24,7 @@ import taa.command.HelpCommand;
 import taa.command.assessment.ListAssessmentsCommand;
 import taa.command.attendance.ListAttendanceCommand;
 import taa.command.mark.ListMarksCommand;
-import taa.command.module.ListModulesCommand;
+import taa.command.teachingclass.ListClassesCommand;
 import taa.command.student.ListStudentsCommand;
 import taa.command.mark.MedianMarkCommand;
 import taa.command.attendance.SetAttendanceCommand;
@@ -33,14 +33,23 @@ import taa.command.student.SortByScoresCommand;
 import taa.command.student.SetCommentCommand;
 import taa.command.student.DeleteCommentCommand;
 import taa.command.student.ListCommentCommand;
+import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
+    private static final String ARGUMENT_VALID_REGEX = "0-9a-zA-Z\\s";
+    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.'};
+
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
+
+    private static final String MESSAGE_FORMAT_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric "
+        + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -57,20 +66,20 @@ public class Parser {
             command = new ExitCommand(argument);
             break;
 
-        case Command.COMMAND_LIST_MODULES:
-            command = new ListModulesCommand(argument);
+        case Command.COMMAND_LIST_CLASSES:
+            command = new ListClassesCommand(argument);
             break;
 
-        case Command.COMMAND_ADD_MODULE:
-            command = new AddModuleCommand(argument);
+        case Command.COMMAND_ADD_CLASS:
+            command = new AddClassCommand(argument);
             break;
 
-        case Command.COMMAND_EDIT_MODULE:
-            command = new EditModuleCommand(argument);
+        case Command.COMMAND_EDIT_CLASS:
+            command = new EditClassCommand(argument);
             break;
 
-        case Command.COMMAND_DELETE_MODULE:
-            command = new DeleteModuleCommand(argument);
+        case Command.COMMAND_DELETE_CLASS:
+            command = new DeleteClassCommand(argument);
             break;
 
         case Command.COMMAND_ADD_STUDENT:
@@ -192,17 +201,19 @@ public class Parser {
     /**
      * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
      * e.g.
-     * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
+     * string: "add_class c/CS2113T-F12 n/Class F12", argumentKeys: {"c","n"}
      * Result: HashMap(
-     *             "c":"CS2113T",
-     *             "n":"Software Engineering and Object-oriented Programming"
+     *             "c":"CS2113T-F12",
+     *             "n":"Class F12"
      *         )
      *
      * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.
      * @return HashMap - argumentKey:argumentValue pair.
+     * @throws TaaException if there are any duplicated keys found within string or value is invalid.
      */
-    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys) {
+    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys)
+        throws TaaException {
         if (argumentKeys == null || argumentKeys.length == 0) {
             return new HashMap<>();
         }
@@ -210,14 +221,25 @@ public class Parser {
         String argumentString = " " + string;
         HashMap<String, Integer> argumentIndexMap = new HashMap<>();
         ArrayList<Integer> argumentIndexes = new ArrayList<>();
+        ArrayList<String> duplicatedKeys = new ArrayList<>();
         for (String key : argumentKeys) {
             String searchString = String.format(" %s/", key);
             int index = argumentString.indexOf(searchString);
             if (index != -1) {
                 argumentIndexMap.put(key, index);
                 argumentIndexes.add(index);
+
+                String trailingString = argumentString.substring(index + 3);
+                if (trailingString.contains(searchString)) {
+                    duplicatedKeys.add(key);
+                }
             }
         }
+
+        if (!duplicatedKeys.isEmpty()) {
+            throw new DuplicatedArgumentException(duplicatedKeys);
+        }
+
         Collections.sort(argumentIndexes);
 
         HashMap<String, String> result = new HashMap<>();
@@ -236,11 +258,70 @@ public class Parser {
             }
             value = value.trim();
 
-            if (!value.isEmpty()) {
-                result.put(key, value);
+            if (!isValueValid(value)) {
+                throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_VALUE, getSpecialCharactersAsString()));
             }
+
+            result.put(key, value);
         }
 
         return result;
+    }
+
+    public static boolean isValueValid(String value) {
+        if (value.isEmpty()) {
+            return true;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("^[");
+        stringBuilder.append(ARGUMENT_VALID_REGEX);
+        for (char c : VALID_SPECIAL_CHARACTERS) {
+            stringBuilder.append(convertToRegexPattern(c));
+        }
+        stringBuilder.append("]+$");
+        String regexStr = stringBuilder.toString();
+
+        Pattern pattern = Pattern.compile(regexStr);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.find();
+    }
+
+    private static String convertToRegexPattern(char c) {
+        boolean needEscape;
+        switch (c) {
+        case '^':
+        case '-':
+        case '[':
+        case ']':
+        case '.':
+            needEscape = true;
+            break;
+
+        default:
+            needEscape = false;
+        }
+
+        String patternStr;
+        if (needEscape) {
+            patternStr = String.format("\\%c", c);
+        } else {
+            patternStr = String.format("%c", c);
+        }
+
+        return patternStr;
+    }
+
+    private static String getSpecialCharactersAsString() {
+        char[] validSpecialCharacters = VALID_SPECIAL_CHARACTERS;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < validSpecialCharacters.length; i += 1) {
+            if (i > 0) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(validSpecialCharacters[i]);
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -2,8 +2,8 @@ package taa.command;
 
 //@@author leyondlee
 import taa.Ui;
+import taa.teachingclass.ClassList;
 import taa.exception.TaaException;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 
 public class ResetCommand extends Command {
@@ -27,8 +27,8 @@ public class ResetCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (moduleList.getSize() <= 0) {
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        if (classList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_DATA);
         }
 
@@ -37,9 +37,9 @@ public class ResetCommand extends Command {
 
         String userInput = ui.getUserInput(PROMPT_WITHIN_COMMAND, true);
         String message;
-        if (userInput.equals(CONFIRM_VALUE)) {
-            moduleList.deleteAllModules();
-            storage.save(moduleList);
+        if (userInput != null && userInput.equals(CONFIRM_VALUE)) {
+            classList.deleteAllClasses();
+            storage.save(classList);
 
             message = MESSAGE_DATA_REMOVED;
         } else {

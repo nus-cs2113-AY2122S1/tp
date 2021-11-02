@@ -1,5 +1,5 @@
-list_modules
-add_module c/CS2113T n/Software Engineering and Object-oriented Programming
-list_modules
+list_classes
+add_class i/CS2113T-F12 n/Tutorial Group F12
+list_classes
 invalid_command
 exit

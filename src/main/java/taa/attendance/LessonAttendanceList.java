@@ -39,7 +39,7 @@ public class LessonAttendanceList {
     /**
      * Adds the LessonAttendance into the LessonAttendanceList.
      *
-     * @param studentList  The list of students in the module.
+     * @param studentList  The list of students in the class.
      * @param lessonNumber The lesson number.
      */
     public void setLessonAttendances(StudentList studentList, int lessonNumber) {
