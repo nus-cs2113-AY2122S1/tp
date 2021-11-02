@@ -96,9 +96,6 @@ public class Entry {
                 String trainingToFind = Parser.getQuery(entry);
                 new FindTraining(trainings, trainingToFind);
                 break;
-            case FIND_ATTENDANCE_KEYWORD:
-                Parser.findInAttendanceEntries(attendanceList, entry);
-                break;
             case EDIT_TRAINING_KEYWORD:
                 trainingIndex = Parser.getIndex(entry);
                 TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);

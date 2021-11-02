@@ -1,3 +1,14 @@
 name,venue,time
+<<<<<<< HEAD
 WEEKLY FRIDAY TRAINING 2 (UPDATED),MPSH2,12 NOV 2021
 WEEKLY FRIDAY TRAINING 3,MPSH1,19 NOV 2021
+=======
+SUNDAY TRAINING,MPSH1,22OCT2021
+SUNDAY TRAINING 2,MPSH1,23OCT2021
+test training 1,POOL,20/1/1000       22:00
+test training 2,POOL,20/1/1000       22:00
+test training 3,POOL,20/1/1000       22:00
+test training 4,POOL,20/1/1000       22:00
+test training 5,POOL,20/1/1000       22:00
+test training 6,POOL,20/1/1000       22:00
+>>>>>>> 5d26e94fce41ea84e36f5ea45175fa79a89907c7

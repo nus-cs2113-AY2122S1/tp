@@ -18,6 +18,7 @@ public class AddAttendance {
     String emptyTrainingNameErrorMessage = "Blank training name provided. Please input a valid training name.";
     String invalidTrainingNameErrorMessage = "Invalid training. Please input an existing training.";
     String invalidAttendedErrorMessage = "Invalid status provided. Please enter 1 for present, 0 for absent.";
+    String duplicateEntryErrorMessage = "This attendance entry already exists. No duplicate entries allowed.";
 
     String validAttendedRegex = "^[1|0]";
 
@@ -34,7 +35,7 @@ public class AddAttendance {
     public AddAttendance(AttendanceList attendanceList, Attendance attendance, MemberList members, 
                          TrainingList trainings) {
         try {
-            boolean validAttendance = verifyAttendanceDetails(attendance, members, trainings);
+            boolean validAttendance = verifyAttendanceDetails(attendance, members, trainings, attendanceList);
             if (validAttendance) {
                 attendanceList.addAttendance(attendance);
                 Ui.printAddedAttendanceMessage(attendance);
@@ -43,8 +44,6 @@ public class AddAttendance {
         } catch (InvalidAddAttendanceException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
     /**
@@ -55,7 +54,8 @@ public class AddAttendance {
      * @return true if all parameters given are valid
      * @throws InvalidAddAttendanceException If there is an error with any of the parameters given.
      */
-    public boolean verifyAttendanceDetails(Attendance attendance, MemberList members, TrainingList trainings)
+    public boolean verifyAttendanceDetails(Attendance attendance, MemberList members, TrainingList trainings,
+                                           AttendanceList attendanceList)
         throws InvalidAddAttendanceException {
         memberName = attendance.getMemberName();
         trainingName = attendance.getTrainingName();
@@ -86,6 +86,17 @@ public class AddAttendance {
         boolean validAttended = presentOrAbsent.matches(validAttendedRegex);
         if (!validAttended) {
             throw new InvalidAddAttendanceException(invalidAttendedErrorMessage);
+        }
+
+        for (Attendance attendance1 : attendanceList.getAttendanceList()) {
+            boolean existingMember = attendance1.getMemberName().equals(memberName);
+            boolean existingTraining = attendance1.getTrainingName().equals(trainingName);
+            boolean existingEntry = existingMember && existingTraining;
+            if (!existingEntry) {
+                continue;
+            } else {
+                throw new InvalidAddAttendanceException(duplicateEntryErrorMessage);
+            }
         }
 
         return true;
