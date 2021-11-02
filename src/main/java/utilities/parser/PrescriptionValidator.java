@@ -27,6 +27,7 @@ public class PrescriptionValidator extends MedicineValidator {
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
+    @Override
     public boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
