@@ -77,14 +77,16 @@ public class Messages {
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
+    public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID MARKER/ATTRIBUTE";
     public static final String EDIT_AUDIO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID [t|i|a|d]/attribute";
+            + "  (!) Format: edit ID [t|i|a|d]/ATTRIBUTE";
     public static final String EDIT_BOOK_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID [t|i|a]/attribute";
+            + "  (!) Format: edit ID [t|i|a]/ATTRIBUTE";
     public static final String EDIT_MAGAZINE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID [t|i|p|e]/attribute";
+            + "  (!) Format: edit ID [t|i|p|e]/ATTRIBUTE";
     public static final String EDIT_VIDEO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID [t|i|p|d]/attribute";
+            + "  (!) Format: edit ID [t|i|p|d]/ATTRIBUTE";
 
 
     // Generic Errors
