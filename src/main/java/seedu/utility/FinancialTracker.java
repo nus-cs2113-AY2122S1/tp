@@ -132,7 +132,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Return an ArrayList called incomes from FinancialTracker.
+     * Returns an ArrayList called incomes from FinancialTracker.
      *
      * @return Return ArrayList with only income entries inside.
      */
