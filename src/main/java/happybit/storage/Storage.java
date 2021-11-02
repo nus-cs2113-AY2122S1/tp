@@ -5,11 +5,15 @@ import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.interval.Interval;
+import happybit.ui.PrintManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Storage class supports the import and export of user data.
+ */
 public class Storage {
     private static final String DEFAULT_DIR = "data";
     private static final String DEFAULT_FILEPATH = "data/habits.txt";
@@ -17,6 +21,7 @@ public class Storage {
     protected String filePath;
     protected String fileDir;
     protected Export export;
+    protected PrintManager printManager;
 
     public Storage() {
         this(DEFAULT_FILEPATH, DEFAULT_DIR);
@@ -25,15 +30,27 @@ public class Storage {
     public Storage(String filePath, String fileDir) {
         this.filePath = filePath;
         this.fileDir = fileDir;
-        export = new Export(this.filePath);
+        this.export = new Export(this.filePath);
+        this.printManager = new PrintManager();
     }
 
+    /**
+     * This method is automatically called everytime the program start up.
+     * It will import the data from storage file.
+     * @return a GoalList object
+     * @throws HaBitStorageException when errors occurred with the importing of data
+     */
     public GoalList load() throws HaBitStorageException {
         this.createFile(this.filePath, this.fileDir);
 
         return Import.importStorage(this.filePath);
     }
 
+    /**
+     * Checks if the storage file exists. If it does not, it will create one for the user.
+     * @param filePath the file path where the storage file is to be found
+     * @param fileDir the folder where the storage file is supposed to be stored at
+     */
     protected void createFile(String filePath, String fileDir) {
         File storageDir = new File(fileDir);
         File storageFile = new File(filePath);
