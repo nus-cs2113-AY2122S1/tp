@@ -18,3 +18,4 @@ bin/
 /src/main/java/seedu/duke/KeyPair
 /data/
 /log/
+/text-ui-test/data/
