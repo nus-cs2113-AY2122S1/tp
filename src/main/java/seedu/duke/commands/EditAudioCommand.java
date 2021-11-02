@@ -146,6 +146,7 @@ public class EditAudioCommand extends Command {
                 catalogue.checkDuplicateID(id);
             } catch (LibmgrException e) {
                 ui.print(e.getMessage());
+                return;
             }
             toEdit.setID(id);
         }
