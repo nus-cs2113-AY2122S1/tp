@@ -70,7 +70,7 @@ public class ArchiveOrderCommand extends Command {
         Storage storage = Storage.getInstance();
         storage.archiveData(filteredOrders);
         storage.saveData(medicines);
-        ui.print("Archived delivered orders from " + DateParser.dateToString(orderArchiveDate));
+        ui.print("Archived " + filteredOrders.size() + " delivered orders from " + DateParser.dateToString(orderArchiveDate));
         logger.log(Level.INFO, "Successful archive of order");
     }
 
