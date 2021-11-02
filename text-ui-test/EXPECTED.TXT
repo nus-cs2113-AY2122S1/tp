@@ -13,4 +13,3 @@ What would you like to do?
 [1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
 => You have successfully exited the programme.
 _____________________________________________________
-
