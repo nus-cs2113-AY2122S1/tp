@@ -5,3 +5,6 @@ expensive item;200.0;29/10/21;elect
 watermelon;30.0;29/10/21;fruits
 item;170.0;29/10/21;unknown
 computer;100.0;29/10/21;electronics
+negative;-20.0;02/11/21;-
+new item;-20.0;02/11/21;.
+last item 000;100.0;02/11/21;overflow
