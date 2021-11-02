@@ -1,6 +1,7 @@
 package happybit.command;
 
 import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
@@ -19,5 +20,11 @@ public class UpdateGoalEndDateCommand extends UpdateCommand {
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         goalList.updateGoalEndDate(goalIndex, newDate, printManager);
+
+        try {
+            storage.export(goalList.getGoalList());
+        } catch (HaBitStorageException e) {
+            printManager.printError(e.getMessage());
+        }
     }
 }

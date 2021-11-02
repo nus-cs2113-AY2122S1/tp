@@ -33,6 +33,7 @@ public class DoneHabitCommand extends Command {
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         goalList.doneHabitFromGoal(goalIndex, habitIndex, printManager);
+
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
