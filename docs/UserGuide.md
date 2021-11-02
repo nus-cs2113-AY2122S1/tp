@@ -302,7 +302,7 @@ Initial stock records:
 > :information_source: Note:
 > * Examples stated below are **independent** from each other.
 
-Example 1 (Updating parameters containing `n/NAME`):
+Example 1 (Updating with medication name present):
 `update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/body infections m/100`
 
 Expected Output 1:
@@ -318,7 +318,7 @@ Stock Id changed from:
 +----+--------+--------+----------+-------------+-----------------+--------------+
 ```
 
-Example 2 (Updating parameters **without** `n/NAME`):
+Example 2 (Updating only price and description):
 `update i/1 p/30 d/fever`
 
 Expected Output 2:
@@ -486,7 +486,7 @@ Initial prescription records:
 > :information_source: Note:
 > * Examples stated below are **independent** from each other.
 
-Example 1 (Update prescription for `q/QUANTITY`): 
+Example 1 (Update prescribed quantity): 
 `updateprescription i/1 q/5`
 
 Expected Output 1:
@@ -515,7 +515,7 @@ Updated stock record for Example 1:
 +----+---------+--------+----------+-------------+-------------+--------------+
 ```
 
-Example 2 (Update prescription for `s/STAFF`):
+Example 2 (Update staff who prescribed the medication):
 `updateprescription i/1 s/jack`
 
 Expected Output 2:
