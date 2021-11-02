@@ -5,6 +5,7 @@ import medbot.Scheduler;
 import medbot.ui.Ui;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
+import medbot.utilities.ViewType;
 
 public class AddAppointmentCommand extends Command {
     Appointment appointment = null;
@@ -16,7 +17,8 @@ public class AddAppointmentCommand extends Command {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.addAppointment(appointment);
-        ui.printOutput("Appointment added: " + appointment);
+        String addAppointmentMessage = Ui.getAddMessage(ViewType.SCHEDULER, appointment.toString());
+        ui.printOutput(addAppointmentMessage);
     }
 
 }

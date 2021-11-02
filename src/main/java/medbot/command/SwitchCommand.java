@@ -9,15 +9,21 @@ import medbot.utilities.ViewType;
 
 public class SwitchCommand extends Command {
     private ViewType newViewType = null;
+    private boolean isChanged = false;
 
-    public SwitchCommand(ViewType viewType) {
+    public SwitchCommand(ViewType viewType, boolean isChanged) {
         newViewType = viewType;
+        this.isChanged = isChanged;
     }
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        Parser.setViewType(newViewType);
-        ui.clearConsoleFromIde();
-        ui.printSwitchedViewMessage(newViewType);
+        if (isChanged) {
+            Parser.setViewType(newViewType);
+            Ui.clearConsoleFromIde();
+            ui.printSwitchedViewMessage(newViewType);
+        } else {
+            ui.printUnchangedViewMessage(newViewType);
+        }
     }
 }

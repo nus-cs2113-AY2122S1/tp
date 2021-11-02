@@ -14,7 +14,7 @@ public class ShowStaffCommand extends ShowPersonCommand {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.showStaff(personId);
-        String showStaffMessage = Ui.getShowPersonMessage(personId, ViewType.PATIENT_INFO);
+        String showStaffMessage = Ui.getShowPersonMessage(personId, ViewType.MEDICAL_STAFF_INFO);
         ui.printOutput(showStaffMessage);
     }
 }

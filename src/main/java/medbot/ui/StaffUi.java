@@ -39,8 +39,8 @@ public class StaffUi extends PersonUi {
         return getShowHelpMessage(STAFF);
     }
 
-    public static String getAddStaffMessage(int id) {
-        return getAddPersonMessage(STAFF, id);
+    public static String getAddStaffMessage(String staffInfo) {
+        return getAddPersonMessage(STAFF, staffInfo);
     }
 
     public static String getDeleteStaffMessage(int id) {

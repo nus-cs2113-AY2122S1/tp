@@ -21,12 +21,22 @@ class UiTest {
 
     @Test
     public void testPrintAddPatientMessage() {
-        int id = 2;
-        String expectedPatientOutput = "Added patient with patient ID: 2" + END_LINE;
+        String expectedPatientOutput = "Added patient with Patient ID: 1 " + END_LINE
+                + "IC: " + "S8712345G" + END_LINE
+                + "Name: " + "Alice Tan" + END_LINE
+                + "H/P: " + "81234567" + END_LINE
+                + "Email: " + "alicetan@example.com" + END_LINE
+                + "Address: " + "Blk 123 Bishan St 12 #05-39" + END_LINE;
+        String patientInfo = "Patient ID: 1 " + END_LINE
+                + "IC: " + "S8712345G" + END_LINE
+                + "Name: " + "Alice Tan" + END_LINE
+                + "H/P: " + "81234567" + END_LINE
+                + "Email: " + "alicetan@example.com" + END_LINE
+                + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualPatientOutput = Ui.getAddMessage(id, ViewType.PATIENT_INFO);
-            assertEquals(actualPatientOutput, expectedPatientOutput);
+            String actualPatientOutput = Ui.getAddMessage(ViewType.PATIENT_INFO, patientInfo);
+            assertEquals(expectedPatientOutput, actualPatientOutput);
 
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
@@ -35,12 +45,22 @@ class UiTest {
 
     @Test
     public void testPrintAddStaffMessage() {
-        int id = 2;
-        String expectedStaffOutput = "Added staff with staff ID: 2" + END_LINE;
+        String expectedStaffOutput = "Added staff with Staff ID: 3 " + END_LINE
+                + "IC: " + "S8712345G" + END_LINE
+                + "Name: " + "Alice Tan" + END_LINE
+                + "H/P: " + "81234567" + END_LINE
+                + "Email: " + "alicetan@example.com" + END_LINE
+                + "Address: " + "Blk 123 Bishan St 12 #05-39" + END_LINE;
+        String staffInfo = "Staff ID: 3 " + END_LINE
+                + "IC: " + "S8712345G" + END_LINE
+                + "Name: " + "Alice Tan" + END_LINE
+                + "H/P: " + "81234567" + END_LINE
+                + "Email: " + "alicetan@example.com" + END_LINE
+                + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualStaffOutput = Ui.getAddMessage(id, ViewType.MEDICAL_STAFF_INFO);
-            assertEquals(actualStaffOutput, expectedStaffOutput);
+            String actualStaffOutput = Ui.getAddMessage(ViewType.MEDICAL_STAFF_INFO, staffInfo);
+            assertEquals(expectedStaffOutput, actualStaffOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
         }
@@ -48,12 +68,18 @@ class UiTest {
 
     @Test
     public void testPrintAddScheduleMessage() {
-        int id = 2;
-        String expectedScheduleOutput = "Added schedule with schedule ID: 2" + END_LINE;
+        String expectedScheduleOutput = "Added appointment with Appointment Id: 3" + END_LINE
+                + "Patient ID: 1" + END_LINE
+                + "Staff ID: 2" + END_LINE
+                + "Date/Time: 11 Dec 21 1400HRS" + END_LINE;
+        String appointmentInfo = "Appointment Id: 3" + END_LINE
+                + "Patient ID: 1" + END_LINE
+                + "Staff ID: 2" + END_LINE
+                + "Date/Time: 11 Dec 21 1400HRS" + END_LINE;
 
         try {
-            String actualScheduleOutput = Ui.getAddMessage(id, ViewType.SCHEDULER);
-            assertEquals(actualScheduleOutput, expectedScheduleOutput);
+            String actualScheduleOutput = Ui.getAddMessage(ViewType.SCHEDULER, appointmentInfo);
+            assertEquals(expectedScheduleOutput, actualScheduleOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
         }
@@ -89,7 +115,7 @@ class UiTest {
     @Test
     public void testPrintDeleteScheduleMessage() {
         int id = 2;
-        String expectedScheduleOutput = "Schedule with id 2 deleted from system." + END_LINE;
+        String expectedScheduleOutput = "Appointment with id 2 deleted from system." + END_LINE;
 
         try {
             String actualScheduleOutput = Ui.getDeleteMessage(id, ViewType.SCHEDULER);
@@ -154,7 +180,7 @@ class UiTest {
     }
 
     @Test
-    public void testEditScheduleMessage() {
+    public void testEditAppointmentMessage() {
         Patient patient = new Patient();
         patient.setId(2);
 
@@ -171,8 +197,11 @@ class UiTest {
         scheduler.addPatient(patient);
         scheduler.addStaff(staff);
 
-        String expectedOutput = "The information of schedule with ID 1 has been edited to:" + END_LINE + END_LINE
-                + "Appointment Id: 1 Date/Time: 01 Nov 21 0800HRS Patient ID: 2 Staff ID: 1" + "\n"
+        String expectedOutput = "The information of appointment with ID 1 has been edited to:" + END_LINE + END_LINE
+                + "Appointment Id: 1" + END_LINE
+                + "Patient ID: 2" + END_LINE
+                + "Staff ID: 1" + END_LINE
+                + "Date/Time: 01 Nov 21 0800HRS" + END_LINE
                 + END_LINE;
         try {
             scheduler.addAppointment(appointment);

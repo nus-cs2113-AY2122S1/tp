@@ -6,7 +6,7 @@ import medbot.list.ListItemType;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.person.Staff;
-import medbot.utilities.Trio;
+import medbot.utilities.Triple;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public abstract class PersonStorage extends Storage {
     @Override
     protected ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException {
 
-        Trio<Integer, Boolean, ArrayList<String>> personDetails = parseStorageLine(storageLine);
+        Triple<Integer, Boolean, ArrayList<String>> personDetails = parseStorageLine(storageLine);
         if (personDetails == null) {
             return null;
         }
@@ -76,7 +76,7 @@ public abstract class PersonStorage extends Storage {
      * @param storageLine a line from the storage file
      * @return listItem details, consisting of person ID and other parameters
      */
-    protected Trio<Integer, Boolean, ArrayList<String>> parseStorageLine(String storageLine)
+    protected Triple<Integer, Boolean, ArrayList<String>> parseStorageLine(String storageLine)
             throws MedBotException {
         if (storageLine.isBlank()) {
             return null;
@@ -100,7 +100,8 @@ public abstract class PersonStorage extends Storage {
         String isHiddenParameter = listItemParameters[listItemParametersLastIndex];
         boolean isHidden = convertStorageHideParameterToBoolean(isHiddenParameter);
 
-        return new Trio<>(listItemId, isHidden, prefixPlusListItemParameters);
+
+        return new Triple<>(listItemId, isHidden, prefixPlusListItemParameters);
     }
 
 

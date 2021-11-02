@@ -30,7 +30,7 @@ public abstract class Person implements ListItem {
     private static final int LENGTH_ADDRESS_COLUMN = 20;
     private static final int LENGTH_EMPTY_STRING = 0;
 
-    private int personId;
+    private int personId = 0;
     protected String icNumber = "";
     protected String name = "";
     protected String phoneNumber = "";

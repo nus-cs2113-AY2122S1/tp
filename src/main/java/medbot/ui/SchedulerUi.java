@@ -87,16 +87,16 @@ public class SchedulerUi {
                 + TABLE_ROW_SEPARATOR;
     }
 
-    public static String getAddScheduleMessage(int id) {
-        return "Added schedule with schedule ID: " + id + END_LINE;
+    public static String getAddAppointmentMessage(String appointmentInfo) {
+        return "Added appointment with " + appointmentInfo;
     }
 
-    public static String getDeleteScheduleMessage(int id) {
-        return "Schedule with id " + id + " deleted from system." + END_LINE;
+    public static String getDeleteAppointmentMessage(int id) {
+        return "Appointment with id " + id + " deleted from system." + END_LINE;
     }
 
-    public static String getEditScheduleMessage(int id, String info) {
-        return "The information of schedule with ID " + id + " has been edited to:" + END_LINE + END_LINE
+    public static String getEditAppointmentMessage(int id, String info) {
+        return "The information of appointment with ID " + id + " has been edited to:" + END_LINE + END_LINE
                 + info + END_LINE;
     }
 
