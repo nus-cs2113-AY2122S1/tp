@@ -79,6 +79,22 @@ public class Ui {
         System.out.println("You have removed training entry: " + "\n" + training.toString());
     }
 
+    public static void printQuestionToList() {
+        System.out.println("Please enter only a 'y' or 'n'.");
+    }
+
+    public static void printArrow() {
+        System.out.print("=> ");
+    }
+
+    public static void printIndexError() {
+        System.out.println("Index must be a number");
+    }
+
+    public static void printMissingTraining() {
+        System.out.println("No such Training Name is in our attendance records.");
+    }
+
     public static void printDeletedAttendanceMessage(Attendance attendance) {
         System.out.println("You have removed attendance entry: " + "\n" + attendance);
     }
@@ -154,6 +170,8 @@ public class Ui {
                 + "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"
                 + "    list [/m] [/t] \n"
                 + "    list [/att /t <TRAINING_NAME>] \n"
+                + "    find [/m <MEMBER_NAME>]  \n"
+                + "    find [/t <TRAINING_NAME>] \n"
                 + "    bye -- exits the programme.");
     }
 }
