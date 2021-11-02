@@ -1,3 +1,3 @@
 search CG
-show CS2113T
+check CS2040
 exit
