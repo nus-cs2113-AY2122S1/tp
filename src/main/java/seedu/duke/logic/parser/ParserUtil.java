@@ -22,10 +22,6 @@ public class ParserUtil {
         return CommandType.of(params[0]);
     }
 
-    public static int parseToOneIndex(int index) {
-        return index + 1;
-    }
-
     public static int parseToZeroIndex(int index) {
         return index - 1;
     }
@@ -40,6 +36,7 @@ public class ParserUtil {
     }
 
     //@@author Roycius
+
     /**
      * Checks if the number of items in an array of Strings is within a certain range.
      *
@@ -63,9 +60,9 @@ public class ParserUtil {
     }
 
     public static String parseTime(String param) throws ParseException {
-        String time = param.strip();
+        String time;
         try {
-            time = LocalTime.parse(param).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            time = LocalTime.parse(param.strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
         }
@@ -92,9 +89,20 @@ public class ParserUtil {
         return priority;
     }
 
+    /**
+     * Parses a string into a HashMap with flags as the key and the corresponding
+     * parameters as the value. Flags need to have at least one space behind them
+     * to be recognised from string to be parsed.
+     * Example flag: "-f"
+     *
+     * @param userResponse the string to be parsed for flags
+     * @param flags all the flags to check for
+     * @return the HashMap
+     * @throws ParseException when there is a duplicate flag in the userResponse
+     */
     public static HashMap<String, String> getFlagMap(String userResponse, String... flags) throws ParseException {
         //make hashmap of flags to index position of flags
-        HashMap<String, Integer> flagToPosMap = new HashMap<String, Integer>();
+        HashMap<String, Integer> flagToPosMap = new HashMap<>();
         for (String flag : flags) { //for each possible flag
             int index = userResponse.indexOf(flag + " ");
             if (index > -1) { //if flag exists
@@ -102,14 +110,15 @@ public class ParserUtil {
                 flagToPosMap.put(flag, index);
             }
         }
+
         //make hashmap of flags to parameter of flags
-        ArrayList<Integer> posList = new ArrayList<Integer>(flagToPosMap.values()); //list of positions of all flags
+        ArrayList<Integer> posList = new ArrayList<>(flagToPosMap.values()); //list of positions of all flags
         Collections.sort(posList);
-        HashMap<String, String> flagToParamMap = new HashMap<String, String>();
+        HashMap<String, String> flagToParamMap = new HashMap<>();
         for (String flag : flagToPosMap.keySet()) {
             int pos = flagToPosMap.get(flag);
             int indexInPosList = posList.indexOf(pos);
-            if (indexInPosList < posList.size() - 1) { //if not last element in posList array
+            if (indexInPosList < posList.size() - 1) { //if not the last element of posList array
                 int nextPos = posList.get(indexInPosList + 1);
                 flagToParamMap.put(flag, userResponse.substring(pos + 3, nextPos).strip());
             } else {
