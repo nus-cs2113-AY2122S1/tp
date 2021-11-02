@@ -30,6 +30,7 @@ public class Messages {
             + "  Add a new book item: add b t/TITLE i/ID a/AUTHOR" + System.lineSeparator()
             + "  Add a new magazine item: add m t/TITLE i/ID p/PUBLISHER e/EDITION" + System.lineSeparator()
             + "  Add a new video item: add v t/TITLE i/ID p/PUBLISHER e/DURATION" + System.lineSeparator()
+            + "  Add a new general item: add i t/TITLE i/ID" + System.lineSeparator()
             + "  List out all items: list" + System.lineSeparator()
             + "  List out loaned items due today: deadline today" + System.lineSeparator()
             + "  List out overdue items: deadline overdue" + System.lineSeparator()
@@ -40,7 +41,11 @@ public class Messages {
             + "  Unreserve an item: unres ID" + System.lineSeparator()
             + "  Loan out an item: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)" + System.lineSeparator()
             + "  Return a loaned item: return ID" + System.lineSeparator()
-            + "  Edit details of an existing item: edit ID MARKER/new attribute" + System.lineSeparator()
+            + "  Edit details of an existing audio item: edit ID [t|i|a|d]/ATTRIBUTE" + System.lineSeparator()
+            + "  Edit details of an existing book item: edit ID [t|i|a]/ATTRIBUTE" + System.lineSeparator()
+            + "  Edit details of an existing magazine item: edit ID [t|i|p|e]/ATTRIBUTE" + System.lineSeparator()
+            + "  Edit details of an existing video item: edit ID [t|i|p|d]/ATTRIBUTE" + System.lineSeparator()
+            + "  Edit details of an existing general item: edit ID [t|i]/ATTRIBUTE" + System.lineSeparator()
             + "  Remove an existing item: rm ID" + System.lineSeparator()
             + "  Exits the program: exit";
 
