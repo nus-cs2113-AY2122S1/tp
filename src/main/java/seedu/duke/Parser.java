@@ -231,14 +231,20 @@ public class Parser {
         }
     }
 
+    private static final int NEW_TRIP_ATTRIBUTES_COUNT = 6;
+
     /**
      * Creates a new instance of {@link Trip} and adds it to the <code>listOfTrips</code>.
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
+     *
+     * @throws ForceCancelException if user cancels a re-requested input resulting from invalid original input
+     * @throws IndexOutOfBoundsException if the user has not entered sufficient attributes to set a new trip.
      */
-    private static void executeCreateTrip(String attributesInString) throws ForceCancelException {
-        String[] newTripInfo = attributesInString.split(" ", 5);
-        if (newTripInfo.length < 5) {
+    private static void executeCreateTrip(String attributesInString)
+            throws ForceCancelException, IndexOutOfBoundsException {
+        String[] newTripInfo = attributesInString.split("/", NEW_TRIP_ATTRIBUTES_COUNT);
+        if (newTripInfo.length < NEW_TRIP_ATTRIBUTES_COUNT) {
             throw new IndexOutOfBoundsException();
         }
         Trip newTrip = new Trip(newTripInfo);
