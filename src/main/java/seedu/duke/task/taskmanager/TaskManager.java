@@ -18,6 +18,7 @@ import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.exception.TaskIsNonRecurringException;
 import seedu.duke.log.Log;
 
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
@@ -346,8 +347,8 @@ public class TaskManager implements Subject {
 
     //@@author SeanRobertDH
     public Task editFilteredTask(int index, Map<String, String> arguments)
-        throws InvalidTaskIndexException, InvalidPriorityException,
-            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
+            throws InvalidTaskIndexException, InvalidPriorityException,
+            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
         checkFilteredListIndexValid(index);
         latestFilteredList.get(index).edit(arguments);
         return latestFilteredList.get(index);

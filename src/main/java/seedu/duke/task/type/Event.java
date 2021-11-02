@@ -1,5 +1,6 @@
 package seedu.duke.task.type;
 
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.Map;
 import seedu.duke.command.flags.EventFlag;
@@ -112,7 +113,7 @@ public class Event extends Task {
 
     @Override
     protected void taskEdit(Map<String, String> arguments)
-            throws ParseDateFailedException, StartDateAfterEndDateException {
+            throws ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
         LocalDateTime startDate = getStartDate();
         LocalDateTime endDate = getEndDate();
         if (arguments.containsKey(EventFlag.START_DATE)) {

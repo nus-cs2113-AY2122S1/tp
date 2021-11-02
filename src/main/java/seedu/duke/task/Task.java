@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.Map;
 import seedu.duke.command.flags.EditFlag;
@@ -97,7 +98,7 @@ public abstract class Task {
     public abstract TypeEnum getTaskType();
 
     public void edit(Map<String, String> arguments) throws InvalidPriorityException,
-            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException {
+            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
         if (arguments.containsKey(EditFlag.DESCRIPTION)) {
             setDescription(arguments.get(EditFlag.DESCRIPTION));
         }
@@ -113,5 +114,5 @@ public abstract class Task {
     }
 
     protected abstract void taskEdit(Map<String, String> arguments)
-        throws ParseDateFailedException, StartDateAfterEndDateException;
+        throws ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException;
 }
