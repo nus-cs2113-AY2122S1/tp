@@ -1,2 +1,6 @@
-add /m /n Glenn /s A0123456B /g M /p 98765432
+add /m /n Juan Hwee /s A0123456B /g M /p 98765432
+add /t /n Weekly Training 1 /a 2 Nov 2021 /v MPSH1
+add /att /m Juan Hwee /n Weekly Training 1 /d 1
+edit /t 1 /v MPSH2
+edit /m 1 /p 91234567
 bye

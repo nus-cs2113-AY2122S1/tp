@@ -9,6 +9,20 @@ Welcome to
 '  '--'\'  '--'\|  | |  |    |  |   |  ||  | |  ||  | `   ||  | |  |'  '--'  ||  `---.|  |\  \ 
  `-----' `-----'`--' `--'    `--'   `--'`--' `--'`--'  `--'`--' `--' `------' `------'`--' '--' 
 What would you like to do?
-=> Added a Member: [1] Name: GLENN | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+=> Added a Member: 
+[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+=> Added a Training entry:
+[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH1 | Time: 2 NOV 2021
+=> Added an Attendance entry: 
+Name: JUAN HWEE | Training Name: Weekly Training 1 | Present: [1] 
+C:\Users\User\Desktop\NUS Stuff\CS2113_TP\tp\build\libs/DukeAttendance/Weekly Training 1.csv
+=> Edited Training:
+[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH1 | Time: 2 NOV 2021
+To become:
+[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH2 | Time: 2 NOV 2021
+=> Edited member:
+[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+To become:
+[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 91234567
 => You have successfully exited the programme.
 _____________________________________________________
