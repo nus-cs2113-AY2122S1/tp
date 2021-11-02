@@ -165,7 +165,7 @@ public class Ui {
                 + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
                 + "\n\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
-                + "\tview : Views all your existing trips and their details.\n"
+                + "\tview TRIPNAME: Views  your existing trip and their detail.\n"
 
                 + "\tdelete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n"
 
