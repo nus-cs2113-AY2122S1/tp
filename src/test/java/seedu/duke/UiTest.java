@@ -9,8 +9,8 @@ import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Expense;
-import seedu.exceptions.DuplicateExpenseException;
-import seedu.exceptions.DuplicateIncomeException;
+import seedu.exceptions.ExpenseOverflowException;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
 import seedu.utility.StonksGraph;
@@ -55,7 +55,7 @@ public class UiTest {
     private BudgetManager budgetManager = new BudgetManager();
 
 
-    public void initialiseFinancialTracker() throws DuplicateIncomeException, DuplicateExpenseException {
+    public void initialiseFinancialTracker() throws IncomeOverflowException, ExpenseOverflowException {
         financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
         financialTracker.addExpense(new Expense("Bought a game", 19.73, ExpenseCategory.FOOD));
         financialTracker.addExpense(new Expense("Bought cookies", 5.0, ExpenseCategory.FOOD));
@@ -65,8 +65,8 @@ public class UiTest {
     }
     
     @Test
-    public void listExpense_validFinancialTracker_filteredExpenses() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+        public void listExpense_validFinancialTracker_filteredExpenses() 
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all of your recent spending!" + newLine 
@@ -83,7 +83,7 @@ public class UiTest {
 
     @Test
     public void listIncome_validFinancialTracker_filteredIncomes() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine 
                 + "Below is a list of all of your recent earnings!" + newLine
@@ -100,7 +100,7 @@ public class UiTest {
 
     @Test
     public void listFind_givenFilteredList_printFilteredList() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + Messages.FOUND_LIST_MESSAGE + newLine
@@ -140,13 +140,13 @@ public class UiTest {
 
     @Test
     public void printBalance_oneExpenseOneIncome_printNetBalance() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         final String expectedOutput = SEPARATOR_LINE + newLine
                 + "Your current balance is: $2018.27" + newLine
                 + SEPARATOR_LINE;
         
-        testUI.printBalance(financialTracker.getBalance());
+        testUI.printBalance(financialTracker.calculateBalance());
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -206,7 +206,7 @@ public class UiTest {
 
     @Test
     public void expenseDeleted_oneExpenseDeleted_deletedExpenseMessage() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "You removed this: " + newLine
@@ -219,7 +219,7 @@ public class UiTest {
 
     @Test
     public void incomeDeleted_oneIncomeDeleted_deletedIncomeMessage() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         initialiseFinancialTracker();
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "You removed this: " + newLine
@@ -281,7 +281,7 @@ public class UiTest {
         testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
-
+    
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
         //empty financialtracker
@@ -290,8 +290,8 @@ public class UiTest {
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
-                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
-                + "x   Current month ( MONTH ) total income:  $0.00                                 o is Income       x"
+                + "x   Current month total expense: $0.00                                # is Expense      x"
+                + "x   Current month total income: $0.00                                 o is Income       x"
                 + "x   Your Yearly Report                                                                             x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
@@ -312,11 +312,11 @@ public class UiTest {
 
         String fullOutput = outputStreamCaptor.toString().trim();
         String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
-        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("\\(.*?\\)","( MONTH )");
+        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("h.*?t","h t");
 
         assertEquals(expectedOutput, outputToBeTested);
     }
-
+    
     @Test
     public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
         String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
@@ -428,7 +428,7 @@ public class UiTest {
 
     @Test
     public void filterByKeyword_testFood_printOnlyFoodEntries() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("food");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -444,7 +444,7 @@ public class UiTest {
 
     @Test
     public void filterByKeyword_testWordCasing_printFoodEntries() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("FOod");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -460,7 +460,7 @@ public class UiTest {
 
     @Test
     public void filterByDate_dateGotMatch_printOnlyEntriesOfThatDate() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws IncomeOverflowException, ExpenseOverflowException {
         String currDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         FindCommand testFindCommand = new FindCommand(currDate);
         initialiseFinancialTracker();
@@ -483,7 +483,7 @@ public class UiTest {
 
     @Test
     public void filterByDate_dateNoMatch_printNoEntryFound() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("25/10/2099");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -495,7 +495,7 @@ public class UiTest {
 
     @Test
     public void filterByKeyword_matchInDescription_printEntriesFound() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("game");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);
@@ -509,7 +509,7 @@ public class UiTest {
 
     @Test
     public void filterByKeyword_matchInAmount_printEntriesFound() 
-            throws DuplicateIncomeException, DuplicateExpenseException {
+            throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("19.73");
         initialiseFinancialTracker();
         testFindCommand.execute(financialTracker, testUI, budgetManager);

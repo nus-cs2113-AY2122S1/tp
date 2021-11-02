@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
+import seedu.commands.budget.SetThresholdCommand;
 import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
 import seedu.commands.general.CurrencyType;
+import seedu.commands.general.ShowGraphCommand;
 import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.income.DeleteIncomeCommand;
 import seedu.commands.general.HelpCommand;
@@ -110,7 +113,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_ex      i/12a              ");
         InvalidCommand test = (InvalidCommand) underTest; 
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer!", test.getMessage());
     }
 
     @Test
@@ -154,7 +157,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in i/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer!", test.getMessage());
     }
 
     @Test
@@ -263,16 +266,17 @@ public class ParserTest {
             }
             testBudgetManager.setBudget(12, category);
         }
+        testBudgetManager.setThreshold(0.2);
         Parser testParser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
         String testData = testParser.convertSettingsToData(financialTracker, testBudgetManager);
-        assertEquals(testData, "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12.0");
+        assertEquals("SGD,0.2,12.0,12.0,12.0,12.0,12.0,12.0,12.0", testData);
         
     }
     
     @Test
-    public void convertDataToBudgetSettings() throws InvalidSettingsDataException {
-        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
+    public void convertDataToBudgetSettings_validData_validBudgets() throws InvalidSettingsDataException {
+        String testData = "SGD,0.1,12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
         for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
@@ -281,9 +285,9 @@ public class ParserTest {
     }
     
     @Test 
-    public void convertDataToCurrencySetting() throws InvalidCurrencyTypeException, InvalidSettingsDataException, 
-            BlankCurrencyTypeException {
-        String testData = "SGD,12.0,12.0,12.0,12.0,12.0,12.0,12";
+    public void convertDataToCurrencySetting_validData_validCurrency() throws InvalidCurrencyTypeException, 
+            InvalidSettingsDataException, BlankCurrencyTypeException {
+        String testData = "SGD,0.0,12.0,12.0,12.0,12.0,12.0,12.0,12";
         Parser parser = new Parser();
         CurrencyType currency = parser.convertDataToCurrencySetting(testData);
         assertEquals(currency.toString(), "SGD");
@@ -320,4 +324,40 @@ public class ParserTest {
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), InvalidCommand.class);
     }
+
+    @Test
+    public void parseAddExpenseCommand_invalidExpenseValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d/food a/1000000000.001 c/food");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseAddIncomeCommand_invalidIncomeValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_in d/salary a/1000000000.0011 c/salary");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validThresholdInput_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("set_threshold t/0.5");
+        assertSame(SetThresholdCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validClearAllCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("clear_all_entries");
+        assertSame(ClearAllEntriesCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph");
+        assertSame(ShowGraphCommand.class, underTest.getClass());
+    }
+    
 }

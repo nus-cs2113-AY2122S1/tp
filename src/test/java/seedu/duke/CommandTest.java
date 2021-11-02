@@ -13,6 +13,8 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.ExpenseOverflowException;
+import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
@@ -66,7 +68,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testTotalExpenseCommand() {
+    public void testTotalExpenseCommand() throws ExpenseOverflowException, IncomeOverflowException {
         TotalExpenseCommand testCommand = new TotalExpenseCommand();
         testCommand.execute(testTracker, testUi, budgetManager);
         assertEquals(0, testTracker.getTotalIncome());
@@ -82,7 +84,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testTotalIncomeCommand() {
+    public void testTotalIncomeCommand() throws ExpenseOverflowException, IncomeOverflowException {
         TotalIncomeCommand testCommand = new TotalIncomeCommand();
         testCommand.execute(testTracker, testUi, budgetManager);
         assertEquals(0, testTracker.getTotalExpense());
