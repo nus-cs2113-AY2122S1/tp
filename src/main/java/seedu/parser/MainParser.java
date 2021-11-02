@@ -252,8 +252,8 @@ public class MainParser {
     //@@author lezongmun
     private Command parseDeleteContact(String userInput) {
         try {
-            int deletedIndex = IndexParser.getIndexFromInput(userInput);
             boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
+            int deletedIndex = IndexParser.getIndexFromInput(userInput);
             return new DeleteContactCommand(deletedIndex, hasDeletedDetail);
         } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);

@@ -11,6 +11,7 @@ public class ViewContactCommand extends Command {
     private static final int PERSONAL_CONTACT_INDEX = -1;
     private static final int ALL_CONTACTS_INDEX = -2;
 
+
     public ViewContactCommand(int contactIndex) {
         this.contactIndex = contactIndex;
     }
