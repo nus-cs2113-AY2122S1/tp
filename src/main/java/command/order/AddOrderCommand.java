@@ -96,9 +96,9 @@ public class AddOrderCommand extends Command {
                 if (orderQuantity + totalQuantity <= maxQuantity) {
                     addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
                 } else {
-                    ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity "
-                            + "exceeds maximum stock quantity of " + maxQuantity + ". Existing quantity "
-                            + totalQuantity + ".");
+                    ui.print("Order for " + nameToAdd + " exists.\nUnable to add order as total order quantity "
+                            + "exceeds maximum stock quantity of " + maxQuantity + ".\nExisting quantity in stock: "
+                            + existingStockQuantity + "\nPending order quantity: " + existingOrdersQuantity);
                 }
             }
         } else {
