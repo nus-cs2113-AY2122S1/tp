@@ -4,6 +4,7 @@ import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.habit.Habit;
 import happybit.interval.Interval;
+import happybit.ui.PrintManager;
 
 import java.io.File;
 import java.io.FileWriter;
