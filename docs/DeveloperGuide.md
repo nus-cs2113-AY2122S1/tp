@@ -4,7 +4,8 @@
 
 - [1. Introduction](#1-introduction)
     * [1.1 Purpose](#11-purpose)
-    * [1.2 Using this Guide](#12-using-this-guide)
+    * [1.2 Acknowledgements](#12-acknowledgements)
+    * [1.2 Using this Guide](#13-using-this-guide)
 - [2. Setting up](#2-setting-up)
     * [2.1 Setting up the project in your computer](#21-setting-up-the-project-in-your-computer)
         + [2.1.1 Prerequisite](#211-prerequisite)
@@ -27,12 +28,12 @@
   * [4.4 Adding and Deleting Content]()
   * [4.5 Storage](#45-storage-implementation)
     + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
-- [5. Documentation, Logging, Testing and DevOps]()
-- [Appendix A: Product Scope]()
-- [Appendix B: User Stories ]()
-- [Appendix C: Non Functional Requirements]()
-- [Appendix D: Glossary]()
-- [Appendix E: Instructions for Manual Testing]()
+- [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories ](#appendix-b-user-stories)
+- [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## 1. Introduction
 
@@ -53,7 +54,17 @@ overall architecture design of **TermiNUS** and it displays our main features im
 with the rationale and consideration for each. As of now, the guide is written for the current
 release version of `TermiNUS of v1.0`.
 
-### 1.2 Using this Guide
+### 1.2 Acknowledgements
+
+We would like to thank the following projects and repositories for assisting in the development of 
+TermiNUS.
+
+- [**GSON:** Providing the JSON parsing capabilities for the main file.](https://github.com/google/gson)
+- [**iTextPDF 5:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itextpdf)
+- [**AddressBook-3:** Providing a guide on writing the guides you are reading now.](https://se-education.org/addressbook-level3/)
+
+
+### 1.3 Using this Guide
 
 Insert legends / special icons used here to aid in the guide later.
 
@@ -98,15 +109,17 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
     2. If everything is correctly set up, you should see the following terminal.
    
    ```
-   Welcome to TermiNUS!
-   
-   Type any of the following to get started:
-   > exit
-   > help
-   > note
-   > schedule
-   
-   [] >>>
+    Welcome to TermiNUS!
+    You have no schedule for today.
+    
+    Type any of the following to get started:
+    > exit
+    > help
+    > module
+    > go
+    > timetable
+    
+    [] >>>  
    ```
 
 #### 2.1.4 Configuring the Coding Style
@@ -221,9 +234,11 @@ The `GameEnvironment` consists of a `QuestionGenerator` which will only exist if
 `GameEnvironment`, and a `Ui` instance to handle user input and printing of information. The 
 decision to re-use the `Ui` is to allow easier upgrades to the `Ui` if there is a need in the 
 future.
+
 The `QuestionGenerator` takes in a list of `Question` and a maximum question count to randomly
 generate questions based on `Random`. If `Random` is not provided, a new `Random` with a random seed
-will be created to generate the `Question` order.  
+will be created to generate the `Question` order.
+
 The `DifficultyModifier` is a utility class used to calculate and tweak the weights of `Question`
 after the user has provided feedback on the difficulty of the question. It uses a 
 [logistic curve](https://en.wikipedia.org/wiki/Logistic_function) to calculate the change in weight.
@@ -306,6 +321,10 @@ To view the high-level diagram, head to
 
 ![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
 
+The overall sequence flow is shown above.
+
+![](attachments/ActiveRecallCreateEnvironmentSequenceDiagram.png)
+
 **Step 1:** When the user executes the `TestCommand`, the `GameEnvironment` will be created with the
 static method `GameEnvironment.createNewEnvironment()`, where it will handle the creation of
 `QuestionGenerator` as well. 
@@ -322,6 +341,8 @@ call the `run` method within the object.
 session, such as the actual question pool size, and may include more information and statistics in 
 the future.
 
+![](attachments/ActiveRecallShowQuestionSequence.png)
+
 **Step 5:** Next, the `run()` method will start a loop and check if there are questions in the local 
 `questionGenerator` to ensure that the session can continue. After which, the `promptQuestion()` is 
 called, where the next question is pulled from `questionGenerator.next()` and displayed to the user.
@@ -331,9 +352,13 @@ number from `0` to `total`, and look up a `Question` that is closest to the valu
 <kbd>Enter</kbd> key is pressed by the user, the answer is then displayed and the `promptQuestion()` 
 passes the `Question` object back to the `run()` method.
 
+![](attachments/ActiveRecallGetFeedbackSequence.png)
+
 **Step 7:** The program now runs `getUserFeedback()` to collect user feedback, and return
 the difficulty back to `run()` after cleaning the input. This is also when the user can decide if 
 they wish to quit the session, and if they do, the difficulty value will be set to `EXIT_CODE = -1`.
+
+![](attachments/ActiveRecallUpdateQuestionDifficultySequence.png)
 
 **Step 8:** If the `difficulty` is checked to be the `EXIT_CODE`, the loop will break and return. Otherwise, the
 `Question`'s difficulty will now be changed in the `updateQuestionDifficulty(question, difficulty)` 
@@ -351,17 +376,27 @@ The reason for using `NavigableMap` to generate questions was because it provide
 the total weight of the question pool (which should never happen as the random number generator can 
 only generate between `0` and `total`).
 
-To prevent the user from viewing the answers before they are ready, we have decided to require the
-user to press Enter to display the answer as a method of confirmation, as it is the most effective
-way to ensure the answer does not get revealed unless the user intents to view it.
+**Aspect: Hiding the answer from the user**
 
-The rationale behind using the logistic curve is to ensure that as harder questions appear more
-often and easier questions appear less. We also want to ensure once the user finds a hard question
-easy, it should quickly move down a difficulty and vice versa. The application of the logistic curve
-also prevents the values from increasing too rapidly, and dominating the question pools. It also
-prevents the case where easy questions disappear entirely from the question pool due to low weights.
-We will continue to seek user feedback and tweak the curve parameters if needed if there are any
-issues.
+| Approach | Pros | Cons |
+|----------|------|------|
+| Enter Key | Allows user to reveal the answer at their own pace | Requires user input |
+| Timer | No user input | Might reveal answers too early or late |
+
+**Chosen Solution:** Enter Key, as it is the most effective way to ensure the answer does not get 
+revealed unless the user intents to view it.
+
+**Aspect: Questions randomness needs to be re-weighed.**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Change weights by a fixed amount | Simple to implement | Easy questions might never ever appear again. |
+| Change weights with logistics curve | Weights don't increase/decrease out of control | Requires curve calibration |
+| Use ELO/Glicko | Questions have fair share | Requires questions to "compete" against each other |
+
+**Chosen Solution:** Logistic curve, as it ensures once the user finds a hard question easy, it 
+would quickly move down a difficulty and vice versa. We will continue to seek user feedback and 
+tweak the curve parameters if needed.
 
 ![](attachments/desmos-graph.png)
 The parameters of the logistic curve can be viewed here:
@@ -557,5 +592,51 @@ Notes in TermiNUS is stored as a **text** file where the **name** of the file is
 and the **contents** of the file will be the **content** for that Note. For example, if a module has **5 Notes** object in TermiNUS, it should have **5 text files** within its module folder.
 
 
+## 5. Documentation, Logging, Testing and DevOps
 
+This section details how we document, log, test and perform development operations.
+
+### 5.1 Documentation
+
+Our User Guide and Developer Guide are written in Markdown, and are rendered by GitHub Pages.
+
+All diagrams in this Developer Guide are generated with PlantUML.
+
+### 5.2 Logging
+
+We wrap the default `java.util.logging.Logger` in Java in `terminus.common.TerminusLogger`, 
+providing us easier access to logging information for debugging and error message displaying. By
+default, TermiNUS will not print any logging information to the terminal, and will log anything 
+equal to or above `Level.INFO` into the file `terminus.log` in the same directory the user ran the 
+application.
+
+### 5.3 Testing
+
+Testing is done with JUnit testing, and we have added Jacoco as a Gradle plugin to monitor test code
+coverage.
+
+Before pushing and creating a pull request, please ensure no existing JUnit tests fail, as well as 
+ensure new test cases are written to maintain a high code coverage.
+
+### 5.4 DevOps
+
+Building and testing can be done with Gradle, and all integration testing is done with GitHub 
+Actions in the GitHub repository.
+
+All pull requests are also checked with Codecov to ensure that overall code coverage does not drop.
+You may monitor your Codecov progress in your pull request if you successfully passed all the tests.
+
+## Appendix A: Product Scope
+
+
+## Appendix B: User Stories
+
+
+## Appendix C: Non Functional Requirements
+
+
+## Appendix D: Glossary
+
+
+## Appendix E: Instructions for Manual Testing
 

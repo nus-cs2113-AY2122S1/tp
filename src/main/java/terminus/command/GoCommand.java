@@ -43,7 +43,7 @@ public class GoCommand extends WorkspaceCommand {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         String[] args = arguments.strip().split(CommonFormat.SPACE_DELIMITER, 2);
-        moduleName = args[0];
+        moduleName = args[0].toUpperCase();
         if (args.length > 1) {
             super.parseArguments(args[1]);
         } else {

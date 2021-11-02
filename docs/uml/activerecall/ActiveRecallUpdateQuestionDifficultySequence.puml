@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam sequenceMessageAlign center
+
+mainframe sd updateQuestionDifficulty
+
+box "Commands" #thistle
+endbox
+box "Active Recall" #lightblue
+participant ":GameEnvironment" as GameEnvironment #lightskyblue
+participant ":DifficultyModifier" as DifficultyModifier #lightskyblue
+participant ":Question" as Question #lightskyblue
+endbox
+
+activate GameEnvironment
+GameEnvironment -> GameEnvironment : updateQuestionDifficulty(question, difficulty)
+activate GameEnvironment 
+  alt difficulty == EASY_DIFFICULTY
+    GameEnvironment -> DifficultyModifier : tweakEasyQuestionDifficulty(weight)
+    activate DifficultyModifier 
+    return newWeight
+    
+    GameEnvironment -> Question : setWeight(newWeight)
+    activate Question
+    return
+  else difficulty == HARD_DIFFICULTY
+    GameEnvironment -> DifficultyModifier : tweakHardQuestionDifficulty(weight)
+    activate DifficultyModifier 
+    return newWeight
+    
+    GameEnvironment -> Question : setWeight(newWeight)
+    activate Question
+    return
+  end
+return
+@enduml

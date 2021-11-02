@@ -1,7 +1,9 @@
 package terminus;
 
+import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.Messages;
@@ -17,13 +19,7 @@ import terminus.ui.Ui;
 
 public class Terminus {
 
-    public static final String[] INVALID_JSON_MESSAGE = {
-        "Invalid file data detected.",
-        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-        "To save your current file, close your terminal (do not run exit).",
-        "Otherwise, you can continue using the program :)"
-    };
-    private Ui ui;
+    private final Ui ui;
     private CommandParser parser;
     private String workspace;
 
@@ -39,112 +35,135 @@ public class Terminus {
     public static void main(String[] args) {
         new Terminus().run();
     }
+    
+    Terminus() {
+        this(Ui.getInstance(), MainCommandParser.getInstance());
+    }
+    
+    Terminus(Ui ui, CommandParser parser) {
+        this.ui = ui;
+        this.parser = parser;
+    }
 
     /**
      * Starts the program.
      */
     public void run() {
-        start();
+        initialize();
         runCommandsUntilExit();
         exit();
     }
 
-    private void start() {
+    void initialize() {
         try {
             TerminusLogger.initializeLogger();
             TerminusLogger.info("Starting Terminus...");
-            this.ui = Ui.getInstance();
-            this.parser = MainCommandParser.getInstance();
             this.workspace = "";
             this.storageManager = new StorageManager(DATA_DIRECTORY, MAIN_JSON);
             this.moduleManager = this.storageManager.initialize();
         } catch (IOException e) {
             TerminusLogger.warning("Log file loading has failed.", e.fillInStackTrace());
-            handleIoException(e);
-        } catch (InvalidFileException e) {
-            ui.printSection(e.getMessage());
-        } finally {
-            if (this.moduleManager == null) {
-                TerminusLogger.warning("File not found.");
-                TerminusLogger.warning("Creating new NusModule instance...");
-                this.moduleManager = new ModuleManager();
-            } else {
-                TerminusLogger.info("File loaded.");
-            }
-            this.ui.printParserBanner(this.parser, this.moduleManager);
-        }
-        TerminusLogger.info("Terminus has started.");
-    }
-
-    private void runCommandsUntilExit() {
-        while (true) {
-            assert workspace != null : "Workspace should always have a value";
-            String input = ui.requestCommand(workspace);
-            TerminusLogger.debug("User entered: " + input);
-            assert input != null : "Input should not be null.";
-
-            Command currentCommand;
-            try {
-                currentCommand = parser.parseCommand(input);
-                CommandResult result = currentCommand.execute(moduleManager);
-
-                boolean isExitCommand = result.isExit();
-                boolean isWorkspaceCommand = result.getNewCommandParser() != null;
-                if (isExitCommand) {
-                    break;
-                } else if (isWorkspaceCommand) {
-                    parser = result.getNewCommandParser();
-                    assert parser != null : "commandParser is not null";
-                    workspace = parser.getWorkspace();
-                    ui.printParserBanner(parser, moduleManager);
-                } else {
-                    ui.printSection(result.getMessage());
-                }
-
-                // Perform related storage changes
-                if (result.hasChange()) {
-                    // Pass to Storage to handle the request
-                    storageManager.executeCommandResult(moduleManager, result);
-                }
-
-                // Update JSON File
-                TerminusLogger.info("Saving data into file...");
-                this.storageManager.updateMainJsonFile(moduleManager);
-                TerminusLogger.info("Save completed.");
-
-            } catch (InvalidCommandException e) {
-                TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
-                ui.printSection(e.getMessage());
-            } catch (InvalidArgumentException e) {
-                TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
-
-                // Check if the exception specified a correct command format for the user to follow.
-                if (e.getFormat() != null) {
-                    // Print the format of the command along with the error message to the user.
-                    ui.printSection(e.getMessage(),
-                            String.format(Messages.INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));
-                } else {
-                    ui.printSection(e.getMessage());
-                }
-            } catch (InvalidFileException e) {
-                ui.printSection(e.getMessage());
-                ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
-                //storageManager.setDisabled(true);
-            }
-        }
-    }
-
-    private void handleIoException(IOException e) {
-        TerminusLogger.severe("Save file is inaccessible.");
-        TerminusLogger.severe(e.getMessage(), e.getCause());
-        ui.printSection(
+            ui.printSection(
                 String.format(Messages.ERROR_MESSAGE_FILE, e.getMessage()),
                 "TermiNUS may still run, but your changes may not be saved.",
                 "Check 'terminus.log' for more information."
-        );
+            );
+        } catch (InvalidFileException e) {
+            ui.printSection(e.getMessage());
+        }
+
+        if (this.moduleManager == null) {
+            TerminusLogger.warning("File not found.");
+            TerminusLogger.warning("Creating new NusModule instance...");
+            this.moduleManager = new ModuleManager();
+        } else {
+            TerminusLogger.info("File loaded.");
+        }
+        this.ui.printParserBanner(this.parser, this.moduleManager);
+        
+        TerminusLogger.info("Terminus has started.");
+    }
+    
+    CommandResult handleUserInput(String input) {
+        try {
+            Command command = parser.parseCommand(input);
+            return command.execute(moduleManager);
+        } catch (InvalidCommandException e) {
+            TerminusLogger.warning(e.getMessage(), e.fillInStackTrace());
+            ui.printSection(e.getMessage());
+        } catch (InvalidArgumentException e) {
+            TerminusLogger.warning(e.getMessage(), e.fillInStackTrace());
+            if (e.getFormat() != null) {
+                // Print the format of the command along with the error message to the user, if specified.
+                ui.printSection(e.getMessage(), String.format(Messages.INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));
+            } else {
+                ui.printSection(e.getMessage());
+            }
+        }
+        return null;
+    }
+    
+    void handleCommandResult(CommandResult commandResult) {
+        boolean isWorkspaceCommand = commandResult.getNewCommandParser() != null;
+        if (isWorkspaceCommand) {
+            parser = commandResult.getNewCommandParser();
+            assert parser != null : "parser should not be null";
+            workspace = parser.getWorkspace();
+            ui.printParserBanner(parser, moduleManager);
+        } else {
+            ui.printSection(commandResult.getMessage());
+        }
     }
 
-    private void exit() {
+    void handleStorage(CommandResult commandResult) {
+        try {
+            // Pass to Storage to handle the request if there are any changes to file.
+            if (commandResult.hasChange()) {
+                storageManager.executeCommandResult(moduleManager, commandResult);
+            }
+
+            // Update JSON File
+            TerminusLogger.info("Saving data into file...");
+            this.storageManager.updateMainJsonFile(moduleManager);
+            TerminusLogger.info("Save completed.");
+        } catch (InvalidFileException ex) {
+            ui.printSection(ex.getMessage());
+            ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
+        }
+    }
+
+    void runCommandsUntilExit() {
+        while (true) {
+            try {
+                assert workspace != null : "Workspace should always have a value";
+
+                String input = ui.requestCommand(workspace);
+                CommandResult commandResult = handleUserInput(input);
+
+                // Error occurred, just continue to next command.
+                if (commandResult == null) {
+                    continue;
+                }
+                // Stop the program if it is exit.
+                if (commandResult.isExit()) {
+                    break;
+                }
+
+                handleCommandResult(commandResult);
+                handleStorage(commandResult);
+            } catch (NoSuchElementException e) {
+                if (e.getMessage().equals("No line found")) {
+                    ui.printSection("", "Force-quitting detected.", "TermiNUS will attempt to quit.");
+                    return;
+                }
+            } catch (Exception e) {
+                ui.printSection("An unexpected error has occurred: ", e.getMessage());
+                TerminusLogger.severe(e.getMessage(), e.fillInStackTrace());
+            }
+        }
+    }
+
+    void exit() {
         TerminusLogger.info("Saving data into file...");
         try {
             storageManager.setDisabled(false);
