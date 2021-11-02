@@ -19,6 +19,7 @@ public class AddStudentCommand extends Command {
     private static final String MESSAGE_FORMAT_ADD_STUDENT_USAGE = "%s %s/<CLASS_ID> %s/<STUDENT_ID> "
         + "%s/<STUDENT_NAME>";
     private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student has been added to %s:\n  %s";
+    public static final String MESSAGE_ID_ALREADY_EXISTS = "A student with that ID already exists";
 
     public AddStudentCommand(String argument) {
         super(argument, ADD_STUDENT_ARGUMENT_KEYS);
@@ -56,6 +57,11 @@ public class AddStudentCommand extends Command {
         Student student = new Student(studentID, studentName);
 
         StudentList studentList = teachingClass.getStudentList();
+        for (Student students : studentList.getStudents()) {
+            if (students.getId().equals(studentID)) {
+                throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
+            }
+        }
         studentList.addStudent(student);
 
         storage.save(classList);
