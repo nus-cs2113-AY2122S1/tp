@@ -1,4 +1,3 @@
-Timetable loaded from storage
 No local profile can be found,
 Setup a new profile by answering the following: 
 ________________________________________________________________________________________________________________________
