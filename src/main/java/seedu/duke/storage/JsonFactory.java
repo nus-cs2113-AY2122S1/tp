@@ -22,10 +22,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonFactory {
-    public static final String KEY_AUDIO = "audio";
-    public static final String KEY_BOOK = "book";
-    public static final String KEY_MAGAZINE = "magazine";
-    public static final String KEY_VIDEO = "video";
+    private static final String KEY_AUDIO = "audio";
+    private static final String KEY_BOOK = "book";
+    private static final String KEY_ITEM = "item";
+    private static final String KEY_MAGAZINE = "magazine";
+    private static final String KEY_VIDEO = "video";
     private static final ObjectMapper mapper = new ObjectMapper();
     private final ObjectNode allItems;
     //private DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(Item.dateFormat);
@@ -42,6 +43,7 @@ public class JsonFactory {
     public String toJson(Catalogue catalogue) throws JsonProcessingException {
         allItems.set(KEY_AUDIO, audioToJson(catalogue));
         allItems.set(KEY_BOOK, bookToJson(catalogue));
+        allItems.set(KEY_ITEM, itemToJson(catalogue));
         allItems.set(KEY_MAGAZINE, magazineToJson(catalogue));
         allItems.set(KEY_VIDEO, videoToJson(catalogue));
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allItems);
@@ -91,6 +93,24 @@ public class JsonFactory {
         ArrayList<Book> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
             itemList.add(mapper.treeToValue(item, Book.class));
+        }
+        return itemList;
+    }
+
+    private ArrayNode itemToJson(Catalogue catalogue) {
+        ArrayNode itemArray = mapper.createArrayNode();
+        List<Item> itemObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Item)
+                .map(p -> (Item) p).collect(Collectors.toList());
+        for (Item a : itemObjects) {
+            itemArray.add(mapper.convertValue(a, ObjectNode.class));
+        }
+        return itemArray;
+    }
+
+    private ArrayList<Item> jsonToItem(ArrayNode arrayNode) throws JsonProcessingException {
+        ArrayList<Item> itemList = new ArrayList<>();
+        for (JsonNode item : arrayNode) {
+            itemList.add(mapper.treeToValue(item, Item.class));
         }
         return itemList;
     }
