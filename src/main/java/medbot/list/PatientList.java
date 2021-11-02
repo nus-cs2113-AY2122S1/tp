@@ -21,6 +21,6 @@ public class PatientList extends PersonList {
 
     @Override
     protected String getIcIsDuplicate(String icNumber) {
-        return "The patient with IC" + icNumber + " is already in the record." + END_LINE;
+        return "The patient with IC " + icNumber + " is already in the record." + END_LINE;
     }
 }
