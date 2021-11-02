@@ -65,7 +65,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Income object into the income ArrayList of FinancialTracker.
+     * Adds an Income object into the income ArrayList of FinancialTracker.
      * 
      * @param income Income object we want to add into the ArrayList.
      * @throws IncomeOverflowException Thrown if the sum of income exceeds a fixed limit.
