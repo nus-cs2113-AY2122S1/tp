@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -588,6 +589,53 @@ public class Parser {
 
     public static boolean doesUserWantToForceCancel(String userInput) {
         return userInput.equals("-cancel");
+    }
+
+    private static final int DAYDD = 0;
+    private static final int MONTHMM = 1;
+    private static final int YEARYYYY = 2;
+
+    /**
+     * Checks if the user-entered date is a date that actually exists.
+     *
+     * @param dateInString the entire dd-mm-yyyy date as a single string.
+     * @return true if the date actually exists.
+     */
+    public static boolean doesDateReallyExist(String dateInString) {
+        String[] dateSplitUp = dateInString.split("-");
+        int day;
+        int month;
+        int year;
+        try {
+            day = Integer.parseInt(dateSplitUp[DAYDD]);
+            month = Integer.parseInt(dateSplitUp[MONTHMM]);
+            year = Integer.parseInt(dateSplitUp[YEARYYYY]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        //definitely an invalid date
+        if (day < 0 || day > 31 || month < 0 || month > 12) {
+            return false;
+        }
+        //for months with 30 days
+        if ((month < 7 && month % 2 == 0) || (month >= 8 && month % 2 == 1)) {
+            if (day > 30) {
+                return false;
+            }
+        }
+        //leap year checks
+        if (month == 2) {
+            LocalDate leapYearCheck = LocalDate.of(year, 1, 1);
+            if (!leapYearCheck.isLeapYear() && day > 28) {
+                return false;
+            } else {
+                return (!leapYearCheck.isLeapYear() || day <= 29);
+            }
+        }
+
+        return true;
+
     }
 
 }

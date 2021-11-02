@@ -23,7 +23,7 @@ class DukeTest {
     }
 
     @Test
-    public void testSetLocation() {
+    public void testSetLocation() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setLocation("America");
         assertEquals("America", trip.getLocation());
