@@ -93,8 +93,8 @@ public class SelectedUniversityStorage extends UserStorage {
                                       ArrayList<ModuleMapping> moduleMappings,
                                       UniversityList universitySelectedList,
                                       UniversityList universityMasterList) {
-        if ((universityMasterList.searchUniversity(universityName)) &&
-                !(universitySelectedList.searchUniversity(universityName))) {
+        if ((universityMasterList.searchUniversity(universityName))
+                && !(universitySelectedList.searchUniversity(universityName))) {
             universitySelectedList.addUniversity(new University(universityName, moduleMappings,
                     universityMasterList));
         } else {

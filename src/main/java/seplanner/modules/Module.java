@@ -51,10 +51,11 @@ public class Module implements Comparator<Module> {
     }
 
     public boolean equals(Module searchModule) {
-        return (getModuleCode().equals(searchModule.getModuleCode())) &&
-                (getModuleName().equals(searchModule.getModuleName())) &&
-                        (getModuleCredits() == searchModule.getModuleCredits());
+        return (getModuleCode().equals(searchModule.getModuleCode()))
+                && (getModuleName().equals(searchModule.getModuleName()))
+                && (getModuleCredits() == searchModule.getModuleCredits());
     }
+
     public void setModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
     }

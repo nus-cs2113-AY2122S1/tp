@@ -68,15 +68,6 @@ public class UniversityList {
         return false;
     }
 
-    public boolean isExistMapping(ModuleMapping mapping, String universityName) {
-        University university = getUniversity(universityName);
-        if (university != null) {
-            System.out.println(university.getMappingListSize());
-            return university.isExistMapping(mapping);
-        }
-        return false;
-    }
-
     public University getUniversity(String universityName) {
         for (University university : list) {
             if (university.name.equals(universityName)) {

@@ -54,9 +54,9 @@ public class SelectedModuleStorage extends UserStorage {
         }
         Module newModule = new Module(attributes[0], attributes[1],
                 parseDouble(attributes[2]), moduleMasterList);
-        if ((newModule.getIndex() != -1) &&
-                (moduleMasterList.isModuleExist(newModule)) &&
-                !(moduleList.isModuleExist(newModule))) {
+        if ((newModule.getIndex() != -1)
+                && (moduleMasterList.isModuleExist(newModule))
+                && !(moduleList.isModuleExist(newModule))) {
             moduleList.addModule(newModule);
         } else {
             logger.log(Level.SEVERE, "Invalid module found in the file.");

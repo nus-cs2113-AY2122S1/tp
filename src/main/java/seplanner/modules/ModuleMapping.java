@@ -10,9 +10,10 @@ public class ModuleMapping {
     }
 
     public boolean equals(ModuleMapping searchMapping) {
-        return getLocalModule().equals(searchMapping.localModule) &&
-                getMappedModule().equals(searchMapping.mappedModule);
+        return getLocalModule().equals(searchMapping.localModule)
+                && getMappedModule().equals(searchMapping.mappedModule);
     }
+
     public Module getLocalModule() {
         return localModule;
     }
