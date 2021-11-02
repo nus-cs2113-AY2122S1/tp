@@ -575,7 +575,19 @@ public class Parser {
         if (toBeChecked == null) {
             Ui.invalidArgForAmount();
         } else {
-            Ui.printAmount(toBeChecked, trip);
+            Ui.printAmount(toBeChecked, trip, false);
+            Ui.optimizedPaymentPrompt();
+            checkForOptimization(toBeChecked);
+        }
+    }
+
+    private static void checkForOptimization(Person person) {
+        boolean isValidInput = false;
+        String input;
+        if (getUserToConfirm()) {
+            Trip trip = Storage.getOpenTrip();
+            trip.optimizePayments();
+            Ui.printAmount(person, Storage.getOpenTrip(), true);
         }
     }
 
