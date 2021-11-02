@@ -304,7 +304,6 @@ public class UpdatePrescriptionCommand extends Command {
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
         int currentQuantity = prescription.getQuantity();
-        int stockId = prescription.getStockId();
         int updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
         Stock stock = StockManager.extractStockObject(medicines, currentName, currentStockId);
         if (stock == null) {
@@ -323,6 +322,7 @@ public class UpdatePrescriptionCommand extends Command {
         }
 
         // guarantee can restore
+        int stockId = prescription.getStockId();
         PrescriptionManager.restoreStock(stock, totalQuantity);
 
         medicines.remove(prescription);
