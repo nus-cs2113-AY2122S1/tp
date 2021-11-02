@@ -5,17 +5,16 @@ import seplanner.commands.FindModCommand;
 import seplanner.commands.FindUniCommand;
 import seplanner.constants.Constants;
 import seplanner.enumerations.FindModInputType;
+import seplanner.exceptions.FindParseException;
 import seplanner.modules.ModuleList;
 import seplanner.universities.UniversityList;
-
-import java.text.ParseException;
 
 public class FindCommandParser {
 
     private String flag;
 
     public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList)
-            throws ParseException {
+            throws FindParseException {
         String searchString = identifyFlagAndSplitArgs(arguments);
 
         switch (flag) {
@@ -26,14 +25,14 @@ public class FindCommandParser {
         case Constants.FLAG_MODULE:
             return new FindModCommand(searchString, moduleMasterList, FindModInputType.MODULENAME);
         default:
-            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
     }
 
-    private String identifyFlagAndSplitArgs(String arguments) throws ParseException {
+    private String identifyFlagAndSplitArgs(String arguments) throws FindParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (argumentsSubstrings.length < 2) {
-            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         flag = argumentsSubstrings[0];
         return argumentsSubstrings[1];

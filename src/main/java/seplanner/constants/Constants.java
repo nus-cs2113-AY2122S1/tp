@@ -40,7 +40,7 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTFOUND = "University not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND = "Mapping not found.";
-    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Matcher class exception.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Empty input.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD = "This module has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
