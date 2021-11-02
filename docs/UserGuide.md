@@ -238,6 +238,8 @@ Examples:
 * `list_marks c/CS2113T-F12 a/Midterms`
 * `list_marks c/CS2101-C03 a/Oral Presentation`
 
+Expected Output: <br>
+![img.png](images/list_marks.png)
 <br>
 
 ### Setting mark for a student's assessment: `set_mark`
@@ -253,6 +255,8 @@ Examples:
 * `set_mark c/CS2113T s/1 a/Midterms m/70.6`
 * `set_mark c/CS2101 s/3 a/Oral Presentation m/80`
 
+Expected Output: <br>
+![set_mark.png](images/set_mark.png)
 <br>
 
 ### Editing marks for a student's assessment: `edit_mark`
@@ -268,6 +272,8 @@ Examples:
 * `edit_mark c/CS2113T-F12 s/1 a/Midterms m/80.6`
 * `edit_mark c/CS2101-C03 s/3 a/Oral Presentation m/90`
 
+Expected Output: <br>
+![edit_mark.png](images/edit_mark.png)
 <br>
 
 ### Deleting marks for a student's assessment: `delete_mark`
@@ -282,6 +288,8 @@ Examples:
 * `delete_mark c/CS2113T s/1 a/Midterms`
 * `delete_mark c/CS2101 s/3 a/Oral Presentation`
 
+Expected Output: <br>
+![delete_mark.png](images/delete_mark.png)
 <br>
 
 ### Viewing average marks for an assessment: `average_marks`
@@ -296,6 +304,12 @@ Examples:
 * `average_marks c/CS2113T a/Midterms`
 * `average_marks c/CS2101 a/Oral Presentation`
 
+Expected Output: <br>
+(Some students unmarked) <br>
+![average_marks_with_unmarked.png](images/average_marks_with_unmarked.png)
+<br>
+(All students marked) <br>
+![average_marks_all_marked.png](images/average_marks_all_marked.png)
 <br>
 
 ### Viewing median mark for an assessment: `median_mark`
@@ -310,6 +324,12 @@ Examples:
 * `median_mark c/CS2113T a/Midterms`
 * `median_mark c/CS2101 a/Oral Presentation`
 
+Expected Output: <br>
+(Some students unmarked) <br>
+![img.png](median_mark_with_unmarked.png)
+<br>
+(All students marked) <br>
+![img.png](median_mark_all_marked.png)
 <br>
 
 ### Sorting and listing students in a module by their overall score: `sort_by_scores`
