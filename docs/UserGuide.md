@@ -445,17 +445,19 @@ and delete the save file before trying again.
 
 ## Cheat sheet
 
+Quick reference: [Contents](#contents)
+
 Instruction | Command format
 ------------ | -------------
-Add a recipe | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
-Delete a recipe | `deleteRecipe RECIPE_INDEX`
-Look up a recipe | `check RECIPE_NAME`
-Display all recipes | `listRecipes`
-Exit Gordon | `exit`
-Get some help | `help`
-Set recipe attributes | `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
-Find a recipe | `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
-Tag a recipe | `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
-Untag a recipe | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
-Delete a tag | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
-List all tags | `listTags`
+[Add a recipe](#1-add-a-recipe-addrecipe) | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
+[Delete a recipe](#2-delete-a-recipe-deleterecipe) | `deleteRecipe RECIPE_INDEX`
+[Look up a recipe](#3-look-up-a-recipe-check) | `check RECIPE_NAME`
+[Display all recipes](#4-display-all-recipes-listrecipe) | `listRecipes`
+[Exit Gordon](#5-exit-gordon-exit) | `exit`
+[Get some help](#6-lend-a-hand-help) | `help`
+[Set attributes of a recipe](#7-set-attributes-of-a-recipe-set) | `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
+[Find a recipe by attribute](#8-find-a-recipe-by-attribute-find) | `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
+[Tag a recipe](#91-adding-tags-to-recipes-tag) | `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+[Untag a recipe](#92-untagging-tags-from-recipes-untag) | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+[Delete a tag](#93-deleting-tags-from-cookbook-deletetag) | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
+[List all tags](#94-find-a-recipe-by-their-tags-find) | `listTags`
