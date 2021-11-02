@@ -1,12 +1,18 @@
 package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
-import seedu.duke.data.*;
+import seedu.duke.data.Audio;
+import seedu.duke.data.Book;
+import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
+import seedu.duke.data.Magazine;
+import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.EDIT_INVALID_FORMAT;
+import static seedu.duke.common.Messages.EDIT_INVALID_ITEM;
 
 //@@author avellinwong01
 /**

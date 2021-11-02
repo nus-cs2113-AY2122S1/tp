@@ -8,7 +8,17 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.EDIT_MAGAZINE_INVALID_FORMAT;
+import static seedu.duke.common.Messages.EDIT_MAGAZINE_MESSAGE;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_EDITION;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_ID;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_PUBLISHER;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_TITLE;
+import static seedu.duke.common.Messages.KEY_EDITION;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_PUBLISHER;
+import static seedu.duke.common.Messages.KEY_TITLE;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author avellinwong01
 /**

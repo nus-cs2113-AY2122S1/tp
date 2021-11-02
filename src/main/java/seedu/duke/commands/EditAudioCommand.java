@@ -9,7 +9,16 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.EDIT_AUDIO_INVALID_FORMAT;
+import static seedu.duke.common.Messages.EDIT_AUDIO_MESSAGE;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_ARTIST;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_DURATION;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_ID;
+import static seedu.duke.common.Messages.EDIT_UNCHANGED_TITLE;
+import static seedu.duke.common.Messages.KEY_ARTIST;
+import static seedu.duke.common.Messages.KEY_DURATION;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author avellinwong01
