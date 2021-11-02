@@ -4,7 +4,7 @@ If you can type fast, TAA can help keep track of your classes and students faste
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Listing all classes: `list_class`](#listing-all-classes-list_classes)
+  * [Listing all classes: `list_classes`](#listing-all-classes-list_classes)
   * [Adding a class: `add_class`](#adding-a-class-add_class)
   * [Editing a class: `edit_class`](#editing-a-class-edit_class)
   * [Deleting a class: `delete_class`](#deleting-a-class-delete_class)
