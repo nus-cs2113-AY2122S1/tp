@@ -1,13 +1,13 @@
 package seedu.duke.attendance;
 
-import seedu.duke.member.Member;
-import seedu.duke.training.TrainingSchedule;
-
 public class Attendance {
 
     protected String memberName;
     protected String trainingName;
+    /* 1 if present, 0 if absent */
     protected String attended;
+    /* Index of attendance entry from the arraylist. */
+    protected int index;
 
     /**
      * Constructor for any type of Attendance.

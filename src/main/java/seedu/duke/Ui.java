@@ -129,9 +129,6 @@ public class Ui {
     }
 
     public static void printList(AttendanceList attendanceList) {
-        if (attendanceList.getAttendanceListSize() == 0) {
-            System.out.println("Attendance list is empty!");
-        }
         int display = 1;
         for (Attendance attendance : attendanceList.getAttendanceList()) {
             System.out.println("[" + display + "] " + attendance.toString());
@@ -151,7 +148,7 @@ public class Ui {
                 + "NUMBER>]\n"
                 + "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"
                 + "    list [/m] [/t] \n"
-                + "    list [/att /t <TRAINING_NAME> [/d <1_OR_0>]] \n"
+                + "    list [/att /t <TRAINING_NAME>] \n"
                 + "    bye -- exits the programme.");
     }
 }

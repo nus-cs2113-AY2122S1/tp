@@ -1,10 +1,6 @@
 package seedu.duke.attendance;
 
-import seedu.duke.member.Member;
-import seedu.duke.member.exception.InvalidMemberException;
-
 import java.util.ArrayList;
-import java.util.SplittableRandom;
 
 public class AttendanceList {
 
