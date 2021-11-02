@@ -291,10 +291,10 @@ public class StonksGraph {
         boolean isSmallerThanZeroPointOne = totalValue < 0.1;
         
         if (isBetweenZeroPointOneAndOne) {
-            writeToGraph(5, 75, "Unit: 0.1" );
+            writeToGraph(5, 75, "Unit: 0.1");
             return 0.1;
         } else if (isSmallerThanZeroPointOne) {
-            writeToGraph(5, 75, "Unit: 0.01" );
+            writeToGraph(5, 75, "Unit: 0.01");
             return 0.01;
         }
         
