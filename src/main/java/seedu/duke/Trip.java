@@ -39,11 +39,11 @@ public class Trip {
         //empty constructor
     }
 
-    private static final int LOCATION_STRING = 0;
-    private static final int DATE_STRING = 1;
-    private static final int FORCUR_STRING = 2;
-    private static final int EXRATE_STRING = 3;
-    private static final int PERSONS_STRING = 4;
+    private static final int LOCATION_STRING = 1;
+    private static final int DATE_STRING = 2;
+    private static final int FORCUR_STRING = 3;
+    private static final int EXRATE_STRING = 4;
+    private static final int PERSONS_STRING = 5;
 
     /**
      * Non-empty {@link Trip} constructor. Reads in a String array and processes it to set attributes for a given Trip.
@@ -51,11 +51,11 @@ public class Trip {
      * @param newTripInfo array containing one attribute in each element
      */
     public Trip(String[] newTripInfo) throws ForceCancelException {
-        assert newTripInfo.length == 5;
-        setLocation(newTripInfo[LOCATION_STRING]);
-        setDateOfTrip(newTripInfo[DATE_STRING]);
-        setForeignCurrency(newTripInfo[FORCUR_STRING].toUpperCase());
-        setExchangeRate(newTripInfo[EXRATE_STRING]);
+        assert newTripInfo.length == 6;
+        setLocation(newTripInfo[LOCATION_STRING].strip());
+        setDateOfTrip(newTripInfo[DATE_STRING].strip());
+        setForeignCurrency(newTripInfo[FORCUR_STRING].strip().toUpperCase());
+        setExchangeRate(newTripInfo[EXRATE_STRING].strip());
         setListOfPersons(splitPeople(newTripInfo[PERSONS_STRING]));
     }
 
@@ -519,7 +519,7 @@ public class Trip {
             if (personName.isBlank()) {
                 continue;
             }
-            Person person = new Person(personName.trim());
+            Person person = new Person(personName.strip());
             listOfPeople.add(person);
         }
         for (Person person : listOfPeople) {

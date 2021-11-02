@@ -1,4 +1,4 @@
-create America 02-02-2021 USD 0.74 yikai,yuzhao,qian,josh,xiyuan
+create /America /02-02-2021 /USD /0.74 /yikai,yuzhao,qian,josh,xiyuan
 open 1
 view filter category breakfast
 view filter description d a c
