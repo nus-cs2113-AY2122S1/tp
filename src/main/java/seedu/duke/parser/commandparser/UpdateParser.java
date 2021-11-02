@@ -172,7 +172,7 @@ public abstract class UpdateParser extends Parser {
             throw new IndexOutOfBoundsException();
         }
         Member memberAdded = task.getFromMemberList(memberIndex);
-        if (task.getMemberList().contains(memberAdded)){
+        if (task.getMemberList().contains(memberAdded)) {
             throw new ExistingMemberException(Ui.getLineBreak()
                     + "\nThis member is already assigned to the task!");
         }
