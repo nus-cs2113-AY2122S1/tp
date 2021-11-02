@@ -70,7 +70,8 @@ public class ArchivePrescriptionCommand extends Command {
         Storage storage = Storage.getInstance();
         storage.archiveData(filteredPrescriptions);
         storage.saveData(medicines);
-        ui.print("Archived " + filteredPrescriptions.size() + " prescriptions from " + DateParser.dateToString(prescriptionArchiveDate));
+        ui.print("Archived " + filteredPrescriptions.size() + " prescriptions from "
+                + DateParser.dateToString(prescriptionArchiveDate));
         logger.log(Level.INFO, "Successful archive of prescriptions");
     }
 
