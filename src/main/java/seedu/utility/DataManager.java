@@ -35,10 +35,8 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String SETTINGS_FILE_NAME = "./StonksXD_Settings.csv";
-    private static final String SETTINGS_CSV_HEADER = "currency,food,transport,medical,bills,entertainment," 
+    private static final String SETTINGS_CSV_HEADER = "currency,threshold,food,transport,medical,bills,entertainment," 
             + "misc,overall";
-    private static final String BACKUP_ENTRIES_FILE_NAME = "./StonksXD_EntriesBackup.csv";
-    private static final String BACKUP_SETTINGS_FILE_NAME = "./StonksXD_SettingsBackup.csv";
     private final Parser parser;
     private final Ui ui;
     private final FinancialTracker financialTracker;
@@ -68,10 +66,8 @@ public class DataManager {
      * This method will be used more frequently as we typically want to save both entries and settings together.
      */
     public void saveAll() {
-        saveEntries(ENTRIES_FILE_NAME);
-        saveEntries(BACKUP_ENTRIES_FILE_NAME);
-        saveSettings(SETTINGS_FILE_NAME);
-        saveSettings(BACKUP_SETTINGS_FILE_NAME);
+        saveEntries();
+        saveSettings();
     }
 
     /**
@@ -87,9 +83,9 @@ public class DataManager {
      * Saves all entries StonksXD is currently tracking into a csv file.
      * This allows users to not lose all their entries when program closes.
      */
-    private void saveEntries(String filename) {
+    private void saveEntries() {
         try {
-            FileWriter writer = new FileWriter(filename);
+            FileWriter writer = new FileWriter(ENTRIES_FILE_NAME);
             BufferedWriter buffer = new BufferedWriter(writer);
             
             buffer.write(ENTRIES_CSV_HEADER);
@@ -98,12 +94,8 @@ public class DataManager {
             writeIncomes(buffer);
             buffer.close();
         } catch (IOException e) {
-            ui.printError(createErrorSavingEntriesMessage(filename));
+            ui.printError(Messages.ERROR_SAVING_ENTRIES_MESSAGE);
         }
-    }
-    
-    private String createErrorSavingEntriesMessage(String filename) {
-        return "There is trouble saving entries into " + filename + ", some or all entries maybe lost.";
     }
 
     private void writeIncomes(BufferedWriter buffer) throws IOException {
@@ -207,9 +199,9 @@ public class DataManager {
      * Saves all settings into a csv file.
      * This allows users to not lose all their settings when program closes.
      */
-    private void saveSettings(String filename) {
+    private void saveSettings() {
         try {
-            FileWriter writer = new FileWriter(filename);
+            FileWriter writer = new FileWriter(SETTINGS_FILE_NAME);
             BufferedWriter buffer = new BufferedWriter(writer);
             
             buffer.write(SETTINGS_CSV_HEADER);
@@ -218,12 +210,8 @@ public class DataManager {
             buffer.write(NEWLINE);
             buffer.close();
         } catch (IOException e) {
-            ui.printError(createErrorSavingSettingsMessage(filename));
+            ui.printError(Messages.ERROR_SAVING_SETTINGS_MESSAGE);
         }
-    }
-    
-    private String createErrorSavingSettingsMessage(String filename) {
-        return "There is trouble saving settings into " + filename + ", some or all settings maybe lost.";
     }
 
     private void writeSettings(BufferedWriter buffer) throws IOException {
