@@ -146,7 +146,7 @@ public class Scheduler {
      * @param parameters The attributes to filter patients
      * @return list of patients that match the specified attributes
      */
-    public List<String> findPatients(String[] parameters) {
+    public List<String> findPatients(String[] parameters) throws MedBotException {
         return patientList.findPersons(parameters);
     }
 
@@ -156,7 +156,7 @@ public class Scheduler {
      * @param parameters The attributes to filter patients
      * @return list of staff that match the specified attributes
      */
-    public List<String> findStaff(String[] parameters) {
+    public List<String> findStaff(String[] parameters) throws MedBotException {
         return medicalStaffList.findPersons(parameters);
     }
 
@@ -165,8 +165,8 @@ public class Scheduler {
      *
      * @return String containing information of all patients.
      */
-    public String listPatients(boolean getArchivedPatients) {
-        return patientList.listPersons(getArchivedPatients);
+    public String listPatients(boolean getHiddenPatients) {
+        return patientList.listPersons(getHiddenPatients);
     }
 
     /**
@@ -174,48 +174,48 @@ public class Scheduler {
      *
      * @return String containing information of all staff.
      */
-    public String listStaff(boolean getArchivedStaffs) {
-        return medicalStaffList.listPersons(getArchivedStaffs);
+    public String listStaff(boolean getHiddenStaffs) {
+        return medicalStaffList.listPersons(getHiddenStaffs);
     }
 
     /**
-     * Archives the patient with the specified id.
+     * Hides the patient with the specified id.
      *
-     * @param patientId the id of the patient to archive.
+     * @param patientId the id of the patient to hide.
      * @throws MedBotException if there is no patient with that id
      */
-    public void archivePatient(int patientId) throws MedBotException {
-        patientList.archivePerson(patientId);
+    public void hidePatient(int patientId) throws MedBotException {
+        patientList.hidePerson(patientId);
     }
 
     /**
-     * Archives the staff with the specified id.
+     * Hides the staff with the specified id.
      *
-     * @param staffId the id of the staff to archive.
+     * @param staffId the id of the staff to hide.
      * @throws MedBotException if there is no staff with that id
      */
-    public void archiveStaff(int staffId) throws MedBotException {
-        medicalStaffList.archivePerson(staffId);
+    public void hideStaff(int staffId) throws MedBotException {
+        medicalStaffList.hidePerson(staffId);
     }
 
     /**
-     * Unarchives the patient with the specified id.
+     * Shows the patient with the specified id.
      *
-     * @param patientId the id of the patient to unarchive.
+     * @param patientId the id of the patient to show.
      * @throws MedBotException if there is no patient with that id
      */
-    public void unarchivePatient(int patientId) throws MedBotException {
-        patientList.unarchivePerson(patientId);
+    public void showPatient(int patientId) throws MedBotException {
+        patientList.showPerson(patientId);
     }
 
     /**
-     * Unarchives the staff with the specified id.
+     * Shows the staff with the specified id.
      *
-     * @param staffId the id of the staff to unarchive.
+     * @param staffId the id of the staff to show.
      * @throws MedBotException if there is no staff with that id
      */
-    public void unarchiveStaff(int staffId) throws MedBotException {
-        medicalStaffList.unarchivePerson(staffId);
+    public void showStaff(int staffId) throws MedBotException {
+        medicalStaffList.showPerson(staffId);
     }
 
     //Storage methods

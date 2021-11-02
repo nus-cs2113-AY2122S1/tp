@@ -12,14 +12,14 @@ find
 delete
 switch
 exit
-archive
-unarchive
+hide
+show
 get view
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
-*Note that all commands will remove any '|' inputs for format parsing purposes. For 
+*Note that all commands will remove any '|' inputs for format parsing purposes. For
 examples of the expected output, please refer to the actual user guide.
 
 Adds a patient to the patient list.
@@ -44,7 +44,12 @@ Incorrect email address format.
 
 Incorrect email address format.
 
-Added patient with patient ID: 1
+Added patient with Patient ID: 1
+IC: S1231234A
+Name: John Smith
+H/P: 91234567
+Email: johnsmit@eg.com
+Address: Qweqwqwenoiqwenqw
 
 Thank you for using MedBot!
 See you again!

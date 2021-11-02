@@ -41,7 +41,7 @@ public class SchedulerUi {
     }
 
     public static String getListSchedulerHelpMessage() {
-        return "List the information of all appointments, including those of archived patients." + END_LINE
+        return "List the information of all appointments, including those of hidden patients." + END_LINE
                 + "Format: list " + END_LINE;
     }
 

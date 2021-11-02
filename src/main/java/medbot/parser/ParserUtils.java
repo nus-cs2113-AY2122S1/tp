@@ -17,12 +17,11 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import static java.util.stream.Collectors.toList;
 
 
 public abstract class ParserUtils {
-    private static final String PARAMETER_ARCHIVE = "-ar";
+    private static final String PARAMETER_HIDE = "-h";
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
     private static final String PARAMETER_PATIENT = "p/";
@@ -390,14 +389,14 @@ public abstract class ParserUtils {
     }
 
     /**
-     * Returns the flag in the list command (show archived listItem or not).
+     * Returns the flag in the list command (show hidden listItem or not).
      *
      * @param attributeString the String to be parsed.
-     * @return the boolean indicate whether we show archived listItem or not.
+     * @return the boolean indicate whether we show hidden listItem or not.
      * @throws MedBotParserException when the String is of wrong format.
      */
     public static boolean parseListParameter(String attributeString) throws MedBotParserException {
-        if (attributeString.trim().equals(PARAMETER_ARCHIVE)) {
+        if (attributeString.trim().equals(PARAMETER_HIDE)) {
             return true;
         }
 

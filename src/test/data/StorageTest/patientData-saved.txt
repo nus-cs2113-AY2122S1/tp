@@ -1,7 +1,7 @@
-1 | S7912345A | Doge | 91234567 | doge@mail.com | Doge Town 2nd Street | U
-2 | X | Cheems | X | cheems@mail.com | Doge County | U
-4 | S2312345A | X | 81234567 | cheems@mail.com | Arken Street | U
-6 | F9123456X | Emma | X | emma@mail.com | Greensville County | U
-7 | F3232145B | Norman | X | norman@mail.com | Petalburg City | U
-9 | S9145645C | Arthur | 67654321 | X | Evergrande District | U
-10 | T0123463X | William | X | will@mail.com | Doge County | U
+1 | S7912345A | Doge | 91234567 | doge@mail.com | Doge Town 2nd Street | S
+2 | X | Cheems | X | cheems@mail.com | Doge County | S
+4 | S2312345A | X | 81234567 | cheems@mail.com | Arken Street | S
+6 | F9123456X | Emma | X | emma@mail.com | Greensville County | S
+7 | F3232145B | Norman | X | norman@mail.com | Petalburg City | S
+9 | S9145645C | Arthur | 67654321 | X | Evergrande District | S
+10 | T0123463X | William | X | will@mail.com | Doge County | S

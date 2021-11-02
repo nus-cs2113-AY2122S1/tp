@@ -13,19 +13,19 @@ import medbot.command.personcommand.patientcommand.AddPatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
 import medbot.command.personcommand.patientcommand.EditPatientCommand;
 import medbot.command.personcommand.patientcommand.FindPatientCommand;
+import medbot.command.personcommand.patientcommand.HidePatientCommand;
 import medbot.command.personcommand.patientcommand.ListPatientCommand;
+import medbot.command.personcommand.patientcommand.ShowPatientCommand;
 import medbot.command.personcommand.patientcommand.ViewPatientCommand;
-import medbot.command.personcommand.patientcommand.ArchivePatientCommand;
-import medbot.command.personcommand.patientcommand.UnarchivePatientCommand;
 import medbot.command.personcommand.staffcommand.AddStaffCommand;
 import medbot.command.personcommand.staffcommand.DeleteStaffCommand;
 import medbot.command.personcommand.staffcommand.EditStaffCommand;
 import medbot.command.personcommand.staffcommand.FindStaffCommand;
+import medbot.command.personcommand.staffcommand.HideStaffCommand;
 import medbot.command.personcommand.staffcommand.ListStaffCommand;
-import medbot.command.personcommand.staffcommand.ViewStaffCommand;
-import medbot.command.personcommand.staffcommand.ArchiveStaffCommand;
-import medbot.command.personcommand.staffcommand.UnarchiveStaffCommand;
+import medbot.command.personcommand.staffcommand.ShowStaffCommand;
 
+import medbot.command.personcommand.staffcommand.ViewStaffCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.parser.Parser;
 import medbot.parser.ParserUtils;
@@ -292,8 +292,8 @@ class ParserTest {
         testCases.put("find n/name", new FindPatientCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewPatientCommand(1));
         testCases.put("list", new ListPatientCommand(false));
-        testCases.put("archive 1", new ArchivePatientCommand(1));
-        testCases.put("unarchive 1", new UnarchivePatientCommand(1));
+        testCases.put("hide 1", new HidePatientCommand(1));
+        testCases.put("show 1", new ShowPatientCommand(1));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {
@@ -321,8 +321,8 @@ class ParserTest {
         testCases.put("find n/name", new FindStaffCommand(new String[]{"name"}));
         testCases.put("view 1", new ViewStaffCommand(1));
         testCases.put("list", new ListStaffCommand(false));
-        testCases.put("archive 1", new ArchiveStaffCommand(1));
-        testCases.put("unarchive 1", new UnarchiveStaffCommand(1));
+        testCases.put("hide 1", new HideStaffCommand(1));
+        testCases.put("show 1", new ShowStaffCommand(1));
         testCases.put(" hello", null);
 
         for (String testCase : testCases.keySet()) {

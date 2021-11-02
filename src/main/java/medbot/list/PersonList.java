@@ -130,7 +130,7 @@ public abstract class PersonList {
      * @param parameters The attributes to filter persons.
      * @return The filtered persons.
      */
-    public List<String> findPersons(String[] parameters) {
+    public List<String> findPersons(String[] parameters) throws MedBotException {
         List<String> filteredPersons = new ArrayList<>();
         for (int key : persons.keySet()) {
             Person currentPerson = persons.get(key);
@@ -143,16 +143,18 @@ public abstract class PersonList {
     }
 
     /**
-     * Returns a String that contains information of all archived or unarchived persons.
+     * Returns a String that contains information of all hiddren or not-hidden persons.
      *
-     * @param getArchivedPersons The boolean to indicate whether to get archived or unarchived persons.
-     * @return String that contains information of all archived or unarchived persons
+     * @param getHiddenPersons The boolean to indicate whether to get hidden or not-hidden persons.
+     * @return String that contains information of all hidden or not-hidden persons
      */
-    public String listPersons(boolean getArchivedPersons) {
+    public String listPersons(boolean getHiddenPersons) {
         String output = "";
 
         for (int key : persons.keySet()) {
-            if (persons.get(key).isArchived() == getArchivedPersons) {
+            boolean isPersonHidden = persons.get(key).isHidden();
+
+            if (isPersonHidden == getHiddenPersons) {
                 output += persons.get(key).getInfoInTableFormat() + END_LINE;
             }
         }
@@ -161,31 +163,35 @@ public abstract class PersonList {
     }
 
     /**
-     * Archive a person in the list.
+     * Hide a person in the list.
      *
-     * @param personId the id of the person to archive.
-     * @throws MedBotException when the person have already been archive.
+     * @param personId the id of the person to hide.
+     * @throws MedBotException when the person have already been hidden.
      */
-    public void archivePerson(int personId) throws MedBotException {
+    public void hidePerson(int personId) throws MedBotException {
         checkPersonExists(personId);
-        if (persons.get(personId).isArchived()) {
-            throw new MedBotException(getAlreadyArchivedErrorMessage(personId));
+        boolean isPersonHidden = persons.get(personId).isHidden();
+
+        if (isPersonHidden) {
+            throw new MedBotException(getAlreadyHiddenErrorMessage(personId));
         }
-        persons.get(personId).archive();
+        persons.get(personId).hide();
     }
 
     /**
-     * Unarchive an archived person in the list.
+     * Shows a hidden person in the list.
      *
-     * @param personId the id of the person to unarchive.
-     * @throws MedBotException when the person have not been archived.
+     * @param personId the id of the person to show.
+     * @throws MedBotException when the person is not hidden.
      */
-    public void unarchivePerson(int personId) throws MedBotException {
+    public void showPerson(int personId) throws MedBotException {
         checkPersonExists(personId);
-        if (!persons.get(personId).isArchived()) {
-            throw new MedBotException(getAlreadyUnarchivedErrorMessage(personId));
+        boolean isPersonHidden = persons.get(personId).isHidden();
+
+        if (!isPersonHidden) {
+            throw new MedBotException(getAlreadyShownErrorMessage(personId));
         }
-        persons.get(personId).unarchive();
+        persons.get(personId).show();
     }
 
     /**
@@ -275,24 +281,24 @@ public abstract class PersonList {
     protected abstract String getPersonNotFoundErrorMessage(int personId);
 
     /**
-     * Generates the exception message for MedBotExceptions when the person is already archived.
+     * Generates the exception message for MedBotExceptions when the person is already hidden.
      *
      * <p>Is overrode by subclasses
      *
-     * @param personId id of the person who is already archived
-     * @return exception message when the person is already archived
+     * @param personId id of the person who is already hidden
+     * @return exception message when the person is already hidden
      */
-    protected abstract String getAlreadyArchivedErrorMessage(int personId);
+    protected abstract String getAlreadyHiddenErrorMessage(int personId);
 
     /**
-     * Generates the exception message for MedBotExceptions when the person is already unarchived.
+     * Generates the exception message for MedBotExceptions when the person is already shown.
      *
      * <p>Is overrode by subclasses
      *
-     * @param personId id of the person who is already unarchived
-     * @return exception message when the person is already unarchived
+     * @param personId id of the person who is already shown
+     * @return exception message when the person is already shown
      */
-    protected abstract String getAlreadyUnarchivedErrorMessage(int personId);
+    protected abstract String getAlreadyShownErrorMessage(int personId);
 
 
     /**

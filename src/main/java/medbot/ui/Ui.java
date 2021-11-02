@@ -154,18 +154,18 @@ public class Ui {
     /**
      * Returns the successful message of archiving a person.
      *
-     * @param personId the ID of the person to be archived.
+     * @param personId the ID of the person to be hidden.
      * @param viewType the viewType context of the command.
      * @return The successful message of archiving the person
      */
-    public static String getArchivePersonMessage(int personId, ViewType viewType) throws MedBotException {
+    public static String getHidePersonMessage(int personId, ViewType viewType) throws MedBotException {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = PatientUi.getArchivePatientMessage(personId);
+            output = PatientUi.getHidePatientMessage(personId);
             break;
         case MEDICAL_STAFF_INFO:
-            output = StaffUi.getArchiveStaffMessage(personId);
+            output = StaffUi.getHideStaffMessage(personId);
             break;
         default:
             assert false;
@@ -178,18 +178,18 @@ public class Ui {
     /**
      * Returns the successful message of un-archiving a person.
      *
-     * @param personId the ID of the person to be un-archived.
+     * @param personId the ID of the person to be shown.
      * @param viewType the viewType context of the command.
      * @return The successful message of un-archiving the person
      */
-    public static String getUnarchivePersonMessage(int personId, ViewType viewType) throws MedBotException {
+    public static String getShowPersonMessage(int personId, ViewType viewType) throws MedBotException {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = PatientUi.getUnarchivePatientMessage(personId);
+            output = PatientUi.getShowPatientMessage(personId);
             break;
         case MEDICAL_STAFF_INFO:
-            output = StaffUi.getUnarchiveStaffMessage(personId);
+            output = StaffUi.getShowStaffMessage(personId);
             break;
         default:
             assert false;
@@ -397,16 +397,16 @@ public class Ui {
     }
 
     /**
-     * Prints information about archive command.
+     * Prints information about hide command.
      *
-     * @return the information on archive command.
+     * @return the information on hide command.
      */
-    public String getArchiveHelpMessage(ViewType viewType) throws MedBotException {
+    public String getHideHelpMessage(ViewType viewType) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:
-            return PatientUi.getArchivePatientHelpMessage();
+            return PatientUi.getHidePatientHelpMessage();
         case MEDICAL_STAFF_INFO:
-            return StaffUi.getArchiveStaffHelpMessage();
+            return StaffUi.getHideStaffHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -414,16 +414,16 @@ public class Ui {
     }
 
     /**
-     * Prints information about archive command.
+     * Prints information about hide command.
      *
-     * @return the information on archive command.
+     * @return the information on hide command.
      */
-    public String getUnarchiveHelpMessage(ViewType viewType) throws MedBotException {
+    public String getShowHelpMessage(ViewType viewType) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:
-            return PatientUi.getUnarchivePatientHelpMessage();
+            return PatientUi.getShowPatientHelpMessage();
         case MEDICAL_STAFF_INFO:
-            return StaffUi.getUnarchiveStaffHelpMessage();
+            return StaffUi.getShowStaffHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);

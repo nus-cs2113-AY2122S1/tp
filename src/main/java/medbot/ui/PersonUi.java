@@ -10,10 +10,10 @@ public abstract class PersonUi {
         return "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
                 + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
-                + "archive" + END_LINE + "unarchive" + END_LINE + "get view" + END_LINE + END_LINE
+                + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For" + END_LINE
                 + "examples of the expected output, please refer to the actual user guide." + END_LINE;
     }
 
@@ -61,18 +61,18 @@ public abstract class PersonUi {
     }
 
     //@@author EricBryann
-    public static String getArchiveHelpMessage(String person) {
+    public static String getHideHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Archives a " + person + " from the list." + END_LINE
+        return "Hides a " + person + " from the list." + END_LINE
                 + "Format:" + END_LINE
-                + "archive " + uppercasePerson + "_ID" + END_LINE;
+                + "hide " + uppercasePerson + "_ID" + END_LINE;
     }
 
-    public static String getUnarchiveHelpMessage(String person) {
+    public static String getShowHelpMessage(String person) {
         String uppercasePerson = capitalize(person);
-        return "Unarchive a " + person + " from the list." + END_LINE
+        return "Show a " + person + " from the list." + END_LINE
                 + "Format:" + END_LINE
-                + "unarchive " + uppercasePerson + "_ID" + END_LINE;
+                + "show " + uppercasePerson + "_ID" + END_LINE;
     }
 
 
@@ -136,12 +136,16 @@ public abstract class PersonUi {
                 + info + END_LINE;
     }
 
-    public static String getArchivePersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is archived successfully." + END_LINE;
+    public static String getHidePersonMessage(String person, int id) {
+        String output = "The " + person + " with ID: " + id + " is now hidden." + END_LINE;
+
+        return output;
     }
 
-    public static String getUnarchivePersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is unarchived successfully." + END_LINE;
+    public static String getShowPersonMessage(String person, int id) {
+        String output = "The " + person + " with ID: " + id + " is now not hidden." + END_LINE;
+
+        return output;
     }
 
     public static String getCurrentViewPersonMessage(String person) {

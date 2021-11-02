@@ -12,7 +12,7 @@ class PersonTest {
 
     @Test
     public void testStringConversion() {
-        String correctString = "Patient ID: 0 " + END_LINE
+        String correctString = "Patient ID: 0" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: " + END_LINE
                 + "H/P: " + END_LINE
@@ -30,7 +30,7 @@ class PersonTest {
         patient.setPhoneNumber("81234567");
         patient.setEmailAddress("alicetan@example.com");
         patient.setResidentialAddress("Blk 123 Bishan St 12 #05-39");
-        String correctString = "Patient ID: 0 " + END_LINE
+        String correctString = "Patient ID: 0" + END_LINE
                 + "IC: " + "S8712345G" + END_LINE
                 + "Name: " + "Alice Tan" + END_LINE
                 + "H/P: " + "81234567" + END_LINE

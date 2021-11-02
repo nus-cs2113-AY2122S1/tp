@@ -31,12 +31,12 @@ public class PatientUi extends PersonUi {
         return getDeleteHelpMessage(PATIENT);
     }
 
-    public static String getArchivePatientHelpMessage() {
-        return getArchiveHelpMessage(PATIENT);
+    public static String getHidePatientHelpMessage() {
+        return getHideHelpMessage(PATIENT);
     }
 
-    public static String getUnarchivePatientHelpMessage() {
-        return getUnarchiveHelpMessage(PATIENT);
+    public static String getShowPatientHelpMessage() {
+        return getShowHelpMessage(PATIENT);
     }
 
     public static String getAddPatientMessage(String patientInfo) {
@@ -51,12 +51,12 @@ public class PatientUi extends PersonUi {
         return getEditPersonMessage(PATIENT, id, info);
     }
 
-    public static String getArchivePatientMessage(int id) {
-        return getArchivePersonMessage(PATIENT, id);
+    public static String getHidePatientMessage(int id) {
+        return getHidePersonMessage(PATIENT, id);
     }
 
-    public static String getUnarchivePatientMessage(int id) {
-        return getUnarchivePersonMessage(PATIENT, id);
+    public static String getShowPatientMessage(int id) {
+        return getShowPersonMessage(PATIENT, id);
     }
 
     public static String getCurrentViewPatientMessage() {
