@@ -9,10 +9,8 @@ import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
-
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -20,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class RemoveCommandParser {
 
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private String flag;
     private int uniIndex;
     private int mapIndex;
@@ -88,8 +86,8 @@ public class RemoveCommandParser {
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = universitySelectedList.getUniversity(uniName);
-
         }
+
         // Check if university has been added already
         if (!universitySelectedList.searchUniversity(uniName)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
@@ -143,6 +141,7 @@ public class RemoveCommandParser {
             uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
             mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
         } catch (NumberFormatException e) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
         }
         for (University uni : universitySelectedList.getList()) {
@@ -153,12 +152,15 @@ public class RemoveCommandParser {
             }
         }
         if (!validUni) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
         }
         if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
         if (currentUni.getMappingListSize() < mapIndex || mapIndex < 1) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
 

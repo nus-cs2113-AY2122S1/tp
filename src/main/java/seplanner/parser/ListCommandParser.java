@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class ListCommandParser {
 
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
                          UniversityList universitySelectedList, ModuleList moduleSelectedList)
@@ -42,7 +42,7 @@ public class ListCommandParser {
             return new ListModCommand(moduleSelectedList, ListType.SELECTED);
         default:
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new ParseException("Incorrect flags passed.", 1);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
     }
 }
