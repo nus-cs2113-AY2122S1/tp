@@ -225,9 +225,7 @@ public class Parser {
     private boolean isGeneralRelatedCommand(String commandWord) {
         return (commandWord.equals(HELP_COMMAND_KEYWORD) || commandWord.equals(FIND_KEYWORD)
                 || commandWord.equals(EXIT_KEYWORD) || commandWord.equals(SHOW_GRAPH_KEYWORD)
-                || commandWord.equals(CONVERT_CURRENCY_KEYWORD) || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD)
-                || commandWord.equals(CHECK_CURRENT_CURRENCY_KEYWORD)
-                || commandWord.equals(LIST_CURRENCY_TYPES_KEYWORD));
+                || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD));
     }
 
     private boolean isBudgetRelatedCommand(String commandWord) {
