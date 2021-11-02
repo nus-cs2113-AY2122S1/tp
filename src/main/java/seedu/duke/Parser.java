@@ -13,8 +13,7 @@ import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
 
-    // static String regex = "(\\/[a-z])+";
-    static String regex = "[\\s]+";
+    static String regex = "(\\/[a-z])+";
 
     public static boolean hasListMemberKeyword(String arg) {
         return arg.trim().matches("^list /m");

@@ -28,10 +28,10 @@ public class EditTraining {
             assert index >= 1;
 
             TrainingSchedule trainingToChange = trainings.getTrainingList().get(index - 1);
-            String oldName = trainingToChange.getTrainingName();
-            String oldVenue = trainingToChange.getTrainingVenue();
-            String oldTime = trainingToChange.getTrainingTime();
-            int oldIndex = trainingToChange.getTrainingIndex();
+            final String oldName = trainingToChange.getTrainingName();
+            final String oldVenue = trainingToChange.getTrainingVenue();
+            final String oldTime = trainingToChange.getTrainingTime();
+            final int oldIndex = trainingToChange.getTrainingIndex();
 
             if (!toChange.getTrainingName().equals("")) {
                 if (verifyTrainingDetails(toChange.getTrainingName(), trainings)) {
