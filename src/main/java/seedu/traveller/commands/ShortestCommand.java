@@ -49,7 +49,9 @@ public class ShortestCommand extends Command {
         MinCalcResult result;
 
         assert Objects.equals(this.distOrCost,"dist") || Objects.equals(this.distOrCost,"cost");
-        if (Objects.equals(this.distOrCost, "dist")) {
+
+
+        if(Objects.equals(this.distOrCost, "dist")) {
             result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
         } else {
             WorldMap.altWorldMap();

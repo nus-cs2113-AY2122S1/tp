@@ -115,6 +115,7 @@ public class Ui {
         }
     }
 
+
     public void printShortestCost(String startCountry, String endCountry, double cost, List<Double> costs) {
         System.out.println("\tThe least cost from " + startCountry + " to " + endCountry + " is " + cost + ".");
         System.out.println("\tCost breakdown: ");
@@ -122,6 +123,8 @@ public class Ui {
             System.out.println("\t" + c);
         }
     }
+
+
 
     public void printEditMap(String startCountry, String endCountry, double dist) {
         System.out.println("\tThe distance from " + startCountry + " to "
