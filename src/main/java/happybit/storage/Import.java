@@ -2,7 +2,6 @@ package happybit.storage;
 
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
-import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.interval.Interval;
@@ -10,19 +9,29 @@ import happybit.interval.Interval;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Import class handles the importing of data from the storage file to GoalList.
+ */
 public class Import {
     private static final String DELIMITER = "##";
     private static final String GOAL_TYPE = "G";
     private static final String HABIT_TYPE = "H";
     private static final String INTERVAL_TYPE = "I";
+    private static final String ERROR_INVALID_GOAL_INDEX = "There is no goal at that index.";
+    private static final String ERROR_READING_DATA = "Error while reading data from storage.";
     private static final int GOAL_INDEX = 0;
     private static final int TYPE_INDEX = 1;
     private static final int HABIT_INDEX = 2;
-    private static final String ERROR_INVALID_GOAL_INDEX = "There is no goal at that index.";
 
+    /**
+     * This method will read from the storage file to return a GoalList object.
+     *
+     * @param filePath the location of the storage file
+     * @return GoalList object that contains user data
+     * @throws HaBitStorageException when an error occurred during importing of data
+     */
     protected static GoalList importStorage(String filePath) throws HaBitStorageException {
         GoalList goalList = new GoalList();
         File storageFile = new File(filePath);
@@ -43,7 +52,6 @@ public class Import {
         } catch (HaBitCommandException e) {
             throw new HaBitStorageException(ERROR_INVALID_GOAL_INDEX);
         }
-
         return goalList;
     }
 

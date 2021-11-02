@@ -43,6 +43,7 @@ public class Storage {
     /**
      * This method is automatically called everytime the program start up.
      * It will import the data from storage file.
+     *
      * @return a GoalList object
      * @throws HaBitStorageException when errors occurred with the importing of data
      */
@@ -54,6 +55,7 @@ public class Storage {
 
     /**
      * Checks if the storage file exists. If it does not, it will create one for the user.
+     *
      * The storage file created will be read only.
      * @param filePath the file path where the storage file is to be found
      * @param fileDir the folder where the storage file is supposed to be stored at
@@ -73,6 +75,7 @@ public class Storage {
 
     /**
      * Create directory of storage file.
+     *
      * @param storageDir the directory where storage file will be placed
      */
     protected void makeDirectory(File storageDir) {
@@ -87,6 +90,7 @@ public class Storage {
 
     /**
      * Create the storage file if it does not exist.
+     *
      * @param storageFile the storage text file to create
      */
     protected void createFile(File storageFile) {
@@ -105,6 +109,7 @@ public class Storage {
 
     /**
      * Set the storage file as read only.
+     *
      * @param storageFile the storage file to set as read only
      */
     protected void setReadOnly(File storageFile) {
