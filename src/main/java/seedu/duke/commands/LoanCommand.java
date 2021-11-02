@@ -11,6 +11,9 @@ import java.util.HashMap;
 import static seedu.duke.common.Messages.INVALID_DATE;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_DUE;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_USER;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
@@ -26,9 +29,7 @@ public class LoanCommand extends Command {
     public static final String COMMAND_WORD = "loan";
     public static final String SUCCESS_LOAN = "  (+) Item has been loaned out:";
     public static final String ERR_RESERVED = "  (!) Sorry, the item has already been reserved for someone else";
-    public static final String KEY_ID = "i";
-    public static final String KEY_USER = "u";
-    public static final String KEY_DUE = "d";
+
 
     protected HashMap<String, String> args;
     protected String id;

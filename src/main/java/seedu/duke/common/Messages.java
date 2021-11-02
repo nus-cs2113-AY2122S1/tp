@@ -67,7 +67,7 @@ public class Messages {
     public static final String EDIT_UNCHANGED_ARTIST = "  (!) New artist is the same as the existing artist";
     public static final String EDIT_UNCHANGED_EDITION = "  (!) New edition is the same as the existing edition";
 
-    // Add and Edit
+    // Keys
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
     public static final String KEY_ARTIST = "a";
@@ -75,6 +75,10 @@ public class Messages {
     public static final String KEY_PUBLISHER = "p";
     public static final String KEY_AUTHOR = "a";
     public static final String KEY_EDITION = "e";
+    public static final String KEY_STATUS = "s";
+    public static final String KEY_CATEGORY = "c";
+    public static final String KEY_USER = "u";
+    public static final String KEY_DUE = "d";
 
 
     // Invalid Formats
