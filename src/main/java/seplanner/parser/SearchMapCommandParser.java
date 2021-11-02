@@ -2,11 +2,10 @@ package seplanner.parser;
 
 import seplanner.commands.SearchMapCommand;
 import seplanner.constants.Constants;
+import seplanner.exceptions.SearchMapParseException;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
-
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,12 +15,12 @@ public class SearchMapCommandParser {
 
     public SearchMapCommand parse(String arguments, UniversityList universityMasterList,
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
-            throws ParseException {
+            throws SearchMapParseException {
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
         if (input.length() == 0) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
         University university;
@@ -29,7 +28,7 @@ public class SearchMapCommandParser {
         if (isNumeric(input)) {
             int index = Integer.parseInt(input);
             if (index > universityMasterList.getSize() || index < 1) {
-                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             university = universityMasterList.get(index - 1);
         } else {
@@ -38,7 +37,7 @@ public class SearchMapCommandParser {
 
         if (university == null) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
         assert university.getName() != null;
         logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
