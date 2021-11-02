@@ -16,7 +16,8 @@ public class DeleteIncomeCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         try {
             Income deletedIncome = finances.removeIncome(incomeNumber);
             ui.printIncomeDeleted(deletedIncome);

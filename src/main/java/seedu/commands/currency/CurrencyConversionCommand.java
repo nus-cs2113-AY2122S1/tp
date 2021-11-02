@@ -16,12 +16,13 @@ public class CurrencyConversionCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         try {
-            currencyManager.CurrencyConversion(from, to, finances, budgetManager);
+            currencyManager.currencyConvertor(from, to, finances, budgetManager);
             ui.printCurrencyChangedConfirmation(to);
         } catch (SameCurrencyTypeException e) {
-           ui.printSameCurrencyTypeMessage(to);
+            ui.printSameCurrencyTypeMessage(to);
         }
     }
 }

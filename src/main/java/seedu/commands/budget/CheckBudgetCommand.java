@@ -15,7 +15,8 @@ public class CheckBudgetCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         double budgetLimit = budgetManager.getBudget(category);
         ui.printBudget(category, budgetLimit);
     }

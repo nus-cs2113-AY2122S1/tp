@@ -17,7 +17,8 @@ public class SetBudgetCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         budgetManager.setBudget(amount, category);
         ui.printBudgetSetConfirmation(amount, category);
     }

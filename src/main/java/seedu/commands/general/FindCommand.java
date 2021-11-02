@@ -30,7 +30,8 @@ public class FindCommand extends Command {
      * @param ui The user interface which provide feedback to the user.
      * @param budgetManager The budgeting manager that manages all the budget related operations.
      */
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         ArrayList<Entry> entries = finances.getEntries();
         ArrayList<Entry> filteredEntries = new ArrayList<>();
         

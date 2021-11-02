@@ -497,7 +497,7 @@ public class Ui {
         System.out.println(Messages.AVAILABLE_CURRENCIES_MESSAGE);
         int i = 0;
         for (CurrencyType currencyType : currencyTypes) {
-            System.out.println(i+1 + ". " + currencyType);
+            System.out.println(i + 1 + ". " + currencyType);
             i++;
         }
         printLine();

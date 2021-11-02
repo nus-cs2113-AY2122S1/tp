@@ -16,7 +16,8 @@ public class AddExpenseCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         try {
             finances.addExpense(expense);
             ui.printExpenseAdded(expense);

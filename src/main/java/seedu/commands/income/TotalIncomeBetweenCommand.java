@@ -21,7 +21,8 @@ public class TotalIncomeBetweenCommand extends Command {
     }
     
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         double totalIncomeBetween = finances.getIncomeBetween(start,end);
         ui.printTotalIncomeBetween(totalIncomeBetween,start,end);
     }

@@ -9,7 +9,8 @@ import seedu.utility.Ui;
 public class CheckCurrentCurrencyCommand extends Command {
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         CurrencyType currency = currencyManager.getCurrency();
         ui.printCurrentCurrency(currency);
     }

@@ -20,7 +20,8 @@ public class TotalExpenseBetweenCommand extends Command {
     }
     
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         double totalExpenseBetween = finances.getExpenseBetween(start,end);
         ui.printTotalExpenseBetween(totalExpenseBetween,start,end);
     }

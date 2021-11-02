@@ -14,7 +14,7 @@ public class CurrencyManager {
     private CurrencyType currency = CurrencyType.SGD;
     private ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
 
-    public void CurrencyConversion(CurrencyType from, CurrencyType to, FinancialTracker finances,
+    public void currencyConvertor(CurrencyType from, CurrencyType to, FinancialTracker finances,
                                    BudgetManager budgetManager) throws SameCurrencyTypeException {
         if (getCurrency() == to) {
             throw new SameCurrencyTypeException(Messages.SAME_CURRENCY_TYPE_MESSAGE);

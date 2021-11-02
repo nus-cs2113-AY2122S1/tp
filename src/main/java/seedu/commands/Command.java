@@ -6,7 +6,8 @@ import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
 public abstract class Command {
-    public abstract void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager);
+    public abstract void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                                 CurrencyManager currencyManager);
 
     public boolean isExit() {
         return false;

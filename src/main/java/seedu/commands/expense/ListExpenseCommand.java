@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class ListExpenseCommand extends Command {
     @Override
-    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager, CurrencyManager currencyManager) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,
+                        CurrencyManager currencyManager) {
         ArrayList<Expense> expenses = finances.getExpenses(); 
         ui.listExpense(expenses);
     }
