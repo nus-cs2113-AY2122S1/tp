@@ -136,7 +136,7 @@ class UiTest {
         String patientInfo = patient.toString();
         String expectedOutput =
                 "The information of patient with ID 1 has been edited to:" + END_LINE + END_LINE
-                + "Patient ID: 1 " + END_LINE
+                + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: Bob" + END_LINE
                 + "H/P: " + END_LINE
@@ -221,7 +221,7 @@ class UiTest {
         patientList.addPerson(patient);
         String patientInfo = patient.toString();
         String expectedOutput = "Here's the requested patient:" + END_LINE + END_LINE
-                + "Patient ID: 1 " + END_LINE
+                + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: John Doe" + END_LINE
                 + "H/P: " + END_LINE
@@ -323,7 +323,7 @@ class UiTest {
                 + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For" + END_LINE
                 + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 
         try {
@@ -342,7 +342,7 @@ class UiTest {
                 + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For" + END_LINE
                 + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 
         try {
