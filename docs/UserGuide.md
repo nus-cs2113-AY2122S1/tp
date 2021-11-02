@@ -23,13 +23,13 @@ If you can type fast, TAA can help keep track of your classes and students faste
   * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
   * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
   * [Viewing median mark for an assessment: `median_mark`](#viewing-median-mark-for-an-assessment-median_mark)
-  * [Sorting and listing students in a module by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-module-by-their-overall-score-sort_by_scores)
+  * [Sorting and listing students in a class by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-class-by-their-overall-score-sort_by_scores)
   * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
   * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
   * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
   * [Setting comment for a particular student: `set_comment`](#setting-comment-for-a-particular-student-set_comment)
   * [Deleting comment for a particular student: `delete_comment`](#deleting-comment-for-a-particular-student-delete_comment)
-  * [Listing comments for all students in a module `list_comment`](#listing-comments-for-all-students-in-a-module-list_comment)
+  * [Listing comments for all students in a class `list_comment`](#listing-comments-for-all-students-in-a-class-list_comment)
   * [Viewing help: `help`](#viewing-help-help)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Archiving data: `archive`](#archiving-data-archive)
@@ -59,7 +59,9 @@ Format: `list_classes`
 Adds a class to the class list.
 
 Format: `add_class c/<CLASS_ID> [n/<CLASS_NAME>]`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+  * Case-insensitive
+  * Cannot contain whitespaces
 * `CLASS_NAME` [Optional] refers to the name of the class to be added.
 
 Examples:
@@ -73,8 +75,8 @@ Examples:
 Edits the code or name of an existing class.
 
 Format: `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
-* `NEW_CLASS_ID` [Optional] refers to the updated id of the class. **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `NEW_CLASS_ID` [Optional] refers to the updated id of the class.
 * `NEW_CLASS_NAME` [Optional] refers to the updated name of the class.
 > 💡 **Note:**<br />
 > At least one optional field must be provided:
@@ -92,7 +94,7 @@ Examples:
 Deletes an existing class from the class list.
 
 Format: `delete_class c/<CLASS_ID>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 
 Examples:
 * `delete_class c/CS2113T-F12`
@@ -104,7 +106,7 @@ Examples:
 Shows a list of all students in a particular class.
 
 Format: `list_students c/<CLASS_ID>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
 
 Examples:
 * `list_students c/CS2113T-F11`
@@ -116,7 +118,7 @@ Examples:
 Adds a student to a particular class.
 
 Format: `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
 * `STUDENT_ID` refers to the ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the name of the student (e.g. Jon Lim).
 
@@ -130,7 +132,7 @@ Examples:
 Edits student information from a particular class
 
 Format: `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `STUDENT_ID` refers to the updated ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the updated name of the student (e.g. Jon Limbs).
@@ -145,7 +147,7 @@ Examples:
 Deletes student information from a particular class.
 
 Format: `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 
 Examples:
@@ -157,7 +159,7 @@ Examples:
 Displays all students in the class matching the keyword along with their index.
 
 Format: `find_student c/<CLASS_ID> k/<KEYWORD>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
 * `KEYWORD` refers to the keyword used to search the student list of the class.
 
 Examples:
@@ -170,7 +172,7 @@ Examples:
 List all assessments in a class.
 
 Format: `list_assessments c/<CLASS_ID>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 
 Examples:
 * `list_assessments c/CS2113T-F12`
@@ -182,7 +184,7 @@ Examples:
 Adds an assessment to a class.
 
 Format: `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 * `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100).
 * `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%).
@@ -197,7 +199,7 @@ Examples:
 Edits an assessment of a class.
 
 Format: `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>] [w/<NEW_WEIGHTAGE>]`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 * `NEW_ASSESSMENT_NAME` [Optional] refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
 * `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50).
@@ -218,7 +220,7 @@ Examples:
 Deletes an assessment of a class.
 
 Format: `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 
 Examples:
@@ -231,7 +233,7 @@ Examples:
 Lists all students and their marks for an assessment.
 
 Format: `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment whose marks are to be listed.
 
 Examples:
@@ -244,7 +246,7 @@ Examples:
 Adds a student's marks for an assessment.
 
 Format: `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 * `MARKS` refers to the marks given for the assessment.
@@ -259,7 +261,7 @@ Examples:
 Edits a student's mark for an assessment.
 
 Format: `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 * `NEW_MARKS` refers to the new marks to be given for the assessment.
@@ -274,7 +276,7 @@ Examples:
 Deletes a student's marks for an assessment.
 
 Format: `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 
@@ -289,7 +291,7 @@ Computes and prints the average marks for an assessment. If there are unmarked s
 within the marked students only.
 
 Format: `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 
 Examples:
@@ -303,7 +305,7 @@ Computes and prints the median mark for an assessment. If there are unmarked stu
 within the marked students only.
 
 Format: `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 
 Examples:
@@ -312,12 +314,12 @@ Examples:
 
 <br>
 
-### Sorting and listing students in a module by their overall score: `sort_by_scores`
-Sorts and lists students in a module by their overall score according to the desired format. 
+### Sorting and listing students in a class by their overall score: `sort_by_scores`
+Sorts and lists students in a class by their overall score according to the desired format. 
 Only marks currently added to students will be taken into consideration for their scores.
 
 Format: `sort_by_scores c/<CLASS_ID> o/<ORDER>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ORDER` refers to the sorting order. `asc` for ascending and `desc` for descending.
 
 Examples:
@@ -330,7 +332,7 @@ Examples:
 Lists a student's attendance.
 
 Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 
 <br>
@@ -339,7 +341,7 @@ Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX`
 Sets a student's attendance for a lesson.
 
 Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
@@ -350,9 +352,21 @@ Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRES
 Deletes a student's attendance for a lesson.
 
 Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
+
+<br>
+
+### Listing comments for all students in a class: `list_comment`
+List comments for all students in a class
+
+Format: `list_comment c/<CLASS_ID>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+
+Examples:
+* `list_comment c/CS2113T-F12`
+* `list_comment c/CS2101-D03`
 
 <br>
 
@@ -360,8 +374,8 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 Sets a comment for a student.
 
 Format: `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
-* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `COMMENT` refers to the comment to be set.
 > 💡 **Note:**<br />
 > The new comment will overwrite any previous comment set
@@ -376,24 +390,12 @@ Examples:
 Deletes the comment for a student.
 
 Format: `delete_comment c/<CLASS_ID> s/<STUDENT_INDEX>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
-* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 
 Examples:
 * `delete_comment c/CS2113T-F12 s/1`
 * `delete_comment c/CS2113T-F12 s/5`
-
-<br>
-
-### Listing comments for all students in a module: `list_comment`
-List comments for all students in a module
-
-Format: `list_comment c/<CLASS_ID>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
-
-Examples:
-* `list_comment c/CS2113T-F12`
-* `list_comment c/CS2101-D03`
 
 <br>
 
