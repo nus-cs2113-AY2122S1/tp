@@ -66,6 +66,8 @@ public class Messages {
     public static final String EDIT_UNCHANGED_DURATION = "  (!) New duration is the same as the existing duration";
     public static final String EDIT_UNCHANGED_ARTIST = "  (!) New artist is the same as the existing artist";
     public static final String EDIT_UNCHANGED_EDITION = "  (!) New edition is the same as the existing edition";
+
+    // Add and Edit
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
     public static final String KEY_ARTIST = "a";

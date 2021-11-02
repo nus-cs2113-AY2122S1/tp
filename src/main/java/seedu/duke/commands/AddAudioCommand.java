@@ -9,6 +9,10 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_ARTIST;
+import static seedu.duke.common.Messages.KEY_DURATION;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
@@ -16,13 +20,9 @@ import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
  * This class consists of the logic for the AddAudio command.
  */
 public class AddAudioCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add a t/TITLE i/ID a/ARTIST d/DURATION";
+    public static final String COMMAND_FORMAT = "  (!) Format: add a t/TITLE i/ID a/ARTIST d/DURATION";
     public static final String ADD_MESSAGE = "  (+) Added new audio item to the catalogue";
     public static final String COMMAND_WORD = "add a";
-    public static final String KEY_TITLE = "t";
-    public static final String KEY_ID = "i";
-    public static final String KEY_ARTIST = "a";
-    public static final String KEY_DURATION = "d";
 
 
     private HashMap<String, String> args;

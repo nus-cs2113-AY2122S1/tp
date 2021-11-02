@@ -9,6 +9,9 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_AUTHOR;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
@@ -16,12 +19,9 @@ import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
  * This class consists of the logic for the AddBook command.
  */
 public class AddBookCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add b t/TITLE i/ID a/AUTHOR";
+    public static final String COMMAND_FORMAT = "  (!) Format: add b t/TITLE i/ID a/AUTHOR";
     public static final String ADD_MESSAGE = "  (+) Added new book item to the catalogue";
     public static final String COMMAND_WORD = "add b";
-    public static final String KEY_TITLE = "t";
-    public static final String KEY_ID = "i";
-    public static final String KEY_AUTHOR = "a";
 
     private HashMap<String, String> args;
     private String title;
