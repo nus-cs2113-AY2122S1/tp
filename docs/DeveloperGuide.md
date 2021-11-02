@@ -277,17 +277,17 @@ The diagram below is the class diagram for the Tag Class
 ![Tag Diagram](./RenderedUML/TagClassDiagramP.svg)
 
 #### Functions of the Tag Class:
-> 
->The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
->1. `getTagName` returns the _Tag Name_.
->2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
->3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
->4. `removeAssociatedRecipeName` removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
-> 5. `numberofAssociatedRecipes` returns the number of _Recipes_ that each _Tag_ has under it.
+ 
+The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
+1. `getTagName` returns the _Tag Name_.
+2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
+3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
+4. `removeAssociatedRecipeName` removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
+5. `numberofAssociatedRecipes` returns the number of _Recipes_ that each _Tag_ has under it.
 
 >The diagram below is the sequence diagram, for when the User wishes to `untag` _Tags_ from a _Recipe_.
 > 
->![Untag Sequence Diagram](./RenderedUML/UntagSequence.svg)
+>![Untag Sequence Diagram](./RenderedUML/UntagSequenceP.svg)
 
 ## Product scope
 ### Target user profile
