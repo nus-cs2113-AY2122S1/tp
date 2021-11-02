@@ -95,7 +95,7 @@ to show all available commands and their format.)
 - Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
   e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
 - Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
-  e.g. in the add expense/income feature, an optional date parameter `[da/DATE]` may be added which can be typed as `da/19/10/2021` 
+  e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
 - Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
 
 ---
@@ -149,7 +149,7 @@ To Terminate The Program: end
 ### Create expense entry: `add_ex`
 This command adds an expense entry to your list. Use this to keep track of your daily expenses!
 
-Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [da/DATE]`
+Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
@@ -165,7 +165,7 @@ Note:
 Examples:
 
 - `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
-- `add_ex d/McDonalds dinner a/7.50 c/food da/20/10/2021` Adds a dinner expense entry that costs $7.50 that is made on 20th October 2021.
+- `add_ex d/McDonalds dinner a/7.50 c/food D/20/10/2021` Adds a dinner expense entry that costs $7.50 that is made on 20th October 2021.
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -247,7 +247,7 @@ After deletion, we see that the list has removed the previous first entry!
 
 This adds an income entry to your list. Use this to keep track of your income!
 
-Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [da/DATE]`
+Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
@@ -263,7 +263,7 @@ Note:
 Examples:
 
 - `add_in d/lunch money a/1000 c/allowance` Adds an income entry regarding a lunch allowance of $1000.
-- `add_in d/december's bonus a/5000 c/salary da/26/12/2021` Adds an income entry regarding a salary bonus of $5000 for 26th December 2021.
+- `add_in d/december's bonus a/5000 c/salary D/26/12/2021` Adds an income entry regarding a salary bonus of $5000 for 26th December 2021.
 
 <details>
   <summary> ▼ Expected output in run window </summary>
