@@ -747,6 +747,14 @@ This shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
 We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
+
+#### Note
+1. The graph scales according to your largest monthly total, the scale currently used by the graph will be shown to you on the top right. 1.0E9 for example would mean 1,000,000,000, E stands for exponential.
+
+
+2. It would be ideal not to have entries with big differences as the Stonks XD app is meant for daily logging.
+
+
 Format: `show_graph`
 
 <details>
@@ -756,21 +764,21 @@ show_graph
 -----------------------------------------------------------------------------------------------------
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 x                                                                                                  x
-x   Account Balance: $-398.2                                               Legend:                 x
-x   Current month (OCTOBER) total expense: $410.20                               # is Expense      x
-x   Current month (OCTOBER) total income: $0.00                                  o is Income       x
-x   Your Yearly Report                                                                             x
+x   Account Balance: $-449.50                                              Legend:                 x
+x   Current month (NOVEMBER) total expense: $5454.00                             # is Expense      x
+x   Current month (NOVEMBER) total income: $0.00                                 o is Income       x
+x   Your Yearly Report                                                     Unit: 1000.0            x
 x ------------------------------------------------------------------------------------------------ x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                           #                      x
-x                                                                           #                      x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
 x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
 x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
