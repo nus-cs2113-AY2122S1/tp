@@ -1,3 +1,6 @@
+test
+test
+test
 search CG
 check CS2040
 exit
