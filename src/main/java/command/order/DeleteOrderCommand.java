@@ -34,7 +34,7 @@ public class DeleteOrderCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
         String orderIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (isValidOrderParameters(ui, medicines, orderIdToDelete)) {
+        if (!isValidOrderParameters(ui, medicines, orderIdToDelete)) {
             return;
         }
 
@@ -85,7 +85,7 @@ public class DeleteOrderCommand extends Command {
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of order");
-            return true;
+            return false;
         }
 
         boolean isValidOrderId = orderValidator.isValidOrderId(ui, orderIdToDelete, medicines);
@@ -93,10 +93,10 @@ public class DeleteOrderCommand extends Command {
         if (!isValidOrderId) {
             logger.log(Level.WARNING, "Invalid order id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of order");
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
 
