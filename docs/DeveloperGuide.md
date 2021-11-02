@@ -51,7 +51,7 @@ The _Architecture Sequence Diagram_ shown above shows how the components usually
 ## Implementation
 ### Add Module
 The sequence diagram shown below illustrates how the `add_module` command works:
-![AddModuleSequenceDiagram](diagrams/AddModuleSequenceDiagram.png)
+![AddClassSequenceDiagram](diagrams/AddClassSequenceDiagram.png)
 
 Steps:
 1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
