@@ -1,6 +1,7 @@
 package seedu.ui;
 
 import seedu.command.flags.AddFlag;
+import seedu.exceptions.ProfileException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
@@ -31,8 +32,12 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
-    private static final String USER_PROMPT = "What would you like to do?";
-    private static final String PROMPT_CURSOR = "==>";
+    public static final String COMMAND_PROMPT = "What would you like to do?";
+    public static final String NAME_PROMPT = "What is your name?";
+    public static final String MAJOR_PROMPT = "What is your major?";
+    public static final String YEAR_PROMPT = "Which year of study are you currently in?";
+    private static final String PROFILE_SETUP = "Setup a new profile by answering the following: ";
+    private static final String PROMPT_CURSOR = "==> ";
     private static final String PREREQ_SUCCESS = "Yes! You are eligible to take up: ";
     private static final String PREREQ_FAIL = "Oops, you have not met the module's prerequisite: ";
     private static final String HELP_HEADER = LINE + "\tUNIMods accepts the following commands:-\n";
@@ -58,9 +63,9 @@ public class TextUi {
             + "\n \"store\" <grade> \">\" <module_code> ";
 
     /*------------- PUBLIC COMMANDS ----------- */
-    public static String getCommand() {
+    public static String getCommand(String prompt) {
         System.out.println(LINE);
-        System.out.println(USER_PROMPT);
+        System.out.println(prompt);
         System.out.print(PROMPT_CURSOR);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -68,6 +73,11 @@ public class TextUi {
             input = in.nextLine();
         }
         return input;
+    }
+
+    public static void printProfileException(ProfileException e) {
+        System.out.println(e.getMessage());
+        System.out.println(PROFILE_SETUP);
     }
 
     public static AddFlag getAddFlag() throws UniModsException {
@@ -85,15 +95,6 @@ public class TextUi {
         } else {
             throw new UniModsException("Invalid Selection, please choose either 1 or 2");
         }
-    }
-
-    public static String getReply(String question) {
-        System.out.print(question);
-        String input = in.nextLine();
-        while (input.isEmpty()) {
-            input = in.next();
-        }
-        return input;
     }
 
     public static String getLessonCommand(String lessonType) {
@@ -299,11 +300,11 @@ public class TextUi {
         System.out.println("Current semester: " + currentSem);
     }
 
-    public static void printEvents(Timetable timetable) {
-        ArrayList<TimetableUserItem> timetableUserItem = timetable.getEvents();
+    public static void printEvents(ArrayList<TimetableUserItem> timetableUserItems) {
+
         int serial = SERIAL;
-        for (TimetableUserItem userItem : timetableUserItem) {
-            System.out.println(serial + ": " + userItem.toString());
+        for (TimetableUserItem userItem : timetableUserItems) {
+            System.out.println(serial++ + ": " + userItem.toString());
         }
     }
 

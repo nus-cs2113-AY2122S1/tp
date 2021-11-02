@@ -1,16 +1,27 @@
-Hello from
-   _    _       _ __  __           _
- | |  | |     (_)  \/  |         | |
- | |  | |_ __  _| \  / | ___   __| |___
+No local profile can be found,
+Setup a new profile by answering the following: 
+________________________________________________________________________________________________________________________
+
+What is your name?
+==> ________________________________________________________________________________________________________________________
+
+What is your major?
+==> ________________________________________________________________________________________________________________________
+
+Which year of study are you currently in?
+==> Hello from 
+   _    _       _ __  __           _     
+ | |  | |     (_)  \/  |         | |    
+ | |  | |_ __  _| \  / | ___   __| |___ 
  | |  | | '_ \| | |\/| |/ _ \ / _` / __|
  | |__| | | | | | |  | | (_) | (_| \__ \
   \____/|_| |_|_|_|  |_|\___/ \__,_|___/
-
-
+                                        
+                                        
 ________________________________________________________________________________________________________________________
 
 What would you like to do?
-==>Searching, standby...
+==> Searching, standby...
 If nothing is appearing even after a while, press ENTER to cancel the search and narrow down your search terms.
 CG1111 Engineering Principles and Practice I 6MC
 CG1111A Engineering Principles and Practice I 4MC
@@ -29,36 +40,12 @@ CG4003 Advanced Project and Internship 12MC
 ________________________________________________________________________________________________________________________
 
 What would you like to do?
-==>Title: Software Engineering & Object-Oriented Programming
-
-MCs: 4
-
-Department: Computer Science
-
-This module introduces the necessary skills for systematic and
-rigorous development of software systems. It covers requirements,
-design, implementation, quality assurance, and project management
-aspects of small-to-medium size multi-person software projects. The
-module uses the Object Oriented Programming paradigm. Students of this
-module will receive hands-on practice of tools commonly used in the
-industry, such as test automation tools, build automation tools, and
-code revisioning tools will be covered.
-
-Prerequisites: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-
-S/U able: No
-
-Semester Availability: [1, 2]
-
-Exam Date(s): Sem 1: Tue Nov 30 01:00 AM - 03:00 AM
-              Sem 2: Thu May 05 05:00 AM - 07:00 AM
-
-
-
+==> Oops, you have not met the module's prerequisite: 
+CS1010 or its equivalent
 ________________________________________________________________________________________________________________________
 
 What would you like to do?
-==>________________________________________________________________________________________________________________________
+==> ________________________________________________________________________________________________________________________
 > Bye friend!
 > See you again! :)
 ________________________________________________________________________________________________________________________

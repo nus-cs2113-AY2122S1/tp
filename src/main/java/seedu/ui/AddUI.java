@@ -63,10 +63,10 @@ public class AddUI {
             getCommand(lec, LECTURE, timetable, module);
             getCommand(tt, TUTORIAL, timetable, module);
             getCommand(lab, LAB, timetable, module);
+            TextUi.printLessonAdded();
         } catch (IntegerException e) {
             e.printMessage();
         }
-        TextUi.printLessonAdded();
     }
 
     /**
