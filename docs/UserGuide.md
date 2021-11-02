@@ -22,6 +22,7 @@ If you can type fast, TAA can help keep track of your classes and students faste
   * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
   * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
   * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
+  * [Viewing median mark for an assessment: `median_mark`](#viewing-median-mark-for-an-assessment-median_mark)
   * [Sorting and listing students in a module by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-module-by-their-overall-score-sort_by_scores)
   * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
   * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
@@ -452,8 +453,8 @@ Listing **marks** for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NA
 Setting **marks** for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 Editing **marks** for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
 Deleting **marks** for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-Viewing the median **mark** for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Viewing average **marks** for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Viewing the median **mark** for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Listing **attendance** for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 Setting **attendance** for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 Deleting **attendance** for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
