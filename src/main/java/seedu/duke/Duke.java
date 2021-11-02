@@ -24,6 +24,7 @@ public class Duke {
         catalogue = new Catalogue();
         parser = new Parser();
         storage = new Storage(ui);
+        // Restore previous state of catalogue
         storage.read(catalogue);
 
         // Continue to read, parse and execute commands until exit command is issued by user
@@ -35,9 +36,8 @@ public class Duke {
             assert userCommand != null : "Parsed command returns null";
             // Executes logic of command
             userCommand.execute(ui, catalogue);
-
+            // Write current state of catalogue to data.json
             storage.write(catalogue);
-
 
             // Check whether to exit program
             if (userCommand.isExit()) {

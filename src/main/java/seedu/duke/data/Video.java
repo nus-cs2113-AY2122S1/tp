@@ -28,7 +28,7 @@ public class Video extends Item {
     }
 
     /**
-     * Default constructor for Audio class
+     * Default constructor for Audio class.
      */
     public Video() {
     }

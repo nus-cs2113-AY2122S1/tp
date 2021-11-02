@@ -24,7 +24,7 @@ public class Book extends Item {
     }
 
     /**
-     * Default constructor for Book class
+     * Default constructor for Book class.
      */
     public Book() {
     }

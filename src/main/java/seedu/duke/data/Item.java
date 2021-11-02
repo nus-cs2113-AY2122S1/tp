@@ -41,6 +41,9 @@ public class Item {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Default constructor.
+     */
     public Item() {
     }
 

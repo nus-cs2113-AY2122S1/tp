@@ -29,7 +29,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Default constructor for Magazine class
+     * Default constructor for Magazine class.
      */
     public Magazine() {
     }

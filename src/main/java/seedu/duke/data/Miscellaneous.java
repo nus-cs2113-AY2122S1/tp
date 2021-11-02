@@ -18,7 +18,7 @@ public class Miscellaneous extends Item {
     }
 
     /**
-     * Default constructor for miscellaneous class
+     * Default constructor for miscellaneous class.
      */
     public Miscellaneous() {
     }

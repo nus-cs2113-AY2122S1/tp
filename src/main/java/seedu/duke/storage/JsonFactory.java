@@ -8,7 +8,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import seedu.duke.data.*;
+import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
+import seedu.duke.data.Audio;
+import seedu.duke.data.Book;
+import seedu.duke.data.Magazine;
+import seedu.duke.data.Miscellaneous;
+import seedu.duke.data.Video;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@@author exetr
+
+/**
+ * The JsonFactory class handles all logic pertaining to serialization and deserialization of the catalogue.
+ */
 public class JsonFactory {
     private static final String KEY_AUDIO = "audio";
     private static final String KEY_BOOK = "book";
@@ -26,9 +37,15 @@ public class JsonFactory {
     private static final ObjectMapper mapper = new ObjectMapper();
     private final ObjectNode allItems;
 
+    /**
+     * Default constructor, configures relevant parameters of the Object Mapper.
+     */
     public JsonFactory() {
+        //Disable serializing dates as timestamp
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        //Exclude null values
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //Specify time module
         JavaTimeModule timeModule = new JavaTimeModule();
         mapper.registerModule(timeModule);
         mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
@@ -50,6 +67,7 @@ public class JsonFactory {
         ObjectNode json = mapper.readValue(data, ObjectNode.class);
         itemArrayList.addAll(jsonToAudio((ArrayNode) json.get(KEY_AUDIO)));
         itemArrayList.addAll(jsonToBook((ArrayNode) json.get(KEY_BOOK)));
+        itemArrayList.addAll(jsonToItem((ArrayNode) json.get(KEY_ITEM)));
         itemArrayList.addAll(jsonToMagazine((ArrayNode) json.get(KEY_MAGAZINE)));
         itemArrayList.addAll(jsonToVideo((ArrayNode) json.get(KEY_VIDEO)));
 
@@ -102,10 +120,10 @@ public class JsonFactory {
         return itemArray;
     }
 
-    private ArrayList<Item> jsonToItem(ArrayNode arrayNode) throws JsonProcessingException {
-        ArrayList<Item> itemList = new ArrayList<>();
+    private ArrayList<Miscellaneous> jsonToItem(ArrayNode arrayNode) throws JsonProcessingException {
+        ArrayList<Miscellaneous> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
-            itemList.add(mapper.treeToValue(item, Item.class));
+            itemList.add(mapper.treeToValue(item, Miscellaneous.class));
         }
         return itemList;
     }
