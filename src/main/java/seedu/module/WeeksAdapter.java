@@ -10,6 +10,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * Adapter class for GSON parsing. This adapter allows GSON to parse the weeks field from jsons retrieved from the
+ * NUSMods API, which can be either an int array or an object.
+ */
 public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     private final Gson gson;
@@ -20,6 +24,7 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     /**
      * Writes a week as either an int array or an object, depending on its attributes.
+     *
      * @param jsonWriter JsonWriter.
      * @param weeks Weeks object to convert into a json data type.
      * @throws IOException when Gson is unable to convert and save the Weeks object.
@@ -35,6 +40,7 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     /**
      * Writes a week as an object.
+     *
      * @param jsonWriter JsonWriter.
      * @param weeks Weeks object to convert into json object.
      * @throws IOException when Gson is unable to convert and save the Weeks object.
@@ -49,6 +55,7 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     /**
      * Writes a week as an int array.
+     *
      * @param jsonWriter JsonWriter.
      * @param weeks Weeks object to convert into int array.
      * @throws IOException when Gson is unable to convert and save the Weeks object.
@@ -63,6 +70,7 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     /**
      * Parses a weeks key in a json that can either be an int array or an object with start and end dates.
+     *
      * @param jsonReader JsonReader.
      * @return weeks as an object with relevant attributes.
      * @throws IOException when weeks key is neither an int array nor an object.
@@ -80,7 +88,8 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
     }
 
     /**
-     * Returns weeks with start and end dates. weeks will be null.
+     * Returns weeks as an object with start and end dates. weeks attribute in the weeks object will be null.
+     *
      * @param jsonReader JsonReader.
      * @return weeks with start and end dates.
      */
@@ -89,7 +98,8 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
     }
 
     /**
-     * Returns weeks with weeks int array. start and end dates will be null.
+     * Returns weeks as an object with weeks attribute int array. start and end dates will be null.
+     *
      * @param jsonReader JsonReader.
      * @return weeks with an int array attribute named weeks.
      */

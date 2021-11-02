@@ -147,10 +147,6 @@ public class TextUi {
         System.out.println("Error occurred.");
     }
 
-    public static void printMcErrorMessage() {
-        System.out.println("Invalid input for MC flag. MC flag is ignored.");
-    }
-
     public static void printUpdateStartMessage() {
         System.out.println("Updating, standby... This may take up to 10 minutes.");
         System.out.println("Press ENTER to cancel the update.");

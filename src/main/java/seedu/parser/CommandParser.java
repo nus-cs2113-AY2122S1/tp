@@ -203,6 +203,12 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
+    /**
+     * Parses user input into an AddCommand.
+     *
+     * @param timetable Timetable to add to.
+     * @return AddCommand with timetable and flag.
+     */
     private Command parseAddCommand(Timetable timetable) {
         AddFlag flag = AddFlag.INVALID;
         try {
