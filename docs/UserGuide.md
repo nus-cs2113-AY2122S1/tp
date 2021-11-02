@@ -16,9 +16,11 @@ fast, this application can allow one to access relevant travel information faste
 
 3. Copy the file to the folder you want to use as the home folder for your database.
 
-4. Double-click the file to start the app.
+4. Open a command window in that folder
 
-5. Type the command in the command box and press Enter to execute.
+5. Run the command ```java -jar TourPlanner.jar``` to start the program
+
+6. Type the command in the command box and press Enter to execute
 
 <br>
 
@@ -138,7 +140,7 @@ Mandatory data fields:
 
 Example:
 
-* `add -t t001 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
+* `add -f SQ-JPN1 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
 
 Add flights from _Singapore_ to _Japan_
 and back, departing from Singapore at _1pm, 29 Oct 2021_ and returning to Singapore at _5 Nov 2021, 2am_. Stored in the
@@ -159,8 +161,8 @@ Format: ```add [DATA_TYPE] TOUR_ID [DATA_FIELDS]```
 Mandatory data fields:
 
 * Tour ID - ```TOUR_ID```
-* Tour name - ```/n DEPARTURE_DESTINATION```
-* Tour price - ```/p RETURN_DESTINATION```
+* Tour name - ```/n TOUR_NAME```
+* Tour price - ```/p TOUR_PRICE```
 
 :exclamation: Note that the given price should be a numerical value.
 
@@ -359,7 +361,7 @@ Email: adam@mail.com
 2. Client ID: c002
 Name: Betty
 Contact Number: 12223444
-Email: betty.com
+Email: betty@mail.com
 
 Total Clients: 2
 ```
@@ -432,10 +434,10 @@ In addition, ```find -c ad``` will yield the same results, since "ad" is
 contained in "Adam".
 <br>
 
-### Find tour / flight / package
+### Find tour / flight 
 
-Finds a specific entry based on a particular code. In addition for tours and flights, it will show the names of the
-passenger(s) who are assigned to them.
+Finds a specific entry based on a particular code. In addition, for tours and flights, it will show the names of the
+subscriber(s) / passenger(s) who are assigned to them respectively.
 
 (Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```)
 
@@ -463,6 +465,24 @@ Total Subscribed Clients: 1
 ```
 
 <br>
+
+* ```find -f SQ-JPN``` finds a particular flight with code 'SQ-JPN'. It also shows the clients who are passengers to
+  said flight.
+
+An output of this format will be shown:
+
+```
+This is the flight that matches your search
+Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/2021 18:00
+Return Flight: SG, 21/10/2021 03:00
+
+
+Passengers:
+Betty
+
+Total Passengers: 1
+```
 
 * ```find -f SQ-JPN``` finds a particular flight with code 'SQ-JPN'. It also shows the clients who are passengers to
   said flight.
@@ -671,7 +691,7 @@ Contact Number: 10101010
 
 This program can print all the cilentpackages into a text file will save the clientpackages you have added before by load and save functions.
 
-## Exit application: ```exit```
+## Exit application: ```bye```
 
 Exits the application.
 

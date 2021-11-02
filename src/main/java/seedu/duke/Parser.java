@@ -443,11 +443,8 @@ public class Parser {
 
     private static void handleTourException(String[] values) throws TourPlannerException {
         String price = values[2];
-        for (int i = 0; i < price.length(); i++) {
-            char ch = price.charAt(i);
-            if (!(ch <= '9' && ch >= '0')) {
-                throw new TourPlannerException(ERROR_PRICE_FORMAT);
-            }
+        if (price.equals(null)) {
+            throw new TourPlannerException(ERROR_PRICE_FORMAT);
         }
     }
 
