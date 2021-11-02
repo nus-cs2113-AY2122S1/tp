@@ -55,8 +55,8 @@ public class Storage {
 
     /**
      * Checks if the storage file exists. If it does not, it will create one for the user.
-     *
      * The storage file created will be read only.
+     *
      * @param filePath the file path where the storage file is to be found
      * @param fileDir the folder where the storage file is supposed to be stored at
      */
