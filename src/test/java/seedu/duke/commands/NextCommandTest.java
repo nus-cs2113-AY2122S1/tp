@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Event;
@@ -36,7 +35,7 @@ public class NextCommandTest {
 
     @Test
     public void nextCommandResult_nextEarliestEvent() throws DukeException, NoCommandAttributesException,
-            InvalidBudgetException, InvalidItemTypeException {
+            InvalidItemTypeException {
         setUp();
         Command command1 = Parser.parseCommand("next -e");
         Ui.printEvent(eventCatalog.get(0));
@@ -63,7 +62,7 @@ public class NextCommandTest {
 
     @Test
     public void nextCommandResult_nextEarliestTask_taskExists() throws DukeException, NoCommandAttributesException,
-            InvalidBudgetException, InvalidItemTypeException {
+            InvalidItemTypeException {
         setUp();
         Command command1 = Parser.parseCommand("next -t 1");
         Ui.printTask(eventCatalog.get(0).getFromTaskList(0));
@@ -82,7 +81,7 @@ public class NextCommandTest {
 
     @Test
     public void nextCommandResult_nextEarliestTask_noTaskExists() throws DukeException, NoCommandAttributesException,
-            InvalidBudgetException, InvalidItemTypeException {
+            InvalidItemTypeException {
         setUp();
         Command command1 = Parser.parseCommand("next -t 2");
         assertEquals("This Event has no Tasks!", command1.execute().feedbackToUser);
