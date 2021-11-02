@@ -20,8 +20,9 @@ import static seedu.duke.common.Messages.STATS_INVALID_FORMAT;
  */
 public class StatsCommand extends Command {
     public static final String COMMAND_WORD = "stats all";
-    public static final String COMMAND_WORD_CATEGORY = "stats category";
-    public static final String COMMAND_WORD_STATUS = "stats status";
+    public static final String COMMAND_WORD_ALL = "all";
+    public static final String COMMAND_WORD_CATEGORY = "category";
+    public static final String COMMAND_WORD_STATUS = "status";
     protected String args;
 
     /**
@@ -30,7 +31,7 @@ public class StatsCommand extends Command {
      * @param args Arguments supplied by the user in the Stats Command
      */
     public StatsCommand(String args) {
-        this.args = args;
+        this.args = args.strip();
     }
 
     /**
@@ -96,8 +97,10 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
-        switch (args) {
-        case COMMAND_WORD:
+        String[] argsList = args.split("\\s+");
+        // check if argsList[0] is "stats"? 
+        switch (argsList[1]) {
+        case COMMAND_WORD_ALL:
             calcCategoryStats(ui, catalogue);
             calcStatusStats(ui, catalogue);
             break;
