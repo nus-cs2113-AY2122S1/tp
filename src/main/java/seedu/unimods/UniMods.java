@@ -33,8 +33,8 @@ public class UniMods {
         timetableStorage = new TimetableStorage(timetablePath);
         profileStorage = new ProfileStorage();
         timetable = timetableStorage.loadSchedule();
-        TextUi.printWelcomeMessage();
         setupProfile();
+        TextUi.printWelcomeMessage();
         run();
     }
 

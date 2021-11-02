@@ -16,6 +16,15 @@ public abstract class TimetableItem {
     protected String type;
     protected String venue;
 
+    /**
+     * Abstract class for possible Timetable schedule items, implemeting common functions that all
+     * timetable items will use.
+     * 
+     * @param title Title of timetable item
+     * @param day Day which timetable item occurs
+     * @param startTime timetable item start time
+     * @param endTime timetable item end time
+     */
     public TimetableItem(String title, String day, String startTime, String endTime) {
         this.title = title;
         this.startTime = startTime;
@@ -24,8 +33,8 @@ public abstract class TimetableItem {
     }
 
     /**
-     * Takes in a string e.g. "Sunday", "Monday", and formats it as a DayOfWeek Enum
-     * for easier handling.
+     * Takes in a string e.g. "Sunday", "Monday", and formats it as a DayOfWeek Enum for easier
+     * handling.
      * 
      * @param day String to be parsed as a DayOfWeek
      * @return DayOfWeek
@@ -90,8 +99,7 @@ public abstract class TimetableItem {
     }
 
     /**
-     * Takes in a String in the time format "HHmm" e.g. 1800 And parses it into a
-     * LocalTime object
+     * Takes in a String in the time format "HHmm" e.g. 1800 And parses it into a LocalTime object
      * 
      * @param time String in the format "HHmm" e.g. 1800
      * @return a LocalTime object representing the input time
@@ -121,11 +129,16 @@ public abstract class TimetableItem {
         return endTime.getHour();
     }
 
+    /**
+     * Gets duration of timetable item.
+     * 
+     * @return an Integer representing duration in minutes
+     */
     public int duration() {
         return getEndHour() - getStartHour();
     }
 
     public boolean equals(TimetableItem item) {
-        return Objects.equals(this,item);
+        return Objects.equals(this, item);
     }
 }
