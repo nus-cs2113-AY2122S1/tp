@@ -1,7 +1,12 @@
 package seedu.unimods;
 
 import seedu.command.Command;
-import seedu.exceptions.*;
+import seedu.exceptions.AddException;
+import seedu.exceptions.EditException;
+import seedu.exceptions.FetchException;
+import seedu.exceptions.IntegerException;
+import seedu.exceptions.ModuleExistException;
+import seedu.exceptions.ProfileException;
 import seedu.parser.CommandParser;
 import seedu.storage.ProfileStorage;
 import seedu.storage.TimetableStorage;

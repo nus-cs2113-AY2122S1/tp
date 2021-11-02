@@ -49,7 +49,7 @@ public class Timetable implements Comparable<Timetable> {
     private TimetableItem[] saturday = new TimetableItem[24];
     private TimetableItem[] sunday = new TimetableItem[24];
 
-    private Map<DayOfWeek,TimetableItem[]> schedules;
+    private Map<DayOfWeek,TimetableItem[]> schedules = new HashMap<>();
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year.
@@ -67,16 +67,7 @@ public class Timetable implements Comparable<Timetable> {
         latestHours = new PriorityQueue(24,Collections.reverseOrder());
         latestHours.add(DEFAULT_END);
 
-        schedules = new HashMap<>(){{
-            put(DayOfWeek.MONDAY,monday);
-            put(DayOfWeek.TUESDAY,tuesday);
-            put(DayOfWeek.WEDNESDAY,wednesday);
-            put(DayOfWeek.THURSDAY, thursday);
-            put(DayOfWeek.FRIDAY, friday);
-            put(DayOfWeek.SATURDAY, saturday);
-            put(DayOfWeek.SUNDAY, sunday);
-        }};
-
+        addSchedulesToMap();
         checkIfEmpty();
     }
 
@@ -96,16 +87,7 @@ public class Timetable implements Comparable<Timetable> {
         this.saturday = timetableDto.getSaturdayItems();
         this.sunday = timetableDto.getSundayItems();
 
-        schedules = new HashMap<>(){{
-            put(DayOfWeek.MONDAY,monday);
-            put(DayOfWeek.TUESDAY,tuesday);
-            put(DayOfWeek.WEDNESDAY,wednesday);
-            put(DayOfWeek.THURSDAY, thursday);
-            put(DayOfWeek.FRIDAY, friday);
-            put(DayOfWeek.SATURDAY, saturday);
-            put(DayOfWeek.SUNDAY, sunday);
-        }};
-
+        addSchedulesToMap();
         checkIfEmpty();
         addHoursFromDto(timetableDto);
     }
@@ -118,6 +100,16 @@ public class Timetable implements Comparable<Timetable> {
         isScheduleEmpty(friday);
         isScheduleEmpty(saturday);
         isScheduleEmpty(sunday);
+    }
+
+    private void addSchedulesToMap() {
+        schedules.put(DayOfWeek.MONDAY,monday);
+        schedules.put(DayOfWeek.TUESDAY,tuesday);
+        schedules.put(DayOfWeek.WEDNESDAY,wednesday);
+        schedules.put(DayOfWeek.THURSDAY, thursday);
+        schedules.put(DayOfWeek.FRIDAY, friday);
+        schedules.put(DayOfWeek.SATURDAY, saturday);
+        schedules.put(DayOfWeek.SUNDAY, sunday);
     }
 
     private void addHoursFromDto(TimetableDto dto) {

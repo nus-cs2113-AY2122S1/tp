@@ -1,13 +1,13 @@
 package seedu.exceptions;
 
-public class ProfileException extends UniModsException{
+public class ProfileException extends UniModsException {
 
-    public enum CAUSE {
+    public enum Cause {
         NO_PROFILE_FOUND("No local profile can be found,"),
         PROFILE_CORRUPTED("Saved profile was corrupted,");
 
         private String errorMessage;
-        private CAUSE(String message) {
+        private Cause(String message) {
             this.errorMessage = message;
         }
 
@@ -21,7 +21,7 @@ public class ProfileException extends UniModsException{
         super(cause);
     }
 
-    public ProfileException(CAUSE cause) {
+    public ProfileException(Cause cause) {
         this(cause.toString());
     }
 }

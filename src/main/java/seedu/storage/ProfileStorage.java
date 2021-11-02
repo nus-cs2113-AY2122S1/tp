@@ -1,16 +1,11 @@
 package seedu.storage;
 
 import seedu.exceptions.ProfileException;
-import seedu.timetable.Timetable;
-import seedu.timetable.TimetableDto;
-import seedu.timetable.TimetableItem;
-import seedu.timetable.TimetableLesson;
 
 import com.google.gson.Gson;
 import seedu.user.Profile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,18 +36,18 @@ public class ProfileStorage {
      *
      * @return The profile saved.
      * @throws ProfileException if no profile can be found locally.
-     * Always throws on first-time startup.
+     *     Always throws on first-time startup.
      */
     public Profile loadProfile() throws ProfileException {
         try {
             FileReader timetableSaveReader = new FileReader(file);
             Profile profile = new Gson().fromJson(timetableSaveReader, Profile.class);
             if (profile == null) {
-                throw new ProfileException(ProfileException.CAUSE.NO_PROFILE_FOUND);
+                throw new ProfileException(ProfileException.Cause.NO_PROFILE_FOUND);
             }
             return profile;
         } catch (IOException e) {
-            throw new ProfileException(ProfileException.CAUSE.NO_PROFILE_FOUND);
+            throw new ProfileException(ProfileException.Cause.NO_PROFILE_FOUND);
         }
     }
 
