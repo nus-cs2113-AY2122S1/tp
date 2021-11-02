@@ -272,7 +272,7 @@ Examples:
 ### Deleting marks for a student's assessment: `delete_mark`
 Deletes a student's marks for an assessment.
 
-Format: `set_marks c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
+Format: `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
