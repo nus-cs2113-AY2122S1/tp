@@ -25,10 +25,9 @@ public class Import {
 
     protected static GoalList importStorage(String filePath) throws HaBitStorageException {
         GoalList goalList = new GoalList();
+        File storageFile = new File(filePath);
         Scanner s;
         String line;
-
-        File storageFile = new File(filePath);
 
         try {
             s = new Scanner(storageFile);
@@ -36,25 +35,8 @@ public class Import {
             while (s.hasNext()) {
                 line = s.nextLine();
                 String[] lineData = line.split(DELIMITER);
-                int goalIndex = Integer.parseInt(lineData[GOAL_INDEX]);
 
-                switch (lineData[TYPE_INDEX]) {
-                case GOAL_TYPE:
-                    goalList.addGoal(ImportParser.goalParser(lineData));
-                    break;
-                case HABIT_TYPE:
-                    // this Habit object returned contains an empty ArrayList of Intervals
-                    Habit habit = ImportParser.habitParser(lineData);
-                    goalList.addHabitToGoal(habit, goalIndex);
-                    break;
-                case INTERVAL_TYPE:
-                    int habitIndex = Integer.parseInt(lineData[HABIT_INDEX]);
-                    Interval interval = ImportParser.intervalParser(lineData);
-                    goalList.addIntervalToHabit(goalIndex, habitIndex, interval);
-                    break;
-                default:
-                    throw new HaBitStorageException("error while loading");
-                }
+                updateGoalList(lineData, goalList);
             }
         } catch (FileNotFoundException | NumberFormatException | ParseException e) {
             throw new HaBitStorageException(e.getMessage());
@@ -63,5 +45,39 @@ public class Import {
         }
 
         return goalList;
+    }
+
+    /**
+     * This method will determine the data to add to GoalList and update accordingly.
+     *
+     * @param lineData the data read from the storage file
+     * @param goalList the GoalList object to contain user data
+     * @throws ParseException when string cannot be parsed to integers
+     * @throws HaBitCommandException when there is error adding to GoalList
+     * @throws HaBitStorageException when there is an unexpected data being read
+     */
+    protected static void updateGoalList(String[] lineData, GoalList goalList) throws ParseException,
+            HaBitCommandException, HaBitStorageException {
+        int goalIndex = Integer.parseInt(lineData[GOAL_INDEX]);
+
+        switch (lineData[TYPE_INDEX]) {
+        case GOAL_TYPE:
+            goalList.addGoal(ImportParser.goalParser(lineData));
+            break;
+        case HABIT_TYPE:
+            // this Habit object returned contains an empty ArrayList of Intervals
+            Habit habit = ImportParser.habitParser(lineData);
+
+            goalList.addHabitToGoal(habit, goalIndex);
+            break;
+        case INTERVAL_TYPE:
+            int habitIndex = Integer.parseInt(lineData[HABIT_INDEX]);
+            Interval interval = ImportParser.intervalParser(lineData);
+
+            goalList.addIntervalToHabit(goalIndex, habitIndex, interval);
+            break;
+        default:
+            throw new HaBitStorageException(ERROR_READING_DATA);
+        }
     }
 }
