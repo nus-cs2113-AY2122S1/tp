@@ -97,12 +97,22 @@ public class Entry {
                 new FindTraining(trainings, trainingToFind);
                 break;
             case EDIT_TRAINING_KEYWORD:
-                trainingIndex = Parser.getIndex(entry);
+                try {
+                    trainingIndex = Parser.getIndex(entry);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a valid number!");
+                    break;
+                }
                 TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);
                 new EditTraining(trainings, trainingIndex, newTrainingDetail);
                 break;
             case EDIT_MEMBER_KEYWORD:
-                memberIndex = Parser.getIndex(entry);
+                try {
+                    memberIndex = Parser.getIndex(entry);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a valid number!");
+                    break;
+                }
                 Member newMemberDetail = Parser.getMemberDetails(entry);
                 new EditMember(members, memberIndex, newMemberDetail);
                 break;
