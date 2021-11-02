@@ -279,6 +279,9 @@ public abstract class PersonList {
      * @throws MedBotException if the specified IC exists in the list already.
      */
     private void checkIcExists(String icNumber) throws MedBotException {
+        if (icNumber.isBlank()) {
+            return;
+        }
         for (int key : persons.keySet()) {
             Person currentPerson = persons.get(key);
             if (currentPerson.getIcNumber().equals(icNumber)) {
