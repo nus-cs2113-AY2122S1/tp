@@ -1,8 +1,4 @@
-# Developer Guide
-
-Duke is a **desktop application for managing tasks, optimised for usage
-via a Command Line Interface (CLI).** If you can type fast, Duke can help
-you manage your daily tasks faster than traditional GUI application.
+# SchedUrMods Developer Guide
 
 - [1. Introduction](#1-introduction)
   - [1.1 Purpose](#11-purpose)
@@ -10,6 +6,9 @@ you manage your daily tasks faster than traditional GUI application.
 - [2. Setting up, getting started](#2-setting-up-getting-started)
   - [2.1 Pre-requisites](#21-pre-requisites)
   - [2.2 Download the project on your computer](#22-download-the-project-on-your-computer)
+  - [2.3 Setting up the project in IntelliJ](#23-setting-up-the-project-in-intellij)
+- [3. Design](#3-design)
+  - [3.1 Architecture](#31-architecture)
   
 # 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
@@ -58,7 +57,7 @@ Please follow the following steps below to download the project file on your com
 1. Click [here](https://github.com/AY2122S1-CS2113T-W13-3/tp) to access the Github repository of the **SchedUrMods** application. 
 2. **Fork** and **Clone** the repository using `SourceTree`.
 
-## 2.2 Setting up the project in IntelliJ
+## 2.3 Setting up the project in IntelliJ
 Please follow the following steps below to set up the project in `IntelliJ`:
 
 1. Launch `IntelliJ` application.
@@ -87,9 +86,23 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 [user]:
 ```
       
-# Design
+# 3. Design
+## 3.1 Architecture
+<p align="center">
+    <img src="C:\Users\amosp\Desktop\CS2113 TP - Amos Peh\docs\images\Amos UML Diagrams\Architecture - SchedUrMods.png">
+</p>
+
+The Architecture Diagram above shows the high-level design of **SchedUrMods** 
+and how **SchedUrMods** main components are connected.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+
+
 
 {Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
+
+
 
 # Implementation
 
