@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-import static seedu.duke.Parser.isNumeric;
+import static seedu.duke.parser.Parser.isNumeric;
 
 public class Trip {
 

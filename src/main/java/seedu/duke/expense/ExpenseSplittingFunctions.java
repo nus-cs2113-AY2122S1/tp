@@ -1,4 +1,10 @@
-package seedu.duke;
+package seedu.duke.expense;
+
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.parser.Parser;
+import seedu.duke.Person;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
 
 import java.util.HashMap;
 

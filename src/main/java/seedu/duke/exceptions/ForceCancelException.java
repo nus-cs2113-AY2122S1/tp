@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exceptions;
 
 public class ForceCancelException extends Exception {
 }
