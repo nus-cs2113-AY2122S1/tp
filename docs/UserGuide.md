@@ -18,7 +18,7 @@ If you can type fast, TAA can help keep track of your modules and students faste
   * [Editing an assessment in a module: `edit_assessment`](#editing-an-assessment-in-a-module-edit_assessment)
   * [Deleting an assessment from a module: `delete_assessment`](#deleting-an-assessment-from-a-module-delete_assessment)
   * [Listing marks for an assessment: `list_marks`](#listing-marks-for-an-assessment-list_marks)
-  * [Setting marks for a student's assessment: `set_marks`](#setting-marks-for-a-students-assessment-set_marks)
+  * [Setting mark for a student's assessment: `set_mark`](#setting-mark-for-a-students-assessment-set_mark)
   * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
   * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
   * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
@@ -229,18 +229,18 @@ Examples:
 
 <br>
 
-### Setting marks for a student's assessment: `set_marks`
+### Setting mark for a student's assessment: `set_mark`
 Adds a student's marks for an assessment.
 
-Format: `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
+Format: `set_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the module.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 * `MARKS` refers to the marks given for the assessment.
 
 Examples:
-* `set_marks c/CS2113T s/1 a/Midterms m/70.6`
-* `set_marks c/CS2101 s/3 a/Oral Presentation m/80`
+* `set_mark c/CS2113T s/1 a/Midterms m/70.6`
+* `set_mark c/CS2101 s/3 a/Oral Presentation m/80`
 
 <br>
 
@@ -369,7 +369,7 @@ Adding an assessment to a module | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT
 Editing an assessment in a module | `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
 Deleting an assessment from a module | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>`
 Listing marks for an assessment: | `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
-Setting marks for a student's assessment | `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
+Setting marks for a student's assessment | `set_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 Editing marks for a student's assessment | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
 Deleting marks for a student's assessment | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
 Viewing average marks for an assessment | `average_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
