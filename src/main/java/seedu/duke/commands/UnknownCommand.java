@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
-//@@author exetr
+//@@author avellinwong01
 /**
  * Class encapsulating an unknown command not recognised by the application.
  */
@@ -27,3 +27,4 @@ public class UnknownCommand extends Command {
     }
 
 }
+//@@author avellinwong01

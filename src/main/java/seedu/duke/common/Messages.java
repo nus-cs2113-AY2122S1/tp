@@ -34,6 +34,14 @@ public class Messages {
     // List deadline
     public static final String LIST_DEADLINE_TODAY = "  (+) Listing out loaned items that have to be returned today";
     public static final String LIST_DEADLINE_OVERDUE = "  (+) Listing out loaned items that are overdue";
+    public static final String LIST_DEADLINE_DATE = "  (+) Listing out loaned items that are due this date: ";
+    public static final String EMPTY_DEADLINE_COMMAND = " (!) Oops! Please specify the due date!";
+    public static final String INVALID_DEADLINE_COMMAND = " (!) Oops! Please input the command in one of these format"
+            + System.lineSeparator()
+            + " 1. deadline today" + System.lineSeparator()
+            + " 2. deadline overdue" + System.lineSeparator()
+            + " 3. deadline d/dd-mm-yyyy";
+    public static final String EMPTY_DATE = " (!) Oops! Please specify the due date!";
     // Search
     public static final String SEARCH_MESSAGE = "  (+) Here are the searching results in library";
     public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()

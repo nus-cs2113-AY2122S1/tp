@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
@@ -14,7 +15,7 @@ public abstract class Command {
      * It is only meant to be called by child classes.
      * @param ui Object that handles user IO
      */
-    public void execute(TextUI ui, Catalogue catalogue) {
+    public void execute(TextUI ui, Catalogue catalogue) throws LibmgrException {
         throw new UnsupportedOperationException();
     }
 

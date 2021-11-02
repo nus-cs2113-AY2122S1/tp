@@ -14,6 +14,8 @@ done in an efficient manner.
         - [Adding a magazine item: `add m`](#Adding-a-magazine-item)
         - [Adding a video item: `add v`](#Adding-a-video-item)
     - [List items: `list`](#List-items)
+    - [Listing items that are due today: `deadline today`](#Listing-items-that-are-due-today)
+    - [Listing items that are overdue: `deadline overdue`](#Listing-items-that-are-overdue)
     - [Search items: `search`](#Search-item-by-ID)
       - [Search item by ID: `search i/`](#Search-item-by-ID)
       - [Search item by title: `search t/`](#Search-item-by-title)
@@ -120,6 +122,36 @@ Expected Output:
   ========================================
   [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  ========================================
+```
+
+### Listing items that are due today
+List the loaned items that need to be returned today
+
+Format: `deadline today`
+
+Example: `deadline today`
+
+Expected Output:
+```
+  (+) Listing out loaned items that have to be returned today
+  ========================================
+  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+### Listing items that are overdue
+List the loaned items that already overdue but haven't been returned yet
+
+Format: `deadline overdue`
+
+Example: `deadline overdue`
+
+Expected Output:
+```
+  (+) Listing out loaned items that are overdue
+  ========================================
+  [M] 58720a | LOANED | Time Magazine | Time USA | oct252021
   ========================================
 ```
 

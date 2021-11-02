@@ -17,6 +17,7 @@ import static seedu.duke.common.Messages.EDIT_INVALID_VIDEO;
 import static seedu.duke.common.Messages.EDIT_INVALID_MAGAZINE;
 import static seedu.duke.common.Messages.EDIT_INVALID_BOOK;
 
+//@@author avellinwong01
 /**
  * Class encapsulating an edit command.
  */
@@ -205,4 +206,5 @@ public class EditCommand extends Command {
         }
     }
 }
+//@@author avellinwong01
 

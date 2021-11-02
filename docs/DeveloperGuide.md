@@ -4,49 +4,114 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Setting up the project in your computer
+
+> ⚠ **Caution**: Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
+> 
+First, **fork** this repo, and **clone** the fork into your computer.
+
+If you plan to use Intellij IDEA (highly recommended):
+
+1. **Configure the JDK**: Follow the guide _[[se-edu/guides] IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html)_ to ensure Intellij is configured to use **JDK 11**.
+2. **Import the project as a Gradle project**: Follow the guide _[[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)_ 
+to import the project into IDEA.
+   _⚠ Note: Importing a Gradle project is slightly different from importing a normal Java project._
+3. **Verify the setup**:
+   1. Run the `seedu.libmgr.Libmgr` and try a few commands. 
+   2. Run the tests to ensure they all pass.
+
 ## Design & implementation
 
-This section provides an overview of the design architecture and implementation of Libmgr. Each sub-section provides a detailed explanation of the design of each component
+This section provides an overview of the design architecture and implementation of Libmgr. 
+Each sub-section provides a detailed explanation of the architecture and design of each component.
 
-### Architecture Diagram
+### Architecture
 
-### Entrypoint of Libmgr
+Libmgr is a Command-Line-Interface (CLI) application that is designed for librarians to manage library inventory efficiently. 
+Its main architecture consists of a few components:
+- ui: Contains TextUI, the class which manages the UI of the app 
+- data: Contains the library catalogue and various item classes that hold the data of the app 
+- commands: Contains various command classes and a Parser class that handles the execution of user commands
+- common: Contains a collection of classes used by multiple other components, such as exceptions and messages
+- storage: Reads data from, and writes data to the hard disk
+
+#### Entrypoint of Libmgr
+
+The sequence diagram below shows an overview how the components and classes interact with each other in the application.
 
 ![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
 
-### Searching feature of Libmgr
-
-![SearchFunction](img/SearchFunctionSequence.png)
+When the app is launched, the `ui` component is first invoked to print a logo and welcome message to the user. 
+Subsequently, the `data` component (Catalogue class) is invoked to manage and add items to the library inventory. 
+The `commands` component (Parser class) is then invoked to process the commands given by the user, 
+which is read in by the `ui` component. The individual command classes are then invoked to execute the respective command.
 
 ---
+### UI Component
 
-### Data Package
+_todo_
 
-The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
+### Data Component
 
 ![ItemsClassDiagram](img/ItemsClassDiagram.png)
 
-### Commands Package
+The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
 
-The commands component consists of a 'commands' package which holds a main Parser class to execute all the commands, as well as 
-individual class files, each corresponding to a specific command, that inherit from an abstract command class.
+
+### Commands component
 
 ![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
 
-#### Edit Command 
+The commands component consists of a `commands` package. Inside the package are the following classes: 
+1. A main `Parser` class to process all the commands 
+2. Individual Command classes, each corresponding to a specific command 
+   1. `AddAudioCommand`
+   2. `AddBookCommand`
+   3. `AddCommand`
+   4. `AddMagazineCommand`
+   5. `AddVideoCommand`
+   6. `DeadlineCommand`
+   7. `EditCommand`
+   8. `ExitCommand`
+   9. `ListCommand`
+   10. `LoanCommand`
+   11. `RemoveCommand`
+   12. `ReserveCommand`
+   13. `ReturnCommand`
+   14. `SearchCommand`
+   15. `UnknownCommand`
+   16. `UnreserveCommand`
 
-The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
+
+The individual Command classes inherit from an abstract `Command` class.
+
+#### Edit Command
 
 ![EditCommandSequence](img/EditCommandSequence.png)
 
+The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
+
+#### Search Command 
+
+![SearchFunction](img/SearchFunctionSequence.png)
+
+### Common component
+Classes used by multiple components are located in the `common` package. 
+For example, the `LibmgrException` class which is the main exception class for the app. 
+
+---
 ## Product scope
 ### Target user profile
 
-Library staff who prefer keyboard inputs and require a text based application to quickly track and update the statuses of items within their catalogue
+Library staff who prefer keyboard inputs and require a text based application to quickly track and update 
+the details of library items within their catalogue.
 
 ### Value proposition
 
-This product aims to streamline the process of managing the book catalogues within their library. It will allow library staff to quickly track their books, such as finding out their location and status. Designed for fast typists, it also allows staff to track their inventory faster and more efficiently.
+This product aims to streamline the process of managing the book catalogues within their library. 
+It will allow library staff to track their items, such as finding out their status, as well as update their 
+catalogue quickly. Designed for fast typists, it also allows staff to track, update and manage their 
+inventory more efficiently.
 
 ## User Stories
 
@@ -69,11 +134,10 @@ This product aims to streamline the process of managing the book catalogues with
 |v2.0|librarian|view what items are due to be returned today|| 
 |v2.0|librarian|view the list of overdue items|inform people to return them|| 
 
-
-
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on Windows, macOSX and Linux as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
