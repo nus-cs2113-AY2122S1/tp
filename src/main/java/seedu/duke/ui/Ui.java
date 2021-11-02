@@ -1,10 +1,17 @@
 package seedu.duke.ui;
 
 //@@author APZH
+
+import seedu.duke.command.CommandEnum;
+
+import java.util.Scanner;
+
 /**
  * Text UI of the SchedUrMods application.
  */
 public class Ui {
+
+    private static final Scanner IN = new Scanner(System.in);
 
     private static final String LOGO = "\n"
             + " _____        _                _  _   _       ___  ___            _\n"
@@ -37,6 +44,15 @@ public class Ui {
      */
     public void printCursor() {
         System.out.print(CURSOR);
+    }
+
+    public String readInput() {
+        printCursor();
+        if (!IN.hasNextLine()) {
+            return CommandEnum.BYE.toString();
+        }
+        String input = IN.nextLine();
+        return input;
     }
 
     //@@author APZH
