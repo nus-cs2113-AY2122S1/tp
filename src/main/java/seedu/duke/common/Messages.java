@@ -54,8 +54,8 @@ public class Messages {
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
 
     // Unknown
-    public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean" + System.lineSeparator()
-            + "Type 'help' to view available commands";
+    public static final String UNKNOWN_MESSAGE = "  (!) Invalid Command" + System.lineSeparator()
+            + "  (!) Type 'help' to view available commands";
 
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
