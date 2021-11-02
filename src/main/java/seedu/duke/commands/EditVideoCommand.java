@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.data.Video;
@@ -122,6 +123,11 @@ public class EditVideoCommand extends Command {
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
+            try {
+                catalogue.checkDuplicateID(id);
+            } catch (LibmgrException e) {
+                ui.print(e.getMessage());
+            }
             toEdit.setID(id);
         }
         if (args.containsKey(KEY_PUBLISHER)) {

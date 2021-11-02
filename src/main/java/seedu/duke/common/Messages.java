@@ -23,7 +23,7 @@ public class Messages {
 
     // Add Commands
 
-    public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
+    public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate of an existing ID!";
 
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";

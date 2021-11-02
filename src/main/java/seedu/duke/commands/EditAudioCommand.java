@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Messages;
 import seedu.duke.data.Audio;
 import seedu.duke.data.Catalogue;
@@ -124,6 +125,11 @@ public class EditAudioCommand extends Command {
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
+            try {
+                catalogue.checkDuplicateID(id);
+            } catch (LibmgrException e) {
+                ui.print(e.getMessage());
+            }
             toEdit.setID(id);
         }
         if (args.containsKey(KEY_ARTIST)) {
