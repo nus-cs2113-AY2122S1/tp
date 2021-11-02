@@ -59,6 +59,8 @@ public class EditCommand extends Command {
             new EditMagazineCommand(args, toEdit).execute(ui, catalogue);
         } else if (toEdit instanceof Video) {
             new EditVideoCommand(args, toEdit).execute(ui, catalogue);
+        } else {
+            new EditItemCommand(args, toEdit).execute(ui, catalogue);
         }
 
     }
