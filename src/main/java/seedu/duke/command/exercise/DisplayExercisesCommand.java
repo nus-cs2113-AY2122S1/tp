@@ -29,7 +29,7 @@ public class DisplayExercisesCommand extends Command {
             + ": Displays all exercises in the workout the user is currently in.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_DISPLAY_EXERCISES = "Exercises in %d) %s";
+    public static final String MESSAGE_DISPLAY_EXERCISES = "Exercises in (%d) %s";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
 
     private final int workoutIndex;
@@ -59,7 +59,7 @@ public class DisplayExercisesCommand extends Command {
         if (exercises.isEmpty()) {
             return new CommandResult(MESSAGE_EMPTY_WORKOUT);
         } else {
-            String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workoutIndex, workout.getWorkoutName());
+            String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workoutIndex, workout);
             return new CommandResult(displayMessage, exercises);
         }
     }
