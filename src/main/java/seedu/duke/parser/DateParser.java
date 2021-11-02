@@ -33,9 +33,12 @@ public class DateParser {
     private static final String[] ACCEPTED_SEPARATORS
         = {":", "~", "\\.", "\\/", "\\|", "\\\\"};
 
-    private static LocalDateTime removeNanos(LocalDateTime dateTime) {
+    private static LocalDateTime removeSecondsAndNanos(LocalDateTime dateTime) {
+        int seconds = dateTime.getSecond();
+        dateTime = dateTime.minusSeconds(seconds);
         int nanos = dateTime.getNano();
-        return dateTime.minusNanos(nanos);
+        dateTime = dateTime.minusNanos(nanos);
+        return dateTime;
     }
 
     public static LocalDateTime roundToClosestHour(LocalDateTime dateTime) {
@@ -44,14 +47,14 @@ public class DateParser {
             return dateTime.plusMinutes(HOUR - minutes);
         }
         System.out.printf(Integer.toString(minutes));
-        dateTime = removeNanos(dateTime);
+        dateTime = removeSecondsAndNanos(dateTime);
         return dateTime.minusMinutes(minutes);
     }
 
     public static LocalDateTime roundUpHour(LocalDateTime dateTime) {
         int minutes = dateTime.getMinute();
         dateTime = dateTime.minusMinutes(minutes);
-        dateTime = removeNanos(dateTime);
+        dateTime = removeSecondsAndNanos(dateTime);
         return dateTime.plusHours(1);
     }
 
