@@ -434,51 +434,27 @@ Format: `reset`
 
 Action | Format |
   ------ | --------------- |
-<<<<<<< HEAD
-Listing all modules | `list_modules`
-Adding a module | `add_module c/<MODULE_CODE> [n/<MODULE_NAME>]`
-Editing a module | `edit_module c/<MODULE_CODE> [nc/<NEW_MODULE_NAME>] [n/<NEW_MODULE_NAME>]`
-Deleting a module | `delete_module c/<MODULE_CODE>`
-Listing all students in a module | `list_students c/<MODULE_CODE>`
-Adding a student to a module | `add_student c/<MODULE_CODE> i/<STUDENT_ID> n/<STUDENT_NAME>`
-Editing a student's information in a module | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
-Deleting a student from a module | `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
-Finding students in a module given a keyword | `find_student c/<MODULE_CODE> k/<KEYWORD>`
-Listing all assessments in a module | `list_assessments c/<MODULE_CODE>`
-Adding an assessment to a module | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-Editing an assessment in a module | `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
-Deleting an assessment from a module | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>`
-Listing marks for an assessment: | `list_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
-Setting marks for a student's assessment | `set_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
-Editing marks for a student's assessment | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
-Deleting marks for a student's assessment | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-Viewing average marks for an assessment | `average_marks c/<MODULE_CODE> a/<ASSESSMENT_NAME>`
-Listing attendance for a particular student | `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX>`
-Setting attendance for a particular lesson for a student | `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-Deleting attendance for a particular lesson for a student | `delete_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
-=======
-Listing all classes | `list_classes`
-Adding a class | `add_class c/<CLASS_ID> [n/<CLASS_NAME>]`
-Editing a class | `edit_class c/<CLASS_ID> [nc/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
-Deleting a class | `delete_class c/<CLASS_ID>`
-Listing all students in a class | `list_students c/<CLASS_ID>`
-Adding a student to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
-Editing a student's information in a class | `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
-Deleting a student from a class | `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
-Finding students in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
-Listing all assessments in a class | `list_assessments c/<CLASS_ID>`
-Adding an assessment to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-Editing an assessment in a class | `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
-Deleting an assessment from a class | `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
-Listing marks for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-Setting marks for a student's assessment | `set_marks c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
-Editing marks for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
-Deleting marks for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-Viewing average marks for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-Listing attendance for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
-Setting attendance for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-Deleting attendance for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
-
->>>>>>> d70490d5dd9fb6e131f55b99a49be2a7a92b3478
+Listing all **classes** | `list_classes`
+Adding a **class** | `add_class c/<CLASS_ID> [n/<CLASS_NAME>]`
+Editing a **class** | `edit_class c/<CLASS_ID> [nc/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
+Deleting a **class** | `delete_class c/<CLASS_ID>`
+Listing all **students** in a class | `list_students c/<CLASS_ID>`
+Adding a **student** to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
+Editing a **student's** information in a class | `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
+Deleting a **student** from a class | `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
+Finding **students** in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
+Listing all **assessments** in a class | `list_assessments c/<CLASS_ID>`
+Adding an **assessment** to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
+Editing an **assessment** in a class | `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
+Deleting an **assessment** from a class | `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
+Listing **marks** for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Setting **marks** for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
+Editing **marks** for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
+Deleting **marks** for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
+Viewing the median **mark** for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Viewing average **marks** for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Listing **attendance** for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
+Setting **attendance** for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+Deleting **attendance** for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 Viewing help | `help`
 Exiting the program | `exit`
