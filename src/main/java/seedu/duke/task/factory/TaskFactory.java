@@ -35,20 +35,19 @@ public abstract class TaskFactory {
         try {
             checkForRequiredArguments(flags);
 
-            String priority = flags.get(TaskFlag.PRIORITY);
-            String recurrence = flags.get(TaskFlag.RECURRENCE);
-
             description = flags.get(TaskFlag.DESCRIPTION);
             if (description.equals("")) {
                 throw new RequiredArgmentNotProvidedException(DESCRIPTION, taskType.toString());
             }
+
+            String priority = flags.get(TaskFlag.PRIORITY);
             priorityEnum = TaskParser.getPriorityEnum(priority);
+
+            String recurrence = flags.get(TaskFlag.RECURRENCE);
             recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
             setAdditionalVariables();
-
             return decideConstructor();
-
         } catch (RequiredArgmentNotProvidedException ranpe) {
             throw new GetTaskFailedException(ranpe.getMessage());
         } catch (InvalidPriorityException ipe) {
