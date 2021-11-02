@@ -58,12 +58,12 @@ The other core components of SEPlanner are:
 `Parser`: Handles user inputs and pass them down to the `Command` class.  
 `Command` : Handles output passed down from `Parser` based on the user inputs and execute user instructions.  
 `Storage` : Loads data from, and stores data back to the user's local machine.  
-`UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.  
+`UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.
 
 ### Command Interaction 
 
 <p align = "center">
-<img src="images/CommandInteraction.png" width = "800" />
+<img src="images/mainseq.png" width = "800" />
 </p>
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 

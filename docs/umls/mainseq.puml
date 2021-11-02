@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+
+participant Parser #LightGreen
+User -> Parser ++ #LightGreen: "add /uni 1"
+
+participant Command #Yellow
+Parser -> Command ++ #Yellow : addUniCommand(University U)
+
+participant Model #Orange
+Command -> Model ++ #Orange: selectedUniversityList.addUniversity(U)
+return
+deactivate Model
+
+participant Storage #LightGrey
+Command -> Storage ++ #LightGrey: updateSelectedUniversityList(selectedUniversityList)
+return
+deactivate Storage
+
+participant Ui #DarkGrey
+Command -> Ui ++ #DarkGrey : printUniversity(U)
+return
+deactivate Ui
+
+Command --> Parser
+deactivate Command
+
+
+@enduml
