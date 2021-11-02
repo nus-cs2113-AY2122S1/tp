@@ -817,8 +817,10 @@ Your current mode is indicated in the square brackets at the bottom left of the 
 It allows you to type add, list, update, delete without typing in the full command.
 Type stock, prescription or order to change to respective modes.
 Note that parameters in {curly braces} are optional.
-Parameters in [square braces] indicate that at least one of the parameter(s) must be
-provided.
+Parameters in [square braces] indicate that at least one of the parameter(s) must be provided.
+Parameters enclosed in (round brackets) are conditional optional parameters. For example, 
+the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be optional
+only if the stock exists.
 +=====================+====================================================+
 |       COMMAND       |                   COMMAND SYNTAX                   | 
 +=====================+====================================================+

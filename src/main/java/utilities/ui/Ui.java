@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome command message.
+     * Prints the welcome message and logo.
      */
     public void printWelcomeMessage() {
         String logo = "|  \\/  |          | |(_)| | | |              | || |  \n"
@@ -219,7 +219,7 @@ public class Ui {
     }
 
     /**
-     * Helps to truncate the description of a table column and ensure that it does not break a word in the middle.
+     * Helps to truncate the description of a table column and ensure that it does not truncate a word in the middle.
      * It will ensure that the truncated description returned contains valid words.
      *
      * @param description   Description value in the column.
@@ -316,6 +316,9 @@ public class Ui {
         System.out.println("Note that parameters in {curly braces} are optional.");
         System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
                 + "provided.");
+        System.out.println("Parameters enclosed in (round brackets) are conditional optional parameters. For example,"
+                + " the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be optional only"
+                + " if the stock exists.");
         printHeaderBorder(columnWidths);
         System.out.println(headers);
         printHeaderBorder(columnWidths);
