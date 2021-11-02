@@ -10,5 +10,7 @@
       \(   _.-"  libmgr
        `--"
 Welcome to libmgr
+(*) No existing data found, creating new one: /Users/exetr/Workspace/tp/text-ui-test/data/data.json ...
+(+) Loaded 0 records
 > Sorry, I don't understand what you mean
 > See you soon!
