@@ -210,25 +210,45 @@ public abstract class Person implements ListItem {
         return true;
     }
 
+    /**
+     * Checks whether wordToCheck contains wordInput.
+     * If wordInput is an empty string, checks whether wordToCheck
+     * is an empty string.
+     *
+     * @param wordToCheck the attributes to check.
+     * @param wordInput the inputted word to check against wordToCheck.
+     * @return true if wordInput is in wordToCheck, false otherwise.
+     */
+    private boolean contains(String wordToCheck,String wordInput) {
+        if (wordInput.length() == 0) {
+            return wordToCheck.length() == 0;
+        }
+        return wordToCheck.toLowerCase().contains(wordInput);
+    }
+
     private boolean containsParameter(String parameter) {
         String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
-        if (parameter.startsWith(PARAMETER_NAME)) {
-            return getName().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_IC)) {
-            return getIcNumber().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_PHONE)) {
-            return getPhoneNumber().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_EMAIL)) {
-            return getEmailAddress().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_ADDRESS)) {
-            return getResidentialAddress().toLowerCase().contains(trimmedParameter);
-        }
+        String paramSpecifier = parameter.substring(0, PARAMETER_BUFFER);
 
-        return false;
+        switch(paramSpecifier) {
+        case (PARAMETER_NAME) :
+            return contains(getName(), trimmedParameter);
+
+        case (PARAMETER_IC) :
+            return contains(getIcNumber(), trimmedParameter);
+
+        case (PARAMETER_PHONE) :
+            return contains(getPhoneNumber(), trimmedParameter);
+
+        case (PARAMETER_EMAIL) :
+            return contains(getEmailAddress(), trimmedParameter);
+
+        case (PARAMETER_ADDRESS) :
+            return contains(getResidentialAddress(), trimmedParameter);
+
+        default:
+            return false;
+        }
     }
 
 
