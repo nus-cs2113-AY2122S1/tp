@@ -60,20 +60,21 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Function returns an event that the user will create by calling other methods
+     * to get the event details, which will be used to construct the event item.
+     * @return the event that will be added to the timetable
+     * @throws AddException when the event that is to added conflicts with another item in timetable
+     */
     public TimetableUserItem getEvent() throws AddException {
-        String description;
-        String date;
-        String startTime;
-        String endTime;
-        String location;
         TimetableUserItem event;
         try {
-            description = getDescription();
-            date = getDate();
-            startTime = getStartTime();
-            endTime = getEndTime();
+            String description = getDescription();
+            String date = getDate();
+            String startTime = getStartTime();
+            String endTime = getEndTime();
             verifyCorrectTime(startTime, endTime);
-            location = getLocation();
+            String location = getLocation();
             event = new TimetableUserItem(description, date, startTime, endTime, location);
             verifyNoConflict(event);
             return event;
@@ -91,12 +92,14 @@ public class AddCommand extends Command {
     public String getLocation() {
         return addUI.getReply(FIFTH_QN).trim();
     }
+
     public void verifyCorrectTime(String startTime, String endTime) throws AddException {
         if (isEndBeforeStart(startTime, endTime)) {
             throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
                     + "All Events can only occur within a single day");
         }
     }
+
     public String getEndTime() throws AddException {
         String endTime = addUI.getReply(FOURTH_QN).trim();
         try {
@@ -122,6 +125,7 @@ public class AddCommand extends Command {
         }
         return startTime;
     }
+
     public String getDate() throws AddException {
         String date = addUI.getReply(SECOND_QN).trim();
         if (isValidDate(date)) {
@@ -137,6 +141,7 @@ public class AddCommand extends Command {
         }
         return description;
     }
+
     public void addLesson(Semester semesterData, Module module) {
         try {
             ArrayList<Lesson> lecture;
@@ -154,6 +159,7 @@ public class AddCommand extends Command {
             e.printMessage();
         }
     }
+
     public ArrayList<Lesson> addRemainingLessons(ArrayList<Lesson> lessons,
             ArrayList<Lesson> lecture) throws AddException {
         try {
@@ -170,6 +176,13 @@ public class AddCommand extends Command {
         return lecture;
     }
 
+    /**
+     * Function creates an ArrayList of Lessons with the specified lesson type.
+     * @param lessons the list of lessons in the module
+     * @param lessonType the type of lesson specified
+     * @return list of lesson with the specified lesson type
+     * @throws AddException If the module contains no lessons
+     */
     public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) throws AddException {
         ArrayList<Lesson> completeList = new ArrayList<>();
         try {
@@ -189,6 +202,11 @@ public class AddCommand extends Command {
         return completeList;
     }
 
+    /**
+     * Check whether the current module to be added into the timetable already exist.
+     * @param mod the module to check
+     * @throws ModuleExistException if the module already exist in the timetable
+     */
     public void checkModuleExist(Module mod) throws ModuleExistException {
         for (Module module : timetable.getModules()) {
             String moduleCode = module.getModuleCode();

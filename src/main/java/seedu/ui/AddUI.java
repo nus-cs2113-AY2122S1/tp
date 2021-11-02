@@ -154,7 +154,7 @@ public class AddUI {
         if (isArrayExist(lessons, ZERO)) {
             try {
                 addLessonInfo(lessons, lessonType, timetable, module);
-            } catch(IntegerException e) {
+            } catch (IntegerException e) {
                 throw e;
             }
         }
@@ -245,6 +245,11 @@ public class AddUI {
         System.out.println(header);
     }
 
+    /**
+     * Function takes in user input and return input in String format.
+     * @param question The printed question to the user
+     * @return the string format of the user input
+     */
     public String getReply(String question) {
         System.out.print(question);
         String input = in.nextLine();
@@ -255,6 +260,10 @@ public class AddUI {
         }
     }
 
+    /**
+     * Function prints out the description of the event that has been added into the timetable.
+     * @param event The event that is to be printed
+     */
     public void printEventMessage(TimetableUserItem event) {
         String startTime = String.format(FIXED_TIME_FORMAT, event.getStartHour() * TIME);
         String endTime = String.format(FIXED_TIME_FORMAT, event.getEndHour() * TIME);
@@ -277,6 +286,13 @@ public class AddUI {
         return input.toUpperCase();
     }
 
+    /**
+     * Function finds the true index value of the lesson that the user has selected by
+     * counting the number of lessons with the same class number before the index selected.
+     * @param lessons the list of lessons
+     * @param index the index that the user has selected to be added into timetable
+     * @return the lesson to be added to timetable
+     */
     public Lesson lessonEqualizer(ArrayList<Lesson> lessons, int index) {
         int tally = 0;
         for (int i = 1; lessons.size() > i; i++) {
@@ -311,6 +327,13 @@ public class AddUI {
         addLessonToTimetable(lessons, timetable, module, classNumber);
     }
 
+    /**
+     * Function checks for user response when a conflict occurs when
+     * trying to add a lesson into timetable.
+     * @param timetable the user's timetable
+     * @param lesson the lesson to be added into the timetable
+     * @return the flag to determine whether user input is required again
+     */
     public String checkFlag(Timetable timetable, Lesson lesson) {
         if (timetable.isConflict(lesson)) {
             String choice = TextUi.printAskConfirmation(lesson);
@@ -328,6 +351,12 @@ public class AddUI {
         }
     }
 
+    /**
+     * Function makes sure that the input String is a valid number and is not out of range of the array.
+     * @param select The user input of the number
+     * @param lessons The array of lesson
+     * @throws IntegerException when input is an invalid number
+     */
     public void verifySelection(String select, ArrayList<Lesson> lessons) throws IntegerException {
         try {
             int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
