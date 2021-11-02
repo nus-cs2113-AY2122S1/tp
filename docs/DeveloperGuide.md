@@ -4,28 +4,22 @@ Duke is a **desktop application for managing tasks, optimised for usage
 via a Command Line Interface (CLI).** If you can type fast, Duke can help
 you manage your daily tasks faster than traditional GUI application.
 
+- []
 - [Acknowledgements](#acknowledgements)
-- [Setting up, getting started](#)
-- [Design](#2-features)
-  - [Architecture](#2-1-viewing-help--help)
-  - [UI component](#22-adding-a-task)
-  - [Logic component](#221-todo-todo)
-  - [Model component](#222-deadline-deadline)
-  - [Storage component](#223-event-event)
-  - [Common classes](#23-listing-all-tasks-list)
-- [Implementation](#24-marking-a-task-as-done-done)
-- [Documentation, logging, testing, configuration, dev-ops](#3-faq)
-- [Appendix: Requirements](#4-command-summary)
-  - [Product scope](#4-command-summary)
-  - [User stories](#4-command-summary)
-  - [Use cases](#4-command-summary)
-  - [Non-Functional Requirements](#4-command-summary)
-  - [Glossary](#4-command-summary)
-- [Appendix: Instructions for manual testing](#4-command-summary)
-  - Launch and shutdown
-  - Deleting a person
+- [Setting up, getting started]()
   
-# Acknowledgements
+# 1. Introduction
+**SchedUrMods** is a desktop application for NUS students who wish to manage 
+their assignments and semester-related information via CLI (command-line interface).
+
+**SchedUrMods** is written in `Java 11` and utilises the Object-Oriented Programming (OOP) paradigm
+to provide the following benefits during the development of the application. 
+- Modularity for easier troubleshooting
+- Reuse of code through inheritance 
+- Flexibility through polymorphism
+
+## 1.1 Purpose
+## 1.2 Acknowledgements
 ## Code structure
 [Duke, by Peh Zhenhao, Amos](https://github.com/APZH/ip)
 ## Third-party library
