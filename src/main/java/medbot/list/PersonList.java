@@ -65,15 +65,19 @@ public abstract class PersonList {
     }
 
     /**
-     * Returns a String containing the information of the person with the specified personId.
+     * Returns a String containing the name of the person with the specified personId.
      *
      * @param personId the id of the person to search for
-     * @return a String containing the person's information
+     * @return a String containing the person's name
      * @throws MedBotException if there is no person with that id
      */
     public String getPersonName(int personId) throws MedBotException {
         checkPersonExists(personId);
         return persons.get(personId).getName();
+    }
+
+    public boolean getPersonIsHidden(int personId) {
+        return persons.get(personId).isHidden();
     }
 
     /**
