@@ -4,36 +4,43 @@ If you can type fast, TAA can help keep track of your classes and students faste
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Listing all classes: `list_classes`](#listing-all-classes-list_classes)
-  * [Adding a class: `add_class`](#adding-a-class-add_class)
-  * [Editing a class: `edit_class`](#editing-a-class-edit_class)
-  * [Deleting a class: `delete_class`](#deleting-a-class-delete_class)
-  * [Listing all students in a class: `list_students`](#listing-all-students-in-a-class-list_students)
-  * [Adding a student to a class: `add_student`](#adding-a-student-to-a-class-add_student)
-  * [Editing a student's information in a class: `edit_student`](#editing-a-students-information-in-a-class-edit_student)
-  * [Deleting a student from a class: `delete_student`](#deleting-a-student-from-a-class-delete_student)
-  * [Finding students in a class given a keyword: `find_student`](#finding-students-in-a-class-given-a-keyword-find_student)
-  * [Listing all assessments in a class: `list_assessments`](#listing-all-assessments-in-a-class-list_assessments)
-  * [Adding an assessment to a class: `add_assessment`](#adding-an-assessment-to-a-class-add_assessment)
-  * [Editing an assessment in a class: `edit_assessment`](#editing-an-assessment-in-a-class-edit_assessment)
-  * [Deleting an assessment from a class: `delete_assessment`](#deleting-an-assessment-from-a-class-delete_assessment)
-  * [Listing marks for an assessment: `list_marks`](#listing-marks-for-an-assessment-list_marks)
-  * [Setting mark for a student's assessment: `set_mark`](#setting-mark-for-a-students-assessment-set_mark)
-  * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
-  * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
-  * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
-  * [Viewing median mark for an assessment: `median_mark`](#viewing-median-mark-for-an-assessment-median_mark)
-  * [Sorting and listing students in a class by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-class-by-their-overall-score-sort_by_scores)
-  * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
-  * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
-  * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
-  * [Setting comment for a particular student: `set_comment`](#setting-comment-for-a-particular-student-set_comment)
-  * [Deleting comment for a particular student: `delete_comment`](#deleting-comment-for-a-particular-student-delete_comment)
-  * [Listing comments for all students in a class `list_comment`](#listing-comments-for-all-students-in-a-class-list_comment)
-  * [Viewing help: `help`](#viewing-help-help)
-  * [Exiting the program: `exit`](#exiting-the-program-exit)
-  * [Archiving data: `archive`](#archiving-data-archive)
-  * [Resetting/Removing all data: `reset`](#resettingremoving-all-data-reset)
+  * [Classes](#classes)
+    * [Listing all classes: `list_classes`](#listing-all-classes-list_classes)
+    * [Adding a class: `add_class`](#adding-a-class-add_class)
+    * [Editing a class: `edit_class`](#editing-a-class-edit_class)
+    * [Deleting a class: `delete_class`](#deleting-a-class-delete_class)
+  * [Students](#students)
+    * [Listing all students in a class: `list_students`](#listing-all-students-in-a-class-list_students)
+    * [Adding a student to a class: `add_student`](#adding-a-student-to-a-class-add_student)
+    * [Editing a student's information in a class: `edit_student`](#editing-a-students-information-in-a-class-edit_student)
+    * [Deleting a student from a class: `delete_student`](#deleting-a-student-from-a-class-delete_student)
+    * [Finding students in a class given a keyword: `find_student`](#finding-students-in-a-class-given-a-keyword-find_student)
+  * [Assessments](#assessments)
+    * [Listing all assessments in a class: `list_assessments`](#listing-all-assessments-in-a-class-list_assessments)
+    * [Adding an assessment to a class: `add_assessment`](#adding-an-assessment-to-a-class-add_assessment)
+    * [Editing an assessment in a class: `edit_assessment`](#editing-an-assessment-in-a-class-edit_assessment)
+    * [Deleting an assessment from a class: `delete_assessment`](#deleting-an-assessment-from-a-class-delete_assessment)
+  * [Marks](#marks)
+    * [Listing marks for an assessment: `list_marks`](#listing-marks-for-an-assessment-list_marks)
+    * [Setting mark for a student's assessment: `set_mark`](#setting-mark-for-a-students-assessment-set_mark)
+    * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
+    * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
+    * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
+    * [Viewing median mark for an assessment: `median_mark`](#viewing-median-mark-for-an-assessment-median_mark)
+    * [Sorting and listing students in a class by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-class-by-their-overall-score-sort_by_scores)
+  * [Attendance](#attendance)
+    * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
+    * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
+    * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
+  * [Comments](#comments)
+    * [Setting comment for a particular student: `set_comment`](#setting-comment-for-a-particular-student-set_comment)
+    * [Deleting comment for a particular student: `delete_comment`](#deleting-comment-for-a-particular-student-delete_comment)
+    * [Listing comments for all students in a class `list_comment`](#listing-comments-for-all-students-in-a-class-list_comment)
+  * [Useful Features](#useful-features)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Archiving data: `archive`](#archiving-data-archive)
+    * [Resetting/Removing all data: `reset`](#resettingremoving-all-data-reset)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -47,6 +54,7 @@ If you can type fast, TAA can help keep track of your classes and students faste
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
 ## Features
+## Classes
 
 ### Listing all classes: `list_classes`
 Displays the list of all classes in the class list.
@@ -58,16 +66,16 @@ Format: `list_classes`
 ### Adding a class: `add_class`
 Adds a class to the class list.
 
-Format: `add_class c/<CLASS_ID> [n/<CLASS_NAME>]`
+Format: `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
   * Case-insensitive
   * Cannot contain whitespaces
 * `CLASS_NAME` [Optional] refers to the name of the class to be added.
 
 Examples:
-* `add_class c/CS2113T-F12 n/Tutorial Group F12`
-* `add_class n/Sectional Group C03 c/CS2101-C03`
-* `add_class c/CS2102`
+* `add_class i/CS2113T-F12 n/Tutorial Group F12`
+* `add_class n/Sectional Group C03 i/CS2101-C03`
+* `add_class i/CS2102`
 
 <br>
 
@@ -102,6 +110,7 @@ Examples:
 
 <br>
 
+##Students
 ### Listing all students in a class: `list_students`
 Shows a list of all students in a particular class.
 
@@ -168,6 +177,7 @@ Examples:
 
 <br>
 
+## Assessments
 ### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
 
@@ -229,6 +239,7 @@ Examples:
 
 <br>
 
+## Marks
 ### Listing marks for an assessment: `list_marks`
 Lists all students and their marks for an assessment.
 
@@ -348,6 +359,7 @@ Examples:
 
 <br>
 
+## Attendance
 ### Listing attendance for a particular student: `list_attendance`
 Lists a student's attendance.
 
@@ -378,6 +390,7 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 
 <br>
 
+## Comments
 ### Listing comments for all students in a class: `list_comment`
 List comments for all students in a class
 
@@ -419,6 +432,7 @@ Examples:
 
 <br>
 
+## Useful Features
 ### Viewing help: `help`
 Displays the list of available commands and how to use them.
 
@@ -456,29 +470,31 @@ Format: `reset`
 
 ## Command Summary
 
-Action | Format |
-  ------ | --------------- |
-Listing all **classes** | `list_classes`
-Adding a **class** | `add_class c/<CLASS_ID> [n/<CLASS_NAME>]`
-Editing a **class** | `edit_class c/<CLASS_ID> [nc/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
-Deleting a **class** | `delete_class c/<CLASS_ID>`
-Listing all **students** in a class | `list_students c/<CLASS_ID>`
-Adding a **student** to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
-Editing a **student's** information in a class | `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
-Deleting a **student** from a class | `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
-Finding **students** in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
-Listing all **assessments** in a class | `list_assessments c/<CLASS_ID>`
-Adding an **assessment** to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-Editing an **assessment** in a class | `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
-Deleting an **assessment** from a class | `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
-Listing **marks** for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-Setting **marks** for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
-Editing **marks** for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
-Deleting **marks** for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-Viewing average **marks** for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-Viewing the median **mark** for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
-Listing **attendance** for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
-Setting **attendance** for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-Deleting **attendance** for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
-Viewing help | `help`
-Exiting the program | `exit`
+Category | Action | Format |
+ ----- | ------ | --------------- |
+Class | Listing all **classes** | `list_classes`
+Class | Adding a **class** | `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
+Class | Editing a **class** | `edit_class c/<CLASS_ID> [nc/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
+Class | Deleting a **class** | `delete_class c/<CLASS_ID>`
+Student | Listing all **students** in a class | `list_students c/<CLASS_ID>`
+Student | Adding a **student** to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
+Student | Editing a **student's** information in a class | `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>`
+Student | Deleting a **student** from a class | `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
+Student | Finding **students** in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
+Assessment | Listing all **assessments** in a class | `list_assessments c/<CLASS_ID>`
+Assessment | Adding an **assessment** to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
+Assessment | Editing an **assessment** in a class | `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
+Assessment | Deleting an **assessment** from a class | `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
+Marks | Listing **marks** for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Marks | Setting **mark** for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
+Marks | Editing **mark** for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
+Marks | Deleting **mark** for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
+Marks | Viewing average **marks** for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Marks | Viewing the median **mark** for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Attendance | Listing **attendance** for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
+Attendance | Setting **attendance** for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+Attendance | Deleting **attendance** for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+Useful Features | Viewing help | `help`
+Useful Features | Exiting the program | `exit`
+Useful Features | Archiving data | `archive`
+Useful Features | Resetting/Removing all data | `reset`
