@@ -6,7 +6,6 @@ import command.CommandSyntax;
 import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Stock;
-import utilities.parser.DateParser;
 import utilities.parser.MedicineValidator;
 import utilities.parser.PrescriptionManager;
 import utilities.parser.PrescriptionValidator;
@@ -15,7 +14,6 @@ import utilities.parser.StockValidator;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
