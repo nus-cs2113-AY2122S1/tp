@@ -401,7 +401,7 @@ class UiTest {
             List<String> params = patientList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.PATIENT_INFO), expectedOutput);
 
-            String newParameters[] = {"n/Bob", "z/test"};
+            String[] newParameters = {"n/Bob", "z/test"};
             patientList.findPersons(newParameters);
         } catch (MedBotException e) {
             assertEquals("The specifier z/ is invalid.", e.getMessage());
@@ -443,7 +443,7 @@ class UiTest {
             List<String> params = staffList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.MEDICAL_STAFF_INFO), expectedOutput);
 
-            String newParameters[] = {"n/Bob", "z/test"};
+            String[] newParameters = {"n/Bob", "z/test"};
             staffList.findPersons(newParameters);
         } catch (MedBotException e) {
             assertEquals("The specifier z/ is invalid.", e.getMessage());
