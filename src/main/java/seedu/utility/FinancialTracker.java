@@ -44,7 +44,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Expense object into the expenses ArrayList of FinancialTracker.
+     * Adds an Expense object into the expenses ArrayList of FinancialTracker.
      *
      * @param expense Expense object we want to add into the ArrayList.
      * @throws ExpenseOverflowException Thrown if the sum of expense exceeds a fixed limit. 
@@ -65,7 +65,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Income object into the income ArrayList of FinancialTracker.
+     * Adds an Income object into the income ArrayList of FinancialTracker.
      * 
      * @param income Income object we want to add into the ArrayList.
      * @throws IncomeOverflowException Thrown if the sum of income exceeds a fixed limit.
@@ -90,7 +90,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an expense entry based on its index.
+     * Removes an expense entry based on its index.
      *
      * @param expenseIndex Index of deleted expense entry.
      * @return Deleted expense object.
@@ -106,7 +106,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an income entry based on its index.
+     * Removes an income entry based on its index.
      * 
      * @param incomeIndex Index of deleted income entry.
      * @return Deleted income object.
@@ -122,9 +122,9 @@ public class FinancialTracker {
     }
 
     /**
-     * Return an ArrayList called expenses from FinancialTracker.
+     * Returns an ArrayList called expenses from FinancialTracker.
      * 
-     * @return Return ArrayList with only expense entries inside.
+     * @return Returns ArrayList with only expense entries inside.
      */
     public ArrayList<Expense> getExpenses() {
         assert expenses != null;
@@ -132,9 +132,9 @@ public class FinancialTracker {
     }
 
     /**
-     * Return an ArrayList called incomes from FinancialTracker.
+     * Returns an ArrayList called incomes from FinancialTracker.
      *
-     * @return Return ArrayList with only income entries inside.
+     * @return Returns ArrayList with only income entries inside.
      */
     public ArrayList<Income> getIncomes() {
         assert incomes != null;
