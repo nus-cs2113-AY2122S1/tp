@@ -34,9 +34,9 @@ public class Storage {
 
             assert i == commandStorage.size();
         } catch (IOException i) {
-            System.out.println("Error");
+            System.out.println("IOEXCEPTION Error!");
         } catch (ClassCastException cce) {
-            System.out.println("Data File is corrupted");
+            System.out.println("Your current year data file is corrupted!");
             System.exit(0);
         }
 
