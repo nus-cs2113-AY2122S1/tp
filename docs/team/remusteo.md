@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 1600 lines of
+Code contributed: more than 1800 lines of
 code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=RemusTeo&tabRepo=AY2122S1-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)]
 
 ### Features
@@ -54,6 +54,13 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
     * Functionality: Archive orders to remove DELIVERED order records <= specified date and input into a static file `data/order_archive.txt` that has readable format.
     * Justification: Allow user to remove cluttered records. After long term usage will have many insignificant records.
     * Pull request: [[#193](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/193), [#226](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/226)]
+  
+#### v2.1:
+
+* Improved `archive*` commands.
+    * Functionality: To show number of records archived.
+    * Justification: Provide more information to the user.
+    * Pull request: [[#297](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/297)]
 
 
 ### Enhancements to Existing Features
@@ -76,6 +83,7 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
     * Justification: Consistency
     * Pull requests: [[#141](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/141)]
 
+
 * Implemented `removeTime()` method in `DateParser`.
     * Functionality: Remove time from Date object.
     * Justification: For use when archiving to match user specified date.
@@ -88,6 +96,9 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
       . [[#101](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/101), [#176](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/176), [#202](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/202), [#228](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/228)]
     * Added documentation for `Data Storage`, `Data Editing`, `FAQ` sections in UG
       . [[#202](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/202)]
+    * Added documentation for `Purpose` section in UG
+      . [[#294](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/294)]
+
 
 * [Developer Guide](../DeveloperGuide.md)
     * Storage Component
@@ -99,8 +110,18 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
     * Non Functional Requirements
       . [[#266](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/266)]
 
-### Community
+### Team-Based
 
+* Attended all team meetings
+* Discovery of bugs from self testing before v1.0 release.
+* Providing feedback to sequence diagrams in DG.
+* Communication with TA for advice on our sequence diagrams.
+* Documentation of the Purpose & FAQ in UG.
+* Documentation of Value Proposition & NFRs in DG.
+* Github pages emoji plugin.
 * Pull Requests reviewed with non-trivial review comments
   . [[#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45), [#99](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/99), [#204](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/204), [#211](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/211), [#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
+
+### Community
+
 * Reported bugs and suggestions for other teams in the class [[#1](https://github.com/RemusTeo/ped/issues/1), [#2](https://github.com/RemusTeo/ped/issues/2), [#3](https://github.com/RemusTeo/ped/issues/3), [#4](https://github.com/RemusTeo/ped/issues/4), [#5](https://github.com/RemusTeo/ped/issues/5), [#6](https://github.com/RemusTeo/ped/issues/6), [#7](https://github.com/RemusTeo/ped/issues/7), [#8](https://github.com/RemusTeo/ped/issues/8)]
