@@ -1,10 +1,6 @@
 package seedu.duke.attendance;
 
-import seedu.duke.member.Member;
-import seedu.duke.member.exception.InvalidMemberException;
-
 import java.util.ArrayList;
-import java.util.SplittableRandom;
 
 public class AttendanceList {
 
@@ -41,10 +37,6 @@ public class AttendanceList {
         try {
             int index = attendanceNumber - 1;
             Attendance entry = attendanceList.get(index);
-            for (int i = attendanceNumber; i < this.getAttendanceListSize(); i++) {
-                Attendance attendanceToChangeIndex = attendanceList.get(i);
-                attendanceToChangeIndex.setIndex(i);
-            }
             attendanceList.remove(index);
             return entry;
         } catch (IndexOutOfBoundsException e) {

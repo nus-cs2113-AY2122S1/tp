@@ -141,7 +141,6 @@ public class Parser {
     public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String entry) {
         // e.g. list /att /t Friday Training /d 0
         String[] trainingNameAndLabel = entry.trim().split("/t");
-        String presentOrAbsent = "";
         AttendanceList filteredAttendanceList = new AttendanceList();
 
         try {
@@ -151,6 +150,10 @@ public class Parser {
                     filteredAttendanceList.addAttendance(attendance);
                 }
             }
+            if (filteredAttendanceList.getAttendanceListSize() == 0) {
+                System.out.println("No such Training Name is in our attendance records.");
+            }
+
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printWrongInputMessage();
         }

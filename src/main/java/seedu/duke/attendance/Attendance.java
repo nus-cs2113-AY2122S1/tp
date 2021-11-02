@@ -1,8 +1,5 @@
 package seedu.duke.attendance;
 
-import seedu.duke.member.Member;
-import seedu.duke.training.TrainingSchedule;
-
 public class Attendance {
 
     protected String memberName;
