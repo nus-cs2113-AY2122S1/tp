@@ -811,21 +811,47 @@ Format: `end`
 
 Stonks XD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
 
-- `StonksXD_Entries.csv` will store all the expense and income entries StonksXD is currently tracking.
-- `StonksXD_Settings.csv` will store all the budget values as well as the currency setting.
+- `StonksXD_Entries.csv` will store all the expense and income entries Stonks XD is currently tracking.
+- `StonksXD_Settings.csv` will store all the budget values, the currency setting and the threshold value.
 
 The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
 when not using the program.
 
-#### Note
+#### When editing csv files
 
-1. Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `dd/MM/yyyy` format i.e., `11/12/2021` when loading data. 
-When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date format 
-is in `dd/MM/yyyy` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be considered 
-corrupted and not be loaded into Stonks XD.
-2. Changing the currency setting in `StonksXD_Settings.csv` is almost never recommended. This is because this will 
-cause all your entries and budgets to be recognised as a different currency. 
-3. `.csv` files should not be open concurrently while Stonks XD is running. This would cause the data to not be accurately saved. 
+- `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
+writing / reading the `.csv` files at the same time. This will very likely cause a saving error and lost of data.
+- Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
+above.
+  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
+  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number.
+  - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
+  - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
+  specified ealier on in the user guide.
+- Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
+ensure your data is saved / loaded properly, please do not edit anything unexpected.
+- Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `DD/MM/YYYY` format i.e., `11/12/2021` when loading 
+data.
+  When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
+format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
+considered corrupted and not be loaded into Stonks XD.
+- Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
+  cause all your entries and budgets to be recognised as a different currency.
+
+
+
+#### In the event of corrupted data
+
+When you run Stonks XD, it will immediately start to load all the data from both `.csv` files. You might run into 
+messages telling you that there are corrupted data, and they will not be loaded. This is likely because you have 
+edited things you are not suppose to, or you have edited wrongly. There is a way to minimise this damage (This is 
+optional, and you do not have to do this if you are fine with losing data). 
+Here are the steps:
+1. When you ended Stonks XD already but wants to edit the `.csv` files, make a copy of them first.
+2. When you run Stonks XD and receive corruption errors, end the program.
+3. Copy and paste the contents from your copies back into `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This 
+means all your edits are gone. But this pretty much ensures that there will be no corrupted data. 
+
 
 ---
 
