@@ -44,7 +44,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Add an Expense object into the expenses ArrayList of FinancialTracker.
+     * Adds an Expense object into the expenses ArrayList of FinancialTracker.
      *
      * @param expense Expense object we want to add into the ArrayList.
      * @throws ExpenseOverflowException Thrown if the sum of expense exceeds a fixed limit. 
