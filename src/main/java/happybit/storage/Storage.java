@@ -71,6 +71,10 @@ public class Storage {
         this.setReadOnly(storageFile);
     }
 
+    /**
+     * Create directory of storage file.
+     * @param storageDir the directory where storage file will be placed
+     */
     protected void makeDirectory(File storageDir) {
         boolean isDirCreated = storageDir.mkdirs();
 
@@ -81,6 +85,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Create the storage file if it does not exist.
+     * @param storageFile the storage text file to create
+     */
     protected void createFile(File storageFile) {
         try {
             boolean isFileCreated = storageFile.createNewFile();
@@ -95,6 +103,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Set the storage file as read only.
+     * @param storageFile the storage file to set as read only
+     */
     protected void setReadOnly(File storageFile) {
         boolean isReadOnly = storageFile.setReadOnly();
 
