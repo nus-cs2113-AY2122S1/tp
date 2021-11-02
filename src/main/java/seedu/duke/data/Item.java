@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+//@@author silinche
 /**
  * The Item class is a class representing a item in the library.
  */
@@ -84,6 +85,7 @@ public class Item {
         this.status = status;
     }
 
+    //@@author
     /**
      * Getter method that returns the loanee attribute.
      * @return loanee Username of a person.
