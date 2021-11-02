@@ -274,7 +274,7 @@ The Diagram below is the sequence diagram for when the user needs ***help*** wit
 
 The diagram below is the class diagram for the Tag Class
 
-![Tag Diagram](./RenderedUML/TagClassDiagram.svg)
+![Tag Diagram](./RenderedUML/TagClassDiagramP.svg)
 
 #### Functions of the Tag Class:
 > 

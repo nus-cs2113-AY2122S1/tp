@@ -120,7 +120,8 @@ public class TagTest {
         String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "find /tag NoExistsTag";
-        String expected = formatException(GordonException.NO_RESULT_FOUND);
+        String expected = "Searching by tags..." + System.lineSeparator()
+                + formatException(GordonException.NO_RESULT_FOUND);
         inputOutputTest(input,expected);
     }
 
