@@ -3,8 +3,6 @@ package seedu.duke.commands.updates;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.items.Task;
 
 import java.time.LocalDateTime;
@@ -23,7 +21,7 @@ public class UpdateTaskCommand extends Command {
         this.dateTime = dateTime;
     }
 
-    public CommandResult execute() throws DukeException, InvalidBudgetException {
+    public CommandResult execute() {
         if (!updates[INDEX_OF_TITLE].equalsIgnoreCase("")) {
             taskToBeUpdated.setTitle(updates[INDEX_OF_TITLE]);
         } else if (dateTime != null) {
