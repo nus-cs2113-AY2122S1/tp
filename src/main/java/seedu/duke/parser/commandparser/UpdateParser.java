@@ -7,10 +7,13 @@ import seedu.duke.commands.updates.UpdateEventCommand;
 import seedu.duke.commands.updates.UpdateMemberCommand;
 import seedu.duke.commands.updates.UpdateTaskCommand;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
+import seedu.duke.exceptions.parserexceptions.ExistingMemberException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
+import seedu.duke.parser.ItemAttribute;
 import seedu.duke.parser.Parser;
 
 import java.time.LocalDateTime;
@@ -20,14 +23,13 @@ public abstract class UpdateParser extends Parser {
     private static final int INDEX_OF_TITLE = 0;
     private static final int INDEX_OF_VENUE = 2;
     private static final int INDEX_OF_DESCRIPTION = 1;
-    protected static final String TITLE_FLAG = "title/";
-    protected static final String DATE_FLAG = "date/";
-    protected static final String DEADLINE_FLAG = "deadline/";
-    protected static final String VENUE_FLAG = "venue/";
-    protected static final String BUDGET_FLAG = "budget/";
-    protected static final String DESCRIPTION_FLAG = "description/";
-    protected static final String TASK_FLAG = "task/";
-    protected static final String MEMBER_FLAG = "member/";
+    protected static final String TITLE_FLAG = "n/";
+    protected static final String DATE_FLAG = "d/";
+    protected static final String VENUE_FLAG = "v/";
+    protected static final String BUDGET_FLAG = "b/";
+    protected static final String DESCRIPTION_FLAG = "p/";
+    protected static final String TASK_FLAG = "t/";
+    protected static final String CHANGE_FLAG = "change/";
     protected static final String REMOVE_FLAG = "remove/";
     protected static final String ADD_FLAG = "add";
 
@@ -38,104 +40,108 @@ public abstract class UpdateParser extends Parser {
             Ui.printUpdateEventDetails(eventToBeUpdated);
             Ui.updateIntroMessage();
             String userInput = Ui.readInput();
-            String[] userUpdates = userInput.trim().split(">+");
-            Command result = parseUpdateEvent(userUpdates, eventToBeUpdated);
+            Command result = parseUpdateEvent(userInput, eventToBeUpdated);
             Ui.printLineBreak();
             return result;
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid index of event, please type an integer!");
-        } catch (InvalidBudgetException | DukeException e) {
+            System.out.println("That is not an Integer! Please key an integer value!");
+        } catch (ExistingMemberException | InvalidBudgetException | DukeException e) {
             System.out.println(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please key in your updates!");
         } catch (IndexOutOfBoundsException e) {
             Ui.printLineBreak();
             System.out.println("That selection does not exist!");
+        } catch (AttributeNotFoundException e) {
+            String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
+            String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
+            System.out.println("Please add a " + attributeType + "for your update using "
+                    + attributeFlag + attributeType.toUpperCase());
         }
         return null;
     }
 
-    private static Command parseUpdateEvent(String[] userUpdates, Event event)
-            throws DukeException, InvalidBudgetException {
+    private static Command parseUpdateEvent(String update, Event event)
+            throws DukeException, InvalidBudgetException, AttributeNotFoundException, ExistingMemberException {
         String[] parsedAttributes = new String[3];
-        LocalDateTime dateTime = null;
+        LocalDateTime dateTimeToBeUpdated = null;
         double budget = 0;
-        boolean isFlag;
-        for (String update : userUpdates) {
-            isFlag = false;
-            String[] attribute = update.trim().split("/+");
-            if (update.contains(TITLE_FLAG)) {
-                isFlag = true;
-                parsedAttributes[INDEX_OF_TITLE] = attribute[1];
-            }
-            if (update.contains(DATE_FLAG)) {
-                isFlag = true;
-                dateTime = Parser.convertDateTime(attribute[1]);
-            }
-            if (update.contains(VENUE_FLAG)) {
-                isFlag = true;
-                parsedAttributes[INDEX_OF_VENUE] = attribute[1];
-            }
-            if (update.contains(BUDGET_FLAG)) {
-                isFlag = true;
-                budget = convertEventBudgetToDouble(attribute[1]);
-            }
-            if (update.contains(DESCRIPTION_FLAG)) {
-                isFlag = true;
-                parsedAttributes[INDEX_OF_DESCRIPTION] = attribute[1];
-            }
-            if (update.contains(TASK_FLAG)) {
-                attribute[1] = attribute[1].replaceAll("\\s", "");
-                return parseUpdateTask(event, attribute[1]);
-            }
-            if (!isFlag) {
-                System.out.println("Invalid update, you have returned to the main page!");
-            }
+        if (update.trim().startsWith(TITLE_FLAG)) {
+            String title = retrieveItemAttribute(update, ItemAttribute.TITLE);
+            parsedAttributes[INDEX_OF_TITLE] = title;
+        } else if (update.trim().startsWith(DATE_FLAG)) {
+            String dateTime = retrieveItemAttribute(update, ItemAttribute.DATE);
+            dateTimeToBeUpdated = convertDateTime(dateTime);
+        } else if (update.trim().startsWith(VENUE_FLAG)) {
+            String venue = retrieveItemAttribute(update, ItemAttribute.VENUE);
+            parsedAttributes[INDEX_OF_VENUE] = venue;
+        } else if (update.trim().startsWith(BUDGET_FLAG)) {
+            budget = Double.parseDouble(retrieveItemAttribute(update, ItemAttribute.BUDGET));
+        } else if (update.trim().startsWith(DESCRIPTION_FLAG)) {
+            String description = retrieveItemAttribute(update, ItemAttribute.DESCRIPTION);
+            parsedAttributes[INDEX_OF_DESCRIPTION] = description;
+        } else if (update.trim().startsWith(TASK_FLAG)) {
+            String taskIndex = retrieveItemAttribute(update, ItemAttribute.TASK);
+            taskIndex = taskIndex.replaceAll("\\s", "");
+            return parseUpdateTask(event, taskIndex);
+        } else {
+            System.out.println("Invalid update");
         }
-        return new UpdateEventCommand(event, parsedAttributes, dateTime, budget);
+        checkForOtherUpdate(update);
+        return new UpdateEventCommand(event, parsedAttributes, dateTimeToBeUpdated, budget);
+    }
+
+    private static void checkForOtherUpdate(String update) {
+        long totalCharacters = update.chars().filter(ch -> ch == '/').count();
+        if (totalCharacters > 2) {
+            Ui.printLineBreak();
+            System.out.println("Multiple updates detected, Only the first one will be implemented!"
+                    + "\nPlease only key in a single update at a time!");
+        }
     }
 
     protected static Command parseUpdateTask(Event eventToBeUpdated, String index)
-            throws DukeException {
+            throws DukeException, AttributeNotFoundException, ExistingMemberException {
         int taskNum = Integer.parseInt(index) - 1;
         Task taskToBeUpdated = eventToBeUpdated.getFromTaskList(taskNum);
-        String[] userUpdates = prepareTaskUpdates(taskToBeUpdated);
-
+        String update = prepareTaskUpdates(taskToBeUpdated);
         String[] parsedAttributes = new String[3];
-        LocalDateTime dateTime = null;
-
-        for (String update : userUpdates) {
-            String[] attribute = update.trim().split("/+");
-            if (update.contains(TITLE_FLAG)) {
-                parsedAttributes[INDEX_OF_TITLE] = attribute[1];
-            } else if (update.contains(DEADLINE_FLAG)) {
-                dateTime = Parser.convertDateTime(attribute[1]);
-            } else if (update.contains(DESCRIPTION_FLAG)) {
-                parsedAttributes[INDEX_OF_DESCRIPTION] = attribute[1];
-            } else if (update.contains(MEMBER_FLAG)) {
-                attribute[1] = attribute[1].replaceAll("\\s", "");
-                return changeMember(attribute[1], taskToBeUpdated);
-            } else if (update.contains(REMOVE_FLAG)) {
-                attribute[1] = attribute[1].replaceAll("\\s", "");
-                return removeMember(attribute[1], taskToBeUpdated);
-            } else if (update.contains(ADD_FLAG)) {
-                return addMember(taskToBeUpdated);
-            } else {
-                System.out.println("Invalid update");
-            }
+        LocalDateTime dateTimeToBeUpdated = null;
+        String[] attribute = update.trim().split("/+");
+        if (update.trim().startsWith(TITLE_FLAG)) {
+            String title = retrieveItemAttribute(update, ItemAttribute.TITLE);
+            parsedAttributes[INDEX_OF_TITLE] = title;
+        } else if (update.trim().startsWith(DATE_FLAG)) {
+            String dateTime = retrieveItemAttribute(update, ItemAttribute.DATE);
+            dateTimeToBeUpdated = convertDateTime(dateTime);
+        } else if (update.trim().startsWith(DESCRIPTION_FLAG)) {
+            String description = retrieveItemAttribute(update, ItemAttribute.DESCRIPTION);
+            parsedAttributes[INDEX_OF_DESCRIPTION] = description;
+        } else if (update.contains(CHANGE_FLAG)) {
+            attribute[1] = attribute[1].replaceAll("\\s", "");
+            return changeMember(attribute[1], taskToBeUpdated);
+        } else if (update.contains(REMOVE_FLAG)) {
+            attribute[1] = attribute[1].replaceAll("\\s", "");
+            return removeMember(attribute[1], taskToBeUpdated);
+        } else if (update.contains(ADD_FLAG)) {
+            return addMember(taskToBeUpdated);
+        } else {
+            System.out.println("Invalid update");
         }
-        return new UpdateTaskCommand(parsedAttributes, taskToBeUpdated, dateTime);
+
+        return new UpdateTaskCommand(parsedAttributes, taskToBeUpdated, dateTimeToBeUpdated);
     }
 
-    private static Command changeMember(String index, Task taskToBeUpdated) throws DukeException {
+    private static Command changeMember(String index, Task taskToBeUpdated) throws DukeException,
+            ExistingMemberException {
         int memberToBeReplaced = Integer.parseInt(index);
         int memberIndex = prepareMemberDetails();
         checkValidMember(memberIndex, taskToBeUpdated);
         return new UpdateMemberCommand("change", memberIndex, taskToBeUpdated, memberToBeReplaced);
     }
 
-    private static Command addMember(Task taskToBeUpdated) throws DukeException {
+    private static Command addMember(Task taskToBeUpdated) throws DukeException, ExistingMemberException {
         int memberIndex = prepareMemberDetails();
         checkValidMember(memberIndex, taskToBeUpdated);
         return new UpdateMemberCommand("add", memberIndex, taskToBeUpdated, -1);
@@ -161,9 +167,14 @@ public abstract class UpdateParser extends Parser {
         return memberIndex;
     }
 
-    private static void checkValidMember(int memberIndex, Task task) {
-        if (memberIndex > task.memberList.size() || memberIndex < 0) {
+    private static void checkValidMember(int memberIndex, Task task) throws ExistingMemberException {
+        if (memberIndex >= task.memberList.size() || memberIndex < 0) {
             throw new IndexOutOfBoundsException();
+        }
+        Member memberAdded = task.getFromMemberList(memberIndex);
+        if (task.getMemberList().contains(memberAdded)) {
+            throw new ExistingMemberException(Ui.getLineBreak()
+                    + "\nThis member is already assigned to the task!");
         }
     }
 
@@ -205,11 +216,11 @@ public abstract class UpdateParser extends Parser {
         return new UpdateMemberCommand("remove", -1, taskToBeUpdated, memberIndex);
     }
 
-    private static String[] prepareTaskUpdates(Task taskToBeUpdated) {
+    private static String prepareTaskUpdates(Task taskToBeUpdated) {
         Ui.printLineBreak();
         Ui.printTask(taskToBeUpdated);
         Ui.updateTaskIntroMessage();
-        String userInput = Ui.readInput();
-        return userInput.trim().split(">");
+        return Ui.readInput();
+
     }
 }

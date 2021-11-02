@@ -37,6 +37,9 @@ public class UpdateMemberCommand extends Command {
 
     private void addMember(int memberToBeAdded) {
         Duke.memberRoster.get(memberToBeAdded).addToAssignedTasks(taskToBeUpdated);
+        Duke.memberRoster.get(memberToBeAdded).sortTasks();
+        taskToBeUpdated.addMember(Duke.memberRoster.get(memberToBeAdded));
+
     }
 
     private void removeMember(int memberToBeRemoved) {

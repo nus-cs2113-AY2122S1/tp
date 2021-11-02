@@ -213,14 +213,15 @@ public class Ui {
     public static void updateIntroMessage() {
         System.out.println("Please type the item you would like to update in the following manner "
                 + System.lineSeparator() + "-----------------------------------------------------------------------   "
-                + System.lineSeparator() + "title/[NEW NAME]   "
-                + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
-                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
-                + System.lineSeparator() + "venue/[NEW VENUE]"
-                + System.lineSeparator() + "budget/[NEW BUDGET]"
-                + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
+                + System.lineSeparator() + "n/[NEW NAME]   "
+                + System.lineSeparator() + "d/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "p/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "v/[NEW VENUE]"
+                + System.lineSeparator() + "b/[NEW BUDGET]"
+                + System.lineSeparator() + "t/[TASK NUM YOU WANT TO UPDATE]"
                 + System.lineSeparator()
-                + "You may type more then one update at a given time but separate them with a [>]"
+                + "Only type a singular update at given time!"
+                + "\n Only the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
@@ -258,14 +259,15 @@ public class Ui {
         Ui.printLineBreak();
         System.out.println("Please type the item for task you would like to update in the following manner "
                 + System.lineSeparator() + "-----------------------------------------------------------------------"
-                + System.lineSeparator() + "title/[NEW NAME]   "
-                + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
-                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "n/[NEW NAME]   "
+                + System.lineSeparator() + "d/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "p/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
                 + System.lineSeparator() + "remove/[MEMBER INDEX]"
                 + System.lineSeparator() + "add : to add a member to a task"
                 + System.lineSeparator()
-                + "You may type more then one update at a given time but separate them with a [>]"
+                + "\nOnly type a singular update at given time!"
+                + "\n Only the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
