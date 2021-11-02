@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+!include Style.puml
+
 participant ":Storage" as Storage #lightgreen
 participant "fin:FileReader" as fin
 participant "bin:BufferedReader" as bin
