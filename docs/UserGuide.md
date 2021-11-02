@@ -139,7 +139,11 @@ Hope you enjoy your experience with TermiNUS!
 
 ## Command Syntax
 
-> 💡 Commands are **case-insensitive**, and may **ignore additional data** appended behind commands.
+> 💡 Commands are **case-insensitive**, but the `value` you provide can be **case-sensitive**.   
+> Commands may also **ignore unnecessary data** appended behind commands.
+> 
+> Example: <code>HELP &nbsp;&nbsp;&nbsp;</code> is a valid command, and the spaces after `HELP` 
+> will be ignored.
 
 As you use this guide, you will notice commands with specific brackets around some values such as `{}` and `<>`.
 
@@ -152,8 +156,8 @@ The below table represents what each means.
 |`"<value>"`| Some command have `""` quotes in it, this is required for the command to work properly. For example, `add "<value>"` would need to be `add "something"`.|
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
 |`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
-|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
-|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+|`day`|The `day` must be a day spelled out fully and is case-insensitive. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
+|`duration`|The `duration` must be a **positive** integer and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
 
 ## Section: Managing all your modules
 
@@ -208,7 +212,7 @@ Adds a module when in the module management workspace.
 > ⚠️The `<module code>` cannot be more than **30** characters and cannot have any `spaces` in it.
 
 > 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the
-> module code in uppercase (e.g. creating `cs2113t` will create a folder in `data` called `CS2113T`).
+> module code in **uppercase** (e.g. creating `cs2113t` will create a folder in `data` called `CS2113T`).
 
 > ❗ If there exists a folder with the same code of the newly added module, all contents in that 
 > folder will be wiped. [Please see the FAQ for more information.](#faq)
@@ -247,7 +251,8 @@ Expected Output:
 Deletes the specified module given by its **index** in the `view` command when in the module 
 management workspace.
 
-> ❗ When the specified module is being deleted, all contents in its folder will be wiped.
+> ❗ When the specified module is being deleted, all contents in its folder will be wiped.  
+> [Please see the FAQ for more information.](#faq)
 
 Example: `delete 1`
 
@@ -412,7 +417,10 @@ Adds a note when in the note workspace.
 
 > 💡 When executing this command, it will add the note into its module and creates a `.txt` file inside the module folder. The `.txt` file will be named after the newly added note name.
 
-> ❗ If there exists a file with the same name of the newly added note, all contents in that file will be overwritten.
+> ❗ If there is a file with the same name as the newly added note and is not registered in TermiNUS, 
+> all contents in that file will be overwritten. 
+> 
+> To add that note, please refer to [Reloading all notes](#reloading-all-notes).
 
 Example: `add "coding style" "switch case identation should be aligned."`
 
@@ -920,7 +928,8 @@ command examples.
 A workspace command is a command that will bring you to its own workspace. Current workspace command
 includes note, schedule, question, and module.
 
-> 💡 To access the module in TermiNUS, you will need to use the `go` command. For more information, please refer to [Section: Module](#section-specific-module).
+> 💡 To access the module in TermiNUS, you will need to use the `go` command. For more information, 
+> please refer to [Section: Specific Module](#section-specific-module).
 
 > ⚠️This advance command do not allow any chaining with the `back` command.
 
@@ -965,6 +974,14 @@ or renaming any folders in the `data` folder including the `data` folder itself.
 **Q:** (MacOS/Linux) What will happen if I create a new module when I have an existing folder with the same module code in the `data` directory?  
 **A:** Only the files within the **uppercase** folder (i.e. `CS2113T`) will be deleted. If there are folders with mixed or
 lowercase (i.e. `cS2113t` or `cs2113t`), the **content within will be ignored** (for loading, saving and deleting).
+
+**Q:** Why is my module folder in the `data` folder not deleted?  
+**A:** There can be 2 reason. Firstly, there are files inside the folder that are locked by the 
+operating system. This means there might be other applications using the file, which is preventing 
+TermiNUS from deleting the folder cleanly. Usually restarting the computer and deleting it will 
+solve the issue. Secondly, if you are running macOS or Linux, we do not delete folders that are 
+**not uppercase** (e.g. `CS2113T` will be deleted but `CS2113t` will not be). 
+
 ___  
 
 ## Workspace Command Summary
@@ -989,6 +1006,7 @@ ___
 |module management|update module |`update <index> "<new_module_code>"`|`update 1 "CS2113"`|
 |note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
 |note|export note|`export`|`export`|
+|note|reload notes|`reload`|`reload`|
 |schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
 |question|active learning|`test {count}`|`test`, `test 3`|
