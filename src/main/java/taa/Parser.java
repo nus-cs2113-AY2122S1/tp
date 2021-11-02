@@ -212,8 +212,8 @@ public class Parser {
      * @return HashMap - argumentKey:argumentValue pair.
      * @throws TaaException if there are any duplicated keys found within string or value is invalid.
      */
-    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys)
-        throws TaaException {
+    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys,
+                                                                 boolean includeEmptyValues) throws TaaException {
         if (argumentKeys == null || argumentKeys.length == 0) {
             return new HashMap<>();
         }
@@ -262,7 +262,10 @@ public class Parser {
                 throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_VALUE, getSpecialCharactersAsString()));
             }
 
-            result.put(key, value);
+            boolean canAdd = includeEmptyValues || !value.isEmpty();
+            if (canAdd) {
+                result.put(key, value);
+            }
         }
 
         return result;

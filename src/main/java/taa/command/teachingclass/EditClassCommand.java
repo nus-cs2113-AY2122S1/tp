@@ -58,8 +58,10 @@ public class EditClassCommand extends Command {
         assert (argumentMap.containsKey(KEY_NEW_CLASS_ID) || argumentMap.containsKey(KEY_NEW_CLASS_NAME));
         String newClassId = argumentMap.getOrDefault(KEY_NEW_CLASS_ID, null);
         if (newClassId != null) {
-            if (classList.getClassWithId(newClassId) != null) {
-                throw new TaaException(String.format(MESSAGE_FORMAT_CLASS_EXISTS, newClassId));
+            TeachingClass existingTeachingClass = classList.getClassWithId(newClassId);
+            boolean isSameTeachingClass = teachingClass == existingTeachingClass;
+            if (existingTeachingClass != null && !isSameTeachingClass) {
+                throw new TaaException(String.format(MESSAGE_FORMAT_CLASS_EXISTS, existingTeachingClass.getId()));
             }
 
             teachingClass.setId(newClassId);

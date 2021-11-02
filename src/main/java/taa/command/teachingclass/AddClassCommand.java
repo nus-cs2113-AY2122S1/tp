@@ -14,14 +14,15 @@ public class AddClassCommand extends Command {
     private static final String KEY_CLASS_NAME = "n";
     private static final String[] ADD_CLASS_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_CLASS_NAME};
 
-    private static final String MESSAGE_INVALID_CLASS_ID = "Invalid class ID. Class ID cannot contain spaces";
+    private static final String MESSAGE_INVALID_CLASS_ID = "Invalid class ID. Class ID cannot be empty or "
+        + "contain spaces.";
     private static final String MESSAGE_CLASS_EXISTS = "Class already exists.";
 
     private static final String MESSAGE_FORMAT_ADD_CLASS_USAGE = "%s %s/<CLASS_ID> [%s/<CLASS_NAME>]";
     private static final String MESSAGE_FORMAT_CLASS_ADDED = "Class added:\n  %s\nThere are %d classes in the list.";
 
     public AddClassCommand(String argument) {
-        super(argument, ADD_CLASS_ARGUMENT_KEYS);
+        super(argument, ADD_CLASS_ARGUMENT_KEYS, true);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class AddClassCommand extends Command {
         }
 
         String classId = argumentMap.get(KEY_CLASS_ID);
-        if (classId.contains(" ")) {
+        if (!TeachingClass.isValidId(classId)) {
             throw new TaaException(MESSAGE_INVALID_CLASS_ID);
         }
     }
