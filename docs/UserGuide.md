@@ -3,37 +3,40 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Purpose](#purpose)
-- [Using this Guide](#using-this-guide)
+  - [Purpose of this Guide](#purpose-of-this-guide)
+  - [Using this Guide](#using-this-guide)
 - [Getting Started](#getting-started)
-- [Quick guide to using TermiNUS](#quick-guide-to-using-terminus)
-- [Section: Module Management](#section-module-management)
-    * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
+  - [Installing TermiNUS](#installing-terminus)
+  - [Quick Guide of TermiNUS](#quick-guide-of-terminus)
+- [Command Syntax](#command-syntax)
+- [Section: Managing all your modules](#section-managing-all-your-modules)
+    * [Accessing the module management workspace: `module`](#accessing-the-module-management-workspace)
     * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
     * [Updating a module :`update <index> "<new_module_code>"`](#updating-a-module)
     * [Viewing module information `view`](#viewing-module-information)
-- [Section: Module](#section-module)
-    * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
-- [Section: Note](#section-note)
-    * [Accessing note workspace : `note`](#accessing-note-workspace)
-    * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
-    * [Deleting a Note : `delete <index>`](#deleting-a-note)
-    * [Viewing note information : `view {index}`](#viewing-note-information)
-    * [Exporting all notes: `export`](#exporting-all-notes)
-- [Section: Schedule](#section-schedule)
-    * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
-    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
-    * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
-    * [Viewing schedule information : `view {index}`](#viewing-schedule-information)
-- [Section: Question](#section-question)
-    * [Accessing question workspace : `question`](#accessing-question-workspace)
-    * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
-    * [Deleting a Question : `delete <index>`](#deleting-a-question)
-    * [Viewing question information : `view {index}`](#viewing-question-information)
-    * [Testing Yourself with Active Recall : `test {count}`](#testing-yourself-with-active-recall)
-- [Displaying all schedules across all modules : `timetable {day}`](#displaying-all-schedules-across-all-modules)
 - [Returning to previous workspace : `back`](#returning-to-previous-workspace)
+- [Section: Specific Module](#section-specific-module)
+    - [Accessing a specific module workspace : `go <module_code>`](#accessing-a-specific-module-workspace)
+    - [Section: Note](#section-note)
+        * [Accessing note workspace : `note`](#accessing-note-workspace)
+        * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
+        * [Viewing note information : `view {index}`](#viewing-note-information)
+        * [Deleting a Note : `delete <index>`](#deleting-a-note)
+        * [Reloading all notes: `reload`](#reloading-all-notes)
+        * [Exporting all notes: `export`](#exporting-all-notes)
+    - [Section: Schedule](#section-schedule)
+        * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
+        * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
+        * [Viewing schedule information : `view {index}`](#viewing-schedule-information)
+        * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
+    - [Section: Question](#section-question)
+        * [Accessing question workspace : `question`](#accessing-question-workspace)
+        * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
+        * [Viewing question information : `view {index}`](#viewing-question-information)
+        * [Deleting a Question : `delete <index>`](#deleting-a-question)
+        * [Testing Yourself with Active Recall : `test {count}`](#testing-yourself-with-active-recall)
+- [Displaying all schedules across all modules : `timetable {day}`](#displaying-all-schedules-across-all-modules)
 - [Exiting TermiNUS : `exit`](#exiting-terminus)
 - [Accessing Help : `help`](#accessing-help)
 - [Advanced Usage of Commands](#advanced-usage-of-commands)
@@ -43,34 +46,30 @@
 
 ## Introduction
 
-TermiNUS is a CLI (command line interface) program for NUS Students who wish to consolidate their
-NUS academic materials such as zoom links, questions and notes for the modules that they are taking.
-With TermiNUS, it aims to aid Students and improve their learning experiences while studying in NUS.
+TermiNUS is a CLI (command line interface) program for NUS students who wish to consolidate their
+NUS academic needs such as schedules, questions and notes for the modules that they are taking.
+With TermiNUS, it aims to aid students and improve their learning experiences while studying in NUS.
 
-## Purpose
+### Purpose of this Guide
 
 This documents aims to provide you with instruction on how to use `TermiNUS` and tips & tricks
-included to improve your experiences while using it. The document will bring you through a detailed
-guide on all existing commands as well as aiding you in installing `TerminNUS`.
+included to improve your experiences while using it. The document is for both beginners and advanced
+users. The document will bring you through the installation process and guide you on all 
+the commands available within `TerminNUS`.
 
----
 
-## Using this Guide
+### Using this Guide
 
-Along the way, you might encounter commands with specific brackets around some values such as `{}`
-and `<>`.
+Along the way, you might encounter these messages with icons throughout this guide:
 
-The below table represents what each means.
+> ⚠️A caution that you have to keep in mind when using the command.
 
-| Command options | Description |
-| ----------- | ----------- |
-| `{value}` |  The value is optional, and including it may provide different results.|
-| `<value>` | The value is required for the command to work properly.|
-|`"<value>"`| Some command have `""` quotes in it, this is required for the command to work properly. For example, `add "<value>"` would need to be `add "something"`.|
-|`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
-|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
-|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
-|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+> 💡 Take note when you see this icon, as it might tell you something important.
+
+> ❗ Important things you should take note of before using the command.
+
+Text that is blue like this example, are clickable [links](#test) that will bring you to the
+relevant part of this user guide.
 
 Terminologies used throughout this guide:
 
@@ -81,26 +80,20 @@ Terminologies used throughout this guide:
 |default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
 
-Icons used throughout this guide:
-
-> ⚠️A caution that you have to keep in mind when using the command.
-
-> 💡 Take note when you see this icon, as it might tell you something important.
-
-> ❗ Important things you should take note of before using the command.
-
-Lastly, text that is blue like this example, are clickable [links](#test) that will bring you to the 
-relevant part of this user guide.
-
 ---
 
 ## Getting Started
+
+This section will detail the `TermiNUS` installation guide, as well a quick guide on how to use 
+`TermiNUS`.
+
+### Installing TermiNUS
 
 1. Ensure that you
    have [Java 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) or
    above installed.
 2. Download the latest version of `TermiNUS.jar`
-   from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
+   [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
 3. Copy the file to the folder you want to use for `TermiNUS`.
     1. This is because `TermiNUS` will store all its saved data in the folder it is currently in.
 4. Open your command prompt and go into the folder containing the `TermiNUS.jar` file.
@@ -124,23 +117,16 @@ relevant part of this user guide.
     [] >>>  
     ```
 
-7. To get started, you can run the following commands:
+7. For more information of each command, please refer to the [Features](#section-note) below.
 
-    - module
-    - go
-    - timetable
-    - help
-    - exit
-8. For more information of each command, please refer to the [Features](#section-note) below.
-
-___
-
-## Quick guide to using TermiNUS
+### Quick Guide of TermiNUS
 
 1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
-2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section-module-management).
+2. You can do so by adding a module within the **module management workspace**.  
+   Please refer to: [Section: Managing all your Modules](#section-managing-all-your-modules).
 3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
-4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section-module).
+4. But firstly you will need to enter the **module workspace** in which you have just created.  
+   Please refer to: [Section: Specific Module](#section-specific-module).
 5. Once entering the **module workspace**, you can add the items related to the module here.
     1. Please refer to [Section: Note](#section-note) for any related **Note** item.
     2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
@@ -151,7 +137,23 @@ Hope you enjoy your experience with TermiNUS!
 
 ---
 
-## Section: Module Management
+## Command Syntax
+
+As you use this guide, you will notice commands with specific brackets around some values such as `{}` and `<>`.
+
+The below table represents what each means.
+
+| Command options | Description |
+| ----------- | ----------- |
+| `{value}` |  The value is optional, and including it may provide different results.|
+| `<value>` | The value is required for the command to work properly.|
+|`"<value>"`| Some command have `""` quotes in it, this is required for the command to work properly. For example, `add "<value>"` would need to be `add "something"`.|
+|`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
+|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
+|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
+|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+
+## Section: Managing all your modules
 
 All commands related to the workspace `Module Management` will be displayed in this section. These
 commands enable users to create, delete and view `modules` within TermiNUS.
@@ -188,9 +190,9 @@ List of Module Management workspace commands:
 | Command      | Description |
 | ----------- | ----------- |
 |add|add a module in TermiNUS|
+|view|view modules information currently in TermiNUS|
 |delete|delete a module in TermiNUS|
 |update|update a module code currently in TermiNUS|
-|view|view modules information currently in TermiNUS|
 |help|view all commands and their usage within the module management workspace|
 |back|escape and return to the default workspace|
 |exit|exit and closes TermiNUS|
@@ -203,9 +205,11 @@ Adds a module when in the module management workspace.
 
 > ⚠️The `<module code>` cannot be more than **30** characters and cannot have any `spaces` in it.
 
-> 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the module code.
+> 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the
+> module code in uppercase (e.g. creating `cs2113t` will create a folder in `data` called `CS2113T`).
 
-> ❗ If there exists a folder with the same code of the newly added module, all contents in that folder will be wiped.
+> ❗ If there exists a folder with the same code of the newly added module, all contents in that 
+> folder will be wiped. [Please see the FAQ for more information.](#faq)
 
 Example: `add "CS2113T"`
 
@@ -217,11 +221,29 @@ Module CS2113T has been added
 [module] >>> 
 ```
 
+### Viewing module information
+
+**Format:** `view`
+
+Views all modules when in the module management workspace.
+
+Example: `view`
+
+Expected Output:
+
+```
+[module] >>> view
+1. CS2113T
+2. CS2106
+[module] >>> 
+```
+
 ### Deleting a module
 
 **Format:** `delete <index>`
 
-Deletes the specified module given by its **index** when in the module management workspace.
+Deletes the specified module given by its **index** in the `view` command when in the module 
+management workspace.
 
 > ❗ When the specified module is being deleted, all contents in its folder will be wiped.
 
@@ -252,33 +274,48 @@ Updated CS2113T to CS2113 successfully.
 [module] >>> 
 ```
 
-### Viewing module information
+---
 
-**Format:** `view`
+## Returning to previous workspace
 
-Views all modules when in the module management workspace.
+**Format:** `back`
 
-Example: `view`
+Returns to the previous workspace prior to the current workspace you are in.
+
+> 💡 The **default** workspace is the only workspace that has no `back` command. This is because this workspace is the very first workspace of TermiNUS.
+
+Example: `back` from module workspace
 
 Expected Output:
 
 ```
-[module] >>> view
-1. CS2113T
-2. CS2106
-[module] >>> 
+[CS2113T] >>> back
+
+Welcome to TermiNUS!
+You have no schedule for today.
+
+Type any of the following to get started:
+> exit
+> help
+> module
+> go
+> timetable
+
+[] >>> 
 ```
+
+> 💡 Notice how the workspace indicator changes from `[CS2113T] >>>` to `[] >>>`.
 
 ---
 
-## Section: Module
+## Section: Specific Module
 
 All commands related to accessing the existing modules in TermiNUS. These commands enable users to
 enter the module workspace in Terminus.
 
-> 💡 The module mentioned here are the modules created within the **module management workspace**. Please refer to [Section: Module Management](#section-module-management) for more information.
+> 💡 The module mentioned here are the modules created within the **module management workspace**. Please refer to [Section: Module Management](#section-managing-all-your-modules) for more information.
 
-### Accessing module workspace
+### Accessing a specific module workspace
 
 **Format:** `go <module_code>`
 
@@ -342,6 +379,7 @@ Type any of the following to get started:
 > exit
 > help
 > view
+> reload
 > back
 > delete
 > export
@@ -354,8 +392,9 @@ List of Note workspace commands:
 | Command      | Description |
 | ----------- | ----------- |
 |add|add a note for the module|
-|delete|delete a note from the module|
 |view|view notes information from the module|
+|delete|delete a note from the module|
+|reload|reload all the notes from the `data/<module code>` folder|
 |export|export all current notes for the module as a pdf|
 |help|view all commands and their usage in the note workspace|
 |back|escape and return to the module workspace|
@@ -380,24 +419,6 @@ Expected Output:
 ```
 [CS2113T > note] >>> add "coding style" "switch case identation should be aligned."
 Your note on 'coding style' has been added!
-[CS2113T > note] >>> 
-```
-
-### Deleting a Note
-
-**Format:** `delete <index>`
-
-Deletes the specified note given by its **index** when in the note workspace.
-
-> ❗ When the specified note is being deleted, the file that stores the note will be deleted.
-
-Example: `delete 1`
-
-Expected Output:
-
-```
-[CS2113T > note] >>> delete 1
-Your note on 'coding style' has been deleted!
 [CS2113T > note] >>> 
 ```
 
@@ -436,11 +457,50 @@ switch case identation should be aligned.
 [CS2113T > note] >>> 
 ```
 
+### Deleting a Note
+
+**Format:** `delete <index>`
+
+Deletes the specified note given by its **index** when in the note workspace.
+
+> ❗ When the specified note is being deleted, the file that stores the note will be deleted.
+
+Example: `delete 1`
+
+Expected Output:
+
+```
+[CS2113T > note] >>> delete 1
+Your note on 'coding style' has been deleted!
+[CS2113T > note] >>> 
+```
+
+### Reloading all notes
+
+**Format:** `reload`
+
+Reloads all the notes found within your `data/<module code>`.
+
+> 💡 This command is useful when you have updated your notes file in another application, and would 
+> wish to update the contents into TermiNUS.
+
+Example: `reload`
+
+Expected Output:
+
+```
+[CS2113T > note] >>> reload
+Your Notes for CS2113T is being reloaded.
+[CS2113T > note] >>> 
+```
+
 ### Exporting all notes 
 
 **Format:** `export`
 
-Exports all notes within the note workspace as a PDF file.
+For your convenience to print and bring physical notes to exams, you can export all notes within the
+note workspace as a PDF file.
+
 > ⚠️ To export a file, there must be at least 1 note contained within the note workspace.
 
 > ⚠️ The export process can take a while.   
@@ -494,8 +554,8 @@ List of Schedule workspace commands:
 | Command      | Description |
 | ----------- | ----------- |
 |add|add a schedule for the module|
-|delete|delete a schedule from the module|
 |view|view schedule information from the module|
+|delete|delete a schedule from the module|
 |help|view all commands and their usage in the schedule workspace|
 |back|escape and return to the module workspace|
 |exit|exit and closes TermiNUS|
@@ -508,7 +568,7 @@ Adds a schedule when in the schedule workspace.
 
 > ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
 
-> 💡The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
+> 💡 The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
  
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
@@ -523,22 +583,6 @@ Expected Output:
 ```
 [CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"
 Your schedule on 'CS2113T Tutorial 1' has been added!
-[CS2113T > schedule] >>> 
-```
-
-### Deleting a Schedule
-
-**Format:** `delete <index>`
-
-Deletes the specified schedule given by its **index** when in the schedule workspace.
-
-Example: `delete 1`
-
-Expected Output:
-
-```
-[CS2113T > schedule] >>> delete 1
-Your link on 'CS2113T Tutorial 1' has been deleted!
 [CS2113T > schedule] >>> 
 ```
 
@@ -572,6 +616,23 @@ Expected Output 2:
 CS2113T Tutorial 1 (Thursday, 10:00 - 12:00): https://zoom.us/test
 [CS2113T > schedule] >>> 
 ```
+
+### Deleting a Schedule
+
+**Format:** `delete <index>`
+
+Deletes the specified schedule given by its **index** when in the schedule workspace.
+
+Example: `delete 1`
+
+Expected Output:
+
+```
+[CS2113T > schedule] >>> delete 1
+Your link on 'CS2113T Tutorial 1' has been deleted!
+[CS2113T > schedule] >>> 
+```
+
 ---
 
 ## Section: Question
@@ -580,6 +641,18 @@ All commands related to the workspace Question will be displayed in this section
 enable users to create, delete and view questions within the module.
 
 In addition, users can test themselves with the question added into the module.
+
+List of Question workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|add|add a question for the module|
+|view|view question(s) from the module|
+|delete|delete a question from the module|
+|test|test yourself with questions from the module|
+|help|view all commands and their usage in the question workspace|
+|back|escape and return to the module workspace|
+|exit|exit and closes TermiNUS|
 
 ### Accessing question workspace
 
@@ -624,22 +697,6 @@ Your question on 'What is 1+1?' has been added!
 [CS2113T > question] >>> 
 ```
 
-### Deleting a Question
-
-**Format:** `delete <index>`
-
-Deletes the specified question given by its **index** when in the question workspace.
-
-Example: `delete 1`
-
-Expected Output:
-
-```
-[CS2113T > question] >>> delete 1
-Your question on 'What is 1+1?' has been deleted!
-[CS2113T > question] >>> 
-```
-
 ### Viewing question information
 
 **Format:** `view {index}`
@@ -676,18 +733,40 @@ Equivalence partitioning
 [CS2113T > question] >>> 
 ```
 
+### Deleting a Question
+
+**Format:** `delete <index>`
+
+Deletes the specified question given by its **index** when in the question workspace.
+
+Example: `delete 1`
+
+Expected Output:
+
+```
+[CS2113T > question] >>> delete 1
+Your question on 'What is 1+1?' has been deleted!
+[CS2113T > question] >>> 
+```
+
 ### Testing Yourself with Active Recall
 
-**Format:** `test {count}`  
-You can start an Active Recall session by running the `test` command.
+**Format:** `test {count}`
 
-By default, it will test 10 questions (or less if there are not enough questions). You may specify
-how many questions you wish to run in that session by keying in the number of questions after the
-`test` command.
+Starts an Active Recall session.
 
-When you begin, you will be prompted with the following (do note that the question pool may be
-smaller if there are not enough questions in the workspace). Press the <kbd>Enter</kbd> key to
-start.
+You may specify the number of questions to be tested by adding a `{count}` at the end of the 
+command. 
+
+> ⚠ To start a session, there must be at least 1 question contained within the question workspace.
+
+> 💡 By default, `{count}` will be set to **10** questions if left unspecified. 
+> 
+> If there are not enough questions, it will take the whole pool of questions in the module 
+> (i.e. if you have 7 questions in your current module, you will only receive 7 questions when you 
+> indicate a `{count}` greater than 7 or leave it empty).
+
+When you begin, you will be prompted with the following:
 
 ```
 [CS2113T > question] >>> test 3
@@ -699,6 +778,7 @@ This session will consist of 3 questions.
 When you are ready, press [Enter] to continue.
 ```
 
+Press the <kbd>Enter</kbd> key to start.
 The first question will be displayed, and once you are ready to reveal the answer, press the
 <kbd>Enter</kbd> key again.
 
@@ -757,7 +837,10 @@ Returning you back to main program.
 Displays all schedules from all modules in TermiNUS or displays certain schedules that falls on the
 specified day.
 
-> ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
+> ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but 
+> `mon` is not.
+> 
+> You may view [Adding a Schedule](#adding-a-schedule) for the valid list of days.
 
 Example 1: `timetable`
 
@@ -783,36 +866,6 @@ Expected Output 2:
 
 [] >>> 
 ```
-
-## Returning to previous workspace
-
-**Format:** `back`
-
-Returns to the previous workspace prior to the current workspace you are in.
-
-> 💡 The **default** workspace is the only workspace that has no `back` command. This is because this workspace is the very first workspace of TermiNUS.
-
-Example: `back` from note workspace
-
-Expected Output:
-
-```
-[CS2113T > note] >>> back
-
-Entering CS2113T workspace
-
-Type any of the following to get started:
-> exit
-> help
-> note
-> schedule
-> question
-> back
-
-[CS2113T] >>> 
-```
-
-> 💡 Notice how the workspace indicator changes from `[CS2113T > note]` to `[CS2113T]`.
 
 ## Exiting TermiNUS
 
@@ -865,7 +918,7 @@ command examples.
 A workspace command is a command that will bring you to its own workspace. Current workspace command
 includes note, schedule, question, and module.
 
-> 💡 To access the module in TermiNUS, you will need to use the `go` command. For more information, please refer to [Section: Module](#section-module).
+> 💡 To access the module in TermiNUS, you will need to use the `go` command. For more information, please refer to [Section: Module](#section-specific-module).
 
 > ⚠️This advance command do not allow any chaining with the `back` command.
 
@@ -904,6 +957,12 @@ in the `data` folder. We recommend you to update the **contents** of any notes w
 `data/module_code` directory. However, we **do not** recommend modifying any configuration file such as `.json` file 
 or renaming any folders in the `data` folder including the `data` folder itself. For these, you should use **TermiNUS** instead to edit.
 
+**Q:** (Windows) What will happen if I create a new module when I have an existing folder with the same module code in the `data` directory?  
+**A:** Regardless of **case sensitivity** (i.e. `cS2113T` or `CS2113T`), the files within the folder will be deleted.
+
+**Q:** (MacOS/Linux) What will happen if I create a new module when I have an existing folder with the same module code in the `data` directory?  
+**A:** Only the files within the **uppercase** folder (i.e. `CS2113T`) will be deleted. If there are folders with mixed or
+lowercase (i.e. `cS2113t` or `cs2113t`), the **content within will be ignored** (for loading, saving and deleting).
 ___  
 
 ## Workspace Command Summary
