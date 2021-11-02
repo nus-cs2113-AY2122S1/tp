@@ -124,7 +124,7 @@ public class FinancialTracker {
     /**
      * Return an ArrayList called expenses from FinancialTracker.
      * 
-     * @return Return ArrayList with only expense entries inside.
+     * @return Returns ArrayList with only expense entries inside.
      */
     public ArrayList<Expense> getExpenses() {
         assert expenses != null;
