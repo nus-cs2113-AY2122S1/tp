@@ -1,5 +1,7 @@
 package happybit.parser;
 
+import happybit.exception.HaBitParserException;
+
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -13,11 +15,14 @@ public class Parser {
 
     protected static final String FLAG_GOAL_INDEX = "g/";
     protected static final String FLAG_NAME = "n/";
-    protected static final String FLAG_GOAL_TYPE = "f/";
+    protected static final String FLAG_GOAL_TYPE = "t/";
     protected static final String FLAG_INTERVAL = "i/";
     protected static final String FLAG_START_DATE = "s/";
     protected static final String FLAG_END_DATE = "e/";
     protected static final String FLAG_HABIT_INDEX = "h/";
+
+    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+            + "Enter the help command to view command formats";
 
     /**
      * Splits the input into the various parameters.
@@ -41,8 +46,8 @@ public class Parser {
      * @return String array of command parameters that have been trimmed of leading/trailing whitespaces.
      */
     private static String[] trimParameters(String[] parameters) {
-        for (int i = 0; i < parameters.length; i++) {
-            parameters[i] = parameters[i].trim();
+        for (int i = 1; i < parameters.length; i++) {
+            parameters[i] = parameters[i].substring(0, 2) + parameters[i].substring(2).trim();
         }
         return parameters;
     }
@@ -61,6 +66,18 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    /**
+     * Checks if the input is null.
+     *
+     * @param input String of the user input.
+     * @throws HaBitParserException If the user input is null (blank).
+     */
+    protected static void checkNoDescription(String input) throws HaBitParserException {
+        if (input == null) {
+            throw new HaBitParserException(ERROR_NO_PARAMS);
+        }
     }
 
 }

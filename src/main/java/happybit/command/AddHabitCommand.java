@@ -2,13 +2,10 @@ package happybit.command;
 
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
-import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
-
-import java.util.Date;
 
 public class AddHabitCommand extends AddCommand {
 
@@ -41,8 +38,26 @@ public class AddHabitCommand extends AddCommand {
         try {
             storage.export(this.habit, goalIndex);
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
+    }
+
+    /**
+     * Getter for Habit (Used in JUnit test).
+     *
+     * @return New habit to be added to specified goal number.
+     */
+    public Habit getHabit() {
+        return habit;
+    }
+
+    /**
+     * Getter for goal index (Used in JUnit test).
+     *
+     * @return Goal index to add new habit to.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
     }
 
 }

@@ -34,9 +34,10 @@ public class ListHabitsCommand extends ListCommand {
     /**
      * Getter for goalIndex (Used in JUnit test).
      *
-     * @return Index of goal in goalList, where a list of habits is to be printed.
+     * @return Index of goal in goalList whose habits are to be printed.
      */
     public int getGoalIndex() {
         return goalIndex;
     }
+
 }

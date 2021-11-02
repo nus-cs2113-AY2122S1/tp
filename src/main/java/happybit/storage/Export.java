@@ -76,7 +76,7 @@ public class Export {
     protected String goalString(Goal goal, int index) {
         return index + DELIMITER
                 + GOAL_TYPE + DELIMITER
-                + goal.getGoalType() + DELIMITER
+                + goal.getGoalTypeStr() + DELIMITER
                 + goal.getGoalName() + DELIMITER
                 + goal.getStartDate() + DELIMITER
                 + goal.getStringEndDate() + NEWLINE;

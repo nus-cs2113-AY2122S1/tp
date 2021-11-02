@@ -3,27 +3,27 @@ package happybit.command;
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
+import happybit.goal.GoalType;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
-public class UpdateGoalNameCommand extends UpdateCommand {
+public class UpdateGoalTypeCommand extends UpdateCommand {
 
     protected int goalIndex;
-    protected String goalName;
+    protected GoalType goalType;
 
     /**
-     * Constructor for UpdateGoalNameCommand.
-     *
-     * @param goalIndex Index of goal in goalList to be updated with newGoalName.
-     * @param newGoalName  New name of the goal.
+     * Constructor for UpdateGoalTypeCommand.
+     *  @param goalIndex Index of goal in goalList to be updated with newGoalType.
+     * @param newGoalType  New type of the goal.
      */
-    public UpdateGoalNameCommand(int goalIndex, String newGoalName) {
+    public UpdateGoalTypeCommand(int goalIndex, GoalType newGoalType) {
         this.goalIndex = goalIndex;
-        this.goalName = newGoalName;
+        this.goalType = newGoalType;
     }
 
     /**
-     * Executes update goal name command and changes the goalName.
+     * Executes update goal type command and changes the goalType.
      *
      * @param goalList     List that stores all the goals.
      * @param printManager Prints messages to the console.
@@ -32,8 +32,7 @@ public class UpdateGoalNameCommand extends UpdateCommand {
      */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        goalList.updateGoalName(goalIndex, goalName, printManager);
-
+        goalList.updateGoalType(goalIndex, goalType, printManager);
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
@@ -44,19 +43,18 @@ public class UpdateGoalNameCommand extends UpdateCommand {
     /**
      * Getter for goalIndex (Used in JUnit test).
      *
-     * @return Index of goal in goalList, whose goalName is to be updated.
+     * @return Index of goal in goalList, whose goalType is to be updated.
      */
     public int getGoalIndex() {
         return goalIndex;
     }
 
     /**
-     * Getter for habitIndex (Used in JUnit test).
+     * Getter for goalType (Used in JUnit test).
      *
-     * @return New goal name to be updated.
+     * @return New goal type to be updated.
      */
-    public String getNewGoalName() {
-        return goalName;
+    public GoalType getNewGoalType() {
+        return goalType;
     }
-
 }

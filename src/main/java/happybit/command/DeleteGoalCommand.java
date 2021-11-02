@@ -34,8 +34,17 @@ public class DeleteGoalCommand extends DeleteCommand {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
+            printManager.printError(e.getMessage());
         }
+    }
+
+    /**
+     * Getter for goalIndex (Used in JUnit test).
+     *
+     * @return Index of goal to be deleted from goalList.
+     */
+    public int getGoalIndex() {
+        return goalIndex;
     }
 
 }

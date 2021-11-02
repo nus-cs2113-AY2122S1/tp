@@ -5,23 +5,19 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
-public class ViewStreakCommand extends Command {
-    protected int goalIndex;
-    protected int habitIndex;
+import java.util.Date;
 
-    /**
-     * Constructor of ViewStreakCommand.
-     *
-     * @param goalIndex Index of goal in goalList
-     * @param habitIndex Index of habit in habitList of specified goal, where
-     */
-    public ViewStreakCommand(int goalIndex, int habitIndex) {
+public class UpdateGoalEndDateCommand extends UpdateCommand {
+    protected int goalIndex;
+    protected Date newDate;
+
+    public UpdateGoalEndDateCommand(int goalIndex, Date newDate) {
         this.goalIndex = goalIndex;
-        this.habitIndex = habitIndex;
+        this.newDate = newDate;
     }
 
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        // todo
+        goalList.updateGoalEndDate(goalIndex, newDate, printManager);
     }
 }
