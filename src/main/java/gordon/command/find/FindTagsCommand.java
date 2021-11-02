@@ -18,6 +18,7 @@ public class FindTagsCommand extends Command {
 
     @Override
     public void execute(Cookbook cookbook) {
+        System.out.println("Searching by tags...");
         ArrayList<Recipe> result = cookbook.filterByTags(tags);
         ArrayList<String> namesInOrder = new ArrayList<String>();
 
@@ -31,7 +32,6 @@ public class FindTagsCommand extends Command {
         if (result.size() == 0) {
             System.out.println("GordonException: " + GordonException.NO_RESULT_FOUND);
         } else {
-            System.out.println("Searching by tags...");
             for (int i = 0; i < result.size(); i++) {
                 System.out.println((i + 1) + ". " + namesInOrder.get(i));
             }

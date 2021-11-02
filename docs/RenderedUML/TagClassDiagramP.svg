@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="330px" preserveAspectRatio="none" style="width:655px;height:330px;background:#FFFFFF;" version="1.1" viewBox="0 0 655 330" width="655px" zoomAndPan="magnify"><defs/><g><!--MD5=[a55135535b5c544b99c33b17428c3b14]
+cluster Util--><rect fill="#FFFFFF" height="159" style="stroke:#000000;stroke-width:1.5;" width="401.5" x="247.5" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="23" x="436.75" y="22.1318">Util</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
+cluster Kitchen--><rect fill="#FFFFFF" height="134" style="stroke:#000000;stroke-width:1.5;" width="94" x="241" y="190"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="54" x="261" y="205.1318">Kitchen</text><!--MD5=[41f2db2ca7aecd6a21c8c9517294992e]
+entity Gordon--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="68" x="7" y="192"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="17" y="215.1318">Gordon</text><!--MD5=[11b747870319a085bc745183e08c5f76]
+class Storage--><rect codeLine="13" fill="#FDFCBE" height="23.7988" id="Storage" style="stroke:#000000;stroke-width:1.5;" width="49" x="263.5" y="99"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="43" x="266.5" y="115.2559">Storage</text><!--MD5=[39d6d2ea03de602dbf4d534e70c872a9]
+class Tag--><rect codeLine="16" fill="#FDFCBE" height="107.6924" id="Tag" style="stroke:#000000;stroke-width:1.5;" width="188" x="445" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="21" x="528.5" y="58.2559">Tag</text><line style="stroke:#000000;stroke-width:1.5;" x1="446" x2="632" y1="65.7988" y2="65.7988"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="32" x="451" y="80.1167">+Tag()</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="74" x="451" y="92.7656">+getTagName()</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="176" x="451" y="105.4146">+containsAssociatedRecipeNames()</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="147" x="451" y="118.0635">+addAssociatedRecipeName()</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="165" x="451" y="130.7124">+removeAssociatedRecipeName()</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="156" x="451" y="143.3613">+numberOfAssociatedRecipes()</text><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
+class Cookbook--><rect codeLine="27" fill="#B3DFF3" height="23.7988" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="62" x="257" y="225"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="260" y="241.2559">Cookbook</text><!--MD5=[20418cb98520644da1e87dc0310aa74a]
+class Recipe--><rect codeLine="30" fill="#B3DFF3" height="23.7988" id="Recipe" style="stroke:#000000;stroke-width:1.5;" width="45" x="265.5" y="284"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="39" x="268.5" y="300.2559">Recipe</text><!--MD5=[98bae1954b1fe6593e4f2df2463b5756]
+link Gordon to Storage--><path codeLine="34" d="M75.04,196.65 C123.43,177.09 212.78,140.99 258.47,122.53 " fill="none" id="Gordon-to-Storage" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="263.29,120.58,253.4463,120.2607,258.6575,122.4615,256.4567,127.6727,263.29,120.58" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="145.6358,139.6011,136.1485,140.265,138.3506,145.7147,145.6358,139.6011" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="43" x="150" y="146.1938">creates</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="82.7826" y="207.6218">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="248.3559" y="137.5987">1</text><!--MD5=[f7fdfe1210dc69bc196ba4f16763d598]
+link Gordon to Cookbook--><path codeLine="35" d="M75.04,213.64 C121.17,218.72 204.49,227.91 251.77,233.12 " fill="none" id="Gordon-to-Cookbook" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="256.79,233.67,248.2915,228.6925,251.8211,233.1131,247.4005,236.6428,256.79,233.67" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="145.9699,214.0222,137.3013,210.1099,136.6573,215.9524,145.9699,214.0222" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="43" x="150" y="218.1938">creates</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="82.7826" y="223.8941">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="242.1972" y="246.7924">1</text><!--MD5=[1bc0f202cd81a0d9c38858a934a13621]
+link Gordon to Recipe--><path codeLine="36" d="M75.1,225.61 C92.93,233.72 115.43,243.48 136,251 C178.74,266.63 229.71,280.95 260.15,289.06 " fill="none" id="Gordon-to-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="265.23,290.41,257.5577,284.2345,260.3974,289.127,255.5049,291.9667,265.23,290.41" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="145.7297,245.0961,138.1268,239.3823,136.2204,244.9424,145.7297,245.0961" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="43" x="150" y="248.1938">creates</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="82.855" y="242.5548">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="250.5132" y="303.1869">1</text><!--MD5=[00b8486c216600c3ade6c557b13730ac]
+link Storage to Tag--><path codeLine="38" d="M312.88,109.56 C342.12,107.8 393.49,104.71 439.78,101.92 " fill="none" id="Storage-to-Tag" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="444.81,101.61,435.586,98.1578,439.819,101.9103,436.0665,106.1433,444.81,101.61" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="371.491,96.1739,362.2856,93.7838,362.6388,99.6511,371.491,96.1739" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="28" x="375.5" y="101.1938">uses</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="320.5071" y="123.4026">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="432.105" y="114.8588">*</text><!--MD5=[3c3075692205822d712cafcfcd4e3411]
+link Cookbook to Tag--><path codeLine="39" d="M310.23,224.98 C339.05,208.66 392.48,178.4 440.34,151.3 " fill="none" id="Cookbook-to-Tag" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="444.96,148.69,435.1595,149.6649,440.6144,151.163,439.1163,156.6179,444.96,148.69" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="370.8508,157.0105,361.5319,158.9103,364.4283,164.025,370.8508,157.0105" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="28" x="375.5" y="164.1938">uses</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="312.3609" y="214.1819">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="431.9653" y="165.8789">*</text><!--MD5=[aab071f6e496da150eb1924ca162ae57]
+link Recipe to Tag--><path codeLine="40" d="M310.61,284.13 C320.5,278.66 332.38,272.05 343,266 C375.19,247.67 385.89,246.91 415,224 C441.32,203.29 467.47,177.09 488.84,153.8 " fill="none" id="Recipe-to-Tag" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="492.22,150.09,483.2016,154.0484,488.8524,153.7858,489.1149,159.4366,492.22,150.09" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="360.036,213.523,351,216.4897,354.4695,221.2344,360.036,213.523" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="365" y="221.1938">contains</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="318.6062" y="295.0085">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="481.214" y="169.8058">*</text><!--MD5=[8db5a65c73622aec9368fe6ac81de2dc]
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+left to right direction
+
+hide empty fields
+hide empty methods
+
+rectangle Gordon #white {
+}
+
+rectangle Util {
+    class Storage LOGIC_YELLOW_1 {
+    }
+
+    class Tag LOGIC_YELLOW_1 {
+        + Tag()
+        + getTagName()
+        + containsAssociatedRecipeNames()
+        + addAssociatedRecipeName()
+        + removeAssociatedRecipeName()
+        + numberOfAssociatedRecipes()
+    }
+}
+
+rectangle Kitchen {
+    class Cookbook LOGIC_BLUE_1 {
+    }
+
+    class Recipe LOGIC_BLUE_1 {
+    }
+}
+
+Gordon "1" - -> "1" Storage : creates >
+Gordon "1" - - -> "1" Cookbook : creates >
+Gordon "1" - -> "1" Recipe : creates >
+
+Storage "1" - -> "*" Tag : uses >
+Cookbook "1" - -> "*" Tag : uses >
+Recipe "1" - -> "*" Tag : contains >
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam ArrowColor black
+skinparam classBorderColor black
+left to right direction
+
+hide empty fields
+hide empty methods
+
+rectangle Gordon #white {
+}
+
+rectangle Util {
+    class Storage #fdfcbe {
+    }
+
+    class Tag #fdfcbe {
+        + Tag()
+        + getTagName()
+        + containsAssociatedRecipeNames()
+        + addAssociatedRecipeName()
+        + removeAssociatedRecipeName()
+        + numberOfAssociatedRecipes()
+    }
+}
+
+rectangle Kitchen {
+    class Cookbook #b3dff3 {
+    }
+
+    class Recipe #b3dff3 {
+    }
+}
+
+Gordon "1" - -> "1" Storage : creates >
+Gordon "1" - - -> "1" Cookbook : creates >
+Gordon "1" - -> "1" Recipe : creates >
+
+Storage "1" - -> "*" Tag : uses >
+Cookbook "1" - -> "*" Tag : uses >
+Recipe "1" - -> "*" Tag : contains >
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
