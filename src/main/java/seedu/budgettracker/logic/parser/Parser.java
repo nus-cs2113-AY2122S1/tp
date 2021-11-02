@@ -21,6 +21,7 @@ import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
+import static seedu.budgettracker.common.Messages.MESSAGE_WARNING_INCORRECT_YEAR_FORMAT; 
 
 public class Parser {
 
@@ -191,6 +192,12 @@ public class Parser {
 
     private Command prepareYearCommand(String commandParams) {
         try {
+            boolean isYear = commandParams.matches("^[0-9]{4}$");
+
+            if (!(isYear)) {
+                return new InvalidCommand(String.format(MESSAGE_WARNING_INCORRECT_YEAR_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
             String directoryOfRecordList = "./data/" + commandParams + ".txt";
             return new YearCommand(directoryOfRecordList);
         } catch (StringIndexOutOfBoundsException e) {

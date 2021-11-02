@@ -1,6 +1,7 @@
 package seedu.budgettracker.ui;
 
 import seedu.budgettracker.logic.commands.Command;
+import seedu.budgettracker.logic.commands.FindCommand;
 import seedu.budgettracker.logic.commands.StatYearCommand;
 import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.data.records.Category;
@@ -243,6 +244,7 @@ public class TextUi {
                 totalSpending += expenditure.getAmount();
             }
         }
+
         String budget = "";
         boolean printInfo = true;
 
@@ -253,6 +255,10 @@ public class TextUi {
             budget = records.getBudget(i).toString();
         }
 
+        recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
+    }
+
+    private static void recordListPrinter(AllRecordList records, int i, Category category, String monthString, double totalSpending, double currentMonthBudget, String budget, boolean printInfo) {
         if (totalSpending > currentMonthBudget && currentMonthBudget > 0 && printInfo) {
             System.out.println("You are spending too much for " + monthString + "!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
@@ -264,6 +270,7 @@ public class TextUi {
             System.out.printf("%.2f", percentage);
             System.out.println("% of your overall budget has been spent");
         }
+
         getMonthListView(records, i, monthString, budget, category);
     }
 
@@ -272,8 +279,29 @@ public class TextUi {
      */
     private static void getMonthListView(AllRecordList list, int month, String monthString,
                                          String budget, Category category) {
+        budgetExpenditurePrinter(list, month, monthString, budget, category);
+
+        loanPrinter(list, month);
+
+        printDivider();
+    }
+
+    private static void loanPrinter(AllRecordList list, int month) {
+        System.out.println("Your loans: ");
+
+        if (list.getLoanListSize(month) > 0) {
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
+            System.out.print(LS);
+            printEnumeratedLoanList(list.getLoanRecords(month));
+        } else {
+            System.out.println("No Loan records yet.");
+        }
+    }
+
+    private static void budgetExpenditurePrinter(AllRecordList list, int month, String monthString, String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
+
         if (list.getMonthNumberOfExpenditures(month) > 0) {
             System.out.printf("%-30.30s %-20.20s %-20.20s %-20.20s%n", "  Description", "| Amount",
                     "| Date ", "| Category");
@@ -281,14 +309,6 @@ public class TextUi {
         } else {
             System.out.println("No Expenditure records yet.");
         }
-        System.out.println("Your loans: ");
-        if (list.getLoanListSize(month) > 0) {
-            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
-            printEnumeratedLoanList(list.getLoanRecords(month));
-        } else {
-            System.out.println("No Loan records yet.");
-        }
-        printDivider();
     }
 
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList, Category category) {
@@ -304,6 +324,7 @@ public class TextUi {
         for (int i = 0; i < monthLoanList.size(); i++) {
             Loan currentLoan = monthLoanList.get(i);
             System.out.println(i + 1 + "." + currentLoan);
+            System.out.print(LS);
         }
     }
 
@@ -441,6 +462,33 @@ public class TextUi {
         Delay.wait(500);
         System.out.println();
         Delay.loadingBar(40);
+    }
+
+    public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList, ArrayList<Loan> matchedLoanList, int sizeOfMatchedExpenditureList, int sizeOfMatchedLoanList) {
+        if (sizeOfMatchedExpenditureList == 0) {
+            System.out.println("No Expenditures found for this month");
+        } else {
+            System.out.println("Here are the Expenditures we found!");
+            System.out.println(FindCommand.TITLE_DIVIDER);
+            for (int j = 0; j < sizeOfMatchedExpenditureList; j += 1) {
+                System.out.println(matchedExpenditureList.get(j).toString(j));
+            }
+        }
+
+        System.out.println(FindCommand.EXPENDITURE_LOAN_DIVIDER);
+
+        if (sizeOfMatchedLoanList == 0) {
+            System.out.println("No Loan found for this month");
+        } else {
+            System.out.println("Here are the Loan we found!");
+            System.out.println(FindCommand.TITLE_DIVIDER);
+            for (int j = 0; j < sizeOfMatchedLoanList; j += 1) {
+                System.out.print((j + 1) + ". ");
+                System.out.println(matchedLoanList.get(j).toString());
+            }
+        }
+
+        System.out.println(FindCommand.DIVIDER);
     }
 
 

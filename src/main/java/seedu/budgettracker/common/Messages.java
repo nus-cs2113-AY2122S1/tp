@@ -21,5 +21,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_IO = "IOException: ";
     public static final String MESSAGE_WARNING_FILE_DIRECTORY = "Ensure "
             + "that you have files " + "in correct directory and named correctly!";
+    public static final String MESSAGE_WARNING_INCORRECT_YEAR_FORMAT = "The year entered is not of YYYY format!";
 
 }
