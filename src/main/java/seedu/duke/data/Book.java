@@ -13,6 +13,8 @@ public class Book extends Item {
      *
      * @param title  The title of the book.
      * @param id     The unique attribute of the book.
+     * @param loanee Person who has loaned or reserved the item
+     * @param dueDate Date when item should be returned.
      * @param status The status of the book, can be either "Loaned" or "Available".
      * @param author The author of the book.
      */
@@ -21,11 +23,14 @@ public class Book extends Item {
         this.author = author;
     }
 
+    /**
+     * Default constructor for Book class
+     */
     public Book() {
     }
 
     /**
-     * Getter method that returns the author of the book.
+     * Gets the author of the book.
      * @return author The author of the book.
      */
     public String getAuthor() {
@@ -33,7 +38,7 @@ public class Book extends Item {
     }
 
     /**
-     * Setter method that sets author attribute.
+     * Sets author attribute.
      * @param author THe author of the book.
      */
     public void setAuthor(String author) {

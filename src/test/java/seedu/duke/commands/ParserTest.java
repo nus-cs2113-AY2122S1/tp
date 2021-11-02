@@ -211,7 +211,7 @@ class ParserTest {
     public void parse_edit_InvalidVideoMarkerExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        Video b = new Video("The Hunger Games", "123", Status.AVAILABLE, "Suzanne Collins", "5h");
+        Video b = new Video("The Hunger Games", "123", Status.AVAILABLE, null, null, "Suzanne Collins", "5h");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {

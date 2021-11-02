@@ -15,6 +15,8 @@ public class Video extends Item {
      * @param title  The title of the Video.
      * @param id     The unique attribute of the Video.
      * @param status The status of the Video, can be either "Loaned" or "Available".
+     * @param loanee Person who has loaned or reserved the item
+     * @param dueDate Date when item should be returned.
      * @param publisher The publisher of the video.
      * @param duration The duration of the video.
      */
@@ -25,11 +27,14 @@ public class Video extends Item {
         this.duration = duration;
     }
 
+    /**
+     * Default constructor for Audio class
+     */
     public Video() {
     }
 
     /**
-     * Getter method that returns the publisher attribute.
+     * Gets the publisher attribute.
      * @return publisher The publisher of the video.
      */
     public String getPublisher() {
@@ -37,7 +42,7 @@ public class Video extends Item {
     }
 
     /**
-     * Getter method that returns the duration attribute.
+     * Gets the duration attribute.
      * @return duration The duration of the video.
      */
     public String getDuration() {
@@ -45,7 +50,7 @@ public class Video extends Item {
     }
 
     /**
-     * Setter method that sets the publisher attribute.
+     * Sets the publisher attribute.
      * @param publisher The input publisher to be set.
      */
     public void setPublisher(String publisher) {
@@ -53,7 +58,7 @@ public class Video extends Item {
     }
 
     /**
-     * Setter method that sets the duration attribute.
+     * Sets the duration attribute.
      * @param duration The input duration to be set.
      */
     public void setDuration(String duration) {
@@ -61,7 +66,7 @@ public class Video extends Item {
     }
 
     /**
-     * Convert the video object to string type.
+     * Converts the video object to string type.
      * @return A string that represents a video object.
      */
     @Override

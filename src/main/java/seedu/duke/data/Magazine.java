@@ -16,6 +16,8 @@ public class Magazine extends Item {
      * @param title  The title of the magazine.
      * @param id     The unique attribute of the magazine.
      * @param status The status of the magazine, can be either "Loaned" or "Available".
+     * @param loanee Person who has loaned or reserved the item
+     * @param dueDate Date when item should be returned.
      * @param publisher The publisher of the magazine.
      * @param edition The edition of the magazine.
      */
@@ -26,11 +28,14 @@ public class Magazine extends Item {
         this.edition = edition;
     }
 
+    /**
+     * Default constructor for Magazine class
+     */
     public Magazine() {
     }
 
     /**
-     * Getter method that returns publisher attribute.
+     * Gets publisher attribute.
      * @return String Publisher of the magazine.
      */
     public String getPublisher() {
@@ -38,7 +43,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Getter method that returns edition attribute.
+     * Gets edition attribute.
      * @return String Edition of the magazine.
      */
     public String getEdition() {
@@ -46,7 +51,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Setter method that sets publisher attribute.
+     * Sets publisher attribute.
      * @param publisher The publisher of the magazine.
      */
     public void setPublisher(String publisher) {
@@ -54,7 +59,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Setter method that sets edition attribute.
+     * Sets edition attribute.
      * @param edition The edition of the magazine.
      */
     public void setEdition(String edition) {
@@ -62,7 +67,7 @@ public class Magazine extends Item {
     }
 
     /**
-     * Convert the magazine object to string type.
+     * Converts the magazine object to string type.
      * @return A string that represents a magazine object.
      */
     @Override
