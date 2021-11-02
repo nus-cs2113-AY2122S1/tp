@@ -30,6 +30,7 @@
 UML Diagrams were generated with the help of [PlantUML](https://plantuml.com/).
 
 Developer Guide was adapted from [se-education.org/addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+
 ## Getting started
 
 ### Recommended software (for optimal compatibility)
@@ -99,6 +100,7 @@ The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the reci
 The `Recipe` Class is instantiated by the `Parser` Class, and contains methods to update an existing recipe.
 
 The `Cookbook` class consists of 2 main attributes
+
 1. The array `recipes` that stores all the main recipes currently in Gordon.
 2. The array `cookbookTags` that stores all the tags currently in Gordon.
 
@@ -148,6 +150,7 @@ The diagram below is the class diagram for the `Parser` class
 ![Command Class Diagram](./RenderedUML/Parser.svg)
 
 Functions of the Parser class:
+
 * Reads in user input by implementing the `Scanner` class
   * The parseMaster() method parses through the user's input to find the best match for the user's intended command
   * The corresponding command is then returned to the `Gordon` class
@@ -290,6 +293,7 @@ The `Tag` class contains the basic functionalities related to a _Tag_, and encap
 >![Untag Sequence Diagram](./RenderedUML/UntagSequenceP.svg)
 
 ## Product scope
+
 ### Target user profile
 
 * NUS Students who stay in a Hall
@@ -507,6 +511,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 - [JUnit Tests](#junit-tests)
 
 ### I/O Tests
+
 #### Windows
 
 1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
@@ -526,14 +531,17 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 ### JUnit tests
 
 #### Pre-requisites before running any tests
+
 1. Open the project in **IntelliJ IDEA** IDE
 2. Click on the `Project` icon in the left sidebar to open the Project window.
 
 #### Run all tests
+
 1. Right-click on the `test` folder, and in the options window that pops up, click `Run` to run all tests.
 2. You will be redirected to a view of the console, to await to result of the test.
 
 #### Run individual tests
+
 1. In the Project window, click the dropdown beside the `test` folder, then the `java` folder, until you find `gordon`.
 2. `gordon` has 2 sub-packages, the `kitchen` package and the `util` package.
 3. To run individual JUnit Tests, first select the desired `.java` file located in these packages.
@@ -541,6 +549,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 5. You will be redirected to a view of the console, to await to result of the test.
 
 #### Interpreting test results
+
 1. Depending on the number of tests ran, see the number of green ticks in the `test results` dropdown.
 2. If number of green ticks equals number of tests run, then all tests have passed.
 3. If there are red crosses, then there are tests that have failed.
