@@ -34,7 +34,8 @@ import seedu.traveller.exceptions.DistanceNonStringException;
 import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
-import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.exceptions.InvalidShortestDistException;
+import seedu.traveller.exceptions.InvalidShortestCostException;
 import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -312,6 +313,9 @@ public class Parser {
             tripName = parseFieldValue(userInput, 0, dayIdx);
             rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, keywordIdx);
             keyword = parseFieldValue(userInput, keywordIdx + KEY_LENGTH, userInput.length());
+            assert !keyword.equals(" ") : "keyword should not be blank.";
+            assert !keyword.contains(" ") : "keyword should not be contain whitespace.";
+
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchItemFormatException();
         }
@@ -390,17 +394,20 @@ public class Parser {
         Command command;
         String startCountryCode;
         String endCountryCode;
+        int fromIdx = getFromFlagIndex(userInput);
+        int toIdx = getToFlagIndex(userInput);
         try {
-            int toIdx = getToFlagIndex(userInput);
-            startCountryCode = parseFieldValue(userInput, FROM_LENGTH - 1, toIdx).toUpperCase();
-            endCountryCode = parseFieldValue(userInput, toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+            startCountryCode = parseFieldValue(userInput,
+                    fromIdx + FROM_LENGTH, toIdx).toUpperCase();
+            endCountryCode = parseFieldValue(userInput,
+                    toIdx + TO_LENGTH, userInput.length()).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
 
             command = new ShortestCommand("dist", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidShortestFormatException();
+            throw new InvalidShortestDistException();
         }
 
         return command;
@@ -427,7 +434,7 @@ public class Parser {
 
             command = new ShortestCommand("cost", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidShortestFormatException();
+            throw new InvalidShortestCostException();
         }
 
         return command;
