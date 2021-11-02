@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
-import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -52,6 +51,8 @@ public class Parser {
                 return new DeadlineCommand(input);
             } else if (input.startsWith(UnreserveCommand.COMMAND_WORD)) {
                 return new UnreserveCommand(input);
+            } else if (input.startsWith(StatsCommand.COMMAND_WORD)) {
+                return new StatsCommand(input);
             } else {
                 return new UnknownCommand();
             }
