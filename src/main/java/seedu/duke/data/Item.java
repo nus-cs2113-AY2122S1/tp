@@ -45,7 +45,7 @@ public class Item {
     }
 
     /**
-     * Getter method that returns the title attribute.
+     * Gets the title attribute.
      * @return title The title of the item in String.
      */
     public String getTitle() {
@@ -53,7 +53,7 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the title attribute.
+     * Sets the title attribute.
      * @param title The input title to be set.
      */
     public void setTitle(String title) {
@@ -61,7 +61,7 @@ public class Item {
     }
 
     /**
-     * Getter method that returns the id attribute.
+     * Gets the id attribute.
      * @return id The id of the item in String.
      */
     public String getID() {
@@ -69,7 +69,7 @@ public class Item {
     }
 
     /**
-     * Setter method that returns the id attribute.
+     * Sets the id attribute.
      * @param id The id of the item in String.
      */
     public void setID(String id) {
@@ -77,7 +77,7 @@ public class Item {
     }
 
     /**
-     * Getter method that returns the status attribute.
+     * Gets the status attribute.
      * @return status The status of the item in String.
      */
     public Status getStatus() {
@@ -85,7 +85,7 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the status method.
+     * Sets the status method.
      * @param status The input status to be set.
      */
     public void setStatus(Status status) {
@@ -94,7 +94,7 @@ public class Item {
 
     //@@author
     /**
-     * Getter method that returns the loanee attribute.
+     * Gets the loanee attribute.
      * @return loanee Username of a person.
      */
     public String getLoanee() {
@@ -102,7 +102,7 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the loanee attribute.
+     * Sets the loanee attribute.
      * @param loanee Username of a person.
      */
     public void setLoanee(String loanee) {
@@ -110,7 +110,7 @@ public class Item {
     }
 
     /**
-     * Getter method that returns dueDate attribute.
+     * Gets the dueDate attribute.
      * @return LocalDate date object representing due date.
      */
     public LocalDate getDueDate() {
@@ -118,7 +118,7 @@ public class Item {
     }
 
     /**
-     * Getter method that returns dueDate attribute as a string.
+     * Gets the dueDate attribute as a string.
      * @return String date representing due date.
      */
     public String dueDateToString() {
@@ -132,7 +132,7 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the dueDate attribute.
+     * Sets the dueDate attribute.
      * @param dueDate LocalDate object representing when item should be returned.
      */
     public void setDueDate(LocalDate dueDate) {
@@ -140,7 +140,7 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the dueDate attribute.
+     * Sets the dueDate attribute.
      * @param dueDate String representing when item should be returned.
      */
     public void setDueDate(String dueDate) throws DateTimeParseException {
@@ -148,7 +148,7 @@ public class Item {
     }
 
     /**
-     * Setter method that resets the dueDate attribute.
+     * Resets the dueDate attribute.
      */
     public void setDueDate() {
         this.dueDate = null;
@@ -159,7 +159,7 @@ public class Item {
     }
 
     /**
-     * Convert the item object to string type.
+     * Converts the item object to string type.
      * @return A string that represents an item object.
      */
     @Override

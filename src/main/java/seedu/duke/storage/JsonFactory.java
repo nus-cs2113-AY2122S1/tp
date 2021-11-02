@@ -8,12 +8,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import seedu.duke.data.Audio;
-import seedu.duke.data.Book;
-import seedu.duke.data.Catalogue;
-import seedu.duke.data.Item;
-import seedu.duke.data.Magazine;
-import seedu.duke.data.Video;
+import seedu.duke.data.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,8 +60,8 @@ public class JsonFactory {
         ArrayNode audioArray = mapper.createArrayNode();
         List<Audio> audioObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Audio)
                 .map(p -> (Audio) p).collect(Collectors.toList());
-        for (Audio a : audioObjects) {
-            audioArray.add(mapper.convertValue(a, ObjectNode.class));
+        for (Audio oneItem : audioObjects) {
+            audioArray.add(mapper.convertValue(oneItem, ObjectNode.class));
         }
         return audioArray;
     }
@@ -83,8 +78,8 @@ public class JsonFactory {
         ArrayNode bookArray = mapper.createArrayNode();
         List<Book> bookObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Book)
                 .map(p -> (Book) p).collect(Collectors.toList());
-        for (Book a : bookObjects) {
-            bookArray.add(mapper.convertValue(a, ObjectNode.class));
+        for (Book oneItem : bookObjects) {
+            bookArray.add(mapper.convertValue(oneItem, ObjectNode.class));
         }
         return bookArray;
     }
@@ -99,10 +94,10 @@ public class JsonFactory {
 
     private ArrayNode itemToJson(Catalogue catalogue) {
         ArrayNode itemArray = mapper.createArrayNode();
-        List<Item> itemObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Item)
-                .map(p -> (Item) p).collect(Collectors.toList());
-        for (Item a : itemObjects) {
-            itemArray.add(mapper.convertValue(a, ObjectNode.class));
+        List<Miscellaneous> itemObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Miscellaneous)
+                .map(p -> (Miscellaneous) p).collect(Collectors.toList());
+        for (Miscellaneous oneItem : itemObjects) {
+            itemArray.add(mapper.convertValue(oneItem, ObjectNode.class));
         }
         return itemArray;
     }
@@ -119,8 +114,8 @@ public class JsonFactory {
         ArrayNode magazineArray = mapper.createArrayNode();
         List<Magazine> magazineObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Magazine)
                 .map(p -> (Magazine) p).collect(Collectors.toList());
-        for (Magazine a : magazineObjects) {
-            magazineArray.add(mapper.convertValue(a, ObjectNode.class));
+        for (Magazine oneItem : magazineObjects) {
+            magazineArray.add(mapper.convertValue(oneItem, ObjectNode.class));
         }
         return magazineArray;
     }
@@ -137,8 +132,8 @@ public class JsonFactory {
         ArrayNode videoArray = mapper.createArrayNode();
         List<Video> videoObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Video)
                 .map(p -> (Video) p).collect(Collectors.toList());
-        for (Video a : videoObjects) {
-            videoArray.add(mapper.convertValue(a, ObjectNode.class));
+        for (Video oneItem : videoObjects) {
+            videoArray.add(mapper.convertValue(oneItem, ObjectNode.class));
         }
         return videoArray;
     }

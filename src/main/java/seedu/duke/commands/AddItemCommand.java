@@ -5,6 +5,7 @@ import seedu.duke.common.Status;
 import seedu.duke.data.Audio;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
+import seedu.duke.data.Miscellaneous;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
@@ -70,7 +71,7 @@ public class AddItemCommand extends Command {
             ui.print(WARN_ADDITIONAL_ARGS);
         }
         try {
-            Item newItem = new Item(title, id, status, null, null);
+            Miscellaneous newItem = new Miscellaneous(title, id, status, null, null);
             catalogue.add(newItem);
             ui.print(ADD_MESSAGE, newItem);
         } catch (LibmgrException e) {
