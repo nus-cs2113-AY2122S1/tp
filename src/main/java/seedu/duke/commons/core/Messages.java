@@ -49,8 +49,8 @@ public final class Messages {
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";
 
-    public static final String ERROR_INVALID_LIST_ARGUMENT =
-            "Sorry, list module command currently only accepts either \"verbose\" or no argument.";
+    public static final String ERROR_INVALID_TITLE =
+            "Sorry, the field for title cannot be blank.";
 
     public static final String ERROR_MISSING_FLAGS =
             "There are missing flags in the input given. Please check again.";

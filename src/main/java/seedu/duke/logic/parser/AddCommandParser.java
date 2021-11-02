@@ -21,6 +21,8 @@ import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parsePriority;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
+import static seedu.duke.logic.parser.ParserUtil.parseTime;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
@@ -62,20 +64,16 @@ public class AddCommandParser {
         if (!flagMap.containsKey("-d") || !flagMap.containsKey("-s") || !flagMap.containsKey("-e")) {
             throw new ParseException(Messages.ERROR_MISSING_FLAGS);
         }
-        String title = params[0].strip();
+        String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get("-d"));
-        String startTime;
-        String endTime;
-        try {
-            startTime = LocalTime.parse(flagMap.get("-s")).format(DateTimeFormatter.ofPattern("hh:mm a"));
-            endTime = LocalTime.parse(flagMap.get("-e")).format(DateTimeFormatter.ofPattern("hh:mm a"));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+        String startTime = parseTime(flagMap.get("-s"));
+        String endTime = parseTime(flagMap.get("-e"));
+        String meetingUrl = EMPTY_INFORMATION;
+
+        if (flagMap.containsKey("-l")) {
+            meetingUrl = flagMap.get("-l");
         }
-        if (!flagMap.containsKey("-l")) {
-            return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, EMPTY_INFORMATION);
-        }
-        return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, flagMap.get("-l"));
+        return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
     }
 
     private static Command parseAddTaskCommand(String userResponse) throws ParseException {
@@ -84,7 +82,7 @@ public class AddCommandParser {
         if (!flagMap.containsKey("-d")) {
             throw new ParseException(Messages.ERROR_MISSING_FLAGS);
         }
-        String title = params[0].strip();
+        String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get("-d"));
         String priority = DEFAULT_PRIORITY;
         String information = EMPTY_INFORMATION;
