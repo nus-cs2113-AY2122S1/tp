@@ -5,17 +5,14 @@ import java.io.IOException;
 
 public class FileCreator {
     private static final String LIST_STORAGE_FOLDER = "./data/";
-    private static final String LIST_STORAGE_FILE = "./data/task.txt";
-    private static final String DIARY_STORAGE_FILE = "./data/diary.txt";
+    private static final String LIST_STORAGE_FILE = "task.txt";
 
     private File taskFile;
-    private File diaryFile;
 
     public FileCreator() {
         createFolder();
         try {
-            taskFile = createFile(LIST_STORAGE_FILE);
-            diaryFile = createFile(DIARY_STORAGE_FILE);
+            taskFile = createFile(LIST_STORAGE_FOLDER + LIST_STORAGE_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +37,7 @@ public class FileCreator {
         return taskFile;
     }
 
-    public File getDiaryFile() {
-        return diaryFile;
+    public String getTaskFileName() {
+        return LIST_STORAGE_FOLDER + LIST_STORAGE_FILE;
     }
 }
