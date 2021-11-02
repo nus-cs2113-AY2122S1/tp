@@ -1,2 +1,2 @@
-add /m /n Glenn /s A0123456B /g M /p 98765432
+add /m /n Juan Hwee /s A0123456B /g M /p 98765432
 bye

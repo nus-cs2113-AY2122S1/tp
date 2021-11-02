@@ -50,7 +50,8 @@ public class AddTraining {
      * @return true if all parameters given are valid
      * @throws InvalidAddTrainingException If there is an error with any of the parameters given.
      */
-    public boolean verifyTrainingDetails(TrainingSchedule trainingSched, TrainingList trainings) throws InvalidAddTrainingException {
+    public boolean verifyTrainingDetails(TrainingSchedule trainingSched, TrainingList trainings)
+            throws InvalidAddTrainingException {
         trainingName = trainingSched.getTrainingName();
         trainingVenue = trainingSched.getTrainingVenue();
         trainingTime = trainingSched.getTrainingTime();
