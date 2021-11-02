@@ -263,7 +263,7 @@ public class Ui {
                 + System.lineSeparator() + "description/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
                 + System.lineSeparator() + "remove/[MEMBER INDEX]"
-                + System.lineSeparator() + "add/[MEMBER INDEX]"
+                + System.lineSeparator() + "add : to add a member to a task"
                 + System.lineSeparator()
                 + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
