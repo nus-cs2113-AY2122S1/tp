@@ -58,19 +58,17 @@ public class Ui {
     /**
      * Returns a message when successfully add to a list.
      *
-     * @param id       the ID of the patient to be added
      * @param viewType the viewType context of the command
      * @return the Successful Message
      */
-    public static String getAddMessage(int id, ViewType viewType) throws MedBotException {
-        assert id > 0;
+    public static String getAddMessage(ViewType viewType, String info) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:
-            return PatientUi.getAddPatientMessage(id);
+            return PatientUi.getAddPatientMessage(info);
         case SCHEDULER:
-            return SchedulerUi.getAddScheduleMessage(id);
+            return SchedulerUi.getAddAppointmentMessage(info);
         case MEDICAL_STAFF_INFO:
-            return StaffUi.getAddStaffMessage(id);
+            return StaffUi.getAddStaffMessage(info);
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -90,7 +88,7 @@ public class Ui {
         case PATIENT_INFO:
             return PatientUi.getDeletePatientMessage(id);
         case SCHEDULER:
-            return SchedulerUi.getDeleteScheduleMessage(id);
+            return SchedulerUi.getDeleteAppointmentMessage(id);
         case MEDICAL_STAFF_INFO:
             return StaffUi.getDeleteStaffMessage(id);
         default:
@@ -113,7 +111,7 @@ public class Ui {
         case PATIENT_INFO:
             return PatientUi.getEditPatientMessage(id, info);
         case SCHEDULER:
-            return SchedulerUi.getEditScheduleMessage(id, info);
+            return SchedulerUi.getEditAppointmentMessage(id, info);
         case MEDICAL_STAFF_INFO:
             return StaffUi.getEditStaffMessage(id, info);
         default:

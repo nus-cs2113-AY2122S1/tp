@@ -121,44 +121,32 @@ public abstract class PersonUi {
         return output;
     }
 
-    public static String getAddPersonMessage(String person, int id) {
-        String output = "Added " + person + " with " + person + " ID: " + id + END_LINE;
-
-        return output;
+    public static String getAddPersonMessage(String person, String personInfo) {
+        return "Added " + person + " with " + personInfo + END_LINE;
     }
 
     public static String getDeletePersonMessage(String person, int id) {
         String uppercasePerson = capitalizeFirstLetter(person);
 
-        String output = uppercasePerson + " with id " + id + " deleted from system." + END_LINE;
-
-        return output;
+        return uppercasePerson + " with id " + id + " deleted from system." + END_LINE;
     }
 
     public static String getEditPersonMessage(String person, int id, String info) {
-        String output = "The information of " + person + " with ID " + id + " has been edited to:" + END_LINE + END_LINE
+        return "The information of " + person + " with ID " + id + " has been edited to:" + END_LINE + END_LINE
                 + info + END_LINE;
-
-        return output;
     }
 
     public static String getArchivePersonMessage(String person, int id) {
-        String output = "The " + person + " with ID: " + id + " is archived successfully." + END_LINE;
-
-        return output;
+        return "The " + person + " with ID: " + id + " is archived successfully." + END_LINE;
     }
 
     public static String getUnarchivePersonMessage(String person, int id) {
-        String output = "The " + person + " with ID: " + id + " is unarchived successfully." + END_LINE;
-
-        return output;
+        return "The " + person + " with ID: " + id + " is unarchived successfully." + END_LINE;
     }
 
     public static String getCurrentViewPersonMessage(String person) {
         String uppercasePerson = capitalize(person);
-        String output = "You are currently in the " + uppercasePerson + "'s View.";
-
-        return output;
+        return "You are currently in the " + uppercasePerson + "'s View.";
     }
 
     private static String capitalize(String word) {
