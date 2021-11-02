@@ -7,7 +7,9 @@ you manage your daily tasks faster than traditional GUI application.
 - [1. Introduction](#1-introduction)
   - [1.1 Purpose](#11-purpose)
   - [1.2 Acknowledgments](#12-acknowledgements)
-- [Setting up, getting started]()
+- [2. Setting up, getting started](#2-setting-up-getting-started)
+  - [2.1 Pre-requisites](#21-pre-requisites)
+  - [2.2 Download the project on your computer](#22-download-the-project-on-your-computer)
   
 # 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
@@ -25,7 +27,7 @@ This developer guide is intended for software developers, designers, or testers 
 to contribute to the development of the **SchedUrMods** application. 
 
 The guide provides an overall architectural view of **SchedUrMods** and describes the 
-implementation of key features of the application that is supplmented with easy to understand
+implementation of key features of the application that is supplemented with easy to understand
 UML diagrams.
 
 ## 1.2 Acknowledgements
@@ -37,10 +39,54 @@ This section provides a list 3rd-party libraries adapted in the development of *
 4. [Checkstyle](https://checkstyle.sourceforge.io/)
 5. [JUnit](https://junit.org)
 
-# Setting up, getting started
+# 2. Setting up, getting started
+This section provides instructions on how to set up the development environment of the **SchedUrMods** application.
 
-Refer to the guide [Setting up and getting started](https://www.google.com).
+## 2.1 Pre-requisites
+Please ensure that you have the following software installed, prior to setting up the project:
 
+1. IDE: [`IntelliJ IDEA`](https://www.jetbrains.com/idea/download/)
+   1. Development platform used for the development for the application.
+2. JDK: [`Java 11`](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
+   1. Programming language the application is written in.
+3. Revision Control: [`SourceTree`](https://www.sourcetreeapp.com/)
+   1. Version control software used by development team.
+
+## 2.2 Download the project on your computer
+Please follow the following steps below to download the project file on your computer:
+
+1. Click [here](https://github.com/AY2122S1-CS2113T-W13-3/tp) to access the Github repository of the **SchedUrMods** application. 
+2. **Fork** and **Clone** the repository using `SourceTree`.
+
+## 2.2 Setting up the project in IntelliJ
+Please follow the following steps below to set up the project in `IntelliJ`:
+
+1. Launch `IntelliJ` application.
+   1. On the toolbar, click on `file` and then `Open...`.
+   2. Find and select the project folder that was previously downloaded.
+2. Configure the **Project SDK** to use `Java 11`
+   1. On the toolbar, click on `file` and then `Project Structure...`
+   2. Select `Project`
+      1. Configure `Project SDK:` to use `Java 11`.
+      2. Configure `Project language level:` to use `SDK default`.
+3. Verify the setup:
+   1. After completing steps **1** and **2**, right-click on the following java class 
+   `\src\main\java\seedu\SchedUrMods.java` and select `Run SchedUrMods.main()`
+   2. Assuming the project is set up correctly, you should see the following display in the terminal:
+   
+```
+ _____        _                _  _   _       ___  ___            _
+/  ___|      | |              | || | | |      |  \/  |           | |
+\ `--.   ___ | |__    ___   __| || | | | _ __ | .  . |  ___    __| | ___
+ `--. \ / __|| '_ \  / _ \ / _` || | | || '__|| |\/| | / _ \  / _` |/ __|
+/\__/ /| (__ | | | ||  __/| (_| || |_| || |   | |  | || (_) || (_| |\__ \
+\____/  \___||_| |_| \___| \__,_| \___/ |_|   \_|  |_/ \___/  \__,_||___/
+-------------------------------------------------------------------------
+Command-Line Interface for NUSMODS                               (v2.1.0)
+-------------------------------------------------------------------------
+[user]:
+```
+      
 # Design
 
 {Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
