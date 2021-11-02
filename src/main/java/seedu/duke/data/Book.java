@@ -21,6 +21,9 @@ public class Book extends Item {
         this.author = author;
     }
 
+    public Book() {
+    }
+
     /**
      * Getter method that returns the author of the book.
      * @return author The author of the book.

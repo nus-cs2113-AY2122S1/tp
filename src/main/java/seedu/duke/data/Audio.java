@@ -25,6 +25,9 @@ public class Audio extends Item {
         this.duration = duration;
     }
 
+    public Audio() {
+    }
+
     /**
      * Getter method that returns the artist attribute.
      * @return publisher The artist of the audio.

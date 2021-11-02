@@ -10,7 +10,7 @@ import static seedu.duke.common.Messages.ADD_DUPLICATE_ID;
  * The Catalogue class stores the ArrayList of the items.
  */
 public class Catalogue {
-    private final ArrayList<Item> itemsArrayList;
+    private ArrayList<Item> itemsArrayList;
 
     /**
      * Creates an empty catalogue.
@@ -26,6 +26,10 @@ public class Catalogue {
      */
     public Catalogue(ArrayList<Item> items) {
         this.itemsArrayList = new ArrayList<>(items);
+    }
+
+    public void setItemsArrayList(ArrayList<Item> itemsList) {
+        this.itemsArrayList = itemsList;
     }
 
     public ArrayList<Item> getAllItems() {

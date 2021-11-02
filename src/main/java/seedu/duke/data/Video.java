@@ -25,6 +25,9 @@ public class Video extends Item {
         this.duration = duration;
     }
 
+    public Video() {
+    }
+
     /**
      * Getter method that returns the publisher attribute.
      * @return publisher The publisher of the video.

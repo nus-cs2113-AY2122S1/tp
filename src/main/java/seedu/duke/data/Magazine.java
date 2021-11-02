@@ -26,6 +26,9 @@ public class Magazine extends Item {
         this.edition = edition;
     }
 
+    public Magazine() {
+    }
+
     /**
      * Getter method that returns publisher attribute.
      * @return String Publisher of the magazine.

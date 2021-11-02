@@ -1,5 +1,6 @@
 package seedu.duke.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import seedu.duke.common.Status;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,7 @@ public class Item {
     private String id;
     private Status status;
     private String loanee;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dueDate;
 
     // Date functions
@@ -37,6 +39,9 @@ public class Item {
         this.status = status;
         this.loanee = loanee;
         this.dueDate = dueDate;
+    }
+
+    public Item() {
     }
 
     /**
@@ -147,6 +152,10 @@ public class Item {
      */
     public void setDueDate() {
         this.dueDate = null;
+    }
+
+    public void setDueDate(String[] date) {
+        this.dueDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),Integer.parseInt(date[2]));
     }
 
     /**

@@ -23,7 +23,8 @@ public class Duke {
         ui = new TextUI();
         catalogue = new Catalogue();
         parser = new Parser();
-        storage = new Storage();
+        storage = new Storage(ui);
+        storage.read(catalogue);
 
         // Continue to read, parse and execute commands until exit command is issued by user
         while (true) {
@@ -35,8 +36,8 @@ public class Duke {
             // Executes logic of command
             userCommand.execute(ui, catalogue);
 
-            storage.write(ui, catalogue);
-            storage.read(catalogue);
+            storage.write(catalogue);
+
 
             // Check whether to exit program
             if (userCommand.isExit()) {

@@ -3,8 +3,6 @@
     "title" : "Thriller",
     "id" : "5920",
     "status" : "AVAILABLE",
-    "loanee" : null,
-    "dueDate" : null,
     "artist" : "Michael Jackson",
     "duration" : "42:16"
   } ],
@@ -12,17 +10,20 @@
     "title" : "To Kill a Mockingbird",
     "id" : "2551",
     "status" : "AVAILABLE",
-    "loanee" : null,
-    "dueDate" : null,
     "author" : "Harper Lee"
-  }, {
-    "title" : "Harry Potter",
-    "id" : "2500",
-    "status" : "AVAILABLE",
-    "loanee" : null,
-    "dueDate" : null,
-    "author" : "Jackson Martinez"
   } ],
-  "magazine" : [ ],
-  "video" : [ ]
+  "magazine" : [ {
+    "title" : "Time Magazine",
+    "id" : "58720a",
+    "status" : "AVAILABLE",
+    "publisher" : "Time USA",
+    "edition" : "oct252021"
+  } ],
+  "video" : [ {
+    "title" : "Casino Royale",
+    "id" : "095680",
+    "status" : "AVAILABLE",
+    "publisher" : "Sony Pictures",
+    "duration" : "144 minutes"
+  } ]
 }
