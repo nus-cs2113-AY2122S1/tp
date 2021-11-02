@@ -5,6 +5,7 @@ import medbot.exceptions.MedBotException;
 import medbot.ui.Ui;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static medbot.list.ListItemType.APPOINTMENT;
 import static medbot.list.ListItemType.PATIENT;
@@ -16,27 +17,33 @@ public class StorageManager {
     private static AppointmentStorage appointmentStorage;
     protected static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n"
             + "Please decide if you wish to:" + "\n"
-            + "1. Enter 'exit' to exit Medbot to correct the storage files" + "\n"
+            + "1. Enter 'exit' to exit MedBot to correct the storage files" + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
+
+    public StorageManager() {
+    }
 
     /**
      * Initializes all storage classes to be used for MedBot, and prints out any errors in storage files.
      *
      * @param scheduler instance of scheduler class
      * @param ui        instance of ui class
-     * @throws FileNotFoundException if any storage file not found
-     * @throws MedBotException       If there are any errors in storage files
+     * @throws MedBotException If there are any errors in storage files
      */
-    public StorageManager(Scheduler scheduler, Ui ui) throws FileNotFoundException, MedBotException {
+    public void initializeStorages(Scheduler scheduler, Ui ui) throws MedBotException {
         patientStorage = new PatientStorage();
         staffStorage = new StaffStorage();
         appointmentStorage = new AppointmentStorage();
 
-        String loadStorageErrorMessage = loadStoragesAndGetErrorMessage(scheduler);
-        if (!loadStorageErrorMessage.isBlank()) {
-            loadStorageErrorMessage += ERROR_INVALID_STORAGE_LINE_INSTRUCTION;
-            ui.printOutput("");
-            ui.printOutput(loadStorageErrorMessage);
+        try {
+            String loadStorageErrorMessage = loadStoragesAndGetErrorMessage(scheduler);
+            if (!loadStorageErrorMessage.isBlank()) {
+                loadStorageErrorMessage += ERROR_INVALID_STORAGE_LINE_INSTRUCTION;
+                ui.printOutput("");
+                ui.printOutput(loadStorageErrorMessage);
+            }
+        } catch (FileNotFoundException e) {
+            throw new MedBotException("ERROR: MedBot has issues finding some or all of the storage files to load!");
         }
     }
 
@@ -45,9 +52,9 @@ public class StorageManager {
      * Save all relevant data from MedBot program to storage text files.
      *
      * @param scheduler instance of Scheduler class
-     * @throws MedBotException if unable to save data to any of the storage text files
+     * @throws IOException if unable to save data to any of the storage text files
      */
-    public void saveToStorage(Scheduler scheduler) throws MedBotException {
+    public void saveToStorage(Scheduler scheduler) throws IOException {
         patientStorage.saveData(scheduler.getPatientStorageString());
         staffStorage.saveData(scheduler.getStaffStorageString());
         appointmentStorage.saveData(scheduler.getAppointmentStorageString());
