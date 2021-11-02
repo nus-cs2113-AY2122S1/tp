@@ -53,7 +53,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
-            } catch (InvalidBudgetException | NoCommandAttributesException | InvalidItemTypeException e) {
+            } catch (NoCommandAttributesException | InvalidItemTypeException e) {
                 System.out.println(e.getMessage());
             }
         } while (ByeCommand.isRunning);
