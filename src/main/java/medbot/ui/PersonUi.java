@@ -18,8 +18,9 @@ public abstract class PersonUi {
     }
 
     protected static String getListHelpMessage(String person) {
-        return "View information of all current " + person + "s." + END_LINE
-                + "Format: list" + END_LINE;
+        return "View information of all non-hidden " + person + "s." + END_LINE
+                + "To view only hidden " + person + "s, add the '-h' parameter." + END_LINE
+                + "Format: list [-h]" + END_LINE;
     }
 
     protected static String getViewHelpMessage(String person) {
