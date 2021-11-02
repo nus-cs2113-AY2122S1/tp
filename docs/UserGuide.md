@@ -55,14 +55,20 @@ It's absolutely bonkers. Now let's get down to business.
 
 ## How do you start Gordon?
 
+If you're using a Windows system, follow this guide:
+
 1. Checkout the latest version of **Gordon** [here](https://github.com/AY2122S1-CS2113T-W13-2/tp)
    1. Go to the 'Releases' section on the right-side of the page
+     ![](images/releases.jpg)
    1. Download the file named 'tp.jar'
+     ![](images/tpjar.jpg)
 1. Find the 'tp.jar' file in your computer
    1. Search for 'tp.jar' in your search bar
    1. Right-click on the file
    1. Select 'Properties'
    1. Copy the location of the file
+      
+        ![](images/location.jpg)
 1. Ensure that you have Java 11 or above installed
    1. Search for 'Command Prompt' in your search bar, then open the Command Prompt
    1. In the Command Prompt terminal, type `java -version`
@@ -71,7 +77,7 @@ It's absolutely bonkers. Now let's get down to business.
       1. If you don't have Java 11, you can install it [here](https://www.oracle.com/java/technologies/downloads/#java11)
 1. Run the Gordon program 
    1. In your terminal, type `java -jar` then paste the location of the file to run Gordon
-   1. If everything works, you should be able to see this:
+   1. If everything works, you should be able to see this welcome message:
    ![](images/Gordon%20welcome%20message.jpg)
 
 ## What can Gordon do?
