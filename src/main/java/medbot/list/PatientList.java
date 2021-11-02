@@ -19,4 +19,8 @@ public class PatientList extends PersonList {
         return "The patient with ID " + patientId + " is already unarchived." + END_LINE;
     }
 
+    @Override
+    protected String getIcIsDuplicate(String icNumber) {
+        return "The patient with IC" + icNumber + " is already in the record." + END_LINE;
+    }
 }
