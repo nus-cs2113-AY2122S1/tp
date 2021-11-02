@@ -95,29 +95,28 @@ public class ParserUtil {
     public static HashMap<String, String> getFlagMap(String userResponse, String... flags) throws ParseException {
         //make hashmap of flags to index position of flags
         HashMap<String, Integer> flagToPosMap = new HashMap<String, Integer>();
-        ArrayList<Integer> posList = new ArrayList<Integer>(); //list of positions of all flags
         for (String flag : flags) { //for each possible flag
             int index = userResponse.indexOf(flag + " ");
             if (index > -1) { //if flag exists
                 checkDuplicateFlags(flag + " ", userResponse);
                 flagToPosMap.put(flag, index);
-                posList.add(index); //add index of valid flag to list
             }
         }
         //make hashmap of flags to parameter of flags
+        ArrayList<Integer> posList = new ArrayList<Integer>(flagToPosMap.values()); //list of positions of all flags
         Collections.sort(posList);
-        HashMap<String, String> flagToParameterMap = new HashMap<String, String>();
+        HashMap<String, String> flagToParamMap = new HashMap<String, String>();
         for (String flag : flagToPosMap.keySet()) {
             int pos = flagToPosMap.get(flag);
             int indexInPosList = posList.indexOf(pos);
-            if (indexInPosList < posList.size() - 1) { //if not last element in postList array
+            if (indexInPosList < posList.size() - 1) { //if not last element in posList array
                 int nextPos = posList.get(indexInPosList + 1);
-                flagToParameterMap.put(flag, userResponse.substring(pos + 3, nextPos).strip());
+                flagToParamMap.put(flag, userResponse.substring(pos + 3, nextPos).strip());
             } else {
-                flagToParameterMap.put(flag, userResponse.substring(pos + 3).strip());
+                flagToParamMap.put(flag, userResponse.substring(pos + 3).strip());
             }
         }
-        return flagToParameterMap;
+        return flagToParamMap;
     }
 
     public static void checkDuplicateFlags(String flag, String userResponse) throws ParseException {
