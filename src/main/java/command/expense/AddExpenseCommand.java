@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import static constants.ErrorMessage.addExpenseErrorMsg;
+import static constants.ErrorMessage.incorrectExpenseValueMsg;
 
 @Command(name = "add", mixinStandardHelpOptions = true,
         description = "Adds an expense in the current month to the database.")
@@ -35,6 +36,10 @@ public class AddExpenseCommand implements Callable<Integer> {
         try {
             String expenseName = String.join(" ", names);
             double expenseValue = Money.truncate(value);
+            if (expenseValue <= 0) {
+                ui.printMessage(incorrectExpenseValueMsg);
+                return 1;
+            }
             if (category != null) {
                 expenseMgr.addExpense(expenseName, expenseValue, category);
             } else {

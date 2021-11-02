@@ -18,6 +18,9 @@ public final class ErrorMessage {
     public static final String expenseWarningErrorMsg = "Error with setting your warning limit. Ensure "
             + "you keyed in the correct value and try again!";
 
+    public static final String incorrectExpenseValueMsg = "Your expense value cannot be $0 or any "
+            + "negative amount. Check that you have entered the correct value and try again!";
+
     // income error messages
     public static final String addIncomeErrorMsg = "Error with adding income. Ensure you keyed "
             + "in both an income name and a value and try again!";
