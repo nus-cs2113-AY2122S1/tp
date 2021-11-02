@@ -16,7 +16,6 @@ import java.util.Scanner;
 /**
  * Handles printing all messages in the application to the console.
  */
-
 public class Ui {
     private static final int TABLE_PADDING = 2;
     private static final int DESCRIPTION_MAX_WIDTH = 40;
