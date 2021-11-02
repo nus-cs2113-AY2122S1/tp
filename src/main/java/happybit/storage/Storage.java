@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Storage class supports the import and export of user data.
+ * Supports the import and export of user data.
  */
 public class Storage {
     private static final String DEFAULT_DIR = "data";
@@ -42,7 +42,7 @@ public class Storage {
 
     /**
      * This method is automatically called everytime the program start up.
-     * It will import the data from storage file.
+     * It will import the data from storage file into GoalList object.
      *
      * @return a GoalList object
      * @throws HaBitStorageException when errors occurred with the importing of data
@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Create directory of storage file.
+     * Creates the directory of storage file.
      *
      * @param storageDir the directory where storage file will be placed
      */
@@ -89,7 +89,7 @@ public class Storage {
     }
 
     /**
-     * Create the storage file if it does not exist.
+     * Creates the storage file if it does not exist.
      *
      * @param storageFile the storage text file to create
      */
@@ -108,7 +108,7 @@ public class Storage {
     }
 
     /**
-     * Set the storage file as read only.
+     * Sets the storage file as read only.
      *
      * @param storageFile the storage file to set as read only
      */
@@ -123,7 +123,7 @@ public class Storage {
     }
 
     /**
-     * To export goal list to storage file.
+     * Exports goal list to storage file.
      *
      * @param goalList an array list of goals
      * @throws HaBitStorageException IOException
@@ -133,7 +133,7 @@ public class Storage {
     }
 
     /**
-     * To export a goal to storage file.
+     * Exports a goal to storage file.
      *
      * @param goal a Goal object
      * @param index the index of goal in goal list
@@ -144,7 +144,7 @@ public class Storage {
     }
 
     /**
-     * To export a habit to storage file.
+     * Exports a habit to storage file.
      *
      * @param habit a Habit object
      * @param index the index of the goal the habit is under

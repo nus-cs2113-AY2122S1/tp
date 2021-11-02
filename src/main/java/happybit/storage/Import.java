@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 /**
- * Import class handles the importing of data from the storage file to GoalList.
+ * Handles the importing of data from the storage file to GoalList.
  */
 public class Import {
     private static final String DELIMITER = "##";
@@ -26,7 +26,7 @@ public class Import {
     private static final int HABIT_INDEX = 2;
 
     /**
-     * This method will read from the storage file to return a GoalList object.
+     * Reads from the storage file to return a GoalList object.
      *
      * @param filePath the location of the storage file
      * @return GoalList object that contains user data
@@ -56,7 +56,7 @@ public class Import {
     }
 
     /**
-     * This method will determine the data to add to GoalList and update accordingly.
+     * Determines the data to add to GoalList and update accordingly.
      *
      * @param lineData the data read from the storage file
      * @param goalList the GoalList object to contain user data

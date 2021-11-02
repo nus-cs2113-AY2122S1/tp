@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class handles the parsing of data from storage file and return the appropriate object back to Import class.
+ * Handles the parsing of data from storage file and return the appropriate object back to Import class.
  */
 public class ImportParser {
     private static final String SLEEP = "[SL]";
