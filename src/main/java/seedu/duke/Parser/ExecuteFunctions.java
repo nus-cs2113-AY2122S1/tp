@@ -16,6 +16,7 @@ public abstract class ExecuteFunctions {
     private static final String EDIT_EXRATE = "-exchangerate";
     private static final String EDIT_FORCUR = "-forcur";
     private static final String EDIT_HOMECUR = "-homecur";
+    private static final int NEW_TRIP_ATTRIBUTES_COUNT = 6;
 
 
     /**
@@ -23,9 +24,10 @@ public abstract class ExecuteFunctions {
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
-    protected static void executeCreateTrip(String attributesInString) throws ForceCancelException {
-        String[] newTripInfo = attributesInString.split(" ", 5);
-        if (newTripInfo.length < 5) {
+    protected static void executeCreateTrip(String attributesInString)
+            throws ForceCancelException, IndexOutOfBoundsException {
+        String[] newTripInfo = attributesInString.split("/", NEW_TRIP_ATTRIBUTES_COUNT);
+        if (newTripInfo.length < NEW_TRIP_ATTRIBUTES_COUNT) {
             throw new IndexOutOfBoundsException();
         }
         Trip newTrip = new Trip(newTripInfo);
