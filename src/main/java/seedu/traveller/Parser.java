@@ -34,7 +34,8 @@ import seedu.traveller.exceptions.DistanceNonStringException;
 import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
-import seedu.traveller.exceptions.InvalidShortestFormatException;
+import seedu.traveller.exceptions.InvalidShortestDistException;
+import seedu.traveller.exceptions.InvalidShortestCostException;
 import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -404,7 +405,7 @@ public class Parser {
 
             command = new ShortestCommand("dist", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidShortestFormatException();
+            throw new InvalidShortestDistException();
         }
 
         return command;
@@ -431,7 +432,7 @@ public class Parser {
 
             command = new ShortestCommand("cost", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidShortestFormatException();
+            throw new InvalidShortestCostException();
         }
 
         return command;
