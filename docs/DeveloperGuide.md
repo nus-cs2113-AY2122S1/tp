@@ -95,12 +95,31 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 The Architecture Diagram above shows the high-level design of **SchedUrMods** 
 and how **SchedUrMods** main components are connected.
 
-Given below is a quick overview of main components and how they interact with each other.
+**Main components of the architecture**
 
+`SchedUrMods` contains the main method of the application. It is responsible for,
+- **At app launch**: Initializes the components in the correct sequence, and connects them up with each other.
+- **While app is running**: Reads user input and outputs the appropriate command result.
+- **At shut down**: Shuts down the components and invokes cleanup methods where necessary.
 
+The rest of the App consists of five main components.
+- `UI`: Handles user input and displaying of messages on the terminal.
+- `Parser`: Interpret user input and decides which `Command` is to be executed.
+- `Command`: Collection of user command classes + Handles command execution
+- `Storage`: Reads data from, and writes data to, the hard disk.
+- `Utility`: Collection of classes used by multiple other components.
+- `Logger`: Handles the logging throughout all classes
+- `NUSMods API`: Communicate with NUSMods server to pull module related information.
 
+**How the architecture components interact with each other**
 
-{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
+The **Sequence Diagram** below shows how the components interact with each other for the 
+scenario where the **user inputs any valid command**.
+
+<p align="center">
+    <img src="C:\Users\amosp\Desktop\CS2113 TP - Amos Peh\docs\images\Amos UML Diagrams\
+Sequence Diagram - Input Valid Command.png">
+</p>
 
 
 
