@@ -288,8 +288,8 @@ public class StonksGraph {
 
     private double determineBarValue(double max) {
         double barValue;
-        if(max < 1) {
-            if(max >= 0.1) {
+        if (max < 1) {
+            if (max >= 0.1) {
                 barValue = 0.1;
             } else {
                 barValue = 0.01;
