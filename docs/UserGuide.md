@@ -252,7 +252,7 @@ Examples:
 * `list_marks c/CS2101-C03 a/Oral Presentation`
 
 Expected Output: <br>
-![img.png](images/list_marks.png)
+![img.png](images/Marks_Images/list_marks.png)
 <br>
 
 ### Setting mark for a student's assessment: `set_mark`
@@ -269,7 +269,7 @@ Examples:
 * `set_mark c/CS2101 s/3 a/Oral Presentation m/80`
 
 Expected Output: <br>
-![set_mark.png](images/set_mark.png)
+![set_mark.png](images/Marks_Images/set_mark.png)
 <br>
 
 ### Editing marks for a student's assessment: `edit_mark`
@@ -286,7 +286,7 @@ Examples:
 * `edit_mark c/CS2101-C03 s/3 a/Oral Presentation m/90`
 
 Expected Output: <br>
-![edit_mark.png](images/edit_mark.png)
+![edit_mark.png](images/Marks_Images/edit_mark.png)
 <br>
 
 ### Deleting marks for a student's assessment: `delete_mark`
@@ -302,7 +302,7 @@ Examples:
 * `delete_mark c/CS2101 s/3 a/Oral Presentation`
 
 Expected Output: <br>
-![delete_mark.png](images/delete_mark.png)
+![delete_mark.png](images/Marks_Images/delete_mark.png)
 <br>
 
 ### Viewing average marks for an assessment: `average_marks`
@@ -319,10 +319,10 @@ Examples:
 
 Expected Output: <br>
 (Some students unmarked) <br>
-![average_marks_with_unmarked.png](images/average_marks_with_unmarked.png)
+![average_marks_with_unmarked.png](images/Marks_Images/average_marks_with_unmarked.png)
 <br>
 (All students marked) <br>
-![average_marks_all_marked.png](images/average_marks_all_marked.png)
+![average_marks_all_marked.png](images/Marks_Images/average_marks_all_marked.png)
 <br>
 
 ### Viewing median mark for an assessment: `median_mark`
