@@ -422,9 +422,8 @@ class UiTest {
 
         } catch (MedBotException e) {
             fail();
-            //assertEquals("The specifier z/ is invalid.", e.getMessage());
         }
-        try{
+        try {
             String[] newParameters = {"n/Bob", "z/test"};
             patientList.findPersons(newParameters);
         } catch (MedBotException e) {

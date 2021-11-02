@@ -22,5 +22,6 @@ public class MedicalStaffList extends PersonList {
 
     @Override
     protected String getIcIsDuplicate(String icNumber) {
-        return "The staff with IC " + icNumber + " is already in the record." + END_LINE;    }
+        return "The staff with IC " + icNumber + " is already in the record." + END_LINE;
+    }
 }
