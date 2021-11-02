@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 
 public class DeleteCommand extends Command {
 
+    public static final String commandSyntax = "delete <MODULE_CODE/TASK>";
+    public static final String commandAction =
+            "Removes the module or personal task from timetable";
+
     private static final Logger logger = Logger.getLogger("");
     private final String itemToBeDeleted;
     private final Timetable timetable;

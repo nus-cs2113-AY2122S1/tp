@@ -50,7 +50,7 @@ public class TimetableUI {
      * @param end   the last hour of the timetable
      */
     public static void printScheduleHours(int start, int end) {
-        String infoLine = "\t\t\t\t";
+        String infoLine = String.format(FIXED_LENGTH_FORMAT,"");
         String time;
         for (int u = start; u <= end; u++) {
             time = String.format(FIXED_TIME_FORMAT, u * TIME_MULTIPLIER);
@@ -106,11 +106,11 @@ public class TimetableUI {
     }
 
     private static String addHeader(String day, LineType type) {
+        String str = "";
         if (type.equals(LineType.TYPE)) {
-            return "\t\t" + day + "\t\t";
-        } else {
-            return "\t\t\t\t";
+            str = String.format("%8s",day);
         }
+        return String.format(FIXED_LENGTH_FORMAT,str);
     }
 
     private static String addInfoToString(TimetableItem timetableItem,

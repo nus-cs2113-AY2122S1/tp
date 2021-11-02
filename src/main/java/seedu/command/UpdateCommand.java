@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 
 public class UpdateCommand extends Command {
 
+    public static final String commandSyntax = "update";
+    public static final String commandAction = "Fetches all modules from API to a local save";
+
     private static Logger logger = Logger.getLogger("");
 
     public UpdateCommand() {

@@ -13,6 +13,7 @@ import static org.apache.commons.text.WordUtils.wrap;
 
 public class Module extends BaseModule {
     private static final int FINALISE_INDEX = 1;
+    private static final String EXAM_SPACING = "              ";
 
     private String department;
     private String faculty;
@@ -85,13 +86,14 @@ public class Module extends BaseModule {
         if (attributes != null) {
             isSUable = attributes.isSUable();
         }
-        String fullInfo = "Title: " + title + "\n"
-                + "MCs: " + (int) moduleCredit + "\n"
-                + "Department: " + department + "\n"
-                + wrap(description, 70) + "\n"
-                + "Prerequisites: " + prerequisite + "\n"
-                + "S/U able: " + isSUable + "\n"
-                + "Semester Availability: " + semesterData + "\n";
+        String fullInfo = "Title: " + title + "\n\n"
+                + "MCs: " + (int) moduleCredit + "\n\n"
+                + "Department: " + department + "\n\n"
+                + wrap(description, 70) + "\n\n"
+                + "Prerequisites: " + prerequisite + "\n\n"
+                + "S/U able: " + isSUable + "\n\n"
+                + "Semester Availability: " + semesterData + "\n\n"
+                + "Exam Date(s): " + getAllExams() + "\n\n";
         return fullInfo;
     }
 
@@ -145,32 +147,44 @@ public class Module extends BaseModule {
      * @return true if all secondary conditions are matched, false otherwise.
      */
     public boolean meetsSecondaryConditions(SearchFlags searchFlags) {
-        if (searchFlags.getHasMcFlag()) {
-            if (moduleCredit != searchFlags.getMcs()) {
-                return false;
-            }
+        if (noMcMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasFacultyFlag()) {
-            if (!faculty.equalsIgnoreCase(searchFlags.getFaculty())) {
-                return false;
-            }
+        if (noFacultyMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasDepartmentFlag()) {
-            if (!department.equalsIgnoreCase(searchFlags.getDepartment())) {
-                return false;
-            }
+        if (noDepartmentMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasExamFlag()) {
-            if (!checkExams(searchFlags.getHasExam())) {
-                return false;
-            }
+        if (noExamMatch(searchFlags)) {
+            return false;
         }
-        if (searchFlags.getHasSemesterFlag()) {
-            if (!hasSemester(searchFlags.getSemester())) {
-                return false;
-            }
+        if (noSemesterMatch(searchFlags)) {
+            return false;
         }
         return true;
+    }
+
+    private boolean noMcMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasMcFlag() && moduleCredit != searchFlags.getMcs());
+    }
+
+    private boolean noFacultyMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasFacultyFlag()
+                && !faculty.toLowerCase().contains((searchFlags.getFaculty().toLowerCase())));
+    }
+
+    private boolean noDepartmentMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasDepartmentFlag()
+                && !department.toLowerCase().contains((searchFlags.getDepartment().toLowerCase())));
+    }
+
+    private boolean noExamMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasExamFlag() && !checkExams(searchFlags.getHasExam()));
+    }
+
+    private boolean noSemesterMatch(SearchFlags searchFlags) {
+        return (searchFlags.getHasSemesterFlag() && !hasSemester(searchFlags.getSemester()));
     }
 
     /**
@@ -195,6 +209,22 @@ public class Module extends BaseModule {
             }
             return true;
         }
+    }
+
+    public String getAllExams() {
+        String examdates = "";
+        boolean hasExam = false;
+        for (Semester semester : semesterData) {
+            if (semester.getExamDate() != null) {
+                examdates += "Sem " + semester.getSemester() + ": " + semester.getExamInfo()
+                        + "\n" + EXAM_SPACING;
+                hasExam = true;
+            }
+        }
+        if (!hasExam) {
+            return "No Exam";
+        }
+        return examdates;
     }
 
     public String getExam(int sem) {

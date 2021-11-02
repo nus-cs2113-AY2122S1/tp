@@ -45,7 +45,7 @@ upon.
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest unimods.jar from [here](https://github.com/AY2122S1-CS2113T-W12-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your NUS Mods Lite.
-4. Double-click the file to start the app.
+4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it. Some example commands you can try:
     - `help` : to list all the commands with their description
     - `search <module_code>` : lists module code based on the given partial regex
@@ -214,6 +214,10 @@ The following implemented functions are utilized heavily:
 #### Search
 
 ![](uml-diagrams/Search.png)
+
+*Fetch, Save and Load Mod*
+
+![](uml-diagrams/SearchRef.png)
 
 Utilizes `getOnlineModList()` to get all mods from online. If the module code contains the search term or matches the 
 level flag if inputted, `getOnlineModInfo()` is used to fetch the full data for further comparison with the remaining 

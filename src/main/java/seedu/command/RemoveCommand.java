@@ -12,6 +12,9 @@ import seedu.user.Profile;
 public class RemoveCommand extends Command {
     private final String moduleToBeRemoved;
 
+    public static final String commandSyntax = "remove <MODULE_CODE>";
+    public static final String commandAction = "Removes the module from the profile's record";
+
     public RemoveCommand(String moduleToBeRemoved) {
         this.moduleToBeRemoved = moduleToBeRemoved;
     }

@@ -7,6 +7,7 @@ import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class TextUi {
 
     public static Scanner in = new Scanner(System.in);
 
-    public static final String LINE = "__________________________________________________________________________\n";
+    public static final String LINE = String.format("%120s\n","").replaceAll(" ","_");
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
     private static final String LOGO = "  _    _       _ __  __           _     \n"
@@ -34,21 +35,10 @@ public class TextUi {
     private static final String PROMPT_CURSOR = "==>";
     private static final String PREREQ_SUCCESS = "Yes! You are eligible to take up: ";
     private static final String PREREQ_FAIL = "Oops, you have not met the module's prerequisite: ";
-    private static final String HELP_MESSAGE = LINE
-            + "\tUNIMods accepts the following commands:-\n"
-            + "\t\t| No.| Command Syntax                |            Command Action                      |\n"
-            + "\t\t| 1. | search <module_code>          | Search module based on the given partial regex |\n"
-            + "\t\t| 2. | show <module_code>            | Display module information                     |\n"
-            + "\t\t| 3. | add <module_code>             | Add module to the Timetable                    |\n"
-            + "\t\t| 4. | delete <module_code>          | Deletes module from the Timetable              |\n"
-            + "\t\t| 5. | clear                         | Deletes all modules from the Timetable         |\n"
-            + "\t\t| 6. | timetable                     | Display the Timetable                          |\n"
-            + "\t\t| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |\n"
-            + "\t\t| 8. | remove <module_code>          | Remove the module from the Transcript          |\n"
-            + "\t\t| 9. | calculate cap                 | Displays the Cumulative Average Point          |\n"
-            + "\t\t| 10.| exit                          | Exit From Program                              |\n"
-            + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
-            + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
+    private static final String HELP_HEADER = LINE + "\tUNIMods accepts the following commands:-\n";
+    private static final String HELP_FOOTER =
+            "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
+            + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n";
 
     public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
     public static final String ERROR_MODULE_NOT_IN_TRANSCRIPT = "OOPS, this module does not exist in your Transcript";
@@ -132,8 +122,12 @@ public class TextUi {
         System.out.print(LINE + "> Bye friend!\n> See you again! :)\n" + LINE);
     }
 
-    public static void printHelpMessage() {
-        System.out.print(HELP_MESSAGE);
+    public static void printHelpHeader() {
+        System.out.print(HELP_HEADER);
+    }
+
+    public static void printHelpFooter() {
+        System.out.println(HELP_FOOTER);
     }
 
     public static void printInvalidCommandMessage() {
@@ -152,13 +146,17 @@ public class TextUi {
         System.out.println("Error occurred.");
     }
 
+    public static void printMcErrorMessage() {
+        System.out.println("Invalid input for MC flag. MC flag is ignored.");
+    }
+
     public static void printUpdateStartMessage() {
-        System.out.println("Updating, standby...");
+        System.out.println("Updating, standby... This may take up to 10 minutes.");
         System.out.println("Press ENTER to cancel the update.");
     }
 
     public static void printUpdateInterruptMessage() {
-        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
+        System.out.println("\n" + LINE + "UPDATE CANCELLED.\n" + LINE);
     }
 
     public static void printUpdateSuccessMessage() {
@@ -178,7 +176,8 @@ public class TextUi {
     }
 
     public static void printNoConnectionMessage() {
-        System.out.println(LINE + "Failed to connect to NUSMods API. Loading saved information.");
+        System.out.println(LINE + "Failed to connect to NUSMods API. This could either be because the mod does not "
+                + "exist, or due to a connection error. \nChecking local saved information.");
         System.out.println(LINE);
     }
 
@@ -310,5 +309,30 @@ public class TextUi {
 
     public static void printEditMessage() {
         System.out.println("Noted, event name has been changed");
+    }
+
+    public static void printUpdateProgressMessage(int count) {
+        System.out.print("\rApproximately ");
+        System.out.printf("%.2f", (double)count / 130);
+        System.out.print("% done.");
+    }
+
+    public static void printSearchStartMessage() {
+        System.out.println("Searching, standby...");
+        System.out.println("If nothing is appearing even after a while, press ENTER to cancel the search "
+                + "and narrow down your search terms.");
+    }
+
+    public static void printInvalidMcMessage() {
+        System.out.println("Your MC flag has an invalid input, please check your MC flag.");
+    }
+
+    public static void printInvalidFlagMessage() {
+        System.out.println("You have inputted some invalid flags, please check your flags.");
+    }
+
+    public static void printStorageErrorMessage() {
+        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself. Delete "
+                + "all files in your Module directory.");
     }
 }
