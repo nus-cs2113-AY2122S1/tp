@@ -33,21 +33,8 @@ public class AssessmentList implements ClassChecker {
      * @return true if success, else false.
      */
     public boolean addAssessment(Assessment assessment) {
-        double totalWeightage = 0;
-        for (Assessment a : assessments) {
-            if (a.getName().equalsIgnoreCase(assessment.getName())) {
-                return false;
-            }
-
-            totalWeightage += a.getWeightage();
-        }
-
-        double newTotalWeightage = totalWeightage + assessment.getWeightage();
-        boolean isWeightageValid = Assessment.isWeightageWithinRange(newTotalWeightage);
-        boolean isMaximumMarksValid = assessment.getMaximumMarks() >= Assessment.MINIMUM_MARKS;
-        if (!isWeightageValid || !isMaximumMarksValid) {
-            return false;
-        }
+        assert assessment.getMaximumMarks() >= Assessment.MINIMUM_MARKS;
+        assert Assessment.isWeightageWithinRange(assessment.getWeightage());
 
         assessments.add(assessment);
         return true;
