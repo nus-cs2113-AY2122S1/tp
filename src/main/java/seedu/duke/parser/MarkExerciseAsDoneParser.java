@@ -19,6 +19,8 @@ public class MarkExerciseAsDoneParser extends Parser {
     private Command prepareMarkExerciseAsDone(String commandArgs) {
         try {
             int[] indices = parseWorkoutAndExerciseIndex(commandArgs, false);
+            //returns array of length 2, exercise index at index 0 and workout index at index 1
+
             int exerciseIndex = indices[0];
             int workoutIndex = indices[1];
 
