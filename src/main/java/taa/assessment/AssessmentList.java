@@ -43,8 +43,9 @@ public class AssessmentList implements ClassChecker {
         }
 
         double newTotalWeightage = totalWeightage + assessment.getWeightage();
-        if (!Assessment.isWeightageWithinRange(newTotalWeightage)
-                || assessment.getMaximumMarks() < Assessment.MINIMUM_MARKS) {
+        boolean isWeightageValid = Assessment.isWeightageWithinRange(newTotalWeightage);
+        boolean isMaximumMarksValid = assessment.getMaximumMarks() >= Assessment.MINIMUM_MARKS;
+        if (!isWeightageValid || !isMaximumMarksValid) {
             return false;
         }
 
@@ -86,6 +87,25 @@ public class AssessmentList implements ClassChecker {
         }
 
         return null;
+    }
+
+    public double totalWeightageForEditAssessmentCommand(String assessmentName) {
+        double totalWeightage = 0;
+        for (Assessment a : assessments) {
+            if (!a.getName().equalsIgnoreCase(assessmentName)) {
+                totalWeightage += a.getWeightage();
+            }
+        }
+        return totalWeightage;
+    }
+
+    public boolean checkRepeatedName(String newAssessmentName) {
+        for (Assessment a : assessments) {
+            if (a.getName().equalsIgnoreCase(newAssessmentName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
