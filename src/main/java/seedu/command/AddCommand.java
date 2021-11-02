@@ -46,73 +46,104 @@ public class AddCommand extends Command {
             module = NusMods.fetchModOnline(moduleCode);
             checkModuleExist(module);
             TextUi.printAddMessage(moduleCode);
-
             Semester semesterData = module.getSemester(semester);
-            try {
-                ArrayList<Lesson> lecture;
-                lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
-                lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
-
-                ArrayList<Lesson> tutorial;
-                tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
-
-                ArrayList<Lesson> laboratory;
-                laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
-
-                addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
-            } catch (AddException e) {
-                e.printMessage();
-            }
+            addLesson(semesterData, module);
         } else if (getFlag() == AddFlag.EVENT) {
-            String description = addUI.getReply(FIRST_QN).trim();
-            if (isValidDescription(description)) {
-                throw new AddException("Description is Empty, please enter something valid");
-            }
-
-            String date = addUI.getReply(SECOND_QN).trim();
-            if (isValidDate(date)) {
-                throw new AddException("Invalid Date Format (Format: Monday)");
-            }
-
-            String startTime = addUI.getReply(THIRD_QN).trim();
-            try {
-                Integer.parseInt(startTime);
-            } catch (NumberFormatException e) {
-                throw new AddException("Invalid Start Time Entered (Format: 1600)");
-            }
-            if (isValidTime(startTime)) {
-                throw new AddException("Invalid Start Time Entered (Format: 1600)");
-            }
-
-            String endTime = addUI.getReply(FOURTH_QN).trim();
-            try {
-                Integer.parseInt(endTime);
-            } catch (NumberFormatException e) {
-                throw new AddException("Invalid End Time Entered (Format: 1600)");
-            }
-            if (isValidTime(endTime)) {
-                throw new AddException("Invalid End Time Entered (Format: 1600)");
-            }
-
-            if (isEndBeforeStart(startTime, endTime)) {
-                throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
-                        + "All Events can only occur within a single day");
-            }
-
-            String location = addUI.getReply(FIFTH_QN).trim();
-
-            TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime, location);
-            if (timetable.isConflict(event)) {
-                throw new AddException("Selected timeslot is occupied, please delete before proceeding");
-            }
-
+            TimetableUserItem event = getEvent();
             timetable.addEvent(event.getDayOfWeek(), event);
             timetable.addToEvents(event);
-
-            addUI.printEventMessage(event, date);
+            addUI.printEventMessage(event);
         }
     }
 
+    public TimetableUserItem getEvent() {
+        TimetableUserItem event = null;
+        try {
+            String description = getDescription();
+            String date = getDate();
+            String startTime = getStartTime();
+            String endTime = getEndTime();
+            verifyCorrectTime(startTime, endTime);
+            String location = getLocation();
+            event = new TimetableUserItem(description, date, startTime, endTime, location);
+            verifyNoConflict(event);
+        } catch (AddException e) {
+            e.printMessage();
+        }
+        return event;
+    }
+
+    public void verifyNoConflict(TimetableUserItem event) throws AddException {
+        if (timetable.isConflict(event)) {
+            throw new AddException("Selected timeslot is occupied, please delete before proceeding");
+        }
+    }
+    public String getLocation() {
+        return addUI.getReply(FIFTH_QN).trim();
+    }
+    public void verifyCorrectTime(String startTime, String endTime) throws AddException {
+        if (isEndBeforeStart(startTime, endTime)) {
+            throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
+                    + "All Events can only occur within a single day");
+        }
+    }
+    public String getEndTime() throws AddException {
+        String endTime = addUI.getReply(FOURTH_QN).trim();
+        try {
+            Integer.parseInt(endTime);
+        } catch (NumberFormatException e) {
+            throw new AddException("Invalid End Time Entered (Format: 1600)");
+        }
+        if (isValidTime(endTime)) {
+            throw new AddException("Invalid End Time Entered (Format: 1600)");
+        }
+        return endTime;
+    }
+
+    public String getStartTime() throws AddException {
+        String startTime = addUI.getReply(THIRD_QN).trim();
+        try {
+            Integer.parseInt(startTime);
+        } catch (NumberFormatException e) {
+            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+        }
+        if (isValidTime(startTime)) {
+            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+        }
+        return startTime;
+    }
+    public String getDate() throws AddException {
+        String date = addUI.getReply(SECOND_QN).trim();
+        if (isValidDate(date)) {
+            throw new AddException("Invalid Date Format (Format: Monday)");
+        }
+        return date;
+    }
+
+    public String getDescription() throws AddException {
+        String description = addUI.getReply(FIRST_QN).trim();
+        if (isValidDescription(description)) {
+            throw new AddException("Description is Empty, please enter something valid");
+        }
+        return description;
+    }
+    public void addLesson(Semester semesterData, Module module) {
+        try {
+            ArrayList<Lesson> lecture;
+            lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
+            lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
+
+            ArrayList<Lesson> tutorial;
+            tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
+
+            ArrayList<Lesson> laboratory;
+            laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
+
+            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
+        } catch (AddException e) {
+            e.printMessage();
+        }
+    }
     public ArrayList<Lesson> addRemainingLessons(ArrayList<Lesson> lessons,
             ArrayList<Lesson> lecture) throws AddException {
         try {
@@ -135,7 +166,7 @@ public class AddCommand extends Command {
             for (Lesson lesson : lessons) {
                 if (lesson.getLessonType().equals(lessonType)) {
                     completeList.add(lesson);
-                } else if (lessonType == LECTURE) {
+                } else if (lessonType.equals(LECTURE)) {
                     if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
                         completeList.add(lesson);
                     }
