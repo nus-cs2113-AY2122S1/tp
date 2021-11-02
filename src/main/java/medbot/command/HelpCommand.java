@@ -51,11 +51,11 @@ public class HelpCommand extends Command {
         case SWITCH:
             output = ui.getSwitchHelpMessage();
             break;
-        case ARCHIVE:
-            output = ui.getArchiveHelpMessage(viewType);
+        case HIDE:
+            output = ui.getHideHelpMessage(viewType);
             break;
-        case UNARCHIVE:
-            output = ui.getUnarchiveHelpMessage(viewType);
+        case SHOW:
+            output = ui.getShowHelpMessage(viewType);
             break;
         case EXIT:
             output = ui.getExitHelpMessage();

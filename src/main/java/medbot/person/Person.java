@@ -28,6 +28,7 @@ public abstract class Person implements ListItem {
     private static final int LENGTH_PHONE_NUM_COLUMN = 9;
     private static final int LENGTH_EMAIL_COLUMN = 20;
     private static final int LENGTH_ADDRESS_COLUMN = 20;
+    private static final int LENGTH_EMPTY_STRING = 0;
 
     private int personId = 0;
     protected String icNumber = "";
@@ -36,7 +37,7 @@ public abstract class Person implements ListItem {
     protected String emailAddress = "";
     protected String residentialAddress = "";
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
-    protected boolean isArchived = false;
+    protected boolean isHidden = false;
     protected PersonType personType;
 
     public int getId() {
@@ -114,16 +115,16 @@ public abstract class Person implements ListItem {
         residentialAddress = null;
     }
 
-    public boolean isArchived() {
-        return isArchived;
+    public boolean isHidden() {
+        return isHidden;
     }
 
-    public void archive() {
-        isArchived = true;
+    public void hide() {
+        isHidden = true;
     }
 
-    public void unarchive() {
-        isArchived = false;
+    public void show() {
+        isHidden = false;
     }
 
     /**
@@ -192,7 +193,7 @@ public abstract class Person implements ListItem {
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(residentialAddress) + VERTICAL_LINE_SPACED
-                + getArchiveStatusStorageString(isArchived);
+                + getHideStatusStorageString(isHidden);
     }
 
     /**
@@ -201,7 +202,7 @@ public abstract class Person implements ListItem {
      * @param parameters the attributes to check.
      * @return true if all parameters are found, false otherwise.
      */
-    public boolean containsAllParameters(String[] parameters) {
+    public boolean containsAllParameters(String[] parameters) throws MedBotException {
         for (String parameter : parameters) {
             if (!containsParameter(parameter)) {
                 return false;
@@ -210,25 +211,45 @@ public abstract class Person implements ListItem {
         return true;
     }
 
-    private boolean containsParameter(String parameter) {
-        String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
-        if (parameter.startsWith(PARAMETER_NAME)) {
-            return getName().toLowerCase().contains(trimmedParameter);
+    /**
+     * Checks whether wordToCheck contains wordInput.
+     * If wordInput is an empty string, checks whether wordToCheck
+     * is an empty string.
+     *
+     * @param wordToCheck the attributes to check.
+     * @param wordInput the inputted word to check against wordToCheck.
+     * @return true if wordInput is in wordToCheck, false otherwise.
+     */
+    private boolean contains(String wordToCheck,String wordInput) {
+        if (wordInput.length() == LENGTH_EMPTY_STRING) {
+            return wordToCheck.length() == LENGTH_EMPTY_STRING;
         }
-        if (parameter.startsWith(PARAMETER_IC)) {
-            return getIcNumber().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_PHONE)) {
-            return getPhoneNumber().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_EMAIL)) {
-            return getEmailAddress().toLowerCase().contains(trimmedParameter);
-        }
-        if (parameter.startsWith(PARAMETER_ADDRESS)) {
-            return getResidentialAddress().toLowerCase().contains(trimmedParameter);
-        }
+        return wordToCheck.toLowerCase().contains(wordInput);
+    }
 
-        return false;
+    private boolean containsParameter(String parameter) throws MedBotException {
+        String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
+        String paramSpecifier = parameter.substring(0, PARAMETER_BUFFER);
+
+        switch (paramSpecifier) {
+        case (PARAMETER_NAME) :
+            return contains(getName(), trimmedParameter);
+
+        case (PARAMETER_IC) :
+            return contains(getIcNumber(), trimmedParameter);
+
+        case (PARAMETER_PHONE) :
+            return contains(getPhoneNumber(), trimmedParameter);
+
+        case (PARAMETER_EMAIL) :
+            return contains(getEmailAddress(), trimmedParameter);
+
+        case (PARAMETER_ADDRESS) :
+            return contains(getResidentialAddress(), trimmedParameter);
+
+        default:
+            throw new MedBotException("The specifier " + paramSpecifier + " is invalid.");
+        }
     }
 
 
@@ -285,12 +306,12 @@ public abstract class Person implements ListItem {
     }
 
     /**
-     * Return "A" if person is archived, "U" otherwise.
+     * Return "H" if person is hidden, "S" otherwise.
      *
-     * @param isArchived whether person is archived or not
-     * @return "A" is person is archived, "U" otherwise
+     * @param isHidden whether person is hidden or not
+     * @return "H" is person is hidden, "S" otherwise
      */
-    protected String getArchiveStatusStorageString(boolean isArchived) {
-        return (isArchived) ? "A" : "U";
+    protected String getHideStatusStorageString(boolean isHidden) {
+        return (isHidden) ? "H" : "S";
     }
 }

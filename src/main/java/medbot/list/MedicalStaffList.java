@@ -11,13 +11,13 @@ public class MedicalStaffList extends PersonList {
     }
 
     @Override
-    protected String getAlreadyArchivedErrorMessage(int staffId) {
-        return "The staff with ID " + staffId + " is already archived." + END_LINE;
+    protected String getAlreadyHiddenErrorMessage(int staffId) {
+        return "The staff with ID " + staffId + " is already hidden." + END_LINE;
     }
 
     @Override
-    protected String getAlreadyUnarchivedErrorMessage(int staffId) {
-        return "The staff with ID " + staffId + " is already unarchived." + END_LINE;
+    protected String getAlreadyShownErrorMessage(int staffId) {
+        return "The staff with ID " + staffId + " is already not-hidden." + END_LINE;
     }
 
     @Override

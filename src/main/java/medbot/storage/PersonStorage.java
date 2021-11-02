@@ -54,12 +54,12 @@ public abstract class PersonStorage extends Storage {
         }
 
         int personId = personDetails.first;
-        boolean isArchived = personDetails.second;
+        boolean isHidden = personDetails.second;
         ArrayList<String> prefixPlusPersonParameters = personDetails.third;
 
         person.setId(personId);
-        if (isArchived) {
-            person.archive();
+        if (isHidden) {
+            person.hide();
         }
 
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
@@ -97,21 +97,22 @@ public abstract class PersonStorage extends Storage {
         }
 
         int listItemParametersLastIndex = listItemParameters.length - 1;
-        String isArchivedParameter = listItemParameters[listItemParametersLastIndex];
-        boolean isArchived = convertStorageArchiveParameterToBoolean(isArchivedParameter);
+        String isHiddenParameter = listItemParameters[listItemParametersLastIndex];
+        boolean isHidden = convertStorageHideParameterToBoolean(isHiddenParameter);
 
-        return new Triple<>(listItemId, isArchived, prefixPlusListItemParameters);
+
+        return new Triple<>(listItemId, isHidden, prefixPlusListItemParameters);
     }
 
 
-    protected static boolean convertStorageArchiveParameterToBoolean(String storageArchiveParameter)
+    protected static boolean convertStorageHideParameterToBoolean(String storageHideParameter)
             throws MedBotException {
-        if (storageArchiveParameter.equals("U")) {
+        if (storageHideParameter.equals("S")) {
             return false;
-        } else if (storageArchiveParameter.equals("A")) {
+        } else if (storageHideParameter.equals("H")) {
             return true;
         } else {
-            throw new MedBotException("Invalid storage archive parameter");
+            throw new MedBotException("Invalid storage hide parameter");
         }
     }
 }

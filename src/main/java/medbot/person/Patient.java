@@ -7,7 +7,7 @@ public class Patient extends Person {
     }
 
     public String toString() {
-        return "Patient ID: " + getId() + " " + super.toString();
+        return "Patient ID: " + getId() + super.toString();
     }
 
 }

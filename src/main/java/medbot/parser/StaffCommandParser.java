@@ -2,12 +2,12 @@ package medbot.parser;
 
 import medbot.command.Command;
 import medbot.command.personcommand.staffcommand.AddStaffCommand;
-import medbot.command.personcommand.staffcommand.ArchiveStaffCommand;
+import medbot.command.personcommand.staffcommand.HideStaffCommand;
 import medbot.command.personcommand.staffcommand.DeleteStaffCommand;
 import medbot.command.personcommand.staffcommand.EditStaffCommand;
 import medbot.command.personcommand.staffcommand.FindStaffCommand;
 import medbot.command.personcommand.staffcommand.ListStaffCommand;
-import medbot.command.personcommand.staffcommand.UnarchiveStaffCommand;
+import medbot.command.personcommand.staffcommand.ShowStaffCommand;
 import medbot.command.personcommand.staffcommand.ViewStaffCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Staff;
@@ -21,8 +21,8 @@ public abstract class StaffCommandParser {
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_ARCHIVE = "archive";
-    private static final String COMMAND_UNARCHIVE = "unarchive";
+    private static final String COMMAND_HIDE = "hide";
+    private static final String COMMAND_SHOW = "show";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
 
@@ -52,11 +52,11 @@ public abstract class StaffCommandParser {
         if (userInput.startsWith(COMMAND_FIND)) {
             return parseFindStaffCommand(userInput);
         }
-        if (userInput.startsWith(COMMAND_ARCHIVE)) {
-            return parseArchiveStaffCommand(userInput);
+        if (userInput.startsWith(COMMAND_HIDE)) {
+            return parseHideStaffCommand(userInput);
         }
-        if (userInput.startsWith(COMMAND_UNARCHIVE)) {
-            return parseUnarchiveStaffCommand(userInput);
+        if (userInput.startsWith(COMMAND_SHOW)) {
+            return parseShowStaffCommand(userInput);
         }
 
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
@@ -104,14 +104,14 @@ public abstract class StaffCommandParser {
     }
 
     /**
-     * Parses user input and returns ListPatientCommand with the parameter to retrieve archived or unarchived patients.
+     * Parses user input and returns ListPatientCommand with the parameter to retrieve hidden or not-hidden patients.
      *
      * @param userInput String containing the full user input.
      * @return ListPatientCommand object.
      */
     private static ListStaffCommand parseListStaffCommand(String userInput) throws MedBotParserException {
-        boolean getArchivedPersons = ParserUtils.parseListParameter(userInput.substring(4));
-        return new ListStaffCommand(getArchivedPersons);
+        boolean getHiddenPersons = ParserUtils.parseListParameter(userInput.substring(4));
+        return new ListStaffCommand(getHiddenPersons);
     }
 
     /**
@@ -134,27 +134,27 @@ public abstract class StaffCommandParser {
     }
 
     /**
-     * Parses user input and returns ArchiveStaffCommand with the specified staff ID.
+     * Parses user input and returns HideStaffCommand with the specified staff ID.
      *
      * @param userInput String containing the full user input.
-     * @return ArchiveStaffCommand object.
+     * @return HideStaffCommand object.
      * @throws MedBotParserException when staff id given is not specified or not a number.
      */
-    private static ArchiveStaffCommand parseArchiveStaffCommand(String userInput) throws MedBotParserException {
-        int personId = ParserUtils.parseId(userInput.substring(7));
-        return new ArchiveStaffCommand(personId);
+    private static HideStaffCommand parseHideStaffCommand(String userInput) throws MedBotParserException {
+        int personId = ParserUtils.parseId(userInput.substring(4));
+        return new HideStaffCommand(personId);
     }
 
     /**
-     * Parses user input and returns UnarchiveStaffCommand with the specified staff ID.
+     * Parses user input and returns ShowStaffCommand with the specified staff ID.
      *
      * @param userInput String containing the full user input.
-     * @return UnarchiveStaffCommand object.
+     * @return ShowStaffCommand object.
      * @throws MedBotParserException when staff id given is not specified or not a number.
      */
-    private static UnarchiveStaffCommand parseUnarchiveStaffCommand(String userInput) throws MedBotParserException {
-        int personId = ParserUtils.parseId(userInput.substring(9));
-        return new UnarchiveStaffCommand(personId);
+    private static ShowStaffCommand parseShowStaffCommand(String userInput) throws MedBotParserException {
+        int personId = ParserUtils.parseId(userInput.substring(4));
+        return new ShowStaffCommand(personId);
     }
 
 }

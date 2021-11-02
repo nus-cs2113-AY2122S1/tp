@@ -10,13 +10,13 @@ public class PatientList extends PersonList {
     }
 
     @Override
-    protected String getAlreadyArchivedErrorMessage(int patientId) {
-        return "The patient with ID " + patientId + " is already archived." + END_LINE;
+    protected String getAlreadyHiddenErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already hidden." + END_LINE;
     }
 
     @Override
-    protected String getAlreadyUnarchivedErrorMessage(int patientId) {
-        return "The patient with ID " + patientId + " is already unarchived." + END_LINE;
+    protected String getAlreadyShownErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already not-hidden." + END_LINE;
     }
 
     @Override

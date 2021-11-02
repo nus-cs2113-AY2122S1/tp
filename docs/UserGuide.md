@@ -127,8 +127,8 @@ find
 delete
 switch
 exit
-archive
-unarchive
+help
+show
 get view
 
 To obtain more information on each command and their respective required inputs, type:
@@ -208,10 +208,10 @@ Address: ADDRESS
 
 List all patients in the patient list.
 
-Format: `list [-ar]`
+Format: `list [-h]`
 
-`list` will only show all unarchived patients. 
-To show archived patients, use `list -ar` instead.
+`list` will only show all not-hidden patients. 
+To show hidden patients, use `list -h` instead.
 
 Example Output:
 
@@ -258,7 +258,7 @@ Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * The attributes given do not have to be in full.
 * At least one attribute must be present.
-* Archived patients will also be displayed.
+* Hidden patients will also be displayed.
 
 Example:
 `find n/Smith`
@@ -275,30 +275,30 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
-### Archive a patient: `archive`
+### Hide a patient: `hide`
 
-Archives a patient in the list. Archived patients are not shown with `list` command. To show all archived patients,
-use `list -ar`.
+Hides a patient in the list. Hidden patients are not shown with `list` command. To show all hidden patients,
+use `list -h`.
 
-This command only works for currently unarchived patients.
+This command only works for currently not-hidden patients.
 
-Format: `archive PATIENT_ID`
-
-Expected output:
-
-`The patient with ID: 1 is archived successfully.`
-
-### Unarchive a patient: `unarchive`
-
-Unarchive a patient in the list. Unarchived patients are shown on `list`
-
-This command only works for currently archived patients.
-
-Format: `unarchive PATIENT_ID`
+Format: `hide PATIENT_ID`
 
 Expected output:
 
-`The patient with ID: 1 is unarchived successfully.`
+`The patient with ID: 1 is now hidden.`
+
+### Show a patient: `show`
+
+Show a patient in the list. Shown (not-hidden) patients are shown on `list`
+
+This command only works for currently hidden patients.
+
+Format: `show PATIENT_ID`
+
+Expected output:
+
+`The patient with ID: 1 is now not hidden.`
 
 ### Scheduler Commands
 
@@ -360,7 +360,7 @@ Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff
 
 ### Listing information of all appointments: `list`
 
-List the information of all appointments, including those of archived patients.
+List the information of all appointments, including those of hidden patients.
 
 Format: `list`
 
@@ -409,8 +409,8 @@ three text files to the other computer, and run the `medbot.jar` in the same new
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
 | **find**     | `find [i/PERSON_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`find i/s1231234A`|
-| **archive**  | `archive PATIENT_ID`<br/>eg., `archive 1`|
-| **unarchive**| `unarchive PATIENT_ID`<br/>eg., `unarchive 1`|
+| **hide**     | `hide PATIENT_ID`<br/>eg., `hide 1`|
+| **show**     | `show PATIENT_ID`<br/>eg., `show 1`|
 
 ### Scheduler View
 
