@@ -231,7 +231,7 @@ public abstract class Person implements ListItem {
         String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
         String paramSpecifier = parameter.substring(0, PARAMETER_BUFFER);
 
-        switch(paramSpecifier) {
+        switch (paramSpecifier) {
         case (PARAMETER_NAME) :
             return contains(getName(), trimmedParameter);
 

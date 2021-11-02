@@ -130,7 +130,7 @@ public abstract class PersonList {
      * @param parameters The attributes to filter persons.
      * @return The filtered persons.
      */
-    public List<String> findPersons(String[] parameters) throws MedBotException{
+    public List<String> findPersons(String[] parameters) throws MedBotException {
         List<String> filteredPersons = new ArrayList<>();
         for (int key : persons.keySet()) {
             Person currentPerson = persons.get(key);
