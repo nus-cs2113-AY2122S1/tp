@@ -332,15 +332,10 @@ public class Parser {
      * @return int Index that is in entry.
      */
     public static Integer getIndex(String entry) {
-        try {
-            String[] words = entry.trim().split(regex);
-            int indexNumber = Integer.parseInt(words[1].trim());
-            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-            return indexNumber;
-        } catch (NumberFormatException e) {
-            Ui.printIndexError();
-            return -1;
-        }
+        String[] words = entry.trim().split(regex);
+        int indexNumber = Integer.parseInt(words[1].trim());
+        assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+        return indexNumber;
     }
 
     /**
