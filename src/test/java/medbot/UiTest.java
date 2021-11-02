@@ -131,9 +131,6 @@ class UiTest {
         Patient patient = new Patient();
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
-        patientList.addPerson(patient);
-        patient.setName("Bob");
-        String patientInfo = patient.toString();
         String expectedOutput =
                 "The information of patient with ID 1 has been edited to:" + END_LINE + END_LINE
                 + "Patient ID: 1" + END_LINE
@@ -144,10 +141,13 @@ class UiTest {
                 + "Address: " + END_LINE;
         int patientId = 1;
         try {
+            patientList.addPerson(patient);
+            patient.setName("Bob");
+            String patientInfo = patient.toString();
             String actualOutput = Ui.getEditMessage(patientId, patientInfo, ViewType.PATIENT_INFO);
             assertEquals(actualOutput, expectedOutput);
         } catch (MedBotException e) {
-            assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
+            fail();
         }
     }
 
@@ -160,8 +160,6 @@ class UiTest {
         staff.setPhoneNumber("91238456");
         staff.setResidentialAddress("25 Dover Road");
         MedicalStaffList staffList = new MedicalStaffList();
-        staffList.addPerson(staff);
-        String staffInfo = staff.toString();
         String expectedOutput =
                 "The information of staff with ID 1 has been edited to:" + END_LINE + END_LINE
                         + "Staff ID: 1 " + END_LINE
@@ -172,10 +170,12 @@ class UiTest {
                         + "Address: 25 Dover Road" + END_LINE;
         int staffId = 1;
         try {
+            staffList.addPerson(staff);
+            String staffInfo = staff.toString();
             String actualOutput = Ui.getEditMessage(staffId, staffInfo, ViewType.MEDICAL_STAFF_INFO);
             assertEquals(actualOutput, expectedOutput);
         } catch (MedBotException e) {
-            assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
+            fail();
         }
     }
 
@@ -194,9 +194,6 @@ class UiTest {
         appointment.setDateTimeCode(27262080); //1 November 2021, 0800
         Scheduler scheduler = new Scheduler();
 
-        scheduler.addPatient(patient);
-        scheduler.addStaff(staff);
-
         String expectedOutput = "The information of appointment with ID 1 has been edited to:" + END_LINE + END_LINE
                 + "Appointment Id: 1" + END_LINE
                 + "Patient ID: 2" + END_LINE
@@ -204,11 +201,13 @@ class UiTest {
                 + "Date/Time: 01 Nov 21 0800HRS" + END_LINE
                 + END_LINE;
         try {
+            scheduler.addPatient(patient);
+            scheduler.addStaff(staff);
             scheduler.addAppointment(appointment);
             String actualOutput = Ui.getEditMessage(1, appointment.toString(),ViewType.SCHEDULER);
             assertEquals(expectedOutput, actualOutput);
         } catch (MedBotException e) {
-            assertEquals("Incomplete appointment.", e.getMessage());
+            fail();
         }
     }
 
@@ -218,8 +217,6 @@ class UiTest {
         Patient patient = new Patient();
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
-        patientList.addPerson(patient);
-        String patientInfo = patient.toString();
         String expectedOutput = "Here's the requested patient:" + END_LINE + END_LINE
                 + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
@@ -227,7 +224,14 @@ class UiTest {
                 + "H/P: " + END_LINE
                 + "Email: John@gmail.com" + END_LINE
                 + "Address: " + END_LINE;
-        assertEquals(expectedOutput, PatientUi.getPatientInfo(patientInfo));
+        try {
+            patientList.addPerson(patient);
+            String patientInfo = patient.toString();
+            assertEquals(expectedOutput, PatientUi.getPatientInfo(patientInfo));
+
+        } catch (MedBotException e) {
+            fail();
+        }
     }
 
     @Test
@@ -236,8 +240,7 @@ class UiTest {
         Staff staff = new Staff();
         staff.setName("John Doe");
         staff.setEmailAddress("John@gmail.com");
-        staffList.addPerson(staff);
-        String staffInfo = staff.toString();
+
         String expectedOutput = "Here's the requested staff:" + END_LINE + END_LINE
                 + "Staff ID: 1 " + END_LINE
                 + "IC: " + END_LINE
@@ -245,7 +248,13 @@ class UiTest {
                 + "H/P: " + END_LINE
                 + "Email: John@gmail.com" + END_LINE
                 + "Address: " + END_LINE;
-        assertEquals(expectedOutput, StaffUi.getStaffInfo(staffInfo));
+        try {
+            staffList.addPerson(staff);
+            String staffInfo = staff.toString();
+            assertEquals(expectedOutput, StaffUi.getStaffInfo(staffInfo));
+        } catch (MedBotException e) {
+            fail();
+        }
     }
 
     @Test
@@ -254,11 +263,11 @@ class UiTest {
         Patient patient1 = new Patient();
         patient1.setName("John Doe");
         patient1.setEmailAddress("John@gmail.com");
-        patientList.addPerson(patient1);
         Patient patient2 = new Patient();
         patient2.setName("Bob");
         patient2.setPhoneNumber("88889999");
-        patientList.addPerson(patient2);
+
+
         String expectedOutput =
             "Here is a list of all patients:" + END_LINE
             + "For full details of each patient, please use the command \"view PATIENT_ID\"" + END_LINE
@@ -274,8 +283,13 @@ class UiTest {
             + END_LINE
             + " ----------------------------------------------------------------------------------------------------- "
             + END_LINE;
-
-        assertEquals(expectedOutput, PatientUi.getAllPatientsString(patientList.listPersons(false)));
+        try {
+            patientList.addPerson(patient1);
+            patientList.addPerson(patient2);
+            assertEquals(expectedOutput, PatientUi.getAllPatientsString(patientList.listPersons(false)));
+        } catch (MedBotException e) {
+            fail();
+        }
     }
 
     @Test
@@ -284,11 +298,10 @@ class UiTest {
         Staff staff1 = new Staff();
         staff1.setName("John Doe");
         staff1.setEmailAddress("John@gmail.com");
-        staffList.addPerson(staff1);
+
         Staff staff2 = new Staff();
         staff2.setName("Bob");
         staff2.setPhoneNumber("88889999");
-        staffList.addPerson(staff2);
         String expectedOutput =
             "Here is a list of all staffs:" + END_LINE
                     + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
@@ -310,8 +323,14 @@ class UiTest {
                     + " ------------------------------------------------------"
                     + "----------------------------------------------- "
                     + END_LINE;
+        try {
+            staffList.addPerson(staff1);
+            staffList.addPerson(staff2);
+            assertEquals(expectedOutput, StaffUi.getAllStaffsString(staffList.listPersons(false)));
 
-        assertEquals(expectedOutput, StaffUi.getAllStaffsString(staffList.listPersons(false)));
+        } catch (MedBotException e) {
+            fail();
+        }
     }
 
     @Test
@@ -376,11 +395,9 @@ class UiTest {
         Patient patient1 = new Patient();
         patient1.setName("John Doe");
         patient1.setEmailAddress("John@gmail.com");
-        patientList.addPerson(patient1);
         Patient patient2 = new Patient();
         patient2.setName("Bob");
         patient2.setPhoneNumber("88889999");
-        patientList.addPerson(patient2);
         String expectedOutput =
             "Here is a list of all patients:" + END_LINE
             + "For full details of each patient, please use the command \"view PATIENT_ID\"" + END_LINE
@@ -398,9 +415,16 @@ class UiTest {
         String[] parameters = {"n/Bob"};
 
         try {
+            patientList.addPerson(patient1);
+            patientList.addPerson(patient2);
             List<String> params = patientList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.PATIENT_INFO), expectedOutput);
 
+        } catch (MedBotException e) {
+            fail();
+            //assertEquals("The specifier z/ is invalid.", e.getMessage());
+        }
+        try{
             String[] newParameters = {"n/Bob", "z/test"};
             patientList.findPersons(newParameters);
         } catch (MedBotException e) {
@@ -414,11 +438,9 @@ class UiTest {
         Staff staff1 = new Staff();
         staff1.setName("John Doe");
         staff1.setEmailAddress("John@gmail.com");
-        staffList.addPerson(staff1);
         Staff staff2 = new Staff();
         staff2.setName("Bob");
         staff2.setPhoneNumber("88889999");
-        staffList.addPerson(staff2);
         String expectedOutput =
                 "Here is a list of all staffs:" + END_LINE
                         + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
@@ -440,9 +462,15 @@ class UiTest {
 
         String[] parameters = {"n/Bob"};
         try {
+            staffList.addPerson(staff1);
+            staffList.addPerson(staff2);
             List<String> params = staffList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.MEDICAL_STAFF_INFO), expectedOutput);
+        } catch (MedBotException e) {
+            fail();
+        }
 
+        try {
             String[] newParameters = {"n/Bob", "z/test"};
             staffList.findPersons(newParameters);
         } catch (MedBotException e) {
