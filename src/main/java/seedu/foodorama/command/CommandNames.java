@@ -23,10 +23,10 @@ public enum CommandNames {
     SORT_DISH("sort dish", new SortDishCommand()),
     SORT_INGR("sort ingr", new SortIngrCommand()),
     EDIT_DISH_NAME("edit dish name", new EditDishNameCommand()),
-    EDIT_DISH_WASTAGE("edit dish wastage", new EditDishWasteCommand()),
+    EDIT_DISH_WASTE("edit dish waste", new EditDishWasteCommand()),
     EDIT_INGR_NAME("edit ingr name", new EditIngrNameCommand()),
-    EDIT_INGR_WASTAGE("edit ingr wastage", new EditIngrWasteCommand()),
-    EDIT_INGR_STORAGE("edit ingr storage", new EditIngrStoredCommand());
+    EDIT_INGR_WASTE("edit ingr waste", new EditIngrWasteCommand()),
+    EDIT_INGR_STORAGE("edit ingr stored", new EditIngrStoredCommand());
 
 
     private String name;
