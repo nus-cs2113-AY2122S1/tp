@@ -312,6 +312,7 @@ public class Parser {
             tripName = parseFieldValue(userInput, 0, dayIdx);
             rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, keywordIdx);
             keyword = parseFieldValue(userInput, keywordIdx + KEY_LENGTH, userInput.length());
+            assert !keyword.equals(" ") : "keyword should not be blank.";
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchItemFormatException();
         }
