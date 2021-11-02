@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class EditContactCommand extends Command {
     public static final int PERSONAL_CONTACT_INDEX = -1;
+    private static final int ALL_CONTACTS_INDEX = -2;
     public static final int NUMBER_OF_FIELDS = 6;
     public static final String EDIT_TYPE = "edit";
     String[] contactDetails;
@@ -26,23 +27,25 @@ public class EditContactCommand extends Command {
         try {
             if (contactIndex == PERSONAL_CONTACT_INDEX) {
                 updatePersonalContact();
+            } else if (contactIndex == ALL_CONTACTS_INDEX) {
+                ExceptionTextUi.missingIndexEditMessage();
             } else {
                 Contact editedContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
                 editedContact.editContact(contactDetails);
                 handleDuplicates(editedContact);
             }
-        } catch (IndexOutOfBoundsException | InvalidFlagException e) {
+        } catch (IndexOutOfBoundsException e) {
             //triggerred when inputs are "edit <wrong_index> <proper flags>"
             ExceptionTextUi.numOutOfRangeEditMessage(contactList.getListSize());
         }
     }
 
-    private void updatePersonalContact() throws InvalidFlagException {
+    private void updatePersonalContact() {
         personalContact.editContact(contactDetails);
         TextUi.editPersonalContactMessage(personalContact);
     }
 
-    private void handleDuplicates(Contact postEditContact) throws IndexOutOfBoundsException, InvalidFlagException {
+    private void handleDuplicates(Contact postEditContact) throws IndexOutOfBoundsException {
         if (hasDuplicates(postEditContact, contactList, contactIndex)) {
             TextUi.ignoreContact(EDIT_TYPE);
         } else {

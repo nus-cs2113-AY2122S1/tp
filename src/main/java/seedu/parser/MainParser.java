@@ -29,6 +29,8 @@ import seedu.exception.MissingArgSearchException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingIndexException;
 
+import java.lang.reflect.Array;
+
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 public class MainParser {
@@ -193,9 +195,11 @@ public class MainParser {
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (MissingDetailException | MissingIndexException | MissingArgEditException e) {
-            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
         } catch (NumberFormatException e) {
+            return new FailedCommand(FailedCommandType.INVALID_INDEX_EDIT);
+        } catch (MissingIndexException | MissingDetailException | MissingArgEditException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARGS_EDIT);
+        } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND_EDIT);
         } catch (DuplicateDetailException e) {
             return new FailedCommand(FailedCommandType.DUPLICATE_DETAIL);
@@ -238,9 +242,9 @@ public class MainParser {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
             return new ViewContactCommand(viewedIndex);
-        } catch (NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
-        } catch (MissingIndexException e) {
+        } catch (MissingIndexException | NumberFormatException e) {
             return new FailedCommand(FailedCommandType.MISSING_INDEX);
         }
     }
@@ -251,9 +255,9 @@ public class MainParser {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
             boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
             return new DeleteContactCommand(deletedIndex, hasDeletedDetail);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
-        } catch (MissingIndexException e) {
+        } catch (MissingIndexException | NumberFormatException e) {
             return new FailedCommand(FailedCommandType.MISSING_INDEX);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);

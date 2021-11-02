@@ -37,12 +37,12 @@ public class IndexParser {
             return REMOVE_ALL_ID;
         }
         if (!significantIndex.matches(numbers)) {
-            throw new MissingIndexException();
+            throw new NumberFormatException();
         }
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         int index = Integer.parseInt(significantIndex);
         if (index < 0) {
-            throw new NumberFormatException();
+            throw new IndexOutOfBoundsException();
         }
         return index;
     }

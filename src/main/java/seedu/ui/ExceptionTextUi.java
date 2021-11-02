@@ -128,6 +128,17 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void missingIndexEditMessage() {
+        String message = "There seems to be missing or invalid index in your request.\n"
+                + "Please enter command in the following way:\n"
+                + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      example : edit 0 -n George -g procoder -te george123\n"
+                + "NOTE : At least one flag and description required\n"
+                + "       Order of parameters do not matter except for INDEX\n"
+                + "       \"me\" is used as the INDEX for personal contact.";
+        printDoubleLineMessage(message);
+    }
+
     //@@author mayankp291
     public static void missingArgEditMessage() {
         String message = "There seems to be missing parameters in your request.\n"
