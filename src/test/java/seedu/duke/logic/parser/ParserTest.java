@@ -82,12 +82,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parseAddLesson_wrongFlag_exceptionThrown() {
-        String userResponse = "add lesson CS2113T Lecture -d MON -e 18:00 -s 16:00 -l www.link.com";
-        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
-    }
-
-    @Test
     public void parseAddLesson_invalidDayOfTheWeek_exceptionThrown() {
         String userResponse = "add lesson CS2113T Lecture -d LOL -s 16:00 -e 18:00 -l www.link.com";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
