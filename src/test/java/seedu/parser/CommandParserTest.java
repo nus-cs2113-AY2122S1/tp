@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.command.AddCommand;
 import seedu.command.Command;
 import seedu.command.ExitCommand;
 import seedu.command.InvalidCommand;

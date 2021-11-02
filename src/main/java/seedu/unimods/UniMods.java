@@ -19,6 +19,7 @@ public class UniMods {
     private static String timetablePath = "data/timetable.json";
     public static Timetable timetable;
     public static TimetableStorage timetableStorage;
+    public static ProfileStorage profileStorage;
     public static CommandParser commandParser = new CommandParser();
     public static ArrayList<Profile> profiles = new ArrayList<>();
     private static Profile profileInUse;
@@ -29,10 +30,10 @@ public class UniMods {
 
     private void setup() {
         timetableStorage = new TimetableStorage(timetablePath);
+        profileStorage = new ProfileStorage();
         timetable = timetableStorage.loadSchedule();
         TextUi.printWelcomeMessage();
-        profiles.add(new Profile("test user", "CEG", "2"));
-        profileInUse = profiles.get(0);
+        profileInUse = profileStorage.loadProfile();
         run();
     }
 
@@ -42,6 +43,7 @@ public class UniMods {
             command = commandParser.parseCommand(TextUi.getCommand(), timetable);
             executeCommand(command);
             timetableStorage.save(timetable);
+            profileStorage.save(profileInUse);
         } while (!command.isExit());
     }
 

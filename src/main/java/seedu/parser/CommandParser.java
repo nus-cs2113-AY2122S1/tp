@@ -17,13 +17,11 @@ import seedu.command.DeleteCommand;
 import seedu.command.SearchCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ShowCommand;
-import seedu.command.AddCommand;
 import seedu.command.flags.AddFlag;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
-import seedu.timetable.TaskType;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
 
