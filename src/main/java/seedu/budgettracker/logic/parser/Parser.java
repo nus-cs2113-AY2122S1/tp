@@ -13,6 +13,7 @@ import seedu.budgettracker.logic.commands.StatCommand;
 import seedu.budgettracker.logic.commands.YearCommand;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.common.exception.EmptyDescriptionException;
+import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
@@ -109,15 +110,13 @@ public class Parser {
                 command = new InvalidCommand("Sorry. I don't understand your command!");
                 break;
             }
-        } catch (NumberFormatException e) {
-            command = new InvalidCommand("Month/ Index inputs don't exist! They are compulsory!");
-        } catch (EmptyDescriptionException e) {
-            command = new InvalidCommand("Expenditure description is empty!");
+        } catch (ParserException e) {
+            command = new InvalidCommand(e.getMessage());
         }
         return command;
     }
 
-    private Command prepareStatCommand(String commandParams) {
+    private Command prepareStatCommand(String commandParams) throws ParserException {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         switch (statOption) {
         case ("-c"):
@@ -129,7 +128,7 @@ public class Parser {
         }
     }
 
-    private Command prepareEditCommand(String commandParams) throws EmptyDescriptionException {
+    private Command prepareEditCommand(String commandParams) throws ParserException {
         String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         try {
@@ -143,16 +142,16 @@ public class Parser {
             default:
                 return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
             }
-        } catch (NumberFormatException | EmptyDescriptionException e) {
-            return new InvalidCommand("Missing inputs!");
+        } catch (NumberFormatException e) {
+            throw new ParserException("Missing type parameters! Make sure to indicate '-b','-e' or '-l'");
         }
     }
 
-    private Command prepareListMonthCommand(String commandParams) {
+    private Command prepareListMonthCommand(String commandParams) throws ParserException {
         try {
             return ListRecordParser.parse(commandParams);
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParserException(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
         }
     }
 
@@ -162,7 +161,7 @@ public class Parser {
      * @param commandParams raw String commandParams
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
-    private Command prepareAddCommand(String commandParams) {
+    private Command prepareAddCommand(String commandParams) throws ParserException {
         try {
             String addType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
             String addParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -176,17 +175,17 @@ public class Parser {
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException | IllegalArgumentException e) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
+        } catch (StringIndexOutOfBoundsException | IllegalArgumentException e) {
+            throw new ParserException(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
 
     }
 
-    private Command prepareFindCommand(String commandParams) {
+    private Command prepareFindCommand(String commandParams) throws ParserException {
         try {
             return new FindCommand(commandParams);
         } catch (StringIndexOutOfBoundsException e) {
-            return new InvalidCommand(String.format("Add message later please", AddCommand.MESSAGE_USAGE));
+            throw new ParserException(String.format("Add message later please", AddCommand.MESSAGE_USAGE));
         }
     }
 
@@ -211,7 +210,7 @@ public class Parser {
      * @param commandParams raw String commandParams
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
-    private Command prepareDeleteCommand(String commandParams) {
+    private Command prepareDeleteCommand(String commandParams) throws ParserException {
         try {
             String deleteType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
             String deleteParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -225,7 +224,7 @@ public class Parser {
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DELETE_COMMAND, DeleteCommand.MESSAGE_USAGE));
         }
     }
