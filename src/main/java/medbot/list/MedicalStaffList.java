@@ -19,4 +19,9 @@ public class MedicalStaffList extends PersonList {
     protected String getAlreadyShownErrorMessage(int staffId) {
         return "The staff with ID " + staffId + " is already not-hidden." + END_LINE;
     }
+
+    @Override
+    protected String getIcIsDuplicate(String icNumber) {
+        return "The staff with IC " + icNumber + " is already in the record." + END_LINE;
+    }
 }

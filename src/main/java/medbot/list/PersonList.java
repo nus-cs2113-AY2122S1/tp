@@ -26,7 +26,8 @@ public abstract class PersonList {
      * @param person Person to be added into the list
      * @return personId that was allocated to the person
      */
-    public int addPerson(Person person) {
+    public int addPerson(Person person) throws MedBotException {
+        checkIcExists(person.getIcNumber());
         int personId = person.getId();
 
         //if person not created from storage data
@@ -94,12 +95,13 @@ public abstract class PersonList {
      * @param oldPersonData the old Person data in the system
      * @param newPersonData the new Person data inputted by the user
      */
-    private void mergeEditPersonData(Person oldPersonData, Person newPersonData) {
+    private void mergeEditPersonData(Person oldPersonData, Person newPersonData) throws MedBotException {
+        if (newPersonData.getIcNumber() != null) {
+            checkIcExists(newPersonData.getIcNumber());
+            oldPersonData.setIcNumber(newPersonData.getIcNumber());
+        }
         if (newPersonData.getName() != null) {
             oldPersonData.setName(newPersonData.getName());
-        }
-        if (newPersonData.getIcNumber() != null) {
-            oldPersonData.setIcNumber(newPersonData.getIcNumber());
         }
         if (newPersonData.getEmailAddress() != null) {
             oldPersonData.setEmailAddress(newPersonData.getEmailAddress());
@@ -269,6 +271,34 @@ public abstract class PersonList {
             throw new MedBotException(getPersonNotFoundErrorMessage(personId));
         }
     }
+
+    /**
+     * Checks if a specified ic is present in the list.
+     *
+     * @param icNumber the ic number to search for
+     * @throws MedBotException if the specified IC exists in the list already.
+     */
+    private void checkIcExists(String icNumber) throws MedBotException {
+        if (icNumber.isBlank()) {
+            return;
+        }
+        for (int key : persons.keySet()) {
+            Person currentPerson = persons.get(key);
+            if (currentPerson.getIcNumber().equals(icNumber)) {
+                throw new MedBotException(getIcIsDuplicate(icNumber));
+            }
+        }
+    }
+
+    /**
+     * Generates the exception message for MedBotExceptions when the recently added Ic Number exists in the record.
+     *
+     * <p>Is overrode by subclasses
+     *
+     * @param icNumber the newly added IC number.
+     * @return exception message when the recently added Ic Number exists in the record.
+     */
+    protected abstract String getIcIsDuplicate(String icNumber);
 
     /**
      * Generates the exception message for MedBotExceptions when no person with the specified id is found.

@@ -40,7 +40,7 @@ public class Scheduler {
      * @param patient Patient to be added into the scheduler
      * @return personId that was allocated to the patient
      */
-    public int addPatient(Person patient) {
+    public int addPatient(Person patient) throws MedBotException {
         return patientList.addPerson(patient);
     }
 
@@ -50,7 +50,7 @@ public class Scheduler {
      * @param staff Staff to be added into the scheduler
      * @return personId that was allocated to the staff
      */
-    public int addStaff(Person staff) {
+    public int addStaff(Person staff) throws MedBotException {
         return medicalStaffList.addPerson(staff);
     }
 
