@@ -27,15 +27,15 @@ public class UpdateEventCommand extends Command {
     }
 
     public CommandResult execute() {
-        if (!updates[INDEX_OF_TITLE].equalsIgnoreCase("")) {
+        if (updates[INDEX_OF_TITLE] != null) {
             eventToBeUpdated.setTitle(updates[INDEX_OF_TITLE]);
         } else if (dateTime != null) {
             eventToBeUpdated.setDateTime(dateTime);
-        } else if (!updates[INDEX_OF_VENUE].equalsIgnoreCase("")) {
+        } else if (updates[INDEX_OF_VENUE] != null) {
             eventToBeUpdated.setVenue(updates[INDEX_OF_VENUE]);
         } else if (budget != 0) {
             eventToBeUpdated.setBudget(budget);
-        } else if (!updates[INDEX_OF_DESCRIPTION].equalsIgnoreCase("")) {
+        } else if (updates[INDEX_OF_DESCRIPTION] != null) {
             eventToBeUpdated.setDescription(updates[INDEX_OF_DESCRIPTION]);
         }
         Ui.postUpdateMessage(eventToBeUpdated);

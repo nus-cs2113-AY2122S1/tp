@@ -22,11 +22,11 @@ public class UpdateTaskCommand extends Command {
     }
 
     public CommandResult execute() {
-        if (!updates[INDEX_OF_TITLE].equalsIgnoreCase("")) {
+        if (updates[INDEX_OF_TITLE] != null) {
             taskToBeUpdated.setTitle(updates[INDEX_OF_TITLE]);
         } else if (dateTime != null) {
             taskToBeUpdated.setDateTime(dateTime);
-        } else if (!updates[INDEX_OF_DESCRIPTION].equalsIgnoreCase("")) {
+        } else if (updates[INDEX_OF_DESCRIPTION] != null) {
             taskToBeUpdated.setDescription(updates[INDEX_OF_DESCRIPTION]);
         }
         Ui.postUpdateMessage(taskToBeUpdated.getEvent());
