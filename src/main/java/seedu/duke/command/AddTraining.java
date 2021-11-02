@@ -13,10 +13,10 @@ import seedu.duke.Ui;
  */
 public class AddTraining {
 
-
-    String invalidTrainingNameErrorMessage = "Blank training name provided. Please input a proper training name.";
-    String invalidTrainingVenueErrorMessage = "Blank training venue provided. Please input a proper training venue.";
-    String invalidTrainingTimeErrorMessage = "Blank training time provided. Please input a proper training time.";
+    String invalidTrainingDetailsErrorMessage = "Invalid training details provided. Please check and ensure all "
+            + "fields are filled.";
+    String duplicateTrainingNameErrorMessage = "Training name already exists in the list. Please input a different "
+            + "training name.";
 
     private String trainingName;
     private String trainingVenue;
@@ -29,7 +29,7 @@ public class AddTraining {
      */
     public AddTraining(TrainingList trainings, TrainingSchedule trainingSched) {
         try {
-            boolean validTraining = verifyTrainingDetails(trainingSched);
+            boolean validTraining = verifyTrainingDetails(trainingSched, trainings);
             if (validTraining) {
                 trainings.addTrainingSchedule(trainingSched);
                 Ui.printAddedTrainingMessage(trainingSched);
@@ -50,24 +50,30 @@ public class AddTraining {
      * @return true if all parameters given are valid
      * @throws InvalidAddTrainingException If there is an error with any of the parameters given.
      */
-    public boolean verifyTrainingDetails(TrainingSchedule trainingSched) throws InvalidAddTrainingException {
+    public boolean verifyTrainingDetails(TrainingSchedule trainingSched, TrainingList trainings) throws InvalidAddTrainingException {
         trainingName = trainingSched.getTrainingName();
         trainingVenue = trainingSched.getTrainingVenue();
         trainingTime = trainingSched.getTrainingTime();
 
+        for (TrainingSchedule training : trainings.getTrainingList()) {
+            if (trainingName.trim().equalsIgnoreCase(training.getTrainingName().trim().toLowerCase())) {
+                throw new InvalidAddTrainingException(duplicateTrainingNameErrorMessage);
+            }
+        }
+
         boolean validTrainingName = trainingName != null && !trainingName.trim().isEmpty();
         if (!validTrainingName) {
-            throw new InvalidAddTrainingException(invalidTrainingNameErrorMessage);
+            throw new InvalidAddTrainingException(invalidTrainingDetailsErrorMessage);
         }
 
         boolean validTrainingVenue = trainingVenue != null && !trainingVenue.trim().isEmpty();
         if (!validTrainingVenue) {
-            throw new InvalidAddTrainingException(invalidTrainingVenueErrorMessage);
+            throw new InvalidAddTrainingException(invalidTrainingDetailsErrorMessage);
         }
 
         boolean validTrainingTime = trainingTime != null && !trainingTime.trim().isEmpty();
         if (!validTrainingTime) {
-            throw new InvalidAddTrainingException(invalidTrainingTimeErrorMessage);
+            throw new InvalidAddTrainingException(invalidTrainingDetailsErrorMessage);
         }
 
         return true;

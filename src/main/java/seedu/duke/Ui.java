@@ -100,6 +100,11 @@ public class Ui {
         System.out.println("To become:  " + newMember);
     }
 
+    public static void printEditTrainingMessage(TrainingSchedule oldTraining, TrainingSchedule newTraining) {
+        System.out.println("Edited Training:\n" + oldTraining.toString());
+        System.out.println("To become:\n" + newTraining.toString());
+    }
+
     public static void printExitMessage() {
         System.out.println("You have successfully exited the programme.");
         printSeparator();

@@ -42,9 +42,8 @@ public class DeleteTraining {
             Ui.printDeletedTrainingMessage(toDelete);
             File trainingFile = new File("CCATrainings.csv");
             writeTrainingFile(trainingFile, trainings);
-            //Update save file
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid index number");
+            System.out.println("Invalid index number. Returning to main search.");
         } catch (AssertionError e) {
             System.out.println("The index to delete must be an integer >= 1");
         }
