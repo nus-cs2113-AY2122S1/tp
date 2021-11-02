@@ -13,8 +13,7 @@ import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
 
-    // static String regex = "(\\/[a-z])+";
-    static String regex = "[\\s]+";
+    static String regex = "(\\/[a-z])+";
 
     public static boolean hasListMemberKeyword(String arg) {
         return arg.trim().matches("^list /m");
@@ -141,18 +140,18 @@ public class Parser {
      */
     public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String entry) {
         // e.g. list /att /t Friday Training /d 0
-        String[] trainingNameAndLabel = entry.trim().split("/t");
+        String[] trainingNameAndLabel = entry.trim().toLowerCase().split("/t");
         AttendanceList filteredAttendanceList = new AttendanceList();
 
         try {
             String trainingName = getTrainingName(trainingNameAndLabel[1].trim());
             for (Attendance attendance : attendanceList.getAttendanceList()) {
-                if (attendance.getTrainingName().equals(trainingName.trim())) {
+                if (attendance.getTrainingName().toLowerCase().equals(trainingName.trim())) {
                     filteredAttendanceList.addAttendance(attendance);
                 }
             }
             if (filteredAttendanceList.getAttendanceListSize() == 0) {
-                System.out.println("No such Training Name is in our attendance records.");
+                Ui.printMissingTraining();
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -339,7 +338,7 @@ public class Parser {
             assert indexNumber >= 1 : "indexNumber should be greater than 1.";
             return indexNumber;
         } catch (NumberFormatException e) {
-            System.out.println("Index must be a number");
+            Ui.printIndexError();
             return -1;
         }
     }
@@ -390,8 +389,8 @@ public class Parser {
         Scanner userInput = new Scanner(System.in);
         String entry = userInput.nextLine();
         while (!(entry.equals("y") || entry.equals("n"))) {
-            System.out.println("Please enter only a 'y' or 'n'.");
-            System.out.print("=> ");
+            Ui.printQuestionToList();
+            Ui.printArrow();
             if (userInput.hasNextLine()) {
                 entry = userInput.nextLine();
             }
@@ -408,7 +407,7 @@ public class Parser {
         String entry = "";
         Scanner userInput = new Scanner(System.in);
         while (!entry.equals("bye")) {
-            System.out.print("=> ");
+            Ui.printArrow();
             if (userInput.hasNextLine()) {
                 entry = userInput.nextLine();
             }
