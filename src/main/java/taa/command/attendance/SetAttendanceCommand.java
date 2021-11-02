@@ -1,24 +1,25 @@
 package taa.command.attendance;
 
+//@@author daknam2001
 import taa.attendance.AttendanceList;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.attendance.Attendance;
-import taa.module.Module;
-import taa.module.ModuleList;
+import taa.teachingclass.TeachingClass;
 import taa.storage.Storage;
 import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
 public class SetAttendanceCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
+        KEY_CLASS_ID,
         KEY_STUDENT_INDEX,
         KEY_LESSON_NUMBER,
         KEY_PRESENT
@@ -33,7 +34,7 @@ public class SetAttendanceCommand extends Command {
     private static final String PRESENT_VALUE = "1";
     private static final String ABSENT_VALUE = "0";
 
-    private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+    private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE = "%s %s/<CLASS_ID> %s/<STUDENT_INDEX> "
         + "%s/<LESSON_NUMBER> %s/<PRESENT>";
 
     public SetAttendanceCommand(String argument) {
@@ -64,23 +65,23 @@ public class SetAttendanceCommand extends Command {
     /**
      * Executes the set_attendance command and sets the attendance of a student.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
-        StudentList studentList = module.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
@@ -117,7 +118,7 @@ public class SetAttendanceCommand extends Command {
             attendance.setPresent(isPresent);
         }
 
-        storage.save(moduleList);
+        storage.save(classList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_SET_ATTENDANCE, student.getName(), attendance));
     }
@@ -127,7 +128,7 @@ public class SetAttendanceCommand extends Command {
         return String.format(
             MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
             COMMAND_SET_ATTENDANCE,
-            KEY_MODULE_CODE,
+            KEY_CLASS_ID,
             KEY_STUDENT_INDEX,
             KEY_LESSON_NUMBER,
             KEY_PRESENT

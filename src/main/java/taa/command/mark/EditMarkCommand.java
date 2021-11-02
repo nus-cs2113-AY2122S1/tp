@@ -3,28 +3,28 @@ package taa.command.mark;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.module.Module;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
 public class EditMarkCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String KEY_NEW_MARKS = "m";
     private static final String[] EDIT_MARKS_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
+        KEY_CLASS_ID,
         KEY_STUDENT_INDEX,
         KEY_ASSESSMENT_NAME,
         KEY_NEW_MARKS
     };
 
-    private static final String MESSAGE_FORMAT_EDIT_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+    private static final String MESSAGE_FORMAT_EDIT_MARKS_USAGE = "%s %s/<CLASS_ID> %s/<STUDENT_INDEX> "
         + "%s/<ASSESSMENT_NAME> %s/<NEW_MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
         + "Marks must be between %d and %,.2f (inclusive)";
@@ -58,29 +58,29 @@ public class EditMarkCommand extends Command {
     /**
      * Executes the edit_marks command and edits the marks of a student's assessment.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
-        StudentList studentList = module.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        AssessmentList assessmentList = module.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = assessmentList.getAssessment(assessmentName);
         if (assessment == null) {
@@ -100,7 +100,7 @@ public class EditMarkCommand extends Command {
         }
 
         editMark(ui, student, assessment, marks);
-        storage.save(moduleList);
+        storage.save(classList);
     }
 
     /**
@@ -128,7 +128,7 @@ public class EditMarkCommand extends Command {
         return String.format(
             MESSAGE_FORMAT_EDIT_MARKS_USAGE,
             COMMAND_EDIT_MARK,
-            KEY_MODULE_CODE,
+            KEY_CLASS_ID,
             KEY_STUDENT_INDEX,
             KEY_ASSESSMENT_NAME,
             KEY_NEW_MARKS

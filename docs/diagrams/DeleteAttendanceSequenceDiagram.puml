@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":DeleteAttendanceCommand" as deleteAttendanceCommand
+Participant ":ModuleList" as moduleList
+Participant ":Module" as module
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+Participant ":AttendanceList" as attendanceList
+Participant ":Storage" as storage
+
+activate taa
+
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : "delete_attendance c/CS2113T\ns/1 l/1"
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput)
+activate parser
+
+create deleteAttendanceCommand
+parser -> deleteAttendanceCommand
+activate deleteAttendanceCommand
+deleteAttendanceCommand -> parser
+deactivate deleteAttendanceCommand
+
+parser --> taa : deleteAttendanceCommand:command
+deactivate parser
+
+taa -> deleteAttendanceCommand : checkArgument()
+activate deleteAttendanceCommand
+
+deleteAttendanceCommand --> taa
+deactivate deleteAttendanceCommand
+
+taa -> deleteAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
+activate deleteAttendanceCommand
+
+deleteAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
+activate moduleList
+moduleList --> deleteAttendanceCommand : module:Module
+deactivate moduleList
+
+deleteAttendanceCommand -> module : getStudentList()
+activate module
+module -> studentList : getStudentAt(studentIndex:int)
+deactivate module
+activate studentList
+studentList --> deleteAttendanceCommand : student:StudentList
+deactivate studentList
+
+deleteAttendanceCommand -> student : getAttendanceList()
+activate student
+student --> deleteAttendanceCommand : attendanceList:AttendanceList
+deactivate student
+
+deleteAttendanceCommand -> attendanceList : deleteAttendance(lessonNumber:int)
+activate attendanceList
+attendanceList --> deleteAttendanceCommand : attendance:Attendance
+deactivate attendanceList
+
+deleteAttendanceCommand -> storage : save(moduleList:ModuleList)
+activate storage
+storage --> deleteAttendanceCommand
+deactivate storage
+
+deleteAttendanceCommand -> ui : printMessage("Attendance removed for ...")
+activate ui
+ui -> user : Display message:\n"Attendance removed for ..."
+ui --> deleteAttendanceCommand
+deactivate ui
+
+deactivate deleteAttendanceCommand
+
+@enduml

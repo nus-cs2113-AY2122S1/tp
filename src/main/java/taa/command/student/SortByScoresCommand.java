@@ -6,23 +6,22 @@ import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.module.Module;
-import taa.module.ModuleList;
+import taa.teachingclass.TeachingClass;
+import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.student.Student;
-import taa.student.StudentList;
-import taa.util.Util;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SortByScoresCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_SORT_ORDER = "o";
     private static final String[] SORT_SCORES_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
+        KEY_CLASS_ID,
         KEY_SORT_ORDER
     };
-    private static final String MESSAGE_FORMAT_SORT_SCORES_USAGE = "%s %s/<MODULE_CODE> "
+    private static final String MESSAGE_FORMAT_SORT_SCORES_USAGE = "%s %s/<CLASS_ID> "
             + "%s/<SORT_ORDER>";
     private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the sorted list of students and their scores";
     public static final String MESSAGE_INVALID_SORT_ORDER = "Please input a valid sort order.";
@@ -43,19 +42,19 @@ public class SortByScoresCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String order = argumentMap.get(KEY_SORT_ORDER);
         if (!order.equalsIgnoreCase("asc") && !order.equalsIgnoreCase("desc")) {
             throw new TaaException(MESSAGE_INVALID_SORT_ORDER);
         }
-        ArrayList<Student> students = module.getStudentList().getStudents();
-        AssessmentList assessmentList = module.getAssessmentList();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         HashMap<Student, Double> unsortedScores = new HashMap<>();
         ArrayList<Student> sortedStudents = new ArrayList<>();
         for (Student student : students) {
@@ -119,7 +118,7 @@ public class SortByScoresCommand extends Command {
         return String.format(
         MESSAGE_FORMAT_SORT_SCORES_USAGE,
         COMMAND_SORT_BY_SCORES,
-        KEY_MODULE_CODE,
+            KEY_CLASS_ID,
         KEY_SORT_ORDER
         );
     }

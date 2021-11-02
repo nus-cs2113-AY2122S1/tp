@@ -2,32 +2,30 @@ package taa.command.assessment;
 
 import taa.Ui;
 import taa.assessment.Assessment;
-import taa.assessment.AssessmentList;
+import taa.teachingclass.ClassList;
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.module.Module;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 import taa.util.Util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EditAssessmentCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_ASSESSMENT_NAME = "n";
     private static final String KEY_NEW_ASSESSMENT_NAME = "nn";
     private static final String KEY_NEW_MAXIMUM_MARKS = "m";
     private static final String KEY_NEW_WEIGHTAGE = "w";
     private static final String[] EDIT_ASSESSMENT_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
+        KEY_CLASS_ID,
         KEY_ASSESSMENT_NAME,
         KEY_NEW_ASSESSMENT_NAME,
         KEY_NEW_MAXIMUM_MARKS,
         KEY_NEW_WEIGHTAGE
     };
 
-    private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<MODULE_CODE> "
+    private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> "
         + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME>] [%s/<NEW_MAXIMUM_MARKS>] [%s/<NEW_WEIGHTAGE>]";
     private static final String MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE = "Invalid new weightage. "
         + "Weightage must be between %,.2f and %,.2f (inclusive)";
@@ -45,14 +43,14 @@ public class EditAssessmentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        boolean hasModuleCode = argumentMap.containsKey(KEY_MODULE_CODE);
+        boolean hasClassId = argumentMap.containsKey(KEY_CLASS_ID);
         boolean hasAssessmentName = argumentMap.containsKey(KEY_ASSESSMENT_NAME);
         boolean hasNewAssessmentName = argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME);
         boolean hasNewMaximumMarks = argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS);
         boolean hasNewWeightage = argumentMap.containsKey(KEY_NEW_WEIGHTAGE);
-        boolean hasNecessaryArguments = hasModuleCode && hasAssessmentName
+        boolean hasOptionalArgument = hasClassId && hasAssessmentName
             && (hasNewAssessmentName || hasNewMaximumMarks || hasNewWeightage);
-        if (!hasNecessaryArguments) {
+        if (!hasOptionalArgument) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -79,25 +77,25 @@ public class EditAssessmentCommand extends Command {
     }
 
     /**
-     * Executes the edit_assessment command and edits an assessment a particular module.
+     * Executes the edit_assessment command and edits an assessment a particular class.
      * The name, maximum marks and weightage of the assessment can be changed.
      * Some new values can be missing and the old values of them will not change.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-        Assessment assessment = module.getAssessmentList().getAssessment(name);
+        Assessment assessment = teachingClass.getAssessmentList().getAssessment(name);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
@@ -116,7 +114,7 @@ public class EditAssessmentCommand extends Command {
                 );
             }
             double totalNewWeightage = 0;
-            ArrayList<Assessment> assessments = module.getAssessmentList().getAssessments();
+            ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
             for (Assessment a : assessments) {
                 if (a.getName() != name) {
                     totalNewWeightage += a.getWeightage();
@@ -153,10 +151,10 @@ public class EditAssessmentCommand extends Command {
         }
 
         assert storage != null : "storage should exist.";
-        storage.save(moduleList);
+        storage.save(classList);
 
         assert ui != null : "ui should exist.";
-        ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_EDITED, moduleCode,
+        ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_EDITED, classId,
             assessment));
     }
 
@@ -165,7 +163,7 @@ public class EditAssessmentCommand extends Command {
         return String.format(
             MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE,
             COMMAND_EDIT_ASSESSMENT,
-            KEY_MODULE_CODE,
+            KEY_CLASS_ID,
             KEY_ASSESSMENT_NAME,
             KEY_NEW_ASSESSMENT_NAME,
             KEY_NEW_MAXIMUM_MARKS,
