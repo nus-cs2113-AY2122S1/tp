@@ -90,7 +90,7 @@ public class FinancialTracker {
     }
 
     /**
-     * Remove an expense entry based on its index.
+     * Removes an expense entry based on its index.
      *
      * @param expenseIndex Index of deleted expense entry.
      * @return Deleted expense object.
