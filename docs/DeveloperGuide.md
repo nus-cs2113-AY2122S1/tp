@@ -108,7 +108,7 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 # 3. Design
 ## 3.1 Architecture
 <p align="center">
-    <img src="C:\Users\amosp\Desktop\CS2113 TP - Amos Peh\docs\images\Amos UML Diagrams\Architecture - SchedUrMods.png">
+    <img src="images/AmosUMLDiagrams/Architecture.png">
 </p>
 
 The Architecture Diagram above shows the high-level design of **SchedUrMods** 
@@ -136,8 +136,7 @@ The **Sequence Diagram** below shows how the components interact with each other
 scenario where the **user inputs any valid command** in to the application.
 
 <p align="center">
-    <img src="C:\Users\amosp\Desktop\CS2113 TP - Amos Peh\docs\images\Amos UML Diagrams\
-Sequence Diagram - Input Valid Command.png">
+    <img src="images/AmosUMLDiagrams/SD_InputValidCommand.png">
 </p>
 
 ## 3.2 UI Component
