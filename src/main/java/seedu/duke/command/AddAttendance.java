@@ -31,7 +31,8 @@ public class AddAttendance {
      * @param attendanceList Contains all attendance objects added.
      * @param attendance Attendance object to be added.
      */
-    public AddAttendance(AttendanceList attendanceList, Attendance attendance, MemberList members, TrainingList trainings) {
+    public AddAttendance(AttendanceList attendanceList, Attendance attendance, MemberList members, 
+                         TrainingList trainings) {
         try {
             boolean validAttendance = verifyAttendanceDetails(attendance, members, trainings);
             if (validAttendance) {
@@ -54,7 +55,8 @@ public class AddAttendance {
      * @return true if all parameters given are valid
      * @throws InvalidAddAttendanceException If there is an error with any of the parameters given.
      */
-    public boolean verifyAttendanceDetails(Attendance attendance, MemberList members, TrainingList trainings) throws InvalidAddAttendanceException {
+    public boolean verifyAttendanceDetails(Attendance attendance, MemberList members, TrainingList trainings)
+        throws InvalidAddAttendanceException {
         memberName = attendance.getMemberName();
         trainingName = attendance.getTrainingName();
         presentOrAbsent = attendance.getAttended();
