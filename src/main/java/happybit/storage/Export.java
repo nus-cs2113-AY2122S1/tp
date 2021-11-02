@@ -17,40 +17,41 @@ public class Export {
     private static final String GOAL_TYPE = "G";
     private static final String HABIT_TYPE = "H";
     private static final String INTERVAL_TYPE = "I";
+    private static final String EMPTY = "";
+    private static final String NULL = "null";
+    private static final String FILE_WRITE = "Allow writing to storage file.";
+    private static final String FILE_WRITE_FAIL = "Failed to write to storage file.";
+    private static final String READ_ONLY = "Writing done. Storage file set to read only.";
+    private static final String SET_READ_ONLY_FAILED = "Failed to set storage file as read only.";
+    private static final String DATE_FORMAT = "ddMMyyyy";
 
     protected String filePath;
+    protected PrintManager printManager;
 
-    public Export(String filePath) {
+    public Export(String filePath, PrintManager printManager) {
         this.filePath = filePath;
+        this.printManager = printManager;
     }
 
-    protected void exportStorage(ArrayList<Goal> goalList) throws HaBitStorageException {
+    protected void exportToStorage(ArrayList<Goal> goalList) throws HaBitStorageException {
         try {
-            clearFile();
-            writeToFile(goalList);
+            this.clearFile();
+            this.writeToFile(goalList);
         } catch (IOException e) {
             throw new HaBitStorageException(e.toString());
         }
     }
 
     protected void clearFile() throws IOException {
-        File storageFile = new File(this.filePath);
-        boolean isWriteable = storageFile.setWritable(true);
-
-        if (isWriteable) {
-            System.out.println("Writing to storage file.");
-        } else {
-            System.out.println("Failed to write to storage file.");
-        }
+        this.setWritable();
 
         FileWriter fileWriter = new FileWriter(this.filePath);
 
-        fileWriter.write("");
+        fileWriter.write(EMPTY);
         fileWriter.close();
     }
 
     protected void writeToFile(ArrayList<Goal> goalList) throws IOException {
-        File storageFile = new File(this.filePath);
         FileWriter fileWriter = new FileWriter(this.filePath, true);
 
         for (Goal goal : goalList) {
@@ -62,13 +63,31 @@ public class Export {
             this.writeHabit(fileWriter, habits, index);
         }
         fileWriter.close();
+        this.setReadOnly();
+    }
 
+    protected void setWritable() {
+        File storageFile = new File(this.filePath);
+        boolean isWriteable = storageFile.setWritable(true);
+
+        if (isWriteable) {
+            this.printManager.printStorageMessage(FILE_WRITE);
+        } else {
+            this.printManager.printStorageMessage(FILE_WRITE_FAIL);
+        }
+    }
+
+    /**
+     * Set the storage file as read only.
+     */
+    protected void setReadOnly() {
+        File storageFile = new File(this.filePath);
         boolean isReadOnly = storageFile.setReadOnly();
 
         if (isReadOnly) {
-            System.out.println("Storage file is not writable.");
+            this.printManager.printStorageMessage(READ_ONLY);
         } else {
-            System.out.println("Failed to disable writing to storage file.");
+            this.printManager.printStorageMessage(SET_READ_ONLY_FAILED);
         }
     }
 
@@ -111,13 +130,13 @@ public class Export {
     }
 
     protected String intervalString(Interval interval, int goalIndex, int habitIndex) {
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         String startDate = format.format(interval.getStartDate());
         String endDate = format.format(interval.getEndDate());
         String completedDate;
 
         if (interval.getCompletedDate() == null) {
-            completedDate = "null";
+            completedDate = NULL;
         } else {
             completedDate = format.format(interval.getCompletedDate());
         }
@@ -131,60 +150,34 @@ public class Export {
     }
 
     protected void exportGoal(Goal goal, int index) throws HaBitStorageException {
+        this.setWritable();
+
         try {
-            File storageFile = new File(this.filePath);
-            boolean isWriteable = storageFile.setWritable(true);
-
-            if (isWriteable) {
-                System.out.println("Writing to storage file.");
-            } else {
-                System.out.println("Failed to write to storage file.");
-            }
-
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             String goalToWrite = this.goalString(goal, index);
 
             fileWriter.write(goalToWrite);
             fileWriter.close();
-
-            boolean isReadOnly = storageFile.setReadOnly();
-
-            if (isReadOnly) {
-                System.out.println("Storage file is not writable.");
-            } else {
-                System.out.println("Failed to disable writing to storage file.");
-            }
         } catch (IOException e) {
             throw new HaBitStorageException(e.getMessage());
         }
+
+        this.setReadOnly();
     }
 
     protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
+        this.setWritable();
+
         try {
-            File storageFile = new File(this.filePath);
-            boolean isWriteable = storageFile.setWritable(true);
-
-            if (isWriteable) {
-                System.out.println("Writing to storage file.");
-            } else {
-                System.out.println("Failed to write to storage file.");
-            }
-
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             String habitToWrite = this.habitString(habit, index);
 
             fileWriter.write(habitToWrite);
             fileWriter.close();
-
-            boolean isReadOnly = storageFile.setReadOnly();
-
-            if (isReadOnly) {
-                System.out.println("Storage file is not writable.");
-            } else {
-                System.out.println("Failed to disable writing to storage file.");
-            }
         } catch (IOException e) {
             throw new HaBitStorageException(e.getMessage());
         }
+
+        this.setReadOnly();
     }
 }

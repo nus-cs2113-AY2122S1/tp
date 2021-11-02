@@ -36,8 +36,8 @@ public class Storage {
     public Storage(String filePath, String fileDir) {
         this.filePath = filePath;
         this.fileDir = fileDir;
-        this.export = new Export(this.filePath);
         this.printManager = new PrintManager();
+        this.export = new Export(this.filePath, this.printManager);
     }
 
     /**
@@ -129,7 +129,7 @@ public class Storage {
      * @throws HaBitStorageException IOException
      */
     public void export(ArrayList<Goal> goalList) throws HaBitStorageException {
-        export.exportStorage(goalList);
+        this.export.exportToStorage(goalList);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Storage {
      * @throws HaBitStorageException IOException
      */
     public void export(Goal goal, int index) throws HaBitStorageException {
-        export.exportGoal(goal, index);
+        this.export.exportGoal(goal, index);
     }
 
     /**
@@ -151,6 +151,6 @@ public class Storage {
      * @throws HaBitStorageException IOException
      */
     public void export(Habit habit, int index) throws HaBitStorageException {
-        export.exportHabit(habit, index);
+        this.export.exportHabit(habit, index);
     }
 }
