@@ -18,7 +18,7 @@ public class TeachingClass implements ClassChecker {
     private final AssessmentList assessmentList;
 
     public TeachingClass(String id, String name) {
-        this.id = id;
+        this.id = id.toLowerCase();
         this.name = name;
         this.studentList = new StudentList();
         this.assessmentList = new AssessmentList();
@@ -64,7 +64,7 @@ public class TeachingClass implements ClassChecker {
             return id;
         }
 
-        return String.format("%s - %s", id, name);
+        return String.format("[%s] %s", id, name);
     }
 
     /**
@@ -74,11 +74,11 @@ public class TeachingClass implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (id.isEmpty()) {
+        if (!isValidId(id)) {
             return false;
         }
 
-        if (!Parser.isValueValid(id) || !Parser.isValueValid(id)) {
+        if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return false;
         }
 
@@ -111,5 +111,9 @@ public class TeachingClass implements ClassChecker {
         }
 
         return true;
+    }
+
+    public static boolean isValidId(String id) {
+        return !id.isEmpty() && !id.contains(" ");
     }
 }
