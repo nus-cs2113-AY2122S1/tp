@@ -37,7 +37,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 2. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
 
 
-3. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+3. **Verify the setup**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
 ```
 > Task :compileJava UP-TO-DATE
 > Task :processResources UP-TO-DATE
@@ -180,7 +180,7 @@ The `Task` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)  
 
-The storage component makes use of the serializing methods in the `taskList`, `lessonList`, and `moduleList` classes to save data to the `data` folder.
+The storage component makes use of the serializing methods in the `TaskList`, `LessonList`, and `ModuleList` classes to save data to the `data` folder.
 It also reads data from a given path into strings which can be utilized by those 3 list classes to create a list.
 
 The `Storage` component has methods that:

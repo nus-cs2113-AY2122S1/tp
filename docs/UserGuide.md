@@ -5,7 +5,7 @@ Designed specifically for NUS students, it includes an intuitive **task and less
 with CAP calculation features that can be accessed quickly via a Command Line Interface (CLI), taking up the least of 
 your time, so you can focus on tasks and lessons that are important to you.
 
-This user guide will help you get started on using NUS Buddy so you can go about organising your tasks, 
+This user guide will help you get started on using NUS Buddy, so you can go about organising your tasks, 
 lessons and modules right away. The [quick start](#quick-start) will show you how to set up NUS Buddy 
 on your computer. The [features](#features) section will show you the list of features and how to use 
 them. If you encounter any issues while using NUS Buddy, the [FAQ](#faq) section may help with troubleshooting 
@@ -40,7 +40,7 @@ commands that you can execute.
 [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
 2. Download the latest version of NUS Buddy from our GitHub repository.
 3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
-4. To launch the app, run the command `java -jar {filename}.jar`.
+4. To launch the app, run the command `java -jar NUSBuddy.jar`.
 
 You should see the following output when you start NUSBuddy for the first time.
 
@@ -66,7 +66,6 @@ You should see the following output when you start NUSBuddy for the first time.
       ||   \\,-.(__) )(    )(  (__)     _|| \\_ (__) )(    |||_     |||_ .-,//|(_  
       (_")  (_/     (__)  (__)         (__) (__)    (__)  (__)_)   (__)_) \_) (__) 
     _______________________________________________________________________________
-
 ```
 
 > ❗ The new files created are used to store the data of your tasks/lessons/modules. 
@@ -135,6 +134,8 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 
 > 💡 The task priority is low by default.
 
+> ❗ Any `|` symbol entered in the title will be replaced by a `/` symbol. 
+
 Example:
 
 ```
@@ -146,7 +147,6 @@ $ add task Do CS2113T tP -d sat -p H
               Info: -
        Now you have 1 tasks in the list.
       ______________________________________________________________________________________
-
 $ add task Update CS2113T docs -d thu -i User Guide
       ______________________________________________________________________________________
        Noted. I've added this task:
@@ -307,8 +307,8 @@ Format: `list module {verbose}`
 $ list module
       ______________________________________________________________________________________
        Here are the modules in your list:
-       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
-       2. CG2028 Computer Organization (2MCs) Grade: B
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
+       2. CG2028 Computer Organization (2MCs) | Grade: B
        ------------------------------------------------------------------------------------
        You have a total of 6 MCs
        Your current CAP is: 4.50
@@ -318,7 +318,7 @@ $ list module verbose
       ______________________________________________________________________________________
        Here are the detailed information of your modules:
        ------------------------------------------------------------------------------------
-       CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
        Department: Computer Science
        Faculty: Computing
        Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
@@ -326,7 +326,7 @@ $ list module verbose
        Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
        ------------------------------------------------------------------------------------
        ------------------------------------------------------------------------------------
-       CG2028 Computer Organization (2MCs) Grade: B
+       CG2028 Computer Organization (2MCs) | Grade: B
        Department: Computing and Engineering Programme
        Faculty: Multi Disciplinary Programme
        Preclusion: EE2024 Programming for Computer Interfaces
@@ -494,7 +494,7 @@ $ list module
 
 ### Finding Tasks or Lessons by keyword - `find`
 
-Finds tasks/lessons that contains the specific keeyword.
+Finds tasks/lessons that contains the specific keyword.
 
 #### Task
 
@@ -593,6 +593,32 @@ $ exit
 ### Saving the data
 
 Data from NUS Buddy is automatically saved on your local machine.
+
+Tasks are stored in `tasks.txt`, lessons are stored in `lessons.txt`, and modules are stored in `modules.txt`.
+
+All save files use one line for each task, lesson or module.
+
+The format of the save files is as follows:
+
+Tasks:
+
+```text
+[Completion status] | [Task title] | [Day of the week] | [Priority] | [Information]
+```
+
+Lessons:
+
+```text
+[Lesson title] | [Day of the week] | [Start time] | [End time] | [Lesson URL]
+```
+
+Modules:
+
+```text
+[Module code] | [Module title] | [Number of MCs] | [Grade]
+```
+
+> ❗ You can edit the save files using a text editor, if you wish to do so. However, do note that if the save files are edited in a way that causes the data to be invalid, NUS Buddy will discard the invalid data, which may cause data loss. 
 
 ## FAQ
 

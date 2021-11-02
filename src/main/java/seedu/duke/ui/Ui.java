@@ -419,7 +419,6 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);
-        System.out.println(PADDING + "   Grade: " + module.getGrade());
         System.out.println(LINE);
     }
 

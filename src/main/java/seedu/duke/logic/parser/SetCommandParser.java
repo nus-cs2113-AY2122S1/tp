@@ -13,7 +13,8 @@ import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author rebchua39
 public class SetCommandParser {
-    private static String[] grades = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U", "NONE"};
+    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U",
+        "CS", "CU", "NONE"};
 
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);
@@ -42,7 +43,7 @@ public class SetCommandParser {
     }
 
     private static boolean isValidGrade(String param) {
-        for (String grade : grades) {
+        for (String grade : GRADES) {
             if (param.equals(grade)) {
                 return true;
             }
