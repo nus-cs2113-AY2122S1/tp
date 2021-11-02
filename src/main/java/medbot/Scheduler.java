@@ -146,7 +146,7 @@ public class Scheduler {
      * @param parameters The attributes to filter patients
      * @return list of patients that match the specified attributes
      */
-    public List<String> findPatients(String[] parameters) {
+    public List<String> findPatients(String[] parameters) throws MedBotException {
         return patientList.findPersons(parameters);
     }
 
@@ -156,7 +156,7 @@ public class Scheduler {
      * @param parameters The attributes to filter patients
      * @return list of staff that match the specified attributes
      */
-    public List<String> findStaff(String[] parameters) {
+    public List<String> findStaff(String[] parameters) throws MedBotException {
         return medicalStaffList.findPersons(parameters);
     }
 

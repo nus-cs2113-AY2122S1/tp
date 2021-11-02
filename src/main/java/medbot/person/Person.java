@@ -28,6 +28,7 @@ public abstract class Person implements ListItem {
     private static final int LENGTH_PHONE_NUM_COLUMN = 9;
     private static final int LENGTH_EMAIL_COLUMN = 20;
     private static final int LENGTH_ADDRESS_COLUMN = 20;
+    private static final int LENGTH_EMPTY_STRING = 0;
 
     private int personId;
     protected String icNumber = "";
@@ -201,7 +202,7 @@ public abstract class Person implements ListItem {
      * @param parameters the attributes to check.
      * @return true if all parameters are found, false otherwise.
      */
-    public boolean containsAllParameters(String[] parameters) {
+    public boolean containsAllParameters(String[] parameters) throws MedBotException {
         for (String parameter : parameters) {
             if (!containsParameter(parameter)) {
                 return false;
@@ -220,13 +221,13 @@ public abstract class Person implements ListItem {
      * @return true if wordInput is in wordToCheck, false otherwise.
      */
     private boolean contains(String wordToCheck,String wordInput) {
-        if (wordInput.length() == 0) {
-            return wordToCheck.length() == 0;
+        if (wordInput.length() == LENGTH_EMPTY_STRING) {
+            return wordToCheck.length() == LENGTH_EMPTY_STRING;
         }
         return wordToCheck.toLowerCase().contains(wordInput);
     }
 
-    private boolean containsParameter(String parameter) {
+    private boolean containsParameter(String parameter) throws MedBotException {
         String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
         String paramSpecifier = parameter.substring(0, PARAMETER_BUFFER);
 
@@ -247,7 +248,7 @@ public abstract class Person implements ListItem {
             return contains(getResidentialAddress(), trimmedParameter);
 
         default:
-            return false;
+            throw new MedBotException("The specifier " + paramSpecifier + " is invalid.");
         }
     }
 
