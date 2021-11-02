@@ -55,6 +55,20 @@ ________________________________________________________
 
 --------------------------------------
 
+## Using this guide
+This guide is meant to describe and explain how to use Get Jack'd, including the various commands and inputs.
+Here are some things to take note of while using this guide:
+* A  ⚠️ symbol indicates something important to note
+
+
+* A   ❗   symbol indicates something very important to note, failure to adhere to it may cause the program to crash.
+
+
+* Words wrapped in square braces `[words]` are parameters, they are the parts of the command that you can change.
+   Words not wrapped in square braces are part of the command format. Not following said command format may cause your 
+   input to not be recognised by the application. 
+
+  
 ## Features
 
 ### 1. Creating a new workout: `create`

@@ -1,0 +1,37 @@
+# Joel Chiam's Project Portfolio Page
+
+## Project: Get Jack'd
+
+Given below are my contributions to the project.
+
+- **New Feature**: Implemented the Exercise class for v1.0
+- **New Feature**: Implemented help command
+  - **What it does** Prints help message for user to describe the various commands and what they do. When the user
+  specifies a command (e.g. "help add"), then more detailed information on that command is printed instead.
+  - **Justification** Allows the user to easily get information on how to use Get Jack'd without having to consult the User Guide
+  , which may be inconvenient and not fast. Detailed command information is only given when requested because printing all the information
+  is both long and will be overwhelming for the user.
+  - **Difficulties faced** Required a minor change to the structure of command classes to include a specific String constant to be printed 
+  for each command's specific help message.
+- **Enhancement to existing features**: Restructured and splitting of v1.0 parser into various Parser classes
+    - **What was done:** Split Parser class into CommandManager class, Parser (parent) class and various child Parsers.
+    - **Justification:** In v1.0, there was only one parser class with methods that were shared between the different commands.
+    Splitting this class into the separate classes made the code more object-oriented and easier to read and debug.
+    made the code more object-oriented and easier to understand and debug. 
+    - **Credits:** Some logic was retained from the original methods in parser class written by group member QianQi. 
+    some utility methods were also retained in the new Parser class
+- **Enhancement to existing features**: Wrote tests for various Parser classes
+- **Enhancement to existing features**: Minimised the use of flags like "/w" for command parameters.
+  - **What was done**: Changed command formats to use commas "," instead of different flags like "/w" to indicate command parameters
+  - **Justification**: Having many different flags like "/w", "/e", "/d" etc. can get confusing for users as they will have to remember 
+  what each flag represents, and what flags to use for the different commands. By eliminating the use of specific flags and using commas instead
+  users will no longer need to remember the flags, just the format of the command.
+- **Code contributed**: [RepoSense link] ()
+- **Documentation**: 
+  - User Guide:
+    - Added Command information.
+  - Developer's Guide:
+    - Added Parser component.
+- **Community**
+  - PRs reviewed (with non-trivial comments): [#12](https://github.com/AY2122S1-CS2113T-F12-2/tp/pull/12)
+  - Reported bugs and suggestions for other teammates
