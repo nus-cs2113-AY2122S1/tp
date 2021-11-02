@@ -35,7 +35,7 @@ public class Duke {
             // Executes logic of command
             userCommand.execute(ui, catalogue);
 
-            storage.write(catalogue);
+            storage.write(ui, catalogue);
             storage.read(catalogue);
 
             // Check whether to exit program

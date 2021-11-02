@@ -1,0 +1,28 @@
+{
+  "audio" : [ {
+    "title" : "Thriller",
+    "id" : "5920",
+    "status" : "AVAILABLE",
+    "loanee" : null,
+    "dueDate" : null,
+    "artist" : "Michael Jackson",
+    "duration" : "42:16"
+  } ],
+  "book" : [ {
+    "title" : "To Kill a Mockingbird",
+    "id" : "2551",
+    "status" : "AVAILABLE",
+    "loanee" : null,
+    "dueDate" : null,
+    "author" : "Harper Lee"
+  }, {
+    "title" : "Harry Potter",
+    "id" : "2500",
+    "status" : "AVAILABLE",
+    "loanee" : null,
+    "dueDate" : null,
+    "author" : "Jackson Martinez"
+  } ],
+  "magazine" : [ ],
+  "video" : [ ]
+}
