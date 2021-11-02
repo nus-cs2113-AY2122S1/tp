@@ -19,8 +19,8 @@ import static java.lang.Double.parseDouble;
 public class UniversityStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
-    public ArrayList<University> readUniversityList(InputStream inputStream,
-                                                    ModuleList moduleMasterList) throws IOException {
+    public ArrayList<University> readFile(InputStream inputStream,
+                                          ModuleList moduleMasterList) throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -41,7 +41,7 @@ public class UniversityStorage {
                     parseDouble(attributes[3]), moduleMasterList);
             assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be positive";
             Module mapped = new Module(attributes[4], attributes[5],
-                    parseDouble(attributes[6]), moduleMasterList);
+                    parseDouble(attributes[6]), 0);
             moduleMappingList.add(new ModuleMapping(local, mapped));
             line = br.readLine();
         }

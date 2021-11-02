@@ -50,10 +50,10 @@ public class Seplanner {
     private static Parser setupData(Storage storage) throws IOException {
         ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
         UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
-        UniversityList universitySelectedList = new UniversityList(
-                storage.readSelectedUniversityList(universityMasterList, moduleMasterList));
-        ModuleList moduleSelectedList = new ModuleList(
-                storage.readSelectedModuleList(moduleMasterList));
+        UniversityList universitySelectedList = storage.readSelectedUniversityList(
+                universityMasterList, moduleMasterList);
+        ModuleList moduleSelectedList = storage.readSelectedModuleList(
+                moduleMasterList);
         return new Parser(universityMasterList, moduleMasterList, universitySelectedList, moduleSelectedList);
     }
 }

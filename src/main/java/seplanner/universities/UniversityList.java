@@ -1,5 +1,7 @@
 package seplanner.universities;
 
+import seplanner.modules.ModuleMapping;
+
 import java.util.ArrayList;
 
 public class UniversityList {

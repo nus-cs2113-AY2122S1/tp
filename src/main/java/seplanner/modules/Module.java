@@ -47,7 +47,13 @@ public class Module implements Comparator<Module> {
                 return i + 1;
             }
         }
-        return 0;
+        return -1;
+    }
+
+    public boolean equals(Module searchModule) {
+        return (getModuleCode().equals(searchModule.getModuleCode()))
+                && (getModuleName().equals(searchModule.getModuleName()))
+                && (getModuleCredits() == searchModule.getModuleCredits());
     }
 
     public void setModuleCode(String moduleCode) {

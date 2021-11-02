@@ -10,8 +10,6 @@ public class AddModCommand extends Command {
 
     public AddModCommand(Module moduleToAdd, ModuleList moduleMasterList,
                          ModuleList moduleSelectedList) throws IOException {
-
-        int moduleIndexToAdd = moduleToAdd.getMasterListIndex(moduleMasterList);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;
@@ -20,6 +18,7 @@ public class AddModCommand extends Command {
                 .getModuleName().equals(moduleToAdd.getModuleName());
         assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
+        int moduleIndexToAdd = moduleToAdd.getMasterListIndex(moduleMasterList);
         storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
         UiModule.printModule(moduleToAdd, moduleIndexToAdd, true);

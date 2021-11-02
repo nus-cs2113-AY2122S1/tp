@@ -4,6 +4,7 @@ import seplanner.constants.Constants;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.modules.ModuleMapping;
+import seplanner.ui.UiStorage;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
@@ -22,7 +23,7 @@ public class SelectedUniversityStorage extends UserStorage {
 
     private static final String FILE_PATH = "data/selectedUniversities.txt";
 
-    public void updateSelectedUniversityList(UniversityList universityList) throws IOException {
+    public void updateFile(UniversityList universityList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < universityList.getSize(); i++) {
             University curr = universityList.get(i);
@@ -32,12 +33,12 @@ public class SelectedUniversityStorage extends UserStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public ArrayList<University> readSelectedUniversityList(
-            UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
+    public UniversityList readFile(UniversityList universityMasterList,
+                                          ModuleList moduleMasterList) throws IOException {
         File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
-        ArrayList<University> universities = new ArrayList<>();
+        UniversityList universitySelectedList = new UniversityList();
         ArrayList<ModuleMapping> moduleMappings = new ArrayList<>();
         String curr = " ";
         while (scanner.hasNext()) {
@@ -45,22 +46,70 @@ public class SelectedUniversityStorage extends UserStorage {
             if (curr.equals(" ")) {
                 curr = line;
             } else if (!line.contains("#")) {
-                universities.add(new University(curr, moduleMappings, universityMasterList));
-                curr = line;
+                updateUniversityList(curr, moduleMappings, universitySelectedList,
+                        universityMasterList);
                 moduleMappings = new ArrayList<>();
+                curr = line;
             } else {
-                String[] attributes = line.split(" # ");
-                Module local = new Module(attributes[0], attributes[1],
-                        parseDouble(attributes[2]),moduleMasterList);
-                Module mapped = new Module(attributes[3], attributes[4],
-                        parseDouble(attributes[5]),moduleMasterList);
-                moduleMappings.add(new ModuleMapping(local, mapped));
+                updateMappings(moduleMappings, line, moduleMasterList,
+                        universityMasterList, curr);
             }
         }
         if (!curr.equals(" ")) {
-            universities.add(new University(curr, moduleMappings, universityMasterList));
+            updateUniversityList(curr, moduleMappings, universitySelectedList,
+                    universityMasterList);
         }
+        updateFile(universitySelectedList);
         logger.log(Level.INFO, "Module mappings stored in the file are successfully loaded");
-        return universities;
+        return universitySelectedList;
+    }
+
+    private void updateMappings(ArrayList<ModuleMapping> moduleMappings,
+                                String line, ModuleList moduleMasterList,
+                                UniversityList universityMasterList,
+                                String universityName) {
+        String[] attributes = line.split(" # ");
+        if (attributes.length != 6) {
+            logger.log(Level.SEVERE, "Invalid mapping found in the file.");
+            UiStorage.printInvalidMappingMessage();
+            return;
+        }
+        Module local = new Module(attributes[0], attributes[1],
+                    parseDouble(attributes[2]), moduleMasterList);
+        Module mapped = new Module(attributes[3], attributes[4],
+                    parseDouble(attributes[5]), 0);
+        ModuleMapping newMapping = new ModuleMapping(local, mapped);
+        University currentUni = universityMasterList.getUniversity(universityName);
+        if ((local.getIndex() != -1) && currentUni.isExistMapping(newMapping)
+                && !(isMappingExist(moduleMappings, newMapping))) {
+            moduleMappings.add(newMapping);
+        } else {
+            logger.log(Level.SEVERE, "Invalid mapping found in the file.");
+            UiStorage.printInvalidMappingMessage();
+        }
+    }
+
+    private void updateUniversityList(String universityName,
+                                      ArrayList<ModuleMapping> moduleMappings,
+                                      UniversityList universitySelectedList,
+                                      UniversityList universityMasterList) {
+        if ((universityMasterList.searchUniversity(universityName))
+                && !(universitySelectedList.searchUniversity(universityName))) {
+            universitySelectedList.addUniversity(new University(universityName, moduleMappings,
+                    universityMasterList));
+        } else {
+            logger.log(Level.SEVERE, "Invalid university found in the file.");
+            UiStorage.printInvalidUniversityMessage();
+        }
+    }
+
+    private boolean isMappingExist(ArrayList<ModuleMapping> mappings,
+                                   ModuleMapping searchMapping) {
+        for (ModuleMapping mapping : mappings) {
+            if (mapping.equals(searchMapping)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
