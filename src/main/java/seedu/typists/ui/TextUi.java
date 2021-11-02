@@ -101,7 +101,7 @@ public class TextUi {
     }
 
     public void printGameMode1Progress(int a, int b) throws InterruptedException {
-         viewAnimateLeft("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
+        viewAnimateLeft("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
     }
 
     public void printKeyboard() {
