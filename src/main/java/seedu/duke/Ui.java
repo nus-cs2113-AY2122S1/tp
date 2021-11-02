@@ -1,9 +1,21 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ui {
+
+    public static String receiveUserInput() throws ForceCancelException {
+        String userInput = Storage.getScanner().nextLine().strip();
+        if (Parser.doesUserWantToForceCancel(userInput)) {
+            throw new ForceCancelException();
+        }
+        return userInput;
+    }
 
     public static void printPendingCommand() {
         System.out.print("Enter your command: ");
@@ -57,6 +69,10 @@ public class Ui {
     }
 
     //@@author
+
+    public static void printCancelExpenseCreation() {
+        System.out.println("Your expense creation has been cancelled.");
+    }
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
@@ -127,9 +143,16 @@ public class Ui {
         System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
     }
 
+    public static void printInvalidAmountError() {
+        System.out.print("Please re-enter your expense amount as a positive number (i.e > 0): ");
+    }
+
     public static void printDateTimeFormatError() {
-        System.out.print("Please check that your date-time format is dd-MM-yyyy. "
-                + "Please enter the date again: ");
+        System.out.print("The entered date is invalid. Please enter the date again: ");
+    }
+
+    public static void dateInvalidError() {
+        System.out.println("Sorry, the date you entered is invalid. Please enter the date again: ");
     }
 
     public static void printIsoFormatError() {
@@ -342,7 +365,7 @@ public class Ui {
         System.out.println("If you would like to overwrite your current save file and"
                 + "start with a new save file, please enter 'y'. "
                 + "Otherwise, please enter 'n' to exit the program.");
-        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file"
+        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file "
                 + "will no longer be recoverable. This operation is irreversible.");
     }
 
@@ -369,11 +392,21 @@ public class Ui {
         System.out.println("Otherwise, you may continue to use the program.");
     }
 
-    public static void printInvalidPerson(String name) {
-        System.out.println(name + " is not part of the trip. "
-                + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
+    public static void printInvalidPeople(ArrayList<String> names) {
+        for (String name : names) {
+            if (names.indexOf(name) == names.size() - 1) {
+                System.out.print(name + " ");
+            } else if (names.indexOf(name) == names.size() - 2) {
+                System.out.print(name + " and");
+            } else if (names.indexOf(name) < names.size() - 2) {
+                System.out.print(name + ", ");
+            }
+        }
+        System.out.println("is not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
         printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        System.out.println("Please enter the names of the people who are involved in this expense again, "
+                + "separated by a comma:");
     }
 
     public static void printTripClosed(Trip trip) {
@@ -405,7 +438,7 @@ public class Ui {
         System.out.println("\tPress enter to use today's date");
     }
 
-    public static void viewFilterDateInvalid() {
+    public static void viewFilterDateFormatInvalid() {
         System.out.println("\tPlease enter date as DD-MM-YYYY");
     }
     //@@author
@@ -446,4 +479,15 @@ public class Ui {
         System.out.println();
     }
 
+    public static void printForceCancelled() {
+        System.out.println("You have chosen to force cancel this operation.");
+    }
+
+    public static void locationIsBlank() {
+        System.out.println("No location was entered. Please enter your trip location: ");
+    }
+
+    public static void noPersonsAdded() {
+        System.out.println("No persons were added to this trip. Please enter the names of the people in this trip: ");
+    }
 }

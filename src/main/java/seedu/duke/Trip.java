@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,10 +11,9 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Level;
 
-import static seedu.duke.Parser.isNumeric;
+import static seedu.duke.parser.Parser.isNumeric;
 
 public class Trip {
 
@@ -27,6 +30,11 @@ public class Trip {
     private String location;
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final int ISO_LENGTH = 3;
+    private static final String CATEGORY = "category";
+    private static final String DESCRIPTION = "description";
+    private static final String PAYER = "payer";
+    private static final String PERSON = "person";
+    private static final String DATE = "date";
     private static final double EPSILON = 0.001;
 
     /**
@@ -36,18 +44,24 @@ public class Trip {
         //empty constructor
     }
 
+    private static final int LOCATION_STRING = 1;
+    private static final int DATE_STRING = 2;
+    private static final int FORCUR_STRING = 3;
+    private static final int EXRATE_STRING = 4;
+    private static final int PERSONS_STRING = 5;
+
     /**
      * Non-empty {@link Trip} constructor. Reads in a String array and processes it to set attributes for a given Trip.
      *
      * @param newTripInfo array containing one attribute in each element
      */
-    public Trip(String[] newTripInfo) {
-        assert newTripInfo.length == 5;
-        this.location = newTripInfo[0];
-        setDateOfTrip(newTripInfo[1]);
-        setForeignCurrency(newTripInfo[2].toUpperCase());
-        setExchangeRate(newTripInfo[3]);
-        this.listOfPersons = splitPeople(newTripInfo[4]);
+    public Trip(String[] newTripInfo) throws ForceCancelException {
+        assert newTripInfo.length == 6;
+        setLocation(newTripInfo[LOCATION_STRING].strip());
+        setDateOfTrip(newTripInfo[DATE_STRING].strip());
+        setForeignCurrency(newTripInfo[FORCUR_STRING].strip().toUpperCase());
+        setExchangeRate(newTripInfo[EXRATE_STRING].strip());
+        setListOfPersons(splitPeople(newTripInfo[PERSONS_STRING]));
     }
 
     //@@author leeyikai
@@ -59,19 +73,19 @@ public class Trip {
         }
         try {
             switch (expenseCategory) {
-            case "category":
+            case CATEGORY:
                 findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "description":
+            case DESCRIPTION:
                 findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "payer":
+            case PAYER:
                 findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "person":
+            case PERSON:
                 findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
                 break;
-            case "date":
+            case DATE:
                 findMatchingDateExpenses(listOfExpenses, expenseAttribute);
                 break;
             default:
@@ -81,16 +95,20 @@ public class Trip {
 
         } catch (IndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
 
     }
+    //@@author
 
     //@@author lixiyuan416
-    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute)
+            throws ForceCancelException {
         boolean areThereExpenses = false;
         String inputDate = expenseAttribute;
         while (!isDateValid(inputDate)) {
-            inputDate = Storage.getScanner().nextLine();
+            inputDate = Ui.receiveUserInput();
         }
         LocalDate dateToFind = LocalDate.parse(inputDate, inputPattern);
         for (Expense e : listOfCurrentExpenses) {
@@ -106,6 +124,7 @@ public class Trip {
     }
     //@@author
 
+    //@@author leeyikai
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
@@ -180,11 +199,15 @@ public class Trip {
 
     private boolean isDateValid(String inputDate) {
         try {
-            LocalDate.parse(inputDate, inputPattern);
-            return true;
+            if (Parser.doesDateReallyExist(inputDate)) {
+                LocalDate.parse(inputDate, inputPattern);
+                return true;
+            } else {
+                return false;
+            }
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
-            Ui.viewFilterDateInvalid();
+            Ui.viewFilterDateFormatInvalid();
             return false;
         }
     }
@@ -281,15 +304,33 @@ public class Trip {
      *
      * @param dateOfTrip user-entered date of trip as a String
      */
-    public void setDateOfTrip(String dateOfTrip) {
+    public void setDateOfTrip(String dateOfTrip) throws ForceCancelException {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
-            this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
+            LocalDate date = LocalDate.parse(dateOfTrip, pattern);
+            if (Parser.doesDateReallyExist(dateOfTrip)) {
+                if (date.isBefore(LocalDate.EPOCH)) {
+                    dateInvalid();
+                } else {
+                    this.dateOfTrip = date;
+                }
+            } else {
+                dateInvalid();
+            }
         } catch (DateTimeParseException e) {
             Ui.printDateTimeFormatError();
-            Scanner scanner = Storage.getScanner();
-            setDateOfTrip(scanner.nextLine().strip());
+            userInputDateError();
         }
+    }
+
+    private void dateInvalid() throws ForceCancelException {
+        Ui.dateInvalidError();
+        userInputDateError();
+    }
+
+    public void userInputDateError() throws ForceCancelException {
+        String newInput = Ui.receiveUserInput();
+        setDateOfTrip(newInput);
     }
 
 
@@ -303,13 +344,13 @@ public class Trip {
      *
      * @param exchangeRateString user-entered exchange rate (as a String)
      */
-    public void setExchangeRate(String exchangeRateString) {
+    public void setExchangeRate(String exchangeRateString) throws ForceCancelException {
         try {
             this.exchangeRate = Double.parseDouble(exchangeRateString);
         } catch (NumberFormatException e) {
             Ui.printExchangeRateFormatError();
-            Scanner scanner = Storage.getScanner();
-            setExchangeRate(scanner.nextLine().strip());
+            String userInput = Ui.receiveUserInput();
+            setExchangeRate(userInput);
         }
     }
 
@@ -329,7 +370,7 @@ public class Trip {
     //@@author
 
     //@@author itsleeqian
-    public void setForeignCurrency(String foreignCurrency) {
+    public void setForeignCurrency(String foreignCurrency) throws ForceCancelException {
         try {
             if (isNumeric(foreignCurrency) || foreignCurrency.length() != ISO_LENGTH) {
                 throw new NumberFormatException();
@@ -339,8 +380,8 @@ public class Trip {
             setForeignCurrencySymbol(this.foreignCurrency);
         } catch (NumberFormatException e) {
             Ui.printIsoFormatError();
-            Scanner scanner = Storage.getScanner();
-            setForeignCurrency(scanner.nextLine().strip());
+            String userInput = Ui.receiveUserInput();
+            setForeignCurrency(userInput);
         }
     }
     //@@author
@@ -410,11 +451,26 @@ public class Trip {
         return this.location;
     }
 
+
+    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException {
+        if (listOfPersons.isEmpty()) {
+            Ui.noPersonsAdded();
+            String userInput = Ui.receiveUserInput();
+            setListOfPersons(splitPeople(userInput));
+            return;
+        }
+        this.listOfPersons = listOfPersons;
+    }
+
     public ArrayList<Person> getListOfPersons() {
         return listOfPersons;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String location) throws ForceCancelException {
+        if (location.isBlank()) {
+            Ui.locationIsBlank();
+            setLocation(Ui.receiveUserInput());
+        }
         this.location = location;
     }
 
@@ -465,7 +521,10 @@ public class Trip {
     private ArrayList<Person> splitPeople(String peopleChained) {
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
-            Person person = new Person(personName.trim());
+            if (personName.isBlank()) {
+                continue;
+            }
+            Person person = new Person(personName.strip());
             listOfPeople.add(person);
         }
         for (Person person : listOfPeople) {
@@ -475,6 +534,7 @@ public class Trip {
         }
         return listOfPeople;
     }
+
     //@@author leeyikai
     public void optimizePayments() {
         ArrayList<Double> totalExpenses = new ArrayList<>();
@@ -482,9 +542,9 @@ public class Trip {
         getTotalAmountForPerson(totalExpenses);
 
         int currentIndex;
-        while(!isAllPaid) {
+        while (!isAllPaid) {
             for (Person person : listOfPersons) {
-                currentIndex= listOfPersons.indexOf(person);
+                currentIndex = listOfPersons.indexOf(person);
                 if (totalExpenses.get(currentIndex) < 0) {
                     findNextPersonToPay(totalExpenses, currentIndex);
                 }
@@ -503,9 +563,12 @@ public class Trip {
     }
 
     public void findNextPersonToPay(ArrayList<Double> totalExpenses, int indexOfPersonPaying) {
-        Double expensesOfCurrentPerson, expensesOfPersonPaying;
-        Person personPaying, personReceiving;
-        String nameOfPersonPaying, nameOfPersonReceiving;
+        Double expensesOfCurrentPerson;
+        Double expensesOfPersonPaying;
+        Person personPaying;
+        Person personReceiving;
+        String nameOfPersonPaying;
+        String nameOfPersonReceiving;
         for (Person person : listOfPersons) {
             int indexOfPersonReceiving = listOfPersons.indexOf(person);
             expensesOfCurrentPerson = totalExpenses.get(indexOfPersonReceiving);
@@ -540,8 +603,8 @@ public class Trip {
             HashMap<String, Double> personExpenses = person.getMoneyOwed();
             String otherPersonName;
             for (Person otherPerson : listOfPersons) {
-                if(!otherPerson.equals(person)) {
-                    otherPersonName= otherPerson.getName();
+                if (!otherPerson.equals(person)) {
+                    otherPersonName = otherPerson.getName();
                     totalAmountPerPerson += personExpenses.get(otherPersonName);
                 }
 
@@ -551,16 +614,18 @@ public class Trip {
         }
     }
 
-    public static boolean isMoreThanOrEqual (double firstValue, double secondValue) {
+    public static boolean isMoreThanOrEqual(double firstValue, double secondValue) {
         if (isEqual(firstValue, secondValue)) {
             return true;
         }
         return firstValue > secondValue;
     }
-    public static boolean isEqual (double firstValue, double secondValue) {
+
+    public static boolean isEqual(double firstValue, double secondValue) {
         double difference = firstValue - secondValue;
         return difference < EPSILON && difference > -EPSILON;
     }
+
     public static boolean isZero(double value) {
         return value < EPSILON && value > -EPSILON;
     }

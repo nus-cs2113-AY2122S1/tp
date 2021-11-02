@@ -1,4 +1,4 @@
-create America 02-02-2021 USD 0.74 yikai,yuzhao,qian,josh,xiyuan
+create /America /02-02-2021 /USD /0.74 /yikai,yuzhao,qian,josh,xiyuan
 open 1
 expense 8.00 breakfast yikai,yuzhao,qian /c a b
 19-10-2021

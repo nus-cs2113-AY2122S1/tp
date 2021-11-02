@@ -3,6 +3,7 @@ package seedu.duke;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import seedu.duke.expense.Expense;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,10 +27,12 @@ public class Storage {
     private static Scanner scanner;
     private static Logger logger;
 
+    private static boolean isProcessing = false;
+
     //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
-                    "delete", "expense", "quit", "help", "amount", "close"));
+                    "delete", "expense", "quit", "help", "amount", "people", "close"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
             put("USD", new String[]{"$", "%.02f"});
@@ -198,7 +201,7 @@ public class Storage {
         try {
             System.out.print("Please enter the trip you would like to open: ");
             int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
-            setOpenTrip(listOfTrips.get(tripIndex));
+            setOpenTrip(tripIndex);
         } catch (NumberFormatException e) {
             Ui.argNotNumber();
             Ui.promptForTripIndex();
@@ -215,8 +218,13 @@ public class Storage {
         return openTrip != null;
     }
 
-    public static void setOpenTrip(Trip openTrip) {
-        Storage.openTrip = openTrip;
+    /**
+     * Opens the trip at the specified <code>tripIndex</code>, and sets that trip as the last modified trip.
+     *
+     * @param tripIndex index of the trip inside {@link Storage#listOfTrips} to be opened
+     */
+    public static void setOpenTrip(int tripIndex) {
+        openTrip = listOfTrips.get(tripIndex);
         lastTrip = openTrip;
     }
 

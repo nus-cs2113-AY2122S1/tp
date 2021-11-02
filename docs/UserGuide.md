@@ -32,6 +32,8 @@ and move the downloaded file to your preferred folder.
    containing your downloaded copy of `PayMeBack`.
 4. In the command-line interface, type `java -jar PayMeBack.jar`.
 5. If the program starts successfully, you should see the following on your screen:
+
+
 ```
 Welcome to
     ____              __  ___     ____             __  
@@ -43,7 +45,7 @@ Welcome to
 
 Enter your command: 
 ```
-<br />
+
 
 ## Features
 
@@ -87,18 +89,20 @@ You must have at least one trip created (or loaded from the save file) to use an
 
 The input syntax to create a trip is:
 ```
-create [location] [date] [foriegn-currency-ISO-code] [exchange-rate] [persons-in-trip]
+create /[location] /[date] /[foriegn-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
 ```
 
+Please note the following about the command above:
 - `[date]` must follow the format of dd-mm-yyyy.
 - `[foriegn-currency-ISO-code]` Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
-  - Note that the default home currency is SGD, unless edited by the user.
+  - Note that the default home currency is SGD, unless edited by the user. To edit, see (edit trip).
 - `persons-in-trip` should be separated with commas.
 
 #### Compatible Currencies
+
 Currency Name | ISO Code
 ------------ | -----------
 United States Dollar | USD
@@ -142,7 +146,7 @@ For example,
 Input:
 
 ```
-create America 02-02-2021 USD 0.74 Ben, Jerry, Tom
+create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
 ```
 
 Output:
@@ -158,28 +162,34 @@ Your trip to America on 02 Feb 2021 has been successfully added!
 In order to add, edit or delete expenses within a trip, you must first open the trip containing
 the expenses you wish to access.
 
-The input syntax for open:
+The input syntax for open is:
 ```
 open [trip-number]
 ```
 
 For example,
 
-Input:
+
 ````
 open 1
 ````
-Output:
+If the trip is successfully opened, you will see:
 ```
 You have opened the following trip:
 America | 02 Feb 2021
 ```
+
+You can also run the `open` command while a trip is already open. This will close the currently-opened
+trip, and open the specified trip in the most recent command.
+
+*Note: Only one trip can be open at any time.*
+
 <br />
 
 #### - Close Trip
-Closes the current trip you are in, allowing the `list` and `delete` command to be used.
 
-Only can be used if you have already opened a trip.
+Closes the current trip you are in, allowing the `list` and `delete` command to be used.
+This command can only be used if you have already opened a trip.
 
 The input syntax for close:
 ```
@@ -196,7 +206,7 @@ America | 02 Feb 2021
 #### - List Trips
 Lists down the trips that you have created. Note that no trip must be open when executing this command.
 
-The input syntax for list:
+The input syntax for list is:
 ```
 list
 ```
@@ -216,15 +226,15 @@ The input syntax to delete a trip is:
 ```
 delete [trip-number]
 ```
-- `[trip-number]` is the index of the trip you wish to delete, and can be found by using `whatcommand` command.
+- `[trip-number]` is the index of the trip you wish to delete, and can be found by using `list` command while in 
+Trip mode.
 
 For example,
 
-Input:
 ````
 delete 1
 ````
-Output:
+If your trip is successfully deleted, you will see:
 ```
 Your trip to America on 02 Feb 2021 has been successfully removed.
 ```

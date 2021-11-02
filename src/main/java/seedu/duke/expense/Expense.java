@@ -1,14 +1,19 @@
-package seedu.duke;
+package seedu.duke.expense;
+
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.InvalidAmountException;
+import seedu.duke.Person;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Level;
 
-public class Expense {
+public class Expense extends ExpenseSplittingFunctions {
     private double amountSpent;
     private String description;
     private ArrayList<Person> personsList;
@@ -45,63 +50,63 @@ public class Expense {
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
-    //@@author yeezao
-    public Expense(String inputDescription) {
+
+    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
-        this.amountSpent = Double.parseDouble(expenseInfo[0]);
-        this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
-        this.category = expenseInfo[1].toLowerCase();
+        setAmountSpent(expenseInfo[0]);
+        setCategory(expenseInfo[1].toLowerCase());
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
+        this.date = promptDate();
+        if (personsList.size() == 1) {
+            updateOnePersonSpending(this, personsList.get(0));
+        } else {
+            updateIndividualSpending(this);
+        }
     }
     //@@author
 
     private static String getDescriptionParse(String userInput) {
-        return userInput.split("/")[1].trim();
+        return userInput.split("/")[1].strip();
     }
 
-    //@@author joshualeeky
     /**
      * Obtains a list of Person objects from array of names of people.
      *
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) {
+    private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
+        ArrayList<String> invalidListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
-        if (listOfPeople.length == 1 && listOfPeople[0].trim().equalsIgnoreCase("-all")) {
+        if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
         for (String name : listOfPeople) {
             boolean isValidPerson = false;
             for (Person person : Storage.getOpenTrip().getListOfPersons()) {
-                if (name.trim().equalsIgnoreCase(person.getName())) {
+                if (name.strip().equalsIgnoreCase(person.getName())) {
                     validListOfPeople.add(person);
                     isValidPerson = true;
                     break;
                 }
             }
             if (!isValidPerson) {
-                Ui.printInvalidPerson(name);
-                Scanner newUserInput = Storage.getScanner();
-                return checkValidPersons(newUserInput.nextLine());
+                invalidListOfPeople.add(name);
             }
+        }
+        if (!invalidListOfPeople.isEmpty()) {
+            Ui.printInvalidPeople(invalidListOfPeople);
+            String newUserInput = Ui.receiveUserInput();
+            return checkValidPersons(newUserInput);
         }
         return validListOfPeople;
     }
 
     //@@author
-
-    public void assignAmounts() {
-        if (personsList.size() == 1) {
-            Parser.updateOnePersonSpending(this, personsList.get(0));
-        } else {
-            Parser.updateIndividualSpending(this);
-        }
-    }
 
     public void setPayer(Person person) {
         this.payer = person;
@@ -126,19 +131,17 @@ public class Expense {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    public Expense prompDate() {
-        Scanner sc = Storage.getScanner();
+    public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
-        String inputDate = sc.nextLine();
+        String inputDate = Ui.receiveUserInput();
         while (!isDateValid(inputDate)) {
-            inputDate = sc.nextLine();
+            inputDate = Ui.receiveUserInput();
         }
         if (inputDate.isEmpty()) {
-            this.date = LocalDate.now();
+            return LocalDate.now();
         } else {
-            this.date = LocalDate.parse(inputDate, inputPattern);
+            return LocalDate.parse(inputDate, inputPattern);
         }
-        return this;
     }
 
     private Boolean isDateValid(String date) {
@@ -214,12 +217,29 @@ public class Expense {
         return amountSpent;
     }
 
-    public void setAmountSpent(double amountSpent) {
-        this.amountSpent = amountSpent;
+    //@@author itsleeqian
+    public void setAmountSpent(String amount) throws InvalidAmountException, ForceCancelException {
+        try {
+            this.amountSpent = Double.parseDouble(amount);
+            if (this.amountSpent <= 0) {
+                throw new InvalidAmountException();
+            }
+            this.amountSpent = Double.parseDouble(amount);
+            this.amountSpent = Storage.formatForeignMoneyDouble(this.amountSpent);
+        } catch (InvalidAmountException e) {
+            Ui.printInvalidAmountError();
+            String newInput = Ui.receiveUserInput();
+            setAmountSpent(newInput);
+        }
     }
+    //@@author
 
     public String getDescription() {
         return description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setDescription(String description) {

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.ForceCancelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DukeTest {
 
     @Test
-    public void testNewTrip() {
-        String[] stringArray = {"Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
+    public void testNewTrip() throws ForceCancelException {
+        String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         Trip trip = new Trip(stringArray);
         assertEquals("Canada", trip.getLocation());
         assertEquals("02 Mar 2021", trip.getDateOfTripString());
@@ -23,7 +24,7 @@ class DukeTest {
     }
 
     @Test
-    public void testSetLocation() {
+    public void testSetLocation() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setLocation("America");
         assertEquals("America", trip.getLocation());
@@ -37,7 +38,7 @@ class DukeTest {
     }
 
     @Test
-    public void testSetCurrencyInfo() {
+    public void testSetCurrencyInfo() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setForeignCurrency("USD");
         trip.setRepaymentCurrency("SGD");
@@ -48,11 +49,12 @@ class DukeTest {
     }
 
     @Test
-    public void testSetDate() {
+    public void testSetDate() throws ForceCancelException {
         Trip trip = new Trip();
         trip.setDateOfTrip("23-09-2021");
         assertEquals("23 Sep 2021", trip.getDateOfTripString());
     }
+
 
     @Test
     public void sampleTest() {
