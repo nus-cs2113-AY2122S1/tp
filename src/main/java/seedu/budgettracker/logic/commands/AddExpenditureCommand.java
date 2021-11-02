@@ -23,7 +23,7 @@ public class AddExpenditureCommand extends AddCommand {
             + "Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]\n"
             + "Note:\n"
             + " * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.\n"
-            + " * If CATEGORY is not specified, GENERAL will be the default category.";
+            + " * If CATEGORY is not specified, GENERAL will be the default category.\n";
 
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional

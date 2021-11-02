@@ -6,7 +6,7 @@
 * [Features](#features)
 * [Commands](#commands)
   * [Add](#add) 
-    * [Budget: `-b`](#add-budget)
+    *[Budget: `-b`](#add-budget)
     * [Expenditure: `-e`](#add-expenditure)
     * [Loan: `-l`](#add-loan)
   * [Edit](#edit)
@@ -23,10 +23,9 @@
     * [Budget: `-b`](#delete-budget)
     * [Expenditure: `-e`](#delete-expenditure)
     * [Loan: `-l`](#delete-loan)
-  * [Statistics](#statistics)
-    * [Stat](#stat) 
-      * [Budget: `-b`](#stat-budget)
-      * [Budget: `-l`](#stat-year)
+  * [Stat](#stat) 
+    * [Month: `-c`](#stat-budget)
+    * [Year: `-l`](#stat-year)
   * [Guides](#guides)
     * [Help](#help)
   * [Exit](#exit)
@@ -510,13 +509,13 @@ _________________________________________________________
 
 Display the statistics for a particular month's budget and expenditure by categories. 
 
-Format: `stat -e m/MONTH`
+Format: `stat -c m/MONTH`
 
 * The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
 
 Example of usage:
 
-`stat -e m/10`
+`stat -c m/10`
 
 Expected outcome: A graph showing the percentages which each category contributes to the overall monthly
 expenditures.
