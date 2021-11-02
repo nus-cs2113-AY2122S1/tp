@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.Exceptions.ForceCancelException;
+import seedu.duke.Expense.Expense;
+import seedu.duke.Parser.Parser;
+
 import java.util.ArrayList;
 
 public class Ui {

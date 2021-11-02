@@ -1,11 +1,16 @@
-package seedu.duke;
+package seedu.duke.Expense;
+
+import seedu.duke.Exceptions.ForceCancelException;
+import seedu.duke.Exceptions.InvalidAmountException;
+import seedu.duke.Person;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Level;
 
 public class Expense extends ExpenseSplittingFunctions {
@@ -46,7 +51,7 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws  InvalidAmountException, ForceCancelException {
+    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
