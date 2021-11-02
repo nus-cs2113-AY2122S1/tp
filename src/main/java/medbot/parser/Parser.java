@@ -156,18 +156,22 @@ public abstract class Parser {
         } catch (IndexOutOfBoundsException ie) {
             newType = EMPTY_STRING;
         }
+        boolean isChanged;
         switch (newType) {
         case EMPTY_STRING:
-            return new SwitchCommand(ViewType.getNextView(viewType));
+            return new SwitchCommand(ViewType.getNextView(viewType), true);
         case VIEW_TYPE_PATIENT_VIEW:
         case VIEW_TYPE_PATIENT_VIEW_ALT:
-            return new SwitchCommand(ViewType.PATIENT_INFO);
+            isChanged = viewType != ViewType.PATIENT_INFO;
+            return new SwitchCommand(ViewType.PATIENT_INFO, isChanged);
         case VIEW_TYPE_MEDICAL_STAFF_VIEW:
         case VIEW_TYPE_MEDICAL_STAFF_VIEW_ALT:
-            return new SwitchCommand(ViewType.MEDICAL_STAFF_INFO);
+            isChanged = viewType != ViewType.MEDICAL_STAFF_INFO;
+            return new SwitchCommand(ViewType.MEDICAL_STAFF_INFO, isChanged);
         case VIEW_TYPE_SCHEDULER_VIEW:
         case VIEW_TYPE_SCHEDULER_VIEW_ALT:
-            return new SwitchCommand(ViewType.SCHEDULER);
+            isChanged = viewType != ViewType.SCHEDULER;
+            return new SwitchCommand(ViewType.SCHEDULER, isChanged);
         default:
             throw new MedBotParserException(ERROR_INVALID_VIEW_TYPE);
         }

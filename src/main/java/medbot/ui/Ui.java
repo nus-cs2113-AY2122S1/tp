@@ -460,12 +460,14 @@ public class Ui {
     }
 
     /**
-     * Prints switched view message.
+     * Prints the switched view message if the view is switched to the given viewType.
+     *
+     * @param viewType the ViewType that is switched to
      */
     public void printSwitchedViewMessage(ViewType viewType) {
         switch (viewType) {
         case PATIENT_INFO:
-            System.out.println("  ___  _ _____ ___ ___ _  _ _____ \n"
+            printOutput("  ___  _ _____ ___ ___ _  _ _____ \n"
                     + " | _ \\/_\\_   _|_ _| __| \\| |_   _|\n"
                     + " |  _/ _ \\| |  | || _|| .` | | |  \n"
                     + " |_|/_/ \\_\\_|_|___|___|_|\\_| |_|  \n"
@@ -478,7 +480,7 @@ public class Ui {
                     + "                                  ");
             break;
         case SCHEDULER:
-            System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
+            printOutput("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
                     + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
                     + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"
                     + " |___/\\___|_||_|___|___/_\\___/|____|___|_|_\\\n"
@@ -488,7 +490,7 @@ public class Ui {
                     + "                                            ");
             break;
         case MEDICAL_STAFF_INFO:
-            System.out.println("  ___ _____ _   ___ ___  \n"
+            printOutput("  ___ _____ _   ___ ___  \n"
                     + " / __|_   _/_\\ | __| __| \n"
                     + " \\__ \\ | |/ _ \\| _|| _|  \n"
                     + " |___/_|_/_/_\\_\\_| |_|   \n"
@@ -503,6 +505,27 @@ public class Ui {
         default:
             break;
         }
-        System.out.println("View has been switched to " + viewType);
+        printOutput("View has been switched to " + viewType);
+    }
+
+    /**
+     * Prints the switched view message if the view is already at the given viewType.
+     *
+     * @param viewType the ViewType that the application is already at
+     */
+    public void printUnchangedViewMessage(ViewType viewType) {
+        switch (viewType) {
+        case PATIENT_INFO:
+            printOutput("You are already in the Patient Management view.");
+            break;
+        case MEDICAL_STAFF_INFO:
+            printOutput("You are already in the Staff Management view.");
+            break;
+        case SCHEDULER:
+            printOutput("You are already in the Scheduler view.");
+            break;
+        default:
+            break;
+        }
     }
 }
