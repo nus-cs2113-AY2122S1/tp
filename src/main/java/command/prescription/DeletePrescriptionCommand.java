@@ -36,7 +36,7 @@ public class DeletePrescriptionCommand extends Command {
 
         String prescriptionIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (isValidPrescriptionParameters(ui, medicines, prescriptionIdToDelete)) {
+        if (!isValidPrescriptionParameters(ui, medicines, prescriptionIdToDelete)) {
             return;
         }
 
@@ -94,7 +94,7 @@ public class DeletePrescriptionCommand extends Command {
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of prescription");
-            return true;
+            return false;
         }
 
         boolean isValidPrescriptionId = prescriptionValidator.isValidPrescriptionId(ui, prescriptionIdToDelete,
@@ -103,9 +103,9 @@ public class DeletePrescriptionCommand extends Command {
         if (!isValidPrescriptionId) {
             logger.log(Level.WARNING, "Invalid prescription id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of prescription");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**

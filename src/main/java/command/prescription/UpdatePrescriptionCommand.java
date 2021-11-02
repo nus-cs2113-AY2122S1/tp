@@ -41,8 +41,8 @@ public class UpdatePrescriptionCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF, CommandParameters.DATE};
 
         MedicineValidator validator = new PrescriptionValidator();
-        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.UPDATE_PRESCRIPTION_COMMAND, true, validator);
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.UPDATE_PRESCRIPTION_COMMAND, true, validator);
         if (isInvalidInput) {
             return;
         }
@@ -58,13 +58,13 @@ public class UpdatePrescriptionCommand extends Command {
         boolean isSuccessfulUpdate = false;
 
         if (hasNameParam && hasQuantityParam) {
-            isSuccessfulUpdate = processGivenNameAndQuantity(medicines, prescription, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenNameAndQuantity(ui, medicines, prescription, customerId, date, staffName);
         } else if (hasNameParam && !hasQuantityParam) {
-            isSuccessfulUpdate = processGivenName(medicines, prescription, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenName(ui, medicines, prescription, customerId, date, staffName);
         } else if (!hasNameParam && hasQuantityParam) {
-            isSuccessfulUpdate = processGivenQuantity(medicines, prescription, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenQuantity(ui, medicines, prescription, customerId, date, staffName);
         } else {
-            isSuccessfulUpdate = processOtherFields(medicines, prescription, customerId, date, staffName);
+            isSuccessfulUpdate = processOtherFields(ui, medicines, prescription, customerId, date, staffName);
         }
 
         if (!isSuccessfulUpdate) {
@@ -78,6 +78,7 @@ public class UpdatePrescriptionCommand extends Command {
     /**
      * Processes name and quantity field provided by user for updating prescription information.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -85,9 +86,8 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if update is successful.
      */
-    private boolean processGivenNameAndQuantity(ArrayList<Medicine> medicines, Prescription prescription,
+    private boolean processGivenNameAndQuantity(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
                                                 String customerId, Date date, String staffName) {
-        Ui ui = Ui.getInstance();
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -146,6 +146,7 @@ public class UpdatePrescriptionCommand extends Command {
     /**
      * Processes name field provided by user for updating prescription information.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -153,9 +154,8 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if update is successful.
      */
-    private boolean processGivenName(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
+    private boolean processGivenName(Ui ui, ArrayList<Medicine> medicines, Prescription prescription, String customerId,
                                      Date date, String staffName) {
-        Ui ui = Ui.getInstance();
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -207,6 +207,7 @@ public class UpdatePrescriptionCommand extends Command {
     /**
      * Processes quantity field provided by user for updating prescription information.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -214,15 +215,15 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if update is successful.
      */
-    private boolean processGivenQuantity(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
-                                         Date date, String staffName) {
+    private boolean processGivenQuantity(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
+                                         String customerId, Date date, String staffName) {
         int currentQuantity = prescription.getQuantity();
         int updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
         boolean isSuccessful = false;
         if (updatedQuantity < currentQuantity) {
-            isSuccessful = processRestoration(medicines, prescription, customerId, date, staffName);
+            isSuccessful = processRestoration(ui, medicines, prescription, customerId, date, staffName);
         } else if (updatedQuantity > currentQuantity) {
-            isSuccessful = processPrescription(medicines, prescription, customerId, date, staffName);
+            isSuccessful = processPrescription(ui, medicines, prescription, customerId, date, staffName);
         }
         if (!isSuccessful) {
             return false;
@@ -233,6 +234,7 @@ public class UpdatePrescriptionCommand extends Command {
     /**
      * Process prescription of medication for a prescription record.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -240,10 +242,8 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if prescription is successful.
      */
-    private boolean processPrescription(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
-                                        Date date, String staffName) {
-        Ui ui = Ui.getInstance();
-
+    private boolean processPrescription(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
+                                        String customerId, Date date, String staffName) {
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentQuantity = prescription.getQuantity();
@@ -290,6 +290,7 @@ public class UpdatePrescriptionCommand extends Command {
     /**
      * Process restoration for a prescription record.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -297,9 +298,9 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if restoration is successful.
      */
-    private boolean processRestoration(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
+    private boolean processRestoration(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
+                                       String customerId,
                                        Date date, String staffName) {
-        Ui ui = Ui.getInstance();
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -342,6 +343,7 @@ public class UpdatePrescriptionCommand extends Command {
      * Processes other fields provided by user for updating prescription information.
      * The other field are the customerId, date and staffName.
      *
+     * @param ui           Reference to the UI object to print messages.
      * @param medicines    Arraylist of all medicines.
      * @param prescription The associated prescription object.
      * @param customerId   CustomerId of customers.
@@ -349,7 +351,8 @@ public class UpdatePrescriptionCommand extends Command {
      * @param staffName    Staff responsible for the prescription of medication.
      * @return Boolean value true if update is successful.
      */
-    private boolean processOtherFields(ArrayList<Medicine> medicines, Prescription prescription, String customerId,
+    private boolean processOtherFields(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
+                                       String customerId,
                                        Date date, String staffName) {
         if (prescription == null) {
             return false;
@@ -369,7 +372,6 @@ public class UpdatePrescriptionCommand extends Command {
         }
         ArrayList<Prescription> newPrescriptions = new ArrayList<>();
         newPrescriptions.add(prescription);
-        Ui ui = Ui.getInstance();
         ui.print("Updated prescription information!");
         ui.printPrescriptions(newPrescriptions);
         return true;
