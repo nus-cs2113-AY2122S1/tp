@@ -18,7 +18,7 @@ import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
 import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.SEARCH_MESSAGE;
 import static seedu.duke.common.Messages.NO_SEARCH_RESULT;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author silinche
 /**
@@ -152,7 +152,7 @@ public class SearchCommand extends Command {
             throw new LibmgrException(SEARCH_FORMAT_INCORRECT);
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         ArrayList<Item> fourMatch = new ArrayList<>();
         ArrayList<Item> threeMatch = new ArrayList<>();

@@ -8,6 +8,10 @@ import java.util.HashMap;
 
 import static seedu.duke.common.Messages.*;
 
+//@@author avellinwong01
+/**
+ * Class encapsulating an edit command.
+ */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     protected HashMap<String, String> args;
@@ -15,12 +19,20 @@ public class EditCommand extends Command {
 
     /**
      * Sole Constructor.
+     *
      * @param args Arguments supplied by user in the Edit command
      */
     public EditCommand(HashMap<String, String> args) {
         this.args = args;
     }
 
+    /**
+     * Processes Edit Command, including exceptions.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates a library catalogue
+     * @throws LibmgrException when user input is invalid
+     */
     public void handlesEditCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         String commandWord = args.get(null).strip();
         String[] command = commandWord.split("\\s+");
@@ -29,7 +41,7 @@ public class EditCommand extends Command {
         }
         String id = commandWord.substring(COMMAND_WORD.length() + 1).strip();
         try {
-            toEdit = catalogue.getItem(id); // command[1] is the ID
+            toEdit = catalogue.getItem(id);
         } catch (NullPointerException e) {
             throw new LibmgrException(EDIT_INVALID_ITEM);
         }
@@ -45,6 +57,13 @@ public class EditCommand extends Command {
 
     }
 
+    /**
+     * Executes edit command.
+     * Overrides method from parent class.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
+     */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
@@ -54,3 +73,4 @@ public class EditCommand extends Command {
         }
     }
 }
+//@@author avellinwong01

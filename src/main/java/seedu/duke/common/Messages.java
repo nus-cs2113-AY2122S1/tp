@@ -77,16 +77,14 @@ public class Messages {
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
-    public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID marker/attribute";
-    public static final String EDIT_INVALID_AUDIO = "  (!) Attribute Marker not valid for Audio"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, a/ or d/";
-    public static final String EDIT_INVALID_BOOK = "  (!) Attribute Marker not valid for Book" + System.lineSeparator()
-            + "  (!) Should only be t/, i/ or a/";
-    public static final String EDIT_INVALID_MAGAZINE = "  (!) Attribute Marker not valid for Magazine"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or e/";
-    public static final String EDIT_INVALID_VIDEO = "  (!) Attribute Marker not valid for Video"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or d/";
+    public static final String EDIT_AUDIO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|a|d]/attribute";
+    public static final String EDIT_BOOK_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|a]/attribute";
+    public static final String EDIT_MAGAZINE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|p|e]/attribute";
+    public static final String EDIT_VIDEO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|p|d]/attribute";
 
 
     // Generic Errors
