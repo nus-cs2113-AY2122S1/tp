@@ -390,10 +390,13 @@ public class Parser {
         Command command;
         String startCountryCode;
         String endCountryCode;
+        int fromIdx = getFromFlagIndex(userInput);
+        int toIdx = getToFlagIndex(userInput);
         try {
-            int toIdx = getToFlagIndex(userInput);
-            startCountryCode = parseFieldValue(userInput, FROM_LENGTH - 1, toIdx).toUpperCase();
-            endCountryCode = parseFieldValue(userInput, toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+            startCountryCode = parseFieldValue(userInput,
+                    fromIdx + FROM_LENGTH, toIdx).toUpperCase();
+            endCountryCode = parseFieldValue(userInput,
+                    toIdx + TO_LENGTH, userInput.length()).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
