@@ -329,7 +329,7 @@ public class TextUi {
     }
 
     public static void printStorageErrorMessage() {
-        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself. Delete "
-                + "all files in your Module directory.");
+        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself."
+                + "\nDelete all files in your Module directory and rerun update.");
     }
 }

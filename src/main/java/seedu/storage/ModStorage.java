@@ -114,6 +114,7 @@ public class ModStorage {
                 }
             } catch (Exception e) {
                 TextUi.printStorageErrorMessage();
+                return;
             }
         }
         TextUi.printModsFound(count);
