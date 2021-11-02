@@ -11,16 +11,6 @@ Welcome to
 What would you like to do?
 => Added a Member: 
 [1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
-=> Added a Training entry:
-[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH1 | Time: 2 NOV 2021
-=> Edited Training:
-[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH1 | Time: 2 NOV 2021
-To become:
-[1] Training Name: WEEKLY TRAINING 1 | Venue: MPSH2 | Time: 2 NOV 2021
-=> Edited member:
-[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
-To become:
-[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 91234567
 => You have successfully exited the programme.
 _____________________________________________________
 
