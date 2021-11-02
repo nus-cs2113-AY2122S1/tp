@@ -1,14 +1,11 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
-
 public class Command {
 
     public Command() {
     }
 
-    public CommandResult execute() throws DukeException, InvalidBudgetException {
+    public CommandResult execute() {
 
         /*
         This is thrown if ever an empty command is executed (pseudo error message)
