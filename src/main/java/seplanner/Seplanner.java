@@ -23,10 +23,10 @@ public class Seplanner {
             UiGeneral.welcome();
             ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
             UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
-            UniversityList universitySelectedList = new UniversityList(
-                    storage.readSelectedUniversityList(universityMasterList, moduleMasterList));
-            ModuleList moduleSelectedList = new ModuleList(
-                    storage.readSelectedModuleList(moduleMasterList));
+            UniversityList universitySelectedList = storage.readSelectedUniversityList(
+                    universityMasterList, moduleMasterList);
+            ModuleList moduleSelectedList = storage.readSelectedModuleList(
+                    moduleMasterList);
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;

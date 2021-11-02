@@ -29,6 +29,10 @@ public class ModuleList {
         }
     }
 
+    public void removeModule(int index) {
+        list.remove(index);
+    }
+
     public int getSize() {
         return list.size();
     }
@@ -41,6 +45,15 @@ public class ModuleList {
     public boolean isModuleExist(String moduleCode) {
         for (Module module : list) {
             if (module.moduleCode.equals(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isModuleExist(Module searchModule) {
+        for (Module module : list) {
+            if (module.equals(searchModule)) {
                 return true;
             }
         }

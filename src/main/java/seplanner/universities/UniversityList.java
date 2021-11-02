@@ -1,5 +1,7 @@
 package seplanner.universities;
 
+import seplanner.modules.ModuleMapping;
+
 import java.util.ArrayList;
 
 public class UniversityList {
@@ -62,6 +64,15 @@ public class UniversityList {
             if (list.get(i).name.equals(universityName)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean isExistMapping(ModuleMapping mapping, String universityName) {
+        University university = getUniversity(universityName);
+        if (university != null) {
+            System.out.println(university.getMappingListSize());
+            return university.isExistMapping(mapping);
         }
         return false;
     }
