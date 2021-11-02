@@ -3,13 +3,13 @@ package medbot.command.personcommand;
 import medbot.command.Command;
 
 public abstract class ListPersonCommand extends Command {
-    private boolean getArchived;
+    private boolean getHidden;
 
-    public ListPersonCommand(boolean getArchived) {
-        this.getArchived = getArchived;
+    public ListPersonCommand(boolean getHidden) {
+        this.getHidden = getHidden;
     }
 
-    public boolean getArchived() {
-        return getArchived;
+    public boolean getHidden() {
+        return getHidden;
     }
 }

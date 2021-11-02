@@ -6,13 +6,13 @@ import medbot.ui.Ui;
 import medbot.command.personcommand.ListPersonCommand;
 
 public class ListStaffCommand extends ListPersonCommand {
-    public ListStaffCommand(boolean getArchived) {
-        super(getArchived);
+    public ListStaffCommand(boolean getHidden) {
+        super(getHidden);
     }
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allStaffString = StaffUi.getAllStaffsString(scheduler.listStaff(getArchived()));
+        String allStaffString = StaffUi.getAllStaffsString(scheduler.listStaff(getHidden()));
         ui.printOutput(allStaffString);
     }
 }

@@ -291,7 +291,7 @@ class UiTest {
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
                 + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
-                + "archive" + END_LINE + "unarchive" + END_LINE + "get view" + END_LINE + END_LINE
+                + "help" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
@@ -310,7 +310,7 @@ class UiTest {
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
                 + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
-                + "archive" + END_LINE + "unarchive" + END_LINE + "get view" + END_LINE + END_LINE
+                + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
@@ -422,24 +422,24 @@ class UiTest {
     }
 
     @Test
-    public void testGetArchivePatientMessage() {
+    public void testGetHidePatientMessage() {
         int patientId = 1;
-        String expectedOutput = "The patient with ID: " + patientId + " is archived successfully." + END_LINE;
+        String expectedOutput = "The patient with ID: " + patientId + " is now hidden." + END_LINE;
 
         try {
-            assertEquals(expectedOutput, Ui.getArchivePersonMessage(patientId, ViewType.PATIENT_INFO));
+            assertEquals(expectedOutput, Ui.getHidePersonMessage(patientId, ViewType.PATIENT_INFO));
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
         }
     }
 
     @Test
-    public void testGetUnarchiveStaffMessage() {
+    public void testGetShowStaffMessage() {
         int staffId = 1;
-        String expectedOutput = "The staff with ID: " + staffId + " is unarchived successfully." + END_LINE;
+        String expectedOutput = "The staff with ID: " + staffId + " is now not hidden." + END_LINE;
 
         try {
-            assertEquals(expectedOutput, Ui.getUnarchivePersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));
+            assertEquals(expectedOutput, Ui.getShowPersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
         }

@@ -37,7 +37,7 @@ public abstract class Person implements ListItem {
     protected String emailAddress = "";
     protected String residentialAddress = "";
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
-    protected boolean isArchived = false;
+    protected boolean isHidden = false;
     protected PersonType personType;
 
     public int getId() {
@@ -115,16 +115,16 @@ public abstract class Person implements ListItem {
         residentialAddress = null;
     }
 
-    public boolean isArchived() {
-        return isArchived;
+    public boolean isHidden() {
+        return isHidden;
     }
 
-    public void archive() {
-        isArchived = true;
+    public void hide() {
+        isHidden = true;
     }
 
-    public void unarchive() {
-        isArchived = false;
+    public void show() {
+        isHidden = false;
     }
 
     /**
@@ -193,7 +193,7 @@ public abstract class Person implements ListItem {
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(residentialAddress) + VERTICAL_LINE_SPACED
-                + getArchiveStatusStorageString(isArchived);
+                + getHideStatusStorageString(isHidden);
     }
 
     /**
@@ -306,12 +306,12 @@ public abstract class Person implements ListItem {
     }
 
     /**
-     * Return "A" if person is archived, "U" otherwise.
+     * Return "H" if person is hidden, "S" otherwise.
      *
-     * @param isArchived whether person is archived or not
-     * @return "A" is person is archived, "U" otherwise
+     * @param isHidden whether person is hidden or not
+     * @return "H" is person is hidden, "S" otherwise
      */
-    protected String getArchiveStatusStorageString(boolean isArchived) {
-        return (isArchived) ? "A" : "U";
+    protected String getHideStatusStorageString(boolean isHidden) {
+        return (isHidden) ? "H" : "S";
     }
 }

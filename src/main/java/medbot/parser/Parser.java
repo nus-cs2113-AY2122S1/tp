@@ -24,8 +24,8 @@ public abstract class Parser {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_SWITCH = "switch";
     private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_ARCHIVE = "archive";
-    private static final String COMMAND_UNARCHIVE = "unarchive";
+    private static final String COMMAND_HIDE = "hide";
+    private static final String COMMAND_SHOW = "show";
     private static final String COMMAND_GET_VIEW = "get view";
 
     private static final String VIEW_TYPE_PATIENT_VIEW = "p";
@@ -128,10 +128,10 @@ public abstract class Parser {
             return CommandType.VIEW;
         case COMMAND_FIND:
             return CommandType.FIND;
-        case COMMAND_ARCHIVE:
-            return CommandType.ARCHIVE;
-        case COMMAND_UNARCHIVE:
-            return CommandType.UNARCHIVE;
+        case COMMAND_HIDE:
+            return CommandType.HIDE;
+        case COMMAND_SHOW:
+            return CommandType.SHOW;
         case COMMAND_GET_VIEW:
             return CommandType.GET_VIEW;
         default:

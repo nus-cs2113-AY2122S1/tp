@@ -7,13 +7,13 @@ import medbot.command.personcommand.ListPersonCommand;
 
 
 public class ListPatientCommand extends ListPersonCommand {
-    public ListPatientCommand(boolean getArchivedPersons) {
-        super(getArchivedPersons);
+    public ListPatientCommand(boolean getHiddenPersons) {
+        super(getHiddenPersons);
     }
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allPatientsString = PatientUi.getAllPatientsString(scheduler.listPatients(getArchived()));
+        String allPatientsString = PatientUi.getAllPatientsString(scheduler.listPatients(getHidden()));
         ui.printOutput(allPatientsString);
     }
 }
