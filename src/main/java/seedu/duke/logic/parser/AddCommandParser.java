@@ -33,6 +33,10 @@ public class AddCommandParser {
     public static final String EMPTY_INFORMATION = "-";
 
     public static Command parse(String userResponse) throws ParseException {
+        if (userResponse.contains("|")) {
+            userResponse = userResponse.replace("|","/");
+        }
+
         CommandType commandType = parseCommandType(userResponse);
 
         String simplifiedUserResponse;

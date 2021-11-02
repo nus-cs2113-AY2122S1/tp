@@ -134,6 +134,8 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 
 > 💡 The task priority is low by default.
 
+> ❗ Any `|` symbol entered in the title will be replaced by a `/` symbol. 
+
 Example:
 
 ```
