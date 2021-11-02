@@ -53,12 +53,13 @@ public class Catalogue {
     }
 
     /**
-     * Checks whether ID is duplicate, if not adds item to ArrayList.
+     * Checks whether ID of new item is a duplicate of an existing item.
+     *
      * @param newItem Item to be added
-     * @throws LibmgrException Thrown when item ID is a duplicate
+     * @throws LibmgrException when item ID is duplicate
      */
-    public void add(Item newItem) throws LibmgrException {
-        Boolean isDuplicate = false;
+    public void checkDuplicateID(Item newItem) throws LibmgrException {
+        boolean isDuplicate = false;
         for (Item current : itemsArrayList) {
             if (newItem.getID().equals(current.getID())) {
                 isDuplicate = true;
@@ -67,9 +68,17 @@ public class Catalogue {
         }
         if (isDuplicate) {
             throw new LibmgrException(ADD_DUPLICATE_ID);
-        } else {
-            itemsArrayList.add(newItem);
         }
+    }
+
+    /**
+     * Checks whether ID is duplicate, if not adds item to ArrayList.
+     * @param newItem Item to be added
+     * @throws LibmgrException when item ID is a duplicate
+     */
+    public void add(Item newItem) throws LibmgrException {
+        checkDuplicateID(newItem);
+        itemsArrayList.add(newItem);
     }
 
     /**
