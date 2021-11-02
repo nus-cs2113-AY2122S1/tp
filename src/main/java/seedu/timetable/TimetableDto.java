@@ -27,6 +27,12 @@ public class TimetableDto {
     private final TimetableUserItem[] saturdayUserItems = new TimetableUserItem[24];
     private final TimetableUserItem[] sundayUserItems = new TimetableUserItem[24];
 
+    /**
+     * Data Transfer Object class for converting Timetable object into a format that can be stored
+     * with Gson.
+     * 
+     * @param timetable The timetable object to convert
+     */
     public TimetableDto(Timetable timetable) {
         this.semester = timetable.getSemester();
         this.earliestHour = timetable.getEarliestHour();
@@ -34,14 +40,24 @@ public class TimetableDto {
         this.modules = timetable.getModules();
         splitTimetableItems(timetable.getMonday(), this.mondayLesson, this.mondayUserItems);
         splitTimetableItems(timetable.getTuesday(), this.tuesdayLesson, this.tuesdayUserItems);
-        splitTimetableItems(timetable.getWednesday(), this.wednesdayLesson, this.wednesdayUserItems);
+        splitTimetableItems(timetable.getWednesday(), this.wednesdayLesson,
+                this.wednesdayUserItems);
         splitTimetableItems(timetable.getThursday(), this.thursdayLesson, this.thursdayUserItems);
         splitTimetableItems(timetable.getFriday(), this.fridayLesson, this.fridayUserItems);
         splitTimetableItems(timetable.getSaturday(), this.saturdayLesson, this.saturdayUserItems);
         splitTimetableItems(timetable.getSunday(), this.sundayLesson, this.sundayUserItems);
     }
 
-    public void splitTimetableItems(TimetableItem[] items, TimetableLesson[] lessons, TimetableUserItem[] userItems) {
+    /**
+     * Splits TimetableItem array into 2 arrays depending on which child class of TimetableItem the
+     * object belongs to.
+     * 
+     * @param items TimetableItem array
+     * @param lessons TimetableLesson array to store TimetableLesson type objects
+     * @param userItems TimetableUserItem array to store TimetableUserItem type objects
+     */
+    public void splitTimetableItems(TimetableItem[] items, TimetableLesson[] lessons,
+            TimetableUserItem[] userItems) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] instanceof TimetableLesson) {
                 lessons[i] = (TimetableLesson) items[i];
@@ -54,19 +70,34 @@ public class TimetableDto {
         }
     }
 
+    /**
+     * Converts TimetableDTO to a Timetable object. Merges TimetableLesson array and
+     * TimetableUserItem array into TimetableItem array that is used in Timetable object.
+     * 
+     * @return
+     */
     public Timetable toTimetable() {
         TimetableItem[] monday = mergeTimetableItems(this.mondayLesson, this.mondayUserItems);
         TimetableItem[] tuesday = mergeTimetableItems(this.tuesdayLesson, this.tuesdayUserItems);
-        TimetableItem[] wednesday = mergeTimetableItems(this.wednesdayLesson, this.wednesdayUserItems);
+        TimetableItem[] wednesday =
+                mergeTimetableItems(this.wednesdayLesson, this.wednesdayUserItems);
         TimetableItem[] thursday = mergeTimetableItems(this.thursdayLesson, this.thursdayUserItems);
         TimetableItem[] friday = mergeTimetableItems(this.fridayLesson, this.fridayUserItems);
         TimetableItem[] saturday = mergeTimetableItems(this.saturdayLesson, this.saturdayUserItems);
         TimetableItem[] sunday = mergeTimetableItems(this.sundayLesson, this.sundayUserItems);
-        return new Timetable(this.semester, this.earliestHour, this.latestHour, this.modules, monday, tuesday,
-                wednesday, thursday, friday, saturday, sunday);
+        return new Timetable(this.semester, this.earliestHour, this.latestHour, this.modules,
+                monday, tuesday, wednesday, thursday, friday, saturday, sunday);
     }
 
-    public TimetableItem[] mergeTimetableItems(TimetableLesson[] lessons, TimetableUserItem[] userItems) {
+    /**
+     * Merges TimetableLessons and TimetableUserItems into a TimetableItem array.
+     * 
+     * @param lessons TimetableLesson array
+     * @param userItems TimetableUserItem array
+     * @return
+     */
+    public TimetableItem[] mergeTimetableItems(TimetableLesson[] lessons,
+            TimetableUserItem[] userItems) {
         TimetableItem[] day = new TimetableItem[24];
         for (int i = 0; i < day.length; i++) {
             if (lessons[i] != null) {

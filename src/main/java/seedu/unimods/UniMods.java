@@ -29,8 +29,8 @@ public class UniMods {
 
     private void setup() {
         timetableStorage = new TimetableStorage(timetablePath);
-        timetable = timetableStorage.loadSchedule();
         TextUi.printWelcomeMessage();
+        timetable = timetableStorage.loadSchedule();
         profiles.add(new Profile("test user", "CEG", "2"));
         profileInUse = profiles.get(0);
         run();
