@@ -314,6 +314,8 @@ public class Parser {
             rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, keywordIdx);
             keyword = parseFieldValue(userInput, keywordIdx + KEY_LENGTH, userInput.length());
             assert !keyword.equals(" ") : "keyword should not be blank.";
+            assert !keyword.contains(" ") : "keyword should not be contain whitespace.";
+
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchItemFormatException();
         }
