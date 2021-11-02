@@ -16,7 +16,7 @@ import static java.lang.Double.parseDouble;
 public class ModuleStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
-    public ArrayList<Module> readModuleList(InputStream inputStream) throws IOException {
+    public ArrayList<Module> readFile(InputStream inputStream) throws IOException {
         ArrayList<Module> moduleList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();

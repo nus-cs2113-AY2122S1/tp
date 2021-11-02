@@ -120,7 +120,13 @@ public class University implements Comparator<University> {
     }
 
     public boolean isExistMapping(ModuleMapping mapping) {
-        return list.contains(mapping);
+        ArrayList<ModuleMapping> mappingList = getList();
+        for (int i = 0; i < getMappingListSize(); i++) {
+            if (mappingList.get(i).equals(mapping)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
