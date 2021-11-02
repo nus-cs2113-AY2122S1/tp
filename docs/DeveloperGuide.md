@@ -51,7 +51,6 @@ The _Architecture Sequence Diagram_ shown above shows how the components usually
 ## Implementation
 ### Add Class
 The sequence diagram shown below illustrates how the `add_class` command works:
->>>>>>> upstream/master
 ![AddClassSequenceDiagram](diagrams/AddClassSequenceDiagram.png)
 
 Steps:
