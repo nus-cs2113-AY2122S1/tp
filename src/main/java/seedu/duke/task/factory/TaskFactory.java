@@ -18,6 +18,8 @@ public abstract class TaskFactory {
     private final String[] requiredFlags;
     final Map<String, String> flags;
 
+    private static final String DESCRIPTION = "description";
+
     String description;
     PriorityEnum priorityEnum;
     RecurrenceEnum recurrenceEnum;
@@ -37,6 +39,9 @@ public abstract class TaskFactory {
             String recurrence = flags.get(TaskFlag.RECURRENCE);
 
             description = flags.get(TaskFlag.DESCRIPTION);
+            if (description.equals("")) {
+                throw new RequiredArgmentNotProvidedException(DESCRIPTION, taskType.toString());
+            }
             priorityEnum = TaskParser.getPriorityEnum(priority);
             recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
