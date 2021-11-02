@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Level;
 
 import static seedu.duke.Parser.isNumeric;
@@ -189,11 +188,15 @@ public class Trip {
 
     private boolean isDateValid(String inputDate) {
         try {
-            LocalDate.parse(inputDate, inputPattern);
-            return true;
+            if (Parser.doesDateReallyExist(inputDate)) {
+                LocalDate.parse(inputDate, inputPattern);
+                return true;
+            } else {
+                return false;
+            }
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
-            Ui.viewFilterDateInvalid();
+            Ui.viewFilterDateFormatInvalid();
             return false;
         }
     }
@@ -294,16 +297,24 @@ public class Trip {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             LocalDate date = LocalDate.parse(dateOfTrip, pattern);
-            if (date.isBefore(LocalDate.EPOCH)) {
-                Ui.dateInvalidError();
-                userInputDateError();
+            if (Parser.doesDateReallyExist(dateOfTrip)) {
+                if (date.isBefore(LocalDate.EPOCH)) {
+                    dateInvalid();
+                } else {
+                    this.dateOfTrip = date;
+                }
             } else {
-                this.dateOfTrip = date;
+                dateInvalid();
             }
         } catch (DateTimeParseException e) {
             Ui.printDateTimeFormatError();
             userInputDateError();
         }
+    }
+
+    private void dateInvalid() throws ForceCancelException {
+        Ui.dateInvalidError();
+        userInputDateError();
     }
 
     public void userInputDateError() throws ForceCancelException {

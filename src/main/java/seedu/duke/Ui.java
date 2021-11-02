@@ -136,7 +136,7 @@ public class Ui {
     }
 
     public static void dateInvalidError() {
-        System.out.println("Sorry, the date you entered is invalid. Only dates after 01-01-1970 are accepted.");
+        System.out.println("Sorry, the date you entered is invalid.");
     }
 
     public static void printIsoFormatError() {
@@ -414,7 +414,7 @@ public class Ui {
         System.out.println("\tPress enter to use today's date");
     }
 
-    public static void viewFilterDateInvalid() {
+    public static void viewFilterDateFormatInvalid() {
         System.out.println("\tPlease enter date as DD-MM-YYYY");
     }
     //@@author
