@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Semester {
+
+    private static final int MILLISECONDS_TO_SECONDS = 1000;
+    private static final int SECONDS_TO_MINUTES = 60;
+
     private int semester;
     private Date examDate;
     private int examDuration;
@@ -23,7 +27,7 @@ public class Semester {
     }
 
     public String getExamInfo() {
-        Date end = new Date(examDate.getTime() + examDuration * 60);
+        Date end = new Date(examDate.getTime() + (long)examDuration * MILLISECONDS_TO_SECONDS * SECONDS_TO_MINUTES);
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
         String date = dateFormat.format(examDate.getTime());

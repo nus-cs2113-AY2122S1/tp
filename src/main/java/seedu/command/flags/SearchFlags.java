@@ -1,5 +1,7 @@
 package seedu.command.flags;
 
+import seedu.ui.TextUi;
+
 public class SearchFlags {
 
     private boolean hasQuickFlag;
@@ -15,6 +17,12 @@ public class SearchFlags {
     private String department;
     private boolean hasSemesterFlag;
     private int semester;
+    private int errorFlag;
+
+    public static final int NO_ERROR = 0;
+    public static final int INVALID_FLAGS = 1;
+    public static final int INVALID_MC = 2;
+    public static final int MC_LENGTH = 2;
 
     public SearchFlags() {
         this.hasQuickFlag = false;
@@ -23,6 +31,7 @@ public class SearchFlags {
         this.hasFacultyFlag = false;
         this.hasExamFlag = false;
         this.hasDepartmentFlag = false;
+        this.errorFlag = NO_ERROR;
     }
 
     public boolean getHasQuickFlag() {
@@ -127,5 +136,24 @@ public class SearchFlags {
 
     public void setSemester(int semester) {
         this.semester = semester;
+    }
+
+    public int getErrorFlag() {
+        return errorFlag;
+    }
+
+    public void setErrorFlag(int errorFlag) {
+        this.errorFlag += errorFlag;
+    }
+
+    public void printErrorMessages() {
+        if (errorFlag == 3) {
+            TextUi.printInvalidFlagMessage();
+            TextUi.printInvalidMcMessage();
+        } else if (errorFlag == 2) {
+            TextUi.printInvalidMcMessage();
+        } else {
+            TextUi.printInvalidFlagMessage();
+        }
     }
 }

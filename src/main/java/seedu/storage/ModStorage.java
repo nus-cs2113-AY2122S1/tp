@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 
 public class ModStorage {
 
@@ -101,19 +102,30 @@ public class ModStorage {
     private static void searchFiles(File[] fileList, String searchTerm, SearchFlags searchFlags) throws IOException {
         int count = 0;
         for (File file : fileList) {
-            String extension = ".json";
-            int extensionIndex = file.getName().indexOf(extension);
-            String modCode = file.getName().substring(0, extensionIndex);
-            Module module = new Module(modCode);
-            if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
-                module = loadModInfo(modCode);
-                if (module.meetsSecondaryConditions(searchFlags)) {
-                    TextUi.printModBriefDescription(module);
+            try {
+                if (doesFileMatch(file, searchTerm, searchFlags)) {
                     count++;
                 }
+            } catch (Exception e) {
+                TextUi.printStorageErrorMessage();
             }
         }
         TextUi.printModsFound(count);
+    }
+
+    private static boolean doesFileMatch(File file, String searchTerm, SearchFlags searchFlags) throws IOException {
+        String extension = ".json";
+        int extensionIndex = file.getName().indexOf(extension);
+        String modCode = file.getName().substring(0, extensionIndex);
+        Module module = new Module(modCode);
+        if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
+            module = loadModInfo(modCode);
+            if (module.meetsSecondaryConditions(searchFlags)) {
+                TextUi.printModBriefDescription(module);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -124,9 +136,13 @@ public class ModStorage {
      */
     public static Module loadModInfo(String moduleCode) throws IOException {
         File file = new File("./data/Modules/" + moduleCode + ".json");
-        InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        return new Gson().fromJson(reader, Module.class);
+        try {
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            return new Gson().fromJson(reader, Module.class);
+        } catch (InvalidPathException e) {
+            throw new IOException();
+        }
     }
 
     public static class FileErrorException extends Exception {

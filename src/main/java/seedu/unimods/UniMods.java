@@ -1,12 +1,9 @@
 package seedu.unimods;
 
 import seedu.command.Command;
-import seedu.exceptions.AddException;
-import seedu.exceptions.EditException;
-import seedu.exceptions.IntegerException;
-import seedu.exceptions.FetchException;
-import seedu.exceptions.ModuleExistException;
+import seedu.exceptions.*;
 import seedu.parser.CommandParser;
+import seedu.storage.ProfileStorage;
 import seedu.storage.TimetableStorage;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
@@ -21,7 +18,6 @@ public class UniMods {
     public static TimetableStorage timetableStorage;
     public static ProfileStorage profileStorage;
     public static CommandParser commandParser = new CommandParser();
-    public static ArrayList<Profile> profiles = new ArrayList<>();
     private static Profile profileInUse;
 
     public static void main(String[] args) {
@@ -33,14 +29,26 @@ public class UniMods {
         profileStorage = new ProfileStorage();
         timetable = timetableStorage.loadSchedule();
         TextUi.printWelcomeMessage();
-        profileInUse = profileStorage.loadProfile();
+        setupProfile();
         run();
+    }
+
+    private void setupProfile() {
+        try {
+            profileInUse = profileStorage.loadProfile();
+        } catch (ProfileException e) {
+            TextUi.printProfileException(e);
+            String name = TextUi.getCommand(TextUi.NAME_PROMPT);
+            String major = TextUi.getCommand(TextUi.MAJOR_PROMPT);
+            String year = TextUi.getCommand(TextUi.YEAR_PROMPT);
+            profileInUse = new Profile(name,major,year);
+        }
     }
 
     private void run() {
         Command command;
         do {
-            command = commandParser.parseCommand(TextUi.getCommand(), timetable);
+            command = commandParser.parseCommand(TextUi.getCommand(TextUi.COMMAND_PROMPT), timetable);
             executeCommand(command);
             timetableStorage.save(timetable);
             profileStorage.save(profileInUse);

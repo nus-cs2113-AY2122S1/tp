@@ -7,10 +7,13 @@ import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
 
-import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 
 /**
@@ -28,10 +31,14 @@ public class Timetable implements Comparable<Timetable> {
     private int earliestHour;
     private int latestHour;
 
-    private boolean isEmpty = true;
+    private boolean isEmpty = false;
 
-    private final ArrayList<TimetableUserItem> events = new ArrayList<>();
+    private final ArrayList<TimetableUserItem> events;
     private final ArrayList<Module> modules;
+    private final PriorityQueue<Integer> earliestHours; //Min heap
+    private final PriorityQueue<Integer> latestHours;
+
+
     private final TimetableLogger logger = new TimetableLogger();
 
     private TimetableItem[] monday = new TimetableItem[24];
@@ -41,6 +48,8 @@ public class Timetable implements Comparable<Timetable> {
     private TimetableItem[] friday = new TimetableItem[24];
     private TimetableItem[] saturday = new TimetableItem[24];
     private TimetableItem[] sunday = new TimetableItem[24];
+
+    private Map<DayOfWeek,TimetableItem[]> schedules;
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year.
@@ -52,26 +61,53 @@ public class Timetable implements Comparable<Timetable> {
         this.semester = semester;
         this.earliestHour = DEFAULT_START;
         this.latestHour = DEFAULT_END;
+        events = new ArrayList<>();
+        earliestHours = new PriorityQueue(24);
+        earliestHours.add(DEFAULT_START);
+        latestHours = new PriorityQueue(24,Collections.reverseOrder());
+        latestHours.add(DEFAULT_END);
+
+        schedules = new HashMap<>(){{
+            put(DayOfWeek.MONDAY,monday);
+            put(DayOfWeek.TUESDAY,tuesday);
+            put(DayOfWeek.WEDNESDAY,wednesday);
+            put(DayOfWeek.THURSDAY, thursday);
+            put(DayOfWeek.FRIDAY, friday);
+            put(DayOfWeek.SATURDAY, saturday);
+            put(DayOfWeek.SUNDAY, sunday);
+        }};
 
         checkIfEmpty();
     }
 
-    public Timetable(int semester, int earliestHour, int latestHour, ArrayList<Module> modules, TimetableItem[] mon,
-            TimetableItem[] tues, TimetableItem[] wed, TimetableItem[] thurs, TimetableItem[] fri, TimetableItem[] sat,
-            TimetableItem[] sun) {
-        this.semester = semester;
-        this.earliestHour = earliestHour;
-        this.latestHour = latestHour;
-        this.modules = modules;
-        this.monday = mon;
-        this.tuesday = tues;
-        this.wednesday = wed;
-        this.thursday = thurs;
-        this.friday = fri;
-        this.saturday = sat;
-        this.sunday = sun;
+    public Timetable(TimetableDto timetableDto) {
+        this.semester = timetableDto.getSemester();
+        this.earliestHour = timetableDto.getEarliestHour();
+        this.latestHour = timetableDto.getLatestHour();
+        this.earliestHours = new PriorityQueue<>(24);
+        this.latestHours = new PriorityQueue(24,Collections.reverseOrder());
+        this.modules = timetableDto.getModules();
+        this.events = timetableDto.getEvents();
+        this.monday = timetableDto.getMondayItems();
+        this.tuesday = timetableDto.getTuesdayItems();
+        this.wednesday = timetableDto.getWednesdayItems();
+        this.thursday = timetableDto.getThursdayItems();
+        this.friday = timetableDto.getFridayItems();
+        this.saturday = timetableDto.getSaturdayItems();
+        this.sunday = timetableDto.getSundayItems();
+
+        schedules = new HashMap<>(){{
+            put(DayOfWeek.MONDAY,monday);
+            put(DayOfWeek.TUESDAY,tuesday);
+            put(DayOfWeek.WEDNESDAY,wednesday);
+            put(DayOfWeek.THURSDAY, thursday);
+            put(DayOfWeek.FRIDAY, friday);
+            put(DayOfWeek.SATURDAY, saturday);
+            put(DayOfWeek.SUNDAY, sunday);
+        }};
 
         checkIfEmpty();
+        addHoursFromDto(timetableDto);
     }
 
     private void checkIfEmpty() {
@@ -82,6 +118,15 @@ public class Timetable implements Comparable<Timetable> {
         isScheduleEmpty(friday);
         isScheduleEmpty(saturday);
         isScheduleEmpty(sunday);
+    }
+
+    private void addHoursFromDto(TimetableDto dto) {
+        dto.getEarliestHours().forEach(hour -> {
+            earliestHours.add(hour);
+        });
+        dto.getLatestHours().forEach(hour -> {
+            latestHours.add(hour);
+        });
     }
 
     private void isScheduleEmpty(TimetableItem[] schedule) {
@@ -103,31 +148,7 @@ public class Timetable implements Comparable<Timetable> {
      * @see TimetableLesson
      */
     public void addItem(DayOfWeek day, TimetableItem item) {
-        switch (day) {
-        case MONDAY:
-            addItemToSchedule(item, monday);
-            break;
-        case TUESDAY:
-            addItemToSchedule(item, tuesday);
-            break;
-        case WEDNESDAY:
-            addItemToSchedule(item, wednesday);
-            break;
-        case THURSDAY:
-            addItemToSchedule(item, thursday);
-            break;
-        case FRIDAY:
-            addItemToSchedule(item, friday);
-            break;
-        case SATURDAY:
-            addItemToSchedule(item, saturday);
-            break;
-        case SUNDAY:
-            addItemToSchedule(item, sunday);
-            break;
-        default:
-            break;
-        }
+        addItemToSchedule(item,schedules.get(day));
     }
 
     public void addLesson(Module module, Integer semester, Lesson lesson) {
@@ -149,17 +170,20 @@ public class Timetable implements Comparable<Timetable> {
      * If the item has an earlier starting hour, the starting hour = item's starting hour
      * And same with ending hour
      *
-     * @param start The starting hour of the item to be added
-     * @param end The ending hour of the item to be added
      */
-    private void adjustStartAndEndHours(int start, int end) {
-        if (start < earliestHour) {
-            earliestHour = start;
+    private void adjustStartAndEndHours() {
+        if (earliestHours.peek() != null) {
+            earliestHour = earliestHours.peek();
+        } else {
+            earliestHour = DEFAULT_START;
         }
 
-        if (end > latestHour) {
-            latestHour = end;
+        if (latestHours.peek() != null) {
+            latestHour = latestHours.peek();
+        } else {
+            latestHour = DEFAULT_END;
         }
+
         assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
     }
 
@@ -179,8 +203,10 @@ public class Timetable implements Comparable<Timetable> {
         int end = timetableItem.getEndHour();
         for (int i = start; i < end; i++) {
             schedule[i] = timetableItem;
+            earliestHours.add(start);
+            latestHours.add(end);
         }
-        adjustStartAndEndHours(start, end);
+        adjustStartAndEndHours();
         isEmpty = false;
     }
 
@@ -234,49 +260,28 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Sets the TimetableLesson for the particular time slot to be null where the
-     * timetableLesson is scheduled for the module to be deleted.
+     * Sets the TimetableItem for the particular time slot to be null where the
+     * timetableitem is scheduled for the module to be deleted.
      * 
      * @param schedule Schedule contains the lessons of the user for a particular
      *                 day of the week.
-     * @param moduleCode ModuleCode to be Deleted
-     * @see Module
+     * @param title Tilte of TimetableItem to be Deleted
+     * @see TimetableItem
      */
     private void deleteItemFromSchedule(String title, TimetableItem[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null && schedule[i].getTitle().toUpperCase(Locale.ROOT).equals(title)) {
+                latestHours.remove(schedule[i].getEndHour());
+                earliestHours.remove(schedule[i].getStartHour());
                 schedule[i] = null;
             }
         }
+        adjustStartAndEndHours();
     }
 
     public void editEventFromSchedule(TimetableUserItem event, String input) {
-        TimetableItem[] schedule = getSunday();
-        switch (DayOfWeek.valueOf(event.getDay().toUpperCase(Locale.ROOT))) {
-        case MONDAY:
-            schedule = getMonday();
-            break;
-        case TUESDAY:
-            schedule = getTuesday();
-            break;
-        case WEDNESDAY:
-            schedule = getWednesday();
-            break;
-        case THURSDAY:
-            schedule = getThursday();
-            break;
-        case FRIDAY:
-            schedule = getFriday();
-            break;
-        case SATURDAY:
-            schedule = getSaturday();
-            break;
-        case SUNDAY:
-            schedule = getSunday();
-            break;
-        default:
-            break;
-        }
+        DayOfWeek day = DayOfWeek.valueOf(event.getDay().toUpperCase(Locale.ROOT));
+        TimetableItem[] schedule = schedules.get(day);
         String title = event.getTitle();
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null && schedule[i].getTitle().equals(title)) {
@@ -294,7 +299,13 @@ public class Timetable implements Comparable<Timetable> {
             throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
         }
         modules.clear();
+        events.clear();
         clearTimetableFromLessons();
+        earliestHours.clear();
+        latestHours.clear();
+        earliestHours.add(DEFAULT_START);
+        latestHours.add(DEFAULT_END);
+        adjustStartAndEndHours();
         TextUi.printTimetableCleared();
         logger.log(Level.INFO, "All modules removed from timetable");
     }
@@ -350,33 +361,8 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     public TimetableItem getItem(String day, int startHour) {
-        TimetableItem item;
-        switch (DayOfWeek.valueOf(day.toUpperCase(Locale.ROOT))) {
-        case MONDAY:
-            item = monday[startHour];
-            break;
-        case TUESDAY:
-            item = tuesday[startHour];
-            break;
-        case WEDNESDAY:
-            item = wednesday[startHour];
-            break;
-        case THURSDAY:
-            item = thursday[startHour];
-            break;
-        case FRIDAY:
-            item = friday[startHour];
-            break;
-        case SATURDAY:
-            item = saturday[startHour];
-            break;
-        case SUNDAY:
-            item = sunday[startHour];
-            break;
-        default:
-            return null;
-        }
-        return item;
+        DayOfWeek dayOfWeek = DayOfWeek.valueOf(day.toUpperCase(Locale.ROOT));
+        return schedules.get(dayOfWeek)[startHour];
     }
 
     public int getSemester() {
@@ -398,6 +384,14 @@ public class Timetable implements Comparable<Timetable> {
 
     public ArrayList<Module> getModules() {
         return this.modules;
+    }
+
+    public PriorityQueue<Integer> getEarliestHours() {
+        return earliestHours;
+    }
+
+    public PriorityQueue<Integer> getLatestHours() {
+        return latestHours;
     }
 
     public TimetableItem[] getMonday() {

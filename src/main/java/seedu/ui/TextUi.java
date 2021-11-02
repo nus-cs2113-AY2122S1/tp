@@ -1,12 +1,14 @@
 package seedu.ui;
 
 import seedu.command.flags.AddFlag;
+import seedu.exceptions.ProfileException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,8 +32,12 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
-    private static final String USER_PROMPT = "What would you like to do?";
-    private static final String PROMPT_CURSOR = "==>";
+    public static final String COMMAND_PROMPT = "What would you like to do?";
+    public static final String NAME_PROMPT = "What is your name?";
+    public static final String MAJOR_PROMPT = "What is your major?";
+    public static final String YEAR_PROMPT = "Which year of study are you currently in?";
+    private static final String PROFILE_SETUP = "Setup a new profile by answering the following: ";
+    private static final String PROMPT_CURSOR = "==> ";
     private static final String PREREQ_SUCCESS = "Yes! You are eligible to take up: ";
     private static final String PREREQ_FAIL = "Oops, you have not met the module's prerequisite: ";
     private static final String HELP_HEADER = LINE + "\tUNIMods accepts the following commands:-\n";
@@ -57,9 +63,9 @@ public class TextUi {
             + "\n \"store\" <grade> \">\" <module_code> ";
 
     /*------------- PUBLIC COMMANDS ----------- */
-    public static String getCommand() {
+    public static String getCommand(String prompt) {
         System.out.println(LINE);
-        System.out.println(USER_PROMPT);
+        System.out.println(prompt);
         System.out.print(PROMPT_CURSOR);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -67,6 +73,11 @@ public class TextUi {
             input = in.nextLine();
         }
         return input;
+    }
+
+    public static void printProfileException(ProfileException e) {
+        System.out.println(e.getMessage());
+        System.out.println(PROFILE_SETUP);
     }
 
     public static AddFlag getAddFlag() throws UniModsException {
@@ -86,15 +97,6 @@ public class TextUi {
         }
     }
 
-    public static String getReply(String question) {
-        System.out.print(question);
-        String input = in.nextLine();
-        while (input.isEmpty()) {
-            input = in.next();
-        }
-        return input;
-    }
-
     public static String getLessonCommand(String lessonType) {
         String output = "Which " + lessonType + " would you like to choose? ";
         System.out.print(output);
@@ -107,7 +109,8 @@ public class TextUi {
 
     public static String printAskConfirmation(Lesson lesson) {
         String output = "Are you sure you want to add " + lesson.lessonDetails()
-                + " as it conflicts with your current timetable (y/n)";
+                + " as it conflicts with your current timetable (y/n)\n"
+                + "Note that conflicting lessons will override current lesson/event in timetable";
         System.out.print(output);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -144,13 +147,17 @@ public class TextUi {
         System.out.println("Error occurred.");
     }
 
+    public static void printMcErrorMessage() {
+        System.out.println("Invalid input for MC flag. MC flag is ignored.");
+    }
+
     public static void printUpdateStartMessage() {
-        System.out.println("Updating, standby...");
+        System.out.println("Updating, standby... This may take up to 10 minutes.");
         System.out.println("Press ENTER to cancel the update.");
     }
 
     public static void printUpdateInterruptMessage() {
-        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
+        System.out.println("\n" + LINE + "UPDATE CANCELLED.\n" + LINE);
     }
 
     public static void printUpdateSuccessMessage() {
@@ -170,7 +177,8 @@ public class TextUi {
     }
 
     public static void printNoConnectionMessage() {
-        System.out.println(LINE + "Failed to connect to NUSMods API. Loading saved information.");
+        System.out.println(LINE + "Failed to connect to NUSMods API. This could either be because the mod does not "
+                + "exist, or due to a connection error. \nChecking local saved information.");
         System.out.println(LINE);
     }
 
@@ -186,6 +194,8 @@ public class TextUi {
 
     public static void printAddMessage(String moduleCode) {
         System.out.println("Now adding " + moduleCode + " into timetable");
+        System.out.println("Lessons with the same class number are packed together");
+        System.out.println("Adding any type of lesson will add all lessons with similar class number into timetable");
     }
 
     public static void printLessonMessage(String lessonType) {
@@ -290,15 +300,40 @@ public class TextUi {
         System.out.println("Current semester: " + currentSem);
     }
 
-    public static void printEvents(Timetable timetable) {
-        ArrayList<TimetableUserItem> timetableUserItem = timetable.getEvents();
+    public static void printEvents(ArrayList<TimetableUserItem> timetableUserItems) {
+
         int serial = SERIAL;
-        for (TimetableUserItem userItem : timetableUserItem) {
-            System.out.println(serial + ": " + userItem.toString());
+        for (TimetableUserItem userItem : timetableUserItems) {
+            System.out.println(serial++ + ": " + userItem.toString());
         }
     }
 
     public static void printEditMessage() {
         System.out.println("Noted, event name has been changed");
+    }
+
+    public static void printUpdateProgressMessage(int count) {
+        System.out.print("\rApproximately ");
+        System.out.printf("%.2f", (double)count / 130);
+        System.out.print("% done.");
+    }
+
+    public static void printSearchStartMessage() {
+        System.out.println("Searching, standby...");
+        System.out.println("If nothing is appearing even after a while, press ENTER to cancel the search "
+                + "and narrow down your search terms.");
+    }
+
+    public static void printInvalidMcMessage() {
+        System.out.println("Your MC flag has an invalid input, please check your MC flag.");
+    }
+
+    public static void printInvalidFlagMessage() {
+        System.out.println("You have inputted some invalid flags, please check your flags.");
+    }
+
+    public static void printStorageErrorMessage() {
+        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself. Delete "
+                + "all files in your Module directory.");
     }
 }

@@ -80,7 +80,7 @@ public class NusMods {
             ModStorage.saveModInfo(moduleCode, inputStream);
             return ModStorage.loadModInfo(moduleCode);
         } catch (Exception e) {
-            throw new FetchException("Unable to fetch module");
+            throw new FetchException("Unable to fetch module, please ensure that module exists");
         }
     }
 
@@ -238,6 +238,7 @@ public class NusMods {
          * @throws IOException if there is no connection.
          */
         private static void search(String searchTerm, SearchFlags searchFlags) throws IOException {
+            TextUi.printSearchStartMessage();
             InputStream inputStream = getOnlineModList();
             JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
             int count = 0;
@@ -301,7 +302,7 @@ public class NusMods {
                     InputStream modStream = getOnlineModInfo(moduleCode);
                     ModStorage.saveModInfo(moduleCode, modStream);
                     count++;
-                    System.out.println(count);
+                    TextUi.printUpdateProgressMessage(count);
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
                     TextUi.printErrorMessage();
