@@ -105,7 +105,9 @@ Method:
 - I'll let you know that the recipe has been added
 - I'll list down the ingredients and steps required for said recipe
 - Finally, some good ******** food...
-    
+
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
+
 ---
 
 ### 2. Delete a recipe: `deleteRecipe`
@@ -131,6 +133,9 @@ OK! The recipe has been deleted from your cookbook.
 #### Description of the outcome:
 - I'll let you know that the recipe has been removed
 - You can type `listRecipes` to confirm if the correct recipe has been removed
+
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
+
 
 ---
 
@@ -168,6 +173,8 @@ Method:
 
 - I'll show you the ingredients you need for that recipe, and the steps required to prepare it.
 
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
+
 ---
 
 ### 4. Display all recipes: `listRecipes`
@@ -191,6 +198,8 @@ Shows all recipes saved in the database
 
 - I'll show you all the existing recipes saved in my database.
 
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
+
 ---
 
 ### 5. Exit Gordon: `exit`
@@ -212,6 +221,8 @@ Pack your bags, you're off the show
 #### Description of the outcome:
 
 - Pack your bags; you're off the show
+
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
 
 ---
 
@@ -248,6 +259,8 @@ Shows you the proper format of commands.
 
 - I'll show you the proper format for using every command
 - Just type `help` anywhere in the terminal for a quick guide if you forget any command
+
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
 
 ---
 
@@ -287,6 +300,8 @@ Setting times...
 Times set successfully.
 ```
 
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
+
 ---
 
 ### 8. Find a recipe by attribute: `find`
@@ -322,6 +337,8 @@ Searching by total time...
 1. Cookies (Total time: 30)
 2. Caprese Salad (Total time: 10)
 ```
+
+Quick reference: [Contents](#contents) | [Cheat sheet](#cheat-sheet)
 
 ---
 
