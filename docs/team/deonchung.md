@@ -95,6 +95,7 @@ code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deo
 * Pull Requests reviewed with non-trivial review comments. [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)
 
 ### Community
+
 * Reported bugs and suggestions for other teams in the class. [[#1](https://github.com/deonchung/ped/issues/1)], [[#2](https://github.com/deonchung/ped/issues/2)],
   [[#3](https://github.com/deonchung/ped/issues/3)], [[#4](https://github.com/deonchung/ped/issues/4)], [[#5](https://github.com/deonchung/ped/issues/5)],   
   [[#6](https://github.com/deonchung/ped/issues/6)], [[#7](https://github.com/deonchung/ped/issues/7)]
