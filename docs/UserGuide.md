@@ -824,7 +824,8 @@ writing / reading the `.csv` files at the same time. This will very likely cause
 - Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
 above.
   - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
-  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number.
+  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
+  less than 1000000000.
   - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
   specified ealier on in the user guide.
@@ -837,7 +838,9 @@ format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with
 considered corrupted and not be loaded into Stonks XD.
 - Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
   cause all your entries and budgets to be recognised as a different currency.
-
+- Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
+total limit of 100000000000 for expense / income. Entries that cause you to exceed either limit will be considered 
+corrupted.
 
 
 #### In the event of corrupted data
