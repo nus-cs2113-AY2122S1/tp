@@ -2,6 +2,8 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Deadline;
 
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineLine extends TaskLine {
     private String type;
 
@@ -21,15 +23,26 @@ public class DeadlineLine extends TaskLine {
         description = task.getDescription();
         priority = task.getPriority().toString();
         recurrence = task.getRecurrence().toString();
-        dueDate = task.getDueDate().toString();
+        dueDate = task.getDueDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         reminderTime = task.getReminderInformation().getUserTime();
         reminderMessage = task.getReminderInformation().getMessage();
     }
 
-    public String getString() {
-        return type + "|" + description + "|" + dueDate + "|"
-                + priority + "|" + recurrence + "|"
-                + reminderTime + "|" + reminderMessage;
+    public String getString(int taskIndex) {
+        String line = type + " " + description + " --priority " + priority;
+        if (!recurrence.equals("none")) {
+            line += " --recur " + recurrence;
+        }
+        if (dueDate != null) {
+            line += " --due " + dueDate + System.lineSeparator() + getReminderString(taskIndex);
+        }
+        return line;
+    }
+
+    public String getReminderString(int taskIndex) {
+        return "reminder " + taskIndex
+                + " --time " + reminderTime
+                + " --message " + reminderMessage;
     }
 
     public void updateTime(long userTime) {

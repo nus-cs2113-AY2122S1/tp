@@ -29,7 +29,7 @@ public class TaskFileWriter {
             try {
                 appendToFile(taskLine + System.lineSeparator());
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                System.out.println("Something went wrong: \n" + e.getMessage());
             }
         }
     }

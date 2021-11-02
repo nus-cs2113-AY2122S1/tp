@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FileCreater {
@@ -29,13 +30,9 @@ public class FileCreater {
         }
     }
 
-    public static void createAll() {
-        try {
-            createFolder();
-            createListFile();
-            createDiaryFile();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+    public static void createAll() throws IOException {
+        createFolder();
+        createListFile();
+        createDiaryFile();
     }
 }

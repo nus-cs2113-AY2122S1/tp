@@ -33,7 +33,7 @@ public class DataManager {
     public static ArrayList<String> getStringLineList() {
         ArrayList<String> strings = new ArrayList<>();
         for (int i = 0; i < getSize(); i++) {
-            strings.add(taskLines.get(i).getString());
+            strings.add(taskLines.get(i).getString(i + 1));
         }
         return strings;
     }

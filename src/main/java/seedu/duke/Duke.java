@@ -5,6 +5,7 @@ import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.storage.FileCreater;
+import seedu.duke.storage.StorageManager;
 import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
@@ -53,10 +54,10 @@ public class Duke implements TaskManagerObserver {
 
         ui.printLogo();
 
+        StorageManager.readLocalData(taskManager);
+
         Command userCommand;
         CommandResult commandResult = null;
-
-        FileCreater.createAll();
 
         do {
 
