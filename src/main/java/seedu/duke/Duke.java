@@ -11,32 +11,19 @@ import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
 
-import java.util.Scanner;
-
 public class Duke {
 
-    private final Scanner in;
     private final Ui ui;
     private ReminderManager reminderManager;
     private TaskManager taskManager;
 
     public Duke() {
-        in = new Scanner(System.in);
         ui = new Ui();
 
         DataManager dataManager = new DataManager();
         taskManager = new TaskManager(dataManager);
 
         reminderManager = new ReminderManager();
-    }
-
-    public String readInput() {
-        ui.printCursor();
-        if (!in.hasNextLine()) {
-            return CommandEnum.BYE.toString();
-        }
-        String input = in.nextLine();
-        return input;
     }
 
     public CommandResult runCommand(Command userCommand) {
@@ -62,7 +49,7 @@ public class Duke {
 
         do {
 
-            String userInput = readInput();
+            String userInput = ui.readInput();
 
             userCommand = CommandParser.parseCommand(taskManager, userInput);
 
