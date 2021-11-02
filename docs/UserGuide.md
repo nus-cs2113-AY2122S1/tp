@@ -49,7 +49,7 @@ you may have in order to help you organise your CCA's timetable.
 
 **CCA Manager** helps you to organize three main types of information: [Members], [Training] and [Attendance].
 With **CCA Manager**, you can organize your data with the help of useful commands such as `add`, `delete`, `edit`, `list` and `find` function
-### Quick Reference: | [add](#Add) | [list](#list) | [delete](#delete) | [edit](#edit) | [find](#find)
+### Quick Reference: | [Member Commands](#member-commands) | [Training Commands](#trianing-commands) | [Attendance Commands](#attendance-commands)
 
 
 ## Member Commands
