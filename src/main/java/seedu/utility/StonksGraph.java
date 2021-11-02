@@ -286,24 +286,26 @@ public class StonksGraph {
         }
     }
 
-    private double determineBarValue(double max) {
-        double barValue;
-        if (max < 1) {
-            if (max >= 0.1) {
-                barValue = 0.1;
-            } else {
-                barValue = 0.01;
-            }
-        }
+    private double determineBarValue(double totalValue) {
+        boolean isBetweenZeroPointOneAndOne = totalValue >= 0.1 && totalValue < 1;
+        boolean isSmallerThanZeroPointOne = totalValue < 0.1;
         
+        if (isBetweenZeroPointOneAndOne) {
+            writeToGraph(5, 75, "Unit: 0.1" );
+            return 0.1;
+        } else if (isSmallerThanZeroPointOne) {
+            writeToGraph(5, 75, "Unit: 0.01" );
+            return 0.01;
+        }
         
         int noOfDigits = 0;
-        while (max >= 1) {
-            max = max /= 10;
+        while (totalValue >= 1) {
+            totalValue = totalValue /= 10;
             noOfDigits++;
         }
+        double barValue = Math.pow(10, noOfDigits - 1);
         
-        barValue = Math.pow(10, noOfDigits - 1);
+        
         writeToGraph(5, 75, "Unit: " + barValue);
         return barValue;
     }
