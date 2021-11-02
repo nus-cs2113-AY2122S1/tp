@@ -459,4 +459,11 @@ public class Ui {
         System.out.println("You have chosen to force cancel this operation.");
     }
 
+    public static void locationIsBlank() {
+        System.out.println("No location was entered. Please enter your trip location: ");
+    }
+
+    public static void noPersonsAdded() {
+        System.out.println("No persons were added to this trip. Please enter the names of the people in this trip: ");
+    }
 }

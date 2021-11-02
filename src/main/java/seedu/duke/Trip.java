@@ -39,6 +39,12 @@ public class Trip {
         //empty constructor
     }
 
+    private static final int LOCATION_STRING = 0;
+    private static final int DATE_STRING = 1;
+    private static final int FORCUR_STRING = 2;
+    private static final int EXRATE_STRING = 3;
+    private static final int PERSONS_STRING = 4;
+
     /**
      * Non-empty {@link Trip} constructor. Reads in a String array and processes it to set attributes for a given Trip.
      *
@@ -46,11 +52,11 @@ public class Trip {
      */
     public Trip(String[] newTripInfo) throws ForceCancelException {
         assert newTripInfo.length == 5;
-        this.location = newTripInfo[0];
-        setDateOfTrip(newTripInfo[1]);
-        setForeignCurrency(newTripInfo[2].toUpperCase());
-        setExchangeRate(newTripInfo[3]);
-        this.listOfPersons = splitPeople(newTripInfo[4]);
+        setLocation(newTripInfo[LOCATION_STRING]);
+        setDateOfTrip(newTripInfo[DATE_STRING]);
+        setForeignCurrency(newTripInfo[FORCUR_STRING].toUpperCase());
+        setExchangeRate(newTripInfo[EXRATE_STRING]);
+        setListOfPersons(splitPeople(newTripInfo[PERSONS_STRING]));
     }
 
     //@@author leeyikai
@@ -440,11 +446,26 @@ public class Trip {
         return this.location;
     }
 
+
+    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException {
+        if (listOfPersons.isEmpty()) {
+            Ui.noPersonsAdded();
+            String userInput = Ui.receiveUserInput();
+            setListOfPersons(splitPeople(userInput));
+            return;
+        }
+        this.listOfPersons = listOfPersons;
+    }
+
     public ArrayList<Person> getListOfPersons() {
         return listOfPersons;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String location) throws ForceCancelException {
+        if (location.isBlank()) {
+            Ui.locationIsBlank();
+            setLocation(Ui.receiveUserInput());
+        }
         this.location = location;
     }
 
@@ -495,6 +516,9 @@ public class Trip {
     private ArrayList<Person> splitPeople(String peopleChained) {
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
+            if (personName.isBlank()) {
+                continue;
+            }
             Person person = new Person(personName.trim());
             listOfPeople.add(person);
         }
