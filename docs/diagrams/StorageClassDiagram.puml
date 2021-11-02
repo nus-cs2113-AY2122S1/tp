@@ -4,6 +4,8 @@
 hide circle
 ' hide the icons for access modifiers
 skinparam classAttributeIconSize 0
+!include style.puml
+skinparam classBackgroundColor COLOR_UTILITIES_BOX
 
 Storage -> FileParser
 
