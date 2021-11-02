@@ -5,6 +5,7 @@ import inventory.Medicine;
 import inventory.Stock;
 import utilities.ui.Ui;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -239,9 +240,24 @@ public class StockValidator extends MedicineValidator {
                 filteredStocks.add(stock);
             }
         }
+
+        Date currentDate = new Date();
+        String currentDateString = DateParser.dateToString(currentDate);
+
+        try {
+            currentDate = DateParser.stringToDate(currentDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (expiryDate.before(currentDate)) {
+            ui.print("Expired date detected! Action aborted.");
+            return false;
+        }
+
         for (Stock filteredStock : filteredStocks) {
             if (expiryDate.equals(filteredStock.getExpiry())) {
-                ui.print("Same expiry date already exists!");
+                ui.print("Same expiry date already exists! Action aborted.");
                 return false;
             }
         }

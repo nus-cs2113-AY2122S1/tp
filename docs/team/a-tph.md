@@ -59,8 +59,7 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
 ### Documentation
 
 * [User Guide](../UserGuide.md)
-    * Added documentation for `updatestock`, `updateprescription` and `updateorder` commands
-      . [[#186](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/186)]
+    * Added documentation for `updatestock`, `updateprescription` and `updateorder` commands. [[#186](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/186)]
 
 * [Developer Guide](../DeveloperGuide.md)
     * Created skeleton Developer guide for the team. [[#210](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/210)]
@@ -72,7 +71,14 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
             * `UpdateStockCommand`, `UpdatePrescriptionCommand` and `UpdateOrderCommand` sequence diagrams and detailed
               explanation.
 
+### Team-Based
+
+* Created and contributed to [Trello](https://trello.com/b/nMVm0vgz/cs2113t-user-stories) dashboard.
+* Attended weekly team meetings.
+* Contributed to release managements.
+* Ensured UG and DG has a consistent format.
+* Pull Requests reviewed with non-trivial review comments. [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171), [#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
+
 ### Community
 
-* Pull Requests reviewed with non-trivial review comments
-[To be continued...]
+* Reported bugs and provided suggestions for other teams in the class. [[#1](https://github.com/a-tph/ped/issues/1), [#2](https://github.com/a-tph/ped/issues/2), [#3](https://github.com/a-tph/ped/issues/3), [#4](https://github.com/a-tph/ped/issues/4), [#5](https://github.com/a-tph/ped/issues/5)]

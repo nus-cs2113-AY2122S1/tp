@@ -133,6 +133,11 @@ public class DeleteStockCommand extends Command {
 
             Stock stock = (Stock) medicine;
             Date stockExpiryDate = stock.getExpiry();
+
+            if (stock.isDeleted()) {
+                continue;
+            }
+
             if (stockExpiryDate.before(date) || stockExpiryDate.equals(date)) {
                 stock.setQuantity(0);
                 stock.setDeleted(true);
