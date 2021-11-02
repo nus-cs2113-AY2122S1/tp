@@ -103,11 +103,11 @@ Examples:
 Shows a list of all students in a particular class.
 
 Format: `list_students c/<CLASS_ID>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
 
 Examples:
-* `list_students c/CS2113T-F12`
-* `list_students c/CS2101-C03`
+* `list_students c/CS2113T-F11`
+* `list_students c/CS2101-C04`
 
 <br>
 
@@ -115,13 +115,13 @@ Examples:
 Adds a student to a particular class.
 
 Format: `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
 * `STUDENT_ID` refers to the ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the name of the student (e.g. Jon Lim).
 
 Examples:
-* `add_student c/CS2113T-F12 i/a0212345x n/Jon Lim`
-* `add_student c/CS2101-C03 n/Jonny Lims i/a1234567i`
+* `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
+* `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
 
 <br>
 
@@ -129,14 +129,14 @@ Examples:
 Edits student information from a particular class
 
 Format: `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_NAME>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `STUDENT_ID` refers to the updated ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the updated name of the student (e.g. Jon Limbs).
 
 Examples:
-* `edit_student c/CS2113T-F12 s/1 i/a03452345x n/Jon Lim`
-* `edit_student c/CS2101-C03 s/5 n/Jonny Lims i/a120067i`
+* `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
+* `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
 
 <br>
 
@@ -144,11 +144,11 @@ Examples:
 Deletes student information from a particular class.
 
 Format: `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 
 Examples:
-* `delete_student c/CS2113T-F12 s/1`
+* `delete_student c/CS2113T-F11 s/1`
 
 <br>
 
@@ -156,12 +156,12 @@ Examples:
 Displays all students in the class matching the keyword along with their index.
 
 Format: `find_student c/<CLASS_ID> k/<KEYWORD>`
-* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11). **Cannot contain whitespaces.**
 * `KEYWORD` refers to the keyword used to search the student list of the class.
 
 Examples:
-* `find_student c/CS2113T-F12 k/123`
-* `find_student c/CS2101-C03 k/Jon`
+* `find_student c/CS2113T-F11 k/123`
+* `find_student c/CS2101-D03 k/Jon`
 
 <br>
 
@@ -315,13 +315,13 @@ Examples:
 Sorts and lists students in a module by their overall score according to the desired format. 
 Only marks currently added to students will be taken into consideration for their scores.
 
-Format: `sort_by_scores c/<MODULE_CODE> o/<ORDER>`
-* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+Format: `sort_by_scores c/<CLASS_ID> o/<ORDER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `ORDER` refers to the sorting order. `asc` for ascending and `desc` for descending.
 
 Examples:
-* `sort_by_scores c/CS2113T o/asc`
-* `sort_by_scores c/CS2101 o/desc`
+* `sort_by_scores c/CS2113T-F12 o/asc`
+* `sort_by_scores c/CS2113T-F12 o/desc`
 
 <br>
 
@@ -358,40 +358,41 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 ### Setting comment for a particular student: `set_comment`
 Sets a comment for a student.
 
-Format: `set_comment c/<MODULE_CODE> s/<STUDENT_INDEX> t/<COMMENT>`
-* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+Format: `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in the student list of the module.
 * `COMMENT` refers to the comment to be set.
 > 💡 **Note:**<br />
 > The new comment will overwrite any previous comment set
 
 Examples:
-* `set_comment c/CS2113t s/1 t/Doing well in class`
-* `set_comment c/CS2113t s/1 t/Needs help understanding java`
+* `set_comment c/CS2113T-F12 s/1 t/Doing well in class`
+* `set_comment c/CS2113T-F12 s/1 t/Needs help understanding java`
 
 <br>
 
 ### Deleting comment for a particular student: `delete_comment`
 Deletes the comment for a student.
 
-Format: `delete_comment c/<MODULE_CODE> s/<STUDENT_INDEX>`
-* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+Format: `delete_comment c/<CLASS_ID> s/<STUDENT_INDEX>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in the student list of the module.
 
 Examples:
-* `delete_comment c/CS2113T s/1`
-* `delete_comment c/CS2113T s/5`
+* `delete_comment c/CS2113T-F12 s/1`
+* `delete_comment c/CS2113T-F12 s/5`
 
 <br>
 
 ### Listing comments for all students in a module: `list_comment`
 List comments for all students in a module
 
-Format: `list_comment c/<MODULE_CODE>`
+Format: `list_comment c/<CLASS_ID>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 
 Examples:
-* `list_comment c/CS2113T`
-* `list_comment c/CS2101`
+* `list_comment c/CS2113T-F12`
+* `list_comment c/CS2101-D03`
 
 <br>
 
