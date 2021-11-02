@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 //@@author a-tph
+
 /**
  * Manages medicines that are order objects.
  */
@@ -51,5 +52,27 @@ public class OrderManager {
             }
         }
         return existingQuantity;
+    }
+
+    /**
+     * Extracts the filtered orders for stocks with same name.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param orderName Medicine name for a given order.
+     * @return ArrayList of filteredStocks of the same stock name.
+     */
+    public static ArrayList<Order> getFilteredOrdersByName(ArrayList<Medicine> medicines, String orderName) {
+        ArrayList<Order> filteredOrders = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            boolean isOrderInstance = medicine instanceof Order;
+            if (isOrderInstance) {
+                boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(orderName);
+                boolean isPending = !(((Order) medicine).isDelivered());
+                if (isSameName && isPending) {
+                    filteredOrders.add((Order) medicine);
+                }
+            }
+        }
+        return filteredOrders;
     }
 }

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author a-tph
+
 /**
  * Manages medicines that are prescription objects.
  */
@@ -163,6 +164,7 @@ public class PrescriptionManager {
     }
 
     //@@author deonchung
+
     /**
      * Retrieves the total stock quantity for medicine with same name that has not expired.
      *

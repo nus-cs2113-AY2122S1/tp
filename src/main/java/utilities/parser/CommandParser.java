@@ -57,7 +57,6 @@ import static utilities.parser.Mode.STOCK;
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
-
 public class CommandParser {
     public CommandParser() {
     }

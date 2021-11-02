@@ -6,11 +6,15 @@ import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 public abstract class MedicineValidator {
+    private static Logger logger = Logger.getLogger("MedicineValidator");
+
     public MedicineValidator() {
     }
 
@@ -18,6 +22,7 @@ public abstract class MedicineValidator {
      * Helps to check if the parameters and values required are provided by the user.
      *
      * @param ui                         Reference to the UI object to print messages.
+     * @param medicines                  Arraylist of all medicines.
      * @param parameters                 Parameters entered in by the user.
      * @param requiredParameters         Parameters required by the command.
      * @param optionalParameters         Parameters that are optional.
@@ -26,21 +31,22 @@ public abstract class MedicineValidator {
      * @param validator                  Validator object used for validation checks.
      * @return A boolean value indicating if the parameters and values required are entered by the user.
      */
-    public boolean containsInvalidParametersAndValues(Ui ui, LinkedHashMap<String, String> parameters,
+    public boolean containsInvalidParametersAndValues(Ui ui, ArrayList<Medicine> medicines,
+                                                      LinkedHashMap<String, String> parameters,
                                                       String[] requiredParameters, String[] optionalParameters,
-                                                      String commandSyntax,
-                                                      boolean requiresOptionalParameters,
+                                                      String commandSyntax, boolean requiresOptionalParameters,
                                                       MedicineValidator validator) {
         boolean isInvalidParameter = validator.containsInvalidParameters(ui, parameters, requiredParameters,
                 optionalParameters, commandSyntax, requiresOptionalParameters);
         if (isInvalidParameter) {
+            logger.log(Level.WARNING, "Invalid parameters given by user");
             return true;
         }
 
-        ArrayList<Medicine> medicines = Medicine.getInstance();
         boolean isInvalidParameterValues = validator.containsInvalidParameterValues(ui, parameters,
                 medicines, commandSyntax);
         if (isInvalidParameterValues) {
+            logger.log(Level.WARNING, "Invalid parameters values given by user");
             return true;
         }
 
