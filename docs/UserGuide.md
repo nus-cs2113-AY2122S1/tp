@@ -81,7 +81,9 @@ Example of usage:
 #### Deleting an expense - `delete`
 Deletes expense record(s) from the database by the unique identifier (from list) or by the name.
 
-Format: `expense delete -n [NAME] -i [ID]`
+Format: `expense delete -n [NAME]`
+OR
+Format: `expense delete -i [ID]`
 
 Arguments:
 - `NAME`
