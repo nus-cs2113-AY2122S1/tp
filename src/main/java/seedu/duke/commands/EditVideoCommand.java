@@ -119,10 +119,18 @@ public class EditVideoCommand extends Command {
         }
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
+            if (toEdit.getTitle().equals(title)) {
+                ui.print(EDIT_UNCHANGED_TITLE);
+                return;
+            }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
+            if (toEdit.getID().equals(id)) {
+                ui.print(EDIT_UNCHANGED_ID);
+                return;
+            }
             try {
                 catalogue.checkDuplicateID(id);
             } catch (LibmgrException e) {
@@ -132,10 +140,18 @@ public class EditVideoCommand extends Command {
         }
         if (args.containsKey(KEY_PUBLISHER)) {
             assert publisher != null && !publisher.equals("");
+            if (toEdit.getPublisher().equals(publisher)) {
+                ui.print(EDIT_UNCHANGED_PUBLISHER);
+                return;
+            }
             toEdit.setPublisher(publisher);
         }
         if (args.containsKey(KEY_DURATION)) {
             assert duration != null && !duration.equals("");
+            if (toEdit.getDuration().equals(duration)) {
+                ui.print(EDIT_UNCHANGED_DURATION);
+                return;
+            }
             toEdit.setDuration(duration);
         }
         ui.print(EDIT_VIDEO_MESSAGE, toEdit);

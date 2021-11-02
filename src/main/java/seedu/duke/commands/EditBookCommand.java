@@ -110,10 +110,18 @@ public class EditBookCommand extends Command {
         }
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
+            if (toEdit.getTitle().equals(title)) {
+                ui.print(EDIT_UNCHANGED_TITLE);
+                return;
+            }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
+            if (toEdit.getID().equals(id)) {
+                ui.print(EDIT_UNCHANGED_ID);
+                return;
+            }
             try {
                 catalogue.checkDuplicateID(id);
             } catch (LibmgrException e) {
@@ -123,6 +131,10 @@ public class EditBookCommand extends Command {
         }
         if (args.containsKey(KEY_AUTHOR)) {
             assert author != null && !author.equals("");
+            if (toEdit.getAuthor().equals(author)) {
+                ui.print(EDIT_UNCHANGED_AUTHOR);
+                return;
+            }
             toEdit.setAuthor(author);
         }
         ui.print(EDIT_BOOK_MESSAGE, toEdit);

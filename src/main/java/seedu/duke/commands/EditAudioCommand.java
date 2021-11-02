@@ -121,10 +121,18 @@ public class EditAudioCommand extends Command {
         }
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
+            if (toEdit.getTitle().equals(title)) {
+                ui.print(EDIT_UNCHANGED_TITLE);
+                return;
+            }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
+            if (toEdit.getID().equals(id)) {
+                ui.print(EDIT_UNCHANGED_ID);
+                return;
+            }
             try {
                 catalogue.checkDuplicateID(id);
             } catch (LibmgrException e) {
@@ -134,10 +142,18 @@ public class EditAudioCommand extends Command {
         }
         if (args.containsKey(KEY_ARTIST)) {
             assert artist != null && !artist.equals("");
+            if (toEdit.getArtist().equals(artist)) {
+                ui.print(EDIT_UNCHANGED_ARTIST);
+                return;
+            }
             toEdit.setArtist(artist);
         }
         if (args.containsKey(KEY_DURATION)) {
             assert duration != null && !duration.equals("");
+            if (toEdit.getDuration().equals(duration)) {
+                ui.print(EDIT_UNCHANGED_DURATION);
+                return;
+            }
             toEdit.setDuration(duration);
         }
         ui.print(EDIT_AUDIO_MESSAGE, toEdit);

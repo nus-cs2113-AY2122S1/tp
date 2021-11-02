@@ -59,7 +59,13 @@ public class Messages {
     public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
     public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
     public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
-    public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
+    public static final String EDIT_UNCHANGED_TITLE = "  (!) New title is the same as the existing title";
+    public static final String EDIT_UNCHANGED_ID = "  (!) New ID is the same as the existing ID";
+    public static final String EDIT_UNCHANGED_AUTHOR = "  (!) New author is the same as the existing author";
+    public static final String EDIT_UNCHANGED_PUBLISHER = "  (!) New publisher is the same as the existing publisher";
+    public static final String EDIT_UNCHANGED_DURATION = "  (!) New duration is the same as the existing duration";
+    public static final String EDIT_UNCHANGED_ARTIST = "  (!) New artist is the same as the existing artist";
+    public static final String EDIT_UNCHANGED_EDITION = "  (!) New edition is the same as the existing edition";
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
     public static final String KEY_ARTIST = "a";
@@ -77,6 +83,7 @@ public class Messages {
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
+    public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
     public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: edit ID MARKER/ATTRIBUTE";
     public static final String EDIT_AUDIO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
