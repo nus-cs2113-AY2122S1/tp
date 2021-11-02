@@ -367,11 +367,15 @@ class UiTest {
             + END_LINE;
 
         String[] parameters = {"n/Bob"};
-        List<String> params = patientList.findPersons(parameters);
+
         try {
+            List<String> params = patientList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.PATIENT_INFO), expectedOutput);
+
+            String newParameters[] = {"n/Bob", "z/test"};
+            patientList.findPersons(newParameters);
         } catch (MedBotException e) {
-            assertEquals("There is no person with such attributes in this list.", e.getMessage());
+            assertEquals("The specifier z/ is invalid.", e.getMessage());
         }
     }
 
@@ -406,11 +410,14 @@ class UiTest {
                         + END_LINE;
 
         String[] parameters = {"n/Bob"};
-        List<String> params = staffList.findPersons(parameters);
         try {
+            List<String> params = staffList.findPersons(parameters);
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.MEDICAL_STAFF_INFO), expectedOutput);
+
+            String newParameters[] = {"n/Bob", "z/test"};
+            staffList.findPersons(newParameters);
         } catch (MedBotException e) {
-            assertEquals("There is no person with such attributes in this list.", e.getMessage());
+            assertEquals("The specifier z/ is invalid.", e.getMessage());
         }
     }
 
