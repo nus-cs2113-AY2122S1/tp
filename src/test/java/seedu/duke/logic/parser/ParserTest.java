@@ -48,14 +48,37 @@ public class ParserTest {
     }
 
     @Test
+    public void parseAddTask_hasJumbledFlags_valid() {
+        String userResponse = "add task CS2113T tP -p HIGH -d MON -i before tutorial";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof AddTaskCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parseAddTask_wrongFlag_exceptionThrown() {
         String userResponse = "add task CS2113T tP -i MON -d before tutorial";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
     @Test
+    public void parseAddTask_duplicateFlag_exceptionThrown() {
+        String userResponse = "add task CS2113T tP -d MON -i before tutorial -d MON";
+        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    }
+
+    @Test
     public void parseAddTask_invalidDayOfTheWeek_exceptionThrown() {
         String userResponse = "add task CS2113T tP -d LOL -i before tutorial";
+        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    }
+
+    @Test
+    public void parseAddTask_noTitle_exceptionThrown() {
+        String userResponse = "add task  -d MON -p HIGH";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
@@ -73,6 +96,17 @@ public class ParserTest {
     @Test
     public void parseAddLesson_hasAllParameters_valid() {
         String userResponse = "add lesson CS2113T Lecture -d FRI -s 16:00 -e 18:00 -l www.link.com";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof AddLessonCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseAddLesson_hasJumbledFlags_valid() {
+        String userResponse = "add lesson CS2113T Lecture -e 18:00 -s 16:00 -l www.link.com -d FRI";
         try {
             Command command = Parser.parse(userResponse);
             assertTrue(command instanceof AddLessonCommand);
