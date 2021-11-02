@@ -102,12 +102,12 @@ The Ui component consolidates and formats the output of the program before displ
 in the command line. 
 
 <p align = "center">
-<img src="images/Ui_UML.png" width = "800" />
+<img src="images/ui.png" width = "800" />
 </p>
 
 The above class diagram illustrates the relationship between the classes within the Ui components.
 
-The UI class
+The Ui class is the parent of every other class in the package.
 * Contains helper methods for the other Ui classes.
 * Provides means of printing constants.
 
@@ -120,6 +120,16 @@ The UiModule class contains methods for printing Modules.
 The UiUniversity class contains methods for printing Universities. 
 
 The UiWelcome class contains a method for printing the welcome greeting. 
+
+<p align = "center">
+<img src="images/uiseq.png" width = "800" />
+</p>
+
+The sequence diagram above illustrates how the classes in the Ui package interact when a printUniversity() call is made from outside the package.
+In the printUniversity Method,
+1. printIndex is called from the Ui class.
+2. Within printIndex, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
+3. After printing the index, print the university name, then depending on the boolean printMC, we pad it again with stringPadder before displaying the Module Credits. 
 
 
 
