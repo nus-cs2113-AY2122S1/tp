@@ -68,7 +68,7 @@ public class Expense extends ExpenseSplittingFunctions {
     //@@author
 
     private static String getDescriptionParse(String userInput) {
-        return userInput.split("/")[1].trim();
+        return userInput.split("/")[1].strip();
     }
 
     /**
@@ -82,13 +82,13 @@ public class Expense extends ExpenseSplittingFunctions {
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
-        if (listOfPeople.length == 1 && listOfPeople[0].trim().equalsIgnoreCase("-all")) {
+        if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
         for (String name : listOfPeople) {
             boolean isValidPerson = false;
             for (Person person : Storage.getOpenTrip().getListOfPersons()) {
-                if (name.trim().equalsIgnoreCase(person.getName())) {
+                if (name.strip().equalsIgnoreCase(person.getName())) {
                     validListOfPeople.add(person);
                     isValidPerson = true;
                     break;

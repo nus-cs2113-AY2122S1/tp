@@ -10,7 +10,7 @@ class DukeTest {
 
     @Test
     public void testNewTrip() throws ForceCancelException {
-        String[] stringArray = {"Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
+        String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         Trip trip = new Trip(stringArray);
         assertEquals("Canada", trip.getLocation());
         assertEquals("02 Mar 2021", trip.getDateOfTripString());

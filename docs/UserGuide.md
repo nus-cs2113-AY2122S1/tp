@@ -89,18 +89,20 @@ You must have at least one trip created (or loaded from the save file) to use an
 
 The input syntax to create a trip is:
 ```
-create [location] [date] [foriegn-currency-ISO-code] [exchange-rate] [persons-in-trip]
+create /[location] /[date] /[foriegn-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
 ```
 
+Please note the following about the command above:
 - `[date]` must follow the format of dd-mm-yyyy.
 - `[foriegn-currency-ISO-code]` Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
-  - Note that the default home currency is SGD, unless edited by the user.
+  - Note that the default home currency is SGD, unless edited by the user. To edit, see (edit trip).
 - `persons-in-trip` should be separated with commas.
 
 #### Compatible Currencies
+
 Currency Name | ISO Code
 ------------ | -----------
 United States Dollar | USD
@@ -144,7 +146,7 @@ For example,
 Input:
 
 ```
-create America 02-02-2021 USD 0.74 Ben, Jerry, Tom
+create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
 ```
 
 Output:
