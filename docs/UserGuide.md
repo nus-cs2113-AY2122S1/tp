@@ -40,7 +40,7 @@ commands that you can execute.
 [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
 2. Download the latest version of NUS Buddy from our GitHub repository.
 3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
-4. To launch the app, run the command `java -jar {filename}.jar`.
+4. To launch the app, run the command `java -jar NUSBuddy.jar`.
 
 You should see the following output when you start NUSBuddy for the first time.
 
