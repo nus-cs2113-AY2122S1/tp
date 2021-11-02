@@ -16,8 +16,8 @@ import java.util.ArrayList;
  * This adapter assists GSON to parse the recursive pre-requisite trees that vary
  * from module to module.
  *
- * Some modules have deeply nested trees for their pre-requisites (such as CS4243), while
- * others have simple pre-requisites (such as CS2040)
+ * <p> Some modules have deeply nested trees for their pre-requisites (such as CS4243), while
+ * others have simple pre-requisites (such as CS2040)</p>
  */
 public class PrerequisiteTreeAdapter extends TypeAdapter<PrerequisiteTree> {
 
@@ -31,9 +31,9 @@ public class PrerequisiteTreeAdapter extends TypeAdapter<PrerequisiteTree> {
      * Writes the Prerequisite tree component into json as an object or string depending how it has
      * been created.
      *
-     * E.g. CS2040's Prerequisite Tree is simply "CS1010" so it will be written as a string.
+     * <p>E.g. CS2040's Prerequisite Tree is simply "CS1010" so it will be written as a string.
      * But other modules like CS4243 have recursive trees for their prerequisite tree and are
-     * written as an object.
+     * written as an object.</p>
      *
      * @param jsonWriter the jsonWriter by GSON
      * @param tree the prerequisite tree to be written into json format
