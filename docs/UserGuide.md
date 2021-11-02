@@ -301,7 +301,7 @@ Examples:
 Computes and prints the median mark for an assessment. If there are unmarked students, the median will be computed 
 within the marked students only.
 
-Format: `set_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Format: `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 
