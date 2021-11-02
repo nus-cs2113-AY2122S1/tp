@@ -71,7 +71,7 @@ public class Entry {
                 break;
             case ADD_ATTENDANCE_KEYWORD:
                 Attendance attendance = Parser.getAttendanceDetails(entry);
-                new AddAttendance(attendanceList, attendance);
+                new AddAttendance(attendanceList, attendance, members, trainings);
                 break;
             case DELETE_MEMBER_KEYWORD:
                 Object parameter = Parser.getParameter(entry);
