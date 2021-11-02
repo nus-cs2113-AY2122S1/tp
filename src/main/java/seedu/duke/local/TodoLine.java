@@ -2,6 +2,8 @@ package seedu.duke.local;
 
 import seedu.duke.task.type.Todo;
 
+import java.time.format.DateTimeFormatter;
+
 public class TodoLine extends TaskLine {
     private String type;
 
@@ -27,16 +29,27 @@ public class TodoLine extends TaskLine {
             reminderTime = null;
             reminderMessage = null;
         } else {
-            doOnDate = task.getDoOnDate().toString();
+            doOnDate = task.getDoOnDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
             reminderTime = task.getReminderInformation().getUserTime();
             reminderMessage = task.getReminderInformation().getMessage();
         }
     }
 
-    public String getString() {
-        return type + "|" + description + "|" + doOnDate + "|"
-                + priority + "|" + recurrence + "|"
-                + reminderTime + "|" + reminderMessage;
+    public String getString(int taskIndex) {
+        String line = type + " " + description + " --priority " + priority;
+        if (!recurrence.equals("none")) {
+            line += " --recur " + recurrence;
+        }
+        if (doOnDate != null) {
+            line += " --doOn " + doOnDate + System.lineSeparator() + getReminderString(taskIndex);
+        }
+        return line;
+    }
+
+    public String getReminderString(int taskIndex) {
+        return "reminder " + taskIndex
+                + " --time " + reminderTime
+                + " --message " + reminderMessage;
     }
 
     public void updateTime(long userTime) {

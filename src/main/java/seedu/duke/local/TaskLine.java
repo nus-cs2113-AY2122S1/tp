@@ -24,8 +24,8 @@ public class TaskLine {
         recurrence = task.getRecurrence().toString();
     }
 
-    public String getString() {
-        return type + "|" + description + "|" + priority + "|" + recurrence;
+    public String getString(int taskIndex) {
+        return type + " " + description;
     }
 
     public TaskLine() {
