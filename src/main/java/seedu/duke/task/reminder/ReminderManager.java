@@ -66,7 +66,7 @@ public class ReminderManager {
                 try {
                     customizeReminderTime(userTime, index - 1, taskManager);
                     DataManager.updateReminderTime(index - 1, userTime);
-                    outMessage += "The time for reminding before task is updated to " + userTime + " minutes.";
+                    outMessage += "The time for reminding before task is updated to " + userTime + " minutes.\n";
                 } catch (InvalidTaskIndexException itie) {
                     return itie.getMessage();
                 } catch (ReminderNotRequiredException rnre) {
@@ -82,7 +82,7 @@ public class ReminderManager {
                 try {
                     customizeReminderMessage(message, index - 1, taskManager);
                     DataManager.updateReminderMessage(index - 1, message);
-                    outMessage += "The reminder message is updated to " + message;
+                    outMessage += "The reminder message is updated to \"" + message + "\".";
                 } catch (InvalidTaskIndexException itie) {
                     return itie.getMessage();
                 } catch (ReminderNotRequiredException rnre) {

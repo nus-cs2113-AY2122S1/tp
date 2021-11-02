@@ -41,7 +41,7 @@ class ReminderManagerTest {
         Task eventTest = new Event("meeting", startDate, endDate);
         taskManager.addTask(eventTest);
 
-        expectedOut = "Reminder! 10 min before the following task:\n" + "\t"
+        expectedOut = "Reminder! 10 min before the following tas:\n" + "\t"
                 + todoWithReminder.getTaskEntryDescription() + "\n"
                 + "Reminder! 10 min before the following task:\n" + "\t"
                 + deadlineWithReminder.getTaskEntryDescription() + "\n"

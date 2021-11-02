@@ -17,7 +17,8 @@ Below is a guide on how you can get started using our program to start Sched'ing
     - [2.3 Listing your tasks: `list`](#23-listing-all-your-tasks-list)
     - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
     - [2.5 Deleting your tasks: `delete`](#25-deleting-your-tasks-delete)
-    - [2.6 Exiting the program: `bye`](#26-exiting-the-program-bye)
+    - [2.6 Reminder for tasks: `reminder`](#26-reminder-for-tasks-reminder)
+    - [2.7 Exiting the program: `bye`](#27-exiting-the-program-bye)
 - [3. FAQ](#3-faq)
 - [4. Command Summary](#4-command-summary)
 
@@ -278,7 +279,45 @@ Index should be specified in either,
 -------------------------------------------------------------------------
 ```
 
-### 2.6 Exiting the program: `bye`
+### 2.6 Reminder for tasks: `reminder`
+By default, a pop-up reminder is displayed 10 minutes before each task.   
+    
+**Example:**    
+```
+-------------------------------------------------------------------------
+Reminder! 10 min before the following task:
+	submit assignment 5 [medium] (dueDate: 02-11-2021 12:00)
+-------------------------------------------------------------------------
+```
+
+You can also choose to **change the reminder message and time**. Each task can have different reminder time and message.     
+
+**Format:** `reminder <index of task> [--flag <argument>]`
+- `<index of task>` specifies number of the task you want to change in your current task list.
+- `[--flag <argument>]` specifies additional details you need to provide.
+  - The time *(in minute)* you want the reminder to pop up before it starts/needs to be done: `[--time <minute>]`
+  - The reminder message you want to use: `[--message <your reminder message>]`
+
+>💡 **Note**: The task description cannot be changed. i.e. only the "Reminder! 10 min before the following task:" part can be modified.
+
+**Example:** 
+
+**Expected message when a reminder is customized:**    
+```
+[user]: reminder 1 --time 30 --message finish it in half an hour!
+The time for reminding before task is updated to 30 minutes.
+The reminder message is updated to "finish it in half an hour!".
+```
+      
+**Reminder displayed:**    
+```
+-------------------------------------------------------------------------
+finish it in half an hour!
+	submit assignment 5 [medium] (dueDate: 02-11-2021 12:00)
+-------------------------------------------------------------------------
+```
+
+### 2.7 Exiting the program: `bye`
 Displays goodbye message and exits the program.
 
 An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has the same effect as this command.
