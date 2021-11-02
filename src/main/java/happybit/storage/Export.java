@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * Writes data from GoalList to storage file.
+ */
 public class Export {
     private static final String NEWLINE = System.lineSeparator();
     private static final String DELIMITER = "##";
@@ -34,6 +37,12 @@ public class Export {
         this.printManager = printManager;
     }
 
+    /**
+     * Exports the entire GoalList to storage.
+     *
+     * @param goalList the arraylist of goals to be exported
+     * @throws HaBitStorageException when an error occurred with storage file
+     */
     protected void exportToStorage(ArrayList<Goal> goalList) throws HaBitStorageException {
         try {
             this.clearFile();
@@ -43,6 +52,11 @@ public class Export {
         }
     }
 
+    /**
+     * Clears the storage file.
+     *
+     * @throws IOException error when writing to storage file
+     */
     protected void clearFile() throws IOException {
         this.setWritable();
 
@@ -52,6 +66,12 @@ public class Export {
         fileWriter.close();
     }
 
+    /**
+     * Writes all the goals set to storage file.
+     *
+     * @param goalList the array list that contains all the user data
+     * @throws IOException error when writing to the storage file
+     */
     protected void writeToFile(ArrayList<Goal> goalList) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath, true);
 
@@ -67,6 +87,9 @@ public class Export {
         this.setReadOnly();
     }
 
+    /**
+     * Allows writing to the storage file which was set as read only.
+     */
     protected void setWritable() {
         File storageFile = new File(this.filePath);
         boolean isWriteable = storageFile.setWritable(true);
@@ -79,7 +102,7 @@ public class Export {
     }
 
     /**
-     * Set the storage file as read only.
+     * Sets the storage file back to read only after writing.
      */
     protected void setReadOnly() {
         File storageFile = new File(this.filePath);
@@ -92,6 +115,14 @@ public class Export {
         }
     }
 
+    /**
+     * Writes all the habits under a certain goal into storage file.
+     *
+     * @param fileWriter the file to write to
+     * @param habitList the list of habit under a goal
+     * @param index the index of the goal the habit is under
+     * @throws IOException error when writing to the storage file
+     */
     protected void writeHabit(FileWriter fileWriter, ArrayList<Habit> habitList, int index) throws IOException {
         for (Habit habit : habitList) {
             int habitIndex = habitList.indexOf(habit);
@@ -103,6 +134,15 @@ public class Export {
         }
     }
 
+    /**
+     * Writes all the intervals under a certain habit into storage file.
+     *
+     * @param fileWriter the file to write to
+     * @param intervalList the list of intervals under a habit
+     * @param goalIndex the index of goal the habit is under
+     * @param habitIndex the index of habit the interval is for
+     * @throws IOException error when writing to the storage file
+     */
     protected void writeInterval(FileWriter fileWriter, ArrayList<Interval> intervalList, int goalIndex,
                                  int habitIndex) throws IOException {
         for (Interval interval : intervalList) {
@@ -112,6 +152,13 @@ public class Export {
         }
     }
 
+    /**
+     * Converts a Goal object into a string format to be written to storage file.
+     *
+     * @param goal the Goal object to be converted to a string for storage
+     * @param index the index of the goal in the goallist
+     * @return the string representing the goal object
+     */
     protected String goalString(Goal goal, int index) {
         return index + DELIMITER
                 + GOAL_TYPE + DELIMITER
@@ -121,6 +168,13 @@ public class Export {
                 + goal.getStringEndDate() + NEWLINE;
     }
 
+    /**
+     * Converts a Habit object into a string format to be written to storage file.
+     *
+     * @param habit the Habit object to be converted to string for storage
+     * @param index the index of the goal the habit is under
+     * @return the string representing the habit object
+     */
     protected String habitString(Habit habit, int index) {
         return index + DELIMITER
                 + HABIT_TYPE + DELIMITER
@@ -130,6 +184,14 @@ public class Export {
                 + habit.getIntervalLength() + NEWLINE;
     }
 
+    /**
+     * Converts an Interval object into a string format to be written to storage file.
+     *
+     * @param interval the Interval object to be converted to string for storage
+     * @param goalIndex the index of the goal the habit is under
+     * @param habitIndex the index of the habit the interval is for
+     * @return the string representing the interval object
+     */
     protected String intervalString(Interval interval, int goalIndex, int habitIndex) {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         String startDate = format.format(interval.getStartDate());
@@ -150,6 +212,13 @@ public class Export {
                 + completedDate + NEWLINE;
     }
 
+    /**
+     * Exports a Goal object.
+     *
+     * @param goal the object to be written to storage
+     * @param index the index of the goal
+     * @throws HaBitStorageException error when writing to storage file
+     */
     protected void exportGoal(Goal goal, int index) throws HaBitStorageException {
         this.setWritable();
 
@@ -166,6 +235,13 @@ public class Export {
         this.setReadOnly();
     }
 
+    /**
+     * Exports a Habit object.
+     *
+     * @param habit the object to be written to storage
+     * @param index the index of the goal the habit is under
+     * @throws HaBitStorageException error when writing to storage file
+     */
     protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
         this.setWritable();
 
