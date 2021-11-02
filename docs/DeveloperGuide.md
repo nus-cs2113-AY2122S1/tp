@@ -29,17 +29,13 @@ implementation of key features of the application that is supplmented with easy 
 UML diagrams.
 
 ## 1.2 Acknowledgements
-## Code structure
-[Duke, by Peh Zhenhao, Amos](https://github.com/APZH/ip)
-## Third-party library
-### Development
-- [Checkstyle](https://checkstyle.sourceforge.io/)
-  - [Configuration file, from AddressBook Level 3 project](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)
-- [JUnit](https://junit.org)
-### Implementation
-- [iCal4J](http://ical4j.github.io/)
-- [Gson](https://github.com/google/gson)
-- [Apache Commons IO](https://commons.apache.org/proper/commons-io/)
+This section provides a list 3rd-party libraries adapted in the development of **SchedUrMods**.
+
+1. [iCal4J](http://ical4j.github.io/)
+2. [Gson](https://github.com/google/gson)
+3. [Apache Commons IO](https://commons.apache.org/proper/commons-io/)
+4. [Checkstyle](https://checkstyle.sourceforge.io/)
+5. [JUnit](https://junit.org)
 
 # Setting up, getting started
 
