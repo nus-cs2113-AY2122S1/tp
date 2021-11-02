@@ -78,54 +78,54 @@ public class Parser {
         String userCommand = userInput[0].toLowerCase();
         try {
             switch (userCommand) {
-                case "new":
-                    command = parseNewCommand(userInput[1]);
-                    break;
-                case "edit":
-                    command = parseEditCommand(userInput[1]);
-                    break;
-                case "delete":
-                    command = parseDeleteCommand(userInput[1]);
-                    break;
-                case "view":
-                    command = parseViewCommand(userInput[1]);
-                    break;
-                case "shortest-dist":
-                    command = parseShortestDistCommand(userInput[1]);
-                    break;
-                case "shortest-cost":
-                    command = parseShortestCostCommand(userInput[1]);
-                    break;
-                case "search-item":
-                    command = parseSearchItemCommand(userInput[1]);
-                    break;
-                case "add-day":
-                    command = parseAddDayCommand(userInput[1]);
-                    break;
-                case "add-item":
-                    command = parseAddItemCommand(userInput[1]);
-                    break;
-                case "delete-day":
-                    command = parseDeleteDayCommand(userInput[1]);
-                    break;
-                case "delete-item":
-                    command = parseDeleteItemCommand(userInput[1]);
-                    break;
-                case "edit-item":
-                    command = parseEditItemCommand(userInput[1]);
-                    break;
-                case "exit":
-                    command = parseExitCommand();
-                    break;
-                case "help":
-                    command = parseHelpCommand();
-                    break;
-                case "edit-map":
-                    command = parseEditMapCommand(userInput[1]);
-                    break;
-                default:
-                    logger.log(Level.WARNING, "Invalid command input!");
-                    throw new CommandNotFoundException(rawInput);
+            case "new":
+                command = parseNewCommand(userInput[1]);
+                break;
+            case "edit":
+                command = parseEditCommand(userInput[1]);
+                break;
+            case "delete":
+                command = parseDeleteCommand(userInput[1]);
+                break;
+            case "view":
+                command = parseViewCommand(userInput[1]);
+                break;
+            case "shortest-dist":
+                command = parseShortestDistCommand(userInput[1]);
+                break;
+            case "shortest-cost":
+                command = parseShortestCostCommand(userInput[1]);
+                break;
+            case "search-item":
+                command = parseSearchItemCommand(userInput[1]);
+                break;
+            case "add-day":
+                command = parseAddDayCommand(userInput[1]);
+                break;
+            case "add-item":
+                command = parseAddItemCommand(userInput[1]);
+                break;
+            case "delete-day":
+                command = parseDeleteDayCommand(userInput[1]);
+                break;
+            case "delete-item":
+                command = parseDeleteItemCommand(userInput[1]);
+                break;
+            case "edit-item":
+                command = parseEditItemCommand(userInput[1]);
+                break;
+            case "exit":
+                command = parseExitCommand();
+                break;
+            case "help":
+                command = parseHelpCommand();
+                break;
+            case "edit-map":
+                command = parseEditMapCommand(userInput[1]);
+                break;
+            default:
+                logger.log(Level.WARNING, "Invalid command input!");
+                throw new CommandNotFoundException(rawInput);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidFormatException();
