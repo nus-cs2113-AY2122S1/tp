@@ -3,6 +3,7 @@ package taa;
 //@@author leyondlee
 import taa.command.Command;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -31,17 +32,29 @@ public class Ui {
     /**
      * Gets a non-empty user input.
      *
-     * @return Non-empty user input.
+     * @return A non-empty string if successful, else null.
      */
     public String getUserInput() {
         return getUserInput(INPUT_PROMPT, false);
     }
 
+    /**
+     * Gets a user input.
+     *
+     * @param inputPrompt The prompt to display before asking for user input.
+     * @param allowEmpty true to allow empty user input, else false.
+     * @return A string if successful, else null.
+     */
     public String getUserInput(String inputPrompt, boolean allowEmpty) {
         String input;
         do {
             System.out.print(inputPrompt);
-            input = scanner.nextLine();
+
+            try {
+                input = scanner.nextLine();
+            } catch (NoSuchElementException | IllegalStateException e) {
+                return null;
+            }
         } while (input.trim().isEmpty() && !allowEmpty);
 
         return input;

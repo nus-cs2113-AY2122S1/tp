@@ -1,13 +1,13 @@
 package taa.command.mark;
 
+import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
-import taa.module.Module;
-import taa.module.ModuleList;
+import taa.teachingclass.ClassList;
 import taa.student.Student;
 import taa.student.StudentList;
 
@@ -15,14 +15,14 @@ import taa.student.StudentList;
  * Class that deals with the command for the listing of marks.
  */
 public class ListMarksCommand extends Command {
-    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_CLASS_ID = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
-    private static final String[] LIST_MARKS_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
+    private static final String[] LIST_MARKS_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_ASSESSMENT_NAME};
 
     private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the list of students and "
         + "their marks for %s:";
     private static final String MARKS_LIST_EMPTY = "There are no marks inputted!";
-    private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
+    private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "%s %s/<CLASS_ID> %s/<ASSESSMENT_NAME>";
 
     public ListMarksCommand(String argument) {
         super(argument, LIST_MARKS_ARGUMENT_KEYS);
@@ -42,31 +42,31 @@ public class ListMarksCommand extends Command {
     /**
      * Executes the list_marks command and list marks of students for an assessment.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModuleWithCode(moduleCode);
-        if (module == null) {
-            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        TeachingClass teachingClass = classList.getClassWithId(classId);
+        if (teachingClass == null) {
+            throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        StudentList studentList = module.getStudentList();
+        StudentList studentList = teachingClass.getStudentList();
         if (studentList.getSize() <= 0) {
             throw new TaaException(MESSAGE_NO_STUDENTS);
         }
 
-        AssessmentList assessmentList = module.getAssessmentList();
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
         Assessment assessment = assessmentList.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        listMarks(ui, module, assessment);
+        listMarks(ui, teachingClass, assessment);
     }
 
     /**
@@ -84,10 +84,10 @@ public class ListMarksCommand extends Command {
      * Lists the student and the marks they attained for an assessment.
      *
      * @param ui     The ui instance to handle interactions with the user.
-     * @param module The module that the student and assessment belong to.
+     * @param teachingClass The class that the student and assessment belong to.
      */
-    private void listMarks(Ui ui, Module module, Assessment assessment) {
-        StudentList studentList = module.getStudentList();
+    private void listMarks(Ui ui, TeachingClass teachingClass, Assessment assessment) {
+        StudentList studentList = teachingClass.getStudentList();
         String assessmentName = assessment.getName();
 
         StringBuilder stringBuilder = new StringBuilder(String.format(MESSAGE_LIST_MARKS_HEADER, assessmentName));
@@ -126,7 +126,7 @@ public class ListMarksCommand extends Command {
         return String.format(
             MESSAGE_FORMAT_LIST_MARKS_USAGE,
             COMMAND_LIST_MARKS,
-            KEY_MODULE_CODE,
+            KEY_CLASS_ID,
             KEY_ASSESSMENT_NAME
         );
     }

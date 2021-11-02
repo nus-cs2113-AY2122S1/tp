@@ -3,9 +3,9 @@ package taa.assessment;
 import org.junit.jupiter.api.Test;
 import taa.Parser;
 import taa.Ui;
+import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
-import taa.module.ModuleList;
 import taa.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,18 +25,24 @@ class AssessmentListTest {
     void addAssessment_userInput_assessmentAddedCorrectly() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
-        ModuleList moduleList = new ModuleList();
-        String moduleInput = "add_module c/cs2113t n/software engineering";
-        String assessmentInput = "add_assessment c/cs2113t n/Midterms m/50 w/20";
-        Command command1 = Parser.parseUserInput(moduleInput);
-        command1.execute(moduleList, ui, storage);
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t_f12 n/software engineering (class-f12)";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
-        command2.execute(moduleList, ui, storage);
-        assertEquals("Midterms", moduleList.getModuleWithCode("cs2113t")
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        assertEquals("Midterms", classList.getClassWithId("cs2113t_f12")
                 .getAssessmentList().getAssessment("Midterms").getName());
-        assertEquals(50, moduleList.getModuleWithCode("cs2113t")
+        assertEquals(50, classList.getClassWithId("cs2113t_f12")
                 .getAssessmentList().getAssessment("Midterms").getMaximumMarks());
-        assertEquals(20, moduleList.getModuleWithCode("cs2113t")
+        assertEquals(20, classList.getClassWithId("cs2113t_f12")
                 .getAssessmentList().getAssessment("Midterms").getWeightage());
     }
 
@@ -45,6 +51,7 @@ class AssessmentListTest {
         AssessmentList assessments = new AssessmentList();
         assessments.addAssessment(new Assessment("Midterms", 50, 20));
         Assessment assessment = assessments.deleteAssessment("Midterms");
+
         assertEquals("Midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());
@@ -54,19 +61,28 @@ class AssessmentListTest {
     void deleteAssessment_userInput_emptyAssessmentList() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
-        ModuleList moduleList = new ModuleList();
-        String moduleInput = "add_module c/cs2113t n/software engineering";
-        String assessmentInput = "add_assessment c/cs2113t n/Midterms m/50 w/20";
-        String deleteAssessmentInput = "delete_assessment c/cs2113t n/Midterms";
-        Command command1 = Parser.parseUserInput(moduleInput);
-        command1.execute(moduleList, ui, storage);
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t_f12 n/software engineering (F_12)";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t_f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
-        command2.execute(moduleList, ui, storage);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        String deleteAssessmentInput = "delete_assessment c/cs2113t_f12 n/Midterms";
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
-        command3.execute(moduleList, ui, storage);
+        command3.parseArgument();
+        command3.checkArgument();
+        command3.execute(classList, ui, storage);
+
         assertEquals(
                 new AssessmentList().getSize(),
-                moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize()
+                classList.getClassWithId("cs2113t_f12").getAssessmentList().getSize()
         );
     }
 
@@ -74,30 +90,48 @@ class AssessmentListTest {
     void editAssessment_userInputFourEdits_assessmentEditedCorrectly() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
-        ModuleList moduleList = new ModuleList();
-        String moduleInput = "add_module c/cs2113t n/software engineering";
-        String assessmentInput = "add_assessment c/cs2113t n/Midterms m/50 w/20";
-        String editAssessment1 = "edit_assessment c/cs2113t n/midterms nn/finals";
-        Command command1 = Parser.parseUserInput(moduleInput);
-        command1.execute(moduleList, ui, storage);
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String assessmentInput = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
         Command command2 = Parser.parseUserInput(assessmentInput);
-        command2.execute(moduleList, ui, storage);
-        Assessment assessment = moduleList.getModuleWithCode("cs2113t").getAssessmentList()
-                .getAssessment("midterms");
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        String editAssessment1 = "edit_assessment c/cs2113t-f12 n/midterms nn/finals";
         Command command3 = Parser.parseUserInput(editAssessment1);
-        command3.execute(moduleList, ui, storage);
+        command3.parseArgument();
+        command3.checkArgument();
+        command3.execute(classList, ui, storage);
+        Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
+            .getAssessment("finals");
         assertEquals("finals", assessment.getName());
-        String editAssessment2 = "edit_assessment c/cs2113t n/finals m/100";
+
+        String editAssessment2 = "edit_assessment c/cs2113t-f12 n/finals m/100";
         Command command4 = Parser.parseUserInput(editAssessment2);
-        command4.execute(moduleList, ui, storage);
+        command4.parseArgument();
+        command4.checkArgument();
+        command4.execute(classList, ui, storage);
         assertEquals(100, assessment.getMaximumMarks());
-        String editAssessment3 = "edit_assessment c/cs2113t n/finals w/50";
+
+        String editAssessment3 = "edit_assessment c/cs2113t-f12 n/finals w/50";
         Command command5 = Parser.parseUserInput(editAssessment3);
-        command5.execute(moduleList, ui, storage);
+        command5.parseArgument();
+        command5.checkArgument();
+        command5.execute(classList, ui, storage);
         assertEquals(50, assessment.getWeightage());
-        String editAssessment4 = "edit_assessment c/cs2113t n/finals nn/midterms m/50 w/20";
+
+        String editAssessment4 = "edit_assessment c/cs2113t-f12 n/finals nn/midterms m/50 w/20";
         Command command6 = Parser.parseUserInput(editAssessment4);
-        command6.execute(moduleList, ui, storage);
+        command6.parseArgument();
+        command6.checkArgument();
+        command6.execute(classList, ui, storage);
+
         assertEquals("midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());

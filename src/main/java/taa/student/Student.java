@@ -2,6 +2,7 @@ package taa.student;
 
 //@@author hozhenhong99
 import taa.ClassChecker;
+import taa.Parser;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.attendance.AttendanceList;
@@ -154,6 +155,6 @@ public class Student implements ClassChecker {
 
     @Override
     public boolean verify() {
-        return !id.isEmpty() && !name.isEmpty();
+        return !id.isEmpty() && !name.isEmpty() && Parser.isValueValid(id) && Parser.isValueValid(name);
     }
 }

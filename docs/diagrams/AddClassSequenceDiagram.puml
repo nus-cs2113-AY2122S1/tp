@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":AddClassCommand" as addClassCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":Storage" as storage
+
+user -> taa : "add_class i/CS2113T-F12\nn/Tutorial Group F12"
+activate taa
+
+taa -> addClassCommand : execute(classList:ClassList,\nui:Ui, storage:Storage)
+activate addClassCommand
+
+create teachingClass
+addClassCommand -> teachingClass
+activate teachingClass
+teachingClass --> addClassCommand : teachingClass:TeachingClass
+deactivate teachingClass
+
+addClassCommand -> classList : addClass(teachingClass)
+activate classList
+classList --> addClassCommand
+deactivate classList
+
+addClassCommand -> storage : save(classList)
+activate storage
+storage --> addClassCommand
+deactivate storage
+
+addClassCommand --> taa
+deactivate addClassCommand
+taa -[hidden]-> addClassCommand
+destroy addClassCommand
+
+taa --> user
+deactivate taa
+
+@enduml

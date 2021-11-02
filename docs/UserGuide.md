@@ -22,9 +22,13 @@ If you can type fast, TAA can help keep track of your classes and students faste
   * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
   * [Deleting marks for a student's assessment: `delete_mark`](#deleting-marks-for-a-students-assessment-delete_mark)
   * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
+  * [Sorting and listing students in a module by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-module-by-their-overall-score-sort_by_scores)
   * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
   * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
   * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
+  * [Setting comment for a particular student: `set_comment`](#setting-comment-for-a-particular-student-set_comment)
+  * [Deleting comment for a particular student: `delete_comment`](#deleting-comment-for-a-particular-student-delete_comment)
+  * [Listing comments for all students in a module `list_comment`](#listing-comments-for-all-students-in-a-module-list_comment)
   * [Viewing help: `help`](#viewing-help-help)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Archiving data: `archive`](#archiving-data-archive)
@@ -307,6 +311,20 @@ Examples:
 
 <br>
 
+### Sorting and listing students in a module by their overall score: `sort_by_scores`
+Sorts and lists students in a module by their overall score according to the desired format. 
+Only marks currently added to students will be taken into consideration for their scores.
+
+Format: `sort_by_scores c/<MODULE_CODE> o/<ORDER>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ORDER` refers to the sorting order. `asc` for ascending and `desc` for descending.
+
+Examples:
+* `sort_by_scores c/CS2113T o/asc`
+* `sort_by_scores c/CS2101 o/desc`
+
+<br>
+
 ### Listing attendance for a particular student: `list_attendance`
 Lists a student's attendance.
 
@@ -334,6 +352,46 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12). **Cannot contain whitespaces.**
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
+
+<br>
+
+### Setting comment for a particular student: `set_comment`
+Sets a comment for a student.
+
+Format: `set_comment c/<MODULE_CODE> s/<STUDENT_INDEX> t/<COMMENT>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `COMMENT` refers to the comment to be set.
+> 💡 **Note:**<br />
+> The new comment will overwrite any previous comment set
+
+Examples:
+* `set_comment c/CS2113t s/1 t/Doing well in class`
+* `set_comment c/CS2113t s/1 t/Needs help understanding java`
+
+<br>
+
+### Deleting comment for a particular student: `delete_comment`
+Deletes the comment for a student.
+
+Format: `delete_comment c/<MODULE_CODE> s/<STUDENT_INDEX>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+
+Examples:
+* `delete_comment c/CS2113T s/1`
+* `delete_comment c/CS2113T s/5`
+
+<br>
+
+### Listing comments for all students in a module: `list_comment`
+List comments for all students in a module
+
+Format: `list_comment c/<MODULE_CODE>`
+
+Examples:
+* `list_comment c/CS2113T`
+* `list_comment c/CS2101`
 
 <br>
 
@@ -374,8 +432,6 @@ Format: `reset`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
 Action | Format |
   ------ | --------------- |
 Listing all classes | `list_classes`
@@ -399,5 +455,6 @@ Viewing average marks for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSM
 Listing attendance for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 Setting attendance for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 Deleting attendance for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+
 Viewing help | `help`
 Exiting the program | `exit`
