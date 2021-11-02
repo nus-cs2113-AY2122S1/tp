@@ -79,6 +79,14 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error occurred while creating file: " + e);
         }
+
+        boolean isReadOnly = storageFile.setReadOnly();
+
+        if (isReadOnly) {
+            System.out.println("Storage file is read only.");
+        } else {
+            System.out.println("Failed to set storage file as read only.");
+        }
     }
 
     /**
@@ -111,9 +119,5 @@ public class Storage {
      */
     public void export(Habit habit, int index) throws HaBitStorageException {
         export.exportHabit(habit, index);
-    }
-
-    public void export(Interval interval, int goalIndex, int habitIndex) throws HaBitStorageException {
-        export.exportInterval(interval, goalIndex, habitIndex);
     }
 }

@@ -5,6 +5,7 @@ import happybit.goal.Goal;
 import happybit.habit.Habit;
 import happybit.interval.Interval;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -33,6 +34,15 @@ public class Export {
     }
 
     protected void clearFile() throws IOException {
+        File storageFile = new File(this.filePath);
+        boolean isWriteable = storageFile.setWritable(true);
+
+        if (isWriteable) {
+            System.out.println("Writing to storage file.");
+        } else {
+            System.out.println("Failed to write to storage file.");
+        }
+
         FileWriter fileWriter = new FileWriter(this.filePath);
 
         fileWriter.write("");
@@ -40,6 +50,7 @@ public class Export {
     }
 
     protected void writeToFile(ArrayList<Goal> goalList) throws IOException {
+        File storageFile = new File(this.filePath);
         FileWriter fileWriter = new FileWriter(this.filePath, true);
 
         for (Goal goal : goalList) {
@@ -51,6 +62,14 @@ public class Export {
             this.writeHabit(fileWriter, habits, index);
         }
         fileWriter.close();
+
+        boolean isReadOnly = storageFile.setReadOnly();
+
+        if (isReadOnly) {
+            System.out.println("Storage file is not writable.");
+        } else {
+            System.out.println("Failed to disable writing to storage file.");
+        }
     }
 
     protected void writeHabit(FileWriter fileWriter, ArrayList<Habit> habitList, int index) throws IOException {
@@ -113,11 +132,28 @@ public class Export {
 
     protected void exportGoal(Goal goal, int index) throws HaBitStorageException {
         try {
+            File storageFile = new File(this.filePath);
+            boolean isWriteable = storageFile.setWritable(true);
+
+            if (isWriteable) {
+                System.out.println("Writing to storage file.");
+            } else {
+                System.out.println("Failed to write to storage file.");
+            }
+
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             String goalToWrite = this.goalString(goal, index);
 
             fileWriter.write(goalToWrite);
             fileWriter.close();
+
+            boolean isReadOnly = storageFile.setReadOnly();
+
+            if (isReadOnly) {
+                System.out.println("Storage file is not writable.");
+            } else {
+                System.out.println("Failed to disable writing to storage file.");
+            }
         } catch (IOException e) {
             throw new HaBitStorageException(e.getMessage());
         }
@@ -125,26 +161,30 @@ public class Export {
 
     protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
         try {
+            File storageFile = new File(this.filePath);
+            boolean isWriteable = storageFile.setWritable(true);
+
+            if (isWriteable) {
+                System.out.println("Writing to storage file.");
+            } else {
+                System.out.println("Failed to write to storage file.");
+            }
+
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             String habitToWrite = this.habitString(habit, index);
 
             fileWriter.write(habitToWrite);
             fileWriter.close();
+
+            boolean isReadOnly = storageFile.setReadOnly();
+
+            if (isReadOnly) {
+                System.out.println("Storage file is not writable.");
+            } else {
+                System.out.println("Failed to disable writing to storage file.");
+            }
         } catch (IOException e) {
             throw new HaBitStorageException(e.getMessage());
         }
-    }
-
-    protected void exportInterval(Interval interval, int goalIndex, int habitIndex) throws HaBitStorageException {
-        try {
-            FileWriter fileWriter = new FileWriter(this.filePath, true);
-            String intervalToWrite = this.intervalString(interval, goalIndex, habitIndex);
-
-            fileWriter.write(intervalToWrite);
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new HaBitStorageException(e.getMessage());
-        }
-
     }
 }
