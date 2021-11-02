@@ -1,0 +1,43 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+left to right direction
+
+hide empty fields
+hide empty methods
+
+rectangle Gordon #white {
+}
+
+rectangle Util {
+    class Storage LOGIC_YELLOW_1 {
+    }
+
+    class Tag LOGIC_YELLOW_1 {
+        + Tag()
+        + getTagName()
+        + containsAssociatedRecipeNames()
+        + addAssociatedRecipeName()
+        + removeAssociatedRecipeName()
+        + numberOfAssociatedRecipes()
+    }
+}
+
+rectangle Kitchen {
+    class Cookbook LOGIC_BLUE_1 {
+    }
+
+    class Recipe LOGIC_BLUE_1 {
+    }
+}
+
+Gordon "1" --> "1" Storage : creates >
+Gordon "1" ---> "1" Cookbook : creates >
+Gordon "1" --> "1" Recipe : creates >
+
+Storage "1" --> "*" Tag : uses >
+Cookbook "1" --> "*" Tag : uses >
+Recipe "1" --> "*" Tag : contains >
+
+@enduml
