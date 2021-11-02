@@ -2,14 +2,17 @@ package seplanner;
 
 import seplanner.commands.Command;
 import seplanner.commands.ExitCommand;
+import seplanner.exceptions.ParserClassException;
 import seplanner.log.Log;
 import seplanner.modules.ModuleList;
 import seplanner.parser.Parser;
 import seplanner.storage.Storage;
 import seplanner.ui.UiGeneral;
+import seplanner.ui.UiInvalid;
 import seplanner.universities.UniversityList;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Seplanner {
@@ -40,6 +43,9 @@ public class Seplanner {
             String userInput = in.nextLine();
             cmd = mainParser.parseCommand(userInput);
             System.out.println();
+        } catch (ParserClassException e) {
+            UiInvalid.printParseException(e.getMessage());
+            UiInvalid.printFormat(e.getFormat());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println();
