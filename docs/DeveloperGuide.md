@@ -9,6 +9,25 @@
   - [2.3 Setting up the project in IntelliJ](#23-setting-up-the-project-in-intellij)
 - [3. Design](#3-design)
   - [3.1 Architecture](#31-architecture)
+  - [3.2 UI Component](#32-ui-component)
+  - [3.3 Parser Component](#33-parser-component)
+  - [3.4 Command Component](#34-command-component)
+  - [3.5 TaskManager Component](#35-taskmanager-component)
+  - [3.5 Storage Component](#36-storage-component)
+  - [3.6 Utility Component](#37-utility-component)
+  - [3.7 Logger Component](#38-logger-component)
+  - [3.8 NUSMods API Component](#39-nusmods-api-component)
+- [4. Implementation](#4-implementation)
+  - [4.1 Adding Tasks](#41-adding-tasks)
+  - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
+  - [4.3 Sorting the tasklist](#43-sorting-the-tasklist)
+- [5. Appendix: Requirements](#5-appendix-requirements)
+  - [5.1 Product scope](#51-product-scope)
+  - [5.2 User stories](#52-user-stories)
+  - [5.3 Use cases](#53-use-cases)
+  - [5.4 Non-Functional Requirements](#54-non-functional-requirements)
+  - [5.5 Glossary](#55-glossary)
+- [6. Appendix: Instructions for manual testing](#6-appendix-instructions-for-manual-testing)
   
 # 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
@@ -114,18 +133,33 @@ The rest of the App consists of five main components.
 **How the architecture components interact with each other**
 
 The **Sequence Diagram** below shows how the components interact with each other for the 
-scenario where the **user inputs any valid command**.
+scenario where the **user inputs any valid command** in to the application.
 
 <p align="center">
     <img src="C:\Users\amosp\Desktop\CS2113 TP - Amos Peh\docs\images\Amos UML Diagrams\
 Sequence Diagram - Input Valid Command.png">
 </p>
 
+## 3.2 UI Component
+
+## 3.3 Parser Component
+
+## 3.4 Command Component
+
+## 3.5 TaskManager Component
+
+## 3.6 Storage Component
+
+## 3.7 Utility Component
+
+## 3.8 Logger Component
+
+## 3.9 NUSMods API Component
 
 
-# Implementation
+# 4. Implementation
 
-## Tasks
+## 4.1 Adding Tasks
 Tasks are managed by the `TaskManager` class and are all stored in memory using a `private static ArrayList<Task>`.
 The TaskManager provides functionality such as:
 * listing the tasks `listTaskList(HashMap<String, String> filter)`.
@@ -148,35 +182,45 @@ The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 
 The same logical structure is used in the Deadline and Event factories.  
 
-# Documentation, logging, testing, configuration, dev-ops
+## 4.2 Filtering the tasklist
 
-- [Documentation guide](https://www.google.com)
-- [Testing guide](https://www.google.com)
-- [Logging guide](https://www.google.com)
-- [Configuration guide](https://www.google.com)
-- [DevOps guide](https://www.google.com)
+## 4.3 Sorting the tasklist
 
-# Appendix: Requirements
+# 5. Appendix: Requirements
 
-## Product scope
+## 5.1 Product scope
+**Target User Profile**
 
-## User stories
+The target user profile of **SchedUrMods** are NUS students from all faculties.
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
+**Needs of Target Users**
+
+- Prefer CLI interface as opposed to GUI interface.
+- Needs a quick way to manage their homework and assignments.
+- Needs a quick way to launch lesson zoom links.
+- Needs a quick way to view semester timetable.
+
+## 5.2 User stories
+**Priorities**: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a ... | I want to ... | So that I can ...|
+|----------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Use cases
+## 5.3 Use cases
+{Describe the use cases}
 
-## Non-Functional Requirements
+## 5.4 Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-## Glossary
+## 5.5 Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-# Appendix: Instructions for manual testing
+# 6. Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
