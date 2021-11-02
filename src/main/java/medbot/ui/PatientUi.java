@@ -39,8 +39,8 @@ public class PatientUi extends PersonUi {
         return getUnarchiveHelpMessage(PATIENT);
     }
 
-    public static String getAddPatientMessage(int id) {
-        return getAddPersonMessage(PATIENT, id);
+    public static String getAddPatientMessage(String patientInfo) {
+        return getAddPersonMessage(PATIENT, patientInfo);
     }
 
     public static String getDeletePatientMessage(int id) {

@@ -14,8 +14,8 @@ public class AddStaffCommand extends AddPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        int staffId = scheduler.addStaff(person);
-        String addStaffMessage = ui.getAddMessage(staffId, ViewType.MEDICAL_STAFF_INFO);
+        scheduler.addStaff(person);
+        String addStaffMessage = Ui.getAddMessage(ViewType.MEDICAL_STAFF_INFO, person.toString());
         ui.printOutput(addStaffMessage);
     }
 }

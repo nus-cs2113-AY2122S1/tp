@@ -18,11 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import medbot.Appointment;
-import medbot.exceptions.MedBotException;
-import medbot.exceptions.MedBotParserException;
-import medbot.person.Person;
-
 import static java.util.stream.Collectors.toList;
 
 
@@ -64,7 +59,7 @@ public abstract class ParserUtils {
     private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
-    private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
+    private static final String REGEX_PHONE_NUMBER_SPACERS = "[- _]";
     private static final String REGEX_ID = "([0-9]+$)|([0-9]+ )";
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
@@ -274,7 +269,7 @@ public abstract class ParserUtils {
      *                               has too many/few digits or contains unexpected characters
      */
     public static String parsePhoneNumber(String attributeString) throws MedBotParserException {
-        String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
+        String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SPACERS, EMPTY_STRING).strip();
         if (numberString.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
         }

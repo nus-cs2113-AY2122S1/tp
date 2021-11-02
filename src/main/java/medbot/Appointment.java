@@ -14,6 +14,7 @@ public class Appointment implements ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
+    private static String END_LINE = System.lineSeparator();
 
     private int appointmentId = 0;
     private int patientId = 0;
@@ -114,8 +115,10 @@ public class Appointment implements ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + " Date/Time: " + getDateTimeString() + " Patient ID: "
-                + patientId + " Staff ID: " + medicalStaffId + "\n";
+        return "Appointment Id: " + appointmentId + END_LINE
+                + "Patient ID: " + patientId + END_LINE
+                + "Staff ID: " + medicalStaffId + END_LINE
+                + "Date/Time: " + getDateTimeString() + END_LINE;
     }
 
     /**
