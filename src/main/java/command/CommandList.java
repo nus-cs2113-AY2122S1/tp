@@ -3,7 +3,6 @@ package command;
 /**
  * Represents all the commands available in the application.
  */
-
 public class CommandList {
     public static final String ADD = "add";
     public static final String ADD_PRESCRIPTION = "addprescription";

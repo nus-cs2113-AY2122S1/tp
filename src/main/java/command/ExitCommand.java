@@ -7,10 +7,10 @@ import utilities.ui.Ui;
 import java.util.ArrayList;
 
 //@@author alvintan01
+
 /**
  * Helps to process the exit command and prints the exit message.
  */
-
 public class ExitCommand extends Command {
 
     @Override
