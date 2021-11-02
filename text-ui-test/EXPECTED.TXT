@@ -12,16 +12,16 @@ What can I do for you?
 Enter "help" to view the list of commands
 ------------------------------------------------------------
 $ ------------------------------------------------------------
-There are no modules in the list.
+There are no classes in the list.
 ------------------------------------------------------------
 $ ------------------------------------------------------------
-Module added:
-  CS2113T - Software Engineering and Object-oriented Programming
-There are 1 modules in the list.
+Class added:
+  CS2113T-F12 - Tutorial Group F12
+There are 1 classes in the list.
 ------------------------------------------------------------
 $ ------------------------------------------------------------
-Module list:
-1. CS2113T - Software Engineering and Object-oriented Programming
+Class list:
+1. CS2113T-F12 - Tutorial Group F12
 ------------------------------------------------------------
 $ ------------------------------------------------------------
 An exception has occurred:

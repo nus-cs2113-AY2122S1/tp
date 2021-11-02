@@ -1,6 +1,7 @@
 package taa.assessment;
 
 import taa.ClassChecker;
+import taa.Parser;
 
 public class Assessment implements ClassChecker {
     public static final double[] WEIGHTAGE_RANGE = {0, 100};
@@ -73,7 +74,8 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (name.isEmpty() || !isWeightageWithinRange(weightage) || maximumMarks < MINIMUM_MARKS) {
+        if (name.isEmpty() || !Parser.isValueValid(name) || !isWeightageWithinRange(weightage)
+            || maximumMarks < MINIMUM_MARKS) {
             return false;
         }
 

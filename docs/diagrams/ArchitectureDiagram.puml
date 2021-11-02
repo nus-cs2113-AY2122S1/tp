@@ -21,7 +21,7 @@ Package " "<<Rectangle>>{
     Class Storage #DarkGoldenRod
     Class Main #IndianRed
     Class Command #DarkSlateBlue
-    Class ModuleList #DarkRed
+    Class ClassList #DarkRed
     Class Parser #Navy
     Class Util #LightSeaGreen
 }
@@ -36,6 +36,6 @@ Command -up-> UI
 Command -down-> Storage
 Storage -up-> Taa
 Storage <-down-> File
-Command <-right-> ModuleList
+Command <-right-> ClassList
 
 @enduml

@@ -1,10 +1,10 @@
 package taa.command;
 
 //@@author leyondlee
+import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
-import taa.module.ModuleList;
 
 public class ExitCommand extends Command {
     private static final String MESSAGE_FORMAT_EXIT_USAGE = "%s";
@@ -23,13 +23,13 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command and exits the program.
      *
-     * @param moduleList The list of modules.
+     * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
      * @param storage    The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
         ui.printExitMessage();
         this.isExit = true;
     }

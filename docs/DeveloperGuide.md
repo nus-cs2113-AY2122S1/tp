@@ -2,7 +2,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
 * [Implementation](#implementation)
-  * [Add Module](#add-module)
+  * [Add Class](#add-class)
   * [Add Student](#add-student)
   * [Add Assessment](#add-assessment)
   * [Set Marks](#set-marks)
@@ -34,8 +34,8 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
   * Handles input parsing and determines which command to run.
 * `Command`
   * Defines how a command is to be executed.
-* `ModuleList`
-  * Contains a list of `Module` objects currently being managed by the app.
+* `ClassList`
+  * Contains a list of `TeachingClass` objects currently being managed by the app.
 * `Util`
   * Contains useful methods (e.g. Check if a string is integer/double, convert string to integer/double).
 * `Storage`
@@ -49,19 +49,16 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other. 
 
 ## Implementation
-### Add Module
-The sequence diagram shown below illustrates how the `add_module` command works:
+### Add Class
+The sequence diagram shown below illustrates how the `add_class` command works:
+>>>>>>> upstream/master
 ![AddClassSequenceDiagram](diagrams/AddClassSequenceDiagram.png)
 
 Steps:
-1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
-2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
-is returned.
-3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid.
-4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called. A new
-`Module` object is created and the `ModuleList.addModule(module:Module)` method is invoked to add the `Module`
-object into the list of modules.
-5. Lastly, a message indicating that the module has been added will be printed out.
+1. The `Taa` instance reads in a user input and calls `AddClassCommand.execute(classList:ClassList, ui:Ui, storage:Storage)`.
+2. A new `TeachingClass` object is created and the `ClassList.addClass(teachingClass:TeachingClass)` method is invoked
+to add the `TeachingClass` object into the list of classes.
+3. Lastly, a message indicating that the class has been added will be printed out.
 
 <br>
 
