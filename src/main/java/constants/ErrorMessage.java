@@ -21,8 +21,11 @@ public final class ErrorMessage {
     public static final String incorrectExpenseValueMsg = "Your expense value cannot be $0 or any "
             + "negative amount. Check that you have entered the correct value and try again!";
 
-    public static final String tooLongNameErrorMsg = "The expense name you entered is too long."
+    public static final String tooLongNameErrorMsg = "The expense name you entered is too long. "
             + "A maximum of 25 characters is allowed for the expense name. Please try again!";
+
+    public static final String cannotFindSuchItemErrorMsg = "Could not find such an item. Ensure that "
+            + "you have correctly entered the expense name and try again!";
 
     // income error messages
     public static final String addIncomeErrorMsg = "Error with adding income. Ensure you keyed "

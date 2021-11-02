@@ -19,13 +19,16 @@ public class ExpenseList {
         expenses.add(newExpense);
     }
 
-    public static void deleteExpense(String expenseName) {
+    public static boolean deleteExpense(String expenseName) {
+        boolean isSomethingDeleted = false;
         for (Expense expense : expenses) {
             if (expense.getDescription().contains(expenseName)) {
+                isSomethingDeleted = true;
                 runningExpenseValue -= expense.getValue();
             }
         }
         expenses.removeIf(expense -> expense.getDescription().contains(expenseName));
+        return isSomethingDeleted;
     }
 
     public static void deleteExpense(int expenseIndex) {

@@ -13,6 +13,7 @@ import java.util.Date;
 import static constants.WarningMessage.expenseNearingBudgetWarning;
 import static constants.WarningMessage.budgetNowZeroWarning;
 import static constants.WarningMessage.expenseExceedBudgetWarning;
+import static constants.ErrorMessage.cannotFindSuchItemErrorMsg;
 
 public class ExpenseManager implements LoadableManager {
 
@@ -71,7 +72,11 @@ public class ExpenseManager implements LoadableManager {
     }
 
     public void deleteExpense(String expenseName) {
-        ExpenseList.deleteExpense(expenseName);
+        boolean isSuccess = ExpenseList.deleteExpense(expenseName);
+        if (!isSuccess) {
+            Ui ui = Ui.getUi();
+            ui.printMessage(cannotFindSuchItemErrorMsg);
+        }
     }
 
     public void deleteExpense(int expenseNumber) {
