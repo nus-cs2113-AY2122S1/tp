@@ -88,7 +88,7 @@ public class Ui {
     }
 
     public static void printAddedMemberMessage(Member member) {
-        System.out.println("Added a Member: " + member);
+        System.out.println("Added a Member: \n" + member);
     }
 
     public static void printAddedAttendanceMessage(Attendance attendance) {
@@ -96,8 +96,8 @@ public class Ui {
     }
 
     public static void printEditMessage(Member oldMember, Member newMember) {
-        System.out.println("Edited member: " + oldMember);
-        System.out.println("To become:  " + newMember);
+        System.out.println("Edited member:\n" + oldMember);
+        System.out.println("To become:\n" + newMember);
     }
 
     public static void printEditTrainingMessage(TrainingSchedule oldTraining, TrainingSchedule newTraining) {

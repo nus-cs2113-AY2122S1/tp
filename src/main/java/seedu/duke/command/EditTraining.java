@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
 
-import seedu.duke.*;
+import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddTrainingException;
 
 
@@ -16,6 +16,7 @@ import seedu.duke.training.TrainingSchedule;
 public class EditTraining {
     String duplicateTrainingNameErrorMessage = "Training name already exists in the list. Please input a different "
             + "training name.";
+
     /**
      * Edits a TrainingSchedule in TrainingList. TrainingSchedule is located by index.
      * @param trainings TrainingList containing all TrainingSchedules.
@@ -31,8 +32,6 @@ public class EditTraining {
             String oldVenue = trainingToChange.getTrainingVenue();
             String oldTime = trainingToChange.getTrainingTime();
             int oldIndex = trainingToChange.getTrainingIndex();
-            TrainingSchedule oldTraining = new TrainingSchedule(oldName, oldVenue, oldTime, oldIndex);
-
 
             if (!toChange.getTrainingName().equals("")) {
                 if (verifyTrainingDetails(toChange.getTrainingName(), trainings)) {
@@ -50,7 +49,7 @@ public class EditTraining {
 
             trainings.getTrainingList().set(index - 1, trainingToChange);
             File trainingFile = new File("CCATrainings.csv");
-            Ui.printEditTrainingMessage(oldTraining, trainingToChange);
+            Ui.printEditTrainingMessage(new TrainingSchedule(oldName, oldVenue, oldTime, oldIndex), trainingToChange);
             writeTrainingFile(trainingFile, trainings);
 
         } catch (AssertionError e) {
