@@ -3,7 +3,8 @@ package seplanner.exceptions;
 import java.text.ParseException;
 
 public class FindParseException extends ParserClassException {
-    private final String format = "find /uni <search field> ------------- Find universities that contains the search field\n"
+    private final String format = "find /uni <search field> ------------- "
+            + "Find universities that contains the search field\n"
             + "find /mod <search field> ~~~~~~~~~~~~~ Find module names that contain the search field\n"
             + "find /code <search field> ------------ Find module codes that contain the search field\n";
 
