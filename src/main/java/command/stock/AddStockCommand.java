@@ -232,9 +232,7 @@ public class AddStockCommand extends Command {
      * @return Boolean Value indicating if quantity added is less than maximum quantity.
      */
     private boolean isValidQuantity(Ui ui, StockValidator stockValidator, int maxQuantity, int quantity) {
-        boolean isValidQuantity =
-                stockValidator.quantityValidityChecker(ui, quantity,
-                        maxQuantity);
+        boolean isValidQuantity = stockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
 
         if (!isValidQuantity) {
             logger.log(Level.WARNING, "Invalid Quantity is specified by user");
