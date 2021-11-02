@@ -1,7 +1,7 @@
-package seedu.duke.Expense;
+package seedu.duke.expense;
 
-import seedu.duke.Exceptions.ForceCancelException;
-import seedu.duke.Parser.Parser;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.parser.Parser;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;

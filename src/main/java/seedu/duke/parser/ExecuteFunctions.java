@@ -1,10 +1,13 @@
-package seedu.duke.Parser;
+package seedu.duke.parser;
 
-import seedu.duke.*;
-import seedu.duke.Exceptions.ForceCancelException;
-import seedu.duke.Exceptions.InvalidAmountException;
-import seedu.duke.Exceptions.TripNotOpenException;
-import seedu.duke.Expense.Expense;
+import seedu.duke.Trip;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.Person;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.InvalidAmountException;
+import seedu.duke.exceptions.TripNotOpenException;
+import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
 

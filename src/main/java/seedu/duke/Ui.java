@@ -1,8 +1,8 @@
 package seedu.duke;
 
-import seedu.duke.Exceptions.ForceCancelException;
-import seedu.duke.Expense.Expense;
-import seedu.duke.Parser.Parser;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 

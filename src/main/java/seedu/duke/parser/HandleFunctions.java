@@ -1,8 +1,8 @@
-package seedu.duke.Parser;
+package seedu.duke.parser;
 
-import seedu.duke.Exceptions.ForceCancelException;
-import seedu.duke.Exceptions.InvalidAmountException;
-import seedu.duke.Exceptions.TripNotOpenException;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.InvalidAmountException;
+import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
@@ -73,7 +73,7 @@ public abstract class HandleFunctions extends ExecuteFunctions {
     protected static void handleList() {
         try {
             executeList();
-        } catch (TripNotOpenException e){
+        } catch (TripNotOpenException e) {
             Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         }
     }

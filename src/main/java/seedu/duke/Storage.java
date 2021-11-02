@@ -3,7 +3,7 @@ package seedu.duke;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import seedu.duke.Expense.Expense;
+import seedu.duke.expense.Expense;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

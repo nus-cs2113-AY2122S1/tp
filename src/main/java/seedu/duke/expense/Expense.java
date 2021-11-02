@@ -1,7 +1,7 @@
-package seedu.duke.Expense;
+package seedu.duke.expense;
 
-import seedu.duke.Exceptions.ForceCancelException;
-import seedu.duke.Exceptions.InvalidAmountException;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;

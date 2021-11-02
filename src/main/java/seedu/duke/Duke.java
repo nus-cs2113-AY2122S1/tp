@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Parser.Parser;
+import seedu.duke.parser.Parser;
 
 import java.io.IOException;
 import java.util.Scanner;

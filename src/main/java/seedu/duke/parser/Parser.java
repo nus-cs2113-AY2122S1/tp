@@ -1,6 +1,6 @@
-package seedu.duke.Parser;
+package seedu.duke.parser;
 
-import seedu.duke.Exceptions.ForceCancelException;
+import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
@@ -71,6 +71,7 @@ public class Parser extends HandleFunctions {
     private static final String AMOUNT_COMMAND = "amount";
     private static final String HELP_COMMAND = "help";
     private static final String PEOPLE_COMMAND = "people";
+
     /**
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
      * for further updates.
