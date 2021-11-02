@@ -5,6 +5,7 @@ import seedu.budgettracker.logic.commands.DeleteCommand;
 import seedu.budgettracker.logic.commands.DeleteMultipleExpenditureCommand;
 import seedu.budgettracker.logic.commands.DeleteSingleExpenditureCommand;
 import seedu.budgettracker.common.exception.EmptyDescriptionException;
+import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ public class DeleteExpenditureParser implements ParserPrefix {
         PREFIX_MONTH,
         PREFIX_INDEX };
 
-    public static DeleteCommand parse(String args) throws NumberFormatException, EmptyDescriptionException {
+    public static DeleteCommand parse(String args) throws ParserException {
         HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH),IS_COMPULSORY);
