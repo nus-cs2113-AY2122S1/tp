@@ -52,8 +52,13 @@ public class Expenditure extends Record {
         return category;
     }
 
+    public String toString() {
+        return String.format(this.description + this.amount + this.date + this.category);
+    }
+
     /**
-     * Prints the details of the Expenditure in column format.
+     * Returns the details of the Expenditure in table row format;
+     * description is truncated to fit within the column width.
      *
      * @param indexOfExpenditure The current index of the Expenditure
      * @return String details of the expenditure

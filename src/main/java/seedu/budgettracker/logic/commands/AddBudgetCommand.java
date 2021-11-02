@@ -5,7 +5,9 @@ import seedu.budgettracker.ui.TextUi;
 public class AddBudgetCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = ("Adds a budget record.\n"
-            + "Parameters: -b a/AMOUNT m/MONTH");
+            + "Parameters: -b a/AMOUNT m/[MONTH]\n"
+            + "Note:\n"
+            + " * If MONTH is not specified, current system month will be the default value.\n");
 
     private final double amount;
     private final int month;
@@ -21,6 +23,6 @@ public class AddBudgetCommand extends AddCommand {
 
     public void execute(boolean isLoadingStorage) {
         allRecordList.addBudget(amount, month, isLoadingStorage);
-        TextUi.showBudgetAddedMessage(amount, isLoadingStorage);
+        TextUi.showBudgetAddedMessage(amount, month, isLoadingStorage);
     }
 }

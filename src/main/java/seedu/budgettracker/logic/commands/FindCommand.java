@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     }
 
     public void execute(boolean isLoadingStorage) {
-        System.out.println("Here are the Expenditure and Loan match we have found!");
+        System.out.println("Here are the Expenditure and Loan matches we have found!");
         System.out.println(TITLE_DIVIDER);
 
         for (int i = 1; i <= 12; i++) {
@@ -42,8 +42,7 @@ public class FindCommand extends Command {
                 System.out.println("Here are the Expenditures we found!");
                 System.out.println(TITLE_DIVIDER);
                 for (int j = 0; j < sizeOfMatchedExpenditureList; j += 1) {
-                    System.out.print((j + 1) + ". ");
-                    System.out.println(matchedExpenditureList.get(j).toString());
+                    System.out.println(matchedExpenditureList.get(j).toString(j));
                 }
             }
 
