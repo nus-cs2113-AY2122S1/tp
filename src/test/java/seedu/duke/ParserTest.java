@@ -158,7 +158,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in i/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertSame("Index given is either out of range or not an integer!", test.getMessage());
+        assertSame("Only numeric inputs are allowed for index", test.getMessage());
     }
 
     @Test
