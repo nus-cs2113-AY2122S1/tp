@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 
 import static constants.ErrorMessage.addExpenseErrorMsg;
 import static constants.ErrorMessage.incorrectExpenseValueMsg;
+import static constants.ErrorMessage.tooLongNameErrorMsg;
 
 @Command(name = "add", mixinStandardHelpOptions = true,
         description = "Adds an expense in the current month to the database.")
@@ -32,10 +33,15 @@ public class AddExpenseCommand implements Callable<Integer> {
         Ui ui = Ui.getUi();
         ExpenseManager expenseMgr = ExpenseManager.getExpenseMgr();
         DataManager dataMgr = DataManager.getDataMgr();
+        int maxNameLength = 25;
 
         try {
             String expenseName = String.join(" ", names);
             double expenseValue = Money.truncate(value);
+            if (expenseName.length() > maxNameLength) {
+                ui.printMessage(tooLongNameErrorMsg);
+                return 1;
+            }
             if (expenseValue <= 0) {
                 ui.printMessage(incorrectExpenseValueMsg);
                 return 1;
