@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
 import seedu.duke.commands.clientpackages.CutClientPackageCommand;
 import seedu.duke.commands.clientpackages.ListClientPackageCommand;
@@ -109,6 +110,11 @@ public class Parser {
             return parseFind(params);
         case "sort":
             return parseSort(params);
+        case "help":
+            if (!params.equals(EMPTY_STRING)) {
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
+            }
+            return new HelpCommand();
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
