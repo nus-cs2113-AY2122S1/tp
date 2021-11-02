@@ -22,12 +22,22 @@ public class Expenditure extends Record {
         return description;
     }
 
+    /**
+     * Gets the date on which the expenditure was made.
+     *
+     * @return String date on which expenditure was made
+     */
     public String getDate() {
         return date.toString();
     }
 
-    public int getMonth() {
-        return date.getMonthValue();
+    /**
+     * Gets category which expenditure falls under.
+     *
+     * @return String category which expenditure belongs to
+     */
+    public String getCategory() {
+        return category.toString();
     }
 
     public void setDescription(String description) {
@@ -38,19 +48,16 @@ public class Expenditure extends Record {
         this.date = date;
     }
 
-    public String getCategory() {
-        return category.toString();
-    }
-
     public Category returnCategory() {
         return category;
     }
 
-    public String toString() {
-        return String.format("%-20.20s  %-20.20s %-20.20s %-20.20s",
-                this.description, "| $" + this.amount, "| " + this.date.toString(), "| " + this.category.toString());
-    }
-
+    /**
+     * Prints the details of the Expenditure in column format.
+     *
+     * @param indexOfExpenditure The current index of the Expenditure
+     * @return String details of the expenditure
+     */
     public String toString(int indexOfExpenditure) {
         int displayIndex = indexOfExpenditure + DISPLAY_INDEX_OFFSET;
         int displayIndexCharactersNeeded = (int) ceil((double)displayIndex / 10) + 1;

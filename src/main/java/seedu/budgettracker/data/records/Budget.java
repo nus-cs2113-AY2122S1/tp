@@ -10,7 +10,6 @@ public class Budget extends Record {
         if (amount < 0.00) {
             System.out.println("Budget cannot be negative!!!!");
             System.out.println("Defaulting the amount to $0.00");
-
             this.amount = 0.00;
         } else {
             this.amount = amount;
@@ -23,9 +22,5 @@ public class Budget extends Record {
 
     public String toString() {
         return (" $" + this.amount);
-    }
-
-    public Double getRawValue() {
-        return this.amount;
     }
 }
