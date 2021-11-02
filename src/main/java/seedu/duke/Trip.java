@@ -52,10 +52,10 @@ public class Trip {
      */
     public Trip(String[] newTripInfo) throws ForceCancelException {
         assert newTripInfo.length == 5;
-        setLocation(newTripInfo[LOCATION_STRING]);
-        setDateOfTrip(newTripInfo[DATE_STRING]);
-        setForeignCurrency(newTripInfo[FORCUR_STRING].toUpperCase());
-        setExchangeRate(newTripInfo[EXRATE_STRING]);
+        setLocation(newTripInfo[LOCATION_STRING].strip());
+        setDateOfTrip(newTripInfo[DATE_STRING].strip());
+        setForeignCurrency(newTripInfo[FORCUR_STRING].strip().toUpperCase());
+        setExchangeRate(newTripInfo[EXRATE_STRING].strip());
         setListOfPersons(splitPeople(newTripInfo[PERSONS_STRING]));
     }
 
@@ -519,7 +519,7 @@ public class Trip {
             if (personName.isBlank()) {
                 continue;
             }
-            Person person = new Person(personName.trim());
+            Person person = new Person(personName.strip());
             listOfPeople.add(person);
         }
         for (Person person : listOfPeople) {
