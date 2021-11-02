@@ -42,6 +42,7 @@ public class Messages {
     public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion";
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
     public static final String SAME_CURRENCY_TYPE_MESSAGE = "Your lists are already in the requested currency type!";
+    public static final String AVAILABLE_CURRENCIES_MESSAGE = "Here are the list of available currencies you can convert to!";
 
     public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
             + "-------------------------------------";

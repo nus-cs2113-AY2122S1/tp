@@ -1,13 +1,14 @@
 package seedu.utility;
 
+import seedu.commands.currency.ListCurrencyTypesCommand;
 import seedu.commands.expense.AddExpenseCommand;
-import seedu.commands.general.CheckCurrentCurrencyCommand;
+import seedu.commands.currency.CheckCurrentCurrencyCommand;
 import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.budget.CheckBudgetCommand;
 import seedu.commands.general.ClearAllEntriesCommand;
 import seedu.commands.Command;
-import seedu.commands.general.CurrencyConversionCommand;
-import seedu.commands.general.CurrencyType;
+import seedu.commands.currency.CurrencyConversionCommand;
+import seedu.commands.currency.CurrencyType;
 import seedu.commands.expense.DeleteExpenseCommand;
 import seedu.commands.income.DeleteIncomeCommand;
 import seedu.commands.general.ExitCommand;
@@ -152,6 +153,7 @@ public class Parser {
     private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
     private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
     private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
+    private static final String LIST_CURRENCY_TYPES_KEYWORD = "list_curr";
 
     public static final List<String> multiplePartCommands = Arrays.asList(ADD_EXPENSE_KEYWORD, ADD_INCOME_KEYWORD,
             DELETE_EXPENSE_KEYWORD, DELETE_INCOME_KEYWORD, FIND_KEYWORD, EXPENSE_RANGE_KEYWORD, INCOME_RANGE_KEYWORD,
@@ -201,7 +203,10 @@ public class Parser {
             return prepareGeneralRelatedCommand(commandWord, arguments);
         } else if (isBudgetRelatedCommand(commandWord)) {
             return prepareBudgetRelatedCommand(commandWord, arguments);
-        } else {
+        } else if (isCurrencyRelatedCommand(commandWord)) {
+            return prepareCurrencyRelatedCommand(commandWord, arguments);
+        }
+        else {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
     }
@@ -222,12 +227,17 @@ public class Parser {
         return (commandWord.equals(HELP_COMMAND_KEYWORD) || commandWord.equals(FIND_KEYWORD)
                 || commandWord.equals(EXIT_KEYWORD) || commandWord.equals(SHOW_GRAPH_KEYWORD)
                 || commandWord.equals(CONVERT_CURRENCY_KEYWORD) || commandWord.equals(CLEAR_ALL_ENTRIES_KEYWORD)
-                || commandWord.equals(CHECK_CURRENT_CURRENCY_KEYWORD));
+                || commandWord.equals(CHECK_CURRENT_CURRENCY_KEYWORD) || commandWord.equals(LIST_CURRENCY_TYPES_KEYWORD));
     }
 
     private boolean isBudgetRelatedCommand(String commandWord) {
         return (commandWord.equals(BALANCE_KEYWORD) || commandWord.equals(SET_BUDGET_KEYWORD)
                 || commandWord.equals(CHECK_BUDGET_KEYWORD) || commandWord.equals(SET_THRESHOLD_KEYWORD));
+    }
+
+    private boolean isCurrencyRelatedCommand(String commandWord) {
+        return (commandWord.equals(CHECK_CURRENT_CURRENCY_KEYWORD) || commandWord.equals(CONVERT_CURRENCY_KEYWORD)
+                || commandWord.equals(LIST_CURRENCY_TYPES_KEYWORD));
     }
 
     private Command prepareExpenseRelatedCommand(String commandWord, String arguments) {
@@ -295,6 +305,19 @@ public class Parser {
         }
     }
 
+    private Command prepareCurrencyRelatedCommand(String commandWord, String arguments) {
+        switch (commandWord) {
+        case CHECK_CURRENT_CURRENCY_KEYWORD:
+            return prepareCheckCurrentCurrency(arguments);
+        case CONVERT_CURRENCY_KEYWORD:
+            return prepareConvertCurrency(arguments);
+        case LIST_CURRENCY_TYPES_KEYWORD:
+            return prepareListCurrencyTypes(arguments);
+        default:
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+    }
+
     private Command prepareGeneralRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
@@ -305,12 +328,8 @@ public class Parser {
             return prepareExit(arguments);
         case SHOW_GRAPH_KEYWORD:
             return prepareShowGraph(arguments);
-        case CONVERT_CURRENCY_KEYWORD:
-            return prepareConvertCurrency(arguments);
         case CLEAR_ALL_ENTRIES_KEYWORD:
             return prepareClearAllEntries(arguments);
-        case CHECK_CURRENT_CURRENCY_KEYWORD:
-            return prepareCheckCurrentCurrency(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -366,35 +385,6 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
         return new FindCommand(arguments);
-    }
-
-    private Command prepareConvertCurrency(String arguments) {
-        final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
-        if (isMatch(matcher)) {
-            try {
-                CurrencyType newCurrencyType = extractCurrencyType(matcher);
-                return new CurrencyConversionCommand(newCurrencyType);
-            } catch (InputException e) {
-                return new InvalidCommand(e.getMessage());
-            }
-        }
-        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
-    }
-
-    private CurrencyType extractCurrencyType(Matcher matcher)
-            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
-        String newCurrency = matcher.group("currency").trim();
-        if (newCurrency.isBlank()) {
-            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
-        }
-        switch (newCurrency.toUpperCase()) {
-        case "USD":
-            return CurrencyType.USD;
-        case "SGD":
-            return CurrencyType.SGD;
-        default:
-            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
-        }
     }
 
     private Command prepareHelp(String arguments) {
@@ -869,9 +859,46 @@ public class Parser {
         
         return new SetThresholdCommand(thresholdValue);
     }
+
+    private Command prepareConvertCurrency(String arguments) {
+        final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
+        if (isMatch(matcher)) {
+            try {
+                CurrencyType newCurrencyType = extractCurrencyType(matcher);
+                return new CurrencyConversionCommand(newCurrencyType);
+            } catch (InputException e) {
+                return new InvalidCommand(e.getMessage());
+            }
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private CurrencyType extractCurrencyType(Matcher matcher)
+            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
+        String newCurrency = matcher.group("currency").trim();
+        if (newCurrency.isBlank()) {
+            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
+        }
+        switch (newCurrency.toUpperCase()) {
+        case "USD":
+            return CurrencyType.USD;
+        case "SGD":
+            return CurrencyType.SGD;
+        default:
+            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
+        }
+    }
+
+    private Command prepareListCurrencyTypes(String arguments) {
+        if (arguments.isBlank()) {
+            return new ListCurrencyTypesCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
     
-    public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager) {
-        CurrencyType currency = financialTracker.getCurrency();
+    public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager,
+                                        CurrencyManager currencyManager) {
+        CurrencyType currency = currencyManager.getCurrency();
         StringBuilder data = new StringBuilder(currency.toString() + ",");
         data.append(budgetManager.getThreshold()).append(",");
         for (ExpenseCategory category : ExpenseCategory.values()) {
