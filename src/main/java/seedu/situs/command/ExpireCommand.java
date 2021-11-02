@@ -7,6 +7,7 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+//@@author mudkip8
 
 public class ExpireCommand extends Command {
 
@@ -27,11 +28,14 @@ public class ExpireCommand extends Command {
             int entryCount = ingredientGroup.getIngredientGroupSize();
             for (int i = 0; i < entryCount; i++) {
                 if (getNumDaysBetween(ingredientGroup.getIngredientExpiry(i + 1),
-                        expireBeforeDate) >= 0) {
-                    resultMsg += ingredientGroup.get(i + 1).getName() + " | "
-                            + ingredientGroup.getIngredientInfo(i + 1) + LIST_NEWLINE_INDENT;
-                    expiringCount += 1;
+                        expireBeforeDate) < 0) {
+                    continue;
                 }
+                String groupName = ingredientGroup.get(i + 1).getName();
+                String ingredientInfo = ingredientGroup.getIngredientInfo(i + 1);
+                resultMsg +=  groupName + " | " + ingredientInfo + LIST_NEWLINE_INDENT;
+                expiringCount += 1;
+
             }
         }
 

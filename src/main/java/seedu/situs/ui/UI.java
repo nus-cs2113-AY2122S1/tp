@@ -1,6 +1,7 @@
 package seedu.situs.ui;
 
 import java.util.Scanner;
+//@@author nishantrai-nus
 
 public class UI {
 
@@ -10,8 +11,7 @@ public class UI {
     private static final String WELCOME_MESSAGE = DIVIDER
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
-            + "To see what I can do, use \"help\"\n"
-            + DIVIDER;
+            + "To see what I can do, use \"help\"\n";
     private static final String GOODBYE_MESSAGE = DIVIDER + "Okay, see you soon! Goodbye.\n" + DIVIDER;
 
 
@@ -25,6 +25,10 @@ public class UI {
 
     public static void printCommandOutput(String commandOutput) {
         System.out.print(DIVIDER + commandOutput + "\n" + DIVIDER);
+    }
+
+    public static void printCommandOutputWithoutTopDivider(String commandOutput) {
+        System.out.print(commandOutput + "\n" + DIVIDER);
     }
 
     public String getUserCommand() {

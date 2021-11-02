@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+//@@author datn02
+
 /**
  * Represents a command to fetch and update the system's date.
  */
@@ -37,7 +39,7 @@ public class DateCommand extends Command {
             resultMsg = "The current session date has been changed to " + formattedDate.format(dateFormat);
             return resultMsg;
         } catch (DateTimeParseException e) {
-            throw new SitusException("Please write the date in this format: dd-mm-yyyy\n"
+            throw new SitusException("Please write the date in this format: yyyy/mm/dd\n"
                 + "e.g 14/10/2021");
         }
     }

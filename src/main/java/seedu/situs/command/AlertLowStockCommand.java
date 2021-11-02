@@ -7,17 +7,18 @@ import seedu.situs.storage.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+//@@author mudkip8
 
 public class AlertLowStockCommand extends Command {
 
-    private static double lowStockThreshold;
+    private static double lowStockThreshold = 1.0;
     private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
-    public AlertLowStockCommand() {
+    public AlertLowStockCommand() throws SitusException {
         try {
             lowStockThreshold = new Storage().loadStockThreshold();
-        } catch (IOException | NumberFormatException e) {
-            lowStockThreshold = 1.0;
+        } catch (IOException | SitusException e) {
+            throw new SitusException(e.getMessage());
         }
     }
 
@@ -37,10 +38,15 @@ public class AlertLowStockCommand extends Command {
         ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();
 
         for (IngredientGroup ingredientGroup : ingredientList) {
-            if (ingredientGroup.getTotalAmount() <= lowStockThreshold) {
-                resultMsg += ingredientGroup + LIST_NEWLINE_INDENT;
-                lowStockCount += 1;
+            if (ingredientGroup.getTotalAmount() > lowStockThreshold) {
+                continue;
             }
+            String groupName = ingredientGroup.getIngredientGroupName();
+            String totalAmountMessage = " | Total Amount: "
+                    + String.format("%.3f", ingredientGroup.getTotalAmount()) + " kg";
+            resultMsg += groupName + totalAmountMessage + LIST_NEWLINE_INDENT;
+            lowStockCount += 1;
+
         }
 
         if (lowStockCount == 0) {

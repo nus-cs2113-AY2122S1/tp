@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+//@@author ngoivanessa
 /*
  * Represents a group of the same ingredient.
  * (Same ingredient but different expiry dates)
@@ -30,7 +31,7 @@ public class IngredientGroup {
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
-        this.totalAmount = 0.0;
+        this.totalAmount = 0.000;
     }
 
     /**
@@ -52,6 +53,7 @@ public class IngredientGroup {
     }
 
     /**
+     * @@author AayushMathur7
      * Updates total amount of ingredient.
      * @param currentAmount previous amount of ingredient with specific expiry date
      * @param newAmount new amount of ingredient with specific expiry date
@@ -62,6 +64,7 @@ public class IngredientGroup {
     }
 
     /**
+     * @@author AayushMathur7
      * Subtracts amount from total amount.
      * @param subtractAmount amount to subtract from total amount
      */
@@ -123,7 +126,7 @@ public class IngredientGroup {
             }
         }
 
-        return groupName + " | Total Amount: " + String.format("%.1f", totalAmount) + " kg"
+        return groupName + " | Total Amount: " + String.format("%.3f", totalAmount) + " kg"
                 + '\n' + printedGroup;
     }
 

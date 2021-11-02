@@ -9,6 +9,8 @@ import seedu.situs.ingredients.IngredientList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@@author nishantrai-nus
+
 public class FindCommand extends Command {
 
     private static final String FIND_MESSAGE_START = "I found these ingredients for \"";
@@ -31,12 +33,12 @@ public class FindCommand extends Command {
                 .collect(Collectors.toList());
         if (searchResults.isEmpty()) {
             resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
-        } else {
-            resultMsg += FIND_MESSAGE_START + keyword + FIND_MESSAGE_END;
-            for (IngredientGroup group : searchResults) {
-                resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getIngredientList()
-                        .indexOf(group) + 1) + ". " + group;
-            }
+            return resultMsg;
+        }
+        resultMsg += FIND_MESSAGE_START + keyword + FIND_MESSAGE_END;
+        for (IngredientGroup group : searchResults) {
+            resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getIngredientList()
+                    .indexOf(group) + 1) + ". " + group;
         }
         return resultMsg;
     }

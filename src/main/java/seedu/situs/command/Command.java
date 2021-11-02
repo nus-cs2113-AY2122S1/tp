@@ -14,11 +14,6 @@ public abstract class Command {
         return ChronoUnit.DAYS.between(date1, date2);
     }
 
-    public int getIngredientIndex(String ingredientName) {
-        //Todo: fill in as a Search
-        return 0;
-    }
-
     /**
      * Executes the command.
      *

@@ -48,7 +48,7 @@ This user guide will give you a quick rundown of all the things SITUS can do for
 ## 1. Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v1.0).
+2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v2.0).
 3. Copy the jar file to the folder that you want to use SITUS.
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Type `java -jar Situs.jar` in the terminal window.
@@ -92,7 +92,7 @@ These are the commands I can currently carry out:
 	8. view alerts - alert ALERT_TYPE
 	9. set alert thresholds - set ALERT_TYPE VALUE
 	10. view SITUS's current date - date
-	11. edit SITUS's current date - date DATE (in yyyy-mm-dd format)
+	11. edit SITUS's current date - date DATE (in dd/mm/yyyy format)
 	12. exit SITUS - exit
 ____________________________________________________
 ```
@@ -307,7 +307,7 @@ There are 3 possible `[ALERT_TYPE]`:
 2. `stock`: displays all ingredients with stock lower than the threshold value
 3. `all`: displays both of the above
 
-Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry):
+Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry)):
 ```
 alerts expiry
 ____________________________________________________
@@ -406,14 +406,14 @@ The following table shows a summary of all of SITUS's commands and links to thei
 | Action | Command |
 |---|---|
 | [View help](#21-viewing-help) | `help` |
-| [Add ingredient](#22-add-ingredients) | `add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]` |
+| [Add ingredient](#22-add-ingredients) | `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]` |
 | [List ingredients](#23-list-ingredients) | `list` |
 | [Update ingredient](#24-update-ingredients) | `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]` |
-| [Subtract Ingredients Stock](#25-subtract-ingredient-stock) | `subtract GROUP_INDEX a/[AMOUNT]` | 
-| [Delete ingredient](#26-delete-ingredients) | `delete GROUP_INDEX.INGREDIENT_INDEX` |
+| [Subtract Ingredients Stock](#25-subtract-ingredient-stock) | `subtract [GROUP_INDEX] a/[AMOUNT]` | 
+| [Delete ingredient](#26-delete-ingredients) | `delete [GROUP_INDEX.INGREDIENT_INDEX]` |
 | [Search Ingredients By Expiry](#27-search-ingredients-by-expiry) | `expire [DATE]` |
 | [Search Ingredients By Name](#28-search-ingredients-by-name) | `find [INGREDIENT_NAMES]` |
 | [Display Alerts](#29-display-alerts) | `alert [ALERT_TYPE]` |
 | [Set Thresholds](#210-set-thresholds) | `set [TYPE] [NEW_VALUE]` |
-| [View/ Set Current Date](#211-view-set-current-date)] | `date [NEW_DATE]` |
-| [Exit Program](#212-exit-program)] | `exit` |
+| [View/ Set Current Date](#211-view-set-current-date) | `date {NEW_DATE}` |
+| [Exit Program](#212-exit-program) | `exit` |

@@ -46,7 +46,7 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Amount Left: " + String.format("%.1f", getAmount()) + " kg | Expiry Date: "
+        return "Amount Left: " + String.format("%.3f", getAmount()) + " kg | Expiry Date: "
                  + Ingredient.dateToString(getExpiry());
     }
 
