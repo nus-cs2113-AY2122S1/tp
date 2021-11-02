@@ -594,7 +594,7 @@ public class Parser {
         }
 
         //definitely an invalid date
-        if (day < 0 || day > 31 || month < 0 || month > 12) {
+        if (day < 1 || day > 31 || month < 1 || month > 12) {
             return false;
         }
         //for months with 30 days
@@ -612,9 +612,7 @@ public class Parser {
                 return (!leapYearCheck.isLeapYear() || day <= 29);
             }
         }
-
         return true;
-
     }
 
 }

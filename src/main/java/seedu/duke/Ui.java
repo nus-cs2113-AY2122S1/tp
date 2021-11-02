@@ -131,12 +131,11 @@ public class Ui {
     }
 
     public static void printDateTimeFormatError() {
-        System.out.print("Please check that your date-time format is dd-MM-yyyy. "
-                + "Please enter the date again: ");
+        System.out.print("The entered date is invalid. Please enter the date again: ");
     }
 
     public static void dateInvalidError() {
-        System.out.println("Sorry, the date you entered is invalid.");
+        System.out.println("Sorry, the date you entered is invalid. Please enter the date again: ");
     }
 
     public static void printIsoFormatError() {
