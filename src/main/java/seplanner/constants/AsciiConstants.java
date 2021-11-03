@@ -1,5 +1,6 @@
 package seplanner.constants;
 
+// @@author titustortoiseturtle1999
 public class AsciiConstants {
     public static final String GLOBE
         = "                                                       /(#######################(*\n"

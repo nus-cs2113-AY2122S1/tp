@@ -9,6 +9,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+//@@author titustortoiseturtle1999
 public class Log {
     private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
     private static final String FILE_PATH = "log/Logs.log";

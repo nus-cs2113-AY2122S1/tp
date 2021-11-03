@@ -11,7 +11,7 @@ package "ui" <<Frame>> #DDDDDD {
     }
 
     class UiModule extends Ui{
-    + printModule(Module mod, int index, boolean printMC)
+    UiModule : + printModule(Module mod, int index, boolean printMC)
     }
 
     class UiMapping extends Ui {
@@ -23,14 +23,26 @@ package "ui" <<Frame>> #DDDDDD {
     + printUniversity(University uni, boolean printMC)
     }
 
-    class UiInvalid extends Ui {
+UiInvalid --|> Ui
+    class UiInvalid {
     + printFindModNull()
     + printFindUniNull()
+    + printParseException(String errorMessage)
+    + printFormat(String format)
     }
 
-    class UiGeneral extends Ui {
-    + welcome
+UiGeneral --|> Ui
+    class UiGeneral {
+    + welcome()
     + printExit()
+    }
+
+UiStorage --|> Ui
+    class UiStorage {
+    + printInvalidModuleMessage()
+    + printInvalidMappingMessage()
+    + printInvalidUniversityMessage()
+    + printWarningMessage()
     }
 }
 enum PaddingType <<enumeration>> {

@@ -17,6 +17,7 @@ public class University implements Comparator<University> {
     public University() {
     }
 
+    //@@author titustortoiseturtle1999
     public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
         this.list = list;
@@ -70,6 +71,7 @@ public class University implements Comparator<University> {
         return list;
     }
 
+    //@@author Ma Zijian
     public int getSelectedMappingListSize(ModuleList selectedModuleList) {
         return getSelectedMappings(selectedModuleList).size();
     }
@@ -143,6 +145,7 @@ public class University implements Comparator<University> {
         return result;
     }
 
+    //@@ author titustortoiseturltle1999
     @Override
     public int compare(University u, University u1) {
         return u.index - u1.index;

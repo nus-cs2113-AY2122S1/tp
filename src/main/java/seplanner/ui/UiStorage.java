@@ -21,7 +21,7 @@ public class UiStorage extends Ui {
         printWarningMessage();
     }
 
-    public static void printWarningMessage() {
+        public static void printWarningMessage() {
         System.out.println(Constants.STORAGE_WARNING_MESSAGE);
     }
 }
