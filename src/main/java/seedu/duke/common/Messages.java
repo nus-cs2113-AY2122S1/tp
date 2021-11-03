@@ -47,6 +47,10 @@ public class Messages {
             + "  Edit details of an existing video item: edit ID [t|i|p|d]/ATTRIBUTE" + System.lineSeparator()
             + "  Edit details of an existing general item: edit ID [t|i]/ATTRIBUTE" + System.lineSeparator()
             + "  Remove an existing item: rm ID" + System.lineSeparator()
+            + "  Display all library statistics: stats all" + System.lineSeparator()
+            + "  Display library statistics by item category: stats category" + System.lineSeparator()
+            + "  Display library statistics by item status: stats status" + System.lineSeparator()
+            + "  Get a list of user commands: help" + System.lineSeparator()
             + "  Exits the program: exit";
 
     // Add Commands
