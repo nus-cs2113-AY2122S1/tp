@@ -62,22 +62,30 @@ Beyond that, the libmgr application contains a number of other components:
 - `commands`: Contains various command classes that facilitate the execution of commands and a parser class that parses user inputs.
 - `storage`: Reads data from, and writes data to the hard disk.
 - `common`: Contains a collection of classes used by multiple other components, such as exceptions and messages.
-- 
 
 #### Application Launch
 
-The following sequence diagram 
+![ApplicationLaunchSequenceDiagram](img/ApplicationLaunchSequenceDiagram.png)
+
+The above sequence diagram depicts how the components interact with each other when the program is first started.
+
+1. A `TextUI` object is created which then prints the logo and a welcome message.
+2. The `Catalogue` container is created in order to store all items.
+3. A `Parser` object is created.
+4. A `Storage` handler is created, before having `read()` called to load in existing data from `data/data.json` (if applicable).
 
 #### Component Interaction
 
-![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
+![ComponentInteractionSequenceDiagram](img/ComponentInteractionSequenceDiagram.png)
 
-When the app is launched, the `ui` component is first invoked to print a logo and welcome message to the user. 
-Subsequently, the `data` component (Catalogue class) is invoked to manage and add items to the library inventory. 
-The `commands` component (Parser class) is then invoked to process the commands given by the user, 
-which is read in by the `ui` component. The individual command classes are then invoked to execute the respective command.
+The above sequence diagram shows the interactions occurring each time a command is issued by the user.
 
-
+1. `Libmgr` uses the `TextUI` class to obtain the user input.
+2. `Libmgr` then uses `Parser` to parse the user input.
+3. A `Command` object is returned based on the user input.
+4. `Libmgr` then calls the `execute()` method of the `Command` object which performs all the logic as defined by the command
+5. `Libmgr` lastly calls the `write()` method of the `Storage` object which writes the current state of teh items in the `Catalogue` container to `data/data.json`
+6. The exit condition is checked by computing whether the `isExit()` method of the current `Command` object returns true. If it is computed as true, the loop is broken out of and the program quits.
 
 ### Commands component
 
@@ -103,18 +111,32 @@ The commands component consists of a `commands` package. Inside the package are 
    15. `UnknownCommand`
    16. `UnreserveCommand`
 
-
 The individual Command classes inherit from an abstract `Command` class.
 
 ### Data Component
 
 ![ItemsClassDiagram](img/ItemsClassDiagram.png)
 
-The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
+The data component consists of a `data` package which holds classes that allows the categorisation of items into different types.
+- Audio
+- Books
+- Magazines
+- Videos
+- Miscellaneous
+
+Additionally, this component also holds a `Catalogue` class, which acts as a container for all items and also provides functionality to perform operations on them.
 
 ### Storage Component
 
-__todo__
+![StorageClassDiagram](img/StorageClassDiagram.png)
+
+The storage component contains the `Storage` and `JsonFactory` classes.
+- `Storage` holds the functionality to write the current state of the catalogue to the `data.json` file. It also reads from the `data.json` file if one is found, if not a new empty file is created
+- `JsonFactory` contains all the logic for deserializing the `Catalogue` object into JSON so that it can be written into a file. Likewise, it also contains the logic for serializing the `Catalogue` object when provided JSON.
+Furthermore, it also contains error checking to ensure that malformed or corrupted data is not processed.
+
+> :grey_exclamation: The directory and filename of the JSON file is defined within the `Storage` class<br>
+The default value is set to `./data/data.json`
 
 ### UI Component
 
@@ -123,7 +145,10 @@ _todo_
 ### Common component
 
 Classes used by multiple components are located in the `common` package.
-For example, the `LibmgrException` class which is the main exception class for the app.
+- `LibmgrException` is the main exception class for the app.
+- `Status` enumeration contains the possible values for `Status` of items, which include `AVAILABLE`, `RESERVED` and `LOANED`
+- `Messages` contains information, warning and error messages
+
 
 ## Implementation
 
@@ -136,8 +161,6 @@ The Edit Command class handles the functionality to change a specific detail of 
 #### Search Command 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
-
-
 
 ---
 ## Product scope

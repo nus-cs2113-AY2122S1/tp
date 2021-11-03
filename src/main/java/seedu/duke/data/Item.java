@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * The Item class is a class representing an item in the library.
  */
-public class Item {
+public abstract class Item {
     private String title;
     private String id;
     private Status status;

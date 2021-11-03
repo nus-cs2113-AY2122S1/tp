@@ -3,9 +3,9 @@ hide footbox
 
 Participant ":Libmgr" as libmgr
 Participant "ui:TextUI" as ui
-Participant "catalogue:Catalogue" as catalogue
 Participant "parser:Parser" as parser
 Participant "storage:Storage" as storage
+Participant ":Command" as cmd
 
 activate libmgr
 
@@ -14,6 +14,36 @@ loop while true
     activate ui
     return userInput:String
 
+    libmgr -> parser:parse(userInput:String)
+    activate parser
+
+    create cmd
+    parser -> cmd:XYZCommand()
+    activate cmd
+    return
+
+    return userCommand:Command
+
+    libmgr -> cmd:execute(ui:TextUI, catalogue: Catalogue)
+    activate cmd
+    return
+
+    libmgr -> storage:write(catalogue:Catalogue)
+    activate storage
+    return
+
+
+    opt userCommand.isExit()
+        libmgr -> cmd:isExit()
+        activate cmd
+        return isExit:Boolean
+    end
+    destroy cmd
 end
 
+libmgr --[hidden]> libmgr
+destroy libmgr
+destroy ui
+destroy parser
+destroy storage
 @enduml
