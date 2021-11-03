@@ -106,7 +106,7 @@ public class SelectedUniversityStorage extends UserStorage {
     private boolean isMappingExist(ArrayList<ModuleMapping> mappings,
                                    ModuleMapping searchMapping) {
         for (ModuleMapping mapping : mappings) {
-            if (mapping.equals(searchMapping)) {
+            if (mapping.isEqual(searchMapping)) {
                 return true;
             }
         }

@@ -9,9 +9,9 @@ public class ModuleMapping {
         this.mappedModule = mappedModule;
     }
 
-    public boolean equals(ModuleMapping searchMapping) {
-        return getLocalModule().equals(searchMapping.localModule)
-                && getMappedModule().equals(searchMapping.mappedModule);
+    public boolean isEqual(ModuleMapping searchMapping) {
+        return getLocalModule().isEqual(searchMapping.localModule)
+                && getMappedModule().isEqual(searchMapping.mappedModule);
     }
 
     public Module getLocalModule() {

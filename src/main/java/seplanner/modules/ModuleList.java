@@ -53,7 +53,7 @@ public class ModuleList {
 
     public boolean isModuleExist(Module searchModule) {
         for (Module module : list) {
-            if (module.equals(searchModule)) {
+            if (module.isEqual(searchModule)) {
                 return true;
             }
         }
