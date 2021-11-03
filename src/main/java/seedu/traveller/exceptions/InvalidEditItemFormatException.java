@@ -1,7 +1,7 @@
 package seedu.traveller.exceptions;
 
 
-//@@author Uxinnn
+//@@author Jach23
 public class InvalidEditItemFormatException extends TravellerException {
     public InvalidEditItemFormatException() {
         message = "\tWrong format for EditItem!\n\tCorrect format: "
