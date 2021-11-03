@@ -14,12 +14,22 @@ public class AppointmentStorage extends Storage {
     private static final String APPOINTMENT_DATA_PATH = "MedBotData/appointment.txt";
     private static final String[] parameterPrefixes = {"d/", "p/", "s/"};
 
+    /**
+     * Instantiate storage at the default path, APPOINTMENT_DATA_PATH.
+     *
+     * @throws MedBotException if unable to create/detect storage file
+     */
     public AppointmentStorage() throws MedBotException {
         super(APPOINTMENT_DATA_PATH);
     }
 
-
-    public AppointmentStorage(String testDataPath) throws MedBotException {
+    /**
+     * For testing purposes, using a custom data path.
+     *
+     * @param testDataPath custom data path
+     * @throws MedBotException if unable to create/detect storage file
+     */
+    protected AppointmentStorage(String testDataPath) throws MedBotException {
         super(testDataPath);
     }
 
