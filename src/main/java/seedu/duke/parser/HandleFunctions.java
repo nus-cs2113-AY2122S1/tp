@@ -3,7 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.exceptions.TripNotOpenException;
-import seedu.duke.exceptions.NoExpensesError;
+import seedu.duke.exceptions.NoExpensesException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
@@ -122,10 +122,9 @@ public abstract class HandleFunctions extends ExecuteFunctions {
     protected static void handleOptimize() {
         try {
             executeOptimize();
-        } catch (NoExpensesError e) {
+        } catch (NoExpensesException e) {
             Ui.printNoExpensesError();
         }
     }
-
-
 }
+

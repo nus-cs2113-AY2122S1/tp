@@ -6,7 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.Person;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.InvalidAmountException;
-import seedu.duke.exceptions.NoExpensesError;
+import seedu.duke.exceptions.NoExpensesException;
 import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.expense.Expense;
 
@@ -208,11 +208,11 @@ public abstract class ExecuteFunctions {
         Storage.setLastExpense(null);
     }
 
-    protected static void executeOptimize() throws NoExpensesError {
+    protected static void executeOptimize() throws NoExpensesException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
             checkForOptimization();
         } else {
-            throw new NoExpensesError();
+            throw new NoExpensesException();
         }
     }
 
