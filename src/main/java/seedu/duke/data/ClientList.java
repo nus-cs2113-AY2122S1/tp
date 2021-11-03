@@ -12,8 +12,8 @@ public class ClientList {
     private static final String CLIENT_NOT_FOUND_MESSAGE = "Client cannot be found. Please try another client ID";
 
     private final ArrayList<Client> clients;
-    private final ArrayList<String> clientIds;
-    private final ArrayList<String> clientNames;
+    private ArrayList<String> clientIds;
+    private ArrayList<String> clientNames;
     private ArrayList<String> iteratedClientIds;
     private int clientCount = 0;
 

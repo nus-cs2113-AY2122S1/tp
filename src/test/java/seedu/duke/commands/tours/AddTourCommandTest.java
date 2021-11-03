@@ -16,7 +16,6 @@ public class AddTourCommandTest {
     public static final String TEST_TOUR_ID = "t001";
     public static final String TEST_TOUR_NAME = "AustralianRomance";
     public static final String TEST_TOUR_PRICE_STRING = "1500";
-    public static final float TEST_TOUR_PRICE_FLOAT = 1500;
 
     TourList testTourList = new TourList();
     ClientList dummyClientList = new ClientList();
@@ -36,7 +35,7 @@ public class AddTourCommandTest {
         Tour retrieveTour = addTour.getTour();
         assertEquals(TEST_TOUR_ID, retrieveTour.getId());
         assertEquals(TEST_TOUR_NAME, retrieveTour.getName());
-        assertEquals(TEST_TOUR_PRICE_FLOAT, retrieveTour.getPrice());
+        assertEquals(TEST_TOUR_PRICE_STRING, retrieveTour.getPrice());
     }
 
     @Test
@@ -53,6 +52,6 @@ public class AddTourCommandTest {
         Tour retrieveTour = addTour.getTour();
         assertEquals(TEST_TOUR_ID, retrieveTour.getId());
         assertEquals(TEST_TOUR_NAME, retrieveTour.getName());
-        assertEquals(TEST_TOUR_PRICE_FLOAT, retrieveTour.getPrice());
+        assertEquals(TEST_TOUR_PRICE_STRING, retrieveTour.getPrice());
     }
 }
