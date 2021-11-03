@@ -1,18 +1,16 @@
 @startuml
-
+!includesub CommandClassDiagram.puml!COMMAND
 skinparam classAttributeIconSize 0
 hide circle
-"{abstract}\nCommandParser" --> "2..*" "{abstract}\nCommand": has >
-Terminus -> "0..1" "{abstract}\nCommandParser": commandParser
-XYZCommandParser --|>  "{abstract}\nCommandParser"
 !startsub COMMANDPARSER
-abstract class "{abstract}\nCommandParser" {
+abstract class "{abstract}\nCommandParser" as CommandParser {
  - workplace: String
  + CommandParser(workspace: String)
  + {abstract} parseCommand(command: String): Command
  + getHelpMenu(): String[]
 }
 !endsub
+
 class XYZCommandParser  {
 - commandParser: XYZCommandParser
 + parseCommand(command: String): Command
@@ -21,5 +19,8 @@ class XYZCommandParser  {
 
 class Terminus
 
-!includesub CommandClassDiagram.puml!COMMAND
+CommandParser --> "2..*" Command: has >
+Terminus -> "0..1" CommandParser: commandParser
+XYZCommandParser --|>  CommandParser
+
 @enduml

@@ -1,7 +1,7 @@
 @startuml
-package UI #bisque
 skinparam actorStyle awesome
 actor User as user
+package UI #bisque
 package Terminus #whitesmoke
 package Parser #aquamarine
 package Command #thistle

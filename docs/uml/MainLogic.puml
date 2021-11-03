@@ -1,4 +1,6 @@
 @startuml
+!include style.puml
+
 box "Main" #whitesmoke
 participant ":Terminus" as Terminus #white
 endbox
@@ -15,7 +17,6 @@ endbox
 box "Storage" #lightpink
 participant ":StorageManager" as StorageManager #mistyrose
 endbox
-skinparam sequenceMessageAlign center
 autoactivate on
 
 -> Terminus: run()

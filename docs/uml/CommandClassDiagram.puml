@@ -1,15 +1,11 @@
 @startuml
+!includesub Module.puml!MODULEMANAGER
+!includesub ParserClassDiagram.puml!COMMANDPARSER
 
 skinparam classAttributeIconSize 0
 hide circle
-
-"{abstract}\nCommand" ..> "1" CommandResult: returns >
-"{abstract}\nCommand" ..> "1" ModuleManager: modifies
-CommandResult ..> "0..1" "{abstract}\nCommandParser": contains >
-"{abstract}\nCommandParser" -> "2..*" "{abstract}\nCommand": has >
-XYZCommand --|> "{abstract}\nCommand"
 !startsub COMMAND
-abstract class "{abstract}\nCommand"  {
+abstract class "{abstract}\nCommand" as Command  {
   # arguments: String
   - moduleName: String
   + {abstract} getFormat(): String
@@ -19,8 +15,7 @@ abstract class "{abstract}\nCommand"  {
 
 }
 !endsub
-
-class XYZCommand {
+class "XYZCommand" {
   + execute(moduleManager: ModuleManager): CommandResult
   + getHelpMessage(): String
   + getFormat(): String
@@ -42,6 +37,10 @@ class CommandResult {
   + getStorageType(): StorageTypeEnum
 }
 
-!includesub Module.puml!MODULEMANAGER
-!includesub ParserClassDiagram.puml!COMMANDPARSER
+Command ..> "1" CommandResult: returns >
+Command ..> "1" ModuleManager: modifies
+CommandResult ..> "0..1" CommandParser: contains >
+CommandParser -> "2..*" Command: has >
+XYZCommand --|> Command
+
 @enduml

@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
 box "Main" #whitesmoke
 participant ":Terminus" as Terminus #white
 endbox
@@ -9,7 +10,7 @@ endbox
 
 
 autoactivate on
-skinparam sequenceMessageAlign center
+
 mainframe sd Exit
 
  -> Terminus: exit()

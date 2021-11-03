@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
 box "Main" #whitesmoke
 participant ":Terminus" as Terminus #white
 endbox
@@ -11,7 +12,7 @@ participant ":ModuleManager" as ModuleManager #lightsalmon
 endbox
 
 autoactivate on
-skinparam sequenceMessageAlign center
+
 mainframe sd Intialization
 
  -> Terminus: initialize()
