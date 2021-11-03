@@ -5,9 +5,12 @@ import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
+import seedu.logger.TimetableLogger;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddUI {
 
@@ -34,6 +37,7 @@ public class AddUI {
     private static final String NO_LAB_FOUND = "               *Module has no Labs*";
     private static final String DISCLAIMER = " [CONFLICT]";
 
+    private static final Logger logger = Logger.getLogger("");
     public static Scanner in = new Scanner(System.in);
 
     /**
@@ -66,6 +70,7 @@ public class AddUI {
             TextUi.printLessonAdded();
         } catch (IntegerException e) {
             e.printMessage();
+            logger.log(Level.WARNING, "Invalid Lesson Selection, Add Module aborted");
         }
     }
 

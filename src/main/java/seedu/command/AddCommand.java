@@ -15,6 +15,8 @@ import seedu.ui.TextUi;
 import seedu.exceptions.ModuleExistException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddCommand extends Command {
     private static final String LECTURE = "Lecture";
@@ -29,6 +31,7 @@ public class AddCommand extends Command {
     private final Timetable timetable;
     private final AddFlag flag;
     public AddUI addUI = new AddUI();
+    private static final Logger logger = Logger.getLogger("");
 
     public static final String commandSyntax = "add";
     public static final String commandAction = "Add modules or tasks to the Timetable";
@@ -49,24 +52,15 @@ public class AddCommand extends Command {
             Semester semesterData = module.getSemester(semester);
             addLesson(semesterData, module);
         } else if (getFlag() == AddFlag.EVENT) {
-            try {
-                TimetableUserItem event = getEvent();
-                timetable.addEvent(event.getDayOfWeek(), event);
-                timetable.addToEvents(event);
-                addUI.printEventMessage(event);
-            } catch (AddException e) {
-                throw e;
-            }
+            addEvent();
         }
     }
 
     /**
-     * Function returns an event that the user will create by calling other methods
+     * Function adds an event that the user will create by calling other methods
      * to get the event details, which will be used to construct the event item.
-     * @return the event that will be added to the timetable
-     * @throws AddException when the event that is to added conflicts with another item in timetable
      */
-    public TimetableUserItem getEvent() throws AddException {
+    public void addEvent() {
         TimetableUserItem event;
         try {
             String description = getDescription();
@@ -77,9 +71,12 @@ public class AddCommand extends Command {
             String location = getLocation();
             event = new TimetableUserItem(description, date, startTime, endTime, location);
             verifyNoConflict(event);
-            return event;
+            timetable.addEvent(event.getDayOfWeek(), event);
+            timetable.addToEvents(event);
+            addUI.printEventMessage(event);
         } catch (AddException e) {
-            throw e;
+            e.printMessage();
+            logger.log(Level.WARNING, "Invalid event created, event has not been added to timetable");
         }
     }
 
@@ -157,6 +154,8 @@ public class AddCommand extends Command {
             addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
         } catch (AddException e) {
             e.printMessage();
+            logger.log(Level.WARNING, "Module that does not contain any lessons, " +
+                    "module has been successfully added into timetable");
         }
     }
 
