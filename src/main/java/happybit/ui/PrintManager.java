@@ -70,7 +70,7 @@ public class PrintManager {
     private static final String COMMAND_NOTE_3 = "* Use 'list' and 'view' to check the goal and habit indexes "
             + "respectively";
 
-    private static final String[] COMMAND_HEADERS = {"Description", "Format"};
+    private static final String[] COMMAND_HEADERS = {"Action", "Format"};
     private static final String[] GOAL_HEADERS = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count",
         "Completion Rate"};
     private static final String[] HABIT_HEADERS = {"Index", "Name", "Interval", "Completion", "Completed", "Remaining",
