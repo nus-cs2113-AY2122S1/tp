@@ -33,11 +33,11 @@ public class ReturnCommand extends Command {
      * @param catalogue Object that encapsulates the library catalogue
      * @throws LibmgrException when user input is invalid
      */
-    public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+    public void handleReturnCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (!args.contains(" ")) {
             throw new LibmgrException(INVALID_ID);
         }
-        id = args.split(" ")[1];
+        id = args.split("return ")[1];
         Item toBeReturned = catalogue.getItem(id);
 
         if (toBeReturned.getStatus().equals(LOANED)) {
@@ -46,7 +46,7 @@ public class ReturnCommand extends Command {
             toBeReturned.setDueDate();
             ui.print(RETURN_SUCCESS, toBeReturned);
         } else {
-            ui.print(WRONG_ITEM_MESSAGE);
+            throw new LibmgrException(WRONG_ITEM_MESSAGE);
         }
     }
 
@@ -58,7 +58,7 @@ public class ReturnCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            handleLoanCommand(ui, catalogue);
+            handleReturnCommand(ui, catalogue);
         } catch (IndexOutOfBoundsException e) {
             ui.print(INVALID_ID);
         } catch (NullPointerException e) {
