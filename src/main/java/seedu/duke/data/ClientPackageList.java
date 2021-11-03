@@ -9,10 +9,10 @@ public class ClientPackageList {
     private static final String CLIENTPACKAGE_NOT_FOUND_MESSAGE
             = "Client Package cannot be found. Please try another client package ID";
 
-    private static ArrayList<ClientPackage> clientPackages;
-    private static int clientPackageCount = 0;
+    private final ArrayList<ClientPackage> clientPackages;
+    private int clientPackageCount = 0;
 
-    public static ArrayList<ClientPackage> getClientPackages() {
+    public ArrayList<ClientPackage> getClientPackages() {
         return clientPackages;
     }
 
@@ -26,7 +26,7 @@ public class ClientPackageList {
         clientPackages.add(pack);
     }
 
-    public ClientPackage get(int index) {
+    public ClientPackage getClientPackageByIndex(int index) {
         return clientPackages.get(index);
     }
 

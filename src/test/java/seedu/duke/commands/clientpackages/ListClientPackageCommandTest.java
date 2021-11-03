@@ -1,10 +1,9 @@
-package seedu.duke.commands.clients;
+package seedu.duke.commands.clientpackages;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clientpackages.ListClientPackageCommand;
 import seedu.duke.data.Client;
 import seedu.duke.data.Tour;
 import seedu.duke.data.Flight;
@@ -36,8 +35,7 @@ public class ListClientPackageCommandTest {
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
         Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
-            "20/10/2021 18:00", "21/10/2021 03:00"});
+        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
         dummyClientList.add(botuan);
         dummyTourList.add(jpn);
         dummyFlightList.add(sqjpn);

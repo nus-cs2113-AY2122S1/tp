@@ -63,7 +63,7 @@ public class TourPlanner {
                 logr.log(Level.SEVERE, e.getMessage());
             } finally {
                 ui.showLine();
-                storage.saveFile();
+                storage.saveFile(clientPackages.getClientPackages());
             }
         }
     }

@@ -1,12 +1,17 @@
 # **TourPlanner User Guide**
 
+<br>
 TourPlanner is a desktop application meant for employees of travel agencies. Its main purpose is to manage clients,
 flights, accommodations and client packages data, optimized for use via a Command Line Interface (CLI). If you can type
 fast, this application can allow one to access relevant travel information faster than traditional GUI applications.
 
 <br>
 
-## **Quick Start**
+* Table of Contents{:toc}
+
+<br>
+
+## **Quick Start** ##
 
 <hr>
 
@@ -16,13 +21,15 @@ fast, this application can allow one to access relevant travel information faste
 
 3. Copy the file to the folder you want to use as the home folder for your database.
 
-4. Double-click the file to start the app.
+4. Open a command window in that folder
 
-5. Type the command in the command box and press Enter to execute.
+5. Run the command ```java -jar TourPlanner.jar``` to start the program
+
+6. Type the command in the command box and press Enter to execute
 
 <br>
 
-## Introduction to Data Types
+## Introduction to Data Types ##
 
 <hr>
 
@@ -36,9 +43,8 @@ There are 4 data types that are stored in TourPlanner:
 * ```-f``` Flights
 * ```-p``` Client Package: package that contains the client along with the tour and flight they have opted for.
 
-<br>
 
-Examples:
+Examples of data types in commands:
 
 * ```add -t JPN /n Japan Basic Tour /p 1500 ``` calls for a <u>tour</u> to be added.
 * ```list -p ``` calls for all available <u>client packages</u> to be listed out.
@@ -76,14 +82,30 @@ Examples of data fields in commands:
 
 <br>
 
-## Features
-
-:information_source: Do refer to <u>Introduction to Data Fields</u> on the purpose and syntax of ```DATA_FIELDS``` for
-more clarity!
-
+## Viewing help ``help``
 <hr>
 
-## Adding data types:  ```add```
+Shows a message with the link to this user guide.
+
+<br>
+
+Format: ```help```
+
+The following output will be shown:
+
+(insert output)
+
+<br>
+
+## Adding / Cutting Data Types
+<hr>
+
+:information_source:Please refer to <u>Introduction to Data Types</u> and <u>Introduction to Data Fields</u> on
+the purpose and syntax of ```DATA_TYPES``` and ```DATA_FIELDS```.
+
+<br>
+
+## :heavy_plus_sign: Adding data types:  ```add```
 
 You are able to add information of all data types into the database, specified by mandatory fields to enter for each
 entry.
@@ -159,8 +181,8 @@ Format: ```add [DATA_TYPE] TOUR_ID [DATA_FIELDS]```
 Mandatory data fields:
 
 * Tour ID - ```TOUR_ID```
-* Tour name - ```/n DEPARTURE_DESTINATION```
-* Tour price - ```/p RETURN_DESTINATION```
+* Tour name - ```/n TOUR_NAME```
+* Tour price - ```/p TOUR_PRICE```
 
 :exclamation: Note that the given price should be a numerical value.
 
@@ -206,8 +228,10 @@ Adds Client _c002_, Flight _SQ-KOR1_, and Tour _t002_ into an overall package _p
 
 <hr>
 
-## Cutting data types:  ```cut```
+## :scissors: Cutting data types:  ```cut```
 Deletes entry of a certain data type.
+
+<br>
 
 ###Cut Client Package
 Deletes the client package from the list of packages.
@@ -249,7 +273,6 @@ Return Flight: SG, 21/10/21 03:00
 Format: `cut [DATA_TYPE] DATA_ID`
 * Deletes the entry of DATA_TYPE with specified DATA_ID.
 * Deletes all client packages that contains the specific entry
-* Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```
 
 <br>
 Examples:
@@ -323,7 +346,7 @@ Departure Flight: JPN, 20/10/21 18:00
 Return Flight: SG, 21/10/21 03:00
 ```
 
-<hr>
+<br>
 
 ## **Querying Data Types**
 
@@ -332,17 +355,16 @@ Return Flight: SG, 21/10/21 03:00
 The user is also able to view all entries of a specific data type, as well as find specific entrie(s) based their codes.
 
 <br>
+:information_source: Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```
+<br>
 
-## Listing data types: ```list```
+## :mag_right: Listing data types: ```list```
 
 Shows a list of all available entries of a specific data type, along with their respective fields.
 
 Format: ```list [DATA_TYPE]```
 
-(Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```)
-
 <br>
-
 Examples:
 
 * ```list -c``` lists out all available client entries.
@@ -359,7 +381,7 @@ Email: adam@mail.com
 2. Client ID: c002
 Name: Betty
 Contact Number: 12223444
-Email: betty.com
+Email: betty@mail.com
 
 Total Clients: 2
 ```
@@ -432,12 +454,10 @@ In addition, ```find -c ad``` will yield the same results, since "ad" is
 contained in "Adam".
 <br>
 
-### Find tour / flight / package
+### Find tour / flight 
 
-Finds a specific entry based on a particular code. In addition for tours and flights, it will show the names of the
-passenger(s) who are assigned to them.
-
-(Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```)
+Finds a specific entry based on a particular code. In addition, for tours and flights, it will show the names of the
+subscriber(s) / passenger(s) who are assigned to them respectively.
 
 <br>
 
@@ -482,139 +502,31 @@ Betty
 Total Passengers: 1
 ```
 
+
 <br>
 
-## Sort clientpackages
+## :chart_with_upwards_trend: Sorting data types: ```sort```
 
-Sort the list of clientpackages
+Sort a specific data type based on a particular ```[FILTER]```. It will return all client(s) in ascending
+alphabetical order. the possible values of ```[FILTER]``` varies between data types.
 
-Format: ```sort [DATA_TYPE] [DATA_FIELDS]```
+Format: ```sort [DATA_TYPE] [FILTER]```
 
-### Sorted by returning flight times
+<br>
 
-Format: ```sort -f /r```
+### Sort client
+
+The possible values of ```[FILTER]``` are:
+* ```\n``` to sort by client name 
+* ```\id``` to sort by client id
+
+<br>
+
 Examples:
 
-Output:
+* ```sort -c \n``` sorts the clients by client name alphabetically.
 
-```
-Sorted by returning flight times
-1. Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/21 18:00
-Return Flight: SG, 21/10/21 03:00
-
-2. Flight ID: SQ-ZWM
-Departure Flight: ZWM, 5/11/21 09:00
-Return Flight: SG, 7/11/21 15:00
-
-3. Flight ID: SQ-KOR
-Departure Flight: KOR, 23/10/21 08:00
-Return Flight: SG, 30/11/21 03:00
-```
-
-### Sorted by departing flight times
-
-Format: ```sort -f /d```
-Examples:
-
-Output:
-
-```
-Sorted by departing flight times
-1. Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/21 18:00
-Return Flight: SG, 21/10/21 03:00
-
-2. Flight ID: SQ-KOR
-Departure Flight: KOR, 23/10/21 08:00
-Return Flight: SG, 30/11/21 03:00
-
-3. Flight ID: SQ-ZWM
-Departure Flight: ZWM, 5/11/21 09:00
-Return Flight: SG, 7/11/21 15:00
-```
-
-### Sorted by flight id alphabetically
-
-Format: ```sort -f /id```
-Examples:
-
-Output:
-
-```
-Sorted by departing flight times
-Sorted by flight id alphabetically
-1. Flight ID: SQ-JPN
-Departure Flight: JPN, 20/10/21 18:00
-Return Flight: SG, 21/10/21 03:00
-
-2. Flight ID: SQ-KOR
-Departure Flight: KOR, 23/10/21 08:00
-Return Flight: SG, 30/11/21 03:00
-
-3. Flight ID: SQ-ZWM
-Departure Flight: ZWM, 5/11/21 09:00
-Return Flight: SG, 7/11/21 15:00
-```
-
-### Sorted by tour id alphabetically
-
-Format: ```sort -t /id```
-Examples:
-
-Output:
-
-```
-Sorted by tour id alphabetically
-1. Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-2. Name: Japan Food Tour
-Code: JPN2
-Price per pax: $4000.00
-
-3. Name: Korea Cultural Tour
-Code: KOR
-Price per pax: $3000.00
-
-4. Name: Zimbabwe Tour
-Code: ZWM
-Price per pax: $1700.00
-```
-
-### Sorted by price in ascending order
-
-Format: ```sort -t /id```
-Examples:
-
-Output:
-
-```
-Sorted by tour id alphabetically
-1. Name: Japan Basic Tour
-Code: JPN1
-Price per pax: $1500.00
-
-2. Name: Zimbabwe Tour
-Code: ZWM
-Price per pax: $1700.00
-
-3. Name: Korea Cultural Tour
-Code: KOR
-Price per pax: $3000.00
-
-4. Name: Japan Food Tour
-Code: JPN2
-Price per pax: $4000.00
-```
-
-### Sorted by client name alphabetically
-
-Format: ```sort -c /n```
-Examples:
-
-Output:
+An output of this format will be shown:
 
 ```
 Sorted by client name alphabetically
@@ -638,13 +550,11 @@ Name: Wayne
 Contact Number: 56667888
 Email: wendy@mail.com
 ```
+<br>
 
-### Sorted by client id alphabetically
+* ```sort -c \id``` sorts the clients by id alphabetically.
 
-Format: ```sort -c /id```
-Examples:
-
-Output:
+An output of this format will be shown:
 
 ```
 orted by client id alphabetically
@@ -667,11 +577,154 @@ Email: wendy@mail.com
 Name: ChengXu
 Contact Number: 10101010
 ```
+
+<br>
+
+### Sort tour
+
+Sort tour(s) based on a particular ```[FILTER]```. It will return all tour(s) in ascending
+alphabetical order.
+
+The possible values of ```[FILTER]``` are:
+* ```\id``` to sort by tour id
+* ```\p``` to sort by price
+
+<br>
+
+Examples:
+
+* ```sort -f \id``` sorts the tours by tour id alphabetically.
+
+An output of this format will be shown:
+
+```
+Sorted by tour id alphabetically
+1. Name: Japan Basic Tour
+Code: JPN1
+Price per pax: $1500.00
+
+2. Name: Japan Food Tour
+Code: JPN2
+Price per pax: $4000.00
+
+3. Name: Korea Cultural Tour
+Code: KOR
+Price per pax: $3000.00
+
+4. Name: Zimbabwe Tour
+Code: ZWM
+Price per pax: $1700.00
+```
+<br>
+
+* ```sort -f \id``` sorts the tours by price in ascending order.
+
+An output of this format will be shown:
+
+```
+Sorted by tour id alphabetically
+1. Name: Japan Basic Tour
+Code: JPN1
+Price per pax: $1500.00
+
+2. Name: Zimbabwe Tour
+Code: ZWM
+Price per pax: $1700.00
+
+3. Name: Korea Cultural Tour
+Code: KOR
+Price per pax: $3000.00
+
+4. Name: Japan Food Tour
+Code: JPN2
+Price per pax: $4000.00
+```
+
+<br>
+
+
+### Sort flights
+
+Sort flight(s) based on a particular [FILTER]. 
+It will return all flight(s) in ascending alphabetical order.
+
+The possible values of ```[FILTER]``` are:
+*```\id``` to sort by flight id
+* ```\d``` to sort by departing flight times
+* ```\r``` to sort by returning flight times
+
+<br>
+
+Examples:
+
+* ```sort -f \id``` sorts the flights by flight id alphabetically.
+
+An output of this format will be shown:
+
+```
+Sorted by departing flight times
+Sorted by flight id alphabetically
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+
+3. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+```
+<br>
+
+* ```sort -f \d``` sorts the flights by departing returning flight times.
+
+An output of this format will be shown:
+
+```
+Sorted by departing flight times
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+
+3. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+```
+<br>
+
+* ```sort -f \r``` sorts the flights by ascending returning flight times.
+
+An output of this format will be shown:
+
+```
+Sorted by returning flight times
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+
+3. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+```
+<br>
+
+
 ## Storage
 
-This program can print all the cilentpackages into a text file will save the clientpackages you have added before by load and save functions.
+This program can print all the cilentpackages into a text file will save the clientpackages 
+you have added before by load and save functions.
 
-## Exit application: ```exit```
+## Exit application: ```bye```
 
 Exits the application.
 
