@@ -59,6 +59,7 @@ public class RecommendWorkoutCommand extends Command {
         LOGGER.info("Showing the recommended " + workoutLevel + " Workouts");
         Map<String, ArrayList<?>> recommendedWorkouts = getRecommendedWorkouts(workoutLevel);
 
+        // Loops through each exercise inside each workout to add it to the respective exerciseList
         for (Map.Entry<String, ArrayList<?>> m : recommendedWorkouts.entrySet()) {
             ArrayList<?> list = m.getValue();
             ArrayList<Exercise> exerciseList = new ArrayList<>();
@@ -67,9 +68,11 @@ public class RecommendWorkoutCommand extends Command {
                 assert o instanceof Exercise;
                 exerciseList.add((Exercise) o);
             }
+            // Adds the recommended workout to the workoutList
             String recommendedWorkoutName = workoutLevel + " " + m.getKey();
             Workout recommendedWorkout = new Workout(recommendedWorkoutName, exerciseList);
             workouts.addWorkout(recommendedWorkout);
+
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         }

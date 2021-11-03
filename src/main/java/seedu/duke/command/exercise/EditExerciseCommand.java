@@ -84,6 +84,7 @@ public class EditExerciseCommand extends Command {
             Exercise toEdit = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
 
             LOGGER.info("Editing current exercise parameters with new exercise parameters");
+            // Assigns new values to the parameters
             toEdit.setDescription(newDescription);
             toEdit.setReps(newReps);
             toEdit.setSets(newSets);
