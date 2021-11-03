@@ -22,12 +22,12 @@ public class WordLimitGame extends Game {
     private String[] displayed;
 
 
-    public WordLimitGame(String targetWordSet, int wordsPerLine, boolean isReady) {
+    public WordLimitGame(int wordLimit, String targetWordSet, int wordsPerLine, boolean isReady) {
         super();
         this.eachWord = new ArrayList<>(100);
         this.wordsPerLine = wordsPerLine;
         this.content1 = targetWordSet;
-        this.wordLimit = getWordLimit();
+        this.wordLimit = getWordLimit(wordLimit);
         this.isReady = isReady;
     }
 
@@ -47,7 +47,11 @@ public class WordLimitGame extends Game {
         return eachWord.size();
     }
 
-    public int getWordLimit() {
+    public int getWordLimit(int wordLimit) {
+        if (wordLimit != -1) {
+            return wordLimit;
+        }
+
         Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how many words you want the game to run: ");
 
@@ -55,7 +59,7 @@ public class WordLimitGame extends Game {
             return Integer.parseInt(in.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Not a Number!");
-            return getWordLimit();
+            return getWordLimit(wordLimit);
         }
     }
 

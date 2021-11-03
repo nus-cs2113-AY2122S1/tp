@@ -23,25 +23,27 @@ public class TimeModeGame extends Game {
         super();
         assert targetWordSet != null : "text passed into Time Game should not be null.";
         this.wordLists = splitStringIntoWordList(targetWordSet);
-        this.timeInSeconds = timeInSeconds;
+        this.timeInSeconds = getTimeLimit(timeInSeconds);
         this.wordsPerLine = wordsPerLine;
         this.isReady = isReady;
         this.currentRow = 1;
     }
 
+    public int getTimeLimit(int timeInSeconds) {
+        if (timeInSeconds != -1) {
+            return timeInSeconds;
+        }
 
-    public int getTimeLimit() {
         Scanner in = new Scanner(System.in);
-        ui.printScreen("Enter how long (in seconds) you want the game to run: ");
+        ui.printScreen("Enter how long you want the game to run: ");
 
         try {
             return Integer.parseInt(in.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Not a Number!");
-            return getTimeLimit();
+            return getTimeLimit(timeInSeconds);
         }
     }
-
 
     @Override
     public void displayLines(int row) {
