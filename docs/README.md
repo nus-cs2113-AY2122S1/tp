@@ -1,4 +1,4 @@
-# Duke
+# Gordon
 
 Gordon is a CLI recipe manager.
 

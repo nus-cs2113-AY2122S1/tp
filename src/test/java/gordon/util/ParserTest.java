@@ -629,6 +629,7 @@ public class ParserTest {
                 + "/steps a+b+c\n"
                 + "set recipeC /difficulty medium \n"
                 + "find /difficulty xyz\n"
+                + "find /difficulty hard\n"
                 + "find /difficulty medium\n"
                 + "exit\n";
         String expected = "Added recipeA recipe! Yum!" + System.lineSeparator()
@@ -666,6 +667,8 @@ public class ParserTest {
                 + "Setting difficulty..." + System.lineSeparator()
                 + "Difficulty set successfully." + System.lineSeparator()
                 + "GordonException: Please input a valid difficulty." + System.lineSeparator()
+                + "Searching by difficulty..." + System.lineSeparator()
+                + "GordonException: Search returns no result." + System.lineSeparator()
                 + "Searching by difficulty..." + System.lineSeparator()
                 + "1. recipeA (Difficulty: Medium)" + System.lineSeparator()
                 + "2. recipeC (Difficulty: Medium)" + System.lineSeparator();
@@ -716,6 +719,7 @@ public class ParserTest {
                 + "1. a" + System.lineSeparator()
                 + "2. b" + System.lineSeparator()
                 + "3. c" + System.lineSeparator()
+                + "Searching by ingredient..." + System.lineSeparator()
                 + "GordonException: Search returns no result." + System.lineSeparator()
                 + "Searching by ingredient..." + System.lineSeparator()
                 + "1. recipeA" + System.lineSeparator()

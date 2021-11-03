@@ -17,6 +17,7 @@ public class FindIngredientsCommand extends Command {
 
     @Override
     public void execute(Cookbook cookbook) {
+        System.out.println("Searching by ingredient...");
         ArrayList<Recipe> result = cookbook.filterByIngredients(ingredients);
         ArrayList<String> resultNames = new ArrayList<String>();
         for (int i = 0; i < result.size(); i++) {
@@ -29,7 +30,6 @@ public class FindIngredientsCommand extends Command {
         if (result.size() == 0) {
             System.out.println("GordonException: " + GordonException.NO_RESULT_FOUND);
         } else {
-            System.out.println("Searching by ingredient...");
             for (int i = 0; i < result.size(); i++) {
                 System.out.println((i + 1) + ". " + resultNames.get(i));
             }
