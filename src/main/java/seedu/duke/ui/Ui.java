@@ -3,8 +3,8 @@ package seedu.duke.ui;
 import de.vandermeer.asciitable.AsciiTable;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.Exercise;
+import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,13 +23,8 @@ public class Ui {
      */
     public Ui() {
         boolean withIndent = Command.workoutMode != 0;
-        if (withIndent) {
-            prefix = INDENT;
-            newLine = System.lineSeparator() + INDENT;
-        } else {
-            prefix = "";
-            newLine = System.lineSeparator();
-        }
+        prefix = withIndent ? INDENT : "";
+        newLine = System.lineSeparator() + prefix;
     }
 
     public static void printWelcomeMessage() {
@@ -49,12 +44,13 @@ public class Ui {
     }
 
     /**
-     * Prints a message with the required indent.
+     * Prints a message with the required indent and text wrapping.
      *
      * @param message String to be printed to the user
      */
     private void printText(String message) {
-        System.out.println(prefix + message.replace("\n", newLine));
+        String string = prefix + message.replace("\n", newLine);
+        System.out.println(string);
     }
 
     /**

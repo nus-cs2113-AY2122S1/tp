@@ -28,7 +28,7 @@ public class DeadlineWorkout extends Workout {
         super(workoutName);
         assert deadlineDate != null;
         this.deadlineDate = deadlineDate;
-        deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        deadline = deadlineDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
     public LocalDate getDeadlineDate() {
