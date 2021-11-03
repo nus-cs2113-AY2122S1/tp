@@ -17,10 +17,7 @@ done in an efficient manner.
     - [List items: `list`](#list-items)
     - [Listing items that are due today: `deadline today`](#listing-items-that-are-due-today)
     - [Listing items that are overdue: `deadline overdue`](#listing-items-that-are-overdue)
-    - [Search items: `search`](#search-item-by-ID)
-      - [Search item by ID: `search i/`](#search-item-by-ID)
-      - [Search item by title: `search t/`](#search-item-by-title)
-      - [Search item by status: `search s/`](#search-item-by-status)
+    - [Search items: `search`](#search-items)
     - [Reserve items: `res`](#reserve-items)
     - [Un-reserve items: `unres`](#unreserve-items)
     - [Loan items: `loan`](#loan-items)
@@ -191,7 +188,7 @@ Expected Output:
 ```
 
 
-### Search item by ID, Title, Status, Category
+### Search items
 Search items by ID, Title, Status, and Category.
 
 Status must be one of "AVAILABLE", "LOANED" or "RESERVED".
@@ -202,35 +199,17 @@ Any items matching more than one keyword will be listed, those items matching th
 
 Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
-Example: `search i/095680`
+Example: `search s/LOANED c/Book`
 
 Expected Output:
 ```
   (+) Here are the searching results in library
   ========================================
-  [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+  [B] 123 | LOANED (Silin TILL 12-12-2021) | The Hunger Games | Collins
+  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
   ========================================
 ```
 
-<<<<<<< HEAD
-### Search item by status
-Search items by status (input keyword must be one of AVAILABLE, LOANED, RESERVED)
-
-Format: `search s/STATUS`
-
-Example: `search s/AVAILABLE`
-=======
-Example: `search s/LOANED c/Magazine`
->>>>>>> master
-
-Expected Output:
-```
-  (+) Here are the searching results in library
-  ========================================
-  [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
-  [B] 2551 | LOANED (Silin TILL 20-06-2022) | To Kill a Mockingbird | Harper Lee
-  ========================================
-```
 ### Reserve items
 Reserves an item for a specific person.
 
@@ -369,5 +348,5 @@ You can then key in a command again.
 |Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
 |Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
 |Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
-|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search t/Time`|
+|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search c/Book t/Junglebook`|
 |Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|

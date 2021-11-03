@@ -235,6 +235,47 @@ class ParserTest {
     }
 
     @Test
+    public void parse_listCommandObject() {
+        Boolean type = parser.parse("list") instanceof ListCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_list_FormatIncorrectExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            ListCommand l = (ListCommand) parser.parse("list all");
+            l.handlesListCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Invalid listing command" + System.lineSeparator()
+                    + " (!) Format: 'list'", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_searchCommandObject() {
+        Boolean type = parser.parse("search i/001") instanceof SearchCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_search_FormatIncorrectExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            SearchCommand s = (SearchCommand) parser.parse("search q/ssss");
+            s.handlesSearchCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Invalid searching format!" + System.lineSeparator()
+                    + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
+                    + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset", e.getMessage());
+        }
+    }
+
+    @Test
     public void parse_edit_EditCommandObject() {
         boolean type = parser.parse("edit 123 t/The Hunger Games id/124") instanceof EditCommand;
         assertTrue(type);
@@ -253,6 +294,7 @@ class ParserTest {
                     + "  (!) Format: edit ID KEY/ATTRIBUTE", e.getMessage());
         }
     }
+
 
     @Test
     public void parse_edit_InvalidItemExceptionThrown() {
