@@ -105,33 +105,4 @@ public abstract class AddParser extends Parser {
         return null;
     }
 
-    /**
-     * Converts a budget as a string and formats it into a double.
-     *
-     * @param budget The budget provided as a String
-     * @return The converted budget as a double
-     * @throws InvalidBudgetException If the provided budget converts into a negative number of has more than 2 decimals
-     */
-    private double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
-        Double result = null;
-        try {
-            result = Double.parseDouble(budget);
-            if (result < 0) {
-                throw new InvalidBudgetException("Event budget needs to be a positive number.");
-            }
-
-            if (BigDecimal.valueOf(result).scale() > 2) {
-                throw new InvalidBudgetException("Event budget cannot have more than 2 decimal places.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Event budget needs to be a number.");
-        }
-
-        // If conditional checks above fail internally, result will remain null. Throw exception
-        if (result == null) {
-            throw new InvalidBudgetException("Event budget is null!");
-        }
-
-        return result;
-    }
 }

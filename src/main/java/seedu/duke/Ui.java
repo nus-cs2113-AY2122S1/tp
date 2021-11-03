@@ -14,9 +14,9 @@ public class Ui {
             + "help\n"
             + "\t - Show a summary of the commands and options that I can handle\n\n"
             + "list\n"
-            + "\t - Lists all the events in your schedule in chronological order\n"
-            + "\t - To list Tasks: list [Event Index] -t\n"
-            + "\t - To list Members of a Task: list [Event Index] t/[Task Index]\n\n"
+            + "\t - Lists all the events in your schedule in chronological order: list -e\n"
+            + "\t - To list Tasks: list -t [Event Index]\n"
+            + "\t - To list Members of a Task: list -m e/[Event Index] t/[Task Index]\n\n"
             + "add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET\n"
             + "\t - Add an event to the schedule\n\n"
             + "delete -e INDEX\n"
@@ -47,6 +47,9 @@ public class Ui {
             + "\t - Delete a member from your roster given his/her name\n\n"
             + "update EVENT_INDEX\n"
             + "\t - Choose an event to update. You can update tasks/members under that event from there.\n\n"
+            + "next\n"
+            + "\t - To show the next upcoming Event: next -e\n"
+            + "\t - To show the next upcoming Task of a specific Event: next -t\n\n"
             + "bye\n"
             + "\t - Exit the program. Bye!";
 
@@ -195,23 +198,30 @@ public class Ui {
 
     public static void listUsageCommands() {
         System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
-                + System.lineSeparator() + "-----------------------"
-                + System.lineSeparator() + "To list Task: list [Event Index] -t"
-                + System.lineSeparator() + "To list Members of a Task: "
-                + "list [Event Index] t/[Task Index]");
+                + System.lineSeparator()
+                + "-----------------------"
+                + System.lineSeparator()
+                + "list -e: to see overall events"
+                + System.lineSeparator()
+                + "list -t [EVENT_NUM]: to see tasks in an Event"
+                + System.lineSeparator()
+                + "list -m e/[Event Index] t/[Task Index] : to see members in a Task"
+                + System.lineSeparator()
+                + "list -m: to see overall member roster");
     }
 
     public static void updateIntroMessage() {
         System.out.println("Please type the item you would like to update in the following manner "
                 + System.lineSeparator() + "-----------------------------------------------------------------------   "
-                + System.lineSeparator() + "title/[NEW NAME]   "
-                + System.lineSeparator() + "date/[NEW DATE[d/dd-MM-yyyy HHmm]]"
-                + System.lineSeparator() + "description/[NEW DESCRIPTION]"
-                + System.lineSeparator() + "venue/[NEW VENUE]"
-                + System.lineSeparator() + "budget/[NEW BUDGET]"
-                + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
+                + System.lineSeparator() + "n/[NEW NAME]   "
+                + System.lineSeparator() + "d/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "p/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "v/[NEW VENUE]"
+                + System.lineSeparator() + "b/[NEW BUDGET]"
+                + System.lineSeparator() + "t/[TASK NUM YOU WANT TO UPDATE]"
                 + System.lineSeparator()
-                + "You may type more then one update at a given time but separate them with a [>]"
+                + "Only type a singular update at given time!"
+                + "\n Only the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
@@ -225,7 +235,51 @@ public class Ui {
         for (Task t : event.getTaskList()) {
             printTask(t);
         }
-        //printList(event.getTaskList());
+    }
+
+    public static void printUpdateEventDetails(Event eventToBeUpdated) {
+        System.out.println("Here are the details of the event:" + System.lineSeparator()
+                + "======================================");
+        printEvent(eventToBeUpdated);
+        printLineBreak();
+    }
+
+    public static void postUpdateMessage(Event eventToBeUpdated) {
+        System.out.println("Here is the Event"
+                + System.lineSeparator()
+                + "---------------------------");
+        printUpdatedEvent(eventToBeUpdated);
+    }
+
+    public static String updateExitMessage() {
+        return getLineBreak() + System.lineSeparator() + "returning to main page...";
+    }
+
+    public static void updateTaskIntroMessage() {
+        Ui.printLineBreak();
+        System.out.println("Please type the item for task you would like to update in the following manner "
+                + System.lineSeparator() + "-----------------------------------------------------------------------"
+                + System.lineSeparator() + "n/[NEW NAME]   "
+                + System.lineSeparator() + "d/[NEW DATE[d/dd-MM-yyyy HHmm]]"
+                + System.lineSeparator() + "p/[NEW DESCRIPTION]"
+                + System.lineSeparator() + "member/[MEMBER INDEX]"
+                + System.lineSeparator() + "remove/[MEMBER INDEX]"
+                + System.lineSeparator() + "add : to add a member to a task"
+                + System.lineSeparator()
+                + "\nOnly type a singular update at given time!"
+                + "\n Only the first command will be updated if multiple updates are written"
+                + System.lineSeparator() + Ui.getLineBreak());
+    }
+
+    public static void printNextCommandErrorMessage() {
+        System.out.println("please follow the correct format"
+                + System.lineSeparator()
+                + "next event : View details of the upcoming events"
+                + System.lineSeparator()
+                + "next task [Event index]: View details of the task with the closest deadline in a particular "
+                + "event"
+                + System.lineSeparator()
+                + Ui.getLineBreak());
     }
 
 }

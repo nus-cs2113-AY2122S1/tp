@@ -12,18 +12,21 @@ import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.NextCommand;
-import seedu.duke.commands.UpdateCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Item;
 import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.ListParser;
+import seedu.duke.parser.commandparser.NextParser;
+import seedu.duke.parser.commandparser.UpdateParser;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 
@@ -32,18 +35,29 @@ public abstract class Parser {
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
-    public static Command parseCommand(String response) throws DukeException {
+    public static Command parseCommand(String response) throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         // Trim and split response using first detected occurrence of whitespace(s) to get type of command requested
-        String[] command = response.trim().split(" +");
+        //String[] command = response.trim().split(" +");
 
         // TODO: Once parser is restructured, replace above with following two lines
-        //String[] command = response.trim().split(" +");
-        //String commandDetails = command[1];
-        String commandType = command[0];
+        String[] command = response.trim().split(" +");
+        if (command.length == 1) {
+            String commandType = command[0];
+            return singleWordCommandProtocol(command, commandType);
+        } else {
+            String commandDetails = command[1];
+            String commandType = command[0];
+            return multiWordCommandProtocol(response, command, commandDetails, commandType);
+        }
+    }
 
+    private static Command multiWordCommandProtocol(String response, String[] command, String commandDetails,
+                                                    String commandType) throws DukeException {
         switch (commandType) {
         case "list":
-            return new ListCommand(command);
+            //return new ListCommand(command);
+            return ListParser.getListCommand(commandDetails,response);
         case "done":
         case "undo":
             return new DoneUndoCommand(command, response);
@@ -51,8 +65,8 @@ public abstract class Parser {
             return new DeleteCommand(command);
         case "add":
             return new AddCommand(command, response);
-            // TODO: Replace with the following commented out code
-            // return AddParser.getAddCommand(commandDetails);
+        // TODO: Replace with the following commented out code
+        // return AddParser.getAddCommand(commandDetails);
         case "bye":
             return new ByeCommand();
         case "help":
@@ -62,9 +76,24 @@ public abstract class Parser {
         case "select":
             return new SelectCommand(command);
         case "update":
-            return new UpdateCommand(command);
+            //return new UpdateCommand(command);
+            return UpdateParser.getUpdateCommand(commandDetails);
         case "next":
-            return new NextCommand(command);
+            return NextParser.getNextCommand(commandDetails, response);
+        default:
+            throw new DukeException(Ui.getInvalidCommandMessage());
+        }
+    }
+
+    private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
+        switch (commandType) {
+
+        case "delete":
+            return new DeleteCommand(command);
+        case "bye":
+            return new ByeCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException(Ui.getInvalidCommandMessage());
         }
@@ -146,12 +175,18 @@ public abstract class Parser {
     }
 
     public static LocalDateTime convertDateTime(String dateTime) throws DukeException {
-        LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
-        if (result.isBefore(LocalDateTime.now())) {
-            throw new DukeException("Unfortunately, we cannot travel back in time. Please "
-                    + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+        try {
+            LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
+            if (result.isBefore(LocalDateTime.now())) {
+                throw new DukeException("Unfortunately, we cannot travel back in time. Please "
+                        + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+            }
+            return result;
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter a valid date and time in the format 'dd-MM-yyyy HHmm'.");
+
         }
-        return result;
+        return null;
     }
 
     public static String convertDateTimeForSaving(LocalDateTime dateTime) {
@@ -163,6 +198,36 @@ public abstract class Parser {
         sortedList.addAll(Duke.eventCatalog);
         sortedList.addAll(Duke.taskList);
         return sortedList;
+    }
+
+    /**
+     * Converts a budget as a string and formats it into a double.
+     *
+     * @param budget The budget provided as a String
+     * @return The converted budget as a double
+     * @throws InvalidBudgetException If the provided budget converts into a negative number of has more than 2 decimals
+     */
+    public static double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
+        Double result = null;
+        try {
+            result = Double.parseDouble(budget);
+            if (result < 0) {
+                throw new InvalidBudgetException("Event budget needs to be a positive number.");
+            }
+
+            if (BigDecimal.valueOf(result).scale() > 2) {
+                throw new InvalidBudgetException("Event budget cannot have more than 2 decimal places.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Event budget needs to be a number.");
+        }
+
+        // If conditional checks above fail internally, result will remain null. Throw exception
+        if (result == null) {
+            throw new InvalidBudgetException("Event budget is null!");
+        }
+
+        return result;
     }
 
     public static void updateIndexOfLastSelectedEvent(int index) {
