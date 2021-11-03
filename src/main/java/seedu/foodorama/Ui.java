@@ -94,41 +94,51 @@ public class Ui {
     private static final String NEWPAGE_MESSAGE = START_LOGO + System.lineSeparator()
             + "#                                            SUMMARY OF COMMANDS:                                  "
             + "            #" + System.lineSeparator()
-            + "# 1. Adding a Dish : 'add dish [dishName]'                                                         "
+            + "# 1. Adding a new Dish : 'add dish [DISH_NAME]'                                                    "
             + "            #" + System.lineSeparator()
-            + "# 2. Adding Dish Wastage : 'add dish waste [dishName]' followed by '[weight in KG]'                "
+            + "# 2. Adding Dish Wastage : 'add dish waste [DISH_NAME/INDEX]'                                      "
             + "            #" + System.lineSeparator()
-            + "# 3. Adding Dish Limit : 'set dish limit [dishName]' followed by '[weight in KG]'                  "
+            + "# 3. Setting Dish Limit : 'set dish limit [DISH_NAME/INDEX]'                                       "
             + "            #" + System.lineSeparator()
-            + "# 4. Deleting a Dish : 'del dish [dishName]                                                        "
+            + "# 4. Deleting a Dish : 'del dish [DISH_NAME/INDEX]                                                 "
             + "            #" + System.lineSeparator()
-            + "# 5. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'                  "
+            + "# 5. Adding a new Ingredient : 'add ingr [INGR_NAME/INDEX]'                                        "
             + "            #" + System.lineSeparator()
-            + "# 6. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'               "
+            + "# 6. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME/INDEX]'        "
             + "            #" + System.lineSeparator()
-            + "#    followed by '[weight in KG]'                                                                  "
+            + "# 7. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME/INDEX]'                                "
             + "            #" + System.lineSeparator()
-            + "# 7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
+            + "# 8. Setting Ingredient Limit : 'set ingr limit [INGR_NAME/INDEX]'                                 "
             + "            #" + System.lineSeparator()
-            + "# 8. Adding Ingredient Limit : 'set ingr limit [ingrName]' followed by '[weight in KG]'            "
+            + "# 8. Setting Ingredient Expiry Date : 'set ingr expiry [INGR_NAME/INDEX]'                          "
             + "            #" + System.lineSeparator()
-            + "# 9. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                              "
+            + "# 9. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME/INDEX]'                      "
             + "            #" + System.lineSeparator()
-            + "# 10. Deleting an Ingredient : 'del ingr [ingrName]'                                               "
+            + "# 10. Deleting an Ingredient : 'del ingr [INGR_NAME/INDEX]'                                        "
             + "            #" + System.lineSeparator()
             + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
             + "            #" + System.lineSeparator()
-            + "# 12. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
+            + "# 12. Editing a Dish/Ingredient Name :                                                             "
+            + "\n#     'edit dish name [DISH_NAME/INDEX] | edit ingr name [INGR_NAME/INDEX]'                         "
             + "            #" + System.lineSeparator()
-            + "# 13. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
+            + "# 13. Editing Ingredient Storage : 'edit ingr stored [INGR_NAME/INDEX]'                            "
             + "            #" + System.lineSeparator()
-            + "# 14. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
+            + "# 14. Editing a Dish/Ingredient Waste :                                                            "
+            + "\n#     'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
             + "            #" + System.lineSeparator()
-            + "# 15. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "# 15. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
             + "            #" + System.lineSeparator()
-            + "# 16. View full list of commands and examples: 'help'                                              "
+            + "# 16. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
             + "            #" + System.lineSeparator()
-            + "# 17. Exiting the program: 'bye'                                                                   "
+            + "# 17. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
+            + "            #" + System.lineSeparator()
+            + "# 18. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "            #" + System.lineSeparator()
+            + "# 19. Creating a Random Dish: 'rdish'                                                              "
+            + "            #" + System.lineSeparator()
+            + "# 20. View full list of commands and examples: 'help'                                              "
+            + "            #" + System.lineSeparator()
+            + "# 21. Exiting the program: 'bye'                                                                   "
             + "            #" + System.lineSeparator()
             + "###################################################################################################"
             + "#############" + System.lineSeparator()
@@ -139,47 +149,68 @@ public class Ui {
 
     protected static final String HELP_ME = LINE_DIVIDER + System.lineSeparator()
             + "Here are the commands you can use:" + System.lineSeparator()
-            + "1. Adding a Dish : 'add dish [DISH_NAME]'" + System.lineSeparator()
-            + "    Example: 'add dish chicken rice'" + System.lineSeparator()
-            + "2. Adding Dish Wastage : 'add dish waste [DISH_NAME]' followed by "
-            + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add dish waste chicken rice' ; '0.8'" + System.lineSeparator()
-            + "3. Adding Dish Limit : 'set dish limit [DISH_NAME]' followed by "
-            + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'set dish limit chicken rice' ; '16.9'" + System.lineSeparator()
-            + "4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
-            + "    Example: 'find dish chicken rice'" + System.lineSeparator()
-            + "5. Deleting a Dish : 'del [DISH_NAME]" + System.lineSeparator()
-            + "    Example: 'del dish chicken rice'" + System.lineSeparator()
-            + "6. Viewing all Dishes : 'list dish'" + System.lineSeparator()
-            + "7. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
-            + "8. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
-            + "9. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
-            + "10. Adding a new Ingredient : 'add ingr [INGR_NAME]' "
-            + "followed by '[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add ingr chicken' ; '2'" + System.lineSeparator()
-            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME]'"
-            + " followed by '[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add ingr stored chicken' ; '1.5'" + System.lineSeparator()
-            + "12. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME]' followed by "
-            + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "13. Adding Ingredient Limit : 'set ingr limit [INGR_NAME]' followed by "
-            + "'[weight in KG]'" + System.lineSeparator()
-            + "    Example: 'set ingr limit chicken' ; '42.7'" + System.lineSeparator()
-            + "14. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'" + System.lineSeparator()
-            + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
-            + "15. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
-            + "    Example: 'find ingr chicken'" + System.lineSeparator()
-            + "16. Deleting an Ingredient : 'del [INGR_NAME]'" + System.lineSeparator()
-            + "    Example: 'del ingr chicken'" + System.lineSeparator()
-            + "17. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
-            + "18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
-            + "19. Viewing Graph of Ingredient Wastage : 'graph ingr'" + System.lineSeparator()
-            + "20. Clearing all Ingredients : 'clear ingr'" + System.lineSeparator()
-            + "21. Clearing both Dishes and Ingredients : 'clear all'" + System.lineSeparator()
-            + "22. Viewing this list of commands: help" + System.lineSeparator()
-            + "23. Exiting the program: bye" + System.lineSeparator()
+            + "Dish Commands:" + System.lineSeparator()
+            + "  1. Adding a Dish : 'add dish [DISH_NAME]'" + System.lineSeparator()
+            + "     Example: 'add dish chicken rice'" + System.lineSeparator()
+            + "  2. Adding Dish Wastage : 'add dish waste [DISH_NAME/INDEX]'. Type the [DISH_WASTE_WEIGHT in KG] "
+            + "when prompted" + System.lineSeparator()
+            + "     Example: 'add dish waste chicken rice' | '0.8'" + System.lineSeparator()
+            + "  3. Setting Dish Limit : 'set dish limit [DISH_NAME/INDEX]'. Type the [DISH_LIMIT_WEIGHT in KG] "
+            + "when prompted" + System.lineSeparator()
+            + "     Example: 'set dish limit chicken rice' | '16.9'" + System.lineSeparator()
+            + "  4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
+            + "     Example: 'find dish chicken rice'" + System.lineSeparator()
+            + "  5. Editing Dish Name : 'edit dish name [DISH_NAME/INDEX]'.\n     Type the [NEW_DISH_NAME] and "
+            + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
+            + "     Example: 'edit dish name chicken rice' | 'hainanese chicken rice' | 'y'" + System.lineSeparator()
+            + "  6. Editing Dish Waste : 'edit dish waste [DISH_NAME/INDEX]'.\n     Type the [NEW_DISH_WASTE_WEIGHT in KG] and "
+            + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
+            + "     Example: 'edit dish waste chicken rice' | '6.5' | 'y'" + System.lineSeparator()
+            + "  7. Deleting a Dish : 'del [DISH_NAME/INDEX]'.\n     Type 'y' to confirm and 'n' to disregard the deletion "
+            + "when prompted" + System.lineSeparator()
+            + "     Example: 'del dish chicken rice' | 'y'" + System.lineSeparator()
+            + "  8. Viewing all Dishes : 'list dish'" + System.lineSeparator()
+            + "  9. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
+            + "  10. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
+            + "  11. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
+            + "  12. Creating Random Dish : 'rdish'" + System.lineSeparator()
+            + "\nIngredient Commands:" + System.lineSeparator()
+            + "  13. Adding a new Ingredient : 'add ingr [INGR_NAME]' "
+            + "Type the [INGR_STORAGE_WEIGHT in KG] when prompted" + System.lineSeparator()
+            + "      Example: 'add ingr chicken' | '2'" + System.lineSeparator()
+            + "  14. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME/INDEX]'. "
+            + "Type the [INGR_STORAGE_WEIGHT in KG] when prompted" + System.lineSeparator()
+            + "      Example: 'add ingr stored chicken' | '1.5'" + System.lineSeparator()
+            + "  15. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME/INDEX]'. "
+            + "Type the [INGR_WASTE_WEIGHT in KG] when prompted" + System.lineSeparator()
+            + "      Example: 'add ingr waste chicken' | '0.7'" + System.lineSeparator()
+            + "  16. Setting Ingredient Limit : 'set ingr limit [INGR_NAME/INDEX]'. "
+            + "Type the [INGR_LIMIT_WEIGHT in KG] when prompted" + System.lineSeparator()
+            + "      Example: 'set ingr limit chicken' | '42.7'" + System.lineSeparator()
+            + "  17. Setting Ingredient Expiry : 'set ingr expiry [INGR_NAME/INDEX]'. "
+            + "Type the [INGR_EXPIRY_DATE in dd/mm/yyyy Format] when prompted" + System.lineSeparator()
+            + "      Example: 'set ingr limit chicken' | '42.7'" + System.lineSeparator()
+            + "  18. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'" + System.lineSeparator()
+            + "      Example: 'link chicken rice / chicken'" + System.lineSeparator()
+            + "  19. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
+            + "      Example: 'find ingr chicken'" + System.lineSeparator()
+            + "  20. Editing Ingredient Name : 'edit ingr name [INGR_NAME/INDEX]'.\n      Type the [NEW_INGR_NAME] and "
+            + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
+            + "      Example: 'edit ingr name chicken' | 'chicken breast' | 'y'" + System.lineSeparator()
+            + "  21. Editing Ingredient Waste : 'edit ingr waste [INGR_NAME/INDEX]'.\n      "
+            + "Type the [NEW_INGR_WASTE_WEIGHT in KG] and "
+            + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
+            + "      Example: 'edit ingr waste chicken' | '7.0' | 'y'" + System.lineSeparator()
+            + "  22. Deleting an Ingredient : 'del [INGR_NAME/INDEX]'\n      Type 'y' to confirm and 'n' to disregard the "
+            + "deletion when prompted" + System.lineSeparator()
+            + "      Example: 'del ingr chicken' | 'y'" + System.lineSeparator()
+            + "  23. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
+            + "  24. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
+            + "  25. Viewing Graph of Ingredient Wastage : 'graph ingr'" + System.lineSeparator()
+            + "  26. Clearing all Ingredients : 'clear ingr'" + System.lineSeparator()
+            + "  27. Clearing both Dishes and Ingredients : 'clear all'" + System.lineSeparator()
+            + "  28. Viewing this list of commands: help" + System.lineSeparator()
+            + "  29. Exiting the program: bye" + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String EXIT_MESSAGE = EXIT_LOGO + System.lineSeparator()
