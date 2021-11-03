@@ -43,7 +43,7 @@ public class Parser extends HandleFunctions {
                 Storage.getLogger().log(Level.WARNING, "invalid user input");
                 Ui.printUnknownCommandError();
                 return true;
-            } else if (Storage.getListOfTrips().isEmpty() && !inputCommand.equals("create")) {
+            } else if (Storage.getListOfTrips().isEmpty() && !inputCommand.equals(CREATE_COMMAND)) {
                 Storage.getLogger().log(Level.WARNING, "No trip created yet");
                 Ui.printNoTripError();
                 return true;

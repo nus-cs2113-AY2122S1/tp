@@ -606,11 +606,11 @@ public class Trip {
                 if (!otherPerson.equals(person)) {
                     otherPersonName = otherPerson.getName();
                     totalAmountPerPerson += personExpenses.get(otherPersonName);
+                    person.setOptimizedMoneyOwed(otherPerson);
                 }
 
             }
             totalExpenses.add(totalAmountPerPerson);
-            person.resetHashMap(person.getOptimizedMoneyOwed());
         }
     }
 

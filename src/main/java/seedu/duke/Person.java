@@ -13,13 +13,6 @@ public class Person {
         this.name = name;
     }
 
-    public void resetHashMap(HashMap<String, Double> personExpenses) {
-        Trip currentTrip = Storage.getOpenTrip();
-        for (Person p : currentTrip.getListOfPersons()) {
-            personExpenses.put(p.getName(), 0.0);
-        }
-    }
-
     public String getName() {
         return name;
     }
@@ -39,6 +32,10 @@ public class Person {
 
     public HashMap<String, Double> getOptimizedMoneyOwed() {
         return this.optimizedMoneyOwed;
+    }
+
+    public void setOptimizedMoneyOwed(Person person) {
+        optimizedMoneyOwed.put(person.getName(), 0.0);
     }
 
     @Override

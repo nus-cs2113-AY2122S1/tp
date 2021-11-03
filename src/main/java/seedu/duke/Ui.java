@@ -10,12 +10,8 @@ import java.util.HashMap;
 public class Ui {
 
     public static void printOptimizedAmounts() {
-        System.out.println("Here is the optimized payment transactions:");
+        boolean isAllPaid = true;
         Trip openTrip = Storage.getOpenTrip();
-        if (openTrip.getListOfExpenses().size() == 0) {
-            printNoExpensesError();
-            return;
-        }
         ArrayList<Person> listOfPersons = openTrip.getListOfPersons();
         HashMap<String, Double> currentHashMap;
         String nameOfPersonPaying;
@@ -28,12 +24,19 @@ public class Ui {
                 currentHashMap = personPaying.getOptimizedMoneyOwed();
                 amountOwed = currentHashMap.get(nameOfPersonReceiving);
                 if (!personPaying.equals(personReceiving) && amountOwed < 0) {
+                    if (isAllPaid) {
+                        System.out.println("Here is the optimized payment transactions:");
+                    }
                     System.out.println(nameOfPersonPaying + " needs to pay "
                             + stringForeignMoney(-amountOwed)
                             + " (" + stringRepaymentMoney(-amountOwed) + ")"
                             + " to " + personReceiving);
+                    isAllPaid = false;
                 }
             }
+        }
+        if (isAllPaid) {
+            System.out.println("All are paid! :)");
         }
     }
 
