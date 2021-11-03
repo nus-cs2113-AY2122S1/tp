@@ -82,7 +82,7 @@ Examples:
 #### Editing a class: `edit_class`
 Edits the code or name of an existing class.
 
-Format: `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
+Format: `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> | n/<NEW_CLASS_NAME>]`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `NEW_CLASS_ID` [Optional] refers to the updated id of the class.
 * `NEW_CLASS_NAME` [Optional] refers to the updated name of the class.
@@ -210,7 +210,7 @@ Examples:
 #### Editing an assessment in a class: `edit_assessment`
 Edits an assessment of a class.
 
-Format: `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>] [w/<NEW_WEIGHTAGE>]`
+Format: `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAME> | m/<NEW_MAXIMUM_MARKS> | w/<NEW_WEIGHTAGE>]`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 * `NEW_ASSESSMENT_NAME` [Optional] refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
@@ -231,7 +231,7 @@ Examples:
 #### Deleting an assessment from a class: `delete_assessment`
 Deletes an assessment of a class.
 
-Format: `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
+Format: `delete_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 
@@ -489,7 +489,7 @@ Category | Action | Format |
  ----- | ------ | --------------- |
 Class | Listing all classes | `list_classes`
 Class | Adding a class | `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
-Class | Editing a class | `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
+Class | Editing a class | `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> \| n/<NEW_CLASS_NAME>]`
 Class | Deleting a class | `delete_class c/<CLASS_ID>`
 Student | Listing all students in a class | `list_students c/<CLASS_ID>`
 Student | Adding a student to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
@@ -498,8 +498,8 @@ Student | Deleting a student from a class | `delete_student c/<CLASS_ID> s/<STUD
 Student | Finding students in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
 Assessment | Listing all assessments in a class | `list_assessments c/<CLASS_ID>`
 Assessment | Adding an assessment to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-Assessment | Editing an assessment in a class | `edit_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
-Assessment | Deleting an assessment from a class | `delete_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME>`
+Assessment | Editing an assessment in a class | `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAME> \| m/<NEW_MAXIMUM_MARKS> \| w/<NEW_WEIGHTAGE>]`
+Assessment | Deleting an assessment from a class | `delete_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Listing marks for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Setting mark for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 Mark | Editing mark for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
