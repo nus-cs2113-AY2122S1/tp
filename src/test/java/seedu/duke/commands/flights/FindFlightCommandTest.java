@@ -1,8 +1,9 @@
-package seedu.duke;
+package seedu.duke.commands.flights;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.flights.FindFlightCommand;
 import seedu.duke.data.Client;
 import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackage;
@@ -12,10 +13,10 @@ import seedu.duke.data.FlightList;
 import seedu.duke.data.Tour;
 import seedu.duke.data.TourList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindFlightCommandTest {
 
@@ -42,7 +43,7 @@ public class FindFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flights that matches your search\n"
+        String expectedString = "This is the flight that matches your search\n"
                 + "Flight ID: SQ-JPN\n"
                 + "Departure Flight: JPN, 20/10/2021 18:00\n"
                 + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"
@@ -74,7 +75,7 @@ public class FindFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flights that matches your search\n"
+        String expectedString = "This is the flight that matches your search\n"
                 + "Flight ID: SQ-JPN\n"
                 + "Departure Flight: JPN, 20/10/2021 18:00\n"
                 + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"

@@ -1,13 +1,14 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.tours.ListTourCommand;
-import seedu.duke.data.Tour;
 import seedu.duke.data.ClientList;
-import seedu.duke.data.TourList;
-import seedu.duke.data.FlightList;
 import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -40,12 +41,8 @@ public class ListTourCommandTest {
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
         String expectedString = "Here is a list of all tours:\n"
-                + "1. Name: Japan Basic Tour\n"
-                + "Code: JPN\n"
-                + "Price per pax: $1500.00\n" + "\n"
-                + "2. Name: Korea Cultural Tour\n"
-                + "Code: KOR\n"
-                + "Price per pax: $3000.00\n" + "\n"
+                + "1. " + jpn + "\n\n"
+                + "2. " + kor + "\n\n"
                 + "Total Tours: 2";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);

@@ -38,6 +38,7 @@ public class TourPlanner {
         } catch (TourPlannerException e) {
             ui.show(e.getMessage());
         }
+
         storage = new Storage();
         TourList tours = storage.getTours();
         FlightList flights = storage.getFlights();
@@ -62,8 +63,8 @@ public class TourPlanner {
                 logr.log(Level.SEVERE, e.getMessage());
             } finally {
                 ui.showLine();
+                storage.saveFile();
             }
         }
-        storage.saveFile(clientPackages);
     }
 }

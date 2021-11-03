@@ -17,30 +17,30 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String ADD_CLIENT_MESSAGE = "Client has been added:";
-    private static final String ADD_FLIGHT_MESSAGE = "Flight has been added:";
-    private static final String ADD_TOUR_MESSAGE = "Tour has been added:";
-    private static final String ADD_CLIENT_PACKAGE_MESSAGE = "Client package has been added:";
+    public static final String ADD_CLIENT_MESSAGE = "Client has been added:";
+    public static final String ADD_FLIGHT_MESSAGE = "Flight has been added:";
+    public static final String ADD_TOUR_MESSAGE = "Tour has been added:";
+    public static final String ADD_CLIENT_PACKAGE_MESSAGE = "Client package has been added:";
 
-    private static final String CUT_CLIENT_MESSAGE = "Client has been deleted:";
-    private static final String CUT_FLIGHT_MESSAGE = "Flight has been deleted:";
-    private static final String CUT_TOUR_MESSAGE = "Tour has been deleted:";
-    private static final String CUT_CLIENT_PACKAGE_MESSAGE = "Client package has been deleted:";
+    public static final String CUT_CLIENT_MESSAGE = "Client has been deleted:";
+    public static final String CUT_FLIGHT_MESSAGE = "Flight has been deleted:";
+    public static final String CUT_TOUR_MESSAGE = "Tour has been deleted:";
+    public static final String CUT_CLIENT_PACKAGE_MESSAGE = "Client package has been deleted:";
 
-    private static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
-    private static final String LIST_MESSAGE = "Here is a list of all ";
-    private static final String FIND_FAIL_MESSAGE_LEFT = "I'm sorry, there seems to be no ";
-    private static final String FIND_SUCCESS_MESSAGE_LEFT = "This is the ";
-    private static final String FIND_MESSAGE_RIGHT = "that matches your search";
-    private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
+    public static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
+    public static final String LIST_MESSAGE = "Here is a list of all ";
+    public static final String FIND_FAIL_MESSAGE_LEFT = "I'm sorry, there seems to be no ";
+    public static final String FIND_SUCCESS_MESSAGE_LEFT = "This is the ";
+    public static final String FIND_MESSAGE_RIGHT = "that matches your search";
+    public static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
-    private static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
-    private static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
-    private static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
-    private static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
-    private static final String SORT_FLIGHT_BY_DEPARTURE_MESSAGE = "Sorted by departing flight times";
-    private static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
-    private static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
+    public static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
+    public static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
+    public static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
+    public static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
+    public static final String SORT_FLIGHT_BY_DEPARTURE_MESSAGE = "Sorted by departing flight times";
+    public static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
+    public static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
     private static final Scanner in = new Scanner(System.in);
 
@@ -215,9 +215,9 @@ public class Ui {
         show("Total Tours: " + count);
     }
 
-    public void showFindTour(TourList tours, ClientPackageList clientPackages, String code)
+    public void showFindTour(TourList tours, ClientPackageList clientPackages, String id)
             throws TourPlannerException {
-        Tour foundTour = tours.getTourByCode(code);
+        Tour foundTour = tours.getTourById(id);
         if (foundTour != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "tour " + FIND_MESSAGE_RIGHT);
             show(foundTour + "\n" + "\n");
@@ -242,15 +242,15 @@ public class Ui {
      * Ui response to sort tour by id.
      *
      * @param tours           the current list of tours in the database
-     * @param sortedTourCodes the list of sorted tour codes/ids (by alphabetical order)
+     * @param sortedTourIds the list of sorted tour codes/ids (by alphabetical order)
      * @throws TourPlannerException if there is no tours that can be found given the tour code
      */
-    public void showSortedTourById(TourList tours, ArrayList<String> sortedTourCodes)
+    public void showSortedTourById(TourList tours, ArrayList<String> sortedTourIds)
             throws TourPlannerException {
         show(SORT_TOUR_ID_MESSAGE);
         int listIndex = 1;
-        for (String tourCode : sortedTourCodes) {
-            Tour currTour = tours.getTourByCode(tourCode);
+        for (String tourId : sortedTourIds) {
+            Tour currTour = tours.getTourById(tourId);
             show(listIndex + ". " + currTour + System.lineSeparator());
             listIndex++;
         }
