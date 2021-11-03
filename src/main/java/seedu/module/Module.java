@@ -78,6 +78,7 @@ public class Module extends BaseModule {
     /**
      * Returns a string containing the following information from the module: Title, MCs, Department, Description,
      * Prereqs, S/Uable, Semester Availability.
+     *
      * @return String containing the full information of the module.
      */
     public String getFullInfo() {
@@ -102,7 +103,7 @@ public class Module extends BaseModule {
      * with the information from the moduleList that contains all mods. Further checks require pulling the moduleInfo
      * json for each specific module, and will not be done should this check fail.
      *
-     * @param searchTerm search term that module code is checked to contain.
+     * @param searchTerm  search term that module code is checked to contain.
      * @param searchFlags search flags containing additional conditions.
      * @return true if conditions are met, false otherwise
      */
@@ -253,16 +254,18 @@ public class Module extends BaseModule {
         for (int i = 0; i < GRADES.length; i++) {
             if (gradeToCheck.equals(GRADES[i])) {
                 gradeType = TextUi.GRADED;
+                System.out.println("1");
                 return gradeType;
             }
         }
         for (int i = 0; i < SU_GRADES.length; i++) {
             if (gradeToCheck.equals(SU_GRADES[i])) {
                 gradeType = TextUi.UNGRADED;
+                System.out.println("2");
                 return gradeType;
             }
         }
-        throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
-
+        System.out.println("3");
+            throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
     }
 }

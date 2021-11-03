@@ -29,9 +29,10 @@ public class StoreResultsCommand extends Command {
     }
 
     public void execute() {
-        Module module = null;
+        Module module;
         try {
             if (isErrorThrown) {
+                isErrorThrown = false;
                 return;
             }
             module = NusMods.fetchModOnline(moduleCode);
@@ -39,9 +40,11 @@ public class StoreResultsCommand extends Command {
             if (gradeType.equals(TextUi.GRADED)) {
                 GradedModule grModule = new GradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(grModule);
-            } else {
+            } else if (gradeType.equals(TextUi.UNGRADED)){
                 UngradedModule ugModule = new UngradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(ugModule);
+            }else{
+                System.out.print("INVALID GRADE");
             }
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);

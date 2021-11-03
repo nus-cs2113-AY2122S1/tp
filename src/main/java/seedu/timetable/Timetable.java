@@ -237,7 +237,6 @@ public class Timetable implements Comparable<Timetable> {
      * 
      * @param schedule Schedule contains the lessons of the user for a particular
      *                 day of the week.
-     * @param moduleCode ModuleCode to be Deleted
      * @see Module
      */
     private void deleteItemFromSchedule(String title, TimetableItem[] schedule) {

@@ -33,6 +33,7 @@ public class ModuleRecord {
         gradedModules.add(module);
         moduleCodes.add(module.getModuleCode());
         cap = calculateCapFromList();
+        System.out.println("YAHAN");
         TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
     }
 
@@ -44,6 +45,7 @@ public class ModuleRecord {
     public void addModuleToRecord(UngradedModule module) {
         ungradedModules.add(module);
         moduleCodes.add(module.getModuleCode());
+        System.out.println("YAHAN");
         TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
     }
 
@@ -228,5 +230,11 @@ public class ModuleRecord {
         for (int i = 0; i < ungradedModules.size(); i++) {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
+    }
+    public ArrayList<GradedModule> getGradedModules(){
+        return gradedModules;
+    }
+    public ArrayList<UngradedModule> getUngradedModules(){
+        return ungradedModules;
     }
 }

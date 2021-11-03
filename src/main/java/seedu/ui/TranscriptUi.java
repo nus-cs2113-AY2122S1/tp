@@ -84,6 +84,7 @@ public class TranscriptUi {
 
     public static void printConclusion() {
         System.out.println("\nTotal Credits Fulfilled : " + mcsCompleted);
+        mcsCompleted=0;
         System.out.println();
         Profile currentProfile = UniMods.getProfileInUse();
         TextUi.printCap(currentProfile.getCap());

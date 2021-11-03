@@ -7,6 +7,7 @@ public abstract class BaseModule {
     protected double moduleCredit;
 
     public BaseModule(String moduleCode) {
+
         this.moduleCode = moduleCode;
     }
 
@@ -40,6 +41,6 @@ public abstract class BaseModule {
 
     @Override
     public String toString() {
-        return moduleCode + " " + title + " " + (int)moduleCredit + "MC";
+        return moduleCode + " " + title + " " + (int) moduleCredit + "MC";
     }
 }

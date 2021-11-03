@@ -132,10 +132,15 @@ public class CommandParser {
             grade = split[0].trim().toUpperCase();
             gradeType = Module.checkGradeType(grade);
             moduleCode = split[1].trim().toUpperCase();
+            if(gradeType.equals("")){
+                return new InvalidCommand();
+            } else{
+                return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
+            }
         } catch (UniModsException e) {
             System.out.println(e.getMessage());
+            return new InvalidCommand();
         }
-        return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
     }
 
 

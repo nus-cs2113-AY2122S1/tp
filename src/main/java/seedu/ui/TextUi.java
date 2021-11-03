@@ -45,12 +45,13 @@ public class TextUi {
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
     public static final String ERROR_INVALID_GRADE = "OOPS, it seems that the grade you entered is invalid.";
-    public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format"
+    public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format. "
             + "The correct command format is =>"
             + " \n \"store\" <grade> \">\" <module_code> ";
 
     public static final String GRADED = "GRADED";
     public static final String UNGRADED = "UNGRADED";
+    public static final String ERROR_FAIL_TO_SAVE = "Failed to save modules in the Transcript";
     public static final String ERROR_EMPTY_RECORD = "OOPS, it seems that you have not added any modules "
             + "and grades to your transcript"
             + "\nType the command below to store the grades in our records =>"
