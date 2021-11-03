@@ -191,7 +191,16 @@ Expected Output:
   ========================================
 ```
 
+<<<<<<< HEAD
+### Search item by status
+Search items by status (input keyword must be one of AVAILABLE, LOANED, RESERVED)
+
+Format: `search s/STATUS`
+
+Example: `search s/AVAILABLE`
+=======
 Example: `search s/LOANED c/Magazine`
+>>>>>>> master
 
 Expected Output:
 ```

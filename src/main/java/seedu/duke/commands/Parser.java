@@ -53,6 +53,8 @@ public class Parser {
                 return new UnreserveCommand(input);
             } else if (input.startsWith(StatsCommand.COMMAND_WORD)) {
                 return new StatsCommand(input);
+            } else if (input.startsWith(HelpCommand.COMMAND_WORD)) {
+                return new HelpCommand();
             } else {
                 return new UnknownCommand();
             }

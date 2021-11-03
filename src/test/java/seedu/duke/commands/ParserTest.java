@@ -101,6 +101,12 @@ class ParserTest {
     }
 
     @Test
+    public void parse_help_HelpCommandObject() {
+        Boolean isSameObject = parser.parse("help") instanceof HelpCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
     public void parse_add_AddCommandObject() {
         Boolean isSameObject = parser.parse("add a t/Thriller i/5920 "
                 + "a/Michael Jackson d/42:16") instanceof AddCommand;
@@ -249,7 +255,7 @@ class ParserTest {
     }
 
     @Test
-    public void parse_add_InvalidItemExceptionThrown() {
+    public void parse_edit_InvalidItemExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
