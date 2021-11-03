@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.commands.currency.CurrencyType;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
@@ -99,9 +100,10 @@ public class DataManagerTest {
             i += 1;
         }
         budgetManager.setThreshold(0.5);
+        currencyManager.setCurrency(CurrencyType.USD);
         dataManager.saveAll();
-        String testData = parser.convertSettingsToData(financialTracker, budgetManager, currencyManager);
-        String expectedData = "SGD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
+        String testData = parser.convertSettingsToData(budgetManager, currencyManager);
+        String expectedData = "USD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
 

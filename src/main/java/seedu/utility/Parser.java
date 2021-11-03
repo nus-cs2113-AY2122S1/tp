@@ -900,8 +900,7 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
-    public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager,
-                                        CurrencyManager currencyManager) {
+    public String convertSettingsToData(BudgetManager budgetManager, CurrencyManager currencyManager) {
         CurrencyType currency = currencyManager.getCurrency();
         StringBuilder data = new StringBuilder(currency.toString() + ",");
         data.append(budgetManager.getThreshold()).append(",");

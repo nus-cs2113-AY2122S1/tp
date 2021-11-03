@@ -271,7 +271,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
         CurrencyManager currencyManager = new CurrencyManager();
-        String testData = testParser.convertSettingsToData(financialTracker, testBudgetManager, currencyManager);
+        String testData = testParser.convertSettingsToData(testBudgetManager, currencyManager);
         assertEquals("SGD,0.2,12.0,12.0,12.0,12.0,12.0,12.0,12.0", testData);
         
     }
