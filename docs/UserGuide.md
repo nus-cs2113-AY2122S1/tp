@@ -25,7 +25,7 @@
     * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
     * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
-    * [Viewing schedule information : `view`](#viewing-schedule-information)
+    * [Viewing schedule information : `view {index}`](#viewing-schedule-information)
 - [Section: Question](#section-question)
     * [Accessing question workspace : `question`](#accessing-question-workspace)
     * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
@@ -508,16 +508,20 @@ Adds a schedule when in the schedule workspace.
 
 > ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
 
+> 💡The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
+ 
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
-> ⚠️The `<duration>` must be a **positive** number. For example, `2` is a valid duration but `-1` is not.
+> ⚠️The `<duration>` must be a **positive** integer. For example, `2` is a valid duration but `-1.5` is not.
+
+> ⚠️The `<zoom_link>` must begin with a "https://" in order for the link to be valid.
 
 Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"`
 
 Expected Output:
 
 ```
-[CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"
+[CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"
 Your schedule on 'CS2113T Tutorial 1' has been added!
 [CS2113T > schedule] >>> 
 ```
@@ -540,13 +544,13 @@ Your link on 'CS2113T Tutorial 1' has been deleted!
 
 ### Viewing schedule information
 
-**Format:** `view`
+**Format:** `view {index}`
 
 Views a list of schedules in the module when in the schedule workspace.
 
-Example: `view`
+Example 1: `view`
 
-Expected Output:
+Expected Output 1:
 
 ```
 [CS2113T > schedule] >>> view
@@ -559,6 +563,15 @@ Rerun the same command with an index behind to view the content.
 [CS2113T > schedule] >>> 
 ```
 
+Example 2: `view 1`
+
+Expected Output 2:
+
+```
+[CS2113T > schedule] >>> view 1
+CS2113T Tutorial 1 (Thursday, 10:00 - 12:00): https://zoom.us/test
+[CS2113T > schedule] >>> 
+```
 ---
 
 ## Section: Question

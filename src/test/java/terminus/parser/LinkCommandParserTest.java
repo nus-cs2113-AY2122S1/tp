@@ -34,6 +34,8 @@ public class LinkCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> linkCommandParser.parseCommand("vieww"));
         assertThrows(InvalidCommandException.class, () -> linkCommandParser.parseCommand("dellett"));
         assertThrows(InvalidCommandException.class, () -> linkCommandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("eXiT tt"));
+        assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("HeLp pppp"));
     }
 
     @Test
@@ -41,7 +43,6 @@ public class LinkCommandParserTest {
         assertTrue(linkCommandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(linkCommandParser.parseCommand("eXiT") instanceof ExitCommand);
         assertTrue(linkCommandParser.parseCommand("   ExIt   ") instanceof ExitCommand);
-        assertTrue(linkCommandParser.parseCommand("eXiT tt") instanceof ExitCommand);
     }
 
     @Test
@@ -49,7 +50,6 @@ public class LinkCommandParserTest {
         assertTrue(linkCommandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(linkCommandParser.parseCommand("HeLp") instanceof HelpCommand);
         assertTrue(linkCommandParser.parseCommand("   hElP   ") instanceof HelpCommand);
-        assertTrue(linkCommandParser.parseCommand("HeLp pppp") instanceof HelpCommand);
     }
 
     @Test

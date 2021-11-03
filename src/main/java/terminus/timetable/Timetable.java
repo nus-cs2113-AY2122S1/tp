@@ -2,10 +2,10 @@ package terminus.timetable;
 
 import static terminus.common.CommonUtils.isStringNullOrEmpty;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Stream;
 import terminus.common.DaysOfWeekEnum;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;

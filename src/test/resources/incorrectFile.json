@@ -1,0 +1,150 @@
+{
+  "moduleMap": {
+    "with spaces": {
+      "linkManager": {
+        "contents": []
+      },
+      "questionManager": {
+        "contents": []
+      }
+    },
+    "more30char30char30char30char30char30char30char": {
+      "linkManager": {
+        "contents": []
+      },
+      "questionManager": {
+        "contents": []
+      }
+    },
+    "lowercase": {
+      "linkManager": {
+        "contents": []
+      },
+      "questionManager": {
+        "contents": []
+      }
+    },
+    "": {
+      "linkManager": {
+        "contents": []
+      },
+      "questionManager": {
+        "contents": []
+      }
+    },
+    "TEST": {
+      "linkManager": {
+        "contents": [
+          {
+            "day": "tuday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 1121,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "//zoom/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": -2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": ""
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 23,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 10,
+            "link": "https://zoom.us/",
+            "name": "test"
+          },
+          {
+            "day": "tuesday",
+            "startTime": {
+              "hour": 11,
+              "minute": 11,
+              "second": 0,
+              "nano": 0
+            },
+            "duration": 2,
+            "link": "https://zoom.us/",
+            "name": "test"
+          }
+        ]
+      },
+      "questionManager": {
+        "contents": [
+          {
+            "weight": null,
+            "name": "s",
+            "data": "s"
+          },
+          {
+            "weight": 0.36048851650742564,
+            "name": "What is UML?",
+            "data": ""
+          },
+          {
+            "weight": 0.36048851650742564,
+            "name": "",
+            "data": "System under test"
+          },
+          {
+            "weight": 10000000000000000000,
+            "name": "What is Java?",
+            "data": "It is a programming language."
+          }
+        ]
+      }
+  }
+  }
+}

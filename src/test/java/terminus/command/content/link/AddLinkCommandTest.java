@@ -2,12 +2,12 @@ package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -20,8 +20,6 @@ import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddLinkCommandTest {
 
