@@ -16,7 +16,7 @@ class EditIngrWasteCommandTest {
     void execute() throws FoodoramaException {
 
         ArrayList<String> inputParams = new ArrayList<>();
-        inputParams.add("chicken");
+        inputParams.add("fish");
 
         InputStream ingrWeight = System.in;
         InputStream fakeInputWeight  = new ByteArrayInputStream("5".getBytes());
