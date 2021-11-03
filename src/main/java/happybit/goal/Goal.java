@@ -69,11 +69,20 @@ public class Goal {
     }
 
     /**
+     * Getter for start date of goal.
+     *
+     * @return Start Date of a goal.
+     */
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
+    /**
      * Getter for startDate of the goal in string format. (For storage)
      *
      * @return Start date formatted as a string.
      */
-    public String getStartDate() {
+    public String getStringStartDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         return dateFormat.format(this.startDate);
     }

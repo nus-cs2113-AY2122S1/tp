@@ -44,7 +44,7 @@ class AddParserTest {
         Goal testGoal = testCommand.getGoal();
         assertEquals("Test", testGoal.getGoalName());
         assertEquals("[SD]", testGoal.getGoalTypeCharacter());
-        assertEquals("31122021", testGoal.getStartDate());
+        assertEquals("31122021", testGoal.getStringStartDate());
         assertEquals(new SimpleDateFormat("ddMMyyyy").parse("31122022"), testGoal.getEndDate());
     }
 
@@ -56,7 +56,7 @@ class AddParserTest {
         Goal testGoal = testCommand.getGoal();
         assertEquals("Test", testGoal.getGoalName());
         assertEquals("[DF]", testGoal.getGoalTypeCharacter());
-        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), testGoal.getStartDate());
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), testGoal.getStringStartDate());
         assertEquals(new SimpleDateFormat("ddMMyyyy").parse("31122022"), testGoal.getEndDate());
     }
 

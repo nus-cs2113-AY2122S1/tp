@@ -96,6 +96,11 @@ class UpdateParserTest {
     }
 
     @Test
+    void parseUpdateEndDateCommand_validInput_success() throws HaBitParserException {
+
+    }
+
+    @Test
     void parseUpdateHabitIntervalCommand_validInput_success() throws HaBitParserException {
         UpdateHabitIntervalCommand testCommand =
                 (UpdateHabitIntervalCommand) UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/3");

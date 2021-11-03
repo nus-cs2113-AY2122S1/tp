@@ -21,6 +21,8 @@ public class GoalList {
     private static final String ERROR_IDENTICAL_NEW_DATE = "There is no change in end date";
     private static final String ERROR_DUPLICATE_HABIT_NAME = "This habit name is already present for this goal";
     private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
+    private static final String ERROR_NEW_END_DATE_AFTER_START_DATE = "You cannot have the end date of a goal before "
+            + "or on the start date.";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
@@ -265,7 +267,11 @@ public class GoalList {
     public void updateGoalEndDate(int goalIndex, Date newDate, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         Date oldDate = goal.getEndDate();
+        Date startDate = goal.getStartDate();
+        // check if new end date same as previous end date
         compareOldDateWithNewDate(oldDate, newDate);
+        // check if new end date before start date
+        checkNewDateAfterStartDate(startDate, newDate);
         goal.setEndDate(newDate);
         // Go through all habits for Goal
         // change endDate for all of them + call updateIntervals
@@ -437,12 +443,28 @@ public class GoalList {
         }
     }
 
+    /**
+     * Checks if new end Date set by user is the same as the old end Date for that goal.
+     *
+     * @param oldDate Current end Date for goal
+     * @param newDate New end Date for goal
+     * @throws HaBitCommandException thrown if they are oldDate and newDate are the same
+     */
     private void compareOldDateWithNewDate(Date oldDate, Date newDate) throws HaBitCommandException {
         LocalDate oldDateLD = convertDateToLocalDate(oldDate);
         LocalDate newDateLD = convertDateToLocalDate(newDate);
 
         if (oldDateLD.isEqual(newDateLD)) {
-            throw new HaBitCommandException((ERROR_IDENTICAL_NEW_DATE));
+            throw new HaBitCommandException(ERROR_IDENTICAL_NEW_DATE);
+        }
+    }
+
+    private void checkNewDateAfterStartDate(Date startDate, Date newDate) throws HaBitCommandException {
+        LocalDate startDateLD = convertDateToLocalDate(startDate);
+        LocalDate newDateLD = convertDateToLocalDate(newDate);
+
+        if (!newDateLD.isAfter(startDateLD)) {
+            throw new HaBitCommandException(ERROR_NEW_END_DATE_AFTER_START_DATE);
         }
     }
 
