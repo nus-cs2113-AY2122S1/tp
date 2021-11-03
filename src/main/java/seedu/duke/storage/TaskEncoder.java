@@ -1,5 +1,7 @@
 package seedu.duke.storage;
 
+import seedu.duke.Duke;
+import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Task;
 
@@ -24,7 +26,11 @@ public class TaskEncoder {
                 + " | "
                 + Parser.convertDateTimeForSaving(task.getDateTime())
                 + " |"
-                + encodeMemberListToString(task);
+                + encodeMemberListToString(task)
+                + " | "
+                + Duke.eventCatalog.indexOf(task.getEvent())
+                + " | "
+                + task.getEvent().getTitle();
     }
 
     private static String encodeMemberListToString(Task task) {
