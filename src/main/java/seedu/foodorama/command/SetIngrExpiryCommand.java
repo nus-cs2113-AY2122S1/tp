@@ -11,18 +11,28 @@ public class SetIngrExpiryCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
+        String ingr = parameters.get(0);
         int ingrIndex;
-        if (isNumber(parameters.get(0))) {
-            ingrIndex = Integer.parseInt(parameters.get(0)) - 1;
+        if (isNumber(ingr)) {
+            ingrIndex = Integer.parseInt(ingr) - 1;
+        } else if (!isNumber(ingr) & ingr.isEmpty()) {
+            throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
-            String ingrName = String.join(" ", parameters);
-            if (ingrName.isBlank()) {
-                throw new FoodoramaException(UI.getIngrIndexMissingMsg());
-            } else {
-                ingrIndex = IngredientList.find(ingrName);
+            ingrIndex = IngredientList.find(ingr);
+        }
+        if (ingrIndex == -1) {
+            throw new FoodoramaException(UI.getIngrNotExistMsg());
+        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            assert (ingrIndex != -1) : "The ingrIndex cannot be -1";
+            try {
+                IngredientList.addExpiry(ingrIndex);
+            } catch (FoodoramaException e) {
+                throw new FoodoramaException(e.getMessage());
             }
         }
-        IngredientList.addExpiry(ingrIndex);
+
     }
 
     public boolean isNumber(String number) {

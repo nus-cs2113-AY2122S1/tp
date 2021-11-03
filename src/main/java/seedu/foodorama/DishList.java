@@ -101,32 +101,31 @@ public class DishList {
     }
 
     public static void editName(int dishIndex) throws FoodoramaException {
-        if (dishIndex == -1) {
-            throw new FoodoramaException(UI.getDishNotExistEdit());
-        } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
-            throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
+        String dishName = dishList.get(dishIndex).getDishName();
+        UI.printAskNewNameDish(dishName);
+
+        Scanner input = new Scanner(System.in);
+        String newName = input.nextLine().toLowerCase();
+        while (isNumber(newName)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidDishName();
+            newName = input.nextLine().toLowerCase();
+        }
+
+        UI.clearTerminalAndPrintNewPage();
+        UI.printConfirmDishNameEditMsg(dishName, newName);
+        String confirmChange = input.nextLine().toLowerCase();
+        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmChange = input.nextLine().toLowerCase();
+        }
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmChange.equals(YES)) {
+            dishList.get(dishIndex).setDishName(newName);
+            UI.printDishNameChanged(dishName, newName);
         } else {
-            String dishName = dishList.get(dishIndex).getDishName();
-            UI.printAskNewNameDish(dishName);
-
-            Scanner input = new Scanner(System.in);
-            String newName = input.nextLine();
-
-            UI.clearTerminalAndPrintNewPage();
-            UI.printConfirmDishNameEditMsg(dishName, newName);
-            String confirmChange = input.nextLine().toLowerCase();
-            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
-                UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidConfirmation();
-                confirmChange = input.nextLine().toLowerCase();
-            }
-            UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.equals(YES)) {
-                dishList.get(dishIndex).setDishName(newName);
-                UI.printDishNameChanged(dishName, newName);
-            } else {
-                UI.printDisregardMsg();
-            }
+            UI.printDisregardMsg();
         }
     }
 
@@ -168,6 +167,15 @@ public class DishList {
             } else {
                 UI.printDisregardMsg();
             }
+        }
+    }
+
+    public static boolean isNumber(String numberString) {
+        try {
+            int numberInteger = Integer.parseInt(numberString) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }

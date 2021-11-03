@@ -36,6 +36,7 @@ class SetIngrLimitCommandTest {
         //Add the ingredient
         Ingredient ingredientToAdd = new Ingredient("chocolate", 3.33);
         IngredientList.ingredientList.add(ingredientToAdd);
+        System.out.println(IngredientList.ingredientList.get(0));
         try {
             //Spoof scanner input with input stream
             fakeInput = new ByteArrayInputStream("7.2".getBytes());
@@ -46,6 +47,7 @@ class SetIngrLimitCommandTest {
             fakeInput = new ByteArrayInputStream("-22".getBytes());
             System.setIn(fakeInput);
             commandToTest.execute(inputs);
+            //System.setIn(fakeInput);
         } catch (FoodoramaException e) {
             assertEquals(ui.getInvalidNumberMsg(), e.getMessage());
         }
@@ -56,7 +58,7 @@ class SetIngrLimitCommandTest {
         try {
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
-            assertEquals(ui.getDishNotExistMsg("chocolate"), e.getMessage());
+            assertEquals(ui.getIngrNotExistMsg(), e.getMessage());
         }
     }
 

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class IngredientList {
@@ -126,32 +127,31 @@ public class IngredientList {
     }
 
     public static void editName(int ingredientIndex) throws FoodoramaException {
-        if (ingredientIndex == -1) {
-            throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
-            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
+        UI.printAskNewNameIngr(ingrName);
+
+        Scanner input = new Scanner(System.in);
+        String newName = input.nextLine().toLowerCase();
+        while (isNumber(newName)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidIngredientName();
+            newName = input.nextLine().toLowerCase();
+        }
+
+        UI.clearTerminalAndPrintNewPage();
+        UI.printConfirmIngrEditMsg(ingrName, newName);
+        String confirmChange = input.nextLine().toLowerCase();
+        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmChange = input.nextLine().toLowerCase();
+        }
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmChange.equals(YES)) {
+            ingredientList.get(ingredientIndex).setIngredientName(newName);
+            UI.printIngrNameChanged(ingrName, newName);
         } else {
-            String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
-            UI.printAskNewNameIngr(ingrName);
-
-            Scanner input = new Scanner(System.in);
-            String newName = input.nextLine();
-
-            UI.clearTerminalAndPrintNewPage();
-            UI.printConfirmIngrEditMsg(ingrName, newName);
-            String confirmChange = input.nextLine().toLowerCase();
-            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
-                UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidConfirmation();
-                confirmChange = input.nextLine().toLowerCase();
-            }
-            UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.equals(YES)) {
-                ingredientList.get(ingredientIndex).setIngredientName(newName);
-                UI.printIngrNameChanged(ingrName, newName);
-            } else {
-                UI.printDisregardMsg();
-            }
+            UI.printDisregardMsg();
         }
     }
 
@@ -165,77 +165,68 @@ public class IngredientList {
     }
 
     public static void addExpiry(int ingredientIndex) throws FoodoramaException {
-        if (ingredientIndex == -1) {
-            throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
-            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
+        UI.printAskIngrExpiryDate(ingrName);
+
+        Scanner input = new Scanner(System.in);
+        String expiryDateString = input.nextLine();
+        LocalDate expiryDate = null;
+
+        while (!isValidDate(expiryDateString)) {
+            UI.clearTerminalAndPrintNewPage();
+            System.out.println(UI.getIncorrectExpiryDateFormatMsg());
+            expiryDateString = input.nextLine();
+        }
+        if (isValidDate(expiryDateString)) {
+            expiryDate = LocalDate.parse(expiryDateString, dtf);
+        }
+
+        long daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+        if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
+            UI.clearTerminalAndPrintNewPage();
+            throw new FoodoramaException(UI.getLongExpiryDateMsg());
+        } else if (daysBetweenExpiryToday < ZERO_DAYS) {
+            UI.clearTerminalAndPrintNewPage();
+            throw new FoodoramaException(UI.getPassedExpiryDateMsg());
         } else {
-            String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
-            UI.printAskIngrExpiryDate(ingrName);
-
-            Scanner input = new Scanner(System.in);
-            String expiryDateString = input.nextLine();
-            LocalDate expiryDate = null;
-
-            if (isValidDate(expiryDateString)) {
-                expiryDate = LocalDate.parse(expiryDateString, dtf);
-            } else {
-                UI.clearTerminalAndPrintNewPage();
-                throw new FoodoramaException(UI.getIncorrectExpiryDateFormatMsg());
-            }
-
-            long daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
-            if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
-                UI.clearTerminalAndPrintNewPage();
-                throw new FoodoramaException(UI.getLongExpiryDateMsg());
-            } else if (daysBetweenExpiryToday < ZERO_DAYS) {
-                UI.clearTerminalAndPrintNewPage();
-                throw new FoodoramaException(UI.getPassedExpiryDateMsg());
-            } else {
-                ingredientList.get(ingredientIndex).setExpiryDate(expiryDate);
-                UI.clearTerminalAndPrintNewPage();
-                UI.printSetIngrExpiryDate(ingrName, expiryDate, daysBetweenExpiryToday);
-            }
+            ingredientList.get(ingredientIndex).setExpiryDate(expiryDate);
+            UI.clearTerminalAndPrintNewPage();
+            UI.printSetIngrExpiryDate(ingrName, expiryDate, daysBetweenExpiryToday);
         }
     }
 
     public static void editWastage(int ingrIndex) throws FoodoramaException {
-        if (ingrIndex == -1) {
-            throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
-            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+
+        String ingrName = ingredientList.get(ingrIndex).getIngredientName();
+        UI.printAskNewWastageDish(ingrName);
+
+        Scanner input = new Scanner(System.in);
+        double newWeight;
+
+        try {
+            newWeight = Double.parseDouble(input.nextLine());
+            if (newWeight < 0) {
+                throw new FoodoramaException("");
+            }
+        } catch (NumberFormatException | FoodoramaException e) {
+            throw new FoodoramaException(UI.getInvalidNumberMsg());
+        }
+        Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
+
+        UI.clearTerminalAndPrintNewPage();
+        UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
+        String confirmChange = input.nextLine().toLowerCase();
+        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmChange = input.nextLine().toLowerCase();
+        }
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmChange.equals(YES)) {
+            ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
+            UI.printDishWastageChanged(ingrName, newWeight);
         } else {
-            String ingrName = ingredientList.get(ingrIndex).getIngredientName();
-            UI.printAskNewWastageDish(ingrName);
-
-            Scanner input = new Scanner(System.in);
-            double newWeight;
-
-            try {
-                newWeight = Double.parseDouble(input.nextLine());
-                if (newWeight < 0) {
-                    throw new FoodoramaException("");
-                }
-            } catch (NumberFormatException | FoodoramaException e) {
-                throw new FoodoramaException(UI.getInvalidNumberMsg());
-            }
-            Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
-
-            UI.clearTerminalAndPrintNewPage();
-            UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
-            String confirmChange = input.nextLine().toLowerCase();
-            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
-                UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidConfirmation();
-                confirmChange = input.nextLine().toLowerCase();
-            }
-            UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.equals(YES)) {
-                ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
-                UI.printDishWastageChanged(ingrName, newWeight);
-            } else {
-                UI.printDisregardMsg();
-            }
+            UI.printDisregardMsg();
         }
     }
 
@@ -276,6 +267,15 @@ public class IngredientList {
             } else {
                 UI.printDisregardMsg();
             }
+        }
+    }
+
+    public static boolean isNumber(String numberString) {
+        try {
+            int numberInteger = Integer.parseInt(numberString) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }

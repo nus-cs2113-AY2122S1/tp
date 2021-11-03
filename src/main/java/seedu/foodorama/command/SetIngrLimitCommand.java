@@ -1,5 +1,6 @@
 package seedu.foodorama.command;
 
+import seedu.foodorama.DishList;
 import seedu.foodorama.Ingredient;
 import seedu.foodorama.IngredientList;
 import seedu.foodorama.Ui;
@@ -12,18 +13,36 @@ public class SetIngrLimitCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        String dish = String.join(" ", parameters);
-        int ingredientIndex = IngredientList.find(dish);
-
-        if (ingredientIndex == -1) {
-            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
+        String ingr = parameters.get(0);
+        int ingrIndex;
+        if (isNumber(ingr)) {
+            ingrIndex = Integer.parseInt(ingr) - 1;
+        } else if (!isNumber(ingr) & ingr.isEmpty()) {
+            throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
+            ingrIndex = IngredientList.find(ingr);
+        }
+        if (ingrIndex == -1) {
+            throw new FoodoramaException(UI.getIngrNotExistMsg());
+        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            assert (ingrIndex != -1) : "The dishIndex cannot be -1";
             try {
-                Ingredient currentIngr = IngredientList.ingredientList.get(ingredientIndex);
+                Ingredient currentIngr = IngredientList.ingredientList.get(ingrIndex);
                 currentIngr.setLimitValue();
             } catch (FoodoramaException e) {
                 throw new FoodoramaException(e.getMessage());
             }
+        }
+    }
+
+    public boolean isNumber(String number) {
+        try {
+            int dishIndex = Integer.parseInt(number) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
