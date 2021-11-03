@@ -15,6 +15,7 @@ import static seedu.duke.common.Messages.KEY_ID;
 import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
+//@@author avellinwong01
 /**
  * Class encapsulating an Edit Miscellaneous Item Command.
  */
@@ -136,3 +137,4 @@ public class EditMiscellaneousCommand extends Command {
         }
     }
 }
+//@@author avellinwong01
