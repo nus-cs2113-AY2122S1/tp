@@ -12,6 +12,7 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    * [Testing](#testing) 
 * [Implementation](#implementation)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
@@ -26,7 +27,7 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The documentation and class organization of the code is done with some reference to the [AB-3 repository](https://github.com/se-edu/addressbook-level3).
 
 ## Setting up, getting started
 
@@ -194,7 +195,31 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 
 ### Common classes
 
+#### Core
+
+* The `Messages` class stores string constants for simple success and error messages to be printed to users. (usually 1 liners)
+* The `CommandFormat` class stores string constants representing formats for user commands. 
+It also provides a method that creates a ready-to-print string that suggests selected command formats for the user.
+* The `DayOfTheWeek` class stores enumerations for the Day of the Week. It also provides methods to check the validity of a Day of the Week input and convert it into a `DayOfTheWeek`.
+* The `Priority` class stores enumerations for task priority. It also provides methods to check the validity of a priority input and convert it into a `Priority`.
+* The `CommandType` class stores enumerations for command types. It also provides a method to convert a command word into a `CommandType`.
+
+#### Utility
+
+{to be added}
+
 ## Documentation, logging, testing, configuration, dev-ops
+
+### Testing
+
+#### Running Tests
+
+* Method 1: Using the Intellij JUnit test runner
+  * Right-click on the `src/test/java folder` and choose `Run 'All Tests'`
+  * To run only selected, right-click on the class or package and choose `Run 'TEST_NAME'`
+
+* Method 2: Using Gradle
+  * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
 
 ## Implementation
 
