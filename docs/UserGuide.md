@@ -13,6 +13,7 @@ done in an efficient manner.
         - [Adding a book item: `add b`](#adding-a-book-item)
         - [Adding a magazine item: `add m`](#adding-a-magazine-item)
         - [Adding a video item: `add v`](#adding-a-video-item)
+        - [Adding a miscellaneous item: `add i`](#adding-a-miscellaneous-item)
     - [List items: `list`](#list-items)
     - [Listing items that are due today: `deadline today`](#listing-items-that-are-due-today)
     - [Listing items that are overdue: `deadline overdue`](#listing-items-that-are-overdue)
@@ -107,6 +108,20 @@ Expected Output:
 > add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes
   (+) Added new video item to the catalogue
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
+```
+
+#### Adding a miscellaneous item
+For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command
+
+Format: `add i t/TITLE i/ID`
+
+Example: `dd i t/Scrabble i/0513895`
+
+Expected Output:
+```
+> add i t/Scrabble i/0513895
+  (+) Added new item to the catalogue
+  [-] 0513895 | AVAILABLE | Scrabble
 ```
 
 ### List items
