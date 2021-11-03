@@ -1,5 +1,7 @@
 package seedu.foodorama;
 
+import seedu.foodorama.command.RandomDishCommand;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -664,7 +666,7 @@ public class Ui {
                         if (j % 2 == 0) {
                             System.out.print("   ");
                         } else {
-                            System.out.print((char)(j / 2 + 65) + " ");
+                            System.out.print((char) (j / 2 + 65) + " ");
                         }
                     } else {
                         System.out.print("   ");
@@ -672,7 +674,7 @@ public class Ui {
                 }
                 if (i < listSize) {
                     System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
-                        + ":" + dishList.get(i).getWastage() + "kg");
+                            + ":" + dishList.get(i).getWastage() + "kg");
                 } else {
                     System.out.print(System.lineSeparator());
                 }
@@ -714,7 +716,7 @@ public class Ui {
                         if (j % 2 == 0) {
                             System.out.print("   ");
                         } else {
-                            System.out.print((char)(j / 2 + 65) + " ");
+                            System.out.print((char) (j / 2 + 65) + " ");
                         }
                     } else {
                         System.out.print("   ");
@@ -863,5 +865,13 @@ public class Ui {
                 + dishExample + System.lineSeparator()
                 + ingrFormat + System.lineSeparator()
                 + ingrExample + System.lineSeparator();
+    }
+
+    public void printRandommDishName(String randomDishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Here's an idea for a new Dish!" + System.lineSeparator()
+                + randomDishName + System.lineSeparator()
+                + LINE_DIVIDER
+        );
     }
 }
