@@ -15,7 +15,7 @@ public class DeleteIngredientInRecipeCommand extends Command {
      */
     public static final String COMMAND_WORD = "delete ingredient in recipe";
 
-    public static final String MESSAGE_DELETION_SUCCESSFUL = "I've deleted ingredients in this recipe:\n" + "%1$s";
+    public static final String MESSAGE_DELETION_SUCCESSFUL = "I've deleted ingredients in this recipe:\n\n" + "%1$s";
     public static final String RECIPE_DELETION_FAIL = "Unable to deleted ingredients in this recipe:\n" + "%1$s"
             + "No matching recipes or ingredients found, please check your input again\n";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to update recipe: %1$s\n"
@@ -59,7 +59,7 @@ public class DeleteIngredientInRecipeCommand extends Command {
             recipes = recipes.deleteIngredientInRecipe(recipes, recipe, ingredients);
 
             if (recipes != null) {
-                return String.format(MESSAGE_DELETION_SUCCESSFUL, recipe);
+                return String.format(MESSAGE_DELETION_SUCCESSFUL, recipe.getName());
             } else {
                 return String.format(RECIPE_DELETION_FAIL, recipe);
             }
