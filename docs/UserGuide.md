@@ -362,10 +362,11 @@ Expected outcome of usage:
 ```
 edit 0 -n John Lee -g johnlee -te johnlee123 -e john.lee@contech.sg
 ____________________________________________________________
-0. John Lee
-   Github:   github.com/johnlee
-   Email:    john.lee@contech.sg
-   Telegram: t.me/johnlee123
+ConTech has edited the specified contact:
+Name:     John Lee
+Github:   github.com/johnlee
+Email:    john.lee@contech.sg
+Telegram: t.me/johnlee123
 ____________________________________________________________
 ```
 
