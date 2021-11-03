@@ -243,6 +243,9 @@ Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
+⚠️ Only one exercise can be removed at a time. 
+
+
 Examples of usage:
 
 `remove 1, 1` = remove exercise 1 from workout 1
@@ -349,6 +352,8 @@ ________________________________________________________
 ### 12. Recommend a workout: `recommend`
 
 Provides a given set of workouts with exercises.
+
+⚠️ This command will add the recommended workouts to your workout list.
 
 Format: `recommend [beginner/ intermediate/ pro]`
 
