@@ -385,7 +385,7 @@ class UiTest {
         try {
             assertEquals(expectedOutput, Ui.getCommandList(ViewType.SCHEDULER));
         } catch (MedBotException mbe) {
-            fail();
+            fail("Can't get the command list");
         }
     }
 
@@ -421,7 +421,7 @@ class UiTest {
             assertEquals(Ui.getFindPersonsMessage(params, ViewType.PATIENT_INFO), expectedOutput);
 
         } catch (MedBotException e) {
-            fail();
+            fail("Can't add the person to the list");
         }
         try {
             String[] newParameters = {"n/Bob", "z/test"};
