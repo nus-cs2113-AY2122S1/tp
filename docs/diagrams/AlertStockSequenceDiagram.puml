@@ -19,15 +19,18 @@ loop all ingredientGroups in ingredientList
     alert_exp -> ing_group: getTotalAmount()
     activate ing_group INGREDIENTGROUP_COLOUR
     ing_group --> alert_exp: totalAmount
+    deactivate ing_group
     opt totalAmount < threshold amount
         alert_exp -> ing_group: toString()
+        activate ing_group INGREDIENTGROUP_COLOUR
         ing_group -->alert_exp
+        deactivate ing_group
     end
     deactivate ing_group
 end
 
 <-- alert_exp : list of expiring ingredients
-
+deactivate alert_exp
 
 
 
