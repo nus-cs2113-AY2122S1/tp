@@ -39,6 +39,24 @@ public class WorldMapTest {
     }
 
     @Test
+    public void calcMinCost_sinMly_success() throws EmptyVertexException {
+        Country countrySin = new Country("SIN", 0);
+        Country countryMly = new Country("MLY", 1);
+
+        List<Country> path = new ArrayList<>();
+        path.add(countrySin);
+        path.add(countryMly);
+
+        List<Double> distances = new ArrayList<>();
+        distances.add(100.0);
+
+        MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryMly, path, distances);
+
+        assertEquals(minCalcResult.toString(),
+                WorldMap.calcMinCost("SIN", "MLY").toString());
+    }
+
+    @Test
     public void calcMinDistance_sinJpn_success() throws EmptyVertexException {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
