@@ -32,6 +32,9 @@ import seedu.duke.data.Tour;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -65,9 +68,18 @@ public class Parser {
             = "Missing prefixes! Did you miss out some fields? Please try again.";
     public static final String ERROR_MISSING_NAME_ID = "Missing name/id! Please try again.";
     private static final String ERROR_MISSING_FIELDS = "Please do not leave your fields empty!";
-    public static final String ERROR_EMAIL_FORMAT_WRONG = "Invalid Email!";
-    public static final String ERROR_CONTACT_NUMBER_WRONG = "Invalid Contact Number!";
-    public static final String ERROR_FLIGHT_TIME_INVERT = "Invalid Flight Time!";
+    public static final String ERROR_EMAIL_FORMAT_WRONG = "TourPlanner has detected possible erroneous email! "
+            + "Are you sure about this entry? \n";
+    public static final String ERROR_CONTACT_NUMBER_WRONG =
+            "TourPlanner has detected possible erroneous contact number! (characters other than numbers)"
+                    + "Are you sure about this entry? \n";
+    public static final String ERROR_SHORT_CONTACT_NUMBER =
+            "TourPlanner detected that the given contact number is too short (< 8)! Are you sure about this entry? \n";
+    private static final String ERROR_LONG_CONTACT_NUMBER =
+            "TourPlanner detected that the given contact number is too long (> 8)! Are you sure about this entry? \n";
+    public static final String ERROR_FLIGHT_TIME_FORMAT = "TourPlanner detected wrong date time entry formatting! \n"
+            + "Please input your date-times with the following format: d/M/yy HH:mm";
+    public static final String ERROR_FLIGHT_TIME_INVERT = "TourPlanner detected erroneous flight time entry!";
     public static final String ERROR_PRICE_FORMAT = "Invalid Price";
     public static final String TOUR_NAME_PREFIX = "/n";
     public static final String TOUR_PRICE_PREFIX = "/p";
@@ -455,33 +467,48 @@ public class Parser {
     }
 
     private static void handleFlightException(String[] values) throws TourPlannerException {
-        SimpleDateFormat formatter = new SimpleDateFormat("d/M/yy HH:mm");
-        Date start = null;
-        Date end = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
+        LocalDateTime start;
+        LocalDateTime end;
         String startDateString = values[3];
         String endDateString = values[4];
+
         try {
-            start = formatter.parse(startDateString);
-            end = formatter.parse(endDateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            start = LocalDateTime.parse(startDateString, formatter);
+            end = LocalDateTime.parse(endDateString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new TourPlannerException(ERROR_FLIGHT_TIME_FORMAT);
         }
-        if (end.before(start)) {
+        if (end.isBefore(start) || end.equals(start)) {
             throw new TourPlannerException(ERROR_FLIGHT_TIME_INVERT);
         }
     }
 
-    private static void handleClientException(String[] values) throws TourPlannerException {
+    private static void handleClientException(String[] values) {
         String contactNum = values[2];
         String email = values[3];
-        if (!email.contains("@")) {
-            throw new TourPlannerException(ERROR_EMAIL_FORMAT_WRONG);
+        int adSymbolCount = (int) email.chars().filter(ch -> ch == '@').count();
+        int periodCount = (int) email.chars().filter(ch -> ch == '.').count();
+
+        if (adSymbolCount != 1 || periodCount != 1) {
+            System.out.println(ERROR_EMAIL_FORMAT_WRONG);
         }
-        for (int i = 0; i < contactNum.length(); i++) {
+
+        boolean isWrongContactNumber = false;
+        int contactNumberLength = contactNum.length();
+        for (int i = 0; i < contactNumberLength; i++) {
             char ch = contactNum.charAt(i);
             if (!(ch <= '9' && ch >= '0')) {
-                throw new TourPlannerException(ERROR_CONTACT_NUMBER_WRONG);
+                isWrongContactNumber = true;
+                break;
             }
+        }
+        if (isWrongContactNumber) {
+            System.out.println(ERROR_CONTACT_NUMBER_WRONG);
+        } else if (contactNumberLength < 8) {
+            System.out.println(ERROR_SHORT_CONTACT_NUMBER);
+        } else if (contactNumberLength > 8) {
+            System.out.println(ERROR_LONG_CONTACT_NUMBER);
         }
     }
 

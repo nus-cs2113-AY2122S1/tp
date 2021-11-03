@@ -27,10 +27,11 @@ public class AddClientCommandTest {
     @Test
     void addClientCommand_validData_correctlyConstructed() {
         Client testClient =
-                new Client(new String[]{TEST_CLIENT_ID,
-                        TEST_CLIENT_NAME,
-                        TEST_CLIENT_CONTACT,
-                        TEST_CLIENT_EMAIL});
+                new Client(new String[]{
+                    TEST_CLIENT_ID,
+                    TEST_CLIENT_NAME,
+                    TEST_CLIENT_CONTACT,
+                    TEST_CLIENT_EMAIL});
         AddClientCommand addClient = new AddClientCommand(testClient);
 
         Client retrieveClient = addClient.getClient();
@@ -43,10 +44,11 @@ public class AddClientCommandTest {
     @Test
     void addClientCommand_emptyClientList_populatedClientList() throws TourPlannerException {
         Client testClient =
-                new Client(new String[]{TEST_CLIENT_ID,
-                        TEST_CLIENT_NAME,
-                        TEST_CLIENT_CONTACT,
-                        TEST_CLIENT_EMAIL});
+                new Client(new String[]{
+                    TEST_CLIENT_ID,
+                    TEST_CLIENT_NAME,
+                    TEST_CLIENT_CONTACT,
+                    TEST_CLIENT_EMAIL});
         AddClientCommand addClient = new AddClientCommand(testClient);
         addClient.setData(testClientList, dummyFlightList, dummyTourList, dummyPackageList, testUi);
         addClient.execute();

@@ -241,7 +241,7 @@ public class Ui {
     /**
      * Ui response to sort tour by id.
      *
-     * @param tours           the current list of tours in the database
+     * @param tours         the current list of tours in the database
      * @param sortedTourIds the list of sorted tour codes/ids (by alphabetical order)
      * @throws TourPlannerException if there is no tours that can be found given the tour code
      */

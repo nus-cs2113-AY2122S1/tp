@@ -28,11 +28,11 @@ public class AddFlightCommandTest {
     void addFlightCommand_validData_correctlyConstructed() {
         Flight testFlight =
                 new Flight(new String[]{
-                        TEST_FLIGHT_ID,
-                        TEST_FLIGHT_DEPART,
-                        TEST_FLIGHT_RETURN,
-                        TEST_DEPART_TIME,
-                        TEST_RETURN_TIME});
+                    TEST_FLIGHT_ID,
+                    TEST_FLIGHT_DEPART,
+                    TEST_FLIGHT_RETURN,
+                    TEST_DEPART_TIME,
+                    TEST_RETURN_TIME});
         AddFlightCommand addFlight = new AddFlightCommand(testFlight);
 
         Flight retrieveFlight = addFlight.getFlight();
@@ -47,11 +47,11 @@ public class AddFlightCommandTest {
     void addFlightCommand_emptyFlightList_populatedFlightList() {
         Flight testFlight =
                 new Flight(new String[]{
-                        TEST_FLIGHT_ID,
-                        TEST_FLIGHT_DEPART,
-                        TEST_FLIGHT_RETURN,
-                        TEST_DEPART_TIME,
-                        TEST_RETURN_TIME});
+                    TEST_FLIGHT_ID,
+                    TEST_FLIGHT_DEPART,
+                    TEST_FLIGHT_RETURN,
+                    TEST_DEPART_TIME,
+                    TEST_RETURN_TIME});
         AddFlightCommand addFlight = new AddFlightCommand(testFlight);
         addFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         addFlight.execute();
