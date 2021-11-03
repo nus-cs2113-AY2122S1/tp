@@ -200,10 +200,9 @@ Each section describes the function of each command and its format.
 * Parameters enclosed within curly brackets, `{}` are optional, although each command must have at least 1 parameter.
 
 ### Ask for Help: `help`
-Ummm, I'm not sure what the commands are. Fortunately this command is here for you.\
+What did you say? "Ummm, I'm not sure what the commands are."? Relax, this command is here for you.\
 This command displays a list of all possible commands.
 If an invalid command is typed, this method will be invoked by default.
-
 **Format:** `help`
 
 **Output:**
