@@ -121,7 +121,7 @@ and how **SchedUrMods** main components are connected.
 - **While app is running**: Reads user input and outputs the appropriate command result.
 - **At shut down**: Shuts down the components and invokes cleanup methods where necessary.
 
-The rest of the App consists of five main components.
+The rest of the App consists of seven main components.
 - `UI`: Handles user input and displaying of messages on the terminal.
 - `Parser`: Interpret user input and decides which `Command` is to be executed.
 - `Command`: Collection of user command classes + Handles command execution
@@ -146,6 +146,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
     <img src="images/AmosUMLDiagrams/CD_UIComponent.png">
 </p>
 
+The UI Component consists of the `Ui.java` class, which handles all user input and output operations within the 
+**SchedUrMods** application. The application structure (i.e. logo, borders, cursor...) is also defined in this 
+class as constant `String` variables to improve readability of the class and allow changes to be made
+to the general user interface easier.
+
+The `Ui.java` class implements the below functionalities using the following methods:
+- `printLogo()`: Prints the application logo when the application is launched.
+- `printCursor()`: Prints the user's cursor to indicate point of entering commands.
+- `readInput()`: Obtain user input entered as a `String` to be parsed later on.
+- `printMessage()`: Prints the system generated messages (i.e. command execution, errors, exceptions...)
 
 
 
