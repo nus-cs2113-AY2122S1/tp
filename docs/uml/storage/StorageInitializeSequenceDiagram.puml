@@ -1,14 +1,17 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-participant ":Terminus" as Terminus
-participant ":StorageManager" as StorageManager
+box Terminus #whitesmoke
+participant ":Terminus" as Terminus #white
+endbox
 
-participant ":JsonStorage" as JsonStorage
-participant ":NoteStorage" as NoteStorage
-participant ":PdfStorage" as PdfStorage
-participant ":FolderStorage" as FolderStorage
-
+box Storage #lightpink
+participant ":StorageManager" as StorageManager #mistyrose
+participant ":JsonStorage" as JsonStorage #mistyrose
+participant ":NoteStorage" as NoteStorage #mistyrose
+participant ":PdfStorage" as PdfStorage #mistyrose
+participant ":FolderStorage" as FolderStorage #mistyrose
+endbox
 
 -> Terminus : initialize()
 activate Terminus

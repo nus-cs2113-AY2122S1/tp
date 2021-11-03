@@ -3,13 +3,12 @@
 
 mainframe sd load
 
-participant ":StorageManager" as StorageManager
-
-participant ":JsonStorage" as JsonStorage
-
-participant ":FilterManager" as FilterManager
-
-participant ":NoteStorage" as NoteStorage
+box Storage #lightpink
+participant ":StorageManager" as StorageManager #mistyrose
+participant ":JsonStorage" as JsonStorage #mistyrose
+participant ":FilterManager" as FilterManager #mistyrose
+participant ":NoteStorage" as NoteStorage #mistyrose
+endbox
 
 activate StorageManager
 StorageManager -> StorageManager : load()
@@ -28,13 +27,13 @@ StorageManager -> FilterManager : filter(:ModuleStorage)
 note left : Remove any \ninvalid data \nin ModuleManager \nloaded from json
 activate FilterManager
 return
+destroy FilterManager
 loop each module in ModuleManager
   StorageManager -> NoteStorage : execute(:ModuleManager, module : String, null : String, RELOAD : StorageActionEnum)
   activate NoteStorage
   note left : ignore the file \nif exception \nis caught
-  ref over NoteStorage
-  loadNoteIntoModuleManager
-  end
+  |||
+  note right: Load Note data \ninto ModuleManager
   return
 end
 return moduleManager

@@ -562,18 +562,15 @@ This section details the technical information of StorageManager when TermiNUS c
 
 ![](attachments/StorageInitializeSequenceDiagram.png)
 
-**Step 1:** When `TermiNUS` gets executes, it will need to initialise a `StorageManager` that handles
+**Step 1:** When TermiNUS gets executes, it will need to initialise a `StorageManager` that handles
 any file I/O operations.
 
-**Step 2:** `TermiNUS` will need to provide a path for the **main directory** where all data are stored
+**Step 2:** `Terminus` will need to provide a path for the **main directory** where all data are stored
 and the **main json file** where the `module`,`question` and `schedule` are stored.
 
 > 📝 **Note:** The **main directory** is **hardcoded** within TermiNUS that has the filepath of the directory
 > where TermiNUS was executed from. The main directory will be named **data** and the **main json**
 > file will be located within the **data** folder and it is named as **main.json**.
-
-> 📝 **Note:** The modules in the `.json` file represents the modules that should be in TermiNUS when 
-> TermiNUS gets executed.
 
 **Step 3:** When calling the construct of `StorageManager`, it will create different storage type objects
 to handle different storage type file I/O operations. They are `NoteStorage`, `JsonStorage`, `PdfStorage` and
@@ -600,7 +597,67 @@ of file I/O operations using `NIO2` to be in its own class which is in the `Stor
 of the storage type class to inherit the functionality of the `Storage` class while adding their own
 checks and third party imports on top of it.
 
+#### 4.5.2 Loading Storage Implementation
 
+This section details the technical information of StorageManager when TermiNUS loads data in the `data` directory.
+
+##### 4.5.2.1 Current Implementation
+
+![](attachments/StorageLoadSequenceDiagram_part1.png)
+
+**Step 1:** TermiNUS will call the method `initialise()` for `StorageManager` that will proceed to load
+any data from the main `data` directory.
+
+**Step 2:** Firstly, `StorageManager` will attempt to create the main `data` directory follow by the `main.json` file
+, only if they have not been created yet. This is to ensure that on the **first** time execution of TermiNUS, 
+all necessary file and folder are created.
+
+> 📝 **Note:** The `createFolder()` and `createFile()` uses checks from `Files.notExists(:Path)` before
+> creating the folder and file using `Files.createDirectories(:Path)` and `Files.createFile(:Path)` respectively.
+
+![](attachments/StorageLoadSequenceDiagram_part2.png)
+
+**Step 3:** After, ensuring that all required folder and file are created, it will proceed to load any data
+from the `main.json` file into a `ModuleManager` object using `gson` libraries.
+
+**Step 4:** However, if the `main.json` file does not contain any data due to the `main.json` file being
+created in **step 2**, it will create a new `ModuleManager` object and return it back to TermiNUS.
+
+**Step 5:** After loading the data into `ModuleManager` from the `main.json` file, it will proceed to filter any 
+invalid data using a `FilterManager`. The `FilterManager` will iterate through each data in `ModuleManager`
+and removes the invalid ones.
+
+> 📝 **Note:** From this point onwards, the ModuleManager will only contain valid data that matches the
+> criteria set by TermiNUS. One example of the filter done by `FilterManager` is **module code** of `NusModule` cannot have spaces.
+
+**Step 6:** With the validated `ModuleManager`, it will load any `Note` data for each `NusModule` in `ModuleManager` from its respective **module** folder.
+The **nus module** mentioned here are the ones currently in the `ModuleManager` and the folder containing the `Note` file
+has the name of the **nus module**.
+
+> 📝 **Note:** The nus modules in the `main.json` file represents the `NusModule` that should be in TermiNUS when
+> TermiNUS gets executed. Any other folder within the main `data` directory with its name not
+> in `ModuleManager` will be ignored.
+
+> 📝 **Note:** Any `Note` file that causes an error while performing file I/O operations, that `Note` file
+> will be ignored and the program will proceed to load the next `Note` file if any.
+
+**Step 7:** Once the `Note` has been loaded into `ModuleManager` under each of its respective `NusModule`, 
+it will return this `ModuleManager`.
+
+##### 4.5.2.2 Design Consideration
+
+**Aspect: Creates missing folder of existing NusModule.**
+
+| Approach                                                                    | Pros                                                                | Cons                                                                                  |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Create a folder for the `NusModule` if its folder does not exists.          | Synchronize folder data with current `ModuleManager` data.          | Extra file I/O operations needed.                                                     |
+| Do nothing and proceed to check for the next `NusModule` in `ModuleManager` | No need to perform additional file I/O operation to create folders. | Current `NusModule` in `ModuleManager` does not reflect in the main `data` directory. |
+
+**Chosen Solution:** Do not create the missing folders of existing `NusModule` in `ModuleManager`. By performing 
+the additional filo I/O operation to create a folder may result in an IO Exception due to not being able to
+create the specified folder. Due to this, it may abort loading of any notes for any other `NusModule` in
+ModuleManager. Secondly, this method is meant to load existing data and not to create any data that is not
+the main `data` directory or the `main.json` file.
 
 ## 5. Documentation, Logging, Testing and DevOps
 

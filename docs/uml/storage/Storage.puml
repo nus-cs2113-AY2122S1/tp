@@ -28,7 +28,7 @@ PdfStorage --|> Storage
 JsonStorage --|> Storage
 FolderStorage --|> Storage
 
-class StorageManager {
+class StorageManager #mistyrose{
   - isDisabled : Boolean
   - baseDirectory : Path
   + StorageManager(Path baseDirectory, String mainJsonFileName)
@@ -38,33 +38,33 @@ class StorageManager {
   + save() : void
 }
 
-class NoteStorage {
+class NoteStorage #mistyrose{
   + execute() : void
   # createNoteFile() : void
   # loadNoteIntoModuleManager() : void
   # saveAllNotes() : void
 }
 
-class PdfStorage {
+class PdfStorage #mistyrose{
   + execute() : void
   # exportModuleNotes() : void
 }
 
-class JsonStorage {
+class JsonStorage #mistyrose{
   + execute() : void
   + loadJson() : ModuleManager
   # createJson() : void
   # saveJson() : void
 }
 
-class FolderStorage{
+class FolderStorage #mistyrose{
   + execute() : void
   # createModuleFolder() : void
   # deleteModuleFolder() : void
   # renameModuleFolder() : void
 }
 
-class Storage {
+class Storage #mistyrose{
  + createFolder(Path folderPath) : void
  + createFile(Path filePath) : void
  + readFile(Path filePath) : String
@@ -79,7 +79,7 @@ class Storage {
 
 }
 
-class FilterManager {
+class FilterManager #mistyrose{
   + filter(ModuleManager moduleManager) : void
   # filterLink(ContentManager<Link> linkContentManager) : void
   # filterQuestion(ContentManager<Question> questionContentManager) : void

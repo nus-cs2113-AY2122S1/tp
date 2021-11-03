@@ -1,11 +1,17 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-participant ":Terminus" as Terminus
-participant ":StorageManager" as StorageManager
+skinparam sequenceMessageAlign center
 
-participant ":Storage" as Storage
-participant ":JsonStorage" as JsonStorage
+box Terminus #whitesmoke
+participant ":Terminus" as Terminus #white
+endbox
+
+box Storage #lightpink
+participant ":StorageManager" as StorageManager #mistyrose
+participant ":Storage" as Storage #mistyrose
+participant ":JsonStorage" as JsonStorage #mistyrose
+endbox
 
 activate Terminus
 Terminus -> StorageManager : initialise()
@@ -16,7 +22,9 @@ Create Storage
 return storage
 StorageManager -> Storage : createFolder(:Path)
 activate Storage
+|||
 return
+destroy Storage
 StorageManager -> JsonStorage : execute(null : ModuleManager, CREATE : StorageActionEnum)
 activate JsonStorage
 note left: Create data folder and \nmain json file \nif they do not exists
