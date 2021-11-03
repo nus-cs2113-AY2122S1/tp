@@ -110,7 +110,7 @@ public class TextUi {
     public static String printAskConfirmation(Lesson lesson) {
         String output = "Note that conflicting lessons will override current lesson/event in timetable\n"
                 + "Are you sure you want to add " + lesson.lessonDetails()
-                + " as it conflicts with your current timetable (y/n)";
+                + " as it conflicts with your current timetable (y/n): ";
         System.out.print(output);
         String input = in.nextLine();
         while (input.isEmpty()) {

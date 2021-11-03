@@ -12,9 +12,6 @@ public class HelpCommand extends Command {
     private static final String FIXED_SYNTAX_FORMAT = "| %-32.32s";
     private static final String FIXED_ACTION_FORMAT = "| %-55.55s|";
     private static final String FIXED_SERIAL_FORMAT = "| %-3.3s";
-    private static final String FIXED_SPACING = "%8.8s";
-
-    private ArrayList<String> commandList = new ArrayList<>();
 
     public HelpCommand() {
 
