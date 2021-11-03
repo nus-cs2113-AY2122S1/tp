@@ -89,6 +89,14 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    private boolean hasDuplicateField(String input, String saved) {
+        return cleanString(saved).equals(cleanString(input));
+    }
+
+    private String cleanString(String input) {
+        return input.replace(" ", "").toLowerCase();
+    }
+
     //@@author ng-andre
     private boolean[] hasEditedFields(String[] contactDetails) {
         boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
@@ -96,14 +104,6 @@ public class EditContactCommand extends Command {
             hasEditedField[i] = (contactDetails[i] != null);
         }
         return hasEditedField;
-    }
-
-    private boolean hasDuplicateField(String input, String saved) {
-        return cleanString(saved).equals(cleanString(input));
-    }
-
-    private String cleanString(String input) {
-        return input.replace(" ", "").toLowerCase();
     }
 
     //@@author ng-andre
