@@ -7,7 +7,6 @@ import seplanner.exceptions.StorageException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.modules.ModuleMapping;
-import seplanner.ui.UiStorage;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
@@ -97,8 +96,8 @@ public class SelectedUniversityStorage extends UserStorage {
                                       UniversityList universitySelectedList,
                                       UniversityList universityMasterList)
             throws InvalidUniversityException {
-        if ((universityMasterList.searchUniversity(universityName))
-                && !(universitySelectedList.searchUniversity(universityName))) {
+        if ((universityMasterList.isExistUniversity(universityName))
+                && !(universitySelectedList.isExistUniversity(universityName))) {
             universitySelectedList.addUniversity(new University(universityName, moduleMappings,
                     universityMasterList));
         } else {

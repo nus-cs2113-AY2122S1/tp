@@ -18,7 +18,7 @@ public class AddUniCommand extends Command {
         universitySelectedList.addUniversity(universityToAdd);
         this.universityIndexToAdd = universityToAdd.getMasterListIndex(universityMasterList);
         assert universitySelectedList.getSize() != 0;
-        assert universitySelectedList.searchUniversity(universityToAdd.getName());
+        assert universitySelectedList.isExistUniversity(universityToAdd.getName());
         assert universitySelectedList.get(universitySelectedList.getSize() - 1)
                 .getName().equals(universityToAdd.getName());
         storage.updateSelectedUniversityList(universitySelectedList);
