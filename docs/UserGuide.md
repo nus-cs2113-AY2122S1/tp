@@ -81,6 +81,8 @@ Format (with deadline): `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
 ⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+ 
 Usage examples: 
 
 `create abs`
@@ -153,6 +155,8 @@ Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
 * Note the comma  `,`  separating the command arguments
 * Sets and reps are entered in the form of two numbers separated by a space 
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+
 Usage examples:
 
 `add squats, 5 10, 1`  = squats, 5 sets of 10 reps, add to workout 1
@@ -174,6 +178,8 @@ Marks an exercise from a specified workout as done
 
 Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+
 Usage example:
 
 `done 1, 2` = mark exercise 1 from workout 2 as done
@@ -192,6 +198,8 @@ ________________________________________________________
 Edits an exercise in a specified workout
 
 Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Examples of usage:
 
@@ -232,6 +240,8 @@ ________________________________________________________
 Removes an exercise from a specified workout
 
 Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Examples of usage:
 
@@ -381,7 +391,7 @@ go.
 
 Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
-Note: Include WORKOUT_INDEX only when you want to clear exercises.
+⚠️ Include `WORKOUT_INDEX` only when you want to clear exercises.
 
 Example of usage: 
 
