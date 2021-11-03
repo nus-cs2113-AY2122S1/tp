@@ -27,7 +27,7 @@
 
 ## Acknowledgements
 
-The documentation and class organization of the code is done with some reference to the [AB-3 repository](https://github.com/se-edu/addressbook-level3).
+The documentation and class organization of this project is done with some reference to the [AB-3 repository](https://github.com/se-edu/addressbook-level3).
 
 ## Setting up, getting started
 
