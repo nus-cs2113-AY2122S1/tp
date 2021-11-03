@@ -6,9 +6,9 @@ import medbot.person.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static medbot.ui.Ui.END_LINE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ListTest {
 
@@ -26,8 +26,7 @@ public class ListTest {
         try {
             patientList.addPerson(patient);
         } catch (Exception e) {
-            //Should not have exceptions thrown
-            e.printStackTrace();
+            fail("Cannot add the person to the list");
         }
     }
 
@@ -42,13 +41,11 @@ public class ListTest {
         });
         String expectedMessage = "The patient with IC S1234567A is already in the record." + END_LINE;
         String actualMessage = medBotException.getMessage();
-
         assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
     public void testAddPerson_personIcDoesNotExist_Success() {
-
         Patient patientWithDiffId = new Patient();
         patientWithDiffId.setName("Charlie");
         patientWithDiffId.setIcNumber("S1231231B");
@@ -57,8 +54,7 @@ public class ListTest {
         try {
             actualPatientId = patientList.addPerson(patientWithDiffId);
         } catch (Exception e) {
-            //Should not have exceptions thrown
-            e.printStackTrace();
+            fail("Cannot add the person to the list");
         }
         //Should be second patient in the list
         assertEquals(expectedPatientId, actualPatientId);
@@ -86,8 +82,7 @@ public class ListTest {
         try {
             actualMessage = patientList.getPersonInfo(existingPatientId);
         } catch (Exception e) {
-            //No exception should be thrown
-            e.printStackTrace();
+            fail("No person with that Id");
         }
 
         String name = "Adam";
@@ -127,14 +122,12 @@ public class ListTest {
         try {
             patientList.hidePerson(existingPatientId);
         } catch (Exception e) {
-            //No exception should be thrown
-            e.printStackTrace();
+            fail("Person have already been hidden");
         }
 
         MedBotException medBotException = assertThrows(MedBotException.class, () -> {
             patientList.hidePerson(existingPatientId);
         });
-
         String expectedMessage = "The patient with ID " + existingPatientId + " is already hidden." + END_LINE;
         String actualMessage = medBotException.getMessage();
 
@@ -180,15 +173,13 @@ public class ListTest {
         try {
             patientList.hidePerson(existingPatientId);
         } catch (Exception e) {
-            //No exception should be thrown
-            e.printStackTrace();
+            fail("Person have already been hidden");
         }
 
         try {
             patientList.showPerson(existingPatientId);
         } catch (Exception e) {
-            //No exception should be thrown
-            e.printStackTrace();
+            fail("Person have already been shown");
         }
 
         boolean isHidden = patientList.getPersonIsHidden(existingPatientId);

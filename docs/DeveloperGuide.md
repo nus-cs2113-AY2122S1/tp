@@ -22,8 +22,7 @@
 
 ## 1. Acknowledgements
 
-* Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
-
+* [SE-EDU AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 ## 2. Introduction
 
 MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
@@ -36,6 +35,7 @@ scheduler appointments between them and medical staff.
 Given below is a quick overview of the main components of MedBot and how they interact with one another.
 
 #### 3.1.1 Main Components
+![MedBot Architecture Diagram](diagrams/ArchitectureDiagram.png)
 
 The main class of MedBot is the `MedBot` class. It is responsible for initialising the other core components of MedBot
 at application startup and for handling the interactions between these components.
