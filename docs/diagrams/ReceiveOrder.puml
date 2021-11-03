@@ -17,23 +17,21 @@ autoactivate on
 mainFrame sd Logic for ReceiveOrderCommand
 
 activate receiveordercommand
-receiveordercommand -> receiveordercommand : isStockParametersValid()
+receiveordercommand -> receiveordercommand : isStockParametersValid(ui: Ui, medicines: ArrayList<Medicines>, name: String)
 receiveordercommand -> stockvalidator : new StockValidator()
 receiveordercommand <-- stockvalidator
 
 receiveordercommand -> receiveordercommand : checkStockExist
 receiveordercommand --> receiveordercommand
-receiveordercommand -> stockvalidator : containsInvalidParameters()
-receiveordercommand <-- stockvalidator : isInvalidParameter
+receiveordercommand -> stockvalidator : containsInvalidParametersAndValues(ui: Ui, medicines: ArrayList<Medicine>,\nparameters: LinkedHashMap<String, String>, requiredParameters: String[],\noptionalParameters: String[], commandSyntax: String,\nrequiresOptionalParameters: boolean, validator: MedicineValidator)
+receiveordercommand <-- stockvalidator : isInvalidInput
 
-opt !isInvalidParameter
-    receiveordercommand -> stockvalidator : containsInvalidParameterValues()
-    receiveordercommand <-- stockvalidator : isInvalidParameterValues
-    receiveordercommand --> receiveordercommand
-    receiveordercommand -> addstockcommand : execute()
-    deactivate addstockcommand
-end
-
+receiveordercommand --> receiveordercommand
+create addstockcommand
+receiveordercommand -> addstockcommand : new AddStockCommand(parameters: LinkedHashMap<String, String>)
+receiveordercommand <-- addstockcommand
+receiveordercommand -> addstockcommand : execute()
+deactivate addstockcommand
 
 
 
