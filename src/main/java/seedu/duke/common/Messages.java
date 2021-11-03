@@ -58,7 +58,6 @@ public class Messages {
     // Add Commands
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate of an existing ID!";
 
-
     // Unknown
     public static final String UNKNOWN_MESSAGE = "  (!) Invalid Command" + System.lineSeparator()
             + "  (!) Type 'help' to view available commands";
@@ -105,7 +104,7 @@ public class Messages {
     public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
     public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
     public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
-    public static final String EDIT_ITEM_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited item details:";
     public static final String EDIT_UNCHANGED_TITLE = "  (!) New title is the same as the existing title";
     public static final String EDIT_UNCHANGED_ID = "  (!) New ID is the same as the existing ID";
     public static final String EDIT_UNCHANGED_AUTHOR = "  (!) New author is the same as the existing author";
@@ -138,8 +137,8 @@ public class Messages {
     public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
     public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: edit ID KEY/ATTRIBUTE";
-    public static final String EDIT_ITEM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID [t|i]/ATTRIBUTE";
+    public static final String EDIT_MISCELLANEOUS_INVALID_FORMAT = "  (!) Invalid/missing values"
+            + System.lineSeparator() + "  (!) Format: edit ID [t|i]/ATTRIBUTE";
     public static final String EDIT_AUDIO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: edit ID [t|i|a|d]/ATTRIBUTE";
     public static final String EDIT_BOOK_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
