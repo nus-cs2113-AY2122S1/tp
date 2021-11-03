@@ -19,6 +19,7 @@
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
   15. [Saving data](#15-saving-data)
   16. [Editable data file](#16-editable-data-file)
+  17. [Automatic sorting of Workouts](#17-automatic-sorting-of-workouts)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -440,6 +441,29 @@ directly by editing that data file.
 
 ❗  **Caution**: If your changes to the data file is detected to be corrupted or does not conform to GetJackd's
 saved file format (json), GetJack'd will not run.
+
+### 17. Automatic sorting of Workouts
+
+GetJackd automatically sorts your workouts by their deadlines every time you add a new workout to your workout list. The
+workouts will be sorted in descending order where workouts with the earliest deadlines being on top. Workouts without 
+deadlines will be at the bottom of the list and ranked according to the time they were added to your workout list. 
+
+Example (key in the following commands in this order): 
+1. `create test`
+2. `create xmas workout, 2021-12-25`
+3. `create halloween workout, 2021-10-31`
+4. `create test 2`
+
+Expected final Workout List:
+```
+________________________________________________________
+Workout list:
+1. halloween workout finish by: 31 Oct 2021
+2. xmas workout finish by: 25 Dec 2021
+3. test
+4. test 2
+________________________________________________________
+```
 
 ## FAQ
 
