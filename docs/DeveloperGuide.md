@@ -15,6 +15,7 @@
 * [Implementation](#implementation)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
+    * [Save file formatting](#save-file-formatting)
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
@@ -181,7 +182,7 @@ The `Task` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)  
 
-The storage component makes use of the serializing methods in the `TaskList`, `LessonList`, and `ModuleList` classes to save data to the `data` folder.
+The `Storage` component makes use of the serializing methods in the `TaskList`, `LessonList`, and `ModuleList` classes to save data to the `data` folder.
 It also reads data from a given path into strings which can be utilized by those 3 list classes to create a list.
 
 The `Storage` component has methods that:
@@ -215,6 +216,59 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 2. An ArrayList of Strings is created.
 3. BufferedReader is used to read each line of data from the path and stored into the ArrayList. (with each item in the array representing 1 line in the file)
 4. BufferedReader is closed and the function returns the ArrayList containing the read data.
+
+### Save file formatting
+
+Data for user added tasks, lessons and modules are stored in the `task.txt`, `lesson.txt` and `module.txt` files in the data folder respectively.
+
+The format of the save files are as follows:
+
+#### Tasks:
+
+```text
+[Completion status] | [Task title] | [Day of the week] | [Priority] | [Information]
+```
+
+* `Completion status`: "0" when not marked as done, "1" when marked as done.
+* `Task title`: The full title of the task.
+* `Day of the week`: The day of the week in full.
+* `Priority`: The priority in caps. Possible priorities are low, medium and high.
+* `Information`: The user given information for the task.
+
+Example: `1 | CS2113 tP | Thursday | HIGH | Do Dev Guide`
+
+#### Lessons:
+
+```text
+[Lesson title] | [Day of the week] | [Start time] | [End time] | [Lesson URL]
+```
+
+* `Lesson title`: The full title of the lesson.
+* `Day of the week`: The day of the week in full.
+* `Start time`: The start time of the lesson. In `HH:MM AM/PM` format.
+* `End time`: The end time of the lesson. In `HH:MM AM/PM` format.
+* `Lesson URL`: The user given lesson url.
+
+Example: `CS2113 Tutorial | Friday | 02:00 PM | 04:00 PM | www.google.com`
+
+#### Modules:
+
+```text
+[Module code] | [Module title] | [Number of MCs] | [Grade]
+```
+
+* `Module code`: The module code of the module.
+* `Module title`: The title of the module.
+* `Number of MCs`: The number of modular credits of the module
+* `Grade`: The grade assigned to the module.
+
+Example: `CS2113T | Software Engineering & Object-Oriented Programming | 4 | A-`
+
+Only a minimalist version of the module information is stored in the save file. 
+This is because the full module information can be very detailed and lengthy, which would be impractical to be stored in full here.
+Hence, only the regularly used information for running the app is stored here.
+
+Instead, detailed full module information will only be retrieved from the `ModuleInfo.json` file directly when needed.
 
 ## Appendix: Requirements
 
