@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -26,15 +27,11 @@ public class MemberStorage {
                 initializeMemberFile(memberFile);
                 System.out.println("Member file not detected. Creating.");
                 assert memberFile != null : "duke member file should be created";
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("I/O error has occurred");
             }
         } else {
-            try {
-                System.out.println("CCA Members file found & loaded");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            System.out.println("CCA Members file found & loaded");
             loadMemberFile(memberFile, memberList);
         }
     }
@@ -68,7 +65,7 @@ public class MemberStorage {
                 index++;
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("file not found!");
         } catch (NoSuchElementException e) {
             Ui.printEmptyMembersFile();
         }
@@ -89,8 +86,8 @@ public class MemberStorage {
             memberWriter.write(',');
             memberWriter.write("phone number");
             memberWriter.write('\n');
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 
@@ -121,8 +118,8 @@ public class MemberStorage {
                 memberWriter.write(memberList.getMemberPhoneNumber(i));
                 memberWriter.write('\n');
             }
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 

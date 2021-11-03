@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -26,8 +27,8 @@ public class AttendanceStorage {
             } else {
                 new File(AttendanceFolderPath).mkdirs();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("I/O error has occurred");
         }
     }
 
@@ -67,7 +68,7 @@ public class AttendanceStorage {
                 attendanceList.addAttendance(attendance);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("file not found!");
         }
     }
 
@@ -89,8 +90,8 @@ public class AttendanceStorage {
             } else {
                 initializeAttendanceCsv(attendanceList, attendance);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch ( IOException e) {
+            System.out.println("I/O error has occurred");
         }
     }
 
@@ -108,8 +109,8 @@ public class AttendanceStorage {
             File attendanceCsvFile = new File(dukeAttendanceFilePath);
             attendanceCsvFile.createNewFile();
             writeFirstAttendance(attendanceCsvFile, attendance);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("I/O error has occurred");
         }
     }
 
@@ -129,8 +130,8 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(attendance.getMemberName());
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write(attendance.getAttended());
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 
@@ -157,8 +158,8 @@ public class AttendanceStorage {
                     dukeAttendanceWriter.write('\n');
                 }
             }
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 
@@ -207,14 +208,14 @@ public class AttendanceStorage {
      * @param attendanceList the current attendance list.
      * @param trainingName
      */
-    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName) {
+    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName)  {
         File currentDir = new File("");
         try {
             String AttendanceFilePath = currentDir.getCanonicalPath() + "/Attendance/" + trainingName + ".csv";
             File SpecificAttendanceFile = new File(AttendanceFilePath);
             rewriteAttendanceCsv(attendanceList, SpecificAttendanceFile, trainingName);
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch( IOException e) {
+            System.out.println("I/O error has occurred");
         }
     }
 }
