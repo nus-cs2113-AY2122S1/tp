@@ -22,9 +22,11 @@ public class SelectCommand extends Command {
     public SelectCommand(String[] command) {
         isCorrectFormat = true;
         try {
+            // v2.1: already covered in multiWordCommandProtocol
             if (command.length == 1) {
                 throw new DukeException("Please specify what you wish to select.");
             }
+            // v1.1: covered in getItemType
             itemFlag = command[1].trim().toLowerCase();
             if (isValidFlag(itemFlag)) {
                 prepareInputs(command);
