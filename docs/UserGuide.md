@@ -110,6 +110,7 @@ Examples:
 * `delete_class c/CS2101-C03`
 
 <br>
+<hr>
 
 ###Students
 
@@ -178,6 +179,7 @@ Examples:
 * `find_student c/CS2101-D03 k/Jon`
 
 <br>
+<hr>
 
 ### Assessments
 
@@ -258,6 +260,7 @@ Expected Output: <br>
 ![img.png](images/marks/list_marks.png)
 
 <br>
+<hr>
 
 #### Setting mark for a student's assessment: `set_mark`
 Adds a student's marks for an assessment.
@@ -367,6 +370,7 @@ Examples:
 * `sort_by_scores c/CS2113T-F12 o/desc`
 
 <br>
+<hr>
 
 ### Attendance
 
@@ -413,6 +417,7 @@ Examples:
 * `list_comment c/CS2101-D03`
 
 <br>
+<hr>
 
 #### Setting comment for a particular student: `set_comment`
 Sets a comment for a student.
@@ -473,6 +478,8 @@ Format: `archive [f/<FILENAME>]`
 Removes all saved data from the current program.
 
 Format: `reset`
+
+<br>
 
 ## FAQ
 
