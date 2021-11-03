@@ -42,6 +42,14 @@ public class AddStockCommand extends Command {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         String[] optionalParameters = {};
+        String[] requiredParam = {CommandParameters.NAME, CommandParameters.QUANTITY,
+                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+
+        if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParam,
+                optionalParameters)) {
+            return;
+        }
+
         String nameToAdd = parameters.get(CommandParameters.NAME);
         String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
 
