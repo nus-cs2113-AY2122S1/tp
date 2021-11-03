@@ -2,6 +2,7 @@ package taa.command;
 
 //@@author leyondlee
 import taa.Ui;
+import taa.command.comment.DeleteCommentCommand;
 import taa.teachingclass.ClassList;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.assessment.DeleteAssessmentCommand;
@@ -24,9 +25,9 @@ import taa.command.student.AddStudentCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.student.EditStudentCommand;
 import taa.command.student.FindStudentCommand;
-import taa.command.student.ListCommentCommand;
+import taa.command.comment.ListCommentCommand;
 import taa.command.student.ListStudentsCommand;
-import taa.command.student.SetCommentCommand;
+import taa.command.comment.SetCommentCommand;
 import taa.command.student.SortByScoresCommand;
 import taa.exception.TaaException;
 import taa.storage.Storage;
@@ -40,7 +41,8 @@ public class HelpCommand extends Command {
     private static final String STRING_ASSESSMENT = "Assessment";
     private static final String STRING_MARK = "Mark";
     private static final String STRING_ATTENDANCE = "Attendance";
-    private static final String STRING_OTHERS = "Others";
+    private static final String STRING_COMMENT = "Comment";
+    private static final String STRING_OTHER = "Other";
 
     private static final String MESSAGE_OUTPUT_HEADER = "Available commands:";
 
@@ -69,10 +71,7 @@ public class HelpCommand extends Command {
             new AddStudentCommand(""),
             new EditStudentCommand(""),
             new DeleteStudentCommand(""),
-            new FindStudentCommand(""),
-            new ListCommentCommand(""),
-            new SetCommentCommand(""),
-            new SortByScoresCommand(""),
+            new FindStudentCommand("")
         };
         commandUsages.put(STRING_STUDENT, getUsagesFromCommands(studentCommands));
 
@@ -91,6 +90,7 @@ public class HelpCommand extends Command {
             new DeleteMarkCommand(""),
             new AverageMarksCommand(""),
             new MedianMarkCommand(""),
+            new SortByScoresCommand("")
         };
         commandUsages.put(STRING_MARK, getUsagesFromCommands(markCommands));
 
@@ -101,13 +101,20 @@ public class HelpCommand extends Command {
         };
         commandUsages.put(STRING_ATTENDANCE, getUsagesFromCommands(attendanceCommands));
 
+        Command[] commentCommands = {
+            new ListCommentCommand(""),
+            new SetCommentCommand(""),
+            new DeleteCommentCommand("")
+        };
+        commandUsages.put(STRING_COMMENT, getUsagesFromCommands(commentCommands));
+
         Command[] othersCommands = {
             new ExitCommand(""),
             new HelpCommand(""),
             new ArchiveCommand(""),
             new ResetCommand("")
         };
-        commandUsages.put(STRING_OTHERS, getUsagesFromCommands(othersCommands));
+        commandUsages.put(STRING_OTHER, getUsagesFromCommands(othersCommands));
     }
 
     private static ArrayList<String> getUsagesFromCommands(Command[] commands) {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class DeleteAssessmentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
-    private static final String KEY_ASSESSMENT_NAME = "n";
+    private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String[] DELETE_ASSESSMENT_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_ASSESSMENT_NAME};
 
     private static final String MESSAGE_FORMAT_DELETE_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> %s/<ASSESSMENT_NAME>";

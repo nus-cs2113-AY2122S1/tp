@@ -18,8 +18,8 @@ public class TeachingClass implements ClassChecker {
     private final AssessmentList assessmentList;
 
     public TeachingClass(String id, String name) {
-        this.id = id.toLowerCase();
-        this.name = name;
+        setId(id);
+        setName(name);
         this.studentList = new StudentList();
         this.assessmentList = new AssessmentList();
     }
@@ -33,7 +33,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id.toLowerCase();
     }
 
     public void setName(String name) {

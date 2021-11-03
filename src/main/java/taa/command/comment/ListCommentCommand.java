@@ -1,4 +1,4 @@
-package taa.command.student;
+package taa.command.comment;
 
 //@@author hozhenhong99
 import taa.Ui;

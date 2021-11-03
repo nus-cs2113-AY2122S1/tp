@@ -74,7 +74,7 @@ class AssessmentListTest {
         command2.checkArgument();
         command2.execute(classList, ui, storage);
 
-        String deleteAssessmentInput = "delete_assessment c/cs2113t_f12 n/Midterms";
+        String deleteAssessmentInput = "delete_assessment c/cs2113t_f12 a/Midterms";
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
         command3.parseArgument();
         command3.checkArgument();
@@ -103,7 +103,7 @@ class AssessmentListTest {
         command2.checkArgument();
         command2.execute(classList, ui, storage);
 
-        String editAssessment1 = "edit_assessment c/cs2113t-f12 n/midterms nn/finals";
+        String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms n/finals";
         Command command3 = Parser.parseUserInput(editAssessment1);
         command3.parseArgument();
         command3.checkArgument();
@@ -112,21 +112,21 @@ class AssessmentListTest {
             .getAssessment("finals");
         assertEquals("finals", assessment.getName());
 
-        String editAssessment2 = "edit_assessment c/cs2113t-f12 n/finals m/100";
+        String editAssessment2 = "edit_assessment c/cs2113t-f12 a/finals m/100";
         Command command4 = Parser.parseUserInput(editAssessment2);
         command4.parseArgument();
         command4.checkArgument();
         command4.execute(classList, ui, storage);
         assertEquals(100, assessment.getMaximumMarks());
 
-        String editAssessment3 = "edit_assessment c/cs2113t-f12 n/finals w/50";
+        String editAssessment3 = "edit_assessment c/cs2113t-f12 a/finals w/50";
         Command command5 = Parser.parseUserInput(editAssessment3);
         command5.parseArgument();
         command5.checkArgument();
         command5.execute(classList, ui, storage);
         assertEquals(50, assessment.getWeightage());
 
-        String editAssessment4 = "edit_assessment c/cs2113t-f12 n/finals nn/midterms m/50 w/20";
+        String editAssessment4 = "edit_assessment c/cs2113t-f12 a/finals n/midterms m/50 w/20";
         Command command6 = Parser.parseUserInput(editAssessment4);
         command6.parseArgument();
         command6.checkArgument();

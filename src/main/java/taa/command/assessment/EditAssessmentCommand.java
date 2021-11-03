@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class EditAssessmentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
-    private static final String KEY_ASSESSMENT_NAME = "n";
-    private static final String KEY_NEW_ASSESSMENT_NAME = "nn";
+    private static final String KEY_ASSESSMENT_NAME = "a";
+    private static final String KEY_NEW_ASSESSMENT_NAME = "n";
     private static final String KEY_NEW_MAXIMUM_MARKS = "m";
     private static final String KEY_NEW_WEIGHTAGE = "w";
     private static final String[] EDIT_ASSESSMENT_ARGUMENT_KEYS = {
@@ -27,7 +27,7 @@ public class EditAssessmentCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> "
-        + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME>] [%s/<NEW_MAXIMUM_MARKS>] [%s/<NEW_WEIGHTAGE>]";
+        + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME> | %s/<NEW_MAXIMUM_MARKS> | %s/<NEW_WEIGHTAGE>]";
     private static final String MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE = "Invalid new weightage. "
         + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE = "Invalid new weightage. "
