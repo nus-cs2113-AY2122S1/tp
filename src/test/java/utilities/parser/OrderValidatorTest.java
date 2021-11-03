@@ -39,4 +39,47 @@ public class OrderValidatorTest {
         boolean isInvalid = orderValidator.isValidOrderId(ui, "5", tempOrder);
         assertFalse(isInvalid);
     }
+
+    @Test
+    public void checkValidExpiry_validDate_expectTrue() {
+        String inputDate = "08-10-2021";
+        boolean isValid = orderValidator.isValidDate(ui, inputDate);
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void checkValidExpiry_validDate_expectFalse() {
+        String inputDate = "8 Oct 2021";
+        boolean isInvalid = orderValidator.isValidDate(ui, inputDate);
+        assertFalse(isInvalid);
+    }
+
+    @Test
+    public void checkValidColumn_validColumn_expectTrue() {
+        String inputColumnName = "NAME";
+        boolean isValid = orderValidator.isValidColumn(ui, inputColumnName);
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void checkValidColumn_validColumn_expectFalse() {
+        String inputColumnName = "panadol";
+        boolean isInvalid = orderValidator.isValidColumn(ui, inputColumnName);
+        assertFalse(isInvalid);
+    }
+
+    @Test
+    public void checkValidStatus_validStatus_expectTrue() {
+        String inputColumnName = "PENDING";
+        boolean isValid = orderValidator.isValidStatus(ui, inputColumnName);
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void checkValidStatus_validColumn_expectFalse() {
+        String inputColumnName = "panadol";
+        boolean isInvalid = orderValidator.isValidStatus(ui, inputColumnName);
+        assertFalse(isInvalid);
+    }
+
 }
