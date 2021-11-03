@@ -311,7 +311,7 @@ start dates are optional (well, we wouldn't you to be procrastinating on your go
   * `df` &#8594; Default (This will be the goal type if the parameter is omitted)
 * Start date is an optional parameter. Omitting it will set the start date as today.
 
-**Example:**\
+**Example:**
 
 Command 1: `set n/Reduce spending s/29102021 e/31122021`\
 Command 2: `set n/Exercise more t/ex e/01012022`\
@@ -352,7 +352,7 @@ Command: list
 > a vegetarian` to change from 3 to 2.
 
 ### Update a Goal: `Update`
-Updates an attribute (Name, Date, or Goal Type) of a goal specified by its index.\
+Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
 
@@ -397,9 +397,9 @@ one of these habits will be the metaphorical straw that breaks the camel's back.
 without even pulling a muscle.)
 
 **Format:** `add n/<habit_name> g/<goal_index> i/<interval>`
-* name your habit with an action or task that is preferably achievable (e.g. Run 2.4km, Sleep at 10pm)
-* 'Interval' is a number that indicates the period of time you have to complete the task before the next cycle
-* 'Interval' defined as 0 means that you only have to complete the task once
+* name your habit with an achievable and actionable task (e.g. Run 2.4km, Sleep at 10pm)
+* 'Interval' is a number that indicates the period of time you have to complete the habit before the next cycle
+* 'Interval' defined as 0 indicates a one-off habit; you only have to complete the habit once
 
 **Example:**\
 Input 1: `add n/Run 2.4km g/1 i/7`\
@@ -466,7 +466,7 @@ ________________________________________________________________________________
 ```
 
 ### View all Habits: `view`
-List all habits under a specific goal.
+List all habits under a specific goal for a bird's eye view on your goal.
 
 **Format:** `view g/<goal_index>`
 
