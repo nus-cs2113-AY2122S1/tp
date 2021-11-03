@@ -156,8 +156,8 @@ public class AddCommand extends Command {
             addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
         } catch (AddException e) {
             e.printMessage();
-            logger.log(Level.WARNING, "Module that does not contain any lessons, " +
-                    " module has been added into timetable");
+            logger.log(Level.WARNING, "Module that does not contain any lessons, "
+                    + " module has been added into timetable");
         } catch (UniModsException e) {
             e.printMessage();
             logger.log(Level.WARNING, "Attempt to add module not offered this semester failed");

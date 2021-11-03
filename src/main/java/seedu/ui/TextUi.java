@@ -195,7 +195,8 @@ public class TextUi {
     public static void printAddMessage(String moduleCode) {
         System.out.println("Now adding " + moduleCode + " into timetable");
         System.out.println("[DISCLAIMER] Lessons with the same class number are packed together");
-        System.out.println("[DISCLAIMER] Adding any type of lesson will add all lessons with similar class number into timetable\n");
+        System.out.println("[DISCLAIMER] Adding any type of lesson will add all "
+                + "lessons with similar class number into timetable\n");
     }
 
     public static void printLessonMessage(String lessonType) {

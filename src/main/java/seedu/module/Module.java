@@ -66,7 +66,7 @@ public class Module extends BaseModule {
         return prerequisite;
     }
 
-    public Semester getSemester(int sem) throws UniModsException{
+    public Semester getSemester(int sem) throws UniModsException {
         for (Semester s : semesterData) {
             if (s.getSemester() == sem) {
                 return s;

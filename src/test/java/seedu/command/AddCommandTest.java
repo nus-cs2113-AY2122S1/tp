@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.command.flags.AddFlag;
 import seedu.exceptions.AddException;
 import seedu.exceptions.FetchException;
-import seedu.exceptions.IntegerException;
+import seedu.exceptions.UniModsException;
 import seedu.exceptions.ModuleExistException;
+import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.module.Semester;
@@ -79,7 +80,8 @@ class AddCommandTest {
     }
 
     @Test
-    public void verifySelectionThrowsExceptionWhenInputIsOutOfRange() throws FetchException, AddException {
+    public void verifySelectionThrowsExceptionWhenInputIsOutOfRange() throws FetchException,
+            AddException, UniModsException {
         String invalid = "3";
         Module module = NusMods.fetchModOnline("CG2271");
         Semester semesterData = module.getSemester(1);
