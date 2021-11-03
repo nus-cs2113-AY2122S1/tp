@@ -56,9 +56,8 @@ public class SearchItemCommand extends Command {
             throw new TripNotFoundException();
         }
 
-        Trip trip = tripsList.getTrip(getTripName());
-        Day day = trip.getDay(getDayIndex());
-
+        Trip trip = tripsList.getTrip(tripName);
+        Day day = trip.getDay(dayIndex);
 
         ArrayList<Item> keyString;
         keyString = day.searchItem(itemKey);
