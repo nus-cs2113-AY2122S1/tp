@@ -21,9 +21,9 @@ public class DeleteMember {
      * @param parameter Index of Member object to delete. Note that the actual index is index -1.
      */
     public DeleteMember(MemberList members, Object parameter) {
-        if (parameter instanceof Integer) {
+        if (parameter instanceof Integer && !(parameter instanceof String)) {
             deleteMemberByIndex(members, (Integer) parameter);
-        } else if (parameter instanceof String) {
+        } else if (parameter instanceof String && !(parameter instanceof Integer)) {
             deleteMemberByString(members, (String) parameter);
         } else {
             System.out.println("Error in processing parameter, please input either name or index of member to delete.");
@@ -37,11 +37,10 @@ public class DeleteMember {
             Ui.printDeletedMemberMessage(toDelete);
             File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
-            //Update save file
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such member number...");
+            System.out.println("please input a valid member index or member name");
         } catch (AssertionError e) {
-            System.out.println("The index to delete must be an integer >= 1");
+            System.out.println("please input a valid member index or member name");
         }
     }
 
@@ -52,11 +51,10 @@ public class DeleteMember {
             Ui.printDeletedMemberMessage(toDelete);
             File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
-            //Update save file
         } catch (InvalidMemberException e) {
             Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
         } catch (AssertionError e) {
-            System.out.println("Name cannot be empty!");
+            System.out.println("please input a valid member index or member name");
         }
     }
 }

@@ -70,8 +70,6 @@ public class Ui {
             for (Member member : members.getMemberList()) {
                 System.out.println(member.toString());
             }
-        } else {
-            System.out.println("Sorry there is no members that have similar name as your delete \"" + name + "\"");
         }
     }
 
