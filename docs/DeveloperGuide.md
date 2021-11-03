@@ -140,7 +140,7 @@ scenario where the **user inputs any valid command** in to the application.
 </p>
 
 ### 3.2 UI Component
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/src/main/java/seedu/duke/ui/Ui.java)
+The **main API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/src/main/java/seedu/duke/ui/Ui.java)
 
 <p align="center">
     <img src="images/AmosUMLDiagrams/CD_UIComponent.png">
@@ -152,14 +152,34 @@ class as constant `String` variables to improve readability of the class and all
 to the general user interface easier.
 
 The `Ui.java` class implements the below functionalities using the following methods:
-- `printLogo()`: Prints the application logo when the application is launched.
-- `printCursor()`: Prints the user's cursor to indicate point of entering commands.
-- `readInput()`: Obtain user input entered as a `String` to be parsed later on.
-- `printMessage()`: Prints the system generated messages (i.e. command execution, errors, exceptions...)
-
-
+- `printLogo`: Prints the application logo when the application is launched.
+- `printCursor`: Prints the user's cursor to indicate point of entering commands.
+- `readInput`: Obtain user input entered as a `String` to be parsed later on.
+- `printMessage`: Prints the system generated messages (i.e. command execution, errors, exceptions...)
+in a pre-defined formatting.
 
 ### 3.3 Parser Component
+The **main API** of this component is specified in [`CommandParser.java`](https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/src/main/java/seedu/duke/parser/CommandParser.java)
+
+<p align="center">
+    <img src="images/AmosUMLDiagrams/CD_ParserComponent.png">
+</p>
+
+The Parser Component consists of `CommandParser.java` and other additional helper parsers such as `DateParser.java`, 
+`TaskParser.java`, and `TaskUsageParser.java` classes. Importantly, the `CommandParser.java` class is responsible 
+for parsing the user's input and generating the correct `Command` object to be returned to the `SchedUrMods` class.
+
+Any flags and arguments present in the user's input are extracted out and stored in a `Map<String, String>` as a 
+flag to argument keyset. This `Map` is then parsed as a parameter during the creation of the `Command` object along
+with the **main command** converted into a `CommandEnum`.
+
+The `CommandParser.java` class implements the below functionalities using the following methods:
+- `getCommandOptions`: Converts the command arguments entered by the user into a `Map<String, String>` variable. 
+The purpose of this is to enable direct and easier access to flags based on the name.
+- `createCommand`: Creates the correct `Command` based on the main command and any flags or arguments it may have.
+- `parseCommand`: Parent method that calls the above methods after splitting and sanitising the user's input into
+a `CommandEnum` variable for the **main command** and a `Map<String, String>` variable for the flags or arguments
+- associated with it.
 
 ### 3.4 Command Component
 
