@@ -125,12 +125,6 @@ public class Ui {
     }
 
 
-
-    public void printEditMap(String startCountry, String endCountry, double dist) {
-        System.out.println("\tThe distance from " + startCountry + " to "
-                + endCountry + " is updated to " + dist + ".");
-    }
-
     public void printAddDayToTrip(String tripName, int numberOfDays) {
         assert numberOfDays >= 0 : "Number of days is negative.";
         assert !tripName.equals("all") : "'all' is an invalid tripName.";
@@ -165,7 +159,7 @@ public class Ui {
                 + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
                 + "\n\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
-                + "\tview TRIPNAME: Views  your existing trip and their detail.\n"
+                + "\tview FamilyTrip2021: Views your trip named FamilyTrip2021 and their detail.\n"
 
                 + "\tdelete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n"
 
