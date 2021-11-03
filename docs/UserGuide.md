@@ -21,8 +21,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 ---
 
 ## Table of Contents
-1. [Quick Start](#quick-start)
-2. [Features](#features)
+1. [Quick Start](#1-quick-start)
+
+
+2. [Features](#2-features)
 
    2.1 Help 
    * [View all possible commands: `help`](#view-all-possible-commands-help)
@@ -67,8 +69,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    2.10 Saving of Data
    * [Saving of data](#saving-of-data)
    
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+3. [FAQ](#3-faq)
+
+
+4. [Command Summary](#4-command-summary)
 
 ---
 
@@ -935,7 +939,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 4. FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
@@ -947,7 +951,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 5. Command Summary
+## 4. Command Summary
 
 | Action | Format | Examples |
 | ------------ | ------------- | ------------- |
