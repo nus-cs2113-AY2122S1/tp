@@ -291,7 +291,7 @@ public class Parser {
                 memberName = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/n":
-                trainingName = words[wordIndex].trim();
+                trainingName = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/d":
                 presentOrAbsent = words[wordIndex].trim();
