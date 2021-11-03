@@ -4,19 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
 public class MemberStorage {
 
     /**
-     * This method sets up the duke members csv file. It firsts tries to find if the file exists in the current
-     * directory. If the file exists, it will call the loadDukeMemberFile method. If not it will create a new duke
+     * Sets up the duke members csv file. It will first try to find if the file exists in the current
+     * directory. If the file exists, it will load the CCAMembers CSV file into the current member list. If not it will create a new
      * member csv file in the current directory.
      *
-     * @param members the list of current members
+     * @param memberList the list of current members.
      */
-    public static void setupMemberFile(MemberList members) {
+    public static void setupMemberFile(MemberList memberList) {
         File memberFile = new File("CCAMembers.csv");
         if (!memberFile.exists()) {
             try {
@@ -33,15 +34,15 @@ public class MemberStorage {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            loadMemberFile(memberFile, members);
+            loadMemberFile(memberFile, memberList);
         }
     }
 
     /**
-     * This method loads the duke member file and writes to the current member list. Only happens on start-up.
+     * Loads the duke member file and writes to the current member list. Only happens on start-up.
      *
-     * @param memberFile CSV file to read data from.
-     * @param memberList     MemberList to write to.
+     * @param memberFile CCAMembers CSV file to read data from.
+     * @param memberList the list of current members.
      */
     public static void loadMemberFile(File memberFile, MemberList memberList) {
         String name;
@@ -50,15 +51,13 @@ public class MemberStorage {
         String phoneNumber;
         try {
             Scanner memberScanner = new Scanner(memberFile);
-            memberScanner.nextLine(); //skips the first header row
+            memberScanner.nextLine();
             int index = 1;
             while (memberScanner.hasNextLine()) {
                 String fullMemberDetails = memberScanner.nextLine();
                 assert fullMemberDetails != null : "fullMemberDetails should not be empty";
-                //System.out.println(fullMemberDetails);
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-
-                name = memberDetails[0]; //used this to prevent magic numbers
+                name = memberDetails[0];
                 studentNumber = memberDetails[1];
                 gender = memberDetails[2];
                 phoneNumber = memberDetails[3];
@@ -73,9 +72,9 @@ public class MemberStorage {
     }
 
     /**
-     * This method initializes the headers of duke member file.
+     * Initializes the headers of duke member file.
      *
-     * @param memberFile the member file
+     * @param memberFile the CCAMembers CSV file.
      */
     public static void initializeMemberFile(File memberFile) {
         try (PrintWriter memberWriter = new PrintWriter(memberFile)) {
@@ -93,10 +92,10 @@ public class MemberStorage {
     }
 
     /**
-     * This method rewrites the entire duke member file.
+     * Rewrites the entire duke member file.
      *
-     * @param memberFile the member file
-     * @param memberList     the current member list
+     * @param memberFile the CCAMembers CSV file.
+     * @param memberList the list of current members..
      */
     public static void writeMemberFile(File memberFile, MemberList memberList) {
         int memberListSize = memberList.getMemberListSize();
