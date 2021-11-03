@@ -21,7 +21,7 @@ public class ShoppingListCommand extends Command {
             + "Example: " + COMMAND_WORD + " r/Chicken Soup r/Pork Soup";
 
     public static final String MESSAGE_SHOW_SHOPPING_LIST = "Here is your shopping list!\n";
-    public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
+    public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. One or more of your recipes are not found!";
 
     private final ArrayList<String> recipeDescriptions;
 

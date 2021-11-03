@@ -1,5 +1,10 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ViewIngredientCommand" as ViewIngredientCommand
+participant ":IngredientRepository" as IngredientRepository
 
 autonumber
 
@@ -10,8 +15,9 @@ create ViewIngredientCommand
 Parser -> ViewIngredientCommand: ViewIngredientCommand(ingredientName: String))
 activate ViewIngredientCommand
 
-return
+return viewIngredientCommand
 return command
+destroy Parser
 
 -> ViewIngredientCommand: execute()
 activate ViewIngredientCommand
@@ -20,10 +26,10 @@ ViewIngredientCommand -> IngredientRepository: find(ingredientName: String)
 activate IngredientRepository
 
 IngredientRepository --> ViewIngredientCommand: ingredient: IngredientStorage
-deactivate IngredientRepository
+destroy IngredientRepository
 
-<-- ViewIngredientCommand: String
-deactivate ViewIngredientCommand
+<-- ViewIngredientCommand: ingredient
+destroy ViewIngredientCommand
 
 
 @enduml

@@ -27,6 +27,8 @@ import expiryeliminator.commands.UpdateRecipeCommand;
 import expiryeliminator.commands.UpdateUnitsCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.data.Recipe;
+import expiryeliminator.data.RecipeList;
 import expiryeliminator.commands.DeleteIngredientInRecipeCommand;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
@@ -360,6 +362,7 @@ public class Parser {
                     ShoppingListCommand.MESSAGE_USAGE));
         }
         final ArrayList<String> recipe = new RecipeParser().parse(argsParser.getArgList(PREFIX_MULTIPLE_RECIPE));
+
         return new ShoppingListCommand(recipe);
     }
 

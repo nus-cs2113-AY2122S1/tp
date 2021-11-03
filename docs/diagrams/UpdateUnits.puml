@@ -1,5 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":UpdateUnitsCommand" as UpdateUnitsCommand
+participant ":IngredientRepository" as IngredientRepository
+participant ":IngredientStorage" as IngredientStorage
+participant ":RecipeList" as RecipeList
 
 autonumber
 
@@ -7,11 +14,12 @@ autonumber
 activate Parser
 
 create UpdateUnitsCommand
-Parser -> UpdateUnitsCommand : UpdateUnitsCommand(ingredientName: String, newUnits: String))
+Parser -> UpdateUnitsCommand : UpdateUnitsCommand()
 activate UpdateUnitsCommand
 
-return
+return updateUnitsCommand
 return command
+destroy Parser
 
 -> UpdateUnitsCommand: execute()
 activate UpdateUnitsCommand
@@ -20,21 +28,21 @@ UpdateUnitsCommand -> IngredientRepository: find(ingredientName: String)
 activate IngredientRepository
 
 IngredientRepository --> UpdateUnitsCommand: ingredientStorage: IngredientStorage
-deactivate IngredientRepository
+destroy IngredientRepository
 
 UpdateUnitsCommand -> IngredientStorage: updateUnits(unit: String)
 activate IngredientStorage
 
 IngredientStorage --> UpdateUnitsCommand
-deactivate IngredientStorage
+destroy IngredientStorage
 
 UpdateUnitsCommand -> RecipeList: updateUnits(ingredientName: String, unit: String)
 activate RecipeList
 
 RecipeList --> UpdateUnitsCommand:
-deactivate RecipeList
+destroy RecipeList
 
-<-- UpdateUnitsCommand: String
-deactivate UpdateUnitsCommand
+<-- UpdateUnitsCommand: message
+destroy UpdateUnitsCommand
 
 @enduml
