@@ -144,7 +144,7 @@ public abstract class ExpenseSplittingFunctions {
             }
             assignAmounts(payer, expense,amountBeingPaid);
         } else {
-            // Print error
+            Ui.printErrorWithInitialAmount();
             updateIndividualSpending(expense);
         }
     }
@@ -156,7 +156,7 @@ public abstract class ExpenseSplittingFunctions {
             amountBeingPaid.put(person, Storage.formatForeignMoneyDouble(amountRemaining));
             assignAmounts(payer, expense, amountBeingPaid);
         } else {
-            Ui.printIncorrectAmount(expense.getAmountSpent()); //Change to different error message
+            Ui.printErrorWithInitialAmount();
             updateIndividualSpending(expense);
         }
     }

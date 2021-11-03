@@ -384,6 +384,11 @@ public class Ui {
         System.out.print("Would you like to overwrite your save file? (y/n): ");
     }
 
+    public static void printErrorWithInitialAmount() {
+        System.out.println("Please check the amount you entered for the expense or "
+                + "the amount you allocated to each person again.");
+    }
+
     public static void printNoLastTripError() {
         System.out.println("You may have deleted the most recently modified trip. "
                 + "Please try again with the trip number of the trip you wish to edit.");
