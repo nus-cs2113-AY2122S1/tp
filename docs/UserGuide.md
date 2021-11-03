@@ -398,17 +398,17 @@ Expected outcome of usage:
 ```
 search -g lee
 ____________________________________________________________
-0. Alex Lee
-   Github:   github.com/alexlee
-   Email:    alex.lee@contech.sg
-   Telegram: t.me/alexl33
+Name:     Alex Lee
+Github:   github.com/alexlee
+Email:    alex.lee@contech.sg
+Telegram: t.me/alexl33
 ____________________________________________________________
 
 ____________________________________________________________
-1. John Lee
-   Github:   github.com/johnlee
-   Email:    john.lee@contech.sg
-   Telegram: t.me/johnlee123
+Name:     John Lee
+Github:   github.com/johnlee
+Email:    john.lee@contech.sg
+Telegram: t.me/johnlee123
 ____________________________________________________________
 ```
 
