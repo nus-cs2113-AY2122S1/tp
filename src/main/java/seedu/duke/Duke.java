@@ -12,7 +12,7 @@ import seedu.duke.ui.Ui;
 
 public class Duke {
 
-    private final Ui ui;
+    private Ui ui;
     private ReminderManager reminderManager;
     private TaskManager taskManager;
 
