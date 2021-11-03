@@ -1,6 +1,9 @@
 package seplanner.storage;
 
 import seplanner.constants.Constants;
+import seplanner.exceptions.InvalidMappingException;
+import seplanner.exceptions.InvalidUniversityException;
+import seplanner.exceptions.StorageException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.modules.ModuleMapping;
@@ -34,7 +37,8 @@ public class SelectedUniversityStorage extends UserStorage {
     }
 
     public UniversityList readFile(UniversityList universityMasterList,
-                                          ModuleList moduleMasterList) throws IOException {
+                                   ModuleList moduleMasterList)
+            throws IOException, StorageException {
         File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -67,12 +71,11 @@ public class SelectedUniversityStorage extends UserStorage {
     private void updateMappings(ArrayList<ModuleMapping> moduleMappings,
                                 String line, ModuleList moduleMasterList,
                                 UniversityList universityMasterList,
-                                String universityName) {
+                                String universityName) throws InvalidMappingException {
         String[] attributes = line.split(" # ");
         if (attributes.length != 6) {
             logger.log(Level.SEVERE, "Invalid mapping found in the file.");
-            UiStorage.printInvalidMappingMessage();
-            return;
+            throw new InvalidMappingException();
         }
         Module local = new Module(attributes[0], attributes[1],
                     parseDouble(attributes[2]), moduleMasterList);
@@ -85,21 +88,22 @@ public class SelectedUniversityStorage extends UserStorage {
             moduleMappings.add(newMapping);
         } else {
             logger.log(Level.SEVERE, "Invalid mapping found in the file.");
-            UiStorage.printInvalidMappingMessage();
+            throw new InvalidMappingException();
         }
     }
 
     private void updateUniversityList(String universityName,
                                       ArrayList<ModuleMapping> moduleMappings,
                                       UniversityList universitySelectedList,
-                                      UniversityList universityMasterList) {
+                                      UniversityList universityMasterList)
+            throws InvalidUniversityException {
         if ((universityMasterList.searchUniversity(universityName))
                 && !(universitySelectedList.searchUniversity(universityName))) {
             universitySelectedList.addUniversity(new University(universityName, moduleMappings,
                     universityMasterList));
         } else {
             logger.log(Level.SEVERE, "Invalid university found in the file.");
-            UiStorage.printInvalidUniversityMessage();
+            throw new InvalidUniversityException();
         }
     }
 

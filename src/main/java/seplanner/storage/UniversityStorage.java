@@ -55,7 +55,7 @@ public class UniversityStorage {
     private String[] extractAttributes(String line) {
         String[] attributes = line.split(",");
         if (attributes.length == 7) {
-            return attributes;
+            return editMappedModuleCode(attributes);
         }
         String[] updatedAttributes = new String[7];
         int i = 0;
@@ -79,6 +79,14 @@ public class UniversityStorage {
             }
             i++;
         }
-        return updatedAttributes;
+        return editMappedModuleCode(updatedAttributes);
+    }
+
+    private String[] editMappedModuleCode(String[] attributes) {
+        if (attributes[4].startsWith("\"") && attributes[4].endsWith("\"")) {
+            int length = attributes[4].length();
+            attributes[4] = attributes[4].substring(1, length - 1);
+        }
+        return attributes;
     }
 }

@@ -1,6 +1,7 @@
 package seplanner.storage;
 
 import seplanner.constants.Constants;
+import seplanner.exceptions.InvalidModuleException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.ui.UiStorage;
@@ -29,7 +30,8 @@ public class SelectedModuleStorage extends UserStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public ModuleList readFile(ModuleList moduleMasterList) throws IOException {
+    public ModuleList readFile(ModuleList moduleMasterList)
+            throws IOException, InvalidModuleException {
         File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -44,13 +46,12 @@ public class SelectedModuleStorage extends UserStorage {
     }
 
     private void updateList(ModuleList moduleList, String line,
-                            ModuleList moduleMasterList) {
+                            ModuleList moduleMasterList) throws InvalidModuleException {
         String[] attributes = line.split(" # ");
         if (attributes.length != 3) {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            UiStorage.printInvalidModuleMessage();
             logger.log(Level.SEVERE, "Deleted the invalid module.");
-            return;
+            throw new InvalidModuleException();
         }
         Module newModule = new Module(attributes[0], attributes[1],
                 parseDouble(attributes[2]), moduleMasterList);
@@ -60,7 +61,7 @@ public class SelectedModuleStorage extends UserStorage {
             moduleList.addModule(newModule);
         } else {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            UiStorage.printInvalidModuleMessage();
+            throw new InvalidModuleException();
         }
     }
 }

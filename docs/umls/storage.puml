@@ -4,40 +4,38 @@ skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 
 ModuleStorage "1" ---* Storage
-    ModuleStorage : - {static} logger : Logger
-
-    ModuleStorage : + ArrayList<Module> readModuleList(InputStream inputStream);
-    ModuleStorage : + String[] extractAttributes(String line);
+    ModuleStorage : + readModuleList(InputStream inputStream) : ArrayList<Module>
+    ModuleStorage : - extractAttributes(String line) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" -----* Storage
-    SelectedUniversityStorage : - {static} logger : Logger;
-    SelectedUniversityStorage : + updateSelectedUniversityList()
-    SelectedUniversityStorage : + readSelectedUniversityList() : ArrayList<University>
+    SelectedUniversityStorage : + updateFile(UniversityList universityList)
+    SelectedUniversityStorage : + readFile(UniversityList universityMasterList, ModuleList moduleMasterList) : UniversityList
+    SelectedUniversityStorage : - updateMappings(ArrayList<ModuleMapping> moduleMappings, String line, ModuleList moduleMasterList, UniversityList universityMasterList, String universityName)
+    SelectedUniversityStorage : - updateUniversityList(String universityName, ArrayList<ModuleMapping> moduleMappings, UniversityList universitySelectedList, UniversityList universityMasterList)
+    SelectedUniversityStorage : - isMappingExist(ArrayList<ModuleMapping> mappings, ModuleMapping searchMapping) : boolean
 
 UserStorage <|-- SelectedModuleStorage
 SelectedModuleStorage "1" ------* Storage
-     SelectedModuleStorage : - {static} logger : Logger
-     SelectedModuleStorage : + updateSelectedModuleList()
-     SelectedModuleStorage : + readSelectedModuleList() : ArrayList<Module>
+     SelectedModuleStorage : + updateFile(ModuleList moduleList)
+     SelectedModuleStorage : + readFile(ModuleList moduleMasterList) : ModuleList
+     SelectedModuleStorage : - updateList(ModuleList moduleList, String line, ModuleList moduleMasterList)
 
 UniversityStorage "1" ---* Storage
-    UniversityStorage : - {static} logger : Logger
-    UniversityStorage : + readUniversityList() : ArrayList<University>
-    UniversityStorage : + extractAttributes() : String[]
-    UniversityStorage : + extractAttributes() : String[];
+    UniversityStorage : + readFile(InputStream inputStream, ModuleList moduleMasterList) : ArrayList<University>
+    UniversityStorage : - extractAttributes(String line) : String[]
+    UniversityStorage : - editMappedModuleCode(String[] attributes) : String[]
 
 class UserStorage {
-    # loadFile() : File;
+    # loadFile(String filepath) : File
 }
-class Storage {
-    - {static} logger : Logger;
 
+class Storage {
     + readModuleList() : ArrayList<Module>
-    + readUniversityList() : ArrayList<University>
-    + readSelectedModuleList() : ArrayList<Module>
-    + readSelectedUniversityList() : ArrayList<University>
-    + updateSelectedModuleList()
-    + updateSelectedUniversityList()
+    + readUniversityList(ModuleList moduleMasterList) : ArrayList<University>
+    + readSelectedModuleList(ModuleList moduleMasterList) : ModuleList
+    + readSelectedUniversityList(UniversityList universityMasterList, ModuleList moduleMasterList) : UniversityList
+    + updateSelectedModuleList(ModuleList moduleList)
+    + updateSelectedUniversityList(UniversityList universityList)
 }
 @enduml
