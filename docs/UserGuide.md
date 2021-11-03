@@ -414,7 +414,6 @@ Examples:
 * `list_comment c/CS2101-D03`
 
 <br>
-<hr>
 
 #### Setting comment for a particular student: `set_comment`
 Sets a comment for a student.
@@ -444,6 +443,7 @@ Examples:
 * `delete_comment c/CS2113T-F12 s/5`
 
 <br>
+<hr>
 
 ### Other
 #### Viewing help: `help`
