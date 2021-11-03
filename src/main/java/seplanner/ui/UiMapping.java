@@ -12,7 +12,8 @@ public class UiMapping extends Ui {
         String mappingDetails
                 = " " + mm.localModule.getModuleCode()
                 + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule.getModuleCode()
-                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
+                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName()
+                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleCredits();
         System.out.println(mappingDetails);
     }
 
