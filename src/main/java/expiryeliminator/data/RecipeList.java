@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import expiryeliminator.data.exception.IllegalValueException;
 
+import java.util.Iterator;
 import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -55,7 +56,7 @@ public class RecipeList {
      *
      * @return The list of recipes.
      */
-    public TreeMap<String,Recipe> getRecipes() {
+    public TreeMap<String, Recipe> getRecipes() {
         return recipes;
     }
 
@@ -103,7 +104,7 @@ public class RecipeList {
      * Updates units of specified ingredient in all recipes.
      *
      * @param ingredientName The name of the ingredient.
-     * @param newUnits The new units to change to.
+     * @param newUnits       The new units to change to.
      */
     public void updateUnits(String ingredientName, String newUnits) {
         //iterate through all recipes
@@ -117,26 +118,68 @@ public class RecipeList {
         }
     }
 
-    public RecipeList updateRecipe(RecipeList recipes, Recipe recipe)
-            throws NotFoundException, IllegalValueException {
+    /**
+     * Updates the quantities of ingredients in a recipe.
+     *
+     * @param recipes     The whole recipe list.
+     * @param recipe      The recipe that is going to be updated.
+     * @param ingredients The whole ingredient Repository.
+     */
+    public RecipeList updateRecipe(RecipeList recipes, Recipe recipe, IngredientRepository ingredients)
+            throws NotFoundException, IllegalValueException, DuplicateDataException {
         Recipe matchedRecipe = recipes.findRecipe(recipe.getName());
         boolean hasMatchingIngredient = false;
-        if (matchedRecipe != null) {
-            for (IngredientQuantity targetIngredient : recipe.getIngredientQuantities().values()) {
-                for (IngredientQuantity originalIngredient : matchedRecipe.getIngredientQuantities().values()) {
-                    if (targetIngredient.getName().equals(originalIngredient.getName())) {
-                        hasMatchingIngredient = true;
-                        originalIngredient.setQuantity(targetIngredient.getQuantity());
-                    }
-                }
-                if (!hasMatchingIngredient) {
-                    return null;
-                }
-            }
-            recipes.recipes.put(recipe.getName(), matchedRecipe);
-            return recipes;
-        } else {
+        if (matchedRecipe == null) {
             return null;
         }
+        for (IngredientQuantity newIngredient : recipe.getIngredientQuantities().values()) {
+            for (IngredientQuantity originalIngredient : matchedRecipe.getIngredientQuantities().values()) {
+                if (newIngredient.getName().equals(originalIngredient.getName())) {
+                    hasMatchingIngredient = true;
+                    originalIngredient.setQuantity(newIngredient.getQuantity());
+                }
+            }
+            if (!hasMatchingIngredient) {
+                matchedRecipe.add(newIngredient.getName(), newIngredient.getQuantity(), ingredients);
+            }
+            hasMatchingIngredient = false;
+        }
+        recipes.recipes.put(recipe.getName(), matchedRecipe);
+        return recipes;
+    }
+
+    /**
+     * Deletes ingredients in a recipe.
+     *
+     * @param recipes     The whole recipe list.
+     * @param recipe      The recipe that is going to be updated.
+     * @param ingredients The whole ingredient Repository.
+     */
+    public RecipeList deleteIngredientInRecipe(RecipeList recipes, Recipe recipe, IngredientRepository ingredients)
+            throws NotFoundException, IllegalValueException, DuplicateDataException {
+        Recipe matchedRecipe = recipes.findRecipe(recipe.getName());
+        boolean hasMatchingIngredient = false;
+        if (matchedRecipe == null) {
+            return null;
+        }
+        for (IngredientQuantity newIngredient : recipe.getIngredientQuantities().values()) {
+
+            // Use iterator to avoid ConcurrentModificationException
+            Iterator<IngredientQuantity> iterator = matchedRecipe.getIngredientQuantities().values().iterator();
+            while (iterator.hasNext()) {
+                IngredientQuantity originalIngredient = iterator.next();
+                if (newIngredient.getName().equals(originalIngredient.getName())) {
+                    hasMatchingIngredient = true;
+                    iterator.remove();
+                }
+            }
+            if (!hasMatchingIngredient) {
+                return null;
+            }
+            hasMatchingIngredient = false;
+        }
+
+        recipes.recipes.put(recipe.getName(), matchedRecipe);
+        return recipes;
     }
 }
