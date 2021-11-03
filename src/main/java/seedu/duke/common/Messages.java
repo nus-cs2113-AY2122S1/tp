@@ -56,7 +56,7 @@ public class Messages {
             + "  (+) Exit the program: exit";
 
     // Add Commands
-    public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
+    public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate of an existing ID!";
 
     // Unknown
     public static final String UNKNOWN_MESSAGE = "  (!) Invalid Command" + System.lineSeparator()
@@ -100,24 +100,56 @@ public class Messages {
     // Remove
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
     // Edit
-    public static final String EDIT_MESSAGE = "  (+) Edited item details:";
-    public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
+    public static final String EDIT_AUDIO_MESSAGE = "  (+) Edited audio item details:";
+    public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
+    public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
+    public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
+    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_UNCHANGED_TITLE = "  (!) New title is the same as the existing title";
+    public static final String EDIT_UNCHANGED_ID = "  (!) New ID is the same as the existing ID";
+    public static final String EDIT_UNCHANGED_AUTHOR = "  (!) New author is the same as the existing author";
+    public static final String EDIT_UNCHANGED_PUBLISHER = "  (!) New publisher is the same as the existing publisher";
+    public static final String EDIT_UNCHANGED_DURATION = "  (!) New duration is the same as the existing duration";
+    public static final String EDIT_UNCHANGED_ARTIST = "  (!) New artist is the same as the existing artist";
+    public static final String EDIT_UNCHANGED_EDITION = "  (!) New edition is the same as the existing edition";
+
+    // Keys
+    public static final String KEY_TITLE = "t";
+    public static final String KEY_ID = "i";
+    public static final String KEY_ARTIST = "a";
+    public static final String KEY_DURATION = "d";
+    public static final String KEY_PUBLISHER = "p";
+    public static final String KEY_AUTHOR = "a";
+    public static final String KEY_EDITION = "e";
+    public static final String KEY_STATUS = "s";
+    public static final String KEY_CATEGORY = "c";
+    public static final String KEY_USER = "u";
+    public static final String KEY_DUE = "d";
+
+
     // Invalid Formats
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm ID";
+    public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: reserve i/ID u/USER";
+    public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
+    public static final String EDIT_INVALID_ITEM = "  (!) Invalid ID entered. No such item in library";
     public static final String EDIT_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: edit ID marker/attribute";
-    public static final String EDIT_INVALID_AUDIO = "  (!) Attribute Marker not valid for Audio"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, a/ or d/";
-    public static final String EDIT_INVALID_BOOK = "  (!) Attribute Marker not valid for Book" + System.lineSeparator()
-            + "  (!) Should only be t/, i/ or a/";
-    public static final String EDIT_INVALID_MAGAZINE = "  (!) Attribute Marker not valid for Magazine"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or e/";
-    public static final String EDIT_INVALID_VIDEO = "  (!) Attribute Marker not valid for Video"
-            + System.lineSeparator() + "  (!) Should only be t/, i/, p/ or d/";
+            + "  (!) Format: edit ID KEY/ATTRIBUTE";
+    public static final String EDIT_MISCELLANEOUS_INVALID_FORMAT = "  (!) Invalid/missing values"
+            + System.lineSeparator() + "  (!) Format: edit ID [t|i]/ATTRIBUTE";
+    public static final String EDIT_AUDIO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|a|d]/ATTRIBUTE";
+    public static final String EDIT_BOOK_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|a]/ATTRIBUTE";
+    public static final String EDIT_MAGAZINE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|p|e]/ATTRIBUTE";
+    public static final String EDIT_VIDEO_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: edit ID [t|i|p|d]/ATTRIBUTE";
 
     // Generic Errors
-    public static final String WARN_ADDITIONAL_ARGS = "  (*) Additional arguments detected, ignoring them";
+    public static final String WARN_INVALID_ARGS = "  (*) Invalid arguments detected, ignoring them";
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
     public static final String INVALID_DATE = "  (!) Invalid date format! It should be in dd-mm-yyyy";
 }

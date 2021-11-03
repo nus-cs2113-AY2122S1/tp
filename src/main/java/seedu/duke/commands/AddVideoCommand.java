@@ -9,7 +9,11 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.KEY_DURATION;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_PUBLISHER;
+import static seedu.duke.common.Messages.KEY_TITLE;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
 /**
@@ -19,10 +23,6 @@ public class AddVideoCommand extends Command {
     public static final String COMMAND_FORMAT = "  Format: add v t/TITLE i/ID p/PUBLISHER d/DURATION";
     public static final String ADD_MESSAGE = "  (+) Added new video item to the catalogue";
     public static final String COMMAND_WORD = "add v";
-    public static final String KEY_TITLE = "t";
-    public static final String KEY_ID = "i";
-    public static final String KEY_PUBLISHER = "p";
-    public static final String KEY_DURATION = "d";
 
     private HashMap<String, String> args;
     private String title;
@@ -84,7 +84,7 @@ public class AddVideoCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         try {
             Video newVideo = new Video(title, id, status, null, null, publisher, duration);

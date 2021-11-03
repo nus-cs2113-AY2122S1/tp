@@ -9,7 +9,11 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.KEY_EDITION;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_PUBLISHER;
+import static seedu.duke.common.Messages.KEY_TITLE;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
 
@@ -20,10 +24,6 @@ public class AddMagazineCommand extends Command {
     public static final String COMMAND_FORMAT = "  Format: add m t/TITLE i/ID p/PUBLISHER e/EDITION";
     public static final String ADD_MESSAGE = "  (+) Added new magazine item to the catalogue";
     public static final String COMMAND_WORD = "add m";
-    public static final String KEY_TITLE = "t";
-    public static final String KEY_ID = "i";
-    public static final String KEY_PUBLISHER = "p";
-    public static final String KEY_EDITION = "e";
 
     private HashMap<String, String> args;
     private String title;
@@ -85,7 +85,7 @@ public class AddMagazineCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         try {
             Magazine newMagazine = new Magazine(title, id, status, null, null, publisher, edition);
