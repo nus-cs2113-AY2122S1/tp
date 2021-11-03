@@ -111,7 +111,7 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Medication added: Panadol\r\n"
+        String error = "\nMedication added: Panadol\r\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\r\n"
                 + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \r\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\r\n"
