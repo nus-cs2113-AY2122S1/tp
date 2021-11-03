@@ -3,7 +3,9 @@ package seedu.duke.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
@@ -69,6 +71,8 @@ public class MemberStorage {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
         }
     }
 

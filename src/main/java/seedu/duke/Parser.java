@@ -71,6 +71,21 @@ public class Parser {
         return arg.trim().toLowerCase().contains("bye");
     }
 
+    public static boolean isValidPhone(String phone) {
+        if (phone.contains("[a-zA-Z]+")) {
+            return false;
+        } else {
+            return phone.length() == 8;
+        }
+    }
+
+    public static boolean isValidGender(String gender) {
+        return (gender.toLowerCase().matches("m") ||  gender.toLowerCase().matches("f"));
+    }
+
+    public static boolean isValidName(String name) {
+        return !name.matches(".*\\d.*");
+    }
 
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
