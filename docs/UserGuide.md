@@ -9,7 +9,7 @@
   1. [Add a recipe](#1-add-a-recipe-addrecipe)
   1. [Delete a recipe](#2-delete-a-recipe-deleterecipe)
   1. [Look up a recipe](#3-look-up-a-recipe-check)
-  1. [Display all recipes](#4-display-all-recipes-listrecipe)
+  1. [Display all recipes](#4-display-all-recipes-listrecipes)
   1. [Exit Gordon](#5-exit-gordon-exit)
   1. [Lend a hand](#6-lend-a-hand-help)
   1. [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set)
@@ -497,7 +497,7 @@ Instruction | Command format
 [Add a recipe](#1-add-a-recipe-addrecipe) | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 [Delete a recipe](#2-delete-a-recipe-deleterecipe) | `deleteRecipe RECIPE_INDEX`
 [Look up a recipe](#3-look-up-a-recipe-check) | `check RECIPE_NAME`
-[Display all recipes](#4-display-all-recipes-listrecipe) | `listRecipes`
+[Display all recipes](#4-display-all-recipes-listrecipes) | `listRecipes`
 [Exit Gordon](#5-exit-gordon-exit) | `exit`
 [Get some help](#6-lend-a-hand-help) | `help`
 [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set) | `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`
