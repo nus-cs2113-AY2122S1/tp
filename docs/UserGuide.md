@@ -2,11 +2,17 @@
 
 ## What is CCA Manager?
 
-**CCA Manager** is a simple and easy to use command-line based application aimed to assist you, a CCA manager, to easily add, delete or alter information about your 
-CCA members. Moreover, **CCA Manager** also allows you to perform its functions on any training-related activities
-you may have in order to help you organise your CCA's timetable.
+CCA Manager is a **simple and easy to use** organisational planner for CCAs (Co-Curricular Activities) in NUS. It is 
+designed specifically for students who are key appointment holders of such CCAs. Features include **storing and tracking
+of information** on CCA members, training schedules and attendance records which can be accessed quickly via a Command
+Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
+improving other aspects of the CCA.
 
-**CCA Manager** is designed for local students who are familiar with Command Line Interface (CLI) operations.
+This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites) will show you how to 
+set up CCA Manager on your computer. The [Commands](#commands) section will show you the list of commands and how to use
+them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
+
+## Table of contents
 
 * [Pre-requisites](#pre-requisites)
 * [Commands](#commands)
@@ -189,7 +195,7 @@ This means that you will not have to delete the entry and then add a new one lat
         * use `/v` to input _venue_ of training schedule.
 
     * **Format:**
-        * add [/t </n TRAINING_NAME> </a DATE_TIME> </v VENUE>]
+        * add [/t /n <TRAINING_NAME> /a <DATE_TIME> /v <VENUE>]
 
     * **Examples:**
         * `add /t /n Weekly Friday Training 1 /a 5 Nov 2021 /v MPSH 1`
@@ -303,7 +309,7 @@ Have too many training schedules, and can't find the one you want? Just use the 
 ### Add Attendance
 **CCA Manager** can help keep track of which members went for which training with the help of the `add /att` feature.
 
-1. `add /att` This adds entries to the Training List stored in CCA Manager.
+1. `add /att` This adds entries to the Attendance List stored in CCA Manager.
     * The `add /att` keyword requires 3 different arguments:
         * use `/m` to input _member name_ of the student who attended training.
         * use `/n` to input the _training name_ that the student attended.
@@ -311,20 +317,22 @@ Have too many training schedules, and can't find the one you want? Just use the 
           * 1 represents 'Present', while 0 represents 'Absent'
 
     * **Format:**
-        * add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]
+        * add [/att /m <MEMBER_NAME> /n <TRAINING_NAME> /d <1_OR_0>]
 
     * **Examples:**
         * `add /att /m John Hwee /n Weekly Friday Training 1 /d 1`
 
     * **Expected Output:**
    ```
-   FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN 
+   Added an Attendance entry:
+   Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   C:\repos\tP/DukeAttendance/WEEKLY FRIDAY TRAINING 1.csv 
    ```
 
 ### Delete Attendance
 You can delete existing attendance entries with the help of the `delete /att` command.
 
-2. `delete /att` This delete entries from the training list in **CCA Manager**.
+2. `delete /att` This delete entries from the Attendance List in **CCA Manager**.
     * The `delete /att` keyword can delete attendance entries based on index and training name. It takes in two arguments
         * `/t` represents the _training name_ of the attendance to delete from.
         * `/i` represents the _index_ of the attendee to delete.
@@ -332,29 +340,42 @@ You can delete existing attendance entries with the help of the `delete /att` co
     * **Format:**
         * delete [/att /t <TRAINING_NAME> /i <MEMBER_INDEX>]
     * **Examples:**
-        * `delete /att /t Friday Training /i 2` Deletes the second attendee on the attendance list for 'Friday Training'.
+        * `delete /att /t Weekly Friday Training 1 /i 2` deletes the second attendee on the attendance list for 'Weekly Friday Training 1'.
     * **Expected Output:**
    ```
    FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN
    ```
 
 ### List Attendance
-**CCA Manager** allows you to list out all the recorded trainings.
+**CCA Manager** allows you to list out all attendance entries recorded.
 
-2. `list /att` This lists out entries in CCA Manager's Training List.
+2. `list /att` This lists out entries in CCA Manager's Attendance List.
     * `list /att` takes in several arguments
       * use `/t <TRAINING_NAME>` to look for all attendances for a particular training
       * use `/d <1 OR 0>` to further filter the list to show attendances of people who were present or absent
         * 1 represents present; it will show the attendance of members who were present
         * 0 represents absent; it will show the attendance of members who were absent
+    * In addition, there will be a prompt to view the full attendance list that consists of all trainings such as:
+      ```
+      ===== Would you like to list the full attendance sheet? (y / n) =====
+      ```
     * **Format:**
         * list [/att /t <TRAINING_NAME> /d <1_OR_0>]
     * **Examples:**
-        * `list /att /t Friday /d 1`
+        * `list /att /t Weekly Friday Training 1`
+        * `list /att /t Weekly Friday Training 1 /d 1`
     * **Expected Output:**
-      ```
-      FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN
-      ```
+      * Attendance entries for particular training 'Weekly Friday Training 1':
+        ```
+        [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+        [2] Name: MARK LEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [0]
+        [3] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+        ```
+      * Filtered attendance list of 'Weekly Friday Training 1' for those who were present:
+        ```
+        [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+        [2] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+        ```
 
 
 ## Command Summary
