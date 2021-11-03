@@ -212,7 +212,7 @@ public class TestUtil {
     }
 
     /**
-     * Generates the ingredient to be used for comparison of CookedRecipeCommand output
+     * Generates the ingredient to be used for comparison of CookedRecipeCommand output.
      *
      * @return The ingredient "Chicken" for the example recipe
      */
@@ -234,7 +234,7 @@ public class TestUtil {
     }
 
     /**
-     * Generates the ingredient to be used for comparison of CookedRecipeCommand output
+     * Generates the ingredient to be used for comparison of CookedRecipeCommand output.
      *
      * @return The ingredient "Salt" for the example recipe
      */
