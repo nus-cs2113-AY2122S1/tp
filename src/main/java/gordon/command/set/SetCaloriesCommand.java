@@ -13,6 +13,13 @@ public class SetCaloriesCommand extends Command {
         this.newCalories = newCalories;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the setCalories function and prints the corresponding message</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Setting calories...");

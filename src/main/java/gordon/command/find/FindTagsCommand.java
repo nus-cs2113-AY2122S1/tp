@@ -16,6 +16,13 @@ public class FindTagsCommand extends Command {
         this.tags = tags;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the filterByTags function and prints the sorted list of tags</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by tags...");

@@ -15,6 +15,13 @@ public class FindIngredientsCommand extends Command {
         this.ingredients = ingredients;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the filterByIngredients function and prints the sorted list of recipes</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by ingredient...");

@@ -16,6 +16,13 @@ public class FindDifficultyCommand extends Command {
         this.difficulty = difficulty;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the filterByDifficulty function and prints the sorted list of recipes</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by difficulty...");

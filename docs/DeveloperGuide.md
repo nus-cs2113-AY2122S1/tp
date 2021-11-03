@@ -166,39 +166,40 @@ The `Command` class contains all the basic functionality of the Gordon cookbook,
 
 The `Command` class can be classified into 4 main functionalities:
 
-1. Basic Commands: 
-   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
-   * `AddCommand` is where the `addRecipe` feature is executed
-   * `CheckCommand` is where the `checkRecipe` feature is executed
-   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
-   * `ListRecipesCommand` is where the `listRecipes` feature is executed
-   * `HelpCommand` is where the `help` feature is executed
+1. Basic Commands:
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here.
+   * `AddCommand` is where the `addRecipe` feature is executed.
+   * `CheckCommand` is where the `checkRecipe` feature is executed.
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed.
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed.
+   * `HelpCommand` is where the `help` feature is executed.
 
-    #### Example : `AddCommand`
-    
-    `addRecipe Curry /ingredients Curry Sauce + Rice /steps Simmer + Cook`
+   #### Example : `AddCommand`
 
-    #### Expected outcome:
-    
+   `addRecipe Curry Rice /ingredients Curry Sauce + Rice /steps Simmer + Cook rice + Serve`
+
+   #### Expected outcome:
+
     ```
-    Added Curry recipe! Yum!
-    Curry
+    Added Curry Rice recipe! Yum!
+    Curry Rice
     Ingredients needed: 
     1. Curry Sauce
     2. Rice 
     Method: 
     1. Simmer
     2. Cook
+    3. Serve
     ```
 
 2. Set Commands:
-    * The Commands that are required for the `set` feature of Gordon are contained here
-    * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
-    * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
-    * `SetPriceCommand` is where the `set` /price feature of gordon is executed
-    * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
-    * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
-    * `SetTimeCommand` is where the `set` /time feature of gordon is executed
+   * The Commands that are required for the `set` feature of Gordon are contained here.
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed.
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed.
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed.
+   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed.
+   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed.
+   * `SetTimeCommand` is where the `set` /time feature of gordon is executed.
 
    #### Example : `SetDifficultyCommand`
 
@@ -212,40 +213,43 @@ The `Command` class can be classified into 4 main functionalities:
     ```
 
 3. Find Commands:
-   * The Commands that are required for the `find` feature of Gordon are contained here
-   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
-   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
-   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
-   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
-   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
-   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
+   *The Commands that are required for the `find` feature of Gordon are contained here.
+   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed.
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed.
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed.
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed.
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed.
+   * `FindTimeCommand` is where the `find` /time feature of gordon is executed.
 
-    #### Example : `FindDifficultyCommand`
+   #### Example : `FindDifficultyCommand`
 
-    `find /difficulty Hard`
+   `find /difficulty Hard`
 
-    #### Expected outcome:
-    
+   #### Expected outcome:
+
     ```
     Searching by difficulty...
     1. Curry Rice (Difficulty: Hard)
+    2. Coffee (Difficulty: Easy)
     ```
 
 4. Tag Commands:
-   * The Commands that are required for the  `tag` feature of Gordon are contained here
-   * `TagAddCommand` is where the `tag` feature of gordon is executed
-   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
-   * `TagUntagCommand` is where the `untag` feature of gordon is executed
+   * The Commands that are required for the  `tag` feature of Gordon are contained here.
+   * `TagAddCommand` is where the `tag` feature of gordon is executed.
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed.
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed.
 
-    #### Example : `TagAddCommand`
+   #### Example : `TagAddCommand`
 
-    `tag / Curry Rice / Yummy`
+   `tag / Curry Rice / Yummy`
 
-    #### Expected outcome:
-    
+   #### Expected outcome:
+
     ```
     Successfully tagged Curry Rice under Yummy
     ```
+
+
 ### Storage component
 
 The Diagram below is the class diagram for the Storage Class
@@ -336,9 +340,12 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The command given was invalid
-   >  * Gordon shows an error message
+>  * Gordon shows an error message
+>  * Use case resumes on step 1
+>* The recipe name was identical to an existing recipe
+>  * Gordon shows an error message that the recipe already exists
 >  * Use case resumes on step 1
 
 **Use case: `deleteRecipe`**
@@ -351,11 +358,11 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The list is empty
-   >  * Use case ends
+>    * Use case ends
 >* The given index is invalid
-   >  * Gordon shows an error message
+>  * Gordon shows an error message
 >  * Use case resumes from step 2
 
 **Use case: `listRecipes`**
@@ -366,10 +373,10 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The list is empty.
-   >    * Use case ends.
->
+>  * Use case ends.
+
 
 **Use case: `help`**
 >
@@ -388,7 +395,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >2. Program exits.
 >
 >Use case ends
- 
+
 **Use case: `check`**
 >
 >**MSS:**
@@ -397,10 +404,10 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The recipe does not exist.
 >    * Use case ends.
->* Input was entered incorrectly
+>* Name of recipe was entered incorrectly
 >  * Use case resumes from step 1
 
 **Use case: `set`**
@@ -413,11 +420,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The recipe does not exist.
-   >    * Use case ends.
+>     * Use case ends.
 >* Input was entered incorrectly
-   >  * Use case resumes from step 1
+>    * Use case resumes from step 1
+>* User enters an Index that is out of bounds
+>  * Use case resumes from step 1
 
 **Use case: `find`**
 >
@@ -429,7 +438,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions** 
+>>**Extensions** 
 >* The list is empty
 >  * Use case ends
 >* No recipe contains the keyword
@@ -446,7 +455,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The given recipe does not exist
 >  * Gordon shows an error message, notifies User that recipe does not exist
 >  * Use case resumes from step 2
@@ -470,7 +479,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The tag does not exist
 >    * Gordon shows an error message.
 >    * Use case ends
@@ -480,7 +489,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >    * Use case ends
 >
 >* Input fields for tagName or recipeName is left blank
-   >    * Gordon shows an error message, prompts User to enter recipeName or tagName
+>      * Gordon shows an error message, prompts User to enter recipeName or tagName
 >    * Use case resumes from step 1
 
 **Use case: `deleteTag`**
@@ -492,10 +501,10 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The tag does not exist
 >    * Use case ends.
-
+>
 ## Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java `11` or above installed.
