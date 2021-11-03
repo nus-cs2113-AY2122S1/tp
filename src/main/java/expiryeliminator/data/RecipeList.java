@@ -155,7 +155,7 @@ public class RecipeList {
      * @param recipe      The recipe that is going to be updated.
      * @param ingredients The whole ingredient Repository.
      */
-    public RecipeList DeleteIngredientInRecipe(RecipeList recipes, Recipe recipe, IngredientRepository ingredients)
+    public RecipeList deleteIngredientInRecipe(RecipeList recipes, Recipe recipe, IngredientRepository ingredients)
             throws NotFoundException, IllegalValueException, DuplicateDataException {
         Recipe matchedRecipe = recipes.findRecipe(recipe.getName());
         boolean hasMatchingIngredient = false;

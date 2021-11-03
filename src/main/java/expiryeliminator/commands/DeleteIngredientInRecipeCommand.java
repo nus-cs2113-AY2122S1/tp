@@ -20,8 +20,8 @@ public class DeleteIngredientInRecipeCommand extends Command {
             + "No matching recipes or ingredients found, please check your input again\n";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to update recipe: %1$s\n"
             + "There is a duplicate ingredient: %2$s.";
-    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero or " +
-            "negative.";
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero or "
+            + "negative.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes ingredients in a recipe \n"
             + "Parameters: r/RECIPE NAME i/INGREDIENT...\n"
             + "Example: " + COMMAND_WORD
@@ -56,7 +56,7 @@ public class DeleteIngredientInRecipeCommand extends Command {
         }
 
         try {
-            recipes = recipes.DeleteIngredientInRecipe(recipes, recipe, ingredients);
+            recipes = recipes.deleteIngredientInRecipe(recipes, recipe, ingredients);
 
             if (recipes != null) {
                 return String.format(MESSAGE_DELETION_SUCCESSFUL, recipe);

@@ -196,8 +196,7 @@ public class Parser {
      * Creates a AddRecipeCommand from the inputs.
      *
      * @param args Command arguments.
-     * @return a AddRecipeCommand with the recipe name and the ingredients if successful
-     * and an IncorrectCommand if not.
+     * @return AddRecipeCommand with the recipe name and the ingredients if successful and IncorrectCommand if not.
      */
     private static Command prepareAddRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT,

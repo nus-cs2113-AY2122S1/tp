@@ -20,8 +20,8 @@ public class UpdateRecipeCommand extends Command {
             + "No matching recipes or ingredients found, please check your input again\n";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to update recipe: %1$s\n"
             + "There is a duplicate ingredient: %2$s.";
-    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero or " +
-            "negative.";
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero or "
+            + "negative.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the quantity of ingredients"
             + " in the recipe list.\n"
             + "Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...\n"
