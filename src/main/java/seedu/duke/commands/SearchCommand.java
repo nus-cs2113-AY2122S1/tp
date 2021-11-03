@@ -14,11 +14,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static seedu.duke.common.Messages.KEY_CATEGORY;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_STATUS;
+import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
 import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.SEARCH_MESSAGE;
 import static seedu.duke.common.Messages.NO_SEARCH_RESULT;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author silinche
 /**
@@ -28,10 +32,6 @@ import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String KEY_ID = "i";
-    public static final String KEY_TITLE = "t";
-    public static final String KEY_STATUS = "s";
-    public static final String KEY_CATEGORY = "c";
 
     protected HashMap<String, String> args;
     private String id;
@@ -152,7 +152,7 @@ public class SearchCommand extends Command {
             throw new LibmgrException(SEARCH_FORMAT_INCORRECT);
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         ArrayList<Item> fourMatch = new ArrayList<>();
         ArrayList<Item> threeMatch = new ArrayList<>();

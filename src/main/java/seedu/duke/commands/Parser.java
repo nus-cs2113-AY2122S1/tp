@@ -44,7 +44,7 @@ public class Parser {
             } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
                 return new ReturnCommand(input);
             } else if (input.startsWith(EditCommand.COMMAND_WORD)) {
-                return new EditCommand(input);
+                return new EditCommand(extractArgs(input));
             } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
                 return new ReserveCommand(extractArgs(input));
             } else if (input.startsWith(DeadlineCommand.COMMAND_WORD)) {

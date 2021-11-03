@@ -10,8 +10,10 @@ import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_USER;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
 
@@ -23,8 +25,7 @@ public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "res";
     public static final String SUCCESS_RES = "  (+) You have successfully reserved an item:";
     public static final String ERR_RESERVED = "";
-    public static final String KEY_ID = "i";
-    public static final String KEY_USER = "u";
+
 
     protected HashMap<String, String> args;
     protected String id;
@@ -73,7 +74,7 @@ public class ReserveCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
 
         // Get item to be updated

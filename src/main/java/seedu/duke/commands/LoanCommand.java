@@ -11,8 +11,11 @@ import java.util.HashMap;
 import static seedu.duke.common.Messages.INVALID_DATE;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_DUE;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_USER;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.LOANED;
 import static seedu.duke.common.Status.RESERVED;
@@ -26,9 +29,7 @@ public class LoanCommand extends Command {
     public static final String COMMAND_WORD = "loan";
     public static final String SUCCESS_LOAN = "  (+) Item has been loaned out:";
     public static final String ERR_RESERVED = "  (!) Sorry, the item has already been reserved for someone else";
-    public static final String KEY_ID = "i";
-    public static final String KEY_USER = "u";
-    public static final String KEY_DUE = "d";
+
 
     protected HashMap<String, String> args;
     protected String id;
@@ -81,7 +82,7 @@ public class LoanCommand extends Command {
             throw new LibmgrException(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
 
         // Get item to be updated
