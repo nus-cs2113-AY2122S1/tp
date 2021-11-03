@@ -11,11 +11,12 @@ import seedu.duke.ui.Ui;
 public class Duke {
 
     private Ui ui;
+    private CommandParser commandParser;
     private TaskManager taskManager;
 
     public Duke() {
         ui = new Ui();
-
+        commandParser = new CommandParser();
         FileCreator fileCreator = new FileCreator();
         DataManager dataManager = new DataManager(fileCreator);
         taskManager = new TaskManager(dataManager);
@@ -42,7 +43,7 @@ public class Duke {
 
             String userInput = ui.readInput();
 
-            userCommand = CommandParser.parseCommand(taskManager, userInput);
+            userCommand = commandParser.parseCommand(taskManager, userInput);
 
             commandResult = runCommand(userCommand);
 
