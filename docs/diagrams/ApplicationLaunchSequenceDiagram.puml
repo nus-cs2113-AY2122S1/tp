@@ -1,0 +1,43 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "ui:TextUI" as ui
+Participant "parser:Parser" as parser
+Participant "catalogue:Catalogue" as catalogue
+Participant "storage:Storage" as storage
+
+-> libmgr : main()
+activate libmgr
+
+create ui
+libmgr -> ui:TextUI()
+activate ui
+ui -> ui:print(LOGO)
+activate ui
+return
+ui -> ui:print(WELCOME)
+activate ui
+return
+return
+
+create parser
+libmgr -> parser:Parser()
+activate parser
+return
+
+create catalogue
+libmgr -> catalogue:Catalogue()
+activate catalogue
+return
+
+create storage
+libmgr -> storage:Storage(ui:TextUI)
+activate storage
+return
+
+libmgr -> storage:read(catalogue:Catalogue)
+activate storage
+return
+
+@enduml
