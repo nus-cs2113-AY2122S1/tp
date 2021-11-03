@@ -26,7 +26,12 @@ public class SearchCommand extends Command {
             + "specified keyword with the workout or exercise index the keyword.\n"
             + "Format: search [keyword]\n"
             + "\tParameters: KEYWORD\n"
-            + "\tExample: " + COMMAND_WORD + " abs";
+            + "\tExample: " + COMMAND_WORD + " abs"
+            + "\tExample: " + COMMAND_WORD + " 12 Nov 2021"
+            + "\tIMPORTANT: The date must match the format dd MMM yyyy exactly if you want to search by date."
+            + "Tips: To search within a workout, enter that workout, then search for the keyword.\n"
+            + "\tOtherwise, searching in the main level will give you search results from all workouts.\n";
+
 
     public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";
     public static final String MESSAGE_NO_MATCHES_FOUND = "No matches found. ";
@@ -63,7 +68,8 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Filters through a workout list to find workouts that contain a keyword in the workout name or date.
+     * Filters through a workout list to find workouts that contain a keyword in the workout name.
+     * If the user wants to search by date, the date must match exactly, in the format dd mmm yyyy.
      * Index of workouts are preserved in the list.
      *
      * @param workoutList list of workouts that we want to filter through
@@ -75,7 +81,7 @@ public class SearchCommand extends Command {
             if (w.getWorkoutName().toLowerCase(Locale.ROOT).contains(filterString)) {
                 filteredList.add(w);
             } else if (w instanceof DeadlineWorkout
-                    && ((DeadlineWorkout) w).getDeadlineString().toLowerCase(Locale.ROOT).contains(filterString)) {
+                    && ((DeadlineWorkout) w).getDeadlineString().equalsIgnoreCase(filterString)) {
                 filteredList.add(w);
             } else {
                 filteredList.add(null);

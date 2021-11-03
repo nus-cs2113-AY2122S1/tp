@@ -18,7 +18,7 @@ Given below are my contributions to the project.
     - **Justification:** In v1.0, there was only one parser class with methods that were shared between the different commands.
     Splitting this class into the separate classes made the code more object-oriented and easier to read and debug.
     made the code more object-oriented and easier to understand and debug. 
-    - **Credits:** Some logic was retained from the original methods in parser class written by group member QianQi. 
+    - **Credits:** Some logic was retained from the original methods in parser class written by group member Qianqi. 
     some utility methods were also retained in the new Parser class
 - **Enhancement to existing features**: Wrote tests for various Parser classes
 - **Enhancement to existing features**: Minimised the use of flags like "/w" for command parameters.
