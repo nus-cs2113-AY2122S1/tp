@@ -3,6 +3,7 @@ package seedu.duke.command;
 import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
+
 import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddMemberException;
 import seedu.duke.member.Member;
@@ -13,16 +14,16 @@ import seedu.duke.member.MemberList;
  */
 public class AddMember {
 
-    String invalidNameErrorMessage = "Blank name provided. Please input a proper name.";
+    String invalidNameErrorMessage = "Please input a valid name.Name cannot contain numbers or be empty.";
     String invalidStudentNumberErrorMessage = "Invalid student number provided. Please give it in the following "
-            + "format: \n A1234567X where it consist of 1 letter at the start and 7 digits after and ends off "
-            + "with an alphabet";
+            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends off "
+            + "with an capital letter";
     String invalidGenderErrorMessage = "Invalid gender provided. Please enter M for male, F for female.";
-    String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 phone digit number";
+    String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 digit Singapore phone number";
 
-    String validStudentNumberRegex = "^[A-Z]\\d{7}[A-Z]";
+    String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
     String validGenderRegex = "^[M|F]";
-    String validPhoneNumberRegex = "^\\d{8}";
+    String validPhoneNumberRegex = "^[8|9]\\d{7}";
 
     String name;
     String studentNumber;
@@ -65,7 +66,7 @@ public class AddMember {
         gender = member.getGender();
         phoneNumber = member.getPhoneNumber();
 
-        boolean validName = name != null && !name.trim().isEmpty();
+        boolean validName = verifyMemberName(name);
         if (!validName) {
             throw new InvalidAddMemberException(invalidNameErrorMessage);
         }
@@ -86,5 +87,18 @@ public class AddMember {
         }
 
         return true;
+    }
+
+    /**
+     * Checks whether the string is empty or contain digits.
+     *
+     * @param name the member  name to be verified.
+     * @return true if member name is valid.
+     */
+    public boolean verifyMemberName(String name) {
+        boolean nameEmpty = (name == null || name.trim().isEmpty());
+        boolean nameContainDigits = name.matches(".*\\d.*");
+        boolean validName = !nameEmpty && !nameContainDigits;
+        return validName;
     }
 }
