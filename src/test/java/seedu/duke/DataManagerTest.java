@@ -100,10 +100,9 @@ public class DataManagerTest {
             i += 1;
         }
         budgetManager.setThreshold(0.5);
-        currencyManager.setCurrency(CurrencyType.USD);
         dataManager.saveAll();
         String testData = parser.convertSettingsToData(budgetManager, currencyManager);
-        String expectedData = "USD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
+        String expectedData = "SGD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
 
