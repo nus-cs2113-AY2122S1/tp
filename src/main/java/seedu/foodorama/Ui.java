@@ -163,11 +163,12 @@ public class Ui {
             + "  5. Editing Dish Name : 'edit dish name [DISH_NAME/INDEX]'.\n     Type the [NEW_DISH_NAME] and "
             + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
             + "     Example: 'edit dish name chicken rice' | 'hainanese chicken rice' | 'y'" + System.lineSeparator()
-            + "  6. Editing Dish Waste : 'edit dish waste [DISH_NAME/INDEX]'.\n     Type the [NEW_DISH_WASTE_WEIGHT in KG] and "
-            + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
-            + "     Example: 'edit dish waste chicken rice' | '6.5' | 'y'" + System.lineSeparator()
-            + "  7. Deleting a Dish : 'del [DISH_NAME/INDEX]'.\n     Type 'y' to confirm and 'n' to disregard the deletion "
+            + "  6. Editing Dish Waste : 'edit dish waste [DISH_NAME/INDEX]'.\n"
+            + "     Type the [NEW_DISH_WASTE_WEIGHT in KG] and 'y' to confirm and 'n' to disregard the change "
             + "when prompted" + System.lineSeparator()
+            + "     Example: 'edit dish waste chicken rice' | '6.5' | 'y'" + System.lineSeparator()
+            + "  7. Deleting a Dish : 'del [DISH_NAME/INDEX]'.\n "
+            + "    Type 'y' to confirm and 'n' to disregard the deletion when prompted" + System.lineSeparator()
             + "     Example: 'del dish chicken rice' | 'y'" + System.lineSeparator()
             + "  8. Viewing all Dishes : 'list dish'" + System.lineSeparator()
             + "  9. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
@@ -201,8 +202,8 @@ public class Ui {
             + "Type the [NEW_INGR_WASTE_WEIGHT in KG] and "
             + "'y' to confirm and 'n' to disregard the change when prompted" + System.lineSeparator()
             + "      Example: 'edit ingr waste chicken' | '7.0' | 'y'" + System.lineSeparator()
-            + "  22. Deleting an Ingredient : 'del [INGR_NAME/INDEX]'\n      Type 'y' to confirm and 'n' to disregard the "
-            + "deletion when prompted" + System.lineSeparator()
+            + "  22. Deleting an Ingredient : 'del [INGR_NAME/INDEX]'\n"
+            + "      Type 'y' to confirm and 'n' to disregard the deletion when prompted" + System.lineSeparator()
             + "      Example: 'del ingr chicken' | 'y'" + System.lineSeparator()
             + "  23. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
             + "  24. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
