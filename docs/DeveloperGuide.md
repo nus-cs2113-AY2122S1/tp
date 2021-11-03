@@ -38,6 +38,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 
 3. **Verify the setup**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+
 ```
 > Task :compileJava UP-TO-DATE
 > Task :processResources UP-TO-DATE
