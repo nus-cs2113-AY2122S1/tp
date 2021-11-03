@@ -34,7 +34,7 @@ Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
 There is USD 24.00 left to be assigned. How much did yikai spend?: There is USD 24.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD 8.00 to qian? (y/n): Your expense has been added successfully
-Enter your command: Here is the optimized payment transactions:
+Enter your command: Here are the optimized payment transactions:
 yuzhao needs to pay USD 8.00 (SGD 8.00) to yikai
 yuzhao needs to pay USD 13.00 (SGD 13.00) to qian
 Enter your command: Enter date of expense:
