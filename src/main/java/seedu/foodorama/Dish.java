@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Dish implements Comparable<Dish> {
-    private static final Logger logger = Logger.getLogger("Dish class");
+    private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui UI = new Ui();
     private String dishName;
@@ -19,8 +19,8 @@ public class Dish implements Comparable<Dish> {
     private double ingredientContribution;
 
     public Dish(String dishName) {
-        LoggerManager.setupLogger(logger);
-        logger.log(Level.INFO, "Calling default constructor");
+        LoggerManager.setupLogger(LOGGER);
+        LOGGER.log(Level.INFO, "Calling default constructor");
         this.dishName = dishName;
         this.wastage = 0.0;
         this.ingredientContribution = 0.0;
@@ -28,8 +28,8 @@ public class Dish implements Comparable<Dish> {
     }
 
     public Dish(String dishName, double wastage, double ingredientContribution) {
-        LoggerManager.setupLogger(logger);
-        logger.log(Level.INFO, "Calling loading constructor");
+        LoggerManager.setupLogger(LOGGER);
+        LOGGER.log(Level.INFO, "Calling loading constructor");
         this.dishName = dishName;
         this.wastage = wastage;
         this.ingredientContribution = ingredientContribution;
@@ -156,7 +156,7 @@ public class Dish implements Comparable<Dish> {
             }
             partList = partList.replaceFirst(",", "");
         } else {
-            logger.log(Level.INFO, "No parts present for dish " + dishName);
+            LOGGER.log(Level.INFO, "No parts present for dish " + dishName);
             partList = "None";
         }
         return dishName + System.lineSeparator()

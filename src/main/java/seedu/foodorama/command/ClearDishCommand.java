@@ -9,19 +9,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClearDishCommand extends Command {
-    private static final Logger logger = Logger.getLogger("ClearDishCommand.execute()");
+    private static final Logger LOGGER = Logger.getLogger("ClearDishCommand.execute()");
 
     ClearDishCommand() {
-        LoggerManager.setupLogger(logger);
+        LoggerManager.setupLogger(LOGGER);
     }
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        logger.log(Level.INFO, "Start of process");
+        LOGGER.log(Level.INFO, "Start of process");
 
         DishList.clearList();
-        logger.log(Level.INFO, "Successfully cleared dishList");
+        LOGGER.log(Level.INFO, "Successfully cleared dishList");
 
-        logger.log(Level.INFO, "End of process");
+        LOGGER.log(Level.INFO, "End of process");
     }
 }

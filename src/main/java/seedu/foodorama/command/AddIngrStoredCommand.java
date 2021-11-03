@@ -1,5 +1,6 @@
 package seedu.foodorama.command;
 
+import seedu.foodorama.DishList;
 import seedu.foodorama.Ingredient;
 import seedu.foodorama.IngredientList;
 import seedu.foodorama.Ui;
@@ -20,13 +21,20 @@ public class AddIngrStoredCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-
         logger.log(Level.INFO, "Start of process");
-        String ingredient = String.join(" ", parameters);
-        int ingredientIndex = IngredientList.find(ingredient);
+        String ingredient = parameters.get(0);
+        int ingredientIndex;
+        if (isNumber(ingredient)) {
+            ingredientIndex = Integer.parseInt(ingredient) - 1;
+        } else {
+            ingredientIndex = DishList.find(ingredient);
+        }
         if (ingredientIndex == -1) {
-            logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
+            logger.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
+        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
+            logger.log(Level.INFO, "Ingredient index is wrong");
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             try {
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
@@ -37,5 +45,14 @@ public class AddIngrStoredCommand extends Command {
             }
         }
         logger.log(Level.INFO, "End of process");
+    }
+
+    public boolean isNumber(String number) {
+        try {
+            int dishIndex = Integer.parseInt(number) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

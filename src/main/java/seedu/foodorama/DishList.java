@@ -103,7 +103,7 @@ public class DishList {
     public static void editName(int dishIndex) throws FoodoramaException {
         if (dishIndex == -1) {
             throw new FoodoramaException(UI.getDishNotExistEdit());
-        } else if (dishIndex >= dishList.size()) {
+        } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
             String dishName = dishList.get(dishIndex).getDishName();
@@ -133,7 +133,7 @@ public class DishList {
     public static void editWastage(int dishIndex) throws FoodoramaException {
         if (dishIndex == -1) {
             throw new FoodoramaException(UI.getDishNotExistEdit());
-        } else if (dishIndex >= dishList.size()) {
+        } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
             String dishName = dishList.get(dishIndex).getDishName();

@@ -635,6 +635,26 @@ public class Ui {
         System.out.println(INVALID_CONFIRMATION);
     }
 
+    private void printGraph(int graphPortions, ArrayList<Integer> lengths, int i, int j) {
+        if (i < graphPortions) {
+            if (j % 2 == 0) {
+                System.out.print("  "); //Every other column is blank
+            } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
+                System.out.print("[|]");
+            } else {
+                System.out.print("   ");
+            }
+        } else if (i == graphPortions) {
+            if (j % 2 == 0) {
+                System.out.print("   ");
+            } else {
+                System.out.print((char)(j / 2 + 65) + " ");
+            }
+        } else {
+            System.out.print("   ");
+        }
+    }
+
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
         int graphPortions = 10;
@@ -652,27 +672,10 @@ public class Ui {
             int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
-                    if (i < graphPortions) {
-                        if (j % 2 == 0) {
-                            System.out.print("  "); //Every other column is blank
-                        } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                            System.out.print("[|]");
-                        } else {
-                            System.out.print("   ");
-                        }
-                    } else if (i == graphPortions) {
-                        if (j % 2 == 0) {
-                            System.out.print("   ");
-                        } else {
-                            System.out.print((char)(j / 2 + 65) + " ");
-                        }
-                    } else {
-                        System.out.print("   ");
-                    }
+                    printGraph(graphPortions, lengths, i, j);
                 }
                 if (i < listSize) {
-                    System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
-                        + ":" + dishList.get(i).getWastage() + "kg");
+                    printDishLegend(dishList, i);
                 } else {
                     System.out.print(System.lineSeparator());
                 }
@@ -683,6 +686,11 @@ public class Ui {
             System.out.println("There are no dishes to graph");
             System.out.println(LINE_DIVIDER);
         }
+    }
+
+    private void printDishLegend(ArrayList<Dish> dishList, int i) {
+        System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
+            + ":" + dishList.get(i).getWastage() + "kg");
     }
 
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
@@ -702,27 +710,10 @@ public class Ui {
             int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
-                    if (i < graphPortions) {
-                        if (j % 2 == 0) {
-                            System.out.print("  "); //Every other column is blank
-                        } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                            System.out.print("[|]");
-                        } else {
-                            System.out.print("   ");
-                        }
-                    } else if (i == graphPortions) {
-                        if (j % 2 == 0) {
-                            System.out.print("   ");
-                        } else {
-                            System.out.print((char)(j / 2 + 65) + " ");
-                        }
-                    } else {
-                        System.out.print("   ");
-                    }
+                    printGraph(graphPortions, lengths, i, j);
                 }
                 if (i < listSize) {
-                    System.out.println("     " + (char) (i + 65) + ". " + ingredientList.get(i).getIngredientName()
-                            + ":" + ingredientList.get(i).getWastage() + "kg");
+                    printIngrLegend(ingredientList, i);
                 } else {
                     System.out.print(System.lineSeparator());
                 }
@@ -733,6 +724,11 @@ public class Ui {
             System.out.println("There are no ingredients to graph");
             System.out.println(LINE_DIVIDER);
         }
+    }
+
+    private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
+        System.out.println("     " + (char) (i + 65) + ". " + ingredientList.get(i).getIngredientName()
+                + ":" + ingredientList.get(i).getWastage() + "kg");
     }
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
