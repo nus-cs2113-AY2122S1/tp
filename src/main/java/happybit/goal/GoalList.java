@@ -22,7 +22,7 @@ public class GoalList {
     private static final String ERROR_DUPLICATE_HABIT_NAME = "This habit name is already present for this goal";
     private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
     private static final String ERROR_NEW_END_DATE_AFTER_START_DATE = "You cannot have the end date of a goal before "
-            + "or on the start date.";
+            + "or on the start date itself.";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
