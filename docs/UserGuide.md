@@ -414,7 +414,7 @@ These are the expense entries you have made in the past couple of months.
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-Simply type in the command <code>total_ex</code>, it the program will display the total expense entries you have made:
+Simply type in the command <code>total_ex</code>, and the program will display the total expense entries you have made:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your total income is: $604.00
@@ -460,7 +460,7 @@ These are the income entries you have made in the past couple of months.
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-Simply type in the command <code>total_in</code>, it the program will display the total income entries you have made:
+Simply type in the command <code>total_in</code>, and the program will display the total income entries you have made:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your total income is: $6000.00
