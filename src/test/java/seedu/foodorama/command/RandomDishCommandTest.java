@@ -13,25 +13,22 @@ public class RandomDishCommandTest {
     @Test
     void execute() throws FoodoramaException {
 
-        //set up testCommand
         RandomDishCommand testCommand = new RandomDishCommand();
 
-        // set up test ArrayLists
         ArrayList<String> testCarbohydrates;
-        ArrayList<String> testProteins;
-        ArrayList<String> testSauces;
-        ArrayList<String> testCookingMethods;
-
-        //assign test ArrayLists
         testCarbohydrates = testCommand.getCarbohydrates();
-        testProteins = testCommand.getProteins();
-        testSauces = testCommand.getSauces();
-        testCookingMethods = testCommand.getCookingMethods();
-
-        //checking
         assertEquals(testCommand.getCarbohydrates().size(), testCarbohydrates.size());
+
+        ArrayList<String> testProteins;
+        testProteins = testCommand.getProteins();
         assertEquals(testCommand.getProteins().size(), testProteins.size());
+
+        ArrayList<String> testSauces;
+        testSauces = testCommand.getSauces();
         assertEquals(testCommand.getSauces().size(), testSauces.size());
+
+        ArrayList<String> testCookingMethods;
+        testCookingMethods = testCommand.getCookingMethods();
         assertEquals(testCommand.getCookingMethods().size(), testCookingMethods.size());
 
     }

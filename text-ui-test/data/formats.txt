@@ -1,0 +1,7 @@
+Dish Format: [Name] | [Amount wasted (kg)] | [Wastage divided by number of constituents] | [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]
+Example (no constituents, no limit): prata|2.0|2.0|-1
+Example (2 constituents, no limit): prata|2.0|1.0|-1|flour|egg
+Example (2 constituents, limit of 3): prata|2.0|1.0|3|flour|egg
+Ingredients: [Name] | [Amount stored (kg)] | [Amount wasted (kg)] | [Wastage limit (if present else -1)] | [Expiry Date in format dd/MM/yyyy (if set)]
+Example (no limit, expiry not set): chicken|2.33|1.0|-1|null
+Example (limit of 2.5, expiry set): chicken|2.33|1.0|2.5|30/10/2021
