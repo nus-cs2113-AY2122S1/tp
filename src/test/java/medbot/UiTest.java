@@ -3,6 +3,7 @@ package medbot;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
+import medbot.list.PersonList;
 import medbot.person.Patient;
 import medbot.person.Staff;
 import medbot.ui.PatientUi;
@@ -14,13 +15,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class UiTest {
     public static final String END_LINE = System.lineSeparator();
 
     @Test
-    public void testPrintAddPatientMessage() {
+    public void testPrintAddPatientMessage_viewTypeExists_Success() {
         String expectedPatientOutput = "Added patient with Patient ID: 1 " + END_LINE
                 + "IC: " + "S8712345G" + END_LINE
                 + "Name: " + "Alice Tan" + END_LINE
@@ -44,7 +46,7 @@ class UiTest {
     }
 
     @Test
-    public void testPrintAddStaffMessage() {
+    public void testPrintAddStaffMessage_viewTypeExists_Success() {
         String expectedStaffOutput = "Added staff with Staff ID: 3 " + END_LINE
                 + "IC: " + "S8712345G" + END_LINE
                 + "Name: " + "Alice Tan" + END_LINE
@@ -67,7 +69,7 @@ class UiTest {
     }
 
     @Test
-    public void testPrintAddScheduleMessage() {
+    public void testPrintAddScheduleMessage_viewTypeExists_Success() {
         String expectedScheduleOutput = "Added appointment with Appointment Id: 3" + END_LINE
                 + "Patient ID: 1" + END_LINE
                 + "Staff ID: 2" + END_LINE
@@ -86,7 +88,21 @@ class UiTest {
     }
 
     @Test
-    public void testPrintDeletePatientMessage() {
+    public void testPrintDeletePersonMessage_personDoesNotExist_Fail() {
+        MedicalStaffList staffList = new MedicalStaffList();
+
+        int id = 2;
+        MedBotException medBotException = assertThrows(MedBotException.class, () -> {
+            staffList.deletePerson(id);
+        });
+
+        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+
+        assertEquals(expectedOutput, medBotException.getMessage());
+    }
+
+    @Test
+    public void testPrintDeletePatientMessage_patientExists_Success() {
         int id = 2;
         String expectedPatientOutput = "Patient with id 2 deleted from system." + END_LINE;
 
@@ -100,7 +116,7 @@ class UiTest {
     }
 
     @Test
-    public void testPrintDeleteStaffMessage() {
+    public void testPrintDeleteStaffMessage_staffExists_Success() {
         int id = 2;
         String expectedStaffOutput = "Staff with id 2 deleted from system." + END_LINE;
 
@@ -113,7 +129,21 @@ class UiTest {
     }
 
     @Test
-    public void testPrintDeleteScheduleMessage() {
+    public void testPrintDeleteScheduleMessage_scheduleDoesNotExist_Fail() {
+        Scheduler scheduler = new Scheduler();
+
+        int id = 2;
+        MedBotException medBotException = assertThrows(MedBotException.class, () -> {
+            scheduler.deleteAppointment(id);
+        });
+
+        String expectedOutput = "No appointment with ID 2 found.";
+
+        assertEquals(expectedOutput, medBotException.getMessage());
+    }
+
+    @Test
+    public void testPrintDeleteScheduleMessage_scheduleExists_Success() {
         int id = 2;
         String expectedScheduleOutput = "Appointment with id 2 deleted from system." + END_LINE;
 
@@ -126,7 +156,21 @@ class UiTest {
     }
 
     @Test
-    public void testEditPatientMessage() {
+    public void testEditPersonMessage_personDoesNotExist_Fail() {
+        MedicalStaffList staffList = new MedicalStaffList();
+
+        int id = 2;
+        MedBotException medBotException = assertThrows(MedBotException.class, () -> {
+            staffList.editPerson(id, new Staff());
+        });
+
+        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+
+        assertEquals(expectedOutput, medBotException.getMessage());
+    }
+
+    @Test
+    public void testEditPatientMessage_patientExists_Success() {
         PatientList patientList = new PatientList();
         Patient patient = new Patient();
         patient.setName("John Doe");
@@ -152,7 +196,7 @@ class UiTest {
     }
 
     @Test
-    public void testEditStaffMessage() {
+    public void testEditStaffMessage_staffExists_Success() {
         Staff staff = new Staff();
         staff.setName("Dr Tan");
         staff.setIcNumber("S1459203K");
@@ -180,7 +224,21 @@ class UiTest {
     }
 
     @Test
-    public void testEditAppointmentMessage() {
+    public void testEditAppointmentMessage_appointmentDoesNotExist_Fail() {
+        Scheduler scheduler = new Scheduler();
+
+        int id = 2;
+        MedBotException medBotException = assertThrows(MedBotException.class, () -> {
+            scheduler.deleteAppointment(id);
+        });
+
+        String expectedOutput = "No appointment with ID 2 found.";
+
+        assertEquals(expectedOutput, medBotException.getMessage());
+    }
+
+    @Test
+    public void testEditAppointmentMessage_appointmentExists_Success() {
         Patient patient = new Patient();
         patient.setId(2);
 
@@ -212,7 +270,21 @@ class UiTest {
     }
 
     @Test
-    public void testGetPatientInfoMessage() {
+    public void testGetPersonInfoMessage_personDoesNotExist_Fail() {
+        MedicalStaffList staffList = new MedicalStaffList();
+
+        int id = 2;
+        MedBotException medBotException = assertThrows(MedBotException.class, () -> {
+            staffList.getPersonInfo(id);
+        });
+
+        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+
+        assertEquals(expectedOutput, medBotException.getMessage());
+    }
+
+    @Test
+    public void testGetPatientInfoMessage_patientExists_Success() {
         PatientList patientList = new PatientList();
         Patient patient = new Patient();
         patient.setName("John Doe");
@@ -235,7 +307,7 @@ class UiTest {
     }
 
     @Test
-    public void testGetStaffInfoMessage() {
+    public void testGetStaffInfoMessage_staffExists_Success() {
         MedicalStaffList staffList = new MedicalStaffList();
         Staff staff = new Staff();
         staff.setName("John Doe");
