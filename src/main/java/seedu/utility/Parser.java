@@ -679,7 +679,7 @@ public class Parser {
         try {
             deleteExpenseIndex = Integer.parseInt(userGivenIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidExpenseIndexException(Messages.NON_NUMERIC_INDEX_MESSAGE);
+            throw new InvalidExpenseIndexException(Messages.INVALID_INDEX_MESSAGE);
         }
         if (deleteExpenseIndex <= 0) {
             throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
@@ -692,7 +692,7 @@ public class Parser {
         try {
             deleteIncomeIndex = Integer.parseInt(userGivenIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidIncomeIndexException(Messages.NON_NUMERIC_INDEX_MESSAGE);
+            throw new InvalidIncomeIndexException(Messages.INVALID_INDEX_MESSAGE);
         }
         if (deleteIncomeIndex <= 0) {
             throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
