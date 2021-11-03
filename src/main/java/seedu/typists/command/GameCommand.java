@@ -26,7 +26,7 @@ public class GameCommand implements Command {
 
         try {
             Game game = createGame(args, startNow, setContent);
-            game.runGame();
+            game.run();
             game.gameSummary();
         } catch (IncompleteCommandException e) {
             System.out.println("Please specify game type.");
@@ -42,18 +42,18 @@ public class GameCommand implements Command {
         if (getBoolean(args, TIME_SIGNIFIER)) {
             return createTimeLimitGame(args,startNow, setContent);
         } else if (getBoolean(args, WORD_SIGNIFIER)) {
-            return createWordLimitGame(setContent);
+            return createWordLimitGame(startNow, setContent);
         } else {
             throw new IncompleteCommandException();
         }
     }
 
-    public WordLimitGame createWordLimitGame(boolean setContent) {
+    public WordLimitGame createWordLimitGame(boolean isReady, boolean setContent) {
         uiBot.printKeyboard();
         if (setContent) {
             content.setContent();
         }
-        return new WordLimitGame(content.getContent(), 5);
+        return new WordLimitGame(content.getContent(), 5, isReady);
     }
 
     public TimeModeGame createTimeLimitGame(ArrayList<String> args, boolean isReady, boolean setContent) {

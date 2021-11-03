@@ -22,12 +22,13 @@ public class WordLimitGame extends Game {
     private String[] displayed;
 
 
-    public WordLimitGame(String targetWordSet, int wordsPerLine) {
+    public WordLimitGame(String targetWordSet, int wordsPerLine, boolean isReady) {
         super();
         this.eachWord = new ArrayList<>(100);
         this.wordsPerLine = wordsPerLine;
         this.content1 = targetWordSet;
         this.wordLimit = getWordLimit();
+        this.isReady = isReady;
     }
 
 

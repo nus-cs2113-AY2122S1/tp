@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public abstract class Game {
     protected final GameUi ui;
+    protected boolean isReady;
 
     public ArrayList<String[]> displayedLines = new ArrayList<>();
     public ArrayList<String[]> userLines = new ArrayList<>();
@@ -19,6 +20,15 @@ public abstract class Game {
         this.ui = new GameUi();
     }
 
+    public void run() {
+        if (isReady) {
+            runGame();
+        } else {
+            ui.readyToStartTimer();
+            runGame();
+        }
+    }
+
     public long getTimeNow() {
         return System.currentTimeMillis();
     }
@@ -26,7 +36,6 @@ public abstract class Game {
     public double getDuration(long startTime, long endTime) {
         return (double) (endTime - startTime) / 1000;
     }
-
 
     public abstract void displayLines(int row);
 

@@ -15,7 +15,6 @@ import static seedu.typists.common.Utils.getWordLineFromStringArray;
 public class TimeModeGame extends Game {
     protected final int timeInSeconds;
     protected final ArrayList<String> wordLists;
-    protected final boolean isReady;
     protected int wordsPerLine;
     protected double gameTime;
     protected int currentRow;
@@ -30,11 +29,17 @@ public class TimeModeGame extends Game {
         this.currentRow = 1;
     }
 
-    public boolean getReady(boolean isReady) {
-        if (!isReady) {
-            return ui.readyToStartTimer();
+
+    public int getTimeLimit() {
+        Scanner in = new Scanner(System.in);
+        ui.printScreen("Enter how long (in seconds) you want the game to run: ");
+
+        try {
+            return Integer.parseInt(in.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Not a Number!");
+            return getTimeLimit();
         }
-        return true;
     }
 
 
@@ -54,25 +59,24 @@ public class TimeModeGame extends Game {
         Scanner in = new Scanner(System.in);
         List<String> inputs = new ArrayList<>();
 
-        if (getReady(isReady)) {
-            long beginTime = getTimeNow();
-            boolean timeOver = false;
+        //game begins
+        long beginTime = getTimeNow();
+        boolean timeOver = false;
 
-            while (!timeOver) {
-                long currTime = getTimeNow() - beginTime;
-                if (currTime >= timeInSeconds * 1000L) {
-                    gameTime = (double) currTime / 1000;
-                    timeOver = true;
-                } else {
-                    displayLines(currentRow);
-                    inputs.add(in.nextLine());
-                    currentRow++;
-                }
+        while (!timeOver) {
+            long currTime = getTimeNow() - beginTime;
+            if (currTime >= timeInSeconds * 1000L) {
+                gameTime = (double) currTime / 1000;
+                timeOver = true;
+            } else {
+                displayLines(currentRow);
+                inputs.add(in.nextLine());
+                currentRow++;
             }
-
-            updateUserLines(inputs);
-            endGame();
         }
+
+        updateUserLines(inputs);
+        endGame();
     }
 
     public void endGame() {
