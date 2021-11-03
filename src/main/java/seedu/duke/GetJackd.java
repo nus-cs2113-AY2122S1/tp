@@ -5,6 +5,7 @@ import seedu.duke.command.CommandResult;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.WorkoutList;
+import seedu.duke.exception.StorageException;
 import seedu.duke.logger.LoggerUtil;
 import seedu.duke.parser.CommandManager;
 import seedu.duke.storage.Storage;
@@ -40,6 +41,9 @@ public class GetJackd {
             storage.loadData(workouts);
         } catch (GetJackDException e) {
             ui.printErrorMessage(e);
+        } catch (StorageException e) {
+            ui.printErrorMessage(e);
+            exit();
         }
     }
 

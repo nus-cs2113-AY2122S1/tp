@@ -440,7 +440,31 @@ GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`
 directly by editing that data file.
 
 ❗  **Caution**: If your changes to the data file is detected to be corrupted or does not conform to GetJackd's
-saved file format (json), GetJack'd will not run.
+saved file format (json), GetJack'd will automatically stop running and display an error message. GetJackd will be able
+to run again when the data file conforms to the saved file format (json) again. 
+
+**Error Messages when data file does not conform to saved file format**:
+
+Scenario 1 (Exercise reps and sets are not numbers)
+```
+________________________________________________________
+☹ OOPS!!! Error reading file! Please ensure the sets and reps in data/workouts.json are numbers.
+________________________________________________________
+```
+
+Scenario 2 (Workout deadlines are not in the correct date format)
+```
+________________________________________________________
+☹ OOPS!!! Error reading file! Please ensure the deadline in data/workouts.json is in the format yyyy-mm-dd.
+________________________________________________________
+```
+
+Scenario 3 (Invalid JSON file format)
+```
+________________________________________________________
+☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for proper closing brackets "{ }" and "[ ]" in data/workouts.json.
+________________________________________________________
+```
 
 ### 17. Automatic sorting of Workouts
 

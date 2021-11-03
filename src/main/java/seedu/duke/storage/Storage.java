@@ -6,6 +6,7 @@ import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.DeadlineWorkout;
 import seedu.duke.data.Workout;
 import seedu.duke.data.WorkoutList;
+import seedu.duke.exception.StorageException;
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
@@ -56,7 +57,7 @@ public class Storage {
      * @param workoutList Manages workouts after loading data
      * @throws GetJackDException Exception is thrown when data cannot be loaded
      */
-    public void loadData(WorkoutList workoutList) throws GetJackDException {
+    public void loadData(WorkoutList workoutList) throws GetJackDException, StorageException {
         assert file.exists();
         if (file.length() == 0) {
             return;
@@ -79,8 +80,8 @@ public class Storage {
                         );
                         addDeadlineWorkout(workoutList, workoutModel, deadlineWorkout);
                     } catch (DateTimeParseException e) {
-                        throw new GetJackDException("☹ OOPS!!! Error reading file! Please exit the program with " +
-                                "command \"bye\" and ensure the deadline in data/workouts.json " +
+                        throw new StorageException("☹ OOPS!!! Error reading file! Please " +
+                                "ensure the deadline in data/workouts.json " +
                                 "is in the format yyyy-mm-dd.");
                     }
                 }
@@ -97,7 +98,7 @@ public class Storage {
             WorkoutList workoutList,
             WorkoutModel workoutModel,
             Workout workout
-    ) throws GetJackDException {
+    ) throws StorageException {
         assert workout != null;
         populateExercises(workoutModel, workout);
         workoutList.addWorkout(workout);
@@ -107,14 +108,14 @@ public class Storage {
             WorkoutList workoutList,
             WorkoutModel workoutModel,
             DeadlineWorkout deadlineWorkout
-    ) throws GetJackDException {
+    ) throws StorageException {
         assert deadlineWorkout != null;
         populateExercises(workoutModel, deadlineWorkout);
         workoutList.addWorkout(deadlineWorkout);
     }
 
 
-    private void populateExercises(WorkoutModel workoutModel, Workout workout) throws GetJackDException {
+    private void populateExercises(WorkoutModel workoutModel, Workout workout) throws StorageException {
         for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
             Exercise exercise = readExercise(exerciseModel);
             workout.addExercise(exercise);
@@ -148,7 +149,7 @@ public class Storage {
      * @param exerciseModel Storage model for Exercise class
      * @return Exercise to be stored in the Workout class
      */
-    private Exercise readExercise(ExerciseModel exerciseModel) throws GetJackDException {
+    private Exercise readExercise(ExerciseModel exerciseModel) throws StorageException {
         try {
             int exerciseSets = Integer.parseInt(exerciseModel.getSets());
             int exerciseReps = Integer.parseInt(exerciseModel.getReps());
@@ -161,8 +162,8 @@ public class Storage {
             return exercise;
         } catch (NumberFormatException e) {
             LOGGER.log(Level.SEVERE, "Invalid values for sets and reps in data/workouts.json");
-            throw new GetJackDException("☹ OOPS!!! Error reading file! Please exit the program with command \"bye\" " +
-                    "and ensure the sets and reps in data/workouts.json are numbers.");
+            throw new StorageException("☹ OOPS!!! Error reading file! Please " +
+                    "ensure the sets and reps in data/workouts.json are numbers.");
         }
 
     }
@@ -174,7 +175,7 @@ public class Storage {
      * @return Workout List Model
      * @throws GetJackDException Exception is thrown when data from JSON file cannot be converted to storage model class
      */
-    private ArrayList<WorkoutModel> convertFromJson(String jsonString) throws GetJackDException {
+    private ArrayList<WorkoutModel> convertFromJson(String jsonString) throws StorageException {
         try {
             JsonNode node = JsonUtil.parse(jsonString);
             WorkoutListModel.clearWorkoutListModel();
@@ -183,7 +184,8 @@ public class Storage {
 
             return workoutListModel.getWorkouts();
         } catch (IOException e) {
-            throw new GetJackDException("☹ OOPS!!! Error converting from JSON");
+            throw new StorageException("☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for " +
+                    "proper closing brackets \"{ }\" and \"[ ]\" in data/workouts.json.");
         }
     }
 
