@@ -75,8 +75,8 @@ public class DataManager {
      * This method will be used more frequently as we typically want to load both entries and settings together.
      */
     public void loadAll() {
-        loadEntries();
         loadSettings();
+        loadEntries();
     }
 
     /**
