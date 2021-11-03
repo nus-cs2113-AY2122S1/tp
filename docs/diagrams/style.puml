@@ -4,13 +4,13 @@
  '/
 
 !define UI_COLOUR #LimeGreen
-!define PARSER_COLOUR #DarkOrchid
-!define PARSER_COLOUR_S1 #Orchid
+!define PARSER_COLOUR #Orchid
+!define PARSER_COLOUR_S1 #Magenta
 !define INGREDIENTLIST_COLOUR #DeepSkyBlue
 !define INGREDIENTGROUP_COLOUR #SkyBlue
 !define INGREDIENT_COLOUR #LightBlue
 !define STORAGE_COLOUR #GoldenRod
-!define COMMAND_COLOUR #Crimson
+!define COMMAND_COLOUR #Red
 !define COMMAND_COLOUR_S1 #Pink
 !define COMMAND_COLOUR_S2 #DarkSalmon
 !define DATE_COLOUR #Khaki
