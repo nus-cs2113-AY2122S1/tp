@@ -1,10 +1,26 @@
 # Developer Guide
 
+Libmgr is a desktop app for managing the inventory of libraries, optimised for use via a Command Line Interface (CLI). 
+Designed for fast typists, it can help to augment the day-to-day tasks of a librarian and can help them to get tasks done in an efficient manner.
+
+This document is meant to assist developers in better understanding the inner workings of the program.
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up the project](#setting-up-the-project)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [Commands Component](#commands-component)
+  - [Data Component](#data-component)
+  - [Storage Component](#storage-component)
+  - [UI Component](#ui-component)
+  - [Common Package](#common-component)
+- [Implementation](#implementation)
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Setting up the project in your computer
+## Setting up the project
 
 > ⚠ **Caution**: Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 > 
@@ -20,12 +36,16 @@ to import the project into IDEA.
    1. Run the `seedu.libmgr.Libmgr` and try a few commands. 
    2. Run the tests to ensure they all pass.
 
-## Design & implementation
+## Design
 
-This section provides an overview of the design architecture and implementation of Libmgr. 
-Each sub-section provides a detailed explanation of the architecture and design of each component.
+This section provides an overview of the design architecture and design of the various components of Libmgr. 
 
 ### Architecture
+
+The following __*Architecture Diagram*__ provides a high level visualization of the interaction between the various components of the app.
+Further elaboration  is given below
+
+![ArchitectureDiagram](img/ArchitectureDiagram.png)
 
 Libmgr is a Command-Line-Interface (CLI) application that is designed for librarians to manage library inventory efficiently. 
 Its main architecture consists of a few components:
@@ -46,16 +66,6 @@ Subsequently, the `data` component (Catalogue class) is invoked to manage and ad
 The `commands` component (Parser class) is then invoked to process the commands given by the user, 
 which is read in by the `ui` component. The individual command classes are then invoked to execute the respective command.
 
----
-### UI Component
-
-_todo_
-
-### Data Component
-
-![ItemsClassDiagram](img/ItemsClassDiagram.png)
-
-The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
 
 
 ### Commands component
@@ -85,6 +95,27 @@ The commands component consists of a `commands` package. Inside the package are 
 
 The individual Command classes inherit from an abstract `Command` class.
 
+### Data Component
+
+![ItemsClassDiagram](img/ItemsClassDiagram.png)
+
+The data component consists of a `data` package which holds classes that aim to allow the categorisation of items into different types.
+
+### Storage Component
+
+__todo__
+
+### UI Component
+
+_todo_
+
+### Common component
+
+Classes used by multiple components are located in the `common` package.
+For example, the `LibmgrException` class which is the main exception class for the app.
+
+## Implementation
+
 #### Edit Command
 
 ![EditCommandSequence](img/EditCommandSequence.png)
@@ -95,9 +126,7 @@ The Edit Command class handles the functionality to change a specific detail of 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
 
-### Common component
-Classes used by multiple components are located in the `common` package. 
-For example, the `LibmgrException` class which is the main exception class for the app. 
+
 
 ---
 ## Product scope
