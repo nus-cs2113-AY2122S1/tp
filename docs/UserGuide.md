@@ -489,7 +489,7 @@ Category | Action | Format |
  ----- | ------ | --------------- |
 Class | Listing all classes | `list_classes`
 Class | Adding a class | `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
-Class | Editing a class | `edit_class c/<CLASS_ID> [nc/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
+Class | Editing a class | `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID>] [n/<NEW_CLASS_NAME>]`
 Class | Deleting a class | `delete_class c/<CLASS_ID>`
 Student | Listing all students in a class | `list_students c/<CLASS_ID>`
 Student | Adding a student to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
