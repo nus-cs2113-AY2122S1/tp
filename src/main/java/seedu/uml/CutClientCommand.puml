@@ -36,5 +36,6 @@ deactivate ClientPackageList
 CCC --> Parser
 deactivate CCC
 <-- Parser
+deactivate Parser
 destroy CCC
 @enduml

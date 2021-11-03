@@ -24,7 +24,7 @@
 to ensure that Intellij is configured to use JDK 11.
 
 
-4. mport the project as a Gradle project: Follow the guide [Intellij IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+4. Import the project as a Gradle project: Follow the guide [Intellij IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
 
 
 5. Verify the setup:
@@ -193,7 +193,7 @@ with `CLIENTPACKAGE_ID` of "p001".
 
 Here is a (partial) sequence diagram of above user input:
 
-![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140176245-c7b99499-fac6-48d6-bee1-3d3ec107c4d9.png)
+![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140183929-2968d7c1-6a93-4378-8389-a3f7a3413cbe.png)
 
 **Step 1.** `Parser` returns `CutClientPackageCommand("p001)`.
 
@@ -211,7 +211,7 @@ and all corresponding client packages that contain deleted client.
 
 Here is a (partial) sequence diagram for above user input:
 
-![CutClientCommand](https://user-images.githubusercontent.com/70316271/140176323-032583db-49a1-4d52-9404-923a7535365b.png)
+![CutClientCommand](https://user-images.githubusercontent.com/70316271/140184002-db955693-ac5e-44c5-9c13-e18df17a8974.png)
 
 **Step 1.** `Parser` returns `CutClientCommand("c001)`.
 
