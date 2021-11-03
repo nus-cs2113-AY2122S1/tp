@@ -90,4 +90,5 @@ class AddCommandTest {
         AddUI addUi = new AddUI();
         Assertions.assertThrows(IntegerException.class, () -> addUi.verifySelection(invalid, lecture));
     }
+
 }
