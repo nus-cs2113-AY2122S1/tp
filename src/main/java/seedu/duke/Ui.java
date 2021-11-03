@@ -395,9 +395,9 @@ public class Ui {
     public static void printInvalidPeople(ArrayList<String> names) {
         for (String name : names) {
             if (names.indexOf(name) == names.size() - 1) {
-                System.out.print(name + " ");
+                System.out.print(name);
             } else if (names.indexOf(name) == names.size() - 2) {
-                System.out.print(name + " and");
+                System.out.print(name + " and ");
             } else if (names.indexOf(name) < names.size() - 2) {
                 System.out.print(name + ", ");
             }
