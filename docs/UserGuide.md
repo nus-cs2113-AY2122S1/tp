@@ -51,6 +51,9 @@ e.g. `add a t/TITLE i/ID a/ARTIST d/DURATION` can be used as `add a a/ARTIST i/I
 > ⚠️ Parameters must be separated with a space<br>
 e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is invalid
 
+> ⚠️ Command word must be in lower case
+e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
+
 ### Adding an item
 Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
