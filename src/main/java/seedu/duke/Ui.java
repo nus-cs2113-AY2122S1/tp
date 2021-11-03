@@ -76,28 +76,30 @@ public class Ui {
     }
 
     public void showHelp() {
-        String add = "add: Add information of all data types into the database.\n" +
-                "Prefixes can be input in any order.\n" +
-                "   Add client: add -c CLIENT_ID /n NAME /cn CONTACT_NUM /m EMAIL\n" +
-                "   Add flight: add -f FLIGHT_ID /d DEPART_DESTINATION /r RETURN_DESTINATION\n" +
-                "               /dd DEPARTURE_DATETIME /rd RETURN_DATETIME\n" +
-                "   Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE\n" +
-                "   Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID\n\n";
-        String list = "list: Shows a list of all available entries of a specific data type, along with their respective fields.\n" +
-                "   List client: list -c\n" +
-                "   List flight: list -f\n" +
-                "   List tour: list -t\n" +
-                "   List client package: list -p\n\n";
-        String cut = "cut: Deletes entry of a certain data type and all client packages corresponding to the entry.\n" +
-                "   Cut client: cut -c CLIENT_ID\n" +
-                "   Cut flight: cut -f FLIGHT_ID\n" +
-                "   Cut tour: cut -t TOUR_ID\n" +
-                "   Cut client package: cut -p PACKAGE_ID\n\n";
-        String find = "find: Finds specific client(s) based on a particular substring and returns their client packages.\n" +
-                "   Find client: find -c CLIENT_NAME\n" +
-                "   Find flight: find -f FLIGHT_ID\n" +
-                "   Find tour: find -t TOUR_ID\n" +
-                "   Find client package: find -p PACKAGE_ID\n\n";
+        String add = "add: Add information of all data types into the database.\n"
+                + "Prefixes can be input in any order.\n"
+                + "   Add client: add -c CLIENT_ID /n NAME /cn CONTACT_NUM /m EMAIL\n"
+                + "   Add flight: add -f FLIGHT_ID /d DEPART_DESTINATION /r RETURN_DESTINATION\n"
+                + "               /dd DEPARTURE_DATETIME /rd RETURN_DATETIME\n"
+                + "   Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE\n"
+                + "   Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID\n\n";
+        String list = "list: Shows a list of all available entries of a specific data type, along with their "
+                + "respective fields.\n"
+                + "   List client: list -c\n"
+                + "   List flight: list -f\n"
+                + "   List tour: list -t\n"
+                + "   List client package: list -p\n\n";
+        String cut = "cut: Deletes entry of a certain data type and all client packages corresponding to the entry.\n"
+                + "   Cut client: cut -c CLIENT_ID\n"
+                + "   Cut flight: cut -f FLIGHT_ID\n"
+                + "   Cut tour: cut -t TOUR_ID\n"
+                + "   Cut client package: cut -p PACKAGE_ID\n\n";
+        String find = "find: Finds specific client(s) based on a particular substring and returns their "
+                + "client packages.\n"
+                + "   Find client: find -c CLIENT_NAME\n"
+                + "   Find flight: find -f FLIGHT_ID\n"
+                + "   Find tour: find -t TOUR_ID\n"
+                + "   Find client package: find -p PACKAGE_ID\n\n";
         String bye = "bye: Exits the program.";
         show(add + list + cut + find + bye);
     }
