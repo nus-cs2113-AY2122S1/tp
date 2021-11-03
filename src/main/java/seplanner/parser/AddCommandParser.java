@@ -105,7 +105,7 @@ public class AddCommandParser {
         if (textMatches) {
             module = moduleMasterList.getModule(arguments.toUpperCase());
             // Check if module exists
-            if (module == null) {
+            if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
                 throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
@@ -137,8 +137,6 @@ public class AddCommandParser {
                                    UniversityList universityMasterList) throws AddParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
-        University currentUni = new University();
-        boolean validUni = false;
         if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
@@ -150,19 +148,13 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
         }
-        for (University uni : universitySelectedList.getList()) {
-            if (uni.getIndex() == uniIndex) {
-                validUni = true;
-                //university object from selected list
-                currentUni = uni;
-                break;
-            }
-        }
-        if (!validUni) {
+        University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
+                universityMasterList);
+        if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
         }
-        if (ParseCondition.isNoAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }

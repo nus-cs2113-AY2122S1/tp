@@ -101,7 +101,7 @@ public class RemoveCommandParser {
         if (textMatches) {
             module = moduleSelectedList.getModule(arguments);
             // Check if module has been added already
-            if (module == null) {
+            if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
@@ -131,8 +131,6 @@ public class RemoveCommandParser {
                                    UniversityList universityMasterList) throws RemoveParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
-        University currentUni = new University();
-        boolean validUni = false;
         if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
@@ -144,18 +142,11 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
         }
-        for (University uni : universitySelectedList.getList()) {
-            if (uni.getIndex() == uniIndex) {
-                validUni = true;
-                currentUni = uni;
-                break;
-            }
-        }
-        if (!validUni) {
+        if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);  
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
         }
-        if (ParseCondition.isNoAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
