@@ -12,6 +12,7 @@ import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,8 +76,11 @@ class SearchCommandTest {
     void executeUserCommand_keywordMatchesWorkoutDeadline_commandResultMapOnly() {
         createDeadlineWorkoutWithExercise();
         Command.workoutMode = 0;
-        String keyword = String.valueOf(LocalDate.now().getDayOfMonth());
-        SearchCommand c = new SearchCommand(keyword);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String strDate = formatter.format(LocalDate.now());
+
+        SearchCommand c = new SearchCommand(strDate);
         CommandResult result = c.executeUserCommand(workoutList, storage);
         assert result.feedbackToUser == null;
         assert result.map != null;
