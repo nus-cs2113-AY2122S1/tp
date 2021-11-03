@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,11 +72,17 @@ public class Storage {
                     Workout workout = new Workout(workoutModel.getWorkoutName());
                     addWorkout(workoutList, workoutModel, workout);
                 } else {
-                    DeadlineWorkout deadlineWorkout = new DeadlineWorkout(
-                            workoutModel.getWorkoutName(),
-                            LocalDate.parse(workoutModel.getDeadline())
-                    );
-                    addDeadlineWorkout(workoutList, workoutModel, deadlineWorkout);
+                    try {
+                        DeadlineWorkout deadlineWorkout = new DeadlineWorkout(
+                                workoutModel.getWorkoutName(),
+                                LocalDate.parse(workoutModel.getDeadline())
+                        );
+                        addDeadlineWorkout(workoutList, workoutModel, deadlineWorkout);
+                    } catch (DateTimeParseException e) {
+                        throw new GetJackDException("☹ OOPS!!! Error reading file! Please exit the program with " +
+                                "command \"bye\" and ensure the deadline in data/workouts.json " +
+                                "is in the format yyyy-mm-dd.");
+                    }
                 }
             }
 
@@ -86,7 +93,11 @@ public class Storage {
         }
     }
 
-    private void addWorkout(WorkoutList workoutList, WorkoutModel workoutModel, Workout workout) {
+    private void addWorkout(
+            WorkoutList workoutList,
+            WorkoutModel workoutModel,
+            Workout workout
+    ) throws GetJackDException {
         assert workout != null;
         populateExercises(workoutModel, workout);
         workoutList.addWorkout(workout);
@@ -96,14 +107,14 @@ public class Storage {
             WorkoutList workoutList,
             WorkoutModel workoutModel,
             DeadlineWorkout deadlineWorkout
-    ) {
+    ) throws GetJackDException {
         assert deadlineWorkout != null;
         populateExercises(workoutModel, deadlineWorkout);
         workoutList.addWorkout(deadlineWorkout);
     }
 
 
-    private void populateExercises(WorkoutModel workoutModel, Workout workout) {
+    private void populateExercises(WorkoutModel workoutModel, Workout workout) throws GetJackDException {
         for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
             Exercise exercise = readExercise(exerciseModel);
             workout.addExercise(exercise);
@@ -137,16 +148,23 @@ public class Storage {
      * @param exerciseModel Storage model for Exercise class
      * @return Exercise to be stored in the Workout class
      */
-    private Exercise readExercise(ExerciseModel exerciseModel) {
-        int exerciseSets = Integer.parseInt(exerciseModel.getSets());
-        int exerciseReps = Integer.parseInt(exerciseModel.getReps());
-        Exercise exercise = new Exercise(exerciseModel.getDescription(), exerciseSets, exerciseReps);
+    private Exercise readExercise(ExerciseModel exerciseModel) throws GetJackDException {
+        try {
+            int exerciseSets = Integer.parseInt(exerciseModel.getSets());
+            int exerciseReps = Integer.parseInt(exerciseModel.getReps());
+            Exercise exercise = new Exercise(exerciseModel.getDescription(), exerciseSets, exerciseReps);
 
-        if (exerciseModel.getIsDone().equals("true")) {
-            exercise.setDone();
+            if (exerciseModel.getIsDone().equals("true")) {
+                exercise.setDone();
+            }
+
+            return exercise;
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.SEVERE, "Invalid values for sets and reps in data/workouts.json");
+            throw new GetJackDException("☹ OOPS!!! Error reading file! Please exit the program with command \"bye\" " +
+                    "and ensure the sets and reps in data/workouts.json are numbers.");
         }
 
-        return exercise;
     }
 
     /**
