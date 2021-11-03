@@ -286,6 +286,15 @@ public class Ui {
             + "Sorry, that is an invalid command. Please type y to confirm or n to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, Ingredient Name cannot be a Number. Please type an appropriate Ingredient Name!"
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String INVALID_DISH_NAME = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, Dish Name cannot be a Number. Please type an appropriate Dish Name!" + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
             + "Your previous command is disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
@@ -444,7 +453,7 @@ public class Ui {
         return INGR_INDEX_MISSING;
     }
 
-    public static String getDishIndexMissingMsg() {
+    public String getDishIndexMissingMsg() {
         return DISH_INDEX_MISSING;
     }
 
@@ -472,10 +481,17 @@ public class Ui {
         System.out.println(INGR_NOT_EXIST);
     }
 
+    public String getDishExistsMsg(String dishName) {
+        assert dishName != null : "dishName cannot be null";
+        return LINE_DIVIDER + System.lineSeparator()
+                + "Sorry, the Dish " + dishName + " already exists in your list." + System.lineSeparator()
+                + LINE_DIVIDER;
+    }
+
     public String getIngrExistsMsg(String ingrName) {
         assert ingrName != null : "ingrName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
+                + "Sorry, the Ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
@@ -635,6 +651,22 @@ public class Ui {
 
     public void printInvalidConfirmation() {
         System.out.println(INVALID_CONFIRMATION);
+    }
+
+    public void printInvalidIngredientName() {
+        System.out.println(INVALID_INGR_NAME);
+    }
+
+    public void printInvalidDishName() {
+        System.out.println(INVALID_DISH_NAME);
+    }
+
+    public String getInvalidIngredientName() {
+        return INVALID_INGR_NAME;
+    }
+
+    public String getInvalidDishName() {
+        return INVALID_DISH_NAME;
     }
 
     private void printGraph(int graphPortions, ArrayList<Integer> lengths, int i, int j) {

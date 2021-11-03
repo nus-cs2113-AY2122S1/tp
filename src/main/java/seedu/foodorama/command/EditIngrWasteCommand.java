@@ -20,21 +20,32 @@ public class EditIngrWasteCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
-        int ingredientIndex;
-        if (isNumber(parameters.get(0))) {
-            ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
-            LOGGER.log(Level.INFO, "Parameter is Integer " + ingredientIndex);
+        String ingr = parameters.get(0);
+        int ingrIndex;
+        if (isNumber(ingr)) {
+            ingrIndex = Integer.parseInt(parameters.get(0)) - 1;
+            LOGGER.log(Level.INFO, "Parameter is Integer " + ingrIndex);
+        } else if (!isNumber(ingr) & ingr.isEmpty()) {
+            LOGGER.log(Level.INFO, "Parameter is Empty");
+            throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
-            String ingredientName = String.join(" ", parameters);
-            if (ingredientName.isBlank()) {
-                LOGGER.log(Level.INFO, "Parameter is Empty");
-                throw new FoodoramaException(UI.getIngrIndexMissingMsg());
-            } else {
-                ingredientIndex = IngredientList.find(ingredientName);
-                LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");
+            LOGGER.log(Level.INFO, "Parameter is String '" + ingr + "'");
+            ingrIndex = IngredientList.find(ingr);
+        }
+        if (ingrIndex == -1) {
+            LOGGER.log(Level.INFO, "Ingredient does not exist");
+            throw new FoodoramaException(UI.getIngrNotExistMsg());
+        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
+            LOGGER.log(Level.INFO, "Ingredient Index is not within Ingredient List Range");
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            assert (ingrIndex != -1) : "The dishIndex cannot be -1";
+            try {
+                IngredientList.editWastage(ingrIndex);
+            } catch (FoodoramaException e) {
+                throw new FoodoramaException(e.getMessage());
             }
         }
-        IngredientList.editWastage(ingredientIndex);
         LOGGER.log(Level.INFO, "Ingredient Name edited.");
         LOGGER.log(Level.INFO, "End of process.");
     }

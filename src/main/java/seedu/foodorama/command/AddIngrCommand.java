@@ -22,11 +22,14 @@ public class AddIngrCommand extends Command {
         LOGGER.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         if (ingredient.isBlank()) {
+            LOGGER.log(Level.INFO, "Ingredient Name is Empty");
             throw new FoodoramaException(UI.getIngrNameMissingMsg());
-        }
-        if (IngredientList.find(ingredient) >= 0) {
+        } else if (IngredientList.find(ingredient) >= 0) {
             LOGGER.log(Level.INFO, "Ingredient already exists", ingredient);
             throw new FoodoramaException(UI.getIngrExistsMsg(parameters.get(0)));
+        } else if (isNumber(ingredient)) {
+            LOGGER.log(Level.INFO, "Parameter is Integer ", ingredient);
+            throw new FoodoramaException(UI.getInvalidIngredientName());
         } else {
             try {
                 IngredientList.add(ingredient);
@@ -36,6 +39,15 @@ public class AddIngrCommand extends Command {
             }
         }
         LOGGER.log(Level.INFO, "End of process");
+    }
+
+    public boolean isNumber(String numberString) {
+        try {
+            int numberInteger = Integer.parseInt(numberString) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }

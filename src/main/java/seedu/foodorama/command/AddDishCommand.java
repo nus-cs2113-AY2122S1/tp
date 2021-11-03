@@ -1,20 +1,48 @@
 package seedu.foodorama.command;
 
 import seedu.foodorama.DishList;
+import seedu.foodorama.IngredientList;
 import seedu.foodorama.Ui;
 import seedu.foodorama.exceptions.FoodoramaException;
+import seedu.foodorama.logger.LoggerManager;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddDishCommand extends Command {
+    private static Logger LOGGER = Logger.getLogger("AddDishCommand.execute()");
     private static final Ui UI = new Ui();
+
+    AddDishCommand() {
+        LoggerManager.setupLogger(LOGGER);
+    }
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        if (parameters.get(0).isBlank()) {
+        String dish = parameters.get(0);
+        if (dish.isBlank()) {
+            LOGGER.log(Level.INFO, "Dish Name is Empty");
             throw new FoodoramaException(UI.getDishNameMissingMsg());
+        } else if (DishList.find(dish) >= 0) {
+            LOGGER.log(Level.INFO, "Dish already exists ", dish);
+            throw new FoodoramaException(UI.getDishExistsMsg(dish));
+        } else if (isNumber(dish)) {
+            LOGGER.log(Level.INFO, "Parameter is Integer ", dish);
+            throw new FoodoramaException(UI.getInvalidDishName());
+        } else {
+            DishList.add(dish);
+            LOGGER.log(Level.INFO, "Successfully added Dish");
         }
-        DishList.add(parameters.get(0));
+    }
+
+    public boolean isNumber(String numberString) {
+        try {
+            int numberInteger = Integer.parseInt(numberString) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }
