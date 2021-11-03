@@ -21,8 +21,8 @@ public class ClearParser extends Parser {
         try {
             if (commandArgs.equals("workout")) {
                 return new ClearCommand("workout");
-            } // Checks if the first word of commandArgs is "exercise" or not
-            else if (commandArgs.split(" ")[0].equals("exercise")) {
+            } else if (commandArgs.split(" ")[0].equals("exercise")) {
+                // The above checks if the first word of commandArgs is "exercise" or not
                 String argsForExercise = commandArgs.trim().substring(INDEX_AFTER_EXERCISE);
                 int workoutIndex = parseWorkoutIndex(argsForExercise);
                 return new ClearCommand(workoutIndex, "exercise");
