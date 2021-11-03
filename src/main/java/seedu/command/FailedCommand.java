@@ -37,6 +37,7 @@ public class FailedCommand extends Command {
         case MISSING_DETAIL: // Fallthrough
         case MISSING_NAME: // Fallthrough
         case MISSING_INDEX: // Fallthrough
+        case INVALID_INDEX_EDIT:
             missingUserInputExecute();
             break;
         default:
@@ -100,6 +101,8 @@ public class FailedCommand extends Command {
             break;
         case MISSING_INDEX_DELETE:
             ExceptionTextUi.missingIndexDeleteMessage(contactList.getListSize());
+        case INVALID_INDEX_EDIT:
+            ExceptionTextUi.missingIndexEditMessage();
             break;
         default:
             return;
