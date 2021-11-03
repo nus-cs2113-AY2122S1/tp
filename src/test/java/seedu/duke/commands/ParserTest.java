@@ -134,7 +134,7 @@ class ParserTest {
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
         // add.execute(ui, catalogue);
-        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, "Harper Lee");
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -174,7 +174,7 @@ class ParserTest {
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
         // add.execute(ui, catalogue);
-        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, "Harper Lee");
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -314,6 +314,30 @@ class ParserTest {
         } catch (Exception e) {
             assertEquals("  (!) Attribute Marker not valid for Magazine" + System.lineSeparator()
                     + "  (!) Should only be t/, i/, p/ or e/", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_stats_StatsCommandObject() {
+        boolean type = parser.parse("stats all") instanceof StatsCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_stats_StatsInvalidFormatExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        String args = "stats hello";
+        try {
+            StatsCommand a = (StatsCommand) parser.parse(args);
+            a.handlesStatsCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Invalid Stats command" + System.lineSeparator()
+                    + "  (!) Format:" + System.lineSeparator()
+                    + "  1. stats all" + System.lineSeparator()
+                    + "  2. stats category" + System.lineSeparator()
+                    + "  3. stats status", e.getMessage());
         }
     }
 
