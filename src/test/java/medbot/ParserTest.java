@@ -261,10 +261,10 @@ class ParserTest {
         }
 
         String[][] testInputExceptions = {
-                {"add    ", "No parameters given"},
-                {"edit    ", "No parameters given"},
-                {"add John  john@email", "No parameters given"},
-                {"edit John john@email", "No parameters given"}
+                {"add    ", "No parameters given."},
+                {"edit    ", "No parameters given."},
+                {"add John  john@email", "No parameters given."},
+                {"edit John john@email", "No parameters given."}
         };
         for (String[] testInputException : testInputExceptions) {
             try {

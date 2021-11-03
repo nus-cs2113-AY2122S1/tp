@@ -12,6 +12,8 @@ import medbot.exceptions.MedBotParserException;
 import medbot.person.PersonType;
 import medbot.utilities.FilterType;
 
+import java.util.List;
+
 public abstract class SchedulerCommandParser {
     private static final String END_LINE = System.lineSeparator();
 
@@ -120,17 +122,17 @@ public abstract class SchedulerCommandParser {
      */
     private static Command parseFindAppointmentCommand(String userInput) throws MedBotParserException {
         String[] attributeStrings = ParserUtils.getParametersWithoutSpecifiers(userInput).toArray(new String[0]);
-        String[] attributeSpecifiers = ParserUtils.getSpecifiers(userInput);
+        List<String> attributeSpecifiers = ParserUtils.getSpecifiers(userInput);
 
-        assert (attributeSpecifiers.length == 1 || attributeSpecifiers.length == 2);
+        assert (attributeSpecifiers.size() == 1 || attributeSpecifiers.size() == 2);
         assert (attributeStrings.length == 1 || attributeStrings.length == 2);
 
-        PersonType personType = ParserUtils.parsePersonType(attributeSpecifiers[0]);
+        PersonType personType = ParserUtils.parsePersonType(attributeSpecifiers.get(0));
         int personId = ParserUtils.parseId(attributeStrings[0]);
         FilterType filterType = FilterType.NONE;
         int dateTimeCode = -1;
-        if (attributeSpecifiers.length == 2) {
-            filterType = ParserUtils.parseFilterType(attributeSpecifiers[1]);
+        if (attributeSpecifiers.size() == 2) {
+            filterType = ParserUtils.parseFilterType(attributeSpecifiers.get(1));
         }
         if (attributeStrings.length == 2) {
             dateTimeCode = ParserUtils.parseDateTime(attributeStrings[1]);
