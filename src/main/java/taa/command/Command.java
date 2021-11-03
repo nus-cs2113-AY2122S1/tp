@@ -67,16 +67,22 @@ public abstract class Command {
     protected boolean isExit;
     protected String[] argumentKeys;
     protected HashMap<String, String> argumentMap;
+    protected boolean includeEmptyValues;
 
     public Command(String argument) {
         this(argument, null);
     }
 
     public Command(String argument, String[] argumentKeys) {
+        this(argument, argumentKeys, false);
+    }
+
+    public Command(String argument, String[] argumentKeys, boolean includeEmptyValues) {
         this.argument = argument;
         this.isExit = false;
         this.argumentKeys = argumentKeys;
         this.argumentMap = null;
+        this.includeEmptyValues = includeEmptyValues;
     }
 
     protected abstract String getUsage();
@@ -86,7 +92,7 @@ public abstract class Command {
     public abstract void execute(ClassList classList, Ui ui, Storage storage) throws TaaException;
 
     public void parseArgument() throws TaaException {
-        argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
+        argumentMap = Parser.getArgumentsFromString(argument, argumentKeys, includeEmptyValues);
     }
 
     public boolean isExit() {

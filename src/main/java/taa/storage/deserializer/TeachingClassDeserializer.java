@@ -16,7 +16,7 @@ import taa.student.StudentList;
 
 import java.lang.reflect.Type;
 
-public class ClassObjectDeserializer extends StorageDeserializer implements JsonDeserializer<TeachingClass> {
+public class TeachingClassDeserializer extends StorageDeserializer implements JsonDeserializer<TeachingClass> {
     private static final String MEMBER_ID = "id";
     private static final String MEMBER_NAME = "name";
     private static final String MEMBER_STUDENTLIST = "studentList";

@@ -32,7 +32,7 @@ public class ClassListDeserializer extends StorageDeserializer implements JsonDe
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(TeachingClass.class, new ClassObjectDeserializer());
+        gsonBuilder.registerTypeAdapter(TeachingClass.class, new TeachingClassDeserializer());
         Gson gson = gsonBuilder.create();
 
         ClassList classList = new ClassList();

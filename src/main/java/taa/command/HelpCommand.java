@@ -31,44 +31,92 @@ import taa.command.student.SortByScoresCommand;
 import taa.exception.TaaException;
 import taa.storage.Storage;
 
-public class HelpCommand extends Command {
-    private static final String MESSAGE_FORMAT_OUTPUT = "Available commands:\n%s";
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
-    private static final Command[] commands = {
-        new ListClassesCommand(""),
-        new AddClassCommand(""),
-        new EditClassCommand(""),
-        new DeleteClassCommand(""),
-        new ListStudentsCommand(""),
-        new AddStudentCommand(""),
-        new EditStudentCommand(""),
-        new DeleteStudentCommand(""),
-        new FindStudentCommand(""),
-        new ListCommentCommand(""),
-        new SetCommentCommand(""),
-        new DeleteStudentCommand(""),
-        new SortByScoresCommand(""),
-        new ListAssessmentsCommand(""),
-        new AddAssessmentCommand(""),
-        new EditAssessmentCommand(""),
-        new DeleteAssessmentCommand(""),
-        new ListMarksCommand(""),
-        new SetMarkCommand(""),
-        new EditMarkCommand(""),
-        new DeleteMarkCommand(""),
-        new AverageMarksCommand(""),
-        new MedianMarkCommand(""),
-        new ListAttendanceCommand(""),
-        new SetAttendanceCommand(""),
-        new DeleteAttendanceCommand(""),
-        new ExitCommand(""),
-        new HelpCommand(""),
-        new ArchiveCommand(""),
-        new ResetCommand("")
-    };
+public class HelpCommand extends Command {
+    private static final String STRING_CLASS = "Class";
+    private static final String STRING_STUDENT = "Student";
+    private static final String STRING_ASSESSMENT = "Assessment";
+    private static final String STRING_MARK = "Mark";
+    private static final String STRING_ATTENDANCE = "Attendance";
+    private static final String STRING_OTHERS = "Others";
+
+    private static final String MESSAGE_OUTPUT_HEADER = "Available commands:";
+
+    private static final LinkedHashMap<String, ArrayList<String>> commandUsages = new LinkedHashMap<>();
 
     public HelpCommand(String argument) {
         super(argument);
+        initCommandUsages();
+    }
+
+    private static void initCommandUsages() {
+        if (!commandUsages.isEmpty()) {
+            return;
+        }
+
+        Command[] classCommands = {
+            new ListClassesCommand(""),
+            new AddClassCommand(""),
+            new EditClassCommand(""),
+            new DeleteClassCommand(""),
+        };
+        commandUsages.put(STRING_CLASS, getUsagesFromCommands(classCommands));
+
+        Command[] studentCommands = {
+            new ListStudentsCommand(""),
+            new AddStudentCommand(""),
+            new EditStudentCommand(""),
+            new DeleteStudentCommand(""),
+            new FindStudentCommand(""),
+            new ListCommentCommand(""),
+            new SetCommentCommand(""),
+            new SortByScoresCommand(""),
+        };
+        commandUsages.put(STRING_STUDENT, getUsagesFromCommands(studentCommands));
+
+        Command[] assessmentCommands = {
+            new ListAssessmentsCommand(""),
+            new AddAssessmentCommand(""),
+            new EditAssessmentCommand(""),
+            new DeleteAssessmentCommand("")
+        };
+        commandUsages.put(STRING_ASSESSMENT, getUsagesFromCommands(assessmentCommands));
+
+        Command[] markCommands = {
+            new ListMarksCommand(""),
+            new SetMarkCommand(""),
+            new EditMarkCommand(""),
+            new DeleteMarkCommand(""),
+            new AverageMarksCommand(""),
+            new MedianMarkCommand(""),
+        };
+        commandUsages.put(STRING_MARK, getUsagesFromCommands(markCommands));
+
+        Command[] attendanceCommands = {
+            new ListAttendanceCommand(""),
+            new SetAttendanceCommand(""),
+            new DeleteAttendanceCommand("")
+        };
+        commandUsages.put(STRING_ATTENDANCE, getUsagesFromCommands(attendanceCommands));
+
+        Command[] othersCommands = {
+            new ExitCommand(""),
+            new HelpCommand(""),
+            new ArchiveCommand(""),
+            new ResetCommand("")
+        };
+        commandUsages.put(STRING_OTHERS, getUsagesFromCommands(othersCommands));
+    }
+
+    private static ArrayList<String> getUsagesFromCommands(Command[] commands) {
+        ArrayList<String> usages = new ArrayList<>();
+        for (Command command : commands) {
+            usages.add(command.getUsage());
+        }
+
+        return usages;
     }
 
     @Override
@@ -78,22 +126,31 @@ public class HelpCommand extends Command {
         }
     }
 
-    @Override
-    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < commands.length; i += 1) {
-            Command command = commands[i];
-
-            if (i > 0) {
-                stringBuilder.append("\n");
-            }
-
-            stringBuilder.append("- ");
-            stringBuilder.append(command.getUsage());
+    private String getStringForCommandGroup(String name) {
+        if (!commandUsages.containsKey(name)) {
+            return "";
         }
 
-        String message = String.format(MESSAGE_FORMAT_OUTPUT, stringBuilder.toString());
-        ui.printMessage(message);
+        StringBuilder stringBuilder = new StringBuilder(name);
+        stringBuilder.append(":");
+        for (String string : commandUsages.get(name)) {
+            stringBuilder.append("\n");
+            stringBuilder.append("  - ");
+            stringBuilder.append(string);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        StringBuilder stringBuilder = new StringBuilder(MESSAGE_OUTPUT_HEADER);
+        for (String name : commandUsages.keySet()) {
+            stringBuilder.append("\n\n");
+            stringBuilder.append(getStringForCommandGroup(name));
+        }
+
+        ui.printMessage(stringBuilder.toString());
     }
 
     @Override

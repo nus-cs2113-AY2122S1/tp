@@ -66,7 +66,7 @@ public class ClassList implements ClassChecker {
      */
     public TeachingClass getClassWithId(String id) {
         for (TeachingClass teachingClass : classes) {
-            if (teachingClass.getId().equals(id)) {
+            if (teachingClass.getId().equalsIgnoreCase(id)) {
                 return teachingClass;
             }
         }
