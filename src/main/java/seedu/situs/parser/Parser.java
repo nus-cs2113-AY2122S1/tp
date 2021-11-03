@@ -57,7 +57,7 @@ public class Parser {
     private static final String INVALID_THRESHOLD_TYPE_MESSAGE = "Not a threshold type!";
     private static final String SET_THRESHOLD_ERROR_MESSAGE = "Error in setting threshold";
     private static final String INVALID_THRESHOLD_MESSAGE = "Thresholds cannot be less than or equal to 0";
-    private static final String INVALID_AMOUNT_MESSAGE = "The amount of an ingredient cannot be negative";
+    private static final String INVALID_AMOUNT_MESSAGE = "The amount of an ingredient cannot be negative or 0";
     private static final String INVALID_AMOUNT_SUBTRACT_MESSAGE = "The amount to subtract cannot be negative";
     private static final String INVALID_EXPIRY_MESSAGE = "Your ingredient is already expired. Please throw it away.";
     private static final String USE_DELETE_INSTEAD_MESSAGE = "You are updating an ingredient's amount to 0. "
@@ -228,21 +228,19 @@ public class Parser {
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
 
+            if (Double.parseDouble(details[1]) < 0) {
+                throw new SitusException(INVALID_AMOUNT_MESSAGE);
+            }
+            if (Math.abs(Double.parseDouble(details[1]) - 0.000) < 0.001) {
+                throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
+            }
+            if (Double.parseDouble(details[1]) > MAX_INGREDIENT_THRESHOLD) {
+                throw new SitusException(MAX_INGREDIENT_THRESHOLD_MESSAGE);
+            }
+
             int groupNumber = Integer.parseInt(splitGroupAndIngredient[0]);
             int ingredientNumber = Integer.parseInt(splitGroupAndIngredient[1]);
             double newAmount = Double.parseDouble(details[1]);
-
-            if (newAmount < 0) {
-                throw new SitusException(INVALID_AMOUNT_MESSAGE);
-            }
-
-            if (newAmount == 0) {
-                throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
-            }
-
-            if (newAmount >= MAX_INGREDIENT_THRESHOLD) {
-                throw new SitusException(MAX_INGREDIENT_THRESHOLD_MESSAGE);
-            }
 
             return new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
         } catch (NumberFormatException e) {
@@ -292,11 +290,11 @@ public class Parser {
 
             double ingredientAmount = Double.parseDouble(details[2]);
 
-            if (ingredientAmount <= 0) {
+            if (ingredientAmount <= 0 || Math.abs(ingredientAmount - 0.000) < 0.001) {
                 throw new SitusException(INVALID_AMOUNT_MESSAGE);
             }
 
-            if (ingredientAmount >= MAX_INGREDIENT_THRESHOLD) {
+            if (ingredientAmount > MAX_INGREDIENT_THRESHOLD) {
                 throw new SitusException(MAX_INGREDIENT_THRESHOLD_MESSAGE);
             }
             LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
