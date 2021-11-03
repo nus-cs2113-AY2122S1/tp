@@ -7,6 +7,10 @@ import seedu.duke.task.taskmanager.TaskManager;
 import java.util.Map;
 
 //@@author APZH
+/**
+ * Represents a command to sort the tasks in a tasklist.
+ * This command can sort the tasklist by either task type, description, or priority.
+ */
 public class SortCommand extends Command {
 
     private static final String USAGE = "sort";
@@ -16,6 +20,13 @@ public class SortCommand extends Command {
     }
 
     //@@author APZH
+    /**
+     * Executes the sort command.
+     * Stores the message to be displayed to the user into {@code message}
+     * and to be passed as an input parameter of the {@code CommandResult} object to be returned.
+     *
+     * @return The command result of the execution.
+     */
     @Override
     public CommandResult executeCommand() throws Exception {
         String message = "";

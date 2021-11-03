@@ -98,22 +98,4 @@ class DateParserTest {
         assertEquals(3, dateTime.getHour());
         assertEquals(29, dateTime.getMinute());
     }
-
-    @Test
-    void getStringAsDate_today_expectLocalDateTime() throws ParseDateFailedException {
-        String dateTimeString = DateParser.dateToString(DateParser.stringToDate("today"));
-        LocalDateTime dateTime = LocalDateTime.now();
-        String expectedString = DateParser.dateToString(DateParser.roundToClosestHour(dateTime));
-        assertEquals(expectedString, dateTimeString);
-
-        dateTimeString = DateParser.dateToString(DateParser.stringToDate("yesterday"));
-        dateTime = LocalDateTime.now().minusDays(1);
-        expectedString = DateParser.dateToString(DateParser.roundToClosestHour(dateTime));
-        assertEquals(expectedString, dateTimeString);
-
-        dateTimeString = DateParser.dateToString(DateParser.stringToDate("tomorrow"));
-        dateTime = LocalDateTime.now().plusDays(1);
-        expectedString = DateParser.dateToString(DateParser.roundToClosestHour(dateTime));
-        assertEquals(expectedString, dateTimeString);
-    }
 }

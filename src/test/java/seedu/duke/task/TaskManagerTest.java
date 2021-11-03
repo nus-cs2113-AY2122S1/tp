@@ -339,21 +339,4 @@ class TaskManagerTest {
         }
     }
 
-    //@@author APZH
-    @Test
-    void sortTasklist_ThrowsException_IfSortCriteriaEmpty() {
-
-        Map<String, String> commandArguments = new HashMap<>();
-        commandArguments.put("by", "");
-
-        try {
-            System.out.println("sortTasklist_ThrowsException_IfSortCriteriaEmpty");
-            taskManager.sortTasklist(commandArguments);
-            fail(); // the test should not reach here
-        } catch (Exception e) {
-            assertEquals("[!] Please specify a sort criteria...\n", e.toString());
-            System.out.println("EmptySortCriteriaException caught");
-        }
-    }
-
 }

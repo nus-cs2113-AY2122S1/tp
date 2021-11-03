@@ -13,6 +13,10 @@ import seedu.duke.exception.TaskIsNonRecurringException;
 import seedu.duke.task.taskmanager.TaskManager;
 
 //@@author APZH
+/**
+ * Represents a command to list the tasks in a tasklist.
+ * This command can filter the tasklist and display the recurrences of a task.
+ */
 public class ListCommand extends Command {
 
     private static final String USAGE = "list";
@@ -22,12 +26,20 @@ public class ListCommand extends Command {
     }
 
     //@@author APZH
+    /**
+     * Executes the list command.
+     * Stores the message to be displayed to the user into {@code message}
+     * and to be passed as an input parameter of the {@code CommandResult} object to be returned.
+     *
+     * @return The command result of the execution.
+     */
     @Override
     public CommandResult executeCommand() {
         String message = "";
         boolean containsMainArgument = commandArguments.containsKey(MAIN_ARGUMENT);
 
         try {
+            taskManager.refreshListDates();
             if (!containsMainArgument || (containsMainArgument && commandArguments.get(MAIN_ARGUMENT).equals(""))) {
                 message = taskManager.listTasklistWithFilter(commandArguments);
             } else if (containsMainArgument) {

@@ -3,35 +3,27 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
+import seedu.duke.storage.DataManager;
 import seedu.duke.parser.CommandParser;
-import seedu.duke.storage.FileCreater;
+import seedu.duke.storage.FileCreator;
 import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
 
-import java.util.Scanner;
-
 public class Duke {
 
-    private final Scanner in;
     private final Ui ui;
     private ReminderManager reminderManager;
     private TaskManager taskManager;
 
     public Duke() {
-        in = new Scanner(System.in);
         ui = new Ui();
-        reminderManager = new ReminderManager();
-        taskManager = new TaskManager();
-    }
 
-    public String readInput() {
-        ui.printCursor();
-        if (!in.hasNextLine()) {
-            return CommandEnum.BYE.toString();
-        }
-        String input = in.nextLine();
-        return input;
+        FileCreator fileCreator = new FileCreator();
+        DataManager dataManager = new DataManager(fileCreator);
+        taskManager = new TaskManager(dataManager);
+
+        reminderManager = new ReminderManager();
     }
 
     public CommandResult runCommand(Command userCommand) {
@@ -55,11 +47,9 @@ public class Duke {
         Command userCommand;
         CommandResult commandResult = null;
 
-        FileCreater.createAll();
-
         do {
 
-            String userInput = readInput();
+            String userInput = ui.readInput();
 
             userCommand = CommandParser.parseCommand(taskManager, userInput);
 
@@ -68,7 +58,6 @@ public class Duke {
             ui.printMessage(commandResult.getMessage());
 
         } while (commandResult.getIsExited() != true);
-
     }
 
     public static void main(String[] args) {
