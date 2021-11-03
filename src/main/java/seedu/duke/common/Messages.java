@@ -25,6 +25,12 @@ public class Messages {
 
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
 
+    // Stats
+    public static final String STATS_INVALID_FORMAT = "  (!) Invalid Stats command" + System.lineSeparator()
+            + "  (!) Format:" + System.lineSeparator()
+            + "  1. stats all" + System.lineSeparator()
+            + "  2. stats category" + System.lineSeparator()
+            + "  3. stats status";
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
     public static final String LIST_FORMAT_INCORRECT = " (!) Invalid listing command" + System.lineSeparator()

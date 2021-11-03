@@ -14,7 +14,7 @@ import static seedu.duke.common.Messages.WELCOME_MESSAGE;
 public class TextUI {
     private final Scanner in;
     private final PrintStream out;
-    private static final String prefix = "> ";
+    private static final String PREFIX = "> ";
 
     /**
      * Constructor for TextUI class.
@@ -31,7 +31,7 @@ public class TextUI {
      * @return User input
      */
     public String read() {
-        out.print(prefix);
+        out.print(PREFIX);
         String input = in.nextLine();
         return input;
     }
