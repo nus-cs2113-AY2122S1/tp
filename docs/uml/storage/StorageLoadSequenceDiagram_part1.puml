@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Terminus" as Terminus
+participant ":StorageManager" as StorageManager
+
+participant ":Storage" as Storage
+participant ":JsonStorage" as JsonStorage
+
+activate Terminus
+Terminus -> StorageManager : initialise()
+activate StorageManager
+Create Storage
+  StorageManager -> Storage : Storage()
+  activate Storage
+return storage
+StorageManager -> Storage : createFolder(:Path)
+activate Storage
+return
+StorageManager -> JsonStorage : execute(null : ModuleManager, CREATE : StorageActionEnum)
+activate JsonStorage
+note left: Create data folder and \nmain json file \nif they do not exists
+  JsonStorage -> JsonStorage : createJson()
+  activate JsonStorage
+  JsonStorage -> JsonStorage : createFolder(:Path)
+  activate JsonStorage
+  return
+  JsonStorage -> JsonStorage : createFile(:Path)
+  activate JsonStorage
+  return
+return
+return
+ref over StorageManager
+  load
+end
+return moduleManager
+
+
+@enduml

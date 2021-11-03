@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+mainframe sd load
+
+participant ":StorageManager" as StorageManager
+
+participant ":JsonStorage" as JsonStorage
+
+participant ":FilterManager" as FilterManager
+
+participant ":NoteStorage" as NoteStorage
+
+activate StorageManager
+StorageManager -> StorageManager : load()
+activate StorageManager
+StorageManager -> JsonStorage : loadJson()
+activate JsonStorage
+return moduleManager
+opt moduleManager is null
+<-- StorageManager : ModuleManager()
+end
+create FilterManager
+StorageManager -> FilterManager : FilterManager()
+activate FilterManager
+return filterManager
+StorageManager -> FilterManager : filter(:ModuleStorage)
+note left : Remove any \ninvalid data \nin ModuleManager \nloaded from json
+activate FilterManager
+return
+loop each module in ModuleManager
+  StorageManager -> NoteStorage : execute(:ModuleManager, module : String, null : String, RELOAD : StorageActionEnum)
+  activate NoteStorage
+  note left : ignore the file \nif exception \nis caught
+  ref over NoteStorage
+  loadNoteIntoModuleManager
+  end
+  return
+end
+return moduleManager
+
+
+
+
+
+@enduml

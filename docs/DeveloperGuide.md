@@ -556,41 +556,50 @@ To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
 
 #### 4.5.1 Initialize Storage Implementation
 
+This section details the technical information of StorageManager when TermiNUS create the StorageManager.
+
+##### 4.5.1.1 Current Implementation
+
 ![](attachments/StorageInitializeSequenceDiagram.png)
 
-**Step 1:** When `Terminus` just started, it will initialize a `ModuleStorage` object and loads any
-related data from the `data` directory into it.
+**Step 1:** When `TermiNUS` gets executes, it will need to initialise a `StorageManager` that handles
+any file I/O operations.
 
-**Step 2:** Next, `Terminus` will create an instance of `ModuleStorage` which is a **singleton class**
-object. Subsequently, `Terminus` calls the `init()` function provided by ModuleStorage to set the filepath of the ModuleStorage with the main `.json` file
-filepath which contains data such as `module`, `questions` and `schedules`.
+**Step 2:** `TermiNUS` will need to provide a path for the **main directory** where all data are stored
+and the **main json file** where the `module`,`question` and `schedule` are stored.
 
-**Step 3:** Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
-which is provided by `ModuleStorage`. 
+> 📝 **Note:** The **main directory** is **hardcoded** within TermiNUS that has the filepath of the directory
+> where TermiNUS was executed from. The main directory will be named **data** and the **main json**
+> file will be located within the **data** folder and it is named as **main.json**.
 
-**Step 4:** Within the `ModuleStorage` of `loadFile()`, it will first check if
-the main directory of `data` exists. This is needed for the first time execution of `Terminus` as there
-should not be any `data` folder within the same folder in which `Terminus` was executed from. Hence,
-if no `data` directory was found, it will create a `data` directory and create the main `.json`
-file. However, if `data` directory exists, it will locate the main `.json` file within
-the `data` directory. This main `.json` will tell `Terminus` what `modules`
-does it have prior this current session of `Terminus`.
+> 📝 **Note:** The modules in the `.json` file represents the modules that should be in TermiNUS when 
+> TermiNUS gets executed.
 
-**Step 5:** Once the main `.json` has been loaded, a plugin `GsonBuilder` will proceed to load the `.json` 
-data into a `ModuleManager` object. This `ModuleManager` will then be used throughout the execution of `Terminus`.
-For more information, please refer to [Module Component](#35-module-component).
+**Step 3:** When calling the construct of `StorageManager`, it will create different storage type objects
+to handle different storage type file I/O operations. They are `NoteStorage`, `JsonStorage`, `PdfStorage` and
+`FolderStorage`.
 
-**Step 6:** Next, `ModuleStorage` will proceed to load any note data from the `modules` in the `ModuleManager` 
-object. Due to the restriction of **TermiNUS**, it will filter any `module` whose name does not fit the criteria of a valid `module` name. 
-Subsequently, it will check for module that has a folder in the `data` directory in order to retrieve its note data.
-If no folder was found it will simply create one for itself and proceed to check on other `module` in the `ModuleManager`. 
+| Storage Type  | Explanation                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| NoteStorage   | Handles any `Note` related file I/O operations.                                                                            |
+| JsonStorage   | Handles any main `.json` file related I/O operations.                                                                      |
+| FolderStorage | Handles any `Module` related file I/O operations. As `Module` in TermiNUS is stored as a folder in the **data** directory. |
+| PdfStorage    | Handles any `.pdf` file related I/O operations. Mainly the `export` command within the `note` workspace.                   |
 
-**Step 7:** Finally, after `ModuleStorage` has loaded all contents for the validated `modules` in the ModuleManager, it
-will return the `ModuleManager` back to `Terminus` for further operations.
+##### 4.5.1.2 Design Consideration
 
+**Aspect: Different types of storage.**
 
-Notes in TermiNUS is stored as a **text** file where the **name** of the file is the **name** of the note 
-and the **contents** of the file will be the **content** for that Note. For example, if a module has **5 Notes** object in TermiNUS, it should have **5 text files** within its module folder.
+| Approach                                                                                | Pros                                                                          | Cons                                                                                                     |
+|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| 2 Types of Storage that handles either file or folder only                              | More consolidated classes.                                                    | Mix handling of third party operations such as `gson` and `pdfWriter` with the base file I/O operations. |
+| Current implementation of 4 different types of Storage differs by its files operations. | More catered operations that allows the base file I/O to be in another class. | Multiple Storage to be referenced in StorageManager, higher probability of failed initialization.        |
+
+**Chosen Solution:** Current approach with the 4 different types of storage. Allowing all base functionality
+of file I/O operations using `NIO2` to be in its own class which is in the `Storage` class. As for the rest
+of the storage type class to inherit the functionality of the `Storage` class while adding their own
+checks and third party imports on top of it.
+
 
 
 ## 5. Documentation, Logging, Testing and DevOps
