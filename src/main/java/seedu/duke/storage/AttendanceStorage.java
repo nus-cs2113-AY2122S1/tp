@@ -72,8 +72,8 @@ public class AttendanceStorage {
     }
 
     /**
-     * Adds to the CSV file if training name of attendance corresponding to it already exists. If the csv file does not exist, it will create a new CSV
-     * file and add to it.
+     * Adds to the CSV file if training name of attendance corresponding to it already exists. 
+     * If the csv file does not exist, it will create a new CSV file and add to it.
      *
      * @param attendance     the attendance entry to be added.
      * @param attendanceList the current AttendanceList.
