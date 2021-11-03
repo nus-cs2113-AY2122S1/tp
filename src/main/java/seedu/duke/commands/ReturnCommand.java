@@ -37,7 +37,7 @@ public class ReturnCommand extends Command {
         if (!args.contains(" ")) {
             throw new LibmgrException(INVALID_ID);
         }
-        id = args.split(" ")[1];
+        id = args.split("return ")[1];
         Item toBeReturned = catalogue.getItem(id);
 
         if (toBeReturned.getStatus().equals(LOANED)) {
