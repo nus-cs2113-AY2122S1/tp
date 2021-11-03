@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.LibmgrException;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
@@ -22,8 +23,8 @@ import static seedu.duke.common.Messages.LIST_DEADLINE_TODAY;
  */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
-    public static final String DEADLINE_TODAY_COMMAND = "deadline today";
-    public static final String DEADLINE_OVERDUE_COMMAND = "deadline overdue";
+    public static final String COMMAND_DEADLINE_TODAY = "deadline today";
+    public static final String COMMAND_DEADLINE_OVERDUE = "deadline overdue";
     public static final String dateFormat = "dd-MM-yyyy";
     protected DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(dateFormat);
     public String input = "";
@@ -40,9 +41,9 @@ public class DeadlineCommand extends Command {
      * @param ui Object that handles user IO
      * @param catalogue Object that stores the list of all items
      */
-    public void handleDeadlineCommand(TextUI ui, Catalogue catalogue) {
+    public void handleDeadlineCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         LocalDate today = LocalDate.now();
-        if (input.equals(DEADLINE_TODAY_COMMAND)) {
+        if (input.equals(COMMAND_DEADLINE_TODAY)) {
             ui.print(LIST_DEADLINE_TODAY);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
@@ -50,7 +51,7 @@ public class DeadlineCommand extends Command {
                     ui.print(temp);
                 }
             }
-        } else if (input.equals(DEADLINE_OVERDUE_COMMAND)) {
+        } else if (input.equals(COMMAND_DEADLINE_OVERDUE)) {
             ui.print(LIST_DEADLINE_OVERDUE);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
@@ -68,9 +69,9 @@ public class DeadlineCommand extends Command {
                 }
             }
         } else if (input.equals(COMMAND_WORD)) {
-            ui.print(EMPTY_DEADLINE_COMMAND);
+            throw new LibmgrException(EMPTY_DEADLINE_COMMAND);
         } else {
-            ui.print(INVALID_DEADLINE_COMMAND);
+            throw new LibmgrException(INVALID_DEADLINE_COMMAND);
         }
         ui.print(DIVIDER);
     }
@@ -82,7 +83,7 @@ public class DeadlineCommand extends Command {
      * @param catalogue Object that stores the list of all items
      */
     @Override
-    public void execute(TextUI ui, Catalogue catalogue) {
+    public void execute(TextUI ui, Catalogue catalogue) throws LibmgrException {
         try {
             handleDeadlineCommand(ui, catalogue);
         } catch (DateTimeParseException e) {
@@ -91,6 +92,8 @@ public class DeadlineCommand extends Command {
             ui.print(INVALID_DATE);
         } catch (IndexOutOfBoundsException e) {
             ui.print(EMPTY_DATE);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
         }
     }
 }

@@ -12,9 +12,10 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
@@ -100,6 +101,12 @@ class ParserTest {
     }
 
     @Test
+    public void parse_help_HelpCommandObject() {
+        Boolean isSameObject = parser.parse("help") instanceof HelpCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
     public void parse_add_AddCommandObject() {
         Boolean isSameObject = parser.parse("add a t/Thriller i/5920 "
                 + "a/Michael Jackson d/42:16") instanceof AddCommand;
@@ -109,14 +116,116 @@ class ParserTest {
 
     @Test
     public void parse_loan_LoanCommandObject() {
-        boolean isSameObject = parser.parse("loan 123") instanceof LoanCommand;
+        boolean isSameObject = parser.parse("loan i/2551 d/12-11-2021 u/johnsmith") instanceof LoanCommand;
         assertTrue(isSameObject);
     }
 
     @Test
+    public void parse_loan_FormatIncorrectExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            LoanCommand a = (LoanCommand) parser.parse("loan");
+            a.handleLoanCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Invalid/missing values" + System.lineSeparator()
+                    + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_loan_InvalidDateInput() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
+        // add.execute(ui, catalogue);
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
+        try {
+            catalogue.add(b);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
+        }
+        try {
+            LoanCommand a = (LoanCommand) parser.parse("loan i/2551 d/12-Oct-2021 u/johnsmith");
+            a.handleLoanCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
     public void parse_return_ReturnCommandObject() {
-        boolean isSameObject = parser.parse("return 123") instanceof ReturnCommand;
+        boolean isSameObject = parser.parse("return 2551") instanceof ReturnCommand;
         assertTrue(isSameObject);
+    }
+
+    @Test
+    public void parse_return_InvalidItemID() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            ReturnCommand a = (ReturnCommand) parser.parse("return");
+            a.handleReturnCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Invalid Item ID!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_return_ReturnUnloanedItem() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
+        // add.execute(ui, catalogue);
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
+        try {
+            catalogue.add(b);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
+        }
+        try {
+            ReturnCommand a = (ReturnCommand) parser.parse("return 2551");
+            a.handleReturnCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Item is not on loan!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_deadline_DeadlineCommandObject() {
+        boolean isSameObject = parser.parse("deadline today") instanceof DeadlineCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
+    public void parse_deadline_EmptyDescription() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            DeadlineCommand a = (DeadlineCommand) parser.parse("deadline");
+            a.handleDeadlineCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Oops! Please specify the due date "
+                    + "(today/overdue/specific date)!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_deadline_InvalidDateInput() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            DeadlineCommand a = (DeadlineCommand) parser.parse("deadline d/12-Oct-2021");
+            a.handleDeadlineCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertNotNull(e);
+        }
     }
 
     @Test
@@ -248,5 +357,28 @@ class ParserTest {
         }
     }
 
+    @Test
+    public void parse_stats_StatsCommandObject() {
+        boolean type = parser.parse("stats all") instanceof StatsCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_stats_StatsInvalidFormatExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        String args = "stats hello";
+        try {
+            StatsCommand a = (StatsCommand) parser.parse(args);
+            a.handlesStatsCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Invalid Stats command" + System.lineSeparator()
+                    + "  (!) Format:" + System.lineSeparator()
+                    + "  1. stats all" + System.lineSeparator()
+                    + "  2. stats category" + System.lineSeparator()
+                    + "  3. stats status", e.getMessage());
+        }
+    }
 
 }

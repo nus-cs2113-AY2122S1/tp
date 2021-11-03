@@ -25,7 +25,7 @@ import static seedu.duke.common.Status.RESERVED;
  */
 public class LoanCommand extends Command {
     // Format: loan i/ID u/USERNAME d/DUE_DATE
-    public static final String COMMAND_FORMAT = "  Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
+    public static final String COMMAND_FORMAT = "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
     public static final String COMMAND_WORD = "loan";
     public static final String SUCCESS_LOAN = "  (+) Item has been loaned out:";
     public static final String ERR_RESERVED = "  (!) Sorry, the item has already been reserved for someone else";
@@ -79,8 +79,7 @@ public class LoanCommand extends Command {
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (checkMissingArgs()) {
-            ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
-            return;
+            throw new LibmgrException(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
         }
         if (checkAdditionalArgs()) {
             ui.print(WARN_INVALID_ARGS);

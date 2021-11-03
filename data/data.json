@@ -14,13 +14,30 @@
   } ],
   "book" : [ {
     "title" : "To Kill a Mockingbird",
+<<<<<<< HEAD
     "id" : "2449",
     "status" : "AVAILABLE",
+=======
+    "id" : "2551",
+    "status" : "LOANED",
+    "loanee" : "Jane",
+    "dueDate" : "20-10-2021",
+>>>>>>> master
     "author" : "Harper Lee"
+  }, {
+    "title" : "hi",
+    "id" : "123",
+    "status" : "AVAILABLE",
+    "author" : "hello"
   } ],
   "item" : [ {
     "title" : "something general",
     "id" : "9999",
+    "status" : "RESERVED",
+    "loanee" : "John"
+  }, {
+    "title" : "Scrabble",
+    "id" : "0513895",
     "status" : "AVAILABLE"
   }, {
     "title" : "hello",
@@ -33,6 +50,12 @@
     "status" : "AVAILABLE",
     "publisher" : "Time USA",
     "edition" : "oct252021"
+  }, {
+    "title" : "hi",
+    "id" : "124",
+    "status" : "AVAILABLE",
+    "publisher" : "pub",
+    "edition" : "edi"
   } ],
   "video" : [ {
     "title" : "Casino Royale",
