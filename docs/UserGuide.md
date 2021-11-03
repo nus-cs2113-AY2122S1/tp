@@ -209,7 +209,7 @@ Mandatory data fields:
 
 * Package ID - ```PACKAGE_ID```
 * Client ID - ```/c CLIENT_ID```
-* FLIGHT_ID - ```/f FLIGHT_ID```
+* Flight ID - ```/f FLIGHT_ID```
 * Tour ID - ```/t TOUR_ID```
 
 :exclamation: Note that the respective client, flight and tour must **exist** in order for package to be added.

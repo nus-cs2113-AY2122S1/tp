@@ -1,10 +1,18 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clients.CutClientCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
 
 
 import java.io.ByteArrayOutputStream;
