@@ -51,7 +51,7 @@ public class DeleteStockCommandTest {
     }
 
     @Test
-    void deleteStock_validStock_expectValid() {
+    void deleteStockCommand_validStock_expectValid() {
         try {
             medicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
