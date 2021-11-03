@@ -10,7 +10,7 @@ import static seedu.duke.common.Messages.INVALID_VALUES;
 
 public class UnreserveCommand extends Command {
     public static final String COMMAND_WORD = "unres";
-    public static final String COMMAND_FORMAT = "  Format: unres ID";
+    public static final String COMMAND_FORMAT = "  (!) Format: unres ID";
     public static final String ERR_NOT_RESERVED = "  (!) Item not reserved!";
     public static final String SUCCESS_UNRES = "  (+) Item unreserved:";
     protected String args;
