@@ -688,8 +688,9 @@ Adds the received medication into the current stocks.
 > * The `p/PRICE` parameter is also required so that stocks with different remaining shelf life can have different prices.
 
 > :warning: Warning
-> * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
-> * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used. 
+> * If medication exists, `d/DESCRIPTION` and `m/MAX_QUANTITY` will be optional parameters. If you include `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity in stocks.
+> * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used.
+> * You may not be able to `receiveorder` if the order quantity + current stock quantity > max quantity.
 
 Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 
@@ -817,10 +818,11 @@ Your current mode is indicated in the square brackets at the bottom left of the 
 It allows you to type add, list, update, delete without typing in the full command.
 Type stock, prescription or order to change to respective modes.
 Note that parameters in {curly braces} are optional.
-Parameters in [square braces] indicate that at least one of the parameter(s) must be provided.
+Parameters in [square braces] indicate that at least one of the parameter(s) must be
+provided.
 Parameters enclosed in (round brackets) are conditional optional parameters. For example, 
-the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be optional
-only if the stock exists.
+the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be
+optional only if the stock exists.
 +=====================+====================================================+
 |       COMMAND       |                   COMMAND SYNTAX                   | 
 +=====================+====================================================+
