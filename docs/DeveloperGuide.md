@@ -158,7 +158,8 @@ methods required.
 
 The classes `SelectedUniversityStorage` and `SelectedModuleStorage` are responsible for reading and updating the text files
 storing your selected university list and your selected module list. These classes inherit from the `UserStorage` class as the `loadFile` function
-is identical other than the file path.
+is identical other than the file path. The private methods in both the classes filters out the invalid data found while reading the 
+text files.
 
 The classes `UniversityStorage` and `ModuleStorage` are responsible for extracting the Master University List and Master Module List
 from the CSV type files (`University.csv` and `modules.csv`) stored in the resources root.

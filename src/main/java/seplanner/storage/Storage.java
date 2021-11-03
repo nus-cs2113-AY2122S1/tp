@@ -1,6 +1,9 @@
 package seplanner.storage;
 
 import seplanner.constants.Constants;
+import seplanner.exceptions.InvalidModuleException;
+import seplanner.exceptions.InvalidUniversityException;
+import seplanner.exceptions.StorageException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
@@ -40,13 +43,15 @@ public class Storage {
         return universityStorage.readFile(inputStream, moduleMasterList);
     }
 
-    public ModuleList readSelectedModuleList(ModuleList moduleMasterList) throws IOException {
+    public ModuleList readSelectedModuleList(ModuleList moduleMasterList)
+            throws IOException, InvalidModuleException {
         logger.log(Level.INFO, "Start loading selected module data");
         return selectedModuleStorage.readFile(moduleMasterList);
     }
 
     public UniversityList readSelectedUniversityList(
-            UniversityList universityMasterList, ModuleList moduleMasterList) throws IOException {
+            UniversityList universityMasterList, ModuleList moduleMasterList)
+            throws IOException, StorageException {
         logger.log(Level.INFO, "Start loading selected university data");
         return selectedUniversityStorage.readFile(universityMasterList, moduleMasterList);
     }

@@ -27,6 +27,7 @@ to plan for their Student Exchange Programme, optimised for use via Command Line
   * [Removing a selected university](#removing-a-selected-university)
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
+  * [Storage](#storage)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
@@ -441,6 +442,22 @@ This module mapping is removed:
 Removing a module does not automatically remove all module mappings associated with it.
 </div>
 
+### Storage
+
+Your selected module list and selected university list are stored in the text files, `selectedModules.txt` and 
+`selectedUniveristies.txt` respectively.
+
+<p align = "center">
+<img src="images/Storage_UG.png" />
+</p>
+
+Whenever, your selected module list and selected university list gets updated, the data stored in the files will get
+updated immediately.
+
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
+Do not try to edit the data stored in the text file, as the storage feature removes the invalid data stored in the files.
+</div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?  
@@ -470,6 +487,6 @@ Command | Format | Purpose
 
 1. `UNI_INDEX` - The unique identifier corresponding to a particular university.
 2. `MOD_INDEX` - The unique identifier corresponding to a particular module.
-3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the module selected list.
-4. `university selected list` - The list of universities selected by you.
-5. `module selected list` - The list of modules selected by you.
+3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the selected module list.
+4. `selected university list` - The list of universities and its respective mappings selected by you.
+5. `selected module list` - The list of modules selected by you.
