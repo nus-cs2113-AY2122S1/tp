@@ -205,6 +205,10 @@ Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
 - The recipe is added to the recipe list.
 - The ingredients and the quantity can be added in any order, but the first ingredient will correspond to the first
  quantity entered, second ingredient to second quantity entered etc.
+- A recipe must have at least one ingredient.
+- If there are too many ingredients in the recipe, users can add at least one ingredient first with `add recipe` and
+  add the rest later on to avoid confusion
+  (see [Update recipe](#updating-quantities-of-ingredients-in-a-recipe-update-recipe))
 - The units of the ingredients in the recipe will follow the units of the ingredients 
   saved in the ingredient repository.
 - If the ingredients of the recipe do not exist in the ingredient repository when adding the recipe, the
@@ -213,6 +217,41 @@ Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
 Example of usage:
 - `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
 - `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
+
+Output:
+- If the ingredients do not exist in the list,
+  ```
+      ____________________________________________________________________________________________________
+       I've added this recipe:
+
+       Chicken Soup
+        - Chicken (qty: 1)
+        - Salt (qty: 20)
+
+       Now you have 3 recipe(s)
+
+       I've also added these ingredients:
+
+       Chicken
+       Salt
+
+       Please update the unit if required.
+      ____________________________________________________________________________________________________
+  ```
+- If the ingredients exist in the list,
+  ```
+      ____________________________________________________________________________________________________
+       I've added this recipe:
+
+       Chicken Soup
+       - Chicken (qty: 1)
+       - Salt (qty: 20)
+
+       Now you have 3 recipe(s)
+      ____________________________________________________________________________________________________
+  ```
+  
+  
 
 <br/>
 
@@ -231,6 +270,20 @@ Format : `delete recipe r/RECIPE`
 Example of usage:
 
 - `delete recipe r/Chicken Soup`
+
+Output:
+- If recipe is in the list.
+```
+    ____________________________________________________________________________________________________
+     I've deleted this recipe for you:
+     
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+     
+     Now you have 2 recipe(s)
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
@@ -254,6 +307,20 @@ Format: `cooked r/RECIPE`
 Example of usage: 
 - `cooked r/Chicken Soup`
 
+Output:
+- If there are sufficient ingredients.
+```
+    ____________________________________________________________________________________________________
+     Now you have these quantities left for your ingredients:
+
+     Chicken (qty: 1)
+     - 1 (2021-11-20)
+
+     Salt (qty: 20)
+     - 20 (2021-12-31)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Listing recipes that can be cooked: `list recipes I can cook`
@@ -270,6 +337,35 @@ Format: `list recipes i can cook`
 
 Example of usage: 
 - `list recipes i can cook`
+
+Output: 
+- If there are no expired ingredients
+```
+    ____________________________________________________________________________________________________
+     Here are the recipes you can cook with the ingredients you have:
+
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+    ____________________________________________________________________________________________________
+```
+
+- If there are expired ingredients
+```
+    ____________________________________________________________________________________________________
+     Here are the recipes you can cook with the ingredients you have:
+
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+
+     Note that some of these ingredients have expired:
+
+     Chicken
+
+     Please remove them if you don't want to use them for your recipe.
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 

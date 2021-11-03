@@ -70,6 +70,7 @@ public class Recipe {
             ingredient = ingredientStorage.getIngredient();
         }
         final IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
+        assert quantity > 0 : "Quantity for an ingredient in the recipe cannot be zero";
         if (ingredientQuantities.containsKey(ingredientQuantity.getName())) {
             throw new DuplicateDataException();
         }

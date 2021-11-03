@@ -48,7 +48,7 @@ public class TestUtil {
     }
 
     public static void addIngredientsWithoutUnitsToRecipe(Recipe recipe) {
-        final IngredientRepository ingredientRepository = generateIngredientRepositoryWithoutUnitsForRecipe();
+        final IngredientRepository ingredientRepository = generateIngredientRepositoryForExampleRecipe(1,20);
         assert ingredientRepository != null;
         try {
             recipe.add("Chicken", 1, ingredientRepository);
@@ -77,31 +77,31 @@ public class TestUtil {
         return recipe;
     }
 
-    public static ArrayList<String> generateIngredientNamesForRecipe() {
+    /**
+     * Generates the ingredient names required for a recipe to test for AddRecipeCommand.
+     *
+     * @param name1 The name of the first ingredient in the recipe
+     * @param name2 The name of the second ingredient in the recipe
+     * @return The list of ingredient names for the recipe.
+     */
+    public static ArrayList<String> generateIngredientNamesForRecipe(String name1, String name2) {
         final ArrayList<String> ingredientNames = new ArrayList<>();
-        ingredientNames.add("Chicken");
-        ingredientNames.add("Salt");
+        ingredientNames.add(name1);
+        ingredientNames.add(name2);
         return ingredientNames;
     }
 
-    public static ArrayList<String> generateDuplicateIngredientNamesForRecipe() {
-        final ArrayList<String> ingredientNames = new ArrayList<>();
-        ingredientNames.add("Chicken");
-        ingredientNames.add("Chicken");
-        return ingredientNames;
-    }
-
-    public static ArrayList<Integer> generateQuantitiesForRecipe() {
+    /**
+     * Generates the quantities required for a recipe to test for AddRecipeCommand.
+     *
+     * @param quantity1 Quantity for "Chicken" ingredient
+     * @param quantity2 Quantity for "Salt" ingredient
+     * @return The list of quantities for the ingredients.
+     */
+    public static ArrayList<Integer> generateQuantitiesForRecipe(int quantity1, int quantity2) {
         final ArrayList<Integer> quantities = new ArrayList<>();
-        quantities.add(1);
-        quantities.add(20);
-        return quantities;
-    }
-
-    public static ArrayList<Integer> generateZeroQuantityForRecipe() {
-        final ArrayList<Integer> quantities = new ArrayList<>();
-        quantities.add(1);
-        quantities.add(0);
+        quantities.add(quantity1);
+        quantities.add(quantity2);
         return quantities;
     }
 
@@ -161,19 +161,13 @@ public class TestUtil {
         }
     }
 
-    public static IngredientRepository generateIngredientRepositoryWithoutUnitsForRecipe() {
-        final IngredientRepository ingredientRepository = new IngredientRepository();
-        try {
-            ingredientRepository.add("Chicken");
-            ingredientRepository.add("Salt");
-            return ingredientRepository;
-        } catch (DuplicateDataException e) {
-            fail("Ingredient repository should be valid by definition");
-            return null;
-        }
-    }
-
-
+    /**
+     * Generates unexpired ingredients for example recipe to test for ListRecipeUserCanCookCommand output.
+     *
+     * @param quantity1 The quantity of the "Chicken" ingredient in the example recipe
+     * @param quantity2 The quantity of the "Salt" ingredient in the example recipe
+     * @return The ingredient repository for the example recipe.
+     */
     public static IngredientRepository generateIngredientRepositoryForExampleRecipe(int quantity1, int quantity2) {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
@@ -193,8 +187,14 @@ public class TestUtil {
         }
     }
 
-    public static IngredientRepository generateIngredientRepositoryWithExpiredIngredients(int quantity1,
-                                                                                          int quantity2) {
+    /**
+     * Generates expired ingredients for example recipe to test for ListRecipeUserCanCookCommand output.
+     *
+     * @param quantity1 The quantity of the "Chicken" ingredient in the example recipe
+     * @param quantity2 The quantity of the "Salt" ingredient in the example recipe
+     * @return The ingredient repository for the example recipe.
+     */
+    public static IngredientRepository generateExpiredIngredientsForExampleRecipe(int quantity1, int quantity2) {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDateMinusThreeDays = currentDate.minus(3, ChronoUnit.DAYS);
         final LocalDate currentDateMinusThreeWeeks = currentDate.minus(3, ChronoUnit.WEEKS);
@@ -211,6 +211,11 @@ public class TestUtil {
         }
     }
 
+    /**
+     * Generates the ingredient to be used for comparison of CookedRecipeCommand output.
+     *
+     * @return The ingredient "Chicken" for the example recipe
+     */
     public static IngredientStorage generateFirstIngredient() {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
@@ -228,6 +233,11 @@ public class TestUtil {
         }
     }
 
+    /**
+     * Generates the ingredient to be used for comparison of CookedRecipeCommand output.
+     *
+     * @return The ingredient "Salt" for the example recipe
+     */
     public static IngredientStorage generateSecondIngredient() {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);

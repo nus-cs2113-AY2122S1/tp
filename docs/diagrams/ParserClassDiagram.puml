@@ -16,7 +16,6 @@ class MultipleArgPrefix extends Prefix {
 }
 class OptionalArgPrefix extends SingleArgPrefix {
     +OptionalArgPrefix(prefix : String)
-    +OptionalArgPrefix(singleArgPrefix: SingleArgPrefix)
 }
 
 class ArgsParser {
@@ -35,7 +34,7 @@ ArgsParser ..> MultipleArgPrefix
 Parser ..> ArgsParser
 Parser "1" --> "4" SingleArgPrefix
 Parser "1" --> "3  " MultipleArgPrefix
-Parser "    1" --> "3 " OptionalArgPrefix
+Parser "    1" --> "1 " OptionalArgPrefix
 MultipleArgPrefix .> SingleArgPrefix
 
 note bottom of MultipleArgPrefix
@@ -54,10 +53,8 @@ PREFIX_EXPIRY
 end note
 
 note right of OptionalArgPrefix
-Parser has the following prefixes:
+Parser has the following prefix:
 PREFIX_OPTIONAL_UNIT
-PREFIX_OPTIONAL_QUANTITY
-PREFIX_OPTIONAL_EXPIRY
 end note
 
 @enduml
