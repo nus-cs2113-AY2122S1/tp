@@ -94,6 +94,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts WorkoutModel to a Workout and adds Workout to the workout list.
+     *
+     * @param workoutList Workout List in app
+     * @param workoutModel Model of Workout class stored in JSON file
+     * @param workout Workout class to be added to Workout List in app
+     * @throws StorageException thrown when there is an error reading the JSON file
+     */
     private void addWorkout(
             WorkoutList workoutList,
             WorkoutModel workoutModel,
@@ -104,6 +112,14 @@ public class Storage {
         workoutList.addWorkout(workout);
     }
 
+    /**
+     * Converts WorkoutModel to a deadlineWorkout and adds deadlineWorkout to the workout list.
+     *
+     * @param workoutList Workout List in app
+     * @param workoutModel Model of Workout class stored in JSON file
+     * @param deadlineWorkout Deadline Workout class to be added to Workout List in app
+     * @throws StorageException thrown when there is an error reading the JSON file
+     */
     private void addDeadlineWorkout(
             WorkoutList workoutList,
             WorkoutModel workoutModel,
@@ -114,7 +130,13 @@ public class Storage {
         workoutList.addWorkout(deadlineWorkout);
     }
 
-
+    /**
+     * Transfers the exercises from the WorkoutModel class to the Workout class.
+     *
+     * @param workoutModel Model of Workout class stored in JSON file
+     * @param workout Workout class to be added to Workout List in app
+     * @throws StorageException thrown when there is an error reading the JSON file
+     */
     private void populateExercises(WorkoutModel workoutModel, Workout workout) throws StorageException {
         for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
             Exercise exercise = readExercise(exerciseModel);
