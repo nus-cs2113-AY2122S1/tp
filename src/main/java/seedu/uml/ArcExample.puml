@@ -1,0 +1,39 @@
+@startuml
+
+participant ":Ui" as Ui
+participant ":Parser" as Parser
+participant ":Command" as Command
+participant ":ClientList" as ClientList
+
+
+
+-> Ui: execute "list -c"
+activate Ui
+Ui -> Parser : parse("list -c")
+
+activate Parser
+Parser -> Parser : parseFind("list -c")
+
+create Command
+Parser -> Command : calls for FindClientCommand
+activate Command
+
+Command -> ClientList :
+activate ClientList
+ClientList --> Command : name, contact number, email
+deactivate ClientList
+
+Command --> Parser
+deactivate Command
+
+Parser --> Ui
+deactivate Parser
+<-- Ui : all clients
+deactivate Ui
+destroy Command
+
+
+
+
+
+@enduml

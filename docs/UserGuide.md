@@ -43,6 +43,8 @@ Examples:
 * ```add -t JPN /n Japan Basic Tour /p 1500 ``` calls for a <u>tour</u> to be added.
 * ```list -p ``` calls for all available <u>client packages</u> to be listed out.
 
+<br>
+
 ## Introduction to Data Fields
 
 <hr>
@@ -71,6 +73,8 @@ Examples of data fields in commands:
 * Sort tours:
     * ```/p``` - sorts tours by *price*
     * ```/d``` - sorts tours by *departure date and time*
+
+<br>
 
 ## Features
 
@@ -479,6 +483,193 @@ Total Passengers: 1
 ```
 
 <br>
+
+## Sort clientpackages
+
+Sort the list of clientpackages
+
+Format: ```sort [DATA_TYPE] [DATA_FIELDS]```
+
+### Sorted by returning flight times
+
+Format: ```sort -f /r```
+Examples:
+
+Output:
+
+```
+Sorted by returning flight times
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+
+3. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+```
+
+### Sorted by departing flight times
+
+Format: ```sort -f /d```
+Examples:
+
+Output:
+
+```
+Sorted by departing flight times
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+
+3. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+```
+
+### Sorted by flight id alphabetically
+
+Format: ```sort -f /id```
+Examples:
+
+Output:
+
+```
+Sorted by departing flight times
+Sorted by flight id alphabetically
+1. Flight ID: SQ-JPN
+Departure Flight: JPN, 20/10/21 18:00
+Return Flight: SG, 21/10/21 03:00
+
+2. Flight ID: SQ-KOR
+Departure Flight: KOR, 23/10/21 08:00
+Return Flight: SG, 30/11/21 03:00
+
+3. Flight ID: SQ-ZWM
+Departure Flight: ZWM, 5/11/21 09:00
+Return Flight: SG, 7/11/21 15:00
+```
+
+### Sorted by tour id alphabetically
+
+Format: ```sort -t /id```
+Examples:
+
+Output:
+
+```
+Sorted by tour id alphabetically
+1. Name: Japan Basic Tour
+Code: JPN1
+Price per pax: $1500.00
+
+2. Name: Japan Food Tour
+Code: JPN2
+Price per pax: $4000.00
+
+3. Name: Korea Cultural Tour
+Code: KOR
+Price per pax: $3000.00
+
+4. Name: Zimbabwe Tour
+Code: ZWM
+Price per pax: $1700.00
+```
+
+### Sorted by price in ascending order
+
+Format: ```sort -t /id```
+Examples:
+
+Output:
+
+```
+Sorted by tour id alphabetically
+1. Name: Japan Basic Tour
+Code: JPN1
+Price per pax: $1500.00
+
+2. Name: Zimbabwe Tour
+Code: ZWM
+Price per pax: $1700.00
+
+3. Name: Korea Cultural Tour
+Code: KOR
+Price per pax: $3000.00
+
+4. Name: Japan Food Tour
+Code: JPN2
+Price per pax: $4000.00
+```
+
+### Sorted by client name alphabetically
+
+Format: ```sort -c /n```
+Examples:
+
+Output:
+
+```
+Sorted by client name alphabetically
+1. Client ID: c001
+Name: Bo Tuan
+Contact Number: 93338333
+Email: borangutuan@mail.com
+
+2. Client ID: c004
+Name: ChengXu
+Contact Number: 10101010
+Email: demonshaha@mail.com
+
+3. Client ID: c002
+Name: Sam
+Contact Number: 12223444
+Email: sam@mail.com
+
+4. Client ID: c003
+Name: Wayne
+Contact Number: 56667888
+Email: wendy@mail.com
+```
+
+### Sorted by client id alphabetically
+
+Format: ```sort -c /id```
+Examples:
+
+Output:
+
+```
+orted by client id alphabetically
+1. Client ID: c001
+Name: Bo Tuan
+Contact Number: 93338333
+Email: borangutuan@mail.com
+
+2. Client ID: c002
+Name: Sam
+Contact Number: 12223444
+Email: sam@mail.com
+
+3. Client ID: c003
+Name: Wayne
+Contact Number: 56667888
+Email: wendy@mail.com
+
+4. Client ID: c004
+Name: ChengXu
+Contact Number: 10101010
+```
+## Storage
+
+This program can print all the cilentpackages into a text file will save the clientpackages you have added before by load and save functions.
 
 ## Exit application: ```exit```
 

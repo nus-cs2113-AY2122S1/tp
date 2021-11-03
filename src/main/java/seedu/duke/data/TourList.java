@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TourList {
-    private final String TOUR_NOT_FOUND_MESSAGE = "Tour code cannot be found. Please try another Tour code.";
+    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
 
-    private ArrayList<Tour> tours;
-    private ArrayList<String> tourCodes;
-    private ArrayList<Float> tourPrices;
+    private final ArrayList<Tour> tours;
+    private final ArrayList<String> tourCodes;
+    private final ArrayList<Float> tourPrices;
     private ArrayList<String> iteratedTourCodes;
     private int tourCount;
 

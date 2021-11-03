@@ -1,13 +1,82 @@
 # Developer Guide
 
-## Acknowledgements
+##Getting started
+<hr>
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+###Recommended software (for optimal compatability)
+
+* GitHub
+* Sourcetree (for version control)
+* IntelliJ IDEA (IDE)
+* Amazon Coretto
+
+###Setting up this project in your computer
+1. On Github, fork this repo by clicking on the fork button
+
+
+2. In Sourcetree, clone the fork into your computer
+   1. Open a new tab
+   2. Select the clone button at the top of the menu
+   3. Key in the details of this repository
+
+
+3. Configure the JDK: Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html)
+to ensure that Intellij is configured to use JDK 11.
+
+
+4. mport the project as a Gradle project: Follow the guide [Intellij IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+
+
+5. Verify the setup:
+   1. Run the seedu.duke.TourPlanner and try a few commands.
+   2. Run the tests to ensure they all pass.
+
+<br>
 
 ## Design & implementation
+<hr>
 
-### Implementation of add feature
+##Architecture
+<hr>
+
+The diagram above shows the high-level design of TourPlanner.
+
+![image](component_diagram.png)
+
+Below is an overview of the main components, and how they interact with each other.
+
+**Main components**
+
+```TourPlanner``` acts as the main class. It is responsible for:
+* At app launch: Initialises the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes clean-up methods where necessary.
+
+The rest of the app consists of the following components:
+* ```Ui```: The UI of the application.
+* ```Parser```: Deciphers user input and executes the appropriate command / error message
+* ```Command```: The different types of commands that can possibly be executed.
+* ```ObejctList```: Holds data in different arrays, based on their type. Namely there are four types of ObjectLists:
+  * ClientList
+  *	TourList
+  *	FlightList
+  *	ClientPackageList
+*	```Storage```; Reads data from, and writes data to, the hard disk.
+
+<br>
+
+**Interaction of components**
+
+The diagram below shows how the components interact with each other if the user 
+inputs the command ```list -c```:
+
+![image](architecture_example.png)
+
+<br>
+
+##Command component
+<hr>
+
+### <u>Add feature</u>
 
 The add feature is facilitated mainly by `Parser`, and returns an `AddCommand` object. When `AddCommand` is executed,
 the values corresponding to their fields are added.
@@ -66,48 +135,33 @@ extractValue(/n Hokkaido-A) --> Hokkaido-A
 
 **Step 8.** `AddCommand(Object o)` constructor is called, passing in the created object.
 
+<br>
 
-## Product scope
+### <u>List feature</u>
 
-### Target user profile
+It implements these following types of list commands:
+* `list -c`: Lists all existing clients and their contact numbers
+* `list -t`: Lists all existing tours
+* `list -p`: Lists all clients and their corresponding tours and flights
 
-{Describe the target user profile}
+Given below is an example usage of command `list -c`:
 
-### Value proposition
+**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` method in the `Parser` class.
 
-{Describe the value proposition: what problem does it solve?}
+**Step 2**: `parse()` identifies the command type `ListCCommand` based on the user input and returns it.
 
-## User Stories
+**Step 3**: Then, `execute()` method in `ListCCommand` is called, where it loops through the current `clientList` and prints out all client names and their details.
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Depending on the type of list command being called, these command types will be returned:
+* `list -c`: `ListCCommand`
+* `list -t`: `ListTCommand`
+* `list -p`: `ListPCommand`
 
-|Priority| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
-|`* * *`|user|add a new client| |
-|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
-|`* * *`|user|add a new tour package|update the tour package database|
-|`* * *`|user|delete a tour package|update the tour package database|
-|`* * *`|user|add flight timings|keep track of flights|
+<br>
+
+## <u>Find feature</u>
 
 
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-## **Find feature**
-
-<hr>
-
-### <u>Proposed Implementation</u>
 
 The ```find``` feature is to be used to query for a particular client or tour, providing extensive information about it. It is facilitated by the ```parse``` function in the ```Parser``` class, which determines which type of Object (```Client``` or ```Tour```) is to be parsed and which command to be executed. It is implemented by following operations:
 
@@ -130,18 +184,18 @@ Firstly, assume that in previous sessions, commands were executed to add clients
 
 ### <u>Finding a particular client</u>
 
-**Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named 
-Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser``` 
-class takes the command, and the first word in it (```find```) means that the 
-```parseFind()``` is to be called to determine which type of Object is to be 
-queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is 
+**Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named
+Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser```
+class takes the command, and the first word in it (```find```) means that the
+```parseFind()``` is to be called to determine which type of Object is to be
+queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is
 executed with the parameter ```Bo Tuan```
 
 
 
-**Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. 
-For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client. 
-If the name attribute is equals to ```Bo Tuan```, the ```Client``` object 
+**Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```.
+For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client.
+If the name attribute is equals to ```Bo Tuan```, the ```Client``` object
 is printed onto the console terminal.
 
 <br>
@@ -149,7 +203,7 @@ is printed onto the console terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findclient.png) (to change)
+    ![image](findclient.png) 
 
 <br>
 
@@ -184,7 +238,7 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findtour.png) 
+![image](findtour.png)
 
 <br>
 
@@ -219,7 +273,7 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findflight.png) 
+![image](findflight.png)
 
 <br>
 
@@ -229,23 +283,44 @@ The following activity diagram summarizes the following steps.
   * Pros: fast querying time.
   * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their contact number.
 
+  
 
-### <u>Listing clients, tours and flights</u>
+## Product scope
 
-It implements these following types of list commands:
-* `list -c`: Lists all existing clients and their contact numbers
-* `list -t`: Lists all existing tours
-* `list -p`: Lists all clients and their corresponding tours and flights
+### Target user profile
 
-Given below is an example usage of command `list -c`:
+* Tour company employees that need to manage a significant amount of tour data
+* Prefer desktop apps over other types
+* Can type fast
+* Is reasonably comfortable using CLI apps
 
-**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` method in the `Parser` class.
+### Value proposition
 
-**Step 2**: `parse()` identifies the command type `ListCCommand` based on the user input and returns it.
+* Manage tour information faster than typical mouse /GUI driven apps
 
-**Step 3**: Then, `execute()` method in `ListCCommand` is called, where it loops through the current `clientList` and prints out all client names and their details.
+## User Stories
 
-Depending on the type of list command being called, these command types will be returned:
-* `list -c`: `ListCCommand`
-* `list -t`: `ListTCommand`
-* `list -p`: `ListPCommand`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+|Priority| As a ... | I want to ... | So that I can ...|
+|--------|----------|---------------|------------------|
+|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
+|`* * *`|user|add a new client| |
+|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
+|`* * *`|user|add a new tour package|update the tour package database|
+|`* * *`|user|delete a tour package|update the tour package database|
+|`* * *`|user|add flight timings|keep track of flights|
+
+
+## Non-Functional Requirements
+
+{Give non-functional requirements}
+
+## Glossary
+
+* *glossary item* - Definition
+
+## Instructions for manual testing
+
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
