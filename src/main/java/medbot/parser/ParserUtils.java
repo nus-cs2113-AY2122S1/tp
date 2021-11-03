@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -36,7 +37,8 @@ public abstract class ParserUtils {
     private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID = "s/";
     private static final String PARAMETER_APPOINTMENT_DATE_TIME = "d/";
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
-    private static final String ERROR_NO_PARAMETER = "No parameters given";
+    private static final String ERROR_NO_PARAMETER = "No parameters given.";
+    private static final String ERROR_TOO_MANY_SPECIFIERS = "Too many attribute specifiers.";
     private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
     private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
     private static final String ERROR_FILTER_TYPE_INVALID = "Filter type specified is not valid.";
@@ -54,7 +56,7 @@ public abstract class ParserUtils {
     private static final String ERROR_DATE_TIME_WRONG_FORMAT = "Incorrect Date/Time format.";
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
-    private static final String REGEX_INPUT_PARAMETER = "[a-zA-Z]/";
+    private static final String REGEX_INPUT_PARAMETER = "[abdps]/";
     private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
@@ -143,18 +145,16 @@ public abstract class ParserUtils {
                 .collect(toList());
     }
 
-    static String[] getSpecifiers(String userInput) throws MedBotParserException {
+    static List<String> getSpecifiers(String userInput) throws MedBotParserException {
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(userInput);
-        String[] specifiers = new String[2];
-        int i = 0;
-        try {
-            while (matcher.find()) {
-                specifiers[i] = matcher.group();
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MedBotParserException("Too many attribute specifiers.");
+        List<String> specifiers = new ArrayList<>();
+
+        while (matcher.find()) {
+            specifiers.add(matcher.group());
+        }
+        if (specifiers.size() > 2) {
+            throw new MedBotParserException(ERROR_TOO_MANY_SPECIFIERS);
         }
 
         return specifiers;
