@@ -5,6 +5,7 @@ import seplanner.universities.University;
 
 import static java.lang.System.out;
 
+// @@author titustortoiseturtle1999
 public class UiUniversity extends Ui {
 
     public static void printUniversity(University uni, boolean printMC) {

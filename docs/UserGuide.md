@@ -5,13 +5,13 @@ title: User Guide
 
 ## Introduction
 
-SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
-Exchange Programme, optimised for use via Command Line Interface (CLI).  
+SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore 
+to plan for their Student Exchange Programme, optimised for use via Command Line Interface (CLI).  
 
 ## Content Page
-
+* [Program run through](#program-run-through)
 * [Quick Start](#quick-start)  
-* [Program run through](#program-run-through)  
+* [How to use this guide](#How-to-use-this-guide)
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
   * [Viewing all available modules](#viewing-all-available-modules)
@@ -30,6 +30,14 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
+
+## Program run through
+
+This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
+1. Add partner universities the user is interested in.
+2. Add potential NUS modules that the user wants to add.
+3. Search for potential mapping for a particular selected university.
+4. Select a mapping and add the mapping.
 
 ## Quick Start
 
@@ -82,17 +90,9 @@ If the visual that appears does not look like this, you might want maximize your
 Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
 </div>
 
-## Program run through
-
-This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
-  1. Add partner universities the user is interested in.
-  2. Add potential NUS modules that the user wants to add.
-  3. Search for potential mapping for a particular selected university.
-  4. Select a mapping and add the mapping.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Information about this guide:**<br>
+## How to use this guide
+This user guide provides useful tools to help the reader acclimatise to SEPlanner. 
+Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 Tips give helpful information to make your experience better.
@@ -106,7 +106,10 @@ Warnings caution you about certain actions that might be dangerous.
 Notes are important pieces of information. 
 </div>
 
-</div>
+```
+Code blocks contain either user inputs or program outputs.  
+```
+
 
 ## Features
 
@@ -159,7 +162,7 @@ Here are the modules in the list:
 
 Add a partner university the user is interested into the user selected university list.
 
-#### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
+#### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. 
@@ -266,6 +269,7 @@ Potential mappings for Boston University [4]  :
 The output of this command might differ from the example given, based on the modules added into the selected module 
 list. For instance, the above output is executed with the following modules in the selected module list: CS2030, CS2040,
  BT3102, BT4222. 
+</div>
 
 ### Adding a module mapping
 

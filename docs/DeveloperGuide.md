@@ -41,7 +41,7 @@ title: Developer Guide
 
 ## Getting started 
 
-Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/docs/UserGuide.md)
+Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start)
 
 ## Design & implementation
 
@@ -68,7 +68,7 @@ The other core components of SEPlanner are:
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
 is entered. 
-
+ 
 ### Command Implementation
 
 <p align = "center">
@@ -120,6 +120,10 @@ The UiModule class contains methods for printing Modules.
 The UiUniversity class contains methods for printing Universities. 
 
 The UiWelcome class contains a method for printing the welcome greeting. 
+
+The UiInvalid class contains methods to display error messages to the user. 
+
+The UiStorage class contains methods to display error messages from the Storage component to the user. 
 
 <p align = "center">
 <img src="images/uiseq.png" width = "800" />
@@ -258,7 +262,7 @@ This object will invoke an instance of `ExitCommand`.
 
 ### Target User Profile
 
-__SEPlanner__ is targeted at Computer Engineering students in NUS planning for their Student Exchange Program (SEP). 
+__SEPlanner__ is targeted at Computer Engineering students in the National University of Singapore planning for their Student Exchange Program (SEP). 
 
 ### Value Proposition
 
@@ -289,7 +293,10 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* SEPlanner must operate with full functionality on all mainstream operating systems: Windows, MacOS and Ubuntu with Java 11 installed. 
+* It should offer a streamlined experience using the command line interface primarily. 
+* It should be fast and responsive (No more than 1000ms between user input and program output).
+* It should be significantly faster than the default Student Exchange Program application portal on myEduRec. 
 
 ## Glossary
 
