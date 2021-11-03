@@ -44,9 +44,6 @@ public class AddStockCommand extends Command {
         String[] optionalParameters = {};
         String nameToAdd = parameters.get(CommandParameters.NAME);
         boolean nameExist = false;
-        String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
-
-        Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
 
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
@@ -67,6 +64,9 @@ public class AddStockCommand extends Command {
                     optionalParameters)) {
                 return;
             }
+
+            String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
+            Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
 
             if (formatExpiryDate == null) { //if medication has expired
                 return;
@@ -107,7 +107,9 @@ public class AddStockCommand extends Command {
             String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
             String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
             String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
+            String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
 
+            Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
             if (formatExpiryDate == null) { //if medication has expired
                 return;
             }
