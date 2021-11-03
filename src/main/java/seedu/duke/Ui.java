@@ -25,7 +25,7 @@ public class Ui {
                 amountOwed = currentHashMap.get(nameOfPersonReceiving);
                 if (!personPaying.equals(personReceiving) && amountOwed < 0) {
                     if (isAllPaid) {
-                        System.out.println("Here is the optimized payment transactions:");
+                        System.out.println("Here are the optimized payment transactions:");
                     }
                     System.out.println(nameOfPersonPaying + " needs to pay "
                             + stringForeignMoney(-amountOwed)
