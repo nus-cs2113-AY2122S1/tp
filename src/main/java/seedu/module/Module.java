@@ -66,14 +66,13 @@ public class Module extends BaseModule {
         return prerequisite;
     }
 
-    public Semester getSemester(int sem) {
+    public Semester getSemester(int sem) throws UniModsException{
         for (Semester s : semesterData) {
             if (s.getSemester() == sem) {
                 return s;
             }
         }
-        //What is the point of this? Shouldn't we just print out an error
-        return new Semester();
+        throw new UniModsException("Module is not offered in this semester");
     }
 
     /**

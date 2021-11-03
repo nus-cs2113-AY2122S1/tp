@@ -4,6 +4,7 @@ import seedu.command.flags.AddFlag;
 import seedu.comparator.ClassNumComparator;
 import seedu.exceptions.AddException;
 import seedu.exceptions.FetchException;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.module.Semester;
@@ -49,8 +50,7 @@ public class AddCommand extends Command {
             module = NusMods.fetchMod(moduleCode);
             checkModuleExist(module);
             TextUi.printAddMessage(moduleCode);
-            Semester semesterData = module.getSemester(semester);
-            addLesson(semesterData, module);
+            addLesson(module, semester);
         } else if (getFlag() == AddFlag.EVENT) {
             addEvent();
         }
@@ -139,8 +139,10 @@ public class AddCommand extends Command {
         return description;
     }
 
-    public void addLesson(Semester semesterData, Module module) {
+    public void addLesson(Module module, int semester) {
         try {
+            Semester semesterData = module.getSemester(semester);
+
             ArrayList<Lesson> lecture;
             lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
             lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
@@ -155,7 +157,10 @@ public class AddCommand extends Command {
         } catch (AddException e) {
             e.printMessage();
             logger.log(Level.WARNING, "Module that does not contain any lessons, " +
-                    "module has been successfully added into timetable");
+                    " module has been added into timetable");
+        } catch (UniModsException e) {
+            e.printMessage();
+            logger.log(Level.WARNING, "Attempt to add module not offered this semester failed");
         }
     }
 

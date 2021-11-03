@@ -17,7 +17,7 @@ public class AddUI {
     private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
     private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String SMALL_GAP = "%14s";
-    private static final String FIXED_FORMAT = "%88.88s";
+    private static final String FIXED_FORMAT = "%93.93s";
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
@@ -31,7 +31,7 @@ public class AddUI {
     private static final String RUN = "Run";
     private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
-    private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
+    private static final String NO_LESSON_FOUND = "      No Lesson Time Slots Found";
     private static final String NO_LECTURE_FOUND = "            *Module has no Lectures*";
     private static final String NO_TUTORIAL_FOUND = "            *Module has no Tutorials*";
     private static final String NO_LAB_FOUND = "               *Module has no Labs*";
