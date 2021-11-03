@@ -29,8 +29,8 @@ public class AddTourCommandTest {
     void addTourCommand_validData_correctlyConstructed() {
         Tour testTour =
                 new Tour(new String[]{TEST_TOUR_ID,
-                        TEST_TOUR_NAME,
-                        TEST_TOUR_PRICE_STRING});
+                    TEST_TOUR_NAME,
+                    TEST_TOUR_PRICE_STRING});
         AddTourCommand addTour = new AddTourCommand(testTour);
 
         Tour retrieveTour = addTour.getTour();
@@ -40,12 +40,12 @@ public class AddTourCommandTest {
     }
 
     @Test
-    void addTourCommand_emptyTourList_populatedTourList() throws TourPlannerException {
+    void addTourCommand_emptyTourList_populatedTourList() {
         Tour testTour =
                 new Tour(new String[]{
-                        TEST_TOUR_ID,
-                        TEST_TOUR_NAME,
-                        TEST_TOUR_PRICE_STRING});
+                    TEST_TOUR_ID,
+                    TEST_TOUR_NAME,
+                    TEST_TOUR_PRICE_STRING});
         AddTourCommand addTour = new AddTourCommand(testTour);
         addTour.setData(dummyClientList, dummyFlightList, testTourList, dummyPackageList, testUi);
         addTour.execute();

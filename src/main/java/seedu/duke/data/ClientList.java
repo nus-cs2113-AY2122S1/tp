@@ -1,8 +1,6 @@
 package seedu.duke.data;
 
 import seedu.duke.TourPlannerException;
-import seedu.duke.Ui;
-import seedu.duke.data.Client;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +25,10 @@ public class ClientList {
         clientIds = new ArrayList<>();
         clientNames = new ArrayList<>();
         clientCount = 0;
+    }
+
+    public ArrayList<Client> getClients() {
+        return clients;
     }
 
     /**

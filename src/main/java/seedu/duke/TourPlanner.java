@@ -6,6 +6,7 @@ import seedu.duke.data.ClientPackageList;
 import seedu.duke.data.FlightList;
 import seedu.duke.data.TourList;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,10 +29,9 @@ public class TourPlanner {
      *
      * @param args not used
      */
-    public static void main(String[] args) throws TourPlannerException {
+    public static void main(String[] args) throws TourPlannerException, FileNotFoundException {
         Ui ui = new Ui();
         Storage storage;
-
         try {
             storage = new Storage();
             storage.loadFile();
@@ -63,7 +63,7 @@ public class TourPlanner {
                 logr.log(Level.SEVERE, e.getMessage());
             } finally {
                 ui.showLine();
-                storage.saveFile();
+                storage.saveFile(clientPackages.getClientPackages());
             }
         }
     }

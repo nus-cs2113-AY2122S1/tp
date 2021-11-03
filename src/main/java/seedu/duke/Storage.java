@@ -138,11 +138,10 @@ public class Storage {
         }
     }
 
-    public void saveFile() {
+    public void saveFile(ArrayList<ClientPackage> clientPackages) {
         try {
             FileWriter writer = new FileWriter(filePath.toString());
-            ArrayList<ClientPackage> clientPackageArray = ClientPackageList.getClientPackages();
-            for (ClientPackage clientPackage : clientPackageArray) {
+            for (ClientPackage clientPackage : clientPackages) {
                 writer.write(clientPackage.storageString() + System.lineSeparator());
             }
             writer.close();
