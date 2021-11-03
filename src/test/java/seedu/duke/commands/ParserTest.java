@@ -247,4 +247,28 @@ class ParserTest {
         }
     }
 
+    @Test
+    public void parse_stats_StatsCommandObject() {
+        boolean type = parser.parse("stats all") instanceof StatsCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_stats_StatsInvalidFormatExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        String args = "stats hello";
+        try {
+            StatsCommand a = (StatsCommand) parser.parse(args);
+            a.handlesStatsCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals("  (!) Invalid Stats command" + System.lineSeparator()
+                    + "  (!) Format:" + System.lineSeparator()
+                    + "  1. stats all" + System.lineSeparator()
+                    + "  2. stats category" + System.lineSeparator()
+                    + "  3. stats status", e.getMessage());
+        }
+    }
+
 }
