@@ -21,7 +21,7 @@ import static seedu.duke.common.Messages.EDIT_INVALID_ITEM;
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     protected HashMap<String, String> args;
-    private Item toEdit;
+    protected Item toEdit;
 
     /**
      * Sole Constructor.
@@ -33,13 +33,13 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Processes Edit Command, including exceptions.
+     * Processes hashmap arguments to extract out ID of item to be edited.
+     * Includes exception handling.
      *
-     * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates a library catalogue
-     * @throws LibmgrException when user input is invalid
+     * @throws LibmgrException when user input and hashmap arguments are invalid
      */
-    public void handlesEditCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+    public void processArgs(Catalogue catalogue) throws LibmgrException {
         String commandWord = args.get(null).strip();
         String[] command = commandWord.split("\\s+");
         if (!command[0].equals(COMMAND_WORD) || command.length < 2) {
@@ -51,6 +51,17 @@ public class EditCommand extends Command {
         } catch (NullPointerException e) {
             throw new LibmgrException(EDIT_INVALID_ITEM);
         }
+    }
+
+    /**
+     * Processes Edit Command, including exceptions.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates a library catalogue
+     * @throws LibmgrException when user input and hashmap arguments are invalid
+     */
+    public void handlesEditCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+        processArgs(catalogue);
         if (toEdit instanceof Book) {
             new EditBookCommand(args, toEdit).execute(ui, catalogue);
         } else if (toEdit instanceof Audio) {
@@ -60,9 +71,8 @@ public class EditCommand extends Command {
         } else if (toEdit instanceof Video) {
             new EditVideoCommand(args, toEdit).execute(ui, catalogue);
         } else {
-            new EditItemCommand(args, toEdit).execute(ui, catalogue);
+            new EditMiscellaneousCommand(args, toEdit).execute(ui, catalogue);
         }
-
     }
 
     /**

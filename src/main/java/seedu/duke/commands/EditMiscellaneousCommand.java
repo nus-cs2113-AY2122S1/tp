@@ -7,8 +7,8 @@ import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
 
-import static seedu.duke.common.Messages.EDIT_ITEM_INVALID_FORMAT;
-import static seedu.duke.common.Messages.EDIT_ITEM_MESSAGE;
+import static seedu.duke.common.Messages.EDIT_MISCELLANEOUS_INVALID_FORMAT;
+import static seedu.duke.common.Messages.EDIT_MISCELLANEOUS_MESSAGE;
 import static seedu.duke.common.Messages.EDIT_UNCHANGED_ID;
 import static seedu.duke.common.Messages.EDIT_UNCHANGED_TITLE;
 import static seedu.duke.common.Messages.KEY_ID;
@@ -16,9 +16,9 @@ import static seedu.duke.common.Messages.KEY_TITLE;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 /**
- * Class encapsulating an Edit General Item Command
+ * Class encapsulating an Edit Miscellaneous Item Command.
  */
-public class EditItemCommand extends Command {
+public class EditMiscellaneousCommand extends Command {
     private Item toEdit;
     private HashMap<String, String> args;
     private String title;
@@ -32,7 +32,7 @@ public class EditItemCommand extends Command {
      *             Key represents the type of argument (null represents command word and id of item to edit)
      *             Value represents value associated with argument type
      */
-    public EditItemCommand(HashMap<String,String> args, Item toEdit) {
+    public EditMiscellaneousCommand(HashMap<String,String> args, Item toEdit) {
         this.toEdit = toEdit;
         this.args = args;
     }
@@ -88,18 +88,16 @@ public class EditItemCommand extends Command {
     }
 
     /**
-     * Executes Edit Item command.
-     * Overrides method from parent class.
+     * Processes Edit Miscellaneous Command, including exceptions.
      *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
+     * @throws LibmgrException when the user input is invalid
      */
-    @Override
-    public void execute(TextUI ui, Catalogue catalogue) {
+    public void handlesEditMiscellaneousCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         processArgs();
         if (checkMissingArgs() || checkEmptyArgs()) {
-            ui.print(EDIT_ITEM_INVALID_FORMAT);
-            return;
+            throw new LibmgrException(EDIT_MISCELLANEOUS_INVALID_FORMAT);
         }
         if (checkInvalidArgs()) {
             ui.print(WARN_INVALID_ARGS);
@@ -107,25 +105,34 @@ public class EditItemCommand extends Command {
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
             if (toEdit.getTitle().equals(title)) {
-                ui.print(EDIT_UNCHANGED_TITLE);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_TITLE);
             }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
             if (toEdit.getID().equals(id)) {
-                ui.print(EDIT_UNCHANGED_ID);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_ID);
             }
-            try {
-                catalogue.checkDuplicateID(id);
-            } catch (LibmgrException e) {
-                ui.print(e.getMessage());
-                return;
-            }
+            catalogue.checkDuplicateID(id);
             toEdit.setID(id);
         }
-        ui.print(EDIT_ITEM_MESSAGE, toEdit);
+        ui.print(EDIT_MISCELLANEOUS_MESSAGE, toEdit);
+    }
+
+    /**
+     * Executes Edit Miscellaneous command, including exception handling.
+     * Overrides method from parent class.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
+     */
+    @Override
+    public void execute(TextUI ui, Catalogue catalogue) {
+        try {
+            handlesEditMiscellaneousCommand(ui, catalogue);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
+        }
     }
 }
