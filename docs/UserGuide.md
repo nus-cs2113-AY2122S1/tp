@@ -136,6 +136,9 @@ Examples:
 * `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
 * `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
 
+> 💡 **Note:**<br />
+> `STUDENT_ID` will be converted to uppercase.
+
 <br>
 
 #### Editing a student's information in a class: `edit_student`
@@ -150,6 +153,9 @@ Format: `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_N
 Examples:
 * `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
 * `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
+
+> 💡 **Note:**<br />
+> `STUDENT_ID` will be converted to uppercase.
 
 <br>
 
