@@ -234,8 +234,14 @@ public class Parser {
 
             if (newAmount < 0) {
                 throw new SitusException(INVALID_AMOUNT_MESSAGE);
-            } else if (newAmount == 0) {
+            }
+
+            if (newAmount == 0) {
                 throw new SitusException(USE_DELETE_INSTEAD_MESSAGE);
+            }
+
+            if (newAmount >= MAX_INGREDIENT_THRESHOLD) {
+                throw new SitusException(MAX_INGREDIENT_THRESHOLD_MESSAGE);
             }
 
             return new UpdateCommand(groupNumber, ingredientNumber, newAmount).run();
