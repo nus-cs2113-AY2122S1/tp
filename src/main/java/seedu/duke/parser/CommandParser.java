@@ -14,6 +14,7 @@ import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
 import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
+import seedu.duke.exception.NoIndexException;
 import seedu.duke.log.Log;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.utility.Utility;
 
 //@@author APZH
+
 /**
  * Parses user input.
  */
@@ -34,6 +36,7 @@ public class CommandParser {
     private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     //@@author APZH
+
     /**
      * Returns a {@code Map} mapping command flags to the arguments entered by the user.
      *
@@ -69,6 +72,7 @@ public class CommandParser {
     }
 
     //@@author APZH
+
     /**
      * Creates a {@code Command} object based on the {@code commandSyntax}.
      *
@@ -108,6 +112,7 @@ public class CommandParser {
     }
 
     //@@author APZH
+
     /**
      * Returns the {@code Command} to be executed based on the {@code userInput}.
      *
@@ -130,8 +135,11 @@ public class CommandParser {
     }
 
     //@@author SeanRobertDH
-    public static Integer parseTaskIndex(String index) throws NumberFormatException {
+    public static Integer parseTaskIndex(String index) throws NumberFormatException, NoIndexException {
         if (!Utility.isInteger(index)) {
+            if (index.equals("")) {
+                throw new NoIndexException();
+            }
             throw new NumberFormatException(String.format(INVALID_TASK_INDEX, index));
         }
         return Integer.parseInt(index);

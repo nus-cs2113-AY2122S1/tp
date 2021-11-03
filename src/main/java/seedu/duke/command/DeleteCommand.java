@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
+import seedu.duke.exception.NoIndexException;
 import seedu.duke.exception.NoTasksSpecifiedException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.task.Task;
@@ -29,7 +30,7 @@ public class DeleteCommand extends Command {
         String message = TASK_DELETED;
         try {
             String mainArgument = getMainArgument();
-            if (mainArgument == null) {
+            if (mainArgument == null || mainArgument.equals("")) {
                 throw new NullPointerException();
             }
             if (taskManager.isEmpty()) {
@@ -49,6 +50,8 @@ public class DeleteCommand extends Command {
             message = ntse.getMessage();
         } catch (NumberFormatException nfe) {
             message = nfe.getMessage();
+        } catch (NoIndexException nie) {
+            message = String.format(nie.getMessage(), getMainArgument());
         } catch (InvalidTaskIndexException itie) {
             message = itie.getMessage();
         }
@@ -65,7 +68,7 @@ public class DeleteCommand extends Command {
         return parsedArgument.split(SEPARATOR);
     }
 
-    private TreeSet<Integer> getTasksToDelete(String[] indexStrings) throws NumberFormatException {
+    private TreeSet<Integer> getTasksToDelete(String[] indexStrings) throws NumberFormatException, NoIndexException {
         TreeSet<Integer> indexes = new TreeSet<>();
         for (String indexString : indexStrings) {
             if (indexString.contains(LIST_NUMBERS)) {

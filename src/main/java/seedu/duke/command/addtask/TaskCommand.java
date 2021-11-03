@@ -26,7 +26,8 @@ public abstract class TaskCommand extends Command {
     public CommandResult executeCommand() throws Exception {
         String message;
         try {
-            if (getMainArgument() == null) {
+            String mainArgument = getMainArgument();
+            if (mainArgument == null || mainArgument.equals("")) {
                 throw new NullPointerException();
             }
 
