@@ -70,6 +70,9 @@ public class Parser {
     private static final long MAX_STOCK_THRESHOLD = 1000;
     private static final String MAX_STOCK_THRESHOLD_MESSAGE = "The max stock threshold is 1000kg";
 
+    private static final long MAX_INGREDIENT_THRESHOLD = 1000;
+    private static final String MAX_INGREDIENT_THRESHOLD_MESSAGE = "The maximum amount for an ingredient is 1000kg.";
+
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = "n/|a/|e/";
@@ -285,6 +288,10 @@ public class Parser {
 
             if (ingredientAmount <= 0) {
                 throw new SitusException(INVALID_AMOUNT_MESSAGE);
+            }
+
+            if (ingredientAmount >= MAX_INGREDIENT_THRESHOLD) {
+                throw new SitusException(MAX_INGREDIENT_THRESHOLD_MESSAGE);
             }
             LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
 
