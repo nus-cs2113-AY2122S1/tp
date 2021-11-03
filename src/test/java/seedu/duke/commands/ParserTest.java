@@ -134,7 +134,7 @@ class ParserTest {
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
         // add.execute(ui, catalogue);
-        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, "Harper Lee");
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
@@ -174,7 +174,7 @@ class ParserTest {
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
         // add.execute(ui, catalogue);
-        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, "Harper Lee");
+        Book b = new Book("To Kill a Mockingbird", "2551", Status.AVAILABLE, null, null, "Harper Lee");
         try {
             catalogue.add(b);
         } catch (LibmgrException e) {
