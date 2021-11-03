@@ -10,7 +10,10 @@ import seedu.duke.data.Book;
 import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
 import static seedu.duke.common.Messages.DIVIDER;
