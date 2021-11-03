@@ -93,7 +93,7 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Unable to add medicine. Medicine is expired.";
+        String error = "Unable to add medicine. Medicine has expired.";
 
         assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
