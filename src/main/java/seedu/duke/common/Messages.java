@@ -52,7 +52,7 @@ public class Messages {
             + "  (+) Display all library statistics: stats all" + System.lineSeparator()
             + "  (+) Display library statistics by item category: stats category" + System.lineSeparator()
             + "  (+) Display library statistics by item status: stats status" + System.lineSeparator()
-            + "  (+) Get a list of user commands: help" + System.lineSeparator()
+            + "  (+) Get a list of valid user commands: help" + System.lineSeparator()
             + "  (+) Exit the program: exit";
 
     // Add Commands

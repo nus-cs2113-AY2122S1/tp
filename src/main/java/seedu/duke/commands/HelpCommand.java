@@ -7,7 +7,7 @@ import static seedu.duke.common.Messages.HELP_MESSAGE;
 
 //@@author avellinwong01
 /**
- * Class encapsulating a Help Command
+ * Class encapsulating a Help Command.
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
