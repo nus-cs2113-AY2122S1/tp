@@ -59,7 +59,7 @@ public class UniversityList {
         return list.get(index);
     }
 
-    public boolean searchUniversity(String universityName) {
+    public boolean isExistUniversity(String universityName) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).name.equals(universityName)) {
                 return true;

@@ -2,6 +2,7 @@ package seplanner.parser;
 
 import seplanner.commands.SearchMapCommand;
 import seplanner.constants.Constants;
+import seplanner.exceptions.AddParseException;
 import seplanner.exceptions.SearchMapParseException;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
@@ -18,24 +19,24 @@ public class SearchMapCommandParser {
             throws SearchMapParseException {
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String input = arguments.trim();
-        if (input.length() == 0) {
+        if (ParseCondition.isEmptyInput(input)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
         University university;
 
-        if (isNumeric(input)) {
-            int index = Integer.parseInt(input);
-            if (index > universityMasterList.getSize() || index < 1) {
+        if (ParseCondition.isNumeric(input)) {
+            int uniIndex = Integer.parseInt(input);
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
-            university = universityMasterList.get(index - 1);
+            university = universityMasterList.get(uniIndex - 1);
         } else {
-            university = searchForUniversity(input, universityMasterList);
+            university = universityMasterList.getUniversity(input);
         }
 
-        if (university == null) {
+        if (ParseCondition.isNullUniversity(university)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
@@ -44,21 +45,4 @@ public class SearchMapCommandParser {
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
     }
 
-    private static boolean isNumeric(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private University searchForUniversity(String universityName, UniversityList universityMasterList) {
-        for (University university : universityMasterList.getList()) {
-            if (universityName.equals(university.getName())) {
-                return university;
-            }
-        }
-        return null;
-    }
 }

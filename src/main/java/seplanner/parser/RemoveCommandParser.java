@@ -11,7 +11,6 @@ import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -54,7 +53,7 @@ public class RemoveCommandParser {
 
     private String identifyFlagAndSplitArgs(String arguments) throws RemoveParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
-        if (argumentsSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
@@ -69,7 +68,7 @@ public class RemoveCommandParser {
         if (textMatches) {
             uniName = arguments;
             // Check if university has been added
-            if (!universitySelectedList.searchUniversity(uniName)) {
+            if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
@@ -81,7 +80,7 @@ public class RemoveCommandParser {
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             // Check if university exists
-            if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
@@ -90,7 +89,7 @@ public class RemoveCommandParser {
         }
 
         // Check if university has been added already
-        if (!universitySelectedList.searchUniversity(uniName)) {
+        if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
@@ -102,7 +101,7 @@ public class RemoveCommandParser {
         if (textMatches) {
             module = moduleSelectedList.getModule(arguments);
             // Check if module has been added already
-            if (module == null) {
+            if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
@@ -114,14 +113,14 @@ public class RemoveCommandParser {
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             // Check if module exists
-            if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             module = moduleMasterList.get(modIndex - 1);
         }
         // Check if module has been added already
-        if (!moduleSelectedList.isModuleExist(module.getModuleCode())) {
+        if (!ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
         }
@@ -132,9 +131,7 @@ public class RemoveCommandParser {
                                    UniversityList universityMasterList) throws RemoveParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
-        University currentUni = new University();
-        boolean validUni = false;
-        if (argumentSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
@@ -145,23 +142,15 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
         }
-        for (University uni : universitySelectedList.getList()) {
-            if (uni.getIndex() == uniIndex) {
-                validUni = true;
-                currentUni = uni;
-                break;
-            }
-        }
-        if (!validUni) {
-
+        if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);  
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
+        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
         }
-        if (currentUni.getMappingListSize() < mapIndex || mapIndex < 1) {
+        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }

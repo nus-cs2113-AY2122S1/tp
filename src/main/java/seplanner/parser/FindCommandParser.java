@@ -40,7 +40,7 @@ public class FindCommandParser {
 
     private String identifyFlagAndSplitArgs(String arguments) throws FindParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
-        if (argumentsSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
 
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
