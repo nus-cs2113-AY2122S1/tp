@@ -12,8 +12,8 @@ public class MemberStorage {
 
     /**
      * Sets up the duke members csv file. It will first try to find if the file exists in the current
-     * directory. If the file exists, it will load the CCAMembers CSV file into the current member list. If not it will create a new
-     * member csv file in the current directory.
+     * directory. If the file exists, it will load the CCAMembers CSV file into the current member list.
+     * If not it will create a new member csv file in the current directory.
      *
      * @param memberList the list of current members.
      */
