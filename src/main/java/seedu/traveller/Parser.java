@@ -11,7 +11,6 @@ import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.SearchItemCommand;
 import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.ShortestCommand;
-import seedu.traveller.commands.EditMapCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
@@ -28,20 +27,12 @@ import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.InvalidNumberOfDaysException;
-import seedu.traveller.exceptions.InvalidEditMapFormatException;
-import seedu.traveller.exceptions.DistanceNonNegativeException;
-import seedu.traveller.exceptions.DistanceNonStringException;
 import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
 import seedu.traveller.exceptions.InvalidShortestDistException;
 import seedu.traveller.exceptions.InvalidShortestCostException;
-import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
-
-import seedu.traveller.worldmap.WorldMap;
-import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
-import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 
 import java.util.Objects;
 import java.util.logging.Level;
@@ -120,9 +111,6 @@ public class Parser {
                 break;
             case "help":
                 command = parseHelpCommand();
-                break;
-            case "edit-map":
-                command = parseEditMapCommand(userInput[1]);
                 break;
             default:
                 logger.log(Level.WARNING, "Invalid command input!");
@@ -440,44 +428,6 @@ public class Parser {
         return command;
     }
 
-    private static Command parseEditMapCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Edit-map command input");
-        Command command;
-        String startCountryCode;
-        String endCountryCode;
-        String rawDist;
-
-        try {
-            int distIdx = getDistFlagIndex(userInput);
-
-            rawDist = parseFieldValue(userInput, distIdx + DIST_LENGTH, userInput.length());
-
-            int toIdx = getToFlagIndex(userInput);
-
-            try {
-                WorldMap.distanceNonString(rawDist);
-            } catch (NonStringDistanceException e) {
-                throw new DistanceNonStringException();
-            }
-
-            double dist = Double.parseDouble(rawDist);
-            WorldMap.distanceNonZero(dist);
-
-            startCountryCode = parseFieldValue(userInput, FROM_LENGTH - 1, toIdx).toUpperCase();
-            endCountryCode = parseFieldValue(userInput, toIdx + TO_LENGTH, distIdx).toUpperCase();
-            assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
-            assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
-            assert !(dist < 0.1) : "distance should be more than 0.1.";
-
-            command = new EditMapCommand(startCountryCode, endCountryCode, dist);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidEditMapFormatException();
-        } catch (NonZeroDistanceException e) {
-            throw new DistanceNonNegativeException();
-        }
-
-        return command;
-    }
 
     /**
      * Parses user input to give an <code>AddDayCommand</code>.
