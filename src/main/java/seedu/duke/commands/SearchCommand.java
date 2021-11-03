@@ -12,6 +12,7 @@ import seedu.duke.ui.TextUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static seedu.duke.common.Messages.KEY_CATEGORY;
@@ -115,7 +116,7 @@ public class SearchCommand extends Command {
             if (k.equals(KEY_TITLE) && temp.getTitle().contains(v)) {
                 matches++;
             }
-            if (k.equals(KEY_STATUS) && v.equals(temp.getStatus().name())) {
+            if (k.equals(KEY_STATUS) && v.toUpperCase(Locale.ROOT).equals(temp.getStatus().name())) {
                 matches++;
             }
             if (k.equals(KEY_CATEGORY)) {
