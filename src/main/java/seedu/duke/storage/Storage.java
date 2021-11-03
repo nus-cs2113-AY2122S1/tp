@@ -80,9 +80,9 @@ public class Storage {
                         );
                         addDeadlineWorkout(workoutList, workoutModel, deadlineWorkout);
                     } catch (DateTimeParseException e) {
-                        throw new StorageException("☹ OOPS!!! Error reading file! Please " +
-                                "ensure the deadline in data/workouts.json " +
-                                "is in the format yyyy-mm-dd.");
+                        throw new StorageException("☹ OOPS!!! Error reading file! Please "
+                                + "ensure the deadline in data/workouts.json "
+                                + "is in the format yyyy-mm-dd.");
                     }
                 }
             }
@@ -162,8 +162,8 @@ public class Storage {
             return exercise;
         } catch (NumberFormatException e) {
             LOGGER.log(Level.SEVERE, "Invalid values for sets and reps in data/workouts.json");
-            throw new StorageException("☹ OOPS!!! Error reading file! Please " +
-                    "ensure the sets and reps in data/workouts.json are numbers.");
+            throw new StorageException("☹ OOPS!!! Error reading file! Please "
+                    + "ensure the sets and reps in data/workouts.json are numbers.");
         }
 
     }
@@ -184,8 +184,8 @@ public class Storage {
 
             return workoutListModel.getWorkouts();
         } catch (IOException e) {
-            throw new StorageException("☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for " +
-                    "proper closing brackets \"{ }\" and \"[ ]\" in data/workouts.json.");
+            throw new StorageException("☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for "
+                    + "proper closing brackets \"{ }\" and \"[ ]\" in data/workouts.json.");
         }
     }
 
