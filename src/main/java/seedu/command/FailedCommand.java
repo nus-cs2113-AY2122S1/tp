@@ -37,6 +37,7 @@ public class FailedCommand extends Command {
         case MISSING_DETAIL: // Fallthrough
         case MISSING_NAME: // Fallthrough
         case MISSING_INDEX: // Fallthrough
+        case INVALID_INDEX_EDIT:
             missingUserInputExecute();
             break;
         default:
@@ -94,6 +95,9 @@ public class FailedCommand extends Command {
             break;
         case MISSING_INDEX:
             ExceptionTextUi.missingIndexMessage();
+            break;
+        case INVALID_INDEX_EDIT:
+            ExceptionTextUi.missingIndexEditMessage();
             break;
         default:
             return;

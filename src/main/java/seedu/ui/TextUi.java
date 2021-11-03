@@ -5,9 +5,11 @@ import seedu.contact.ContactList;
 
 import java.util.ArrayList;
 
-public abstract class TextUi {
+
+public class TextUi {
     public static final int GITHUB_INDEX = 1;
     public static final int EMAIL_INDEX = 5;
+
     private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
@@ -267,7 +269,9 @@ public abstract class TextUi {
                 + "view: Displays all details for index specified contact.\n"
                 + " Parameter: INDEX\n"
                 + " Note: Index starts from 0.\n"
-                + " Example: view 2\n\n"
+                + "       \"me\" is used as INDEX for personal contact\n"
+                + " Examples: view 2\n"
+                + "           view me\n\n"
                 + "me: Displays all details for personal contact.\n"
                 + " Example: me\n\n"
                 + "rm: Deletes the index specified contact.\n"

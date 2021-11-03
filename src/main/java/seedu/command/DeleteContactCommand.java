@@ -10,7 +10,8 @@ import seedu.ui.UserInputTextUi;
 
 public class DeleteContactCommand extends Command {
     private static final String ACKNOWLEDGE_DELETE = "y";
-    private static final int DELETE_ALL_CONTACTS = -2;
+    private static final int PERSONAL_CONTACT_INDEX = -1;
+    private static final int DELETE_ALL_CONTACTS_INDEX = -2;
 
     private final int contactIndex;
     private final boolean[] hasDeletedDetails;
@@ -78,8 +79,10 @@ public class DeleteContactCommand extends Command {
 
     public void execute() {
         try {
-            if (contactIndex == DELETE_ALL_CONTACTS) {
+            if (contactIndex == DELETE_ALL_CONTACTS_INDEX) {
                 deleteAllContacts();
+            } else if (contactIndex == PERSONAL_CONTACT_INDEX) {
+                ExceptionTextUi.missingIndexMessage();
             } else if (hasDeletedDetails[6]) { //delete entire contact
                 deleteSelectedContact();
             } else {
