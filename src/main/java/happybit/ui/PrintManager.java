@@ -245,6 +245,10 @@ public class PrintManager {
         printLine();
     }
 
+    public void printStorageMessage(String storageMessage) {
+        System.out.println(storageMessage);
+    }
+
     /**
      * Prints an error message.
      *

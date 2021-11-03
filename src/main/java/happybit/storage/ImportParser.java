@@ -9,12 +9,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Handles the parsing of data from storage file and return the appropriate object back to Import class.
+ */
 public class ImportParser {
     private static final String SLEEP = "[SL]";
     private static final String FOOD = "[FD]";
     private static final String EXERCISE = "[EX]";
     private static final String STUDY = "[SD]";
     private static final String NULL = "null";
+    private static final String DATE_FORMAT = "ddMMyyyy";
     private static final int GOAL_TYPE_INDEX = 2;
     private static final int GOAL_NAME_INDEX = 3;
     private static final int GOAL_START_INDEX = 4;
@@ -27,12 +31,18 @@ public class ImportParser {
     private static final int INTERVAL_END_INDEX = 4;
     private static final int INTERVAL_COMPLETE_INDEX = 5;
 
+    /**
+     * Parses the data from storage for a Goal object.
+     *
+     * @param lineData the data from storage to be parsed
+     * @return Goal class that contains data read from storage
+     * @throws ParseException error when paring date from storage
+     */
     protected static Goal goalParser(String[] lineData) throws ParseException {
         GoalType goalType;
         Date dateStart;
         Date dateEnd;
-
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         dateStart = format.parse(lineData[GOAL_START_INDEX]);
         dateEnd = format.parse(lineData[GOAL_END_INDEX]);
 
@@ -52,15 +62,19 @@ public class ImportParser {
         default:
             goalType = GoalType.DEFAULT;
         }
-
-        return new Goal(lineData[GOAL_NAME_INDEX],
-                goalType,
-                dateStart,
-                dateEnd);
+        return new Goal(lineData[GOAL_NAME_INDEX], goalType, dateStart, dateEnd);
     }
 
+    /**
+     * Parses the data from storage for a Habit object.
+     *
+     * @param lineData the data from storage to be parsed
+     * @return Habit object containing the data read from storage
+     * @throws NumberFormatException error when parsing a string to integer
+     * @throws ParseException error when parsing a date
+     */
     protected static Habit habitParser(String[] lineData) throws NumberFormatException, ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         Date habitStartDate = format.parse(lineData[HABIT_START_INDEX]);
         Date habitEndDate = format.parse(lineData[HABIT_END_INDEX]);
         String habitName = lineData[HABIT_NAME_INDEX];
@@ -69,8 +83,15 @@ public class ImportParser {
         return new Habit(habitName, habitStartDate, habitEndDate, habitInterval);
     }
 
+    /**
+     * Parses the data from storage for an Interval object.
+     *
+     * @param lineData the data from storage to be parsed
+     * @return Interval object containing the data read from storage
+     * @throws ParseException error when parsing a date
+     */
     protected static Interval intervalParser(String[] lineData) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         Date intervalStartDate = format.parse(lineData[INTERVAL_START_INDEX]);
         Date intervalEndDate = format.parse(lineData[INTERVAL_END_INDEX]);
         Interval interval = new Interval(intervalStartDate, intervalEndDate);

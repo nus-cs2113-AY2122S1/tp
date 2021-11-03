@@ -471,7 +471,7 @@ Exits the program.\
 
 > ⚠ Make sure to use this command before exiting the program to ensure that your data is saved properly.
 
-**Format:** `bye`
+**Format:** `exit`
 
 **Example:**
 ```
