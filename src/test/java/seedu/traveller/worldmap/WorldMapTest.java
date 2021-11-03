@@ -103,4 +103,48 @@ public class WorldMapTest {
         assertEquals(minCalcResult.toString(),
                 WorldMap.calcMinDistance("JPN", "SIN").toString());
     }
+
+    @Test
+    public void calcMinCost_sinJpn_success() throws EmptyVertexException {
+        Country countrySin = new Country("SIN", 0);
+        Country countryChn = new Country("CHN", 2);
+        Country countryJpn = new Country("JPN", 3);
+
+        List<Country> path = new ArrayList<>();
+        path.add(countrySin);
+        path.add(countryChn);
+        path.add(countryJpn);
+
+        List<Double> costs = new ArrayList<>();
+        costs.add(150.0);
+        costs.add(400.0);
+
+        MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryJpn, path, costs);
+
+        assertEquals(minCalcResult.toString(),
+                WorldMap.calcMinCost("SIN", "JPN").toString());
+    }
+
+    @Test
+    public void calcMinCost_jpnSin_success() throws EmptyVertexException {
+        Country countrySin = new Country("SIN", 0);
+        Country countryChn = new Country("CHN", 2);
+        Country countryJpn = new Country("JPN", 3);
+
+        List<Country> path = new ArrayList<>();
+        path.add(countryJpn);
+        path.add(countryChn);
+        path.add(countrySin);
+
+        List<Double> costs = new ArrayList<>();
+        costs.add(400.0);
+        costs.add(150.0);
+
+        MinCalcResult minCalcResult = new MinCalcResult(countryJpn, countrySin, path, costs);
+
+        assertEquals(minCalcResult.toString(),
+                WorldMap.calcMinCost("JPN", "SIN").toString());
+    }
+
+
 }
