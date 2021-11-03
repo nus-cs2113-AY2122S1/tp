@@ -38,7 +38,7 @@ public class ListRecipesUserCanCookCommandTest {
     @Test
     public void listRecipesUserCanCookCommand_enoughIngredientsButSomeAreExpired_listRecipeUserCanCook() {
         final RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
-        final IngredientRepository ingredients = TestUtil.generateIngredientRepositoryWithExpiredIngredients(1,20);
+        final IngredientRepository ingredients = TestUtil.generateExpiredIngredientsForExampleRecipe(1,20);
         Command command = new ListRecipesUserCanCookCommand();
         String message = String.format(ListRecipesUserCanCookCommand.MESSAGE_RECIPES_WITH_ENOUGH_INGREDIENTS_TO_COOK,
                 TestUtil.generateChickenRecipe() + "\n"

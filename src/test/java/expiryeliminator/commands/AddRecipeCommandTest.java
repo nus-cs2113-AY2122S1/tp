@@ -15,7 +15,8 @@ class AddRecipeCommandTest {
         final IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
         RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
-                TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
+                TestUtil.generateIngredientNamesForRecipe("Chicken","Salt"),
+                TestUtil.generateQuantitiesForRecipe(1,20));
         String errorMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ALREADY_EXISTS,
                 TestUtil.EXAMPLE_RECIPE_NAME);
         assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
@@ -26,7 +27,8 @@ class AddRecipeCommandTest {
         final IngredientRepository ingredientRepository = new IngredientRepository();
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
-                TestUtil.generateDuplicateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
+                TestUtil.generateIngredientNamesForRecipe("Chicken","Chicken"),
+                TestUtil.generateQuantitiesForRecipe(1,20));
         String errorMessage = String.format(AddRecipeCommand.MESSAGE_DUPLICATE_INGREDIENT, TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.EXAMPLE_INGREDIENT_NAME);
         assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
@@ -37,7 +39,8 @@ class AddRecipeCommandTest {
         final IngredientRepository ingredientRepository = new IngredientRepository();
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
-                TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateZeroQuantityForRecipe());
+                TestUtil.generateIngredientNamesForRecipe("Chicken","Salt"),
+                TestUtil.generateQuantitiesForRecipe(1,0));
         String errorMessage = AddRecipeCommand.MESSAGE_ILLEGAL_VALUE_ERROR;
         assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
     }
@@ -47,7 +50,8 @@ class AddRecipeCommandTest {
         final IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
-                TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
+                TestUtil.generateIngredientNamesForRecipe("Chicken","Salt"),
+                TestUtil.generateQuantitiesForRecipe(1,20));
         String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED,
                 TestUtil.generateChickenRecipe(), 1);
         assertEquals(command.execute(ingredientRepository, recipes), successMessage);
@@ -58,7 +62,8 @@ class AddRecipeCommandTest {
         final IngredientRepository ingredientRepository = new IngredientRepository();
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
-                TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
+                TestUtil.generateIngredientNamesForRecipe("Chicken","Salt"),
+                TestUtil.generateQuantitiesForRecipe(1,20));
         String successAndIngredientsAddedMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED_WITH_REMINDER,
                 TestUtil.generateRecipeWithoutUnits(),1,TestUtil.INGREDIENTS_TO_UPDATE_UNITS);
         assertEquals(command.execute(ingredientRepository,recipes),successAndIngredientsAddedMessage);

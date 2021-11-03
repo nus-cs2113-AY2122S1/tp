@@ -278,6 +278,7 @@
      Invalid command format!
      add recipe: Adds a recipe with its constituent ingredients to the recipe list.
      You can add any number of ingredients with its required quantities.
+     You must add at least one ingredient to the recipe.
      Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...
      Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ____________________________________________________________________________________________________
@@ -286,6 +287,7 @@
      Invalid command format!
      add recipe: Adds a recipe with its constituent ingredients to the recipe list.
      You can add any number of ingredients with its required quantities.
+     You must add at least one ingredient to the recipe.
      Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...
      Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ____________________________________________________________________________________________________
@@ -370,18 +372,22 @@
 
     ____________________________________________________________________________________________________
      I've deleted this recipe for you:
+
      Apple Pie
      - Blue Apple (qty: 4)
      - Red Apple (qty: 4)
+
      Now you have 1 recipe(s)
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      I've deleted this recipe for you:
+
      Apple Cake
      - Flour (qty: 400 grams)
      - Green Apple (qty: 2)
      - Red Apple (qty: 2)
+
      Now you have 0 recipe(s)
     ____________________________________________________________________________________________________
 
