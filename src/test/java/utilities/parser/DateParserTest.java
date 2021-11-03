@@ -33,4 +33,13 @@ public class DateParserTest {
         String parsedStr = DateParser.dateToString(date);
         assertEquals("13-09-2021", parsedStr);
     }
+
+    @Test
+    public void removeTime_validDate_expectValid() {
+        Date date = new GregorianCalendar(2021, 8, 13,10,10,10).getTime();
+        Date dateWithoutTime = DateParser.removeTime(date);
+        Date expectedDate = new GregorianCalendar(2021,8,13).getTime();
+        assertEquals(expectedDate, dateWithoutTime);
+    }
+
 }
