@@ -30,9 +30,9 @@ import taa.command.mark.MedianMarkCommand;
 import taa.command.attendance.SetAttendanceCommand;
 import taa.command.mark.SetMarkCommand;
 import taa.command.student.SortByScoresCommand;
-import taa.command.student.SetCommentCommand;
-import taa.command.student.DeleteCommentCommand;
-import taa.command.student.ListCommentCommand;
+import taa.command.comment.SetCommentCommand;
+import taa.command.comment.DeleteCommentCommand;
+import taa.command.comment.ListCommentCommand;
 import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
