@@ -34,7 +34,7 @@ public class EditCommand extends Command {
             if (taskManager.isEmpty()) {
                 throw new EmptyTasklistException();
             }
-            int index = CommandParser.parseTaskIndex(getMainArgument());
+            int index = CommandParser.parseTaskIndex(mainArgument);
             Task editedTask = taskManager.editFilteredTask(index - 1, commandArguments);
             message += editedTask.getTaskEntryDescription();
         } catch (NullPointerException npe) {

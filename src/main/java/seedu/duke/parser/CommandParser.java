@@ -1,7 +1,8 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.Command;
+import seedu.duke.command.BrowseCommand;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
@@ -99,6 +100,8 @@ public class CommandParser {
             return new ModuleCommand(taskManager, commandOptions);
         case EDIT:
             return new EditCommand(taskManager, commandOptions);
+        case BROWSE:
+            return new BrowseCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }
