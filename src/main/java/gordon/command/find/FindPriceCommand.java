@@ -14,6 +14,13 @@ public class FindPriceCommand extends Command {
         this.price = price;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the filterByPrice function and prints the sorted list of recipes</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by price...");

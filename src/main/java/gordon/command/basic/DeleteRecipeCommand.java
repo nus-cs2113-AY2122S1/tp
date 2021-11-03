@@ -12,6 +12,13 @@ public class DeleteRecipeCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the removeRecipe function and prints the corresponding message</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         try {

@@ -167,38 +167,39 @@ The `Command` class contains all the basic functionality of the Gordon cookbook,
 The `Command` class can be classified into 4 main functionalities:
 
 1. Basic Commands:
-   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
-   * `AddCommand` is where the `addRecipe` feature is executed
-   * `CheckCommand` is where the `checkRecipe` feature is executed
-   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
-   * `ListRecipesCommand` is where the `listRecipes` feature is executed
-   * `HelpCommand` is where the `help` feature is executed
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here.
+   * `AddCommand` is where the `addRecipe` feature is executed.
+   * `CheckCommand` is where the `checkRecipe` feature is executed.
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed.
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed.
+   * `HelpCommand` is where the `help` feature is executed.
 
    #### Example : `AddCommand`
 
-   `addRecipe Curry /ingredients Curry Sauce + Rice /steps Simmer + Cook`
+   `addRecipe Curry Rice /ingredients Curry Sauce + Rice /steps Simmer + Cook rice + Serve`
 
    #### Expected outcome:
 
     ```
-    Added Curry recipe! Yum!
-    Curry
+    Added Curry Rice recipe! Yum!
+    Curry Rice
     Ingredients needed: 
     1. Curry Sauce
     2. Rice 
     Method: 
     1. Simmer
     2. Cook
+    3. Serve
     ```
 
 2. Set Commands:
-   * The Commands that are required for the `set` feature of Gordon are contained here
-   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
-   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
-   * `SetPriceCommand` is where the `set` /price feature of gordon is executed
-   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
-   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
-   * `SetTimeCommand` is where the `set` /time feature of gordon is executed
+   * The Commands that are required for the `set` feature of Gordon are contained here.
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed.
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed.
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed.
+   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed.
+   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed.
+   * `SetTimeCommand` is where the `set` /time feature of gordon is executed.
 
    #### Example : `SetDifficultyCommand`
 
@@ -212,13 +213,13 @@ The `Command` class can be classified into 4 main functionalities:
     ```
 
 3. Find Commands:
-   *The Commands that are required for the `find` feature of Gordon are contained here
-   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
-   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed
-   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
-   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
-   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
-   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
+   *The Commands that are required for the `find` feature of Gordon are contained here.
+   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed.
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed.
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed.
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed.
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed.
+   * `FindTimeCommand` is where the `find` /time feature of gordon is executed.
 
    #### Example : `FindDifficultyCommand`
 
@@ -229,13 +230,14 @@ The `Command` class can be classified into 4 main functionalities:
     ```
     Searching by difficulty...
     1. Curry Rice (Difficulty: Hard)
+    2. Coffee (Difficulty: Easy)
     ```
 
 4. Tag Commands:
-   * The Commands that are required for the  `tag` feature of Gordon are contained here
-   * `TagAddCommand` is where the `tag` feature of gordon is executed
-   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
-   * `TagUntagCommand` is where the `untag` feature of gordon is executed
+   * The Commands that are required for the  `tag` feature of Gordon are contained here.
+   * `TagAddCommand` is where the `tag` feature of gordon is executed.
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed.
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed.
 
    #### Example : `TagAddCommand`
 

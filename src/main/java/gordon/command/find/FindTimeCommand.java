@@ -14,6 +14,13 @@ public class FindTimeCommand extends Command {
         this.time = time;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the filterByTime function and prints the sorted list of recipes</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Searching by total time...");
