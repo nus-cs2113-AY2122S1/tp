@@ -8,8 +8,6 @@ import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
 
-//@@author qqkoh
-
 /**
  * To make sense of user commands by extracting keywords and descriptions.
  */
@@ -29,8 +27,7 @@ public abstract class Parser {
 
     public static String getCommandType(String userInputString) {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
-        String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
-        return commandType;
+        return commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
     }
 
     /**
@@ -41,15 +38,13 @@ public abstract class Parser {
      */
     protected static String getCommandArguments(String userInputString) {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
-        String commandArgs = commandTypeAndParams[1].trim();
-        return commandArgs;
+        return commandTypeAndParams[1].trim();
     }
 
     static int parseWorkoutIndex(String commandArgs) throws GetJackDException {
         String arg = commandArgs.trim();
-        int workoutIndex = (Command.workoutMode == 0 || !arg.isEmpty()) ? parseArgsAsIndex(arg) :
+        return (Command.workoutMode == 0 || !arg.isEmpty()) ? parseArgsAsIndex(arg) :
                 Command.workoutMode;
-        return workoutIndex;
     }
 
     /**
@@ -69,8 +64,7 @@ public abstract class Parser {
         int lengthForItToContainWorkoutIndex = (isEdit) ? 3 : 1;
         int workoutIndex = (Command.workoutMode == 0 || args.length > lengthForItToContainWorkoutIndex)
                 ? parseArgsAsIndex(args[1]) : Command.workoutMode;
-        int[] indices = {exerciseIndex, workoutIndex};
-        return indices;
+        return new int[]{exerciseIndex, workoutIndex};
     }
 
     /**
