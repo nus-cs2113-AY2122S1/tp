@@ -13,6 +13,11 @@ import java.nio.file.Paths;
 
 public class SaveData {
 
+    /**
+     * Saves the recipe list to the txt file.
+     *
+     * @param recipes The whole recipe list.
+     */
     public static void saveRecipeListToFile(RecipeList recipes) {
         String pathName = "./data/";
         String fileName = "recipeList.txt";
@@ -25,6 +30,11 @@ public class SaveData {
         }
     }
 
+    /**
+     * Saves the whole ingredient repository to the txt file.
+     *
+     * @param ingredients The whole ingredient repository.
+     */
     public static void saveIngredientRepoToFile(IngredientRepository ingredients) {
         String pathName = "./data/";
         String fileName = "ingredientRepo.txt";
@@ -37,6 +47,12 @@ public class SaveData {
         }
     }
 
+    /**
+     * Flushes the txt file.
+     *
+     * @param pathName The pathname of the txt file, containing the directory name.
+     * @param fileName The filename of the txt file, containing the file name.
+     */
     public static void flushFile(String pathName, String fileName) {
         File file = new File(pathName + fileName);
         try {
@@ -47,6 +63,12 @@ public class SaveData {
         }
     }
 
+    /**
+     * Creates the txt file or the folder.
+     *
+     * @param pathName The pathname of the txt file, containing the directory name.
+     * @param fileName The filename of the txt file, containing the file name.
+     */
     public static void createFileOrFolder(String pathName, String fileName) {
         boolean hasExist = false;
         try {
@@ -68,6 +90,12 @@ public class SaveData {
         }
     }
 
+    /**
+     * Append text to the txt file.
+     *
+     * @param filePath     The whole pathname of the txt file.
+     * @param textToAppend The string that is going to be appended to the txt file.
+     */
     public static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend);

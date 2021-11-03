@@ -4,7 +4,9 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 public class HelpCommand extends Command {
-    /** Unique word associated with the command. */
+    /**
+     * Unique word associated with the command.
+     */
     public static final String COMMAND_WORD = "help";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
@@ -25,6 +27,7 @@ public class HelpCommand extends Command {
                 + "\n\n" + CookedRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ViewRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + UpdateRecipeCommand.MESSAGE_USAGE
+                + "\n\n" + DeleteIngredientInRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ListCommand.MESSAGE_USAGE
                 + "\n\n" + ViewIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + ListIngredientExpiringCommand.MESSAGE_USAGE
