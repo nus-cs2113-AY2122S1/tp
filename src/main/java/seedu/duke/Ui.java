@@ -35,7 +35,7 @@ public class Ui {
                 }
             }
         }
-    };
+    }
 
     public static String receiveUserInput() throws ForceCancelException {
         String userInput = Storage.getScanner().nextLine().strip();
@@ -105,12 +105,6 @@ public class Ui {
         System.out.println(e);
     }
 
-    /*public static void printExpensesSummary(Trip t) {
-        System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        *//*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
-        System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
-        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*//*
-    }*/
 
     public static void printFilteredExpenses(Expense e, int index) {
         System.out.println((index + 1) + ". " + e);

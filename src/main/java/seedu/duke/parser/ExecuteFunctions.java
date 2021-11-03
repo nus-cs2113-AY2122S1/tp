@@ -208,7 +208,7 @@ public abstract class ExecuteFunctions {
     }
 
     protected static void executeOptimize() throws TripNotOpenException {
-        if (Storage.checkOpenTrip()){
+        if (Storage.checkOpenTrip()) {
             checkForOptimization();
         } else {
             throw new TripNotOpenException();
