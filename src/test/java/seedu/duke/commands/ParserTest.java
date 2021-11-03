@@ -101,6 +101,12 @@ class ParserTest {
     }
 
     @Test
+    public void parse_help_HelpCommandObject() {
+        Boolean isSameObject = parser.parse("help") instanceof HelpCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
     public void parse_add_AddCommandObject() {
         Boolean isSameObject = parser.parse("add a t/Thriller i/5920 "
                 + "a/Michael Jackson d/42:16") instanceof AddCommand;
@@ -190,6 +196,39 @@ class ParserTest {
     }
 
     @Test
+    public void parse_deadline_DeadlineCommandObject() {
+        boolean isSameObject = parser.parse("deadline today") instanceof DeadlineCommand;
+        assertTrue(isSameObject);
+    }
+
+    @Test
+    public void parse_deadline_EmptyDescription() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            DeadlineCommand a = (DeadlineCommand) parser.parse("deadline");
+            a.handleDeadlineCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Oops! Please specify the due date "
+                    + "(today/overdue/specific date)!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_deadline_InvalidDateInput() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            DeadlineCommand a = (DeadlineCommand) parser.parse("deadline d/12-Oct-2021");
+            a.handleDeadlineCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
     public void parse_unres_UnreserveCommandObject() {
         Boolean isSameObject = parser.parse("unres 5555") instanceof UnreserveCommand;
         assertTrue(isSameObject);
@@ -216,7 +255,7 @@ class ParserTest {
     }
 
     @Test
-    public void parse_add_InvalidItemExceptionThrown() {
+    public void parse_edit_InvalidItemExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
         // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");

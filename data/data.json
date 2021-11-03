@@ -30,6 +30,10 @@
     "id" : "9999",
     "status" : "RESERVED",
     "loanee" : "John"
+  }, {
+    "title" : "Scrabble",
+    "id" : "0513895",
+    "status" : "AVAILABLE"
   } ],
   "magazine" : [ {
     "title" : "Time Magazine",
