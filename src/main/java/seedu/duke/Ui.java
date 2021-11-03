@@ -384,6 +384,11 @@ public class Ui {
         System.out.print("Would you like to overwrite your save file? (y/n): ");
     }
 
+    public static void printErrorWithInitialAmount() {
+        System.out.println("Please check the amount you entered for the expense or "
+                + "the amount you allocated to each person again.");
+    }
+
     public static void printNoLastTripError() {
         System.out.println("You may have deleted the most recently modified trip. "
                 + "Please try again with the trip number of the trip you wish to edit.");
@@ -413,7 +418,12 @@ public class Ui {
                 System.out.print(name + ", ");
             }
         }
-        System.out.println("is not part of the trip.");
+        if (names.size() == 1) {
+            System.out.print(" is ");
+        } else {
+            System.out.print(" are ");
+        }
+        System.out.println("not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
         printListOfPeople(Storage.getOpenTrip().getListOfPersons());
         System.out.println("Please enter the names of the people who are involved in this expense again, "
