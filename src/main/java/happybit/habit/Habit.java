@@ -73,6 +73,10 @@ public class Habit {
         return dateToString(this.startDate);
     }
 
+    public LocalDate getStartDateLD() {
+        return convertDateToLocalDate(this.startDate);
+    }
+
     /**
      * Getter for end date in string format (for storage).
      *
@@ -80,6 +84,10 @@ public class Habit {
      */
     public String getEndDate() {
         return dateToString(this.endDate);
+    }
+
+    public LocalDate getEndDateLD() {
+        return convertDateToLocalDate(this.endDate);
     }
 
     /**
