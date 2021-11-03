@@ -159,7 +159,7 @@ public class ExceptionTextUi {
                 + "Please enter command in this format:\n"
                 + "      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}\n"
                 + "      example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n"
-                + "NOTE : At least name and description required\n"
+                + "NOTE : At least NAME required\n"
                 + "       Order of parameters do not matter";
         printDoubleLineMessage(message);
     }

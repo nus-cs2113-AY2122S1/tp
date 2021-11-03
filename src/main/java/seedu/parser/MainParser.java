@@ -29,7 +29,6 @@ import seedu.exception.MissingArgSearchException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingIndexException;
 
-import java.lang.reflect.Array;
 
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
