@@ -18,16 +18,7 @@ endbox
 
 -> TestCommand : execute(moduleManager)
 activate TestCommand
-TestCommand -> GameEnvironment : createNewEnvironment(questions, count)
-activate GameEnvironment
-  GameEnvironment -> Ui : getInstance()
-  activate Ui
-  return ui
-  create QuestionGenerator
-  GameEnvironment -> QuestionGenerator : new QuestionGenerator(questions, count)
-  activate QuestionGenerator
-  return QuestionGenerator
-return GameEnvironment
+ref over TestCommand, GameEnvironment, QuestionGenerator : createGameEnvironment
 
 TestCommand -> GameEnvironment : run()
 activate GameEnvironment
@@ -35,62 +26,14 @@ activate GameEnvironment
   activate GameEnvironment 
   return
   loop questionGenerator.hasNext()
-    GameEnvironment -> GameEnvironment : promptQuestion()
-    activate GameEnvironment
-      GameEnvironment -> QuestionGenerator : next()
-      activate QuestionGenerator 
-      return question
-      GameEnvironment -> Ui : printSection(question.getQuestion())
-      activate Ui
-      return
-      GameEnvironment -> Ui : getUserInput()
-      note right: Wait for user to press Enter key to reveal answer.
-      activate Ui
-      return
-      GameEnvironment -> Ui : printSection(question.getAnswer())
-      activate Ui
-      return
-    return question
-    |||
-    GameEnvironment -> GameEnvironment : getUserFeedback()
-    activate GameEnvironment
-      loop difficulty == INVALID_DIFFICULTY
-      GameEnvironment -> Ui : getUserInput()
-      activate Ui
-      return input
-      end
-    return difficulty
-    |||
+    ref over Ui, GameEnvironment, QuestionGenerator : showQuestion
+    ref over Ui, GameEnvironment : getUserFeedback
     break difficulty == EXIT_CODE
       note across: Breaks the loop and returns to TestCommand
     end
-    |||
-    GameEnvironment -> GameEnvironment : updateQuestionDifficulty(question, difficulty)
-    activate GameEnvironment 
-      alt difficulty == EASY_DIFFICULTY
-        GameEnvironment -> DifficultyModifier : tweakEasyQuestionDifficulty(weight)
-        activate DifficultyModifier 
-        return newWeight
-        
-        GameEnvironment -> Question : setWeight(newWeight)
-        activate Question
-        return
-      else difficulty == HARD_DIFFICULTY
-        GameEnvironment -> DifficultyModifier : tweakHardQuestionDifficulty(weight)
-        activate DifficultyModifier 
-        return newWeight
-        
-        GameEnvironment -> Question : setWeight(newWeight)
-        activate Question
-        return
-      end
-      |||
-    return
-    |||
+    ref over GameEnvironment, DifficultyModifier, Question : updateQuestionDifficulty
     |||
   end
-  |||
-  |||
 return
 
 return CommandResult(true)

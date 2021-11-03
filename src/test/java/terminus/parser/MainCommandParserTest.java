@@ -32,6 +32,8 @@ public class MainCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("ex it"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("helpa"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("eXiT a"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("HeLp    a"));
     }
 
     @Test
@@ -39,7 +41,6 @@ public class MainCommandParserTest {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
-        assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
 
     @Test
@@ -47,7 +48,6 @@ public class MainCommandParserTest {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
-        assertTrue(commandParser.parseCommand("HeLp    a") instanceof HelpCommand);
     }
 
     @Test

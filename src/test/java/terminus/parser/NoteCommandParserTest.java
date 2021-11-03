@@ -36,29 +36,28 @@ public class NoteCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("vie wer"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("deleterr"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("eXiT a"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("HeLp    a"));
     }
 
     @Test
     void parseCommand_resolveExitCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
-        assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
 
     @Test
     void parseCommand_resolveHelpCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
-        assertTrue(commandParser.parseCommand("HeLp    a") instanceof HelpCommand);
     }
 
     @Test
-    void parseCommand_resolveAddCommand_exceptionThrown()
-            throws InvalidCommandException, InvalidArgumentException {
+    void parseCommand_resolveAddCommand_exceptionThrown() {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\"test2\""));
         assertThrows(InvalidArgumentException.class,
@@ -80,14 +79,14 @@ public class NoteCommandParserTest {
 
     @Test
     void parseCommand_resolveDeleteCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("delete 1") instanceof DeleteCommand);
         assertTrue(commandParser.parseCommand("delete 2") instanceof DeleteCommand);
     }
 
     @Test
     void parseCommand_resolveViewCommand_exceptionThrown()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("view abcd"));
     }
 
@@ -99,13 +98,13 @@ public class NoteCommandParserTest {
 
     @Test
     void parseCommand_resolveExportCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("export") instanceof ExportNoteCommand);
     }
 
     @Test
     void parseCommand_resolveReloadCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("reload") instanceof ReloadNoteCommand);
     }
 

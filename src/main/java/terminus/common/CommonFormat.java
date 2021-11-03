@@ -42,8 +42,9 @@ public class CommonFormat {
     public static final String COMMAND_ADD_QUESTION_FORMAT = COMMAND_ADD + " \"<question>\" \"<answer>\"";
     public static final String COMMAND_TEST_QUESTION_FORMAT = COMMAND_TEST + " {question count}";
     public static final String COMMAND_TIMETABLE_FORMAT = COMMAND_TIMETABLE + " {day}";
-    public static final String COMMAND_UPDATE_MODULE_FORMAT = COMMAND_UPDATE + " <index> <new module name>";
-    public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
+    public static final String
+        COMMAND_UPDATE_MODULE_FORMAT = COMMAND_UPDATE + " <index> \"<new_module_code>\"";
+    public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module_code>\"";
     public static final String COMMAND_MODULE_FORMAT = COMMAND_MODULE;
     public static final String COMMAND_VIEW_MODULE_FORMAT = COMMAND_VIEW;
 
@@ -72,4 +73,7 @@ public class CommonFormat {
     public static final int FONT_SIZE = 11;
     public static final String UPDATE_MODULE_REGEX_FORMAT = "(?<index>\\d+)\\s+\"(?<newName>.*?)\"";
     public static final String COMMAND_GO_FORMAT = "go <module name>";
+    public static final String QUESTION_FORMAT_CHECK = "^[123e]$";
+    public static final String QUOTE_REGEX_DELIMITER = "\"(.*?)\"";
+    public static final String STRICT_WHITE_REGEX = "^(?:(?:\"([^\"]+?)\")\\s+?)*?(?:\"([^\"]+?)\")$";
 }
