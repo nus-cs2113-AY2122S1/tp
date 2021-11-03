@@ -3,21 +3,20 @@ package command.order;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Order;
 import inventory.Medicine;
+import inventory.Order;
 import inventory.Stock;
 import utilities.parser.DateParser;
 import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
 import utilities.parser.StockManager;
 import utilities.storage.Storage;
-
 import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -163,17 +162,11 @@ public class AddOrderCommand extends Command {
     private boolean checkValidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                               ArrayList<Medicine> medicines, String[] requiredParameters,
                                               String[] optionalParameters, OrderValidator orderValidator) {
-        boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false);
-        if (isInvalidParameters) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return true;
-        }
+        boolean isInvalidInput = orderValidator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false, orderValidator);
 
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ADD_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        if (isInvalidInput) {
+            logger.log(Level.WARNING, "Invalid parameter or value specified by user");
             return true;
         }
         return false;

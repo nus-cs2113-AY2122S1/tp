@@ -5,6 +5,7 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderValidator;
 import utilities.ui.Ui;
 import utilities.storage.Storage;
@@ -74,24 +75,16 @@ public class DeleteOrderCommand extends Command {
      */
     private boolean isValidOrderParameters(Ui ui, ArrayList<Medicine> medicines, String orderIdToDelete) {
 
-        OrderValidator orderValidator = new OrderValidator();
+        MedicineValidator validator = new OrderValidator();
 
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
-        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.DELETE_ORDER_COMMAND, true);
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.DELETE_ORDER_COMMAND, false, validator);
 
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful deletion of order");
-            return false;
-        }
-
-        boolean isValidOrderId = orderValidator.isValidOrderId(ui, orderIdToDelete, medicines);
-
-        if (!isValidOrderId) {
-            logger.log(Level.WARNING, "Invalid order id is specified by user");
+        if (isInvalidInput) {
+            logger.log(Level.WARNING, "Invalid parameter or value specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of order");
             return false;
         }

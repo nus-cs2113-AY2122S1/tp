@@ -15,6 +15,9 @@ import java.util.LinkedHashMap;
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 public class StockValidator extends MedicineValidator {
+    public StockValidator() {
+    }
+
     /**
      * Checks if parameter values are valid for Stock objects.
      *
