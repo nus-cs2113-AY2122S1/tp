@@ -1,0 +1,42 @@
+@startuml
+
+hide footbox
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+-> ":Parser": parseMaster()
+activate ":Parser"
+
+":Parser" -> ":TagUntagCommand": untagParse()
+activate ":TagUntagCommand"
+
+":TagUntagCommand" -> ":Cookbook": isRecipeExist()
+activate ":Cookbook"
+
+alt recipe exists
+    ":Cookbook" --> ":TagUntagCommand"
+    loop for all Tags in parsedCommand
+        ":TagUntagCommand" -> ":Cookbook": extractCookbookTag()
+        ":Cookbook" --> ":TagUntagCommand": extractedTag
+        ":TagUntagCommand" -> ":Cookbook": untagTagFromRecipe(extractedTag, recipeName)
+        ":Cookbook" --> ":TagUntagCommand"
+        ":TagUntagCommand" -> ":Cookbook": deleteRecipeFromCookbook(tagName, recipeName)
+        ":Cookbook" --> ":TagUntagCommand"
+    end
+else recipe does not exist
+    ":Cookbook" -> ":GordonException": throws(NO_RECIPE_FOUND)
+    activate ":GordonException"
+    ":GordonException" --> ":Parser"
+    deactivate ":GordonException"
+    destroy ":GordonException"
+end
+destroy ":Cookbook"
+destroy ":TagUntagCommand"
+destroy ":Parser"
+@enduml
