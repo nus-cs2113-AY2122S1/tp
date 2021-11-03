@@ -83,7 +83,8 @@ public class Ui {
                 "               /dd DEPARTURE_DATETIME /rd RETURN_DATETIME\n" +
                 "   Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE\n" +
                 "   Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID\n\n";
-        String list = "list: Shows a list of all available entries of a specific data type, along with their respective fields.\n" +
+        String list = "list: Shows a list of all available entries of a specific data type, " +
+                "along with their respective fields.\n" +
                 "   List client: list -c\n" +
                 "   List flight: list -f\n" +
                 "   List tour: list -t\n" +
@@ -239,7 +240,7 @@ public class Ui {
     /**
      * Ui response to sort tour by id.
      *
-     * @param tours           the current list of tours in the database
+     * @param tours         the current list of tours in the database
      * @param sortedTourIds the list of sorted tour codes/ids (by alphabetical order)
      * @throws TourPlannerException if there is no tours that can be found given the tour code
      */
