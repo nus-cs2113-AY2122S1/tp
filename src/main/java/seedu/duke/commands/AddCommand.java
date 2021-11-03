@@ -12,12 +12,8 @@ import static seedu.duke.common.Messages.INVALID_VALUES;
  * Class encapsulating an add command.
  */
 public class AddCommand extends Command {
-    public static final String COMMAND_FORMAT = "  Format: add [a|b|m|v] [ARGUMENTS]";
+    public static final String COMMAND_FORMAT = "  Format: add [a|b|i|m|v] [ARGUMENTS]";
     public static final String COMMAND_WORD = "add";
-
-    public static final String COMMAND_ADD_BOOK = "add b";
-    public static final String COMMAND_ADD_MAGAZINE = "add m";
-    public static final String COMMAND_ADD_VIDEO = "add v";
     protected HashMap<String, String> args;
 
     /**
@@ -41,13 +37,16 @@ public class AddCommand extends Command {
         case AddAudioCommand.COMMAND_WORD:
             new AddAudioCommand(args).execute(ui, catalogue);
             break;
-        case COMMAND_ADD_BOOK:
+        case AddBookCommand.COMMAND_WORD:
             new AddBookCommand(args).execute(ui, catalogue);
             break;
-        case COMMAND_ADD_MAGAZINE:
+        case AddItemCommand.COMMAND_WORD:
+            new AddItemCommand(args).execute(ui, catalogue);
+            break;
+        case AddMagazineCommand.COMMAND_WORD:
             new AddMagazineCommand(args).execute(ui, catalogue);
             break;
-        case COMMAND_ADD_VIDEO:
+        case AddVideoCommand.COMMAND_WORD:
             new AddVideoCommand(args).execute(ui, catalogue);
             break;
         default:

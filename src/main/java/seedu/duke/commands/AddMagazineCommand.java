@@ -88,7 +88,7 @@ public class AddMagazineCommand extends Command {
             ui.print(WARN_ADDITIONAL_ARGS);
         }
         try {
-            Magazine newMagazine = new Magazine(title, id, status, publisher, edition);
+            Magazine newMagazine = new Magazine(title, id, status, null, null, publisher, edition);
             catalogue.add(newMagazine);
             ui.print(ADD_MESSAGE, newMagazine);
         } catch (LibmgrException e) {
