@@ -418,7 +418,12 @@ public class Ui {
                 System.out.print(name + ", ");
             }
         }
-        System.out.println("is not part of the trip.");
+        if (names.size() == 1) {
+            System.out.print(" is ");
+        } else {
+            System.out.print(" are ");
+        }
+        System.out.println("not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
         printListOfPeople(Storage.getOpenTrip().getListOfPersons());
         System.out.println("Please enter the names of the people who are involved in this expense again, "

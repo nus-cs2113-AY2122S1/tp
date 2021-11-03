@@ -95,7 +95,7 @@ public class Expense extends ExpenseSplittingFunctions {
                 }
             }
             if (!isValidPerson) {
-                invalidListOfPeople.add(name);
+                invalidListOfPeople.add(name.strip());
             }
         }
         if (!invalidListOfPeople.isEmpty()) {
