@@ -10,9 +10,7 @@ import seedu.duke.data.Book;
 import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
 import static seedu.duke.common.Messages.DIVIDER;
@@ -115,7 +113,7 @@ public class SearchCommand extends Command {
             if (k.equals(KEY_TITLE) && temp.getTitle().contains(v)) {
                 matches++;
             }
-            if (k.equals(KEY_STATUS) && v.equals(temp.getStatus().name())) {
+            if (k.equals(KEY_STATUS) && v.toUpperCase(Locale.ROOT).equals(temp.getStatus().name())) {
                 matches++;
             }
             if (k.equals(KEY_CATEGORY)) {
