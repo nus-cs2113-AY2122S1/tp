@@ -44,37 +44,60 @@ public abstract class ExpenseSplittingFunctions {
             } else if (checkLastPersonInExpense(expense, person)) {
                 assignRemainder(person, payer, amountRemaining, expense, amountBeingPaid);
                 return;
-            }
-
-            Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
-            String amountString = Ui.receiveUserInput();
-            if (checkAssignEqual(amountBeingPaid, amountString)) {
-                assignEqualAmounts(payer, expense, amountBeingPaid);
-                return;
             } else {
-                try {
-                    double amount = Double.parseDouble(amountString);
-                    amount = Storage.formatForeignMoneyDouble(amount);
-                    total += amount;
-                    if (total > expense.getAmountSpent()) {
-                        Ui.printIncorrectAmount(expense.getAmountSpent());
-                        updateIndividualSpending(expense);
-                        return;
-                    } else {
-                        amountBeingPaid.put(person, amount);
-                    }
-                } catch (NumberFormatException e) {
-                    Ui.argNotNumber();
-                    updateIndividualSpending(expense);
-                    return;
-                }
+                amountBeingPaid = assignNormal(person, payer, amountRemaining, total, amountBeingPaid, expense);
+            }
+            if (amountBeingPaid != null) {
+                total += amountBeingPaid.get(person);
+            } else {
+                total = expense.getAmountSpent();
+                break;
             }
         }
         if (total < expense.getAmountSpent()) {
             Ui.printIncorrectAmount(expense.getAmountSpent());
             updateIndividualSpending(expense);
-        } else {
+        } else if (amountBeingPaid != null) {
             assignAmounts(payer, expense, amountBeingPaid);
+        }
+    }
+
+    /**
+     * Helper function for updateIndividualSpending(). Updates the amountBeingPaid HashMap while checking if the amount
+     * entered is higher than the amount spent for the expense as well as checking if the value entered is valid.
+     * @param person the current Person who is being assigned a value
+     * @param payer the Person who paid for the Expense
+     * @param amountRemaining the amount of money left to be assigned
+     * @param total the total amount of money that has been assigned
+     * @param amountBeingPaid HashMap of the amount each Person is assigned
+     * @param expense the expense that is being added to the current Trip.
+     * @return updated amountBeingPaid HashMap.
+     * @throws ForceCancelException if the user chooses to cancel the operation.
+     */
+    private static HashMap<Person, Double> assignNormal(Person person, Person payer, double amountRemaining,
+            double total, HashMap<Person, Double> amountBeingPaid, Expense expense) throws ForceCancelException {
+        Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
+        String amountString = Ui.receiveUserInput();
+        if (checkAssignEqual(amountBeingPaid, amountString)) {
+            assignEqualAmounts(payer, expense, amountBeingPaid);
+            return null;
+        } else {
+            try {
+                double amount = Double.parseDouble(amountString);
+                amount = Storage.formatForeignMoneyDouble(amount);
+                total += amount;
+                if (total > expense.getAmountSpent()) {
+                    Ui.printIncorrectAmount(expense.getAmountSpent());
+                    updateIndividualSpending(expense);
+                    return null;
+                } else {
+                    amountBeingPaid.put(person, amount);
+                    return amountBeingPaid;
+                }
+            } catch (NumberFormatException e) {
+                Ui.argNotNumber();
+                return assignNormal(person, payer, amountRemaining, total, amountBeingPaid, expense);
+            }
         }
     }
 
