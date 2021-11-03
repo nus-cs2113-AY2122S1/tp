@@ -98,7 +98,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : edit 0 -n George -g procoder -te george123
 NOTE : At least one flag and description required
        Order of parameters do not matter except for INDEX
@@ -133,7 +133,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
@@ -224,7 +224,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 NOTE : At least name and description required
        Order of parameters do not matter
@@ -233,7 +233,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
@@ -248,7 +248,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 NOTE : At least name and description required
        Order of parameters do not matter
@@ -297,7 +297,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 NOTE : At least name and description required
        Order of parameters do not matter
@@ -377,14 +377,14 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 NOTE : At least name and description required
        Order of parameters do not matter
@@ -443,7 +443,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
 NOTE : At least name and description required
        Order of parameters do not matter
@@ -562,7 +562,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -571,7 +571,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -580,7 +580,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -789,14 +789,14 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
@@ -810,7 +810,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : edit 0 -n George -g procoder -te george123
 NOTE : At least one flag and description required
        Order of parameters do not matter except for INDEX
@@ -820,7 +820,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : edit 0 -n George -g procoder -te george123
 NOTE : At least one flag and description required
        Order of parameters do not matter except for INDEX
