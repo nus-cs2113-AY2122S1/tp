@@ -251,13 +251,14 @@ For further details on the implementation, head to
 
 ![](attachments/StorageComponent.png)
 
-The Module Storage handles any file I/O operations of TermiNUS.
+The StorageManager handles any file I/O operations of TermiNUS.
 
-The `ModuleStorage` component:
+The `StorageManager` component:
 
 - can create folder for each module provided by the user.
-- can save modules, schedules and links data in a `.json` file.
-- can save notes into multiple `.txt` files.
+- can save / load modules, schedules and links data in / from a `.json` file.
+- can save / load notes into / from multiple `.txt` files.
+- can filters invalid data loaded from a `.json` file.
 
 `TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
 data easily with any available text editor.

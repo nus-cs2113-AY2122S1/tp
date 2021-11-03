@@ -21,7 +21,7 @@ StorageManager --> "1" PdfStorage
 StorageManager --> "1" JsonStorage
 StorageManager --> "1" FolderStorage
 
-
+FilterManager <.. StorageManager : "filters \n ModuleManager <"
 
 NoteStorage --|> Storage
 PdfStorage --|> Storage
@@ -30,6 +30,7 @@ FolderStorage --|> Storage
 
 class StorageManager {
   - isDisabled : Boolean
+  - baseDirectory : Path
   + StorageManager(Path baseDirectory, String mainJsonFileName)
   + executeCommandResult(ModuleManager moduleManager, CommandResult result) : void
   + updateMainJsonFile(ModuleManager moduleManager) : void
@@ -75,6 +76,16 @@ class Storage {
  + getFileType(File file) : String
  + getAppendPath(Path corePath, String path) : Path
  # cleanAllFilesInclusive(Path filePath) : void
+
+}
+
+class FilterManager {
+  + filter(ModuleManager moduleManager) : void
+  # filterLink(ContentManager<Link> linkContentManager) : void
+  # filterQuestion(ContentManager<Question> questionContentManager) : void
+  + {static} isQuestionValid(Question question) : Boolean
+  + {static} isScheduleValid(Link link) : Boolean
+  + {static} isModuleValid(String module) : Boolean
 
 }
 
