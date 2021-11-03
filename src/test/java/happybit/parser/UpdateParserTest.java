@@ -20,6 +20,7 @@ class UpdateParserTest {
     private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
     private static final String ERROR_INTERVAL_NEGATIVE = "The interval has to be a positive integer.";
+    private static final String ERROR_INTERVAL_ZERO = "You cannot update a habit to have no interval.";
 
 
     @Test
@@ -213,12 +214,19 @@ class UpdateParserTest {
     }
 
     @Test
-    void parseUpdateHabitIntervalCommand_negativeInterval_exceptionThrown() {
+    void parseUpdateHabitIntervalCommand_negativeOrZeroInterval_exceptionThrown() {
         try {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/-100");
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_INTERVAL_NEGATIVE, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_INTERVAL_ZERO, e.getMessage());
         }
     }
 

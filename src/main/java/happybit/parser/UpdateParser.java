@@ -31,6 +31,7 @@ public class UpdateParser extends Parser {
     private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
     private static final String ERROR_INTERVAL_NEGATIVE = "The interval has to be a positive integer.";
+    private static final String ERROR_INTERVAL_ZERO = "You cannot update a habit to have no interval.";
 
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.";
@@ -147,9 +148,12 @@ public class UpdateParser extends Parser {
         if (interval < 0) {
             throw new HaBitParserException(ERROR_INTERVAL_NEGATIVE);
         }
+        if (interval == 0) {
+            throw new HaBitParserException(ERROR_INTERVAL_ZERO);
+        }
         assert (goalIndex >= 0);
         assert (habitIndex >= 0);
-        assert (interval >= 0);
+        assert (interval > 0);
         return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
     }
 
