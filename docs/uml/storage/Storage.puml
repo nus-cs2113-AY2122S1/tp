@@ -1,7 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
+hide circle
+skinparam classAttributeIconSize 0
 
 'abstract class DGS
 'abstract AbstractCollection
@@ -15,38 +16,69 @@
 'AbstractCollection <|- AbstractList
 'AbstractList <|-- ArrayList
 
-Terminus "1" --> "1  " ModuleStorage: moduleStorage
+StorageManager --> "1" NoteStorage
+StorageManager --> "1" PdfStorage
+StorageManager --> "1" JsonStorage
+StorageManager --> "1" FolderStorage
 
-Command "0..*  " ..> "0..1 " ModuleStorage: uses >
 
-class Terminus {
-  + main(): void {static}
-  + run(): void
-  - start(): void
-  - runUntilCommandExit(): void
-  - handleIoException(e: IOException): void
-  - exit(): void
+
+NoteStorage --|> Storage
+PdfStorage --|> Storage
+JsonStorage --|> Storage
+FolderStorage --|> Storage
+
+class StorageManager {
+  - isDisabled : Boolean
+  + StorageManager(Path baseDirectory, String mainJsonFileName)
+  + executeCommandResult(ModuleManager moduleManager, CommandResult result) : void
+  + updateMainJsonFile(ModuleManager moduleManager) : void
+  + initialize() : ModuleManager
+  + save() : void
 }
 
-class ModuleStorage {
-  - filePath: Path
-  - gson: Gson
-  - ModuleStorage()
-  + init(filePath: Path): void
-  + getInstance(): ModuleStorage {static}
-  + loadFile(): ModuleManager
-  + saveFile(moduleManager: ModuleManager): void
-  + loadNotesFromModule(moduleManager: ModuleManager, mod: String): void
-  + saveAllNotes(moduleManager: ModuleManager): void
-  + saveNotesFromModule(moduleManager: ModuleManager, mod: String, toDeleteAll: Boolean): void
-  + removeNoteFromModule(moduleName: String, noteName, String): void
-  + addNoteFromModule(moduleName: String, newNote: Note): void
-  + createModuleDirectory(moduleName: String): boolean
-  + cleanAfterDeleteModule(mod: String): void
+class NoteStorage {
+  + execute() : void
+  # createNoteFile() : void
+  # loadNoteIntoModuleManager() : void
+  # saveAllNotes() : void
 }
 
-abstract Command {
+class PdfStorage {
+  + execute() : void
+  # exportModuleNotes() : void
+}
+
+class JsonStorage {
+  + execute() : void
+  + loadJson() : ModuleManager
+  # createJson() : void
+  # saveJson() : void
+}
+
+class FolderStorage{
+  + execute() : void
+  # createModuleFolder() : void
+  # deleteModuleFolder() : void
+  # renameModuleFolder() : void
+}
+
+class Storage {
+ + createFolder(Path folderPath) : void
+ + createFile(Path filePath) : void
+ + readFile(Path filePath) : String
+ + writeFile(Path filePath, String data): void
+ + delete(Path filePath) : void
+ + getListOfFiles(Path folderPath) : File[]
+ + renameFolder(Path oldPath, Path newPath) : void
+ + getBufferedReader(Path filePath) : void
+ + getFileType(File file) : String
+ + getAppendPath(Path corePath, String path) : Path
+ # cleanAllFilesInclusive(Path filePath) : void
 
 }
+
+note "The input parameters in all functions \nfor <Type>Storage has been left out \nto make this diagram more compact." as note1
+
 
 @enduml
