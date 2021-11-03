@@ -33,41 +33,12 @@ public class DateParser {
     private static final String[] ACCEPTED_SEPARATORS
         = {":", "~", "\\.", "\\/", "\\|", "\\\\"};
 
-    private enum Day {
-        YESTERDAY(-1),
-        TODAY(0),
-        TOMORROW(1);
-
-        private final int daysToAdd;
-
-        Day(int daysToAdd) {
-            this.daysToAdd = daysToAdd;
-        }
-
-        private String getRegex() {
-            return STARTS_WITH_REGEX + super.toString().toLowerCase() + ENDS_WITH_REGEX;
-        }
-
-        private static boolean isDay(String input) {
-            input = input.toLowerCase().replace(WHITESPACE_REGEX, "");
-            for (Day day : Day.values()) {
-                if (input.matches(day.getRegex())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static LocalDateTime getDate(String input) {
-            input = input.toLowerCase().replace(WHITESPACE_REGEX, "");
-            for (Day day : Day.values()) {
-                if (input.matches(day.getRegex())) {
-                    LocalDateTime dateTime = LocalDateTime.now().plusDays(day.daysToAdd);
-                    return roundToClosestHour(dateTime);
-                }
-            }
-            return null;
-        }
+    private static LocalDateTime removeSecondsAndNanos(LocalDateTime dateTime) {
+        int seconds = dateTime.getSecond();
+        dateTime = dateTime.minusSeconds(seconds);
+        int nanos = dateTime.getNano();
+        dateTime = dateTime.minusNanos(nanos);
+        return dateTime;
     }
 
     public static LocalDateTime roundToClosestHour(LocalDateTime dateTime) {
@@ -76,12 +47,14 @@ public class DateParser {
             return dateTime.plusMinutes(HOUR - minutes);
         }
         System.out.printf(Integer.toString(minutes));
+        dateTime = removeSecondsAndNanos(dateTime);
         return dateTime.minusMinutes(minutes);
     }
 
     public static LocalDateTime roundUpHour(LocalDateTime dateTime) {
         int minutes = dateTime.getMinute();
         dateTime = dateTime.minusMinutes(minutes);
+        dateTime = removeSecondsAndNanos(dateTime);
         return dateTime.plusHours(1);
     }
 
@@ -91,21 +64,17 @@ public class DateParser {
     }
 
     public static LocalDateTime stringToDate(String dateTime) throws ParseDateFailedException {
-        if (Day.isDay(dateTime)) {
-            return Day.getDate(dateTime);
-        } else {
-            String formattedDate = formatDateString(dateTime);
-            Log.info(LOG_FORMATTED_DATE_MESSAGE + formattedDate);
-            for (String dateFormatString : ACCEPTED_DATE_FORMATS) {
-                try {
-                    DateTimeFormatter dateFormat = getDateTimeFormatter(dateFormatString);
-                    return LocalDateTime.parse(formattedDate, dateFormat);
-                } catch (DateTimeParseException dtpe) {
-                    continue;
-                }
+        String formattedDate = formatDateString(dateTime);
+        Log.info(LOG_FORMATTED_DATE_MESSAGE + formattedDate);
+        for (String dateFormatString : ACCEPTED_DATE_FORMATS) {
+            try {
+                DateTimeFormatter dateFormat = getDateTimeFormatter(dateFormatString);
+                return LocalDateTime.parse(formattedDate, dateFormat);
+            } catch (DateTimeParseException dtpe) {
+                continue;
             }
-            throw new ParseDateFailedException(getDefaultDateFormat());
         }
+        throw new ParseDateFailedException(getDefaultDateFormat());
     }
 
     private static String formatDateString(String dateTime) {

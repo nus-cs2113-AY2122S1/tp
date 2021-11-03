@@ -11,7 +11,7 @@ import seedu.duke.task.taskmanager.TaskManager;
 //@@author SeanRobertDH
 public class EventCommand extends TaskCommand {
 
-    private static final String USAGE = "event <description> <%s %s> <%s %s>";
+    private static final String USAGE = "event <description> <--%s %s> <--%s %s>";
 
     public EventCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

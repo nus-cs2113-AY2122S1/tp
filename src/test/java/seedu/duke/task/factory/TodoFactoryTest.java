@@ -33,7 +33,7 @@ class TodoFactoryTest {
         arguments.put(TodoFlag.DO_ON_DATE, VALID_DATE1);
         arguments.put(TodoFlag.PRIORITY, PriorityEnum.HIGH.toString());
 
-        Todo todo = (Todo) new TodoFactory(arguments).getTask();
+        Todo todo = new TodoFactory(arguments).getTask();
 
         assertEquals(todo.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(todo.getDoOnDate()), VALID_DATE1);
@@ -47,7 +47,7 @@ class TodoFactoryTest {
 
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
 
-        Todo todo = (Todo) new TodoFactory(arguments).getTask();
+        Todo todo = new TodoFactory(arguments).getTask();
 
         assertEquals(todo.getDescription(), DESCRIPTION);
         assertEquals(0, todo.getDoOnDate().getMinute());
@@ -63,7 +63,7 @@ class TodoFactoryTest {
         arguments.put(TodoFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(TodoFlag.RECURRENCE, RecurrenceEnum.DAILY.toString());
 
-        Todo todo = (Todo) new TodoFactory(arguments).getTask();
+        Todo todo = new TodoFactory(arguments).getTask();
 
         assertEquals(0, todo.getDoOnDate().getMinute());
         assertEquals(LocalDateTime.now().getHour() + 1, todo.getDoOnDate().getHour());

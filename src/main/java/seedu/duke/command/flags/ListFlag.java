@@ -1,8 +1,9 @@
 package seedu.duke.command.flags;
 
-import seedu.duke.command.Command;
-
 //@@author APZH
+/**
+ * Flags and arguments used by the 'list' command.
+ */
 public class ListFlag {
     public static final String TASK_TYPE = "type";
     public static final String PRIORITY = "priority";

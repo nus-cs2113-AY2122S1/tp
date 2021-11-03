@@ -15,20 +15,31 @@ import seedu.duke.command.addtask.EventCommand;
 import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
-
 import java.util.HashMap;
 import java.util.Map;
+
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.utility.Utility;
 
 //@@author APZH
+/**
+ * Parses user input.
+ */
 public class CommandParser {
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
+    private static final String WHITESPACE = " ";
+    private static final String SPLIT_INPUT_REGEX = "\\s+";
     private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     //@@author APZH
+    /**
+     * Returns a {@code Map} mapping command flags to the arguments entered by the user.
+     *
+     * @param commandArguments The command entered by the user.
+     * @return {@code Map} mapping command flags to the arguments.
+     */
     public static Map<String, String> getCommandOptions(String commandArguments) {
 
         Map<String, String> flagsToArguments = new HashMap<>();
@@ -41,7 +52,7 @@ public class CommandParser {
                 String flagArguments = "";
                 try {
                     while (tokens[i + 1].matches(FLAG_REGEX) == false) {
-                        flagArguments += tokens[i + 1] + " ";
+                        flagArguments += tokens[i + 1] + WHITESPACE;
                         i++;
                     }
                 } catch (IndexOutOfBoundsException e) {
@@ -49,7 +60,7 @@ public class CommandParser {
                 }
                 flagsToArguments.put(flag.substring(2), flagArguments.trim());
             } else {
-                mainArgument += tokens[i] + " ";
+                mainArgument += tokens[i] + WHITESPACE;
             }
         }
 
@@ -58,17 +69,17 @@ public class CommandParser {
     }
 
     //@@author APZH
-    public static Command parseCommand(TaskManager taskManager, String userInput) {
-
-        String[] inputArguments = userInput.split("\\s+", 2);
-        String command = inputArguments[0];
-        CommandEnum commandEnum = CommandEnum.getCommand(command);
-        Map<String, String> commandOptions = new HashMap<>();
-
-        if (inputArguments.length == 2) {
-            commandOptions = getCommandOptions(inputArguments[1]);
-        }
-        switch (commandEnum) {
+    /**
+     * Creates a {@code Command} object based on the {@code commandSyntax}.
+     *
+     * @param taskManager    {@code TaskManager} object that contains the tasklist to be executed upon.
+     * @param commandSyntax  Contains the type of command entered by the user.
+     * @param commandOptions Contains any flags and arguments associated with the command.
+     * @return The {@code commandSyntax} specified {@code Command} object.
+     */
+    public static Command createCommand(TaskManager taskManager, CommandEnum commandSyntax,
+                                        Map<String, String> commandOptions) {
+        switch (commandSyntax) {
         case BYE:
             return new ByeCommand();
         case HELP:
@@ -97,18 +108,25 @@ public class CommandParser {
     }
 
     //@@author APZH
-    // Used to debug and check the whether the user command mapping of flag->value works
-    public static String printCommandOptions(Map<String, String> commandOptions) {
+    /**
+     * Returns the {@code Command} to be executed based on the {@code userInput}.
+     *
+     * @param taskManager {@code TaskManager} object that contains the tasklist to be executed upon.
+     * @param userInput   User input to determine the {@code Command} to be executed.
+     * @return {@code Command} to be executed.
+     */
+    public static Command parseCommand(TaskManager taskManager, String userInput) {
+        String[] inputArguments = userInput.split(SPLIT_INPUT_REGEX, 2);
+        String command = inputArguments[0];
 
-        String flagsToArguments = "";
+        CommandEnum commandSyntax = CommandEnum.getCommand(command);
+        Map<String, String> commandOptions = new HashMap<>();
 
-        for (String flag : commandOptions.keySet()) {
-            flagsToArguments += flag + " = " + commandOptions.get(flag) + "\n";
+        if (inputArguments.length == 2) {
+            commandOptions = getCommandOptions(inputArguments[1]);
         }
 
-        System.out.println(flagsToArguments);
-
-        return flagsToArguments;
+        return createCommand(taskManager, commandSyntax, commandOptions);
     }
 
     //@@author SeanRobertDH
