@@ -39,7 +39,8 @@ public class Messages {
     public static final String LIST_DEADLINE_TODAY = "  (+) Listing out loaned items that have to be returned today";
     public static final String LIST_DEADLINE_OVERDUE = "  (+) Listing out loaned items that are overdue";
     public static final String LIST_DEADLINE_DATE = "  (+) Listing out loaned items that are due this date: ";
-    public static final String EMPTY_DEADLINE_COMMAND = " (!) Oops! Please specify the due date!";
+    public static final String EMPTY_DEADLINE_COMMAND = " (!) Oops! Please specify the due date"
+            + " (today/overdue/specific date)!";
     public static final String INVALID_DEADLINE_COMMAND = " (!) Oops! Please input the command in one of these format"
             + System.lineSeparator()
             + " 1. deadline today" + System.lineSeparator()
