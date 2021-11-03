@@ -4,6 +4,9 @@ import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Task;
 import seedu.duke.items.mainlists.MemberRoster;
@@ -44,11 +47,14 @@ public class Duke {
                 System.out.println(feedback.feedbackToUser);
                 Ui.printLineBreak();
             } catch (NullPointerException | NumberFormatException | StringIndexOutOfBoundsException e) {
-                System.out.println("Please key in the commands accurately, use help to view the guide");
+                Ui.printLineBreak();
+                System.out.println("Returning to Main Page...");
                 Ui.printLineBreak();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
+            } catch (NoCommandAttributesException | InvalidItemTypeException e) {
+                System.out.println(e.getMessage());
             }
         } while (ByeCommand.isRunning);
 

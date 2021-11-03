@@ -2,6 +2,9 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.Parser;
 
 import java.io.ByteArrayInputStream;
@@ -15,7 +18,8 @@ import static seedu.duke.Duke.eventCatalog;
 public class AddCommandTest {
 
     @Test
-    public void addCommand_validData_correctlyConstructed() throws DukeException {
+    public void addCommand_validData_correctlyConstructed() throws DukeException, NoCommandAttributesException,
+            InvalidBudgetException, InvalidItemTypeException {
         eventCatalog.clear();
         final InputStream sysInBackup = System.in;
         ByteArrayInputStream in1 = new ByteArrayInputStream("Birthday barbeque".getBytes());
