@@ -164,7 +164,7 @@ public class AddCommand extends Command {
         try {
             for (Lesson lesson : lessons) {
                 if (!lesson.getLessonType().equals(LECTURE) && !lesson.getLessonType().equals(TUTORIAL)
-                        && !lesson.getLessonType().equals(LAB)) {
+                        && !lesson.getLessonType().equals(LAB) && !lecture.contains(lesson)) {
                     lecture.add(lesson);
                 }
             }
