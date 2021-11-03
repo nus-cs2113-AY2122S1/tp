@@ -19,7 +19,7 @@ import seedu.duke.task.taskmanager.TaskManager;
  */
 public class ListCommand extends Command {
 
-    private static final String USAGE = "list";
+    private static final String USAGE = "-> Listing your tasklist: list [index]";
 
     public ListCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

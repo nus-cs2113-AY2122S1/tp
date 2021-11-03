@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ModuleCommand extends Command {
 
-    private static final String USAGE = "module {<module code>:<class number>...}...";
+    private static final String USAGE = "-> Adding a module: module {<module code>:<class number>...}...";
 
     public ModuleCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

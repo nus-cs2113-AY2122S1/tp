@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.Map;
 
 public class BrowseCommand extends Command {
-    private static final String USAGE = "browse <index>";
+    private static final String USAGE = "-> Launching a link tagged to a task: browse <index>";
 
     public BrowseCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

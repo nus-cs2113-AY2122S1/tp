@@ -3,7 +3,7 @@ package seedu.duke.command;
 public class ByeCommand extends Command {
 
     private static final String EXIT_MSG = "Exiting program!";
-    private static final String USAGE = "bye";
+    private static final String USAGE = "-> Exiting the program: bye";
 
     @Override
     public CommandResult executeCommand() {
