@@ -59,8 +59,8 @@ public class Ingredient implements  Comparable<Ingredient> {
     }
 
 
-    public LocalDate getExpiryDate() {
-        return this.expiryDate;
+    public String getExpiryDate() {
+        return this.expiryDate.format(dtf);
     }
 
     public void setExpiryDate(LocalDate date) {
