@@ -1,19 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.storage.DataManager;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.storage.FileCreator;
-import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
 
 public class Duke {
 
-    private final Ui ui;
-    private ReminderManager reminderManager;
+    private Ui ui;
     private TaskManager taskManager;
 
     public Duke() {
@@ -22,8 +19,6 @@ public class Duke {
         FileCreator fileCreator = new FileCreator();
         DataManager dataManager = new DataManager(fileCreator);
         taskManager = new TaskManager(dataManager);
-
-        reminderManager = new ReminderManager();
     }
 
     public CommandResult runCommand(Command userCommand) {
@@ -36,16 +31,12 @@ public class Duke {
         return commandResult;
     }
 
-    public String checkReminder() {
-        return reminderManager.sendReminder(taskManager);
-    }
-
     public void startProgram() {
 
         ui.printLogo();
 
         Command userCommand;
-        CommandResult commandResult = null;
+        CommandResult commandResult;
 
         do {
 
