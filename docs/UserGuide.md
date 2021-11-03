@@ -117,7 +117,7 @@ Method:
 - I'll list down the ingredients and steps required for said recipe
 - Finally, some good ******** food...
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -147,7 +147,7 @@ OK! The recipe has been deleted from your cookbook.
 - I'll let you know that the recipe has been removed.
 - You can type `listRecipes` to confirm if the correct recipe has been removed.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -185,7 +185,7 @@ Method:
 
 * I'll show you the ingredients you need for that recipe, and the steps required to prepare it, as well as any other attributes you might have assigned it.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -210,7 +210,7 @@ Shows all recipes saved in my database.
 
 - I'll show you all the existing recipes saved in my database.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -234,7 +234,7 @@ Pack your bags, you're off the show
 
 * Pass me your apron...
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -272,7 +272,7 @@ Shows you the proper format of commands.
 * I'll show you the proper format for using every command
 * Just type `help` anywhere in the terminal for a quick guide if you forget any command
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -312,7 +312,7 @@ Setting times...
 Times set successfully.
 ```
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -358,7 +358,7 @@ Searching by ingredient...
 2. Duck Rice
 ```
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
