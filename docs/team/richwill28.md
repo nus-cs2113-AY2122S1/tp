@@ -1,5 +1,7 @@
 # Richard Willie - Project Portfolio Page
 
+<img src="https://i.imgur.com/9s3AOcl.jpg" width="300" height="300" />
+
 ## Table of Contents
 
 * [Overview](#overview)
