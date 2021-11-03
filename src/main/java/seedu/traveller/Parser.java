@@ -288,6 +288,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses user input to give a <code>SearchItemCommand</code>.
+     * @param userInput Raw user input, with the first command option (search-item) removed.
+     * @return Command An <code>SearchItemCommand</code> object.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static Command parseSearchItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         String tripName;
@@ -315,6 +321,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses user input to give an <code>EditItemCommand</code>.
+     * @param userInput Raw user input, with the first command option (edit-item) removed.
+     * @return Command An <code>EditItemCommand</code> object.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static Command parseEditItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit-item command input");
         String tripName;
@@ -325,19 +337,19 @@ public class Parser {
         String rawDayNumber;
 
         try {
-            int dayIdx = getDayFlagIndex(userInput);
-            tripName = parseFieldValue(userInput, 0, dayIdx);
+            int dayIndex = getDayFlagIndex(userInput);
+            tripName = parseFieldValue(userInput, 0, dayIndex);
 
-            int timeIdx = getTimeFlagIndex(userInput);
-            rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, timeIdx);
+            int timeIndex = getTimeFlagIndex(userInput);
+            rawDayNumber = parseFieldValue(userInput, dayIndex + DAY_LENGTH, timeIndex);
 
-            int nameIdx = getNameFlagIndex(userInput);
-            itemTime = parseFieldValue(userInput, timeIdx + TIME_LENGTH, nameIdx);
+            int nameIndex = getNameFlagIndex(userInput);
+            itemTime = parseFieldValue(userInput, timeIndex + TIME_LENGTH, nameIndex);
 
-            int indexIdx = getIndexFlagIndex(userInput);
-            itemName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, indexIdx);
+            int indexIndex = getIndexFlagIndex(userInput);
+            itemName = parseFieldValue(userInput, nameIndex + NAME_LENGTH, indexIndex);
 
-            rawIndex = parseFieldValue(userInput, indexIdx + INDEX_LENGTH, userInput.length());
+            rawIndex = parseFieldValue(userInput, indexIndex + INDEX_LENGTH, userInput.length());
 
             try {
                 itemIndex = Integer.parseInt(rawIndex);
@@ -373,8 +385,8 @@ public class Parser {
 
     /**
      * Parses user input to give a <code>ShortestCommand</code>.
-     * @param userInput Raw user input, with the first command option (search) removed.
-     * @return Command A <code>ShortestCommand</code> object.
+     * @param userInput Raw user input, with the first command option (shortest-dist) removed.
+     * @return Command A <code>ShortestCommand</code> object with in-built tag "dist"
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
     private static Command parseShortestDistCommand(String userInput) throws TravellerException {
@@ -382,13 +394,15 @@ public class Parser {
         Command command;
         String startCountryCode;
         String endCountryCode;
-        int fromIdx = getFromFlagIndex(userInput);
-        int toIdx = getToFlagIndex(userInput);
+
+        int fromIndex = getFromFlagIndex(userInput);
+        int toIndex = getToFlagIndex(userInput);
+
         try {
             startCountryCode = parseFieldValue(userInput,
-                    fromIdx + FROM_LENGTH, toIdx).toUpperCase();
+                    fromIndex + FROM_LENGTH, toIndex).toUpperCase();
             endCountryCode = parseFieldValue(userInput,
-                    toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+                    toIndex + TO_LENGTH, userInput.length()).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
@@ -403,8 +417,8 @@ public class Parser {
 
     /**
      * Parses user input to give a <code>ShortestCommand</code>.
-     * @param userInput Raw user input, with the first command option (search) removed.
-     * @return Command A <code>ShortestCommand</code> object.
+     * @param userInput Raw user input, with the first command option (shortest-cost) removed.
+     * @return Command A <code>ShortestCommand</code> object with in-built tag "cost"
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
     private static Command parseShortestCostCommand(String userInput) throws TravellerException {
@@ -412,10 +426,15 @@ public class Parser {
         Command command;
         String startCountryCode;
         String endCountryCode;
+
+        int fromIndex = getFromFlagIndex(userInput);
+        int toIndex = getToFlagIndex(userInput);
+
         try {
-            int toIdx = getToFlagIndex(userInput);
-            startCountryCode = parseFieldValue(userInput, FROM_LENGTH - 1, toIdx).toUpperCase();
-            endCountryCode = parseFieldValue(userInput, toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+            startCountryCode = parseFieldValue(userInput,
+                    fromIndex + FROM_LENGTH, toIndex).toUpperCase();
+            endCountryCode = parseFieldValue(userInput,
+                    toIndex + TO_LENGTH, userInput.length()).toUpperCase();
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";

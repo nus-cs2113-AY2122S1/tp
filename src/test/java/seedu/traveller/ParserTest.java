@@ -22,6 +22,8 @@ import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.InvalidNumberOfDaysException;
 import seedu.traveller.exceptions.InvalidViewCommandException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.InvalidSearchItemFormatException;
+import seedu.traveller.exceptions.InvalidEditItemFormatException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,8 +45,11 @@ public class ParserTest {
         ViewCommand viewCommand = new ViewCommand("all");
         assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
 
-        ShortestCommand shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
-        assertEquals(shortestCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+        ShortestCommand shortestDistCommand = new ShortestCommand("dist", "SKR", "JPN");
+        assertEquals(shortestDistCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+
+        ShortestCommand shortestCostCommand = new ShortestCommand("cost", "SKR", "JPN");
+        assertEquals(shortestCostCommand.toString(), Parser.parse("shortest-cost /from SKR /to JPN").toString());
 
         AddDayCommand addDayCommand = new AddDayCommand("trip3", 3);
         assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3 /day 3").toString());
@@ -183,9 +188,128 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_searchItemCommand_exceptionThrown() {
+        // Invalid /day flag input, character
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("search-item trip /day a /key dinner");
+        });
+        // Invalid /day flag input, negative integer
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("search-item trip /day -23 /key dinner");
+        });
+        // Missing /day flag value
+        assertThrows(EmptyFieldValueException.class, () -> {
+            Parser.parse("search-item trip /day  /key dinner");
+        });
+        // Missing trip
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item /day 0 /key dinner");
+        });
+        // Missing /day flag
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item trip /key dinner");
+        });
+        // Missing /key flag
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item trip /day 0 ");
+        });
+        // Wrong order of flags in search-item command
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item /day 0 trip4 /key dinner");
+        });
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item /key dinner /day 0 trip4");
+        });
+        assertThrows(InvalidSearchItemFormatException.class, () -> {
+            Parser.parse("search-item /key dinner trip4 /day 0");
+        });
+    }
+
+    @Test
+    public void parse_editItemCommand_exceptionThrown() {
+        //"edit-item trip4 /day 0 /time 1900 /name wake up from bed /index 1"
+        // Invalid /day flag input, character
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("edit-item trip4 /day a /time 1900 /name wake up from bed /index 1");
+        });
+        // Invalid /day flag input, negative integer
+        assertThrows(InvalidNumberOfDaysException.class, () -> {
+            Parser.parse("edit-item trip4 /day -27 /time 1900 /name wake up from bed /index 1");
+        });
+        // Invalid /time flag input, negative integer 3 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time -100 /name wake up from bed /index 1");
+        });
+        // Invalid /time flag input, negative integer 4 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time -1700 /name wake up from bed /index 1");
+        });
+        // Invalid /time flag input, integer 1 digits
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 9 /name wake up from bed /index 1");
+        });
+        // Invalid /time flag input, integer exceed 2359
+        assertThrows(IllegalTimeValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 4321 /name wake up from bed /index 1");
+        });
+        // Invalid /time flag input, wrong format
+        assertThrows(IllegalTimeFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 5pm /name wake up from bed /index 1");
+        });
+        // Missing /day flag value
+        assertThrows(EmptyFieldValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day  /time 1900 /name wake up from bed /index 1");
+        });
+        // Missing /day flag
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /time 1900 /name wake up from bed /index 1");
+        });
+        // Missing /time flag value
+        assertThrows(EmptyFieldValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time  /name wake up from bed /index 1");
+        });
+        // Missing /time flag
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /name wake up from bed /index 1");
+        });
+        // Missing /name flag value
+        assertThrows(EmptyFieldValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 1900 /name  /index 1");
+        });
+        // Missing /name flag
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 1900 /index 1");
+        });
+        // Missing /index flag value
+        assertThrows(EmptyFieldValueException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 1900 /name wake up from bed /index  ");
+        });
+        // Missing index flag
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /day 0 /time 1900");
+        });
+        // Wrong order of flags in add-item command
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /time 1900 /day 0 /name wake up from bed /index 1");
+        });
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /time 1900 /name wake up from bed /day 0 /index 1");
+        });
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /time 1900 /day 0 /index 1 /name wake up from bed");
+        });
+        assertThrows(InvalidEditItemFormatException.class, () -> {
+            Parser.parse("edit-item trip4 /time 1900 /index 1 /day 0 /name wake up from bed");
+        });
+    }
+
+    @Test
     public void parse_viewCommand_exceptionThrown() {
         assertThrows(EmptyFieldValueException.class, () -> {
             Parser.parse("view ");
         });
     }
+
+
 }
+
