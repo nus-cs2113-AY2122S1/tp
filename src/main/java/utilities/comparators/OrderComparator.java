@@ -6,10 +6,10 @@ import inventory.Order;
 import java.util.Comparator;
 
 //@@author alvintan01
+
 /**
  * Helps to sort the order based on the column provided.
  */
-
 public class OrderComparator implements Comparator<Order> {
     private String column;
     private Boolean isReversed;

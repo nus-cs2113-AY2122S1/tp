@@ -22,11 +22,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author jiangweichen835
+
 /**
  * Add order for medication based on user input.
  * User input include medication name, quantity and the order date.
  */
-
 public class AddOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("AddOrder");
 
@@ -44,7 +44,7 @@ public class AddOrderCommand extends Command {
         String[] optionalParameter = {CommandParameters.DATE};
 
         OrderValidator orderValidator = new OrderValidator();
-        if (checkValidParameterValues(ui,parameters, medicines, requiredParameters, optionalParameter,
+        if (checkValidParameterValues(ui, parameters, medicines, requiredParameters, optionalParameter,
                 orderValidator)) {
             return;
         }
@@ -85,7 +85,7 @@ public class AddOrderCommand extends Command {
 
             if (!nameExistsInStock) {
                 if (orderQuantity < maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
                 }
             } else {
                 int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
@@ -94,7 +94,7 @@ public class AddOrderCommand extends Command {
                 maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
 
                 if (orderQuantity + totalQuantity <= maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
                 } else {
                     ui.print("Order for " + nameToAdd + " exists.\nUnable to add order as total order quantity "
                             + "exceeds maximum stock quantity of " + maxQuantity + ".\nExisting quantity in stock: "
@@ -102,7 +102,7 @@ public class AddOrderCommand extends Command {
                 }
             }
         } else {
-            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
         }
     }
 
@@ -129,11 +129,10 @@ public class AddOrderCommand extends Command {
     /**
      * Add date based on user input.
      *
-     * @param ui        Reference to the UI object to print messages.
      * @param dateToAdd Order date input by user (check if it is in correct date format).
      * @return Default date or order date.
      */
-    private Date addDate(Ui ui, String dateToAdd) {
+    private Date addDate(String dateToAdd) {
         if (dateToAdd == null) {
             Date defaultDate = null;
             defaultDate = new Date();
@@ -153,17 +152,17 @@ public class AddOrderCommand extends Command {
     /**
      * Checks if user inputs are valid.
      *
-     * @param ui                    Reference to the UI object to print messages.
-     * @param parameters            The parameter that is not found.
-     * @param medicines             List of all medicines.
-     * @param requiredParameters    The required parameters to check.
-     * @param optionalParameters    The optional parameters to check.
-     * @param orderValidator        Reference to OrderValidator object.
+     * @param ui                 Reference to the UI object to print messages.
+     * @param parameters         The parameter that is not found.
+     * @param medicines          List of all medicines.
+     * @param requiredParameters The required parameters to check.
+     * @param optionalParameters The optional parameters to check.
+     * @param orderValidator     Reference to OrderValidator object.
      * @return Boolean value indicating if parameter and parameter values are valid.
      */
     private boolean checkValidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                            ArrayList<Medicine> medicines, String[] requiredParameters,
-                                            String[] optionalParameters, OrderValidator orderValidator) {
+                                              ArrayList<Medicine> medicines, String[] requiredParameters,
+                                              String[] optionalParameters, OrderValidator orderValidator) {
         boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false);
         if (isInvalidParameters) {

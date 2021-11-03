@@ -8,6 +8,7 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderValidator;
 import utilities.parser.StockValidator;
 import utilities.ui.Ui;
@@ -24,7 +25,6 @@ import java.util.logging.Logger;
 /**
  * Helps to add an order to stocks and mark the order as delivered.
  */
-
 public class ReceiveOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("ReceiveOrder");
 
@@ -77,7 +77,7 @@ public class ReceiveOrderCommand extends Command {
      * Check if same medication name and expiry date exist and returns the current quantity.
      *
      * @param medicines Arraylist of all medicines.
-     * @param name Medication name to be searched.
+     * @param name      Medication name to be searched.
      * @return Integer value indicating the current quantity.
      */
     private int getCurrentQuantity(ArrayList<Medicine> medicines, String name) {
@@ -172,31 +172,17 @@ public class ReceiveOrderCommand extends Command {
      * @return Boolean value indicating if Stock parameters are valid.
      */
     private boolean isStockParametersValid(Ui ui, ArrayList<Medicine> medicines, String name) {
-        StockValidator stockValidator = new StockValidator();
+        MedicineValidator validator = new StockValidator();
+        String[] requiredParameters = {CommandParameters.PRICE, CommandParameters.EXPIRY_DATE};
         String[] optionalParameters = {};
-        if (checkStockExist(medicines, name)) {
-            String[] requiredParameters = {CommandParameters.PRICE, CommandParameters.EXPIRY_DATE};
-            boolean isInvalidParameters = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                    optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false);
-            if (isInvalidParameters) {
-                logger.log(Level.WARNING, "Invalid parameter is specified by user");
-                return false;
-            }
-        } else {
-            String[] requiredParameters = {CommandParameters.PRICE, CommandParameters.EXPIRY_DATE,
+        if (!checkStockExist(medicines, name)) {
+            requiredParameters = new String[]{CommandParameters.PRICE, CommandParameters.EXPIRY_DATE,
                     CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
-            boolean isInvalidParameters = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                    optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false);
-            if (isInvalidParameters) {
-                logger.log(Level.WARNING, "Invalid parameter is specified by user");
-                return false;
-            }
         }
 
-        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.RECEIVE_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user!");
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false, validator);
+        if (isInvalidInput) {
             return false;
         }
         return true;

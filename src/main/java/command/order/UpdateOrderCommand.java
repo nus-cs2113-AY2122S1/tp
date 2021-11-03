@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
 import utilities.parser.StockManager;
@@ -20,10 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author a-tph
+
 /**
  * Update medication information based on user input given order id.
  */
-
 public class UpdateOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
@@ -36,21 +37,15 @@ public class UpdateOrderCommand extends Command {
         logger.log(Level.INFO, "Start of UpdateOrder command execution.");
 
         Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        String[] requiredParameter = {CommandParameters.ID};
+        String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 
-        OrderValidator orderValidator = new OrderValidator();
-        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameter,
-                optionalParameters, CommandSyntax.UPDATE_ORDER_COMMAND, true);
-        if (isInvalidParameter) {
-            return;
-        }
-
-        ArrayList<Medicine> medicines = Medicine.getInstance();
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.UPDATE_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
+        MedicineValidator validator = new OrderValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.UPDATE_ORDER_COMMAND, true, validator);
+        if (isInvalidInput) {
             return;
         }
 
@@ -64,30 +59,15 @@ public class UpdateOrderCommand extends Command {
         assert maxQuantity >= 0 : "Max quantity must not be less than 0";
         boolean existName = maxQuantity > 0;
         boolean existQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
-        int actualTotalQuantity = 0;
 
         if (existName && existQuantityParam) {
-            int totalQuantity = OrderManager.getTotalOrderQuantity(medicines, order.getMedicineName());
-            int orderQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
-            actualTotalQuantity = totalQuantity - order.getQuantity() + orderQuantity;
-            StockValidator stockValidator = new StockValidator();
-            boolean isValidQuantity = stockValidator.quantityValidityChecker(ui, actualTotalQuantity, maxQuantity);
+            boolean isValidQuantity = checkUpdateQuantity(ui, medicines, order, maxQuantity);
             if (!isValidQuantity) {
                 return;
             }
         }
 
-        ArrayList<Order> filteredOrders = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            boolean isOrderInstance = medicine instanceof Order;
-            if (isOrderInstance) {
-                boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(order.getMedicineName());
-                boolean isPending = !(((Order) medicine).isDelivered());
-                if (isSameName && isPending) {
-                    filteredOrders.add((Order) medicine);
-                }
-            }
-        }
+        ArrayList<Order> filteredOrders = OrderManager.getFilteredOrdersByName(medicines, order.getMedicineName());
 
         // Default value for updating all affected rows
         int rowsAffected = filteredOrders.size();
@@ -97,7 +77,7 @@ public class UpdateOrderCommand extends Command {
             rowsAffected = filteredOrders.size();
         }
 
-        setUpdatesByOrderId(parameters, filteredOrders, order);
+        setUpdatesByOrderId(filteredOrders, order);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         ui.printOrders(filteredOrders);
         Storage storage = Storage.getInstance();
@@ -106,14 +86,33 @@ public class UpdateOrderCommand extends Command {
     }
 
     /**
+     * Checks if the updated order quantity exceeds the maximum quantity.
+     *
+     * @param ui          Reference to the UI object to print messages.
+     * @param medicines   Arraylist of all medicines.
+     * @param order       Order object to be updated.
+     * @param maxQuantity Maximum quantity for the provided stock.
+     * @return Boolean true if quantity given can be updated.
+     */
+    private boolean checkUpdateQuantity(Ui ui, ArrayList<Medicine> medicines, Order order, int maxQuantity) {
+        int totalQuantity = OrderManager.getTotalOrderQuantity(medicines, order.getMedicineName());
+        int orderQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
+        int actualTotalQuantity = totalQuantity - order.getQuantity() + orderQuantity;
+        StockValidator stockValidator = new StockValidator();
+        boolean isValidQuantity = stockValidator.quantityValidityChecker(ui, actualTotalQuantity, maxQuantity);
+        if (!isValidQuantity) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Update values provided by user for a given order id.
      *
-     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredOrders Arraylist of filtered medicine orders.
      * @param order          Order object of the given order id.
      */
-    private void setUpdatesByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
-                                     Order order) {
+    private void setUpdatesByOrderId(ArrayList<Order> filteredOrders, Order order) {
         logger.log(Level.INFO, "Attempt to update order information.");
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);

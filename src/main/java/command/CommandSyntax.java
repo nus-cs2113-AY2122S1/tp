@@ -4,7 +4,6 @@ package command;
  * Contains all the valid command syntax accepted by the application. Also contains methods to validate if the
  * parameter and its value is valid for a given command.
  */
-
 public class CommandSyntax {
     private String commandName;
     private String commandSyntax;

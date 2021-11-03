@@ -7,6 +7,7 @@ import inventory.Medicine;
 import inventory.Order;
 import utilities.comparators.OrderComparator;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderValidator;
 import utilities.ui.Ui;
 
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 //@@author RemusTeo
+
 /**
  * Helps to process the listorder command together with filters and sort.
  */
-
 public class ListOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("ListOrder");
 
@@ -34,26 +35,17 @@ public class ListOrderCommand extends Command {
     public void execute() {
         logger.log(Level.INFO, "Start listing of order records");
         Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.DATE, CommandParameters.STATUS, CommandParameters.SORT,
                 CommandParameters.REVERSED_SORT};
 
-        OrderValidator orderValidator = new OrderValidator();
-        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false);
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return;
-        }
-
-        ArrayList<Medicine> medicines = Medicine.getInstance();
-
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.LIST_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        MedicineValidator validator = new OrderValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false, validator);
+        if (isInvalidInput) {
             return;
         }
 
@@ -80,8 +72,7 @@ public class ListOrderCommand extends Command {
      * @param filteredOrders Arraylist of Order objects.
      * @return Arraylist of filtered Order objects based on the user's parameters values.
      */
-    private ArrayList<Order> filterOrders(LinkedHashMap<String, String> parameters,
-                                          ArrayList<Order> filteredOrders) {
+    private ArrayList<Order> filterOrders(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {

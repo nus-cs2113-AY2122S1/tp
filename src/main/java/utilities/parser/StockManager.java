@@ -106,7 +106,7 @@ public class StockManager {
     }
 
     /**
-     * Extracts the filtered stock for stocks with same name.
+     * Extracts the filtered stocks for stocks with same name.
      *
      * @param medicines Arraylist of all medicines.
      * @param stockName Stock name for a given stock.

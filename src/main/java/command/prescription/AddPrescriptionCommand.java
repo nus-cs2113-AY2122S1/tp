@@ -6,9 +6,11 @@ import command.CommandSyntax;
 import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Stock;
+import utilities.parser.MedicineValidator;
 import utilities.parser.PrescriptionValidator;
 import utilities.parser.DateParser;
 import utilities.parser.PrescriptionManager;
+import utilities.parser.StockManager;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
 
@@ -42,20 +44,10 @@ public class AddPrescriptionCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
-        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
-
-        boolean isInvalidParameters = prescriptionValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters,
-                optionalParameters, CommandSyntax.ADD_PRESCRIPTION_COMMAND, false);
-
-        if (isInvalidParameters) {
-            return;
-        }
-
-        boolean isInvalidParameterValues = prescriptionValidator.containsInvalidParameterValues(ui, parameters,
-                medicines,
-                CommandSyntax.ADD_PRESCRIPTION_COMMAND);
-        if (isInvalidParameterValues) {
+        MedicineValidator validator = new PrescriptionValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_PRESCRIPTION_COMMAND, false, validator);
+        if (isInvalidInput) {
             return;
         }
 
@@ -67,15 +59,7 @@ public class AddPrescriptionCommand extends Command {
             return;
         }
 
-
-        ArrayList<Stock> filteredStocks = new ArrayList<>();
-
-        for (Medicine medicine : medicines) {
-            if ((medicine instanceof Stock) && (medicine.getMedicineName().equalsIgnoreCase(medicationName))
-                    && !((Stock) medicine).isDeleted()) {
-                filteredStocks.add((Stock) medicine);
-            }
-        }
+        ArrayList<Stock> filteredStocks = StockManager.getFilteredStocksByName(medicines, medicationName);
 
         if (filteredStocks.isEmpty()) {
             ui.print("Medicine not available!");

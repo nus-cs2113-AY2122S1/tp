@@ -8,7 +8,6 @@ import java.util.Date;
  * Represents a Medicine object. A Medicine object is represented by stock_id, name, price, quantity, expiry,
  * description and max quantity.
  */
-
 public class Stock extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";

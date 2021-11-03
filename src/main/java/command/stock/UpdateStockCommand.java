@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 /**
  * Update medication information based on user input given stock id.
  */
-
 public class UpdateStockCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateStock");
 
@@ -37,26 +36,25 @@ public class UpdateStockCommand extends Command {
         logger.log(Level.INFO, "Start of UpdateStock command execution.");
 
         Ui ui = Ui.getInstance();
-
+        ArrayList<Medicine> medicines = Medicine.getInstance();
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
                 CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
                 CommandParameters.MAX_QUANTITY};
 
         MedicineValidator validator = new StockValidator();
-        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.UPDATE_STOCK_COMMAND, true, validator);
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.UPDATE_STOCK_COMMAND, true, validator);
         if (isInvalidInput) {
             return;
         }
 
-        ArrayList<Medicine> medicines = Medicine.getInstance();
         Stock stock = StockManager.extractStockObject(parameters, medicines);
-        boolean isValidQuantityValues = processQuantityValues(ui, parameters, medicines, stock);
+        boolean isValidQuantityValues = processQuantityValues(ui, medicines, stock);
         if (!isValidQuantityValues) {
             return;
         }
-        boolean isValidExpDate = processDateInput(ui, parameters, medicines, stock);
+        boolean isValidExpDate = processDateInput(ui, medicines, stock);
         if (!isValidExpDate) {
             return;
         }
@@ -154,8 +152,7 @@ public class UpdateStockCommand extends Command {
      * @param filteredStocks Arraylist of filtered medicine stocks.
      * @param medicines      Arraylist of all medicines.
      */
-    private void addNewRowForUpdates(ArrayList<Stock> filteredStocks,
-                                     ArrayList<Medicine> medicines) {
+    private void addNewRowForUpdates(ArrayList<Stock> filteredStocks, ArrayList<Medicine> medicines) {
         // Initialise new stock to get a new Stock Id
         for (Stock stock : filteredStocks) {
             String name = stock.getMedicineName();
@@ -185,14 +182,12 @@ public class UpdateStockCommand extends Command {
     /**
      * Process valid date input to be updated given a stock id.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
-     * @param stock      Stock object of the given stock id.
+     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param medicines Arraylist of all medicines.
+     * @param stock     Stock object of the given stock id.
      * @return Boolean value indicating if quantity values are valid.
      */
-    private boolean processDateInput(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                                     Stock stock) {
+    private boolean processDateInput(Ui ui, ArrayList<Medicine> medicines, Stock stock) {
         logger.log(Level.INFO, "Processing date input for update stock...");
         boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
         if (!hasExpiryDate) {
@@ -214,14 +209,12 @@ public class UpdateStockCommand extends Command {
     /**
      * Process quantity values to be updated given a stock id.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
-     * @param stock      Stock object of the given stock id.
+     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param medicines Arraylist of all medicines.
+     * @param stock     Stock object of the given stock id.
      * @return Boolean value indicating if quantity values are valid.
      */
-    private boolean processQuantityValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                          ArrayList<Medicine> medicines, Stock stock) {
+    private boolean processQuantityValues(Ui ui, ArrayList<Medicine> medicines, Stock stock) {
         logger.log(Level.INFO, "Processing quantity values for update stock...");
         String name = stock.getMedicineName();
         int quantity = 0;
@@ -265,8 +258,7 @@ public class UpdateStockCommand extends Command {
      * @param filteredStocks Arraylist of filtered medicine stocks.
      * @param stock          Stock object of the given stock id.
      */
-    private void setUpdatesByStockId(ArrayList<Stock> filteredStocks,
-                                     Stock stock) {
+    private void setUpdatesByStockId(ArrayList<Stock> filteredStocks, Stock stock) {
         logger.log(Level.INFO, "Attempt to update stock information.");
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);

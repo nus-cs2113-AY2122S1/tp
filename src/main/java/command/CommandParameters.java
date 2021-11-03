@@ -3,7 +3,6 @@ package command;
 /**
  * Represents all the commands parameters used in the application.
  */
-
 public class CommandParameters {
     public static final String CUSTOMER_ID = "c";
     public static final String DATE = "d";

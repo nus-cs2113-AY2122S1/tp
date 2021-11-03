@@ -6,7 +6,9 @@ import command.CommandSyntax;
 import inventory.Prescription;
 import inventory.Medicine;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderValidator;
+import utilities.parser.PrescriptionValidator;
 import utilities.ui.Ui;
 import utilities.storage.Storage;
 
@@ -39,19 +41,10 @@ public class ArchivePrescriptionCommand extends Command {
         String[] requiredParameters = {CommandParameters.DATE};
         String[] optionalParameters = {};
 
-        OrderValidator orderValidator = new OrderValidator();
-        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.ARCHIVE_PRESCRIPTION_COMMAND, true);
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful archive of prescription");
-            return;
-        }
-
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ARCHIVE_PRESCRIPTION_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        MedicineValidator validator = new PrescriptionValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ARCHIVE_PRESCRIPTION_COMMAND, true, validator);
+        if (isInvalidInput) {
             logger.log(Level.INFO, "Unsuccessful archive of prescription");
             return;
         }

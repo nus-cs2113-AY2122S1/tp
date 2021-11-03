@@ -6,10 +6,10 @@ import inventory.Prescription;
 import java.util.Comparator;
 
 //@@author alvintan01
+
 /**
  * Helps to sort the medicines based on the column provided.
  */
-
 public class PrescriptionComparator implements Comparator<Prescription> {
     private String column;
     private Boolean isReversed;

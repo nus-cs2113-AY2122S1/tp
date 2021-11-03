@@ -7,7 +7,6 @@ import java.util.Date;
 /**
  * Represents an Order. An Order is represented by order_id, medicine name, quantity, date and isDelivered.
  */
-
 public class Order extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";

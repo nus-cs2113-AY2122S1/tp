@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //@@author alvintan01
+
 /**
  * Helps to process the purge command and prompts the user for confirmation.
  */
-
 public class PurgeCommand extends Command {
     @Override
     public void execute() {

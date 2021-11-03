@@ -17,11 +17,11 @@ import static utilities.parser.Mode.PRESCRIPTION;
 import static utilities.parser.Mode.STOCK;
 
 //@@author alvintan01
+
 /**
  * Helps to start the application, and initialise all variables.
  * It will continuously prompt for input from the user until "EXIT" is received.
  */
-
 public class MediVault {
     private static Logger logger = Logger.getLogger("MediVault");
     private Mode mode = Mode.STOCK;

@@ -8,7 +8,6 @@ import java.util.Date;
  * Represents a Dispensed object. A Dispensed object is represented by medicine name, quantity, customer's NRIC,
  * date and staff name.
  */
-
 public class Prescription extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";

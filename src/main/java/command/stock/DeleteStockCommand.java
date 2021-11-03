@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.StockValidator;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
@@ -18,10 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author RemusTeo
+
 /**
  * Delete medication based on user input given stock id.
  */
-
 public class DeleteStockCommand extends Command {
     private static Logger logger = Logger.getLogger("DeleteStock");
 
@@ -39,19 +40,11 @@ public class DeleteStockCommand extends Command {
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRING};
 
-        StockValidator stockValidator = new StockValidator();
-        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.DELETE_STOCK_COMMAND, true);
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
+        MedicineValidator validator = new StockValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.DELETE_STOCK_COMMAND, true, validator);
+        if (isInvalidInput) {
             logger.log(Level.INFO, "Unsuccessful deletion of stock");
-            return;
-        }
-
-        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.DELETE_STOCK_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameter value specified by user");
             return;
         }
 
@@ -65,9 +58,9 @@ public class DeleteStockCommand extends Command {
         }
 
         if (hasStockId && !hasExpiryDate) {
-            deleteStockById(ui, parameters, medicines, stockValidator);
+            deleteStockById(ui, medicines);
         } else if (!hasStockId && hasExpiryDate) {
-            deleteStockByExpiry(ui, parameters, medicines);
+            deleteStockByExpiry(ui, medicines);
         }
 
         Storage storage = Storage.getInstance();
@@ -78,13 +71,10 @@ public class DeleteStockCommand extends Command {
     /**
      * Deletion of stock given an id.
      *
-     * @param ui             Reference to the UI object to print messages.
-     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines      Arraylist of all medicines.
-     * @param stockValidator Reference to StockValidator object.
+     * @param ui        Reference to the UI object to print messages.
+     * @param medicines Arraylist of all medicines.
      */
-    private static void deleteStockById(Ui ui, LinkedHashMap<String, String> parameters,
-                                        ArrayList<Medicine> medicines, StockValidator stockValidator) {
+    private void deleteStockById(Ui ui, ArrayList<Medicine> medicines) {
         String stockIdToDelete = parameters.get(CommandParameters.ID);
         int stockId = Integer.parseInt(stockIdToDelete);
 
@@ -107,15 +97,14 @@ public class DeleteStockCommand extends Command {
     }
 
     //@@author a-tph
+
     /**
      * Deletion of expired stocks given a date.
      *
-     * @param ui         Reference to the UI object to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
+     * @param ui        Reference to the UI object to print messages.
+     * @param medicines Arraylist of all medicines.
      */
-    private static void deleteStockByExpiry(Ui ui, LinkedHashMap<String, String> parameters,
-                                            ArrayList<Medicine> medicines) {
+    private void deleteStockByExpiry(Ui ui, ArrayList<Medicine> medicines) {
         String dateString = parameters.get(CommandParameters.EXPIRING);
         Date date = null;
         try {
@@ -133,7 +122,6 @@ public class DeleteStockCommand extends Command {
 
             Stock stock = (Stock) medicine;
             Date stockExpiryDate = stock.getExpiry();
-
             if (stock.isDeleted()) {
                 continue;
             }
