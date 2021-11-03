@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@@author silinche
 class ItemTest {
-    Item item = new Item("Junglebook", "1", Status.AVAILABLE);
+    Item item = new Item("Junglebook", "1", Status.AVAILABLE, null, null);
 
     @Test
     void testGetTitle() {
