@@ -1,5 +1,6 @@
 package seedu.foodorama.command;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import seedu.foodorama.DishList;
 import seedu.foodorama.IngredientList;
@@ -22,6 +23,12 @@ class AddDishCommandTest {
         testAddDishCommand.execute(inputParams);
 
         assertEquals("chicken rice", DishList.dishList.get(0).getDishName());
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
+    }
+
+    @AfterEach
+    void clearLists() {
         DishList.dishList.clear();
         IngredientList.ingredientList.clear();
     }

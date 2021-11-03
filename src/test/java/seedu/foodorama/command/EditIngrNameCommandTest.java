@@ -53,6 +53,5 @@ class EditIngrNameCommandTest {
         assert (updatedIngrName.equals("chicken"));
 
         IngredientList.ingredientList.clear();
-
     }
 }

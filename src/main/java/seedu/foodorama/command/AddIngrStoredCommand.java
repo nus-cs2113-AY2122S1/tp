@@ -27,7 +27,7 @@ public class AddIngrStoredCommand extends Command {
         if (isNumber(ingredient)) {
             ingredientIndex = Integer.parseInt(ingredient) - 1;
         } else {
-            ingredientIndex = DishList.find(ingredient);
+            ingredientIndex = IngredientList.find(ingredient);
         }
         if (ingredientIndex == -1) {
             logger.log(Level.INFO, "Ingredient does not exist");
