@@ -102,8 +102,8 @@ Typists automatically stores the updated game records into text files when gamer
 ### !Warning: Editing the data file
 Typists is a game application and only game records will be stored. 
 Gamers should not edit the data it will manipulate the integrity of the records.
-In the event where the data is editted and the wrong format is inputted, the game will crash when it tries to read the file. 
-The only way to make it run smoothly again is to delete the text files, hence losing all the game data.
+In the event where the data is edited and the wrong format is inputted, the file contents will be cleared, 
+hence losing all the game data.
 
 
 
