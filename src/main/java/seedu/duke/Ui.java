@@ -79,6 +79,10 @@ public class Ui {
         System.out.println("You have removed training entry: " + "\n" + training.toString());
     }
 
+    public static void printEmptyMembersFile() {
+        System.out.println("Members File is Empty!!!");
+    }
+
     public static void printQuestionToList() {
         System.out.println("Please enter only a 'y' or 'n'.");
     }
@@ -89,6 +93,18 @@ public class Ui {
 
     public static void printIndexError() {
         System.out.println("Index must be a number");
+    }
+
+    public static void printEditPhoneFailed() {
+        System.out.println("You did not edit the phone number due to a wrong format being used...");
+    }
+
+    public static void printEditGenderFailed() {
+        System.out.println("You did not edit the gender due to a wrong format being used...");
+    }
+
+    public static void printEditNameFailed() {
+        System.out.println("You did not edit the Name due to a number being used...");
     }
 
     public static void printMissingTraining() {
