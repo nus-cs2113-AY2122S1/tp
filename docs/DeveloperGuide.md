@@ -330,174 +330,179 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 ## Use Cases
 
 **Use case: `addRecipe`**
+>
+>**MSS:**
+>1. User requests to add a recipe to Gordon
+>2. User inputs the necessary commands
+>3. Gordon adds the recipe to the cookbook
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The command given was invalid
+>  * Gordon shows an error message
+>  * Use case resumes on step 1
+>* The recipe name was identical to an existing recipe
+>  * Gordon shows an error message that the recipe already exists
+>  * Use case resumes on step 1
 
-**MSS:**
-1. User requests to add a recipe to Gordon
-2. User inputs the necessary commands
-3. Gordon adds the recipe to the cookbook
+**Use case: `deleteRecipe`**
+>
+>**MSS:**
+>1. User requests a list of all recipes
+>2. Gordon shows a list of all recipes
+>3. User requests to delete a specific recipe
+>4. Gordon deletes that recipe.
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The list is empty
+>    * Use case ends
+>* The given index is invalid
+>  * Gordon shows an error message
+>  * Use case resumes from step 2
 
-Use case ends.
-
-**Extensions**
-* The command given was invalid
-  >  * Gordon shows an error message
-  * Use case resumes on step 1
-
-*Use case: `deleteRecipe`**
-
-**MSS:**
-1. User requests a list of all recipes
-2. Gordon shows a list of all recipes
-3. User requests to delete a specific recipe
-4. Gordon deletes that recipe.
-
-Use case ends.
-
-**Extensions**
-* The list is empty
-  >  * Use case ends
-* The given index is invalid
-  >  * Gordon shows an error message
-  * Use case resumes from step 2
-
-*Use case: `listRecipes`**
-
-**MSS:**
-1. User requests to see all their recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions**
-* The list is empty.
-  >    * Use case ends.
+**Use case: `listRecipes`**
+>
+>**MSS:**
+>1. User requests to see all their recipes
+>2. Gordon shows a list of all currently stored recipes
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The list is empty.
+>  * Use case ends.
 
 
-*Use case: `help`**
+**Use case: `help`**
+>
+>**MSS:**
+>1. User opens Application
+>2. User does not know the commands
+>3. Gordon provides a list of commands
+>4. User can now use the App
+> 
+>Use case ends.
 
-**MSS:**
-1. User opens Application
-2. User does not know the commands
-3. Gordon provides a list of commands
-4. User can now use the App
- 
-Use case ends.
+**Use case: `exit`**
+>
+>**MSS:**
+>1. User requests to exit program
+>2. Program exits.
+>
+>Use case ends
 
-*Use case: `exit`**
+**Use case: `check`**
+>
+>**MSS:**
+>1. User requests to check a specific recipe
+>2. Gordon brings up the specified recipe for the user to peruse
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The recipe does not exist.
+>    * Use case ends.
+>* Name of recipe was entered incorrectly
+>  * Use case resumes from step 1
 
-**MSS:**
-1. User requests to exit program
-2. Program exits.
+**Use case: `set`**
+>
+>**MSS:**
+>1. User wants to add or edit certain parameters to their recipes
+>2. User inputs commands to add or edit these parameters
+>3. Gordon adds or edits these parameters
+>4. The next time the User checks the recipe, they will have these new parameters to refer to.
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The recipe does not exist.
+>     * Use case ends.
+>* Input was entered incorrectly
+>    * Use case resumes from step 1
+>* User enters an Index that is out of bounds
+>  * Use case resumes from step 1
 
-Use case ends
+**Use case: `find`**
+>
+>**MSS:**
+>1. User has a large cookbook
+>2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
+>3. Gordon returns a list of all the recipes which contain what the user is looking for
+>4. User checks the recipe for cooking
+>
+>Use case ends.
+>
+>>**Extensions** 
+>* The list is empty
+>  * Use case ends
+>* No recipe contains the keyword
+>  * Gordon shows an error message
+>  * Use case resumes from step 2
 
-*Use case: `check`**
+**Use case: `tag`**
+>
+>**MSS:** 
+>1. User wants to sort the recipes with their own metric
+>2. User requests to add tag(s) to a specific recipe
+>3. Gordon tags the recipe
+>4. User can now find the recipe by tag
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The given recipe does not exist
+>  * Gordon shows an error message, notifies User that recipe does not exist
+>  * Use case resumes from step 2
+> 
+> 
+>* Input fields for tagName or recipeName is left blank
+>    * Gordon shows an error message, prompts User to enter recipeName or tagName
+>    * Use case resumes from step 2
+> 
+> 
+> * There is a duplicate tag within the same recipe
+>   * Gordon shows an error message, notifies User that duplicate tags are not allowed
+>   * Use case resumes from step 2
 
-**MSS:**
-1. User requests to check a specific recipe
-2. Gordon brings up the specified recipe for the user to peruse
+**Use case: `untag`**
+>
+>**MSS:**
+>1. User wants to remove a tag from a specific recipe
+>2. Gordon removes the tag from the recipe
+>3. User can now add a different tag to that recipe
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The tag does not exist
+>    * Gordon shows an error message.
+>    * Use case ends
+>
+>* The recipe being untagged is the last recipe under the Tag
+>    * Gordon will print a message to the User, prompting them to delete the Tag if they want to
+>    * Use case ends
+>
+>* Input fields for tagName or recipeName is left blank
+>      * Gordon shows an error message, prompts User to enter recipeName or tagName
+>    * Use case resumes from step 1
 
-Use case ends.
-
-**Extensions**
-* The recipe does not exist.
-    * Use case ends.
-* Input was entered incorrectly
-  * Use case resumes from step 1
-
-*Use case: `set`**
-
-**MSS:**
-1. User wants to add or edit certain parameters to their recipes
-2. User inputs commands to add or edit these parameters
-3. Gordon adds or edits these parameters
-4. The next time the User checks the recipe, they will have these new parameters to refer to.
-
-Use case ends.
-
-**Extensions**
-* The recipe does not exist.
-  >    * Use case ends.
-* Input was entered incorrectly
-  >  * Use case resumes from step 1
-
-*Use case: `find`**
-
-**MSS:**
-1. User has a large cookbook
-2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
-3. Gordon returns a list of all the recipes which contain what the user is looking for
-4. User checks the recipe for cooking
-
-Use case ends.
-
-**Extensions** 
-* The list is empty
-  * Use case ends
-* No recipe contains the keyword
-  * Gordon shows an error message
-  * Use case resumes from step 2
-
-*Use case: `tag`**
-
-**MSS:** 
-1. User wants to sort the recipes with their own metric
-2. User requests to add tag(s) to a specific recipe
-3. Gordon tags the recipe
-4. User can now find the recipe by tag
-
-Use case ends.
-
-**Extensions**
-* The given recipe does not exist
-  * Gordon shows an error message, notifies User that recipe does not exist
-  * Use case resumes from step 2
- 
- 
-* Input fields for tagName or recipeName is left blank
-    * Gordon shows an error message, prompts User to enter recipeName or tagName
-    * Use case resumes from step 2
- 
- 
- * There is a duplicate tag within the same recipe
-   * Gordon shows an error message, notifies User that duplicate tags are not allowed
-   * Use case resumes from step 2
-
-*Use case: `untag`**
-
-**MSS:**
-1. User wants to remove a tag from a specific recipe
-2. Gordon removes the tag from the recipe
-3. User can now add a different tag to that recipe
-
-Use case ends.
-
-**Extensions**
-* The tag does not exist
-    * Gordon shows an error message.
-    * Use case ends
-
-* The recipe being untagged is the last recipe under the Tag
-    * Gordon will print a message to the User, prompting them to delete the Tag if they want to
-    * Use case ends
-
-* Input fields for tagName or recipeName is left blank
-  >    * Gordon shows an error message, prompts User to enter recipeName or tagName
-    * Use case resumes from step 1
-
-*Use case: `deleteTag`**
-
-**MSS:**
-1. User wants to delete a master tag from the database
-2. Gordon deletes the master tag from the cookbook
-3. All recipes will have references to this master tag removed
-
-Use case ends.
-
-**Extensions**
-* The tag does not exist
-    * Use case ends.
-
+**Use case: `deleteTag`**
+>
+>**MSS:**
+>1. User wants to delete a master tag from the database
+>2. Gordon deletes the master tag from the cookbook
+>3. All recipes will have references to this master tag removed
+>
+>Use case ends.
+>
+>>**Extensions**
+>* The tag does not exist
+>    * Use case ends.
+>
 ## Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java `11` or above installed.
