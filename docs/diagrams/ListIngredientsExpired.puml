@@ -1,53 +1,59 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ListIngredientsExpiredCommand" as ListIngredientsExpiredCommand
+participant ":IngredientRepository" as IngredientRepository
+participant ":IngredientStorage" as IngredientStorage
 
 autonumber
 
  -> Parser: parseCommand()
 activate Parser
 
-Parser -> ListIngredientsExpiredCommand: execute()
+return command
+destroy Parser
+
+-> ListIngredientsExpiredCommand: execute()
 activate ListIngredientsExpiredCommand
 
-ListIngredientsExpiredCommand -> ingredientRepository: findExpiredIngredients()
-activate ingredientRepository
+ListIngredientsExpiredCommand -> IngredientRepository: findExpiredIngredients()
+activate IngredientRepository
 
 loop ingredientStorages
 
-    ingredientRepository -> IngredientStorage: getIngredient()
+    IngredientRepository -> IngredientStorage: getIngredient()
     activate IngredientStorage
 
-    IngredientStorage --> ingredientRepository: ingredient: Ingredient
+    IngredientStorage --> IngredientRepository: ingredient: Ingredient
     deactivate IngredientStorage
 
-    ingredientRepository -> IngredientStorage: new(ingredient: Ingredient)
+    IngredientRepository -> IngredientStorage: new(ingredient: Ingredient)
     activate IngredientStorage
 
-    IngredientStorage -> ingredientRepository: expiredIngredientStorage: IngredientStorage
+    IngredientStorage -> IngredientRepository: expiredIngredientStorage: IngredientStorage
     deactivate IngredientStorage
 
     loop ingredientStorageBatches
 
             opt expiryDateOfBatch < currentDate
 
-                ingredientRepository -> expiredIngredientStorage: add( ingredientBatch)
+                IngredientRepository -> expiredIngredientStorage: add( ingredientBatch)
                 activate expiredIngredientStorage
 
             end
     end
 
-    expiredIngredientStorage --> ingredientRepository:expiredIngredientStorage: IngredientStorage
+    expiredIngredientStorage --> IngredientRepository:expiredIngredientStorage: IngredientStorage
     deactivate expiredIngredientStorage
 
 end
 
-ingredientRepository --> ListIngredientsExpiredCommand: String
-deactivate ingredientRepository
+IngredientRepository --> ListIngredientsExpiredCommand: list
+deactivate IngredientRepository
 
-ListIngredientsExpiredCommand --> Parser: String
-deactivate ListIngredientsExpiredCommand
+return list
 
-<-- Parser: Command
-deactivate Parser
 
 @enduml

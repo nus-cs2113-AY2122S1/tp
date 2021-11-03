@@ -1,12 +1,30 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ShoppingListCommand" as ShoppingListCommand
+participant ":IngredientRepository" as IngredientRepository
 
 autonumber
 
 -> Parser: parseCommand()
 activate Parser
 
-Parser -> ShoppingListCommand: execute()
+Parser -> Parser: prepareShoppingList()
+activate Parser
+
+create ShoppingListCommand
+Parser -> ShoppingListCommand: new()
+activate ShoppingListCommand
+
+return shoppingListCommand
+return shoppingListCommand
+return shoppingListCommand
+destroy Parser
+
+
+-> ShoppingListCommand: execute()
 activate ShoppingListCommand
 
 ShoppingListCommand -> IngredientRepository: generateShoppingList(recipes: Array<Recipe>)
@@ -26,13 +44,10 @@ loop recipes
 
 end
 
-IngredientRepository -> ShoppingListCommand: shoppingList: String
-deactivate IngredientRepository
+return shoppingList
+destroy IngredientRepository
 
-ShoppingListCommand -> Parser: String
-deactivate ShoppingListCommand
-
- <-- Parser: Command
-deactivate Parser
+return shoppingList
+destroy ShoppingListCommand
 
 @enduml
