@@ -34,7 +34,7 @@ class DeadlineFactoryTest {
         arguments.put(DeadlineFlag.PRIORITY, Integer.toString(PriorityEnum.HIGH.getValue()));
         arguments.put(DeadlineFlag.RECURRENCE, RecurrenceEnum.MONTHLY.toString());
 
-        Deadline deadline = (Deadline) new DeadlineFactory(arguments).getTask();
+        Deadline deadline = new DeadlineFactory(arguments).getTask();
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);
@@ -49,7 +49,7 @@ class DeadlineFactoryTest {
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
 
-        Deadline deadline = (Deadline) new DeadlineFactory(arguments).getTask();
+        Deadline deadline = new DeadlineFactory(arguments).getTask();
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
-import seedu.duke.local.DataManager;
+import seedu.duke.exception.NoTasksSpecifiedException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.taskmanager.TaskManager;
@@ -37,11 +37,16 @@ public class DeleteCommand extends Command {
             }
             String[] taskIndexStrings = splitIndexesString(mainArgument);
             TreeSet<Integer> tasksToDelete = getTasksToDelete(taskIndexStrings);
+            if (tasksToDelete.isEmpty()) {
+                throw new NoTasksSpecifiedException(mainArgument);
+            }
             message += deleteTasks(tasksToDelete);
         } catch (NullPointerException npe) {
             message = getUsageMessage();
         } catch (EmptyTasklistException etle) {
             message = etle.getMessage();
+        } catch (NoTasksSpecifiedException ntse) {
+            message = ntse.getMessage();
         } catch (NumberFormatException nfe) {
             message = nfe.getMessage();
         } catch (InvalidTaskIndexException itie) {

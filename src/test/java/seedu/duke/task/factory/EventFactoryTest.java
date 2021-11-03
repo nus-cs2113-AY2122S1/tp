@@ -34,7 +34,7 @@ class EventFactoryTest {
         arguments.put(EventFlag.PRIORITY, Integer.toString(PriorityEnum.LOW.getValue()));
         arguments.put(EventFlag.RECURRENCE, RecurrenceEnum.YEARLY.toString());
 
-        Event event = (Event) new EventFactory(arguments).getTask();
+        Event event = new EventFactory(arguments).getTask();
 
         assertEquals(event.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);
@@ -51,7 +51,7 @@ class EventFactoryTest {
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
         arguments.put(EventFlag.END_DATE, VALID_DATE2);
 
-        Event event = (Event) new EventFactory(arguments).getTask();
+        Event event = new EventFactory(arguments).getTask();
 
         assertEquals(event.getDescription(), DESCRIPTION);
         assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);

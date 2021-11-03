@@ -72,4 +72,9 @@ public class EventFactory extends TaskFactory {
             return new Event(description, start, end, priority, recurrence);
         }
     }
+
+    @Override
+    public Event getTask() throws GetTaskFailedException {
+        return (Event) super.getTask();
+    }
 }

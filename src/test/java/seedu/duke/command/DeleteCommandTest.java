@@ -10,7 +10,6 @@ import seedu.duke.command.flags.EventFlag;
 import seedu.duke.command.flags.ListFlag;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
-import seedu.duke.local.DataManager;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.task.factory.DeadlineFactory;

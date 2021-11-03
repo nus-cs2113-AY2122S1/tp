@@ -59,4 +59,9 @@ public class DeadlineFactory extends TaskFactory {
             return new Deadline(description, due, priority, recurrence);
         }
     }
+
+    @Override
+    public Deadline getTask() throws GetTaskFailedException {
+        return (Deadline) super.getTask();
+    }
 }
