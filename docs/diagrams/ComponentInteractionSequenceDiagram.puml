@@ -1,0 +1,19 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "ui:TextUI" as ui
+Participant "catalogue:Catalogue" as catalogue
+Participant "parser:Parser" as parser
+Participant "storage:Storage" as storage
+
+activate libmgr
+
+loop while true
+    libmgr -> ui:read()
+    activate ui
+    return userInput:String
+
+end
+
+@enduml

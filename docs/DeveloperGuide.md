@@ -18,7 +18,12 @@ This document is meant to assist developers in better understanding the inner wo
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The format of this developer guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://github.com/se-edu/addressbook-level3/blob/master/docs/DeveloperGuide.md)
+
+Libmgr also makes use of the following third-party libraries:
+- [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.13.0) (Apache 2 License)
+- [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.13.0) (Apache 2 License)
+- [Jackson Datatype JSR310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.0) (Apache 2 License)
 
 ## Setting up the project
 
@@ -43,21 +48,27 @@ This section provides an overview of the design architecture and design of the v
 ### Architecture
 
 The following __*Architecture Diagram*__ provides a high level visualization of the interaction between the various components of the app.
-Further elaboration  is given below
+Further elaboration  is given below.
 
 ![ArchitectureDiagram](img/ArchitectureDiagram.png)
 
-Libmgr is a Command-Line-Interface (CLI) application that is designed for librarians to manage library inventory efficiently. 
-Its main architecture consists of a few components:
-- ui: Contains TextUI, the class which manages the UI of the app 
-- data: Contains the library catalogue and various item classes that hold the data of the app 
-- commands: Contains various command classes and a Parser class that handles the execution of user commands
-- common: Contains a collection of classes used by multiple other components, such as exceptions and messages
-- storage: Reads data from, and writes data to the hard disk
+The base `Duke` class consists of the main method which is responsible for:
+- Application launch: initializing the components in the correct order and setting up the data containers effectively.
+- Applicaiton teardown: shutting down the components, perform cleaning up and closing of processes where necessary.
 
-#### Entrypoint of Libmgr
+Beyond that, the libmgr application contains a number of other components:
+- `ui`: Contains TextUI, the class which handles user interaction through the command line UI .
+- `data`: Contains the library catalogue and various item classes that form the data of the app along with all relevant operations.
+- `commands`: Contains various command classes that facilitate the execution of commands and a parser class that parses user inputs.
+- `storage`: Reads data from, and writes data to the hard disk.
+- `common`: Contains a collection of classes used by multiple other components, such as exceptions and messages.
+- 
 
-The sequence diagram below shows an overview how the components and classes interact with each other in the application.
+#### Application Launch
+
+The following sequence diagram 
+
+#### Component Interaction
 
 ![InitializationMainFunction](img/InitializationMainFunctionSequence.png)
 
