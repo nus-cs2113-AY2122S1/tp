@@ -25,7 +25,7 @@ public class BrowseCommand extends Command {
 
     @Override
     public CommandResult executeCommand() throws Exception {
-        String message = null;
+        String message;
         try {
             String mainArgument = getMainArgument();
             if (mainArgument == null) {
@@ -36,6 +36,7 @@ public class BrowseCommand extends Command {
             Task task = taskManager.getFilteredTask(index);
             URI link = ((Lesson) task).getLink();
             ExternalHelper.browseUri(link);
+            message = link.toString();
         } catch (NullPointerException npe) {
             message = USAGE;
         } catch (ClassCastException cce) {
