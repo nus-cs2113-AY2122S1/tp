@@ -50,9 +50,9 @@ public class InputParser {
         case ADD_INGR:
         case ADD_DISH:
         case EDIT_INGR_NAME:
-        case EDIT_DISH_WASTAGE:
+        case EDIT_DISH_WASTE:
         case EDIT_DISH_NAME:
-        case EDIT_INGR_WASTAGE:
+        case EDIT_INGR_WASTE:
         case EDIT_INGR_STORAGE:
         case LIST:
             parameters.add(parameterString);

@@ -148,7 +148,7 @@ public class IngredientList {
             UI.clearTerminalAndPrintNewPage();
             if (confirmChange.equals(YES)) {
                 ingredientList.get(ingredientIndex).setIngredientName(newName);
-                UI.printIngrNameChanged(newName);
+                UI.printIngrNameChanged(ingrName, newName);
             } else {
                 UI.printDisregardMsg();
             }

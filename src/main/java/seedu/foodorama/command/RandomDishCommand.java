@@ -1,11 +1,17 @@
 package seedu.foodorama.command;
 
+import seedu.foodorama.Ui;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomDishCommand extends Command {
 
-    String randomDishName;
+    private String randomDishName;
+
+    public String getRandomDishName() {
+        return this.randomDishName;
+    }
 
     ArrayList<String> carbohydrates = new ArrayList<>() {
         {
@@ -55,9 +61,27 @@ public class RandomDishCommand extends Command {
         }
     };
 
+    public ArrayList<String> getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public ArrayList<String> getProteins() {
+        return proteins;
+    }
+
+    public ArrayList<String> getSauces() {
+        return sauces;
+    }
+
+    public ArrayList<String> getCookingMethods() {
+        return cookingMethods;
+    }
+
 
     @Override
     public void execute(ArrayList<String> parameters) {
+
+        Ui ui = new Ui();
 
         Random randomMethod = new Random();
 
@@ -73,10 +97,7 @@ public class RandomDishCommand extends Command {
 
         this.randomDishName = generatedDishName;
 
-        System.out.println("Here's an idea for a new Dish!"
-                + System.lineSeparator()
-                + generatedDishName
-        );
+        ui.printRandomDishName(generatedDishName);
 
     }
 

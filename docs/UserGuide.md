@@ -15,10 +15,11 @@ This user guide serves to help you manoeuvre around **Food-O-Rama**, which the *
 and includes a **List of Commands** for your quick
 reference. We hope you enjoy using *Food-O-Rama*!
 
-| Legend | Description |
+| Legend |  Description |
 | --- | --- |
-| *Note* 💡 | Lightbulb requires your attention. |
-| *Tip* ❕ | Exclamation mark gives additional information to use Food-O-Rama more effectively. | 
+| 💡 *Note*  | Lightbulb requires your attention. |
+| ❕ *Tip*  | Exclamation mark gives additional information to use Food-O-Rama more effectively. |
+| ↩ *Next Input* | Next Input indicates that to you that you should press the `enter` key after the first input. |
 
 ## 🧾 Table of Contents
 
@@ -29,14 +30,20 @@ reference. We hope you enjoy using *Food-O-Rama*!
     * [Dish Commands](#add-a-new-dish--add-dish)
         * `add dish`: [Add new dish](#add-a-new-dish--add-dish)
         * `add dish waste`: [Add dish wastage](#add-a-dishs-wastage--add-dish-waste)
-        * `set dish limit`: [Add a limit for dish wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
+        * `set dish limit`: [Set a limit for dish wastage](#set-a-limit-for-dish-wastage-set-dish-limit)
+        * `edit dish name`: [Edit a dish's name](#edit-a-dishs-name--edit-dish-name)  
+        * `edit dish waste`: [Edit a dish's wastage](#edit-a-dishs-wastage--edit-dish-waste) 
         * `del dish`: [Delete existing dish](#delete-existing-dish--del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes--list-dish)
     * [Ingredient Commands](#add-new-ingredient--add-ingr)
         * `add ingr`: [Add new ingredient](#add-new-ingredient--add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient--add-ingr-stored)
         * `add ingr waste`: [Add an ingredient's wastage](#add-an-ingredients-wastage--add-ingr-waste)
-        * `set ingr limit`: [Add a limit for ingredient wastage](#add-a-limit-for-dish-wastage-set-dish-limit)
+        * `set ingr limit`: [Set a limit for ingredient wastage](#set-a-limit-for-an-ingredients-wastage--set-ingr-limit)
+        * `set ingr expiry`: [Set an expiry date for an ingredient](#set-an-expiry-date-for-an-ingredient--set-ingr-expiry)        
+        * `edit ingr name`: [Edit an ingredient's name](#edit-an-ingredients-name--edit-ingr-name)
+        * `edit ingr stored` [Edit an ingredient's storage](#edit-an-ingredients-storage--edit-ingr-stored) 
+        * `edit ingr waste`: [Edit an ingredient's wastage](#edit-an-ingredients-wastage--edit-ingr-waste)
         * `link`: [Link ingredient to dish](#link-ingredient-to-dish--link)
         * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient--del-ingr)
         * `list ingr`: [View existing ingredients](#view-existing-ingredients--list-ingr)
@@ -55,6 +62,10 @@ reference. We hope you enjoy using *Food-O-Rama*!
         * `sort ingr`: [Sort ingredients by amount of wastage](#sort-ingredients-by-amount-of-wastage--sort-ingr)
     * `bye`: [Exit Food-O-Rama](#exit-food-o-rama--bye)
     * [Saving the data](#saving-the-data)
+    * [Accessing the data](#accessing-the-data)
+    * [Manipulating the data](#manipulating-the-data)
+* [FAQ](#-faq)
+* [Final Notes](#-final-notes)
 
 ## 📖 Quick Start
 
@@ -62,7 +73,7 @@ reference. We hope you enjoy using *Food-O-Rama*!
 2. Download the latest version of `Food-O-Rama`
    from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases).
 3. Copy 'Food-O-Rama.jar' into an empty folder.
-4. Open command prompt, nagivate to where 'Food-O-Rama.jar' is located. e.g. 'cd [FILE_PATH]'
+4. Open command prompt, navigate to where 'Food-O-Rama.jar' is located. e.g. 'cd [FILE_PATH]'
 5. Launch 'Food-O-Rama' using 'java -jar Food-O-Rama.jar'.
 6. Enter commands to use Food-O-Rama.
 
@@ -94,14 +105,20 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 |---|---|
 | View the list of commands | `help` |
 | Add new *dish* | `add dish [DISH_NAME]` |
-| Add the *dish wastage* | `add dish waste [DISH_NAME]`; followed by `[WEIGHT_IN_KG]` |
-| Set the limit for *dish wastage* | `set dish limit [DISH_NAME]` ; followed by `[WEIGHT_IN_KG]` |
+| Add the *dish wastage* | `add dish waste [DISH_NAME]` |
+| Set a limit for *dish's wastage* | `set dish limit [DISH_NAME]` |
+| Edit a *dish's name* | `edit dish name [DISH_NAME]` |
+| Edit a *dish's wastage* | `edit dish waste [DISH_NAME]` |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
 | View existing *dishes* | `list dish`|
-| Add a new *ingredient* | `add ingr [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
-| Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
-| Add *ingredient wastage* | `add ingr waste [INGR_NAME]`; followed by `[WEIGHT_IN_KG]` |
-| Set the limit for Ingredient Wastage | `set ingr limit [INGR_NAME]` ; `followed by [WEIGHT_IN_KG]` |
+| Add a new *ingredient* | `add ingr [INGR_NAME]` |
+| Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]` |
+| Add *ingredient wastage* | `add ingr waste [INGR_NAME]` |
+| Set a *limit* for an ingredient's wastage | `set ingr limit [INGR_NAME]` |
+| Set an *expiry date* an ingredient | `set ingr expiry [INGR_NAME]` |
+| Edit an *ingredient's name* | `edit ingr name [INGR_NAME]` |
+| Edit an *ingredient's storage* | `edit ingr stored [INGR_NAME]` |
+| Edit an *ingredient's wastage* | `edit ingr waste [INGR_NAME]` |
 | Link *dish* to an *ingredient* | `link [DISH_NAME] / [INGR_NAME]` |
 | Delete existing *ingredient* | `del [INGR_NAME]` |
 | View existing *ingredients* | `list ingr` |
@@ -186,8 +203,6 @@ menu to Food-O-Rama*.
 
 Format: `add dish [DISH_NAME]`
 
-* *Tip* ❕ The `DISH_NAME` can be in a natural language format.
-
 Example of usage:
 
 `add dish chicken rice`
@@ -212,7 +227,7 @@ Format: `add dish waste [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
 
-* *Note* 💡 You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
+* 💡 *Note*:  You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
 
 Example of usage:
@@ -239,7 +254,7 @@ Wastage of chicken rice is now 2.5 kg
 ____________________________________________________________
 ```
 
-### Add a limit for dish wastage: `set dish limit`
+### Set a limit for dish wastage: `set dish limit`
 
 Set a limit for wastage of an existing dish.
 
@@ -249,7 +264,7 @@ having more Dishes wasted than what was prepared initially*.
 Format: `set dish limit [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
-* *Note* 💡 You will be prompted to enter the limit to watch out for in the next step.
+* 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -275,12 +290,10 @@ The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
-*Note* 💡
+💡 *Note*: 
 
-When adding new wastage to the Dish exceeds the limit,
-you will receive a prompt that the current Dish limit has exceeded.
-
-An indicator *(exceeded)* shows the Dish that has exceesed its limit.
+* When adding new wastage to the Dish exceeds the limit, you will receive a prompt that the current Dish limit has exceeded.
+* An indicator *(exceeded)* shows the Dish that has exceeded its limit.
 
 Expected outcome:
 ```
@@ -307,6 +320,134 @@ ____________________________________________________________
 ```
 <br/>
 
+### Edit a dish's name : `edit dish name`
+
+Edit the name of an existing dish.
+
+*This is so that you will be able to make changes to a dish's name when there is an update to the menu 
+or a typo to the name of the dish*
+
+Format: `edit dish name [DISH_NAME]`
+
+* Can only be performed on existing `DISH_NAME`
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to edit.
+* 💡 *Note*:  You will be prompted to enter the new dish name in the next step, and a confirmation message afterwards.
+
+Example of usage:
+
+`edit dish name chicken rice` or `edit dish name 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What would you like to change the Dish Name 'chicken rice' to?
+____________________________________________________________
+```
+
+Example of usage:
+
+`chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Are you sure you want to change Dish Name from 'chicken rice' to 'roasted chicken rice'? Type y for Yes and n for No.
+____________________________________________________________
+```
+
+Example of usage (selecting **yes**):
+
+`y`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+chicken rice has been updated to 'roasted chicken rice'!
+____________________________________________________________
+
+```
+
+Example of usage (selecting **no**):
+
+`n`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Your previous command is disregarded.
+____________________________________________________________
+```
+
+<br/>
+
+### Edit a dish's wastage : `edit dish waste`
+
+Edit the wastage of an existing dish.
+
+*This is so that you will be able to make changes to a dish's wastage when resetting or updating
+a new wastage weight.*
+
+Format: `edit dish waste [DISH_NAME]`
+
+* Can only be performed on existing `DISH_NAME`
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to edit.
+* 💡 *Note*:  You will be prompted to enter the new dish wastage in the next step, and a confirmation message afterwards.
+
+Example of usage:
+
+`edit dish waste roasted chicken rice` or `edit dish waste 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What would you like to change the wastage weight (in kg) of 'roasted chicken rice' to?
+____________________________________________________________
+```
+
+Example of usage:
+
+`2`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Are you sure you want to change the wastage weight (in kg) from '50.0' to '5.0'? Type y for Yes and n for No.
+____________________________________________________________
+```
+
+Example of usage (selecting **yes**):
+
+`y`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Wastage of roasted chicken rice has been updated to '5.0' kg!
+____________________________________________________________
+
+```
+
+Example of usage (selecting **no**):
+
+`n`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Your previous command is disregarded.
+____________________________________________________________
+```
+
+<br/>
+
 ### Delete existing dish : `del dish`
 
 Delete an existing Dish from your Dish list.
@@ -316,7 +457,7 @@ Delete an existing Dish from your Dish list.
 Format: `del dish [DISH_NAME]`
 
 * The `DISH_NAME` has to be existing in the Dish list for it to be deleted.
-* *Note* 💡 You will be prompted with a confirmation message to delete the dish.
+* 💡 *Note*:  You will be prompted with a confirmation message to delete the dish.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -364,7 +505,7 @@ ____________________________________________________________
 
 Views all existing Dishes in your Dish list.
 
-*Tip* ❕ Useful to check all your Dishes available.
+❕ *Tip*:  Useful to check all your Dishes available.
 
 Format: `list dish`
 
@@ -398,8 +539,7 @@ inventory to Food-O-Rama*.
 
 Format: `add ingr [INGR_NAME]`
 
-* The `INGR_NAME` can be in a natural language format.
-* *Tip* ❕ You will be prompted to enter the weight of `INGR_NAME` in the next step.
+* ❕ *Tip*:  You will be prompted to enter the weight of `INGR_NAME` in the next step.
 
 Example of usage:
 
@@ -437,7 +577,7 @@ Add more storage to an Ingredient that exists in the Ingredient list by weight.
 Format: `add ingr stored [INGR_NAME]`
 
 * The `INGR_NAME` has to be an existing Ingredient in the Ingredient list.
-* *Note* 💡 You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
+* 💡 *Note*:  You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
 
 Example of usage:
 
@@ -474,7 +614,7 @@ Incur wastage on an existing Ingredient.
 Format: `add ingr waste [INGR_NAME]`
 
 * Can only be performed on existing `[INGR_NAME]`
-* *Note* 💡 You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
+* 💡 *Note*:  You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
 
 Example of usage:
 
@@ -501,7 +641,7 @@ Wastage of chicken is now 1.5 kg
 ____________________________________________________________
 ```
 
-### Add a limit for ingredient wastage: `set ingr limit`
+### Set a limit for an ingredient's wastage : `set ingr limit`
 
 Set a limit for wastage of an existing Ingredient
 
@@ -511,7 +651,7 @@ having more Ingredients wasted than what was stored initially*.
 Format: `set ingr limit [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
-* *Note* 💡 You will be prompted to enter the limit to watch out for in the next step.
+* 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
@@ -537,12 +677,12 @@ The limit for chicken is now 7.7 kg
 ____________________________________________________________
 ```
 
-*Note* 💡
+💡 *Note*: 
 
 When adding new wastage to the Ingredient exceeds the limit,
 you will receive a prompt that the current Dish limit has exceeded.
 
-An indicator *(exceeded)* shows the Ingredient that has exceesed its limit.
+An indicator *(exceeded)* shows the Ingredient that has exceeded its limit.
 
 Expected outcome:
 ```
@@ -570,6 +710,243 @@ ____________________________________________________________
 
 <br/>
 
+### Set an expiry date for an ingredient : `set ingr expiry`
+
+Set an expiry date for an existing ingredient.
+
+*This is so that you will be able to track when your ingredients will expire*.
+
+Format: `set ingr expiry [INGR_NAME]`
+
+* Can only be performed on existing `INGR_NAME`
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
+* 💡 *Note*:  You will be prompted to enter the expiry date of the ingredient in the next step.
+
+Example of usage:
+
+`set ingr expiry chicken` or `set ingr expiry 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What is the expiry date of 'chicken'?
+____________________________________________________________
+```
+
+Example of usage:
+
+`20/12/2021`
+
+💡 *Note*: 
+
+* The expiry date must be in the format of `dd/MM/yyyy`.
+* You cannot add a date before the current date on your PC.
+
+Expected Outcome:
+
+```
+____________________________________________________________
+The expiry date of 'chicken' has been set to 20/12/2021 (47 day(s) from today)
+____________________________________________________________
+```
+💡 *Note*: The number of days shown to expiry is relative to the date set on your PC and does not strictly
+follow the outcome shown above.
+
+<br/>
+
+### Edit an ingredient's name : `edit ingr name`
+
+Edit the name of an existing ingredient.
+
+*This is so that you will be able to make changes to an ingredient 's name when there is an update to the menu
+or a typo to the name of the ingredient*
+
+Format: `edit ingr name [INGR_NAME]`
+
+* Can only be performed on existing `INGR_NAME`
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
+* 💡 *Note*:  You will be prompted to enter the new ingredient name in the next step, and a confirmation message afterwards.
+
+Example of usage:
+
+`edit ingr name chicken` or `edit ingr name 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What would you like to change the Ingredient Name 'chicken' to?
+____________________________________________________________
+```
+
+Example of usage:
+
+`roasted chicken`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Are you sure you want to change ingredient name from 'chicken' to 'roasted chicken'? Type y for Yes and n for No.
+____________________________________________________________
+```
+
+Example of usage (selecting **yes**):
+
+`y`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+chicken has been updated to 'roasted chicken'!
+____________________________________________________________
+
+```
+
+Example of usage (selecting **no**):
+
+`n`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Your previous command is disregarded.
+____________________________________________________________
+```
+
+<br/>
+
+### Edit an ingredient's storage : `edit ingr stored`
+
+Edit the storage of an existing ingredient.
+
+*This is so that you will be able to make changes to an ingredient's storage when resetting or updating
+a new storage weight.*
+
+Format: `edit ingr stored [INGR_NAME]`
+
+* Can only be performed on existing `INGR_NAME`
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
+* 💡 *Note*:  You will be prompted to enter the new ingredient storage in the next step, and a confirmation message afterwards.
+
+Example of usage:
+
+`edit ingr stored roasted chicken` or `edit ingr stored 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What would you like to change the storage weight (in kg) of 'roasted chicken' to?
+____________________________________________________________
+```
+
+Example of usage:
+
+`50`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Are you sure you want to change the storage weight (in kg) from '10.0' to '50.0'? Type y for Yes and n for No.
+____________________________________________________________
+```
+
+Example of usage (selecting **yes**):
+
+`y`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Storage of roasted chicken has been updated to '50.0' kg!
+____________________________________________________________
+
+```
+
+Example of usage (selecting **no**):
+
+`n`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Your previous command is disregarded.
+____________________________________________________________
+```
+
+<br/>
+
+### Edit an ingredient's wastage : `edit ingr waste`
+
+Edit the wastage of an existing ingredient.
+
+*This is so that you will be able to make changes to an ingredient's wastage when resetting or updating
+a new wastage weight.*
+
+Format: `edit ingr waste [INGR_NAME]`
+
+* Can only be performed on existing `INGR_NAME`
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
+* 💡 *Note*:  You will be prompted to enter the new ingredient wastage in the next step, and a confirmation message afterwards.
+
+Example of usage:
+
+`edit ingr waste roasted chicken` or `edit ingr waste 1`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+What would you like to change the wastage weight (in kg) of 'roasted chicken' to?
+____________________________________________________________
+```
+
+Example of usage:
+
+`2`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Are you sure you want to change the wastage weight (in kg) from '50.0' to '5.0'? Type y for Yes and n for No.
+____________________________________________________________
+```
+
+Example of usage (selecting **yes**):
+
+`y`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Wastage of roasted chicken has been updated to '5.0' kg!
+____________________________________________________________
+
+```
+
+Example of usage (selecting **no**):
+
+`n`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Your previous command is disregarded.
+____________________________________________________________
+```
+
+<br/>
+
 ### Link ingredient to dish : `link`
 
 Link an existing Ingredient to an existing Dish.
@@ -578,7 +955,7 @@ Link an existing Ingredient to an existing Dish.
 
 Format: `link [DISH_NAME] / [INGR_NAME]`
 
-*`[DISH_NAME]` space `/` space `[INGR_NAME]`
+* `[DISH_NAME]` space `/` space `[INGR_NAME]`
 
 Example of usage:
 
@@ -603,7 +980,7 @@ Delete an existing Ingredient from your Ingredient list.
 Format: `del ingr [INGR_NAME]`
 
 * The `INGR_NAME` has to be existing in the Ingredient list for it to be deleted.
-* *Note* 💡  You will be prompted with a confirmation message to delete the ingredient.
+* 💡 *Note*:   You will be prompted with a confirmation message to delete the ingredient.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -651,7 +1028,7 @@ ____________________________________________________________
 
 View all existing Ingredients in the Ingredient list.
 
-*Tip* ❕ Useful to check all your Ingredients available
+❕ *Tip*:  Useful to check all your Ingredients available
 
 Format: `list ingr`
 
@@ -716,7 +1093,7 @@ ____________________________________________________________
 
 Displays a graph to show Ingredient wastage.
 
-*Gives you a visual representation of the Ingredients wastage in your restaurant.*
+*Gives you a visual representation of the Ingredients' wastage in your restaurant.*
 
 Format: `graph ingr`
 
@@ -750,12 +1127,11 @@ ____________________________________________________________
 
 Retrieves a list of Dishes inclusive of the matching keyword.
 
-*Tip* ❕ Useful to find certain Dishes available in your Dish list
+❕ *Tip*:  Useful to find certain Dishes available in your Dish list
 
 Format: `find dish [KEYWORD]`
 
 * `find dish` comes before `[KEYWORD]`.
-* The `KEYWORD` does not necessarily need to be in natural language format.
 
 Example of usage:
 
@@ -784,12 +1160,11 @@ ____________________________________________________________
 
 Retrieves a list of Ingredients inclusive of the matching keyword.
 
-*Tip* ❕ Useful to find certain Ingredients available in your Ingredient list.
+❕ *Tip*:  Useful to find certain Ingredients available in your Ingredient list.
 
 Format: `find ingr [KEYWORD]`
 
 * `find ingr` comes before `[KEYWORD]`.
-* The `KEYWORD` does not necessarily need to be in natural language format.
 
 Example of usage:
 
@@ -819,12 +1194,12 @@ ____________________________________________________________
 
 Removes all existing Dishes from the list of Ingredients.
 
-*Tip* ❕ Useful to obtain an empty Dish list.
+❕ *Tip*:  Useful to obtain an empty Dish list.
 
 Format: `clear dish`
 
 * `clear dish` does not require additional parameters
-* *Note* 💡  You will be prompted with a confirmation message to delete all dishes.
+* 💡 *Note*: You will be prompted with a confirmation message to delete all dishes.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -872,12 +1247,12 @@ ____________________________________________________________
 
 Removes all existing Ingredients from the list of ingredients.
 
-*Tip* ❕ Useful to obtain an empty Ingredient list.
+❕ *Tip*:  Useful to obtain an empty Ingredient list.
 
 Format: `clear ingr`
 
 * `clear ingr` does not require additional parameters
-* *Note* 💡  You will be prompted with a confirmation message to delete all ingredients.
+* 💡 *Note*: You will be prompted with a confirmation message to delete all ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
     
@@ -923,12 +1298,12 @@ ____________________________________________________________
 
 Removes all existing Dishes and Ingredients from their respective lists.
 
-*Tip* ❕ Useful to obtain both empty Ingredient list & Dish list.
+❕ *Tip*: Useful to obtain both empty Ingredient list & Dish list.
 
 Format: `clear all`
 
 * `clear all` does not require additional parameters
-* *Note* 💡 You will be prompted with a confirmation message to delete all dishes and ingredients.
+* 💡 *Note*: You will be prompted with a confirmation message to delete all dishes and ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
 
@@ -974,7 +1349,7 @@ ____________________________________________________________
 
 Sorts all Dishes in **descending order** of wastage.
 
-*Tip* ❕ Useful to immediately see the most wasted Dish.
+❕ *Tip*: Useful to immediately see the most wasted Dish.
 
 Format: `sort dish`
 
@@ -1011,7 +1386,7 @@ ____________________________________________________________
 
 Sorts all Ingredients in **descending order** of wastage.
 
-*Tip* ❕ Useful to immediaely see the most wasted Ingredient.
+❕ *Tip*: Useful to immediately see the most wasted Ingredient.
 
 Format: `sort ingr`
 
@@ -1053,7 +1428,7 @@ Exit Food-O-Rama and save all data entries.
 
 Format: `bye`
 
-* *Note* 💡 All data will be saved automatically.
+* 💡 *Note*:  All data will be saved automatically.
 
 Example of usage:
 
@@ -1099,11 +1474,15 @@ Expected Outcome:
 Food-O-Rama data (*dish and ingredients list*) are saved automatically after any command that changes the data.
 There is no need to save manually.
 
+<br/>
+
 ### Accessing the data
 
 Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These
 files can be found under the *'Data'* folder in the same directory as the .jar
 file.
+
+<br/>
 
 ### Manipulating the data
 
@@ -1112,7 +1491,7 @@ Refer to *Instructions for Manual Testing* in the Developer Guide for the approp
 
 Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
 
-* *Note* 💡 `[WASTAGE_LIMIT]` is `-1` when no limit is set.
+* 💡 *Note*: `[WASTAGE_LIMIT]` is `-1` when no limit is set.
 
 Dish example of usage:
 
@@ -1129,10 +1508,10 @@ prata|2.0|1.0|3|flour|egg
 
 Ingredient Format: `[INGR_NAME] | [AMOUNT_STORED_IN_KG] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_LIMIT] | [EXPIRY_DATE]`
 
-* *Note* 💡:
+* 💡 *Note*:
   
     * `[WASTAGE_LIMIT]` is `-1` when no limit is set.
-    * `[EXPIRY_DATE]` follows the fomat `dd/MM/yyyy`.
+    * `[EXPIRY_DATE]` follows the format `dd/MM/yyyy`.
     * `[EXPIRY_DATE]` is `null` when no expiry date is set. 
     
 Ingredient example of usage:
@@ -1155,7 +1534,7 @@ chicken|2.0|1.0|2.5|30/10/2021
 
 You have come to the end of the **Food-O-Rama User Guide**. 
 
-For any further enquries, please do
+For any further enquiries, please do
 contact us through our contact information found at our [About Us](https://ay2122s1-cs2113t-w11-4.github.io/tp/AboutUs.html)
 page.
 

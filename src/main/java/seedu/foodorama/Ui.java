@@ -1,5 +1,7 @@
 package seedu.foodorama;
 
+import seedu.foodorama.command.RandomDishCommand;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -566,7 +568,7 @@ public class Ui {
 
     public void printDishNameChanged(String dishName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + dishName + "Dish Name has been updated to '" + newName + "'!"
+                + dishName + " has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -596,9 +598,9 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
-    public void printIngrNameChanged(String ingrName) {
+    public void printIngrNameChanged(String ingrName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Ingredient Name has been updated to '" + ingrName + "'!"
+                + ingrName + " has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -859,5 +861,13 @@ public class Ui {
                 + dishExample + System.lineSeparator()
                 + ingrFormat + System.lineSeparator()
                 + ingrExample + System.lineSeparator();
+    }
+
+    public void printRandomDishName(String randomDishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Here's an idea for a new Dish!" + System.lineSeparator()
+                + randomDishName + System.lineSeparator()
+                + LINE_DIVIDER
+        );
     }
 }

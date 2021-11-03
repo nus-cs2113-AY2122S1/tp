@@ -18,8 +18,8 @@ class SortDishCommandTest {
 
     @Test
     void execute() throws FoodoramaException {
-        //define inputs
 
+        //define inputs
         ByteArrayInputStream fakeInput;
         Dish dishToAdd = new Dish("hamburger");
         fakeInput = new ByteArrayInputStream("3.00".getBytes());
