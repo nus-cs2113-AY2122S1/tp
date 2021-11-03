@@ -209,7 +209,7 @@ List of Module Management workspace commands:
 
 Adds a module when in the module management workspace.
 
-> ⚠️The `<module code>` cannot be more than **30** characters and cannot have any `spaces` in it.
+> ⚠️The `<module code>` will be converted to **UPPERCASE** and cannot be more than **30** characters and cannot have any `spaces` in it.
 
 > 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the
 > module code in **uppercase** (e.g. creating `cs2113t` will create a folder in `data` called `CS2113T`).
@@ -217,12 +217,12 @@ Adds a module when in the module management workspace.
 > ❗ If there exists a folder with the same code of the newly added module, all contents in that 
 > folder will be wiped. [Please see the FAQ for more information.](#faq)
 
-Example: `add "CS2113T"`
+Example: `add "cs2113t"`
 
 Expected Output:
 
 ```
-[module] >>> add "CS2113T"
+[module] >>> add "cs2113t"
 Module CS2113T has been added
 [module] >>> 
 ```
@@ -328,12 +328,14 @@ enter the module workspace in Terminus.
 
 Enters the module workspace to access data within the module.
 
-Example: `go CS2113T`
+> ⚠ The module code is **case-insensitive** and will be converted to **UPPERCASE** as shown below.
+
+Example: `go cs2113t`
 
 Expected Output:
 
 ```
-[] >>> go CS2113T
+[] >>> go cs2113t
 
 Entering CS2113T workspace
 
@@ -582,9 +584,10 @@ Adds a schedule when in the schedule workspace.
  
 > ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
 
-> ⚠️The `<duration>` must be a **positive** integer. For example, `2` is a valid duration but `-1.5` is not.
+> ⚠️The `duration` must be a **positive** integer and upon addition with `start_time`, 
+> it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.
 
-> ⚠️The `<zoom_link>` must begin with a "https://" in order for the link to be valid.
+> ⚠️The `<zoom_link>` must begin with a "http://" or "https://" in order for the link to be valid.
 
 Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "2" "https://zoom.us/test"`
 
