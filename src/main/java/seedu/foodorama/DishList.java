@@ -53,30 +53,25 @@ public class DishList {
         UI.printDishListGraph(dishList);
     }
 
-    public static void delete(String dishName) {
+    public static void delete(int dishIndex) {
         Scanner input = new Scanner(System.in);
 
         int listSize = dishList.size(); //listSize = N
-        int dishIndex = DishList.find(dishName);
-        if (dishIndex == -1) {
-            UI.printDishNotExistMsg();
-            assert dishList.size() == listSize : "dishList should be of size N";
-        } else {
-            UI.printConfirmDelDish();
-            String confirmDel = input.nextLine().toLowerCase();
-            while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
-                UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidConfirmation();
-                confirmDel = input.nextLine().toLowerCase();
-            }
+        String dishName = dishList.get(dishIndex).getDishName();
+        UI.printConfirmDelDish();
+        String confirmDel = input.nextLine().toLowerCase();
+        while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
             UI.clearTerminalAndPrintNewPage();
-            if (confirmDel.equals(YES)) {
-                dishList.remove(dishIndex);
-                UI.printDishNameRemoved(dishName);
-                assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
-            } else {
-                UI.printDisregardMsg();
-            }
+            UI.printInvalidConfirmation();
+            confirmDel = input.nextLine().toLowerCase();
+        }
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmDel.equals(YES)) {
+            dishList.remove(dishIndex);
+            UI.printDishNameRemoved(dishName);
+            assert (dishList.size() == (listSize - 1)) : "dishList should be of size N-1";
+        } else {
+            UI.printDisregardMsg();
         }
     }
 

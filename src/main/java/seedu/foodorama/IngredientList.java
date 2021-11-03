@@ -68,10 +68,10 @@ public class IngredientList {
         UI.printIngrList(ingredientList);
     }
 
-    public static void delete(String ingredientName) {
+    public static void delete(int ingredientIndex) {
         Scanner input = new Scanner(System.in);
         int listSize = ingredientList.size(); //listSize = N
-        int ingredientIndex = IngredientList.find(ingredientName);
+        String ingredientName = ingredientList.get(ingredientIndex).getIngredientName();
         if (ingredientIndex == -1) {
             UI.printIngrNotExistMsg();
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
