@@ -15,6 +15,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class LoadData {
+
+    /**
+     * Load the recipe list from txt file.
+     *
+     * @param recipes The whole recipe list.
+     */
     public static void loadRecipeList(RecipeList recipes) {
         String pathName = "./data/";
         String fileName = "recipeList.txt";
@@ -30,6 +36,13 @@ public class LoadData {
         }
     }
 
+    /**
+     * Store the current recipe from the txt file to the recipe list.
+     *
+     * @param recipes       The whole recipe list.
+     * @param sc            The scanner.
+     * @param currentRecipe The current recipe that is going to be stored.
+     */
     private static void storeCurrentRecipeFromList(RecipeList recipes, Scanner sc, Recipe currentRecipe)
             throws IllegalValueException, DuplicateDataException {
         while (sc.hasNext()) {
@@ -52,6 +65,12 @@ public class LoadData {
         }
     }
 
+    /**
+     * Stores the current ingredient of a recipe from the txt file.
+     *
+     * @param currentRecipe The current recipe that is stored.
+     * @param line          The current line of the txt file.
+     */
     private static void storeCurrentIngredientOfRecipe(Recipe currentRecipe, String line)
             throws IllegalValueException {
         int ingredientNameSeparator = line.indexOf("(") - 1;
@@ -68,7 +87,13 @@ public class LoadData {
         currentRecipe.setIngredientQuantities(ingredientName, ingredientQuantity);
     }
 
-
+    /**
+     * Gets the current unit of an ingredient from the txt file.
+     *
+     * @param line           The current line of a txt file.
+     * @param unitStartIndex The starting index of the unit substring.
+     * @param unitEndIndex   The ending index of the unit substring.
+     */
     private static String getUnitForIngredientRepo(String line, int unitStartIndex, int unitEndIndex) {
         String unit = line.substring(unitStartIndex, unitEndIndex);
         if (unit.isBlank()) {
@@ -79,6 +104,11 @@ public class LoadData {
         return unit;
     }
 
+    /**
+     * Loading the ingredient repository from the txt file.
+     *
+     * @param ingredients The whole ingredient repository.
+     */
     public static void loadIngredientRepo(IngredientRepository ingredients) {
         String pathName = "./data/";
         String fileName = "ingredientRepo.txt";
@@ -93,6 +123,12 @@ public class LoadData {
         }
     }
 
+    /**
+     * Gets the current quantity of the ingredient with batch number from the txt file.
+     *
+     * @param line            The current line of a txt file.
+     * @param expiryDateStart The start index of the expiry date substring.
+     */
     private static int getQuantityWithBatch(String line, int expiryDateStart) {
         int quantityWithBatch;
         String quantityWithUnit = line.substring(2, expiryDateStart - 2);
@@ -101,6 +137,11 @@ public class LoadData {
         return quantityWithBatch;
     }
 
+    /**
+     * Gets the unit of an ingredient in the current recipe from the txt file.
+     *
+     * @param line The current line of a txt file.
+     */
     private static String getUnitForRecipeList(String line) {
         String unit;
         String theDigits = line.replaceAll("[^0-9]", "");
@@ -117,6 +158,12 @@ public class LoadData {
         return unit;
     }
 
+    /**
+     * Loads the current ingredient from the txt file.
+     *
+     * @param ingredients The whole ingredient repository.
+     * @param sc          The scanner.
+     */
     private static void loadCurrentIngredientFromRepo(IngredientRepository ingredients, Scanner sc)
             throws DuplicateDataException {
         LocalDate expiryDate = null;
