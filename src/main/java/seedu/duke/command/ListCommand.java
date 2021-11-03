@@ -19,7 +19,8 @@ import seedu.duke.task.taskmanager.TaskManager;
  */
 public class ListCommand extends Command {
 
-    private static final String USAGE = "list";
+    private static final String USAGE = "-> Listing/Filtering your tasklist: list [--flag value] [--flag value] ...\n"
+            + "-> Listing a recurrence of a task: list <index>";
 
     public ListCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

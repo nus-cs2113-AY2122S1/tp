@@ -9,7 +9,7 @@ import seedu.duke.task.reminder.ReminderManager;
 import java.util.Map;
 
 public class ReminderCommand extends Command {
-    private static final String USAGE = "reminder";
+    private static final String USAGE = "-> Setting a reminder for a task: reminder <index>";
 
     public ReminderCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);

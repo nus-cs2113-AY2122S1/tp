@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class SortCommand extends Command {
 
-    private static final String USAGE = "sort";
+    private static final String USAGE = "-> Sorting your tasklist: sort <--by> <index>";
 
     public SortCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);
