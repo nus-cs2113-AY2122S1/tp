@@ -10,12 +10,14 @@ import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
 import static seedu.duke.Duke.eventCatalog;
+import static seedu.duke.parser.ItemType.EVENT;
+import static seedu.duke.parser.ItemType.TASK;
 
 public abstract class SelectParser extends Parser {
 
     private static int eventIndexToSelect;
     private static int taskIndexToSelect;
-    private static int memberIndexToSelect;
+    private static int lastEventIndex;
 
     public static Command getSelectCommand(String[] command, String commandDetails) {
 
@@ -24,10 +26,10 @@ public abstract class SelectParser extends Parser {
             switch (itemType) {
             case EVENT:
                 parseEvent(command);
-                return new SelectCommand(itemType, eventIndexToSelect);
+                return new SelectCommand(EVENT, eventIndexToSelect);
             case TASK:
                 parseTask(command);
-                return new SelectCommand(itemType, taskIndexToSelect);
+                return new SelectCommand(TASK, lastEventIndex, taskIndexToSelect);
             case MEMBER:
                 return null;
             default:
@@ -46,8 +48,8 @@ public abstract class SelectParser extends Parser {
     private static void parseEvent(String[] command) throws InvalidIndexException {
         int index = getIndexFromCommand(command[2]);
         if (!isValidEventIndex(index)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 0 to "
-                    + eventCatalog.size() +".");
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
+                    + eventCatalog.size() + ".");
         }
         updateIndexOfLastSelectedEvent(index);
         eventIndexToSelect = index;
@@ -57,11 +59,11 @@ public abstract class SelectParser extends Parser {
         if (Parser.noEventSelected()) {
             throw new DukeException("Please select an event first!");
         }
-        int indexOfLastEvent = getIndexOfLastSelectedEvent();
+        lastEventIndex = getIndexOfLastSelectedEvent();
         int index = getIndexFromCommand(command[2]);
-        if (!isValidTaskIndex(indexOfLastEvent, taskIndexToSelect)) {
+        if (!isValidTaskIndex(lastEventIndex, taskIndexToSelect)) {
             throw new InvalidIndexException("Invalid index range. Choose a number between 0 to "
-                    + eventCatalog.get(indexOfLastEvent).getTaskList().size() +".");
+                    + eventCatalog.get(lastEventIndex).getTaskList().size() + ".");
         }
         taskIndexToSelect = index;
     }
