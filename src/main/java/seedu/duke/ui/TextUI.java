@@ -12,16 +12,16 @@ import static seedu.duke.common.Messages.WELCOME_MESSAGE;
  * Class encapsulating input and output of the application.
  */
 public class TextUI {
-    private final Scanner in;
-    private final PrintStream out;
-    private static String prefix = "> ";
+    private final Scanner IN;
+    private final PrintStream OUT;
+    private static final String PREFIX = "> ";
 
     /**
      * Constructor for TextUI class.
      */
     public TextUI() {
-        in = new Scanner(System.in);
-        out = System.out;
+        IN = new Scanner(System.in);
+        OUT = System.out;
         print(LOGO);
         print(WELCOME_MESSAGE);
     }
@@ -31,8 +31,8 @@ public class TextUI {
      * @return User input
      */
     public String read() {
-        out.print(prefix);
-        String input = in.nextLine();
+        OUT.print(PREFIX);
+        String input = IN.nextLine();
         return input;
     }
 
@@ -41,7 +41,7 @@ public class TextUI {
      * @param message Message to be printed
      */
     public void print(String message) {
-        out.println(message);
+        OUT.println(message);
     }
 
     /**
@@ -49,7 +49,7 @@ public class TextUI {
      * @param item Item to be printed
      */
     public void print(Item item) {
-        out.println("  " + item);
+        OUT.println("  " + item);
     }
 
     /**
@@ -58,7 +58,7 @@ public class TextUI {
      * @param item Item to be printed
      */
     public void print(String message, Item item) {
-        out.println(message);
-        out.println("  " + item);
+        OUT.println(message);
+        OUT.println("  " + item);
     }
 }

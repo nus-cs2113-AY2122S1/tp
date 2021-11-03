@@ -2,28 +2,39 @@ package seedu.duke.data;
 
 import seedu.duke.common.Status;
 
+import java.time.LocalDate;
+
 //@@author exetr
 public class Audio extends Item {
     private String artist;
     private String duration;
 
     /**
-     * Constructor for class item.
+     * Constructor for class Audio.
      *
-     * @param title  The title of the item.
-     * @param id     The unique attribute of the item.
-     * @param status The status of the item, can be either "Loaned" or "Available".
-     * @param artist The artist of the video.
-     * @param duration The duration of the video.
+     * @param title  The title of the audio.
+     * @param id     The unique identifier of the audio.
+     * @param status The status of the item, can be either "Loaned", "Available" or "Reserved".
+     * @param loanee Person who has loaned or reserved the item
+     * @param dueDate Date when item should be returned.
+     * @param artist The artist of the audio.
+     * @param duration The duration of the audio.
      */
-    public Audio(String title, String id, Status status, String artist, String duration) {
-        super(title, id, status);
+    public Audio(String title, String id, Status status, String loanee, LocalDate dueDate,
+                 String artist, String duration) {
+        super(title, id, status, loanee, dueDate);
         this.artist = artist;
         this.duration = duration;
     }
 
     /**
-     * Getter method that returns the artist attribute.
+     * Default constructor for Audio class.
+     */
+    public Audio() {
+    }
+
+    /**
+     * Gets the artist attribute.
      * @return publisher The artist of the audio.
      */
     public String getArtist() {
@@ -31,7 +42,7 @@ public class Audio extends Item {
     }
 
     /**
-     * Setter method that sets the artist attribute.
+     * Sets the artist attribute.
      * @param artist The input artist to be set.
      */
     public void setArtist(String artist) {
@@ -39,7 +50,7 @@ public class Audio extends Item {
     }
 
     /**
-     * Getter method that returns the duration attribute.
+     * Gets the duration attribute.
      * @return publisher The duration of the audio.
      */
     public String getDuration() {
@@ -47,7 +58,7 @@ public class Audio extends Item {
     }
 
     /**
-     * Setter method that sets the duration attribute.
+     * Sets the duration attribute.
      * @param duration The input duration to be set.
      */
     public void setDuration(String duration) {
@@ -55,7 +66,7 @@ public class Audio extends Item {
     }
 
     /**
-     * Convert the audio object to string type.
+     * Converts the audio object to string type.
      * @return A string that represents an audio object.
      */
     @Override
