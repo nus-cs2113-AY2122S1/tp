@@ -26,7 +26,7 @@ Given below are my contributions to the project.
   - **Justification**: Having many different flags like "/w", "/e", "/d" etc. can get confusing for users as they will have to remember 
   what each flag represents, and what flags to use for the different commands. By eliminating the use of specific flags and using commas instead
   users will no longer need to remember the flags, just the format of the command.
-- **Code contributed**: [RepoSense link] ()
+- **Code contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=JMattChiam&tabRepo=AY2122S1-CS2113T-F12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 - **Documentation**: 
   - User Guide:
     - Added Command information.
