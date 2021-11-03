@@ -31,8 +31,11 @@ deactivate alert_stock
 alert --> parser : both lists of ingredients
 deactivate alert
 
-<-- parser : both lists of ingredients
+parser --> parser :both lists of ingredients
+deactivate parser
 
+<-- parser : both lists of ingredients
+deactivate parser
 
 
 @enduml
