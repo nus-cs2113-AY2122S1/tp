@@ -51,6 +51,9 @@ e.g. `add a t/TITLE i/ID a/ARTIST d/DURATION` can be used as `add a a/ARTIST i/I
 > ⚠️ Parameters must be separated with a space<br>
 e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is invalid
 
+> ⚠️ Command word must be in lower case
+e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
+
 ### Adding an item
 Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
@@ -170,6 +173,24 @@ Expected Output:
   ========================================
 ```
 
+### Listing items that are due on a specific date
+List the loaned items that are due on a specific date given in the input
+
+> ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
+
+Format: `deadline d/dd-mm-yyyy`
+
+Example: `deadline d/03-11-2021`
+
+Expected Output:
+```
+  (+) Listing out loaned items that are due this date: 03-11-2021
+  ========================================
+  [M] 58720a | LOANED (Sam TILL 03-11-2021) | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+
 ### Search item by ID, Title, Status, Category
 Search items by ID, Title, Status, and Category.
 
@@ -241,6 +262,8 @@ Expected Output:
 ### Loan items
 Loan out an item to an individual until a specific due date.
 
+> ℹ️ Only `AVAILABLE` items can be loaned out
+
 > ℹ️ Items that have been previously reserved by an individual can only be loaned out to the same individual
 
 > ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
@@ -258,6 +281,9 @@ Expected Output:
 
 ### Return items
 Mark a previously loaned item as returned, making it available again.
+
+> ℹ️ Only `LOANED` items can be returned. Unsuccessful message will be displayed when 
+> you return items that are not loaned out.
 
 Format: `return ID`
 
