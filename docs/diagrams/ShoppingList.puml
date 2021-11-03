@@ -30,17 +30,14 @@ activate ShoppingListCommand
 ShoppingListCommand -> IngredientRepository: generateShoppingList(recipes: Array<Recipe>)
 activate IngredientRepository
 
-IngredientRepository -> IngredientRepository: updateShoppingListItemQuantity(ingredientName: String, recipe: Recipe)
-activate IngredientRepository
-
 loop recipes
 
-    loop ingredientNames
+    IngredientRepository -> IngredientRepository: updateShoppingListItemQuantity(ingredientName: String, recipe: Recipe)
+    activate IngredientRepository
 
-        IngredientRepository -> IngredientRepository: totalIngredients: Treemap<String, IngredientQuantity>
-        deactivate IngredientRepository
+    IngredientRepository -> IngredientRepository: totalIngredients: Treemap<String, IngredientQuantity>
+    deactivate IngredientRepository
 
-    end
 
 end
 

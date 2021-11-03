@@ -95,6 +95,7 @@ Format: `update units i/INGREDIENT u/UNIT`
 Example of usage:
 - `update units i/salt u/grams`
 - `update units i/chicken u/kilograms`
+- `update units i/pork u/kg`
 - `update units i/salt u/`
 
 Example incorrect usage:
