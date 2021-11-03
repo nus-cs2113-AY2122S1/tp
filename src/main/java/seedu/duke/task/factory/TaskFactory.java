@@ -36,9 +36,6 @@ public abstract class TaskFactory {
             checkForRequiredArguments(flags);
 
             description = flags.get(TaskFlag.DESCRIPTION);
-            if (description.equals("")) {
-                throw new RequiredArgmentNotProvidedException(DESCRIPTION, taskType.toString());
-            }
 
             String priority = flags.get(TaskFlag.PRIORITY);
             priorityEnum = TaskParser.getPriorityEnum(priority);
