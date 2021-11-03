@@ -18,7 +18,7 @@ import static seedu.duke.common.Messages.STATS_INVALID_FORMAT;
 //@@author avellinwong01
 /**
  * Class that encapsulates a command to calculate and display library statistics
- * to the user
+ * to the user.
  */
 public class StatsCommand extends Command {
     public static final String COMMAND_WORD = "stats";
