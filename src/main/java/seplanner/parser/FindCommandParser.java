@@ -8,7 +8,6 @@ import seplanner.enumerations.FindModInputType;
 import seplanner.exceptions.FindParseException;
 import seplanner.modules.ModuleList;
 import seplanner.universities.UniversityList;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
