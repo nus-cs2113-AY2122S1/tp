@@ -43,7 +43,7 @@ public class AddCommand extends Command {
         if (getFlag() == AddFlag.LESSON) {
             Module module;
             String moduleCode = addUI.getModuleCode();
-            module = NusMods.fetchModOnline(moduleCode);
+            module = NusMods.fetchMod(moduleCode);
             checkModuleExist(module);
             TextUi.printAddMessage(moduleCode);
             Semester semesterData = module.getSemester(semester);
