@@ -226,7 +226,7 @@ There seems to be missing parameters in your request.
 Please enter command in this format:
       add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -250,7 +250,7 @@ There seems to be missing parameters in your request.
 Please enter command in this format:
       add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -299,7 +299,7 @@ There seems to be missing parameters in your request.
 Please enter command in this format:
       add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -386,7 +386,7 @@ There seems to be missing parameters in your request.
 Please enter command in this format:
       add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -445,7 +445,7 @@ There seems to be missing parameters in your request.
 Please enter command in this format:
       add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
