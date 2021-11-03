@@ -963,6 +963,5 @@ means all your edits are gone. But this pretty much ensures that there will be n
 | Check current currency | `check_curr` | - |
 | To terminate program | `end` | - |
 
-## 6. Product Specs
 
 
