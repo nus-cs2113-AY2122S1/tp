@@ -24,11 +24,12 @@ public class SearchCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays workouts or exercises that contain the "
             + "specified keyword with the workout or exercise index the keyword.\n"
-            + "Format: search [keyword]\n"
-            + "\tParameters: KEYWORD\n"
-            + "\tExample: " + COMMAND_WORD + " abs"
-            + "\tExample: " + COMMAND_WORD + " 5 Nov 2021"
-            + "\tIMPORTANT: The date must match the format d MMM yyyy exactly if you want to search by date.\n";
+            + "Format: search [KEYWORD]\n"
+            + "Parameters:\n"
+            + "\tKEYWORD - word to search for\n"
+            + "Example: " + COMMAND_WORD + " abs\n"
+            + "Example: " + COMMAND_WORD + " 5 Nov 2021"
+            + "Important: The date must match the format d MMM yyyy exactly if you want to search by date.\n";
 
 
     public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";

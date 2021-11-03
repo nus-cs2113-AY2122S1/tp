@@ -22,8 +22,10 @@ public class EnterWorkoutCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Now inside Workout: %1$s";
     private static final String NL = System.lineSeparator();
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enter into a Workout to edit its exercises"
-            + NL + "Parameters: WORKOUT_INDEX"
-            + NL + "Example: " + COMMAND_WORD + " 1";
+            + "Format: enter [Workout index]\n"
+            + "Parameters: \n"
+            + "\tWorkout index - index of workout to enter\n"
+            + "Example: " + COMMAND_WORD + " 1";
     private static final Logger LOGGER = Logger.getLogger(EnterWorkoutCommand.class.getName());
     private final int workoutIndex;
 

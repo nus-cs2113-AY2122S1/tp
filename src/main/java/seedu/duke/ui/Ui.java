@@ -65,7 +65,7 @@ public class Ui {
      *
      * @param e is the exception whose message we want to print
      */
-    public void printErrorMessage(GetJackDException e) {
+    public void printErrorMessage(Exception e) {
         String errorMessage = e.getMessage();
         assert (!errorMessage.isEmpty());
 

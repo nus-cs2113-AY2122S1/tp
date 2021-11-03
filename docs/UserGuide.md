@@ -19,6 +19,7 @@
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
   15. [Saving data](#15-saving-data)
   16. [Editable data file](#16-editable-data-file)
+  17. [Automatic sorting of Workouts](#17-automatic-sorting-of-workouts)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -81,6 +82,8 @@ Format (with deadline): `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
 ⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+ 
 Usage examples: 
 
 `create abs`
@@ -153,6 +156,8 @@ Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
 * Note the comma  `,`  separating the command arguments
 * Sets and reps are entered in the form of two numbers separated by a space 
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+
 Usage examples:
 
 `add squats, 5 10, 1`  = squats, 5 sets of 10 reps, add to workout 1
@@ -174,6 +179,8 @@ Marks an exercise from a specified workout as done
 
 Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+
 Usage example:
 
 `done 1, 2` = mark exercise 1 from workout 2 as done
@@ -192,6 +199,8 @@ ________________________________________________________
 Edits an exercise in a specified workout
 
 Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Examples of usage:
 
@@ -232,6 +241,11 @@ ________________________________________________________
 Removes an exercise from a specified workout
 
 Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+
+⚠️ Only one exercise can be removed at a time. 
+
 
 Examples of usage:
 
@@ -340,6 +354,8 @@ ________________________________________________________
 
 Provides a given set of workouts with exercises.
 
+⚠️ This command will add the recommended workouts to your workout list.
+
 Format: `recommend [beginner/ intermediate/ pro]`
 
 Example of usage: `recommend beginner`
@@ -381,7 +397,7 @@ go.
 
 Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
-Note: Include WORKOUT_INDEX only when you want to clear exercises.
+⚠️ Include `WORKOUT_INDEX` only when you want to clear exercises.
 
 Example of usage: 
 
@@ -429,7 +445,54 @@ GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`
 directly by editing that data file.
 
 ❗  **Caution**: If your changes to the data file is detected to be corrupted or does not conform to GetJackd's
-saved file format (json), GetJack'd will not run.
+saved file format (json), GetJack'd will automatically stop running and display an error message. GetJackd will be able
+to run again when the data file conforms to the saved file format (json) again. 
+
+**Error Messages when data file does not conform to saved file format**:
+
+Scenario 1 (Exercise reps and sets are not numbers)
+```
+________________________________________________________
+☹ OOPS!!! Error reading file! Please ensure the sets and reps in data/workouts.json are numbers.
+________________________________________________________
+```
+
+Scenario 2 (Workout deadlines are not in the correct date format)
+```
+________________________________________________________
+☹ OOPS!!! Error reading file! Please ensure the deadline in data/workouts.json is in the format yyyy-mm-dd.
+________________________________________________________
+```
+
+Scenario 3 (Invalid JSON file format)
+```
+________________________________________________________
+☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for proper closing brackets "{ }" and "[ ]" in data/workouts.json.
+________________________________________________________
+```
+
+### 17. Automatic sorting of Workouts
+
+GetJackd automatically sorts your workouts by their deadlines every time you add a new workout to your workout list. The
+workouts will be sorted in descending order where workouts with the earliest deadlines being on top. Workouts without 
+deadlines will be at the bottom of the list and ranked according to the time they were added to your workout list. 
+
+Example (key in the following commands in this order): 
+1. `create test`
+2. `create xmas workout, 2021-12-25`
+3. `create halloween workout, 2021-10-31`
+4. `create test 2`
+
+Expected final Workout List:
+```
+________________________________________________________
+Workout list:
+1. halloween workout finish by: 31 Oct 2021
+2. xmas workout finish by: 25 Dec 2021
+3. test
+4. test 2
+________________________________________________________
+```
 
 ## FAQ
 

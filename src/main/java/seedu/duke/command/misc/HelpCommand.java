@@ -13,6 +13,13 @@ import seedu.duke.storage.Storage;
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Prints command information\n"
+            + "Format: help [Command]"
+            + "Parameters:\n"
+            + "\tCommand - command to view information for, can be omitted\n"
+            + "Example: " + COMMAND_WORD + " add\n"
+            + "Example: " + COMMAND_WORD;
+
     public static final String FULL_HELP_MESSAGE = "Here's a list of commands and what they do.\n"
             + "To find out more information about the command, such as input format and parameters, "
             + "enter \"help COMMAND\" where COMMAND is the command you want to know more about\n"

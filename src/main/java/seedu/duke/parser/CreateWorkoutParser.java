@@ -56,7 +56,9 @@ public class CreateWorkoutParser extends Parser {
                 LocalDate deadlineDate = LocalDate.parse(deadline);
                 return new CreateWorkoutCommand(workoutName, deadlineDate);
             }
-        } catch (GetJackDException | DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
+            return new IncorrectCommand("Invalid date entered\n" + CreateWorkoutCommand.MESSAGE_USAGE);
+        } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
         }
     }
