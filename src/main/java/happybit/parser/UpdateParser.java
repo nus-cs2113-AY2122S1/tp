@@ -30,6 +30,7 @@ public class UpdateParser extends Parser {
     private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
     private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
+    private static final String ERROR_INTERVAL_NEGATIVE = "The interval has to be a positive integer.";
 
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.";
@@ -143,6 +144,9 @@ public class UpdateParser extends Parser {
         int goalIndex = getGoalIndex(parameters);
         int habitIndex = getHabitIndex(parameters);
         int interval = getInterval(parameters);
+        if (interval < 0) {
+            throw new HaBitParserException(ERROR_INTERVAL_NEGATIVE);
+        }
         assert (goalIndex >= 0);
         assert (habitIndex >= 0);
         assert (interval >= 0);
@@ -192,8 +196,8 @@ public class UpdateParser extends Parser {
         return false;
     }
 
-    private static boolean containsFlag(String[] paramters, String flag) {
-        for (String param : paramters) {
+    private static boolean containsFlag(String[] parameters, String flag) {
+        for (String param : parameters) {
             if (param.contains(flag)) {
                 return true;
             }
