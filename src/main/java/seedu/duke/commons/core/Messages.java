@@ -19,6 +19,9 @@ public final class Messages {
     public static final String ERROR_DESERIALIZING_TASK =
             "Saved task data is invalid format. Ignoring the line..";
 
+    public static final String ERROR_DUPLICATE_FLAGS =
+            "Duplicate Flag(s) found, please check your flags again.";
+
     public static final String ERROR_EMPTY_MEETING_LINK =
             "Sorry, no meeting link was provided.";
 
@@ -30,9 +33,6 @@ public final class Messages {
 
     public static final String ERROR_INVALID_DAY =
             "Sorry, the input parameter is not a valid day of the week.";
-
-    public static final String ERROR_INVALID_FLAG_SEQUENCE =
-            "Sorry, the input flag sequence is invalid.";
 
     public static final String ERROR_INVALID_INDEX =
             "Sorry, the index is invalid.";
@@ -49,8 +49,11 @@ public final class Messages {
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";
 
-    public static final String ERROR_INVALID_LIST_ARGUMENT =
-            "Sorry, list module command currently only accepts either \"verbose\" or no argument.";
+    public static final String ERROR_INVALID_TITLE =
+            "Sorry, the field for title cannot be blank.";
+
+    public static final String ERROR_MISSING_FLAGS =
+            "There are missing flags in the input given. Please check again.";
 
     public static final String ERROR_MODULE_LOAD_FAILED =
             "Sorry, there was an issue loading NUSMods module information.";

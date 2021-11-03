@@ -1,12 +1,11 @@
 package seedu.duke.logic.parser;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
+import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
@@ -16,25 +15,30 @@ import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
 import static seedu.duke.commons.core.Priority.LOW;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
-import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
+import static seedu.duke.logic.parser.ParserUtil.parsePriority;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
-import static seedu.duke.logic.parser.ParserUtil.parseMeetingUrl;
-import static seedu.duke.logic.parser.ParserUtil.parsePriorityAndInfo;
-import static seedu.duke.logic.parser.ParserUtil.parsePriorityOrInfo;
+import static seedu.duke.logic.parser.ParserUtil.parseTime;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
-
 
 //@@author richwill28
 public class AddCommandParser {
-    public static final String LESSON_FLAGS = " -d | -s | -e | -l ";
-    public static final String TASK_FLAGS = " -d | -p | -i ";
+    public static final String LESSON_FLAGS = "-d |-s |-e |-l ";
+    public static final String TASK_FLAGS = "-d |-p |-i ";
+    public static final String DAY_FLAG = "-d";
+    public static final String START_FLAG = "-s";
+    public static final String END_FLAG = "-e";
+    public static final String LINK_FLAG = "-l";
+    public static final String PRIORITY_FLAG = "-p";
+    public static final String INFORMATION_FLAG = "-i";
     public static final String DEFAULT_PRIORITY = LOW.toString();
     public static final String EMPTY_INFORMATION = "-";
 
+
     public static Command parse(String userResponse) throws ParseException {
         if (userResponse.contains("|")) {
-            userResponse = userResponse.replace("|","/");
+            userResponse = userResponse.replace("|", "/");
         }
 
         CommandType commandType = parseCommandType(userResponse);
@@ -59,48 +63,43 @@ public class AddCommandParser {
 
     //@@author Roycius
     private static Command parseAddLessonCommand(String userResponse) throws ParseException {
+        HashMap<String, String> flagMap =
+                ParserUtil.getFlagMap(userResponse, DAY_FLAG, START_FLAG, END_FLAG, LINK_FLAG);
         String[] params = userResponse.split(LESSON_FLAGS);
-        checkParamsLength(params, 4, 5);
-
-        String title = params[0].strip();
-        String dayOfTheWeek = parseDayOfTheWeek(userResponse, params[1]);
-        String startTime;
-        String endTime;
-        try {
-            startTime = LocalTime.parse(params[2].strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
-            endTime = LocalTime.parse(params[3].strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+        if (!flagMap.containsKey(DAY_FLAG) || !flagMap.containsKey(START_FLAG) || !flagMap.containsKey(END_FLAG)) {
+            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
         }
+        String title = parseTitle(params[0]);
+        String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));
+        String startTime = parseTime(flagMap.get(START_FLAG));
+        String endTime = parseTime(flagMap.get(END_FLAG));
+        String meetingUrl = EMPTY_INFORMATION;
 
-        switch (params.length) {
-        case 4:
-            return parseMeetingUrl(userResponse, title, dayOfTheWeek, startTime, endTime, EMPTY_INFORMATION, false);
-        case 5:
-            String url = params[4];
-            return parseMeetingUrl(userResponse, title, dayOfTheWeek, startTime, endTime, url, true);
-        default:
-            throw new ParseException(promptFormat(ADD_LESSON_FORMAT));
+        if (flagMap.containsKey(LINK_FLAG)) {
+            meetingUrl = flagMap.get(LINK_FLAG);
         }
+        return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
     }
 
     private static Command parseAddTaskCommand(String userResponse) throws ParseException {
+        HashMap<String, String> flagMap =
+                ParserUtil.getFlagMap(userResponse, DAY_FLAG, PRIORITY_FLAG, INFORMATION_FLAG);
         String[] params = userResponse.split(TASK_FLAGS);
-        checkParamsLength(params, 2, 4);
-
-        String title = params[0].strip();
-        String dayOfTheWeek = parseDayOfTheWeek(userResponse, params[1]);
-
-        switch (params.length) {
-        case 2:
-            return new AddTaskCommand(title, dayOfTheWeek, DEFAULT_PRIORITY, EMPTY_INFORMATION);
-        case 3:
-            return parsePriorityOrInfo(userResponse, params, title, dayOfTheWeek);
-        case 4:
-            return parsePriorityAndInfo(userResponse, params, title, dayOfTheWeek);
-        default:
-            throw new ParseException(promptFormat(ADD_TASK_FORMAT));
+        if (!flagMap.containsKey(DAY_FLAG)) {
+            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
         }
+        String title = parseTitle(params[0]);
+        String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));
+        String priority = DEFAULT_PRIORITY;
+        String information = EMPTY_INFORMATION;
+
+        if (flagMap.containsKey(PRIORITY_FLAG)) {
+            priority = parsePriority(flagMap.get(PRIORITY_FLAG));
+        }
+        if (flagMap.containsKey(INFORMATION_FLAG)) {
+            information = flagMap.get(INFORMATION_FLAG);
+        }
+        return new AddTaskCommand(title, dayOfTheWeek, priority, information);
     }
 
     //@@author ptejasv

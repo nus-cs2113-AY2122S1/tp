@@ -6,36 +6,20 @@ import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.core.Priority;
 import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 import seedu.duke.commons.core.exceptions.PriorityException;
-import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.lesson.AddLessonCommand;
-import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
-import static seedu.duke.commons.core.CommandFormat.promptFormat;
-import static seedu.duke.logic.parser.AddCommandParser.DEFAULT_PRIORITY;
-import static seedu.duke.logic.parser.AddCommandParser.EMPTY_INFORMATION;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 //@@author richwill28
 public class ParserUtil {
-    public static boolean hasCorrectFlagSequence(String userResponse, String... flags) {
-        for (int i = 0; i < flags.length - 1; i++) {
-            int leftFlagIndex = userResponse.indexOf(flags[i]);
-            int rightFlagIndex = userResponse.indexOf(flags[i + 1]);
-            if (leftFlagIndex >= rightFlagIndex) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static CommandType parseCommandType(String userResponse) {
         String[] params = userResponse.split(" ", 2);
         return CommandType.of(params[0]);
-    }
-
-    public static int parseToOneIndex(int index) {
-        return index + 1;
     }
 
     public static int parseToZeroIndex(int index) {
@@ -52,6 +36,7 @@ public class ParserUtil {
     }
 
     //@@author Roycius
+
     /**
      * Checks if the number of items in an array of Strings is within a certain range.
      *
@@ -66,11 +51,26 @@ public class ParserUtil {
         }
     }
 
-    public static String parseDayOfTheWeek(String userResponse, String param) throws ParseException {
-        String dayOfTheWeek;
-        if (!userResponse.contains("-d")) {
-            throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
+    public static String parseTitle(String param) throws ParseException {
+        String title = param.strip();
+        if (title.isBlank()) {
+            throw new ParseException(Messages.ERROR_INVALID_TITLE);
         }
+        return title;
+    }
+
+    public static String parseTime(String param) throws ParseException {
+        String time;
+        try {
+            time = LocalTime.parse(param.strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+        }
+        return time;
+    }
+
+    public static String parseDayOfTheWeek(String param) throws ParseException {
+        String dayOfTheWeek;
         try {
             dayOfTheWeek = DayOfTheWeek.toProper(param.strip());
         } catch (DayOfTheWeekException e) {
@@ -79,58 +79,59 @@ public class ParserUtil {
         return dayOfTheWeek;
     }
 
-    public static Command parseMeetingUrl(String userResponse, String title, String dayOfTheWeek,
-            String startTime, String endTime, String meetingUrl, boolean hasMeetingUrl) throws ParseException {
-        if ((hasMeetingUrl && !hasCorrectFlagSequence(userResponse, "-d", "-s", "-e", "-l"))
-                || (!hasMeetingUrl && !hasCorrectFlagSequence(userResponse, "-d", "-s", "-e"))) {
-            throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
-        }
-        return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
-    }
-
-    public static AddTaskCommand parsePriorityAndInfo(
-            String userResponse, String[] params, String title, String dayOfTheWeek) throws ParseException {
-        String information;
+    public static String parsePriority(String param) throws ParseException {
         String priority;
-        if (!hasCorrectFlagSequence(userResponse, "-d", "-p", "-i")) {
-            throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
-        }
-
         try {
-            priority = Priority.toProper(params[2].strip());
+            priority = Priority.toProper(param.strip());
         } catch (PriorityException e) {
             throw new ParseException(e.getMessage());
         }
-
-        information = params[3].strip();
-        return new AddTaskCommand(title, dayOfTheWeek, priority, information);
+        return priority;
     }
 
-    public static AddTaskCommand parsePriorityOrInfo(
-            String userResponse, String[] params, String title, String dayOfTheWeek) throws ParseException {
-        String priority = DEFAULT_PRIORITY;
-        String information = EMPTY_INFORMATION;
-
-        if (userResponse.contains("-p")) {
-            if (!hasCorrectFlagSequence(userResponse, "-d", "-p")) {
-                throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
+    /**
+     * Parses a string into a HashMap with flags as the key and the corresponding
+     * parameters as the value. Flags need to have at least one space behind them
+     * to be recognised from string to be parsed.
+     * Example flag: "-f"
+     *
+     * @param userResponse the string to be parsed for flags
+     * @param flags all the flags to check for
+     * @return the HashMap
+     * @throws ParseException when there is a duplicate flag in the userResponse
+     */
+    public static HashMap<String, String> getFlagMap(String userResponse, String... flags) throws ParseException {
+        //make hashmap of flags to index position of flags
+        HashMap<String, Integer> flagToPosMap = new HashMap<>();
+        for (String flag : flags) { //for each possible flag
+            int index = userResponse.indexOf(flag + " ");
+            if (index > -1) { //if flag exists
+                checkDuplicateFlags(flag + " ", userResponse);
+                flagToPosMap.put(flag, index);
             }
-
-            try {
-                priority = Priority.toProper(params[2].strip());
-            } catch (PriorityException e) {
-                throw new ParseException(e.getMessage());
-            }
-        } else if (userResponse.contains("-i")) {
-            if (!hasCorrectFlagSequence(userResponse, "-d", "-i")) {
-                throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
-            }
-
-            information = params[2].strip();
-        } else {
-            throw new ParseException(promptFormat(ADD_TASK_FORMAT));
         }
 
-        return new AddTaskCommand(title, dayOfTheWeek, priority, information);
+        //make hashmap of flags to parameter of flags
+        ArrayList<Integer> posList = new ArrayList<>(flagToPosMap.values()); //list of positions of all flags
+        Collections.sort(posList);
+        HashMap<String, String> flagToParamMap = new HashMap<>();
+        for (String flag : flagToPosMap.keySet()) {
+            int pos = flagToPosMap.get(flag);
+            int indexInPosList = posList.indexOf(pos);
+            if (indexInPosList < posList.size() - 1) { //if not the last element of posList array
+                int nextPos = posList.get(indexInPosList + 1);
+                flagToParamMap.put(flag, userResponse.substring(pos + 3, nextPos).strip());
+            } else {
+                flagToParamMap.put(flag, userResponse.substring(pos + 3).strip());
+            }
+        }
+        return flagToParamMap;
+    }
+
+    public static void checkDuplicateFlags(String flag, String userResponse) throws ParseException {
+        int firstIndex = userResponse.indexOf(flag);
+        if (userResponse.substring(firstIndex + 1).contains(flag)) {
+            throw new ParseException(Messages.ERROR_DUPLICATE_FLAGS);
+        }
     }
 }
