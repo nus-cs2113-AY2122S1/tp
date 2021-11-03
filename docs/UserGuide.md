@@ -116,7 +116,7 @@ Format: ```add [DATA_TYPE] [DATA_FIELDS]```
 
 ### Adding clients into database: ```add -c```
 
-Format: ```add [DATA_TYPE] CLIENT_ID [DATA_FIELDS]```
+Format: ```add [DATA_TYPE] [CLIENT_ID] [DATA_FIELDS]```
 
 These are your existing or potential customers. In this industry of tour planning, your livelihoods depend on them.
 
@@ -146,7 +146,7 @@ Adds *Wayne*, contact number *92468024* and email
 
 ### Adding flights into database: ```add -f```
 
-Format: ```add [DATA_TYPE] FLIGHT_ID [DATA_FIELDS]```
+Format: ```add [DATA_TYPE] [FLIGHT_ID] [DATA_FIELDS]```
 
 Mandatory data fields:
 
@@ -176,7 +176,7 @@ database as ID: _SQ-KOR1_.
 
 ### Adding tours into database: ```add -t```
 
-Format: ```add [DATA_TYPE] TOUR_ID [DATA_FIELDS]```
+Format: ```add [DATA_TYPE] [TOUR_ID] [DATA_FIELDS]```
 
 Mandatory data fields:
 
@@ -203,7 +203,7 @@ Adds _KoreanWonderland_, which costs _$2300_, as tour _t002_.
 ClientPackage acts as a master list of details for each client, to have an overview of the client upon querying. Each
 package represents one client, with his or her respective tour and flight details.
 
-Format: ```add [DATA_TYPE] PACKAGE_ID [DATA_FIELDS]```
+Format: ```add [DATA_TYPE] [PACKAGE_ID] [DATA_FIELDS]```
 
 Mandatory data fields:
 
@@ -461,7 +461,7 @@ subscriber(s) / passenger(s) who are assigned to them respectively.
 
 <br>
 
-Format: ```find [DATA_TYPE] [CODE]```
+Format: ```find [DATA_TYPE] [ID]```
 
 Examples:
 
@@ -593,7 +593,7 @@ The possible values of ```[FILTER]``` are:
 
 Examples:
 
-* ```sort -f \id``` sorts the tours by tour id alphabetically.
+* ```sort -t \id``` sorts the tours by tour id alphabetically.
 
 An output of this format will be shown:
 
@@ -617,7 +617,7 @@ Price per pax: $1700.00
 ```
 <br>
 
-* ```sort -f \id``` sorts the tours by price in ascending order.
+* ```sort -t \p``` sorts the tours by price in ascending order.
 
 An output of this format will be shown:
 
@@ -719,12 +719,8 @@ Return Flight: SG, 30/11/21 03:00
 <br>
 
 
-## Storage
-
-This program can print all the cilentpackages into a text file will save the clientpackages 
-you have added before by load and save functions.
-
 ## Exit application: ```bye```
+<hr>
 
 Exits the application.
 
@@ -737,4 +733,23 @@ The following output will be shown:
 ```Thanks for using TourPlanner. Goodbye!```
 
 <br>
+
+## Saving Data
 <hr>
+
+In TourPlanner, all data (clients, tours, flights, client packages) are saved in the hard disk
+<u>ONLY</u> after the user exits the application with the ```bye``` command.
+
+<br>
+
+## **Command Summary**
+
+Command | Format
+------------ | -------------
+```help``` | ```help```
+```add``` | ```add [DATA_TYPE] [ID] [DATA_FIELDS] ```
+```cut``` | ```cut [DATA_TYPE] [ID]```
+```list``` | ```list [DATA_TYPE]```
+```find``` | Clients: ```find [DATA_TYPE] [SUBSTRING]``` <br> Tour / Flights: ```find [DATA_TYPE] [ID]```
+```sort``` | ```sort [DATA_TYPE] [FILTER]```
+```bye``` | ```bye```
