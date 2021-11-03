@@ -241,7 +241,7 @@ public class MainParser {
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (MissingIndexException e) {
-            return new FailedCommand(FailedCommandType.MISSING_INDEX);
+            return new FailedCommand(FailedCommandType.MISSING_INDEX_VIEW);
         }
     }
 

@@ -95,6 +95,12 @@ public class FailedCommand extends Command {
         case MISSING_INDEX:
             ExceptionTextUi.missingIndexMessage();
             break;
+        case MISSING_INDEX_VIEW:
+            ExceptionTextUi.missingIndexViewMessage(contactList.getListSize());
+            break;
+        case MISSING_INDEX_DELETE:
+            ExceptionTextUi.missingIndexDeleteMessage(contactList.getListSize());
+            break;
         default:
             return;
         }
