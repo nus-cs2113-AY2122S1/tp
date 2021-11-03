@@ -180,9 +180,7 @@ public abstract class ExecuteFunctions {
         if (toBeChecked == null) {
             Ui.invalidArgForAmount();
         } else {
-            Ui.printAmount(toBeChecked, trip, false);
-            Ui.optimizedPaymentPrompt();
-            checkForOptimization(toBeChecked);
+            Ui.printAmount(toBeChecked, trip);
         }
     }
 
@@ -207,6 +205,14 @@ public abstract class ExecuteFunctions {
             Ui.printUnknownExpenseIndexError();
         }
         Storage.setLastExpense(null);
+    }
+
+    protected static void executeOptimize() throws TripNotOpenException {
+        if (Storage.checkOpenTrip()){
+            checkForOptimization();
+        } else {
+            throw new TripNotOpenException();
+        }
     }
 
     /**
@@ -317,30 +323,10 @@ public abstract class ExecuteFunctions {
     //@@author
 
 
-    private static void checkForOptimization(Person person) {
-        boolean isValidInput = false;
-        String input;
-        if (getUserToConfirm()) {
-            Trip trip = Storage.getOpenTrip();
-            trip.optimizePayments();
-            Ui.printAmount(person, Storage.getOpenTrip(), true);
-        }
+    private static void checkForOptimization() {
+        Trip trip = Storage.getOpenTrip();
+        trip.optimizePayments();
+        Ui.printOptimizedAmounts();
     }
 
-    private static boolean getUserToConfirm() {
-        boolean isValidInput = false;
-        boolean doesUserAgree = false;
-        while (!isValidInput) {
-            String userReply = Storage.getScanner().nextLine();
-            if (userReply.equalsIgnoreCase("y")) {
-                isValidInput = true;
-                doesUserAgree = true;
-            } else if (userReply.equalsIgnoreCase("n")) {
-                isValidInput = true;
-            } else {
-                System.out.println("Enter y/n");
-            }
-        }
-        return doesUserAgree;
-    }
 }

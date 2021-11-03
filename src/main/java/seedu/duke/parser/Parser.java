@@ -71,6 +71,7 @@ public class Parser extends HandleFunctions {
     private static final String AMOUNT_COMMAND = "amount";
     private static final String HELP_COMMAND = "help";
     private static final String PEOPLE_COMMAND = "people";
+    private static final String OPTIMIZE_COMMAND = "optimize";
 
     /**
      * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
@@ -127,6 +128,10 @@ public class Parser extends HandleFunctions {
 
         case HELP_COMMAND:
             Ui.displayHelp();
+            break;
+
+        case OPTIMIZE_COMMAND:
+            handleOptimize();
             break;
 
         default:

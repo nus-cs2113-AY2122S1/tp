@@ -16,6 +16,7 @@ qian
 0
 16
 y
+optimize yikai
 expense 48.00 breakfast yikai,yuzhao,qian /d a c
 19-10-2021
 yuzhao
@@ -23,11 +24,8 @@ yuzhao
 0
 y
 amount yikai
-y
 amount qian
-y
 amount yuzhao
-y
 view filter category breakfast
 view filter category lunch
 view filter description d a c

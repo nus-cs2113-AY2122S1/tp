@@ -117,4 +117,14 @@ public abstract class HandleFunctions extends ExecuteFunctions {
             Ui.printNoOpenTripError();
         }
     }
+
+    protected static void handleOptimize() {
+        try {
+            executeOptimize();
+        } catch (TripNotOpenException e) {
+            Ui.printNoOpenTripError();
+        }
+    }
+
+
 }

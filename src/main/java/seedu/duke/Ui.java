@@ -9,6 +9,34 @@ import java.util.HashMap;
 
 public class Ui {
 
+    public static void printOptimizedAmounts() {
+        System.out.println("Here is the optimized payment transactions:");
+        Trip openTrip = Storage.getOpenTrip();
+        if (openTrip.getListOfExpenses().size() == 0) {
+            printNoExpensesError();
+            return;
+        }
+        ArrayList<Person> listOfPersons = openTrip.getListOfPersons();
+        HashMap<String, Double> currentHashMap;
+        String nameOfPersonPaying;
+        String nameOfPersonReceiving;
+        Double amountOwed;
+        for (Person personPaying : listOfPersons) {
+            for (Person personReceiving : listOfPersons) {
+                nameOfPersonPaying = personPaying.getName();
+                nameOfPersonReceiving = personReceiving.getName();
+                currentHashMap = personPaying.getOptimizedMoneyOwed();
+                amountOwed = currentHashMap.get(nameOfPersonReceiving);
+                if (!personPaying.equals(personReceiving) && amountOwed < 0) {
+                    System.out.println(nameOfPersonPaying + " needs to pay "
+                            + stringForeignMoney(-amountOwed)
+                            + " (" + stringRepaymentMoney(-amountOwed) + ")"
+                            + " to " + personReceiving);
+                }
+            }
+        }
+    };
+
     public static String receiveUserInput() throws ForceCancelException {
         String userInput = Storage.getScanner().nextLine().strip();
         if (Parser.doesUserWantToForceCancel(userInput)) {
@@ -41,13 +69,6 @@ public class Ui {
                 + newTrip.getDateOfTripString() + " has been successfully added!");
     }
 
-    public static void optimizedPaymentPrompt() {
-        System.out.print("Do you want to optimize the payments? (y/n): ");
-    }
-
-    public static void promptForValidInput() {
-        System.out.println("Please enter a valid input (y/n)");
-    }
 
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
@@ -282,29 +303,22 @@ public class Ui {
     }
 
 
-    public static void printAmount(Person person, Trip trip, boolean isOptimized) {
-        HashMap<String, Double> hashmap;
-        if (isOptimized) {
-            hashmap = person.getOptimizedMoneyOwed();
-
-        } else {
-            hashmap = person.getMoneyOwed();
-            System.out.println(person.getName() + " spent "
-                    + stringForeignMoney(hashmap.get(person.getName())) // Remove .getName()
-                    + " (" + stringRepaymentMoney(hashmap.get(person.getName())) + ") on the trip so far");
-        }
+    public static void printAmount(Person person, Trip trip) {
+        System.out.println(person.getName() + " spent "
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
 
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
-                if (hashmap.get(otherPerson.getName()) > 0) {
+                if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
                     System.out.println(otherPerson.getName() + " owes "
-                            + stringForeignMoney(hashmap.get(otherPerson.getName()))
-                            + " (" + stringRepaymentMoney(hashmap.get(otherPerson.getName())) + ")"
+                            + stringForeignMoney(person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + person.getName());
-                } else if (hashmap.get(otherPerson.getName()) < 0) {
+                } else if (person.getMoneyOwed().get(otherPerson.getName()) < 0) {
                     System.out.println(person.getName() + " owes "
-                            + stringForeignMoney(-hashmap.get(otherPerson.getName()))
-                            + " (" + stringRepaymentMoney(-hashmap.get(otherPerson.getName())) + ")"
+                            + stringForeignMoney(-person.getMoneyOwed().get(otherPerson.getName()))
+                            + " (" + stringRepaymentMoney(-person.getMoneyOwed().get(otherPerson.getName())) + ")"
                             + " to " + otherPerson.getName());
                 } else {
                     System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
