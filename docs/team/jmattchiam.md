@@ -2,6 +2,9 @@
 
 ## Project: Get Jack'd
 
+Get Jack'd is a Command-Line application that helps busy people manage their workouts and fitness routines quickly by
+typing in commands. It is written in Java and has about 6 kLoC. (6000 lines of code)
+
 Given below are my contributions to the project.
 
 - **New Feature**: Implemented the Exercise class for v1.0
