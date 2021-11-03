@@ -4,7 +4,7 @@
 
 MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
 It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders. The
-purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.0.
+purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.1.
 
 ## Acknowledgements
 
@@ -61,6 +61,11 @@ Stock | Refers to a medication.
 Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
 Parameters | Prefixes for MediVault to understand the type of information you provide.
+
+Meaning of Icons:
+- :information_source: Additional information
+- :warning: Warning
+- :bulb: Note
 
 ## Setting up environment
 
@@ -245,8 +250,6 @@ There are three variations of the list command.
 The sequence diagram below shows how the `list` operation works in general.
 
 ![ListSequenceDiagram](diagrams/diagram_images/ListSequenceDiagram.png)
-
-> :information_source: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
 
 * All three variations of `list` are similar as they are implemented by iterating through the `Medicine` ArrayList and
   filtering out the respective object types.
