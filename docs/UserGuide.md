@@ -411,6 +411,33 @@ Output:
 
 <br />
 
+###Optimization
+
+#### - Optimizing Number of Transactions
+
+Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened
+a trip to use the command. The input syntax is as follows:
+
+```
+optimize
+```
+
+For example,
+
+Input:
+
+```
+optimize
+```
+
+Output:
+
+```
+Here is the optimized payment transactions:
+yuzhao needs to pay USD 8.00 (SGD 8.00) to yikai
+yuzhao needs to pay USD 13.00 (SGD 13.00) to qian
+```
+
 ### Summary
 
 #### - View Summary of expenses
