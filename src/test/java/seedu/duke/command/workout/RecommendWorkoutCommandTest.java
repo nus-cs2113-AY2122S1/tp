@@ -10,6 +10,9 @@ class RecommendWorkoutCommandTest {
     @Test
     void recommend_invalidWorkoutLevel_exceptionThrown() {
         assertThrows(GetJackDException.class, () -> new RecommendWorkoutCommand("sgdtshjnf"));
+        assertThrows(GetJackDException.class, () -> new RecommendWorkoutCommand("pro pro"));
+        assertThrows(GetJackDException.class, () -> new RecommendWorkoutCommand("beginnerbeginner"));
+        assertThrows(GetJackDException.class, () -> new RecommendWorkoutCommand("intermediateblahblah"));
     }
-
+    
 }

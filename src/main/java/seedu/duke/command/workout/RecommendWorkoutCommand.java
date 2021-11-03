@@ -38,8 +38,8 @@ public class RecommendWorkoutCommand extends Command {
      */
     public RecommendWorkoutCommand(String workoutLevel) throws GetJackDException {
         assert workoutLevel != null;
-        if (!workoutLevel.contains("beginner") & !workoutLevel.contains("intermediate")
-                & !workoutLevel.contains("pro")) {
+        if (!workoutLevel.equals("beginner") & !workoutLevel.equals("intermediate")
+                & !workoutLevel.equals("pro")) {
             throw new GetJackDException("Invalid command parameter provided!");
         }
         this.workoutLevel = workoutLevel;
