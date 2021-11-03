@@ -2,6 +2,9 @@ package happybit.parser;
 
 import happybit.exception.HaBitParserException;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -78,6 +81,26 @@ public class Parser {
         if (input == null) {
             throw new HaBitParserException(ERROR_NO_PARAMS);
         }
+    }
+
+    /**
+     * 'Type-casting' a Date to a LocalDate.
+     *
+     * @param date Date to be 'type-casted'.
+     * @return LocalDate that has been 'type-casted' from Date.
+     */
+    protected static LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 'Type-casting' a LocalDate to a Date.
+     *
+     * @param localDate LocalDate to be 'type-casted'.
+     * @return Date that has been 'type-casted' from LocalDate.
+     */
+    protected static Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

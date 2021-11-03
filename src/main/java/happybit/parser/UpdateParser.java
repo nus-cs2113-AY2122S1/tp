@@ -11,6 +11,10 @@ import happybit.goal.GoalType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class UpdateParser extends Parser {
@@ -24,7 +28,7 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end date"
             + "Eg: e/31122021";
-    private static final String ERROR_GOAL_END_DATE_NON_DATE = "Enter your date in the format DDMMYYYY";
+    private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
     private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
@@ -37,6 +41,8 @@ public class UpdateParser extends Parser {
             + "do check your parameters one more time.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
             + "do check your parameters one more time.";
+
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
     private static final int FLAG_LENGTH = 2;
     private static final String SLEEP_LABEL = "sl";
@@ -352,12 +358,15 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If the String Date fails to be parsed
      */
     private static Date stringToDate(String strDate) throws HaBitParserException {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        formatter.setLenient(false);
+        LocalDate parsedDate;
+        //SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        //formatter.setLenient(false);
         try {
-            return formatter.parse(strDate);
-        } catch (ParseException e) {
-            throw new HaBitParserException(ERROR_GOAL_END_DATE_NON_DATE);
+            //return formatter.parse(strDate);
+            parsedDate = LocalDate.parse(strDate, dateTimeFormatter);
+            return convertLocalDateToDate(parsedDate);
+        } catch (DateTimeParseException e) {
+            throw new HaBitParserException(ERROR_DATE_FORMAT);
         }
     }
 

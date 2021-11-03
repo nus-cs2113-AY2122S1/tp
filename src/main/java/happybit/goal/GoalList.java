@@ -5,6 +5,7 @@ import happybit.habit.Habit;
 import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -264,10 +265,8 @@ public class GoalList {
     public void updateGoalEndDate(int goalIndex, Date newDate, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         Date oldDate = goal.getEndDate();
-        final String oldDateString = goal.getPrintableEndDate();
         compareOldDateWithNewDate(oldDate, newDate);
         goal.setEndDate(newDate);
-        String newDateString = goal.getPrintableEndDate();
         // Go through all habits for Goal
         // change endDate for all of them + call updateIntervals
         ArrayList<Habit> habits = goal.getHabitList();
@@ -276,7 +275,9 @@ public class GoalList {
             // update Interval Lengths using same interval for habit
             habit.updateLengthOfInterval(habit.getIntervalLength());
         }
+        String oldDateString = dateToString(oldDate);
         String goalName = goal.getGoalName();
+        String newDateString = goal.getPrintableEndDate();
         printManager.printUpdatedGoalEndDate(goalName, oldDateString, newDateString);
     }
 
@@ -472,5 +473,10 @@ public class GoalList {
             }
         }
         return false;
+    }
+
+    private String dateToString(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        return dateFormat.format(date);
     }
 }
