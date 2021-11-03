@@ -68,6 +68,7 @@ public class AddPrescriptionCommandTest {
                 + "+----+---------+----------+-------------+------------+-------+----------+";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -104,7 +105,9 @@ public class AddPrescriptionCommandTest {
                 + "+====+=========+==========+=============+============+=======+==========+\r\n"
                 + "| 2  | PANADOL |    20    |     123     | 03-11-2021 | JOHN  |    2     | \r\n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
+
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -130,6 +133,31 @@ public class AddPrescriptionCommandTest {
                 + "Prescription quantity: 30 Stock available: 5";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
+    @Test
+    void addPrescriptionCommand_invalidExpiryDate_expectInvalid() {
+        try {
+            medicines.add(new Stock(NAME, PRICE, 5,
+                    DateParser.stringToDate("11-11-2020"), DESCRIPTION, MAX_QUANTITY));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        parameters.put("n", NAME);
+        parameters.put("q", QUANTITY);
+        parameters.put("c", CUSTOMER_ID);
+        parameters.put("s", STAFF_NAME);
+
+        Command command = new AddPrescriptionCommand(parameters);
+        command.execute();
+
+        String error = "Unable to Prescribe! Medication has expired!";
+
+        assertEquals(error.trim(), outContent.toString().trim());
+
+    }
 }

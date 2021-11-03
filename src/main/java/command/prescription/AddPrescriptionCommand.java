@@ -65,10 +65,16 @@ public class AddPrescriptionCommand extends Command {
             ui.print("Medicine not available!");
             return;
         }
+
         Date prescribeDate = new Date(); //prescribe date will be today's date
         String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
+
+        if (checkExpiredMedication(ui, filteredStocks)) {
+            return;
+        }
+
         int totalStock = PrescriptionManager.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
 
         if (prescriptionQuantity > totalStock) {
@@ -108,8 +114,39 @@ public class AddPrescriptionCommand extends Command {
             }
 
         }
+
         ui.print("Unable to Prescribe! Medicine has expired!");
 
+    }
+
+    /**
+     * Check if non-expired medication exist.
+     *
+     * @param ui             Reference to the UI object to print messages.
+     * @param filteredStocks List of stock sorted by expiry date.
+     * @return Boolean Value indicating if expired medication exist.
+     */
+    private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks) {
+        boolean existNonExpiredMed = false;
+        for (Stock stock : filteredStocks) {
+            Date expiryDate = stock.getExpiry();
+            Date todayDate = new Date();
+
+            String todayDateString = DateParser.dateToString(todayDate);
+            String latestExpiryString = DateParser.dateToString(expiryDate);
+
+            boolean isNotExpired = expiryDate.after(todayDate) || todayDateString.equals(latestExpiryString);
+
+            if (isNotExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
+                existNonExpiredMed = true;
+            }
+        }
+
+        if (!existNonExpiredMed) {
+            ui.print("Unable to Prescribe! Medication has expired!");
+            return true;
+        }
+        return false;
     }
 
     /**

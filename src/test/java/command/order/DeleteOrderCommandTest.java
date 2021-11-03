@@ -33,6 +33,7 @@ public class DeleteOrderCommandTest {
         Order.setOrderCount(0);
         Prescription.setPrescriptionCount(0);
         System.setOut(new PrintStream(outContent));
+
     }
 
     @Test
@@ -53,6 +54,7 @@ public class DeleteOrderCommandTest {
         String error = "Order deleted for Order ID 1";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -67,6 +69,7 @@ public class DeleteOrderCommandTest {
         String error = "Invalid order id provided!";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
 }

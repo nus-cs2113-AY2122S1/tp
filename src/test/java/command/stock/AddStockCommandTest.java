@@ -115,6 +115,7 @@ public class AddStockCommandTest {
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -147,6 +148,7 @@ public class AddStockCommandTest {
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -178,6 +180,7 @@ public class AddStockCommandTest {
                 + "+----+---------+--------+----------+-------------+-------------+--------------+";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
 }

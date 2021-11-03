@@ -5,7 +5,7 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Prescription;
 import inventory.Stock;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utilities.parser.DateParser;
@@ -43,6 +43,7 @@ public class DeletePrescriptionCommandTest {
         Order.setOrderCount(0);
         Prescription.setPrescriptionCount(0);
         System.setOut(new PrintStream(outContent));
+
     }
 
 
@@ -65,6 +66,7 @@ public class DeletePrescriptionCommandTest {
         String error = "Prescription deleted for Prescription Id 1";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -77,7 +79,9 @@ public class DeletePrescriptionCommandTest {
 
         Command command = new DeletePrescriptionCommand(parameters);
         command.execute();
+
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -102,6 +106,7 @@ public class DeletePrescriptionCommandTest {
                 + "Maximum quantity: 50 Total Quantity after deletion: 55";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
     @Test
@@ -125,6 +130,7 @@ public class DeletePrescriptionCommandTest {
         String error = "Medication has expired. Unable to delete prescription.";
 
         assertEquals(error.trim(), outContent.toString().trim());
+
     }
 
 }
