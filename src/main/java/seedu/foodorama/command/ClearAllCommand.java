@@ -12,16 +12,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClearAllCommand extends Command {
-    private static final Logger logger = Logger.getLogger("ClearAllCommand.execute()");
+    private static final Logger LOGGER = Logger.getLogger("ClearAllCommand.execute()");
     private static final Ui UI = new Ui();
 
     ClearAllCommand() {
-        LoggerManager.setupLogger(logger);
+        LoggerManager.setupLogger(LOGGER);
     }
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        logger.log(Level.INFO, "Start of process");
+        LOGGER.log(Level.INFO, "Start of process");
         Scanner input = new Scanner(System.in);
         UI.printConfirmClearAll();
         String confirmClear = input.nextLine().toLowerCase();
@@ -35,10 +35,10 @@ public class ClearAllCommand extends Command {
             DishList.dishList.clear();
             IngredientList.ingredientList.clear();
             UI.printAllCleared();
-            logger.log(Level.INFO, "Successfully cleared both lists");
+            LOGGER.log(Level.INFO, "Successfully cleared both lists");
         } else {
             UI.printDisregardMsg();
         }
-        logger.log(Level.INFO, "End of process");
+        LOGGER.log(Level.INFO, "End of process");
     }
 }

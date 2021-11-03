@@ -128,7 +128,7 @@ public class IngredientList {
     public static void editName(int ingredientIndex) throws FoodoramaException {
         if (ingredientIndex == -1) {
             throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingredientIndex >= ingredientList.size()) {
+        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
@@ -167,7 +167,7 @@ public class IngredientList {
     public static void addExpiry(int ingredientIndex) throws FoodoramaException {
         if (ingredientIndex == -1) {
             throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingredientIndex >= ingredientList.size()) {
+        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
@@ -202,7 +202,7 @@ public class IngredientList {
     public static void editWastage(int ingrIndex) throws FoodoramaException {
         if (ingrIndex == -1) {
             throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingrIndex >= ingredientList.size()) {
+        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             String ingrName = ingredientList.get(ingrIndex).getIngredientName();
@@ -242,7 +242,7 @@ public class IngredientList {
     public static void editStorage(int ingrIndex) throws FoodoramaException {
         if (ingrIndex == -1) {
             throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingrIndex >= ingredientList.size()) {
+        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             String ingrName = ingredientList.get(ingrIndex).getIngredientName();

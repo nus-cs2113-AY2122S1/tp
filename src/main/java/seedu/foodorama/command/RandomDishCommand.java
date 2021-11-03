@@ -97,7 +97,7 @@ public class RandomDishCommand extends Command {
 
         this.randomDishName = generatedDishName;
 
-        ui.printRandommDishName(generatedDishName);
+        ui.printRandomDishName(generatedDishName);
 
     }
 

@@ -48,6 +48,5 @@ class EditDishNameCommandTest {
         assert (updatedDishName.equals("prata"));
 
         DishList.dishList.clear();
-
     }
 }

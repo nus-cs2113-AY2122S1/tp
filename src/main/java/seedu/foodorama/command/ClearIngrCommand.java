@@ -8,19 +8,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClearIngrCommand extends Command {
-    private static final Logger logger = Logger.getLogger("ClearIngrCommand.execute()");
+    private static final Logger LOGGER = Logger.getLogger("ClearIngrCommand.execute()");
 
     ClearIngrCommand() {
-        LoggerManager.setupLogger(logger);
+        LoggerManager.setupLogger(LOGGER);
     }
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        logger.log(Level.INFO, "Start of process");
+        LOGGER.log(Level.INFO, "Start of process");
 
         IngredientList.clearList();
-        logger.log(Level.INFO, "Successfully cleared ingredientList");
+        LOGGER.log(Level.INFO, "Successfully cleared ingredientList");
 
-        logger.log(Level.INFO, "End of process");
+        LOGGER.log(Level.INFO, "End of process");
     }
 }

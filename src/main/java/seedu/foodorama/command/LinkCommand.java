@@ -10,25 +10,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LinkCommand extends Command {
-    private static final Logger logger = Logger.getLogger("AddingDishIngrCommand.execute()");
+    private static final Logger LOGGER = Logger.getLogger("AddingDishIngrCommand.execute()");
     private static final Ui UI = new Ui();
 
     LinkCommand() {
-        LoggerManager.setupLogger(logger);
+        LoggerManager.setupLogger(LOGGER);
     }
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        logger.log(Level.INFO, "Start of process");
+        LOGGER.log(Level.INFO, "Start of process");
         int dishIndex = DishList.find(parameters.get(0));
 
         if (dishIndex == -1) {
-            logger.log(Level.INFO, "Dish does not exist", dishIndex);
+            LOGGER.log(Level.INFO, "Dish does not exist", dishIndex);
             throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else {
             DishList.dishList.get(dishIndex).addPart(parameters.get(1));
-            logger.log(Level.INFO, "Successfully added dish ingredient");
+            LOGGER.log(Level.INFO, "Successfully added dish ingredient");
         }
-        logger.log(Level.INFO, "End of process");
+        LOGGER.log(Level.INFO, "End of process");
     }
 }

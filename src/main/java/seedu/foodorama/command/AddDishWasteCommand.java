@@ -22,11 +22,21 @@ public class AddDishWasteCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-        String dish = String.join(" ", parameters);
-        int dishIndex = DishList.find(dish);
+        String dish = parameters.get(0);
+        int dishIndex;
+        if (isNumber(dish)) {
+            dishIndex = Integer.parseInt(dish) - 1;
+        } else {
+            dishIndex = DishList.find(dish);
+        }
+        //Input validation for dishIndex
+        //Possible edge case (user give 0 as input)
         if (dishIndex == -1) {
-            logger.log(Level.INFO, "Dish does not exist", dishIndex);
+            logger.log(Level.INFO, "Dish does not exist");
             throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
+        } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
+            logger.log(Level.INFO, "Dish index is wrong");
+            throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
             try {
@@ -39,6 +49,15 @@ public class AddDishWasteCommand extends Command {
             }
         }
         logger.log(Level.INFO, "End of process");
+    }
+
+    public boolean isNumber(String number) {
+        try {
+            int dishIndex = Integer.parseInt(number) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }
