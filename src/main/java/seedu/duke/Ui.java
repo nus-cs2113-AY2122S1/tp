@@ -5,8 +5,40 @@ import seedu.duke.expense.Expense;
 import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Ui {
+
+    public static void printOptimizedAmounts() {
+        boolean isAllPaid = true;
+        Trip openTrip = Storage.getOpenTrip();
+        ArrayList<Person> listOfPersons = openTrip.getListOfPersons();
+        HashMap<String, Double> currentHashMap;
+        String nameOfPersonPaying;
+        String nameOfPersonReceiving;
+        Double amountOwed;
+        for (Person personPaying : listOfPersons) {
+            for (Person personReceiving : listOfPersons) {
+                nameOfPersonPaying = personPaying.getName();
+                nameOfPersonReceiving = personReceiving.getName();
+                currentHashMap = personPaying.getOptimizedMoneyOwed();
+                amountOwed = currentHashMap.get(nameOfPersonReceiving);
+                if (!personPaying.equals(personReceiving) && amountOwed < 0) {
+                    if (isAllPaid) {
+                        System.out.println("Here is the optimized payment transactions:");
+                    }
+                    System.out.println(nameOfPersonPaying + " needs to pay "
+                            + stringForeignMoney(-amountOwed)
+                            + " (" + stringRepaymentMoney(-amountOwed) + ")"
+                            + " to " + personReceiving);
+                    isAllPaid = false;
+                }
+            }
+        }
+        if (isAllPaid) {
+            System.out.println("All are paid! :)");
+        }
+    }
 
     public static String receiveUserInput() throws ForceCancelException {
         String userInput = Storage.getScanner().nextLine().strip();
@@ -39,6 +71,7 @@ public class Ui {
         System.out.println("Your trip to " + newTrip.getLocation() + " on "
                 + newTrip.getDateOfTripString() + " has been successfully added!");
     }
+
 
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
@@ -75,12 +108,6 @@ public class Ui {
         System.out.println(e);
     }
 
-    /*public static void printExpensesSummary(Trip t) {
-        System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        *//*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
-        System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
-        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*//*
-    }*/
 
     public static void printFilteredExpenses(Expense e, int index) {
         System.out.println((index + 1) + ". " + e);
@@ -277,6 +304,7 @@ public class Ui {
         System.out.println(person.getName() + " spent "
                 + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
                 + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
+
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
                 if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
@@ -378,9 +406,9 @@ public class Ui {
     public static void printInvalidPeople(ArrayList<String> names) {
         for (String name : names) {
             if (names.indexOf(name) == names.size() - 1) {
-                System.out.print(name + " ");
+                System.out.print(name);
             } else if (names.indexOf(name) == names.size() - 2) {
-                System.out.print(name + " and");
+                System.out.print(name + " and ");
             } else if (names.indexOf(name) < names.size() - 2) {
                 System.out.print(name + ", ");
             }

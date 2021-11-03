@@ -32,7 +32,7 @@ public class Storage {
     //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
-                    "delete", "expense", "quit", "help", "amount", "people", "close"));
+                    "delete", "expense", "quit", "help", "amount", "people", "close", "optimize"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
             put("USD", new String[]{"$", "%.02f"});

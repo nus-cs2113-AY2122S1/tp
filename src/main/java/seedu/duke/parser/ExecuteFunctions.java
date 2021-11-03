@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.Person;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.InvalidAmountException;
+import seedu.duke.exceptions.NoExpensesError;
 import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.expense.Expense;
 
@@ -207,6 +208,14 @@ public abstract class ExecuteFunctions {
         Storage.setLastExpense(null);
     }
 
+    protected static void executeOptimize() throws NoExpensesError {
+        if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
+            checkForOptimization();
+        } else {
+            throw new NoExpensesError();
+        }
+    }
+
     /**
      * Deletes a trip from the <code>listOfTrips</code>.
      *
@@ -312,4 +321,13 @@ public abstract class ExecuteFunctions {
         }
         return null;
     }
+    //@@author
+
+
+    private static void checkForOptimization() {
+        Trip trip = Storage.getOpenTrip();
+        trip.optimizePayments();
+        Ui.printOptimizedAmounts();
+    }
+
 }

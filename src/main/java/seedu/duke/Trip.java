@@ -35,6 +35,7 @@ public class Trip {
     private static final String PAYER = "payer";
     private static final String PERSON = "person";
     private static final String DATE = "date";
+    private static final double EPSILON = 0.001;
 
     /**
      * Empty {@link Trip} constructor (included for legacy test support).
@@ -533,4 +534,100 @@ public class Trip {
         }
         return listOfPeople;
     }
+
+    //@@author leeyikai
+    public void optimizePayments() {
+        ArrayList<Double> totalExpenses = new ArrayList<>();
+        boolean isAllPaid = false;
+        getTotalAmountForPerson(totalExpenses);
+
+        int currentIndex;
+        while (!isAllPaid) {
+            for (Person person : listOfPersons) {
+                currentIndex = listOfPersons.indexOf(person);
+                if (totalExpenses.get(currentIndex) < 0) {
+                    findNextPersonToPay(totalExpenses, currentIndex);
+                }
+            }
+            isAllPaid = checkIfAllPaid(totalExpenses);
+        }
+    }
+
+    public boolean checkIfAllPaid(ArrayList<Double> totalExpenses) {
+        for (Double i : totalExpenses) {
+            if (!isZero(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void findNextPersonToPay(ArrayList<Double> totalExpenses, int indexOfPersonPaying) {
+        Double expensesOfCurrentPerson;
+        Double expensesOfPersonPaying;
+        Person personPaying;
+        Person personReceiving;
+        String nameOfPersonPaying;
+        String nameOfPersonReceiving;
+        for (Person person : listOfPersons) {
+            int indexOfPersonReceiving = listOfPersons.indexOf(person);
+            expensesOfCurrentPerson = totalExpenses.get(indexOfPersonReceiving);
+            expensesOfPersonPaying = -totalExpenses.get(indexOfPersonPaying);
+            personPaying = listOfPersons.get(indexOfPersonPaying);
+            personReceiving = listOfPersons.get(indexOfPersonReceiving);
+            nameOfPersonPaying = personPaying.getName();
+            nameOfPersonReceiving = personReceiving.getName();
+            if (totalExpenses.get(indexOfPersonReceiving) > 0) {
+                if (isMoreThanOrEqual(expensesOfPersonPaying, expensesOfCurrentPerson)) {
+                    personPaying.getOptimizedMoneyOwed().put(nameOfPersonReceiving, -expensesOfCurrentPerson);
+                    personReceiving.getOptimizedMoneyOwed().put(nameOfPersonPaying, expensesOfCurrentPerson);
+                    totalExpenses.set(indexOfPersonReceiving, 0.0);
+                    totalExpenses.set(indexOfPersonPaying, -(expensesOfPersonPaying - expensesOfCurrentPerson));
+                } else {
+                    personPaying.getOptimizedMoneyOwed().put(nameOfPersonReceiving, -expensesOfPersonPaying);
+                    personReceiving.getOptimizedMoneyOwed().put(nameOfPersonPaying, expensesOfPersonPaying);
+                    totalExpenses.set(indexOfPersonPaying, 0.0);
+                    totalExpenses.set(indexOfPersonReceiving, expensesOfCurrentPerson - expensesOfPersonPaying);
+                }
+            }
+            if (isZero(totalExpenses.get(indexOfPersonPaying))) {
+                return;
+            }
+        }
+    }
+
+    private void getTotalAmountForPerson(ArrayList<Double> totalExpenses) {
+        Double totalAmountPerPerson;
+        for (Person person : listOfPersons) {
+            totalAmountPerPerson = 0.0;
+            HashMap<String, Double> personExpenses = person.getMoneyOwed();
+            String otherPersonName;
+            for (Person otherPerson : listOfPersons) {
+                if (!otherPerson.equals(person)) {
+                    otherPersonName = otherPerson.getName();
+                    totalAmountPerPerson += personExpenses.get(otherPersonName);
+                    person.setOptimizedMoneyOwed(otherPerson);
+                }
+
+            }
+            totalExpenses.add(totalAmountPerPerson);
+        }
+    }
+
+    public static boolean isMoreThanOrEqual(double firstValue, double secondValue) {
+        if (isEqual(firstValue, secondValue)) {
+            return true;
+        }
+        return firstValue > secondValue;
+    }
+
+    public static boolean isEqual(double firstValue, double secondValue) {
+        double difference = firstValue - secondValue;
+        return difference < EPSILON && difference > -EPSILON;
+    }
+
+    public static boolean isZero(double value) {
+        return value < EPSILON && value > -EPSILON;
+    }
+    //@@author
 }

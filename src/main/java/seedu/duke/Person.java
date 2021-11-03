@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Person {
     private String name;
     private HashMap<String, Double> moneyOwed = new HashMap<>();
+    private HashMap<String, Double> optimizedMoneyOwed = new HashMap<>();
 
     public Person(String name) {
         this.name = name;
@@ -27,6 +28,14 @@ public class Person {
 
     public HashMap<String, Double> getMoneyOwed() {
         return this.moneyOwed;
+    }
+
+    public HashMap<String, Double> getOptimizedMoneyOwed() {
+        return this.optimizedMoneyOwed;
+    }
+
+    public void setOptimizedMoneyOwed(Person person) {
+        optimizedMoneyOwed.put(person.getName(), 0.0);
     }
 
     @Override
