@@ -24,8 +24,7 @@ public class Data {
         Prescription.setPrescriptionCount(0);
         Order.setOrderCount(0);
     }
-
-
+    
     /**
      * Function to generate test data to test list commands.
      */
