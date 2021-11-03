@@ -223,9 +223,9 @@ public class Ui {
             int count = clientPackages.getClientPackageCount();
             show("Subscribed Clients:");
             for (int i = 0; i < count; i++) {
-                Tour currTour = clientPackages.get(i).getTour();
+                Tour currTour = clientPackages.getClientPackageByIndex(i).getTour();
                 if (currTour.equals(foundTour)) {
-                    String currClientName = clientPackages.get(i).getClient().getName();
+                    String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     subbedClients++;
                 }
@@ -389,9 +389,9 @@ public class Ui {
             int count = clientPackages.getClientPackageCount();
             show("Passengers:");
             for (int i = 0; i < count; i++) {
-                Flight currFlight = clientPackages.get(i).getFlight();
+                Flight currFlight = clientPackages.getClientPackageByIndex(i).getFlight();
                 if (currFlight.equals(foundFlight)) {
-                    String currClientName = clientPackages.get(i).getClient().getName();
+                    String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     passengers++;
                 }
@@ -410,14 +410,14 @@ public class Ui {
         }
         show(LIST_MESSAGE + "packages:");
         for (int i = 0; i < count; i++) {
-            ClientPackage currPackage = clientPackages.get(i);
+            ClientPackage currPackage = clientPackages.getClientPackageByIndex(i);
             show((i + 1) + ". " + currPackage + "\n" + "\n");
         }
         show("Total Packages:" + count);
     }
 
     public void showFindClientPackage(ClientPackageList packages, int index) {
-        ClientPackage foundPackage = packages.get(index - 1);
+        ClientPackage foundPackage = packages.getClientPackageByIndex(index - 1);
         if (foundPackage != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
             show(foundPackage + "\n" + "\n");

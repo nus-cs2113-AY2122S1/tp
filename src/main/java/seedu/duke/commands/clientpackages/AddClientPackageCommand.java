@@ -30,6 +30,10 @@ public class AddClientPackageCommand extends Command {
         }
     }
 
+    public ClientPackage getClientPackage() {
+        return clientPackage;
+    }
+
     private void createClientPackage() {
         try {
             String clientPackageId = rawClientPackage[0];
