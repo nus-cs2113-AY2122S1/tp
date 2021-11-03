@@ -205,6 +205,10 @@ Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
 - The recipe is added to the recipe list.
 - The ingredients and the quantity can be added in any order, but the first ingredient will correspond to the first
  quantity entered, second ingredient to second quantity entered etc.
+- A recipe must have at least one ingredient.
+- If there are too many ingredients in the recipe, users can add at least one ingredient first with `add recipe` and
+  add the rest later on to avoid confusion
+  (see [Update recipe](#updating-quantities-of-ingredients-in-a-recipe-update-recipe))
 - The units of the ingredients in the recipe will follow the units of the ingredients 
   saved in the ingredient repository.
 - If the ingredients of the recipe do not exist in the ingredient repository when adding the recipe, the
