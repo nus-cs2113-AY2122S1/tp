@@ -37,7 +37,7 @@ public class CutClientCommand extends Command {
 
     private void cutClient() throws TourPlannerException {
         this.client = clients.getClientById(clientId);
-        int newClientCount = clients.getClientCount() - 1;
+        final int newClientCount = clients.getClientCount() - 1;
         ui.showCut(client);
         ui.showLine();
         clients.cut(client);
