@@ -47,54 +47,56 @@ Developer Guide was adapted from [se-education.org/addressbook-level3](https://s
    1. Open a new tab
    1. Select the clone button at the top of the menu
    1. Key in the details of this repository
-1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11.
+1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11
 1. **Import the project as a Gradle project:** Follow the guide [Intellij IDEA: Importing a Gradle project
    ](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
 1. **Verify the setup:**
-   1. Run the seedu.address.Main and try a few commands.
-   1. Run the tests to ensure they all pass.
+   1. Run the seedu.address.Main and try a few commands
+   1. Run the tests to ensure they all pass
 
 ## Design & Implementation
 
 ### Architecture
 
+The diagram below describes the design of the app and how it functions:
+
 ![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
-The Diagram above explains how the App is designed and will function
+Given below is a quick overview of all the main components of Gordon as well as how these components interact with each other.
 
-Given below we have a quick overview of all the main components of Gordon as well as how these pieces interact with each other
+#### Main Components
 
-*Main Components*
-
-`Main` contains both `main` and `run`. It is responsible for:
+`Main` contains both `main` and `run`.
 
 1. Once the App is launched, `main` will call `run` to initialize the necessary components for the App to function properly
-2. On exit, the App will print the corresponding messages and execute the necessary cleanup methods.
+1. On exit, the App will print the corresponding messages and execute the necessary cleanup methods
 
 The App is organized by the `command`, `exception`, `kitchen`, and `util` packages that represent a collection of various different components that are deal with different parts of the functions of the App
 
 1. `command`: Contains all the `XYZ_Command` components that deal with the inputs that the user is able to make.
-2. `exception`: Contains all the the `GordonException` component that is used throughout the App
-3. `kitchen`: Contains the `Cookbook` and `Recipe` components that deal with the management of the cookbook
-4. `util`: Contains the `Difficulty`, `Parser`, `Tag` and `UI` components that deal with the functionality of the App
+1. `exception`: Contains all the `GordonException` components that are used throughout the App to handle errors
+1. `kitchen`: Contains the `Cookbook` and `Recipe` components that deal with the management of the cookbook database
+1. `util`: Contains the `Difficulty`, `Parser`, `Tag` and `UI` components that deal with the functionality of the App
 
-*How do these components interact with each other*
+#### How do these components interact with each other
 
-The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
+The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`:
 
 ![Add Sequence Diagram](./RenderedUML/AddSequence.svg)
 
 ### Kitchen component
 
-The Diagram below is the class diagram for the `Cookbook` and `Recipe` Classes in the ``Kitchen`` package
+The diagrams below are the class diagrams for the `Cookbook` and `Recipe` Classes in the ``Kitchen`` package:
 
-`COOKBOOK`
+> `COOKBOOK`
+>
+> ![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
+> 
 
-![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
-
-`RECIPE`
-
-![Recipe Class Diagram](./RenderedUML/Recipe.svg)
+> `RECIPE`
+>
+> ![Recipe Class Diagram](./RenderedUML/Recipe.svg)
+> 
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 The `Recipe` Class is instantiated by the `Parser` Class, and contains methods to update an existing recipe.
@@ -102,50 +104,44 @@ The `Recipe` Class is instantiated by the `Parser` Class, and contains methods t
 The `Cookbook` class consists of 2 main attributes
 
 1. The array `recipes` that stores all the main recipes currently in Gordon.
-2. The array `cookbookTags` that stores all the tags currently in Gordon.
+1. The array `cookbookTags` that stores all the tags currently in Gordon.
 
-The `Kichen` package can be classified into 3 main functionalities:
+The `Kitchen` package can be classified into **3** main functionalities:
 
-1. Recipe Management in `Cookbook` : 
-  - `addRecipe` : Adds recipe to Cookbook
-  - `removeRecipe` : Remove recipe from Cookbook
-  - `checkRecipe` : Checks whether recipe exists in Cookbook
-  - `setIngredients` : Updates the ***ingredients*** of a recipe in the Cookbook
-  - `setSteps` : Updates the ***steps*** of a recipe in the Cookbook
-  - `setCalories` : Adds ***calories*** to a recipe in the Cookbook
-  - `setPrice` : Adds ***price*** to a recipe in the Cookbook
-  - `setTime` : Adds ***cooking time*** and ***preparation time*** to a recipe in the Cookbook
-  - `setDifficulty` : Adds ***difficulty*** to a recipe in the Cookbook
-
-For example, the diagram below shows the sequence diagram when user wants to add ***calories*** to a recipe
-
-![AddCalories Sequence Diagram](./RenderedUML/SetCalories.svg)
-
-2. Tag Management in `Cookbook` :
-  - `addCookbookTag` : Add a new tag to the ***cookbookTags*** array
-  - `deleteCookbookTag` : Deletes a tag from the ***cookbookTags*** array
-  - `appendRecipeToCookbookTag` : Associates a recipe with a tag
-  - `deleteRecipeToCookBookTag` : Removes a recipe's association with a tag
-  - `addTagToRecipes` : Adds a tag to a recipe
-  - `deleteTagFromRecipes` : Deletes a tag from a recipe
-  - `listCookBookTags` : List all tags in the Cookbook
-  - `doesCookBookTagExist` : Check whether a tag exists 
-
-For example, the diagram below shows the sequence diagram for when user wants to add ***tag*** to a recipe
-
-![AddTags Sequence Diagram](./RenderedUML/AddTag.svg)
-
-3. Filter Recipes in `Cookbook` by different traits (such as *ingredients*, *tags*, *calories* etc.): 
-  - `filterByIngredients` : Filter by ***ingredients***
-  - `filterByTags` : Filter by ***tags***
-  - `filterByDifficulty` : Filter by ***difficulty***
-  - `filterByPrice` : Filter by ***price***
-  - `filterByCalories` : Filter by ***calories***
-  - `filterByTime` : Filter by ***cooking time*** and ***preparation time***
+1. Recipe Management in `Cookbook` :
+   * `addRecipe` : Adds recipe to Cookbook
+   * `removeRecipe` : Remove recipe from Cookbook
+   * `checkRecipe` : Checks whether recipe exists in Cookbook
+   * `setIngredients` : Updates the ***ingredients*** of a recipe in the Cookbook
+   * `setSteps` : Updates the ***steps*** of a recipe in the Cookbook
+   * `setCalories` : Adds ***calories*** to a recipe in the Cookbook
+   * `setPrice` : Adds ***price*** to a recipe in the Cookbook
+   * `setTime` : Adds ***cooking time*** and ***preparation time*** to a recipe in the Cookbook
+   * `setDifficulty` : Adds ***difficulty*** to a recipe in the Cookbook
+   * For example, the diagram below shows the sequence diagram when user wants to add ***calories*** to a recipe
+     ![AddCalories Sequence Diagram](./RenderedUML/SetCalories.svg)
+1. Tag Management in `Cookbook` :
+   * `addCookbookTag` : Add a new tag to the ***cookbookTags*** array
+   * `deleteCookbookTag` : Deletes a tag from the ***cookbookTags*** array
+   * `appendRecipeToCookbookTag` : Associates a recipe with a tag
+   * `deleteRecipeToCookBookTag` : Removes a recipe's association with a tag
+   * `addTagToRecipes` : Adds a tag to a recipe
+   * `deleteTagFromRecipes` : Deletes a tag from a recipe
+   * `listCookBookTags` : List all tags in the Cookbook
+   * `doesCookBookTagExist` : Check whether a tag exists
+   * For example, the diagram below shows the sequence diagram for when user wants to add ***tag*** to a recipe
+    ![AddTags Sequence Diagram](./RenderedUML/AddTag.svg)
+1. Filter Recipes in `Cookbook` by different traits (such as *ingredients*, *tags*, *calories* etc.): 
+   * `filterByIngredients` : Filter by ***ingredients***
+   * `filterByTags` : Filter by ***tags***
+   * `filterByDifficulty` : Filter by ***difficulty***
+   * `filterByPrice` : Filter by ***price***
+   * `filterByCalories` : Filter by ***calories***
+   * `filterByTime` : Filter by ***cooking time*** and ***preparation time***
 
 ### Parser component
 
-The diagram below is the class diagram for the `Parser` class
+The diagram below is the class diagram for the `Parser` class:
 
 ![Command Class Diagram](./RenderedUML/Parser.svg)
 
@@ -158,7 +154,7 @@ Functions of the Parser class:
 
 ### Command component
 
-The Diagram below is the class diagram for the Command Class
+The Diagram below is the class diagram for the Command Class:
 
 ![Command Class Diagram](./RenderedUML/CommandRects.svg)
 
@@ -280,6 +276,7 @@ The diagram below is the class diagram for the Tag Class
 ![Tag Diagram](./RenderedUML/TagClassDiagramP.svg)
 
 #### Functions of the Tag Class:
+
 > 
 >The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
 >1. `getTagName` returns the _Tag Name_.
@@ -305,7 +302,7 @@ The diagram below is the class diagram for the Tag Class
 
 ### Value proposition
 
-A digital cookbook that works in Command-Line Interface that can provide all the necessary functions faster than from a typical mouse/GUI drive App
+A digital cookbook that works in Command-Line Interface that can provide all the necessary functions faster than from a typical mouse/GUI drive app
 
 ## User Stories
 
@@ -498,15 +495,16 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 
 ## Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java `11` or above installed.
-2. It should be able to hold thousands of recipes without any slowdown in performance
-3. A user with above average typing speed should be able to key in recipes faster than using a typical mouse/GUI application
+* Should work on any mainstream OS as long as it has Java `11` or above installed.
+* It should be able to hold thousands of recipes without any slowdown in performance
+* A user with above average typing speed should be able to key in recipes faster than using a typical mouse/GUI application
 
 ## Glossary
 
 * *Mainstream OS* - Windows, MacOS, Linux, Unix
 
 ## Instructions for manual testing
+
 - [I/O Tests](#io-tests)
 - [JUnit Tests](#junit-tests)
 
@@ -515,17 +513,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 #### Windows
 
 1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
-
 2. Run the `runtests.bat` script
-
 3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed.
 
 #### Mac/Unix/Linux
 
 1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
-
 2. Run the `runtests.sh` script
-
 3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed
 
 ### JUnit tests
