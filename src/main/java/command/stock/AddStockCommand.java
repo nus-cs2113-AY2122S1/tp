@@ -42,10 +42,10 @@ public class AddStockCommand extends Command {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         String[] optionalParameters = {};
-        String[] required = {CommandParameters.NAME, CommandParameters.QUANTITY,
+        String[] requiredParam = {CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
-        if (!checkValidParametersAndValues(ui, parameters, medicines, required,
+        if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParam,
                 optionalParameters)) {
             return;
         }
