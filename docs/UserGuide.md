@@ -214,6 +214,41 @@ Example of usage:
 - `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
 - `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
 
+Output:
+- If the ingredients do not exist in the list,
+  ```
+      ____________________________________________________________________________________________________
+       I've added this recipe:
+
+       Chicken Soup
+        - Chicken (qty: 1)
+        - Salt (qty: 20)
+
+       Now you have 3 recipe(s)
+
+       I've also added these ingredients:
+
+       Chicken
+       Salt
+
+       Please update the unit if required.
+      ____________________________________________________________________________________________________
+  ```
+- If the ingredients exist in the list,
+  ```
+      ____________________________________________________________________________________________________
+       I've added this recipe:
+
+       Chicken Soup
+       - Chicken (qty: 1)
+       - Salt (qty: 20)
+
+       Now you have 3 recipe(s)
+      ____________________________________________________________________________________________________
+  ```
+  
+  
+
 <br/>
 
 ### Deleting a recipe: `delete recipe`
@@ -231,6 +266,20 @@ Format : `delete recipe r/RECIPE`
 Example of usage:
 
 - `delete recipe r/Chicken Soup`
+
+Output:
+- If recipe is in the list.
+```
+    ____________________________________________________________________________________________________
+     I've deleted this recipe for you:
+     
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+     
+     Now you have 2 recipe(s)
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
@@ -254,6 +303,20 @@ Format: `cooked r/RECIPE`
 Example of usage: 
 - `cooked r/Chicken Soup`
 
+Output:
+- If there are sufficient ingredients.
+```
+    ____________________________________________________________________________________________________
+     Now you have these quantities left for your ingredients:
+
+     Chicken (qty: 1)
+     - 1 (2021-11-20)
+
+     Salt (qty: 20)
+     - 20 (2021-12-31)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Listing recipes that can be cooked: `list recipes I can cook`
@@ -270,6 +333,35 @@ Format: `list recipes i can cook`
 
 Example of usage: 
 - `list recipes i can cook`
+
+Output: 
+- If there are no expired ingredients
+```
+    ____________________________________________________________________________________________________
+     Here are the recipes you can cook with the ingredients you have:
+
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+    ____________________________________________________________________________________________________
+```
+
+- If there are expired ingredients
+```
+    ____________________________________________________________________________________________________
+     Here are the recipes you can cook with the ingredients you have:
+
+     Chicken Soup
+     - Chicken (qty: 1)
+     - Salt (qty: 20)
+
+     Note that some of these ingredients have expired:
+
+     Chicken
+
+     Please remove them if you don't want to use them for your recipe.
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
