@@ -33,6 +33,10 @@ Developer Guide was adapted from [se-education.org/addressbook-level3](https://s
 
 ## Getting started
 
+### User guide
+
+* Refer to our user guide [here](https://ay2122s1-cs2113t-w13-2.github.io/tp/UserGuide.html) to get a better understanding of how to use Gordon
+
 ### Recommended software (for optimal compatibility)
 
 * Github
