@@ -6,7 +6,7 @@ Content <|-- Note
 Content <|-- Link
 Content <|-- Question
 
-ContentManager  --> "0..*" Content : contents
+ContentManager  --> "*" Content : contents
 ContentManager ..>  Note
 ContentManager ..>  Link
 ContentManager ..> Question
@@ -24,7 +24,7 @@ class ContentManager <T extends Content> {
 }
 !endsub
 
-abstract class "{abstract}\nContent" as Content{
+class "{abstract}\nContent" as Content{
   # name: String
   # data: String
 }

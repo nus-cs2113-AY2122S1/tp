@@ -1,17 +1,19 @@
 @startuml
 
-CommandParser --> "2..*" Command: has >
-Terminus -> "0..1" CommandParser: commandParser
-
+skinparam classAttributeIconSize 0
+hide circle
+"{abstract}\nCommandParser" --> "2..*" "{abstract}\nCommand": has >
+Terminus -> "0..1" "{abstract}\nCommandParser": commandParser
+XYZCommandParser --|>  "{abstract}\nCommandParser"
 !startsub COMMANDPARSER
-abstract class "{abstract}\nCommandParser" as CommandParser {
+abstract class "{abstract}\nCommandParser" {
  - workplace: String
  + CommandParser(workspace: String)
  + {abstract} parseCommand(command: String): Command
  + getHelpMenu(): String[]
 }
 !endsub
-class XYZCommandParser extends CommandParser {
+class XYZCommandParser  {
 - commandParser: XYZCommandParser
 + parseCommand(command: String): Command
 + {static} getInstance(): XYZCommandParser

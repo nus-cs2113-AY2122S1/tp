@@ -8,7 +8,7 @@ NusModule -> "1" ContentManager: noteManager
 NusModule -> "1" ContentManager: linkManager
 NusModule -> "1" ContentManager: questionManager
 
-ModuleManager  --> "0..*" NusModule :  has >
+ModuleManager  --> "*" NusModule :  has >
 !startsub MODULEMANAGER
 class ModuleManager {
   + getAllModules(): String []

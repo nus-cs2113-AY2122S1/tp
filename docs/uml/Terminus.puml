@@ -1,0 +1,20 @@
+@startuml
+box "Main" #whitesmoke
+participant ":Terminus" as Terminus #white
+endbox
+box "UI" #bisque
+participant ":Ui" as Ui
+endbox
+box "Parser" #aquamarine
+participant ":MainCommandParser" as CommandParser #palegreen
+endbox
+autoactivate on
+-> Terminus: Terminus()
+  create Ui
+  Terminus-> Ui:getInstance()
+  return Ui;
+  create CommandParser
+  Terminus -> CommandParser:getInstance()
+  return MainCommandParser;
+return
+@enduml

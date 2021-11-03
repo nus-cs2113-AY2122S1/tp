@@ -7,12 +7,13 @@ participant ":ModuleWorkspaceCommandParser" as ModuleWorkspaceCommandParser
 participant ":NoteCommand" as NoteCommand
 participant ":NoteCommandParser" as NoteCommandParser
 participant ":AddNoteCommand" as AddNoteCommand
+participant ":CommandResult" as CommandResult
 autoactivate on
 Terminus -> MainCommandParser: parseCommand(command)
   MainCommandParser -> GoCommand: parseArguments(arguments)
   return
 return GoCommand
-Terminus -> GoCommand: execute(ui, moduleManager)
+Terminus -> GoCommand: execute(moduleManager)
    GoCommand -> ModuleManger: getModule(moduleName)
    return NusModule
    GoCommand -> ModuleWorkspaceCommandParser: setWorkspace(workspace)
@@ -20,7 +21,7 @@ Terminus -> GoCommand: execute(ui, moduleManager)
       alt if arguments != null
       GoCommand -> ModuleWorkspaceCommandParser:parseCommand(command)
       return NoteCommand
-      GoCommand -> NoteCommand : execute(ui, moduleManager)
+      GoCommand -> NoteCommand : execute(moduleManager)
         alt if arguments != null
           NoteCommand -> NoteCommandParser: setModule(moduleName)
           return
@@ -45,9 +46,4 @@ Terminus -> GoCommand: execute(ui, moduleManager)
         return CommandResult
       end
 return CommandResult
-
-
-
-
-
 @enduml

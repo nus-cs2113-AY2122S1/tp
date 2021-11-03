@@ -1,27 +1,31 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+box "Main" #whitesmoke
+participant ":Terminus" as Terminus #white
+endbox
+box "Storage" #lightpink
+participant ":StorageManager" as StorageManager #mistyrose
+endbox
+box "Module" #coral
+participant ":ModuleManager" as ModuleManager #lightsalmon
+endbox
 
 autoactivate on
-mainframe sd start
-  Terminus -> Terminus: start()
-    create Ui
-    Terminus -> Ui
-    return
-    Terminus -> CommandParser : getInstance()
-      create Command
-      CommandParser -> Command
-      return
-    return CommandParser
-    Terminus -> ModuleStorage : getInstance ()
-    return ModuleStorage
-    Terminus -> ModuleStorage: init (filePath)
-    return
-    Terminus -> ModuleStorage: loadFile()
+skinparam sequenceMessageAlign center
+mainframe sd Intialization
+
+ -> Terminus: initialize()
+
+    create StorageManager
+    Terminus -> StorageManager : StorageManager(DATA_DIRECTORY, MAIN_JSON)
+    return StorageManager
+    Terminus -> StorageManager: initialize()
     return ModuleManager
     opt moduleManager == null
       create ModuleManager
-      Terminus -> ModuleManager
-      return
+      Terminus -> ModuleManager: ModuleManager()
+      return ModuleManager
     end
   return
+
 @enduml

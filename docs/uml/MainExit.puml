@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+box "Main" #whitesmoke
+participant ":Terminus" as Terminus #white
+endbox
+box "Storage" #lightpink
+participant ":StorageManager" as StorageManager #mistyrose
+endbox
+
+
+autoactivate on
+skinparam sequenceMessageAlign center
+mainframe sd Exit
+
+ -> Terminus: exit()
+  Terminus -> StorageManager:setDisabled(false)
+  return
+  Terminus -> StorageManager:save(moduleManager);
+  return
+ return
+
+@enduml

@@ -1,38 +1,47 @@
 @startuml
 
-Command ..> "1" CommandResult: returns >
-Command ..> "1" ModuleManager: modifies
-Command ..> "1" Ui: uses
-CommandResult ..> "0..1" CommandParser: contains >
-CommandParser -> "2..*" Command: has >
+skinparam classAttributeIconSize 0
+hide circle
 
+"{abstract}\nCommand" ..> "1" CommandResult: returns >
+"{abstract}\nCommand" ..> "1" ModuleManager: modifies
+CommandResult ..> "0..1" "{abstract}\nCommandParser": contains >
+"{abstract}\nCommandParser" -> "2..*" "{abstract}\nCommand": has >
+XYZCommand --|> "{abstract}\nCommand"
 !startsub COMMAND
-abstract class "{abstract}\nCommand" as Command {
+abstract class "{abstract}\nCommand"  {
   # arguments: String
   - moduleName: String
   + {abstract} getFormat(): String
   + {abstract} getHelpMessage(): String
   + parseArguments(arguments: String): void
-  + {abstract} execute(ui: Ui, moduleManager: ModuleManager): CommandResult
+  + {abstract} execute(moduleManager: ModuleManager): CommandResult
 
 }
 !endsub
 
-class XYZCommand extends Command {
-  + execute(ui: Ui, moduleManager: ModuleManager): CommandResult
+class XYZCommand {
+  + execute(moduleManager: ModuleManager): CommandResult
   + getHelpMessage(): String
   + getFormat(): String
 }
 
 class CommandResult {
-  # additionalData: CommandParser
-  # isOk: boolean
+
+  # newCommandParser: CommandParser
+  # hasChange: boolean
   # isExit: boolean
+  # message: String[]
+  # storageAction: StorageActionEnum
+  # storageType: StorageTypeEnum
+  # module: String
   + isExit(): boolean
-  + getAdditionalData(): CommandParser
+  + getNewCommandParser(): CommandParser
+  + getMessage(): String[]
+  + getStorageAction(): StorageActionEnum
+  + getStorageType(): StorageTypeEnum
 }
 
-class Ui
 !includesub Module.puml!MODULEMANAGER
 !includesub ParserClassDiagram.puml!COMMANDPARSER
 @enduml

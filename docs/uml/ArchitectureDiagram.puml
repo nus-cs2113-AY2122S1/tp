@@ -1,0 +1,32 @@
+@startuml
+package UI #bisque
+skinparam actorStyle awesome
+actor User as user
+package Terminus #whitesmoke
+package Parser #aquamarine
+package Command #thistle
+package Module #coral
+package Content #goldenrod
+package ActiveRecall #lightblue
+package Storage #lightpink
+file data [
+  <size:100><&document></size>
+]
+
+user -> UI
+Terminus ..> UI
+Terminus ..> Parser
+Terminus ..> Command
+Parser ..> Command
+Content <.r. Module
+Command ..> Module
+ActiveRecall ...> UI
+Command ..> ActiveRecall
+Terminus ..> Storage
+
+ActiveRecall ..> Module
+Storage ..> Command
+Storage ..> Module
+Storage -> data
+Terminus ..> Module
+@enduml

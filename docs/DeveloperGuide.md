@@ -144,15 +144,50 @@ Import the coding style xml file into your IntelliJ IDEA.
 ## 3. Design
 
 ### 3.1 Architecture
+This section will provide insight to the general overview of **TermiNUS**'s architecture.
+
+![](attachments/ArchitectureDiagram.png)  
+
+The Architecture Diagram above describes the high-level design of **TermiNUS** and 
+how the different components interact with each other. Below we will provide a quick overview of 
+each component involved.  
+
+The `Terminus` class is the main entry point of the application and contains the `main` method used 
+by Java as the starting function.
+
+The `Terminus` class main responsibilities include:
+- Initializing various components required for the program to run.
+- Requesting the specific modules to load data from file into the program.
+- Performing any data entry saving and clean up when the program is going to terminate.
+
+The rest of **TermiNUS** consists of 7 other components:
+- `UI`: Manages the input and output of **TermiNUS**.
+- `Parser`: Parses the user inputs and their arguments.
+- `Command`: Execute the required commands and store the output.
+- `Module`: Manage the multiple different types of `Content`
+- `Content`: Stores and Provides user information.
+- `Storage`: Reads the data, and writes data back to the hard disk.
+
+Below contains some example sequence diagram to help illustrate the general program flow and 
+how the many object interact with one another in `TermiNUS`.  
+
+The first diagram shows the constructor of `Terminus` class running to initialize essential Modules 
+such as `UI` and `Parser`.  
+
+![](attachments/Terminus.png)  
+
+The next sequence diagram shows the loading of user data into `Terminus`.  
 
 ![](attachments/MainInit.png)  
 
-Initialization of all the classes required for Terminus class to run
+The next sequence diagram shows an instance of command execution.
 
 ![](attachments/MainLogic.png)
 
-Main loop logic of Terminus
+The next sequence diagram show the termination of `Terminus`  
 
+![](attachments/MainExit.png)
+  
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
 
@@ -177,9 +212,9 @@ each representing a specific type command parser. The `CommandParser` will recei
 returning the according `Command` object back. 
 
 The `CommandParser` implements the following functionality:
-- Parsing the command string and giving the respective `Command` object 
-- Keeps track of the workspace
-- Provides functionality to list all commands for the help `Command`
+- Parsing the command string and giving the respective `Command` object. 
+- Keeps track of the workspace.
+- Provides functionality to list all commands for the help `Command`.
 
 
 ### 3.4 Command Component
@@ -189,11 +224,13 @@ The Command Component `Command` class, `CommandResult` class and multiple `XYZCo
 each representing a specific type of command. Each `Command` will `parseArguments` and set them 
 to private variables, and then `execute` would run specific operation specified by `XYZCommand`.
 The `Command` would then modify the required changes in `ModuleManager` and 
-print the required to be output to `Ui` before returning a `CommandResult`.   
+store the resulting output message in `CommandResult`.   
 
-The `CommandResult` will contains certain attributes to indicate if the `Terminus` loop should be 
-terminated or if the `CommandParser` might require changing through the `additionData` attribute.
-The `CommandParser` maybe used to change workspace.
+The `CommandResult` will contains certain attributes that will indicate certain operations:
+- Contains a `message` to be printed as the output for the `Command`.
+- Contains the `newCommandParser` required to switch workspaces.
+- Indicate the if file operations are required and the corresponding actions.
+- Tracks if the program should terminate.
 
 
 ### 3.5 Module Component
@@ -206,9 +243,9 @@ The `NusModule` consist of `ContentManager` which help to manage `Content`.
 The `ContentManager` accepts a `Content` type generic which is from the Content Component
 
 The `ModuleManager` implements the below functionality:
-- add, delete or retrieve a specific `NusModule`
-- list all module names
-- grants access to the different types of content stored by `NusModule`
+- Add, delete or retrieve a specific `NusModule`.
+- List all module names.
+- Grants access to the different types of content stored by `NusModule`.
 
 ### 3.6 Content Component
 ![](attachments/Content.png)
@@ -217,14 +254,12 @@ The Content Component consist of objects such as `Link`, `Question` and `Note`
 which inherit from the abstract `Content` class. The `ContentManager` allows a generic 
 `<T extends Content>` which must belong to the `Content` type or its children. The 
 `ContentManager` manages an `ArrayList` of Content type and provide the following functionality:
-
-
-- adding of any Content type
-- removing any Content
-- accessing the Content and the inner data attribute
-- getting the total number of content
-- listing all contents
-- accessing the arraylist of contents
+- Adding of any Content type.
+- Removing any Content.
+- Accessing the Content and the inner data attribute.
+- Getting the total number of content.
+- Listing all contents.
+- Accessing the arraylist of contents.
 
 ### 3.7 Active Recall Component
 ![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
