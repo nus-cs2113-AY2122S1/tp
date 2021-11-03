@@ -25,6 +25,7 @@ public class AddParser extends Parser {
     private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goalIndex has to be a number.";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number.";
+    private static final String ERROR_INTERVAL_NEGATIVE = "The interval has to be a positive integer.";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
@@ -105,6 +106,9 @@ public class AddParser extends Parser {
         String[] parameters = splitInput(input);
         String habitName = getName(parameters).trim();
         int interval = getInterval(parameters);
+        if (interval < 0) {
+            throw new HaBitParserException(ERROR_INTERVAL_NEGATIVE);
+        }
         return new Habit(habitName, interval);
     }
 
