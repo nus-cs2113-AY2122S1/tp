@@ -29,7 +29,7 @@
   - [5.5 Glossary](#55-glossary)
 - [6. Appendix: Instructions for manual testing](#6-appendix-instructions-for-manual-testing)
   
-# 1. Introduction
+## 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
 their assignments and semester-related information via CLI (command-line interface).
 
@@ -40,7 +40,7 @@ paradigm to provide the following benefits during the development of the applica
 - Reuse of code through inheritance 
 - Flexibility through polymorphism
 
-## 1.1 Purpose
+### 1.1 Purpose
 This developer guide is intended for software developers, designers, or testers who wish
 to contribute to the development of the **SchedUrMods** application. 
 
@@ -48,7 +48,7 @@ The guide provides an overall architectural view of **SchedUrMods** and describe
 implementation of key features of the application that is supplemented with easy to understand
 UML diagrams.
 
-## 1.2 Acknowledgements
+### 1.2 Acknowledgements
 This section provides a list 3rd-party libraries adapted in the development of **SchedUrMods**.
 
 1. [iCal4J](http://ical4j.github.io/)
@@ -57,10 +57,10 @@ This section provides a list 3rd-party libraries adapted in the development of *
 4. [Checkstyle](https://checkstyle.sourceforge.io/)
 5. [JUnit](https://junit.org)
 
-# 2. Setting up, getting started
+## 2. Setting up, getting started
 This section provides instructions on how to set up the development environment of the **SchedUrMods** application.
 
-## 2.1 Pre-requisites
+### 2.1 Pre-requisites
 Please ensure that you have the following software installed, prior to setting up the project:
 
 1. IDE: [`IntelliJ IDEA`](https://www.jetbrains.com/idea/download/)
@@ -70,13 +70,13 @@ Please ensure that you have the following software installed, prior to setting u
 3. Revision Control: [`SourceTree`](https://www.sourcetreeapp.com/)
    1. Version control software used by development team.
 
-## 2.2 Download the project on your computer
+### 2.2 Download the project on your computer
 Please follow the following steps below to download the project file on your computer:
 
 1. Click [here](https://github.com/AY2122S1-CS2113T-W13-3/tp) to access the Github repository of the **SchedUrMods** application. 
 2. **Fork** and **Clone** the repository using `SourceTree`.
 
-## 2.3 Setting up the project in IntelliJ
+### 2.3 Setting up the project in IntelliJ
 Please follow the following steps below to set up the project in `IntelliJ`:
 
 1. Launch `IntelliJ` application.
@@ -105,8 +105,8 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 [user]:
 ```
       
-# 3. Design
-## 3.1 Architecture
+## 3. Design
+### 3.1 Architecture
 <p align="center">
     <img src="images/AmosUMLDiagrams/Architecture.png">
 </p>
@@ -139,26 +139,34 @@ scenario where the **user inputs any valid command** in to the application.
     <img src="images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
 
-## 3.2 UI Component
+### 3.2 UI Component
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/src/main/java/seedu/duke/ui/Ui.java)
 
-## 3.3 Parser Component
-
-## 3.4 Command Component
-
-## 3.5 TaskManager Component
-
-## 3.6 Storage Component
-
-## 3.7 Utility Component
-
-## 3.8 Logger Component
-
-## 3.9 NUSMods API Component
+<p align="center">
+    <img src="images/AmosUMLDiagrams/CD_UIComponent.png">
+</p>
 
 
-# 4. Implementation
 
-## 4.1 Adding Tasks
+
+### 3.3 Parser Component
+
+### 3.4 Command Component
+
+### 3.5 TaskManager Component
+
+### 3.6 Storage Component
+
+### 3.7 Utility Component
+
+### 3.8 Logger Component
+
+### 3.9 NUSMods API Component
+
+
+## 4. Implementation
+
+### 4.1 Adding Tasks
 Tasks are managed by the `TaskManager` class and are all stored in memory using a `private static ArrayList<Task>`.
 The TaskManager provides functionality such as:
 * listing the tasks `listTaskList(HashMap<String, String> filter)`.
@@ -181,13 +189,13 @@ The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 
 The same logical structure is used in the Deadline and Event factories.  
 
-## 4.2 Filtering the tasklist
+### 4.2 Filtering the tasklist
 
-## 4.3 Sorting the tasklist
+### 4.3 Sorting the tasklist
 
-# 5. Appendix: Requirements
+## 5. Appendix: Requirements
 
-## 5.1 Product scope
+### 5.1 Product scope
 **Target User Profile**
 
 The target user profile of **SchedUrMods** are NUS students from all faculties.
@@ -199,7 +207,7 @@ The target user profile of **SchedUrMods** are NUS students from all faculties.
 - Needs a quick way to launch lesson zoom links.
 - Needs a quick way to view semester timetable.
 
-## 5.2 User stories
+### 5.2 User stories
 **Priorities**: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ... | I want to ... | So that I can ...|
@@ -207,19 +215,19 @@ The target user profile of **SchedUrMods** are NUS students from all faculties.
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## 5.3 Use cases
+### 5.3 Use cases
 {Describe the use cases}
 
-## 5.4 Non-Functional Requirements
+### 5.4 Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-## 5.5 Glossary
+### 5.5 Glossary
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-# 6. Appendix: Instructions for manual testing
+## 6. Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
