@@ -170,6 +170,24 @@ Expected Output:
   ========================================
 ```
 
+### Listing items that are due on a specific date
+List the loaned items that are due on a specific date given in the input
+
+> ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
+
+Format: `deadline d/dd-mm-yyyy`
+
+Example: `deadline d/03-11-2021`
+
+Expected Output:
+```
+  (+) Listing out loaned items that are due this date: 03-11-2021
+  ========================================
+  [M] 58720a | LOANED (Sam TILL 03-11-2021) | Time Magazine | Time USA | oct252021
+  ========================================
+```
+
+
 ### Search item by ID, Title, Status, Category
 Search items by ID, Title, Status, and Category.
 
@@ -241,6 +259,8 @@ Expected Output:
 ### Loan items
 Loan out an item to an individual until a specific due date.
 
+> ℹ️ Only `AVAILABLE` items can be loaned out
+
 > ℹ️ Items that have been previously reserved by an individual can only be loaned out to the same individual
 
 > ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
@@ -258,6 +278,9 @@ Expected Output:
 
 ### Return items
 Mark a previously loaned item as returned, making it available again.
+
+> ℹ️ Only `LOANED` items can be returned. Unsuccessful message will be displayed when 
+> you return items that are not loaned out.
 
 Format: `return ID`
 
