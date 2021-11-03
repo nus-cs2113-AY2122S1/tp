@@ -5,6 +5,7 @@ import seplanner.modules.ModuleMapping;
 
 import static java.lang.System.out;
 
+// @@author titustortoiseturtle1999
 public class UiMapping extends Ui {
 
     public static void printMappingForList(ModuleMapping mm, int index) {

@@ -1,6 +1,7 @@
 package seplanner.constants;
 
 public class Constants {
+    // @@author titustortoiseturtle1999
     // Ui
     public static final String INDEX_WRAP_FRONT = "[";
     public static final String INDEX_WRAP_BACK = "]";
@@ -13,7 +14,7 @@ public class Constants {
     public static final int INDEX_LENGTH = 3;
     public static final int UNIVERSITY_NAME_LENGTH = 50;
     public static int MODUlE_NAME_LENGTH = 40;
-
+    // @@author
     // Commands
     public static final String COMMAND_REMOVE = "remove";
     public static final String COMMAND_ADD = "add";
