@@ -1,5 +1,7 @@
-package medbot;
+package medbot.storagetests;
 
+import medbot.Appointment;
+import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItemType;
 import medbot.list.MedicalStaffList;
@@ -44,7 +46,7 @@ class StorageTest {
     @Test
     public void testLoadPatientStorage_partialInvalidFormat()
             throws MedBotException, FileNotFoundException {
-        PatientStorage patientStorage = new PatientStorage(PATIENT_DATA_INVALID);
+        PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_INVALID);
         Scheduler actualScheduler = new Scheduler();
 
         String actualLoadStorageErrorMessage = patientStorage.loadStorage(ListItemType.PATIENT, actualScheduler);
@@ -66,7 +68,7 @@ class StorageTest {
     // actual: patients added through loading storage
     @Test
     public void testLoadPatientStorage_validFormat() throws FileNotFoundException, MedBotException {
-        PatientStorage patientStorage = new PatientStorage(PATIENT_DATA_VALID);
+        PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
         Scheduler actualScheduler = new Scheduler();
 
         String actualLoadStorageErrorMessage = patientStorage.loadStorage(ListItemType.PATIENT, actualScheduler);
@@ -84,7 +86,7 @@ class StorageTest {
 
     @Test
     public void testLoadStaffStorage_partialInvalidFormat() throws MedBotException, FileNotFoundException {
-        StaffStorage staffStorage = new StaffStorage(STAFF_DATA_INVALID);
+        StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_INVALID);
         Scheduler actualScheduler = new Scheduler();
 
         String actualLoadStorageErrorMessage = staffStorage.loadStorage(ListItemType.STAFF, actualScheduler);
@@ -104,7 +106,7 @@ class StorageTest {
 
     @Test
     public void testLoadStaffStorage_validFormat() throws MedBotException, FileNotFoundException {
-        StaffStorage staffStorage = new StaffStorage(STAFF_DATA_VALID);
+        StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_VALID);
         Scheduler actualScheduler = new Scheduler();
 
         String actualLoadStorageErrorMessage = staffStorage.loadStorage(ListItemType.STAFF, actualScheduler);
@@ -120,9 +122,9 @@ class StorageTest {
 
     @Test
     public void testLoadAppointmentStorage_partialInvalidFormat() throws MedBotException, FileNotFoundException {
-        PatientStorage patientStorage = new PatientStorage(PATIENT_DATA_VALID);
-        StaffStorage staffStorage = new StaffStorage(STAFF_DATA_VALID);
-        AppointmentStorage appointmentStorage = new AppointmentStorage(APPOINTMENT_DATA_INVALID);
+        PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
+        StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_VALID);
+        AppointmentStorage appointmentStorage = new AppointmentStorageStub(APPOINTMENT_DATA_INVALID);
         Scheduler actualScheduler = new Scheduler();
 
         patientStorage.loadStorage(ListItemType.PATIENT, actualScheduler);
@@ -147,9 +149,9 @@ class StorageTest {
 
     @Test
     public void testLoadAppointmentStorage_validFormat() throws MedBotException, FileNotFoundException {
-        PatientStorage patientStorage = new PatientStorage(PATIENT_DATA_VALID);
-        StaffStorage staffStorage = new StaffStorage(STAFF_DATA_VALID);
-        AppointmentStorage appointmentStorage = new AppointmentStorage(APPOINTMENT_DATA_VALID);
+        PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
+        StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_VALID);
+        AppointmentStorage appointmentStorage = new AppointmentStorageStub(APPOINTMENT_DATA_VALID);
         Scheduler actualScheduler = new Scheduler();
 
         patientStorage.loadStorage(ListItemType.PATIENT, actualScheduler);
@@ -171,9 +173,9 @@ class StorageTest {
     @Test
     public void testSaveData() throws MedBotException {
         //create test storage files
-        PatientStorage patientStorage = new PatientStorage(PATIENT_DATA_SAVED);
-        StaffStorage staffStorage = new StaffStorage(STAFF_DATA_SAVED);
-        AppointmentStorage appointmentStorage = new AppointmentStorage(APPOINTMENT_DATA_SAVED);
+        PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_SAVED);
+        StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_SAVED);
+        AppointmentStorage appointmentStorage = new AppointmentStorageStub(APPOINTMENT_DATA_SAVED);
 
         String expectedPatientStorageString = getTestPatientListStorageString();
         String expectedStaffStorageString = getTestStaffListStorageString();

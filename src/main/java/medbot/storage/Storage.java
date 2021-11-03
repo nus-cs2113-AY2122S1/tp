@@ -18,17 +18,19 @@ import static java.lang.Math.max;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 public abstract class Storage {
-    protected static final String ERROR_LOAD_STORAGE = "\nERROR: MedBot is unable to create/load its storage files.\n";
+    protected static final String ERROR_CREATE_STORAGE = "\nERROR: MedBot is unable to create/detect"
+            + " its storage files.\n";
     public static final String ERROR_SAVE_STORAGE = "\nERROR: MedBot is unable to save data into its storage files.\n";
     public static final String ERROR_MOVE_STORAGE_FILES = "\nPlease manually move medbot.jar to "
             + "a location where it has read and write privileges before running it again.\n\n"
             + "Exiting MedBot...\n";
+    protected static final String ERROR_NOT_LIST_ITEM = "Not a list item";
 
     protected File dataFile;
     protected String dataPath;
 
     /**
-     * Generic Constructor with creates a storage file if it doesn't already exist.
+     * Generic Constructor with creates a storage text file if it doesn't already exist.
      *
      * @param dataPathString String that is the path of the storage file
      * @throws MedBotException if storage file cannot be created and does not exist
@@ -41,14 +43,14 @@ public abstract class Storage {
             dataFile.createNewFile();
 
         } catch (IOException e) {
-            throw new MedBotException(ERROR_LOAD_STORAGE + ERROR_MOVE_STORAGE_FILES);
+            throw new MedBotException(ERROR_CREATE_STORAGE + ERROR_MOVE_STORAGE_FILES);
         }
     }
 
 
     /**
-     * Reads in storage file, parses each line and adds the data into the program
-     * returns all line numbers of storage file that are invalid.
+     * Reads in storage file, parses each line and adds the data into MedBot
+     * returns all line numbers of a storage file that are invalid.
      *
      * @param listItemType enum of ListItem type
      * @return Error message if there are formatting errors in storage file
@@ -103,7 +105,7 @@ public abstract class Storage {
             scheduler.setLastAppointmentId(lastAppointmentId);
             break;
         default:
-            throw new MedBotException("Not a list item");
+            throw new MedBotException(ERROR_NOT_LIST_ITEM);
 
         }
     }
@@ -148,8 +150,7 @@ public abstract class Storage {
      * @return Error message
      */
     protected String loadStorageLineErrorMessage(int lineNumber) {
-        return "Error: Line " + lineNumber + " of " + dataPath
-                + " is invalid!\n";
+        return "Error: Line " + lineNumber + " of " + dataPath + " is invalid!\n";
     }
 
     /**
@@ -160,7 +161,6 @@ public abstract class Storage {
      * @return a ListItem interfaced object
      * @throws MedBotException if a ListItem object fails to be created
      */
-    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws
-            MedBotException;
+    protected abstract ListItem createListItem(String storageLine, ListItemType listItemType) throws MedBotException;
 }
 

@@ -19,16 +19,19 @@ public class StorageManager {
             + "Please decide if you wish to:" + "\n"
             + "1. Enter 'exit' to exit MedBot to correct the storage files" + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
+    protected static final String ERROR_LOAD_STORAGE = "ERROR: MedBot has issues finding some or "
+            + "all of the storage files to load!";
 
     public StorageManager() {
     }
 
     /**
-     * Initializes all storage classes to be used for MedBot, and prints out any errors in storage files.
+     * Initializes all storage classes to be used for MedBot, and prints out the line number of invalid lines in
+     * the storage files and the name of the respective storage file.
      *
      * @param scheduler instance of scheduler class
      * @param ui        instance of ui class
-     * @throws MedBotException If there are any errors in storage files
+     * @throws MedBotException if unable to load any of the storage files
      */
     public void initializeStorages(Scheduler scheduler, Ui ui) throws MedBotException {
         patientStorage = new PatientStorage();
@@ -43,7 +46,7 @@ public class StorageManager {
                 ui.printOutput(loadStorageErrorMessage);
             }
         } catch (FileNotFoundException e) {
-            throw new MedBotException("ERROR: MedBot has issues finding some or all of the storage files to load!");
+            throw new MedBotException(ERROR_LOAD_STORAGE);
         }
     }
 
