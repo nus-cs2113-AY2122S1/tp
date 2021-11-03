@@ -15,8 +15,13 @@ import java.util.logging.Logger;
 public abstract class MedicineValidator {
     private static Logger logger = Logger.getLogger("MedicineValidator");
 
-    public MedicineValidator() {
+    public MedicineValidator(){
     }
+
+    public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
+                                                           ArrayList<Medicine> medicines, String commandSyntax);
+
+    public abstract boolean isValidColumn(Ui ui, String columnName);
 
     /**
      * Helps to check if the parameters and values required are provided by the user.
@@ -53,8 +58,6 @@ public abstract class MedicineValidator {
         return false;
     }
 
-    public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                           ArrayList<Medicine> medicines, String commandSyntax);
 
     /**
      * Helps to check if the parameters required are provided by the user.
@@ -162,8 +165,6 @@ public abstract class MedicineValidator {
         }
         return false;
     }
-
-    abstract boolean isValidColumn(Ui ui, String columnName);
 
     /**
      * Checks if name parameter exists.

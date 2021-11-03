@@ -125,23 +125,18 @@ public class ReceiveOrderCommand extends Command {
      * @return Boolean value indicating if order ID is valid.
      */
     private boolean checkOrderIdExist(Ui ui, ArrayList<Medicine> medicines) {
-        OrderValidator orderValidator = new OrderValidator();
+        MedicineValidator validator = new OrderValidator();
         String[] orderRequiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
+        LinkedHashMap<String, String> orderParameters = new LinkedHashMap<>();
+        if (parameters.containsKey(CommandParameters.ID)) {
+            orderParameters.put(CommandParameters.ID, parameters.get(CommandParameters.ID));
+        }
 
-        boolean orderIdNotProvided = orderValidator.containsInvalidParameters(ui, parameters,
-                orderRequiredParameters, optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false);
+        boolean orderIdNotProvided = validator.containsInvalidParametersAndValues(ui, medicines, orderParameters,
+                orderRequiredParameters, optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false, validator);
         if (orderIdNotProvided) {
             logger.log(Level.WARNING, "Order id is not specified by user!");
-            return false;
-        }
-        LinkedHashMap<String, String> orderParameters = new LinkedHashMap<>();
-        orderParameters.put(CommandParameters.ID, parameters.get(CommandParameters.ID)); // Only check for Order ID
-
-        boolean isInvalidOrderId = orderValidator.containsInvalidParameterValues(ui, orderParameters,
-                medicines, CommandSyntax.RECEIVE_ORDER_COMMAND);
-        if (isInvalidOrderId) {
-            logger.log(Level.WARNING, "Invalid order id specified by user!");
             return false;
         }
 
@@ -183,6 +178,7 @@ public class ReceiveOrderCommand extends Command {
         boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.RECEIVE_ORDER_COMMAND, false, validator);
         if (isInvalidInput) {
+            logger.log(Level.WARNING, "Invalid parameter or value specified by user");
             return false;
         }
         return true;

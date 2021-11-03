@@ -13,7 +13,8 @@ class "{abstract}\nMedicine"{
     -{static} medicines: ArrayList<Medicine>
     +{static} getInstance()
     +Medicine(medicineName: String, quantity: int)
-    +toFileFormat()
+    +toFileFormat() &#123;abstract&#125;
+    +toArchiveFormat() &#123;abstract&#125;
 }
 
 class "Stock"{
@@ -26,19 +27,21 @@ class "Stock"{
     #isDeleted: boolean
     +Stock(name: String, price: Double, quantity: int,
      expiry: Date, description: String, maxQuantity: int)
-    +toFileFormat(): void
+    +toFileFormat(): String
+    +toArchiveFormat(): String
 }
 
-class "Dispense"{
-    -{static} dispenseCount: int
-    #dispenseId: int
+class "Prescription"{
+    -{static} prescriptionCount: int
+    #prescriptionId: int
     #customerId: int
     #date: Date
     #staff: String
     #stockId: int
-    +Dispense(medicineName: String, quantity: int,
+    +Prescription(medicineName: String, quantity: int,
      customerId: String, date: Date, staff: String, stockId: int)
-    +toFileFormat(): void
+    +toFileFormat(): String
+    +toArchiveFormat(): String
 }
 
 class "Order"{
@@ -48,11 +51,12 @@ class "Order"{
     #isDelivered: boolean
     +Order(medicineName: String,
     quantity: int, date: Date)
-    +toFileFormat(): void
+    +toFileFormat(): String
+    +toArchiveFormat(): String
 }
 
 "{abstract}\nMedicine" <|-- "Stock"
-"{abstract}\nMedicine" <|-- "Dispense"
+"{abstract}\nMedicine" <|-- "Prescription"
 "{abstract}\nMedicine" <|-- "Order"
 
 note "Note: All the getter and setters are\nleft out in this diagram." as n1
