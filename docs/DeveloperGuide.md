@@ -664,7 +664,33 @@ You may monitor your Codecov progress in your pull request if you successfully p
 ## Appendix A: Product Scope
 
 
-## Appendix B: User Stories
+## Appendix B: User Stories  
+
+| Version | As a ... | I want to ... | So that I ... |
+|---------|----------|---------------|---------------|
+| 1.0 | disorganized student | be able to store my zoom links somewhere|  can easily view my links when required.|
+| 1.0 | student |  be able to retrieve my zoom links easily| can easily find them when required.|
+| 1.0 | student | be able to remove zoom links from my regular schedule | can fix any finished lessons. |
+| 1.0 | student |  be able to add notes taken during lecture| do no need to manage it physically myself.|
+| 1.0 | student | be able to delete my notes | can re-organize information taken down by me.|
+| 1.0 | student | be able to view the notes taken during lecture | can refer to them easily.|
+| 1.0 | student | be able to exit the app properly | can shut down my computer. |
+| 1.0 | student |  view all available commands in the app | know what commands are there in the application.|
+| 1.0 | student |  store my data persistently | can use the application properly. |
+| 2.0 | organised student |  categorize my notes to specific modules | can extract information only from that module I specified.|
+| 2.0 | learned student | add questions and answers | can view them later.|
+| 2.0 | student | be able to view my lessons for the day | can check my schedule for that day.|
+| 2.0 | student |  be reminded when my next class is |  would not miss any class accidentally.|
+| 2.0 | student | be able to extract the notes into a pdf format | can view on my phone outside of the app.|
+| 2.0 | student | be able to view my questions and answers | can revise on my module. |
+| 2.0 | student |  be able to organize my questions and answers into different topics | can find what I want easily.|
+| 2.0 | student | be able to delete my questions and answers | can delete the ones that are irrelevant. |
+| 2.0 | student | be able to extract information from one computer to the other | am able to sync information between multiple devices. |
+| 2.0 | student |  be able to create categories for my notes | can organize my notes better. |
+| 2.0 | student |  ensure that my timetables have no clashes | can have exams are on different timings / days.|
+| 2.0 | student |  edit a text file instead of within a terminal for lengthy texts | can use my favourite text editor to edit instead. |
+| 2.0 | student | view changes edited in the saved text file on the terminal | don't have to restart the program. |
+| 2.0 | student | be able to view my lessons for the week | can check my schedule for that week. |
 
 
 ## Appendix C: Non Functional Requirements

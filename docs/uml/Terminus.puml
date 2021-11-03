@@ -8,6 +8,7 @@ endbox
 box "Parser" #aquamarine
 participant ":MainCommandParser" as CommandParser #palegreen
 endbox
+skinparam sequenceMessageAlign center
 autoactivate on
 -> Terminus: Terminus()
   create Ui
