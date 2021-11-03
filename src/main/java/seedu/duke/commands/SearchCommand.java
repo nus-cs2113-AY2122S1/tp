@@ -71,7 +71,7 @@ public class SearchCommand extends Command {
      * Checks whether there is at least one valid argument.
      * @return True if there is at least one valid argument.
      */
-    private Boolean checkValidArgs() {
+    public Boolean checkValidArgs() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
             String k = entry.getKey();
             if (k == null) {
@@ -85,10 +85,10 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Checks whether the there are more than four arguments.
-     * @return True if there are indeed more than four arguments
+     * Checks whether there are additional arguments other than the four supported.
+     * @return True if there are arguements not supported
      */
-    private Boolean checkAdditionalArgs() {
+    public Boolean checkAdditionalArgs() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
             String k = entry.getKey();
             if (k == null) {
@@ -147,7 +147,7 @@ public class SearchCommand extends Command {
         return matches;
     }
 
-    private void handlesSearchCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+    public void handlesSearchCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (!checkValidArgs()) {
             throw new LibmgrException(SEARCH_FORMAT_INCORRECT);
         }
