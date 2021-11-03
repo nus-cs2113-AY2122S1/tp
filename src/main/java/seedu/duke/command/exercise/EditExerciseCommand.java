@@ -7,6 +7,7 @@ import seedu.duke.data.Exercise;
 import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
@@ -82,6 +83,11 @@ public class EditExerciseCommand extends Command {
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         try {
             Exercise toEdit = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
+
+            if (newSets < 0 || newReps < 0) {
+                LOGGER.log(Level.SEVERE, "Edit exercise failed - sets or reps <= 0");
+                throw new GetJackDException("Sets or reps must be more than 0.");
+            }
 
             LOGGER.info("Editing current exercise parameters with new exercise parameters");
             // Assigns new values to the parameters
