@@ -59,10 +59,10 @@ ________________________________________________________
 ## Using this guide
 This guide is meant to describe and explain how to use Get Jack'd, including the various commands and inputs.
 Here are some things to take note of while using this guide:
-* A  ⚠️ symbol indicates something important to note
+* ⚠️ indicates something important to note
 
 
-* A   ❗   symbol indicates something very important to note, failure to adhere to it may cause the program to crash.
+* ❗ indicates something very important to note, failure to adhere to it may cause the program to crash.
 
 
 * Words wrapped in square braces `[words]` are parameters, they are the parts of the command that you can change.
@@ -76,9 +76,10 @@ Here are some things to take note of while using this guide:
 
 Adds a new workout to the list of workouts. You are free to add a deadline to your workouts too.
 
-Format (without deadline): `create [WORKOUT_DESCRIPTION]`
+Format
+- No deadline: `create [WORKOUT_DESCRIPTION]`
 
-Format (with deadline): `create [WORKOUT_DESCRIPTION], [DEADLINE]`
+- With deadline: `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
 ⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
 
@@ -86,9 +87,8 @@ Format (with deadline): `create [WORKOUT_DESCRIPTION], [DEADLINE]`
  
 Usage examples: 
 
-`create abs`
-
-`create leg day, 2021-10-21`
+- No deadline: `create abs`
+- With deadline: `create leg day, 2021-10-21`
 
 Expected outcome (**no deadline specified**):
 
@@ -110,7 +110,10 @@ ________________________________________________________
 
 ### 2. Show all workouts: `list`
 
-Shows you all the workouts in the current list of workouts
+Shows you all the workouts in the current list of workouts, in **sorted** order: 
+workouts with deadlines (in ascending order), then workouts without deadlines.
+
+⚠ Since the workouts are sorted , whenever you create or delete a workout, the indices of other workout might change!️
 
 Usage example:
 
@@ -122,8 +125,10 @@ Expected outcome:
 list
 ________________________________________________________
 Workout list:
-1. abs finish by: 25 Dec 2021
-2. leg day finish by: 21 Oct 2021
+1. leg day finish by: 21 Oct 2021
+2. abs finish by: 25 Dec 2021
+3. run
+4. jog
 ________________________________________________________
 ```
 
@@ -152,40 +157,59 @@ ________________________________________________________
 
 Adds an exercise to a specified workout
 
-Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
-* Note the comma  `,`  separating the command arguments
+Format (in main mode): `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
+Format (in workout mode): `add [EXERCISE_DESCRIPTION], [SETS] [REPS]`
+* Note the comma and space `, `  separating the command arguments
 * Sets and reps are entered in the form of two numbers separated by a space 
 
-⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+⚠️ There must be a space between the comma `, ` and the next parameter as shown in the format.
 
 Usage examples:
 
-`add squats, 5 10, 1`  = squats, 5 sets of 10 reps, add to workout 1
+- Main mode: `add squats, 5 10, 2`  = squats, 5 sets of 10 reps, add to workout 2
 
-`add lunges, 4 8, 1` = lunges, 4 sets of 8 reps, add to workout 1
+- Workout mode:
+`enter 1`
+`add lunges, 4 8` = lunges, 4 sets of 8 reps, add to workout 1
 
-Expected outcome:
+Expected outcome (main mode):
 
 ```
-add squats, 5 10, 1
+add squats, 5 10, 2
 ________________________________________________________
 New exercise added: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
+```
+
+Expected outcome (workout mode):
+```
+enter 1
+			________________________________________________________
+			Now inside Workout: leg day finish by: 21 Oct 2021
+			________________________________________________________
+add lunges, 4 8
+			________________________________________________________
+			New exercise added: [ ] lunges | 4 sets of 8 reps
+			________________________________________________________
 ```
 
 ### 5. Mark an exercise done: `done`
 
 Marks an exercise from a specified workout as done
 
-Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
+Format 
+- Main mode: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+- Workout mode: `done [EXERCISE_INDEX]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Usage example:
 
-`done 1, 2` = mark exercise 1 from workout 2 as done
+- Main mode: `done 1, 2` = mark exercise 1 from workout 2 as done
+- Workout mode: `enter 1` then `done 1` = mark exercise 1 from workout 1 as done
 
-Expected outcome:
+Expected outcome (main mode):
 
 ```
 done 2, 1
@@ -193,19 +217,34 @@ ________________________________________________________
 Completed: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
+Expected outcome (workout mode): 
+```
+enter 1
+			________________________________________________________
+			Now inside Workout: leg day finish by: 21 Oct 2021
+			________________________________________________________
+done 1
+			________________________________________________________
+			Completed: [X] lunges | 3 sets of 8 reps
+			________________________________________________________
+
+```
 
 ### 6. Editing an exercise in a workout: `edit`
 
 Edits an exercise in a specified workout
 
-Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+Format
+- Main mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+- Workout mode: `edit [EXERCISE_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
-Examples of usage:
-
-`edit 2, 1, kickbacks, 4 12 ` = edit exercise 2 from workout 1 to new exercise description of "kickbacks", new
-sets of "4" and new reps of "12"
+Usage example:
+- Main mode: `edit 2, 1, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
+sets of `4` and new reps of `12`
+- Workout mode: `enter 1` then `edit 2, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
+  sets of `4` and new reps of `12`
 
 Expected outcome:
 ```
@@ -219,11 +258,14 @@ ________________________________________________________
 
 Shows you all the exercises in a specified workout
 
-Format: `display [WORKOUT_INDEX]`
+Format
+- Main mode: `display [WORKOUT_INDEX]`
+- Workout mode: `display`
 
 Usage example:
 
-`display 1` = Show all exercises from workout 1
+- Main mode: `display 1` = Show all exercises from workout 1
+- Workout mode: `enter 1` then `display` = show all exercises from workout 1
 
 Expected outcome:
 
@@ -262,28 +304,34 @@ ________________________________________________________
 
 ### 9. Searching for workouts and exercises: `search`
 
-Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.\n"
+Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.
+
+In order to search by date, you must enter the full date in the format d MMM yyyy.
 
 Format: `search [KEYWORD]`
 
 Example of usage:
 
-`search kickbacks` = search for workout names and exercise names that contain "kickbacks"
+`search 2 oct 2021` = search for workouts that have the deadline 2 Oct 2021
 
-`search leg day` = search for workout names and exercise names that contain "leg day"
+`search kick` = search for workout names and exercise names that contain "kick"
 
-Expected outcome:
+Expected outcome (search by name)
 
 ```
-search kickbacks
+search kick
 ________________________________________________________
-Matching exercises in 1) leg day
+Matching exercises in (1) leg day
 1. [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
-search leg day
+```
+
+Expected outcome (search by date)
+```
+search 2 oct 2021
 ________________________________________________________
 Matching workouts: 
-1. leg day finish by: 21 Oct 2021
+1. leg day finish by: 2 Oct 2021
 ________________________________________________________
 ```
 
@@ -295,8 +343,6 @@ in the context of the workout routine you have entered, saving you the trouble o
 Format: `enter [WORKOUT_INDEX]`
 
 Example of usage:
-
-`enter 1` = enter into the workout with index 1
 
 `enter 2` = enter into the workout with index 2
 

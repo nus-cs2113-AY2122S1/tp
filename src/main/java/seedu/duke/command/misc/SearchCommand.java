@@ -29,7 +29,7 @@ public class SearchCommand extends Command {
             + "\tKEYWORD - word to search for\n"
             + "Example: " + COMMAND_WORD + " abs\n"
             + "Example: " + COMMAND_WORD + " 5 Nov 2021"
-            + "Important: The date must match the format d MMM yyyy exactly if you want to search by date.\n";
+            + "Important: The date must match the format d MMM yyyy if you want to search by date.\n";
 
 
     public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";
