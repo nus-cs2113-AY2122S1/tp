@@ -41,8 +41,7 @@ Format: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]`
 Example of usage:
 - `add i/Red Apple`
 - `add i/Salt u/g`
-- `add i/Red Apple q/5 e/2021-10-08`
-- `add i/Salt u/g q/1000 e/2021-01-01`
+- `add i/Chicken u/kg`
 
 <br/>
 
@@ -59,8 +58,10 @@ Format: `increment i/INGREDIENT q/QUANTITY e/EXPIRY_DATE`
 - If the ingredient name is not found, an error message will be shown.
 
 Example of usage:
-- `increment i/Red Apple q/6 e/2021-10-22`
+- `increment i/red apple q/10 e/2021-10-28`
 - `increment i/Salt q/200 e/2021-10-22`
+- `increment i/Chicken q/2 e/2021-11-15`
+- `increment i/Chicken q/2 e/2021-11-08`
 
 <br/>
 
@@ -102,6 +103,21 @@ Example incorrect usage:
 - `update units i/salt u/ kilograms`
 - `update units i/salt u/6`
 
+Output: 
+- If ingredient exists:
+```
+    ____________________________________________________________________________________________________
+     The units for this ingredient has been updated to kilograms.
+    ____________________________________________________________________________________________________
+```
+
+- If ingredient does not exist
+```
+    ____________________________________________________________________________________________________
+     Sorry. No matching ingredients found!
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Listing all ingredients: `list`
@@ -115,6 +131,25 @@ Format: `list`
 Example of usage:
 - `list`
 
+Output:
+```
+     ____________________________________________________________________________________________________
+     Here are the ingredients in your list:
+
+     Chicken (qty: 4 kg)
+     - 2 kg (2021-11-08)
+     - 2 kg (2021-11-15)
+
+     Red Apple (qty: 10)
+     - 10 (2021-10-28)
+
+     Salt (qty: 200 kilograms)
+     - 200 kilograms (2021-10-22)
+
+     You have a total of 3 ingredient(s)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Listing ingredients that are expiring: `list expiring`
@@ -125,6 +160,24 @@ Format: `list expiring`
 
 Example of usage:
 - `list expiring`
+
+Output:
+- If no expiring ingredients:
+```
+    ____________________________________________________________________________________________________
+     Here are the expiring ingredients in your list:
+    ____________________________________________________________________________________________________
+```
+
+- If have expiring ingredients:
+```
+    ____________________________________________________________________________________________________
+     Here are the expiring ingredients in your list:
+
+     Chicken (qty: 2 kg)
+     - 2 kg (2021-11-08)
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
@@ -140,6 +193,27 @@ Format: `list expired`
 
 Example of usage:
 - `list expired`
+
+Output:
+- If no expired ingredients:
+```
+    ____________________________________________________________________________________________________
+     Here are the expired ingredients in your list:
+    ____________________________________________________________________________________________________
+```
+
+- If have expired ingredients:
+```
+    ____________________________________________________________________________________________________
+     Here are the expired ingredients in your list:
+
+     Red Apple (qty: 10)
+     - 10 (2021-10-28)
+
+     Salt (qty: 200 kilograms)
+     - 200 kilograms (2021-10-22)
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
@@ -158,6 +232,26 @@ Example of usage:
 - `view i/Salt`
 - `view i/Red apple`
 - `view i/Chicken`
+
+Output:
+- If ingredient exists:
+```
+    ____________________________________________________________________________________________________
+     Here is the ingredient in your list:
+
+     Chicken (qty: 4 kg)
+     - 2 kg (2021-11-08)
+     - 2 kg (2021-11-15)
+    ____________________________________________________________________________________________________
+```
+
+- If ingredient does not exist:
+```
+    ____________________________________________________________________________________________________
+     Sorry. No matching ingredients found!
+    ____________________________________________________________________________________________________
+```
+
 
 <br/>
 
@@ -191,6 +285,21 @@ Format: `delete expired`
 Example of usage:
 - `delete expired`
 
+Output:
+- If there are expired ingredients:
+```
+    ____________________________________________________________________________________________________
+     All expired ingredients have been deleted!
+    ____________________________________________________________________________________________________
+```
+
+- If there are no expired ingredients:
+```
+    ____________________________________________________________________________________________________
+     You do not have expired ingredients!
+    ____________________________________________________________________________________________________
+
+```
 <br/>
 
 ### Adding a recipe: `add recipe`
@@ -218,6 +327,7 @@ Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
 Example of usage:
 - `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
 - `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
+- `add recipe r/Pork Soup i/Pork q/300 i/Salt q/10`
 
 Output:
 - If the ingredients do not exist in the list,
@@ -419,6 +529,26 @@ Format: `shopping list r/RECIPE...`
 Example of usage:
 - `shopping list r/Chicken Soup`
 - `shopping list r/Chicken Soup r/Pork Soup`
+
+Output:
+- If recipe exists:
+```
+    ____________________________________________________________________________________________________
+     Here is your shopping list!
+
+
+     Chicken (qty: 296 kg)
+     Pork (qty: 300)
+     Salt (qty: 20 kilograms)
+    ____________________________________________________________________________________________________
+```
+
+- If at least one recipe does not exist:
+```
+    ____________________________________________________________________________________________________
+     Sorry. One or more of your recipes are not found!
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
