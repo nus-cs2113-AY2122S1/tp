@@ -129,7 +129,7 @@ public class ReceiveOrderCommand extends Command {
         String[] orderRequiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
         LinkedHashMap<String, String> orderParameters = new LinkedHashMap<>();
-        if (parameters.containsKey(CommandParameters.ID)){
+        if (parameters.containsKey(CommandParameters.ID)) {
             orderParameters.put(CommandParameters.ID, parameters.get(CommandParameters.ID));
         }
 
