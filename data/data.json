@@ -1,67 +1,12 @@
 {
-  "audio" : [ {
-    "title" : "hi",
-    "id" : "2550",
-    "status" : "AVAILABLE",
-    "artist" : "Michael Jackson",
-    "duration" : "42:16"
-  }, {
-    "title" : "title 1",
-    "id" : "12039",
-    "status" : "AVAILABLE",
-    "artist" : "artist1",
-    "duration" : "11:11"
-  } ],
+  "audio" : [ ],
   "book" : [ {
-    "title" : "To Kill a Mockingbird",
-<<<<<<< HEAD
-    "id" : "2449",
-    "status" : "AVAILABLE",
-=======
-    "id" : "2551",
-    "status" : "LOANED",
-    "loanee" : "Jane",
-    "dueDate" : "20-10-2021",
->>>>>>> master
-    "author" : "Harper Lee"
-  }, {
-    "title" : "hi",
+    "title" : "The Hunger Games",
     "id" : "123",
     "status" : "AVAILABLE",
-    "author" : "hello"
+    "author" : "Collins"
   } ],
-  "item" : [ {
-    "title" : "something general",
-    "id" : "9999",
-    "status" : "RESERVED",
-    "loanee" : "John"
-  }, {
-    "title" : "Scrabble",
-    "id" : "0513895",
-    "status" : "AVAILABLE"
-  }, {
-    "title" : "hello",
-    "id" : "50000",
-    "status" : "AVAILABLE"
-  } ],
-  "magazine" : [ {
-    "title" : "Time Magazine",
-    "id" : "58720a",
-    "status" : "AVAILABLE",
-    "publisher" : "Time USA",
-    "edition" : "oct252021"
-  }, {
-    "title" : "hi",
-    "id" : "124",
-    "status" : "AVAILABLE",
-    "publisher" : "pub",
-    "edition" : "edi"
-  } ],
-  "video" : [ {
-    "title" : "Casino Royale",
-    "id" : "095680",
-    "status" : "AVAILABLE",
-    "publisher" : "Sony Pictures",
-    "duration" : "144 minutes"
-  } ]
+  "item" : [ ],
+  "magazine" : [ ],
+  "video" : [ ]
 }

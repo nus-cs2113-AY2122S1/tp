@@ -245,7 +245,7 @@ class ParserTest {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
         try {
-            EditCommand a = (EditCommand) parser.parse("edit hello");
+            EditCommand a = (EditCommand) parser.parse("edit ");
             a.handlesEditCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
