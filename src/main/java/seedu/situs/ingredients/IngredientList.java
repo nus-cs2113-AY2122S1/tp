@@ -152,11 +152,8 @@ public class IngredientList {
             throw new SitusException(INVALID_SUBTRACT);
         }
 
-        BigDecimal difference = BigDecimal.valueOf(currentGroup.getTotalAmount())
-                .subtract(BigDecimal.valueOf(subtractAmount));
 
-        // amounts less than 0.001 kg are taken to be 0
-        if (difference.compareTo(new BigDecimal("0.001")) < 0) {
+        if (Math.abs(currentGroup.getTotalAmount() - subtractAmount) < 0.001) {
             ingredientList.remove(groupNumber - 1);
             storage.writeIngredientsToMemory(ingredientList);
             return subtractedIngredientName;
