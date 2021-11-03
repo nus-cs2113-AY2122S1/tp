@@ -1,0 +1,42 @@
+@startuml ArchitectureDiagram
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!define UI_COLOR #1D8900
+
+' hide the circles in the diagram
+hide circle
+hide empty members
+skinparam Shadowing false
+skinparam MinClassWidth 50
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #000000
+}
+
+package " "<<Rectangle>>{
+    class MedBot #grey
+    class Ui #green
+    class Parser #lightblue
+    class Command #blue
+    class Scheduler #9D0012
+    class Storage  #A38300
+}
+
+class "<$user>" as User  #83E769
+class "<$documents>" as Files  #FFE374
+
+User .down[#green].> Ui
+Ui -[#green]left-> Parser
+Parser -[#lightblue]-> Command
+Command -[#blue]-> Scheduler
+Command -[#blue]up-> Ui
+Scheduler -[#9D0012]-> Storage
+MedBot -[#grey]up->Ui
+MedBot -[#grey]-> Storage
+MedBot -[#grey]left-> Parser
+MedBot -[#grey]> Scheduler
+Storage .right[#A38300]..>Files
+
+
+@enduml
