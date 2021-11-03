@@ -33,6 +33,14 @@ command, which will be explained further down below.
 
 ## Commands
 
+### General Notes
+
+These notes apply to all commands that are supported by MedBot.
+* Words in upper case are the required parameters.
+  * e.g. in `delete PATIENT_ID`, a `PATIENT_ID` is required for this command. 
+* Words in square brackets are optional parameters.
+  * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
+
 ### General Commands
 
 These commands will work the same for any view that you are currently in.
@@ -185,6 +193,14 @@ Patient with id PATIENT_ID deleted from system.
 Examples:
 `delete 123` deletes the patient with PATIENT_ID 123 in the list.
 
+####Notes:
+
+* The patient being deleted does not affect the data of the rest of the patients, i.e. the ID will 
+remain the same. 
+<br>Reasons :
+  * ID uniquely identifies a patient and should not be changed.
+  * ID does not indicate the row number in the patient list.
+
 ### View a patient’s information: `view`
 
 View a patient’s personal information.
@@ -228,6 +244,13 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
+####Notes:
+
+* `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
+<br>Reason:
+  * To maintain the table layout and prevent overflow of a cell.
+* To get the full information without the truncated details, use `VIEW PATIENT_ID`.
+
 ### Edit information of a patient: `edit`
 
 Edit the personal and medical information of a patient in the list.
@@ -256,10 +279,6 @@ Find all patients that contains the given attributes.
 
 Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-* The attributes given do not have to be in full.
-* At least one attribute must be present.
-* Hidden patients will also be displayed.
-
 Example:
 `find n/Smith`
 
@@ -274,6 +293,14 @@ For full details of each patient, please use the command "view PATIENT_ID"
  | 3    | S1231234A | John Smith           | 91234567  | johnsmit@eg.com      | Qweqwqwenoiqwenqw    | 
  ----------------------------------------------------------------------------------------------------- 
 ```
+
+####Notes:
+
+* The attributes given do not have to be in full.
+* At least one attribute must be present.
+* Hidden patients will also be displayed.
+* An empty value for a parameter will return rows with an empty value for the particular parameter
+    * e.g. `find n/ e/` will show all patients with empty Name and Email.
 
 ### Hide a patient: `hide`
 
@@ -333,6 +360,14 @@ Expected output:
 deleted appointment with Id: APPOINTMENT_ID
 ```
 
+####Notes:
+
+* The appointment being deleted does not affect the rest of the appointments, i.e. the ID will
+  remain the same.
+  <br>Reasons :
+    * ID uniquely identifies an appointment and should not be changed.
+    * ID does not indicate the row number in the appointment list.
+
 ### Editing an appointment's information: `edit`
 
 Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error
@@ -377,6 +412,13 @@ Here is a list of all appointments:
  | 4    | 31 Oct 21 1200HRS | 3          | Daniel Chan          | 1        | Dr Lim               | 
  -------------------------------------------------------------------------------------------------- 
 ```
+
+####Notes:
+
+* `Patient Name` and `Staff Name` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
+  <br>Reason:
+    * To maintain the table layout and prevent overflow of a cell.
+* To get the full information without the truncated details, use `VIEW APPOINTMENT_ID`.
 
 
 ## FAQ
