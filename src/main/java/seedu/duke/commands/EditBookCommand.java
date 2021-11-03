@@ -100,18 +100,16 @@ public class EditBookCommand extends Command {
     }
 
     /**
-     * Executes Edit Book command.
-     * Overrides method from parent class.
+     * Processes Edit Book Command, including exceptions.
      *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
+     * @throws LibmgrException when the user input is invalid
      */
-    @Override
-    public void execute(TextUI ui, Catalogue catalogue) {
+    public void handlesEditBookCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         processArgs();
         if (checkMissingArgs() || checkEmptyArgs()) {
-            ui.print(EDIT_BOOK_INVALID_FORMAT);
-            return;
+            throw new LibmgrException(EDIT_BOOK_INVALID_FORMAT);
         }
         if (checkInvalidArgs()) {
             ui.print(WARN_INVALID_ARGS);
@@ -119,34 +117,42 @@ public class EditBookCommand extends Command {
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
             if (toEdit.getTitle().equals(title)) {
-                ui.print(EDIT_UNCHANGED_TITLE);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_TITLE);
             }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
             if (toEdit.getID().equals(id)) {
-                ui.print(EDIT_UNCHANGED_ID);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_ID);
             }
-            try {
-                catalogue.checkDuplicateID(id);
-            } catch (LibmgrException e) {
-                ui.print(e.getMessage());
-                return;
-            }
+            catalogue.checkDuplicateID(id);
             toEdit.setID(id);
         }
         if (args.containsKey(KEY_AUTHOR)) {
             assert author != null && !author.equals("");
             if (toEdit.getAuthor().equals(author)) {
-                ui.print(EDIT_UNCHANGED_AUTHOR);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_AUTHOR);
             }
             toEdit.setAuthor(author);
         }
         ui.print(EDIT_BOOK_MESSAGE, toEdit);
+    }
+
+    /**
+     * Executes Edit Book command, including exception handling.
+     * Overrides method from parent class.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
+     */
+    @Override
+    public void execute(TextUI ui, Catalogue catalogue) {
+        try {
+            handlesEditBookCommand(ui, catalogue);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
+        }
     }
 }
 //@@author avellinwong01

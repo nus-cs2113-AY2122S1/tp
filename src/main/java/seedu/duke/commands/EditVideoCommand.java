@@ -111,18 +111,16 @@ public class EditVideoCommand extends Command {
     }
 
     /**
-     * Executes Edit Video command.
-     * Overrides method from parent class.
+     * Processes Edit Video Command, including exceptions.
      *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
+     * @throws LibmgrException when the user input is invalid
      */
-    @Override
-    public void execute(TextUI ui, Catalogue catalogue) {
+    public void handlesEditVideoCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         processArgs();
         if (checkMissingArgs() || checkEmptyArgs()) {
-            ui.print(EDIT_VIDEO_INVALID_FORMAT);
-            return;
+            throw new LibmgrException(EDIT_VIDEO_INVALID_FORMAT);
         }
         if (checkInvalidArgs()) {
             ui.print(WARN_INVALID_ARGS);
@@ -130,42 +128,49 @@ public class EditVideoCommand extends Command {
         if (args.containsKey(KEY_TITLE)) {
             assert title != null && !title.equals("");
             if (toEdit.getTitle().equals(title)) {
-                ui.print(EDIT_UNCHANGED_TITLE);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_TITLE);
             }
             toEdit.setTitle(title);
         }
         if (args.containsKey(KEY_ID)) {
             assert id != null && !id.equals("");
             if (toEdit.getID().equals(id)) {
-                ui.print(EDIT_UNCHANGED_ID);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_ID);
             }
-            try {
-                catalogue.checkDuplicateID(id);
-            } catch (LibmgrException e) {
-                ui.print(e.getMessage());
-                return;
-            }
+            catalogue.checkDuplicateID(id);
             toEdit.setID(id);
         }
         if (args.containsKey(KEY_PUBLISHER)) {
             assert publisher != null && !publisher.equals("");
             if (toEdit.getPublisher().equals(publisher)) {
-                ui.print(EDIT_UNCHANGED_PUBLISHER);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_PUBLISHER);
             }
             toEdit.setPublisher(publisher);
         }
         if (args.containsKey(KEY_DURATION)) {
             assert duration != null && !duration.equals("");
             if (toEdit.getDuration().equals(duration)) {
-                ui.print(EDIT_UNCHANGED_DURATION);
-                return;
+                throw new LibmgrException(EDIT_UNCHANGED_DURATION);
             }
             toEdit.setDuration(duration);
         }
         ui.print(EDIT_VIDEO_MESSAGE, toEdit);
+    }
+
+    /**
+     * Executes Edit Video command, including exception handling.
+     * Overrides method from parent class.
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
+     */
+    @Override
+    public void execute(TextUI ui, Catalogue catalogue) {
+        try {
+            handlesEditVideoCommand(ui, catalogue);
+        } catch (LibmgrException e) {
+            ui.print(e.getMessage());
+        }
     }
 }
 //@@author avellinwong01
