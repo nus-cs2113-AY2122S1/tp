@@ -205,10 +205,10 @@ Expected outcome of usage:
 ```
 view 0
 ____________________________________________________________
-0. Alex Lee
-   Github:   github.com/alexlee
-   Email:    alex.lee@contech.sg
-   Telegram: t.me/alexl33
+Name:     Alex Lee
+Github:   github.com/alexlee
+Email:    alex.lee@contech.sg
+Telegram: t.me/alexl33
 ____________________________________________________________
 ```
 * View personal contact:
@@ -562,7 +562,7 @@ List all valid commands and usage | `help` | `help`
 Add a new contact | `add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `add -n Marcus` <br />`add -n John Doe -g johndoecoder -e john@email.com -te johndoe`<br />
 List all contacts | `ls` | `ls`
 View a contact | `view <INDEX>` | `view 2`
-View personal contact | `view me` | `view me`
+View personal contact | `view me` or `me` | `view me` or `me`
 Edit a contact | `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` | `edit 1 -e john.doe@email.com` <br />`edit 0 -n Tan -g tanned -te tantan`<br />
 Edit personal contact | `edit me {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}` |`edit me -e bobby@email.com` <br />`edit me -n Tan -g tanned -te tantan`<br />
 Delete contact fields | `rm <INDEX> {-g} {-l} {-te} {-tw} {-e}` | `rm 3 -g -te -l -e`
