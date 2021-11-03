@@ -62,6 +62,7 @@ public class StorageManager {
      */
     public void updateMainJsonFile(ModuleManager moduleManager) throws InvalidFileException {
         execute(moduleManager, null, null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
+        TerminusLogger.info("Save completed.");
     }
 
     /**
@@ -78,6 +79,7 @@ public class StorageManager {
             StorageTypeEnum type)
             throws InvalidFileException {
         if (isDisabled) {
+            TerminusLogger.info("Storage has been disabled.");
             return;
         }
         if (moduleManager == null) {

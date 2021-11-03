@@ -556,7 +556,7 @@ To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
 
 #### 4.5.1 Initialize Storage Implementation
 
-This section details the technical information of StorageManager when TermiNUS create the StorageManager.
+This section details the technical information of `StorageManager` when `Terminus` create the `StorageManager`.
 
 ##### 4.5.1.1 Current Implementation
 
@@ -599,7 +599,7 @@ checks and third party imports on top of it.
 
 #### 4.5.2 Loading Storage Implementation
 
-This section details the technical information of StorageManager when TermiNUS loads data in the `data` directory.
+This section details the technical information of `StorageManager` when `Terminus` loads data in the `data` directory.
 
 ##### 4.5.2.1 Current Implementation
 
@@ -644,6 +644,8 @@ has the name of the **nus module**.
 **Step 7:** Once the `Note` has been loaded into `ModuleManager` under each of its respective `NusModule`, 
 it will return this `ModuleManager`.
 
+**Step 8:** And finally, `StorageManager` will return this `ModuleManager` back to `Terminus`.
+
 ##### 4.5.2.2 Design Consideration
 
 **Aspect: Creates missing folder of existing NusModule.**
@@ -658,6 +660,37 @@ the additional filo I/O operation to create a folder may result in an IO Excepti
 create the specified folder. Due to this, it may abort loading of any notes for any other `NusModule` in
 ModuleManager. Secondly, this method is meant to load existing data and not to create any data that is not
 the main `data` directory or the `main.json` file.
+
+#### 4.5.3 Execute CommandResult with Storage Implementation
+
+This section details the technical information of `StorageManager` when `Terminus` performs required file I/O operations stated in `CommandResult` after an execution of a `Command`.
+
+##### 4.5.3.1 Current Implementation
+
+![](attachments/StorageCommandResultSequenceDiagram.png)
+
+**Step 1:** When `Terminus` executes a `Command`, a `CommandResult` will be returned. The `CommandResult` contains
+information of the `Command` execution and this includes any additional file I/O operations needed. If `CommandResult.hasChanges()` returns
+a **True**, it determines a file I/O operation is needed.
+
+**Step 2:** If a file I/O operation is needed, `Terminus` will call the method `executeCommandResult()` in `StorageManager` that
+handles the extraction of information in `CommandResult` and parses the information to its respective Storage types for further
+processing.
+
+**Step 3:** Once done, `StorageManager` will return to `Terminus` and this concludes the file I/O 
+requirements from the execution of a `Command`.
+
+##### 4.5.3.2 Design Consideration
+
+**Aspect: Split by StorageAction or StorageType first.**
+
+| Approach             | Pros                                                                                        | Cons                                                                                                              |
+|----------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| StorageAction first. | File I/O grouped by similar changes performed.                                              | Need to handle different types of file. For example, folder and file creation are both different calls in `NIO2`. |
+| StorageType first.   | Group by the objects requirements in Terminus. Decoupling of file I/O operations is easier. | In the future, many different file types may result in multiple Storage class needed.                             |
+
+**Chosen Solution:** Separate file I/O operation by the type of file involved first which is the solution of
+StorageType first. This means that each Storage type have a higher decoupling from one another.
 
 ## 5. Documentation, Logging, Testing and DevOps
 

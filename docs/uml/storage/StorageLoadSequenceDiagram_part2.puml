@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+skinparam sequenceMessageAlign center
+
 mainframe sd load
 
 box Storage #lightpink

@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+skinparam sequenceMessageAlign center
+
 box Terminus #whitesmoke
 participant ":Terminus" as Terminus #white
 endbox
