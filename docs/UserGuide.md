@@ -243,8 +243,9 @@ You can choose either Module or Event, since you are adding a module, you enter 
 Choose your option: 1
 Enter Module Code to add it into Timetable: cg2271
 Now adding CG2271 into timetable
-Lessons with the same class number are packed together
-Adding any type of lesson will add all lessons with similar class number into timetable
+[DISCLAIMER] Lessons with the same class number are packed together
+[DISCLAIMER] Adding any type of lesson will add all lessons with similar class number into timetable
+
               Lecture Lesson Slots                                    Tutorial Lesson Slots                                   Laboratory Lesson Slots
 1: Wednesday, 0900-1100, 01, E-Learn_A                  1: Thursday, 1100-1200, 01, E-Learn_A                   1: Friday, 0800-1000, 01, E4A-04-08                     
 _________________________________________________   |   _________________________________________________   |   _________________________________________________   |   
@@ -278,7 +279,7 @@ For example:
 ```
 `NOTE:`Lessons that are added into timetable with existing lessons/events will override the slot
 
-If all lesson types have been successfully added, terminal will print out 
+If all lesson types have been successfully added, program will print out 
 ```shell
 Lessons for all modules have been successfully added
 ```
@@ -305,12 +306,11 @@ Description of Event (E.g. Read Micah): Team Meeting CS2113T
 Date of Event (E.g. Monday): Monday
 Starting time of Event (E.g. 1600): 2000
 Ending time of Event (E.g. 1800): 2100
-Location of Event (Optional): Discod
-Selected timeslot is occupied, please delete before proceeding
+Location of Event (Optional): Discord
 Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
 ```
 
-If the selected timeslot is already occupied, the terminal will let you know and the event will not be added until the timeslot
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
 <br>
 
