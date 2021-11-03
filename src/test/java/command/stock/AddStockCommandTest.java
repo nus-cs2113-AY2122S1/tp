@@ -2,6 +2,8 @@ package command.stock;
 
 import command.Command;
 import inventory.Medicine;
+import inventory.Order;
+import inventory.Prescription;
 import inventory.Stock;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +35,8 @@ public class AddStockCommandTest {
     void setup() {
         medicines.clear();
         Stock.setStockCount(0);
+        Order.setOrderCount(0);
+        Prescription.setPrescriptionCount(0);
         System.setOut(new PrintStream(outContent));
     }
 
