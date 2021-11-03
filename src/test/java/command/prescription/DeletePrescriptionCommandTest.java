@@ -102,10 +102,10 @@ public class DeletePrescriptionCommandTest {
         Command command = new DeletePrescriptionCommand(parameters);
         command.execute();
 
-        String error = "Unable to delete prescription. Quantity added will exceed maximum quantity.\r\n"
+        String error = "Unable to delete prescription. Quantity added will exceed maximum quantity.\n"
                 + "Maximum quantity: 50 Total Quantity after deletion: 55";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 

@@ -60,14 +60,14 @@ public class AddPrescriptionCommandTest {
         Command command = new AddPrescriptionCommand(parameters);
         command.execute();
 
-        String error = "Prescribed:Panadol Quantity:30 Expiry Date:11-11-2025\r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| 1  | PANADOL |    30    |     123     | 04-11-2021 | JOHN  |    1     | \r\n"
+        String error = "Prescribed:Panadol Quantity:30 Expiry Date:11-11-2025\n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| 1  | PANADOL |    30    |     123     | 04-11-2021 | JOHN  |    1     | \n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
@@ -93,20 +93,20 @@ public class AddPrescriptionCommandTest {
         Command command = new AddPrescriptionCommand(parameters);
         command.execute();
 
-        String error = "Prescribed:Panadol Quantity:10 Expiry Date:11-11-2022\r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| 1  | PANADOL |    10    |     123     | 04-11-2021 | JOHN  |    1     | \r\n"
-                + "+----+---------+----------+-------------+------------+-------+----------+\r\n"
-                + "Prescribed:Panadol Quantity:20 Expiry Date:01-05-2025\r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \r\n"
-                + "+====+=========+==========+=============+============+=======+==========+\r\n"
-                + "| 2  | PANADOL |    20    |     123     | 04-11-2021 | JOHN  |    2     | \r\n"
+        String error = "Prescribed:Panadol Quantity:10 Expiry Date:11-11-2022\n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| 1  | PANADOL |    10    |     123     | 04-11-2021 | JOHN  |    1     | \n"
+                + "+----+---------+----------+-------------+------------+-------+----------+\n"
+                + "Prescribed:Panadol Quantity:20 Expiry Date:01-05-2025\n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \n"
+                + "+====+=========+==========+=============+============+=======+==========+\n"
+                + "| 2  | PANADOL |    20    |     123     | 04-11-2021 | JOHN  |    2     | \n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
@@ -129,10 +129,10 @@ public class AddPrescriptionCommandTest {
         Command command = new AddPrescriptionCommand(parameters);
         command.execute();
 
-        String error = "Unable to Prescribe! Prescription quantity is more than stock available!\r\n"
+        String error = "Unable to Prescribe! Prescription quantity is more than stock available!\n"
                 + "Prescription quantity: 30 Stock available: 5";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
@@ -157,7 +157,7 @@ public class AddPrescriptionCommandTest {
 
         String error = "Unable to Prescribe! Medication has expired!";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 }

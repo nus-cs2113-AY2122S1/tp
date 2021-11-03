@@ -56,7 +56,7 @@ public class AddStockCommandTest {
 
         String error = "Invalid expiry date! Ensure date is in dd-MM-yyyy.";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -73,9 +73,10 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Quantity cannot be more than maximum quantity!\r\nQuantity: 50, Max Quantity: 5";
+        String error = "Quantity cannot be more than maximum quantity!\n"
+                + "Quantity: 50, Max Quantity: 5";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -94,7 +95,7 @@ public class AddStockCommandTest {
 
         String error = "Unable to add medicine. Medicine is expired.";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -111,14 +112,14 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "\r\nMedication added: Panadol\r\n"
-                + "+====+=========+=======+==========+=============+=============+==============+\r\n"
-                + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \r\n"
-                + "+====+=========+=======+==========+=============+=============+==============+\r\n"
-                + "| 1  | PANADOL | $5.00 |    50    | 12-12-2025  |    FEVER    |     100      | \r\n"
+        String error = "Medication added: Panadol\n"
+                + "+====+=========+=======+==========+=============+=============+==============+\n"
+                + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
+                + "+====+=========+=======+==========+=============+=============+==============+\n"
+                + "| 1  | PANADOL | $5.00 |    50    | 12-12-2025  |    FEVER    |     100      | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
@@ -143,15 +144,15 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Medicine exists. Using existing description and maximum quantity.\r\n"
-                + "Medication added: Panadol\r\n"
-                + "+====+=========+=======+==========+=============+=============+==============+\r\n"
-                + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \r\n"
-                + "+====+=========+=======+==========+=============+=============+==============+\r\n"
-                + "| 2  | PANADOL | $5.00 |    50    | 12-12-2025  |  FOR FEVER  |     1000     | \r\n"
+        String error = "Medicine exists. Using existing description and maximum quantity.\n"
+                + "Medication added: Panadol\n"
+                + "+====+=========+=======+==========+=============+=============+==============+\n"
+                + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
+                + "+====+=========+=======+==========+=============+=============+==============+\n"
+                + "| 2  | PANADOL | $5.00 |    50    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
@@ -176,14 +177,14 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Same Medication and Expiry Date exist. Updating existing quantity.\r\n"
-                + "+====+=========+========+==========+=============+=============+==============+\r\n"
-                + "| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \r\n"
-                + "+====+=========+========+==========+=============+=============+==============+\r\n"
-                + "| 1  | PANADOL | $10.00 |   100    | 12-12-2025  |  FOR FEVER  |     1000     | \r\n"
+        String error = "Same Medication and Expiry Date exist. Updating existing quantity.\n"
+                + "+====+=========+========+==========+=============+=============+==============+\n"
+                + "| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
+                + "+====+=========+========+==========+=============+=============+==============+\n"
+                + "| 1  | PANADOL | $10.00 |   100    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+--------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
