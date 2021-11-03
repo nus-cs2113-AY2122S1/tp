@@ -127,9 +127,9 @@ public abstract class Parser {
 
         try {
             String exerciseDescription = arguments[0];
-            String[] setsAndReps = arguments[1].split(" ");
+            String[] setsAndReps = arguments[1].trim().split(" ", 2);
             String sets = setsAndReps[0];
-            String reps = setsAndReps[1];
+            String reps = setsAndReps[1].trim();
             String workoutIdentifier;
             workoutIdentifier = getWorkoutIdentifier(arguments, isEdit);
 
