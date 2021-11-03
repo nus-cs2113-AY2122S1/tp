@@ -51,5 +51,7 @@ class EditIngrWasteCommandTest {
 
         assertEquals(10, IngredientList.ingredientList.get(0).getWastage());
 
+        IngredientList.ingredientList.clear();
+
     }
 }
