@@ -42,22 +42,21 @@ public class DeleteStockCommandTest {
         command.execute();
     }
 
-    @Test
-    void deleteStockCommand_stockIdZero_expectInvalid() {
-        executeDeleteStockCommand("i", "0");
-        assertEquals("Invalid stock id provided!", outContent.toString().trim());
+    private void executeListStockCommand() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        Command command = new ListStockCommand(parameters);
+        command.execute();
     }
 
     @Test
-    void deleteStockCommand_negativeStockId_expectInvalid() {
-        executeDeleteStockCommand("i", "-1");
-        assertEquals("Invalid stock id provided!", outContent.toString().trim());
-    }
-
-    @Test
-    void deleteStockCommand_aboveStockCount_expectInvalid() {
-        executeDeleteStockCommand("i", "10");
-        assertEquals("Invalid stock id provided!", outContent.toString().trim());
+    void deleteStockCommand_invalidStockId_expectInvalid() {
+        String[] invalidParams = {"-1", "0", "7"};
+        for (String param : invalidParams) {
+            executeDeleteStockCommand("i", param);
+            String expectedOutput = "Invalid stock id provided!";
+            assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
+            outContent.reset();
+        }
     }
 
     @Test
@@ -71,6 +70,61 @@ public class DeleteStockCommandTest {
         deleteStockCommand_validStockId_expectValid();
         executeDeleteStockCommand("i", "1");
         String expectedOutput = "Deleted row with Stock Id: 1\n" + "Invalid stock id provided!";
+        assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
+    }
+
+    @Test
+    void deleteStockCommand_validStockId_expectOneLessStock() {
+        deleteStockCommand_validStockId_expectValid();
+        executeListStockCommand();
+        String expectedOutput = "Deleted row with Stock Id: 1\n"
+                + "+====+==============+========+==============+=============+==================+==============+\n"
+                + "| ID |     NAME     | PRICE  |   QUANTITY   | EXPIRY_DATE |   DESCRIPTION    | MAX_QUANTITY | \n"
+                + "+====+==============+========+==============+=============+==================+==============+\n"
+                + "| 2  |   PANADOL    | $20.00 |      10      | 14-09-2022  |    HEADACHES     |     1000     | \n"
+                + "|    |              |        | PENDING: 150 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 3  |   VICODIN    | $10.00 |      20      | 30-09-2022  |   SEVERE PAIN    |     500      | \n"
+                + "|    |              |        | PENDING: 30  |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 4  | SIMVASTATIN  | $20.00 |      25      | 10-10-2023  | HIGH CHOLESTEROL |     800      | \n"
+                + "|    |              |        | PENDING: 20  |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 5  |  LISINOPRIL  | $20.00 |      25      | 15-10-2023  |  HYPOTHYROIDISM  |     800      | \n"
+                + "|    |              |        | PENDING: 200 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 6  | AZITHROMYCIN | $20.00 |      35      | 15-10-2023  |    INFECTIONS    |     100      | \n"
+                + "|    |              |        | PENDING: 100 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+";
+        assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
+    }
+
+    @Test
+    void deleteStockCommand_invalidStockId_expectSameStocks() {
+        deleteStockCommand_invalidStockId_expectInvalid();
+        executeListStockCommand();
+        String expectedOutput = ""
+                + "+====+==============+========+==============+=============+==================+==============+\n"
+                + "| ID |     NAME     | PRICE  |   QUANTITY   | EXPIRY_DATE |   DESCRIPTION    | MAX_QUANTITY | \n"
+                + "+====+==============+========+==============+=============+==================+==============+\n"
+                + "| 1  |   PANADOL    | $20.00 |      20      | 13-09-2022  |    HEADACHES     |     1000     | \n"
+                + "|    |              |        | PENDING: 150 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 2  |   PANADOL    | $20.00 |      10      | 14-09-2022  |    HEADACHES     |     1000     | \n"
+                + "|    |              |        | PENDING: 150 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 3  |   VICODIN    | $10.00 |      20      | 30-09-2022  |   SEVERE PAIN    |     500      | \n"
+                + "|    |              |        | PENDING: 30  |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 4  | SIMVASTATIN  | $20.00 |      25      | 10-10-2023  | HIGH CHOLESTEROL |     800      | \n"
+                + "|    |              |        | PENDING: 20  |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 5  |  LISINOPRIL  | $20.00 |      25      | 15-10-2023  |  HYPOTHYROIDISM  |     800      | \n"
+                + "|    |              |        | PENDING: 200 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+\n"
+                + "| 6  | AZITHROMYCIN | $20.00 |      35      | 15-10-2023  |    INFECTIONS    |     100      | \n"
+                + "|    |              |        | PENDING: 100 |             |                  |              | \n"
+                + "+----+--------------+--------+--------------+-------------+------------------+--------------+";
         assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
     }
 }
