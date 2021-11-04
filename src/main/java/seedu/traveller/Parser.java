@@ -195,7 +195,7 @@ public class Parser {
      * @return Command An <code>EditCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseEditCommand(String userInput) throws TravellerException {
+    /*private static Command parseEditCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit command input");
         Command command;
         try {
@@ -221,15 +221,57 @@ public class Parser {
             throw new InvalidEditFormatException();
         }
         return command;
+    }*/
+
+    private static Command parseEditCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Edit command input");
+        Command command;
+        try {
+            String tripName = parseEditTripName(userInput);
+            String newTripName = "";
+            String startCountryCode = "";
+            String endCountryCode = "";
+            if (userInput.contains("/name")) {
+                newTripName = parseEditNewTripName(userInput);
+            }
+            if (userInput.contains("/from")) {
+                startCountryCode = parseEditStartCountryCode(userInput);
+            }
+            if (userInput.contains("/to")) {
+                endCountryCode = parseEditEndCountryCode(userInput);
+            }
+            parseValidTripName(tripName);
+            command = new EditCommand(tripName, newTripName, startCountryCode, endCountryCode);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidEditFormatException();
+        }
+        return command;
     }
 
-    private String parseEditNewTripName(String userInput) throws TravellerException {
+    private static String parseEditTripName(String userInput) throws TravellerException {
+        String tripName;
+        if (userInput.contains("/name")) {
+            int nameIdx = getNameFlagIndex(userInput);
+            tripName = parseFieldValue(userInput, 0, nameIdx);
+        } else if (userInput.contains("/from")) {
+            assert !userInput.contains("/name");
+            int fromIdx = getFromFlagIndex(userInput);
+            tripName = parseFieldValue(userInput, 0, fromIdx);
+        } else {
+            assert !userInput.contains("/name") && !userInput.contains("/from");
+            int toIdx = getToFlagIndex(userInput);
+            tripName = parseFieldValue(userInput, 0, toIdx);
+        }
+        return tripName;
+    }
+
+    private static String parseEditNewTripName(String userInput) throws TravellerException {
         int nameIdx = getNameFlagIndex(userInput);
         String newTripName;
         if (userInput.contains("/from")) {
             int fromIdx = getFromFlagIndex(userInput);
             newTripName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, fromIdx);
-        } else if (userInput.contains("/to")){
+        } else if (userInput.contains("/to")) {
             assert !userInput.contains("/from");
             int toIdx = getToFlagIndex(userInput);
             newTripName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, toIdx);
@@ -238,6 +280,28 @@ public class Parser {
             newTripName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, userInput.length());
         }
         return newTripName;
+    }
+
+    private static String parseEditStartCountryCode(String userInput) throws TravellerException {
+        int fromIdx = getFromFlagIndex(userInput);
+        String startCountryCode;
+        if (userInput.contains("/to")) {
+            int toIdx = getToFlagIndex(userInput);
+            startCountryCode = parseFieldValue(userInput,
+                    fromIdx + FROM_LENGTH, toIdx).toUpperCase();
+        } else {
+            assert (!userInput.contains("/to"));
+            startCountryCode = parseFieldValue(userInput,
+                    fromIdx + FROM_LENGTH, userInput.length()).toUpperCase();
+        }
+        return startCountryCode;
+    }
+
+    private static String parseEditEndCountryCode(String userInput) throws TravellerException {
+        int toIdx = getToFlagIndex(userInput);
+        String endCountryCode = parseFieldValue(userInput,
+                toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+        return endCountryCode;
     }
 
     /**
