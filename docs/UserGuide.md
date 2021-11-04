@@ -100,6 +100,7 @@ Number of Correct Words: 30/30|100.00%
 Mistakes: No words typed wrongly.
 ==================================================================
 ```
+
 ### Clear past records: `clear` 
 Clear all past game records
 Format: `clear [-g GAME_MODE] [-h]`
@@ -111,6 +112,7 @@ Examples
 * `clear`
 <!-- -->
 Example of usage
+
 ```
 clear -g time
    ________    _________    ____     ____  ________________  ____  ____  _____
