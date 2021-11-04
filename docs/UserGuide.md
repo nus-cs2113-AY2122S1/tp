@@ -15,7 +15,7 @@ Use Traveller so that you can plan your trips with ease and focus on what matter
 
 ### What is a Command Line Interface (CLI)?
 A CLI is a way of interacting with applications via lines of text, instead of the usual way of clicking on the application.
-Each computer will have their own CLI, such as the Windows' Powershell and the MacOS's Terminal.
+Each computer will have their own CLI, such as the Windows' Powershell and the macOS's Terminal.
 
 ### What is this guide for?
 This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
@@ -100,10 +100,9 @@ The purpose of the help command is to ensure that even if there is no internet c
 <br/>
 
 ### 2.2. Creating a trip: `new`
-Creates a new trip. 
-The CLI then returns the shortest path from one point to another.
+Creates a new trip.
 
-#### Format: `new TRIP_NAME /from START /to END`
+#### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
    * `START` and `END` destinations must be countries included in *flightData/dist.txt* or *flightData/cost.txt*.
@@ -117,7 +116,16 @@ ____________________________________________________________
 	You have just created a new trip called FamilyTrip2021.
 ____________________________________________________________
 ```
-
+> ![](documentationPics/info.png) A trip is a basic building block of Traveller. To start planning your trips, 
+> create a trip using this command first. Then, when planning your trip, all details will be tagged to this trip that 
+> you have created.
+> 
+> ![](documentationPics/tip.png) If you have accidentally created unwanted trips, use the 
+> [delete](#26-delete-a-trip-delete) command to delete the unwanted trips.
+> 
+> ![](documentationPics/tip.png) After creating a trip, you can [view](#25-viewing-trips-view) the trip to find 
+> the shortest flight path to get to your desired country (Yes, it is automated! :)).
+> 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
 > Take a look in *flightData/dist.txt* or *flightData/cost.txt* to see how Traveller recognises them!
 
@@ -134,19 +142,22 @@ This command allows you to create any number of days in your trip.
 
 ```
 ____________________________________________________________
-$ add-day myTrip /day 3
+$ add-day FamilyTrip2021 /day 3
 ____________________________________________________________
-	Added 3 days to trip trip1.
+	Added 3 days to trip FamilyTrip2021.
 ____________________________________________________________
 ```
+
+> ![](documentationPics/info.png) After creating a trip, what's next is to specify the number of days your trip will 
+> last. Use this command to do so.
+> 
+> ![](documentationPics/tip.png) If you have accidentally created more days than you want, you can delete the days 
+> you have created at any time using the [delete-day](#27-deleting-a-day-from-a-trip-delete-day) command.
 
 <br/>
 
 ### 2.4. Adding an item to a Day: `add-item`
-In each day of your trip, you will want to have multiple items planned out, such as visiting a museum or going to the
-beach.
-
-Use this command to add an item to a day of your trip.
+Use this command to add an item to a day of your trip. An item represents an activity that you will do in a day.
 
 #### Format: `add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
 
@@ -154,13 +165,20 @@ Use this command to add an item to a day of your trip.
 
 ```
 ____________________________________________________________
-$ add-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn
+$ add-item FamilyTrip2021 /day 0 /time 7pm /name Check-in to HolidayInn
 ____________________________________________________________
-	Added a new item to day 0 of trip trip1.
+	Added a new item to day 0 of trip FamilyTrip2021.
 ____________________________________________________________
 ```
 
+> ![](documentationPics/info.png) In each day of your trip, you will want to have multiple items planned out, 
+> such as visiting a museum or relaxing at the beach. Use this command to create these items in your trip. Items are
+> very flexible in what they can represent, so do use them to their fullest!
+> 
 > ![](documentationPics/info.png) Days are 0-indexed based. That is, the first day of your trip is day 0.
+> 
+> ![](documentationPics/tip.png) If you decided that you want to remove some items, simply use 
+> the [delete-item](#28-deleting-an-item-from-a-day-delete-item) command.
 > 
 > ![](documentationPics/tip.png) If your item spans the whole day, just type in `All day` for the time field!
 
@@ -175,10 +193,10 @@ Shows you details of your existing trips.
 
 ```
 ____________________________________________________________
-$ view myTrip
+$ view FamilyTrip2021
 ____________________________________________________________
 	Here are all your trips: 
-		TripName: myTrip
+		TripName: FamilyTrip2021
 			 Origin: SIN
 			 Destination: MLY
 			 Path: [SIN, MLY]
@@ -188,7 +206,9 @@ ____________________________________________________________
 					0:	7pm		Check-in at HolidayInn
 ____________________________________________________________
 ```
-
+> ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
+> the shortest flight path and its associated distance, and your itinerary for the trip.
+>
 > ![](documentationPics/tip.png) To view all trips, simply enter `view all`.
 
 <br/>
@@ -201,9 +221,9 @@ Deletes an existing trip from the trip list.
 #### Usage Example:
 ```
 ____________________________________________________________
-$ delete myTrip
+$ delete FamilyTrip2021
 ____________________________________________________________
-	You have just deleted a trip called myTrip.
+	You have just deleted a trip called FamilyTrip2021.
 ____________________________________________________________
 ```
 
@@ -217,9 +237,9 @@ Deletes an existing day from a trip.
 #### Usage Example:
 ```
 ____________________________________________________________
-$ delete-day myTrip /day 0
+$ delete-day FamilyTrip2021 /day 0
 ____________________________________________________________
-	You have just deleted day 0 of myTrip.
+	You have just deleted day 0 of FamilyTrip2021.
 ____________________________________________________________
 ```
 
@@ -233,9 +253,9 @@ Deletes an existing item from a trip.
 #### Usage Example:
 ```
 ____________________________________________________________
-$ delete-item trip1 /day 1 /item 0
+$ delete-item FamilyTrip2021 /day 1 /item 0
 ____________________________________________________________
-	You have just deleted item 0 of trip1 day 1
+	You have just deleted item 0 of FamilyTrip2021 day 1
 ____________________________________________________________
 ```
 
@@ -244,7 +264,7 @@ ____________________________________________________________
 ### 2.9 Edit a trip: `edit`
 Edits an existing trip from the trip list.
 
-#### Format: `edit TRIP_NAME /from START /to END`
+#### Format: `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
    * Format is similar to `new`.
 
 #### Usage Example:
@@ -263,9 +283,9 @@ Edits and updates existing item from a trip and updates it to a new correspondin
 #### Usage Example:
 ```
 _________________________________________________________________________________
-$ edit-item trip1 /day 1 /time 9am /name later breakfast /index 1
+$ edit-item FamilyTrip2021 /day 1 /time 9am /name later breakfast /index 1
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of trip1 to later breakfast at 9am
+	You have just edited item 1 on day 1 of FamilyTrip2021 to later breakfast at 9am
 _________________________________________________________________________________
 ```
 
@@ -276,18 +296,18 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
-> ![](documentationPics/info.png) KEYWORD must be one word and not have aany white spaces before or after.
+> ![](documentationPics/info.png) KEYWORD must be one word and not have any white spaces before or after.
 
 #### Usage Example:
 ```
 _________________________________________________________________________________
-$ search-item trip1 /day 1 /key n
+$ search-item FamilyTrip2021 /day 1 /key mealtime
 _________________________________________________________________________________
-	You have just search item keyword n on day 1 in trip called trip1
+	You have just search item keyword n on day 1 in trip called FamilyTrip2021
 	
 	Results: 
-	1. 2pm		lunch
-	2. 5pm		dinner
+	1. 2pm		mealtime (lunch)
+	2. 5pm		mealtime (dinner)
 _________________________________________________________________________________
 ```
 
@@ -351,6 +371,26 @@ Exits the program.
 **A**: Traveller can only read specific words as destinations. 
 Please check in *flightData/dist.txt* or *flightData/cost.txt* for all supported destinations and their specific wordings.
 
+**Q**: What should I do when creating a new trip if my trip span multiple countries?
+
+**A**: As of our current version v2.1, we unfortunately do not support multiple countries in 1 trip.
+However, you can create multiple trips instead, 1 for each country that you plan to go to, and plan your trips from 
+there.
+
+**Q**: What units are distance measured in?
+
+**A**: Distance is given in hours.
+
+**Q**: How do I interpret path and distance shown in the `view` command?
+
+**A**: Path can be read from left to right. For example, a path of `[SIN, MLY, SKR]` means that the shortest path from
+Singapore (SIN) to South Korea (SKR) is to take a flight from Singapore to Malaysia (MLY), and then taking a flight from 
+Malaysia to South Korea.
+
+Similarly, distance can be read from left to right. Continuing from the above example, if a distance of `[1, 5]` is 
+shown, this means that the flight from Singapore to Malaysia is 1 hour long, and the flight from Malaysia to South Korea
+is 5 hours long.
+
 <br/>
 
 ## 4. Command Summary
@@ -360,14 +400,14 @@ A summary of all commands available in Traveller, and how you can use them, is d
 Action | Format
 --- | ---
 **help**| `help`
-**new** | `new TRIP_NAME /from START /to END`
+**new** | `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **add-day**| `add-day TRIP_NAME /day NUMBER_OF_DAYS`
 **add-item**|`add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
 **view** | `view TRIP_NAME`
 **delete** | `delete TRIP_NAME`
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
-**edit** | `edit TRIP_NAME /from START /to END`
+**edit** | `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-dist** | `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
