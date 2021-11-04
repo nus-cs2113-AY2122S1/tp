@@ -67,11 +67,11 @@ back : Returns to the parent workspace.
 Format: back
 
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Your schedule on 'CS2113T Tutorial' has been added!
 [TEST] >>> Your schedule on 'CS2113T Lecture' has been added!
 [TEST] >>> Command not found! Type 'help' for a list of commands.
