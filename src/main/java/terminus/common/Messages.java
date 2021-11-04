@@ -47,7 +47,7 @@ public class Messages {
         + "arguments.";
     public static final String ERROR_MESSAGE_EMPTY_CONTENTS = ERROR_MESSAGE_TAG + "Content not found.";
     public static final String ERROR_MESSAGE_INVALID_NUMBER = ERROR_MESSAGE_TAG + "Invalid numerical value provided "
-        + "or Content could not be found.";
+        + "or content could not be found.";
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
