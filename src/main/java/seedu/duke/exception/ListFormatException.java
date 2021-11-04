@@ -1,5 +1,9 @@
 package seedu.duke.exception;
 
+/**
+ * Exception to be thrown when the format of the user's input for the list command
+ * {@link seedu.duke.command.ListCommand} entered by the user is incorrect.
+ */
 public class ListFormatException extends Exception {
 
     private static final String INVALID_LIST_FORMAT_MESSAGE = "[!] Your list command is wrong...\n"
