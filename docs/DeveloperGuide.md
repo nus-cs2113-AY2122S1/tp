@@ -204,8 +204,6 @@ of the `Parser`. The 3 possible views and the corresponding user input commands 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
 `ViewType` property in the `Parser` class.
 
-[Design Considerations to be added]
-
 ### 4.2 Find feature
 
 #### Functionality
