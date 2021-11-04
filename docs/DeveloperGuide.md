@@ -5,7 +5,7 @@
 - [1. Introduction](#1-introduction)
     * [1.1 Purpose](#11-purpose)
     * [1.2 Acknowledgements](#12-acknowledgements)
-    * [1.2 Using this Guide](#13-using-this-guide)
+    * [1.3 Using this Guide](#13-using-this-guide)
 - [2. Setting up](#2-setting-up)
     * [2.1 Setting up the project in your computer](#21-setting-up-the-project-in-your-computer)
         + [2.1.1 Prerequisite](#211-prerequisite)
@@ -13,35 +13,41 @@
         + [2.1.3 Setting up on IntelliJ IDEA](#213-setting-up-on-intellij-idea)
         + [2.1.4 Configuring the Coding Style](#214-configuring-the-coding-style)
 - [3. Design](#3-design)
-  * [3.1 Architecture](#31-architecture)
-  * [3.2 UI](#32-ui-component)
-  * [3.3 Parser](#33-parser-component)
-  * [3.4 Command](#34-command-component)
-  * [3.5 Module](#35-module-component)
-  * [3.6 Content](#36-content-component)
-  * [3.7 Active Recall](#37-active-recall-component)
-  * [3.8 Storage](#38-storage-component)
+    * [3.1 Architecture](#31-architecture)
+    * [3.2 UI Component](#32-ui-component)
+    * [3.3 Parser Component](#33-parser-component)
+    * [3.4 Command Component](#34-command-component)
+    * [3.5 Module Component](#35-module-component)
+    * [3.6 Content Component](#36-content-component)
+    * [3.7 Active Recall Component](#37-active-recall-component)
+    * [3.8 Storage Component](#38-storage-component)
 - [4. Implementation](#4-implementation)
-  * [4.1 Timetable](#41-timetable-feature)
-  * [4.2 Active Recall](#42-active-recall-implementation)
-  * [4.3 Workspace]()
-  * [4.4 Adding and Deleting Content]()
-  * [4.5 Storage](#45-storage-implementation)
-    + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
+    * [4.1 Timetable Feature](#41-timetable-feature)
+    * [4.2 Active Recall](#42-active-recall-implementation)
+    * [4.3 Workspace](#43-workspace-implementation)
+    * [4.4 Conflict Manager](#44-conflict-manager-implementation)
+    * [4.5 Storage](#45-storage-implementation)
+        + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
+        + [4.5.2 Loading Storage](#452-loading-storage-implementation)
+        + [4.5.3 Execute CommandResult with Storage](#453-execute-commandresult-with-storage-implementation)
+    * [4.6 Adding Content](#46-adding-content-implementation)
+    * [4.7 Deleting Content](#47-deleting-content-implementation)
 - [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
+    * [5.1 Documentation](#51-documentation)
+    * [5.2 Logging](#52-logging)
+    * [5.2 Logging](#52-logging)
+    * [5.3 Testing](#53-testing)
+    * [5.4 DevOps](#54-devops)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
-- [Appendix B: User Stories ](#appendix-b-user-stories)
+- [Appendix B: User Stories](#appendix-b-user-stories)
 - [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d-glossary)
-- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+- [Appendix D: Instructions for Manual Testing](#appendix-d-instructions-for-manual-testing)
 
 ## 1. Introduction
 
 **Welcome to TermiNUS!**
 
-**TermiNUS** is a CLI (command line interface) program for NUS Students who wish to organize their
-NUS academic materials through a CLI. The product aims to aid student in organizing their academic
-schedule and enhancing their learning experiences.
+**TermiNUS** is a CLI (command line interface) program for NUS students who wish to consolidate their NUS academic needs such as schedules, questions and notes for the modules that they are taking. With TermiNUS, it aims to aid students and improve their learning experiences while studying in NUS.
 
 **TermiNUS** is written in **Java 11** and uses the Object-Oriented Programming (OOP) paradigm which
 provides us with means to structure a software program into organized and reusable pieces of codes,
@@ -52,7 +58,7 @@ making it more efficient for future improvements and revisions.
 This developer guide is for any developers who wish to contribute to **TermiNUS**. It contains the
 overall architecture design of **TermiNUS** and it displays our main features implementation details
 with the rationale and consideration for each. As of now, the guide is written for the current
-release version of `TermiNUS of v1.0`.
+release version of `TermiNUS of v2.1`.
 
 ### 1.2 Acknowledgements
 
@@ -60,13 +66,19 @@ We would like to thank the following projects and repositories for assisting in 
 TermiNUS.
 
 - [**GSON:** Providing the JSON parsing capabilities for the main file.](https://github.com/google/gson)
-- [**iTextPDF 5:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itextpdf)
+- [**iTextPDF 7:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itext7)
 - [**AddressBook-3:** Providing a guide on writing the guides you are reading now.](https://se-education.org/addressbook-level3/)
 
 
 ### 1.3 Using this Guide
 
-Insert legends / special icons used here to aid in the guide later.
+Along the way you might encounter several icons. These icons will provide you with different types of information that you may find useful.
+
+> 💡 Take note when you see this icon, as it might tell you something important.
+
+> 📝 **Note:** This icon represents additional information that might be useful when using our application.
+
+Lastly, text that is blue like this [example](#test), are clickable links that will bring you to the relevant part of this developer guide.
 
 ## 2. Setting up
 
@@ -126,14 +138,16 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
 Import the coding style xml file into your IntelliJ IDEA.
 
+You can download the `xml` file [here](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml).
+
 1. Go to IntelliJ IDEA settings page.
     1. Located at the **top-right** of the app, click on the gear icon and select `Settings...`.
 2. Under the settings page, locate the `Code Style` tab.
     1. `Editor`&rarr;`Code Style`
-3. Once you are at the `Code Style` tab, you will need to import the file `CS2113TStyle.xml`.
+3. Once you are at the `Code Style` tab, you will need to import the `xml` file.
     1. At the `Scheme` section, select the gear icon and select `Import Scheme`
        &rarr;`IntelliJ IDEA code style XML`.
-    2. Locate and select the `CS2113TStyle.xml` file which is included in the TermiNUS project.
+    2. Locate and select the `xml` file that you have downloaded earlier.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
@@ -286,19 +300,24 @@ For further details on the implementation, head to
 
 ![](attachments/StorageComponent.png)
 
-The Module Storage handles any file I/O operations of TermiNUS.
+The StorageManager handles any file I/O operations of TermiNUS.
 
-The `ModuleStorage` component:
+The `StorageManager` component:
 
 - can create folder for each module provided by the user.
-- can save modules, schedules and links data in a `.json` file.
-- can save notes into multiple `.txt` files.
+- can save / load modules, schedules and links data in / from a `.json` file.
+- can save / load notes into / from multiple `.txt` files.
+- can filters invalid data loaded from a `.json` file.
 
 `TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
 data easily with any available text editor.
 
 
 ## 4. Implementation
+
+This section introduces the specific implementation details and design consideration of some features in TermiNUS.
+
+
 
 ### 4.1 Timetable Feature
 The timetable feature aims to provide users a single command to access all the schedules they store in different modules within TermiNUS.
@@ -630,42 +649,205 @@ To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
 
 #### 4.5.1 Initialize Storage Implementation
 
+This section details the technical information of `StorageManager` when `Terminus` create the `StorageManager`.
+
+##### 4.5.1.1 Current Implementation
+
 ![](attachments/StorageInitializeSequenceDiagram.png)
 
-**Step 1:** When `Terminus` just started, it will initialize a `ModuleStorage` object and loads any
-related data from the `data` directory into it.
+**Step 1:** When TermiNUS gets executes, it will need to initialise a `StorageManager` that handles
+any file I/O operations.
 
-**Step 2:** Next, `Terminus` will create an instance of `ModuleStorage` which is a **singleton class**
-object. Subsequently, `Terminus` calls the `init()` function provided by ModuleStorage to set the filepath of the ModuleStorage with the main `.json` file
-filepath which contains data such as `module`, `questions` and `schedules`.
+**Step 2:** `Terminus` will need to provide a path for the **main directory** where all data are stored
+and the **main json file** where the `module`,`question` and `schedule` are stored.
 
-**Step 3:** Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
-which is provided by `ModuleStorage`. 
+> 📝 **Note:** The **main directory** is **hardcoded** within TermiNUS that has the filepath of the directory
+> where TermiNUS was executed from. The main directory will be named **data** and the **main json**
+> file will be located within the **data** folder and it is named as **main.json**.
 
-**Step 4:** Within the `ModuleStorage` of `loadFile()`, it will first check if
-the main directory of `data` exists. This is needed for the first time execution of `Terminus` as there
-should not be any `data` folder within the same folder in which `Terminus` was executed from. Hence,
-if no `data` directory was found, it will create a `data` directory and create the main `.json`
-file. However, if `data` directory exists, it will locate the main `.json` file within
-the `data` directory. This main `.json` will tell `Terminus` what `modules`
-does it have prior this current session of `Terminus`.
+**Step 3:** When calling the construct of `StorageManager`, it will create different storage type objects
+to handle different storage type file I/O operations. They are `NoteStorage`, `JsonStorage`, `PdfStorage` and
+`FolderStorage`.
 
-**Step 5:** Once the main `.json` has been loaded, a plugin `GsonBuilder` will proceed to load the `.json` 
-data into a `ModuleManager` object. This `ModuleManager` will then be used throughout the execution of `Terminus`.
-For more information, please refer to [Module Component](#35-module-component).
+| Storage Type  | Explanation                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| NoteStorage   | Handles any `Note` related file I/O operations.                                                                            |
+| JsonStorage   | Handles any main `.json` file related I/O operations.                                                                      |
+| FolderStorage | Handles any `Module` related file I/O operations. As `Module` in TermiNUS is stored as a folder in the **data** directory. |
+| PdfStorage    | Handles any `.pdf` file related I/O operations. Mainly the `export` command within the `note` workspace.                   |
 
-**Step 6:** Next, `ModuleStorage` will proceed to load any note data from the `modules` in the `ModuleManager` 
-object. Due to the restriction of **TermiNUS**, it will filter any `module` whose name does not fit the criteria of a valid `module` name. 
-Subsequently, it will check for module that has a folder in the `data` directory in order to retrieve its note data.
-If no folder was found it will simply create one for itself and proceed to check on other `module` in the `ModuleManager`. 
+##### 4.5.1.2 Design Consideration
 
-**Step 7:** Finally, after `ModuleStorage` has loaded all contents for the validated `modules` in the ModuleManager, it
-will return the `ModuleManager` back to `Terminus` for further operations.
+**Aspect: Different types of storage.**
 
+| Approach                                                                                | Pros                                                                          | Cons                                                                                                     |
+|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| 2 Types of Storage that handles either file or folder only                              | More consolidated classes.                                                    | Mix handling of third party operations such as `gson` and `pdfWriter` with the base file I/O operations. |
+| Current implementation of 4 different types of Storage differs by its files operations. | More catered operations that allows the base file I/O to be in another class. | Multiple Storage to be referenced in StorageManager, higher probability of failed initialization.        |
 
-Notes in TermiNUS is stored as a **text** file where the **name** of the file is the **name** of the note 
-and the **contents** of the file will be the **content** for that Note. For example, if a module has **5 Notes** object in TermiNUS, it should have **5 text files** within its module folder.
+**Chosen Solution:** Current approach with the 4 different types of storage. Allowing all base functionality
+of file I/O operations using `NIO2` to be in its own class which is in the `Storage` class. As for the rest
+of the storage type class to inherit the functionality of the `Storage` class while adding their own
+checks and third party imports on top of it.
 
+#### 4.5.2 Loading Storage Implementation
+
+This section details the technical information of `StorageManager` when `Terminus` loads data in the `data` directory.
+
+##### 4.5.2.1 Current Implementation
+
+![](attachments/StorageLoadSequenceDiagram_part1.png)
+
+**Step 1:** TermiNUS will call the method `initialise()` for `StorageManager` that will proceed to load
+any data from the main `data` directory.
+
+**Step 2:** Firstly, `StorageManager` will attempt to create the main `data` directory follow by the `main.json` file
+, only if they have not been created yet. This is to ensure that on the **first** time execution of TermiNUS, 
+all necessary file and folder are created.
+
+> 📝 **Note:** The `createFolder()` and `createFile()` uses checks from `Files.notExists(:Path)` before
+> creating the folder and file using `Files.createDirectories(:Path)` and `Files.createFile(:Path)` respectively.
+
+![](attachments/StorageLoadSequenceDiagram_part2.png)
+
+**Step 3:** After, ensuring that all required folder and file are created, it will proceed to load any data
+from the `main.json` file into a `ModuleManager` object using `gson` libraries.
+
+**Step 4:** However, if the `main.json` file does not contain any data due to the `main.json` file being
+created in **step 2**, it will create a new `ModuleManager` object and return it back to TermiNUS.
+
+**Step 5:** After loading the data into `ModuleManager` from the `main.json` file, it will proceed to filter any 
+invalid data using a `FilterManager`. The `FilterManager` will iterate through each data in `ModuleManager`
+and removes the invalid ones.
+
+> 📝 **Note:** From this point onwards, the ModuleManager will only contain valid data that matches the
+> criteria set by TermiNUS. One example of the filter done by `FilterManager` is **module code** of `NusModule` cannot have spaces.
+
+**Step 6:** With the validated `ModuleManager`, it will load any `Note` data for each `NusModule` in `ModuleManager` from its respective **module** folder.
+The **nus module** mentioned here are the ones currently in the `ModuleManager` and the folder containing the `Note` file
+has the name of the **nus module**.
+
+> 📝 **Note:** The nus modules in the `main.json` file represents the `NusModule` that should be in TermiNUS when
+> TermiNUS gets executed. Any other folder within the main `data` directory with its name not
+> in `ModuleManager` will be ignored.
+
+> 📝 **Note:** Any `Note` file that causes an error while performing file I/O operations, that `Note` file
+> will be ignored and the program will proceed to load the next `Note` file if any.
+
+**Step 7:** Once the `Note` has been loaded into `ModuleManager` under each of its respective `NusModule`, 
+it will return this `ModuleManager`.
+
+**Step 8:** And finally, `StorageManager` will return this `ModuleManager` back to `Terminus`.
+
+##### 4.5.2.2 Design Consideration
+
+**Aspect: Creates missing folder of existing NusModule.**
+
+| Approach                                                                    | Pros                                                                | Cons                                                                                  |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Create a folder for the `NusModule` if its folder does not exists.          | Synchronize folder data with current `ModuleManager` data.          | Extra file I/O operations needed.                                                     |
+| Do nothing and proceed to check for the next `NusModule` in `ModuleManager` | No need to perform additional file I/O operation to create folders. | Current `NusModule` in `ModuleManager` does not reflect in the main `data` directory. |
+
+**Chosen Solution:** Do not create the missing folders of existing `NusModule` in `ModuleManager`. By performing 
+the additional filo I/O operation to create a folder may result in an IO Exception due to not being able to
+create the specified folder. Due to this, it may abort loading of any notes for any other `NusModule` in
+ModuleManager. Secondly, this method is meant to load existing data and not to create any data that is not
+the main `data` directory or the `main.json` file.
+
+#### 4.5.3 Execute CommandResult with Storage Implementation
+
+This section details the technical information of `StorageManager` when `Terminus` performs required file I/O operations stated in `CommandResult` after an execution of a `Command`.
+
+##### 4.5.3.1 Current Implementation
+
+![](attachments/StorageCommandResultSequenceDiagram.png)
+
+**Step 1:** When `Terminus` executes a `Command`, a `CommandResult` will be returned. The `CommandResult` contains
+information of the `Command` execution and this includes any additional file I/O operations needed. If `CommandResult.hasChanges()` returns
+a **True**, it determines a file I/O operation is needed.
+
+**Step 2:** If a file I/O operation is needed, `Terminus` will call the method `executeCommandResult()` in `StorageManager` that
+handles the extraction of information in `CommandResult` and parses the information to its respective Storage types for further
+processing.
+
+**Step 3:** Once done, `StorageManager` will return to `Terminus` and this concludes the file I/O 
+requirements from the execution of a `Command`.
+
+##### 4.5.3.2 Design Consideration
+
+**Aspect: Split by StorageAction or StorageType first.**
+
+| Approach             | Pros                                                                                        | Cons                                                                                                              |
+|----------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| StorageAction first. | File I/O grouped by similar changes performed.                                              | Need to handle different types of file. For example, folder and file creation are both different calls in `NIO2`. |
+| StorageType first.   | Group by the objects requirements in Terminus. Decoupling of file I/O operations is easier. | In the future, many different file types may result in multiple Storage class needed.                             |
+
+**Chosen Solution:** Separate file I/O operation by the type of file involved first which is the solution of
+StorageType first. This means that each Storage type have a higher decoupling from one another.
+
+### 4.6 Adding Content Implementation
+
+This section details the technical information of adding a `Content` into `ContentManager`.
+
+#### 4.6.1 Current Implementation
+
+![](attachments/AddingContentSequenceDiagram.png)
+
+> 📝 **Note:** For the other `Content` type such as `Question` and `Schedule`, they follow the same logic
+> flow as the diagram shown above. Simply replace the `AddNoteCommand` and `Note` to their respective 
+> `Content` type.
+
+**Step 1:** When the `AddNoteCommand` receives the call to `execute()` from the `CommandParser`, it will
+proceed to add the new `Note` into its `ContentManager`.
+
+**Step 2:** Firstly, it will create a new `Note` object with the specified arguments for it.
+
+**Step 3** Next, `AddNoteCommand` will pass the newly created `Note` object into `ContentManager` for it to 
+store in its arraylist of `Note`.
+
+**Step 4** Upon, the successful execution of adding the new `Note` into `ContentManager`, it will return a `CommandResult` with
+its respective message for user `Ui` response purposes.
+
+#### 4.6.2 Design Consideration
+
+**Aspect: Checks arguments in ContentManager or the AddCommand.**
+
+| Approach                           | Pros                                                                      | Cons                                                                      |
+|------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Checks argument in AddCommand.     | Ease the workload on ContentManager.                                      | Add command can no longer be a generic command used by all Content types. |
+| Checks argument in ContentManager. | Command do not need to understand the criteria of a valid Content object. | Introduces a lengthy if-else for each Content type in Terminus.           |
+
+**Chosen Solution:** To validate arguments in the AddCommand instead. This is due to the generic type of
+`ContentManager` that may lead to nested conditions if the arguments are checked within the `ContentManager`.
+
+### 4.7 Deleting Content Implementation
+
+This section details the technical information of deleting a `Content` from `ContentManager`.
+
+#### 4.7.1 Current Implementation
+
+![](attachments/DeletingContentSequenceDiagram.png)
+
+**Step 1:** When the `DeleteCommand` receives the call to `execute()` it will proceed to remove the
+specified `Content` by its **content number** from the `ContentManager`.
+
+**Step 2:** Within `ContentManager`, it will check if the provided **content number** is within range
+of the arraylist.
+
+**Step 3:** Once the `Content` has been removed from the arraylist, it will return the removed `Content` name
+for user `Ui` response purposes.
+
+#### 4.7.2 Design Consideration
+
+**Aspect: To pass the content number as the exact index in the arraylist or the index viewed from the view command.**
+
+| Approach                          | Pros                                                                                                                                                                | Cons                                                                                                                            |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Pass by array index.              | Generic use of `deleteContent()` could be possible for any other `Command` that requires a removal of a certain `Content`.                                          | Could be confusing as the arraylist is not known only to the `DeleteCommand`.                                                   |
+| Pass by content number from view. | All indexes used in Terminus will be retrieved from the view command, hence the content number is the only number involved in any `Command` that requires an index. | Internal usage to remove an element in the arraylist could not use the `deleteContent()` unless it adds a 1 to the given index. |
+
+**Chosen Solution:** To avoid the mixing up of content number and array index, we decided to pass the content number
+into `ContentManager` where it will subtract the given number by 1 to get the index number for the arraylist.
 
 ## 5. Documentation, Logging, Testing and DevOps
 
@@ -702,6 +884,23 @@ All pull requests are also checked with Codecov to ensure that overall code cove
 You may monitor your Codecov progress in your pull request if you successfully passed all the tests.
 
 ## Appendix A: Product Scope
+
+### A.1 Target User Profile
+
+- Students in NUS.
+- Wants to enhance their learning experience.
+- Has difficulty managing academic materials in NUS.
+- Prefers command-line desktop applications.
+- Able to type fast.
+
+### A.2 Value Proposition
+
+- Helps the target user organise their academic materials.
+- Find any conflicts in the schedules from the target user.
+- Aids in learning better using Active Recall.
+- Consolidate all notes into a PDF for referencing purposes while studying.
+- Organise academic materials for different modules.
+- Portable and works offline.
 
 
 ## Appendix B: User Stories  
@@ -740,12 +939,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 3. The application should be easy to learn and use with the User Guide and/or Developer Guide.
 4. The application should be responsive to user input.
 
-
-
-## Appendix D: Glossary
-
-
-## Appendix E: Instructions for Manual Testing
+## Appendix D: Instructions for Manual Testing
 
 ### D.1: Launch and Shutdown
 

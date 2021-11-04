@@ -1,8 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-skinparam classAttributeIconSize 0
-hide circle
+!include ClassStyle.puml
 
 TestCommand ..> GameEnvironment
 
@@ -18,11 +17,11 @@ note top on link
 endnote
 GameEnvironment ..>  Question
 
-class TestCommand {
+class TestCommand COMMAND_COLOR{
   + execute(ModuleManager moduleManager): void
 }
 
-class GameEnvironment {
+class GameEnvironment ACTIVERECALL_COLOR{
   GameEnvironment(Ui ui, QuestionGenerator generator)
   + run(): void
   - showPreGameInformation(): void
@@ -32,7 +31,7 @@ class GameEnvironment {
   + {static} createNewEnvironment(List<Question> questions, int questionCount)
 }
 
-class QuestionGenerator {
+class QuestionGenerator ACTIVERECALL_COLOR{
   - random: Random
   - total: double
   - questionCount: int
@@ -44,7 +43,7 @@ class QuestionGenerator {
   - addQuestion(Question question): void
 }
 
-class Question {
+class Question ACTIVERECALL_COLOR{
   - name
   - data
   - weight
@@ -62,7 +61,7 @@ class Ui {
   + {static} getInstance(): Ui
 }
 
-class DifficultyModifier {
+class DifficultyModifier ACTIVERECALL_COLOR{
   + {static} tweakEasyQuestionDifficulty(double initial): double
   + {static} tweakHardQuestionDifficulty(double initial): double
   - {static} getCurveValue(double x): double
