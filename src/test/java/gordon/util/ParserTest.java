@@ -459,8 +459,7 @@ public class ParserTest {
                 + "====================" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
-
-
+    
     @Test
     public void testSetPrice() {
         String input = "addRecipe Myojo Noodles "
