@@ -229,6 +229,40 @@ public class ParserTest {
         inputOutputTest(input, expected);
     }
 
+    @Test
+    public void listRecipes_unnecessaryParameters_exceptionThrown() {
+        String input = "addRecipe Fried Rice "
+                + "/ingredients Eggs + Rice + MSG"
+                + "/steps Cook rice + Fry Rice + Serve\n"
+                + "addRecipe Mee Rebus"
+                + "/ingredients Mee + Sauce + Half-Boiled Egg"
+                + "/steps Cook egg + Boil noodles + Serve\n"
+                + "listRecipes /ingredients\n"
+                + "exit\n";
+        String expected = "Added Fried Rice recipe! Yum!" + System.lineSeparator()
+                + "Fried Rice" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Eggs" + System.lineSeparator()
+                + "2. Rice" + System.lineSeparator()
+                + "3. MSG" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Cook rice" + System.lineSeparator()
+                + "2. Fry Rice" + System.lineSeparator()
+                + "3. Serve" + System.lineSeparator()
+                + "Added Mee Rebus recipe! Yum!" + System.lineSeparator()
+                + "Mee Rebus" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Mee" + System.lineSeparator()
+                + "2. Sauce" + System.lineSeparator()
+                + "3. Half-Boiled Egg" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Cook egg" + System.lineSeparator()
+                + "2. Boil noodles" + System.lineSeparator()
+                + "3. Serve" + System.lineSeparator()
+                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator();
+        inputOutputTest(input, expected);
+    }
+
 
     @Test
     public void testCheck() {
