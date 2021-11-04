@@ -4,15 +4,14 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import seedu.duke.trip.Trip;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

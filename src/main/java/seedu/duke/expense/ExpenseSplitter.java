@@ -8,8 +8,8 @@ import seedu.duke.Ui;
 
 import java.util.HashMap;
 
-public abstract class ExpenseSplittingFunctions {
-    private static final double EPSILON = 0.001;
+interface ExpenseSplitter {
+    double EPSILON = 0.001;
 
     //@@author joshualeeky
 
@@ -19,7 +19,7 @@ public abstract class ExpenseSplittingFunctions {
      * @param expense Expense that is being added into the current trip.
      * @param person Person who is part of the trip.
      */
-    protected static void updateOnePersonSpending(Expense expense, Person person) {
+    static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
         expense.setPayer(person);
         expense.setAmountSplit(person, expense.getAmountSpent());
@@ -30,7 +30,7 @@ public abstract class ExpenseSplittingFunctions {
      * @param expense Expense that is being added.
      * @throws ForceCancelException Cancel the creation of the expense anytime an input is required by the user.
      */
-    protected static void updateIndividualSpending(Expense expense) throws ForceCancelException {
+    static void updateIndividualSpending(Expense expense) throws ForceCancelException {
         Person payer = getValidPersonInExpenseFromString(expense);
         expense.setPayer(payer);
         HashMap<Person, Double> amountBeingPaid = new HashMap<>();
