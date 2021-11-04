@@ -167,6 +167,14 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
+To delete specific details of a selected contact, a user must enter a command in the form `rm [CONTACT INDEX]
+[FLAGS]`. The sequence diagram below shows how the removal of a contact's fields works. Before any
+deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
+deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
+that deletion has been executed. If user cancels, deletion, a message is printed to show that the deletion has been
+cancelled.
+
+![Delete Fields Sequence Diagram](images/DeleteContactFieldsSequenceDiagram.png)
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
@@ -176,7 +184,6 @@ on contact names buy default. From the user input, the search query and the sear
 will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
-
 
 ### <a name="List"></a>Listing all contacts: `ls`
 This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
