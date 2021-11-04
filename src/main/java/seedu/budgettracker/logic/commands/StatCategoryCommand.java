@@ -11,7 +11,7 @@ public class StatCategoryCommand extends StatCommand {
         this.month = month;
     }
 
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         int numberOfCategories = Category.values().length;
         double[] categoryPercentage;
         categoryPercentage = new double[numberOfCategories];

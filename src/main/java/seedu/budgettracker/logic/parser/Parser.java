@@ -11,8 +11,6 @@ import seedu.budgettracker.logic.commands.InvalidCommand;
 import seedu.budgettracker.logic.commands.ListRecordsCommand;
 import seedu.budgettracker.logic.commands.StatCommand;
 import seedu.budgettracker.logic.commands.YearCommand;
-import seedu.budgettracker.data.records.Category;
-import seedu.budgettracker.common.exception.EmptyDescriptionException;
 import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
@@ -197,9 +195,9 @@ public class Parser {
                 return new InvalidCommand(String.format(MESSAGE_WARNING_INCORRECT_YEAR_FORMAT,
                         AddCommand.MESSAGE_USAGE));
             }
-
+            int year = Integer.parseInt(commandParams);
             String directoryOfRecordList = "./data/" + commandParams + ".txt";
-            return new YearCommand(directoryOfRecordList);
+            return new YearCommand(directoryOfRecordList, year);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
