@@ -510,7 +510,9 @@ Your expense of SGD 50.00 has been successfully removed.
 ###Optimize Transactions
 
 Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened
-a trip and have expenses to use the command. The input syntax is as follows:
+a trip and have expenses to use the command. 
+
+Input syntax:
 
 ```
 optimize
@@ -524,7 +526,7 @@ Input:
 optimize
 ```
 
-Output:
+If successful, the output will be as follows:
 
 ```
 Here is the optimized payment transactions:
@@ -560,7 +562,7 @@ Input:
 summary
 ```
 
-Output:
+If successful, the output will be as follows:
 ```
 Ben has spent USD $50.00 (SGD $67.57) on 3 expenses on the following categories:
 food: USD $30.00 (SGD $40.54)
@@ -577,6 +579,44 @@ travel: USD $20.00 (SGD $27.03)
 shopping: USD $30.00 (SGD $40.54)
 
 ```
+
+### Help
+Shows a quick help message, depending on which stage the user is at.
+
+Input syntax:
+
+``
+help
+``
+
+For example,
+
+Input:
+
+```
+help
+```
+
+Output for if no trip is open:
+````
+Type "open [trip number]" to open your trip
+While a trip is open, type "expense" to create an expense for that trip
+Type "quit" to exit
+````
+
+Output for if trip is open:
+````
+You are inside a trip. Trip specific commands:
+	expense: creates an expense
+	view: list all expenses
+	view filter [options] [search keyword]: list filtered expenses.
+		filter options: [category, description, payer, person, date]
+	view [index]
+	summary: shows how much each person spent in total for this trip
+	amount [person]: for settling repayment at the end of the trip,shows how much this person owes to others, or how much others owe this person
+	open [trip num]: open another trip
+	quit: exit the program
+````
 ---
 
 
