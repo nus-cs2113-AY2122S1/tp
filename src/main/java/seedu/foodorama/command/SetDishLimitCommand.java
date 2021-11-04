@@ -15,7 +15,11 @@ public class SetDishLimitCommand extends Command {
         String dish = parameters.get(0);
         int dishIndex;
         if (isNumber(dish)) {
-            dishIndex = Integer.parseInt(dish) - 1;
+            if (isInteger(dish)) {
+                dishIndex = Integer.parseInt(dish) - 1;
+            } else {
+                throw new FoodoramaException(UI.getInvalidIndexMsg());
+            }
         } else if (!isNumber(dish) & dish.isEmpty()) {
             throw new FoodoramaException(UI.getDishNameMissingMsg());
         } else {
@@ -41,6 +45,15 @@ public class SetDishLimitCommand extends Command {
             int dishIndex = Integer.parseInt(number) - 1;
             return true;
         } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean isInteger(String numberString) {
+        if (isNumber(numberString)) {
+            double number = Double.parseDouble(numberString);
+            return Math.rint(number) - number == 0;
+        } else {
             return false;
         }
     }

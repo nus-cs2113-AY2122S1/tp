@@ -25,7 +25,11 @@ public class AddIngrStoredCommand extends Command {
         String ingredient = parameters.get(0);
         int ingredientIndex;
         if (isNumber(ingredient)) {
-            ingredientIndex = Integer.parseInt(ingredient) - 1;
+            if (isInteger(ingredient)) {
+                ingredientIndex = Integer.parseInt(ingredient) - 1;
+            } else {
+                throw new FoodoramaException(UI.getInvalidIndexMsg());
+            }
         } else {
             ingredientIndex = IngredientList.find(ingredient);
         }
@@ -52,6 +56,15 @@ public class AddIngrStoredCommand extends Command {
             int dishIndex = Integer.parseInt(number) - 1;
             return true;
         } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean isInteger(String numberString) {
+        if (isNumber(numberString)) {
+            double number = Double.parseDouble(numberString);
+            return Math.rint(number) - number == 0;
+        } else {
             return false;
         }
     }

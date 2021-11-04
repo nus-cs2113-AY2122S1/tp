@@ -1,7 +1,6 @@
 package seedu.foodorama.command;
 
 import seedu.foodorama.DishList;
-import seedu.foodorama.IngredientList;
 import seedu.foodorama.Ui;
 import seedu.foodorama.exceptions.FoodoramaException;
 import seedu.foodorama.logger.LoggerManager;
@@ -38,7 +37,7 @@ public class AddDishCommand extends Command {
 
     public boolean isNumber(String numberString) {
         try {
-            int numberInteger = Integer.parseInt(numberString) - 1;
+            double number = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;
