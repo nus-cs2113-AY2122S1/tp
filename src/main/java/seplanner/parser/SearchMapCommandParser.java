@@ -24,7 +24,12 @@ public class SearchMapCommandParser {
             throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
 
-        University university;
+        University university = new University();
+
+        if (input.equals("all")) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+            return new SearchMapCommand(university, universitySelectedList, moduleSelectedList, true);
+        }
 
         if (ParseCondition.isNumeric(input)) {
             int uniIndex = Integer.parseInt(input);
@@ -42,7 +47,7 @@ public class SearchMapCommandParser {
         }
         assert university.getName() != null;
         logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-        return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
+        return new SearchMapCommand(university, universitySelectedList, moduleSelectedList, false);
     }
 
 }
