@@ -55,6 +55,14 @@ public class UpdatePrescriptionCommand extends Command {
         String customerId = PrescriptionManager.getUpdatedCustomerId(parameters, prescription.getCustomerId());
         String staffName = PrescriptionManager.getUpdatedStaff(parameters, prescription.getStaff());
         boolean hasQuantityParam = validator.hasQuantityParamChecker(parameters, prescription.getQuantity());
+
+        if (hasQuantityParam) {
+            boolean isZero = Integer.parseInt(parameters.get(CommandParameters.QUANTITY)) == 0;
+            if (isZero) {
+                ui.print("Action aborted! Please use the delete command to remove the prescription.");
+                return;
+            }
+        }
         boolean isSuccessfulUpdate = false;
 
         if (hasNameParam && hasQuantityParam) {
@@ -299,8 +307,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if restoration is successful.
      */
     private boolean processRestoration(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
-                                       String customerId,
-                                       Date date, String staffName) {
+                                       String customerId, Date date, String staffName) {
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -352,8 +359,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if update is successful.
      */
     private boolean processOtherFields(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
-                                       String customerId,
-                                       Date date, String staffName) {
+                                       String customerId, Date date, String staffName) {
         if (prescription == null) {
             return false;
         }

@@ -217,19 +217,19 @@ After the `.execute()` command is called, MediVault does the following validator
 
 ![ContainValidParametersAndValuesSequenceDiagram](diagrams/diagram_images/ContainValidParametersAndValuesSequenceDiagram.png)
 
-> :information_source: Note: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
+> :information_source: Note: Replace `*` with `Stock`, `Prescription` or `Order` depending on the command entered.
 
-1. MediVault attempts to get the instance of the `Ui` class which is a singleton if it exists. Otherwise, it creates
-a new instance of the `Ui` class.
-2. MediVault creates a new `*Validator` instance which contains the methods to validate the user's input for the
+1. `*Command` attempts to get the instances of the `Ui` and `Medicine` classes which are a singletons if they exists. 
+Otherwise, it creates a new instance of the `Ui` and/or `Medicine` class.
+2. `*Command` creates a new `*Validator` instance which contains the methods to validate the user's input for the
 respective `*`.
-3. MediVault runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
-4. Medivault attempts to get the instance of the `Medicine` class which is also a single if it exists. Otherwise, it 
-creates a new instance of the `Medicine` class. 
-5. MediVault runs `containsInvalidParameterValues()` to check if **parameter values** input by the user is valid.
-6. If **Step 3** and **Step 5** are able to run without throwing any exception or error, user inputs are considered 
-valid.
-7. After running the logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
+3. `*Command` runs `containsInvalidParametersAndValues()` and does validation checks explained in detail in **Step 4** 
+and **Step 5**.
+4. The `MedicineValidator` class runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
+5. Then, `MedicineValidator` class runs `containsInvalidParameterValues()` in `*Validator` to check if 
+**parameter values** input by the user is valid.
+6. `MedicineValidator` will return the result of the validity checks back to `*Command`.
+7. After running the Logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
 `Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
 
 The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 

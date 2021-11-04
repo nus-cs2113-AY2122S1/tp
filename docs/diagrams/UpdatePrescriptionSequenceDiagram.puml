@@ -15,13 +15,19 @@ end box
 autoactivate on
 mainFrame sd Logic for UpdatePrescriptionCommand
 activate updateprescription
-    updateprescription -> prescriptionmanager: extractDispenseObject()
+    updateprescription -> prescriptionmanager: extractDispenseObject(parameters: LinkedHashMap<String,String>,\nmedicines: ArrayList<Medicine>)
     updateprescription <-- prescriptionmanager
     create stockvalidator
     updateprescription -> stockvalidator: new StockValidator()
     updateprescription <-- stockvalidator
     alt hasNameParam && hasQuantityParam
         updateprescription -> updateprescription: processGivenNameAndQuantity()
+        note right
+            All methods takes in the same parameters.
+            process(ui: Ui, medicines: ArrayList<Medicine>,
+            prescription: Prescription, customerId: String,
+            date: Date, staffName: String)
+        end note
         updateprescription --> updateprescription: isSuccessfulUpdate
     else hasNameParam && !hasQuantityParam
         updateprescription -> updateprescription: processGivenName()

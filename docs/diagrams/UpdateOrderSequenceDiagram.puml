@@ -20,21 +20,21 @@ end box
 autoactivate on
 mainFrame sd Logic for UpdateOrderCommand
 activate updateorder
-    updateorder -> ordermanager: extractOrderObject()
+    updateorder -> ordermanager: extractOrderObject(parameters: LinkedHashMap<String, String>,\nmedicines: ArrayList<Medicine>)
     updateorder <-- ordermanager: order
     updateorder -> order: isDelivered()
     updateorder <-- order
     opt !isDelivered
-        updateorder -> stockmanager: getMaxStockQuantity()
+        updateorder -> stockmanager: getMaxStockQuantity(medicines: ArrayList<Medicines>, orderName: String)
         updateorder <-- stockmanager
         opt existName && existQuantityParam
             create stockvalidator
             updateorder -> stockvalidator: new StockValidator()
             updateorder <-- stockvalidator
-            updateorder -> stockvalidator: quantityValidityChecker()
+            updateorder -> stockvalidator: checkUpdateQuantity(ui: Ui,\nmedicines: ArrayList<Medicine>,\norder: Order, maxQuantity: int)
             updateorder <-- stockvalidator: isValidQuantity
             opt isValidQuantity
-                updateorder -> updateorder: setUpdatesByOrderId()
+                updateorder -> updateorder: setUpdatesByOrderId(filteredOrders: ArrayList<Order>,\norder: Order)
                 updateorder --> updateorder
             end
         end
