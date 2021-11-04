@@ -7,7 +7,7 @@ import seedu.duke.Ui;
 import java.time.LocalDate;
 import java.util.logging.Level;
 
-public class Parser extends HandleFunctions {
+public class Parser extends CommandHandler {
 
     private static final int SPLIT_COMMAND_FROM_INFO_LENGTH = 2;
     private static final int INPUT_COMMAND = 0;
@@ -36,7 +36,6 @@ public class Parser extends HandleFunctions {
                 Ui.goodBye();
                 return false;
             } else if (inputCommand.equals(CLOSE_COMMAND)) {
-                Storage.setLastExpense(null);
                 Storage.closeTrip();
                 return true;
             } else if (!checkValidCommand(inputCommand)) {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import seedu.duke.expense.Expense;
+import seedu.duke.trip.Trip;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,12 +23,9 @@ public class Storage {
     private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
     private static Trip lastTrip = null;
-    private static Expense lastExpense = null;
 
     private static Scanner scanner;
     private static Logger logger;
-
-    private static boolean isProcessing = false;
 
     //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
@@ -256,14 +254,6 @@ public class Storage {
 
     public static void setLastTrip(Trip lastTrip) {
         Storage.lastTrip = lastTrip;
-    }
-
-    public static Expense getLastExpense() {
-        return lastExpense;
-    }
-
-    public static void setLastExpense(Expense lastExpense) {
-        Storage.lastExpense = lastExpense;
     }
 
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {

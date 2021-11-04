@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-public class Expense extends ExpenseSplittingFunctions {
+public class Expense implements ExpenseSplitter {
     private double amountSpent;
     private String description;
     private ArrayList<Person> personsList;
@@ -23,7 +23,6 @@ public class Expense extends ExpenseSplittingFunctions {
     private HashMap<String, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
-    private double exchangeRate;
 
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
@@ -32,16 +31,14 @@ public class Expense extends ExpenseSplittingFunctions {
      * @param category      (placeholder)
      * @param listOfPersons (placeholder)
      * @param description   (placeholder)
-     * @param exchangeRate  (placeholder)
      */
     //@@author lixiyuan416
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
-                   String description, double exchangeRate) {
+                   String description) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
-        this.exchangeRate = exchangeRate;
     }
     //@@author
 
@@ -57,12 +54,11 @@ public class Expense extends ExpenseSplittingFunctions {
         setCategory(expenseInfo[1].toLowerCase());
         this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
-        this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
         this.date = promptDate();
         if (personsList.size() == 1) {
-            updateOnePersonSpending(this, personsList.get(0));
+            ExpenseSplitter.updateOnePersonSpending(this, personsList.get(0));
         } else {
-            updateIndividualSpending(this);
+            ExpenseSplitter.updateIndividualSpending(this);
         }
     }
     //@@author
@@ -71,6 +67,7 @@ public class Expense extends ExpenseSplittingFunctions {
         return userInput.split("/")[1].strip();
     }
 
+    //@@author joshualeeky
     /**
      * Obtains a list of Person objects from array of names of people.
      *
@@ -105,8 +102,6 @@ public class Expense extends ExpenseSplittingFunctions {
         }
         return validListOfPeople;
     }
-
-    //@@author
 
     public void setPayer(Person person) {
         this.payer = person;
@@ -158,14 +153,6 @@ public class Expense extends ExpenseSplittingFunctions {
         }
     }
 
-    public void addPerson(Person p) {
-        personsList.add(p);
-    }
-
-    public void printDate() {
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        System.out.println(formattedDate);
-    }
     //@@author
 
 
@@ -242,28 +229,12 @@ public class Expense extends ExpenseSplittingFunctions {
         this.category = category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDate getDate() {
         return date;
     }
 
     public String getStringDate() {
         return date.format(outputPattern);
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public double getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(double exchangeRate) {
-        this.exchangeRate = exchangeRate;
     }
 
 }

@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.Trip;
+import seedu.duke.trip.Trip;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.Person;
@@ -12,7 +12,7 @@ import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
 
-public abstract class ExecuteFunctions {
+abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
     private static final String EDIT_LOCATION = "-location";
@@ -86,7 +86,7 @@ public abstract class ExecuteFunctions {
         if (inputParams == null) {
             //list everybody's expense summary
             for (Person p : currentTrip.getListOfPersons()) {
-                currentTrip.getIndividualExpenseSummary(p);
+                ExpenseSummarizer.getIndividualExpenseSummary(p);
                 System.out.println();
             }
         } else {
@@ -95,7 +95,7 @@ public abstract class ExecuteFunctions {
                 //returns null if no such person
                 Person personToView = getValidPersonInTripFromString(inputParams, currentTrip);
                 if (personToView != null) {
-                    currentTrip.getIndividualExpenseSummary(personToView);
+                    ExpenseSummarizer.getIndividualExpenseSummary(personToView);
                 } else {
                     Ui.printNoPersonFound(inputParams);
                     Ui.printSummaryFormatError();
@@ -112,6 +112,12 @@ public abstract class ExecuteFunctions {
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
+        } else if (inputParams.equalsIgnoreCase("last")) {
+            if (openTrip.getLastExpense() == null) {
+                Ui.noRecentExpenseError();
+            } else {
+                System.out.println(openTrip.getLastExpense());
+            }
         } else {
             String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
@@ -121,7 +127,7 @@ public abstract class ExecuteFunctions {
                 expenseCategory = paramString[1];
                 expenseAttribute = paramString[2];
             }
-            if (secondCommand.equals("filter")) {
+            if (secondCommand.equalsIgnoreCase("filter")) {
                 try {
                     openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
                 } catch (IndexOutOfBoundsException e) {
@@ -149,11 +155,22 @@ public abstract class ExecuteFunctions {
      * @see Parser#executeDeleteExpense(int)
      */
     protected static void executeDelete(String inputParams) {
-        int index = Integer.parseInt(inputParams) - 1;
-        if (!Storage.checkOpenTrip()) {
-            executeDeleteTrip(index);
-        } else {
+        int index;
+        if (Storage.checkOpenTrip()) {
+            Trip currTrip = Storage.getOpenTrip();
+            if (inputParams.equalsIgnoreCase("last")) {
+                index = currTrip.getListOfExpenses().indexOf(currTrip.getLastExpense());
+            } else {
+                index = Integer.parseInt(inputParams) - 1;
+            }
             executeDeleteExpense(index);
+        } else {
+            if (inputParams.equalsIgnoreCase("last")) {
+                index = Storage.getListOfTrips().indexOf(Storage.getLastTrip());
+            } else {
+                index = Integer.parseInt(inputParams) - 1;
+            }
+            executeDeleteTrip(index);
         }
     }
 
@@ -171,7 +188,7 @@ public abstract class ExecuteFunctions {
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
         currTrip.addExpense(newExpense);
-        Storage.setLastExpense(newExpense);
+        currTrip.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 
@@ -194,26 +211,22 @@ public abstract class ExecuteFunctions {
         }
     }
 
-    private static void executeDeleteExpense(int expenseIndex) {
-        try {
-            Trip currentTrip = Storage.getOpenTrip();
-            Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
-            Double expenseAmount = expenseToDelete.getAmountSpent();
-            correctBalances(expenseToDelete);
-            currentTrip.removeExpense(expenseIndex);
-            Ui.printDeleteExpenseSuccessful(expenseAmount);
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printUnknownExpenseIndexError();
-        }
-        Storage.setLastExpense(null);
-    }
-
     protected static void executeOptimize() throws NoExpensesException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
             checkForOptimization();
         } else {
             throw new NoExpensesException();
         }
+    }
+
+    private static void executeDeleteExpense(int expenseIndex) {
+        Trip currentTrip = Storage.getOpenTrip();
+        Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
+        double expenseAmount = expenseToDelete.getAmountSpent();
+        correctBalances(expenseToDelete);
+        currentTrip.removeExpense(expenseIndex);
+        Ui.printDeleteExpenseSuccessful(expenseAmount);
+        currentTrip.setLastExpense(null);
     }
 
     /**
@@ -223,14 +236,10 @@ public abstract class ExecuteFunctions {
      */
     private static void executeDeleteTrip(int tripIndex) {
         ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
-        try {
-            Trip tripToDelete = listOfTrips.get(tripIndex);
-            listOfTrips.remove(tripIndex);
-            Ui.printDeleteTripSuccessful(tripToDelete);
-            Storage.setLastTrip(null);
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printUnknownTripIndexError();
-        }
+        Trip tripToDelete = listOfTrips.get(tripIndex);
+        listOfTrips.remove(tripIndex);
+        Ui.printDeleteTripSuccessful(tripToDelete);
+        Storage.setLastTrip(null);
     }
 
 
@@ -292,13 +301,14 @@ public abstract class ExecuteFunctions {
 
     public static boolean isNumeric(String secondCommand) {
         try {
-            int i = Integer.parseInt(secondCommand);
+            Integer.parseInt(secondCommand);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
+    //@@author joshualeeky
     private static void correctBalances(Expense expense) {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
@@ -312,7 +322,6 @@ public abstract class ExecuteFunctions {
         }
     }
 
-    //@@author joshualeeky
     private static Person getValidPersonInTripFromString(String name, Trip trip) {
         for (Person person : trip.getListOfPersons()) {
             if (name.equalsIgnoreCase(person.getName())) {
@@ -326,7 +335,7 @@ public abstract class ExecuteFunctions {
 
     private static void checkForOptimization() {
         Trip trip = Storage.getOpenTrip();
-        trip.optimizePayments();
+        PaymentOptimizer.optimizePayments(trip);
         Ui.printOptimizedAmounts();
     }
 

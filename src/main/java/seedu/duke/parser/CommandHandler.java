@@ -7,7 +7,7 @@ import seedu.duke.exceptions.NoExpensesException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
-public abstract class HandleFunctions extends ExecuteFunctions {
+abstract class CommandHandler extends CommandExecutor {
 
     /**
      * Confirms that the user entered paramaters, and calls {@link Parser#executeCreateTrip(String)}.
@@ -65,7 +65,25 @@ public abstract class HandleFunctions extends ExecuteFunctions {
             assert inputParams != null;
             executeDelete(inputParams);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            Ui.printUnknownTripIndexError();
+            if (Storage.checkOpenTrip()) {
+                Ui.printUnknownExpenseIndexError();
+            } else {
+                Ui.printUnknownTripIndexError();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            if (Storage.checkOpenTrip()) {
+                if (inputParams.equalsIgnoreCase("last")) {
+                    Ui.noRecentExpenseError();
+                } else {
+                    Ui.printUnknownExpenseIndexError();
+                }
+            } else {
+                if (inputParams.equalsIgnoreCase("last")) {
+                    Ui.printNoLastTripError();
+                } else {
+                    Ui.printUnknownTripIndexError();
+                }
+            }
         } catch (NullPointerException e) {
             Ui.emptyArgForDeleteCommand();
         }

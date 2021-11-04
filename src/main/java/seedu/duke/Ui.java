@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.expense.Expense;
 import seedu.duke.parser.Parser;
+import seedu.duke.trip.Trip;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -260,7 +261,7 @@ public class Ui {
     }
 
     public static void promptForTripIndex() {
-        System.out.print("Please enter a valid trip number: ");
+        System.out.print("The number you entered is not valid, ");
     }
 
     public static void emptyArgForDeleteCommand() {
@@ -457,6 +458,10 @@ public class Ui {
     public static void expensePromptDate() {
         System.out.println("Enter date of expense:");
         System.out.println("\tPress enter to use today's date");
+    }
+
+    public static void noRecentExpenseError() {
+        System.out.println("You have not recently added an expense.");
     }
 
     public static void viewFilterDateFormatInvalid() {
