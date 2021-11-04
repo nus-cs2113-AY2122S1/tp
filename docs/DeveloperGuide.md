@@ -135,12 +135,14 @@ The storage component contains the `Storage` and `JsonFactory` classes.
 - `JsonFactory` contains all the logic for deserializing the `Catalogue` object into JSON so that it can be written into a file. Likewise, it also contains the logic for serializing the `Catalogue` object when provided JSON.
 Furthermore, it also contains error checking to ensure that malformed or corrupted data is not processed.
 
-> :grey_exclamation: The directory and filename of the JSON file is defined within the `Storage` class<br>
+> ℹ️The directory and filename of the JSON file is defined within the `Storage` class<br>
 The default value is set to `./data/data.json`
 
 ### UI Component
 
-_todo_
+![TextUIIClassDiagram](img/TextUISequenceDiagram.png)
+
+The UI component consists of a single `TextUI` class and is responsible for retrieving user inputs and displaying user feedback such as successful execution of commands, results of queries or details about exceptions.
 
 ### Common component
 
