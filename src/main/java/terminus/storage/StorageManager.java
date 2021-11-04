@@ -23,7 +23,6 @@ public class StorageManager {
     private FolderStorage folderStorage;
     private JsonStorage jsonStorage;
     private PdfStorage pdfStorage;
-    private Storage storage;
 
     /**
      * Initialises all related storage type that handles different file I/O operations.
@@ -37,7 +36,6 @@ public class StorageManager {
         this.folderStorage = new FolderStorage(baseDirectory);
         this.jsonStorage = new JsonStorage(baseDirectory, mainJsonFileName);
         this.pdfStorage = new PdfStorage(baseDirectory);
-        this.storage = new Storage();
         this.isDisabled = false;
     }
 
@@ -64,6 +62,7 @@ public class StorageManager {
      */
     public void updateMainJsonFile(ModuleManager moduleManager) throws InvalidFileException {
         execute(moduleManager, null, null, StorageActionEnum.UPDATE, StorageTypeEnum.JSON);
+        TerminusLogger.info("Save completed.");
     }
 
     /**
@@ -80,6 +79,7 @@ public class StorageManager {
             StorageTypeEnum type)
             throws InvalidFileException {
         if (isDisabled) {
+            TerminusLogger.info("Storage has been disabled.");
             return;
         }
         if (moduleManager == null) {
@@ -110,6 +110,7 @@ public class StorageManager {
      * @throws InvalidFileException when any file I/O operations has error.
      */
     public ModuleManager initialize() throws InvalidFileException {
+        Storage storage = new Storage();
         storage.createFolder(baseDirectory);
         jsonStorage.execute(null, StorageActionEnum.CREATE);
         return load();

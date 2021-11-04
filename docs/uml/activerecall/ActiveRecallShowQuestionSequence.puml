@@ -1,12 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-skinparam sequenceMessageAlign center
+!include ../SequenceStyle.puml
 
 mainframe sd showQuestion
 
 box "Commands" #thistle
 endbox
-box "Main" #bisque
+box "Ui" #bisque
 participant ":Ui" as Ui
 endbox
 box "Active Recall" #lightblue

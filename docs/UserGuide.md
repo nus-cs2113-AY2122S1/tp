@@ -855,6 +855,9 @@ specified day.
 > 
 > You may view [Adding a Schedule](#adding-a-schedule) for the valid list of days.
 
+> 💡 The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
+
+
 Example 1: `timetable`
 
 Expected Output 2:
