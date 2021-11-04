@@ -38,14 +38,16 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS = "Incorrect flags passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTCOMMAND = "Incorrect command passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS = "Missing arguments.";
-    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Please input a command. Type 'help' for more information.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS =
+            "Please input a command. Type 'help' for more information.";
 
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTFOUND = "University not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNIDUPLICATE = "This university has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED = "This university is not in your selected list.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTAVAILABLE = "This university does not exist.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE = "This university index does not exist.";
-    public static final String ERRORMSG_PARSEEXCEPTION_UNIINVALID = "Input is either university index or university name";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNIINVALID =
+            "Input is either university index or university name";
 
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODDUPLICATE = "This module has already been added.";
