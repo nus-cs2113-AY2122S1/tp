@@ -14,27 +14,27 @@ end box
 autoactivate on
 mainFrame sd Logic for UpdateStockCommand
 activate updatestock
-    updatestock -> stockmanager: extractStockObject()
+    updatestock -> stockmanager: extractStockObject(parameters: LinkedHashMap<String, String>,\nmedicines: ArrayList<Medicine>)
     updatestock <-- stockmanager: stock
 
-    updatestock -> updatestock: processQuantityValues()
+    updatestock -> updatestock: processQuantityValues(ui: Ui, \nmedicines: ArrayList<Medicine>, stock: Stock)
     updatestock --> updatestock: isValidQuantityValues
 
-    updatestock -> updatestock: processDateInput()
+    updatestock -> updatestock: processDateInput(ui: Ui, \nmedicines: ArrayList<Medicine>, stock: Stock)
     updatestock --> updatestock: isValidExpDate
 
     opt isValidQuantityValues && isValidExpDate
-        updatestock -> stockmanager: getFilteredStocksByName()
+        updatestock -> stockmanager: getFilteredStocksByName(medicines: ArrayList<Medicine>,\nstockName: String)
         updatestock <-- stockmanager: oldFilteredStocks
         opt parameters contains name
-            updatestock -> updatestock: addNewRowForUpdate()
+            updatestock -> updatestock: addNewRowForUpdate(filteredStocks: ArrayList<Stock>,\nmedicines: ArrayList<Medicine>)
             deactivate updatestock
-            updatestock -> updatestock: getNewStock()
+            updatestock -> updatestock: getNewStock(medicines: ArrayList<Medicine>,\nstock: Stock)
             deactivate updatestock
         end
-        updatestock -> stockmanager: getFilteredStocksByName()
+        updatestock -> stockmanager: getFilteredStocksByName(medicines: ArrayList<Medicine>,\nstockName: String)
         updatestock <-- stockmanager: filteredStocks
-        updatestock -> updatestock: setUpdatesByStockId(stock)
+        updatestock -> updatestock: setUpdatesByStockId(filteredStocks: ArrayList<Stock>,\nstock: Stock)
         deactivate updatestock
     end
 

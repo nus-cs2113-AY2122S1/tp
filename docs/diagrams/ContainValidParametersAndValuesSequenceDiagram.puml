@@ -9,6 +9,7 @@ end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant "<<abstract>>\nMedicineValidator" as medicinevalidator COLOR_UTILITIES
     participant ":*Validator" as xvalidator COLOR_UTILITIES
     participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
 end box
@@ -19,24 +20,29 @@ end box
 
 autoactivate on
 mainFrame sd Execution of *Command
+note right of command
+Replace * in the diagram with
+Stock, Prescription or Order
+depending on the command entered.
+end note
 activate command
     command -> ui: getInstance()
     command <-- ui
+    command -> medicine: getInstance()
+    command <-- medicine
     create xvalidator
     command -> xvalidator: new *Validator()
     command <-- xvalidator
-
-    command -> xvalidator: containsInvalidParameters()
-    command <-- xvalidator: isInvalidParameter
-
-    opt !isInvalidParameter
-        command -> medicine: getInstance()
-        command <-- medicine
-        command -> xvalidator: containsInvalidParameterValues()
-        command <-- xvalidator: isInvalidParameterValues
-
-        opt !isInvalidParameterValues
-            ref over command, medicine
+    command -> medicinevalidator: containsInvalidParametersAndValues()
+        medicinevalidator -> medicinevalidator: containsInvalidParameters()
+        medicinevalidator --> medicinevalidator: isInvalidParameter
+        opt !isInvalidParameter
+            medicinevalidator -> xvalidator: containsInvalidParameterValues()
+            medicinevalidator <-- xvalidator: isInvalidParameterValues
+        end
+        command <-- medicinevalidator: isInvalidInput
+        opt !isInvalidInput
+            ref over command, storage
                 Logic for *Command
             end ref
             command -> storage: getInstance()
@@ -44,6 +50,6 @@ activate command
             command -> storage: saveData()
             command <-- storage
         end
-    end
+
 
 @enduml
