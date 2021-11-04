@@ -36,8 +36,6 @@ public interface ParserError {
     boolean isNoAvailableMapping(University university, int uniIndex, UniversityList universityMasterList,
                                ModuleList moduleSelectedList);
    
-
-   
     boolean isDuplicateMapping(University university, int uniIndex, int mapIndex, UniversityList universityMasterList,
                                ModuleList moduleSelectedList);
 }
