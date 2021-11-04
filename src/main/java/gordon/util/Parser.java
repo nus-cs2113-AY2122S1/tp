@@ -99,9 +99,9 @@ public class Parser {
                 return deleteTagParse();
             } else if (parsedCommand.equalsIgnoreCase(CHECK_PROMPT)) {
                 return new CheckCommand(parseName(line));
-            } else if (parsedCommand.equalsIgnoreCase(LIST_RECIPES_PROMPT)) {
+            } else if (line.equalsIgnoreCase(LIST_RECIPES_PROMPT)) {
                 return new ListRecipesCommand(LIST_RECIPES_PROMPT);
-            } else if (parsedCommand.equalsIgnoreCase(LIST_TAGS_PROMPT)) {
+            } else if (line.equalsIgnoreCase(LIST_TAGS_PROMPT)) {
                 return new ListRecipesCommand(LIST_TAGS_PROMPT);
             } else if (parsedCommand.equalsIgnoreCase(SET_PROMPT)) {
                 return setParse();
