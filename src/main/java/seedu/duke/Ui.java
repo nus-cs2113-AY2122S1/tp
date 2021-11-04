@@ -145,6 +145,10 @@ public class Ui {
         printSeparator();
     }
 
+    public static void printValidNumberNeeded() {
+        System.out.println("Please key in a valid number!");
+    }
+
     public static void printList(MemberList members) {
         if (members.getMemberListSize() == 0) {
             System.out.println("Member list is empty!");
