@@ -184,7 +184,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
 
     protected static void executeCreateExpense(String inputDescription)
-            throws InvalidAmountException, ForceCancelException, SameNameException {
+            throws InvalidAmountException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);

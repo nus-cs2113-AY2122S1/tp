@@ -110,8 +110,6 @@ abstract class CommandHandler extends CommandExecutor {
             Ui.printExpenseFormatError();
         } catch (InvalidAmountException e) {
             Ui.printInvalidAmountError();
-        } catch (SameNameException e) {
-            Ui.sameNameInExpenseError();
         }
     }
 

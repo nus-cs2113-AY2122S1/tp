@@ -5,7 +5,6 @@ import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.exceptions.SameNameException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -49,12 +48,12 @@ public class Expense implements ExpenseSplitter {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException, SameNameException {
+    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
-        this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
+        this.personsList = checkValidPersons(expenseInfo[2]);
         this.date = promptDate();
         if (personsList.size() == 1) {
             ExpenseSplitter.updateOnePersonSpending(this, personsList.get(0));
@@ -75,8 +74,7 @@ public class Expense implements ExpenseSplitter {
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput)
-            throws ForceCancelException, SameNameException {
+    private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
@@ -85,6 +83,7 @@ public class Expense implements ExpenseSplitter {
         if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
+        boolean isThereRepeatedName = false;
         for (String name : listOfPeople) {
             boolean isValidPerson = false;
             for (Person person : Storage.getOpenTrip().getListOfPersons()) {
@@ -95,7 +94,7 @@ public class Expense implements ExpenseSplitter {
                 }
             }
             if (listOfPeopleNamesUpperCase.contains(name.strip().toUpperCase())) {
-                throw new SameNameException();
+                isThereRepeatedName = true;
             } else if (!isValidPerson) {
                 invalidListOfPeople.add(name.strip());
             }
@@ -103,6 +102,10 @@ public class Expense implements ExpenseSplitter {
         }
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);
+            String newUserInput = Ui.receiveUserInput();
+            return checkValidPersons(newUserInput);
+        } else if (isThereRepeatedName) {
+            Ui.sameNameInExpenseError();
             String newUserInput = Ui.receiveUserInput();
             return checkValidPersons(newUserInput);
         }

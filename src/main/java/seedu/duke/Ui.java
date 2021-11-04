@@ -402,8 +402,9 @@ public class Ui {
     }
 
     public static void sameNameInExpenseError() {
-        System.out.println("You have entered people with the same name, please recreate the expense ensuring there are "
-                + "no repeated names for the expense.");
+        System.out.println("You have entered people with the same name.");
+        System.out.println("Please reenter the names of the participants of the expense, "
+                + "ensuring there are no repeats:");
     }
 
     public static void printNoLastTripError() {
