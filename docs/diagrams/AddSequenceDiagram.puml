@@ -2,19 +2,120 @@
 'https://plantuml.com/sequence-diagram
 !include style.puml
 
-autonumber
 
-Participant ":Parser" as parser PARSER_COLOUR
+Participant "<<class>> Parser" as parser PARSER_COLOUR
 Participant ":AddCommand" as add COMMAND_COLOUR
 Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
+Participant ":Ingredient" as ingredientClass INGREDIENT_COLOUR
 Participant ":Storage" as storage STORAGE_COLOUR
+Participant "<<CurrentDate>>" as currentDate DATE_COLOUR
+
 
 -> parser: parse ("add a/carrot n/200 e/ 25/12/2021")
+activate parser PARSER_COLOUR
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+parser -> parser : parseAddCommand("a/carrot n/200 e/ 25/12/2021")
+activate parser PARSER_COLOUR
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+parser -> add **: AddCommand(ingredient)
+activate add COMMAND_COLOUR
+return
+
+parser -> add : run()
+activate add COMMAND_COLOUR
+
+add -> ingredient_list : getInstance()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return instance
+
+add -> ingredient_list : add(ingredient)
+activate ingredient_list INGREDIENTLIST_COLOUR
+
+ingredient_list -> ingredientClass : getName()
+activate ingredientClass INGREDIENT_COLOUR
+return ingredientName
+
+ingredient_list -> ingredient_list : isIngredientInList(ingredientName)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return isRepeatedName
+
+alt !isRepeatedName
+    ingredient_list -> ingredient_group **: IngredientGroup()
+    activate ingredient_group INGREDIENTGROUP_COLOUR
+    return newIngredientGroup
+
+    ingredient_list -> ingredient_list : add(newIngredientGroup)
+    activate ingredient_list INGREDIENTLIST_COLOUR
+    return
+
+    ingredient_list -> ingredient_group : setIngredientGroupName(ingredientName)
+    activate ingredient_group INGREDIENTGROUP_COLOUR
+    return
+
+    ingredient_list -> ingredient_group : add (ingredient)
+    activate ingredient_group INGREDIENTGROUP_COLOUR
+    return
+
+
+    else isRepeatedName
+    ingredient_list -> ingredient_list : findIngredientIndexInList(ingredientName)
+        activate ingredient_list INGREDIENTLIST_COLOUR
+        return ingredientIndex
+
+        ingredient_list -> ingredient_list : get(ingredientIndex)
+        activate ingredient_list INGREDIENTLIST_COLOUR
+        return
+        ingredient_list -> ingredient_group : add(ingredient)
+        activate ingredient_group INGREDIENTGROUP_COLOUR
+        return
+end
+
+ingredient_list -> storage : writeIngredientsToMemory(ingredientList)
+activate storage STORAGE_COLOUR
+return
+
+return
+
+add -> ingredientClass : getName()
+activate ingredientClass INGREDIENT_COLOUR
+return
+
+add -> ingredientClass : toString()
+activate ingredientClass INGREDIENT_COLOUR
+return
+
+add -> ingredient_list : getInstance()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return
+
+add -> ingredient_list : getSize()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return
+
+add -> ingredientClass : getExpiry()
+activate ingredientClass INGREDIENT_COLOUR
+return expiryDate
+
+add -> ingredientClass : daysFromCurrentDate(expiryDate)
+activate ingredientClass INGREDIENTLIST_COLOUR
+
+ingredientClass -> currentDate : getCurrentDate()
+activate currentDate DATE_COLOUR
+return
+return
+return resultMsg
+return resultMsg
+return CLI message
+
+
+
+
+
+
+
+
+
+
+
 @enduml
