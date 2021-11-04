@@ -12,19 +12,19 @@ public class Prescription extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";
     public static final String QUANTITY = "QUANTITY";
-    public static final String CUSTOMER_ID = "CUSTOMER ID";
+    public static final String CUSTOMER_ID = "CUSTOMER_ID";
     public static final String DATE = "DATE";
     public static final String STAFF = "STAFF";
-    public static final String STOCK_ID = "STOCK ID";
+    public static final String STOCK_ID = "STOCK_ID";
 
     // Used for sorting
     public static final String ID_LOWERCASE = "id";
     public static final String NAME_LOWERCASE = "name";
     public static final String QUANTITY_LOWERCASE = "quantity";
-    public static final String CUSTOMER_ID_LOWERCASE = "customer id";
+    public static final String CUSTOMER_ID_LOWERCASE = "customer_id";
     public static final String DATE_LOWERCASE = "date";
     public static final String STAFF_LOWERCASE = "staff";
-    public static final String STOCK_ID_LOWERCASE = "stock id";
+    public static final String STOCK_ID_LOWERCASE = "stock_id";
 
     public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMER_ID, DATE, STAFF, STOCK_ID};
 
