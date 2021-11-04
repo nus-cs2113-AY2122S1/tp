@@ -21,17 +21,19 @@ receiveordercommand -> receiveordercommand : isStockParametersValid(ui: Ui, medi
 receiveordercommand -> stockvalidator : new StockValidator()
 receiveordercommand <-- stockvalidator
 
-receiveordercommand -> receiveordercommand : checkStockExist
+receiveordercommand -> receiveordercommand : checkStockExist(medicines: ArrayList<Medicine>, name: String)
 receiveordercommand --> receiveordercommand
 receiveordercommand -> stockvalidator : containsInvalidParametersAndValues(ui: Ui, medicines: ArrayList<Medicine>,\nparameters: LinkedHashMap<String, String>, requiredParameters: String[],\noptionalParameters: String[], commandSyntax: String,\nrequiresOptionalParameters: boolean, validator: MedicineValidator)
 receiveordercommand <-- stockvalidator : isInvalidInput
 
-receiveordercommand --> receiveordercommand
-create addstockcommand
-receiveordercommand -> addstockcommand : new AddStockCommand(parameters: LinkedHashMap<String, String>)
-receiveordercommand <-- addstockcommand
-receiveordercommand -> addstockcommand : execute()
-deactivate addstockcommand
+receiveordercommand --> receiveordercommand : isStockParametersValid
+opt isStockParametersValid
+    create addstockcommand
+    receiveordercommand -> addstockcommand : new AddStockCommand(parameters: LinkedHashMap<String, String>)
+    receiveordercommand <-- addstockcommand
+    receiveordercommand -> addstockcommand : execute()
+    deactivate addstockcommand
+end
 
 
 

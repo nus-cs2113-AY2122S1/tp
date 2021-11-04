@@ -10,6 +10,8 @@ import utilities.ui.Ui;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+//@@author alvintan01
+
 public class Data {
     private static Ui ui = Ui.getInstance();
 
@@ -24,7 +26,7 @@ public class Data {
         Prescription.setPrescriptionCount(0);
         Order.setOrderCount(0);
     }
-    
+
     /**
      * Function to generate test data to test list commands.
      */
