@@ -102,7 +102,7 @@ public class Entry {
             case EDIT_TRAINING_KEYWORD:
                 try {
                     trainingIndex = Parser.getIndex(entry);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | NullPointerException e) {
                     Ui.printValidNumberNeeded();
                     break;
                 }
@@ -112,7 +112,7 @@ public class Entry {
             case EDIT_MEMBER_KEYWORD:
                 try {
                     memberIndex = Parser.getIndex(entry);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | NullPointerException e) {
                     Ui.printValidNumberNeeded();
                     break;
                 }

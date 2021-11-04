@@ -159,7 +159,10 @@ public class Parser {
     }
 
     /**
-     * Returns the description of the task only, without the date or the keyword.
+     * Returns the description of the task only, without the date or the keyword. If any fields is empty "", an
+     * exception will be thrown at AddTraining or EditTraining. Users should only key in one of each field, /n /a /v, in
+     * the input. Additional inputs to the same field will set the field to "", causing an exception to be thrown at
+     * AddTraining or EditTraining.
      *
      * @param entry user raw data input.
      * @return description of task.
@@ -167,6 +170,9 @@ public class Parser {
     public static TrainingSchedule getTrainingDescription(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
+        boolean matchedName = false;
+        boolean matchedTime = false;
+        boolean matchedVenue = false;
 
         String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
@@ -183,13 +189,28 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim().toUpperCase();
+                if (!matchedName) {
+                    name = words[wordIndex].trim().toUpperCase();
+                    matchedName = true;
+                } else {
+                    name = "";
+                }
                 break;
             case "/a":
-                time = words[wordIndex].trim().toUpperCase();
+                if (!matchedTime) {
+                    time = words[wordIndex].trim().toUpperCase();
+                    matchedTime = true;
+                } else {
+                    time = "";
+                }
                 break;
             case "/v":
-                venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                if (!matchedVenue) {
+                    venue = words[wordIndex].trim().toUpperCase();
+                    matchedVenue = true;
+                } else {
+                    venue = "";
+                }
                 break;
             default:
                 break;
@@ -353,84 +374,86 @@ public class Parser {
      * @return int Index that is in entry.
      */
     public static Integer getIndex(String entry) {
-        String[] words = entry.trim().split(regex);
-        int indexNumber = Integer.parseInt(words[1].trim());
-        assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-        return indexNumber;
-    }
-
-    //@@author Teckwhye
-
-    /**
-     * Returns parameter as given by user.
-     *
-     * @param entry String user input
-     * @return Object parameter that is given in entry which will either be int or string as given by user
-     */
-    public static Object getParameter(String entry) {
-        String[] words = entry.trim().split(regex);
         try {
+            String[] words = entry.trim().split(regex);
             int indexNumber = Integer.parseInt(words[1].trim());
             assert indexNumber >= 1 : "indexNumber should be greater than 1.";
             return indexNumber;
-        } catch (NumberFormatException e) {
-            String parameter = words[1].trim();
-            return parameter;
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }
     //@@author
 
-    /**
-     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
-     * words are found, the user will be notified.
-     *
-     * @param entry user input
-     */
-    public static String getQuery(String entry) {
-        try {
+        /**
+         * Returns parameter as given by user.
+         *
+         * @param entry String user input
+         * @return Object parameter that is given in entry which will either be int or string as given by user
+         */
+        public static Object getParameter (String entry){
             String[] words = entry.trim().split(regex);
-            return words[1].trim();
-        } catch (IndexOutOfBoundsException e) {
-            return "";
-        }
-    }
-
-    /**
-     * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
-     * Otherwise, the full list will not be shown.
-     *
-     * @param attendanceList full list of attendance sheet.
-     */
-    public static void askToListAll(AttendanceList attendanceList) {
-        Ui.printListAllMessage();
-        Scanner userInput = new Scanner(System.in);
-        String entry = userInput.nextLine();
-        while (!(entry.equals("y") || entry.equals("n"))) {
-            Ui.printQuestionToList();
-            Ui.printArrow();
-            if (userInput.hasNextLine()) {
-                entry = userInput.nextLine();
+            try {
+                int indexNumber = Integer.parseInt(words[1].trim());
+                assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+                return indexNumber;
+            } catch (NumberFormatException e) {
+                String parameter = words[1].trim();
+                return parameter;
+            } catch (IndexOutOfBoundsException e) {
+                return null;
             }
         }
-        if (entry.equals("y")) {
-            Ui.printList(attendanceList);
-        }
-    }
 
-    /**
-     * Function waits for user input, or takes input from ./list.txt.
-     */
-    public static void waitForQuery() {
-        String entry = "";
-        Scanner userInput = new Scanner(System.in);
-        while (!entry.equals("bye")) {
-            Ui.printArrow();
-            if (userInput.hasNextLine()) {
-                entry = userInput.nextLine();
+        /**
+         * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
+         * words are found, the user will be notified.
+         *
+         * @param entry user input
+         */
+        public static String getQuery (String entry){
+            try {
+                String[] words = entry.trim().split(regex);
+                return words[1].trim();
+            } catch (IndexOutOfBoundsException e) {
+                return "";
             }
-            Entry.addEntry(entry);
+        }
+
+        /**
+         * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
+         * Otherwise, the full list will not be shown.
+         *
+         * @param attendanceList full list of attendance sheet.
+         */
+        public static void askToListAll (AttendanceList attendanceList){
+            Ui.printListAllMessage();
+            Scanner userInput = new Scanner(System.in);
+            String entry = userInput.nextLine();
+            while (!(entry.equals("y") || entry.equals("n"))) {
+                Ui.printQuestionToList();
+                Ui.printArrow();
+                if (userInput.hasNextLine()) {
+                    entry = userInput.nextLine();
+                }
+            }
+            if (entry.equals("y")) {
+                Ui.printList(attendanceList);
+            }
+        }
+
+        /**
+         * Function waits for user input, or takes input from ./list.txt.
+         */
+        public static void waitForQuery () {
+            String entry = "";
+            Scanner userInput = new Scanner(System.in);
+            while (!entry.equals("bye")) {
+                Ui.printArrow();
+                if (userInput.hasNextLine()) {
+                    entry = userInput.nextLine();
+                }
+                Entry.addEntry(entry);
+            }
         }
     }
-}

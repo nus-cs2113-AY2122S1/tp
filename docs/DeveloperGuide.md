@@ -104,6 +104,7 @@ The `Ui` component handles the **output display** of **CCA Manager**. Whenever t
 
 ### Parser Component
 ![Parser Object Diagram](images/ParserObjectDiagram.png)
+
 **API** : [Parser](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Parser.java)
 
 The `Parser` component handles the **input parsing** of **CCA Manager**. User input is parsed to produce a `keyword` and corresponding inputs, such as `index` , `name`, etc. are identified.
@@ -118,6 +119,7 @@ A `keyword` is an identifier used by **CCA Manager** to determine what operation
 
 ### Entry Component
 ![Entry Object Diagram](images/EntryObjectDiagram.png)
+
 **API** : [Entry](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Entry.java)
 
 The `Entry` component performs a `command` based on the `keyword` given. If the user enters an invalid command, for example, the `Entry` component will direct the `Ui` component
@@ -126,6 +128,7 @@ to print an error message. It uses a simple `switch-case` statement to handle th
 
 ### Command Component
 ![Command Object Diagram](images/CommandObjectDiagram.png)
+
 **API** : [Command](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/command)
 
 The `Command` component directly interacts with the `Member`, `Training` or `Attendance` component based on the `keyword` given in order to perform a specific operation.
@@ -209,7 +212,7 @@ The `training schedule` component
 
 ## Restrictions
 # IMPORTANT!
-One restriction of the current implementation (`v2.0`) of **CCAManager** is that the user input cannot contain any commas.
+One restriction of the current implementation (`v2.1`) of **CCAManager** is that the user input cannot contain any commas.
 
 This is because data is saved in a `.csv` file, which uses commas as field delimiters. Hence, if user input were to contain commas, this may cause data to be imported inaccurately during the loading of existing files at start-up.
 

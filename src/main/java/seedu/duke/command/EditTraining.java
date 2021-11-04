@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
 
+import java.util.*;
 import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddTrainingException;
 
@@ -16,6 +17,8 @@ import seedu.duke.training.TrainingSchedule;
 public class EditTraining {
     String duplicateTrainingNameErrorMessage = "Training name already exists in the list. Please input a different "
             + "training name.";
+    String noTrainingChangesFoundErrorMessage = "No fields to change found.\nSYNTAX: edit /t <index> [/n <NAME>] OR "
+            + "[/a <TIME>] OR [/v <VENUE>]";
 
     /**
      * Edits a TrainingSchedule in TrainingList. TrainingSchedule is located by index.
@@ -32,6 +35,10 @@ public class EditTraining {
             final String oldVenue = trainingToChange.getTrainingVenue();
             final String oldTime = trainingToChange.getTrainingTime();
             final int oldIndex = trainingToChange.getTrainingIndex();
+
+            if (allFieldsEmpty(toChange)) {
+                throw new InvalidAddTrainingException(noTrainingChangesFoundErrorMessage);
+            }
 
             if (!toChange.getTrainingName().equals("")) {
                 if (verifyTrainingDetails(toChange.getTrainingName(), trainings)) {
@@ -69,5 +76,12 @@ public class EditTraining {
         }
 
         return true;
+    }
+
+    boolean allFieldsEmpty(TrainingSchedule training) {
+        String name = training.getTrainingName().trim().toUpperCase();
+        String time = training.getTrainingTime().trim().toUpperCase();
+        String venue = training.getTrainingVenue().trim().toUpperCase();
+        return name.equals("") && time.equals("") && venue.equals("");
     }
 }
