@@ -20,12 +20,12 @@ public class MemberStorage {
     static String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
     static String validGenderRegex = "^[M|F|m|f]";
 
-    static String invalidPhoneNumberErrorExcelMessage = "Invalid phone number found in CSV. Please fix this before running the program again.";
-    static String invalidGenderErrorExcelMessage = "Invalid gender found in CSV.Please fix this before running the program again.";
-    static String invalidNameErrorExcelMessage = "invalid name found in CSV.Please fix this before running the program again.";
-    static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CSV.Please fix this before running the program again.";
+    static String invalidPhoneNumberErrorExcelMessage = "Invalid phone number found in CCA Members CSV. Please fix this before running the program again.";
+    static String invalidGenderErrorExcelMessage = "Invalid gender found in CCA Members CSV.Please fix this before running the program again.";
+    static String invalidNameErrorExcelMessage = "invalid name found in CCA Members CSV.Please fix this before running the program again.";
+    static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CCA Members CSV.Please fix this before running the program again.";
 
-    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CSV.Please fix this before running the program again.";
+    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CCA Members CSV.Please fix this before running the program again.";
 
 
     /**
@@ -74,8 +74,8 @@ public class MemberStorage {
             verifyDuplicateStudentNumber(memberFile);
             verifyDuplicatePhoneNumber(memberFile);
         } catch (InvalidAddMemberException e) {
-        System.out.println(e.getMessage());
-        System.exit(0);
+            System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
 
@@ -155,10 +155,10 @@ public class MemberStorage {
     }
 
     /**
-     * Checks for any duplicates in the list.Returns true if there is any duplicates.
-     * Else return false.
+     * Checks for any duplicates in the list.
      *
      * @param pendingList current list of Strings to check.
+     * @throws InvalidAddMemberException if there are any duplicates.
      */
     private static void checkDuplicates(List<String> pendingList) throws InvalidAddMemberException {
         for (int i = 0; i < pendingList.size(); i++) {
