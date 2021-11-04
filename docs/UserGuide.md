@@ -112,7 +112,6 @@ Examples
 * `clear`
 <!-- -->
 Example of usage
-
 ```
 clear -g time
    ________    _________    ____     ____  ________________  ____  ____  _____
