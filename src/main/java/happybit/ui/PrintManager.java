@@ -8,10 +8,7 @@ import java.util.ArrayList;
 public class PrintManager {
 
     private static final String LS = System.lineSeparator();
-    private static final String HORIZONTAL_SYMBOL = "-";
-    private static final String BAR_AND_SPACE = "| ";
     private static final String PERCENT_SYMBOL = "%";
-    private static final String BLANK = " ";
     private static final String LINE = "______________________________________________________________"
             + "__________________________________________________________";
 
@@ -108,7 +105,7 @@ public class PrintManager {
      */
     public void printCommandList() {
         System.out.println(MSG_LIST_COMMAND);
-        printTable(COMMAND_HEADERS, populateCommandData());
+        PrintTable.printTable(COMMAND_HEADERS, populateCommandData());
         System.out.println(COMMAND_NOTE_1 + LS + COMMAND_NOTE_2 + LS + COMMAND_NOTE_3);
     }
 
@@ -122,7 +119,7 @@ public class PrintManager {
         String[][] data = populateGoalData(goals, numOfGoals, GOAL_HEADERS.length);
         printGibberish(gibberish);
         System.out.printf(MSG_LIST_GOAL, numOfGoals);
-        printTable(GOAL_HEADERS, data);
+        PrintTable.printTable(GOAL_HEADERS, data);
     }
 
     /**
@@ -135,7 +132,7 @@ public class PrintManager {
     public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
         String[][] data = populateHabitData(habits, numOfHabits, HABIT_HEADERS.length);
         System.out.printf(MSG_LIST_HABIT, numOfHabits, goalDescription);
-        printTable(HABIT_HEADERS, data);
+        PrintTable.printTable(HABIT_HEADERS, data);
     }
 
     /**
@@ -270,22 +267,6 @@ public class PrintManager {
         printLine();
         System.out.println(MSG_EXIT);
         printLine();
-    }
-
-    /**
-     * Prints data in a tabular format.
-     *
-     * @param headers 1D string array containing names of headers.
-     * @param data    2D string array containing data.
-     */
-    public void printTable(String[] headers, String[][] data) {
-        int numOfRows = data.length;
-        int numOfColumns = headers.length;
-        int[] columnLengths = getColumnLengths(numOfRows, numOfColumns, headers, data);
-        int totalLength = getTotalLength(columnLengths);
-        String lineSeparator = HORIZONTAL_SYMBOL.repeat(totalLength);
-        printHeaders(lineSeparator, headers, columnLengths, numOfColumns);
-        printData(numOfRows, numOfColumns, columnLengths, data, lineSeparator);
     }
 
     /*

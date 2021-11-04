@@ -13,10 +13,10 @@ import java.util.Date;
  * Handles the parsing of data from storage file and return the appropriate object back to Import class.
  */
 public class ImportParser {
-    private static final String SLEEP = "[SL]";
-    private static final String FOOD = "[FD]";
-    private static final String EXERCISE = "[EX]";
-    private static final String STUDY = "[SD]";
+    private static final String SLEEP = "Sleep";
+    private static final String FOOD = "Food";
+    private static final String EXERCISE = "Exercise";
+    private static final String STUDY = "Study";
     private static final String NULL = "null";
     private static final String DATE_FORMAT = "ddMMyyyy";
     private static final int GOAL_TYPE_INDEX = 2;
