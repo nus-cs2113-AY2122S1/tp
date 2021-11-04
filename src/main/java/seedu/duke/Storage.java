@@ -3,6 +3,8 @@ package seedu.duke;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.trip.Trip;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,17 +23,14 @@ public class Storage {
     private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
     private static Trip lastTrip = null;
-    private static Expense lastExpense = null;
 
     private static Scanner scanner;
     private static Logger logger;
 
-    private static boolean isProcessing = false;
-
     //@@author joshualeeky
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
-                    "delete", "expense", "quit", "help", "amount", "close"));
+                    "delete", "expense", "quit", "help", "amount", "people", "close", "optimize"));
 
     private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
             put("USD", new String[]{"$", "%.02f"});
@@ -39,22 +38,22 @@ public class Storage {
             put("AUD", new String[]{"$", "%.02f"});
             put("CAD", new String[]{"$", "%.02f"});
             put("NZD", new String[]{"$", "%.02f"});
-            put("EUR", new String[]{"€", "%.02f"});
-            put("GBP", new String[]{"£", "%.02f"});
+            put("EUR", new String[]{"", "%.02f"}); //€
+            put("GBP", new String[]{"", "%.02f"}); //£
             put("MYR", new String[]{"RM", "%.02f"});
             put("HKD", new String[]{"$", "%.02f"});
-            put("THB", new String[]{"฿", "%.02f"});
-            put("RUB", new String[]{"₽", "%.02f"});
+            put("THB", new String[]{"", "%.02f"}); //฿
+            put("RUB", new String[]{"", "%.02f"}); //₽
             put("ZAR", new String[]{"R", "%.02f"});
-            put("TRY", new String[]{"₺", "%.02f"});
+            put("TRY", new String[]{"", "%.02f"}); //₺
             put("BRL", new String[]{"R$", "%.02f"});
             put("DKK", new String[]{"Kr.", "%.02f"});
-            put("PLN", new String[]{"zł", "%.02f"});
-            put("ILS", new String[]{"₪", "%.02f"});
+            put("PLN", new String[]{"", "%.02f"}); //zł
+            put("ILS", new String[]{"", "%.02f"}); //₪
             put("SAR", new String[]{"SR", "%.02f"});
-            put("CNY", new String[]{"¥", "%.0f"});
-            put("JPY", new String[]{"¥", "%.0f"});
-            put("KRW", new String[]{"₩", "%.0f"});
+            put("CNY", new String[]{"", "%.0f"}); //¥
+            put("JPY", new String[]{"", "%.0f"}); //¥
+            put("KRW", new String[]{"", "%.0f"}); //₩
             put("IDR", new String[]{"Rp", "%.0f"});
             put("INR", new String[]{"Rs", "%.0f"});
             put("CHF", new String[]{"SFr.", "%.0f"});
@@ -65,8 +64,8 @@ public class Storage {
             put("HUF", new String[]{"Ft", "%.0f"});
             put("CZK", new String[]{"Kc", "%.0f"});
             put("CLP", new String[]{"$", "%.0f"});
-            put("PHP", new String[]{"₱", "%.0f"});
-            put("AED", new String[]{"د.إ", "%.0f"});
+            put("PHP", new String[]{"", "%.0f"}); //₱
+            put("AED", new String[]{"", "%.0f"}); //د.إ
             put("COP", new String[]{"$", "%.0f"});
             put("RON", new String[]{"lei", "%.0f"});
         }};
@@ -75,11 +74,11 @@ public class Storage {
         return availableCurrency;
     }
 
-    public static double formatForeignMoneyDouble(double money) {
+    public static double formatForeignMoneyDouble(double money) throws ForceCancelException {
         return Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), money));
     }
 
-    public static double formatRepaymentMoneyDouble(double money) {
+    public static double formatRepaymentMoneyDouble(double money) throws ForceCancelException {
         return Double.parseDouble(String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(), money));
     }
 
@@ -182,10 +181,11 @@ public class Storage {
      *
      * @return the currently opened trip
      */
-    public static Trip getOpenTrip() {
+    public static Trip getOpenTrip() throws ForceCancelException {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
             promptUserForValidTrip();
+            Ui.printOpenTripMessage(openTrip);
         }
         lastTrip = openTrip;
         return openTrip;
@@ -196,10 +196,11 @@ public class Storage {
      *
      * @see Storage#getOpenTrip()
      */
-    public static void promptUserForValidTrip() {
+    public static void promptUserForValidTrip() throws ForceCancelException {
         try {
             System.out.print("Please enter the trip you would like to open: ");
-            int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
+            String input = Ui.receiveUserInput();
+            int tripIndex = Integer.parseInt(input) - 1;
             setOpenTrip(tripIndex);
         } catch (NumberFormatException e) {
             Ui.argNotNumber();
@@ -210,7 +211,6 @@ public class Storage {
 
     /**
      * Checks if there is an open trip or not.
-     *
      * @return true if there is an open trip
      */
     public static boolean checkOpenTrip() {
@@ -219,7 +219,6 @@ public class Storage {
 
     /**
      * Opens the trip at the specified <code>tripIndex</code>, and sets that trip as the last modified trip.
-     *
      * @param tripIndex index of the trip inside {@link Storage#listOfTrips} to be opened
      */
     public static void setOpenTrip(int tripIndex) {
@@ -255,14 +254,6 @@ public class Storage {
 
     public static void setLastTrip(Trip lastTrip) {
         Storage.lastTrip = lastTrip;
-    }
-
-    public static Expense getLastExpense() {
-        return lastExpense;
-    }
-
-    public static void setLastExpense(Expense lastExpense) {
-        Storage.lastExpense = lastExpense;
     }
 
     public static void setListOfTrips(ArrayList<Trip> listOfTrips) {

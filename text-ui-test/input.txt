@@ -1,26 +1,31 @@
 create /America /02-02-2021 /USD /0.74 /yikai,yuzhao,qian,josh,xiyuan
 open 1
-view filter category breakfast
-view filter description d a c
-list
-edit 1 budget 2000
 expense 8.00 breakfast yikai,yuzhao,qian /c a b
 19-10-2021
 yikai
-5.00
-1.00
+0
+5
 y
-expense 1.00 lunch yikai,josh,xiyuan /d a c
+view filter category breakfast
+view filter description d a c
+list
+edit 1 -exchangerate 1
+expense 24.00 lunch yikai,yuzhao,qian /d a c
 19-10-2021
-yikai
-0.33
-0.33
+qian
+0
+16
 y
-expense 2.00 breakfast yikai,josh /d a c
+optimize yikai
+expense 48.00 breakfast yikai,yuzhao,qian /d a c
 19-10-2021
-josh
-1.00
+yuzhao
+32
+0
 y
+amount yikai
+amount qian
+amount yuzhao
 view filter category breakfast
 view filter category lunch
 view filter description d a c

@@ -1,8 +1,45 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
+import seedu.duke.trip.Trip;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Ui {
+
+    public static void printOptimizedAmounts() throws ForceCancelException {
+        boolean isAllPaid = true;
+        Trip openTrip = Storage.getOpenTrip();
+        ArrayList<Person> listOfPersons = openTrip.getListOfPersons();
+        HashMap<String, Double> currentHashMap;
+        String nameOfPersonPaying;
+        String nameOfPersonReceiving;
+        Double amountOwed;
+        for (Person personPaying : listOfPersons) {
+            for (Person personReceiving : listOfPersons) {
+                nameOfPersonPaying = personPaying.getName();
+                nameOfPersonReceiving = personReceiving.getName();
+                currentHashMap = personPaying.getOptimizedMoneyOwed();
+                amountOwed = currentHashMap.get(nameOfPersonReceiving);
+                if (!personPaying.equals(personReceiving) && amountOwed < 0) {
+                    if (isAllPaid) {
+                        System.out.println("Here are the optimized payment transactions:");
+                    }
+                    System.out.println(nameOfPersonPaying + " needs to pay "
+                            + stringForeignMoney(-amountOwed)
+                            + " (" + stringRepaymentMoney(-amountOwed) + ")"
+                            + " to " + personReceiving);
+                    isAllPaid = false;
+                }
+            }
+        }
+        if (isAllPaid) {
+            System.out.println("All are paid! :)");
+        }
+    }
 
     public static String receiveUserInput() throws ForceCancelException {
         String userInput = Storage.getScanner().nextLine().strip();
@@ -36,18 +73,29 @@ public class Ui {
                 + newTrip.getDateOfTripString() + " has been successfully added!");
     }
 
+
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
-        return Storage.getOpenTrip().getForeignCurrency() + " "
-                //+ Storage.getOpenTrip().getForeignCurrencySymbol()
-                + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
+        try {
+            return Storage.getOpenTrip().getForeignCurrency() + " "
+                    + Storage.getOpenTrip().getForeignCurrencySymbol()
+                    + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
+        } catch (ForceCancelException e) {
+            printForceCancelled();
+            return null;
+        }
     }
 
     public static String stringRepaymentMoney(double val) {
-        return Storage.getOpenTrip().getRepaymentCurrency() + " "
-                //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
-                + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
-                val / Storage.getOpenTrip().getExchangeRate());
+        try {
+            return Storage.getOpenTrip().getRepaymentCurrency() + " "
+                    + Storage.getOpenTrip().getRepaymentCurrencySymbol()
+                    + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
+                    val / Storage.getOpenTrip().getExchangeRate());
+        } catch (ForceCancelException e) {
+            printForceCancelled();
+            return null;
+        }
     }
 
     public static void askAutoAssignRemainder(Person person, double remainder) {
@@ -57,9 +105,6 @@ public class Ui {
 
     //@@author
 
-    public static void printCancelExpenseCreation() {
-        System.out.println("Your expense creation has been cancelled.");
-    }
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
@@ -71,12 +116,6 @@ public class Ui {
         System.out.println(e);
     }
 
-    /*public static void printExpensesSummary(Trip t) {
-        System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        *//*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
-        System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
-        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*//*
-    }*/
 
     public static void printFilteredExpenses(Expense e, int index) {
         System.out.println((index + 1) + ". " + e);
@@ -110,7 +149,7 @@ public class Ui {
     public static void printCreateFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "create [place] [date] [currency ISO] [exchange rate] [people].");
+                + "create /[place] /[date] /[currency ISO] /[exchange rate] /[people].");
     }
 
     public static void printExpenseFormatError() {
@@ -128,6 +167,10 @@ public class Ui {
 
     public static void printExchangeRateFormatError() {
         System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
+    }
+
+    public static void printInvalidAmountError() {
+        System.out.print("Please re-enter your expense amount as a positive number (i.e > 0): ");
     }
 
     public static void printDateTimeFormatError() {
@@ -173,7 +216,7 @@ public class Ui {
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
-        System.out.println("Your expense of " + stringForeignMoney(expenseAmount) + " has been successfully removed");
+        System.out.println("Your expense of " + stringForeignMoney(expenseAmount) + " has been successfully removed.");
     }
 
     public static void printNoExpensesError() {
@@ -225,7 +268,7 @@ public class Ui {
     }
 
     public static void promptForTripIndex() {
-        System.out.print("Please enter a valid trip number: ");
+        System.out.print("The number you entered is not valid, ");
     }
 
     public static void emptyArgForDeleteCommand() {
@@ -237,19 +280,19 @@ public class Ui {
         System.out.println("---------------------------");
     }
 
-    public static void invalidArgForAmount() {
-        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. "
-                + System.lineSeparator()
-                + "Please format as follows: "
-                + "amount [person].");
+    public static void invalidAmountFormat() {
+        System.out.println("The syntax for amount you have entered is invalid. "
+                + "Please format as follows: amount [person].");
+    }
+
+    public static void invalidArgForAmount() throws ForceCancelException {
+        Trip currTrip = Storage.getOpenTrip();
+        System.out.println("The person you entered is not in the opened trip.");
         System.out.println("These are the people involved in this trip:");
-        Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        Ui.printListOfPeople(currTrip.getListOfPersons());
         System.out.println();
     }
 
-    public static void printInvalidDeleteFormatError() {
-        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
-    }
 
     public static void printGetPersonPaid() {
         System.out.print("Who paid for the expense?: ");
@@ -267,8 +310,9 @@ public class Ui {
 
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent "
-                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName()))
                 + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
+
         for (Person otherPerson : trip.getListOfPersons()) {
             if (otherPerson != person) {
                 if (person.getMoneyOwed().get(otherPerson.getName()) > 0) {
@@ -334,7 +378,6 @@ public class Ui {
     }
 
     public static void printJsonParseError() {
-        //todo not sure what this should be
         System.out.println("We couldn't read your save file. It may be corrupted, "
                 + "or may have been wrongly modified outside the program.");
         System.out.println("If you would like to overwrite your current save file and"
@@ -346,6 +389,22 @@ public class Ui {
 
     public static void printJsonParseUserInputPrompt() {
         System.out.print("Would you like to overwrite your save file? (y/n): ");
+    }
+
+    public static void printErrorWithInitialAmount() {
+        System.out.println("Please check the amount you entered for the expense or "
+                + "the amount you allocated to each person again.");
+    }
+
+    public static void sameNameInTripError() {
+        System.out.println("You have entered people with the same name, please recreate the trip ensuring there are no "
+            + "repeated names for the trip.");
+    }
+
+    public static void sameNameInExpenseError() {
+        System.out.println("You have entered people with the same name.");
+        System.out.println("Please reenter the names of the participants of the expense, "
+                + "ensuring there are no repeats:");
     }
 
     public static void printNoLastTripError() {
@@ -367,19 +426,25 @@ public class Ui {
         System.out.println("Otherwise, you may continue to use the program.");
     }
 
-    public static void printInvalidPeople(ArrayList<String> names) {
+    public static void printInvalidPeople(ArrayList<String> names) throws ForceCancelException {
+        final Trip currTrip = Storage.getOpenTrip();
         for (String name : names) {
             if (names.indexOf(name) == names.size() - 1) {
-                System.out.print(name + " ");
+                System.out.print(name);
             } else if (names.indexOf(name) == names.size() - 2) {
-                System.out.print(name + " and");
+                System.out.print(name + " and ");
             } else if (names.indexOf(name) < names.size() - 2) {
                 System.out.print(name + ", ");
             }
         }
-        System.out.println("is not part of the trip.");
+        if (names.size() == 1) {
+            System.out.print(" is ");
+        } else {
+            System.out.print(" are ");
+        }
+        System.out.println("not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
-        printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        printListOfPeople(currTrip.getListOfPersons());
         System.out.println("Please enter the names of the people who are involved in this expense again, "
                 + "separated by a comma:");
     }
@@ -411,6 +476,10 @@ public class Ui {
     public static void expensePromptDate() {
         System.out.println("Enter date of expense:");
         System.out.println("\tPress enter to use today's date");
+    }
+
+    public static void noRecentExpenseError() {
+        System.out.println("You have not recently added an expense.");
     }
 
     public static void viewFilterDateFormatInvalid() {

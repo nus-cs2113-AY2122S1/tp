@@ -1,17 +1,22 @@
-package seedu.duke;
+package seedu.duke.trip;
+
+import seedu.duke.Person;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.SameNameException;
+import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
-import static seedu.duke.Parser.isNumeric;
+import static seedu.duke.parser.Parser.isNumeric;
 
-public class Trip {
+public class Trip implements FilterFinder {
 
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
@@ -24,7 +29,7 @@ public class Trip {
     private String repaymentCurrencyFormat = "%.02f";
     private String repaymentCurrencySymbol = "$";
     private String location;
-    private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private Expense lastExpense = null;
     private static final int ISO_LENGTH = 3;
     private static final String CATEGORY = "category";
     private static final String DESCRIPTION = "description";
@@ -50,7 +55,7 @@ public class Trip {
      *
      * @param newTripInfo array containing one attribute in each element
      */
-    public Trip(String[] newTripInfo) throws ForceCancelException {
+    public Trip(String[] newTripInfo) throws ForceCancelException, SameNameException {
         assert newTripInfo.length == 6;
         setLocation(newTripInfo[LOCATION_STRING].strip());
         setDateOfTrip(newTripInfo[DATE_STRING].strip());
@@ -69,19 +74,19 @@ public class Trip {
         try {
             switch (expenseCategory) {
             case CATEGORY:
-                findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
+                FilterFinder.findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
                 break;
             case DESCRIPTION:
-                findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
+                FilterFinder.findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
                 break;
             case PAYER:
-                findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
+                FilterFinder.findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
             case PERSON:
-                findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
+                FilterFinder.findMatchingPersonExpenses(listOfExpenses, expenseAttribute);
                 break;
             case DATE:
-                findMatchingDateExpenses(listOfExpenses, expenseAttribute);
+                FilterFinder.findMatchingDateExpenses(listOfExpenses, expenseAttribute);
                 break;
             default:
                 Ui.printInvalidFilterError();
@@ -95,189 +100,6 @@ public class Trip {
         }
 
     }
-    //@@author
-
-    //@@author lixiyuan416
-    private void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute)
-            throws ForceCancelException {
-        boolean areThereExpenses = false;
-        String inputDate = expenseAttribute;
-        while (!isDateValid(inputDate)) {
-            inputDate = Ui.receiveUserInput();
-        }
-        LocalDate dateToFind = LocalDate.parse(inputDate, inputPattern);
-        for (Expense e : listOfCurrentExpenses) {
-            if (e.getDate().isEqual(dateToFind)) {
-                int index = listOfCurrentExpenses.indexOf(e);
-                Ui.printFilteredExpenses(e, index);
-                areThereExpenses = true;
-            }
-        }
-        if (!areThereExpenses) {
-            Ui.printNoMatchingExpenseError();
-        }
-    }
-    //@@author
-
-    //@@author leeyikai
-    private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
-        boolean areThereExpenses = false;
-        for (Expense e : listOfCurrentExpenses) {
-            if (e.getPayer().getName().equalsIgnoreCase(expenseAttribute)) {
-                int index = listOfCurrentExpenses.indexOf(e);
-                Ui.printFilteredExpenses(e, index);
-                areThereExpenses = true;
-            }
-        }
-        if (!areThereExpenses) {
-            Ui.printNoMatchingExpenseError();
-        }
-    }
-
-    private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
-                                                        String expenseAttribute) {
-        boolean areThereExpenses = false;
-        String descriptionToLowerCase;
-        String attributeToLowerCase = expenseAttribute.toLowerCase();
-        for (Expense e : listOfCurrentExpenses) {
-            descriptionToLowerCase = e.getDescription().toLowerCase();
-            if (descriptionToLowerCase.contains(attributeToLowerCase)) {
-                int index = listOfCurrentExpenses.indexOf(e);
-                Ui.printFilteredExpenses(e, index);
-                areThereExpenses = true;
-            }
-        }
-        if (!areThereExpenses) {
-            Ui.printNoMatchingExpenseError();
-        }
-    }
-
-    private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
-                                                     String expenseAttribute) {
-        boolean areThereExpenses = false;
-        for (Expense e : listOfCurrentExpenses) {
-            if (e.getCategory().equalsIgnoreCase(expenseAttribute)) {
-                int index = listOfCurrentExpenses.indexOf(e);
-                Ui.printFilteredExpenses(e, index);
-                areThereExpenses = true;
-            }
-        }
-        if (!areThereExpenses) {
-            Ui.printNoMatchingExpenseError();
-        }
-    }
-    //@@author
-
-    //@@author lixiyuan416
-    private static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
-                                                   String personToSearchFor) {
-        boolean areThereExpenses = false;
-        for (Expense e : listOfCurrentExpenses) {
-            boolean isExpenseToBeAdded = false;
-            ArrayList<Person> personList = e.getPersonsList();
-            for (Person p : personList) {
-                if (p.getName().equalsIgnoreCase(personToSearchFor)) {
-                    isExpenseToBeAdded = true;
-                    break;
-                }
-            }
-            if (isExpenseToBeAdded) {
-                int index = listOfCurrentExpenses.indexOf(e);
-                Ui.printFilteredExpenses(e, index);
-                areThereExpenses = true;
-            }
-        }
-        if (!areThereExpenses) {
-            Ui.printNoMatchingExpenseError();
-        }
-    }
-
-    private boolean isDateValid(String inputDate) {
-        try {
-            if (Parser.doesDateReallyExist(inputDate)) {
-                LocalDate.parse(inputDate, inputPattern);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (DateTimeParseException e) {
-            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
-            Ui.viewFilterDateFormatInvalid();
-            return false;
-        }
-    }
-    //@@author
-
-    //@@author itsleeqian
-    public void getIndividualExpenseSummary(Person person) {
-        double currentAmount; //amount paid for current expense
-        double totalAmountSpent = 0;
-        double totalAmountSpentInLocalCurrency = 0;
-        Trip currTrip = Storage.getOpenTrip();
-        int expensesInvolved = 0; //num of expenses involved
-        HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
-        for (Expense e : listOfExpenses) {
-            if (containsPerson(e.getPersonsList(), person.getName())) {
-                currentAmount = e.getAmountSplit().get(person.getName());
-                String currentCategory = e.getCategory();
-                totalAmountSpent += currentAmount;
-                expensesInvolved++;
-                //the following if else is to update the category/amtSpent hashmap
-                if (!categoriesSplit.containsKey(currentCategory)) {
-                    categoriesSplit.put(currentCategory, currentAmount);
-                } else {
-                    double updatedValue = categoriesSplit.get(currentCategory) + currentAmount;
-                    categoriesSplit.put(currentCategory, updatedValue);
-                }
-            }
-        }
-        totalAmountSpentInLocalCurrency = roundToLocal(totalAmountSpentInLocalCurrency, currTrip, categoriesSplit);
-        System.out.println(person + " has spent "
-                + Ui.stringForeignMoney(totalAmountSpent)
-                + " (" + currTrip.getRepaymentCurrency() + " "
-                //+ currTrip.getRepaymentCurrencySymbol()
-                + String.format(currTrip.getRepaymentCurrencyFormat(), totalAmountSpentInLocalCurrency) + ") on "
-                + expensesInvolved
-                + " expenses on the following categories:");
-        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
-            System.out.println(set.getKey() + ": " + Ui.stringForeignMoney(set.getValue())
-                    + " (" + Ui.stringRepaymentMoney(set.getValue()) + ")");
-        }
-    }
-
-    /**
-     * Helper method for getIndividualExpenseSummary() method.
-     * Returns the rounded and formatted total repayment amount spent.
-     * @param totalAmount the amount before rounding
-     * @param currTrip the Trip the user is in/computing
-     * @param categoriesSplit the HashMap containing the category and the amount spent on said category
-     * @return a rounded and formatted value for amount spent in local currency
-     */
-    private double roundToLocal(double totalAmount, Trip currTrip, HashMap<String, Double> categoriesSplit) {
-        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
-            totalAmount += Storage.formatRepaymentMoneyDouble(
-                    set.getValue() / currTrip.getExchangeRate());
-        }
-        return totalAmount;
-    }
-
-    /**
-     * Returns true if personsList contains a person with a specific name.
-     * This is to replace the list.contains() method due to bugs with json deserialization.
-     *
-     * @param personsList list of persons to check
-     * @param name the name to check for
-     * @return true if personsList contains a person with a specific name
-     */
-    public boolean containsPerson(ArrayList<Person> personsList, String name) {
-        for (Person person : personsList) {
-            if (person.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //@@author
 
 
     public LocalDate getDateOfTrip() {
@@ -349,21 +171,6 @@ public class Trip {
         }
     }
 
-    public double getTotalExpenses() {
-        double totalExpense = 0;
-        for (Expense currentExpense : listOfExpenses) {
-            totalExpense += currentExpense.getAmountSpent();
-        }
-        return totalExpense;
-    }
-
-
-    //@@author joshualeeky
-    public String getForeignCurrency() {
-        return foreignCurrency;
-    }
-    //@@author
-
     //@@author itsleeqian
     public void setForeignCurrency(String foreignCurrency) throws ForceCancelException {
         try {
@@ -379,9 +186,12 @@ public class Trip {
             setForeignCurrency(userInput);
         }
     }
-    //@@author
 
     //@@author joshualeeky
+    public String getForeignCurrency() {
+        return foreignCurrency;
+    }
+
     private void setForeignCurrencyFormat(String input) {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
@@ -394,7 +204,7 @@ public class Trip {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
-            this.foreignCurrencySymbol = "$";
+            this.foreignCurrencySymbol = "";
         }
     }
 
@@ -447,7 +257,7 @@ public class Trip {
     }
 
 
-    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException {
+    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException, SameNameException {
         if (listOfPersons.isEmpty()) {
             Ui.noPersonsAdded();
             String userInput = Ui.receiveUserInput();
@@ -467,6 +277,14 @@ public class Trip {
             setLocation(Ui.receiveUserInput());
         }
         this.location = location;
+    }
+
+    public Expense getLastExpense() {
+        return lastExpense;
+    }
+
+    public void setLastExpense(Expense lastExpense) {
+        this.lastExpense = lastExpense;
     }
 
     public void setPersonName(int indexOfPerson, String newName) {
@@ -513,18 +331,25 @@ public class Trip {
      * @param peopleChained String of all persons involved in the trip
      * @return {@link String} array, each element of the array being a person involved in the trip
      */
-    private ArrayList<Person> splitPeople(String peopleChained) {
+    private ArrayList<Person> splitPeople(String peopleChained) throws SameNameException {
+        ArrayList<String> listOfPeopleNames = new ArrayList<>();
+        ArrayList<String> listOfPeopleNamesUpperCased = new ArrayList<>();
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
-            if (personName.isBlank()) {
-                continue;
+            if (listOfPeopleNamesUpperCased.contains(personName.strip().toUpperCase())) {
+                throw new SameNameException();
+            } else if (!personName.isBlank()) {
+                listOfPeopleNames.add(personName.strip());
+                listOfPeopleNamesUpperCased.add(personName.strip().toUpperCase());
             }
-            Person person = new Person(personName.strip());
+        }
+        for (String name : listOfPeopleNames) {
+            Person person = new Person(name);
             listOfPeople.add(person);
         }
         for (Person person : listOfPeople) {
             for (Person personToAdd : listOfPeople) {
-                person.getMoneyOwed().put(personToAdd.getName(), 0.0); // Remove .getName()
+                person.getMoneyOwed().put(personToAdd.getName(), 0.0);
             }
         }
         return listOfPeople;

@@ -11,7 +11,30 @@ easy and fuss-free, by helping you calculate how much each person owes every oth
 
 <br />
 
-__(Table of Contents here)__
+## Table of Contents
+* [Using this guide](#using-this-guide)
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Saving your data](#saving-your-data)
+  * [Loading your saved data](#loading-your-saved-data)
+  * [Trips](#trips)
+    * [Create Trip](#--create-trip)
+    * [Open Trip](#--open-trip)
+    * [Close Trip](#--close-trip)
+    * [List Trips](#--list-trips)
+    * [View People in Trip](#--view-people-in-trip)
+    * [Delete Trip](#--delete-trip)
+  * [Expenses](#expenses)
+    * [Create Expense](#--create-expense)
+    * [List Expenses](#--list-expenses)
+    * [View an Expense](#--view-an-expense)
+    * [Filter Expenses by Attribute](#--filter-expenses-by-attribute)
+    * [Delete Expense](#--delete-expense)
+  * [Optimize Transactions](#optimize-transactions)
+  * [Summary of Expenses](#summary-of-expenses)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 
 ## Using this guide
 
@@ -81,24 +104,23 @@ If there is an error loading your save file, please go to () for more informatio
 
 ### Trips
 
-#### - Create New Trip
+#### - Create Trip
 
-Creates a new trip in the program.
+Creates a new Trip in the program.
 
-You must have at least one trip created (or loaded from the save file) to use any other function.
-
-The input syntax to create a trip is:
+Input syntax:
 ```
-create /[location] /[date] /[foriegn-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
+create /[location] /[date] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
 ```
 
-Please note the following about the command above:
+All fields are compulsory. Note the following:
+- `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
-- `[foriegn-currency-ISO-code]` Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+- `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
-  - Note that the default home currency is SGD, unless edited by the user. To edit, see (edit trip).
+  - Note that the default home currency is SGD.
 - `persons-in-trip` should be separated with commas.
 
 #### Compatible Currencies
@@ -149,7 +171,7 @@ Input:
 create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
 ```
 
-Output:
+If successful, the output will be as follows:
 
 ```
 Your trip to America on 02 Feb 2021 has been successfully added!
@@ -159,42 +181,49 @@ Your trip to America on 02 Feb 2021 has been successfully added!
 
 #### - Open Trip
 
-In order to add, edit or delete expenses within a trip, you must first open the trip containing
-the expenses you wish to access.
+Opens a Trip, which allows the user to interact with other functionalities of our app, such as adding and viewing expenses.
 
-The input syntax for open is:
+Input syntax:
 ```
 open [trip-number]
 ```
 
 For example,
 
+Input:
 
 ````
 open 1
 ````
-If the trip is successfully opened, you will see:
+If successful, the output will be as follows:
 ```
 You have opened the following trip:
 America | 02 Feb 2021
 ```
 
-You can also run the `open` command while a trip is already open. This will close the currently-opened
-trip, and open the specified trip in the most recent command.
+You can also run the `open` command while a Trip is already open. This will close the currently-opened
+Trip, and open the specified Trip in the most recent command.
 
-*Note: Only one trip can be open at any time.*
+*Note: Only one Trip can be open at any time.*
 
 <br />
 
 #### - Close Trip
 
-Closes the current trip you are in, allowing the `list` and `delete` command to be used.
-This command can only be used if you have already opened a trip.
+Closes the current Trip you are in. This allows the user to list all trips or to delete a Trip.
 
-The input syntax for close:
+This command can only be used if a Trip is open.
+
+Input syntax:
 ```
 close
 ```
+For example,
+
+Input:
+````
+close
+````
 If successful, the output will be as follows:
 ```
 You have closed the following trip:
@@ -204,12 +233,21 @@ America | 02 Feb 2021
 <br />
 
 #### - List Trips
-Lists down the trips that you have created. Note that no trip must be open when executing this command.
+Lists all the Trips that you have created. 
+This command can only be used if no Trip is open.
 
-The input syntax for list is:
+Note that if a Trip is open, this command will list down your expenses instead. 
+
+Input syntax:
 ```
 list
 ```
+For example,
+
+Input:
+````
+list
+````
 If successful, the output will be as follows:
 ```
 List of Trips:
@@ -218,23 +256,48 @@ List of Trips:
 
 <br />
 
-#### - Delete a Trip
+#### - View People in Trip
+Lists the persons involved in a particular Trip. 
+This command can only be used if you have opened a Trip.
 
-Deletes a trip from the program.
+Input syntax:
+```
+people
+```
+For example,
 
-The input syntax to delete a trip is:
+Input:
+````
+people
+````
+If successful, the output will be as follows:
+```
+These are the people involved in this trip:
+	Ben
+	Jerry
+	Tom
+```
+
+<br />
+
+#### - Delete Trip
+
+Deletes a Trip from the program.
+
+Input syntax:
 ```
 delete [trip-number]
 ```
-- `[trip-number]` is the index of the trip you wish to delete, and can be found by using `list` command while in 
-Trip mode.
+- `[trip-number]` is the index of the Trip you wish to delete, which can be found by using `list` command while no Trip is open.
 
 For example,
+
+Input:
 
 ````
 delete 1
 ````
-If your trip is successfully deleted, you will see:
+If successful, the output will be as follows:
 ```
 Your trip to America on 02 Feb 2021 has been successfully removed.
 ```
@@ -242,27 +305,27 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 
 ### Expenses
 #### - Create Expense
-Creates a new expense entry for the current trip. 
+Creates a new expense entry for the current Trip. 
 
-A trip needs to open a trip to use this command.
+This command can only be used if you have opened a Trip.
 
-All arguments are compulsory.
-
-The input syntax is as follows:
+Input syntax:
 ````  
 expense [amount] [category] [people] /[description]
 ````
-
+All fields are compulsory. Note the following:
 - `[amount]` is the total amount spent on the expense.
 
-- `[cat]` is a category tag to the expense. Only one tag is allowed.
+- `[category]` is a category tag for the expense. Only 1 category per Expense is allowed.
 
-- `[people]` Denotes the people involved in the expense. Multiple people involved are separated by commas.
+- `[people]` denotes the people involved in the expense. Multiple people involved are to be separated by commas.
   - Entering `-all` will add every person in the trip to the expense
 
 - `[description]` is the description of the expense.
 
-For Example:
+For example,
+
+Input:
 ````
 expense 30 food Ben, Jerry /In-and-Out Burgers
 ````
@@ -274,7 +337,7 @@ Enter date of expense:
 ````
 - The date must follow the format of dd-mm-yyyy.
 - Pressing the enter key without keying in anything will use the current date.
-- If the expense only has one person involved, the expense will be automatically added as the rest of the expense portion is redundant.
+- If the expense only has one person involved, the steps below will be skipped and the expense will be automatically added.
 
 PayMeBack will then ask for the name of the person who paid for the expense:
 ````
@@ -282,12 +345,12 @@ Who paid for the expense?:
 ````
 - The name entered has to be part of the expense or PayMeBack will request for the name again.
 
-PayMeBack will then ask for the amounts each person involved in the expense spent on that particular expense along
+PayMeBack will then ask for the amounts spent by each person involved along
 with how much of the amount has yet to be assigned:
 ````
 Who paid for the expense?: Ben
 Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $30.00 left to be assigned. How much did Tom Ben?: 
+There is USD $30.00 left to be assigned. How much did Tom spend?: 
 ````
 - The program will automatically cycle through every person involved in the expense.
 - Entering `equal` when the program asks for the amount spent for the first person will cause the program to evenly split the expense among all the people involved in it.
@@ -308,7 +371,7 @@ Assign the remaining USD $10.00 to Jerry? (y/n):
 - Entering `y` will allow PayMeBack to assign the amount to the persons stated.
 - Entering `n` will result in PayMeBack requesting for the name of the person who paid for the expense again, followed by the same sequence of steps.
 
-Upon successful adding of an expense the following output will be printed:
+If successful, the output will be as follows:
 ````
 Your expense has been added successfully
 ````
@@ -318,18 +381,23 @@ Your expense has been added successfully
 #### - List Expenses
 
 List all expenses in the current opened trip.
+This command can only be used if a trip is open.
 
-To list all expenses in a trip, ensure you have opened a trip, then type ``list``.
+Note that if a trip is not currently open, this command will list trips instead.
 
+Input syntax:
+````  
+list
+````
 
 For example,
 
 Input:
 ````
-Enter your command: list
+list
 ````
 
-Output:
+If successful, the output will be as follows:
 ````
 List of Expenses: 
 	1. In-and-Out Burgers | 03 Feb 2021
@@ -340,23 +408,24 @@ List of Expenses:
 <br />
 
 
-#### - View Expenses
+#### - View an Expense
 Shows the details of a particular expense of a trip.
 
-User must already be inside a trip and have at least 1 expense.
+This command can only be used if a trip is open, and there is at least 1 expense.
 
-The input syntax is as follows:
+Input syntax:
 ````
-view [index]
+view [expense-number]
 ````
-- Entering `view` without index will print all expenses in the currently opened trip.
+- Note that entering `view` without an index will print all expenses in the currently opened trip.
+
 For example,
 
 Input:
 ````
-Enter your command: view 1
+view 1
 ````
-Output:
+If successful, the output will be as follows:
 ````
 	In-and-Out Burgers
 	Date: 03 Feb 2021
@@ -371,10 +440,12 @@ Output:
 
 <br />
 
-#### - Filter Expenses By Attributes
+#### - Filter Expenses By Attribute
 Allows the user to view specific expenses based on an attribute of their choice.
 
-The input syntax is as follows:
+This command can only be used if a trip is open, and there is at least 1 expense.
+
+Input syntax:
 ````
 view filter [expense-attribute] [search-keyword]
 ````
@@ -386,7 +457,7 @@ Input:
 ````
 Enter your command: view filter category food
 ````
-Output:
+If successful, the output will be as follows:
 ````
 1.  In-and-Out Burgers
     Date: 03 Feb 2021
@@ -411,25 +482,87 @@ Output:
 
 <br />
 
-### Summary
+#### - Delete Expense
 
-#### - View Summary of expenses
-Shows an overall summary of current trip’s expenses. User needs to have opened a trip to use this command.
-The input syntax is as follows:
+Deletes an expense from a trip.
+
+This command can only be used if a trip is open, and there is at least 1 expense.
+
+Input syntax:
+```
+delete [expense-number]
+```
+- `[expense-number]` is the index of the expense you wish to delete, 
+and can be found by using `list` command while a Trip is open.
+
+For example,
+
+Input:
 ````
-summary [name]
+delete 1
 ````
-- Entering `summary` without a name will print the summary of everybody in the opened trip.
+If successful, the output will be as follows:
+```
+Your expense of SGD 50.00 has been successfully removed.
+```
+<br />
+
+###Optimize Transactions
+
+Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened
+a trip and have expenses to use the command. 
+
+Input syntax:
+
+```
+optimize
+```
 
 For example,
 
 Input:
 
 ```
-Enter your command: summary
+optimize
 ```
 
+If successful, the output will be as follows:
+
+```
+Here is the optimized payment transactions:
+yuzhao needs to pay USD 8.00 (SGD 8.00) to yikai
+yuzhao needs to pay USD 13.00 (SGD 13.00) to qian
+```
+
+If no transactions are required, the user will see this message:
+
 Output:
+```
+All are paid! :)
+```
+<br />
+
+### Summary of Expenses
+Shows an overall summary of individual expenses in a trip.
+
+This command can only be used if you have opened a trip.
+
+The input syntax is as follows:
+````
+summary [name]
+````
+- [name] is an optional argument.
+- Note that entering `summary` without a name will print the summary of everybody in the opened trip.
+
+For example,
+
+Input:
+
+```
+summary
+```
+
+If successful, the output will be as follows:
 ```
 Ben has spent USD $50.00 (SGD $67.57) on 3 expenses on the following categories:
 food: USD $30.00 (SGD $40.54)
@@ -446,6 +579,44 @@ travel: USD $20.00 (SGD $27.03)
 shopping: USD $30.00 (SGD $40.54)
 
 ```
+
+### Help
+Shows a quick help message, depending on which stage the user is at.
+
+Input syntax:
+
+``
+help
+``
+
+For example,
+
+Input:
+
+```
+help
+```
+
+Output for if no trip is open:
+````
+Type "open [trip number]" to open your trip
+While a trip is open, type "expense" to create an expense for that trip
+Type "quit" to exit
+````
+
+Output for if trip is open:
+````
+You are inside a trip. Trip specific commands:
+	expense: creates an expense
+	view: list all expenses
+	view filter [options] [search keyword]: list filtered expenses.
+		filter options: [category, description, payer, person, date]
+	view [index]
+	summary: shows how much each person spent in total for this trip
+	amount [person]: for settling repayment at the end of the trip,shows how much this person owes to others, or how much others owe this person
+	open [trip num]: open another trip
+	quit: exit the program
+````
 ---
 
 
@@ -462,7 +633,7 @@ shopping: USD $30.00 (SGD $40.54)
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this app to the device you wish to use.
 
 ## Command Summary
 * Add todo `todo n/TODO_NAME d/DEADLINE`

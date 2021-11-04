@@ -2,6 +2,8 @@ package seedu.duke;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import seedu.duke.expense.Expense;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +16,7 @@ class ExpenseTest {
         Person person = new Person("Xi Yuan");
         ArrayList<Person> listOfPersons = new ArrayList<>();
         listOfPersons.add(person);
-        exp = new Expense(8.0, "food", listOfPersons, "nice Italian restaurant", 0);
+        exp = new Expense(8.0, "food", listOfPersons, "nice Italian restaurant");
     }
 
     @Test
