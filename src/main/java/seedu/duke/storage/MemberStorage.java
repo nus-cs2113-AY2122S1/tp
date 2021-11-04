@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddMemberException;
 import seedu.duke.member.Member;
@@ -22,7 +25,7 @@ public class MemberStorage {
     static String invalidNameErrorExcelMessage = "invalid name found in CSV.Please fix this before running the program again.";
     static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CSV.Please fix this before running the program again.";
 
-
+    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CSV.Please fix this before running the program again.";
 
 
     /**
@@ -57,14 +60,123 @@ public class MemberStorage {
      */
     private static void verifyMemberDetails(File memberFile) {
         verifyIndividualFields(memberFile);
+        verifyDuplicateFields(memberFile);
     }
+
+    /**
+     * verifies that no duplicates of member name, phone number and student number exists.
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyDuplicateFields(File memberFile) {
+        try {
+            verifyDuplicateNames(memberFile);
+            verifyDuplicateStudentNumber(memberFile);
+            verifyDuplicatePhoneNumber(memberFile);
+        } catch (InvalidAddMemberException e) {
+        System.out.println(e.getMessage());
+        System.exit(0);
+        }
+    }
+
+    /**
+     * verifies that no duplicates of student number exists.
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyDuplicateStudentNumber(File memberFile) throws InvalidAddMemberException {
+        String StudentNumber;
+        List<String> pendingStudentNumber = new ArrayList<String>();
+        try {
+            Scanner memberScanner = new Scanner(memberFile);
+            memberScanner.nextLine();
+            while (memberScanner.hasNextLine()) {
+                String fullMemberDetails = memberScanner.nextLine();
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
+                StudentNumber = memberDetails[1];
+                pendingStudentNumber.add(StudentNumber);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
+        }
+        checkDuplicates(pendingStudentNumber);
+    }
+
+    /**
+     * verifies that no duplicates of student number exists.
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyDuplicatePhoneNumber(File memberFile) throws InvalidAddMemberException {
+        String PhoneNumber;
+        List<String> pendingPhoneNumber = new ArrayList<String>();
+        try {
+            Scanner memberScanner = new Scanner(memberFile);
+            memberScanner.nextLine();
+            while (memberScanner.hasNextLine()) {
+                String fullMemberDetails = memberScanner.nextLine();
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
+                PhoneNumber = memberDetails[3];
+                pendingPhoneNumber.add(PhoneNumber);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
+        }
+        checkDuplicates(pendingPhoneNumber);
+    }
+
+    /**
+     * verifies that no duplicates of member name exists.
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyDuplicateNames(File memberFile) throws InvalidAddMemberException {
+        String name;
+        List<String> pendingMemberNames = new ArrayList<String>();
+        try {
+            Scanner memberScanner = new Scanner(memberFile);
+            memberScanner.nextLine();
+            while (memberScanner.hasNextLine()) {
+                String fullMemberDetails = memberScanner.nextLine();
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
+                name = memberDetails[0];
+                pendingMemberNames.add(name);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
+        }
+        checkDuplicates(pendingMemberNames);
+    }
+
+    /**
+     * Checks for any duplicates in the list.Returns true if there is any duplicates.
+     * Else return false.
+     *
+     * @param pendingList current list of Strings to check.
+     */
+    private static void checkDuplicates(List<String> pendingList) throws InvalidAddMemberException {
+        for (int i = 0; i < pendingList.size(); i++) {
+            for (int j = i + 1; j < pendingList.size(); j++) {
+                if (pendingList.get(i).equals(pendingList.get(j))) {
+                    throw new InvalidAddMemberException(duplicateErrorExcelMessage);
+                }
+            }
+        }
+    }
+
 
     /**
      * verifies that individual details from CSV file are valid
      *
      * @param memberFile CCAMembers CSV file to read data from.
      */
-    private static void verifyIndividualFields(File memberFile)  {
+    private static void verifyIndividualFields(File memberFile) {
         String name;
         String studentNumber;
         String gender;
@@ -94,6 +206,12 @@ public class MemberStorage {
         }
     }
 
+    /**
+     * Checks if phone number is valid.
+     *
+     * @param phoneNumber the phone number to be checked.
+     * @throws InvalidAddMemberException when phone number is invalid.
+     */
     private static void verifyMemberPhoneNumber(String phoneNumber) throws InvalidAddMemberException {
         boolean validPhoneNumber = phoneNumber.matches(validPhoneNumberRegex);
         if (!validPhoneNumber) {
@@ -102,6 +220,12 @@ public class MemberStorage {
 
     }
 
+    /**
+     * Checks if gender is valid.
+     *
+     * @param gender the gender to be checked.
+     * @throws InvalidAddMemberException when gender is invalid.
+     */
     private static void verifyMemberGender(String gender) throws InvalidAddMemberException {
         boolean validGender = gender.matches(validGenderRegex);
         if (!validGender) {
@@ -110,6 +234,12 @@ public class MemberStorage {
 
     }
 
+    /**
+     * Checks if studentNumber is valid.
+     *
+     * @param studentNumber the student number to be checked.
+     * @throws InvalidAddMemberException when studentNumber is invalid.
+     */
     private static void verifyMemberStudentNumber(String studentNumber) throws InvalidAddMemberException {
         boolean validStudentNumber = studentNumber.matches(validStudentNumberRegex);
         if (!validStudentNumber) {
@@ -117,6 +247,12 @@ public class MemberStorage {
         }
     }
 
+    /**
+     * Checks if member name is valid
+     *
+     * @param name the member name to be checked.
+     * @throws InvalidAddMemberException when member name is invalid.
+     */
     private static void verifyMemberName(String name) throws InvalidAddMemberException {
         boolean nameEmpty = (name == null || name.trim().isEmpty());
         boolean nameContainDigits = name.matches(".*\\d.*");
