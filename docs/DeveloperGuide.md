@@ -168,7 +168,7 @@ Functions of the Parser class:
       * Compares the user's input against a list of valid inputs
       * If valid, this method finds the corresponding attribute of the recipe as intended by the user by instantiating the `FindXYZCommand` class (where XYZ can be Ingredients, Steps, Calories, Difficulty, Price or Time)
     * `addTagParse`:
-      * Adds a new tag to an existing recipe by instantiating the 'TagAddCommand' class
+      * Adds a new tag to an existing recipe by instantiating the `TagAddCommand` class
     * `unTagParse`
       * Removes an existing tag from its original recipe by instantiating the `TagUntagCommand` class
   * Below are the child classes of the `Command` class that `parseMaster()` instantiates directly:
@@ -176,6 +176,9 @@ Functions of the Parser class:
     * `ListRecipesCommand`
     * `HelpCommand`
 * Prints responses to the console by implementing the `UI` class
+
+For example, the diagram below shows the sequence diagram for when the user wants to find recipes by their ingredients:
+![FindByIngredients Sequence Diagram](./RenderedUML/Find.svg)
 
 ### Command component
 
