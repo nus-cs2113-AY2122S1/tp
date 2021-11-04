@@ -44,16 +44,14 @@ public abstract class GameCommand implements Command {
      * for word game: word limit
      **/
     public int getNumber(ArrayList<String> args, String gameType)
-            throws InvalidCommandException {
-        if (!args.contains(gameType)) {
-            return -1;
-        }
+            throws InvalidCommandException, IncompleteCommandException {
         //if number is negative or out of range, throw exception
         int index = args.indexOf(gameType);
         try {
             return Integer.parseInt(args.get(index + 1));
         } catch (IndexOutOfBoundsException e) {
-            return -1;
+            //no suffix after -<mode>
+            throw new IncompleteCommandException();
         }
     }
 }

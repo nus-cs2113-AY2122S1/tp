@@ -1,9 +1,7 @@
 package seedu.typists.game;
 
-import seedu.typists.exception.ExceedRangeException;
 import seedu.typists.ui.GameUi;
 import seedu.typists.ui.SummaryUi;
-import seedu.typists.ui.TextUi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,22 +9,29 @@ import java.util.HashMap;
 public abstract class Game {
     protected final GameUi ui;
     protected boolean isReady;
+    protected int wordsPerLine;
+    protected int limit;
 
     public ArrayList<String[]> displayedLines = new ArrayList<>();
     public ArrayList<String[]> userLines = new ArrayList<>();
     public double gameTime;
 
-    public Game() {
+    public Game(int wordsPerLine, boolean isReady) {
         this.ui = new GameUi();
+        this.isReady = isReady;
+        this.wordsPerLine = wordsPerLine;
+    }
+
+    public Game(int wordsPerLine, int limit, boolean isReady) {
+        this(wordsPerLine, isReady);
+        this.limit = limit;
     }
 
     public void run() {
-        if (isReady) {
-            runGame();
-        } else {
+        if (!isReady) {
             ui.readyToStartTimer();
-            runGame();
         }
+        runGame();
     }
 
     public long getTimeNow() {

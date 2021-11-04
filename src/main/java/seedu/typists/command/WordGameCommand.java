@@ -20,11 +20,12 @@ public class WordGameCommand extends GameCommand {
             if (setContent) {
                 content.setContent();
             }
-            return new WordLimitGame(wordLimit, content.getContent(), 5, isReady);
-        } catch (NumberFormatException e) {
-            System.out.println("Number of words be a number");
+            return new WordLimitGame(content.getContent(), 5, wordLimit, isReady);
         } catch (InvalidCommandException e) {
             //won't come here.
+        } catch (NumberFormatException | IncompleteCommandException e) {
+            //constructor without limit
+            return new WordLimitGame(content.getContent(), 5, isReady);
         }
         return null;
     }

@@ -1,6 +1,5 @@
 package seedu.typists.command;
 
-import seedu.typists.exception.IncompleteCommandException;
 import seedu.typists.ui.TextUi;
 
 import java.util.ArrayList;
@@ -34,13 +33,8 @@ public class CommandFactory {
             return new TimeGameCommand();
         } else if (args.contains(WORD_SIGNIFIER)) {
             return new WordGameCommand();
-        } else {
-            try {
-                throw new IncompleteCommandException();
-            } catch (IncompleteCommandException e) {
-                ui.printScreen("Please specify game type: -time or -word");
-            }
         }
+        ui.printScreen("Please specify game type: -time or -word");
         return null;
     }
 }

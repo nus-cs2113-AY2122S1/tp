@@ -15,22 +15,22 @@ import static seedu.typists.parser.StringParser.splitString;
 public class WordLimitGame extends Game {
     private ArrayList<String> eachWord;
     protected ArrayList<String[]> wordLines;
-    protected int wordLimit;
-    private final int wordsPerLine;
     private final String content1;
     private long beginTime;
     private String[] displayed;
 
-
-    public WordLimitGame(int wordLimit, String targetWordSet, int wordsPerLine, boolean isReady) {
-        super();
+    public WordLimitGame(String targetWordSet, int wordsPerLine, boolean isReady) {
+        super(wordsPerLine, isReady);
         this.eachWord = new ArrayList<>(100);
-        this.wordsPerLine = wordsPerLine;
         this.content1 = targetWordSet;
-        this.wordLimit = getWordLimit(wordLimit);
-        this.isReady = isReady;
+        this.limit = getWordLimit();
     }
 
+    public WordLimitGame(String targetWordSet, int wordsPerLine, int wordLimit, boolean isReady) {
+        super(wordsPerLine, wordLimit, isReady);
+        this.eachWord = new ArrayList<>(100);
+        this.content1 = targetWordSet;
+    }
 
     @Override
     public void displayLines(int row) {
@@ -47,11 +47,7 @@ public class WordLimitGame extends Game {
         return eachWord.size();
     }
 
-    public int getWordLimit(int wordLimit) {
-        if (wordLimit != -1) {
-            return wordLimit;
-        }
-
+    public int getWordLimit() {
         Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how many words you want the game to run: ");
 
@@ -59,7 +55,7 @@ public class WordLimitGame extends Game {
             return Integer.parseInt(in.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Not a Number!");
-            return getWordLimit(wordLimit);
+            return getWordLimit();
         }
     }
 
@@ -73,7 +69,7 @@ public class WordLimitGame extends Game {
     }
 
     public void runGame() {
-        trimContent(wordLimit);
+        trimContent(limit);
         beginTime = getTimeNow();
         List<String> inputs = new ArrayList<>();
         int row = 0;// for method: getDisplayLines()

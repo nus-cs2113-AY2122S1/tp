@@ -1,6 +1,7 @@
 package seedu.typists.game;
 
 import seedu.typists.exception.ExceedRangeException;
+import seedu.typists.exception.InvalidCommandException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,41 +9,40 @@ import java.util.List;
 import java.util.Scanner;
 
 import static seedu.typists.common.Messages.MESSAGE_TIME_GAME_END;
-import static seedu.typists.common.Utils.getDisplayLines;
-import static seedu.typists.common.Utils.splitStringIntoWordList;
-import static seedu.typists.common.Utils.getWordLineFromStringArray;
+import static seedu.typists.common.Utils.*;
 
 public class TimeModeGame extends Game {
-    protected final int timeInSeconds;
     protected final ArrayList<String> wordLists;
-    protected int wordsPerLine;
     protected double gameTime;
     protected int currentRow;
 
-    public TimeModeGame(int timeInSeconds, String targetWordSet, int wordsPerLine, boolean isReady) {
-        super();
-        assert targetWordSet != null : "text passed into Time Game should not be null.";
+    public TimeModeGame(String targetWordSet, int wordsPerLine, boolean isReady) {
+        super(wordsPerLine, isReady);
+        assert targetWordSet != null;
         this.wordLists = splitStringIntoWordList(targetWordSet);
-        this.timeInSeconds = getTimeLimit(timeInSeconds);
-        this.wordsPerLine = wordsPerLine;
-        this.isReady = isReady;
+        this.currentRow = 1;
+        this.limit = getTimeLimit();
+    }
+
+    public TimeModeGame(String targetWordSet, int wordsPerLine, int timeInSeconds, boolean isReady) {
+        super(wordsPerLine, timeInSeconds, isReady);
+        assert targetWordSet != null;
+        this.wordLists = splitStringIntoWordList(targetWordSet);
         this.currentRow = 1;
     }
 
-    public int getTimeLimit(int timeInSeconds) {
-        if (timeInSeconds != -1) {
-            return timeInSeconds;
-        }
-
+    public int getTimeLimit() {
         Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how long you want the game to run: ");
-
         try {
-            return Integer.parseInt(in.nextLine());
+            int n = Integer.parseInt(in.nextLine());
+            return isValidTime(n);
         } catch (NumberFormatException e) {
-            System.out.println("Not a Number!");
-            return getTimeLimit(timeInSeconds);
+            System.out.println("Invalid Number!");
+        } catch (InvalidCommandException e) {
+            //repeat getTimeLimit
         }
+        return getTimeLimit();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TimeModeGame extends Game {
 
         while (!timeOver) {
             long currTime = getTimeNow() - beginTime;
-            if (currTime >= timeInSeconds * 1000L) {
+            if (currTime >= limit * 1000L) {
                 gameTime = (double) currTime / 1000;
                 timeOver = true;
             } else {
@@ -83,7 +83,7 @@ public class TimeModeGame extends Game {
 
     public void endGame() {
         ui.printEnd(MESSAGE_TIME_GAME_END);
-        double overshoot = gameTime - timeInSeconds;
+        double overshoot = gameTime - limit;
         assert overshoot >= 0;
         if (overshoot > 0) {
             ui.printOvershoot(overshoot);
