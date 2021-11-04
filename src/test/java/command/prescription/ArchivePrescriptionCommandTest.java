@@ -18,21 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArchivePrescriptionCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
 
     @BeforeEach
     public void setUp() {
         Data.generateTestData();
         System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
     }
 
     @AfterEach
     public void tearDown() {
         System.setOut(originalOut);
-        System.setErr(originalErr);
     }
 
     @AfterAll
@@ -67,7 +63,7 @@ public class ArchivePrescriptionCommandTest {
         command.execute();
         String expectedOutput = "Archived 2 prescriptions from 10-10-2021\n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
-                + "| ID |     NAME     | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \n"
+                + "| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
                 + "| 3  | SIMVASTATIN  |    20    |  S1234567A  | 11-10-2021 |  SAM  |    4     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
@@ -87,7 +83,7 @@ public class ArchivePrescriptionCommandTest {
         command.execute();
         String expectedOutput = "Archived 0 prescriptions from 08-10-2021\n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
-                + "| ID |     NAME     | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | \n"
+                + "| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
                 + "| 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"

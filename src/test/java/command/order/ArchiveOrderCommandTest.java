@@ -18,21 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArchiveOrderCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
 
     @BeforeEach
     public void setUp() {
         Data.generateTestData();
         System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
     }
 
     @AfterEach
     public void tearDown() {
         System.setOut(originalOut);
-        System.setErr(originalErr);
     }
 
     @AfterAll

@@ -1,5 +1,6 @@
 package command.order;
 
+import command.Command;
 import command.Data;
 import inventory.Medicine;
 import org.junit.jupiter.api.AfterAll;
@@ -41,7 +42,7 @@ public class ListOrderCommandTest {
     //@@author alvintan01
 
     @Test
-    public void listOrder_sortByIdAscending_expectOrdersWithSortedIdAscending() {
+    public void listOrderCommand_sortByIdAscending_expectOrdersWithSortedIdAscending() {
         String expectedOutput = "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"
                 + "+====+==============+==========+============+===========+\n"
@@ -67,7 +68,7 @@ public class ListOrderCommandTest {
     }
 
     @Test
-    public void listOrder_sortByNameAscending_expectOrdersWithSortedNameAscending() {
+    public void listOrderCommand_sortByNameAscending_expectOrdersWithSortedNameAscending() {
         String expectedOutput = "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"
                 + "+====+==============+==========+============+===========+\n"
@@ -93,7 +94,7 @@ public class ListOrderCommandTest {
     }
 
     @Test
-    public void listOrder_sortByQuantityDescending_expectOrdersWithSortedQuantityDescending() {
+    public void listOrderCommand_sortByQuantityDescending_expectOrdersWithSortedQuantityDescending() {
         String expectedOutput = "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"
                 + "+====+==============+==========+============+===========+\n"
@@ -119,7 +120,7 @@ public class ListOrderCommandTest {
     }
 
     @Test
-    public void listOrder_sortByDateDescending_expectOrdersWithSortedDateDescending() {
+    public void listOrderCommand_sortByDateDescending_expectOrdersWithSortedDateDescending() {
         String expectedOutput = "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"
                 + "+====+==============+==========+============+===========+\n"
@@ -145,7 +146,7 @@ public class ListOrderCommandTest {
     }
 
     @Test
-    public void listOrder_sortByStatusDescending_expectOrdersWithSortedStatusDescending() {
+    public void listOrderCommand_sortByStatusDescending_expectOrdersWithSortedStatusDescending() {
         String expectedOutput = "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"
                 + "+====+==============+==========+============+===========+\n"
@@ -171,7 +172,7 @@ public class ListOrderCommandTest {
     }
 
     @Test
-    public void listOrder_columnDoesNotExist_expectError() {
+    public void listOrderCommand_columnDoesNotExist_expectError() {
         String expectedOutput = "Invalid column name/alias! Column names can only be [ID, NAME, QUANTITY, DATE, "
                 + "STATUS] and the respective aliases are [i, n, q, d, s].";
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
@@ -180,4 +181,31 @@ public class ListOrderCommandTest {
         // Output stream will include \r for each line break
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
+
+    //@@author RemusTeo
+    @Test
+    public void listOrderCommand_byValidId_expectValidSingleOrder() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put("i", "7");
+        Command command = new ListOrderCommand(parameters);
+        command.execute();
+        String expectedOutput = "+====+=========+==========+============+=========+\n"
+                +"| ID |  NAME   | QUANTITY |    DATE    | STATUS  | \n"
+                +"+====+=========+==========+============+=========+\n"
+                +"| 7  | PANADOL |    50    | 13-12-2021 | PENDING | \n"
+                +"+----+---------+----------+------------+---------+";
+        assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
+    }
+
+    @Test
+    public void listOrderCommand_byInvalidId_expectInvalid() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put("i", "0");
+        Command command = new ListOrderCommand(parameters);
+        command.execute();
+        String expectedOutput = "Invalid order id provided!";
+        assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
+    }
+
+
 }

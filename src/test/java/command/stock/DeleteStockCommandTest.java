@@ -2,18 +2,13 @@ package command.stock;
 
 import command.Command;
 import command.Data;
-import inventory.Medicine;
-import inventory.Stock;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utilities.parser.DateParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,21 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteStockCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
 
     @BeforeEach
     void setup() {
         Data.generateTestData();
         System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
     }
 
     @AfterEach
     void restoreStreams() {
         System.setOut(originalOut);
-        System.setErr(originalErr);
     }
 
     @AfterAll
