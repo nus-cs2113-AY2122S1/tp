@@ -336,7 +336,7 @@ public class Trip implements FilterFinder {
         ArrayList<String> listOfPeopleNamesUpperCased = new ArrayList<>();
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
-             if (listOfPeopleNamesUpperCased.contains(personName.strip().toUpperCase())) {
+            if (listOfPeopleNamesUpperCased.contains(personName.strip().toUpperCase())) {
                 throw new SameNameException();
             } else if (!personName.isBlank()) {
                 listOfPeopleNames.add(personName.strip());
