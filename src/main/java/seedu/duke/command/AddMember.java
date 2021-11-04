@@ -16,13 +16,14 @@ public class AddMember {
 
     String invalidNameErrorMessage = "Please input a valid name.Name cannot contain numbers or be empty.";
     String invalidStudentNumberErrorMessage = "Invalid student number provided. Please give it in the following "
-            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends off "
-            + "with an capital letter";
+            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends "
+            + "off with an capital letter";
     String invalidGenderErrorMessage = "Invalid gender provided. Please enter M for male, F for female.";
     String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 digit Singapore phone number";
     String duplicateNameErrorMessage = "Duplicate name found.Please enter a different name";
     String duplicatePhoneNumberErrorMessage = "Duplicate phone number found.Please enter a different phone number";
-    String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a different student number ";
+    String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a different student"
+            + " number ";
 
     String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
     String validGenderRegex = "^[M|F]";
