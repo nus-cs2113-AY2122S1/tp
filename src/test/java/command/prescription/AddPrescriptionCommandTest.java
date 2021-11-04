@@ -51,16 +51,9 @@ public class AddPrescriptionCommandTest {
                     DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY);
             medicines.add(stock);
 
-            LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-            parameters.put("n", NAME);
-            parameters.put("q", QUANTITY);
-            parameters.put("c", CUSTOMER_ID);
-            parameters.put("s", STAFF_NAME);
+            executeAddPrescriptionCommand();
 
             final int prescriptionIndex = 1;
-            Command command = new AddPrescriptionCommand(parameters);
-            command.execute();
             Prescription prescription = (Prescription) medicines.get(prescriptionIndex);
 
             assertEquals(prescription.getPrescriptionId(), 1);
@@ -87,15 +80,7 @@ public class AddPrescriptionCommandTest {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("c", CUSTOMER_ID);
-        parameters.put("s", STAFF_NAME);
-
-        Command command = new AddPrescriptionCommand(parameters);
-        command.execute();
+        executeAddPrescriptionCommand();
 
         String expectedOutput = "Unable to Prescribe! Prescription quantity is more than stock available!\n"
                 + "Prescription quantity: 30 Stock available: 5";
@@ -115,6 +100,16 @@ public class AddPrescriptionCommandTest {
             e.printStackTrace();
         }
 
+        executeAddPrescriptionCommand();
+
+        String expectedOutput = "Unable to Prescribe! Medication has expired!";
+
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+
+    }
+
+    private void executeAddPrescriptionCommand() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
         parameters.put("n", NAME);
@@ -124,11 +119,6 @@ public class AddPrescriptionCommandTest {
 
         Command command = new AddPrescriptionCommand(parameters);
         command.execute();
-
-        String expectedOutput = "Unable to Prescribe! Medication has expired!";
-
-        // Output stream will include \r for each line break
-        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 }

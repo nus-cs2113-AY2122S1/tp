@@ -47,12 +47,7 @@ public class DeleteOrderCommandTest {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("i",ID);
-
-        Command command = new DeleteOrderCommand(parameters);
-        command.execute();
+        executeDeleteOrderCommand();
 
         String expectedOutput = "Order deleted for Order ID 1";
 
@@ -62,16 +57,21 @@ public class DeleteOrderCommandTest {
 
     @Test
     void deleteOrderCommand_invalidId_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("i",ID);
-
-        Command command = new DeleteOrderCommand(parameters);
-        command.execute();
+        executeDeleteOrderCommand();
 
         String expectedOutput = "Invalid order id provided!";
 
         assertEquals(expectedOutput.trim(), outContent.toString().trim());
+
+    }
+
+    private void executeDeleteOrderCommand() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        parameters.put("i", ID);
+
+        Command command = new DeleteOrderCommand(parameters);
+        command.execute();
 
     }
 

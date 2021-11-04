@@ -55,12 +55,7 @@ public class DeletePrescriptionCommandTest {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("i",ID);
-
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
+        executeDeletePrescriptionCommand();
 
         String expectedOutput = "Prescription deleted for Prescription Id 1";
 
@@ -72,12 +67,7 @@ public class DeletePrescriptionCommandTest {
     void deletePrescriptionCommand_invalidPrescriptionId_expectInvalid() {
         String expectedOutput = "Invalid prescription id provided!";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("i",ID);
-
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
+        executeDeletePrescriptionCommand();
 
         assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
@@ -96,18 +86,23 @@ public class DeletePrescriptionCommandTest {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("i",ID);
-
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
+        executeDeletePrescriptionCommand();
 
         String expectedOutput = "Unable to delete prescription. Quantity added will exceed maximum quantity.\n"
                 + "Maximum quantity: 50 Total Quantity after deletion: 55";
 
         // Output stream will include \r for each line break
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+
+    }
+
+    private void executeDeletePrescriptionCommand() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        parameters.put("i", ID);
+
+        Command command = new DeletePrescriptionCommand(parameters);
+        command.execute();
 
     }
 
