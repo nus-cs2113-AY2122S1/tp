@@ -185,7 +185,8 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String expectedOutput = "Same Medication and Expiry Date exist. Using existing price, description and maximum quantity"
+        String expectedOutput = "Same Medication and Expiry Date exist. Using existing price, "
+                + "description and maximum quantity"
                 + ". Updating existing quantity.\n"
                 + "+====+=========+========+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"

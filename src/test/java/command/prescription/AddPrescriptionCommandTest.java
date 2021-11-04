@@ -59,7 +59,7 @@ public class AddPrescriptionCommandTest {
             parameters.put("s", STAFF_NAME);
             final int prescriptionIndex = 1;
 
-            Date today = new Date();
+
             Command command = new AddPrescriptionCommand(parameters);
             command.execute();
 
@@ -70,6 +70,7 @@ public class AddPrescriptionCommandTest {
             assertEquals(prescription.getQuantity(), 30);
             assertEquals(prescription.getStaff(), "JOHN");
             assertEquals(prescription.getCustomerId(), "123");
+            Date today = new Date();
             assertEquals(DateParser.dateToString(prescription.getDate()), DateParser.dateToString(today));
 
         } catch (ParseException e) {

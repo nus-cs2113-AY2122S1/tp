@@ -24,7 +24,7 @@ addstock --> addstock :
 alt nameExist
     addstock -> stockmanager: getTotalStockQuantity()
     addstock <-- stockmanager: totalStock
-    addstock -> addstock : isExpiryExist(ui: Ui, stockValidator: StockValidator, \nfilteredStock: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry:Date, totalStock: int)
+    addstock -> addstock : isExpiryExist(ui: Ui, stockValidator: StockValidator, \nfilteredStock: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry: Date, totalStock: int)
     loop stock : filteredStocks
         opt isValidQuantity
             addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
