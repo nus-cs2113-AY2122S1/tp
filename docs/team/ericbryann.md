@@ -1,6 +1,6 @@
 # Eric Bryan - Project Portfolio Page
 
-##Overview
+## Overview
 
 MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
 scheduler appointments between them and medical staff.
