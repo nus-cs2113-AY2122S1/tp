@@ -103,7 +103,7 @@ public class Entry {
                 try {
                     trainingIndex = Parser.getIndex(entry);
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in a valid number!");
+                    Ui.printValidNumberNeeded();
                     break;
                 }
                 TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);
@@ -113,7 +113,7 @@ public class Entry {
                 try {
                     memberIndex = Parser.getIndex(entry);
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in a valid number!");
+                    Ui.printValidNumberNeeded();
                     break;
                 }
                 Member newMemberDetail = Parser.getMemberDetails(entry);

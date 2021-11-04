@@ -81,6 +81,10 @@ public class Ui {
         System.out.println("Members File is Empty!!!");
     }
 
+    public static void printEmptyTrainingFile() {
+        System.out.println("Training File is Empty!!!");
+    }
+
     public static void printQuestionToList() {
         System.out.println("Please enter only a 'y' or 'n'.");
     }
@@ -143,6 +147,10 @@ public class Ui {
     public static void printNoCommasMessage() {
         System.out.println("Invalid input! Inputs should not contain any commas (i.e. ',')");
         printSeparator();
+    }
+
+    public static void printValidNumberNeeded() {
+        System.out.println("Please key in a valid number!");
     }
 
     public static void printList(MemberList members) {

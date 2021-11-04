@@ -1,13 +1,25 @@
+/*@@author xingyuan123*/
+
 package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import seedu.duke.Ui;
+import seedu.duke.command.exception.InvalidAddMemberException;
+import seedu.duke.command.exception.InvalidAddTrainingException;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
 public class TrainingStorage {
+
+    static String duplicateTrainingErrorExcelMessage = "Duplicates training name found in CCA Trainings CSV."
+            + "Please fix this before running the program again.";
 
     /**
      * This method sets up the cca trainings csv file. It firsts tries to find if the file exists in the current
@@ -28,13 +40,67 @@ public class TrainingStorage {
                 e.printStackTrace();
             }
         } else {
-            try {
-                System.out.println("CCA Training file found & loaded");
-                loadTrainingsFile(ccaTrainingFile, trainings);
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            System.out.println("CCA Training file found & loaded");
+            verifyTrainingDetails(ccaTrainingFile);
+            loadTrainingsFile(ccaTrainingFile, trainings);
+
+        }
+    }
+
+    /**
+     * Verifies the training schedule file details are valid.
+     *
+     * @param ccaTrainingFile the list of current trainings
+     */
+    private static void verifyTrainingDetails(File ccaTrainingFile) {
+        try {
+            verifyTrainingDuplicates(ccaTrainingFile);
+        } catch (InvalidAddTrainingException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Verifies that there are o duplicate names in training schedule.
+     *
+     * @param ccaTrainingFile the list of current trainings
+     */
+    private static void verifyTrainingDuplicates(File ccaTrainingFile) throws InvalidAddTrainingException {
+        String trainingName;
+        List<String> pendingTrainingName = new ArrayList<String>();
+        try {
+            Scanner memberScanner = new Scanner(ccaTrainingFile);
+            memberScanner.nextLine();
+            while (memberScanner.hasNextLine()) {
+                String fullMemberDetails = memberScanner.nextLine();
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
+                trainingName = memberDetails[1];
+                pendingTrainingName.add(trainingName);
             }
-            //loadTrainingsFile(ccaTrainingFile, trainings);
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyTrainingFile();
+        }
+        checkDuplicates(pendingTrainingName);
+
+    }
+
+    /**
+     * Checks for any duplicates in the list.
+     *
+     * @param pendingList current list of Strings to check.
+     * @throws InvalidAddMemberException if there are any duplicates.
+     */
+    private static void checkDuplicates(List<String> pendingList) throws InvalidAddTrainingException {
+        for (int i = 0; i < pendingList.size(); i++) {
+            for (int j = i + 1; j < pendingList.size(); j++) {
+                if (pendingList.get(i).equals(pendingList.get(j))) {
+                    throw new InvalidAddTrainingException(duplicateTrainingErrorExcelMessage);
+                }
+            }
         }
     }
 
@@ -67,7 +133,7 @@ public class TrainingStorage {
                 index++;
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("file not found!");
         }
     }
 
@@ -84,8 +150,8 @@ public class TrainingStorage {
             dukeMemberWriter.write(',');
             dukeMemberWriter.write("time");
             dukeMemberWriter.write('\n');
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 
@@ -93,7 +159,7 @@ public class TrainingStorage {
      * This method rewrites the entire duke member file.
      *
      * @param trainingFile the training file
-     * @param trainingList     the current training list
+     * @param trainingList the current training list
      */
     public static void writeTrainingFile(File trainingFile, TrainingList trainingList) {
         int trainingListSize = trainingList.getTrainingListSize();
@@ -112,8 +178,8 @@ public class TrainingStorage {
                 dukeTrainingWriter.write(trainingList.getTrainingTime(i));
                 dukeTrainingWriter.write('\n');
             }
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
         }
     }
 
