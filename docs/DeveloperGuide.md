@@ -94,6 +94,7 @@ The Finance component consists of the `Finance`, `FinanceList`, `FinanceParser`,
 ### Storage Component
 The storage component has a `Storage` class which can load data from the file and save data into the file with the 
 methods to encode and decode data.  
+![storage](Diagrams/Storage.png)
 
 ## Implementation  
 
@@ -156,7 +157,7 @@ by mainParser to handle add finance command. Then, it creates new `Finance` obje
 the Finance object to the FinanceList and add the account number to the totalAccount. Lastly, it will call 
 printAddFinanceMessage() of FinanceUI to show the result.
 
-Picture
+![add](Diagrams/addFinance.png)
 
 ### Remove Finance Feature
 The mechanism of removing an account from the financeList is facilitated by `FinanceParser`. It is firstly identified 
@@ -165,7 +166,7 @@ will get the deletedAccount using get method from the financeList. Besides, it w
 financeList and the totalAccount will minus the account number of deletedAccount. Lastly, it will call
 printRemoveFinanceMessage() of FinanceUI to show the result.
 
-Picture
+![remove](Diagrams/removeFinance.png)
 
 ### Edit Finance Feature
 The mechanism of editing an account form the financeList is facilitated by `FinanceParser`. It is firstly identified 
@@ -174,7 +175,7 @@ will get the editedAccount using get method from the financeList. Besides,it wil
 method and change the totalAccount number. Lastly, it will call printEditFinanceMessage() of FinanceUI to 
 show the result.
 
-Picture
+![edit](Diagrams/editFinance.png)
 
 
 ### List Finance Feature
@@ -198,7 +199,7 @@ in the list. In `Storage`, it will encode the target object based its toString f
 Lastly, it will have four loops for the four different lists. Given below is the sequence diagram when storing
 employeeList and ingredientList.
 
-Picture
+![save](Diagrams/save.png)
 
 
 ### Load Storage Feature
@@ -209,7 +210,7 @@ It goes in a loop until there are no more lines to read. Then, it will create ne
 Lastly, it will use `loadEmployeeFromStorage` method to different object to add them into target lists. Given below
 is the sequence diagram of loading `Employee` from the Storage.
 
-Picture
+![load](Diagrams/load.png)
 
 ## Appendix
 
