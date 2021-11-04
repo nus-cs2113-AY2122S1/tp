@@ -10,11 +10,6 @@ Activate ConflictManager #DarkSalmon
 ConflictManager -> ConflictManager: getAllLinks()
 Activate ConflictManager
 
-create ArrayList
-ConflictManager -> ArrayList: ArrayList()
-Activate ArrayList #FFBBBB
-ArrayList --> ConflictManager: currentLinks
-
 ConflictManager -> ModuleManager: getAllModules()
 Activate ModuleManager #FFBBBB
 NusModule --> ModuleManager: modules
@@ -30,10 +25,8 @@ loop For each NusModule in modules
     Activate ContentManager
     ContentManager --> ContentManager: contents
     Deactivate ContentManager
-    ContentManager -> ArrayList: addAll(contents)
+    ContentManager --> ConflictManager: addAll(contents)
     Deactivate ContentManager
-    ArrayList --> ConflictManager
-    Deactivate ArrayList
     ConflictManager --> ConflictManager: AllLinks
     Deactivate ConflictManager
 

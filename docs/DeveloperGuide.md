@@ -338,10 +338,24 @@ The application will iterate through all the user's modules and invoke `ModuleMa
 **Step 5:** Once the `ContentManager` has been acquired, the application will invoke `ContentManager#getContents()` to acquire all the `Link` objects stored by the user.
 For each `Link`, the application will invoke `Link#getDay()` to allow the filtering out of `Link` objects which has a different `day` attribute from the user request.
 
-**Step 6:** If the instruction type is a Daily Timetable Instruction, then Step 5 will only be executed once for a specific day. 
+Note: If the instruction type is a Daily Timetable Instruction, then Step 5 will only be executed once for a specific day. 
 Otherwise, for a Weekly Timetable Instruction, the process in Step 5 will be repeated for each day in the `DaysOfWeekEnum`.
 Once all the relevant `Link` objects have been collected, the application will sort all the user `Link` according to its `startTime` to allow a more convenient viewing.
 
+
+#### 4.1.2 Design Consideration
+
+This section shows the design considerations that were taken into account when implementing the Timetable feature.
+
+**Aspect: Accessibility of Timetable**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Accessed in the main workspace | Generates a compiled timetable of all user schedules | Requires to gather links from all content managers |
+| Accessed under each module | Easier to implement, as links are gathered from one content manager | Functionality might not be as useful for users |
+
+**Chosen Solution:** Accessed in the main workspace, as we decided that organizing and creating a compiled timetable of all the available user schedules will be better for user experience.
+Moreover, implementing a timetable for each module might be slightly redundant as a view schedule command could offer a similar functionality albeit not sorted out.
 
 
 
@@ -593,6 +607,23 @@ If the newly added `Link` object has the same `day` attribute and overlapping `s
 **Step 7:** The `StringBuilder` object will be converted to a `String` object before being returned to `ConflictManager` and `AddLinkCommand`.
 Then the `AddLinkCommand` will display all the conflicting schedule during its execution
 
+
+#### 4.4.2 Design Consideration
+
+This section shows the design considerations that were taken into account when implementing the Conflict Manager feature.
+
+**Aspect: Accessibility of Conflict Manager**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Accessed like other commands | Allows users to view conflicts anytime | Users might not be aware of conflicting schedules upon adding |
+| Integrated to Add Schedule | Users will be aware of conflicting schedules upon adding | Slightly challenging for users to identify conflicts at any given time |
+
+**Chosen Solution:** Integrated to Add Schedule, as we would like to notify users immediately when a conflict occurs.
+We hope that all users are aware of the conflicts as soon as possible, so that conflicts can be resolved quickly. 
+Although it is slightly challenging to identify conflicts when not adding a new schedule,
+we think that the timetable feature can help in identifying conflicts manually.
+
 ### 4.5 Storage Implementation
 
 To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
@@ -716,3 +747,387 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 ## Appendix E: Instructions for Manual Testing
 
+### D.1: Launch and Shutdown
+
+#### Initial Launch
+
+1.  Download the jar file and copy it into an empty folder.
+2.  Open a new terminal and navigate to the directory containing `TermiNUS.jar`.
+3.  Enter the command `java -jar TermiNUS.jar` to launch **TermiNUS**.
+4.  The program will display a welcome message and **TermiNUS** will be ready for use.
+
+
+#### Shutdown
+
+1.  To exit **TermiNUS**, enter the `exit` command.
+
+<br/>
+
+
+### D.2: Workspace Navigation
+
+1. When users run a program or enter a new workspace, a welcome instruction indicating the navigable workspaces will be displayed.
+2. Users can also use the `help` command to check the navigable workspace(s).
+3. It is important to take note that workspaces such as `question`, `note`, and `schedule` can only be accessed from the `go` workspace
+4. Test case performed in the `main` workspace: `go cs2113T`
+
+    Expected: Users will be navigated to the `go` workspace, where they can now access the `question`, `note`, or `schedule` workspaces.
+5. Test case performed in the `go` workspace: `schedule`
+
+    Expected: Users will be navigated to the `schedule` workspace, where they can now use the `schedule` functionalities.
+6. Incorrect commands to try:
+   
+    a. `go` (No module is specified)
+
+    b. `go X` (Where X is not an existing user module)
+
+> 💡 Advanced users can navigate to sub-workspaces using a single command. E.g. `go cs2113T schedule`
+
+<br/>
+
+
+### D.3: Timetable Feature
+
+1. The `timetable` features can only be used from the main workspace.
+2. Test case: `timetable`
+
+   Expected: User's schedule for the week will be displayed.
+3. Test case: `timetable Tuesday`
+
+   Expected: User's schedule for Tuesday will be displayed.
+4. Incorrect commands to try:
+
+   a. `timetable today` (Today is not a valid day)
+
+   b. `timetable 1` (1 is not a valid day)
+
+<br/>
+
+
+### D.4: Module Workspace
+
+1. Navigate to the `module` workspace from the main workspace.
+2. Users can now `add`, `view`, `delete` or `update` their modules.
+3. Test case: `add cs2106`
+
+    Expected: Users will have a new module, cs2106.
+4. Test case: `view`
+
+    Expected: All the user's modules will be displayed.
+5. Test case: `delete 1`
+
+    Expected: The user module at index 1 will be deleted.
+6. Test case: `update 1 "cs2105"`
+   
+    Expected: The user module at index 1 will be updated to cs2105.
+7. Incorrect commands to try:
+
+    a. `add` (No new module is created)
+
+    b. `delete 0` (Invalid index for deletion)
+
+    c. `update 0 "cs2101"` (Invalid module index to be updated)
+
+<br/>
+
+
+### D.5: Accessing a Specific Module
+
+1. From the main workspace, use `go` to access a specific module.
+2. A specific module will be accessed when users enter the `go` workspace.
+3. Workspaces such as `question`, `note`, and `schedule` can now be accessed.
+4. Test case: `go cs2105`
+
+    Expected: User will now access the cs2105 module
+5. Incorrect commands to try:
+   
+    a. `go` (No module is specified)
+
+    b. `go X` (Where X is not an existing user module)
+
+<br/>
+
+
+### D.6: Accessing the Question Workspace
+
+1. Prerequisite: User has to access a module and operate in the `go` workspace
+2. User can access the question workspace using the `question` command
+3. Test case: `question`
+
+    Expected: Navigate to the `question` workspace
+4. Other incorrect commands to try:
+
+    a. `question A` (Trailing "A" is not a valid command)
+
+    b. `question 1` (Trailing "1" is not a valid command)
+
+    c. `question` from the main workspace (Question workspace can not be accessed from the main workspace)
+
+<br/>
+
+
+### D.7: Add Question
+
+1. Prerequisite: User has to be in the question workspace
+2. User can add a new question using the `add` command
+3. Test case: `add "What is 1+1 ?" "2"`
+    
+    Expected: A new question "What is 1+1 ?" is added to the list of questions.
+4. Other incorrect commands to try:
+
+   a. `add What is 1+1 ? 2` (The use of quotes for questions and answers is mandatory)
+
+   b. `add "What is 1+1 ?"` (An answer must be present for the new question)
+
+   c. `add` (A pair of question and answer must be present for an add command)
+
+<br/>
+
+
+### D.8: View Questions
+
+1. Prerequisite: User has to be in the question workspace
+2. User can view all the available questions using the `view` command
+3. Test case: `view`
+
+   Expected: All the questions for the module will be displayed.
+4. Test case: `view 1`
+
+   Expected: The question at index 1 for the module will be displayed.
+5. Other incorrect commands to try:
+
+   a. `view 0` (The index 0 is invalid)
+
+   b. `view X` (Where X is a negative number, a word, or a number exceeding the number of questions in the workspace)
+
+   c. `view` from the main workspace (To view questions, execute `view` from the question workspace)
+
+<br/>
+
+
+### D.9: Delete Question
+
+1. Prerequisite: User has to be in the question workspace
+2. User can delete selected question(s) using the `delete` command
+3. Test case: `delete 1`
+
+   Expected: Delete the question at index 1.
+4. Other incorrect commands to try:
+
+   a. `delete 0` (The index 0 is invalid)
+
+   b. `delete X` (Where X is a negative number, a word, or a number exceeding the number of questions in the workspace)
+
+   c. `delete` (The delete command has to be followed by a valid index)
+
+<br/>
+
+
+### D.10: Test Feature
+
+1. Prerequisite: User has to be in the question workspace
+2. User can ask themselves questions using the `test` feature
+3. Test case: `test`
+
+   Expected: Users will be prompted with the available questions.
+4. Other incorrect commands to try:
+
+   a. `test` from the main workspace (The test feature can only be accessed from the question workspace)
+
+<br/>
+
+
+### D.11: Accessing the Note Workspace
+
+1. Prerequisite: User has to access a module and operate in the `go` workspace
+2. User can access the note workspace using the `note` command
+3. Test case: `note`
+
+   Expected: Navigate to the `note` workspace
+4. Other incorrect commands to try:
+
+   a. `note A` (Trailing "A" is not a valid command)
+
+   b. `note 1` (Trailing "1" is not a valid command)
+
+   c. `note` from the main workspace (Note workspace can not be accessed from the main workspace)
+
+<br/>
+
+
+### D.12: Add Note
+
+1. Prerequisite: User has to be in the note workspace
+2. User can add a new note using the `add` command
+3. Test case: `add "cs2113 tutorial" "SLAP your code"`
+
+   Expected: A new note titled "cs2113 tutorial", with "SLAP your code" as its content is added to the list of notes.
+4. Other incorrect commands to try:
+
+   a. `add cs2113 tutorial SLAP your code` (The use of quotes for note title and content is mandatory)
+
+   b. `add "cs2113 tutorial"` (Content must be present for the new note)
+
+   c. `add` (A pair of note title and content must be present for an add command)
+
+<br/>
+
+
+### D.13: View Notes
+
+1. Prerequisite: User has to be in the note workspace
+2. User can view all the available notes using the `view` command
+3. Test case: `view`
+
+   Expected: All the notes for the module will be displayed.
+4. Test case: `view 1`
+
+   Expected: The note at index 1 for the module will be displayed.
+5. Other incorrect commands to try:
+
+   a. `view 0` (The index 0 is invalid)
+
+   b. `view X` (Where X is a negative number, a word, or a number exceeding the number of notes in the workspace)
+
+   c. `view` from the main workspace (To view notes, execute `view` from the note workspace)
+
+<br/>
+
+
+### D.14: Delete Note
+
+1. Prerequisite: User has to be in the note workspace
+2. User can delete selected note(s) using the `delete` command
+3. Test case: `delete 1`
+
+   Expected: Delete the note at index 1.
+4. Other incorrect commands to try:
+
+   a. `delete 0` (The index 0 is invalid)
+
+   b. `delete X` (Where X is a negative number, a word, or a number exceeding the number of notes in the workspace)
+
+   c. `delete` (The delete command has to be followed by a valid index)
+
+<br/>
+
+
+### D.15: Export Notes
+
+1. Prerequisite: User has to be in the note workspace
+2. User can export all the notes in a pdf format using the `export` command
+3. Test case: `export`
+
+    Expected: All the notes will be exported in a pdf format.
+4. Other incorrect commands to try:
+
+   a. `export X` (Where X is any trailing number or word)
+
+   b. `export` from the main workspace (The export command must be executed in the note workspace)
+
+<br/>
+
+
+### D.16: Accessing the Schedule Workspace
+
+1. Prerequisite: User has to access a module and operate in the `go` workspace
+2. User can access the schedule workspace using the `schedule` command
+3. Test case: `schedule`
+
+   Expected: Navigate to the `schedule` workspace
+4. Other incorrect commands to try:
+
+   a. `schedule A` (Trailing "A" is not a valid command)
+
+   b. `schedule 1` (Trailing "1" is not a valid command)
+
+   c. `schedule` from the main workspace (Schedule workspace can not be accessed from the main workspace)
+
+<br/>
+
+
+### D.17: Add Schedule
+
+1. Prerequisite: User has to be in the schedule workspace
+2. User can add a new schedule using the `add` command
+3. Test case: `add "CS2113T Lecture" "Friday" "16:00" "2" "https://zoom.us/test"`
+
+   Expected: A new schedule for CS2113T Lecture on Friday from 16.00 for 2 hours with "https://zoom.us/test" link is added to the list of schedules.
+4. Other incorrect commands to try:
+
+   a. `add "Friday" "16:00" "2" "https://zoom.us/test"` (Any missing arguments will result in an invalid command)
+
+   b. `add CS2113T Lecture Friday 16:00 2 https://zoom.us/test` (Any missing quotes will result in an invalid command)
+
+   c. `add` (All arguments must be present for a valid add command)
+
+<br/>
+
+
+### D.18: View Schedules
+
+1. Prerequisite: User has to be in the schedule workspace
+2. User can view all the schedules using the `view` command
+3. Test case: `view`
+
+   Expected: All the schedules for the module will be displayed.
+4. Test case: `view 1`
+
+   Expected: The schedule at index 1 for the module will be displayed.
+5. Other incorrect commands to try:
+
+   a. `view 0` (The index 0 is invalid)
+
+   b. `view X` (Where X is a negative number, a word, or a number exceeding the number of schedules in the workspace)
+
+   c. `view` from the main workspace (To view schedules, execute `view` from the schedule workspace)
+
+<br/>
+
+
+### D.19: Delete Schedule
+
+1. Prerequisite: User has to be in the schedule workspace
+2. User can delete selected schedule(s) using the `delete` command
+3. Test case: `delete 1`
+
+   Expected: Delete the schedule at index 1.
+4. Other incorrect commands to try:
+
+   a. `delete 0` (The index 0 is invalid)
+
+   b. `delete X` (Where X is a negative number, a word, or a number exceeding the number of schedules in the workspace)
+
+   c. `delete` (The delete command has to be followed by a valid index)
+
+<br/>
+
+
+### D.20: Help Feature
+
+1. Users can use the `help` command to show all the available commands in the workspace.
+2. The `help` messages might differ in different workspaces.
+3. Test case: `help`
+
+    Expected: All available commands and their format in the workspace will be displayed.
+4. Other incorrect commands to try:
+    
+    a. `help X` (Where X is any trailing number or word)
+
+<br/>
+
+
+### D.21: Navigate to Previous Workspace
+
+1. Prerequisite: User must have accessed any workspaces other than the main workspace.
+2. To return to the previous workspace, user can use the `back` command.
+3. Test case: `back`
+
+    Expected: Navigate to the previous workspace.
+4. Other incorrect commands to try:
+
+    a. `back X` (Where X is any trailing number or word)
+
+    b. `back` from the main workspace (The back command cannot be used in the main workspace)
+
+<br/>
