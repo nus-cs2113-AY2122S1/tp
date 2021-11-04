@@ -86,6 +86,10 @@ public class Storage {
         } else {
             for (String gameRecordString : gameRecordsStringArrayList) {
                 GameRecord gameRecord = FileParser.convertStringToGameRecord(gameRecordString);
+                if (gameRecord == null) {
+                    gameRecords = new ArrayList<>();
+                    return gameRecords;
+                }
                 gameRecords.add(gameRecord);
             }
             return gameRecords;
@@ -110,13 +114,13 @@ public class Storage {
 
 
     private static String getFileName(String gameMode) {
-        assert ((gameMode == "Time-limited") || (gameMode == "Word-limited"));
+        assert ((gameMode.equals("Time-limited")) || (gameMode.equals("Word-limited")));
         String filename = gameMode.toLowerCase(Locale.ROOT) + "_records.txt";
         return filename;
 
     }
 
-    private static void setUpLog() {
+    public static void setUpLog() {
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
 

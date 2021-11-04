@@ -8,14 +8,13 @@ public class GameUi extends TextUi {
         printScreen(endMessage);
     }
 
-    public boolean readyToStartTimer() {
+    public void readyToStartTimer() {
         Scanner in = new Scanner(System.in);
         String command = "";
-        while (!command.equals("yes")) {
-            printScreen("Do you want to start now?");
+        while (!command.equals("start")) {
+            printScreen("Timer will start once you entered \"start\": ");
             command = in.nextLine();
         }
-        return true;
     }
 
     public void printOvershoot(double overshoot) {
@@ -29,6 +28,13 @@ public class GameUi extends TextUi {
 
     public void printGameMode1Progress(int a, int b) throws InterruptedException {
         viewAnimateLeft("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
+    }
+
+    public void printResetContent(int n) {
+        printScreen(
+                "Please reset your content to more than "
+                + n + " words."
+        );
     }
 
 }
