@@ -226,20 +226,19 @@ public class Parser {
                 lastParameter = matcher.group();
                 switch (matcher.group()) {
                 case "/n":
-                    name = words[wordIndex].trim();
-                    System.out.println("Given is: " + name);
+                    name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (name.equals("")) {
                         throw new InvalidMemberException("Please do not give empty name");
                     }
                     break;
                 case "/s":
-                    studentNumber = words[wordIndex].trim();
+                    studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (studentNumber.equals("")) {
                         throw new InvalidMemberException("Please do not give empty student number");
                     }
                     break;
                 case "/g":
-                    gender = words[wordIndex].trim();
+                    gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (gender.equals("")) {
                         throw new InvalidMemberException("Please do not give empty gender");
                     }
@@ -249,6 +248,8 @@ public class Parser {
                     if (phoneNumber.equals("")) {
                         throw new InvalidMemberException("Please do not give empty phone number");
                     }
+                    break;
+                case "/m":
                     break;
                 default:
                     throw new InvalidMemberException("Either there is no parameter given or wrong parameter is given");
@@ -359,6 +360,7 @@ public class Parser {
     }
 
     //@@author Teckwhye
+
     /**
      * Returns parameter as given by user.
      *

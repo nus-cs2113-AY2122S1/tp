@@ -10,10 +10,10 @@ import seedu.duke.member.exception.InvalidMemberException;
 public class MemberList {
 
     /* Error message for duplicate names */
-    private final String duplicateNameErrorMessage = "Duplicate name found.Please enter a different name";
-    private final String duplicatePhoneNumberErrorMessage = "Duplicate phone number found.Please enter a different "
+    private final String duplicateNameErrorMessage = "Duplicate name found. Please enter a different name";
+    private final String duplicatePhoneNumberErrorMessage = "Duplicate phone number found. Please enter a different "
             + "phone number";
-    private final String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a "
+    private final String duplicateStudentNumberErrorMessage = "Duplicate student number found. Please enter a "
             + "different student number ";
 
     private final ArrayList<Member> memberList;

@@ -2,7 +2,6 @@
 
 package seedu.duke.member;
 
-import java.util.Locale;
 import seedu.duke.member.exception.InvalidMemberException;
 
 public class Member {
@@ -27,7 +26,7 @@ public class Member {
     String validPhoneNumberRegex = "^[8|9]\\d{7}$";
 
     /* Error message to throw */
-    String invalidNameErrorMessage = "Please input a valid name.Name cannot contain numbers or be empty.";
+    String invalidNameErrorMessage = "Please input a valid name. Name cannot contain numbers or be empty.";
     String invalidStudentNumberErrorMessage = "Invalid student number provided. Please give it in the following "
             + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends "
             + "off with a capital letter";
@@ -94,7 +93,6 @@ public class Member {
      * @throws InvalidMemberException If name given is not valid
      */
     public void setName(String name) throws InvalidMemberException {
-        name = name.toUpperCase(Locale.ROOT);
         boolean isEmptyName = (name.trim().isEmpty()) || name.equals("");
         boolean isOnlyAlphabetsAndSpace = name.matches(validStudentNameRegex);
         boolean isValidName = !isEmptyName && isOnlyAlphabetsAndSpace;
@@ -117,7 +115,6 @@ public class Member {
      * @throws InvalidMemberException If student number given is not valid
      */
     public void setStudentNumber(String studentNumber) throws InvalidMemberException {
-        studentNumber = studentNumber.toUpperCase(Locale.ROOT);
         boolean isValidStudentNumber = studentNumber.matches(validStudentNumberRegex);
         if (!isValidStudentNumber) {
             throw new InvalidMemberException(invalidStudentNumberErrorMessage);
@@ -137,7 +134,6 @@ public class Member {
      * @throws InvalidMemberException If name given is not valid
      */
     public void setGender(String gender) throws InvalidMemberException {
-        gender = gender.toUpperCase(Locale.ROOT);
         boolean validGender = gender.matches(validGenderRegex);
         if (!validGender) {
             throw new InvalidMemberException(invalidGenderErrorMessage);
