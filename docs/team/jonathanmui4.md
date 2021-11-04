@@ -36,13 +36,15 @@ Given below are my contributions to the project.
 
 - **Documentation**: 
     - User Guide:
-      - Added documentation for `Editable data file` feature
-      - Added installation instructions
+      - Added documentation for `Editable data file` feature.
+      - Added documentation for `Automatic sorting of Workouts` feature.
+      - Added installation instructions.
       - Added Table of Contents with links to relevant headers. 
     - Developer's Guide:
       - Added implementation details of `storage` feature. 
       - Added Target user profile and value proposition.
       - Added Table of Contents with links to relevant headers.
+      - Added `Launch and Shutdown` and `Saving data` components in Instructions for Manual Testing.
 
 - **Project Management**:
     - Managed releases `v1.0`-`v2.0` (2 releases) on GitHub.

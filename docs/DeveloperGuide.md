@@ -5,15 +5,17 @@
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
   - [Command Component](#command-component)
-  - [Command Manager Component](#commandmanager-component)
+  - [Command Manager Component](#parser--commandmanager-component)
 - [Logging](#logging)
-- [Product Scope](#product-scope)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
   - [Target User Profile](#target-user-profile)
   - [Value Proposition](#value-proposition)
-- [User Stories](#user-stories)
-- [Non-Functional Requirements](#non-functional-requirements)
-- [Glossary](#glossary)
-- [Instructions for manual testing](#instructions-for-manual-testing)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
+    - [Launch and Shutdown](#launch-and-shutdown)
+    - [Saving data](#saving-data)
 
 ## Acknowledgements
 
@@ -188,7 +190,6 @@ Location: `seedu.duke.ui`
 __Note:__
 * `CommandResult` : Contains all the information we want to display to the user.
 * `Command` : Abstract class that tells us whether we are in the main level or in a workout.
-* 
 * `Ui` : Handles the display of information to the user.
 
 In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
@@ -197,7 +198,7 @@ In the Ui class, `withIndent` is true if the user is in `workoutMode`, false oth
 
 * [Logger Guide](Logging.md)
 
-## Product scope
+## Appendix A: Product scope
 ### Target user profile
 
 - Has a need to plan and remember their workouts quickly
@@ -208,7 +209,7 @@ In the Ui class, `withIndent` is true if the user is in `workoutMode`, false oth
 ### Value proposition: 
 Manage fitness routines quickly
 
-## User Stories
+## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -224,16 +225,48 @@ Manage fitness routines quickly
 |v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
 |v2.0|busy user|clear all my current workouts or all the exercises in a workout|make a new workout plan without having to delete one by one|
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has java `11` or above installed.
 * A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using GetJackD than using another equivalent GUI application.
 * Able to store data in a file so that user data can be saved.
 
-## Glossary
+## Appendix D: Glossary
 
-* *glossary item* - Definition
+* *CLI* - Command Line Interface
+* *Ui* - User Interface
+* *GUI* - Graphical User Interface
+* *Mainstream OS* - Windows, MacOS, Linux, Unix
 
-## Instructions for manual testing
+## Appendix E: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually. 
+
+⚠️ **Note**: These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+
+### Launch and Shutdown
+
+1. Setup and Launch
+    - Download the latest release of Get Jack'd from [here](https://github.com/AY2122S1-CS2113T-F12-2/tp/releases/)
+    - Place `GetJackd.jar` in the folder of your choice.
+    - Navigate to the folder where `GetJackd.jar` is saved and run `java -jar GetJackd.jar` in your terminal
+2. Shutdown
+    - enter `bye` to exit the app. 
+
+### Saving data
+
+1. Dealing with a corrupt data file
+    - Simulate a corrupt JSON file by removing 1 of the `{ }`, `[ ]`, `" "` or `,`.
+    - **Expected**: Error message will be shown on the terminal and the app will stop running.
+
+2. Dealing with invalid data fields within data file
+    - Simulate a JSON file with invalid data input by replacing either the `deadline`, `sets` or `reps` data field with 
+a string.
+    - **Expected**: Similar to previous.
+
+3. Automatic saving of data after every change 
+    - Create a new Workout or add an exercise to an existing workout.
+    - Force close the app by closing the Terminal Window.
+    - Reopen the app and enter the commands `list` (if you created a new workout) or `display [workout index]` if you
+added a new exercise to an existing workout. 
+    - **Expected**: The new workout/exercise created will be displayed with all other existing workouts and exercises.
