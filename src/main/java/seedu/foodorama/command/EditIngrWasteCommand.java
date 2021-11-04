@@ -23,7 +23,7 @@ public class EditIngrWasteCommand extends Command {
         String ingr = parameters.get(0);
         int ingrIndex;
         if (isNumber(ingr)) {
-            if(isInteger(ingr)) {
+            if (isInteger(ingr)) {
                 ingrIndex = Integer.parseInt(parameters.get(0)) - 1;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + ingrIndex);
             } else {

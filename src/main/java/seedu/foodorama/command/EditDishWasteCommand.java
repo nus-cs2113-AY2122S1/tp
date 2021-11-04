@@ -22,7 +22,7 @@ public class EditDishWasteCommand extends Command {
         LOGGER.log(Level.INFO, "Start of process");
         int dishIndex;
         if (isNumber(parameters.get(0))) {
-            if(isInteger(parameters.get(0))) {
+            if (isInteger(parameters.get(0))) {
                 dishIndex = Integer.parseInt(parameters.get(0)) - 1;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
             } else {
@@ -54,7 +54,7 @@ public class EditDishWasteCommand extends Command {
     }
 
     public boolean isInteger(String numberString) {
-        if(isNumber(numberString)) {
+        if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
             return Math.rint(number) - number == 0;
         } else {

@@ -23,7 +23,7 @@ public class EditDishNameCommand extends Command {
         String dish = parameters.get(0);
         int dishIndex;
         if (isNumber(dish)) {
-            if(isInteger(dish)) {
+            if (isInteger(dish)) {
                 dishIndex = Integer.parseInt(parameters.get(0)) - 1;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
             } else {
@@ -64,7 +64,7 @@ public class EditDishNameCommand extends Command {
     }
 
     public boolean isInteger(String numberString) {
-        if(isNumber(numberString)) {
+        if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
             return Math.rint(number) - number == 0;
         } else {

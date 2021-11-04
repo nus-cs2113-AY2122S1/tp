@@ -16,7 +16,7 @@ public class SetIngrLimitCommand extends Command {
         String ingr = parameters.get(0);
         int ingrIndex;
         if (isNumber(ingr)) {
-            if(isInteger(ingr)) {
+            if (isInteger(ingr)) {
                 ingrIndex = Integer.parseInt(ingr) - 1;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
@@ -51,7 +51,7 @@ public class SetIngrLimitCommand extends Command {
     }
 
     public boolean isInteger(String numberString) {
-        if(isNumber(numberString)) {
+        if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
             return Math.rint(number) - number == 0;
         } else {
