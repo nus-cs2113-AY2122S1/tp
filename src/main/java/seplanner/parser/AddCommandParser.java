@@ -146,8 +146,6 @@ public class AddCommandParser {
                     : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
             throw new AddParseException(error, 1);
         }
-        University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
-                universityMasterList);
         if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
@@ -160,7 +158,10 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
         }
-        if (ParseCondition.isDuplicateMapping(currentUni, uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
+        University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
+                universityMasterList);
+        if (ParseCondition.isDuplicateMapping(currentUni, uniIndex, mapIndex, universityMasterList,
+                                              moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
         }
