@@ -183,7 +183,8 @@ public class AddStockCommand extends Command {
             if (formatExpiry.equals(stock.getExpiry())) {
                 quantity += stock.getQuantity();
                 stock.setQuantity(quantity);
-                ui.print("Same Medication and Expiry Date exist. Updating existing quantity.");
+                ui.print("Same Medication and Expiry Date exist. Using existing price,"
+                        + " description and maximum quantity. Updating existing quantity.");
                 ui.printStock(stock);
                 return true;
             }

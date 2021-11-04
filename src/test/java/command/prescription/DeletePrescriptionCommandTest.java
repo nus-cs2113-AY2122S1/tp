@@ -18,19 +18,19 @@ import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author deonchung
+
 public class DeletePrescriptionCommandTest {
     public static final String ID = "1";
     public static final String MEDICATION_NAME = "PANADOL";
-    public static final int PRICE = 10;
     public static final String CUSTOMER_ID = "123";
     public static final String PRESCRIPTION_DATE = "12-12-2025";
     public static final String STAFF_NAME = "JOHN";
     public static final String DESCRIPTION = "For Fever";
     public static final int MAX_QUANTITY = 50;
     public static final int STOCK_ID = 1;
-    public static final int QUANTITY = 45;
-    public static final int PRESCRIPTION_QUANTITY = 10;
     public static final int STOCK_QUANTITY = 45;
+    public static final int PRICE = 10;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -46,7 +46,6 @@ public class DeletePrescriptionCommandTest {
 
     }
 
-
     @Test
     void deletePrescriptionCommand_validDeletePrescription_expectValid() {
         try {
@@ -56,80 +55,54 @@ public class DeletePrescriptionCommandTest {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeDeletePrescriptionCommand();
 
-        parameters.put("i",ID);
+        String expectedOutput = "Prescription deleted for Prescription Id 1";
 
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
-
-        String error = "Prescription deleted for Prescription Id 1";
-
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
     }
 
     @Test
     void deletePrescriptionCommand_invalidPrescriptionId_expectInvalid() {
-        String error = "Invalid prescription id provided!";
+        String expectedOutput = "Invalid prescription id provided!";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeDeletePrescriptionCommand();
 
-        parameters.put("i",ID);
-
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
-
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
     }
 
     @Test
     void deletePrescriptionCommand_invalidPrescriptionQuantity_expectInvalid() {
         try {
-            medicines.add(new Stock(MEDICATION_NAME, PRICE, STOCK_QUANTITY,
-                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY));
-            medicines.add(new Prescription(MEDICATION_NAME, 10, CUSTOMER_ID,
-                    DateParser.stringToDate(PRESCRIPTION_DATE), STAFF_NAME, STOCK_ID));
+            Stock stock = new Stock(MEDICATION_NAME, PRICE, STOCK_QUANTITY,
+                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY);
+            medicines.add(stock);
+            Prescription prescription = new Prescription(MEDICATION_NAME, 10, CUSTOMER_ID,
+                    DateParser.stringToDate(PRESCRIPTION_DATE), STAFF_NAME, STOCK_ID);
+            medicines.add(prescription);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeDeletePrescriptionCommand();
 
-        parameters.put("i",ID);
-
-        Command command = new DeletePrescriptionCommand(parameters);
-        command.execute();
-
-        String error = "Unable to delete prescription. Quantity added will exceed maximum quantity.\n"
+        String expectedOutput = "Unable to delete prescription. Quantity added will exceed maximum quantity.\n"
                 + "Maximum quantity: 50 Total Quantity after deletion: 55";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
-    @Test
-    void deletePrescriptionCommand_expiredMedication_expectInvalid() {
-        try {
-            medicines.add(new Stock(MEDICATION_NAME, PRICE, QUANTITY,
-                    DateParser.stringToDate("12-12-2020"), DESCRIPTION, MAX_QUANTITY));
-            medicines.add(new Prescription(MEDICATION_NAME, PRESCRIPTION_QUANTITY, CUSTOMER_ID,
-                    DateParser.stringToDate("12-12-2021"), STAFF_NAME, STOCK_ID));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+    private void executeDeletePrescriptionCommand() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
-        parameters.put("i",ID);
+        parameters.put("i", ID);
 
         Command command = new DeletePrescriptionCommand(parameters);
         command.execute();
-
-        String error = "Medication has expired. Unable to delete prescription.";
-
-        assertEquals(error.trim(), outContent.toString().trim());
 
     }
 

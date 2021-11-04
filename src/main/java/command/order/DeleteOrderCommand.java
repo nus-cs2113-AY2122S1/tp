@@ -35,7 +35,7 @@ public class DeleteOrderCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
         String orderIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (!isValidOrderParameters(ui, medicines, orderIdToDelete)) {
+        if (!isValidOrderParameters(ui, medicines)) {
             return;
         }
 
@@ -70,10 +70,9 @@ public class DeleteOrderCommand extends Command {
      *
      * @param ui              Reference to the UI object to print messages.
      * @param medicines       Arraylist of medicines
-     * @param orderIdToDelete Order ID to delete.
      * @return Boolean Value indicating if parameters values for Order are valid and Order ID exist.
      */
-    private boolean isValidOrderParameters(Ui ui, ArrayList<Medicine> medicines, String orderIdToDelete) {
+    private boolean isValidOrderParameters(Ui ui, ArrayList<Medicine> medicines) {
 
         MedicineValidator validator = new OrderValidator();
 

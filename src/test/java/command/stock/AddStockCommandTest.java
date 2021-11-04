@@ -18,6 +18,8 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author deonchung
+
 public class AddStockCommandTest {
 
     public static final String NAME = "Panadol";
@@ -42,149 +44,116 @@ public class AddStockCommandTest {
 
     @Test
     void addStockCommand_invalidExpiryDateFormat_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand("20/12/2021", MAX_QUANTITY);
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", "20/12/2021");
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", MAX_QUANTITY);
+        String expectedOutput = "Invalid expiry date! Ensure date is in dd-MM-yyyy.";
 
-        Command command = new AddStockCommand(parameters);
-        command.execute();
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
-        String error = "Invalid expiry date! Ensure date is in dd-MM-yyyy.";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
     void addStockCommand_exceedMaxQuantity_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand(EXPIRY_DATE, "5");
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", EXPIRY_DATE);
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", "5");
-
-        Command command = new AddStockCommand(parameters);
-        command.execute();
-
-        String error = "Quantity cannot be more than maximum quantity!\n"
+        String expectedOutput = "Quantity cannot be more than maximum quantity!\n"
                 + "Quantity: 50, Max Quantity: 5";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+
     }
 
     @Test
     void addStockCommand_expiredMedication_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand("12-12-2020", MAX_QUANTITY);
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", "12-12-2020");
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", MAX_QUANTITY);
+        String expectedOutput = "Unable to add medicine. Medicine has expired.";
 
-        Command command = new AddStockCommand(parameters);
-        command.execute();
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
-        String error = "Unable to add medicine. Medicine has expired.";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
     void addStockCommand_validAddStock_expectValid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand(EXPIRY_DATE, MAX_QUANTITY);
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", EXPIRY_DATE);
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", MAX_QUANTITY);
-
-        Command command = new AddStockCommand(parameters);
-        command.execute();
-
-        String error = "Medication added: Panadol\n"
+        String expectedOutput = "Medication added: Panadol\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| 1  | PANADOL | $5.00 |    50    | 12-12-2025  |    FEVER    |     100      | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addStockCommand_sameStockName_expectValid() {
         try {
-            medicines.add(new Stock("PANADOL", 10, 50,
-                    DateParser.stringToDate("11-11-2025"), "For Fever", 1000));
+            Stock stock = new Stock("PANADOL", 10, 50,
+                    DateParser.stringToDate("11-11-2025"), "For Fever", 1000);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand(EXPIRY_DATE, MAX_QUANTITY);
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", EXPIRY_DATE);
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", MAX_QUANTITY);
-
-        Command command = new AddStockCommand(parameters);
-        command.execute();
-
-        String error = "Medicine exists. Using existing description and maximum quantity.\n"
+        String expectedOutput = "Medicine exists. Using existing description and maximum quantity.\n"
                 + "Medication added: Panadol\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| 2  | PANADOL | $5.00 |    50    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addStockCommand_sameStockNameAndExpiry_expectValid() {
         try {
-            medicines.add(new Stock("PANADOL", 10, 50,
-                    DateParser.stringToDate("12-12-2025"), "For Fever", 1000));
+            Stock stock = new Stock("PANADOL", 10, 50,
+                    DateParser.stringToDate("12-12-2025"), "For Fever", 1000);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddStockCommand(EXPIRY_DATE, MAX_QUANTITY);
 
-        parameters.put("n", NAME);
-        parameters.put("p", PRICE);
-        parameters.put("q", QUANTITY);
-        parameters.put("e", EXPIRY_DATE);
-        parameters.put("d", DESCRIPTION);
-        parameters.put("m", MAX_QUANTITY);
-
-        Command command = new AddStockCommand(parameters);
-        command.execute();
-
-        String error = "Same Medication and Expiry Date exist. Updating existing quantity.\n"
+        String expectedOutput = "Same Medication and Expiry Date exist. Using existing price, "
+                + "description and maximum quantity"
+                + ". Updating existing quantity.\n"
                 + "+====+=========+========+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+========+==========+=============+=============+==============+\n"
                 + "| 1  | PANADOL | $10.00 |   100    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+--------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+
+    }
+
+    private void executeAddStockCommand(String expiryDate, String maxQuantity) {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        parameters.put("n", NAME);
+        parameters.put("p", PRICE);
+        parameters.put("q", QUANTITY);
+        parameters.put("e", expiryDate);
+        parameters.put("d", DESCRIPTION);
+        parameters.put("m", maxQuantity);
+
+        Command command = new AddStockCommand(parameters);
+        command.execute();
 
     }
 
