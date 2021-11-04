@@ -10,6 +10,7 @@ participant "ClientPackageList" as ClientPackageList
 -> Parser: execute "find -t JPN"
 activate Parser
 Parser -> Parser : parseFind("-t JPN")
+activate Parser
 
 create FTC
 Parser -> FTC
@@ -26,8 +27,10 @@ ClientPackageList --> FTC : subscribed clients
 deactivate ClientPackageList
 
 FTC --> Parser
+deactivate Parser
 deactivate FTC
 <-- Parser
+deactivate Parser
 destroy FTC
 
 @enduml

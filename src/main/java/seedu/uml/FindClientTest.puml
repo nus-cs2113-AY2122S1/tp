@@ -3,12 +3,13 @@
 participant ":Parser" as Parser
 participant ":FindClientCommand" as FCC
 participant ":ClientList" as ClientList
-
+participant ":ClientPackageList" as ClientPackageList
 
 
 -> Parser: execute "find -c Bo Tuan"
 activate Parser
 Parser -> Parser : parseFind("-c Bo Tuan")
+activate Parser
 
 create FCC
 Parser -> FCC
@@ -19,11 +20,16 @@ activate ClientList
 ClientList --> FCC : name, contact number, email
 deactivate ClientList
 
-
+FCC -> ClientPackageList : getClient() for every ClientPackage
+activate ClientPackageList
+ClientPackageList --> FCC : packages belonging to client
+deactivate ClientPackageList
 
 FCC --> Parser
+deactivate Parser
 deactivate FCC
 <-- Parser
+deactivate Parser
 destroy FCC
 
 @enduml

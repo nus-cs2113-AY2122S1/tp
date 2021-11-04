@@ -264,9 +264,9 @@ Depending on the type of list command being called, these command types will be 
 
 The ```find``` feature is to be used to query for a particular client or tour, providing extensive information about it. It is facilitated by the ```parse``` function in the ```Parser``` class, which determines which type of Object (```Client``` or ```Tour```) is to be parsed and which command to be executed. It is implemented by following operations:
 
-* ```FindClientCommand(String name)```
-
+* ```FindClientCommand(String substring)```
 * ```FindTourCommand(String code)```
+* ```FindFlightCommand(String code)```
 
 These commands extend from the Command class.
 
@@ -285,26 +285,31 @@ Firstly, assume that in previous sessions, commands were executed to add clients
 
 #### <u>Finding a particular client</u>
 
-**Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named
+**Step 1**: The user executes ```find -c bo``` to query if a client named
 Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser```
 class takes the command, and the first word in it (```find```) means that the
 ```parseFind()``` is to be called to determine which type of Object is to be
 queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is
-executed with the parameter ```Bo Tuan```
+executed with the parameter ```bo```
 
 
 
 **Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```.
 For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client.
-If the name attribute is equals to ```Bo Tuan```, the ```Client``` object
+The name attribute is then converted to lower case for comparison with the substring.
+If the name attribute is contains the substring```bo```, the ```Client``` object
 is printed onto the console terminal.
 
-<br>
+**Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getClient()``` function is called to retrieve the client attribute of the ClientPackage.
+If the client attribute is equals to the same ```Client``` object that was found in Step 2, the respective client package will
+be printed onto the console terminal.
 
 
 The following activity diagram summarizes the following steps.
 
-    ![image](findclient.png) 
+![image](findclient.png)
+(outdated feelsbad)
 
 <br>
 
@@ -384,9 +389,34 @@ The following activity diagram summarizes the following steps.
   * Pros: fast querying time.
   * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their contact number.
 
-  
+<br>
+
+##UI Component
+<hr>
+
+**API: `Ui.java`**
+
+The Ui component is the means by which Command(s) can receive inputs from the user, as
+well as display information to them, all through the console terminal.
+
+After the user typed in an input into the console terminal and presses 'Enter':
+* the ```Ui``` reads the input typed in by the user on the console terminal.
+* the ```Parser``` class parses the read input and calls the apprpriate ```Command```. (see the ```Parser``` and ```Command``` sections
+for more information)
+* the called ```Command``` calls a function in the ```Ui``` to print the appropriate information onto
+the console terminal.
+
+<br>
+
+The diagram below shows the class diagram of the Ui component, in relation with
+other major components:
+
+(insert image)
+
+<br>
 
 ## Product scope
+<hr>
 
 ### Target user profile
 
@@ -399,27 +429,36 @@ The following activity diagram summarizes the following steps.
 
 * Manage tour information faster than typical mouse /GUI driven apps
 
+<br>
+
 ## User Stories
+<hr>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 |Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
-|`* * *`|user|add a new client| |
-|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
-|`* * *`|user|add a new tour package|update the tour package database|
-|`* * *`|user|delete a tour package|update the tour package database|
-|`* * *`|user|add flight timings|keep track of flights|
+|`* * *`|user|add a new entry of specific data type| add data into the current database|
+|`* * *`|user|delete an existing entry of specific data type |remove outdated data from the current database|
+|`* *`|user with large amounts of data|find an existing entry of specific data type |locate a specific entry easily|
+|`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
+|`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
 
+
+Note: 'specific data type' refers to either clients, tours, flights or tour packages.
+
+<br>
 
 ## Non-Functional Requirements
+<hr>
 
-{Give non-functional requirements}
+* Should work on any mainstream OS as long as it has Java 11 or above installed.
+* Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
+* A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should
+be able to accomplish most of the tasks faster using commands than using the mouse.
 
-## Glossary
-
-* *glossary item* - Definition
+<br>
 
 ## Instructions for manual testing
 
