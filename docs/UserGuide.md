@@ -132,7 +132,7 @@ enter 2
 
 
 Tip: You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
-You may also add, remove, edit exercises in workout 2 while you are in workout 1.
+You may also add, remove, edit, display and mark exercises as done in workout 2 while you are in workout 1.
 For example,
 ```
 enter 1
