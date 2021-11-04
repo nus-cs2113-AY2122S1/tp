@@ -206,14 +206,14 @@ public class AttendanceStorage {
      * Rewrites the entire CSV file after an attendance with the corresponding training name is deleted.
      *
      * @param attendanceList the current attendance list.
-     * @param trainingName
+     * @param trainingName name of training.
      */
     public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName) {
         File currentDir = new File("");
         try {
-            String AttendanceFilePath = currentDir.getCanonicalPath() + "/Attendance/" + trainingName + ".csv";
-            File SpecificAttendanceFile = new File(AttendanceFilePath);
-            rewriteAttendanceCsv(attendanceList, SpecificAttendanceFile, trainingName);
+            String attendanceFilePath = currentDir.getCanonicalPath() + "/Attendance/" + trainingName + ".csv";
+            File specificAttendanceFile = new File(attendanceFilePath);
+            rewriteAttendanceCsv(attendanceList, specificAttendanceFile, trainingName);
         } catch (IOException e) {
             System.out.println("I/O error has occurred");
         }
