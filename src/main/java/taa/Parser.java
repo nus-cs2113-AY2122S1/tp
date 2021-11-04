@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private static final String ARGUMENT_VALID_REGEX = "0-9a-zA-Z\\s";
-    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.'};
+    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.', ','};
 
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
