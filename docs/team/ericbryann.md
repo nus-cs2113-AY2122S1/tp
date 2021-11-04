@@ -40,4 +40,5 @@ scheduler appointments between them and medical staff.
 * Contributions to team task:
   * Occasional refactoring of codes to follow more OOP.
 * Review / mentoring contributions:
-  * 
+  * Pointing out other team members' bug.
+  * Suggest possible improvements for the features they implemented.
