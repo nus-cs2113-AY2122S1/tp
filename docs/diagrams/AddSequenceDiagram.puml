@@ -9,7 +9,7 @@ Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
 Participant ":Ingredient" as ingredientClass INGREDIENT_COLOUR
 Participant ":Storage" as storage STORAGE_COLOUR
-Participant "<<CurrentDate>>" as currentDate DATE_COLOUR
+Participant "<<class>> CurrentDate" as currentDate DATE_COLOUR
 
 
 -> parser: parse ("add a/carrot n/200 e/ 25/12/2021")
