@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.task.taskmanager.TaskManager;
-
 /**
  * Represents the result of a command execution.
  */
@@ -9,17 +7,12 @@ public class CommandResult {
 
     private static final String MESSAGE_NOT_NULL_ASSERTION = "Command Result message cannot be null!";
 
-    private boolean isModified;
     private boolean isExited;
     private String message;
 
-    public CommandResult(String message, boolean isModified, boolean isExited) {
+    public CommandResult(String message, boolean isExited) {
         this.isExited = isExited;
         this.message = message;
-    }
-
-    public void setModified(boolean modified) {
-        isModified = modified;
     }
 
     public void setExited(boolean exited) {
@@ -33,10 +26,6 @@ public class CommandResult {
 
     public String getMessage() {
         return this.message;
-    }
-
-    public boolean getIsModified() {
-        return this.isModified;
     }
 
     public boolean getIsExited() {

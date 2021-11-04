@@ -11,7 +11,6 @@ import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
-import seedu.duke.parser.TaskParser;
 
 public abstract class Task {
 
@@ -114,6 +113,20 @@ public abstract class Task {
 
     public abstract TypeEnum getTaskType();
 
+    //@@author SeanRobertDH
+    /**
+     * Edits the variables of {@link seedu.duke.task.Task} based off the flags in <code>arguments</code>.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of
+     *     flags to values that should be edited in {@link seedu.duke.task.Task}.
+     * @throws seedu.duke.exception.InvalidPriorityException if attempting to edit
+     *     {@link #priority} and the <code>priority</code> specified is invalid.
+     * @throws seedu.duke.exception.InvalidRecurrenceException if attempting to edit
+     *     {@link #recurrence} and the <code>recurrence</code> specified is invalid.
+     * @throws seedu.duke.exception.ParseDateFailedException From {@link #taskEdit(java.util.Map)}.
+     * @throws seedu.duke.exception.StartDateAfterEndDateException From {@link #taskEdit(java.util.Map)}.
+     * @throws java.net.URISyntaxException From {@link #taskEdit(java.util.Map)}.
+     */
     public void edit(Map<String, String> arguments) throws InvalidPriorityException,
             InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
         if (arguments.containsKey(EditFlag.DESCRIPTION)) {
@@ -121,19 +134,38 @@ public abstract class Task {
         }
         if (arguments.containsKey(TaskFlag.PRIORITY)) {
             String priority = arguments.get(TaskFlag.PRIORITY);
-            setPriority(TaskParser.getPriorityEnum(priority));
+            setPriority(PriorityEnum.getPriority(priority));
         }
         if (arguments.containsKey(TaskFlag.RECURRENCE)) {
             String recurrence = arguments.get(TaskFlag.RECURRENCE);
-            setRecurrence(TaskParser.getRecurrenceEnum(recurrence));
+            setRecurrence(RecurrenceEnum.getRecurrence(recurrence));
         }
         taskEdit(arguments);
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Edits the variables of subclass of {@link seedu.duke.task.Task} based off the flags in <code>arguments</code>.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of flags to values that should be edited in subclasses.
+     * @throws seedu.duke.exception.ParseDateFailedException if unable to parse a
+     *     value when editing a {@link java.time.LocalDateTime}.
+     * @throws StartDateAfterEndDateException From {@link seedu.duke.task.type.Event}.
+     * @throws java.net.URISyntaxException From {@link seedu.duke.task.type.Lesson}.
+     */
     protected abstract void taskEdit(Map<String, String> arguments)
         throws ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException;
 
-    public abstract void refreshDate();
-
+    //@@author SeanRobertDH
+    /**
+     * Returns the {@link java.time.LocalDateTime} that is the most relevant for the Task subclass.
+     */
     public abstract LocalDateTime getListDate();
+
+    //@@author SeanRobertDH
+    /**
+     * Updates the {@link java.time.LocalDateTime} in subclasses if they have a recurrence
+     * to the latest date.
+     */
+    public abstract void refreshDate();
 }

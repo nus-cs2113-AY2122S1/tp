@@ -64,6 +64,15 @@ public class Deadline extends Task {
             + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, DateParser.dateToString(getDueDate()));
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Edits the {@link #dueDate} if {@link seedu.duke.command.flags.DeadlineFlag#DUE_DATE}
+     *     is a key in <code>arguments</code>.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of flags to values
+     *     that should be edited in {@link seedu.duke.task.type.Deadline}.
+     * @throws seedu.duke.exception.ParseDateFailedException if unable to parse <code>due</code>.
+     */
     @Override
     protected void taskEdit(Map<String, String> arguments) throws ParseDateFailedException {
         if (arguments.containsKey(DeadlineFlag.DUE_DATE)) {
@@ -72,12 +81,20 @@ public class Deadline extends Task {
         }
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Updates the {@link #dueDate} if {@link seedu.duke.task.type.Deadline} has a recurrence to the latest date.
+     */
     @Override
     public void refreshDate() {
         LocalDateTime newDueDate = getRecurrence().getNextRecurredDate(getDueDate());
         setDueDate(newDueDate);
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Returns {@link #dueDate}.
+     */
     @Override
     public LocalDateTime getListDate() {
         return getDueDate();

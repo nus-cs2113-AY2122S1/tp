@@ -6,7 +6,6 @@ import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.command.flags.EventFlag;
-import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -14,6 +13,9 @@ import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Event;
 
 //@@author SeanRobertDH
+/**
+ * Factory class used to create {@link seedu.duke.task.type.Event}.
+ */
 public class EventFactory extends TaskFactory {
 
     private static final TypeEnum taskType = TypeEnum.EVENT;
@@ -21,6 +23,11 @@ public class EventFactory extends TaskFactory {
     LocalDateTime startDate;
     LocalDateTime endDate;
 
+    /**
+     * Constructor for {@link seedu.duke.task.factory.EventFactory}.
+     *
+     * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
+     */
     public EventFactory(Map<String, String> flags) {
         super(taskType, EventFlag.REQUIRED_FLAGS, flags);
     }
@@ -31,8 +38,8 @@ public class EventFactory extends TaskFactory {
             String start = flags.get(EventFlag.START_DATE);
             String end = flags.get(EventFlag.END_DATE);
 
-            startDate = TaskParser.getDate(start);
-            endDate = TaskParser.getDate(end);
+            startDate = getDate(start);
+            endDate = getDate(end);
 
             if (startDate.isAfter(endDate)) {
                 throw new StartDateAfterEndDateException();
@@ -46,7 +53,7 @@ public class EventFactory extends TaskFactory {
     }
 
     @Override
-    Task decideConstructor() {
+    Task createTask() {
         if (priorityEnum == null) {
             return getEventWithDefaultPriority(description, startDate, endDate, recurrenceEnum);
         } else {
@@ -73,6 +80,13 @@ public class EventFactory extends TaskFactory {
         }
     }
 
+    /**
+     * Returns the {@link seedu.duke.task.type.Event} created.
+     *
+     * @return created {@link seedu.duke.task.type.Event}.
+     * @throws seedu.duke.exception.GetTaskFailedException General Exception
+     *     thrown when creating {@link seedu.duke.task.Task} fails.
+     */
     @Override
     public Event getTask() throws GetTaskFailedException {
         return (Event) super.getTask();

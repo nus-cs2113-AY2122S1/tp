@@ -5,19 +5,28 @@ import java.util.Map;
 import seedu.duke.command.flags.DeadlineFlag;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.ParseDateFailedException;
-import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Deadline;
 
+
+//@@author SeanRobertDH
+/**
+ * Factory class used to create {@link seedu.duke.task.type.Deadline}.
+ */
 public class DeadlineFactory extends TaskFactory {
 
     private static final TypeEnum taskType = TypeEnum.DEADLINE;
 
     LocalDateTime dueDate;
 
+    /**
+     * Constructor for {@link seedu.duke.task.factory.DeadlineFactory}.
+     *
+     * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
+     */
     public DeadlineFactory(Map<String, String> flags) {
         super(taskType, DeadlineFlag.REQUIRED_FLAGS, flags);
     }
@@ -27,14 +36,14 @@ public class DeadlineFactory extends TaskFactory {
     void setAdditionalVariables() throws GetTaskFailedException {
         try {
             String due = flags.get(DeadlineFlag.DUE_DATE);
-            dueDate = TaskParser.getDate(due);
+            dueDate = getDate(due);
         } catch (ParseDateFailedException pdfe) {
             throw new GetTaskFailedException(pdfe.getMessage());
         }
     }
 
     @Override
-    Task decideConstructor() {
+    Task createTask() {
         if (priorityEnum == null) {
             return getDeadlineWithDefaultPriority(description, dueDate, recurrenceEnum);
         } else {
@@ -60,6 +69,13 @@ public class DeadlineFactory extends TaskFactory {
         }
     }
 
+    /**
+     * Returns the {@link seedu.duke.task.type.Deadline} created.
+     *
+     * @return created {@link seedu.duke.task.type.Deadline}.
+     * @throws seedu.duke.exception.GetTaskFailedException General Exception
+     *     thrown when creating {@link seedu.duke.task.Task} fails.
+     */
     @Override
     public Deadline getTask() throws GetTaskFailedException {
         return (Deadline) super.getTask();

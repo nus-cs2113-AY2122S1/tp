@@ -11,7 +11,12 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 import seedu.duke.task.Task;
 
-public class TaskTypeAdapter implements JsonSerializer<Task>, JsonDeserializer<Task> {
+//@@author SeanRobertDH
+/**
+ * <code>JsonSerializer</code> and <code>JsonDeserializer</code> used by {@link seedu.duke.storage.DataManager}
+ * for parsing superclasses of {@link seedu.duke.task.Task}.
+ */
+class TaskTypeAdapter implements JsonSerializer<Task>, JsonDeserializer<Task> {
     private static final String JSON_TYPE_KEY = "type";
 
     private final Gson gson;

@@ -63,7 +63,7 @@ public class ListCommand extends Command {
         } catch (TaskIsNonRecurringException tnrx) {
             message = tnrx.toString();
         }
-        return new CommandResult(message, false, false);
+        return new CommandResult(message, false);
     }
 
     @Override

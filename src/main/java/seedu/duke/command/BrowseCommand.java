@@ -46,6 +46,6 @@ public class BrowseCommand extends Command {
         } catch (BrowseFailException bfe) {
             message = bfe.getMessage();
         }
-        return new CommandResult(message, false, false);
+        return new CommandResult(message, false);
     }
 }

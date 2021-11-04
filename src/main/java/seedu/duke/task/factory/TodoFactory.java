@@ -6,7 +6,6 @@ import java.util.Map;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.command.flags.TodoFlag;
-import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -14,11 +13,20 @@ import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Todo;
 
 //@@author SeanRobertDH
+/**
+ * Factory class used to create {@link seedu.duke.task.type.Todo}.
+ */
 public class TodoFactory extends TaskFactory {
     private static final TypeEnum taskType = TypeEnum.TODO;
 
     LocalDateTime doOnDate;
 
+
+    /**
+     * Constructor for {@link seedu.duke.task.factory.TodoFactory}.
+     *
+     * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
+     */
     public TodoFactory(Map<String, String> flags) {
         super(taskType, TodoFlag.REQUIRED_FLAGS, flags);
     }
@@ -28,7 +36,7 @@ public class TodoFactory extends TaskFactory {
     void setAdditionalVariables() throws GetTaskFailedException {
         try {
             String doOn = flags.get(TodoFlag.DO_ON_DATE);
-            doOnDate = TaskParser.getDate(doOn);
+            doOnDate = getDate(doOn);
 
         } catch (ParseDateFailedException pdfe) {
             throw new GetTaskFailedException(pdfe.getMessage());
@@ -36,7 +44,7 @@ public class TodoFactory extends TaskFactory {
     }
 
     @Override
-    Task decideConstructor() {
+    Task createTask() {
         if (priorityEnum == null) {
             return getTodoWithDefaultPriority(description, doOnDate, recurrenceEnum);
         } else {
@@ -69,6 +77,13 @@ public class TodoFactory extends TaskFactory {
         }
     }
 
+    /**
+     * Returns the {@link seedu.duke.task.type.Todo} created.
+     *
+     * @return created {@link seedu.duke.task.type.Todo}.
+     * @throws seedu.duke.exception.GetTaskFailedException General Exception
+     *     thrown when creating {@link seedu.duke.task.Task} fails.
+     */
     @Override
     public Todo getTask() throws GetTaskFailedException {
         return (Todo) super.getTask();

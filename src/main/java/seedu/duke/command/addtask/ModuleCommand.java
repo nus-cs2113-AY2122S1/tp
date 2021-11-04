@@ -40,6 +40,6 @@ public class ModuleCommand extends Command {
         } catch (ModuleStringFormatIncorrectException msfie) {
             message = msfie.getMessage();
         }
-        return new CommandResult(message, true, false);
+        return new CommandResult(message, false);
     }
 }

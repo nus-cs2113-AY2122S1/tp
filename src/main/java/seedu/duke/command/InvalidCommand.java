@@ -6,7 +6,7 @@ public class InvalidCommand extends Command {
 
     @Override
     public CommandResult executeCommand() throws Exception {
-        return new CommandResult(INVALID_MSG, false, false);
+        return new CommandResult(INVALID_MSG, false);
     }
 
     @Override
