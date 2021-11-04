@@ -11,6 +11,7 @@ import expiryeliminator.data.exception.IllegalValueException;
 /**
  * Adds a recipe, together with the ingredients needed.
  */
+//@@author vincentlauhl
 public class AddRecipeCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "add recipe";
