@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author gavienwz
-
-
 public class EditCommand extends Command {
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
     private final String tripName;
@@ -38,11 +36,11 @@ public class EditCommand extends Command {
                 + "\n\tendCountry: " + endCountry;
     }
 
-    public void editTripInfo(Trip current, List<Country> path, List<Double> distances) {
+    public void editTripInfo(Trip current, List<Country> path, List<Double> time) {
         current.setStartCountryCode(this.startCountry);
         current.setEndCountryCode(this.endCountry);
         current.setPath(path);
-        current.setDistances(distances);
+        current.setTime(time);
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
@@ -52,11 +50,11 @@ public class EditCommand extends Command {
         }
         assert tripIndex < tripsList.getSize() && tripIndex > -1 : "The trip index is out of bound.";
 
-        MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
+        MinCalcResult result = WorldMap.calcMinTime(this.startCountry, this.endCountry);
         List<Country> path = result.getPath();
-        List<Double> distances = result.getDistances();
+        List<Double> time = result.getTime();
         Trip current = tripsList.getTrip(tripIndex);
-        editTripInfo(current, path, distances);
+        editTripInfo(current, path, time);
         ui.printEdit(tripName);
     }
 }

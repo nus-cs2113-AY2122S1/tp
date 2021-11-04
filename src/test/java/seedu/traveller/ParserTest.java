@@ -43,8 +43,8 @@ public class ParserTest {
         ViewCommand viewCommand = new ViewCommand("all");
         assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
 
-        ShortestCommand shortestCommand = new ShortestCommand("dist", "SKR", "JPN");
-        assertEquals(shortestCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+        ShortestCommand shortestCommand = new ShortestCommand("time", "SKR", "JPN");
+        assertEquals(shortestCommand.toString(), Parser.parse("shortest-time /from SKR /to JPN").toString());
 
         AddDayCommand addDayCommand = new AddDayCommand("trip3", 3);
         assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3 /day 3").toString());

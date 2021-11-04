@@ -7,14 +7,14 @@ public class MinCalcResult {
     Country startCountry;
     Country endCountry;
     List<Country> path;
-    List<Double> distances;
+    List<Double> time;
     int error;
 
-    public MinCalcResult(Country startCountry, Country endCountry, List<Country> path, List<Double> distances) {
+    public MinCalcResult(Country startCountry, Country endCountry, List<Country> path, List<Double> time) {
         this.startCountry = startCountry;
         this.endCountry = endCountry;
         this.path = path;
-        this.distances = distances;
+        this.time = time;
         this.error = 0;
     }
 
@@ -34,8 +34,8 @@ public class MinCalcResult {
         return path;
     }
 
-    public List<Double> getDistances() {
-        return distances;
+    public List<Double> getTime() {
+        return time;
     }
 
     public int getError() {
@@ -45,6 +45,6 @@ public class MinCalcResult {
     @Override
     public String toString() {
         return "minCalcResult:\n\t" + getStartCountry() + " to " + getEndCountry()
-                + "\n\t" + getPath() + "\n\t" + getDistances();
+                + "\n\t" + getPath() + "\n\t" + getTime();
     }
 }

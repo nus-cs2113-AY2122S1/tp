@@ -36,7 +36,7 @@ class EditCommandTest {
         assertNotEquals(firstTrip.getStartCountryCode(), secondTrip.getStartCountryCode());
         assertNotEquals(firstTrip.getEndCountryCode(), secondTrip.getEndCountryCode());
         assertNotEquals(firstTrip.getPath(), secondTrip.getPath());
-        assertNotEquals(firstTrip.getDistances(), secondTrip.getDistances());
+        assertNotEquals(firstTrip.getTime(), secondTrip.getTime());
 
         edit.execute(tripsList, ui);
         Trip editedTrip = tripsList.getTrip(0);
@@ -44,7 +44,7 @@ class EditCommandTest {
         assertEquals(editedTrip.getStartCountryCode(), secondTrip.getStartCountryCode());
         assertEquals(editedTrip.getEndCountryCode(), secondTrip.getEndCountryCode());
         assertEquals(editedTrip.getPath(), secondTrip.getPath());
-        assertEquals(editedTrip.getDistances(), secondTrip.getDistances());
+        assertEquals(editedTrip.getTime(), secondTrip.getTime());
     }
 
     @Test

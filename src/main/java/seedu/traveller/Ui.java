@@ -106,11 +106,11 @@ public class Ui {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printShortestDist(String startCountry, String endCountry, double distance, List<Double> distances) {
-        System.out.println("\tThe shortest distance from " + startCountry
-                + " to " + endCountry + " is " + distance + ".");
-        System.out.println("\tDistance breakdown: ");
-        for (Double d : distances) {
+    public void printShortestTime(String startCountry, String endCountry, double totalTime, List<Double> time) {
+        System.out.println("\tThe shortest time from " + startCountry
+                + " to " + endCountry + " is " + totalTime + ".");
+        System.out.println("\tTime breakdown: ");
+        for (Double d : time) {
             System.out.println("\t" + d);
         }
     }
@@ -179,8 +179,8 @@ public class Ui {
                 + "\tsearch-item trip1 /name sleep at home : "
                 + "\n\tSearches item keyword sleep at home in trip called trip1.\n"
 
-                + "\tshortest-dist /from SKR /to JPN : "
-                + "Returns the shortest distance from SKR to JPN.\n"
+                + "\tshortest-time /from SKR /to JPN : "
+                + "Returns the shortest time from SKR to JPN.\n"
 
                 + "\texit : Exits the program.");
     }

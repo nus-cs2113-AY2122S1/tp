@@ -50,7 +50,8 @@ Use the Table of Contents below to easily navigate to the section you desire.
 ## 1. Design & Implementation
 Traveller's design can be broken down into 2 main components: The World Map, and the Main Traveller code, 
 as illustrated in figure 1 below.
-The World Map is the part of the application that handles the calculation of the shortest distance between countries, 
+The World Map is the part of the application that handles the calculation of the shortest time/cost 
+(collectively referred to as distance in this guide) between countries, 
 while the Main Traveller code handles the interaction with users, and the general logic of the application.
 
 ![](documentationPics/designOverview.png)
@@ -74,8 +75,8 @@ is then performed on this graph to obtain the shortest travel path from 1 countr
 The `WorldMap` class is the main overarching class for the World Map component of the project. 
 It instantiates all its subsequent classes, `GraphList`, `DataLoader`, and `Logic`. 
 
-Its main functionalities are is the `calcMinDistance` function which calculates the least distance o get from a given source 
-to destination country. Similarly, the `calcMinCost` function calculates the least cost. Then, the function then reads either *dist.txt* or *cost.txt* 
+Its main functionalities are in the `calcMinDistance` function which calculates the least distance o get from a given source 
+to destination country. Similarly, the `calcMinCost` function calculates the least cost. Then, the function then reads either *time.txt* or *cost.txt* 
 and runs `computeSource` and `getToGoal`, both from the `Logic` class. Also, another key functionality is the `editMap` which is linked to the `Parser` class, which enables the user to edit a distance from
 a given source to destination country.
 
@@ -108,8 +109,8 @@ expands outwards to all other countries, yielding the least distances to all oth
 trace the shortest path to the source country, in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
 #### 1.1.4. DataLoader class
-The `DataLoader` class reads in data from *flightData/dist.txt* or *flightData/cost.txt* to create the vertexes and edges in `GraphList`.
-Its main function is the `readData` function which passes the relevant lines in *dist.txt* or *cost.txt* to either `loadCountries`
+The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes and edges in `GraphList`.
+Its main function is the `readData` function which passes the relevant lines in *time.txt* or *cost.txt* to either `loadCountries`
 or `loadDistances` to create vertexes or edges respectively.
 
 While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this number by
@@ -118,12 +119,12 @@ changing the variable `numberOfCountries` in the class.
 ![](documentationPics/dataSequenceDiagram.png)
 <div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
 
-The first line of *dist.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
+The first line of *time.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as edges between the vertexes.
 
->![](documentationPics/tip.png) As *dist.txt* and *cost.txt* are both read in a specific way, there are certain things to take note when modifying it.
+>![](documentationPics/tip.png) As *time.txt* and *cost.txt* are both read in a specific way, there are certain things to take note when modifying it.
 >1. Country codes must only be 3 letters.
->2. Distances/Costs must be numbers as it will be parsed into a double.
+>2. Distances must be numbers as it will be parsed into a double.
 >3. **numberOfCountries** should be changed to the number of countries on the first line.
 > 
 > ![](documentationPics/warning.png) Invalid information that cannot be read by DataLoader will result in the disregard of the entire text file.
@@ -261,7 +262,7 @@ _{More to be added}_
 ## 6. Instructions for manual testing
 
 ###6.1 Data file
-The data file *flightData/dist.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+The data file *flightData/time.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
 To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
 there is no flight between the two countries (no edge between the vertexes).
 

@@ -48,7 +48,7 @@ public class WorldMap {
         }
     }
 
-    public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
+    public static MinCalcResult calcMinTime(String sourceCountryName, String targetCountryName) {
         Country sourceCountry = getCountry(sourceCountryName);
         Country targetCountry = getCountry(targetCountryName);
         if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {

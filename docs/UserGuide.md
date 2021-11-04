@@ -52,7 +52,7 @@ each functionality are explained in the [features](#2-features) section.
   * [2.9. edit](#29-edit-a-trip-edit)
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
-  * [2.12. shortest-dist](#212-shortest-distance-shortest-dist)
+  * [2.12. shortest-time](#212-shortest-time-shortest-time)
   * [2.13. shortest-cost](#213-least-cost-shortest-cost)
   * [2.14. exit](#214-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
@@ -105,7 +105,7 @@ Creates a new trip.
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
-   * `START` and `END` destinations must be countries included in *flightData/dist.txt* or *flightData/cost.txt*.
+   * `START` and `END` destinations must be countries included in *flightData/time.txt* or *flightData/cost.txt*.
 
 #### Usage Example:
 
@@ -127,7 +127,7 @@ ____________________________________________________________
 > the shortest flight path to get to your desired country (Yes, it is automated! :)).
 > 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
-> Take a look in *flightData/dist.txt* or *flightData/cost.txt* to see how Traveller recognises them!
+> Take a look in *flightData/time.txt* or *flightData/cost.txt* to see how Traveller recognises them!
 
 <br/>
 
@@ -200,14 +200,14 @@ ____________________________________________________________
 			 Origin: SIN
 			 Destination: MLY
 			 Path: [SIN, MLY]
-			 Distances: [1.0]
+			 Time: [1.0]
 			 Days: 
 				Day 0: 
 					0:	7pm		Check-in at HolidayInn
 ____________________________________________________________
 ```
 > ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
-> the shortest flight path and its associated distance, and your itinerary for the trip.
+> the shortest flight path and its associated duration of flight, and your itinerary for the trip.
 >
 > ![](documentationPics/tip.png) To view all trips, simply enter `view all`.
 
@@ -311,18 +311,18 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 ```
 
-### 2.12. Shortest distance: `shortest-dist`
-Returns the shortest distance from the source to destination country.
+### 2.12. Shortest time: `shortest-time`
+Returns the shortest flight time from the source to destination country.
 
-#### Format: `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+#### Format: `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
 #### Usage Example:
 ```
 ____________________________________________________________
-$ shortest-dist /from SIN /to JPN
+$ shortest-time /from SIN /to JPN
 ____________________________________________________________
-	The shortest distance from SIN to JPN is 6.0.
-	Distance breakdown: 
+	The shortest time from SIN to JPN is 6.0.
+	Time breakdown: 
 	1.0
 	5.0
 ____________________________________________________________
@@ -363,13 +363,13 @@ Exits the program.
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
    * *Traveller.jar*
-   * *flightData* folder with *dist.txt* and *cost.txt* inside
+   * *flightData* folder with *time.txt* and *cost.txt* inside
    * *save* folder with *save.txt* inside
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
 **A**: Traveller can only read specific words as destinations. 
-Please check in *flightData/dist.txt* or *flightData/cost.txt* for all supported destinations and their specific wordings.
+Please check in *flightData/time.txt* or *flightData/cost.txt* for all supported destinations and their specific wordings.
 
 **Q**: What should I do when creating a new trip if my trip span multiple countries?
 
@@ -377,17 +377,17 @@ Please check in *flightData/dist.txt* or *flightData/cost.txt* for all supported
 However, you can create multiple trips instead, 1 for each country that you plan to go to, and plan your trips from 
 there.
 
-**Q**: What units are distance measured in?
+**Q**: What unit is time measured in?
 
-**A**: Distance is given in hours.
+**A**: Time is given in hours.
 
-**Q**: How do I interpret path and distance shown in the `view` command?
+**Q**: How do I interpret path and time shown in the `view` command?
 
 **A**: Path can be read from left to right. For example, a path of `[SIN, MLY, SKR]` means that the shortest path from
 Singapore (SIN) to South Korea (SKR) is to take a flight from Singapore to Malaysia (MLY), and then taking a flight from 
 Malaysia to South Korea.
 
-Similarly, distance can be read from left to right. Continuing from the above example, if a distance of `[1, 5]` is 
+Similarly, time can be read from left to right. Continuing from the above example, if a time of `[1, 5]` is 
 shown, this means that the flight from Singapore to Malaysia is 1 hour long, and the flight from Malaysia to South Korea
 is 5 hours long.
 
@@ -410,7 +410,7 @@ Action | Format
 **edit** | `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
-**shortest-dist** | `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **exit** | `exit`
 
