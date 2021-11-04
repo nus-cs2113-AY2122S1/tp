@@ -298,7 +298,7 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
  
 `set Chicken Rice /calories 350`  
 `set Chicken Rice /difficulty hard`  
-`set Chicken Rice /price $3.00`  
+`set Chicken Rice /price 3.00`  
 `set Chicken Rice /time 20, 40`
 
 ```
