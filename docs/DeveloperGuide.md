@@ -152,8 +152,29 @@ The diagram below is the class diagram for the `Parser` class:
 Functions of the Parser class:
 
 * Reads in user input by implementing the `Scanner` class
-  * The parseMaster() method parses through the user's input to find the best match for the user's intended command
+  * The `parseMaster()` method parses through the user's input to find the best match for the user's intended command
   * The corresponding command is then returned to the `Gordon` class
+  * Below are the methods in the `Parser` class that `parseMaster()` calls:
+    * `addRecipeParse`:
+      * Adds a new recipe to the Cookbook by instantiating the `AddCommand` class
+    * `deleteRecipeParse`:
+      * Deletes an existing recipe from the Cookbook by instantiating the `DeleteRecipeCommand` class
+    * `deleteTagParse`:
+      * Deletes an existing tag from the Cookbook by instantiating the `DeleteTagCommand` class
+    * `setParse`:
+      * Compares the user's input against a list of valid inputs
+      * If valid, this method sets the corresponding attribute of the recipe as intended by the user by instantiating the `SetXYZCommand` class (where XYZ can be Ingredients, Steps, Calories, Difficulty, Price or Time)
+    * `findParse`:
+      * Compares the user's input against a list of valid inputs
+      * If valid, this method finds the corresponding attribute of the recipe as intended by the user by instantiating the `FindXYZCommand` class (where XYZ can be Ingredients, Steps, Calories, Difficulty, Price or Time)
+    * `addTagParse`:
+      * Adds a new tag to an existing recipe by instantiating the 'TagAddCommand' class
+    * `unTagParse`
+      * Removes an existing tag from its original recipe by instantiating the `TagUntagCommand` class
+  * Below are the child classes of the `Command` class that `parseMaster()` instantiates directly:
+    * `CheckCommand`
+    * `ListRecipesCommand`
+    * `HelpCommand`
 * Prints responses to the console by implementing the `UI` class
 
 ### Command component
