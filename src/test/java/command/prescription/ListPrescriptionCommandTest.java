@@ -40,6 +40,12 @@ public class ListPrescriptionCommandTest {
         Medicine.getInstance().clear();
     }
 
+    public void executeListPrescriptionCommand(String parameter, String parameterValue){
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put(parameter, parameterValue);
+        new ListPrescriptionCommand(parameters).execute();
+    }
+
     @Test
     public void listPrescription_filterByIdTwo_expectPrescriptionsWithIdTwo() {
         String expectedOutput = "+====+=========+==========+=============+============+=======+==========+\n"
@@ -47,10 +53,7 @@ public class ListPrescriptionCommandTest {
                 + "+====+=========+==========+=============+============+=======+==========+\n"
                 + "| 2  | VICODIN |    15    |  S2345678B  | 10-10-2021 | PETER |    3     | \n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("i", "2");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("i", "2");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -61,10 +64,7 @@ public class ListPrescriptionCommandTest {
                 + "+====+=========+==========+=============+============+=======+==========+\n"
                 + "| 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("n", "panadol");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("n", "panadol");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -77,10 +77,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+------------+----------+-------------+------------+-------+----------+\n"
                 + "| 4  | LISINOPRIL |    10    |  S3456789C  | 12-10-2021 | JANE  |    5     | \n"
                 + "+----+------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("q", "10");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("q", "10");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -93,10 +90,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+-------------+----------+-------------+------------+-------+----------+\n"
                 + "| 3  | SIMVASTATIN |    20    |  S1234567A  | 11-10-2021 |  SAM  |    4     | \n"
                 + "+----+-------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("c", "S1234567A");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("c", "S1234567A");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -107,10 +101,7 @@ public class ListPrescriptionCommandTest {
                 + "+====+==============+==========+=============+============+=======+==========+\n"
                 + "| 5  | AZITHROMYCIN |    5     |  S2345678B  | 13-10-2021 | PETER |    6     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "13-10-2021");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("d", "13-10-2021");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -123,10 +114,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+------------+----------+-------------+------------+-------+----------+\n"
                 + "| 4  | LISINOPRIL |    10    |  S3456789C  | 12-10-2021 | JANE  |    5     | \n"
                 + "+----+------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("s", "jane");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("s", "jane");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -137,10 +125,7 @@ public class ListPrescriptionCommandTest {
                 + "+====+=========+==========+=============+============+=======+==========+\n"
                 + "| 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+---------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sid", "1");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("sid", "1");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -159,10 +144,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "i");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("rsort", "i");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -181,10 +163,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 2  |   VICODIN    |    15    |  S2345678B  | 10-10-2021 | PETER |    3     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "n");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("sort", "n");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -203,10 +182,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 3  | SIMVASTATIN  |    20    |  S1234567A  | 11-10-2021 |  SAM  |    4     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "q");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("sort", "q");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -225,10 +201,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "d");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("rsort", "d");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -247,10 +220,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 4  |  LISINOPRIL  |    10    |  S3456789C  | 12-10-2021 | JANE  |    5     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "s");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("rsort", "s");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -269,10 +239,7 @@ public class ListPrescriptionCommandTest {
                 + "+----+--------------+----------+-------------+------------+-------+----------+\n"
                 + "| 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | \n"
                 + "+----+--------------+----------+-------------+------------+-------+----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "sid");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("rsort", "sid");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -281,20 +248,14 @@ public class ListPrescriptionCommandTest {
         String expectedOutput = "Please enter a valid optional parameter!\n"
                 + "COMMAND SYNTAX: listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID "
                 + "sort/COLUMN_NAME rsort/COLUMN_NAME}";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("a", "1");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("a", "1");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
     @Test
     public void listPrescription_nameDoesNotExist_expectNoResultsFound() {
         String expectedOutput = "There are no records of medicines prescribed.";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("n", "abcd");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("n", "abcd");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -302,10 +263,7 @@ public class ListPrescriptionCommandTest {
     public void listPrescription_columnDoesNotExist_expectError() {
         String expectedOutput = "Invalid column name/alias! Column names can only be [ID, NAME, QUANTITY, CUSTOMER_"
                 + "ID, DATE, STAFF, STOCK_ID] and the respective aliases are [i, n, q, c, d, s, sid].";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "a");
-        new ListPrescriptionCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListPrescriptionCommand("sort", "a");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 }

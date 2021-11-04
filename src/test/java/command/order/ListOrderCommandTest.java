@@ -72,10 +72,7 @@ public class ListOrderCommandTest {
                 + "+----+--------------+----------+------------+-----------+\n"
                 + "| 7  |   PANADOL    |    50    | 13-12-2021 |  PENDING  | \n"
                 + "+----+--------------+----------+------------+-----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "i");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("sort", "i");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -98,10 +95,7 @@ public class ListOrderCommandTest {
                 + "+----+--------------+----------+------------+-----------+\n"
                 + "| 3  |   VICODIN    |    50    | 11-10-2021 | DELIVERED | \n"
                 + "+----+--------------+----------+------------+-----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "n");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("sort", "n");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -124,10 +118,7 @@ public class ListOrderCommandTest {
                 + "+----+--------------+----------+------------+-----------+\n"
                 + "| 4  | SIMVASTATIN  |    20    | 11-10-2021 |  PENDING  | \n"
                 + "+----+--------------+----------+------------+-----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "q");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("rsort", "q");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -150,10 +141,7 @@ public class ListOrderCommandTest {
                 + "+----+--------------+----------+------------+-----------+\n"
                 + "| 1  |   PANADOL    |   100    | 09-10-2021 |  PENDING  | \n"
                 + "+----+--------------+----------+------------+-----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "d");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("rsort", "d");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -176,10 +164,7 @@ public class ListOrderCommandTest {
                 + "+----+--------------+----------+------------+-----------+\n"
                 + "| 3  |   VICODIN    |    50    | 11-10-2021 | DELIVERED | \n"
                 + "+----+--------------+----------+------------+-----------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("rsort", "s");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("rsort", "s");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -187,10 +172,7 @@ public class ListOrderCommandTest {
     public void listOrderCommand_columnDoesNotExist_expectError() {
         String expectedOutput = "Invalid column name/alias! Column names can only be [ID, NAME, QUANTITY, DATE, "
                 + "STATUS] and the respective aliases are [i, n, q, d, s].";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("sort", "a");
-        new ListOrderCommand(parameters).execute();
-        // Output stream will include \r for each line break
+        executeListOrderCommand("sort", "a");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
