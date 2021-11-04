@@ -162,6 +162,8 @@ You can type `search GEH` to display all GEH modules available:
 
 ```shell
 ~$ search GEH
+Searching, standby...
+If nothing is appearing even after a while, press ENTER to cancel the search and narrow down your search terms.
 GEH1001 Globalisation and New Media 4MC
 GEH1002 Economic Issues in Dev World 4MC
 GEH1004 Chinese Heritage: History and Literature 4MC
@@ -169,9 +171,6 @@ GEH1005 Crime Fiction in Eng & Chinese 4MC
 GEH1006 Chinese Music, Language and Literature (in English) 4MC
 GEH1007 Asian Cinema: The Silent Era 4MC
 GEH1008 Nations & Nationalism in South Asia 4MC
-GEH1009 Framing Bollywood: Unpacking The Magic 4MC
-GEH1010 Beasts, People and Wild Environments in South Asia 4MC
-GEH1011 Film and History 4MC
 :
 :
 ```
@@ -193,21 +192,7 @@ very quick e.g. `-q`. Note that local search cannot be cancelled.
 
 :information_source: Command, search term and flag regex are case-insensitive.
 
-:information_source: Search keyword is only for the module code. Searching for the title of a module is currently 
-unsupported.
-
-:information_source: If text is not displaying correctly (Mojibake), running `chcp 65001` or `chcp.com 65001` from your 
-CLI should resolve some issues.
-
 :warning: Flags are **NOT** case-insensitive. Inputting an invalid flag will print an error message.
-
-:warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every
-single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform
-them with the -q flag, which will execute in a matter of seconds.
-
-:warning: Local search is dependent on local data. If certain modules cannot be found offline, it is likely that you do
-not have the local data, or your local data is outdated. Please do run `update`, or `search` for that
-module online.
 
 <br>
 
@@ -454,13 +439,43 @@ __________________________________________________________________________
 
 # FAQ
 
+**Q**: Why does this module not show up even though my search term is its exact title?
+<br>
+**A**: Search keyword is only for the module code. Searching for the title of a module is currently
+unsupported, since NUS modules are far more often referred to by their module code.
+
+**Q**: Why am I getting garbage characters/ Mojibake when searching for/ showing modules?
+<br>
+**A**: This is unfortunately caused by most shells not using UTF-8 encoding. If possible, running 
+`chcp 65001` or `chcp.com 65001` from your CLI should resolve most issues.
+
+**Q**: Why is the search taking so long?
+<br>
+**A**: Your query is probably too broad. You can greatly cut down search time by specifying at least the letter codes 
+of the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a 
+quicksearch with the -q flag instead, which will execute in a matter of seconds. <br>
+See [here](#extra_info) if you wish to know more about the technical details behind why it takes so long.
+
+**Q**: Alright, I decided to do a quicksearch instead. Why are no mods appearing even though I know some mods must 
+match my search?
+<br>
+**A**: Local search is dependent on local data. If certain modules cannot be found offline, and you are sure that
+they do exist and match your query, then it is likely that you do not have the local data, or your local data is 
+outdated.
+
 **Q**: How do I save my timetable so I don’t have to add all my modules again?
 <br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
-**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?
+**Q**<a name = "extra_info"></a>: How does the search actually work?
 <br>
-**A**: Stay tuned for v2.0!
+**A**: Due to how the API works, the search first checks for matches in module code, level and semesters. The app will
+make a request to the API for every match. Hence, including some part of a module code, and or the level/ semester 
+flags will greatly increase search speed by cutting down the number of requests needed to be made.
+Other flags, such as the faculty, department and exams are checked against the mod information after the request and as 
+such have little to no effect on how fast the search goes. The most common cause of a slow search is running `search`
+without any search term specified, which means that UNIMods has to make 12000+ requests to the API, one for each mod,
+and is very similar to just running `update`. 
 
 <br>
 
@@ -468,15 +483,23 @@ __________________________________________________________________________
 
 ## Command Summary
 
-| Command                   | Meaning                                                                                           |
-| --------------            | ----------                                                                                        |
-| `help`                    | Shows available commands and flags. <br> Example: `help`                                         |
-| `search <KEYWORD> [-l]`  | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l`   |
-| `show <MODULE_CODE>`      | Display relevant module information. <br> Example: `show CS2113T`                                |
-| `add <MODULE_CODE>`       | Adds the module to the timetable. <br> Example: `add CS2113T`                                    |
-| `delete <MODULE_CODE>`    | Deletes the module from the timetable. <br> Example: `delete CS2113T`                            |
-| `clear`                   | Deletes all modules from the timetable. <br> Example: `clear`                                    |
-| `timetable`               | Displays timetable with total MCs taken. <br> Example: `timetable`                               |
-| `exit`                    | Exit the application. <br> Example:`exit`                                                        |
+| Command                         | Meaning                                                                                            |
+| --------------                  | ----------                                                                                         |
+| `help`                          | Shows available commands and flags. <br> Example: `help`                                           |
+| `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
+| `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
+| `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
+| `add`                           | Adds modules or tasks to the timetable. <br> Example: `add`                                        |
+| `delete <MODULE_CODE/TASK>`     | Deletes the module from the timetable. <br> Example: `delete CS2113T`                              |
+| `clear`                         | Deletes all modules from the timetable. <br> Example: `clear`                                      |
+| `edit`                          | Edit a personal task in the timetable. <br> Example: `edit`                                        |
+| `timetable`                     | Displays the timetable in a weekly grid format <br> Example: `timetable`                           |
+| `semester`                      | Changes the academic semester that you wish to plan for <br> Example: `semester`                   |
+| `check <MODULE_CODE>`           | Check whether the module's pre-requisite is met <br> Example: `check CS2113T`                      |
+| `store <GRADE> > <MODULE_CODE>` | Assigns a grade to a module and stores it on record <br> Example: `store B+ > CS2113T`             |
+| `remove <MODULE_CODE>`          | Removes the module from the profile's record <br> Example: `remove CS2113T`                        |
+| `calculate`                     | Calculates your CAP from your profile. <br> Example: `calculate`                                   |
+| `transcript`                    | Creates and displays an unofficial transcript <br> Example: `transcript`                           |
+| `exit`                          | Saves the current state and exits UniMods safely <br> Example: `exit`                              |                                                   |
 
 ---
