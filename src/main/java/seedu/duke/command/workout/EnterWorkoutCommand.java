@@ -19,8 +19,7 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public class EnterWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "enter";
-    public static final String MESSAGE_SUCCESS = "Now inside Workout: %1$s";
-    private static final String NL = System.lineSeparator();
+    public static final String MESSAGE_SUCCESS = "Now inside workout %d : %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enter into a Workout to edit its exercises"
             + "Format: enter [Workout index]\n"
             + "Parameters: \n"
@@ -61,6 +60,6 @@ public class EnterWorkoutCommand extends Command {
         workoutMode = workoutIndex;
         LOGGER.info("Entering the " + workoutIndex + "th(st/nd/rd) Workout");
         Workout workoutEntered = workouts.getAllWorkouts().get(workoutIndex - 1);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, workoutEntered));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, workoutIndex, workoutEntered));
     }
 }

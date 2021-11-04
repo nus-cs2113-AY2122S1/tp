@@ -27,7 +27,7 @@ To find out more information about the command, such as input format and paramet
 "recommend" : Recommends workouts of a given difficulty
 "display" : Shows all the exercises in a specified workout
 "edit" : Edits a specific exercise in a specified workout
-"search" : Displays workouts or exercises that contain the specified keyword
+"search" : Displays workouts or exercises that contain the specified keyword or date
 "clear" : Clears all exercises in a specified workout or all workouts in the list
 "bye" : Ends the program
 ________________________________________________________
@@ -101,7 +101,7 @@ Parameters:
 Example: add Push-ups, 5 10, 1
 ________________________________________________________
 ________________________________________________________
-New exercise added: [ ] Squats | 3 sets of 10 reps
+New exercise added to workout 2 : [ ] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -122,7 +122,7 @@ Parameters:
 Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
-Completed: [X] Squats | 3 sets of 10 reps
+Completed exercise in workout 2 : [X] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -132,7 +132,7 @@ Format: edit [exercise index], [workout index], [new Description], [sets and rep
 Parameters:
 	Exercise index - Index of exercise to edit
 	Workout index - Index of workout containing exercise to edit
-Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps from workout 2
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 in workout 2 to Lunges of 5 sets and 10 reps
 ________________________________________________________
 ________________________________________________________
 edit: Edits the exercise in the workout.
@@ -140,10 +140,10 @@ Format: edit [exercise index], [workout index], [new Description], [sets and rep
 Parameters:
 	Exercise index - Index of exercise to edit
 	Workout index - Index of workout containing exercise to edit
-Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps from workout 2
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 in workout 2 to Lunges of 5 sets and 10 reps
 ________________________________________________________
 ________________________________________________________
-The edited exercise: [X] Lunges | 4 sets of 8 reps
+The edited exercise in workout 2 : [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -184,7 +184,7 @@ Parameters:
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
-Removed exercise: [X] Lunges | 4 sets of 8 reps
+Removed exercise in workout 2 : [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
 You have no exercises.
@@ -221,13 +221,13 @@ ________________________________________________________
 New workout created: abs
 ________________________________________________________
 			________________________________________________________
-			Now inside Workout: abs
+			Now inside workout 1 : abs
 			________________________________________________________
 			________________________________________________________
 			You have no exercises.
 			________________________________________________________
 			________________________________________________________
-			New exercise added: [ ] pushups | 5 sets of 20 reps
+			New exercise added to workout 1 : [ ] pushups | 5 sets of 20 reps
 			________________________________________________________
 ________________________________________________________
 Back to Main View

@@ -4,16 +4,16 @@
 - [Quick Start](#quick-start)
 - [Features](#features)
   1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
-  2. [Show all workouts: `list`](#2-show-all-workouts-list)
-  3. [Deleting a workout: `delete`](#3-deleting-a-workout-delete)
-  4. [Adding an exercise to a workout: `add`](#4-adding-an-exercise-to-a-workout-add)
-  5. [Mark an exercise done: `done`](#5-mark-an-exercise-done-done)
-  6. [Editing an exercise in a workout: `edit`](#6-editing-an-exercise-in-a-workout-edit)
-  7. [Show all exercises from a workout: `display`](#7-show-all-exercises-from-a-workout-display)
-  8. [Removing an exercise from a workout: `remove`](#8-removing-an-exercise-from-a-workout-remove)
-  9. [Searching for workouts and exercises: `search`](#9-searching-for-workouts-and-exercises-search)
-  10. [Entering into a Workout: `enter`](#10-entering-into-a-workout-enter)
-  11. [Exiting from a workout: `back`](#11-exiting-from-a-workout-back)
+  2. [Entering into a Workout: `enter`](#2-entering-into-a-workout-enter)
+  3. [Exiting from a workout: `back`](#3-exiting-from-a-workout-back)
+  4. [Show all workouts: `list`](#4-show-all-workouts-list)
+  5. [Deleting a workout: `delete`](#5-deleting-a-workout-delete)
+  6. [Adding an exercise to a workout: `add`](#6-adding-an-exercise-to-a-workout-add)
+  7. [Mark an exercise done: `done`](#7-mark-an-exercise-done-done)
+  8. [Editing an exercise in a workout: `edit`](#8-editing-an-exercise-in-a-workout-edit)
+  9. [Show all exercises from a workout: `display`](#9-show-all-exercises-from-a-workout-display)
+  10. [Removing an exercise from a workout: `remove`](#10-removing-an-exercise-from-a-workout-remove)
+  11. [Searching for workouts and exercises: `search`](#11-searching-for-workouts-and-exercises-search)
   12. [Recommend a workout: `recommend`](#12-recommend-a-workout-recommend)
   13. [Clearing all workouts or exercises: `clear`](#13-clearing-all-workouts-or-exercises-clear)
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
@@ -108,7 +108,64 @@ New workout created: leg day finish by: 21 Oct 2021
 ________________________________________________________
 ```
 
-### 2. Show all workouts: `list`
+### 2. Entering into a Workout: `enter`
+
+Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
+in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
+
+Entering a workout also confines your search results to within the particular workout you are in.
+
+
+Format: `enter [WORKOUT_INDEX]`
+
+Example of usage:
+
+`enter 2` = enter into the workout with index 2
+
+Expected outcome:
+```
+enter 2
+			________________________________________________________
+			Now inside workout 2 : leg day finish by: 2 Oct 2021
+			________________________________________________________
+```
+
+
+Tip: You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
+You may also add, remove, edit exercises in workout 2 while you are in workout 1.
+For example,
+```
+enter 1
+			________________________________________________________
+			Now inside workout 1 : leg day finish by: 2 Oct 2021
+			________________________________________________________
+add sit ups, 4 30, 2
+			________________________________________________________
+			New exercise added to workout 2 : [ ] sit ups | 4 sets of 30 reps
+			________________________________________________________
+enter 2
+			________________________________________________________
+			Now inside workout 2 : full body
+			________________________________________________________
+```
+
+### 3. Exiting from a workout: `back`
+
+Allows you to exit back into the main view once you have entered into a workout.
+
+Format `back`
+
+Expected outcome:
+
+```
+back
+________________________________________________________
+Back to Main View
+________________________________________________________
+			
+```
+
+### 4. Show all workouts: `list`
 
 Shows you all the workouts in the current list of workouts, in **sorted** order: 
 workouts with deadlines (in ascending order), then workouts without deadlines.
@@ -132,9 +189,11 @@ Workout list:
 ________________________________________________________
 ```
 
-### 3. Deleting a workout: `delete`
+### 5. Deleting a workout: `delete`
 
 Deletes a workout from the list of workouts
+Tip: If you are in Workout Mode and you delete the workout that you are currently in, you will automatically be returned 
+to Main Mode.
 
 Format: `delete [WORKOUT_INDEX]`
 
@@ -153,12 +212,14 @@ Deleted workout: abs finish by: 25 Dec 2021
 ________________________________________________________
 ```
 
-### 4. Adding an exercise to a workout: `add`
+### 6. Adding an exercise to a workout: `add`
 
 Adds an exercise to a specified workout
 
-Format (in main mode): `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
-Format (in workout mode): `add [EXERCISE_DESCRIPTION], [SETS] [REPS]`
+Format 
+- Main Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
+- Workout Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS]`
+
 * Note the comma and space `, `  separating the command arguments
 * Sets and reps are entered in the form of two numbers separated by a space 
 
@@ -168,9 +229,7 @@ Usage examples:
 
 - Main mode: `add squats, 5 10, 2`  = squats, 5 sets of 10 reps, add to workout 2
 
-- Workout mode:
-`enter 1`
-`add lunges, 4 8` = lunges, 4 sets of 8 reps, add to workout 1
+- Workout Mode: `enter 1` then `add lunges, 4 8` = lunges, 4 sets of 8 reps, add to workout 1
 
 Expected outcome (main mode):
 
@@ -181,7 +240,7 @@ New exercise added: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
 ```
 
-Expected outcome (workout mode):
+Expected outcome (Workout Mode):
 ```
 enter 1
 			________________________________________________________
@@ -193,21 +252,21 @@ add lunges, 4 8
 			________________________________________________________
 ```
 
-### 5. Mark an exercise done: `done`
+### 7. Mark an exercise done: `done`
 
 Marks an exercise from a specified workout as done
 
 Format 
 - Main mode: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
-- Workout mode: `done [EXERCISE_INDEX]`
+- Workout Mode: `done [EXERCISE_INDEX]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Usage example:
 
 - Main mode: `done 1, 2` = mark exercise 1 from workout 2 as done
-- Workout mode: `enter 1` then `done 1` = mark exercise 1 from workout 1 as done
+- Workout Mode: `enter 1` then `done 1` = mark exercise 1 from workout 1 as done
 
 Expected outcome (main mode):
 
@@ -217,7 +276,7 @@ ________________________________________________________
 Completed: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
-Expected outcome (workout mode): 
+Expected outcome (Workout Mode): 
 ```
 enter 1
 			________________________________________________________
@@ -225,25 +284,25 @@ enter 1
 			________________________________________________________
 done 1
 			________________________________________________________
-			Completed: [X] lunges | 3 sets of 8 reps
+			Completed exercise in workout 1 : [X] lunges | 3 sets of 8 reps
 			________________________________________________________
 
 ```
 
-### 6. Editing an exercise in a workout: `edit`
+### 8. Editing an exercise in a workout: `edit`
 
 Edits an exercise in a specified workout
 
 Format
-- Main mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
-- Workout mode: `edit [EXERCISE_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+- Main Mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+- Workout Mode: `edit [EXERCISE_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Usage example:
-- Main mode: `edit 2, 1, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
+- Main Mode: `edit 2, 1, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
 sets of `4` and new reps of `12`
-- Workout mode: `enter 1` then `edit 2, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
+- Workout Mode: `enter 1` then `edit 2, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
   sets of `4` and new reps of `12`
 
 Expected outcome:
@@ -254,18 +313,18 @@ The edited exercise: [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 ```
 
-### 7. Show all exercises from a workout: `display`
+### 9. Show all exercises from a workout: `display`
 
 Shows you all the exercises in a specified workout
 
 Format
-- Main mode: `display [WORKOUT_INDEX]`
-- Workout mode: `display`
+- Main Mode: `display [WORKOUT_INDEX]`
+- Workout Mode: `display`
 
-Usage example:
+Examples of usage:
 
-- Main mode: `display 1` = Show all exercises from workout 1
-- Workout mode: `enter 1` then `display` = show all exercises from workout 1
+- Main Mode: `display 1` = Show all exercises from workout 1
+- Workout Mode: `enter 1` then `display` = show all exercises from workout 1
 
 Expected outcome:
 
@@ -278,11 +337,13 @@ Exercises in leg day
 ________________________________________________________
 ```
 
-### 8. Removing an exercise from a workout: `remove`
+### 10. Removing an exercise from a workout: `remove`
 
 Removes an exercise from a specified workout
 
-Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+Format
+- Main Mode: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+- Workout Mode: `remove [EXERCISE_INDEX]`
 
 ⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
 
@@ -291,9 +352,10 @@ Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
 Examples of usage:
 
-`remove 1, 1` = remove exercise 1 from workout 1
+- Main Mode: `remove 1, 1` = remove exercise 1 from workout 1
+- Workout Mode: `enter 1` then `remove 1` = remove exercise 1 from workout 1
 
-Expected outcome:
+Expected outcome (Main Mode):
 
 ```
 remove 1, 1
@@ -302,31 +364,51 @@ Removed exercise: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
 ```
 
-### 9. Searching for workouts and exercises: `search`
+Expected outcome (Workout Mode): 
+```
+enter 1
+			________________________________________________________
+			Now inside Workout: legs
+			________________________________________________________
+remove 1
+			________________________________________________________
+			Removed exercise: [ ] squats | 5 sets of 10 reps
+			________________________________________________________
+```
 
-Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.
+### 11. Searching for workouts and exercises: `search`
 
-In order to search by date, you must enter the full date in the format d MMM yyyy.
+Main Mode: 
+- Search by name: Displays workouts or exercises that contain the specified keyword in the workout or exercise name.
+- Search by date: Displays workouts that has the specified date (in the format `DD MMM YYY`) as the workout deadline.
 
-Format: `search [KEYWORD]`
+Workout Mode: 
+- Search by name: Displays exercises that contain the specified keyword in the exercise name, within the particular workout.
 
-Example of usage:
+Format
+- search by name: `search [KEYWORD]`
+- search by date: `search [DD MMM YYYY]`
 
-`search 2 oct 2021` = search for workouts that have the deadline 2 Oct 2021
+Examples of usage:
 
-`search kick` = search for workout names and exercise names that contain "kick"
+- Main Mode: 
+  - `search kick` = search for workouts and exercises that contain "kick" in the description
+  - `search 2 oct 2021` = search for workouts that have the deadline 2 Oct 2021
+- Workout Mode:
+  - `enter 1` then `search kick` = search for exercises within workout 1 
 
-Expected outcome (search by name)
+Expected outcome:
 
+- Main Mode:
 ```
 search kick
 ________________________________________________________
-Matching exercises in (1) leg day
+Matching exercises in (1) leg day finsih by: 2 Oct 2021
 1. [X] kickbacks | 4 sets of 12 reps
+Matching exercises in (2) full body
+1. [ ] kickbacks | 2 sets of 10 reps
 ________________________________________________________
 ```
-
-Expected outcome (search by date)
 ```
 search 2 oct 2021
 ________________________________________________________
@@ -335,65 +417,17 @@ Matching workouts:
 ________________________________________________________
 ```
 
-### 10. Entering into a Workout: `enter`
-
-Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
-in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
-
-Format: `enter [WORKOUT_INDEX]`
-
-Example of usage:
-
-`enter 2` = enter into the workout with index 2
-
-### 11. Exiting from a workout: `back`
-
-Allows you to exit back into the main view once you have entered into a workout.
-
-Format `back`
-
-Expected outcome of `enter` and `back`:
-
+- Workout Mode
 ```
-You: list
-
-GetJackd:
-________________________________________________________
-Workout list:
-1. workout2 finish by: 11 Nov 2102
-2. workout3 finish by: 25 Dec 2020
-________________________________________________________
-
-You: enter 1
-
-GetJackd:
+enter 1
 			________________________________________________________
-			Now inside Workout: workout2 finish by: 11 Nov 2102
+			Now inside Workout: leg day finish by: 2 Oct 2021
 			________________________________________________________
-			
-			You: add pushups, 5 20
-			
-			GetJackd:
-
+search kick
 			________________________________________________________
-			New exercise added: [ ] pushups | 5 sets of 20 reps
+			Matching exercises in (1) leg day finish by: 2 Oct 2021
+			1. [X] kickbacks | 4 sets of 12 reps
 			________________________________________________________
-			
-			You: display
-			
-			GetJackd:
-			
-			Exercises in workout2
-			1. [ ] pushups | 5 sets of 20 reps
-			________________________________________________________
-			
-			You: back
-
-GetJackd:
-________________________________________________________
-Back to Main View
-________________________________________________________
-			
 ```
 
 ### 12. Recommend a workout: `recommend`

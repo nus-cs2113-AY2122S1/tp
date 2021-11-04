@@ -2,6 +2,7 @@ package seedu.duke.command.misc;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.data.DeadlineWorkout;
 import seedu.duke.data.Exercise;
@@ -60,6 +61,7 @@ class SearchCommandTest {
 
     @Test
     void executeUserCommand_keywordMatchesWorkoutAndExercise_commandResultMapOnly() {
+        Command.workoutMode = 0;
         createWorkoutWithExercise();
         SearchCommand c = new SearchCommand("O");
         CommandResult result = c.executeUserCommand(workoutList, storage);
@@ -72,6 +74,7 @@ class SearchCommandTest {
 
     @Test
     void executeUserCommand_keywordMatchesWorkoutDeadline_commandResultMapOnly() {
+        Command.workoutMode = 0;
         createDeadlineWorkoutWithExercise();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         String strDate = formatter.format(LocalDate.now());

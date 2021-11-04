@@ -35,7 +35,7 @@ public class AddExerciseCommand extends Command {
             + "\tSets and reps: \"5 10\" - 5 sets of 10 reps\n"
             + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10";
 
-    public static final String MESSAGE_SUCCESS = "New exercise added: %s";
+    public static final String MESSAGE_SUCCESS = "New exercise added to workout %d : %s";
 
     private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
     private final Exercise toAdd;
@@ -76,7 +76,7 @@ public class AddExerciseCommand extends Command {
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, workoutIndex, toAdd));
     }
 
     public int getWorkoutIndex() {

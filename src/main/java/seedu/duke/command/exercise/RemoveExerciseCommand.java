@@ -33,7 +33,7 @@ public class RemoveExerciseCommand extends Command {
             + "\tExercise index - Index of exercise to remove\n"
             + "Example: " + COMMAND_WORD + " 1  - remove exercise 1 from the current workout";
 
-    public static final String MESSAGE_SUCCESS = "Removed exercise: %s";
+    public static final String MESSAGE_SUCCESS = "Removed exercise in workout %d : %s";
     private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
 
     private final int workoutIndex;
@@ -69,7 +69,7 @@ public class RemoveExerciseCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, workoutIndex, toRemove));
         } catch (IndexOutOfBoundsException e) {
             LOGGER.info("Remove exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);

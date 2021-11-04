@@ -31,27 +31,45 @@ public class HelpParser extends Parser {
     private Command prepareHelpMessage(String commandArgs) {
         switch (commandArgs) {
         case DisplayExercisesCommand.COMMAND_WORD:
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(DisplayExercisesCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
             return new HelpCommand(DisplayExercisesCommand.MESSAGE_USAGE_MAIN);
         case ListWorkoutsCommand.COMMAND_WORD:
             return new HelpCommand(ListWorkoutsCommand.MESSAGE_USAGE);
         case RecommendWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(RecommendWorkoutCommand.MESSAGE_USAGE);
         case AddExerciseCommand.COMMAND_WORD:
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(AddExerciseCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
             return new HelpCommand(AddExerciseCommand.MESSAGE_USAGE_MAIN);
         case CreateWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(CreateWorkoutCommand.MESSAGE_USAGE);
         case DeleteWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(DeleteWorkoutCommand.MESSAGE_USAGE);
         case MarkExerciseAsDoneCommand.COMMAND_WORD:
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
             return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE_MAIN);
         case RemoveExerciseCommand.COMMAND_WORD:
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
             return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE_MAIN);
         case EditExerciseCommand.COMMAND_WORD:
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(EditExerciseCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
             return new HelpCommand(EditExerciseCommand.MESSAGE_USAGE_MAIN);
         case ClearCommand.COMMAND_WORD:
             return new HelpCommand(ClearCommand.MESSAGE_USAGE);
         case SearchCommand.COMMAND_WORD:
-            return new HelpCommand(SearchCommand.MESSAGE_USAGE);
+            if (Command.workoutMode != 0) {
+                return new HelpCommand(SearchCommand.MESSAGE_USAGE_WORKOUT_MODE);
+            }
+            return new HelpCommand(SearchCommand.MESSAGE_USAGE_MAIN);
         case EnterWorkoutCommand.COMMAND_WORD:
             return new HelpCommand(EnterWorkoutCommand.MESSAGE_USAGE);
         case ExitWorkoutCommand.COMMAND_WORD:
