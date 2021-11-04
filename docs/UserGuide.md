@@ -114,8 +114,9 @@ create /[location] /[date] /[foreign-currency-ISO-code] /[exchange-rate] /[perso
 ```
 
 All fields are compulsory. Note the following:
+- `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
-- `[foriegn-currency-ISO-code]` Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+- `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
