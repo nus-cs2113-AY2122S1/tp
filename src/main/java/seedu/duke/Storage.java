@@ -185,9 +185,9 @@ public class Storage {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
             promptUserForValidTrip();
+            Ui.printOpenTripMessage(openTrip);
         }
         lastTrip = openTrip;
-        Ui.printOpenTripMessage(openTrip);
         return openTrip;
     }
 
