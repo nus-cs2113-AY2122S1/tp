@@ -174,7 +174,7 @@ public class UpdateParser extends Parser {
 
     private static boolean isUpdateGoalName(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_NAME)
-        && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_NAME);
+                && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_NAME);
     }
 
     private static boolean isUpdateGoalType(String[] parameters) {
