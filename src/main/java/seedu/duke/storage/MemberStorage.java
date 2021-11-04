@@ -7,10 +7,23 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import seedu.duke.Ui;
+import seedu.duke.command.exception.InvalidAddMemberException;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
 public class MemberStorage {
+
+    static String validPhoneNumberRegex = "^[8|9]\\d{7}";
+    static String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
+    static String validGenderRegex = "^[M|F|m|f]";
+
+    static String invalidPhoneNumberErrorExcelMessage = "Invalid phone number found in CSV. Please fix this before running the program again.";
+    static String invalidGenderErrorExcelMessage = "Invalid gender found in CSV.Please fix this before running the program again.";
+    static String invalidNameErrorExcelMessage = "invalid name found in CSV.Please fix this before running the program again.";
+    static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CSV.Please fix this before running the program again.";
+
+
+
 
     /**
      * Sets up the duke members csv file. It will first try to find if the file exists in the current
@@ -32,9 +45,87 @@ public class MemberStorage {
             }
         } else {
             System.out.println("CCA Members file found & loaded");
+            verifyMemberDetails(memberFile);
             loadMemberFile(memberFile, memberList);
         }
     }
+
+    /**
+     * verifies that member details from CSV file are valid
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyMemberDetails(File memberFile) {
+        verifyIndividualFields(memberFile);
+    }
+
+    /**
+     * verifies that individual details from CSV file are valid
+     *
+     * @param memberFile CCAMembers CSV file to read data from.
+     */
+    private static void verifyIndividualFields(File memberFile)  {
+        String name;
+        String studentNumber;
+        String gender;
+        String phoneNumber;
+        try {
+            Scanner memberScanner = new Scanner(memberFile);
+            memberScanner.nextLine();
+            while (memberScanner.hasNextLine()) {
+                String fullMemberDetails = memberScanner.nextLine();
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
+                name = memberDetails[0];
+                verifyMemberName(name);
+                studentNumber = memberDetails[1];
+                verifyMemberStudentNumber(studentNumber);
+                gender = memberDetails[2];
+                verifyMemberGender(gender);
+                phoneNumber = memberDetails[3];
+                verifyMemberPhoneNumber(phoneNumber);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
+        } catch (InvalidAddMemberException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    private static void verifyMemberPhoneNumber(String phoneNumber) throws InvalidAddMemberException {
+        boolean validPhoneNumber = phoneNumber.matches(validPhoneNumberRegex);
+        if (!validPhoneNumber) {
+            throw new InvalidAddMemberException(invalidPhoneNumberErrorExcelMessage);
+        }
+
+    }
+
+    private static void verifyMemberGender(String gender) throws InvalidAddMemberException {
+        boolean validGender = gender.matches(validGenderRegex);
+        if (!validGender) {
+            throw new InvalidAddMemberException(invalidGenderErrorExcelMessage);
+        }
+
+    }
+
+    private static void verifyMemberStudentNumber(String studentNumber) throws InvalidAddMemberException {
+        boolean validStudentNumber = studentNumber.matches(validStudentNumberRegex);
+        if (!validStudentNumber) {
+            throw new InvalidAddMemberException(invalidStudentNumberErrorExcelMessage);
+        }
+    }
+
+    private static void verifyMemberName(String name) throws InvalidAddMemberException {
+        boolean nameEmpty = (name == null || name.trim().isEmpty());
+        boolean nameContainDigits = name.matches(".*\\d.*");
+        boolean validName = !nameEmpty && !nameContainDigits;
+        if (!validName) {
+            throw new InvalidAddMemberException(invalidNameErrorExcelMessage);
+        }
+    }
+
 
     /**
      * Loads the duke member file and writes to the current member list. Only happens on start-up.
