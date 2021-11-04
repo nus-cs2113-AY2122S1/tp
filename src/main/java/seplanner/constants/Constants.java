@@ -38,14 +38,23 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS = "Incorrect flags passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTCOMMAND = "Incorrect command passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS = "Missing arguments.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Please input a command. Type 'help' for more information.";
+
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTFOUND = "University not found.";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNIDUPLICATE = "This university has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED = "This university is not in your selected list.";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNINOTAVAILABLE = "This university does not exist.";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE = "This university index does not exist.";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNIINVALID = "Input is either university index or university name";
+
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
-    public static final String ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND = "Mapping not found.";
-    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Empty input.";
-    public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD = "This module has already been added.";
-    public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODDUPLICATE = "This module has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED = "This module is not in your selected list.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODNOTAVAILABLE = "This module does not exist.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODINDEXNOTAVAILABLE = "This module index does not exist.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODINVALID = "Input is either module index or module code";
+
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
-    public static final String ERRORMSG_PARSEEXCEPTION_INVALIDUNI = "This university is not in your selected list.";
     public static final String ERRORMSG_PARSEEXCEPTION_NOMAPPING = "This university has no available mappings.";
     public static final String ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING = "Mapping with this index does not exist.";
 

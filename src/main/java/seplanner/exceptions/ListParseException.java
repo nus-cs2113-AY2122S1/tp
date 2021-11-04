@@ -3,6 +3,7 @@ package seplanner.exceptions;
 import java.text.ParseException;
 
 public class ListParseException extends ParserClassException {
+    boolean isPrintFormat;
     private final String format = "list /muni --------------------------- "
             + "Display all universities from the master list\n"
             + "list /suni ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display all the universities and their module "
@@ -18,8 +19,8 @@ public class ListParseException extends ParserClassException {
      * @param s           the detail message
      * @param errorOffset the position where the error is found while parsing.
      */
-    public ListParseException(String s, int errorOffset) {
-        super(s, errorOffset);
+    public ListParseException(String s, int errorOffset, boolean isPrintFormat) {
+        super(s, errorOffset, isPrintFormat);
     }
 
     public String getFormat() {

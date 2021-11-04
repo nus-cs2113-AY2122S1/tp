@@ -25,7 +25,7 @@ public class ListCommandParser {
 
         if (arguments.trim().length() == 0) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new ListParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new ListParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         switch (arguments.trim()) {
         case Constants.FLAG_MASTER_UNIVERSITYLIST:
@@ -42,7 +42,7 @@ public class ListCommandParser {
             return new ListModCommand(moduleSelectedList, ListType.SELECTED);
         default:
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new ListParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new ListParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
     }
 }

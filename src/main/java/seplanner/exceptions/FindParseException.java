@@ -16,8 +16,8 @@ public class FindParseException extends ParserClassException {
      * @param s           the detail message
      * @param errorOffset the position where the error is found while parsing.
      */
-    public FindParseException(String s, int errorOffset) {
-        super(s, errorOffset);
+    public FindParseException(String s, int errorOffset, boolean isPrintFormat) {
+        super(s, errorOffset, isPrintFormat);
     }
 
     public String getFormat() {
