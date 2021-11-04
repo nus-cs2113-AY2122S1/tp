@@ -2,6 +2,14 @@
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
+   1. [Set Content](#31-set-content-content)
+   2. [Open Game](#32-open-game-game)
+      1. [Word Mode Game](#321-word-limit-game)
+      2. [Time Mode Game](#322-time-limit-game)
+   3. [View history](#33-view-past-records-history)
+   4. [Clear history](#34-clear-past-records-clear)
+   5. [Display Summary](#35-view-summary-of-game)
+   6. [Save Data](#36-saving-the-data)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -80,6 +88,9 @@ Format: `game -GAME_MODE [GAME_LIMIT] [-c] [-sn]`
   * `word` for game in Word Limit Mode 
   * `time` for game in Time Limit Mode
 #### 3.2.1 Word Limit Game
+  In a Word-Limit game, user needs to specify the total number of words 
+they want to type. Game will terminate once they finish typing the specified 
+number of words. 
 * Format: `game -word [WORD_LIMIT] [-c] [-sn]`
 * Example: `game -word`
 * ```
@@ -89,10 +100,18 @@ Format: `game -GAME_MODE [GAME_LIMIT] [-c] [-sn]`
      | Timer will start once you entered "start":
   start
      | Lorem Ipsum is simply dummy
+  lorem ipsum is simply dummy
+     | Your progress:5/10
   ```
 * Exit: `Exit` allows user to terminate the current game.
 
 #### 3.2.2 Time Limit Game
+In a Time-Limit Game, user needs to specify the duration 
+they want to type. Timer will stop once the duration is reached
+and terminates the game at the same time. 
+>**NOTE**: 
+> The time limit that user inputs needs to be a positive integer that represents time in seconds. 
+> It also needs to be multiple of 30. 
 * Format: `game -time [TIME_LIMIT] [-c] [-sn]`
 * Example: `game -time`  
 * ```
@@ -111,6 +130,7 @@ Format: `game -GAME_MODE [GAME_LIMIT] [-c] [-sn]`
  without the "enter limit" prompt.
   > **NOTE**:
   > if you want to specify GAME_LIMIT, it needs to be right after the GAME_MODE argument.
+  > If the GAME_LIMIT entered is invalid, game will still start but with the "enter limit" prompt.
 
 <!-- -->
 
@@ -130,7 +150,7 @@ game -time -sn
 30
      | Lorem Ipsum is simply dummy text of the printing and 
 ```
-Example 3: `game -word -c`  
+Example 3: `game -word 20 -sn -c`  
 Expected outcome: 
 ```
 (\ 
@@ -150,7 +170,7 @@ Expected outcome:
 <!-- --> 
 
 
-### View past records: `history`
+### 3.3 View past records: `history`
 View past game records.  
 Format: `history -g GAME_MODE [-n NUMBER_OF_RECORDS] [-h]`
 * NUMBER_OF_RECORDS defaults to all records if not provided
@@ -176,7 +196,7 @@ Number of Correct Words: 30/30|100.00%
 Mistakes: No words typed wrongly.
 ==================================================================
 ```
-### Clear past records: `clear` 
+### 3.4 Clear past records: `clear` 
 Clear all past game records
 Format: `clear [-g GAME_MODE] [-h]`
 * GAME_MODE defaults to `all` if not provided
@@ -198,7 +218,7 @@ clear -g time
 Successfully cleared Time-limited game records.
 ```
 
-### View summary of game
+### 3.5 View summary of game
 View summary of a just-played game.
 Typists automatically generates and displays the summary after a game ends.   
 The summary consists of the following fields:
@@ -223,7 +243,7 @@ Number of Wrong Words: 0/30|0.00%
 Number of Correct Words: 30/30|100.00%
 Mistakes: No words typed wrongly.
 ```
-### Saving the data
+### 3.6 Saving the data
 Typists automatically stores the game records (and any changes to them) into text files.
 
 
@@ -233,47 +253,8 @@ Gamers should not edit the data it will manipulate the integrity of the records.
 In the event where the data is edited and the wrong format is inputted, the file contents will be cleared, 
 hence losing all the game data.
 
-
-
-### `Keyword` - Describe action
-
-List of the keywords are shown below:
-
-`content`-Set the content
-
-`game -word`-Enter a word-limited game mode
-
-`game -word -c`-Enter a word-limited game mode with content setting
-
->Exit word-limited game mode command: `Exit`
-
-`time`-Enter a time-limited game mode
-
-`error`-Enter a error detecting game mode
-
-`bye`-Exit the program.
-
 ### Showing summary of a game
 Statistics of game is shown automatically after a game is finished.
-
-## Example of usage:
-
-```
-game -word
-     | Enter how many words you want the game to run: 
-5
-     | lorem ipsum is simply dummy 
-lorem ipsum is simply dummy
-     | Your progress:5/5
-```
-```
-game -time 30 -sn
-     | lorem ipsum is simply dummy text of the printing and 
-lorem ipsum is simply dummy text of the printing and 
-     | typesetting imply dummy text of the printing and typesetting industry 
-typesetting imply dummy text of the printing and typesetting industry
-     | Timer's UP!
-```
 
 
 
@@ -285,8 +266,11 @@ typesetting imply dummy text of the printing and typesetting industry
 
 ## Command Summary
 
-| Feature  | Command |
+| Command  | Action |
 | ------------- | ------------- | 
-| Start Word Limit Game| `game -word [-c]` | 
-| Start Time Limit Game | `game -time TIME_LIMIT [-sn] [-c]`
-| Get History | `history -h`|
+|`content`| Set the content
+|`game -word [WORD_LIMIT] [-sn] [-c]` | Start a word-limited game
+|`game -time [TIME_LIMIT] [-sn] [-c]` | Start a time-limited game 
+|`history -h` | Get history
+|`history -g GAME_MODE [-n NUMBER_OF_RECORDS] [-h]` | Clear history
+|`bye`| Exit the program
