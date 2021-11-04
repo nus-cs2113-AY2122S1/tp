@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
-    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the habit index. Eg: h/1";
-    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
 
     /*
      * NOTE : ==================================================================

@@ -249,11 +249,11 @@ public class Goal {
         if (habitListSize == 0) {
             return "Not Applicable";
         } else {
-            int sum = 0;
+            double sum = 0;
             for (Habit habit : this.habitList) {
                 sum += habit.computeHabitCompletionRate();
             }
-            return sum / getHabitListSize() + "%";
+            return String.format("%.2f", sum / getHabitListSize()) + "%";
         }
     }
 
@@ -296,16 +296,16 @@ public class Goal {
      *
      * @return ArrayList containing a list of all completion rates.
      */
-    public ArrayList<Integer> getCompletionRates() {
-        ArrayList<Integer> completionRates = new ArrayList<>();
-        int sum = 0;
-        int completionRate;
+    public ArrayList<Double> getCompletionRates() {
+        ArrayList<Double> completionRates = new ArrayList<>();
+        double sum = 0;
+        double completionRate;
         for (Habit habit : this.habitList) {
             completionRate = habit.computeHabitCompletionRate();
             completionRates.add(completionRate);
             sum += completionRate;
         }
-        int averageCompletionRate = sum / getHabitListSize();
+        double averageCompletionRate = sum / getHabitListSize();
         completionRates.add(averageCompletionRate);
         return completionRates;
     }
