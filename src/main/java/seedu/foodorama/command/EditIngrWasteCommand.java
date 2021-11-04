@@ -36,7 +36,7 @@ public class EditIngrWasteCommand extends Command {
             LOGGER.log(Level.INFO, "Parameter is String '" + ingr + "'");
             ingrIndex = IngredientList.find(ingr);
         }
-        if (ingrIndex == -1) {
+        if (!isNumber(ingr) & ingrIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
