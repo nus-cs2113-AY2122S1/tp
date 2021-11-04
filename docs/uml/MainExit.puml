@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include SequenceStyle.puml
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+endbox
+
+
+autoactivate on
+
+mainframe sd Exit
+
+ -> Terminus: exit()
+  Terminus -> StorageManager:setDisabled(false)
+  return
+  Terminus -> StorageManager:save(moduleManager);
+  return
+ return
+
+@enduml

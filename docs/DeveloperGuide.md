@@ -146,15 +146,50 @@ Import the coding style xml file into your IntelliJ IDEA.
 ## 3. Design
 
 ### 3.1 Architecture
+This section will provide insight to the general overview of **TermiNUS**'s architecture.
+
+![](attachments/ArchitectureDiagram.png)  
+
+The Architecture Diagram above describes the high-level design of **TermiNUS** and 
+how the different components interact with each other. Below we will provide a quick overview of 
+each component involved.  
+
+The `Terminus` class is the main entry point of the application and contains the `main` method used 
+by Java as the starting function.
+
+The `Terminus` class main responsibilities include:
+- Initializing various components required for the program to run.
+- Requesting the specific modules to load data from file into the program.
+- Performing any data entry saving and clean up when the program is going to terminate.
+
+The rest of **TermiNUS** consists of 7 other components:
+- `UI`: Manages the input and output of **TermiNUS**.
+- `Parser`: Parses the user inputs and their arguments.
+- `Command`: Execute the required commands and store the output.
+- `Module`: Manage the multiple different types of `Content`
+- `Content`: Stores and Provides user information.
+- `Storage`: Reads the data, and writes data back to the hard disk.
+
+Below contains some example sequence diagram to help illustrate the general program flow and 
+how the many object interact with one another in `TermiNUS`.  
+
+The first diagram shows the constructor of `Terminus` class running to initialize essential Modules 
+such as `UI` and `Parser`.  
+
+![](attachments/Terminus.png)  
+
+The next sequence diagram shows the loading of user data into `Terminus`.  
 
 ![](attachments/MainInit.png)  
 
-Initialization of all the classes required for Terminus class to run
+The next sequence diagram shows an instance of command execution.
 
 ![](attachments/MainLogic.png)
 
-Main loop logic of Terminus
+The next sequence diagram show the termination of `Terminus`  
 
+![](attachments/MainExit.png)
+  
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
 
@@ -179,9 +214,9 @@ each representing a specific type command parser. The `CommandParser` will recei
 returning the according `Command` object back. 
 
 The `CommandParser` implements the following functionality:
-- Parsing the command string and giving the respective `Command` object 
-- Keeps track of the workspace
-- Provides functionality to list all commands for the help `Command`
+- Parsing the command string and giving the respective `Command` object. 
+- Keeps track of the workspace.
+- Provides functionality to list all commands for the help `Command`.
 
 
 ### 3.4 Command Component
@@ -191,11 +226,13 @@ The Command Component `Command` class, `CommandResult` class and multiple `XYZCo
 each representing a specific type of command. Each `Command` will `parseArguments` and set them 
 to private variables, and then `execute` would run specific operation specified by `XYZCommand`.
 The `Command` would then modify the required changes in `ModuleManager` and 
-print the required to be output to `Ui` before returning a `CommandResult`.   
+store the resulting output message in `CommandResult`.   
 
-The `CommandResult` will contains certain attributes to indicate if the `Terminus` loop should be 
-terminated or if the `CommandParser` might require changing through the `additionData` attribute.
-The `CommandParser` maybe used to change workspace.
+The `CommandResult` will contains certain attributes that will indicate certain operations:
+- Contains a `message` to be printed as the output for the `Command`.
+- Contains the `newCommandParser` required to switch workspaces.
+- Indicate the if file operations are required and the corresponding actions.
+- Tracks if the program should terminate.
 
 
 ### 3.5 Module Component
@@ -208,9 +245,9 @@ The `NusModule` consist of `ContentManager` which help to manage `Content`.
 The `ContentManager` accepts a `Content` type generic which is from the Content Component
 
 The `ModuleManager` implements the below functionality:
-- add, delete or retrieve a specific `NusModule`
-- list all module names
-- grants access to the different types of content stored by `NusModule`
+- Add, delete or retrieve a specific `NusModule`.
+- List all module names.
+- Grants access to the different types of content stored by `NusModule`.
 
 ### 3.6 Content Component
 ![](attachments/Content.png)
@@ -219,14 +256,12 @@ The Content Component consist of objects such as `Link`, `Question` and `Note`
 which inherit from the abstract `Content` class. The `ContentManager` allows a generic 
 `<T extends Content>` which must belong to the `Content` type or its children. The 
 `ContentManager` manages an `ArrayList` of Content type and provide the following functionality:
-
-
-- adding of any Content type
-- removing any Content
-- accessing the Content and the inner data attribute
-- getting the total number of content
-- listing all contents
-- accessing the arraylist of contents
+- Adding of any Content type.
+- Removing any Content.
+- Accessing the Content and the inner data attribute.
+- Getting the total number of content.
+- Listing all contents.
+- Accessing the arraylist of contents.
 
 ### 3.7 Active Recall Component
 ![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
@@ -468,39 +503,48 @@ The `ModuleWorkspaceCommandParser` is a special `CommandParser` that sets the `m
 attribute for all the subsequent commands, so that they become aware of what module they are 
 modifying.
 
-To explain the concept, more clearly we will be explaining how the  input from the user
+To explain the concept, more clearly we will be explaining how the input from the user
 `go Module note add "Content Name" "Content"` will be executed.
 
 ![](attachments/CommandExecution.png)
 
 **Step 1:** After receiving the user input in `Terminus`, `MainCommandParser` is called to parse the input 
 with the `parseCommand` function which return the specific `Command` class. In this case `GoCommand` 
-is returned. It will then call the `GoCommand`'s `execute` function to run the command. 
-Note the remaining arguments is `Module note add "Content Name" "Content"`
+is returned. The Command Parsers function by stripping commands down layer by layer. Note the 
+remaining arguments is `Module note add "Content Name" "Content"`. The `GoCommand` will execution 
+will be shown in `Go Execution` below.
 
-**Step 2:** The `GoCommand` validates the Module name stored as the `arguments` attribute of 
+![](attachments/GoCommandExecution.png)
+
+**Step 2:** The `GoCommand` executes and validates the module name stored as the `moduleName` attribute of 
 the `GoCommand` and sets the workspace of the stored `commandMap` with the value of the module name.
 This is done so via the `setWorkspace` function, and for this scenario the workspace for
-`ModuleWorkspaceCommandParser` is set. 
-Note the remaining arguments is `note add "Content Name" "Content"` and the module name is `Module`
+`ModuleWorkspaceCommandParser` is set. Note the remaining arguments is 
+`note add "Content Name" "Content"` and the module name is `Module`.
 
 **Step 3:** Similar to step 1 but with a different `CommandParser`, the 
 `ModuleWorkspaceCommandParser` parses the remaining arguments from `GoCommand` as a command 
 and sets the `NoteCommand`'s `moduleName` attribute to the value of the module name stored in its 
-workspace. It then executes the `NoteCommand` `execute` function. 
+workspace. It then runs the `NoteCommand` `execute` function. 
 Note the remaining arguments is `add "Content Name" "Content"` and the module name is `Module`
 > 📝 **Note:** If the remaining arguments is empty, `ModuleWorkspaceCommandParser` will be stored 
 > inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its 
-> `commandParser` with `ModuleWorkspaceCommandParser`, changing the workspace.
+> `commandParser` with `ModuleWorkspaceCommandParser`, changing the workspace. This would be the 
+> same as running the command `go Module` without any further arguments.
+
+
+![](attachments/NoteCommandExecution.png)
 
 **Step 4:** Similar to step 1, the `NoteCommand` `setsModule` for the `NoteCommandParser` that is 
 stored in the `commandMap` attribute and parses the remaining arguments 
 `add "Content Name" "Content"` which results in a `AddNoteCommand`. The `execute` function of 
 `AddNoteCommand` performs the needed modification to the `NusModule` for the module with the name 
-`Module`. The `execute` function then returns a `CommandResult` that is propagated to `Terminus`.
+`Module`(This is not shown to prevent confusion). The `execute` function then returns 
+a `CommandResult` that is propagated to `Terminus`.
 > 📝 **Note:** If the remaining arguments is empty, `NoteCommandParser` will be stored
 > inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its
-> `commandParser` with `NoteCommandParser`, changing the workspace.
+> `commandParser` with `NoteCommandParser`, changing the workspace. This would be the
+> same as running the command `go Module note` without any further arguments.
 
 #### 4.3.2 Design considerations
 This section shows the design considerations that were taken into account when implementing 
@@ -516,7 +560,7 @@ Custom commands and Command Parsers should be easy for others to implement.
 
 Eventually the team decide to go with the second implementation, as we require multi-level 
 workspaces and would like to create our own workspace for each feature. Aside from that the 
-`Command` provide common functionality that many commands need hence reducing repetition of code.
+`Command` provides common functionality that many commands need hence reducing repetition of code.
 
 
 ### 4.4 Conflict Manager Implementation
@@ -795,10 +839,42 @@ You may monitor your Codecov progress in your pull request if you successfully p
 ## Appendix A: Product Scope
 
 
-## Appendix B: User Stories
+## Appendix B: User Stories  
+
+| Version | As a ... | I want to ... | So that I ... |
+|---------|----------|---------------|---------------|
+| 1.0 | disorganized student | be able to store my zoom links somewhere|  can easily view my links when required.|
+| 1.0 | student |  be able to retrieve my zoom links easily| can easily find them when required.|
+| 1.0 | student | be able to remove zoom links from my regular schedule | can fix any finished lessons. |
+| 1.0 | student |  be able to add notes taken during lecture| do no need to manage it physically myself.|
+| 1.0 | student | be able to delete my notes | can re-organize information taken down by me.|
+| 1.0 | student | be able to view the notes taken during lecture | can refer to them easily.|
+| 1.0 | student | be able to exit the app properly | can shut down my computer. |
+| 1.0 | student |  view all available commands in the app | know what commands are there in the application.|
+| 1.0 | student |  store my data persistently | can use the application properly. |
+| 2.0 | organised student |  categorize my notes to specific modules | can extract information only from that module I specified.|
+| 2.0 | learned student | add questions and answers | can view them later.|
+| 2.0 | student | be able to view my lessons for the day | can check my schedule for that day.|
+| 2.0 | student |  be reminded when my next class is |  would not miss any class accidentally.|
+| 2.0 | student | be able to extract the notes into a pdf format | can view on my phone outside of the app.|
+| 2.0 | student | be able to view my questions and answers | can revise on my module. |
+| 2.0 | student |  be able to organize my questions and answers into different topics | can find what I want easily.|
+| 2.0 | student | be able to delete my questions and answers | can delete the ones that are irrelevant. |
+| 2.0 | student | be able to extract information from one computer to the other | am able to sync information between multiple devices. |
+| 2.0 | student |  be able to create categories for my notes | can organize my notes better. |
+| 2.0 | student |  ensure that my timetables have no clashes | can have exams are on different timings / days.|
+| 2.0 | student |  edit a text file instead of within a terminal for lengthy texts | can use my favourite text editor to edit instead. |
+| 2.0 | student | view changes edited in the saved text file on the terminal | don't have to restart the program. |
+| 2.0 | student | be able to view my lessons for the week | can check my schedule for that week. |
 
 
-## Appendix C: Non Functional Requirements
+## Appendix C: Non Functional Requirements  
+
+1. The application should work on any _major operating systems_ (OS) such as Windows,Linux and macOS that have `Java 11` installed.
+2. Users with fast typing speed should be able to add and remove content more easily and faster as compared to using mouse.
+3. The application should be easy to learn and use with the User Guide and/or Developer Guide.
+4. The application should be responsive to user input.
+
 
 
 ## Appendix D: Glossary

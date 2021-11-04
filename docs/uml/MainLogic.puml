@@ -1,35 +1,73 @@
 @startuml
-participant ":Terminus" as Terminus
-participant ":Ui" as Ui
-participant ":CommandParser" as CommandParser
-participant ":ModuleStorage" as ModuleStorage
-participant ":ModuleManager" as ModuleManager
+!include SequenceStyle.puml
 
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "UI" UI_BOX_COLOR
+participant ":Ui" as Ui
+endbox
+box "Parser" PARSER_BOX_COLOR
+participant ":CommandParser" as CommandParser PARSER_COLOR
+endbox
+box "Command" COMMAND_BOX_COLOR
+participant ":Command" as Command COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+endbox
 autoactivate on
 
 -> Terminus: run()
-  ref over Terminus, Command: start
+Terminus -> Terminus: initialize()
+ref over Terminus,CommandParser: Initialization
+return
   Terminus -> Terminus : runCommandsUntilExit()
     loop True
       Terminus -> Ui : requestCommand ()
       return String
-      Terminus -> CommandParser: parseCommand(command)
-      return Command
-      Terminus -> Command : execute(ui, moduleManager)
+      Terminus -> Terminus: handleUserInput(input)
+        Terminus -> CommandParser: parseCommand(input)
+        return Command
+        Terminus -> Command : execute(moduleManager)
         create CommandResult
         Command -> CommandResult
-        return
+        return CommandResult
      return CommandResult
-      break isExitCommand == true
-      note over Terminus, CommandResult : Breaks out of loop and Returns runCommandsUntilExit()
+   return CommandResult
+      break commandResult.isExit() == true
+        note over Terminus, CommandResult : Breaks out of loop and Returns runCommandsUntilExit()
       end
-     opt result.getAdditionalData() != null
-      Terminus -> CommandResult: result.getAdditionalData()
-      return CommandParser
-      Terminus -> CommandParser: getWorkspace()
-      return String
-     end
+      Terminus -> Terminus: handleCommandResult(commandResult)
+        alt commandResult.getNewCommandParser() != null
+          Terminus -> CommandResult: getNewCommandParser()
+          return CommandParser
+          Terminus -> Ui:printParserBanner(parser, moduleManager)
+          return
+        else else
+          Terminus -> Ui:printSection(commandResult.getMessage())
+          return
+        end
+      return
+      Terminus -> Terminus: handleStorage(commandResult)
+        opt commandResult.hasChange() == true
+          Terminus -> StorageManager: executeCommandResult(moduleManager, commandResult)
+          return
+        end
+        Terminus -> StorageManager: updateMainJsonFile(moduleManager)
+        return
+      return
+      destroy CommandResult
     end
-  return
-
+    return
+        Terminus -> Terminus :exit()
+        ref over Terminus,StorageManager: Exit
+        return
+    return
+destroy Terminus
+destroy Ui
+destroy CommandParser
+destroy Command
+destroy StorageManager
 @enduml
