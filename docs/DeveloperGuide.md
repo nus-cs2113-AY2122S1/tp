@@ -20,8 +20,11 @@
   
 ## Introduction
 
-**CCA Manager** is a simple and easy to use command-line based application aimed to assist you, a CCA manager, to easily add, delete or alter information about your CCA members. 
-Moreover, **CCA Manager** also allows you to perform its functions on any training-related activities you may have in order to help you organise your CCA's timetable.
+CCA Manager is a **simple and easy to use** organisational planner for CCAs (Co-Curricular Activities) in NUS. It is 
+designed specifically for students who are key appointment holders of such CCAs. Features include **storing and tracking
+of information** on CCA members, training schedules and attendance records which can be accessed quickly via a Command
+Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
+improving other aspects of the CCA.
 
 **CCA Manager** is written in `Java 11` and designed with OOP (Object Oriented Programming) as a guideline to help design a modular and organized structure for the application.
 
