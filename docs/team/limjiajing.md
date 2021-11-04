@@ -56,6 +56,7 @@ for code to have less coupling.
   `clear past records`and `automatic storage`.
 * Developer Guide
   * Added implementation details for the proposed `view statistics` feature.
+
 #### Project management
 * Assigned issues created during practical examination dry-run to teammates responsible for those parts.
 * Wrapped up milestones.
