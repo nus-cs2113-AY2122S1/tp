@@ -119,12 +119,14 @@ public class Ui {
             + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
             + "            #" + System.lineSeparator()
             + "# 12. Editing a Dish/Ingredient Name :                                                             "
-            + "\n#     'edit dish name [DISH_NAME/INDEX] | edit ingr name [INGR_NAME/INDEX]'                         "
+            + "            #" + System.lineSeparator()
+            + "#     'edit dish name [DISH_NAME/INDEX] | edit ingr name [INGR_NAME/INDEX]'                        "
             + "            #" + System.lineSeparator()
             + "# 13. Editing Ingredient Storage : 'edit ingr stored [INGR_NAME/INDEX]'                            "
             + "            #" + System.lineSeparator()
             + "# 14. Editing a Dish/Ingredient Waste :                                                            "
-            + "\n#     'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
+            + "            #" + System.lineSeparator()
+            + "      'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
             + "            #" + System.lineSeparator()
             + "# 15. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
             + "            #" + System.lineSeparator()

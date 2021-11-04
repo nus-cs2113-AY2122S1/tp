@@ -33,7 +33,7 @@ public class AddIngrStoredCommand extends Command {
         } else {
             ingredientIndex = IngredientList.find(ingredient);
         }
-        if (ingredientIndex == -1) {
+        if (!isNumber(ingredient) & ingredientIndex == -1) {
             logger.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
         } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
