@@ -304,6 +304,7 @@ public class PrintManager {
         System.out.println(LINE);
     }
 
+    //@@author kahhe
     /**
      * Prints the excess text from user after 'line' command if it exists.
      *
