@@ -29,11 +29,19 @@ The code written by me (`ashrafjfr`) can be found [here](https://nus-cs2113-ay21
 ### Contributions to UG
 - Implemented the structure with reference from 
   [AddressBook Level 3 User Guide](https://se-education.org/addressbook-level3/UserGuide.html)
-- Added the `Table of Contents` with links to each feature
-- Added documentation for features `view` and `help`
+- Added documentation for `view` feature
+- Added documentation for `help` feature
 
 ### Contributions to DG
 - Added implementation details and sequence diagram for `view` feature
-- Added table of user stories for `User Stories` section.
+
+### Contributions to team-based tasks
+- Updated User Guide (UG) and Developer Guide (DG) documentation that were not specific to any feature:
+   - Updated overall UG and fixed inconsistencies between UG and output from application
+   - Added the `Table of Contents` with links to each feature in the UG
+   - Added table of user stories for `User Stories` section in the DG
+
+### Review/mentoring contributions
+- Reviewed PRs and ensured overall code quality/formatting was up to standard
 
 

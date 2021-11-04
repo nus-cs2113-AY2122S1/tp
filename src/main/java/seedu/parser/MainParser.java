@@ -243,8 +243,8 @@ public class MainParser {
             return new ViewContactCommand(viewedIndex);
         } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
-        } catch (MissingIndexException | NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.MISSING_INDEX);
+        } catch (NumberFormatException | MissingIndexException e) {
+            return new FailedCommand(FailedCommandType.MISSING_INDEX_VIEW);
         }
     }
 
@@ -257,7 +257,7 @@ public class MainParser {
         } catch (IndexOutOfBoundsException e) {
             return new FailedCommand(FailedCommandType.NUM_OUT_OF_BOUND);
         } catch (MissingIndexException | NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.MISSING_INDEX);
+            return new FailedCommand(FailedCommandType.MISSING_INDEX_DELETE);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (InvalidDeleteDetailException e) {

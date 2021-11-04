@@ -184,6 +184,50 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
+    public static void missingIndexViewMessage(int listSize) {
+        String message;
+        if (listSize == 0) {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      view <INDEX>\n"
+                    + "Enter <INDEX> as \"me\" to view personal contact";
+        } else if (listSize == 1) {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      view <INDEX>\n"
+                    + "Enter <INDEX> as 0 or \"me\" (personal contact)";
+        } else {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      view <INDEX>\n"
+                    + "Enter <INDEX> between 0 and " + (listSize - 1) + " or \"me\" (personal contact)";
+        }
+        printDoubleLineMessage(message);
+    }
+
+    //@@author mayankp291
+    public static void missingIndexDeleteMessage(int listSize) {
+        String message;
+        if (listSize == 0) {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
+                    + "Enter <INDEX> as \"me\" to view personal contact";
+        } else if (listSize == 1) {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
+                    + "Enter <INDEX> as 0 or \"me\" (personal contact)";
+        } else {
+            message = "There seems to be missing or invalid index in your request.\n"
+                    + "Please enter command in the following way:\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
+                    + "Enter <INDEX> between 0 and " + (listSize - 1) + ", \"me\" (personal contact) or \"all\"";
+        }
+        printDoubleLineMessage(message);
+    }
+
     //@@author
     public static void invalidNumMessage() {
         String message = "That does not seem to be a number.\n" + "Please provide a number instead.";

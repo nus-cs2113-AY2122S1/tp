@@ -81,7 +81,7 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "rm";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX_DELETE;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -89,7 +89,7 @@ public class MainParserTest {
     @Test
     public void parseDeleteCommand_invalidNumber_expectFailedCommandType() {
         testUserInput = "rm abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX_DELETE;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -267,7 +267,7 @@ public class MainParserTest {
     @Test
     public void parseViewCommand_missingIndex_expectFailedCommandType() {
         testUserInput = "view";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX_VIEW;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
@@ -276,7 +276,7 @@ public class MainParserTest {
     @Test
     public void parseViewCommand_invalidInput_expectFailedCommandType() {
         testUserInput = "view abc";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX;
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_INDEX_VIEW;
         final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
