@@ -110,7 +110,8 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 | Edit a *dish's name* | `edit dish name [DISH_NAME]` |
 | Edit a *dish's wastage* | `edit dish waste [DISH_NAME]` |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
-| View existing *dishes* | `list dish`|
+| View existing *dishes* | `list dish` |
+| Generate a random *dish* name | `rdish` |
 | Add a new *ingredient* | `add ingr [INGR_NAME]` |
 | Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]` |
 | Add *ingredient wastage* | `add ingr waste [INGR_NAME]` |
@@ -525,6 +526,31 @@ Here are the dishes you have:
    Ingredients Linked: None
    Limit: No limit has been set
 You can use command 'add' to add new dishes!
+____________________________________________________________
+```
+
+<br/>
+
+### Generate a random Dish name : `rdish`
+
+Generates a random Dish name from a fixed list of Carbohydrates, Protiens, Sauces and Cooking Methods.
+
+❕ *Tip*:  Useful to give new Dish idea for Restaurant's menu.
+
+Format: `rdish`
+
+* Only requires`rdish`.
+
+Example of usage:
+
+`rdish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here's an idea for a new Dish!
+smoked mustard turkey noodles 
 ____________________________________________________________
 ```
 
