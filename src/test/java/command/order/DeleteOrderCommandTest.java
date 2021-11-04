@@ -37,7 +37,7 @@ public class DeleteOrderCommandTest {
     }
 
     @Test
-    void deleteOrderCommand_validDeleteOrder_expectInvalid() {
+    void deleteOrderCommand_validDeleteOrder_expectValid() {
         try {
             medicines.add(new Order("PANADOL", 10, DateParser.stringToDate("12-12-2025")));
         } catch (ParseException e) {

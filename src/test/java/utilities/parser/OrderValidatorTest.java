@@ -29,7 +29,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void checkValidStockId_validId_expectFalse() {
+    public void checkValidStockId_invalidId_expectFalse() {
         ArrayList<Medicine> tempOrder = new ArrayList<>();
         try {
             tempOrder.add(new Order("SIMVASTATIN", 20, DateParser.stringToDate("11-10-2021")));
@@ -48,7 +48,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void checkValidExpiry_validDate_expectFalse() {
+    public void checkValidExpiry_invalidDate_expectFalse() {
         String inputDate = "8 Oct 2021";
         boolean isInvalid = orderValidator.isValidDate(ui, inputDate);
         assertFalse(isInvalid);
@@ -62,7 +62,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void checkValidColumn_validColumn_expectFalse() {
+    public void checkValidColumn_invalidColumn_expectFalse() {
         String inputColumnName = "panadol";
         boolean isInvalid = orderValidator.isValidColumn(ui, inputColumnName);
         assertFalse(isInvalid);
@@ -76,7 +76,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void checkValidStatus_validColumn_expectFalse() {
+    public void checkValidStatus_invalidStatus_expectFalse() {
         String inputColumnName = "panadol";
         boolean isInvalid = orderValidator.isValidStatus(ui, inputColumnName);
         assertFalse(isInvalid);
