@@ -20,6 +20,9 @@ its developers (😀 us!) at our [Main Page](README.md).
 * [Using this Guide](#using-this-guide)
   * [Terminology](#terminology)
   * [Icons & Format](#icons--format)
+* [Using _Ha(ppy)Bit_](#using-_happybit_)
+  * [Instructions from _Ha(ppy)Bit_](#instructions-from-_happybit_)
+  * [Command Format](#command-format)
 * [Features](#features)
     * [Ask for Help: `help`](#ask-for-help-help)
     * [Set a Goal: `set`](#set-a-goal-set)
@@ -49,7 +52,8 @@ its developers (😀 us!) at our [Main Page](README.md).
 4. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 5. Open your terminal of choice inside the folder containing `happybit.jar` file.
 6. Run the file by typing the command `java -jar happybit.jar`.
-7. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
+7. Upon loading the app you should see the following screen, 
+indicating that you have successfully ran the app.
 
    ```
    ==============================================================================
@@ -72,7 +76,9 @@ its developers (😀 us!) at our [Main Page](README.md).
    Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
 ### Start-Up Interface
-In the current loading screen, you will be able to execute the following actions based on your input.
+In the current loading screen, you will be able to navigate to five other screens.
+Choose an option from one to five by typing 1, 2, 3, 4, or 5 and hitting "enter" to load the desired screen.
+Below are the outcomes.
 
 #### Option 1: `About Ha(ppy)Bit`
 Learn more about our vision for _Ha(ppy)Bit_ and the team behind it.
@@ -165,12 +171,26 @@ Name     | Description                                                      | Ex
 -----    | ---------------------------------------------------------------- | -------------------
 Goal     | A long term achievement you wish to accomplish.                  |`Lose 5kg by Dec`
 Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Run 5km`
-Interval | How often you want to repeat each habit                          |`Run 5km every 7 days` 
+Interval | The frequency (in days) which you want the habit to recur.       |`Run 5km every 7 days` 
 
+**Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
 to know that the purpose of `habits` is to break down daunting, colossal `goals` into easy, bite-sized
 `habits`; tasks that you can complete within a day or as defined by your `interval`.
+
+**Intervals** <br>
+An `interval` is user-defined. It is for `habits` that will occur periodically, saving you the hassle
+of keying in individual `habits` every time it occurs. It is also the window period for you to complete a `habit`.
+Here are three things to note:
+1. `interval` is not allowed to extend longer than your `goal` time frame. <br>
+To explain with an example, a goal that starts and ends within a month is _not_ to have a`habit` with an `interval` 
+longer than 30 days, otherwise it should've been a one-off `habit`! 
+2. One-off `habits` (hey, an oxymoron!) are habits that do not repeat. <br>
+This is achieved by setting the `interval` as `0`, rather than any positive integer.
+3. _Ha(ppy)Bit_ does not allow for an `interval` to be shorter than 1 day. <br>
+This if for those who are planning to do a habit more than once a day. 
+You may consider having multiple recurring habits instead.
 
 ### Icons & Format
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
@@ -181,28 +201,60 @@ Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis
  
 > 💡 **Pro-Tip!** additional information that may make your tracking journey easier
 
-> 😀 &#8594; Used to show developers' exuberance!!!
+> 😀 &#8594; Used to show the developers' exuberance!!!
 
-> 👍 &#8594; Used to show developers' love and support for you.
+> 👍 &#8594; Used to show the developers' love and support for you.
+
+## Using _Ha(ppy)Bit_
+_Ha(ppy)Bit_ comes with some quirks that might need some time getting used to. To get you up to speed and warmed
+up with _Ha(ppy)Bit_, here are instructions and command formats to follow. 👍
+
+### Instructions from _Ha(ppy)Bit_
+
+You may have noticed the instructions `Press enter to return to main menu...` and `Type 'return' to return to main menu`
+at the bottom of some responses from _Ha(ppy)Bit_. This is because _Ha(ppy)Bit_ clears and refreshes the page after 
+every command. Previously typed commands will also be cleared, so press the "up" key on your keyboard to navigate 
+through recently typed commands. 
+
+Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not
+register your input. On the topic of inputs...
+
+### Command Format
+_Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
+action to carry out (See [Command Summary](#command-summary) for all actions). The actions are then followed up with
+"parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
+type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
+parameters.
+
+A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
+`add` is the command word, <br>
+`Run 2.4km`, `1`, and `7` are parameters, <br>
+and `n/`, `g/`, and `i/` are flags.
+
+Here are guidelines and tips for the command format:
+* **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#main-interface)). 
+  Your inputs appearing after `Command: ` indicates you're doing it right.
+* **Commands** may require one or more flags. You may choose to use the flags in any order but ensure that all flags 
+  for that command are present.\
+  (e.g. `add` requires the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and
+  `add i/1 n/habit 1 g/1`)
+* **Parameters** `<goal_index>` and `<habit_index>`can be checked with the commands `list` and `view` respectively.
+* **Parameters** enclosed in angle brackets `<>` are meant to be replaced.\
+  (e.g. `view g/<goal_index>` could be `view g/1`)
+* **Parameters** enclosed within curly brackets, `{}` are optional 
+* **Parameters** enclosed withing square brackets, `[]` suggest that at least one of the parameters are required
+* **Flags** should have a whitespace before them <br>
+  (e.g. `view g/1` instead of `viewg/1`)
 
 ## Features
 
 Below are the commands supported by the application.
-Each section describes the function of each command and its format.
-
-**Command Format**
-* Command may require one or more flags. You may choose to use the flags in any other but ensure that all flags for that
-  command are present.\
-  (e.g. `add` requires the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and 
-  `add i/1 n/habit 1 g/1`)
-* Parameters enclosed in angle brackets `<>` are meant to be replaced.\
-  (e.g. `view g/<goal_index>` could be `view g/1`)
-* Parameters enclosed within curly brackets, `{}` are optional, although each command must have at least 1 parameter.
+Each section describes the function of each command and its format. <br>
 
 ### Ask for Help: `help`
-Ummm, I'm not sure what the commands are. Fortunately this command is here for you.\
+What did you say? You're not sure what the commands are? Relax, that's why the `help` command exists.\
 This command displays a list of all possible commands.
-If an invalid command is typed, this method will be invoked by default.
+If an invalid command is typed, this command will be invoked by default.
 
 **Format:** `help`
 
@@ -210,7 +262,7 @@ If an invalid command is typed, this method will be invoked by default.
 ```
 Here are the list of commands:
 --------------------------------------------------------------------------------------------------------------
-| Description                       | Format                                                                 | 
+| Action                            | Format                                                                 | 
 --------------------------------------------------------------------------------------------------------------
 | open command list                 | help                                                                   | 
 --------------------------------------------------------------------------------------------------------------
@@ -259,7 +311,8 @@ start dates are optional (well, we wouldn't you to be procrastinating on your go
   * `df` &#8594; Default (This will be the goal type if the parameter is omitted)
 * Start date is an optional parameter. Omitting it will set the start date as today.
 
-**Example:**\
+**Example:**
+
 Command 1: `set n/Reduce spending s/29102021 e/31122021`\
 Command 2: `set n/Exercise more t/ex e/01012022`\
 Command 3: `set t/fd e/31122022 n/Become a vegetarian`
@@ -299,8 +352,8 @@ Command: list
 > a vegetarian` to change from 3 to 2.
 
 ### Update a Goal: `Update`
-Updates an attribute (Name, Date, or Goal Type) of a goal specified by its index.\
-(To err is human. That's why we have the `update` feature; designed to be more forgiving,
+Updates a parameter of a goal specified by its index.\
+(To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
 
 **Format:** `update g/<goal_index> { n/<goal_name> t/<goal_type> e/<end_date> }`
@@ -344,11 +397,9 @@ one of these habits will be the metaphorical straw that breaks the camel's back.
 without even pulling a muscle.)
 
 **Format:** `add n/<habit_name> g/<goal_index> i/<interval>`
-* name your habit with an action or task that is preferably achievable (e.g. Run 2.4km, Sleep at 10pm)
-* 'Interval' is a number that indicates the period of time you have to complete the task before the next cycle
-* 'Interval' defined as 0 means that you only have to complete the task once
-* 'Interval' should be lesser than the number of days before the end date of the goal 
-  (otherwise you only have to complete the task once - what's the point right?)
+* name your habit with an achievable and actionable task (e.g. Run 2.4km, Sleep at 10pm)
+* 'Interval' is a number that indicates the period of time you have to complete the habit before the next cycle
+* 'Interval' defined as 0 indicates a one-off habit; you only have to complete the habit once
 
 **Example:**\
 Input 1: `add n/Run 2.4km g/1 i/7`\
@@ -398,7 +449,7 @@ ________________________________________________________________________________
 
 ### Delete a Habit: `delete`
 Deletes a habit under a goal.\
-(This should be used a last resort. Don't give up, hang in there and try completing your tasks.)
+(This should be used a last resort. Don't give up, hang in there and make your habits stick.)
 
 **Format:** `delete g/<goal_index> h/<habit_index>`
 
@@ -415,7 +466,7 @@ ________________________________________________________________________________
 ```
 
 ### View all Habits: `view`
-List all habits under a specific goal.
+List all habits under a specific goal for a bird's eye view on your goal.
 
 **Format:** `view g/<goal_index>`
 
@@ -531,7 +582,7 @@ Remove goal        | `remove g/<goal_index>`                                    
 Add habit          | `add g/<goal_index> n/<habit_name> i/<interval>`                        | `add n/Don't drink BBT g/1 i/3`
 Change habit       | `change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }` | `change g/1 h/2 i/3`
 Done habit         | `done g/<goal_index> h/<habit_index> `                                  | `done g/1 h/1`
-Delete habit       | `delete g/<goal_index> h/<habit_index>`                                 | `delete g/1 g/1`
+Delete habit       | `delete g/<goal_index> h/<habit_index>`                                 | `delete g/1 h/1`
 View habits        | `view g/<goal_index>`                                                   | `view g/1`
 Return to Start-Up | `return`                                                                | `return`
 Exit Program       | `exit`                                                                  | `exit`
