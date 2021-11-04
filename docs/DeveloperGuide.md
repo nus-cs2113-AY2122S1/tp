@@ -32,16 +32,16 @@
         + [4.5.3 Execute CommandResult with Storage](#453-execute-commandresult-with-storage-implementation)
     * [4.6 Adding Content](#46-adding-content-implementation)
     * [4.7 Deleting Content](#47-deleting-content-implementation)
-- [5. Documentation, Logging, Testing and DevOps](#5-documentation--logging--testing-and-devops)
+- [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
     * [5.1 Documentation](#51-documentation)
+    * [5.2 Logging](#52-logging)
     * [5.2 Logging](#52-logging)
     * [5.3 Testing](#53-testing)
     * [5.4 DevOps](#54-devops)
-- [Appendix A: Product Scope](#appendix-a--product-scope)
-- [Appendix B: User Stories](#appendix-b--user-stories)
-- [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d--glossary)
-- [Appendix E: Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Instructions for Manual Testing](#appendix-d-instructions-for-manual-testing)
 
 ## 1. Introduction
 
@@ -939,12 +939,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 3. The application should be easy to learn and use with the User Guide and/or Developer Guide.
 4. The application should be responsive to user input.
 
-
-
-## Appendix D: Glossary
-
-
-## Appendix E: Instructions for Manual Testing
+## Appendix D: Instructions for Manual Testing
 
 ### D.1: Launch and Shutdown
 
