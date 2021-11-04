@@ -2,10 +2,7 @@
 
 package seedu.parser;
 
-import seedu.contact.Contact;
-import seedu.contact.ContactList;
 import seedu.exception.MissingIndexException;
-
 
 public class IndexParser {
     private static final int COMD_WORD_LENGTH = 1;
@@ -16,7 +13,7 @@ public class IndexParser {
     private static final int PERSONAL_CONTACT_ID = -1;
     private static final String REMOVE_ALL_INDEX = "all";
     private static final int REMOVE_ALL_ID = -2;
-    private static final String numbers = "[0-9]+";
+    private static final String numbers = "^-?\\d+$";
 
     public static int getIndexFromInput(String userInput)
             throws NumberFormatException, MissingIndexException {
@@ -30,7 +27,7 @@ public class IndexParser {
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
         // Since inputs like "rm 1 2 3" are allowed
         // 1 is the significant index that is important and chosen as the index for command
-        // index can be "me" or "-rf" or an integer
+        // index can be "me" or "all" or an integer
         String significantIndex = indexSplit[SIGNIFICANT_INDEX_POSITION].trim();
         if (significantIndex.equalsIgnoreCase(PERSONAL_CONTACT_INDEX)) {
             return PERSONAL_CONTACT_ID;
@@ -39,17 +36,13 @@ public class IndexParser {
             return REMOVE_ALL_ID;
         }
         if (!significantIndex.matches(numbers)) {
-            throw new MissingIndexException();
+            throw new NumberFormatException();
         }
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         int index = Integer.parseInt(significantIndex);
         if (index < 0) {
-            throw new NumberFormatException();
+            throw new IndexOutOfBoundsException();
         }
         return index;
-    }
-
-    public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
-        return contactList.getContactAtIndex(index);
     }
 }

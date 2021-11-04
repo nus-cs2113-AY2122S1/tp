@@ -93,6 +93,16 @@ ls
 rm all
 asdsad
 ls
+rm 0 -e -te -tw
+y
+view 0
+add -n marcus  -n lezaimun
+edit 4 -g github -g guthib
+view all
+rm me
+view me
+edit all -n trysth -g trying
+edit asd -n trying
 rm all
 y
 ls

@@ -2,6 +2,7 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.exception.DuplicateDetailException;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -24,7 +25,7 @@ class EditContactParserTest {
     void parseContactDetails() throws MissingDetailException,
             MissingArgEditException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         String[] expectedResult = {null, "github", null, null, null, null};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
@@ -36,7 +37,7 @@ class EditContactParserTest {
     void parseEditCommand_inputAllFields_expectOutput() throws MissingDetailException,
             MissingArgEditException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
-            InvalidTwitterUsernameException, InvalidEmailException {
+            InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         String[] expectedResult = {"akshay", "topcoder", "akshay123", "akshay123", "akshay123", "akshay@gmail.com"};
         String testInput = "edit 1 -n akshay -g topcoder -l akshay123 -te akshay123 -tw akshay123 -e akshay@gmail.com";
         String[] actualResult = editContactParser.parseContactDetails(testInput);

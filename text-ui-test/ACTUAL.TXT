@@ -98,7 +98,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : edit 0 -n George -g procoder -te george123
 NOTE : At least one flag and description required
        Order of parameters do not matter except for INDEX
@@ -133,7 +133,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
@@ -189,7 +189,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-3. ng andre
+3.
+Name:     ng andre
 Github:   github.com/ng-andre
 
 Do you still want to add the contact?  (y/n)
@@ -217,23 +218,23 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-1. ashraf
+Name:     ashraf
 Github:   github.com/ashraf
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
@@ -248,9 +249,9 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -268,7 +269,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-3. lezong
+Name:     lezong
 Github:   github.com/lezongmun
 ____________________________________________________________
 
@@ -297,14 +298,14 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
 ____________________________________________________________
-2. mayank
+Name:     mayank
 Github:   github.com/mayankp123
 ____________________________________________________________
 
@@ -377,16 +378,16 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
 Where <COMMAND_WORD> is rm or view
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -436,16 +437,16 @@ You now have 6 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-0. asjoda sadfsd
+Name:     asjoda sadfsd
 Telegram: t.me/_123adad
 ____________________________________________________________
 
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>
+      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
       example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
-NOTE : At least name and description required
+NOTE : At least NAME required
        Order of parameters do not matter
 ____________________________________________________________
 
@@ -457,7 +458,8 @@ add -n lezong mun -g    lezaimun
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-2. lezongmun
+2.
+Name:     lezongmun
 Github:   github.com/lezong
 
 Do you still want to add the contact?  (y/n)
@@ -512,7 +514,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-0. asjoda sadfsd
+0.
+Name:     asjoda sadfsd
 Telegram: t.me/_123adad
 
 Do you still want to add the contact?  (y/n)
@@ -562,7 +565,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -571,7 +574,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -580,7 +583,7 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing parameters in your request.
 Please enter command in this format:
-      search <FLAG> <QUERY>
+      search {FLAG} <QUERY>
       example : search Ashraf
                 search -g revflash
 NOTE : Flag is optional and only one can be specified
@@ -591,12 +594,12 @@ No search results found.
 ____________________________________________________________
 
 ____________________________________________________________
-1. bory
+Name:     bory
 Github:   github.com/marcus
 ____________________________________________________________
 
 ____________________________________________________________
-5. lezongmun
+Name:     lezongmun
 Github:   github.com/lezong
 ____________________________________________________________
 
@@ -638,7 +641,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-0. ashraf
+0.
+Name:     ashraf
 Github:   github.com/ashrafjfr
 
 Do you still want to add the contact?  (y/n)
@@ -656,7 +660,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-1. ashraf
+1.
+Name:     ashraf
 Telegram: t.me/ashrafjfr
 
 Do you still want to edit the contact?  (y/n)
@@ -679,7 +684,7 @@ Telegram: t.me/ashrafjfr
 ____________________________________________________________
 
 ____________________________________________________________
-0. ashraf
+Name:     ashraf
 Github:   github.com/ashrafjfr
 Email:    ashrafjfr@gmail.com
 Telegram: t.me/ashrafjfr
@@ -702,7 +707,7 @@ ConTech has successfully imported 3 lines
 ____________________________________________________________
 
 ____________________________________________________________
-6. lezai
+Name:     lezai
 Github:   github.com/lezongmun
 ____________________________________________________________
 
@@ -758,6 +763,73 @@ ____________________________________________________________
 11. mayank
 12. ng andre
 13. yusdhsdsd
+____________________________________________________________
+
+____________________________________________________________
+Delete the following fields for ashraf?  (y/n)
+
+Telegram: t.me/ashrafjfr
+Email:    ashrafjfr@gmail.com
+____________________________________________________________
+
+____________________________________________________________
+The specified fields for ashraf have been deleted.
+____________________________________________________________
+
+____________________________________________________________
+Name:     ashraf
+Github:   github.com/ashrafjfr
+____________________________________________________________
+
+____________________________________________________________
+There appears to be duplicated flags in your command.
+Please kindly remove them to prevent any ambiguous action performed.
+____________________________________________________________
+
+____________________________________________________________
+There appears to be duplicated flags in your command.
+Please kindly remove them to prevent any ambiguous action performed.
+____________________________________________________________
+
+____________________________________________________________
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
+Where <COMMAND_WORD> is rm or view
+____________________________________________________________
+
+____________________________________________________________
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
+Where <COMMAND_WORD> is rm or view
+____________________________________________________________
+
+____________________________________________________________
+Name:     Marcus Bory
+Github:   github.com/lezongmun
+Email:    lezongmun@gmail.com
+Telegram: t.me/lezongg
+____________________________________________________________
+
+____________________________________________________________
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+      example : edit 0 -n George -g procoder -te george123
+NOTE : At least one flag and description required
+       Order of parameters do not matter except for INDEX
+       "me" is used as the INDEX for personal contact.
+____________________________________________________________
+
+____________________________________________________________
+There seems to be missing or invalid index in your request.
+Please enter command in the following way:
+      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+      example : edit 0 -n George -g procoder -te george123
+NOTE : At least one flag and description required
+       Order of parameters do not matter except for INDEX
+       "me" is used as the INDEX for personal contact.
 ____________________________________________________________
 
 ____________________________________________________________

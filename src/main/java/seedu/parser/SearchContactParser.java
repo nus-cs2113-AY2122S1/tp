@@ -7,6 +7,7 @@ import seedu.exception.MissingArgSearchException;
 import static seedu.parser.ContactParser.FLAG_INDEX_IN_DETAILS;
 import static seedu.parser.ContactParser.NUMBER_OF_DETAILS;
 
+//@@author ng-andre
 public class SearchContactParser implements ContactDetails {
     //return only search query as a String
     public String parseSearchQuery(String searchInput) throws MissingArgSearchException {

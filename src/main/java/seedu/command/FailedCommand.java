@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.command;
 
 import seedu.parser.FailedCommandType;
@@ -26,6 +28,7 @@ public class FailedCommand extends Command {
         case NUM_OUT_OF_BOUND: // Fallthrough
         case NUM_OUT_OF_BOUND_EDIT: // Fallthrough
         case INVALID_DELETE: //Fallthrough
+        case DUPLICATE_DETAIL:
             invalidUserInputExecute();
             break;
         case MISSING_ARGS_EDIT: // Fallthrough
@@ -34,6 +37,7 @@ public class FailedCommand extends Command {
         case MISSING_DETAIL: // Fallthrough
         case MISSING_NAME: // Fallthrough
         case MISSING_INDEX: // Fallthrough
+        case INVALID_INDEX_EDIT:
             missingUserInputExecute();
             break;
         default:
@@ -64,6 +68,9 @@ public class FailedCommand extends Command {
         case INVALID_DELETE:
             ExceptionTextUi.invalidDeleteFlag();
             break;
+        case DUPLICATE_DETAIL:
+            ExceptionTextUi.duplicateDetailMessage();
+            break;
         default:
             return;
         }
@@ -88,6 +95,9 @@ public class FailedCommand extends Command {
             break;
         case MISSING_INDEX:
             ExceptionTextUi.missingIndexMessage();
+            break;
+        case INVALID_INDEX_EDIT:
+            ExceptionTextUi.missingIndexEditMessage();
             break;
         default:
             return;

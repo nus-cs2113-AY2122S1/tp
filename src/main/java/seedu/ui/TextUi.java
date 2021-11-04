@@ -2,17 +2,19 @@ package seedu.ui;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
+
 import java.util.ArrayList;
 
-public abstract class TextUi {
+
+public class TextUi {
+    public static final int GITHUB_INDEX = 1;
+    public static final int EMAIL_INDEX = 5;
+
     private static final String LOGO = "\n   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      ";
-
     private static final String LINE = "____________________________________________________________\n";
-    public static final int GITHUB_INDEX = 1;
-    public static final int EMAIL_INDEX = 5;
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -149,7 +151,7 @@ public abstract class TextUi {
 
     public static void viewContactMessage(Contact viewingContact, int index) {
         String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
-        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        String message = "Name:     " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
@@ -212,7 +214,7 @@ public abstract class TextUi {
         StringBuilder output = new StringBuilder();
         assert hasDeletedDetail.length == 7;
         String[] contactDetails = contact.getContactStringArray();
-        for (int i = GITHUB_INDEX; i < EMAIL_INDEX; i++) { //from GitHub to Email
+        for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) { //from GitHub to Email
             if (contactDetails[i] != null && hasDeletedDetail[i]) {
                 output.append(ViewMessageFormatterUi.viewDetailFormatter(contact, i));
             }
@@ -267,7 +269,9 @@ public abstract class TextUi {
                 + "view: Displays all details for index specified contact.\n"
                 + " Parameter: INDEX\n"
                 + " Note: Index starts from 0.\n"
-                + " Example: view 2\n\n"
+                + "       \"me\" is used as INDEX for personal contact\n"
+                + " Examples: view 2\n"
+                + "           view me\n\n"
                 + "me: Displays all details for personal contact.\n"
                 + " Example: me\n\n"
                 + "rm: Deletes the index specified contact.\n"
@@ -295,11 +299,11 @@ public abstract class TextUi {
             String message;
             if (type.equals("add")) {
                 message = "One of your saved contacts has a duplicate field:\n"
-                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + "\n" + duplicatedIndex.get(0) + ".\n" + "Name:     " + currentContact.getName()
                         + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
             } else {
                 message = "One of your saved contacts has a duplicate field:\n"
-                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + "\n" + duplicatedIndex.get(0) + ".\n" + "Name:     " + currentContact.getName()
                         + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
             }
             printDoubleLineMessage(message);
@@ -320,7 +324,7 @@ public abstract class TextUi {
 
     public static void duplicatedContactsMessage(Contact viewingContact, int index) {
         String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
-        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        String message = index + ".\n" + "Name:     " + viewName + formatContactFields(viewingContact);
         System.out.println(message + "\n");
     }
 

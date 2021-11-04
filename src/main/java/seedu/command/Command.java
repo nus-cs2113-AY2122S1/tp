@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 
+//@@author marcusbory
 public abstract class Command {
     protected ContactList contactList;
     protected Contact personalContact;

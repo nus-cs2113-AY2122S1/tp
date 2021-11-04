@@ -1,3 +1,5 @@
+//@@author marcusbory
+
 package seedu.storage;
 
 import seedu.contact.Contact;
@@ -10,13 +12,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class Storage {
+    public static final String SEPARATOR = ",";
     private final String contactFilePath;
     private final File contactFile;
     private final String personalContactFilePath;
     private final File personalContactFile;
     private final ContactsDecoder contactsDecoder;
     private final ContactsEncoder contactsEncoder;
-    public static final String SEPARATOR = ",";
 
     public Storage(String contactFilePath, String personalContactFilePath, ContactsDecoder contactsDecoder,
                    ContactsEncoder contactsEncoder) {
@@ -25,7 +27,7 @@ public class Storage {
         this.personalContactFilePath = personalContactFilePath;
         this.personalContactFile = new File(personalContactFilePath);
         this.contactsDecoder = contactsDecoder;
-        this.contactsEncoder  = contactsEncoder;
+        this.contactsEncoder = contactsEncoder;
     }
 
     //@@author lezongmun
@@ -49,7 +51,7 @@ public class Storage {
         return personalContactFile.exists() && personalContactFile.length() == 0;
     }
 
-    //@@author
+    //@@author marcusbory
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {

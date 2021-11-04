@@ -89,6 +89,7 @@ public class ExceptionTextUi {
                 + "Rules for Linkedin username :\n"
                 + "    * Lowercase letters only\n"
                 + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Other special characters and spaces not allowed\n"
                 + "    * Length between 3 to 100 characters\n\n"
                 + "Please enter your linkedin username again\n"
                 + "or press ENTER to skip.";
@@ -127,11 +128,24 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void missingIndexEditMessage() {
+        String message = "There seems to be missing or invalid index in your request.\n"
+                + "Please enter command in the following way:\n"
+                + "      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} "
+                + "{-tw <TWITTER>}\n"
+                + "      example : edit 0 -n George -g procoder -te george123\n"
+                + "NOTE : At least one flag and description required\n"
+                + "       Order of parameters do not matter except for INDEX\n"
+                + "       \"me\" is used as the INDEX for personal contact.";
+        printDoubleLineMessage(message);
+    }
+
     //@@author mayankp291
     public static void missingArgEditMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
-                + "      edit <INDEX> -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} "
+                + "{-tw <TWITTER>}\n"
                 + "      example : edit 0 -n George -g procoder -te george123\n"
                 + "NOTE : At least one flag and description required\n"
                 + "       Order of parameters do not matter except for INDEX\n"
@@ -143,9 +157,9 @@ public class ExceptionTextUi {
     public static void missingArgAddMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
-                + "      add -n <NAME> -g <GITHUB> -e <EMAIL> -te <TELEGRAM> -l <LINKEDIN> -tw <TWITTER>\n"
+                + "      add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}\n"
                 + "      example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n"
-                + "NOTE : At least name and description required\n"
+                + "NOTE : At least NAME required\n"
                 + "       Order of parameters do not matter";
         printDoubleLineMessage(message);
     }
@@ -154,7 +168,7 @@ public class ExceptionTextUi {
     public static void missingArgSearchMessage() {
         String message = "There seems to be missing parameters in your request.\n"
                 + "Please enter command in this format:\n"
-                + "      search <FLAG> <QUERY>\n"
+                + "      search {FLAG} <QUERY>\n"
                 + "      example : search Ashraf\n"
                 + "                search -g revflash\n"
                 + "NOTE : Flag is optional and only one can be specified";
@@ -165,7 +179,7 @@ public class ExceptionTextUi {
     public static void missingIndexMessage() {
         String message = "There seems to be missing or invalid index in your request.\n"
                 + "Please enter command in the following way:\n"
-                + "      <COMMAND_WORD> <INDEX> <OPTIONAL_FLAGS>\n"
+                + "      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}\n"
                 + "Where <COMMAND_WORD> is rm or view";
         printDoubleLineMessage(message);
     }
@@ -252,6 +266,12 @@ public class ExceptionTextUi {
     public static void forbiddenDetailMessage() {
         String message = "As one of the details to be stored is \"null\",\n"
                 + "ConTech is unable to process it";
+        printDoubleLineMessage(message);
+    }
+
+    public static void duplicateDetailMessage() {
+        String message = "There appears to be duplicated flags in your command.\n"
+                + "Please kindly remove them to prevent any ambiguous action performed.";
         printDoubleLineMessage(message);
     }
 

@@ -3,27 +3,22 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.parser.IndexParser;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 
 public class DeleteContactCommand extends Command {
     private static final String ACKNOWLEDGE_DELETE = "y";
-    private static final int DELETE_ALL_CONTACTS = -2;
-    public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
-    public static final int EMAIL_INDEX = 5;
+    private static final int PERSONAL_CONTACT_INDEX = -1;
+    private static final int DELETE_ALL_CONTACTS_INDEX = -2;
 
     private final int contactIndex;
-    private final boolean[] hasDeletedDetail;
+    private final boolean[] hasDeletedDetails;
 
-    public DeleteContactCommand(int contactIndex, boolean[] hasDeletedDetail) {
+    public DeleteContactCommand(int contactIndex, boolean[] hasDeletedDetails) {
         this.contactIndex = contactIndex;
-        this.hasDeletedDetail = hasDeletedDetail;
+        this.hasDeletedDetails = hasDeletedDetails;
     }
 
     public int getContactIndex() {
@@ -33,7 +28,7 @@ public class DeleteContactCommand extends Command {
 
     private void deleteSelectedContact() throws IndexOutOfBoundsException {
         // throws IndexOutOfBoundsException if index is outside of the range
-        Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+        Contact deletedContact = contactList.getContactAtIndex(contactIndex);
         // index must be within range since no exceptions thrown
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
         // ask for confirmation to delete from user
@@ -64,31 +59,17 @@ public class DeleteContactCommand extends Command {
     }
 
     private void deleteFields() {
-        Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+        Contact deletedContact = contactList.getContactAtIndex(contactIndex);
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
-        if (TextUi.deletedFieldsGenerator(hasDeletedDetail, deletedContact).isEmpty()) {
+        if (TextUi.deletedFieldsGenerator(hasDeletedDetails, deletedContact).isEmpty()) {
             //if no fields exist, return false
             TextUi.noDeleteFields();
             return;
         }
-        TextUi.confirmDeleteFieldMessage(hasDeletedDetail, deletedContact);
+        TextUi.confirmDeleteFieldMessage(hasDeletedDetails, deletedContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
         if (userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE)) {
-            if (hasDeletedDetail[GITHUB_INDEX]) {
-                deletedContact.setGithub(null);
-            }
-            if (hasDeletedDetail[LINKEDIN_INDEX]) {
-                deletedContact.setLinkedin(null);
-            }
-            if (hasDeletedDetail[TELEGRAM_INDEX]) {
-                deletedContact.setTelegram(null);
-            }
-            if (hasDeletedDetail[TWITTER_INDEX]) {
-                deletedContact.setTwitter(null);
-            }
-            if (hasDeletedDetail[EMAIL_INDEX]) {
-                deletedContact.setEmail(null);
-            }
+            deletedContact.deleteContactFields(hasDeletedDetails);
             TextUi.deleteFieldsMessage(deletedContact);
         } else {
             assert !userConfirmation.equalsIgnoreCase(ACKNOWLEDGE_DELETE);
@@ -98,9 +79,11 @@ public class DeleteContactCommand extends Command {
 
     public void execute() {
         try {
-            if (contactIndex == DELETE_ALL_CONTACTS) {
+            if (contactIndex == DELETE_ALL_CONTACTS_INDEX) {
                 deleteAllContacts();
-            } else if (hasDeletedDetail[6]) { //delete entire contact
+            } else if (contactIndex == PERSONAL_CONTACT_INDEX) {
+                ExceptionTextUi.missingIndexMessage();
+            } else if (hasDeletedDetails[6]) { //delete entire contact
                 deleteSelectedContact();
             } else {
                 deleteFields();
