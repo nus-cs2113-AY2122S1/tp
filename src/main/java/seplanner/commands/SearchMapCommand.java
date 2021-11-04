@@ -15,21 +15,22 @@ public class SearchMapCommand extends Command {
         assert selectedUniversity.getClass() != null;
         this.selectedUniversity = selectedUniversity;
         if (isAll) {
-            System.out.println("Here are all the potential module mappings based on your selected universities:");
             for (University uni : universitySelectedList.getList()) {
-                System.out.print("Potential mappings for ");
-                System.out.print(uni.getName() + " ");
-                Ui.printIndex(uni.getIndex(), false);
-                System.out.println(":");
-                uni.listSelectedMappings(moduleSelectedList);
+                printMappings(uni, moduleSelectedList);
             }
         } else {
-            System.out.print("Potential mappings for ");
-            System.out.print(selectedUniversity.getName() + " ");
-            Ui.printIndex(selectedUniversity.getIndex(), false);
-            System.out.println(":");
-            selectedUniversity.listSelectedMappings(moduleSelectedList);
+            printMappings(selectedUniversity, moduleSelectedList);
         }
+    }
+
+    public void printMappings(University uni, ModuleList moduleSelectedList) {
+        assert uni.getName() != null;
+        assert uni.getClass() != null;
+        System.out.print("Potential mappings for ");
+        System.out.print(uni.getName() + " ");
+        Ui.printIndex(uni.getIndex(), false);
+        System.out.println(":");
+        uni.listSelectedMappings(moduleSelectedList);
     }
 
     public University getSelectedUniversity() {

@@ -41,6 +41,11 @@ public class SearchMapCommandParser {
             university = universityMasterList.getUniversity(input);
         }
 
+        if (ParseCondition.isNoPotentialMapping(university, moduleSelectedList)) {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+        }
+
         if (ParseCondition.isNullUniversity(university)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
