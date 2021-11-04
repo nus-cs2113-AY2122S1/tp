@@ -5,7 +5,7 @@
 - [1. Introduction](#1-introduction)
     * [1.1 Purpose](#11-purpose)
     * [1.2 Acknowledgements](#12-acknowledgements)
-    * [1.2 Using this Guide](#13-using-this-guide)
+    * [1.3 Using this Guide](#13-using-this-guide)
 - [2. Setting up](#2-setting-up)
     * [2.1 Setting up the project in your computer](#21-setting-up-the-project-in-your-computer)
         + [2.1.1 Prerequisite](#211-prerequisite)
@@ -13,37 +13,41 @@
         + [2.1.3 Setting up on IntelliJ IDEA](#213-setting-up-on-intellij-idea)
         + [2.1.4 Configuring the Coding Style](#214-configuring-the-coding-style)
 - [3. Design](#3-design)
-  * [3.1 Architecture](#31-architecture)
-  * [3.2 UI](#32-ui-component)
-  * [3.3 Parser](#33-parser-component)
-  * [3.4 Command](#34-command-component)
-  * [3.5 Module](#35-module-component)
-  * [3.6 Content](#36-content-component)
-  * [3.7 Active Recall](#37-active-recall-component)
-  * [3.8 Storage](#38-storage-component)
+    * [3.1 Architecture](#31-architecture)
+    * [3.2 UI Component](#32-ui-component)
+    * [3.3 Parser Component](#33-parser-component)
+    * [3.4 Command Component](#34-command-component)
+    * [3.5 Module Component](#35-module-component)
+    * [3.6 Content Component](#36-content-component)
+    * [3.7 Active Recall Component](#37-active-recall-component)
+    * [3.8 Storage Component](#38-storage-component)
 - [4. Implementation](#4-implementation)
-  * [4.1 Timetable](#41-timetable-feature)
-  * [4.2 Active Recall](#42-active-recall-implementation)
-  * [4.3 Workspace]()
-  * [4.4 Adding and Deleting Content]()
-  * [4.5 Storage](#45-storage-implementation)
-    + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
-    + [4.5.2 Loading Storage](#452-loading-storage-implementation)
-    + [4.5.3 Execute CommandResult with Storage](#453-execute-commandresult-with-storage-implementation)
-- [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
-- [Appendix A: Product Scope](#appendix-a-product-scope)
-- [Appendix B: User Stories ](#appendix-b-user-stories)
-- [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d-glossary)
-- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+    * [4.1 Timetable Feature](#41-timetable-feature)
+    * [4.2 Active Recall](#42-active-recall-implementation)
+    * [4.3 Workspace](#43-workspace-implementation)
+    * [4.4 Conflict Manager](#44-conflict-manager-implementation)
+    * [4.5 Storage](#45-storage-implementation)
+        + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
+        + [4.5.2 Loading Storage](#452-loading-storage-implementation)
+        + [4.5.3 Execute CommandResult with Storage](#453-execute-commandresult-with-storage-implementation)
+    * [4.6 Adding Content](#46-adding-content-implementation)
+    * [4.7 Deleting Content](#47-deleting-content-implementation)
+- [5. Documentation, Logging, Testing and DevOps](#5-documentation--logging--testing-and-devops)
+    * [5.1 Documentation](#51-documentation)
+    * [5.2 Logging](#52-logging)
+    * [5.3 Testing](#53-testing)
+    * [5.4 DevOps](#54-devops)
+- [Appendix A: Product Scope](#appendix-a--product-scope)
+- [Appendix B: User Stories](#appendix-b--user-stories)
+- [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d--glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
 
 ## 1. Introduction
 
 **Welcome to TermiNUS!**
 
-**TermiNUS** is a CLI (command line interface) program for NUS Students who wish to organize their
-NUS academic materials through a CLI. The product aims to aid student in organizing their academic
-schedule and enhancing their learning experiences.
+**TermiNUS** is a CLI (command line interface) program for NUS students who wish to consolidate their NUS academic needs such as schedules, questions and notes for the modules that they are taking. With TermiNUS, it aims to aid students and improve their learning experiences while studying in NUS.
 
 **TermiNUS** is written in **Java 11** and uses the Object-Oriented Programming (OOP) paradigm which
 provides us with means to structure a software program into organized and reusable pieces of codes,
@@ -68,7 +72,15 @@ TermiNUS.
 
 ### 1.3 Using this Guide
 
-Insert legends / special icons used here to aid in the guide later.
+Along the way you might encounter several icons. These icons will provide you with different types of information that you may find useful.
+
+> 💡 Take note when you see this icon, as it might tell you something important.
+
+> 📝 **Note:** This icon represents additional information that might be useful when using our application.
+
+Lastly, text that is blue like this [example](#test), are clickable links that will bring you to the relevant part of this developer guide.
+
+
 
 ## 2. Setting up
 
@@ -128,14 +140,16 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
 Import the coding style xml file into your IntelliJ IDEA.
 
+You can download the `xml` file [here](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml).
+
 1. Go to IntelliJ IDEA settings page.
     1. Located at the **top-right** of the app, click on the gear icon and select `Settings...`.
 2. Under the settings page, locate the `Code Style` tab.
     1. `Editor`&rarr;`Code Style`
-3. Once you are at the `Code Style` tab, you will need to import the file `CS2113TStyle.xml`.
+3. Once you are at the `Code Style` tab, you will need to import the `xml` file.
     1. At the `Scheme` section, select the gear icon and select `Import Scheme`
        &rarr;`IntelliJ IDEA code style XML`.
-    2. Locate and select the `CS2113TStyle.xml` file which is included in the TermiNUS project.
+    2. Locate and select the `xml` file that you have downloaded earlier.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
