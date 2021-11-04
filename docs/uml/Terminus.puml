@@ -1,0 +1,23 @@
+@startuml
+!include SequenceStyle.puml
+
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "UI" UI_BOX_COLOR
+participant ":Ui" as Ui
+endbox
+box "Parser" PARSER_BOX_COLOR
+participant ":CommandParser" as CommandParser PARSER_COLOR
+endbox
+
+autoactivate on
+-> Terminus: Terminus()
+  create Ui
+  Terminus-> Ui:getInstance()
+  return Ui;
+  create CommandParser
+  Terminus -> CommandParser:getInstance()
+  return MainCommandParser;
+return
+@enduml
