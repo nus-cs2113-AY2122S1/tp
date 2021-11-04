@@ -1,17 +1,25 @@
 @startuml
 hide footbox
-mainframe sd delete selected contact
-":DeleteContactCommand" -> ":DeleteContactCommand":deleteSelectedContact()
+mainframe sd delete selected contact fields
+":DeleteContactCommand" -> ":DeleteContactCommand":deleteFields()
 activate ":DeleteContactCommand"
 
 'obtain contact to be deleted using index
-":DeleteContactCommand" -> ":IndexParser": getContactAtIndex(contactIndex: int, contactList: ContactList)
+":DeleteContactCommand" -> ":IndexParser": getContactFromIndex(contactIndex: int, contactList: ContactList)
 activate ":IndexParser"
 ":IndexParser" --> ":DeleteContactCommand": deletedContact:Contact
 deactivate ":IndexParser"
 
+
+opt#gold #lightgreen no fields to delete
+    ":DeleteContactCommand" -> ":TextUi": noDeleteFields()
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+end
+
 'confirm delete message
-":DeleteContactCommand" -> ":TextUi" :confirmDeleteContactMessage(deletedContact: Contact, contactIndex: int)
+":DeleteContactCommand" -> ":TextUi" :confirmDeleteFieldMessage(hasDeleteDetails: boolean[], deletedContact: Contact)
 activate ":TextUi"
 ":TextUi" --> ":DeleteContactCommand"
 deactivate ":TextUi"
@@ -24,25 +32,13 @@ deactivate ":UserInputTextUi"
 
 alt#gold #lightgreen delete confirmed
     'execute delete for selected contact
-    ":DeleteContactCommand" -> ":ContactList":deleteContact(contactIndex: int)
+    ":DeleteContactCommand" -> ":ContactList":deleteContactFields(hasDeletedDetails: boolean[])
     activate ":ContactList"
     ":ContactList" --> ":DeleteContactCommand"
     deactivate ":ContactList"
 
-    'get name of deleted contact
-    ":DeleteContactCommand" -> ":Contact" :getName()
-    activate ":Contact"
-    ":Contact" --> ":DeleteContactCommand":deletedName: String
-    deactivate ":Contact"
-
-    'get size of list for delete message
-    ":DeleteContactCommand" -> ":ContactList": getListSize()
-    activate ":ContactList"
-    ":ContactList" --> ":DeleteContactCommand": contactListSize: int
-    deactivate ":ContactList"
-
     'Print message to show delete executed
-    ":DeleteContactCommand" -> ":TextUi": deleteContactMessage(deletedName: String, contactListSize: int)
+    ":DeleteContactCommand" -> ":TextUi": deleteFieldsMessage(deletedContact: Contact)
     activate ":TextUi"
     ":TextUi" --> ":DeleteContactCommand"
     deactivate ":TextUi"
