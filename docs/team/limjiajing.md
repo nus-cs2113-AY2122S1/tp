@@ -21,9 +21,7 @@ for code to have less coupling.
    want to know how they did in a game. 
    * Highlights: The logic of getting the mistakes made was fairly complicated as it required taking into
    considerations many conditions and scenarios. The implementation of this feature also affects the implementation 
-   of the `view history` feature, hence the design had to be well-thought-out. 
-
-<div style="page-break-after: always;"></div>
+   of the `view history` feature, hence the design had to be well-thought-out.
 
 2. New feature: Added the ability to view records of past games.
     * What it does: Allows gamers to select which game mode's past records they want to view 
