@@ -9,7 +9,7 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
 
 ### Summary of Contributions
 
-* **Code contributed**: [ReposSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Dniv-ra&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=Dniv-ra&tabRepo=AY2122S1-CS2113T-W11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Dniv-ra&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=Dniv-ra&tabRepo=AY2122S1-CS2113T-W11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Feature**: Added linking of dishes and ingredients
   * **What it does**: Allows the user to link an existing ingredient to an existing dish so that any wastage incurred
@@ -44,4 +44,3 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
 * **Contributions to team-based tasks**:
 * **Review/mentoring contributions**:
 * **Contributions beyond the project team**:
-
