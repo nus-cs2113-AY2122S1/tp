@@ -20,12 +20,12 @@ public interface ParserError {
    
     boolean isIndexOutOfBounds(UniversityList universityMasterList, int inputIndex);
    
-    boolean isNullModule(Module module);
-   
     boolean isIndexOutOfBounds(ModuleList moduleMasterList, int inputIndex);
    
     boolean isIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
                                ModuleList moduleSelectedList);
+    
+    boolean isNullModule(Module module);
    
     boolean isDuplicateUniversity(UniversityList universitySelectedList, String uniName);
    
