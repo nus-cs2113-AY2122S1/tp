@@ -67,6 +67,7 @@ TermiNUS.
 
 - [**GSON:** Providing the JSON parsing capabilities for the main file.](https://github.com/google/gson)
 - [**iTextPDF 7:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itext7)
+- [**SLF4J:** Dependencies for **iTextPDF 7**](http://www.slf4j.org/)
 - [**AddressBook-3:** Providing a guide on writing the guides you are reading now.](https://se-education.org/addressbook-level3/)
 
 

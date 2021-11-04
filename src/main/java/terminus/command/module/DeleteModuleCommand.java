@@ -27,7 +27,7 @@ public class DeleteModuleCommand extends DeleteCommand {
 
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(itemNumber, listOfModule)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
         assert itemNumber > 0;
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
