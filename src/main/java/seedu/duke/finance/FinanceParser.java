@@ -3,11 +3,14 @@ package seedu.duke.finance;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientUI;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class FinanceParser {
 
     public void addFinance(String[] command, FinanceList finances) {
         try {
-            Finance newAccount = new Finance(command[1], command[2]);
+            Finance newAccount = new Finance(LocalDate.parse(command[1]), command[2]);
 
             finances.financeList.add(newAccount);
             finances.totalAccount += newAccount.getAccount();
@@ -16,6 +19,8 @@ public class FinanceParser {
 
         } catch (ArrayIndexOutOfBoundsException e) {
             seedu.duke.finance.FinanceUI.printInvalidCommandSyntaxMessage();
+        } catch (DateTimeParseException e) {
+            FinanceUI.printInvalidCommandSyntaxMessage();
         }
     }
 

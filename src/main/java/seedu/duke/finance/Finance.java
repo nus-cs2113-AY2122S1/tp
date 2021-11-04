@@ -1,10 +1,12 @@
 package seedu.duke.finance;
 
+import java.time.LocalDate;
+
 public class Finance {
-    private String date;
+    private LocalDate date;
     private String account;
 
-    public Finance(String date, String account) {
+    public Finance(LocalDate date, String account) {
         this.date = date;
         this.account = account;
     }
@@ -14,11 +16,11 @@ public class Finance {
         return date + " $" + account;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
