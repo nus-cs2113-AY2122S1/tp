@@ -1,6 +1,15 @@
-# User Guide
+# GetJack'D User Guide
 
-- [Introduction](#introduction)
+## Introduction
+
+Get Jack'd is a **desktop app for managing and planning exercise routines, optimized for use via a Command Line Interface** (CLI).
+This application is targeted at computing students who wish to keep track of the workout and exercise routine despite their busy schedule.
+GetJack'd guarantees faster management of workouts than traditional GUI apps. If you are a fast typer and looking for an application to help you 
+embark on a fitness journey, Get Jack'd is the one for you!
+
+## Contents
+
+- [Purpose](#purpose)
 - [Quick Start](#quick-start)
 - [Features](#features)
   1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
@@ -23,10 +32,15 @@
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
-## Introduction
 
-Get Jack'd is a **desktop app for managing and planning exercise routines, optimized for use via a Command Line Interface** (CLI).
-If you can type fast, Get Jack'd can manage your workouts faster than traditional GUI apps.
+## Purpose
+
+This user guide explains how you can set up the application and utilise the various features delivered by GetJackD. 
+In addition, this guide provides the correct format to use, examples to refer and expected outcomes to reconfirm actions.
+
+As an active fitness enthusiast, you would probably dive straight into using the modifying features.
+
+As a beginner, you may be more interested in the recommended workouts and work your way through from there.
 
 ## Quick Start
 
@@ -56,21 +70,13 @@ ________________________________________________________
 
 --------------------------------------
 
-## Using this guide
-This guide is meant to describe and explain how to use Get Jack'd, including the various commands and inputs.
-Here are some things to take note of while using this guide:
-* ⚠️ indicates something important to note
-
-
-* ❗ indicates something very important to note, failure to adhere to it may cause the program to crash.
-
-
-* Words wrapped in square braces `[words]` are parameters, they are the parts of the command that you can change.
-   Words not wrapped in square braces are part of the command format. Not following said command format may cause your 
-   input to not be recognised by the application. 
-
   
 ## Features
+
+> 💡 Note
+>* Words wrapped in square braces `[words]` are parameters, they are the parts of the command that you can change.
+   Words not wrapped in square braces are part of the command format. Not following said command format may cause your
+   input to not be recognised by the application.
 
 ### 1. Creating a new workout: `create`
 
@@ -81,16 +87,16 @@ Format
 
 - With deadline: `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
-⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
-
-⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+>⚠️ Warning  
+>* `DEADLINE` needs to be in format `yyyy-MM-dd`.
+>* There must be a space between the comma `,` and the next parameter as shown in the format.
  
 Usage examples: 
 
 - No deadline: `create abs`
 - With deadline: `create leg day, 2021-10-21`
 
-Expected outcome (**no deadline specified**):
+Expected outcome (*no deadline specified*):
 
 ```
 create abs
@@ -99,7 +105,7 @@ New workout created: abs
 ________________________________________________________
 ```
 
-Expected outcome (**deadline specified**):
+Expected outcome (*deadline specified*):
 
 ```
 create leg day, 2021-10-21
@@ -113,8 +119,8 @@ ________________________________________________________
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
-Entering a workout also confines your search results to within the particular workout you are in.
-
+> 💡 Note
+>* Entering a workout also confines your search results to within the particular workout you are in.
 
 Format: `enter [WORKOUT_INDEX]`
 
@@ -130,8 +136,8 @@ enter 2
 			________________________________________________________
 ```
 
-
-Tip: You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
+> 💡 Tip
+>* You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
 You may also add, remove, edit exercises in workout 2 while you are in workout 1.
 For example,
 ```
@@ -170,7 +176,8 @@ ________________________________________________________
 Shows you all the workouts in the current list of workouts, in **sorted** order: 
 workouts with deadlines (in ascending order), then workouts without deadlines.
 
-⚠ Since the workouts are sorted , whenever you create or delete a workout, the indices of other workout might change!️
+>⚠️ Warning   
+>* Since the workouts are sorted , whenever you create or delete a workout, the indices of other workout might change!️
 
 Usage example:
 
@@ -223,7 +230,8 @@ Format
 * Note the comma and space `, `  separating the command arguments
 * Sets and reps are entered in the form of two numbers separated by a space 
 
-⚠️ There must be a space between the comma `, ` and the next parameter as shown in the format.
+>⚠️ Warning  
+>* There must be a space between the comma `, ` and the next parameter as shown in the format.
 
 Usage examples:
 
@@ -231,7 +239,7 @@ Usage examples:
 
 - Workout Mode: `enter 1` then `add lunges, 4 8` = lunges, 4 sets of 8 reps, add to workout 1
 
-Expected outcome (main mode):
+Expected outcome (*Main mode*):
 
 ```
 add squats, 5 10, 2
@@ -240,7 +248,7 @@ New exercise added: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
 ```
 
-Expected outcome (Workout Mode):
+Expected outcome (*Workout Mode*):
 ```
 enter 1
 			________________________________________________________
@@ -261,14 +269,15 @@ Format
 
 - Workout Mode: `done [EXERCISE_INDEX]`
 
-⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+>⚠️ Warning  
+>* There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Usage example:
 
 - Main mode: `done 1, 2` = mark exercise 1 from workout 2 as done
 - Workout Mode: `enter 1` then `done 1` = mark exercise 1 from workout 1 as done
 
-Expected outcome (main mode):
+Expected outcome (*Main mode*):
 
 ```
 done 2, 1
@@ -276,7 +285,7 @@ ________________________________________________________
 Completed: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
-Expected outcome (Workout Mode): 
+Expected outcome (*Workout Mode*): 
 ```
 enter 1
 			________________________________________________________
@@ -297,7 +306,8 @@ Format
 - Main Mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
 - Workout Mode: `edit [EXERCISE_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
 
-⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
+>⚠️ Warning
+>* There must be a space between the comma `,` and the next parameter as shown in the format.
 
 Usage example:
 - Main Mode: `edit 2, 1, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
@@ -345,9 +355,9 @@ Format
 - Main Mode: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
 - Workout Mode: `remove [EXERCISE_INDEX]`
 
-⚠️ There must be a space between the comma `,` and the next parameter as shown in the format.
-
-⚠️ Only one exercise can be removed at a time. 
+>⚠️ Warning  
+>* There must be a space between the comma `,` and the next parameter as shown in the format.
+>* Only one exercise can be removed at a time. 
 
 
 Examples of usage:
@@ -355,7 +365,7 @@ Examples of usage:
 - Main Mode: `remove 1, 1` = remove exercise 1 from workout 1
 - Workout Mode: `enter 1` then `remove 1` = remove exercise 1 from workout 1
 
-Expected outcome (Main Mode):
+Expected outcome (*Main Mode*):
 
 ```
 remove 1, 1
@@ -364,7 +374,7 @@ Removed exercise: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
 ```
 
-Expected outcome (Workout Mode): 
+Expected outcome (*Workout Mode*): 
 ```
 enter 1
 			________________________________________________________
@@ -378,12 +388,16 @@ remove 1
 
 ### 11. Searching for workouts and exercises: `search`
 
-Main Mode: 
-- Search by name: Displays workouts or exercises that contain the specified keyword in the workout or exercise name.
-- Search by date: Displays workouts that has the specified date (in the format `DD MMM YYY`) as the workout deadline.
+Searches for workouts and exercises containing the keyword specified
 
-Workout Mode: 
-- Search by name: Displays exercises that contain the specified keyword in the exercise name, within the particular workout.
+> 💡 Note
+> 
+> Main Mode: 
+>- Search by name: Displays workouts or exercises that contain the specified keyword in the workout or exercise name.
+>- Search by date: Displays workouts that has the specified date (in the format `DD MMM YYY`) as the workout deadline.
+>
+>Workout Mode: 
+>- Search by name: Displays exercises that contain the specified keyword in the exercise name, within the particular workout.
 
 Format
 - search by name: `search [KEYWORD]`
@@ -399,7 +413,7 @@ Examples of usage:
 
 Expected outcome:
 
-- Main Mode:
+- Main Mode
 ```
 search kick
 ________________________________________________________
@@ -434,7 +448,8 @@ search kick
 
 Provides a given set of workouts with exercises.
 
-⚠️ This command will add the recommended workouts to your workout list.
+> 💡 Note  
+>* This command will add the recommended workouts to your workout list.
 
 Format: `recommend [beginner/ intermediate/ pro]`
 
@@ -477,7 +492,8 @@ go.
 
 Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
-⚠️ Include `WORKOUT_INDEX` only when you want to clear exercises.
+> 💡 Note
+>* Include `WORKOUT_INDEX` only when you want to clear exercises.
 
 Example of usage: 
 
