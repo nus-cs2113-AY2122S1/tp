@@ -94,4 +94,9 @@ public class ParseCondition {
         return universitySelectedList.getUniversity(uniName);
     }
 
+    public static boolean isNoPotentialMapping(University uni, ModuleList moduleSelectedList) {
+        int size = uni.getSelectedMappingListSize(moduleSelectedList);
+        return size == 0;
+    }
+
 }
