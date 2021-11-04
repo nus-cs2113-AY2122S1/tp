@@ -118,6 +118,24 @@ The image below shows the sequence diagram of how the `AddExpenseCommand` class 
 
 ![img_2.png](AddExpenseCommandSD.drawio.PNG)
 
+---
+
+### Parser component
+
+The `Parser` class is in charge of converting user input to a command. It is also in charge of converting important 
+information such as users' entries to easy-to-store data, and vice versa.
+
+#### Implementation
+
+`Parser` mainly uses regex to parse items. Here are the uses of regex in the `Parser` class.
+1. To determine if user inputs are in the correct format. 
+2. To split up user input to their respective parameters with the help of flags such as `a/` and `d/`. 
+3. To determine if data from the `csv` files are in the correct format.
+4. To split up data from the `csv` files into their respective parameters with the help of commas since our data are
+stored in `csv` files.
+
+
+
 ### Budget Component
 
 The Budget component consists mainly of the `BudgetManager` class and the `Budget` class.
