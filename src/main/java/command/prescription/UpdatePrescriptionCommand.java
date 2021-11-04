@@ -55,6 +55,14 @@ public class UpdatePrescriptionCommand extends Command {
         String customerId = PrescriptionManager.getUpdatedCustomerId(parameters, prescription.getCustomerId());
         String staffName = PrescriptionManager.getUpdatedStaff(parameters, prescription.getStaff());
         boolean hasQuantityParam = validator.hasQuantityParamChecker(parameters, prescription.getQuantity());
+
+        if (hasQuantityParam) {
+            boolean isZero = Integer.parseInt(parameters.get(CommandParameters.QUANTITY)) == 0;
+            if (isZero) {
+                ui.print("Action aborted! Please use the delete command to remove the prescription.");
+                return;
+            }
+        }
         boolean isSuccessfulUpdate = false;
 
         if (hasNameParam && hasQuantityParam) {
