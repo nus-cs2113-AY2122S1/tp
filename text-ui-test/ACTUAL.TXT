@@ -133,8 +133,8 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
-Where <COMMAND_WORD> is rm or view
+      view <INDEX>
+Enter <INDEX> as 0 or "me" (personal contact)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -234,8 +234,8 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
-Where <COMMAND_WORD> is rm or view
+      rm <INDEX> {REMOVE_DETAIL_FLAGS}
+Enter <INDEX> between 0 and 4, "me" (personal contact) or "all"
 ____________________________________________________________
 
 ____________________________________________________________
@@ -378,8 +378,8 @@ ____________________________________________________________
 ____________________________________________________________
 There seems to be missing or invalid index in your request.
 Please enter command in the following way:
-      <COMMAND_WORD> <INDEX> {REMOVE_DETAIL_FLAGS}
-Where <COMMAND_WORD> is rm or view
+      view <INDEX>
+Enter <INDEX> between 0 and 3 or "me" (personal contact)
 ____________________________________________________________
 
 ____________________________________________________________
