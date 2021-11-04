@@ -15,14 +15,14 @@ end box
 mainFrame sd Logic for ArchivePrescriptionCommand
 autoactivate on
 activate archivePrescription
-archivePrescription -> dateParser : stringToDate()
+archivePrescription -> dateParser : stringToDate(date: String)
 archivePrescription <-- dateParser : date
-archivePrescription -> archivePrescription : prescriptionsToArchive()
+archivePrescription -> archivePrescription : prescriptionsToArchive(medicines: ArrayList<Medicine>,\n prescriptionArchiveDate: Date)
 archivePrescription --> archivePrescription : filteredPrescriptions
-archivePrescription -> archivePrescription : removeFromPrescriptions()
+archivePrescription -> archivePrescription : removeFromPrescriptions(medicines: ArrayList<Medicine>,\n filteredPrescriptions: ArrayList<Medicine>)
 archivePrescription --> archivePrescription
 archivePrescription -> storage : getInstance()
 archivePrescription <-- storage
-archivePrescription -> storage : archiveData()
+archivePrescription -> storage : archiveData(filteredPrescriptions: ArrayList<Medicine>)
 archivePrescription <-- storage
 @enduml
