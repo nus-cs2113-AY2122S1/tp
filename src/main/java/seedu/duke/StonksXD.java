@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.commands.Command;
 
 import seedu.utility.BudgetManager;
+import seedu.utility.CurrencyManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.FinancialAdvisor;
@@ -20,6 +21,7 @@ public class StonksXD {
     private Parser parser;
     private DataManager dataManager;
     private BudgetManager budgetManager;
+    private CurrencyManager currencyManager;
     private FinancialAdvisor financialAdvisor;
     private String advice;
 
@@ -32,8 +34,9 @@ public class StonksXD {
         this.finances = new FinancialTracker();
         this.parser = new Parser();
         this.budgetManager = new BudgetManager();
+        this.currencyManager = new CurrencyManager();
         
-        this.dataManager = new DataManager(parser, finances, ui, budgetManager);
+        this.dataManager = new DataManager(parser, finances, ui, budgetManager, currencyManager);
         dataManager.loadAll();
         
         this.financialAdvisor = FinancialAdvisor.getInstance();
@@ -50,7 +53,7 @@ public class StonksXD {
         while (isNonTerminatingCommand) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
-            command.execute(finances, ui, budgetManager);
+            command.execute(finances, ui, budgetManager, currencyManager);
             if (command.isExit()) {
                 isNonTerminatingCommand = false;
             }

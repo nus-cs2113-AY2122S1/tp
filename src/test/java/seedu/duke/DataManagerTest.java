@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.commands.currency.CurrencyType;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
@@ -8,6 +9,7 @@ import seedu.entry.IncomeCategory;
 import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeOverflowException;
 import seedu.utility.BudgetManager;
+import seedu.utility.CurrencyManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Parser;
@@ -34,7 +36,8 @@ public class DataManagerTest {
         Parser parser = new Parser();
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        CurrencyManager currencyManager = new CurrencyManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, currencyManager);
         dataManager.saveAll();
     }
 
@@ -46,7 +49,8 @@ public class DataManagerTest {
         FinancialTracker financialTracker = new FinancialTracker();
         Ui ui = new Ui();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        CurrencyManager currencyManager = new CurrencyManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, currencyManager);
         dataManager.loadAll();
         assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
         assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
@@ -73,7 +77,8 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        CurrencyManager currencyManager = new CurrencyManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, currencyManager);
         dataManager.saveAll();
         dataManager.loadAll();
     }
@@ -84,7 +89,8 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        CurrencyManager currencyManager = new CurrencyManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, currencyManager);
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
             if (category == ExpenseCategory.NULL) {
@@ -95,7 +101,7 @@ public class DataManagerTest {
         }
         budgetManager.setThreshold(0.5);
         dataManager.saveAll();
-        String testData = parser.convertSettingsToData(financialTracker, budgetManager);
+        String testData = parser.convertSettingsToData(budgetManager, currencyManager);
         String expectedData = "SGD,0.5,0.0,1.0,2.0,3.0,4.0,5.0,6.0";
         assertEquals(expectedData, testData);
     }
@@ -107,7 +113,8 @@ public class DataManagerTest {
         Ui ui = new Ui();
         Parser parser = new Parser();
         BudgetManager budgetManager = new BudgetManager();
-        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager);
+        CurrencyManager currencyManager = new CurrencyManager();
+        DataManager dataManager = new DataManager(parser, financialTracker, ui, budgetManager, currencyManager);
         dataManager.loadAll();
         int i = 0;
         for (ExpenseCategory category : ExpenseCategory.values()) {
