@@ -10,6 +10,7 @@ import seedu.duke.Ui;
 
 abstract class CommandHandler extends CommandExecutor {
 
+    //@@author yeezao
     /**
      * Confirms that the user entered paramaters, and calls {@link Parser#executeCreateTrip(String)}.
      *
@@ -46,6 +47,7 @@ abstract class CommandHandler extends CommandExecutor {
             Ui.emptyArgForOpenCommand();
         }
     }
+    //@@author
 
     protected static void handleTripSummary(String inputParams) throws ForceCancelException {
         try {

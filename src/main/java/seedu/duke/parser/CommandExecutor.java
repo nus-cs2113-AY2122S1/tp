@@ -23,7 +23,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     private static final String EDIT_HOMECUR = "-homecur";
     private static final int NEW_TRIP_ATTRIBUTES_COUNT = 6;
 
-
+    //@@author yeezao
     /**
      * Creates a new instance of {@link Trip}
      *
@@ -134,6 +134,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         Storage.setOpenTrip(indexToGet);
         Ui.printOpenTripMessage(Storage.getOpenTrip());
     }
+    //@@author
 
     protected static void executeSummary(String inputParams) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
@@ -199,6 +200,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
+    //@@author yeezao
     /**
      * Checks whether to delete trip or delete expense (by determining if a trip is open),
      * and calls the appropriate method.
@@ -227,6 +229,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             executeDeleteTrip(index);
         }
     }
+    //@@author
 
     protected static void executeList() throws ForceCancelException {
         if (!Storage.checkOpenTrip()) {
@@ -284,6 +287,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         currentTrip.setLastExpense(null);
     }
 
+    //@@author yeezao
     /**
      * Deletes a trip from the <code>listOfTrips</code>.
      *
@@ -352,7 +356,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         Storage.setLastTrip(tripToEdit);
         return tripToEdit;
     }
-
+    //@@author
 
     public static boolean isNumeric(String secondCommand) {
         try {
