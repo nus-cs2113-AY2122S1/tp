@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 
 public class AddEventCommand extends Command {
 
-    protected String title;
-    protected String description;
-    protected LocalDateTime dateTime;
-    protected String venue;
-    protected double budget;
+    private final String title;
+    private final String description;
+    private final LocalDateTime dateTime;
+    private final String venue;
+    private final double budget;
 
     public AddEventCommand(String title, String description, LocalDateTime dateTime, String venue, double budget) {
         this.title = title;

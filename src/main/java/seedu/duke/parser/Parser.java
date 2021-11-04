@@ -40,12 +40,13 @@ public abstract class Parser {
         //String[] command = response.trim().split(" +");
 
         // TODO: Once parser is restructured, replace above with following two lines
-        String[] command = response.trim().split(" +", 2);
+        String[] command = response.trim().split(" +");
         if (command.length == 1) {
             String commandType = command[0];
             return singleWordCommandProtocol(command, commandType);
         } else {
-            String commandDetails = command[1];
+            String[] splitCommandIntoTwo = response.trim().split(" +", 2);
+            String commandDetails = splitCommandIntoTwo[1];
             String commandType = command[0];
             return multiWordCommandProtocol(response, command, commandDetails, commandType);
         }
@@ -207,6 +208,9 @@ public abstract class Parser {
     public static double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
         Double result = null;
         try {
+            if (!budget.matches("[0-9.]+")) {
+                throw new InvalidBudgetException("Event budget can only be a valid number. ");
+            }
             result = Double.parseDouble(budget);
             if (result < 0) {
                 throw new InvalidBudgetException("Event budget needs to be a positive number.");

@@ -86,7 +86,8 @@ public class Ui {
     }
 
     public static void promptForMemberIndex() {
-        System.out.println("Please choose which member you want to assign your task to. ");
+        System.out.println("Please choose which member(s) you want to assign your task to. " +
+                "If you're choosing more than 1 member, separate the indexes with ', '. ");
     }
 
     public static String getTaskDeletionMessage(String taskTitle) {

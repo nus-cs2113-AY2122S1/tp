@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 public class AddTaskCommand extends Command {
 
-    protected String title;
-    protected String description;
-    protected LocalDateTime dateTime;
-    protected int eventIndex;
-    protected int[] memberIndexes;
+    private final String title;
+    private final String description;
+    private final LocalDateTime dateTime;
+    private final int eventIndex;
+    private final int[] memberIndexes;
 
-    protected ArrayList<Member> memberList = new ArrayList<>();
-    protected Event assignedEvent;
+    private final ArrayList<Member> memberList = new ArrayList<>();
+    private Event assignedEvent;
 
     public AddTaskCommand(String title, String description, LocalDateTime dateTime,
                           int eventIndex, int[] memberIndexes) {

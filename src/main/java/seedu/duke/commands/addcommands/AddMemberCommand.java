@@ -8,7 +8,7 @@ import seedu.duke.items.characteristics.Member;
 
 public class AddMemberCommand extends Command {
 
-    protected String[] memberNames;
+    private final String[] memberNames;
 
     public AddMemberCommand(String[] memberNames) {
         this.memberNames = memberNames;
