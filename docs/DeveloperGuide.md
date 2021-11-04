@@ -80,8 +80,6 @@ Along the way you might encounter several icons. These icons will provide you wi
 
 Lastly, text that is blue like this [example](#test), are clickable links that will bring you to the relevant part of this developer guide.
 
-
-
 ## 2. Setting up
 
 ### 2.1 Setting up the project in your computer
@@ -855,6 +853,23 @@ All pull requests are also checked with Codecov to ensure that overall code cove
 You may monitor your Codecov progress in your pull request if you successfully passed all the tests.
 
 ## Appendix A: Product Scope
+
+### A.1 Target User Profile
+
+- Students in NUS.
+- Wants to enhance their learning experience.
+- Has difficulty managing academic materials in NUS.
+- Prefers command-line desktop applications.
+- Able to type fast.
+
+### A.2 Value Proposition
+
+- Helps the target user organise their academic materials.
+- Find any conflicts in the schedules from the target user.
+- Aids in learning better using Active Recall.
+- Consolidate all notes into a PDF for referencing purposes while studying.
+- Organise academic materials for different modules.
+- Portable and works offline.
 
 
 ## Appendix B: User Stories  
