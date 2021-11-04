@@ -3,19 +3,21 @@
 !include SequenceStyle.puml
 
 box Command COMMAND_BOX_COLOR
-participant AddLinkCommand as AddLinkCommand COMMAND_COLOR
+participant ":AddLinkCommand" as AddLinkCommand COMMAND_COLOR
 endbox
 
-participant ConflictManager as ConflictManager
+participant ":ConflictManager" as ConflictManager
 
 box Module MODULE_BOX_COLOR
-participant ModuleManager as ModuleManager MODULE_COLOR
-participant NusModule as NusModule MODULE_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+participant ":NusModule" as NusModule MODULE_COLOR
 endbox
 
 box Content CONTENT_BOX_COLOR
-participant ContentManager as ContentManager CONTENT_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
 endbox
+
+participant ":StringBuilder" as StringBuilder
 
 Activate AddLinkCommand
 create ConflictManager
