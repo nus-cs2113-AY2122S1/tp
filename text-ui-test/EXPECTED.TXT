@@ -156,9 +156,9 @@ Enter your command: List of all Expenses in detail:
 	Payer: yuzhao
 	Category: breakfast
 
-Enter your command: Your expense of USD 24.00 has been successfully removed
-Enter your command: Your expense of USD 8.00 has been successfully removed
-Enter your command: Your expense of USD 48.00 has been successfully removed
+Enter your command: Your expense of USD 24.00 has been successfully removed.
+Enter your command: Your expense of USD 8.00 has been successfully removed.
+Enter your command: Your expense of USD 48.00 has been successfully removed.
 Enter your command: yikai has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
 
 yuzhao has spent USD 0.00 (SGD 0.00) on 0 expenses on the following categories:
