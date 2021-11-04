@@ -68,6 +68,13 @@ The `Ui` class serves as an abstraction over these smaller classes:
     * `StaffUi`: Inherits `PersonUi` to handle staff-related Ui
 * `SchedulerUi`: Handles the Ui for schedulers.
 
+How `Ui` works:
+* After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will 
+call methods from different `Ui` subclasses
+  * When `viewType` is `PATIENT_INFO`, `PatientUi` methods are called.
+  * When `viewType` is `MEDICAL_STAFF_INFO`, `StaffUi` methods are called.
+  * When `viewType` is `SCHEDULER`, `SchedulerUi` methods are called.
+
 Given below is a sequence diagram of how the `Ui` component works after the `Parser`
 parses `help delete` input given by a user.
 
