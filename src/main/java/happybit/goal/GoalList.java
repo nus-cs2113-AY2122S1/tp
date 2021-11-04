@@ -13,6 +13,7 @@ import java.util.Date;
 public class GoalList {
     private static final String ERROR_EMPTY_GOAL_LIST = "There are no goals!";
     private static final String ERROR_INVALID_GOAL_INDEX = "There are no goals at that index.";
+    private static final String ERROR_NON_POSITIVE_GOAL_INDEX = "Goal index should be a positive integer.";
     private static final String ERROR_EMPTY_HABIT_LIST = "There are no habits listed under this goal!";
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
     private static final String ERROR_IDENTICAL_NEW_NAME = "There is no change in name.";
@@ -351,7 +352,11 @@ public class GoalList {
         try {
             goal = goalList.get(goalIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new HaBitCommandException(ERROR_INVALID_GOAL_INDEX);
+            if (goalIndex > 0) {
+                throw new HaBitCommandException(ERROR_INVALID_GOAL_INDEX);
+            } else {
+                throw new HaBitCommandException(ERROR_NON_POSITIVE_GOAL_INDEX);
+            }
         }
         return goal;
     }
