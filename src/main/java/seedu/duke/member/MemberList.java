@@ -1,4 +1,5 @@
 //@@author Teckwhye
+
 package seedu.duke.member;
 
 import java.util.ArrayList;

@@ -1,4 +1,5 @@
 //@@author Teckwhye
+
 package seedu.duke.member;
 
 import java.util.Locale;
@@ -28,13 +29,13 @@ public class Member {
     /* Error message to throw */
     String invalidNameErrorMessage = "Please input a valid name.Name cannot contain numbers or be empty.";
     String invalidStudentNumberErrorMessage = "Invalid student number provided. Please give it in the following "
-            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends off "
-            + "with a capital letter";
+            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends "
+            + "off with a capital letter";
     String invalidGenderErrorMessage = "Invalid gender provided. Please enter M for male, F for female.";
     String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 digit Singapore phone number";
 
     /**
-     * Constructor for member with validation checking
+     * Constructor for member with validation checking or without according to needsValidation.
      *
      * @param name            Name of member
      * @param studentNumber   Student number of member
@@ -57,9 +58,15 @@ public class Member {
         }
     }
 
+    // Constructor for empty member class.
     public Member() {
     }
 
+    /**
+     * Constructor for copying a member class.
+     *
+     * @param member member to be copied
+     */
     public Member(Member member) throws InvalidMemberException {
         setName(member.name);
         setStudentNumber(member.studentNumber);
@@ -124,7 +131,7 @@ public class Member {
     }
 
     /**
-     * Verify gender only contains M or F and set member's gender if valid
+     * Verify gender only contains M or F and set member's gender if valid.
      *
      * @param gender gender given by user input
      * @throws InvalidMemberException If name given is not valid
@@ -144,7 +151,7 @@ public class Member {
     }
 
     /**
-     * Verify phone number is a Singapore 8-digit number and set member's phone number if valid
+     * Verify phone number is a Singapore 8-digit number and set member's phone number if valid.
      *
      * @param phoneNumber phone number given by user input
      * @throws InvalidMemberException If phone number given is not valid

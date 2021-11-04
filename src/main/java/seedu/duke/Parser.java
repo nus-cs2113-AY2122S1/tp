@@ -255,13 +255,10 @@ public class Parser {
                 }
                 wordIndex++;
             }
-            switch (type) {
-            case 'A':
+            if (type == 'A') {
                 memberdetails = new Member(name, studentNumber, gender, phoneNumber, true);
-                break;
-            case 'E':
+            } else if (type == 'E') {
                 memberdetails = new Member(name, studentNumber, gender, phoneNumber, false);
-                break;
             }
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
@@ -362,7 +359,6 @@ public class Parser {
     }
 
     //@@author Teckwhye
-
     /**
      * Returns parameter as given by user.
      *
@@ -381,7 +377,8 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
-    }//@@author
+    }
+    //@@author
 
     /**
      * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching

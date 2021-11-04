@@ -1,4 +1,5 @@
 //@@author Teckwhye
+
 package seedu.duke.member.exception;
 
 import seedu.duke.member.MemberList;
