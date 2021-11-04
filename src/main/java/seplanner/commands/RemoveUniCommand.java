@@ -18,7 +18,7 @@ public class RemoveUniCommand extends Command {
      *
      * @param universityToRemove university to remove from the selected university list.
      * @param universityMasterList The master university list which contains all universities.
-     * @param universitySelectedList The selected university list which contains only the universities selected by the user.
+     * @param universitySelectedList The selected university list which contains only the universities selected.
      * @throws IOException If input-output operation failed.
     */
     public RemoveUniCommand(University universityToRemove, UniversityList universityMasterList,
