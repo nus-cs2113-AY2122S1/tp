@@ -9,6 +9,7 @@ end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\n:PrescriptionManager" as prescriptionManager COLOR_UTILITIES
+    participant "<<class>>\n:StockManager" as stockManager COLOR_UTILITIES
     participant ":StockComparator" as stockcomparator COLOR_UTILITIES
 end box
 
@@ -19,37 +20,45 @@ end box
 autoactivate on
 mainframe sd AddPrescriptionCommand
 activate addprescription
-    addprescription -> prescriptionManager: getNotExpiredStockQuantity()
-    addprescription <-- prescriptionManager: totalStock
-
+    addprescription -> stockManager: getFilteredStocksByName(medicines: ArrayList<Medicine>, stockName: String)
+    addprescription <-- stockManager: filteredStocks
     create stockcomparator
     addprescription -> stockcomparator : new StockComparator()
     addprescription <-- stockcomparator : filteredStocks
+
+    addprescription -> prescriptionManager: getNotExpiredStockQuantity(medicines: ArrayList<Medicine>, \nname: String, prescribeDate: Date)
+    addprescription <-- prescriptionManager: totalStock
+
+
+
     deactivate stockcomparator
+    addprescription -> addprescription : checkExpiredMedication(ui: Ui, filteredStocks: ArrayList<Stock>, \nprescriptionQuantity: int)
+
     loop stock : filteredStocks
         opt existingExpiry.after(prescribeDate) || prescribeDateString.equals(expiryString)
             opt existingQuantity == quantityToPrescribe
-                addprescription -> addprescription : prescribe()
+                addprescription -> addprescription : prescribe(ui: Ui, medicines: ArrayList<Medicine>, medicationName: String, \ncustomerId: String, staffName: String, quantityToPrescribe: int, prescribeDate: Date, \nstock: Stock, existingId: int, existingExpiry: Date, setStockValue: int)
                 addprescription -> stock : setQuantity()
                 addprescription <-- stock
                 addprescription --> addprescription
             end
 
             opt existingQuantity > quantityToPrescribe
-                addprescription -> addprescription : prescribe()
+                addprescription -> addprescription : prescribe(ui: Ui, medicines: ArrayList<Medicine>, medicationName: String, \ncustomerId: String, staffName: String, quantityToPrescribe: int, prescribeDate: Date, \nstock: Stock, existingId: int, existingExpiry: Date, setStockValue: int)
                 addprescription -> stock : setQuantity()
                 addprescription <-- stock
                 addprescription --> addprescription
             end
             opt existingQuantity < quantityToPrescribe
-                addprescription -> addprescription : prescribe()
+                addprescription -> addprescription : prescribe(ui: Ui, medicines: ArrayList<Medicine>, medicationName: String, \ncustomerId: String, staffName: String, quantityToPrescribe: int, prescribeDate: Date, \nstock: Stock, existingId: int, existingExpiry: Date, setStockValue: int)
                 addprescription -> stock : setQuantity()
                 addprescription <-- stock
                 addprescription --> addprescription
             end
         end
     end
+        addprescription --> addprescription
 
-deactivate addprescription
+
 
 @enduml

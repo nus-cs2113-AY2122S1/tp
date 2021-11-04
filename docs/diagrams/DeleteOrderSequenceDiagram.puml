@@ -20,11 +20,10 @@ autoactivate on
 mainframe sd DeleteOrderCommand
 activate deleteorder
 
-deleteorder -> deleteorder : isValidOrderParameters()
+deleteorder -> deleteorder : isValidOrderParameters(ui: Ui, medicines: ArrayList<Medicine>)
 
-    opt isValidOrderId
-    deleteorder -> ordervalidator : isValidOrderId()
-    deleteorder <-- ordervalidator : isValidOrderId
+
+
     loop medicine : medicines
     opt medicine instanceof Order
 
@@ -37,7 +36,7 @@ deleteorder -> deleteorder : isValidOrderParameters()
             end
         end
     end
-   end
+
 
 deleteorder --> deleteorder :
 

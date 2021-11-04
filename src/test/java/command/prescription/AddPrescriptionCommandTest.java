@@ -14,9 +14,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+//@@author deonchung
 
 public class AddPrescriptionCommandTest {
 
@@ -44,107 +47,69 @@ public class AddPrescriptionCommandTest {
     @Test
     void addPrescriptionCommand_validPrescription_expectValid() {
         try {
-            medicines.add(new Stock(NAME, PRICE, 50,
-                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            Stock stock = new Stock(NAME, PRICE, 50,
+                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY);
+            medicines.add(stock);
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+            executeAddPrescriptionCommand();
 
-        parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("c", CUSTOMER_ID);
-        parameters.put("s", STAFF_NAME);
+            final int prescriptionIndex = 1;
+            Prescription prescription = (Prescription) medicines.get(prescriptionIndex);
 
-        Command command = new AddPrescriptionCommand(parameters);
-        command.execute();
-
-        String error = "Prescribed:Panadol Quantity:30 Expiry Date:11-11-2025\n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| 1  | PANADOL |    30    |     123     | 04-11-2021 | JOHN  |    1     | \n"
-                + "+----+---------+----------+-------------+------------+-------+----------+";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
-
-    }
-
-    @Test
-    void addPrescriptionCommand_validMultiplePrescription_expectValid() {
-        try {
-            medicines.add(new Stock(NAME, PRICE, 10,
-                    DateParser.stringToDate("11-11-2022"), DESCRIPTION, MAX_QUANTITY));
-            medicines.add(new Stock(NAME, PRICE, 50,
-                    DateParser.stringToDate("01-05-2025"), DESCRIPTION, MAX_QUANTITY));
+            assertEquals(prescription.getPrescriptionId(), 1);
+            assertEquals(prescription.getStockId(), 1);
+            assertEquals(prescription.getQuantity(), 30);
+            assertEquals(prescription.getStaff(), "JOHN");
+            assertEquals(prescription.getCustomerId(), "123");
+            Date today = new Date();
+            assertEquals(DateParser.dateToString(prescription.getDate()), DateParser.dateToString(today));
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("c", CUSTOMER_ID);
-        parameters.put("s", STAFF_NAME);
-
-        Command command = new AddPrescriptionCommand(parameters);
-        command.execute();
-
-        String error = "Prescribed:Panadol Quantity:10 Expiry Date:11-11-2022\n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| 1  | PANADOL |    10    |     123     | 04-11-2021 | JOHN  |    1     | \n"
-                + "+----+---------+----------+-------------+------------+-------+----------+\n"
-                + "Prescribed:Panadol Quantity:20 Expiry Date:01-05-2025\n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
-                + "+====+=========+==========+=============+============+=======+==========+\n"
-                + "| 2  | PANADOL |    20    |     123     | 04-11-2021 | JOHN  |    2     | \n"
-                + "+----+---------+----------+-------------+------------+-------+----------+";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addPrescriptionCommand_exceedQuantity_expectInvalid() {
         try {
-            medicines.add(new Stock(NAME, PRICE, 5,
-                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY));
+            Stock stock = new Stock(NAME, PRICE, 5,
+                    DateParser.stringToDate("11-11-2025"), DESCRIPTION, MAX_QUANTITY);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        executeAddPrescriptionCommand();
 
-        parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("c", CUSTOMER_ID);
-        parameters.put("s", STAFF_NAME);
-
-        Command command = new AddPrescriptionCommand(parameters);
-        command.execute();
-
-        String error = "Unable to Prescribe! Prescription quantity is more than stock available!\n"
+        String expectedOutput = "Unable to Prescribe! Prescription quantity is more than stock available!\n"
                 + "Prescription quantity: 30 Stock available: 5";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addPrescriptionCommand_invalidExpiryDate_expectInvalid() {
         try {
-            medicines.add(new Stock(NAME, PRICE, 5,
-                    DateParser.stringToDate("11-11-2020"), DESCRIPTION, MAX_QUANTITY));
+            Stock stock = new Stock(NAME, PRICE, 5,
+                    DateParser.stringToDate("11-11-2020"), DESCRIPTION, MAX_QUANTITY);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        executeAddPrescriptionCommand();
+
+        String expectedOutput = "Unable to Prescribe! Medication has expired!";
+
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+
+    }
+
+    private void executeAddPrescriptionCommand() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
         parameters.put("n", NAME);
@@ -154,10 +119,6 @@ public class AddPrescriptionCommandTest {
 
         Command command = new AddPrescriptionCommand(parameters);
         command.execute();
-
-        String error = "Unable to Prescribe! Medication has expired!";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 }
