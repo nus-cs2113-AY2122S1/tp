@@ -48,6 +48,7 @@ public class Recipe {
         return ingredientQuantities;
     }
 
+    //@@author vincentlauhl
     /**
      * Adds an ingredient and its associated quantity to the recipe.
      *
@@ -77,6 +78,7 @@ public class Recipe {
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
         return ingredientNameIfNotInList;
     }
+    //@@author
 
     /**
      * Checks if the recipe contains the given ingredient name.
@@ -87,8 +89,10 @@ public class Recipe {
         return ingredientQuantities.containsKey(ingredientName);
     }
 
+    //@@author vincentlauhl
     @Override
     public String toString() {
+        assert ingredientQuantities.size() > 0 : "Recipe must contain at least one ingredient.";
         StringBuilder ingredientsWithQuantities = new StringBuilder(name + "\n");
         for (IngredientQuantity ingredientQuantity : ingredientQuantities.values()) {
             ingredientsWithQuantities.append("- ").append(ingredientQuantity).append("\n");
