@@ -6,7 +6,7 @@ class Module
 class ModuleList
 class FullModuleList
 
-ModuleList -> "*" Module : moduleList
+ModuleList -down-> "*" Module : moduleList
 FullModuleList -> "*" Module : fullModuleList
 FullModuleList -> "*" Module : moduleMap
 
