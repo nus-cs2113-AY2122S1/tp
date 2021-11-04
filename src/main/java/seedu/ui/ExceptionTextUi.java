@@ -188,17 +188,17 @@ public class ExceptionTextUi {
     public static void missingIndexViewMessage(int ListSize) {
         String message;
         if (ListSize == 0) {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
                     + "Enter <INDEX> as \"me\" to view personal contact";
         } else if (ListSize == 1) {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
                     + "Enter <INDEX> as 0 or \"me\" (personal contact)";
         } else {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
                     + "Enter <INDEX> between 0 and " + (ListSize - 1) + " or \"me\" (personal contact)";
@@ -210,19 +210,19 @@ public class ExceptionTextUi {
     public static void missingIndexDeleteMessage(int ListSize) {
         String message;
         if (ListSize == 0) {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
-                    + "      rm <INDEX> <OPTIONAL_FLAGS>\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
                     + "Enter <INDEX> as \"me\" to view personal contact";
         } else if (ListSize == 1) {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
-                    + "      view <INDEX>\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
                     + "Enter <INDEX> as 0 or \"me\" (personal contact)";
         } else {
-            message = "There seems to be missing index in your request.\n"
+            message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
-                    + "      view <INDEX>\n"
+                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
                     + "Enter <INDEX> between 0 and " + (ListSize - 1) + " or \"me\" (personal contact)";
         }
         printDoubleLineMessage(message);
