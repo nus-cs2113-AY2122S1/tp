@@ -15,8 +15,8 @@ public class RemoveParseException extends ParserClassException {
      * @param s           the detail message
      * @param errorOffset the position where the error is found while parsing.
      */
-    public RemoveParseException(String s, int errorOffset) {
-        super(s, errorOffset);
+    public RemoveParseException(String s, int errorOffset, boolean isPrintFormat) {
+        super(s, errorOffset, isPrintFormat);
     }
 
     public String getFormat() {

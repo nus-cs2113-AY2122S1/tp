@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddCommandParser {
 
@@ -50,7 +48,7 @@ public class AddCommandParser {
                     universitySelectedList, moduleSelectedList);
         default:
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
     }
 
@@ -58,7 +56,7 @@ public class AddCommandParser {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         flag = argumentsSubstrings[0].trim();
         return argumentsSubstrings[1].trim();
@@ -72,7 +70,7 @@ public class AddCommandParser {
             // Check if university exists
             if (!ParseCondition.isValidUniversity(universityMasterList, uniName)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTAVAILABLE, 1, false);
             }
             university = new University(uniName, new ArrayList<>(), universityMasterList);
         } else if (ParseCondition.isNumeric(arguments)) {
@@ -80,20 +78,20 @@ public class AddCommandParser {
             // Check if university exists
             if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = new University(uniName, new ArrayList<>(), uniIndex);
         } else {
             // in the case where input is both not text only and numbers only
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINVALID, 1, false);
         }
 
         // Check if university has been added already
         if (ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIDUPLICATE, 1, false);
         }
     }
 
@@ -104,25 +102,25 @@ public class AddCommandParser {
             // Check if module exists
             if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTAVAILABLE, 1, false);
             }
         } else if (ParseCondition.isNumeric(arguments)) {
             int modIndex = Integer.parseInt(arguments);
             // Check if module exists
             if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINDEXNOTAVAILABLE, 1, false);
             }
             module = moduleMasterList.get(modIndex - 1);
         } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINVALID, 1, false);
         }
 
         // Check if module has been added already
         if (ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODDUPLICATE, 1, false);
         }
     }
 
@@ -133,7 +131,7 @@ public class AddCommandParser {
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
         if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         String firstParam = argumentSubstrings[0].trim();
         String secondParam = argumentSubstrings[1].trim();
@@ -144,26 +142,26 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
                     : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
-            throw new AddParseException(error, 1);
+            throw new AddParseException(error, 1, false);
         }
         if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
         if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
         if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }
         University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
                 universityMasterList);
         if (ParseCondition.isDuplicateMapping(currentUni, uniIndex, mapIndex, universityMasterList,
                                               moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1, false);
         }
     }
 

@@ -34,7 +34,7 @@ public class FindCommandParser {
             return new FindModCommand(searchString, moduleMasterList, FindModInputType.MODULENAME);
         default:
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
     }
 
@@ -43,7 +43,7 @@ public class FindCommandParser {
         if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
 
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new FindParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         flag = argumentsSubstrings[0];
         return argumentsSubstrings[1];

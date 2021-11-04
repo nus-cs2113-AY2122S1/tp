@@ -14,8 +14,8 @@ public class SearchMapParseException extends ParserClassException {
      * @param s           the detail message
      * @param errorOffset the position where the error is found while parsing.
      */
-    public SearchMapParseException(String s, int errorOffset) {
-        super(s, errorOffset);
+    public SearchMapParseException(String s, int errorOffset, boolean isPrintFormat) {
+        super(s, errorOffset, isPrintFormat);
     }
 
     public String getFormat() {
