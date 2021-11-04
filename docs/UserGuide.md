@@ -115,7 +115,7 @@ For any other item that cannot be categorised into the above-mentioned ones, the
 
 Format: `add i t/TITLE i/ID`
 
-Example: `dd i t/Scrabble i/0513895`
+Example: `add i t/Scrabble i/0513895`
 
 Expected Output:
 ```
@@ -326,6 +326,7 @@ You can then key in a command again.
 |Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
 |Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
 |Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
+|Add (Miscellaneous)|Add an item that cannot be categorised under any type|`add i t/TITLE i/ID` <br> E.g. `add i t/Scrabble i/0513895`|
 |Deadline|View items due to be returned|`deadline [overdue\|today]` <br> E.g. `deadline today`|
 |Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute` <br> E.g. `edit 123 t/Harry Potter`|
 |Exit|Quit the program|`exit`|
