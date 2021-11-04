@@ -2,15 +2,15 @@
 'https://plantuml.com/sequence-diagram
 
 
-skinparam sequenceMessageAlign center
+!include ../SequenceStyle.puml
 
-box Command #thistle
-participant ":DeleteCommand" as DeleteCommand #violet
+box Command COMMAND_BOX_COLOR
+participant ":DeleteCommand" as DeleteCommand COMMAND_COLOR
 endbox
 
-box Content #goldenrod
-participant ":ContentManager" as ContentManager #gold
-participant ":Content" as Content #gold
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Content" as Content CONTENT_COLOR
 endbox
 
 -> DeleteCommand : execute()

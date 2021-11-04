@@ -1,15 +1,15 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-skinparam sequenceMessageAlign center
+!include ../SequenceStyle.puml
 
-box Command #thistle
-participant ":AddNoteCommand" as AddNoteCommand #violet
+box Command COMMAND_BOX_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
 endbox
 
-box Content #goldenrod
-participant ":ContentManager" as ContentManager #gold
-participant ":Note" as Note #gold
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Note" as Note CONTENT_COLOR
 endbox
 
 -> AddNoteCommand : execute()

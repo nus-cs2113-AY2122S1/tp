@@ -1,16 +1,16 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-skinparam sequenceMessageAlign center
+!include ../SequenceStyle.puml
 
-box Terminus #whitesmoke
-participant ":Terminus" as Terminus #white
+box Main TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
 
-box Storage #lightpink
-participant ":StorageManager" as StorageManager #mistyrose
-participant ":Storage" as Storage #mistyrose
-participant ":JsonStorage" as JsonStorage #mistyrose
+box Storage STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":Storage" as Storage STORAGE_COLOR
+participant ":JsonStorage" as JsonStorage STORAGE_COLOR
 endbox
 
 activate Terminus
@@ -24,7 +24,6 @@ StorageManager -> Storage : createFolder(:Path)
 activate Storage
 |||
 return
-destroy Storage
 StorageManager -> JsonStorage : execute(null : ModuleManager, CREATE : StorageActionEnum)
 activate JsonStorage
 note left: Create data folder and \nmain json file \nif they do not exists
@@ -42,6 +41,7 @@ ref over StorageManager
   load
 end
 return moduleManager
+destroy Storage
 
 
 @enduml

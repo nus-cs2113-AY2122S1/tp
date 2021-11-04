@@ -1,18 +1,18 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-skinparam sequenceMessageAlign center
+!include ../SequenceStyle.puml
 
-box Terminus #whitesmoke
-participant ":Terminus" as Terminus #white
+box Main TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
 
-box Storage #lightpink
-participant ":StorageManager" as StorageManager #mistyrose
-participant ":JsonStorage" as JsonStorage #mistyrose
-participant ":NoteStorage" as NoteStorage #mistyrose
-participant ":PdfStorage" as PdfStorage #mistyrose
-participant ":FolderStorage" as FolderStorage #mistyrose
+box Storage STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonStorage" as JsonStorage STORAGE_COLOR
+participant ":NoteStorage" as NoteStorage STORAGE_COLOR
+participant ":PdfStorage" as PdfStorage STORAGE_COLOR
+participant ":FolderStorage" as FolderStorage STORAGE_COLOR
 endbox
 
 -> Terminus : initialize()

@@ -1,8 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
-skinparam classAttributeIconSize 0
+!include ../ClassStyle.puml
 
 'abstract class DGS
 'abstract AbstractCollection
@@ -28,7 +27,7 @@ PdfStorage --|> Storage
 JsonStorage --|> Storage
 FolderStorage --|> Storage
 
-class StorageManager #mistyrose{
+class StorageManager STORAGE_COLOR{
   - isDisabled : Boolean
   - baseDirectory : Path
   + StorageManager(Path baseDirectory, String mainJsonFileName)
@@ -38,33 +37,33 @@ class StorageManager #mistyrose{
   + save() : void
 }
 
-class NoteStorage #mistyrose{
+class NoteStorage STORAGE_COLOR{
   + execute() : void
   # createNoteFile() : void
   # loadNoteIntoModuleManager() : void
   # saveAllNotes() : void
 }
 
-class PdfStorage #mistyrose{
+class PdfStorage STORAGE_COLOR{
   + execute() : void
   # exportModuleNotes() : void
 }
 
-class JsonStorage #mistyrose{
+class JsonStorage STORAGE_COLOR{
   + execute() : void
   + loadJson() : ModuleManager
   # createJson() : void
   # saveJson() : void
 }
 
-class FolderStorage #mistyrose{
+class FolderStorage STORAGE_COLOR{
   + execute() : void
   # createModuleFolder() : void
   # deleteModuleFolder() : void
   # renameModuleFolder() : void
 }
 
-class Storage #mistyrose{
+class Storage STORAGE_COLOR{
  + createFolder(Path folderPath) : void
  + createFile(Path filePath) : void
  + readFile(Path filePath) : String
@@ -79,7 +78,7 @@ class Storage #mistyrose{
 
 }
 
-class FilterManager #mistyrose{
+class FilterManager STORAGE_COLOR{
   + filter(ModuleManager moduleManager) : void
   # filterLink(ContentManager<Link> linkContentManager) : void
   # filterQuestion(ContentManager<Question> questionContentManager) : void
