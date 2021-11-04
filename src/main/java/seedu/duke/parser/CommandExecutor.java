@@ -25,7 +25,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
 
     //@@author yeezao
     /**
-     * Creates a new instance of {@link Trip}
+     * Creates a new instance of {@link Trip}.
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
@@ -58,7 +58,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
 
     /**
-     * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate
+     * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate.
      *
      * @return true if the user still wants to add the trip
      * @throws ForceCancelException if the user does not want to add the trip
