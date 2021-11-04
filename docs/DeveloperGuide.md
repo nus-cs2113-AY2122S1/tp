@@ -303,10 +303,24 @@ The application will iterate through all the user's modules and invoke `ModuleMa
 **Step 5:** Once the `ContentManager` has been acquired, the application will invoke `ContentManager#getContents()` to acquire all the `Link` objects stored by the user.
 For each `Link`, the application will invoke `Link#getDay()` to allow the filtering out of `Link` objects which has a different `day` attribute from the user request.
 
-**Step 6:** If the instruction type is a Daily Timetable Instruction, then Step 5 will only be executed once for a specific day. 
+Note: If the instruction type is a Daily Timetable Instruction, then Step 5 will only be executed once for a specific day. 
 Otherwise, for a Weekly Timetable Instruction, the process in Step 5 will be repeated for each day in the `DaysOfWeekEnum`.
 Once all the relevant `Link` objects have been collected, the application will sort all the user `Link` according to its `startTime` to allow a more convenient viewing.
 
+
+#### 4.1.2 Design Consideration
+
+This section shows the design considerations that were taken into account when implementing the Timetable feature.
+
+**Aspect: Accessibility of Timetable**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Accessed in the main workspace | Generates a compiled timetable of all user schedules | Requires to gather links from all content managers |
+| Accessed under each module | Easier to implement, as links are gathered from one content manager | Functionality might not be as useful for users |
+
+**Chosen Solution:** Accessed in the main workspace, as we decided that organizing and creating a compiled timetable of all the available user schedules will be better for user experience.
+Moreover, implementing a timetable for each module might be slightly redundant as a view schedule command could offer a similar functionality albeit not sorted out.
 
 
 
@@ -548,6 +562,23 @@ If the newly added `Link` object has the same `day` attribute and overlapping `s
 
 **Step 7:** The `StringBuilder` object will be converted to a `String` object before being returned to `ConflictManager` and `AddLinkCommand`.
 Then the `AddLinkCommand` will display all the conflicting schedule during its execution
+
+
+#### 4.4.2 Design Consideration
+
+This section shows the design considerations that were taken into account when implementing the Conflict Manager feature.
+
+**Aspect: Accessibility of Conflict Manager**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Accessed like other commands | Allows users to view conflicts anytime | Users might not be aware of conflicting schedules upon adding |
+| Integrated to Add Schedule | Users will be aware of conflicting schedules upon adding | Slightly challenging for users to identify conflicts at any given time |
+
+**Chosen Solution:** Integrated to Add Schedule, as we would like to notify users immediately when a conflict occurs.
+We hope that all users are aware of the conflicts as soon as possible, so that conflicts can be resolved quickly. 
+Although it is slightly challenging to identify conflicts when not adding a new schedule,
+we think that the timetable feature can help in identifying conflicts manually.
 
 ### 4.5 Storage Implementation
 
