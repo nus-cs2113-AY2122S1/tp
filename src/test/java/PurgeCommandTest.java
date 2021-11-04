@@ -27,7 +27,7 @@ public class PurgeCommandTest {
     }
 
     @Test
-    public void purgeCommand_inputNo_expectDataNotCleared() {
+    public void purgeCommand_inputN_expectDataNotCleared() {
         ByteArrayInputStream in = new ByteArrayInputStream("N\n".getBytes());
         System.setIn(in); // Send 'N' to scanner
         new PurgeCommand().execute();
@@ -35,7 +35,7 @@ public class PurgeCommandTest {
     }
 
     @Test
-    public void purgeCommand_inputYes_expectDataCleared() {
+    public void purgeCommand_inputY_expectDataCleared() {
         ByteArrayInputStream in = new ByteArrayInputStream("Y\n".getBytes());
         System.setIn(in); // Send 'Y' to scanner
         new PurgeCommand().execute();
