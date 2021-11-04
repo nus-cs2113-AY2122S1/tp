@@ -10,11 +10,22 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.taskmanager.TaskManager;
 
+/**
+ * Class for EditCommand. to be executed when editing tasks from {@link #taskManager}.
+ */
 public class EditCommand extends Command {
     private static final String TASK_EDITED = "Tasks edited:\n";
     private static final String USAGE = "-> Editing a task: edit <index> <--flag value> [--flag value] "
             + "[--flag value]...";
 
+    /**
+     * Constructs the EditCommand with the program {@link #taskManager}
+     * and the <code>commandArguments</code> specified in Command.
+     *
+     * @param taskManager the program's {@link seedu.duke.task.taskmanager.TaskManager}.
+     * @param commandArguments a <code>Map&lt;String, String&gt;</code>
+     *     of <code>flags</code> to <code>flag values</code>.
+     */
     public EditCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);
     }
@@ -24,6 +35,14 @@ public class EditCommand extends Command {
         return USAGE;
     }
 
+    /**
+     * Parses and edits the task specified in {@link #getMainArgument()}
+     * using the {@link seedu.duke.command.flags.EditFlag#DESCRIPTION} to change
+     * Task description and respective flags in superclasses of {@link seedu.duke.command.flags.TaskFlag}
+     * to modify Task superclass values.
+     * @return The message from the command in CommandResult.
+     * @throws java.lang.Exception Any uncaught Exceptions.
+     */
     @Override
     public CommandResult executeCommand() throws Exception {
         String message = TASK_EDITED;
@@ -53,6 +72,6 @@ public class EditCommand extends Command {
         } catch (StartDateAfterEndDateException sdaede) {
             message = sdaede.getMessage();
         }
-        return new CommandResult(message, true, false);
+        return new CommandResult(message, false);
     }
 }

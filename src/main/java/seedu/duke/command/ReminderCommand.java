@@ -34,6 +34,6 @@ public class ReminderCommand extends Command {
         } catch (MissingReminderFieldException mrfe) {
             message = mrfe.getMessage();
         }
-        return new CommandResult(message, true, false);
+        return new CommandResult(message, false);
     }
 }

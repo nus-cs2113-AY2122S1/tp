@@ -76,20 +76,37 @@ public class Todo extends Task {
         return description;
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Edits the {@link #doOnDate} if {@link seedu.duke.command.flags.TodoFlag#DO_ON_DATE}
+     *     is a key in <code>arguments</code>.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of flags to values
+     *     that should be edited in {@link seedu.duke.task.type.Todo}.
+     * @throws seedu.duke.exception.ParseDateFailedException if unable to parse <code>doOn</code>.
+     */
     @Override
     protected void taskEdit(Map<String, String> arguments) throws ParseDateFailedException {
         if (arguments.containsKey(TodoFlag.DO_ON_DATE)) {
-            String todo = arguments.get(TodoFlag.DO_ON_DATE);
-            setDoOnDate(DateParser.stringToDate(todo));
+            String doOn = arguments.get(TodoFlag.DO_ON_DATE);
+            setDoOnDate(DateParser.stringToDate(doOn));
         }
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Updates the {@link #doOnDate} if {@link seedu.duke.task.type.Todo} has a recurrence to the latest date.
+     */
     @Override
     public void refreshDate() {
         LocalDateTime newDoOnDate = getRecurrence().getNextRecurredDate(getDoOnDate());
         setDoOnDate(newDoOnDate);
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Returns {@link #doOnDate}.
+     */
     @Override
     public LocalDateTime getListDate() {
         return getDoOnDate();

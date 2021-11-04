@@ -1,21 +1,18 @@
 package seedu.duke.task;
 
-import seedu.duke.exception.InvalidTaskTypeException;
-
+/**
+ * {@link java.lang.Enum} class used to store the possible {@link seedu.duke.task.Task} types.
+ */
 public enum TypeEnum {
     TODO, DEADLINE, EVENT, LESSON;
 
+    /**
+     * Returns the name of {@link TypeEnum} in lowercase.
+     *
+     * @return <code>String</code> of {@link TypeEnum} name in lowercase.
+     */
     @Override
     public String toString() {
         return super.toString().toLowerCase();
-    }
-
-    public static TypeEnum getTaskType(String taskString) throws InvalidTaskTypeException {
-        for (TypeEnum type : values()) {
-            if (taskString.equalsIgnoreCase(type.name())) {
-                return type;
-            }
-        }
-        throw new InvalidTaskTypeException(taskString);
     }
 }

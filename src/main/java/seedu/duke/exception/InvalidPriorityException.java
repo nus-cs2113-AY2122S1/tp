@@ -1,5 +1,8 @@
 package seedu.duke.exception;
 
+/**
+ * Exception to be thrown when User enters an invalid {@link seedu.duke.task.PriorityEnum}.
+ */
 public class InvalidPriorityException extends Exception {
     private static final String MESSAGE = "Invalid parameter for priority inserted, '%s'.";
 

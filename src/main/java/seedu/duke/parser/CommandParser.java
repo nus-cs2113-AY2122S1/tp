@@ -14,7 +14,7 @@ import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
 import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
-import seedu.duke.exception.NoIndexException;
+import seedu.duke.exception.ParseTaskIndexesFailedException;
 import seedu.duke.log.Log;
 import java.util.HashMap;
 import java.util.Map;
@@ -135,10 +135,10 @@ public class CommandParser {
     }
 
     //@@author SeanRobertDH
-    public static Integer parseTaskIndex(String index) throws NumberFormatException, NoIndexException {
+    public static Integer parseTaskIndex(String index) throws NumberFormatException, ParseTaskIndexesFailedException {
         if (!Utility.isInteger(index)) {
             if (index.equals("")) {
-                throw new NoIndexException();
+                throw new ParseTaskIndexesFailedException();
             }
             throw new NumberFormatException(String.format(INVALID_TASK_INDEX, index));
         }

@@ -1,5 +1,9 @@
 package seedu.duke.exception;
 
+/**
+ * Exception to be thrown when User enters a Task Index that does not
+ * correspond to any task in {@link seedu.duke.task.taskmanager.TaskManager#taskList}.
+ */
 public class InvalidTaskIndexException extends Exception {
     private static final String MESSAGE = "[!] Task index '%d' does not correspond to any task!";
 

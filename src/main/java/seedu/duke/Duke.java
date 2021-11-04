@@ -26,7 +26,7 @@ public class Duke {
         try {
             commandResult = userCommand.executeCommand();
         } catch (Exception e) {
-            commandResult = new CommandResult(e.toString(), false, false);
+            commandResult = new CommandResult(e.toString(), false);
         }
         return commandResult;
     }

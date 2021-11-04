@@ -7,7 +7,6 @@ import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.parser.DateParser;
-import seedu.duke.parser.TaskParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -87,6 +86,17 @@ public class Event extends Task {
             DateParser.dateToString(getStartDate()), DateParser.dateToString(getEndDate()));
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Edits the {@link #startDate} and/or {@link #endDate} if {@link seedu.duke.command.flags.EventFlag#START_DATE}
+     * and/or {@link seedu.duke.command.flags.EventFlag#END_DATE} is a key in <code>arguments</code>.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of flags to values
+     *     that should be edited in {@link seedu.duke.task.type.Event}.
+     * @throws seedu.duke.exception.ParseDateFailedException if unable to parse <code>start</code> or <code>end</code>.
+     * @throws seedu.duke.exception.StartDateAfterEndDateException if edited <code>startDate</code> and/or
+     *     <code>endDate</code> would result in {@link #startDate} being before {@link #endDate}.
+     */
     @Override
     protected void taskEdit(Map<String, String> arguments)
             throws ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
@@ -94,12 +104,13 @@ public class Event extends Task {
         LocalDateTime endDate = getEndDate();
         if (arguments.containsKey(EventFlag.START_DATE)) {
             String start = arguments.get(EventFlag.START_DATE);
-            startDate = TaskParser.getDate(start);
+            startDate = DateParser.stringToDate(start);
         }
         if (arguments.containsKey(EventFlag.END_DATE)) {
             String end = arguments.get(EventFlag.END_DATE);
-            endDate = TaskParser.getDate(end);
+            endDate = DateParser.stringToDate(end);
         }
+        refreshDate();
         if (startDate.isAfter(endDate)) {
             throw new StartDateAfterEndDateException();
         }
@@ -107,6 +118,11 @@ public class Event extends Task {
         setEndDate(endDate);
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Updates the {@link #startDate} and {@link #endDate}
+     * if {@link seedu.duke.task.type.Event} has a recurrence to the latest date.
+     */
     @Override
     public void refreshDate() {
         LocalDateTime newStartDate = getRecurrence().getNextRecurredDate(getStartDate());
@@ -115,6 +131,10 @@ public class Event extends Task {
         setStartDate(newStartDate);
     }
 
+    //@@author SeanRobertDH
+    /**
+     * Returns {@link #startDate}.
+     */
     @Override
     public LocalDateTime getListDate() {
         return getStartDate();

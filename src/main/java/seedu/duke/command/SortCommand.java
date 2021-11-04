@@ -39,7 +39,7 @@ public class SortCommand extends Command {
             message = esce.toString();
         }
 
-        return new CommandResult(message, true, false);
+        return new CommandResult(message, false);
     }
 
     @Override

@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 //@@author SeanRobertDH
+/**
+ * Log class. Contains <code>static</code> {@link java.util.logging.Logger} methods.
+ */
 public class Log {
 
     private static final Level DEFAULT_CONSOLE_SEVERITY = Level.SEVERE;
@@ -33,6 +36,13 @@ public class Log {
         return fileHandler;
     }
 
+    /**
+     * Returns a <code>Logger</code> created that is tied to the <code>class</code>
+     * that called the function.
+     * Gets the Class that called the function using the <code>getStackTrace()</code> method.
+     *
+     * @return <code>Logger</code> that corresponds to class.
+     */
     private static Logger getLogger() {
         StackTraceElement classToLog = Thread.currentThread().getStackTrace()[METHOD_STACKTRACE_POSITION];
         String className = classToLog.getClassName();
@@ -43,6 +53,14 @@ public class Log {
         }
     }
 
+    /**
+     * Returns a <code>Logger</code> created that is tied to the <code>className</code>.
+     * Adds the <code>ConsoleHandler</code> with {@link #DEFAULT_CONSOLE_SEVERITY}.
+     * Adds the created <code>Logger</code> to {@link #loggers}.
+     *
+     * @param className Name of class to create <code>Logger</code> for.
+     * @return <code>Logger</code> for Class with name <<code>className</code>.
+     */
     private static Logger createLogger(String className) {
         Logger logger = Logger.getLogger(className);
         logger.setUseParentHandlers(USE_DEFAULT_HANDLERS);
@@ -70,6 +88,14 @@ public class Log {
         };
     }
 
+    /**
+     * Logs <code>message</code> with the
+     * logger from {@link #getLogger()}.
+     * Adds <code>FileHandler</code> before logging message
+     * and closes <code>FileHandler</code> afterwards.
+     * @param level Log severity level.
+     * @param message Message to log.
+     */
     private static void logMessage(Level level, String message) {
         Logger logger = getLogger();
         try {

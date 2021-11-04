@@ -7,7 +7,7 @@ public class ByeCommand extends Command {
 
     @Override
     public CommandResult executeCommand() {
-        return new CommandResult(EXIT_MSG, false, true);
+        return new CommandResult(EXIT_MSG, true);
     }
 
     @Override

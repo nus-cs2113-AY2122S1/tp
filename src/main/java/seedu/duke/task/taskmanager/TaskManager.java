@@ -409,6 +409,20 @@ public class TaskManager implements Subject {
         }
     }
 
+    private void updateFilteredTaskList(List<Task> replacementTaskList) {
+        latestFilteredList = replacementTaskList;
+    }
+
+    public Task getFilteredTask(int index) throws InvalidTaskIndexException {
+        checkFilteredListIndexValid(index);
+        return latestFilteredList.get(index);
+    }
+
+    public void addTasks(List<Task> tasks) {
+        taskList.addAll(tasks);
+        updateObservers();
+    }
+
     //@@author SeanRobertDH
     public int getTaskListSize() {
         return taskList.size();
@@ -430,12 +444,14 @@ public class TaskManager implements Subject {
         updateObservers();
     }
 
-    public void addTasks(List<Task> tasks) {
-        taskList.addAll(tasks);
-        updateObservers();
-    }
-
     //@@author SeanRobertDH
+    /**
+     * Checks if <code>index</code> is a valid index in {@link #latestFilteredList}.
+     *
+     * @param index Index to check exists in {@link #latestFilteredList}.
+     * @throws InvalidTaskIndexException if <code>index</code> does not correspond to
+     *     any {@link seedu.duke.task.Task} in {@link #latestFilteredList}.
+     */
     public void checkFilteredListIndexValid(int index) throws InvalidTaskIndexException {
         if (latestFilteredList.isEmpty()) {
             latestFilteredList = taskList;
@@ -445,6 +461,14 @@ public class TaskManager implements Subject {
         }
     }
 
+    /**
+     * Deletes the {@link seedu.duke.task.Task} in {@link #taskList}
+     * based off its index in {@link #latestFilteredList}.
+     *
+     * @param index Index of task in {@link #latestFilteredList} to delete from {@link #taskList}.
+     * @throws InvalidTaskIndexException if <code>index</code> does not correspond to
+     *     any {@link seedu.duke.task.Task} in {@link #latestFilteredList}.
+     */
     //@@author SeanRobertDH
     public Task deleteFilteredTask(int index) throws InvalidTaskIndexException {
         checkFilteredListIndexValid(index);
@@ -454,23 +478,21 @@ public class TaskManager implements Subject {
         return deletedTask;
     }
 
+    /**
+     * Edits the {@link seedu.duke.task.Task} in {@link #taskList}
+     * based off its index in {@link #latestFilteredList}.
+     *
+     * @param index Index of task in {@link #latestFilteredList} to edit from {@link #taskList}.
+     * @throws InvalidTaskIndexException if <code>index</code> does not correspond to
+     *     any {@link seedu.duke.task.Task} in {@link #latestFilteredList}.
+     */
     //@@author SeanRobertDH
-    private void updateFilteredTaskList(List<Task> replacementTaskList) {
-        latestFilteredList = replacementTaskList;
-    }
-
-    //@@author SeanRobertDH
-    public Task editFilteredTask(int index, Map<String, String> arguments)
-            throws InvalidTaskIndexException, InvalidPriorityException,
-            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
+    public Task editFilteredTask(int index, Map<String, String> arguments) throws InvalidTaskIndexException,
+            InvalidPriorityException, InvalidRecurrenceException, ParseDateFailedException,
+            StartDateAfterEndDateException, URISyntaxException {
         checkFilteredListIndexValid(index);
         latestFilteredList.get(index).edit(arguments);
         updateObservers();
-        return latestFilteredList.get(index);
-    }
-
-    public Task getFilteredTask(int index) throws InvalidTaskIndexException {
-        checkFilteredListIndexValid(index);
         return latestFilteredList.get(index);
     }
 }

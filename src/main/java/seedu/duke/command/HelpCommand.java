@@ -6,6 +6,9 @@ import seedu.duke.command.addtask.ModuleCommand;
 import seedu.duke.command.addtask.TodoCommand;
 
 //@@author SeanRobertDH
+/**
+ * Class for HelpCommand. to be executed when the User needs to see usage for all {@link seedu.duke.command.Command}.
+ */
 public class HelpCommand extends Command {
 
     private static final String SEPARATOR = "......................................................................\n";
@@ -38,7 +41,7 @@ public class HelpCommand extends Command {
             message += command.getUsage() + NEW_LINE;
         }
         message += ADDITIONAL_INFORMATION;
-        return new CommandResult(message, false, false);
+        return new CommandResult(message, false);
     }
 
     @Override

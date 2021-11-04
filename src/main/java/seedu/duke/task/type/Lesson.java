@@ -1,10 +1,6 @@
 package seedu.duke.task.type;
 
-import seedu.duke.command.flags.EventFlag;
 import seedu.duke.command.flags.LessonFlag;
-import seedu.duke.exception.ParseDateFailedException;
-import seedu.duke.exception.StartDateAfterEndDateException;
-import seedu.duke.parser.TaskParser;
 import seedu.duke.parser.DateParser;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.ReminderInformation;

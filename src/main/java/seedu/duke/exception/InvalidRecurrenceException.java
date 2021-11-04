@@ -1,5 +1,8 @@
 package seedu.duke.exception;
 
+/**
+ * Exception to be thrown when User enters an invalid {@link seedu.duke.task.RecurrenceEnum}.
+ */
 public class InvalidRecurrenceException extends Exception {
     private static final String MESSAGE = "Invalid parameter for recurrence inserted, '%s'.";
 
