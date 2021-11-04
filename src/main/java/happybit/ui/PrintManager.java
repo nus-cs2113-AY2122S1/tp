@@ -458,11 +458,12 @@ public class PrintManager {
             data[habitIndex][INDEX_INDEX] = String.valueOf(habitIndex + 1);
             data[habitIndex][HABIT_NAME_INDEX] = habits.get(habitIndex).getHabitName();
             data[habitIndex][HABIT_INTERVAL_INDEX] = String.valueOf(habits.get(habitIndex).getIntervalLength());
-            int[] habitStatistics = habits.get(habitIndex).getListStatistics();
-            data[habitIndex][HABIT_COMPLETION_RATE_INDEX] = habitStatistics[COMPLETION_RATE_INDEX] + PERCENT_SYMBOL;
-            data[habitIndex][HABIT_COMPLETED_INDEX] = String.valueOf(habitStatistics[COMPLETED_INDEX]);
-            data[habitIndex][HABIT_REMAINING_INDEX] = String.valueOf(habitStatistics[REMAINING_INDEX]);
-            data[habitIndex][HABIT_EXPIRED_INDEX] = String.valueOf(habitStatistics[EXPIRED_INDEX]);
+            double[] habitStatistics = habits.get(habitIndex).getListStatistics();
+            data[habitIndex][HABIT_COMPLETION_RATE_INDEX] =
+                    String.format("%.2f", habitStatistics[COMPLETION_RATE_INDEX]) + PERCENT_SYMBOL;
+            data[habitIndex][HABIT_COMPLETED_INDEX] = String.valueOf((int)(habitStatistics[COMPLETED_INDEX]));
+            data[habitIndex][HABIT_REMAINING_INDEX] = String.valueOf((int)(habitStatistics[REMAINING_INDEX]));
+            data[habitIndex][HABIT_EXPIRED_INDEX] = String.valueOf((int)(habitStatistics[EXPIRED_INDEX]));
             data[habitIndex][HABIT_STREAK_INDEX] = String.valueOf(habits.get(habitIndex).getStreak());
         }
         return data;

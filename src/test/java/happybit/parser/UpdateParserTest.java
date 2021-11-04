@@ -10,15 +10,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UpdateParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
-    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
-            + "Eg: n/Reach for the stars";
-    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
-    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
-    private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
-    private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
-    private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
+    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
 
     @Test
     void parseUpdateGoalNameCommand_validInput_success() throws HaBitParserException {
