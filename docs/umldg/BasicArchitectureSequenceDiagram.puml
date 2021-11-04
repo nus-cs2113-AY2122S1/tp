@@ -35,6 +35,7 @@ Command --[#edba02]> Parser
 deactivate Command
 Parser --[#Black]> Main : Command 
 deactivate Parser
+destroy Parser
 
 Main -[#Black]> Command : executeUserCommand(Storage,WorkoutList) 
 activate Command #Orange
@@ -48,6 +49,7 @@ Storage -[#Orange]-> Command
 deactivate Storage
 Command -[#Black]-> Main : CommandResult
 deactivate Command
+destroy Command
 
 create Ui
 Main -[#Black]> Ui

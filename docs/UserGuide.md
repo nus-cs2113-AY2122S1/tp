@@ -551,9 +551,36 @@ ________________________________________________________
 ________________________________________________________
 ```
 
+**How to resolve errors?**
+
+If you obtained the error messages in any of the 3 scenarios, do ensure that GetJackd's data file is in the valid format as shown below. 
+```json
+{
+  "workouts" : [ {
+    "exercises" : [ {
+      "description" : "planks",
+      "sets" : "3", 
+      "reps" : "10",
+      "isDone" : "false"
+    } ],
+    "workoutName" : "xmas workout",
+    "deadline" : "2021-12-25"
+  }, {
+    "exercises" : [ ],
+    "workoutName" : "emptyWorkout",
+    "deadline" : ""
+  }  ]
+}
+```
+
+_**Things to look out for**_:
+1. Data fields in sets and reps are numbers.
+2. Data field in deadline is following the format: `YYYY-MM-DD`
+3. Missing `{ }`, `[ ]`, `" "` or `,`
+
 ### 17. Automatic sorting of Workouts
 
-GetJackd automatically sorts your workouts by their deadlines every time you add a new workout to your workout list. The
+GetJack'd automatically sorts your workouts by their deadlines every time you add a new workout to your workout list. The
 workouts will be sorted in descending order where workouts with the earliest deadlines being on top. Workouts without 
 deadlines will be at the bottom of the list and ranked according to the time they were added to your workout list. 
 

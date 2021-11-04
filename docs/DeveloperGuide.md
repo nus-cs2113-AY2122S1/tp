@@ -5,7 +5,7 @@
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
   - [Command Component](#command-component)
-  - [Command Manager Component](#commandmanager-component)
+  - [Command Manager Component](#parser--commandmanager-component)
 - [Logging](#logging)
 - [Product Scope](#product-scope)
   - [Target User Profile](#target-user-profile)
@@ -188,7 +188,6 @@ Location: `seedu.duke.ui`
 __Note:__
 * `CommandResult` : Contains all the information we want to display to the user.
 * `Command` : Abstract class that tells us whether we are in the main level or in a workout.
-* 
 * `Ui` : Handles the display of information to the user.
 
 In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
