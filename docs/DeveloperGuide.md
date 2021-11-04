@@ -23,9 +23,18 @@
 &nbsp;&nbsp;[3.5. IngredientList component](#35-ingredientlist-component) <br>
 &nbsp;&nbsp;[3.6. Storage component](#36-storage-component) <br>
 [4. Implementation](#4-implementation) <br>
+<<<<<<< HEAD
 &nbsp;&nbsp;[4.1. Adding Ingredients](#41-adding-ingredients) <br>
 &nbsp;&nbsp;[4.2. Alerts](#42-alerts) <br>
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
+=======
+&nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
+&nbsp;&nbsp;[4.2. Alerts](#42-deleting-ingredients) <br>
+[5. Product scope](#5-product-scope) <br>
+[6. User stories](#6-user-stories) <br>
+[7. Non-functional requirements](#7-non-functional-requirements) <br>
+[8. Instructions for manual testing](#8-instructions-for-manual-testing)<br>
+>>>>>>> master
 
 ## 1. Introduction
 
@@ -211,7 +220,7 @@ The sequence diagram below illustrates the above command example
 ![image](images/DeleteSequenceDiagram.png)
 
 
-## Product scope
+## 5. Product scope
 
 **Target user profile**:
 * manages food stock and needs to track a significant number of ingredients/ food items (e.g. a restaurant inventory manager)
@@ -220,7 +229,7 @@ The sequence diagram below illustrates the above command example
 
 **Value proposition**: track large amounts of ingredients simply through typing commands faster than a GUI driven application
 
-## User Stories
+## 6. User stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -235,12 +244,12 @@ The sequence diagram below illustrates the above command example
 |v2.0|user|find stock of an ingredient by name|view stock of an ingredient without having to go through the entire list|
 |v2.0|user|subtract stock from current inventory according to the restaurant's usage|automatically update inventory's stock|
 
-## Non-Functional Requirements
+## 7. Non-functional requirements
 
 1. Should work on any *mainstream OS* (Windows, Linus, macOS or Unix) with Java `11` or above installed.
 2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
 
-## Instructions for manual testing
+## 8. Instructions for manual testing
 
 ### Setting up 
 Refer to the [first time setup section](#2-first-time-setup) and follow the steps to run SITUS on your device. For the following sections, refer to the [user guide](UserGuide.md) for information on how to use the different commands.
