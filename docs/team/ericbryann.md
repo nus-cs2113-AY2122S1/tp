@@ -6,7 +6,7 @@ MedBot is a Command Line Interface (CLI) application for head nurses to manage p
 scheduler appointments between them and medical staff.
 
 ### Summary of Contributions
-* Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
+* Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=EricBryann&tabRepo=AY2122S1-CS2113-T13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 * New Features implemented:
   * `Ui` class (including `PersonUi`, `PatientUi`, `StaffUi` class)
     * What it does : interacts with users by reading user inputs and printing outputs.
