@@ -70,13 +70,15 @@ public class Ui {
             for (Member member : members.getMemberList()) {
                 System.out.println(member.toString());
             }
-        } else {
-            System.out.println("Sorry there is no members that have similar name as your delete \"" + name + "\"");
         }
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
         System.out.println("You have removed training entry: " + "\n" + training.toString());
+    }
+
+    public static void printEmptyMembersFile() {
+        System.out.println("Members File is Empty!!!");
     }
 
     public static void printQuestionToList() {
@@ -89,6 +91,18 @@ public class Ui {
 
     public static void printIndexError() {
         System.out.println("Index must be a number");
+    }
+
+    public static void printEditPhoneFailed() {
+        System.out.println("You did not edit the phone number due to a wrong format being used...");
+    }
+
+    public static void printEditGenderFailed() {
+        System.out.println("You did not edit the gender due to a wrong format being used...");
+    }
+
+    public static void printEditNameFailed() {
+        System.out.println("You did not edit the Name due to a number being used...");
     }
 
     public static void printMissingTraining() {

@@ -203,6 +203,7 @@ This means that you will not have to delete the entry and then add a new one lat
         * `add /t /n Weekly Friday Training 2 /a 12 Nov 2021 /v MPSH1`
 
     * **Expected Output:**
+
    ```
    Added a Training entry:
    [1] Training Name: WEEKLY FRIDAY TRAINING 1 | Venue: MPSH 1 | Time: 5 NOV 2021
