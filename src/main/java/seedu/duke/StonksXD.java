@@ -12,7 +12,7 @@ import seedu.utility.Ui;
 
 /**
  * A command line interfaced program that can store your financial entries and provide other insights and analytical 
- * services
+ * services.
  */
 public class StonksXD {
     private Ui ui;
