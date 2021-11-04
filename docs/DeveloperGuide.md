@@ -317,6 +317,10 @@ data easily with any available text editor.
 
 ## 4. Implementation
 
+This section introduces the specific implementation details and design consideration of some features in TermiNUS.
+
+
+
 ### 4.1 Timetable Feature
 The timetable feature aims to provide users a single command to access all the schedules they store in different modules within TermiNUS.
 This feature would ease users in accessing a compilation of all their schedule, instead of having to access all the individual module workspaces.
