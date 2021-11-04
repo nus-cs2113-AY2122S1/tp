@@ -6,6 +6,9 @@ import seplanner.modules.ModuleMapping;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ParseCondition {
 
     public static boolean isNumeric(String input) {
@@ -15,6 +18,13 @@ public class ParseCondition {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean isText(String input) {
+        String regex = ".*[a-zA-Z].*";  // regex to check if string contains any letters
+        Pattern pattern = Pattern.compile(regex);  // compiles the regex
+        Matcher matcherText = pattern.matcher(input);
+        return matcherText.matches();
     }
 
     public static boolean isEmptyInput(String input) {
