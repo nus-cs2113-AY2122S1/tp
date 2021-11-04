@@ -169,7 +169,4 @@ class UpdateStockCommandTest {
         executeUpdateStockCommandQtyAndMaxQty("1", "999", "9999");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
-
-
-
 }
