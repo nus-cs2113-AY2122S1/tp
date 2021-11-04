@@ -149,7 +149,7 @@ Mode has changed to ORDER.
 > sort in descending order.
 > * For the `delete` commands, ID will not reset after deletion as stock ID, order ID and prescription ID are unique so that MediVault 
 > can identify each stock, order and prescription entry uniquely.
-> * `/` is not allowed to be entered for all input parameters, as MediVault uses them to identity the parameters.
+> * `/` is not allowed to be entered for all input parameters, as MediVault uses it to identity the parameters.
 
 ## Managing Stocks
 
@@ -433,11 +433,14 @@ Expected Output 2:
 Updates an existing prescription information.
 
 > :warning: Warning:
-> * You cannot update the Stock or the Prescription ID. 
+> * You **cannot** update the Stock or the Prescription ID. 
 > * The allocation of Prescription ID is determined by MediVault.
 > * Your provided `n/NAME` parameter **must** exist in stocks.
 > * When you update a prescription record, the stock information may be affected as well
 > * MediVault does not combine prescription information even if the column information are the same.
+> * You **cannot** update an existing prescription information with 0 quantity. You must use the `deleteprescription` 
+command instead.
+> * You **cannot** update the prescription date with a date after today.
 
 > :information_source: Note:
 > * MediVault allocates a **new** Prescription ID when you update prescription records containing the `n/NAME` and 
@@ -546,6 +549,7 @@ Adds an order for a stock.
 > :information_source: Note:
 > * The date parameter is optional, MediVault will set it as the date you added in the order if the parameter is omitted.
 > * If the order quantity exceeds the maximum stock quantity allowed, you are unable to add the order.
+> * You **cannot** add an order date with a date after today.
 
 Format: `addorder n/NAME q/QUANTITY {d/DATE}`
 
@@ -637,6 +641,7 @@ Updates an existing order information.
 > * The allocation of Order ID is determined by MediVault.
 > * The status of the order will only be changed when you run the `receiveorder` command.
 > * MediVault does not combine orders even if the column information are the same.
+> * You **cannot** update the order date with a date after today.
 
 Format: `updateorder i/ID [n/NAME q/QUANTITY d/DATE]`
 
