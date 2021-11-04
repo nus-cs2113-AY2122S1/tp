@@ -14,8 +14,10 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
 
 ## Table of contents
 
-* [Pre-requisites](#pre-requisites)
+* [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
 * [Commands](#commands)
+  * [Warning Labels](#warning-labels) :warning:
+
   * [Members](#member-commands)
     * [add /m](#add-member)
     * [delete /m](#delete-member)
@@ -55,7 +57,11 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
 
 **CCA Manager** helps you to organize three main types of information: [Members], [Training] and [Attendance].
 With **CCA Manager**, you can organize your data with the help of useful commands such as `add`, `delete`, `edit`, `list` and `find` function
+
 ### Quick Reference: | [Member Commands](#member-commands) | [Training Commands](#trianing-commands) | [Attendance Commands](#attendance-commands)
+
+## Warning Labels
+:warning: *denotes important formatting points you should pay attention to. Failing to follow them will cause your command to be unsuccessful.*
 
 
 ## Member Commands
@@ -69,7 +75,7 @@ To start, you can populate the member list of **CCA Manager** with the help of t
     * The `add /m` keyword requires 4 different arguments:
         * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
-          * Student Number of each entry must be _unique_. Different member entries with the same student number is not allowed.
+          * :warning: Student Number of each entry must be _unique_. Different member entries with the same student number is not allowed.
         * use `/g` to input _gender_ of your member. Either _M_ for male and _F_ for female.
         * use `/p` to input _phone number_ of your member.
    
@@ -189,10 +195,12 @@ This means that you will not have to delete the entry and then add a new one lat
 1. `add /t` This adds entries to the Training List stored in CCA Manager.
     * The `add /t` keyword requires 3 different arguments:
         * use `/n` to input _name_ of your training schedule.
-          * Training Schedules must have _unique_ names. Different training entries with the same training name is not allowed.
+          * :warning: Training Schedules must have _unique_ names. Different training entries with the same training name is not allowed.
         * use `/a` to input _date and time_ of your training schedule.
           * _Date and time_ is stored as a _String_ to allow the CCA admin to use relative timing. E.g. _After training_, _Recess Week_, etc.
         * use `/v` to input _venue_ of training schedule.
+        * :warning: In your command input, there should only be ONE of each fields. Additional instances of the field will be treated as a wrong command, thus printing an error.
+          * For example, `add /t /n Friday /n Training /a 5 Nov 2021 /v MPSH1` will produce an error, because `/n` is used twice.
 
     * **Format:**
         * add [/t /n <TRAINING_NAME> /a <DATE_TIME> /v <VENUE>]
@@ -269,6 +277,8 @@ Had a sudden change in venue for your trainings? No worries! You can edit your t
         * `/n <NEW_NAME>` edits the current _training name_
         * `/a <NEW_DATETIME>` edits the current _date and time_
         * `/v <NEW_VENUE>` edits the current _venue_
+        * :warning: Similar to [Add Member](#add-member), the edit field should only have **one** of each field (`/n`, `/a` or `/v`). Otherwise, the command will be treated as invalid. 
+
     * **Format:**
         * edit [/t <TRAINING_INDEX> /n <NEW_NAME> /a <NEW_DATETIME> /v <NEW_VENUE>]
     * **Examples:**
@@ -385,14 +395,14 @@ A 'cheat sheet' of commands here
 
 Action| Syntax |Remarks|
 |-----|----------|----|
-|add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
-|add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
+|add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Only one of each `/n` `/s` `/g` `/p`<br />All fields are compulsory
+|add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Only one of each `/n` `/a` `/v` All fields are compulsory 
 |add attendance| add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]|
 |delete member| delete [/m <MEMBER_INDEX_NUMBER>] OR [/m <MEMBER_NAME>] | Get the index or name by calling `list /m`
 |delete training|delete [/t <TRAINING_INDEX_NUMBER>] OR [/t <TRAINING_NAME>]| Get the name or index by calling `list /t`
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>] OR <MEMBER_NAME> OR <TRAINING_NAME>| Get the index by calling `list /att`
-|edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
-|edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
+|edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields<br />Only one of each `/n` `/s` `/g` `/p`
+|edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields<br />Only one of each `/n` `/a` `/v`
 | find member| find [/m <MEMBER_NAME>] | Searches for valid entries based on member name
 | find training| find [/t <TRAINING_NAME>] | Searches for valid entries based on training name
 |list| list [/m] [/t] [/att /t <TRAINING_NAME>]| `/m` for Member, `/t` for Training, `/att` for Attendance
