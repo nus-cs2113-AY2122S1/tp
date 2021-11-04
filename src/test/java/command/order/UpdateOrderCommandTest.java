@@ -33,7 +33,7 @@ class UpdateOrderCommandTest {
 
     @AfterAll
     public static void clearData() {
-        Medicine.getInstance().clear();
+        Data.clearTestData();
     }
 
     private void executeUpdateOrderCommand(String id, String date, String qty) {

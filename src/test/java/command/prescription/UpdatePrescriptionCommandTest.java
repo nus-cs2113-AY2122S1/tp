@@ -33,7 +33,7 @@ class UpdatePrescriptionCommandTest {
 
     @AfterAll
     public static void clearData() {
-        Medicine.getInstance().clear();
+        Data.clearTestData();
     }
 
     private void executeUpdatePrescriptionCommandNameAndQty(String id, String name, String qty) {

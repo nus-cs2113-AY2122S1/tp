@@ -33,7 +33,7 @@ class UpdateStockCommandTest {
 
     @AfterAll
     public static void clearData() {
-        Medicine.getInstance().clear();
+        Data.clearTestData();
     }
 
 
