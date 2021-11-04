@@ -67,13 +67,6 @@ public class EditAssessmentCommand extends Command {
                     Assessment.MINIMUM_MARKS)
                 );
             }
-            int newMaximumMarks = Integer.parseInt(newMaximumMarksString);
-            if (newMaximumMarks < Assessment.MINIMUM_MARKS) {
-                throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
-                        Assessment.MINIMUM_MARKS)
-                );
-            }
         }
 
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
@@ -83,14 +76,6 @@ public class EditAssessmentCommand extends Command {
                     MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
                     Assessment.WEIGHTAGE_RANGE[0],
                     Assessment.WEIGHTAGE_RANGE[1])
-                );
-            }
-            double newWeightage = Double.parseDouble(newWeightageString);
-            if (!Assessment.isWeightageWithinRange(newWeightage)) {
-                throw new TaaException(String.format(
-                        MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
-                        Assessment.WEIGHTAGE_RANGE[0],
-                        Assessment.WEIGHTAGE_RANGE[1])
                 );
             }
         }
@@ -115,41 +100,42 @@ public class EditAssessmentCommand extends Command {
         }
 
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-        Assessment assessment = teachingClass.getAssessmentList().getAssessment(name);
         AssessmentList assessmentList = teachingClass.getAssessmentList();
+        Assessment assessment = assessmentList.getAssessment(name);
         if (assessment == null) {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
         assert (argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME) || argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS)
             || argumentMap.containsKey(KEY_NEW_WEIGHTAGE)) : "a new value to edit should at least exist.";
+
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
+        boolean hasValidNewWeightage = false;
         if (newWeightageString != null) {
-            assert Util.isStringDouble(newWeightageString);
-            double newWeightage = Double.parseDouble(newWeightageString);
-            assert Assessment.isWeightageWithinRange(newWeightage);
-            double totalWeightage = assessmentList.totalWeightageForEditAssessmentCommand(name);
-            double totalNewWeightage = totalWeightage + newWeightage;
-            if (!Assessment.isWeightageWithinRange(totalNewWeightage)) {
-                throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE));
-            }
-            assessment.setWeightage(newWeightage);
+            hasValidNewWeightage = checkWeightage(newWeightageString, assessmentList, name);
         }
 
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
+        boolean hasValidNewMaximumMarks = false;
         if (newMaximumMarksString != null) {
-            assert Util.isStringInteger(newMaximumMarksString);
-            int newMaximumMarks = Integer.parseInt(newMaximumMarksString);
-            assert newMaximumMarks >= Assessment.MINIMUM_MARKS;
-            assessment.setMaximumMarks(newMaximumMarks);
+            hasValidNewMaximumMarks = checkMaximumMarks(newMaximumMarksString);
         }
 
         String newName = argumentMap.getOrDefault(KEY_NEW_ASSESSMENT_NAME, null);
+        boolean hasValidNewName = false;
         if (newName != null) {
-            boolean isValidNewName = assessmentList.checkRepeatedName(newName);
-            if (!isValidNewName) {
-                throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_NAME));
-            }
+            hasValidNewName = checkNewName(newName, assessmentList, assessment);
+        }
+
+        if (hasValidNewWeightage) {
+            double newWeightage = Double.parseDouble(newWeightageString);
+            assessment.setWeightage(newWeightage);
+        }
+        if (hasValidNewMaximumMarks) {
+            int newMaximumMarks = Integer.parseInt(newMaximumMarksString);
+            assessment.setMaximumMarks(newMaximumMarks);
+        }
+        if (hasValidNewName) {
             assessment.setName(newName);
         }
 
@@ -159,6 +145,50 @@ public class EditAssessmentCommand extends Command {
         assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_EDITED, classId,
             assessment));
+    }
+
+    public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name) throws TaaException {
+        assert Util.isStringDouble(newWeightageString);
+        double newWeightage = Double.parseDouble(newWeightageString);
+        if (!Assessment.isWeightageWithinRange(newWeightage)) {
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
+            );
+        }
+        double totalWeightage = 0;
+        ArrayList<Assessment> assessments = assessmentList.getAssessments();
+        for (Assessment a : assessments) {
+            if (!a.getName().equalsIgnoreCase(name)) {
+                totalWeightage += a.getWeightage();
+            }
+        }
+        double totalNewWeightage = totalWeightage + newWeightage;
+        if (!Assessment.isWeightageWithinRange(totalNewWeightage)) {
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE));
+        }
+        return true;
+    }
+
+    public boolean checkMaximumMarks(String newMaximumMarksString) throws TaaException {
+        assert Util.isStringInteger(newMaximumMarksString);
+        int newMaximumMarks = Integer.parseInt(newMaximumMarksString);
+        if (newMaximumMarks < Assessment.MINIMUM_MARKS) {
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
+                    Assessment.MINIMUM_MARKS)
+            );
+        }
+        return true;
+    }
+
+    public boolean checkNewName(String newName, AssessmentList assessmentList, Assessment assessment) throws TaaException {
+        boolean isValidNewName = assessmentList.checkRepeatedName(assessment, newName);
+        if (!isValidNewName) {
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_NAME));
+        }
+        return true;
     }
 
     @Override
