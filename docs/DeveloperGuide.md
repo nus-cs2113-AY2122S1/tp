@@ -229,7 +229,7 @@ and **Step 5**.
 5. Then, `MedicineValidator` class runs `containsInvalidParameterValues()` in `*Validator` to check if 
 **parameter values** input by the user is valid.
 6. `MedicineValidator` will return the result of the validity checks back to `*Command`.
-7. After running the Logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
+7. After running the Logic for `*Command`, commands that **modifies** the `*` information attempts to get the instance of 
 `Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
 
 The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 
