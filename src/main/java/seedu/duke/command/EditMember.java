@@ -26,8 +26,8 @@ public class EditMember {
      */
     public EditMember(MemberList members, int index, Member toChange) {
         try {
-
-            if (toChange == null) {
+            System.out.println();
+            if (toChange == null || !members.verifyNoDuplicates(toChange)) {
                 return;
             }
             assert index >= 1;

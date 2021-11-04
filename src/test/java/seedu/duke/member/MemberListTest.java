@@ -25,15 +25,15 @@ class MemberListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432", true);
+        teckHwee = new Member("TAN TECK HWEE", "A0123456A", "F", "98765432", true);
         teckHwee.setIndex(1);
-        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232", true);
+        ianWang = new Member("IAN WANG", "A0234567B", "M", "98441232", true);
         ianWang.setIndex(2);
-        glenn = new Member("Glenn", "A0345678C", "M", "91233344", true);
+        glenn = new Member("GLENN", "A0345678C", "M", "91233344", true);
         glenn.setIndex(3);
-        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452", true);
+        izdiyad = new Member("IZDIYAD", "A0456789D", "M", "94376452", true);
         izdiyad.setIndex(4);
-        xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132", true);
+        xingYuan = new Member("XING YUAN", "A0567891E", "M", "96987132", true);
         xingYuan.setIndex(5);
 
         ArrayList<Member> memberList = new ArrayList<Member>();
@@ -92,13 +92,13 @@ class MemberListTest {
 
     @Test
     void editMember() {
-        final String string = "edit /m 1 /n Ian Wang";
+        final String string = "edit /m 1 /n Ian Hwang";
         int index = Parser.getIndex(string);
         Member memberDetail = Parser.getMemberDetails(string, 'E');
         new EditMember(fullMemberList, index, memberDetail);
 
         try {
-            assertEquals(fullMemberList.getMember(1).getName(), "IAN WANG");
+            assertEquals(fullMemberList.getMember(1).getName(), "IAN HWANG");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
