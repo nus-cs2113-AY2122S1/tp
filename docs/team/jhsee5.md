@@ -11,7 +11,7 @@ and enables more efficient allocation of said ingredients to the cooking of dish
 ultimately saving cost and increasing profits.
 
 ### Summary of Contributions
-* **Code contributed**: [ReposSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=jhsee5&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jhsee5&tabRepo=AY2122S1-CS2113T-W11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=jhsee5&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jhsee5&tabRepo=AY2122S1-CS2113T-W11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 * **Feature**: Add Ingredients
   * **What it does**: Allows the user to add a new Ingredient to the List of Ingredients in Food-O-Rama.
   * **Justification**: This feature is one of the core features of Food-O-Rama which keeps track of Ingredients.
