@@ -1,21 +1,23 @@
-# User Guide
-SchedUrMods is a **desktop application for NUS Students to manage your NUSMODS timetable and
+# SchedUrMods User Guide
+SchedUrMods is a **desktop application for NUS Students to manage their NUSMODS timetable and
 everyday tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
 SchedUrMods can help you manage your daily tasks faster than traditional GUI application.  
 
-Below is a guide on how you can get started using our program to start Sched'ing Ur Mods.  
+Below is a guide on how you can get started using our program to start **"Scheduling Ur Mods"**.  
 
 ## Overview
-
 - [1. Quick Start](#1-quick-start)
 - [2. Features](#2-features)
     - [2.1 Viewing help: `help`](#2-1-viewing-help--help)
     - [2.2 Adding your task:](#22-adding-your-task)
-        - [2.2.1 Todo: `todo`](#221-todo-todo)
-        - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
-        - [2.2.3 Event: `event`](#223-event-event)
-        - [2.2.4 Date Format: `<dateFormat>`](#224-date-format-dateformat)
-    - [2.3 Listing your tasks: `list`](#23-listing-all-your-tasks-list)
+      - [2.2.1 Todo: `todo`](#221-todo-todo)
+      - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
+      - [2.2.3 Event: `event`](#223-event-event)
+      - [2.2.4 Date Format: `<dateFormat>`](#224-date-format-dateformat)
+    - [2.3 Listing your tasks: `list`](#23-listing-your-tasks-list)
+      - [2.3.1 Listing your entire tasklist](#231-listing-your-entire-tasklist)
+      - [2.3.2 Filtering your tasklist](#232-filtering-your-tasklist)
+      - [2.3.3 Listing the recurrence of a task](#233-listing-the-recurrence-of-a-task)
     - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
     - [2.5 Deleting your tasks: `delete`](#25-deleting-your-tasks-delete)
     - [2.6 Exiting the program: `bye`](#26-exiting-the-program-bye)
@@ -41,7 +43,7 @@ and that `java` is in your `PATH` environment variable.
 /\__/ /| (__ | | | ||  __/| (_| || |_| || |   | |  | || (_) || (_| |\__ \
 \____/  \___||_| |_| \___| \__,_| \___/ |_|   \_|  |_/ \___/  \__,_||___/
 -------------------------------------------------------------------------
-Command-Line Interface for NUSMODS                               (v1.0.0)
+Command-Line Interface for NUSMODS                               (v2.1.0)
 -------------------------------------------------------------------------
 [user]:
 ```
@@ -51,7 +53,7 @@ Command-Line Interface for NUSMODS                               (v1.0.0)
 8. Refer to the [Features](#2-features) below for details of each command.
 
 ## 2. Features
-### 2. 1 Viewing help : `help`
+### 2.1 Viewing help : `help`
 Displays all commands available for the SchedUrMods application.
 
 **Format:** `help`
@@ -132,7 +134,7 @@ Adds your **event** task to your task list.
 - with no recurrence.
 
 ### 2.2.4 Date Format: `<dateFormat>`
-The acepted date formats in our program:  
+The accepted date formats in our program:  
 - `dd/MM/yyyy HH:mm`
 - `dd/MM/yyyy HH`
 - `dd/MM HH:mm`
@@ -149,76 +151,107 @@ The acepted date formats in our program:
 - `mm` is the minute
 
 >💡 **Note**: When `dd`, `mm` or `yyyy` is unspecified, they will be replaced with current day, month and year respectively.  
+
 >💡 **Note**: When `mm` is unspecified, it will be replaced with `0`.
 
 **Example:** `03/10/2004 03` translates to `3rd October 2004, 3am`.
 
 
-### 2.3 Listing all your tasks: `list`
-Lists tasks in your task list.
+### 2.3 Listing your tasks: `list`
 
-**Format 1:** `list [--filter <argument>]`
-- `[--flag <argument>]` specifies the filter to be applied to your task list.
-  - Type of task: `[--type todo|deadline|event]`
-  - Priority of the task: `[--priority high|medium|low]`
-  - Recurrence of the task: `[--recur daily|weekly|monthly|yearly]`
+There are **3 main features** you can use with the list command.
 
-**Example (without filter):** `list`
-- List all tasks currently stored in your task list.
+#### 2.3.1 Listing your entire tasklist
+List all tasks currently stored locally in your tasklist.
+
+**Format:** `list`
+- The command displays the following information for each task:
+  - **Task id**:
+    - A positive integer i.e. `1.` to identify the task
+  - **Task type**:
+    - A task can be either Todo, Deadline, Event or Lesson and is represented with the first letter of their task type
+    - `[T]` represents a `Todo`
+    - `[D]` represents a `Deadline`
+    - `[E]` represents a `Event`
+    - `[L]` represents a `Lesson`
+  - **Task description**:
+    - General details of the task
+  - **Task priority `[priority]`**:
+    - A task can either have `low`, `medium`, or `high` priority. 
+    - This value determines the urgency of the task.
+  - **Task recurrence ``**:
+    - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
+    - This value determines how often a task recurs.
+  - **Task date field**:
+    - For a `Todo`, it represents the datetime to perform the task.
+    - For a `Deadline`, it represents the due date of the task.
+    - For an `Event`, it represents the date and duration of the event.
+    - For a `Lesson`, it represents the date and duration of the lesson.
+    
+**Example:** `list`
+- List all tasks currently stored locally in your tasklist.
 
 **Expected Outcome:**
 
 ```
--------------------------------------------------------------------------
 [user]: list
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
-|| 2. return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| 3. project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| 4. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 5. homework [low] (dueDate: 21-10-2021 03:00:00)
-|| 6. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
--------------------------------------------------------------------------
+|| 1. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
+|| 2. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
+|| 3. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+|| 6. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
+|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
 ```
 
-**Example (with filter):** `list --type todo --priority low`
-- List all tasks that are type `todo` and priority is `low`.
+#### 2.3.2 Filtering your tasklist
+Filters the tasklist for specific tasks that matches the filters applied.
+
+**Format:** `list [--filter <argument>] [--filter <argument>] ...`
+- `[--flag <argument>]` specifies the filter to be applied to your task list.
+  - Type of task: `[--type todo|deadline|event|lesson]`
+  - Priority of the task: `[--priority low|medium|high]`
+  - Recurrence of the task: `[--recur none|daily|weekly|monthly|yearly]`
+
+**Example:** `list --type todo --priority medium`
+- List all tasks that are type `Todo` and priority is `medium`.
 
 **Expected Outcome:**
 
 ```
--------------------------------------------------------------------------
-[user]: list --type todo --priority low
+[user]: list --type todo --priority medium
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
--------------------------------------------------------------------------
+|| 1. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 ```
+
+#### 2.3.3 Listing the recurrence of a task
+Displays the next 4 recurrences of a task.
 
 **Format 2:** `list [task id]`
 - `[task id]` specifies the id of the task to display the recurrence.
 
-**Example (with task id):** `list 1`
-- List the next 4 recurrences for task with task id `1`.
+**Example (with task id):** `list 3`
+- List the next 4 recurrences for task with task id `3`.
 
 **Expected Outcome:**
 
 ```
--------------------------------------------------------------------------
-[user]: list 1
+[user]: list 3
 || -------------
 ||  MY TASKLIST
 || -------------
 || Listing next 4 recurrences for:
-|| [T] read book <low> {daily} (doOn: 30-10-2021 02:00)
-|| -> 31-10-2021 02:00
-|| -> 01-11-2021 02:00
-|| -> 02-11-2021 02:00
-|| -> 03-11-2021 02:00
--------------------------------------------------------------------------
+|| [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| -> 22-12-2021 04:00
+|| -> 22-01-2022 04:00
+|| -> 22-02-2022 04:00
+|| -> 22-03-2022 04:00
 ```
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
@@ -233,27 +266,26 @@ Sorts your task list by a given criteria.
   - Priority of the task: `priority`
 
 **Example:** `sort --by priority` + `list`
-- Sort your current task list by `priority`
+- Sort your current task list by `priority` from `high` to `low`
 - Print out the sorted list with the `list` command
 
 **Expected Outcome:**
 
 ```
--------------------------------------------------------------------------
 [user]: sort --by priority
-|| [!] Tasklist has been sorted by priority
+|| [!] Tasklist has been sorted by: priority
 -------------------------------------------------------------------------
 [user]: list
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
-|| 2. homework [low] (dueDate: 21-10-2021 03:00:00)
-|| 3. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| 4. return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| 5. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 6. project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
--------------------------------------------------------------------------
+|| 1. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| 2. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
+|| 3. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
+|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+|| 6. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
+|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
 ```
 
 ### 2.5 Deleting your tasks: `delete`
@@ -333,15 +365,16 @@ An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has th
 
 ## 3. FAQ
 
+
 ## 4. Command Summary
 
-Action   | Format                                      | Example                                                                                              |
--------- | --------------------------------------------| -----------------------------------------------------------------------------------------------------|
-help     | `help`                                      | `help`                                                                                               |
-todo     | `todo <description> [--flag <argument>]`    | `todo read book`                                                                                     |
-deadline | `deadline <description> [--flag <argument>]`|`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
-event    | `event <description> [--flag <argument>]`   | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
-list     | `list [--filter <argument>]`                | `list` or `list --type todo --priority low`                                                          |
-sort     | `sort --by <criteria>`                      | `sort --by priority`                                                                                 |
-delete   | `delete <indexes of tasks to delete>`       | `delete 1, 2, 4-7`                                                                                   |
-bye      | `bye`                                       | `bye`                                                                                                |
+Action   | Format                                           | Example                                                                                              |
+-------- | -------------------------------------------------| -----------------------------------------------------------------------------------------------------|
+help     | `help`                                           | `help`                                                                                               |
+todo     | `todo <description> [--flag <argument>]`         | `todo read book`                                                                                     |
+deadline | `deadline <description> [--flag <argument>]`     |`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
+event    | `event <description> [--flag <argument>]`        | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
+list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                                           |
+sort     | `sort --by <criteria>`                           | `sort --by priority`                                                                                 |
+delete   | `delete <indexes of tasks to delete>`            | `delete 1, 2, 4-7`                                                                                   |
+bye      | `bye`                                            | `bye`                                                                                                |
