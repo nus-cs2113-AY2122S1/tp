@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Rebecca Chua - Project Portfolio Page
 
 ## Overview
 
