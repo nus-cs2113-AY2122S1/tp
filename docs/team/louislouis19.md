@@ -47,8 +47,9 @@ It is written in Java, and has about 12 kLoC.
 
   
 - Team-based Tasks:
-  - Fix bug on providing better error messages: #172, #175
-  - Add JUnit Tests to improve coverage: #65
+  - Fix bug on providing better error messages: [#172](https://github.com/AY2122S1-CS2113T-T10-2/tp/issues/172), 
+  [#175](https://github.com/AY2122S1-CS2113T-T10-2/tp/issues/175)
+  - Add JUnit Tests to improve coverage: [#65](https://github.com/AY2122S1-CS2113T-T10-2/tp/issues/65)
 
 
 - Beyond Project Team Tasks:
