@@ -1,15 +1,14 @@
 package happybit.storage;
 
 import happybit.goal.Goal;
-import happybit.goal.GoalType;
-import happybit.ui.PrintManager;
+import happybit.interval.Interval;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ImportParserTest {
     private static final String DELIMITER = "##";
@@ -21,6 +20,8 @@ public class ImportParserTest {
     private static final String TEST_GOAL_3 = "0##G##Exercise##example##05112021##07112021";
     private static final String TEST_GOAL_4 = "0##G##Study##example##05112021##07112021";
     private static final String TEST_GOAL_5 = "0##G##Default##example##05112021##07112021";
+    private static final String TEST_INTERVAL_1 = "0##I##0##07112021##07112021##null";
+    private static final String TEST_INTERVAL_2 = "0##I##0##07112021##07112021##07112021";
 
     @Test
     public void goalParser_sleep() {
@@ -82,6 +83,32 @@ public class ImportParserTest {
             Goal goal = ImportParser.goalParser(lineData);
 
             assertEquals("Default", goal.getGoalTypeStr());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void intervalParser_notCompleted() {
+        String[] lineData = TEST_INTERVAL_1.split(DELIMITER);
+
+        try {
+            Interval interval = ImportParser.intervalParser(lineData);
+
+            assertFalse(interval.getDone());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void intervalParser_completed() {
+        String[] lineData = TEST_INTERVAL_2.split(DELIMITER);
+
+        try {
+            Interval interval = ImportParser.intervalParser(lineData);
+
+            assertTrue(interval.getDone());
         } catch (ParseException e) {
             e.printStackTrace();
         }
