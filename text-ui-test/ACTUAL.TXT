@@ -189,7 +189,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-3. ng andre
+3.
+Name:     ng andre
 Github:   github.com/ng-andre
 
 Do you still want to add the contact?  (y/n)
@@ -217,7 +218,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-1. ashraf
+Name:     ashraf
 Github:   github.com/ashraf
 ____________________________________________________________
 
@@ -268,7 +269,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-3. lezong
+Name:     lezong
 Github:   github.com/lezongmun
 ____________________________________________________________
 
@@ -304,7 +305,7 @@ NOTE : At least NAME required
 ____________________________________________________________
 
 ____________________________________________________________
-2. mayank
+Name:     mayank
 Github:   github.com/mayankp123
 ____________________________________________________________
 
@@ -436,7 +437,7 @@ You now have 6 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-0. asjoda sadfsd
+Name:     asjoda sadfsd
 Telegram: t.me/_123adad
 ____________________________________________________________
 
@@ -457,7 +458,8 @@ add -n lezong mun -g    lezaimun
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-2. lezongmun
+2.
+Name:     lezongmun
 Github:   github.com/lezong
 
 Do you still want to add the contact?  (y/n)
@@ -512,7 +514,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-0. asjoda sadfsd
+0.
+Name:     asjoda sadfsd
 Telegram: t.me/_123adad
 
 Do you still want to add the contact?  (y/n)
@@ -591,12 +594,12 @@ No search results found.
 ____________________________________________________________
 
 ____________________________________________________________
-1. bory
+Name:     bory
 Github:   github.com/marcus
 ____________________________________________________________
 
 ____________________________________________________________
-5. lezongmun
+Name:     lezongmun
 Github:   github.com/lezong
 ____________________________________________________________
 
@@ -638,7 +641,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-0. ashraf
+0.
+Name:     ashraf
 Github:   github.com/ashrafjfr
 
 Do you still want to add the contact?  (y/n)
@@ -656,7 +660,8 @@ ____________________________________________________________
 ____________________________________________________________
 One of your saved contacts has a duplicate field:
 
-1. ashraf
+1.
+Name:     ashraf
 Telegram: t.me/ashrafjfr
 
 Do you still want to edit the contact?  (y/n)
@@ -679,7 +684,7 @@ Telegram: t.me/ashrafjfr
 ____________________________________________________________
 
 ____________________________________________________________
-0. ashraf
+Name:     ashraf
 Github:   github.com/ashrafjfr
 Email:    ashrafjfr@gmail.com
 Telegram: t.me/ashrafjfr
@@ -702,7 +707,7 @@ ConTech has successfully imported 3 lines
 ____________________________________________________________
 
 ____________________________________________________________
-6. lezai
+Name:     lezai
 Github:   github.com/lezongmun
 ____________________________________________________________
 
@@ -772,7 +777,7 @@ The specified fields for ashraf have been deleted.
 ____________________________________________________________
 
 ____________________________________________________________
-0. ashraf
+Name:     ashraf
 Github:   github.com/ashrafjfr
 ____________________________________________________________
 

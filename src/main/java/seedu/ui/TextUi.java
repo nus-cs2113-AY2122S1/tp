@@ -151,7 +151,7 @@ public class TextUi {
 
     public static void viewContactMessage(Contact viewingContact, int index) {
         String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
-        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        String message = "Name:     " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
@@ -299,11 +299,11 @@ public class TextUi {
             String message;
             if (type.equals("add")) {
                 message = "One of your saved contacts has a duplicate field:\n"
-                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + "\n" + duplicatedIndex.get(0) + ".\n" + "Name:     " + currentContact.getName()
                         + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
             } else {
                 message = "One of your saved contacts has a duplicate field:\n"
-                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + "\n" + duplicatedIndex.get(0) + ".\n" + "Name:     " + currentContact.getName()
                         + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
             }
             printDoubleLineMessage(message);
@@ -324,7 +324,7 @@ public class TextUi {
 
     public static void duplicatedContactsMessage(Contact viewingContact, int index) {
         String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
-        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        String message = index + ".\n" + "Name:     " + viewName + formatContactFields(viewingContact);
         System.out.println(message + "\n");
     }
 
