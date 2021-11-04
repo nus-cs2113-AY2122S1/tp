@@ -32,18 +32,18 @@ Format: note add "<note name>" "<note content>"
 1. CS2113T
 
 Rerun the same command with an index behind to view the content.
-[TEST] >>> Error: Invalid numerical value provided.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 Format: note view {item number}
-[TEST] >>> Error: Content not found.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 [TEST] >>> Name: CS2113T
 Content:
 Week 8 test
 
 [TEST] >>> Error: Missing arguments or Invalid arguments.
 Format: note delete <item number>
-[TEST] >>> Error: Invalid numerical value provided.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 Format: note delete <item number>
-[TEST] >>> Error: Content not found.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 [TEST] >>> Your note on 'CS2113T' has been deleted!
 [TEST] >>> 
 Help Menu
@@ -81,11 +81,11 @@ Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<
 2. CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
-[TEST] >>> Error: Content not found.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 [TEST] >>> CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
 [TEST] >>> Error: Missing arguments or Invalid arguments.
 Format: schedule delete <item number>
-[TEST] >>> Error: Content not found.
+[TEST] >>> Error: Invalid numerical value provided or Content could not be found.
 [TEST] >>> Your link on 'CS2113T Tutorial' has been deleted!
 [TEST] >>> List of Content
 ---------------
