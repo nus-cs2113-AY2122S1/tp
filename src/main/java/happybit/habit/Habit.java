@@ -2,12 +2,9 @@ package happybit.habit;
 
 import happybit.interval.Interval;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Habit {
@@ -35,7 +32,7 @@ public class Habit {
      */
     public Habit(String habitName, int intervalLength) {
         this.habitName = habitName;
-        this.startDate = getStartOfDay(new Date());
+        this.startDate = HabitDateManager.getStartOfDay(new Date());
         this.intervalLength = intervalLength;
     }
 
@@ -70,7 +67,7 @@ public class Habit {
      * @return String of the start date.
      */
     public String getStartDate() {
-        return dateToString(this.startDate);
+        return HabitDateManager.dateToString(this.startDate);
     }
 
     /**
@@ -79,7 +76,7 @@ public class Habit {
      * @return String of the end date.
      */
     public String getEndDate() {
-        return dateToString(this.endDate);
+        return HabitDateManager.dateToString(this.endDate);
     }
 
     /**
@@ -162,9 +159,10 @@ public class Habit {
         String[] strDates = new String[3];
         for (Interval interval : intervals) {
             if (interval.isWithinInterval(completionDate)) {
-                strDates[START_DATE_INDEX] = dateToString(interval.getStartDate());
-                strDates[END_DATE_INDEX] = dateToString(interval.getEndDate());
-                strDates[NEXT_START_DATE_INDEX] = dateToString(getStartOfNextDay(interval.getEndDate()));
+                strDates[START_DATE_INDEX] = HabitDateManager.dateToString(interval.getStartDate());
+                strDates[END_DATE_INDEX] = HabitDateManager.dateToString(interval.getEndDate());
+                Date startOfNextDay = HabitDateManager.getStartOfNextDay(interval.getEndDate());
+                strDates[NEXT_START_DATE_INDEX] = HabitDateManager.dateToString(startOfNextDay);
             }
         }
         return strDates;
@@ -254,13 +252,13 @@ public class Habit {
      * =========================================================================
      */
 
-    /* The following sub-methods are used to populate the Checkpoint list.
-     * populateCheckpoints()
-     * populateCheckpointsIfNoInterval()
-     * populateCheckpointsIfNonZeroInterval()
+    /* The following sub-methods are used to populate the Interval list.
+     * populateIntervals()
+     * populateIntervalsIfNoInterval()
+     * populateIntervalsIfNonZeroInterval()
      * daysBetweenStartAndEndDates()
-     * getNumOfCheckpoints()
-     * addIntervalToDate()
+     * getNumOfIntervals()
+     * addDaysToDate()
      */
 
     /**
@@ -294,12 +292,13 @@ public class Habit {
     private void populateIntervalsIfNonZeroLengthInterval() {
         int numOfCheckpoints = getNumOfIntervals();
         Date assignedStartDate = this.startDate;
-        Date assignedEndDate = getEndOfDay(addDaysToDate(assignedStartDate, this.intervalLength));
+        Date dateWithAddedDays = HabitDateManager.addDaysToDate(assignedStartDate, this.intervalLength);
+        Date assignedEndDate = HabitDateManager.getEndOfDay(dateWithAddedDays);
         for (int checkpoint = 0; checkpoint < numOfCheckpoints; checkpoint++) {
             Interval interval = new Interval(assignedStartDate, assignedEndDate);
             this.intervals.add(interval);
-            assignedStartDate = addDaysToDate(assignedStartDate, this.intervalLength);
-            assignedEndDate = addDaysToDate(assignedEndDate, this.intervalLength);
+            assignedStartDate = HabitDateManager.addDaysToDate(assignedStartDate, this.intervalLength);
+            assignedEndDate = HabitDateManager.addDaysToDate(assignedEndDate, this.intervalLength);
         }
         this.intervals.get(numOfCheckpoints - 1).setEndDate(this.endDate);
     }
@@ -311,8 +310,8 @@ public class Habit {
      * @return Number of days between start and end dates.
      */
     private int daysBetweenStartAndEndDates() {
-        LocalDate startLocalDate = convertDateToLocalDate(this.startDate);
-        LocalDate endLocalDate = convertDateToLocalDate(this.endDate);
+        LocalDate startLocalDate = HabitDateManager.convertDateToLocalDate(this.startDate);
+        LocalDate endLocalDate = HabitDateManager.convertDateToLocalDate(this.endDate);
         return (int) ChronoUnit.DAYS.between(startLocalDate, endLocalDate) + 1;
     }
 
@@ -330,19 +329,6 @@ public class Habit {
         return numberOfDays / this.intervalLength;
     }
 
-    /**
-     * Adds number of dates equal to the interval to the base date.
-     *
-     * @param baseDate Date to have days added to.
-     * @param days     Number of days to be added to base date.
-     * @return Date with days added.
-     */
-    private Date addDaysToDate(Date baseDate, int days) {
-        LocalDate baseLocalDate = convertDateToLocalDate(baseDate);
-        LocalDate nextLocalDate = baseLocalDate.plusDays(days);
-        return convertLocalDateToDate(nextLocalDate);
-    }
-
     /* The following are sub-methods used to update the Interval list following change in interval length.
      * updateIntervals()
      * getIndexOfCurrentInterval()
@@ -358,7 +344,7 @@ public class Habit {
         setEndDateOfCurrentInterval(currIntervalIndex);
         deleteFutureIntervals(currIntervalIndex);
         Date currDate = new Date();
-        Date startOfNextDay = getStartOfNextDay(currDate);
+        Date startOfNextDay = HabitDateManager.getStartOfNextDay(currDate);
         populateIntervals(startOfNextDay);
     }
 
@@ -384,7 +370,7 @@ public class Habit {
      * @param currIntervalIndex Index of the current interval.
      */
     private void setEndDateOfCurrentInterval(int currIntervalIndex) {
-        Date currEndDate = getEndOfDay(new Date());
+        Date currEndDate = HabitDateManager.getEndOfDay(new Date());
         intervals.get(currIntervalIndex).setEndDate(currEndDate);
     }
 
@@ -395,87 +381,6 @@ public class Habit {
      */
     private void deleteFutureIntervals(int currIntervalIndex) {
         intervals.subList(currIntervalIndex + 1, getTotalIntervals()).clear();
-    }
-
-    /* The following are methods used to treat Date classes.
-     * convertDateToLocalDate()
-     * convertLocalDateToDate()
-     * getStartOfDay()
-     * getEndOfDay()
-     */
-
-    /**
-     * Converts date into a string.
-     *
-     * @param date Date to be converted.
-     * @return String format of a date.
-     */
-    private String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-        return formatter.format(date);
-    }
-
-    /**
-     * 'Type-casting' a Date to a LocalDate.
-     *
-     * @param date Date to be 'type-casted'.
-     * @return LocalDate that has been 'type-casted' from Date.
-     */
-    private LocalDate convertDateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    /**
-     * 'Type-casting' a LocalDate to a Date.
-     *
-     * @param localDate LocalDate to be 'type-casted'.
-     * @return Date that has been 'type-casted' from LocalDate.
-     */
-    private Date convertLocalDateToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-    }
-
-    /**
-     * Sets the hours, minute, seconds, milliseconds of a date to the start of the day.
-     *
-     * @param date Date to set to start of the day.
-     * @return Date corresponding to start of the day.
-     */
-    private Date getStartOfDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        return calendar.getTime();
-    }
-
-    /**
-     * Sets the hours, minute, seconds, milliseconds of a date to the end of the day.
-     *
-     * @param date Date to set to end of the day.
-     * @return Date corresponding to end of the day.
-     */
-    private Date getEndOfDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.MILLISECOND, 999);
-        return calendar.getTime();
-    }
-
-    /**
-     * Gets the start of the next day.
-     *
-     * @param date Date used to get the next day.
-     * @return Date of the start of the next day.
-     */
-    private Date getStartOfNextDay(Date date) {
-        Date currStartOfDay = getStartOfDay(date);
-        return addDaysToDate(currStartOfDay, 1);
     }
 
     /* The following are methods used to calculate progress statistics.
