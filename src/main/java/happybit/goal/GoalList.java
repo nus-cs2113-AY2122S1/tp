@@ -192,11 +192,11 @@ public class GoalList {
      * @param printManager User Interface class for printing goalList to output.
      * @throws HaBitCommandException If there are no items in the goalList.
      */
-    public void listGoals(PrintManager printManager) throws HaBitCommandException {
+    public void listGoals(PrintManager printManager, String gibberish) throws HaBitCommandException {
         if (goalList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_GOAL_LIST);
         }
-        printManager.printGoalList(goalList, getListLength());
+        printManager.printGoalList(goalList, getListLength(), gibberish);
     }
 
     /**

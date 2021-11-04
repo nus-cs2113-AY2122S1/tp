@@ -18,6 +18,7 @@ public class PrintManager {
     private static final String MSG_ERROR = "Error Detected: %1$s" + LS;
     private static final String MSG_LIST_COMMAND = "Here are the list of commands:";
     private static final String MSG_LIST_GOAL = "%1$s goal(s) currently being tracked:" + LS;
+    private static final String MSG_LIST_GOAL_EXCESS_TEXT = "Gibberish found: %1$s. Anyway," + LS;
     private static final String MSG_LIST_HABIT = "%1$s habit(s) currently being tracked for %2$s:" + LS;
     private static final String MSG_ADD_GOAL = "The goal '%1$s' has been added." + LS;
     private static final String MSG_ADD_HABIT = "The habit '%1$s' has been added to goal '%2$s'" + LS;
@@ -100,6 +101,7 @@ public class PrintManager {
     private static final int FRONT_1_BACK_2_PADDING = 3;
     private static final int BACK_2_PADDING = 2;
     private static final int START_SINGLE_BAR = 1;
+    private static final int MAX_GIBBERISH_LENGTH = 40;
 
     /**
      * Prints the list of commands.
@@ -116,8 +118,9 @@ public class PrintManager {
      * @param goals      List of goals.
      * @param numOfGoals Number of goals in the goal list.
      */
-    public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
+    public void printGoalList(ArrayList<Goal> goals, int numOfGoals, String gibberish) {
         String[][] data = populateGoalData(goals, numOfGoals, GOAL_HEADERS.length);
+        printGibberish(gibberish);
         System.out.printf(MSG_LIST_GOAL, numOfGoals);
         printTable(GOAL_HEADERS, data);
     }
@@ -299,6 +302,20 @@ public class PrintManager {
      */
     private void printLine() {
         System.out.println(LINE);
+    }
+
+    private void printGibberish(String gibberish) {
+        if (gibberish != null) {
+            gibberish = trimGibberish(gibberish);
+            System.out.printf(MSG_LIST_GOAL_EXCESS_TEXT, gibberish);
+        }
+    }
+
+    private String trimGibberish(String gibberish) {
+        if (gibberish.length() > MAX_GIBBERISH_LENGTH) {
+            return gibberish.substring(0, MAX_GIBBERISH_LENGTH) + "..";
+        }
+        return gibberish;
     }
 
     /* The following are sub-methods of the printTable() method.
