@@ -211,7 +211,6 @@ public class Storage {
 
     /**
      * Checks if there is an open trip or not.
-     *
      * @return true if there is an open trip
      */
     public static boolean checkOpenTrip() {
@@ -220,7 +219,6 @@ public class Storage {
 
     /**
      * Opens the trip at the specified <code>tripIndex</code>, and sets that trip as the last modified trip.
-     *
      * @param tripIndex index of the trip inside {@link Storage#listOfTrips} to be opened
      */
     public static void setOpenTrip(int tripIndex) {

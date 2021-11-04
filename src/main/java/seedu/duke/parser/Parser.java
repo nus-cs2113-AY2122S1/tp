@@ -38,6 +38,9 @@ public class Parser extends CommandHandler {
             } else if (inputCommand.equals(CLOSE_COMMAND)) {
                 Storage.closeTrip();
                 return true;
+            } else if (inputCommand.equals(HELP_COMMAND)) {
+                Ui.displayHelp();
+                return true;
             } else if (!checkValidCommand(inputCommand)) {
                 Storage.getLogger().log(Level.WARNING, "invalid user input");
                 Ui.printUnknownCommandError();
@@ -123,10 +126,6 @@ public class Parser extends CommandHandler {
 
         case PEOPLE_COMMAND:
             handlePeople();
-            break;
-
-        case HELP_COMMAND:
-            Ui.displayHelp();
             break;
 
         case OPTIMIZE_COMMAND:
