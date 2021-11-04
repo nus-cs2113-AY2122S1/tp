@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * FinancialAdvisor offers a finance related tip to the user at the end when the program terminates
+ * FinancialAdvisor offers a finance related tip to the user at the end when the program terminates.
  */
 public class FinancialAdvisor {
     private static FinancialAdvisor financialAdvisor = null;
@@ -41,7 +41,7 @@ public class FinancialAdvisor {
     }
 
     /**
-     * Generates a random advice
+     * Generates a random advice.
      * 
      * @return A string that reads a financial advice.
      */

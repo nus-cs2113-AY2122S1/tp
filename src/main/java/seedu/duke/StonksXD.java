@@ -24,7 +24,8 @@ public class StonksXD {
     private String advice;
 
     /**
-     * Constructor for StonksXD. It instantiates all the components used and are crucial to the functioning of the program.
+     * Constructor for StonksXD. It instantiates all the components used and are crucial to the functioning of the 
+     * program.
      */
     public StonksXD() {
         this.ui = new Ui();
@@ -59,9 +60,9 @@ public class StonksXD {
     }
 
     /**
-     * Point of entry for the program 
+     * Point of entry for the program.
      * 
-     * @param args No input parameters is expected
+     * @param args No input parameters is expected.
      */
     public static void main(String[] args) {
         new StonksXD().run();
