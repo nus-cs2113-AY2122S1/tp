@@ -107,6 +107,7 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
      * `delete /m John` Deletes a member with the name 'John'.
        * If there is more than 1 John in the member list, a prompt will show up and you will need to delete the 'John' based on his index number.
    * **Expected Output:**
+   
    ```
     You have removed member: 
     [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
@@ -154,6 +155,7 @@ This means that you will not have to delete the entry and then add a new one lat
       * `edit /m 3 /n 91112222` Change the phone number of the 3rd entry to 91112222
     
     * **Expected Output:**
+    
    ```
    Edited member: 
    [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
@@ -179,6 +181,7 @@ This means that you will not have to delete the entry and then add a new one lat
      * `find /m juan`
      * `find /m lorem`
    * **Expected Output:**
+   
    ```
    The following members matches your search "juan"
    [1] Name: JUAN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
@@ -286,6 +289,7 @@ Had a sudden change in venue for your trainings? No worries! You can edit your t
         * `edit /t 1 /n Weekly Friday Training 2 (Updated)` Updates the name of Index 1
  
     * **Expected Output:**
+    
    ```
    Edited Training:
    [1] Training Name: WEEKLY FRIDAY TRAINING 2 | Venue: MPSH 1 | Time: 12 NOV 2021
