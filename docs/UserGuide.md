@@ -62,9 +62,9 @@ Order | Refers to ordering new medications to replenish the stocks.
 Parameters | Prefixes for MediVault to understand the type of information you provide.
 
 Meaning of Icons:
-- :information_source: Additional information
+- :information_source: Note
 - :warning: Warning
-- :bulb: Note
+- :bulb: Tip
 
 # Quick Start
 
@@ -86,12 +86,12 @@ Meaning of Icons:
 Welcome to MediVault!
 [STOCK] > 
 ```
-> :bulb: Note: MediVault is best used when the window is maximised to ensure that all tables are rendered correctly.
+> :bulb: Tip: MediVault is best used when the window is maximised to ensure that all tables are rendered correctly.
 
 
 ### Changing Modes
 
-> :information_source: Advanced users can choose to omit mode selection to get things done faster.
+> :bulb: Tip: Advanced users can choose to omit mode selection to get things done faster.
 
 MediVault includes a mode feature to make the commands simpler for you. Your current mode is indicated in the square
 brackets on the bottom left of the console `[STOCK] >`. It allows you to type `add`, `list`, `update`, `delete` without
@@ -127,7 +127,7 @@ Mode has changed to ORDER.
 
 # Features
 
-> :bulb: Notes about the commands:
+> :information_source: Notes about the commands:
 > 
 > You can refer to [Glossary](#glossary) to understand technical terms mentioned below.
 > * Parameters enclosed in `[]` should contain **one or more** optional parameters.
@@ -157,7 +157,7 @@ Mode has changed to ORDER.
 
 Adds medication into the inventory.
 
-> :warning: Warning
+> :warning: Warning:
 > * If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity.
 > * If medication and expiry date exists, price, description and maximum quantity will be optional parameters. If you include `p/PRICE` or `d/DESCRIPTION` or  `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing price, existing description and existing maximum quantity.
 
@@ -260,7 +260,7 @@ Expected Output 2:
 
 Updates existing medication stock information in the inventory.
 
-> :warning: Warning
+> :warning: Warning:
 > * The Stock ID must exist in MediVault.
 > * You cannot update the Stock ID.
 > * The allocation of Stock ID is determined by MediVault.
@@ -355,7 +355,7 @@ Deleted expired medications! Rows deleted: 4
 
 Adds a prescription record and subtracts the medication quantity from stocks.
 
-> :information_source:
+> :information_source: Note:
 > * MediVault will prescribe the medication with the shortest expiry date first. 
 If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
 > * MediVault will add another entry to prescription even if the medication name, customer's ID, date and staff name is exactly the same. 
@@ -372,7 +372,7 @@ Expected Output:
 ```
 Prescribed:PANADOL Quantity:1 Expiry Date:14-09-2021
 +====+=========+==========+=============+============+=======+==========+
-| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+=========+==========+=============+============+=======+==========+
 | 9  | PANADOL |    5     |     123     | 26-10-2021 | JOHN  |    2     | 
 +----+---------+----------+-------------+------------+-------+----------+
@@ -394,7 +394,7 @@ Expected Output 1:
 
 ```
 +====+==============+==========+=============+============+=======+==========+
-| ID |     NAME     | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+==============+==========+=============+============+=======+==========+
 | 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | 
 +----+--------------+----------+-------------+------------+-------+----------+
@@ -414,7 +414,7 @@ Expected Output 2:
 
 ```
 +====+==============+==========+=============+============+=======+==========+
-| ID |     NAME     | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+==============+==========+=============+============+=======+==========+
 | 1  |   PANADOL    |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | 
 +----+--------------+----------+-------------+------------+-------+----------+
@@ -432,7 +432,7 @@ Expected Output 2:
 
 Updates an existing prescription information.
 
-> :warning: Warning
+> :warning: Warning:
 > * You cannot update the Stock or the Prescription ID. 
 > * The allocation of Prescription ID is determined by MediVault.
 > * Your provided `n/NAME` parameter **must** exist in stocks.
@@ -465,7 +465,7 @@ Initial prescription records:
 
 ```
 +====+=========+==========+=============+============+=======+==========+
-| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+=========+==========+=============+============+=======+==========+
 | 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JANE  |    1     | 
 +----+---------+----------+-------------+------------+-------+----------+
@@ -485,7 +485,7 @@ Expected Output 1:
 Restored 5 PANADOL
 Updated prescription information!
 +====+=========+==========+=============+============+=======+==========+
-| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+=========+==========+=============+============+=======+==========+
 | 3  | PANADOL |    5     |  S1234567A  | 09-10-2021 | JANE  |    1     | 
 +----+---------+----------+-------------+------------+-------+----------+
@@ -513,7 +513,7 @@ Expected Output 2:
 ```
 Updated prescription information!
 +====+=========+==========+=============+============+=======+==========+
-| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
+| ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+=========+==========+=============+============+=======+==========+
 | 1  | PANADOL |    10    |  S1234567A  | 09-10-2021 | JACK  |    1     | 
 +----+---------+----------+-------------+------------+-------+----------+
@@ -632,7 +632,7 @@ Expended output:
 
 Updates an existing order information.
 
-> :warning: Warning
+> :warning: Warning:
 > * You cannot update the Order ID or the status of the order.
 > * The allocation of Order ID is determined by MediVault.
 > * The status of the order will only be changed when you run the `receiveorder` command.
@@ -682,12 +682,12 @@ Order deleted for Order ID 1
 Adds the received medication into the current stocks.
 
 > :information_source: Note:
-> * Your input order Id must exist
+> * Your input Order ID must exist
 > * When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
 > * The `e/EXPIRY_DATE` parameter is required so that MediVault knows the expiry date of the stock that just arrived.
 > * The `p/PRICE` parameter is also required so that stocks with different remaining shelf life can have different prices.
 
-> :warning: Warning
+> :warning: Warning:
 > * If medication exists, `d/DESCRIPTION` and `m/MAX_QUANTITY` will be optional parameters. If you include `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity in stocks.
 > * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used.
 > * You may not be able to `receiveorder` if the order quantity + current stock quantity > max quantity.
@@ -735,7 +735,7 @@ Archive order records into data/order_archive.txt file.
 > * MediVault will then archive it into data/order_archive.txt file.
 > * The date parameter is compulsory.
 
-> :warning: Warning
+> :warning: Warning:
 > * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
 
 Format: `archiveorder d/DATE`
@@ -764,7 +764,7 @@ Archive prescription records into data/prescription_archive.txt file.
 > * MediVault will then archive it into data/prescription_archive.txt file.
 > * The date parameter for this command is compulsory.
 
-> :warning: Warning
+> :warning: Warning:
 > * This is a one way command, there is no reversal except for you to manually add the archived records back into MediVault.
 
 Format: `archiveprescription d/DATE`
@@ -907,7 +907,7 @@ Data formats:
 
 ### Data Editing
 
-> :warning: Warning
+> :warning: Warning:
 > * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
 > * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
 > * In order for MediVault to work, you have to fix the error in the data file.
