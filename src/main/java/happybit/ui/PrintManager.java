@@ -35,7 +35,7 @@ public class PrintManager {
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
             + "to '%3$s'" + LS;
     private static final String MSG_EXIT = "Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + LS
-            + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
+            + LS + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
             + " — Will Durant";
 
     private static final String COMMAND_HELP = "open command list";
@@ -304,6 +304,11 @@ public class PrintManager {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints the excess text from user after 'line' command if it exists.
+     *
+     * @param gibberish Excess text from user after the one-word command 'line'.
+     */
     private void printGibberish(String gibberish) {
         if (gibberish != null) {
             gibberish = trimGibberish(gibberish);
@@ -311,6 +316,13 @@ public class PrintManager {
         }
     }
 
+    /**
+     * Shortens the gibberish text if it's too long.
+     * To prevent abuse from user by typing lengthy characters.
+     *
+     * @param gibberish Excess text from user after the one-word command 'line'.
+     * @return Trimmed gibberish to a respectable length.
+     */
     private String trimGibberish(String gibberish) {
         if (gibberish.length() > MAX_GIBBERISH_LENGTH) {
             return gibberish.substring(0, MAX_GIBBERISH_LENGTH) + "..";
