@@ -396,6 +396,17 @@ public class Ui {
                 + "the amount you allocated to each person again.");
     }
 
+    public static void sameNameInTripError() {
+        System.out.println("You have entered people with the same name, please recreate the trip ensuring there are no "
+            + "repeated names for the trip.");
+    }
+
+    public static void sameNameInExpenseError() {
+        System.out.println("You have entered people with the same name.");
+        System.out.println("Please reenter the names of the participants of the expense, "
+                + "ensuring there are no repeats:");
+    }
+
     public static void printNoLastTripError() {
         System.out.println("You may have deleted the most recently modified trip. "
                 + "Please try again with the trip number of the trip you wish to edit.");

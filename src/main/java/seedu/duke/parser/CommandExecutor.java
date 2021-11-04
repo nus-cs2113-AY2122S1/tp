@@ -1,13 +1,14 @@
 package seedu.duke.parser;
 
+import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.InvalidAmountException;
+import seedu.duke.exceptions.NoExpensesException;
+import seedu.duke.exceptions.SameNameException;
+import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.trip.Trip;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.Person;
-import seedu.duke.exceptions.ForceCancelException;
-import seedu.duke.exceptions.InvalidAmountException;
-import seedu.duke.exceptions.NoExpensesException;
-import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
     protected static void executeCreateTrip(String attributesInString)
-            throws ForceCancelException, IndexOutOfBoundsException {
+            throws ForceCancelException, IndexOutOfBoundsException, SameNameException {
         String[] newTripInfo = attributesInString.split("/", NEW_TRIP_ATTRIBUTES_COUNT);
         if (newTripInfo.length < NEW_TRIP_ATTRIBUTES_COUNT) {
             throw new IndexOutOfBoundsException();

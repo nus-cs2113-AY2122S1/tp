@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.SameNameException;
 import seedu.duke.trip.Trip;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DukeTest {
 
     @Test
-    public void testNewTrip() throws ForceCancelException {
+    public void testNewTrip() throws ForceCancelException, SameNameException {
         String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         Trip trip = new Trip(stringArray);
         assertEquals("Canada", trip.getLocation());

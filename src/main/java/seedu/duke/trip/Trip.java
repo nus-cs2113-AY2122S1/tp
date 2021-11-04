@@ -4,6 +4,7 @@ import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.ForceCancelException;
+import seedu.duke.exceptions.SameNameException;
 import seedu.duke.expense.Expense;
 import seedu.duke.parser.Parser;
 
@@ -54,7 +55,7 @@ public class Trip implements FilterFinder {
      *
      * @param newTripInfo array containing one attribute in each element
      */
-    public Trip(String[] newTripInfo) throws ForceCancelException {
+    public Trip(String[] newTripInfo) throws ForceCancelException, SameNameException {
         assert newTripInfo.length == 6;
         setLocation(newTripInfo[LOCATION_STRING].strip());
         setDateOfTrip(newTripInfo[DATE_STRING].strip());
@@ -256,7 +257,7 @@ public class Trip implements FilterFinder {
     }
 
 
-    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException {
+    public void setListOfPersons(ArrayList<Person> listOfPersons) throws ForceCancelException, SameNameException {
         if (listOfPersons.isEmpty()) {
             Ui.noPersonsAdded();
             String userInput = Ui.receiveUserInput();
@@ -330,18 +331,25 @@ public class Trip implements FilterFinder {
      * @param peopleChained String of all persons involved in the trip
      * @return {@link String} array, each element of the array being a person involved in the trip
      */
-    private ArrayList<Person> splitPeople(String peopleChained) {
+    private ArrayList<Person> splitPeople(String peopleChained) throws SameNameException {
+        ArrayList<String> listOfPeopleNames = new ArrayList<>();
+        ArrayList<String> listOfPeopleNamesUpperCased = new ArrayList<>();
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
-            if (personName.isBlank()) {
-                continue;
+            if (listOfPeopleNamesUpperCased.contains(personName.strip().toUpperCase())) {
+                throw new SameNameException();
+            } else if (!personName.isBlank()) {
+                listOfPeopleNames.add(personName.strip());
+                listOfPeopleNamesUpperCased.add(personName.strip().toUpperCase());
             }
-            Person person = new Person(personName.strip());
+        }
+        for (String name : listOfPeopleNames) {
+            Person person = new Person(name);
             listOfPeople.add(person);
         }
         for (Person person : listOfPeople) {
             for (Person personToAdd : listOfPeople) {
-                person.getMoneyOwed().put(personToAdd.getName(), 0.0); // Remove .getName()
+                person.getMoneyOwed().put(personToAdd.getName(), 0.0);
             }
         }
         return listOfPeople;

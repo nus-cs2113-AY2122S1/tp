@@ -52,8 +52,8 @@ public class Expense implements ExpenseSplitter {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
-        this.personsList = checkValidPersons(expenseInfo[2]);
         this.description = getDescriptionParse(expenseInfo[2]);
+        this.personsList = checkValidPersons(expenseInfo[2]);
         this.date = promptDate();
         if (personsList.size() == 1) {
             ExpenseSplitter.updateOnePersonSpending(this, personsList.get(0));
@@ -76,12 +76,14 @@ public class Expense implements ExpenseSplitter {
      */
     private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
+        ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
+        boolean isThereRepeatedName = false;
         for (String name : listOfPeople) {
             boolean isValidPerson = false;
             for (Person person : Storage.getOpenTrip().getListOfPersons()) {
@@ -91,12 +93,19 @@ public class Expense implements ExpenseSplitter {
                     break;
                 }
             }
-            if (!isValidPerson) {
+            if (listOfPeopleNamesUpperCase.contains(name.strip().toUpperCase())) {
+                isThereRepeatedName = true;
+            } else if (!isValidPerson) {
                 invalidListOfPeople.add(name.strip());
             }
+            listOfPeopleNamesUpperCase.add(name.strip().toUpperCase());
         }
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);
+            String newUserInput = Ui.receiveUserInput();
+            return checkValidPersons(newUserInput);
+        } else if (isThereRepeatedName) {
+            Ui.sameNameInExpenseError();
             String newUserInput = Ui.receiveUserInput();
             return checkValidPersons(newUserInput);
         }
