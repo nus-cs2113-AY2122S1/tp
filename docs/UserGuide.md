@@ -449,7 +449,10 @@ search kick
 Provides a given set of workouts with exercises.
 
 > 💡 Note  
->* This command will add the recommended workouts to your workout list.
+>* When command is executed, the recommended workouts will be automatically added to your workout list.
+
+>⚠️ Warning  
+>* Duplicate of same recommended workout will be added to the list if command is executed multiple times.   
 
 Format: `recommend [beginner/ intermediate/ pro]`
 
@@ -494,6 +497,7 @@ Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
 > 💡 Note
 >* Include `WORKOUT_INDEX` only when you want to clear exercises.
+>* All workouts can also be cleared inside a workout mode.
 
 Example of usage: 
 
@@ -502,8 +506,7 @@ Example of usage:
   - `clear workout` - Clears all the workouts present in the application
 - Workout Mode: 
   - `enter 1` then `clear exercise` = Clears all exercises within workout 1
-
-Expected outcome:
+  
 
 Expected outcome (*Main Mode*):
 ```
