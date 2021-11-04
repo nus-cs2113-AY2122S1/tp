@@ -24,7 +24,9 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
+
         boolean isValid = orderValidator.isValidOrderId(ui, "1", tempOrder);
+
         assertTrue(isValid);
     }
 
@@ -36,7 +38,9 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
+
         boolean isInvalid = orderValidator.isValidOrderId(ui, "5", tempOrder);
+
         assertFalse(isInvalid);
     }
 
@@ -59,6 +63,7 @@ public class OrderValidatorTest {
         String inputColumnName = "NAME";
         boolean isValid = orderValidator.isValidColumn(ui, inputColumnName);
         assertTrue(isValid);
+
     }
 
     @Test
@@ -66,20 +71,23 @@ public class OrderValidatorTest {
         String inputColumnName = "panadol";
         boolean isInvalid = orderValidator.isValidColumn(ui, inputColumnName);
         assertFalse(isInvalid);
+
     }
 
     @Test
     public void checkValidStatus_validStatus_expectTrue() {
-        String inputColumnName = "PENDING";
-        boolean isValid = orderValidator.isValidStatus(ui, inputColumnName);
+        String inputStatusName = "PENDING";
+        boolean isValid = orderValidator.isValidStatus(ui, inputStatusName);
         assertTrue(isValid);
+
     }
 
     @Test
     public void checkValidStatus_invalidStatus_expectFalse() {
-        String inputColumnName = "panadol";
-        boolean isInvalid = orderValidator.isValidStatus(ui, inputColumnName);
+        String inputStatusName = "panadol";
+        boolean isInvalid = orderValidator.isValidStatus(ui, inputStatusName);
         assertFalse(isInvalid);
+
     }
 
 }
