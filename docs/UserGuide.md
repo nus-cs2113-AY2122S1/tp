@@ -759,6 +759,9 @@ specified day.
 
 > ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
 
+> 💡 The accepted input for the `<day>` argument includes "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", and "Sunday".
+
+
 Example 1: `timetable`
 
 Expected Output 2:
