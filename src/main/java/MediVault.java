@@ -35,7 +35,7 @@ public class MediVault {
 
     public static void main(String[] args) {
         LogManager.getLogManager().reset();
-        logger.log(Level.INFO, "Medivault is starting up");
+        logger.log(Level.INFO, "MediVault is starting up");
         new MediVault().run();
     }
 
