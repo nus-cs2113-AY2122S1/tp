@@ -7,7 +7,7 @@ familiar with the command line interface. There are two game modes in types, tim
 number of words as fast as possible).
 
 ### Summary of Contributions
-#### Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=limjiajing)
+#### Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=LimJiaJing&tabRepo=AY2122S1-CS2113-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 #### Contribution to code design
 Suggest having all command classes implement a common interface and using factory 
@@ -56,6 +56,7 @@ for code to have less coupling.
   `clear past records`and `automatic storage`.
 * Developer Guide
   * Added implementation details for the proposed `view statistics` feature.
+
 #### Project management
 * Assigned issues created during practical examination dry-run to teammates responsible for those parts.
 * Wrapped up milestones.
