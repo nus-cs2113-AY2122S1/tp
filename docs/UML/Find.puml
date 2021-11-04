@@ -27,11 +27,13 @@ activate ":FindIngredientsCommand"
 ":FindIngredientsCommand" -> ":Cookbook" : filterByIngredients(ArrayList<String> ingredients)
 activate ":Cookbook"
 
+loop no. of recipes
 ":Cookbook" -> ":Recipe": containsIngredients(ArrayList<String> ingredients)
 activate ":Recipe"
 
 ":Recipe" --> ":Cookbook"
 destroy ":Recipe"
+end
 
 ":Cookbook" --> ":FindIngredientsCommand"
 destroy ":Cookbook"
