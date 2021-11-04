@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.trip.Trip;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;

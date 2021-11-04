@@ -420,7 +420,7 @@ public class Ui {
     }
 
     public static void printInvalidPeople(ArrayList<String> names) throws ForceCancelException {
-        Trip currTrip = Storage.getOpenTrip();
+        final Trip currTrip = Storage.getOpenTrip();
         for (String name : names) {
             if (names.indexOf(name) == names.size() - 1) {
                 System.out.print(name);
