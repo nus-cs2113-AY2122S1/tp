@@ -62,7 +62,7 @@ public class UpdateRecipeCommand extends Command {
         for (int i = 0; i < ingredientNames.size(); i++) {
             int quantity = quantities.get(i);
             String ingredientName = ingredientNames.get(i);
-            if(quantity == 0) {
+            if (quantity == 0) {
                 try {
                     recipe.delete(ingredientName);
                 } catch (IllegalValueException e) {
