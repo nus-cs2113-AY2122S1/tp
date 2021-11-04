@@ -4,6 +4,7 @@ import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
+import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Represents a recipe.
@@ -77,6 +78,38 @@ public class Recipe {
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
         return ingredientNameIfNotInList;
     }
+
+    /**
+     * Delete ingredients in a recipe.
+     *
+     * @param ingredientName Name of ingredient to be added.
+     *
+     */
+    public void delete(String ingredientName) throws IllegalValueException, NotFoundException {
+        if(!contains(ingredientName)) {
+            throw new NotFoundException();
+        }
+        if(ingredientQuantities.size() <= 1) {
+            throw new IllegalValueException();
+        }
+
+        ingredientQuantities.remove(ingredientName);
+    }
+
+    /**
+     * Updates the quantity of ingredients in a recipe.
+     *
+     * @param ingredientName Name of ingredient to be added.
+     * @param quantity quantity of ingredient to be updated to.
+     */
+    public void update(String ingredientName, int quantity) throws NotFoundException, IllegalValueException {
+        if(!contains(ingredientName)) {
+            throw new NotFoundException();
+        }
+        IngredientQuantity ingredientQuantity = ingredientQuantities.get(ingredientName);
+        ingredientQuantity.setQuantity(quantity);
+    }
+
 
     /**
      * Checks if the recipe contains the given ingredient name.
