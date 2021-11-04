@@ -20,7 +20,7 @@ public class Parser {
     }
 
     public static boolean hasListTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("list /t");
+        return arg.trim().equalsIgnoreCase("list /t");
     }
 
     public static boolean hasListAttendanceKeyword(String arg) {
@@ -71,6 +71,21 @@ public class Parser {
         return arg.trim().toLowerCase().contains("bye");
     }
 
+    public static boolean isValidPhone(String phone) {
+        if (phone.contains("[a-zA-Z]+")) {
+            return false;
+        } else {
+            return phone.length() == 8;
+        }
+    }
+
+    public static boolean isValidGender(String gender) {
+        return (gender.toLowerCase().matches("m") ||  gender.toLowerCase().matches("f"));
+    }
+
+    public static boolean isValidName(String name) {
+        return !name.matches(".*\\d.*");
+    }
 
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
@@ -140,17 +155,20 @@ public class Parser {
      */
     public static AttendanceList getFilteredAttendanceList(AttendanceList attendanceList, String entry) {
         // e.g. list /att /t Friday Training /d 0
-        String[] trainingNameAndLabel = entry.trim().split("/t");
-        String presentOrAbsent = "";
+        String[] trainingNameAndLabel = entry.trim().toLowerCase().split("/t");
         AttendanceList filteredAttendanceList = new AttendanceList();
 
         try {
             String trainingName = getTrainingName(trainingNameAndLabel[1].trim());
             for (Attendance attendance : attendanceList.getAttendanceList()) {
-                if (attendance.getTrainingName().equals(trainingName.trim())) {
+                if (attendance.getTrainingName().toLowerCase().equals(trainingName.trim())) {
                     filteredAttendanceList.addAttendance(attendance);
                 }
             }
+            if (filteredAttendanceList.getAttendanceListSize() == 0) {
+                Ui.printMissingTraining();
+            }
+
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printWrongInputMessage();
         }
@@ -182,10 +200,10 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim();
+                name = words[wordIndex].trim().toUpperCase();
                 break;
             case "/a":
-                time = words[wordIndex].trim();
+                time = words[wordIndex].trim().toUpperCase();
                 break;
             case "/v":
                 venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);
@@ -273,7 +291,7 @@ public class Parser {
                 memberName = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/n":
-                trainingName = words[wordIndex].trim();
+                trainingName = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                 break;
             case "/d":
                 presentOrAbsent = words[wordIndex].trim();
@@ -329,15 +347,10 @@ public class Parser {
      * @return int Index that is in entry.
      */
     public static Integer getIndex(String entry) {
-        try {
-            String[] words = entry.trim().split(regex);
-            int indexNumber = Integer.parseInt(words[1].trim());
-            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-            return indexNumber;
-        } catch (NumberFormatException e) {
-            System.out.println("Index must be a number");
-            return -1;
-        }
+        String[] words = entry.trim().split(regex);
+        int indexNumber = Integer.parseInt(words[1].trim());
+        assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+        return indexNumber;
     }
 
     /**
@@ -376,21 +389,6 @@ public class Parser {
     }
 
     /**
-     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
-     * words are found, the user will be notified.
-     *
-     * @param attendanceList full list of attendance sheet.
-     * @param entry          user input
-     */
-    public static void findInAttendanceEntries(AttendanceList attendanceList, String entry) {
-        //Leave for v2.0, implement as class in commands package
-    }
-
-    public static void wrongInputTypeMessage() {
-        Ui.printWrongInputMessage();
-    }
-
-    /**
      * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
      * Otherwise, the full list will not be shown.
      *
@@ -400,6 +398,13 @@ public class Parser {
         Ui.printListAllMessage();
         Scanner userInput = new Scanner(System.in);
         String entry = userInput.nextLine();
+        while (!(entry.equals("y") || entry.equals("n"))) {
+            Ui.printQuestionToList();
+            Ui.printArrow();
+            if (userInput.hasNextLine()) {
+                entry = userInput.nextLine();
+            }
+        }
         if (entry.equals("y")) {
             Ui.printList(attendanceList);
         }
@@ -412,14 +417,11 @@ public class Parser {
         String entry = "";
         Scanner userInput = new Scanner(System.in);
         while (!entry.equals("bye")) {
-            System.out.print("=> ");
+            Ui.printArrow();
             if (userInput.hasNextLine()) {
                 entry = userInput.nextLine();
             }
             Entry.addEntry(entry);
         }
     }
-
-
 }
-

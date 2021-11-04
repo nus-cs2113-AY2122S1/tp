@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+Package Training <<Rectangle>> {
+Class TrainingList
+Class TrainingSchedule
+}
+
+Package Storage <<Rectangle>> {
+Class TrainingStorage
+}
+
+TrainingStorage ..> TrainingList
+TrainingList ..>"*" TrainingSchedule
+
+hide members
+hide circle
+@enduml

@@ -9,6 +9,7 @@ Welcome to
 '  '--'\'  '--'\|  | |  |    |  |   |  ||  | |  ||  | `   ||  | |  |'  '--'  ||  `---.|  |\  \ 
  `-----' `-----'`--' `--'    `--'   `--'`--' `--'`--'  `--'`--' `--' `------' `------'`--' '--' 
 What would you like to do?
-=> Added a Member: [1] Name: GLENN | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+=> Added a Member: 
+[1] Name: JUAN HWEE | Student Number: A0123456B | Gender: M | Phone Number: 98765432
 => You have successfully exited the programme.
 _____________________________________________________

@@ -71,7 +71,7 @@ public class Entry {
                 break;
             case ADD_ATTENDANCE_KEYWORD:
                 Attendance attendance = Parser.getAttendanceDetails(entry);
-                new AddAttendance(attendanceList, attendance);
+                new AddAttendance(attendanceList, attendance, members, trainings);
                 break;
             case DELETE_MEMBER_KEYWORD:
                 Object parameter = Parser.getParameter(entry);
@@ -82,9 +82,7 @@ public class Entry {
                 new DeleteTraining(trainings, parameter);
                 break;
             case DELETE_ATTENDANCE_KEYWORD:
-                //delete /att /t Friday Training /i 2
                 attendanceIndex = Parser.getAttendanceIndex(entry);
-                //havent handle if i is not a number aka number format exception
                 String trainingName = Parser.getAttendanceTrainingName(entry);
                 new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
                 break;
@@ -96,21 +94,28 @@ public class Entry {
                 String trainingToFind = Parser.getQuery(entry);
                 new FindTraining(trainings, trainingToFind);
                 break;
-            case FIND_ATTENDANCE_KEYWORD:
-                Parser.findInAttendanceEntries(attendanceList, entry);
-                break;
             case EDIT_TRAINING_KEYWORD:
-                trainingIndex = Parser.getIndex(entry);
+                try {
+                    trainingIndex = Parser.getIndex(entry);
+                } catch (NumberFormatException e) {
+                    Ui.printValidNumberNeeded();
+                    break;
+                }
                 TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);
                 new EditTraining(trainings, trainingIndex, newTrainingDetail);
                 break;
             case EDIT_MEMBER_KEYWORD:
-                memberIndex = Parser.getIndex(entry);
+                try {
+                    memberIndex = Parser.getIndex(entry);
+                } catch (NumberFormatException e) {
+                    Ui.printValidNumberNeeded();
+                    break;
+                }
                 Member newMemberDetail = Parser.getMemberDetails(entry);
                 new EditMember(members, memberIndex, newMemberDetail);
                 break;
             case NO_KEYWORD:
-                Parser.wrongInputTypeMessage();
+                Ui.printWrongInputMessage();
                 break;
             case HELP_KEYWORD:
                 Ui.printHelp();

@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/component-diagram
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+Package Architecture <<Rectangle>> {
+Class Ui #fedcba
+Class Member #d83815
+Class Entry #f3f609
+Class Parser #f3f609
+Class Attendance #9218dd
+Class Training #008b8b
+Class Command
+Class Storage #ffffff
+}
+
+Class "<$user>" as User #abcdef
+Class "<$documents>" as File #abcdef
+
+User -down-> Ui
+Ui -down-> Parser
+Parser <-left-> Entry
+Entry -down-> Command
+Command -down-> Member
+Command -down-> Training
+Command -down-> Attendance
+Member-down-> Storage
+Attendance -down-> Storage
+Training -down-> Storage
+
+Storage -down-> File
+
+hide members
+hide circle
+
+@enduml

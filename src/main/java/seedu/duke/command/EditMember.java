@@ -3,6 +3,7 @@ package seedu.duke.command;
 import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
+import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
@@ -30,7 +31,11 @@ public class EditMember {
             oldMember = new Member(memberToChange);
 
             if (!toChange.getName().equals("")) {
-                memberToChange.setName(toChange.getName());
+                if (Parser.isValidName(toChange.getName())) {
+                    memberToChange.setName(toChange.getName());
+                } else {
+                    Ui.printEditNameFailed();
+                }
             }
 
             if (!toChange.getStudentNumber().equals("")) {
@@ -38,11 +43,19 @@ public class EditMember {
             }
 
             if (!toChange.getGender().equals("")) {
-                memberToChange.setGender(toChange.getGender());
+                if (Parser.isValidGender(toChange.getGender())) {
+                    memberToChange.setGender(toChange.getGender());
+                } else {
+                    Ui.printEditGenderFailed();
+                }
             }
 
             if (!toChange.getPhoneNumber().equals("")) {
-                memberToChange.setPhoneNumber(toChange.getPhoneNumber());
+                if (Parser.isValidPhone(toChange.getPhoneNumber())) {
+                    memberToChange.setPhoneNumber(toChange.getPhoneNumber());
+                } else {
+                    Ui.printEditPhoneFailed();
+                }
             }
 
             members.getMemberList().set(index - 1, memberToChange);
