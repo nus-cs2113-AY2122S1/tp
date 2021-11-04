@@ -35,7 +35,7 @@ public class ListOrderCommandTest {
 
     @AfterAll
     public static void clearData() {
-        Medicine.getInstance().clear();
+        Data.clearTestData();
     }
 
     @Test

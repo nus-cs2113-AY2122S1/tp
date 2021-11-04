@@ -1,10 +1,10 @@
 package command.stock;
 
 import command.Command;
+import command.Data;
 import inventory.Medicine;
-import inventory.Order;
-import inventory.Prescription;
 import inventory.Stock;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,19 +18,17 @@ import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author RemusTeo
+
 public class DeleteStockCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
-    ArrayList<Medicine> medicines = Medicine.getInstance();
 
     @BeforeEach
     void setup() {
-        medicines.clear();
-        Stock.setStockCount(0);
-        Prescription.setPrescriptionCount(0);
-        Order.setOrderCount(0);
+        Data.generateTestData();
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -41,8 +39,13 @@ public class DeleteStockCommandTest {
         System.setErr(originalErr);
     }
 
+    @AfterAll
+    public static void clearData() {
+        Data.clearTestData();
+    }
+
     @Test
-    void deleteStockCommand_invalidStock_expectInvalid() {
+    void deleteStockCommand_stockIdZero_expectInvalid() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         parameters.put("i", "0");
         Command command = new DeleteStockCommand(parameters);
@@ -51,17 +54,41 @@ public class DeleteStockCommandTest {
     }
 
     @Test
-    void deleteStockCommand_validStock_expectValid() {
-        try {
-            medicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
-                    "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    void deleteStockCommand_negativeStockId_expectInvalid() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put("i", "-1");
+        Command command = new DeleteStockCommand(parameters);
+        command.execute();
+        assertEquals("Invalid stock id provided!", outContent.toString().trim());
+    }
+
+    @Test
+    void deleteStockCommand_aboveStockCount_expectInvalid() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put("i", "10");
+        Command command = new DeleteStockCommand(parameters);
+        command.execute();
+        assertEquals("Invalid stock id provided!", outContent.toString().trim());
+    }
+
+    @Test
+    void deleteStockCommand_validStockId_expectValid() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         parameters.put("i", "1");
         Command command = new DeleteStockCommand(parameters);
         command.execute();
         assertEquals("Deleted row with Stock Id: 1", outContent.toString().trim());
+    }
+
+    @Test
+    void deleteStockCommand_sameStockIdTwice_expectInvalid() {
+        deleteStockCommand_validStockId_expectValid();
+
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        parameters.put("i", "1");
+        Command command = new DeleteStockCommand(parameters);
+        command.execute();
+        String expectedOutput = "Deleted row with Stock Id: 1\n" + "Invalid stock id provided!";
+        assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
     }
 }
