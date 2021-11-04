@@ -18,7 +18,7 @@ public class AddUniCommand extends Command {
      *
      * @param universityToAdd university to add to the selected university list.
      * @param universityMasterList The master university list which contains all universities.
-     * @param universitySelectedList The selected university list which contains only the universities selected by the user.
+     * @param universitySelectedList The selected university list which contains only the universities selected.
      * @throws IOException If input-output operation failed.
     */
     public AddUniCommand(University universityToAdd, UniversityList universityMasterList,
