@@ -20,7 +20,6 @@
 - [4. Implementation](#4-implementation)
   - [4.1 Adding Tasks](#41-adding-tasks)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
-  - [4.3 Sorting the tasklist](#43-sorting-the-tasklist)
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
   - [5.2 User stories](#52-user-stories)
@@ -222,8 +221,12 @@ The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 The same logical structure is used in the Deadline and Event factories.  
 
 ### 4.2 Filtering the tasklist
+The sequence diagram belows shows the process of filtering the user's tasklist that is managed
+by the `TaskManager.java` class.
 
-### 4.3 Sorting the tasklist
+<p align="center">
+    <img src="images/AmosUMLDiagrams/SD_FilteringTasklist.png">
+</p>
 
 ## 5. Appendix: Requirements
 
