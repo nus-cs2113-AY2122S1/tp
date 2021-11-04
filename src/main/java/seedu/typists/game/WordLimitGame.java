@@ -15,21 +15,22 @@ import static seedu.typists.parser.StringParser.splitString;
 public class WordLimitGame extends Game {
     private ArrayList<String> eachWord;
     protected ArrayList<String[]> wordLines;
-    protected int wordLimit;
-    private final int wordsPerLine;
     private final String content1;
     private long beginTime;
     private String[] displayed;
 
-
-    public WordLimitGame(String targetWordSet, int wordsPerLine) {
-        super();
+    public WordLimitGame(String targetWordSet, int wordsPerLine, boolean isReady) {
+        super(wordsPerLine, isReady);
         this.eachWord = new ArrayList<>(100);
-        this.wordsPerLine = wordsPerLine;
         this.content1 = targetWordSet;
-        this.wordLimit = getWordLimit();
+        this.limit = getWordLimit();
     }
 
+    public WordLimitGame(String targetWordSet, int wordsPerLine, int wordLimit, boolean isReady) {
+        super(wordsPerLine, wordLimit, isReady);
+        this.eachWord = new ArrayList<>(100);
+        this.content1 = targetWordSet;
+    }
 
     @Override
     public void displayLines(int row) {
@@ -68,7 +69,7 @@ public class WordLimitGame extends Game {
     }
 
     public void runGame() {
-        trimContent(wordLimit);
+        trimContent(limit);
         beginTime = getTimeNow();
         List<String> inputs = new ArrayList<>();
         int row = 0;// for method: getDisplayLines()
