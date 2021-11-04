@@ -16,13 +16,14 @@ public class AddMember {
 
     String invalidNameErrorMessage = "Please input a valid name.Name cannot contain numbers or be empty.";
     String invalidStudentNumberErrorMessage = "Invalid student number provided. Please give it in the following "
-            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends off "
-            + "with an capital letter";
+            + "format: \n A1234567X where it consist of capital letter 'A' at the start and 7 digits after and ends "
+            + "off with an capital letter";
     String invalidGenderErrorMessage = "Invalid gender provided. Please enter M for male, F for female.";
     String invalidPhoneNumberErrorMessage = "Invalid phone number given. Please enter a 8 digit Singapore phone number";
     String duplicateNameErrorMessage = "Duplicate name found.Please enter a different name";
     String duplicatePhoneNumberErrorMessage = "Duplicate phone number found.Please enter a different phone number";
-    String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a different student number ";
+    String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a different student"
+            + " number ";
 
     String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
     String validGenderRegex = "^[M|F]";
@@ -58,20 +59,20 @@ public class AddMember {
     /**
      * Checks for any duplicate names,student number and phone number.
      *
-     * @param member         Member to be added to MemberList.
+     * @param member  Member to be added to MemberList.
      * @param members MemberList containing all members.
      * @return true if there are no duplicates given are valid.
      */
     private boolean verifyNoDuplicates(Member member, MemberList members) throws InvalidAddMemberException {
         int memberListSize = members.getMemberListSize();
-        for (int i = 1 ; i <= memberListSize; i++) {
-            if(member.getName().equals(members.getMemberName(i))){
+        for (int i = 1; i <= memberListSize; i++) {
+            if (member.getName().equals(members.getMemberName(i))) {
                 throw new InvalidAddMemberException(duplicateNameErrorMessage);
             }
-            if(member.getPhoneNumber().equals(members.getMemberPhoneNumber(i))){
-                throw  new InvalidAddMemberException(duplicatePhoneNumberErrorMessage);
+            if (member.getPhoneNumber().equals(members.getMemberPhoneNumber(i))) {
+                throw new InvalidAddMemberException(duplicatePhoneNumberErrorMessage);
             }
-            if(member.getStudentNumber().equals(members.getMemberStudentNumber(i))){
+            if (member.getStudentNumber().equals(members.getMemberStudentNumber(i))) {
                 throw new InvalidAddMemberException(duplicateStudentNumberErrorMessage);
             }
         }
