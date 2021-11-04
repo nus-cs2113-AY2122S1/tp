@@ -32,6 +32,8 @@
 ## 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
 their assignments and semester-related information via CLI (command-line interface).
+If you can type fast, SchedUrMods can help you manage your daily tasks faster than 
+traditional GUI application.
 
 **SchedUrMods** is written in `Java 11` and utilises the **Object-Oriented Programming (OOP)** 
 paradigm to provide the following benefits during the development of the application. 
