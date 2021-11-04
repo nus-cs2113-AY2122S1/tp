@@ -129,6 +129,32 @@ public class AddOrderCommandTest {
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
+    /**
+     * If medicine exist in Stock but not in Order.
+     */
+    @Test
+    public void addOrderCommand_InvalidQuantity_expectInvalid() {
+        try {
+            medicines.add(new Stock("PANADOL", 10, 20,
+                    DateParser.stringToDate("10-10-2022"), "Fever", 1000));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        parameters.put("n", NAME);
+        parameters.put("q", "1000");
+        parameters.put("d", DATE);
+
+        Command command = new AddOrderCommand(parameters);
+        command.execute();
+
+        String expectedOutput = "Unable to add order as total order quantity exceeds "
+                + "maximum stock quantity of 1000.\nExisting quantity in stock: 20";
+
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
+    }
+
     @Test
     public void addOrderCommand_invalidQuantity_expectInvalid() {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
