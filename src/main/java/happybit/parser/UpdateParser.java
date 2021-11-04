@@ -155,6 +155,9 @@ public class UpdateParser extends Parser {
         int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
         int habitIndex = getNumber(parameters, FLAG_HABIT_INDEX) - 1;
         int interval = getNumber(parameters, FLAG_INTERVAL);
+        if (interval > MAX_INTERVAL) {
+            throw new HaBitParserException(ERROR_INTERVAL_TOO_LARGE);
+        }
         assert (goalIndex >= 0);
         assert (habitIndex >= 0);
         assert (interval >= 0);

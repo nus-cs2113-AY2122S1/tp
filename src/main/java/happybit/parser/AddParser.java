@@ -94,6 +94,9 @@ public class AddParser extends Parser {
         String[] parameters = splitInput(input);
         String habitName = getName(parameters).trim();
         int interval = getNumber(parameters, FLAG_INTERVAL);
+        if (interval > MAX_INTERVAL) {
+            throw new HaBitParserException(ERROR_INTERVAL_TOO_LARGE);
+        }
         return new Habit(habitName, interval);
     }
 
