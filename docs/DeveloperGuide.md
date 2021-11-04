@@ -24,7 +24,7 @@
 to ensure that Intellij is configured to use JDK 11.
 
 
-4. mport the project as a Gradle project: Follow the guide [Intellij IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+4. Import the project as a Gradle project: Follow the guide [Intellij IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
 
 
 5. Verify the setup:
@@ -75,6 +75,25 @@ inputs the command ```list -c```:
 
 ##Command component
 <hr>
+
+**API: `Command.java`**
+
+Here's a (partial) class diagram of Command component:
+
+![Command class](https://user-images.githubusercontent.com/70316271/140176181-47f4dd25-6c60-4c9a-8b4a-dd21f916a52a.png)
+
+*Note: This diagram and explanation includes only commands related to the `Client` class. 
+The same workflow applies for classes `Flight`, `Tour` and `ClientPackage`, only with a difference in command naming.*
+
+How the `Command` works:
+
+**Step 1.** Based on the user input, `Parser` returns a `Command` to `TourPlanner` *(main class)*.
+
+**Step 2.** `TourPlanner` calls `Command.execute()`. 
+
+**Step 3.** Corresponding command uses associate classes, `ClientList` and `Ui` to carry out its function.
+
+<br>
 
 ### <u>Add feature</u>
 
@@ -137,29 +156,109 @@ extractValue(/n Hokkaido-A) --> Hokkaido-A
 
 <br>
 
+### <u>Cut feature</u>
+The `cut` feature is used to remove an entry from the `ObjectList` (for Client, Tour, Flight and ClientPackage),
+where `Parser` determines the `ObjectList` to remove from.
+
+It implements these following types of `cut` commands:
+* `cut -c CLIENT_ID`
+* `cut -t TOUR_ID`
+* `cut -f FLIGHT_ID`
+* `cut -p CLIENTPACKAGE_ID`
+
+In general, there is a sequence of steps when any of the 4 `cut` commands are called.
+
+Here is an example usage of `cut -c` to delete client with `CLIENT_ID` of "c001":
+**Step 1.** After adding a few client packages to the database, user inputs `cut -c c001`.
+This command is passed to `parse()` method in the `Parser` class.
+
+**Step 2.** Based on the user input, `parse()` identifies that it is of type `cut` command and calls `ParseCut()`.
+`ParseCut()` will then return `CutClientCommand("c001")` based on the prefix `-c`, where "c001" will be stored in
+`CutClientCommand`.
+
+Depending on the type of cut command being called, these command types will be returned:
+* `cut -c`: `CutClientCommand`
+* `cut -f`: `CutFlightCommand`
+* `cut -t`: `CutTourCommand`
+* `cut -p`: `CutClientPackageCommand`
+
+The following 2 sections focuses on cut for the specific classes.
+
+<br>
+
+#### <u>Cutting a particular client package</u>
+
+Given below is an example usage of `cut -p p001` to deletes client package
+with `CLIENTPACKAGE_ID` of "p001".
+
+Here is a (partial) sequence diagram of above user input:
+
+![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140183929-2968d7c1-6a93-4378-8389-a3f7a3413cbe.png)
+
+**Step 1.** `Parser` returns `CutClientPackageCommand("p001)`.
+
+**Step 2.** Then, `execute()` method in `CutClientPackageCommand` calls `getClientPackageById("p001")` 
+which finds the `ClientPackage` based on the `CLIENTPACKAGE_ID` "p001".
+
+**Step 3.** The `ClientPackage` is removed from the `ClientPackageList`.                        
+
+<br>
+
+#### <u>Cutting a particular client / tour / flight</u>
+
+Given below is an example usage of `cut -c c001` to delete client with `CLIENT_ID` of "c001"
+and all corresponding client packages that contain deleted client.
+
+Here is a (partial) sequence diagram for above user input:
+
+![CutClientCommand](https://user-images.githubusercontent.com/70316271/140184002-db955693-ac5e-44c5-9c13-e18df17a8974.png)
+
+**Step 1.** `Parser` returns `CutClientCommand("c001)`.
+
+**Step 2.** Then, `execute()` method in `CutClientCommand` calls `getClientById("c001")` 
+which finds the `Client` based on the `CLIENT_ID` "c001".
+
+**Step 3.** The `Client` is removed from the `ClientList`.
+
+**Step 4.** Next, `getClientPackageByClient("c001")` returns an `ArrayList` of `ClientPackages` that contains
+the `CLient` "c001".
+
+**Step 5.** Loops through the `ClientPackages` and deletes them from `ClientPackageList`.
+
+*Note: `Tour` and `Flight` works in the same way respectively with `TourList` and `FlightList`*
+
+<br>
+
 ### <u>List feature</u>
+The `list` feature is used to display all entries in `ObjectList` (for Client, Tour, Flight and ClientPackage),
+where `Parser` determines the `ObjectList` to list from.
 
 It implements these following types of list commands:
 * `list -c`: Lists all existing clients and their contact numbers
 * `list -t`: Lists all existing tours
+* `list -f`: Lists all existing flights
 * `list -p`: Lists all clients and their corresponding tours and flights
 
 Given below is an example usage of command `list -c`:
 
-**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` method in the `Parser` class.
+**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` 
+method in the `Parser` class.
 
-**Step 2**: `parse()` identifies the command type `ListCCommand` based on the user input and returns it.
+**Step 2**: Based on the user input, `parse()` identifies that it is of type `list` command and calls `ParseList()`. 
+`ParseList()` will then return `ListClientCommand` based on the prefix `-c`.
 
-**Step 3**: Then, `execute()` method in `ListCCommand` is called, where it loops through the current `clientList` and prints out all client names and their details.
+**Step 3**: Then, `execute()` method in `ListClientCommand` is called, where it loops through the current `clientList` 
+and prints out all client names and their details.
 
 Depending on the type of list command being called, these command types will be returned:
-* `list -c`: `ListCCommand`
-* `list -t`: `ListTCommand`
-* `list -p`: `ListPCommand`
+* `list -c`: `ListClientCommand`
+* `list -f`: `ListFlightCommand`
+* `list -t`: `ListTourCommand`
+* `list -p`: `ListClientPackageCommand`
 
 <br>
 
-## <u>Find feature</u>
+### <u>Find feature</u>
 
 
 
@@ -182,7 +281,9 @@ Firstly, assume that in previous sessions, commands were executed to add clients
 * ```add -f SQ-JPN /d JPN /r SG /dd 20/10/2021 18:00 /rd 21/10/2021 03:00```
 * ```add -p p001 /c c001 /t JPN /f SQ-JPN```
 
-### <u>Finding a particular client</u>
+<br>
+
+#### <u>Finding a particular client</u>
 
 **Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named
 Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser```
@@ -207,7 +308,7 @@ The following activity diagram summarizes the following steps.
 
 <br>
 
-### <u>Finding a particular tour</u>
+#### <u>Finding a particular tour</u>
 
 **Step 1**: The user executes ```find -t JPN``` to query if a tour with code
 JPN exists in the TourList. The ```parse``` function in the ```Parser```
@@ -242,7 +343,7 @@ The following activity diagram summarizes the following steps.
 
 <br>
 
-### <u>Finding a particular flight</u>
+#### <u>Finding a particular flight</u>
 
 **Step 1**: The user executes ```find -f SQ-JPN``` to query if a tour with code
 JPN exists in the TourList. The ```parse``` function in the ```Parser```
