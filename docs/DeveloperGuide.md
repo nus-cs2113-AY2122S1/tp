@@ -69,9 +69,9 @@ Its key methods are:
 <!-- -->
 Given below is an example usage scenario and how the program implements the feature.
 
-Step 1: The user launches the application (scenario assumes that there are several game records already stored in multiple files). 
+Step 1: The user launches the application (scenario assumes that there are several game records already stored in the text files). 
 
-Step 2: The user executes `view -m best -g time -n 9` to view his/her best statistics for the error game mode over the past 9 games. 
+Step 2: The user executes `view -m best -g time -n 4` to view his/her best statistics for the time-limited game mode over the past 4 games. 
 
 Step 3: A ViewCommand object is then instantiated.  
 
@@ -83,7 +83,7 @@ Step 4. ViewCommand calls the retrieveStatistics() method of StatisticsManager.
 Step 5: StatisticsManager creates a GameRecordsManager object.
 * The constructor of GameRecordsManager calls the readGameRecords() method of the Storage class to retrieve the gamer's past game records from the text files.
 <!-- -->
-![Alt text](uml/ViewStatistics-3.drawio.svg)
+![Alt text](uml/ViewStatistics-3.drawio.svg)  
 Step 6. StatisticsManager then calls getGamesRecords() method of GameRecordsManager() and self-invokes calculateBestStatistics().
 * Calculated statistics is returned.
 
@@ -125,8 +125,11 @@ Our product is a typing game, intent to provide enjoyment for people who are fam
 |v1.0|user|customize the time limit to finish a game|train myself to type faster|
 |v1.0|user|customize the word limit, in multiples of 100|have an optimal gaming experience by being able to choose my preferred length of text for the game|
 |v1.0|user|choose text from famous books, randomly generated text or customized text for my game|make my gaming experience more fun and fulfilling|
-|v2.0|user|view my game statistics after the game finishes|know how I fared|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|typist|view my error rate|know on average, what my error rate is|
+|v1.0|typist|see my word per minute after I've finished a game|know my typing speed|
+|v2.0|gamer|view my past records|see how I have improved over time|
+|v2.0|gamer|clear my past records|have a fresh start|
+|v2.0|typist|see the words I typed wrongly after I've finished a game|know which words I have to practice more|
 
 ## Non-Functional Requirements
 

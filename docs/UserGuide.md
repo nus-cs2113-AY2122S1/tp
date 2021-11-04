@@ -62,13 +62,13 @@ Start a typing game.
 Format: `game GAME_MODE [-c]`
 * SET_CONTENT `-c` is optional, it allows user to set input content before game starts.
 * GAME_MODE 
-  * `-w` for game in Word Limit Mode 
-  * `-t` for game in Time Limit Mode
+  * `-word` for game in Word Limit Mode 
+  * `-time` for game in Time Limit Mode
 * For Word Limit Game:
-  * Format: `game -w [-c]`
+  * Format: `game -word [-c]`
   * Exit: `Exit` allows user to terminate the current game.
 * For Time Limit Game:
-  * Format: `game -t TIME_LIMIT [-sn] [-c]`
+  * Format: `game -time TIME_LIMIT [-sn] [-c]`
   * START_NOW `-sn` allows user to start the game immediately without the "ready to start?" prompt.
 
 <!-- -->
@@ -183,9 +183,9 @@ List of the keywords are shown below:
 
 `content`-Set the content
 
-`game -w`-Enter a word-limited game mode
+`game -word`-Enter a word-limited game mode
 
-`game -w -c`-Enter a word-limited game mode with content setting
+`game -word -c`-Enter a word-limited game mode with content setting
 
 >Exit word-limited game mode command: `Exit`
 
@@ -201,7 +201,7 @@ Statistics of game is shown automatically after a game is finished.
 ## Example of usage:
 
 ```
-game -w
+game -word
      | Enter how many words you want the game to run: 
 5
      | lorem ipsum is simply dummy 
@@ -209,7 +209,7 @@ lorem ipsum is simply dummy
      | Your progress:5/5
 ```
 ```
-game -t 30 -sn
+game -time 30 -sn
      | lorem ipsum is simply dummy text of the printing and 
 lorem ipsum is simply dummy text of the printing and 
      | typesetting imply dummy text of the printing and typesetting industry 
@@ -229,6 +229,6 @@ typesetting imply dummy text of the printing and typesetting industry
 
 | Feature  | Command |
 | ------------- | ------------- | 
-| Start Word Limit Game| `game -w [-c]` | 
-| Start Time Limit Game | `game -t TIME_LIMIT [-sn] [-c]`
+| Start Word Limit Game| `game -word [-c]` | 
+| Start Time Limit Game | `game -time TIME_LIMIT [-sn] [-c]`
 | Get History | `history -h`|
