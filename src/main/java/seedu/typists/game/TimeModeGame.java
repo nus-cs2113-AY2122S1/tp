@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import static seedu.typists.common.Messages.MESSAGE_TIME_GAME_END;
-import static seedu.typists.common.Utils.*;
+import static seedu.typists.common.Utils.getDisplayLines;
+import static seedu.typists.common.Utils.splitStringIntoWordList;
+import static seedu.typists.common.Utils.getWordLineFromStringArray;
+import static seedu.typists.common.Utils.isValidTime;
+
 
 public class TimeModeGame extends Game {
     protected final ArrayList<String> wordLists;

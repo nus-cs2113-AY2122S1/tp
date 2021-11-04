@@ -70,7 +70,8 @@ public class Messages {
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
     public static final String MESSAGE_HELP = "Manual:\n"
             + "content: set the content\n"
-            + "game: start a new game\n"
+            + "game -time: start a new time game\n"
+            + "game -word: start a new word game\n"
             + "history -g GAME_MODE [-n NUMBER_OF_RECORDS]: view past game records\n"
             + "clear [-g GAME_MODE]: clear all game records\n"
             + "bye: exit typist";
