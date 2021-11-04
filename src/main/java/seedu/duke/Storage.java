@@ -3,7 +3,7 @@ package seedu.duke;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import seedu.duke.expense.Expense;
+import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.trip.Trip;
 
 import java.io.FileNotFoundException;
@@ -74,11 +74,11 @@ public class Storage {
         return availableCurrency;
     }
 
-    public static double formatForeignMoneyDouble(double money) {
+    public static double formatForeignMoneyDouble(double money) throws ForceCancelException {
         return Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), money));
     }
 
-    public static double formatRepaymentMoneyDouble(double money) {
+    public static double formatRepaymentMoneyDouble(double money) throws ForceCancelException {
         return Double.parseDouble(String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(), money));
     }
 
@@ -181,10 +181,11 @@ public class Storage {
      *
      * @return the currently opened trip
      */
-    public static Trip getOpenTrip() {
+    public static Trip getOpenTrip() throws ForceCancelException {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
             promptUserForValidTrip();
+            Ui.printOpenTripMessage(openTrip);
         }
         lastTrip = openTrip;
         return openTrip;
@@ -195,10 +196,11 @@ public class Storage {
      *
      * @see Storage#getOpenTrip()
      */
-    public static void promptUserForValidTrip() {
+    public static void promptUserForValidTrip() throws ForceCancelException {
         try {
             System.out.print("Please enter the trip you would like to open: ");
-            int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
+            String input = Ui.receiveUserInput();
+            int tripIndex = Integer.parseInt(input) - 1;
             setOpenTrip(tripIndex);
         } catch (NumberFormatException e) {
             Ui.argNotNumber();

@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Ui {
 
-    public static void printOptimizedAmounts() {
+    public static void printOptimizedAmounts() throws ForceCancelException {
         boolean isAllPaid = true;
         Trip openTrip = Storage.getOpenTrip();
         ArrayList<Person> listOfPersons = openTrip.getListOfPersons();
@@ -76,16 +76,26 @@ public class Ui {
 
     //@@author joshualeeky
     public static String stringForeignMoney(double val) {
-        return Storage.getOpenTrip().getForeignCurrency() + " "
-                //+ Storage.getOpenTrip().getForeignCurrencySymbol()
-                + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
+        try {
+            return Storage.getOpenTrip().getForeignCurrency() + " "
+                    //+ Storage.getOpenTrip().getForeignCurrencySymbol()
+                    + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
+        } catch (ForceCancelException e) {
+            printForceCancelled();
+            return null;
+        }
     }
 
     public static String stringRepaymentMoney(double val) {
-        return Storage.getOpenTrip().getRepaymentCurrency() + " "
-                //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
-                + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
-                val / Storage.getOpenTrip().getExchangeRate());
+        try {
+            return Storage.getOpenTrip().getRepaymentCurrency() + " "
+                    //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
+                    + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
+                    val / Storage.getOpenTrip().getExchangeRate());
+        } catch (ForceCancelException e) {
+            printForceCancelled();
+            return null;
+        }
     }
 
     public static void askAutoAssignRemainder(Person person, double remainder) {
@@ -95,9 +105,6 @@ public class Ui {
 
     //@@author
 
-    public static void printCancelExpenseCreation() {
-        System.out.println("Your expense creation has been cancelled.");
-    }
 
     public static void printListOfPeople(ArrayList<Person> people) {
         for (Person person : people) {
@@ -273,13 +280,16 @@ public class Ui {
         System.out.println("---------------------------");
     }
 
-    public static void invalidArgForAmount() {
-        System.out.println("The person you entered is not in the opened trip, or syntax is invalid. "
-                + System.lineSeparator()
-                + "Please format as follows: "
-                + "amount [person].");
+    public static void invalidAmountFormat() {
+        System.out.println("The syntax for amount you have entered is invalid. "
+                + "Please format as follows: amount [person].");
+    }
+
+    public static void invalidArgForAmount() throws ForceCancelException {
+        Trip currTrip = Storage.getOpenTrip();
+        System.out.println("The person you entered is not in the opened trip.");
         System.out.println("These are the people involved in this trip:");
-        Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        Ui.printListOfPeople(currTrip.getListOfPersons());
         System.out.println();
     }
 
@@ -303,7 +313,7 @@ public class Ui {
 
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent "
-                + stringForeignMoney(person.getMoneyOwed().get(person.getName())) // Remove .getName()
+                + stringForeignMoney(person.getMoneyOwed().get(person.getName()))
                 + " (" + stringRepaymentMoney(person.getMoneyOwed().get(person.getName())) + ") on the trip so far");
 
         for (Person otherPerson : trip.getListOfPersons()) {
@@ -409,7 +419,8 @@ public class Ui {
         System.out.println("Otherwise, you may continue to use the program.");
     }
 
-    public static void printInvalidPeople(ArrayList<String> names) {
+    public static void printInvalidPeople(ArrayList<String> names) throws ForceCancelException {
+        final Trip currTrip = Storage.getOpenTrip();
         for (String name : names) {
             if (names.indexOf(name) == names.size() - 1) {
                 System.out.print(name);
@@ -426,7 +437,7 @@ public class Ui {
         }
         System.out.println("not part of the trip.");
         System.out.println("These are the names of the people who are part of the trip:");
-        printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+        printListOfPeople(currTrip.getListOfPersons());
         System.out.println("Please enter the names of the people who are involved in this expense again, "
                 + "separated by a comma:");
     }

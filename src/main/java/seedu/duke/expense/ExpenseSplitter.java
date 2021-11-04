@@ -189,7 +189,8 @@ interface ExpenseSplitter {
      * @param expense Expense that is being added to the current Trip.
      * @param amountBeingPaid The amount that is being paid for the Expense.
      */
-    private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
+    private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid)
+            throws ForceCancelException {
         double total = 0.0;
         double amount = Storage.formatForeignMoneyDouble(expense.getAmountSpent() / expense.getPersonsList().size());
         for (Person people : expense.getPersonsList()) {

@@ -71,7 +71,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      *
      * @param indexAsString index of trip to open, as a {@link String} to be parsed.
      */
-    protected static void executeOpen(String indexAsString) {
+    protected static void executeOpen(String indexAsString) throws ForceCancelException {
         //assumes that listOfTrips have at least 1 trip
         int indexToGet = Integer.parseInt(indexAsString) - 1;
         if (Storage.checkOpenTrip()) {
@@ -81,7 +81,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         Ui.printOpenTripMessage(Storage.getOpenTrip());
     }
 
-    protected static void executeSummary(String inputParams) {
+    protected static void executeSummary(String inputParams) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             //list everybody's expense summary
@@ -108,7 +108,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
 
     //@@author leeyikai
-    protected static void executeView(String inputParams) {
+    protected static void executeView(String inputParams) throws ForceCancelException {
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
@@ -154,7 +154,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * @see Parser#executeDeleteTrip(int)
      * @see Parser#executeDeleteExpense(int)
      */
-    protected static void executeDelete(String inputParams) {
+    protected static void executeDelete(String inputParams) throws ForceCancelException {
         int index;
         if (Storage.checkOpenTrip()) {
             Trip currTrip = Storage.getOpenTrip();
@@ -174,11 +174,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
-    protected static void executeList() throws TripNotOpenException {
+    protected static void executeList() throws ForceCancelException {
         if (!Storage.checkOpenTrip()) {
             Ui.printAllTrips();
         } else {
-            throw new TripNotOpenException();
+            Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         }
     }
 
@@ -192,7 +192,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         Ui.printExpenseAddedSuccess();
     }
 
-    protected static void executeAmount(String inputParams) {
+    protected static void executeAmount(String inputParams) throws ForceCancelException {
         Trip trip = Storage.getOpenTrip();
         Person toBeChecked = getValidPersonInTripFromString(inputParams, trip);
         if (toBeChecked == null) {
@@ -202,16 +202,17 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
-    protected static void executePeople() throws TripNotOpenException {
+    protected static void executePeople() throws TripNotOpenException, ForceCancelException {
+        Trip currTrip = Storage.getOpenTrip();
         if (Storage.checkOpenTrip()) {
             System.out.println("These are the people involved in this trip:");
-            Ui.printListOfPeople(Storage.getOpenTrip().getListOfPersons());
+            Ui.printListOfPeople(currTrip.getListOfPersons());
         } else {
             throw new TripNotOpenException();
         }
     }
 
-    protected static void executeOptimize() throws NoExpensesException {
+    protected static void executeOptimize() throws NoExpensesException, ForceCancelException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
             checkForOptimization();
         } else {
@@ -219,7 +220,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
-    private static void executeDeleteExpense(int expenseIndex) {
+    private static void executeDeleteExpense(int expenseIndex) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
         Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
         double expenseAmount = expenseToDelete.getAmountSpent();
@@ -333,7 +334,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     //@@author
 
 
-    private static void checkForOptimization() {
+    private static void checkForOptimization() throws ForceCancelException {
         Trip trip = Storage.getOpenTrip();
         PaymentOptimizer.optimizePayments(trip);
         Ui.printOptimizedAmounts();
