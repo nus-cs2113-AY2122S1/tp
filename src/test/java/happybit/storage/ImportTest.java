@@ -5,7 +5,6 @@ import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
-import happybit.interval.Interval;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -14,8 +13,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ImportTest {
     private static final String DELIMITER = "##";
