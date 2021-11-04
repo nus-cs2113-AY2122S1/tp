@@ -3,7 +3,7 @@ package seedu.duke.data;
 public class Tour {
     private final String id;
     private final String name;
-    private final float price;
+    private final Float price;
 
     public Tour(String[] values) {
         id = values[0];
@@ -19,7 +19,7 @@ public class Tour {
         return name;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 

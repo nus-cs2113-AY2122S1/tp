@@ -1,7 +1,6 @@
 package seedu.duke.data;
 
 import seedu.duke.TourPlannerException;
-import seedu.duke.data.ClientPackage;
 
 import java.util.ArrayList;
 

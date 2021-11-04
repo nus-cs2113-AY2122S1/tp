@@ -12,9 +12,9 @@ public class FlightList {
     private static final String FLIGHT_NOT_FOUND_MESSAGE = "Flight cannot be found. Please try another flight ID";
 
     private final ArrayList<Flight> flights;
-    private final ArrayList<String> flightIds;
-    private final ArrayList<String> flightReturnDates;
-    private final ArrayList<String> flightDepartureDates;
+    private ArrayList<String> flightIds;
+    private ArrayList<String> flightReturnDates;
+    private ArrayList<String> flightDepartureDates;
     private ArrayList<String> iteratedFlightIds;
     private int flightCount = 0;
 
@@ -34,6 +34,10 @@ public class FlightList {
             }
         }
     };
+
+    public ArrayList<Flight> getFlights() {
+        return flights;
+    }
 
     public FlightList() {
         flights = new ArrayList<>();

@@ -36,7 +36,7 @@ public class SortTourCommand extends Command {
         try {
             switch (filter) {
             case "/id":
-                ArrayList<String> sortedCodes = tours.getSortedTourCodes();
+                ArrayList<String> sortedCodes = tours.getSortedTourIds();
                 ui.showSortedTourById(tours, sortedCodes);
                 break;
             case "/p":

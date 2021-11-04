@@ -9,21 +9,21 @@ public class TourList {
     private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
 
     private final ArrayList<Tour> tours;
-    private final ArrayList<String> tourCodes;
+    private final ArrayList<String> tourIds;
     private final ArrayList<Float> tourPrices;
-    private ArrayList<String> iteratedTourCodes;
+    private ArrayList<String> iteratedTourIds;
     private int tourCount;
 
     public TourList() {
         tours = new ArrayList<>();
-        tourCodes = new ArrayList<>();
+        tourIds = new ArrayList<>();
         tourPrices = new ArrayList<>();
         tourCount = 0;
     }
 
     public void add(Tour tour) {
         tours.add(tour);
-        tourCodes.add(tour.getId());
+        tourIds.add(tour.getId());
         tourPrices.add(tour.getPrice());
         tourCount++;
     }
@@ -37,9 +37,9 @@ public class TourList {
         return tourPrices;
     }
 
-    public ArrayList<String> getSortedTourCodes() {
-        Collections.sort(tourCodes);
-        return tourCodes;
+    public ArrayList<String> getSortedTourIds() {
+        Collections.sort(tourIds);
+        return tourIds;
     }
 
     public int getTourCount() {
@@ -51,14 +51,14 @@ public class TourList {
     }
 
     public void initTempArray() {
-        iteratedTourCodes = new ArrayList<String>();
+        iteratedTourIds = new ArrayList<String>();
     }
 
     public Tour getTourByPrice(Float price) throws TourPlannerException {
         for (Tour currTour : tours) {
-            String currTourCode = currTour.getId();
-            if (currTour.getPrice() == price && !iteratedTourCodes.contains(currTourCode)) {
-                iteratedTourCodes.add(currTourCode);
+            String currTourId = currTour.getId();
+            if (currTour.getPrice() == price && !iteratedTourIds.contains(currTourId)) {
+                iteratedTourIds.add(currTourId);
                 return currTour;
             }
         }
