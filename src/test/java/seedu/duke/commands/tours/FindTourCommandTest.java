@@ -1,8 +1,9 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.tours.FindTourCommand;
 import seedu.duke.data.Client;
 import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackage;
@@ -42,9 +43,9 @@ public class FindTourCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the tours that matches your search\n"
+        String expectedString = "This is the tour that matches your search\n"
                 + "Name: Japan Basic Tour\n"
-                + "Code: JPN\n"
+                + "Id: JPN\n"
                 + "Price per pax: $1500.00\n" + "\n" + "\n"
                 + "Subscribed Clients:\n"
                 + "Total Subscribed Clients: 0";
@@ -71,9 +72,9 @@ public class FindTourCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the tours that matches your search\n"
+        String expectedString = "This is the tour that matches your search\n"
                 + "Name: Japan Basic Tour\n"
-                + "Code: JPN\n"
+                + "Id: JPN\n"
                 + "Price per pax: $1500.00\n" + "\n" + "\n"
                 + "Subscribed Clients:\n"
                 + "1. Bo Tuan\n" + "\n"

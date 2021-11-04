@@ -17,30 +17,30 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String ADD_CLIENT_MESSAGE = "Client has been added:";
-    private static final String ADD_FLIGHT_MESSAGE = "Flight has been added:";
-    private static final String ADD_TOUR_MESSAGE = "Tour has been added:";
-    private static final String ADD_CLIENT_PACKAGE_MESSAGE = "Client package has been added:";
+    public static final String ADD_CLIENT_MESSAGE = "Client has been added:";
+    public static final String ADD_FLIGHT_MESSAGE = "Flight has been added:";
+    public static final String ADD_TOUR_MESSAGE = "Tour has been added:";
+    public static final String ADD_CLIENT_PACKAGE_MESSAGE = "Client package has been added:";
 
-    private static final String CUT_CLIENT_MESSAGE = "Client has been deleted:";
-    private static final String CUT_FLIGHT_MESSAGE = "Flight has been deleted:";
-    private static final String CUT_TOUR_MESSAGE = "Tour has been deleted:";
-    private static final String CUT_CLIENT_PACKAGE_MESSAGE = "Client package has been deleted:";
+    public static final String CUT_CLIENT_MESSAGE = "Client has been deleted:";
+    public static final String CUT_FLIGHT_MESSAGE = "Flight has been deleted:";
+    public static final String CUT_TOUR_MESSAGE = "Tour has been deleted:";
+    public static final String CUT_CLIENT_PACKAGE_MESSAGE = "Client package has been deleted:";
 
-    private static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
-    private static final String LIST_MESSAGE = "Here is a list of all ";
-    private static final String FIND_FAIL_MESSAGE_LEFT = "I'm sorry, there seems to be no ";
-    private static final String FIND_SUCCESS_MESSAGE_LEFT = "This is the ";
-    private static final String FIND_MESSAGE_RIGHT = "that matches your search";
-    private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
+    public static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
+    public static final String LIST_MESSAGE = "Here is a list of all ";
+    public static final String FIND_FAIL_MESSAGE_LEFT = "I'm sorry, there seems to be no ";
+    public static final String FIND_SUCCESS_MESSAGE_LEFT = "This is the ";
+    public static final String FIND_MESSAGE_RIGHT = "that matches your search";
+    public static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
-    private static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
-    private static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
-    private static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
-    private static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
-    private static final String SORT_FLIGHT_BY_DEPARTURE_MESSAGE = "Sorted by departing flight times";
-    private static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
-    private static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
+    public static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
+    public static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
+    public static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
+    public static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
+    public static final String SORT_FLIGHT_BY_DEPARTURE_MESSAGE = "Sorted by departing flight times";
+    public static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
+    public static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
     private static final Scanner in = new Scanner(System.in);
 
@@ -76,28 +76,30 @@ public class Ui {
     }
 
     public void showHelp() {
-        String add = "add: Add information of all data types into the database.\n" +
-                "Prefixes can be input in any order.\n" +
-                "   Add client: add -c CLIENT_ID /n NAME /cn CONTACT_NUM /m EMAIL\n" +
-                "   Add flight: add -f FLIGHT_ID /d DEPART_DESTINATION /r RETURN_DESTINATION\n" +
-                "               /dd DEPARTURE_DATETIME /rd RETURN_DATETIME\n" +
-                "   Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE\n" +
-                "   Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID\n\n";
-        String list = "list: Shows a list of all available entries of a specific data type, along with their respective fields.\n" +
-                "   List client: list -c\n" +
-                "   List flight: list -f\n" +
-                "   List tour: list -t\n" +
-                "   List client package: list -p\n\n";
-        String cut = "cut: Deletes entry of a certain data type and all client packages corresponding to the entry.\n" +
-                "   Cut client: cut -c CLIENT_ID\n" +
-                "   Cut flight: cut -f FLIGHT_ID\n" +
-                "   Cut tour: cut -t TOUR_ID\n" +
-                "   Cut client package: cut -p PACKAGE_ID\n\n";
-        String find = "find: Finds specific client(s) based on a particular substring and returns their client packages.\n" +
-                "   Find client: find -c CLIENT_NAME\n" +
-                "   Find flight: find -f FLIGHT_ID\n" +
-                "   Find tour: find -t TOUR_ID\n" +
-                "   Find client package: find -p PACKAGE_ID\n\n";
+        String add = "add: Add information of all data types into the database.\n"
+                + "Prefixes can be input in any order.\n"
+                + "   Add client: add -c CLIENT_ID /n NAME /cn CONTACT_NUM /m EMAIL\n"
+                + "   Add flight: add -f FLIGHT_ID /d DEPART_DESTINATION /r RETURN_DESTINATION\n"
+                + "               /dd DEPARTURE_DATETIME /rd RETURN_DATETIME\n"
+                + "   Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE\n"
+                + "   Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID\n\n";
+        String list = "list: Shows a list of all available entries of a specific data type, along with their "
+                + "respective fields.\n"
+                + "   List client: list -c\n"
+                + "   List flight: list -f\n"
+                + "   List tour: list -t\n"
+                + "   List client package: list -p\n\n";
+        String cut = "cut: Deletes entry of a certain data type and all client packages corresponding to the entry.\n"
+                + "   Cut client: cut -c CLIENT_ID\n"
+                + "   Cut flight: cut -f FLIGHT_ID\n"
+                + "   Cut tour: cut -t TOUR_ID\n"
+                + "   Cut client package: cut -p PACKAGE_ID\n\n";
+        String find = "find: Finds specific client(s) based on a particular substring and returns their "
+                + "client packages.\n"
+                + "   Find client: find -c CLIENT_NAME\n"
+                + "   Find flight: find -f FLIGHT_ID\n"
+                + "   Find tour: find -t TOUR_ID\n"
+                + "   Find client package: find -p PACKAGE_ID\n\n";
         String bye = "bye: Exits the program.";
         show(add + list + cut + find + bye);
     }
@@ -213,9 +215,9 @@ public class Ui {
         show("Total Tours: " + count);
     }
 
-    public void showFindTour(TourList tours, ClientPackageList clientPackages, String code)
+    public void showFindTour(TourList tours, ClientPackageList clientPackages, String id)
             throws TourPlannerException {
-        Tour foundTour = tours.getTourByCode(code);
+        Tour foundTour = tours.getTourById(id);
         if (foundTour != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "tour " + FIND_MESSAGE_RIGHT);
             show(foundTour + "\n" + "\n");
@@ -223,9 +225,9 @@ public class Ui {
             int count = clientPackages.getClientPackageCount();
             show("Subscribed Clients:");
             for (int i = 0; i < count; i++) {
-                Tour currTour = clientPackages.get(i).getTour();
+                Tour currTour = clientPackages.getClientPackageByIndex(i).getTour();
                 if (currTour.equals(foundTour)) {
-                    String currClientName = clientPackages.get(i).getClient().getName();
+                    String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     subbedClients++;
                 }
@@ -239,16 +241,16 @@ public class Ui {
     /**
      * Ui response to sort tour by id.
      *
-     * @param tours           the current list of tours in the database
-     * @param sortedTourCodes the list of sorted tour codes/ids (by alphabetical order)
+     * @param tours         the current list of tours in the database
+     * @param sortedTourIds the list of sorted tour codes/ids (by alphabetical order)
      * @throws TourPlannerException if there is no tours that can be found given the tour code
      */
-    public void showSortedTourById(TourList tours, ArrayList<String> sortedTourCodes)
+    public void showSortedTourById(TourList tours, ArrayList<String> sortedTourIds)
             throws TourPlannerException {
         show(SORT_TOUR_ID_MESSAGE);
         int listIndex = 1;
-        for (String tourCode : sortedTourCodes) {
-            Tour currTour = tours.getTourByCode(tourCode);
+        for (String tourId : sortedTourIds) {
+            Tour currTour = tours.getTourById(tourId);
             show(listIndex + ". " + currTour + System.lineSeparator());
             listIndex++;
         }
@@ -389,9 +391,9 @@ public class Ui {
             int count = clientPackages.getClientPackageCount();
             show("Passengers:");
             for (int i = 0; i < count; i++) {
-                Flight currFlight = clientPackages.get(i).getFlight();
+                Flight currFlight = clientPackages.getClientPackageByIndex(i).getFlight();
                 if (currFlight.equals(foundFlight)) {
-                    String currClientName = clientPackages.get(i).getClient().getName();
+                    String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     passengers++;
                 }
@@ -410,14 +412,14 @@ public class Ui {
         }
         show(LIST_MESSAGE + "packages:");
         for (int i = 0; i < count; i++) {
-            ClientPackage currPackage = clientPackages.get(i);
+            ClientPackage currPackage = clientPackages.getClientPackageByIndex(i);
             show((i + 1) + ". " + currPackage + "\n" + "\n");
         }
         show("Total Packages:" + count);
     }
 
     public void showFindClientPackage(ClientPackageList packages, int index) {
-        ClientPackage foundPackage = packages.get(index - 1);
+        ClientPackage foundPackage = packages.getClientPackageByIndex(index - 1);
         if (foundPackage != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
             show(foundPackage + "\n" + "\n");

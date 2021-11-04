@@ -1,10 +1,18 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clients.CutClientCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
 
 
 import java.io.ByteArrayOutputStream;
@@ -33,6 +41,9 @@ public class CutClientCommandTest {
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
         Client wayne = new Client(new String[]{"c002", "Wayne", "56667888", "wen@mail.com"});
         Client chengxu = new Client(new String[]{"c003", "ChengXu", "10101010", "demonshaha@mail.com"});
+        clients = createClientList(botuan, wayne, chengxu);
+        allClients = createClientList(botuan, wayne, chengxu);
+        clientsWithoutBoTuan = createClientList(wayne, chengxu);
 
         Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
         Tour kor = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
@@ -42,12 +53,6 @@ public class CutClientCommandTest {
 
         ClientPackage botuanPack1 = new ClientPackage("p001", botuan, jpn, sqjpn);
         ClientPackage botuanPack2 = new ClientPackage("p002", botuan, kor, sqkor);
-
-        clients = createClientList(botuan, wayne, chengxu);
-
-        allClients = createClientList(botuan, wayne, chengxu);
-        clientsWithoutBoTuan = createClientList(wayne, chengxu);
-
         clientPackages = createClientPackageList(botuanPack1, botuanPack2);
     }
 

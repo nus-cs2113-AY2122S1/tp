@@ -37,8 +37,8 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight ID: " + id + System.lineSeparator()
-                + "Departure Flight: " + departDestination + ", " + departDate + System.lineSeparator()
+        return "Flight ID: " + id + "\n"
+                + "Departure Flight: " + departDestination + ", " + departDate + "\n"
                 + "Return Flight: " + returnDestination + ", " + returnDate;
     }
 }

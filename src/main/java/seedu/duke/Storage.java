@@ -23,24 +23,24 @@ public class Storage {
     private static final Path filePath = Paths.get(root, "data", "TourPlanner.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
-    private static ClientList clients = new ClientList();
-    private static FlightList flights = new FlightList();
-    private static TourList tours = new TourList();
-    private static ClientPackageList clientPackages = new ClientPackageList();
+    private static final ClientList clients = new ClientList();
+    private static final FlightList flights = new FlightList();
+    private static final TourList tours = new TourList();
+    private static final ClientPackageList clientPackages = new ClientPackageList();
 
-    public static ClientList getClients() {
+    public ClientList getClients() {
         return clients;
     }
 
-    public static FlightList getFlights() {
+    public FlightList getFlights() {
         return flights;
     }
 
-    public static TourList getTours() {
+    public TourList getTours() {
         return tours;
     }
 
-    public static ClientPackageList getClientPackages() {
+    public ClientPackageList getClientPackages() {
         return clientPackages;
     }
 
@@ -48,11 +48,17 @@ public class Storage {
         try {
             File fileDirectory = new File(dirPath.toString());
             if (!fileDirectory.exists()) {
-                fileDirectory.mkdir();
+                boolean isDirectoryCreated = fileDirectory.mkdir();
+                if (isDirectoryCreated) {
+                    System.out.println("New folder created!");
+                }
             }
 
             File dataFile = new File(filePath.toString());
-            dataFile.createNewFile();
+            boolean isFileCreated = dataFile.createNewFile();
+            if (isFileCreated) {
+                System.out.println("New file created!");
+            }
         } catch (IOException e) {
             throw new TourPlannerException("File ERROR");
         }
@@ -132,11 +138,10 @@ public class Storage {
         }
     }
 
-    public void saveFile(ClientPackageList clientPackages) {
+    public void saveFile(ArrayList<ClientPackage> clientPackages) {
         try {
             FileWriter writer = new FileWriter(filePath.toString());
-            ArrayList<ClientPackage> clientPackageArray = clientPackages.getClientPackages();
-            for (ClientPackage clientPackage : clientPackageArray) {
+            for (ClientPackage clientPackage : clientPackages) {
                 writer.write(clientPackage.storageString() + System.lineSeparator());
             }
             writer.close();

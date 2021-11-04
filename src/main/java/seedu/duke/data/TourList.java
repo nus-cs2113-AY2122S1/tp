@@ -23,7 +23,7 @@ public class TourList {
 
     public void add(Tour tour) {
         tours.add(tour);
-        tourCodes.add(tour.getCode());
+        tourCodes.add(tour.getId());
         tourPrices.add(tour.getPrice());
         tourCount++;
     }
@@ -56,7 +56,7 @@ public class TourList {
 
     public Tour getTourByPrice(Float price) throws TourPlannerException {
         for (Tour currTour : tours) {
-            String currTourCode = currTour.getCode();
+            String currTourCode = currTour.getId();
             if (currTour.getPrice() == price && !iteratedTourCodes.contains(currTourCode)) {
                 iteratedTourCodes.add(currTourCode);
                 return currTour;
@@ -65,10 +65,10 @@ public class TourList {
         throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
     }
 
-    public Tour getTourByCode(String code) throws TourPlannerException {
+    public Tour getTourById(String id) throws TourPlannerException {
         for (int i = 0; i < tourCount; i++) {
             Tour currentTour = tours.get(i);
-            if (currentTour.getCode().equals(code)) {
+            if (currentTour.getId().equals(id)) {
                 return currentTour;
             }
         }

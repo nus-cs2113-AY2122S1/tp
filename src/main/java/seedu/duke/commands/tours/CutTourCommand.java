@@ -8,16 +8,16 @@ import seedu.duke.data.Tour;
 import java.util.ArrayList;
 
 public class CutTourCommand extends Command {
-    private final String tourCode;
+    private final String tourId;
     private Tour tour;
 
     /**
      * Class constructor for CutTourCommand.
      *
-     * @param tourCode code of to-be-deleted tour in the tour list
+     * @param tourId ID of to-be-deleted tour in the tour list
      */
-    public CutTourCommand(String tourCode) {
-        this.tourCode = tourCode;
+    public CutTourCommand(String tourId) {
+        this.tourId = tourId;
     }
 
     /**
@@ -36,7 +36,7 @@ public class CutTourCommand extends Command {
     }
 
     private void cutTour() throws TourPlannerException {
-        this.tour = tours.getTourByCode(tourCode);
+        this.tour = tours.getTourById(tourId);
         int newTourCount = tours.getTourCount() - 1;
         ui.showCut(tour);
         tours.cut(tour);

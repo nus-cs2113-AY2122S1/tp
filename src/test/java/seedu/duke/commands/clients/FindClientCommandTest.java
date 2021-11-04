@@ -1,8 +1,9 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clients.FindClientCommand;
 import seedu.duke.data.Client;
 import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackageList;

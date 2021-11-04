@@ -30,6 +30,10 @@ public class AddClientPackageCommand extends Command {
         }
     }
 
+    public ClientPackage getClientPackage() {
+        return clientPackage;
+    }
+
     private void createClientPackage() {
         try {
             String clientPackageId = rawClientPackage[0];
@@ -49,8 +53,8 @@ public class AddClientPackageCommand extends Command {
         return clients.getClientById(clientId);
     }
 
-    private Tour extractTour(String tourCode) throws TourPlannerException {
-        return tours.getTourByCode(tourCode);
+    private Tour extractTour(String tourId) throws TourPlannerException {
+        return tours.getTourById(tourId);
     }
 
     private Flight extractFlight(String flightId) throws TourPlannerException {

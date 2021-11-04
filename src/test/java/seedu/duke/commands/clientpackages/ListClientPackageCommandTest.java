@@ -1,23 +1,24 @@
-package seedu.duke;
+package seedu.duke.commands.clientpackages;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TourPlannerException;
+import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.clientpackages.FindClientPackageCommand;
 import seedu.duke.data.Client;
-import seedu.duke.data.ClientList;
-import seedu.duke.data.ClientPackage;
-import seedu.duke.data.ClientPackageList;
-import seedu.duke.data.Flight;
-import seedu.duke.data.FlightList;
 import seedu.duke.data.Tour;
+import seedu.duke.data.Flight;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientList;
 import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FindClientPackageCommandTest {
+public class ListClientPackageCommandTest {
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
@@ -29,7 +30,7 @@ public class FindClientPackageCommandTest {
     Ui testUi = new Ui();
 
     @Test
-    void findTourCommand_validSubscription_correctlyConstructed() throws TourPlannerException {
+    void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
         Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
@@ -38,21 +39,19 @@ public class FindClientPackageCommandTest {
         dummyClientList.add(botuan);
         dummyTourList.add(jpn);
         dummyFlightList.add(sqjpn);
-
         ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
         testPackageList.add(jpnPackage);
 
-        Command findPackage = new FindClientPackageCommand(1);
-        findPackage.setData(dummyClientList, dummyFlightList, dummyTourList, testPackageList, testUi);
-        findPackage.execute();
+        Command listPackage = new ListClientPackageCommand();
+        listPackage.setData(dummyClientList, dummyFlightList, dummyTourList, testPackageList, testUi);
+        listPackage.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the packages that matches your search\n"
-                + "Package ID: p001\n" + "\n"
+        String expectedString = "Here is a list of all packages:\n"
+                + "1. Package ID: p001\n" + "\n"
                 + "Client: \n"
                 + "Client ID: c001";
-
         String[] actualStringArray = newConsole.toString().trim().split("\r\n", 2);
         String actualString = actualStringArray[0] + "\n" + actualStringArray[1].trim().split("\r\n", 2)[0];
         assertEquals(expectedString, actualString);

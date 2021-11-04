@@ -13,6 +13,9 @@ public class SortClientCommand extends Command {
     public static final String ERROR_MISSING_FILTER = "Missing filter! Sort clients with the format: \n"
             + "sort -c /n (sort by name)\n"
             + "sort -c /id (sort by id)";
+    public static final String SORT_NAME_FILTER = "/n";
+    public static final String SORT_ID_FILTER = "/id";
+
     private final String filter;
 
     /**
@@ -36,11 +39,11 @@ public class SortClientCommand extends Command {
     public void execute() throws TourPlannerException {
         try {
             switch (filter) {
-            case "/n":
+            case SORT_NAME_FILTER:
                 ArrayList<String> sortedNames = clients.getSortedClientNames();
                 ui.showSortedClientByName(clients, sortedNames);
                 break;
-            case "/id":
+            case SORT_ID_FILTER:
                 ArrayList<String> sortedIds = clients.getSortedClientIds();
                 ui.showSortedClientById(clients, sortedIds);
                 break;
