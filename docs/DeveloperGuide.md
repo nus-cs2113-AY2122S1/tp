@@ -12,9 +12,11 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    * [Testing](#testing) 
 * [Implementation](#implementation)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
+    * [Save file formatting](#save-file-formatting)
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
@@ -25,7 +27,7 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The documentation and class organization of this project is done with some reference to the [AB-3 repository](https://github.com/se-edu/addressbook-level3).
 
 ## Setting up, getting started
 
@@ -38,6 +40,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 
 3. **Verify the setup**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+
 ```
 > Task :compileJava UP-TO-DATE
 > Task :processResources UP-TO-DATE
@@ -180,7 +183,7 @@ The `Task` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)  
 
-The storage component makes use of the serializing methods in the `TaskList`, `LessonList`, and `ModuleList` classes to save data to the `data` folder.
+The `Storage` component makes use of the serializing methods in the `TaskList`, `LessonList`, and `ModuleList` classes to save data to the `data` folder.
 It also reads data from a given path into strings which can be utilized by those 3 list classes to create a list.
 
 The `Storage` component has methods that:
@@ -192,7 +195,31 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 
 ### Common classes
 
+#### Core
+
+* The `Messages` class stores string constants for simple success and error messages to be printed to users. (usually 1 liners)
+* The `CommandFormat` class stores string constants representing formats for user commands. 
+It also provides a method that creates a ready-to-print string that suggests selected command formats for the user.
+* The `DayOfTheWeek` class stores enumerations for the Day of the Week. It also provides methods to check the validity of a Day of the Week input and convert it into a `DayOfTheWeek`.
+* The `Priority` class stores enumerations for task priority. It also provides methods to check the validity of a priority input and convert it into a `Priority`.
+* The `CommandType` class stores enumerations for command types. It also provides a method to convert a command word into a `CommandType`.
+
+#### Utility
+
+{to be added}
+
 ## Documentation, logging, testing, configuration, dev-ops
+
+### Testing
+
+#### Running Tests
+
+* Method 1: Using the Intellij JUnit test runner
+  * Right-click on the `src/test/java folder` and choose `Run 'All Tests'`
+  * To run only selected, right-click on the class or package and choose `Run 'TEST_NAME'`
+
+* Method 2: Using Gradle
+  * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
 
 ## Implementation
 
@@ -214,6 +241,59 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 2. An ArrayList of Strings is created.
 3. BufferedReader is used to read each line of data from the path and stored into the ArrayList. (with each item in the array representing 1 line in the file)
 4. BufferedReader is closed and the function returns the ArrayList containing the read data.
+
+### Save file formatting
+
+Data for user added tasks, lessons and modules are stored in the `task.txt`, `lesson.txt` and `module.txt` files in the data folder respectively.
+
+The format of the save files are as follows:
+
+#### Tasks:
+
+```text
+[Completion status] | [Task title] | [Day of the week] | [Priority] | [Information]
+```
+
+* `Completion status`: "0" when not marked as done, "1" when marked as done.
+* `Task title`: The full title of the task.
+* `Day of the week`: The day of the week in full.
+* `Priority`: The priority in caps. Possible priorities are low, medium and high.
+* `Information`: The user given information for the task.
+
+Example: `1 | CS2113 tP | Thursday | HIGH | Do Dev Guide`
+
+#### Lessons:
+
+```text
+[Lesson title] | [Day of the week] | [Start time] | [End time] | [Lesson URL]
+```
+
+* `Lesson title`: The full title of the lesson.
+* `Day of the week`: The day of the week in full.
+* `Start time`: The start time of the lesson. In `HH:MM AM/PM` format.
+* `End time`: The end time of the lesson. In `HH:MM AM/PM` format.
+* `Lesson URL`: The user given lesson url.
+
+Example: `CS2113 Tutorial | Friday | 02:00 PM | 04:00 PM | www.google.com`
+
+#### Modules:
+
+```text
+[Module code] | [Module title] | [Number of MCs] | [Grade]
+```
+
+* `Module code`: The module code of the module.
+* `Module title`: The title of the module.
+* `Number of MCs`: The number of modular credits of the module
+* `Grade`: The grade assigned to the module.
+
+Example: `CS2113T | Software Engineering & Object-Oriented Programming | 4 | A-`
+
+Only a minimalist version of the module information is stored in the save file. 
+This is because the full module information can be very detailed and lengthy, which would be impractical to be stored in full here.
+Hence, only the regularly used information for running the app is stored here.
+
+Instead, detailed full module information will only be retrieved from the `ModuleInfo.json` file directly when needed.
 
 ## Appendix: Requirements
 
