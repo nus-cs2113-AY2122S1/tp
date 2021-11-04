@@ -110,8 +110,7 @@ public class UiMain extends UiManager {
                 checkFlags(isExit, isReturn);
             } catch (HaBitParserException | HaBitCommandException e) {
                 printManager.printError(e.getMessage());
-                waitApp(WAIT_TIME_IN_SECONDS);
-                resetDisplay();
+                waitForEnter();
             }
         }
         this.isExit = isExit;

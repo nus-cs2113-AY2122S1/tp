@@ -59,7 +59,7 @@ public class UiStartup extends UiManager {
             userInput = readUserInput(in);
         }
         System.out.println(START_MESSAGE);
-        waitApp(2);
+        waitApp(1);
         clearConsoleScreen();
     }
 
