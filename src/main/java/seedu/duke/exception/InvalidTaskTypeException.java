@@ -1,5 +1,8 @@
 package seedu.duke.exception;
 
+/**
+ * Exception to be thrown when the user enters an invalid {@link seedu.duke.task.TypeEnum}.
+ */
 public class InvalidTaskTypeException extends Exception {
     private static final String MESSAGE = "Invalid parameter for task type inserted, '%s'.";
 
