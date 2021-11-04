@@ -307,8 +307,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if restoration is successful.
      */
     private boolean processRestoration(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
-                                       String customerId,
-                                       Date date, String staffName) {
+                                       String customerId, Date date, String staffName) {
         StockValidator stockValidator = new StockValidator();
         String currentName = prescription.getMedicineName();
         int currentStockId = prescription.getStockId();
@@ -360,8 +359,7 @@ public class UpdatePrescriptionCommand extends Command {
      * @return Boolean value true if update is successful.
      */
     private boolean processOtherFields(Ui ui, ArrayList<Medicine> medicines, Prescription prescription,
-                                       String customerId,
-                                       Date date, String staffName) {
+                                       String customerId, Date date, String staffName) {
         if (prescription == null) {
             return false;
         }
