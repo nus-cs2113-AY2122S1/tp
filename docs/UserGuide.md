@@ -21,8 +21,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 ---
 
 ## Table of Contents
-1. [Quick Start](#quick-start)
-2. [Features](#features)
+1. [Quick Start](#1-quick-start)
+
+
+2. [Features](#2-features)
 
    2.1 Help 
    * [View all possible commands: `help`](#view-all-possible-commands-help)
@@ -67,8 +69,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    2.10 Saving of Data
    * [Saving of data](#saving-of-data)
    
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+3. [FAQ](#3-faq)
+
+
+4. [Command Summary](#4-command-summary)
 
 ---
 
@@ -793,6 +797,14 @@ This shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
 We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
+
+#### Note
+1. The graph scales according to your largest monthly total, the scale currently used by the graph will be shown to you on the top right. 1.0E9 for example would mean 1,000,000,000, E stands for exponential.
+
+
+2. It would be ideal not to have entries with big differences as the Stonks XD app is meant for daily logging.
+
+
 Format: `show_graph`
 
 <details>
@@ -802,21 +814,21 @@ show_graph
 -----------------------------------------------------------------------------------------------------
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 x                                                                                                  x
-x   Account Balance: $-398.2                                               Legend:                 x
-x   Current month (OCTOBER) total expense: $410.20                               # is Expense      x
-x   Current month (OCTOBER) total income: $0.00                                  o is Income       x
-x   Your Yearly Report                                                                             x
+x   Account Balance: $-449.50                                              Legend:                 x
+x   Current month (NOVEMBER) total expense: $5454.00                             # is Expense      x
+x   Current month (NOVEMBER) total income: $0.00                                 o is Income       x
+x   Your Yearly Report                                                     Unit: 1000.0            x
 x ------------------------------------------------------------------------------------------------ x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                           #                      x
-x                                                                           #                      x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
 x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
 x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -927,7 +939,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 4. FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
@@ -939,7 +951,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 5. Command Summary
+## 4. Command Summary
 
 | Action | Format | Examples |
 | ------------ | ------------- | ------------- |

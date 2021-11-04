@@ -1,12 +1,11 @@
 package seedu.utility;
 
-import seedu.commands.general.CurrencyType;
+import seedu.commands.currency.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,8 +16,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private Scanner in;
-    private final String newLine = System.lineSeparator();
+    private final Scanner in;
+    private static final String NEW_LINE = System.lineSeparator();
 
 
     /**
@@ -110,7 +109,7 @@ public class Ui {
 
         int i = 1;
         for (Entry entry : filteredEntries) {
-            System.out.print(i + ": " + entry + newLine);
+            System.out.print(i + ": " + entry + NEW_LINE);
             i++;
         }
     }
@@ -122,7 +121,7 @@ public class Ui {
 
         int i = 1;
         for (Income income : incomes) {
-            System.out.print(i + ": " + income + newLine);
+            System.out.print(i + ": " + income + NEW_LINE);
             i++;
         }
     }
@@ -134,7 +133,7 @@ public class Ui {
 
         int i = 1;
         for (Expense expense : expenses) {
-            System.out.print(i + ": " + expense + newLine);
+            System.out.print(i + ": " + expense + NEW_LINE);
             i++;
         }
     }
@@ -147,7 +146,7 @@ public class Ui {
     public void printTotalExpense(double totalExpense) {
         assert totalExpense >= 0;
         printLine();
-        System.out.printf("Your total expense is: $%.2f" + newLine, totalExpense);
+        System.out.printf("Your total expense is: $%.2f" + NEW_LINE, totalExpense);
         printLine();
     }
 
@@ -159,7 +158,7 @@ public class Ui {
     public void printTotalIncome(double totalIncome) {
         assert totalIncome >= 0;
         printLine();
-        System.out.printf("Your total income is: $%.2f" + newLine, totalIncome);
+        System.out.printf("Your total income is: $%.2f" + NEW_LINE, totalIncome);
         printLine();
     }
 
@@ -170,7 +169,7 @@ public class Ui {
      */
     public void printBalance(double balance) {
         printLine();
-        System.out.printf("Your current balance is: $%.2f" + newLine, balance);
+        System.out.printf("Your current balance is: $%.2f" + NEW_LINE, balance);
         printLine();
     }
     
@@ -181,7 +180,7 @@ public class Ui {
      */
     public void printExpenseAdded(Expense expense) {
         printLine();
-        System.out.println("Your most recent spending: " + newLine + expense);
+        System.out.println("Your most recent spending: " + NEW_LINE + expense);
         printLine();
     }
 
@@ -192,7 +191,7 @@ public class Ui {
      */
     public void printExpenseDeleted(Expense expense) {
         printLine();
-        System.out.println("You removed this: " + newLine + expense);
+        System.out.println("You removed this: " + NEW_LINE + expense);
         printLine();
     }
 
@@ -203,7 +202,7 @@ public class Ui {
      */
     public void printIncomeAdded(Income income) {
         printLine();
-        System.out.println("Your most recent earning: " + newLine + income);
+        System.out.println("Your most recent earning: " + NEW_LINE + income);
         printLine();
     }
 
@@ -214,7 +213,7 @@ public class Ui {
      */
     public void printIncomeDeleted(Income income) {
         printLine();
-        System.out.println("You removed this: " + newLine + income);
+        System.out.println("You removed this: " + NEW_LINE + income);
         printLine();
     }
 
@@ -258,28 +257,28 @@ public class Ui {
         String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("Your total expense between %s and %s is $%.2f", startString, endString, totalExpense);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
     }
 
     private void printNoExpenseBetweenMessage(LocalDate start, LocalDate end) {
         String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("You do not have any expense between %s and %s", startString, endString);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
     }
 
     private void printIncomeBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
         String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("Your total income between %s and %s is $%.2f", startString, endString, totalExpense);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
     }
 
     private void printNoIncomeBetweenMessage(LocalDate start, LocalDate end) {
         String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("You do not have any income between %s and %s", startString, endString);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
 
     }
 
@@ -304,7 +303,7 @@ public class Ui {
     public void printBye(String advice) {
         printLine();
         System.out.println(Messages.BYE_MESSAGE);
-        System.out.println(newLine);
+        System.out.println(NEW_LINE);
         System.out.println(Messages.TIP_HEADER + advice);
         printLine();
     }
@@ -354,7 +353,7 @@ public class Ui {
 
         System.out.printf("You are almost reaching the %s OVERALL budget: $%.2f/$%.2f",
                 month, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.println("Consider readjusting your " + month + " OVERALL budget!");
         printLine();
     }
@@ -362,7 +361,7 @@ public class Ui {
     public void printOverallBudgetExceeded(String month, double currAmount, double limit) {
 
         System.out.printf("You have exceeded the %s OVERALL budget: $%.2f/$%.2f", month, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.println("Consider readjusting your " + month + " OVERALL budget!");
         printLine();
     }
@@ -372,10 +371,10 @@ public class Ui {
 
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.printf("Since you have already exceeded your %s OVERALL budget: $%.2f/$%.2f",
                 month, overallAmount, overallLimit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
                 + " " + budgetName + " budget!");
         printLine();
@@ -386,10 +385,10 @@ public class Ui {
 
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.printf("Since you have also exceeded your %s OVERALL budget: $%.2f/$%.2f",
                 month, overallAmount, overallLimit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         System.out.println("Consider readjusting your " + month + " OVERALL budget before readjusting your " + month
                 + " " + budgetName + " budget!");
         printLine();
@@ -401,15 +400,15 @@ public class Ui {
 
         System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
 
         if (overallLimit > 0) {
             double newLimit = limit + overallLimit - overallAmount;
             System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
                     month, overallAmount, overallLimit);
-            System.out.print(newLine);
+            System.out.print(NEW_LINE);
             System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
-            System.out.print(newLine);
+            System.out.print(NEW_LINE);
         } else {
             System.out.println("Consider readjusting your " + month + " " + budgetName + " budget!");
         }
@@ -422,15 +421,15 @@ public class Ui {
 
         System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f",
                 month, budgetName, currAmount, limit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
 
         if (overallLimit > 0) {
             double newLimit = currAmount + overallLimit - overallAmount;
             System.out.printf("Since you have not yet exceeded your %s OVERALL budget: $%.2f/$%.2f",
                     month, overallAmount, overallLimit);
-            System.out.print(newLine);
+            System.out.print(NEW_LINE);
             System.out.printf("You can directly increase your %s %s budget up to $%.2f!", month, budgetName, newLimit);
-            System.out.print(newLine);
+            System.out.print(NEW_LINE);
         } else {
             System.out.println("Consider readjusting your " + month + " " + budgetName + " budget!");
         }
@@ -446,7 +445,7 @@ public class Ui {
     public void printBudgetSetConfirmation(double amount, ExpenseCategory category) {
         printLine();
         System.out.printf("%s budget has been set to $%.2f", category.toString(), amount);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         printLine();
     }
 
@@ -460,7 +459,7 @@ public class Ui {
     public void printBudget(ExpenseCategory category, double budgetLimit) {
         printLine();
         System.out.printf("Current %s limit is $%.2f", category.toString(), budgetLimit);
-        System.out.print(newLine);
+        System.out.print(NEW_LINE);
         printLine();
     }
 
@@ -472,6 +471,8 @@ public class Ui {
     public void printThresholdConfirmation(double threshold) {
         printLine();
         System.out.println("Threshold for budget reminders set to " + threshold);
+        System.out.printf("We'll warn you when you spend %.1f%% of your budget!", threshold * 100);
+        System.out.print(NEW_LINE);
         printLine();
     }
 
@@ -483,13 +484,24 @@ public class Ui {
 
     public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
-        System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + ": " + currency);
+        System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + "- " + currency);
         printLine();
     }
 
     public void printCurrentCurrency(CurrencyType currency) {
         printLine();
         System.out.println(Messages.CURRENT_CURRENCY_MESSAGE + currency.toString());
+        printLine();
+    }
+
+    public void printCurrencyTypes(ArrayList<CurrencyType> currencyTypes) {
+        printLine();
+        System.out.println(Messages.AVAILABLE_CURRENCIES_MESSAGE);
+        int i = 0;
+        for (CurrencyType currencyType : currencyTypes) {
+            System.out.println(i + 1 + ". " + currencyType);
+            i++;
+        }
         printLine();
     }
 }
