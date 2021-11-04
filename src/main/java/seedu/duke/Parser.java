@@ -48,7 +48,7 @@ public class Parser {
     }
 
     public static boolean hasDeleteAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /att");
+        return arg.trim().toLowerCase().contains("delete /att /t");
     }
 
     public static boolean hasFindMemberKeyword(String arg) {

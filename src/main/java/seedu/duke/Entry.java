@@ -31,8 +31,8 @@ public class Entry {
      */
     public static void initializeFiles() {
         MemberStorage.setupMemberFile(members);
-        AttendanceStorage.setUpAttendanceStorage(attendanceList);
         TrainingStorage.setupTrainingFile(trainings);
+        AttendanceStorage.setUpAttendanceStorage(attendanceList);
     }
 
     /**
@@ -82,9 +82,12 @@ public class Entry {
                 new DeleteTraining(trainings, parameter);
                 break;
             case DELETE_ATTENDANCE_KEYWORD:
-                //delete /att /t Friday Training /i 2
-                attendanceIndex = Parser.getAttendanceIndex(entry);
-                //havent handle if i is not a number aka number format exception
+                try {
+                    attendanceIndex = Parser.getAttendanceIndex(entry);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a valid number!");
+                    break;
+                }
                 String trainingName = Parser.getAttendanceTrainingName(entry);
                 new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
                 break;

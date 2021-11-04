@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 
@@ -23,12 +24,11 @@ public class AttendanceStorage {
             //System.out.println(DukeAttendanceFolderPath);
             File dukeAttendanceFolder = new File(dukeAttendanceFolderPath);
             if (dukeAttendanceFolder.isDirectory()) {
-                System.out.println("attendance file exists");
+                System.out.println("CCA Attendance file found & loaded");
                 loadAttendanceFiles(dukeAttendanceFolder, attendanceList);
             } else {
-                System.out.println("attendance file does not exists");
+                System.out.println("CCA Attendance file not detected. Creating.");
                 new File(dukeAttendanceFolderPath).mkdirs();
-                System.out.println("attendance file created");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,16 +168,6 @@ public class AttendanceStorage {
         return trainingName;
     }
 
-    //this function cheesing cos it just goes into the attendance folder and read the csv names
-    //haven't done
-
-    /**
-     * This method will list all the attendance training names.
-     */
-    public static String getAllTrainingNames() {
-        return "kk";
-    }
-
 
     /**
      * This method will delete the attendance entry from the main list.
@@ -190,11 +180,13 @@ public class AttendanceStorage {
         //the index passed in is based on the sub attendance list of the training name passed in
         //so need to loop through the attendance list for that particular training name amd when it reaches the count
         //delete it
+        assert index >= 1;
         int count = 1;
         for (int i = 1; i < attendanceList.getAttendanceListSize(); i++) {
             if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
                 if (count == index) {
-                    attendanceList.deleteAttendance(i);
+                    Attendance toDelete = attendanceList.deleteAttendance(i);
+                    Ui.printDeletedAttendanceMessage(toDelete);
                     break;
                 } else {
                     count++;

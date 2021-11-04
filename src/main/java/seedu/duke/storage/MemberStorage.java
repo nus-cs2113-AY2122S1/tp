@@ -22,7 +22,7 @@ public class MemberStorage {
             try {
                 memberFile.createNewFile();
                 initializeMemberFile(memberFile);
-                System.out.println("Member file not detected. Creating.");
+                System.out.println("CCA Members file not detected. Creating.");
                 assert memberFile != null : "duke member file should be created";
             } catch (Exception e) {
                 e.printStackTrace();
