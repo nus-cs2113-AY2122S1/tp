@@ -78,7 +78,7 @@ public class Ui {
     public static String stringForeignMoney(double val) {
         try {
             return Storage.getOpenTrip().getForeignCurrency() + " "
-                    //+ Storage.getOpenTrip().getForeignCurrencySymbol()
+                    + Storage.getOpenTrip().getForeignCurrencySymbol()
                     + String.format(Storage.getOpenTrip().getForeignCurrencyFormat(), val);
         } catch (ForceCancelException e) {
             printForceCancelled();
@@ -89,7 +89,7 @@ public class Ui {
     public static String stringRepaymentMoney(double val) {
         try {
             return Storage.getOpenTrip().getRepaymentCurrency() + " "
-                    //+ Storage.getOpenTrip().getRepaymentCurrencySymbol()
+                    + Storage.getOpenTrip().getRepaymentCurrencySymbol()
                     + String.format(Storage.getOpenTrip().getRepaymentCurrencyFormat(),
                     val / Storage.getOpenTrip().getExchangeRate());
         } catch (ForceCancelException e) {

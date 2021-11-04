@@ -203,7 +203,7 @@ public class Trip implements FilterFinder {
         if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
-            this.foreignCurrencySymbol = "$";
+            this.foreignCurrencySymbol = "";
         }
     }
 
