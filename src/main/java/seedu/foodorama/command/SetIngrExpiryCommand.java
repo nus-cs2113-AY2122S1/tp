@@ -39,9 +39,9 @@ public class SetIngrExpiryCommand extends Command {
 
     }
 
-    public boolean isNumber(String number) {
+    public boolean isNumber(String numberString) {
         try {
-            int ingrIndex = Integer.parseInt(number) - 1;
+            double number = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;
