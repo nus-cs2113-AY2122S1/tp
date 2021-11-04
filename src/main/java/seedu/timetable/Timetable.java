@@ -49,7 +49,7 @@ public class Timetable implements Comparable<Timetable> {
     private TimetableItem[] saturday = new TimetableItem[24];
     private TimetableItem[] sunday = new TimetableItem[24];
 
-    private Map<DayOfWeek,TimetableItem[]> schedules = new HashMap<>();
+    private final Map<DayOfWeek,TimetableItem[]> schedules = new HashMap<>();
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year.
@@ -113,12 +113,8 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     private void addHoursFromDto(TimetableDto dto) {
-        dto.getEarliestHours().forEach(hour -> {
-            earliestHours.add(hour);
-        });
-        dto.getLatestHours().forEach(hour -> {
-            latestHours.add(hour);
-        });
+        earliestHours.addAll(dto.getEarliestHours());
+        latestHours.addAll(dto.getLatestHours());
     }
 
     private void isScheduleEmpty(TimetableItem[] schedule) {
@@ -209,7 +205,7 @@ public class Timetable implements Comparable<Timetable> {
      * @param module Module to be added
      * @see Module
      */
-    private void addModuleToList(Module module) {
+    public void addModuleToList(Module module) {
         if (!modules.contains(module)) {
             modules.add(module);
         }
@@ -275,9 +271,9 @@ public class Timetable implements Comparable<Timetable> {
         DayOfWeek day = DayOfWeek.valueOf(event.getDay().toUpperCase(Locale.ROOT));
         TimetableItem[] schedule = schedules.get(day);
         String title = event.getTitle();
-        for (int i = 0; i < schedule.length; i++) {
-            if (schedule[i] != null && schedule[i].getTitle().equals(title)) {
-                schedule[i].setTitle(input);
+        for (TimetableItem timetableItem : schedule) {
+            if (timetableItem != null && timetableItem.getTitle().equals(title)) {
+                timetableItem.setTitle(input);
             }
         }
     }

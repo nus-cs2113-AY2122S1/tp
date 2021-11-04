@@ -3,7 +3,6 @@ package seedu.timetable;
 import seedu.module.Module;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class TimetableDto {
@@ -81,8 +80,6 @@ public class TimetableDto {
     /**
      * Converts TimetableDTO to a Timetable object. Merges TimetableLesson array and
      * TimetableUserItem array into TimetableItem array that is used in Timetable object.
-     * 
-     * @return
      */
     public Timetable toTimetable() {
         return new Timetable(this);
@@ -93,7 +90,6 @@ public class TimetableDto {
      * 
      * @param lessons TimetableLesson array
      * @param userItems TimetableUserItem array
-     * @return
      */
     public TimetableItem[] mergeTimetableItems(TimetableLesson[] lessons,
             TimetableUserItem[] userItems) {
