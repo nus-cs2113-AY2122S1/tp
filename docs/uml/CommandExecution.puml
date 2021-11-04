@@ -1,7 +1,7 @@
 @startuml
 !include SequenceStyle.puml
-box "Main" TERMINUS_BOX_COLOUR
-participant ":Terminus" as Terminus  TERMINUS_COLOR
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
 box "Parser" PARSER_BOX_COLOR
 participant ":MainCommandParser" as MainCommandParser PARSER_COLOR
