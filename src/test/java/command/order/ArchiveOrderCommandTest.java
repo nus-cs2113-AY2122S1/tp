@@ -36,31 +36,35 @@ public class ArchiveOrderCommandTest {
         Data.clearTestData();
     }
 
-    @Test
-    public void archiveOrderCommand_deliveredOrderDoesNotExist_expectZeroArchived() {
+    private void executeArchiveOrderCommand(String parameter, String parameterValue) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "10-10-2021");
+        parameters.put(parameter, parameterValue);
         Command command = new ArchiveOrderCommand(parameters);
         command.execute();
+    }
+
+    private void executeListOrderCommand() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        Command command = new ListOrderCommand(parameters);
+        command.execute();
+    }
+
+    @Test
+    public void archiveOrderCommand_deliveredOrderDoesNotExist_expectZeroArchived() {
+        executeArchiveOrderCommand("d", "10-10-2021");
         assertEquals("Archived 0 delivered orders from 10-10-2021", outContent.toString().trim());
     }
 
     @Test
     public void archiveOrderCommand_deliveredOrdersExist_expectOneArchived() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "11-10-2021");
-        Command command = new ArchiveOrderCommand(parameters);
-        command.execute();
+        executeArchiveOrderCommand("d", "11-10-2021");
         assertEquals("Archived 1 delivered orders from 11-10-2021", outContent.toString().trim());
     }
 
     @Test
     public void archiveOrderCommand_deliveredOrdersRemoved_expectOneLessOrder() {
         archiveOrderCommand_deliveredOrdersExist_expectOneArchived();
-
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        Command command = new ListOrderCommand(parameters);
-        command.execute();
+        executeListOrderCommand();
         String expectedOutput = "Archived 1 delivered orders from 11-10-2021\n"
                 + "+====+==============+==========+============+=========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    | STATUS  | \n"
@@ -83,10 +87,7 @@ public class ArchiveOrderCommandTest {
     @Test
     public void archiveOrderCommand_noDeliveredOrdersToRemove_expectSameOrder() {
         archiveOrderCommand_deliveredOrderDoesNotExist_expectZeroArchived();
-
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        Command command = new ListOrderCommand(parameters);
-        command.execute();
+        executeListOrderCommand();
         String expectedOutput = "Archived 0 delivered orders from 10-10-2021\n"
                 + "+====+==============+==========+============+===========+\n"
                 + "| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | \n"

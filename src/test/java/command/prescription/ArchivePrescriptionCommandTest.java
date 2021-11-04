@@ -2,6 +2,8 @@ package command.prescription;
 
 import command.Command;
 import command.Data;
+import command.order.ArchiveOrderCommand;
+import command.order.ListOrderCommand;
 import inventory.Medicine;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,31 +38,35 @@ public class ArchivePrescriptionCommandTest {
         Data.clearTestData();
     }
 
-    @Test
-    public void archivePrescriptionCommand_prescriptionsDoesNotExist_expectZeroArchived() {
+    private void executeArchivePrescriptionCommand(String parameter, String parameterValue) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "08-10-2021");
+        parameters.put(parameter, parameterValue);
         Command command = new ArchivePrescriptionCommand(parameters);
         command.execute();
+    }
+
+    private void executeListPrescriptionCommand() {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+        Command command = new ListPrescriptionCommand(parameters);
+        command.execute();
+    }
+
+    @Test
+    public void archivePrescriptionCommand_prescriptionsDoesNotExist_expectZeroArchived() {
+        executeArchivePrescriptionCommand("d", "08-10-2021");
         assertEquals("Archived 0 prescriptions from 08-10-2021", outContent.toString().trim());
     }
 
     @Test
     public void archivePrescriptionCommand_prescriptionsExist_expectTwoArchived() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "10-10-2021");
-        Command command = new ArchivePrescriptionCommand(parameters);
-        command.execute();
+        executeArchivePrescriptionCommand("d", "10-10-2021");
         assertEquals("Archived 2 prescriptions from 10-10-2021", outContent.toString().trim());
     }
 
     @Test
     public void archivePrescriptionCommand_prescriptionsRemoved_expectTwoLessPrescriptions() {
         archivePrescriptionCommand_prescriptionsExist_expectTwoArchived();
-
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        Command command = new ListPrescriptionCommand(parameters);
-        command.execute();
+        executeListPrescriptionCommand();
         String expectedOutput = "Archived 2 prescriptions from 10-10-2021\n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
                 + "| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
@@ -77,10 +83,7 @@ public class ArchivePrescriptionCommandTest {
     @Test
     public void archivePrescriptionCommand_noPrescriptionsToRemove_expectSamePrescriptions() {
         archivePrescriptionCommand_prescriptionsDoesNotExist_expectZeroArchived();
-
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        Command command = new ListPrescriptionCommand(parameters);
-        command.execute();
+        executeListPrescriptionCommand();
         String expectedOutput = "Archived 0 prescriptions from 08-10-2021\n"
                 + "+====+==============+==========+=============+============+=======+==========+\n"
                 + "| ID |     NAME     | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | \n"
