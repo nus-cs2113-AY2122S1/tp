@@ -34,7 +34,7 @@ public class TrainingStorage {
             try {
                 ccaTrainingFile.createNewFile();
                 initializeTrainingFile(ccaTrainingFile);
-                System.out.println("Training file not detected. Creating.");
+                System.out.println("CCA Training file not detected. Creating.");
                 assert ccaTrainingFile != null : "duke member file should be created";
             } catch (Exception e) {
                 e.printStackTrace();

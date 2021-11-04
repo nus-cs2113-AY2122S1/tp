@@ -10,12 +10,6 @@ public class Member {
     /* Gender of member: M = Male, F = Female */
     protected String gender;
 
-    /* Status of member. True if still in team, False if left the team */
-    protected Boolean isActive;
-
-    /* 1 if present, 0 if absent */
-    //String presentOrAbsent;
-
     protected String phoneNumber;
 
     /* Index of member from the arraylist. */
@@ -32,10 +26,8 @@ public class Member {
     public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
         setStudentNumber(studentNumber);
-        setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-        // setPresentOrAbsent(presentOrAbsent);
     }
 
     public Member() {
@@ -44,28 +36,22 @@ public class Member {
     public Member(String name, String studentNumber, String gender, String phoneNumber, String presentOrAbsent) {
         setName(name);
         setStudentNumber(studentNumber);
-        setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-        //setPresentOrAbsent(presentOrAbsent);
     }
 
     public Member(String name, String studentNumber) {
         setName(name);
         setStudentNumber(studentNumber);
-        setAsActiveMember();
-        //setPresentOrAbsent(presentOrAbsent);
     }
 
 
     public Member(Member member) {
         setName(member.name);
         setStudentNumber(member.studentNumber);
-        setAsActiveMember();
         setGender(member.gender);
         setPhoneNumber(member.phoneNumber);
         setIndex(member.index);
-        //setPresentOrAbsent(presentOrAbsent);
     }
 
     public int getIndex() {
@@ -76,22 +62,6 @@ public class Member {
         this.index = index;
     }
 
-    public boolean checkIfActive() {
-        return isActive;
-    }
-
-    public void setAsActiveMember() {
-        this.isActive = true;
-    }
-
-    public void setAsInActiveMember() {
-        this.isActive = false;
-    }
-
-    /* public void setPresentOrAbsent(String presentOrAbsent) {
-         this.presentOrAbsent = presentOrAbsent;
-     }
-    */
     public String getName() {
         return name;
     }
@@ -123,11 +93,6 @@ public class Member {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    /*
-    public String getAttendance() {
-        return presentOrAbsent;
-    }
-    */
 
     /**
      * Formats description of member to be displayed to user.

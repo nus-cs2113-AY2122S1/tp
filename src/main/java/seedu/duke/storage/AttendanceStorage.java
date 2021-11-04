@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 
@@ -23,8 +24,10 @@ public class AttendanceStorage {
             String attendanceFolderPath = currentDir.getCanonicalPath() + "/Attendance";
             File attendanceFolder = new File(attendanceFolderPath);
             if (attendanceFolder.isDirectory()) {
+                System.out.println("CCA Attendance file found & loaded");
                 loadAttendanceFiles(attendanceFolder, attendanceList);
             } else {
+                System.out.println("CCA Attendance file not detected. Creating.");
                 new File(attendanceFolderPath).mkdirs();
             }
         } catch (IOException e) {
@@ -186,14 +189,16 @@ public class AttendanceStorage {
      * @param index          index of attendance.
      */
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
-        System.out.println("trying to delete");
-        System.out.println(trainingName);
-        System.out.println(index);
+        assert index >= 1;
+        //System.out.println("trying to delete");
+        //System.out.println(trainingName);
+        //System.out.println(index);
         int count = 1;
         for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
             if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
                 if (count == index) {
-                    attendanceList.deleteAttendance(i);
+                    Attendance toDelete = attendanceList.deleteAttendance(i);
+                    Ui.printDeletedAttendanceMessage(toDelete);
                     break;
                 } else {
                     count++;

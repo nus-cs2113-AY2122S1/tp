@@ -8,13 +8,13 @@ of information** on CCA members, training schedules and attendance records which
 Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
 improving other aspects of the CCA.
 
-This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites) will show you how to 
+This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_) will show you how to 
 set up CCA Manager on your computer. The [Commands](#commands) section will show you the list of commands and how to use
 them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
 
 ## Table of contents
 
-* [Pre-requisites](#pre-requisites)
+* [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
 * [Commands](#commands)
   * [Members](#member-commands)
     * [add /m](#add-member)
@@ -74,7 +74,7 @@ To start, you can populate the member list of **CCA Manager** with the help of t
         * use `/p` to input _phone number_ of your member.
    
     * **Format:**
-      * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE_NUMBER>]
+      * `add /m [/n MEMBER_NAME] [/s STUDENT_NUMBER] [/g GENDER] [/p PHONE NUMBER]`
 
     * **Examples:**
       * `add /m /n John Hwee /s A0248192K /g M /p 91128888`
@@ -88,14 +88,14 @@ To start, you can populate the member list of **CCA Manager** with the help of t
 ### Delete Member
 If one of your CCA members has quit, or your senior has graduated, you can remove their entry from **CCA Manager** to keep your member list up to date.
 
-2. `delete /m` This delete entries from the member list in **CCA Manager**.
+2. `delete /m` This delete entries from the Member list in **CCA Manager**.
    * The `delete /m` keyword can delete entries using either of two different prompts: index or name
      * You can delete member entries by inputting the `index` of the member.
      * You can also delete member entries by inputting the `name` of the member.
        * If there are *two or more* members with the same name, **CCA Manager** will display these members and their indexes and prompt you to delete the member you want using his/her index.
    * **Format:**
-     * delete [/m <MEMBER_INDEX>]
-     * delete [/m <MEMBER_NAME_KEYWORD>]
+     * `delete [/m MEMBER_INDEX_NUMBER]`
+     * `delete [/m MEMBER_NAME]`
    * **Examples:**
      * `delete /m 1` Deletes the first member on the member list.
      * `delete /m John` Deletes a member with the name 'John'.
@@ -115,11 +115,11 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
 ### List Member
 **CCA Manager** allows you to list out all the recorded members in your member list.
 
-2. `list /m` This lists out entries in CCA Manager's Entry List.
+2. `list /m` This lists out entries in CCA Manager's Member List.
    * The `list /m` keyword is strict, meaning that it must follow the above format. E.g. `list /m RANDOM` will not be a valid command.
    * `list /m` will also show you the `index` of the members that will be helpful for other commands.
    * **Format:** 
-     * list /m
+     * `list /m`
    * **Examples:**
      * `list /m`
    * **Expected Output:**
@@ -135,14 +135,14 @@ This means that you will not have to delete the entry and then add a new one lat
 
 4. `edit /m` This edits an existing entry from the member list
     * Entries are referenced using their index
-    * `/m <MEMBER_INDEX>` edits the member detail stored at the given index. The index is a **compulsory** field.
+    * `/m <MEMBER_INDEX_NUMBER>` edits the member detail stored at the given index. The index is a **compulsory** field.
       * The below fields are on a fill-per-case basis. Only fill in the fields that need changing.
-      * `/n <NEW_NAME>` edits the current member _name_
-      * `/s <NEW_NUMBER>` edits the current _student number_
+      * `/n <NEW_MEMBER_NAME>` edits the current member _name_
+      * `/s <NEW_PHONE_NUMBER>` edits the current _student number_
       * `/g <NEW_GENDER>` edits the current _gender_
-      * `/p <NEW_NUMBER>` edits the current _phone number_
+      * `/p <NEW_PHONE_NUMBER>` edits the current _phone number_
     * **Format:**
-      * edit [/m <MEMBER_INDEX> /n <NEW_NAME> /s <NEW_STUDENT_NUMBER> /g <NEW_GENDER> /p <NEW_PHONE_NUMBER>]
+      * `edit [/m MEMBER_INDEX_NUMBER] [/n NEW_MEMBER_NAME] [/s NEW_STUDENT_NUMBER] [/g NEW_GENDER] [/p NEW_PHONE_NUMBER]`
     * **Examples:**
       * `edit /m 1 /n Juan Hwee` Change only the name of the first entry to JUAN HWEE
       * `edit /m 3 /n 91112222` Change the phone number of the 3rd entry to 91112222
@@ -168,7 +168,7 @@ This means that you will not have to delete the entry and then add a new one lat
      * For example, if you type `find /m jon`, `JON TAN` and `JON BOVI` will be found, but `JOHN LIM` will not be matched
    * The keyword is not case-sensitive
    * **Format:**
-     * find [/m <MEMBER_NAME_KEYWORD>]
+     * `find [/m MEMBER_NAME_KEYWORD]`
    * **Examples:**
      * `find /m juan`
      * `find /m lorem`
@@ -195,7 +195,7 @@ This means that you will not have to delete the entry and then add a new one lat
         * use `/v` to input _venue_ of training schedule.
 
     * **Format:**
-        * add [/t /n <TRAINING_NAME> /a <DATE_TIME> /v <VENUE>]
+        * `add /t [/n TRAINING_NAME] [/a TRAINING_TIME] [/v TRAINING_VENUE]`
 
     * **Examples:**
         * `add /t /n Weekly Friday Training 1 /a 5 Nov 2021 /v MPSH 1`
@@ -224,8 +224,8 @@ You can delete any existing training schedules with the help of the `delete` com
         * You can also delete training entries by inputting the `name` of the training.
             * If there are *two or more* trainings with the same name, **CCA Manager** will display these trainings and their indexes and prompt you to delete the training you want using his/her index.
     * **Format:**
-        * delete [/t <TRAINING_INDEX>]
-        * delete [/t <TRAINING_NAME_KEYWORD>]
+        * `delete [/t TRAINING_INDEX_NUMBER]`
+        * `delete [/t TRAINING_NAME]`
     * **Examples:**
         * `delete /t 1` Deletes the first training on the training list.
         * `delete /t Friday` Deletes a training with the name 'John'.
@@ -251,7 +251,7 @@ You can delete any existing training schedules with the help of the `delete` com
     * The `list /t` keyword is strict, meaning that it must follow the above format. E.g. `list /t TRAININGABC` will not be a valid command.
     * `list /t` will also show you the `index` of the trainings that will be helpful for other commands.
     * **Format:**
-        * list /t
+        * `list /t`
     * **Examples:**
         * `list /t`
     * **Expected Output:**
@@ -264,13 +264,13 @@ Had a sudden change in venue for your trainings? No worries! You can edit your t
 
 4. `edit /t` This edits an existing entry from the training list
     * Entries are referenced using their index
-    * `/t <TRAINING>` edits the training detail stored at the given index. The index is a **compulsory** field.
+    * `/t <TRAINING_INDEX_NUMBER>` edits the training detail stored at the given index. The index is a **compulsory** field.
         * The below fields are on a fill-per-case basis. Only fill in the fields that need changing.
-        * `/n <NEW_NAME>` edits the current _training name_
-        * `/a <NEW_DATETIME>` edits the current _date and time_
-        * `/v <NEW_VENUE>` edits the current _venue_
+        * `/n <NEW_TRAINING_NAME>` edits the current _training name_
+        * `/a <NEW_TRAINING_TIME>` edits the current _date and time_
+        * `/v <NEW_TRAINING_VENUE>` edits the current _venue_
     * **Format:**
-        * edit [/t <TRAINING_INDEX> /n <NEW_NAME> /a <NEW_DATETIME> /v <NEW_VENUE>]
+        * `edit [/t TRAINING_INDEX_NUMBER] [/n NEW_TRAINING_NAME] [/a NEW_TRAINING_TIME] [/v NEW_TRAINING_VENUE]`
     * **Examples:**
         * `edit /t 1 /v MPSH2` Updates the venue of Index 1 to MPSH2
         * `edit /t 1 /n Weekly Friday Training 2 (Updated)` Updates the name of Index 1
@@ -295,7 +295,7 @@ Have too many training schedules, and can't find the one you want? Just use the 
         * For example, if you type `find /t friday`, `FRIDAY TRAINING 1` and `FRIDAY TRAINING 2` will be found, but `FIDAY TRAINING` will not be matched
     * The keyword is not case-sensitive
     * **Format:**
-        * find [/t <TRAINING_NAME_KEYWORD>]
+        * `find [/t TRAINING_NAME_KEYWORD]`
     * **Examples:**
         * `find /t friday`
     * **Expected Output:**
@@ -318,7 +318,7 @@ Have too many training schedules, and can't find the one you want? Just use the 
           * 1 represents 'Present', while 0 represents 'Absent'
 
     * **Format:**
-        * add [/att /m <MEMBER_NAME> /n <TRAINING_NAME> /d <1_OR_0>]
+        * `add [/att [/m MEMBER_NAME] [/n TRAINING_NAME] [/d 1_OR_0]`
 
     * **Examples:**
         * `add /att /m John Hwee /n Weekly Friday Training 1 /d 1`
@@ -339,12 +339,21 @@ You can delete existing attendance entries with the help of the `delete /att` co
         * `/i` represents the _index_ of the attendee to delete.
    
     * **Format:**
-        * delete [/att /t <TRAINING_NAME> /i <MEMBER_INDEX>]
+        * `delete [/att [/t TRAINING_NAME] [/i MEMBER_INDEX]`
     * **Examples:**
-        * `delete /att /t Weekly Friday Training 1 /i 2` deletes the second attendee on the attendance list for 'Weekly Friday Training 1'.
+        * `delete /att /t Weekly Friday Training 1 /i 2` 
+          * deletes the second entry on the attendance list for 'Weekly Friday Training 1'.
     * **Expected Output:**
    ```
-   FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN FILL IN
+   => list /att /t WEEKLY FRIDAY TRAINING 1
+   [1] Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   [2] Name: BEN | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [0]
+   [3] Name: CANDICE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   ===== Would you like to list the full attendance sheet? (y / n) =====
+   n
+   => delete /att /t WEEKLY FRIDAY TRAINING 1 /i 1
+   You have removed attendance entry:
+   Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
    ```
 
 ### List Attendance
@@ -354,14 +363,14 @@ You can delete existing attendance entries with the help of the `delete /att` co
     * `list /att` takes in several arguments
       * use `/t <TRAINING_NAME>` to look for all attendances for a particular training
       * use `/d <1 OR 0>` to further filter the list to show attendances of people who were present or absent
-        * 1 represents present; it will show the attendance of members who were present
-        * 0 represents absent; it will show the attendance of members who were absent
+        * 1 displays the entries of members who were present for that training
+        * 0 displays the entries of members who were absent for that training
     * In addition, there will be a prompt to view the full attendance list that consists of all trainings such as:
       ```
       ===== Would you like to list the full attendance sheet? (y / n) =====
       ```
     * **Format:**
-        * list [/att /t <TRAINING_NAME> /d <1_OR_0>]
+        * `list /att [/t TRAINING_NAME] [/d 1_OR_0]`
     * **Examples:**
         * `list /att /t Weekly Friday Training 1`
         * `list /att /t Weekly Friday Training 1 /d 1`
@@ -385,14 +394,16 @@ A 'cheat sheet' of commands here
 
 Action| Syntax |Remarks|
 |-----|----------|----|
-|add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
-|add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
-|add attendance| add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]|
-|delete member| delete [/m <MEMBER_INDEX_NUMBER>] OR [/m <MEMBER_NAME>] | Get the index or name by calling `list /m`
-|delete training|delete [/t <TRAINING_INDEX_NUMBER>] OR [/t <TRAINING_NAME>]| Get the name or index by calling `list /t`
-|delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>] OR <MEMBER_NAME> OR <TRAINING_NAME>| Get the index by calling `list /att`
-|edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
-|edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
-| find member| find [/m <MEMBER_NAME>] | Searches for valid entries based on member name
-| find training| find [/t <TRAINING_NAME>] | Searches for valid entries based on training name
-|list| list [/m] [/t] [/att /t <TRAINING_NAME>]| `/m` for Member, `/t` for Training, `/att` for Attendance
+|add member| `add /m [/n MEMBER_NAME] [/s STUDENT_NUMBER] [/g GENDER] [/p PHONE NUMBER]`| 
+|add training| `add /t [/n TRAINING_NAME] [/a TRAINING_TIME] [/v TRAINING_VENUE]`| 
+|add attendance| `add [/att [/m MEMBER_NAME] [/n TRAINING_NAME] [/d 1_OR_0]`|
+|delete member| `delete [/m MEMBER_INDEX_NUMBER]` OR `delete [/m MEMBER_NAME]` | Get the index or name by calling `list /m`
+|delete training| `delete [/t TRAINING_INDEX_NUMBER]` OR `delete [/t TRAINING_NAME]`| Get the name or index by calling `list /t`
+|delete attendance|`delete [/att [/t TRAINING_NAME] [/i MEMBER_INDEX]`| Get the index by calling `list /att`
+|edit member| `edit [/m MEMBER_INDEX_NUMBER] [/n NEW_MEMBER_NAME] [/s NEW_STUDENT_NUMBER] [/g NEW_GENDER] [/p NEW_PHONE_NUMBER]`| Index is compulsory, the rest are optional fields
+|edit training| `edit [/t TRAINING_INDEX_NUMBER] [/n NEW_TRAINING_NAME] [/a NEW_TRAINING_TIME] [/v NEW_TRAINING_VENUE]`| Index is compulsory, the rest are optional fields
+|find member| `find [/m MEMBER_NAME_KEYWORD]` | Searches for valid entries based on member name
+|find training| `find [/t TRAINING_NAME_KEYWORD]` | Searches for valid entries based on training name
+|list member| `list /m` |
+|list trainings| `list [/t]` |
+|list attendance entries | `list /att [/t TRAINING_NAME] [/d 1_OR_0]` |Training name is compulsory, 1_OR_0 is an optional field.
