@@ -8,19 +8,24 @@ Below is a guide on how you can get started using our program to start **"Schedu
 ## Overview
 - [1. Quick Start](#1-quick-start)
 - [2. Features](#2-features)
-    - [2.1 Viewing help: `help`](#2-1-viewing-help--help)
+    - [2.1 Viewing help: `help`](#21-viewing-help--help)
     - [2.2 Adding your task:](#22-adding-your-task)
       - [2.2.1 Todo: `todo`](#221-todo-todo)
       - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
       - [2.2.3 Event: `event`](#223-event-event)
       - [2.2.4 Date Format: `<dateFormat>`](#224-date-format-dateformat)
-    - [2.3 Listing your tasks: `list`](#23-listing-your-tasks-list)
-      - [2.3.1 Listing your entire tasklist](#231-listing-your-entire-tasklist)
-      - [2.3.2 Filtering your tasklist](#232-filtering-your-tasklist)
-      - [2.3.3 Listing the recurrence of a task](#233-listing-the-recurrence-of-a-task)
-    - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
-    - [2.5 Deleting your tasks: `delete`](#25-deleting-your-tasks-delete)
-    - [2.6 Exiting the program: `bye`](#26-exiting-the-program-bye)
+    - [2.3 Adding your NUS timetable:](#23-adding-your-nus-timetable)
+      - [2.3.1 Module: `module`](#231-module-module)
+      - [2.3.2 Browse: `browse`](#232-browse-browse)
+    - [2.4 Listing your tasks: `list`](#24-listing-your-tasks-list)
+      - [2.4.1 Listing your entire tasklist](#241-listing-your-entire-tasklist)
+      - [2.4.2 Filtering your tasklist](#242-filtering-your-tasklist)
+      - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
+    - [2.5 Sorting your tasklist: `sort`](#25-sorting-your-task-list-sort)
+    - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
+    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
+    - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
+    - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
 - [3. FAQ](#3-faq)
 - [4. Command Summary](#4-command-summary)
 
@@ -156,12 +161,17 @@ The accepted date formats in our program:
 
 **Example:** `03/10/2004 03` translates to `3rd October 2004, 3am`.
 
+### 2.3 Adding your NUS timetable:
 
-### 2.3 Listing your tasks: `list`
+#### 2.3.1 Module: `module`
+
+#### 2.3.2 Browse: `browse`
+
+### 2.4 Listing your tasks: `list`
 
 There are **3 main features** you can use with the list command.
 
-#### 2.3.1 Listing your entire tasklist
+#### 2.4.1 Listing your entire tasklist
 List all tasks currently stored locally in your tasklist.
 
 **Format:** `list`
@@ -207,7 +217,7 @@ List all tasks currently stored locally in your tasklist.
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
 ```
 
-#### 2.3.2 Filtering your tasklist
+#### 2.4.2 Filtering your tasklist
 Filters the tasklist for specific tasks that matches the filters applied.
 
 **Format:** `list [--filter <argument>] [--filter <argument>] ...`
@@ -230,7 +240,7 @@ Filters the tasklist for specific tasks that matches the filters applied.
 || 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 ```
 
-#### 2.3.3 Listing the recurrence of a task
+#### 2.4.3 Listing the recurrence of a task
 Displays the next 4 recurrences of a task.
 
 **Format 2:** `list [task id]`
@@ -256,7 +266,7 @@ Displays the next 4 recurrences of a task.
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
 
-### 2.4 Sorting your task list: `sort`
+### 2.5 Sorting your task list: `sort`
 Sorts your task list by a given criteria.
 
 **Format:** `sort --by <criteria>`
@@ -288,7 +298,11 @@ Sorts your task list by a given criteria.
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
 ```
 
-### 2.5 Deleting your tasks: `delete`
+### 2.6 Setting reminders to your tasks: `reminder`
+
+### 2.7 Editing your tasks: `edit`
+
+### 2.8 Deleting your tasks: `delete`
 Deletes tasks specified in comma-seperated argument.
 
 **Format:** `delete <indexes of tasks to delete>`
@@ -347,7 +361,7 @@ Index should be specified in either,
 -------------------------------------------------------------------------
 ```
 
-### 2.6 Exiting the program: `bye`
+### 2.9 Exiting the program: `bye`
 Displays goodbye message and exits the program.
 
 An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has the same effect as this command.
@@ -383,7 +397,10 @@ help     | `help`                                           | `help`            
 todo     | `todo <description> [--flag <argument>]`         | `todo read book`                                                                                     |
 deadline | `deadline <description> [--flag <argument>]`     |`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
 event    | `event <description> [--flag <argument>]`        | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
-list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                                           |
+module   |                                                  |                                                                                                      | 
+browse   |                                                  |                                                                                                      |
+list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                           |
+reminder |                                                  |                                                                                                      |
 sort     | `sort --by <criteria>`                           | `sort --by priority`                                                                                 |
 delete   | `delete <indexes of tasks to delete>`            | `delete 1, 2, 4-7`                                                                                   |
 bye      | `bye`                                            | `bye`                                                                                                |
