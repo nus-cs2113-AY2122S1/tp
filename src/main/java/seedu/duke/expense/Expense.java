@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.SameNameException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +49,7 @@ public class Expense implements ExpenseSplitter {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException {
+    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException, SameNameException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
@@ -74,8 +75,10 @@ public class Expense implements ExpenseSplitter {
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
+    private static ArrayList<Person> checkValidPersons(String userInput)
+            throws ForceCancelException, SameNameException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
+        ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
@@ -91,9 +94,12 @@ public class Expense implements ExpenseSplitter {
                     break;
                 }
             }
-            if (!isValidPerson) {
+            if (listOfPeopleNamesUpperCase.contains(name.strip().toUpperCase())) {
+                throw new SameNameException();
+            } else if (!isValidPerson) {
                 invalidListOfPeople.add(name.strip());
             }
+            listOfPeopleNamesUpperCase.add(name.strip().toUpperCase());
         }
         if (!invalidListOfPeople.isEmpty()) {
             Ui.printInvalidPeople(invalidListOfPeople);

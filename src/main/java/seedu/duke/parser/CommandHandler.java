@@ -2,8 +2,9 @@ package seedu.duke.parser;
 
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.InvalidAmountException;
-import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.exceptions.NoExpensesException;
+import seedu.duke.exceptions.SameNameException;
+import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
@@ -20,6 +21,8 @@ abstract class CommandHandler extends CommandExecutor {
             executeCreateTrip(inputParams);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             Ui.printCreateFormatError();
+        } catch (SameNameException e) {
+            Ui.sameNameInTripError();
         }
     }
 
@@ -32,7 +35,7 @@ abstract class CommandHandler extends CommandExecutor {
         }
     }
 
-    protected static void handleOpenTrip(String inputParams) {
+    protected static void handleOpenTrip(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeOpen(inputParams);
@@ -41,32 +44,26 @@ abstract class CommandHandler extends CommandExecutor {
             System.out.println();
         } catch (NullPointerException e) {
             Ui.emptyArgForOpenCommand();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
-    protected static void handleTripSummary(String inputParams) {
+    protected static void handleTripSummary(String inputParams) throws ForceCancelException {
         try {
             executeSummary(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
-    protected static void handleViewTrip(String inputParams) {
+    protected static void handleViewTrip(String inputParams) throws ForceCancelException {
         try {
             executeView(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
-    protected static void handleDelete(String inputParams) {
+    protected static void handleDelete(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeDelete(inputParams);
@@ -92,17 +89,11 @@ abstract class CommandHandler extends CommandExecutor {
             }
         } catch (NullPointerException e) {
             Ui.emptyArgForDeleteCommand();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
-    protected static void handleList() {
-        try {
-            executeList();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
-        }
+    protected static void handleList() throws ForceCancelException {
+        executeList();
     }
 
     /**
@@ -111,7 +102,7 @@ abstract class CommandHandler extends CommandExecutor {
      *
      * @param inputParams attributes of expense to be created.
      */
-    protected static void handleCreateExpense(String inputParams) {
+    protected static void handleCreateExpense(String inputParams) throws ForceCancelException {
         try {
             assert inputParams != null;
             executeCreateExpense(inputParams);
@@ -119,18 +110,16 @@ abstract class CommandHandler extends CommandExecutor {
             Ui.printExpenseFormatError();
         } catch (InvalidAmountException e) {
             Ui.printInvalidAmountError();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
+        } catch (SameNameException e) {
+            Ui.sameNameInExpenseError();
         }
     }
 
-    protected static void handleAmount(String inputParams) {
+    protected static void handleAmount(String inputParams) throws ForceCancelException {
         try {
             executeAmount(inputParams);
         } catch (NullPointerException e) {
             Ui.invalidAmountFormat();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
@@ -139,23 +128,19 @@ abstract class CommandHandler extends CommandExecutor {
      * Prints out the list of people in the trip if trip is open.
      * Otherwise, informs the user no trip open.
      */
-    protected static void handlePeople() {
+    protected static void handlePeople() throws ForceCancelException {
         try {
             executePeople();
         } catch (TripNotOpenException e) {
             Ui.printNoOpenTripError();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 
-    protected static void handleOptimize() {
+    protected static void handleOptimize() throws ForceCancelException {
         try {
             executeOptimize();
         } catch (NoExpensesException e) {
             Ui.printNoExpensesError();
-        } catch (ForceCancelException e) {
-            Ui.printForceCancelled();
         }
     }
 }
