@@ -37,7 +37,10 @@ public class CreateWorkoutParser extends Parser {
             workoutArgs = new String[]{workoutName};
         } else {
             String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
-            String workoutName = arguments[0];
+            String workoutName = arguments[0].trim();
+            if (workoutName.length() == 0) {
+                throw new GetJackDException(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
+            }
             String deadline = arguments[1];
 
             workoutArgs = new String[]{workoutName, deadline};
