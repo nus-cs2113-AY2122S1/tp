@@ -163,7 +163,8 @@ public class AddOrderCommand extends Command {
                                               ArrayList<Medicine> medicines, String[] requiredParameters,
                                               String[] optionalParameters, OrderValidator orderValidator) {
         boolean isInvalidInput = orderValidator.containsInvalidParametersAndValues(ui, medicines, parameters,
-                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false, orderValidator);
+                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND,
+                false, orderValidator);
 
         if (isInvalidInput) {
             logger.log(Level.WARNING, "Invalid parameter or value specified by user");
