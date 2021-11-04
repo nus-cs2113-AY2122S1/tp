@@ -57,12 +57,11 @@ public abstract class RegexParser {
 
     protected void checkEmailRegex(String detailToParse) throws InvalidEmailException {
         //allow lowercase email ids
-        String emailRegex1 = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
         String emailRegex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|"
                 + "(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|"
                 + "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         if (!detailToParse.matches(emailRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Email id failed");
+            LOGGER.log(Level.FINE, "Regex check for Email id failed");
             throw new InvalidEmailException();
         }
     }
@@ -108,7 +107,7 @@ public abstract class RegexParser {
 
     protected void checkNameRegex(String detailToParse) throws InvalidNameException {
         //only letters and spaces allowed
-        String nameRegex = "^([a-zA-Z]+\\s)*[a-zA-Z]+$";
+        String nameRegex = "^([a-zA-Z.'/]+\\s)*[a-zA-Z.'/]+$";
         if (!detailToParse.matches(nameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for name failed");
             throw new InvalidNameException();

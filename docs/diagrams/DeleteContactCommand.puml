@@ -8,6 +8,9 @@ alt#gold #lightgreen delete all contacts
 
 else #lightblue delete selected contact
     ref over ":DeleteContactCommand", ":DeleteContactCommand" :delete selected contact
+
+else #gold delete selected contact fields
+    ref over ":DeleteContactCommand", ":DeleteContactCommand" :delete selected contact fields
 end
 
 deactivate ":DeleteContactCommand"
