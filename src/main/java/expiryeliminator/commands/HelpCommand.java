@@ -27,7 +27,6 @@ public class HelpCommand extends Command {
                 + "\n\n" + CookedRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ViewRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + UpdateRecipeCommand.MESSAGE_USAGE
-                + "\n\n" + DeleteIngredientInRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ListCommand.MESSAGE_USAGE
                 + "\n\n" + ViewIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + ListIngredientExpiringCommand.MESSAGE_USAGE

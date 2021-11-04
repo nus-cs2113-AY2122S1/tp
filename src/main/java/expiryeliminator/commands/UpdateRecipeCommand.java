@@ -15,13 +15,17 @@ public class UpdateRecipeCommand extends Command {
      */
     public static final String COMMAND_WORD = "update recipe";
 
-    public static final String MESSAGE_RECIPE_UPDATED = "I've updated this recipe:\n" + "%1$s";
-    public static final String RECIPE_UPDATE_FAIL = "Unable to update this recipe:\n" + "%1$s"
-            + "No matching recipes or ingredients found, please check your input again\n";
-    public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to update recipe: %1$s\n"
-            + "There is a duplicate ingredient: %2$s.";
-    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero or "
-            + "negative.";
+    public static final String MESSAGE_RECIPE_UPDATED = "I've updated this recipe:\n\n" + "%1$s\n\n"
+            + "You may want to use the 'list recipes' command to check the whole recipe list.";
+    public static final String RECIPE_UPDATE_FAIL = "Unable to update this recipe:\n\n" + "%1$s\n\n"
+            + "No matching recipes or ingredients found, please check your input again.\n";
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Unable to update this recipe:\n\n" + "%1$s\n\n"
+            + "Quantity of ingredients for recipe cannot be negative.";
+    public static final String MESSAGE_NO_INGREDIENT_ERROR = "Unable to update this recipe:\n\n" + "%1$s\n\n"
+            + "Why update fails:\n"
+            + "There should be at least one ingredient in the recipe.\n"
+            + "But your command may result in a recipe without any ingredients.\n"
+            + "Therefore, please add another ingredient first if you still want to delete this ingredient.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the quantity of ingredients"
             + " in the recipe list.\n"
             + "Parameters: r/RECIPE NAME i/INGREDIENT... q/QUANTITY...\n"
@@ -48,29 +52,38 @@ public class UpdateRecipeCommand extends Command {
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         assert recipes != null : "Recipe list cannot be null";
 
-        final Recipe recipe = new Recipe(name);
+        final Recipe recipe;
+        try {
+            recipe = recipes.findRecipe(name);
+        } catch (NotFoundException e) {
+            return String.format(RECIPE_UPDATE_FAIL, name);
+        }
 
         for (int i = 0; i < ingredientNames.size(); i++) {
-            try {
-                recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
-            } catch (DuplicateDataException e) {
-                return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, ingredientNames.get(i));
-            } catch (IllegalValueException e) {
-                return MESSAGE_ILLEGAL_VALUE_ERROR;
-            }
-        }
-
-        try {
-            recipes = recipes.updateRecipe(recipes, recipe, ingredients);
-
-            if (recipes != null) {
-                return String.format(MESSAGE_RECIPE_UPDATED, recipe);
+            int quantity = quantities.get(i);
+            String ingredientName = ingredientNames.get(i);
+            if (quantity == 0) {
+                try {
+                    recipe.delete(ingredientName);
+                } catch (IllegalValueException e) {
+                    return String.format(MESSAGE_NO_INGREDIENT_ERROR, name);
+                } catch (NotFoundException e) {
+                    return String.format(RECIPE_UPDATE_FAIL, name);
+                }
             } else {
-                return String.format(RECIPE_UPDATE_FAIL, recipe);
+                try {
+                    recipe.update(ingredientName, quantity);
+                } catch (IllegalValueException e) {
+                    return String.format(RECIPE_UPDATE_FAIL, name) + "\n\n" + MESSAGE_ILLEGAL_VALUE_ERROR;
+                } catch (NotFoundException e) {
+                    try {
+                        recipe.add(ingredientName, quantity, ingredients);
+                    } catch (DuplicateDataException | IllegalValueException ex) {
+                        return String.format(RECIPE_UPDATE_FAIL, name);
+                    }
+                }
             }
-        } catch (IllegalValueException | DuplicateDataException | NotFoundException e) {
-            return String.format(RECIPE_UPDATE_FAIL, recipe);
         }
-
+        return String.format(MESSAGE_RECIPE_UPDATED, recipe);
     }
 }
