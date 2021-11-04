@@ -16,15 +16,14 @@ for code to have less coupling.
 
 #### Enhancements implemented
 1. New feature: Added the summary feature that will show the game's summary after a game finishes.
-   * What it does: Shows the summary of the game to gamers after they complete a game. 
-   Fields in the summary -
-     `game mode`, `wpm`, `wrong word count`, `percentage of wrong words`, `correct word counts`,
-     `percentage of correct words` and `mistakes`.
+   * What it does: Shows the summary of the game to gamers after they complete a game.
    * Justification: This feature improves the project significantly because gamers mostly 
    want to know how they did in a game. 
    * Highlights: The logic of getting the mistakes made was fairly complicated as it required taking into
    considerations many conditions and scenarios. The implementation of this feature also affects the implementation 
    of the `view history` feature, hence the design had to be well-thought-out. 
+
+<div style="page-break-after: always;"></div>
 
 2. New feature: Added the ability to view records of past games.
     * What it does: Allows gamers to select which game mode's past records they want to view 
