@@ -426,8 +426,7 @@ public class ParserTest {
     public void testSetDifficulty() {
         String input = "addRecipe Aglio Olio "
                 + "/ingredients Pasta + Oil "
-                + "/steps Cook pasta + Stir fry "
-                + "/calories 666\n"
+                + "/steps Cook pasta + Stir fry\n"
                 + "set bolognese /difficulty easy\n"
                 + "set Aglio Olio /difficulty gordon\n"
                 + "set Aglio Olio /difficulty medium\n"
@@ -460,8 +459,7 @@ public class ParserTest {
                 + "====================" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
-
-
+    
     @Test
     public void testSetPrice() {
         String input = "addRecipe Myojo Noodles "

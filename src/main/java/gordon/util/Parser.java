@@ -226,10 +226,11 @@ public class Parser {
 
     public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
-        if (splitContent.length < 3) {
+        if (splitContent.length != 3) {
             throw new GordonException(GordonException.ADD_COMMAND_INVALID);
         }
 
+        assert splitContent.length == 3 : "Invalid input";
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
         parseIngredients(splitContent[INGREDIENTS_INDEX], r);
         parseSteps(splitContent[STEPS_INDEX], r);
