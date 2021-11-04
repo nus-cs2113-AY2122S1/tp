@@ -17,15 +17,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class AddParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Exp: g/2";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
-    private static final String ERROR_INTERVAL_FORMAT = "Use the 'i/' flag to define the interval. Exp: i/7";
+    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
     private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goalIndex has to be a number.";
-    private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number.";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";

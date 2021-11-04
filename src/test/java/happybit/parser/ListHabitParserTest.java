@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ListHabitParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
 
     @Test
     void parseListHabitCommand_validInput_success() throws HaBitParserException {
