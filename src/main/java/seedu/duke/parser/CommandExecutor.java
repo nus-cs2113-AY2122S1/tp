@@ -25,7 +25,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
 
 
     /**
-     * Creates a new instance of {@link Trip} and adds it to the <code>listOfTrips</code>.
+     * Creates a new instance of {@link Trip}
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
      */
@@ -36,11 +36,64 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             throw new IndexOutOfBoundsException();
         }
         Trip newTrip = new Trip(newTripInfo);
+        if (!isTripADuplicate(newTrip)) {
+            addNewTripToList(newTrip);
+        } else {
+            if (doesUserWantToAddDuplicateTrip()) {
+                addNewTripToList(newTrip);
+            }
+        }
+
+    }
+
+    /**
+     * Adds a newly-created {@link Trip} to the <code>listOfTrips</code>.
+     *
+     * @param newTrip instance of a newly-created {@link Trip}.
+     */
+    private static void addNewTripToList(Trip newTrip) {
         Storage.getListOfTrips().add(newTrip);
         Ui.newTripSuccessfullyCreated(newTrip);
         Storage.setLastTrip(newTrip);
     }
 
+    /**
+     * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate
+     *
+     * @return true if the user still wants to add the trip
+     * @throws ForceCancelException if the user does not want to add the trip
+     */
+    private static boolean doesUserWantToAddDuplicateTrip() throws ForceCancelException {
+        Ui.duplicateTripWarning();
+        while (true) {
+            String userOption = Ui.receiveUserInput();
+            if (userOption.contains("y")) {
+                return true;
+            } else if (userOption.contains("n")) {
+                Ui.printForceCancelled();
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Checks if the trip might be a duplicate of an already existing trip.
+     * The following attributes are checked: date, exchange rate, location, currency.
+     *
+     * @param newTrip instance of newly-created {@link Trip} object
+     * @return true if the trip is detected as a possible duplicate
+     */
+    public static boolean isTripADuplicate(Trip newTrip) {
+        for (Trip tripToCompare : Storage.getListOfTrips()) {
+            if (tripToCompare.getDateOfTrip().equals(newTrip.getDateOfTrip())
+                    && tripToCompare.getExchangeRate() == newTrip.getExchangeRate()
+                    && tripToCompare.getForeignCurrency().equalsIgnoreCase(newTrip.getForeignCurrency())
+                    && tripToCompare.getLocation().equalsIgnoreCase(newTrip.getLocation())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Gets the trip to be edited and edits the specified attributes of the trip.
@@ -340,5 +393,4 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         PaymentOptimizer.optimizePayments(trip);
         Ui.printOptimizedAmounts();
     }
-
 }

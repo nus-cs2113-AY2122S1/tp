@@ -524,7 +524,7 @@ public class Ui {
     }
 
     public static void printForceCancelled() {
-        System.out.println("You have chosen to force cancel this operation.");
+        System.out.println("You have chosen to cancel this operation.");
     }
 
     public static void locationIsBlank() {
@@ -533,5 +533,11 @@ public class Ui {
 
     public static void noPersonsAdded() {
         System.out.println("No persons were added to this trip. Please enter the names of the people in this trip: ");
+    }
+
+    public static void duplicateTripWarning() {
+        System.out.println("A trip with similar information may already exist. Please confirm if you wish to proceed"
+                + "with creating this trip.");
+        System.out.print("Enter 'y' if you wish to create this trip, or 'n' to cancel: ");
     }
 }
