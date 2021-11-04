@@ -385,75 +385,75 @@ public class Parser {
     }
     //@@author
 
-        /**
-         * Returns parameter as given by user.
-         *
-         * @param entry String user input
-         * @return Object parameter that is given in entry which will either be int or string as given by user
-         */
-        public static Object getParameter (String entry){
-            String[] words = entry.trim().split(regex);
-            try {
-                int indexNumber = Integer.parseInt(words[1].trim());
-                assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-                return indexNumber;
-            } catch (NumberFormatException e) {
-                String parameter = words[1].trim();
-                return parameter;
-            } catch (IndexOutOfBoundsException e) {
-                return null;
-            }
-        }
-
-        /**
-         * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
-         * words are found, the user will be notified.
-         *
-         * @param entry user input
-         */
-        public static String getQuery (String entry){
-            try {
-                String[] words = entry.trim().split(regex);
-                return words[1].trim();
-            } catch (IndexOutOfBoundsException e) {
-                return "";
-            }
-        }
-
-        /**
-         * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
-         * Otherwise, the full list will not be shown.
-         *
-         * @param attendanceList full list of attendance sheet.
-         */
-        public static void askToListAll (AttendanceList attendanceList){
-            Ui.printListAllMessage();
-            Scanner userInput = new Scanner(System.in);
-            String entry = userInput.nextLine();
-            while (!(entry.equals("y") || entry.equals("n"))) {
-                Ui.printQuestionToList();
-                Ui.printArrow();
-                if (userInput.hasNextLine()) {
-                    entry = userInput.nextLine();
-                }
-            }
-            if (entry.equals("y")) {
-                Ui.printList(attendanceList);
-            }
-        }
-
-        /**
-         * Function waits for user input, or takes input from ./list.txt.
-         */
-        public static void waitForQuery () {
-            String entry = "";
-            Scanner userInput = new Scanner(System.in);
-            while (!entry.equals("bye")) {
-                Ui.printArrow();
-                if (userInput.hasNextLine()) {
-                    entry = userInput.nextLine();
-                }
-                Entry.addEntry(entry);
-            }
+    /**
+     * Returns parameter as given by user.
+     *
+     * @param entry String user input
+     * @return Object parameter that is given in entry which will either be int or string as given by user
+     */
+    public static Object getParameter(String entry) {
+        String[] words = entry.trim().split(regex);
+        try {
+            int indexNumber = Integer.parseInt(words[1].trim());
+            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+            return indexNumber;
+        } catch (NumberFormatException e) {
+            String parameter = words[1].trim();
+            return parameter;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
     }
+
+    /**
+     * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching
+     * words are found, the user will be notified.
+     *
+     * @param entry user input
+     */
+    public static String getQuery(String entry) {
+        try {
+            String[] words = entry.trim().split(regex);
+            return words[1].trim();
+        } catch (IndexOutOfBoundsException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Function asks user if there is a need to list the full list. If 'y' is input, then the full list will show.
+     * Otherwise, the full list will not be shown.
+     *
+     * @param attendanceList full list of attendance sheet.
+     */
+    public static void askToListAll(AttendanceList attendanceList) {
+        Ui.printListAllMessage();
+        Scanner userInput = new Scanner(System.in);
+        String entry = userInput.nextLine();
+        while (!(entry.equals("y") || entry.equals("n"))) {
+            Ui.printQuestionToList();
+            Ui.printArrow();
+            if (userInput.hasNextLine()) {
+                entry = userInput.nextLine();
+            }
+        }
+        if (entry.equals("y")) {
+            Ui.printList(attendanceList);
+        }
+    }
+
+    /**
+     * Function waits for user input, or takes input from ./list.txt.
+     */
+    public static void waitForQuery() {
+        String entry = "";
+        Scanner userInput = new Scanner(System.in);
+        while (!entry.equals("bye")) {
+            Ui.printArrow();
+            if (userInput.hasNextLine()) {
+                entry = userInput.nextLine();
+            }
+            Entry.addEntry(entry);
+        }
+    }
+}
