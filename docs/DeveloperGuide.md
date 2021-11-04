@@ -12,6 +12,7 @@ purpose of this guide is to help developers set up and continue with the develop
 * Inspiration for User Guide: https://se-education.org/addressbook-level3/UserGuide.html
 * Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
 * PlantUML Tutorial: https://se-education.org/guides/tutorials/plantUml.html
+* Gradle: https://github.com/gradle/gradle
 
 ## Contents
 
@@ -47,11 +48,12 @@ purpose of this guide is to help developers set up and continue with the develop
         * [ArchivePrescriptionCommand](#archiveprescriptioncommand)
         * [ArchiveOrderCommand](#archiveordercommand)
 * [Product Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
+    * [Target User Profile](#target-user-profile)
+    * [Value Proposition](#value-proposition)
 * [User Stories](#user-stories)
 * [Non-Functional Requirements](#non-functional-requirements)
-* [Instructions for manual testing](#instructions-for-manual-testing)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
+* [Instructions for Automated Testing](#instructions-for-automated-testing)
 
 ## Glossary
 
@@ -296,6 +298,8 @@ in `stock` mode.
 > * MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry then executes
   accordingly.
 > * MediVault will not execute if both id and expiry date are specified. 
+> * MediVault will not actually delete the stock. Rather, it will set it as deleted and hide from user view. This is 
+for the purpose of retaining stock information in case it is needed again in the future.
 
 The sequence diagram for `DeleteStockCommand` is shown below.
 
@@ -562,14 +566,14 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ## Product Scope
 
-### Target user profile
+### Target User Profile
 
 * Pharmacist handling storing, ordering and prescribing of medication
 * Has a need to manage large number of stocks in the pharmacy
 * May forget how much medicine stock is left in the pharmacy
 * Is a fast typist
 
-### Value proposition
+### Value Proposition
 
 The main value proposition of MediVault is such that it provides the user with an interface for efficient stock taking
 purposes. It eradicates the need for manual tracking of medications which will greatly lessen the administrative 
@@ -643,7 +647,7 @@ redirection tests.
 * **User Requirements:** MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
 
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
 ### Starting up and Shutting Down
 
@@ -669,11 +673,32 @@ All data files are located in the data folder.
         5. Delete entry to stock, prescription and order into MediVault.
         6. Exit MediVault.
     * Expected: stock.txt, prescription.txt and order.txt will be empty.
-2. Archive data is saved in archiveorder.txt and archiveprescription.txt.
+2. Archive data is saved in order_archive.txt and prescription_archive.txt.
     * Test Case:
         1. Run the application.
         2. Add entries to prescription and order into MediVault.
         3. Run the `archiveorder` and `archiveprescription` command with date specified.
         4. Exit MediVault.
-    * Expected: archiveorder.txt and archiveprescription.txt will have entries.
-   
+    * Expected: order_archive.txt and prescription_archive.txt will have entries.
+
+## Instructions for Automated Testing
+
+### Gradle Build Tests
+
+MediVault uses Gradle for Continuous Integration during development. Gradle performs automated checking of 
+coding style which helps in ensuring adherence to Java Coding Standards. Gradle also helps to automate testing by running
+our JUnit test cases to ensure that MediVault bug-free to the extent of our testing and working as intended. It is helpful
+in catching unintended bugs while we continuously develop MediVault.
+
+### JUnit Tests
+
+> :bulb: Tip
+> * **Equivalence Partitions:** Create Effective and Efficient Test Cases by considering Equivalence Partitions
+> * **Boundary Value Analysis:** Focus on testing Boundary Values
+
+To contribute and develop JUnit Test Cases:
+1. Locate `tp/src/test/java/` folder.
+2. Decide which aspect of MediVault you will be creating JUnit Tests for.
+   * Command, Parsers, Validators, etc.
+3. Start coding JUnit Test Cases in the appropriate files.
+   * Aim to create both Positive and Negative test cases.
