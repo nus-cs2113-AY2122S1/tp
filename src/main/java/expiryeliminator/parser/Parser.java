@@ -27,9 +27,6 @@ import expiryeliminator.commands.UpdateRecipeCommand;
 import expiryeliminator.commands.UpdateUnitsCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
-import expiryeliminator.data.Recipe;
-import expiryeliminator.data.RecipeList;
-import expiryeliminator.commands.DeleteIngredientInRecipeCommand;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -124,8 +121,6 @@ public class Parser {
                 return prepareCookedRecipe(args);
             case UpdateUnitsCommand.COMMAND_WORD:
                 return prepareUpdateUnits(args);
-            case DeleteIngredientInRecipeCommand.COMMAND_WORD:
-                return prepareDeleteRecipeIngredient(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
@@ -289,27 +284,6 @@ public class Parser {
         }
         assert !recipe.isBlank();
         return new UpdateRecipeCommand(recipe, ingredients, quantities);
-    }
-
-    /**
-     * Creates a DeleteIngredientInRecipeCommand from the inputs.
-     *
-     * @param args Command arguments.
-     * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
-     */
-    private static Command prepareDeleteRecipeIngredient(String args) throws InvalidArgFormatException {
-        final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT);
-        try {
-            argsParser.parse(args);
-        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteIngredientInRecipeCommand.MESSAGE_USAGE));
-        }
-        final String recipe = new RecipeParser().parse(argsParser.getSingleArg(PREFIX_RECIPE));
-        final ArrayList<String> ingredients =
-                new IngredientParser().parse(argsParser.getArgList(PREFIX_MULTIPLE_INGREDIENT));
-        assert !recipe.isBlank();
-        return new DeleteIngredientInRecipeCommand(recipe, ingredients);
     }
 
     //@@author vincentlauhl
