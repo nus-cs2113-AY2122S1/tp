@@ -18,6 +18,8 @@ import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author deonchung
+
 public class DeleteOrderCommandTest {
 
     public static final String ID = "1";
@@ -39,7 +41,8 @@ public class DeleteOrderCommandTest {
     @Test
     void deleteOrderCommand_validDeleteOrder_expectValid() {
         try {
-            medicines.add(new Order("PANADOL", 10, DateParser.stringToDate("12-12-2025")));
+            Order order = new Order("PANADOL", 10, DateParser.stringToDate("12-12-2025"));
+            medicines.add(order);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -51,9 +54,9 @@ public class DeleteOrderCommandTest {
         Command command = new DeleteOrderCommand(parameters);
         command.execute();
 
-        String error = "Order deleted for Order ID 1";
+        String expectedOutput = "Order deleted for Order ID 1";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
     }
 
@@ -66,9 +69,9 @@ public class DeleteOrderCommandTest {
         Command command = new DeleteOrderCommand(parameters);
         command.execute();
 
-        String error = "Invalid order id provided!";
+        String expectedOutput = "Invalid order id provided!";
 
-        assertEquals(error.trim(), outContent.toString().trim());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
     }
 

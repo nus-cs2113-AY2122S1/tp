@@ -71,7 +71,7 @@ public class AddPrescriptionCommand extends Command {
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
-        if (checkExpiredMedication(ui, filteredStocks)) {
+        if (checkExpiredMedication(ui, filteredStocks, prescriptionQuantity)) {
             return;
         }
 
@@ -122,11 +122,12 @@ public class AddPrescriptionCommand extends Command {
     /**
      * Check if non-expired medication exist.
      *
-     * @param ui             Reference to the UI object to print messages.
-     * @param filteredStocks List of stock sorted by expiry date.
+     * @param ui                   Reference to the UI object to print messages.
+     * @param filteredStocks       List of stock sorted by expiry date.
+     * @param prescriptionQuantity Quantity to prescribe.
      * @return Boolean Value indicating if expired medication exist.
      */
-    private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks) {
+    private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks, int prescriptionQuantity) {
         boolean existNonExpiredMed = false;
         for (Stock stock : filteredStocks) {
             Date expiryDate = stock.getExpiry();
@@ -139,6 +140,11 @@ public class AddPrescriptionCommand extends Command {
 
             if (isNotExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
                 existNonExpiredMed = true;
+            }
+            if (isNotExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
+                ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
+                ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
+                return true;
             }
         }
 

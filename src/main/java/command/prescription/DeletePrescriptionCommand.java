@@ -12,7 +12,6 @@ import utilities.storage.Storage;
 import utilities.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +37,7 @@ public class DeletePrescriptionCommand extends Command {
 
         String prescriptionIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (!isValidPrescriptionParameters(ui, medicines, prescriptionIdToDelete)) {
+        if (!isValidPrescriptionParameters(ui, medicines)) {
             return;
         }
 
@@ -81,10 +80,9 @@ public class DeletePrescriptionCommand extends Command {
      *
      * @param ui                     Reference to the UI object to print messages.
      * @param medicines              Arraylist of medicines.
-     * @param prescriptionIdToDelete Prescription ID to delete.
      * @return Boolean Value indicating if parameters values for Prescription are valid and Prescription ID exist.
      */
-    private boolean isValidPrescriptionParameters(Ui ui, ArrayList<Medicine> medicines, String prescriptionIdToDelete) {
+    private boolean isValidPrescriptionParameters(Ui ui, ArrayList<Medicine> medicines) {
 
         MedicineValidator validator = new PrescriptionValidator();
         String[] requiredParameters = {CommandParameters.ID};
@@ -117,12 +115,6 @@ public class DeletePrescriptionCommand extends Command {
                 continue;
             }
             Stock stock = (Stock) medicine;
-            Date today = new Date();
-
-            if (stock.getExpiry().before(today)) {
-                ui.print("Medication has expired. Unable to delete prescription.");
-                return true;
-            }
 
             if (stock.getStockId() == stockIdToPrescribe) {
                 if (stock.isDeleted()) {

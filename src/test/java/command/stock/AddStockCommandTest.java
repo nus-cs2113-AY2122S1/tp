@@ -18,6 +18,8 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author deonchung
+
 public class AddStockCommandTest {
 
     public static final String NAME = "Panadol";
@@ -54,9 +56,9 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Invalid expiry date! Ensure date is in dd-MM-yyyy.";
+        String expectedOutput = "Invalid expiry date! Ensure date is in dd-MM-yyyy.";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -73,10 +75,11 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Quantity cannot be more than maximum quantity!\n"
+        String expectedOutput = "Quantity cannot be more than maximum quantity!\n"
                 + "Quantity: 50, Max Quantity: 5";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -93,9 +96,10 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Unable to add medicine. Medicine has expired.";
+        String expectedOutput = "Unable to add medicine. Medicine has expired.";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
     }
 
     @Test
@@ -112,22 +116,24 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Medication added: Panadol\n"
+        String expectedOutput = "Medication added: Panadol\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| 1  | PANADOL | $5.00 |    50    | 12-12-2025  |    FEVER    |     100      | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addStockCommand_sameStockName_expectValid() {
         try {
-            medicines.add(new Stock("PANADOL", 10, 50,
-                    DateParser.stringToDate("11-11-2025"), "For Fever", 1000));
+            Stock stock = new Stock("PANADOL", 10, 50,
+                    DateParser.stringToDate("11-11-2025"), "For Fever", 1000);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -144,23 +150,25 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Medicine exists. Using existing description and maximum quantity.\n"
+        String expectedOutput = "Medicine exists. Using existing description and maximum quantity.\n"
                 + "Medication added: Panadol\n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+=======+==========+=============+=============+==============+\n"
                 + "| 2  | PANADOL | $5.00 |    50    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+-------+----------+-------------+-------------+--------------+";
-
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
     @Test
     void addStockCommand_sameStockNameAndExpiry_expectValid() {
         try {
-            medicines.add(new Stock("PANADOL", 10, 50,
-                    DateParser.stringToDate("12-12-2025"), "For Fever", 1000));
+            Stock stock = new Stock("PANADOL", 10, 50,
+                    DateParser.stringToDate("12-12-2025"), "For Fever", 1000);
+            medicines.add(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -177,14 +185,16 @@ public class AddStockCommandTest {
         Command command = new AddStockCommand(parameters);
         command.execute();
 
-        String error = "Same Medication and Expiry Date exist. Updating existing quantity.\n"
+        String expectedOutput = "Same Medication and Expiry Date exist. Using existing price, description and maximum quantity"
+                + ". Updating existing quantity.\n"
                 + "+====+=========+========+==========+=============+=============+==============+\n"
                 + "| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | \n"
                 + "+====+=========+========+==========+=============+=============+==============+\n"
                 + "| 1  | PANADOL | $10.00 |   100    | 12-12-2025  |  FOR FEVER  |     1000     | \n"
                 + "+----+---------+--------+----------+-------------+-------------+--------------+";
 
-        assertEquals(error.trim(), outContent.toString().trim().replace("\r", ""));
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
 
     }
 
