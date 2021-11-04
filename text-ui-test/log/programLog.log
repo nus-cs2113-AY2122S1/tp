@@ -1,4 +1,4 @@
-Nov 03, 2021 9:10:28 PM seedu.foodorama.logger.LoggerManager setupLogger
+Nov 04, 2021 12:46:34 PM seedu.foodorama.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Nov 03, 2021 9:10:28 PM seedu.foodorama.Foodorama main
+Nov 04, 2021 12:46:34 PM seedu.foodorama.Foodorama main
 INFO: Food-o-rama has begun running

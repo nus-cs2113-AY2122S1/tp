@@ -262,7 +262,7 @@ public class IngredientList {
             }
             UI.clearTerminalAndPrintNewPage();
             if (confirmChange.equals(YES)) {
-                ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
+                ingredientList.get(ingrIndex).setIngredientWeight(newWeight);
                 UI.printIngrStorageChanged(ingrName, newWeight);
             } else {
                 UI.printDisregardMsg();
