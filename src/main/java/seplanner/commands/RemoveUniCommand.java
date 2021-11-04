@@ -6,10 +6,21 @@ import seplanner.universities.UniversityList;
 
 import java.io.IOException;
 
+/**
+ * Command to remove a university from the selected university list.
+*/
 public class RemoveUniCommand extends Command {
     private final University universityToRemove;
     private final int universityIndexToRemove;
 
+    /**
+     * Remove a university from the selected university list.
+     *
+     * @param universityToRemove university to remove from the selected university list.
+     * @param universityMasterList The master university list which contains all universities.
+     * @param universitySelectedList The selected university list which contains only the universities selected.
+     * @throws IOException If input-output operation failed.
+    */
     public RemoveUniCommand(University universityToRemove, UniversityList universityMasterList,
                             UniversityList universitySelectedList) throws IOException {
         this.universityToRemove = universityToRemove;

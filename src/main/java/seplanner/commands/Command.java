@@ -2,6 +2,9 @@ package seplanner.commands;
 
 import seplanner.storage.Storage;
 
+/**
+ * An abstract command class to import the storage.
+*/
 public abstract class Command {
     protected Storage storage;
 

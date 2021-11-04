@@ -49,18 +49,27 @@ public class ParseCondition {
         return isExceedUpperBound || isExceedLowerBound;
     }
 
+    public static boolean isIndexOutOfBounds(int modIndex, ModuleList moduleMasterList) {
+        boolean isExceedUpperBound = modIndex > moduleMasterList.getSize();
+        boolean isExceedLowerBound = modIndex <= 0;
+        return isExceedUpperBound || isExceedLowerBound;
+    }
+    
+    public static boolean isIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
+                                             ModuleList moduleSelectedList) {
+        University uni = universityMasterList.get(uniIndex - 1);
+        int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
+        boolean isExceedUpperBound = mapIndex > mapSize;
+        boolean isExceedLowerBound = mapIndex <= 0;
+        return isExceedUpperBound || isExceedLowerBound;
+    }
+    
     public static boolean isValidUniversity(UniversityList universityMasterList, String uniName) {
         return universityMasterList.isExistUniversity(uniName);
     }
 
     public static boolean isDuplicateUniversity(UniversityList universitySelectedList, String uniName) {
         return universitySelectedList.isExistUniversity(uniName);
-    }
-
-    public static boolean isIndexOutOfBounds(int modIndex, ModuleList moduleMasterList) {
-        boolean isExceedUpperBound = modIndex > moduleMasterList.getSize();
-        boolean isExceedLowerBound = modIndex <= 0;
-        return isExceedUpperBound || isExceedLowerBound;
     }
 
     public static boolean isDuplicateModule(ModuleList moduleSelectedList, Module module) {
@@ -73,15 +82,6 @@ public class ParseCondition {
         University uni = universityMasterList.get(uniIndex - 1);
         int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
         return mapSize == 0;
-    }
-
-    public static boolean isIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
-                                             ModuleList moduleSelectedList) {
-        University uni = universityMasterList.get(uniIndex - 1);
-        int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
-        boolean isExceedUpperBound = mapIndex > mapSize;
-        boolean isExceedLowerBound = mapIndex <= 0;
-        return isExceedUpperBound || isExceedLowerBound;
     }
 
     // university here refers to the uni object in the selected uni list
