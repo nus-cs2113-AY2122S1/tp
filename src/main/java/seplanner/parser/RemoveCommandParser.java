@@ -5,6 +5,7 @@ import seplanner.commands.RemoveMapCommand;
 import seplanner.commands.RemoveModCommand;
 import seplanner.commands.RemoveUniCommand;
 import seplanner.constants.Constants;
+import seplanner.exceptions.AddParseException;
 import seplanner.exceptions.RemoveParseException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
@@ -21,6 +22,7 @@ public class RemoveCommandParser {
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private String flag;
     private int uniIndex;
+    private int modIndex;
     private int mapIndex;
     private University university;
     private Module module;
@@ -72,12 +74,8 @@ public class RemoveCommandParser {
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             university = universitySelectedList.getUniversity(uniName);
-        } else {
-            try {
-                uniIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            uniIndex = Integer.parseInt(arguments);
             // Check if university exists
             if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
@@ -85,6 +83,9 @@ public class RemoveCommandParser {
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = universitySelectedList.getUniversity(uniName);
+        } else {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
 
         // Check if university has been added already
@@ -103,19 +104,17 @@ public class RemoveCommandParser {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
-        } else {
-            int modIndex;
-            try {
-                modIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            modIndex = Integer.parseInt(arguments);;
             // Check if module exists
             if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             module = moduleMasterList.get(modIndex - 1);
+        } else {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
         }
         // Check if module has been added already
         if (!ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
@@ -133,12 +132,16 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
-        try {
-            uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
-            mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
-        } catch (NumberFormatException e) {
-            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
+        String firstParam = argumentSubstrings[0].trim();
+        String secondParam = argumentSubstrings[1].trim();
+        if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
+            uniIndex = Integer.parseInt(firstParam);
+            mapIndex = Integer.parseInt(secondParam);
+        } else {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
+                    : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
+            throw new RemoveParseException(error, 1);
         }
         if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);  

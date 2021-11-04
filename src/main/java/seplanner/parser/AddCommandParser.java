@@ -143,7 +143,7 @@ public class AddCommandParser {
         } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
-                    : Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI;
+                    : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
             throw new AddParseException(error, 1);
         }
         University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
