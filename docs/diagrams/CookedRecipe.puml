@@ -1,42 +1,51 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+
+skinparam defaultFontSize 25
 
 autonumber
 box Logic
--> Parser: parseCommand(userInput)
-activate Parser
+-> ":Parser": parseCommand(userInput)
+activate ":Parser"
 
-create CookedRecipeCommand
-Parser -> CookedRecipeCommand : CookedRecipeCommand(name)
-activate CookedRecipeCommand
+create ":CookedRecipeCommand"
+":Parser" -> ":CookedRecipeCommand" : CookedRecipeCommand(name)
+activate ":CookedRecipeCommand"
 
 return
 return command
 
--> CookedRecipeCommand : execute(ingredients, recipes)
-activate CookedRecipeCommand
+-> ":CookedRecipeCommand" : execute(ingredients, recipes)
+activate ":CookedRecipeCommand"
 end box
 
 box Data
-CookedRecipeCommand -> RecipeList : findRecipe(name)
-activate RecipeList
+":CookedRecipeCommand" -> "recipes :RecipeList" : findRecipe(name)
+activate "recipes :RecipeList"
 
 return recipe
 
-CookedRecipeCommand -> Recipe : getIngredientQuantities()
-activate Recipe
+":CookedRecipeCommand" -> ":Recipe" : getIngredientQuantities()
+activate ":Recipe"
 return ingredientsInRecipe
 
-CookedRecipeCommand -> CookedRecipeCommand : allIngredientsAreSufficient(ingredientsInRecipe,ingredients)
-activate CookedRecipeCommand
+":CookedRecipeCommand" -> ":CookedRecipeCommand" : allIngredientsAreSufficient()
+note right
+allIngredientsAreSufficient() is called with the following args:
+- ingredientsInRecipe
+- Ingredients
+end note
+
+activate ":CookedRecipeCommand"
 return
 opt all ingredients are sufficient
 loop all ingredients in recipe
-CookedRecipeCommand -> IngredientRepository : findWithNullReturn(name)
-activate IngredientRepository
+":CookedRecipeCommand" -> "ingredients :IngredientRepository" : findWithNullReturn(name)
+activate "ingredients :IngredientRepository"
 return ingredientStorage
-CookedRecipeCommand -> IngredientStorage : remove(quantity)
-activate IngredientStorage
+":CookedRecipeCommand" -> ":IngredientStorage" : remove(quantity)
+activate ":IngredientStorage"
 return ingredient
 end
 
@@ -45,6 +54,6 @@ end box
 end
 
 return message
-destroy CookedRecipeCommand
+destroy ":CookedRecipeCommand"
 
 @enduml

@@ -3,5 +3,6 @@
 hide circle
 hide footbox
 skinparam classAttributeIconSize 0
+skinparam componentStyle rectangle
 
 @enduml

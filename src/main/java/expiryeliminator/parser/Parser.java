@@ -189,6 +189,7 @@ public class Parser {
         return new DeleteIngredientCommand(ingredient);
     }
 
+    //@@author vincentlauhl
     /**
      * Creates a AddRecipeCommand from the inputs.
      *
@@ -236,6 +237,7 @@ public class Parser {
         assert !recipe.isBlank();
         return new DeleteRecipeCommand(recipe);
     }
+    //@@author
 
     /**
      * Creates a ViewIngredientCommand from the inputs.
@@ -284,6 +286,7 @@ public class Parser {
         return new UpdateRecipeCommand(recipe, ingredients, quantities);
     }
 
+    //@@author vincentlauhl
     /**
      * Creates a CookedRecipeCommand from the inputs.
      *
@@ -302,6 +305,7 @@ public class Parser {
         final String recipe = new RecipeParser().parse(argsParser.getSingleArg(PREFIX_RECIPE));
         return new CookedRecipeCommand(recipe);
     }
+    //@@author
 
     /**
      * Creates a ViewRecipeCommand from the inputs.
