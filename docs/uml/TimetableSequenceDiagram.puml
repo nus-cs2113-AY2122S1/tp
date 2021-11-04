@@ -3,21 +3,21 @@
 !include SequenceStyle.puml
 
 box Command COMMAND_BOX_COLOR
-participant TimetableCommand as TimetableCommand
+participant ":TimetableCommand" as TimetableCommand COMMAND_COLOR
 endbox
 
-participant Timetable as Timetable
+participant ":Timetable" as Timetable
 
-participant StringBuilder as StringBuilder
+participant ":StringBuilder" as StringBuilder
 
 box Module MODULE_BOX_COLOR
-participant ModuleManager as ModuleManager MODULE_COLOR
-participant NusModule as NusModule MODULE_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+participant ":NusModule" as NusModule MODULE_COLOR
 endbox
 
 box Content CONTENT_BOX_COLOR
-participant ContentManager as ContentManager CONTENT_COLOR
-participant Link as Link CONTENT_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Link" as Link CONTENT_COLOR
 endbox
 
 activate TimetableCommand
