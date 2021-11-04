@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
 
-import java.util.*;
 import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddTrainingException;
 
