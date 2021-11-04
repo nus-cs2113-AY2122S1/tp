@@ -1,4 +1,5 @@
 /*@@author xingyuan123*/
+
 package seedu.duke.storage;
 
 import java.io.File;
@@ -17,7 +18,8 @@ import seedu.duke.training.TrainingSchedule;
 
 public class TrainingStorage {
 
-    static String duplicateTrainingErrorExcelMessage = "Duplicates training name found in CCA Trainings CSV.Please fix this before running the program again.";
+    static String duplicateTrainingErrorExcelMessage = "Duplicates training name found in CCA Trainings CSV."
+            + "Please fix this before running the program again.";
 
     /**
      * This method sets up the cca trainings csv file. It firsts tries to find if the file exists in the current
