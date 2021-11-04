@@ -169,6 +169,8 @@ Examples:
 - `PATIENT_IC` must be in a valid NRIC format:
     - The checksum of the NRIC will not be checked.
     - Alphabets will be auto-capitalized. The input alphabets therefore non-case-sensitive.
+- No fields are made compulsory. The purpose is to allow adding an urgent (e.g. car accident) patient
+  into MedBot in case all information is not yet available, to allow scheduling an urgent appointment.
 
 ### Delete a patient: `delete`
 
