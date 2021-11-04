@@ -16,7 +16,7 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
 
 * [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
 * [Commands](#commands)
-  * [Warning Labels](#warning-labels) :warning:
+  * [Warning Labels](#warning-labels) ⚠️
 
   * [Members](#member-commands)
     * [add /m](#add-member)
@@ -61,7 +61,7 @@ With **CCA Manager**, you can organize your data with the help of useful command
 ### Quick Reference: | [Member Commands](#member-commands) | [Training Commands](#trianing-commands) | [Attendance Commands](#attendance-commands)
 
 ## Warning Labels
-:warning: *denotes important formatting points you should pay attention to. Failing to follow them will cause your command to be unsuccessful.*
+⚠️ *denotes important formatting points you should pay attention to. Failing to follow them will cause your command to be unsuccessful.*
 
 
 ## Member Commands
@@ -75,7 +75,7 @@ To start, you can populate the member list of **CCA Manager** with the help of t
     * The `add /m` keyword requires 4 different arguments:
         * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
-          * :warning: Student Number of each entry must be _unique_. Different member entries with the same student number is not allowed.
+          * ⚠️ Student Number of each entry must be _unique_. Different member entries with the same student number is not allowed.
         * use `/g` to input _gender_ of your member. Either _M_ for male and _F_ for female.
         * use `/p` to input _phone number_ of your member.
    
@@ -195,11 +195,11 @@ This means that you will not have to delete the entry and then add a new one lat
 1. `add /t` This adds entries to the Training List stored in CCA Manager.
     * The `add /t` keyword requires 3 different arguments:
         * use `/n` to input _name_ of your training schedule.
-          * :warning: Training Schedules must have _unique_ names. Different training entries with the same training name is not allowed.
+          * ⚠️ Training Schedules must have _unique_ names. Different training entries with the same training name is not allowed.
         * use `/a` to input _date and time_ of your training schedule.
           * _Date and time_ is stored as a _String_ to allow the CCA admin to use relative timing. E.g. _After training_, _Recess Week_, etc.
         * use `/v` to input _venue_ of training schedule.
-        * :warning: In your command input, there should only be ONE of each fields. Additional instances of the field will be treated as a wrong command, thus printing an error.
+        * ⚠️ In your command input, there should only be ONE of each fields. Additional instances of the field will be treated as a wrong command, thus printing an error.
           * For example, `add /t /n Friday /n Training /a 5 Nov 2021 /v MPSH1` will produce an error, because `/n` is used twice.
 
     * **Format:**
@@ -277,7 +277,7 @@ Had a sudden change in venue for your trainings? No worries! You can edit your t
         * `/n <NEW_TRAINING_NAME>` edits the current _training name_
         * `/a <NEW_TRAINING_TIME>` edits the current _date and time_
         * `/v <NEW_TRAINING_VENUE>` edits the current _venue_
-        * :warning: Similar to [Add Member](#add-member), the edit field should only have **one** of each field (`/n`, `/a` or `/v`). Otherwise, the command will be treated as invalid. 
+        * ⚠️ Similar to [Add Member](#add-member), the edit field should only have **one** of each field (`/n`, `/a` or `/v`). Otherwise, the command will be treated as invalid. 
 
     * **Format:**
         * `edit [/t TRAINING_INDEX_NUMBER] [/n NEW_TRAINING_NAME] [/a NEW_TRAINING_TIME] [/v NEW_TRAINING_VENUE]`
