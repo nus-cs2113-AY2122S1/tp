@@ -57,12 +57,10 @@ public class AddPrescriptionCommandTest {
             parameters.put("q", QUANTITY);
             parameters.put("c", CUSTOMER_ID);
             parameters.put("s", STAFF_NAME);
+
             final int prescriptionIndex = 1;
-
-
             Command command = new AddPrescriptionCommand(parameters);
             command.execute();
-
             Prescription prescription = (Prescription) medicines.get(prescriptionIndex);
 
             assertEquals(prescription.getPrescriptionId(), 1);
