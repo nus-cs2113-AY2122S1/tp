@@ -36,7 +36,7 @@ If you can type fast, Get Jack'd can manage your workouts faster than traditiona
 4. If you are using **Windows**, open up a Command prompt terminal `cmd.exe` or `powershell.exe` and
    navigate to the folder where `GetJackd.jar` is stored (using the file path).
 5. For **Mac** and **Linux** users, do the same as step 4 with the terminal of your respective systems.
-6. Execute `java -jar GetJackd.jar`in the terminal and the application will start running.
+6. Execute `java -jar GetJackd.jar` in the terminal and the application will start running.
 
 You should be able to see something like this:
 ```
