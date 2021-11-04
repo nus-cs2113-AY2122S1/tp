@@ -31,8 +31,8 @@ public class Entry {
      */
     public static void initializeFiles() {
         MemberStorage.setupMemberFile(members);
-        AttendanceStorage.setUpAttendanceStorage(attendanceList);
         TrainingStorage.setupTrainingFile(trainings);
+        AttendanceStorage.setUpAttendanceStorage(attendanceList);
     }
 
     /**
@@ -82,7 +82,12 @@ public class Entry {
                 new DeleteTraining(trainings, parameter);
                 break;
             case DELETE_ATTENDANCE_KEYWORD:
-                attendanceIndex = Parser.getAttendanceIndex(entry);
+                try {
+                    attendanceIndex = Parser.getAttendanceIndex(entry);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a valid number!");
+                    break;
+                }
                 String trainingName = Parser.getAttendanceTrainingName(entry);
                 new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
                 break;
@@ -98,7 +103,7 @@ public class Entry {
                 try {
                     trainingIndex = Parser.getIndex(entry);
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in a valid number!");
+                    Ui.printValidNumberNeeded();
                     break;
                 }
                 TrainingSchedule newTrainingDetail = Parser.getTrainingDescription(entry);
@@ -108,7 +113,7 @@ public class Entry {
                 try {
                     memberIndex = Parser.getIndex(entry);
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in a valid number!");
+                    Ui.printValidNumberNeeded();
                     break;
                 }
                 Member newMemberDetail = Parser.getMemberDetails(entry, 'E');
