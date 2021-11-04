@@ -1,3 +1,5 @@
+//@@author Teckwhye
+
 package seedu.duke.member;
 
 import java.util.ArrayList;
@@ -6,6 +8,13 @@ import java.util.regex.Pattern;
 import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberList {
+
+    /* Error message for duplicate names */
+    private final String duplicateNameErrorMessage = "Duplicate name found.Please enter a different name";
+    private final String duplicatePhoneNumberErrorMessage = "Duplicate phone number found.Please enter a different "
+            + "phone number";
+    private final String duplicateStudentNumberErrorMessage = "Duplicate student number found.Please enter a "
+            + "different student number ";
 
     private final ArrayList<Member> memberList;
 
@@ -59,17 +68,13 @@ public class MemberList {
      */
     public Member getMember(int memberNumber) throws InvalidMemberException {
         Member member = new Member();
-        try {
-            boolean isWithinMemberList = (memberNumber > 0) && (memberNumber <= memberList.size());
-            if (isWithinMemberList) {
-                int index = memberNumber - 1;
-                member = memberList.get(index);
+        boolean isWithinMemberList = (memberNumber > 0) && (memberNumber <= memberList.size());
+        if (isWithinMemberList) {
+            int index = memberNumber - 1;
+            member = memberList.get(index);
 
-            } else {
-                throw new InvalidMemberException("Member do not exist, please select the right member index.");
-            }
-        } catch (InvalidMemberException e) {
-            throw new InvalidMemberException(e.getMessage());
+        } else {
+            throw new InvalidMemberException("Member do not exist, please select the right member index.");
         }
         return member;
     }
@@ -119,20 +124,16 @@ public class MemberList {
      * @return member to be displayed as deleted
      * @throws IndexOutOfBoundsException When an invalid member is selected to be deleted
      */
-    public Member deleteMemberByIndex(int memberNumber) throws IndexOutOfBoundsException {
-        try {
-            int index = memberNumber - 1;
-            Member member = memberList.get(index);
-            Member removedMember = new Member(member);
-            for (int i = memberNumber; i < this.getMemberListSize(); i++) {
-                Member memberToChangeIndex = memberList.get(i);
-                memberToChangeIndex.setIndex(i);
-            }
-            memberList.remove(index);
-            return removedMember;
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException(e.getMessage());
+    public Member deleteMemberByIndex(int memberNumber) throws IndexOutOfBoundsException, InvalidMemberException {
+        int index = memberNumber - 1;
+        Member member = memberList.get(index);
+        Member removedMember = new Member(member);
+        for (int i = memberNumber; i < this.getMemberListSize(); i++) {
+            Member memberToChangeIndex = memberList.get(i);
+            memberToChangeIndex.setIndex(i);
         }
+        memberList.remove(index);
+        return removedMember;
     }
 
     /**
@@ -153,4 +154,26 @@ public class MemberList {
         return new MemberList(membersThatMatchFind);
     }
 
+    /**
+     * Checks for any duplicate names, student number and phone number.
+     *
+     * @param member Member to be added to MemberList.
+     * @return true if there are no duplicates given are valid.
+     */
+    public boolean verifyNoDuplicates(Member member) throws InvalidMemberException {
+        for (Member memberInList : memberList) {
+            if (member.getName().equals(memberInList.getName())) {
+                throw new InvalidMemberException(duplicateNameErrorMessage);
+            }
+            if (member.getPhoneNumber().equals(memberInList.getPhoneNumber())) {
+                throw new InvalidMemberException(duplicatePhoneNumberErrorMessage);
+            }
+            if (member.getStudentNumber().equals(memberInList.getStudentNumber())) {
+                throw new InvalidMemberException(duplicateStudentNumberErrorMessage);
+            }
+        }
+        return true;
+    }
+
 }
+//@@author

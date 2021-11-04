@@ -1,9 +1,10 @@
+//@@author Teckwhye
+
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
-
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
@@ -35,13 +36,12 @@ public class DeleteMember {
             assert index >= 1;
             Member toDelete = members.deleteMemberByIndex(index);
             Ui.printDeletedMemberMessage(toDelete);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
-            //Update save file
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such member number...");
-        } catch (AssertionError e) {
-            System.out.println("The index to delete must be an integer >= 1");
+        } catch (IndexOutOfBoundsException | AssertionError e) {
+            System.out.println("please input a valid member index or member name");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -50,13 +50,13 @@ public class DeleteMember {
             assert !name.equals("");
             Member toDelete = members.deleteMemberByName(name);
             Ui.printDeletedMemberMessage(toDelete);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
-            //Update save file
         } catch (InvalidMemberException e) {
             Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
         } catch (AssertionError e) {
-            System.out.println("Name cannot be empty!");
+            System.out.println("please input a valid member index or member name");
         }
     }
 }
+//@@author

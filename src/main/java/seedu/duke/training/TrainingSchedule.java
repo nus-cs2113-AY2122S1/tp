@@ -5,6 +5,7 @@ public class TrainingSchedule {
     protected String trainingName;
     protected String trainingVenue;
     protected String trainingTime;
+    protected int trainingIndex;
 
     Boolean completed = false;
 
@@ -13,7 +14,15 @@ public class TrainingSchedule {
      * @param name          Name of event
      * @param venue         Venue of event
      * @param time          Time of event
+     * @param index         Index of event in TrainingList
      */
+    public TrainingSchedule(String name, String venue, String time, int index) {
+        setTrainingName(name);
+        setTrainingVenue(venue);
+        setTrainingTime(time);
+        setTrainingIndex(index);
+    }
+
     public TrainingSchedule(String name, String venue, String time) {
         setTrainingName(name);
         setTrainingVenue(venue);
@@ -32,6 +41,10 @@ public class TrainingSchedule {
         this.trainingTime = trainingTime;
     }
 
+    public void setTrainingIndex(int trainingIndex) {
+        this.trainingIndex = trainingIndex;
+    }
+
     public void setTrainingComplete() {
         this.completed = true;
     }
@@ -48,6 +61,10 @@ public class TrainingSchedule {
         return trainingTime;
     }
 
+    public int getTrainingIndex() {
+        return trainingIndex;
+    }
+
     public Boolean getTrainingStatus() {
         return completed;
     }
@@ -59,7 +76,7 @@ public class TrainingSchedule {
      */
     @Override
     public String toString() {
-        return String.format("Training Name: %s | Venue: %s | Time: %s", this.trainingName, this.trainingVenue,
-                this.trainingTime);
+        return String.format("[%d] Training Name: %s | Venue: %s | Time: %s", this.trainingIndex, this.trainingName,
+                this.trainingVenue, this.trainingTime);
     }
 }

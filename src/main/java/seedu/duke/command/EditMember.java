@@ -1,11 +1,14 @@
+//@@author Teckwhye
+
 package seedu.duke.command;
 
-import static seedu.duke.MemberStorage.writeMemberFile;
+import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 /**
  * Edits a Member located in MemberList.
@@ -23,12 +26,15 @@ public class EditMember {
      */
     public EditMember(MemberList members, int index, Member toChange) {
         try {
+
+            if (toChange == null) {
+                return;
+            }
             assert index >= 1;
 
             Member memberToChange = members.getMemberList().get(index - 1);
 
             oldMember = new Member(memberToChange);
-
             if (!toChange.getName().equals("")) {
                 memberToChange.setName(toChange.getName());
             }
@@ -47,13 +53,16 @@ public class EditMember {
 
             members.getMemberList().set(index - 1, memberToChange);
             Ui.printEditMessage(oldMember, memberToChange);
-            File dukeMemberFile = new File("dukeMembers.csv");
+            File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
 
         } catch (AssertionError e) {
             System.out.println("Index to edit must be an integer >= 1");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Unfortunately, the index you entered is invalid.");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
+//@@author

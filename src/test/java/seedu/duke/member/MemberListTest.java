@@ -25,15 +25,15 @@ class MemberListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
+        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432", true);
         teckHwee.setIndex(1);
-        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232");
+        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232", true);
         ianWang.setIndex(2);
-        glenn = new Member("Glenn", "A0345678C", "M", "91233344");
+        glenn = new Member("Glenn", "A0345678C", "M", "91233344", true);
         glenn.setIndex(3);
-        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452");
+        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452", true);
         izdiyad.setIndex(4);
-        xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132");
+        xingYuan = new Member("Xing Yuan", "A0567891E", "M", "96987132", true);
         xingYuan.setIndex(5);
 
         ArrayList<Member> memberList = new ArrayList<Member>();
@@ -80,7 +80,7 @@ class MemberListTest {
     @Test
     void makeMemberEntry() {
         final String string = "add /m /n Lorem Ipsum /s A1231234B /g M /p 91118888";
-        Member newMember = Parser.getMemberDetails(string);
+        Member newMember = Parser.getMemberDetails(string, 'A');
         new AddMember(fullMemberList, newMember);
         //Parser.makeMemberEntry(fullMemberList, string);
 
@@ -94,7 +94,7 @@ class MemberListTest {
     void editMember() {
         final String string = "edit /m 1 /n Ian Wang";
         int index = Parser.getIndex(string);
-        Member memberDetail = Parser.getMemberDetails(string);
+        Member memberDetail = Parser.getMemberDetails(string, 'E');
         new EditMember(fullMemberList, index, memberDetail);
 
         try {

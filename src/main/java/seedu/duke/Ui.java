@@ -38,7 +38,14 @@ public class Ui {
     }
 
     public static void printMatchingTrainingList(TrainingList trainings, String query) {
-        // version 2.0
+        if (trainings.getTrainingListSize() > 0) {
+            System.out.println("The following trainings matches your search \"" + query + "\"");
+            for (TrainingSchedule training : trainings.getTrainingList()) {
+                System.out.println(training.toString());
+            }
+        } else {
+            System.out.println("Sorry, there is no training that matches your search \"" + query + "\"");
+        }
     }
 
     public static void printMatchingMemberList(MemberList members, String name) {
@@ -63,13 +70,43 @@ public class Ui {
             for (Member member : members.getMemberList()) {
                 System.out.println(member.toString());
             }
-        } else {
-            System.out.println("Sorry there is no members that have similar name as your delete \"" + name + "\"");
         }
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
         System.out.println("You have removed training entry: " + "\n" + training.toString());
+    }
+
+    public static void printEmptyMembersFile() {
+        System.out.println("Members File is Empty!!!");
+    }
+
+    public static void printQuestionToList() {
+        System.out.println("Please enter only a 'y' or 'n'.");
+    }
+
+    public static void printArrow() {
+        System.out.print("=> ");
+    }
+
+    public static void printIndexError() {
+        System.out.println("Index must be a number");
+    }
+
+    public static void printEditPhoneFailed() {
+        System.out.println("You did not edit the phone number due to a wrong format being used...");
+    }
+
+    public static void printEditGenderFailed() {
+        System.out.println("You did not edit the gender due to a wrong format being used...");
+    }
+
+    public static void printEditNameFailed() {
+        System.out.println("You did not edit the Name due to a number being used...");
+    }
+
+    public static void printMissingTraining() {
+        System.out.println("No such Training Name is in our attendance records.");
     }
 
     public static void printDeletedAttendanceMessage(Attendance attendance) {
@@ -81,7 +118,7 @@ public class Ui {
     }
 
     public static void printAddedMemberMessage(Member member) {
-        System.out.println("Added a Member: " + member);
+        System.out.println("Added a Member: \n" + member);
     }
 
     public static void printAddedAttendanceMessage(Attendance attendance) {
@@ -89,12 +126,22 @@ public class Ui {
     }
 
     public static void printEditMessage(Member oldMember, Member newMember) {
-        System.out.println("Edited member: " + oldMember);
-        System.out.println("To become:  " + newMember);
+        System.out.println("Edited member:\n" + oldMember);
+        System.out.println("To become:\n" + newMember);
+    }
+
+    public static void printEditTrainingMessage(TrainingSchedule oldTraining, TrainingSchedule newTraining) {
+        System.out.println("Edited Training:\n" + oldTraining.toString());
+        System.out.println("To become:\n" + newTraining.toString());
     }
 
     public static void printExitMessage() {
         System.out.println("You have successfully exited the programme.");
+        printSeparator();
+    }
+
+    public static void printNoCommasMessage() {
+        System.out.println("Invalid input! Inputs should not contain any commas (i.e. ',')");
         printSeparator();
     }
 
@@ -111,17 +158,12 @@ public class Ui {
         if (trainings.getTrainingListSize() == 0) {
             System.out.println("Training schedule list is empty!");
         }
-        int display = 1;
         for (TrainingSchedule trainingEntries : trainings.getTrainingList()) {
-            System.out.println("[" + display + "] " + trainingEntries.toString());
-            display++;
+            System.out.println(trainingEntries.toString());
         }
     }
 
     public static void printList(AttendanceList attendanceList) {
-        if (attendanceList.getAttendanceListSize() == 0) {
-            System.out.println("Attendance list is empty!");
-        }
         int display = 1;
         for (Attendance attendance : attendanceList.getAttendanceList()) {
             System.out.println("[" + display + "] " + attendance.toString());
@@ -141,7 +183,9 @@ public class Ui {
                 + "NUMBER>]\n"
                 + "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"
                 + "    list [/m] [/t] \n"
-                + "    list [/att /t <TRAINING_NAME> [/d <1_OR_0>]] \n"
+                + "    list [/att /t <TRAINING_NAME>] \n"
+                + "    find [/m <MEMBER_NAME>]  \n"
+                + "    find [/t <TRAINING_NAME>] \n"
                 + "    bye -- exits the programme.");
     }
 }
