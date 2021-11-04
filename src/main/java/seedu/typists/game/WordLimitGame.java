@@ -1,12 +1,15 @@
 package seedu.typists.game;
 
 import seedu.typists.exception.ExceedRangeException;
+import seedu.typists.exception.InvalidCommandException;
 import seedu.typists.exception.InvalidStringInputException;
+import seedu.typists.ui.TextUi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
 
 import static seedu.typists.common.Utils.getDisplayLinesWithoutNull;
 import static seedu.typists.common.Utils.getWordLineFromStringArray;
@@ -50,14 +53,26 @@ public class WordLimitGame extends Game {
     public int getWordLimit() {
         Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how many words you want the game to run: ");
-
         try {
-            return Integer.parseInt(in.nextLine());
+            int n = Integer.parseInt(in.nextLine());
+            return isValidWord(n);
         } catch (NumberFormatException e) {
-            System.out.println("Not a Number!");
-            return getWordLimit();
+            new TextUi().printScreen("Length should be a number!");
+            //repeat getWordLimit
+        } catch (InvalidCommandException e) {
+            new TextUi().printScreen(e.getMessage());
+            //repeat getWordLimit
         }
+        return getWordLimit();
     }
+
+    public static int isValidWord(int n) throws InvalidCommandException {
+        if (n <= 0) {
+            throw new InvalidCommandException("Length should be positive!");
+        }
+        return n;
+    }
+
 
     public void trimContent(int wordLimit) {
         try {
@@ -69,6 +84,7 @@ public class WordLimitGame extends Game {
     }
 
     public void runGame() {
+        assert limit > 0 : "limit should be greater than 0";
         trimContent(limit);
         beginTime = getTimeNow();
         List<String> inputs = new ArrayList<>();
@@ -76,6 +92,7 @@ public class WordLimitGame extends Game {
         boolean isExit = false;
         while (!isExit) {
             row++;
+            assert row > 0 : "row is always a positive integer.";
             //display a single line
             displayLines(row);
             //read user input
