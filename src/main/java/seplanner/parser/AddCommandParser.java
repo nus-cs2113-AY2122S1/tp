@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// @@author leowyy99
+
+/**
+ * Handle add command arguments.
+ */
 public class AddCommandParser {
 
     private String flag;
@@ -24,6 +29,18 @@ public class AddCommandParser {
     private Module module;
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle add command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The Command object corresponding to the flag.
+     * @throws AddParseException If arguments are invalid.
+     * @throws IOException If IO exception exists.
+     */
     public Command parse(String arguments, UniversityList universityMasterList,
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws AddParseException, IOException {
@@ -52,6 +69,13 @@ public class AddCommandParser {
         }
     }
 
+    /**
+     * Extract the flag from the rest of the arguments.
+     *
+     * @param arguments The user input without the command word.
+     * @return The String containing the arguments for AddCommand.
+     * @throws AddParseException If inputs are invalid.
+     */
     private String identifyFlagAndSplitArgs(String arguments) throws AddParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
@@ -62,6 +86,14 @@ public class AddCommandParser {
         return argumentsSubstrings[1].trim();
     }
 
+    /**
+     * Handle the arguments for /uni flag.
+     *
+     * @param arguments The argument for /uni flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws AddParseException {
         String uniName;
@@ -95,6 +127,14 @@ public class AddCommandParser {
         }
     }
 
+    /**
+     * Handle the arguments for /mod flag
+     *
+     * @param arguments The arguments for /mod flag.
+     * @param moduleMasterList The master list of all available modules.
+     * @param moduleSelectedList The list of user selected modules.
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws AddParseException {
         if (ParseCondition.isText(arguments)) {
@@ -124,6 +164,14 @@ public class AddCommandParser {
         }
     }
 
+    /**
+     * Handle arguments for /map flag.
+     * @param arguments The arguments for /map flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.    * @param universityMasterList
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
                                    ModuleList moduleSelectedList,
                                    UniversityList universityMasterList) throws AddParseException {
