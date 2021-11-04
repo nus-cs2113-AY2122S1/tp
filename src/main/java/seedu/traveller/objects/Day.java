@@ -12,7 +12,7 @@ public class Day {
         itemsList = new ItemsList();
     }
 
-    public void addItem(Item item) {
+    public void addItem(Item item) throws TravellerException {
         itemsList.addItem(item);
     }
 

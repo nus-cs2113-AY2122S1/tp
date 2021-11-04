@@ -54,8 +54,7 @@ each functionality are explained in the [features](#2-features) section.
   * [2.11. search-item](#211-searching-for-an-item-search-item)
   * [2.12. shortest-dist](#212-shortest-distance-shortest-dist)
   * [2.13. shortest-cost](#213-least-cost-shortest-cost)
-  * [2.14. edit-map](#214-edit-distances-in-map-edit-map)
-  * [2.15. exit](#215-exiting-the-program-exit)
+  * [2.14. exit](#214-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -277,6 +276,8 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
+> ![](documentationPics/info.png) KEYWORD must be one word and not have aany white spaces before or after.
+
 #### Usage Example:
 ```
 _________________________________________________________________________________
@@ -324,22 +325,9 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-### 2.14. Edit Distances in Map: `edit-map`
-Edits and updates the distance from the source to destination country.
-
-#### Format: `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist NEW_DISTANCE`
-
-#### Usage Example:
-```
-____________________________________________________________
-$ edit-map /from SIN /to MLY /dist 2.0
-____________________________________________________________
-	The distance from SIN to MLY is updated to 2.0.
-____________________________________________________________
-```
 
 
-### 2.15 Exiting the program: `exit`
+### 2.14 Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
@@ -384,6 +372,5 @@ Action | Format
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-dist** | `shortest-dist /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-**edit-map** | `edit-map /from SOURCE_COUNTRY /to DESTINATION_COUNTRY /dist DISTANCE`
 **exit** | `exit`
 

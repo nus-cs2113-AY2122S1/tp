@@ -1,6 +1,7 @@
 package seedu.traveller.objects;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.exceptions.ItemNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
 
@@ -18,8 +19,8 @@ public class DayTest {
 
     @Test
     public void addItem_success() throws TravellerException {
-        Item item1 = new Item("7-9pm", "Eat dinner");
-        Item item2 = new Item("12am", "See northern lights");
+        Item item1 = new Item("1900", "Eat dinner");
+        Item item2 = new Item("0000", "See northern lights");
         day.addItem(item1);
         day.addItem(item2);
         assertEquals(item1, day.getItem(0));
@@ -28,12 +29,20 @@ public class DayTest {
 
     @Test
     public void deleteDay_success() throws TravellerException {
-        Item item1 = new Item("7-9pm", "Eat dinner");
-        Item item2 = new Item("12am", "See northern lights");
+        Item item1 = new Item("1900", "Eat dinner");
+        Item item2 = new Item("0000", "See northern lights");
         day.addItem(item1);
         day.addItem(item2);
         day.deleteItem(0);
         assertEquals(item2, day.getItem(0));
+    }
+
+    @Test
+    public void addItem_exceptionThrown() throws TravellerException {
+        day.addItem(new Item("0900", "Dinner"));
+        assertThrows(DuplicateItemException.class, () -> {
+            day.addItem(new Item("0900", "Dinner"));
+        });
     }
 
     @Test

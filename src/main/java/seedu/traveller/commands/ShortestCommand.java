@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author Jach23
 public class ShortestCommand extends Command {
     private static final Logger logger = Logger.getLogger(ShortestCommand.class.getName());
     private final String startCountry;
@@ -49,6 +49,8 @@ public class ShortestCommand extends Command {
         MinCalcResult result;
 
         assert Objects.equals(this.distOrCost,"dist") || Objects.equals(this.distOrCost,"cost");
+
+
         if (Objects.equals(this.distOrCost, "dist")) {
             result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
         } else {

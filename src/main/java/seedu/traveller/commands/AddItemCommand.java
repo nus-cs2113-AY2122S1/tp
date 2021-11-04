@@ -1,5 +1,6 @@
 package seedu.traveller.commands;
 
+import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.objects.Day;
 import seedu.traveller.objects.Trip;
 import seedu.traveller.objects.TripsList;
@@ -70,14 +71,19 @@ public class AddItemCommand extends Command {
      * <code>ItemsList</code> of a <code>Day</code>.
      */
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        Trip trip = tripsList.getTrip(getTripName());
-        Day day = trip.getDay(getDayIndex());
-        Item newItem = new Item(getItemTime(), getItemName());
-        assert Objects.equals(newItem.getItemTime(), getItemTime()) :
+        String tripName = getTripName();
+        String itemName = getItemName();
+        String itemTime = getItemTime();
+        int dayIndex = getDayIndex();
+        Trip trip = tripsList.getTrip(tripName);
+        Day day = trip.getDay(dayIndex);
+
+        Item newItem = new Item(itemTime, itemName);
+        assert Objects.equals(newItem.getItemTime(), itemTime) :
                 "Item time in created item and command do not match.";
-        assert Objects.equals(newItem.getItemName(), getItemName()) :
+        assert Objects.equals(newItem.getItemName(), itemName) :
                 "Item name in created item and command do not match.";
         day.addItem(newItem);
-        ui.printAddItemToDay(getTripName(), getDayIndex());
+        ui.printAddItemToDay(tripName, dayIndex);
     }
 }

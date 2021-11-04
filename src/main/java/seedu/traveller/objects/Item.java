@@ -33,6 +33,6 @@ public class Item {
      */
     @Override
     public String toString() {
-        return getItemTime() + "\t\t" + getItemName();
+        return getItemTime() + "  " + getItemName();
     }
 }

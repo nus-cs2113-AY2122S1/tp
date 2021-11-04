@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author Jach23
 public class SearchItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteDayCommand.class.getName());
     private final String tripName;
@@ -56,9 +56,8 @@ public class SearchItemCommand extends Command {
             throw new TripNotFoundException();
         }
 
-        Trip trip = tripsList.getTrip(getTripName());
-        Day day = trip.getDay(getDayIndex());
-
+        Trip trip = tripsList.getTrip(tripName);
+        Day day = trip.getDay(dayIndex);
 
         ArrayList<Item> keyString;
         keyString = day.searchItem(itemKey);
