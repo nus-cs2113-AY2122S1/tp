@@ -1,24 +1,45 @@
 @startuml
-Activate TimetableCommand #FFBBBB
+
+!include SequenceStyle.puml
+
+box Command COMMAND_BOX_COLOR
+participant TimetableCommand as TimetableCommand
+endbox
+
+participant Timetable as Timetable
+
+participant StringBuilder as StringBuilder
+
+box Module MODULE_BOX_COLOR
+participant ModuleManager as ModuleManager MODULE_COLOR
+participant NusModule as NusModule MODULE_COLOR
+endbox
+
+box Content CONTENT_BOX_COLOR
+participant ContentManager as ContentManager CONTENT_COLOR
+participant Link as Link CONTENT_COLOR
+endbox
+
+activate TimetableCommand
 create StringBuilder
 TimetableCommand -> StringBuilder: StringBuilder()
-Activate StringBuilder #FFBBBB
+Activate StringBuilder
 StringBuilder --> TimetableCommand
 Deactivate StringBuilder
 
 create Timetable
 TimetableCommand -> Timetable: Timetable(moduleManager)
-Activate Timetable #FFBBBB
+Activate Timetable
 Timetable --> TimetableCommand
 Deactivate Timetable
 
 
 alt isStringNullOrEmpty(day)
 TimetableCommand -> Timetable: getWeeklySchedule()
-Activate Timetable #FFBBBB
+Activate Timetable
 
 Timetable -> StringBuilder: StringBuilder()
-Activate StringBuilder #FFBBBB
+Activate StringBuilder
 StringBuilder --> Timetable
 Deactivate StringBuilder
 
@@ -31,17 +52,17 @@ Deactivate Timetable
 
 else else
 TimetableCommand -> Timetable: getDailySchedule()
-Activate Timetable #FFBBBB
+Activate Timetable
 
 Timetable -> StringBuilder: StringBuilder()
-Activate StringBuilder #FFBBBB
+Activate StringBuilder
 StringBuilder --> Timetable
 Deactivate StringBuilder
 
 Timetable -> ModuleManager: getAllModules()
-Activate ModuleManager #FFBBBB
+Activate ModuleManager
 NusModule --> ModuleManager: modules
-Activate NusModule #FFBBBB
+Activate NusModule
 
 loop For each NusModule in modules
     ModuleManager -> NusModule: getModule(NusModule)
@@ -51,13 +72,13 @@ loop For each NusModule in modules
 
     NusModule -> ContentManager : getContentManager()
 
-    Activate ContentManager #FFBBBB
+    Activate ContentManager
     Deactivate NusModule
 
         loop For each Link in ContentManager
 
             ContentManager -> Link: getContents()
-            Activate Link #FFBBBB
+            Activate Link
             Deactivate ContentManager
 
             Link->Link: getDay()
@@ -73,13 +94,13 @@ loop For each NusModule in modules
             Link --> Link: description
             Deactivate Link
             Link -> StringBuilder: append(description)
-            Activate StringBuilder #FFBBBB
+            Activate StringBuilder
             Deactivate Link
         end
 
 end
 StringBuilder -> StringBuilder: toString()
-Activate StringBuilder #DarkSalmon
+Activate StringBuilder
 StringBuilder --> StringBuilder: dailySchedule
 Deactivate StringBuilder
 StringBuilder --> Timetable: dailySchedule

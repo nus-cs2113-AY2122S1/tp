@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include ../SequenceStyle.puml
+
+box Command COMMAND_BOX_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
+endbox
+
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Note" as Note CONTENT_COLOR
+endbox
+
+-> AddNoteCommand : execute()
+activate AddNoteCommand
+create Note
+AddNoteCommand -> Note : Note()
+activate Note
+return
+AddNoteCommand -> ContentManager : add(:Note)
+activate ContentManager
+note right : Add the new Note into \nthe arraylist of Note \nin ContentManager.
+return
+return :CommandResult
+
+@enduml

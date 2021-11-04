@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+!include ../SequenceStyle.puml
+
+box Command COMMAND_BOX_COLOR
+participant ":DeleteCommand" as DeleteCommand COMMAND_COLOR
+endbox
+
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Content" as Content CONTENT_COLOR
+endbox
+
+-> DeleteCommand : execute()
+activate DeleteCommand
+DeleteCommand -> ContentManager : deleteContent(contentNumber:int)
+activate ContentManager
+ContentManager -> ContentManager : isNotValidNumber(:int)
+activate ContentManager
+note left : Invalid contentNumber: \ncontentNumber < 1 and \ncontentNumber > the size of arraylist
+return
+alt contentNumber is not valid
+ContentManager --> DeleteCommand : InvalidArgumentException()
+else else
+ContentManager -> Content : getName()
+activate Content
+return
+note left : Remove the Content from \nthe arraylist of Content \nin ContentManager.
+destroy Content
+end
+return deletedContentName:String
+return :CommandResult
+
+@enduml
