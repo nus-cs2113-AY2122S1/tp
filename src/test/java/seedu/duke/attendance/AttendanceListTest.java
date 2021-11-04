@@ -30,10 +30,10 @@ public class AttendanceListTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
-        ianWang = new Member("Ian Wang", "A0234567B", "M", "98441232");
-        glenn = new Member("Glenn", "A0345678C", "M", "91233344");
-        izdiyad = new Member("Izdiyad", "A0456789D", "M", "94376452");
+        teckHwee = new Member("TAN TECK HWEE", "A0123456A", "F", "98765432", true);
+        ianWang = new Member("IAN WANG", "A0234567B", "M", "98441232", true);
+        glenn = new Member("GLENN", "A0345678C", "M", "91233344", true);
+        izdiyad = new Member("IZDIYAD", "A0456789D", "M", "94376452", true);
 
         training1 = new TrainingSchedule("October Friday Weekly Training 1", "MPSH1", "1 Oct 2021");
         training2 = new TrainingSchedule("October Friday Weekly Training 2", "MPSH1", "8 Oct 2021");

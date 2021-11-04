@@ -1,3 +1,5 @@
+//@@author Teckwhye
+
 package seedu.duke.member.exception;
 
 import seedu.duke.member.MemberList;
@@ -23,3 +25,4 @@ public class InvalidMemberException extends Exception {
         this.members = members;
     }
 }
+//@@author
