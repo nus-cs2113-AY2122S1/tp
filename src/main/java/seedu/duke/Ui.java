@@ -142,7 +142,7 @@ public class Ui {
     public static void printCreateFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "create [place] [date] [currency ISO] [exchange rate] [people].");
+                + "create /[place] /[date] /[currency ISO] /[exchange rate] /[people].");
     }
 
     public static void printExpenseFormatError() {
@@ -209,7 +209,7 @@ public class Ui {
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
-        System.out.println("Your expense of " + stringForeignMoney(expenseAmount) + " has been successfully removed");
+        System.out.println("Your expense of " + stringForeignMoney(expenseAmount) + " has been successfully removed.");
     }
 
     public static void printNoExpensesError() {
@@ -283,9 +283,6 @@ public class Ui {
         System.out.println();
     }
 
-    public static void printInvalidDeleteFormatError() {
-        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
-    }
 
     public static void printGetPersonPaid() {
         System.out.print("Who paid for the expense?: ");
@@ -371,7 +368,6 @@ public class Ui {
     }
 
     public static void printJsonParseError() {
-        //todo not sure what this should be
         System.out.println("We couldn't read your save file. It may be corrupted, "
                 + "or may have been wrongly modified outside the program.");
         System.out.println("If you would like to overwrite your current save file and"
