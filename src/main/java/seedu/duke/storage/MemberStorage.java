@@ -28,7 +28,8 @@ public class MemberStorage {
             + "Please fix this before running the program again.";
     static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CCA Members CSV."
             + "Please fix this before running the program again.";
-    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CCA Members CSV."
+    static String duplicateErrorExcelMessage = 
+            "Duplicates name,student number or phone number found in CCA Members CSV."
             + "Please fix this before running the program again.";
 
 
@@ -58,7 +59,7 @@ public class MemberStorage {
     }
 
     /**
-     * verifies that member details from CSV file are valid
+     * verifies that member details from CSV file are valid.
      *
      * @param memberFile CCAMembers CSV file to read data from.
      */
