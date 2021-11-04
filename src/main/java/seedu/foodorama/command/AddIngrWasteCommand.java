@@ -25,7 +25,11 @@ public class AddIngrWasteCommand extends Command {
         String ingredient = String.join(" ", parameters);
         int ingredientIndex;
         if (isNumber(ingredient)) {
-            ingredientIndex = Integer.parseInt(ingredient) - 1;
+            if(isInteger(ingredient)) {
+                ingredientIndex = Integer.parseInt(ingredient) - 1;
+            } else {
+                throw new FoodoramaException(UI.getInvalidIndexMsg());
+            }
         } else {
             ingredientIndex = IngredientList.find(ingredient);
         }
@@ -58,4 +62,14 @@ public class AddIngrWasteCommand extends Command {
             return false;
         }
     }
+
+    public boolean isInteger(String numberString) {
+        if(isNumber(numberString)) {
+            double number = Double.parseDouble(numberString);
+            return Math.rint(number) - number == 0;
+        } else {
+            return false;
+        }
+    }
+
 }

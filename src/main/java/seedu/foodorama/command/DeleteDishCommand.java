@@ -23,8 +23,12 @@ public class DeleteDishCommand extends Command {
         String dish = parameters.get(0);
         int dishIndex;
         if (isNumber(dish)) {
-            dishIndex = Integer.parseInt(parameters.get(0)) - 1;
-            LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
+            if(isInteger(dish)) {
+                dishIndex = Integer.parseInt(parameters.get(0)) - 1;
+                LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
+            } else {
+                throw new FoodoramaException(UI.getInvalidIndexMsg());
+            }
         } else if (!isNumber(dish) & dish.isEmpty()) {
             LOGGER.log(Level.INFO, "Parameter is Empty");
             throw new FoodoramaException(UI.getDishIndexMissingMsg());
@@ -52,6 +56,15 @@ public class DeleteDishCommand extends Command {
             int dishIndex = Integer.parseInt(number) - 1;
             return true;
         } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean isInteger(String numberString) {
+        if(isNumber(numberString)) {
+            double number = Double.parseDouble(numberString);
+            return Math.rint(number) - number == 0;
+        } else {
             return false;
         }
     }

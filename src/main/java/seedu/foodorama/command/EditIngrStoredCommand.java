@@ -22,8 +22,12 @@ public class EditIngrStoredCommand extends Command {
         LOGGER.log(Level.INFO, "Start of process");
         int ingredientIndex;
         if (isNumber(parameters.get(0))) {
-            ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
-            LOGGER.log(Level.INFO, "Parameter is Integer " + ingredientIndex);
+            if(isInteger(parameters.get(0))) {
+                ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
+                LOGGER.log(Level.INFO, "Parameter is Integer " + ingredientIndex);
+            } else {
+                throw new FoodoramaException(UI.getInvalidIndexMsg());
+            }
         } else {
             String ingredientName = String.join(" ", parameters);
             if (ingredientName.isBlank()) {
@@ -45,6 +49,15 @@ public class EditIngrStoredCommand extends Command {
             int ingredientIndex = Integer.parseInt(number) - 1;
             return true;
         } catch (NumberFormatException ignored) {
+            return false;
+        }
+    }
+
+    public boolean isInteger(String numberString) {
+        if(isNumber(numberString)) {
+            double number = Double.parseDouble(numberString);
+            return Math.rint(number) - number == 0;
+        } else {
             return false;
         }
     }

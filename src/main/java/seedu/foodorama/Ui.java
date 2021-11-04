@@ -378,6 +378,10 @@ public class Ui {
             + "The expiry date cannot be set to a date before today." + System.lineSeparator()
             + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
 
+    private static final String INVALID_INDEX = LINE_DIVIDER + System.lineSeparator()
+            + "The index given as input must be an integer" + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public void printLogo() {
         System.out.println(START_LOGO);
     }
@@ -487,6 +491,10 @@ public class Ui {
 
     public String getDishIndexMissingMsg() {
         return DISH_INDEX_MISSING;
+    }
+
+    public String getInvalidIndexMsg() {
+        return INVALID_INDEX;
     }
 
     public String getIngrNotExistEdit() {
