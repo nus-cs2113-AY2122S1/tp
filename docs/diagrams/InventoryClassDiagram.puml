@@ -59,5 +59,5 @@ class "Order"{
 "{abstract}\nMedicine" <|-- "Prescription"
 "{abstract}\nMedicine" <|-- "Order"
 
-note "Note: All the getter and setters are\nleft out in this diagram." as n1
+note "Note: All the getters and setters are\nleft out in this diagram." as n1
 @enduml
