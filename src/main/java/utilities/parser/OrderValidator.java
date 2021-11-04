@@ -7,6 +7,7 @@ import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author deonchung
@@ -111,6 +112,14 @@ public class OrderValidator extends MedicineValidator {
     public boolean isValidDate(Ui ui, String dateString) {
         try {
             DateParser.stringToDate(dateString);
+            Date date = DateParser.stringToDate(dateString);
+            Date todayDate = new Date();
+            String todayDateString = DateParser.dateToString(todayDate);
+            todayDate = DateParser.stringToDate(todayDateString);
+            if (date.after(todayDate)) {
+                ui.print("Invalid date! Input date cannot be after today's date.");
+                return false;
+            }
             return true;
         } catch (Exception e) {
             ui.print("Invalid date! Ensure date is in " + DateParser.OUTPUT_DATE_FORMAT + ".");
