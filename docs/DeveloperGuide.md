@@ -242,7 +242,7 @@ Manage fitness routines quickly
 
 Given below are instructions to test the app manually. 
 
-⚠️ **Note**: These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+>⚠️ **Note**: These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
 
 ### Launch and Shutdown
 
@@ -252,6 +252,22 @@ Given below are instructions to test the app manually.
     - Navigate to the folder where `GetJackd.jar` is saved and run `java -jar GetJackd.jar` in your terminal
 2. Shutdown
     - enter `bye` to exit the app. 
+
+### Clearing all workouts or exercises
+
+1. Clearing all workouts 
+   - Prerequisites: List all workouts using the `list` command. Multiple workouts in list.
+   - Test Case: `clear workout`
+   - Expected: All workouts in the application is deleted. List is empty.
+   - Test Case: `clear workout` inside workout mode
+   - Test Case: `clear workout 1`
+   - Expected: No workouts deleted. Error details shown in the output.
+   - Test Case: `c`
+
+2. Clearing all exercises in a specified workout
+   - Prerequisites: List all exercises in a workout using the `display` command. Multiple exercises in list.
+   - Test Case: `clear exercise 1`
+   - Expected: All exercises in the first indexed workout is deleted. List is empty.
 
 ### Saving data
 

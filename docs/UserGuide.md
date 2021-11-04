@@ -497,12 +497,15 @@ Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
 Example of usage: 
 
-`clear exercise 1` - Clears all the exercises present inside workout 1
-
-`clear workout` - Clears all the workouts present in the application
+- Main Mode: 
+  - `clear exercise 1` - Clears all the exercises present inside workout 1
+  - `clear workout` - Clears all the workouts present in the application
+- Workout Mode: 
+  - `enter 1` then `clear exercise` = Clears all exercises within workout 1
 
 Expected outcome:
 
+Expected outcome (*Main Mode*):
 ```
 clear exercise 1
 ________________________________________________________
@@ -514,6 +517,19 @@ ________________________________________________________
 All workouts have been cleared!
 ________________________________________________________
 ```
+
+Expected outcome (*Workout Mode*): 
+```
+enter 1
+			________________________________________________________
+			Now inside workout 1 : legs
+			________________________________________________________
+clear exercise
+			________________________________________________________
+			All exercises in workout 1 have been cleared!
+			________________________________________________________
+```
+
 
 ### 14. Exiting the application: `bye`
 
