@@ -271,12 +271,21 @@ public class Ui {
         System.out.print("The number you entered is not valid, ");
     }
 
-    public static void emptyArgForDeleteCommand() {
+    public static void emptyArgForDeleteTripCommand() {
         System.out.println();
         System.out.println("Which trip to delete?");
         System.out.println("Syntax: delete [trip number]");
         System.out.println("---------------------------");
         printAllTrips();
+        System.out.println("---------------------------");
+    }
+
+    public static void emptyArgForDeleteExpenseCommand() throws ForceCancelException {
+        System.out.println();
+        System.out.println("Which expense to delete?");
+        System.out.println("Syntax: delete [expense number]");
+        System.out.println("---------------------------");
+        printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         System.out.println("---------------------------");
     }
 

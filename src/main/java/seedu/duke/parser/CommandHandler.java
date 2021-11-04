@@ -68,12 +68,14 @@ abstract class CommandHandler extends CommandExecutor {
             assert inputParams != null;
             executeDelete(inputParams);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("NFE" + e);
             if (Storage.checkOpenTrip()) {
                 Ui.printUnknownExpenseIndexError();
             } else {
                 Ui.printUnknownTripIndexError();
             }
         } catch (IndexOutOfBoundsException e) {
+            System.out.println("OOB" + e);
             if (Storage.checkOpenTrip()) {
                 if (inputParams.equalsIgnoreCase("last")) {
                     Ui.noRecentExpenseError();
@@ -88,7 +90,11 @@ abstract class CommandHandler extends CommandExecutor {
                 }
             }
         } catch (NullPointerException e) {
-            Ui.emptyArgForDeleteCommand();
+            if (!Storage.checkOpenTrip()) {
+                Ui.emptyArgForDeleteTripCommand();
+            } else {
+                Ui.emptyArgForDeleteExpenseCommand();
+            }
         }
     }
 
