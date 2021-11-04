@@ -367,17 +367,21 @@ Searching by ingredient...
 I've got a variety of tagging-related functions, for better organization of your recipes.
 
 #### 9.1 Adding Tags to Recipes: `tag`
+
 > Tag recipes in your cookbook.
 > 
 > #### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+> 
 > * I'll name your tag as defined in `TAG_NAME`
 > * Within a recipe, you are not allowed to have duplicate tag names
 > * You can associate multiple tags to a single recipe in one command
 > 
 > #### Example of usage:
-> `tag / Mee Pok / Hawker Food + Noodles`
-> </br>
- `tag / Duck Rice / Hawker Food + Favorites`
+> 
+> ```
+> tag / Mee Pok / Hawker Food + Noodles
+> tag / Duck Rice / Hawker Food + Favorites
+> ```
 > 
 > #### Expected outcome
 > 
@@ -389,6 +393,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
  
 #### 9.2 Untagging Tags from Recipes: `untag`
+
 > Untag recipes in your cookbook.
 >
 > #### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
@@ -414,6 +419,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.3 Deleting Tags from Cookbook: `deleteTag`
+
 > Delete tags from your cookbook.
 >
 > #### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
@@ -422,6 +428,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * You can delete multiple tags from your Cookbook in one command.
 >
 > #### Example of usage:
+> 
 > `deleteTag / Hawker Food + Noodles`
 > <br>
 > 
@@ -432,12 +439,15 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.4 Find a Recipe by their tag(s): `find`
+
 > Finds recipes by their tag(s)
 >
 > #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
+> 
 > * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
 >
 > #### Example of usage:
+> 
 > Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
 > <br>
 > Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
@@ -447,6 +457,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 >
 > #### Expected outcome
+> 
 > ```
 > Searching by tags...
 > 1. Mee Pok
@@ -457,16 +468,19 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.5 List all your Tags: `listTags`
+
 > List all the tags in your Cookbook.
 >
 > #### Format: `listTags`
 >
 > #### Example of usage:
+> 
 > ```
 > listTags
 > ```
 >
 > #### Expected outcome
+> 
 > ```
 > 1. Hawker Food
 > 2. Noodles
