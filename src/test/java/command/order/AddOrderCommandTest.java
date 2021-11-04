@@ -73,7 +73,7 @@ public class AddOrderCommandTest {
     }
 
     /**
-     * If medicine name exists in Order and in Stock
+     * If medicine name exists in Order and in Stock.
      */
     @Test
     public void addOrderCommand_exceedMaxQuantity_expectInvalid() {
@@ -100,8 +100,8 @@ public class AddOrderCommandTest {
     }
 
     /**
-     * If medicine name exists in Order but not in Stock
-     * There is no max quantity to limit user input quantity
+     * If medicine name exists in Order but not in Stock.
+     * There is no max quantity to limit user input quantity.
      */
     @Test
     public void addOrderCommand_validQuantity_expectValid() {
