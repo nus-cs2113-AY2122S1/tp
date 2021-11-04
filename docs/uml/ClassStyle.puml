@@ -1,0 +1,13 @@
+@startuml
+!define MODULE_COLOR #lightsalmon
+!define CONTENT_COLOR #gold
+!define TERMINUS_COLOR #white
+!define PARSER_COLOR #palegreen
+!define STORAGE_COLOR #mistyrose
+!define ACTIVERECALL_COLOR #lightskyblue
+!define COMMAND_COLOR #violet
+
+skinparam classAttributeIconSize 0
+hide circle
+
+@enduml
