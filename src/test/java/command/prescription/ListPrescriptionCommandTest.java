@@ -40,7 +40,7 @@ public class ListPrescriptionCommandTest {
         Medicine.getInstance().clear();
     }
 
-    public void executeListPrescriptionCommand(String parameter, String parameterValue){
+    public void executeListPrescriptionCommand(String parameter, String parameterValue) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         parameters.put(parameter, parameterValue);
         new ListPrescriptionCommand(parameters).execute();

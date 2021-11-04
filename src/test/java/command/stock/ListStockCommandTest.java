@@ -38,7 +38,7 @@ public class ListStockCommandTest {
         Medicine.getInstance().clear();
     }
 
-    public void executeListStockCommand(String parameter, String parameterValue){
+    public void executeListStockCommand(String parameter, String parameterValue) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         parameters.put(parameter, parameterValue);
         new ListStockCommand(parameters).execute();
