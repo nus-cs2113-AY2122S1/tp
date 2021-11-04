@@ -246,37 +246,36 @@ This process will occur the moment Stonks XD starts to run.
 When loading data,
 1. The main class (StonksXD) will call `loadAll()` which causes `DataManager` to start loading data.
 2. `DataManager` will call `loadSettings()`, to load users' budget values, threshold value and currency setting first.
-3. `DataManager` will look for `StonksXD_Settings.csv` and create a `FileInputStream`. If file cannot be found, a new
-`StonksXD_Settings.csv` will be created and the loading process for settings will end here.
-4. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Settings.csv`.
-5. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
-message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
-6. `Scanner` reads the second line (let's call it `data`) which should contain all the settings. If there is something 
-wrong with the format or there is no second line at all, an error will be shown and the settings will not be loaded.
-7. `Parser` will take in `data` and return the `CurrencyType`.
-8. The `CurrencyType` will then be loaded into `CurrencyManager`.
-9. `Parser` will take in `data` again and return the `thresholdValue`.
-10. The `thresholdValue` will then be loaded into `BudgetManager`.
-11. Now `DataManager` will be loading the users' budget values. (Step 11 to step 13 will not be shown in the sequence 
-diagram below to reduce complexity.)
-12. `Parser` will take in `data` again and return an `ArrayList<double>`. Each double representing the budget value 
-for an expense category.
-13. Each budget value will be loaded into their respective categories in `BudgetManager`.
-14. `DataManager` will now call `loadEntries()`, to load users' expense and income entries.
-15. The process is similar to the loading of settings. (This process is omitted from the sequence diagram to reduce 
-complexity.)
-16. `DataManager` will look for `StonksXD_Entries.csv` and create a `FileInputStream`. If file cannot be found, a new
-    `StonksXD_Entries.csv` will be created and the loading process for settings will end here.
-17. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Entries.csv`.
-18. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
-    message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
-19. `Scanner` will no read line by line till the end of file. For every line, `DataManager` will pass it to `Parser` to 
-attempt to convert it to either an expense or an income. If it can be converted, it will be loaded into 
-`FinancialTracker`. If the line cannot be understood by `Parser`, it will be deemed as a corrupted line, and it will
-not be loaded.
-20. When the end of line is reached, `DataManager` will let the users know if there are any corrupted lines. At this 
-point, all valid entries are loaded already.
-21. Now all entries and settings are loaded. Control is returned to main.
+   1. `DataManager` will look for `StonksXD_Settings.csv` and create a `FileInputStream`. If file cannot be found, a new
+   `StonksXD_Settings.csv` will be created and the loading process for settings will end here.
+   2. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Settings.csv`.
+   3. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
+   message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
+   4. `Scanner` reads the second line (let's call it `data`) which should contain all the settings. If there is something 
+   wrong with the format or there is no second line at all, an error will be shown and the settings will not be loaded.
+   5. `Parser` will take in `data` and return the `CurrencyType`.
+   6. The `CurrencyType` will then be loaded into `CurrencyManager`.
+   7. `Parser` will take in `data` again and return the `thresholdValue`.
+   8. The `thresholdValue` will then be loaded into `BudgetManager`.
+   9. Now `DataManager` will be loading the users' budget values. (this process will not be shown in the sequence 
+   diagram below to reduce complexity)
+   10. `Parser` will take in `data` again and return an `ArrayList<double>`. Each double representing the budget value 
+   for an expense category.
+   11. Each budget value will be loaded into their respective categories in `BudgetManager`.
+3. `DataManager` will now call `loadEntries()`, to load users' expense and income entries (this process is omitted 
+from the sequence diagram to reduce complexity).
+   1. `DataManager` will look for `StonksXD_Entries.csv` and create a `FileInputStream`. If file cannot be found, a new
+      `StonksXD_Entries.csv` will be created and the loading process for settings will end here.
+   2. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Entries.csv`.
+   3. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
+      message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
+   4. `Scanner` will now read line by line till the end of file. For every line, `DataManager` will pass it to `Parser` to 
+   attempt to convert it to either an expense or an income. If it can be converted, it will be loaded into 
+   `FinancialTracker`. If the line cannot be understood by `Parser`, it will be deemed as a corrupted line, and it will
+   not be loaded.
+   5. When the end of line is reached, `DataManager` will let the users know if there are any corrupted lines. At this 
+   point, all valid entries are loaded already.
+4. Now all entries and settings are loaded. Control is returned to main.
 
 The sequence diagram below illustrates the loading process (note that the diagram is not exhaustive).
 
