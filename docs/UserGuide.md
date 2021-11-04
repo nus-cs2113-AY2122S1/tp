@@ -11,9 +11,8 @@ efficient allocation to the cooking of dishes which ultimately saves cost.
 **list** and **find** different dishes and ingredients. What's more, you can also show **graphs** for your statistical
 wastage, and even **link** your ingredients to your dishes for advanced management!
 
-This user guide serves to help you manoeuvre around **Food-O-Rama**, which the **Table of Contents** will be of big help to you, 
-and includes a **List of Commands** for your quick
-reference. We hope you enjoy using *Food-O-Rama*!
+This user guide serves to help you manoeuvre around **Food-O-Rama**, which the **Table of Contents** will be of big help
+to you, and includes a **List of Commands** for your quick reference. We hope you enjoy using *Food-O-Rama*!
 
 | Legend |  Description |
 | --- | --- |
@@ -31,8 +30,8 @@ reference. We hope you enjoy using *Food-O-Rama*!
         * `add dish`: [Add new dish](#add-a-new-dish--add-dish)
         * `add dish waste`: [Add dish wastage](#add-a-dishs-wastage--add-dish-waste)
         * `set dish limit`: [Set a limit for dish wastage](#set-a-limit-for-dish-wastage-set-dish-limit)
-        * `edit dish name`: [Edit a dish's name](#edit-a-dishs-name--edit-dish-name)  
-        * `edit dish waste`: [Edit a dish's wastage](#edit-a-dishs-wastage--edit-dish-waste) 
+        * `edit dish name`: [Edit a dish's name](#edit-a-dishs-name--edit-dish-name)
+        * `edit dish waste`: [Edit a dish's wastage](#edit-a-dishs-wastage--edit-dish-waste)
         * `del dish`: [Delete existing dish](#delete-existing-dish--del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes--list-dish)
     * [Ingredient Commands](#add-new-ingredient--add-ingr)
@@ -40,9 +39,9 @@ reference. We hope you enjoy using *Food-O-Rama*!
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient--add-ingr-stored)
         * `add ingr waste`: [Add an ingredient's wastage](#add-an-ingredients-wastage--add-ingr-waste)
         * `set ingr limit`: [Set a limit for ingredient wastage](#set-a-limit-for-an-ingredients-wastage--set-ingr-limit)
-        * `set ingr expiry`: [Set an expiry date for an ingredient](#set-an-expiry-date-for-an-ingredient--set-ingr-expiry)        
+        * `set ingr expiry`: [Set an expiry date for an ingredient](#set-an-expiry-date-for-an-ingredient--set-ingr-expiry)
         * `edit ingr name`: [Edit an ingredient's name](#edit-an-ingredients-name--edit-ingr-name)
-        * `edit ingr stored` [Edit an ingredient's storage](#edit-an-ingredients-storage--edit-ingr-stored) 
+        * `edit ingr stored` [Edit an ingredient's storage](#edit-an-ingredients-storage--edit-ingr-stored)
         * `edit ingr waste`: [Edit an ingredient's wastage](#edit-an-ingredients-wastage--edit-ingr-waste)
         * `link`: [Link ingredient to dish](#link-ingredient-to-dish--link)
         * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient--del-ingr)
@@ -97,6 +96,7 @@ java -jar Food-O-Rama.jar
 #                  Type a command to get us started, or type help for a list of commands!                      #
 ################################################################################################################
 ```
+
 Congratulations! Now, the **List of Commands** below will teach you how to use all of the *Commands in Food-O-Rama*.
 
 ## 💽 List of Commands
@@ -110,7 +110,8 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 | Edit a *dish's name* | `edit dish name [DISH_NAME]` |
 | Edit a *dish's wastage* | `edit dish waste [DISH_NAME]` |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
-| View existing *dishes* | `list dish`|
+| View existing *dishes* | `list dish` |
+| Generate a random *dish* name | `rdish` |
 | Add a new *ingredient* | `add ingr [INGR_NAME]` |
 | Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]` |
 | Add *ingredient wastage* | `add ingr waste [INGR_NAME]` |
@@ -198,8 +199,7 @@ ____________________________________________________________
 
 Add a new Dish to your Dish list.
 
-*For adding Dishes that you will serve / Dishes on your restaurant's
-menu to Food-O-Rama*.
+*For adding Dishes that you will serve / Dishes on your restaurant's menu to Food-O-Rama*.
 
 Format: `add dish [DISH_NAME]`
 
@@ -229,7 +229,6 @@ Format: `add dish waste [DISH_NAME]`
 
 * 💡 *Note*:  You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
-
 Example of usage:
 
 `add dish waste chicken rice`
@@ -258,8 +257,8 @@ ____________________________________________________________
 
 Set a limit for wastage of an existing dish.
 
-*This is so that you will not have to deal with errors arising from
-having more Dishes wasted than what was prepared initially*.
+*This is so that you will not have to deal with errors arising from having more Dishes wasted than what was prepared
+initially*.
 
 Format: `set dish limit [DISH_NAME]`
 
@@ -290,12 +289,14 @@ The limit for prata is now 3.5 kg
 ____________________________________________________________
 ```
 
-💡 *Note*: 
+💡 *Note*:
 
-* When adding new wastage to the Dish exceeds the limit, you will receive a prompt that the current Dish limit has exceeded.
+* When adding new wastage to the Dish exceeds the limit, you will receive a prompt that the current Dish limit has
+  exceeded.
 * An indicator *(exceeded)* shows the Dish that has exceeded its limit.
 
 Expected outcome:
+
 ```
 ____________________________________________________________
 Enter the weight of prata in kg:
@@ -308,6 +309,7 @@ ____________________________________________________________
 Wastage of prata has exceeded the limit
 ____________________________________________________________
 ```
+
 ```
 ____________________________________________________________
 Here are the dishes you have:
@@ -318,14 +320,15 @@ Here are the dishes you have:
 You can use command 'add' to add new dishes!
 ____________________________________________________________
 ```
+
 <br/>
 
 ### Edit a dish's name : `edit dish name`
 
 Edit the name of an existing dish.
 
-*This is so that you will be able to make changes to a dish's name when there is an update to the menu 
-or a typo to the name of the dish*
+*This is so that you will be able to make changes to a dish's name when there is an update to the menu or a typo to the
+name of the dish*
 
 Format: `edit dish name [DISH_NAME]`
 
@@ -388,14 +391,14 @@ ____________________________________________________________
 
 Edit the wastage of an existing dish.
 
-*This is so that you will be able to make changes to a dish's wastage when resetting or updating
-a new wastage weight.*
+*This is so that you will be able to make changes to a dish's wastage when resetting or updating a new wastage weight.*
 
 Format: `edit dish waste [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
 * ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to edit.
-* 💡 *Note*:  You will be prompted to enter the new dish wastage in the next step, and a confirmation message afterwards.
+* 💡 *Note*:  You will be prompted to enter the new dish wastage in the next step, and a confirmation message
+  afterwards.
 
 Example of usage:
 
@@ -530,12 +533,36 @@ ____________________________________________________________
 
 <br/>
 
+### Generate a random Dish name : `rdish`
+
+Generates a random Dish name from a fixed list of Carbohydrates, Protiens, Sauces and Cooking Methods.
+
+❕ *Tip*:  Useful to give new Dish idea for Restaurant's menu.
+
+Format: `rdish`
+
+* Only requires`rdish`.
+
+Example of usage:
+
+`rdish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here's an idea for a new Dish!
+smoked mustard turkey noodles 
+____________________________________________________________
+```
+
+<br/>
+
 ### Add new ingredient : `add ingr`
 
 Add a new Ingredient to your Ingredient list.
 
-*For adding Ingredients that you have in your Restaurant's
-inventory to Food-O-Rama*.
+*For adding Ingredients that you have in your Restaurant's inventory to Food-O-Rama*.
 
 Format: `add ingr [INGR_NAME]`
 
@@ -645,8 +672,8 @@ ____________________________________________________________
 
 Set a limit for wastage of an existing Ingredient
 
-*This is so that you will not have to deal with errors arising from
-having more Ingredients wasted than what was stored initially*.
+*This is so that you will not have to deal with errors arising from having more Ingredients wasted than what was stored
+initially*.
 
 Format: `set ingr limit [INGR_NAME]`
 
@@ -677,14 +704,15 @@ The limit for chicken is now 7.7 kg
 ____________________________________________________________
 ```
 
-💡 *Note*: 
+💡 *Note*:
 
-When adding new wastage to the Ingredient exceeds the limit,
-you will receive a prompt that the current Dish limit has exceeded.
+When adding new wastage to the Ingredient exceeds the limit, you will receive a prompt that the current Dish limit has
+exceeded.
 
 An indicator *(exceeded)* shows the Ingredient that has exceeded its limit.
 
 Expected outcome:
+
 ```
 ____________________________________________________________
 Enter the weight of chicken in kg:
@@ -697,6 +725,7 @@ ____________________________________________________________
 Wastage of chicken has exceeded the limit
 ____________________________________________________________
 ```
+
 ```
 ____________________________________________________________
 Here are the ingredients you have: 
@@ -738,7 +767,7 @@ Example of usage:
 
 `20/12/2021`
 
-💡 *Note*: 
+💡 *Note*:
 
 * The expiry date must be in the format of `dd/MM/yyyy`.
 * You cannot add a date before the current date on your PC.
@@ -750,8 +779,9 @@ ____________________________________________________________
 The expiry date of 'chicken' has been set to 20/12/2021 (47 day(s) from today)
 ____________________________________________________________
 ```
-💡 *Note*: The number of days shown to expiry is relative to the date set on your PC and does not strictly
-follow the outcome shown above.
+
+💡 *Note*: The number of days shown to expiry is relative to the date set on your PC and does not strictly follow the
+outcome shown above.
 
 <br/>
 
@@ -759,14 +789,15 @@ follow the outcome shown above.
 
 Edit the name of an existing ingredient.
 
-*This is so that you will be able to make changes to an ingredient 's name when there is an update to the menu
-or a typo to the name of the ingredient*
+*This is so that you will be able to make changes to an ingredient 's name when there is an update to the menu or a typo
+to the name of the ingredient*
 
 Format: `edit ingr name [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
-* 💡 *Note*:  You will be prompted to enter the new ingredient name in the next step, and a confirmation message afterwards.
+* 💡 *Note*:  You will be prompted to enter the new ingredient name in the next step, and a confirmation message
+  afterwards.
 
 Example of usage:
 
@@ -823,14 +854,15 @@ ____________________________________________________________
 
 Edit the storage of an existing ingredient.
 
-*This is so that you will be able to make changes to an ingredient's storage when resetting or updating
-a new storage weight.*
+*This is so that you will be able to make changes to an ingredient's storage when resetting or updating a new storage
+weight.*
 
 Format: `edit ingr stored [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
-* 💡 *Note*:  You will be prompted to enter the new ingredient storage in the next step, and a confirmation message afterwards.
+* 💡 *Note*:  You will be prompted to enter the new ingredient storage in the next step, and a confirmation message
+  afterwards.
 
 Example of usage:
 
@@ -887,14 +919,15 @@ ____________________________________________________________
 
 Edit the wastage of an existing ingredient.
 
-*This is so that you will be able to make changes to an ingredient's wastage when resetting or updating
-a new wastage weight.*
+*This is so that you will be able to make changes to an ingredient's wastage when resetting or updating a new wastage
+weight.*
 
 Format: `edit ingr waste [INGR_NAME]`
 
 * Can only be performed on existing `INGR_NAME`
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
-* 💡 *Note*:  You will be prompted to enter the new ingredient wastage in the next step, and a confirmation message afterwards.
+* 💡 *Note*:  You will be prompted to enter the new ingredient wastage in the next step, and a confirmation message
+  afterwards.
 
 Example of usage:
 
@@ -1255,7 +1288,7 @@ Format: `clear ingr`
 * 💡 *Note*: You will be prompted with a confirmation message to delete all ingredients.
     * Enter `y` to confirm deletion.
     * Enter `n` to abort deletion.
-    
+
 Example of usage:
 
 `clear ingr`
@@ -1471,25 +1504,25 @@ Expected Outcome:
 
 ### Saving the data
 
-Food-O-Rama data (*dish and ingredients list*) are saved automatically after any command that changes the data.
-There is no need to save manually.
+Food-O-Rama data (*dish and ingredients list*) are saved automatically after any command that changes the data. There is
+no need to save manually.
 
 <br/>
 
 ### Accessing the data
 
-Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These
-files can be found under the *'Data'* folder in the same directory as the .jar
-file.
+Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These files can be found under the *'Data'*
+folder in the same directory as the .jar file.
 
 <br/>
 
 ### Manipulating the data
 
-Food-O-Rama data can be written manually by editing the text files in *'Data'*.
-Refer to *Instructions for Manual Testing* in the Developer Guide for the appropriate data format.
+Food-O-Rama data can be written manually by editing the text files in *'Data'*. Refer to *Instructions for Manual
+Testing* in the Developer Guide for the appropriate data format.
 
-Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
+Dish
+Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
 
 * 💡 *Note*: `[WASTAGE_LIMIT]` is `-1` when no limit is set.
 
@@ -1509,11 +1542,11 @@ prata|2.0|1.0|3|flour|egg
 Ingredient Format: `[INGR_NAME] | [AMOUNT_STORED_IN_KG] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_LIMIT] | [EXPIRY_DATE]`
 
 * 💡 *Note*:
-  
+
     * `[WASTAGE_LIMIT]` is `-1` when no limit is set.
     * `[EXPIRY_DATE]` follows the format `dd/MM/yyyy`.
-    * `[EXPIRY_DATE]` is `null` when no expiry date is set. 
-    
+    * `[EXPIRY_DATE]` is `null` when no expiry date is set.
+
 Ingredient example of usage:
 
 ```
@@ -1528,15 +1561,15 @@ chicken|2.0|1.0|2.5|30/10/2021
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy the data folder and its contents over to the new computer. 
+**A**: Copy the data folder and its contents over to the new computer.
 
 ## 👋 Final Notes
 
-You have come to the end of the **Food-O-Rama User Guide**. 
+You have come to the end of the **Food-O-Rama User Guide**.
 
-For any further enquiries, please do
-contact us through our contact information found at our [About Us](https://ay2122s1-cs2113t-w11-4.github.io/tp/AboutUs.html)
+For any further enquiries, please do contact us through our contact information found at
+our [About Us](https://ay2122s1-cs2113t-w11-4.github.io/tp/AboutUs.html)
 page.
 
-With Love 💕, <br> 
+With Love 💕, <br>
 the *Food-O-Rama Team*.

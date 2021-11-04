@@ -35,7 +35,7 @@ public class EditDishNameCommand extends Command {
         } else {
             dishIndex = DishList.find(dish);
         }
-        if (dishIndex == -1) {
+        if (!isNumber(dish) & dishIndex == -1) {
             LOGGER.log(Level.INFO, "Dish does not exist");
             throw new FoodoramaException(UI.getDishNotExistMsg(dish));
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {

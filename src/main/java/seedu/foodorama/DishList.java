@@ -101,7 +101,7 @@ public class DishList {
 
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
-        while (isNumber(newName)) {
+        while (isNumber(newName) | isDouble(newName)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidDishName();
             newName = input.nextLine().toLowerCase();
@@ -167,7 +167,16 @@ public class DishList {
 
     public static boolean isNumber(String numberString) {
         try {
-            int numberInteger = Integer.parseInt(numberString) - 1;
+            int numberInteger = Integer.parseInt(numberString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isDouble(String numberString) {
+        try {
+            Double numberDouble = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;
