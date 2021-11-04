@@ -44,7 +44,7 @@ public class StatYearCommand extends StatCommand {
     }
 
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         double amount;
 
         double[] barPercentage;

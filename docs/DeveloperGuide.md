@@ -34,7 +34,10 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 At app launch, **`BudgetTracker`** is in charge of initializing the components and linking them by passing some 
-initialized components into others as parameters. (e.g. an initialized variable of `Data` is passed into an initialized variable of `Storage`)
+initialized components into others as parameters. 
+
+For example, an initialized variable of `Data` is passed into an initialized variable of `Storage` for
+the `Storage` component to load hard disk information into the memory.
 
 [**`Commons`**](#common-classes) consists of the exception classes for exception handling and messages used by other classes.
 
@@ -42,13 +45,15 @@ The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component): The User Interface of the App -- Reads User Input and displays queried data.
 * [**`Logic`**](#logic-component): Parses User Input and executes the corresponding command.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Data`**](#data-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add -e m/1 a/500`.
+
+![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
 ## Implementation
 ### Delete feature

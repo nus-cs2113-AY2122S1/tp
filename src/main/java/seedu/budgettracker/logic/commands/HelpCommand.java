@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
         System.out.println(DIVIDER);
     }
 
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         printHelp();
     }
 }

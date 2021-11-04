@@ -2,8 +2,12 @@ package seedu.budgettracker.common;
 
 public class Messages {
 
-    public static final String MESSAGE_INVALID_AMOUNT = "Amount entered is invalid\n%1$s";
+    public static final String MESSAGE_INVALID_EXPENDITURE_AMOUNT = "Amount entered must be greater than 0.";
+    public static final String MESSAGE_INVALID_BUDGET_AMOUNT = "Amount entered must be greater than or equals to 0.";
     public static final String MESSAGE_INVALID_DATE = "Date entered is invalid\n%1$s";
+    public static final String MESSAGE_INVALID_YEAR = "The date entered belongs to a year outside of your"
+            + "current storage file. \n"
+            + "Please use the \"year\" command to switch to the correct storage file before trying again.";
     public static final String MESSAGE_INVALID_INDEX_OF_EXPENDITURE = "Index of expenditure entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_MONTH = "Month entered should be in the range of 1 to 12";
     public static final String MESSAGE_INVALID_MONTH_OF_BUDGET = "Month of budget entered is invalid\n%1$s";

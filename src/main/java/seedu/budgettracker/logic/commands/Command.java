@@ -1,6 +1,7 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.AllRecordList;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 
 /**
  * Basic command that other commands extend off of.
@@ -8,7 +9,7 @@ import seedu.budgettracker.data.AllRecordList;
 public abstract class Command {
     protected AllRecordList allRecordList;
 
-    public abstract void execute(boolean isLoadingStorage);
+    public abstract void execute() throws CommandException;
 
     public void setAllRecordList(AllRecordList allRecordList) {
         this.allRecordList = allRecordList;
@@ -17,4 +18,6 @@ public abstract class Command {
     public boolean isExit() {
         return this instanceof ExitCommand;
     }
+
+
 }

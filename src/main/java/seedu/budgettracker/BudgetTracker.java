@@ -5,6 +5,7 @@ import java.lang.String;
 
 import seedu.budgettracker.logic.commands.Command;
 import seedu.budgettracker.data.AllRecordList;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.logic.parser.Parser;
 import seedu.budgettracker.storage.Storage;
 import seedu.budgettracker.ui.TextUi;
@@ -39,7 +40,7 @@ public class BudgetTracker {
         for (int i = 0; i < recordList.getLoanListSize(dateMonthNow); i++) {
             recordList.getLoan(i,dateMonthNow).setDueDate();
             if (dateNow.isAfter(recordList.getLoan(i,dateMonthNow).getDueDate())) {
-                textUi.showLoanReminder(loanCounter, recordList.getLoan(i, dateMonthNow));
+                TextUi.showLoanReminder(loanCounter, recordList.getLoan(i, dateMonthNow));
                 loanCounter++;
             }
         }
@@ -72,13 +73,16 @@ public class BudgetTracker {
                 String userInput = textUi.getUserInput();
                 Command command = parser.parseCommand(userInput);
                 command.setAllRecordList(recordList);
-                command.execute(false);
+                command.execute();
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(MESSAGE_INVALID_INPUT);
                 TextUi.printDivider();
             } catch (NullPointerException npe) {
                 System.out.println(MESSAGE_INVALID_MONTH);
+                TextUi.printDivider();
+            } catch (CommandException ce) {
+                System.out.println(ce.getMessage());
                 TextUi.printDivider();
             }
         }
