@@ -1,0 +1,44 @@
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+--> ":Parser": setParse()
+activate ":Parser"
+
+' Name
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
+
+":Parser" -> ":FindIngredientsCommand": FindIngredientsCommand(ArrayList<String> ingredients)
+activate ":FindIngredientsCommand"
+
+":FindIngredientsCommand" -> ":Cookbook" : filterByIngredients(ArrayList<String> ingredients)
+activate ":Cookbook"
+
+":Cookbook" -> ":Recipe": containsIngredients(ArrayList<String> ingredients)
+activate ":Recipe"
+
+":Recipe" --> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" --> ":FindIngredientsCommand"
+destroy ":Cookbook"
+
+":FindIngredientsCommand" --> ":Parser"
+destroy ":FindIngredientsCommand"
+
+destroy ":Parser"
+
+@enduml
