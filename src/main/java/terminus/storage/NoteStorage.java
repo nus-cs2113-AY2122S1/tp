@@ -100,8 +100,7 @@ public class NoteStorage extends Storage {
         ContentManager<Note> contentManager = moduleManager.getModule(module).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfNoteFiles) {
-            String fileName = CommonUtils.getFileNameOnly(file.getName());
-            if (isValidTextFile(file) && CommonUtils.isValidFileName(fileName)) {
+            if (isValidNote(file, contentManager)) {
                 addAndFilterNote(file, contentManager);
             }
         }
@@ -124,6 +123,26 @@ public class NoteStorage extends Storage {
         } catch (Exception e) {
             // Ignore all exception and skip the file
         }
+    }
+
+    /**
+     * Checks the validity of the given file.
+     *
+     * @param file The file to be checked.
+     * @param noteContentManager The content manager of Note.
+     * @return True if the file is a valid note data, otherwise false.
+     */
+    private boolean isValidNote(File file, ContentManager<Note> noteContentManager) {
+        String fileName = CommonUtils.getFileNameOnly(file.getName());
+        boolean isValid = true;
+        if (!isValidTextFile(file)) {
+            isValid = false;
+        } else if (!CommonUtils.isValidFileName(fileName)) {
+            isValid = false;
+        } else if (noteContentManager.isDuplicateName(fileName)) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     /**
