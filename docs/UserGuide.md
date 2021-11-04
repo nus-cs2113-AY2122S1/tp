@@ -49,9 +49,12 @@ After entering `content`, user can type an integer from 1-3 to choose from follo
 1. Opening of famous books
 2. Wikipedia article
 3. Random sentence of custom length
-<!-- input example -->
+
+<!-- input example --> 
+
 Examples
 * `content` `1` `3`
+
 <!-- -->
 
 ### Open Game: `game`
@@ -67,11 +70,15 @@ Format: `game GAME_MODE [-c]`
 * For Time Limit Game:
   * Format: `game -t TIME_LIMIT [-sn] [-c]`
   * START_NOW `-sn` allows user to start the game immediately without the "ready to start?" prompt.
+
 <!-- -->
+
 Examples
 * `game -t 30 -sn` 
 * `game -w -c`
+
 <!-- --> 
+
 
 
 ### View past records: `history`
@@ -79,11 +86,15 @@ View past game records.
 Format: `history -g GAME_MODE [-n NUMBER_OF_RECORDS] [-h]`
 * NUMBER_OF_RECORDS defaults to all records if not provided
 * Possible arguments for GAME_MODE are - `word` or `time`
-<!-- -->
+
+<!-- --> 
+
 Examples
 * `history -g time -n 10`
-* `history -g word`
-<!-- -->
+* `history -g word`  
+
+<!-- --> 
+
 Example of usage
 ```
 history -g time -n 1
@@ -106,11 +117,15 @@ Clear all past game records
 Format: `clear [-g GAME_MODE] [-h]`
 * GAME_MODE defaults to `all` if not provided
 * Possible arguments for GAME_MODE are - `word`, `time` or `all`
-<!-- -->
+
+<!-- --> 
+
 Examples
 * `clear -g time`
 * `clear`
-<!-- -->
+
+<!-- --> 
+
 Example of usage
 ```
 clear -g time
@@ -133,7 +148,9 @@ The summary consists of the following fields:
 * Number of wrong words and its percentage
 * Number of correct words and its percentage
 * Wrongly and not typed words (Mistakes)
-<!-- -->
+
+<!-- --> 
+
 Example of usage
 ```
    _____ __  ____  _____  ______    ______  __
