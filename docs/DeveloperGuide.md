@@ -28,6 +28,8 @@
   * [4.4 Adding and Deleting Content]()
   * [4.5 Storage](#45-storage-implementation)
     + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
+    + [4.5.2 Loading Storage](#452-loading-storage-implementation)
+    + [4.5.3 Execute CommandResult with Storage](#453-execute-commandresult-with-storage-implementation)
 - [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
 - [Appendix B: User Stories ](#appendix-b-user-stories)
@@ -691,6 +693,70 @@ requirements from the execution of a `Command`.
 
 **Chosen Solution:** Separate file I/O operation by the type of file involved first which is the solution of
 StorageType first. This means that each Storage type have a higher decoupling from one another.
+
+### 4.6 Adding Content Implementation
+
+This section details the technical information of adding a `Content` into `ContentManager`.
+
+#### 4.6.1 Current Implementation
+
+![](attachments/AddingContentSequenceDiagram.png)
+
+> 📝 **Note:** For the other `Content` type such as `Question` and `Schedule`, they follow the same logic
+> flow as the diagram shown above. Simply replace the `AddNoteCommand` and `Note` to their respective 
+> `Content` type.
+
+**Step 1:** When the `AddNoteCommand` receives the call to `execute()` from the `CommandParser`, it will
+proceed to add the new `Note` into its `ContentManager`.
+
+**Step 2:** Firstly, it will create a new `Note` object with the specified arguments for it.
+
+**Step 3** Next, `AddNoteCommand` will pass the newly created `Note` object into `ContentManager` for it to 
+store in its arraylist of `Note`.
+
+**Step 4** Upon, the successful execution of adding the new `Note` into `ContentManager`, it will return a `CommandResult` with
+its respective message for user `Ui` response purposes.
+
+#### 4.6.2 Design Consideration
+
+**Aspect: Checks arguments in ContentManager or the AddCommand.**
+
+| Approach                           | Pros                                                                      | Cons                                                                      |
+|------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Checks argument in AddCommand.     | Ease the workload on ContentManager.                                      | Add command can no longer be a generic command used by all Content types. |
+| Checks argument in ContentManager. | Command do not need to understand the criteria of a valid Content object. | Introduces a lengthy if-else for each Content type in Terminus.           |
+
+**Chosen Solution:** To validate arguments in the AddCommand instead. This is due to the generic type of
+`ContentManager` that may lead to nested conditions if the arguments are checked within the `ContentManager`.
+
+### 4.7 Deleting Content Implementation
+
+This section details the technical information of deleting a `Content` from `ContentManager`.
+
+#### 4.7.1 Current Implementation
+
+![](attachments/DeletingContentSequenceDiagram.png)
+
+**Step 1:** When the `DeleteCommand` receives the call to `execute()` it will proceed to remove the
+specified `Content` by its **content number** from the `ContentManager`.
+
+**Step 2:** Within `ContentManager`, it will check if the provided **content number** is within range
+of the arraylist.
+
+**Step 3:** Once the `Content` has been removed from the arraylist, it will return the removed `Content` name
+for user `Ui` response purposes.
+
+#### 4.7.2 Design Consideration
+
+**Aspect: To pass the content number as the exact index in the arraylist or the index viewed from the view command.**
+
+| Approach                          | Pros                                                                                                                                                                | Cons                                                                                                                            |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Pass by array index.              | Generic use of `deleteContent()` could be possible for any other `Command` that requires a removal of a certain `Content`.                                          | Could be confusing as the arraylist is not known only to the `DeleteCommand`.                                                   |
+| Pass by content number from view. | All indexes used in Terminus will be retrieved from the view command, hence the content number is the only number involved in any `Command` that requires an index. | Internal usage to remove an element in the arraylist could not use the `deleteContent()` unless it adds a 1 to the given index. |
+
+**Chosen Solution:** To avoid the mixing up of content number and array index, we decided to pass the content number
+into `ContentManager` where it will subtract the given number by 1 to get the index number for the arraylist.
 
 ## 5. Documentation, Logging, Testing and DevOps
 

@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam sequenceMessageAlign center
+
+box Command #thistle
+participant ":AddNoteCommand" as AddNoteCommand #violet
+endbox
+
+box Content #goldenrod
+participant ":ContentManager" as ContentManager #gold
+participant ":Note" as Note #gold
+endbox
+
+-> AddNoteCommand : execute()
+activate AddNoteCommand
+create Note
+AddNoteCommand -> Note : Note()
+activate Note
+return
+AddNoteCommand -> ContentManager : add(:Note)
+activate ContentManager
+note right : Add the new Note into \nthe arraylist of Note \nin ContentManager.
+return
+return :CommandResult
+
+@enduml
