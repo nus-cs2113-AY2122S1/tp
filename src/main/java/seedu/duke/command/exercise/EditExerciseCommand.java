@@ -25,18 +25,18 @@ public class EditExerciseCommand extends Command {
             + "Parameters:\n"
             + "\tExercise index - Index of exercise to edit\n"
             + "\tWorkout index - Index of workout containing exercise to edit\n"
-            + "Example: " + COMMAND_WORD + " 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
-            + "from workout 2";
+            + "Example: " + COMMAND_WORD + " 1, 2, Lunges, 5 10 - edit exercise 1 in workout 2 to Lunges of 5 sets "
+            + "and 10 reps";
 
     public static final String MESSAGE_USAGE_WORKOUT_MODE = COMMAND_WORD
             + ": Edits the exercise in the workout the user is currently in.\n"
             + "Format: edit [exercise index], [new Description], [sets and reps]\n"
             + "Parameters:\n"
             + "\tExercise index - Index of exercise to edit\n"
-            + "Example: " + COMMAND_WORD + " 1, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
-            + "from the current workout";
+            + "Example: " + COMMAND_WORD + " 1, Lunges, 5 10 - edit exercise 1 in the current workout to "
+            + "Lunges of 5 sets and 10 reps ";
 
-    public static final String MESSAGE_SUCCESS = "The edited exercise: %1$s";
+    public static final String MESSAGE_SUCCESS = "The edited exercise in workout %d : %s";
 
     private static final Logger LOGGER = Logger.getLogger(EditExerciseCommand.class.getName());
 
@@ -98,7 +98,7 @@ public class EditExerciseCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toEdit));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, workoutIndex, toEdit));
         } catch (IndexOutOfBoundsException e) {
             LOGGER.info("Edit exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);

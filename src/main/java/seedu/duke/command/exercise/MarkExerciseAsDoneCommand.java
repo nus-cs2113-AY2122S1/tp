@@ -33,7 +33,7 @@ public class MarkExerciseAsDoneCommand extends Command {
             + "\tExercise index - Index of exercise to mark done\n"
             + "Example: " + COMMAND_WORD + " 1  - Mark exercise 1 from the current workout as done";
 
-    public static final String MESSAGE_SUCCESS = "Completed: %s";
+    public static final String MESSAGE_SUCCESS = "Completed exercise in workout %d : %s";
 
     private static final Logger LOGGER = Logger.getLogger(MarkExerciseAsDoneCommand.class.getName());
 
@@ -72,7 +72,7 @@ public class MarkExerciseAsDoneCommand extends Command {
 
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkDone));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, workoutIndex, toMarkDone));
 
         } catch (IndexOutOfBoundsException e) {
             LOGGER.info("Set exercise as done failed - exercise not found");

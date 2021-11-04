@@ -34,7 +34,7 @@ public class HelpCommand extends Command {
             + "\"recommend\" : Recommends workouts of a given difficulty\n"
             + "\"display\" : Shows all the exercises in a specified workout\n"
             + "\"edit\" : Edits a specific exercise in a specified workout\n"
-            + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
+            + "\"search\" : Displays workouts or exercises that contain the specified keyword or date\n"
             + "\"clear\" : Clears all exercises in a specified workout or all workouts in the list\n"
             + "\"bye\" : Ends the program";
 
