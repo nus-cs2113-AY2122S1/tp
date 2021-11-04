@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,9 +52,11 @@ public class SaveLoader {
 
     /**
      * The main function of writing the save file.
-     * It is called at the end when Traveller closes.
+     * It is called at the end when Traveller closes and when any input is given.
+     * @param status Status can either be "run" or "exit" as called for in Traveller main() and run(),
+     *     so that it will only print to the command line when exiting.
      */
-    public void writeSave() {
+    public void writeSave(String status) {
         try {
             if (!hasDirectory()) {
                 createDir();
@@ -62,7 +65,10 @@ public class SaveLoader {
         } catch (IOException | TravellerException e) {
             ui.printError(e.getMessage());
         }
-        ui.printLine();
+        if (status.equals("exit")) {
+            ui.printWriteSave();
+            ui.printLine();
+        }
     }
 
     /**
@@ -136,7 +142,6 @@ public class SaveLoader {
         logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Writing data to " + filePath);
         FileWriter fw = new FileWriter(filePath);
-        ui.printWriteSave();
         for (int i = 0; i < tripsList.getSize(); i++) {
             Trip current = tripsList.getTrip(i);
             fw.write(current.getSaveTrip());
