@@ -42,6 +42,14 @@ class ClearParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof IncorrectCommand);
     }
+    
+    @Test
+    void parseInput_emptyWorkoutIndexWhenInsideWorkout_returnsClearCommand() {
+        Command.workoutMode = 1;
+        parser = new ClearParser("clear exercise   ");
+        result = parser.parseInput();
+        assertTrue(result instanceof ClearCommand);
+    }
 
     @Test
     void parseInput_InvalidInputs_returnsIncorrectCommand() {

@@ -38,4 +38,11 @@ class CreateWorkoutParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof IncorrectCommand);
     }
+    
+    @Test
+    void parseInput_missingWorkoutNameButValidDeadline_returnsIncorrectCommand() {
+        parser = new CreateWorkoutParser("create , 2021-12-25");
+        result = parser.parseInput();
+        assertTrue(result instanceof IncorrectCommand);
+    }
 }
