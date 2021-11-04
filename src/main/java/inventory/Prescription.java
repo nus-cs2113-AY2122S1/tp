@@ -94,15 +94,17 @@ public class Prescription extends Medicine {
     }
 
     public String toFileFormat() {
-        String fileFormat = getPrescriptionId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
-                + getCustomerId() + "|" + DateParser.dateToString(getDate()) + "|" + getStaff() + "|" + getStockId();
+        String fileFormat = getPrescriptionId() + "|" + getMedicineName().toUpperCase() + "|" + getQuantity() + "|"
+                + getCustomerId().toUpperCase() + "|" + DateParser.dateToString(getDate()) + "|"
+                + getStaff().toUpperCase() + "|" + getStockId();
         return fileFormat;
     }
 
     public String toArchiveFormat() {
         String archiveFormat = "[PRESCRIPTION ID: " + getPrescriptionId() + "] " + getQuantity() + " "
-                + getMedicineName() + " [STOCK ID: " + getStockId() + "] WAS PRESCRIBED BY " + getStaff().toUpperCase()
-                + " TO " + getCustomerId().toUpperCase() + " ON " + DateParser.dateToString(getDate());
+                + getMedicineName().toUpperCase() + " [STOCK ID: " + getStockId() + "] WAS PRESCRIBED BY "
+                + getStaff().toUpperCase() + " TO " + getCustomerId().toUpperCase() + " ON "
+                + DateParser.dateToString(getDate());
         return archiveFormat;
     }
 
