@@ -99,16 +99,16 @@ public class Parser {
                 return deleteTagParse();
             } else if (parsedCommand.equalsIgnoreCase(CHECK_PROMPT)) {
                 return new CheckCommand(parseName(line));
-            } else if (line.equalsIgnoreCase(LIST_RECIPES_PROMPT)) {
-                return new ListRecipesCommand(LIST_RECIPES_PROMPT);
-            } else if (line.equalsIgnoreCase(LIST_TAGS_PROMPT)) {
-                return new ListRecipesCommand(LIST_TAGS_PROMPT);
+            } else if (parsedCommand.equalsIgnoreCase(LIST_RECIPES_PROMPT)) {
+                return listRecipesParse(LIST_RECIPES_PROMPT);
+            } else if (parsedCommand.equalsIgnoreCase(LIST_TAGS_PROMPT)) {
+                return listRecipesParse(LIST_TAGS_PROMPT);
             } else if (parsedCommand.equalsIgnoreCase(SET_PROMPT)) {
                 return setParse();
             } else if (parsedCommand.equalsIgnoreCase(FIND_PROMPT)) {
                 return findParse();
             } else if (parsedCommand.equalsIgnoreCase(HELP_PROMPT)) {
-                return new HelpCommand();
+                return helpParse();
             } else if (parsedCommand.equalsIgnoreCase(TAG_PROMPT)) {
                 return addTagParse();
             } else if (parsedCommand.equalsIgnoreCase(UNTAG_PROMPT)) {
@@ -237,7 +237,21 @@ public class Parser {
         return new AddCommand(r);
     }
 
-    public DeleteRecipeCommand deleteRecipeParse() throws GordonException {
+    public ListRecipesCommand listRecipesParse(String type) throws GordonException {
+        if (line.contains(" ")) {
+            throw new GordonException(GordonException.LISTHELP_COMMAND_INVALID);
+        }
+        return new ListRecipesCommand(type);
+    }
+
+    public HelpCommand helpParse() throws GordonException {
+        if (line.contains(" ")) {
+            throw new GordonException(GordonException.LISTHELP_COMMAND_INVALID);
+        }
+        return new HelpCommand();
+    }
+
+    public Command deleteRecipeParse() throws GordonException {
         nameRecipe = parseName(line);
         String inputIndex = line.contains(" ") ? line.substring(line.indexOf(" ") + 1) : " ";
         if (inputIndex.isEmpty() || inputIndex.equals(" ")) {

@@ -259,7 +259,7 @@ public class ParserTest {
                 + "1. Cook egg" + System.lineSeparator()
                 + "2. Boil noodles" + System.lineSeparator()
                 + "3. Serve" + System.lineSeparator()
-                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator();
+                + "GordonException: Too many parameters, type 'help' for more info" + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 
