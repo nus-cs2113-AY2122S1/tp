@@ -1,23 +1,43 @@
 # User Guide
-* [Introduction](#introduction)
-* [Quick Start](#quick-start)
-* [Features](#features)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
+3. [Features](#3-features)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
-## Introduction 
+## 1. Introduction 
 
-Typist is a CLI typing game. 
+Welcome to Typist! The ultimate CLI typing game!  
+Go to [Quick Start](#quick-start) to get started!
 
-## Quick Start
+## 2. Quick Start
 
-{Give steps to get started quickly}
+1. Ensure that you have Java 11 installed in your local environment.
+2. Down the latest version of `Typist` from [here](https://github.com/AY2122S1-CS2113-T13-4/tp/releases).
+3. Navigate to the folder containing the jar file and run `java -jar tp.jar`.
+4. If everything goes well, the command interface should display the following:
+```
+     | Typist - Version 2.0
+     | ===========================================================
+     |   ______            _      __
+     |  /_  __/_  ______  (_)____/ /_
+     |   / / / / / / __ \/ / ___/ __/
+     |  / / / /_/ / /_/ / (__  ) /_
+     | /_/  \__, / .___/_/____/\__/
+     |     /____/_/
+     | Welcome to Typist -- the ultimate cli typing game.
+     | Brought to you by -- AY2122S1-CS2113-T13-4.
+     | Manual:
+     | content: set the content
+     | game -time: start a new time game
+     | game -word: start a new word game
+     | history -g GAME_MODE [-n NUMBER_OF_RECORDS]: view past game records
+     | clear [-g GAME_MODE]: clear all game records
+     | bye: exit typist
+     | ===========================================================
+```
 
-1. Ensure that you have Java 11 or above installed. 
-2. Down the latest version of `Typist` from [here](http://link.to/duke).
-3. Navigate to the folder containing the jar file and run `java -jar tp.jar`
-
-## Features
+## 3. Features
 
 ### Notes about the command format:
 
@@ -37,10 +57,8 @@ ignored and the guide for that command will be displayed.
 e.g `history -g time -h -n 10` will be interpreted as `history -h`.
 * All parameters which do not conform to the command syntax will be ignored.  
 e.g.2 `clear -gtime` will be interpreted as `clear`
-### Usage
-### Open Game
 
-### Set Content: `content`
+### 3.1 Set Content: `content`
 Set the typing content before the game.  
 Format: `content` `1-3` `[optional]`
 
@@ -54,23 +72,81 @@ Examples
 * `content` `1` `3`
 <!-- -->
 
-### Open Game: `game`
-Start a typing game.
-Format: `game GAME_MODE [-c]`
-* SET_CONTENT `-c` is optional, it allows user to set input content before game starts.
+### 3.2 Open Game: `game`
+Start a typing game.  
+Format: `game -GAME_MODE [GAME_LIMIT] [-c] [-sn]`
+
 * GAME_MODE 
-  * `-word` for game in Word Limit Mode 
-  * `-time` for game in Time Limit Mode
-* For Word Limit Game:
-  * Format: `game -word [-c]`
-  * Exit: `Exit` allows user to terminate the current game.
-* For Time Limit Game:
-  * Format: `game -time TIME_LIMIT [-sn] [-c]`
-  * START_NOW `-sn` allows user to start the game immediately without the "ready to start?" prompt.
+  * `word` for game in Word Limit Mode 
+  * `time` for game in Time Limit Mode
+#### 3.2.1 Word Limit Game
+* Format: `game -word [WORD_LIMIT] [-c] [-sn]`
+* Example: `game -word`
+* ```
+  game -word 
+     | Enter how many words you want the game to run: 
+  10
+     | Timer will start once you entered "start":
+  start
+     | Lorem Ipsum is simply dummy
+  ```
+* Exit: `Exit` allows user to terminate the current game.
+
+#### 3.2.2 Time Limit Game
+* Format: `game -time [TIME_LIMIT] [-c] [-sn]`
+* Example: `game -time`  
+* ```
+  game -time
+     | Enter how long you want the game to run:
+  60
+     | Timer will start once you entered "start":
+  start
+     | Lorem Ipsum is simply dummy text of the printing and
+  ```
+
+#### Optional arguments
+* SET_CONTENT `-c`: allows user to set input content before game starts.
+* START_NOW `-sn`: allows timer to start immediately without the "start timer" prompt.
+* GAME_LIMIT: integer that sets the word/time limit of the game 
+ without the "enter limit" prompt.
+  > **NOTE**:
+  > if you want to specify GAME_LIMIT, it needs to be right after the GAME_MODE argument.
+
 <!-- -->
-Examples
-* `game -time 30 -sn` 
-* `game -word -c`
+
+Example 1: `game -time 30`  
+Expected outcome: 
+```
+game -time 30
+     | Timer will start once you entered "start": 
+start
+     | Lorem Ipsum is simply dummy text of the printing and 
+```
+Example 2: `game -time 30 -sn`  
+Expected outcome:
+```
+game -time -sn 
+     | Enter how long you want the game to run: 
+30
+     | Lorem Ipsum is simply dummy text of the printing and 
+```
+Example 3: `game -word -c`  
+Expected outcome: 
+```
+(\ 
+\'\ 
+ \'\     __________  
+ / '|   ()_________)
+ \ '/    \ ~~~~~~~~ \
+   \       \ ~~~~~~   \
+   ==).      \__________\
+  (__)       ()__________)
+     | Content selection (input 0 to go back): 
+     | 1. Opening of famous books 
+     | 2. Wikipedia article 
+     | 3. Random sentence of custom length 
+     | Enter your selection:  
+```
 <!-- --> 
 
 
