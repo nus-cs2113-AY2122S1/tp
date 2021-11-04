@@ -20,10 +20,13 @@
      - Stores a list of `Recipe` objects, in the form of `RecipeList`
      - Stores a list of `IngredientStorage`, in the form of `IngredientRepository`
  - Each `Recipe` has its ingredients and respective quantities stored in `IngredientQuantity`
- - The `Ingredient Storage` separates a specific ingredient into batches of quantities, 
+ - The `IngredientStorage` separates a specific ingredient into batches of quantities, 
    according to the expiry date.
  - `Ingredient` stores the information of the ingredients, which are its name and unit, 
    e.g. Chicken and grams.
+- Each command takes an `Ingredient Repository` and a `RecipeList` as an input to modify the ingredients and recipes
+  based on the command.
+
 
 ### Parser
 
@@ -142,6 +145,8 @@ all ingredients exist in the `Ingredient Repository`.
 
 ![](diagrams/AddRecipe.png)
 
+> **Note**: The lifeline for `AddRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+
  `Recipe` checks if an ingredient exists in the `Ingredient Repository` before
  adding the ingredient into the `Recipe`. If it doesn't exist, `Recipe` adds 
  the ingredient into the `Ingredient Repository` without any quantity and expiry date, 
@@ -168,6 +173,8 @@ Here is the sequence diagram for how delete recipe works if the `Recipe` exists 
 
 ![](diagrams/DeleteRecipe.png)
 
+> **Note**: The lifeline for `DeleteRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+
 > **Note** : If the `Recipe` doesn't exist in the `RecipeList`, an error will be returned.
 
 <br/>
@@ -181,6 +188,8 @@ Here is the sequence diagram for how cooked recipe works if the amount of ingred
 is sufficient to be deducted.
 
 ![](diagrams/CookedRecipe.png)
+
+> **Note**: The lifelines for `CookedRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
 
 The feature leaves the responsibility of dealing with expired ingredients to the user, and
 will remove ingredients starting from the earliest batch of ingredients. (ingredients that 
@@ -203,6 +212,8 @@ have.
 Here is the sequence diagram for how list recipe user can cook works
 
 ![](diagrams/ListRecipesUserCanCook.png)
+
+> **Note**: The lifelines for `ListRecipesUserCanCookComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
 
 The feature will indicate that the `Recipe` can be cooked even if some of the ingredients have
 expired. However, it will inform the user that there are expiring ingredients. The responsibility
@@ -254,4 +265,42 @@ To help young adults who are living in their own home keep track of ingredients 
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+1. Initial launch
+    1. Download the [jarfile](https://github.com/AY2122S1-CS2113-T16-3/tp/releases) of the latest release and copy it into an empty folder.
+    2. For Windows, launch Command Prompt and navigate to the folder that contains the jar file
+    3. Type `java -jar fileName.jar`, where `fileName` is the name of the jar file.
+       Expected: Shows the welcome message of the application
+
+2. Shutdown
+    1. Type `bye`
+       Expected: the program exits.
+
+### Add a recipe
+1. Add a recipe 
+    1. Prerequisite: 
+    The ingredient "Chicken" and "Salt" exist in the IngredientRepository. The recipe "Chicken Soup" doesn't exist in the RecipeList.
+    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20`
+       Expected: Recipe added. Details of the recipe added shown. Number of recipes in the RecipeList shown.
+    3. Test case: `add recipe` <br/>
+    Expected: No recipe added, Details of error shown.
+    4. Other incorrect add recipe commands to try `add recipe r/1 i/Chicken q/1`,`add recipe r/Chicken Soup i/1 q/1`,`...` <br/>
+   Expected: Similar to previous.
+    
+
+2. Add a recipe when the recipe already exists.
+    1. Prerequisite: The recipe "Chicken Soup" exists in the RecipeList.
+    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20`
+       Expected: No recipe added. Details of the error are shown.
+
+
+3. Add a recipe with zero quantity for an ingredient.
+    1. Test case: `add recipe r/Chicken Soup i/Chicken q/0 i/Salt q/20`
+       Expected: No recipe added. Details of the error are shown.
+
+
+4. Add a recipe with some ingredients having no quantity or vice versa.
+   1. Test case: `add recipe r/Chicken Soup i/Chicken i/Salt q/20` <br/.
+     Expected: No recipe added. Details of the error are shown, command usage message is shown.
+   2. Test case: `add recipe r/Chicken Soup q/1 i/Salt q/20` <br/>
+    Expected: Similar to previous.

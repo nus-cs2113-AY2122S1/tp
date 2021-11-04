@@ -1,16 +1,38 @@
 @startuml
-'https://plantuml.com/component-diagram
+'https://plantuml.com/class-diagram
+!include style.puml
 
+class ExpiryEliminator
 
-component "Data" {
-  [IngredientStorage] o--> "1"[Ingredient]
-  [IngredientRepository] o--> "*" [IngredientStorage]
-  [IngredientQuantity] o--> "1" [Ingredient]
-  [Recipe] o--> "*" [IngredientQuantity]
-  [RecipeList] o--> "*" [Recipe]
+component Data {
+class Recipe {
+    -name: String
+    +Recipe(name: String)
 }
 
-XYZCommand ..> [RecipeList]
-XYZCommand ..> [IngredientRepository]
 
+class IngredientStorage {
+    -quantity: int
+    -ingredientBatches: TreeMap<LocalDate, Integer>
+}
+
+class IngredientQuantity {
+    -quantity: int
+}
+class IngredientRepository
+class RecipeList
+class Ingredient {
+    -name: String
+    -unit: String
+}
+}
+IngredientStorage o--> "1"Ingredient
+IngredientRepository o--> "*" IngredientStorage
+IngredientQuantity o--> "1" Ingredient
+Recipe o--> "*" IngredientQuantity
+RecipeList o--> "*" Recipe
+Recipe ..> IngredientRepository
+
+ExpiryEliminator o--> "1"IngredientRepository
+ExpiryEliminator o--> "1"RecipeList
 @enduml
