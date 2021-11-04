@@ -93,8 +93,7 @@ public class AddOrderCommandTest {
         Command command = new AddOrderCommand(parameters);
         command.execute();
 
-        String expectedOutput = "Order for Panadol exists.\n"
-                + "Unable to add order as total order quantity exceeds maximum stock quantity of 100.\n"
+        String expectedOutput = "Unable to add order as total order quantity exceeds maximum stock quantity of 100.\n"
                 + "Existing quantity in stock: 50\n" + "Pending order quantity: 50";
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
     }
