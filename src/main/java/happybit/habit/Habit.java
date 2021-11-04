@@ -186,8 +186,8 @@ public class Habit {
      *
      * @return Statistics of habit's completion.
      */
-    public int[] getListStatistics() {
-        int[] statistics = new int[4];
+    public double[] getListStatistics() {
+        double[] statistics = new double[4];
         statistics[COMPLETION_RATE_INDEX] = computeHabitCompletionRate();
         statistics[COMPLETED_INDEX] = computeNumOfCompletedIntervals();
         statistics[REMAINING_INDEX] = computeNumOfRemainingIntervals();
@@ -201,10 +201,10 @@ public class Habit {
      *
      * @return Completion rate of habit.
      */
-    public int computeHabitCompletionRate() {
+    public double computeHabitCompletionRate() {
         int numOfCompletedIntervals = computeNumOfCompletedIntervals();
         int totalIntervals = getTotalIntervals();
-        return (int)((double)(numOfCompletedIntervals) / totalIntervals * 100);
+        return (double)(numOfCompletedIntervals) / totalIntervals * 100;
     }
 
     /**
