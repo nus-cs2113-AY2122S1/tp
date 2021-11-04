@@ -13,81 +13,98 @@ Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addre
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Architecture
 
-![](../docs/team/Images/Architecture.png)
+![](Architecture.drawio.png)
 
 The __Architecture Diagram__ above explains the high-level design of the StonksXD app.
 Given below is a quick overview of the main components of the application and how they interact with each other:
+<br>
 
 `Ui` is the class responsible for interfacing with the user. 
 It receives user input and passes it to`StonksXD`.
 It also receives data from `Command` to output to the user.
 
-`Ui` &rarr; `StonksXD`
+`User` &harr; `Ui` &rarr; `StonksXD`
 
 `Ui` &larr; `Command`
 
+<br>
 
 `StonksXD` is the main class of the app. It has 2 main functions: 
-1. Upon opening the app, it loads saved data from `DataManager`. Before closing the app, it pushes save data to `DataManager`.
+1. Upon opening the app, it loads saved data by calling `DataManager`. Before closing the app, it calls `DataManager` again to save data.
 2. Runs a loop receiving new user input from `Ui` and passing it to `Parser`.
 
-`Ui` &rarr; `StonksXD` &rlarr; `DataManager`
+`StonksXD` &rarr; `DataManager`
 
-`StonksXD` &rarr; `Parser`
+`Ui` &rarr; `StonksXD` &rarr; `Parser`
 
+<br>
 
 `Parser` is the class responsible for interpreting the user input. 
 It ensures the appropriate input format, and passes the input data to the appropriate command.
 
 `StonksXD` &rarr; `Parser` &rarr; `Command`
 
+<br>
 
 `Command` is the class responsible for the execution of all commands.
 It contains child classes for all possible commands.
 It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output.
 
-`Parser` &rarr; `Command` &rlarr; `FinancialTracker`
+`Parser` &rarr; `Command` &harr; `FinancialTracker`
 
-`Parser` &rarr; `Command` &rlarr; `BudgetManager`
+`Parser` &rarr; `Command` &harr; `BudgetManager`
 
-`Ui` &rlarr; `Command`
+`Ui` &larr; `Command`
 
+<br>
 
 `FinancialTracker` is the class containing and handling all income and expense entries input by the user.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
 
-`Command` &rlarr; `FinancialTracker`
+`Command` &harr; `FinancialTracker`
 
-`FinancialTracker` &rarr; `DataManager`
+`FinancialTracker` &harr; `DataManager`
 
+<br>
 
 `BudgetManager` is the class containing and handling all budget information.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
 
-`Command` &rlarr; `BudgetManager`
+`Command` &harr; `BudgetManager`
 
-`BudgetManager` &rarr; `DataManager`
+`BudgetManager` &harr; `DataManager`
 
+<br>
 
-`DataManager` is the class responsible for reading data from the `StonksXD_data.csv` file upon boot up,
-and writing save data to the file before terminating the program.
-It receives data from `FinancialTracker` and `BudgetManager` and interacts with `StonksXD`.
+`DataManager` is the class responsible for reading data from the `StonksXD_entries.csv` and `StonksXD_budget.csv` files upon boot up,
+and writing save data to the files before terminating the program.
+It interacts with `FinancialTracker` and `BudgetManager` and receives commands from `StonksXD`.
 
-`FinancialTracker` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+`FinancialTracker` &harr; `DataManager`
 
-`BudgetManager` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+`BudgetManager` &harr; `DataManager`
 
-`StonksXD` &rlarr; `DataManager` &rlarr; `StonksXD_data.csv`
+`DataManager` &larr; `StonksXD_data.csv`
 
 
 The sections below provide more information on the respective components.
+
+---
 
 ### Ui Component
 Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
-![img_1](https://user-images.githubusercontent.com/69465661/138105673-1d21722d-0f77-4dcf-86d6-d38bffc08a40.png)
+The image below illustrates the sequence diagram in the context of listing methods
+which includes listExpense, listIncome and listFind.
+
+
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/69465661/138629733-63b2a115-5405-4af5-8a74-4d18f51c8f96.png)
+
+---
 
 ### Command Component
 
@@ -101,7 +118,72 @@ The image below shows the sequence diagram of how the `AddExpenseCommand` class 
 
 ![img_2.png](AddExpenseCommandSD.drawio.PNG)
 
+### Budget Component
+
+The Budget component consists mainly of the `BudgetManager` class and the `Budget` class.
+
+<br>
+
+The `BudgetManager` class is the main class containing all methods relating to budget operations.
+On the other hand, the `Budget` class is the parent class of all the budget categories. 
+There are currently 7 child classes of `Budget` (i.e. 7 legal budget categories in the program).
+
+<br>
+
+How the Budget compoment works:
+- Upon start-up, a new `BudgetManager` is initialised in `StonksXD`.
+- `BudgetManager` initialises all `Budget` sub-classes with respective budget limit values loaded from `DataManager`.
+- When an entry is added by the user, `BudgetManager` parses the category input by the user and calls the relevant `Budget` sub-class.
+- The `handleBudget` method is performed on the `Budget` sub-class.
+- The relevant budgeting information is then sent to the `Ui` class for printing.
+
+<br>
+
+Below is a sequence diagram of the Budget component when `handleBudget` is executed:
+![](BudgetComponent.drawio.png)
+
 _------Work in Progress------_
+
+---
+
+### Graphing Component
+Below is a class diagram to show the classes that interacts with StonksGraph. When the ShowGraphCommand is called it would call the execute method
+which calls the constructor of StonksGraph to generate a graph based on current year values, these values are calculated based on the data in FinancialTracker.
+The constructed StonksGraph will then be printed out by the Ui class through the printGraph method.
+
+#### Class Diagram
+
+![](ClassDiagramForGraph.png)
+
+In the following section all coordinates will be in the form of (Row from the top, Column from the left) and coordinates mark with X is a don't care.
+
+Description of graphing component
+1. The graphing component consists mainly of the StonksGraph class which contains a 20 by 100 2d array.
+2. When first initialised, the StonksGraph constructor will call setBorder() which will loop through the 2d array and set
+   all border characters as the given border character 'x' while keeping the others as the char blank.
+3. It then calculates the balance of the financial tracker using the calculateBalance() method and write the value with its descriptor starting from coordinate (2,4).
+4. Next it calls the drawReport() method, first it writes the title "Your Yearly Report" at coordinate (5,4).
+   Then it writes the separator at (6,X), followed by a legend at (2,75) the top right. It also writes the x-axis with its month labels.
+5. It then calls the getMonthlyIncomeBreakdown(currentYear()) and getMonthlyExpenseBreakdown(currentYear()) methods to retrieve all total expenses and total incomes
+   for the current year when the user is using the app.
+6. Using this 24 data set in total (12months for both expenses and incomes) it will calculate the scale for each bar unit
+7. Then it plots the bar graph based on whichever column it looped through using the drawBar() method.
+
+---
+
+
+Below is a sequential diagram for the constructor of StonksGraph that shows the different method calls when a new StonksGraph object is instantiated.
+
+
+
+#### Sequential Diagram
+
+
+
+![](SequenceDiagramForGraphConstructor.png)
+
+---
+
 
 ### Data Saving Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 

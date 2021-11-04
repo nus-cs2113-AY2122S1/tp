@@ -7,31 +7,45 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.HelpCommand;
+import seedu.commands.budget.SetThresholdCommand;
+import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
+import seedu.commands.currency.CurrencyType;
+import seedu.commands.general.ShowGraphCommand;
+import seedu.commands.income.AddIncomeCommand;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.general.HelpCommand;
 import seedu.commands.InvalidCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.expense.ListExpenseCommand;
+import seedu.commands.income.ListIncomeCommand;
+import seedu.commands.income.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.BlankCurrencyTypeException;
 import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidSettingsDataException;
+import seedu.utility.BudgetManager;
+import seedu.utility.CurrencyManager;
+import seedu.utility.FinancialTracker;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class ParserTest {
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String DATA_SEPARATOR = ",";
-    
+    private static final int TOTAL_EXPENSE_CATEGORY = 7;
+
     @Test
     public void parseCommand_validHelpCommand_returnHelpCommand() {
         Parser testParser = new Parser();
@@ -100,7 +114,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_ex      i/12a              ");
         InvalidCommand test = (InvalidCommand) underTest; 
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer.", test.getMessage());
     }
 
     @Test
@@ -144,7 +158,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in i/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer.", test.getMessage());
     }
 
     @Test
@@ -243,4 +257,109 @@ public class ParserTest {
             () -> testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR 
                     + "SALARY" + "|" + "11/11/2121"));
     }
+    
+    @Test
+    public void convertSettingsToData_validSettings_validData() {
+        BudgetManager testBudgetManager = new BudgetManager();
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            testBudgetManager.setBudget(12, category);
+        }
+        testBudgetManager.setThreshold(0.2);
+        Parser testParser = new Parser();
+        FinancialTracker financialTracker = new FinancialTracker();
+        CurrencyManager currencyManager = new CurrencyManager();
+        String testData = testParser.convertSettingsToData(testBudgetManager, currencyManager);
+        assertEquals("SGD,0.2,12.0,12.0,12.0,12.0,12.0,12.0,12.0", testData);
+        
+    }
+    
+    @Test
+    public void convertDataToBudgetSettings_validData_validBudgets() throws InvalidSettingsDataException {
+        String testData = "SGD,0.1,12.0,12.0,12.0,12.0,12.0,12.0,12";
+        Parser parser = new Parser();
+        ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
+        for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
+            assertEquals(12, testBudgets.get(i));
+        }
+    }
+    
+    @Test 
+    public void convertDataToCurrencySetting_validData_validCurrency() throws InvalidCurrencyTypeException, 
+            InvalidSettingsDataException, BlankCurrencyTypeException {
+        String testData = "SGD,0.0,12.0,12.0,12.0,12.0,12.0,12.0,12";
+        Parser parser = new Parser();
+        CurrencyType currency = parser.convertDataToCurrencySetting(testData);
+        assertEquals(currency.toString(), "SGD");
+    }
+    
+    @Test
+    public void addExpenseWithDate_validInput_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_ex d/asf a/10 c/food D/11/11/2021";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddExpenseCommand.class);
+    }
+
+    @Test
+    public void addIncomeWithDate_validInput_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_in d/asf a/10 c/salary D/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddIncomeCommand.class);
+    }
+
+    @Test
+    public void betweenIncome_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_in s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void betweenExpense_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_ex s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void parseAddExpenseCommand_invalidExpenseValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d/food a/1000000000.001 c/food");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseAddIncomeCommand_invalidIncomeValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_in d/salary a/1000000000.0011 c/salary");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validThresholdInput_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("set_threshold t/0.5");
+        assertSame(SetThresholdCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validClearAllCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("clear_all_entries");
+        assertSame(ClearAllEntriesCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph");
+        assertSame(ShowGraphCommand.class, underTest.getClass());
+    }
+    
 }

@@ -17,6 +17,10 @@ public abstract class Entry {
         return this.value;
     }
 
+    public void setValue(double newValue) {
+        this.value = newValue;
+    }
+
     public LocalDate getDate() {
         return this.date;
     }
