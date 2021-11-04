@@ -185,15 +185,15 @@ Below is a sequential diagram for the constructor of StonksGraph that shows the 
 ---
 
 
-### Data Saving Component
+### Data storage Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
-`StonksXD_Entries.csv` and `StonksXD_Budget.csv`, which are located in the same directory as the program. 
+`StonksXD_Entries.csv` and `StonksXD_Settings.csv`, which will be located in the same directory as the program. 
 
 - `StonksXD_Entries.csv` will be storing users' income and expense entries.
-- `StonksXD_Budget.csv` will be storing users' budget settings.
+- `StonksXD_Settings.csv` will be storing users' budget values, threshold value and currency setting.
 
-`DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui` and `BudgetManager` at the moment of 
-creation. 
+`DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui`, `CurrencyManager` and `BudgetManager` 
+at the moment of creation. 
 
 - When saving data into the csv files, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
 interact with the csv file.
@@ -205,28 +205,80 @@ The image below illustrates the class diagram in the context of data saving and 
 ![img_3.png](DataManagerCD.drawio.png)
 
 
-`DataManager` has 2 main objectives which are to save data into csv files and load data from csv files. The sequence of
-saving and loading are the same for both `StonksXD_Entries.csv` and `StonksXD_Budget.csv`. Because of this, we will 
-only be showing sequence diagrams in the context of saving and loading entries.
+#### Saving
+This process will occur after every user command to ensure data security.
 
 When saving data,
-1. A `FileWriter` will be created first and be used to create a `BufferedWriter`.
-2. The header, that consist of all the categories, will be witten into the csv file.
-3. DataManager will obtain all current entries and incomes and write them to the file line by line.
+1. The main class (StonksXD) will call `saveAll()` which causes `DataManager` to start saving data.
+2. `DataManager` will call `saveEntries()`, to save all the expense and income entries into `StonksXD_Entries.csv` 
+first.
+3. A `FileWriter` to `StonksXD_Entries.csv` is created. A `BufferedWriter` is then created using the created 
+`FileWriter`. Using `BufferedWriter` should make the saving process more efficient since multiple writes will 
+take place. 
+4. The `csv` header will be written to `StonksXD_Entries.csv`. 
+The header: entry_type,entry_description,amount,category,date
+5. `DataManager` will obtain all the expenses that Stonks XD is tracking from `FinancialTracker`.
+6. For each expense, it will be converted to a `String` with each field being separated by a comma in `Parser`.
+The `String` will then be written to `StonksXD_Entries.csv`.
+7. Repeat step 5 and step 6 for incomes. (This process is omitted in the sequence diagram as it is 
+a repeat.)
+8. Close the `BufferedWriter` and return from `saveEntries()`, deleting both the `FileWriter` and `BufferedWriter`.
+9. `DataManager` will now call `saveSettings()`, to save the users' budget values, threshold value and currency setting 
+into `StonksXD_Settings.csv`. (This process will be shown in a separate sequence diagram to reduce complexity 
+and confusion. The steps will carry on after showing the sequence diagrams.)
 
-The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Entries.csv`.
+The sequence diagrams below illustrate the saving process (note that the diagrams are not exhaustive).
 
 ![img_4.png](SavingFeatureSD.drawio.png)
 
+10. Create a `FileWriter` to `StonksXD_Settings.csv`. Followed by the `BufferedWriter`.
+11. The `csv` header will be written to `StonksXD_Settings.csv`.
+The header: currency,threshold,food,transport,medical,bills,entertainment,misc,overall
+12. The users' budget values, threshold value and currency setting will be converted to a `String` with each 
+important field separated by a comma in `Parser`. The `String` will then be written to `StonksXD_Settings.csv`.
+13. Close the `BufferedWriter` and return from `saveSettings()`, deleting both the `FileWriter` and `BufferedWriter`.
+14. Now all entries and settings are saved. Control is returned to main.
+
+
+#### Loading
+This process will occur the moment Stonks XD starts to run.
+
 When loading data,
-1. -Work in progress-
+1. The main class (StonksXD) will call `loadAll()` which causes `DataManager` to start loading data.
+2. `DataManager` will call `loadSettings()`, to load users' budget values, threshold value and currency setting first.
+3. `DataManager` will look for `StonksXD_Settings.csv` and create a `FileInputStream`. If file cannot be found, a new
+`StonksXD_Settings.csv` will be created and the loading process for settings will end here.
+4. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Settings.csv`.
+5. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
+message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
+6. `Scanner` reads the second line (let's call it `data`) which should contain all the settings. If there is something 
+wrong with the format or there is no second line at all, an error will be shown and the settings will not be loaded.
+7. `Parser` will take in `data` and return the `CurrencyType`.
+8. The `CurrencyType` will then be loaded into `CurrencyManager`.
+9. `Parser` will take in `data` again and return the `thresholdValue`.
+10. The `thresholdValue` will then be loaded into `BudgetManager`.
+11. Now `DataManager` will be loading the users' budget values. (Step 11 to step 13 will not be shown in the sequence 
+diagram below to reduce complexity.)
+12. `Parser` will take in `data` again and return an `ArrayList<double>`. Each double representing the budget value 
+for an expense category.
+13. Each budget value will be loaded into their respective categories in `BudgetManager`.
+14. `DataManager` will now call `loadEntries()`, to load users' expense and income entries.
+15. The process is similar to the loading of settings. (This process is omitted from the sequence diagram to reduce 
+complexity.)
+16. `DataManager` will look for `StonksXD_Entries.csv` and create a `FileInputStream`. If file cannot be found, a new
+    `StonksXD_Entries.csv` will be created and the loading process for settings will end here.
+17. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Entries.csv`.
+18. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
+    message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
+19. `Scanner` will no read line by line till the end of file. For every line, `DataManager` will pass it to `Parser` to 
+attempt to convert it to either an expense or an income. If it can be converted, it will be loaded into 
+`FinancialTracker`. If the line cannot be understood by `Parser`, it will be deemed as a corrupted line, and it will
+not be loaded.
+20. When the end of line is reached, `DataManager` will let the users know if there are any corrupted lines. At this 
+point, all valid entries are loaded already.
+21. Now all entries and settings are loaded. Control is returned to main.
 
-The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Entries.csv` into the 
-program.
-
--Work in progress-
-
-
+The sequence diagram below illustrates the loading process (note that the diagram is not exhaustive).
 
 
 
