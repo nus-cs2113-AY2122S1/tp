@@ -704,8 +704,8 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 ## Appendix C: Non Functional Requirements  
 
-1. The application should work on major operating systems (OS) such as Windows and Linux that have `Java 11` installed.
-2. Users with fast typing speed should be able to accomplish tasks more easily and faster as compared to using mouse.
+1. The application should work on any _major operating systems_ (OS) such as Windows,Linux and macOS that have `Java 11` installed.
+2. Users with fast typing speed should be able to add and remove content more easily and faster as compared to using mouse.
 3. The application should be easy to learn and use with the User Guide and/or Developer Guide.
 4. The application should be responsive to user input.
 
