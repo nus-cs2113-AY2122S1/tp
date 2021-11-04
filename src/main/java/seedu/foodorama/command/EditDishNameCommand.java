@@ -54,9 +54,9 @@ public class EditDishNameCommand extends Command {
     }
 
 
-    public boolean isNumber(String number) {
+    public boolean isNumber(String numberString) {
         try {
-            int dishIndex = Integer.parseInt(number) - 1;
+            double number = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;

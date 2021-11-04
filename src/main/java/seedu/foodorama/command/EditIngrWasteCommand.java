@@ -54,12 +54,11 @@ public class EditIngrWasteCommand extends Command {
         LOGGER.log(Level.INFO, "End of process.");
     }
 
-
-    public boolean isNumber(String number) {
+    public boolean isNumber(String numberString) {
         try {
-            int ingredientIndex = Integer.parseInt(number) - 1;
+            double number = Double.parseDouble(numberString);
             return true;
-        } catch (NumberFormatException ignored) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
