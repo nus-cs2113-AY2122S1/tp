@@ -336,7 +336,7 @@ Enter date of expense:
 ````
 - The date must follow the format of dd-mm-yyyy.
 - Pressing the enter key without keying in anything will use the current date.
-- If the expense only has one person involved, the expense will be automatically added as the rest of the expense portion is redundant.
+- If the expense only has one person involved, the steps below will be skipped and the expense will be automatically added.
 
 PayMeBack will then ask for the name of the person who paid for the expense:
 ````
