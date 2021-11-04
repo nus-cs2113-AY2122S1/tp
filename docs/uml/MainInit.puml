@@ -1,14 +1,14 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-!include style.puml
-box "Main" #whitesmoke
-participant ":Terminus" as Terminus #white
+!include SequenceStyle.puml
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
-box "Storage" #lightpink
-participant ":StorageManager" as StorageManager #mistyrose
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
 endbox
-box "Module" #coral
-participant ":ModuleManager" as ModuleManager #lightsalmon
+box "Module" MODULE_BOX_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
 endbox
 
 autoactivate on

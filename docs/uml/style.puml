@@ -1,8 +1,0 @@
-@startuml
-hide footbox
-
-skinparam sequenceMessageAlign center
-skinparam DefaultTextAlignment center
-skinparam Shadowing false
-skinparam SequenceGroupBodyBackGroundColor ffffff90
-@enduml

@@ -1,11 +1,11 @@
 @startuml
+!include ClassStyle.puml
 !includesub Module.puml!MODULEMANAGER
 !includesub ParserClassDiagram.puml!COMMANDPARSER
 
-skinparam classAttributeIconSize 0
-hide circle
+
 !startsub COMMAND
-abstract class "{abstract}\nCommand" as Command  {
+abstract class "{abstract}\nCommand" as Command COMMAND_COLOR {
   # arguments: String
   - moduleName: String
   + {abstract} getFormat(): String
@@ -15,13 +15,13 @@ abstract class "{abstract}\nCommand" as Command  {
 
 }
 !endsub
-class "XYZCommand" {
+class XYZCommand COMMAND_COLOR {
   + execute(moduleManager: ModuleManager): CommandResult
   + getHelpMessage(): String
   + getFormat(): String
 }
 
-class CommandResult {
+class CommandResult COMMAND_COLOR {
 
   # newCommandParser: CommandParser
   # hasChange: boolean

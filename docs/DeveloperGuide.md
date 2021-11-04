@@ -500,39 +500,48 @@ The `ModuleWorkspaceCommandParser` is a special `CommandParser` that sets the `m
 attribute for all the subsequent commands, so that they become aware of what module they are 
 modifying.
 
-To explain the concept, more clearly we will be explaining how the  input from the user
+To explain the concept, more clearly we will be explaining how the input from the user
 `go Module note add "Content Name" "Content"` will be executed.
 
 ![](attachments/CommandExecution.png)
 
 **Step 1:** After receiving the user input in `Terminus`, `MainCommandParser` is called to parse the input 
 with the `parseCommand` function which return the specific `Command` class. In this case `GoCommand` 
-is returned. It will then call the `GoCommand`'s `execute` function to run the command. 
-Note the remaining arguments is `Module note add "Content Name" "Content"`
+is returned. The Command Parsers function by stripping commands down layer by layer. Note the 
+remaining arguments is `Module note add "Content Name" "Content"`. The `GoCommand` will execution 
+will be shown in `Go Execution` below.
 
-**Step 2:** The `GoCommand` validates the Module name stored as the `arguments` attribute of 
+![](attachments/GoCommandExecution.png)
+
+**Step 2:** The `GoCommand` executes and validates the module name stored as the `moduleName` attribute of 
 the `GoCommand` and sets the workspace of the stored `commandMap` with the value of the module name.
 This is done so via the `setWorkspace` function, and for this scenario the workspace for
-`ModuleWorkspaceCommandParser` is set. 
-Note the remaining arguments is `note add "Content Name" "Content"` and the module name is `Module`
+`ModuleWorkspaceCommandParser` is set. Note the remaining arguments is 
+`note add "Content Name" "Content"` and the module name is `Module`.
 
 **Step 3:** Similar to step 1 but with a different `CommandParser`, the 
 `ModuleWorkspaceCommandParser` parses the remaining arguments from `GoCommand` as a command 
 and sets the `NoteCommand`'s `moduleName` attribute to the value of the module name stored in its 
-workspace. It then executes the `NoteCommand` `execute` function. 
+workspace. It then runs the `NoteCommand` `execute` function. 
 Note the remaining arguments is `add "Content Name" "Content"` and the module name is `Module`
 > 📝 **Note:** If the remaining arguments is empty, `ModuleWorkspaceCommandParser` will be stored 
 > inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its 
-> `commandParser` with `ModuleWorkspaceCommandParser`, changing the workspace.
+> `commandParser` with `ModuleWorkspaceCommandParser`, changing the workspace. This would be the 
+> same as running the command `go Module` without any further arguments.
+
+
+![](attachments/NoteCommandExecution.png)
 
 **Step 4:** Similar to step 1, the `NoteCommand` `setsModule` for the `NoteCommandParser` that is 
 stored in the `commandMap` attribute and parses the remaining arguments 
 `add "Content Name" "Content"` which results in a `AddNoteCommand`. The `execute` function of 
 `AddNoteCommand` performs the needed modification to the `NusModule` for the module with the name 
-`Module`. The `execute` function then returns a `CommandResult` that is propagated to `Terminus`.
+`Module`(This is not shown to prevent confusion). The `execute` function then returns 
+a `CommandResult` that is propagated to `Terminus`.
 > 📝 **Note:** If the remaining arguments is empty, `NoteCommandParser` will be stored
 > inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its
-> `commandParser` with `NoteCommandParser`, changing the workspace.
+> `commandParser` with `NoteCommandParser`, changing the workspace. This would be the
+> same as running the command `go Module note` without any further arguments.
 
 #### 4.3.2 Design considerations
 This section shows the design considerations that were taken into account when implementing 
@@ -548,7 +557,7 @@ Custom commands and Command Parsers should be easy for others to implement.
 
 Eventually the team decide to go with the second implementation, as we require multi-level 
 workspaces and would like to create our own workspace for each feature. Aside from that the 
-`Command` provide common functionality that many commands need hence reducing repetition of code.
+`Command` provides common functionality that many commands need hence reducing repetition of code.
 
 
 ### 4.4 Conflict Manager Implementation

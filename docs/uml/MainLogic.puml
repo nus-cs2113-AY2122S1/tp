@@ -1,21 +1,21 @@
 @startuml
-!include style.puml
+!include SequenceStyle.puml
 
-box "Main" #whitesmoke
-participant ":Terminus" as Terminus #white
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
-box "UI" #bisque
+box "UI" UI_BOX_COLOR
 participant ":Ui" as Ui
 endbox
-box "Parser" #aquamarine
-participant ":CommandParser" as CommandParser #palegreen
+box "Parser" PARSER_BOX_COLOR
+participant ":CommandParser" as CommandParser PARSER_COLOR
 endbox
-box "Command" #thistle
-participant ":Command" as Command #violet
-participant ":CommandResult" as CommandResult #violet
+box "Command" COMMAND_BOX_COLOR
+participant ":Command" as Command COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
 endbox
-box "Storage" #lightpink
-participant ":StorageManager" as StorageManager #mistyrose
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
 endbox
 autoactivate on
 
@@ -45,7 +45,7 @@ return
           return CommandParser
           Terminus -> Ui:printParserBanner(parser, moduleManager)
           return
-        else
+        else else
           Terminus -> Ui:printSection(commandResult.getMessage())
           return
         end

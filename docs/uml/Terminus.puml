@@ -1,13 +1,14 @@
 @startuml
-!include style.puml
-box "Main" #whitesmoke
-participant ":Terminus" as Terminus #white
+!include SequenceStyle.puml
+
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
 endbox
-box "UI" #bisque
+box "UI" UI_BOX_COLOR
 participant ":Ui" as Ui
 endbox
-box "Parser" #aquamarine
-participant ":MainCommandParser" as CommandParser #palegreen
+box "Parser" PARSER_BOX_COLOR
+participant ":CommandParser" as CommandParser PARSER_COLOR
 endbox
 
 autoactivate on
