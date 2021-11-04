@@ -4,11 +4,10 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
-import seedu.duke.training.TrainingList;
+import seedu.duke.member.exception.InvalidMemberException;
 import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
@@ -71,22 +70,6 @@ public class Parser {
         return arg.trim().toLowerCase().contains("bye");
     }
 
-    public static boolean isValidPhone(String phone) {
-        if (phone.contains("[a-zA-Z]+")) {
-            return false;
-        } else {
-            return phone.length() == 8;
-        }
-    }
-
-    public static boolean isValidGender(String gender) {
-        return (gender.toLowerCase().matches("m") ||  gender.toLowerCase().matches("f"));
-    }
-
-    public static boolean isValidName(String name) {
-        return !name.matches(".*\\d.*");
-    }
-
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
      *
@@ -146,8 +129,8 @@ public class Parser {
     }
 
     /**
-     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command
-     * is called.
+     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command is
+     * called.
      *
      * @param attendanceList full list of attendance sheet.
      * @param entry          user raw data input.
@@ -222,45 +205,68 @@ public class Parser {
      * Creates Member class by input given by user.
      *
      * @param entry user raw data input.
+     * @param type  provide 'A' if adding member and provide 'E' if editing member
      * @return Member according to user input.
      */
-    public static Member getMemberDetails(String entry) {
+    public static Member getMemberDetails(String entry, char type) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
 
         String[] words = entry.trim().split(regex);
-        int parameterSize = words.length;
+        String lastParameter = "";
         String name = "";
         String studentNumber = "";
         String gender = "";
         String phoneNumber = "";
 
+        Member memberdetails = null;
         int wordIndex = 1;
-        while (matcher.find()) {
-            boolean overParameterSize = wordIndex >= parameterSize;
-            if (overParameterSize) {
-                break;
+        try {
+            while (matcher.find()) {
+                lastParameter = matcher.group();
+                switch (matcher.group()) {
+                case "/n":
+                    name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (name.equals("")) {
+                        throw new InvalidMemberException("Please do not give empty name");
+                    }
+                    break;
+                case "/s":
+                    studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (studentNumber.equals("")) {
+                        throw new InvalidMemberException("Please do not give empty student number");
+                    }
+                    break;
+                case "/g":
+                    gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (gender.equals("")) {
+                        throw new InvalidMemberException("Please do not give empty gender");
+                    }
+                    break;
+                case "/p":
+                    phoneNumber = words[wordIndex].trim();
+                    if (phoneNumber.equals("")) {
+                        throw new InvalidMemberException("Please do not give empty phone number");
+                    }
+                    break;
+                case "/m":
+                    break;
+                default:
+                    throw new InvalidMemberException("Either there is no parameter given or wrong parameter is given");
+                }
+                wordIndex++;
             }
-            switch (matcher.group()) {
-            case "/n":
-                name = words[wordIndex].trim();
-                break;
-            case "/s":
-                studentNumber = words[wordIndex].trim();
-                break;
-            case "/g":
-                gender = words[wordIndex].trim();
-                break;
-            case "/p":
-                phoneNumber = words[wordIndex].trim();
-                break;
-            default:
-                break;
+            if (type == 'A') {
+                memberdetails = new Member(name, studentNumber, gender, phoneNumber, true);
+            } else if (type == 'E') {
+                memberdetails = new Member(name, studentNumber, gender, phoneNumber, false);
             }
-            wordIndex++;
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Do not give empty value for the syntax: " + lastParameter);
         }
-
-        return new Member(name, studentNumber, gender, phoneNumber);
+        return memberdetails;
     }
 
     /**
@@ -353,6 +359,8 @@ public class Parser {
         return indexNumber;
     }
 
+    //@@author Teckwhye
+
     /**
      * Returns parameter as given by user.
      *
@@ -372,6 +380,7 @@ public class Parser {
             return null;
         }
     }
+    //@@author
 
     /**
      * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching

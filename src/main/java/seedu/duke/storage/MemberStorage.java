@@ -13,6 +13,7 @@ import seedu.duke.Ui;
 import seedu.duke.command.exception.InvalidAddMemberException;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberStorage {
 
@@ -291,7 +292,7 @@ public class MemberStorage {
                 studentNumber = memberDetails[1];
                 gender = memberDetails[2];
                 phoneNumber = memberDetails[3];
-                Member member = new Member(name, studentNumber, gender, phoneNumber);
+                Member member = new Member(name, studentNumber, gender, phoneNumber, true);
                 member.setIndex(index);
                 memberList.addMember(member);
                 index++;
@@ -300,6 +301,8 @@ public class MemberStorage {
             System.out.println("file not found!");
         } catch (NoSuchElementException e) {
             Ui.printEmptyMembersFile();
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
         }
     }
 
