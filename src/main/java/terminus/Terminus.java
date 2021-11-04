@@ -124,7 +124,6 @@ public class Terminus {
             // Update JSON File
             TerminusLogger.info("Saving data into file...");
             this.storageManager.updateMainJsonFile(moduleManager);
-            TerminusLogger.info("Save completed.");
         } catch (InvalidFileException ex) {
             ui.printSection(ex.getMessage());
             ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);

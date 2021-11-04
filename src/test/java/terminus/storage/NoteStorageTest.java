@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import terminus.TestFilePath;
 import terminus.content.ContentManager;
 import terminus.content.Note;
@@ -117,6 +119,31 @@ public class NoteStorageTest {
         }
         assertEquals(1, noteContentManager.getTotalContents());
         Path invalidFilepath = noteStorage.getAppendPath(folderPath, "a.ser");
+        noteStorage.createFile(invalidFilepath);
+        noteStorage.loadNoteIntoModuleManager(moduleManager, tempModule);
+        assertEquals(5, noteContentManager.getTotalContents());
+        String longName = "a".repeat(31);
+        invalidFilepath = noteStorage.getAppendPath(folderPath, longName + ".txt");
+        noteStorage.createFile(invalidFilepath);
+        noteStorage.loadNoteIntoModuleManager(moduleManager, tempModule);
+        assertEquals(5, noteContentManager.getTotalContents());
+    }
+
+    @Test
+    @EnabledOnOs({OS.LINUX})
+    void loadNoteIntoModuleManager_sameFileName() throws InvalidFileException {
+        NusModule module = moduleManager.getModule(tempModule);
+        ContentManager<Note> noteContentManager = module.getContentManager(Note.class);
+        assertEquals(1, noteContentManager.getTotalContents());
+        Path folderPath = noteStorage.getAppendPath(TestFilePath.RESOURCE_FOLDER, tempModule);
+        noteStorage.createFolder(folderPath);
+        for (int i = 1; i <= 5; i++) {
+            String filename = String.format("a%s.txt", String.valueOf(i));
+            Path filepath = noteStorage.getAppendPath(folderPath, filename);
+            noteStorage.createFile(filepath);
+        }
+        assertEquals(1, noteContentManager.getTotalContents());
+        Path invalidFilepath = noteStorage.getAppendPath(folderPath, "A1.txt");
         noteStorage.createFile(invalidFilepath);
         noteStorage.loadNoteIntoModuleManager(moduleManager, tempModule);
         assertEquals(5, noteContentManager.getTotalContents());
