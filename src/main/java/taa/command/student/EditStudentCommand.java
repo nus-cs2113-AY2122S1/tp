@@ -26,6 +26,7 @@ public class EditStudentCommand extends Command {
     private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "%s %s/<CLASS_ID> %s/<STUDENT_INDEX> "
         + "%s/<NEW_ID> %s/<NEW_NAME>";
     private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
+    public static final String MESSAGE_ID_ALREADY_EXISTS = "A student with that ID already exists";
 
     public EditStudentCommand(String argument) {
         super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
@@ -74,8 +75,13 @@ public class EditStudentCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        String newId = argumentMap.get(KEY_NEW_ID);
+        String newId = argumentMap.get(KEY_NEW_ID).toUpperCase();
         String newName = argumentMap.get(KEY_NEW_NAME);
+        for (Student students : studentList.getStudents()) {
+            if (students.getId().equals(newId)) {
+                throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
+            }
+        }
         student.setId(newId);
         student.setName(newName);
 

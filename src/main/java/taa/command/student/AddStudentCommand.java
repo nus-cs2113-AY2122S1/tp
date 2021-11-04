@@ -52,7 +52,7 @@ public class AddStudentCommand extends Command {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        String studentID = argumentMap.get(KEY_STUDENT_ID);
+        String studentID = argumentMap.get(KEY_STUDENT_ID).toUpperCase();
         String studentName = argumentMap.get(KEY_STUDENT_NAME);
         Student student = new Student(studentID, studentName);
 
