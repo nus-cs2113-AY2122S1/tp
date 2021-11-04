@@ -2,9 +2,7 @@
 
 ## Overview
 
-TermiNUS is a CLI (command line interface) program for NUS Students who wish to consolidate their
-NUS academic materials such as zoom links, questions and notes for the modules that they are taking.
-It is written in Java, and has about 12 kLoC.
+**TermiNUS** is a CLI (command line interface) program for NUS students who wish to consolidate their NUS academic needs such as schedules, questions and notes for the modules that they are taking. With TermiNUS, it aims to aid students and improve their learning experiences while studying in NUS.
 
 ### Summary of Contributions
 
