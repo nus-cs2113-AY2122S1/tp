@@ -15,15 +15,17 @@ design pattern to create instantiate objects of classes which implement the inte
 for code to have less coupling.
 
 #### Enhancements implemented
-1. New feature: Added the summary feature that will show the game's summary after a game finishes.
+* New feature: Added the summary feature that will show the game's summary after a game finishes.
    * What it does: Shows the summary of the game to gamers after they complete a game.
    * Justification: This feature improves the project significantly because gamers mostly 
    want to know how they did in a game. 
    * Highlights: The logic of getting the mistakes made was fairly complicated as it required taking into
    considerations many conditions and scenarios. The implementation of this feature also affects the implementation 
    of the `view history` feature, hence the design had to be well-thought-out.
-
-2. New feature: Added the ability to view records of past games.
+  
+<div style="page-break-after: always;"></div>
+   
+* New feature: Added the ability to view records of past games.
     * What it does: Allows gamers to select which game mode's past records they want to view 
    and how many records (from the most recent) they want to view. Defaults to 
    all the records in the selected game mode if they do not specify the number to records to view.
@@ -33,12 +35,14 @@ for code to have less coupling.
     * Highlights: The command related to this feature `history` has both optional and compulsory parameters. The parsing
    for this command was hence rather complicated to implement.
 
-3. New feature: Added the ability to clear all past game records.
+
+* New feature: Added the ability to clear all past game records.
     * What it does: Clear the past game records of a selected game mode. If the game mode is
    not specified, game records from both game modes are wiped.
     * Justification: Gamers would at times like to clear their past records so that they can start afresh.
 
-4. New feature: Added automatic storage of game records.
+
+* New feature: Added automatic storage of game records.
     * What it does: Automatically stores changes in game records to the corresponding text file 
    (different text files for different game modes). 
     * Justification: This feature is required for the `view history` feature.
