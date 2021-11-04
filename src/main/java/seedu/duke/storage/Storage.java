@@ -64,7 +64,7 @@ public class Storage {
 
     private static Finance decodeFinance(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
-        Finance finance = new Finance(description[1], description[2]);
+        Finance finance = new Finance(LocalDate.parse(description[1]), description[2]);
         return finance;
     }
 

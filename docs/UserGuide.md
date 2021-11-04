@@ -322,14 +322,14 @@ Example:
 Adds a finance record to the finance list.
 
 Format: `add-finance/DATE/ACCOUNT`
+  * `DATE` must be a valid date in YYYY-MM-DD format
   * `ACCOUNT` must be an integer.
-
 Example:
-`add-finance/23 Oct 2021/5000` Adds a finance account of `$5000` on `23 October 2021`.
+`add-finance/2021-10-23/5000` Adds a finance account of `$5000` on `23 October 2021`.
 ```
 ---------------------------------------------
  Got it. This account is added:
-   Finance Date: 23 Oct 2021
+   Finance Date: 2021-10-23
    Account: 5000
 ---------------------------------------------
 ```
