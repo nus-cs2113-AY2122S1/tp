@@ -1,6 +1,7 @@
 # Rebecca Chua - Project Portfolio Page
 
 ## Overview
+NUS Buddy is a fast, flexible and unobtrusive weekly planner. It includes an intuitive task and lesson manager, as well as a module planner with CAP calculation features that can be accessed via a Command Line Interface (CLI).
 
 ## Summary of Contributions
 
