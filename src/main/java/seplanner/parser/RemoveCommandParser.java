@@ -63,9 +63,8 @@ public class RemoveCommandParser {
 
     private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws RemoveParseException {
-        boolean textMatches = isTextMatches(arguments);
         String uniName;
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             uniName = arguments;
             // Check if university has been added
             if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
@@ -97,8 +96,7 @@ public class RemoveCommandParser {
 
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws RemoveParseException {
-        boolean textMatches = isTextMatches(arguments);
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             module = moduleSelectedList.getModule(arguments);
             // Check if module has been added already
             if (ParseCondition.isNullModule(module)) {
@@ -157,10 +155,4 @@ public class RemoveCommandParser {
 
     }
 
-    private boolean isTextMatches(String arguments) {
-        String regex = ".*[a-zA-Z].*";  // regex to check if string contains any letters
-        Pattern pattern = Pattern.compile(regex);  // compiles the regex
-        Matcher matcherText = pattern.matcher(arguments);
-        return matcherText.matches();
-    }
 }
