@@ -9,6 +9,7 @@
     - [Parser](#parser)
     - [Add, Delete, Edit, Orders & Find Command Classes](#add-delete-edit-orders-and-find-command-classes)
     - [Menu & Order Command Classes](#menu-and-order-command-classes)
+    - [Storage](#storage)
 - [Product Scope](#product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
@@ -25,7 +26,7 @@
 
 ## Architecture
 
-<br>![Architecture Diagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/ArchitectureDiagrams/ArchitectureDiagram.drawio.png)
+<br>![Architecture Diagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/ArchitectureDiagrams/ArchitectureDiagram.jpg)
 <br>The ***Architecture Diagram*** given above explains the high-level design of the LOTS app.
 
 <br>The following section gives a brief overview of the main components in the architecture and how they interact with
@@ -36,18 +37,21 @@ each other. Further explanation will be given in depth in the **Design** section
 2. **UI** handles the UI portion of the LOTS program.
 3. **Logic** deals with the parsing and execution of user inputs.
 4. **Manager** deals with the various types of data that is stored within the LOTS program.
+5. **Storage** deals with the reading and writing of data onto the hard disk.
 
 ### Component Interaction
 
 The general flow of the program is as follows:
-1. User inputs data which is read by the `UI` within the `Main`.
-2. This data is passed to the `Parser` which will return a `Command`.
-3. `Command` will be executed, carrying out whatever task the user has input. `Manager` may be called if data is to
-be stored or edited.
-4. `UI` component handles the printing of data if required.  
+1. On initial startup, the program will check if the `.orders.txt` exists in the directory. If it does, the data on the file will be loaded into the program. If not, a new file is created
+2. User then inputs data which is read by the `UI` within the `Main`.
+3. This data is passed to the `Parser` which will return a `Command`.
+4. `Command` will be executed, carrying out whatever task the user has input. `Manager` may be called if data is to
+be stored or edited. 
+5. Every time a new `Command` is executed, `Storage` will write the updated data to the `.orders.txt` file.
+6. `UI` component handles the printing of data if required.  
    <br>Given below is a simplified sequence diagram showing how the components within the LOTS program interact with each other
    when the user inputs the command `delete 1/2`  
-   <br>![Delete Sequence Diagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/ArchitectureDiagrams/DeleteSeq.png)
+   <br>![Delete Sequence Diagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/ArchitectureDiagrams/DeleteSeq.jpg)
 
 ## Design
 
@@ -62,8 +66,8 @@ are related to one another.
 :information_source: **Note:** Specific command names are represented using a placeholder `'Abc'`, i.e. AddCommand, FindCommand.
 
 Below is a brief explanation on how the `Logical` component works.
-1. Upon receiving the user's input to excecute a specific command, it calls the `Parser` to interpret and parse the user's command.
-2. A particular `Command` object is then initialised and returned back to `Duke`, the main program.
+1. Upon receiving the user's input to execute a specific command, it calls the `Parser` to interpret and parse the user's command.
+2. A particular `Command` object is then initialised and returned to `Duke`, the main program.
 3. `Duke` executes the command, which communicates with the `Manager` to perform its specific function, i.e. add a food order.
 
 The class diagram below is a brief overview of how the `Parser` is used in parsing the user's command.
@@ -75,7 +79,7 @@ The class diagram below is a brief overview of how the `Parser` is used in parsi
 Explanation on how the parsing is done:
 1. Upon receiving the user's input string from `Duke`, the `Parser` split the user's input into an array of strings.
 2. It then interprets the string and tries to match it with one of the known commands.
-3. The respective command (i.e. `DeleteCommand`) object will be instantiated and returned back to `Duke` as a `Command` object. (`UnknownCommand` object is return
+3. The respective command (i.e. `DeleteCommand`) object will be instantiated and returned to `Duke` as a `Command` object. (`UnknownCommand` object is return
    if there is no match)
 
 The following sequence diagram depicts how the `Logical` components interact with one another upon receiving the user's input of `"delete 1/2"`.  
@@ -239,7 +243,24 @@ The steps to using the `menu` and `list` command can be seen from the sequence d
 2. After adding orders, invoke `list` command to see the orders added into the list.
 
 **Note:** The command `menu` and `list` are just these two strings. Any edits to these two commands will result in an exception being thrown.
-   
+
+### Storage
+
+The following diagram shows the interaction of the `storage` class with the other classes in the program.
+<br>![StorageDiagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/StorageDiagrams/Storage%20Sequence%20Diagram.jpg)
+<br>How the `storage` component behaves is as follows:  
+
+**Upon startup:**
+* Duke calls `initialiseFile()` to try to get the `.order.txt` file, which is done in `getOrdersFile()` method. In the case when the file is not found, a new `.orders.txt` file would be created.
+* The content of the files are then checked line by line, to make sure it is of a valid format which includes: 
+  * Valid name, valid quantity and valid array size of orders.
+* If all lines satisfy the expected format,`executeLoad()` is called to load the contents of the file by formatting each line into a valid `add` command and then executing it by calling `executeFromFile()` in the `AddCommand` class. 
+* Else, the file is wiped and all the data would be gone. This is accomplished by `updateFileWithEmptyManager()`, which updates the file with an empty list of people.
+
+**During runtime:**
+* After every command execution, `Duke` will call the `Storage.updateFile()`, passing the current `PeopleManager` object to the method.
+* Every person's data (name and orders) is then retrieved using `getPersonName()` and `getEntireOrdersOfPerson()`, where it is then formatted and written into the file as such: 
+  * `name, quantity of 1st food in menu, quantity of 2nd food in menu, ... , quantity of last food in menu`
 ## Product scope
 
 ### Target user profile

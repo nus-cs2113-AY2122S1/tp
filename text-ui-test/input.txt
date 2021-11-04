@@ -4,8 +4,10 @@ a
 abcd123
 adw 12312 daw
 menu
+menu 123
 menu123asd
 list
+list 123
 list1223
 add
 add /n /i /q
@@ -34,7 +36,7 @@ edit 2/2 /q 4
 list
 edit 1/1 /q 0
 list
-find /n
+find /n -
 find /nabcd
 find /n
 find /n aim

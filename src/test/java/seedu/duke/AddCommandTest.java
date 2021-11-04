@@ -6,14 +6,15 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.LotsException;
 
-import java.util.LongSummaryStatistics;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddCommandTest {
 
     protected PeopleManager peopleManager = new PeopleManager();
 
+    /**
+     * This method sets up a list of 3 people with a food order each, before each test is carried out.
+     */
     @BeforeEach
      void setUp() throws LotsException {
         String[] names = {"Adam", "Markus", "Andrew"};
