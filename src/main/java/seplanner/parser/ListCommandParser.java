@@ -13,10 +13,27 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// @@author leowyy99
+
+/**
+ * Handle list command arguments.
+ */
 public class ListCommandParser {
 
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle list command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The Command object corresponding to the flag.
+     * @throws ListParseException If inputs are invalid.
+     * @throws IOException If IO exception exists.
+     */
     public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
                          UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ListParseException, IOException {

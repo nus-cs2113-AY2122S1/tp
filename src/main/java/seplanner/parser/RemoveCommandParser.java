@@ -14,16 +14,32 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// @@author leowyy99
+
+/**
+ * Handle remove command arguments.
+ */
 public class RemoveCommandParser {
 
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private String flag;
     private int uniIndex;
-    private int modIndex;
     private int mapIndex;
     private University university;
     private Module module;
 
+    /**
+     * Handle add command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The Command object corresponding to the flag.
+     * @throws RemoveParseException If inputs are invalid.
+     * @throws IOException If IO exception exists.
+     */
     public Command parse(String arguments, UniversityList universityMasterList,
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws RemoveParseException, IOException {
@@ -50,6 +66,13 @@ public class RemoveCommandParser {
     }
 
 
+    /**
+     * Extract the flag from the rest of the arguments.
+     *
+     * @param arguments The user input without the command word.
+     * @return The String containing the arguments for AddCommand.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private String identifyFlagAndSplitArgs(String arguments) throws RemoveParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
@@ -60,6 +83,14 @@ public class RemoveCommandParser {
         return argumentsSubstrings[1].trim();
     }
 
+    /**
+     * Handle the arguments for /uni flag.
+     *
+     * @param arguments The argument for /uni flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws RemoveParseException {
         String uniName;
@@ -92,6 +123,14 @@ public class RemoveCommandParser {
         }
     }
 
+    /**
+     * Handle the arguments for /mod flag
+     *
+     * @param arguments The arguments for /mod flag.
+     * @param moduleMasterList The master list of all available modules.
+     * @param moduleSelectedList The list of user selected modules.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws RemoveParseException {
         if (ParseCondition.isText(arguments)) {
@@ -102,7 +141,7 @@ public class RemoveCommandParser {
                 throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED, 1, false);
             }
         } else if (ParseCondition.isNumeric(arguments)) {
-            modIndex = Integer.parseInt(arguments);;
+            int modIndex = Integer.parseInt(arguments);
             // Check if module exists
             if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
@@ -120,6 +159,14 @@ public class RemoveCommandParser {
         }
     }
 
+    /**
+     * Handle arguments for /map flag.
+     * @param arguments The arguments for /map flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.    * @param universityMasterList
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
                                    ModuleList moduleSelectedList,
                                    UniversityList universityMasterList) throws RemoveParseException {

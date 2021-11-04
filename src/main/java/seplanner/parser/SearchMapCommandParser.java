@@ -2,7 +2,6 @@ package seplanner.parser;
 
 import seplanner.commands.SearchMapCommand;
 import seplanner.constants.Constants;
-import seplanner.exceptions.AddParseException;
 import seplanner.exceptions.SearchMapParseException;
 import seplanner.modules.ModuleList;
 import seplanner.universities.University;
@@ -10,10 +9,23 @@ import seplanner.universities.UniversityList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handle searchmap command arguments.
+ */
 public class SearchMapCommandParser {
 
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle searchmap command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The SearchMapCommand object.
+     * @throws SearchMapParseException If inputs are invalid.
+     */
     public SearchMapCommand parse(String arguments, UniversityList universityMasterList,
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws SearchMapParseException {

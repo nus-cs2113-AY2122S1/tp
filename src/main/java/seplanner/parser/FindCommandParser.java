@@ -11,11 +11,23 @@ import seplanner.universities.UniversityList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handle find command arguments.
+ */
 public class FindCommandParser {
 
     private String flag;
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle find command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @return The Command object corresponding to the flag.
+     * @throws FindParseException If inputs are invalid.
+     */
     public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList)
             throws FindParseException {
 
@@ -38,6 +50,13 @@ public class FindCommandParser {
         }
     }
 
+    /**
+     * Extract the flag from the rest of the arguments.
+     *
+     * @param arguments The user input without the command word.
+     * @return The String containing the arguments for AddCommand.
+     * @throws FindParseException If inputs are invalid.
+     */
     private String identifyFlagAndSplitArgs(String arguments) throws FindParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
