@@ -1,0 +1,31 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package "UI Component" <<Rectangle>> {
+    class TextUI
+}
+
+class Duke {
+    - parser:Parser
+    - catalogue:Catalogue
+    - storage:Storage
+    +main()
+}
+
+class TextUI {
+    -IN:Scanner
+    -OUT:PrintStream
+    -{static}PREFIX:String
+    +read() : String
+    +print(String message)
+    +print(Item item)
+    +print(String message, Item item)
+}
+
+package XYZCommand <<Rectangle>> {
+}
+
+Duke -> TextUI
+XYZCommand -[dashed]left-> TextUI : uses >
+@enduml
