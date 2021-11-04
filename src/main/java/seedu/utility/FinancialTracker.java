@@ -98,7 +98,7 @@ public class FinancialTracker {
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
             Expense removedExpense =  expenses.remove(indexOffset(expenseIndex));
-            assert expenses.stream().noneMatch(expense -> expense.equals(removedExpense));
+            assert expenses.stream().noneMatch(expense -> expense == removedExpense);
             return removedExpense;
         } catch (IndexOutOfBoundsException e) {
             throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
@@ -115,7 +115,7 @@ public class FinancialTracker {
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
         try {
             Income removedIncome = incomes.remove(indexOffset(incomeIndex));
-            assert incomes.stream().noneMatch(expense -> expense.equals(removedIncome));
+            assert incomes.stream().noneMatch(expense -> expense == removedIncome);
             return removedIncome;
         } catch (IndexOutOfBoundsException e) {
             throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
