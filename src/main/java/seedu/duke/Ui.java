@@ -106,7 +106,7 @@ public class Ui {
                 + "number of events";
         return String.format("Task added: %s\n"
                         + "Total number of tasks in this event = %s",
-                task.getTitle(), Duke.eventCatalog.get(eventIndex - 1).getTaskList().size());
+                task.getTitle(), Duke.eventCatalog.get(eventIndex).getTaskList().size());
     }
 
     public static String getEventAddedMessage(Event event) {
@@ -115,8 +115,16 @@ public class Ui {
                 event.getTitle(), Duke.eventCatalog.size());
     }
 
-    public static String getMemberAddedMessage(Member member) {
-        return String.format("Member added: %s", member.getName());
+    public static String getMembersAddedMessage(String[] memberNames) {
+        StringBuilder message = new StringBuilder();
+        message.append("Member").append(memberNames.length > 1 ? "s" : "").append(" added: ");
+        for (int i = 0; i < memberNames.length; i++) {
+            message.append(memberNames[i]);
+            if (i < memberNames.length - 1) {
+                message.append(", ");
+            }
+        }
+        return message.toString();
     }
 
     public static void printGreetingMessage() {
