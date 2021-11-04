@@ -1,3 +1,5 @@
+//@@author poppolette
+
 package seedu.duke.training;
 
 public class TrainingSchedule {
