@@ -80,7 +80,6 @@ public class TimetableDto {
     /**
      * Converts TimetableDTO to a Timetable object. Merges TimetableLesson array and
      * TimetableUserItem array into TimetableItem array that is used in Timetable object.
-     *
      */
     public Timetable toTimetable() {
         return new Timetable(this);
