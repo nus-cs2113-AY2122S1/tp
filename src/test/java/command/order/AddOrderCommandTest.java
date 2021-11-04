@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddOrderCommandTest {
     public static final String NAME = "Panadol";
     public static final String QUANTITY = "50";
-    public static final String DATE = "10-10-2022";
+    public static final String DATE = "10-10-2020";
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -51,7 +51,7 @@ public class AddOrderCommandTest {
                + "+====+=========+==========+============+=========+\n"
                + "| ID |  NAME   | QUANTITY |    DATE    | STATUS  | \n"
                + "+====+=========+==========+============+=========+\n"
-               + "| 1  | PANADOL |    50    | 10-10-2022 | PENDING | \n"
+               + "| 1  | PANADOL |    50    | 10-10-2020 | PENDING | \n"
                + "+----+---------+----------+------------+---------+\n";
 
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
@@ -63,7 +63,7 @@ public class AddOrderCommandTest {
 
         parameters.put("n", NAME);
         parameters.put("q", QUANTITY);
-        parameters.put("d", "10 Oct 2022");
+        parameters.put("d", "10 Oct 2020");
 
         Command command = new AddOrderCommand(parameters);
         command.execute();
@@ -79,7 +79,7 @@ public class AddOrderCommandTest {
     public void addOrderCommand_exceedMaxQuantity_expectInvalid() {
         try {
             medicines.add(new Stock("PANADOL", 10, 50,
-                    DateParser.stringToDate("10-10-2022"), "For Fever", 100));
+                    DateParser.stringToDate("10-10-2020"), "For Fever", 100));
             medicines.add(new Order("PANADOL", 50, DateParser.stringToDate("9-10-2022")));
         } catch (ParseException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class AddOrderCommandTest {
     @Test
     public void addOrderCommand_validQuantity_expectValid() {
         try {
-            medicines.add(new Order("PANADOL", 50, DateParser.stringToDate("9-10-2022")));
+            medicines.add(new Order("PANADOL", 50, DateParser.stringToDate("9-10-2020")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -122,7 +122,7 @@ public class AddOrderCommandTest {
                 + "+====+=========+==========+============+=========+\n"
                 + "| ID |  NAME   | QUANTITY |    DATE    | STATUS  | \n"
                 + "+====+=========+==========+============+=========+\n"
-                + "| 2  | PANADOL |   1000   | 10-10-2022 | PENDING | \n"
+                + "| 2  | PANADOL |   1000   | 10-10-2020 | PENDING | \n"
                 + "+----+---------+----------+------------+---------+\n";
 
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
@@ -135,7 +135,7 @@ public class AddOrderCommandTest {
     public void addOrderCommand_InvalidQuantity_expectInvalid() {
         try {
             medicines.add(new Stock("PANADOL", 10, 20,
-                    DateParser.stringToDate("10-10-2022"), "Fever", 1000));
+                    DateParser.stringToDate("10-10-2020"), "Fever", 1000));
         } catch (ParseException e) {
             e.printStackTrace();
         }
