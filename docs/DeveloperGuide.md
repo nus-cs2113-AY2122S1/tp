@@ -27,12 +27,12 @@ upon.
       * [Show](#show)
       * [Update](#update)
 - [Documentation, logging, testing, configuration, dev-ops]()
-- [Appendix: Requirements]()
-    * [Product scope]()
-    * [User stories]()
-    * [Use cases]()
-    * [Non-Functional Requirements]()
-    * [Glossary]()
+- [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
 - [Appendix: Instructions for manual testing]()
     * [Launch and shutdown]()
     * [Deleting a person]()
@@ -262,9 +262,106 @@ with any existing lessons, a `<CONFLICT>` line will be displayed beside the less
 For each lessonType, `getCommand` is utilized to collect input of the Lesson to be added into the timetable. 
 The `addModuleToList()` and `addLesson()` functions are called, and the modules are added to the module 
 list and each applicable timetable slot.
+
 #### Delete
 
 #### Clear Timetable
 
 #### Show Timetable
 
+## Appendix: Requirements
+
+### Product Scope
+
+Target user profile:
+* prefers desktop apps over other types
+* is a student at NUS
+
+Value proposition: Works both online and offline.
+
+### User Stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a...   | I want to...                                                    | So that I can...                                                       |
+| -------- | ----------| ----------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`  | user      | add mods to my timetable                                        | add mods that I intend to take                                         |
+| `* * *`  | user      | delete mods from my timetable                                   | remove mods that I am not taking                                       |
+| `* * *`  | user      | search for mods by module codes                                 | know which mods are offered under a pillar                             |
+| `* * *`  | user      | check which mods are S/U-able                                   | plan how to use my S/Us for the semester                               |
+| `* * *`  | user      | check module workloads                                          | plan how to use my modules                                             |
+| `* * *`  | user      | check which semester the module is offered in                   | plan in which semester to take it                                      |
+| `* * *`  | user      | check the total number of MC's taken for a particular semester  | know if I have to overload                                             |
+| `* * *`  | user      | check whether my upcoming class is a tutorial, lecture or lab   | know what type of class it is                                          |
+| `* * *`  | user      | save my timetable to a local file                               | any updates made are persisted                                         |
+| `* * *`  | new user  | use the 'help' command                                          | view the list of all possible commands and their description           |
+| `* * *`  | user      | use the 'clear' command to delete all modules from the timetable| start afresh and make a new timetable                                  |
+| `* *`    | user      | check the exam date of modules                                  | plan for my exams                                                      |
+| `* *`    | user      | filter mods by level                                            | find mods by difficulty level                                          |
+| `* *`    | user      | keep a record of past modules taken                             | refer back to it at any time                                           |
+| `* *`    | user      | monitor the number of MCs taken since enrolling                 | know if I meet my degree requirements                                  |
+| `* *`    | user      | add my own events to the timetable                              | better visualise my schedule for the day/week                          |
+| `* *`    | user      | search for and list all of my related personal tasks added      | find some of my tasks                                                  |
+| `* *`    | user      | check the venue of my classes                                   | know where to go for my classes                                        |
+| `* *`    | user      | check mod prerequisites                                         | know if I am eligible to take a mod that I intend to take              |
+| `* *`    | user      | delete my personal tasks                                        | clear tasks that I have finished                                       |
+| `* *`    | user      | rename my personal tasks                                        | rename it without deleting and re-adding it                            |
+| `* *`    | user      | update my personal tasks                                        | update it without deleting and re-adding it                            |
+| `* *`    | user      | filter the modules by the number of MCs                         | view only the modules that fit under my MC limit                       |
+| `* *`    | user      | access module information while offline                         | view relevant information on the module even while offline             |
+| `* *`    | user      | notified if the current lesson that I'm adding clashes with     | be aware of any potential clashes in my timetable                      |
+| `* *`    | user      | input the grades scored in various modules                      | know my overall semester result                                        |
+| `* *`    | user      | enter the command 'calculate cap'                               | see my CAP according to all grades that I have scored in the past mods |
+| `* *`    | user      | keep a record of all modules which I have S/Ued                 | refer back to them at any time                                         |
+| `* *`    | user      | remove modules and grades from the transcript                   | edit my transcript in case I make a mistake in adding my grades        |
+| `* *`    | user      | view my unofficial transcript                                   | track my degree progress and view the modules I have completed.        |
+| `* *`    | user      | stop an update command                                          | cancel it without waiting 10 minutes                                   |
+| `* *`    | user      | stop a search command                                           | cancel it without waiting any longer                                   |
+
+### Use Cases
+####**Use case: Search for and show a module**
+
+**MSS**
+1. User searches for modules.
+2. UNIMods shows a list of modules matching the search terms.
+3. User requests to show a specific module in the list.
+4. UNIMods shows module information for that module. <br>
+Use case ends.
+
+**Extensions**
+* 1a. No matching mods are found. <br>
+Use case ends.
+* 1b. User cancels search with `ENTER`. <br>
+Use case ends.
+* 3a. User mistypes name of module and mistyped module code does not exist. <br>
+Use case ends.
+
+<br>
+
+####**Use case: Update local database**
+
+**MSS**
+1. User runs update command.
+2. UNIMods updates local data.
+
+**Extensions**
+* 1a. User is offline. <br>
+  Use case ends.
+* 1a. User cancels update with `ENTER`. <br>
+  Use case ends.
+
+<br>
+
+### Non-Functional Requirements
+
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to perform local search operations, even on 12000+ module jsons quickly.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
+able to accomplish most of the tasks faster using commands than using the mouse.
+
+### Glossary
+
+* **Mainstream OS:** Windows, *nix, MacOS
+* **S/U:** Ability to ignore the letter grade of a mod and not factor it into a CAP as long as a `C` grade or above is 
+obtained
+* **Clash:** When two different modules have a lessons that are in the same slot. 
