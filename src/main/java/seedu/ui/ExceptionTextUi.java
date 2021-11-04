@@ -185,14 +185,14 @@ public class ExceptionTextUi {
     }
 
     //@@author mayankp291
-    public static void missingIndexViewMessage(int ListSize) {
+    public static void missingIndexViewMessage(int listSize) {
         String message;
-        if (ListSize == 0) {
+        if (listSize == 0) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
                     + "Enter <INDEX> as \"me\" to view personal contact";
-        } else if (ListSize == 1) {
+        } else if (listSize == 1) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
@@ -201,20 +201,20 @@ public class ExceptionTextUi {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      view <INDEX>\n"
-                    + "Enter <INDEX> between 0 and " + (ListSize - 1) + " or \"me\" (personal contact)";
+                    + "Enter <INDEX> between 0 and " + (listSize - 1) + " or \"me\" (personal contact)";
         }
         printDoubleLineMessage(message);
     }
 
     //@@author mayankp291
-    public static void missingIndexDeleteMessage(int ListSize) {
+    public static void missingIndexDeleteMessage(int listSize) {
         String message;
-        if (ListSize == 0) {
+        if (listSize == 0) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
                     + "Enter <INDEX> as \"me\" to view personal contact";
-        } else if (ListSize == 1) {
+        } else if (listSize == 1) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
@@ -223,7 +223,7 @@ public class ExceptionTextUi {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> between 0 and " + (ListSize - 1) + " or \"me\" (personal contact)";
+                    + "Enter <INDEX> between 0 and " + (listSize - 1) + ", \"me\" (personal contact) or \"all\"";
         }
         printDoubleLineMessage(message);
     }
