@@ -41,6 +41,8 @@ abstract class CommandHandler extends CommandExecutor {
             System.out.println();
         } catch (NullPointerException e) {
             Ui.emptyArgForOpenCommand();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -49,6 +51,8 @@ abstract class CommandHandler extends CommandExecutor {
             executeSummary(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -57,6 +61,8 @@ abstract class CommandHandler extends CommandExecutor {
             executeView(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -86,14 +92,16 @@ abstract class CommandHandler extends CommandExecutor {
             }
         } catch (NullPointerException e) {
             Ui.emptyArgForDeleteCommand();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
     protected static void handleList() {
         try {
             executeList();
-        } catch (TripNotOpenException e) {
-            Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -120,7 +128,9 @@ abstract class CommandHandler extends CommandExecutor {
         try {
             executeAmount(inputParams);
         } catch (NullPointerException e) {
-            Ui.invalidArgForAmount();
+            Ui.invalidAmountFormat();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -134,6 +144,8 @@ abstract class CommandHandler extends CommandExecutor {
             executePeople();
         } catch (TripNotOpenException e) {
             Ui.printNoOpenTripError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 
@@ -142,6 +154,8 @@ abstract class CommandHandler extends CommandExecutor {
             executeOptimize();
         } catch (NoExpensesException e) {
             Ui.printNoExpensesError();
+        } catch (ForceCancelException e) {
+            Ui.printForceCancelled();
         }
     }
 }

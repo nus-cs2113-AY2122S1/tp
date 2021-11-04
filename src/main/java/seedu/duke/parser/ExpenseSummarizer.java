@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.Person;
 import seedu.duke.Storage;
+import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.trip.Trip;
 import seedu.duke.Ui;
 import seedu.duke.expense.Expense;
@@ -13,7 +14,7 @@ import java.util.Map;
 //@@author itsleeqian
 public interface ExpenseSummarizer {
 
-    static void getIndividualExpenseSummary(Person person) {
+    static void getIndividualExpenseSummary(Person person) throws ForceCancelException {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;
         double totalAmountSpentInLocalCurrency = 0;
@@ -58,7 +59,8 @@ public interface ExpenseSummarizer {
      * @param categoriesSplit the HashMap containing the category and the amount spent on said category
      * @return a rounded and formatted value for amount spent in local currency
      */
-    private static double roundToLocal(double totalAmount, Trip currTrip, HashMap<String, Double> categoriesSplit) {
+    private static double roundToLocal(double totalAmount, Trip currTrip, HashMap<String, Double> categoriesSplit)
+            throws ForceCancelException {
         for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
             totalAmount += Storage.formatRepaymentMoneyDouble(
                     set.getValue() / currTrip.getExchangeRate());
