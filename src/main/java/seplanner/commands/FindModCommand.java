@@ -9,8 +9,18 @@ import seplanner.ui.UiModule;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Command to find a module in the master module list.
+*/
 public class FindModCommand extends Command {
 
+    /**
+     * Find a module in the master module list, and print its information.
+     *
+     * @param userInput input from the user, which can contain the module code or the module name.
+     * @param moduleMasterList The master module list which contains all modules.
+     * @param type type of input, which is either module code or module name.
+    */
     public FindModCommand(String userInput, ModuleList moduleMasterList, FindModInputType type) {
         ArrayList<Module> result = (ArrayList<Module>) moduleMasterList.getList().stream()
                 .filter((module) ->
