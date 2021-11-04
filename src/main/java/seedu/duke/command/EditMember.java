@@ -1,12 +1,13 @@
+//@@author Teckwhye
 package seedu.duke.command;
 
 import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
-import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 /**
  * Edits a Member located in MemberList.
@@ -24,18 +25,17 @@ public class EditMember {
      */
     public EditMember(MemberList members, int index, Member toChange) {
         try {
+
+            if (toChange == null) {
+                return;
+            }
             assert index >= 1;
 
             Member memberToChange = members.getMemberList().get(index - 1);
 
             oldMember = new Member(memberToChange);
-
             if (!toChange.getName().equals("")) {
-                if (Parser.isValidName(toChange.getName())) {
-                    memberToChange.setName(toChange.getName());
-                } else {
-                    Ui.printEditNameFailed();
-                }
+                memberToChange.setName(toChange.getName());
             }
 
             if (!toChange.getStudentNumber().equals("")) {
@@ -43,19 +43,11 @@ public class EditMember {
             }
 
             if (!toChange.getGender().equals("")) {
-                if (Parser.isValidGender(toChange.getGender())) {
-                    memberToChange.setGender(toChange.getGender());
-                } else {
-                    Ui.printEditGenderFailed();
-                }
+                memberToChange.setGender(toChange.getGender());
             }
 
             if (!toChange.getPhoneNumber().equals("")) {
-                if (Parser.isValidPhone(toChange.getPhoneNumber())) {
-                    memberToChange.setPhoneNumber(toChange.getPhoneNumber());
-                } else {
-                    Ui.printEditPhoneFailed();
-                }
+                memberToChange.setPhoneNumber(toChange.getPhoneNumber());
             }
 
             members.getMemberList().set(index - 1, memberToChange);
@@ -67,6 +59,9 @@ public class EditMember {
             System.out.println("Index to edit must be an integer >= 1");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Unfortunately, the index you entered is invalid.");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
+//@@author

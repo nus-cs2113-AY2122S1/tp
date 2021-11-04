@@ -14,9 +14,9 @@ class ParserTest {
     private MemberList testMemberList;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
 
-        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432");
+        teckHwee = new Member("Tan Teck Hwee", "A0123456A", "F", "98765432", true);
 
         ArrayList<Member> memberList = new ArrayList<>();
         memberList.add(teckHwee);

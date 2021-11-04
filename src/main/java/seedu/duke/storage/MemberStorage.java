@@ -9,13 +9,14 @@ import java.util.Scanner;
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberStorage {
 
     /**
-     * Sets up the duke members csv file. It will first try to find if the file exists in the current
-     * directory. If the file exists, it will load the CCAMembers CSV file into the current member list.
-     * If not it will create a new member csv file in the current directory.
+     * Sets up the duke members csv file. It will first try to find if the file exists in the current directory. If the
+     * file exists, it will load the CCAMembers CSV file into the current member list. If not it will create a new
+     * member csv file in the current directory.
      *
      * @param memberList the list of current members.
      */
@@ -59,7 +60,7 @@ public class MemberStorage {
                 studentNumber = memberDetails[1];
                 gender = memberDetails[2];
                 phoneNumber = memberDetails[3];
-                Member member = new Member(name, studentNumber, gender, phoneNumber);
+                Member member = new Member(name, studentNumber, gender, phoneNumber, true);
                 member.setIndex(index);
                 memberList.addMember(member);
                 index++;
@@ -68,6 +69,8 @@ public class MemberStorage {
             System.out.println("file not found!");
         } catch (NoSuchElementException e) {
             Ui.printEmptyMembersFile();
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
         }
     }
 
