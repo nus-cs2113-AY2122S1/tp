@@ -18,7 +18,7 @@ scheduler appointments between them and medical staff.
         long string to fit the table cell.
   * `find` command
     * What it does : filter through a list based on inputted parameters.
-    * Justification : This feature mimics a search bar feature in a GUI to address the 
+    * Justification : This feature mimics a search bar feature in a GUI application to address the 
       project requirement of a user who likes to type.
     * Highlights :
       * Consider edge case when empty parameters are given, it will give records with empty 
@@ -38,7 +38,7 @@ scheduler appointments between them and medical staff.
     * Added implementation details for `Ui` and `find`
     * Added a sequence diagram for `Ui`
 * Contributions to team task:
-  * Occasional refactoring of codes to follow more OOP.
+  * Occasional refactoring of codes to follow more OOP principles.
 * Review / mentoring contributions:
-  * Pointing out other team members' bug.
+  * Pointing out other team members' bugs.
   * Suggest possible improvements for the features they implemented.
