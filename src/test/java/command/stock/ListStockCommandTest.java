@@ -206,6 +206,8 @@ public class ListStockCommandTest {
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
+    //@@author alvintan01
+
     @Test
     public void listStock_sortByIdAscending_expectStocksWithSortedIdAscending() {
         String expectedOutput =

@@ -63,9 +63,9 @@ Order | Refers to ordering new medications to replenish the stocks.
 Parameters | Prefixes for MediVault to understand the type of information you provide.
 
 Meaning of Icons:
-- :information_source: Additional information
+- :information_source: Note
 - :warning: Warning
-- :bulb: Note
+- :bulb: Tip
 
 ## Setting up environment
 
@@ -78,7 +78,6 @@ Meaning of Icons:
     * Follow the guide
       at [se-edu/guides IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure
       Intellij is configured to use JDK 11.
-
 4. Import the project as a Gradle project
     * Follow the
       guide [se-edu/guides IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
@@ -117,7 +116,7 @@ The rest of the program consist of four components.
 * `Command`: Executes command based on the user input that is processed by `Utilities`
   component. The list of commands can be found in our User Guide [here](UserGuide.md).
 * `Utilities`: Contains important driver classes for MediVault
-  * includes `parser`, `ui`, `storage` and `comparators`.
+  * Includes `parser`, `ui`, `storage` and `comparators`.
 * `Inventory`: Contains a collection of classes used by MediVault to represent
 different medication information.
 * `Errors`: Contains collection of classes that handles exceptions during execution of MediVault.
@@ -203,7 +202,7 @@ logic:
   to MediVault.
 * MediVault will then invoke the `execute()` function of the `Command` object to execute the command.
 
-> :warning: Warning
+> :warning: Warning:
 > * Should there be an invalid command, `CommandParser` will throw `InvalidCommandException` and MediVault will display the error message using the `Ui` class.
 
 Given below is the sequence diagram after `run()` is called for the interactions within the main application logic.
@@ -218,7 +217,7 @@ After the `.execute()` command is called, MediVault does the following validator
 
 ![ContainValidParametersAndValuesSequenceDiagram](diagrams/diagram_images/ContainValidParametersAndValuesSequenceDiagram.png)
 
-> :information_source: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
+> :information_source: Note: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
 
 1. MediVault attempts to get the instance of the `Ui` class which is a singleton if it exists. Otherwise, it creates
 a new instance of the `Ui` class.
@@ -382,7 +381,7 @@ The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
 ![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeletePrescriptionSequenceDiagram.png)
 
-> :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
+> :bulb: Tip: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
 
 - `setStockQuantity()` method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
 
@@ -426,7 +425,7 @@ This approach solves the issue when a medication is prescribed to a user with an
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
 stock quantity. 
 
-> :bulb: MediVault automatically adds new prescription records when a medication is prescribed
+> :bulb: Tip: MediVault automatically adds new prescription records when a medication is prescribed
 > from stocks with different Stock IDs.
 
 ### Order Commands
@@ -436,7 +435,7 @@ stock quantity.
 MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword
 in `order` mode.
 
-> :information_source: Note
+> :information_source: Note:
 > * MediVault adds order information when `parameter` and `parameterValues` provided by the user are valid.
 > * As the order date is an optional parameter, MediVault will use the date the order was placed as the default date.
 > * Users will not be unable to add orders if the order quantity exceeds maximum stock quantity.
@@ -463,7 +462,7 @@ will simply add the order as a new order.
 MediVault creates a `DeleteOrderCommand` object when CommandParser identifies `deleteorder` or  `delete` in `order`
 mode.
 
-> :information_source: Note
+> :information_source: Note:
 > * MediVault deletes the order when the `parameter` and `parameterValues` provided by the user are valid.
 
 The sequence diagram for `DeleteOrderCommand` is shown below.
@@ -482,7 +481,7 @@ The sequence diagram for `UpdateOrderCommand` is shown below.
 MediVault retrieves the order object using the `i/ID` parameter specified by the user using the
 `extractOrderObject()` method.
 
-> :warning: Warning
+> :warning: Warning:
 > * MediVault disables updating an order that has been delivered. Users can only update information for pending orders.
 
 MediVault conducts a check if an order quantity is valid with the provided `q/QUANTITY`.
@@ -501,6 +500,7 @@ MediVault creates an `ReceiveOrderCommand` object when `CommandParser` identifie
 > * `ReceiveOrderCommand` will call `AddStockCommand` once the `parameters` and `parameterValues` are validated.
 > * If the order contains a medication already in stock, the `d/DESCRIPTION` and `m/MAX_QUANTITY` will be ignored
 > and existing values will be used.
+> * If the `e/EXPIRY_DATE` provided is the same as the one in stock, `p/PRICE` will be ignored as well.
 
 The sequence diagram for `ReceiveOrderCommand` is shown below.
 
