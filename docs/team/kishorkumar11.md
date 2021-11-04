@@ -62,9 +62,12 @@ Given below are my contributions to the project.
         - Added documentation for `edit` feature.
         - Added documentation for `clear` feature.
         - Contributed to the command summary.
+        - Added introduction and purpose.
+        - Enhanced display of warnings and notes.
     - Developer's Guide:
         - Added `command` component.
         - Drafted UML Diagram for `Parser`.
+        - Added `Recommending workouts`, `Editing an exercise` and `Clearing all workouts or exercises` components in Instructions for Manual Testing.
         - Contributed to the user stories.
 
 

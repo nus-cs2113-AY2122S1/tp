@@ -242,7 +242,7 @@ Manage fitness routines quickly
 
 Given below are instructions to test the app manually. 
 
-⚠️ **Note**: These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+>⚠️ **Note**: These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
 
 ### Launch and Shutdown
 
@@ -252,6 +252,85 @@ Given below are instructions to test the app manually.
     - Navigate to the folder where `GetJackd.jar` is saved and run `java -jar GetJackd.jar` in your terminal
 2. Shutdown
     - enter `bye` to exit the app. 
+
+### Recommending workouts
+
+1. Recommending workouts based on difficulty
+    - Prerequisites: None.
+    - Test Case: `recommend beginner`
+
+      Expected: All beginner recommended workouts are displayed and added to the workout list.
+    - Test Case: `recommend intermediate 1`
+
+      Expected: No recommended workouts displayed and added to the list. Error details shown in the output.
+    - Test Case: `recommend propro`, `recommend 123`, `...`
+
+      Expected: Similar to previous.
+
+2. Recommended workouts inside workout mode
+    - Prerequisites: Enter into a workout mode using `enter` command.
+    - Test Case: `recommend intermediate` inside a workout mode
+
+      Expected: All intermediate recommended workouts are displayed and added to the workout list.
+    - Test Case: `recommend novice`
+
+      Expected: No workouts deleted. Error details shown in the output.
+    - Test Case: `recommend testdifficulty`, `recommend 123`, `...`
+
+      Expected: Similar to previous.
+
+### Editing an exercise
+
+1. Editing an exercise in a workout
+   - Prerequisites: List all exercises using the `display` command. Multiple exercises in list.
+   - Test Case: `edit 1, 1, Squats, 5 10`
+
+     Expected: Exercise 1 from workout 1 has been edited to "Squats" with 5 sets and 10 reps. List is updated.
+   - Prerequisites: Enter into a workout mode using `enter 2` command. Inside workout 2 now.
+   - Test Case: `edit 1, Lunges, 2 20` inside a workout mode 
+
+     Expected: Exercise 1 from workout 2 has been edited to "Lunges" with 2 sets and 20 reps. List is updated.
+   - Test Case: `edit 1, 2, Bench Press, 5 10 15`
+
+     Expected: No exercises edited. Error details shown in the output.
+   - Test Case: `edit x,y, testexercise, 2 10`, `edit 123`, `...` (where x or y is larger than the list size or less than or equal to 0)
+
+     Expected: Similar to previous.
+
+### Clearing all workouts or exercises
+
+1. Clearing all workouts 
+   - Prerequisites: List all workouts using the `list` command. Multiple workouts in list.
+   - Test Case: `clear workout`
+    
+     Expected: All workouts in the application is deleted. List is empty.
+   - Prerequisites: Enter into a workout mode using `enter` command.
+   - Test Case: `clear workout` inside a workout mode
+     
+     Expected: All workouts in the application is deleted. List is empty.
+   - Test Case: `clear workout 1`
+    
+     Expected: No workouts deleted. Error details shown in the output.
+   - Test Case: `clear workouthello`, `clear workout 123`, `...`
+   
+     Expected: Similar to previous.
+
+
+2. Clearing all exercises in a specified workout
+   - Prerequisites: List all exercises in a workout using the `display` command. Multiple exercises in list.
+   - Test Case: `clear exercise 1`
+   
+     Expected: All exercises in the first indexed workout is deleted. List is empty.
+   - Prerequisites: Enter into a workout mode using `enter` command.
+   - Test Case: `clear exercise` inside a workout mode.
+   
+     Expected: All exercises inside workout mode is deleted. List is empty.
+   - Test Case: `clear exercise 0`
+   
+     Expected: No exercises deleted. Error details shown in the output.
+   - Test Case: `clear exercisehello`, `clear exercise x`, `...` (where x is larger than the list size or x is less than or equal to 0)
+   
+     Expected: Similar to previous.
 
 ### Saving data
 
