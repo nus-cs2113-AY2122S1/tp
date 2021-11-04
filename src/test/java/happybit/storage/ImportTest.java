@@ -87,11 +87,7 @@ public class ImportTest {
         } catch (HaBitStorageException | HaBitCommandException | ParseException e) {
             e.printStackTrace();
         }
-//        0##G##Default##example##05112021##07112021
-//        0##H##eg1##05112021##07112021##1
-//        0##I##0##05112021##06112021##null
-//        0##I##0##06112021##07112021##null
-//        0##I##0##07112021##07112021##null
+
         assertAll(() -> {
             assertEquals(1, goalList.getListLength());
 
