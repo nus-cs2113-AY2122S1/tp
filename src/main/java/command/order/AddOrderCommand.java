@@ -71,17 +71,17 @@ public class AddOrderCommand extends Command {
             }
         }
 
-        if (nameExistsInOrder) {
-            if (parameters.containsKey(CommandParameters.NAME)) {
-                nameToAdd = parameters.get(CommandParameters.NAME);
-                for (Medicine medicine : medicines) {
-                    if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
-                        nameExistsInStock = true;
-                        break;
-                    }
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            nameToAdd = parameters.get(CommandParameters.NAME);
+            for (Medicine medicine : medicines) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                    nameExistsInStock = true;
+                    break;
                 }
             }
+        }
 
+        if (nameExistsInOrder) {
             if (!nameExistsInStock) {
                 if (orderQuantity < maxQuantity) {
                     addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
@@ -95,13 +95,24 @@ public class AddOrderCommand extends Command {
                 if (orderQuantity + totalQuantity <= maxQuantity) {
                     addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
                 } else {
-                    ui.print("Order for " + nameToAdd + " exists.\nUnable to add order as total order quantity "
-                            + "exceeds maximum stock quantity of " + maxQuantity + ".\nExisting quantity in stock: "
-                            + existingStockQuantity + "\nPending order quantity: " + existingOrdersQuantity);
+                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity
+                            + "\nPending order quantity: " + existingOrdersQuantity);
                 }
             }
         } else {
-            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+            if (!nameExistsInStock) {
+                addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+            } else {
+                int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+                maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+                if (orderQuantity + existingStockQuantity <= maxQuantity) {
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+                } else {
+                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity);
+                }
+            }
         }
     }
 
@@ -163,7 +174,8 @@ public class AddOrderCommand extends Command {
                                               ArrayList<Medicine> medicines, String[] requiredParameters,
                                               String[] optionalParameters, OrderValidator orderValidator) {
         boolean isInvalidInput = orderValidator.containsInvalidParametersAndValues(ui, medicines, parameters,
-                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false, orderValidator);
+                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND,
+                false, orderValidator);
 
         if (isInvalidInput) {
             logger.log(Level.WARNING, "Invalid parameter or value specified by user");
