@@ -58,20 +58,20 @@ public class AddMember {
     /**
      * Checks for any duplicate names,student number and phone number.
      *
-     * @param member         Member to be added to MemberList.
+     * @param member  Member to be added to MemberList.
      * @param members MemberList containing all members.
      * @return true if there are no duplicates given are valid.
      */
     private boolean verifyNoDuplicates(Member member, MemberList members) throws InvalidAddMemberException {
         int memberListSize = members.getMemberListSize();
-        for (int i = 1 ; i <= memberListSize; i++) {
-            if(member.getName().equals(members.getMemberName(i))){
+        for (int i = 1; i <= memberListSize; i++) {
+            if (member.getName().equals(members.getMemberName(i))) {
                 throw new InvalidAddMemberException(duplicateNameErrorMessage);
             }
-            if(member.getPhoneNumber().equals(members.getMemberPhoneNumber(i))){
-                throw  new InvalidAddMemberException(duplicatePhoneNumberErrorMessage);
+            if (member.getPhoneNumber().equals(members.getMemberPhoneNumber(i))) {
+                throw new InvalidAddMemberException(duplicatePhoneNumberErrorMessage);
             }
-            if(member.getStudentNumber().equals(members.getMemberStudentNumber(i))){
+            if (member.getStudentNumber().equals(members.getMemberStudentNumber(i))) {
                 throw new InvalidAddMemberException(duplicateStudentNumberErrorMessage);
             }
         }

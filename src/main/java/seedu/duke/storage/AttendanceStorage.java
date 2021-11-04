@@ -73,7 +73,7 @@ public class AttendanceStorage {
     }
 
     /**
-     * Adds to the CSV file if training name of attendance corresponding to it already exists. 
+     * Adds to the CSV file if training name of attendance corresponding to it already exists.
      * If the csv file does not exist, it will create a new CSV file and add to it.
      *
      * @param attendance     the attendance entry to be added.
@@ -90,7 +90,7 @@ public class AttendanceStorage {
             } else {
                 initializeAttendanceCsv(attendanceList, attendance);
             }
-        } catch ( IOException e) {
+        } catch (IOException e) {
             System.out.println("I/O error has occurred");
         }
     }
@@ -208,13 +208,13 @@ public class AttendanceStorage {
      * @param attendanceList the current attendance list.
      * @param trainingName
      */
-    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName)  {
+    public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName) {
         File currentDir = new File("");
         try {
             String AttendanceFilePath = currentDir.getCanonicalPath() + "/Attendance/" + trainingName + ".csv";
             File SpecificAttendanceFile = new File(AttendanceFilePath);
             rewriteAttendanceCsv(attendanceList, SpecificAttendanceFile, trainingName);
-        } catch( IOException e) {
+        } catch (IOException e) {
             System.out.println("I/O error has occurred");
         }
     }
