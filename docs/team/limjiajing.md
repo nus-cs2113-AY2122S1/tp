@@ -7,14 +7,14 @@ familiar with the command line interface. There are two game modes in types, tim
 number of words as fast as possible).
 
 ### Summary of Contributions
-####Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=limjiajing)
+#### Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=limjiajing)
 
 #### Contribution to code design
 Suggest having all command classes implement a common interface and using factory 
 design pattern to create instantiate objects of classes which implement the interface 
 for code to have less coupling.
 
-####Enhancements implemented
+#### Enhancements implemented
 1. New feature: Added the summary feature that will show the game's summary after a game finishes.
    * What it does: Shows the summary of the game to gamers after they complete a game. 
    Fields in the summary -
@@ -48,14 +48,14 @@ for code to have less coupling.
     * Highlights: Extensive exception handling had to be done for the scenario where 
     the gamer modifies the text files to an unreadable format.
 
-####Documentation
+#### Documentation
 * User Guide
   * Added `Notes about command format` section.  
   * Added documentation for features `view game summary`, `view past records`,  
   `clear past records`and `automatic storage`.
 * Developer Guide
   * Added implementation details for the proposed `view statistics` feature.
-####Project management
+#### Project management
 * Assigned issues created during practical examination dry-run to teammates responsible for those parts.
 * Wrapped up milestones.
 * Create issues for v1.0 user stories.
