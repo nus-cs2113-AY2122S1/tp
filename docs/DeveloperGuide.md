@@ -54,7 +54,7 @@ making it more efficient for future improvements and revisions.
 This developer guide is for any developers who wish to contribute to **TermiNUS**. It contains the
 overall architecture design of **TermiNUS** and it displays our main features implementation details
 with the rationale and consideration for each. As of now, the guide is written for the current
-release version of `TermiNUS of v1.0`.
+release version of `TermiNUS of v2.1`.
 
 ### 1.2 Acknowledgements
 
@@ -62,7 +62,7 @@ We would like to thank the following projects and repositories for assisting in 
 TermiNUS.
 
 - [**GSON:** Providing the JSON parsing capabilities for the main file.](https://github.com/google/gson)
-- [**iTextPDF 5:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itextpdf)
+- [**iTextPDF 7:** Providing PDF exporting capabilities for notes.](https://github.com/itext/itext7)
 - [**AddressBook-3:** Providing a guide on writing the guides you are reading now.](https://se-education.org/addressbook-level3/)
 
 
