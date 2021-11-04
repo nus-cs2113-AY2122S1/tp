@@ -42,22 +42,7 @@ public class AddStockCommand extends Command {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         String[] optionalParameters = {};
-        String[] requiredParam = {CommandParameters.NAME, CommandParameters.QUANTITY,
-                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
-
-        if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParam,
-                optionalParameters)) {
-            return;
-        }
-
         String nameToAdd = parameters.get(CommandParameters.NAME);
-        String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
-
-        Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
-        if (formatExpiryDate == null) { //if medication has expired
-            return;
-        }
-
         boolean nameExist = false;
 
         if (parameters.containsKey(CommandParameters.NAME)) {
@@ -77,6 +62,13 @@ public class AddStockCommand extends Command {
 
             if (!checkValidParametersAndValues(ui, parameters, medicines, requiredParameters,
                     optionalParameters)) {
+                return;
+            }
+
+            String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
+            Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
+
+            if (formatExpiryDate == null) { //if medication has expired
                 return;
             }
 
@@ -115,6 +107,12 @@ public class AddStockCommand extends Command {
             String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
             String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
             String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
+            String expiryDate = parameters.get(CommandParameters.EXPIRY_DATE);
+
+            Date formatExpiryDate = checkExpiryDate(ui, expiryDate);
+            if (formatExpiryDate == null) { //if medication has expired
+                return;
+            }
 
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
             int quantity = Integer.parseInt(quantityToAdd);
@@ -156,7 +154,7 @@ public class AddStockCommand extends Command {
         }
 
         if (formatExpiryDate.before(formatTodayDate)) {
-            ui.print("Unable to add medicine. Medicine is expired.");
+            ui.print("Unable to add medicine. Medicine has expired.");
             return null;
         }
         return formatExpiryDate;
