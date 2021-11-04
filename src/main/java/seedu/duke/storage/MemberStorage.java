@@ -20,17 +20,21 @@ public class MemberStorage {
     static String validStudentNumberRegex = "^[A]\\d{7}[A-Z]";
     static String validGenderRegex = "^[M|F|m|f]";
 
-    static String invalidPhoneNumberErrorExcelMessage = "Invalid phone number found in CCA Members CSV. Please fix this before running the program again.";
-    static String invalidGenderErrorExcelMessage = "Invalid gender found in CCA Members CSV.Please fix this before running the program again.";
-    static String invalidNameErrorExcelMessage = "invalid name found in CCA Members CSV.Please fix this before running the program again.";
-    static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CCA Members CSV.Please fix this before running the program again.";
-
-    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CCA Members CSV.Please fix this before running the program again.";
+    static String invalidPhoneNumberErrorExcelMessage = "Invalid phone number found in CCA Members CSV."
+            + "Please fix this before running the program again.";
+    static String invalidGenderErrorExcelMessage = "Invalid gender found in CCA Members CSV."
+            + "Please fix this before running the program again.";
+    static String invalidNameErrorExcelMessage = "invalid name found in CCA Members CSV."
+            + "Please fix this before running the program again.";
+    static String invalidStudentNumberErrorExcelMessage = "Invalid student number found in CCA Members CSV."
+            + "Please fix this before running the program again.";
+    static String duplicateErrorExcelMessage = "Duplicates name,student number or phone number found in CCA Members CSV."
+            + "Please fix this before running the program again.";
 
 
     /**
-     * Sets up the duke members csv file. It will first try to find if the file exists in the current
-     * directory. If the file exists, it will load the CCAMembers CSV file into the current member list.
+     * Sets up the duke members csv file. It will first try to find if the file exists in the current directory.
+     * If the file exists, it will load the CCAMembers CSV file into the current member list.
      * If not it will create a new member csv file in the current directory.
      *
      * @param memberList the list of current members.
@@ -85,7 +89,7 @@ public class MemberStorage {
      * @param memberFile CCAMembers CSV file to read data from.
      */
     private static void verifyDuplicateStudentNumber(File memberFile) throws InvalidAddMemberException {
-        String StudentNumber;
+        String studentNumber;
         List<String> pendingStudentNumber = new ArrayList<String>();
         try {
             Scanner memberScanner = new Scanner(memberFile);
@@ -93,8 +97,8 @@ public class MemberStorage {
             while (memberScanner.hasNextLine()) {
                 String fullMemberDetails = memberScanner.nextLine();
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-                StudentNumber = memberDetails[1];
-                pendingStudentNumber.add(StudentNumber);
+                studentNumber = memberDetails[1];
+                pendingStudentNumber.add(studentNumber);
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found!");
@@ -110,7 +114,7 @@ public class MemberStorage {
      * @param memberFile CCAMembers CSV file to read data from.
      */
     private static void verifyDuplicatePhoneNumber(File memberFile) throws InvalidAddMemberException {
-        String PhoneNumber;
+        String phoneNumber;
         List<String> pendingPhoneNumber = new ArrayList<String>();
         try {
             Scanner memberScanner = new Scanner(memberFile);
@@ -118,8 +122,8 @@ public class MemberStorage {
             while (memberScanner.hasNextLine()) {
                 String fullMemberDetails = memberScanner.nextLine();
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-                PhoneNumber = memberDetails[3];
-                pendingPhoneNumber.add(PhoneNumber);
+                phoneNumber = memberDetails[3];
+                pendingPhoneNumber.add(phoneNumber);
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found!");
@@ -172,7 +176,7 @@ public class MemberStorage {
 
 
     /**
-     * verifies that individual details from CSV file are valid
+     * verifies that individual details from CSV file are valid.
      *
      * @param memberFile CCAMembers CSV file to read data from.
      */
@@ -248,7 +252,7 @@ public class MemberStorage {
     }
 
     /**
-     * Checks if member name is valid
+     * Checks if member name is valid.
      *
      * @param name the member name to be checked.
      * @throws InvalidAddMemberException when member name is invalid.
