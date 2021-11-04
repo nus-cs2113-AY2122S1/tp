@@ -4,7 +4,8 @@ import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
@@ -12,14 +13,14 @@ class ParserTest {
     void getName_noFlag_expectException() {
         String[] parameters = {"", "i/1", "e/11112021"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getName(parameters));
+            () -> Parser.getName(parameters));
     }
 
     @Test
     void getName_name0Characters_expectException() {
         String[] parameters = {"n/"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getName(parameters));
+            () -> Parser.getName(parameters));
     }
 
     @Test
@@ -33,7 +34,7 @@ class ParserTest {
     void getName_name51Characters_expectException() {
         String[] parameters = {"n/012345678901234567890123456789012345678901234567890"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getName(parameters));
+            () -> Parser.getName(parameters));
     }
 
     @Test
@@ -46,21 +47,21 @@ class ParserTest {
     void getNumber_negativeNumber_expectException() {
         String[] parameters = {"g/-1", "h/a", "i/"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getNumber(parameters, "g/"));
+            () -> Parser.getNumber(parameters, "g/"));
     }
 
     @Test
     void getNumber_nonInteger_expectException() {
         String[] parameters = {"g/-1", "h/a", "i/"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getNumber(parameters, "h/"));
+            () -> Parser.getNumber(parameters, "h/"));
     }
 
     @Test
     void getNumber_noNumber_expectException() {
         String[] parameters = {"g/-1", "h/a", "i/"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getNumber(parameters, "i/"));
+            () -> Parser.getNumber(parameters, "i/"));
     }
 
     @Test
@@ -79,14 +80,14 @@ class ParserTest {
     void getType_flagWithoutLabel_expectException() {
         String[] parameters = {"t/", "n/Test", "e/11112021"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getType(parameters));
+            () -> Parser.getType(parameters));
     }
 
     @Test
     void getType_flagWithAUndefinedLabel_expectException() {
         String[] parameters = {"t/??", "n/Test", "e/11112021"};
         assertThrows(HaBitParserException.class,
-                ()-> Parser.getType(parameters));
+            () -> Parser.getType(parameters));
     }
 
     @Test
