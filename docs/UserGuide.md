@@ -116,7 +116,7 @@ ________________________________________________________
 
 ### 2. Entering into a Workout: `enter`
 
-Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
+Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done`, `edit` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
 > 💡 Note
@@ -136,9 +136,11 @@ enter 2
 			________________________________________________________
 ```
 
+
 > 💡 Tip
 >* You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
-You may also add, remove, edit exercises in workout 2 while you are in workout 1.
+You may also add, remove, edit, display and mark exercises as done in workout 2 while you are in workout 1.
+
 For example,
 ```
 enter 1
@@ -322,6 +324,17 @@ ________________________________________________________
 The edited exercise: [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 ```
+Expected outcome (Workout Mode):
+```text
+enter 1
+                        ________________________________________________________
+                        Now inside workout 1 : workout
+                        ________________________________________________________
+edit 2, kickbacks, 4 12
+                        ________________________________________________________
+                        The edited exercise in workout 1 : [X] kickbacks | 4 sets of 12 reps
+                        ________________________________________________________
+```
 
 ### 9. Show all exercises from a workout: `display`
 
@@ -345,6 +358,20 @@ Exercises in leg day
 1. [ ] squats | 5 sets of 10 reps
 2. [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
+```
+
+Expected outcome (Workout Mode):
+```text
+enter 1
+                        ________________________________________________________
+                        Now inside workout 1 : workout
+                        ________________________________________________________
+display
+                        ________________________________________________________
+                        Exercises in (1) workout
+                        1. [ ] squats | 5 sets of 10 reps
+                        2. [X] kickbacks | 4 sets of 12 reps
+                        ________________________________________________________
 ```
 
 ### 10. Removing an exercise from a workout: `remove`
@@ -454,6 +481,7 @@ Provides a given set of workouts with exercises.
 >⚠️ Warning  
 >* Duplicate of same recommended workout will be added to the list if command is executed multiple times.   
 
+
 Format: `recommend [beginner/ intermediate/ pro]`
 
 Example of usage: `recommend beginner`
@@ -521,16 +549,17 @@ All workouts have been cleared!
 ________________________________________________________
 ```
 
-Expected outcome (*Workout Mode*): 
-```
+
+Expected outcome (*Workout Mode*):
+```text
 enter 1
-			________________________________________________________
-			Now inside workout 1 : legs
-			________________________________________________________
+                        ________________________________________________________
+                        Now inside workout 1 : workout
+                        ________________________________________________________
 clear exercise
-			________________________________________________________
-			All exercises in workout 1 have been cleared!
-			________________________________________________________
+                        ________________________________________________________
+                        All exercises in workout 1 have been cleared!
+                        ________________________________________________________
 ```
 
 
