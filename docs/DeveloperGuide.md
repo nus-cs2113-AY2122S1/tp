@@ -23,7 +23,9 @@
 &nbsp;&nbsp;[3.5. IngredientList component](#35-ingredientlist-component) <br>
 &nbsp;&nbsp;[3.6. Storage component](#36-storage-component) <br>
 [4. Implementation](#4-implementation) <br>
-&nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
+&nbsp;&nbsp;[4.1. Adding Ingredients](#41-adding-ingredients) <br>
+&nbsp;&nbsp;[4.2. Alerts](#42-alerts) <br>
+&nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
 
 ## 1. Introduction
 
@@ -146,7 +148,9 @@ of the storage class only when there is a change in the ingredient list of the p
 
 ## 4. Implementation
 
-### 4.1. Alerts
+### 4.1. Adding Ingredients
+
+### 4.2. Alerts
 
 Alerts are displayed automatically on startup, and when the user enters the command to display alerts. There are 3 types of commands:
 * `alerts all`: displays alerts for both alert types below
@@ -186,7 +190,7 @@ For `AlertLowStockCommand`, it is less complicated, and the sequence diagram sho
 The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
 information of the `IngredientGroup` is taken note of to be printed when the function is returned.
 
-### 4.2. Deleting ingredients
+### 4.3. Deleting ingredients
 
 Delete is performed on individual ingredients in groups. For example, the current ingredient inventory is
 ```

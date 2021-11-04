@@ -107,6 +107,7 @@ public class IngredientList {
         return -1;
     }
 
+    //@@author ngoivanessa
     /**
      * Adds ingredient to ingredient list.
      *

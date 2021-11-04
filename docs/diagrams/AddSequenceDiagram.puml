@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+autonumber
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":AddCommand" as add COMMAND_COLOUR
+Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
+Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
+Participant ":Storage" as storage STORAGE_COLOUR
+
+-> parser: parse ("add a/carrot n/200 e/ 25/12/2021")
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
