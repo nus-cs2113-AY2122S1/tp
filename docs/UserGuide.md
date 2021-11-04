@@ -364,7 +364,16 @@ An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has th
 ```
 
 ## 3. FAQ
+**Q:** What operating systems can the application work on?
 
+**A:** The SchedUrMods application supports all Windows, Linux and Unix operating systems 
+that have `java 11` installed on their systems. 
+
+**Q:** How do I transfer my data to another computer?
+
+**A:** Install the program on the other computer and replace the new empty `task.txt`
+it creates with the `task.txt` that you wish to transfer from your previous `SchedUrMods.jar`
+home folder.
 
 ## 4. Command Summary
 
