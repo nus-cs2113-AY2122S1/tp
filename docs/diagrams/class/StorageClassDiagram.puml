@@ -2,12 +2,6 @@
 !include ClassStyle.puml
 
 class Storage {
-    {static} -MESSAGE_FORMAT_FAIL_CREATE_FILE: String
-    {static} -MESSAGE_FORMAT_UNABLE_TO_OPEN_READ: String
-    {static} -MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE: String
-    {static} -MESSAGE_FORMAT_UNABLE_TO_READ_JSON: String
-    {static} -MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON: String
-    {static} -MESSAGE_FORMAT_JSON_SYNTAX_ERROR: String
     -filename: String
     +Storage(filename: String)
     +load(): ClassList

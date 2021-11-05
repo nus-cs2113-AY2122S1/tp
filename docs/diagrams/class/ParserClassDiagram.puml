@@ -2,10 +2,6 @@
 !include ClassStyle.puml
 
 class Parser {
-    {static} -ARGUMENT_VALID_REGEX: String
-    {static} -VALID_SPECIAL_CHARACTERS: char[]
-    {static} -MESSAGE_UNKNOWN_COMMAND: String
-    {static} -MESSAGE_FORMAT_INVALID_VALUE: String
     {static} +parseUserInput(userInput: String): Command
     {static} +splitFirstSpace(string: String): String[]
     {static} +getArgumentsFromString(string: String, argumentKeys: String[], includeEmptyValues: boolean): HashMap<String, String>
