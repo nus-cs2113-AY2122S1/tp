@@ -16,7 +16,7 @@ public class AddLoanTest {
         int month = date.getMonthValue();
 
         RecordList currentLoanList = new RecordList(month);
-        currentLoanList.addLoan(name, amount, date, false);
+        currentLoanList.addLoan(name, amount, date);
         assertEquals(1, currentLoanList.getLoanListSize());
     }
 }
