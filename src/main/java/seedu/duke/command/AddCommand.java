@@ -8,6 +8,7 @@ import seedu.duke.Ui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
@@ -235,6 +236,7 @@ public class AddCommand extends Command {
             throw new LotsException(errorMsg);
         }
     }
+
 
     /**
      * Function to get the index of existing name in the list if a match is found.
